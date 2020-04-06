@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "S3",
-  "description": "SDK will throw exception when CopyObject returns 200 status and empty body."
-}

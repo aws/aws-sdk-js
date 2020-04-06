@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.653.0-->
+<!--LATEST=2.654.0-->
 <!--ENTRYINSERT-->
+
+## 2.654.0
+* feature: Chime: Amazon Chime proxy phone sessions let you provide two users with a shared phone number to communicate via voice or text for up to 12 hours without revealing personal phone numbers. When users call or message the provided phone number, they are connected to the other party and their private phone numbers are replaced with the shared number in Caller ID.
+* feature: ElasticBeanstalk: This release adds a new action, ListPlatformBranches, and updates two actions, ListPlatformVersions and DescribePlatformVersion, to support the concept of Elastic Beanstalk platform branches.
+* feature: S3: SDK will throw exception when CopyObject returns 200 status and empty body.
+* feature: TranscribeService: This release adds support for batch transcription jobs within Amazon Transcribe Medical.
 
 ## 2.653.0
 * feature: PersonalizeRuntime: Amazon Personalize: Add new response field "score" to each item returned by GetRecommendations and GetPersonalizedRanking (HRNN-based recipes only)

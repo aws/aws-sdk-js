@@ -140,6 +140,14 @@ declare class Chime extends Service {
    */
   createPhoneNumberOrder(callback?: (err: AWSError, data: Chime.Types.CreatePhoneNumberOrderResponse) => void): Request<Chime.Types.CreatePhoneNumberOrderResponse, AWSError>;
   /**
+   * 
+   */
+  createProxySession(params: Chime.Types.CreateProxySessionRequest, callback?: (err: AWSError, data: Chime.Types.CreateProxySessionResponse) => void): Request<Chime.Types.CreateProxySessionResponse, AWSError>;
+  /**
+   * 
+   */
+  createProxySession(callback?: (err: AWSError, data: Chime.Types.CreateProxySessionResponse) => void): Request<Chime.Types.CreateProxySessionResponse, AWSError>;
+  /**
    * Creates a chat room for the specified Amazon Chime Enterprise account.
    */
   createRoom(params: Chime.Types.CreateRoomRequest, callback?: (err: AWSError, data: Chime.Types.CreateRoomResponse) => void): Request<Chime.Types.CreateRoomResponse, AWSError>;
@@ -220,6 +228,14 @@ declare class Chime extends Service {
    */
   deletePhoneNumber(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * 
+   */
+  deleteProxySession(params: Chime.Types.DeleteProxySessionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  deleteProxySession(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes a chat room in an Amazon Chime Enterprise account.
    */
   deleteRoom(params: Chime.Types.DeleteRoomRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -259,6 +275,14 @@ declare class Chime extends Service {
    * Deletes the origination settings for the specified Amazon Chime Voice Connector.
    */
   deleteVoiceConnectorOrigination(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  deleteVoiceConnectorProxy(params: Chime.Types.DeleteVoiceConnectorProxyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  deleteVoiceConnectorProxy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the streaming configuration for the specified Amazon Chime Voice Connector.
    */
@@ -388,6 +412,14 @@ declare class Chime extends Service {
    */
   getPhoneNumberSettings(callback?: (err: AWSError, data: Chime.Types.GetPhoneNumberSettingsResponse) => void): Request<Chime.Types.GetPhoneNumberSettingsResponse, AWSError>;
   /**
+   * 
+   */
+  getProxySession(params: Chime.Types.GetProxySessionRequest, callback?: (err: AWSError, data: Chime.Types.GetProxySessionResponse) => void): Request<Chime.Types.GetProxySessionResponse, AWSError>;
+  /**
+   * 
+   */
+  getProxySession(callback?: (err: AWSError, data: Chime.Types.GetProxySessionResponse) => void): Request<Chime.Types.GetProxySessionResponse, AWSError>;
+  /**
    * Retrieves room details, such as the room name, for a room in an Amazon Chime Enterprise account.
    */
   getRoom(params: Chime.Types.GetRoomRequest, callback?: (err: AWSError, data: Chime.Types.GetRoomResponse) => void): Request<Chime.Types.GetRoomResponse, AWSError>;
@@ -443,6 +475,14 @@ declare class Chime extends Service {
    * Retrieves origination setting details for the specified Amazon Chime Voice Connector.
    */
   getVoiceConnectorOrigination(callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorOriginationResponse) => void): Request<Chime.Types.GetVoiceConnectorOriginationResponse, AWSError>;
+  /**
+   * 
+   */
+  getVoiceConnectorProxy(params: Chime.Types.GetVoiceConnectorProxyRequest, callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorProxyResponse) => void): Request<Chime.Types.GetVoiceConnectorProxyResponse, AWSError>;
+  /**
+   * 
+   */
+  getVoiceConnectorProxy(callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorProxyResponse) => void): Request<Chime.Types.GetVoiceConnectorProxyResponse, AWSError>;
   /**
    * Retrieves the streaming configuration details for the specified Amazon Chime Voice Connector. Shows whether media streaming is enabled for sending to Amazon Kinesis. It also shows the retention period, in hours, for the Amazon Kinesis data.
    */
@@ -524,6 +564,14 @@ declare class Chime extends Service {
    */
   listPhoneNumbers(callback?: (err: AWSError, data: Chime.Types.ListPhoneNumbersResponse) => void): Request<Chime.Types.ListPhoneNumbersResponse, AWSError>;
   /**
+   * 
+   */
+  listProxySessions(params: Chime.Types.ListProxySessionsRequest, callback?: (err: AWSError, data: Chime.Types.ListProxySessionsResponse) => void): Request<Chime.Types.ListProxySessionsResponse, AWSError>;
+  /**
+   * 
+   */
+  listProxySessions(callback?: (err: AWSError, data: Chime.Types.ListProxySessionsResponse) => void): Request<Chime.Types.ListProxySessionsResponse, AWSError>;
+  /**
    * Lists the membership details for the specified room in an Amazon Chime Enterprise account, such as the members' IDs, email addresses, and names.
    */
   listRoomMemberships(params: Chime.Types.ListRoomMembershipsRequest, callback?: (err: AWSError, data: Chime.Types.ListRoomMembershipsResponse) => void): Request<Chime.Types.ListRoomMembershipsResponse, AWSError>;
@@ -603,6 +651,14 @@ declare class Chime extends Service {
    * Adds origination settings for the specified Amazon Chime Voice Connector.
    */
   putVoiceConnectorOrigination(callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorOriginationResponse) => void): Request<Chime.Types.PutVoiceConnectorOriginationResponse, AWSError>;
+  /**
+   * 
+   */
+  putVoiceConnectorProxy(params: Chime.Types.PutVoiceConnectorProxyRequest, callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorProxyResponse) => void): Request<Chime.Types.PutVoiceConnectorProxyResponse, AWSError>;
+  /**
+   * 
+   */
+  putVoiceConnectorProxy(callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorProxyResponse) => void): Request<Chime.Types.PutVoiceConnectorProxyResponse, AWSError>;
   /**
    * Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Amazon Kinesis. It also sets the retention period, in hours, for the Amazon Kinesis data.
    */
@@ -707,6 +763,14 @@ declare class Chime extends Service {
    * Updates the phone number settings for the administrator's AWS account, such as the default outbound calling name. You can update the default outbound calling name once every seven days. Outbound calling names can take up to 72 hours to update.
    */
   updatePhoneNumberSettings(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  updateProxySession(params: Chime.Types.UpdateProxySessionRequest, callback?: (err: AWSError, data: Chime.Types.UpdateProxySessionResponse) => void): Request<Chime.Types.UpdateProxySessionResponse, AWSError>;
+  /**
+   * 
+   */
+  updateProxySession(callback?: (err: AWSError, data: Chime.Types.UpdateProxySessionResponse) => void): Request<Chime.Types.UpdateProxySessionResponse, AWSError>;
   /**
    * Updates room details, such as the room name, for a room in an Amazon Chime Enterprise account.
    */
@@ -814,6 +878,7 @@ declare namespace Chime {
      */
     AlexaForBusinessRoomArn?: SensitiveString;
   }
+  export type AreaCode = string;
   export type Arn = string;
   export interface AssociatePhoneNumberWithUserRequest {
     /**
@@ -1062,7 +1127,11 @@ declare namespace Chime {
   export type CallingNameStatus = "Unassigned"|"UpdateInProgress"|"UpdateSucceeded"|"UpdateFailed"|string;
   export type CallingRegion = string;
   export type CallingRegionList = CallingRegion[];
+  export type Capability = "Voice"|"SMS"|string;
+  export type CapabilityList = Capability[];
   export type ClientRequestToken = string;
+  export type Country = string;
+  export type CountryList = Country[];
   export type CpsLimit = number;
   export interface CreateAccountRequest {
     /**
@@ -1172,6 +1241,19 @@ declare namespace Chime {
      * The phone number order details.
      */
     PhoneNumberOrder?: PhoneNumberOrder;
+  }
+  export interface CreateProxySessionRequest {
+    VoiceConnectorId: NonEmptyString128;
+    ParticipantPhoneNumbers: ParticipantPhoneNumberList;
+    Name?: ProxySessionNameString;
+    ExpiryMinutes?: PositiveInteger;
+    Capabilities: CapabilityList;
+    NumberSelectionBehavior?: NumberSelectionBehavior;
+    GeoMatchLevel?: GeoMatchLevel;
+    GeoMatchParams?: GeoMatchParams;
+  }
+  export interface CreateProxySessionResponse {
+    ProxySession?: ProxySession;
   }
   export interface CreateRoomMembershipRequest {
     /**
@@ -1326,6 +1408,10 @@ declare namespace Chime {
      */
     PhoneNumberId: String;
   }
+  export interface DeleteProxySessionRequest {
+    VoiceConnectorId: NonEmptyString128;
+    ProxySessionId: NonEmptyString128;
+  }
   export interface DeleteRoomMembershipRequest {
     /**
      * The Amazon Chime account ID.
@@ -1361,6 +1447,9 @@ declare namespace Chime {
      * The Amazon Chime Voice Connector ID.
      */
     VoiceConnectorId: NonEmptyString;
+  }
+  export interface DeleteVoiceConnectorProxyRequest {
+    VoiceConnectorId: NonEmptyString128;
   }
   export interface DeleteVoiceConnectorRequest {
     /**
@@ -1466,6 +1555,11 @@ declare namespace Chime {
     LambdaFunctionArn?: SensitiveString;
   }
   export type ExternalUserIdType = string;
+  export type GeoMatchLevel = "Country"|"AreaCode"|string;
+  export interface GeoMatchParams {
+    Country: Country;
+    AreaCode: AreaCode;
+  }
   export interface GetAccountRequest {
     /**
      * The Amazon Chime account ID.
@@ -1594,6 +1688,13 @@ declare namespace Chime {
      */
     CallingNameUpdatedTimestamp?: Iso8601Timestamp;
   }
+  export interface GetProxySessionRequest {
+    VoiceConnectorId: NonEmptyString128;
+    ProxySessionId: NonEmptyString128;
+  }
+  export interface GetProxySessionResponse {
+    ProxySession?: ProxySession;
+  }
   export interface GetRoomRequest {
     /**
      * The Amazon Chime account ID.
@@ -1678,6 +1779,12 @@ declare namespace Chime {
      */
     Origination?: Origination;
   }
+  export interface GetVoiceConnectorProxyRequest {
+    VoiceConnectorId: NonEmptyString128;
+  }
+  export interface GetVoiceConnectorProxyResponse {
+    Proxy?: Proxy;
+  }
   export interface GetVoiceConnectorRequest {
     /**
      * The Amazon Chime Voice Connector ID.
@@ -1727,6 +1834,7 @@ declare namespace Chime {
     Termination?: Termination;
   }
   export type GuidString = string;
+  export type Integer = number;
   export interface Invite {
     /**
      * The invite ID.
@@ -1922,6 +2030,16 @@ declare namespace Chime {
      * The token to use to retrieve the next page of results.
      */
     NextToken?: String;
+  }
+  export interface ListProxySessionsRequest {
+    VoiceConnectorId: NonEmptyString128;
+    Status?: ProxySessionStatus;
+    NextToken?: NextTokenString;
+    MaxResults?: ResultMax;
+  }
+  export interface ListProxySessionsResponse {
+    ProxySessions?: ProxySessions;
+    NextToken?: NextTokenString;
   }
   export interface ListRoomMembershipsRequest {
     /**
@@ -2185,9 +2303,12 @@ declare namespace Chime {
     Role?: RoomMembershipRole;
   }
   export type MembershipItemList = MembershipItem[];
+  export type NextTokenString = string;
   export type NonEmptyString = string;
+  export type NonEmptyString128 = string;
   export type NonEmptyStringList = String[];
   export type NullableBoolean = boolean;
+  export type NumberSelectionBehavior = "PreferSticky"|"AvoidSticky"|string;
   export interface OrderedPhoneNumber {
     /**
      * The phone number, in E.164 format.
@@ -2236,6 +2357,12 @@ declare namespace Chime {
   export type OriginationRoutePriority = number;
   export type OriginationRouteProtocol = "TCP"|"UDP"|string;
   export type OriginationRouteWeight = number;
+  export interface Participant {
+    PhoneNumber?: E164PhoneNumber;
+    ProxyPhoneNumber?: E164PhoneNumber;
+  }
+  export type ParticipantPhoneNumberList = E164PhoneNumber[];
+  export type Participants = Participant[];
   export interface PhoneNumber {
     /**
      * The phone number ID.
@@ -2377,7 +2504,32 @@ declare namespace Chime {
   export type PhoneNumberStatus = "AcquireInProgress"|"AcquireFailed"|"Unassigned"|"Assigned"|"ReleaseInProgress"|"DeleteInProgress"|"ReleaseFailed"|"DeleteFailed"|string;
   export type PhoneNumberType = "Local"|"TollFree"|string;
   export type Port = number;
+  export type PositiveInteger = number;
   export type ProfileServiceMaxResults = number;
+  export interface Proxy {
+    DefaultSessionExpiryMinutes?: Integer;
+    Disabled?: Boolean;
+    FallBackPhoneNumber?: E164PhoneNumber;
+    PhoneNumberCountries?: StringList;
+  }
+  export interface ProxySession {
+    VoiceConnectorId?: NonEmptyString128;
+    ProxySessionId?: NonEmptyString128;
+    Name?: String128;
+    Status?: ProxySessionStatus;
+    ExpiryMinutes?: PositiveInteger;
+    Capabilities?: CapabilityList;
+    CreatedTimestamp?: Iso8601Timestamp;
+    UpdatedTimestamp?: Iso8601Timestamp;
+    EndedTimestamp?: Iso8601Timestamp;
+    Participants?: Participants;
+    NumberSelectionBehavior?: NumberSelectionBehavior;
+    GeoMatchLevel?: GeoMatchLevel;
+    GeoMatchParams?: GeoMatchParams;
+  }
+  export type ProxySessionNameString = string;
+  export type ProxySessionStatus = "Open"|"InProgress"|"Closed"|string;
+  export type ProxySessions = ProxySession[];
   export interface PutEventsConfigurationRequest {
     /**
      * The Amazon Chime account ID.
@@ -2430,6 +2582,16 @@ declare namespace Chime {
      * The updated origination setting details.
      */
     Origination?: Origination;
+  }
+  export interface PutVoiceConnectorProxyRequest {
+    VoiceConnectorId: NonEmptyString128;
+    DefaultSessionExpiryMinutes: Integer;
+    PhoneNumberPoolCountries: CountryList;
+    FallBackPhoneNumber?: E164PhoneNumber;
+    Disabled?: Boolean;
+  }
+  export interface PutVoiceConnectorProxyResponse {
+    Proxy?: Proxy;
   }
   export interface PutVoiceConnectorStreamingConfigurationRequest {
     /**
@@ -2620,6 +2782,7 @@ declare namespace Chime {
     Disabled?: Boolean;
   }
   export type String = string;
+  export type String128 = string;
   export type StringList = String[];
   export interface TelephonySettings {
     /**
@@ -2766,6 +2929,15 @@ declare namespace Chime {
      * The default outbound calling name for the account.
      */
     CallingName: CallingName;
+  }
+  export interface UpdateProxySessionRequest {
+    VoiceConnectorId: NonEmptyString128;
+    ProxySessionId: NonEmptyString128;
+    Capabilities: CapabilityList;
+    ExpiryMinutes?: PositiveInteger;
+  }
+  export interface UpdateProxySessionResponse {
+    ProxySession?: ProxySession;
   }
   export interface UpdateRoomMembershipRequest {
     /**

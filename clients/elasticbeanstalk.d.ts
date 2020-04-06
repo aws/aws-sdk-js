@@ -44,35 +44,35 @@ declare class ElasticBeanstalk extends Service {
    */
   composeEnvironments(callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.EnvironmentDescriptionsMessage, AWSError>;
   /**
-   *  Creates an application that has one configuration template named default and no application versions. 
+   * Creates an application that has one configuration template named default and no application versions.
    */
   createApplication(params: ElasticBeanstalk.Types.CreateApplicationMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationDescriptionMessage, AWSError>;
   /**
-   *  Creates an application that has one configuration template named default and no application versions. 
+   * Creates an application that has one configuration template named default and no application versions.
    */
   createApplication(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationDescriptionMessage, AWSError>;
   /**
-   * Creates an application version for the specified application. You can create an application version from a source bundle in Amazon S3, a commit in AWS CodeCommit, or the output of an AWS CodeBuild build as follows: Specify a commit in an AWS CodeCommit repository with SourceBuildInformation. Specify a build in an AWS CodeBuild with SourceBuildInformation and BuildConfiguration. Specify a source bundle in S3 with SourceBundle  Omit both SourceBuildInformation and SourceBundle to use the default sample application.  Once you create an application version with a specified Amazon S3 bucket and key location, you cannot change that Amazon S3 location. If you change the Amazon S3 location, you receive an exception when you attempt to launch an environment from the application version. 
+   * Creates an application version for the specified application. You can create an application version from a source bundle in Amazon S3, a commit in AWS CodeCommit, or the output of an AWS CodeBuild build as follows: Specify a commit in an AWS CodeCommit repository with SourceBuildInformation. Specify a build in an AWS CodeBuild with SourceBuildInformation and BuildConfiguration. Specify a source bundle in S3 with SourceBundle  Omit both SourceBuildInformation and SourceBundle to use the default sample application.  After you create an application version with a specified Amazon S3 bucket and key location, you can't change that Amazon S3 location. If you change the Amazon S3 location, you receive an exception when you attempt to launch an environment from the application version. 
    */
   createApplicationVersion(params: ElasticBeanstalk.Types.CreateApplicationVersionMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage, AWSError>;
   /**
-   * Creates an application version for the specified application. You can create an application version from a source bundle in Amazon S3, a commit in AWS CodeCommit, or the output of an AWS CodeBuild build as follows: Specify a commit in an AWS CodeCommit repository with SourceBuildInformation. Specify a build in an AWS CodeBuild with SourceBuildInformation and BuildConfiguration. Specify a source bundle in S3 with SourceBundle  Omit both SourceBuildInformation and SourceBundle to use the default sample application.  Once you create an application version with a specified Amazon S3 bucket and key location, you cannot change that Amazon S3 location. If you change the Amazon S3 location, you receive an exception when you attempt to launch an environment from the application version. 
+   * Creates an application version for the specified application. You can create an application version from a source bundle in Amazon S3, a commit in AWS CodeCommit, or the output of an AWS CodeBuild build as follows: Specify a commit in an AWS CodeCommit repository with SourceBuildInformation. Specify a build in an AWS CodeBuild with SourceBuildInformation and BuildConfiguration. Specify a source bundle in S3 with SourceBundle  Omit both SourceBuildInformation and SourceBundle to use the default sample application.  After you create an application version with a specified Amazon S3 bucket and key location, you can't change that Amazon S3 location. If you change the Amazon S3 location, you receive an exception when you attempt to launch an environment from the application version. 
    */
   createApplicationVersion(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage, AWSError>;
   /**
-   * Creates a configuration template. Templates are associated with a specific application and are used to deploy different versions of the application with the same configuration settings. Templates aren't associated with any environment. The EnvironmentName response element is always null. Related Topics    DescribeConfigurationOptions     DescribeConfigurationSettings     ListAvailableSolutionStacks   
+   * Creates an AWS Elastic Beanstalk configuration template, associated with a specific Elastic Beanstalk application. You define application configuration settings in a configuration template. You can then use the configuration template to deploy different versions of the application with the same configuration settings. Templates aren't associated with any environment. The EnvironmentName response element is always null. Related Topics    DescribeConfigurationOptions     DescribeConfigurationSettings     ListAvailableSolutionStacks   
    */
   createConfigurationTemplate(params: ElasticBeanstalk.Types.CreateConfigurationTemplateMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ConfigurationSettingsDescription) => void): Request<ElasticBeanstalk.Types.ConfigurationSettingsDescription, AWSError>;
   /**
-   * Creates a configuration template. Templates are associated with a specific application and are used to deploy different versions of the application with the same configuration settings. Templates aren't associated with any environment. The EnvironmentName response element is always null. Related Topics    DescribeConfigurationOptions     DescribeConfigurationSettings     ListAvailableSolutionStacks   
+   * Creates an AWS Elastic Beanstalk configuration template, associated with a specific Elastic Beanstalk application. You define application configuration settings in a configuration template. You can then use the configuration template to deploy different versions of the application with the same configuration settings. Templates aren't associated with any environment. The EnvironmentName response element is always null. Related Topics    DescribeConfigurationOptions     DescribeConfigurationSettings     ListAvailableSolutionStacks   
    */
   createConfigurationTemplate(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ConfigurationSettingsDescription) => void): Request<ElasticBeanstalk.Types.ConfigurationSettingsDescription, AWSError>;
   /**
-   * Launches an environment for the specified application using the specified configuration.
+   * Launches an AWS Elastic Beanstalk environment for the specified application using the specified configuration.
    */
   createEnvironment(params: ElasticBeanstalk.Types.CreateEnvironmentMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescription) => void): Request<ElasticBeanstalk.Types.EnvironmentDescription, AWSError>;
   /**
-   * Launches an environment for the specified application using the specified configuration.
+   * Launches an AWS Elastic Beanstalk environment for the specified application using the specified configuration.
    */
   createEnvironment(callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescription) => void): Request<ElasticBeanstalk.Types.EnvironmentDescription, AWSError>;
   /**
@@ -220,11 +220,11 @@ declare class ElasticBeanstalk extends Service {
    */
   describeInstancesHealth(callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribeInstancesHealthResult) => void): Request<ElasticBeanstalk.Types.DescribeInstancesHealthResult, AWSError>;
   /**
-   * Describes the version of the platform.
+   * Describes a platform version. Provides full details. Compare to ListPlatformVersions, which provides summary information about a list of platform versions. For definitions of platform version and other platform-related terms, see AWS Elastic Beanstalk Platforms Glossary.
    */
   describePlatformVersion(params: ElasticBeanstalk.Types.DescribePlatformVersionRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribePlatformVersionResult) => void): Request<ElasticBeanstalk.Types.DescribePlatformVersionResult, AWSError>;
   /**
-   * Describes the version of the platform.
+   * Describes a platform version. Provides full details. Compare to ListPlatformVersions, which provides summary information about a list of platform versions. For definitions of platform version and other platform-related terms, see AWS Elastic Beanstalk Platforms Glossary.
    */
   describePlatformVersion(callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribePlatformVersionResult) => void): Request<ElasticBeanstalk.Types.DescribePlatformVersionResult, AWSError>;
   /**
@@ -232,19 +232,27 @@ declare class ElasticBeanstalk extends Service {
    */
   listAvailableSolutionStacks(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ListAvailableSolutionStacksResultMessage) => void): Request<ElasticBeanstalk.Types.ListAvailableSolutionStacksResultMessage, AWSError>;
   /**
-   * Lists the available platforms.
+   * Lists the platform branches available for your account in an AWS Region. Provides summary information about each platform branch. For definitions of platform branch and other platform-related terms, see AWS Elastic Beanstalk Platforms Glossary.
+   */
+  listPlatformBranches(params: ElasticBeanstalk.Types.ListPlatformBranchesRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ListPlatformBranchesResult) => void): Request<ElasticBeanstalk.Types.ListPlatformBranchesResult, AWSError>;
+  /**
+   * Lists the platform branches available for your account in an AWS Region. Provides summary information about each platform branch. For definitions of platform branch and other platform-related terms, see AWS Elastic Beanstalk Platforms Glossary.
+   */
+  listPlatformBranches(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ListPlatformBranchesResult) => void): Request<ElasticBeanstalk.Types.ListPlatformBranchesResult, AWSError>;
+  /**
+   * Lists the platform versions available for your account in an AWS Region. Provides summary information about each platform version. Compare to DescribePlatformVersion, which provides full details about a single platform version. For definitions of platform version and other platform-related terms, see AWS Elastic Beanstalk Platforms Glossary.
    */
   listPlatformVersions(params: ElasticBeanstalk.Types.ListPlatformVersionsRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ListPlatformVersionsResult) => void): Request<ElasticBeanstalk.Types.ListPlatformVersionsResult, AWSError>;
   /**
-   * Lists the available platforms.
+   * Lists the platform versions available for your account in an AWS Region. Provides summary information about each platform version. Compare to DescribePlatformVersion, which provides full details about a single platform version. For definitions of platform version and other platform-related terms, see AWS Elastic Beanstalk Platforms Glossary.
    */
   listPlatformVersions(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ListPlatformVersionsResult) => void): Request<ElasticBeanstalk.Types.ListPlatformVersionsResult, AWSError>;
   /**
-   * Returns the tags applied to an AWS Elastic Beanstalk resource. The response contains a list of tag key-value pairs. Currently, Elastic Beanstalk only supports tagging of Elastic Beanstalk environments. For details about environment tagging, see Tagging Resources in Your Elastic Beanstalk Environment.
+   * Return the tags applied to an AWS Elastic Beanstalk resource. The response contains a list of tag key-value pairs. Elastic Beanstalk supports tagging of all of its resources. For details about resource tagging, see Tagging Application Resources.
    */
   listTagsForResource(params: ElasticBeanstalk.Types.ListTagsForResourceMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ResourceTagsDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ResourceTagsDescriptionMessage, AWSError>;
   /**
-   * Returns the tags applied to an AWS Elastic Beanstalk resource. The response contains a list of tag key-value pairs. Currently, Elastic Beanstalk only supports tagging of Elastic Beanstalk environments. For details about environment tagging, see Tagging Resources in Your Elastic Beanstalk Environment.
+   * Return the tags applied to an AWS Elastic Beanstalk resource. The response contains a list of tag key-value pairs. Elastic Beanstalk supports tagging of all of its resources. For details about resource tagging, see Tagging Application Resources.
    */
   listTagsForResource(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ResourceTagsDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ResourceTagsDescriptionMessage, AWSError>;
   /**
@@ -336,11 +344,11 @@ declare class ElasticBeanstalk extends Service {
    */
   updateEnvironment(callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescription) => void): Request<ElasticBeanstalk.Types.EnvironmentDescription, AWSError>;
   /**
-   * Update the list of tags applied to an AWS Elastic Beanstalk resource. Two lists can be passed: TagsToAdd for tags to add or update, and TagsToRemove. Currently, Elastic Beanstalk only supports tagging of Elastic Beanstalk environments. For details about environment tagging, see Tagging Resources in Your Elastic Beanstalk Environment. If you create a custom IAM user policy to control permission to this operation, specify one of the following two virtual actions (or both) instead of the API operation name:  elasticbeanstalk:AddTags  Controls permission to call UpdateTagsForResource and pass a list of tags to add in the TagsToAdd parameter.  elasticbeanstalk:RemoveTags  Controls permission to call UpdateTagsForResource and pass a list of tag keys to remove in the TagsToRemove parameter.   For details about creating a custom user policy, see Creating a Custom User Policy.
+   * Update the list of tags applied to an AWS Elastic Beanstalk resource. Two lists can be passed: TagsToAdd for tags to add or update, and TagsToRemove. Elastic Beanstalk supports tagging of all of its resources. For details about resource tagging, see Tagging Application Resources. If you create a custom IAM user policy to control permission to this operation, specify one of the following two virtual actions (or both) instead of the API operation name:  elasticbeanstalk:AddTags  Controls permission to call UpdateTagsForResource and pass a list of tags to add in the TagsToAdd parameter.  elasticbeanstalk:RemoveTags  Controls permission to call UpdateTagsForResource and pass a list of tag keys to remove in the TagsToRemove parameter.   For details about creating a custom user policy, see Creating a Custom User Policy.
    */
   updateTagsForResource(params: ElasticBeanstalk.Types.UpdateTagsForResourceMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Update the list of tags applied to an AWS Elastic Beanstalk resource. Two lists can be passed: TagsToAdd for tags to add or update, and TagsToRemove. Currently, Elastic Beanstalk only supports tagging of Elastic Beanstalk environments. For details about environment tagging, see Tagging Resources in Your Elastic Beanstalk Environment. If you create a custom IAM user policy to control permission to this operation, specify one of the following two virtual actions (or both) instead of the API operation name:  elasticbeanstalk:AddTags  Controls permission to call UpdateTagsForResource and pass a list of tags to add in the TagsToAdd parameter.  elasticbeanstalk:RemoveTags  Controls permission to call UpdateTagsForResource and pass a list of tag keys to remove in the TagsToRemove parameter.   For details about creating a custom user policy, see Creating a Custom User Policy.
+   * Update the list of tags applied to an AWS Elastic Beanstalk resource. Two lists can be passed: TagsToAdd for tags to add or update, and TagsToRemove. Elastic Beanstalk supports tagging of all of its resources. For details about resource tagging, see Tagging Application Resources. If you create a custom IAM user policy to control permission to this operation, specify one of the following two virtual actions (or both) instead of the API operation name:  elasticbeanstalk:AddTags  Controls permission to call UpdateTagsForResource and pass a list of tags to add in the TagsToAdd parameter.  elasticbeanstalk:RemoveTags  Controls permission to call UpdateTagsForResource and pass a list of tag keys to remove in the TagsToRemove parameter.   For details about creating a custom user policy, see Creating a Custom User Policy.
    */
   updateTagsForResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -442,7 +450,7 @@ declare namespace ElasticBeanstalk {
      */
     ServiceRole?: String;
     /**
-     * The application version lifecycle configuration.
+     * Defines lifecycle settings for application versions.
      */
     VersionLifecycleConfig?: ApplicationVersionLifecycleConfig;
   }
@@ -572,6 +580,8 @@ declare namespace ElasticBeanstalk {
   export type AvailableSolutionStackNamesList = SolutionStackName[];
   export type BoxedBoolean = boolean;
   export type BoxedInt = number;
+  export type BranchName = string;
+  export type BranchOrder = number;
   export interface BuildConfiguration {
     /**
      * The name of the artifact of the CodeBuild build. If provided, Elastic Beanstalk stores the build artifact in the S3 location S3-bucket/resources/application-name/codebuild/codebuild-version-label-artifact-name.zip. If not provided, Elastic Beanstalk stores the build artifact in the S3 location S3-bucket/resources/application-name/codebuild/codebuild-version-label.zip. 
@@ -722,11 +732,11 @@ declare namespace ElasticBeanstalk {
   export type ConfigurationOptionPossibleValues = ConfigurationOptionPossibleValue[];
   export interface ConfigurationOptionSetting {
     /**
-     * A unique resource name for a time-based scaling configuration option.
+     * A unique resource name for the option setting. Use it for a time–based scaling configuration option.
      */
     ResourceName?: ResourceName;
     /**
-     * A unique namespace identifying the option's associated AWS resource.
+     * A unique namespace that identifies the option's associated AWS resource.
      */
     Namespace?: OptionNamespace;
     /**
@@ -748,7 +758,7 @@ declare namespace ElasticBeanstalk {
      */
     SolutionStackName?: SolutionStackName;
     /**
-     * The ARN of the platform.
+     * The ARN of the platform version.
      */
     PlatformArn?: PlatformArn;
     /**
@@ -762,7 +772,7 @@ declare namespace ElasticBeanstalk {
      */
     SolutionStackName?: SolutionStackName;
     /**
-     * The ARN of the platform.
+     * The ARN of the platform version.
      */
     PlatformArn?: PlatformArn;
     /**
@@ -815,15 +825,15 @@ declare namespace ElasticBeanstalk {
   export type ConfigurationTemplateNamesList = ConfigurationTemplateName[];
   export interface CreateApplicationMessage {
     /**
-     * The name of the application. Constraint: This name must be unique within your account. If the specified name already exists, the action returns an InvalidParameterValue error.
+     * The name of the application. Must be unique within your account.
      */
     ApplicationName: ApplicationName;
     /**
-     * Describes the application.
+     * Your description of the application.
      */
     Description?: Description;
     /**
-     * Specify an application resource lifecycle configuration to prevent your application from accumulating too many versions.
+     * Specifies an application resource lifecycle configuration to prevent your application from accumulating too many versions.
      */
     ResourceLifecycleConfig?: ApplicationResourceLifecycleConfig;
     /**
@@ -841,7 +851,7 @@ declare namespace ElasticBeanstalk {
      */
     VersionLabel: VersionLabel;
     /**
-     * Describes this version.
+     * A description of this application version.
      */
     Description?: Description;
     /**
@@ -871,35 +881,35 @@ declare namespace ElasticBeanstalk {
   }
   export interface CreateConfigurationTemplateMessage {
     /**
-     * The name of the application to associate with this configuration template. If no application is found with this name, AWS Elastic Beanstalk returns an InvalidParameterValue error. 
+     * The name of the Elastic Beanstalk application to associate with this configuration template.
      */
     ApplicationName: ApplicationName;
     /**
-     * The name of the configuration template. Constraint: This name must be unique per application. Default: If a configuration template already exists with this name, AWS Elastic Beanstalk returns an InvalidParameterValue error. 
+     * The name of the configuration template. Constraint: This name must be unique per application.
      */
     TemplateName: ConfigurationTemplateName;
     /**
-     * The name of the solution stack used by this configuration. The solution stack specifies the operating system, architecture, and application server for a configuration template. It determines the set of configuration options as well as the possible and default values.  Use ListAvailableSolutionStacks to obtain a list of available solution stacks.   A solution stack name or a source configuration parameter must be specified, otherwise AWS Elastic Beanstalk returns an InvalidParameterValue error.  If a solution stack name is not specified and the source configuration parameter is specified, AWS Elastic Beanstalk uses the same solution stack as the source configuration template.
+     * The name of an Elastic Beanstalk solution stack (platform version) that this configuration uses. For example, 64bit Amazon Linux 2013.09 running Tomcat 7 Java 7. A solution stack specifies the operating system, runtime, and application server for a configuration template. It also determines the set of configuration options as well as the possible and default values. For more information, see Supported Platforms in the AWS Elastic Beanstalk Developer Guide. You must specify SolutionStackName if you don't specify PlatformArn, EnvironmentId, or SourceConfiguration. Use the  ListAvailableSolutionStacks  API to obtain a list of available solution stacks.
      */
     SolutionStackName?: SolutionStackName;
     /**
-     * The ARN of the custom platform.
+     * The Amazon Resource Name (ARN) of the custom platform. For more information, see  Custom Platforms in the AWS Elastic Beanstalk Developer Guide.  If you specify PlatformArn, then don't specify SolutionStackName. 
      */
     PlatformArn?: PlatformArn;
     /**
-     * If specified, AWS Elastic Beanstalk uses the configuration values from the specified configuration template to create a new configuration.  Values specified in the OptionSettings parameter of this call overrides any values obtained from the SourceConfiguration.   If no configuration template is found, returns an InvalidParameterValue error.   Constraint: If both the solution stack name parameter and the source configuration parameters are specified, the solution stack of the source configuration template must match the specified solution stack name or else AWS Elastic Beanstalk returns an InvalidParameterCombination error. 
+     * An Elastic Beanstalk configuration template to base this one on. If specified, Elastic Beanstalk uses the configuration values from the specified configuration template to create a new configuration. Values specified in OptionSettings override any values obtained from the SourceConfiguration. You must specify SourceConfiguration if you don't specify PlatformArn, EnvironmentId, or SolutionStackName. Constraint: If both solution stack name and source configuration are specified, the solution stack of the source configuration template must match the specified solution stack name.
      */
     SourceConfiguration?: SourceConfiguration;
     /**
-     * The ID of the environment used with this configuration template.
+     * The ID of an environment whose settings you want to use to create the configuration template. You must specify EnvironmentId if you don't specify PlatformArn, SolutionStackName, or SourceConfiguration.
      */
     EnvironmentId?: EnvironmentId;
     /**
-     * Describes this configuration.
+     * An optional description for this configuration.
      */
     Description?: Description;
     /**
-     * If specified, AWS Elastic Beanstalk sets the specified configuration option to the requested value. The new value overrides the value obtained from the solution stack or the source configuration template.
+     * Option values for the Elastic Beanstalk configuration, such as the instance type. If specified, these values override the values obtained from the solution stack or the source configuration template. For a complete list of Elastic Beanstalk configuration options, see Option Values in the AWS Elastic Beanstalk Developer Guide.
      */
     OptionSettings?: ConfigurationOptionSettingsList;
     /**
@@ -909,11 +919,11 @@ declare namespace ElasticBeanstalk {
   }
   export interface CreateEnvironmentMessage {
     /**
-     * The name of the application that contains the version to be deployed.  If no application is found with this name, CreateEnvironment returns an InvalidParameterValue error. 
+     * The name of the application that is associated with this environment.
      */
     ApplicationName: ApplicationName;
     /**
-     * A unique name for the deployment environment. Used in the application URL. Constraint: Must be from 4 to 40 characters in length. The name can contain only letters, numbers, and hyphens. It cannot start or end with a hyphen. This name must be unique within a region in your account. If the specified name already exists in the region, AWS Elastic Beanstalk returns an InvalidParameterValue error.  Default: If the CNAME parameter is not specified, the environment name becomes part of the CNAME, and therefore part of the visible URL for your application.
+     * A unique name for the environment. Constraint: Must be from 4 to 40 characters in length. The name can contain only letters, numbers, and hyphens. It can't start or end with a hyphen. This name must be unique within a region in your account. If the specified name already exists in the region, Elastic Beanstalk returns an InvalidParameterValue error.  If you don't specify the CNAMEPrefix parameter, the environment name becomes part of the CNAME, and therefore part of the visible URL for your application.
      */
     EnvironmentName?: EnvironmentName;
     /**
@@ -921,15 +931,15 @@ declare namespace ElasticBeanstalk {
      */
     GroupName?: GroupName;
     /**
-     * Describes this environment.
+     * Your description for this environment.
      */
     Description?: Description;
     /**
-     * If specified, the environment attempts to use this value as the prefix for the CNAME. If not specified, the CNAME is generated automatically by appending a random alphanumeric string to the environment name.
+     * If specified, the environment attempts to use this value as the prefix for the CNAME in your Elastic Beanstalk environment URL. If not specified, the CNAME is generated automatically by appending a random alphanumeric string to the environment name.
      */
     CNAMEPrefix?: DNSCnamePrefix;
     /**
-     * This specifies the tier to use for creating this environment.
+     * Specifies the tier to use in creating this environment. The environment tier that you choose determines whether Elastic Beanstalk provisions resources to support a web application that handles HTTP(S) requests or a web application that handles background-processing tasks.
      */
     Tier?: EnvironmentTier;
     /**
@@ -937,19 +947,19 @@ declare namespace ElasticBeanstalk {
      */
     Tags?: Tags;
     /**
-     * The name of the application version to deploy.  If the specified application has no associated application versions, AWS Elastic Beanstalk UpdateEnvironment returns an InvalidParameterValue error.  Default: If not specified, AWS Elastic Beanstalk attempts to launch the sample application in the container.
+     * The name of the application version to deploy. Default: If not specified, Elastic Beanstalk attempts to deploy the sample application.
      */
     VersionLabel?: VersionLabel;
     /**
-     *  The name of the configuration template to use in deployment. If no configuration template is found with this name, AWS Elastic Beanstalk returns an InvalidParameterValue error. 
+     * The name of the Elastic Beanstalk configuration template to use with the environment.  If you specify TemplateName, then don't specify SolutionStackName. 
      */
     TemplateName?: ConfigurationTemplateName;
     /**
-     * This is an alternative to specifying a template name. If specified, AWS Elastic Beanstalk sets the configuration values to the default values associated with the specified solution stack. For a list of current solution stacks, see Elastic Beanstalk Supported Platforms.
+     * The name of an Elastic Beanstalk solution stack (platform version) to use with the environment. If specified, Elastic Beanstalk sets the configuration values to the default values associated with the specified solution stack. For a list of current solution stacks, see Elastic Beanstalk Supported Platforms in the AWS Elastic Beanstalk Platforms guide.  If you specify SolutionStackName, don't specify PlatformArn or TemplateName. 
      */
     SolutionStackName?: SolutionStackName;
     /**
-     * The ARN of the platform.
+     * The Amazon Resource Name (ARN) of the custom platform to use with the environment. For more information, see  Custom Platforms in the AWS Elastic Beanstalk Developer Guide.  If you specify PlatformArn, don't specify SolutionStackName. 
      */
     PlatformArn?: PlatformArn;
     /**
@@ -1325,7 +1335,7 @@ declare namespace ElasticBeanstalk {
      */
     EnvironmentName?: EnvironmentName;
     /**
-     * The ARN of the version of the custom platform.
+     * The ARN of a custom platform version. If specified, AWS Elastic Beanstalk restricts the returned descriptions to those associated with this custom platform version.
      */
     PlatformArn?: PlatformArn;
     /**
@@ -1387,13 +1397,13 @@ declare namespace ElasticBeanstalk {
   }
   export interface DescribePlatformVersionRequest {
     /**
-     * The ARN of the version of the platform.
+     * The ARN of the platform version.
      */
     PlatformArn?: PlatformArn;
   }
   export interface DescribePlatformVersionResult {
     /**
-     * Detailed information about the version of the platform.
+     * Detailed information about the platform version.
      */
     PlatformDescription?: PlatformDescription;
   }
@@ -1423,7 +1433,7 @@ declare namespace ElasticBeanstalk {
      */
     SolutionStackName?: SolutionStackName;
     /**
-     * The ARN of the platform.
+     * The ARN of the platform version.
      */
     PlatformArn?: PlatformArn;
     /**
@@ -1621,7 +1631,7 @@ declare namespace ElasticBeanstalk {
      */
     EnvironmentName?: EnvironmentName;
     /**
-     * The ARN of the platform.
+     * The ARN of the platform version.
      */
     PlatformArn?: PlatformArn;
     /**
@@ -1758,33 +1768,57 @@ declare namespace ElasticBeanstalk {
      */
     SolutionStackDetails?: AvailableSolutionStackDetailsList;
   }
+  export interface ListPlatformBranchesRequest {
+    /**
+     * Criteria for restricting the resulting list of platform branches. The filter is evaluated as a logical conjunction (AND) of the separate SearchFilter terms. The following list shows valid attribute values for each of the SearchFilter terms. Most operators take a single value. The in and not_in operators can take multiple values.    Attribute = BranchName:    Operator: = | != | begins_with | ends_with | contains | in | not_in       Attribute = LifecycleState:    Operator: = | != | in | not_in     Values: beta | supported | deprecated | retired       Attribute = PlatformName:    Operator: = | != | begins_with | ends_with | contains | in | not_in       Attribute = TierType:    Operator: = | !=     Values: WebServer/Standard | Worker/SQS/HTTP      Array size: limited to 10 SearchFilter objects. Within each SearchFilter item, the Values array is limited to 10 items.
+     */
+    Filters?: SearchFilters;
+    /**
+     * The maximum number of platform branch values returned in one call.
+     */
+    MaxRecords?: PlatformBranchMaxRecords;
+    /**
+     * For a paginated request. Specify a token from a previous response page to retrieve the next response page. All other parameter values must be identical to the ones specified in the initial request. If no NextToken is specified, the first page is retrieved.
+     */
+    NextToken?: Token;
+  }
+  export interface ListPlatformBranchesResult {
+    /**
+     * Summary information about the platform branches.
+     */
+    PlatformBranchSummaryList?: PlatformBranchSummaryList;
+    /**
+     * In a paginated request, if this value isn't null, it's the token that you can pass in a subsequent request to get the next response page.
+     */
+    NextToken?: Token;
+  }
   export interface ListPlatformVersionsRequest {
     /**
-     * List only the platforms where the platform member value relates to one of the supplied values.
+     * Criteria for restricting the resulting list of platform versions. The filter is interpreted as a logical conjunction (AND) of the separate PlatformFilter terms.
      */
     Filters?: PlatformFilters;
     /**
-     * The maximum number of platform values returned in one call.
+     * The maximum number of platform version values returned in one call.
      */
     MaxRecords?: PlatformMaxRecords;
     /**
-     * The starting index into the remaining list of platforms. Use the NextToken value from a previous ListPlatformVersion call.
+     * For a paginated request. Specify a token from a previous response page to retrieve the next response page. All other parameter values must be identical to the ones specified in the initial request. If no NextToken is specified, the first page is retrieved.
      */
     NextToken?: Token;
   }
   export interface ListPlatformVersionsResult {
     /**
-     * Detailed information about the platforms.
+     * Summary information about the platform versions.
      */
     PlatformSummaryList?: PlatformSummaryList;
     /**
-     * The starting index into the remaining list of platforms. if this value is not null, you can use it in a subsequent ListPlatformVersion call. 
+     * In a paginated request, if this value isn't null, it's the token that you can pass in a subsequent request to get the next response page.
      */
     NextToken?: Token;
   }
   export interface ListTagsForResourceMessage {
     /**
-     * The Amazon Resource Name (ARN) of the resouce for which a tag list is requested. Must be the ARN of an Elastic Beanstalk environment.
+     * The Amazon Resource Name (ARN) of the resouce for which a tag list is requested. Must be the ARN of an Elastic Beanstalk resource.
      */
     ResourceArn: ResourceArn;
   }
@@ -1948,92 +1982,129 @@ declare namespace ElasticBeanstalk {
   }
   export type OptionsSpecifierList = OptionSpecification[];
   export type PlatformArn = string;
-  export type PlatformCategory = string;
-  export interface PlatformDescription {
+  export type PlatformBranchLifecycleState = string;
+  export type PlatformBranchMaxRecords = number;
+  export interface PlatformBranchSummary {
     /**
-     * The ARN of the platform.
-     */
-    PlatformArn?: PlatformArn;
-    /**
-     * The AWS account ID of the person who created the platform.
-     */
-    PlatformOwner?: PlatformOwner;
-    /**
-     * The name of the platform.
+     * The name of the platform to which this platform branch belongs.
      */
     PlatformName?: PlatformName;
     /**
-     * The version of the platform.
+     * The name of the platform branch.
+     */
+    BranchName?: BranchName;
+    /**
+     * The support life cycle state of the platform branch. Possible values: beta | supported | deprecated | retired 
+     */
+    LifecycleState?: PlatformBranchLifecycleState;
+    /**
+     * An ordinal number that designates the order in which platform branches have been added to a platform. This can be helpful, for example, if your code calls the ListPlatformBranches action and then displays a list of platform branches. A larger BranchOrder value designates a newer platform branch within the platform.
+     */
+    BranchOrder?: BranchOrder;
+    /**
+     * The environment tiers that platform versions in this branch support. Possible values: WebServer/Standard | Worker/SQS/HTTP 
+     */
+    SupportedTierList?: SupportedTierList;
+  }
+  export type PlatformBranchSummaryList = PlatformBranchSummary[];
+  export type PlatformCategory = string;
+  export interface PlatformDescription {
+    /**
+     * The ARN of the platform version.
+     */
+    PlatformArn?: PlatformArn;
+    /**
+     * The AWS account ID of the person who created the platform version.
+     */
+    PlatformOwner?: PlatformOwner;
+    /**
+     * The name of the platform version.
+     */
+    PlatformName?: PlatformName;
+    /**
+     * The version of the platform version.
      */
     PlatformVersion?: PlatformVersion;
     /**
-     * The name of the solution stack used by the platform.
+     * The name of the solution stack used by the platform version.
      */
     SolutionStackName?: SolutionStackName;
     /**
-     * The status of the platform.
+     * The status of the platform version.
      */
     PlatformStatus?: PlatformStatus;
     /**
-     * The date when the platform was created.
+     * The date when the platform version was created.
      */
     DateCreated?: CreationDate;
     /**
-     * The date when the platform was last updated.
+     * The date when the platform version was last updated.
      */
     DateUpdated?: UpdateDate;
     /**
-     * The category of the platform.
+     * The category of the platform version.
      */
     PlatformCategory?: PlatformCategory;
     /**
-     * The description of the platform.
+     * The description of the platform version.
      */
     Description?: Description;
     /**
-     * Information about the maintainer of the platform.
+     * Information about the maintainer of the platform version.
      */
     Maintainer?: Maintainer;
     /**
-     * The operating system used by the platform.
+     * The operating system used by the platform version.
      */
     OperatingSystemName?: OperatingSystemName;
     /**
-     * The version of the operating system used by the platform.
+     * The version of the operating system used by the platform version.
      */
     OperatingSystemVersion?: OperatingSystemVersion;
     /**
-     * The programming languages supported by the platform.
+     * The programming languages supported by the platform version.
      */
     ProgrammingLanguages?: PlatformProgrammingLanguages;
     /**
-     * The frameworks supported by the platform.
+     * The frameworks supported by the platform version.
      */
     Frameworks?: PlatformFrameworks;
     /**
-     * The custom AMIs supported by the platform.
+     * The custom AMIs supported by the platform version.
      */
     CustomAmiList?: CustomAmiList;
     /**
-     * The tiers supported by the platform.
+     * The tiers supported by the platform version.
      */
     SupportedTierList?: SupportedTierList;
     /**
-     * The additions supported by the platform.
+     * The additions supported by the platform version.
      */
     SupportedAddonList?: SupportedAddonList;
+    /**
+     * The state of the platform version in its lifecycle. Possible values: Recommended | null  If a null value is returned, the platform version isn't the recommended one for its branch. Each platform branch has a single recommended platform version, typically the most recent one.
+     */
+    PlatformLifecycleState?: PlatformLifecycleState;
+    /**
+     * The platform branch to which the platform version belongs.
+     */
+    PlatformBranchName?: BranchName;
+    /**
+     * The state of the platform version's branch in its lifecycle. Possible values: Beta | Supported | Deprecated | Retired 
+     */
+    PlatformBranchLifecycleState?: PlatformBranchLifecycleState;
   }
   export interface PlatformFilter {
     /**
-     * The custom platform attribute to which the filter values are applied. Valid Values: PlatformName | PlatformVersion | PlatformStatus | PlatformOwner 
+     * The platform version attribute to which the filter values are applied. Valid values: PlatformName | PlatformVersion | PlatformStatus | PlatformBranchName | PlatformLifecycleState | PlatformOwner | SupportedTier | SupportedAddon | ProgrammingLanguageName | OperatingSystemName 
      */
     Type?: PlatformFilterType;
     /**
-     * The operator to apply to the Type with each of the Values.  Valid Values: = (equal to) | != (not equal to) | &lt; (less than) | &lt;= (less than or equal to) | &gt; (greater than) | &gt;= (greater than or equal to) | contains | begins_with | ends_with 
+     * The operator to apply to the Type with each of the Values. Valid values: = | != | &lt; | &lt;= | &gt; | &gt;= | contains | begins_with | ends_with 
      */
     Operator?: PlatformFilterOperator;
     /**
-     * The list of values applied to the custom platform attribute.
+     * The list of values applied to the filtering platform version attribute. Only one value is supported for all current operators. The following list shows valid filter values for some filter attributes.    PlatformStatus: Creating | Failed | Ready | Deleting | Deleted     PlatformLifecycleState: recommended     SupportedTier: WebServer/Standard | Worker/SQS/HTTP     SupportedAddon: Log/S3 | Monitoring/Healthd | WorkerDaemon/SQSD   
      */
     Values?: PlatformFilterValueList;
   }
@@ -2053,6 +2124,7 @@ declare namespace ElasticBeanstalk {
     Version?: String;
   }
   export type PlatformFrameworks = PlatformFramework[];
+  export type PlatformLifecycleState = string;
   export type PlatformMaxRecords = number;
   export type PlatformName = string;
   export type PlatformOwner = string;
@@ -2070,37 +2142,53 @@ declare namespace ElasticBeanstalk {
   export type PlatformStatus = "Creating"|"Failed"|"Ready"|"Deleting"|"Deleted"|string;
   export interface PlatformSummary {
     /**
-     * The ARN of the platform.
+     * The ARN of the platform version.
      */
     PlatformArn?: PlatformArn;
     /**
-     * The AWS account ID of the person who created the platform.
+     * The AWS account ID of the person who created the platform version.
      */
     PlatformOwner?: PlatformOwner;
     /**
-     * The status of the platform. You can create an environment from the platform once it is ready.
+     * The status of the platform version. You can create an environment from the platform version once it is ready.
      */
     PlatformStatus?: PlatformStatus;
     /**
-     * The category of platform.
+     * The category of platform version.
      */
     PlatformCategory?: PlatformCategory;
     /**
-     * The operating system used by the platform.
+     * The operating system used by the platform version.
      */
     OperatingSystemName?: OperatingSystemName;
     /**
-     * The version of the operating system used by the platform.
+     * The version of the operating system used by the platform version.
      */
     OperatingSystemVersion?: OperatingSystemVersion;
     /**
-     * The tiers in which the platform runs.
+     * The tiers in which the platform version runs.
      */
     SupportedTierList?: SupportedTierList;
     /**
-     * The additions associated with the platform.
+     * The additions associated with the platform version.
      */
     SupportedAddonList?: SupportedAddonList;
+    /**
+     * The state of the platform version in its lifecycle. Possible values: recommended | empty If an empty value is returned, the platform version is supported but isn't the recommended one for its branch.
+     */
+    PlatformLifecycleState?: PlatformLifecycleState;
+    /**
+     * The version string of the platform version.
+     */
+    PlatformVersion?: PlatformVersion;
+    /**
+     * The platform branch to which the platform version belongs.
+     */
+    PlatformBranchName?: BranchName;
+    /**
+     * The state of the platform version's branch in its lifecycle. Possible values: beta | supported | deprecated | retired 
+     */
+    PlatformBranchLifecycleState?: PlatformBranchLifecycleState;
   }
   export type PlatformSummaryList = PlatformSummary[];
   export type PlatformVersion = string;
@@ -2177,7 +2265,7 @@ declare namespace ElasticBeanstalk {
   }
   export interface ResourceTagsDescriptionMessage {
     /**
-     * The Amazon Resource Name (ARN) of the resouce for which a tag list was requested.
+     * The Amazon Resource Name (ARN) of the resource for which a tag list was requested.
      */
     ResourceArn?: ResourceArn;
     /**
@@ -2228,6 +2316,25 @@ declare namespace ElasticBeanstalk {
     S3Key?: S3Key;
   }
   export type SampleTimestamp = Date;
+  export interface SearchFilter {
+    /**
+     * The result attribute to which the filter values are applied. Valid values vary by API action.
+     */
+    Attribute?: SearchFilterAttribute;
+    /**
+     * The operator to apply to the Attribute with each of the Values. Valid values vary by Attribute.
+     */
+    Operator?: SearchFilterOperator;
+    /**
+     * The list of values applied to the Attribute and Operator attributes. Number of values and valid values vary by Attribute.
+     */
+    Values?: SearchFilterValues;
+  }
+  export type SearchFilterAttribute = string;
+  export type SearchFilterOperator = string;
+  export type SearchFilterValue = string;
+  export type SearchFilterValues = SearchFilterValue[];
+  export type SearchFilters = SearchFilter[];
   export interface SingleInstanceHealth {
     /**
      * The ID of the Amazon EC2 instance.
@@ -2515,7 +2622,7 @@ declare namespace ElasticBeanstalk {
   }
   export interface UpdateTagsForResourceMessage {
     /**
-     * The Amazon Resource Name (ARN) of the resouce to be updated. Must be the ARN of an Elastic Beanstalk environment.
+     * The Amazon Resource Name (ARN) of the resouce to be updated. Must be the ARN of an Elastic Beanstalk resource.
      */
     ResourceArn: ResourceArn;
     /**
