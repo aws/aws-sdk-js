@@ -294,6 +294,10 @@ declare namespace MediaConnect {
      * The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
      */
     StreamId?: __string;
+    /**
+     * The name of the VPC interface attachment to use for this output.
+     */
+    VpcInterfaceAttachment?: VpcInterfaceAttachment;
   }
   export type Algorithm = "aes128"|"aes192"|"aes256"|string;
   export interface CreateFlowRequest {
@@ -645,6 +649,10 @@ declare namespace MediaConnect {
      * Attributes related to the transport stream that are used in the output.
      */
     Transport?: Transport;
+    /**
+     * The name of the VPC interface attachment to use for this output.
+     */
+    VpcInterfaceAttachment?: VpcInterfaceAttachment;
   }
   export type Protocol = "zixi-push"|"rtp-fec"|"rtp"|"zixi-pull"|"rist"|string;
   export interface RemoveFlowOutputRequest {
@@ -1031,6 +1039,10 @@ declare namespace MediaConnect {
      * The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
      */
     StreamId?: __string;
+    /**
+     * The name of the VPC interface attachment to use for this output.
+     */
+    VpcInterfaceAttachment?: VpcInterfaceAttachment;
   }
   export interface UpdateFlowOutputResponse {
     /**
@@ -1130,6 +1142,12 @@ declare namespace MediaConnect {
      * Subnet must be in the AZ of the Flow
      */
     SubnetId: __string;
+  }
+  export interface VpcInterfaceAttachment {
+    /**
+     * The name of the VPC interface to use for this output.
+     */
+    VpcInterfaceName?: __string;
   }
   export interface VpcInterfaceRequest {
     /**

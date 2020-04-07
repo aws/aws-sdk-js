@@ -979,7 +979,7 @@ declare namespace APIGateway {
      */
     format?: String;
     /**
-     * The ARN of the CloudWatch Logs log group to receive access logs.
+     * The Amazon Resource Name (ARN) of the CloudWatch Logs log group or Kinesis Data Firehose delivery stream to receive access logs. If you specify a Kinesis Data Firehose delivery stream, the stream name must begin with amazon-apigateway-.
      */
     destinationArn?: String;
   }
@@ -1222,7 +1222,7 @@ declare namespace APIGateway {
      */
     enabled?: Boolean;
     /**
-     * Specifies whether (true) or not (false) the key identifier is distinct from the created API key value.
+     * Specifies whether (true) or not (false) the key identifier is distinct from the created API key value. This parameter is deprecated and should not be used.
      */
     generateDistinctId?: Boolean;
     /**
@@ -1298,7 +1298,7 @@ declare namespace APIGateway {
      */
     restApiId: String;
     /**
-     * The name of the API's stage that you want to use for this mapping. Specify '(none)' if you do not want callers to explicitly specify the stage name after any base path name.
+     * The name of the API's stage that you want to use for this mapping. Specify '(none)' if you want callers to explicitly specify the stage name after any base path name.
      */
     stage?: String;
   }
@@ -1610,7 +1610,7 @@ declare namespace APIGateway {
      */
     description?: String;
     /**
-     * [Required] The ARNs of network load balancers of the VPC targeted by the VPC link. The network load balancers must be owned by the same AWS account of the API owner.
+     * [Required] The ARN of the network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same AWS account of the API owner.
      */
     targetArns: ListOfString;
     /**
@@ -2581,7 +2581,7 @@ declare namespace APIGateway {
   }
   export interface GetTagsRequest {
     /**
-     * [Required] The ARN of a resource that can be tagged. The resource ARN must be URL-encoded.
+     * [Required] The ARN of a resource that can be tagged.
      */
     resourceArn: String;
     /**
@@ -2916,7 +2916,7 @@ declare namespace APIGateway {
      */
     metricsEnabled?: Boolean;
     /**
-     * Specifies the logging level for this method, which affects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is /{method_setting_key}/logging/loglevel, and the available levels are OFF, ERROR, and INFO.
+     * Specifies the logging level for this method, which affects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is /{method_setting_key}/logging/loglevel, and the available levels are OFF, ERROR, and INFO. Choose ERROR to write only error-level entries to CloudWatch Logs, or choose INFO to include all ERROR events as well as extra informational events.
      */
     loggingLevel?: String;
     /**
@@ -3509,7 +3509,7 @@ declare namespace APIGateway {
   export type String = string;
   export interface TagResourceRequest {
     /**
-     * [Required] The ARN of a resource that can be tagged. The resource ARN must be URL-encoded.
+     * [Required] The ARN of a resource that can be tagged.
      */
     resourceArn: String;
     /**
@@ -3668,7 +3668,7 @@ declare namespace APIGateway {
   export type UnauthorizedCacheControlHeaderStrategy = "FAIL_WITH_403"|"SUCCEED_WITH_RESPONSE_HEADER"|"SUCCEED_WITHOUT_RESPONSE_HEADER"|string;
   export interface UntagResourceRequest {
     /**
-     * [Required] The ARN of a resource that can be tagged. The resource ARN must be URL-encoded.
+     * [Required] The ARN of a resource that can be tagged.
      */
     resourceArn: String;
     /**
@@ -4075,7 +4075,7 @@ declare namespace APIGateway {
      */
     description?: String;
     /**
-     * The ARNs of network load balancers of the VPC targeted by the VPC link. The network load balancers must be owned by the same AWS account of the API owner.
+     * The ARN of the network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same AWS account of the API owner.
      */
     targetArns?: ListOfString;
     /**

@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.654.0-->
+<!--LATEST=2.655.0-->
 <!--ENTRYINSERT-->
+
+## 2.655.0
+* feature: CodeGuruReviewer: API updates for CodeGuruReviewer 
+* feature: MediaConnect: You can now send content from your MediaConnect flow to your virtual private cloud (VPC) without going over the public internet.
 
 ## 2.654.0
 * feature: Chime: Amazon Chime proxy phone sessions let you provide two users with a shared phone number to communicate via voice or text for up to 12 hours without revealing personal phone numbers. When users call or message the provided phone number, they are connected to the other party and their private phone numbers are replaced with the shared number in Caller ID.

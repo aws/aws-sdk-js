@@ -1050,6 +1050,11 @@
           "shape": "__string",
           "locationName": "streamId",
           "documentation": "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams."
+        },
+        "VpcInterfaceAttachment": {
+          "shape": "VpcInterfaceAttachment",
+          "locationName": "vpcInterfaceAttachment",
+          "documentation": "The name of the VPC interface attachment to use for this output."
         }
       },
       "documentation": "The output that you want to add to this flow.",
@@ -1664,6 +1669,11 @@
           "shape": "Transport",
           "locationName": "transport",
           "documentation": "Attributes related to the transport stream that are used in the output."
+        },
+        "VpcInterfaceAttachment": {
+          "shape": "VpcInterfaceAttachment",
+          "locationName": "vpcInterfaceAttachment",
+          "documentation": "The name of the VPC interface attachment to use for this output."
         }
       },
       "documentation": "The settings for an output.",
@@ -2308,6 +2318,11 @@
           "shape": "__string",
           "locationName": "streamId",
           "documentation": "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams."
+        },
+        "VpcInterfaceAttachment": {
+          "shape": "VpcInterfaceAttachment",
+          "locationName": "vpcInterfaceAttachment",
+          "documentation": "The name of the VPC interface attachment to use for this output."
         }
       },
       "documentation": "The fields that you want to update in the output.",
@@ -2482,6 +2497,17 @@
         "RoleArn",
         "Name"
       ]
+    },
+    "VpcInterfaceAttachment": {
+      "type": "structure",
+      "members": {
+        "VpcInterfaceName": {
+          "shape": "__string",
+          "locationName": "vpcInterfaceName",
+          "documentation": "The name of the VPC interface to use for this output."
+        }
+      },
+      "documentation": "The settings for attaching a VPC interface to an output."
     },
     "VpcInterfaceRequest": {
       "type": "structure",
