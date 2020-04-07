@@ -28,7 +28,8 @@ Example: v2.466.0
 * For browsers, the SDK version number is in the script tag <pre>src=".../aws-sdk-<b>2.466.0</b>.min.js"</pre>
 * For Node.js, get SDK version by
   * running command `npm list aws-sdk` from your root directory
-  * printing the output of `AWS.VERSION` in your code where `AWS = require("aws-sdk");`
+  * printing the output of `console.log(AWS.VERSION)` in your code where `AWS = require("aws-sdk");`
+  * if running on Lambda and using SDK provided by Lambda runtime, you can find the SDK versions [here](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html) 
 
 **To Reproduce (observed behavior)**
 Steps to reproduce the behavior (please share code or minimal repo)
