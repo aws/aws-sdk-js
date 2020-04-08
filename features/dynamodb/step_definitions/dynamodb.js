@@ -1,26 +1,15 @@
 var jmespath = require('jmespath');
 
 module.exports = function() {
-  this.Before("@dynamodb-2011-12-05", function (next) {
+  this.Before("@dynamodb", function (next) {
     this.service = new this.AWS.DynamoDB({
-      apiVersion: '2011-12-05',
-      maxRetries: 2
-    });
-    next();
-  });
-
-  this.Before("@dynamodb-2012-08-10", function (next) {
-    this.service = new this.AWS.DynamoDB({
-      apiVersion: '2012-08-10',
       maxRetries: 2
     });
     next();
   });
 
   function createTable(world, callback) {
-    var db = new world.AWS.DynamoDB({
-      apiVersion: '2011-12-05',
-    });
+    var db = new world.AWS.DynamoDB();
 
     var params = {
       TableName: world.tableName,
@@ -65,12 +54,7 @@ module.exports = function() {
 
   this.Then(/^the item with id "([^"]*)" should exist$/, function(key, next) {
     var world = this;
-    var params;
-    if (this.service.config.apiVersion === '2011-12-05') {
-      params = {TableName: this.tableName, Key: {HashKeyElement: {S: key}}};
-    } else if (this.service.config.apiVersion === '2012-08-10') {
-      params = {TableName: this.tableName, Key: {id: {S: key}}};
-    }
+    var params = {TableName: this.tableName, Key: {id: {S: key}}};
     this.request(null, 'getItem', params, next);
   });
 
