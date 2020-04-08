@@ -24,13 +24,9 @@ module.exports = function() {
 
     var params = {
       TableName: world.tableName,
-      KeySchema: {
-        HashKeyElement: { AttributeName: 'id', AttributeType: 'S' }
-      },
-      ProvisionedThroughput: {
-        ReadCapacityUnits: 10,
-        WriteCapacityUnits: 5,
-      }
+      AttributeDefinitions: [{ AttributeName: "id", AttributeType: "S" }],
+      KeySchema: [{ AttributeName: "id", KeyType: "HASH" }],
+      BillingMode: "PAY_PER_REQUEST"
     };
 
     db.createTable(params, function(err, data) {
@@ -58,7 +54,7 @@ module.exports = function() {
 
   this.When(/^I create a table$/, function(callback) {
     var world = this;
-    this.tableName = 'aws-sdk-js-integration-' + Math.random().toString(36).substring(2);
+    this.tableName = this.uniqueName("aws-sdk-js-integration-");
     createTable(world, callback);
   });
 
