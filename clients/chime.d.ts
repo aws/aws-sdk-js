@@ -140,11 +140,11 @@ declare class Chime extends Service {
    */
   createPhoneNumberOrder(callback?: (err: AWSError, data: Chime.Types.CreatePhoneNumberOrderResponse) => void): Request<Chime.Types.CreatePhoneNumberOrderResponse, AWSError>;
   /**
-   * 
+   * Creates a proxy session on the specified Amazon Chime Voice Connector for the specified participant phone numbers.
    */
   createProxySession(params: Chime.Types.CreateProxySessionRequest, callback?: (err: AWSError, data: Chime.Types.CreateProxySessionResponse) => void): Request<Chime.Types.CreateProxySessionResponse, AWSError>;
   /**
-   * 
+   * Creates a proxy session on the specified Amazon Chime Voice Connector for the specified participant phone numbers.
    */
   createProxySession(callback?: (err: AWSError, data: Chime.Types.CreateProxySessionResponse) => void): Request<Chime.Types.CreateProxySessionResponse, AWSError>;
   /**
@@ -228,11 +228,11 @@ declare class Chime extends Service {
    */
   deletePhoneNumber(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * 
+   * Deletes the specified proxy session from the specified Amazon Chime Voice Connector.
    */
   deleteProxySession(params: Chime.Types.DeleteProxySessionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * 
+   * Deletes the specified proxy session from the specified Amazon Chime Voice Connector.
    */
   deleteProxySession(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -276,11 +276,11 @@ declare class Chime extends Service {
    */
   deleteVoiceConnectorOrigination(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * 
+   * Deletes the proxy configuration from the specified Amazon Chime Voice Connector.
    */
   deleteVoiceConnectorProxy(params: Chime.Types.DeleteVoiceConnectorProxyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * 
+   * Deletes the proxy configuration from the specified Amazon Chime Voice Connector.
    */
   deleteVoiceConnectorProxy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -412,11 +412,11 @@ declare class Chime extends Service {
    */
   getPhoneNumberSettings(callback?: (err: AWSError, data: Chime.Types.GetPhoneNumberSettingsResponse) => void): Request<Chime.Types.GetPhoneNumberSettingsResponse, AWSError>;
   /**
-   * 
+   * Gets the specified proxy session details for the specified Amazon Chime Voice Connector.
    */
   getProxySession(params: Chime.Types.GetProxySessionRequest, callback?: (err: AWSError, data: Chime.Types.GetProxySessionResponse) => void): Request<Chime.Types.GetProxySessionResponse, AWSError>;
   /**
-   * 
+   * Gets the specified proxy session details for the specified Amazon Chime Voice Connector.
    */
   getProxySession(callback?: (err: AWSError, data: Chime.Types.GetProxySessionResponse) => void): Request<Chime.Types.GetProxySessionResponse, AWSError>;
   /**
@@ -476,11 +476,11 @@ declare class Chime extends Service {
    */
   getVoiceConnectorOrigination(callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorOriginationResponse) => void): Request<Chime.Types.GetVoiceConnectorOriginationResponse, AWSError>;
   /**
-   * 
+   * Gets the proxy configuration details for the specified Amazon Chime Voice Connector.
    */
   getVoiceConnectorProxy(params: Chime.Types.GetVoiceConnectorProxyRequest, callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorProxyResponse) => void): Request<Chime.Types.GetVoiceConnectorProxyResponse, AWSError>;
   /**
-   * 
+   * Gets the proxy configuration details for the specified Amazon Chime Voice Connector.
    */
   getVoiceConnectorProxy(callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorProxyResponse) => void): Request<Chime.Types.GetVoiceConnectorProxyResponse, AWSError>;
   /**
@@ -524,6 +524,14 @@ declare class Chime extends Service {
    */
   listAccounts(callback?: (err: AWSError, data: Chime.Types.ListAccountsResponse) => void): Request<Chime.Types.ListAccountsResponse, AWSError>;
   /**
+   * Lists the tags applied to an Amazon Chime SDK attendee resource.
+   */
+  listAttendeeTags(params: Chime.Types.ListAttendeeTagsRequest, callback?: (err: AWSError, data: Chime.Types.ListAttendeeTagsResponse) => void): Request<Chime.Types.ListAttendeeTagsResponse, AWSError>;
+  /**
+   * Lists the tags applied to an Amazon Chime SDK attendee resource.
+   */
+  listAttendeeTags(callback?: (err: AWSError, data: Chime.Types.ListAttendeeTagsResponse) => void): Request<Chime.Types.ListAttendeeTagsResponse, AWSError>;
+  /**
    * Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
    */
   listAttendees(params: Chime.Types.ListAttendeesRequest, callback?: (err: AWSError, data: Chime.Types.ListAttendeesResponse) => void): Request<Chime.Types.ListAttendeesResponse, AWSError>;
@@ -539,6 +547,14 @@ declare class Chime extends Service {
    * Lists the bots associated with the administrator's Amazon Chime Enterprise account ID.
    */
   listBots(callback?: (err: AWSError, data: Chime.Types.ListBotsResponse) => void): Request<Chime.Types.ListBotsResponse, AWSError>;
+  /**
+   * Lists the tags applied to an Amazon Chime SDK meeting resource.
+   */
+  listMeetingTags(params: Chime.Types.ListMeetingTagsRequest, callback?: (err: AWSError, data: Chime.Types.ListMeetingTagsResponse) => void): Request<Chime.Types.ListMeetingTagsResponse, AWSError>;
+  /**
+   * Lists the tags applied to an Amazon Chime SDK meeting resource.
+   */
+  listMeetingTags(callback?: (err: AWSError, data: Chime.Types.ListMeetingTagsResponse) => void): Request<Chime.Types.ListMeetingTagsResponse, AWSError>;
   /**
    * Lists up to 100 active Amazon Chime SDK meetings. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
    */
@@ -564,11 +580,11 @@ declare class Chime extends Service {
    */
   listPhoneNumbers(callback?: (err: AWSError, data: Chime.Types.ListPhoneNumbersResponse) => void): Request<Chime.Types.ListPhoneNumbersResponse, AWSError>;
   /**
-   * 
+   * Lists the proxy sessions for the specified Amazon Chime Voice Connector.
    */
   listProxySessions(params: Chime.Types.ListProxySessionsRequest, callback?: (err: AWSError, data: Chime.Types.ListProxySessionsResponse) => void): Request<Chime.Types.ListProxySessionsResponse, AWSError>;
   /**
-   * 
+   * Lists the proxy sessions for the specified Amazon Chime Voice Connector.
    */
   listProxySessions(callback?: (err: AWSError, data: Chime.Types.ListProxySessionsResponse) => void): Request<Chime.Types.ListProxySessionsResponse, AWSError>;
   /**
@@ -587,6 +603,14 @@ declare class Chime extends Service {
    * Lists the room details for the specified Amazon Chime Enterprise account. Optionally, filter the results by a member ID (user ID or bot ID) to see a list of rooms that the member belongs to.
    */
   listRooms(callback?: (err: AWSError, data: Chime.Types.ListRoomsResponse) => void): Request<Chime.Types.ListRoomsResponse, AWSError>;
+  /**
+   * Lists the tags applied to an Amazon Chime SDK meeting resource.
+   */
+  listTagsForResource(params: Chime.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Chime.Types.ListTagsForResourceResponse) => void): Request<Chime.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists the tags applied to an Amazon Chime SDK meeting resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Chime.Types.ListTagsForResourceResponse) => void): Request<Chime.Types.ListTagsForResourceResponse, AWSError>;
   /**
    * Lists the users that belong to the specified Amazon Chime account. You can specify an email address to list only the user that the email address belongs to.
    */
@@ -652,11 +676,11 @@ declare class Chime extends Service {
    */
   putVoiceConnectorOrigination(callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorOriginationResponse) => void): Request<Chime.Types.PutVoiceConnectorOriginationResponse, AWSError>;
   /**
-   * 
+   * Puts the specified proxy configuration to the specified Amazon Chime Voice Connector.
    */
   putVoiceConnectorProxy(params: Chime.Types.PutVoiceConnectorProxyRequest, callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorProxyResponse) => void): Request<Chime.Types.PutVoiceConnectorProxyResponse, AWSError>;
   /**
-   * 
+   * Puts the specified proxy configuration to the specified Amazon Chime Voice Connector.
    */
   putVoiceConnectorProxy(callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorProxyResponse) => void): Request<Chime.Types.PutVoiceConnectorProxyResponse, AWSError>;
   /**
@@ -716,6 +740,54 @@ declare class Chime extends Service {
    */
   searchAvailablePhoneNumbers(callback?: (err: AWSError, data: Chime.Types.SearchAvailablePhoneNumbersResponse) => void): Request<Chime.Types.SearchAvailablePhoneNumbersResponse, AWSError>;
   /**
+   * Applies the specified tags to the specified Amazon Chime SDK attendee.
+   */
+  tagAttendee(params: Chime.Types.TagAttendeeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Applies the specified tags to the specified Amazon Chime SDK attendee.
+   */
+  tagAttendee(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Applies the specified tags to the specified Amazon Chime SDK meeting.
+   */
+  tagMeeting(params: Chime.Types.TagMeetingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Applies the specified tags to the specified Amazon Chime SDK meeting.
+   */
+  tagMeeting(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Applies the specified tags to the specified Amazon Chime SDK meeting resource.
+   */
+  tagResource(params: Chime.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Applies the specified tags to the specified Amazon Chime SDK meeting resource.
+   */
+  tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Untags the specified tags from the specified Amazon Chime SDK attendee.
+   */
+  untagAttendee(params: Chime.Types.UntagAttendeeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Untags the specified tags from the specified Amazon Chime SDK attendee.
+   */
+  untagAttendee(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Untags the specified tags from the specified Amazon Chime SDK meeting.
+   */
+  untagMeeting(params: Chime.Types.UntagMeetingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Untags the specified tags from the specified Amazon Chime SDK meeting.
+   */
+  untagMeeting(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Untags the specified tags from the specified Amazon Chime SDK meeting resource.
+   */
+  untagResource(params: Chime.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Untags the specified tags from the specified Amazon Chime SDK meeting resource.
+   */
+  untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Updates account details for the specified Amazon Chime account. Currently, only account name updates are supported for this action.
    */
   updateAccount(params: Chime.Types.UpdateAccountRequest, callback?: (err: AWSError, data: Chime.Types.UpdateAccountResponse) => void): Request<Chime.Types.UpdateAccountResponse, AWSError>;
@@ -764,11 +836,11 @@ declare class Chime extends Service {
    */
   updatePhoneNumberSettings(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * 
+   * Updates the specified proxy session details, such as voice or SMS capabilities.
    */
   updateProxySession(params: Chime.Types.UpdateProxySessionRequest, callback?: (err: AWSError, data: Chime.Types.UpdateProxySessionResponse) => void): Request<Chime.Types.UpdateProxySessionResponse, AWSError>;
   /**
-   * 
+   * Updates the specified proxy session details, such as voice or SMS capabilities.
    */
   updateProxySession(callback?: (err: AWSError, data: Chime.Types.UpdateProxySessionResponse) => void): Request<Chime.Types.UpdateProxySessionResponse, AWSError>;
   /**
@@ -963,6 +1035,8 @@ declare namespace Chime {
     JoinToken?: JoinTokenString;
   }
   export type AttendeeList = Attendee[];
+  export type AttendeeTagKeyList = TagKey[];
+  export type AttendeeTagList = Tag[];
   export type BatchCreateAttendeeErrorList = CreateAttendeeError[];
   export interface BatchCreateAttendeeRequest {
     /**
@@ -1168,12 +1242,20 @@ declare namespace Chime {
      * The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
      */
     ExternalUserId: ExternalUserIdType;
+    /**
+     * The tag key-value pairs.
+     */
+    Tags?: AttendeeTagList;
   }
   export interface CreateAttendeeRequestItem {
     /**
      * The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
      */
     ExternalUserId: ExternalUserIdType;
+    /**
+     * The tag key-value pairs.
+     */
+    Tags?: AttendeeTagList;
   }
   export type CreateAttendeeRequestItemList = CreateAttendeeRequestItem[];
   export interface CreateAttendeeResponse {
@@ -1208,6 +1290,10 @@ declare namespace Chime {
      */
     ClientRequestToken: ClientRequestToken;
     /**
+     * The external meeting ID.
+     */
+    ExternalMeetingId?: ExternalMeetingIdType;
+    /**
      * Reserved.
      */
     MeetingHostId?: ExternalUserIdType;
@@ -1215,6 +1301,10 @@ declare namespace Chime {
      * The Region in which to create the meeting. Available values: ap-northeast-1, ap-southeast-1, ap-southeast-2, ca-central-1, eu-central-1, eu-north-1, eu-west-1, eu-west-2, eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2.
      */
     MediaRegion?: String;
+    /**
+     * The tag key-value pairs.
+     */
+    Tags?: MeetingTagList;
     /**
      * The configuration for resource targets to receive notifications when meeting and attendee events occur.
      */
@@ -1243,16 +1333,43 @@ declare namespace Chime {
     PhoneNumberOrder?: PhoneNumberOrder;
   }
   export interface CreateProxySessionRequest {
+    /**
+     * The Amazon Chime voice connector ID.
+     */
     VoiceConnectorId: NonEmptyString128;
+    /**
+     * The participant phone numbers.
+     */
     ParticipantPhoneNumbers: ParticipantPhoneNumberList;
+    /**
+     * The name of the proxy session.
+     */
     Name?: ProxySessionNameString;
+    /**
+     * The number of minutes allowed for the proxy session.
+     */
     ExpiryMinutes?: PositiveInteger;
+    /**
+     * The proxy session capabilities.
+     */
     Capabilities: CapabilityList;
+    /**
+     * The preference for proxy phone number reuse, or stickiness, between the same participants across sessions.
+     */
     NumberSelectionBehavior?: NumberSelectionBehavior;
+    /**
+     * The preference for matching the country or area code of the proxy phone number with that of the first participant.
+     */
     GeoMatchLevel?: GeoMatchLevel;
+    /**
+     * The country and area code for the proxy phone number.
+     */
     GeoMatchParams?: GeoMatchParams;
   }
   export interface CreateProxySessionResponse {
+    /**
+     * The proxy session details.
+     */
     ProxySession?: ProxySession;
   }
   export interface CreateRoomMembershipRequest {
@@ -1409,7 +1526,13 @@ declare namespace Chime {
     PhoneNumberId: String;
   }
   export interface DeleteProxySessionRequest {
+    /**
+     * The Amazon Chime voice connector ID.
+     */
     VoiceConnectorId: NonEmptyString128;
+    /**
+     * The proxy session ID.
+     */
     ProxySessionId: NonEmptyString128;
   }
   export interface DeleteRoomMembershipRequest {
@@ -1449,6 +1572,9 @@ declare namespace Chime {
     VoiceConnectorId: NonEmptyString;
   }
   export interface DeleteVoiceConnectorProxyRequest {
+    /**
+     * The Amazon Chime Voice Connector ID.
+     */
     VoiceConnectorId: NonEmptyString128;
   }
   export interface DeleteVoiceConnectorRequest {
@@ -1554,10 +1680,17 @@ declare namespace Chime {
      */
     LambdaFunctionArn?: SensitiveString;
   }
+  export type ExternalMeetingIdType = string;
   export type ExternalUserIdType = string;
   export type GeoMatchLevel = "Country"|"AreaCode"|string;
   export interface GeoMatchParams {
+    /**
+     * The country.
+     */
     Country: Country;
+    /**
+     * The area code.
+     */
     AreaCode: AreaCode;
   }
   export interface GetAccountRequest {
@@ -1689,10 +1822,19 @@ declare namespace Chime {
     CallingNameUpdatedTimestamp?: Iso8601Timestamp;
   }
   export interface GetProxySessionRequest {
+    /**
+     * The Amazon Chime voice connector ID.
+     */
     VoiceConnectorId: NonEmptyString128;
+    /**
+     * The proxy session ID.
+     */
     ProxySessionId: NonEmptyString128;
   }
   export interface GetProxySessionResponse {
+    /**
+     * The proxy session details.
+     */
     ProxySession?: ProxySession;
   }
   export interface GetRoomRequest {
@@ -1780,9 +1922,15 @@ declare namespace Chime {
     Origination?: Origination;
   }
   export interface GetVoiceConnectorProxyRequest {
+    /**
+     * The Amazon Chime voice connector ID.
+     */
     VoiceConnectorId: NonEmptyString128;
   }
   export interface GetVoiceConnectorProxyResponse {
+    /**
+     * The proxy configuration details.
+     */
     Proxy?: Proxy;
   }
   export interface GetVoiceConnectorRequest {
@@ -1907,6 +2055,22 @@ declare namespace Chime {
      */
     NextToken?: String;
   }
+  export interface ListAttendeeTagsRequest {
+    /**
+     * The Amazon Chime SDK meeting ID.
+     */
+    MeetingId: GuidString;
+    /**
+     * The Amazon Chime SDK attendee ID.
+     */
+    AttendeeId: GuidString;
+  }
+  export interface ListAttendeeTagsResponse {
+    /**
+     * A list of tag key-value pairs.
+     */
+    Tags?: TagList;
+  }
   export interface ListAttendeesRequest {
     /**
      * The Amazon Chime SDK meeting ID.
@@ -1954,6 +2118,18 @@ declare namespace Chime {
      * The token to use to retrieve the next page of results.
      */
     NextToken?: String;
+  }
+  export interface ListMeetingTagsRequest {
+    /**
+     * The Amazon Chime SDK meeting ID.
+     */
+    MeetingId: GuidString;
+  }
+  export interface ListMeetingTagsResponse {
+    /**
+     * A list of tag key-value pairs.
+     */
+    Tags?: TagList;
   }
   export interface ListMeetingsRequest {
     /**
@@ -2032,13 +2208,31 @@ declare namespace Chime {
     NextToken?: String;
   }
   export interface ListProxySessionsRequest {
+    /**
+     * The Amazon Chime voice connector ID.
+     */
     VoiceConnectorId: NonEmptyString128;
+    /**
+     * The proxy session status.
+     */
     Status?: ProxySessionStatus;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
     NextToken?: NextTokenString;
+    /**
+     * The maximum number of results to return in a single call.
+     */
     MaxResults?: ResultMax;
   }
   export interface ListProxySessionsResponse {
+    /**
+     * The proxy session details.
+     */
     ProxySessions?: ProxySessions;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
     NextToken?: NextTokenString;
   }
   export interface ListRoomMembershipsRequest {
@@ -2096,6 +2290,18 @@ declare namespace Chime {
      * The token to use to retrieve the next page of results.
      */
     NextToken?: String;
+  }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The resource ARN.
+     */
+    ResourceARN: Arn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * A list of tag-key value pairs.
+     */
+    Tags?: TagList;
   }
   export interface ListUsersRequest {
     /**
@@ -2235,6 +2441,10 @@ declare namespace Chime {
      */
     MeetingId?: GuidString;
     /**
+     * The external meeting ID.
+     */
+    ExternalMeetingId?: ExternalMeetingIdType;
+    /**
      * The media placement for the meeting.
      */
     MediaPlacement?: MediaPlacement;
@@ -2254,6 +2464,8 @@ declare namespace Chime {
      */
     SqsQueueArn?: Arn;
   }
+  export type MeetingTagKeyList = TagKey[];
+  export type MeetingTagList = Tag[];
   export interface Member {
     /**
      * The member ID (user ID or bot ID).
@@ -2358,7 +2570,13 @@ declare namespace Chime {
   export type OriginationRouteProtocol = "TCP"|"UDP"|string;
   export type OriginationRouteWeight = number;
   export interface Participant {
+    /**
+     * The participant's phone number.
+     */
     PhoneNumber?: E164PhoneNumber;
+    /**
+     * The participant's proxy phone number.
+     */
     ProxyPhoneNumber?: E164PhoneNumber;
   }
   export type ParticipantPhoneNumberList = E164PhoneNumber[];
@@ -2507,24 +2725,75 @@ declare namespace Chime {
   export type PositiveInteger = number;
   export type ProfileServiceMaxResults = number;
   export interface Proxy {
+    /**
+     * The default number of minutes allowed for proxy sessions.
+     */
     DefaultSessionExpiryMinutes?: Integer;
+    /**
+     * When true, stops proxy sessions from being created on the specified Amazon Chime Voice Connector.
+     */
     Disabled?: Boolean;
+    /**
+     * The phone number to route calls to after a proxy session expires.
+     */
     FallBackPhoneNumber?: E164PhoneNumber;
+    /**
+     * The countries for proxy phone numbers to be selected from.
+     */
     PhoneNumberCountries?: StringList;
   }
   export interface ProxySession {
+    /**
+     * The Amazon Chime voice connector ID.
+     */
     VoiceConnectorId?: NonEmptyString128;
+    /**
+     * The proxy session ID.
+     */
     ProxySessionId?: NonEmptyString128;
+    /**
+     * The name of the proxy session.
+     */
     Name?: String128;
+    /**
+     * The status of the proxy session.
+     */
     Status?: ProxySessionStatus;
+    /**
+     * The number of minutes allowed for the proxy session.
+     */
     ExpiryMinutes?: PositiveInteger;
+    /**
+     * The proxy session capabilities.
+     */
     Capabilities?: CapabilityList;
+    /**
+     * The created timestamp, in ISO 8601 format.
+     */
     CreatedTimestamp?: Iso8601Timestamp;
+    /**
+     * The updated timestamp, in ISO 8601 format.
+     */
     UpdatedTimestamp?: Iso8601Timestamp;
+    /**
+     * The ended timestamp, in ISO 8601 format.
+     */
     EndedTimestamp?: Iso8601Timestamp;
+    /**
+     * The proxy session participants.
+     */
     Participants?: Participants;
+    /**
+     * The preference for proxy phone number reuse, or stickiness, between the same participants across sessions.
+     */
     NumberSelectionBehavior?: NumberSelectionBehavior;
+    /**
+     * The preference for matching the country or area code of the proxy phone number with that of the first participant.
+     */
     GeoMatchLevel?: GeoMatchLevel;
+    /**
+     * The country and area code for the proxy phone number.
+     */
     GeoMatchParams?: GeoMatchParams;
   }
   export type ProxySessionNameString = string;
@@ -2584,13 +2853,31 @@ declare namespace Chime {
     Origination?: Origination;
   }
   export interface PutVoiceConnectorProxyRequest {
+    /**
+     * The Amazon Chime voice connector ID.
+     */
     VoiceConnectorId: NonEmptyString128;
+    /**
+     * The default number of minutes allowed for proxy sessions.
+     */
     DefaultSessionExpiryMinutes: Integer;
+    /**
+     * The countries for proxy phone numbers to be selected from.
+     */
     PhoneNumberPoolCountries: CountryList;
+    /**
+     * The phone number to route calls to after a proxy session expires.
+     */
     FallBackPhoneNumber?: E164PhoneNumber;
+    /**
+     * When true, stops proxy sessions from being created on the specified Amazon Chime Voice Connector.
+     */
     Disabled?: Boolean;
   }
   export interface PutVoiceConnectorProxyResponse {
+    /**
+     * The proxy configuration details.
+     */
     Proxy?: Proxy;
   }
   export interface PutVoiceConnectorStreamingConfigurationRequest {
@@ -2784,6 +3071,54 @@ declare namespace Chime {
   export type String = string;
   export type String128 = string;
   export type StringList = String[];
+  export interface Tag {
+    /**
+     * The key of the tag.
+     */
+    Key: TagKey;
+    /**
+     * The value of the tag.
+     */
+    Value: TagValue;
+  }
+  export interface TagAttendeeRequest {
+    /**
+     * The Amazon Chime SDK meeting ID.
+     */
+    MeetingId: GuidString;
+    /**
+     * The Amazon Chime SDK attendee ID.
+     */
+    AttendeeId: GuidString;
+    /**
+     * The tag key-value pairs.
+     */
+    Tags: AttendeeTagList;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagMeetingRequest {
+    /**
+     * The Amazon Chime SDK meeting ID.
+     */
+    MeetingId: GuidString;
+    /**
+     * The tag key-value pairs.
+     */
+    Tags: MeetingTagList;
+  }
+  export interface TagResourceRequest {
+    /**
+     * The resource ARN.
+     */
+    ResourceARN: Arn;
+    /**
+     * The tag key-value pairs.
+     */
+    Tags: TagList;
+  }
+  export type TagValue = string;
   export interface TelephonySettings {
     /**
      * Allows or denies inbound calling.
@@ -2831,6 +3166,40 @@ declare namespace Chime {
     Source?: String;
   }
   export type TollFreePrefix = string;
+  export interface UntagAttendeeRequest {
+    /**
+     * The Amazon Chime SDK meeting ID.
+     */
+    MeetingId: GuidString;
+    /**
+     * The Amazon Chime SDK attendee ID.
+     */
+    AttendeeId: GuidString;
+    /**
+     * The tag keys.
+     */
+    TagKeys: AttendeeTagKeyList;
+  }
+  export interface UntagMeetingRequest {
+    /**
+     * The Amazon Chime SDK meeting ID.
+     */
+    MeetingId: GuidString;
+    /**
+     * The tag keys.
+     */
+    TagKeys: MeetingTagKeyList;
+  }
+  export interface UntagResourceRequest {
+    /**
+     * The resource ARN.
+     */
+    ResourceARN: Arn;
+    /**
+     * The tag keys.
+     */
+    TagKeys: TagKeyList;
+  }
   export interface UpdateAccountRequest {
     /**
      * The Amazon Chime account ID.
@@ -2931,12 +3300,27 @@ declare namespace Chime {
     CallingName: CallingName;
   }
   export interface UpdateProxySessionRequest {
+    /**
+     * The Amazon Chime voice connector ID.
+     */
     VoiceConnectorId: NonEmptyString128;
+    /**
+     * The proxy session ID.
+     */
     ProxySessionId: NonEmptyString128;
+    /**
+     * The proxy session capabilities.
+     */
     Capabilities: CapabilityList;
+    /**
+     * The number of minutes allowed for the proxy session.
+     */
     ExpiryMinutes?: PositiveInteger;
   }
   export interface UpdateProxySessionResponse {
+    /**
+     * The proxy session details.
+     */
     ProxySession?: ProxySession;
   }
   export interface UpdateRoomMembershipRequest {

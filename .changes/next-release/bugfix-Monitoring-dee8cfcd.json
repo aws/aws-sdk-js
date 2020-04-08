@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Monitoring",
-  "description": "Set MaxRetriesExceeded on monitoring event only when the final retry fails"
-}

@@ -1157,6 +1157,14 @@ declare class EC2 extends Service {
    */
   deregisterImage(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deregisters tag keys to prevent tags that have the specified tag keys from being included in scheduled event notifications for resources in the Region. For more information, see Customizing Scheduled Event Notifications.
+   */
+  deregisterInstanceEventNotificationAttributes(params: EC2.Types.DeregisterInstanceEventNotificationAttributesRequest, callback?: (err: AWSError, data: EC2.Types.DeregisterInstanceEventNotificationAttributesResult) => void): Request<EC2.Types.DeregisterInstanceEventNotificationAttributesResult, AWSError>;
+  /**
+   * Deregisters tag keys to prevent tags that have the specified tag keys from being included in scheduled event notifications for resources in the Region. For more information, see Customizing Scheduled Event Notifications.
+   */
+  deregisterInstanceEventNotificationAttributes(callback?: (err: AWSError, data: EC2.Types.DeregisterInstanceEventNotificationAttributesResult) => void): Request<EC2.Types.DeregisterInstanceEventNotificationAttributesResult, AWSError>;
+  /**
    * Deregisters the specified members (network interfaces) from the transit gateway multicast group.
    */
   deregisterTransitGatewayMulticastGroupMembers(params: EC2.Types.DeregisterTransitGatewayMulticastGroupMembersRequest, callback?: (err: AWSError, data: EC2.Types.DeregisterTransitGatewayMulticastGroupMembersResult) => void): Request<EC2.Types.DeregisterTransitGatewayMulticastGroupMembersResult, AWSError>;
@@ -1492,6 +1500,14 @@ declare class EC2 extends Service {
    * Describes the credit option for CPU usage of the specified burstable performance instances. The credit options are standard and unlimited. If you do not specify an instance ID, Amazon EC2 returns burstable performance instances with the unlimited credit option, as well as instances that were previously configured as T2, T3, and T3a with the unlimited credit option. For example, if you resize a T2 instance, while it is configured as unlimited, to an M4 instance, Amazon EC2 returns the M4 instance. If you specify one or more instance IDs, Amazon EC2 returns the credit option (standard or unlimited) of those instances. If you specify an instance ID that is not valid, such as an instance that is not a burstable performance instance, an error is returned. Recently terminated instances might appear in the returned results. This interval is usually less than one hour. If an Availability Zone is experiencing a service disruption and you specify instance IDs in the affected zone, or do not specify any instance IDs at all, the call fails. If you specify only instance IDs in an unaffected zone, the call works normally. For more information, see Burstable Performance Instances in the Amazon Elastic Compute Cloud User Guide.
    */
   describeInstanceCreditSpecifications(callback?: (err: AWSError, data: EC2.Types.DescribeInstanceCreditSpecificationsResult) => void): Request<EC2.Types.DescribeInstanceCreditSpecificationsResult, AWSError>;
+  /**
+   * Describes the tag keys that are registered to appear in scheduled event notifications for resources in the current Region.
+   */
+  describeInstanceEventNotificationAttributes(params: EC2.Types.DescribeInstanceEventNotificationAttributesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInstanceEventNotificationAttributesResult) => void): Request<EC2.Types.DescribeInstanceEventNotificationAttributesResult, AWSError>;
+  /**
+   * Describes the tag keys that are registered to appear in scheduled event notifications for resources in the current Region.
+   */
+  describeInstanceEventNotificationAttributes(callback?: (err: AWSError, data: EC2.Types.DescribeInstanceEventNotificationAttributesResult) => void): Request<EC2.Types.DescribeInstanceEventNotificationAttributesResult, AWSError>;
   /**
    * Describes the status of the specified instances or all of your instances. By default, only running instances are described, unless you specifically indicate to return the status of all instances. Instance status includes the following components:    Status checks - Amazon EC2 performs status checks on running EC2 instances to identify hardware and software issues. For more information, see Status Checks for Your Instances and Troubleshooting Instances with Failed Status Checks in the Amazon Elastic Compute Cloud User Guide.    Scheduled events - Amazon EC2 can schedule events (such as reboot, stop, or terminate) for your instances related to hardware issues, software updates, or system maintenance. For more information, see Scheduled Events for Your Instances in the Amazon Elastic Compute Cloud User Guide.    Instance state - You can manage your instances from the moment you launch them through their termination. For more information, see Instance Lifecycle in the Amazon Elastic Compute Cloud User Guide.  
    */
@@ -2861,6 +2877,14 @@ declare class EC2 extends Service {
    */
   registerImage(callback?: (err: AWSError, data: EC2.Types.RegisterImageResult) => void): Request<EC2.Types.RegisterImageResult, AWSError>;
   /**
+   * Registers a set of tag keys to include in scheduled event notifications for your resources. For more information, see Customizing Scheduled Event Notifications. To remove tags, use .
+   */
+  registerInstanceEventNotificationAttributes(params: EC2.Types.RegisterInstanceEventNotificationAttributesRequest, callback?: (err: AWSError, data: EC2.Types.RegisterInstanceEventNotificationAttributesResult) => void): Request<EC2.Types.RegisterInstanceEventNotificationAttributesResult, AWSError>;
+  /**
+   * Registers a set of tag keys to include in scheduled event notifications for your resources. For more information, see Customizing Scheduled Event Notifications. To remove tags, use .
+   */
+  registerInstanceEventNotificationAttributes(callback?: (err: AWSError, data: EC2.Types.RegisterInstanceEventNotificationAttributesResult) => void): Request<EC2.Types.RegisterInstanceEventNotificationAttributesResult, AWSError>;
+  /**
    * Registers members (network interfaces) with the transit gateway multicast group. A member is a network interface associated with a supported EC2 instance that receives multicast traffic. For information about supported instances, see Multicast Consideration in Amazon VPC Transit Gateways. After you add the members, use SearchTransitGatewayMulticastGroups to verify that the members were added to the transit gateway multicast group.
    */
   registerTransitGatewayMulticastGroupMembers(params: EC2.Types.RegisterTransitGatewayMulticastGroupMembersRequest, callback?: (err: AWSError, data: EC2.Types.RegisterTransitGatewayMulticastGroupMembersResult) => void): Request<EC2.Types.RegisterTransitGatewayMulticastGroupMembersResult, AWSError>;
@@ -3077,11 +3101,11 @@ declare class EC2 extends Service {
    */
   revokeSecurityGroupIngress(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Launches the specified number of instances using an AMI for which you have permissions.  You can specify a number of options, or leave the default options. The following rules apply:   [EC2-VPC] If you don't specify a subnet ID, we choose a default subnet from your default VPC for you. If you don't have a default VPC, you must specify a subnet ID in the request.   [EC2-Classic] If don't specify an Availability Zone, we choose one for you.   Some instance types must be launched into a VPC. If you do not have a default VPC, or if you do not specify a subnet ID, the request fails. For more information, see Instance Types Available Only in a VPC.   [EC2-VPC] All instances have a network interface with a primary private IPv4 address. If you don't specify this address, we choose one from the IPv4 range of your subnet.   Not all instance types support IPv6 addresses. For more information, see Instance Types.   If you don't specify a security group ID, we use the default security group. For more information, see Security Groups.   If any of the AMIs have a product code attached for which the user has not subscribed, the request fails.   You can create a launch template, which is a resource that contains the parameters to launch an instance. When you launch an instance using RunInstances, you can specify the launch template instead of specifying the launch parameters. To ensure faster instance launches, break up large requests into smaller batches. For example, create five separate launch requests for 100 instances each instead of one launch request for 500 instances. An instance is ready for you to use when it's in the running state. You can check the state of your instance using DescribeInstances. You can tag instances and EBS volumes during launch, after launch, or both. For more information, see CreateTags and Tagging Your Amazon EC2 Resources. Linux instances have access to the public key of the key pair at boot. You can use this key to provide secure access to the instance. Amazon EC2 public images use this feature to provide secure access without passwords. For more information, see Key Pairs in the Amazon Elastic Compute Cloud User Guide. For troubleshooting, see What To Do If An Instance Immediately Terminates, and Troubleshooting Connecting to Your Instance in the Amazon Elastic Compute Cloud User Guide.
+   * Launches the specified number of instances using an AMI for which you have permissions. You can specify a number of options, or leave the default options. The following rules apply:   [EC2-VPC] If you don't specify a subnet ID, we choose a default subnet from your default VPC for you. If you don't have a default VPC, you must specify a subnet ID in the request.   [EC2-Classic] If don't specify an Availability Zone, we choose one for you.   Some instance types must be launched into a VPC. If you do not have a default VPC, or if you do not specify a subnet ID, the request fails. For more information, see Instance Types Available Only in a VPC.   [EC2-VPC] All instances have a network interface with a primary private IPv4 address. If you don't specify this address, we choose one from the IPv4 range of your subnet.   Not all instance types support IPv6 addresses. For more information, see Instance Types.   If you don't specify a security group ID, we use the default security group. For more information, see Security Groups.   If any of the AMIs have a product code attached for which the user has not subscribed, the request fails.   You can create a launch template, which is a resource that contains the parameters to launch an instance. When you launch an instance using RunInstances, you can specify the launch template instead of specifying the launch parameters. To ensure faster instance launches, break up large requests into smaller batches. For example, create five separate launch requests for 100 instances each instead of one launch request for 500 instances. An instance is ready for you to use when it's in the running state. You can check the state of your instance using DescribeInstances. You can tag instances and EBS volumes during launch, after launch, or both. For more information, see CreateTags and Tagging Your Amazon EC2 Resources. Linux instances have access to the public key of the key pair at boot. You can use this key to provide secure access to the instance. Amazon EC2 public images use this feature to provide secure access without passwords. For more information, see Key Pairs in the Amazon Elastic Compute Cloud User Guide. For troubleshooting, see What To Do If An Instance Immediately Terminates, and Troubleshooting Connecting to Your Instance in the Amazon Elastic Compute Cloud User Guide.
    */
   runInstances(params: EC2.Types.RunInstancesRequest, callback?: (err: AWSError, data: EC2.Types.Reservation) => void): Request<EC2.Types.Reservation, AWSError>;
   /**
-   * Launches the specified number of instances using an AMI for which you have permissions.  You can specify a number of options, or leave the default options. The following rules apply:   [EC2-VPC] If you don't specify a subnet ID, we choose a default subnet from your default VPC for you. If you don't have a default VPC, you must specify a subnet ID in the request.   [EC2-Classic] If don't specify an Availability Zone, we choose one for you.   Some instance types must be launched into a VPC. If you do not have a default VPC, or if you do not specify a subnet ID, the request fails. For more information, see Instance Types Available Only in a VPC.   [EC2-VPC] All instances have a network interface with a primary private IPv4 address. If you don't specify this address, we choose one from the IPv4 range of your subnet.   Not all instance types support IPv6 addresses. For more information, see Instance Types.   If you don't specify a security group ID, we use the default security group. For more information, see Security Groups.   If any of the AMIs have a product code attached for which the user has not subscribed, the request fails.   You can create a launch template, which is a resource that contains the parameters to launch an instance. When you launch an instance using RunInstances, you can specify the launch template instead of specifying the launch parameters. To ensure faster instance launches, break up large requests into smaller batches. For example, create five separate launch requests for 100 instances each instead of one launch request for 500 instances. An instance is ready for you to use when it's in the running state. You can check the state of your instance using DescribeInstances. You can tag instances and EBS volumes during launch, after launch, or both. For more information, see CreateTags and Tagging Your Amazon EC2 Resources. Linux instances have access to the public key of the key pair at boot. You can use this key to provide secure access to the instance. Amazon EC2 public images use this feature to provide secure access without passwords. For more information, see Key Pairs in the Amazon Elastic Compute Cloud User Guide. For troubleshooting, see What To Do If An Instance Immediately Terminates, and Troubleshooting Connecting to Your Instance in the Amazon Elastic Compute Cloud User Guide.
+   * Launches the specified number of instances using an AMI for which you have permissions. You can specify a number of options, or leave the default options. The following rules apply:   [EC2-VPC] If you don't specify a subnet ID, we choose a default subnet from your default VPC for you. If you don't have a default VPC, you must specify a subnet ID in the request.   [EC2-Classic] If don't specify an Availability Zone, we choose one for you.   Some instance types must be launched into a VPC. If you do not have a default VPC, or if you do not specify a subnet ID, the request fails. For more information, see Instance Types Available Only in a VPC.   [EC2-VPC] All instances have a network interface with a primary private IPv4 address. If you don't specify this address, we choose one from the IPv4 range of your subnet.   Not all instance types support IPv6 addresses. For more information, see Instance Types.   If you don't specify a security group ID, we use the default security group. For more information, see Security Groups.   If any of the AMIs have a product code attached for which the user has not subscribed, the request fails.   You can create a launch template, which is a resource that contains the parameters to launch an instance. When you launch an instance using RunInstances, you can specify the launch template instead of specifying the launch parameters. To ensure faster instance launches, break up large requests into smaller batches. For example, create five separate launch requests for 100 instances each instead of one launch request for 500 instances. An instance is ready for you to use when it's in the running state. You can check the state of your instance using DescribeInstances. You can tag instances and EBS volumes during launch, after launch, or both. For more information, see CreateTags and Tagging Your Amazon EC2 Resources. Linux instances have access to the public key of the key pair at boot. You can use this key to provide secure access to the instance. Amazon EC2 public images use this feature to provide secure access without passwords. For more information, see Key Pairs in the Amazon Elastic Compute Cloud User Guide. For troubleshooting, see What To Do If An Instance Immediately Terminates, and Troubleshooting Connecting to Your Instance in the Amazon Elastic Compute Cloud User Guide.
    */
   runInstances(callback?: (err: AWSError, data: EC2.Types.Reservation) => void): Request<EC2.Types.Reservation, AWSError>;
   /**
@@ -8133,6 +8157,32 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
   }
+  export interface DeregisterInstanceEventNotificationAttributesRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * Information about the tag keys to deregister.
+     */
+    InstanceTagAttribute?: DeregisterInstanceTagAttributeRequest;
+  }
+  export interface DeregisterInstanceEventNotificationAttributesResult {
+    /**
+     * The resulting set of tag keys.
+     */
+    InstanceTagAttribute?: InstanceTagNotificationAttribute;
+  }
+  export interface DeregisterInstanceTagAttributeRequest {
+    /**
+     * Indicates whether to deregister all tag keys in the current Region. Specify false to deregister all tag keys.
+     */
+    IncludeAllTagsOfInstance?: Boolean;
+    /**
+     * Information about the tag keys to deregister.
+     */
+    InstanceTagKeys?: InstanceTagKeySet;
+  }
   export interface DeregisterTransitGatewayMulticastGroupMembersRequest {
     /**
      * The ID of the transit gateway multicast domain.
@@ -9391,6 +9441,18 @@ declare namespace EC2 {
      * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
     NextToken?: String;
+  }
+  export interface DescribeInstanceEventNotificationAttributesRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeInstanceEventNotificationAttributesResult {
+    /**
+     * Information about the registered tag keys.
+     */
+    InstanceTagAttribute?: InstanceTagNotificationAttribute;
   }
   export interface DescribeInstanceStatusRequest {
     /**
@@ -15564,6 +15626,17 @@ declare namespace EC2 {
      */
     Disks?: DiskInfoList;
   }
+  export type InstanceTagKeySet = String[];
+  export interface InstanceTagNotificationAttribute {
+    /**
+     * The registered tag keys.
+     */
+    InstanceTagKeys?: InstanceTagKeySet;
+    /**
+     * Indicates wheter all tag keys in the current Region are registered to appear in scheduled event notifications. true indicates that all tag keys in the current Region are registered.
+     */
+    IncludeAllTagsOfInstance?: Boolean;
+  }
   export type InstanceType = "t1.micro"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"t2.xlarge"|"t2.2xlarge"|"t3.nano"|"t3.micro"|"t3.small"|"t3.medium"|"t3.large"|"t3.xlarge"|"t3.2xlarge"|"t3a.nano"|"t3a.micro"|"t3a.small"|"t3a.medium"|"t3a.large"|"t3a.xlarge"|"t3a.2xlarge"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m4.16xlarge"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"cr1.8xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"r5.large"|"r5.xlarge"|"r5.2xlarge"|"r5.4xlarge"|"r5.8xlarge"|"r5.12xlarge"|"r5.16xlarge"|"r5.24xlarge"|"r5.metal"|"r5a.large"|"r5a.xlarge"|"r5a.2xlarge"|"r5a.4xlarge"|"r5a.8xlarge"|"r5a.12xlarge"|"r5a.16xlarge"|"r5a.24xlarge"|"r5d.large"|"r5d.xlarge"|"r5d.2xlarge"|"r5d.4xlarge"|"r5d.8xlarge"|"r5d.12xlarge"|"r5d.16xlarge"|"r5d.24xlarge"|"r5d.metal"|"r5ad.large"|"r5ad.xlarge"|"r5ad.2xlarge"|"r5ad.4xlarge"|"r5ad.8xlarge"|"r5ad.12xlarge"|"r5ad.16xlarge"|"r5ad.24xlarge"|"x1.16xlarge"|"x1.32xlarge"|"x1e.xlarge"|"x1e.2xlarge"|"x1e.4xlarge"|"x1e.8xlarge"|"x1e.16xlarge"|"x1e.32xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"i3.large"|"i3.xlarge"|"i3.2xlarge"|"i3.4xlarge"|"i3.8xlarge"|"i3.16xlarge"|"i3.metal"|"i3en.large"|"i3en.xlarge"|"i3en.2xlarge"|"i3en.3xlarge"|"i3en.6xlarge"|"i3en.12xlarge"|"i3en.24xlarge"|"i3en.metal"|"hi1.4xlarge"|"hs1.8xlarge"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.12xlarge"|"c5.18xlarge"|"c5.24xlarge"|"c5.metal"|"c5d.large"|"c5d.xlarge"|"c5d.2xlarge"|"c5d.4xlarge"|"c5d.9xlarge"|"c5d.12xlarge"|"c5d.18xlarge"|"c5d.24xlarge"|"c5d.metal"|"c5n.large"|"c5n.xlarge"|"c5n.2xlarge"|"c5n.4xlarge"|"c5n.9xlarge"|"c5n.18xlarge"|"cc1.4xlarge"|"cc2.8xlarge"|"g2.2xlarge"|"g2.8xlarge"|"g3.4xlarge"|"g3.8xlarge"|"g3.16xlarge"|"g3s.xlarge"|"g4dn.xlarge"|"g4dn.2xlarge"|"g4dn.4xlarge"|"g4dn.8xlarge"|"g4dn.12xlarge"|"g4dn.16xlarge"|"cg1.4xlarge"|"p2.xlarge"|"p2.8xlarge"|"p2.16xlarge"|"p3.2xlarge"|"p3.8xlarge"|"p3.16xlarge"|"p3dn.24xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge"|"f1.2xlarge"|"f1.4xlarge"|"f1.16xlarge"|"m5.large"|"m5.xlarge"|"m5.2xlarge"|"m5.4xlarge"|"m5.8xlarge"|"m5.12xlarge"|"m5.16xlarge"|"m5.24xlarge"|"m5.metal"|"m5a.large"|"m5a.xlarge"|"m5a.2xlarge"|"m5a.4xlarge"|"m5a.8xlarge"|"m5a.12xlarge"|"m5a.16xlarge"|"m5a.24xlarge"|"m5d.large"|"m5d.xlarge"|"m5d.2xlarge"|"m5d.4xlarge"|"m5d.8xlarge"|"m5d.12xlarge"|"m5d.16xlarge"|"m5d.24xlarge"|"m5d.metal"|"m5ad.large"|"m5ad.xlarge"|"m5ad.2xlarge"|"m5ad.4xlarge"|"m5ad.8xlarge"|"m5ad.12xlarge"|"m5ad.16xlarge"|"m5ad.24xlarge"|"h1.2xlarge"|"h1.4xlarge"|"h1.8xlarge"|"h1.16xlarge"|"z1d.large"|"z1d.xlarge"|"z1d.2xlarge"|"z1d.3xlarge"|"z1d.6xlarge"|"z1d.12xlarge"|"z1d.metal"|"u-6tb1.metal"|"u-9tb1.metal"|"u-12tb1.metal"|"u-18tb1.metal"|"u-24tb1.metal"|"a1.medium"|"a1.large"|"a1.xlarge"|"a1.2xlarge"|"a1.4xlarge"|"a1.metal"|"m5dn.large"|"m5dn.xlarge"|"m5dn.2xlarge"|"m5dn.4xlarge"|"m5dn.8xlarge"|"m5dn.12xlarge"|"m5dn.16xlarge"|"m5dn.24xlarge"|"m5n.large"|"m5n.xlarge"|"m5n.2xlarge"|"m5n.4xlarge"|"m5n.8xlarge"|"m5n.12xlarge"|"m5n.16xlarge"|"m5n.24xlarge"|"r5dn.large"|"r5dn.xlarge"|"r5dn.2xlarge"|"r5dn.4xlarge"|"r5dn.8xlarge"|"r5dn.12xlarge"|"r5dn.16xlarge"|"r5dn.24xlarge"|"r5n.large"|"r5n.xlarge"|"r5n.2xlarge"|"r5n.4xlarge"|"r5n.8xlarge"|"r5n.12xlarge"|"r5n.16xlarge"|"r5n.24xlarge"|"inf1.xlarge"|"inf1.2xlarge"|"inf1.6xlarge"|"inf1.24xlarge"|string;
   export type InstanceTypeHypervisor = "nitro"|"xen"|string;
   export interface InstanceTypeInfo {
@@ -18723,11 +18796,11 @@ declare namespace EC2 {
   }
   export interface Placement {
     /**
-     * The Availability Zone of the instance. If not specified, an Availability Zone will be automatically chosen for you based on the load balancing criteria for the Region. This parameter is not supported by .
+     * The Availability Zone of the instance. If not specified, an Availability Zone will be automatically chosen for you based on the load balancing criteria for the Region. This parameter is not supported by CreateFleet.
      */
     AvailabilityZone?: String;
     /**
-     * The affinity setting for the instance on the Dedicated Host. This parameter is not supported for the ImportInstance command. This parameter is not supported by .
+     * The affinity setting for the instance on the Dedicated Host. This parameter is not supported for the ImportInstance command. This parameter is not supported by CreateFleet.
      */
     Affinity?: String;
     /**
@@ -18735,23 +18808,23 @@ declare namespace EC2 {
      */
     GroupName?: String;
     /**
-     * The number of the partition the instance is in. Valid only if the placement group strategy is set to partition. This parameter is not supported by .
+     * The number of the partition the instance is in. Valid only if the placement group strategy is set to partition. This parameter is not supported by CreateFleet.
      */
     PartitionNumber?: Integer;
     /**
-     * The ID of the Dedicated Host on which the instance resides. This parameter is not supported for the ImportInstance command. This parameter is not supported by .
+     * The ID of the Dedicated Host on which the instance resides. This parameter is not supported for the ImportInstance command. This parameter is not supported by CreateFleet.
      */
     HostId?: String;
     /**
-     * The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware. The host tenancy is not supported for the ImportInstance command. This parameter is not supported by .
+     * The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware. The host tenancy is not supported for the ImportInstance command. This parameter is not supported by CreateFleet.
      */
     Tenancy?: Tenancy;
     /**
-     * Reserved for future use. This parameter is not supported by .
+     * Reserved for future use. This parameter is not supported by CreateFleet.
      */
     SpreadDomain?: String;
     /**
-     * The ARN of the host resource group in which to launch the instances. If you specify a host resource group ARN, omit the Tenancy parameter or set it to host. This parameter is not supported by .
+     * The ARN of the host resource group in which to launch the instances. If you specify a host resource group ARN, omit the Tenancy parameter or set it to host. This parameter is not supported by CreateFleet.
      */
     HostResourceGroupArn?: String;
   }
@@ -19307,6 +19380,32 @@ declare namespace EC2 {
      * The ID of the newly registered AMI.
      */
     ImageId?: String;
+  }
+  export interface RegisterInstanceEventNotificationAttributesRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * Information about the tag keys to register.
+     */
+    InstanceTagAttribute?: RegisterInstanceTagAttributeRequest;
+  }
+  export interface RegisterInstanceEventNotificationAttributesResult {
+    /**
+     * The resulting set of tag keys.
+     */
+    InstanceTagAttribute?: InstanceTagNotificationAttribute;
+  }
+  export interface RegisterInstanceTagAttributeRequest {
+    /**
+     * Indicates whether to register all tag keys in the current Region. Specify true to register all tag keys.
+     */
+    IncludeAllTagsOfInstance?: Boolean;
+    /**
+     * The tag keys to register.
+     */
+    InstanceTagKeys?: InstanceTagKeySet;
   }
   export interface RegisterTransitGatewayMulticastGroupMembersRequest {
     /**

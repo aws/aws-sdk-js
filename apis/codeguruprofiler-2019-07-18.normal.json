@@ -133,6 +133,32 @@
       ],
       "documentation": "<p>Describes a profiling group.</p>"
     },
+    "GetPolicy": {
+      "name": "GetPolicy",
+      "http": {
+        "method": "GET",
+        "requestUri": "/profilingGroups/{profilingGroupName}/policy",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetPolicyRequest"
+      },
+      "output": {
+        "shape": "GetPolicyResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Gets the profiling group policy.</p>"
+    },
     "GetProfile": {
       "name": "GetProfile",
       "http": {
@@ -243,6 +269,71 @@
       ],
       "documentation": "<p/>"
     },
+    "PutPermission": {
+      "name": "PutPermission",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/profilingGroups/{profilingGroupName}/policy/{actionGroup}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "PutPermissionRequest"
+      },
+      "output": {
+        "shape": "PutPermissionResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Provides permission to the principals. This overwrites the existing permissions, and is not additive.</p>",
+      "idempotent": true
+    },
+    "RemovePermission": {
+      "name": "RemovePermission",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/profilingGroups/{profilingGroupName}/policy/{actionGroup}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "RemovePermissionRequest"
+      },
+      "output": {
+        "shape": "RemovePermissionResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Removes statement for the provided action group from the policy.</p>"
+    },
     "UpdateProfilingGroup": {
       "name": "UpdateProfilingGroup",
       "http": {
@@ -278,6 +369,12 @@
     }
   },
   "shapes": {
+    "ActionGroup": {
+      "type": "string",
+      "enum": [
+        "agentPermissions"
+      ]
+    },
     "AgentConfiguration": {
       "type": "structure",
       "required": [
@@ -473,6 +570,39 @@
       "max": 255,
       "min": 1,
       "pattern": "^[\\w-.:/]+$"
+    },
+    "GetPolicyRequest": {
+      "type": "structure",
+      "required": [
+        "profilingGroupName"
+      ],
+      "members": {
+        "profilingGroupName": {
+          "shape": "ProfilingGroupName",
+          "documentation": "<p>The name of the profiling group.</p>",
+          "location": "uri",
+          "locationName": "profilingGroupName"
+        }
+      },
+      "documentation": "<p>The structure representing the getPolicyRequest.</p>"
+    },
+    "GetPolicyResponse": {
+      "type": "structure",
+      "required": [
+        "policy",
+        "revisionId"
+      ],
+      "members": {
+        "policy": {
+          "shape": "String",
+          "documentation": "<p>The resource-based policy attached to the <code>ProfilingGroup</code>.</p>"
+        },
+        "revisionId": {
+          "shape": "RevisionId",
+          "documentation": "<p>A unique identifier for the current revision of the policy.</p>"
+        }
+      },
+      "documentation": "<p>The structure representing the getPolicyResponse.</p>"
     },
     "GetProfileRequest": {
       "type": "structure",
@@ -736,6 +866,17 @@
       "members": {},
       "documentation": "<p>The structure representing the postAgentProfileResponse.</p>"
     },
+    "Principal": {
+      "type": "string"
+    },
+    "Principals": {
+      "type": "list",
+      "member": {
+        "shape": "Principal"
+      },
+      "max": 50,
+      "min": 1
+    },
     "ProfileTime": {
       "type": "structure",
       "members": {
@@ -820,6 +961,106 @@
         }
       },
       "documentation": "<p>Information about the profiling status.</p>"
+    },
+    "PutPermissionRequest": {
+      "type": "structure",
+      "required": [
+        "actionGroup",
+        "principals",
+        "profilingGroupName"
+      ],
+      "members": {
+        "actionGroup": {
+          "shape": "ActionGroup",
+          "documentation": "<p>The list of actions that the users and roles can perform on the profiling group.</p>",
+          "location": "uri",
+          "locationName": "actionGroup"
+        },
+        "principals": {
+          "shape": "Principals",
+          "documentation": "<p>The list of role and user ARNs or the accountId that needs access (wildcards are not allowed).</p>"
+        },
+        "profilingGroupName": {
+          "shape": "ProfilingGroupName",
+          "documentation": "<p>The name of the profiling group.</p>",
+          "location": "uri",
+          "locationName": "profilingGroupName"
+        },
+        "revisionId": {
+          "shape": "RevisionId",
+          "documentation": "<p>A unique identifier for the current revision of the policy. This is required, if a policy exists for the profiling group. This is not required when creating the policy for the first time.</p>"
+        }
+      },
+      "documentation": "<p>The structure representing the putPermissionRequest.</p>"
+    },
+    "PutPermissionResponse": {
+      "type": "structure",
+      "required": [
+        "policy",
+        "revisionId"
+      ],
+      "members": {
+        "policy": {
+          "shape": "String",
+          "documentation": "<p>The resource-based policy.</p>"
+        },
+        "revisionId": {
+          "shape": "RevisionId",
+          "documentation": "<p>A unique identifier for the current revision of the policy.</p>"
+        }
+      },
+      "documentation": "<p>The structure representing the putPermissionResponse.</p>"
+    },
+    "RemovePermissionRequest": {
+      "type": "structure",
+      "required": [
+        "actionGroup",
+        "profilingGroupName",
+        "revisionId"
+      ],
+      "members": {
+        "actionGroup": {
+          "shape": "ActionGroup",
+          "documentation": "<p>The list of actions that the users and roles can perform on the profiling group.</p>",
+          "location": "uri",
+          "locationName": "actionGroup"
+        },
+        "profilingGroupName": {
+          "shape": "ProfilingGroupName",
+          "documentation": "<p>The name of the profiling group.</p>",
+          "location": "uri",
+          "locationName": "profilingGroupName"
+        },
+        "revisionId": {
+          "shape": "RevisionId",
+          "documentation": "<p>A unique identifier for the current revision of the policy.</p>",
+          "location": "querystring",
+          "locationName": "revisionId"
+        }
+      },
+      "documentation": "<p>The structure representing the removePermissionRequest.</p>"
+    },
+    "RemovePermissionResponse": {
+      "type": "structure",
+      "required": [
+        "policy",
+        "revisionId"
+      ],
+      "members": {
+        "policy": {
+          "shape": "String",
+          "documentation": "<p>The resource-based policy.</p>"
+        },
+        "revisionId": {
+          "shape": "RevisionId",
+          "documentation": "<p>A unique identifier for the current revision of the policy.</p>"
+        }
+      },
+      "documentation": "<p>The structure representing the removePermissionResponse.</p>"
+    },
+    "RevisionId": {
+      "type": "string",
+      "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"
     },
     "String": {
       "type": "string"

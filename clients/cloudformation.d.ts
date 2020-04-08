@@ -45,11 +45,11 @@ declare class CloudFormation extends Service {
    */
   createStack(callback?: (err: AWSError, data: CloudFormation.Types.CreateStackOutput) => void): Request<CloudFormation.Types.CreateStackOutput, AWSError>;
   /**
-   * Creates stack instances for the specified accounts, within the specified regions. A stack instance refers to a stack in a specific account and region. You must specify at least one value for either Accounts or DeploymentTargets, and you must specify at least one value for Regions.
+   * Creates stack instances for the specified accounts, within the specified Regions. A stack instance refers to a stack in a specific account and Region. You must specify at least one value for either Accounts or DeploymentTargets, and you must specify at least one value for Regions.
    */
   createStackInstances(params: CloudFormation.Types.CreateStackInstancesInput, callback?: (err: AWSError, data: CloudFormation.Types.CreateStackInstancesOutput) => void): Request<CloudFormation.Types.CreateStackInstancesOutput, AWSError>;
   /**
-   * Creates stack instances for the specified accounts, within the specified regions. A stack instance refers to a stack in a specific account and region. You must specify at least one value for either Accounts or DeploymentTargets, and you must specify at least one value for Regions.
+   * Creates stack instances for the specified accounts, within the specified Regions. A stack instance refers to a stack in a specific account and Region. You must specify at least one value for either Accounts or DeploymentTargets, and you must specify at least one value for Regions.
    */
   createStackInstances(callback?: (err: AWSError, data: CloudFormation.Types.CreateStackInstancesOutput) => void): Request<CloudFormation.Types.CreateStackInstancesOutput, AWSError>;
   /**
@@ -77,11 +77,11 @@ declare class CloudFormation extends Service {
    */
   deleteStack(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes stack instances for the specified accounts, in the specified regions. 
+   * Deletes stack instances for the specified accounts, in the specified Regions. 
    */
   deleteStackInstances(params: CloudFormation.Types.DeleteStackInstancesInput, callback?: (err: AWSError, data: CloudFormation.Types.DeleteStackInstancesOutput) => void): Request<CloudFormation.Types.DeleteStackInstancesOutput, AWSError>;
   /**
-   * Deletes stack instances for the specified accounts, in the specified regions. 
+   * Deletes stack instances for the specified accounts, in the specified Regions. 
    */
   deleteStackInstances(callback?: (err: AWSError, data: CloudFormation.Types.DeleteStackInstancesOutput) => void): Request<CloudFormation.Types.DeleteStackInstancesOutput, AWSError>;
   /**
@@ -133,11 +133,11 @@ declare class CloudFormation extends Service {
    */
   describeStackEvents(callback?: (err: AWSError, data: CloudFormation.Types.DescribeStackEventsOutput) => void): Request<CloudFormation.Types.DescribeStackEventsOutput, AWSError>;
   /**
-   * Returns the stack instance that's associated with the specified stack set, AWS account, and region. For a list of stack instances that are associated with a specific stack set, use ListStackInstances.
+   * Returns the stack instance that's associated with the specified stack set, AWS account, and Region. For a list of stack instances that are associated with a specific stack set, use ListStackInstances.
    */
   describeStackInstance(params: CloudFormation.Types.DescribeStackInstanceInput, callback?: (err: AWSError, data: CloudFormation.Types.DescribeStackInstanceOutput) => void): Request<CloudFormation.Types.DescribeStackInstanceOutput, AWSError>;
   /**
-   * Returns the stack instance that's associated with the specified stack set, AWS account, and region. For a list of stack instances that are associated with a specific stack set, use ListStackInstances.
+   * Returns the stack instance that's associated with the specified stack set, AWS account, and Region. For a list of stack instances that are associated with a specific stack set, use ListStackInstances.
    */
   describeStackInstance(callback?: (err: AWSError, data: CloudFormation.Types.DescribeStackInstanceOutput) => void): Request<CloudFormation.Types.DescribeStackInstanceOutput, AWSError>;
   /**
@@ -277,11 +277,11 @@ declare class CloudFormation extends Service {
    */
   listChangeSets(callback?: (err: AWSError, data: CloudFormation.Types.ListChangeSetsOutput) => void): Request<CloudFormation.Types.ListChangeSetsOutput, AWSError>;
   /**
-   * Lists all exported output values in the account and region in which you call this action. Use this action to see the exported output values that you can import into other stacks. To import values, use the  Fn::ImportValue  function.  For more information, see  AWS CloudFormation Export Stack Output Values.
+   * Lists all exported output values in the account and Region in which you call this action. Use this action to see the exported output values that you can import into other stacks. To import values, use the  Fn::ImportValue  function.  For more information, see  AWS CloudFormation Export Stack Output Values.
    */
   listExports(params: CloudFormation.Types.ListExportsInput, callback?: (err: AWSError, data: CloudFormation.Types.ListExportsOutput) => void): Request<CloudFormation.Types.ListExportsOutput, AWSError>;
   /**
-   * Lists all exported output values in the account and region in which you call this action. Use this action to see the exported output values that you can import into other stacks. To import values, use the  Fn::ImportValue  function.  For more information, see  AWS CloudFormation Export Stack Output Values.
+   * Lists all exported output values in the account and Region in which you call this action. Use this action to see the exported output values that you can import into other stacks. To import values, use the  Fn::ImportValue  function.  For more information, see  AWS CloudFormation Export Stack Output Values.
    */
   listExports(callback?: (err: AWSError, data: CloudFormation.Types.ListExportsOutput) => void): Request<CloudFormation.Types.ListExportsOutput, AWSError>;
   /**
@@ -293,11 +293,11 @@ declare class CloudFormation extends Service {
    */
   listImports(callback?: (err: AWSError, data: CloudFormation.Types.ListImportsOutput) => void): Request<CloudFormation.Types.ListImportsOutput, AWSError>;
   /**
-   * Returns summary information about stack instances that are associated with the specified stack set. You can filter for stack instances that are associated with a specific AWS account name or region.
+   * Returns summary information about stack instances that are associated with the specified stack set. You can filter for stack instances that are associated with a specific AWS account name or Region.
    */
   listStackInstances(params: CloudFormation.Types.ListStackInstancesInput, callback?: (err: AWSError, data: CloudFormation.Types.ListStackInstancesOutput) => void): Request<CloudFormation.Types.ListStackInstancesOutput, AWSError>;
   /**
-   * Returns summary information about stack instances that are associated with the specified stack set. You can filter for stack instances that are associated with a specific AWS account name or region.
+   * Returns summary information about stack instances that are associated with the specified stack set. You can filter for stack instances that are associated with a specific AWS account name or Region.
    */
   listStackInstances(callback?: (err: AWSError, data: CloudFormation.Types.ListStackInstancesOutput) => void): Request<CloudFormation.Types.ListStackInstancesOutput, AWSError>;
   /**
@@ -373,11 +373,11 @@ declare class CloudFormation extends Service {
    */
   recordHandlerProgress(callback?: (err: AWSError, data: CloudFormation.Types.RecordHandlerProgressOutput) => void): Request<CloudFormation.Types.RecordHandlerProgressOutput, AWSError>;
   /**
-   * Registers a type with the CloudFormation service. Registering a type makes it available for use in CloudFormation templates in your AWS account, and includes:   Validating the resource schema   Determining which handlers have been specified for the resource   Making the resource type available for use in your account   For more information on how to develop types and ready them for registeration, see Creating Resource Providers in the CloudFormation CLI User Guide. Once you have initiated a registration request using  RegisterType , you can use  DescribeTypeRegistration  to monitor the progress of the registration request.
+   * Registers a type with the CloudFormation service. Registering a type makes it available for use in CloudFormation templates in your AWS account, and includes:   Validating the resource schema   Determining which handlers have been specified for the resource   Making the resource type available for use in your account   For more information on how to develop types and ready them for registeration, see Creating Resource Providers in the CloudFormation CLI User Guide. You can have a maximum of 50 resource type versions registered at a time. This maximum is per account and per region. Use DeregisterType to deregister specific resource type versions if necessary. Once you have initiated a registration request using  RegisterType , you can use  DescribeTypeRegistration  to monitor the progress of the registration request.
    */
   registerType(params: CloudFormation.Types.RegisterTypeInput, callback?: (err: AWSError, data: CloudFormation.Types.RegisterTypeOutput) => void): Request<CloudFormation.Types.RegisterTypeOutput, AWSError>;
   /**
-   * Registers a type with the CloudFormation service. Registering a type makes it available for use in CloudFormation templates in your AWS account, and includes:   Validating the resource schema   Determining which handlers have been specified for the resource   Making the resource type available for use in your account   For more information on how to develop types and ready them for registeration, see Creating Resource Providers in the CloudFormation CLI User Guide. Once you have initiated a registration request using  RegisterType , you can use  DescribeTypeRegistration  to monitor the progress of the registration request.
+   * Registers a type with the CloudFormation service. Registering a type makes it available for use in CloudFormation templates in your AWS account, and includes:   Validating the resource schema   Determining which handlers have been specified for the resource   Making the resource type available for use in your account   For more information on how to develop types and ready them for registeration, see Creating Resource Providers in the CloudFormation CLI User Guide. You can have a maximum of 50 resource type versions registered at a time. This maximum is per account and per region. Use DeregisterType to deregister specific resource type versions if necessary. Once you have initiated a registration request using  RegisterType , you can use  DescribeTypeRegistration  to monitor the progress of the registration request.
    */
   registerType(callback?: (err: AWSError, data: CloudFormation.Types.RegisterTypeOutput) => void): Request<CloudFormation.Types.RegisterTypeOutput, AWSError>;
   /**
@@ -421,19 +421,19 @@ declare class CloudFormation extends Service {
    */
   updateStack(callback?: (err: AWSError, data: CloudFormation.Types.UpdateStackOutput) => void): Request<CloudFormation.Types.UpdateStackOutput, AWSError>;
   /**
-   * Updates the parameter values for stack instances for the specified accounts, within the specified regions. A stack instance refers to a stack in a specific account and region.  You can only update stack instances in regions and accounts where they already exist; to create additional stack instances, use CreateStackInstances.  During stack set updates, any parameters overridden for a stack instance are not updated, but retain their overridden value. You can only update the parameter values that are specified in the stack set; to add or delete a parameter itself, use UpdateStackSet to update the stack set template. If you add a parameter to a template, before you can override the parameter value specified in the stack set you must first use UpdateStackSet to update all stack instances with the updated template and parameter value specified in the stack set. Once a stack instance has been updated with the new parameter, you can then override the parameter value using UpdateStackInstances.
+   * Updates the parameter values for stack instances for the specified accounts, within the specified Regions. A stack instance refers to a stack in a specific account and Region.  You can only update stack instances in Regions and accounts where they already exist; to create additional stack instances, use CreateStackInstances.  During stack set updates, any parameters overridden for a stack instance are not updated, but retain their overridden value. You can only update the parameter values that are specified in the stack set; to add or delete a parameter itself, use UpdateStackSet to update the stack set template. If you add a parameter to a template, before you can override the parameter value specified in the stack set you must first use UpdateStackSet to update all stack instances with the updated template and parameter value specified in the stack set. Once a stack instance has been updated with the new parameter, you can then override the parameter value using UpdateStackInstances.
    */
   updateStackInstances(params: CloudFormation.Types.UpdateStackInstancesInput, callback?: (err: AWSError, data: CloudFormation.Types.UpdateStackInstancesOutput) => void): Request<CloudFormation.Types.UpdateStackInstancesOutput, AWSError>;
   /**
-   * Updates the parameter values for stack instances for the specified accounts, within the specified regions. A stack instance refers to a stack in a specific account and region.  You can only update stack instances in regions and accounts where they already exist; to create additional stack instances, use CreateStackInstances.  During stack set updates, any parameters overridden for a stack instance are not updated, but retain their overridden value. You can only update the parameter values that are specified in the stack set; to add or delete a parameter itself, use UpdateStackSet to update the stack set template. If you add a parameter to a template, before you can override the parameter value specified in the stack set you must first use UpdateStackSet to update all stack instances with the updated template and parameter value specified in the stack set. Once a stack instance has been updated with the new parameter, you can then override the parameter value using UpdateStackInstances.
+   * Updates the parameter values for stack instances for the specified accounts, within the specified Regions. A stack instance refers to a stack in a specific account and Region.  You can only update stack instances in Regions and accounts where they already exist; to create additional stack instances, use CreateStackInstances.  During stack set updates, any parameters overridden for a stack instance are not updated, but retain their overridden value. You can only update the parameter values that are specified in the stack set; to add or delete a parameter itself, use UpdateStackSet to update the stack set template. If you add a parameter to a template, before you can override the parameter value specified in the stack set you must first use UpdateStackSet to update all stack instances with the updated template and parameter value specified in the stack set. Once a stack instance has been updated with the new parameter, you can then override the parameter value using UpdateStackInstances.
    */
   updateStackInstances(callback?: (err: AWSError, data: CloudFormation.Types.UpdateStackInstancesOutput) => void): Request<CloudFormation.Types.UpdateStackInstancesOutput, AWSError>;
   /**
-   * Updates the stack set, and associated stack instances in the specified accounts and regions. Even if the stack set operation created by updating the stack set fails (completely or partially, below or above a specified failure tolerance), the stack set is updated with your changes. Subsequent CreateStackInstances calls on the specified stack set use the updated stack set.
+   * Updates the stack set, and associated stack instances in the specified accounts and Regions. Even if the stack set operation created by updating the stack set fails (completely or partially, below or above a specified failure tolerance), the stack set is updated with your changes. Subsequent CreateStackInstances calls on the specified stack set use the updated stack set.
    */
   updateStackSet(params: CloudFormation.Types.UpdateStackSetInput, callback?: (err: AWSError, data: CloudFormation.Types.UpdateStackSetOutput) => void): Request<CloudFormation.Types.UpdateStackSetOutput, AWSError>;
   /**
-   * Updates the stack set, and associated stack instances in the specified accounts and regions. Even if the stack set operation created by updating the stack set fails (completely or partially, below or above a specified failure tolerance), the stack set is updated with your changes. Subsequent CreateStackInstances calls on the specified stack set use the updated stack set.
+   * Updates the stack set, and associated stack instances in the specified accounts and Regions. Even if the stack set operation created by updating the stack set fails (completely or partially, below or above a specified failure tolerance), the stack set is updated with your changes. Subsequent CreateStackInstances calls on the specified stack set use the updated stack set.
    */
   updateStackSet(callback?: (err: AWSError, data: CloudFormation.Types.UpdateStackSetOutput) => void): Request<CloudFormation.Types.UpdateStackSetOutput, AWSError>;
   /**
@@ -513,11 +513,11 @@ declare namespace CloudFormation {
   export type Account = string;
   export interface AccountGateResult {
     /**
-     * The status of the account gate function.    SUCCEEDED: The account gate function has determined that the account and region passes any requirements for a stack set operation to occur. AWS CloudFormation proceeds with the stack operation in that account and region.     FAILED: The account gate function has determined that the account and region does not meet the requirements for a stack set operation to occur. AWS CloudFormation cancels the stack set operation in that account and region, and sets the stack set operation result status for that account and region to FAILED.     SKIPPED: AWS CloudFormation has skipped calling the account gate function for this account and region, for one of the following reasons:   An account gate function has not been specified for the account and region. AWS CloudFormation proceeds with the stack set operation in this account and region.   The AWSCloudFormationStackSetExecutionRole of the stack set adminstration account lacks permissions to invoke the function. AWS CloudFormation proceeds with the stack set operation in this account and region.   Either no action is necessary, or no action is possible, on the stack. AWS CloudFormation skips the stack set operation in this account and region.    
+     * The status of the account gate function.    SUCCEEDED: The account gate function has determined that the account and Region passes any requirements for a stack set operation to occur. AWS CloudFormation proceeds with the stack operation in that account and Region.     FAILED: The account gate function has determined that the account and Region does not meet the requirements for a stack set operation to occur. AWS CloudFormation cancels the stack set operation in that account and Region, and sets the stack set operation result status for that account and Region to FAILED.     SKIPPED: AWS CloudFormation has skipped calling the account gate function for this account and Region, for one of the following reasons:   An account gate function has not been specified for the account and Region. AWS CloudFormation proceeds with the stack set operation in this account and Region.   The AWSCloudFormationStackSetExecutionRole of the stack set adminstration account lacks permissions to invoke the function. AWS CloudFormation proceeds with the stack set operation in this account and Region.   Either no action is necessary, or no action is possible, on the stack. AWS CloudFormation skips the stack set operation in this account and Region.    
      */
     Status?: AccountGateStatus;
     /**
-     * The reason for the account gate status assigned to this account and region for the stack set operation.
+     * The reason for the account gate status assigned to this account and Region for the stack set operation.
      */
     StatusReason?: AccountGateStatusReason;
   }
@@ -724,7 +724,7 @@ declare namespace CloudFormation {
   }
   export interface CreateStackInput {
     /**
-     * The name that is associated with the stack. The name must be unique in the region in which you are creating the stack.  A stack name can contain only alphanumeric characters (case sensitive) and hyphens. It must start with an alphabetic character and cannot be longer than 128 characters. 
+     * The name that is associated with the stack. The name must be unique in the Region in which you are creating the stack.  A stack name can contain only alphanumeric characters (case sensitive) and hyphens. It must start with an alphabetic character and cannot be longer than 128 characters. 
      */
     StackName: StackName;
     /**
@@ -776,7 +776,7 @@ declare namespace CloudFormation {
      */
     StackPolicyBody?: StackPolicyBody;
     /**
-     * Location of a file containing the stack policy. The URL must point to a policy (maximum size: 16 KB) located in an S3 bucket in the same region as the stack. You can specify either the StackPolicyBody or the StackPolicyURL parameter, but not both.
+     * Location of a file containing the stack policy. The URL must point to a policy (maximum size: 16 KB) located in an S3 bucket in the same Region as the stack. You can specify either the StackPolicyBody or the StackPolicyURL parameter, but not both.
      */
     StackPolicyURL?: StackPolicyURL;
     /**
@@ -798,7 +798,7 @@ declare namespace CloudFormation {
      */
     StackSetName: StackSetName;
     /**
-     * [Self-managed permissions] The names of one or more AWS accounts that you want to create stack instances in the specified region(s) for. You can specify Accounts or DeploymentTargets, but not both.
+     * [Self-managed permissions] The names of one or more AWS accounts that you want to create stack instances in the specified Region(s) for. You can specify Accounts or DeploymentTargets, but not both.
      */
     Accounts?: AccountList;
     /**
@@ -806,11 +806,11 @@ declare namespace CloudFormation {
      */
     DeploymentTargets?: DeploymentTargets;
     /**
-     * The names of one or more regions where you want to create stack instances using the specified AWS account(s). 
+     * The names of one or more Regions where you want to create stack instances using the specified AWS account(s). 
      */
     Regions: RegionList;
     /**
-     * A list of stack set parameters whose values you want to override in the selected stack instances. Any overridden parameter values will be applied to all stack instances in the specified accounts and regions. When specifying parameters and their values, be aware of how AWS CloudFormation sets parameter values during stack instance operations:   To override the current value for a parameter, include the parameter and specify its value.   To leave a parameter set to its present value, you can do one of the following:   Do not include the parameter in the list.   Include the parameter and specify UsePreviousValue as true. (You cannot specify both a value and set UsePreviousValue to true.)     To set all overridden parameter back to the values specified in the stack set, specify a parameter list but do not include any parameters.   To leave all parameters set to their present values, do not specify this property at all.   During stack set updates, any parameter values overridden for a stack instance are not updated, but retain their overridden value. You can only override the parameter values that are specified in the stack set; to add or delete a parameter itself, use UpdateStackSet to update the stack set template.
+     * A list of stack set parameters whose values you want to override in the selected stack instances. Any overridden parameter values will be applied to all stack instances in the specified accounts and Regions. When specifying parameters and their values, be aware of how AWS CloudFormation sets parameter values during stack instance operations:   To override the current value for a parameter, include the parameter and specify its value.   To leave a parameter set to its present value, you can do one of the following:   Do not include the parameter in the list.   Include the parameter and specify UsePreviousValue as true. (You cannot specify both a value and set UsePreviousValue to true.)     To set all overridden parameter back to the values specified in the stack set, specify a parameter list but do not include any parameters.   To leave all parameters set to their present values, do not specify this property at all.   During stack set updates, any parameter values overridden for a stack instance are not updated, but retain their overridden value. You can only override the parameter values that are specified in the stack set; to add or delete a parameter itself, use UpdateStackSet to update the stack set template.
      */
     ParameterOverrides?: Parameters;
     /**
@@ -836,7 +836,7 @@ declare namespace CloudFormation {
   }
   export interface CreateStackSetInput {
     /**
-     * The name to associate with the stack set. The name must be unique in the region where you create your stack set.  A stack name can contain only alphanumeric characters (case-sensitive) and hyphens. It must start with an alphabetic character and can't be longer than 128 characters. 
+     * The name to associate with the stack set. The name must be unique in the Region where you create your stack set.  A stack name can contain only alphanumeric characters (case-sensitive) and hyphens. It must start with an alphabetic character and can't be longer than 128 characters. 
      */
     StackSetName: StackSetName;
     /**
@@ -876,7 +876,7 @@ declare namespace CloudFormation {
      */
     PermissionModel?: PermissionModels;
     /**
-     * Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to the target organization or organizational unit (OU). Specify only if PermissionModel is SERVICE_MANAGED. If you specify AutoDeployment, do not specify DeploymentTargets or Regions.
+     * Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to the target organization or organizational unit (OU). Specify only if PermissionModel is SERVICE_MANAGED.
      */
     AutoDeployment?: AutoDeployment;
     /**
@@ -935,7 +935,7 @@ declare namespace CloudFormation {
      */
     DeploymentTargets?: DeploymentTargets;
     /**
-     * The regions where you want to delete stack set instances. 
+     * The Regions where you want to delete stack set instances. 
      */
     Regions: RegionList;
     /**
@@ -972,7 +972,7 @@ declare namespace CloudFormation {
      */
     Accounts?: AccountList;
     /**
-     * The organization root ID or organizational unit (OUs) IDs to which StackSets deploys.
+     * The organization root ID or organizational unit (OU) IDs to which StackSets deploys.
      */
     OrganizationalUnitIds?: OrganizationalUnitIdList;
   }
@@ -1159,7 +1159,7 @@ declare namespace CloudFormation {
      */
     StackInstanceAccount: Account;
     /**
-     * The name of a region that's associated with this stack instance.
+     * The name of a Region that's associated with this stack instance.
      */
     StackInstanceRegion: Region;
   }
@@ -1673,7 +1673,7 @@ declare namespace CloudFormation {
      */
     StackInstanceAccount?: Account;
     /**
-     * The name of the region where you want to list stack instances. 
+     * The name of the Region where you want to list stack instances. 
      */
     StackInstanceRegion?: Region;
   }
@@ -1727,7 +1727,7 @@ declare namespace CloudFormation {
   }
   export interface ListStackSetOperationResultsOutput {
     /**
-     * A list of StackSetOperationResultSummary structures that contain information about the specified operation results, for accounts and regions that are included in the operation.
+     * A list of StackSetOperationResultSummary structures that contain information about the specified operation results, for accounts and Regions that are included in the operation.
      */
     Summaries?: StackSetOperationResultSummaries;
     /**
@@ -2269,7 +2269,7 @@ declare namespace CloudFormation {
      */
     StackPolicyBody?: StackPolicyBody;
     /**
-     * Location of a file containing the stack policy. The URL must point to a policy (maximum size: 16 KB) located in an S3 bucket in the same region as the stack. You can specify either the StackPolicyBody or the StackPolicyURL parameter, but not both.
+     * Location of a file containing the stack policy. The URL must point to a policy (maximum size: 16 KB) located in an S3 bucket in the same Region as the stack. You can specify either the StackPolicyBody or the StackPolicyURL parameter, but not both.
      */
     StackPolicyURL?: StackPolicyURL;
   }
@@ -2479,7 +2479,7 @@ declare namespace CloudFormation {
      */
     StackSetId?: StackSetId;
     /**
-     * The name of the AWS region that the stack instance is associated with.
+     * The name of the AWS Region that the stack instance is associated with.
      */
     Region?: Region;
     /**
@@ -2503,7 +2503,7 @@ declare namespace CloudFormation {
      */
     StatusReason?: Reason;
     /**
-     * [Service-managed permissions] The organization root ID or organizational unit (OU) ID that the stack instance is associated with.
+     * Reserved for internal use. No data returned.
      */
     OrganizationalUnitId?: OrganizationalUnitId;
     /**
@@ -2523,7 +2523,7 @@ declare namespace CloudFormation {
      */
     StackSetId?: StackSetId;
     /**
-     * The name of the AWS region that the stack instance is associated with.
+     * The name of the AWS Region that the stack instance is associated with.
      */
     Region?: Region;
     /**
@@ -2543,7 +2543,7 @@ declare namespace CloudFormation {
      */
     StatusReason?: Reason;
     /**
-     * [Service-managed permissions] The organization root ID or organizational unit (OU) ID that the stack instance is associated with.
+     * Reserved for internal use. No data returned.
      */
     OrganizationalUnitId?: OrganizationalUnitId;
     /**
@@ -2804,7 +2804,7 @@ declare namespace CloudFormation {
      */
     PermissionModel?: PermissionModels;
     /**
-     * [Service-managed permissions] The organization root ID or organizational unit (OUs) IDs to which stacks in your stack set have been deployed.
+     * Reserved for internal use. No data returned.
      */
     OrganizationalUnitIds?: OrganizationalUnitIdList;
   }
@@ -2862,7 +2862,7 @@ declare namespace CloudFormation {
      */
     Action?: StackSetOperationAction;
     /**
-     * The status of the operation.     FAILED: The operation exceeded the specified failure tolerance. The failure tolerance value that you've set for an operation is applied for each region during stack create and update operations. If the number of failed stacks within a region exceeds the failure tolerance, the status of the operation in the region is set to FAILED. This in turn sets the status of the operation as a whole to FAILED, and AWS CloudFormation cancels the operation in any remaining regions.    QUEUED: [Service-managed permissions] For automatic deployments that require a sequence of operations. The operation is queued to be performed. For more information, see the stack set operation status codes in the AWS CloudFormation User Guide.    RUNNING: The operation is currently being performed.    STOPPED: The user has cancelled the operation.    STOPPING: The operation is in the process of stopping, at user request.     SUCCEEDED: The operation completed creating or updating all the specified stacks without exceeding the failure tolerance for the operation.  
+     * The status of the operation.     FAILED: The operation exceeded the specified failure tolerance. The failure tolerance value that you've set for an operation is applied for each Region during stack create and update operations. If the number of failed stacks within a Region exceeds the failure tolerance, the status of the operation in the Region is set to FAILED. This in turn sets the status of the operation as a whole to FAILED, and AWS CloudFormation cancels the operation in any remaining Regions.    QUEUED: [Service-managed permissions] For automatic deployments that require a sequence of operations, the operation is queued to be performed. For more information, see the stack set operation status codes in the AWS CloudFormation User Guide.    RUNNING: The operation is currently being performed.    STOPPED: The user has cancelled the operation.    STOPPING: The operation is in the process of stopping, at user request.     SUCCEEDED: The operation completed creating or updating all the specified stacks without exceeding the failure tolerance for the operation.  
      */
     Status?: StackSetOperationStatus;
     /**
@@ -2882,11 +2882,11 @@ declare namespace CloudFormation {
      */
     ExecutionRoleName?: ExecutionRoleName;
     /**
-     * The time at which the operation was initiated. Note that the creation times for the stack set operation might differ from the creation time of the individual stacks themselves. This is because AWS CloudFormation needs to perform preparatory work for the operation, such as dispatching the work to the requested regions, before actually creating the first stacks.
+     * The time at which the operation was initiated. Note that the creation times for the stack set operation might differ from the creation time of the individual stacks themselves. This is because AWS CloudFormation needs to perform preparatory work for the operation, such as dispatching the work to the requested Regions, before actually creating the first stacks.
      */
     CreationTimestamp?: Timestamp;
     /**
-     * The time at which the stack set operation ended, across all accounts and regions specified. Note that this doesn't necessarily mean that the stack set operation was successful, or even attempted, in each account or region.
+     * The time at which the stack set operation ended, across all accounts and Regions specified. Note that this doesn't necessarily mean that the stack set operation was successful, or even attempted, in each account or Region.
      */
     EndTimestamp?: Timestamp;
     /**
@@ -2901,15 +2901,15 @@ declare namespace CloudFormation {
   export type StackSetOperationAction = "CREATE"|"UPDATE"|"DELETE"|"DETECT_DRIFT"|string;
   export interface StackSetOperationPreferences {
     /**
-     * The order of the regions in where you want to perform the stack operation.
+     * The order of the Regions in where you want to perform the stack operation.
      */
     RegionOrder?: RegionList;
     /**
-     * The number of accounts, per region, for which this operation can fail before AWS CloudFormation stops the operation in that region. If the operation is stopped in a region, AWS CloudFormation doesn't attempt the operation in any subsequent regions. Conditional: You must specify either FailureToleranceCount or FailureTolerancePercentage (but not both).
+     * The number of accounts, per Region, for which this operation can fail before AWS CloudFormation stops the operation in that Region. If the operation is stopped in a Region, AWS CloudFormation doesn't attempt the operation in any subsequent Regions. Conditional: You must specify either FailureToleranceCount or FailureTolerancePercentage (but not both).
      */
     FailureToleranceCount?: FailureToleranceCount;
     /**
-     * The percentage of accounts, per region, for which this stack operation can fail before AWS CloudFormation stops the operation in that region. If the operation is stopped in a region, AWS CloudFormation doesn't attempt the operation in any subsequent regions. When calculating the number of accounts based on the specified percentage, AWS CloudFormation rounds down to the next whole number. Conditional: You must specify either FailureToleranceCount or FailureTolerancePercentage, but not both.
+     * The percentage of accounts, per Region, for which this stack operation can fail before AWS CloudFormation stops the operation in that Region. If the operation is stopped in a Region, AWS CloudFormation doesn't attempt the operation in any subsequent Regions. When calculating the number of accounts based on the specified percentage, AWS CloudFormation rounds down to the next whole number. Conditional: You must specify either FailureToleranceCount or FailureTolerancePercentage, but not both.
      */
     FailureTolerancePercentage?: FailureTolerancePercentage;
     /**
@@ -2929,11 +2929,11 @@ declare namespace CloudFormation {
      */
     Account?: Account;
     /**
-     * The name of the AWS region for this operation result.
+     * The name of the AWS Region for this operation result.
      */
     Region?: Region;
     /**
-     * The result status of the stack set operation for the given account in the given region.    CANCELLED: The operation in the specified account and region has been cancelled. This is either because a user has stopped the stack set operation, or because the failure tolerance of the stack set operation has been exceeded.    FAILED: The operation in the specified account and region failed.  If the stack set operation fails in enough accounts within a region, the failure tolerance for the stack set operation as a whole might be exceeded.     RUNNING: The operation in the specified account and region is currently in progress.    PENDING: The operation in the specified account and region has yet to start.     SUCCEEDED: The operation in the specified account and region completed successfully.  
+     * The result status of the stack set operation for the given account in the given Region.    CANCELLED: The operation in the specified account and Region has been cancelled. This is either because a user has stopped the stack set operation, or because the failure tolerance of the stack set operation has been exceeded.    FAILED: The operation in the specified account and Region failed.  If the stack set operation fails in enough accounts within a Region, the failure tolerance for the stack set operation as a whole might be exceeded.     RUNNING: The operation in the specified account and Region is currently in progress.    PENDING: The operation in the specified account and Region has yet to start.     SUCCEEDED: The operation in the specified account and Region completed successfully.  
      */
     Status?: StackSetOperationResultStatus;
     /**
@@ -2945,7 +2945,7 @@ declare namespace CloudFormation {
      */
     AccountGateResult?: AccountGateResult;
     /**
-     * [Service-managed permissions] The organization root ID or organizational unit (OU) ID for this operation result.
+     * Reserved for internal use. No data returned.
      */
     OrganizationalUnitId?: OrganizationalUnitId;
   }
@@ -2961,15 +2961,15 @@ declare namespace CloudFormation {
      */
     Action?: StackSetOperationAction;
     /**
-     * The overall status of the operation.    FAILED: The operation exceeded the specified failure tolerance. The failure tolerance value that you've set for an operation is applied for each region during stack create and update operations. If the number of failed stacks within a region exceeds the failure tolerance, the status of the operation in the region is set to FAILED. This in turn sets the status of the operation as a whole to FAILED, and AWS CloudFormation cancels the operation in any remaining regions.    QUEUED: [Service-managed permissions] For automatic deployments that require a sequence of operations. The operation is queued to be performed. For more information, see the stack set operation status codes in the AWS CloudFormation User Guide.    RUNNING: The operation is currently being performed.    STOPPED: The user has cancelled the operation.    STOPPING: The operation is in the process of stopping, at user request.     SUCCEEDED: The operation completed creating or updating all the specified stacks without exceeding the failure tolerance for the operation.  
+     * The overall status of the operation.    FAILED: The operation exceeded the specified failure tolerance. The failure tolerance value that you've set for an operation is applied for each Region during stack create and update operations. If the number of failed stacks within a Region exceeds the failure tolerance, the status of the operation in the Region is set to FAILED. This in turn sets the status of the operation as a whole to FAILED, and AWS CloudFormation cancels the operation in any remaining Regions.    QUEUED: [Service-managed permissions] For automatic deployments that require a sequence of operations, the operation is queued to be performed. For more information, see the stack set operation status codes in the AWS CloudFormation User Guide.    RUNNING: The operation is currently being performed.    STOPPED: The user has cancelled the operation.    STOPPING: The operation is in the process of stopping, at user request.     SUCCEEDED: The operation completed creating or updating all the specified stacks without exceeding the failure tolerance for the operation.  
      */
     Status?: StackSetOperationStatus;
     /**
-     * The time at which the operation was initiated. Note that the creation times for the stack set operation might differ from the creation time of the individual stacks themselves. This is because AWS CloudFormation needs to perform preparatory work for the operation, such as dispatching the work to the requested regions, before actually creating the first stacks.
+     * The time at which the operation was initiated. Note that the creation times for the stack set operation might differ from the creation time of the individual stacks themselves. This is because AWS CloudFormation needs to perform preparatory work for the operation, such as dispatching the work to the requested Regions, before actually creating the first stacks.
      */
     CreationTimestamp?: Timestamp;
     /**
-     * The time at which the stack set operation ended, across all accounts and regions specified. Note that this doesn't necessarily mean that the stack set operation was successful, or even attempted, in each account or region.
+     * The time at which the stack set operation ended, across all accounts and Regions specified. Note that this doesn't necessarily mean that the stack set operation was successful, or even attempted, in each account or Region.
      */
     EndTimestamp?: Timestamp;
   }
@@ -3196,7 +3196,7 @@ declare namespace CloudFormation {
      */
     StackPolicyDuringUpdateBody?: StackPolicyDuringUpdateBody;
     /**
-     * Location of a file containing the temporary overriding stack policy. The URL must point to a policy (max size: 16KB) located in an S3 bucket in the same region as the stack. You can specify either the StackPolicyDuringUpdateBody or the StackPolicyDuringUpdateURL parameter, but not both. If you want to update protected resources, specify a temporary overriding stack policy during this update. If you do not specify a stack policy, the current policy that is associated with the stack will be used.
+     * Location of a file containing the temporary overriding stack policy. The URL must point to a policy (max size: 16KB) located in an S3 bucket in the same Region as the stack. You can specify either the StackPolicyDuringUpdateBody or the StackPolicyDuringUpdateURL parameter, but not both. If you want to update protected resources, specify a temporary overriding stack policy during this update. If you do not specify a stack policy, the current policy that is associated with the stack will be used.
      */
     StackPolicyDuringUpdateURL?: StackPolicyDuringUpdateURL;
     /**
@@ -3224,7 +3224,7 @@ declare namespace CloudFormation {
      */
     StackPolicyBody?: StackPolicyBody;
     /**
-     * Location of a file containing the updated stack policy. The URL must point to a policy (max size: 16KB) located in an S3 bucket in the same region as the stack. You can specify either the StackPolicyBody or the StackPolicyURL parameter, but not both. You might update the stack policy, for example, in order to protect a new resource that you created during a stack update. If you do not specify a stack policy, the current policy that is associated with the stack is unchanged.
+     * Location of a file containing the updated stack policy. The URL must point to a policy (max size: 16KB) located in an S3 bucket in the same Region as the stack. You can specify either the StackPolicyBody or the StackPolicyURL parameter, but not both. You might update the stack policy, for example, in order to protect a new resource that you created during a stack update. If you do not specify a stack policy, the current policy that is associated with the stack is unchanged.
      */
     StackPolicyURL?: StackPolicyURL;
     /**
@@ -3246,7 +3246,7 @@ declare namespace CloudFormation {
      */
     StackSetName: StackSetNameOrId;
     /**
-     * [Self-managed permissions] The names of one or more AWS accounts for which you want to update parameter values for stack instances. The overridden parameter values will be applied to all stack instances in the specified accounts and regions. You can specify Accounts or DeploymentTargets, but not both.
+     * [Self-managed permissions] The names of one or more AWS accounts for which you want to update parameter values for stack instances. The overridden parameter values will be applied to all stack instances in the specified accounts and Regions. You can specify Accounts or DeploymentTargets, but not both.
      */
     Accounts?: AccountList;
     /**
@@ -3254,11 +3254,11 @@ declare namespace CloudFormation {
      */
     DeploymentTargets?: DeploymentTargets;
     /**
-     * The names of one or more regions in which you want to update parameter values for stack instances. The overridden parameter values will be applied to all stack instances in the specified accounts and regions.
+     * The names of one or more Regions in which you want to update parameter values for stack instances. The overridden parameter values will be applied to all stack instances in the specified accounts and Regions.
      */
     Regions: RegionList;
     /**
-     *  A list of input parameters whose values you want to update for the specified stack instances.  Any overridden parameter values will be applied to all stack instances in the specified accounts and regions. When specifying parameters and their values, be aware of how AWS CloudFormation sets parameter values during stack instance update operations:   To override the current value for a parameter, include the parameter and specify its value.   To leave a parameter set to its present value, you can do one of the following:   Do not include the parameter in the list.   Include the parameter and specify UsePreviousValue as true. (You cannot specify both a value and set UsePreviousValue to true.)     To set all overridden parameter back to the values specified in the stack set, specify a parameter list but do not include any parameters.   To leave all parameters set to their present values, do not specify this property at all.   During stack set updates, any parameter values overridden for a stack instance are not updated, but retain their overridden value. You can only override the parameter values that are specified in the stack set; to add or delete a parameter itself, use UpdateStackSet to update the stack set template. If you add a parameter to a template, before you can override the parameter value specified in the stack set you must first use UpdateStackSet to update all stack instances with the updated template and parameter value specified in the stack set. Once a stack instance has been updated with the new parameter, you can then override the parameter value using UpdateStackInstances.
+     *  A list of input parameters whose values you want to update for the specified stack instances.  Any overridden parameter values will be applied to all stack instances in the specified accounts and Regions. When specifying parameters and their values, be aware of how AWS CloudFormation sets parameter values during stack instance update operations:   To override the current value for a parameter, include the parameter and specify its value.   To leave a parameter set to its present value, you can do one of the following:   Do not include the parameter in the list.   Include the parameter and specify UsePreviousValue as true. (You cannot specify both a value and set UsePreviousValue to true.)     To set all overridden parameter back to the values specified in the stack set, specify a parameter list but do not include any parameters.   To leave all parameters set to their present values, do not specify this property at all.   During stack set updates, any parameter values overridden for a stack instance are not updated, but retain their overridden value. You can only override the parameter values that are specified in the stack set; to add or delete a parameter itself, use UpdateStackSet to update the stack set template. If you add a parameter to a template, before you can override the parameter value specified in the stack set you must first use UpdateStackSet to update all stack instances with the updated template and parameter value specified in the stack set. Once a stack instance has been updated with the new parameter, you can then override the parameter value using UpdateStackInstances.
      */
     ParameterOverrides?: Parameters;
     /**
@@ -3344,11 +3344,11 @@ declare namespace CloudFormation {
      */
     OperationId?: ClientRequestToken;
     /**
-     * [Self-managed permissions] The accounts in which to update associated stack instances. If you specify accounts, you must also specify the regions in which to update stack set instances. To update all the stack instances associated with this stack set, do not specify the Accounts or Regions properties. If the stack set update includes changes to the template (that is, if the TemplateBody or TemplateURL properties are specified), or the Parameters property, AWS CloudFormation marks all stack instances with a status of OUTDATED prior to updating the stack instances in the specified accounts and regions. If the stack set update does not include changes to the template or parameters, AWS CloudFormation updates the stack instances in the specified accounts and regions, while leaving all other stack instances with their existing stack instance status. 
+     * [Self-managed permissions] The accounts in which to update associated stack instances. If you specify accounts, you must also specify the Regions in which to update stack set instances. To update all the stack instances associated with this stack set, do not specify the Accounts or Regions properties. If the stack set update includes changes to the template (that is, if the TemplateBody or TemplateURL properties are specified), or the Parameters property, AWS CloudFormation marks all stack instances with a status of OUTDATED prior to updating the stack instances in the specified accounts and Regions. If the stack set update does not include changes to the template or parameters, AWS CloudFormation updates the stack instances in the specified accounts and Regions, while leaving all other stack instances with their existing stack instance status. 
      */
     Accounts?: AccountList;
     /**
-     * The regions in which to update associated stack instances. If you specify regions, you must also specify accounts in which to update stack set instances. To update all the stack instances associated with this stack set, do not specify the Accounts or Regions properties. If the stack set update includes changes to the template (that is, if the TemplateBody or TemplateURL properties are specified), or the Parameters property, AWS CloudFormation marks all stack instances with a status of OUTDATED prior to updating the stack instances in the specified accounts and regions. If the stack set update does not include changes to the template or parameters, AWS CloudFormation updates the stack instances in the specified accounts and regions, while leaving all other stack instances with their existing stack instance status. 
+     * The Regions in which to update associated stack instances. If you specify Regions, you must also specify accounts in which to update stack set instances. To update all the stack instances associated with this stack set, do not specify the Accounts or Regions properties. If the stack set update includes changes to the template (that is, if the TemplateBody or TemplateURL properties are specified), or the Parameters property, AWS CloudFormation marks all stack instances with a status of OUTDATED prior to updating the stack instances in the specified accounts and Regions. If the stack set update does not include changes to the template or parameters, AWS CloudFormation updates the stack instances in the specified accounts and Regions, while leaving all other stack instances with their existing stack instance status. 
      */
     Regions?: RegionList;
   }

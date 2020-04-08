@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.655.0-->
+<!--LATEST=2.656.0-->
 <!--ENTRYINSERT-->
+
+## 2.656.0
+* bugfix: Monitoring: Set MaxRetriesExceeded on monitoring event only when the final retry fails
+* feature: Chime: feature: Chime: This release introduces the ability to tag Amazon Chime SDK meeting resources.  You can use tags to organize and identify your resources for cost allocation. 
+* feature: CodeGuruProfiler: CodeGuruProfiler adds support for resource based authorization to submit profile data.
+* feature: EC2: This release provides the ability to include tags in EC2 event notifications. 
+* feature: ECS: This release provides native support for specifying Amazon EFS file systems as volumes in your Amazon ECS task definitions.
+* feature: MediaConvert: AWS Elemental MediaConvert SDK adds support for queue hopping. Jobs can now hop from their original queue to a specified alternate queue, based on the maximum wait time that you specify in the job settings.
+* feature: MigrationHubConfig: Adding ThrottlingException
 
 ## 2.655.0
 * feature: CodeGuruReviewer: API updates for CodeGuruReviewer 

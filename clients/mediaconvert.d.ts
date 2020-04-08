@@ -1002,7 +1002,7 @@ All burn-in and DVB-Sub font settings must match.
   export type ContainerType = "F4V"|"ISMV"|"M2TS"|"M3U8"|"CMFC"|"MOV"|"MP4"|"MPD"|"MXF"|"RAW"|string;
   export interface CreateJobRequest {
     /**
-     * Accelerated transcoding can significantly speed up jobs with long, visually complex content. Outputs that use this feature incur pro-tier pricing. For information about feature limitations, see the AWS Elemental MediaConvert User Guide.
+     * Optional. Accelerated transcoding can significantly speed up jobs with long, visually complex content. Outputs that use this feature incur pro-tier pricing. For information about feature limitations, see the AWS Elemental MediaConvert User Guide.
      */
     AccelerationSettings?: AccelerationSettings;
     /**
@@ -1010,15 +1010,19 @@ All burn-in and DVB-Sub font settings must match.
      */
     BillingTagsSource?: BillingTagsSource;
     /**
-     * Idempotency token for CreateJob operation.
+     * Optional. Idempotency token for CreateJob operation.
      */
     ClientRequestToken?: __string;
     /**
-     * When you create a job, you can either specify a job template or specify the transcoding settings individually
+     * Optional. Use queue hopping to avoid overly long waits in the backlog of the queue that you submit your job to. Specify an alternate queue and the maximum time that your job will wait in the initial queue before hopping. For more information about this feature, see the AWS Elemental MediaConvert User Guide.
+     */
+    HopDestinations?: __listOfHopDestination;
+    /**
+     * Optional. When you create a job, you can either specify a job template or specify the transcoding settings individually.
      */
     JobTemplate?: __string;
     /**
-     * Specify the relative priority for this job. In any given queue, the service begins processing the job with the highest value first. When more than one job has the same priority, the service begins processing the job that you submitted first. If you don't specify a priority, the service uses the default value 0.
+     * Optional. Specify the relative priority for this job. In any given queue, the service begins processing the job with the highest value first. When more than one job has the same priority, the service begins processing the job that you submitted first. If you don't specify a priority, the service uses the default value 0.
      */
     Priority?: __integerMinNegative50Max50;
     /**
@@ -1034,19 +1038,19 @@ All burn-in and DVB-Sub font settings must match.
      */
     Settings: JobSettings;
     /**
-     * Enable this setting when you run a test job to estimate how many reserved transcoding slots (RTS) you need. When this is enabled, MediaConvert runs your job from an on-demand queue with similar performance to what you will see with one RTS in a reserved queue. This setting is disabled by default.
+     * Optional. Enable this setting when you run a test job to estimate how many reserved transcoding slots (RTS) you need. When this is enabled, MediaConvert runs your job from an on-demand queue with similar performance to what you will see with one RTS in a reserved queue. This setting is disabled by default.
      */
     SimulateReservedQueue?: SimulateReservedQueue;
     /**
-     * Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.
+     * Optional. Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.
      */
     StatusUpdateInterval?: StatusUpdateInterval;
     /**
-     * The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
+     * Optional. The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
      */
     Tags?: __mapOf__string;
     /**
-     * User-defined metadata that you want to associate with an MediaConvert job. You specify metadata in key/value pairs.
+     * Optional. User-defined metadata that you want to associate with an MediaConvert job. You specify metadata in key/value pairs.
      */
     UserMetadata?: __mapOf__string;
   }
@@ -1069,6 +1073,10 @@ All burn-in and DVB-Sub font settings must match.
      * Optional. A description of the job template you are creating.
      */
     Description?: __string;
+    /**
+     * Optional. Use queue hopping to avoid overly long waits in the backlog of the queue that you submit your job to. Specify an alternate queue and the maximum time that your job will wait in the initial queue before hopping. For more information about this feature, see the AWS Elemental MediaConvert User Guide.
+     */
+    HopDestinations?: __listOfHopDestination;
     /**
      * The name of the job template you are creating.
      */
@@ -2455,6 +2463,20 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   }
   export type HlsStreamInfResolution = "INCLUDE"|"EXCLUDE"|string;
   export type HlsTimedMetadataId3Frame = "NONE"|"PRIV"|"TDRL"|string;
+  export interface HopDestination {
+    /**
+     * Optional. When you set up a job to use queue hopping, you can specify a different relative priority for the job in the destination queue. If you don't specify, the relative priority will remain the same as in the previous queue.
+     */
+    Priority?: __integerMinNegative50Max50;
+    /**
+     * Optional unless the job is submitted on the default queue. When you set up a job to use queue hopping, you can specify a destination queue. This queue cannot be the original queue to which the job is submitted. If the original queue isn't the default queue and you don't specify the destination queue, the job will move to the default queue.
+     */
+    Queue?: __string;
+    /**
+     * Required for setting up a job to use queue hopping. Minimum wait time in minutes until the job can hop to the destination queue. Valid range is 1 to 1440 minutes, inclusive.
+     */
+    WaitMinutes?: __integer;
+  }
   export interface Id3Insertion {
     /**
      * Use ID3 tag (Id3) to provide a tag value in base64-encode format.
@@ -2716,7 +2738,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     Arn?: __string;
     /**
-     * Optional. Choose a tag type that AWS Billing and Cost Management will use to sort your AWS Elemental MediaConvert costs on any billing report that you set up. Any transcoding outputs that don't have an associated tag will appear in your billing report unsorted. If you don't choose a valid value for this field, your job outputs will appear on the billing report unsorted.
+     * The tag type that AWS Billing and Cost Management will use to sort your AWS Elemental MediaConvert costs on any billing report that you set up.
      */
     BillingTagsSource?: BillingTagsSource;
     /**
@@ -2735,6 +2757,10 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      * Error message of Job
      */
     ErrorMessage?: __string;
+    /**
+     * Optional list of hop destinations.
+     */
+    HopDestinations?: __listOfHopDestination;
     /**
      * A portion of the job's ARN, unique within your AWS Elemental MediaConvert resources
      */
@@ -2760,9 +2786,13 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     Priority?: __integerMinNegative50Max50;
     /**
-     * Optional. When you create a job, you can specify a queue to send it to. If you don't specify, the job will go to the default queue. For more about queues, see the User Guide topic at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+     * When you create a job, you can specify a queue to send it to. If you don't specify, the job will go to the default queue. For more about queues, see the User Guide topic at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
      */
     Queue?: __string;
+    /**
+     * The job's queue hopping history.
+     */
+    QueueTransitions?: __listOfQueueTransition;
     /**
      * The number of times that the service automatically attempted to process your job after encountering an error.
      */
@@ -2868,6 +2898,10 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     Description?: __string;
     /**
+     * Optional list of hop destinations.
+     */
+    HopDestinations?: __listOfHopDestination;
+    /**
      * The timestamp in epoch seconds when the Job template was last updated.
      */
     LastUpdated?: __timestampUnix;
@@ -2954,7 +2988,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     NextToken?: __string;
     /**
-     * When you request lists of resources, you can optionally specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.
+     * Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.
      */
     Order?: Order;
   }
@@ -2974,19 +3008,19 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     MaxResults?: __integerMin1Max20;
     /**
-     * Use this string, provided with the response to a previous request, to request the next batch of jobs.
+     * Optional. Use this string, provided with the response to a previous request, to request the next batch of jobs.
      */
     NextToken?: __string;
     /**
-     * When you request lists of resources, you can optionally specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.
+     * Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.
      */
     Order?: Order;
     /**
-     * Provide a queue name to get back only jobs from that queue.
+     * Optional. Provide a queue name to get back only jobs from that queue.
      */
     Queue?: __string;
     /**
-     * A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED, or ERROR.
+     * Optional. A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED, or ERROR.
      */
     Status?: JobStatus;
   }
@@ -3018,7 +3052,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     NextToken?: __string;
     /**
-     * When you request lists of resources, you can optionally specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.
+     * Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.
      */
     Order?: Order;
   }
@@ -3046,7 +3080,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      */
     NextToken?: __string;
     /**
-     * When you request lists of resources, you can optionally specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.
+     * Optional. When you request lists of resources, you can specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.
      */
     Order?: Order;
   }
@@ -3982,6 +4016,20 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   }
   export type QueueListBy = "NAME"|"CREATION_DATE"|string;
   export type QueueStatus = "ACTIVE"|"PAUSED"|string;
+  export interface QueueTransition {
+    /**
+     * The queue that the job was on after the transition.
+     */
+    DestinationQueue?: __string;
+    /**
+     * The queue that the job was on before the transition.
+     */
+    SourceQueue?: __string;
+    /**
+     * The time, in Unix epoch format, that the job moved from the source queue to the destination queue.
+     */
+    Timestamp?: __timestampUnix;
+  }
   export interface Rectangle {
     /**
      * Height of rectangle in pixels. Specify only even numbers.
@@ -4287,6 +4335,10 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      * The new description for the job template, if you are changing it.
      */
     Description?: __string;
+    /**
+     * Optional list of hop destinations.
+     */
+    HopDestinations?: __listOfHopDestination;
     /**
      * The name of the job template you are modifying
      */
@@ -4634,6 +4686,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type __listOfHlsAdMarkers = HlsAdMarkers[];
   export type __listOfHlsAdditionalManifest = HlsAdditionalManifest[];
   export type __listOfHlsCaptionLanguageMapping = HlsCaptionLanguageMapping[];
+  export type __listOfHopDestination = HopDestination[];
   export type __listOfId3Insertion = Id3Insertion[];
   export type __listOfInput = Input[];
   export type __listOfInputClipping = InputClipping[];
@@ -4649,6 +4702,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type __listOfOutputGroupDetail = OutputGroupDetail[];
   export type __listOfPreset = Preset[];
   export type __listOfQueue = Queue[];
+  export type __listOfQueueTransition = QueueTransition[];
   export type __listOfTeletextPageType = TeletextPageType[];
   export type __listOf__integerMin1Max2147483647 = __integerMin1Max2147483647[];
   export type __listOf__integerMin32Max8182 = __integerMin32Max8182[];

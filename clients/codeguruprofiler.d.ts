@@ -44,6 +44,14 @@ declare class CodeGuruProfiler extends Service {
    */
   describeProfilingGroup(callback?: (err: AWSError, data: CodeGuruProfiler.Types.DescribeProfilingGroupResponse) => void): Request<CodeGuruProfiler.Types.DescribeProfilingGroupResponse, AWSError>;
   /**
+   * Gets the profiling group policy.
+   */
+  getPolicy(params: CodeGuruProfiler.Types.GetPolicyRequest, callback?: (err: AWSError, data: CodeGuruProfiler.Types.GetPolicyResponse) => void): Request<CodeGuruProfiler.Types.GetPolicyResponse, AWSError>;
+  /**
+   * Gets the profiling group policy.
+   */
+  getPolicy(callback?: (err: AWSError, data: CodeGuruProfiler.Types.GetPolicyResponse) => void): Request<CodeGuruProfiler.Types.GetPolicyResponse, AWSError>;
+  /**
    * Gets the aggregated profile of a profiling group for the specified time range. If the requested time range does not align with the available aggregated profiles, it is expanded to attain alignment. If aggregated profiles are available only for part of the period requested, the profile is returned from the earliest available to the latest within the requested time range.  For example, if the requested time range is from 00:00 to 00:20 and the available profiles are from 00:15 to 00:25, the returned profile will be from 00:15 to 00:20.  You must specify exactly two of the following parameters: startTime, period, and endTime. 
    */
   getProfile(params: CodeGuruProfiler.Types.GetProfileRequest, callback?: (err: AWSError, data: CodeGuruProfiler.Types.GetProfileResponse) => void): Request<CodeGuruProfiler.Types.GetProfileResponse, AWSError>;
@@ -76,6 +84,22 @@ declare class CodeGuruProfiler extends Service {
    */
   postAgentProfile(callback?: (err: AWSError, data: CodeGuruProfiler.Types.PostAgentProfileResponse) => void): Request<CodeGuruProfiler.Types.PostAgentProfileResponse, AWSError>;
   /**
+   * Provides permission to the principals. This overwrites the existing permissions, and is not additive.
+   */
+  putPermission(params: CodeGuruProfiler.Types.PutPermissionRequest, callback?: (err: AWSError, data: CodeGuruProfiler.Types.PutPermissionResponse) => void): Request<CodeGuruProfiler.Types.PutPermissionResponse, AWSError>;
+  /**
+   * Provides permission to the principals. This overwrites the existing permissions, and is not additive.
+   */
+  putPermission(callback?: (err: AWSError, data: CodeGuruProfiler.Types.PutPermissionResponse) => void): Request<CodeGuruProfiler.Types.PutPermissionResponse, AWSError>;
+  /**
+   * Removes statement for the provided action group from the policy.
+   */
+  removePermission(params: CodeGuruProfiler.Types.RemovePermissionRequest, callback?: (err: AWSError, data: CodeGuruProfiler.Types.RemovePermissionResponse) => void): Request<CodeGuruProfiler.Types.RemovePermissionResponse, AWSError>;
+  /**
+   * Removes statement for the provided action group from the policy.
+   */
+  removePermission(callback?: (err: AWSError, data: CodeGuruProfiler.Types.RemovePermissionResponse) => void): Request<CodeGuruProfiler.Types.RemovePermissionResponse, AWSError>;
+  /**
    * Updates a profiling group.
    */
   updateProfilingGroup(params: CodeGuruProfiler.Types.UpdateProfilingGroupRequest, callback?: (err: AWSError, data: CodeGuruProfiler.Types.UpdateProfilingGroupResponse) => void): Request<CodeGuruProfiler.Types.UpdateProfilingGroupResponse, AWSError>;
@@ -85,6 +109,7 @@ declare class CodeGuruProfiler extends Service {
   updateProfilingGroup(callback?: (err: AWSError, data: CodeGuruProfiler.Types.UpdateProfilingGroupResponse) => void): Request<CodeGuruProfiler.Types.UpdateProfilingGroupResponse, AWSError>;
 }
 declare namespace CodeGuruProfiler {
+  export type ActionGroup = "agentPermissions"|string;
   export interface AgentConfiguration {
     /**
      * 
@@ -173,6 +198,22 @@ declare namespace CodeGuruProfiler {
     profilingGroup: ProfilingGroupDescription;
   }
   export type FleetInstanceId = string;
+  export interface GetPolicyRequest {
+    /**
+     * The name of the profiling group.
+     */
+    profilingGroupName: ProfilingGroupName;
+  }
+  export interface GetPolicyResponse {
+    /**
+     * The resource-based policy attached to the ProfilingGroup.
+     */
+    policy: String;
+    /**
+     * A unique identifier for the current revision of the policy.
+     */
+    revisionId: RevisionId;
+  }
   export interface GetProfileRequest {
     /**
      * The format of the profile to return. You can choose application/json or the default application/x-amzn-ion. 
@@ -307,6 +348,8 @@ declare namespace CodeGuruProfiler {
   }
   export interface PostAgentProfileResponse {
   }
+  export type Principal = string;
+  export type Principals = Principal[];
   export interface ProfileTime {
     /**
      * The start time of the profile.
@@ -358,6 +401,59 @@ declare namespace CodeGuruProfiler {
      */
     latestAggregatedProfile?: AggregatedProfileTime;
   }
+  export interface PutPermissionRequest {
+    /**
+     * The list of actions that the users and roles can perform on the profiling group.
+     */
+    actionGroup: ActionGroup;
+    /**
+     * The list of role and user ARNs or the accountId that needs access (wildcards are not allowed).
+     */
+    principals: Principals;
+    /**
+     * The name of the profiling group.
+     */
+    profilingGroupName: ProfilingGroupName;
+    /**
+     * A unique identifier for the current revision of the policy. This is required, if a policy exists for the profiling group. This is not required when creating the policy for the first time.
+     */
+    revisionId?: RevisionId;
+  }
+  export interface PutPermissionResponse {
+    /**
+     * The resource-based policy.
+     */
+    policy: String;
+    /**
+     * A unique identifier for the current revision of the policy.
+     */
+    revisionId: RevisionId;
+  }
+  export interface RemovePermissionRequest {
+    /**
+     * The list of actions that the users and roles can perform on the profiling group.
+     */
+    actionGroup: ActionGroup;
+    /**
+     * The name of the profiling group.
+     */
+    profilingGroupName: ProfilingGroupName;
+    /**
+     * A unique identifier for the current revision of the policy.
+     */
+    revisionId: RevisionId;
+  }
+  export interface RemovePermissionResponse {
+    /**
+     * The resource-based policy.
+     */
+    policy: String;
+    /**
+     * A unique identifier for the current revision of the policy.
+     */
+    revisionId: RevisionId;
+  }
+  export type RevisionId = string;
   export type String = string;
   export type Timestamp = Date;
   export interface UpdateProfilingGroupRequest {
