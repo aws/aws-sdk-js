@@ -9,8 +9,6 @@ module.exports = function() {
   });
 
   function createTable(world, callback) {
-    var db = new world.AWS.DynamoDB();
-
     var params = {
       TableName: world.tableName,
       AttributeDefinitions: [{ AttributeName: "id", AttributeType: "S" }],
@@ -18,13 +16,13 @@ module.exports = function() {
       BillingMode: "PAY_PER_REQUEST"
     };
 
-    db.createTable(params, function(err, data) {
+    world.service.createTable(params, function(err, data) {
       if (err) {
         callback.fail(err);
         return;
       }
       params = { TableName: world.tableName };
-      db.waitFor('tableExists', params, callback);
+      world.service.waitFor('tableExists', params, callback);
     });
   }
 
