@@ -45,7 +45,6 @@ module.exports = function() {
 
   this.Given(/^I have a table$/, function(callback) {
     var world = this;
-    this.tableName = 'aws-sdk-js-integration-test';
     this.service.listTables(function(err, data) {
       for (var i = 0; i < data.TableNames.length; i++) {
         if (data.TableNames[i] == world.tableName) {
@@ -55,6 +54,12 @@ module.exports = function() {
       }
       createTable(world, callback);
     });
+  });
+
+  this.When(/^I create a table$/, function(callback) {
+    var world = this;
+    this.tableName = 'aws-sdk-js-integration-' + Math.random().toString(36).substring(2);
+    createTable(world, callback);
   });
 
   this.When(/^I put the item:$/, function(string, next) {
@@ -81,6 +86,11 @@ module.exports = function() {
   this.When(/^I delete the table$/, function(next) {
     var params = {TableName: this.tableName};
     this.request(null, 'deleteTable', params, next);
+  });
+
+  this.Then(/^the table should eventually exist$/, function(callback) {
+    var params = {TableName: this.tableName};
+    this.service.waitFor('tableExists', params, callback);
   });
 
   this.Then(/^the table should eventually not exist$/, function(callback) {
