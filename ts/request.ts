@@ -33,8 +33,10 @@ request.on('complete', function(response) {
 request.promise().then(
     data => {
         console.log(data.content);
-        console.log(data.$response.requestId);
-        console.log(data.$response.hasNextPage());
+        if (data.$response) {
+            console.log(data.$response.requestId);
+            console.log(data.$response.hasNextPage());
+        }
     },
     error => {
         console.error(error);

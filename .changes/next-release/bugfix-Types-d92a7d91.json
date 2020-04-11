@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Types",
+  "description": "Make PromiseResult.$promise optional in TypeScript types as it is not always present."
+}

@@ -326,7 +326,7 @@ export class Request<D, E> {
 
 }
 
-export type PromiseResult<D, E> = D & {$response: Response<D, E>};
+export type PromiseResult<D, E> = D & {$response?: Response<D, E>};
 
 export interface Progress {
     loaded: number;
