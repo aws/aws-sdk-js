@@ -7770,7 +7770,6 @@
     "GetUserDefinedFunctionsRequest": {
       "type": "structure",
       "required": [
-        "DatabaseName",
         "Pattern"
       ],
       "members": {

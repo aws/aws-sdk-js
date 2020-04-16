@@ -2126,6 +2126,22 @@
       },
       "documentation": "Set up captions in your outputs by first selecting them from your input here."
     },
+    "CaptionSourceFramerate": {
+      "type": "structure",
+      "members": {
+        "FramerateDenominator": {
+          "shape": "__integerMin1Max1001",
+          "locationName": "framerateDenominator",
+          "documentation": "Specify the denominator of the fraction that represents the framerate for the setting Caption source framerate (CaptionSourceFramerate). Use this setting along with the setting Framerate numerator (framerateNumerator)."
+        },
+        "FramerateNumerator": {
+          "shape": "__integerMin1Max60000",
+          "locationName": "framerateNumerator",
+          "documentation": "Specify the numerator of the fraction that represents the framerate for the setting Caption source framerate (CaptionSourceFramerate). Use this setting along with the setting Framerate denominator (framerateDenominator)."
+        }
+      },
+      "documentation": "Ignore this setting unless your input captions format is SCC. To have the service compensate for differing framerates between your input captions and input video, specify the framerate of the captions file. Specify this value as a fraction, using the settings Framerate numerator (framerateNumerator) and Framerate denominator (framerateDenominator). For example, you might specify 24 / 1 for 24 fps, 25 / 1 for 25 fps, 24000 / 1001 for 23.976 fps, or 30000 / 1001 for 29.97 fps."
+    },
     "CaptionSourceSettings": {
       "type": "structure",
       "members": {
@@ -4046,6 +4062,11 @@
           "shape": "FileSourceConvert608To708",
           "locationName": "convert608To708",
           "documentation": "Specify whether this set of input captions appears in your outputs in both 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes the captions data in two ways: it passes the 608 data through using the 608 compatibility bytes fields of the 708 wrapper, and it also translates the 608 data into 708."
+        },
+        "Framerate": {
+          "shape": "CaptionSourceFramerate",
+          "locationName": "framerate",
+          "documentation": "Ignore this setting unless your input captions format is SCC. To have the service compensate for differing framerates between your input captions and input video, specify the framerate of the captions file. Specify this value as a fraction, using the settings Framerate numerator (framerateNumerator) and Framerate denominator (framerateDenominator). For example, you might specify 24 / 1 for 24 fps, 25 / 1 for 25 fps, 24000 / 1001 for 23.976 fps, or 30000 / 1001 for 29.97 fps."
         },
         "SourceFile": {
           "shape": "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
@@ -9722,6 +9743,11 @@
       "type": "integer",
       "min": 1,
       "max": 6
+    },
+    "__integerMin1Max60000": {
+      "type": "integer",
+      "min": 1,
+      "max": 60000
     },
     "__integerMin1Max64": {
       "type": "integer",

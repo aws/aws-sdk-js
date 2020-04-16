@@ -877,11 +877,11 @@ declare class SageMaker extends Service {
    */
   renderUiTemplate(callback?: (err: AWSError, data: SageMaker.Types.RenderUiTemplateResponse) => void): Request<SageMaker.Types.RenderUiTemplateResponse, AWSError>;
   /**
-   * Finds Amazon SageMaker resources that match a search query. Matching resource objects are returned as a list of SearchResult objects in the response. You can sort the search results by any resource property in a ascending or descending order. You can query against the following value types: numeric, text, Boolean, and timestamp.
+   * Finds Amazon SageMaker resources that match a search query. Matching resources are returned as a list of SearchRecord objects in the response. You can sort the search results by any resource property in a ascending or descending order. You can query against the following value types: numeric, text, Boolean, and timestamp.
    */
   search(params: SageMaker.Types.SearchRequest, callback?: (err: AWSError, data: SageMaker.Types.SearchResponse) => void): Request<SageMaker.Types.SearchResponse, AWSError>;
   /**
-   * Finds Amazon SageMaker resources that match a search query. Matching resource objects are returned as a list of SearchResult objects in the response. You can sort the search results by any resource property in a ascending or descending order. You can query against the following value types: numeric, text, Boolean, and timestamp.
+   * Finds Amazon SageMaker resources that match a search query. Matching resources are returned as a list of SearchRecord objects in the response. You can sort the search results by any resource property in a ascending or descending order. You can query against the following value types: numeric, text, Boolean, and timestamp.
    */
   search(callback?: (err: AWSError, data: SageMaker.Types.SearchResponse) => void): Request<SageMaker.Types.SearchResponse, AWSError>;
   /**
@@ -2103,6 +2103,9 @@ declare namespace SageMaker {
      * The name of your flow definition.
      */
     FlowDefinitionName: FlowDefinitionName;
+    /**
+     * Container for configuring the source of human task requests. Use to specify if Amazon Rekognition or Amazon Textract is used as an integration source.
+     */
     HumanLoopRequestSource?: HumanLoopRequestSource;
     /**
      * An object containing information about the events that trigger a human workflow.
@@ -3550,6 +3553,9 @@ declare namespace SageMaker {
      * The timestamp when the flow definition was created.
      */
     CreationTime: Timestamp;
+    /**
+     * Container for configuring the source of human task requests. Used to specify if Amazon Rekognition or Amazon Textract is used as an integration source.
+     */
     HumanLoopRequestSource?: HumanLoopRequestSource;
     /**
      * An object containing information about what triggers a human review workflow.
@@ -4764,15 +4770,15 @@ declare namespace SageMaker {
   export type FileSystemType = "EFS"|"FSxLustre"|string;
   export interface Filter {
     /**
-     * A property name. For example, TrainingJobName. For the list of valid property names returned in a search result for each supported resource, see TrainingJob properties. You must specify a valid property name for the resource.
+     * A resource property name. For example, TrainingJobName. For valid property names, see SearchRecord. You must specify a valid property for the resource.
      */
     Name: ResourcePropertyName;
     /**
-     * A Boolean binary operator that is used to evaluate the filter. The operator field contains one of the following values:  Equals  The specified resource in Name equals the specified Value.  NotEquals  The specified resource in Name does not equal the specified Value.  GreaterThan  The specified resource in Name is greater than the specified Value. Not supported for text-based properties.  GreaterThanOrEqualTo  The specified resource in Name is greater than or equal to the specified Value. Not supported for text-based properties.  LessThan  The specified resource in Name is less than the specified Value. Not supported for text-based properties.  LessThanOrEqualTo  The specified resource in Name is less than or equal to the specified Value. Not supported for text-based properties.  Contains  Only supported for text-based properties. The word-list of the property contains the specified Value. A SearchExpression can include only one Contains operator.   If you have specified a filter Value, the default is Equals.
+     * A Boolean binary operator that is used to evaluate the filter. The operator field contains one of the following values:  Equals  The value of Name equals Value.  NotEquals  The value of Name doesn't equal Value.  GreaterThan  The value of Name is greater than Value. Not supported for text properties.  GreaterThanOrEqualTo  The value of Name is greater than or equal to Value. Not supported for text properties.  LessThan  The value of Name is less than Value. Not supported for text properties.  LessThanOrEqualTo  The value of Name is less than or equal to Value. Not supported for text properties.  Contains  The value of Name contains the string Value. A SearchExpression can include only one Contains operator. Only supported for text properties.  Exists  The Name property exists.  NotExists  The Name property does not exist.  In  The value of Name is one of the comma delimited strings in Value. Only supported for text properties.  
      */
     Operator?: Operator;
     /**
-     * A value used with Resource and Operator to determine if objects satisfy the filter's condition. For numerical properties, Value must be an integer or floating-point decimal. For timestamp properties, Value must be an ISO 8601 date-time string of the following format: YYYY-mm-dd'T'HH:MM:SS.
+     * A value used with Name and Operator to determine which resources satisfy the filter's condition. For numerical properties, Value must be an integer or floating-point decimal. For timestamp properties, Value must be an ISO 8601 date-time string of the following format: YYYY-mm-dd'T'HH:MM:SS.
      */
     Value?: FilterValue;
   }
@@ -4851,11 +4857,11 @@ declare namespace SageMaker {
   export type FlowDefinitionTaskKeywords = FlowDefinitionTaskKeyword[];
   export type FlowDefinitionTaskTimeLimitInSeconds = number;
   export type FlowDefinitionTaskTitle = string;
-  export type Framework = "TENSORFLOW"|"KERAS"|"MXNET"|"ONNX"|"PYTORCH"|"XGBOOST"|string;
+  export type Framework = "TENSORFLOW"|"KERAS"|"MXNET"|"ONNX"|"PYTORCH"|"XGBOOST"|"TFLITE"|string;
   export type GenerateCandidateDefinitionsOnly = boolean;
   export interface GetSearchSuggestionsRequest {
     /**
-     * The name of the Amazon SageMaker resource to Search for.
+     * The name of the Amazon SageMaker resource to search for.
      */
     Resource: ResourceType;
     /**
@@ -7544,6 +7550,78 @@ declare namespace SageMaker {
   export type ProcessingInputs = ProcessingInput[];
   export type ProcessingInstanceCount = number;
   export type ProcessingInstanceType = "ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.8xlarge"|"ml.r5.12xlarge"|"ml.r5.16xlarge"|"ml.r5.24xlarge"|string;
+  export interface ProcessingJob {
+    /**
+     * For each input, data is downloaded from S3 into the processing container before the processing job begins running if "S3InputMode" is set to File.
+     */
+    ProcessingInputs?: ProcessingInputs;
+    ProcessingOutputConfig?: ProcessingOutputConfig;
+    /**
+     * The name of the processing job.
+     */
+    ProcessingJobName?: ProcessingJobName;
+    ProcessingResources?: ProcessingResources;
+    StoppingCondition?: ProcessingStoppingCondition;
+    AppSpecification?: AppSpecification;
+    /**
+     * Sets the environment variables in the Docker container.
+     */
+    Environment?: ProcessingEnvironmentMap;
+    NetworkConfig?: NetworkConfig;
+    /**
+     * The ARN of the role used to create the processing job.
+     */
+    RoleArn?: RoleArn;
+    ExperimentConfig?: ExperimentConfig;
+    /**
+     * The ARN of the processing job.
+     */
+    ProcessingJobArn?: ProcessingJobArn;
+    /**
+     * The status of the processing job.
+     */
+    ProcessingJobStatus?: ProcessingJobStatus;
+    /**
+     * A string, up to one KB in size, that contains metadata from the processing container when the processing job exits.
+     */
+    ExitMessage?: ExitMessage;
+    /**
+     * A string, up to one KB in size, that contains the reason a processing job failed, if it failed.
+     */
+    FailureReason?: FailureReason;
+    /**
+     * The time that the processing job ended.
+     */
+    ProcessingEndTime?: Timestamp;
+    /**
+     * The time that the processing job started.
+     */
+    ProcessingStartTime?: Timestamp;
+    /**
+     * The time the processing job was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The time the processing job was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The ARN of a monitoring schedule for an endpoint associated with this processing job.
+     */
+    MonitoringScheduleArn?: MonitoringScheduleArn;
+    /**
+     * The Amazon Resource Name (ARN) of the AutoML job associated with this processing job.
+     */
+    AutoMLJobArn?: AutoMLJobArn;
+    /**
+     * The ARN of the training job associated with this processing job.
+     */
+    TrainingJobArn?: TrainingJobArn;
+    /**
+     * An array of key-value pairs. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.
+     */
+    Tags?: TagList;
+  }
   export type ProcessingJobArn = string;
   export type ProcessingJobName = string;
   export type ProcessingJobStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped"|string;
@@ -7628,7 +7706,7 @@ declare namespace SageMaker {
      */
     S3DataType: ProcessingS3DataType;
     /**
-     * Wether to use File or Pipe input mode. In File mode, Amazon SageMaker copies the data from the input source onto the local Amazon Elastic Block Store (Amazon EBS) volumes before starting your training algorithm. This is the most commonly used input mode. In Pipe mode, Amazon SageMaker streams input data from the source directly to your algorithm without using the EBS volume.
+     * Whether to use File or Pipe input mode. In File mode, Amazon SageMaker copies the data from the input source onto the local Amazon Elastic Block Store (Amazon EBS) volumes before starting your training algorithm. This is the most commonly used input mode. In Pipe mode, Amazon SageMaker streams input data from the source directly to your algorithm without using the EBS volume.
      */
     S3InputMode: ProcessingS3InputMode;
     /**
@@ -7636,7 +7714,7 @@ declare namespace SageMaker {
      */
     S3DataDistributionType?: ProcessingS3DataDistributionType;
     /**
-     * Whether to use Gzip compresion for Amazon S3 storage.
+     * Whether to use Gzip compression for Amazon S3 storage.
      */
     S3CompressionType?: ProcessingS3CompressionType;
   }
@@ -7899,19 +7977,19 @@ declare namespace SageMaker {
   export type SearchExpressionList = SearchExpression[];
   export interface SearchRecord {
     /**
-     * A TrainingJob object that is returned as part of a Search request.
+     * The properties of a training job.
      */
     TrainingJob?: TrainingJob;
     /**
-     * A summary of the properties of an experiment.
+     * The properties of an experiment.
      */
     Experiment?: Experiment;
     /**
-     * A summary of the properties of a trial.
+     * The properties of a trial.
      */
     Trial?: Trial;
     /**
-     * A summary of the properties of a trial component.
+     * The properties of a trial component.
      */
     TrialComponent?: TrialComponent;
   }
@@ -7921,7 +7999,7 @@ declare namespace SageMaker {
      */
     Resource: ResourceType;
     /**
-     * A Boolean conditional statement. Resource objects must satisfy this condition to be included in search results. You must provide at least one subexpression, filter, or nested filter. The maximum number of recursive SubExpressions, NestedFilters, and Filters that can be included in a SearchExpression object is 50.
+     * A Boolean conditional statement. Resources must satisfy this condition to be included in search results. You must provide at least one subexpression, filter, or nested filter. The maximum number of recursive SubExpressions, NestedFilters, and Filters that can be included in a SearchExpression object is 50.
      */
     SearchExpression?: SearchExpression;
     /**
@@ -7933,17 +8011,17 @@ declare namespace SageMaker {
      */
     SortOrder?: SearchSortOrder;
     /**
-     * If more than MaxResults resource objects match the specified SearchExpression, the SearchResponse includes a NextToken. The NextToken can be passed to the next SearchRequest to continue retrieving results for the specified SearchExpression and Sort parameters.
+     * If more than MaxResults resources match the specified SearchExpression, the response includes a NextToken. The NextToken can be passed to the next SearchRequest to continue retrieving results.
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of results to return in a SearchResponse.
+     * The maximum number of results to return.
      */
     MaxResults?: MaxResults;
   }
   export interface SearchResponse {
     /**
-     * A list of SearchResult objects.
+     * A list of SearchRecord objects.
      */
     Results?: SearchResultsList;
     /**
@@ -8192,7 +8270,7 @@ declare namespace SageMaker {
   export type Timestamp = Date;
   export type TrainingInputMode = "Pipe"|"File"|string;
   export type TrainingInstanceCount = number;
-  export type TrainingInstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|string;
+  export type TrainingInstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5n.xlarge"|"ml.c5n.2xlarge"|"ml.c5n.4xlarge"|"ml.c5n.9xlarge"|"ml.c5n.18xlarge"|string;
   export type TrainingInstanceTypes = TrainingInstanceType[];
   export interface TrainingJob {
     /**
@@ -8627,6 +8705,9 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of the trial component.
      */
     TrialComponentArn?: TrialComponentArn;
+    /**
+     * The Amazon Resource Name (ARN) and job type of the source of the component.
+     */
     Source?: TrialComponentSource;
     Status?: TrialComponentStatus;
     /**
@@ -8664,7 +8745,7 @@ declare namespace SageMaker {
      */
     Metrics?: TrialComponentMetricSummaries;
     /**
-     * The source of the trial component.&gt;
+     * Details of the source of the component.
      */
     SourceDetail?: TrialComponentSourceDetail;
     /**
@@ -8741,7 +8822,7 @@ declare namespace SageMaker {
     NumberValue?: DoubleParameterValue;
   }
   export type TrialComponentParameters = {[key: string]: TrialComponentParameterValue};
-  export type TrialComponentPrimaryStatus = "InProgress"|"Completed"|"Failed"|string;
+  export type TrialComponentPrimaryStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped"|string;
   export type TrialComponentSimpleSummaries = TrialComponentSimpleSummary[];
   export interface TrialComponentSimpleSummary {
     /**
@@ -8761,7 +8842,7 @@ declare namespace SageMaker {
   }
   export interface TrialComponentSource {
     /**
-     * The Amazon Resource Name (ARN) of the source.
+     * The source ARN.
      */
     SourceArn: TrialComponentSourceArn;
     /**
@@ -8775,7 +8856,14 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of the source.
      */
     SourceArn?: TrialComponentSourceArn;
+    /**
+     * Information about a training job that's the source of a trial component.
+     */
     TrainingJob?: TrainingJob;
+    /**
+     * Information about a processing job that's the source of a trial component.
+     */
+    ProcessingJob?: ProcessingJob;
   }
   export interface TrialComponentStatus {
     /**

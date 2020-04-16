@@ -99,10 +99,16 @@
           "shape": "DBInstanceNotFoundFault"
         },
         {
+          "shape": "DBClusterNotFoundFault"
+        },
+        {
           "shape": "DBSnapshotNotFoundFault"
         },
         {
-          "shape": "DBClusterNotFoundFault"
+          "shape": "DBProxyNotFoundFault"
+        },
+        {
+          "shape": "DBProxyTargetGroupNotFoundFault"
         }
       ],
       "documentation": "<p>Adds metadata tags to an Amazon RDS resource. These tags can also be used with cost allocation reporting to track cost associated with Amazon RDS resources, or used in a Condition statement in an IAM policy for Amazon RDS.</p> <p>For an overview on tagging Amazon RDS resources, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html\">Tagging Amazon RDS Resources</a>.</p>"
@@ -2165,6 +2171,12 @@
         },
         {
           "shape": "DBClusterNotFoundFault"
+        },
+        {
+          "shape": "DBProxyNotFoundFault"
+        },
+        {
+          "shape": "DBProxyTargetGroupNotFoundFault"
         }
       ],
       "documentation": "<p>Lists all tags on an Amazon RDS resource.</p> <p>For an overview on tagging an Amazon RDS resource, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html\">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide</i>.</p>"
@@ -2898,6 +2910,12 @@
         },
         {
           "shape": "DBClusterNotFoundFault"
+        },
+        {
+          "shape": "DBProxyNotFoundFault"
+        },
+        {
+          "shape": "DBProxyTargetGroupNotFoundFault"
         }
       ],
       "documentation": "<p>Removes metadata tags from an Amazon RDS resource.</p> <p>For an overview on tagging an Amazon RDS resource, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html\">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i> </p>"
@@ -4083,7 +4101,7 @@
         },
         "InitQuery": {
           "shape": "String",
-          "documentation": "<p> One or more SQL statements for the proxy to run when opening each new database connection. Typically used with <code>SET</code> statements to make sure that each connection has identical settings such as time zone and character set. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single <code>SET</code> statement, such as <code>SET x=1, y=2</code>. </p> <p>Default: no initialization query</p>"
+          "documentation": "<p> One or more SQL statements for the proxy to run when opening each new database connection. Typically used with <code>SET</code> statements to make sure that each connection has identical settings such as time zone and character set. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single <code>SET</code> statement, such as <code>SET x=1, y=2</code>. </p> <p> <code>InitQuery</code> is not currently supported for PostgreSQL.</p> <p>Default: no initialization query</p>"
         }
       },
       "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Specifies the settings that control the size and behavior of the connection pool associated with a <code>DBProxyTargetGroup</code>.</p>"
@@ -4109,7 +4127,7 @@
         },
         "InitQuery": {
           "shape": "String",
-          "documentation": "<p> One or more SQL statements for the proxy to run when opening each new database connection. Typically used with <code>SET</code> statements to make sure that each connection has identical settings such as time zone and character set. This setting is empty by default. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single <code>SET</code> statement, such as <code>SET x=1, y=2</code>. </p>"
+          "documentation": "<p> One or more SQL statements for the proxy to run when opening each new database connection. Typically used with <code>SET</code> statements to make sure that each connection has identical settings such as time zone and character set. This setting is empty by default. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single <code>SET</code> statement, such as <code>SET x=1, y=2</code>. </p> <p> <code>InitQuery</code> is not currently supported for PostgreSQL.</p>"
         }
       },
       "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Displays the settings that control the size and behavior of the connection pool associated with a <code>DBProxyTarget</code>.</p>"
@@ -4985,7 +5003,7 @@
         },
         "EngineFamily": {
           "shape": "EngineFamily",
-          "documentation": "<p>The kinds of databases that the proxy can connect to. This value determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database. Currently, this value is always <code>MYSQL</code>. The engine family applies to both RDS MySQL and Aurora MySQL.</p>"
+          "documentation": "<p>The kinds of databases that the proxy can connect to. This value determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database. The engine family applies to MySQL and PostgreSQL for both RDS and Aurora.</p>"
         },
         "Auth": {
           "shape": "UserAuthConfigList",
@@ -6585,7 +6603,7 @@
         },
         "EngineFamily": {
           "shape": "String",
-          "documentation": "<p>Currently, this value is always <code>MYSQL</code>. The engine family applies to both RDS MySQL and Aurora MySQL.</p>"
+          "documentation": "<p>The engine family applies to MySQL and PostgreSQL for both RDS and Aurora.</p>"
         },
         "VpcSecurityGroupIds": {
           "shape": "StringList",
@@ -6644,7 +6662,10 @@
         "incompatible-network",
         "insufficient-resource-limits",
         "creating",
-        "deleting"
+        "deleting",
+        "suspended",
+        "suspending",
+        "reactivating"
       ]
     },
     "DBProxyTarget": {
@@ -6673,6 +6694,10 @@
         "Type": {
           "shape": "TargetType",
           "documentation": "<p>Specifies the kind of database, such as an RDS DB instance or an Aurora DB cluster, that the target represents.</p>"
+        },
+        "TargetHealth": {
+          "shape": "TargetHealth",
+          "documentation": "<p>Information about the connection health of the RDS Proxy target.</p>"
         }
       },
       "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Contains the details for an RDS Proxy target. It represents an RDS DB instance or Aurora DB cluster that the proxy can connect to. One or more targets are associated with an RDS Proxy target group.</p> <p>This data type is used as a response element in the <code>DescribeDBProxyTargets</code> action.</p>"
@@ -8670,7 +8695,8 @@
     "EngineFamily": {
       "type": "string",
       "enum": [
-        "MYSQL"
+        "MYSQL",
+        "POSTGRESQL"
       ]
     },
     "EngineModeList": {
@@ -8850,7 +8876,7 @@
         },
         "ExportOnly": {
           "shape": "StringList",
-          "documentation": "<p>The data exported from the snapshot. Valid values are the following:</p> <ul> <li> <p> <code>database</code> - Export all the data of the snapshot.</p> </li> <li> <p> <code>database.table [table-name]</code> - Export a table of the snapshot.</p> </li> <li> <p> <code>database.schema [schema-name]</code> - Export a database schema of the snapshot. This value isn't valid for RDS for MySQL, RDS for MariaDB, or Aurora MySQL.</p> </li> <li> <p> <code>database.schema.table [table-name]</code> - Export a table of the database schema. This value isn't valid for RDS for MySQL, RDS for MariaDB, or Aurora MySQL.</p> </li> </ul>"
+          "documentation": "<p>The data exported from the snapshot. Valid values are the following:</p> <ul> <li> <p> <code>database</code> - Export all the data from a specified database.</p> </li> <li> <p> <code>database.table</code> <i>table-name</i> - Export a table of the snapshot. This format is valid only for RDS for MySQL, RDS for MariaDB, and Aurora MySQL.</p> </li> <li> <p> <code>database.schema</code> <i>schema-name</i> - Export a database schema of the snapshot. This format is valid only for RDS for PostgreSQL and Aurora PostgreSQL.</p> </li> <li> <p> <code>database.schema.table</code> <i>table-name</i> - Export a table of the database schema. This format is valid only for RDS for PostgreSQL and Aurora PostgreSQL.</p> </li> </ul>"
         },
         "SnapshotTime": {
           "shape": "TStamp",
@@ -12354,7 +12380,7 @@
         },
         "ExportOnly": {
           "shape": "StringList",
-          "documentation": "<p>The data to be exported from the snapshot. If this parameter is not provided, all the snapshot data is exported. Valid values are the following:</p> <ul> <li> <p> <code>database</code> - Export all the data of the snapshot.</p> </li> <li> <p> <code>database.table [table-name]</code> - Export a table of the snapshot.</p> </li> <li> <p> <code>database.schema [schema-name]</code> - Export a database schema of the snapshot. This value isn't valid for RDS for MySQL, RDS for MariaDB, or Aurora MySQL.</p> </li> <li> <p> <code>database.schema.table [table-name]</code> - Export a table of the database schema. This value isn't valid for RDS for MySQL, RDS for MariaDB, or Aurora MySQL.</p> </li> </ul>"
+          "documentation": "<p>The data to be exported from the snapshot. If this parameter is not provided, all the snapshot data is exported. Valid values are the following:</p> <ul> <li> <p> <code>database</code> - Export all the data from a specified database.</p> </li> <li> <p> <code>database.table</code> <i>table-name</i> - Export a table of the snapshot. This format is valid only for RDS for MySQL, RDS for MariaDB, and Aurora MySQL.</p> </li> <li> <p> <code>database.schema</code> <i>schema-name</i> - Export a database schema of the snapshot. This format is valid only for RDS for PostgreSQL and Aurora PostgreSQL.</p> </li> <li> <p> <code>database.schema.table</code> <i>table-name</i> - Export a table of the database schema. This format is valid only for RDS for PostgreSQL and Aurora PostgreSQL.</p> </li> </ul>"
         }
       }
     },
@@ -12534,11 +12560,46 @@
         "shape": "DBProxyTargetGroup"
       }
     },
+    "TargetHealth": {
+      "type": "structure",
+      "members": {
+        "State": {
+          "shape": "TargetState",
+          "documentation": "<p>The current state of the connection health lifecycle for the RDS Proxy target. The following is a typical lifecycle example for the states of an RDS Proxy target: </p> <p> <code>registering</code> &gt; <code>unavailable</code> &gt; <code>available</code> &gt; <code>unavailable</code> &gt; <code>available</code> </p>"
+        },
+        "Reason": {
+          "shape": "TargetHealthReason",
+          "documentation": "<p>The reason for the current health <code>State</code> of the RDS Proxy target.</p>"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>A description of the health of the RDS Proxy target. If the <code>State</code> is <code>AVAILABLE</code>, a description is not included.</p>"
+        }
+      },
+      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Information about the connection health of an RDS Proxy target.</p>"
+    },
+    "TargetHealthReason": {
+      "type": "string",
+      "enum": [
+        "UNREACHABLE",
+        "CONNECTION_FAILED",
+        "AUTH_FAILURE",
+        "PENDING_PROXY_CAPACITY"
+      ]
+    },
     "TargetList": {
       "type": "list",
       "member": {
         "shape": "DBProxyTarget"
       }
+    },
+    "TargetState": {
+      "type": "string",
+      "enum": [
+        "REGISTERING",
+        "AVAILABLE",
+        "UNAVAILABLE"
+      ]
     },
     "TargetType": {
       "type": "string",

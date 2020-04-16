@@ -3840,7 +3840,7 @@ declare namespace Glue {
     /**
      * The name of the catalog database where the functions are located.
      */
-    DatabaseName: NameString;
+    DatabaseName?: NameString;
     /**
      * An optional function-name pattern string that filters the function definitions returned.
      */

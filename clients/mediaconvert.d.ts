@@ -758,6 +758,16 @@ All burn-in and DVB-Sub font settings must match.
      */
     SourceSettings?: CaptionSourceSettings;
   }
+  export interface CaptionSourceFramerate {
+    /**
+     * Specify the denominator of the fraction that represents the framerate for the setting Caption source framerate (CaptionSourceFramerate). Use this setting along with the setting Framerate numerator (framerateNumerator).
+     */
+    FramerateDenominator?: __integerMin1Max1001;
+    /**
+     * Specify the numerator of the fraction that represents the framerate for the setting Caption source framerate (CaptionSourceFramerate). Use this setting along with the setting Framerate denominator (framerateDenominator).
+     */
+    FramerateNumerator?: __integerMin1Max60000;
+  }
   export interface CaptionSourceSettings {
     /**
      * Settings for ancillary captions source.
@@ -1739,6 +1749,10 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
      * Specify whether this set of input captions appears in your outputs in both 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes the captions data in two ways: it passes the 608 data through using the 608 compatibility bytes fields of the 708 wrapper, and it also translates the 608 data into 708.
      */
     Convert608To708?: FileSourceConvert608To708;
+    /**
+     * Ignore this setting unless your input captions format is SCC. To have the service compensate for differing framerates between your input captions and input video, specify the framerate of the captions file. Specify this value as a fraction, using the settings Framerate numerator (framerateNumerator) and Framerate denominator (framerateDenominator). For example, you might specify 24 / 1 for 24 fps, 25 / 1 for 25 fps, 24000 / 1001 for 23.976 fps, or 30000 / 1001 for 29.97 fps.
+     */
+    Framerate?: CaptionSourceFramerate;
     /**
      * External caption file used for loading captions. Accepted file extensions are 'scc', 'ttml', 'dfxp', 'stl', 'srt', 'xml', and 'smi'.
      */
@@ -4650,6 +4664,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   export type __integerMin1Max32 = number;
   export type __integerMin1Max4 = number;
   export type __integerMin1Max6 = number;
+  export type __integerMin1Max60000 = number;
   export type __integerMin1Max64 = number;
   export type __integerMin22050Max48000 = number;
   export type __integerMin24Max60000 = number;

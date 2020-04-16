@@ -1,6 +1,20 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.656.0-->
+<!--LATEST=2.657.0-->
 <!--ENTRYINSERT-->
+
+## 2.657.0
+* feature: AugmentedAIRuntime: This release updates Amazon Augmented AI ListHumanLoops and StartHumanLoop APIs.
+* feature: EC2: Amazon EC2 now supports adding AWS resource tags for placement groups and key pairs, at creation time. The CreatePlacementGroup API will now return placement group information when created successfully. The DeleteKeyPair API now supports deletion by resource ID.
+* feature: Glue: This release adds support for querying GetUserDefinedFunctions API without databaseName.
+* feature: Imagebuilder: This release includes support for additional OS Versions within EC2 Image Builder.
+* feature: IoTEvents: API update that allows users to customize event action payloads, and adds support for Amazon DynamoDB actions.
+* feature: MediaConvert: AWS Elemental MediaConvert now allows you to specify your input captions frame rate for SCC captions sources.
+* feature: MediaTailor: AWS Elemental MediaTailor SDK now allows configuration of Avail Suppression.
+* feature: MigrationHub: Adding ThrottlingException
+* feature: RDS: This release adds support for Amazon RDS Proxy with PostgreSQL compatibility.
+* feature: SageMaker: Amazon SageMaker now supports running training jobs on ml.g4dn and ml.c5n instance types. Amazon SageMaker supports in "IN" operation for Search now.
+* feature: SecurityHub: Added a new BatchUpdateFindings action, which allows customers to update selected information about their findings. Security Hub customers use BatchUpdateFindings to track their investigation into a finding. BatchUpdateFindings is intended to replace the UpdateFindings action, which is deprecated.
+* feature: Snowball: An update to the Snowball Edge Storage Optimized device has been launched. Like the previous version, it has 80 TB of capacity for data transfer. Now it has 40 vCPUs, 80 GiB, and a 1 TiB SATA SSD of memory for EC2 compatible compute. The 80 TB of capacity can also be used for EBS-like volumes for AMIs.
 
 ## 2.656.0
 * bugfix: Monitoring: Set MaxRetriesExceeded on monitoring event only when the final retry fails

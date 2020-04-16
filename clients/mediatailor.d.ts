@@ -69,6 +69,16 @@ declare class MediaTailor extends Service {
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace MediaTailor {
+  export interface AvailSuppression {
+    /**
+     * Sets the mode for avail suppression, also known as ad suppression. By default, ad suppression is off and all ad breaks are filled by MediaTailor with ads or slate.
+     */
+    Mode?: Mode;
+    /**
+     * The avail suppression value is a live edge offset time in HH:MM:SS. MediaTailor won't fill ad breaks on or behind this time in the manifest lookback window. 
+     */
+    Value?: __string;
+  }
   export interface CdnConfiguration {
     /**
      * A non-default content delivery network (CDN) to serve ad segments. By default, AWS Elemental MediaTailor uses Amazon CloudFront with default cache settings as its CDN for ad segments. To set up an alternate CDN, create a rule in your CDN for the following origin: ads.mediatailor.&lt;region>.amazonaws.com. Then specify the rule's name in this AdSegmentUrlPrefix. When AWS Elemental MediaTailor serves a manifest, it reports your CDN as the source for ad segments.
@@ -122,6 +132,10 @@ declare namespace MediaTailor {
      * The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing, you can provide a static VAST URL. The maximum length is 25,000 characters.
      */
     AdDecisionServerUrl?: __string;
+    /**
+     * The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.
+     */
+    AvailSuppression?: AvailSuppression;
     /**
      * The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. 
      */
@@ -219,11 +233,16 @@ declare namespace MediaTailor {
     Tags?: __mapOf__string;
   }
   export type OriginManifestType = "SINGLE_PERIOD"|"MULTI_PERIOD"|string;
+  export type Mode = "OFF"|"BEHIND_LIVE_EDGE"|string;
   export interface PlaybackConfiguration {
     /**
      * The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing, you can provide a static VAST URL. The maximum length is 25,000 characters.
      */
     AdDecisionServerUrl?: __string;
+    /**
+     * The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.
+     */
+    AvailSuppression?: AvailSuppression;
     /**
      * The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. 
      */
@@ -289,6 +308,10 @@ declare namespace MediaTailor {
      */
     AdDecisionServerUrl?: __string;
     /**
+     * The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.
+     */
+    AvailSuppression?: AvailSuppression;
+    /**
      * The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. 
      */
     CdnConfiguration?: CdnConfiguration;
@@ -330,6 +353,10 @@ declare namespace MediaTailor {
      * The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing, you can provide a static VAST URL. The maximum length is 25,000 characters.
      */
     AdDecisionServerUrl?: __string;
+    /**
+     * The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.
+     */
+    AvailSuppression?: AvailSuppression;
     /**
      * The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. 
      */

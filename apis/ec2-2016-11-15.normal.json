@@ -910,6 +910,9 @@
       "input": {
         "shape": "CreatePlacementGroupRequest"
       },
+      "output": {
+        "shape": "CreatePlacementGroupResult"
+      },
       "documentation": "<p>Creates a placement group in which to launch instances. The strategy of the placement group determines how the instances are organized within the group. </p> <p>A <code>cluster</code> placement group is a logical grouping of instances within a single Availability Zone that benefit from low network latency, high network throughput. A <code>spread</code> placement group places instances on distinct hardware. A <code>partition</code> placement group places groups of instances in different partitions, where instances in one partition do not share the same hardware with instances in another partition.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html\">Placement Groups</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateReservedInstancesListing": {
@@ -1933,7 +1936,7 @@
       "output": {
         "shape": "DeregisterInstanceEventNotificationAttributesResult"
       },
-      "documentation": "<p>Deregisters tag keys to prevent tags that have the specified tag keys from being included in scheduled event notifications for resources in the Region.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-instances-status-check_sched.html#customizing_scheduled_event_notifications\">Customizing Scheduled Event Notifications</a>.</p>"
+      "documentation": "<p>Deregisters tag keys to prevent tags that have the specified tag keys from being included in scheduled event notifications for resources in the Region.</p>"
     },
     "DeregisterTransitGatewayMulticastGroupMembers": {
       "name": "DeregisterTransitGatewayMulticastGroupMembers",
@@ -4889,7 +4892,7 @@
       "output": {
         "shape": "RegisterInstanceEventNotificationAttributesResult"
       },
-      "documentation": "<p>Registers a set of tag keys to include in scheduled event notifications for your resources. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-instances-status-check_sched.html#customizing_scheduled_event_notifications\">Customizing Scheduled Event Notifications</a>.</p> <p>To remove tags, use .</p>"
+      "documentation": "<p>Registers a set of tag keys to include in scheduled event notifications for your resources. </p> <p>To remove tags, use .</p>"
     },
     "RegisterTransitGatewayMulticastGroupMembers": {
       "name": "RegisterTransitGatewayMulticastGroupMembers",
@@ -9760,6 +9763,11 @@
           "shape": "Boolean",
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
+        },
+        "TagSpecifications": {
+          "shape": "TagSpecificationList",
+          "documentation": "<p>The tags to apply to the new key pair.</p>",
+          "locationName": "TagSpecification"
         }
       }
     },
@@ -10187,6 +10195,20 @@
         "PartitionCount": {
           "shape": "Integer",
           "documentation": "<p>The number of partitions. Valid only when <b>Strategy</b> is set to <code>partition</code>.</p>"
+        },
+        "TagSpecifications": {
+          "shape": "TagSpecificationList",
+          "documentation": "<p>The tags to apply to the new placement group.</p>",
+          "locationName": "TagSpecification"
+        }
+      }
+    },
+    "CreatePlacementGroupResult": {
+      "type": "structure",
+      "members": {
+        "PlacementGroup": {
+          "shape": "PlacementGroup",
+          "locationName": "placementGroup"
         }
       }
     },
@@ -11918,13 +11940,14 @@
     },
     "DeleteKeyPairRequest": {
       "type": "structure",
-      "required": [
-        "KeyName"
-      ],
       "members": {
         "KeyName": {
           "shape": "KeyPairName",
           "documentation": "<p>The name of the key pair.</p>"
+        },
+        "KeyPairId": {
+          "shape": "KeyPairId",
+          "documentation": "<p>The ID of the key pair.</p>"
         },
         "DryRun": {
           "shape": "Boolean",
@@ -14527,7 +14550,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>The filters.</p> <ul> <li> <p> <code>instance-id</code> - The ID of the instance.</p> </li> <li> <p> <code>state</code> - The state of the association (<code>associating</code> | <code>associated</code> | <code>disassociating</code> | <code>disassociated</code>).</p> </li> </ul>",
+          "documentation": "<p>The filters.</p> <ul> <li> <p> <code>instance-id</code> - The ID of the instance.</p> </li> <li> <p> <code>state</code> - The state of the association (<code>associating</code> | <code>associated</code> | <code>disassociating</code>).</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -15108,7 +15131,7 @@
       "members": {
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>The filters.</p> <ul> <li> <p> <code>fingerprint</code> - The fingerprint of the key pair.</p> </li> <li> <p> <code>key-name</code> - The name of the key pair.</p> </li> </ul>",
+          "documentation": "<p>The filters.</p> <ul> <li> <p> <code>key-pair-id</code> - The ID of the key pair.</p> </li> <li> <p> <code>fingerprint</code> - The fingerprint of the key pair.</p> </li> <li> <p> <code>key-name</code> - The name of the key pair.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "KeyNames": {
@@ -15799,7 +15822,7 @@
       "members": {
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>The filters.</p> <ul> <li> <p> <code>group-name</code> - The name of the placement group.</p> </li> <li> <p> <code>state</code> - The state of the placement group (<code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code>).</p> </li> <li> <p> <code>strategy</code> - The strategy of the placement group (<code>cluster</code> | <code>spread</code> | <code>partition</code>).</p> </li> </ul>",
+          "documentation": "<p>The filters.</p> <ul> <li> <p> <code>group-name</code> - The name of the placement group.</p> </li> <li> <p> <code>state</code> - The state of the placement group (<code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code>).</p> </li> <li> <p> <code>strategy</code> - The strategy of the placement group (<code>cluster</code> | <code>spread</code> | <code>partition</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources that have a tag with a specific key, regardless of the tag value.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "DryRun": {
@@ -16933,7 +16956,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>The filters.</p> <ul> <li> <p> <code>key</code> - The tag key.</p> </li> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type (<code>customer-gateway</code> | <code>dedicated-host</code> | <code>dhcp-options</code> | <code>elastic-ip</code> | <code>fleet</code> | <code>fpga-image</code> | <code>image</code> | <code>instance</code> | <code>host-reservation</code> | <code>internet-gateway</code> | <code>launch-template</code> | <code>natgateway</code> | <code>network-acl</code> | <code>network-interface</code> | <code>placement-group</code> | <code>reserved-instances</code> | <code>route-table</code> | <code>security-group</code> | <code>snapshot</code> | <code>spot-instances-request</code> | <code>subnet</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-endpoint</code> | <code>vpc-endpoint-service</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of the tag. For example, specify \"tag:Owner\" for the filter name and \"TeamA\" for the filter value to find resources with the tag \"Owner=TeamA\".</p> </li> <li> <p> <code>value</code> - The tag value.</p> </li> </ul>",
+          "documentation": "<p>The filters.</p> <ul> <li> <p> <code>key</code> - The tag key.</p> </li> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type (<code>customer-gateway</code> | <code>dedicated-host</code> | <code>dhcp-options</code> | <code>elastic-ip</code> | <code>fleet</code> | <code>fpga-image</code> | <code>host-reservation</code> | <code>image</code> | <code>instance</code> | <code>internet-gateway</code> | <code>key-pair</code> | <code>launch-template</code> | <code>natgateway</code> | <code>network-acl</code> | <code>network-interface</code> | <code>placement-group</code> | <code>reserved-instances</code> | <code>route-table</code> | <code>security-group</code> | <code>snapshot</code> | <code>spot-instances-request</code> | <code>subnet</code> | <code>volume</code> | <code>vpc</code> | <code>vpc-endpoint</code> | <code>vpc-endpoint-service</code> | <code>vpc-peering-connection</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of the tag. For example, specify \"tag:Owner\" for the filter name and \"TeamA\" for the filter value to find resources with the tag \"Owner=TeamA\".</p> </li> <li> <p> <code>value</code> - The tag value.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -23000,6 +23023,11 @@
           "shape": "Blob",
           "documentation": "<p>The public key. For API calls, the text must be base64-encoded. For command line tools, base64 encoding is performed for you.</p>",
           "locationName": "publicKeyMaterial"
+        },
+        "TagSpecifications": {
+          "shape": "TagSpecificationList",
+          "documentation": "<p>The tags to apply to the imported key pair.</p>",
+          "locationName": "TagSpecification"
         }
       }
     },
@@ -23015,6 +23043,16 @@
           "shape": "String",
           "documentation": "<p>The key pair name you provided.</p>",
           "locationName": "keyName"
+        },
+        "KeyPairId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the resulting key pair.</p>",
+          "locationName": "keyPairId"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags applied to the imported key pair.</p>",
+          "locationName": "tagSet"
         }
       }
     },
@@ -25256,6 +25294,11 @@
           "shape": "String",
           "documentation": "<p>The ID of the key pair.</p>",
           "locationName": "keyPairId"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>Any tags applied to the key pair.</p>",
+          "locationName": "tagSet"
         }
       },
       "documentation": "<p>Describes a key pair.</p>"

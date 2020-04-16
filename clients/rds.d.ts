@@ -1357,7 +1357,7 @@ declare namespace RDS {
      */
     SessionPinningFilters?: StringList;
     /**
-     *  One or more SQL statements for the proxy to run when opening each new database connection. Typically used with SET statements to make sure that each connection has identical settings such as time zone and character set. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single SET statement, such as SET x=1, y=2.  Default: no initialization query
+     *  One or more SQL statements for the proxy to run when opening each new database connection. Typically used with SET statements to make sure that each connection has identical settings such as time zone and character set. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single SET statement, such as SET x=1, y=2.   InitQuery is not currently supported for PostgreSQL. Default: no initialization query
      */
     InitQuery?: String;
   }
@@ -1379,7 +1379,7 @@ declare namespace RDS {
      */
     SessionPinningFilters?: StringList;
     /**
-     *  One or more SQL statements for the proxy to run when opening each new database connection. Typically used with SET statements to make sure that each connection has identical settings such as time zone and character set. This setting is empty by default. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single SET statement, such as SET x=1, y=2. 
+     *  One or more SQL statements for the proxy to run when opening each new database connection. Typically used with SET statements to make sure that each connection has identical settings such as time zone and character set. This setting is empty by default. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single SET statement, such as SET x=1, y=2.   InitQuery is not currently supported for PostgreSQL.
      */
     InitQuery?: String;
   }
@@ -2065,7 +2065,7 @@ declare namespace RDS {
      */
     DBProxyName: String;
     /**
-     * The kinds of databases that the proxy can connect to. This value determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database. Currently, this value is always MYSQL. The engine family applies to both RDS MySQL and Aurora MySQL.
+     * The kinds of databases that the proxy can connect to. This value determines which database network protocol the proxy recognizes when it interprets network traffic to and from the database. The engine family applies to MySQL and PostgreSQL for both RDS and Aurora.
      */
     EngineFamily: EngineFamily;
     /**
@@ -3337,7 +3337,7 @@ declare namespace RDS {
      */
     Status?: DBProxyStatus;
     /**
-     * Currently, this value is always MYSQL. The engine family applies to both RDS MySQL and Aurora MySQL.
+     * The engine family applies to MySQL and PostgreSQL for both RDS and Aurora.
      */
     EngineFamily?: String;
     /**
@@ -3382,7 +3382,7 @@ declare namespace RDS {
     UpdatedDate?: TStamp;
   }
   export type DBProxyList = DBProxy[];
-  export type DBProxyStatus = "available"|"modifying"|"incompatible-network"|"insufficient-resource-limits"|"creating"|"deleting"|string;
+  export type DBProxyStatus = "available"|"modifying"|"incompatible-network"|"insufficient-resource-limits"|"creating"|"deleting"|"suspended"|"suspending"|"reactivating"|string;
   export interface DBProxyTarget {
     /**
      * The Amazon Resource Name (ARN) for the RDS DB instance or Aurora DB cluster.
@@ -3408,6 +3408,10 @@ declare namespace RDS {
      * Specifies the kind of database, such as an RDS DB instance or an Aurora DB cluster, that the target represents.
      */
     Type?: TargetType;
+    /**
+     * Information about the connection health of the RDS Proxy target.
+     */
+    TargetHealth?: TargetHealth;
   }
   export interface DBProxyTargetGroup {
     /**
@@ -4872,7 +4876,7 @@ declare namespace RDS {
      */
     Parameters?: ParametersList;
   }
-  export type EngineFamily = "MYSQL"|string;
+  export type EngineFamily = "MYSQL"|"POSTGRESQL"|string;
   export type EngineModeList = String[];
   export interface Event {
     /**
@@ -4992,7 +4996,7 @@ declare namespace RDS {
      */
     SourceArn?: String;
     /**
-     * The data exported from the snapshot. Valid values are the following:    database - Export all the data of the snapshot.    database.table [table-name] - Export a table of the snapshot.    database.schema [schema-name] - Export a database schema of the snapshot. This value isn't valid for RDS for MySQL, RDS for MariaDB, or Aurora MySQL.    database.schema.table [table-name] - Export a table of the database schema. This value isn't valid for RDS for MySQL, RDS for MariaDB, or Aurora MySQL.  
+     * The data exported from the snapshot. Valid values are the following:    database - Export all the data from a specified database.    database.table table-name - Export a table of the snapshot. This format is valid only for RDS for MySQL, RDS for MariaDB, and Aurora MySQL.    database.schema schema-name - Export a database schema of the snapshot. This format is valid only for RDS for PostgreSQL and Aurora PostgreSQL.    database.schema.table table-name - Export a table of the database schema. This format is valid only for RDS for PostgreSQL and Aurora PostgreSQL.  
      */
     ExportOnly?: StringList;
     /**
@@ -7610,7 +7614,7 @@ declare namespace RDS {
      */
     S3Prefix?: String;
     /**
-     * The data to be exported from the snapshot. If this parameter is not provided, all the snapshot data is exported. Valid values are the following:    database - Export all the data of the snapshot.    database.table [table-name] - Export a table of the snapshot.    database.schema [schema-name] - Export a database schema of the snapshot. This value isn't valid for RDS for MySQL, RDS for MariaDB, or Aurora MySQL.    database.schema.table [table-name] - Export a table of the database schema. This value isn't valid for RDS for MySQL, RDS for MariaDB, or Aurora MySQL.  
+     * The data to be exported from the snapshot. If this parameter is not provided, all the snapshot data is exported. Valid values are the following:    database - Export all the data from a specified database.    database.table table-name - Export a table of the snapshot. This format is valid only for RDS for MySQL, RDS for MariaDB, and Aurora MySQL.    database.schema schema-name - Export a database schema of the snapshot. This format is valid only for RDS for PostgreSQL and Aurora PostgreSQL.    database.schema.table table-name - Export a table of the database schema. This format is valid only for RDS for PostgreSQL and Aurora PostgreSQL.  
      */
     ExportOnly?: StringList;
   }
@@ -7697,7 +7701,23 @@ declare namespace RDS {
     TagList?: TagList;
   }
   export type TargetGroupList = DBProxyTargetGroup[];
+  export interface TargetHealth {
+    /**
+     * The current state of the connection health lifecycle for the RDS Proxy target. The following is a typical lifecycle example for the states of an RDS Proxy target:   registering &gt; unavailable &gt; available &gt; unavailable &gt; available 
+     */
+    State?: TargetState;
+    /**
+     * The reason for the current health State of the RDS Proxy target.
+     */
+    Reason?: TargetHealthReason;
+    /**
+     * A description of the health of the RDS Proxy target. If the State is AVAILABLE, a description is not included.
+     */
+    Description?: String;
+  }
+  export type TargetHealthReason = "UNREACHABLE"|"CONNECTION_FAILED"|"AUTH_FAILURE"|"PENDING_PROXY_CAPACITY"|string;
   export type TargetList = DBProxyTarget[];
+  export type TargetState = "REGISTERING"|"AVAILABLE"|"UNAVAILABLE"|string;
   export type TargetType = "RDS_INSTANCE"|"RDS_SERVERLESS_ENDPOINT"|"TRACKED_CLUSTER"|string;
   export interface Timezone {
     /**

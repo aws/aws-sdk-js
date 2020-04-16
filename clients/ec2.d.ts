@@ -535,11 +535,11 @@ declare class EC2 extends Service {
   /**
    * Creates a placement group in which to launch instances. The strategy of the placement group determines how the instances are organized within the group.  A cluster placement group is a logical grouping of instances within a single Availability Zone that benefit from low network latency, high network throughput. A spread placement group places instances on distinct hardware. A partition placement group places groups of instances in different partitions, where instances in one partition do not share the same hardware with instances in another partition. For more information, see Placement Groups in the Amazon Elastic Compute Cloud User Guide.
    */
-  createPlacementGroup(params: EC2.Types.CreatePlacementGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  createPlacementGroup(params: EC2.Types.CreatePlacementGroupRequest, callback?: (err: AWSError, data: EC2.Types.CreatePlacementGroupResult) => void): Request<EC2.Types.CreatePlacementGroupResult, AWSError>;
   /**
    * Creates a placement group in which to launch instances. The strategy of the placement group determines how the instances are organized within the group.  A cluster placement group is a logical grouping of instances within a single Availability Zone that benefit from low network latency, high network throughput. A spread placement group places instances on distinct hardware. A partition placement group places groups of instances in different partitions, where instances in one partition do not share the same hardware with instances in another partition. For more information, see Placement Groups in the Amazon Elastic Compute Cloud User Guide.
    */
-  createPlacementGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  createPlacementGroup(callback?: (err: AWSError, data: EC2.Types.CreatePlacementGroupResult) => void): Request<EC2.Types.CreatePlacementGroupResult, AWSError>;
   /**
    * Creates a listing for Amazon EC2 Standard Reserved Instances to be sold in the Reserved Instance Marketplace. You can submit one Standard Reserved Instance listing at a time. To get a list of your Standard Reserved Instances, you can use the DescribeReservedInstances operation.  Only Standard Reserved Instances can be sold in the Reserved Instance Marketplace. Convertible Reserved Instances cannot be sold.  The Reserved Instance Marketplace matches sellers who want to resell Standard Reserved Instance capacity that they no longer need with buyers who want to purchase additional capacity. Reserved Instances bought and sold through the Reserved Instance Marketplace work like any other Reserved Instances. To sell your Standard Reserved Instances, you must first register as a seller in the Reserved Instance Marketplace. After completing the registration process, you can create a Reserved Instance Marketplace listing of some or all of your Standard Reserved Instances, and specify the upfront price to receive for them. Your Standard Reserved Instance listings then become available for purchase. To view the details of your Standard Reserved Instance listing, you can use the DescribeReservedInstancesListings operation. For more information, see Reserved Instance Marketplace in the Amazon Elastic Compute Cloud User Guide.
    */
@@ -1157,11 +1157,11 @@ declare class EC2 extends Service {
    */
   deregisterImage(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deregisters tag keys to prevent tags that have the specified tag keys from being included in scheduled event notifications for resources in the Region. For more information, see Customizing Scheduled Event Notifications.
+   * Deregisters tag keys to prevent tags that have the specified tag keys from being included in scheduled event notifications for resources in the Region.
    */
   deregisterInstanceEventNotificationAttributes(params: EC2.Types.DeregisterInstanceEventNotificationAttributesRequest, callback?: (err: AWSError, data: EC2.Types.DeregisterInstanceEventNotificationAttributesResult) => void): Request<EC2.Types.DeregisterInstanceEventNotificationAttributesResult, AWSError>;
   /**
-   * Deregisters tag keys to prevent tags that have the specified tag keys from being included in scheduled event notifications for resources in the Region. For more information, see Customizing Scheduled Event Notifications.
+   * Deregisters tag keys to prevent tags that have the specified tag keys from being included in scheduled event notifications for resources in the Region.
    */
   deregisterInstanceEventNotificationAttributes(callback?: (err: AWSError, data: EC2.Types.DeregisterInstanceEventNotificationAttributesResult) => void): Request<EC2.Types.DeregisterInstanceEventNotificationAttributesResult, AWSError>;
   /**
@@ -2877,11 +2877,11 @@ declare class EC2 extends Service {
    */
   registerImage(callback?: (err: AWSError, data: EC2.Types.RegisterImageResult) => void): Request<EC2.Types.RegisterImageResult, AWSError>;
   /**
-   * Registers a set of tag keys to include in scheduled event notifications for your resources. For more information, see Customizing Scheduled Event Notifications. To remove tags, use .
+   * Registers a set of tag keys to include in scheduled event notifications for your resources.  To remove tags, use .
    */
   registerInstanceEventNotificationAttributes(params: EC2.Types.RegisterInstanceEventNotificationAttributesRequest, callback?: (err: AWSError, data: EC2.Types.RegisterInstanceEventNotificationAttributesResult) => void): Request<EC2.Types.RegisterInstanceEventNotificationAttributesResult, AWSError>;
   /**
-   * Registers a set of tag keys to include in scheduled event notifications for your resources. For more information, see Customizing Scheduled Event Notifications. To remove tags, use .
+   * Registers a set of tag keys to include in scheduled event notifications for your resources.  To remove tags, use .
    */
   registerInstanceEventNotificationAttributes(callback?: (err: AWSError, data: EC2.Types.RegisterInstanceEventNotificationAttributesResult) => void): Request<EC2.Types.RegisterInstanceEventNotificationAttributesResult, AWSError>;
   /**
@@ -6087,6 +6087,10 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * The tags to apply to the new key pair.
+     */
+    TagSpecifications?: TagSpecificationList;
   }
   export interface CreateLaunchTemplateRequest {
     /**
@@ -6383,6 +6387,13 @@ declare namespace EC2 {
      * The number of partitions. Valid only when Strategy is set to partition.
      */
     PartitionCount?: Integer;
+    /**
+     * The tags to apply to the new placement group.
+     */
+    TagSpecifications?: TagSpecificationList;
+  }
+  export interface CreatePlacementGroupResult {
+    PlacementGroup?: PlacementGroup;
   }
   export interface CreateReservedInstancesListingRequest {
     /**
@@ -7531,7 +7542,11 @@ declare namespace EC2 {
     /**
      * The name of the key pair.
      */
-    KeyName: KeyPairName;
+    KeyName?: KeyPairName;
+    /**
+     * The ID of the key pair.
+     */
+    KeyPairId?: KeyPairId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -9239,7 +9254,7 @@ declare namespace EC2 {
      */
     AssociationIds?: AssociationIdList;
     /**
-     * The filters.    instance-id - The ID of the instance.    state - The state of the association (associating | associated | disassociating | disassociated).  
+     * The filters.    instance-id - The ID of the instance.    state - The state of the association (associating | associated | disassociating).  
      */
     Filters?: FilterList;
     /**
@@ -9653,7 +9668,7 @@ declare namespace EC2 {
   }
   export interface DescribeKeyPairsRequest {
     /**
-     * The filters.    fingerprint - The fingerprint of the key pair.    key-name - The name of the key pair.  
+     * The filters.    key-pair-id - The ID of the key pair.    fingerprint - The fingerprint of the key pair.    key-name - The name of the key pair.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.  
      */
     Filters?: FilterList;
     /**
@@ -10151,7 +10166,7 @@ declare namespace EC2 {
   }
   export interface DescribePlacementGroupsRequest {
     /**
-     * The filters.    group-name - The name of the placement group.    state - The state of the placement group (pending | available | deleting | deleted).    strategy - The strategy of the placement group (cluster | spread | partition).  
+     * The filters.    group-name - The name of the placement group.    state - The state of the placement group (pending | available | deleting | deleted).    strategy - The strategy of the placement group (cluster | spread | partition).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources that have a tag with a specific key, regardless of the tag value.  
      */
     Filters?: FilterList;
     /**
@@ -10936,7 +10951,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The filters.    key - The tag key.    resource-id - The ID of the resource.    resource-type - The resource type (customer-gateway | dedicated-host | dhcp-options | elastic-ip | fleet | fpga-image | image | instance | host-reservation | internet-gateway | launch-template | natgateway | network-acl | network-interface | placement-group | reserved-instances | route-table | security-group | snapshot | spot-instances-request | subnet | volume | vpc | vpc-endpoint | vpc-endpoint-service | vpc-peering-connection | vpn-connection | vpn-gateway).    tag:&lt;key&gt; - The key/value combination of the tag. For example, specify "tag:Owner" for the filter name and "TeamA" for the filter value to find resources with the tag "Owner=TeamA".    value - The tag value.  
+     * The filters.    key - The tag key.    resource-id - The ID of the resource.    resource-type - The resource type (customer-gateway | dedicated-host | dhcp-options | elastic-ip | fleet | fpga-image | host-reservation | image | instance | internet-gateway | key-pair | launch-template | natgateway | network-acl | network-interface | placement-group | reserved-instances | route-table | security-group | snapshot | spot-instances-request | subnet | volume | vpc | vpc-endpoint | vpc-endpoint-service | vpc-peering-connection | vpn-connection | vpn-gateway).    tag:&lt;key&gt; - The key/value combination of the tag. For example, specify "tag:Owner" for the filter name and "TeamA" for the filter value to find resources with the tag "Owner=TeamA".    value - The tag value.  
      */
     Filters?: FilterList;
     /**
@@ -14733,6 +14748,10 @@ declare namespace EC2 {
      * The public key. For API calls, the text must be base64-encoded. For command line tools, base64 encoding is performed for you.
      */
     PublicKeyMaterial: _Blob;
+    /**
+     * The tags to apply to the imported key pair.
+     */
+    TagSpecifications?: TagSpecificationList;
   }
   export interface ImportKeyPairResult {
     /**
@@ -14743,6 +14762,14 @@ declare namespace EC2 {
      * The key pair name you provided.
      */
     KeyName?: String;
+    /**
+     * The ID of the resulting key pair.
+     */
+    KeyPairId?: String;
+    /**
+     * The tags applied to the imported key pair.
+     */
+    Tags?: TagList;
   }
   export interface ImportSnapshotRequest {
     /**
@@ -15909,6 +15936,10 @@ declare namespace EC2 {
      * The ID of the key pair.
      */
     KeyPairId?: String;
+    /**
+     * Any tags applied to the key pair.
+     */
+    Tags?: TagList;
   }
   export type KeyPairId = string;
   export type KeyPairIdStringList = KeyPairId[];
