@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.657.0-->
+<!--LATEST=2.658.0-->
 <!--ENTRYINSERT-->
+
+## 2.658.0
+* feature: FraudDetector: Added support for a new rule engine execution mode. Customers will be able to configure their detector versions to evaluate all rules and return outcomes from all 'matched' rules in the GetPrediction API response. Added support for deleting Detectors (DeleteDetector) and Rule Versions (DeleteRuleVersion).
 
 ## 2.657.0
 * feature: AugmentedAIRuntime: This release updates Amazon Augmented AI ListHumanLoops and StartHumanLoop APIs.

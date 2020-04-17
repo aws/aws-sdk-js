@@ -107,6 +107,9 @@
           "shape": "ValidationException"
         },
         {
+          "shape": "ResourceNotFoundException"
+        },
+        {
           "shape": "InternalServerException"
         },
         {
@@ -165,6 +168,34 @@
       ],
       "documentation": "<p>Creates a variable.</p>"
     },
+    "DeleteDetector": {
+      "name": "DeleteDetector",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteDetectorRequest"
+      },
+      "output": {
+        "shape": "DeleteDetectorResult"
+      },
+      "errors": [
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Deletes the detector. Before deleting a detector, you must first delete all detector versions and rule versions associated with the detector.</p>"
+    },
     "DeleteDetectorVersion": {
       "name": "DeleteDetectorVersion",
       "http": {
@@ -189,9 +220,12 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ConflictException"
         }
       ],
-      "documentation": "<p>Deletes the detector version.</p>"
+      "documentation": "<p>Deletes the detector version. You cannot delete detector versions that are in <code>ACTIVE</code> status.</p>"
     },
     "DeleteEvent": {
       "name": "DeleteEvent",
@@ -214,6 +248,34 @@
         }
       ],
       "documentation": "<p>Deletes the specified event.</p>"
+    },
+    "DeleteRuleVersion": {
+      "name": "DeleteRuleVersion",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteRuleVersionRequest"
+      },
+      "output": {
+        "shape": "DeleteRuleVersionResult"
+      },
+      "errors": [
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Deletes the rule version. You cannot delete a rule version if it is used by an <code>ACTIVE</code> or <code>INACTIVE</code> detector version.</p>"
     },
     "DescribeDetector": {
       "name": "DescribeDetector",
@@ -938,6 +1000,10 @@
         "modelVersions": {
           "shape": "ListOfModelVersions",
           "documentation": "<p>The model versions to include in the detector version.</p>"
+        },
+        "ruleExecutionMode": {
+          "shape": "RuleExecutionMode",
+          "documentation": "<p>The rule execution mode for the rules included in the detector version.</p> <p>You can define and edit the rule mode at the detector version level, when it is in draft status.</p> <p>If you specify <code>FIRST_MATCHED</code>, Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at the first matched rule. Amazon Fraud dectector then provides the outcomes for that single rule.</p> <p>If you specifiy <code>ALL_MATCHED</code>, Amazon Fraud Detector evaluates all rules and returns the outcomes for all matched rules. </p> <p>The default behavior is <code>FIRST_MATCHED</code>.</p>"
         }
       }
     },
@@ -1110,6 +1176,22 @@
         "BOOLEAN"
       ]
     },
+    "DeleteDetectorRequest": {
+      "type": "structure",
+      "required": [
+        "detectorId"
+      ],
+      "members": {
+        "detectorId": {
+          "shape": "identifier",
+          "documentation": "<p>The ID of the detector to delete.</p>"
+        }
+      }
+    },
+    "DeleteDetectorResult": {
+      "type": "structure",
+      "members": {}
+    },
     "DeleteDetectorVersionRequest": {
       "type": "structure",
       "required": [
@@ -1144,6 +1226,32 @@
       }
     },
     "DeleteEventResult": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeleteRuleVersionRequest": {
+      "type": "structure",
+      "required": [
+        "detectorId",
+        "ruleId",
+        "ruleVersion"
+      ],
+      "members": {
+        "detectorId": {
+          "shape": "identifier",
+          "documentation": "<p>The ID of the detector that includes the rule version to delete.</p>"
+        },
+        "ruleId": {
+          "shape": "identifier",
+          "documentation": "<p>The rule ID of the rule version to delete.</p>"
+        },
+        "ruleVersion": {
+          "shape": "nonEmptyString",
+          "documentation": "<p>The rule version to delete.</p>"
+        }
+      }
+    },
+    "DeleteRuleVersionResult": {
       "type": "structure",
       "members": {}
     },
@@ -1422,6 +1530,10 @@
         "createdTime": {
           "shape": "time",
           "documentation": "<p>The timestamp when the detector version was created. </p>"
+        },
+        "ruleExecutionMode": {
+          "shape": "RuleExecutionMode",
+          "documentation": "<p>The execution mode of the rule in the dectector</p> <p> <code>FIRST_MATCHED</code> indicates that Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at the first matched rule. Amazon Fraud dectector then provides the outcomes for that single rule.</p> <p> <code>ALL_MATCHED</code> indicates that Amazon Fraud Detector evaluates all rules and returns the outcomes for all matched rules. You can define and edit the rule mode at the detector version level, when it is in draft status.</p>"
         }
       }
     },
@@ -1635,6 +1747,10 @@
         "modelScores": {
           "shape": "ListOfModelScores",
           "documentation": "<p>The model scores for models used in the detector version.</p>"
+        },
+        "ruleResults": {
+          "shape": "ListOfRuleResults",
+          "documentation": "<p>The rule results in the prediction.</p>"
         }
       }
     },
@@ -1764,6 +1880,12 @@
       "type": "list",
       "member": {
         "shape": "ModelVersion"
+      }
+    },
+    "ListOfRuleResults": {
+      "type": "list",
+      "member": {
+        "shape": "RuleResult"
       }
     },
     "ListOfStrings": {
@@ -2328,11 +2450,32 @@
         "shape": "RuleDetail"
       }
     },
+    "RuleExecutionMode": {
+      "type": "string",
+      "enum": [
+        "ALL_MATCHED",
+        "FIRST_MATCHED"
+      ]
+    },
     "RuleList": {
       "type": "list",
       "member": {
         "shape": "Rule"
       }
+    },
+    "RuleResult": {
+      "type": "structure",
+      "members": {
+        "ruleId": {
+          "shape": "string",
+          "documentation": "<p>The rule ID that was matched, based on the rule execution mode.</p>"
+        },
+        "outcomes": {
+          "shape": "ListOfStrings",
+          "documentation": "<p>The outcomes of the matched rule, based on the rule execution mode.</p>"
+        }
+      },
+      "documentation": "<p>The rule results.</p>"
     },
     "RulesMaxResults": {
       "type": "integer",
@@ -2416,6 +2559,10 @@
         "modelVersions": {
           "shape": "ListOfModelVersions",
           "documentation": "<p>The model versions to include in the detector version.</p>"
+        },
+        "ruleExecutionMode": {
+          "shape": "RuleExecutionMode",
+          "documentation": "<p>The rule execution mode to add to the detector.</p> <p>If you specify <code>FIRST_MATCHED</code>, Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at the first matched rule. Amazon Fraud dectector then provides the outcomes for that single rule.</p> <p>If you specifiy <code>ALL_MATCHED</code>, Amazon Fraud Detector evaluates all rules and returns the outcomes for all matched rules. You can define and edit the rule mode at the detector version level, when it is in draft status.</p> <p>The default behavior is <code>FIRST_MATCHED</code>.</p>"
         }
       }
     },
@@ -2717,7 +2864,7 @@
       "type": "string",
       "max": 512,
       "min": 1,
-      "pattern": "^s3:\\/\\/[^\\s]+$"
+      "pattern": "^s3:\\/\\/(.+)$"
     },
     "string": {
       "type": "string"
