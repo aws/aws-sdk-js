@@ -219,5 +219,6 @@ module.exports = {
   EBS: require('./ebs'),
   KinesisVideoSignalingChannels: require('./kinesisvideosignalingchannels'),
   Detective: require('./detective'),
-  CodeStarconnections: require('./codestarconnections')
+  CodeStarconnections: require('./codestarconnections'),
+  Synthetics: require('./synthetics')
 };

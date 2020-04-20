@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.658.0-->
+<!--LATEST=2.659.0-->
 <!--ENTRYINSERT-->
+
+## 2.659.0
+* feature: ApiGatewayV2: You can now export an OpenAPI 3.0 compliant API definition file for Amazon API Gateway HTTP APIs using the Export API.
+* feature: CostExplorer: Cost Categories API is now General Available with new dimensions and operations support. You can map costs by account name, service, and charge type dimensions as well as use contains, starts with, and ends with operations. Cost Categories can also be used in RI and SP coverage reports.
+* feature: Glue: Added a new ConnectionType "KAFKA" and a ConnectionProperty "KAFKA_BOOTSTRAP_SERVERS" to support Kafka connection.
+* feature: IoTEvents: API update that allows users to add AWS Iot SiteWise actions while creating Detector Model in AWS Iot Events
+* feature: Synthetics: Introducing CloudWatch Synthetics. This is the first public release of CloudWatch Synthetics.
 
 ## 2.658.0
 * feature: FraudDetector: Added support for a new rule engine execution mode. Customers will be able to configure their detector versions to evaluate all rules and return outcomes from all 'matched' rules in the GetPrediction API response. Added support for deleting Detectors (DeleteDetector) and Rule Versions (DeleteRuleVersion).

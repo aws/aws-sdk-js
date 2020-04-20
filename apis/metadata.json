@@ -865,5 +865,8 @@
   "codestarconnections": {
     "prefix": "codestar-connections",
     "name": "CodeStarconnections"
+  },
+  "synthetics": {
+    "name": "Synthetics"
   }
 }

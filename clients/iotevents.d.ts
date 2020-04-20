@@ -139,6 +139,14 @@ declare class IoTEvents extends Service {
    * Updates an input.
    */
   updateInput(callback?: (err: AWSError, data: IoTEvents.Types.UpdateInputResponse) => void): Request<IoTEvents.Types.UpdateInputResponse, AWSError>;
+  /**
+   * 
+   */
+  verifyResourcesExistForTagris(params: IoTEvents.Types.TagrisVerifyResourcesExistInput, callback?: (err: AWSError, data: IoTEvents.Types.TagrisVerifyResourcesExistOutput) => void): Request<IoTEvents.Types.TagrisVerifyResourcesExistOutput, AWSError>;
+  /**
+   * 
+   */
+  verifyResourcesExistForTagris(callback?: (err: AWSError, data: IoTEvents.Types.TagrisVerifyResourcesExistOutput) => void): Request<IoTEvents.Types.TagrisVerifyResourcesExistOutput, AWSError>;
 }
 declare namespace IoTEvents {
   export interface Action {
@@ -190,9 +198,66 @@ declare namespace IoTEvents {
      * Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the payload. A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify. For more information, see Actions in AWS IoT Events Developer Guide.
      */
     dynamoDBv2?: DynamoDBv2Action;
+    /**
+     * Sends information about the detector model instance and the event that triggered the action to an AWS IoT SiteWise asset property.
+     */
+    iotSiteWise?: IotSiteWiseAction;
   }
   export type Actions = Action[];
   export type AmazonResourceName = string;
+  export type AssetId = string;
+  export type AssetPropertyAlias = string;
+  export type AssetPropertyBooleanValue = string;
+  export type AssetPropertyDoubleValue = string;
+  export type AssetPropertyEntryId = string;
+  export type AssetPropertyId = string;
+  export type AssetPropertyIntegerValue = string;
+  export type AssetPropertyOffsetInNanos = string;
+  export type AssetPropertyQuality = string;
+  export type AssetPropertyStringValue = string;
+  export type AssetPropertyTimeInSeconds = string;
+  export interface AssetPropertyTimestamp {
+    /**
+     * The timestamp, in seconds, in the Unix epoch format. The valid range is between 1-31556889864403199. You can also specify an expression.
+     */
+    timeInSeconds: AssetPropertyTimeInSeconds;
+    /**
+     * The nanosecond offset converted from timeInSeconds. The valid range is between 0-999999999. You can also specify an expression.
+     */
+    offsetInNanos?: AssetPropertyOffsetInNanos;
+  }
+  export interface AssetPropertyValue {
+    /**
+     * The value to send to an asset property.
+     */
+    value: AssetPropertyVariant;
+    /**
+     * The timestamp associated with the asset property value. The default is the current event time.
+     */
+    timestamp?: AssetPropertyTimestamp;
+    /**
+     * The quality of the asset property value. The value must be GOOD, BAD, or UNCERTAIN. You can also specify an expression.
+     */
+    quality?: AssetPropertyQuality;
+  }
+  export interface AssetPropertyVariant {
+    /**
+     * The asset property value is a string. You can also specify an expression. If you use an expression, the evaluated result should be a string.
+     */
+    stringValue?: AssetPropertyStringValue;
+    /**
+     * The asset property value is an integer. You can also specify an expression. If you use an expression, the evaluated result should be an integer.
+     */
+    integerValue?: AssetPropertyIntegerValue;
+    /**
+     * The asset property value is a double. You can also specify an expression. If you use an expression, the evaluated result should be a double.
+     */
+    doubleValue?: AssetPropertyDoubleValue;
+    /**
+     * The asset property value is a Boolean value that must be TRUE or FALSE. You can also specify an expression. If you use an expression, the evaluated result should be a Boolean value.
+     */
+    booleanValue?: AssetPropertyBooleanValue;
+  }
   export interface Attribute {
     /**
      * An expression that specifies an attribute-value pair in a JSON structure. Use this to specify an attribute from the JSON payload that is made available by the input. Inputs are derived from messages sent to AWS IoT Events (BatchPutMessage). Each such message contains a JSON payload. The attribute (and its paired value) specified here are available for use in the condition expressions used by detectors.  Syntax: &lt;field-name&gt;.&lt;field-name&gt;... 
@@ -616,6 +681,28 @@ declare namespace IoTEvents {
      */
     payload?: Payload;
   }
+  export interface IotSiteWiseAction {
+    /**
+     * A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier. You can also specify an expression.
+     */
+    entryId?: AssetPropertyEntryId;
+    /**
+     * The ID of the asset that has the specified property. You can specify an expression.
+     */
+    assetId?: AssetId;
+    /**
+     * The ID of the asset property. You can specify an expression.
+     */
+    propertyId?: AssetPropertyId;
+    /**
+     * The alias of the asset property. You can also specify an expression.
+     */
+    propertyAlias?: AssetPropertyAlias;
+    /**
+     * The value to send to the asset property. This value contains timestamp, quality, and value (TQV) information. 
+     */
+    propertyValue: AssetPropertyValue;
+  }
   export interface IotTopicPublishAction {
     /**
      * The MQTT topic of the message. You can use a string expression that includes variables ($variable.&lt;variable-name&gt;) and input values ($input.&lt;input-name&gt;.&lt;path-to-datum&gt;) as the topic string.
@@ -876,6 +963,25 @@ declare namespace IoTEvents {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export type TagrisAccountId = string;
+  export type TagrisAmazonResourceName = string;
+  export type TagrisInternalId = string;
+  export type TagrisStatus = "ACTIVE"|"NOT_ACTIVE"|string;
+  export type TagrisSweepList = TagrisSweepListItem[];
+  export interface TagrisSweepListItem {
+    TagrisAccountId?: TagrisAccountId;
+    TagrisAmazonResourceName?: TagrisAmazonResourceName;
+    TagrisInternalId?: TagrisInternalId;
+    TagrisVersion?: TagrisVersion;
+  }
+  export type TagrisSweepListResult = {[key: string]: TagrisStatus};
+  export interface TagrisVerifyResourcesExistInput {
+    TagrisSweepList: TagrisSweepList;
+  }
+  export interface TagrisVerifyResourcesExistOutput {
+    TagrisSweepListResult: TagrisSweepListResult;
+  }
+  export type TagrisVersion = number;
   export type Tags = Tag[];
   export type TimerName = string;
   export type Timestamp = Date;
