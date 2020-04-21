@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.659.0-->
+<!--LATEST=2.660.0-->
 <!--ENTRYINSERT-->
+
+## 2.660.0
+* feature: CostExplorer: Cost Explorer Rightsizing Recommendations integrates with Compute Optimizer and begins offering across instance family rightsizing recommendations, adding to existing support for within instance family rightsizing recommendations. 
+* feature: EMR: Amazon EMR adds support for configuring a managed scaling policy for an Amazon EMR cluster. This enables automatic resizing of a cluster to optimize for job execution speed and reduced cluster cost.
+* feature: GuardDuty: AWS GuardDuty now supports using AWS Organizations delegated administrators to create and manage GuardDuty master and member accounts.  The feature also allows GuardDuty to be automatically enabled on associated organization accounts.
+* feature: Route53Domains: You can now programmatically transfer domains between AWS accounts without having to contact AWS Support
 
 ## 2.659.0
 * feature: ApiGatewayV2: You can now export an OpenAPI 3.0 compliant API definition file for Amazon API Gateway HTTP APIs using the Export API.

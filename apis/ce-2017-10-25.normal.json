@@ -1590,6 +1590,10 @@
         "Filter": {
           "shape": "Expression"
         },
+        "Configuration": {
+          "shape": "RightsizingRecommendationConfiguration",
+          "documentation": "<p> Enables you to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings associated with recommendations with consideration of existing Savings Plans or RI benefits, or niether. </p>"
+        },
         "Service": {
           "shape": "GenericString",
           "documentation": "<p>The specific service that you want recommendations for. The only valid value for <code>GetRightsizingRecommendation</code> is \"<code>AmazonEC2</code>\".</p>"
@@ -1622,6 +1626,10 @@
         "NextPageToken": {
           "shape": "NextPageToken",
           "documentation": "<p>The token to retrieve the next set of results.</p>"
+        },
+        "Configuration": {
+          "shape": "RightsizingRecommendationConfiguration",
+          "documentation": "<p>Enables you to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings associated with recommendations with consideration of existing Savings Plans or RI benefits, or niether. </p>"
         }
       }
     },
@@ -2235,6 +2243,13 @@
       },
       "documentation": "<p>Details about the Amazon RDS instances that AWS recommends that you purchase.</p>"
     },
+    "RecommendationTarget": {
+      "type": "string",
+      "enum": [
+        "SAME_INSTANCE_FAMILY",
+        "CROSS_INSTANCE_FAMILY"
+      ]
+    },
     "RedshiftInstanceDetails": {
       "type": "structure",
       "members": {
@@ -2616,6 +2631,24 @@
         }
       },
       "documentation": "<p>Recommendations to rightsize resources.</p>"
+    },
+    "RightsizingRecommendationConfiguration": {
+      "type": "structure",
+      "required": [
+        "RecommendationTarget",
+        "BenefitsConsidered"
+      ],
+      "members": {
+        "RecommendationTarget": {
+          "shape": "RecommendationTarget",
+          "documentation": "<p> The option to see recommendations within the same instance family, or recommendations for instances across other families. The default value is <code>SAME_INSTANCE_FAMILY</code>. </p>"
+        },
+        "BenefitsConsidered": {
+          "shape": "GenericBoolean",
+          "documentation": "<p> The option to consider RI or Savings Plans discount benefits in your savings calculation. The default value is <code>TRUE</code>. </p>"
+        }
+      },
+      "documentation": "<p> Enables you to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings associated with recommendations with consideration of existing Savings Plans or RI benefits, or niether. </p>"
     },
     "RightsizingRecommendationList": {
       "type": "list",

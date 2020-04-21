@@ -903,6 +903,10 @@ declare namespace CostExplorer {
   export interface GetRightsizingRecommendationRequest {
     Filter?: Expression;
     /**
+     *  Enables you to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings associated with recommendations with consideration of existing Savings Plans or RI benefits, or niether. 
+     */
+    Configuration?: RightsizingRecommendationConfiguration;
+    /**
      * The specific service that you want recommendations for. The only valid value for GetRightsizingRecommendation is "AmazonEC2".
      */
     Service: GenericString;
@@ -932,6 +936,10 @@ declare namespace CostExplorer {
      * The token to retrieve the next set of results.
      */
     NextPageToken?: NextPageToken;
+    /**
+     * Enables you to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings associated with recommendations with consideration of existing Savings Plans or RI benefits, or niether. 
+     */
+    Configuration?: RightsizingRecommendationConfiguration;
   }
   export interface GetSavingsPlansCoverageRequest {
     /**
@@ -1296,6 +1304,7 @@ declare namespace CostExplorer {
      */
     SizeFlexEligible?: GenericBoolean;
   }
+  export type RecommendationTarget = "SAME_INSTANCE_FAMILY"|"CROSS_INSTANCE_FAMILY"|string;
   export interface RedshiftInstanceDetails {
     /**
      * The instance family of the recommended reservation.
@@ -1596,6 +1605,16 @@ declare namespace CostExplorer {
      * Details for termination recommendations.
      */
     TerminateRecommendationDetail?: TerminateRecommendationDetail;
+  }
+  export interface RightsizingRecommendationConfiguration {
+    /**
+     *  The option to see recommendations within the same instance family, or recommendations for instances across other families. The default value is SAME_INSTANCE_FAMILY. 
+     */
+    RecommendationTarget: RecommendationTarget;
+    /**
+     *  The option to consider RI or Savings Plans discount benefits in your savings calculation. The default value is TRUE. 
+     */
+    BenefitsConsidered: GenericBoolean;
   }
   export type RightsizingRecommendationList = RightsizingRecommendation[];
   export interface RightsizingRecommendationMetadata {
