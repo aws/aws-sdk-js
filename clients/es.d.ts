@@ -1459,6 +1459,10 @@ declare namespace ES {
      * Timestamp, in Epoch time, until which you can manually request a service software update. After this date, we automatically update your service software.
      */
     AutomatedUpdateDate?: DeploymentCloseDateTimeStamp;
+    /**
+     * True if a service software is never automatically updated. False if a service software is automatically updated after AutomatedUpdateDate. 
+     */
+    OptionalDeployment?: Boolean;
   }
   export type ServiceUrl = string;
   export interface SnapshotOptions {

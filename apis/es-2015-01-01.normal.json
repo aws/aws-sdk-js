@@ -3061,6 +3061,10 @@
         "AutomatedUpdateDate": {
           "shape": "DeploymentCloseDateTimeStamp",
           "documentation": "<p>Timestamp, in Epoch time, until which you can manually request a service software update. After this date, we automatically update your service software.</p>"
+        },
+        "OptionalDeployment": {
+          "shape": "Boolean",
+          "documentation": "<p><code>True</code> if a service software is never automatically updated. <code>False</code> if a service software is automatically updated after <code>AutomatedUpdateDate</code>. </p>"
         }
       },
       "documentation": "<p>The current options of an Elasticsearch domain service software options.</p>"
