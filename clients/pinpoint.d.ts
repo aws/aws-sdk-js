@@ -804,19 +804,19 @@ declare class Pinpoint extends Service {
    */
   updateEmailTemplate(callback?: (err: AWSError, data: Pinpoint.Types.UpdateEmailTemplateResponse) => void): Request<Pinpoint.Types.UpdateEmailTemplateResponse, AWSError>;
   /**
-   * Creates a new endpoint for an application or updates the settings and attributes of an existing endpoint for an application. You can also use this operation to define custom attributes (Attributes, Metrics, and UserAttributes properties) for an endpoint.
+   * Creates a new endpoint for an application or updates the settings and attributes of an existing endpoint for an application. You can also use this operation to define custom attributes for an endpoint. If an update includes one or more values for a custom attribute, Amazon Pinpoint replaces (overwrites) any existing values with the new values.
    */
   updateEndpoint(params: Pinpoint.Types.UpdateEndpointRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateEndpointResponse) => void): Request<Pinpoint.Types.UpdateEndpointResponse, AWSError>;
   /**
-   * Creates a new endpoint for an application or updates the settings and attributes of an existing endpoint for an application. You can also use this operation to define custom attributes (Attributes, Metrics, and UserAttributes properties) for an endpoint.
+   * Creates a new endpoint for an application or updates the settings and attributes of an existing endpoint for an application. You can also use this operation to define custom attributes for an endpoint. If an update includes one or more values for a custom attribute, Amazon Pinpoint replaces (overwrites) any existing values with the new values.
    */
   updateEndpoint(callback?: (err: AWSError, data: Pinpoint.Types.UpdateEndpointResponse) => void): Request<Pinpoint.Types.UpdateEndpointResponse, AWSError>;
   /**
-   *  Creates a new batch of endpoints for an application or updates the settings and attributes of a batch of existing endpoints for an application. You can also use this operation to define custom attributes (Attributes, Metrics, and UserAttributes properties) for a batch of endpoints.
+   * Creates a new batch of endpoints for an application or updates the settings and attributes of a batch of existing endpoints for an application. You can also use this operation to define custom attributes for a batch of endpoints. If an update includes one or more values for a custom attribute, Amazon Pinpoint replaces (overwrites) any existing values with the new values.
    */
   updateEndpointsBatch(params: Pinpoint.Types.UpdateEndpointsBatchRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateEndpointsBatchResponse) => void): Request<Pinpoint.Types.UpdateEndpointsBatchResponse, AWSError>;
   /**
-   *  Creates a new batch of endpoints for an application or updates the settings and attributes of a batch of existing endpoints for an application. You can also use this operation to define custom attributes (Attributes, Metrics, and UserAttributes properties) for a batch of endpoints.
+   * Creates a new batch of endpoints for an application or updates the settings and attributes of a batch of existing endpoints for an application. You can also use this operation to define custom attributes for a batch of endpoints. If an update includes one or more values for a custom attribute, Amazon Pinpoint replaces (overwrites) any existing values with the new values.
    */
   updateEndpointsBatch(callback?: (err: AWSError, data: Pinpoint.Types.UpdateEndpointsBatchResponse) => void): Request<Pinpoint.Types.UpdateEndpointsBatchResponse, AWSError>;
   /**
@@ -1680,7 +1680,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The settings for the AWS Lambda function to use by default as a code hook for campaigns in the application.
+     * The settings for the AWS Lambda function to invoke by default as a code hook for campaigns in the application. You can use this hook to customize segments that are used by campaigns in the application.
      */
     CampaignHook?: CampaignHook;
     /**
@@ -1688,7 +1688,7 @@ declare namespace Pinpoint {
      */
     LastModifiedDate?: __string;
     /**
-     * The default sending limits for campaigns in the application.
+     * The default sending limits for campaigns and journeys in the application.
      */
     Limits?: CampaignLimits;
     /**
@@ -1855,6 +1855,12 @@ declare namespace Pinpoint {
      */
     Rows: ListOfResultRow;
   }
+  export interface CampaignCustomMessage {
+    /**
+     * The raw, JSON-formatted string to use as the payload for the message. The maximum size is 5 KB.
+     */
+    Data?: __string;
+  }
   export interface CampaignDateRangeKpiResponse {
     /**
      * The unique identifier for the application that the metric applies to.
@@ -1915,11 +1921,11 @@ declare namespace Pinpoint {
   }
   export interface CampaignHook {
     /**
-     * The name or Amazon Resource Name (ARN) of the AWS Lambda function that Amazon Pinpoint invokes to send messages for a campaign.
+     * The name or Amazon Resource Name (ARN) of the AWS Lambda function that Amazon Pinpoint invokes to customize a segment for a campaign.
      */
     LambdaFunctionName?: __string;
     /**
-     * Specifies which Lambda mode to use when invoking the AWS Lambda function.
+     * The mode that Amazon Pinpoint uses to invoke the AWS Lambda function. Possible values are: FILTER - Invoke the function to customize the segment that's used by a campaign. DELIVERY - (Deprecated) Previously, invoked the function to send a campaign through a custom channel. This functionality is not supported anymore. To send a campaign through a custom channel, use the CustomDeliveryConfiguration and CampaignCustomMessage objects of the campaign.
      */
     Mode?: Mode;
     /**
@@ -1929,7 +1935,7 @@ declare namespace Pinpoint {
   }
   export interface CampaignLimits {
     /**
-     * The maximum number of messages that a campaign can send to a single endpoint during a 24-hour period. The maximum value is 100.
+     * The maximum number of messages that a campaign can send to a single endpoint during a 24-hour period. For an application, this value specifies the default limit for the number of messages that campaigns and journeys can send to a single endpoint during a 24-hour period. The maximum value is 100.
      */
     Daily?: __integer;
     /**
@@ -1937,11 +1943,11 @@ declare namespace Pinpoint {
      */
     MaximumDuration?: __integer;
     /**
-     * The maximum number of messages that a campaign can send each second. The minimum value is 50. The maximum value is 20,000.
+     * The maximum number of messages that a campaign can send each second. For an application, this value specifies the default limit for the number of messages that campaigns and journeys can send each second. The minimum value is 50. The maximum value is 20,000.
      */
     MessagesPerSecond?: __integer;
     /**
-     * The maximum number of messages that a campaign can send to a single endpoint during the course of the campaign. The maximum value is 100.
+     * The maximum number of messages that a campaign can send to a single endpoint during the course of the campaign. If a campaign recurs, this setting applies to all runs of the campaign. The maximum value is 100.
      */
     Total?: __integer;
   }
@@ -1963,7 +1969,11 @@ declare namespace Pinpoint {
      */
     CreationDate: __string;
     /**
-     * The current status of the campaign's default treatment. This value exists only for campaigns that have more than one treatment, to support A/B testing.
+     * The delivery configuration settings for sending the campaign through a custom channel.
+     */
+    CustomDeliveryConfiguration?: CustomDeliveryConfiguration;
+    /**
+     * The current status of the campaign's default treatment. This value exists only for campaigns that have more than one treatment.
      */
     DefaultState?: CampaignState;
     /**
@@ -1975,7 +1985,7 @@ declare namespace Pinpoint {
      */
     HoldoutPercent?: __integer;
     /**
-     * The settings for the AWS Lambda function to use as a code hook for the campaign.
+     * The settings for the AWS Lambda function to use as a code hook for the campaign. You can use this hook to customize the segment that's used by the campaign.
      */
     Hook?: CampaignHook;
     /**
@@ -2027,11 +2037,11 @@ declare namespace Pinpoint {
      */
     TemplateConfiguration?: TemplateConfiguration;
     /**
-     * The custom description of a variation of the campaign that's used for A/B testing.
+     * The custom description of the default treatment for the campaign.
      */
     TreatmentDescription?: __string;
     /**
-     * The custom name of a variation of the campaign that's used for A/B testing.
+     * The custom name of the default treatment for the campaign, if the campaign has multiple treatments. A treatment is a variation of a campaign that's used for A/B testing.
      */
     TreatmentName?: __string;
     /**
@@ -2055,7 +2065,7 @@ declare namespace Pinpoint {
   }
   export interface CampaignState {
     /**
-     * The current status of the campaign, or the current status of a treatment that belongs to an A/B test campaign. If a campaign uses A/B testing, the campaign has a status of COMPLETED only if all campaign treatments have a status of COMPLETED.
+     * The current status of the campaign, or the current status of a treatment that belongs to an A/B test campaign. If a campaign uses A/B testing, the campaign has a status of COMPLETED only if all campaign treatments have a status of COMPLETED. If you delete the segment that's associated with a campaign, the campaign fails and has a status of DELETED.
      */
     CampaignStatus?: CampaignStatus;
   }
@@ -2221,11 +2231,11 @@ declare namespace Pinpoint {
   }
   export interface CreateRecommenderConfiguration {
     /**
-     * A map of key-value pairs that defines 1-10 custom endpoint or user attributes, depending on the value for the RecommenderUserIdType property. Each of these attributes temporarily stores a recommended item that's retrieved from the recommender model and sent to an AWS Lambda function for additional processing. Each attribute can be used as a message variable in a message template. In the map, the key is the name of a custom attribute and the value is a custom display name for that attribute. The display name appears in the Attribute finder pane of the template editor on the Amazon Pinpoint console. The following restrictions apply to these names: An attribute name must start with a letter or number and it can contain up to 50 characters. The characters can be letters, numbers, underscores (_), or hyphens (-). Attribute names are case sensitive and must be unique. An attribute display name must start with a letter or number and it can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-). This object is required if the configuration invokes an AWS Lambda function (LambdaFunctionArn) to process recommendation data. Otherwise, don't include this object in your request.
+     * A map of key-value pairs that defines 1-10 custom endpoint or user attributes, depending on the value for the RecommendationProviderIdType property. Each of these attributes temporarily stores a recommended item that's retrieved from the recommender model and sent to an AWS Lambda function for additional processing. Each attribute can be used as a message variable in a message template. In the map, the key is the name of a custom attribute and the value is a custom display name for that attribute. The display name appears in the Attribute finder of the template editor on the Amazon Pinpoint console. The following restrictions apply to these names: An attribute name must start with a letter or number and it can contain up to 50 characters. The characters can be letters, numbers, underscores (_), or hyphens (-). Attribute names are case sensitive and must be unique. An attribute display name must start with a letter or number and it can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-). This object is required if the configuration invokes an AWS Lambda function (RecommendationTransformerUri) to process recommendation data. Otherwise, don't include this object in your request.
      */
     Attributes?: MapOf__string;
     /**
-     * A custom description of the configuration for the recommender model. The description can contain up to 128 characters.
+     * A custom description of the configuration for the recommender model. The description can contain up to 128 characters. The characters can be letters, numbers, spaces, or the following symbols: _ ; () , ‐.
      */
     Description?: __string;
     /**
@@ -2233,7 +2243,7 @@ declare namespace Pinpoint {
      */
     Name?: __string;
     /**
-     * The type of Amazon Pinpoint ID to associate with unique user IDs in the recommender model. This value enables the model to use attribute and event data that’s specific to a particular endpoint or user in an Amazon Pinpoint application. Valid values are: PINPOINT_ENDPOINT_ID - Associate each user in the model with a particular endpoint in Amazon Pinpoint. The data is correlated based on endpoint IDs in Amazon Pinpoint. This is the default value. PINPOINT_USER_ID - Associate each user in the model with a particular user and endpoint in Amazon Pinpoint. The data is correlated based on user IDs in Amazon Pinpoint. If you specify this value, an endpoint definition in Amazon Pinpoint has to specify a both a user ID (UserId) and an endpoint ID. Otherwise, messages won’t be sent to the user's endpoint.
+     * The type of Amazon Pinpoint ID to associate with unique user IDs in the recommender model. This value enables the model to use attribute and event data that’s specific to a particular endpoint or user in an Amazon Pinpoint application. Valid values are: PINPOINT_ENDPOINT_ID - Associate each user in the model with a particular endpoint in Amazon Pinpoint. The data is correlated based on endpoint IDs in Amazon Pinpoint. This is the default value. PINPOINT_USER_ID - Associate each user in the model with a particular user and endpoint in Amazon Pinpoint. The data is correlated based on user IDs in Amazon Pinpoint. If you specify this value, an endpoint definition in Amazon Pinpoint has to specify both a user ID (UserId) and an endpoint ID. Otherwise, messages won’t be sent to the user's endpoint.
      */
     RecommendationProviderIdType?: __string;
     /**
@@ -2249,11 +2259,11 @@ declare namespace Pinpoint {
      */
     RecommendationTransformerUri?: __string;
     /**
-     * A custom display name for the standard endpoint or user attribute (RecommendationItems) that temporarily stores a recommended item for each endpoint or user, depending on the value for the RecommenderUserIdType property. This value is required if the configuration doesn't invoke an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data. This name appears in the Attribute finder pane of the template editor on the Amazon Pinpoint console. The name can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-). These restrictions don't apply to attribute values.
+     * A custom display name for the standard endpoint or user attribute (RecommendationItems) that temporarily stores recommended items for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This value is required if the configuration doesn't invoke an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data. This name appears in the Attribute finder of the template editor on the Amazon Pinpoint console. The name can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-). These restrictions don't apply to attribute values.
      */
     RecommendationsDisplayName?: __string;
     /**
-     * The number of recommended items to retrieve from the model for each endpoint or user, depending on the value for the RecommenderUserIdType property. This number determines how many recommended attributes are available for use as message variables in message templates. The minimum value is 1. The maximum value is 5. The default value is 5. To use multiple recommended items and custom attributes with message variables, you have to use an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data.
+     * The number of recommended items to retrieve from the model for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This number determines how many recommended items are available for use in message variables. The minimum value is 1. The maximum value is 5. The default value is 5. To use multiple recommended items and custom attributes with message variables, you have to use an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data.
      */
     RecommendationsPerMessage?: __integer;
   }
@@ -2306,6 +2316,16 @@ declare namespace Pinpoint {
   }
   export interface CreateVoiceTemplateResponse {
     CreateTemplateMessageBody: CreateTemplateMessageBody;
+  }
+  export interface CustomDeliveryConfiguration {
+    /**
+     * The destination to send the campaign or treatment to. This value can be one of the following: The name or Amazon Resource Name (ARN) of an AWS Lambda function to invoke to handle delivery of the campaign or treatment. The URL for a web application or service that supports HTTPS and can receive the message. The URL has to be a full URL, including the HTTPS protocol. 
+     */
+    DeliveryUri: __string;
+    /**
+     * The types of endpoints to send the campaign or treatment to. Each valid value maps to a type of channel that you can associate with an endpoint by using the ChannelType property of an endpoint.
+     */
+    EndpointTypes?: ListOf__EndpointTypesElement;
   }
   export interface DefaultMessage {
     /**
@@ -2646,7 +2666,7 @@ declare namespace Pinpoint {
   export type Duration = "HR_24"|"DAY_7"|"DAY_14"|"DAY_30"|string;
   export interface EmailChannelRequest {
     /**
-     * The configuration set that you want to apply to email that you send through the channel by using the Amazon Pinpoint Email API.
+     * The Amazon SES configuration set that you want to apply to messages that you send through the channel.
      */
     ConfigurationSet?: __string;
     /**
@@ -2672,7 +2692,7 @@ declare namespace Pinpoint {
      */
     ApplicationId?: __string;
     /**
-     * The configuration set that's applied to email that's sent through the channel by using the Amazon Pinpoint Email API.
+     * The Amazon SES configuration set that's applied to messages that are sent through the channel.
      */
     ConfigurationSet?: __string;
     /**
@@ -2684,7 +2704,7 @@ declare namespace Pinpoint {
      */
     Enabled?: __boolean;
     /**
-     * The verified email address that you send email from when you send email through the channel.
+     * The verified email address that email is sent from when you send email through the channel.
      */
     FromAddress?: __string;
     /**
@@ -2696,7 +2716,7 @@ declare namespace Pinpoint {
      */
     Id?: __string;
     /**
-     *  The Amazon Resource Name (ARN) of the identity, verified with Amazon Simple Email Service (Amazon SES), that you use when you send email through the channel.
+     *  The Amazon Resource Name (ARN) of the identity, verified with Amazon Simple Email Service (Amazon SES), that's used when you send email through the channel.
      */
     Identity?: __string;
     /**
@@ -2712,7 +2732,7 @@ declare namespace Pinpoint {
      */
     LastModifiedDate?: __string;
     /**
-     * The maximum number of emails that you can send through the channel each second.
+     * The maximum number of emails that can be sent through the channel each second.
      */
     MessagesPerSecond?: __integer;
     /**
@@ -2906,7 +2926,7 @@ declare namespace Pinpoint {
      */
     RequestId?: __string;
     /**
-     * One or more custom user attributes that describe the user who's associated with the endpoint.
+     * One or more custom attributes that describe the user who's associated with the endpoint.
      */
     User?: EndpointUser;
   }
@@ -3054,7 +3074,7 @@ declare namespace Pinpoint {
      */
     RequestId?: __string;
     /**
-     * One or more custom user attributes that describe the user who's associated with the endpoint.
+     * One or more custom attributes that describe the user who's associated with the endpoint.
      */
     User?: EndpointUser;
   }
@@ -3204,7 +3224,7 @@ declare namespace Pinpoint {
     /**
      * The dimensions for the event filter to use for the activity.
      */
-    Dimensions: EventDimensions;
+    Dimensions?: EventDimensions;
     /**
      * The message identifier (message_id) for the message to use when determining whether message events meet the condition.
      */
@@ -3601,11 +3621,11 @@ declare namespace Pinpoint {
      */
     KpiName: __string;
     /**
-     * The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     * The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.
      */
     NextToken?: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     * The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
      */
     PageSize?: __string;
     /**
@@ -3627,7 +3647,7 @@ declare namespace Pinpoint {
   }
   export interface GetAppsRequest {
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     * The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
      */
     PageSize?: __string;
     /**
@@ -3657,7 +3677,7 @@ declare namespace Pinpoint {
      */
     CampaignId: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     * The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
      */
     PageSize?: __string;
     /**
@@ -3686,11 +3706,11 @@ declare namespace Pinpoint {
      */
     KpiName: __string;
     /**
-     * The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     * The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.
      */
     NextToken?: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     * The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
      */
     PageSize?: __string;
     /**
@@ -3741,7 +3761,7 @@ declare namespace Pinpoint {
      */
     CampaignId: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     * The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
      */
     PageSize?: __string;
     /**
@@ -3758,7 +3778,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     * The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
      */
     PageSize?: __string;
     /**
@@ -3841,7 +3861,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     * The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
      */
     PageSize?: __string;
     /**
@@ -3880,7 +3900,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     * The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
      */
     PageSize?: __string;
     /**
@@ -3909,11 +3929,11 @@ declare namespace Pinpoint {
      */
     KpiName: __string;
     /**
-     * The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     * The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.
      */
     NextToken?: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     * The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
      */
     PageSize?: __string;
     /**
@@ -3938,11 +3958,11 @@ declare namespace Pinpoint {
      */
     JourneyId: __string;
     /**
-     * The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     * The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.
      */
     NextToken?: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     * The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
      */
     PageSize?: __string;
   }
@@ -3959,11 +3979,11 @@ declare namespace Pinpoint {
      */
     JourneyId: __string;
     /**
-     * The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     * The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.
      */
     NextToken?: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     * The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
      */
     PageSize?: __string;
   }
@@ -4007,7 +4027,7 @@ declare namespace Pinpoint {
   }
   export interface GetRecommenderConfigurationsRequest {
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     * The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
      */
     PageSize?: __string;
     /**
@@ -4024,7 +4044,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     * The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
      */
     PageSize?: __string;
     /**
@@ -4045,7 +4065,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     * The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
      */
     PageSize?: __string;
     /**
@@ -4096,7 +4116,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     * The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
      */
     PageSize?: __string;
     /**
@@ -4117,7 +4137,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     * The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
      */
     PageSize?: __string;
     /**
@@ -4536,7 +4556,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     * The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
      */
     PageSize?: __string;
     /**
@@ -4568,11 +4588,11 @@ declare namespace Pinpoint {
   }
   export interface ListTemplateVersionsRequest {
     /**
-     * The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     * The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.
      */
     NextToken?: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     * The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
      */
     PageSize?: __string;
     /**
@@ -4589,11 +4609,11 @@ declare namespace Pinpoint {
   }
   export interface ListTemplatesRequest {
     /**
-     * The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     * The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.
      */
     NextToken?: __string;
     /**
-     * The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.
+     * The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
      */
     PageSize?: __string;
     /**
@@ -4670,31 +4690,35 @@ declare namespace Pinpoint {
   }
   export interface MessageConfiguration {
     /**
-     * The message that the campaign sends through the ADM (Amazon Device Messaging) channel. This message overrides the default message.
+     * The message that the campaign sends through the ADM (Amazon Device Messaging) channel. If specified, this message overrides the default message.
      */
     ADMMessage?: Message;
     /**
-     * The message that the campaign sends through the APNs (Apple Push Notification service) channel. This message overrides the default message.
+     * The message that the campaign sends through the APNs (Apple Push Notification service) channel. If specified, this message overrides the default message.
      */
     APNSMessage?: Message;
     /**
-     * The message that the campaign sends through the Baidu (Baidu Cloud Push) channel. This message overrides the default message.
+     * The message that the campaign sends through the Baidu (Baidu Cloud Push) channel. If specified, this message overrides the default message.
      */
     BaiduMessage?: Message;
+    /**
+     * The message that the campaign sends through a custom channel, as specified by the delivery configuration (CustomDeliveryConfiguration) settings for the campaign. If specified, this message overrides the default message. 
+     */
+    CustomMessage?: CampaignCustomMessage;
     /**
      * The default message that the campaign sends through all the channels that are configured for the campaign.
      */
     DefaultMessage?: Message;
     /**
-     * The message that the campaign sends through the email channel.
+     * The message that the campaign sends through the email channel. If specified, this message overrides the default message.
      */
     EmailMessage?: CampaignEmailMessage;
     /**
-     * The message that the campaign sends through the GCM channel, which enables Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. This message overrides the default message.
+     * The message that the campaign sends through the GCM channel, which enables Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. If specified, this message overrides the default message.
      */
     GCMMessage?: Message;
     /**
-     * The message that the campaign sends through the SMS channel.
+     * The message that the campaign sends through the SMS channel. If specified, this message overrides the default message.
      */
     SMSMessage?: CampaignSmsMessage;
   }
@@ -5088,7 +5112,7 @@ declare namespace Pinpoint {
   export type RecencyType = "ACTIVE"|"INACTIVE"|string;
   export interface RecommenderConfigurationResponse {
     /**
-     * A map that defines 1-10 custom endpoint or user attributes, depending on the value for the RecommenderUserIdType property. Each of these attributes temporarily stores a recommended item that's retrieved from the recommender model and sent to an AWS Lambda function for additional processing. Each attribute can be used as a message variable in a message template. This value is null if the configuration doesn't invoke an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data.
+     * A map that defines 1-10 custom endpoint or user attributes, depending on the value for the RecommendationProviderIdType property. Each of these attributes temporarily stores a recommended item that's retrieved from the recommender model and sent to an AWS Lambda function for additional processing. Each attribute can be used as a message variable in a message template. This value is null if the configuration doesn't invoke an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data.
      */
     Attributes?: MapOf__string;
     /**
@@ -5128,11 +5152,11 @@ declare namespace Pinpoint {
      */
     RecommendationTransformerUri?: __string;
     /**
-     * The custom display name for the standard endpoint or user attribute (RecommendationItems) that temporarily stores a recommended item for each endpoint or user, depending on the value for the RecommenderUserIdType property. This name appears in the Attribute finder pane of the template editor on the Amazon Pinpoint console. This value is null if the configuration doesn't invoke an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data.
+     * The custom display name for the standard endpoint or user attribute (RecommendationItems) that temporarily stores recommended items for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This name appears in the Attribute finder of the template editor on the Amazon Pinpoint console. This value is null if the configuration doesn't invoke an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data.
      */
     RecommendationsDisplayName?: __string;
     /**
-     * The number of recommended items that are retrieved from the model for each endpoint or user, depending on the value for the RecommenderUserIdType property. This number determines how many recommended attributes are available for use as message variables in message templates.
+     * The number of recommended items that are retrieved from the model for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This number determines how many recommended items are available for use in message variables.
      */
     RecommendationsPerMessage?: __integer;
   }
@@ -5856,6 +5880,10 @@ declare namespace Pinpoint {
   }
   export interface TreatmentResource {
     /**
+     * The delivery configuration settings for sending the treatment through a custom channel. This object is required if the MessageConfiguration object for the treatment specifies a CustomMessage object.
+     */
+    CustomDeliveryConfiguration?: CustomDeliveryConfiguration;
+    /**
      * The unique identifier for the treatment.
      */
     Id: __string;
@@ -5884,7 +5912,7 @@ declare namespace Pinpoint {
      */
     TreatmentDescription?: __string;
     /**
-     * The custom name of the treatment. A treatment is a variation of a campaign that's used for A/B testing of a campaign.
+     * The custom name of the treatment.
      */
     TreatmentName?: __string;
   }
@@ -6099,11 +6127,11 @@ declare namespace Pinpoint {
   }
   export interface UpdateRecommenderConfiguration {
     /**
-     * A map of key-value pairs that defines 1-10 custom endpoint or user attributes, depending on the value for the RecommenderUserIdType property. Each of these attributes temporarily stores a recommended item that's retrieved from the recommender model and sent to an AWS Lambda function for additional processing. Each attribute can be used as a message variable in a message template. In the map, the key is the name of a custom attribute and the value is a custom display name for that attribute. The display name appears in the Attribute finder pane of the template editor on the Amazon Pinpoint console. The following restrictions apply to these names: An attribute name must start with a letter or number and it can contain up to 50 characters. The characters can be letters, numbers, underscores (_), or hyphens (-). Attribute names are case sensitive and must be unique. An attribute display name must start with a letter or number and it can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-). This object is required if the configuration invokes an AWS Lambda function (LambdaFunctionArn) to process recommendation data. Otherwise, don't include this object in your request.
+     * A map of key-value pairs that defines 1-10 custom endpoint or user attributes, depending on the value for the RecommendationProviderIdType property. Each of these attributes temporarily stores a recommended item that's retrieved from the recommender model and sent to an AWS Lambda function for additional processing. Each attribute can be used as a message variable in a message template. In the map, the key is the name of a custom attribute and the value is a custom display name for that attribute. The display name appears in the Attribute finder of the template editor on the Amazon Pinpoint console. The following restrictions apply to these names: An attribute name must start with a letter or number and it can contain up to 50 characters. The characters can be letters, numbers, underscores (_), or hyphens (-). Attribute names are case sensitive and must be unique. An attribute display name must start with a letter or number and it can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-). This object is required if the configuration invokes an AWS Lambda function (RecommendationTransformerUri) to process recommendation data. Otherwise, don't include this object in your request.
      */
     Attributes?: MapOf__string;
     /**
-     * A custom description of the configuration for the recommender model. The description can contain up to 128 characters.
+     * A custom description of the configuration for the recommender model. The description can contain up to 128 characters. The characters can be letters, numbers, spaces, or the following symbols: _ ; () , ‐.
      */
     Description?: __string;
     /**
@@ -6111,7 +6139,7 @@ declare namespace Pinpoint {
      */
     Name?: __string;
     /**
-     * The type of Amazon Pinpoint ID to associate with unique user IDs in the recommender model. This value enables the model to use attribute and event data that’s specific to a particular endpoint or user in an Amazon Pinpoint application. Valid values are: PINPOINT_ENDPOINT_ID - Associate each user in the model with a particular endpoint in Amazon Pinpoint. The data is correlated based on endpoint IDs in Amazon Pinpoint. This is the default value. PINPOINT_USER_ID - Associate each user in the model with a particular user and endpoint in Amazon Pinpoint. The data is correlated based on user IDs in Amazon Pinpoint. If you specify this value, an endpoint definition in Amazon Pinpoint has to specify a both a user ID (UserId) and an endpoint ID. Otherwise, messages won’t be sent to the user's endpoint.
+     * The type of Amazon Pinpoint ID to associate with unique user IDs in the recommender model. This value enables the model to use attribute and event data that’s specific to a particular endpoint or user in an Amazon Pinpoint application. Valid values are: PINPOINT_ENDPOINT_ID - Associate each user in the model with a particular endpoint in Amazon Pinpoint. The data is correlated based on endpoint IDs in Amazon Pinpoint. This is the default value. PINPOINT_USER_ID - Associate each user in the model with a particular user and endpoint in Amazon Pinpoint. The data is correlated based on user IDs in Amazon Pinpoint. If you specify this value, an endpoint definition in Amazon Pinpoint has to specify both a user ID (UserId) and an endpoint ID. Otherwise, messages won’t be sent to the user's endpoint.
      */
     RecommendationProviderIdType?: __string;
     /**
@@ -6127,11 +6155,11 @@ declare namespace Pinpoint {
      */
     RecommendationTransformerUri?: __string;
     /**
-     * A custom display name for the standard endpoint or user attribute (RecommendationItems) that temporarily stores a recommended item for each endpoint or user, depending on the value for the RecommenderUserIdType property. This value is required if the configuration doesn't invoke an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data. This name appears in the Attribute finder pane of the template editor on the Amazon Pinpoint console. The name can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-). These restrictions don't apply to attribute values.
+     * A custom display name for the standard endpoint or user attribute (RecommendationItems) that temporarily stores recommended items for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This value is required if the configuration doesn't invoke an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data. This name appears in the Attribute finder of the template editor on the Amazon Pinpoint console. The name can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-). These restrictions don't apply to attribute values.
      */
     RecommendationsDisplayName?: __string;
     /**
-     * The number of recommended items to retrieve from the model for each endpoint or user, depending on the value for the RecommenderUserIdType property. This number determines how many recommended attributes are available for use as message variables in message templates. The minimum value is 1. The maximum value is 5. The default value is 5. To use multiple recommended items and custom attributes with message variables, you have to use an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data.
+     * The number of recommended items to retrieve from the model for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This number determines how many recommended items are available for use in message variables. The minimum value is 1. The maximum value is 5. The default value is 5. To use multiple recommended items and custom attributes with message variables, you have to use an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data.
      */
     RecommendationsPerMessage?: __integer;
   }
@@ -6397,7 +6425,7 @@ declare namespace Pinpoint {
   }
   export interface WriteApplicationSettingsRequest {
     /**
-     * The settings for the AWS Lambda function to use by default as a code hook for campaigns in the application. To override these settings for a specific campaign, use the Campaign resource to define custom Lambda function settings for the campaign.
+     * The settings for the AWS Lambda function to invoke by default as a code hook for campaigns in the application. You can use this hook to customize segments that are used by campaigns in the application. To override these settings and define custom settings for a specific campaign, use the CampaignHook object of the Campaign resource.
      */
     CampaignHook?: CampaignHook;
     /**
@@ -6405,7 +6433,7 @@ declare namespace Pinpoint {
      */
     CloudWatchMetricsEnabled?: __boolean;
     /**
-     * The default sending limits for campaigns in the application. To override these limits for a specific campaign, use the Campaign resource to define custom limits for the campaign.
+     * The default sending limits for campaigns and journeys in the application. To override these limits and define custom limits for a specific campaign or journey, use the Campaign resource or the Journey resource, respectively.
      */
     Limits?: CampaignLimits;
     /**
@@ -6419,6 +6447,10 @@ declare namespace Pinpoint {
      */
     AdditionalTreatments?: ListOfWriteTreatmentResource;
     /**
+     * The delivery configuration settings for sending the campaign through a custom channel. This object is required if the MessageConfiguration object for the campaign specifies a CustomMessage object.
+     */
+    CustomDeliveryConfiguration?: CustomDeliveryConfiguration;
+    /**
      * A custom description of the campaign.
      */
     Description?: __string;
@@ -6427,11 +6459,11 @@ declare namespace Pinpoint {
      */
     HoldoutPercent?: __integer;
     /**
-     * The settings for the AWS Lambda function to use as a code hook for the campaign.
+     * The settings for the AWS Lambda function to invoke as a code hook for the campaign. You can use this hook to customize the segment that's used by the campaign.
      */
     Hook?: CampaignHook;
     /**
-     * Specifies whether to pause the campaign. A paused campaign doesn't run unless you resume it by setting this value to false.
+     * Specifies whether to pause the campaign. A paused campaign doesn't run unless you resume it by changing this value to false.
      */
     IsPaused?: __boolean;
     /**
@@ -6467,11 +6499,11 @@ declare namespace Pinpoint {
      */
     TemplateConfiguration?: TemplateConfiguration;
     /**
-     * A custom description of a variation of the campaign to use for A/B testing.
+     * A custom description of the default treatment for the campaign.
      */
     TreatmentDescription?: __string;
     /**
-     * A custom name for a variation of the campaign to use for A/B testing.
+     * A custom name of the default treatment for the campaign, if the campaign has multiple treatments. A treatment is a variation of a campaign that's used for A/B testing.
      */
     TreatmentName?: __string;
   }
@@ -6557,6 +6589,10 @@ declare namespace Pinpoint {
   }
   export interface WriteTreatmentResource {
     /**
+     * The delivery configuration settings for sending the treatment through a custom channel. This object is required if the MessageConfiguration object for the treatment specifies a CustomMessage object.
+     */
+    CustomDeliveryConfiguration?: CustomDeliveryConfiguration;
+    /**
      * The message configuration settings for the treatment.
      */
     MessageConfiguration?: MessageConfiguration;
@@ -6577,10 +6613,11 @@ declare namespace Pinpoint {
      */
     TreatmentDescription?: __string;
     /**
-     * A custom name for the treatment. A treatment is a variation of a campaign that's used for A/B testing of a campaign.
+     * A custom name for the treatment.
      */
     TreatmentName?: __string;
   }
+  export type __EndpointTypesElement = "GCM"|"APNS"|"APNS_SANDBOX"|"APNS_VOIP"|"APNS_VOIP_SANDBOX"|"ADM"|"SMS"|"VOICE"|"EMAIL"|"BAIDU"|"CUSTOM"|string;
   export type __boolean = boolean;
   export type __double = number;
   export type __integer = number;
@@ -6606,6 +6643,7 @@ declare namespace Pinpoint {
   export type ListOfTemplateVersionResponse = TemplateVersionResponse[];
   export type ListOfTreatmentResource = TreatmentResource[];
   export type ListOfWriteTreatmentResource = WriteTreatmentResource[];
+  export type ListOf__EndpointTypesElement = __EndpointTypesElement[];
   export type ListOf__string = __string[];
   export type MapOfActivity = {[key: string]: Activity};
   export type MapOfAddressConfiguration = {[key: string]: AddressConfiguration};

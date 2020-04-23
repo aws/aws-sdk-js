@@ -68,11 +68,11 @@ declare class Firehose extends Service {
    */
   putRecordBatch(callback?: (err: AWSError, data: Firehose.Types.PutRecordBatchOutput) => void): Request<Firehose.Types.PutRecordBatchOutput, AWSError>;
   /**
-   * Enables server-side encryption (SSE) for the delivery stream.  This operation is asynchronous. It returns immediately. When you invoke it, Kinesis Data Firehose first sets the encryption status of the stream to ENABLING, and then to ENABLED. The encryption status of a delivery stream is the Status property in DeliveryStreamEncryptionConfiguration. If the operation fails, the encryption status changes to ENABLING_FAILED. You can continue to read and write data to your delivery stream while the encryption status is ENABLING, but the data is not encrypted. It can take up to 5 seconds after the encryption status changes to ENABLED before all records written to the delivery stream are encrypted. To find out whether a record or a batch of records was encrypted, check the response elements PutRecordOutput$Encrypted and PutRecordBatchOutput$Encrypted, respectively. To check the encryption status of a delivery stream, use DescribeDeliveryStream. Even if encryption is currently enabled for a delivery stream, you can still invoke this operation on it to change the ARN of the CMK or both its type and ARN. In this case, Kinesis Data Firehose schedules the grant it had on the old CMK for retirement and creates a grant that enables it to use the new CMK to encrypt and decrypt data and to manage the grant. If a delivery stream already has encryption enabled and then you invoke this operation to change the ARN of the CMK or both its type and ARN and you get ENABLING_FAILED, this only means that the attempt to change the CMK failed. In this case, encryption remains enabled with the old CMK. If the encryption status of your delivery stream is ENABLING_FAILED, you can invoke this operation again.  You can only enable SSE for a delivery stream that uses DirectPut as its source.  The StartDeliveryStreamEncryption and StopDeliveryStreamEncryption operations have a combined limit of 25 calls per delivery stream per 24 hours. For example, you reach the limit if you call StartDeliveryStreamEncryption 13 times and StopDeliveryStreamEncryption 12 times for the same delivery stream in a 24-hour period.
+   * Enables server-side encryption (SSE) for the delivery stream.  This operation is asynchronous. It returns immediately. When you invoke it, Kinesis Data Firehose first sets the encryption status of the stream to ENABLING, and then to ENABLED. The encryption status of a delivery stream is the Status property in DeliveryStreamEncryptionConfiguration. If the operation fails, the encryption status changes to ENABLING_FAILED. You can continue to read and write data to your delivery stream while the encryption status is ENABLING, but the data is not encrypted. It can take up to 5 seconds after the encryption status changes to ENABLED before all records written to the delivery stream are encrypted. To find out whether a record or a batch of records was encrypted, check the response elements PutRecordOutput$Encrypted and PutRecordBatchOutput$Encrypted, respectively. To check the encryption status of a delivery stream, use DescribeDeliveryStream. Even if encryption is currently enabled for a delivery stream, you can still invoke this operation on it to change the ARN of the CMK or both its type and ARN. If you invoke this method to change the CMK, and the old CMK is of type CUSTOMER_MANAGED_CMK, Kinesis Data Firehose schedules the grant it had on the old CMK for retirement. If the new CMK is of type CUSTOMER_MANAGED_CMK, Kinesis Data Firehose creates a grant that enables it to use the new CMK to encrypt and decrypt data and to manage the grant. If a delivery stream already has encryption enabled and then you invoke this operation to change the ARN of the CMK or both its type and ARN and you get ENABLING_FAILED, this only means that the attempt to change the CMK failed. In this case, encryption remains enabled with the old CMK. If the encryption status of your delivery stream is ENABLING_FAILED, you can invoke this operation again with a valid CMK. The CMK must be enabled and the key policy mustn't explicitly deny the permission for Kinesis Data Firehose to invoke KMS encrypt and decrypt operations. You can enable SSE for a delivery stream only if it's a delivery stream that uses DirectPut as its source.  The StartDeliveryStreamEncryption and StopDeliveryStreamEncryption operations have a combined limit of 25 calls per delivery stream per 24 hours. For example, you reach the limit if you call StartDeliveryStreamEncryption 13 times and StopDeliveryStreamEncryption 12 times for the same delivery stream in a 24-hour period.
    */
   startDeliveryStreamEncryption(params: Firehose.Types.StartDeliveryStreamEncryptionInput, callback?: (err: AWSError, data: Firehose.Types.StartDeliveryStreamEncryptionOutput) => void): Request<Firehose.Types.StartDeliveryStreamEncryptionOutput, AWSError>;
   /**
-   * Enables server-side encryption (SSE) for the delivery stream.  This operation is asynchronous. It returns immediately. When you invoke it, Kinesis Data Firehose first sets the encryption status of the stream to ENABLING, and then to ENABLED. The encryption status of a delivery stream is the Status property in DeliveryStreamEncryptionConfiguration. If the operation fails, the encryption status changes to ENABLING_FAILED. You can continue to read and write data to your delivery stream while the encryption status is ENABLING, but the data is not encrypted. It can take up to 5 seconds after the encryption status changes to ENABLED before all records written to the delivery stream are encrypted. To find out whether a record or a batch of records was encrypted, check the response elements PutRecordOutput$Encrypted and PutRecordBatchOutput$Encrypted, respectively. To check the encryption status of a delivery stream, use DescribeDeliveryStream. Even if encryption is currently enabled for a delivery stream, you can still invoke this operation on it to change the ARN of the CMK or both its type and ARN. In this case, Kinesis Data Firehose schedules the grant it had on the old CMK for retirement and creates a grant that enables it to use the new CMK to encrypt and decrypt data and to manage the grant. If a delivery stream already has encryption enabled and then you invoke this operation to change the ARN of the CMK or both its type and ARN and you get ENABLING_FAILED, this only means that the attempt to change the CMK failed. In this case, encryption remains enabled with the old CMK. If the encryption status of your delivery stream is ENABLING_FAILED, you can invoke this operation again.  You can only enable SSE for a delivery stream that uses DirectPut as its source.  The StartDeliveryStreamEncryption and StopDeliveryStreamEncryption operations have a combined limit of 25 calls per delivery stream per 24 hours. For example, you reach the limit if you call StartDeliveryStreamEncryption 13 times and StopDeliveryStreamEncryption 12 times for the same delivery stream in a 24-hour period.
+   * Enables server-side encryption (SSE) for the delivery stream.  This operation is asynchronous. It returns immediately. When you invoke it, Kinesis Data Firehose first sets the encryption status of the stream to ENABLING, and then to ENABLED. The encryption status of a delivery stream is the Status property in DeliveryStreamEncryptionConfiguration. If the operation fails, the encryption status changes to ENABLING_FAILED. You can continue to read and write data to your delivery stream while the encryption status is ENABLING, but the data is not encrypted. It can take up to 5 seconds after the encryption status changes to ENABLED before all records written to the delivery stream are encrypted. To find out whether a record or a batch of records was encrypted, check the response elements PutRecordOutput$Encrypted and PutRecordBatchOutput$Encrypted, respectively. To check the encryption status of a delivery stream, use DescribeDeliveryStream. Even if encryption is currently enabled for a delivery stream, you can still invoke this operation on it to change the ARN of the CMK or both its type and ARN. If you invoke this method to change the CMK, and the old CMK is of type CUSTOMER_MANAGED_CMK, Kinesis Data Firehose schedules the grant it had on the old CMK for retirement. If the new CMK is of type CUSTOMER_MANAGED_CMK, Kinesis Data Firehose creates a grant that enables it to use the new CMK to encrypt and decrypt data and to manage the grant. If a delivery stream already has encryption enabled and then you invoke this operation to change the ARN of the CMK or both its type and ARN and you get ENABLING_FAILED, this only means that the attempt to change the CMK failed. In this case, encryption remains enabled with the old CMK. If the encryption status of your delivery stream is ENABLING_FAILED, you can invoke this operation again with a valid CMK. The CMK must be enabled and the key policy mustn't explicitly deny the permission for Kinesis Data Firehose to invoke KMS encrypt and decrypt operations. You can enable SSE for a delivery stream only if it's a delivery stream that uses DirectPut as its source.  The StartDeliveryStreamEncryption and StopDeliveryStreamEncryption operations have a combined limit of 25 calls per delivery stream per 24 hours. For example, you reach the limit if you call StartDeliveryStreamEncryption 13 times and StopDeliveryStreamEncryption 12 times for the same delivery stream in a 24-hour period.
    */
   startDeliveryStreamEncryption(callback?: (err: AWSError, data: Firehose.Types.StartDeliveryStreamEncryptionOutput) => void): Request<Firehose.Types.StartDeliveryStreamEncryptionOutput, AWSError>;
   /**
@@ -139,7 +139,7 @@ declare namespace Firehose {
   }
   export type ClusterJDBCURL = string;
   export type ColumnToJsonKeyMappings = {[key: string]: NonEmptyString};
-  export type CompressionFormat = "UNCOMPRESSED"|"GZIP"|"ZIP"|"Snappy"|string;
+  export type CompressionFormat = "UNCOMPRESSED"|"GZIP"|"ZIP"|"Snappy"|"HADOOP_SNAPPY"|string;
   export interface CopyCommand {
     /**
      * The name of the target table. The table must already exist in the database.
@@ -206,15 +206,15 @@ declare namespace Firehose {
   export type Data = Buffer|Uint8Array|Blob|string;
   export interface DataFormatConversionConfiguration {
     /**
-     * Specifies the AWS Glue Data Catalog table that contains the column information.
+     * Specifies the AWS Glue Data Catalog table that contains the column information. This parameter is required if Enabled is set to true.
      */
     SchemaConfiguration?: SchemaConfiguration;
     /**
-     * Specifies the deserializer that you want Kinesis Data Firehose to use to convert the format of your data from JSON.
+     * Specifies the deserializer that you want Kinesis Data Firehose to use to convert the format of your data from JSON. This parameter is required if Enabled is set to true.
      */
     InputFormatConfiguration?: InputFormatConfiguration;
     /**
-     * Specifies the serializer that you want Kinesis Data Firehose to use to convert the format of your data to the Parquet or ORC format.
+     * Specifies the serializer that you want Kinesis Data Firehose to use to convert the format of your data to the Parquet or ORC format. This parameter is required if Enabled is set to true.
      */
     OutputFormatConfiguration?: OutputFormatConfiguration;
     /**
@@ -312,12 +312,12 @@ declare namespace Firehose {
      */
     KeyARN?: AWSKMSKeyARN;
     /**
-     * Indicates the type of customer master key (CMK) to use for encryption. The default setting is AWS_OWNED_CMK. For more information about CMKs, see Customer Master Keys (CMKs). When you invoke CreateDeliveryStream or StartDeliveryStreamEncryption with KeyType set to CUSTOMER_MANAGED_CMK, Kinesis Data Firehose invokes the Amazon KMS operation CreateGrant to create a grant that allows the Kinesis Data Firehose service to use the customer managed CMK to perform encryption and decryption. Kinesis Data Firehose manages that grant.  When you invoke StartDeliveryStreamEncryption to change the CMK for a delivery stream that is already encrypted with a customer managed CMK, Kinesis Data Firehose schedules the grant it had on the old CMK for retirement.
+     * Indicates the type of customer master key (CMK) to use for encryption. The default setting is AWS_OWNED_CMK. For more information about CMKs, see Customer Master Keys (CMKs). When you invoke CreateDeliveryStream or StartDeliveryStreamEncryption with KeyType set to CUSTOMER_MANAGED_CMK, Kinesis Data Firehose invokes the Amazon KMS operation CreateGrant to create a grant that allows the Kinesis Data Firehose service to use the customer managed CMK to perform encryption and decryption. Kinesis Data Firehose manages that grant.  When you invoke StartDeliveryStreamEncryption to change the CMK for a delivery stream that is encrypted with a customer managed CMK, Kinesis Data Firehose schedules the grant it had on the old CMK for retirement. You can use a CMK of type CUSTOMER_MANAGED_CMK to encrypt up to 500 delivery streams. If a CreateDeliveryStream or StartDeliveryStreamEncryption operation exceeds this limit, Kinesis Data Firehose throws a LimitExceededException.   To encrypt your delivery stream, use symmetric CMKs. Kinesis Data Firehose doesn't support asymmetric CMKs. For information about symmetric and asymmetric CMKs, see About Symmetric and Asymmetric CMKs in the AWS Key Management Service developer guide. 
      */
     KeyType: KeyType;
   }
   export type DeliveryStreamEncryptionStatus = "ENABLED"|"ENABLING"|"ENABLING_FAILED"|"DISABLED"|"DISABLING"|"DISABLING_FAILED"|string;
-  export type DeliveryStreamFailureType = "RETIRE_KMS_GRANT_FAILED"|"CREATE_KMS_GRANT_FAILED"|"KMS_ACCESS_DENIED"|"DISABLED_KMS_KEY"|"INVALID_KMS_KEY"|"KMS_KEY_NOT_FOUND"|"KMS_OPT_IN_REQUIRED"|"UNKNOWN_ERROR"|string;
+  export type DeliveryStreamFailureType = "RETIRE_KMS_GRANT_FAILED"|"CREATE_KMS_GRANT_FAILED"|"KMS_ACCESS_DENIED"|"DISABLED_KMS_KEY"|"INVALID_KMS_KEY"|"KMS_KEY_NOT_FOUND"|"KMS_OPT_IN_REQUIRED"|"CREATE_ENI_FAILED"|"DELETE_ENI_FAILED"|"SUBNET_NOT_FOUND"|"SECURITY_GROUP_NOT_FOUND"|"ENI_ACCESS_DENIED"|"SUBNET_ACCESS_DENIED"|"SECURITY_GROUP_ACCESS_DENIED"|"UNKNOWN_ERROR"|string;
   export type DeliveryStreamName = string;
   export type DeliveryStreamNameList = DeliveryStreamName[];
   export type DeliveryStreamStatus = "CREATING"|"CREATING_FAILED"|"DELETING"|"DELETING_FAILED"|"ACTIVE"|string;
@@ -444,6 +444,10 @@ declare namespace Firehose {
      * The Amazon CloudWatch logging options for your delivery stream.
      */
     CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+    /**
+     * The details of the VPC of the Amazon ES destination.
+     */
+    VpcConfiguration?: VpcConfiguration;
   }
   export interface ElasticsearchDestinationDescription {
     /**
@@ -494,6 +498,10 @@ declare namespace Firehose {
      * The Amazon CloudWatch logging options.
      */
     CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+    /**
+     * The details of the VPC of the Amazon ES destination.
+     */
+    VpcConfigurationDescription?: VpcConfigurationDescription;
   }
   export interface ElasticsearchDestinationUpdate {
     /**
@@ -1306,6 +1314,7 @@ declare namespace Firehose {
      */
     VersionId?: NonEmptyStringWithoutWhitespace;
   }
+  export type SecurityGroupIdList = NonEmptyStringWithoutWhitespace[];
   export interface Serializer {
     /**
      * A serializer to use for converting data to the Parquet format before storing it in Amazon S3. For more information, see Apache Parquet.
@@ -1465,6 +1474,7 @@ declare namespace Firehose {
   }
   export interface StopDeliveryStreamEncryptionOutput {
   }
+  export type SubnetIdList = NonEmptyStringWithoutWhitespace[];
   export interface Tag {
     /**
      * A unique identifier for the tag. Maximum length: 128 characters. Valid characters: Unicode letters, digits, white space, _ . / = + - % @
@@ -1541,6 +1551,38 @@ declare namespace Firehose {
   export interface UpdateDestinationOutput {
   }
   export type Username = string;
+  export interface VpcConfiguration {
+    /**
+     * The IDs of the subnets that you want Kinesis Data Firehose to use to create ENIs in the VPC of the Amazon ES destination. Make sure that the routing tables and inbound and outbound rules allow traffic to flow from the subnets whose IDs are specified here to the subnets that have the destination Amazon ES endpoints. Kinesis Data Firehose creates at least one ENI in each of the subnets that are specified here. Do not delete or modify these ENIs. The number of ENIs that Kinesis Data Firehose creates in the subnets specified here scales up and down automatically based on throughput. To enable Kinesis Data Firehose to scale up the number of ENIs to match throughput, ensure that you have sufficient quota. To help you calculate the quota you need, assume that Kinesis Data Firehose can create up to three ENIs for this delivery stream for each of the subnets specified here. For more information about ENI quota, see Network Interfaces  in the Amazon VPC Quotas topic.
+     */
+    SubnetIds: SubnetIdList;
+    /**
+     * The ARN of the IAM role that you want the delivery stream to use to create endpoints in the destination VPC.
+     */
+    RoleARN: RoleARN;
+    /**
+     * The IDs of the security groups that you want Kinesis Data Firehose to use when it creates ENIs in the VPC of the Amazon ES destination.
+     */
+    SecurityGroupIds: SecurityGroupIdList;
+  }
+  export interface VpcConfigurationDescription {
+    /**
+     * The IDs of the subnets that Kinesis Data Firehose uses to create ENIs in the VPC of the Amazon ES destination. Make sure that the routing tables and inbound and outbound rules allow traffic to flow from the subnets whose IDs are specified here to the subnets that have the destination Amazon ES endpoints. Kinesis Data Firehose creates at least one ENI in each of the subnets that are specified here. Do not delete or modify these ENIs. The number of ENIs that Kinesis Data Firehose creates in the subnets specified here scales up and down automatically based on throughput. To enable Kinesis Data Firehose to scale up the number of ENIs to match throughput, ensure that you have sufficient quota. To help you calculate the quota you need, assume that Kinesis Data Firehose can create up to three ENIs for this delivery stream for each of the subnets specified here. For more information about ENI quota, see Network Interfaces  in the Amazon VPC Quotas topic.
+     */
+    SubnetIds: SubnetIdList;
+    /**
+     * The ARN of the IAM role that you want the delivery stream uses to create endpoints in the destination VPC.
+     */
+    RoleARN: RoleARN;
+    /**
+     * The IDs of the security groups that Kinesis Data Firehose uses when it creates ENIs in the VPC of the Amazon ES destination.
+     */
+    SecurityGroupIds: SecurityGroupIdList;
+    /**
+     * The ID of the Amazon ES destination's VPC.
+     */
+    VpcId: NonEmptyStringWithoutWhitespace;
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

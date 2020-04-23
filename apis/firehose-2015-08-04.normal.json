@@ -206,7 +206,7 @@
           "shape": "InvalidKMSResourceException"
         }
       ],
-      "documentation": "<p>Enables server-side encryption (SSE) for the delivery stream. </p> <p>This operation is asynchronous. It returns immediately. When you invoke it, Kinesis Data Firehose first sets the encryption status of the stream to <code>ENABLING</code>, and then to <code>ENABLED</code>. The encryption status of a delivery stream is the <code>Status</code> property in <a>DeliveryStreamEncryptionConfiguration</a>. If the operation fails, the encryption status changes to <code>ENABLING_FAILED</code>. You can continue to read and write data to your delivery stream while the encryption status is <code>ENABLING</code>, but the data is not encrypted. It can take up to 5 seconds after the encryption status changes to <code>ENABLED</code> before all records written to the delivery stream are encrypted. To find out whether a record or a batch of records was encrypted, check the response elements <a>PutRecordOutput$Encrypted</a> and <a>PutRecordBatchOutput$Encrypted</a>, respectively.</p> <p>To check the encryption status of a delivery stream, use <a>DescribeDeliveryStream</a>.</p> <p>Even if encryption is currently enabled for a delivery stream, you can still invoke this operation on it to change the ARN of the CMK or both its type and ARN. In this case, Kinesis Data Firehose schedules the grant it had on the old CMK for retirement and creates a grant that enables it to use the new CMK to encrypt and decrypt data and to manage the grant.</p> <p>If a delivery stream already has encryption enabled and then you invoke this operation to change the ARN of the CMK or both its type and ARN and you get <code>ENABLING_FAILED</code>, this only means that the attempt to change the CMK failed. In this case, encryption remains enabled with the old CMK.</p> <p>If the encryption status of your delivery stream is <code>ENABLING_FAILED</code>, you can invoke this operation again. </p> <p>You can only enable SSE for a delivery stream that uses <code>DirectPut</code> as its source. </p> <p>The <code>StartDeliveryStreamEncryption</code> and <code>StopDeliveryStreamEncryption</code> operations have a combined limit of 25 calls per delivery stream per 24 hours. For example, you reach the limit if you call <code>StartDeliveryStreamEncryption</code> 13 times and <code>StopDeliveryStreamEncryption</code> 12 times for the same delivery stream in a 24-hour period.</p>"
+      "documentation": "<p>Enables server-side encryption (SSE) for the delivery stream. </p> <p>This operation is asynchronous. It returns immediately. When you invoke it, Kinesis Data Firehose first sets the encryption status of the stream to <code>ENABLING</code>, and then to <code>ENABLED</code>. The encryption status of a delivery stream is the <code>Status</code> property in <a>DeliveryStreamEncryptionConfiguration</a>. If the operation fails, the encryption status changes to <code>ENABLING_FAILED</code>. You can continue to read and write data to your delivery stream while the encryption status is <code>ENABLING</code>, but the data is not encrypted. It can take up to 5 seconds after the encryption status changes to <code>ENABLED</code> before all records written to the delivery stream are encrypted. To find out whether a record or a batch of records was encrypted, check the response elements <a>PutRecordOutput$Encrypted</a> and <a>PutRecordBatchOutput$Encrypted</a>, respectively.</p> <p>To check the encryption status of a delivery stream, use <a>DescribeDeliveryStream</a>.</p> <p>Even if encryption is currently enabled for a delivery stream, you can still invoke this operation on it to change the ARN of the CMK or both its type and ARN. If you invoke this method to change the CMK, and the old CMK is of type <code>CUSTOMER_MANAGED_CMK</code>, Kinesis Data Firehose schedules the grant it had on the old CMK for retirement. If the new CMK is of type <code>CUSTOMER_MANAGED_CMK</code>, Kinesis Data Firehose creates a grant that enables it to use the new CMK to encrypt and decrypt data and to manage the grant.</p> <p>If a delivery stream already has encryption enabled and then you invoke this operation to change the ARN of the CMK or both its type and ARN and you get <code>ENABLING_FAILED</code>, this only means that the attempt to change the CMK failed. In this case, encryption remains enabled with the old CMK.</p> <p>If the encryption status of your delivery stream is <code>ENABLING_FAILED</code>, you can invoke this operation again with a valid CMK. The CMK must be enabled and the key policy mustn't explicitly deny the permission for Kinesis Data Firehose to invoke KMS encrypt and decrypt operations.</p> <p>You can enable SSE for a delivery stream only if it's a delivery stream that uses <code>DirectPut</code> as its source. </p> <p>The <code>StartDeliveryStreamEncryption</code> and <code>StopDeliveryStreamEncryption</code> operations have a combined limit of 25 calls per delivery stream per 24 hours. For example, you reach the limit if you call <code>StartDeliveryStreamEncryption</code> 13 times and <code>StopDeliveryStreamEncryption</code> 12 times for the same delivery stream in a 24-hour period.</p>"
     },
     "StopDeliveryStreamEncryption": {
       "name": "StopDeliveryStreamEncryption",
@@ -375,6 +375,7 @@
     },
     "ClusterJDBCURL": {
       "type": "string",
+      "max": 512,
       "min": 1,
       "pattern": "jdbc:(redshift|postgresql)://((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\.)+redshift\\.([a-zA-Z0-9\\.]+):\\d{1,5}/[a-zA-Z0-9_$]+"
     },
@@ -393,7 +394,8 @@
         "UNCOMPRESSED",
         "GZIP",
         "ZIP",
-        "Snappy"
+        "Snappy",
+        "HADOOP_SNAPPY"
       ]
     },
     "CopyCommand": {
@@ -418,7 +420,10 @@
       "documentation": "<p>Describes a <code>COPY</code> command for Amazon Redshift.</p>"
     },
     "CopyOptions": {
-      "type": "string"
+      "type": "string",
+      "max": 204800,
+      "min": 0,
+      "pattern": ".*"
     },
     "CreateDeliveryStreamInput": {
       "type": "structure",
@@ -488,15 +493,15 @@
       "members": {
         "SchemaConfiguration": {
           "shape": "SchemaConfiguration",
-          "documentation": "<p>Specifies the AWS Glue Data Catalog table that contains the column information.</p>"
+          "documentation": "<p>Specifies the AWS Glue Data Catalog table that contains the column information. This parameter is required if <code>Enabled</code> is set to true.</p>"
         },
         "InputFormatConfiguration": {
           "shape": "InputFormatConfiguration",
-          "documentation": "<p>Specifies the deserializer that you want Kinesis Data Firehose to use to convert the format of your data from JSON.</p>"
+          "documentation": "<p>Specifies the deserializer that you want Kinesis Data Firehose to use to convert the format of your data from JSON. This parameter is required if <code>Enabled</code> is set to true.</p>"
         },
         "OutputFormatConfiguration": {
           "shape": "OutputFormatConfiguration",
-          "documentation": "<p>Specifies the serializer that you want Kinesis Data Firehose to use to convert the format of your data to the Parquet or ORC format.</p>"
+          "documentation": "<p>Specifies the serializer that you want Kinesis Data Firehose to use to convert the format of your data to the Parquet or ORC format. This parameter is required if <code>Enabled</code> is set to true.</p>"
         },
         "Enabled": {
           "shape": "BooleanObject",
@@ -506,11 +511,16 @@
       "documentation": "<p>Specifies that you want Kinesis Data Firehose to convert data from the JSON format to the Parquet or ORC format before writing it to Amazon S3. Kinesis Data Firehose uses the serializer and deserializer that you specify, in addition to the column information from the AWS Glue table, to deserialize your input data from JSON and then serialize it to the Parquet or ORC format. For more information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/record-format-conversion.html\">Kinesis Data Firehose Record Format Conversion</a>.</p>"
     },
     "DataTableColumns": {
-      "type": "string"
+      "type": "string",
+      "max": 204800,
+      "min": 0,
+      "pattern": ".*"
     },
     "DataTableName": {
       "type": "string",
-      "min": 1
+      "max": 512,
+      "min": 1,
+      "pattern": ".*"
     },
     "DeleteDeliveryStreamInput": {
       "type": "structure",
@@ -638,10 +648,10 @@
         },
         "KeyType": {
           "shape": "KeyType",
-          "documentation": "<p>Indicates the type of customer master key (CMK) to use for encryption. The default setting is <code>AWS_OWNED_CMK</code>. For more information about CMKs, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys\">Customer Master Keys (CMKs)</a>. When you invoke <a>CreateDeliveryStream</a> or <a>StartDeliveryStreamEncryption</a> with <code>KeyType</code> set to CUSTOMER_MANAGED_CMK, Kinesis Data Firehose invokes the Amazon KMS operation <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html\">CreateGrant</a> to create a grant that allows the Kinesis Data Firehose service to use the customer managed CMK to perform encryption and decryption. Kinesis Data Firehose manages that grant. </p> <p>When you invoke <a>StartDeliveryStreamEncryption</a> to change the CMK for a delivery stream that is already encrypted with a customer managed CMK, Kinesis Data Firehose schedules the grant it had on the old CMK for retirement.</p>"
+          "documentation": "<p>Indicates the type of customer master key (CMK) to use for encryption. The default setting is <code>AWS_OWNED_CMK</code>. For more information about CMKs, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys\">Customer Master Keys (CMKs)</a>. When you invoke <a>CreateDeliveryStream</a> or <a>StartDeliveryStreamEncryption</a> with <code>KeyType</code> set to CUSTOMER_MANAGED_CMK, Kinesis Data Firehose invokes the Amazon KMS operation <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html\">CreateGrant</a> to create a grant that allows the Kinesis Data Firehose service to use the customer managed CMK to perform encryption and decryption. Kinesis Data Firehose manages that grant. </p> <p>When you invoke <a>StartDeliveryStreamEncryption</a> to change the CMK for a delivery stream that is encrypted with a customer managed CMK, Kinesis Data Firehose schedules the grant it had on the old CMK for retirement.</p> <p>You can use a CMK of type CUSTOMER_MANAGED_CMK to encrypt up to 500 delivery streams. If a <a>CreateDeliveryStream</a> or <a>StartDeliveryStreamEncryption</a> operation exceeds this limit, Kinesis Data Firehose throws a <code>LimitExceededException</code>. </p> <important> <p>To encrypt your delivery stream, use symmetric CMKs. Kinesis Data Firehose doesn't support asymmetric CMKs. For information about symmetric and asymmetric CMKs, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html\">About Symmetric and Asymmetric CMKs</a> in the AWS Key Management Service developer guide.</p> </important>"
         }
       },
-      "documentation": "<p>Used to specify the type and Amazon Resource Name (ARN) of the CMK needed for Server-Side Encryption (SSE). </p>"
+      "documentation": "<p>Specifies the type and Amazon Resource Name (ARN) of the CMK to use for Server-Side Encryption (SSE). </p>"
     },
     "DeliveryStreamEncryptionStatus": {
       "type": "string",
@@ -664,6 +674,13 @@
         "INVALID_KMS_KEY",
         "KMS_KEY_NOT_FOUND",
         "KMS_OPT_IN_REQUIRED",
+        "CREATE_ENI_FAILED",
+        "DELETE_ENI_FAILED",
+        "SUBNET_NOT_FOUND",
+        "SECURITY_GROUP_NOT_FOUND",
+        "ENI_ACCESS_DENIED",
+        "SUBNET_ACCESS_DENIED",
+        "SECURITY_GROUP_ACCESS_DENIED",
         "UNKNOWN_ERROR"
       ]
     },
@@ -795,7 +812,8 @@
     "DestinationId": {
       "type": "string",
       "max": 100,
-      "min": 1
+      "min": 1,
+      "pattern": "[a-zA-Z0-9-]+"
     },
     "ElasticsearchBufferingHints": {
       "type": "structure",
@@ -882,6 +900,10 @@
         "CloudWatchLoggingOptions": {
           "shape": "CloudWatchLoggingOptions",
           "documentation": "<p>The Amazon CloudWatch logging options for your delivery stream.</p>"
+        },
+        "VpcConfiguration": {
+          "shape": "VpcConfiguration",
+          "documentation": "<p>The details of the VPC of the Amazon ES destination.</p>"
         }
       },
       "documentation": "<p>Describes the configuration of a destination in Amazon ES.</p>"
@@ -936,6 +958,10 @@
         "CloudWatchLoggingOptions": {
           "shape": "CloudWatchLoggingOptions",
           "documentation": "<p>The Amazon CloudWatch logging options.</p>"
+        },
+        "VpcConfigurationDescription": {
+          "shape": "VpcConfigurationDescription",
+          "documentation": "<p>The details of the VPC of the Amazon ES destination.</p>"
         }
       },
       "documentation": "<p>The destination description in Amazon ES.</p>"
@@ -999,7 +1025,8 @@
     "ElasticsearchIndexName": {
       "type": "string",
       "max": 80,
-      "min": 1
+      "min": 1,
+      "pattern": ".*"
     },
     "ElasticsearchIndexRotationPeriod": {
       "type": "string",
@@ -1036,7 +1063,8 @@
     "ElasticsearchTypeName": {
       "type": "string",
       "max": 100,
-      "min": 0
+      "min": 0,
+      "pattern": ".*"
     },
     "EncryptionConfiguration": {
       "type": "structure",
@@ -1059,7 +1087,10 @@
       "type": "string"
     },
     "ErrorOutputPrefix": {
-      "type": "string"
+      "type": "string",
+      "max": 1024,
+      "min": 0,
+      "pattern": ".*"
     },
     "ExtendedS3DestinationConfiguration": {
       "type": "structure",
@@ -1258,7 +1289,10 @@
       "min": 180
     },
     "HECEndpoint": {
-      "type": "string"
+      "type": "string",
+      "max": 2048,
+      "min": 0,
+      "pattern": ".*"
     },
     "HECEndpointType": {
       "type": "string",
@@ -1268,7 +1302,10 @@
       ]
     },
     "HECToken": {
-      "type": "string"
+      "type": "string",
+      "max": 2048,
+      "min": 0,
+      "pattern": ".*"
     },
     "HiveJsonSerDe": {
       "type": "structure",
@@ -1288,7 +1325,7 @@
           "documentation": "<p>Specifies which deserializer to use. You can choose either the Apache Hive JSON SerDe or the OpenX JSON SerDe. If both are non-null, the server rejects the request.</p>"
         }
       },
-      "documentation": "<p>Specifies the deserializer you want to use to convert the format of the input data.</p>"
+      "documentation": "<p>Specifies the deserializer you want to use to convert the format of the input data. This parameter is required if <code>Enabled</code> is set to true.</p>"
     },
     "IntervalInSeconds": {
       "type": "integer",
@@ -1459,10 +1496,16 @@
       "min": 0
     },
     "LogGroupName": {
-      "type": "string"
+      "type": "string",
+      "max": 512,
+      "min": 0,
+      "pattern": "[\\.\\-_/#A-Za-z0-9]*"
     },
     "LogStreamName": {
-      "type": "string"
+      "type": "string",
+      "max": 512,
+      "min": 0,
+      "pattern": "[^:*]*"
     },
     "NoEncryptionConfig": {
       "type": "string",
@@ -1472,10 +1515,14 @@
     },
     "NonEmptyString": {
       "type": "string",
+      "max": 1024,
+      "min": 1,
       "pattern": "^(?!\\s*$).+"
     },
     "NonEmptyStringWithoutWhitespace": {
       "type": "string",
+      "max": 1024,
+      "min": 1,
       "pattern": "^\\S+$"
     },
     "NonNegativeIntegerObject": {
@@ -1577,7 +1624,7 @@
           "documentation": "<p>Specifies which serializer to use. You can choose either the ORC SerDe or the Parquet SerDe. If both are non-null, the server rejects the request.</p>"
         }
       },
-      "documentation": "<p>Specifies the serializer that you want Kinesis Data Firehose to use to convert the format of your data before it writes it to Amazon S3.</p>"
+      "documentation": "<p>Specifies the serializer that you want Kinesis Data Firehose to use to convert the format of your data before it writes it to Amazon S3. This parameter is required if <code>Enabled</code> is set to true.</p>"
     },
     "ParquetCompression": {
       "type": "string",
@@ -1630,11 +1677,16 @@
     },
     "Password": {
       "type": "string",
+      "max": 512,
       "min": 6,
+      "pattern": ".*",
       "sensitive": true
     },
     "Prefix": {
-      "type": "string"
+      "type": "string",
+      "max": 1024,
+      "min": 0,
+      "pattern": ".*"
     },
     "ProcessingConfiguration": {
       "type": "structure",
@@ -1710,7 +1762,8 @@
     "ProcessorParameterValue": {
       "type": "string",
       "max": 512,
-      "min": 1
+      "min": 1,
+      "pattern": "^(?!\\s*$).+"
     },
     "ProcessorType": {
       "type": "string",
@@ -2194,7 +2247,15 @@
           "documentation": "<p>Specifies the table version for the output data schema. If you don't specify this version ID, or if you set it to <code>LATEST</code>, Kinesis Data Firehose uses the most recent version. This means that any updates to the table are automatically picked up.</p>"
         }
       },
-      "documentation": "<p>Specifies the schema to which you want Kinesis Data Firehose to configure your data before it writes it to Amazon S3.</p>"
+      "documentation": "<p>Specifies the schema to which you want Kinesis Data Firehose to configure your data before it writes it to Amazon S3. This parameter is required if <code>Enabled</code> is set to true.</p>"
+    },
+    "SecurityGroupIdList": {
+      "type": "list",
+      "member": {
+        "shape": "NonEmptyStringWithoutWhitespace"
+      },
+      "max": 5,
+      "min": 1
     },
     "Serializer": {
       "type": "structure",
@@ -2415,6 +2476,14 @@
       "type": "structure",
       "members": {}
     },
+    "SubnetIdList": {
+      "type": "list",
+      "member": {
+        "shape": "NonEmptyStringWithoutWhitespace"
+      },
+      "max": 16,
+      "min": 1
+    },
     "Tag": {
       "type": "structure",
       "required": [
@@ -2464,7 +2533,8 @@
     "TagKey": {
       "type": "string",
       "max": 128,
-      "min": 1
+      "min": 1,
+      "pattern": "^(?!aws:)[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@%]*$"
     },
     "TagKeyList": {
       "type": "list",
@@ -2477,7 +2547,8 @@
     "TagValue": {
       "type": "string",
       "max": 256,
-      "min": 0
+      "min": 0,
+      "pattern": "^[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@%]*$"
     },
     "Timestamp": {
       "type": "timestamp"
@@ -2552,8 +2623,61 @@
     },
     "Username": {
       "type": "string",
+      "max": 512,
       "min": 1,
+      "pattern": ".*",
       "sensitive": true
+    },
+    "VpcConfiguration": {
+      "type": "structure",
+      "required": [
+        "SubnetIds",
+        "RoleARN",
+        "SecurityGroupIds"
+      ],
+      "members": {
+        "SubnetIds": {
+          "shape": "SubnetIdList",
+          "documentation": "<p>The IDs of the subnets that you want Kinesis Data Firehose to use to create ENIs in the VPC of the Amazon ES destination. Make sure that the routing tables and inbound and outbound rules allow traffic to flow from the subnets whose IDs are specified here to the subnets that have the destination Amazon ES endpoints. Kinesis Data Firehose creates at least one ENI in each of the subnets that are specified here. Do not delete or modify these ENIs.</p> <p>The number of ENIs that Kinesis Data Firehose creates in the subnets specified here scales up and down automatically based on throughput. To enable Kinesis Data Firehose to scale up the number of ENIs to match throughput, ensure that you have sufficient quota. To help you calculate the quota you need, assume that Kinesis Data Firehose can create up to three ENIs for this delivery stream for each of the subnets specified here. For more information about ENI quota, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis\">Network Interfaces </a> in the Amazon VPC Quotas topic.</p>"
+        },
+        "RoleARN": {
+          "shape": "RoleARN",
+          "documentation": "<p>The ARN of the IAM role that you want the delivery stream to use to create endpoints in the destination VPC.</p>"
+        },
+        "SecurityGroupIds": {
+          "shape": "SecurityGroupIdList",
+          "documentation": "<p>The IDs of the security groups that you want Kinesis Data Firehose to use when it creates ENIs in the VPC of the Amazon ES destination.</p>"
+        }
+      },
+      "documentation": "<p>The details of the VPC of the Amazon ES destination.</p>"
+    },
+    "VpcConfigurationDescription": {
+      "type": "structure",
+      "required": [
+        "SubnetIds",
+        "RoleARN",
+        "SecurityGroupIds",
+        "VpcId"
+      ],
+      "members": {
+        "SubnetIds": {
+          "shape": "SubnetIdList",
+          "documentation": "<p>The IDs of the subnets that Kinesis Data Firehose uses to create ENIs in the VPC of the Amazon ES destination. Make sure that the routing tables and inbound and outbound rules allow traffic to flow from the subnets whose IDs are specified here to the subnets that have the destination Amazon ES endpoints. Kinesis Data Firehose creates at least one ENI in each of the subnets that are specified here. Do not delete or modify these ENIs.</p> <p>The number of ENIs that Kinesis Data Firehose creates in the subnets specified here scales up and down automatically based on throughput. To enable Kinesis Data Firehose to scale up the number of ENIs to match throughput, ensure that you have sufficient quota. To help you calculate the quota you need, assume that Kinesis Data Firehose can create up to three ENIs for this delivery stream for each of the subnets specified here. For more information about ENI quota, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis\">Network Interfaces </a> in the Amazon VPC Quotas topic.</p>"
+        },
+        "RoleARN": {
+          "shape": "RoleARN",
+          "documentation": "<p>The ARN of the IAM role that you want the delivery stream uses to create endpoints in the destination VPC.</p>"
+        },
+        "SecurityGroupIds": {
+          "shape": "SecurityGroupIdList",
+          "documentation": "<p>The IDs of the security groups that Kinesis Data Firehose uses when it creates ENIs in the VPC of the Amazon ES destination.</p>"
+        },
+        "VpcId": {
+          "shape": "NonEmptyStringWithoutWhitespace",
+          "documentation": "<p>The ID of the Amazon ES destination's VPC.</p>"
+        }
+      },
+      "documentation": "<p>The details of the VPC of the Amazon ES destination.</p>"
     }
   },
   "documentation": "<fullname>Amazon Kinesis Data Firehose API Reference</fullname> <p>Amazon Kinesis Data Firehose is a fully managed service that delivers real-time streaming data to destinations such as Amazon Simple Storage Service (Amazon S3), Amazon Elasticsearch Service (Amazon ES), Amazon Redshift, and Splunk.</p>"

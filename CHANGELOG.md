@@ -1,6 +1,16 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.661.0-->
+<!--LATEST=2.662.0-->
 <!--ENTRYINSERT-->
+
+## 2.662.0
+* feature: ApplicationAutoScaling: This release supports Auto Scaling in Amazon Keyspaces for Apache Cassandra.
+* feature: Firehose: You can now deliver streaming data to an Amazon Elasticsearch Service domain in an Amazon VPC. You can now compress streaming data delivered to S3 using Hadoop-Snappy in addition to Gzip, Zip and Snappy formats.
+* feature: MediaPackageVod: Adds tagging support for PackagingGroups, PackagingConfigurations, and Assets
+* feature: Pinpoint: This release of the Amazon Pinpoint API enhances support for sending campaigns through custom channels to locations such as AWS Lambda functions or web applications. Campaigns can now use CustomDeliveryConfiguration and CampaignCustomMessage to configure custom channel settings for a campaign.
+* feature: RAM: AWS Resource Access Manager (RAM) provides a new ListResourceTypes action. This action lets you list the resource types that can be shared using AWS RAM.
+* feature: RDS: Adds support for AWS Local Zones, including a new optional parameter AvailabilityZoneGroup for the DescribeOrderableDBInstanceOptions operation.
+* feature: StorageGateway: Added AutomaticTapeCreation APIs
+* feature: Transfer: This release adds support for transfers over FTPS and FTP in and out of Amazon S3, which makes it easy to migrate File Transfer Protocol over SSL (FTPS) and FTP workloads to AWS, in addition to the existing support for Secure File Transfer Protocol (SFTP).
 
 ## 2.661.0
 * feature: CodeGuruReviewer: Add support for code review and recommendation feedback APIs.

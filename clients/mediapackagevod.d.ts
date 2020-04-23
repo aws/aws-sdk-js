@@ -107,6 +107,30 @@ declare class MediaPackageVod extends Service {
    * Returns a collection of MediaPackage VOD PackagingGroup resources.
    */
   listPackagingGroups(callback?: (err: AWSError, data: MediaPackageVod.Types.ListPackagingGroupsResponse) => void): Request<MediaPackageVod.Types.ListPackagingGroupsResponse, AWSError>;
+  /**
+   * List tags for a given MediaPackage VOD resource
+   */
+  listTagsForResource(params: MediaPackageVod.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: MediaPackageVod.Types.ListTagsForResourceResponse) => void): Request<MediaPackageVod.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * List tags for a given MediaPackage VOD resource
+   */
+  listTagsForResource(callback?: (err: AWSError, data: MediaPackageVod.Types.ListTagsForResourceResponse) => void): Request<MediaPackageVod.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Set tags for a given MediaPackage VOD resource
+   */
+  tagResource(params: MediaPackageVod.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Set tags for a given MediaPackage VOD resource
+   */
+  tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete tags for a given MediaPackage VOD resource
+   */
+  untagResource(params: MediaPackageVod.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete tags for a given MediaPackage VOD resource
+   */
+  untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace MediaPackageVod {
   export type AdMarkers = "NONE"|"SCTE35_ENHANCED"|"PASSTHROUGH"|string;
@@ -139,6 +163,7 @@ declare namespace MediaPackageVod {
      * The IAM role ARN used to access the source S3 bucket.
      */
     SourceRoleArn?: __string;
+    Tags?: Tags;
   }
   export interface CmafEncryption {
     SpekeKeyProvider: SpekeKeyProvider;
@@ -177,6 +202,7 @@ rounded to the nearest multiple of the source fragment duration.
      * The IAM role ARN used to access the source S3 bucket.
      */
     SourceRoleArn: __string;
+    Tags?: Tags;
   }
   export interface CreateAssetResponse {
     /**
@@ -211,6 +237,7 @@ rounded to the nearest multiple of the source fragment duration.
      * The IAM role_arn used to access the source S3 bucket.
      */
     SourceRoleArn?: __string;
+    Tags?: Tags;
   }
   export interface CreatePackagingConfigurationRequest {
     CmafPackage?: CmafPackage;
@@ -225,6 +252,7 @@ rounded to the nearest multiple of the source fragment duration.
      * The ID of a PackagingGroup.
      */
     PackagingGroupId: __string;
+    Tags?: Tags;
   }
   export interface CreatePackagingConfigurationResponse {
     /**
@@ -243,12 +271,14 @@ rounded to the nearest multiple of the source fragment duration.
      * The ID of a PackagingGroup.
      */
     PackagingGroupId?: __string;
+    Tags?: Tags;
   }
   export interface CreatePackagingGroupRequest {
     /**
      * The ID of the PackagingGroup.
      */
     Id: __string;
+    Tags?: Tags;
   }
   export interface CreatePackagingGroupResponse {
     /**
@@ -263,6 +293,7 @@ rounded to the nearest multiple of the source fragment duration.
      * The ID of the PackagingGroup.
      */
     Id?: __string;
+    Tags?: Tags;
   }
   export interface DashEncryption {
     SpekeKeyProvider: SpekeKeyProvider;
@@ -374,6 +405,7 @@ rounded to the nearest multiple of the source segment duration.
      * The IAM role_arn used to access the source S3 bucket.
      */
     SourceRoleArn?: __string;
+    Tags?: Tags;
   }
   export interface DescribePackagingConfigurationRequest {
     /**
@@ -398,6 +430,7 @@ rounded to the nearest multiple of the source segment duration.
      * The ID of a PackagingGroup.
      */
     PackagingGroupId?: __string;
+    Tags?: Tags;
   }
   export interface DescribePackagingGroupRequest {
     /**
@@ -418,6 +451,7 @@ rounded to the nearest multiple of the source segment duration.
      * The ID of the PackagingGroup.
      */
     Id?: __string;
+    Tags?: Tags;
   }
   export interface EgressEndpoint {
     /**
@@ -566,6 +600,12 @@ rounded to the nearest multiple of the source fragment duration.
      */
     PackagingGroups?: __listOfPackagingGroup;
   }
+  export interface ListTagsForResourceRequest {
+    ResourceArn: __string;
+  }
+  export interface ListTagsForResourceResponse {
+    Tags?: __mapOf__string;
+  }
   export type ManifestLayout = "FULL"|"COMPACT"|string;
   export type MaxResults = number;
   export interface MssEncryption {
@@ -606,6 +646,7 @@ rounded to the nearest multiple of the source fragment duration.
      * The ID of a PackagingGroup.
      */
     PackagingGroupId?: __string;
+    Tags?: Tags;
   }
   export interface PackagingGroup {
     /**
@@ -620,6 +661,7 @@ rounded to the nearest multiple of the source fragment duration.
      * The ID of the PackagingGroup.
      */
     Id?: __string;
+    Tags?: Tags;
   }
   export type Profile = "NONE"|"HBBTV_1_5"|string;
   export type SegmentTemplateFormat = "NUMBER_WITH_TIMELINE"|"TIME_WITH_TIMELINE"|"NUMBER_WITH_DURATION"|string;
@@ -654,6 +696,18 @@ MediaPackage will assume when accessing the key provider service.
      */
     StreamOrder?: StreamOrder;
   }
+  export interface TagResourceRequest {
+    ResourceArn: __string;
+    Tags: __mapOf__string;
+  }
+  export type Tags = {[key: string]: __string};
+  export interface UntagResourceRequest {
+    ResourceArn: __string;
+    /**
+     * The key(s) of tag to be deleted
+     */
+    TagKeys: __listOf__string;
+  }
   export type __PeriodTriggersElement = "ADS"|string;
   export type __boolean = boolean;
   export type __integer = number;
@@ -666,6 +720,7 @@ MediaPackage will assume when accessing the key provider service.
   export type __listOfPackagingGroup = PackagingGroup[];
   export type __listOf__PeriodTriggersElement = __PeriodTriggersElement[];
   export type __listOf__string = __string[];
+  export type __mapOf__string = {[key: string]: __string};
   export type __string = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
