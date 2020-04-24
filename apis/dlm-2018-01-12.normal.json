@@ -301,7 +301,7 @@
       "members": {
         "Interval": {
           "shape": "Interval",
-          "documentation": "<p>The interval between snapshots. The supported values are 2, 3, 4, 6, 8, 12, and 24.</p>"
+          "documentation": "<p>The interval between snapshots. The supported values are 1, 2, 3, 4, 6, 8, 12, and 24.</p>"
         },
         "IntervalUnit": {
           "shape": "IntervalUnitValues",

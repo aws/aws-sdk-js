@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.662.0-->
+<!--LATEST=2.663.0-->
 <!--ENTRYINSERT-->
+
+## 2.663.0
+* feature: ElasticInference: This feature allows customers to describe the accelerator types and offerings on any region where Elastic Inference is available.
+* feature: Iot: This release adds a new exception type to the AWS IoT SetV2LoggingLevel API.
 
 ## 2.662.0
 * feature: ApplicationAutoScaling: This release supports Auto Scaling in Amazon Keyspaces for Apache Cassandra.

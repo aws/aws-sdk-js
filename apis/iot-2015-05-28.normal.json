@@ -5438,6 +5438,9 @@
         },
         {
           "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "LimitExceededException"
         }
       ],
       "documentation": "<p>Sets the logging level.</p>"

@@ -113,7 +113,7 @@ declare namespace DLM {
   }
   export interface CreateRule {
     /**
-     * The interval between snapshots. The supported values are 2, 3, 4, 6, 8, 12, and 24.
+     * The interval between snapshots. The supported values are 1, 2, 3, 4, 6, 8, 12, and 24.
      */
     Interval: Interval;
     /**
