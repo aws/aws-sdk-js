@@ -7821,11 +7821,6 @@
       "min": 1,
       "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
     },
-    "EnvironmentArn": {
-      "type": "string",
-      "max": 256,
-      "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:environment/[a-z0-9]([-.]?[a-z0-9])*$"
-    },
     "EnvironmentKey": {
       "type": "string",
       "max": 1024,
@@ -13336,16 +13331,16 @@
     "ResourceSpec": {
       "type": "structure",
       "members": {
-        "EnvironmentArn": {
-          "shape": "EnvironmentArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the environment.</p>"
+        "SageMakerImageArn": {
+          "shape": "SageMakerImageArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the image created on the instance.</p>"
         },
         "InstanceType": {
           "shape": "AppInstanceType",
           "documentation": "<p>The instance type.</p>"
         }
       },
-      "documentation": "<p>The instance type and quantity.</p>"
+      "documentation": "<p>The instance type and the Amazon Resource Name (ARN) of the image created on the instance. The ARN is stored as metadata in Amazon SageMaker Studio notebooks.</p>"
     },
     "ResourceType": {
       "type": "string",
@@ -13470,6 +13465,11 @@
       "type": "string",
       "max": 1024,
       "pattern": "^(https|s3)://([^/]+)/?(.*)$"
+    },
+    "SageMakerImageArn": {
+      "type": "string",
+      "max": 256,
+      "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"
     },
     "SamplingPercentage": {
       "type": "integer",

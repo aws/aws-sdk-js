@@ -4655,7 +4655,6 @@ declare namespace SageMaker {
   export type EndpointSummaryList = EndpointSummary[];
   export type EntityDescription = string;
   export type EntityName = string;
-  export type EnvironmentArn = string;
   export type EnvironmentKey = string;
   export type EnvironmentMap = {[key: string]: EnvironmentValue};
   export type EnvironmentValue = string;
@@ -7903,9 +7902,9 @@ declare namespace SageMaker {
   export type ResourcePropertyName = string;
   export interface ResourceSpec {
     /**
-     * The Amazon Resource Name (ARN) of the environment.
+     * The Amazon Resource Name (ARN) of the image created on the instance.
      */
-    EnvironmentArn?: EnvironmentArn;
+    SageMakerImageArn?: SageMakerImageArn;
     /**
      * The instance type.
      */
@@ -7947,6 +7946,7 @@ declare namespace SageMaker {
   }
   export type S3DataType = "ManifestFile"|"S3Prefix"|"AugmentedManifestFile"|string;
   export type S3Uri = string;
+  export type SageMakerImageArn = string;
   export type SamplingPercentage = number;
   export interface ScheduleConfig {
     /**

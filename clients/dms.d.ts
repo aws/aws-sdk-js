@@ -658,21 +658,25 @@ declare namespace DMS {
      */
     DmsTransferSettings?: DmsTransferSettings;
     /**
-     * Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the configuration properties section in Using MongoDB as a Target for AWS Database Migration Service in the AWS Database Migration Service User Guide. 
+     * Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see Using MongoDB as a Target for AWS Database Migration Service in the AWS Database Migration Service User Guide. 
      */
     MongoDbSettings?: MongoDbSettings;
     /**
-     * Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams. For information about other available settings, see Using Object Mapping to Migrate Data to a Kinesis Data Stream in the AWS Database Migration User Guide. 
+     * Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams. For more information about the available settings, see Using Amazon Kinesis Data Streams as a Target for AWS Database Migration Service in the AWS Database Migration User Guide. 
      */
     KinesisSettings?: KinesisSettings;
     /**
-     * Settings in JSON format for the target Apache Kafka endpoint. For information about other available settings, see Using Object Mapping to Migrate Data to Apache Kafka in the AWS Database Migration User Guide. 
+     * Settings in JSON format for the target Apache Kafka endpoint. For more information about the available settings, see Using Apache Kafka as a Target for AWS Database Migration Service in the AWS Database Migration User Guide. 
      */
     KafkaSettings?: KafkaSettings;
     /**
      * Settings in JSON format for the target Elasticsearch endpoint. For more information about the available settings, see Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS in the AWS Database Migration User Guide. 
      */
     ElasticsearchSettings?: ElasticsearchSettings;
+    /**
+     * Settings in JSON format for the target Amazon Neptune endpoint. For more information about the available settings, see https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings in the AWS Database Migration Service User Guide. 
+     */
+    NeptuneSettings?: NeptuneSettings;
     RedshiftSettings?: RedshiftSettings;
   }
   export interface CreateEndpointResponse {
@@ -827,11 +831,11 @@ declare namespace DMS {
      */
     MigrationType: MigrationTypeValue;
     /**
-     * The table mappings for the task, in JSON format. For more information, see Table Mapping in the AWS Database Migration User Guide. 
+     * The table mappings for the task, in JSON format. For more information, see Using Table Mapping to Specify Task Settings in the AWS Database Migration User Guide. 
      */
     TableMappings: String;
     /**
-     * Overall settings for the task, in JSON format. For more information, see Task Settings in the AWS Database Migration User Guide. 
+     * Overall settings for the task, in JSON format. For more information, see Specifying Task Settings for AWS Database Migration Service Tasks in the AWS Database Migration User Guide. 
      */
     ReplicationTaskSettings?: String;
     /**
@@ -850,6 +854,10 @@ declare namespace DMS {
      * One or more tags to be assigned to the replication task.
      */
     Tags?: TagList;
+    /**
+     * Supplemental information that the task requires to migrate the data for certain source and target endpoints. For more information, see Specifying Supplemental Data for Task Settings in the AWS Database Migration User Guide. 
+     */
+    TaskData?: String;
   }
   export interface CreateReplicationTaskResponse {
     /**
@@ -1256,7 +1264,7 @@ declare namespace DMS {
   }
   export interface DescribeReplicationSubnetGroupsMessage {
     /**
-     * Filters applied to the describe action.
+     * Filters applied to the describe action. Valid filter names: replication-subnet-group-id
      */
     Filters?: FilterList;
     /**
@@ -1525,6 +1533,10 @@ declare namespace DMS {
      */
     ElasticsearchSettings?: ElasticsearchSettings;
     /**
+     * The settings for the MongoDB source endpoint. For more information, see the NeptuneSettings structure.
+     */
+    NeptuneSettings?: NeptuneSettings;
+    /**
      * Settings for the Amazon Redshift endpoint.
      */
     RedshiftSettings?: RedshiftSettings;
@@ -1776,17 +1788,21 @@ declare namespace DMS {
      */
     MongoDbSettings?: MongoDbSettings;
     /**
-     * Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams. For information about other available settings, see Using Object Mapping to Migrate Data to a Kinesis Data Stream in the AWS Database Migration User Guide. 
+     * Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams. For more information about the available settings, see Using Amazon Kinesis Data Streams as a Target for AWS Database Migration Service in the AWS Database Migration User Guide. 
      */
     KinesisSettings?: KinesisSettings;
     /**
-     * Settings in JSON format for the target Apache Kafka endpoint. For information about other available settings, see Using Object Mapping to Migrate Data to Apache Kafka in the AWS Database Migration User Guide. 
+     * Settings in JSON format for the target Apache Kafka endpoint. For more information about the available settings, see Using Apache Kafka as a Target for AWS Database Migration Service in the AWS Database Migration User Guide. 
      */
     KafkaSettings?: KafkaSettings;
     /**
      * Settings in JSON format for the target Elasticsearch endpoint. For more information about the available settings, see Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS in the AWS Database Migration User Guide. 
      */
     ElasticsearchSettings?: ElasticsearchSettings;
+    /**
+     * Settings in JSON format for the target Amazon Neptune endpoint. For more information about the available settings, see https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings in the AWS Database Migration Service User Guide. 
+     */
+    NeptuneSettings?: NeptuneSettings;
     RedshiftSettings?: RedshiftSettings;
   }
   export interface ModifyEndpointResponse {
@@ -1913,7 +1929,7 @@ declare namespace DMS {
      */
     TableMappings?: String;
     /**
-     * JSON file that contains settings for the task, such as target metadata settings.
+     * JSON file that contains settings for the task, such as task metadata settings.
      */
     ReplicationTaskSettings?: String;
     /**
@@ -1928,6 +1944,10 @@ declare namespace DMS {
      * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “
      */
     CdcStopPosition?: String;
+    /**
+     * Supplemental information that the task requires to migrate the data for certain source and target endpoints. For more information, see Specifying Supplemental Data for Task Settings in the AWS Database Migration User Guide. 
+     */
+    TaskData?: String;
   }
   export interface ModifyReplicationTaskResponse {
     /**
@@ -1984,6 +2004,36 @@ declare namespace DMS {
      * The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don't specify a value for the KmsKeyId parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.
      */
     KmsKeyId?: String;
+  }
+  export interface NeptuneSettings {
+    /**
+     * The ARN of the service role you have created for the Neptune target endpoint. For more information, see https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.ServiceRole in the AWS Database Migration Service User Guide. 
+     */
+    ServiceAccessRoleArn?: String;
+    /**
+     * The name of the S3 bucket for AWS DMS to temporarily store migrated graph data in CSV files before bulk-loading it to the Neptune target database. AWS DMS maps the SQL source data to graph data before storing it in these CSV files.
+     */
+    S3BucketName: String;
+    /**
+     * A folder path where you where you want AWS DMS to store migrated graph data in the S3 bucket specified by S3BucketName 
+     */
+    S3BucketFolder: String;
+    /**
+     * The number of milliseconds for AWS DMS to wait to retry a bulk-load of migrated graph data to the Neptune target database before raising an error. The default is 250.
+     */
+    ErrorRetryDuration?: IntegerOptional;
+    /**
+     * The maximum size in KB of migrated graph data stored in a CSV file before AWS DMS bulk-loads the data to the Neptune target database. The default is 1048576 KB. If successful, AWS DMS clears the bucket, ready to store the next batch of migrated graph data.
+     */
+    MaxFileSize?: IntegerOptional;
+    /**
+     * The number of times for AWS DMS to retry a bulk-load of migrated graph data to the Neptune target database before raising an error. The default is 5.
+     */
+    MaxRetryCount?: IntegerOptional;
+    /**
+     * If you want IAM authorization enabled for this endpoint, set this parameter to true and attach the appropriate role policy document to your service role specified by ServiceAccessRoleArn. The default is false.
+     */
+    IamAuthEnabled?: BooleanOptional;
   }
   export type NestingLevelValue = "none"|"one"|string;
   export interface OrderableReplicationInstance {
@@ -2468,6 +2518,10 @@ declare namespace DMS {
      * The statistics for the task, including elapsed time, tables loaded, and table errors.
      */
     ReplicationTaskStats?: ReplicationTaskStats;
+    /**
+     * Supplemental information that the task requires to migrate the data for certain source and target endpoints. For more information, see Specifying Supplemental Data for Task Settings in the AWS Database Migration User Guide. 
+     */
+    TaskData?: String;
   }
   export interface ReplicationTaskAssessmentResult {
     /**
@@ -2730,6 +2784,10 @@ declare namespace DMS {
      * The type of endpoint. Valid values are source and target.
      */
     EndpointType?: ReplicationEndpointTypeValue;
+    /**
+     * The earliest AWS DMS engine version that supports this endpoint engine. Note that endpoint engines released with AWS DMS versions earlier than 3.1.1 do not return a value for this parameter.
+     */
+    ReplicationInstanceEngineMinimumVersion?: String;
     /**
      * The expanded name for the engine name. For example, if the EngineName parameter is "aurora," this value would be "Amazon Aurora MySQL."
      */

@@ -192,7 +192,7 @@ declare namespace AccessAnalyzer {
      */
     resourceType: ResourceType;
     /**
-     * Indicates how the access that generated the finding is granted.
+     * Indicates how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.
      */
     sharedVia?: SharedViaList;
     /**
@@ -416,6 +416,10 @@ declare namespace AccessAnalyzer {
      */
     resourceType: ResourceType;
     /**
+     * The sources of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.
+     */
+    sources?: FindingSourceList;
+    /**
      * The current status of the finding.
      */
     status: FindingStatus;
@@ -426,6 +430,24 @@ declare namespace AccessAnalyzer {
   }
   export type FindingId = string;
   export type FindingIdList = FindingId[];
+  export interface FindingSource {
+    /**
+     * Includes details about how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.
+     */
+    detail?: FindingSourceDetail;
+    /**
+     * Indicates the type of access that generated the finding.
+     */
+    type: FindingSourceType;
+  }
+  export interface FindingSourceDetail {
+    /**
+     * The ARN of the access point that generated the finding.
+     */
+    accessPointArn?: String;
+  }
+  export type FindingSourceList = FindingSource[];
+  export type FindingSourceType = "BUCKET_ACL"|"POLICY"|"S3_ACCESS_POINT"|string;
   export type FindingStatus = "ACTIVE"|"ARCHIVED"|"RESOLVED"|string;
   export type FindingStatusUpdate = "ACTIVE"|"ARCHIVED"|string;
   export interface FindingSummary {
@@ -473,6 +495,10 @@ declare namespace AccessAnalyzer {
      * The type of the resource that the external principal has access to.
      */
     resourceType: ResourceType;
+    /**
+     * The sources of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.
+     */
+    sources?: FindingSourceList;
     /**
      * The status of the finding.
      */

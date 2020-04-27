@@ -551,6 +551,10 @@ declare namespace DataExchange {
      */
     DataSetId: Id;
     /**
+     * Encryption configuration for the export job.
+     */
+    Encryption?: ExportServerSideEncryption;
+    /**
      * The unique identifier for the revision associated with this export request.
      */
     RevisionId: Id;
@@ -565,9 +569,23 @@ declare namespace DataExchange {
      */
     DataSetId: Id;
     /**
+     * Encryption configuration of the export job.
+     */
+    Encryption?: ExportServerSideEncryption;
+    /**
      * The unique identifier for the revision associated with this export response.
      */
     RevisionId: Id;
+  }
+  export interface ExportServerSideEncryption {
+    /**
+     * The Amazon Resource Name (ARN) of the the AWS KMS key you want to use to encrypt the Amazon S3 objects. This parameter is required if you choose aws:kms as an encryption type.
+     */
+    KmsKeyArn: __string;
+    /**
+     * The type of server side encryption used for encrypting the objects in Amazon S3.
+     */
+    Type: ServerSideEncryptionTypes;
   }
   export interface GetAssetRequest {
     /**
@@ -894,7 +912,7 @@ declare namespace DataExchange {
      */
     Message: __string;
     /**
-     * The unqiue identifier for the resource related to the error.
+     * The unique identifier for the resource related to the error.
      */
     ResourceId?: __string;
     /**
@@ -1105,6 +1123,7 @@ declare namespace DataExchange {
      */
     Size: __doubleMin0;
   }
+  export type ServerSideEncryptionTypes = "aws:kms"|"AES256"|string;
   export interface StartJobRequest {
     /**
      * The unique identifier for a job.

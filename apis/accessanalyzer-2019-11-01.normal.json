@@ -635,7 +635,7 @@
         },
         "sharedVia": {
           "shape": "SharedViaList",
-          "documentation": "<p>Indicates how the access that generated the finding is granted.</p>"
+          "documentation": "<p>Indicates how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.</p>"
         },
         "status": {
           "shape": "FindingStatus",
@@ -1002,6 +1002,10 @@
           "shape": "ResourceType",
           "documentation": "<p>The type of the resource reported in the finding.</p>"
         },
+        "sources": {
+          "shape": "FindingSourceList",
+          "documentation": "<p>The sources of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.</p>"
+        },
         "status": {
           "shape": "FindingStatus",
           "documentation": "<p>The current status of the finding.</p>"
@@ -1021,6 +1025,47 @@
       "member": {
         "shape": "FindingId"
       }
+    },
+    "FindingSource": {
+      "type": "structure",
+      "required": [
+        "type"
+      ],
+      "members": {
+        "detail": {
+          "shape": "FindingSourceDetail",
+          "documentation": "<p>Includes details about how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.</p>"
+        },
+        "type": {
+          "shape": "FindingSourceType",
+          "documentation": "<p>Indicates the type of access that generated the finding.</p>"
+        }
+      },
+      "documentation": "<p>The source of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.</p>"
+    },
+    "FindingSourceDetail": {
+      "type": "structure",
+      "members": {
+        "accessPointArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the access point that generated the finding.</p>"
+        }
+      },
+      "documentation": "<p>Includes details about how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.</p>"
+    },
+    "FindingSourceList": {
+      "type": "list",
+      "member": {
+        "shape": "FindingSource"
+      }
+    },
+    "FindingSourceType": {
+      "type": "string",
+      "enum": [
+        "BUCKET_ACL",
+        "POLICY",
+        "S3_ACCESS_POINT"
+      ]
     },
     "FindingStatus": {
       "type": "string",
@@ -1093,6 +1138,10 @@
         "resourceType": {
           "shape": "ResourceType",
           "documentation": "<p>The type of the resource that the external principal has access to.</p>"
+        },
+        "sources": {
+          "shape": "FindingSourceList",
+          "documentation": "<p>The sources of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.</p>"
         },
         "status": {
           "shape": "FindingStatus",
