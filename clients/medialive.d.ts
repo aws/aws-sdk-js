@@ -680,6 +680,19 @@ Alternate rendition that the client will not try to play back by default. Repres
   export interface AudioSelectorSettings {
     AudioLanguageSelection?: AudioLanguageSelection;
     AudioPidSelection?: AudioPidSelection;
+    AudioTrackSelection?: AudioTrackSelection;
+  }
+  export interface AudioTrack {
+    /**
+     * 1-based integer value that maps to a specific audio track
+     */
+    Track: __integerMin1;
+  }
+  export interface AudioTrackSelection {
+    /**
+     * Selects one or more unique audio tracks from within an mp4 source.
+     */
+    Tracks: __listOfAudioTrack;
   }
   export type AudioType = "CLEAN_EFFECTS"|"HEARING_IMPAIRED"|"UNDEFINED"|"VISUAL_IMPAIRED_COMMENTARY"|string;
   export type AuthenticationScheme = "AKAMAI"|"COMMON"|string;
@@ -2148,7 +2161,17 @@ during input switch actions. Presently, this functionality only works with MP4_F
      * List all the audio groups that are used with the video output stream. Input all the audio GROUP-IDs that are associated to the video, separate by ','.
      */
     AudioRenditionSets?: __string;
+    /**
+     * If set to passthrough, Nielsen inaudible tones for media tracking will be detected in the input audio and an equivalent ID3 tag will be inserted in the output.
+     */
+    NielsenId3Behavior?: Fmp4NielsenId3Behavior;
+    /**
+     * When set to passthrough, timed metadata is passed through from input to output.
+     */
+    TimedMetadataBehavior?: Fmp4TimedMetadataBehavior;
   }
+  export type Fmp4NielsenId3Behavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
+  export type Fmp4TimedMetadataBehavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
   export interface FollowModeScheduleActionStartSettings {
     /**
      * Identifies whether this action starts relative to the start or relative to the end of the reference action.
@@ -2224,6 +2247,9 @@ EPOCHLOCKING - MediaLive will attempt to synchronize the output of each pipeline
     Rec709Settings?: Rec709Settings;
   }
   export type H264EntropyEncoding = "CABAC"|"CAVLC"|string;
+  export interface H264FilterSettings {
+    TemporalFilterSettings?: TemporalFilterSettings;
+  }
   export type H264FlickerAq = "DISABLED"|"ENABLED"|string;
   export type H264ForceFieldPictures = "DISABLED"|"ENABLED"|string;
   export type H264FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
@@ -2233,6 +2259,7 @@ EPOCHLOCKING - MediaLive will attempt to synchronize the output of each pipeline
   export type H264LookAheadRateControl = "HIGH"|"LOW"|"MEDIUM"|string;
   export type H264ParControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
   export type H264Profile = "BASELINE"|"HIGH"|"HIGH_10BIT"|"HIGH_422"|"HIGH_422_10BIT"|"MAIN"|string;
+  export type H264QualityLevel = "ENHANCED_QUALITY"|"STANDARD_QUALITY"|string;
   export type H264RateControlMode = "CBR"|"MULTIPLEX"|"QVBR"|"VBR"|string;
   export type H264ScanType = "INTERLACED"|"PROGRESSIVE"|string;
   export type H264SceneChangeDetect = "DISABLED"|"ENABLED"|string;
@@ -2270,6 +2297,10 @@ EPOCHLOCKING - MediaLive will attempt to synchronize the output of each pipeline
      */
     EntropyEncoding?: H264EntropyEncoding;
     /**
+     * Settings associated with the specified filter.
+     */
+    FilterSettings?: H264FilterSettings;
+    /**
      * Four bit AFD value to write on all frames of video in the output stream. Only valid when afdSignaling is set to 'Fixed'.
      */
     FixedAfd?: FixedAfd;
@@ -2278,9 +2309,9 @@ EPOCHLOCKING - MediaLive will attempt to synchronize the output of each pipeline
      */
     FlickerAq?: H264FlickerAq;
     /**
-     * This setting applies only when scan type is "interlaced." It controls whether coding is on a field basis or a frame basis. (When the video is progressive, the coding is always on a frame basis.)
-enabled: Always code on a field basis, so that odd and even sets of fields are coded separately.
-disabled: Code the two sets of fields separately (on a field basis) or together (on a frame basis, using PAFF or MBAFF), depending on what is most appropriate for the content.
+     * This setting applies only when scan type is "interlaced." It controls whether coding is performed on a field basis or on a frame basis. (When the video is progressive, the coding is always performed on a frame basis.)
+enabled: Force MediaLive to code on a field basis, so that odd and even sets of fields are coded separately.
+disabled: Code the two sets of fields separately (on a field basis) or together (on a frame basis using PAFF), depending on what is most appropriate for the content.
      */
     ForceFieldPictures?: H264ForceFieldPictures;
     /**
@@ -2355,6 +2386,10 @@ For VBR: Set the maximum bitrate in order to accommodate expected spikes in the 
      * H.264 Profile.
      */
     Profile?: H264Profile;
+    /**
+     * If set to "ENHANCEDQUALITY," improves visual quality at an increased output cost. If this video is being delivered to a MediaLive Multiplex, "ENHANCEDQUALITY" is always used.
+     */
+    QualityLevel?: H264QualityLevel;
     /**
      * Controls the target quality for the video encode. Applies only when the rate control mode is QVBR. Set values for the QVBR quality level field and Max bitrate field that suit your most important viewing devices. Recommended values are:
 - Primary screen: Quality level: 8 to 10. Max bitrate: 4M
@@ -2775,6 +2810,8 @@ VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, con
     Mode?: HlsMode;
     /**
      * MANIFESTSANDSEGMENTS: Generates manifests (master manifest, if applicable, and media manifests) for this output group.
+
+VARIANTMANIFESTSANDSEGMENTS: Generates media manifests for this output group, but not a master manifest.
 
 SEGMENTSONLY: Does not generate any manifests for this output group.
      */
@@ -3881,7 +3918,7 @@ Options:
      */
     SendDelayMs?: __integerMin0Max10000;
     /**
-     * If set to scte35, use incoming SCTE-35 messages to generate a sparse track in this group of MS-Smooth outputs.
+     * If set to scte35, use incoming SCTE-35 messages to generate a sparse track in this group of MS-Smooth outputs. scte35WithoutSegmentation is the same as scte35, except EML will not start a new segment at a SCTE-35 marker. It will still encode an IDR frame at a SCTE-35 marker.
      */
     SparseTrackType?: SmoothGroupSparseTrackType;
     /**
@@ -4776,7 +4813,7 @@ Valid values: 1, 2, 4, 6, 8
   export type SmoothGroupEventIdMode = "NO_EVENT_ID"|"USE_CONFIGURED"|"USE_TIMESTAMP"|string;
   export type SmoothGroupEventStopBehavior = "NONE"|"SEND_EOS"|string;
   export type SmoothGroupSegmentationMode = "USE_INPUT_SEGMENTATION"|"USE_SEGMENT_DURATION"|string;
-  export type SmoothGroupSparseTrackType = "NONE"|"SCTE_35"|string;
+  export type SmoothGroupSparseTrackType = "NONE"|"SCTE_35"|"SCTE_35_WITHOUT_SEGMENTATION"|string;
   export type SmoothGroupStreamManifestBehavior = "DO_NOT_SEND"|"SEND"|string;
   export type SmoothGroupTimestampOffsetMode = "USE_CONFIGURED_OFFSET"|"USE_EVENT_START_DATE"|string;
   export interface SmpteTtDestinationSettings {
@@ -5095,6 +5132,18 @@ one destination per packager.
      */
     PageNumber?: __string;
   }
+  export type TemporalFilterPostFilterSharpening = "AUTO"|"DISABLED"|"ENABLED"|string;
+  export interface TemporalFilterSettings {
+    /**
+     * If set to "ENABLED," applies post-filter sharpening to improve visual quality. This is most beneficial when using a noisy or compressed input source and low output bitrates.
+     */
+    PostFilterSharpening?: TemporalFilterPostFilterSharpening;
+    /**
+     * Filter strength. A higher value produces stronger filtering.
+     */
+    Strength?: TemporalFilterStrength;
+  }
+  export type TemporalFilterStrength = "AUTO"|"STRENGTH_1"|"STRENGTH_10"|"STRENGTH_11"|"STRENGTH_12"|"STRENGTH_13"|"STRENGTH_14"|"STRENGTH_15"|"STRENGTH_16"|"STRENGTH_2"|"STRENGTH_3"|"STRENGTH_4"|"STRENGTH_5"|"STRENGTH_6"|"STRENGTH_7"|"STRENGTH_8"|"STRENGTH_9"|string;
   export interface TimecodeConfig {
     /**
      * Identifies the source for the timecode that will be associated with the events outputs.
@@ -5436,6 +5485,7 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export type __listOfAudioChannelMapping = AudioChannelMapping[];
   export type __listOfAudioDescription = AudioDescription[];
   export type __listOfAudioSelector = AudioSelector[];
+  export type __listOfAudioTrack = AudioTrack[];
   export type __listOfCaptionDescription = CaptionDescription[];
   export type __listOfCaptionLanguageMapping = CaptionLanguageMapping[];
   export type __listOfCaptionSelector = CaptionSelector[];
