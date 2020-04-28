@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "readme",
+  "description": "Corrected Node.js TypeScript Usage example in README.md"
+}
