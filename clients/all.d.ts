@@ -219,3 +219,4 @@ export import KinesisVideoSignalingChannels = require('./kinesisvideosignalingch
 export import Detective = require('./detective');
 export import CodeStarconnections = require('./codestarconnections');
 export import Synthetics = require('./synthetics');
+export import IoTSiteWise = require('./iotsitewise');

@@ -868,5 +868,8 @@
   },
   "synthetics": {
     "name": "Synthetics"
+  },
+  "iotsitewise": {
+    "name": "IoTSiteWise"
   }
 }

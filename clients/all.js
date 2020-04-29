@@ -220,5 +220,6 @@ module.exports = {
   KinesisVideoSignalingChannels: require('./kinesisvideosignalingchannels'),
   Detective: require('./detective'),
   CodeStarconnections: require('./codestarconnections'),
-  Synthetics: require('./synthetics')
+  Synthetics: require('./synthetics'),
+  IoTSiteWise: require('./iotsitewise')
 };
