@@ -2624,6 +2624,11 @@
           "shape": "MpdSettings",
           "locationName": "mpdSettings",
           "documentation": "Settings for MP4 segments in DASH"
+        },
+        "MxfSettings": {
+          "shape": "MxfSettings",
+          "locationName": "mxfSettings",
+          "documentation": "MXF settings"
         }
       },
       "documentation": "Container specific settings."
@@ -5617,14 +5622,14 @@
         "StylePassthrough": {
           "shape": "ImscStylePassthrough",
           "locationName": "stylePassthrough",
-          "documentation": "Keep this setting enabled to have MediaConvert use the font style and position information from the captions source in the output. This option is available only when your input captions are CFF-TT, IMSC, SMPTE-TT, or TTML. Disable this setting for simplified output captions."
+          "documentation": "Keep this setting enabled to have MediaConvert use the font style and position information from the captions source in the output. This option is available only when your input captions are IMSC, SMPTE-TT, or TTML. Disable this setting for simplified output captions."
         }
       },
       "documentation": "Settings specific to IMSC caption outputs."
     },
     "ImscStylePassthrough": {
       "type": "string",
-      "documentation": "Keep this setting enabled to have MediaConvert use the font style and position information from the captions source in the output. This option is available only when your input captions are CFF-TT, IMSC, SMPTE-TT, or TTML. Disable this setting for simplified output captions.",
+      "documentation": "Keep this setting enabled to have MediaConvert use the font style and position information from the captions source in the output. This option is available only when your input captions are IMSC, SMPTE-TT, or TTML. Disable this setting for simplified output captions.",
       "enum": [
         "ENABLED",
         "DISABLED"
@@ -7868,6 +7873,25 @@
         "UTF16"
       ]
     },
+    "MxfAfdSignaling": {
+      "type": "string",
+      "documentation": "Optional. When you have AFD signaling set up in your output video stream, use this setting to choose whether to also include it in the MXF wrapper. Choose Don't copy (NO_COPY) to exclude AFD signaling from the MXF wrapper. Choose Copy from video stream (COPY_FROM_VIDEO) to copy the AFD values from the video stream for this output to the MXF wrapper. Regardless of which option you choose, the AFD values remain in the video stream. Related settings: To set up your output to include or exclude AFD values, see AfdSignaling, under VideoDescription. On the console, find AFD signaling under the output's video encoding settings.",
+      "enum": [
+        "NO_COPY",
+        "COPY_FROM_VIDEO"
+      ]
+    },
+    "MxfSettings": {
+      "type": "structure",
+      "members": {
+        "AfdSignaling": {
+          "shape": "MxfAfdSignaling",
+          "locationName": "afdSignaling",
+          "documentation": "Optional. When you have AFD signaling set up in your output video stream, use this setting to choose whether to also include it in the MXF wrapper. Choose Don't copy (NO_COPY) to exclude AFD signaling from the MXF wrapper. Choose Copy from video stream (COPY_FROM_VIDEO) to copy the AFD values from the video stream for this output to the MXF wrapper. Regardless of which option you choose, the AFD values remain in the video stream. Related settings: To set up your output to include or exclude AFD values, see AfdSignaling, under VideoDescription. On the console, find AFD signaling under the output's video encoding settings."
+        }
+      },
+      "documentation": "MXF settings"
+    },
     "NielsenConfiguration": {
       "type": "structure",
       "members": {
@@ -9021,14 +9045,14 @@
         "StylePassthrough": {
           "shape": "TtmlStylePassthrough",
           "locationName": "stylePassthrough",
-          "documentation": "Pass through style and position information from a TTML-like input source (TTML, SMPTE-TT, CFF-TT) to the CFF-TT output or TTML output."
+          "documentation": "Pass through style and position information from a TTML-like input source (TTML, SMPTE-TT) to the TTML output."
         }
       },
       "documentation": "Settings specific to TTML caption outputs, including Pass style information (TtmlStylePassthrough)."
     },
     "TtmlStylePassthrough": {
       "type": "string",
-      "documentation": "Pass through style and position information from a TTML-like input source (TTML, SMPTE-TT, CFF-TT) to the CFF-TT output or TTML output.",
+      "documentation": "Pass through style and position information from a TTML-like input source (TTML, SMPTE-TT) to the TTML output.",
       "enum": [
         "ENABLED",
         "DISABLED"

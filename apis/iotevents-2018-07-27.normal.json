@@ -526,40 +526,6 @@
         }
       ],
       "documentation": "<p>Updates an input.</p>"
-    },
-    "VerifyResourcesExistForTagris": {
-      "name": "VerifyResourcesExistForTagris",
-      "http": {
-        "method": "GET",
-        "requestUri": "/internal/tags/resource-status"
-      },
-      "input": {
-        "shape": "TagrisVerifyResourcesExistInput"
-      },
-      "output": {
-        "shape": "TagrisVerifyResourcesExistOutput"
-      },
-      "errors": [
-        {
-          "shape": "TagrisAccessDeniedException"
-        },
-        {
-          "shape": "TagrisInternalServiceException"
-        },
-        {
-          "shape": "TagrisInvalidArnException"
-        },
-        {
-          "shape": "TagrisInvalidParameterException"
-        },
-        {
-          "shape": "TagrisPartialResourcesExistResultsException"
-        },
-        {
-          "shape": "TagrisThrottledException"
-        }
-      ],
-      "internalonly": true
     }
   },
   "shapes": {
@@ -616,7 +582,7 @@
         },
         "iotSiteWise": {
           "shape": "IotSiteWiseAction",
-          "documentation": "<p>Sends information about the detector model instance and the event that triggered the action to an AWS IoT SiteWise asset property.</p>"
+          "documentation": "<p>Sends information about the detector model instance and the event that triggered the action to an asset property in AWS IoT SiteWise .</p>"
         }
       },
       "documentation": "<p>An action to be performed when the <code>condition</code> is TRUE.</p>"
@@ -1947,85 +1913,6 @@
       "type": "string",
       "max": 256,
       "min": 0
-    },
-    "TagrisAccountId": {
-      "type": "string",
-      "max": 12,
-      "min": 12
-    },
-    "TagrisAmazonResourceName": {
-      "type": "string",
-      "max": 1011,
-      "min": 1
-    },
-    "TagrisInternalId": {
-      "type": "string",
-      "max": 64,
-      "min": 0
-    },
-    "TagrisStatus": {
-      "type": "string",
-      "enum": [
-        "ACTIVE",
-        "NOT_ACTIVE"
-      ]
-    },
-    "TagrisSweepList": {
-      "type": "list",
-      "member": {
-        "shape": "TagrisSweepListItem"
-      }
-    },
-    "TagrisSweepListItem": {
-      "type": "structure",
-      "members": {
-        "TagrisAccountId": {
-          "shape": "TagrisAccountId"
-        },
-        "TagrisAmazonResourceName": {
-          "shape": "TagrisAmazonResourceName"
-        },
-        "TagrisInternalId": {
-          "shape": "TagrisInternalId"
-        },
-        "TagrisVersion": {
-          "shape": "TagrisVersion"
-        }
-      }
-    },
-    "TagrisSweepListResult": {
-      "type": "map",
-      "key": {
-        "shape": "TagrisAmazonResourceName"
-      },
-      "value": {
-        "shape": "TagrisStatus"
-      }
-    },
-    "TagrisVerifyResourcesExistInput": {
-      "type": "structure",
-      "required": [
-        "TagrisSweepList"
-      ],
-      "members": {
-        "TagrisSweepList": {
-          "shape": "TagrisSweepList"
-        }
-      }
-    },
-    "TagrisVerifyResourcesExistOutput": {
-      "type": "structure",
-      "required": [
-        "TagrisSweepListResult"
-      ],
-      "members": {
-        "TagrisSweepListResult": {
-          "shape": "TagrisSweepListResult"
-        }
-      }
-    },
-    "TagrisVersion": {
-      "type": "long"
     },
     "Tags": {
       "type": "list",

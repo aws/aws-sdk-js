@@ -966,7 +966,7 @@ declare namespace Lambda {
      */
     Description?: Description;
     /**
-     * The amount of time that Lambda allows a function to run before stopping it.
+     * The amount of time in seconds that Lambda allows a function to run before stopping it.
      */
     Timeout?: Timeout;
     /**

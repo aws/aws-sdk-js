@@ -2506,6 +2506,9 @@
           "shape": "ThrottlingException"
         },
         {
+          "shape": "InvalidRequestException"
+        },
+        {
           "shape": "UnauthorizedException"
         },
         {
@@ -5129,6 +5132,46 @@
       ],
       "documentation": "<p>Registers a device certificate with AWS IoT. If you have more than one CA certificate that has the same subject field, you must specify the CA certificate that was used to sign the device certificate being registered.</p>"
     },
+    "RegisterCertificateWithoutCA": {
+      "name": "RegisterCertificateWithoutCA",
+      "http": {
+        "method": "POST",
+        "requestUri": "/certificate/register-no-ca"
+      },
+      "input": {
+        "shape": "RegisterCertificateWithoutCARequest"
+      },
+      "output": {
+        "shape": "RegisterCertificateWithoutCAResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "CertificateStateException"
+        },
+        {
+          "shape": "CertificateValidationException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Register a certificate that does not have a certificate authority (CA).</p>"
+    },
     "RegisterThing": {
       "name": "RegisterThing",
       "http": {
@@ -5438,9 +5481,6 @@
         },
         {
           "shape": "ServiceUnavailableException"
-        },
-        {
-          "shape": "LimitExceededException"
         }
       ],
       "documentation": "<p>Sets the logging level.</p>"
@@ -7476,6 +7516,9 @@
     },
     "AuthInfo": {
       "type": "structure",
+      "required": [
+        "resources"
+      ],
       "members": {
         "actionType": {
           "shape": "ActionType",
@@ -8057,6 +8100,10 @@
           "shape": "CertificateStatus",
           "documentation": "<p>The status of the certificate.</p> <p>The status value REGISTER_INACTIVE is deprecated and should not be used.</p>"
         },
+        "certificateMode": {
+          "shape": "CertificateMode",
+          "documentation": "<p>The mode of the certificate.</p>"
+        },
         "creationDate": {
           "shape": "DateType",
           "documentation": "<p>The date and time the certificate was created.</p>"
@@ -8121,6 +8168,10 @@
         "validity": {
           "shape": "CertificateValidity",
           "documentation": "<p>When the certificate is valid.</p>"
+        },
+        "certificateMode": {
+          "shape": "CertificateMode",
+          "documentation": "<p>The mode of the certificate.</p>"
         }
       },
       "documentation": "<p>Describes a certificate.</p>"
@@ -8130,6 +8181,13 @@
       "max": 64,
       "min": 64,
       "pattern": "(0x)?[a-fA-F0-9]+"
+    },
+    "CertificateMode": {
+      "type": "string",
+      "enum": [
+        "DEFAULT",
+        "SNI_ONLY"
+      ]
     },
     "CertificateName": {
       "type": "string"
@@ -8443,6 +8501,10 @@
           "shape": "AuthorizerStatus",
           "documentation": "<p>The status of the create authorizer request.</p>"
         },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>Metadata which can be used to manage the custom authorizer.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags \"key1=value1&amp;key2=value2...\"</p> <p>For the cli-input-json file use format: \"tags\": \"key1=value1&amp;key2=value2...\"</p> </note>"
+        },
         "signingDisabled": {
           "shape": "BooleanKey",
           "documentation": "<p>Specifies whether AWS IoT validates the token signature in an authorization request.</p>"
@@ -8615,7 +8677,11 @@
         },
         "serviceType": {
           "shape": "ServiceType",
-          "documentation": "<p>The type of service delivered by the endpoint.</p>"
+          "documentation": "<p>The type of service delivered by the endpoint.</p> <note> <p>AWS IoT Core currently supports only the <code>DATA</code> service type.</p> </note>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>Metadata which can be used to manage the domain configuration.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags \"key1=value1&amp;key2=value2...\"</p> <p>For the cli-input-json file use format: \"tags\": \"key1=value1&amp;key2=value2...\"</p> </note>"
         }
       }
     },
@@ -8941,6 +9007,10 @@
         "policyDocument": {
           "shape": "PolicyDocument",
           "documentation": "<p>The JSON document that describes the policy. <b>policyDocument</b> must have a minimum length of 1, with a maximum length of 2048, excluding whitespace.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>Metadata which can be used to manage the policy.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags \"key1=value1&amp;key2=value2...\"</p> <p>For the cli-input-json file use format: \"tags\": \"key1=value1&amp;key2=value2...\"</p> </note>"
         }
       },
       "documentation": "<p>The input for the CreatePolicy operation.</p>"
@@ -9078,6 +9148,10 @@
           "shape": "RoleArn",
           "documentation": "<p>The role ARN for the role associated with the fleet provisioning template. This IoT role grants permission to provision a device.</p>"
         },
+        "preProvisioningHook": {
+          "shape": "ProvisioningHook",
+          "documentation": "<p>Creates a pre-provisioning hook template.</p>"
+        },
         "tags": {
           "shape": "TagList",
           "documentation": "<p>Metadata which can be used to manage the fleet provisioning template.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags \"key1=value1&amp;key2=value2...\"</p> <p>For the cli-input-json file use format: \"tags\": \"key1=value1&amp;key2=value2...\"</p> </note>"
@@ -9167,6 +9241,10 @@
         "credentialDurationSeconds": {
           "shape": "CredentialDurationSeconds",
           "documentation": "<p>How long (in seconds) the credentials will be valid.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>Metadata which can be used to manage the role alias.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags \"key1=value1&amp;key2=value2...\"</p> <p>For the cli-input-json file use format: \"tags\": \"key1=value1&amp;key2=value2...\"</p> </note>"
         }
       }
     },
@@ -9385,7 +9463,7 @@
       "members": {
         "thingName": {
           "shape": "ThingName",
-          "documentation": "<p>The name of the thing to create.</p>",
+          "documentation": "<p>The name of the thing to create.</p> <p>You can't change a thing's name after you create it. To change a thing's name, you must create a new thing, give it the new name, and then delete the old thing.</p>",
           "location": "uri",
           "locationName": "thingName"
         },
@@ -10778,6 +10856,10 @@
         "provisioningRoleArn": {
           "shape": "RoleArn",
           "documentation": "<p>The ARN of the role associated with the provisioning template. This IoT role grants permission to provision a device.</p>"
+        },
+        "preProvisioningHook": {
+          "shape": "ProvisioningHook",
+          "documentation": "<p>Gets information about a pre-provisioned hook.</p>"
         }
       }
     },
@@ -11119,7 +11201,7 @@
       "members": {
         "defaultClientId": {
           "shape": "ClientId",
-          "documentation": "<p>The default client ID.</p>"
+          "documentation": "<p>The default MQTT client ID. For a typical device, the thing name is also used as the default MQTT client ID. Although we don’t require a mapping between a thing's registry name and its use of MQTT client IDs, certificates, or shadow state, we recommend that you choose a thing name and use it as the MQTT client ID for the registry and the Device Shadow service.</p> <p>This lets you better organize your AWS IoT fleet without removing the flexibility of the underlying device certificate model or shadows.</p>"
         },
         "thingName": {
           "shape": "ThingName",
@@ -15039,6 +15121,7 @@
     },
     "MaxJobExecutionsPerMin": {
       "type": "integer",
+      "max": 1000,
       "min": 1
     },
     "MaxResults": {
@@ -15081,7 +15164,7 @@
         },
         "operator": {
           "shape": "DimensionValueOperator",
-          "documentation": "<p>Defines how the <code>dimensionValues</code> of a dimension are interpreted. For example, for DimensionType TOPIC_FILTER, with <code>IN</code> operator, a message will be counted only if its topic matches one of the topic filters. With <code>NOT_IN</code> Operator, a message will be counted only if it doesn't match any of the topic filters. The operator is optional: if it's not provided (is <code>null</code>), it will be interpreted as <code>IN</code>.</p>"
+          "documentation": "<p>Defines how the <code>dimensionValues</code> of a dimension are interpreted. For example, for dimension type TOPIC_FILTER, the <code>IN</code> operator, a message will be counted only if its topic matches one of the topic filters. With <code>NOT_IN</code> operator, a message will be counted only if it doesn't match any of the topic filters. The operator is optional: if it's not provided (is <code>null</code>), it will be interpreted as <code>IN</code>.</p>"
         }
       },
       "documentation": "<p>The dimension of a metric.</p>"
@@ -15535,6 +15618,12 @@
     "PayloadField": {
       "type": "string"
     },
+    "PayloadVersion": {
+      "type": "string",
+      "max": 32,
+      "min": 10,
+      "pattern": "^[0-9-]+$"
+    },
     "Percent": {
       "type": "double",
       "max": 100,
@@ -15752,6 +15841,23 @@
       },
       "max": 2,
       "min": 1
+    },
+    "ProvisioningHook": {
+      "type": "structure",
+      "required": [
+        "targetArn"
+      ],
+      "members": {
+        "payloadVersion": {
+          "shape": "PayloadVersion",
+          "documentation": "<p>The payload that was sent to the target function.</p> <p> <i>Note:</i> Only Lambda functions are currently supported.</p>"
+        },
+        "targetArn": {
+          "shape": "TargetArn",
+          "documentation": "<p>The ARN of the target function.</p> <p> <i>Note:</i> Only Lambda functions are currently supported.</p>"
+        }
+      },
+      "documentation": "<p>Structure that contains <code>payloadVersion</code> and <code>targetArn</code>.</p>"
     },
     "ProvisioningTemplateListing": {
       "type": "list",
@@ -15986,6 +16092,10 @@
         "registrationConfig": {
           "shape": "RegistrationConfig",
           "documentation": "<p>Information about the registration configuration.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>Metadata which can be used to manage the CA certificate.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags \"key1=value1&amp;key2=value2...\"</p> <p>For the cli-input-json file use format: \"tags\": \"key1=value1&amp;key2=value2...\"</p> </note>"
         }
       },
       "documentation": "<p>The input to the RegisterCACertificate operation.</p>"
@@ -16046,6 +16156,35 @@
       },
       "documentation": "<p>The output from the RegisterCertificate operation.</p>"
     },
+    "RegisterCertificateWithoutCARequest": {
+      "type": "structure",
+      "required": [
+        "certificatePem"
+      ],
+      "members": {
+        "certificatePem": {
+          "shape": "CertificatePem",
+          "documentation": "<p>The certificate data, in PEM format.</p>"
+        },
+        "status": {
+          "shape": "CertificateStatus",
+          "documentation": "<p>The status of the register certificate request.</p>"
+        }
+      }
+    },
+    "RegisterCertificateWithoutCAResponse": {
+      "type": "structure",
+      "members": {
+        "certificateArn": {
+          "shape": "CertificateArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the registered certificate.</p>"
+        },
+        "certificateId": {
+          "shape": "CertificateId",
+          "documentation": "<p>The ID of the registered certificate. (The last part of the certificate ARN contains the certificate ID.</p>"
+        }
+      }
+    },
     "RegisterThingRequest": {
       "type": "structure",
       "required": [
@@ -16058,7 +16197,7 @@
         },
         "parameters": {
           "shape": "Parameters",
-          "documentation": "<p>The parameters for provisioning a thing. See <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html\">Programmatic Provisioning</a> for more information.</p>"
+          "documentation": "<p>The parameters for provisioning a thing. See <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html\">Provisioning Templates</a> for more information.</p>"
         }
       }
     },
@@ -16067,7 +16206,7 @@
       "members": {
         "certificatePem": {
           "shape": "CertificatePem",
-          "documentation": "<p>.</p>"
+          "documentation": "<p>The certificate data, in PEM format.</p>"
         },
         "resourceArns": {
           "shape": "ResourceArns",
@@ -16162,6 +16301,9 @@
       "type": "boolean"
     },
     "RemoveAutoRegistration": {
+      "type": "boolean"
+    },
+    "RemoveHook": {
       "type": "boolean"
     },
     "RemoveThingFromBillingGroupRequest": {
@@ -17377,6 +17519,9 @@
     },
     "Tag": {
       "type": "structure",
+      "required": [
+        "Key"
+      ],
       "members": {
         "Key": {
           "shape": "TagKey",
@@ -17390,7 +17535,10 @@
       "documentation": "<p>A set of key/value pairs that are used to manage the resource.</p>"
     },
     "TagKey": {
-      "type": "string"
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
     },
     "TagKeyList": {
       "type": "list",
@@ -17426,13 +17574,16 @@
       "members": {}
     },
     "TagValue": {
-      "type": "string"
+      "type": "string",
+      "max": 256,
+      "min": 1
     },
     "Target": {
       "type": "string"
     },
     "TargetArn": {
-      "type": "string"
+      "type": "string",
+      "max": 2048
     },
     "TargetAuditCheckNames": {
       "type": "list",
@@ -17606,7 +17757,7 @@
         },
         "tokenSignature": {
           "shape": "TokenSignature",
-          "documentation": "<p>The signature made with the token and your custom authentication service's private key.</p>"
+          "documentation": "<p>The signature made with the token and your custom authentication service's private key. This value must be Base-64-encoded.</p>"
         },
         "httpContext": {
           "shape": "HttpContext",
@@ -18773,6 +18924,14 @@
         "provisioningRoleArn": {
           "shape": "RoleArn",
           "documentation": "<p>The ARN of the role associated with the provisioning template. This IoT role grants permission to provision a device.</p>"
+        },
+        "preProvisioningHook": {
+          "shape": "ProvisioningHook",
+          "documentation": "<p>Updates the pre-provisioning hook template.</p>"
+        },
+        "removePreProvisioningHook": {
+          "shape": "RemoveHook",
+          "documentation": "<p>Removes pre-provisioning hook template.</p>"
         }
       }
     },
@@ -19067,7 +19226,7 @@
       "members": {
         "thingName": {
           "shape": "ThingName",
-          "documentation": "<p>The name of the thing to update.</p>",
+          "documentation": "<p>The name of the thing to update.</p> <p>You can't change a thing's name. To change a thing's name, you must create a new thing, give it the new name, and then delete the old thing.</p>",
           "location": "uri",
           "locationName": "thingName"
         },

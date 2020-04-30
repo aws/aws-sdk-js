@@ -139,14 +139,6 @@ declare class IoTEvents extends Service {
    * Updates an input.
    */
   updateInput(callback?: (err: AWSError, data: IoTEvents.Types.UpdateInputResponse) => void): Request<IoTEvents.Types.UpdateInputResponse, AWSError>;
-  /**
-   * 
-   */
-  verifyResourcesExistForTagris(params: IoTEvents.Types.TagrisVerifyResourcesExistInput, callback?: (err: AWSError, data: IoTEvents.Types.TagrisVerifyResourcesExistOutput) => void): Request<IoTEvents.Types.TagrisVerifyResourcesExistOutput, AWSError>;
-  /**
-   * 
-   */
-  verifyResourcesExistForTagris(callback?: (err: AWSError, data: IoTEvents.Types.TagrisVerifyResourcesExistOutput) => void): Request<IoTEvents.Types.TagrisVerifyResourcesExistOutput, AWSError>;
 }
 declare namespace IoTEvents {
   export interface Action {
@@ -199,7 +191,7 @@ declare namespace IoTEvents {
      */
     dynamoDBv2?: DynamoDBv2Action;
     /**
-     * Sends information about the detector model instance and the event that triggered the action to an AWS IoT SiteWise asset property.
+     * Sends information about the detector model instance and the event that triggered the action to an asset property in AWS IoT SiteWise .
      */
     iotSiteWise?: IotSiteWiseAction;
   }
@@ -963,25 +955,6 @@ declare namespace IoTEvents {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
-  export type TagrisAccountId = string;
-  export type TagrisAmazonResourceName = string;
-  export type TagrisInternalId = string;
-  export type TagrisStatus = "ACTIVE"|"NOT_ACTIVE"|string;
-  export type TagrisSweepList = TagrisSweepListItem[];
-  export interface TagrisSweepListItem {
-    TagrisAccountId?: TagrisAccountId;
-    TagrisAmazonResourceName?: TagrisAmazonResourceName;
-    TagrisInternalId?: TagrisInternalId;
-    TagrisVersion?: TagrisVersion;
-  }
-  export type TagrisSweepListResult = {[key: string]: TagrisStatus};
-  export interface TagrisVerifyResourcesExistInput {
-    TagrisSweepList: TagrisSweepList;
-  }
-  export interface TagrisVerifyResourcesExistOutput {
-    TagrisSweepListResult: TagrisSweepListResult;
-  }
-  export type TagrisVersion = number;
   export type Tags = Tag[];
   export type TimerName = string;
   export type Timestamp = Date;

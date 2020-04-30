@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.666.0-->
+<!--LATEST=2.667.0-->
 <!--ENTRYINSERT-->
+
+## 2.667.0
+* feature: IoTEvents: Doc only update to correct APIs and related descriptions
+* feature: Iot: AWS IoT Core released Fleet Provisioning for scalable onboarding of IoT devices to the cloud. This release includes support for customer's Lambda functions to validate devices during onboarding. Fleet Provisioning also allows devices to send Certificate Signing Requests (CSR) to AWS IoT Core for signing and getting a unique certificate. Lastly,  AWS IoT Core added a feature to register the same certificate for multiple accounts in the same region without needing to register the certificate authority (CA).
+* feature: MediaConvert: AWS Elemental MediaConvert SDK has added support for including AFD signaling in MXF wrapper.
+* feature: Schemas: Add support for resource policies for Amazon EventBridge Schema Registry, which is now generally available.
+* feature: StorageGateway: Adding support for S3_INTELLIGENT_TIERING as a storage class option
 
 ## 2.666.0
 * feature: IoTSiteWise: AWS IoT SiteWise is a managed service that makes it easy to collect, store, organize and monitor data from industrial equipment at scale. You can use AWS IoT SiteWise to model your physical assets, processes and facilities, quickly compute common industrial performance metrics, and create fully managed web applications to help analyze industrial equipment data, prevent costly equipment issues, and reduce production inefficiencies.

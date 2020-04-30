@@ -1008,6 +1008,10 @@ All burn-in and DVB-Sub font settings must match.
      * Settings for MP4 segments in DASH
      */
     MpdSettings?: MpdSettings;
+    /**
+     * MXF settings
+     */
+    MxfSettings?: MxfSettings;
   }
   export type ContainerType = "F4V"|"ISMV"|"M2TS"|"M3U8"|"CMFC"|"MOV"|"MP4"|"MPD"|"MXF"|"RAW"|string;
   export interface CreateJobRequest {
@@ -2509,7 +2513,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   }
   export interface ImscDestinationSettings {
     /**
-     * Keep this setting enabled to have MediaConvert use the font style and position information from the captions source in the output. This option is available only when your input captions are CFF-TT, IMSC, SMPTE-TT, or TTML. Disable this setting for simplified output captions.
+     * Keep this setting enabled to have MediaConvert use the font style and position information from the captions source in the output. This option is available only when your input captions are IMSC, SMPTE-TT, or TTML. Disable this setting for simplified output captions.
      */
     StylePassthrough?: ImscStylePassthrough;
   }
@@ -3701,6 +3705,13 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
     ManifestEncoding?: MsSmoothManifestEncoding;
   }
   export type MsSmoothManifestEncoding = "UTF8"|"UTF16"|string;
+  export type MxfAfdSignaling = "NO_COPY"|"COPY_FROM_VIDEO"|string;
+  export interface MxfSettings {
+    /**
+     * Optional. When you have AFD signaling set up in your output video stream, use this setting to choose whether to also include it in the MXF wrapper. Choose Don't copy (NO_COPY) to exclude AFD signaling from the MXF wrapper. Choose Copy from video stream (COPY_FROM_VIDEO) to copy the AFD values from the video stream for this output to the MXF wrapper. Regardless of which option you choose, the AFD values remain in the video stream. Related settings: To set up your output to include or exclude AFD values, see AfdSignaling, under VideoDescription. On the console, find AFD signaling under the output's video encoding settings.
+     */
+    AfdSignaling?: MxfAfdSignaling;
+  }
   export interface NielsenConfiguration {
     /**
      * Nielsen has discontinued the use of breakout code functionality. If you must include this property, set the value to zero.
@@ -4318,7 +4329,7 @@ Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.
   }
   export interface TtmlDestinationSettings {
     /**
-     * Pass through style and position information from a TTML-like input source (TTML, SMPTE-TT, CFF-TT) to the CFF-TT output or TTML output.
+     * Pass through style and position information from a TTML-like input source (TTML, SMPTE-TT) to the TTML output.
      */
     StylePassthrough?: TtmlStylePassthrough;
   }

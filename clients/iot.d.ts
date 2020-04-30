@@ -1324,6 +1324,14 @@ declare class Iot extends Service {
    */
   registerCertificate(callback?: (err: AWSError, data: Iot.Types.RegisterCertificateResponse) => void): Request<Iot.Types.RegisterCertificateResponse, AWSError>;
   /**
+   * Register a certificate that does not have a certificate authority (CA).
+   */
+  registerCertificateWithoutCA(params: Iot.Types.RegisterCertificateWithoutCARequest, callback?: (err: AWSError, data: Iot.Types.RegisterCertificateWithoutCAResponse) => void): Request<Iot.Types.RegisterCertificateWithoutCAResponse, AWSError>;
+  /**
+   * Register a certificate that does not have a certificate authority (CA).
+   */
+  registerCertificateWithoutCA(callback?: (err: AWSError, data: Iot.Types.RegisterCertificateWithoutCAResponse) => void): Request<Iot.Types.RegisterCertificateWithoutCAResponse, AWSError>;
+  /**
    * Provisions a thing in the device registry. RegisterThing calls other AWS IoT control plane APIs. These calls might exceed your account level  AWS IoT Throttling Limits and cause throttle errors. Please contact AWS Customer Support to raise your throttling limits if necessary.
    */
   registerThing(params: Iot.Types.RegisterThingRequest, callback?: (err: AWSError, data: Iot.Types.RegisterThingResponse) => void): Request<Iot.Types.RegisterThingResponse, AWSError>;
@@ -2231,7 +2239,7 @@ declare namespace Iot {
     /**
      * The resources for which the principal is being authorized to perform the specified action.
      */
-    resources?: Resources;
+    resources: Resources;
   }
   export type AuthInfos = AuthInfo[];
   export interface AuthResult {
@@ -2567,6 +2575,10 @@ declare namespace Iot {
      */
     status?: CertificateStatus;
     /**
+     * The mode of the certificate.
+     */
+    certificateMode?: CertificateMode;
+    /**
      * The date and time the certificate was created.
      */
     creationDate?: DateType;
@@ -2625,8 +2637,13 @@ declare namespace Iot {
      * When the certificate is valid.
      */
     validity?: CertificateValidity;
+    /**
+     * The mode of the certificate.
+     */
+    certificateMode?: CertificateMode;
   }
   export type CertificateId = string;
+  export type CertificateMode = "DEFAULT"|"SNI_ONLY"|string;
   export type CertificateName = string;
   export type CertificatePathOnDevice = string;
   export type CertificatePem = string;
@@ -2783,6 +2800,10 @@ declare namespace Iot {
      */
     status?: AuthorizerStatus;
     /**
+     * Metadata which can be used to manage the custom authorizer.  For URI Request parameters use format: ...key1=value1&amp;key2=value2... For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..." For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..." 
+     */
+    tags?: TagList;
+    /**
      * Specifies whether AWS IoT validates the token signature in an authorization request.
      */
     signingDisabled?: BooleanKey;
@@ -2903,9 +2924,13 @@ declare namespace Iot {
      */
     authorizerConfig?: AuthorizerConfig;
     /**
-     * The type of service delivered by the endpoint.
+     * The type of service delivered by the endpoint.  AWS IoT Core currently supports only the DATA service type. 
      */
     serviceType?: ServiceType;
+    /**
+     * Metadata which can be used to manage the domain configuration.  For URI Request parameters use format: ...key1=value1&amp;key2=value2... For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..." For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..." 
+     */
+    tags?: TagList;
   }
   export interface CreateDomainConfigurationResponse {
     /**
@@ -3158,6 +3183,10 @@ declare namespace Iot {
      * The JSON document that describes the policy. policyDocument must have a minimum length of 1, with a maximum length of 2048, excluding whitespace.
      */
     policyDocument: PolicyDocument;
+    /**
+     * Metadata which can be used to manage the policy.  For URI Request parameters use format: ...key1=value1&amp;key2=value2... For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..." For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..." 
+     */
+    tags?: TagList;
   }
   export interface CreatePolicyResponse {
     /**
@@ -3255,6 +3284,10 @@ declare namespace Iot {
      */
     provisioningRoleArn: RoleArn;
     /**
+     * Creates a pre-provisioning hook template.
+     */
+    preProvisioningHook?: ProvisioningHook;
+    /**
      * Metadata which can be used to manage the fleet provisioning template.  For URI Request parameters use format: ...key1=value1&amp;key2=value2... For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..." For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..." 
      */
     tags?: TagList;
@@ -3318,6 +3351,10 @@ declare namespace Iot {
      * How long (in seconds) the credentials will be valid.
      */
     credentialDurationSeconds?: CredentialDurationSeconds;
+    /**
+     * Metadata which can be used to manage the role alias.  For URI Request parameters use format: ...key1=value1&amp;key2=value2... For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..." For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..." 
+     */
+    tags?: TagList;
   }
   export interface CreateRoleAliasResponse {
     /**
@@ -3475,7 +3512,7 @@ declare namespace Iot {
   }
   export interface CreateThingRequest {
     /**
-     * The name of the thing to create.
+     * The name of the thing to create. You can't change a thing's name after you create it. To change a thing's name, you must create a new thing, give it the new name, and then delete the old thing.
      */
     thingName: ThingName;
     /**
@@ -4283,6 +4320,10 @@ declare namespace Iot {
      * The ARN of the role associated with the provisioning template. This IoT role grants permission to provision a device.
      */
     provisioningRoleArn?: RoleArn;
+    /**
+     * Gets information about a pre-provisioned hook.
+     */
+    preProvisioningHook?: ProvisioningHook;
   }
   export interface DescribeProvisioningTemplateVersionRequest {
     /**
@@ -4528,7 +4569,7 @@ declare namespace Iot {
   }
   export interface DescribeThingResponse {
     /**
-     * The default client ID.
+     * The default MQTT client ID. For a typical device, the thing name is also used as the default MQTT client ID. Although we don’t require a mapping between a thing's registry name and its use of MQTT client IDs, certificates, or shadow state, we recommend that you choose a thing name and use it as the MQTT client ID for the registry and the Device Shadow service. This lets you better organize your AWS IoT fleet without removing the flexibility of the underlying device certificate model or shadows.
      */
     defaultClientId?: ClientId;
     /**
@@ -6892,7 +6933,7 @@ declare namespace Iot {
      */
     dimensionName: DimensionName;
     /**
-     * Defines how the dimensionValues of a dimension are interpreted. For example, for DimensionType TOPIC_FILTER, with IN operator, a message will be counted only if its topic matches one of the topic filters. With NOT_IN Operator, a message will be counted only if it doesn't match any of the topic filters. The operator is optional: if it's not provided (is null), it will be interpreted as IN.
+     * Defines how the dimensionValues of a dimension are interpreted. For example, for dimension type TOPIC_FILTER, the IN operator, a message will be counted only if its topic matches one of the topic filters. With NOT_IN operator, a message will be counted only if it doesn't match any of the topic filters. The operator is optional: if it's not provided (is null), it will be interpreted as IN.
      */
     operator?: DimensionValueOperator;
   }
@@ -7168,6 +7209,7 @@ declare namespace Iot {
   export type Parameters = {[key: string]: Value};
   export type PartitionKey = string;
   export type PayloadField = string;
+  export type PayloadVersion = string;
   export type Percent = number;
   export type PercentList = Percent[];
   export interface PercentPair {
@@ -7251,6 +7293,16 @@ declare namespace Iot {
   export type ProcessingTargetNameList = ProcessingTargetName[];
   export type Protocol = "MQTT"|"HTTP"|string;
   export type Protocols = Protocol[];
+  export interface ProvisioningHook {
+    /**
+     * The payload that was sent to the target function.  Note: Only Lambda functions are currently supported.
+     */
+    payloadVersion?: PayloadVersion;
+    /**
+     * The ARN of the target function.  Note: Only Lambda functions are currently supported.
+     */
+    targetArn: TargetArn;
+  }
   export type ProvisioningTemplateListing = ProvisioningTemplateSummary[];
   export interface ProvisioningTemplateSummary {
     /**
@@ -7375,6 +7427,10 @@ declare namespace Iot {
      * Information about the registration configuration.
      */
     registrationConfig?: RegistrationConfig;
+    /**
+     * Metadata which can be used to manage the CA certificate.  For URI Request parameters use format: ...key1=value1&amp;key2=value2... For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..." For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..." 
+     */
+    tags?: TagList;
   }
   export interface RegisterCACertificateResponse {
     /**
@@ -7414,19 +7470,39 @@ declare namespace Iot {
      */
     certificateId?: CertificateId;
   }
+  export interface RegisterCertificateWithoutCARequest {
+    /**
+     * The certificate data, in PEM format.
+     */
+    certificatePem: CertificatePem;
+    /**
+     * The status of the register certificate request.
+     */
+    status?: CertificateStatus;
+  }
+  export interface RegisterCertificateWithoutCAResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the registered certificate.
+     */
+    certificateArn?: CertificateArn;
+    /**
+     * The ID of the registered certificate. (The last part of the certificate ARN contains the certificate ID.
+     */
+    certificateId?: CertificateId;
+  }
   export interface RegisterThingRequest {
     /**
      * The provisioning template. See Provisioning Devices That Have Device Certificates for more information.
      */
     templateBody: TemplateBody;
     /**
-     * The parameters for provisioning a thing. See Programmatic Provisioning for more information.
+     * The parameters for provisioning a thing. See Provisioning Templates for more information.
      */
     parameters?: Parameters;
   }
   export interface RegisterThingResponse {
     /**
-     * .
+     * The certificate data, in PEM format.
      */
     certificatePem?: CertificatePem;
     /**
@@ -7476,6 +7552,7 @@ declare namespace Iot {
   export type RelatedResources = RelatedResource[];
   export type RemoveAuthorizerConfig = boolean;
   export type RemoveAutoRegistration = boolean;
+  export type RemoveHook = boolean;
   export interface RemoveThingFromBillingGroupRequest {
     /**
      * The name of the billing group.
@@ -8158,7 +8235,7 @@ declare namespace Iot {
     /**
      * The tag's key.
      */
-    Key?: TagKey;
+    Key: TagKey;
     /**
      * The tag's value.
      */
@@ -8286,7 +8363,7 @@ declare namespace Iot {
      */
     token?: Token;
     /**
-     * The signature made with the token and your custom authentication service's private key.
+     * The signature made with the token and your custom authentication service's private key. This value must be Base-64-encoded.
      */
     tokenSignature?: TokenSignature;
     /**
@@ -9035,6 +9112,14 @@ declare namespace Iot {
      * The ARN of the role associated with the provisioning template. This IoT role grants permission to provision a device.
      */
     provisioningRoleArn?: RoleArn;
+    /**
+     * Updates the pre-provisioning hook template.
+     */
+    preProvisioningHook?: ProvisioningHook;
+    /**
+     * Removes pre-provisioning hook template.
+     */
+    removePreProvisioningHook?: RemoveHook;
   }
   export interface UpdateProvisioningTemplateResponse {
   }
@@ -9252,7 +9337,7 @@ declare namespace Iot {
   }
   export interface UpdateThingRequest {
     /**
-     * The name of the thing to update.
+     * The name of the thing to update. You can't change a thing's name. To change a thing's name, you must create a new thing, give it the new name, and then delete the old thing.
      */
     thingName: ThingName;
     /**
