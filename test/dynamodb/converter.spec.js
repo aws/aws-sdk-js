@@ -237,6 +237,20 @@ describe('AWS.DynamoDB.Converter', function() {
       );
     });
 
+    describe('sets', function() {
+      it(
+        'should be iterable',
+        function() {
+          var inputList = [1, 2, 3];
+          var outputList = [];
+          for (var item of new DynamoDBSet(inputList)) {
+            outputList.push(item);
+          }
+          expect(outputList).to.deep.equal(inputList);
+        }
+      );
+    });
+
     describe('string sets', function() {
       it(
         'should convert sets with strings into StringSetAttributeValues',

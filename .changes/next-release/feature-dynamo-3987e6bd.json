@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "dynamo",
+  "description": "DynamoDBSet now implements iterator protocol"
+}
