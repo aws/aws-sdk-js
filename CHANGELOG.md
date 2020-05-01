@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.667.0-->
+<!--LATEST=2.668.0-->
 <!--ENTRYINSERT-->
+
+## 2.668.0
+* feature: EFS: Change the TagKeys argument for UntagResource to a URL parameter to address an issue with the Java and .NET SDKs.
+* feature: SSM: Added TimeoutSeconds as part of ListCommands API response.
 
 ## 2.667.0
 * feature: IoTEvents: Doc only update to correct APIs and related descriptions

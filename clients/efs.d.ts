@@ -809,7 +809,7 @@ declare namespace EFS {
     /**
      * The keys of the key:value tag pairs that you want to remove from the specified EFS resource.
      */
-    TagKeys?: TagKeys;
+    TagKeys: TagKeys;
   }
   export interface UpdateFileSystemRequest {
     /**
