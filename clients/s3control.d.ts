@@ -21,11 +21,11 @@ declare class S3Control extends Service {
    */
   createAccessPoint(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates an Amazon S3 batch operations job.
+   * You can use Amazon S3 Batch Operations to perform large-scale Batch Operations on Amazon S3 objects. Amazon S3 Batch Operations can execute a single operation or action on lists of Amazon S3 objects that you specify. For more information, see Amazon S3 Batch Operations in the Amazon Simple Storage Service Developer Guide. Related actions include:    DescribeJob     ListJobs     UpdateJobPriority     UpdateJobStatus   
    */
   createJob(params: S3Control.Types.CreateJobRequest, callback?: (err: AWSError, data: S3Control.Types.CreateJobResult) => void): Request<S3Control.Types.CreateJobResult, AWSError>;
   /**
-   * Creates an Amazon S3 batch operations job.
+   * You can use Amazon S3 Batch Operations to perform large-scale Batch Operations on Amazon S3 objects. Amazon S3 Batch Operations can execute a single operation or action on lists of Amazon S3 objects that you specify. For more information, see Amazon S3 Batch Operations in the Amazon Simple Storage Service Developer Guide. Related actions include:    DescribeJob     ListJobs     UpdateJobPriority     UpdateJobStatus   
    */
   createJob(callback?: (err: AWSError, data: S3Control.Types.CreateJobResult) => void): Request<S3Control.Types.CreateJobResult, AWSError>;
   /**
@@ -45,11 +45,11 @@ declare class S3Control extends Service {
    */
   deleteAccessPointPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete the tags on a Amazon S3 batch operations job, if any.
+   * Removes the entire tag set from the specified Amazon S3 Batch Operations job. To use this operation, you must have permission to perform the s3:DeleteJobTagging action. For more information, see Using Job Tags in the Amazon Simple Storage Service Developer Guide.  Related actions include:    CreateJob     GetJobTagging     PutJobTagging   
    */
   deleteJobTagging(params: S3Control.Types.DeleteJobTaggingRequest, callback?: (err: AWSError, data: S3Control.Types.DeleteJobTaggingResult) => void): Request<S3Control.Types.DeleteJobTaggingResult, AWSError>;
   /**
-   * Delete the tags on a Amazon S3 batch operations job, if any.
+   * Removes the entire tag set from the specified Amazon S3 Batch Operations job. To use this operation, you must have permission to perform the s3:DeleteJobTagging action. For more information, see Using Job Tags in the Amazon Simple Storage Service Developer Guide.  Related actions include:    CreateJob     GetJobTagging     PutJobTagging   
    */
   deleteJobTagging(callback?: (err: AWSError, data: S3Control.Types.DeleteJobTaggingResult) => void): Request<S3Control.Types.DeleteJobTaggingResult, AWSError>;
   /**
@@ -61,11 +61,11 @@ declare class S3Control extends Service {
    */
   deletePublicAccessBlock(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Retrieves the configuration parameters and status for a batch operations job.
+   * Retrieves the configuration parameters and status for a Batch Operations job. For more information, see Amazon S3 Batch Operations in the Amazon Simple Storage Service Developer Guide.  Related actions include:    CreateJob     ListJobs     UpdateJobPriority     UpdateJobStatus   
    */
   describeJob(params: S3Control.Types.DescribeJobRequest, callback?: (err: AWSError, data: S3Control.Types.DescribeJobResult) => void): Request<S3Control.Types.DescribeJobResult, AWSError>;
   /**
-   * Retrieves the configuration parameters and status for a batch operations job.
+   * Retrieves the configuration parameters and status for a Batch Operations job. For more information, see Amazon S3 Batch Operations in the Amazon Simple Storage Service Developer Guide.  Related actions include:    CreateJob     ListJobs     UpdateJobPriority     UpdateJobStatus   
    */
   describeJob(callback?: (err: AWSError, data: S3Control.Types.DescribeJobResult) => void): Request<S3Control.Types.DescribeJobResult, AWSError>;
   /**
@@ -93,11 +93,11 @@ declare class S3Control extends Service {
    */
   getAccessPointPolicyStatus(callback?: (err: AWSError, data: S3Control.Types.GetAccessPointPolicyStatusResult) => void): Request<S3Control.Types.GetAccessPointPolicyStatusResult, AWSError>;
   /**
-   * Retrieve the tags on a Amazon S3 batch operations job.
+   * Returns the tags on an Amazon S3 Batch Operations job. To use this operation, you must have permission to perform the s3:GetJobTagging action. For more information, see Using Job Tags in the Amazon Simple Storage Service Developer Guide.  Related actions include:    CreateJob     PutJobTagging     DeleteJobTagging   
    */
   getJobTagging(params: S3Control.Types.GetJobTaggingRequest, callback?: (err: AWSError, data: S3Control.Types.GetJobTaggingResult) => void): Request<S3Control.Types.GetJobTaggingResult, AWSError>;
   /**
-   * Retrieve the tags on a Amazon S3 batch operations job.
+   * Returns the tags on an Amazon S3 Batch Operations job. To use this operation, you must have permission to perform the s3:GetJobTagging action. For more information, see Using Job Tags in the Amazon Simple Storage Service Developer Guide.  Related actions include:    CreateJob     PutJobTagging     DeleteJobTagging   
    */
   getJobTagging(callback?: (err: AWSError, data: S3Control.Types.GetJobTaggingResult) => void): Request<S3Control.Types.GetJobTaggingResult, AWSError>;
   /**
@@ -109,19 +109,19 @@ declare class S3Control extends Service {
    */
   getPublicAccessBlock(callback?: (err: AWSError, data: S3Control.Types.GetPublicAccessBlockOutput) => void): Request<S3Control.Types.GetPublicAccessBlockOutput, AWSError>;
   /**
-   * Returns a list of the access points currently associated with the specified bucket. You can retrieve up to 1000 access points per call. If the specified bucket has more than 1000 access points (or the number specified in maxResults, whichever is less), then the response will include a continuation token that you can use to list the additional access points.
+   * Returns a list of the access points currently associated with the specified bucket. You can retrieve up to 1000 access points per call. If the specified bucket has more than 1,000 access points (or the number specified in maxResults, whichever is less), the response will include a continuation token that you can use to list the additional access points.
    */
   listAccessPoints(params: S3Control.Types.ListAccessPointsRequest, callback?: (err: AWSError, data: S3Control.Types.ListAccessPointsResult) => void): Request<S3Control.Types.ListAccessPointsResult, AWSError>;
   /**
-   * Returns a list of the access points currently associated with the specified bucket. You can retrieve up to 1000 access points per call. If the specified bucket has more than 1000 access points (or the number specified in maxResults, whichever is less), then the response will include a continuation token that you can use to list the additional access points.
+   * Returns a list of the access points currently associated with the specified bucket. You can retrieve up to 1000 access points per call. If the specified bucket has more than 1,000 access points (or the number specified in maxResults, whichever is less), the response will include a continuation token that you can use to list the additional access points.
    */
   listAccessPoints(callback?: (err: AWSError, data: S3Control.Types.ListAccessPointsResult) => void): Request<S3Control.Types.ListAccessPointsResult, AWSError>;
   /**
-   * Lists current jobs and jobs that have ended within the last 30 days for the AWS account making the request.
+   * Lists current Amazon S3 Batch Operations jobs and jobs that have ended within the last 30 days for the AWS account making the request. For more information, see Amazon S3 Batch Operations in the Amazon Simple Storage Service Developer Guide. Related actions include:     CreateJob     DescribeJob     UpdateJobPriority     UpdateJobStatus   
    */
   listJobs(params: S3Control.Types.ListJobsRequest, callback?: (err: AWSError, data: S3Control.Types.ListJobsResult) => void): Request<S3Control.Types.ListJobsResult, AWSError>;
   /**
-   * Lists current jobs and jobs that have ended within the last 30 days for the AWS account making the request.
+   * Lists current Amazon S3 Batch Operations jobs and jobs that have ended within the last 30 days for the AWS account making the request. For more information, see Amazon S3 Batch Operations in the Amazon Simple Storage Service Developer Guide. Related actions include:     CreateJob     DescribeJob     UpdateJobPriority     UpdateJobStatus   
    */
   listJobs(callback?: (err: AWSError, data: S3Control.Types.ListJobsResult) => void): Request<S3Control.Types.ListJobsResult, AWSError>;
   /**
@@ -133,11 +133,11 @@ declare class S3Control extends Service {
    */
   putAccessPointPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Replace the set of tags on a Amazon S3 batch operations job.
+   * Set the supplied tag-set on an Amazon S3 Batch Operations job. A tag is a key-value pair. You can associate Amazon S3 Batch Operations tags with any job by sending a PUT request against the tagging subresource that is associated with the job. To modify the existing tag set, you can either replace the existing tag set entirely, or make changes within the existing tag set by retrieving the existing tag set using GetJobTagging, modify that tag set, and use this API action to replace the tag set with the one you have modified.. For more information, see Using Job Tags in the Amazon Simple Storage Service Developer Guide.      If you send this request with an empty tag set, Amazon S3 deletes the existing tag set on the Batch Operations job. If you use this method, you will be charged for a Tier 1 Request (PUT). For more information, see Amazon S3 pricing.   For deleting existing tags for your batch operations job, DeleteJobTagging request is preferred because it achieves the same result without incurring charges.   A few things to consider about using tags:   Amazon S3 limits the maximum number of tags to 50 tags per job.   You can associate up to 50 tags with a job as long as they have unique tag keys.   A tag key can be up to 128 Unicode characters in length, and tag values can be up to 256 Unicode characters in length.   The key and values are case sensitive.   For tagging-related restrictions related to characters and encodings, see User-Defined Tag Restrictions.       To use this operation, you must have permission to perform the s3:PutJobTagging action. Related actions include:    CreateJob     GetJobTagging     DeleteJobTagging   
    */
   putJobTagging(params: S3Control.Types.PutJobTaggingRequest, callback?: (err: AWSError, data: S3Control.Types.PutJobTaggingResult) => void): Request<S3Control.Types.PutJobTaggingResult, AWSError>;
   /**
-   * Replace the set of tags on a Amazon S3 batch operations job.
+   * Set the supplied tag-set on an Amazon S3 Batch Operations job. A tag is a key-value pair. You can associate Amazon S3 Batch Operations tags with any job by sending a PUT request against the tagging subresource that is associated with the job. To modify the existing tag set, you can either replace the existing tag set entirely, or make changes within the existing tag set by retrieving the existing tag set using GetJobTagging, modify that tag set, and use this API action to replace the tag set with the one you have modified.. For more information, see Using Job Tags in the Amazon Simple Storage Service Developer Guide.      If you send this request with an empty tag set, Amazon S3 deletes the existing tag set on the Batch Operations job. If you use this method, you will be charged for a Tier 1 Request (PUT). For more information, see Amazon S3 pricing.   For deleting existing tags for your batch operations job, DeleteJobTagging request is preferred because it achieves the same result without incurring charges.   A few things to consider about using tags:   Amazon S3 limits the maximum number of tags to 50 tags per job.   You can associate up to 50 tags with a job as long as they have unique tag keys.   A tag key can be up to 128 Unicode characters in length, and tag values can be up to 256 Unicode characters in length.   The key and values are case sensitive.   For tagging-related restrictions related to characters and encodings, see User-Defined Tag Restrictions.       To use this operation, you must have permission to perform the s3:PutJobTagging action. Related actions include:    CreateJob     GetJobTagging     DeleteJobTagging   
    */
   putJobTagging(callback?: (err: AWSError, data: S3Control.Types.PutJobTaggingResult) => void): Request<S3Control.Types.PutJobTaggingResult, AWSError>;
   /**
@@ -149,19 +149,19 @@ declare class S3Control extends Service {
    */
   putPublicAccessBlock(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates an existing job's priority.
+   * Updates an existing Amazon S3 Batch Operations job's priority. For more information, see Amazon S3 Batch Operations in the Amazon Simple Storage Service Developer Guide.  Related actions include:    CreateJob     ListJobs     DescribeJob     UpdateJobStatus   
    */
   updateJobPriority(params: S3Control.Types.UpdateJobPriorityRequest, callback?: (err: AWSError, data: S3Control.Types.UpdateJobPriorityResult) => void): Request<S3Control.Types.UpdateJobPriorityResult, AWSError>;
   /**
-   * Updates an existing job's priority.
+   * Updates an existing Amazon S3 Batch Operations job's priority. For more information, see Amazon S3 Batch Operations in the Amazon Simple Storage Service Developer Guide.  Related actions include:    CreateJob     ListJobs     DescribeJob     UpdateJobStatus   
    */
   updateJobPriority(callback?: (err: AWSError, data: S3Control.Types.UpdateJobPriorityResult) => void): Request<S3Control.Types.UpdateJobPriorityResult, AWSError>;
   /**
-   * Updates the status for the specified job. Use this operation to confirm that you want to run a job or to cancel an existing job.
+   * Updates the status for the specified job. Use this operation to confirm that you want to run a job or to cancel an existing job. For more information, see Amazon S3 Batch Operations in the Amazon Simple Storage Service Developer Guide.  Related actions include:    CreateJob     ListJobs     DescribeJob     UpdateJobStatus   
    */
   updateJobStatus(params: S3Control.Types.UpdateJobStatusRequest, callback?: (err: AWSError, data: S3Control.Types.UpdateJobStatusResult) => void): Request<S3Control.Types.UpdateJobStatusResult, AWSError>;
   /**
-   * Updates the status for the specified job. Use this operation to confirm that you want to run a job or to cancel an existing job.
+   * Updates the status for the specified job. Use this operation to confirm that you want to run a job or to cancel an existing job. For more information, see Amazon S3 Batch Operations in the Amazon Simple Storage Service Developer Guide.  Related actions include:    CreateJob     ListJobs     DescribeJob     UpdateJobStatus   
    */
   updateJobStatus(callback?: (err: AWSError, data: S3Control.Types.UpdateJobStatusResult) => void): Request<S3Control.Types.UpdateJobStatusResult, AWSError>;
 }
@@ -172,11 +172,11 @@ declare namespace S3Control {
      */
     Name: AccessPointName;
     /**
-     * Indicates whether this access point allows access from the public Internet. If VpcConfiguration is specified for this access point, then NetworkOrigin is VPC, and the access point doesn't allow access from the public Internet. Otherwise, NetworkOrigin is Internet, and the access point allows access from the public Internet, subject to the access point and bucket access policies.
+     * Indicates whether this access point allows access from the public internet. If VpcConfiguration is specified for this access point, then NetworkOrigin is VPC, and the access point doesn't allow access from the public internet. Otherwise, NetworkOrigin is Internet, and the access point allows access from the public internet, subject to the access point and bucket access policies.
      */
     NetworkOrigin: NetworkOrigin;
     /**
-     * The Virtual Private Cloud (VPC) configuration for this access point, if one exists.
+     * The virtual private cloud (VPC) configuration for this access point, if one exists.
      */
     VpcConfiguration?: VpcConfiguration;
     /**
@@ -204,7 +204,7 @@ declare namespace S3Control {
      */
     Bucket: BucketName;
     /**
-     * If you include this field, Amazon S3 restricts access to this access point to requests from the specified Virtual Private Cloud (VPC).
+     * If you include this field, Amazon S3 restricts access to this access point to requests from the specified virtual private cloud (VPC).
      */
     VpcConfiguration?: VpcConfiguration;
     PublicAccessBlockConfiguration?: PublicAccessBlockConfiguration;
@@ -243,11 +243,11 @@ declare namespace S3Control {
      */
     Priority: JobPriority;
     /**
-     * The Amazon Resource Name (ARN) for the Identity and Access Management (IAM) Role that batch operations will use to execute this job's operation on each object in the manifest.
+     * The Amazon Resource Name (ARN) for the AWS Identity and Access Management (IAM) role that Batch Operations will use to execute this job's operation on each object in the manifest.
      */
     RoleArn: IAMRoleArn;
     /**
-     * An optional set of tags to associate with the job when it is created.
+     * A set of tags to associate with the Amazon S3 Batch Operations job. This is an optional parameter. 
      */
     Tags?: S3TagSet;
   }
@@ -280,11 +280,11 @@ declare namespace S3Control {
   }
   export interface DeleteJobTaggingRequest {
     /**
-     * The account ID for the Amazon Web Services account associated with the Amazon S3 batch operations job you want to remove tags from.
+     * The AWS account ID associated with the Amazon S3 Batch Operations job.
      */
     AccountId: AccountId;
     /**
-     * The ID for the job whose tags you want to delete.
+     * The ID for the Amazon S3 Batch Operations job whose tags you want to delete.
      */
     JobId: JobId;
   }
@@ -312,6 +312,7 @@ declare namespace S3Control {
      */
     Job?: JobDescriptor;
   }
+  export type FunctionArnString = string;
   export interface GetAccessPointPolicyRequest {
     /**
      * The account ID for the account that owns the specified access point.
@@ -364,11 +365,11 @@ declare namespace S3Control {
      */
     Bucket?: BucketName;
     /**
-     * Indicates whether this access point allows access from the public Internet. If VpcConfiguration is specified for this access point, then NetworkOrigin is VPC, and the access point doesn't allow access from the public Internet. Otherwise, NetworkOrigin is Internet, and the access point allows access from the public Internet, subject to the access point and bucket access policies.
+     * Indicates whether this access point allows access from the public internet. If VpcConfiguration is specified for this access point, then NetworkOrigin is VPC, and the access point doesn't allow access from the public internet. Otherwise, NetworkOrigin is Internet, and the access point allows access from the public internet, subject to the access point and bucket access policies.
      */
     NetworkOrigin?: NetworkOrigin;
     /**
-     * Contains the Virtual Private Cloud (VPC) configuration for the specified access point.
+     * Contains the virtual private cloud (VPC) configuration for the specified access point.
      */
     VpcConfiguration?: VpcConfiguration;
     PublicAccessBlockConfiguration?: PublicAccessBlockConfiguration;
@@ -379,17 +380,17 @@ declare namespace S3Control {
   }
   export interface GetJobTaggingRequest {
     /**
-     * The account ID for the Amazon Web Services account associated with the Amazon S3 batch operations job you want to retrieve tags for.
+     * The AWS account ID associated with the Amazon S3 Batch Operations job.
      */
     AccountId: AccountId;
     /**
-     * The ID for the job whose tags you want to retrieve.
+     * The ID for the Amazon S3 Batch Operations job whose tags you want to retrieve.
      */
     JobId: JobId;
   }
   export interface GetJobTaggingResult {
     /**
-     * The set of tags associated with the job.
+     * The set of tags associated with the Amazon S3 Batch Operations job.
      */
     Tags?: S3TagSet;
   }
@@ -467,7 +468,7 @@ declare namespace S3Control {
      */
     TerminationDate?: JobTerminationDate;
     /**
-     * The Amazon Resource Name (ARN) for the Identity and Access Management (IAM) Role assigned to execute the tasks for this job.
+     * The Amazon Resource Name (ARN) for the AWS Identity and Access Management (IAM) role assigned to execute the tasks for this job.
      */
     RoleArn?: IAMRoleArn;
     /**
@@ -588,6 +589,8 @@ declare namespace S3Control {
      * Directs the specified job to execute an Initiate Glacier Restore call on each object in the manifest.
      */
     S3InitiateRestoreObject?: S3InitiateRestoreObjectOperation;
+    S3PutObjectLegalHold?: S3SetObjectLegalHoldOperation;
+    S3PutObjectRetention?: S3SetObjectRetentionOperation;
   }
   export type JobPriority = number;
   export interface JobProgressSummary {
@@ -638,7 +641,7 @@ declare namespace S3Control {
     /**
      * The Amazon Resource Name (ARN) for the AWS Lambda function that the specified job will invoke for each object in the manifest.
      */
-    FunctionArn?: NonEmptyMaxLength1024String;
+    FunctionArn?: FunctionArnString;
   }
   export interface ListAccessPointsRequest {
     /**
@@ -680,7 +683,7 @@ declare namespace S3Control {
     /**
      * A pagination token to request the next page of results. Use the token that Amazon S3 returned in the NextToken element of the ListJobsResult from the previous List Jobs request.
      */
-    NextToken?: NonEmptyMaxLength1024String;
+    NextToken?: StringForNextToken;
     /**
      * The maximum number of jobs that Amazon S3 will include in the List Jobs response. If there are more jobs than this number, the response will include a pagination token in the NextToken field to enable you to retrieve the next page of results.
      */
@@ -690,7 +693,7 @@ declare namespace S3Control {
     /**
      * If the List Jobs request produced more than the maximum number of results, you can pass this value into a subsequent List Jobs request in order to retrieve the next page of results.
      */
-    NextToken?: NonEmptyMaxLength1024String;
+    NextToken?: StringForNextToken;
     /**
      * The list of current jobs and jobs that have ended within the last 30 days.
      */
@@ -703,7 +706,7 @@ declare namespace S3Control {
   export type NonEmptyMaxLength2048String = string;
   export type NonEmptyMaxLength256String = string;
   export type NonEmptyMaxLength64String = string;
-  export type OperationName = "LambdaInvoke"|"S3PutObjectCopy"|"S3PutObjectAcl"|"S3PutObjectTagging"|"S3InitiateRestoreObject"|string;
+  export type OperationName = "LambdaInvoke"|"S3PutObjectCopy"|"S3PutObjectAcl"|"S3PutObjectTagging"|"S3InitiateRestoreObject"|"S3PutObjectLegalHold"|"S3PutObjectRetention"|string;
   export type Policy = string;
   export interface PolicyStatus {
     /**
@@ -745,15 +748,15 @@ declare namespace S3Control {
   }
   export interface PutJobTaggingRequest {
     /**
-     * The account ID for the Amazon Web Services account associated with the Amazon S3 batch operations job you want to replace tags on.
+     * The AWS account ID associated with the Amazon S3 Batch Operations job.
      */
     AccountId: AccountId;
     /**
-     * The ID for the job whose tags you want to replace.
+     * The ID for the Amazon S3 Batch Operations job whose tags you want to replace.
      */
     JobId: JobId;
     /**
-     * The set of tags to associate with the job.
+     * The set of tags to associate with the Amazon S3 Batch Operations job.
      */
     Tags: S3TagSet;
   }
@@ -848,15 +851,15 @@ declare namespace S3Control {
      */
     TargetKeyPrefix?: NonEmptyMaxLength1024String;
     /**
-     * 
+     * The Legal Hold status to be applied to all objects in the Batch Operations job.
      */
     ObjectLockLegalHoldStatus?: S3ObjectLockLegalHoldStatus;
     /**
-     * 
+     * The Retention mode to be applied to all objects in the Batch Operations job.
      */
     ObjectLockMode?: S3ObjectLockMode;
     /**
-     * 
+     * The date when the applied Object Retention configuration will expire on all objects in the Batch Operations job.
      */
     ObjectLockRetainUntilDate?: TimeStamp;
   }
@@ -900,8 +903,15 @@ declare namespace S3Control {
   }
   export type S3KeyArnString = string;
   export type S3MetadataDirective = "COPY"|"REPLACE"|string;
+  export interface S3ObjectLockLegalHold {
+    /**
+     * The Legal Hold status to be applied to all objects in the Batch Operations job.
+     */
+    Status: S3ObjectLockLegalHoldStatus;
+  }
   export type S3ObjectLockLegalHoldStatus = "OFF"|"ON"|string;
   export type S3ObjectLockMode = "COMPLIANCE"|"GOVERNANCE"|string;
+  export type S3ObjectLockRetentionMode = "COMPLIANCE"|"GOVERNANCE"|string;
   export interface S3ObjectMetadata {
     /**
      * 
@@ -960,12 +970,38 @@ declare namespace S3Control {
   }
   export type S3ObjectVersionId = string;
   export type S3Permission = "FULL_CONTROL"|"READ"|"WRITE"|"READ_ACP"|"WRITE_ACP"|string;
+  export interface S3Retention {
+    /**
+     * The date when the applied Object Retention will expire on all objects in the Batch Operations job.
+     */
+    RetainUntilDate?: TimeStamp;
+    /**
+     * The Retention mode to be applied to all objects in the Batch Operations job.
+     */
+    Mode?: S3ObjectLockRetentionMode;
+  }
   export type S3SSEAlgorithm = "AES256"|"KMS"|string;
   export interface S3SetObjectAclOperation {
     /**
      * 
      */
     AccessControlPolicy?: S3AccessControlPolicy;
+  }
+  export interface S3SetObjectLegalHoldOperation {
+    /**
+     * The Legal Hold contains the status to be applied to all objects in the Batch Operations job.
+     */
+    LegalHold: S3ObjectLockLegalHold;
+  }
+  export interface S3SetObjectRetentionOperation {
+    /**
+     * Indicates if the operation should be applied to objects in the Batch Operations job even if they have Governance-type Object Lock in place.
+     */
+    BypassGovernanceRetention?: Boolean;
+    /**
+     * Amazon S3 object lock Retention contains the retention mode to be applied to all objects in the Batch Operations job.
+     */
+    Retention: S3Retention;
   }
   export interface S3SetObjectTaggingOperation {
     /**
@@ -978,17 +1014,20 @@ declare namespace S3Control {
     /**
      * 
      */
-    Key: NonEmptyMaxLength1024String;
+    Key: TagKeyString;
     /**
      * 
      */
-    Value: MaxLength1024String;
+    Value: TagValueString;
   }
   export type S3TagSet = S3Tag[];
   export type S3UserMetadata = {[key: string]: MaxLength1024String};
   export type Setting = boolean;
+  export type StringForNextToken = string;
   export type SuspendedCause = string;
   export type SuspendedDate = Date;
+  export type TagKeyString = string;
+  export type TagValueString = string;
   export type TimeStamp = Date;
   export interface UpdateJobPriorityRequest {
     /**
