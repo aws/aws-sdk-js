@@ -60,11 +60,19 @@ declare class FraudDetector extends Service {
    */
   createVariable(callback?: (err: AWSError, data: FraudDetector.Types.CreateVariableResult) => void): Request<FraudDetector.Types.CreateVariableResult, AWSError>;
   /**
-   * Deletes the detector version.
+   * Deletes the detector. Before deleting a detector, you must first delete all detector versions and rule versions associated with the detector.
+   */
+  deleteDetector(params: FraudDetector.Types.DeleteDetectorRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteDetectorResult) => void): Request<FraudDetector.Types.DeleteDetectorResult, AWSError>;
+  /**
+   * Deletes the detector. Before deleting a detector, you must first delete all detector versions and rule versions associated with the detector.
+   */
+  deleteDetector(callback?: (err: AWSError, data: FraudDetector.Types.DeleteDetectorResult) => void): Request<FraudDetector.Types.DeleteDetectorResult, AWSError>;
+  /**
+   * Deletes the detector version. You cannot delete detector versions that are in ACTIVE status.
    */
   deleteDetectorVersion(params: FraudDetector.Types.DeleteDetectorVersionRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteDetectorVersionResult) => void): Request<FraudDetector.Types.DeleteDetectorVersionResult, AWSError>;
   /**
-   * Deletes the detector version.
+   * Deletes the detector version. You cannot delete detector versions that are in ACTIVE status.
    */
   deleteDetectorVersion(callback?: (err: AWSError, data: FraudDetector.Types.DeleteDetectorVersionResult) => void): Request<FraudDetector.Types.DeleteDetectorVersionResult, AWSError>;
   /**
@@ -75,6 +83,14 @@ declare class FraudDetector extends Service {
    * Deletes the specified event.
    */
   deleteEvent(callback?: (err: AWSError, data: FraudDetector.Types.DeleteEventResult) => void): Request<FraudDetector.Types.DeleteEventResult, AWSError>;
+  /**
+   * Deletes the rule version. You cannot delete a rule version if it is used by an ACTIVE or INACTIVE detector version.
+   */
+  deleteRuleVersion(params: FraudDetector.Types.DeleteRuleVersionRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteRuleVersionResult) => void): Request<FraudDetector.Types.DeleteRuleVersionResult, AWSError>;
+  /**
+   * Deletes the rule version. You cannot delete a rule version if it is used by an ACTIVE or INACTIVE detector version.
+   */
+  deleteRuleVersion(callback?: (err: AWSError, data: FraudDetector.Types.DeleteRuleVersionResult) => void): Request<FraudDetector.Types.DeleteRuleVersionResult, AWSError>;
   /**
    * Gets all versions for a specified detector.
    */
@@ -332,6 +348,10 @@ declare namespace FraudDetector {
      * The model versions to include in the detector version.
      */
     modelVersions?: ListOfModelVersions;
+    /**
+     * The rule execution mode for the rules included in the detector version. You can define and edit the rule mode at the detector version level, when it is in draft status. If you specify FIRST_MATCHED, Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at the first matched rule. Amazon Fraud dectector then provides the outcomes for that single rule. If you specifiy ALL_MATCHED, Amazon Fraud Detector evaluates all rules and returns the outcomes for all matched rules.  The default behavior is FIRST_MATCHED.
+     */
+    ruleExecutionMode?: RuleExecutionMode;
   }
   export interface CreateDetectorVersionResult {
     /**
@@ -442,6 +462,14 @@ declare namespace FraudDetector {
   export type CsvIndexToVariableMap = {[key: string]: string};
   export type DataSource = "EVENT"|"MODEL_SCORE"|"EXTERNAL_MODEL_SCORE"|string;
   export type DataType = "STRING"|"INTEGER"|"FLOAT"|"BOOLEAN"|string;
+  export interface DeleteDetectorRequest {
+    /**
+     * The ID of the detector to delete.
+     */
+    detectorId: identifier;
+  }
+  export interface DeleteDetectorResult {
+  }
   export interface DeleteDetectorVersionRequest {
     /**
      * The ID of the parent detector for the detector version to delete.
@@ -461,6 +489,22 @@ declare namespace FraudDetector {
     eventId: string;
   }
   export interface DeleteEventResult {
+  }
+  export interface DeleteRuleVersionRequest {
+    /**
+     * The ID of the detector that includes the rule version to delete.
+     */
+    detectorId: identifier;
+    /**
+     * The rule ID of the rule version to delete.
+     */
+    ruleId: identifier;
+    /**
+     * The rule version to delete.
+     */
+    ruleVersion: nonEmptyString;
+  }
+  export interface DeleteRuleVersionResult {
   }
   export interface DescribeDetectorRequest {
     /**
@@ -648,6 +692,10 @@ declare namespace FraudDetector {
      * The timestamp when the detector version was created. 
      */
     createdTime?: time;
+    /**
+     * The execution mode of the rule in the dectector  FIRST_MATCHED indicates that Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at the first matched rule. Amazon Fraud dectector then provides the outcomes for that single rule.  ALL_MATCHED indicates that Amazon Fraud Detector evaluates all rules and returns the outcomes for all matched rules. You can define and edit the rule mode at the detector version level, when it is in draft status.
+     */
+    ruleExecutionMode?: RuleExecutionMode;
   }
   export interface GetDetectorsRequest {
     /**
@@ -816,6 +864,10 @@ declare namespace FraudDetector {
      * The model scores for models used in the detector version.
      */
     modelScores?: ListOfModelScores;
+    /**
+     * The rule results in the prediction.
+     */
+    ruleResults?: ListOfRuleResults;
   }
   export interface GetRulesRequest {
     /**
@@ -889,6 +941,7 @@ declare namespace FraudDetector {
   export type Language = "DETECTORPL"|string;
   export type ListOfModelScores = ModelScores[];
   export type ListOfModelVersions = ModelVersion[];
+  export type ListOfRuleResults = RuleResult[];
   export type ListOfStrings = string[];
   export type MaxResults = number;
   export type MetricsMap = {[key: string]: string};
@@ -1228,7 +1281,18 @@ declare namespace FraudDetector {
     createdTime?: time;
   }
   export type RuleDetailList = RuleDetail[];
+  export type RuleExecutionMode = "ALL_MATCHED"|"FIRST_MATCHED"|string;
   export type RuleList = Rule[];
+  export interface RuleResult {
+    /**
+     * The rule ID that was matched, based on the rule execution mode.
+     */
+    ruleId?: string;
+    /**
+     * The outcomes of the matched rule, based on the rule execution mode.
+     */
+    outcomes?: ListOfStrings;
+  }
   export type RulesMaxResults = number;
   export interface TrainingDataSource {
     /**
@@ -1281,6 +1345,10 @@ declare namespace FraudDetector {
      * The model versions to include in the detector version.
      */
     modelVersions?: ListOfModelVersions;
+    /**
+     * The rule execution mode to add to the detector. If you specify FIRST_MATCHED, Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at the first matched rule. Amazon Fraud dectector then provides the outcomes for that single rule. If you specifiy ALL_MATCHED, Amazon Fraud Detector evaluates all rules and returns the outcomes for all matched rules. You can define and edit the rule mode at the detector version level, when it is in draft status. The default behavior is FIRST_MATCHED.
+     */
+    ruleExecutionMode?: RuleExecutionMode;
   }
   export interface UpdateDetectorVersionResult {
   }

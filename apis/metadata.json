@@ -865,5 +865,11 @@
   "codestarconnections": {
     "prefix": "codestar-connections",
     "name": "CodeStarconnections"
+  },
+  "synthetics": {
+    "name": "Synthetics"
+  },
+  "iotsitewise": {
+    "name": "IoTSiteWise"
   }
 }

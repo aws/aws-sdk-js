@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "ApiGatewayV2",
+        "description": "You can now export an OpenAPI 3.0 compliant API definition file for Amazon API Gateway HTTP APIs using the Export API."
+    },
+    {
+        "type": "feature",
+        "category": "CostExplorer",
+        "description": "Cost Categories API is now General Available with new dimensions and operations support. You can map costs by account name, service, and charge type dimensions as well as use contains, starts with, and ends with operations. Cost Categories can also be used in RI and SP coverage reports."
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "Added a new ConnectionType \"KAFKA\" and a ConnectionProperty \"KAFKA_BOOTSTRAP_SERVERS\" to support Kafka connection."
+    },
+    {
+        "type": "feature",
+        "category": "IoTEvents",
+        "description": "API update that allows users to add AWS Iot SiteWise actions while creating Detector Model in AWS Iot Events"
+    },
+    {
+        "type": "feature",
+        "category": "Synthetics",
+        "description": "Introducing CloudWatch Synthetics. This is the first public release of CloudWatch Synthetics."
+    }
+]

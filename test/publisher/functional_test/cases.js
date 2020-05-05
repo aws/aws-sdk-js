@@ -891,6 +891,83 @@ module.exports = {
       ]
     },
     {
+      'description': 'Test MaxRetriesExceeded is not set when final retry succeeds ',
+      'configuration': {
+        'accessKey': 'myaccesskey',
+        'region': 'us-west-2',
+        'environmentVariables': {
+          'AWS_CSM_ENABLED': 'true'
+        },
+        'sharedConfigFile': {},
+        'maxRetries': 1
+      },
+      'apiCalls': [
+        {
+          'serviceId': 'CSM Test',
+          'operationName': 'TestOperation',
+          'params': {},
+          'attemptResponses': [
+            {
+              'httpStatus': 503,
+              'responseHeaders': {},
+              'errorCode': 'ServiceUnavailable',
+              'errorMessage': 'Service is unavailable'
+            },
+            {
+              'httpStatus': 200,
+              'responseHeaders': {},
+            }
+          ]
+        }
+      ],
+      'expectedMonitoringEvents': [
+        {
+          'Version': 1,
+          'Type': 'ApiCallAttempt',
+          'Service': 'CSM Test',
+          'Api': 'TestOperation',
+          'ClientId': '',
+          'Timestamp': 'ANY_INT',
+          'AttemptLatency': 'ANY_INT',
+          'Fqdn': 'csmtest.us-west-2.amazonaws.com',
+          'Region': 'us-west-2',
+          'UserAgent': 'ANY_STR',
+          'AccessKey': 'myaccesskey',
+          'HttpStatusCode': 503,
+          'AwsException': 'ServiceUnavailable',
+          'AwsExceptionMessage': 'Service is unavailable'
+        },
+        {
+          'Version': 1,
+          'Type': 'ApiCallAttempt',
+          'Service': 'CSM Test',
+          'Api': 'TestOperation',
+          'ClientId': '',
+          'Timestamp': 'ANY_INT',
+          'AttemptLatency': 'ANY_INT',
+          'Fqdn': 'csmtest.us-west-2.amazonaws.com',
+          'Region': 'us-west-2',
+          'UserAgent': 'ANY_STR',
+          'AccessKey': 'myaccesskey',
+          'HttpStatusCode': 200
+        },
+        {
+          'Version': 1,
+          'Type': 'ApiCall',
+          'Service': 'CSM Test',
+          'Api': 'TestOperation',
+          'ClientId': '',
+          'Timestamp': 'ANY_INT',
+          'Latency': 'ANY_INT',
+          'AttemptCount': 2,
+          'MaxRetriesExceeded': 0,
+          'UserAgent': 'ANY_STR',
+          'Region': 'us-west-2',
+          'FinalHttpStatusCode': 200
+        }
+      ]
+    },
+    {
       'description': 'Test max retries from AWS exception',
       'configuration': {
         'accessKey': 'myaccesskey',

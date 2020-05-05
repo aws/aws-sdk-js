@@ -141,6 +141,20 @@
     }
   },
   "shapes": {
+    "AvailSuppression": {
+      "type": "structure",
+      "documentation": "<p>The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.</p>",
+      "members": {
+        "Mode": {
+          "documentation": "Sets the mode for avail suppression, also known as ad suppression. By default, ad suppression is off and all ad breaks are filled by MediaTailor with ads or slate.",
+          "shape": "Mode"
+        },
+        "Value": {
+          "documentation": "The avail suppression value is a live edge offset time in HH:MM:SS. MediaTailor won't fill ad breaks on or behind this time in the manifest lookback window. ",
+          "shape": "__string"
+        }
+      }
+    },
     "CdnConfiguration": {
       "documentation": "<p>The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. </p>",
       "members": {
@@ -224,6 +238,10 @@
         "AdDecisionServerUrl": {
           "documentation": "<p>The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing, you can provide a static VAST URL. The maximum length is 25,000 characters.</p>",
           "shape": "__string"
+        },
+        "AvailSuppression": {
+          "shape": "AvailSuppression",
+          "documentation": "<p>The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.</p>"
         },
         "CdnConfiguration": {
           "documentation": "<p>The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. </p>",
@@ -352,12 +370,23 @@
       ],
       "type": "string"
     },
+    "Mode": {
+      "enum": [
+        "OFF",
+        "BEHIND_LIVE_EDGE"
+      ],
+      "type": "string"
+    },
     "PlaybackConfiguration": {
       "documentation": "<p>The AWSMediaTailor configuration.</p>",
       "members": {
         "AdDecisionServerUrl": {
           "documentation": "<p>The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing, you can provide a static VAST URL. The maximum length is 25,000 characters.</p>",
           "shape": "__string"
+        },
+        "AvailSuppression": {
+          "documentation": "<p>The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.</p>",
+          "shape": "AvailSuppression"
         },
         "CdnConfiguration": {
           "documentation": "<p>The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. </p>",
@@ -431,6 +460,10 @@
           "documentation": "<p>The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing you can provide a static VAST URL. The maximum length is 25,000 characters.</p>",
           "shape": "__string"
         },
+        "AvailSuppression": {
+          "shape": "AvailSuppression",
+          "documentation": "<p>The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.</p>"
+        },
         "CdnConfiguration": {
           "documentation": "<p>The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. </p>",
           "shape": "CdnConfiguration"
@@ -476,6 +509,10 @@
         "AdDecisionServerUrl": {
           "documentation": "<p>The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing, you can provide a static VAST URL. The maximum length is 25,000 characters.</p>",
           "shape": "__string"
+        },
+        "AvailSuppression": {
+          "shape": "AvailSuppression",
+          "documentation": "<p>The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.</p>"
         },
         "CdnConfiguration": {
           "documentation": "<p>The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. </p>",

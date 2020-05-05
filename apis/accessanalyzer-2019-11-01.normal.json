@@ -596,6 +596,7 @@
         "createdAt",
         "isPublic",
         "resourceArn",
+        "resourceOwnerAccount",
         "resourceType",
         "updatedAt"
       ],
@@ -624,13 +625,17 @@
           "shape": "ResourceArn",
           "documentation": "<p>The ARN of the resource that was analyzed.</p>"
         },
+        "resourceOwnerAccount": {
+          "shape": "String",
+          "documentation": "<p>The AWS account ID that owns the resource.</p>"
+        },
         "resourceType": {
           "shape": "ResourceType",
           "documentation": "<p>The type of the resource that was analyzed.</p>"
         },
         "sharedVia": {
           "shape": "SharedViaList",
-          "documentation": "<p>Indicates how the access that generated the finding is granted.</p>"
+          "documentation": "<p>Indicates how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.</p>"
         },
         "status": {
           "shape": "FindingStatus",
@@ -647,12 +652,17 @@
       "type": "structure",
       "required": [
         "resourceArn",
+        "resourceOwnerAccount",
         "resourceType"
       ],
       "members": {
         "resourceArn": {
           "shape": "ResourceArn",
           "documentation": "<p>The ARN of the analyzed resource.</p>"
+        },
+        "resourceOwnerAccount": {
+          "shape": "String",
+          "documentation": "<p>The AWS account ID that owns the resource.</p>"
         },
         "resourceType": {
           "shape": "ResourceType",
@@ -671,12 +681,22 @@
       "type": "string",
       "pattern": "^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*:analyzer/.{1,255}$"
     },
+    "AnalyzerStatus": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "CREATING",
+        "DISABLED",
+        "FAILED"
+      ]
+    },
     "AnalyzerSummary": {
       "type": "structure",
       "required": [
         "arn",
         "createdAt",
         "name",
+        "status",
         "type"
       ],
       "members": {
@@ -699,6 +719,14 @@
         "name": {
           "shape": "Name",
           "documentation": "<p>The name of the analyzer.</p>"
+        },
+        "status": {
+          "shape": "AnalyzerStatus",
+          "documentation": "<p>The status of the analyzer. An <code>Active</code> analyzer successfully monitors supported resources and generates new findings. The analyzer is <code>Disabled</code> when a user action, such as removing trusted access for IAM Access Analyzer from AWS Organizations, causes the analyzer to stop generating new findings. The status is <code>Creating</code> when the analyzer creation is in progress and <code>Failed</code> when the analyzer creation has failed. </p>"
+        },
+        "statusReason": {
+          "shape": "StatusReason",
+          "documentation": "<p>The <code>statusReason</code> provides more details about the current status of the analyzer. For example, if the creation for the analyzer fails, a <code>Failed</code> status is displayed. For an analyzer with organization as the type, this failure can be due to an issue with creating the service-linked roles required in the member accounts of the AWS organization.</p>"
         },
         "tags": {
           "shape": "TagsMap",
@@ -924,6 +952,7 @@
         "condition",
         "createdAt",
         "id",
+        "resourceOwnerAccount",
         "resourceType",
         "status",
         "updatedAt"
@@ -965,9 +994,17 @@
           "shape": "String",
           "documentation": "<p>The resource that an external principal has access to.</p>"
         },
+        "resourceOwnerAccount": {
+          "shape": "String",
+          "documentation": "<p>The AWS account ID that owns the resource.</p>"
+        },
         "resourceType": {
           "shape": "ResourceType",
           "documentation": "<p>The type of the resource reported in the finding.</p>"
+        },
+        "sources": {
+          "shape": "FindingSourceList",
+          "documentation": "<p>The sources of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.</p>"
         },
         "status": {
           "shape": "FindingStatus",
@@ -988,6 +1025,47 @@
       "member": {
         "shape": "FindingId"
       }
+    },
+    "FindingSource": {
+      "type": "structure",
+      "required": [
+        "type"
+      ],
+      "members": {
+        "detail": {
+          "shape": "FindingSourceDetail",
+          "documentation": "<p>Includes details about how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.</p>"
+        },
+        "type": {
+          "shape": "FindingSourceType",
+          "documentation": "<p>Indicates the type of access that generated the finding.</p>"
+        }
+      },
+      "documentation": "<p>The source of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.</p>"
+    },
+    "FindingSourceDetail": {
+      "type": "structure",
+      "members": {
+        "accessPointArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the access point that generated the finding.</p>"
+        }
+      },
+      "documentation": "<p>Includes details about how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.</p>"
+    },
+    "FindingSourceList": {
+      "type": "list",
+      "member": {
+        "shape": "FindingSource"
+      }
+    },
+    "FindingSourceType": {
+      "type": "string",
+      "enum": [
+        "BUCKET_ACL",
+        "POLICY",
+        "S3_ACCESS_POINT"
+      ]
     },
     "FindingStatus": {
       "type": "string",
@@ -1011,6 +1089,7 @@
         "condition",
         "createdAt",
         "id",
+        "resourceOwnerAccount",
         "resourceType",
         "status",
         "updatedAt"
@@ -1052,9 +1131,17 @@
           "shape": "String",
           "documentation": "<p>The resource that the external principal has access to.</p>"
         },
+        "resourceOwnerAccount": {
+          "shape": "String",
+          "documentation": "<p>The AWS account ID that owns the resource.</p>"
+        },
         "resourceType": {
           "shape": "ResourceType",
           "documentation": "<p>The type of the resource that the external principal has access to.</p>"
+        },
+        "sources": {
+          "shape": "FindingSourceList",
+          "documentation": "<p>The sources of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.</p>"
         },
         "status": {
           "shape": "FindingStatus",
@@ -1447,6 +1534,15 @@
         "shape": "String"
       }
     },
+    "ReasonCode": {
+      "type": "string",
+      "enum": [
+        "AWS_SERVICE_ACCESS_DISABLED",
+        "DELEGATED_ADMINISTRATOR_DEREGISTERED",
+        "ORGANIZATION_DELETED",
+        "SERVICE_LINKED_ROLE_CREATION_FAILED"
+      ]
+    },
     "ResourceArn": {
       "type": "string",
       "pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:.*$"
@@ -1499,6 +1595,19 @@
         }
       },
       "documentation": "<p>Starts a scan of the policies applied to the specified resource.</p>"
+    },
+    "StatusReason": {
+      "type": "structure",
+      "required": [
+        "code"
+      ],
+      "members": {
+        "code": {
+          "shape": "ReasonCode",
+          "documentation": "<p>The reason code for the current status of the analyzer.</p>"
+        }
+      },
+      "documentation": "<p>Provides more details about the current status of the analyzer. For example, if the creation for the analyzer fails, a <code>Failed</code> status is displayed. For an analyzer with organization as the type, this failure can be due to an issue with creating the service-linked roles required in the member accounts of the AWS organization.</p>"
     },
     "String": {
       "type": "string"
@@ -1553,7 +1662,8 @@
     "Type": {
       "type": "string",
       "enum": [
-        "ACCOUNT"
+        "ACCOUNT",
+        "ORGANIZATION"
       ]
     },
     "UntagResourceRequest": {

@@ -1,0 +1,62 @@
+[
+    {
+        "type": "feature",
+        "category": "AugmentedAIRuntime",
+        "description": "This release updates Amazon Augmented AI ListHumanLoops and StartHumanLoop APIs."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Amazon EC2 now supports adding AWS resource tags for placement groups and key pairs, at creation time. The CreatePlacementGroup API will now return placement group information when created successfully. The DeleteKeyPair API now supports deletion by resource ID."
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "This release adds support for querying GetUserDefinedFunctions API without databaseName."
+    },
+    {
+        "type": "feature",
+        "category": "Imagebuilder",
+        "description": "This release includes support for additional OS Versions within EC2 Image Builder."
+    },
+    {
+        "type": "feature",
+        "category": "IoTEvents",
+        "description": "API update that allows users to customize event action payloads, and adds support for Amazon DynamoDB actions."
+    },
+    {
+        "type": "feature",
+        "category": "MediaConvert",
+        "description": "AWS Elemental MediaConvert now allows you to specify your input captions frame rate for SCC captions sources."
+    },
+    {
+        "type": "feature",
+        "category": "MediaTailor",
+        "description": "AWS Elemental MediaTailor SDK now allows configuration of Avail Suppression."
+    },
+    {
+        "type": "feature",
+        "category": "MigrationHub",
+        "description": "Adding ThrottlingException"
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "This release adds support for Amazon RDS Proxy with PostgreSQL compatibility."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Amazon SageMaker now supports running training jobs on ml.g4dn and ml.c5n instance types. Amazon SageMaker supports in \"IN\" operation for Search now."
+    },
+    {
+        "type": "feature",
+        "category": "SecurityHub",
+        "description": "Added a new BatchUpdateFindings action, which allows customers to update selected information about their findings. Security Hub customers use BatchUpdateFindings to track their investigation into a finding. BatchUpdateFindings is intended to replace the UpdateFindings action, which is deprecated."
+    },
+    {
+        "type": "feature",
+        "category": "Snowball",
+        "description": "An update to the Snowball Edge Storage Optimized device has been launched. Like the previous version, it has 80 TB of capacity for data transfer. Now it has 40 vCPUs, 80 GiB, and a 1 TiB SATA SSD of memory for EC2 compatible compute. The 80 TB of capacity can also be used for EBS-like volumes for AMIs."
+    }
+]

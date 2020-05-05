@@ -4475,7 +4475,7 @@
           "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
         }
       ],
-      "documentation": "<p>Creates a new endpoint for an application or updates the settings and attributes of an existing endpoint for an application. You can also use this operation to define custom attributes (Attributes, Metrics, and UserAttributes properties) for an endpoint.</p>"
+      "documentation": "<p>Creates a new endpoint for an application or updates the settings and attributes of an existing endpoint for an application. You can also use this operation to define custom attributes for an endpoint. If an update includes one or more values for a custom attribute, Amazon Pinpoint replaces (overwrites) any existing values with the new values.</p>"
     },
     "UpdateEndpointsBatch": {
       "name": "UpdateEndpointsBatch",
@@ -4521,7 +4521,7 @@
           "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
         }
       ],
-      "documentation": " <p>Creates a new batch of endpoints for an application or updates the settings and attributes of a batch of existing endpoints for an application. You can also use this operation to define custom attributes (Attributes, Metrics, and UserAttributes properties) for a batch of endpoints.</p>"
+      "documentation": "<p>Creates a new batch of endpoints for an application or updates the settings and attributes of a batch of existing endpoints for an application. You can also use this operation to define custom attributes for a batch of endpoints. If an update includes one or more values for a custom attribute, Amazon Pinpoint replaces (overwrites) any existing values with the new values.</p>"
     },
     "UpdateGcmChannel": {
       "name": "UpdateGcmChannel",
@@ -5871,7 +5871,7 @@
         },
         "KpiName": {
           "shape": "__string",
-          "documentation": "<p>The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, that the data was retrieved for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. For a list of possible values, see the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html\">Amazon Pinpoint Developer Guide</a>.</p>"
+          "documentation": "<p>The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, that the data was retrieved for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. For a list of possible values, see the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html\">Amazon Pinpoint Developer Guide</a>.</p>"
         },
         "KpiResult": {
           "shape": "BaseKpiResult",
@@ -5932,7 +5932,7 @@
         },
         "CampaignHook": {
           "shape": "CampaignHook",
-          "documentation": "<p>The settings for the AWS Lambda function to use by default as a code hook for campaigns in the application.</p>"
+          "documentation": "<p>The settings for the AWS Lambda function to invoke by default as a code hook for campaigns in the application. You can use this hook to customize segments that are used by campaigns in the application.</p>"
         },
         "LastModifiedDate": {
           "shape": "__string",
@@ -5940,7 +5940,7 @@
         },
         "Limits": {
           "shape": "CampaignLimits",
-          "documentation": "<p>The default sending limits for campaigns in the application.</p>"
+          "documentation": "<p>The default sending limits for campaigns and journeys in the application.</p>"
         },
         "QuietTime": {
           "shape": "QuietTime",
@@ -6163,6 +6163,16 @@
         "Rows"
       ]
     },
+    "CampaignCustomMessage": {
+      "type": "structure",
+      "members": {
+        "Data": {
+          "shape": "__string",
+          "documentation": "<p>The raw, JSON-formatted string to use as the payload for the message. The maximum size is 5 KB.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the contents of a message that's sent through a custom channel to recipients of a campaign.</p>"
+    },
     "CampaignDateRangeKpiResponse": {
       "type": "structure",
       "members": {
@@ -6180,7 +6190,7 @@
         },
         "KpiName": {
           "shape": "__string",
-          "documentation": "<p>The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, that the data was retrieved for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. For a list of possible values, see the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html\">Amazon Pinpoint Developer Guide</a>.</p>"
+          "documentation": "<p>The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, that the data was retrieved for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. For a list of possible values, see the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html\">Amazon Pinpoint Developer Guide</a>.</p>"
         },
         "KpiResult": {
           "shape": "BaseKpiResult",
@@ -6250,25 +6260,25 @@
       "members": {
         "LambdaFunctionName": {
           "shape": "__string",
-          "documentation": "<p>The name or Amazon Resource Name (ARN) of the AWS Lambda function that Amazon Pinpoint invokes to send messages for a campaign.</p>"
+          "documentation": "<p>The name or Amazon Resource Name (ARN) of the AWS Lambda function that Amazon Pinpoint invokes to customize a segment for a campaign.</p>"
         },
         "Mode": {
           "shape": "Mode",
-          "documentation": "<p>Specifies which Lambda mode to use when invoking the AWS Lambda function.</p>"
+          "documentation": "<p>The mode that Amazon Pinpoint uses to invoke the AWS Lambda function. Possible values are:</p> <ul><li><p>FILTER - Invoke the function to customize the segment that's used by a campaign.</p></li> <li><p>DELIVERY - (Deprecated) Previously, invoked the function to send a campaign through a custom channel. This functionality is not supported anymore. To send a campaign through a custom channel, use the CustomDeliveryConfiguration and CampaignCustomMessage objects of the campaign.</p></li></ul>"
         },
         "WebUrl": {
           "shape": "__string",
           "documentation": " <p>The web URL that Amazon Pinpoint calls to invoke the AWS Lambda function over HTTPS.</p>"
         }
       },
-      "documentation": "<p>Specifies the AWS Lambda function to use as a code hook for a campaign.</p>"
+      "documentation": "<p>Specifies settings for invoking an AWS Lambda function that customizes a segment for a campaign.</p>"
     },
     "CampaignLimits": {
       "type": "structure",
       "members": {
         "Daily": {
           "shape": "__integer",
-          "documentation": "<p>The maximum number of messages that a campaign can send to a single endpoint during a 24-hour period. The maximum value is 100.</p>"
+          "documentation": "<p>The maximum number of messages that a campaign can send to a single endpoint during a 24-hour period. For an application, this value specifies the default limit for the number of messages that campaigns and journeys can send to a single endpoint during a 24-hour period. The maximum value is 100.</p>"
         },
         "MaximumDuration": {
           "shape": "__integer",
@@ -6276,14 +6286,14 @@
         },
         "MessagesPerSecond": {
           "shape": "__integer",
-          "documentation": "<p>The maximum number of messages that a campaign can send each second. The minimum value is 50. The maximum value is 20,000.</p>"
+          "documentation": "<p>The maximum number of messages that a campaign can send each second. For an application, this value specifies the default limit for the number of messages that campaigns and journeys can send each second. The minimum value is 50. The maximum value is 20,000.</p>"
         },
         "Total": {
           "shape": "__integer",
-          "documentation": "<p>The maximum number of messages that a campaign can send to a single endpoint during the course of the campaign. The maximum value is 100.</p>"
+          "documentation": "<p>The maximum number of messages that a campaign can send to a single endpoint during the course of the campaign. If a campaign recurs, this setting applies to all runs of the campaign. The maximum value is 100.</p>"
         }
       },
-      "documentation": "<p>Specifies limits on the messages that a campaign can send.</p>"
+      "documentation": "<p>For a campaign, specifies limits on the messages that the campaign can send. For an application, specifies the default limits for messages that campaigns and journeys in the application can send.</p>"
     },
     "CampaignResponse": {
       "type": "structure",
@@ -6304,9 +6314,13 @@
           "shape": "__string",
           "documentation": "<p>The date, in ISO 8601 format, when the campaign was created.</p>"
         },
+        "CustomDeliveryConfiguration": {
+          "shape": "CustomDeliveryConfiguration",
+          "documentation": "<p>The delivery configuration settings for sending the campaign through a custom channel.</p>"
+        },
         "DefaultState": {
           "shape": "CampaignState",
-          "documentation": "<p>The current status of the campaign's default treatment. This value exists only for campaigns that have more than one treatment, to support A/B testing.</p>"
+          "documentation": "<p>The current status of the campaign's default treatment. This value exists only for campaigns that have more than one treatment.</p>"
         },
         "Description": {
           "shape": "__string",
@@ -6318,7 +6332,7 @@
         },
         "Hook": {
           "shape": "CampaignHook",
-          "documentation": "<p>The settings for the AWS Lambda function to use as a code hook for the campaign.</p>"
+          "documentation": "<p>The settings for the AWS Lambda function to use as a code hook for the campaign. You can use this hook to customize the segment that's used by the campaign.</p>"
         },
         "Id": {
           "shape": "__string",
@@ -6371,11 +6385,11 @@
         },
         "TreatmentDescription": {
           "shape": "__string",
-          "documentation": "<p>The custom description of a variation of the campaign that's used for A/B testing.</p>"
+          "documentation": "<p>The custom description of the default treatment for the campaign.</p>"
         },
         "TreatmentName": {
           "shape": "__string",
-          "documentation": "<p>The custom name of a variation of the campaign that's used for A/B testing.</p>"
+          "documentation": "<p>The custom name of the default treatment for the campaign, if the campaign has multiple treatments. A <i>treatment</i> is a variation of a campaign that's used for A/B testing.</p>"
         },
         "Version": {
           "shape": "__integer",
@@ -6416,7 +6430,7 @@
       "members": {
         "CampaignStatus": {
           "shape": "CampaignStatus",
-          "documentation": "<p>The current status of the campaign, or the current status of a treatment that belongs to an A/B test campaign. If a campaign uses A/B testing, the campaign has a status of COMPLETED only if all campaign treatments have a status of COMPLETED.</p>"
+          "documentation": "<p>The current status of the campaign, or the current status of a treatment that belongs to an A/B test campaign.</p> <p>If a campaign uses A/B testing, the campaign has a status of COMPLETED only if all campaign treatments have a status of COMPLETED. If you delete the segment that's associated with a campaign, the campaign fails and has a status of DELETED.</p>"
         }
       },
       "documentation": "<p>Provides information about the status of a campaign.</p>"
@@ -6789,11 +6803,11 @@
       "members": {
         "Attributes": {
           "shape": "MapOf__string",
-          "documentation": "<p>A map of key-value pairs that defines 1-10 custom endpoint or user attributes, depending on the value for the RecommenderUserIdType property. Each of these attributes temporarily stores a recommended item that's retrieved from the recommender model and sent to an AWS Lambda function for additional processing. Each attribute can be used as a message variable in a message template.</p> <p>In the map, the key is the name of a custom attribute and the value is a custom display name for that attribute. The display name appears in the <b>Attribute finder</b> pane of the template editor on the Amazon Pinpoint console. The following restrictions apply to these names:</p> <ul><li><p>An attribute name must start with a letter or number and it can contain up to 50 characters. The characters can be letters, numbers, underscores (_), or hyphens (-). Attribute names are case sensitive and must be unique.</p></li> <li><p>An attribute display name must start with a letter or number and it can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-).</p></li></ul> <p>This object is required if the configuration invokes an AWS Lambda function (LambdaFunctionArn) to process recommendation data. Otherwise, don't include this object in your request.</p>"
+          "documentation": "<p>A map of key-value pairs that defines 1-10 custom endpoint or user attributes, depending on the value for the RecommendationProviderIdType property. Each of these attributes temporarily stores a recommended item that's retrieved from the recommender model and sent to an AWS Lambda function for additional processing. Each attribute can be used as a message variable in a message template.</p> <p>In the map, the key is the name of a custom attribute and the value is a custom display name for that attribute. The display name appears in the <b>Attribute finder</b> of the template editor on the Amazon Pinpoint console. The following restrictions apply to these names:</p> <ul><li><p>An attribute name must start with a letter or number and it can contain up to 50 characters. The characters can be letters, numbers, underscores (_), or hyphens (-). Attribute names are case sensitive and must be unique.</p></li> <li><p>An attribute display name must start with a letter or number and it can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-).</p></li></ul> <p>This object is required if the configuration invokes an AWS Lambda function (RecommendationTransformerUri) to process recommendation data. Otherwise, don't include this object in your request.</p>"
         },
         "Description": {
           "shape": "__string",
-          "documentation": "<p>A custom description of the configuration for the recommender model. The description can contain up to 128 characters.</p>"
+          "documentation": "<p>A custom description of the configuration for the recommender model. The description can contain up to 128 characters. The characters can be letters, numbers, spaces, or the following symbols: _ ; () , ‐.</p>"
         },
         "Name": {
           "shape": "__string",
@@ -6801,7 +6815,7 @@
         },
         "RecommendationProviderIdType": {
           "shape": "__string",
-          "documentation": "<p>The type of Amazon Pinpoint ID to associate with unique user IDs in the recommender model. This value enables the model to use attribute and event data that’s specific to a particular endpoint or user in an Amazon Pinpoint application. Valid values are:</p> <ul><li><p>PINPOINT_ENDPOINT_ID - Associate each user in the model with a particular endpoint in Amazon Pinpoint. The data is correlated based on endpoint IDs in Amazon Pinpoint. This is the default value.</p></li> <li><p>PINPOINT_USER_ID - Associate each user in the model with a particular user and endpoint in Amazon Pinpoint. The data is correlated based on user IDs in Amazon Pinpoint. If you specify this value, an endpoint definition in Amazon Pinpoint has to specify a both a user ID (UserId) and an endpoint ID. Otherwise, messages won’t be sent to the user's endpoint.</p></li></ul>"
+          "documentation": "<p>The type of Amazon Pinpoint ID to associate with unique user IDs in the recommender model. This value enables the model to use attribute and event data that’s specific to a particular endpoint or user in an Amazon Pinpoint application. Valid values are:</p> <ul><li><p>PINPOINT_ENDPOINT_ID - Associate each user in the model with a particular endpoint in Amazon Pinpoint. The data is correlated based on endpoint IDs in Amazon Pinpoint. This is the default value.</p></li> <li><p>PINPOINT_USER_ID - Associate each user in the model with a particular user and endpoint in Amazon Pinpoint. The data is correlated based on user IDs in Amazon Pinpoint. If you specify this value, an endpoint definition in Amazon Pinpoint has to specify both a user ID (UserId) and an endpoint ID. Otherwise, messages won’t be sent to the user's endpoint.</p></li></ul>"
         },
         "RecommendationProviderRoleArn": {
           "shape": "__string",
@@ -6817,11 +6831,11 @@
         },
         "RecommendationsDisplayName": {
           "shape": "__string",
-          "documentation": "<p>A custom display name for the standard endpoint or user attribute (RecommendationItems) that temporarily stores a recommended item for each endpoint or user, depending on the value for the RecommenderUserIdType property. This value is required if the configuration doesn't invoke an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data.</p> <p>This name appears in the <b>Attribute finder</b> pane of the template editor on the Amazon Pinpoint console. The name can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-). These restrictions don't apply to attribute values.</p>"
+          "documentation": "<p>A custom display name for the standard endpoint or user attribute (RecommendationItems) that temporarily stores recommended items for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This value is required if the configuration doesn't invoke an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data.</p> <p>This name appears in the <b>Attribute finder</b> of the template editor on the Amazon Pinpoint console. The name can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-). These restrictions don't apply to attribute values.</p>"
         },
         "RecommendationsPerMessage": {
           "shape": "__integer",
-          "documentation": "<p>The number of recommended items to retrieve from the model for each endpoint or user, depending on the value for the RecommenderUserIdType property. This number determines how many recommended attributes are available for use as message variables in message templates. The minimum value is 1. The maximum value is 5. The default value is 5.</p> <p>To use multiple recommended items and custom attributes with message variables, you have to use an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data.</p>"
+          "documentation": "<p>The number of recommended items to retrieve from the model for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This number determines how many recommended items are available for use in message variables. The minimum value is 1. The maximum value is 5. The default value is 5.</p> <p>To use multiple recommended items and custom attributes with message variables, you have to use an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data.</p>"
         }
       },
       "documentation": "<p>Specifies Amazon Pinpoint configuration settings for retrieving and processing recommendation data from a recommender model.</p>",
@@ -6964,6 +6978,23 @@
         "CreateTemplateMessageBody"
       ],
       "payload": "CreateTemplateMessageBody"
+    },
+    "CustomDeliveryConfiguration": {
+      "type": "structure",
+      "members": {
+        "DeliveryUri": {
+          "shape": "__string",
+          "documentation": "<p>The destination to send the campaign or treatment to. This value can be one of the following:</p> <ul><li><p>The name or Amazon Resource Name (ARN) of an AWS Lambda function to invoke to handle delivery of the campaign or treatment.</p></li> <li><p>The URL for a web application or service that supports HTTPS and can receive the message. The URL has to be a full URL, including the HTTPS protocol.</p></li></ul> "
+        },
+        "EndpointTypes": {
+          "shape": "ListOf__EndpointTypesElement",
+          "documentation": "<p>The types of endpoints to send the campaign or treatment to. Each valid value maps to a type of channel that you can associate with an endpoint by using the ChannelType property of an endpoint.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the delivery configuration settings for sending a campaign or campaign treatment through a custom channel. This object is required if you use the CampaignCustomMessage object to define the message to send for the campaign or campaign treatment.</p>",
+      "required": [
+        "DeliveryUri"
+      ]
     },
     "DefaultMessage": {
       "type": "structure",
@@ -7745,7 +7776,7 @@
       "members": {
         "ConfigurationSet": {
           "shape": "__string",
-          "documentation": "<p>The configuration set that you want to apply to email that you send through the channel by using the <a href=\"emailAPIreference.html\">Amazon Pinpoint Email API</a>.</p>"
+          "documentation": "<p>The <a href=\"https://docs.aws.amazon.com/ses/latest/APIReference/API_ConfigurationSet.html\">Amazon SES configuration set</a> that you want to apply to messages that you send through the channel.</p>"
         },
         "Enabled": {
           "shape": "__boolean",
@@ -7779,7 +7810,7 @@
         },
         "ConfigurationSet": {
           "shape": "__string",
-          "documentation": "<p>The configuration set that's applied to email that's sent through the channel by using the <a href=\"emailAPIreference.html\">Amazon Pinpoint Email API</a>.</p>"
+          "documentation": "<p>The <a href=\"https://docs.aws.amazon.com/ses/latest/APIReference/API_ConfigurationSet.html\">Amazon SES configuration set</a> that's applied to messages that are sent through the channel.</p>"
         },
         "CreationDate": {
           "shape": "__string",
@@ -7791,7 +7822,7 @@
         },
         "FromAddress": {
           "shape": "__string",
-          "documentation": "<p>The verified email address that you send email from when you send email through the channel.</p>"
+          "documentation": "<p>The verified email address that email is sent from when you send email through the channel.</p>"
         },
         "HasCredential": {
           "shape": "__boolean",
@@ -7803,7 +7834,7 @@
         },
         "Identity": {
           "shape": "__string",
-          "documentation": " <p>The Amazon Resource Name (ARN) of the identity, verified with Amazon Simple Email Service (Amazon SES), that you use when you send email through the channel.</p>"
+          "documentation": " <p>The Amazon Resource Name (ARN) of the identity, verified with Amazon Simple Email Service (Amazon SES), that's used when you send email through the channel.</p>"
         },
         "IsArchived": {
           "shape": "__boolean",
@@ -7819,7 +7850,7 @@
         },
         "MessagesPerSecond": {
           "shape": "__integer",
-          "documentation": "<p>The maximum number of emails that you can send through the channel each second.</p>"
+          "documentation": "<p>The maximum number of emails that can be sent through the channel each second.</p>"
         },
         "Platform": {
           "shape": "__string",
@@ -8044,7 +8075,7 @@
         },
         "User": {
           "shape": "EndpointUser",
-          "documentation": "<p>One or more custom user attributes that describe the user who's associated with the endpoint.</p>"
+          "documentation": "<p>One or more custom attributes that describe the user who's associated with the endpoint.</p>"
         }
       },
       "documentation": "<p>Specifies an endpoint to create or update and the settings and attributes to set or change for the endpoint.</p>"
@@ -8223,7 +8254,7 @@
         },
         "User": {
           "shape": "EndpointUser",
-          "documentation": "<p>One or more custom user attributes that describe the user who's associated with the endpoint.</p>"
+          "documentation": "<p>One or more custom attributes that describe the user who's associated with the endpoint.</p>"
         }
       },
       "documentation": "<p>Specifies the channel type and other settings for an endpoint.</p>"
@@ -8409,10 +8440,7 @@
           "documentation": "<p>The message identifier (message_id) for the message to use when determining whether message events meet the condition.</p>"
         }
       },
-      "documentation": "<p>Specifies the conditions to evaluate for an event that applies to an activity in a journey.</p>",
-      "required": [
-        "Dimensions"
-      ]
+      "documentation": "<p>Specifies the conditions to evaluate for an event that applies to an activity in a journey.</p>"
     },
     "EventDimensions": {
       "type": "structure",
@@ -9037,19 +9065,19 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "kpi-name",
-          "documentation": "<p>The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are email-open-rate and successful-delivery-rate. For a list of valid values, see the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html\">Amazon Pinpoint Developer Guide</a>.</p>"
+          "documentation": "<p>The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are email-open-rate and successful-delivery-rate. For a list of valid values, see the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html\">Amazon Pinpoint Developer Guide</a>.</p>"
         },
         "NextToken": {
           "shape": "__string",
           "location": "querystring",
           "locationName": "next-token",
-          "documentation": "<p>The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         },
         "PageSize": {
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         },
         "StartTime": {
           "shape": "__timestampIso8601",
@@ -9108,7 +9136,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         },
         "Token": {
           "shape": "__string",
@@ -9175,7 +9203,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         },
         "Token": {
           "shape": "__string",
@@ -9226,19 +9254,19 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "kpi-name",
-          "documentation": "<p>The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are email-open-rate and successful-delivery-rate. For a list of valid values, see the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html\">Amazon Pinpoint Developer Guide</a>.</p>"
+          "documentation": "<p>The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are email-open-rate and successful-delivery-rate. For a list of valid values, see the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html\">Amazon Pinpoint Developer Guide</a>.</p>"
         },
         "NextToken": {
           "shape": "__string",
           "location": "querystring",
           "locationName": "next-token",
-          "documentation": "<p>The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         },
         "PageSize": {
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         },
         "StartTime": {
           "shape": "__timestampIso8601",
@@ -9357,7 +9385,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         },
         "Token": {
           "shape": "__string",
@@ -9396,7 +9424,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         },
         "Token": {
           "shape": "__string",
@@ -9610,7 +9638,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         },
         "Token": {
           "shape": "__string",
@@ -9707,7 +9735,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         },
         "Token": {
           "shape": "__string",
@@ -9757,19 +9785,19 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "kpi-name",
-          "documentation": "<p>The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are email-open-rate and successful-delivery-rate. For a list of valid values, see the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html\">Amazon Pinpoint Developer Guide</a>.</p>"
+          "documentation": "<p>The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, to retrieve data for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. Examples are email-open-rate and successful-delivery-rate. For a list of valid values, see the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html\">Amazon Pinpoint Developer Guide</a>.</p>"
         },
         "NextToken": {
           "shape": "__string",
           "location": "querystring",
           "locationName": "next-token",
-          "documentation": "<p>The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         },
         "PageSize": {
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         },
         "StartTime": {
           "shape": "__timestampIso8601",
@@ -9821,13 +9849,13 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "next-token",
-          "documentation": "<p>The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         },
         "PageSize": {
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         }
       },
       "required": [
@@ -9867,13 +9895,13 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "next-token",
-          "documentation": "<p>The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         },
         "PageSize": {
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         }
       },
       "required": [
@@ -9991,7 +10019,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         },
         "Token": {
           "shape": "__string",
@@ -10026,7 +10054,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         },
         "SegmentId": {
           "shape": "__string",
@@ -10071,7 +10099,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         },
         "SegmentId": {
           "shape": "__string",
@@ -10189,7 +10217,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         },
         "SegmentId": {
           "shape": "__string",
@@ -10234,7 +10262,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         },
         "Token": {
           "shape": "__string",
@@ -10647,7 +10675,7 @@
         },
         "KpiName": {
           "shape": "__string",
-          "documentation": "<p>The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, that the data was retrieved for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. For a list of possible values, see the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html\">Amazon Pinpoint Developer Guide</a>.</p>"
+          "documentation": "<p>The name of the metric, also referred to as a <i>key performance indicator (KPI)</i>, that the data was retrieved for. This value describes the associated metric and consists of two or more terms, which are comprised of lowercase alphanumeric characters, separated by a hyphen. For a list of possible values, see the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html\">Amazon Pinpoint Developer Guide</a>.</p>"
         },
         "KpiResult": {
           "shape": "BaseKpiResult",
@@ -10707,7 +10735,7 @@
         },
         "Metrics": {
           "shape": "MapOf__string",
-          "documentation": "<p>A JSON object that contains the results of the query. The results vary depending on the type of activity (ActivityType). For information about the structure and contents of the results, see the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html\">Amazon Pinpoint Developer Guide</a>.</p>"
+          "documentation": "<p>A JSON object that contains the results of the query. The results vary depending on the type of activity (ActivityType). For information about the structure and contents of the results, see the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html\">Amazon Pinpoint Developer Guide</a>.</p>"
         }
       },
       "documentation": "<p>Provides the results of a query that retrieved the data for a standard execution metric that applies to a journey activity, and provides information about that query.</p>",
@@ -10737,7 +10765,7 @@
         },
         "Metrics": {
           "shape": "MapOf__string",
-          "documentation": "<p>A JSON object that contains the results of the query. For information about the structure and contents of the results, see the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html\">Amazon Pinpoint Developer Guide</a>.</p>"
+          "documentation": "<p>A JSON object that contains the results of the query. For information about the structure and contents of the results, see the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html\">Amazon Pinpoint Developer Guide</a>.</p>"
         }
       },
       "documentation": "<p>Provides the results of a query that retrieved the data for a standard execution metric that applies to a journey, and provides information about that query.</p>",
@@ -10896,7 +10924,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         },
         "Token": {
           "shape": "__string",
@@ -10971,13 +10999,13 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "next-token",
-          "documentation": "<p>The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         },
         "PageSize": {
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         },
         "TemplateName": {
           "shape": "__string",
@@ -11016,13 +11044,13 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "next-token",
-          "documentation": "<p>The  string that specifies which page of results to return in a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         },
         "PageSize": {
           "shape": "__string",
           "location": "querystring",
           "locationName": "page-size",
-          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is currently not supported for application, campaign, and journey metrics.</p>"
+          "documentation": "<p>The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.</p>"
         },
         "Prefix": {
           "shape": "__string",
@@ -11123,15 +11151,19 @@
       "members": {
         "ADMMessage": {
           "shape": "Message",
-          "documentation": "<p>The message that the campaign sends through the ADM (Amazon Device Messaging) channel. This message overrides the default message.</p>"
+          "documentation": "<p>The message that the campaign sends through the ADM (Amazon Device Messaging) channel. If specified, this message overrides the default message.</p>"
         },
         "APNSMessage": {
           "shape": "Message",
-          "documentation": "<p>The message that the campaign sends through the APNs (Apple Push Notification service) channel. This message overrides the default message.</p>"
+          "documentation": "<p>The message that the campaign sends through the APNs (Apple Push Notification service) channel. If specified, this message overrides the default message.</p>"
         },
         "BaiduMessage": {
           "shape": "Message",
-          "documentation": "<p>The message that the campaign sends through the Baidu (Baidu Cloud Push) channel. This message overrides the default message.</p>"
+          "documentation": "<p>The message that the campaign sends through the Baidu (Baidu Cloud Push) channel. If specified, this message overrides the default message.</p>"
+        },
+        "CustomMessage": {
+          "shape": "CampaignCustomMessage",
+          "documentation": "<p>The message that the campaign sends through a custom channel, as specified by the delivery configuration (CustomDeliveryConfiguration) settings for the campaign. If specified, this message overrides the default message.</p> "
         },
         "DefaultMessage": {
           "shape": "Message",
@@ -11139,15 +11171,15 @@
         },
         "EmailMessage": {
           "shape": "CampaignEmailMessage",
-          "documentation": "<p>The message that the campaign sends through the email channel.</p>"
+          "documentation": "<p>The message that the campaign sends through the email channel. If specified, this message overrides the default message.</p>"
         },
         "GCMMessage": {
           "shape": "Message",
-          "documentation": "<p>The message that the campaign sends through the GCM channel, which enables Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. This message overrides the default message.</p>"
+          "documentation": "<p>The message that the campaign sends through the GCM channel, which enables Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. If specified, this message overrides the default message.</p>"
         },
         "SMSMessage": {
           "shape": "CampaignSmsMessage",
-          "documentation": "<p>The message that the campaign sends through the SMS channel.</p>"
+          "documentation": "<p>The message that the campaign sends through the SMS channel. If specified, this message overrides the default message.</p>"
         }
       },
       "documentation": "<p>Specifies the message configuration settings for a campaign.</p>"
@@ -11720,7 +11752,7 @@
       "members": {
         "Attributes": {
           "shape": "MapOf__string",
-          "documentation": "<p>A map that defines 1-10 custom endpoint or user attributes, depending on the value for the RecommenderUserIdType property. Each of these attributes temporarily stores a recommended item that's retrieved from the recommender model and sent to an AWS Lambda function for additional processing. Each attribute can be used as a message variable in a message template.</p> <p>This value is null if the configuration doesn't invoke an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data.</p>"
+          "documentation": "<p>A map that defines 1-10 custom endpoint or user attributes, depending on the value for the RecommendationProviderIdType property. Each of these attributes temporarily stores a recommended item that's retrieved from the recommender model and sent to an AWS Lambda function for additional processing. Each attribute can be used as a message variable in a message template.</p> <p>This value is null if the configuration doesn't invoke an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data.</p>"
         },
         "CreationDate": {
           "shape": "__string",
@@ -11760,11 +11792,11 @@
         },
         "RecommendationsDisplayName": {
           "shape": "__string",
-          "documentation": "<p>The custom display name for the standard endpoint or user attribute (RecommendationItems) that temporarily stores a recommended item for each endpoint or user, depending on the value for the RecommenderUserIdType property. This name appears in the <b>Attribute finder</b> pane of the template editor on the Amazon Pinpoint console.</p> <p>This value is null if the configuration doesn't invoke an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data.</p>"
+          "documentation": "<p>The custom display name for the standard endpoint or user attribute (RecommendationItems) that temporarily stores recommended items for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This name appears in the <b>Attribute finder</b> of the template editor on the Amazon Pinpoint console.</p> <p>This value is null if the configuration doesn't invoke an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data.</p>"
         },
         "RecommendationsPerMessage": {
           "shape": "__integer",
-          "documentation": "<p>The number of recommended items that are retrieved from the model for each endpoint or user, depending on the value for the RecommenderUserIdType property. This number determines how many recommended attributes are available for use as message variables in message templates.</p>"
+          "documentation": "<p>The number of recommended items that are retrieved from the model for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This number determines how many recommended items are available for use in message variables.</p>"
         }
       },
       "documentation": "<p>Provides information about Amazon Pinpoint configuration settings for retrieving and processing data from a recommender model.</p>",
@@ -11948,6 +11980,10 @@
         "Keyword": {
           "shape": "__string",
           "documentation": "<p>The SMS program name that you provided to AWS Support when you requested your dedicated number.</p>"
+        },
+        "MediaUrl": {
+          "shape": "__string",
+          "documentation": "<p>The URL of an image or video to display in the SMS message.</p>"
         },
         "MessageType": {
           "shape": "MessageType",
@@ -12823,6 +12859,10 @@
     "TreatmentResource": {
       "type": "structure",
       "members": {
+        "CustomDeliveryConfiguration": {
+          "shape": "CustomDeliveryConfiguration",
+          "documentation": "<p>The delivery configuration settings for sending the treatment through a custom channel. This object is required if the MessageConfiguration object for the treatment specifies a CustomMessage object.</p>"
+        },
         "Id": {
           "shape": "__string",
           "documentation": "<p>The unique identifier for the treatment.</p>"
@@ -12853,10 +12893,10 @@
         },
         "TreatmentName": {
           "shape": "__string",
-          "documentation": "<p>The custom name of the treatment. A treatment is a variation of a campaign that's used for A/B testing of a campaign.</p>"
+          "documentation": "<p>The custom name of the treatment.</p>"
         }
       },
-      "documentation": "<p>Specifies the settings for a campaign treatment. A treatment is a variation of a campaign that's used for A/B testing of a campaign.</p>",
+      "documentation": "<p>Specifies the settings for a campaign treatment. A <i>treatment</i> is a variation of a campaign that's used for A/B testing of a campaign.</p>",
       "required": [
         "Id",
         "SizePercent"
@@ -13454,11 +13494,11 @@
       "members": {
         "Attributes": {
           "shape": "MapOf__string",
-          "documentation": "<p>A map of key-value pairs that defines 1-10 custom endpoint or user attributes, depending on the value for the RecommenderUserIdType property. Each of these attributes temporarily stores a recommended item that's retrieved from the recommender model and sent to an AWS Lambda function for additional processing. Each attribute can be used as a message variable in a message template.</p> <p>In the map, the key is the name of a custom attribute and the value is a custom display name for that attribute. The display name appears in the <b>Attribute finder</b> pane of the template editor on the Amazon Pinpoint console. The following restrictions apply to these names:</p> <ul><li><p>An attribute name must start with a letter or number and it can contain up to 50 characters. The characters can be letters, numbers, underscores (_), or hyphens (-). Attribute names are case sensitive and must be unique.</p></li> <li><p>An attribute display name must start with a letter or number and it can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-).</p></li></ul> <p>This object is required if the configuration invokes an AWS Lambda function (LambdaFunctionArn) to process recommendation data. Otherwise, don't include this object in your request.</p>"
+          "documentation": "<p>A map of key-value pairs that defines 1-10 custom endpoint or user attributes, depending on the value for the RecommendationProviderIdType property. Each of these attributes temporarily stores a recommended item that's retrieved from the recommender model and sent to an AWS Lambda function for additional processing. Each attribute can be used as a message variable in a message template.</p> <p>In the map, the key is the name of a custom attribute and the value is a custom display name for that attribute. The display name appears in the <b>Attribute finder</b> of the template editor on the Amazon Pinpoint console. The following restrictions apply to these names:</p> <ul><li><p>An attribute name must start with a letter or number and it can contain up to 50 characters. The characters can be letters, numbers, underscores (_), or hyphens (-). Attribute names are case sensitive and must be unique.</p></li> <li><p>An attribute display name must start with a letter or number and it can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-).</p></li></ul> <p>This object is required if the configuration invokes an AWS Lambda function (RecommendationTransformerUri) to process recommendation data. Otherwise, don't include this object in your request.</p>"
         },
         "Description": {
           "shape": "__string",
-          "documentation": "<p>A custom description of the configuration for the recommender model. The description can contain up to 128 characters.</p>"
+          "documentation": "<p>A custom description of the configuration for the recommender model. The description can contain up to 128 characters. The characters can be letters, numbers, spaces, or the following symbols: _ ; () , ‐.</p>"
         },
         "Name": {
           "shape": "__string",
@@ -13466,7 +13506,7 @@
         },
         "RecommendationProviderIdType": {
           "shape": "__string",
-          "documentation": "<p>The type of Amazon Pinpoint ID to associate with unique user IDs in the recommender model. This value enables the model to use attribute and event data that’s specific to a particular endpoint or user in an Amazon Pinpoint application. Valid values are:</p> <ul><li><p>PINPOINT_ENDPOINT_ID - Associate each user in the model with a particular endpoint in Amazon Pinpoint. The data is correlated based on endpoint IDs in Amazon Pinpoint. This is the default value.</p></li> <li><p>PINPOINT_USER_ID - Associate each user in the model with a particular user and endpoint in Amazon Pinpoint. The data is correlated based on user IDs in Amazon Pinpoint. If you specify this value, an endpoint definition in Amazon Pinpoint has to specify a both a user ID (UserId) and an endpoint ID. Otherwise, messages won’t be sent to the user's endpoint.</p></li></ul>"
+          "documentation": "<p>The type of Amazon Pinpoint ID to associate with unique user IDs in the recommender model. This value enables the model to use attribute and event data that’s specific to a particular endpoint or user in an Amazon Pinpoint application. Valid values are:</p> <ul><li><p>PINPOINT_ENDPOINT_ID - Associate each user in the model with a particular endpoint in Amazon Pinpoint. The data is correlated based on endpoint IDs in Amazon Pinpoint. This is the default value.</p></li> <li><p>PINPOINT_USER_ID - Associate each user in the model with a particular user and endpoint in Amazon Pinpoint. The data is correlated based on user IDs in Amazon Pinpoint. If you specify this value, an endpoint definition in Amazon Pinpoint has to specify both a user ID (UserId) and an endpoint ID. Otherwise, messages won’t be sent to the user's endpoint.</p></li></ul>"
         },
         "RecommendationProviderRoleArn": {
           "shape": "__string",
@@ -13482,11 +13522,11 @@
         },
         "RecommendationsDisplayName": {
           "shape": "__string",
-          "documentation": "<p>A custom display name for the standard endpoint or user attribute (RecommendationItems) that temporarily stores a recommended item for each endpoint or user, depending on the value for the RecommenderUserIdType property. This value is required if the configuration doesn't invoke an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data.</p> <p>This name appears in the <b>Attribute finder</b> pane of the template editor on the Amazon Pinpoint console. The name can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-). These restrictions don't apply to attribute values.</p>"
+          "documentation": "<p>A custom display name for the standard endpoint or user attribute (RecommendationItems) that temporarily stores recommended items for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This value is required if the configuration doesn't invoke an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data.</p> <p>This name appears in the <b>Attribute finder</b> of the template editor on the Amazon Pinpoint console. The name can contain up to 25 characters. The characters can be letters, numbers, spaces, underscores (_), or hyphens (-). These restrictions don't apply to attribute values.</p>"
         },
         "RecommendationsPerMessage": {
           "shape": "__integer",
-          "documentation": "<p>The number of recommended items to retrieve from the model for each endpoint or user, depending on the value for the RecommenderUserIdType property. This number determines how many recommended attributes are available for use as message variables in message templates. The minimum value is 1. The maximum value is 5. The default value is 5.</p> <p>To use multiple recommended items and custom attributes with message variables, you have to use an AWS Lambda function (LambdaFunctionArn) to perform additional processing of recommendation data.</p>"
+          "documentation": "<p>The number of recommended items to retrieve from the model for each endpoint or user, depending on the value for the RecommendationProviderIdType property. This number determines how many recommended items are available for use in message variables. The minimum value is 1. The maximum value is 5. The default value is 5.</p> <p>To use multiple recommended items and custom attributes with message variables, you have to use an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data.</p>"
         }
       },
       "documentation": "<p>Specifies Amazon Pinpoint configuration settings for retrieving and processing recommendation data from a recommender model.</p>",
@@ -13960,7 +14000,7 @@
       "members": {
         "CampaignHook": {
           "shape": "CampaignHook",
-          "documentation": "<p>The settings for the AWS Lambda function to use by default as a code hook for campaigns in the application. To override these settings for a specific campaign, use the <link  linkend=\"apps-application-id-campaigns-campaign-id\">Campaign</link> resource to define custom Lambda function settings for the campaign.</p>"
+          "documentation": "<p>The settings for the AWS Lambda function to invoke by default as a code hook for campaigns in the application. You can use this hook to customize segments that are used by campaigns in the application.</p> <p>To override these settings and define custom settings for a specific campaign, use the CampaignHook object of the <link  linkend=\"apps-application-id-campaigns-campaign-id\">Campaign</link> resource.</p>"
         },
         "CloudWatchMetricsEnabled": {
           "shape": "__boolean",
@@ -13968,7 +14008,7 @@
         },
         "Limits": {
           "shape": "CampaignLimits",
-          "documentation": "<p>The default sending limits for campaigns in the application. To override these limits for a specific campaign, use the <link  linkend=\"apps-application-id-campaigns-campaign-id\">Campaign</link> resource to define custom limits for the campaign.</p>"
+          "documentation": "<p>The default sending limits for campaigns and journeys in the application. To override these limits and define custom limits for a specific campaign or journey, use the <link  linkend=\"apps-application-id-campaigns-campaign-id\">Campaign</link> resource or the <link  linkend=\"apps-application-id-journeys-journey-id\">Journey</link> resource, respectively.</p>"
         },
         "QuietTime": {
           "shape": "QuietTime",
@@ -13984,6 +14024,10 @@
           "shape": "ListOfWriteTreatmentResource",
           "documentation": "<p>An array of requests that defines additional treatments for the campaign, in addition to the default treatment for the campaign.</p>"
         },
+        "CustomDeliveryConfiguration": {
+          "shape": "CustomDeliveryConfiguration",
+          "documentation": "<p>The delivery configuration settings for sending the campaign through a custom channel. This object is required if the MessageConfiguration object for the campaign specifies a CustomMessage object.</p>"
+        },
         "Description": {
           "shape": "__string",
           "documentation": "<p>A custom description of the campaign.</p>"
@@ -13994,11 +14038,11 @@
         },
         "Hook": {
           "shape": "CampaignHook",
-          "documentation": "<p>The settings for the AWS Lambda function to use as a code hook for the campaign.</p>"
+          "documentation": "<p>The settings for the AWS Lambda function to invoke as a code hook for the campaign. You can use this hook to customize the segment that's used by the campaign.</p>"
         },
         "IsPaused": {
           "shape": "__boolean",
-          "documentation": "<p>Specifies whether to pause the campaign. A paused campaign doesn't run unless you resume it by setting this value to false.</p>"
+          "documentation": "<p>Specifies whether to pause the campaign. A paused campaign doesn't run unless you resume it by changing this value to false.</p>"
         },
         "Limits": {
           "shape": "CampaignLimits",
@@ -14035,11 +14079,11 @@
         },
         "TreatmentDescription": {
           "shape": "__string",
-          "documentation": "<p>A custom description of a variation of the campaign to use for A/B testing.</p>"
+          "documentation": "<p>A custom description of the default treatment for the campaign.</p>"
         },
         "TreatmentName": {
           "shape": "__string",
-          "documentation": "<p>A custom name for a variation of the campaign to use for A/B testing.</p>"
+          "documentation": "<p>A custom name of the default treatment for the campaign, if the campaign has multiple treatments. A <i>treatment</i> is a variation of a campaign that's used for A/B testing.</p>"
         }
       },
       "documentation": "<p>Specifies the configuration and other settings for a campaign.</p>"
@@ -14145,6 +14189,10 @@
     "WriteTreatmentResource": {
       "type": "structure",
       "members": {
+        "CustomDeliveryConfiguration": {
+          "shape": "CustomDeliveryConfiguration",
+          "documentation": "<p>The delivery configuration settings for sending the treatment through a custom channel. This object is required if the MessageConfiguration object for the treatment specifies a CustomMessage object.</p>"
+        },
         "MessageConfiguration": {
           "shape": "MessageConfiguration",
           "documentation": "<p>The message configuration settings for the treatment.</p>"
@@ -14167,12 +14215,28 @@
         },
         "TreatmentName": {
           "shape": "__string",
-          "documentation": "<p>A custom name for the treatment. A treatment is a variation of a campaign that's used for A/B testing of a campaign.</p>"
+          "documentation": "<p>A custom name for the treatment.</p>"
         }
       },
-      "documentation": "<p>Specifies the settings for a campaign treatment. A treatment is a variation of a campaign that's used for A/B testing of a campaign.</p>",
+      "documentation": "<p>Specifies the settings for a campaign treatment. A <i>treatment</i> is a variation of a campaign that's used for A/B testing of a campaign.</p>",
       "required": [
         "SizePercent"
+      ]
+    },
+    "__EndpointTypesElement": {
+      "type": "string",
+      "enum": [
+        "GCM",
+        "APNS",
+        "APNS_SANDBOX",
+        "APNS_VOIP",
+        "APNS_VOIP_SANDBOX",
+        "ADM",
+        "SMS",
+        "VOICE",
+        "EMAIL",
+        "BAIDU",
+        "CUSTOM"
       ]
     },
     "__boolean": {
@@ -14314,6 +14378,12 @@
       "type": "list",
       "member": {
         "shape": "WriteTreatmentResource"
+      }
+    },
+    "ListOf__EndpointTypesElement": {
+      "type": "list",
+      "member": {
+        "shape": "__EndpointTypesElement"
       }
     },
     "ListOf__string": {

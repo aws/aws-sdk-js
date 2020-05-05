@@ -1767,7 +1767,8 @@
     "UntagResourceRequest": {
       "type": "structure",
       "required": [
-        "ResourceId"
+        "ResourceId",
+        "TagKeys"
       ],
       "members": {
         "ResourceId": {
@@ -1778,7 +1779,9 @@
         },
         "TagKeys": {
           "shape": "TagKeys",
-          "documentation": "<p>The keys of the key:value tag pairs that you want to remove from the specified EFS resource.</p>"
+          "documentation": "<p>The keys of the key:value tag pairs that you want to remove from the specified EFS resource.</p>",
+          "location": "querystring",
+          "locationName": "tagKeys"
         }
       }
     },

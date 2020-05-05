@@ -148,6 +148,34 @@
       ],
       "documentation": "<p>Removes an object lifecycle policy from a container. It takes up to 20 minutes for the change to take effect.</p>"
     },
+    "DeleteMetricPolicy": {
+      "name": "DeleteMetricPolicy",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteMetricPolicyInput"
+      },
+      "output": {
+        "shape": "DeleteMetricPolicyOutput"
+      },
+      "errors": [
+        {
+          "shape": "ContainerInUseException"
+        },
+        {
+          "shape": "ContainerNotFoundException"
+        },
+        {
+          "shape": "PolicyNotFoundException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Deletes the metric policy that is associated with the specified container. If there is no metric policy associated with the container, MediaStore doesn't send metrics to CloudWatch.</p>"
+    },
     "DescribeContainer": {
       "name": "DescribeContainer",
       "http": {
@@ -253,6 +281,34 @@
         }
       ],
       "documentation": "<p>Retrieves the object lifecycle policy that is assigned to a container.</p>"
+    },
+    "GetMetricPolicy": {
+      "name": "GetMetricPolicy",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetMetricPolicyInput"
+      },
+      "output": {
+        "shape": "GetMetricPolicyOutput"
+      },
+      "errors": [
+        {
+          "shape": "ContainerNotFoundException"
+        },
+        {
+          "shape": "PolicyNotFoundException"
+        },
+        {
+          "shape": "ContainerInUseException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Returns the metric policy for the specified container. </p>"
     },
     "ListContainers": {
       "name": "ListContainers",
@@ -372,6 +428,31 @@
         }
       ],
       "documentation": "<p>Writes an object lifecycle policy to a container. If the container already has an object lifecycle policy, the service replaces the existing policy with the new policy. It takes up to 20 minutes for the change to take effect.</p> <p>For information about how to construct an object lifecycle policy, see <a href=\"https://docs.aws.amazon.com/mediastore/latest/ug/policies-object-lifecycle-components.html\">Components of an Object Lifecycle Policy</a>.</p>"
+    },
+    "PutMetricPolicy": {
+      "name": "PutMetricPolicy",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutMetricPolicyInput"
+      },
+      "output": {
+        "shape": "PutMetricPolicyOutput"
+      },
+      "errors": [
+        {
+          "shape": "ContainerInUseException"
+        },
+        {
+          "shape": "ContainerNotFoundException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>The metric policy that you want to add to the container. A metric policy allows AWS Elemental MediaStore to send metrics to Amazon CloudWatch. It takes up to 20 minutes for the new policy to take effect.</p>"
     },
     "StartAccessLogging": {
       "name": "StartAccessLogging",
@@ -538,6 +619,13 @@
     "ContainerAccessLoggingEnabled": {
       "type": "boolean"
     },
+    "ContainerLevelMetrics": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
     "ContainerList": {
       "type": "list",
       "member": {
@@ -702,6 +790,22 @@
       "type": "structure",
       "members": {}
     },
+    "DeleteMetricPolicyInput": {
+      "type": "structure",
+      "required": [
+        "ContainerName"
+      ],
+      "members": {
+        "ContainerName": {
+          "shape": "ContainerName",
+          "documentation": "<p>The name of the container that is associated with the metric policy that you want to delete.</p>"
+        }
+      }
+    },
+    "DeleteMetricPolicyOutput": {
+      "type": "structure",
+      "members": {}
+    },
     "DescribeContainerInput": {
       "type": "structure",
       "members": {
@@ -806,6 +910,30 @@
         }
       }
     },
+    "GetMetricPolicyInput": {
+      "type": "structure",
+      "required": [
+        "ContainerName"
+      ],
+      "members": {
+        "ContainerName": {
+          "shape": "ContainerName",
+          "documentation": "<p>The name of the container that is associated with the metric policy.</p>"
+        }
+      }
+    },
+    "GetMetricPolicyOutput": {
+      "type": "structure",
+      "required": [
+        "MetricPolicy"
+      ],
+      "members": {
+        "MetricPolicy": {
+          "shape": "MetricPolicy",
+          "documentation": "<p>The metric policy that is associated with the specific container.</p>"
+        }
+      }
+    },
     "Header": {
       "type": "string",
       "max": 8192,
@@ -882,6 +1010,61 @@
         "HEAD"
       ]
     },
+    "MetricPolicy": {
+      "type": "structure",
+      "required": [
+        "ContainerLevelMetrics"
+      ],
+      "members": {
+        "ContainerLevelMetrics": {
+          "shape": "ContainerLevelMetrics",
+          "documentation": "<p>A setting to enable or disable metrics at the container level.</p>"
+        },
+        "MetricPolicyRules": {
+          "shape": "MetricPolicyRules",
+          "documentation": "<p>A parameter that holds an array of rules that enable metrics at the object level. This parameter is optional, but if you choose to include it, you must also include at least one rule. By default, you can include up to five rules. You can also <a href=\"https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/services/mediastore/quotas\">request a quota increase</a> to allow up to 300 rules per policy.</p>"
+        }
+      },
+      "documentation": "<p>The metric policy that is associated with the container. A metric policy allows AWS Elemental MediaStore to send metrics to Amazon CloudWatch. In the policy, you must indicate whether you want MediaStore to send container-level metrics. You can also include rules to define groups of objects that you want MediaStore to send object-level metrics for.</p> <p>To view examples of how to construct a metric policy for your use case, see <a href=\"https://docs.aws.amazon.com/mediastore/latest/ug/policies-metric-examples.html\">Example Metric Policies</a>.</p>"
+    },
+    "MetricPolicyRule": {
+      "type": "structure",
+      "required": [
+        "ObjectGroup",
+        "ObjectGroupName"
+      ],
+      "members": {
+        "ObjectGroup": {
+          "shape": "ObjectGroup",
+          "documentation": "<p>A path or file name that defines which objects to include in the group. Wildcards (*) are acceptable.</p>"
+        },
+        "ObjectGroupName": {
+          "shape": "ObjectGroupName",
+          "documentation": "<p>A name that allows you to refer to the object group.</p>"
+        }
+      },
+      "documentation": "<p>A setting that enables metrics at the object level. Each rule contains an object group and an object group name. If the policy includes the MetricPolicyRules parameter, you must include at least one rule. Each metric policy can include up to five rules by default. You can also <a href=\"https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/services/mediastore/quotas\">request a quota increase</a> to allow up to 300 rules per policy.</p>"
+    },
+    "MetricPolicyRules": {
+      "type": "list",
+      "member": {
+        "shape": "MetricPolicyRule"
+      },
+      "max": 300,
+      "min": 1
+    },
+    "ObjectGroup": {
+      "type": "string",
+      "max": 900,
+      "min": 1,
+      "pattern": "/?(?:[A-Za-z0-9_=:\\.\\-\\~\\*]+/){0,10}(?:[A-Za-z0-9_=:\\.\\-\\~\\*]+)?/?"
+    },
+    "ObjectGroupName": {
+      "type": "string",
+      "max": 30,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9_]+"
+    },
     "Origin": {
       "type": "string",
       "max": 2048,
@@ -957,6 +1140,27 @@
       "type": "structure",
       "members": {}
     },
+    "PutMetricPolicyInput": {
+      "type": "structure",
+      "required": [
+        "ContainerName",
+        "MetricPolicy"
+      ],
+      "members": {
+        "ContainerName": {
+          "shape": "ContainerName",
+          "documentation": "<p>The name of the container that you want to add the metric policy to.</p>"
+        },
+        "MetricPolicy": {
+          "shape": "MetricPolicy",
+          "documentation": "<p>The metric policy that you want to associate with the container. In the policy, you must indicate whether you want MediaStore to send container-level metrics. You can also include up to five rules to define groups of objects that you want MediaStore to send object-level metrics for. If you include rules in the policy, construct each rule with both of the following:</p> <ul> <li> <p>An object group that defines which objects to include in the group. The definition can be a path or a file name, but it can't have more than 900 characters. Valid characters are: a-z, A-Z, 0-9, _ (underscore), = (equal), : (colon), . (period), - (hyphen), ~ (tilde), / (forward slash), and * (asterisk). Wildcards (*) are acceptable.</p> </li> <li> <p>An object group name that allows you to refer to the object group. The name can't have more than 30 characters. Valid characters are: a-z, A-Z, 0-9, and _ (underscore).</p> </li> </ul>"
+        }
+      }
+    },
+    "PutMetricPolicyOutput": {
+      "type": "structure",
+      "members": {}
+    },
     "StartAccessLoggingInput": {
       "type": "structure",
       "required": [
@@ -1009,7 +1213,8 @@
     "TagKey": {
       "type": "string",
       "max": 128,
-      "min": 1
+      "min": 1,
+      "pattern": "[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*"
     },
     "TagKeyList": {
       "type": "list",
@@ -1021,7 +1226,9 @@
       "type": "list",
       "member": {
         "shape": "Tag"
-      }
+      },
+      "max": 200,
+      "min": 1
     },
     "TagResourceInput": {
       "type": "structure",
@@ -1047,7 +1254,8 @@
     "TagValue": {
       "type": "string",
       "max": 256,
-      "min": 0
+      "min": 0,
+      "pattern": "[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*"
     },
     "TimeStamp": {
       "type": "timestamp"

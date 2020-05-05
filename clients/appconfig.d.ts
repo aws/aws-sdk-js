@@ -539,6 +539,10 @@ declare namespace AppConfig {
      */
     State?: DeploymentState;
     /**
+     * A list containing all events related to a deployment. The most recent events are displayed first.
+     */
+    EventLog?: DeploymentEvents;
+    /**
      * The percentage of targets for which the deployment is available.
      */
     PercentageComplete?: Percentage;
@@ -551,6 +555,26 @@ declare namespace AppConfig {
      */
     CompletedAt?: Iso8601DateTime;
   }
+  export interface DeploymentEvent {
+    /**
+     * The type of deployment event. Deployment event types include the start, stop, or completion of a deployment; a percentage update; the start or stop of a bake period; the start or completion of a rollback.
+     */
+    EventType?: DeploymentEventType;
+    /**
+     * The entity that triggered the deployment event. Events can be triggered by a user, AWS AppConfig, an Amazon CloudWatch alarm, or an internal error.
+     */
+    TriggeredBy?: TriggeredBy;
+    /**
+     * A description of the deployment event. Descriptions include, but are not limited to, the user account or the CloudWatch alarm ARN that initiated a rollback, the percentage of hosts that received the deployment, or in the case of an internal error, a recommendation to attempt a new deployment.
+     */
+    Description?: Description;
+    /**
+     * The date and time the event occurred.
+     */
+    OccurredAt?: Iso8601DateTime;
+  }
+  export type DeploymentEventType = "PERCENTAGE_UPDATED"|"ROLLBACK_STARTED"|"ROLLBACK_COMPLETED"|"BAKE_TIME_STARTED"|"DEPLOYMENT_STARTED"|"DEPLOYMENT_COMPLETED"|string;
+  export type DeploymentEvents = DeploymentEvent[];
   export type DeploymentList = DeploymentSummary[];
   export type DeploymentState = "BAKING"|"VALIDATING"|"DEPLOYING"|"COMPLETE"|"ROLLING_BACK"|"ROLLED_BACK"|string;
   export interface DeploymentStrategies {
@@ -923,6 +947,7 @@ declare namespace AppConfig {
     Tags: TagMap;
   }
   export type TagValue = string;
+  export type TriggeredBy = "USER"|"APPCONFIG"|"CLOUDWATCH_ALARM"|"INTERNAL_ERROR"|string;
   export interface UntagResourceRequest {
     /**
      * The ARN of the resource for which to remove tags.

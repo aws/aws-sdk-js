@@ -148,6 +148,14 @@ declare class RAM extends Service {
    */
   listResourceSharePermissions(callback?: (err: AWSError, data: RAM.Types.ListResourceSharePermissionsResponse) => void): Request<RAM.Types.ListResourceSharePermissionsResponse, AWSError>;
   /**
+   * Lists the shareable resource types supported by AWS RAM.
+   */
+  listResourceTypes(params: RAM.Types.ListResourceTypesRequest, callback?: (err: AWSError, data: RAM.Types.ListResourceTypesResponse) => void): Request<RAM.Types.ListResourceTypesResponse, AWSError>;
+  /**
+   * Lists the shareable resource types supported by AWS RAM.
+   */
+  listResourceTypes(callback?: (err: AWSError, data: RAM.Types.ListResourceTypesResponse) => void): Request<RAM.Types.ListResourceTypesResponse, AWSError>;
+  /**
    * Lists the resources that you added to a resource shares or the resources that are shared with you.
    */
   listResources(params: RAM.Types.ListResourcesRequest, callback?: (err: AWSError, data: RAM.Types.ListResourcesResponse) => void): Request<RAM.Types.ListResourcesResponse, AWSError>;
@@ -610,7 +618,7 @@ declare namespace RAM {
      */
     principals?: PrincipalArnOrIdList;
     /**
-     * The resource type. Valid values: ec2:CapacityReservation | ec2:Subnet | ec2:TrafficMirrorTarget | ec2:TransitGateway | license-manager:LicenseConfiguration | rds:Cluster | route53resolver:ResolverRule I resource-groups:Group 
+     * The resource type. Valid values: codebuild:Project | codebuild:ReportGroup | ec2:CapacityReservation | ec2:DedicatedHost | ec2:Subnet | ec2:TrafficMirrorTarget | ec2:TransitGateway | imagebuilder:Component | imagebuilder:Image | imagebuilder:ImageRecipe | license-manager:LicenseConfiguration I resource-groups:Group | rds:Cluster | route53resolver:ResolverRule 
      */
     resourceType?: String;
     /**
@@ -660,6 +668,26 @@ declare namespace RAM {
      */
     nextToken?: String;
   }
+  export interface ListResourceTypesRequest {
+    /**
+     * The token for the next page of results.
+     */
+    nextToken?: String;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListResourceTypesResponse {
+    /**
+     * The shareable resource types supported by AWS RAM.
+     */
+    resourceTypes?: ServiceNameAndResourceTypeList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    nextToken?: String;
+  }
   export interface ListResourcesRequest {
     /**
      * The type of owner.
@@ -670,7 +698,7 @@ declare namespace RAM {
      */
     principal?: String;
     /**
-     * The resource type. Valid values: ec2:CapacityReservation | ec2:Subnet | ec2:TrafficMirrorTarget | ec2:TransitGateway | license-manager:LicenseConfiguration | rds:Cluster | route53resolver:ResolverRule | resource-groups:Group 
+     * The resource type. Valid values: codebuild:Project | codebuild:ReportGroup | ec2:CapacityReservation | ec2:DedicatedHost | ec2:Subnet | ec2:TrafficMirrorTarget | ec2:TransitGateway | imagebuilder:Component | imagebuilder:Image | imagebuilder:ImageRecipe | license-manager:LicenseConfiguration I resource-groups:Group | rds:Cluster | route53resolver:ResolverRule 
      */
     resourceType?: String;
     /**
@@ -991,6 +1019,17 @@ declare namespace RAM {
   }
   export type ResourceShareStatus = "PENDING"|"ACTIVE"|"FAILED"|"DELETING"|"DELETED"|string;
   export type ResourceStatus = "AVAILABLE"|"ZONAL_RESOURCE_INACCESSIBLE"|"LIMIT_EXCEEDED"|"UNAVAILABLE"|"PENDING"|string;
+  export interface ServiceNameAndResourceType {
+    /**
+     * The shareable resource types.
+     */
+    resourceType?: String;
+    /**
+     * The name of the AWS services to which the resources belong.
+     */
+    serviceName?: String;
+  }
+  export type ServiceNameAndResourceTypeList = ServiceNameAndResourceType[];
   export type String = string;
   export interface Tag {
     /**

@@ -269,6 +269,20 @@
       ],
       "documentation": "<p>Returns the Amazon EMR block public access configuration for your AWS account in the current Region. For more information see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html\">Configure Block Public Access for Amazon EMR</a> in the <i>Amazon EMR Management Guide</i>.</p>"
     },
+    "GetManagedScalingPolicy": {
+      "name": "GetManagedScalingPolicy",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetManagedScalingPolicyInput"
+      },
+      "output": {
+        "shape": "GetManagedScalingPolicyOutput"
+      },
+      "documentation": "<p> Fetches the attached managed scaling policy for an Amazon EMR cluster. </p>"
+    },
     "ListBootstrapActions": {
       "name": "ListBootstrapActions",
       "http": {
@@ -516,6 +530,20 @@
       ],
       "documentation": "<p>Creates or updates an Amazon EMR block public access configuration for your AWS account in the current Region. For more information see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html\">Configure Block Public Access for Amazon EMR</a> in the <i>Amazon EMR Management Guide</i>.</p>"
     },
+    "PutManagedScalingPolicy": {
+      "name": "PutManagedScalingPolicy",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutManagedScalingPolicyInput"
+      },
+      "output": {
+        "shape": "PutManagedScalingPolicyOutput"
+      },
+      "documentation": "<p> Creates or updates a managed scaling policy for an Amazon EMR cluster. The managed scaling policy defines the limits for resources, such as EC2 instances that can be added or terminated from a cluster. The policy only applies to the core and task nodes. The master node cannot be scaled after initial configuration. </p>"
+    },
     "RemoveAutoScalingPolicy": {
       "name": "RemoveAutoScalingPolicy",
       "http": {
@@ -529,6 +557,20 @@
         "shape": "RemoveAutoScalingPolicyOutput"
       },
       "documentation": "<p>Removes an automatic scaling policy from a specified instance group within an EMR cluster.</p>"
+    },
+    "RemoveManagedScalingPolicy": {
+      "name": "RemoveManagedScalingPolicy",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "RemoveManagedScalingPolicyInput"
+      },
+      "output": {
+        "shape": "RemoveManagedScalingPolicyOutput"
+      },
+      "documentation": "<p> Removes a managed scaling policy from a specified EMR cluster. </p>"
     },
     "RemoveTags": {
       "name": "RemoveTags",
@@ -1174,13 +1216,13 @@
           "shape": "ArnType",
           "documentation": "<p>The Amazon Resource Name of the cluster.</p>"
         },
-        "StepConcurrencyLevel": {
-          "shape": "Integer",
-          "documentation": "<p>Specifies the number of steps that can be executed concurrently.</p>"
-        },
         "OutpostArn": {
           "shape": "OptionalArnType",
           "documentation": "<p> The Amazon Resource Name (ARN) of the Outpost where the cluster is launched. </p>"
+        },
+        "StepConcurrencyLevel": {
+          "shape": "Integer",
+          "documentation": "<p>Specifies the number of steps that can be executed concurrently.</p>"
         }
       },
       "documentation": "<p>The detailed description of the cluster.</p>"
@@ -1336,6 +1378,41 @@
         "GREATER_THAN",
         "LESS_THAN",
         "LESS_THAN_OR_EQUAL"
+      ]
+    },
+    "ComputeLimits": {
+      "type": "structure",
+      "required": [
+        "UnitType",
+        "MinimumCapacityUnits",
+        "MaximumCapacityUnits"
+      ],
+      "members": {
+        "UnitType": {
+          "shape": "ComputeLimitsUnitType",
+          "documentation": "<p> The unit type used for specifying a managed scaling policy. </p>"
+        },
+        "MinimumCapacityUnits": {
+          "shape": "Integer",
+          "documentation": "<p> The lower boundary of EC2 units. It is measured through VCPU cores or instances for instance groups and measured through units for instance fleets. Managed scaling activities are not allowed beyond this boundary. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. </p>"
+        },
+        "MaximumCapacityUnits": {
+          "shape": "Integer",
+          "documentation": "<p> The upper boundary of EC2 units. It is measured through VCPU cores or instances for instance groups and measured through units for instance fleets. Managed scaling activities are not allowed beyond this boundary. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. </p>"
+        },
+        "MaximumOnDemandCapacityUnits": {
+          "shape": "Integer",
+          "documentation": "<p> The upper boundary of on-demand EC2 units. It is measured through VCPU cores or instances for instance groups and measured through units for instance fleets. The on-demand units are not allowed to scale beyond this boundary. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. </p>"
+        }
+      },
+      "documentation": "<p> The EC2 unit limits for a managed scaling policy. The managed scaling activity of a cluster can not be above or below these limits. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. </p>"
+    },
+    "ComputeLimitsUnitType": {
+      "type": "string",
+      "enum": [
+        "InstanceFleetUnits",
+        "Instances",
+        "VCPU"
       ]
     },
     "Configuration": {
@@ -1697,11 +1774,32 @@
       "members": {
         "BlockPublicAccessConfiguration": {
           "shape": "BlockPublicAccessConfiguration",
-          "documentation": "<p>A configuration for Amazon EMR block public access. The configuration applies to all clusters created in your account for the current Region. The configuration specifies whether block public access is enabled. If block public access is enabled, security groups associated with the cluster cannot have rules that allow inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless the port is specified as an exception using <code>PermittedPublicSecurityGroupRuleRanges</code> in the <code>BlockPublicAccessConfiguration</code>. By default, Port 22 (SSH) is an exception, and public access is allowed on this port. You can change this by updating the block public access configuration to remove the exception.</p>"
+          "documentation": "<p>A configuration for Amazon EMR block public access. The configuration applies to all clusters created in your account for the current Region. The configuration specifies whether block public access is enabled. If block public access is enabled, security groups associated with the cluster cannot have rules that allow inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless the port is specified as an exception using <code>PermittedPublicSecurityGroupRuleRanges</code> in the <code>BlockPublicAccessConfiguration</code>. By default, Port 22 (SSH) is an exception, and public access is allowed on this port. You can change this by updating the block public access configuration to remove the exception.</p> <note> <p>For accounts that created clusters in a Region before November 25, 2019, block public access is disabled by default in that Region. To use this feature, you must manually enable and configure it. For accounts that did not create an EMR cluster in a Region before this date, block public access is enabled by default in that Region.</p> </note>"
         },
         "BlockPublicAccessConfigurationMetadata": {
           "shape": "BlockPublicAccessConfigurationMetadata",
           "documentation": "<p>Properties that describe the AWS principal that created the <code>BlockPublicAccessConfiguration</code> using the <code>PutBlockPublicAccessConfiguration</code> action as well as the date and time that the configuration was created. Each time a configuration for block public access is updated, Amazon EMR updates this metadata.</p>"
+        }
+      }
+    },
+    "GetManagedScalingPolicyInput": {
+      "type": "structure",
+      "required": [
+        "ClusterId"
+      ],
+      "members": {
+        "ClusterId": {
+          "shape": "ClusterId",
+          "documentation": "<p> Specifies the ID of the cluster for which the managed scaling policy will be fetched. </p>"
+        }
+      }
+    },
+    "GetManagedScalingPolicyOutput": {
+      "type": "structure",
+      "members": {
+        "ManagedScalingPolicy": {
+          "shape": "ManagedScalingPolicy",
+          "documentation": "<p> Specifies the managed scaling policy that is attached to an Amazon EMR cluster. </p>"
         }
       }
     },
@@ -3119,6 +3217,16 @@
     "Long": {
       "type": "long"
     },
+    "ManagedScalingPolicy": {
+      "type": "structure",
+      "members": {
+        "ComputeLimits": {
+          "shape": "ComputeLimits",
+          "documentation": "<p> The EC2 unit limits for a managed scaling policy. The managed scaling activity of a cluster is not allowed to go above or below these limits. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. </p>"
+        }
+      },
+      "documentation": "<p> Managed scaling policy for an Amazon EMR cluster. The policy specifies the limits for resources that can be added or terminated from a cluster. The policy only applies to the core and task nodes. The master node cannot be scaled after initial configuration. </p>"
+    },
     "Marker": {
       "type": "string"
     },
@@ -3313,11 +3421,32 @@
       "members": {
         "BlockPublicAccessConfiguration": {
           "shape": "BlockPublicAccessConfiguration",
-          "documentation": "<p>A configuration for Amazon EMR block public access. The configuration applies to all clusters created in your account for the current Region. The configuration specifies whether block public access is enabled. If block public access is enabled, security groups associated with the cluster cannot have rules that allow inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless the port is specified as an exception using <code>PermittedPublicSecurityGroupRuleRanges</code> in the <code>BlockPublicAccessConfiguration</code>. By default, Port 22 (SSH) is an exception, and public access is allowed on this port. You can change this by updating <code>BlockPublicSecurityGroupRules</code> to remove the exception.</p>"
+          "documentation": "<p>A configuration for Amazon EMR block public access. The configuration applies to all clusters created in your account for the current Region. The configuration specifies whether block public access is enabled. If block public access is enabled, security groups associated with the cluster cannot have rules that allow inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless the port is specified as an exception using <code>PermittedPublicSecurityGroupRuleRanges</code> in the <code>BlockPublicAccessConfiguration</code>. By default, Port 22 (SSH) is an exception, and public access is allowed on this port. You can change this by updating <code>BlockPublicSecurityGroupRules</code> to remove the exception.</p> <note> <p>For accounts that created clusters in a Region before November 25, 2019, block public access is disabled by default in that Region. To use this feature, you must manually enable and configure it. For accounts that did not create an EMR cluster in a Region before this date, block public access is enabled by default in that Region.</p> </note>"
         }
       }
     },
     "PutBlockPublicAccessConfigurationOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "PutManagedScalingPolicyInput": {
+      "type": "structure",
+      "required": [
+        "ClusterId",
+        "ManagedScalingPolicy"
+      ],
+      "members": {
+        "ClusterId": {
+          "shape": "ClusterId",
+          "documentation": "<p> Specifies the ID of an EMR cluster where the managed scaling policy is attached. </p>"
+        },
+        "ManagedScalingPolicy": {
+          "shape": "ManagedScalingPolicy",
+          "documentation": "<p> Specifies the constraints for the managed scaling policy. </p>"
+        }
+      }
+    },
+    "PutManagedScalingPolicyOutput": {
       "type": "structure",
       "members": {}
     },
@@ -3339,6 +3468,22 @@
       }
     },
     "RemoveAutoScalingPolicyOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "RemoveManagedScalingPolicyInput": {
+      "type": "structure",
+      "required": [
+        "ClusterId"
+      ],
+      "members": {
+        "ClusterId": {
+          "shape": "ClusterId",
+          "documentation": "<p> Specifies the ID of the cluster from which the managed scaling policy will be removed. </p>"
+        }
+      }
+    },
+    "RemoveManagedScalingPolicyOutput": {
       "type": "structure",
       "members": {}
     },
@@ -3477,6 +3622,10 @@
         "StepConcurrencyLevel": {
           "shape": "Integer",
           "documentation": "<p>Specifies the number of steps that can be executed concurrently. The default value is <code>1</code>. The maximum value is <code>256</code>.</p>"
+        },
+        "ManagedScalingPolicy": {
+          "shape": "ManagedScalingPolicy",
+          "documentation": "<p> The specified managed scaling policy for an Amazon EMR cluster. </p>"
         }
       },
       "documentation": "<p> Input to the <a>RunJobFlow</a> operation. </p>"

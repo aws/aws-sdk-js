@@ -220,6 +220,8 @@ export abstract class ConfigurationServicePlaceholders {
   kinesisvideosignalingchannels?: AWS.KinesisVideoSignalingChannels.Types.ClientConfiguration;
   detective?: AWS.Detective.Types.ClientConfiguration;
   codestarconnections?: AWS.CodeStarconnections.Types.ClientConfiguration;
+  synthetics?: AWS.Synthetics.Types.ClientConfiguration;
+  iotsitewise?: AWS.IoTSiteWise.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -442,4 +444,6 @@ export interface ConfigurationServiceApiVersions {
   kinesisvideosignalingchannels?: AWS.KinesisVideoSignalingChannels.Types.apiVersion;
   detective?: AWS.Detective.Types.apiVersion;
   codestarconnections?: AWS.CodeStarconnections.Types.apiVersion;
+  synthetics?: AWS.Synthetics.Types.apiVersion;
+  iotsitewise?: AWS.IoTSiteWise.Types.apiVersion;
 }

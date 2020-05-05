@@ -236,6 +236,14 @@ declare class ApiGatewayV2 extends Service {
    */
   deleteVpcLink(callback?: (err: AWSError, data: ApiGatewayV2.Types.DeleteVpcLinkResponse) => void): Request<ApiGatewayV2.Types.DeleteVpcLinkResponse, AWSError>;
   /**
+   * 
+   */
+  exportApi(params: ApiGatewayV2.Types.ExportApiRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.ExportApiResponse) => void): Request<ApiGatewayV2.Types.ExportApiResponse, AWSError>;
+  /**
+   * 
+   */
+  exportApi(callback?: (err: AWSError, data: ApiGatewayV2.Types.ExportApiResponse) => void): Request<ApiGatewayV2.Types.ExportApiResponse, AWSError>;
+  /**
    * Gets an Api resource.
    */
   getApi(params: ApiGatewayV2.Types.GetApiRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetApiResponse) => void): Request<ApiGatewayV2.Types.GetApiResponse, AWSError>;
@@ -1090,9 +1098,9 @@ declare namespace ApiGatewayV2 {
      */
     TemplateSelectionExpression?: SelectionExpression;
     /**
-     * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.
+     * Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.
      */
-    TimeoutInMillis?: IntegerWithLengthBetween50And29000;
+    TimeoutInMillis?: IntegerWithLengthBetween50And30000;
     /**
      * The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.
      */
@@ -1169,9 +1177,9 @@ declare namespace ApiGatewayV2 {
      */
     TemplateSelectionExpression?: SelectionExpression;
     /**
-     * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.
+     * Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.
      */
-    TimeoutInMillis?: IntegerWithLengthBetween50And29000;
+    TimeoutInMillis?: IntegerWithLengthBetween50And30000;
     /**
      * The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.
      */
@@ -1837,6 +1845,36 @@ declare namespace ApiGatewayV2 {
   export type DomainNameConfigurations = DomainNameConfiguration[];
   export type DomainNameStatus = "AVAILABLE"|"UPDATING"|string;
   export type EndpointType = "REGIONAL"|"EDGE"|string;
+  export interface ExportApiRequest {
+    /**
+     * The API identifier.
+     */
+    ApiId: __string;
+    /**
+     * The version of the API Gateway export algorithm. API Gateway uses the latest version by default. Currently, the only supported version is 1.0.
+     */
+    ExportVersion?: __string;
+    /**
+     * Specifies whether to include API Gateway extensions in the exported API definition. API Gateway extensions are included by default.
+     */
+    IncludeExtensions?: __boolean;
+    /**
+     * The output type of the exported definition file. Valid values are JSON and YAML.
+     */
+    OutputType: __string;
+    /**
+     * The version of the API specification to use. OAS30, for OpenAPI 3.0, is the only supported value.
+     */
+    Specification: __string;
+    /**
+     * The name of the API stage to export. If you don't specify this property, a representation of the latest API configuration is exported.
+     */
+    StageName?: __string;
+  }
+  export interface ExportApiResponse {
+    body?: ExportedApi;
+  }
+  export type ExportedApi = Buffer|Uint8Array|Blob|string;
   export interface GetApiMappingRequest {
     /**
      * The API mapping identifier.
@@ -2231,9 +2269,9 @@ declare namespace ApiGatewayV2 {
      */
     TemplateSelectionExpression?: SelectionExpression;
     /**
-     * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.
+     * Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.
      */
-    TimeoutInMillis?: IntegerWithLengthBetween50And29000;
+    TimeoutInMillis?: IntegerWithLengthBetween50And30000;
     /**
      * The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.
      */
@@ -2732,7 +2770,7 @@ declare namespace ApiGatewayV2 {
      */
     Body: __string;
     /**
-     * Specifies whether to rollback the API creation (true) or not (false) when a warning is encountered. The default value is false.
+     * Specifies whether to rollback the API creation when a warning is encountered. By default, API creation continues if a warning is encountered.
      */
     FailOnWarnings?: __boolean;
   }
@@ -2795,7 +2833,7 @@ declare namespace ApiGatewayV2 {
     Warnings?: __listOf__string;
   }
   export type IntegerWithLengthBetween0And3600 = number;
-  export type IntegerWithLengthBetween50And29000 = number;
+  export type IntegerWithLengthBetween50And30000 = number;
   export type IntegerWithLengthBetweenMinus1And86400 = number;
   export interface Integration {
     /**
@@ -2868,9 +2906,9 @@ declare namespace ApiGatewayV2 {
      */
     TemplateSelectionExpression?: SelectionExpression;
     /**
-     * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.
+     * Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.
      */
-    TimeoutInMillis?: IntegerWithLengthBetween50And29000;
+    TimeoutInMillis?: IntegerWithLengthBetween50And30000;
     /**
      * The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.
      */
@@ -2961,7 +2999,7 @@ declare namespace ApiGatewayV2 {
      */
     Body: __string;
     /**
-     * Specifies whether to rollback the API creation (true) or not (false) when a warning is encountered. The default value is false.
+     * Specifies whether to rollback the API creation when a warning is encountered. By default, API creation continues if a warning is encountered.
      */
     FailOnWarnings?: __boolean;
   }
@@ -3594,9 +3632,9 @@ declare namespace ApiGatewayV2 {
      */
     TemplateSelectionExpression?: SelectionExpression;
     /**
-     * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.
+     * Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.
      */
-    TimeoutInMillis?: IntegerWithLengthBetween50And29000;
+    TimeoutInMillis?: IntegerWithLengthBetween50And30000;
     /**
      * The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.
      */
@@ -3673,9 +3711,9 @@ declare namespace ApiGatewayV2 {
      */
     TemplateSelectionExpression?: SelectionExpression;
     /**
-     * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.
+     * Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.
      */
-    TimeoutInMillis?: IntegerWithLengthBetween50And29000;
+    TimeoutInMillis?: IntegerWithLengthBetween50And30000;
     /**
      * The TLS configuration for a private integration. If you specify a TLS configuration, private integration traffic uses the HTTPS protocol. Supported only for HTTP APIs.
      */

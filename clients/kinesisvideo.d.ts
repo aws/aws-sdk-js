@@ -44,11 +44,11 @@ declare class KinesisVideo extends Service {
    */
   deleteStream(callback?: (err: AWSError, data: KinesisVideo.Types.DeleteStreamOutput) => void): Request<KinesisVideo.Types.DeleteStreamOutput, AWSError>;
   /**
-   * Returns the most current information about the signaling channel. You must specify either the name or the ARN of the channel that you want to describe.
+   * Returns the most current information about the signaling channel. You must specify either the name or the Amazon Resource Name (ARN) of the channel that you want to describe.
    */
   describeSignalingChannel(params: KinesisVideo.Types.DescribeSignalingChannelInput, callback?: (err: AWSError, data: KinesisVideo.Types.DescribeSignalingChannelOutput) => void): Request<KinesisVideo.Types.DescribeSignalingChannelOutput, AWSError>;
   /**
-   * Returns the most current information about the signaling channel. You must specify either the name or the ARN of the channel that you want to describe.
+   * Returns the most current information about the signaling channel. You must specify either the name or the Amazon Resource Name (ARN) of the channel that you want to describe.
    */
   describeSignalingChannel(callback?: (err: AWSError, data: KinesisVideo.Types.DescribeSignalingChannelOutput) => void): Request<KinesisVideo.Types.DescribeSignalingChannelOutput, AWSError>;
   /**
@@ -68,11 +68,11 @@ declare class KinesisVideo extends Service {
    */
   getDataEndpoint(callback?: (err: AWSError, data: KinesisVideo.Types.GetDataEndpointOutput) => void): Request<KinesisVideo.Types.GetDataEndpointOutput, AWSError>;
   /**
-   * Provides an endpoint for the specified signaling channel to send and receive messages. This API uses the SingleMasterChannelEndpointConfiguration input parameter, which consists of the Protocols and Role properties.  Protocols is used to determine the communication mechanism. For example, specifying WSS as the protocol, results in this API producing a secure websocket endpoint, and specifying HTTPS as the protocol, results in this API generating an HTTPS endpoint.   Role determines the messaging permissions. A MASTER role results in this API generating an endpoint that a client can use to communicate with any of the viewers on the channel. A VIEWER role results in this API generating an endpoint that a client can use to communicate only with a MASTER. 
+   * Provides an endpoint for the specified signaling channel to send and receive messages. This API uses the SingleMasterChannelEndpointConfiguration input parameter, which consists of the Protocols and Role properties.  Protocols is used to determine the communication mechanism. For example, if you specify WSS as the protocol, this API produces a secure websocket endpoint. If you specify HTTPS as the protocol, this API generates an HTTPS endpoint.   Role determines the messaging permissions. A MASTER role results in this API generating an endpoint that a client can use to communicate with any of the viewers on the channel. A VIEWER role results in this API generating an endpoint that a client can use to communicate only with a MASTER. 
    */
   getSignalingChannelEndpoint(params: KinesisVideo.Types.GetSignalingChannelEndpointInput, callback?: (err: AWSError, data: KinesisVideo.Types.GetSignalingChannelEndpointOutput) => void): Request<KinesisVideo.Types.GetSignalingChannelEndpointOutput, AWSError>;
   /**
-   * Provides an endpoint for the specified signaling channel to send and receive messages. This API uses the SingleMasterChannelEndpointConfiguration input parameter, which consists of the Protocols and Role properties.  Protocols is used to determine the communication mechanism. For example, specifying WSS as the protocol, results in this API producing a secure websocket endpoint, and specifying HTTPS as the protocol, results in this API generating an HTTPS endpoint.   Role determines the messaging permissions. A MASTER role results in this API generating an endpoint that a client can use to communicate with any of the viewers on the channel. A VIEWER role results in this API generating an endpoint that a client can use to communicate only with a MASTER. 
+   * Provides an endpoint for the specified signaling channel to send and receive messages. This API uses the SingleMasterChannelEndpointConfiguration input parameter, which consists of the Protocols and Role properties.  Protocols is used to determine the communication mechanism. For example, if you specify WSS as the protocol, this API produces a secure websocket endpoint. If you specify HTTPS as the protocol, this API generates an HTTPS endpoint.   Role determines the messaging permissions. A MASTER role results in this API generating an endpoint that a client can use to communicate with any of the viewers on the channel. A VIEWER role results in this API generating an endpoint that a client can use to communicate only with a MASTER. 
    */
   getSignalingChannelEndpoint(callback?: (err: AWSError, data: KinesisVideo.Types.GetSignalingChannelEndpointOutput) => void): Request<KinesisVideo.Types.GetSignalingChannelEndpointOutput, AWSError>;
   /**
@@ -148,11 +148,11 @@ declare class KinesisVideo extends Service {
    */
   updateDataRetention(callback?: (err: AWSError, data: KinesisVideo.Types.UpdateDataRetentionOutput) => void): Request<KinesisVideo.Types.UpdateDataRetentionOutput, AWSError>;
   /**
-   * Updates the existing signaling channel. This is an asynchronous operation and takes time to complete.  If the MessageTtlSeconds value is updated (either increased or reduced), then it only applies to new messages sent via this channel after it's been updated. Existing messages are still expire as per the previous MessageTtlSeconds value.
+   * Updates the existing signaling channel. This is an asynchronous operation and takes time to complete.  If the MessageTtlSeconds value is updated (either increased or reduced), it only applies to new messages sent via this channel after it's been updated. Existing messages are still expired as per the previous MessageTtlSeconds value.
    */
   updateSignalingChannel(params: KinesisVideo.Types.UpdateSignalingChannelInput, callback?: (err: AWSError, data: KinesisVideo.Types.UpdateSignalingChannelOutput) => void): Request<KinesisVideo.Types.UpdateSignalingChannelOutput, AWSError>;
   /**
-   * Updates the existing signaling channel. This is an asynchronous operation and takes time to complete.  If the MessageTtlSeconds value is updated (either increased or reduced), then it only applies to new messages sent via this channel after it's been updated. Existing messages are still expire as per the previous MessageTtlSeconds value.
+   * Updates the existing signaling channel. This is an asynchronous operation and takes time to complete.  If the MessageTtlSeconds value is updated (either increased or reduced), it only applies to new messages sent via this channel after it's been updated. Existing messages are still expired as per the previous MessageTtlSeconds value.
    */
   updateSignalingChannel(callback?: (err: AWSError, data: KinesisVideo.Types.UpdateSignalingChannelOutput) => void): Request<KinesisVideo.Types.UpdateSignalingChannelOutput, AWSError>;
   /**
@@ -165,14 +165,14 @@ declare class KinesisVideo extends Service {
   updateStream(callback?: (err: AWSError, data: KinesisVideo.Types.UpdateStreamOutput) => void): Request<KinesisVideo.Types.UpdateStreamOutput, AWSError>;
 }
 declare namespace KinesisVideo {
-  export type APIName = "PUT_MEDIA"|"GET_MEDIA"|"LIST_FRAGMENTS"|"GET_MEDIA_FOR_FRAGMENT_LIST"|"GET_HLS_STREAMING_SESSION_URL"|"GET_DASH_STREAMING_SESSION_URL"|string;
+  export type APIName = "PUT_MEDIA"|"GET_MEDIA"|"LIST_FRAGMENTS"|"GET_MEDIA_FOR_FRAGMENT_LIST"|"GET_HLS_STREAMING_SESSION_URL"|"GET_DASH_STREAMING_SESSION_URL"|"GET_CLIP"|string;
   export interface ChannelInfo {
     /**
      * The name of the signaling channel.
      */
     ChannelName?: ChannelName;
     /**
-     * The ARN of the signaling channel.
+     * The Amazon Resource Name (ARN) of the signaling channel.
      */
     ChannelARN?: ResourceARN;
     /**
@@ -214,7 +214,7 @@ declare namespace KinesisVideo {
   export type ComparisonOperator = "BEGINS_WITH"|string;
   export interface CreateSignalingChannelInput {
     /**
-     * A name for the signaling channel that you are creating. It must be unique for each account and region.
+     * A name for the signaling channel that you are creating. It must be unique for each AWS account and AWS Region.
      */
     ChannelName: ChannelName;
     /**
@@ -226,13 +226,13 @@ declare namespace KinesisVideo {
      */
     SingleMasterConfiguration?: SingleMasterConfiguration;
     /**
-     * A set of tags (key/value pairs) that you want to associate with this channel.
+     * A set of tags (key-value pairs) that you want to associate with this channel.
      */
     Tags?: TagOnCreateList;
   }
   export interface CreateSignalingChannelOutput {
     /**
-     * The ARN of the created channel.
+     * The Amazon Resource Name (ARN) of the created channel.
      */
     ChannelARN?: ResourceARN;
   }
@@ -273,11 +273,11 @@ declare namespace KinesisVideo {
   export type DataRetentionInHours = number;
   export interface DeleteSignalingChannelInput {
     /**
-     * The ARN of the signaling channel that you want to delete.
+     * The Amazon Resource Name (ARN) of the signaling channel that you want to delete.
      */
     ChannelARN: ResourceARN;
     /**
-     * The current version of the signaling channel that you want to delete. You can obtain the current version by invoking the DescribeSignalingChannel or ListSignalingChannels APIs.
+     * The current version of the signaling channel that you want to delete. You can obtain the current version by invoking the DescribeSignalingChannel or ListSignalingChannels API operations.
      */
     CurrentVersion?: Version;
   }
@@ -350,7 +350,7 @@ declare namespace KinesisVideo {
   }
   export interface GetSignalingChannelEndpointInput {
     /**
-     * The ARN of the signalling channel for which you want to get an endpoint.
+     * The Amazon Resource Name (ARN) of the signalling channel for which you want to get an endpoint.
      */
     ChannelARN: ResourceARN;
     /**
@@ -421,7 +421,7 @@ declare namespace KinesisVideo {
      */
     NextToken?: NextToken;
     /**
-     * The ARN of the signaling channel for which you want to list tags.
+     * The Amazon Resource Name (ARN) of the signaling channel for which you want to list tags.
      */
     ResourceARN: ResourceARN;
   }
@@ -559,7 +559,7 @@ declare namespace KinesisVideo {
   export type TagOnCreateList = Tag[];
   export interface TagResourceInput {
     /**
-     * The ARN of the signaling channel to which you want to add tags.
+     * The Amazon Resource Name (ARN) of the signaling channel to which you want to add tags.
      */
     ResourceARN: ResourceARN;
     /**
@@ -589,7 +589,7 @@ declare namespace KinesisVideo {
   export type Timestamp = Date;
   export interface UntagResourceInput {
     /**
-     * The ARN of the signaling channel from which you want to remove tags.
+     * The Amazon Resource Name (ARN) of the signaling channel from which you want to remove tags.
      */
     ResourceARN: ResourceARN;
     /**
@@ -642,7 +642,7 @@ declare namespace KinesisVideo {
   }
   export interface UpdateSignalingChannelInput {
     /**
-     * The ARN of the signaling channel that you want to update.
+     * The Amazon Resource Name (ARN) of the signaling channel that you want to update.
      */
     ChannelARN: ResourceARN;
     /**

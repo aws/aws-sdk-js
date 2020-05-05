@@ -92,11 +92,11 @@ declare class GlobalAccelerator extends Service {
    */
   describeAcceleratorAttributes(callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeAcceleratorAttributesResponse) => void): Request<GlobalAccelerator.Types.DescribeAcceleratorAttributesResponse, AWSError>;
   /**
-   * Describe an endpoint group.
+   * Describe an endpoint group. To see an AWS CLI example of describing an endpoint group, scroll down to Example.
    */
   describeEndpointGroup(params: GlobalAccelerator.Types.DescribeEndpointGroupRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.DescribeEndpointGroupResponse, AWSError>;
   /**
-   * Describe an endpoint group.
+   * Describe an endpoint group. To see an AWS CLI example of describing an endpoint group, scroll down to Example.
    */
   describeEndpointGroup(callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.DescribeEndpointGroupResponse, AWSError>;
   /**
@@ -116,11 +116,11 @@ declare class GlobalAccelerator extends Service {
    */
   listAccelerators(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListAcceleratorsResponse) => void): Request<GlobalAccelerator.Types.ListAcceleratorsResponse, AWSError>;
   /**
-   * Lists the IP address ranges that were specified in calls to ProvisionByoipCidr. To see an AWS CLI example of listing BYOIP CIDR addresses, scroll down to Example.
+   * Lists the IP address ranges that were specified in calls to ProvisionByoipCidr, including the current state and a history of state changes. To see an AWS CLI example of listing BYOIP CIDR addresses, scroll down to Example.
    */
   listByoipCidrs(params: GlobalAccelerator.Types.ListByoipCidrsRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListByoipCidrsResponse) => void): Request<GlobalAccelerator.Types.ListByoipCidrsResponse, AWSError>;
   /**
-   * Lists the IP address ranges that were specified in calls to ProvisionByoipCidr. To see an AWS CLI example of listing BYOIP CIDR addresses, scroll down to Example.
+   * Lists the IP address ranges that were specified in calls to ProvisionByoipCidr, including the current state and a history of state changes. To see an AWS CLI example of listing BYOIP CIDR addresses, scroll down to Example.
    */
   listByoipCidrs(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListByoipCidrsResponse) => void): Request<GlobalAccelerator.Types.ListByoipCidrsResponse, AWSError>;
   /**
@@ -288,7 +288,22 @@ declare namespace GlobalAccelerator {
      * The state of the address pool.
      */
     State?: ByoipCidrState;
+    /**
+     * A history of status changes for an IP address range that that you bring to AWS Global Accelerator through bring your own IP address (BYOIP).
+     */
+    Events?: ByoipCidrEvents;
   }
+  export interface ByoipCidrEvent {
+    /**
+     * A string that contains an Event message describing changes that you make in the status of an IP address range that you bring to AWS Global Accelerator through bring your own IP address (BYOIP).
+     */
+    Message?: GenericString;
+    /**
+     * A timestamp when you make a status change for an IP address range that you bring to AWS Global Accelerator through bring your own IP address (BYOIP).
+     */
+    Timestamp?: Timestamp;
+  }
+  export type ByoipCidrEvents = ByoipCidrEvent[];
   export type ByoipCidrState = "PENDING_PROVISIONING"|"READY"|"PENDING_ADVERTISING"|"ADVERTISING"|"PENDING_WITHDRAWING"|"PENDING_DEPROVISIONING"|"DEPROVISIONED"|"FAILED_PROVISION"|"FAILED_ADVERTISING"|"FAILED_WITHDRAW"|"FAILED_DEPROVISION"|string;
   export type ByoipCidrs = ByoipCidr[];
   export interface CidrAuthorizationContext {
@@ -498,7 +513,7 @@ declare namespace GlobalAccelerator {
      */
     Weight?: EndpointWeight;
     /**
-     * Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. The value is true or false. The default value is true for new accelerators.  If the value is set to true, the client's IP address is preserved in the X-Forwarded-For request header as traffic travels to applications on the Application Load Balancer endpoint fronted by the accelerator. For more information, see  Viewing Client IP Addresses in AWS Global Accelerator in the AWS Global Accelerator Developer Guide.
+     * Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. The value is true or false. The default value is true for new accelerators.  If the value is set to true, the client's IP address is preserved in the X-Forwarded-For request header as traffic travels to applications on the Application Load Balancer endpoint fronted by the accelerator. For more information, see  Preserve Client IP Addresses in AWS Global Accelerator in the AWS Global Accelerator Developer Guide.
      */
     ClientIPPreservationEnabled?: GenericBoolean;
   }

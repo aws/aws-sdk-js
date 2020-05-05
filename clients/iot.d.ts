@@ -156,6 +156,14 @@ declare class Iot extends Service {
    */
   createCertificateFromCsr(callback?: (err: AWSError, data: Iot.Types.CreateCertificateFromCsrResponse) => void): Request<Iot.Types.CreateCertificateFromCsrResponse, AWSError>;
   /**
+   * Create a dimension that you can use to limit the scope of a metric used in a security profile for AWS IoT Device Defender. For example, using a TOPIC_FILTER dimension, you can narrow down the scope of the metric only to MQTT topics whose name match the pattern specified in the dimension.
+   */
+  createDimension(params: Iot.Types.CreateDimensionRequest, callback?: (err: AWSError, data: Iot.Types.CreateDimensionResponse) => void): Request<Iot.Types.CreateDimensionResponse, AWSError>;
+  /**
+   * Create a dimension that you can use to limit the scope of a metric used in a security profile for AWS IoT Device Defender. For example, using a TOPIC_FILTER dimension, you can narrow down the scope of the metric only to MQTT topics whose name match the pattern specified in the dimension.
+   */
+  createDimension(callback?: (err: AWSError, data: Iot.Types.CreateDimensionResponse) => void): Request<Iot.Types.CreateDimensionResponse, AWSError>;
+  /**
    * Creates a domain configuration.  The domain configuration feature is in public preview and is subject to change. 
    */
   createDomainConfiguration(params: Iot.Types.CreateDomainConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.CreateDomainConfigurationResponse) => void): Request<Iot.Types.CreateDomainConfigurationResponse, AWSError>;
@@ -355,6 +363,14 @@ declare class Iot extends Service {
    * Deletes the specified certificate. A certificate cannot be deleted if it has a policy or IoT thing attached to it or if its status is set to ACTIVE. To delete a certificate, first use the DetachPrincipalPolicy API to detach all policies. Next, use the UpdateCertificate API to set the certificate to the INACTIVE status.
    */
   deleteCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes the specified dimension from your AWS account.
+   */
+  deleteDimension(params: Iot.Types.DeleteDimensionRequest, callback?: (err: AWSError, data: Iot.Types.DeleteDimensionResponse) => void): Request<Iot.Types.DeleteDimensionResponse, AWSError>;
+  /**
+   * Removes the specified dimension from your AWS account.
+   */
+  deleteDimension(callback?: (err: AWSError, data: Iot.Types.DeleteDimensionResponse) => void): Request<Iot.Types.DeleteDimensionResponse, AWSError>;
   /**
    * Deletes the specified domain configuration.  The domain configuration feature is in public preview and is subject to change. 
    */
@@ -603,6 +619,14 @@ declare class Iot extends Service {
    * Describes the default authorizer.
    */
   describeDefaultAuthorizer(callback?: (err: AWSError, data: Iot.Types.DescribeDefaultAuthorizerResponse) => void): Request<Iot.Types.DescribeDefaultAuthorizerResponse, AWSError>;
+  /**
+   * Provides details about a dimension that is defined in your AWS account.
+   */
+  describeDimension(params: Iot.Types.DescribeDimensionRequest, callback?: (err: AWSError, data: Iot.Types.DescribeDimensionResponse) => void): Request<Iot.Types.DescribeDimensionResponse, AWSError>;
+  /**
+   * Provides details about a dimension that is defined in your AWS account.
+   */
+  describeDimension(callback?: (err: AWSError, data: Iot.Types.DescribeDimensionResponse) => void): Request<Iot.Types.DescribeDimensionResponse, AWSError>;
   /**
    * Gets summary information about a domain configuration.  The domain configuration feature is in public preview and is subject to change. 
    */
@@ -988,6 +1012,14 @@ declare class Iot extends Service {
    */
   listCertificatesByCA(callback?: (err: AWSError, data: Iot.Types.ListCertificatesByCAResponse) => void): Request<Iot.Types.ListCertificatesByCAResponse, AWSError>;
   /**
+   * List the set of dimensions that are defined for your AWS account.
+   */
+  listDimensions(params: Iot.Types.ListDimensionsRequest, callback?: (err: AWSError, data: Iot.Types.ListDimensionsResponse) => void): Request<Iot.Types.ListDimensionsResponse, AWSError>;
+  /**
+   * List the set of dimensions that are defined for your AWS account.
+   */
+  listDimensions(callback?: (err: AWSError, data: Iot.Types.ListDimensionsResponse) => void): Request<Iot.Types.ListDimensionsResponse, AWSError>;
+  /**
    * Gets a list of domain configurations for the user. This list is sorted alphabetically by domain configuration name.  The domain configuration feature is in public preview and is subject to change. 
    */
   listDomainConfigurations(params: Iot.Types.ListDomainConfigurationsRequest, callback?: (err: AWSError, data: Iot.Types.ListDomainConfigurationsResponse) => void): Request<Iot.Types.ListDomainConfigurationsResponse, AWSError>;
@@ -1292,6 +1324,14 @@ declare class Iot extends Service {
    */
   registerCertificate(callback?: (err: AWSError, data: Iot.Types.RegisterCertificateResponse) => void): Request<Iot.Types.RegisterCertificateResponse, AWSError>;
   /**
+   * Register a certificate that does not have a certificate authority (CA).
+   */
+  registerCertificateWithoutCA(params: Iot.Types.RegisterCertificateWithoutCARequest, callback?: (err: AWSError, data: Iot.Types.RegisterCertificateWithoutCAResponse) => void): Request<Iot.Types.RegisterCertificateWithoutCAResponse, AWSError>;
+  /**
+   * Register a certificate that does not have a certificate authority (CA).
+   */
+  registerCertificateWithoutCA(callback?: (err: AWSError, data: Iot.Types.RegisterCertificateWithoutCAResponse) => void): Request<Iot.Types.RegisterCertificateWithoutCAResponse, AWSError>;
+  /**
    * Provisions a thing in the device registry. RegisterThing calls other AWS IoT control plane APIs. These calls might exceed your account level  AWS IoT Throttling Limits and cause throttle errors. Please contact AWS Customer Support to raise your throttling limits if necessary.
    */
   registerThing(params: Iot.Types.RegisterThingRequest, callback?: (err: AWSError, data: Iot.Types.RegisterThingResponse) => void): Request<Iot.Types.RegisterThingResponse, AWSError>;
@@ -1491,6 +1531,14 @@ declare class Iot extends Service {
    * Updates the status of the specified certificate. This operation is idempotent. Moving a certificate from the ACTIVE state (including REVOKED) will not disconnect currently connected devices, but these devices will be unable to reconnect. The ACTIVE state is required to authenticate devices connecting to AWS IoT using a certificate.
    */
   updateCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the definition for a dimension. You cannot change the type of a dimension after it is created (you can delete it and re-create it).
+   */
+  updateDimension(params: Iot.Types.UpdateDimensionRequest, callback?: (err: AWSError, data: Iot.Types.UpdateDimensionResponse) => void): Request<Iot.Types.UpdateDimensionResponse, AWSError>;
+  /**
+   * Updates the definition for a dimension. You cannot change the type of a dimension after it is created (you can delete it and re-create it).
+   */
+  updateDimension(callback?: (err: AWSError, data: Iot.Types.UpdateDimensionResponse) => void): Request<Iot.Types.UpdateDimensionResponse, AWSError>;
   /**
    * Updates values stored in the domain configuration. Domain configurations for default endpoints can't be updated.  The domain configuration feature is in public preview and is subject to change. 
    */
@@ -1705,7 +1753,7 @@ declare namespace Iot {
      */
     cloudwatchAlarm?: CloudwatchAlarmAction;
     /**
-     * Send data to CloudWatch logs.
+     * Send data to CloudWatch Logs.
      */
     cloudwatchLogs?: CloudwatchLogsAction;
     /**
@@ -1825,6 +1873,7 @@ declare namespace Iot {
     overrideDynamicGroups?: OverrideDynamicGroups;
   }
   export type AdditionalMetricsToRetainList = BehaviorMetric[];
+  export type AdditionalMetricsToRetainV2List = MetricToRetain[];
   export type AdditionalParameterMap = {[key: string]: Value};
   export type AggregationField = string;
   export type AlarmName = string;
@@ -2190,7 +2239,7 @@ declare namespace Iot {
     /**
      * The resources for which the principal is being authorized to perform the specified action.
      */
-    resources?: Resources;
+    resources: Resources;
   }
   export type AuthInfos = AuthInfo[];
   export interface AuthResult {
@@ -2307,6 +2356,10 @@ declare namespace Iot {
      * What is measured by the behavior.
      */
     metric?: BehaviorMetric;
+    /**
+     * The dimension for a metric in your behavior. For example, using a TOPIC_FILTER dimension, you can narrow down the scope of the metric only to MQTT topics whose name match the pattern specified in the dimension.
+     */
+    metricDimension?: MetricDimension;
     /**
      * The criteria that determine if a device is behaving normally in regard to the metric.
      */
@@ -2522,6 +2575,10 @@ declare namespace Iot {
      */
     status?: CertificateStatus;
     /**
+     * The mode of the certificate.
+     */
+    certificateMode?: CertificateMode;
+    /**
      * The date and time the certificate was created.
      */
     creationDate?: DateType;
@@ -2580,8 +2637,13 @@ declare namespace Iot {
      * When the certificate is valid.
      */
     validity?: CertificateValidity;
+    /**
+     * The mode of the certificate.
+     */
+    certificateMode?: CertificateMode;
   }
   export type CertificateId = string;
+  export type CertificateMode = "DEFAULT"|"SNI_ONLY"|string;
   export type CertificateName = string;
   export type CertificatePathOnDevice = string;
   export type CertificatePem = string;
@@ -2738,6 +2800,10 @@ declare namespace Iot {
      */
     status?: AuthorizerStatus;
     /**
+     * Metadata which can be used to manage the custom authorizer.  For URI Request parameters use format: ...key1=value1&amp;key2=value2... For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..." For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..." 
+     */
+    tags?: TagList;
+    /**
      * Specifies whether AWS IoT validates the token signature in an authorization request.
      */
     signingDisabled?: BooleanKey;
@@ -2804,6 +2870,38 @@ declare namespace Iot {
      */
     certificatePem?: CertificatePem;
   }
+  export interface CreateDimensionRequest {
+    /**
+     * A unique identifier for the dimension. Choose something that describes the type and value to make it easy to remember what it does.
+     */
+    name: DimensionName;
+    /**
+     * Specifies the type of dimension. Supported types: TOPIC_FILTER. 
+     */
+    type: DimensionType;
+    /**
+     * Specifies the value or list of values for the dimension. For TOPIC_FILTER dimensions, this is a pattern used to match the MQTT topic (for example, "admin/#").
+     */
+    stringValues: DimensionStringValues;
+    /**
+     * Metadata that can be used to manage the dimension.
+     */
+    tags?: TagList;
+    /**
+     * Each dimension must have a unique client request token. If you try to create a new dimension with the same token as a dimension that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request.
+     */
+    clientRequestToken: ClientRequestToken;
+  }
+  export interface CreateDimensionResponse {
+    /**
+     * A unique identifier for the dimension.
+     */
+    name?: DimensionName;
+    /**
+     * The ARN (Amazon resource name) of the created dimension.
+     */
+    arn?: DimensionArn;
+  }
   export interface CreateDomainConfigurationRequest {
     /**
      * The name of the domain configuration. This value must be unique to a region.
@@ -2826,9 +2924,13 @@ declare namespace Iot {
      */
     authorizerConfig?: AuthorizerConfig;
     /**
-     * The type of service delivered by the endpoint.
+     * The type of service delivered by the endpoint.  AWS IoT Core currently supports only the DATA service type. 
      */
     serviceType?: ServiceType;
+    /**
+     * Metadata which can be used to manage the domain configuration.  For URI Request parameters use format: ...key1=value1&amp;key2=value2... For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..." For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..." 
+     */
+    tags?: TagList;
   }
   export interface CreateDomainConfigurationResponse {
     /**
@@ -3081,6 +3183,10 @@ declare namespace Iot {
      * The JSON document that describes the policy. policyDocument must have a minimum length of 1, with a maximum length of 2048, excluding whitespace.
      */
     policyDocument: PolicyDocument;
+    /**
+     * Metadata which can be used to manage the policy.  For URI Request parameters use format: ...key1=value1&amp;key2=value2... For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..." For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..." 
+     */
+    tags?: TagList;
   }
   export interface CreatePolicyResponse {
     /**
@@ -3178,6 +3284,10 @@ declare namespace Iot {
      */
     provisioningRoleArn: RoleArn;
     /**
+     * Creates a pre-provisioning hook template.
+     */
+    preProvisioningHook?: ProvisioningHook;
+    /**
      * Metadata which can be used to manage the fleet provisioning template.  For URI Request parameters use format: ...key1=value1&amp;key2=value2... For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..." For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..." 
      */
     tags?: TagList;
@@ -3241,6 +3351,10 @@ declare namespace Iot {
      * How long (in seconds) the credentials will be valid.
      */
     credentialDurationSeconds?: CredentialDurationSeconds;
+    /**
+     * Metadata which can be used to manage the role alias.  For URI Request parameters use format: ...key1=value1&amp;key2=value2... For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..." For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..." 
+     */
+    tags?: TagList;
   }
   export interface CreateRoleAliasResponse {
     /**
@@ -3302,9 +3416,13 @@ declare namespace Iot {
      */
     alertTargets?: AlertTargets;
     /**
-     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.
+     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.  Note: This API field is deprecated. Please use CreateSecurityProfileRequest$additionalMetricsToRetainV2 instead.
      */
     additionalMetricsToRetain?: AdditionalMetricsToRetainList;
+    /**
+     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.
+     */
+    additionalMetricsToRetainV2?: AdditionalMetricsToRetainV2List;
     /**
      * Metadata that can be used to manage the security profile.
      */
@@ -3394,7 +3512,7 @@ declare namespace Iot {
   }
   export interface CreateThingRequest {
     /**
-     * The name of the thing to create.
+     * The name of the thing to create. You can't change a thing's name after you create it. To change a thing's name, you must create a new thing, give it the new name, and then delete the old thing.
      */
     thingName: ThingName;
     /**
@@ -3551,6 +3669,14 @@ declare namespace Iot {
      * Forces the deletion of a certificate if it is inactive and is not attached to an IoT thing.
      */
     forceDelete?: ForceDelete;
+  }
+  export interface DeleteDimensionRequest {
+    /**
+     * The unique identifier for the dimension that you want to delete.
+     */
+    name: DimensionName;
+  }
+  export interface DeleteDimensionResponse {
   }
   export interface DeleteDomainConfigurationRequest {
     /**
@@ -3955,6 +4081,38 @@ declare namespace Iot {
      */
     authorizerDescription?: AuthorizerDescription;
   }
+  export interface DescribeDimensionRequest {
+    /**
+     * The unique identifier for the dimension.
+     */
+    name: DimensionName;
+  }
+  export interface DescribeDimensionResponse {
+    /**
+     * The unique identifier for the dimension.
+     */
+    name?: DimensionName;
+    /**
+     * The ARN (Amazon resource name) for the dimension.
+     */
+    arn?: DimensionArn;
+    /**
+     * The type of the dimension.
+     */
+    type?: DimensionType;
+    /**
+     * The value or list of values used to scope the dimension. For example, for topic filters, this is the pattern used to match the MQTT topic name.
+     */
+    stringValues?: DimensionStringValues;
+    /**
+     * The date the dimension was created.
+     */
+    creationDate?: Timestamp;
+    /**
+     * The date the dimension was last modified.
+     */
+    lastModifiedDate?: Timestamp;
+  }
   export interface DescribeDomainConfigurationRequest {
     /**
      * The name of the domain configuration.
@@ -4162,6 +4320,10 @@ declare namespace Iot {
      * The ARN of the role associated with the provisioning template. This IoT role grants permission to provision a device.
      */
     provisioningRoleArn?: RoleArn;
+    /**
+     * Gets information about a pre-provisioned hook.
+     */
+    preProvisioningHook?: ProvisioningHook;
   }
   export interface DescribeProvisioningTemplateVersionRequest {
     /**
@@ -4263,9 +4425,13 @@ declare namespace Iot {
      */
     alertTargets?: AlertTargets;
     /**
-     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.
+     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.  Note: This API field is deprecated. Please use DescribeSecurityProfileResponse$additionalMetricsToRetainV2 instead.
      */
     additionalMetricsToRetain?: AdditionalMetricsToRetainList;
+    /**
+     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.
+     */
+    additionalMetricsToRetainV2?: AdditionalMetricsToRetainV2List;
     /**
      * The version of the security profile. A new version is generated whenever the security profile is updated.
      */
@@ -4403,7 +4569,7 @@ declare namespace Iot {
   }
   export interface DescribeThingResponse {
     /**
-     * The default client ID.
+     * The default MQTT client ID. For a typical device, the thing name is also used as the default MQTT client ID. Although we don’t require a mapping between a thing's registry name and its use of MQTT client IDs, certificates, or shadow state, we recommend that you choose a thing name and use it as the MQTT client ID for the registry and the Device Shadow service. This lets you better organize your AWS IoT fleet without removing the flexibility of the underlying device certificate model or shadows.
      */
     defaultClientId?: ClientId;
     /**
@@ -4519,6 +4685,13 @@ declare namespace Iot {
   export type DetailsValue = string;
   export type DeviceCertificateUpdateAction = "DEACTIVATE"|string;
   export type DeviceDefenderThingName = string;
+  export type DimensionArn = string;
+  export type DimensionName = string;
+  export type DimensionNames = DimensionName[];
+  export type DimensionStringValue = string;
+  export type DimensionStringValues = DimensionStringValue[];
+  export type DimensionType = "TOPIC_FILTER"|string;
+  export type DimensionValueOperator = "IN"|"NOT_IN"|string;
   export type DisableAllLogs = boolean;
   export interface DisableTopicRuleRequest {
     /**
@@ -5052,7 +5225,7 @@ declare namespace Iot {
      */
     url: Url;
     /**
-     * The URL to which AWS IoT sends a confirmation message. The value of the confirmation URL must be a prefix of the endpoint URL. If you do not specify a confirmation URL AWS IoT uses the endpoint URL as the confirmation URL. If you use substitution templates in the confirmationUrl, you must create and enable topic rule destinations that match each possible value of the substituion template before traffic is allowed to your endpoint URL.
+     * The URL to which AWS IoT sends a confirmation message. The value of the confirmation URL must be a prefix of the endpoint URL. If you do not specify a confirmation URL AWS IoT uses the endpoint URL as the confirmation URL. If you use substitution templates in the confirmationUrl, you must create and enable topic rule destinations that match each possible value of the substitution template before traffic is allowed to your endpoint URL.
      */
     confirmationUrl?: Url;
     /**
@@ -5795,6 +5968,26 @@ declare namespace Iot {
      */
     nextMarker?: Marker;
   }
+  export interface ListDimensionsRequest {
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to retrieve at one time.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListDimensionsResponse {
+    /**
+     * A list of the names of the defined dimensions. Use DescribeDimension to get details for a dimension.
+     */
+    dimensionNames?: DimensionNames;
+    /**
+     * A token that can be used to retrieve the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListDomainConfigurationsRequest {
     /**
      * The marker for the next set of results.
@@ -6244,6 +6437,10 @@ declare namespace Iot {
      * The maximum number of results to return at one time.
      */
     maxResults?: MaxResults;
+    /**
+     * A filter to limit results to the security profiles that use the defined dimension.
+     */
+    dimensionName?: DimensionName;
   }
   export interface ListSecurityProfilesResponse {
     /**
@@ -6730,6 +6927,26 @@ declare namespace Iot {
   export type Message = string;
   export type MessageFormat = "RAW"|"JSON"|string;
   export type MessageId = string;
+  export interface MetricDimension {
+    /**
+     * A unique identifier for the dimension.
+     */
+    dimensionName: DimensionName;
+    /**
+     * Defines how the dimensionValues of a dimension are interpreted. For example, for dimension type TOPIC_FILTER, the IN operator, a message will be counted only if its topic matches one of the topic filters. With NOT_IN operator, a message will be counted only if it doesn't match any of the topic filters. The operator is optional: if it's not provided (is null), it will be interpreted as IN.
+     */
+    operator?: DimensionValueOperator;
+  }
+  export interface MetricToRetain {
+    /**
+     * What is measured by the behavior.
+     */
+    metric: BehaviorMetric;
+    /**
+     * The dimension of a metric.
+     */
+    metricDimension?: MetricDimension;
+  }
   export interface MetricValue {
     /**
      * If the comparisonOperator calls for a numeric value, use this to specify that numeric value to be compared with the metric.
@@ -6992,6 +7209,7 @@ declare namespace Iot {
   export type Parameters = {[key: string]: Value};
   export type PartitionKey = string;
   export type PayloadField = string;
+  export type PayloadVersion = string;
   export type Percent = number;
   export type PercentList = Percent[];
   export interface PercentPair {
@@ -7075,6 +7293,16 @@ declare namespace Iot {
   export type ProcessingTargetNameList = ProcessingTargetName[];
   export type Protocol = "MQTT"|"HTTP"|string;
   export type Protocols = Protocol[];
+  export interface ProvisioningHook {
+    /**
+     * The payload that was sent to the target function.  Note: Only Lambda functions are currently supported.
+     */
+    payloadVersion?: PayloadVersion;
+    /**
+     * The ARN of the target function.  Note: Only Lambda functions are currently supported.
+     */
+    targetArn: TargetArn;
+  }
   export type ProvisioningTemplateListing = ProvisioningTemplateSummary[];
   export interface ProvisioningTemplateSummary {
     /**
@@ -7199,6 +7427,10 @@ declare namespace Iot {
      * Information about the registration configuration.
      */
     registrationConfig?: RegistrationConfig;
+    /**
+     * Metadata which can be used to manage the CA certificate.  For URI Request parameters use format: ...key1=value1&amp;key2=value2... For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..." For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..." 
+     */
+    tags?: TagList;
   }
   export interface RegisterCACertificateResponse {
     /**
@@ -7238,19 +7470,39 @@ declare namespace Iot {
      */
     certificateId?: CertificateId;
   }
+  export interface RegisterCertificateWithoutCARequest {
+    /**
+     * The certificate data, in PEM format.
+     */
+    certificatePem: CertificatePem;
+    /**
+     * The status of the register certificate request.
+     */
+    status?: CertificateStatus;
+  }
+  export interface RegisterCertificateWithoutCAResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the registered certificate.
+     */
+    certificateArn?: CertificateArn;
+    /**
+     * The ID of the registered certificate. (The last part of the certificate ARN contains the certificate ID.
+     */
+    certificateId?: CertificateId;
+  }
   export interface RegisterThingRequest {
     /**
      * The provisioning template. See Provisioning Devices That Have Device Certificates for more information.
      */
     templateBody: TemplateBody;
     /**
-     * The parameters for provisioning a thing. See Programmatic Provisioning for more information.
+     * The parameters for provisioning a thing. See Provisioning Templates for more information.
      */
     parameters?: Parameters;
   }
   export interface RegisterThingResponse {
     /**
-     * .
+     * The certificate data, in PEM format.
      */
     certificatePem?: CertificatePem;
     /**
@@ -7300,6 +7552,7 @@ declare namespace Iot {
   export type RelatedResources = RelatedResource[];
   export type RemoveAuthorizerConfig = boolean;
   export type RemoveAutoRegistration = boolean;
+  export type RemoveHook = boolean;
   export interface RemoveThingFromBillingGroupRequest {
     /**
      * The name of the billing group.
@@ -7982,7 +8235,7 @@ declare namespace Iot {
     /**
      * The tag's key.
      */
-    Key?: TagKey;
+    Key: TagKey;
     /**
      * The tag's value.
      */
@@ -8110,7 +8363,7 @@ declare namespace Iot {
      */
     token?: Token;
     /**
-     * The signature made with the token and your custom authentication service's private key.
+     * The signature made with the token and your custom authentication service's private key. This value must be Base-64-encoded.
      */
     tokenSignature?: TokenSignature;
     /**
@@ -8672,6 +8925,42 @@ declare namespace Iot {
      */
     action: DeviceCertificateUpdateAction;
   }
+  export interface UpdateDimensionRequest {
+    /**
+     * A unique identifier for the dimension. Choose something that describes the type and value to make it easy to remember what it does.
+     */
+    name: DimensionName;
+    /**
+     * Specifies the value or list of values for the dimension. For TOPIC_FILTER dimensions, this is a pattern used to match the MQTT topic (for example, "admin/#").
+     */
+    stringValues: DimensionStringValues;
+  }
+  export interface UpdateDimensionResponse {
+    /**
+     * A unique identifier for the dimension.
+     */
+    name?: DimensionName;
+    /**
+     * The ARN (Amazon resource name) of the created dimension.
+     */
+    arn?: DimensionArn;
+    /**
+     * The type of the dimension.
+     */
+    type?: DimensionType;
+    /**
+     * The value or list of values used to scope the dimension. For example, for topic filters, this is the pattern used to match the MQTT topic name.
+     */
+    stringValues?: DimensionStringValues;
+    /**
+     * The date and time, in milliseconds since epoch, when the dimension was initially created.
+     */
+    creationDate?: Timestamp;
+    /**
+     * The date and time, in milliseconds since epoch, when the dimension was most recently updated.
+     */
+    lastModifiedDate?: Timestamp;
+  }
   export interface UpdateDomainConfigurationRequest {
     /**
      * The name of the domain configuration to be updated.
@@ -8823,6 +9112,14 @@ declare namespace Iot {
      * The ARN of the role associated with the provisioning template. This IoT role grants permission to provision a device.
      */
     provisioningRoleArn?: RoleArn;
+    /**
+     * Updates the pre-provisioning hook template.
+     */
+    preProvisioningHook?: ProvisioningHook;
+    /**
+     * Removes pre-provisioning hook template.
+     */
+    removePreProvisioningHook?: RemoveHook;
   }
   export interface UpdateProvisioningTemplateResponse {
   }
@@ -8896,9 +9193,13 @@ declare namespace Iot {
      */
     alertTargets?: AlertTargets;
     /**
-     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.
+     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.  Note: This API field is deprecated. Please use UpdateSecurityProfileRequest$additionalMetricsToRetainV2 instead.
      */
     additionalMetricsToRetain?: AdditionalMetricsToRetainList;
+    /**
+     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.
+     */
+    additionalMetricsToRetainV2?: AdditionalMetricsToRetainV2List;
     /**
      * If true, delete all behaviors defined for this security profile. If any behaviors are defined in the current invocation, an exception occurs.
      */
@@ -8938,9 +9239,13 @@ declare namespace Iot {
      */
     alertTargets?: AlertTargets;
     /**
-     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the security profile's behaviors, but it is also retained for any metric specified here.
+     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the security profile's behaviors, but it is also retained for any metric specified here.  Note: This API field is deprecated. Please use UpdateSecurityProfileResponse$additionalMetricsToRetainV2 instead.
      */
     additionalMetricsToRetain?: AdditionalMetricsToRetainList;
+    /**
+     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.
+     */
+    additionalMetricsToRetainV2?: AdditionalMetricsToRetainV2List;
     /**
      * The updated version of the security profile.
      */
@@ -9032,7 +9337,7 @@ declare namespace Iot {
   }
   export interface UpdateThingRequest {
     /**
-     * The name of the thing to update.
+     * The name of the thing to update. You can't change a thing's name. To change a thing's name, you must create a new thing, give it the new name, and then delete the old thing.
      */
     thingName: ThingName;
     /**

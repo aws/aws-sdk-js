@@ -645,7 +645,7 @@
           "shape": "ScheduleDefinitionTypeUnsupportedFault"
         }
       ],
-      "documentation": "<p>Creates a snapshot schedule with the rate of every 12 hours.</p>"
+      "documentation": "<p>Create a snapshot schedule that can be associated to a cluster and which overrides the default system backup schedule. </p>"
     },
     "CreateTags": {
       "name": "CreateTags",
@@ -668,6 +668,44 @@
         }
       ],
       "documentation": "<p>Adds tags to a cluster.</p> <p>A resource can have up to 50 tags. If you try to create more than 50 tags for a resource, you will receive an error and the attempt will fail.</p> <p>If you specify a key that already exists for the resource, the value for that key will be updated with the new value.</p>"
+    },
+    "CreateUsageLimit": {
+      "name": "CreateUsageLimit",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateUsageLimitMessage"
+      },
+      "output": {
+        "shape": "UsageLimit",
+        "resultWrapper": "CreateUsageLimitResult"
+      },
+      "errors": [
+        {
+          "shape": "ClusterNotFoundFault"
+        },
+        {
+          "shape": "InvalidClusterStateFault"
+        },
+        {
+          "shape": "LimitExceededFault"
+        },
+        {
+          "shape": "UsageLimitAlreadyExistsFault"
+        },
+        {
+          "shape": "InvalidUsageLimitFault"
+        },
+        {
+          "shape": "TagLimitExceededFault"
+        },
+        {
+          "shape": "UnsupportedOperationFault"
+        }
+      ],
+      "documentation": "<p>Creates a usage limit for a specified Amazon Redshift feature on a cluster. The usage limit is identified by the returned usage limit identifier.</p>"
     },
     "DeleteCluster": {
       "name": "DeleteCluster",
@@ -916,6 +954,25 @@
         }
       ],
       "documentation": "<p>Deletes tags from a resource. You must provide the ARN of the resource from which you want to delete the tag or tags.</p>"
+    },
+    "DeleteUsageLimit": {
+      "name": "DeleteUsageLimit",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteUsageLimitMessage"
+      },
+      "errors": [
+        {
+          "shape": "UsageLimitNotFoundFault"
+        },
+        {
+          "shape": "UnsupportedOperationFault"
+        }
+      ],
+      "documentation": "<p>Deletes a usage limit from a cluster.</p>"
     },
     "DescribeAccountAttributes": {
       "name": "DescribeAccountAttributes",
@@ -1500,6 +1557,29 @@
       ],
       "documentation": "<p>Returns a list of tags. You can return tags from a specific resource by specifying an ARN, or you can return all tags for a given type of resource, such as clusters, snapshots, and so on.</p> <p>The following are limitations for <code>DescribeTags</code>: </p> <ul> <li> <p>You cannot specify an ARN and a resource-type value together in the same request.</p> </li> <li> <p>You cannot use the <code>MaxRecords</code> and <code>Marker</code> parameters together with the ARN parameter.</p> </li> <li> <p>The <code>MaxRecords</code> parameter can be a range from 10 to 50 results to return in a request.</p> </li> </ul> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all resources that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all resources that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, resources are returned regardless of whether they have tag keys or values associated with them.</p>"
     },
+    "DescribeUsageLimits": {
+      "name": "DescribeUsageLimits",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeUsageLimitsMessage"
+      },
+      "output": {
+        "shape": "UsageLimitList",
+        "resultWrapper": "DescribeUsageLimitsResult"
+      },
+      "errors": [
+        {
+          "shape": "ClusterNotFoundFault"
+        },
+        {
+          "shape": "UnsupportedOperationFault"
+        }
+      ],
+      "documentation": "<p>Shows usage limits on a cluster. Results are filtered based on the combination of input usage limit identifier, cluster identifier, and feature type parameters:</p> <ul> <li> <p>If usage limit identifier, cluster identifier, and feature type are not provided, then all usage limit objects for the current account in the current region are returned.</p> </li> <li> <p>If usage limit identifier is provided, then the corresponding usage limit object is returned.</p> </li> <li> <p>If cluster identifier is provided, then all usage limit objects for the specified cluster are returned.</p> </li> <li> <p>If cluster identifier and feature type are provided, then all usage limit objects for the combination of cluster and feature are returned.</p> </li> </ul>"
+    },
     "DisableLogging": {
       "name": "DisableLogging",
       "http": {
@@ -2078,6 +2158,32 @@
       ],
       "documentation": "<p>Modifies a snapshot schedule. Any schedule associated with a cluster is modified asynchronously.</p>"
     },
+    "ModifyUsageLimit": {
+      "name": "ModifyUsageLimit",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyUsageLimitMessage"
+      },
+      "output": {
+        "shape": "UsageLimit",
+        "resultWrapper": "ModifyUsageLimitResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidUsageLimitFault"
+        },
+        {
+          "shape": "UsageLimitNotFoundFault"
+        },
+        {
+          "shape": "UnsupportedOperationFault"
+        }
+      ],
+      "documentation": "<p>Modifies a usage limit in a cluster. You can't modify the feature type or period of a usage limit.</p>"
+    },
     "PauseCluster": {
       "name": "PauseCluster",
       "http": {
@@ -2218,7 +2324,7 @@
           "shape": "LimitExceededFault"
         }
       ],
-      "documentation": "<p>Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method. </p> <p>Elastic resize operations have the following restrictions:</p> <ul> <li> <p>You can only resize clusters of the following types:</p> <ul> <li> <p>dc2.large</p> </li> <li> <p>dc2.8xlarge</p> </li> <li> <p>ds2.xlarge</p> </li> <li> <p>ds2.8xlarge</p> </li> <li> <p>ra3.16xlarge</p> </li> </ul> </li> <li> <p>The type of nodes that you add must match the node type for the cluster.</p> </li> </ul>"
+      "documentation": "<p>Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method. </p> <p>Elastic resize operations have the following restrictions:</p> <ul> <li> <p>You can only resize clusters of the following types:</p> <ul> <li> <p>dc2.large</p> </li> <li> <p>dc2.8xlarge</p> </li> <li> <p>ds2.xlarge</p> </li> <li> <p>ds2.8xlarge</p> </li> <li> <p>ra3.4xlarge</p> </li> <li> <p>ra3.16xlarge</p> </li> </ul> </li> <li> <p>The type of nodes that you add must match the node type for the cluster.</p> </li> </ul>"
     },
     "RestoreFromClusterSnapshot": {
       "name": "RestoreFromClusterSnapshot",
@@ -3435,7 +3541,7 @@
         },
         "NodeType": {
           "shape": "String",
-          "documentation": "<p>The node type to be provisioned for the cluster. For information about node types, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes\"> Working with Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p> <p>Valid Values: <code>ds2.xlarge</code> | <code>ds2.8xlarge</code> | <code>dc1.large</code> | <code>dc1.8xlarge</code> | <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>ra3.16xlarge</code> </p>"
+          "documentation": "<p>The node type to be provisioned for the cluster. For information about node types, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes\"> Working with Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p> <p>Valid Values: <code>ds2.xlarge</code> | <code>ds2.8xlarge</code> | <code>dc1.large</code> | <code>dc1.8xlarge</code> | <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code> </p>"
         },
         "MasterUsername": {
           "shape": "String",
@@ -3930,6 +4036,45 @@
       },
       "documentation": "<p>Contains the output from the <code>CreateTags</code> action. </p>"
     },
+    "CreateUsageLimitMessage": {
+      "type": "structure",
+      "required": [
+        "ClusterIdentifier",
+        "FeatureType",
+        "LimitType",
+        "Amount"
+      ],
+      "members": {
+        "ClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the cluster that you want to limit usage.</p>"
+        },
+        "FeatureType": {
+          "shape": "UsageLimitFeatureType",
+          "documentation": "<p>The Amazon Redshift feature that you want to limit.</p>"
+        },
+        "LimitType": {
+          "shape": "UsageLimitLimitType",
+          "documentation": "<p>The type of limit. Depending on the feature type, this can be based on a time duration or data size. If <code>FeatureType</code> is <code>spectrum</code>, then <code>LimitType</code> must be <code>data-scanned</code>. If <code>FeatureType</code> is <code>concurrency-scaling</code>, then <code>LimitType</code> must be <code>time</code>. </p>"
+        },
+        "Amount": {
+          "shape": "Long",
+          "documentation": "<p>The limit amount. If time-based, this amount is in minutes. If data-based, this amount is in terabytes (TB). The value must be a positive number. </p>"
+        },
+        "Period": {
+          "shape": "UsageLimitPeriod",
+          "documentation": "<p>The time period that the amount applies to. A <code>weekly</code> period begins on Sunday. The default is <code>monthly</code>. </p>"
+        },
+        "BreachAction": {
+          "shape": "UsageLimitBreachAction",
+          "documentation": "<p>The action that Amazon Redshift takes when the limit is reached. The default is log. For more information about this parameter, see <a>UsageLimit</a>.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>A list of tag instances.</p>"
+        }
+      }
+    },
     "CustomerStorageMessage": {
       "type": "structure",
       "members": {
@@ -4221,6 +4366,18 @@
         }
       },
       "documentation": "<p>Contains the output from the <code>DeleteTags</code> action. </p>"
+    },
+    "DeleteUsageLimitMessage": {
+      "type": "structure",
+      "required": [
+        "UsageLimitId"
+      ],
+      "members": {
+        "UsageLimitId": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the usage limit to delete.</p>"
+        }
+      }
     },
     "DescribeAccountAttributesMessage": {
       "type": "structure",
@@ -4898,6 +5055,39 @@
         }
       },
       "documentation": "<p/>"
+    },
+    "DescribeUsageLimitsMessage": {
+      "type": "structure",
+      "members": {
+        "UsageLimitId": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the usage limit to describe.</p>"
+        },
+        "ClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the cluster for which you want to describe usage limits.</p>"
+        },
+        "FeatureType": {
+          "shape": "UsageLimitFeatureType",
+          "documentation": "<p>The feature type for which you want to describe usage limits.</p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned marker value. </p> <p>Default: <code>100</code> </p> <p>Constraints: minimum 20, maximum 100.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeUsageLimits</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+        },
+        "TagKeys": {
+          "shape": "TagKeyList",
+          "documentation": "<p>A tag key or keys for which you want to return all matching usage limit objects that are associated with the specified key or keys. For example, suppose that you have parameter groups that are tagged with keys called <code>owner</code> and <code>environment</code>. If you specify both of these tag keys in the request, Amazon Redshift returns a response with the usage limit objects have either or both of these tag keys associated with them.</p>"
+        },
+        "TagValues": {
+          "shape": "TagValueList",
+          "documentation": "<p>A tag value or values for which you want to return all matching usage limit objects that are associated with the specified tag value or values. For example, suppose that you have parameter groups that are tagged with values called <code>admin</code> and <code>test</code>. If you specify both of these tag values in the request, Amazon Redshift returns a response with the usage limit objects that have either or both of these tag values associated with them.</p>"
+        }
+      }
     },
     "DisableLoggingMessage": {
       "type": "structure",
@@ -5660,7 +5850,7 @@
         },
         "NodeType": {
           "shape": "String",
-          "documentation": "<p>The new node type of the cluster. If you specify a new node type, you must also specify the number of nodes parameter.</p> <p> For more information about resizing clusters, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html\">Resizing Clusters in Amazon Redshift</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>Valid Values: <code>ds2.xlarge</code> | <code>ds2.8xlarge</code> | <code>dc1.large</code> | <code>dc1.8xlarge</code> | <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>ra3.16xlarge</code> </p>"
+          "documentation": "<p>The new node type of the cluster. If you specify a new node type, you must also specify the number of nodes parameter.</p> <p> For more information about resizing clusters, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html\">Resizing Clusters in Amazon Redshift</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>Valid Values: <code>ds2.xlarge</code> | <code>ds2.8xlarge</code> | <code>dc1.large</code> | <code>dc1.8xlarge</code> | <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code> </p>"
         },
         "NumberOfNodes": {
           "shape": "IntegerOptional",
@@ -5974,6 +6164,26 @@
         "ScheduleDefinitions": {
           "shape": "ScheduleDefinitionList",
           "documentation": "<p>An updated list of schedule definitions. A schedule definition is made up of schedule expressions, for example, \"cron(30 12 *)\" or \"rate(12 hours)\".</p>"
+        }
+      }
+    },
+    "ModifyUsageLimitMessage": {
+      "type": "structure",
+      "required": [
+        "UsageLimitId"
+      ],
+      "members": {
+        "UsageLimitId": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the usage limit to modify.</p>"
+        },
+        "Amount": {
+          "shape": "LongOptional",
+          "documentation": "<p>The new limit amount. For more information about this parameter, see <a>UsageLimit</a>. </p>"
+        },
+        "BreachAction": {
+          "shape": "UsageLimitBreachAction",
+          "documentation": "<p>The new action that Amazon Redshift takes when the limit is reached. For more information about this parameter, see <a>UsageLimit</a>. </p>"
         }
       }
     },
@@ -6701,7 +6911,7 @@
         },
         "NodeType": {
           "shape": "String",
-          "documentation": "<p>The node type that the restored cluster will be provisioned with.</p> <p>Default: The node type of the cluster from which the snapshot was taken. You can modify this if you are using any DS node type. In that case, you can choose to restore into another DS node type of the same size. For example, you can restore ds1.8xlarge into ds2.8xlarge, or ds1.xlarge into ds2.xlarge. If you have a DC instance type, you must restore into that same instance type and size. In other words, you can only restore a dc1.large instance type into another dc1.large instance type or dc2.large instance type. You can't restore dc1.8xlarge to dc2.8xlarge. First restore to a dc1.8xlareg cluster, then resize to a dc2.8large cluster. For more information about node types, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes\"> About Clusters and Nodes</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>"
+          "documentation": "<p>The node type that the restored cluster will be provisioned with.</p> <p>Default: The node type of the cluster from which the snapshot was taken. You can modify this if you are using any DS node type. In that case, you can choose to restore into another DS node type of the same size. For example, you can restore ds1.8xlarge into ds2.8xlarge, or ds1.xlarge into ds2.xlarge. If you have a DC instance type, you must restore into that same instance type and size. In other words, you can only restore a dc1.large instance type into another dc1.large instance type or dc2.large instance type. You can't restore dc1.8xlarge to dc2.8xlarge. First restore to a dc1.8xlarge cluster, then resize to a dc2.8large cluster. For more information about node types, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes\"> About Clusters and Nodes</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>"
         },
         "EnhancedVpcRouting": {
           "shape": "BooleanOptional",
@@ -7714,6 +7924,93 @@
         }
       },
       "documentation": "<p>A maintenance track that you can switch the current track to.</p>"
+    },
+    "UsageLimit": {
+      "type": "structure",
+      "members": {
+        "UsageLimitId": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the usage limit.</p>"
+        },
+        "ClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the cluster with a usage limit.</p>"
+        },
+        "FeatureType": {
+          "shape": "UsageLimitFeatureType",
+          "documentation": "<p>The Amazon Redshift feature to which the limit applies.</p>"
+        },
+        "LimitType": {
+          "shape": "UsageLimitLimitType",
+          "documentation": "<p>The type of limit. Depending on the feature type, this can be based on a time duration or data size.</p>"
+        },
+        "Amount": {
+          "shape": "Long",
+          "documentation": "<p>The limit amount. If time-based, this amount is in minutes. If data-based, this amount is in terabytes (TB).</p>"
+        },
+        "Period": {
+          "shape": "UsageLimitPeriod",
+          "documentation": "<p>The time period that the amount applies to. A <code>weekly</code> period begins on Sunday. The default is <code>monthly</code>. </p>"
+        },
+        "BreachAction": {
+          "shape": "UsageLimitBreachAction",
+          "documentation": "<p>The action that Amazon Redshift takes when the limit is reached. Possible values are: </p> <ul> <li> <p> <b>log</b> - To log an event in a system table. The default is log.</p> </li> <li> <p> <b>emit-metric</b> - To emit CloudWatch metrics.</p> </li> <li> <p> <b>disable</b> - To disable the feature until the next usage period begins.</p> </li> </ul>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>A list of tag instances.</p>"
+        }
+      },
+      "documentation": "<p>Describes a usage limit object for a cluster. </p>"
+    },
+    "UsageLimitBreachAction": {
+      "type": "string",
+      "enum": [
+        "log",
+        "emit-metric",
+        "disable"
+      ]
+    },
+    "UsageLimitFeatureType": {
+      "type": "string",
+      "enum": [
+        "spectrum",
+        "concurrency-scaling"
+      ]
+    },
+    "UsageLimitLimitType": {
+      "type": "string",
+      "enum": [
+        "time",
+        "data-scanned"
+      ]
+    },
+    "UsageLimitList": {
+      "type": "structure",
+      "members": {
+        "UsageLimits": {
+          "shape": "UsageLimits",
+          "documentation": "<p>Contains the output from the <a>DescribeUsageLimits</a> action. </p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the <code>Marker</code> parameter and retrying the command. If the <code>Marker</code> field is empty, all response records have been retrieved for the request. </p>"
+        }
+      }
+    },
+    "UsageLimitPeriod": {
+      "type": "string",
+      "enum": [
+        "daily",
+        "weekly",
+        "monthly"
+      ]
+    },
+    "UsageLimits": {
+      "type": "list",
+      "member": {
+        "shape": "UsageLimit"
+      }
     },
     "ValueStringList": {
       "type": "list",

@@ -47,7 +47,7 @@ declare namespace PersonalizeRuntime {
      */
     userId: UserID;
     /**
-     * The contextual metadata to use when getting recommendations. Contextual metadata includes any interaction information that might be relevant when getting a user's recommendations, such as the user's current location or device type. For more information, see Contextual Metadata.
+     * The contextual metadata to use when getting recommendations. Contextual metadata includes any interaction information that might be relevant when getting a user's recommendations, such as the user's current location or device type.
      */
     context?: Context;
   }
@@ -75,7 +75,7 @@ declare namespace PersonalizeRuntime {
      */
     numResults?: NumResults;
     /**
-     * The contextual metadata to use when getting recommendations. Contextual metadata includes any interaction information that might be relevant when getting a user's recommendations, such as the user's current location or device type. For more information, see Contextual Metadata.
+     * The contextual metadata to use when getting recommendations. Contextual metadata includes any interaction information that might be relevant when getting a user's recommendations, such as the user's current location or device type.
      */
     context?: Context;
   }
@@ -94,7 +94,12 @@ declare namespace PersonalizeRuntime {
      * The recommended item ID.
      */
     itemId?: ItemID;
+    /**
+     * A numeric representation of the model's certainty in the item's suitability. For more information on scoring logic, see how-scores-work.
+     */
+    score?: Score;
   }
+  export type Score = number;
   export type UserID = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

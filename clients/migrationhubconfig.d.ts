@@ -20,11 +20,11 @@ declare class MigrationHubConfig extends Service {
    */
   createHomeRegionControl(callback?: (err: AWSError, data: MigrationHubConfig.Types.CreateHomeRegionControlResult) => void): Request<MigrationHubConfig.Types.CreateHomeRegionControlResult, AWSError>;
   /**
-   * This API permits filtering on the ControlId, HomeRegion, and RegionControlScope fields.
+   * This API permits filtering on the ControlId and HomeRegion fields.
    */
   describeHomeRegionControls(params: MigrationHubConfig.Types.DescribeHomeRegionControlsRequest, callback?: (err: AWSError, data: MigrationHubConfig.Types.DescribeHomeRegionControlsResult) => void): Request<MigrationHubConfig.Types.DescribeHomeRegionControlsResult, AWSError>;
   /**
-   * This API permits filtering on the ControlId, HomeRegion, and RegionControlScope fields.
+   * This API permits filtering on the ControlId and HomeRegion fields.
    */
   describeHomeRegionControls(callback?: (err: AWSError, data: MigrationHubConfig.Types.DescribeHomeRegionControlsResult) => void): Request<MigrationHubConfig.Types.DescribeHomeRegionControlsResult, AWSError>;
   /**

@@ -173,11 +173,11 @@ declare class CloudWatch extends Service {
    */
   listMetrics(callback?: (err: AWSError, data: CloudWatch.Types.ListMetricsOutput) => void): Request<CloudWatch.Types.ListMetricsOutput, AWSError>;
   /**
-   * Displays the tags associated with a CloudWatch resource. Alarms support tagging.
+   * Displays the tags associated with a CloudWatch resource. Currently, alarms and Contributor Insights rules support tagging.
    */
   listTagsForResource(params: CloudWatch.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: CloudWatch.Types.ListTagsForResourceOutput) => void): Request<CloudWatch.Types.ListTagsForResourceOutput, AWSError>;
   /**
-   * Displays the tags associated with a CloudWatch resource. Alarms support tagging.
+   * Displays the tags associated with a CloudWatch resource. Currently, alarms and Contributor Insights rules support tagging.
    */
   listTagsForResource(callback?: (err: AWSError, data: CloudWatch.Types.ListTagsForResourceOutput) => void): Request<CloudWatch.Types.ListTagsForResourceOutput, AWSError>;
   /**
@@ -237,11 +237,11 @@ declare class CloudWatch extends Service {
    */
   setAlarmState(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Assigns one or more tags (key-value pairs) to the specified CloudWatch resource. Currently, the only CloudWatch resources that can be tagged are alarms. Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters. You can use the TagResource action with an alarm that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a resource.
+   * Assigns one or more tags (key-value pairs) to the specified CloudWatch resource. Currently, the only CloudWatch resources that can be tagged are alarms and Contributor Insights rules. Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters. You can use the TagResource action with an alarm that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a CloudWatch resource.
    */
   tagResource(params: CloudWatch.Types.TagResourceInput, callback?: (err: AWSError, data: CloudWatch.Types.TagResourceOutput) => void): Request<CloudWatch.Types.TagResourceOutput, AWSError>;
   /**
-   * Assigns one or more tags (key-value pairs) to the specified CloudWatch resource. Currently, the only CloudWatch resources that can be tagged are alarms. Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters. You can use the TagResource action with an alarm that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a resource.
+   * Assigns one or more tags (key-value pairs) to the specified CloudWatch resource. Currently, the only CloudWatch resources that can be tagged are alarms and Contributor Insights rules. Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters. You can use the TagResource action with an alarm that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a CloudWatch resource.
    */
   tagResource(callback?: (err: AWSError, data: CloudWatch.Types.TagResourceOutput) => void): Request<CloudWatch.Types.TagResourceOutput, AWSError>;
   /**
@@ -324,7 +324,7 @@ declare namespace CloudWatch {
     /**
      * The statistic associated with the anomaly detection model.
      */
-    Stat?: Stat;
+    Stat?: AnomalyDetectorMetricStat;
     /**
      * The configuration specifies details about how the anomaly detection model is to be trained, including time ranges to exclude from use for training the model, and the time zone to use for the metric.
      */
@@ -345,6 +345,7 @@ declare namespace CloudWatch {
     MetricTimezone?: AnomalyDetectorMetricTimezone;
   }
   export type AnomalyDetectorExcludedTimeRanges = Range[];
+  export type AnomalyDetectorMetricStat = string;
   export type AnomalyDetectorMetricTimezone = string;
   export type AnomalyDetectorStateValue = "PENDING_TRAINING"|"TRAINED_INSUFFICIENT_DATA"|"TRAINED"|string;
   export type AnomalyDetectors = AnomalyDetector[];
@@ -503,7 +504,7 @@ declare namespace CloudWatch {
     /**
      * The statistic associated with the anomaly detection model to delete.
      */
-    Stat: Stat;
+    Stat: AnomalyDetectorMetricStat;
   }
   export interface DeleteAnomalyDetectorOutput {
   }
@@ -1111,7 +1112,7 @@ declare namespace CloudWatch {
   }
   export interface ListTagsForResourceInput {
     /**
-     * The ARN of the CloudWatch resource that you want to view tags for. For more information on ARN format, see Example ARNs in the Amazon Web Services General Reference.
+     * The ARN of the CloudWatch resource that you want to view tags for. The ARN format of an alarm is arn:aws:cloudwatch:Region:account-id:alarm:alarm-name   The ARN format of a Contributor Insights rule is arn:aws:cloudwatch:Region:account-id:insight-rule:insight-rule-name   For more information on ARN format, see  Resource Types Defined by Amazon CloudWatch in the Amazon Web Services General Reference.
      */
     ResourceARN: AmazonResourceName;
   }
@@ -1418,7 +1419,7 @@ declare namespace CloudWatch {
     /**
      * The statistic to use for the metric and the anomaly detection model.
      */
-    Stat: Stat;
+    Stat: AnomalyDetectorMetricStat;
     /**
      * The configuration specifies details about how the anomaly detection model is to be trained, including time ranges to exclude when training and updating the model. You can specify as many as 10 time ranges. The configuration can also include the time zone to use for the metric. You can in
      */
@@ -1489,6 +1490,10 @@ declare namespace CloudWatch {
      * The definition of the rule, as a JSON object. For details on the valid syntax, see Contributor Insights Rule Syntax.
      */
     RuleDefinition: InsightRuleDefinition;
+    /**
+     * A list of key-value pairs to associate with the Contributor Insights rule. You can associate as many as 50 tags with a rule. Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only the resources that have certain tag values. To be able to associate tags with a rule, you must have the cloudwatch:TagResource permission in addition to the cloudwatch:PutInsightRule permission. If you are using this operation to update an existing Contributor Insights rule, any tags you specify in this parameter are ignored. To change the tags of an existing rule, use TagResource.
+     */
+    Tags?: TagList;
   }
   export interface PutInsightRuleOutput {
   }
@@ -1667,7 +1672,7 @@ declare namespace CloudWatch {
   export type TagList = Tag[];
   export interface TagResourceInput {
     /**
-     * The ARN of the CloudWatch alarm that you're adding tags to. The ARN format is arn:aws:cloudwatch:Region:account-id:alarm:alarm-name  
+     * The ARN of the CloudWatch resource that you're adding tags to. The ARN format of an alarm is arn:aws:cloudwatch:Region:account-id:alarm:alarm-name   The ARN format of a Contributor Insights rule is arn:aws:cloudwatch:Region:account-id:insight-rule:insight-rule-name   For more information on ARN format, see  Resource Types Defined by Amazon CloudWatch in the Amazon Web Services General Reference.
      */
     ResourceARN: AmazonResourceName;
     /**
@@ -1684,7 +1689,7 @@ declare namespace CloudWatch {
   export type TreatMissingData = string;
   export interface UntagResourceInput {
     /**
-     * The ARN of the CloudWatch resource that you're removing tags from. For more information on ARN format, see Example ARNs in the Amazon Web Services General Reference.
+     * The ARN of the CloudWatch resource that you're removing tags from. The ARN format of an alarm is arn:aws:cloudwatch:Region:account-id:alarm:alarm-name   The ARN format of a Contributor Insights rule is arn:aws:cloudwatch:Region:account-id:insight-rule:insight-rule-name   For more information on ARN format, see  Resource Types Defined by Amazon CloudWatch in the Amazon Web Services General Reference.
      */
     ResourceARN: AmazonResourceName;
     /**

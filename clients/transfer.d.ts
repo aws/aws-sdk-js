@@ -12,27 +12,27 @@ declare class Transfer extends Service {
   constructor(options?: Transfer.Types.ClientConfiguration)
   config: Config & Transfer.Types.ClientConfiguration;
   /**
-   * Instantiates an autoscaling virtual server based on Secure File Transfer Protocol (SFTP) in AWS. When you make updates to your server or when you work with users, use the service-generated ServerId property that is assigned to the newly created server.
+   * Instantiates an autoscaling virtual server based on the selected file transfer protocol in AWS. When you make updates to your file transfer protocol-enabled server or when you work with users, use the service-generated ServerId property that is assigned to the newly created server.
    */
   createServer(params: Transfer.Types.CreateServerRequest, callback?: (err: AWSError, data: Transfer.Types.CreateServerResponse) => void): Request<Transfer.Types.CreateServerResponse, AWSError>;
   /**
-   * Instantiates an autoscaling virtual server based on Secure File Transfer Protocol (SFTP) in AWS. When you make updates to your server or when you work with users, use the service-generated ServerId property that is assigned to the newly created server.
+   * Instantiates an autoscaling virtual server based on the selected file transfer protocol in AWS. When you make updates to your file transfer protocol-enabled server or when you work with users, use the service-generated ServerId property that is assigned to the newly created server.
    */
   createServer(callback?: (err: AWSError, data: Transfer.Types.CreateServerResponse) => void): Request<Transfer.Types.CreateServerResponse, AWSError>;
   /**
-   * Creates a user and associates them with an existing Secure File Transfer Protocol (SFTP) server. You can only create and associate users with SFTP servers that have the IdentityProviderType set to SERVICE_MANAGED. Using parameters for CreateUser, you can specify the user name, set the home directory, store the user's public key, and assign the user's AWS Identity and Access Management (IAM) role. You can also optionally add a scope-down policy, and assign metadata with tags that can be used to group and search for users.
+   * Creates a user and associates them with an existing file transfer protocol-enabled server. You can only create and associate users with servers that have the IdentityProviderType set to SERVICE_MANAGED. Using parameters for CreateUser, you can specify the user name, set the home directory, store the user's public key, and assign the user's AWS Identity and Access Management (IAM) role. You can also optionally add a scope-down policy, and assign metadata with tags that can be used to group and search for users.
    */
   createUser(params: Transfer.Types.CreateUserRequest, callback?: (err: AWSError, data: Transfer.Types.CreateUserResponse) => void): Request<Transfer.Types.CreateUserResponse, AWSError>;
   /**
-   * Creates a user and associates them with an existing Secure File Transfer Protocol (SFTP) server. You can only create and associate users with SFTP servers that have the IdentityProviderType set to SERVICE_MANAGED. Using parameters for CreateUser, you can specify the user name, set the home directory, store the user's public key, and assign the user's AWS Identity and Access Management (IAM) role. You can also optionally add a scope-down policy, and assign metadata with tags that can be used to group and search for users.
+   * Creates a user and associates them with an existing file transfer protocol-enabled server. You can only create and associate users with servers that have the IdentityProviderType set to SERVICE_MANAGED. Using parameters for CreateUser, you can specify the user name, set the home directory, store the user's public key, and assign the user's AWS Identity and Access Management (IAM) role. You can also optionally add a scope-down policy, and assign metadata with tags that can be used to group and search for users.
    */
   createUser(callback?: (err: AWSError, data: Transfer.Types.CreateUserResponse) => void): Request<Transfer.Types.CreateUserResponse, AWSError>;
   /**
-   * Deletes the Secure File Transfer Protocol (SFTP) server that you specify. No response returns from this operation.
+   * Deletes the file transfer protocol-enabled server that you specify. No response returns from this operation.
    */
   deleteServer(params: Transfer.Types.DeleteServerRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the Secure File Transfer Protocol (SFTP) server that you specify. No response returns from this operation.
+   * Deletes the file transfer protocol-enabled server that you specify. No response returns from this operation.
    */
   deleteServer(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -44,43 +44,43 @@ declare class Transfer extends Service {
    */
   deleteSshPublicKey(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the user belonging to the server you specify. No response returns from this operation.  When you delete a user from a server, the user's information is lost. 
+   * Deletes the user belonging to a file transfer protocol-enabled server you specify. No response returns from this operation.  When you delete a user from a server, the user's information is lost. 
    */
   deleteUser(params: Transfer.Types.DeleteUserRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the user belonging to the server you specify. No response returns from this operation.  When you delete a user from a server, the user's information is lost. 
+   * Deletes the user belonging to a file transfer protocol-enabled server you specify. No response returns from this operation.  When you delete a user from a server, the user's information is lost. 
    */
   deleteUser(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Describes the server that you specify by passing the ServerId parameter. The response contains a description of the server's properties. When you set EndpointType to VPC, the response will contain the EndpointDetails.
+   * Describes a file transfer protocol-enabled server that you specify by passing the ServerId parameter. The response contains a description of a server's properties. When you set EndpointType to VPC, the response will contain the EndpointDetails.
    */
   describeServer(params: Transfer.Types.DescribeServerRequest, callback?: (err: AWSError, data: Transfer.Types.DescribeServerResponse) => void): Request<Transfer.Types.DescribeServerResponse, AWSError>;
   /**
-   * Describes the server that you specify by passing the ServerId parameter. The response contains a description of the server's properties. When you set EndpointType to VPC, the response will contain the EndpointDetails.
+   * Describes a file transfer protocol-enabled server that you specify by passing the ServerId parameter. The response contains a description of a server's properties. When you set EndpointType to VPC, the response will contain the EndpointDetails.
    */
   describeServer(callback?: (err: AWSError, data: Transfer.Types.DescribeServerResponse) => void): Request<Transfer.Types.DescribeServerResponse, AWSError>;
   /**
-   * Describes the user assigned to a specific server, as identified by its ServerId property. The response from this call returns the properties of the user associated with the ServerId value that was specified.
+   * Describes the user assigned to the specific file transfer protocol-enabled server, as identified by its ServerId property. The response from this call returns the properties of the user associated with the ServerId value that was specified.
    */
   describeUser(params: Transfer.Types.DescribeUserRequest, callback?: (err: AWSError, data: Transfer.Types.DescribeUserResponse) => void): Request<Transfer.Types.DescribeUserResponse, AWSError>;
   /**
-   * Describes the user assigned to a specific server, as identified by its ServerId property. The response from this call returns the properties of the user associated with the ServerId value that was specified.
+   * Describes the user assigned to the specific file transfer protocol-enabled server, as identified by its ServerId property. The response from this call returns the properties of the user associated with the ServerId value that was specified.
    */
   describeUser(callback?: (err: AWSError, data: Transfer.Types.DescribeUserResponse) => void): Request<Transfer.Types.DescribeUserResponse, AWSError>;
   /**
-   * Adds a Secure Shell (SSH) public key to a user account identified by a UserName value assigned to a specific server, identified by ServerId. The response returns the UserName value, the ServerId value, and the name of the SshPublicKeyId.
+   * Adds a Secure Shell (SSH) public key to a user account identified by a UserName value assigned to the specific file transfer protocol-enabled server, identified by ServerId. The response returns the UserName value, the ServerId value, and the name of the SshPublicKeyId.
    */
   importSshPublicKey(params: Transfer.Types.ImportSshPublicKeyRequest, callback?: (err: AWSError, data: Transfer.Types.ImportSshPublicKeyResponse) => void): Request<Transfer.Types.ImportSshPublicKeyResponse, AWSError>;
   /**
-   * Adds a Secure Shell (SSH) public key to a user account identified by a UserName value assigned to a specific server, identified by ServerId. The response returns the UserName value, the ServerId value, and the name of the SshPublicKeyId.
+   * Adds a Secure Shell (SSH) public key to a user account identified by a UserName value assigned to the specific file transfer protocol-enabled server, identified by ServerId. The response returns the UserName value, the ServerId value, and the name of the SshPublicKeyId.
    */
   importSshPublicKey(callback?: (err: AWSError, data: Transfer.Types.ImportSshPublicKeyResponse) => void): Request<Transfer.Types.ImportSshPublicKeyResponse, AWSError>;
   /**
-   * Lists the Secure File Transfer Protocol (SFTP) servers that are associated with your AWS account.
+   * Lists the file transfer protocol-enabled servers that are associated with your AWS account.
    */
   listServers(params: Transfer.Types.ListServersRequest, callback?: (err: AWSError, data: Transfer.Types.ListServersResponse) => void): Request<Transfer.Types.ListServersResponse, AWSError>;
   /**
-   * Lists the Secure File Transfer Protocol (SFTP) servers that are associated with your AWS account.
+   * Lists the file transfer protocol-enabled servers that are associated with your AWS account.
    */
   listServers(callback?: (err: AWSError, data: Transfer.Types.ListServersResponse) => void): Request<Transfer.Types.ListServersResponse, AWSError>;
   /**
@@ -92,27 +92,27 @@ declare class Transfer extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Transfer.Types.ListTagsForResourceResponse) => void): Request<Transfer.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists the users for the server that you specify by passing the ServerId parameter.
+   * Lists the users for a file transfer protocol-enabled server that you specify by passing the ServerId parameter.
    */
   listUsers(params: Transfer.Types.ListUsersRequest, callback?: (err: AWSError, data: Transfer.Types.ListUsersResponse) => void): Request<Transfer.Types.ListUsersResponse, AWSError>;
   /**
-   * Lists the users for the server that you specify by passing the ServerId parameter.
+   * Lists the users for a file transfer protocol-enabled server that you specify by passing the ServerId parameter.
    */
   listUsers(callback?: (err: AWSError, data: Transfer.Types.ListUsersResponse) => void): Request<Transfer.Types.ListUsersResponse, AWSError>;
   /**
-   * Changes the state of a Secure File Transfer Protocol (SFTP) server from OFFLINE to ONLINE. It has no impact on an SFTP server that is already ONLINE. An ONLINE server can accept and process file transfer jobs. The state of STARTING indicates that the server is in an intermediate state, either not fully able to respond, or not fully online. The values of START_FAILED can indicate an error condition.  No response is returned from this call.
+   * Changes the state of a file transfer protocol-enabled server from OFFLINE to ONLINE. It has no impact on a server that is already ONLINE. An ONLINE server can accept and process file transfer jobs. The state of STARTING indicates that the server is in an intermediate state, either not fully able to respond, or not fully online. The values of START_FAILED can indicate an error condition. No response is returned from this call.
    */
   startServer(params: Transfer.Types.StartServerRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Changes the state of a Secure File Transfer Protocol (SFTP) server from OFFLINE to ONLINE. It has no impact on an SFTP server that is already ONLINE. An ONLINE server can accept and process file transfer jobs. The state of STARTING indicates that the server is in an intermediate state, either not fully able to respond, or not fully online. The values of START_FAILED can indicate an error condition.  No response is returned from this call.
+   * Changes the state of a file transfer protocol-enabled server from OFFLINE to ONLINE. It has no impact on a server that is already ONLINE. An ONLINE server can accept and process file transfer jobs. The state of STARTING indicates that the server is in an intermediate state, either not fully able to respond, or not fully online. The values of START_FAILED can indicate an error condition. No response is returned from this call.
    */
   startServer(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Changes the state of an SFTP server from ONLINE to OFFLINE. An OFFLINE server cannot accept and process file transfer jobs. Information tied to your server such as server and user properties are not affected by stopping your server. Stopping a server will not reduce or impact your Secure File Transfer Protocol (SFTP) endpoint billing. The state of STOPPING indicates that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of STOP_FAILED can indicate an error condition. No response is returned from this call.
+   * Changes the state of a file transfer protocol-enabled server from ONLINE to OFFLINE. An OFFLINE server cannot accept and process file transfer jobs. Information tied to your server, such as server and user properties, are not affected by stopping your server. Stopping the server will not reduce or impact your file transfer protocol endpoint billing. The state of STOPPING indicates that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of STOP_FAILED can indicate an error condition. No response is returned from this call.
    */
   stopServer(params: Transfer.Types.StopServerRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Changes the state of an SFTP server from ONLINE to OFFLINE. An OFFLINE server cannot accept and process file transfer jobs. Information tied to your server such as server and user properties are not affected by stopping your server. Stopping a server will not reduce or impact your Secure File Transfer Protocol (SFTP) endpoint billing. The state of STOPPING indicates that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of STOP_FAILED can indicate an error condition. No response is returned from this call.
+   * Changes the state of a file transfer protocol-enabled server from ONLINE to OFFLINE. An OFFLINE server cannot accept and process file transfer jobs. Information tied to your server, such as server and user properties, are not affected by stopping your server. Stopping the server will not reduce or impact your file transfer protocol endpoint billing. The state of STOPPING indicates that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of STOP_FAILED can indicate an error condition. No response is returned from this call.
    */
   stopServer(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class Transfer extends Service {
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * If the IdentityProviderType of the server is API_Gateway, tests whether your API Gateway is set up successfully. We highly recommend that you call this operation to test your authentication method as soon as you create your server. By doing so, you can troubleshoot issues with the API Gateway integration to ensure that your users can successfully use the service.
+   * If the IdentityProviderType of a file transfer protocol-enabled server is API_Gateway, tests whether your API Gateway is set up successfully. We highly recommend that you call this operation to test your authentication method as soon as you create your server. By doing so, you can troubleshoot issues with the API Gateway integration to ensure that your users can successfully use the service.
    */
   testIdentityProvider(params: Transfer.Types.TestIdentityProviderRequest, callback?: (err: AWSError, data: Transfer.Types.TestIdentityProviderResponse) => void): Request<Transfer.Types.TestIdentityProviderResponse, AWSError>;
   /**
-   * If the IdentityProviderType of the server is API_Gateway, tests whether your API Gateway is set up successfully. We highly recommend that you call this operation to test your authentication method as soon as you create your server. By doing so, you can troubleshoot issues with the API Gateway integration to ensure that your users can successfully use the service.
+   * If the IdentityProviderType of a file transfer protocol-enabled server is API_Gateway, tests whether your API Gateway is set up successfully. We highly recommend that you call this operation to test your authentication method as soon as you create your server. By doing so, you can troubleshoot issues with the API Gateway integration to ensure that your users can successfully use the service.
    */
   testIdentityProvider(callback?: (err: AWSError, data: Transfer.Types.TestIdentityProviderResponse) => void): Request<Transfer.Types.TestIdentityProviderResponse, AWSError>;
   /**
@@ -140,11 +140,11 @@ declare class Transfer extends Service {
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the server properties after that server has been created. The UpdateServer call returns the ServerId of the Secure File Transfer Protocol (SFTP) server you updated.
+   * Updates the file transfer protocol-enabled server's properties after that server has been created. The UpdateServer call returns the ServerId of the server you updated.
    */
   updateServer(params: Transfer.Types.UpdateServerRequest, callback?: (err: AWSError, data: Transfer.Types.UpdateServerResponse) => void): Request<Transfer.Types.UpdateServerResponse, AWSError>;
   /**
-   * Updates the server properties after that server has been created. The UpdateServer call returns the ServerId of the Secure File Transfer Protocol (SFTP) server you updated.
+   * Updates the file transfer protocol-enabled server's properties after that server has been created. The UpdateServer call returns the ServerId of the server you updated.
    */
   updateServer(callback?: (err: AWSError, data: Transfer.Types.UpdateServerResponse) => void): Request<Transfer.Types.UpdateServerResponse, AWSError>;
   /**
@@ -160,69 +160,78 @@ declare namespace Transfer {
   export type AddressAllocationId = string;
   export type AddressAllocationIds = AddressAllocationId[];
   export type Arn = string;
+  export type Certificate = string;
   export interface CreateServerRequest {
     /**
-     * The virtual private cloud (VPC) endpoint settings that are configured for your SFTP server. With a VPC endpoint, you can restrict access to your SFTP server to resources only within your VPC. To control incoming internet traffic, you will need to invoke the UpdateServer API and attach an Elastic IP to your server's endpoint. 
+     * The Amazon Resource Name (ARN) of the AWS Certificate Manager (ACM) certificate. Required when Protocols is set to FTPS.
+     */
+    Certificate?: Certificate;
+    /**
+     * The virtual private cloud (VPC) endpoint settings that are configured for your file transfer protocol-enabled server. When you host your endpoint within your VPC, you can make it accessible only to resources within your VPC, or you can attach Elastic IPs and make it accessible to clients over the internet. Your VPC's default security groups are automatically assigned to your endpoint.
      */
     EndpointDetails?: EndpointDetails;
     /**
-     * The type of VPC endpoint that you want your SFTP server to connect to. You can choose to connect to the public internet or a virtual private cloud (VPC) endpoint. With a VPC endpoint, you can restrict access to your SFTP server and resources only within your VPC.
+     * The type of VPC endpoint that you want your file transfer protocol-enabled server to connect to. You can choose to connect to the public internet or a virtual private cloud (VPC) endpoint. With a VPC endpoint, you can restrict access to your server and resources only within your VPC.
      */
     EndpointType?: EndpointType;
     /**
-     * The RSA private key as generated by the ssh-keygen -N "" -f my-new-server-key command.  If you aren't planning to migrate existing users from an existing SFTP server to a new AWS SFTP server, don't update the host key. Accidentally changing a server's host key can be disruptive.   For more information, see "https://alpha-docs-aws.amazon.com/transfer/latest/userguide/configuring-servers.html#change-host-key" in the AWS SFTP User Guide. 
+     * The RSA private key as generated by the ssh-keygen -N "" -f my-new-server-key command.  If you aren't planning to migrate existing users from an existing SFTP-enabled server to a new server, don't update the host key. Accidentally changing a server's host key can be disruptive.  For more information, see Changing the Host Key for Your AWS Transfer Family Server in the AWS Transfer Family User Guide.
      */
     HostKey?: HostKey;
     /**
-     * This parameter is required when the IdentityProviderType is set to API_GATEWAY. Accepts an array containing all of the information required to call a customer-supplied authentication API, including the API Gateway URL. This property is not required when the IdentityProviderType is set to SERVICE_MANAGED.
+     * Required when IdentityProviderType is set to API_GATEWAY. Accepts an array containing all of the information required to call a customer-supplied authentication API, including the API Gateway URL. Not required when IdentityProviderType is set to SERVICE_MANAGED.
      */
     IdentityProviderDetails?: IdentityProviderDetails;
     /**
-     * Specifies the mode of authentication for the SFTP server. The default value is SERVICE_MANAGED, which allows you to store and access SFTP user credentials within the AWS Transfer for SFTP service. Use the API_GATEWAY value to integrate with an identity provider of your choosing. The API_GATEWAY setting requires you to provide an API Gateway endpoint URL to call for authentication using the IdentityProviderDetails parameter.
+     * Specifies the mode of authentication for a file transfer protocol-enabled server. The default value is SERVICE_MANAGED, which allows you to store and access user credentials within the AWS Transfer Family service. Use the API_GATEWAY value to integrate with an identity provider of your choosing. The API_GATEWAY setting requires you to provide an API Gateway endpoint URL to call for authentication using the IdentityProviderDetails parameter.
      */
     IdentityProviderType?: IdentityProviderType;
     /**
-     * A value that allows the service to write your SFTP users' activity to your Amazon CloudWatch logs for monitoring and auditing purposes.
+     * Allows the service to write your users' activity to your Amazon CloudWatch logs for monitoring and auditing purposes.
      */
     LoggingRole?: Role;
     /**
-     * Key-value pairs that can be used to group and search for servers.
+     * Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:   Secure Shell (SSH) File Transfer Protocol (SFTP): File transfer over SSH   File Transfer Protocol Secure (FTPS): File transfer with TLS encryption   File Transfer Protocol (FTP): Unencrypted file transfer  
+     */
+    Protocols?: Protocols;
+    /**
+     * Key-value pairs that can be used to group and search for file transfer protocol-enabled servers.
      */
     Tags?: Tags;
   }
   export interface CreateServerResponse {
     /**
-     * The service-assigned ID of the SFTP server that is created.
+     * The service-assigned ID of the file transfer protocol-enabled server that is created.
      */
     ServerId: ServerId;
   }
   export interface CreateUserRequest {
     /**
-     * The landing directory (folder) for a user when they log in to the server using their SFTP client.  An example is &lt;your-Amazon-S3-bucket-name&gt;/home/username.
+     * The landing directory (folder) for a user when they log in to the file transfer protocol-enabled server using the client. An example is your-Amazon-S3-bucket-name&gt;/home/username.
      */
     HomeDirectory?: HomeDirectory;
     /**
-     * The type of landing directory (folder) you want your users' home directory to be when they log into the SFTP server. If you set it to PATH, the user will see the absolute Amazon S3 bucket paths as is in their SFTP clients. If you set it LOGICAL, you will need to provide mappings in the HomeDirectoryMappings for how you want to make S3 paths visible to your user.
+     * The type of landing directory (folder) you want your users' home directory to be when they log into the file transfer protocol-enabled server. If you set it to PATH, the user will see the absolute Amazon S3 bucket paths as is in their file transfer protocol clients. If you set it LOGICAL, you will need to provide mappings in the HomeDirectoryMappings for how you want to make Amazon S3 paths visible to your users.
      */
     HomeDirectoryType?: HomeDirectoryType;
     /**
-     * Logical directory mappings that specify what S3 paths and keys should be visible to your user and how you want to make them visible. You will need to specify the "Entry" and "Target" pair, where Entry shows how the path is made visible and Target is the actual S3 path. If you only specify a target, it will be displayed as is. You will need to also make sure that your AWS IAM Role provides access to paths in Target. The following is an example.  '[ "/bucket2/documentation", { "Entry": "your-personal-report.pdf", "Target": "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]'  In most cases, you can use this value instead of the scope down policy to lock your user down to the designated home directory ("chroot"). To do this, you can set Entry to '/' and set Target to the HomeDirectory parameter value.   If the target of a logical directory entry does not exist in S3, the entry will be ignored. As a workaround, you can use the S3 api to create 0 byte objects as place holders for your directory. If using the CLI, use the s3api call instead of s3 so you can use the put-object operation. For example, you use the following: aws s3api put-object --bucket bucketname --key path/to/folder/. Make sure that the end of the key name ends in a / for it to be considered a folder.  
+     * Logical directory mappings that specify what Amazon S3 paths and keys should be visible to your user and how you want to make them visible. You will need to specify the "Entry" and "Target" pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 path. If you only specify a target, it will be displayed as is. You will need to also make sure that your AWS IAM Role provides access to paths in Target. The following is an example.  '[ "/bucket2/documentation", { "Entry": "your-personal-report.pdf", "Target": "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]'  In most cases, you can use this value instead of the scope-down policy to lock your user down to the designated home directory ("chroot"). To do this, you can set Entry to '/' and set Target to the HomeDirectory parameter value.  If the target of a logical directory entry does not exist in Amazon S3, the entry will be ignored. As a workaround, you can use the Amazon S3 api to create 0 byte objects as place holders for your directory. If using the CLI, use the s3api call instead of s3 so you can use the put-object operation. For example, you use the following: aws s3api put-object --bucket bucketname --key path/to/folder/. Make sure that the end of the key name ends in a '/' for it to be considered a folder. 
      */
     HomeDirectoryMappings?: HomeDirectoryMappings;
     /**
-     * A scope-down policy for your user so you can use the same IAM role across multiple users. This policy scopes down user access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.  For scope-down policies, AWS Transfer for SFTP stores the policy as a JSON blob, instead of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass it in the Policy argument. For an example of a scope-down policy, see "https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down"&gt;Creating a Scope-Down Policy. For more information, see "https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html" in the AWS Security Token Service API Reference. 
+     * A scope-down policy for your user so you can use the same IAM role across multiple users. This policy scopes down user access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.  For scope-down policies, AWS Transfer Family stores the policy as a JSON blob, instead of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass it in the Policy argument. For an example of a scope-down policy, see Creating a Scope-Down Policy. For more information, see AssumeRole in the AWS Security Token Service API Reference. 
      */
     Policy?: Policy;
     /**
-     * The IAM role that controls your user's access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the SFTP server to access your resources when servicing your SFTP user's transfer requests.
+     * The IAM role that controls your users' access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the file transfer protocol-enabled server to access your resources when servicing your users' transfer requests.
      */
     Role: Role;
     /**
-     * A system-assigned unique identifier for an SFTP server instance. This is the specific SFTP server that you added your user to.
+     * A system-assigned unique identifier for a file transfer protocol-enabled server instance. This is the specific server that you added your user to.
      */
     ServerId: ServerId;
     /**
-     * The public portion of the Secure Shell (SSH) key used to authenticate the user to the SFTP server.
+     * The public portion of the Secure Shell (SSH) key used to authenticate the user to the file transfer protocol-enabled server.
      */
     SshPublicKeyBody?: SshPublicKeyBody;
     /**
@@ -230,30 +239,30 @@ declare namespace Transfer {
      */
     Tags?: Tags;
     /**
-     * A unique string that identifies a user and is associated with a server as specified by the ServerId. This user name must be a minimum of 3 and a maximum of 32 characters long. The following are valid characters: a-z, A-Z, 0-9, underscore, and hyphen. The user name can't start with a hyphen.
+     * A unique string that identifies a user and is associated with a file transfer protocol-enabled server as specified by the ServerId. This user name must be a minimum of 3 and a maximum of 32 characters long. The following are valid characters: a-z, A-Z, 0-9, underscore, and hyphen. The user name can't start with a hyphen.
      */
     UserName: UserName;
   }
   export interface CreateUserResponse {
     /**
-     * The ID of the SFTP server that the user is attached to.
+     * The ID of the file transfer protocol-enabled server that the user is attached to.
      */
     ServerId: ServerId;
     /**
-     * A unique string that identifies a user account associated with an SFTP server.
+     * A unique string that identifies a user account associated with a file transfer protocol-enabled server.
      */
     UserName: UserName;
   }
   export type DateImported = Date;
   export interface DeleteServerRequest {
     /**
-     * A unique system-assigned identifier for an SFTP server instance.
+     * A unique system-assigned identifier for a file transfer protocol-enabled server instance.
      */
     ServerId: ServerId;
   }
   export interface DeleteSshPublicKeyRequest {
     /**
-     * A system-assigned unique identifier for a Secure File Transfer Protocol (SFTP) server instance that has the user assigned to it.
+     * A system-assigned unique identifier for a file transfer protocol-enabled server instance that has the user assigned to it.
      */
     ServerId: ServerId;
     /**
@@ -267,39 +276,39 @@ declare namespace Transfer {
   }
   export interface DeleteUserRequest {
     /**
-     * A system-assigned unique identifier for an SFTP server instance that has the user assigned to it.
+     * A system-assigned unique identifier for a file transfer protocol-enabled server instance that has the user assigned to it.
      */
     ServerId: ServerId;
     /**
-     * A unique string that identifies a user that is being deleted from the server.
+     * A unique string that identifies a user that is being deleted from a file transfer protocol-enabled server.
      */
     UserName: UserName;
   }
   export interface DescribeServerRequest {
     /**
-     * A system-assigned unique identifier for an SFTP server.
+     * A system-assigned unique identifier for a file transfer protocol-enabled server.
      */
     ServerId: ServerId;
   }
   export interface DescribeServerResponse {
     /**
-     * An array containing the properties of the server with the ServerID you specified.
+     * An array containing the properties of a file transfer protocol-enabled server with the ServerID you specified.
      */
     Server: DescribedServer;
   }
   export interface DescribeUserRequest {
     /**
-     * A system-assigned unique identifier for an SFTP server that has this user assigned.
+     * A system-assigned unique identifier for a file transfer protocol-enabled server that has this user assigned.
      */
     ServerId: ServerId;
     /**
-     * The name of the user assigned to one or more servers. User names are part of the sign-in credentials to use the AWS Transfer for SFTP service and perform file transfer tasks.
+     * The name of the user assigned to one or more file transfer protocol-enabled servers. User names are part of the sign-in credentials to use the AWS Transfer Family service and perform file transfer tasks.
      */
     UserName: UserName;
   }
   export interface DescribeUserResponse {
     /**
-     * A system-assigned unique identifier for an SFTP server that has this user assigned.
+     * A system-assigned unique identifier for a file transfer protocol-enabled server that has this user assigned.
      */
     ServerId: ServerId;
     /**
@@ -309,65 +318,73 @@ declare namespace Transfer {
   }
   export interface DescribedServer {
     /**
-     * Specifies the unique Amazon Resource Name (ARN) for the server to be described.
+     * Specifies the unique Amazon Resource Name (ARN) for a file transfer protocol-enabled server to be described.
      */
     Arn: Arn;
     /**
-     * The virtual private cloud (VPC) endpoint settings that you configured for your SFTP server.
+     * The Amazon Resource Name (ARN) of the AWS Certificate Manager (ACM) certificate. Required when Protocols is set to FTPS.
+     */
+    Certificate?: Certificate;
+    /**
+     * The virtual private cloud (VPC) endpoint settings that you configured for your file transfer protocol-enabled server.
      */
     EndpointDetails?: EndpointDetails;
     /**
-     * The type of endpoint that your SFTP server is connected to. If your SFTP server is connected to a VPC endpoint, your server isn't accessible over the public internet.
+     * The type of endpoint that your file transfer protocol-enabled server is connected to. If your server is connected to a VPC endpoint, your server isn't accessible over the public internet.
      */
     EndpointType?: EndpointType;
     /**
-     * This value contains the message-digest algorithm (MD5) hash of the server's host key. This value is equivalent to the output of the ssh-keygen -l -E md5 -f my-new-server-key command.
+     * Contains the message-digest algorithm (MD5) hash of a file transfer protocol-enabled server's host key. This value is equivalent to the output of the ssh-keygen -l -E md5 -f my-new-server-key command.
      */
     HostKeyFingerprint?: HostKeyFingerprint;
     /**
-     * Specifies information to call a customer-supplied authentication API. This field is not populated when the IdentityProviderType of the server is SERVICE_MANAGED&gt;.
+     * Specifies information to call a customer-supplied authentication API. This field is not populated when the IdentityProviderType of a file transfer protocol-enabled server is SERVICE_MANAGED.
      */
     IdentityProviderDetails?: IdentityProviderDetails;
     /**
-     * This property defines the mode of authentication method enabled for this service. A value of SERVICE_MANAGED means that you are using this server to store and access SFTP user credentials within the service. A value of API_GATEWAY indicates that you have integrated an API Gateway endpoint that will be invoked for authenticating your user into the service.
+     * Defines the mode of authentication method enabled for this service. A value of SERVICE_MANAGED means that you are using this file transfer protocol-enabled server to store and access user credentials within the service. A value of API_GATEWAY indicates that you have integrated an API Gateway endpoint that will be invoked for authenticating your user into the service.
      */
     IdentityProviderType?: IdentityProviderType;
     /**
-     * This property is an AWS Identity and Access Management (IAM) entity that allows the server to turn on Amazon CloudWatch logging for Amazon S3 events. When set, user activity can be viewed in your CloudWatch logs.
+     * An AWS Identity and Access Management (IAM) entity that allows a file transfer protocol-enabled server to turn on Amazon CloudWatch logging for Amazon S3 events. When set, user activity can be viewed in your CloudWatch logs.
      */
     LoggingRole?: Role;
     /**
-     * This property is a unique system-assigned identifier for the SFTP server that you instantiate.
+     * Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:   Secure Shell (SSH) File Transfer Protocol (SFTP): File transfer over SSH   File Transfer Protocol Secure (FTPS): File transfer with TLS encryption   File Transfer Protocol (FTP): Unencrypted file transfer  
+     */
+    Protocols?: Protocols;
+    /**
+     * Unique system-assigned identifier for a file transfer protocol-enabled server that you instantiate.
      */
     ServerId?: ServerId;
     /**
-     * The condition of the SFTP server for the server that was described. A value of ONLINE indicates that the server can accept jobs and transfer files. A State value of OFFLINE means that the server cannot perform file transfer operations. The states of STARTING and STOPPING indicate that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of START_FAILED or STOP_FAILED can indicate an error condition.
+     * The condition of a file transfer protocol-enabled server for the server that was described. A value of ONLINE indicates that the server can accept jobs and transfer files. A State value of OFFLINE means that the server cannot perform file transfer operations. The states of STARTING and STOPPING indicate that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of START_FAILED or STOP_FAILED can indicate an error condition.
      */
     State?: State;
     /**
-     * This property contains the key-value pairs that you can use to search for and group servers that were assigned to the server that was described.
+     * Contains the key-value pairs that you can use to search for and group file transfer protocol-enabled servers that were assigned to the server that was described.
      */
     Tags?: Tags;
     /**
-     * The number of users that are assigned to the SFTP server you specified with the ServerId.
+     * The number of users that are assigned to a file transfer protocol-enabled server you specified with the ServerId.
      */
     UserCount?: UserCount;
   }
   export interface DescribedUser {
     /**
-     * This property contains the unique Amazon Resource Name (ARN) for the user that was requested to be described.
+     * Contains the unique Amazon Resource Name (ARN) for the user that was requested to be described.
      */
     Arn: Arn;
     /**
-     * This property specifies the landing directory (or folder), which is the location that files are written to or read from in an Amazon S3 bucket for the described user. An example is /your s3 bucket name/home/username .
+     * Specifies the landing directory (or folder), which is the location that files are written to or read from in an Amazon S3 bucket for the described user. An example is /your s3 bucket name/home/username .
      */
     HomeDirectory?: HomeDirectory;
     /**
-     * Logical directory mappings that you specified for what S3 paths and keys should be visible to your user and how you want to make them visible. You will need to specify the "Entry" and "Target" pair, where Entry shows how the path is made visible and Target is the actual S3 path. If you only specify a target, it will be displayed as is. You will need to also make sure that your AWS IAM Role provides access to paths in Target. In most cases, you can use this value instead of the scope down policy to lock your user down to the designated home directory ("chroot"). To do this, you can set Entry to '/' and set Target to the HomeDirectory parameter value.  In most cases, you can use this value instead of the scope down policy to lock your user down to the designated home directory ("chroot"). To do this, you can set Entry to '/' and set Target to the HomeDirectory parameter value.
+     * Logical directory mappings that you specified for what Amazon S3 paths and keys should be visible to your user and how you want to make them visible. You will need to specify the "Entry" and "Target" pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 path. If you only specify a target, it will be displayed as is. You will need to also make sure that your AWS IAM Role provides access to paths in Target. In most cases, you can use this value instead of the scope-down policy to lock your user down to the designated home directory ("chroot"). To do this, you can set Entry to '/' and set Target to the HomeDirectory parameter value.
      */
     HomeDirectoryMappings?: HomeDirectoryMappings;
     /**
-     * The type of landing directory (folder) you mapped for your users' to see when they log into the SFTP server. If you set it to PATH, the user will see the absolute Amazon S3 bucket paths as is in their SFTP clients. If you set it LOGICAL, you will need to provide mappings in the HomeDirectoryMappings for how you want to make S3 paths visible to your user.
+     * The type of landing directory (folder) you mapped for your users to see when they log into the file transfer protocol-enabled server. If you set it to PATH, the user will see the absolute Amazon S3 bucket paths as is in their file transfer protocol clients. If you set it LOGICAL, you will need to provide mappings in the HomeDirectoryMappings for how you want to make Amazon S3 paths visible to your users.
      */
     HomeDirectoryType?: HomeDirectoryType;
     /**
@@ -375,29 +392,29 @@ declare namespace Transfer {
      */
     Policy?: Policy;
     /**
-     * This property specifies the IAM role that controls your user's access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the SFTP server to access your resources when servicing your SFTP user's transfer requests.
+     * Specifies the IAM role that controls your users' access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows a file transfer protocol-enabled server to access your resources when servicing your users' transfer requests.
      */
     Role?: Role;
     /**
-     * This property contains the public key portion of the Secure Shell (SSH) keys stored for the described user.
+     * Contains the public key portion of the Secure Shell (SSH) keys stored for the described user.
      */
     SshPublicKeys?: SshPublicKeys;
     /**
-     * This property contains the key-value pairs for the user requested. Tag can be used to search for and group users for a variety of purposes.
+     * Contains the key-value pairs for the user requested. Tag can be used to search for and group users for a variety of purposes.
      */
     Tags?: Tags;
     /**
-     * This property is the name of the user that was requested to be described. User names are used for authentication purposes. This is the string that will be used by your user when they log in to your SFTP server.
+     * The name of the user that was requested to be described. User names are used for authentication purposes. This is the string that will be used by your user when they log in to your file transfer protocol-enabled server.
      */
     UserName?: UserName;
   }
   export interface EndpointDetails {
     /**
-     * A list of address allocation IDs that are required to attach an Elastic IP address to your SFTP server's endpoint. This is only valid in the UpdateServer API.  This property can only be use when EndpointType is set to VPC. 
+     * A list of address allocation IDs that are required to attach an Elastic IP address to your file transfer protocol-enabled server's endpoint. This is only valid in the UpdateServer API.  This property can only be use when EndpointType is set to VPC. 
      */
     AddressAllocationIds?: AddressAllocationIds;
     /**
-     * A list of subnet IDs that are required to host your SFTP server endpoint in your VPC.
+     * A list of subnet IDs that are required to host your file transfer protocol-enabled server endpoint in your VPC.
      */
     SubnetIds?: SubnetIds;
     /**
@@ -405,7 +422,7 @@ declare namespace Transfer {
      */
     VpcEndpointId?: VpcEndpointId;
     /**
-     * The VPC ID of the virtual private cloud in which the SFTP server's endpoint will be hosted.
+     * The VPC ID of the VPC in which a file transfer protocol-enabled server's endpoint will be hosted.
      */
     VpcId?: VpcId;
   }
@@ -427,18 +444,18 @@ declare namespace Transfer {
   export type HostKeyFingerprint = string;
   export interface IdentityProviderDetails {
     /**
-     * The Url parameter provides contains the location of the service endpoint used to authenticate users.
+     * Contains the location of the service endpoint used to authenticate users.
      */
     Url?: Url;
     /**
-     * The InvocationRole parameter provides the type of InvocationRole used to authenticate the user account.
+     * Provides the type of InvocationRole used to authenticate the user account.
      */
     InvocationRole?: Role;
   }
   export type IdentityProviderType = "SERVICE_MANAGED"|"API_GATEWAY"|string;
   export interface ImportSshPublicKeyRequest {
     /**
-     * A system-assigned unique identifier for an SFTP server.
+     * A system-assigned unique identifier for a file transfer protocol-enabled server.
      */
     ServerId: ServerId;
     /**
@@ -446,17 +463,17 @@ declare namespace Transfer {
      */
     SshPublicKeyBody: SshPublicKeyBody;
     /**
-     * The name of the user account that is assigned to one or more servers.
+     * The name of the user account that is assigned to one or more file transfer protocol-enabled servers.
      */
     UserName: UserName;
   }
   export interface ImportSshPublicKeyResponse {
     /**
-     * A system-assigned unique identifier for an SFTP server.
+     * A system-assigned unique identifier for a file transfer protocol-enabled server.
      */
     ServerId: ServerId;
     /**
-     * This identifier is the name given to a public key by the system that was imported.
+     * The name given to a public key by the system that was imported.
      */
     SshPublicKeyId: SshPublicKeyId;
     /**
@@ -466,21 +483,21 @@ declare namespace Transfer {
   }
   export interface ListServersRequest {
     /**
-     * Specifies the number of servers to return as a response to the ListServers query.
+     * Specifies the number of file transfer protocol-enabled servers to return as a response to the ListServers query.
      */
     MaxResults?: MaxResults;
     /**
-     * When additional results are obtained from the ListServers command, a NextToken parameter is returned in the output. You can then pass the NextToken parameter in a subsequent command to continue listing additional servers.
+     * When additional results are obtained from theListServers command, a NextToken parameter is returned in the output. You can then pass the NextToken parameter in a subsequent command to continue listing additional file transfer protocol-enabled servers.
      */
     NextToken?: NextToken;
   }
   export interface ListServersResponse {
     /**
-     * When you can get additional results from the ListServers operation, a NextToken parameter is returned in the output. In a following command, you can pass in the NextToken parameter to continue listing additional servers.
+     * When you can get additional results from the ListServers operation, a NextToken parameter is returned in the output. In a following command, you can pass in the NextToken parameter to continue listing additional file transfer protocol-enabled servers.
      */
     NextToken?: NextToken;
     /**
-     * An array of servers that were listed.
+     * An array of file transfer protocol-enabled servers that were listed.
      */
     Servers: ListedServers;
   }
@@ -500,7 +517,7 @@ declare namespace Transfer {
   }
   export interface ListTagsForResourceResponse {
     /**
-     * This value is the ARN you specified to list the tags of.
+     * The ARN you specified to list the tags of.
      */
     Arn?: Arn;
     /**
@@ -522,7 +539,7 @@ declare namespace Transfer {
      */
     NextToken?: NextToken;
     /**
-     * A system-assigned unique identifier for a Secure File Transfer Protocol (SFTP) server that has users assigned to it.
+     * A system-assigned unique identifier for a file transfer protocol-enabled server that has users assigned to it.
      */
     ServerId: ServerId;
   }
@@ -532,7 +549,7 @@ declare namespace Transfer {
      */
     NextToken?: NextToken;
     /**
-     * A system-assigned unique identifier for an SFTP server that the users are assigned to.
+     * A system-assigned unique identifier for a file transfer protocol-enabled server that the users are assigned to.
      */
     ServerId: ServerId;
     /**
@@ -542,54 +559,54 @@ declare namespace Transfer {
   }
   export interface ListedServer {
     /**
-     * The unique Amazon Resource Name (ARN) for the server to be listed.
+     * The unique Amazon Resource Name (ARN) for a file transfer protocol-enabled server to be listed.
      */
     Arn: Arn;
     /**
-     * The authentication method used to validate a user for the server that was specified. This can include Secure Shell (SSH), user name and password combinations, or your own custom authentication method. Valid values include SERVICE_MANAGED or API_GATEWAY.
+     * The authentication method used to validate a user for a file transfer protocol-enabled server that was specified. This can include Secure Shell (SSH), user name and password combinations, or your own custom authentication method. Valid values include SERVICE_MANAGED or API_GATEWAY.
      */
     IdentityProviderType?: IdentityProviderType;
     /**
-     * The type of VPC endpoint that your SFTP server is connected to. If your SFTP server is connected to a VPC endpoint, your server isn't accessible over the public internet.
+     * The type of VPC endpoint that your file transfer protocol-enabled server is connected to. If your server is connected to a VPC endpoint, your server isn't accessible over the public internet.
      */
     EndpointType?: EndpointType;
     /**
-     * The AWS Identity and Access Management entity that allows the server to turn on Amazon CloudWatch logging.
+     * The AWS Identity and Access Management (IAM) entity that allows a file transfer protocol-enabled server to turn on Amazon CloudWatch logging.
      */
     LoggingRole?: Role;
     /**
-     * This value is the unique system assigned identifier for the SFTP servers that were listed.
+     * The unique system assigned identifier for a file transfer protocol-enabled servers that were listed.
      */
     ServerId?: ServerId;
     /**
-     * This property describes the condition of the SFTP server for the server that was described. A value of ONLINE&gt; indicates that the server can accept jobs and transfer files. A State value of OFFLINE means that the server cannot perform file transfer operations. The states of STARTING and STOPPING indicate that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of START_FAILED or STOP_FAILED can indicate an error condition.
+     * Describes the condition of a file transfer protocol-enabled server for the server that was described. A value of ONLINE indicates that the server can accept jobs and transfer files. A State value of OFFLINE means that the server cannot perform file transfer operations. The states of STARTING and STOPPING indicate that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of START_FAILED or STOP_FAILED can indicate an error condition.
      */
     State?: State;
     /**
-     * This property is a numeric value that indicates the number of users that are assigned to the SFTP server you specified with the ServerId.
+     * A numeric value that indicates the number of users that are assigned to a file transfer protocol-enabled server you specified with the ServerId.
      */
     UserCount?: UserCount;
   }
   export type ListedServers = ListedServer[];
   export interface ListedUser {
     /**
-     * This property is the unique Amazon Resource Name (ARN) for the user that you want to learn about.
+     * The unique Amazon Resource Name (ARN) for the user that you want to learn about.
      */
     Arn: Arn;
     /**
-     * This value specifies the location that files are written to or read from an Amazon S3 bucket for the user you specify by their ARN.
+     * Specifies the location that files are written to or read from an Amazon S3 bucket for the user you specify by their ARN.
      */
     HomeDirectory?: HomeDirectory;
     /**
-     * The type of landing directory (folder) you mapped for your users' home directory. If you set it to PATH, the user will see the absolute Amazon S3 bucket paths as is in their SFTP clients. If you set it LOGICAL, you will need to provide mappings in the HomeDirectoryMappings for how you want to make S3 paths visible to your user.
+     * The type of landing directory (folder) you mapped for your users' home directory. If you set it to PATH, the user will see the absolute Amazon S3 bucket paths as is in their file transfer protocol clients. If you set it LOGICAL, you will need to provide mappings in the HomeDirectoryMappings for how you want to make Amazon S3 paths visible to your users.
      */
     HomeDirectoryType?: HomeDirectoryType;
     /**
-     * The role in use by this user. A role is an AWS Identity and Access Management (IAM) entity that, in this case, allows the SFTP server to act on a user's behalf. It allows the server to inherit the trust relationship that enables that user to perform file operations to their Amazon S3 bucket.
+     * The role in use by this user. A role is an AWS Identity and Access Management (IAM) entity that, in this case, allows a file transfer protocol-enabled server to act on a user's behalf. It allows the server to inherit the trust relationship that enables that user to perform file operations to their Amazon S3 bucket.
      */
     Role?: Role;
     /**
-     * This value is the number of SSH public keys stored for the user you specified.
+     * The number of SSH public keys stored for the user you specified.
      */
     SshPublicKeyCount?: SshPublicKeyCount;
     /**
@@ -605,6 +622,8 @@ declare namespace Transfer {
   export type NextToken = string;
   export type NullableRole = string;
   export type Policy = string;
+  export type Protocol = "SFTP"|"FTP"|"FTPS"|string;
+  export type Protocols = Protocol[];
   export type Response = string;
   export type Role = string;
   export type ServerId = string;
@@ -628,7 +647,7 @@ declare namespace Transfer {
   export type SshPublicKeys = SshPublicKey[];
   export interface StartServerRequest {
     /**
-     * A system-assigned unique identifier for an SFTP server that you start.
+     * A system-assigned unique identifier for a file transfer protocol-enabled server that you start.
      */
     ServerId: ServerId;
   }
@@ -636,7 +655,7 @@ declare namespace Transfer {
   export type StatusCode = number;
   export interface StopServerRequest {
     /**
-     * A system-assigned unique identifier for an SFTP server that you stopped.
+     * A system-assigned unique identifier for a file transfer protocol-enabled server that you stopped.
      */
     ServerId: ServerId;
   }
@@ -648,7 +667,7 @@ declare namespace Transfer {
      */
     Key: TagKey;
     /**
-     * This property contains one or more values that you assigned to the key name you create.
+     * Contains one or more values that you assigned to the key name you create.
      */
     Value: TagValue;
   }
@@ -668,17 +687,21 @@ declare namespace Transfer {
   export type Tags = Tag[];
   export interface TestIdentityProviderRequest {
     /**
-     * A system-assigned identifier for a specific server. That server's user authentication method is tested with a user name and password.
+     * A system-assigned identifier for a specific file transfer protocol-enabled server. That server's user authentication method is tested with a user name and password.
      */
     ServerId: ServerId;
     /**
-     * This request parameter is the name of the user account to be tested.
+     * The name of the user account to be tested.
      */
     UserName: UserName;
     /**
      * The password of the user account to be tested.
      */
     UserPassword?: UserPassword;
+    /**
+     * The type of file transfer protocol to be tested. The available protocols are:   Secure Shell (SSH) File Transfer Protocol (SFTP)   File Transfer Protocol Secure (FTPS)   File Transfer Protocol (FTP)  
+     */
+    ServerProtocol?: Protocol;
   }
   export interface TestIdentityProviderResponse {
     /**
@@ -690,7 +713,7 @@ declare namespace Transfer {
      */
     StatusCode: StatusCode;
     /**
-     * A message that indicates whether the test was successful or not. 
+     * A message that indicates whether the test was successful or not.
      */
     Message?: Message;
     /**
@@ -700,7 +723,7 @@ declare namespace Transfer {
   }
   export interface UntagResourceRequest {
     /**
-     * This is the value of the resource that will have the tag removed. An Amazon Resource Name (ARN) is an identifier for a specific AWS resource, such as a server, user, or role.
+     * The value of the resource that will have the tag removed. An Amazon Resource Name (ARN) is an identifier for a specific AWS resource, such as a server, user, or role.
      */
     Arn: Arn;
     /**
@@ -710,73 +733,81 @@ declare namespace Transfer {
   }
   export interface UpdateServerRequest {
     /**
-     * The virtual private cloud (VPC) endpoint settings that are configured for your SFTP server. With a VPC endpoint, you can restrict access to your SFTP server to resources only within your VPC. To control incoming internet traffic, you will need to associate one or more Elastic IP addresses with your server's endpoint. 
+     * The Amazon Resource Name (ARN) of the AWS Certificate Manager (ACM) certificate. Required when Protocols is set to FTPS.
+     */
+    Certificate?: Certificate;
+    /**
+     * The virtual private cloud (VPC) endpoint settings that are configured for your file transfer protocol-enabled server. With a VPC endpoint, you can restrict access to your server to resources only within your VPC. To control incoming internet traffic, you will need to associate one or more Elastic IP addresses with your server's endpoint.
      */
     EndpointDetails?: EndpointDetails;
     /**
-     * The type of endpoint that you want your SFTP server to connect to. You can choose to connect to the public internet or a virtual private cloud (VPC) endpoint. With a VPC endpoint, your SFTP server isn't accessible over the public internet. 
+     * The type of endpoint that you want your file transfer protocol-enabled server to connect to. You can choose to connect to the public internet or a VPC endpoint. With a VPC endpoint, your server isn't accessible over the public internet.
      */
     EndpointType?: EndpointType;
     /**
-     * The RSA private key as generated by ssh-keygen -N "" -f my-new-server-key.  If you aren't planning to migrate existing users from an existing SFTP server to a new AWS SFTP server, don't update the host key. Accidentally changing a server's host key can be disruptive.   For more information, see "https://docs.aws.amazon.com/transfer/latest/userguide/configuring-servers.html#change-host-key" in the AWS SFTP User Guide. 
+     * The RSA private key as generated by ssh-keygen -N "" -f my-new-server-key.  If you aren't planning to migrate existing users from an existing file transfer protocol-enabled server to a new server, don't update the host key. Accidentally changing a server's host key can be disruptive.  For more information, see Changing the Host Key for Your AWS Transfer Family Server in the AWS Transfer Family User Guide.
      */
     HostKey?: HostKey;
     /**
-     * This response parameter is an array containing all of the information required to call a customer's authentication API method.
+     * An array containing all of the information required to call a customer's authentication API method.
      */
     IdentityProviderDetails?: IdentityProviderDetails;
     /**
-     * A value that changes the AWS Identity and Access Management (IAM) role that allows Amazon S3 events to be logged in Amazon CloudWatch, turning logging on or off.
+     * Changes the AWS Identity and Access Management (IAM) role that allows Amazon S3 events to be logged in Amazon CloudWatch, turning logging on or off.
      */
     LoggingRole?: NullableRole;
     /**
-     * A system-assigned unique identifier for an SFTP server instance that the user account is assigned to.
+     * Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:   Secure Shell (SSH) File Transfer Protocol (SFTP): File transfer over SSH   File Transfer Protocol Secure (FTPS): File transfer with TLS encryption   File Transfer Protocol (FTP): Unencrypted file transfer  
+     */
+    Protocols?: Protocols;
+    /**
+     * A system-assigned unique identifier for a file transfer protocol-enabled server instance that the user account is assigned to.
      */
     ServerId: ServerId;
   }
   export interface UpdateServerResponse {
     /**
-     * A system-assigned unique identifier for an SFTP server that the user account is assigned to.
+     * A system-assigned unique identifier for a file transfer protocol-enabled server that the user account is assigned to.
      */
     ServerId: ServerId;
   }
   export interface UpdateUserRequest {
     /**
-     * A parameter that specifies the landing directory (folder) for a user when they log in to the server using their client.  An example is &lt;your-Amazon-S3-bucket-name&gt;/home/username.
+     * Specifies the landing directory (folder) for a user when they log in to the file transfer protocol-enabled server using their file transfer protocol client. An example is your-Amazon-S3-bucket-name&gt;/home/username.
      */
     HomeDirectory?: HomeDirectory;
     /**
-     * The type of landing directory (folder) you want your users' home directory to be when they log into the SFTP serve. If you set it to PATH, the user will see the absolute Amazon S3 bucket paths as is in their SFTP clients. If you set it LOGICAL, you will need to provide mappings in the HomeDirectoryMappings for how you want to make S3 paths visible to your user.
+     * The type of landing directory (folder) you want your users' home directory to be when they log into the file transfer protocol-enabled server. If you set it to PATH, the user will see the absolute Amazon S3 bucket paths as is in their file transfer protocol clients. If you set it LOGICAL, you will need to provide mappings in the HomeDirectoryMappings for how you want to make Amazon S3 paths visible to your users.
      */
     HomeDirectoryType?: HomeDirectoryType;
     /**
-     * Logical directory mappings that specify what S3 paths and keys should be visible to your user and how you want to make them visible. You will need to specify the "Entry" and "Target" pair, where Entry shows how the path is made visible and Target is the actual S3 path. If you only specify a target, it will be displayed as is. You will need to also make sure that your AWS IAM Role provides access to paths in Target. The following is an example.  '[ "/bucket2/documentation", { "Entry": "your-personal-report.pdf", "Target": "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]'  In most cases, you can use this value instead of the scope down policy to lock your user down to the designated home directory ("chroot"). To do this, you can set Entry to '/' and set Target to the HomeDirectory parameter value.   If the target of a logical directory entry does not exist in S3, the entry will be ignored. As a workaround, you can use the S3 api to create 0 byte objects as place holders for your directory. If using the CLI, use the s3api call instead of s3 so you can use the put-object operation. For example, you use the following: aws s3api put-object --bucket bucketname --key path/to/folder/. Make sure that the end of the key name ends in a / for it to be considered a folder.  
+     * Logical directory mappings that specify what Amazon S3 paths and keys should be visible to your user and how you want to make them visible. You will need to specify the "Entry" and "Target" pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 path. If you only specify a target, it will be displayed as is. You will need to also make sure that your AWS IAM Role provides access to paths in Target. The following is an example.  '[ "/bucket2/documentation", { "Entry": "your-personal-report.pdf", "Target": "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]'  In most cases, you can use this value instead of the scope-down policy to lock your user down to the designated home directory ("chroot"). To do this, you can set Entry to '/' and set Target to the HomeDirectory parameter value.  If the target of a logical directory entry does not exist in Amazon S3, the entry will be ignored. As a workaround, you can use the Amazon S3 api to create 0 byte objects as place holders for your directory. If using the CLI, use the s3api call instead of s3 so you can use the put-object operation. For example, you use the following: aws s3api put-object --bucket bucketname --key path/to/folder/. Make sure that the end of the key name ends in a / for it to be considered a folder. 
      */
     HomeDirectoryMappings?: HomeDirectoryMappings;
     /**
-     * Allows you to supply a scope-down policy for your user so you can use the same AWS Identity and Access Management (IAM) role across multiple users. The policy scopes down user access to portions of your Amazon S3 bucket. Variables you can use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.  For scope-down policies, AWS Transfer for SFTP stores the policy as a JSON blob, instead of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass it in the Policy argument. For an example of a scope-down policy, see "https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down"&gt;Creating a Scope-Down Policy. For more information, see "https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html" in the AWS Security Token Service API Reference. 
+     * Allows you to supply a scope-down policy for your user so you can use the same AWS Identity and Access Management (IAM) role across multiple users. The policy scopes down user access to portions of your Amazon S3 bucket. Variables you can use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.  For scope-down policies, AWS Transfer Family stores the policy as a JSON blob, instead of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass it in the Policy argument. For an example of a scope-down policy, see Creating a Scope-Down Policy. For more information, see AssumeRole in the AWS Security Token Service API Reference. 
      */
     Policy?: Policy;
     /**
-     * The IAM role that controls your user's access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the Secure File Transfer Protocol (SFTP) server to access your resources when servicing your SFTP user's transfer requests.
+     * The IAM role that controls your users' access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the file transfer protocol-enabled server to access your resources when servicing your users' transfer requests.
      */
     Role?: Role;
     /**
-     * A system-assigned unique identifier for an SFTP server instance that the user account is assigned to.
+     * A system-assigned unique identifier for a file transfer protocol-enabled server instance that the user account is assigned to.
      */
     ServerId: ServerId;
     /**
-     * A unique string that identifies a user and is associated with a server as specified by the ServerId. This is the string that will be used by your user when they log in to your SFTP server. This user name is a minimum of 3 and a maximum of 32 characters long. The following are valid characters: a-z, A-Z, 0-9, underscore, and hyphen. The user name can't start with a hyphen.
+     * A unique string that identifies a user and is associated with a file transfer protocol-enabled server as specified by the ServerId. This is the string that will be used by your user when they log in to your server. This user name is a minimum of 3 and a maximum of 32 characters long. The following are valid characters: a-z, A-Z, 0-9, underscore, and hyphen. The user name can't start with a hyphen.
      */
     UserName: UserName;
   }
   export interface UpdateUserResponse {
     /**
-     * A system-assigned unique identifier for an SFTP server instance that the user account is assigned to.
+     * A system-assigned unique identifier for a file transfer protocol-enabled server instance that the user account is assigned to.
      */
     ServerId: ServerId;
     /**
-     * The unique identifier for a user that is assigned to the SFTP server instance that was specified in the request.
+     * The unique identifier for a user that is assigned to a file transfer protocol-enabled server instance that was specified in the request.
      */
     UserName: UserName;
   }

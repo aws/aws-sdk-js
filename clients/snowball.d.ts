@@ -907,8 +907,8 @@ declare namespace Snowball {
     OutboundShipment?: Shipment;
   }
   export type ShippingOption = "SECOND_DAY"|"NEXT_DAY"|"EXPRESS"|"STANDARD"|string;
-  export type SnowballCapacity = "T50"|"T80"|"T100"|"T42"|"NoPreference"|string;
-  export type SnowballType = "STANDARD"|"EDGE"|"EDGE_C"|"EDGE_CG"|string;
+  export type SnowballCapacity = "T50"|"T80"|"T100"|"T42"|"T98"|"NoPreference"|string;
+  export type SnowballType = "STANDARD"|"EDGE"|"EDGE_C"|"EDGE_CG"|"EDGE_S"|string;
   export type SnsTopicARN = string;
   export type String = string;
   export interface TaxDocuments {

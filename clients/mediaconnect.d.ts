@@ -28,6 +28,14 @@ declare class MediaConnect extends Service {
    */
   addFlowSources(callback?: (err: AWSError, data: MediaConnect.Types.AddFlowSourcesResponse) => void): Request<MediaConnect.Types.AddFlowSourcesResponse, AWSError>;
   /**
+   * Adds VPC interfaces to flow
+   */
+  addFlowVpcInterfaces(params: MediaConnect.Types.AddFlowVpcInterfacesRequest, callback?: (err: AWSError, data: MediaConnect.Types.AddFlowVpcInterfacesResponse) => void): Request<MediaConnect.Types.AddFlowVpcInterfacesResponse, AWSError>;
+  /**
+   * Adds VPC interfaces to flow
+   */
+  addFlowVpcInterfaces(callback?: (err: AWSError, data: MediaConnect.Types.AddFlowVpcInterfacesResponse) => void): Request<MediaConnect.Types.AddFlowVpcInterfacesResponse, AWSError>;
+  /**
    * Creates a new flow. The request must include one source. The request optionally can include outputs (up to 50) and entitlements (up to 50).
    */
   createFlow(params: MediaConnect.Types.CreateFlowRequest, callback?: (err: AWSError, data: MediaConnect.Types.CreateFlowResponse) => void): Request<MediaConnect.Types.CreateFlowResponse, AWSError>;
@@ -99,6 +107,14 @@ declare class MediaConnect extends Service {
    * Removes a source from an existing flow. This request can be made only if there is more than one source on the flow.
    */
   removeFlowSource(callback?: (err: AWSError, data: MediaConnect.Types.RemoveFlowSourceResponse) => void): Request<MediaConnect.Types.RemoveFlowSourceResponse, AWSError>;
+  /**
+   * Removes a VPC Interface from an existing flow. This request can be made only on a VPC interface that does not have a Source or Output associated with it. If the VPC interface is referenced by a Source or Output, you must first delete or update the Source or Output to no longer reference the VPC interface.
+   */
+  removeFlowVpcInterface(params: MediaConnect.Types.RemoveFlowVpcInterfaceRequest, callback?: (err: AWSError, data: MediaConnect.Types.RemoveFlowVpcInterfaceResponse) => void): Request<MediaConnect.Types.RemoveFlowVpcInterfaceResponse, AWSError>;
+  /**
+   * Removes a VPC Interface from an existing flow. This request can be made only on a VPC interface that does not have a Source or Output associated with it. If the VPC interface is referenced by a Source or Output, you must first delete or update the Source or Output to no longer reference the VPC interface.
+   */
+  removeFlowVpcInterface(callback?: (err: AWSError, data: MediaConnect.Types.RemoveFlowVpcInterfaceResponse) => void): Request<MediaConnect.Types.RemoveFlowVpcInterfaceResponse, AWSError>;
   /**
    * Revokes an entitlement from a flow. Once an entitlement is revoked, the content becomes unavailable to the subscriber and the associated output is removed.
    */
@@ -213,6 +229,26 @@ declare namespace MediaConnect {
      */
     Sources?: __listOfSource;
   }
+  export interface AddFlowVpcInterfacesRequest {
+    /**
+     * The flow that you want to mutate.
+     */
+    FlowArn: __string;
+    /**
+     * A list of VPC interfaces that you want to add.
+     */
+    VpcInterfaces: __listOfVpcInterfaceRequest;
+  }
+  export interface AddFlowVpcInterfacesResponse {
+    /**
+     * The ARN of the flow that these VPC interfaces were added to.
+     */
+    FlowArn?: __string;
+    /**
+     * The details of the newly added VPC interfaces.
+     */
+    VpcInterfaces?: __listOfVpcInterface;
+  }
   export interface AddOutputRequest {
     /**
      * The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
@@ -258,6 +294,10 @@ declare namespace MediaConnect {
      * The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
      */
     StreamId?: __string;
+    /**
+     * The name of the VPC interface attachment to use for this output.
+     */
+    VpcInterfaceAttachment?: VpcInterfaceAttachment;
   }
   export type Algorithm = "aes128"|"aes192"|"aes256"|string;
   export interface CreateFlowRequest {
@@ -280,6 +320,10 @@ declare namespace MediaConnect {
     Source?: SetSourceRequest;
     SourceFailoverConfig?: FailoverConfig;
     Sources?: __listOfSetSourceRequest;
+    /**
+     * The VPC interfaces you want on the flow.
+     */
+    VpcInterfaces?: __listOfVpcInterfaceRequest;
   }
   export interface CreateFlowResponse {
     Flow?: Flow;
@@ -417,6 +461,10 @@ declare namespace MediaConnect {
      * The current status of the flow.
      */
     Status: Status;
+    /**
+     * The VPC Interfaces for this flow.
+     */
+    VpcInterfaces?: __listOfVpcInterface;
   }
   export interface GrantEntitlementRequest {
     /**
@@ -601,6 +649,10 @@ declare namespace MediaConnect {
      * Attributes related to the transport stream that are used in the output.
      */
     Transport?: Transport;
+    /**
+     * The name of the VPC interface attachment to use for this output.
+     */
+    VpcInterfaceAttachment?: VpcInterfaceAttachment;
   }
   export type Protocol = "zixi-push"|"rtp-fec"|"rtp"|"zixi-pull"|"rist"|string;
   export interface RemoveFlowOutputRequest {
@@ -642,6 +694,30 @@ declare namespace MediaConnect {
      * The ARN of the source that was removed.
      */
     SourceArn?: __string;
+  }
+  export interface RemoveFlowVpcInterfaceRequest {
+    /**
+     * The flow that you want to remove a VPC interface from.
+     */
+    FlowArn: __string;
+    /**
+     * The name of the VPC interface that you want to remove.
+     */
+    VpcInterfaceName: __string;
+  }
+  export interface RemoveFlowVpcInterfaceResponse {
+    /**
+     * The ARN of the flow that is associated with the VPC interface you removed.
+     */
+    FlowArn?: __string;
+    /**
+     * IDs of network interfaces associated with the removed VPC interface that Media Connect was unable to remove.
+     */
+    NonDeletedNetworkInterfaceIds?: __listOf__string;
+    /**
+     * The name of the VPC interface that was removed.
+     */
+    VpcInterfaceName?: __string;
   }
   export interface RevokeFlowEntitlementRequest {
     /**
@@ -701,6 +777,10 @@ declare namespace MediaConnect {
      */
     StreamId?: __string;
     /**
+     * The name of the VPC interface to use for this source.
+     */
+    VpcInterfaceName?: __string;
+    /**
      * The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
      */
     WhitelistCidr?: __string;
@@ -742,6 +822,10 @@ declare namespace MediaConnect {
      * Attributes related to the transport stream that are used in the source.
      */
     Transport?: Transport;
+    /**
+     * The name of the VPC Interface this Source is configured with.
+     */
+    VpcInterfaceName?: __string;
     /**
      * The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
      */
@@ -955,6 +1039,10 @@ declare namespace MediaConnect {
      * The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
      */
     StreamId?: __string;
+    /**
+     * The name of the VPC interface attachment to use for this output.
+     */
+    VpcInterfaceAttachment?: VpcInterfaceAttachment;
   }
   export interface UpdateFlowOutputResponse {
     /**
@@ -1015,6 +1103,10 @@ declare namespace MediaConnect {
      */
     StreamId?: __string;
     /**
+     * The name of the VPC Interface to configure this Source with.
+     */
+    VpcInterfaceName?: __string;
+    /**
      * The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
      */
     WhitelistCidr?: __string;
@@ -1029,6 +1121,52 @@ declare namespace MediaConnect {
      */
     Source?: Source;
   }
+  export interface VpcInterface {
+    /**
+     * Immutable and has to be a unique against other VpcInterfaces in this Flow
+     */
+    Name: __string;
+    /**
+     * IDs of the network interfaces created in customer's account by MediaConnect.
+     */
+    NetworkInterfaceIds: __listOf__string;
+    /**
+     * Role Arn MediaConnect can assumes to create ENIs in customer's account
+     */
+    RoleArn: __string;
+    /**
+     * Security Group IDs to be used on ENI.
+     */
+    SecurityGroupIds: __listOf__string;
+    /**
+     * Subnet must be in the AZ of the Flow
+     */
+    SubnetId: __string;
+  }
+  export interface VpcInterfaceAttachment {
+    /**
+     * The name of the VPC interface to use for this output.
+     */
+    VpcInterfaceName?: __string;
+  }
+  export interface VpcInterfaceRequest {
+    /**
+     * The name of the VPC Interface. This value must be unique within the current flow.
+     */
+    Name: __string;
+    /**
+     * Role Arn MediaConnect can assumes to create ENIs in customer's account
+     */
+    RoleArn: __string;
+    /**
+     * Security Group IDs to be used on ENI.
+     */
+    SecurityGroupIds: __listOf__string;
+    /**
+     * Subnet must be in the AZ of the Flow
+     */
+    SubnetId: __string;
+  }
   export type __integer = number;
   export type __listOfAddOutputRequest = AddOutputRequest[];
   export type __listOfEntitlement = Entitlement[];
@@ -1038,6 +1176,8 @@ declare namespace MediaConnect {
   export type __listOfOutput = Output[];
   export type __listOfSetSourceRequest = SetSourceRequest[];
   export type __listOfSource = Source[];
+  export type __listOfVpcInterface = VpcInterface[];
+  export type __listOfVpcInterfaceRequest = VpcInterfaceRequest[];
   export type __listOf__string = __string[];
   export type __mapOf__string = {[key: string]: __string};
   export type __string = string;

@@ -57,7 +57,7 @@ declare namespace AugmentedAIRuntime {
   export type ContentClassifiers = ContentClassifier[];
   export interface DeleteHumanLoopRequest {
     /**
-     * The name of the human loop you want to delete.
+     * The name of the human loop that you want to delete.
      */
     HumanLoopName: HumanLoopName;
   }
@@ -65,7 +65,7 @@ declare namespace AugmentedAIRuntime {
   }
   export interface DescribeHumanLoopRequest {
     /**
-     * The unique name of the human loop.
+     * The name of the human loop that you want information about.
      */
     HumanLoopName: HumanLoopName;
   }
@@ -75,19 +75,19 @@ declare namespace AugmentedAIRuntime {
      */
     CreationTime: Timestamp;
     /**
-     * The reason why a human loop has failed. The failure reason is returned when the human loop status is Failed.
+     * The reason why a human loop failed. The failure reason is returned when the status of the human loop is Failed.
      */
     FailureReason?: String;
     /**
-     * A failure code denoting a specific type of failure.
+     * A failure code that identifies the type of failure.
      */
     FailureCode?: String;
     /**
-     * The status of the human loop. Valid values:
+     * The status of the human loop. 
      */
     HumanLoopStatus: HumanLoopStatus;
     /**
-     * The name of the human loop.
+     * The name of the human loop. The name must be lowercase, unique within the Region in your account, and can have up to 63 characters. Valid characters: a-z, 0-9, and - (hyphen).
      */
     HumanLoopName: HumanLoopName;
     /**
@@ -99,7 +99,7 @@ declare namespace AugmentedAIRuntime {
      */
     FlowDefinitionArn: FlowDefinitionArn;
     /**
-     * An object containing information about the output of the human loop.
+     * An object that contains information about the output of the human loop.
      */
     HumanLoopOutput?: HumanLoopOutput;
   }
@@ -133,7 +133,7 @@ declare namespace AugmentedAIRuntime {
      */
     HumanLoopName?: HumanLoopName;
     /**
-     * The status of the human loop. Valid values:
+     * The status of the human loop. 
      */
     HumanLoopStatus?: HumanLoopStatus;
     /**
@@ -141,11 +141,11 @@ declare namespace AugmentedAIRuntime {
      */
     CreationTime?: Timestamp;
     /**
-     * The reason why the human loop failed. A failure reason is returned only when the status of the human loop is Failed.
+     * The reason why the human loop failed. A failure reason is returned when the status of the human loop is Failed.
      */
     FailureReason?: FailureReason;
     /**
-     * The Amazon Resource Name (ARN) of the flow definition.
+     * The Amazon Resource Name (ARN) of the flow definition used to configure the human loop.
      */
     FlowDefinitionArn?: FlowDefinitionArn;
   }
@@ -164,25 +164,25 @@ declare namespace AugmentedAIRuntime {
      */
     FlowDefinitionArn: FlowDefinitionArn;
     /**
-     * An optional value that specifies whether you want the results sorted in Ascending or Descending order.
+     * Optional. The order for displaying results. Valid values: Ascending and Descending.
      */
     SortOrder?: SortOrder;
     /**
-     * A token to resume pagination.
+     * A token to display the next page of results.
      */
     NextToken?: NextToken;
     /**
-     * The total number of items to return. If the total number of available items is more than the value specified in MaxResults, then a NextToken will be provided in the output that you can use to resume pagination.
+     * The total number of items to return. If the total number of available items is more than the value specified in MaxResults, then a NextToken is returned in the output. You can use this token to display the next page of results. 
      */
     MaxResults?: MaxResults;
   }
   export interface ListHumanLoopsResponse {
     /**
-     * An array of objects containing information about the human loops.
+     * An array of objects that contain information about the human loops.
      */
     HumanLoopSummaries: HumanLoopSummaries;
     /**
-     * A token to resume pagination.
+     * A token to display the next page of results.
      */
     NextToken?: NextToken;
   }
@@ -195,15 +195,15 @@ declare namespace AugmentedAIRuntime {
      */
     HumanLoopName: HumanLoopName;
     /**
-     * The Amazon Resource Name (ARN) of the flow definition.
+     * The Amazon Resource Name (ARN) of the flow definition associated with this human loop.
      */
     FlowDefinitionArn: FlowDefinitionArn;
     /**
-     * An object containing information about the human loop.
+     * An object that contains information about the human loop.
      */
     HumanLoopInput: HumanLoopInput;
     /**
-     * Attributes of the data specified by the customer.
+     * Attributes of the specified data. Use DataAttributes to specify if your data is free of personally identifiable information and/or free of adult content.
      */
     DataAttributes?: HumanLoopDataAttributes;
   }
@@ -215,7 +215,7 @@ declare namespace AugmentedAIRuntime {
   }
   export interface StopHumanLoopRequest {
     /**
-     * The name of the human loop you want to stop.
+     * The name of the human loop that you want to stop.
      */
     HumanLoopName: HumanLoopName;
   }

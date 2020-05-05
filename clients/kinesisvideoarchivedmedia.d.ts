@@ -13,6 +13,14 @@ declare class KinesisVideoArchivedMedia extends Service {
   constructor(options?: KinesisVideoArchivedMedia.Types.ClientConfiguration)
   config: Config & KinesisVideoArchivedMedia.Types.ClientConfiguration;
   /**
+   * Downloads an MP4 file (clip) containing the archived, on-demand media from the specified video stream over the specified time range.  Both the StreamName and the StreamARN parameters are optional, but you must specify either the StreamName or the StreamARN when invoking this API operation.  As a prerequsite to using GetCLip API, you must obtain an endpoint using GetDataEndpoint, specifying GET_CLIP for the APIName parameter.  An Amazon Kinesis video stream has the following requirements for providing data through MP4:   The media must contain h.264 or h.265 encoded video and, optionally, AAC or G.711 encoded audio. Specifically, the codec ID of track 1 should be V_MPEG/ISO/AVC (for h.264) or V_MPEGH/ISO/HEVC (for H.265). Optionally, the codec ID of track 2 should be A_AAC (for AAC) or A_MS/ACM (for G.711).   Data retention must be greater than 0.   The video track of each fragment must contain codec private data in the Advanced Video Coding (AVC) for H.264 format and HEVC for H.265 format. For more information, see MPEG-4 specification ISO/IEC 14496-15. For information about adapting stream data to a given format, see NAL Adaptation Flags.   The audio track (if present) of each fragment must contain codec private data in the AAC format (AAC specification ISO/IEC 13818-7) or the MS Wave format.   You can monitor the amount of outgoing data by monitoring the GetClip.OutgoingBytes Amazon CloudWatch metric. For information about using CloudWatch to monitor Kinesis Video Streams, see Monitoring Kinesis Video Streams. For pricing information, see Amazon Kinesis Video Streams Pricing and AWS Pricing. Charges for outgoing AWS data apply.
+   */
+  getClip(params: KinesisVideoArchivedMedia.Types.GetClipInput, callback?: (err: AWSError, data: KinesisVideoArchivedMedia.Types.GetClipOutput) => void): Request<KinesisVideoArchivedMedia.Types.GetClipOutput, AWSError>;
+  /**
+   * Downloads an MP4 file (clip) containing the archived, on-demand media from the specified video stream over the specified time range.  Both the StreamName and the StreamARN parameters are optional, but you must specify either the StreamName or the StreamARN when invoking this API operation.  As a prerequsite to using GetCLip API, you must obtain an endpoint using GetDataEndpoint, specifying GET_CLIP for the APIName parameter.  An Amazon Kinesis video stream has the following requirements for providing data through MP4:   The media must contain h.264 or h.265 encoded video and, optionally, AAC or G.711 encoded audio. Specifically, the codec ID of track 1 should be V_MPEG/ISO/AVC (for h.264) or V_MPEGH/ISO/HEVC (for H.265). Optionally, the codec ID of track 2 should be A_AAC (for AAC) or A_MS/ACM (for G.711).   Data retention must be greater than 0.   The video track of each fragment must contain codec private data in the Advanced Video Coding (AVC) for H.264 format and HEVC for H.265 format. For more information, see MPEG-4 specification ISO/IEC 14496-15. For information about adapting stream data to a given format, see NAL Adaptation Flags.   The audio track (if present) of each fragment must contain codec private data in the AAC format (AAC specification ISO/IEC 13818-7) or the MS Wave format.   You can monitor the amount of outgoing data by monitoring the GetClip.OutgoingBytes Amazon CloudWatch metric. For information about using CloudWatch to monitor Kinesis Video Streams, see Monitoring Kinesis Video Streams. For pricing information, see Amazon Kinesis Video Streams Pricing and AWS Pricing. Charges for outgoing AWS data apply.
+   */
+  getClip(callback?: (err: AWSError, data: KinesisVideoArchivedMedia.Types.GetClipOutput) => void): Request<KinesisVideoArchivedMedia.Types.GetClipOutput, AWSError>;
+  /**
    * Retrieves an MPEG Dynamic Adaptive Streaming over HTTP (DASH) URL for the stream. You can then open the URL in a media player to view the stream contents. Both the StreamName and the StreamARN parameters are optional, but you must specify either the StreamName or the StreamARN when invoking this API operation. An Amazon Kinesis video stream has the following requirements for providing data through MPEG-DASH:   The media must contain h.264 or h.265 encoded video and, optionally, AAC or G.711 encoded audio. Specifically, the codec ID of track 1 should be V_MPEG/ISO/AVC (for h.264) or V_MPEGH/ISO/HEVC (for H.265). Optionally, the codec ID of track 2 should be A_AAC (for AAC) or A_MS/ACM (for G.711).   Data retention must be greater than 0.   The video track of each fragment must contain codec private data in the Advanced Video Coding (AVC) for H.264 format and HEVC for H.265 format. For more information, see MPEG-4 specification ISO/IEC 14496-15. For information about adapting stream data to a given format, see NAL Adaptation Flags.   The audio track (if present) of each fragment must contain codec private data in the AAC format (AAC specification ISO/IEC 13818-7) or the MS Wave format.   The following procedure shows how to use MPEG-DASH with Kinesis Video Streams:   Get an endpoint using GetDataEndpoint, specifying GET_DASH_STREAMING_SESSION_URL for the APIName parameter.   Retrieve the MPEG-DASH URL using GetDASHStreamingSessionURL. Kinesis Video Streams creates an MPEG-DASH streaming session to be used for accessing content in a stream using the MPEG-DASH protocol. GetDASHStreamingSessionURL returns an authenticated URL (that includes an encrypted session token) for the session's MPEG-DASH manifest (the root resource needed for streaming with MPEG-DASH).  Don't share or store this token where an unauthorized entity could access it. The token provides access to the content of the stream. Safeguard the token with the same measures that you would use with your AWS credentials.  The media that is made available through the manifest consists only of the requested stream, time range, and format. No other media data (such as frames outside the requested window or alternate bitrates) is made available.   Provide the URL (containing the encrypted session token) for the MPEG-DASH manifest to a media player that supports the MPEG-DASH protocol. Kinesis Video Streams makes the initialization fragment and media fragments available through the manifest URL. The initialization fragment contains the codec private data for the stream, and other data needed to set up the video or audio decoder and renderer. The media fragments contain encoded video frames or encoded audio samples.   The media player receives the authenticated URL and requests stream metadata and media data normally. When the media player requests data, it calls the following actions:    GetDASHManifest: Retrieves an MPEG DASH manifest, which contains the metadata for the media that you want to playback.    GetMP4InitFragment: Retrieves the MP4 initialization fragment. The media player typically loads the initialization fragment before loading any media fragments. This fragment contains the "fytp" and "moov" MP4 atoms, and the child atoms that are needed to initialize the media player decoder. The initialization fragment does not correspond to a fragment in a Kinesis video stream. It contains only the codec private data for the stream and respective track, which the media player needs to decode the media frames.    GetMP4MediaFragment: Retrieves MP4 media fragments. These fragments contain the "moof" and "mdat" MP4 atoms and their child atoms, containing the encoded fragment's media frames and their timestamps.   After the first media fragment is made available in a streaming session, any fragments that don't contain the same codec private data cause an error to be returned when those different media fragments are loaded. Therefore, the codec private data should not change between fragments in a session. This also means that the session fails if the fragments in a stream change from having only video to having both audio and video.  Data retrieved with this action is billable. See Pricing for details.      The following restrictions apply to MPEG-DASH sessions:   A streaming session URL should not be shared between players. The service might throttle a session if multiple media players are sharing it. For connection limits, see Kinesis Video Streams Limits.   A Kinesis video stream can have a maximum of ten active MPEG-DASH streaming sessions. If a new session is created when the maximum number of sessions is already active, the oldest (earliest created) session is closed. The number of active GetMedia connections on a Kinesis video stream does not count against this limit, and the number of active MPEG-DASH sessions does not count against the active GetMedia connection limit.  The maximum limits for active HLS and MPEG-DASH streaming sessions are independent of each other.      You can monitor the amount of data that the media player consumes by monitoring the GetMP4MediaFragment.OutgoingBytes Amazon CloudWatch metric. For information about using CloudWatch to monitor Kinesis Video Streams, see Monitoring Kinesis Video Streams. For pricing information, see Amazon Kinesis Video Streams Pricing and AWS Pricing. Charges for both HLS sessions and outgoing AWS data apply. For more information about HLS, see HTTP Live Streaming on the Apple Developer site.  If an error is thrown after invoking a Kinesis Video Streams archived media API, in addition to the HTTP status code and the response body, it includes the following pieces of information:     x-amz-ErrorType HTTP header – contains a more specific error type in addition to what the HTTP status code provides.     x-amz-RequestId HTTP header – if you want to report an issue to AWS, the support team can better diagnose the problem if given the Request Id.   Both the HTTP status code and the ErrorType header can be utilized to make programmatic decisions about whether errors are retry-able and under what conditions, as well as provide information on what actions the client programmer might need to take in order to successfully try again. For more information, see the Errors section at the bottom of this topic, as well as Common Errors.  
    */
   getDASHStreamingSessionURL(params: KinesisVideoArchivedMedia.Types.GetDASHStreamingSessionURLInput, callback?: (err: AWSError, data: KinesisVideoArchivedMedia.Types.GetDASHStreamingSessionURLOutput) => void): Request<KinesisVideoArchivedMedia.Types.GetDASHStreamingSessionURLOutput, AWSError>;
@@ -46,6 +54,27 @@ declare class KinesisVideoArchivedMedia extends Service {
   listFragments(callback?: (err: AWSError, data: KinesisVideoArchivedMedia.Types.ListFragmentsOutput) => void): Request<KinesisVideoArchivedMedia.Types.ListFragmentsOutput, AWSError>;
 }
 declare namespace KinesisVideoArchivedMedia {
+  export interface ClipFragmentSelector {
+    /**
+     * The origin of the timestamps to use (Server or Producer).
+     */
+    FragmentSelectorType: ClipFragmentSelectorType;
+    /**
+     * The range of timestamps to return.
+     */
+    TimestampRange: ClipTimestampRange;
+  }
+  export type ClipFragmentSelectorType = "PRODUCER_TIMESTAMP"|"SERVER_TIMESTAMP"|string;
+  export interface ClipTimestampRange {
+    /**
+     * The starting timestamp in the range of timestamps for which to return fragments.  This value is inclusive. Fragments that start before the StartTimestamp and continue past it are included in the session. If FragmentSelectorType is SERVER_TIMESTAMP, the StartTimestamp must be later than the stream head. 
+     */
+    StartTimestamp: Timestamp;
+    /**
+     * The end of the timestamp range for the requested media. This value must be within 3 hours of the specified StartTimestamp, and it must be later than the StartTimestamp value. If FragmentSelectorType for the request is SERVER_TIMESTAMP, this value must be in the past.  This value is inclusive. The EndTimestamp is compared to the (starting) timestamp of the fragment. Fragments that start before the EndTimestamp value and continue past it are included in the session. 
+     */
+    EndTimestamp: Timestamp;
+  }
   export type ContainerFormat = "FRAGMENTED_MP4"|"MPEG_TS"|string;
   export type ContentType = string;
   export type DASHDisplayFragmentNumber = "ALWAYS"|"NEVER"|string;
@@ -78,7 +107,7 @@ declare namespace KinesisVideoArchivedMedia {
     /**
      * The unique identifier of the fragment. This value monotonically increases based on the ingestion order.
      */
-    FragmentNumber?: String;
+    FragmentNumber?: FragmentNumberString;
     /**
      * The total fragment size, including information about the fragment and contained media data.
      */
@@ -110,6 +139,30 @@ declare namespace KinesisVideoArchivedMedia {
     TimestampRange: TimestampRange;
   }
   export type FragmentSelectorType = "PRODUCER_TIMESTAMP"|"SERVER_TIMESTAMP"|string;
+  export interface GetClipInput {
+    /**
+     * The name of the stream for which to retrieve the media clip.  You must specify either the StreamName or the StreamARN. 
+     */
+    StreamName?: StreamName;
+    /**
+     * The Amazon Resource Name (ARN) of the stream for which to retrieve the media clip.  You must specify either the StreamName or the StreamARN. 
+     */
+    StreamARN?: ResourceARN;
+    /**
+     * The time range of the requested clip and the source of the timestamps.
+     */
+    ClipFragmentSelector: ClipFragmentSelector;
+  }
+  export interface GetClipOutput {
+    /**
+     * The content type of the media in the requested clip.
+     */
+    ContentType?: ContentType;
+    /**
+     * Traditional MP4 file that contains the media clip from the specified video stream. The output will contain the first 100 MB or the first 200 fragments from the specified start timestamp. For more information, see Kinesis Video Streams Limits. 
+     */
+    Payload?: Payload;
+  }
   export interface GetDASHStreamingSessionURLInput {
     /**
      * The name of the stream for which to retrieve the MPEG-DASH manifest URL. You must specify either the StreamName or the StreamARN.
@@ -251,7 +304,7 @@ declare namespace KinesisVideoArchivedMedia {
     /**
      * A token to specify where to start paginating. This is the ListFragmentsOutput$NextToken from a previously truncated response.
      */
-    NextToken?: String;
+    NextToken?: NextToken;
     /**
      * Describes the timestamp range and timestamp origin for the range of fragments to return.
      */
@@ -265,14 +318,14 @@ declare namespace KinesisVideoArchivedMedia {
     /**
      * If the returned list is truncated, the operation returns this token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
-    NextToken?: String;
+    NextToken?: NextToken;
   }
   export type Long = number;
+  export type NextToken = string;
   export type PageLimit = number;
   export type Payload = Buffer|Uint8Array|Blob|string|Readable;
   export type ResourceARN = string;
   export type StreamName = string;
-  export type String = string;
   export type Timestamp = Date;
   export interface TimestampRange {
     /**

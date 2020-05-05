@@ -1,6 +1,169 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.643.0-->
+<!--LATEST=2.670.0-->
 <!--ENTRYINSERT-->
+
+## 2.670.0
+* feature: EC2: With this release, you can call ModifySubnetAttribute with two new parameters: MapCustomerOwnedIpOnLaunch and CustomerOwnedIpv4Pool, to map a customerOwnedIpv4Pool to a subnet. You will also see these two new fields in the DescribeSubnets response. If your subnet has a customerOwnedIpv4Pool mapped, your network interface will get an auto assigned customerOwnedIpv4 address when placed onto an instance.
+* feature: SSM: AWS Systems Manager Parameter Store launches new data type to support aliases in EC2 APIs
+
+## 2.669.0
+* feature: EC2: With this release, you can include enriched metadata in Amazon Virtual Private Cloud (Amazon VPC) flow logs published to Amazon CloudWatch Logs or Amazon Simple Storage Service (S3). Prior to this, custom format VPC flow logs enriched with additional metadata could be published only to S3. With this launch, we are also adding additional metadata fields that provide insights about the location such as AWS Region, AWS Availability Zone, AWS Local Zone, AWS Wavelength Zone, or AWS Outpost where the network interface where flow logs are captured exists. 
+* feature: S3Control: Amazon S3 Batch Operations now supports Object Lock.
+
+## 2.668.0
+* feature: EFS: Change the TagKeys argument for UntagResource to a URL parameter to address an issue with the Java and .NET SDKs.
+* feature: SSM: Added TimeoutSeconds as part of ListCommands API response.
+
+## 2.667.0
+* feature: IoTEvents: Doc only update to correct APIs and related descriptions
+* feature: Iot: AWS IoT Core released Fleet Provisioning for scalable onboarding of IoT devices to the cloud. This release includes support for customer's Lambda functions to validate devices during onboarding. Fleet Provisioning also allows devices to send Certificate Signing Requests (CSR) to AWS IoT Core for signing and getting a unique certificate. Lastly,  AWS IoT Core added a feature to register the same certificate for multiple accounts in the same region without needing to register the certificate authority (CA).
+* feature: MediaConvert: AWS Elemental MediaConvert SDK has added support for including AFD signaling in MXF wrapper.
+* feature: Schemas: Add support for resource policies for Amazon EventBridge Schema Registry, which is now generally available.
+* feature: StorageGateway: Adding support for S3_INTELLIGENT_TIERING as a storage class option
+
+## 2.666.0
+* feature: IoTSiteWise: AWS IoT SiteWise is a managed service that makes it easy to collect, store, organize and monitor data from industrial equipment at scale. You can use AWS IoT SiteWise to model your physical assets, processes and facilities, quickly compute common industrial performance metrics, and create fully managed web applications to help analyze industrial equipment data, prevent costly equipment issues, and reduce production inefficiencies.
+* feature: TranscribeService: With this release, you can now use Amazon Transcribe to create medical custom vocabularies and use them in both medical real-time streaming and medical batch transcription jobs.
+* feature: WAF: This release add migration API for AWS WAF Classic ("waf" and "waf-regional"). The migration API will parse through your web ACL and generate a CloudFormation template into your S3 bucket. Deploying this template will create equivalent web ACL under new AWS WAF ("wafv2").
+* feature: WAFRegional: This release add migration API for AWS WAF Classic ("waf" and "waf-regional"). The migration API will parse through your web ACL and generate a CloudFormation template into your S3 bucket. Deploying this template will create equivalent web ACL under new AWS WAF ("wafv2").
+
+## 2.665.0
+* feature: ECR: This release adds support for multi-architecture images also known as a manifest list
+* feature: KinesisVideo: Add "GET_CLIP" to the list of supported API names for the GetDataEndpoint API.
+* feature: KinesisVideoArchivedMedia: Add support for the GetClip API for retrieving media from a video stream in the MP4 format.
+* feature: MediaLive: AWS Elemental MediaLive now supports several new features: enhanced VQ for H.264 (AVC) output encodes; passthrough of timed metadata and of Nielsen ID3 metadata in fMP4 containers in HLS outputs; the ability to generate a SCTE-35 sparse track without additional segmentation, in Microsoft Smooth outputs;  the ability to select the audio from a TS input by specifying the audio track; and conversion of HDR colorspace in the input to an SDR colorspace in the output.
+* feature: Route53: Amazon Route 53 now supports the Africa (Cape Town) Region (af-south-1) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+* feature: SSM: SSM State Manager support for adding list association filter for Resource Group and manual mode of managing compliance for an association. 
+
+## 2.664.0
+* feature: AccessAnalyzer: This release adds support for inclusion of S3 Access Point policies in IAM Access Analyzer evaluation of S3 bucket access. IAM Access Analyzer now reports findings for buckets shared through access points and identifies the access point that permits access.
+* feature: DMS: Adding minimum replication engine version for describe-endpoint-types api.
+* feature: DataExchange: This release introduces AWS Data Exchange support for configurable encryption parameters when exporting data sets to Amazon S3. 
+* feature: SageMaker: Change to the input, ResourceSpec, changing EnvironmentArn to SageMakerImageArn. This affects the following preview APIs: CreateDomain, DescribeDomain, UpdateDomain, CreateUserProfile, DescribeUserProfile, UpdateUserProfile, CreateApp and DescribeApp.
+
+## 2.663.0
+* feature: ElasticInference: This feature allows customers to describe the accelerator types and offerings on any region where Elastic Inference is available.
+* feature: Iot: This release adds a new exception type to the AWS IoT SetV2LoggingLevel API.
+
+## 2.662.0
+* feature: ApplicationAutoScaling: This release supports Auto Scaling in Amazon Keyspaces for Apache Cassandra.
+* feature: Firehose: You can now deliver streaming data to an Amazon Elasticsearch Service domain in an Amazon VPC. You can now compress streaming data delivered to S3 using Hadoop-Snappy in addition to Gzip, Zip and Snappy formats.
+* feature: MediaPackageVod: Adds tagging support for PackagingGroups, PackagingConfigurations, and Assets
+* feature: Pinpoint: This release of the Amazon Pinpoint API enhances support for sending campaigns through custom channels to locations such as AWS Lambda functions or web applications. Campaigns can now use CustomDeliveryConfiguration and CampaignCustomMessage to configure custom channel settings for a campaign.
+* feature: RAM: AWS Resource Access Manager (RAM) provides a new ListResourceTypes action. This action lets you list the resource types that can be shared using AWS RAM.
+* feature: RDS: Adds support for AWS Local Zones, including a new optional parameter AvailabilityZoneGroup for the DescribeOrderableDBInstanceOptions operation.
+* feature: StorageGateway: Added AutomaticTapeCreation APIs
+* feature: Transfer: This release adds support for transfers over FTPS and FTP in and out of Amazon S3, which makes it easy to migrate File Transfer Protocol over SSL (FTPS) and FTP workloads to AWS, in addition to the existing support for Secure File Transfer Protocol (SFTP).
+
+## 2.661.0
+* feature: CodeGuruReviewer: Add support for code review and recommendation feedback APIs.
+* feature: ES: This change adds a new field 'OptionalDeployment' to ServiceSoftwareOptions to indicate whether a service software update is optional or mandatory. If True, it indicates that the update is optional, and the service software is not automatically updated. If False, the service software is automatically updated after AutomatedUpdateDate.
+* feature: FMS: This release is to support AWS Firewall Manager policy with Organizational Unit scope. 
+* feature: Redshift: Amazon Redshift support for usage limits
+
+## 2.660.0
+* feature: CostExplorer: Cost Explorer Rightsizing Recommendations integrates with Compute Optimizer and begins offering across instance family rightsizing recommendations, adding to existing support for within instance family rightsizing recommendations. 
+* feature: EMR: Amazon EMR adds support for configuring a managed scaling policy for an Amazon EMR cluster. This enables automatic resizing of a cluster to optimize for job execution speed and reduced cluster cost.
+* feature: GuardDuty: AWS GuardDuty now supports using AWS Organizations delegated administrators to create and manage GuardDuty master and member accounts.  The feature also allows GuardDuty to be automatically enabled on associated organization accounts.
+* feature: Route53Domains: You can now programmatically transfer domains between AWS accounts without having to contact AWS Support
+
+## 2.659.0
+* feature: ApiGatewayV2: You can now export an OpenAPI 3.0 compliant API definition file for Amazon API Gateway HTTP APIs using the Export API.
+* feature: CostExplorer: Cost Categories API is now General Available with new dimensions and operations support. You can map costs by account name, service, and charge type dimensions as well as use contains, starts with, and ends with operations. Cost Categories can also be used in RI and SP coverage reports.
+* feature: Glue: Added a new ConnectionType "KAFKA" and a ConnectionProperty "KAFKA_BOOTSTRAP_SERVERS" to support Kafka connection.
+* feature: IoTEvents: API update that allows users to add AWS Iot SiteWise actions while creating Detector Model in AWS Iot Events
+* feature: Synthetics: Introducing CloudWatch Synthetics. This is the first public release of CloudWatch Synthetics.
+
+## 2.658.0
+* feature: FraudDetector: Added support for a new rule engine execution mode. Customers will be able to configure their detector versions to evaluate all rules and return outcomes from all 'matched' rules in the GetPrediction API response. Added support for deleting Detectors (DeleteDetector) and Rule Versions (DeleteRuleVersion).
+
+## 2.657.0
+* feature: AugmentedAIRuntime: This release updates Amazon Augmented AI ListHumanLoops and StartHumanLoop APIs.
+* feature: EC2: Amazon EC2 now supports adding AWS resource tags for placement groups and key pairs, at creation time. The CreatePlacementGroup API will now return placement group information when created successfully. The DeleteKeyPair API now supports deletion by resource ID.
+* feature: Glue: This release adds support for querying GetUserDefinedFunctions API without databaseName.
+* feature: Imagebuilder: This release includes support for additional OS Versions within EC2 Image Builder.
+* feature: IoTEvents: API update that allows users to customize event action payloads, and adds support for Amazon DynamoDB actions.
+* feature: MediaConvert: AWS Elemental MediaConvert now allows you to specify your input captions frame rate for SCC captions sources.
+* feature: MediaTailor: AWS Elemental MediaTailor SDK now allows configuration of Avail Suppression.
+* feature: MigrationHub: Adding ThrottlingException
+* feature: RDS: This release adds support for Amazon RDS Proxy with PostgreSQL compatibility.
+* feature: SageMaker: Amazon SageMaker now supports running training jobs on ml.g4dn and ml.c5n instance types. Amazon SageMaker supports in "IN" operation for Search now.
+* feature: SecurityHub: Added a new BatchUpdateFindings action, which allows customers to update selected information about their findings. Security Hub customers use BatchUpdateFindings to track their investigation into a finding. BatchUpdateFindings is intended to replace the UpdateFindings action, which is deprecated.
+* feature: Snowball: An update to the Snowball Edge Storage Optimized device has been launched. Like the previous version, it has 80 TB of capacity for data transfer. Now it has 40 vCPUs, 80 GiB, and a 1 TiB SATA SSD of memory for EC2 compatible compute. The 80 TB of capacity can also be used for EBS-like volumes for AMIs.
+
+## 2.656.0
+* bugfix: Monitoring: Set MaxRetriesExceeded on monitoring event only when the final retry fails
+* feature: Chime: feature: Chime: This release introduces the ability to tag Amazon Chime SDK meeting resources.  You can use tags to organize and identify your resources for cost allocation. 
+* feature: CodeGuruProfiler: CodeGuruProfiler adds support for resource based authorization to submit profile data.
+* feature: EC2: This release provides the ability to include tags in EC2 event notifications. 
+* feature: ECS: This release provides native support for specifying Amazon EFS file systems as volumes in your Amazon ECS task definitions.
+* feature: MediaConvert: AWS Elemental MediaConvert SDK adds support for queue hopping. Jobs can now hop from their original queue to a specified alternate queue, based on the maximum wait time that you specify in the job settings.
+* feature: MigrationHubConfig: Adding ThrottlingException
+
+## 2.655.0
+* feature: CodeGuruReviewer: API updates for CodeGuruReviewer 
+* feature: MediaConnect: You can now send content from your MediaConnect flow to your virtual private cloud (VPC) without going over the public internet.
+
+## 2.654.0
+* feature: Chime: Amazon Chime proxy phone sessions let you provide two users with a shared phone number to communicate via voice or text for up to 12 hours without revealing personal phone numbers. When users call or message the provided phone number, they are connected to the other party and their private phone numbers are replaced with the shared number in Caller ID.
+* feature: ElasticBeanstalk: This release adds a new action, ListPlatformBranches, and updates two actions, ListPlatformVersions and DescribePlatformVersion, to support the concept of Elastic Beanstalk platform branches.
+* feature: S3: SDK will throw exception when CopyObject returns 200 status and empty body.
+* feature: TranscribeService: This release adds support for batch transcription jobs within Amazon Transcribe Medical.
+
+## 2.653.0
+* feature: PersonalizeRuntime: Amazon Personalize: Add new response field "score" to each item returned by GetRecommendations and GetPersonalizedRanking (HRNN-based recipes only)
+* feature: RoboMaker: Added support for limiting simulation unit usage, giving more predictable control over simulation cost
+
+## 2.652.0
+* feature: CloudWatch: Amazon CloudWatch Contributor Insights adds support for tags and tagging on resource creation. 
+* feature: GameLift: Public preview of GameLift FleetIQ as a standalone feature. GameLift FleetIQ makes it possible to use low-cost Spot instances by limiting the chance of interruptions affecting game sessions. FleetIQ is a feature of the managed GameLift service, and can now be used with game hosting in EC2 Auto Scaling groups that you manage in your own account.
+* feature: MediaLive: AWS Elemental MediaLive now supports Automatic Input Failover. This feature provides resiliency upstream of the channel, before ingest starts.
+
+## 2.651.0
+* feature: Iot: This release introduces Dimensions for AWS IoT Device Defender. Dimensions can be used in Security Profiles to collect and monitor fine-grained metrics.
+* feature: MediaConnect: You can now send content from your virtual private cloud (VPC) to your MediaConnect flow without going over the public internet.
+
+## 2.650.0
+* feature: AppConfig: This release adds an event log to deployments. In the case of a deployment rollback, the event log details the rollback reason.
+* feature: ElasticInference: This release includes improvements for the Amazon Elastic Inference service.
+* feature: FMS: This release contains FMS wafv2 support.
+* feature: Glue: Add two enums for MongoDB connection: Added "CONNECTION_URL" to "ConnectionPropertyKey" and added "MONGODB" to "ConnectionType"
+* feature: Lambda: AWS Lambda now supports .NET Core 3.1
+* feature: MediaStore: This release adds support for CloudWatch Metrics. You can now set a policy on your container to dictate which metrics MediaStore sends to CloudWatch.
+* feature: Pinpoint: This release of the Amazon Pinpoint API introduces MMS support for SMS messages.
+* feature: Rekognition: This release adds DeleteProject and DeleteProjectVersion APIs to Amazon Rekognition Custom Labels.
+* feature: StorageGateway: Adding audit logging support for SMB File Shares
+* feature: WAFV2: Added support for AWS Firewall Manager for WAFv2 and PermissionPolicy APIs for WAFv2.
+
+## 2.649.0
+* feature: AccessAnalyzer: This release adds support for the creation and management of IAM Access Analyzer analyzers with type organization. An analyzer with type organization continuously monitors all supported resources within the AWS organization and reports findings when they allow access from outside the organization.
+
+## 2.648.0
+* feature: GlobalAccelerator: This update adds an event history to the ListByoipCidr API call. This enables you to see the changes that you've made for an IP address range that you bring to AWS Global Accelerator through bring your own IP address (BYOIP).
+* feature: Kendra: The Amazon Kendra Microsoft SharePoint data source now supports include and exclude regular expressions and change log features. Include and exclude regular expressions enable you to  provide a list of regular expressions to match the display URL of SharePoint documents to either include or exclude documents respectively. When you enable the changelog feature it enables Amazon Kendra to use the SharePoint change log to determine which documents to update in the index.
+* feature: ServiceCatalog: Added "LocalRoleName" as an acceptable Parameter for Launch type in CreateConstraint and UpdateConstraint APIs
+
+## 2.647.0
+* feature: FSx: This release includes two changes: a new lower-cost, storage type called HDD (Hard Disk Drive), and a new generation of the Single-AZ deployment type called Single AZ 2. The HDD storage type can be selected on Multi AZ 1 and Single AZ 2 deployment types.
+* feature: SageMaker: This release updates Amazon Augmented AI CreateFlowDefinition API and DescribeFlowDefinition response.
+* feature: SecurityHub: Security Hub has now made it easier to opt out of default standards when you enable Security Hub. We added a new Boolean parameter to EnableSecurityHub called EnableDefaultStandards. If that parameter is true, Security Hub's default standards are enabled. A new Boolean parameter for standards, EnabledByDefault, indicates whether a standard is a default standard. Today, the only default standard is CIS AWS Foundations Benchmark v1.2. Additional default standards will be added in the future.To learn more, visit our documentation on the EnableSecurityHub API action.
+
+## 2.646.0
+* feature: ApplicationInsights: Amazon CloudWatch Application Insights for .NET and SQL Server now integrates with Amazon CloudWatch Events (AWS CodeDeploy, AWS Health and Amazon EC2 state changes). This feature enables customers to view events related to problems detected by CloudWatch Application Insights, and reduce mean-time-to-resolution (MTTR).
+* feature: CostExplorer: Customers can now receive Savings Plans recommendations at the member (linked) account level.
+* feature: Detective: The new ACCEPTED_BUT_DISABLED member account status indicates that a member account that accepted the invitation is blocked from contributing data to the behavior graph. The reason is provided in the new DISABLED_REASON property. The new StartMonitoringMember operation enables a blocked member account.
+* feature: ES: Adding support for customer packages (dictionary files) to Amazon Elasticsearch Service
+* feature: ManagedBlockchain: Amazon Managed Blockchain now has support to publish Hyperledger Fabric peer node, chaincode, and certificate authority (CA) logs to Amazon CloudWatch Logs.
+* feature: XRay: GetTraceSummaries - Now provides additional root cause attribute ClientImpacting which indicates whether root cause impacted trace client.
+
+## 2.645.0
+* feature: EKS: Adding new error codes: Ec2SubnetInvalidConfiguration and NodeCreationFailure for Nodegroups in EKS
+* feature: Organizations: Introduces actions for giving a member account administrative Organizations permissions for an AWS service. You can run this action only for AWS services that support this feature.
+
+## 2.644.0
+* feature: ApiGatewayV2: Documentation updates to reflect that the default timeout for integrations is now 30 seconds for HTTP APIs.
+* feature: EC2: Add EC2ThrottledException to throttledError
+* feature: EKS: Adding new error code IamLimitExceeded for Nodegroups in EKS
 
 ## 2.643.0
 * feature: ServiceCatalog: Added "productId" and "portfolioId" to responses from CreateConstraint, UpdateConstraint, ListConstraintsForPortfolio, and DescribeConstraint APIs

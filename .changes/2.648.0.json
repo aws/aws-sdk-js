@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "GlobalAccelerator",
+        "description": "This update adds an event history to the ListByoipCidr API call. This enables you to see the changes that you've made for an IP address range that you bring to AWS Global Accelerator through bring your own IP address (BYOIP)."
+    },
+    {
+        "type": "feature",
+        "category": "Kendra",
+        "description": "The Amazon Kendra Microsoft SharePoint data source now supports include and exclude regular expressions and change log features. Include and exclude regular expressions enable you to  provide a list of regular expressions to match the display URL of SharePoint documents to either include or exclude documents respectively. When you enable the changelog feature it enables Amazon Kendra to use the SharePoint change log to determine which documents to update in the index."
+    },
+    {
+        "type": "feature",
+        "category": "ServiceCatalog",
+        "description": "Added \"LocalRoleName\" as an acceptable Parameter for Launch type in CreateConstraint and UpdateConstraint APIs"
+    }
+]

@@ -69,6 +69,22 @@ declare class Rekognition extends Service {
    */
   deleteFaces(callback?: (err: AWSError, data: Rekognition.Types.DeleteFacesResponse) => void): Request<Rekognition.Types.DeleteFacesResponse, AWSError>;
   /**
+   * Deletes an Amazon Rekognition Custom Labels project. To delete a project you must first delete all versions of the model associated with the project. To delete a version of a model, see DeleteProjectVersion. This operation requires permissions to perform the rekognition:DeleteProject action. 
+   */
+  deleteProject(params: Rekognition.Types.DeleteProjectRequest, callback?: (err: AWSError, data: Rekognition.Types.DeleteProjectResponse) => void): Request<Rekognition.Types.DeleteProjectResponse, AWSError>;
+  /**
+   * Deletes an Amazon Rekognition Custom Labels project. To delete a project you must first delete all versions of the model associated with the project. To delete a version of a model, see DeleteProjectVersion. This operation requires permissions to perform the rekognition:DeleteProject action. 
+   */
+  deleteProject(callback?: (err: AWSError, data: Rekognition.Types.DeleteProjectResponse) => void): Request<Rekognition.Types.DeleteProjectResponse, AWSError>;
+  /**
+   * Deletes a version of a model.  You must first stop the model before you can delete it. To check if a model is running, use the Status field returned from DescribeProjectVersions. To stop a running model call StopProjectVersion.  This operation requires permissions to perform the rekognition:DeleteProjectVersion action. 
+   */
+  deleteProjectVersion(params: Rekognition.Types.DeleteProjectVersionRequest, callback?: (err: AWSError, data: Rekognition.Types.DeleteProjectVersionResponse) => void): Request<Rekognition.Types.DeleteProjectVersionResponse, AWSError>;
+  /**
+   * Deletes a version of a model.  You must first stop the model before you can delete it. To check if a model is running, use the Status field returned from DescribeProjectVersions. To stop a running model call StopProjectVersion.  This operation requires permissions to perform the rekognition:DeleteProjectVersion action. 
+   */
+  deleteProjectVersion(callback?: (err: AWSError, data: Rekognition.Types.DeleteProjectVersionResponse) => void): Request<Rekognition.Types.DeleteProjectVersionResponse, AWSError>;
+  /**
    * Deletes the stream processor identified by Name. You assign the value for Name when you create the stream processor with CreateStreamProcessor. You might not be able to use the same name for a stream processor for a few seconds after calling DeleteStreamProcessor.
    */
   deleteStreamProcessor(params: Rekognition.Types.DeleteStreamProcessorRequest, callback?: (err: AWSError, data: Rekognition.Types.DeleteStreamProcessorResponse) => void): Request<Rekognition.Types.DeleteStreamProcessorResponse, AWSError>;
@@ -716,6 +732,30 @@ declare namespace Rekognition {
      * An array of strings (face IDs) of the faces that were deleted.
      */
     DeletedFaces?: FaceIdList;
+  }
+  export interface DeleteProjectRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the project that you want to delete.
+     */
+    ProjectArn: ProjectArn;
+  }
+  export interface DeleteProjectResponse {
+    /**
+     * The current status of the delete project operation.
+     */
+    Status?: ProjectStatus;
+  }
+  export interface DeleteProjectVersionRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the model version that you want to delete.
+     */
+    ProjectVersionArn: ProjectVersionArn;
+  }
+  export interface DeleteProjectVersionResponse {
+    /**
+     * The status of the deletion operation.
+     */
+    Status?: ProjectVersionStatus;
   }
   export interface DeleteStreamProcessorRequest {
     /**

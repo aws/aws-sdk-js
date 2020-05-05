@@ -29,11 +29,11 @@ declare class Schemas extends Service {
    */
   createRegistry(callback?: (err: AWSError, data: Schemas.Types.CreateRegistryResponse) => void): Request<Schemas.Types.CreateRegistryResponse, AWSError>;
   /**
-   * Creates a schema definition.
+   * Creates a schema definition. Inactive schemas will be deleted after two years.
    */
   createSchema(params: Schemas.Types.CreateSchemaRequest, callback?: (err: AWSError, data: Schemas.Types.CreateSchemaResponse) => void): Request<Schemas.Types.CreateSchemaResponse, AWSError>;
   /**
-   * Creates a schema definition.
+   * Creates a schema definition. Inactive schemas will be deleted after two years.
    */
   createSchema(callback?: (err: AWSError, data: Schemas.Types.CreateSchemaResponse) => void): Request<Schemas.Types.CreateSchemaResponse, AWSError>;
   /**
@@ -52,6 +52,14 @@ declare class Schemas extends Service {
    * Deletes a Registry.
    */
   deleteRegistry(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete the resource-based policy attached to the specified registry.
+   */
+  deleteResourcePolicy(params: Schemas.Types.DeleteResourcePolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete the resource-based policy attached to the specified registry.
+   */
+  deleteResourcePolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Delete a schema definition.
    */
@@ -117,6 +125,14 @@ declare class Schemas extends Service {
    */
   getDiscoveredSchema(callback?: (err: AWSError, data: Schemas.Types.GetDiscoveredSchemaResponse) => void): Request<Schemas.Types.GetDiscoveredSchemaResponse, AWSError>;
   /**
+   * Retrieves the resource-based policy attached to a given registry.
+   */
+  getResourcePolicy(params: Schemas.Types.GetResourcePolicyRequest, callback?: (err: AWSError, data: Schemas.Types.GetResourcePolicyResponse) => void): Request<Schemas.Types.GetResourcePolicyResponse, AWSError>;
+  /**
+   * Retrieves the resource-based policy attached to a given registry.
+   */
+  getResourcePolicy(callback?: (err: AWSError, data: Schemas.Types.GetResourcePolicyResponse) => void): Request<Schemas.Types.GetResourcePolicyResponse, AWSError>;
+  /**
    * List the discoverers.
    */
   listDiscoverers(params: Schemas.Types.ListDiscoverersRequest, callback?: (err: AWSError, data: Schemas.Types.ListDiscoverersResponse) => void): Request<Schemas.Types.ListDiscoverersResponse, AWSError>;
@@ -157,14 +173,6 @@ declare class Schemas extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Schemas.Types.ListTagsForResourceResponse) => void): Request<Schemas.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * 
-   */
-  lockServiceLinkedRole(params: Schemas.Types.LockServiceLinkedRoleRequest, callback?: (err: AWSError, data: Schemas.Types.LockServiceLinkedRoleResponse) => void): Request<Schemas.Types.LockServiceLinkedRoleResponse, AWSError>;
-  /**
-   * 
-   */
-  lockServiceLinkedRole(callback?: (err: AWSError, data: Schemas.Types.LockServiceLinkedRoleResponse) => void): Request<Schemas.Types.LockServiceLinkedRoleResponse, AWSError>;
-  /**
    * Put code binding URI
    */
   putCodeBinding(params: Schemas.Types.PutCodeBindingRequest, callback?: (err: AWSError, data: Schemas.Types.PutCodeBindingResponse) => void): Request<Schemas.Types.PutCodeBindingResponse, AWSError>;
@@ -172,6 +180,14 @@ declare class Schemas extends Service {
    * Put code binding URI
    */
   putCodeBinding(callback?: (err: AWSError, data: Schemas.Types.PutCodeBindingResponse) => void): Request<Schemas.Types.PutCodeBindingResponse, AWSError>;
+  /**
+   * The name of the policy.
+   */
+  putResourcePolicy(params: Schemas.Types.PutResourcePolicyRequest, callback?: (err: AWSError, data: Schemas.Types.PutResourcePolicyResponse) => void): Request<Schemas.Types.PutResourcePolicyResponse, AWSError>;
+  /**
+   * The name of the policy.
+   */
+  putResourcePolicy(callback?: (err: AWSError, data: Schemas.Types.PutResourcePolicyResponse) => void): Request<Schemas.Types.PutResourcePolicyResponse, AWSError>;
   /**
    * Search the schemas
    */
@@ -205,14 +221,6 @@ declare class Schemas extends Service {
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * 
-   */
-  unlockServiceLinkedRole(params: Schemas.Types.UnlockServiceLinkedRoleRequest, callback?: (err: AWSError, data: Schemas.Types.UnlockServiceLinkedRoleResponse) => void): Request<Schemas.Types.UnlockServiceLinkedRoleResponse, AWSError>;
-  /**
-   * 
-   */
-  unlockServiceLinkedRole(callback?: (err: AWSError, data: Schemas.Types.UnlockServiceLinkedRoleResponse) => void): Request<Schemas.Types.UnlockServiceLinkedRoleResponse, AWSError>;
-  /**
    * Removes tags from a resource.
    */
   untagResource(params: Schemas.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -237,11 +245,11 @@ declare class Schemas extends Service {
    */
   updateRegistry(callback?: (err: AWSError, data: Schemas.Types.UpdateRegistryResponse) => void): Request<Schemas.Types.UpdateRegistryResponse, AWSError>;
   /**
-   * Updates the schema definition
+   * Updates the schema definition Inactive schemas will be deleted after two years.
    */
   updateSchema(params: Schemas.Types.UpdateSchemaRequest, callback?: (err: AWSError, data: Schemas.Types.UpdateSchemaResponse) => void): Request<Schemas.Types.UpdateSchemaResponse, AWSError>;
   /**
-   * Updates the schema definition
+   * Updates the schema definition Inactive schemas will be deleted after two years.
    */
   updateSchema(callback?: (err: AWSError, data: Schemas.Types.UpdateSchemaResponse) => void): Request<Schemas.Types.UpdateSchemaResponse, AWSError>;
   /**
@@ -300,6 +308,9 @@ declare namespace Schemas {
      * A description of the registry to be created.
      */
     Description?: __stringMin0Max256;
+    /**
+     * The name of the registry.
+     */
     RegistryName: __string;
     /**
      * Tags to associate with the registry.
@@ -325,17 +336,29 @@ declare namespace Schemas {
     Tags?: Tags;
   }
   export interface CreateSchemaRequest {
+    /**
+     * The source of the schema definition.
+     */
     Content: __stringMin1Max100000;
     /**
      * A description of the schema.
      */
     Description?: __stringMin0Max256;
+    /**
+     * The name of the registry.
+     */
     RegistryName: __string;
+    /**
+     * The name of the schema.
+     */
     SchemaName: __string;
     /**
      * Tags associated with the schema.
      */
     Tags?: Tags;
+    /**
+     * The type of schema.
+     */
     Type: Type;
   }
   export interface CreateSchemaResponse {
@@ -370,24 +393,63 @@ declare namespace Schemas {
     VersionCreatedDate?: __timestampIso8601;
   }
   export interface DeleteDiscovererRequest {
+    /**
+     * The ID of the discoverer.
+     */
     DiscovererId: __string;
   }
   export interface DeleteRegistryRequest {
+    /**
+     * The name of the registry.
+     */
     RegistryName: __string;
   }
+  export interface DeleteResourcePolicyRequest {
+    /**
+     * The name of the registry.
+     */
+    RegistryName?: __string;
+  }
   export interface DeleteSchemaRequest {
+    /**
+     * The name of the registry.
+     */
     RegistryName: __string;
+    /**
+     * The name of the schema.
+     */
     SchemaName: __string;
   }
   export interface DeleteSchemaVersionRequest {
+    /**
+     * The name of the registry.
+     */
     RegistryName: __string;
+    /**
+     * The name of the schema.
+     */
     SchemaName: __string;
+    /**
+     * The version number of the schema
+     */
     SchemaVersion: __string;
   }
   export interface DescribeCodeBindingRequest {
+    /**
+     * The language of the code binding.
+     */
     Language: __string;
+    /**
+     * The name of the registry.
+     */
     RegistryName: __string;
+    /**
+     * The name of the schema.
+     */
     SchemaName: __string;
+    /**
+     * Specifying this limits the results to only this schema version.
+     */
     SchemaVersion?: __string;
   }
   export interface DescribeCodeBindingResponse {
@@ -409,6 +471,9 @@ declare namespace Schemas {
     Status?: CodeGenerationStatus;
   }
   export interface DescribeDiscovererRequest {
+    /**
+     * The ID of the discoverer.
+     */
     DiscovererId: __string;
   }
   export interface DescribeDiscovererResponse {
@@ -438,6 +503,9 @@ declare namespace Schemas {
     Tags?: Tags;
   }
   export interface DescribeRegistryRequest {
+    /**
+     * The name of the registry.
+     */
     RegistryName: __string;
   }
   export interface DescribeRegistryResponse {
@@ -459,11 +527,23 @@ declare namespace Schemas {
     Tags?: Tags;
   }
   export interface DescribeSchemaRequest {
+    /**
+     * The name of the registry.
+     */
     RegistryName: __string;
+    /**
+     * The name of the schema.
+     */
     SchemaName: __string;
+    /**
+     * Specifying this limits the results to only this schema version.
+     */
     SchemaVersion?: __string;
   }
   export interface DescribeSchemaResponse {
+    /**
+     * The source of the schema definition.
+     */
     Content?: __string;
     /**
      * The description of the schema.
@@ -512,6 +592,9 @@ declare namespace Schemas {
      * The ARN of the event bus.
      */
     SourceArn?: __string;
+    /**
+     * The state of the discoverer.
+     */
     State?: DiscovererState;
     /**
      * Tags associated with the resource.
@@ -519,9 +602,21 @@ declare namespace Schemas {
     Tags?: Tags;
   }
   export interface GetCodeBindingSourceRequest {
+    /**
+     * The language of the code binding.
+     */
     Language: __string;
+    /**
+     * The name of the registry.
+     */
     RegistryName: __string;
+    /**
+     * The name of the schema.
+     */
     SchemaName: __string;
+    /**
+     * Specifying this limits the results to only this schema version.
+     */
     SchemaVersion?: __string;
   }
   export interface GetCodeBindingSourceResponse {
@@ -529,7 +624,7 @@ declare namespace Schemas {
   }
   export interface GetDiscoveredSchemaRequest {
     /**
-     * An array of strings that
+     * An array of strings where each string is a JSON event. These are the events that were used to generate the schema. The array includes a single type of event and has a maximum size of 10 events.
      */
     Events: __listOfGetDiscoveredSchemaVersionItemInput;
     /**
@@ -538,13 +633,41 @@ declare namespace Schemas {
     Type: Type;
   }
   export interface GetDiscoveredSchemaResponse {
+    /**
+     * The source of the schema definition.
+     */
     Content?: __string;
   }
   export type GetDiscoveredSchemaVersionItemInput = string;
+  export interface GetResourcePolicyRequest {
+    /**
+     * The name of the registry.
+     */
+    RegistryName?: __string;
+  }
+  export interface GetResourcePolicyResponse {
+    /**
+     * The resource-based policy.
+     */
+    Policy?: __string;
+    /**
+     * The revision ID.
+     */
+    RevisionId?: __string;
+  }
   export interface ListDiscoverersRequest {
+    /**
+     * Specifying this limits the results to only those discoverer IDs that start with the specified prefix.
+     */
     DiscovererIdPrefix?: __string;
     Limit?: __integer;
+    /**
+     * The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.
+     */
     NextToken?: __string;
+    /**
+     * Specifying this limits the results to only those ARNs that start with the specified prefix.
+     */
     SourceArnPrefix?: __string;
   }
   export interface ListDiscoverersResponse {
@@ -559,8 +682,17 @@ declare namespace Schemas {
   }
   export interface ListRegistriesRequest {
     Limit?: __integer;
+    /**
+     * The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.
+     */
     NextToken?: __string;
+    /**
+     * Specifying this limits the results to only those registry names that start with the specified prefix.
+     */
     RegistryNamePrefix?: __string;
+    /**
+     * Can be set to Local or AWS to limit responses to your custom registries, or the ones provided by AWS.
+     */
     Scope?: __string;
   }
   export interface ListRegistriesResponse {
@@ -575,8 +707,17 @@ declare namespace Schemas {
   }
   export interface ListSchemaVersionsRequest {
     Limit?: __integer;
+    /**
+     * The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.
+     */
     NextToken?: __string;
+    /**
+     * The name of the registry.
+     */
     RegistryName: __string;
+    /**
+     * The name of the schema.
+     */
     SchemaName: __string;
   }
   export interface ListSchemaVersionsResponse {
@@ -591,8 +732,17 @@ declare namespace Schemas {
   }
   export interface ListSchemasRequest {
     Limit?: __integer;
+    /**
+     * The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.
+     */
     NextToken?: __string;
+    /**
+     * The name of the registry.
+     */
     RegistryName: __string;
+    /**
+     * Specifying this limits the results to only those schema names that start with the specified prefix.
+     */
     SchemaNamePrefix?: __string;
   }
   export interface ListSchemasResponse {
@@ -606,24 +756,30 @@ declare namespace Schemas {
     Schemas?: __listOfSchemaSummary;
   }
   export interface ListTagsForResourceRequest {
+    /**
+     * The ARN of the resource.
+     */
     ResourceArn: __string;
   }
   export interface ListTagsForResourceResponse {
-    Tags: Tags;
-  }
-  export interface LockServiceLinkedRoleRequest {
-    RoleArn: __stringMin1Max1600;
-    Timeout: __integerMin1Max29000;
-  }
-  export interface LockServiceLinkedRoleResponse {
-    CanBeDeleted?: __boolean;
-    ReasonOfFailure?: __stringMin1Max1600;
-    RelatedResources?: __listOfDiscovererSummary;
+    Tags?: Tags;
   }
   export interface PutCodeBindingRequest {
+    /**
+     * The language of the code binding.
+     */
     Language: __string;
+    /**
+     * The name of the registry.
+     */
     RegistryName: __string;
+    /**
+     * The name of the schema.
+     */
     SchemaName: __string;
+    /**
+     * Specifying this limits the results to only this schema version.
+     */
     SchemaVersion?: __string;
   }
   export interface PutCodeBindingResponse {
@@ -643,6 +799,30 @@ declare namespace Schemas {
      * The current status of code binding generation.
      */
     Status?: CodeGenerationStatus;
+  }
+  export interface PutResourcePolicyRequest {
+    /**
+     * The resource-based policy.
+     */
+    Policy: __string;
+    /**
+     * The name of the registry.
+     */
+    RegistryName?: __string;
+    /**
+     * The revision ID of the policy.
+     */
+    RevisionId?: __string;
+  }
+  export interface PutResourcePolicyResponse {
+    /**
+     * The resource-based policy.
+     */
+    Policy?: __string;
+    /**
+     * The revision ID of the policy.
+     */
+    RevisionId?: __string;
   }
   export interface RegistrySummary {
     /**
@@ -713,6 +893,9 @@ declare namespace Schemas {
     SchemaVersions?: __listOfSearchSchemaVersionSummary;
   }
   export interface SearchSchemaVersionSummary {
+    /**
+     * The date the schema version was created.
+     */
     CreatedDate?: __timestampIso8601;
     /**
      * The version number of the schema
@@ -720,9 +903,18 @@ declare namespace Schemas {
     SchemaVersion?: __string;
   }
   export interface SearchSchemasRequest {
+    /**
+     * Specifying this limits the results to only schemas that include the provided keywords.
+     */
     Keywords: __string;
     Limit?: __integer;
+    /**
+     * The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.
+     */
     NextToken?: __string;
+    /**
+     * The name of the registry.
+     */
     RegistryName: __string;
   }
   export interface SearchSchemasResponse {
@@ -736,6 +928,9 @@ declare namespace Schemas {
     Schemas?: __listOfSearchSchemaSummary;
   }
   export interface StartDiscovererRequest {
+    /**
+     * The ID of the discoverer.
+     */
     DiscovererId: __string;
   }
   export interface StartDiscovererResponse {
@@ -749,6 +944,9 @@ declare namespace Schemas {
     State?: DiscovererState;
   }
   export interface StopDiscovererRequest {
+    /**
+     * The ID of the discoverer.
+     */
     DiscovererId: __string;
   }
   export interface StopDiscovererResponse {
@@ -762,18 +960,25 @@ declare namespace Schemas {
     State?: DiscovererState;
   }
   export interface TagResourceRequest {
+    /**
+     * The ARN of the resource.
+     */
     ResourceArn: __string;
+    /**
+     * Tags associated with the resource.
+     */
     Tags: Tags;
   }
   export type Tags = {[key: string]: __string};
   export type Type = "OpenApi3"|string;
-  export interface UnlockServiceLinkedRoleRequest {
-    RoleArn: __stringMin1Max1600;
-  }
-  export interface UnlockServiceLinkedRoleResponse {
-  }
   export interface UntagResourceRequest {
+    /**
+     * The ARN of the resource.
+     */
     ResourceArn: __string;
+    /**
+     * Keys of key-value pairs.
+     */
     TagKeys: __listOf__string;
   }
   export interface UpdateDiscovererRequest {
@@ -781,6 +986,9 @@ declare namespace Schemas {
      * The description of the discoverer to update.
      */
     Description?: __stringMin0Max256;
+    /**
+     * The ID of the discoverer.
+     */
     DiscovererId: __string;
   }
   export interface UpdateDiscovererResponse {
@@ -814,6 +1022,9 @@ declare namespace Schemas {
      * The description of the registry to update.
      */
     Description?: __stringMin0Max256;
+    /**
+     * The name of the registry.
+     */
     RegistryName: __string;
   }
   export interface UpdateRegistryResponse {
@@ -847,7 +1058,13 @@ declare namespace Schemas {
      * The description of the schema.
      */
     Description?: __stringMin0Max256;
+    /**
+     * The name of the registry.
+     */
     RegistryName: __string;
+    /**
+     * The name of the schema.
+     */
     SchemaName: __string;
     /**
      * The schema type for the events schema.
@@ -885,9 +1102,7 @@ declare namespace Schemas {
      */
     VersionCreatedDate?: __timestampIso8601;
   }
-  export type __boolean = boolean;
   export type __integer = number;
-  export type __integerMin1Max29000 = number;
   export type __listOfDiscovererSummary = DiscovererSummary[];
   export type __listOfGetDiscoveredSchemaVersionItemInput = GetDiscoveredSchemaVersionItemInput[];
   export type __listOfRegistrySummary = RegistrySummary[];
@@ -901,7 +1116,6 @@ declare namespace Schemas {
   export type __stringMin0Max256 = string;
   export type __stringMin0Max36 = string;
   export type __stringMin1Max100000 = string;
-  export type __stringMin1Max1600 = string;
   export type __stringMin20Max1600 = string;
   export type __timestampIso8601 = Date;
   export type Body = Buffer|Uint8Array|Blob|string;

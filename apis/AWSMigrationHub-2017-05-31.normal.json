@@ -29,6 +29,9 @@
           "shape": "AccessDeniedException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "InternalServerError"
         },
         {
@@ -67,6 +70,9 @@
       "errors": [
         {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
         },
         {
           "shape": "InternalServerError"
@@ -112,6 +118,9 @@
           "shape": "AccessDeniedException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "InternalServerError"
         },
         {
@@ -147,6 +156,9 @@
       "errors": [
         {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
         },
         {
           "shape": "InternalServerError"
@@ -189,6 +201,9 @@
           "shape": "AccessDeniedException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "InternalServerError"
         },
         {
@@ -226,6 +241,9 @@
           "shape": "AccessDeniedException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "InternalServerError"
         },
         {
@@ -258,6 +276,9 @@
       "errors": [
         {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
         },
         {
           "shape": "InternalServerError"
@@ -300,6 +321,9 @@
           "shape": "AccessDeniedException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "InternalServerError"
         },
         {
@@ -338,6 +362,9 @@
       "errors": [
         {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
         },
         {
           "shape": "InternalServerError"
@@ -380,6 +407,9 @@
           "shape": "AccessDeniedException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "InternalServerError"
         },
         {
@@ -409,6 +439,9 @@
       "errors": [
         {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
         },
         {
           "shape": "InternalServerError"
@@ -445,6 +478,9 @@
           "shape": "AccessDeniedException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "InternalServerError"
         },
         {
@@ -477,6 +513,9 @@
       "errors": [
         {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
         },
         {
           "shape": "InternalServerError"
@@ -516,6 +555,9 @@
           "shape": "AccessDeniedException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "InternalServerError"
         },
         {
@@ -545,6 +587,9 @@
       "errors": [
         {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
         },
         {
           "shape": "InternalServerError"
@@ -590,6 +635,9 @@
           "shape": "AccessDeniedException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "InternalServerError"
         },
         {
@@ -630,6 +678,9 @@
           "shape": "AccessDeniedException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "InternalServerError"
         },
         {
@@ -658,7 +709,8 @@
     "ApplicationId": {
       "type": "string",
       "max": 1600,
-      "min": 1
+      "min": 1,
+      "pattern": "^.{1,1600}$"
     },
     "ApplicationIds": {
       "type": "list",
@@ -764,7 +816,9 @@
     },
     "ConfigurationId": {
       "type": "string",
-      "min": 1
+      "max": 1600,
+      "min": 1,
+      "pattern": "^.{1,1600}$"
     },
     "CreateProgressUpdateStreamRequest": {
       "type": "structure",
@@ -806,7 +860,8 @@
     "CreatedArtifactDescription": {
       "type": "string",
       "max": 500,
-      "min": 0
+      "min": 0,
+      "pattern": "^.{0,500}$"
     },
     "CreatedArtifactList": {
       "type": "list",
@@ -971,7 +1026,8 @@
     "DiscoveredResourceDescription": {
       "type": "string",
       "max": 500,
-      "min": 0
+      "min": 0,
+      "pattern": "^.{0,500}$"
     },
     "DiscoveredResourceList": {
       "type": "list",
@@ -1438,12 +1494,14 @@
     "ResourceAttributeValue": {
       "type": "string",
       "max": 256,
-      "min": 1
+      "min": 1,
+      "pattern": "^.{1,256}$"
     },
     "ResourceName": {
       "type": "string",
       "max": 1600,
-      "min": 1
+      "min": 1,
+      "pattern": "^.{1,1600}$"
     },
     "Status": {
       "type": "string",
@@ -1457,7 +1515,8 @@
     "StatusDetail": {
       "type": "string",
       "max": 500,
-      "min": 0
+      "min": 0,
+      "pattern": "^.{0,500}$"
     },
     "Task": {
       "type": "structure",
@@ -1481,7 +1540,10 @@
       "documentation": "<p>Task object encapsulating task information.</p>"
     },
     "Token": {
-      "type": "string"
+      "type": "string",
+      "max": 2048,
+      "min": 0,
+      "pattern": "^[a-zA-Z0-9\\/\\+\\=]{0,2048}$"
     },
     "UpdateDateTime": {
       "type": "timestamp"

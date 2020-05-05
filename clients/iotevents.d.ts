@@ -171,7 +171,7 @@ declare namespace IoTEvents {
      */
     lambda?: LambdaAction;
     /**
-     * Sends an AWS IoT Events input, passing in information about the detector model instance and the event that triggered the action.
+     * Sends AWS IoT Events input, which passes information about the detector model instance and the event that triggered the action.
      */
     iotEvents?: IotEventsAction;
     /**
@@ -182,9 +182,74 @@ declare namespace IoTEvents {
      * Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream.
      */
     firehose?: FirehoseAction;
+    /**
+     * Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the payload. One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see Actions in AWS IoT Events Developer Guide.
+     */
+    dynamoDB?: DynamoDBAction;
+    /**
+     * Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can also customize the payload. A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify. For more information, see Actions in AWS IoT Events Developer Guide.
+     */
+    dynamoDBv2?: DynamoDBv2Action;
+    /**
+     * Sends information about the detector model instance and the event that triggered the action to an asset property in AWS IoT SiteWise .
+     */
+    iotSiteWise?: IotSiteWiseAction;
   }
   export type Actions = Action[];
   export type AmazonResourceName = string;
+  export type AssetId = string;
+  export type AssetPropertyAlias = string;
+  export type AssetPropertyBooleanValue = string;
+  export type AssetPropertyDoubleValue = string;
+  export type AssetPropertyEntryId = string;
+  export type AssetPropertyId = string;
+  export type AssetPropertyIntegerValue = string;
+  export type AssetPropertyOffsetInNanos = string;
+  export type AssetPropertyQuality = string;
+  export type AssetPropertyStringValue = string;
+  export type AssetPropertyTimeInSeconds = string;
+  export interface AssetPropertyTimestamp {
+    /**
+     * The timestamp, in seconds, in the Unix epoch format. The valid range is between 1-31556889864403199. You can also specify an expression.
+     */
+    timeInSeconds: AssetPropertyTimeInSeconds;
+    /**
+     * The nanosecond offset converted from timeInSeconds. The valid range is between 0-999999999. You can also specify an expression.
+     */
+    offsetInNanos?: AssetPropertyOffsetInNanos;
+  }
+  export interface AssetPropertyValue {
+    /**
+     * The value to send to an asset property.
+     */
+    value: AssetPropertyVariant;
+    /**
+     * The timestamp associated with the asset property value. The default is the current event time.
+     */
+    timestamp?: AssetPropertyTimestamp;
+    /**
+     * The quality of the asset property value. The value must be GOOD, BAD, or UNCERTAIN. You can also specify an expression.
+     */
+    quality?: AssetPropertyQuality;
+  }
+  export interface AssetPropertyVariant {
+    /**
+     * The asset property value is a string. You can also specify an expression. If you use an expression, the evaluated result should be a string.
+     */
+    stringValue?: AssetPropertyStringValue;
+    /**
+     * The asset property value is an integer. You can also specify an expression. If you use an expression, the evaluated result should be an integer.
+     */
+    integerValue?: AssetPropertyIntegerValue;
+    /**
+     * The asset property value is a double. You can also specify an expression. If you use an expression, the evaluated result should be a double.
+     */
+    doubleValue?: AssetPropertyDoubleValue;
+    /**
+     * The asset property value is a Boolean value that must be TRUE or FALSE. You can also specify an expression. If you use an expression, the evaluated result should be a Boolean value.
+     */
+    booleanValue?: AssetPropertyBooleanValue;
+  }
   export interface Attribute {
     /**
      * An expression that specifies an attribute-value pair in a JSON structure. Use this to specify an attribute from the JSON payload that is made available by the input. Inputs are derived from messages sent to AWS IoT Events (BatchPutMessage). Each such message contains a JSON payload. The attribute (and its paired value) specified here are available for use in the condition expressions used by detectors.  Syntax: &lt;field-name&gt;.&lt;field-name&gt;... 
@@ -200,6 +265,7 @@ declare namespace IoTEvents {
     timerName: TimerName;
   }
   export type Condition = string;
+  export type ContentExpression = string;
   export interface CreateDetectorModelRequest {
     /**
      * The name of the detector model.
@@ -369,7 +435,7 @@ declare namespace IoTEvents {
      */
     status?: DetectorModelVersionStatus;
     /**
-     * The input attribute key used to identify a device or system to create a detector (an instance of the detector model) and then to route each input received to the appropriate detector (instance). This parameter uses a JSON-path expression in the message payload of each input to specify the attribute-value pair that is used to identify the device associated with the input.
+     * The value used to identify a detector instance. When a device or system sends input, a new detector instance with a unique key value is created. AWS IoT Events can continue to route input to its corresponding detector instance based on this identifying information.  This parameter uses a JSON-path expression to select the attribute-value pair in the message payload that is used for identification. To route the message to the correct detector instance, the device must send a message payload that contains the same attribute-value.
      */
     key?: AttributeJsonPath;
     /**
@@ -441,6 +507,57 @@ declare namespace IoTEvents {
      */
     evaluationMethod?: EvaluationMethod;
   }
+  export interface DynamoDBAction {
+    /**
+     * The data type for the hash key (also called the partition key). You can specify the following values:    STRING - The hash key is a string.    NUMBER - The hash key is a number.   If you don't specify hashKeyType, the default value is STRING.
+     */
+    hashKeyType?: DynamoKeyType;
+    /**
+     * The name of the hash key (also called the partition key).
+     */
+    hashKeyField: DynamoKeyField;
+    /**
+     * The value of the hash key (also called the partition key).
+     */
+    hashKeyValue: DynamoKeyValue;
+    /**
+     * The data type for the range key (also called the sort key), You can specify the following values:    STRING - The range key is a string.    NUMBER - The range key is number.   If you don't specify rangeKeyField, the default value is STRING.
+     */
+    rangeKeyType?: DynamoKeyType;
+    /**
+     * The name of the range key (also called the sort key).
+     */
+    rangeKeyField?: DynamoKeyField;
+    /**
+     * The value of the range key (also called the sort key).
+     */
+    rangeKeyValue?: DynamoKeyValue;
+    /**
+     * The type of operation to perform. You can specify the following values:     INSERT - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.    UPDATE - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.    DELETE - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.   If you don't specify this parameter, AWS IoT Events triggers the INSERT operation.
+     */
+    operation?: DynamoOperation;
+    /**
+     * The name of the DynamoDB column that receives the action payload. If you don't specify this parameter, the name of the DynamoDB column is payload.
+     */
+    payloadField?: DynamoKeyField;
+    /**
+     * The name of the DynamoDB table.
+     */
+    tableName: DynamoTableName;
+    payload?: Payload;
+  }
+  export interface DynamoDBv2Action {
+    /**
+     * The name of the DynamoDB table.
+     */
+    tableName: DynamoTableName;
+    payload?: Payload;
+  }
+  export type DynamoKeyField = string;
+  export type DynamoKeyType = string;
+  export type DynamoKeyValue = string;
+  export type DynamoOperation = string;
+  export type DynamoTableName = string;
   export type EvaluationMethod = "BATCH"|"SERIAL"|string;
   export interface Event {
     /**
@@ -467,6 +584,10 @@ declare namespace IoTEvents {
      * A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
      */
     separator?: FirehoseSeparator;
+    /**
+     * You can configure the action payload when you send a message to an Amazon Kinesis Data Firehose delivery stream.
+     */
+    payload?: Payload;
   }
   export type FirehoseSeparator = string;
   export interface Input {
@@ -547,12 +668,42 @@ declare namespace IoTEvents {
      * The name of the AWS IoT Events input where the data is sent.
      */
     inputName: InputName;
+    /**
+     * You can configure the action payload when you send a message to an AWS IoT Events input.
+     */
+    payload?: Payload;
+  }
+  export interface IotSiteWiseAction {
+    /**
+     * A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier. You can also specify an expression.
+     */
+    entryId?: AssetPropertyEntryId;
+    /**
+     * The ID of the asset that has the specified property. You can specify an expression.
+     */
+    assetId?: AssetId;
+    /**
+     * The ID of the asset property. You can specify an expression.
+     */
+    propertyId?: AssetPropertyId;
+    /**
+     * The alias of the asset property. You can also specify an expression.
+     */
+    propertyAlias?: AssetPropertyAlias;
+    /**
+     * The value to send to the asset property. This value contains timestamp, quality, and value (TQV) information. 
+     */
+    propertyValue: AssetPropertyValue;
   }
   export interface IotTopicPublishAction {
     /**
      * The MQTT topic of the message. You can use a string expression that includes variables ($variable.&lt;variable-name&gt;) and input values ($input.&lt;input-name&gt;.&lt;path-to-datum&gt;) as the topic string.
      */
     mqttTopic: MQTTTopic;
+    /**
+     * You can configure the action payload when you publish a message to an AWS IoT Core topic.
+     */
+    payload?: Payload;
   }
   export type KeyValue = string;
   export interface LambdaAction {
@@ -560,6 +711,10 @@ declare namespace IoTEvents {
      * The ARN of the Lambda function that is executed.
      */
     functionArn: AmazonResourceName;
+    /**
+     * You can configure the action payload when you send a message to a Lambda function.
+     */
+    payload?: Payload;
   }
   export interface ListDetectorModelVersionsRequest {
     /**
@@ -682,6 +837,17 @@ declare namespace IoTEvents {
      */
     transitionEvents?: TransitionEvents;
   }
+  export interface Payload {
+    /**
+     * The content of the payload. You can use a string expression that includes quoted strings ('&lt;string&gt;'), variables ($variable.&lt;variable-name&gt;), input values ($input.&lt;input-name&gt;.&lt;path-to-datum&gt;), string concatenations, and quoted strings that contain ${} as the content. The recommended maximum size of a content expression is 1 KB.
+     */
+    contentExpression: ContentExpression;
+    /**
+     * The value of the payload type can be either STRING or JSON.
+     */
+    type: PayloadType;
+  }
+  export type PayloadType = "STRING"|"JSON"|string;
   export interface PutLoggingOptionsRequest {
     /**
      * The new values of the AWS IoT Events logging options.
@@ -700,6 +866,10 @@ declare namespace IoTEvents {
      * The ARN of the Amazon SNS target where the message is sent.
      */
     targetArn: AmazonResourceName;
+    /**
+     * You can configure the action payload when you send a message as an Amazon SNS push notification.
+     */
+    payload?: Payload;
   }
   export type Seconds = number;
   export interface SetTimerAction {
@@ -708,7 +878,7 @@ declare namespace IoTEvents {
      */
     timerName: TimerName;
     /**
-     * The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy.
+     * The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy. The maximum value is 31622400 seconds. 
      */
     seconds?: Seconds;
     /**
@@ -732,9 +902,13 @@ declare namespace IoTEvents {
      */
     queueUrl: QueueUrl;
     /**
-     * Set this to TRUE if you want the data to be base-64 encoded before it is written to the queue.
+     * Set this to TRUE if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to FALSE.
      */
     useBase64?: UseBase64;
+    /**
+     * You can configure the action payload when you send a message to an Amazon SQS queue.
+     */
+    payload?: Payload;
   }
   export interface State {
     /**

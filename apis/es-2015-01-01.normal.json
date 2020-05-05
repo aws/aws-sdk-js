@@ -35,6 +35,40 @@
       ],
       "documentation": "<p>Attaches tags to an existing Elasticsearch domain. Tags are a set of case-sensitive key value pairs. An Elasticsearch domain may have up to 10 tags. See <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-awsresorcetagging\" target=\"_blank\"> Tagging Amazon Elasticsearch Service Domains for more information.</a></p>"
     },
+    "AssociatePackage": {
+      "name": "AssociatePackage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2015-01-01/packages/associate/{PackageID}/{DomainName}"
+      },
+      "input": {
+        "shape": "AssociatePackageRequest"
+      },
+      "output": {
+        "shape": "AssociatePackageResponse"
+      },
+      "errors": [
+        {
+          "shape": "BaseException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ConflictException"
+        }
+      ],
+      "documentation": "<p>Associates a package with an Amazon ES domain.</p>"
+    },
     "CancelElasticsearchServiceSoftwareUpdate": {
       "name": "CancelElasticsearchServiceSoftwareUpdate",
       "http": {
@@ -100,6 +134,43 @@
       ],
       "documentation": "<p>Creates a new Elasticsearch domain. For more information, see <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains\" target=\"_blank\">Creating Elasticsearch Domains</a> in the <i>Amazon Elasticsearch Service Developer Guide</i>.</p>"
     },
+    "CreatePackage": {
+      "name": "CreatePackage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2015-01-01/packages"
+      },
+      "input": {
+        "shape": "CreatePackageRequest"
+      },
+      "output": {
+        "shape": "CreatePackageResponse"
+      },
+      "errors": [
+        {
+          "shape": "BaseException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InvalidTypeException"
+        },
+        {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Create a package for use with Amazon ES domains.</p>"
+    },
     "DeleteElasticsearchDomain": {
       "name": "DeleteElasticsearchDomain",
       "http": {
@@ -146,6 +217,40 @@
         }
       ],
       "documentation": "<p>Deletes the service-linked role that Elasticsearch Service uses to manage and maintain VPC domains. Role deletion will fail if any existing VPC domains use the role. You must delete any such Elasticsearch domains before deleting the role. See <a href=\"http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-enabling-slr\" target=\"_blank\">Deleting Elasticsearch Service Role</a> in <i>VPC Endpoints for Amazon Elasticsearch Service Domains</i>.</p>"
+    },
+    "DeletePackage": {
+      "name": "DeletePackage",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/2015-01-01/packages/{PackageID}"
+      },
+      "input": {
+        "shape": "DeletePackageRequest"
+      },
+      "output": {
+        "shape": "DeletePackageResponse"
+      },
+      "errors": [
+        {
+          "shape": "BaseException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ConflictException"
+        }
+      ],
+      "documentation": "<p>Delete the package.</p>"
     },
     "DescribeElasticsearchDomain": {
       "name": "DescribeElasticsearchDomain",
@@ -262,6 +367,37 @@
       ],
       "documentation": "<p> Describe Elasticsearch Limits for a given InstanceType and ElasticsearchVersion. When modifying existing Domain, specify the <code> <a>DomainName</a> </code> to know what Limits are supported for modifying. </p>"
     },
+    "DescribePackages": {
+      "name": "DescribePackages",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2015-01-01/packages/describe"
+      },
+      "input": {
+        "shape": "DescribePackagesRequest"
+      },
+      "output": {
+        "shape": "DescribePackagesResponse"
+      },
+      "errors": [
+        {
+          "shape": "BaseException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Describes all packages available to Amazon ES. Includes options for filtering, limiting the number of results, and pagination.</p>"
+    },
     "DescribeReservedElasticsearchInstanceOfferings": {
       "name": "DescribeReservedElasticsearchInstanceOfferings",
       "http": {
@@ -317,6 +453,40 @@
         }
       ],
       "documentation": "<p>Returns information about reserved Elasticsearch instances for this account.</p>"
+    },
+    "DissociatePackage": {
+      "name": "DissociatePackage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2015-01-01/packages/dissociate/{PackageID}/{DomainName}"
+      },
+      "input": {
+        "shape": "DissociatePackageRequest"
+      },
+      "output": {
+        "shape": "DissociatePackageResponse"
+      },
+      "errors": [
+        {
+          "shape": "BaseException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ConflictException"
+        }
+      ],
+      "documentation": "<p>Dissociates a package from the Amazon ES domain.</p>"
     },
     "GetCompatibleElasticsearchVersions": {
       "name": "GetCompatibleElasticsearchVersions",
@@ -430,6 +600,37 @@
       ],
       "documentation": "<p>Returns the name of all Elasticsearch domains owned by the current user's account. </p>"
     },
+    "ListDomainsForPackage": {
+      "name": "ListDomainsForPackage",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2015-01-01/packages/{PackageID}/domains"
+      },
+      "input": {
+        "shape": "ListDomainsForPackageRequest"
+      },
+      "output": {
+        "shape": "ListDomainsForPackageResponse"
+      },
+      "errors": [
+        {
+          "shape": "BaseException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Lists all Amazon ES domains associated with the package.</p>"
+    },
     "ListElasticsearchInstanceTypes": {
       "name": "ListElasticsearchInstanceTypes",
       "http": {
@@ -485,6 +686,37 @@
         }
       ],
       "documentation": "<p>List all supported Elasticsearch versions</p>"
+    },
+    "ListPackagesForDomain": {
+      "name": "ListPackagesForDomain",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2015-01-01/domain/{DomainName}/packages"
+      },
+      "input": {
+        "shape": "ListPackagesForDomainRequest"
+      },
+      "output": {
+        "shape": "ListPackagesForDomainResponse"
+      },
+      "errors": [
+        {
+          "shape": "BaseException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Lists all packages associated with the Amazon ES domain.</p>"
     },
     "ListTags": {
       "name": "ListTags",
@@ -806,6 +1038,38 @@
       },
       "documentation": "<p> Specifies the status of advanced security options for the specified Elasticsearch domain.</p>"
     },
+    "AssociatePackageRequest": {
+      "type": "structure",
+      "required": [
+        "PackageID",
+        "DomainName"
+      ],
+      "members": {
+        "PackageID": {
+          "shape": "PackageID",
+          "documentation": "<p>Internal ID of the package that you want to associate with a domain. Use <code>DescribePackages</code> to find this value.</p>",
+          "location": "uri",
+          "locationName": "PackageID"
+        },
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>Name of the domain that you want to associate the package with.</p>",
+          "location": "uri",
+          "locationName": "DomainName"
+        }
+      },
+      "documentation": "<p> Container for request parameters to <code> <a>AssociatePackage</a> </code> operation. </p>"
+    },
+    "AssociatePackageResponse": {
+      "type": "structure",
+      "members": {
+        "DomainPackageDetails": {
+          "shape": "DomainPackageDetails",
+          "documentation": "<p><code>DomainPackageDetails</code></p>"
+        }
+      },
+      "documentation": "<p> Container for response returned by <code> <a>AssociatePackage</a> </code> operation. </p>"
+    },
     "Boolean": {
       "type": "boolean"
     },
@@ -969,6 +1233,46 @@
       },
       "documentation": "<p>The result of a <code>CreateElasticsearchDomain</code> operation. Contains the status of the newly created Elasticsearch domain.</p>"
     },
+    "CreatePackageRequest": {
+      "type": "structure",
+      "required": [
+        "PackageName",
+        "PackageType",
+        "PackageSource"
+      ],
+      "members": {
+        "PackageName": {
+          "shape": "PackageName",
+          "documentation": "<p>Unique identifier for the package.</p>"
+        },
+        "PackageType": {
+          "shape": "PackageType",
+          "documentation": "<p>Type of package. Currently supports only TXT-DICTIONARY.</p>"
+        },
+        "PackageDescription": {
+          "shape": "PackageDescription",
+          "documentation": "<p>Description of the package.</p>"
+        },
+        "PackageSource": {
+          "shape": "PackageSource",
+          "documentation": "<p>The customer S3 location <code>PackageSource</code> for importing the package.</p>"
+        }
+      },
+      "documentation": "<p> Container for request parameters to <code> <a>CreatePackage</a> </code> operation. </p>"
+    },
+    "CreatePackageResponse": {
+      "type": "structure",
+      "members": {
+        "PackageDetails": {
+          "shape": "PackageDetails",
+          "documentation": "<p>Information about the package <code>PackageDetails</code>.</p>"
+        }
+      },
+      "documentation": "<p> Container for response returned by <code> <a>CreatePackage</a> </code> operation. </p>"
+    },
+    "CreatedAt": {
+      "type": "timestamp"
+    },
     "DeleteElasticsearchDomainRequest": {
       "type": "structure",
       "required": [
@@ -993,6 +1297,31 @@
         }
       },
       "documentation": "<p>The result of a <code>DeleteElasticsearchDomain</code> request. Contains the status of the pending deletion, or no status if the domain and all of its resources have been deleted.</p>"
+    },
+    "DeletePackageRequest": {
+      "type": "structure",
+      "required": [
+        "PackageID"
+      ],
+      "members": {
+        "PackageID": {
+          "shape": "PackageID",
+          "documentation": "<p>Internal ID of the package that you want to delete. Use <code>DescribePackages</code> to find this value.</p>",
+          "location": "uri",
+          "locationName": "PackageID"
+        }
+      },
+      "documentation": "<p> Container for request parameters to <code> <a>DeletePackage</a> </code> operation. </p>"
+    },
+    "DeletePackageResponse": {
+      "type": "structure",
+      "members": {
+        "PackageDetails": {
+          "shape": "PackageDetails",
+          "documentation": "<p><code>PackageDetails</code></p>"
+        }
+      },
+      "documentation": "<p> Container for response parameters to <code> <a>DeletePackage</a> </code> operation. </p>"
     },
     "DeploymentCloseDateTimeStamp": {
       "type": "timestamp"
@@ -1126,6 +1455,76 @@
       },
       "documentation": "<p> Container for the parameters received from <code> <a>DescribeElasticsearchInstanceTypeLimits</a> </code> operation. </p>"
     },
+    "DescribePackagesFilter": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "DescribePackagesFilterName",
+          "documentation": "<p>Any field from <code>PackageDetails</code>.</p>"
+        },
+        "Value": {
+          "shape": "DescribePackagesFilterValues",
+          "documentation": "<p>A list of values for the specified field.</p>"
+        }
+      },
+      "documentation": "<p>Filter to apply in <code>DescribePackage</code> response.</p>"
+    },
+    "DescribePackagesFilterList": {
+      "type": "list",
+      "member": {
+        "shape": "DescribePackagesFilter"
+      },
+      "documentation": "<p>A list of <code>DescribePackagesFilter</code> to filter the packages included in a <code>DescribePackages</code> response.</p>"
+    },
+    "DescribePackagesFilterName": {
+      "type": "string",
+      "enum": [
+        "PackageID",
+        "PackageName",
+        "PackageStatus"
+      ]
+    },
+    "DescribePackagesFilterValue": {
+      "type": "string",
+      "pattern": "^[0-9a-zA-Z\\*\\.\\\\/\\?-]*$"
+    },
+    "DescribePackagesFilterValues": {
+      "type": "list",
+      "member": {
+        "shape": "DescribePackagesFilterValue"
+      }
+    },
+    "DescribePackagesRequest": {
+      "type": "structure",
+      "members": {
+        "Filters": {
+          "shape": "DescribePackagesFilterList",
+          "documentation": "<p>Only returns packages that match the <code>DescribePackagesFilterList</code> values.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>Limits results to a maximum number of packages.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page.</p>"
+        }
+      },
+      "documentation": "<p> Container for request parameters to <code> <a>DescribePackage</a> </code> operation. </p>"
+    },
+    "DescribePackagesResponse": {
+      "type": "structure",
+      "members": {
+        "PackageDetailsList": {
+          "shape": "PackageDetailsList",
+          "documentation": "<p>List of <code>PackageDetails</code> objects.</p>"
+        },
+        "NextToken": {
+          "shape": "String"
+        }
+      },
+      "documentation": "<p> Container for response returned by <code> <a>DescribePackages</a> </code> operation. </p>"
+    },
     "DescribeReservedElasticsearchInstanceOfferingsRequest": {
       "type": "structure",
       "members": {
@@ -1202,6 +1601,38 @@
       },
       "documentation": "<p>Container for results from <code>DescribeReservedElasticsearchInstances</code></p>"
     },
+    "DissociatePackageRequest": {
+      "type": "structure",
+      "required": [
+        "PackageID",
+        "DomainName"
+      ],
+      "members": {
+        "PackageID": {
+          "shape": "PackageID",
+          "documentation": "<p>Internal ID of the package that you want to associate with a domain. Use <code>DescribePackages</code> to find this value.</p>",
+          "location": "uri",
+          "locationName": "PackageID"
+        },
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>Name of the domain that you want to associate the package with.</p>",
+          "location": "uri",
+          "locationName": "DomainName"
+        }
+      },
+      "documentation": "<p> Container for request parameters to <code> <a>DissociatePackage</a> </code> operation. </p>"
+    },
+    "DissociatePackageResponse": {
+      "type": "structure",
+      "members": {
+        "DomainPackageDetails": {
+          "shape": "DomainPackageDetails",
+          "documentation": "<p><code>DomainPackageDetails</code></p>"
+        }
+      },
+      "documentation": "<p> Container for response returned by <code> <a>DissociatePackage</a> </code> operation. </p>"
+    },
     "DomainEndpointOptions": {
       "type": "structure",
       "members": {
@@ -1269,6 +1700,60 @@
         "shape": "DomainName"
       },
       "documentation": "<p>A list of Elasticsearch domain names.</p>"
+    },
+    "DomainPackageDetails": {
+      "type": "structure",
+      "members": {
+        "PackageID": {
+          "shape": "PackageID",
+          "documentation": "<p>Internal ID of the package.</p>"
+        },
+        "PackageName": {
+          "shape": "PackageName",
+          "documentation": "<p>User specified name of the package.</p>"
+        },
+        "PackageType": {
+          "shape": "PackageType",
+          "documentation": "<p>Currently supports only TXT-DICTIONARY.</p>"
+        },
+        "LastUpdated": {
+          "shape": "LastUpdated",
+          "documentation": "<p>Timestamp of the most-recent update to the association status.</p>"
+        },
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>Name of the domain you've associated a package with.</p>"
+        },
+        "DomainPackageStatus": {
+          "shape": "DomainPackageStatus",
+          "documentation": "<p>State of the association. Values are ASSOCIATING/ASSOCIATION_FAILED/ACTIVE/DISSOCIATING/DISSOCIATION_FAILED.</p>"
+        },
+        "ReferencePath": {
+          "shape": "ReferencePath",
+          "documentation": "<p>The relative path on Amazon ES nodes, which can be used as synonym_path when the package is synonym file.</p>"
+        },
+        "ErrorDetails": {
+          "shape": "ErrorDetails",
+          "documentation": "<p>Additional information if the package is in an error state. Null otherwise.</p>"
+        }
+      },
+      "documentation": "<p>Information on a package that is associated with a domain.</p>"
+    },
+    "DomainPackageDetailsList": {
+      "type": "list",
+      "member": {
+        "shape": "DomainPackageDetails"
+      }
+    },
+    "DomainPackageStatus": {
+      "type": "string",
+      "enum": [
+        "ASSOCIATING",
+        "ASSOCIATION_FAILED",
+        "ACTIVE",
+        "DISSOCIATING",
+        "DISSOCIATION_FAILED"
+      ]
     },
     "Double": {
       "type": "double"
@@ -1691,6 +2176,23 @@
         "shape": "ServiceUrl"
       }
     },
+    "ErrorDetails": {
+      "type": "structure",
+      "members": {
+        "ErrorType": {
+          "shape": "ErrorType"
+        },
+        "ErrorMessage": {
+          "shape": "ErrorMessage"
+        }
+      }
+    },
+    "ErrorMessage": {
+      "type": "string"
+    },
+    "ErrorType": {
+      "type": "string"
+    },
     "GUID": {
       "type": "string",
       "pattern": "\\p{XDigit}{8}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{12}"
@@ -1841,6 +2343,9 @@
       "max": 500,
       "min": 1
     },
+    "LastUpdated": {
+      "type": "timestamp"
+    },
     "LimitName": {
       "type": "string"
     },
@@ -1889,6 +2394,46 @@
         }
       },
       "documentation": "<p>The result of a <code>ListDomainNames</code> operation. Contains the names of all Elasticsearch domains owned by this account.</p>"
+    },
+    "ListDomainsForPackageRequest": {
+      "type": "structure",
+      "required": [
+        "PackageID"
+      ],
+      "members": {
+        "PackageID": {
+          "shape": "PackageID",
+          "documentation": "<p>The package for which to list domains.</p>",
+          "location": "uri",
+          "locationName": "PackageID"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>Limits results to a maximum number of domains.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      },
+      "documentation": "<p> Container for request parameters to <code> <a>ListDomainsForPackage</a> </code> operation. </p>"
+    },
+    "ListDomainsForPackageResponse": {
+      "type": "structure",
+      "members": {
+        "DomainPackageDetailsList": {
+          "shape": "DomainPackageDetailsList",
+          "documentation": "<p>List of <code>DomainPackageDetails</code> objects.</p>"
+        },
+        "NextToken": {
+          "shape": "String"
+        }
+      },
+      "documentation": "<p> Container for response parameters to <code> <a>ListDomainsForPackage</a> </code> operation. </p>"
     },
     "ListElasticsearchInstanceTypesRequest": {
       "type": "structure",
@@ -1965,6 +2510,47 @@
         }
       },
       "documentation": "<p> Container for the parameters for response received from <code> <a>ListElasticsearchVersions</a> </code> operation. </p>"
+    },
+    "ListPackagesForDomainRequest": {
+      "type": "structure",
+      "required": [
+        "DomainName"
+      ],
+      "members": {
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The name of the domain for which you want to list associated packages.</p>",
+          "location": "uri",
+          "locationName": "DomainName"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>Limits results to a maximum number of packages.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      },
+      "documentation": "<p> Container for request parameters to <code> <a>ListPackagesForDomain</a> </code> operation. </p>"
+    },
+    "ListPackagesForDomainResponse": {
+      "type": "structure",
+      "members": {
+        "DomainPackageDetailsList": {
+          "shape": "DomainPackageDetailsList",
+          "documentation": "<p>List of <code>DomainPackageDetails</code> objects.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>Pagination token that needs to be supplied to the next call to get the next page of results.</p>"
+        }
+      },
+      "documentation": "<p> Container for response parameters to <code> <a>ListPackagesForDomain</a> </code> operation. </p>"
     },
     "ListTagsRequest": {
       "type": "structure",
@@ -2139,6 +2725,92 @@
       },
       "documentation": "<p>Provides the current status of the entity.</p>"
     },
+    "PackageDescription": {
+      "type": "string",
+      "max": 1024
+    },
+    "PackageDetails": {
+      "type": "structure",
+      "members": {
+        "PackageID": {
+          "shape": "PackageID",
+          "documentation": "<p>Internal ID of the package.</p>"
+        },
+        "PackageName": {
+          "shape": "PackageName",
+          "documentation": "<p>User specified name of the package.</p>"
+        },
+        "PackageType": {
+          "shape": "PackageType",
+          "documentation": "<p>Currently supports only TXT-DICTIONARY.</p>"
+        },
+        "PackageDescription": {
+          "shape": "PackageDescription",
+          "documentation": "<p>User-specified description of the package.</p>"
+        },
+        "PackageStatus": {
+          "shape": "PackageStatus",
+          "documentation": "<p>Current state of the package. Values are COPYING/COPY_FAILED/AVAILABLE/DELETING/DELETE_FAILED</p>"
+        },
+        "CreatedAt": {
+          "shape": "CreatedAt",
+          "documentation": "<p>Timestamp which tells creation date of the package.</p>"
+        },
+        "ErrorDetails": {
+          "shape": "ErrorDetails",
+          "documentation": "<p>Additional information if the package is in an error state. Null otherwise.</p>"
+        }
+      },
+      "documentation": "<p>Basic information about a package.</p>"
+    },
+    "PackageDetailsList": {
+      "type": "list",
+      "member": {
+        "shape": "PackageDetails"
+      }
+    },
+    "PackageID": {
+      "type": "string"
+    },
+    "PackageName": {
+      "type": "string",
+      "max": 28,
+      "min": 3,
+      "pattern": "[a-z][a-z0-9\\-]+"
+    },
+    "PackageSource": {
+      "type": "structure",
+      "members": {
+        "S3BucketName": {
+          "shape": "S3BucketName",
+          "documentation": "<p>Name of the bucket containing the package.</p>"
+        },
+        "S3Key": {
+          "shape": "S3Key",
+          "documentation": "<p>Key (file name) of the package.</p>"
+        }
+      },
+      "documentation": "<p>The S3 location for importing the package specified as <code>S3BucketName</code> and <code>S3Key</code></p>"
+    },
+    "PackageStatus": {
+      "type": "string",
+      "enum": [
+        "COPYING",
+        "COPY_FAILED",
+        "VALIDATING",
+        "VALIDATION_FAILED",
+        "AVAILABLE",
+        "DELETING",
+        "DELETED",
+        "DELETE_FAILED"
+      ]
+    },
+    "PackageType": {
+      "type": "string",
+      "enum": [
+        "TXT-DICTIONARY"
+      ]
+    },
     "Password": {
       "type": "string",
       "min": 8,
@@ -2203,6 +2875,9 @@
       "member": {
         "shape": "RecurringCharge"
       }
+    },
+    "ReferencePath": {
+      "type": "string"
     },
     "RemoveTagsRequest": {
       "type": "structure",
@@ -2348,6 +3023,14 @@
       "max": 2048,
       "min": 20
     },
+    "S3BucketName": {
+      "type": "string",
+      "max": 63,
+      "min": 3
+    },
+    "S3Key": {
+      "type": "string"
+    },
     "ServiceSoftwareOptions": {
       "type": "structure",
       "members": {
@@ -2378,6 +3061,10 @@
         "AutomatedUpdateDate": {
           "shape": "DeploymentCloseDateTimeStamp",
           "documentation": "<p>Timestamp, in Epoch time, until which you can manually request a service software update. After this date, we automatically update your service software.</p>"
+        },
+        "OptionalDeployment": {
+          "shape": "Boolean",
+          "documentation": "<p><code>True</code> if a service software is never automatically updated. <code>False</code> if a service software is automatically updated after <code>AutomatedUpdateDate</code>. </p>"
         }
       },
       "documentation": "<p>The current options of an Elasticsearch domain service software options.</p>"

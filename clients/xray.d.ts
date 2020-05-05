@@ -397,6 +397,10 @@ declare namespace XRay {
      * A list of services corresponding to an error. A service identifies a segment and it contains a name, account ID, type, and inferred flag.
      */
     Services?: ErrorRootCauseServices;
+    /**
+     * A flag that denotes that the root cause impacts the trace client.
+     */
+    ClientImpacting?: NullableBoolean;
   }
   export interface ErrorRootCauseEntity {
     /**
@@ -460,6 +464,10 @@ declare namespace XRay {
      * A list of corresponding services. A service identifies a segment and it contains a name, account ID, type, and inferred flag.
      */
     Services?: FaultRootCauseServices;
+    /**
+     * A flag that denotes that the root cause impacts the trace client.
+     */
+    ClientImpacting?: NullableBoolean;
   }
   export interface FaultRootCauseEntity {
     /**
@@ -906,6 +914,10 @@ declare namespace XRay {
      * A list of corresponding services. A service identifies a segment and contains a name, account ID, type, and inferred flag.
      */
     Services?: ResponseTimeRootCauseServices;
+    /**
+     * A flag that denotes that the root cause impacts the trace client.
+     */
+    ClientImpacting?: NullableBoolean;
   }
   export interface ResponseTimeRootCauseEntity {
     /**

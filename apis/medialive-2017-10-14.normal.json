@@ -2538,9 +2538,41 @@
         "AudioPidSelection": {
           "shape": "AudioPidSelection",
           "locationName": "audioPidSelection"
+        },
+        "AudioTrackSelection": {
+          "shape": "AudioTrackSelection",
+          "locationName": "audioTrackSelection"
         }
       },
       "documentation": "Audio Selector Settings"
+    },
+    "AudioTrack": {
+      "type": "structure",
+      "members": {
+        "Track": {
+          "shape": "__integerMin1",
+          "locationName": "track",
+          "documentation": "1-based integer value that maps to a specific audio track"
+        }
+      },
+      "documentation": "Audio Track",
+      "required": [
+        "Track"
+      ]
+    },
+    "AudioTrackSelection": {
+      "type": "structure",
+      "members": {
+        "Tracks": {
+          "shape": "__listOfAudioTrack",
+          "locationName": "tracks",
+          "documentation": "Selects one or more unique audio tracks from within an mp4 source."
+        }
+      },
+      "documentation": "Audio Track Selection",
+      "required": [
+        "Tracks"
+      ]
     },
     "AudioType": {
       "type": "string",
@@ -2558,6 +2590,25 @@
       "enum": [
         "AKAMAI",
         "COMMON"
+      ]
+    },
+    "AutomaticInputFailoverSettings": {
+      "type": "structure",
+      "members": {
+        "InputPreference": {
+          "shape": "InputPreference",
+          "locationName": "inputPreference",
+          "documentation": "Input preference when deciding which input to make active when a previously failed input has recovered."
+        },
+        "SecondaryInputId": {
+          "shape": "__string",
+          "locationName": "secondaryInputId",
+          "documentation": "The input ID of the secondary input in the automatic input failover pair."
+        }
+      },
+      "documentation": "The settings for Automatic Input Failover.",
+      "required": [
+        "SecondaryInputId"
       ]
     },
     "AvailBlanking": {
@@ -5163,9 +5214,35 @@
           "shape": "__string",
           "locationName": "audioRenditionSets",
           "documentation": "List all the audio groups that are used with the video output stream. Input all the audio GROUP-IDs that are associated to the video, separate by ','."
+        },
+        "NielsenId3Behavior": {
+          "shape": "Fmp4NielsenId3Behavior",
+          "locationName": "nielsenId3Behavior",
+          "documentation": "If set to passthrough, Nielsen inaudible tones for media tracking will be detected in the input audio and an equivalent ID3 tag will be inserted in the output."
+        },
+        "TimedMetadataBehavior": {
+          "shape": "Fmp4TimedMetadataBehavior",
+          "locationName": "timedMetadataBehavior",
+          "documentation": "When set to passthrough, timed metadata is passed through from input to output."
         }
       },
       "documentation": "Fmp4 Hls Settings"
+    },
+    "Fmp4NielsenId3Behavior": {
+      "type": "string",
+      "documentation": "Fmp4 Nielsen Id3 Behavior",
+      "enum": [
+        "NO_PASSTHROUGH",
+        "PASSTHROUGH"
+      ]
+    },
+    "Fmp4TimedMetadataBehavior": {
+      "type": "string",
+      "documentation": "Fmp4 Timed Metadata Behavior",
+      "enum": [
+        "NO_PASSTHROUGH",
+        "PASSTHROUGH"
+      ]
     },
     "FollowModeScheduleActionStartSettings": {
       "type": "structure",
@@ -5361,9 +5438,27 @@
         "CAVLC"
       ]
     },
+    "H264FilterSettings": {
+      "type": "structure",
+      "members": {
+        "TemporalFilterSettings": {
+          "shape": "TemporalFilterSettings",
+          "locationName": "temporalFilterSettings"
+        }
+      },
+      "documentation": "H264 Filter Settings"
+    },
     "H264FlickerAq": {
       "type": "string",
       "documentation": "H264 Flicker Aq",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ]
+    },
+    "H264ForceFieldPictures": {
+      "type": "string",
+      "documentation": "H264 Force Field Pictures",
       "enum": [
         "DISABLED",
         "ENABLED"
@@ -5445,6 +5540,14 @@
         "MAIN"
       ]
     },
+    "H264QualityLevel": {
+      "type": "string",
+      "documentation": "H264 Quality Level",
+      "enum": [
+        "ENHANCED_QUALITY",
+        "STANDARD_QUALITY"
+      ]
+    },
     "H264RateControlMode": {
       "type": "string",
       "documentation": "H264 Rate Control Mode",
@@ -5514,6 +5617,11 @@
           "locationName": "entropyEncoding",
           "documentation": "Entropy encoding mode.  Use cabac (must be in Main or High profile) or cavlc."
         },
+        "FilterSettings": {
+          "shape": "H264FilterSettings",
+          "locationName": "filterSettings",
+          "documentation": "Settings associated with the specified filter."
+        },
         "FixedAfd": {
           "shape": "FixedAfd",
           "locationName": "fixedAfd",
@@ -5523,6 +5631,11 @@
           "shape": "H264FlickerAq",
           "locationName": "flickerAq",
           "documentation": "If set to enabled, adjust quantization within each frame to reduce flicker or 'pop' on I-frames."
+        },
+        "ForceFieldPictures": {
+          "shape": "H264ForceFieldPictures",
+          "locationName": "forceFieldPictures",
+          "documentation": "This setting applies only when scan type is \"interlaced.\" It controls whether coding is performed on a field basis or on a frame basis. (When the video is progressive, the coding is always performed on a frame basis.)\nenabled: Force MediaLive to code on a field basis, so that odd and even sets of fields are coded separately.\ndisabled: Code the two sets of fields separately (on a field basis) or together (on a frame basis using PAFF), depending on what is most appropriate for the content."
         },
         "FramerateControl": {
           "shape": "H264FramerateControl",
@@ -5608,6 +5721,11 @@
           "shape": "H264Profile",
           "locationName": "profile",
           "documentation": "H.264 Profile."
+        },
+        "QualityLevel": {
+          "shape": "H264QualityLevel",
+          "locationName": "qualityLevel",
+          "documentation": "If set to \"ENHANCEDQUALITY,\" improves visual quality at an increased output cost. If this video is being delivered to a MediaLive Multiplex, \"ENHANCEDQUALITY\" is always used."
         },
         "QvbrQualityLevel": {
           "shape": "__integerMin1Max10",
@@ -6309,7 +6427,7 @@
         "OutputSelection": {
           "shape": "HlsOutputSelection",
           "locationName": "outputSelection",
-          "documentation": "MANIFESTSANDSEGMENTS: Generates manifests (master manifest, if applicable, and media manifests) for this output group.\n\nSEGMENTSONLY: Does not generate any manifests for this output group."
+          "documentation": "MANIFESTSANDSEGMENTS: Generates manifests (master manifest, if applicable, and media manifests) for this output group.\n\nVARIANTMANIFESTSANDSEGMENTS: Generates media manifests for this output group, but not a master manifest.\n\nSEGMENTSONLY: Does not generate any manifests for this output group."
         },
         "ProgramDateTime": {
           "shape": "HlsProgramDateTime",
@@ -6674,7 +6792,7 @@
     "ImmediateModeScheduleActionStartSettings": {
       "type": "structure",
       "members": {},
-      "documentation": "Settings to configure an action so that it occurs immediately. This is only supported for input switch actions currently."
+      "documentation": "Settings to configure an action so that it occurs as soon as possible."
     },
     "Input": {
       "type": "structure",
@@ -6753,6 +6871,11 @@
     "InputAttachment": {
       "type": "structure",
       "members": {
+        "AutomaticInputFailoverSettings": {
+          "shape": "AutomaticInputFailoverSettings",
+          "locationName": "automaticInputFailoverSettings",
+          "documentation": "User-specified settings for defining what the conditions are for declaring the input unhealthy and failing over to a different input."
+        },
         "InputAttachmentName": {
           "shape": "__string",
           "locationName": "inputAttachmentName",
@@ -7012,6 +7135,14 @@
         "MAX_10_MBPS",
         "MAX_20_MBPS",
         "MAX_50_MBPS"
+      ]
+    },
+    "InputPreference": {
+      "type": "string",
+      "documentation": "Input preference when deciding which input to make active when a previously failed input has recovered.\nIf \\\"EQUAL_INPUT_PREFERENCE\\\", then the active input will stay active as long as it is healthy.\nIf \\\"PRIMARY_INPUT_PREFERRED\\\", then always switch back to the primary input when it is healthy.\n",
+      "enum": [
+        "EQUAL_INPUT_PREFERENCE",
+        "PRIMARY_INPUT_PREFERRED"
       ]
     },
     "InputResolution": {
@@ -8377,7 +8508,7 @@
         "SparseTrackType": {
           "shape": "SmoothGroupSparseTrackType",
           "locationName": "sparseTrackType",
-          "documentation": "If set to scte35, use incoming SCTE-35 messages to generate a sparse track in this group of MS-Smooth outputs."
+          "documentation": "If set to scte35, use incoming SCTE-35 messages to generate a sparse track in this group of MS-Smooth outputs. scte35WithoutSegmentation is the same as scte35, except EML will not start a new segment at a SCTE-35 marker. It will still encode an IDR frame at a SCTE-35 marker."
         },
         "StreamManifestBehavior": {
           "shape": "SmoothGroupStreamManifestBehavior",
@@ -10085,7 +10216,8 @@
       "documentation": "Smooth Group Sparse Track Type",
       "enum": [
         "NONE",
-        "SCTE_35"
+        "SCTE_35",
+        "SCTE_35_WITHOUT_SEGMENTATION"
       ]
     },
     "SmoothGroupStreamManifestBehavior": {
@@ -10601,6 +10733,54 @@
         }
       },
       "documentation": "Teletext Source Settings"
+    },
+    "TemporalFilterPostFilterSharpening": {
+      "type": "string",
+      "documentation": "Temporal Filter Post Filter Sharpening",
+      "enum": [
+        "AUTO",
+        "DISABLED",
+        "ENABLED"
+      ]
+    },
+    "TemporalFilterSettings": {
+      "type": "structure",
+      "members": {
+        "PostFilterSharpening": {
+          "shape": "TemporalFilterPostFilterSharpening",
+          "locationName": "postFilterSharpening",
+          "documentation": "If set to \"ENABLED,\" applies post-filter sharpening to improve visual quality. This is most beneficial when using a noisy or compressed input source and low output bitrates."
+        },
+        "Strength": {
+          "shape": "TemporalFilterStrength",
+          "locationName": "strength",
+          "documentation": "Filter strength. A higher value produces stronger filtering."
+        }
+      },
+      "documentation": "Temporal Filter Settings"
+    },
+    "TemporalFilterStrength": {
+      "type": "string",
+      "documentation": "Temporal Filter Strength",
+      "enum": [
+        "AUTO",
+        "STRENGTH_1",
+        "STRENGTH_10",
+        "STRENGTH_11",
+        "STRENGTH_12",
+        "STRENGTH_13",
+        "STRENGTH_14",
+        "STRENGTH_15",
+        "STRENGTH_16",
+        "STRENGTH_2",
+        "STRENGTH_3",
+        "STRENGTH_4",
+        "STRENGTH_5",
+        "STRENGTH_6",
+        "STRENGTH_7",
+        "STRENGTH_8",
+        "STRENGTH_9"
+      ]
     },
     "TimecodeConfig": {
       "type": "structure",
@@ -11488,6 +11668,13 @@
         "shape": "AudioSelector"
       },
       "documentation": "Placeholder documentation for __listOfAudioSelector"
+    },
+    "__listOfAudioTrack": {
+      "type": "list",
+      "member": {
+        "shape": "AudioTrack"
+      },
+      "documentation": "Placeholder documentation for __listOfAudioTrack"
     },
     "__listOfCaptionDescription": {
       "type": "list",

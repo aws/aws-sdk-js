@@ -36,13 +36,21 @@ declare class SecurityHub extends Service {
    */
   batchEnableStandards(callback?: (err: AWSError, data: SecurityHub.Types.BatchEnableStandardsResponse) => void): Request<SecurityHub.Types.BatchEnableStandardsResponse, AWSError>;
   /**
-   * Imports security findings generated from an integrated third-party product into Security Hub. This action is requested by the integrated product to import its findings into Security Hub. The maximum allowed size for a finding is 240 Kb. An error is returned for any finding larger than 240 Kb.
+   * Imports security findings generated from an integrated third-party product into Security Hub. This action is requested by the integrated product to import its findings into Security Hub. The maximum allowed size for a finding is 240 Kb. An error is returned for any finding larger than 240 Kb. After a finding is created, BatchImportFindings cannot be used to update the following finding fields and objects, which Security Hub customers use to manage their investigation workflow.    Confidence     Criticality     Note     RelatedFindings     Severity     Types     UserDefinedFields     VerificationState     Workflow   
    */
   batchImportFindings(params: SecurityHub.Types.BatchImportFindingsRequest, callback?: (err: AWSError, data: SecurityHub.Types.BatchImportFindingsResponse) => void): Request<SecurityHub.Types.BatchImportFindingsResponse, AWSError>;
   /**
-   * Imports security findings generated from an integrated third-party product into Security Hub. This action is requested by the integrated product to import its findings into Security Hub. The maximum allowed size for a finding is 240 Kb. An error is returned for any finding larger than 240 Kb.
+   * Imports security findings generated from an integrated third-party product into Security Hub. This action is requested by the integrated product to import its findings into Security Hub. The maximum allowed size for a finding is 240 Kb. An error is returned for any finding larger than 240 Kb. After a finding is created, BatchImportFindings cannot be used to update the following finding fields and objects, which Security Hub customers use to manage their investigation workflow.    Confidence     Criticality     Note     RelatedFindings     Severity     Types     UserDefinedFields     VerificationState     Workflow   
    */
   batchImportFindings(callback?: (err: AWSError, data: SecurityHub.Types.BatchImportFindingsResponse) => void): Request<SecurityHub.Types.BatchImportFindingsResponse, AWSError>;
+  /**
+   * Used by Security Hub customers to update information about their investigation into a finding. Requested by master accounts or member accounts. Master accounts can update findings for their account and their member accounts. Member accounts can update findings for their account. Updates from BatchUpdateFindings do not affect the value of UpdatedAt for a finding. Master accounts can use BatchUpdateFindings to update the following finding fields and objects.    Confidence     Criticality     Note     RelatedFindings     Severity     Types     UserDefinedFields     VerificationState     Workflow    Member accounts can only use BatchUpdateFindings to update the Note object.
+   */
+  batchUpdateFindings(params: SecurityHub.Types.BatchUpdateFindingsRequest, callback?: (err: AWSError, data: SecurityHub.Types.BatchUpdateFindingsResponse) => void): Request<SecurityHub.Types.BatchUpdateFindingsResponse, AWSError>;
+  /**
+   * Used by Security Hub customers to update information about their investigation into a finding. Requested by master accounts or member accounts. Master accounts can update findings for their account and their member accounts. Member accounts can update findings for their account. Updates from BatchUpdateFindings do not affect the value of UpdatedAt for a finding. Master accounts can use BatchUpdateFindings to update the following finding fields and objects.    Confidence     Criticality     Note     RelatedFindings     Severity     Types     UserDefinedFields     VerificationState     Workflow    Member accounts can only use BatchUpdateFindings to update the Note object.
+   */
+  batchUpdateFindings(callback?: (err: AWSError, data: SecurityHub.Types.BatchUpdateFindingsResponse) => void): Request<SecurityHub.Types.BatchUpdateFindingsResponse, AWSError>;
   /**
    * Creates a custom action target in Security Hub. You can use custom actions on findings and insights in Security Hub to trigger target actions in Amazon CloudWatch Events.
    */
@@ -188,11 +196,11 @@ declare class SecurityHub extends Service {
    */
   enableImportFindingsForProduct(callback?: (err: AWSError, data: SecurityHub.Types.EnableImportFindingsForProductResponse) => void): Request<SecurityHub.Types.EnableImportFindingsForProductResponse, AWSError>;
   /**
-   * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from AWS Config, Amazon GuardDuty, Amazon Inspector, and Amazon Macie. When you use the EnableSecurityHub operation to enable Security Hub, you also automatically enable the CIS AWS Foundations standard. You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard. To enable a standard, use the  BatchEnableStandards  operation. To disable a standard, use the  BatchDisableStandards  operation. To learn more, see Setting Up AWS Security Hub in the AWS Security Hub User Guide.
+   * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from other services that are integrated with Security Hub. When you use the EnableSecurityHub operation to enable Security Hub, you also automatically enable the CIS AWS Foundations standard. You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard. To not enable the CIS AWS Foundations standard, set EnableDefaultStandards to false. After you enable Security Hub, to enable a standard, use the  BatchEnableStandards  operation. To disable a standard, use the  BatchDisableStandards  operation. To learn more, see Setting Up AWS Security Hub in the AWS Security Hub User Guide.
    */
   enableSecurityHub(params: SecurityHub.Types.EnableSecurityHubRequest, callback?: (err: AWSError, data: SecurityHub.Types.EnableSecurityHubResponse) => void): Request<SecurityHub.Types.EnableSecurityHubResponse, AWSError>;
   /**
-   * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from AWS Config, Amazon GuardDuty, Amazon Inspector, and Amazon Macie. When you use the EnableSecurityHub operation to enable Security Hub, you also automatically enable the CIS AWS Foundations standard. You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard. To enable a standard, use the  BatchEnableStandards  operation. To disable a standard, use the  BatchDisableStandards  operation. To learn more, see Setting Up AWS Security Hub in the AWS Security Hub User Guide.
+   * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from other services that are integrated with Security Hub. When you use the EnableSecurityHub operation to enable Security Hub, you also automatically enable the CIS AWS Foundations standard. You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard. To not enable the CIS AWS Foundations standard, set EnableDefaultStandards to false. After you enable Security Hub, to enable a standard, use the  BatchEnableStandards  operation. To disable a standard, use the  BatchDisableStandards  operation. To learn more, see Setting Up AWS Security Hub in the AWS Security Hub User Guide.
    */
   enableSecurityHub(callback?: (err: AWSError, data: SecurityHub.Types.EnableSecurityHubResponse) => void): Request<SecurityHub.Types.EnableSecurityHubResponse, AWSError>;
   /**
@@ -316,11 +324,11 @@ declare class SecurityHub extends Service {
    */
   updateActionTarget(callback?: (err: AWSError, data: SecurityHub.Types.UpdateActionTargetResponse) => void): Request<SecurityHub.Types.UpdateActionTargetResponse, AWSError>;
   /**
-   * Updates the Note and RecordState of the Security Hub-aggregated findings that the filter attributes specify. Any member account that can view the finding also sees the update to the finding.
+   *  UpdateFindings is deprecated. Instead of UpdateFindings, use BatchUpdateFindings. Updates the Note and RecordState of the Security Hub-aggregated findings that the filter attributes specify. Any member account that can view the finding also sees the update to the finding.
    */
   updateFindings(params: SecurityHub.Types.UpdateFindingsRequest, callback?: (err: AWSError, data: SecurityHub.Types.UpdateFindingsResponse) => void): Request<SecurityHub.Types.UpdateFindingsResponse, AWSError>;
   /**
-   * Updates the Note and RecordState of the Security Hub-aggregated findings that the filter attributes specify. Any member account that can view the finding also sees the update to the finding.
+   *  UpdateFindings is deprecated. Instead of UpdateFindings, use BatchUpdateFindings. Updates the Note and RecordState of the Security Hub-aggregated findings that the filter attributes specify. Any member account that can view the finding also sees the update to the finding.
    */
   updateFindings(callback?: (err: AWSError, data: SecurityHub.Types.UpdateFindingsResponse) => void): Request<SecurityHub.Types.UpdateFindingsResponse, AWSError>;
   /**
@@ -1771,6 +1779,17 @@ declare namespace SecurityHub {
      */
     Keyword?: KeywordFilterList;
   }
+  export interface AwsSecurityFindingIdentifier {
+    /**
+     * The identifier of the finding that was specified by the finding provider.
+     */
+    Id: NonEmptyString;
+    /**
+     * The ARN generated by Security Hub that uniquely identifies a product that generates findings. This can be the ARN for a third-party product that is integrated with Security Hub, or the ARN for a custom integration.
+     */
+    ProductArn: NonEmptyString;
+  }
+  export type AwsSecurityFindingIdentifierList = AwsSecurityFindingIdentifier[];
   export type AwsSecurityFindingList = AwsSecurityFinding[];
   export interface AwsSnsTopicDetails {
     /**
@@ -1908,6 +1927,70 @@ declare namespace SecurityHub {
      */
     FailedFindings?: ImportFindingsErrorList;
   }
+  export interface BatchUpdateFindingsRequest {
+    /**
+     * The list of findings to update. BatchUpdateFindings can be used to update up to 100 findings at a time. For each finding, the list provides the finding identifier and the ARN of the finding provider.
+     */
+    FindingIdentifiers: AwsSecurityFindingIdentifierList;
+    Note?: NoteUpdate;
+    /**
+     * Used to update the finding severity.
+     */
+    Severity?: SeverityUpdate;
+    /**
+     * Indicates the veracity of a finding. The available values for VerificationState are as follows.    UNKNOWN – The default disposition of a security finding    TRUE_POSITIVE – The security finding is confirmed    FALSE_POSITIVE – The security finding was determined to be a false alarm    BENIGN_POSITIVE – A special case of TRUE_POSITIVE where the finding doesn't pose any threat, is expected, or both  
+     */
+    VerificationState?: VerificationState;
+    /**
+     * The updated value for the finding confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior or issue that it was intended to identify. Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100 means 100 percent confidence.
+     */
+    Confidence?: RatioScale;
+    /**
+     * The updated value for the level of importance assigned to the resources associated with the findings. A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources. 
+     */
+    Criticality?: RatioScale;
+    /**
+     * One or more finding types in the format of namespace/category/classifier that classify a finding. Valid namespace values are as follows.   Software and Configuration Checks   TTPs   Effects   Unusual Behaviors   Sensitive Data Identifications   
+     */
+    Types?: TypeList;
+    /**
+     * A list of name/value string pairs associated with the finding. These are custom, user-defined fields added to a finding.
+     */
+    UserDefinedFields?: FieldMap;
+    /**
+     * Used to update the workflow status of a finding. The workflow status indicates the progress of the investigation into the finding. 
+     */
+    Workflow?: WorkflowUpdate;
+    /**
+     * A list of findings that are related to the updated findings.
+     */
+    RelatedFindings?: RelatedFindingList;
+  }
+  export interface BatchUpdateFindingsResponse {
+    /**
+     * The list of findings that were updated successfully.
+     */
+    ProcessedFindings: AwsSecurityFindingIdentifierList;
+    /**
+     * The list of findings that were not updated.
+     */
+    UnprocessedFindings: BatchUpdateFindingsUnprocessedFindingsList;
+  }
+  export interface BatchUpdateFindingsUnprocessedFinding {
+    /**
+     * The identifier of the finding that was not updated.
+     */
+    FindingIdentifier: AwsSecurityFindingIdentifier;
+    /**
+     * The code associated with the error.
+     */
+    ErrorCode: NonEmptyString;
+    /**
+     * The message associated with the error.
+     */
+    ErrorMessage: NonEmptyString;
+  }
+  export type BatchUpdateFindingsUnprocessedFindingsList = BatchUpdateFindingsUnprocessedFinding[];
   export type Boolean = boolean;
   export type CategoryList = NonEmptyString[];
   export interface Compliance {
@@ -1970,7 +2053,7 @@ declare namespace SecurityHub {
      */
     Filters: AwsSecurityFindingFilters;
     /**
-     * The attribute used as the aggregator to group related findings for the insight.
+     * The attribute used to group the findings for the insight. The grouping attribute identifies the type of item that the insight applies to. For example, if an insight is grouped by resource identifier, then the insight produces a list of resource identifiers.
      */
     GroupByAttribute: NonEmptyString;
   }
@@ -2224,6 +2307,10 @@ declare namespace SecurityHub {
      * The tags to add to the Hub resource when you enable Security Hub.
      */
     Tags?: TagMap;
+    /**
+     * Whether to enable the security standards that Security Hub has designated as automatically enabled. If you do not provide a value for EnableDefaultStandards, it is set to true. To not enable the automatically enabled standards, set EnableDefaultStandards to false.
+     */
+    EnableDefaultStandards?: Boolean;
   }
   export interface EnableSecurityHubResponse {
   }
@@ -2350,15 +2437,15 @@ declare namespace SecurityHub {
   }
   export interface ImportFindingsError {
     /**
-     * The ID of the error made during the BatchImportFindings operation.
+     * The identifier of the finding that could not be updated.
      */
     Id: NonEmptyString;
     /**
-     * The code of the error made during the BatchImportFindings operation.
+     * The code of the error returned by the BatchImportFindings operation.
      */
     ErrorCode: NonEmptyString;
     /**
-     * The message of the error made during the BatchImportFindings operation.
+     * The message of the error returned by the BatchImportFindings operation.
      */
     ErrorMessage: NonEmptyString;
   }
@@ -2377,7 +2464,7 @@ declare namespace SecurityHub {
      */
     Filters: AwsSecurityFindingFilters;
     /**
-     * The attribute that the insight's findings are grouped by. This attribute is used as a findings aggregator for the purposes of viewing and managing multiple related findings under a single operand.
+     * The grouping attribute for the insight's findings. Indicates how to group the matching findings, and identifies the type of item that the insight applies to. For example, if an insight is grouped by resource identifier, then the insight produces a list of resource identifiers.
      */
     GroupByAttribute: NonEmptyString;
   }
@@ -2762,6 +2849,7 @@ declare namespace SecurityHub {
   }
   export type ProductSubscriptionArnList = NonEmptyString[];
   export type ProductsList = Product[];
+  export type RatioScale = number;
   export interface Recommendation {
     /**
      * Describes the recommended steps to take to remediate an issue identified in a finding.
@@ -2929,6 +3017,20 @@ declare namespace SecurityHub {
   }
   export type SeverityLabel = "INFORMATIONAL"|"LOW"|"MEDIUM"|"HIGH"|"CRITICAL"|string;
   export type SeverityRating = "LOW"|"MEDIUM"|"HIGH"|"CRITICAL"|string;
+  export interface SeverityUpdate {
+    /**
+     * The normalized severity for the finding. This attribute is to be deprecated in favor of Label. If you provide Normalized and do not provide Label, Label is set automatically as follows.   0 - INFORMATIONAL    1–39 - LOW    40–69 - MEDIUM    70–89 - HIGH    90–100 - CRITICAL   
+     */
+    Normalized?: RatioScale;
+    /**
+     * The native severity as defined by the AWS service or integrated partner product that generated the finding.
+     */
+    Product?: Double;
+    /**
+     * The severity value of the finding. The allowed values are the following.    INFORMATIONAL - No issue was found.    LOW - The issue does not require action on its own.    MEDIUM - The issue must be addressed but not urgently.    HIGH - The issue must be addressed as a priority.    CRITICAL - The issue must be remediated immediately to avoid it escalating.  
+     */
+    Label?: SeverityLabel;
+  }
   export type SortCriteria = SortCriterion[];
   export interface SortCriterion {
     /**
@@ -2954,6 +3056,10 @@ declare namespace SecurityHub {
      * A description of the standard.
      */
     Description?: NonEmptyString;
+    /**
+     * Whether the standard is enabled by default. When Security Hub is enabled from the console, if a standard is enabled by default, the check box for that standard is selected by default. When Security Hub is enabled using the EnableSecurityHub API operation, the standard is enabled by default unless EnableDefaultStandards is set to false.
+     */
+    EnabledByDefault?: Boolean;
   }
   export type Standards = Standard[];
   export interface StandardsControl {
@@ -3200,6 +3306,12 @@ declare namespace SecurityHub {
   }
   export type WorkflowState = "NEW"|"ASSIGNED"|"IN_PROGRESS"|"DEFERRED"|"RESOLVED"|string;
   export type WorkflowStatus = "NEW"|"NOTIFIED"|"RESOLVED"|"SUPPRESSED"|string;
+  export interface WorkflowUpdate {
+    /**
+     * The status of the investigation into the finding. The allowed values are the following.    NEW - The initial state of a finding, before it is reviewed.    NOTIFIED - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.    RESOLVED - The finding was reviewed and remediated and is now considered resolved.    SUPPRESSED - The finding will not be reviewed again and will not be acted upon.  
+     */
+    Status?: WorkflowStatus;
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

@@ -11,6 +11,49 @@
     "uid": "kinesis-video-archived-media-2017-09-30"
   },
   "operations": {
+    "GetClip": {
+      "name": "GetClip",
+      "http": {
+        "method": "POST",
+        "requestUri": "/getClip"
+      },
+      "input": {
+        "shape": "GetClipInput"
+      },
+      "output": {
+        "shape": "GetClipOutput"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidArgumentException"
+        },
+        {
+          "shape": "ClientLimitExceededException"
+        },
+        {
+          "shape": "NotAuthorizedException"
+        },
+        {
+          "shape": "UnsupportedStreamMediaTypeException"
+        },
+        {
+          "shape": "MissingCodecPrivateDataException"
+        },
+        {
+          "shape": "InvalidCodecPrivateDataException"
+        },
+        {
+          "shape": "InvalidMediaFrameException"
+        },
+        {
+          "shape": "NoDataRetentionException"
+        }
+      ],
+      "documentation": "<p>Downloads an MP4 file (clip) containing the archived, on-demand media from the specified video stream over the specified time range. </p> <p>Both the StreamName and the StreamARN parameters are optional, but you must specify either the StreamName or the StreamARN when invoking this API operation. </p> <p>As a prerequsite to using GetCLip API, you must obtain an endpoint using <code>GetDataEndpoint</code>, specifying GET_CLIP for<code/> the <code>APIName</code> parameter. </p> <p>An Amazon Kinesis video stream has the following requirements for providing data through MP4:</p> <ul> <li> <p>The media must contain h.264 or h.265 encoded video and, optionally, AAC or G.711 encoded audio. Specifically, the codec ID of track 1 should be <code>V_MPEG/ISO/AVC</code> (for h.264) or V_MPEGH/ISO/HEVC (for H.265). Optionally, the codec ID of track 2 should be <code>A_AAC</code> (for AAC) or A_MS/ACM (for G.711).</p> </li> <li> <p>Data retention must be greater than 0.</p> </li> <li> <p>The video track of each fragment must contain codec private data in the Advanced Video Coding (AVC) for H.264 format and HEVC for H.265 format. For more information, see <a href=\"https://www.iso.org/standard/55980.html\">MPEG-4 specification ISO/IEC 14496-15</a>. For information about adapting stream data to a given format, see <a href=\"http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/producer-reference-nal.html\">NAL Adaptation Flags</a>.</p> </li> <li> <p>The audio track (if present) of each fragment must contain codec private data in the AAC format (<a href=\"https://www.iso.org/standard/43345.html\">AAC specification ISO/IEC 13818-7</a>) or the <a href=\"http://www-mmsp.ece.mcgill.ca/Documents/AudioFormats/WAVE/WAVE.html\">MS Wave format</a>.</p> </li> </ul> <p>You can monitor the amount of outgoing data by monitoring the <code>GetClip.OutgoingBytes</code> Amazon CloudWatch metric. For information about using CloudWatch to monitor Kinesis Video Streams, see <a href=\"http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/monitoring.html\">Monitoring Kinesis Video Streams</a>. For pricing information, see <a href=\"https://aws.amazon.com/kinesis/video-streams/pricing/\">Amazon Kinesis Video Streams Pricing</a> and <a href=\"https://aws.amazon.com/pricing/\">AWS Pricing</a>. Charges for outgoing AWS data apply.</p>"
+    },
     "GetDASHStreamingSessionURL": {
       "name": "GetDASHStreamingSessionURL",
       "http": {
@@ -149,6 +192,49 @@
     }
   },
   "shapes": {
+    "ClipFragmentSelector": {
+      "type": "structure",
+      "required": [
+        "FragmentSelectorType",
+        "TimestampRange"
+      ],
+      "members": {
+        "FragmentSelectorType": {
+          "shape": "ClipFragmentSelectorType",
+          "documentation": "<p>The origin of the timestamps to use (Server or Producer).</p>"
+        },
+        "TimestampRange": {
+          "shape": "ClipTimestampRange",
+          "documentation": "<p>The range of timestamps to return.</p>"
+        }
+      },
+      "documentation": "<p>Describes the timestamp range and timestamp origin of a range of fragments.</p> <p>Fragments that have duplicate producer timestamps are deduplicated. This means that if producers are producing a stream of fragments with producer timestamps that are approximately equal to the true clock time, the clip will contain all of the fragments within the requested timestamp range. If some fragments are ingested within the same time range and very different points in time, only the oldest ingested collection of fragments are returned.</p>"
+    },
+    "ClipFragmentSelectorType": {
+      "type": "string",
+      "enum": [
+        "PRODUCER_TIMESTAMP",
+        "SERVER_TIMESTAMP"
+      ]
+    },
+    "ClipTimestampRange": {
+      "type": "structure",
+      "required": [
+        "StartTimestamp",
+        "EndTimestamp"
+      ],
+      "members": {
+        "StartTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The starting timestamp in the range of timestamps for which to return fragments. </p> <p>This value is inclusive. Fragments that start before the <code>StartTimestamp</code> and continue past it are included in the session. If <code>FragmentSelectorType</code> is <code>SERVER_TIMESTAMP</code>, the <code>StartTimestamp</code> must be later than the stream head. </p>"
+        },
+        "EndTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The end of the timestamp range for the requested media.</p> <p>This value must be within 3 hours of the specified <code>StartTimestamp</code>, and it must be later than the <code>StartTimestamp</code> value. If <code>FragmentSelectorType</code> for the request is <code>SERVER_TIMESTAMP</code>, this value must be in the past. </p> <p>This value is inclusive. The <code>EndTimestamp</code> is compared to the (starting) timestamp of the fragment. Fragments that start before the <code>EndTimestamp</code> value and continue past it are included in the session. </p>"
+        }
+      },
+      "documentation": "<p>The range of timestamps for which to return fragments.</p> <p>The values in the ClipTimestampRange are <code>inclusive</code>. Fragments that begin before the start time but continue past it, or fragments that begin before the end time but continue past it, are included in the session. </p>"
+    },
     "ContainerFormat": {
       "type": "string",
       "enum": [
@@ -231,7 +317,7 @@
       "type": "structure",
       "members": {
         "FragmentNumber": {
-          "shape": "String",
+          "shape": "FragmentNumberString",
           "documentation": "<p>The unique identifier of the fragment. This value monotonically increases based on the ingestion order.</p>"
         },
         "FragmentSizeInBytes": {
@@ -297,6 +383,42 @@
         "PRODUCER_TIMESTAMP",
         "SERVER_TIMESTAMP"
       ]
+    },
+    "GetClipInput": {
+      "type": "structure",
+      "required": [
+        "ClipFragmentSelector"
+      ],
+      "members": {
+        "StreamName": {
+          "shape": "StreamName",
+          "documentation": "<p>The name of the stream for which to retrieve the media clip. </p> <p>You must specify either the StreamName or the StreamARN. </p>"
+        },
+        "StreamARN": {
+          "shape": "ResourceARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the stream for which to retrieve the media clip. </p> <p>You must specify either the StreamName or the StreamARN. </p>"
+        },
+        "ClipFragmentSelector": {
+          "shape": "ClipFragmentSelector",
+          "documentation": "<p>The time range of the requested clip and the source of the timestamps.</p>"
+        }
+      }
+    },
+    "GetClipOutput": {
+      "type": "structure",
+      "members": {
+        "ContentType": {
+          "shape": "ContentType",
+          "documentation": "<p>The content type of the media in the requested clip.</p>",
+          "location": "header",
+          "locationName": "Content-Type"
+        },
+        "Payload": {
+          "shape": "Payload",
+          "documentation": "<p>Traditional MP4 file that contains the media clip from the specified video stream. The output will contain the first 100 MB or the first 200 fragments from the specified start timestamp. For more information, see <a href=\"Kinesis Video Streams Limits\">Kinesis Video Streams Limits</a>. </p>"
+        }
+      },
+      "payload": "Payload"
     },
     "GetDASHStreamingSessionURLInput": {
       "type": "structure",
@@ -503,7 +625,7 @@
           "documentation": "<p>The total number of fragments to return. If the total number of fragments available is more than the value specified in <code>max-results</code>, then a <a>ListFragmentsOutput$NextToken</a> is provided in the output that you can use to resume pagination.</p>"
         },
         "NextToken": {
-          "shape": "String",
+          "shape": "NextToken",
           "documentation": "<p>A token to specify where to start paginating. This is the <a>ListFragmentsOutput$NextToken</a> from a previously truncated response.</p>"
         },
         "FragmentSelector": {
@@ -520,13 +642,19 @@
           "documentation": "<p>A list of archived <a>Fragment</a> objects from the stream that meet the selector criteria. Results are in no specific order, even across pages.</p>"
         },
         "NextToken": {
-          "shape": "String",
+          "shape": "NextToken",
           "documentation": "<p>If the returned list is truncated, the operation returns this token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
         }
       }
     },
     "Long": {
       "type": "long"
+    },
+    "NextToken": {
+      "type": "string",
+      "max": 4096,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9+/]+={0,2}"
     },
     "PageLimit": {
       "type": "long",
@@ -548,10 +676,6 @@
       "max": 256,
       "min": 1,
       "pattern": "[a-zA-Z0-9_.-]+"
-    },
-    "String": {
-      "type": "string",
-      "min": 1
     },
     "Timestamp": {
       "type": "timestamp"

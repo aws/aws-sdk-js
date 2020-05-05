@@ -775,6 +775,35 @@
       ],
       "documentation": "<p>Deletes a VPC link.</p>"
     },
+    "ExportApi": {
+      "name": "ExportApi",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v2/apis/{apiId}/exports/{specification}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ExportApiRequest"
+      },
+      "output": {
+        "shape": "ExportApiResponse",
+        "documentation": "<p>Success</p>"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The resource specified in the request was not found.</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The client is sending more than the allowed number of requests per unit of time.</p>"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>One of the parameters in the request is invalid.</p>"
+        }
+      ]
+    },
     "GetApi": {
       "name": "GetApi",
       "http": {
@@ -2794,7 +2823,7 @@
         "IntegrationUri": {
           "shape": "UriWithLengthBetween1And2048",
           "locationName": "integrationUri",
-          "documentation": "<p>For a Lambda integration, specify the URI of a Lambda function.</p> <p>For an HTTP integration, specify a fully-qualified URL.</p> <p>For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see <a href=\"https://alpha-docs-aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html\">DiscoverInstances</a>. For private integrations, all resources must be owned by the same AWS account.</p>"
+          "documentation": "<p>For a Lambda integration, specify the URI of a Lambda function.</p> <p>For an HTTP integration, specify a fully-qualified URL.</p> <p>For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html\">DiscoverInstances</a>. For private integrations, all resources must be owned by the same AWS account.</p>"
         },
         "PassthroughBehavior": {
           "shape": "PassthroughBehavior",
@@ -2822,9 +2851,9 @@
           "documentation": "<p>The template selection expression for the integration.</p>"
         },
         "TimeoutInMillis": {
-          "shape": "IntegerWithLengthBetween50And29000",
+          "shape": "IntegerWithLengthBetween50And30000",
           "locationName": "timeoutInMillis",
-          "documentation": "<p>Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.</p>"
+          "documentation": "<p>Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.</p>"
         },
         "TlsConfig": {
           "shape": "TlsConfigInput",
@@ -2894,7 +2923,7 @@
         "IntegrationUri": {
           "shape": "UriWithLengthBetween1And2048",
           "locationName": "integrationUri",
-          "documentation": "<p>For a Lambda integration, specify the URI of a Lambda function.</p> <p>For an HTTP integration, specify a fully-qualified URL.</p> <p>For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see <a href=\"https://alpha-docs-aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html\">DiscoverInstances</a>. For private integrations, all resources must be owned by the same AWS account.</p>"
+          "documentation": "<p>For a Lambda integration, specify the URI of a Lambda function.</p> <p>For an HTTP integration, specify a fully-qualified URL.</p> <p>For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html\">DiscoverInstances</a>. For private integrations, all resources must be owned by the same AWS account.</p>"
         },
         "PassthroughBehavior": {
           "shape": "PassthroughBehavior",
@@ -2922,9 +2951,9 @@
           "documentation": "<p>The template selection expression for the integration. Supported only for WebSocket APIs.</p>"
         },
         "TimeoutInMillis": {
-          "shape": "IntegerWithLengthBetween50And29000",
+          "shape": "IntegerWithLengthBetween50And30000",
           "locationName": "timeoutInMillis",
-          "documentation": "<p>Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.</p>"
+          "documentation": "<p>Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.</p>"
         },
         "TlsConfig": {
           "shape": "TlsConfig",
@@ -4006,6 +4035,72 @@
         "EDGE"
       ]
     },
+    "ExportApiRequest": {
+      "type": "structure",
+      "members": {
+        "ApiId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "apiId",
+          "documentation": "<p>The API identifier.</p>"
+        },
+        "ExportVersion": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "exportVersion",
+          "documentation": "<p>The version of the API Gateway export algorithm. API Gateway uses the latest version by default. Currently, the only supported version is 1.0.</p>"
+        },
+        "IncludeExtensions": {
+          "shape": "__boolean",
+          "location": "querystring",
+          "locationName": "includeExtensions",
+          "documentation": "<p>Specifies whether to include <a href=\"https://docs.aws.amazon.com//apigateway/latest/developerguide/api-gateway-swagger-extensions.html\">API Gateway extensions</a> in the exported API definition. API Gateway extensions are included by default.</p>"
+        },
+        "OutputType": {
+          "shape": "__string",
+          "enum": [
+            "YAML",
+            "JSON"
+          ],
+          "location": "querystring",
+          "locationName": "outputType",
+          "documentation": "<p>The output type of the exported definition file. Valid values are JSON and YAML.</p>"
+        },
+        "Specification": {
+          "shape": "__string",
+          "enum": [
+            "OAS30"
+          ],
+          "location": "uri",
+          "locationName": "specification",
+          "documentation": "<p>The version of the API specification to use. OAS30, for OpenAPI 3.0, is the only supported value.</p>"
+        },
+        "StageName": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "stageName",
+          "documentation": "<p>The name of the API stage to export. If you don't specify this property, a representation of the latest API configuration is exported.</p>"
+        }
+      },
+      "required": [
+        "Specification",
+        "OutputType",
+        "ApiId"
+      ]
+    },
+    "ExportApiResponse": {
+      "type": "structure",
+      "members": {
+        "body": {
+          "shape": "ExportedApi"
+        }
+      },
+      "payload": "body"
+    },
+    "ExportedApi": {
+      "type": "blob",
+      "documentation": "<p>Represents an exported definition of an API in a particular output format, for example, YAML. The API is serialized to the requested specification, for example, OpenAPI 3.0.</p>"
+    },
     "GetApiMappingRequest": {
       "type": "structure",
       "members": {
@@ -4571,7 +4666,7 @@
         "IntegrationUri": {
           "shape": "UriWithLengthBetween1And2048",
           "locationName": "integrationUri",
-          "documentation": "<p>For a Lambda integration, specify the URI of a Lambda function.</p> <p>For an HTTP integration, specify a fully-qualified URL.</p> <p>For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see <a href=\"https://alpha-docs-aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html\">DiscoverInstances</a>. For private integrations, all resources must be owned by the same AWS account.</p>"
+          "documentation": "<p>For a Lambda integration, specify the URI of a Lambda function.</p> <p>For an HTTP integration, specify a fully-qualified URL.</p> <p>For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html\">DiscoverInstances</a>. For private integrations, all resources must be owned by the same AWS account.</p>"
         },
         "PassthroughBehavior": {
           "shape": "PassthroughBehavior",
@@ -4599,9 +4694,9 @@
           "documentation": "<p>The template selection expression for the integration. Supported only for WebSocket APIs.</p>"
         },
         "TimeoutInMillis": {
-          "shape": "IntegerWithLengthBetween50And29000",
+          "shape": "IntegerWithLengthBetween50And30000",
           "locationName": "timeoutInMillis",
-          "documentation": "<p>Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.</p>"
+          "documentation": "<p>Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.</p>"
         },
         "TlsConfig": {
           "shape": "TlsConfig",
@@ -5397,7 +5492,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "basepath",
-          "documentation": "<p>Specifies how to interpret the base path of the API during import. Valid values are ignore, prepend, and split. The default value is ignore. To learn more, see <a href=\"https://alpha-docs-aws.amazon.com/apigateway/latest/developerguide/api-gateway-import-api-basePath.html\">Set the OpenAPI basePath Property</a>. Supported only for HTTP APIs.</p>"
+          "documentation": "<p>Specifies how to interpret the base path of the API during import. Valid values are ignore, prepend, and split. The default value is ignore. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-import-api-basePath.html\">Set the OpenAPI basePath Property</a>. Supported only for HTTP APIs.</p>"
         },
         "Body": {
           "shape": "__string",
@@ -5408,7 +5503,7 @@
           "shape": "__boolean",
           "location": "querystring",
           "locationName": "failOnWarnings",
-          "documentation": "<p>Specifies whether to rollback the API creation (true) or not (false) when a warning is encountered. The default value is false.</p>"
+          "documentation": "<p>Specifies whether to rollback the API creation when a warning is encountered. By default, API creation continues if a warning is encountered.</p>"
         }
       },
       "documentation": "<p></p>",
@@ -5497,11 +5592,11 @@
       "min": 0,
       "max": 3600
     },
-    "IntegerWithLengthBetween50And29000": {
+    "IntegerWithLengthBetween50And30000": {
       "type": "integer",
-      "documentation": "<p>An integer with a value between [50-29000].</p>",
+      "documentation": "<p>An integer with a value between [50-30000].</p>",
       "min": 50,
-      "max": 29000
+      "max": 30000
     },
     "IntegerWithLengthBetweenMinus1And86400": {
       "type": "integer",
@@ -5565,7 +5660,7 @@
         "IntegrationUri": {
           "shape": "UriWithLengthBetween1And2048",
           "locationName": "integrationUri",
-          "documentation": "<p>For a Lambda integration, specify the URI of a Lambda function.</p> <p>For an HTTP integration, specify a fully-qualified URL.</p> <p>For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see <a href=\"https://alpha-docs-aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html\">DiscoverInstances</a>. For private integrations, all resources must be owned by the same AWS account.</p>"
+          "documentation": "<p>For a Lambda integration, specify the URI of a Lambda function.</p> <p>For an HTTP integration, specify a fully-qualified URL.</p> <p>For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html\">DiscoverInstances</a>. For private integrations, all resources must be owned by the same AWS account.</p>"
         },
         "PassthroughBehavior": {
           "shape": "PassthroughBehavior",
@@ -5593,9 +5688,9 @@
           "documentation": "<p>The template selection expression for the integration. Supported only for WebSocket APIs.</p>"
         },
         "TimeoutInMillis": {
-          "shape": "IntegerWithLengthBetween50And29000",
+          "shape": "IntegerWithLengthBetween50And30000",
           "locationName": "timeoutInMillis",
-          "documentation": "<p>Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.</p>"
+          "documentation": "<p>Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.</p>"
         },
         "TlsConfig": {
           "shape": "TlsConfig",
@@ -5769,7 +5864,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "basepath",
-          "documentation": "<p>Specifies how to interpret the base path of the API during import. Valid values are ignore, prepend, and split. The default value is ignore. To learn more, see <a href=\"https://alpha-docs-aws.amazon.com/apigateway/latest/developerguide/api-gateway-import-api-basePath.html\">Set the OpenAPI basePath Property</a>. Supported only for HTTP APIs.</p>"
+          "documentation": "<p>Specifies how to interpret the base path of the API during import. Valid values are ignore, prepend, and split. The default value is ignore. To learn more, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-import-api-basePath.html\">Set the OpenAPI basePath Property</a>. Supported only for HTTP APIs.</p>"
         },
         "Body": {
           "shape": "__string",
@@ -5780,7 +5875,7 @@
           "shape": "__boolean",
           "location": "querystring",
           "locationName": "failOnWarnings",
-          "documentation": "<p>Specifies whether to rollback the API creation (true) or not (false) when a warning is encountered. The default value is false.</p>"
+          "documentation": "<p>Specifies whether to rollback the API creation when a warning is encountered. By default, API creation continues if a warning is encountered.</p>"
         }
       },
       "documentation": "<p></p>",
@@ -6750,7 +6845,7 @@
         "IntegrationUri": {
           "shape": "UriWithLengthBetween1And2048",
           "locationName": "integrationUri",
-          "documentation": "<p>For a Lambda integration, specify the URI of a Lambda function.</p> <p>For an HTTP integration, specify a fully-qualified URL.</p> <p>For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see <a href=\"https://alpha-docs-aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html\">DiscoverInstances</a>. For private integrations, all resources must be owned by the same AWS account.</p>"
+          "documentation": "<p>For a Lambda integration, specify the URI of a Lambda function.</p> <p>For an HTTP integration, specify a fully-qualified URL.</p> <p>For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html\">DiscoverInstances</a>. For private integrations, all resources must be owned by the same AWS account.</p>"
         },
         "PassthroughBehavior": {
           "shape": "PassthroughBehavior",
@@ -6778,9 +6873,9 @@
           "documentation": "<p>The template selection expression for the integration.</p>"
         },
         "TimeoutInMillis": {
-          "shape": "IntegerWithLengthBetween50And29000",
+          "shape": "IntegerWithLengthBetween50And30000",
           "locationName": "timeoutInMillis",
-          "documentation": "<p>Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.</p>"
+          "documentation": "<p>Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.</p>"
         },
         "TlsConfig": {
           "shape": "TlsConfigInput",
@@ -6850,7 +6945,7 @@
         "IntegrationUri": {
           "shape": "UriWithLengthBetween1And2048",
           "locationName": "integrationUri",
-          "documentation": "<p>For a Lambda integration, specify the URI of a Lambda function.</p> <p>For an HTTP integration, specify a fully-qualified URL.</p> <p>For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see <a href=\"https://alpha-docs-aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html\">DiscoverInstances</a>. For private integrations, all resources must be owned by the same AWS account.</p>"
+          "documentation": "<p>For a Lambda integration, specify the URI of a Lambda function.</p> <p>For an HTTP integration, specify a fully-qualified URL.</p> <p>For an HTTP API private integration, specify the ARN of an Application Load Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map service, API Gateway uses DiscoverInstances to identify resources. You can use query parameters to target specific resources. To learn more, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html\">DiscoverInstances</a>. For private integrations, all resources must be owned by the same AWS account.</p>"
         },
         "PassthroughBehavior": {
           "shape": "PassthroughBehavior",
@@ -6878,9 +6973,9 @@
           "documentation": "<p>The template selection expression for the integration. Supported only for WebSocket APIs.</p>"
         },
         "TimeoutInMillis": {
-          "shape": "IntegerWithLengthBetween50And29000",
+          "shape": "IntegerWithLengthBetween50And30000",
           "locationName": "timeoutInMillis",
-          "documentation": "<p>Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds for WebSocket APIs. The default value is 5,000 milliseconds, or 5 seconds for HTTP APIs.</p>"
+          "documentation": "<p>Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for WebSocket APIs and 30 seconds for HTTP APIs.</p>"
         },
         "TlsConfig": {
           "shape": "TlsConfig",
