@@ -12,11 +12,11 @@ declare class Support extends Service {
   constructor(options?: Support.Types.ClientConfiguration)
   config: Config & Support.Types.ClientConfiguration;
   /**
-   * Adds one or more attachments to an attachment set. If an attachmentSetId is not specified, a new attachment set is created, and the ID of the set is returned in the response. If an attachmentSetId is specified, the attachments are added to the specified set, if it exists. An attachment set is a temporary container for attachments that are to be added to a case or case communication. The set is available for one hour after it is created; the expiryTime returned in the response indicates when the set expires. The maximum number of attachments in a set is 3, and the maximum size of any attachment in the set is 5 MB.
+   * Adds one or more attachments to an attachment set.  An attachment set is a temporary container for attachments that you add to a case or case communication. The set is available for 1 hour after it's created. The expiryTime returned in the response is when the set expires. 
    */
   addAttachmentsToSet(params: Support.Types.AddAttachmentsToSetRequest, callback?: (err: AWSError, data: Support.Types.AddAttachmentsToSetResponse) => void): Request<Support.Types.AddAttachmentsToSetResponse, AWSError>;
   /**
-   * Adds one or more attachments to an attachment set. If an attachmentSetId is not specified, a new attachment set is created, and the ID of the set is returned in the response. If an attachmentSetId is specified, the attachments are added to the specified set, if it exists. An attachment set is a temporary container for attachments that are to be added to a case or case communication. The set is available for one hour after it is created; the expiryTime returned in the response indicates when the set expires. The maximum number of attachments in a set is 3, and the maximum size of any attachment in the set is 5 MB.
+   * Adds one or more attachments to an attachment set.  An attachment set is a temporary container for attachments that you add to a case or case communication. The set is available for 1 hour after it's created. The expiryTime returned in the response is when the set expires. 
    */
   addAttachmentsToSet(callback?: (err: AWSError, data: Support.Types.AddAttachmentsToSetResponse) => void): Request<Support.Types.AddAttachmentsToSetResponse, AWSError>;
   /**
@@ -28,19 +28,19 @@ declare class Support extends Service {
    */
   addCommunicationToCase(callback?: (err: AWSError, data: Support.Types.AddCommunicationToCaseResponse) => void): Request<Support.Types.AddCommunicationToCaseResponse, AWSError>;
   /**
-   * Creates a new case in the AWS Support Center. This operation is modeled on the behavior of the AWS Support Center Create Case page. Its parameters require you to specify the following information:    issueType. The type of issue for the case. You can specify either "customer-service" or "technical." If you do not indicate a value, the default is "technical."  Service limit increases are not supported by the Support API; you must submit service limit increase requests in Support Center. The caseId is not the displayId that appears in Support Center. You can use the DescribeCases API to get the displayId.     serviceCode. The code for an AWS service. You can get the possible serviceCode values by calling DescribeServices.    categoryCode. The category for the service defined for the serviceCode value. You also get the category code for a service by calling DescribeServices. Each AWS service defines its own set of category codes.    severityCode. A value that indicates the urgency of the case, which in turn determines the response time according to your service level agreement with AWS Support. You can get the possible severityCode values by calling DescribeSeverityLevels. For more information about the meaning of the codes, see SeverityLevel and Choosing a Severity.    subject. The Subject field on the AWS Support Center Create Case page.    communicationBody. The Description field on the AWS Support Center Create Case page.    attachmentSetId. The ID of a set of attachments that has been created by using AddAttachmentsToSet.    language. The human language in which AWS Support handles the case. English and Japanese are currently supported.    ccEmailAddresses. The AWS Support Center CC field on the Create Case page. You can list email addresses to be copied on any correspondence about the case. The account that opens the case is already identified by passing the AWS Credentials in the HTTP POST method or in a method or function call from one of the programming languages supported by an AWS SDK.     To add additional communication or attachments to an existing case, use AddCommunicationToCase.  A successful CreateCase request returns an AWS Support case number. Case numbers are used by the DescribeCases operation to retrieve existing AWS Support cases.
+   * Creates a case in the AWS Support Center. This operation is similar to how you create a case in the AWS Support Center Create Case page. The AWS Support API doesn't support requesting service limit increases. You can submit a service limit increase in the following ways:    Submit a request from the AWS Support Center Create Case page.   Use the Service Quotas RequestServiceQuotaIncrease operation.   A successful CreateCase request returns an AWS Support case number. You can use the DescribeCases operation and specify the case number to get existing AWS Support cases. After you create a case, you can use the AddCommunicationToCase operation to add additional communication or attachments to an existing case.    The caseId is separate from the displayId that appears in the Support Center. You can use the DescribeCases operation to get the displayId.   
    */
   createCase(params: Support.Types.CreateCaseRequest, callback?: (err: AWSError, data: Support.Types.CreateCaseResponse) => void): Request<Support.Types.CreateCaseResponse, AWSError>;
   /**
-   * Creates a new case in the AWS Support Center. This operation is modeled on the behavior of the AWS Support Center Create Case page. Its parameters require you to specify the following information:    issueType. The type of issue for the case. You can specify either "customer-service" or "technical." If you do not indicate a value, the default is "technical."  Service limit increases are not supported by the Support API; you must submit service limit increase requests in Support Center. The caseId is not the displayId that appears in Support Center. You can use the DescribeCases API to get the displayId.     serviceCode. The code for an AWS service. You can get the possible serviceCode values by calling DescribeServices.    categoryCode. The category for the service defined for the serviceCode value. You also get the category code for a service by calling DescribeServices. Each AWS service defines its own set of category codes.    severityCode. A value that indicates the urgency of the case, which in turn determines the response time according to your service level agreement with AWS Support. You can get the possible severityCode values by calling DescribeSeverityLevels. For more information about the meaning of the codes, see SeverityLevel and Choosing a Severity.    subject. The Subject field on the AWS Support Center Create Case page.    communicationBody. The Description field on the AWS Support Center Create Case page.    attachmentSetId. The ID of a set of attachments that has been created by using AddAttachmentsToSet.    language. The human language in which AWS Support handles the case. English and Japanese are currently supported.    ccEmailAddresses. The AWS Support Center CC field on the Create Case page. You can list email addresses to be copied on any correspondence about the case. The account that opens the case is already identified by passing the AWS Credentials in the HTTP POST method or in a method or function call from one of the programming languages supported by an AWS SDK.     To add additional communication or attachments to an existing case, use AddCommunicationToCase.  A successful CreateCase request returns an AWS Support case number. Case numbers are used by the DescribeCases operation to retrieve existing AWS Support cases.
+   * Creates a case in the AWS Support Center. This operation is similar to how you create a case in the AWS Support Center Create Case page. The AWS Support API doesn't support requesting service limit increases. You can submit a service limit increase in the following ways:    Submit a request from the AWS Support Center Create Case page.   Use the Service Quotas RequestServiceQuotaIncrease operation.   A successful CreateCase request returns an AWS Support case number. You can use the DescribeCases operation and specify the case number to get existing AWS Support cases. After you create a case, you can use the AddCommunicationToCase operation to add additional communication or attachments to an existing case.    The caseId is separate from the displayId that appears in the Support Center. You can use the DescribeCases operation to get the displayId.   
    */
   createCase(callback?: (err: AWSError, data: Support.Types.CreateCaseResponse) => void): Request<Support.Types.CreateCaseResponse, AWSError>;
   /**
-   * Returns the attachment that has the specified ID. Attachment IDs are generated by the case management system when you add an attachment to a case or case communication. Attachment IDs are returned in the AttachmentDetails objects that are returned by the DescribeCommunications operation.
+   * Returns the attachment that has the specified ID. Attachments can include screenshots, error logs, or other files that describe your issue. Attachment IDs are generated by the case management system when you add an attachment to a case or case communication. Attachment IDs are returned in the AttachmentDetails objects that are returned by the DescribeCommunications operation.
    */
   describeAttachment(params: Support.Types.DescribeAttachmentRequest, callback?: (err: AWSError, data: Support.Types.DescribeAttachmentResponse) => void): Request<Support.Types.DescribeAttachmentResponse, AWSError>;
   /**
-   * Returns the attachment that has the specified ID. Attachment IDs are generated by the case management system when you add an attachment to a case or case communication. Attachment IDs are returned in the AttachmentDetails objects that are returned by the DescribeCommunications operation.
+   * Returns the attachment that has the specified ID. Attachments can include screenshots, error logs, or other files that describe your issue. Attachment IDs are generated by the case management system when you add an attachment to a case or case communication. Attachment IDs are returned in the AttachmentDetails objects that are returned by the DescribeCommunications operation.
    */
   describeAttachment(callback?: (err: AWSError, data: Support.Types.DescribeAttachmentResponse) => void): Request<Support.Types.DescribeAttachmentResponse, AWSError>;
   /**
@@ -131,7 +131,7 @@ declare namespace Support {
      */
     attachmentSetId?: AttachmentSetId;
     /**
-     * One or more attachments to add to the set. The limit is 3 attachments per set, and the size limit is 5 MB per attachment.
+     * One or more attachments to add to the set. You can add up to three attachments per set. The size limit is 5 MB per attachment. In the Attachment object, use the data parameter to specify the contents of the attachment file. In the previous request syntax, the value for data appear as blob, which is represented as a base64-encoded string. The value for fileName is the name of the attachment, such as troubleshoot-screenshot.png.
      */
     attachments: Attachments;
   }
@@ -210,7 +210,7 @@ declare namespace Support {
      */
     subject?: Subject;
     /**
-     * The status of the case. Valid values: resolved | pending-customer-action | opened | unassigned | work-in-progress.
+     * The status of the case. Valid values:    opened     pending-customer-action     reopened     resolved     unassigned     work-in-progress   
      */
     status?: Status;
     /**
@@ -291,45 +291,45 @@ declare namespace Support {
   export type CommunicationList = Communication[];
   export interface CreateCaseRequest {
     /**
-     * The title of the AWS Support case.
+     * The title of the AWS Support case. The title appears in the Subject field on the AWS Support Center Create Case page.
      */
     subject: Subject;
     /**
-     * The code for the AWS service returned by the call to DescribeServices.
+     * The code for the AWS service. You can use the DescribeServices operation to get the possible serviceCode values.
      */
     serviceCode?: ServiceCode;
     /**
-     * The code for the severity level returned by the call to DescribeSeverityLevels.  The availability of severity levels depends on the support plan for the account. 
+     * A value that indicates the urgency of the case. This value determines the response time according to your service level agreement with AWS Support. You can use the DescribeSeverityLevels operation to get the possible values for severityCode.  For more information, see SeverityLevel and Choosing a Severity in the AWS Support User Guide.  The availability of severity levels depends on the support plan for the AWS account. 
      */
     severityCode?: SeverityCode;
     /**
-     * The category of problem for the AWS Support case.
+     * The category of problem for the AWS Support case. You also use the DescribeServices operation to get the category code for a service. Each AWS service defines its own set of category codes.
      */
     categoryCode?: CategoryCode;
     /**
-     * The communication body text when you create an AWS Support case by calling CreateCase.
+     * The communication body text that describes the issue. This text appears in the Description field on the AWS Support Center Create Case page.
      */
     communicationBody: CommunicationBody;
     /**
-     * A list of email addresses that AWS Support copies on case correspondence.
+     * A list of email addresses that AWS Support copies on case correspondence. AWS Support identifies the account that creates the case when you specify your AWS credentials in an HTTP POST method or use the AWS SDKs. 
      */
     ccEmailAddresses?: CcEmailAddressList;
     /**
-     * The ISO 639-1 code for the language in which AWS provides support. AWS Support currently supports English ("en") and Japanese ("ja"). Language parameters must be passed explicitly for operations that take them.
+     * The language in which AWS Support handles the case. You must specify the ISO 639-1 code for the language parameter if you want support in that language. Currently, English ("en") and Japanese ("ja") are supported.
      */
     language?: Language;
     /**
-     * The type of issue for the case. You can specify either "customer-service" or "technical." If you do not indicate a value, the default is "technical."  Service limit increases are not supported by the Support API; you must submit service limit increase requests in Support Center. 
+     * The type of issue for the case. You can specify customer-service or technical. If you don't specify a value, the default is technical.
      */
     issueType?: IssueType;
     /**
-     * The ID of a set of one or more attachments for the case. Create the set by using AddAttachmentsToSet.
+     * The ID of a set of one or more attachments for the case. Create the set by using the AddAttachmentsToSet operation.
      */
     attachmentSetId?: AttachmentSetId;
   }
   export interface CreateCaseResponse {
     /**
-     * The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-12345678910-2013-c4c1d2bf33c5cf47 
+     * The AWS Support case ID requested or returned in the call. The case ID is an alphanumeric string in the following format: case-12345678910-2013-c4c1d2bf33c5cf47 
      */
     caseId?: CaseId;
   }
@@ -342,7 +342,7 @@ declare namespace Support {
   }
   export interface DescribeAttachmentResponse {
     /**
-     * The attachment content and file name.
+     * This object includes the attachment content and file name. In the previous response syntax, the value for the data parameter appears as blob, which is represented as a base64-encoded string. The value for fileName is the name of the attachment, such as troubleshoot-screenshot.png.
      */
     attachment?: Attachment;
   }
@@ -610,7 +610,7 @@ declare namespace Support {
      */
     name: String;
     /**
-     * The description of the Trusted Advisor check, which includes the alert criteria and recommended actions (contains HTML markup).
+     * The description of the Trusted Advisor check, which includes the alert criteria and recommended operations (contains HTML markup).
      */
     description: String;
     /**
@@ -687,11 +687,11 @@ declare namespace Support {
   export type TrustedAdvisorCheckSummaryList = TrustedAdvisorCheckSummary[];
   export interface TrustedAdvisorCostOptimizingSummary {
     /**
-     * The estimated monthly savings that might be realized if the recommended actions are taken.
+     * The estimated monthly savings that might be realized if the recommended operations are taken.
      */
     estimatedMonthlySavings: Double;
     /**
-     * The estimated percentage of savings that might be realized if the recommended actions are taken.
+     * The estimated percentage of savings that might be realized if the recommended operations are taken.
      */
     estimatedPercentMonthlySavings: Double;
   }

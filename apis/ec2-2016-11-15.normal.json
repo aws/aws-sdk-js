@@ -10505,7 +10505,7 @@
       "members": {
         "AvailabilityZone": {
           "shape": "String",
-          "documentation": "<p>The Availability Zone or Local Zone for the subnet.</p> <p>Default: AWS selects one for you. If you create more than one subnet in your VPC, we do not necessarily select a different zone for each subnet.</p> <p>To create a subnet in a Local Zone, set this value to the Local Zone ID, for example <code>us-west-2-lax-1a</code>. For information about the Regions that support Local Zones, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions\">Available Regions</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+          "documentation": "<p>The Availability Zone or Local Zone for the subnet.</p> <p>Default: AWS selects one for you. If you create more than one subnet in your VPC, we do not necessarily select a different zone for each subnet.</p> <p>To create a subnet in a Local Zone, set this value to the Local Zone ID, for example <code>us-west-2-lax-1a</code>. For information about the Regions that support Local Zones, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions\">Available Regions</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>To create a subnet in an Outpost, set this value to the Availability Zone for the Outpost and specify the Outpost ARN.</p>"
         },
         "AvailabilityZoneId": {
           "shape": "String",
@@ -27976,12 +27976,20 @@
         },
         "MapPublicIpOnLaunch": {
           "shape": "AttributeBooleanValue",
-          "documentation": "<p>Specify <code>true</code> to indicate that ENIs attached to instances created in the specified subnet should be assigned a public IPv4 address.</p>"
+          "documentation": "<p>Specify <code>true</code> to indicate that network interfaces attached to instances created in the specified subnet should be assigned a public IPv4 address.</p>"
         },
         "SubnetId": {
           "shape": "SubnetId",
           "documentation": "<p>The ID of the subnet.</p>",
           "locationName": "subnetId"
+        },
+        "MapCustomerOwnedIpOnLaunch": {
+          "shape": "AttributeBooleanValue",
+          "documentation": "<p>Specify <code>true</code> to indicate that network interfaces attached to instances created in the specified subnet should be assigned a customer-owned IPv4 address.</p> <p>When this value is <code>true</code>, you must specify the customer-owned IP pool using <code>CustomerOwnedIpv4Pool</code>.</p>"
+        },
+        "CustomerOwnedIpv4Pool": {
+          "shape": "CoipPoolId",
+          "documentation": "<p>The customer-owned IPv4 address pool associated with the subnet.</p> <p>You must set this value when you specify <code>true</code> for <code>MapCustomerOwnedIpOnLaunch</code>.</p>"
         }
       }
     },
@@ -35907,6 +35915,16 @@
           "shape": "Boolean",
           "documentation": "<p>Indicates whether instances launched in this subnet receive a public IPv4 address.</p>",
           "locationName": "mapPublicIpOnLaunch"
+        },
+        "MapCustomerOwnedIpOnLaunch": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether a network interface created in this subnet (including a network interface created by <a>RunInstances</a>) receives a customer-owned IPv4 address.</p>",
+          "locationName": "mapCustomerOwnedIpOnLaunch"
+        },
+        "CustomerOwnedIpv4Pool": {
+          "shape": "CoipPoolId",
+          "documentation": "<p>The customer-owned IPv4 address pool associated with the subnet.</p>",
+          "locationName": "customerOwnedIpv4Pool"
         },
         "State": {
           "shape": "SubnetState",

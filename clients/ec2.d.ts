@@ -6583,7 +6583,7 @@ declare namespace EC2 {
   }
   export interface CreateSubnetRequest {
     /**
-     * The Availability Zone or Local Zone for the subnet. Default: AWS selects one for you. If you create more than one subnet in your VPC, we do not necessarily select a different zone for each subnet. To create a subnet in a Local Zone, set this value to the Local Zone ID, for example us-west-2-lax-1a. For information about the Regions that support Local Zones, see Available Regions in the Amazon Elastic Compute Cloud User Guide.
+     * The Availability Zone or Local Zone for the subnet. Default: AWS selects one for you. If you create more than one subnet in your VPC, we do not necessarily select a different zone for each subnet. To create a subnet in a Local Zone, set this value to the Local Zone ID, for example us-west-2-lax-1a. For information about the Regions that support Local Zones, see Available Regions in the Amazon Elastic Compute Cloud User Guide. To create a subnet in an Outpost, set this value to the Availability Zone for the Outpost and specify the Outpost ARN.
      */
     AvailabilityZone?: String;
     /**
@@ -17610,13 +17610,21 @@ declare namespace EC2 {
      */
     AssignIpv6AddressOnCreation?: AttributeBooleanValue;
     /**
-     * Specify true to indicate that ENIs attached to instances created in the specified subnet should be assigned a public IPv4 address.
+     * Specify true to indicate that network interfaces attached to instances created in the specified subnet should be assigned a public IPv4 address.
      */
     MapPublicIpOnLaunch?: AttributeBooleanValue;
     /**
      * The ID of the subnet.
      */
     SubnetId: SubnetId;
+    /**
+     * Specify true to indicate that network interfaces attached to instances created in the specified subnet should be assigned a customer-owned IPv4 address. When this value is true, you must specify the customer-owned IP pool using CustomerOwnedIpv4Pool.
+     */
+    MapCustomerOwnedIpOnLaunch?: AttributeBooleanValue;
+    /**
+     * The customer-owned IPv4 address pool associated with the subnet. You must set this value when you specify true for MapCustomerOwnedIpOnLaunch.
+     */
+    CustomerOwnedIpv4Pool?: CoipPoolId;
   }
   export interface ModifyTrafficMirrorFilterNetworkServicesRequest {
     /**
@@ -22569,6 +22577,14 @@ declare namespace EC2 {
      * Indicates whether instances launched in this subnet receive a public IPv4 address.
      */
     MapPublicIpOnLaunch?: Boolean;
+    /**
+     * Indicates whether a network interface created in this subnet (including a network interface created by RunInstances) receives a customer-owned IPv4 address.
+     */
+    MapCustomerOwnedIpOnLaunch?: Boolean;
+    /**
+     * The customer-owned IPv4 address pool associated with the subnet.
+     */
+    CustomerOwnedIpv4Pool?: CoipPoolId;
     /**
      * The current state of the subnet.
      */
