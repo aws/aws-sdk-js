@@ -43,9 +43,34 @@ declare class CodeStarconnections extends Service {
    * Lists the connections associated with your account.
    */
   listConnections(callback?: (err: AWSError, data: CodeStarconnections.Types.ListConnectionsOutput) => void): Request<CodeStarconnections.Types.ListConnectionsOutput, AWSError>;
+  /**
+   * Gets the set of key-value pairs (metadata) that are used to manage the resource.
+   */
+  listTagsForResource(params: CodeStarconnections.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: CodeStarconnections.Types.ListTagsForResourceOutput) => void): Request<CodeStarconnections.Types.ListTagsForResourceOutput, AWSError>;
+  /**
+   * Gets the set of key-value pairs (metadata) that are used to manage the resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: CodeStarconnections.Types.ListTagsForResourceOutput) => void): Request<CodeStarconnections.Types.ListTagsForResourceOutput, AWSError>;
+  /**
+   * Adds to or modifies the tags of the given resource. Tags are metadata that can be used to manage a resource.
+   */
+  tagResource(params: CodeStarconnections.Types.TagResourceInput, callback?: (err: AWSError, data: CodeStarconnections.Types.TagResourceOutput) => void): Request<CodeStarconnections.Types.TagResourceOutput, AWSError>;
+  /**
+   * Adds to or modifies the tags of the given resource. Tags are metadata that can be used to manage a resource.
+   */
+  tagResource(callback?: (err: AWSError, data: CodeStarconnections.Types.TagResourceOutput) => void): Request<CodeStarconnections.Types.TagResourceOutput, AWSError>;
+  /**
+   * Removes tags from an AWS resource.
+   */
+  untagResource(params: CodeStarconnections.Types.UntagResourceInput, callback?: (err: AWSError, data: CodeStarconnections.Types.UntagResourceOutput) => void): Request<CodeStarconnections.Types.UntagResourceOutput, AWSError>;
+  /**
+   * Removes tags from an AWS resource.
+   */
+  untagResource(callback?: (err: AWSError, data: CodeStarconnections.Types.UntagResourceOutput) => void): Request<CodeStarconnections.Types.UntagResourceOutput, AWSError>;
 }
 declare namespace CodeStarconnections {
   export type AccountId = string;
+  export type AmazonResourceName = string;
   export interface Connection {
     /**
      * The name of the connection. Connection names must be unique in an AWS user account.
@@ -60,7 +85,7 @@ declare namespace CodeStarconnections {
      */
     ProviderType?: ProviderType;
     /**
-     * The name of the external provider where your third-party code repository is configured. For Bitbucket, this is the account ID of the owner of the Bitbucket repository.
+     * The identifier of the external provider where your third-party code repository is configured. For Bitbucket, this is the account ID of the owner of the Bitbucket repository.
      */
     OwnerAccountId?: AccountId;
     /**
@@ -81,12 +106,20 @@ declare namespace CodeStarconnections {
      * The name of the connection to be created. The name must be unique in the calling AWS account.
      */
     ConnectionName: ConnectionName;
+    /**
+     * The key-value pair to use when tagging the resource.
+     */
+    Tags?: TagList;
   }
   export interface CreateConnectionOutput {
     /**
      * The Amazon Resource Name (ARN) of the connection to be created. The ARN is used as the connection reference when the connection is shared between AWS services.  The ARN is never reused if the connection is deleted. 
      */
     ConnectionArn: ConnectionArn;
+    /**
+     * Specifies the tags applied to the resource.
+     */
+    Tags?: TagList;
   }
   export interface DeleteConnectionInput {
     /**
@@ -132,9 +165,59 @@ declare namespace CodeStarconnections {
      */
     NextToken?: NextToken;
   }
+  export interface ListTagsForResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) of the resource for which you want to get information about tags, if any.
+     */
+    ResourceArn: AmazonResourceName;
+  }
+  export interface ListTagsForResourceOutput {
+    /**
+     * A list of tag key and value pairs associated with the specified resource.
+     */
+    Tags?: TagList;
+  }
   export type MaxResults = number;
   export type NextToken = string;
   export type ProviderType = "Bitbucket"|string;
+  export interface Tag {
+    /**
+     * The tag's key.
+     */
+    Key: TagKey;
+    /**
+     * The tag's value.
+     */
+    Value: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) of the resource to which you want to add or update tags.
+     */
+    ResourceArn: AmazonResourceName;
+    /**
+     * The tags you want to modify or add to the resource.
+     */
+    Tags: TagList;
+  }
+  export interface TagResourceOutput {
+  }
+  export type TagValue = string;
+  export interface UntagResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) of the resource to remove tags from.
+     */
+    ResourceArn: AmazonResourceName;
+    /**
+     * The list of keys for the tags to be removed from the resource.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceOutput {
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
