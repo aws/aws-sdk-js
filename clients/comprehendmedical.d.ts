@@ -20,6 +20,14 @@ declare class ComprehendMedical extends Service {
    */
   describeEntitiesDetectionV2Job(callback?: (err: AWSError, data: ComprehendMedical.Types.DescribeEntitiesDetectionV2JobResponse) => void): Request<ComprehendMedical.Types.DescribeEntitiesDetectionV2JobResponse, AWSError>;
   /**
+   * Gets the properties associated with an InferICD10CM job. Use this operation to get the status of an inference job.
+   */
+  describeICD10CMInferenceJob(params: ComprehendMedical.Types.DescribeICD10CMInferenceJobRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.DescribeICD10CMInferenceJobResponse) => void): Request<ComprehendMedical.Types.DescribeICD10CMInferenceJobResponse, AWSError>;
+  /**
+   * Gets the properties associated with an InferICD10CM job. Use this operation to get the status of an inference job.
+   */
+  describeICD10CMInferenceJob(callback?: (err: AWSError, data: ComprehendMedical.Types.DescribeICD10CMInferenceJobResponse) => void): Request<ComprehendMedical.Types.DescribeICD10CMInferenceJobResponse, AWSError>;
+  /**
    * Gets the properties associated with a protected health information (PHI) detection job. Use this operation to get the status of a detection job.
    */
   describePHIDetectionJob(params: ComprehendMedical.Types.DescribePHIDetectionJobRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.DescribePHIDetectionJobResponse) => void): Request<ComprehendMedical.Types.DescribePHIDetectionJobResponse, AWSError>;
@@ -27,6 +35,14 @@ declare class ComprehendMedical extends Service {
    * Gets the properties associated with a protected health information (PHI) detection job. Use this operation to get the status of a detection job.
    */
   describePHIDetectionJob(callback?: (err: AWSError, data: ComprehendMedical.Types.DescribePHIDetectionJobResponse) => void): Request<ComprehendMedical.Types.DescribePHIDetectionJobResponse, AWSError>;
+  /**
+   * Gets the properties associated with an InferRxNorm job. Use this operation to get the status of an inference job.
+   */
+  describeRxNormInferenceJob(params: ComprehendMedical.Types.DescribeRxNormInferenceJobRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.DescribeRxNormInferenceJobResponse) => void): Request<ComprehendMedical.Types.DescribeRxNormInferenceJobResponse, AWSError>;
+  /**
+   * Gets the properties associated with an InferRxNorm job. Use this operation to get the status of an inference job.
+   */
+  describeRxNormInferenceJob(callback?: (err: AWSError, data: ComprehendMedical.Types.DescribeRxNormInferenceJobResponse) => void): Request<ComprehendMedical.Types.DescribeRxNormInferenceJobResponse, AWSError>;
   /**
    * The DetectEntities operation is deprecated. You should use the DetectEntitiesV2 operation instead.  Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information .
    */
@@ -76,6 +92,14 @@ declare class ComprehendMedical extends Service {
    */
   listEntitiesDetectionV2Jobs(callback?: (err: AWSError, data: ComprehendMedical.Types.ListEntitiesDetectionV2JobsResponse) => void): Request<ComprehendMedical.Types.ListEntitiesDetectionV2JobsResponse, AWSError>;
   /**
+   * Gets a list of InferICD10CM jobs that you have submitted.
+   */
+  listICD10CMInferenceJobs(params: ComprehendMedical.Types.ListICD10CMInferenceJobsRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.ListICD10CMInferenceJobsResponse) => void): Request<ComprehendMedical.Types.ListICD10CMInferenceJobsResponse, AWSError>;
+  /**
+   * Gets a list of InferICD10CM jobs that you have submitted.
+   */
+  listICD10CMInferenceJobs(callback?: (err: AWSError, data: ComprehendMedical.Types.ListICD10CMInferenceJobsResponse) => void): Request<ComprehendMedical.Types.ListICD10CMInferenceJobsResponse, AWSError>;
+  /**
    * Gets a list of protected health information (PHI) detection jobs that you have submitted.
    */
   listPHIDetectionJobs(params: ComprehendMedical.Types.ListPHIDetectionJobsRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.ListPHIDetectionJobsResponse) => void): Request<ComprehendMedical.Types.ListPHIDetectionJobsResponse, AWSError>;
@@ -83,6 +107,14 @@ declare class ComprehendMedical extends Service {
    * Gets a list of protected health information (PHI) detection jobs that you have submitted.
    */
   listPHIDetectionJobs(callback?: (err: AWSError, data: ComprehendMedical.Types.ListPHIDetectionJobsResponse) => void): Request<ComprehendMedical.Types.ListPHIDetectionJobsResponse, AWSError>;
+  /**
+   * Gets a list of InferRxNorm jobs that you have submitted.
+   */
+  listRxNormInferenceJobs(params: ComprehendMedical.Types.ListRxNormInferenceJobsRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.ListRxNormInferenceJobsResponse) => void): Request<ComprehendMedical.Types.ListRxNormInferenceJobsResponse, AWSError>;
+  /**
+   * Gets a list of InferRxNorm jobs that you have submitted.
+   */
+  listRxNormInferenceJobs(callback?: (err: AWSError, data: ComprehendMedical.Types.ListRxNormInferenceJobsResponse) => void): Request<ComprehendMedical.Types.ListRxNormInferenceJobsResponse, AWSError>;
   /**
    * Starts an asynchronous medical entity detection job for a collection of documents. Use the DescribeEntitiesDetectionV2Job operation to track the status of a job.
    */
@@ -92,6 +124,14 @@ declare class ComprehendMedical extends Service {
    */
   startEntitiesDetectionV2Job(callback?: (err: AWSError, data: ComprehendMedical.Types.StartEntitiesDetectionV2JobResponse) => void): Request<ComprehendMedical.Types.StartEntitiesDetectionV2JobResponse, AWSError>;
   /**
+   * Starts an asynchronous job to detect medical conditions and link them to the ICD-10-CM ontology. Use the DescribeICD10CMInferenceJob operation to track the status of a job.
+   */
+  startICD10CMInferenceJob(params: ComprehendMedical.Types.StartICD10CMInferenceJobRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.StartICD10CMInferenceJobResponse) => void): Request<ComprehendMedical.Types.StartICD10CMInferenceJobResponse, AWSError>;
+  /**
+   * Starts an asynchronous job to detect medical conditions and link them to the ICD-10-CM ontology. Use the DescribeICD10CMInferenceJob operation to track the status of a job.
+   */
+  startICD10CMInferenceJob(callback?: (err: AWSError, data: ComprehendMedical.Types.StartICD10CMInferenceJobResponse) => void): Request<ComprehendMedical.Types.StartICD10CMInferenceJobResponse, AWSError>;
+  /**
    * Starts an asynchronous job to detect protected health information (PHI). Use the DescribePHIDetectionJob operation to track the status of a job.
    */
   startPHIDetectionJob(params: ComprehendMedical.Types.StartPHIDetectionJobRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.StartPHIDetectionJobResponse) => void): Request<ComprehendMedical.Types.StartPHIDetectionJobResponse, AWSError>;
@@ -99,6 +139,14 @@ declare class ComprehendMedical extends Service {
    * Starts an asynchronous job to detect protected health information (PHI). Use the DescribePHIDetectionJob operation to track the status of a job.
    */
   startPHIDetectionJob(callback?: (err: AWSError, data: ComprehendMedical.Types.StartPHIDetectionJobResponse) => void): Request<ComprehendMedical.Types.StartPHIDetectionJobResponse, AWSError>;
+  /**
+   * Starts an asynchronous job to detect medication entities and link them to the RxNorm ontology. Use the DescribeRxNormInferenceJob operation to track the status of a job.
+   */
+  startRxNormInferenceJob(params: ComprehendMedical.Types.StartRxNormInferenceJobRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.StartRxNormInferenceJobResponse) => void): Request<ComprehendMedical.Types.StartRxNormInferenceJobResponse, AWSError>;
+  /**
+   * Starts an asynchronous job to detect medication entities and link them to the RxNorm ontology. Use the DescribeRxNormInferenceJob operation to track the status of a job.
+   */
+  startRxNormInferenceJob(callback?: (err: AWSError, data: ComprehendMedical.Types.StartRxNormInferenceJobResponse) => void): Request<ComprehendMedical.Types.StartRxNormInferenceJobResponse, AWSError>;
   /**
    * Stops a medical entities detection job in progress.
    */
@@ -108,6 +156,14 @@ declare class ComprehendMedical extends Service {
    */
   stopEntitiesDetectionV2Job(callback?: (err: AWSError, data: ComprehendMedical.Types.StopEntitiesDetectionV2JobResponse) => void): Request<ComprehendMedical.Types.StopEntitiesDetectionV2JobResponse, AWSError>;
   /**
+   * Stops an InferICD10CM inference job in progress.
+   */
+  stopICD10CMInferenceJob(params: ComprehendMedical.Types.StopICD10CMInferenceJobRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.StopICD10CMInferenceJobResponse) => void): Request<ComprehendMedical.Types.StopICD10CMInferenceJobResponse, AWSError>;
+  /**
+   * Stops an InferICD10CM inference job in progress.
+   */
+  stopICD10CMInferenceJob(callback?: (err: AWSError, data: ComprehendMedical.Types.StopICD10CMInferenceJobResponse) => void): Request<ComprehendMedical.Types.StopICD10CMInferenceJobResponse, AWSError>;
+  /**
    * Stops a protected health information (PHI) detection job in progress.
    */
   stopPHIDetectionJob(params: ComprehendMedical.Types.StopPHIDetectionJobRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.StopPHIDetectionJobResponse) => void): Request<ComprehendMedical.Types.StopPHIDetectionJobResponse, AWSError>;
@@ -115,6 +171,14 @@ declare class ComprehendMedical extends Service {
    * Stops a protected health information (PHI) detection job in progress.
    */
   stopPHIDetectionJob(callback?: (err: AWSError, data: ComprehendMedical.Types.StopPHIDetectionJobResponse) => void): Request<ComprehendMedical.Types.StopPHIDetectionJobResponse, AWSError>;
+  /**
+   * Stops an InferRxNorm inference job in progress.
+   */
+  stopRxNormInferenceJob(params: ComprehendMedical.Types.StopRxNormInferenceJobRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.StopRxNormInferenceJobResponse) => void): Request<ComprehendMedical.Types.StopRxNormInferenceJobResponse, AWSError>;
+  /**
+   * Stops an InferRxNorm inference job in progress.
+   */
+  stopRxNormInferenceJob(callback?: (err: AWSError, data: ComprehendMedical.Types.StopRxNormInferenceJobResponse) => void): Request<ComprehendMedical.Types.StopRxNormInferenceJobResponse, AWSError>;
 }
 declare namespace ComprehendMedical {
   export type AnyLengthString = string;
@@ -253,6 +317,18 @@ declare namespace ComprehendMedical {
      */
     ComprehendMedicalAsyncJobProperties?: ComprehendMedicalAsyncJobProperties;
   }
+  export interface DescribeICD10CMInferenceJobRequest {
+    /**
+     * The identifier that Amazon Comprehend Medical generated for the job. The StartICD10CMInferenceJob operation returns this identifier in its response.
+     */
+    JobId: JobId;
+  }
+  export interface DescribeICD10CMInferenceJobResponse {
+    /**
+     * An object that contains the properties associated with a detection job.
+     */
+    ComprehendMedicalAsyncJobProperties?: ComprehendMedicalAsyncJobProperties;
+  }
   export interface DescribePHIDetectionJobRequest {
     /**
      * The identifier that Amazon Comprehend Medical generated for the job. The StartPHIDetectionJob operation returns this identifier in its response.
@@ -260,6 +336,18 @@ declare namespace ComprehendMedical {
     JobId: JobId;
   }
   export interface DescribePHIDetectionJobResponse {
+    /**
+     * An object that contains the properties associated with a detection job.
+     */
+    ComprehendMedicalAsyncJobProperties?: ComprehendMedicalAsyncJobProperties;
+  }
+  export interface DescribeRxNormInferenceJobRequest {
+    /**
+     * The identifier that Amazon Comprehend Medical generated for the job. The StartRxNormInferenceJob operation returns this identifier in its response.
+     */
+    JobId: JobId;
+  }
+  export interface DescribeRxNormInferenceJobResponse {
     /**
      * An object that contains the properties associated with a detection job.
      */
@@ -564,6 +652,30 @@ declare namespace ComprehendMedical {
      */
     NextToken?: String;
   }
+  export interface ListICD10CMInferenceJobsRequest {
+    /**
+     * Filters the jobs that are returned. You can filter jobs based on their names, status, or the date and time that they were submitted. You can only set one filter at a time.
+     */
+    Filter?: ComprehendMedicalAsyncJobFilter;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in each page. The default is 100.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListICD10CMInferenceJobsResponse {
+    /**
+     * A list containing the properties of each job that is returned.
+     */
+    ComprehendMedicalAsyncJobPropertiesList?: ComprehendMedicalAsyncJobPropertiesList;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+  }
   export interface ListPHIDetectionJobsRequest {
     /**
      * Filters the jobs that are returned. You can filter jobs based on their names, status, or the date and time that they were submitted. You can only set one filter at a time.
@@ -581,6 +693,30 @@ declare namespace ComprehendMedical {
   export interface ListPHIDetectionJobsResponse {
     /**
      * A list containing the properties of each job returned.
+     */
+    ComprehendMedicalAsyncJobPropertiesList?: ComprehendMedicalAsyncJobPropertiesList;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+  }
+  export interface ListRxNormInferenceJobsRequest {
+    /**
+     * Filters the jobs that are returned. You can filter jobs based on their names, status, or the date and time that they were submitted. You can only set one filter at a time.
+     */
+    Filter?: ComprehendMedicalAsyncJobFilter;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+    /**
+     * Identifies the next page of results to return.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListRxNormInferenceJobsResponse {
+    /**
+     * The maximum number of results to return in each page. The default is 100.
      */
     ComprehendMedicalAsyncJobPropertiesList?: ComprehendMedicalAsyncJobPropertiesList;
     /**
@@ -749,6 +885,42 @@ declare namespace ComprehendMedical {
      */
     JobId?: JobId;
   }
+  export interface StartICD10CMInferenceJobRequest {
+    /**
+     * Specifies the format and location of the input data for the job.
+     */
+    InputDataConfig: InputDataConfig;
+    /**
+     * Specifies where to send the output files.
+     */
+    OutputDataConfig: OutputDataConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. For more information, see  Role-Based Permissions Required for Asynchronous Operations.
+     */
+    DataAccessRoleArn: IamRoleArn;
+    /**
+     * The identifier of the job.
+     */
+    JobName?: JobName;
+    /**
+     * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend Medical generates one.
+     */
+    ClientRequestToken?: ClientRequestTokenString;
+    /**
+     * An AWS Key Management Service key to encrypt your output files. If you do not specify a key, the files are written in plain text.
+     */
+    KMSKey?: KMSKey;
+    /**
+     * The language of the input documents. All documents must be in the same language.
+     */
+    LanguageCode: LanguageCode;
+  }
+  export interface StartICD10CMInferenceJobResponse {
+    /**
+     * The identifier generated for the job. To get the status of a job, use this identifier with the StartICD10CMInferenceJob operation.
+     */
+    JobId?: JobId;
+  }
   export interface StartPHIDetectionJobRequest {
     /**
      * Specifies the format and location of the input data for the job.
@@ -785,6 +957,42 @@ declare namespace ComprehendMedical {
      */
     JobId?: JobId;
   }
+  export interface StartRxNormInferenceJobRequest {
+    /**
+     * Specifies the format and location of the input data for the job.
+     */
+    InputDataConfig: InputDataConfig;
+    /**
+     * Specifies where to send the output files.
+     */
+    OutputDataConfig: OutputDataConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. For more information, see  Role-Based Permissions Required for Asynchronous Operations.
+     */
+    DataAccessRoleArn: IamRoleArn;
+    /**
+     * The identifier of the job.
+     */
+    JobName?: JobName;
+    /**
+     * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend Medical generates one.
+     */
+    ClientRequestToken?: ClientRequestTokenString;
+    /**
+     * An AWS Key Management Service key to encrypt your output files. If you do not specify a key, the files are written in plain text.
+     */
+    KMSKey?: KMSKey;
+    /**
+     * The language of the input documents. All documents must be in the same language.
+     */
+    LanguageCode: LanguageCode;
+  }
+  export interface StartRxNormInferenceJobResponse {
+    /**
+     * The identifier of the job.
+     */
+    JobId?: JobId;
+  }
   export interface StopEntitiesDetectionV2JobRequest {
     /**
      * The identifier of the medical entities job to stop.
@@ -797,6 +1005,18 @@ declare namespace ComprehendMedical {
      */
     JobId?: JobId;
   }
+  export interface StopICD10CMInferenceJobRequest {
+    /**
+     * The identifier of the job.
+     */
+    JobId: JobId;
+  }
+  export interface StopICD10CMInferenceJobResponse {
+    /**
+     * The identifier generated for the job. To get the status of job, use this identifier with the DescribeICD10CMInferenceJob operation.
+     */
+    JobId?: JobId;
+  }
   export interface StopPHIDetectionJobRequest {
     /**
      * The identifier of the PHI detection job to stop.
@@ -806,6 +1026,18 @@ declare namespace ComprehendMedical {
   export interface StopPHIDetectionJobResponse {
     /**
      * The identifier of the PHI detection job that was stopped.
+     */
+    JobId?: JobId;
+  }
+  export interface StopRxNormInferenceJobRequest {
+    /**
+     * The identifier of the job.
+     */
+    JobId: JobId;
+  }
+  export interface StopRxNormInferenceJobResponse {
+    /**
+     * The identifier generated for the job. To get the status of job, use this identifier with the DescribeRxNormInferenceJob operation.
      */
     JobId?: JobId;
   }

@@ -42,6 +42,34 @@
       ],
       "documentation": "<p>Gets the properties associated with a medical entities detection job. Use this operation to get the status of a detection job.</p>"
     },
+    "DescribeICD10CMInferenceJob": {
+      "name": "DescribeICD10CMInferenceJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeICD10CMInferenceJobRequest"
+      },
+      "output": {
+        "shape": "DescribeICD10CMInferenceJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Gets the properties associated with an InferICD10CM job. Use this operation to get the status of an inference job.</p>"
+    },
     "DescribePHIDetectionJob": {
       "name": "DescribePHIDetectionJob",
       "http": {
@@ -69,6 +97,34 @@
         }
       ],
       "documentation": "<p>Gets the properties associated with a protected health information (PHI) detection job. Use this operation to get the status of a detection job.</p>"
+    },
+    "DescribeRxNormInferenceJob": {
+      "name": "DescribeRxNormInferenceJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeRxNormInferenceJobRequest"
+      },
+      "output": {
+        "shape": "DescribeRxNormInferenceJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Gets the properties associated with an InferRxNorm job. Use this operation to get the status of an inference job.</p>"
     },
     "DetectEntities": {
       "name": "DetectEntities",
@@ -270,6 +326,34 @@
       ],
       "documentation": "<p>Gets a list of medical entity detection jobs that you have submitted.</p>"
     },
+    "ListICD10CMInferenceJobs": {
+      "name": "ListICD10CMInferenceJobs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListICD10CMInferenceJobsRequest"
+      },
+      "output": {
+        "shape": "ListICD10CMInferenceJobsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Gets a list of InferICD10CM jobs that you have submitted.</p>"
+    },
     "ListPHIDetectionJobs": {
       "name": "ListPHIDetectionJobs",
       "http": {
@@ -297,6 +381,34 @@
         }
       ],
       "documentation": "<p>Gets a list of protected health information (PHI) detection jobs that you have submitted.</p>"
+    },
+    "ListRxNormInferenceJobs": {
+      "name": "ListRxNormInferenceJobs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListRxNormInferenceJobsRequest"
+      },
+      "output": {
+        "shape": "ListRxNormInferenceJobsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Gets a list of InferRxNorm jobs that you have submitted.</p>"
     },
     "StartEntitiesDetectionV2Job": {
       "name": "StartEntitiesDetectionV2Job",
@@ -326,6 +438,34 @@
       ],
       "documentation": "<p>Starts an asynchronous medical entity detection job for a collection of documents. Use the <code>DescribeEntitiesDetectionV2Job</code> operation to track the status of a job.</p>"
     },
+    "StartICD10CMInferenceJob": {
+      "name": "StartICD10CMInferenceJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartICD10CMInferenceJobRequest"
+      },
+      "output": {
+        "shape": "StartICD10CMInferenceJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Starts an asynchronous job to detect medical conditions and link them to the ICD-10-CM ontology. Use the <code>DescribeICD10CMInferenceJob</code> operation to track the status of a job.</p>"
+    },
     "StartPHIDetectionJob": {
       "name": "StartPHIDetectionJob",
       "http": {
@@ -354,6 +494,34 @@
       ],
       "documentation": "<p>Starts an asynchronous job to detect protected health information (PHI). Use the <code>DescribePHIDetectionJob</code> operation to track the status of a job.</p>"
     },
+    "StartRxNormInferenceJob": {
+      "name": "StartRxNormInferenceJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartRxNormInferenceJobRequest"
+      },
+      "output": {
+        "shape": "StartRxNormInferenceJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Starts an asynchronous job to detect medication entities and link them to the RxNorm ontology. Use the <code>DescribeRxNormInferenceJob</code> operation to track the status of a job.</p>"
+    },
     "StopEntitiesDetectionV2Job": {
       "name": "StopEntitiesDetectionV2Job",
       "http": {
@@ -379,6 +547,31 @@
       ],
       "documentation": "<p>Stops a medical entities detection job in progress.</p>"
     },
+    "StopICD10CMInferenceJob": {
+      "name": "StopICD10CMInferenceJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StopICD10CMInferenceJobRequest"
+      },
+      "output": {
+        "shape": "StopICD10CMInferenceJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Stops an InferICD10CM inference job in progress.</p>"
+    },
     "StopPHIDetectionJob": {
       "name": "StopPHIDetectionJob",
       "http": {
@@ -403,6 +596,31 @@
         }
       ],
       "documentation": "<p>Stops a protected health information (PHI) detection job in progress.</p>"
+    },
+    "StopRxNormInferenceJob": {
+      "name": "StopRxNormInferenceJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StopRxNormInferenceJobRequest"
+      },
+      "output": {
+        "shape": "StopRxNormInferenceJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Stops an InferRxNorm inference job in progress.</p>"
     }
   },
   "shapes": {
@@ -592,6 +810,27 @@
         }
       }
     },
+    "DescribeICD10CMInferenceJobRequest": {
+      "type": "structure",
+      "required": [
+        "JobId"
+      ],
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The identifier that Amazon Comprehend Medical generated for the job. <code>The StartICD10CMInferenceJob</code> operation returns this identifier in its response.</p>"
+        }
+      }
+    },
+    "DescribeICD10CMInferenceJobResponse": {
+      "type": "structure",
+      "members": {
+        "ComprehendMedicalAsyncJobProperties": {
+          "shape": "ComprehendMedicalAsyncJobProperties",
+          "documentation": "<p>An object that contains the properties associated with a detection job.</p>"
+        }
+      }
+    },
     "DescribePHIDetectionJobRequest": {
       "type": "structure",
       "required": [
@@ -605,6 +844,27 @@
       }
     },
     "DescribePHIDetectionJobResponse": {
+      "type": "structure",
+      "members": {
+        "ComprehendMedicalAsyncJobProperties": {
+          "shape": "ComprehendMedicalAsyncJobProperties",
+          "documentation": "<p>An object that contains the properties associated with a detection job.</p>"
+        }
+      }
+    },
+    "DescribeRxNormInferenceJobRequest": {
+      "type": "structure",
+      "required": [
+        "JobId"
+      ],
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The identifier that Amazon Comprehend Medical generated for the job. The StartRxNormInferenceJob operation returns this identifier in its response.</p>"
+        }
+      }
+    },
+    "DescribeRxNormInferenceJobResponse": {
       "type": "structure",
       "members": {
         "ComprehendMedicalAsyncJobProperties": {
@@ -1077,7 +1337,7 @@
           "documentation": "<p>The path to the input data files in the S3 bucket.</p>"
         }
       },
-      "documentation": "<p>The input properties for an entities detection job.</p>"
+      "documentation": "<p>The input properties for an entities detection job. This includes the name of the S3 bucket and the path to the files to be analyzed. See <a>batch-manifest</a> for more information. </p>"
     },
     "Integer": {
       "type": "integer"
@@ -1148,6 +1408,36 @@
         }
       }
     },
+    "ListICD10CMInferenceJobsRequest": {
+      "type": "structure",
+      "members": {
+        "Filter": {
+          "shape": "ComprehendMedicalAsyncJobFilter",
+          "documentation": "<p>Filters the jobs that are returned. You can filter jobs based on their names, status, or the date and time that they were submitted. You can only set one filter at a time.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>Identifies the next page of results to return.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResultsInteger",
+          "documentation": "<p>The maximum number of results to return in each page. The default is 100.</p>"
+        }
+      }
+    },
+    "ListICD10CMInferenceJobsResponse": {
+      "type": "structure",
+      "members": {
+        "ComprehendMedicalAsyncJobPropertiesList": {
+          "shape": "ComprehendMedicalAsyncJobPropertiesList",
+          "documentation": "<p>A list containing the properties of each job that is returned.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>Identifies the next page of results to return.</p>"
+        }
+      }
+    },
     "ListPHIDetectionJobsRequest": {
       "type": "structure",
       "members": {
@@ -1171,6 +1461,36 @@
         "ComprehendMedicalAsyncJobPropertiesList": {
           "shape": "ComprehendMedicalAsyncJobPropertiesList",
           "documentation": "<p>A list containing the properties of each job returned.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>Identifies the next page of results to return.</p>"
+        }
+      }
+    },
+    "ListRxNormInferenceJobsRequest": {
+      "type": "structure",
+      "members": {
+        "Filter": {
+          "shape": "ComprehendMedicalAsyncJobFilter",
+          "documentation": "<p>Filters the jobs that are returned. You can filter jobs based on their names, status, or the date and time that they were submitted. You can only set one filter at a time.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>Identifies the next page of results to return.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResultsInteger",
+          "documentation": "<p>Identifies the next page of results to return.</p>"
+        }
+      }
+    },
+    "ListRxNormInferenceJobsResponse": {
+      "type": "structure",
+      "members": {
+        "ComprehendMedicalAsyncJobPropertiesList": {
+          "shape": "ComprehendMedicalAsyncJobPropertiesList",
+          "documentation": "<p>The maximum number of results to return in each page. The default is 100.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -1466,6 +1786,55 @@
         }
       }
     },
+    "StartICD10CMInferenceJobRequest": {
+      "type": "structure",
+      "required": [
+        "InputDataConfig",
+        "OutputDataConfig",
+        "DataAccessRoleArn",
+        "LanguageCode"
+      ],
+      "members": {
+        "InputDataConfig": {
+          "shape": "InputDataConfig",
+          "documentation": "<p>Specifies the format and location of the input data for the job.</p>"
+        },
+        "OutputDataConfig": {
+          "shape": "OutputDataConfig",
+          "documentation": "<p>Specifies where to send the output files.</p>"
+        },
+        "DataAccessRoleArn": {
+          "shape": "IamRoleArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med\"> Role-Based Permissions Required for Asynchronous Operations</a>.</p>"
+        },
+        "JobName": {
+          "shape": "JobName",
+          "documentation": "<p>The identifier of the job.</p>"
+        },
+        "ClientRequestToken": {
+          "shape": "ClientRequestTokenString",
+          "documentation": "<p>A unique identifier for the request. If you don't set the client request token, Amazon Comprehend Medical generates one.</p>",
+          "idempotencyToken": true
+        },
+        "KMSKey": {
+          "shape": "KMSKey",
+          "documentation": "<p>An AWS Key Management Service key to encrypt your output files. If you do not specify a key, the files are written in plain text.</p>"
+        },
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The language of the input documents. All documents must be in the same language.</p>"
+        }
+      }
+    },
+    "StartICD10CMInferenceJobResponse": {
+      "type": "structure",
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The identifier generated for the job. To get the status of a job, use this identifier with the <code>StartICD10CMInferenceJob</code> operation.</p>"
+        }
+      }
+    },
     "StartPHIDetectionJobRequest": {
       "type": "structure",
       "required": [
@@ -1515,6 +1884,55 @@
         }
       }
     },
+    "StartRxNormInferenceJobRequest": {
+      "type": "structure",
+      "required": [
+        "InputDataConfig",
+        "OutputDataConfig",
+        "DataAccessRoleArn",
+        "LanguageCode"
+      ],
+      "members": {
+        "InputDataConfig": {
+          "shape": "InputDataConfig",
+          "documentation": "<p>Specifies the format and location of the input data for the job.</p>"
+        },
+        "OutputDataConfig": {
+          "shape": "OutputDataConfig",
+          "documentation": "<p>Specifies where to send the output files.</p>"
+        },
+        "DataAccessRoleArn": {
+          "shape": "IamRoleArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med\"> Role-Based Permissions Required for Asynchronous Operations</a>.</p>"
+        },
+        "JobName": {
+          "shape": "JobName",
+          "documentation": "<p>The identifier of the job.</p>"
+        },
+        "ClientRequestToken": {
+          "shape": "ClientRequestTokenString",
+          "documentation": "<p>A unique identifier for the request. If you don't set the client request token, Amazon Comprehend Medical generates one.</p>",
+          "idempotencyToken": true
+        },
+        "KMSKey": {
+          "shape": "KMSKey",
+          "documentation": "<p>An AWS Key Management Service key to encrypt your output files. If you do not specify a key, the files are written in plain text.</p>"
+        },
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The language of the input documents. All documents must be in the same language.</p>"
+        }
+      }
+    },
+    "StartRxNormInferenceJobResponse": {
+      "type": "structure",
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The identifier of the job.</p>"
+        }
+      }
+    },
     "StopEntitiesDetectionV2JobRequest": {
       "type": "structure",
       "required": [
@@ -1536,6 +1954,27 @@
         }
       }
     },
+    "StopICD10CMInferenceJobRequest": {
+      "type": "structure",
+      "required": [
+        "JobId"
+      ],
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The identifier of the job.</p>"
+        }
+      }
+    },
+    "StopICD10CMInferenceJobResponse": {
+      "type": "structure",
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The identifier generated for the job. To get the status of job, use this identifier with the <code>DescribeICD10CMInferenceJob</code> operation.</p>"
+        }
+      }
+    },
     "StopPHIDetectionJobRequest": {
       "type": "structure",
       "required": [
@@ -1554,6 +1993,27 @@
         "JobId": {
           "shape": "JobId",
           "documentation": "<p>The identifier of the PHI detection job that was stopped.</p>"
+        }
+      }
+    },
+    "StopRxNormInferenceJobRequest": {
+      "type": "structure",
+      "required": [
+        "JobId"
+      ],
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The identifier of the job.</p>"
+        }
+      }
+    },
+    "StopRxNormInferenceJobResponse": {
+      "type": "structure",
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The identifier generated for the job. To get the status of job, use this identifier with the <code>DescribeRxNormInferenceJob</code> operation.</p>"
         }
       }
     },
