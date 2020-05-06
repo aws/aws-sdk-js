@@ -659,7 +659,11 @@
           creds = new AWS.EC2MetadataCredentials(opts);
           return expect(opts).to.eql({});
         });
-        return it('allows setting timeout', function() {
+        it('checking default timeout', function() {
+          creds = new AWS.EC2MetadataCredentials({});
+          return expect(creds.metadataService.httpOptions.timeout).to.equal(1000);
+        });
+        it('allows setting timeout', function() {
           var opts;
           opts = {
             httpOptions: {
@@ -668,6 +672,20 @@
           };
           creds = new AWS.EC2MetadataCredentials(opts);
           return expect(creds.metadataService.httpOptions.timeout).to.equal(5000);
+        });
+        it('checking default connectTimeout', function() {
+          creds = new AWS.EC2MetadataCredentials({});
+          return expect(creds.metadataService.httpOptions.connectTimeout).to.equal(1000);
+        });
+        it('allows setting connectTimeout', function() {
+          var opts;
+          opts = {
+            httpOptions: {
+              connectTimeout: 5000
+            }
+          };
+          creds = new AWS.EC2MetadataCredentials(opts);
+          return expect(creds.metadataService.httpOptions.connectTimeout).to.equal(5000);
         });
       });
       describe('needsRefresh', function() {
