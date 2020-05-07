@@ -461,19 +461,19 @@ declare class EC2 extends Service {
    */
   createKeyPair(callback?: (err: AWSError, data: EC2.Types.KeyPair) => void): Request<EC2.Types.KeyPair, AWSError>;
   /**
-   * Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using RunInstances, you can specify a launch template instead of providing the launch parameters in the request.
+   * Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using RunInstances, you can specify a launch template instead of providing the launch parameters in the request. For more information, see Launching an instance from a launch templatein the Amazon Elastic Compute Cloud User Guide.
    */
   createLaunchTemplate(params: EC2.Types.CreateLaunchTemplateRequest, callback?: (err: AWSError, data: EC2.Types.CreateLaunchTemplateResult) => void): Request<EC2.Types.CreateLaunchTemplateResult, AWSError>;
   /**
-   * Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using RunInstances, you can specify a launch template instead of providing the launch parameters in the request.
+   * Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using RunInstances, you can specify a launch template instead of providing the launch parameters in the request. For more information, see Launching an instance from a launch templatein the Amazon Elastic Compute Cloud User Guide.
    */
   createLaunchTemplate(callback?: (err: AWSError, data: EC2.Types.CreateLaunchTemplateResult) => void): Request<EC2.Types.CreateLaunchTemplateResult, AWSError>;
   /**
-   * Creates a new version for a launch template. You can specify an existing version of launch template from which to base the new version. Launch template versions are numbered in the order in which they are created. You cannot specify, change, or replace the numbering of launch template versions.
+   * Creates a new version for a launch template. You can specify an existing version of launch template from which to base the new version. Launch template versions are numbered in the order in which they are created. You cannot specify, change, or replace the numbering of launch template versions. For more information, see Managing launch template versionsin the Amazon Elastic Compute Cloud User Guide.
    */
   createLaunchTemplateVersion(params: EC2.Types.CreateLaunchTemplateVersionRequest, callback?: (err: AWSError, data: EC2.Types.CreateLaunchTemplateVersionResult) => void): Request<EC2.Types.CreateLaunchTemplateVersionResult, AWSError>;
   /**
-   * Creates a new version for a launch template. You can specify an existing version of launch template from which to base the new version. Launch template versions are numbered in the order in which they are created. You cannot specify, change, or replace the numbering of launch template versions.
+   * Creates a new version for a launch template. You can specify an existing version of launch template from which to base the new version. Launch template versions are numbered in the order in which they are created. You cannot specify, change, or replace the numbering of launch template versions. For more information, see Managing launch template versionsin the Amazon Elastic Compute Cloud User Guide.
    */
   createLaunchTemplateVersion(callback?: (err: AWSError, data: EC2.Types.CreateLaunchTemplateVersionResult) => void): Request<EC2.Types.CreateLaunchTemplateVersionResult, AWSError>;
   /**
@@ -6123,6 +6123,10 @@ declare namespace EC2 {
      * Information about the launch template.
      */
     LaunchTemplate?: LaunchTemplate;
+    /**
+     * If the launch template contains parameters or parameter combinations that are not valid, an error code and an error message are returned for each issue that's found.
+     */
+    Warning?: ValidationWarning;
   }
   export interface CreateLaunchTemplateVersionRequest {
     /**
@@ -6159,6 +6163,10 @@ declare namespace EC2 {
      * Information about the launch template version.
      */
     LaunchTemplateVersion?: LaunchTemplateVersion;
+    /**
+     * If the new version of the launch template contains parameters or parameter combinations that are not valid, an error code and an error message are returned for each issue that's found.
+     */
+    Warning?: ValidationWarning;
   }
   export interface CreateLocalGatewayRouteRequest {
     /**
@@ -12689,6 +12697,7 @@ declare namespace EC2 {
   }
   export type EndDateType = "unlimited"|"limited"|string;
   export type EndpointSet = ClientVpnEndpoint[];
+  export type ErrorSet = ValidationError[];
   export type EventCode = "instance-reboot"|"system-reboot"|"system-maintenance"|"instance-retirement"|"instance-stop"|string;
   export interface EventInformation {
     /**
@@ -23952,6 +23961,22 @@ declare namespace EC2 {
      * List of the valid number of threads per core that can be configured for the instance type. 
      */
     ValidThreadsPerCore?: ThreadsPerCoreList;
+  }
+  export interface ValidationError {
+    /**
+     * The error code that indicates why the parameter or parameter combination is not valid. For more information about error codes, see Error Codes.
+     */
+    Code?: String;
+    /**
+     * The error message that describes why the parameter or parameter combination is not valid. For more information about error messages, see Error Codes.
+     */
+    Message?: String;
+  }
+  export interface ValidationWarning {
+    /**
+     * The error codes and error messages.
+     */
+    Errors?: ErrorSet;
   }
   export type ValueStringList = String[];
   export type VersionDescription = string;
