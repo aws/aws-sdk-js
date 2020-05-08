@@ -84,7 +84,7 @@
           "shape": "ResourceInUse"
         }
       ],
-      "documentation": "<p>Creates a running App for the specified UserProfile. Supported Apps are JupyterServer and KernelGateway. This operation is automatically invoked by Amazon SageMaker Amazon SageMaker Studio (Studio) upon access to the associated Studio Domain, and when new kernel configurations are selected by the user. A user may have multiple Apps active simultaneously. Apps will automatically terminate and be deleted when stopped from within Studio, or when the DeleteApp API is manually called. UserProfiles are limited to 5 concurrently running Apps at a time.</p>"
+      "documentation": "<p>Creates a running App for the specified UserProfile. Supported Apps are <code>JupyterServer</code>, <code>KernelGateway</code>, and <code>TensorBoard</code>. This operation is automatically invoked by Amazon SageMaker Studio upon access to the associated Studio Domain, and when new kernel configurations are selected by the user. A user may have multiple Apps active simultaneously. Apps will automatically terminate and be deleted when stopped from within Studio, or when the DeleteApp API is manually called. UserProfiles are limited to 5 concurrently running Apps at a time.</p>"
     },
     "CreateAutoMLJob": {
       "name": "CreateAutoMLJob",
@@ -164,7 +164,7 @@
           "shape": "ResourceInUse"
         }
       ],
-      "documentation": "<p>Creates a Domain for Amazon SageMaker Amazon SageMaker Studio (Studio), which can be accessed by end-users in a web browser. A Domain has an associated directory, list of authorized users, and a variety of security, application, policies, and Amazon Virtual Private Cloud configurations. An AWS account is limited to one Domain, per region. Users within a domain can share notebook files and other artifacts with each other. When a Domain is created, an Amazon Elastic File System (EFS) is also created for use by all of the users within the Domain. Each user receives a private home directory within the EFS for notebooks, Git repositories, and data files. </p>"
+      "documentation": "<p>Creates a Domain for Amazon SageMaker Studio, which can be accessed by end-users in a web browser. A Domain has an associated directory, list of authorized users, and a variety of security, application, policies, and Amazon Virtual Private Cloud configurations. An AWS account is limited to one Domain, per region. Users within a domain can share notebook files and other artifacts with each other. When a Domain is created, an Amazon Elastic File System (EFS) is also created for use by all of the users within the Domain. Each user receives a private home directory within the EFS for notebooks, Git repositories, and data files. </p>"
     },
     "CreateEndpoint": {
       "name": "CreateEndpoint",
@@ -421,7 +421,7 @@
           "shape": "ResourceNotFound"
         }
       ],
-      "documentation": "<p>Creates a URL for a specified UserProfile in a Domain. When accessed in a web browser, the user will be automatically signed in to Amazon SageMaker Amazon SageMaker Studio (Studio), and granted access to all of the Apps and files associated with that Amazon Elastic File System (EFS). This operation can only be called when AuthMode equals IAM. </p>"
+      "documentation": "<p>Creates a URL for a specified UserProfile in a Domain. When accessed in a web browser, the user will be automatically signed in to Amazon SageMaker Studio, and granted access to all of the Apps and files associated with that Amazon Elastic File System (EFS). This operation can only be called when AuthMode equals IAM. </p>"
     },
     "CreatePresignedNotebookInstanceUrl": {
       "name": "CreatePresignedNotebookInstanceUrl",
@@ -573,7 +573,7 @@
           "shape": "ResourceInUse"
         }
       ],
-      "documentation": "<p>Creates a new user profile. A user profile represents a single user within a Domain, and is the main way to reference a \"person\" for the purposes of sharing, reporting and other user-oriented features. This entity is created during on-boarding. If an administrator invites a person by email or imports them from SSO, a new UserProfile is automatically created. This entity is the primary holder of settings for an individual user and has a reference to the user's private Amazon Elastic File System (EFS) home directory. </p>"
+      "documentation": "<p>Creates a user profile. A user profile represents a single user within a Domain, and is the main way to reference a \"person\" for the purposes of sharing, reporting and other user-oriented features. This entity is created during on-boarding to Amazon SageMaker Studio. If an administrator invites a person by email or imports them from SSO, a UserProfile is automatically created. </p> <p> This entity is the primary holder of settings for an individual user and, through the domain, has a reference to the user's private Amazon Elastic File System (EFS) home directory. </p>"
     },
     "CreateWorkteam": {
       "name": "CreateWorkteam",
@@ -655,7 +655,7 @@
           "shape": "ResourceNotFound"
         }
       ],
-      "documentation": "<p>Used to delete a domain. If you on-boarded with IAM mode, you will need to delete your domain to on-board again using SSO. Use with caution. All of the members of the domain will lose access to their EFS volume, including data, notebooks, and other artifacts. </p>"
+      "documentation": "<p>Used to delete a domain. Use with caution. If <code>RetentionPolicy</code> is set to <code>Delete</code>, all of the members of the domain will lose access to their EFS volume, including data, notebooks, and other artifacts. </p>"
     },
     "DeleteEndpoint": {
       "name": "DeleteEndpoint",
@@ -3890,7 +3890,7 @@
         },
         "ResourceSpec": {
           "shape": "ResourceSpec",
-          "documentation": "<p>The instance type and quantity.</p>"
+          "documentation": "<p>The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.</p>"
         }
       }
     },
@@ -4071,7 +4071,7 @@
         },
         "HomeEfsFileSystemKmsKeyId": {
           "shape": "KmsKeyId",
-          "documentation": "<p>The AWS Key Management Service encryption key ID.</p>"
+          "documentation": "<p>The AWS Key Management Service (KMS) encryption key ID. Encryption with a customer master key (CMK) is not supported.</p>"
         }
       }
     },
@@ -5366,7 +5366,7 @@
         },
         "RetentionPolicy": {
           "shape": "RetentionPolicy",
-          "documentation": "<p>The retention policy for this domain, which specifies which resources will be retained after the Domain is deleted. By default, all resources are retained (not automatically deleted). </p>"
+          "documentation": "<p>The retention policy for this domain, which specifies whether resources will be retained after the Domain is deleted. By default, all resources are retained (not automatically deleted). </p>"
         }
       }
     },
@@ -5760,7 +5760,7 @@
         },
         "ResourceSpec": {
           "shape": "ResourceSpec",
-          "documentation": "<p>The instance type and quantity.</p>"
+          "documentation": "<p>The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.</p>"
         }
       }
     },
@@ -7392,7 +7392,7 @@
         },
         "HomeEfsFileSystemUid": {
           "shape": "EfsUid",
-          "documentation": "<p>The homa Amazon Elastic File System (EFS) Uid.</p>"
+          "documentation": "<p>The home Amazon Elastic File System (EFS) Uid.</p>"
         },
         "Status": {
           "shape": "UserProfileStatus",
@@ -9185,7 +9185,7 @@
       "members": {
         "DefaultResourceSpec": {
           "shape": "ResourceSpec",
-          "documentation": "<p>The instance type and quantity.</p>"
+          "documentation": "<p>The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.</p>"
         }
       },
       "documentation": "<p>Jupyter server's app settings.</p>"
@@ -9195,7 +9195,7 @@
       "members": {
         "DefaultResourceSpec": {
           "shape": "ResourceSpec",
-          "documentation": "<p>The instance type and quantity.</p>"
+          "documentation": "<p>The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.</p>"
         }
       },
       "documentation": "<p>The kernel gateway app settings.</p>"
@@ -12014,6 +12014,10 @@
     "NetworkConfig": {
       "type": "structure",
       "members": {
+        "EnableInterContainerTrafficEncryption": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether to encrypt all communications between distributed processing jobs. Choose <code>True</code> to encrypt communications. Encryption provides greater security for distributed processing jobs, but the processing might take longer.</p>"
+        },
         "EnableNetworkIsolation": {
           "shape": "Boolean",
           "documentation": "<p>Whether to allow inbound and outbound network calls to and from the containers used for the processing job.</p>"
@@ -13179,7 +13183,6 @@
     "RenderUiTemplateRequest": {
       "type": "structure",
       "required": [
-        "UiTemplate",
         "Task",
         "RoleArn"
       ],
@@ -13333,14 +13336,14 @@
       "members": {
         "SageMakerImageArn": {
           "shape": "SageMakerImageArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the image created on the instance.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the SageMaker image created on the instance.</p>"
         },
         "InstanceType": {
           "shape": "AppInstanceType",
           "documentation": "<p>The instance type.</p>"
         }
       },
-      "documentation": "<p>The instance type and the Amazon Resource Name (ARN) of the image created on the instance. The ARN is stored as metadata in Amazon SageMaker Studio notebooks.</p>"
+      "documentation": "<p>The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. The ARN is stored as metadata in Amazon SageMaker Studio notebooks.</p>"
     },
     "ResourceType": {
       "type": "string",
@@ -13367,10 +13370,10 @@
       "members": {
         "HomeEfsFileSystem": {
           "shape": "RetentionType",
-          "documentation": "<p>The home Amazon Elastic File System (EFS).</p>"
+          "documentation": "<p>The default is <code>Retain</code>, which specifies to keep the data stored on the EFS volume.</p> <p>Specify <code>Delete</code> to delete the data stored on the EFS volume.</p>"
         }
       },
-      "documentation": "<p>The retention policy.</p>"
+      "documentation": "<p>The retention policy for data stored on an Amazon Elastic File System (EFS) volume.</p>"
     },
     "RetentionType": {
       "type": "string",
@@ -14211,7 +14214,7 @@
       "members": {
         "DefaultResourceSpec": {
           "shape": "ResourceSpec",
-          "documentation": "<p>The instance type and quantity.</p>"
+          "documentation": "<p>The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.</p>"
         }
       },
       "documentation": "<p>The TensorBoard app settings.</p>"
@@ -15397,9 +15400,6 @@
     },
     "UiConfig": {
       "type": "structure",
-      "required": [
-        "UiTemplateS3Uri"
-      ],
       "members": {
         "UiTemplateS3Uri": {
           "shape": "S3Uri",

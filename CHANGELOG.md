@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.672.0-->
+<!--LATEST=2.673.0-->
 <!--ENTRYINSERT-->
+
+## 2.673.0
+* feature: SageMaker: This release adds a new parameter (EnableInterContainerTrafficEncryption) to CreateProcessingJob API to allow for enabling inter-container traffic encryption on processing jobs.
 
 ## 2.672.0
 * feature: CloudWatchLogs: Amazon CloudWatch Logs now offers the ability to interact with Logs Insights queries via the new PutQueryDefinition, DescribeQueryDefinitions, and DeleteQueryDefinition APIs.

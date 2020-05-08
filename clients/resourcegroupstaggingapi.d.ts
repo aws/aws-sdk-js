@@ -316,7 +316,7 @@ declare namespace ResourceGroupsTaggingAPI {
      */
     Key: TagKey;
     /**
-     * The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key).
+     * One part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key). The value can be empty or null.
      */
     Value: TagValue;
   }
@@ -326,7 +326,7 @@ declare namespace ResourceGroupsTaggingAPI {
      */
     Key?: TagKey;
     /**
-     * The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key).
+     * One part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key). The value can be empty or null.
      */
     Values?: TagValueList;
   }
@@ -339,7 +339,7 @@ declare namespace ResourceGroupsTaggingAPI {
   export type TagMap = {[key: string]: TagValue};
   export interface TagResourcesInput {
     /**
-     * A list of ARNs. An ARN (Amazon Resource Name) uniquely identifies a resource. You can specify a minimum of 1 and a maximum of 20 ARNs (resources) to tag. An ARN can be set to a maximum of 1600 characters. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
+     * A list of ARNs. An ARN (Amazon Resource Name) uniquely identifies a resource. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     ResourceARNList: ResourceARNList;
     /**
@@ -362,7 +362,7 @@ declare namespace ResourceGroupsTaggingAPI {
   export type TargetIdType = "ACCOUNT"|"OU"|"ROOT"|string;
   export interface UntagResourcesInput {
     /**
-     * A list of ARNs. An ARN (Amazon Resource Name) uniquely identifies a resource. You can specify a minimum of 1 and a maximum of 20 ARNs (resources) to untag. An ARN can be set to a maximum of 1600 characters. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
+     * A list of ARNs. An ARN (Amazon Resource Name) uniquely identifies a resource. For more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
      */
     ResourceARNList: ResourceARNList;
     /**
