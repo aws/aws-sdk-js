@@ -790,7 +790,7 @@
       "output": {
         "shape": "CreateLaunchTemplateResult"
       },
-      "documentation": "<p>Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using <a>RunInstances</a>, you can specify a launch template instead of providing the launch parameters in the request.</p>"
+      "documentation": "<p>Creates a launch template. A launch template contains the parameters to launch an instance. When you launch an instance using <a>RunInstances</a>, you can specify a launch template instead of providing the launch parameters in the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html\">Launching an instance from a launch template</a>in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateLaunchTemplateVersion": {
       "name": "CreateLaunchTemplateVersion",
@@ -804,7 +804,7 @@
       "output": {
         "shape": "CreateLaunchTemplateVersionResult"
       },
-      "documentation": "<p>Creates a new version for a launch template. You can specify an existing version of launch template from which to base the new version.</p> <p>Launch template versions are numbered in the order in which they are created. You cannot specify, change, or replace the numbering of launch template versions.</p>"
+      "documentation": "<p>Creates a new version for a launch template. You can specify an existing version of launch template from which to base the new version.</p> <p>Launch template versions are numbered in the order in which they are created. You cannot specify, change, or replace the numbering of launch template versions.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#manage-launch-template-versions\">Managing launch template versions</a>in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateLocalGatewayRoute": {
       "name": "CreateLocalGatewayRoute",
@@ -9812,6 +9812,11 @@
           "shape": "LaunchTemplate",
           "documentation": "<p>Information about the launch template.</p>",
           "locationName": "launchTemplate"
+        },
+        "Warning": {
+          "shape": "ValidationWarning",
+          "documentation": "<p>If the launch template contains parameters or parameter combinations that are not valid, an error code and an error message are returned for each issue that's found.</p>",
+          "locationName": "warning"
         }
       }
     },
@@ -9858,6 +9863,11 @@
           "shape": "LaunchTemplateVersion",
           "documentation": "<p>Information about the launch template version.</p>",
           "locationName": "launchTemplateVersion"
+        },
+        "Warning": {
+          "shape": "ValidationWarning",
+          "documentation": "<p>If the new version of the launch template contains parameters or parameter combinations that are not valid, an error code and an error message are returned for each issue that's found.</p>",
+          "locationName": "warning"
         }
       }
     },
@@ -19704,6 +19714,13 @@
       "type": "list",
       "member": {
         "shape": "ClientVpnEndpoint",
+        "locationName": "item"
+      }
+    },
+    "ErrorSet": {
+      "type": "list",
+      "member": {
+        "shape": "ValidationError",
         "locationName": "item"
       }
     },
@@ -38398,6 +38415,33 @@
         }
       },
       "documentation": "<p>Describes the vCPU configurations for the instance type.</p>"
+    },
+    "ValidationError": {
+      "type": "structure",
+      "members": {
+        "Code": {
+          "shape": "String",
+          "documentation": "<p>The error code that indicates why the parameter or parameter combination is not valid. For more information about error codes, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html\">Error Codes</a>.</p>",
+          "locationName": "code"
+        },
+        "Message": {
+          "shape": "String",
+          "documentation": "<p>The error message that describes why the parameter or parameter combination is not valid. For more information about error messages, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html\">Error Codes</a>.</p>",
+          "locationName": "message"
+        }
+      },
+      "documentation": "<p>The error code and error message that is returned for a parameter or parameter combination that is not valid when a new launch template or new version of a launch template is created.</p>"
+    },
+    "ValidationWarning": {
+      "type": "structure",
+      "members": {
+        "Errors": {
+          "shape": "ErrorSet",
+          "documentation": "<p>The error codes and error messages.</p>",
+          "locationName": "errorSet"
+        }
+      },
+      "documentation": "<p>The error codes and error messages that are returned for the parameters or parameter combinations that are not valid when a new launch template or new version of a launch template is created.</p>"
     },
     "ValueStringList": {
       "type": "list",

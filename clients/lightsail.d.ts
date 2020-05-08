@@ -52,11 +52,11 @@ declare class Lightsail extends Service {
    */
   attachStaticIp(callback?: (err: AWSError, data: Lightsail.Types.AttachStaticIpResult) => void): Request<Lightsail.Types.AttachStaticIpResult, AWSError>;
   /**
-   * Closes the public ports on a specific Amazon Lightsail instance. The close instance public ports operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
+   * Closes ports for a specific Amazon Lightsail instance. The CloseInstancePublicPorts action supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
    */
   closeInstancePublicPorts(params: Lightsail.Types.CloseInstancePublicPortsRequest, callback?: (err: AWSError, data: Lightsail.Types.CloseInstancePublicPortsResult) => void): Request<Lightsail.Types.CloseInstancePublicPortsResult, AWSError>;
   /**
-   * Closes the public ports on a specific Amazon Lightsail instance. The close instance public ports operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
+   * Closes ports for a specific Amazon Lightsail instance. The CloseInstancePublicPorts action supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
    */
   closeInstancePublicPorts(callback?: (err: AWSError, data: Lightsail.Types.CloseInstancePublicPortsResult) => void): Request<Lightsail.Types.CloseInstancePublicPortsResult, AWSError>;
   /**
@@ -508,11 +508,11 @@ declare class Lightsail extends Service {
    */
   getInstanceMetricData(callback?: (err: AWSError, data: Lightsail.Types.GetInstanceMetricDataResult) => void): Request<Lightsail.Types.GetInstanceMetricDataResult, AWSError>;
   /**
-   * Returns the port states for a specific virtual private server, or instance.
+   * Returns the firewall port states for a specific Amazon Lightsail instance, the IP addresses allowed to connect to the instance through the ports, and the protocol.
    */
   getInstancePortStates(params: Lightsail.Types.GetInstancePortStatesRequest, callback?: (err: AWSError, data: Lightsail.Types.GetInstancePortStatesResult) => void): Request<Lightsail.Types.GetInstancePortStatesResult, AWSError>;
   /**
-   * Returns the port states for a specific virtual private server, or instance.
+   * Returns the firewall port states for a specific Amazon Lightsail instance, the IP addresses allowed to connect to the instance through the ports, and the protocol.
    */
   getInstancePortStates(callback?: (err: AWSError, data: Lightsail.Types.GetInstancePortStatesResult) => void): Request<Lightsail.Types.GetInstancePortStatesResult, AWSError>;
   /**
@@ -756,11 +756,11 @@ declare class Lightsail extends Service {
    */
   isVpcPeered(callback?: (err: AWSError, data: Lightsail.Types.IsVpcPeeredResult) => void): Request<Lightsail.Types.IsVpcPeeredResult, AWSError>;
   /**
-   * Adds public ports to an Amazon Lightsail instance. The open instance public ports operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
+   * Opens ports for a specific Amazon Lightsail instance, and specifies the IP addresses allowed to connect to the instance through the ports, and the protocol. The OpenInstancePublicPorts action supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
    */
   openInstancePublicPorts(params: Lightsail.Types.OpenInstancePublicPortsRequest, callback?: (err: AWSError, data: Lightsail.Types.OpenInstancePublicPortsResult) => void): Request<Lightsail.Types.OpenInstancePublicPortsResult, AWSError>;
   /**
-   * Adds public ports to an Amazon Lightsail instance. The open instance public ports operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
+   * Opens ports for a specific Amazon Lightsail instance, and specifies the IP addresses allowed to connect to the instance through the ports, and the protocol. The OpenInstancePublicPorts action supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
    */
   openInstancePublicPorts(callback?: (err: AWSError, data: Lightsail.Types.OpenInstancePublicPortsResult) => void): Request<Lightsail.Types.OpenInstancePublicPortsResult, AWSError>;
   /**
@@ -780,11 +780,11 @@ declare class Lightsail extends Service {
    */
   putAlarm(callback?: (err: AWSError, data: Lightsail.Types.PutAlarmResult) => void): Request<Lightsail.Types.PutAlarmResult, AWSError>;
   /**
-   * Sets the specified open ports for an Amazon Lightsail instance, and closes all ports for every protocol not included in the current request. The put instance public ports operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
+   * Opens ports for a specific Amazon Lightsail instance, and specifies the IP addresses allowed to connect to the instance through the ports, and the protocol. This action also closes all currently open ports that are not included in the request. Include all of the ports and the protocols you want to open in your PutInstancePublicPortsrequest. Or use the OpenInstancePublicPorts action to open ports without closing currently open ports. The PutInstancePublicPorts action supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
    */
   putInstancePublicPorts(params: Lightsail.Types.PutInstancePublicPortsRequest, callback?: (err: AWSError, data: Lightsail.Types.PutInstancePublicPortsResult) => void): Request<Lightsail.Types.PutInstancePublicPortsResult, AWSError>;
   /**
-   * Sets the specified open ports for an Amazon Lightsail instance, and closes all ports for every protocol not included in the current request. The put instance public ports operation supports tag-based access control via resource tags applied to the resource identified by instance name. For more information, see the Lightsail Dev Guide.
+   * Opens ports for a specific Amazon Lightsail instance, and specifies the IP addresses allowed to connect to the instance through the ports, and the protocol. This action also closes all currently open ports that are not included in the request. Include all of the ports and the protocols you want to open in your PutInstancePublicPortsrequest. Or use the OpenInstancePublicPorts action to open ports without closing currently open ports. The PutInstancePublicPorts action supports tag-based access control via resource tags applied to the resource identified by instanceName. For more information, see the Lightsail Dev Guide.
    */
   putInstancePublicPorts(callback?: (err: AWSError, data: Lightsail.Types.PutInstancePublicPortsResult) => void): Request<Lightsail.Types.PutInstancePublicPortsResult, AWSError>;
   /**
@@ -812,11 +812,11 @@ declare class Lightsail extends Service {
    */
   releaseStaticIp(callback?: (err: AWSError, data: Lightsail.Types.ReleaseStaticIpResult) => void): Request<Lightsail.Types.ReleaseStaticIpResult, AWSError>;
   /**
-   * Sends a verification request to an email contact method to ensure it’s owned by the requester. SMS contact methods don’t need to be verified. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail. A verification request is sent to the contact method when you initially create it. Use this action to send another verification request if a previous verification request was deleted, or has expired.  Notifications are not sent to an email contact method until after it is verified, and confirmed as valid. 
+   * Sends a verification request to an email contact method to ensure it's owned by the requester. SMS contact methods don't need to be verified. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail. A verification request is sent to the contact method when you initially create it. Use this action to send another verification request if a previous verification request was deleted, or has expired.  Notifications are not sent to an email contact method until after it is verified, and confirmed as valid. 
    */
   sendContactMethodVerification(params: Lightsail.Types.SendContactMethodVerificationRequest, callback?: (err: AWSError, data: Lightsail.Types.SendContactMethodVerificationResult) => void): Request<Lightsail.Types.SendContactMethodVerificationResult, AWSError>;
   /**
-   * Sends a verification request to an email contact method to ensure it’s owned by the requester. SMS contact methods don’t need to be verified. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail. A verification request is sent to the contact method when you initially create it. Use this action to send another verification request if a previous verification request was deleted, or has expired.  Notifications are not sent to an email contact method until after it is verified, and confirmed as valid. 
+   * Sends a verification request to an email contact method to ensure it's owned by the requester. SMS contact methods don't need to be verified. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail. A verification request is sent to the contact method when you initially create it. Use this action to send another verification request if a previous verification request was deleted, or has expired.  Notifications are not sent to an email contact method until after it is verified, and confirmed as valid. 
    */
   sendContactMethodVerification(callback?: (err: AWSError, data: Lightsail.Types.SendContactMethodVerificationResult) => void): Request<Lightsail.Types.SendContactMethodVerificationResult, AWSError>;
   /**
@@ -999,11 +999,11 @@ declare namespace Lightsail {
      */
     datapointsToAlarm?: integer;
     /**
-     * Specifies how the alarm handles missing data points. An alarm can treat missing data in the following ways:    breaching — Assume the missing data is not within the threshold. Missing data counts towards the number of times the metric is not within the threshold.    notBreaching — Assume the missing data is within the threshold. Missing data does not count towards the number of times the metric is not within the threshold.    ignore — Ignore the missing data. Maintains the current alarm state.    missing — Missing data is treated as missing.  
+     * Specifies how the alarm handles missing data points. An alarm can treat missing data in the following ways:    breaching - Assume the missing data is not within the threshold. Missing data counts towards the number of times the metric is not within the threshold.    notBreaching - Assume the missing data is within the threshold. Missing data does not count towards the number of times the metric is not within the threshold.    ignore - Ignore the missing data. Maintains the current alarm state.    missing - Missing data is treated as missing.  
      */
     treatMissingData?: TreatMissingData;
     /**
-     * The statistic for the metric associated with the alarm. The following statistics are available:    Minimum — The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.    Maximum — The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.    Sum — All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.    Average — The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.    SampleCount — The count, or number, of data points used for the statistical calculation.  
+     * The statistic for the metric associated with the alarm. The following statistics are available:    Minimum - The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.    Maximum - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.    Sum - All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.    Average - The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.    SampleCount - The count, or number, of data points used for the statistical calculation.  
      */
     statistic?: MetricStatistic;
     /**
@@ -1011,7 +1011,7 @@ declare namespace Lightsail {
      */
     metricName?: MetricName;
     /**
-     * The current state of the alarm. An alarm has the following possible states:    ALARM — The metric is outside of the defined threshold.    INSUFFICIENT_DATA — The alarm has just started, the metric is not available, or not enough data is available for the metric to determine the alarm state.    OK — The metric is within the defined threshold.  
+     * The current state of the alarm. An alarm has the following possible states:    ALARM - The metric is outside of the defined threshold.    INSUFFICIENT_DATA - The alarm has just started, the metric is not available, or not enough data is available for the metric to determine the alarm state.    OK - The metric is within the defined threshold.  
      */
     state?: AlarmState;
     /**
@@ -1041,7 +1041,7 @@ declare namespace Lightsail {
   }
   export interface AllocateStaticIpResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1061,7 +1061,7 @@ declare namespace Lightsail {
   }
   export interface AttachDiskResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1077,7 +1077,7 @@ declare namespace Lightsail {
   }
   export interface AttachInstancesToLoadBalancerResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1093,7 +1093,7 @@ declare namespace Lightsail {
   }
   export interface AttachLoadBalancerTlsCertificateResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request. These SSL/TLS certificates are only usable by Lightsail load balancers. You can't get the certificate and use it for another purpose.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request. These SSL/TLS certificates are only usable by Lightsail load balancers. You can't get the certificate and use it for another purpose.
      */
     operations?: OperationList;
   }
@@ -1109,7 +1109,7 @@ declare namespace Lightsail {
   }
   export interface AttachStaticIpResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1265,17 +1265,17 @@ declare namespace Lightsail {
   export type BundleList = Bundle[];
   export interface CloseInstancePublicPortsRequest {
     /**
-     * Information about the public port you are trying to close.
+     * An object to describe the ports to close for the specified instance.
      */
     portInfo: PortInfo;
     /**
-     * The name of the instance on which you're attempting to close the public ports.
+     * The name of the instance for which to close ports.
      */
     instanceName: ResourceName;
   }
   export interface CloseInstancePublicPortsResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An object that describes the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
   }
@@ -1337,7 +1337,7 @@ declare namespace Lightsail {
      */
     contactEndpoint?: NonEmptyString;
     /**
-     * The current status of the contact method. A contact method has the following possible status:    PendingVerification — The contact method has not yet been verified, and the verification has not yet expired.    Valid — The contact method has been verified.    InValid — An attempt was made to verify the contact method, but the verification has expired.  
+     * The current status of the contact method. A contact method has the following possible status:    PendingVerification - The contact method has not yet been verified, and the verification has not yet expired.    Valid - The contact method has been verified.    InValid - An attempt was made to verify the contact method, but the verification has expired.  
      */
     status?: ContactMethodStatus;
     /**
@@ -1399,7 +1399,7 @@ declare namespace Lightsail {
   }
   export interface CopySnapshotResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1411,7 +1411,7 @@ declare namespace Lightsail {
   }
   export interface CreateCloudFormationStackResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1421,13 +1421,13 @@ declare namespace Lightsail {
      */
     protocol: ContactProtocol;
     /**
-     * The destination of the contact method, such as an email address or a mobile phone number. Use the E.164 format when specifying a mobile phone number. E.164 is a standard for the phone number structure used for international telecommunication. Phone numbers that follow this format can have a maximum of 15 digits, and they are prefixed with the plus character (+) and the country code. For example, a U.S. phone number in E.164 format would be specified as +1XXX5550100. For more information, see E.164 in Wikipedia.
+     * The destination of the contact method, such as an email address or a mobile phone number. Use the E.164 format when specifying a mobile phone number. E.164 is a standard for the phone number structure used for international telecommunication. Phone numbers that follow this format can have a maximum of 15 digits, and they are prefixed with the plus character (+) and the country code. For example, a U.S. phone number in E.164 format would be specified as +1XXX5550100. For more information, see E.164 on Wikipedia.
      */
     contactEndpoint: StringMax256;
   }
   export interface CreateContactMethodResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1471,7 +1471,7 @@ declare namespace Lightsail {
   }
   export interface CreateDiskFromSnapshotResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1499,7 +1499,7 @@ declare namespace Lightsail {
   }
   export interface CreateDiskResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1523,7 +1523,7 @@ declare namespace Lightsail {
   }
   export interface CreateDiskSnapshotResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1539,7 +1539,7 @@ declare namespace Lightsail {
   }
   export interface CreateDomainEntryResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
   }
@@ -1555,7 +1555,7 @@ declare namespace Lightsail {
   }
   export interface CreateDomainResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
   }
@@ -1575,7 +1575,7 @@ declare namespace Lightsail {
   }
   export interface CreateInstanceSnapshotResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1631,7 +1631,7 @@ declare namespace Lightsail {
   }
   export interface CreateInstancesFromSnapshotResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1675,7 +1675,7 @@ declare namespace Lightsail {
   }
   export interface CreateInstancesResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1703,7 +1703,7 @@ declare namespace Lightsail {
      */
     privateKeyBase64?: Base64;
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
   }
@@ -1739,7 +1739,7 @@ declare namespace Lightsail {
   }
   export interface CreateLoadBalancerResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1767,7 +1767,7 @@ declare namespace Lightsail {
   }
   export interface CreateLoadBalancerTlsCertificateResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1811,7 +1811,7 @@ declare namespace Lightsail {
   }
   export interface CreateRelationalDatabaseFromSnapshotResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1863,7 +1863,7 @@ declare namespace Lightsail {
   }
   export interface CreateRelationalDatabaseResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1883,7 +1883,7 @@ declare namespace Lightsail {
   }
   export interface CreateRelationalDatabaseSnapshotResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1895,7 +1895,7 @@ declare namespace Lightsail {
   }
   export interface DeleteAlarmResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1911,7 +1911,7 @@ declare namespace Lightsail {
   }
   export interface DeleteAutoSnapshotResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1923,7 +1923,7 @@ declare namespace Lightsail {
   }
   export interface DeleteContactMethodResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1939,7 +1939,7 @@ declare namespace Lightsail {
   }
   export interface DeleteDiskResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1951,7 +1951,7 @@ declare namespace Lightsail {
   }
   export interface DeleteDiskSnapshotResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -1967,7 +1967,7 @@ declare namespace Lightsail {
   }
   export interface DeleteDomainEntryResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
   }
@@ -1979,7 +1979,7 @@ declare namespace Lightsail {
   }
   export interface DeleteDomainResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
   }
@@ -1995,7 +1995,7 @@ declare namespace Lightsail {
   }
   export interface DeleteInstanceResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -2007,7 +2007,7 @@ declare namespace Lightsail {
   }
   export interface DeleteInstanceSnapshotResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -2019,7 +2019,7 @@ declare namespace Lightsail {
   }
   export interface DeleteKeyPairResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
   }
@@ -2031,7 +2031,7 @@ declare namespace Lightsail {
   }
   export interface DeleteKnownHostKeysResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -2043,7 +2043,7 @@ declare namespace Lightsail {
   }
   export interface DeleteLoadBalancerResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -2063,7 +2063,7 @@ declare namespace Lightsail {
   }
   export interface DeleteLoadBalancerTlsCertificateResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -2083,7 +2083,7 @@ declare namespace Lightsail {
   }
   export interface DeleteRelationalDatabaseResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -2095,7 +2095,7 @@ declare namespace Lightsail {
   }
   export interface DeleteRelationalDatabaseSnapshotResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -2117,7 +2117,7 @@ declare namespace Lightsail {
   }
   export interface DetachDiskResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -2133,7 +2133,7 @@ declare namespace Lightsail {
   }
   export interface DetachInstancesFromLoadBalancerResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -2145,7 +2145,7 @@ declare namespace Lightsail {
   }
   export interface DetachStaticIpResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -2161,7 +2161,7 @@ declare namespace Lightsail {
   }
   export interface DisableAddOnResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -2428,7 +2428,7 @@ declare namespace Lightsail {
   }
   export interface EnableAddOnResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -2510,7 +2510,7 @@ declare namespace Lightsail {
   }
   export interface ExportSnapshotResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -2764,7 +2764,7 @@ declare namespace Lightsail {
      */
     instanceName: ResourceName;
     /**
-     * The metric for which you want to return information. Valid instance metric names are listed below, along with the most useful statistics to include in your request, and the published unit value.     CPUUtilization  — The percentage of allocated compute units that are currently in use on the instance. This metric identifies the processing power to run the applications on the instance. Tools in your operating system can show a lower percentage than Lightsail when the instance is not allocated a full processor core.  Statistics: The most useful statistics are Maximum and Average.  Unit: The published unit is Percent.     NetworkIn  — The number of bytes received on all network interfaces by the instance. This metric identifies the volume of incoming network traffic to the instance. The number reported is the number of bytes received during the period. Because this metric is reported in 5-minute intervals, divide the reported number by 300 to find Bytes/second.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Bytes.     NetworkOut  — The number of bytes sent out on all network interfaces by the instance. This metric identifies the volume of outgoing network traffic from the instance. The number reported is the number of bytes sent during the period. Because this metric is reported in 5-minute intervals, divide the reported number by 300 to find Bytes/second.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Bytes.     StatusCheckFailed  — Reports whether the instance passed or failed both the instance status check and the system status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Count.     StatusCheckFailed_Instance  — Reports whether the instance passed or failed the instance status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Count.     StatusCheckFailed_System  — Reports whether the instance passed or failed the system status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Count.  
+     * The metric for which you want to return information. Valid instance metric names are listed below, along with the most useful statistics to include in your request, and the published unit value.     CPUUtilization  - The percentage of allocated compute units that are currently in use on the instance. This metric identifies the processing power to run the applications on the instance. Tools in your operating system can show a lower percentage than Lightsail when the instance is not allocated a full processor core.  Statistics: The most useful statistics are Maximum and Average.  Unit: The published unit is Percent.     NetworkIn  - The number of bytes received on all network interfaces by the instance. This metric identifies the volume of incoming network traffic to the instance. The number reported is the number of bytes received during the period. Because this metric is reported in 5-minute intervals, divide the reported number by 300 to find Bytes/second.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Bytes.     NetworkOut  - The number of bytes sent out on all network interfaces by the instance. This metric identifies the volume of outgoing network traffic from the instance. The number reported is the number of bytes sent during the period. Because this metric is reported in 5-minute intervals, divide the reported number by 300 to find Bytes/second.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Bytes.     StatusCheckFailed  - Reports whether the instance passed or failed both the instance status check and the system status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Count.     StatusCheckFailed_Instance  - Reports whether the instance passed or failed the instance status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Count.     StatusCheckFailed_System  - Reports whether the instance passed or failed the system status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Count.  
      */
     metricName: InstanceMetricName;
     /**
@@ -2780,11 +2780,11 @@ declare namespace Lightsail {
      */
     endTime: timestamp;
     /**
-     * The unit for the metric data request. Valid units depend on the metric data being required. For the valid units with each available metric, see the metricName parameter.
+     * The unit for the metric data request. Valid units depend on the metric data being requested. For the valid units to specify with each available metric, see the metricName parameter.
      */
     unit: MetricUnit;
     /**
-     * The statistic for the metric. The following statistics are available:    Minimum — The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.    Maximum — The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.    Sum — All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.    Average — The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.    SampleCount — The count, or number, of data points used for the statistical calculation.  
+     * The statistic for the metric. The following statistics are available:    Minimum - The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.    Maximum - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.    Sum - All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.    Average - The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.    SampleCount - The count, or number, of data points used for the statistical calculation.  
      */
     statistics: MetricStatisticList;
   }
@@ -2800,13 +2800,13 @@ declare namespace Lightsail {
   }
   export interface GetInstancePortStatesRequest {
     /**
-     * The name of the instance.
+     * The name of the instance for which to return firewall port states.
      */
     instanceName: ResourceName;
   }
   export interface GetInstancePortStatesResult {
     /**
-     * Information about the port states resulting from your request.
+     * An array of objects that describe the firewall port states for the specified instance.
      */
     portStates?: InstancePortStateList;
   }
@@ -2912,7 +2912,7 @@ declare namespace Lightsail {
      */
     loadBalancerName: ResourceName;
     /**
-     * The metric for which you want to return information. Valid load balancer metric names are listed below, along with the most useful statistics to include in your request, and the published unit value.     ClientTLSNegotiationErrorCount  — The number of TLS connections initiated by the client that did not establish a session with the load balancer due to a TLS error generated by the load balancer. Possible causes include a mismatch of ciphers or protocols.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Count.     HealthyHostCount  — The number of target instances that are considered healthy.  Statistics: The most useful statistic are Average, Minimum, and Maximum.  Unit: The published unit is Count.     HTTPCode_Instance_2XX_Count  — The number of HTTP 2XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.  Unit: The published unit is Count.     HTTPCode_Instance_3XX_Count  — The number of HTTP 3XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.  Unit: The published unit is Count.     HTTPCode_Instance_4XX_Count  — The number of HTTP 4XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.  Unit: The published unit is Count.     HTTPCode_Instance_5XX_Count  — The number of HTTP 5XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.  Unit: The published unit is Count.     HTTPCode_LB_4XX_Count  — The number of HTTP 4XX client error codes that originated from the load balancer. Client errors are generated when requests are malformed or incomplete. These requests were not received by the target instance. This count does not include response codes generated by the target instances.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.  Unit: The published unit is Count.     HTTPCode_LB_5XX_Count  — The number of HTTP 5XX server error codes that originated from the load balancer. This does not include any response codes generated by the target instance. This metric is reported if there are no healthy instances attached to the load balancer, or if the request rate exceeds the capacity of the instances (spillover) or the load balancer.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.  Unit: The published unit is Count.     InstanceResponseTime  — The time elapsed, in seconds, after the request leaves the load balancer until a response from the target instance is received.  Statistics: The most useful statistic is Average.  Unit: The published unit is Seconds.     RejectedConnectionCount  — The number of connections that were rejected because the load balancer had reached its maximum number of connections.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Count.     RequestCount  — The number of requests processed over IPv4. This count includes only the requests with a response generated by a target instance of the load balancer.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.  Unit: The published unit is Count.     UnhealthyHostCount  — The number of target instances that are considered unhealthy.  Statistics: The most useful statistic are Average, Minimum, and Maximum.  Unit: The published unit is Count.  
+     * The metric for which you want to return information. Valid load balancer metric names are listed below, along with the most useful statistics to include in your request, and the published unit value.     ClientTLSNegotiationErrorCount  - The number of TLS connections initiated by the client that did not establish a session with the load balancer due to a TLS error generated by the load balancer. Possible causes include a mismatch of ciphers or protocols.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Count.     HealthyHostCount  - The number of target instances that are considered healthy.  Statistics: The most useful statistic are Average, Minimum, and Maximum.  Unit: The published unit is Count.     HTTPCode_Instance_2XX_Count  - The number of HTTP 2XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.  Unit: The published unit is Count.     HTTPCode_Instance_3XX_Count  - The number of HTTP 3XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.  Unit: The published unit is Count.     HTTPCode_Instance_4XX_Count  - The number of HTTP 4XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.  Unit: The published unit is Count.     HTTPCode_Instance_5XX_Count  - The number of HTTP 5XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.  Unit: The published unit is Count.     HTTPCode_LB_4XX_Count  - The number of HTTP 4XX client error codes that originated from the load balancer. Client errors are generated when requests are malformed or incomplete. These requests were not received by the target instance. This count does not include response codes generated by the target instances.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.  Unit: The published unit is Count.     HTTPCode_LB_5XX_Count  - The number of HTTP 5XX server error codes that originated from the load balancer. This does not include any response codes generated by the target instance. This metric is reported if there are no healthy instances attached to the load balancer, or if the request rate exceeds the capacity of the instances (spillover) or the load balancer.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.  Unit: The published unit is Count.     InstanceResponseTime  - The time elapsed, in seconds, after the request leaves the load balancer until a response from the target instance is received.  Statistics: The most useful statistic is Average.  Unit: The published unit is Seconds.     RejectedConnectionCount  - The number of connections that were rejected because the load balancer had reached its maximum number of connections.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Count.     RequestCount  - The number of requests processed over IPv4. This count includes only the requests with a response generated by a target instance of the load balancer.  Statistics: The most useful statistic is Sum. Note that Minimum, Maximum, and Average all return 1.  Unit: The published unit is Count.     UnhealthyHostCount  - The number of target instances that are considered unhealthy.  Statistics: The most useful statistic are Average, Minimum, and Maximum.  Unit: The published unit is Count.  
      */
     metricName: LoadBalancerMetricName;
     /**
@@ -2932,7 +2932,7 @@ declare namespace Lightsail {
      */
     unit: MetricUnit;
     /**
-     * The statistic for the metric. The following statistics are available:    Minimum — The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.    Maximum — The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.    Sum — All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.    Average — The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.    SampleCount — The count, or number, of data points used for the statistical calculation.  
+     * The statistic for the metric. The following statistics are available:    Minimum - The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.    Maximum - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.    Sum - All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.    Average - The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.    SampleCount - The count, or number, of data points used for the statistical calculation.  
      */
     statistics: MetricStatisticList;
   }
@@ -2994,7 +2994,7 @@ declare namespace Lightsail {
   }
   export interface GetOperationResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
   }
@@ -3010,7 +3010,7 @@ declare namespace Lightsail {
   }
   export interface GetOperationsForResourceResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
     /**
@@ -3030,7 +3030,7 @@ declare namespace Lightsail {
   }
   export interface GetOperationsResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
     /**
@@ -3188,7 +3188,7 @@ declare namespace Lightsail {
      */
     relationalDatabaseName: ResourceName;
     /**
-     * The metric for which you want to return information. Valid relational database metric names are listed below, along with the most useful statistics to include in your request, and the published unit value. All relational database metric data is available in 1-minute (60 seconds) granularity.     CPUUtilization  — The percentage of CPU utilization currently in use on the database.  Statistics: The most useful statistics are Maximum and Average.  Unit: The published unit is Percent.     DatabaseConnections  — The number of database connections in use.  Statistics: The most useful statistics are Maximum and Sum.  Unit: The published unit is Count.     DiskQueueDepth  — The number of outstanding IOs (read/write requests) that are waiting to access the disk.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Count.     FreeStorageSpace  — The amount of available storage space.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Bytes.     NetworkReceiveThroughput  — The incoming (Receive) network traffic on the database, including both customer database traffic and AWS traffic used for monitoring and replication.  Statistics: The most useful statistic is Average.  Unit: The published unit is Bytes/Second.     NetworkTransmitThroughput  — The outgoing (Transmit) network traffic on the database, including both customer database traffic and AWS traffic used for monitoring and replication.  Statistics: The most useful statistic is Average.  Unit: The published unit is Bytes/Second.  
+     * The metric for which you want to return information. Valid relational database metric names are listed below, along with the most useful statistics to include in your request, and the published unit value. All relational database metric data is available in 1-minute (60 seconds) granularity.     CPUUtilization  - The percentage of CPU utilization currently in use on the database.  Statistics: The most useful statistics are Maximum and Average.  Unit: The published unit is Percent.     DatabaseConnections  - The number of database connections in use.  Statistics: The most useful statistics are Maximum and Sum.  Unit: The published unit is Count.     DiskQueueDepth  - The number of outstanding IOs (read/write requests) that are waiting to access the disk.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Count.     FreeStorageSpace  - The amount of available storage space.  Statistics: The most useful statistic is Sum.  Unit: The published unit is Bytes.     NetworkReceiveThroughput  - The incoming (Receive) network traffic on the database, including both customer database traffic and AWS traffic used for monitoring and replication.  Statistics: The most useful statistic is Average.  Unit: The published unit is Bytes/Second.     NetworkTransmitThroughput  - The outgoing (Transmit) network traffic on the database, including both customer database traffic and AWS traffic used for monitoring and replication.  Statistics: The most useful statistic is Average.  Unit: The published unit is Bytes/Second.  
      */
     metricName: RelationalDatabaseMetricName;
     /**
@@ -3208,7 +3208,7 @@ declare namespace Lightsail {
      */
     unit: MetricUnit;
     /**
-     * The statistic for the metric. The following statistics are available:    Minimum — The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.    Maximum — The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.    Sum — All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.    Average — The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.    SampleCount — The count, or number, of data points used for the statistical calculation.  
+     * The statistic for the metric. The following statistics are available:    Minimum - The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.    Maximum - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.    Sum - All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.    Average - The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.    SampleCount - The count, or number, of data points used for the statistical calculation.  
      */
     statistics: MetricStatisticList;
   }
@@ -3369,7 +3369,7 @@ declare namespace Lightsail {
   }
   export interface ImportKeyPairResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
   }
@@ -3508,7 +3508,7 @@ declare namespace Lightsail {
      */
     instanceType: NonEmptyString;
     /**
-     * The port configuration to use for the new Amazon EC2 instance. The following configuration options are available:   DEFAULT — Use the default firewall settings from the image.   INSTANCE — Use the firewall settings from the source Lightsail instance.   NONE — Default to Amazon EC2.   CLOSED — All ports closed.  
+     * The port configuration to use for the new Amazon EC2 instance. The following configuration options are available:    DEFAULT - Use the default firewall settings from the Lightsail instance blueprint.    INSTANCE - Use the configured firewall settings from the source Lightsail instance.    NONE - Use the default Amazon EC2 security group.    CLOSED - All ports closed.    If you configured lightsail-connect as a cidrListAliases on your instance, or if you chose to allow the Lightsail browser-based SSH or RDP clients to connect to your instance, that configuration is not carried over to your new Amazon EC2 instance. 
      */
     portInfoSource: PortInfoSourceType;
     /**
@@ -3568,19 +3568,19 @@ declare namespace Lightsail {
   export type InstancePlatformList = InstancePlatform[];
   export interface InstancePortInfo {
     /**
-     * The first port in the range.
+     * The first port in a range of open ports on an instance. Allowed ports:   TCP and UDP - 0 to 65535    ICMP - 8 (to configure Ping)  Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the fromPort parameter as 8, and the toPort parameter as -1.   
      */
     fromPort?: Port;
     /**
-     * The last port in the range.
+     * The last port in a range of open ports on an instance. Allowed ports:   TCP and UDP - 0 to 65535    ICMP - -1 (to configure Ping)  Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the fromPort parameter as 8, and the toPort parameter as -1.   
      */
     toPort?: Port;
     /**
-     * The protocol being used. Can be one of the following.    tcp - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn't require reliable data stream service, use UDP instead.    all - All transport layer protocol types. For more general information, see Transport layer on Wikipedia.    udp - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don't require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.  
+     * The IP protocol name. The name can be one of the following:    tcp - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn't require reliable data stream service, use UDP instead.    all - All transport layer protocol types. For more general information, see Transport layer on Wikipedia.    udp - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don't require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.    icmp - Internet Control Message Protocol (ICMP) is used to send error messages and operational information indicating success or failure when communicating with an instance. For example, an error is indicated when an instance could not be reached.  Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the fromPort parameter as 8, and the toPort parameter as -1.   
      */
     protocol?: NetworkProtocol;
     /**
-     * The location from which access is allowed (e.g., Anywhere (0.0.0.0/0)).
+     * The location from which access is allowed. For example, Anywhere (0.0.0.0/0), or Custom if a specific IP address or range of IP addresses is allowed.
      */
     accessFrom?: string;
     /**
@@ -3588,32 +3588,48 @@ declare namespace Lightsail {
      */
     accessType?: PortAccessType;
     /**
-     * The common name.
+     * The common name of the port information.
      */
     commonName?: string;
     /**
-     * The access direction (inbound or outbound).
+     * The access direction (inbound or outbound).  Lightsail currently supports only inbound access direction. 
      */
     accessDirection?: AccessDirection;
+    /**
+     * The IP address, or range of IP addresses in CIDR notation, that are allowed to connect to an instance through the ports, and the protocol. Lightsail supports IPv4 addresses. For more information about CIDR block notation, see Classless Inter-Domain Routing on Wikipedia.
+     */
+    cidrs?: StringList;
+    /**
+     * An alias that defines access for a preconfigured range of IP addresses. The only alias currently supported is lightsail-connect, which allows IP addresses of the browser-based RDP/SSH client in the Lightsail console to connect to your instance.
+     */
+    cidrListAliases?: StringList;
   }
   export type InstancePortInfoList = InstancePortInfo[];
   export interface InstancePortState {
     /**
-     * The first port in the range.
+     * The first port in a range of open ports on an instance. Allowed ports:   TCP and UDP - 0 to 65535    ICMP - 8 (to configure Ping)  Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the fromPort parameter as 8, and the toPort parameter as -1.   
      */
     fromPort?: Port;
     /**
-     * The last port in the range.
+     * The last port in a range of open ports on an instance. Allowed ports:   TCP and UDP - 0 to 65535    ICMP - -1 (to configure Ping)  Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the fromPort parameter as 8, and the toPort parameter as -1.   
      */
     toPort?: Port;
     /**
-     * The protocol being used. Can be one of the following.    tcp - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn't require reliable data stream service, use UDP instead.    all - All transport layer protocol types. For more general information, see Transport layer on Wikipedia.    udp - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don't require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.  
+     * The IP protocol name. The name can be one of the following:    tcp - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn't require reliable data stream service, use UDP instead.    all - All transport layer protocol types. For more general information, see Transport layer on Wikipedia.    udp - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don't require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.    icmp - Internet Control Message Protocol (ICMP) is used to send error messages and operational information indicating success or failure when communicating with an instance. For example, an error is indicated when an instance could not be reached.  Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the fromPort parameter as 8, and the toPort parameter as -1.   
      */
     protocol?: NetworkProtocol;
     /**
-     * Specifies whether the instance port is open or closed.
+     * Specifies whether the instance port is open or closed.  The port state for Lightsail instances is always open. 
      */
     state?: PortState;
+    /**
+     * The IP address, or range of IP addresses in CIDR notation, that are allowed to connect to an instance through the ports, and the protocol. Lightsail supports IPv4 addresses. For more information about CIDR block notation, see Classless Inter-Domain Routing on Wikipedia.
+     */
+    cidrs?: StringList;
+    /**
+     * An alias that defines access for a preconfigured range of IP addresses. The only alias currently supported is lightsail-connect, which allows IP addresses of the browser-based RDP/SSH client in the Lightsail console to connect to your instance.
+     */
+    cidrListAliases?: StringList;
   }
   export type InstancePortStateList = InstancePortState[];
   export interface InstanceSnapshot {
@@ -4056,22 +4072,22 @@ declare namespace Lightsail {
      */
     gbPerMonthAllocated?: integer;
   }
-  export type NetworkProtocol = "tcp"|"all"|"udp"|string;
+  export type NetworkProtocol = "tcp"|"all"|"udp"|"icmp"|string;
   export type NonEmptyString = string;
   export type NotificationTriggerList = AlarmState[];
   export interface OpenInstancePublicPortsRequest {
     /**
-     * An array of key-value pairs containing information about the port mappings.
+     * An object to describe the ports to open for the specified instance.
      */
     portInfo: PortInfo;
     /**
-     * The name of the instance for which you want to open the public ports.
+     * The name of the instance for which to open ports.
      */
     instanceName: ResourceName;
   }
   export interface OpenInstancePublicPortsResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
   }
@@ -4142,7 +4158,7 @@ declare namespace Lightsail {
   }
   export interface PeerVpcResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
   }
@@ -4179,17 +4195,25 @@ declare namespace Lightsail {
   export type PortAccessType = "Public"|"Private"|string;
   export interface PortInfo {
     /**
-     * The first port in the range.
+     * The first port in a range of open ports on an instance. Allowed ports:   TCP and UDP - 0 to 65535    ICMP - 8 (to configure Ping)  Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the fromPort parameter as 8, and the toPort parameter as -1.   
      */
     fromPort?: Port;
     /**
-     * The last port in the range.
+     * The last port in a range of open ports on an instance. Allowed ports:   TCP and UDP - 0 to 65535    ICMP - -1 (to configure Ping)  Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the fromPort parameter as 8, and the toPort parameter as -1.   
      */
     toPort?: Port;
     /**
-     * The protocol. 
+     * The IP protocol name. The name can be one of the following:    tcp - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn't require reliable data stream service, use UDP instead.    all - All transport layer protocol types. For more general information, see Transport layer on Wikipedia.    udp - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don't require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.    icmp - Internet Control Message Protocol (ICMP) is used to send error messages and operational information indicating success or failure when communicating with an instance. For example, an error is indicated when an instance could not be reached.  Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the fromPort parameter as 8, and the toPort parameter as -1.   
      */
     protocol?: NetworkProtocol;
+    /**
+     * The IP address, or range of IP addresses in CIDR notation, that are allowed to connect to an instance through the ports, and the protocol. Lightsail supports IPv4 addresses. Examples:   To allow the IP address 192.0.2.44, specify 192.0.2.44 or 192.0.2.44/32.    To allow the IP addresses 192.0.2.0 to 192.0.2.255, specify 192.0.2.0/24.   For more information about CIDR block notation, see Classless Inter-Domain Routing on Wikipedia.
+     */
+    cidrs?: StringList;
+    /**
+     * An alias that defines access for a preconfigured range of IP addresses. The only alias currently supported is lightsail-connect, which allows IP addresses of the browser-based RDP/SSH client in the Lightsail console to connect to your instance.
+     */
+    cidrListAliases?: StringList;
   }
   export type PortInfoList = PortInfo[];
   export type PortInfoSourceType = "DEFAULT"|"INSTANCE"|"NONE"|"CLOSED"|string;
@@ -4225,7 +4249,7 @@ declare namespace Lightsail {
      */
     datapointsToAlarm?: integer;
     /**
-     * Sets how this alarm will handle missing data points. An alarm can treat missing data in the following ways:    breaching — Assume the missing data is not within the threshold. Missing data counts towards the number of times the metric is not within the threshold.    notBreaching — Assume the missing data is within the threshold. Missing data does not count towards the number of times the metric is not within the threshold.    ignore — Ignore the missing data. Maintains the current alarm state.    missing — Missing data is treated as missing.   If treatMissingData is not specified, the default behavior of missing is used.
+     * Sets how this alarm will handle missing data points. An alarm can treat missing data in the following ways:    breaching - Assume the missing data is not within the threshold. Missing data counts towards the number of times the metric is not within the threshold.    notBreaching - Assume the missing data is within the threshold. Missing data does not count towards the number of times the metric is not within the threshold.    ignore - Ignore the missing data. Maintains the current alarm state.    missing - Missing data is treated as missing.   If treatMissingData is not specified, the default behavior of missing is used.
      */
     treatMissingData?: TreatMissingData;
     /**
@@ -4233,7 +4257,7 @@ declare namespace Lightsail {
      */
     contactProtocols?: ContactProtocolsList;
     /**
-     * The alarm states that trigger a notification. An alarm has the following possible states:    ALARM — The metric is outside of the defined threshold.    INSUFFICIENT_DATA — The alarm has just started, the metric is not available, or not enough data is available for the metric to determine the alarm state.    OK — The metric is within the defined threshold.   When you specify a notification trigger, the ALARM state must be specified. The INSUFFICIENT_DATA and OK states can be specified in addition to the ALARM state.   If you specify OK as an alarm trigger, a notification is sent when the alarm switches from an ALARM or INSUFFICIENT_DATA alarm state to an OK state. This can be thought of as an all clear alarm notification.   If you specify INSUFFICIENT_DATA as the alarm trigger, a notification is sent when the alarm switches from an OK or ALARM alarm state to an INSUFFICIENT_DATA state.   The notification trigger defaults to ALARM if you don't specify this parameter.
+     * The alarm states that trigger a notification. An alarm has the following possible states:    ALARM - The metric is outside of the defined threshold.    INSUFFICIENT_DATA - The alarm has just started, the metric is not available, or not enough data is available for the metric to determine the alarm state.    OK - The metric is within the defined threshold.   When you specify a notification trigger, the ALARM state must be specified. The INSUFFICIENT_DATA and OK states can be specified in addition to the ALARM state.   If you specify OK as an alarm trigger, a notification is sent when the alarm switches from an ALARM or INSUFFICIENT_DATA alarm state to an OK state. This can be thought of as an all clear alarm notification.   If you specify INSUFFICIENT_DATA as the alarm trigger, a notification is sent when the alarm switches from an OK or ALARM alarm state to an INSUFFICIENT_DATA state.   The notification trigger defaults to ALARM if you don't specify this parameter.
      */
     notificationTriggers?: NotificationTriggerList;
     /**
@@ -4243,23 +4267,23 @@ declare namespace Lightsail {
   }
   export interface PutAlarmResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
   export interface PutInstancePublicPortsRequest {
     /**
-     * Specifies information about the public port(s).
+     * An array of objects to describe the ports to open for the specified instance.
      */
     portInfos: PortInfoList;
     /**
-     * The Lightsail instance name of the public port(s) you are setting.
+     * The name of the instance for which to open ports.
      */
     instanceName: ResourceName;
   }
   export interface PutInstancePublicPortsResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
   }
@@ -4271,7 +4295,7 @@ declare namespace Lightsail {
   }
   export interface RebootInstanceResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -4283,7 +4307,7 @@ declare namespace Lightsail {
   }
   export interface RebootRelationalDatabaseResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -4641,7 +4665,7 @@ declare namespace Lightsail {
   }
   export interface ReleaseStaticIpResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -4667,7 +4691,7 @@ declare namespace Lightsail {
   }
   export interface SendContactMethodVerificationResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -4680,7 +4704,7 @@ declare namespace Lightsail {
   }
   export interface StartInstanceResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -4692,7 +4716,7 @@ declare namespace Lightsail {
   }
   export interface StartRelationalDatabaseResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -4747,7 +4771,7 @@ declare namespace Lightsail {
   }
   export interface StopInstanceResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -4763,7 +4787,7 @@ declare namespace Lightsail {
   }
   export interface StopRelationalDatabaseResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -4798,7 +4822,7 @@ declare namespace Lightsail {
   }
   export interface TagResourceResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -4809,13 +4833,13 @@ declare namespace Lightsail {
      */
     alarmName: ResourceName;
     /**
-     * The alarm state to test. An alarm has the following possible states that can be tested:    ALARM — The metric is outside of the defined threshold.    INSUFFICIENT_DATA — The alarm has just started, the metric is not available, or not enough data is available for the metric to determine the alarm state.    OK — The metric is within the defined threshold.  
+     * The alarm state to test. An alarm has the following possible states that can be tested:    ALARM - The metric is outside of the defined threshold.    INSUFFICIENT_DATA - The alarm has just started, the metric is not available, or not enough data is available for the metric to determine the alarm state.    OK - The metric is within the defined threshold.  
      */
     state: AlarmState;
   }
   export interface TestAlarmResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -4825,7 +4849,7 @@ declare namespace Lightsail {
   }
   export interface UnpeerVpcResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
   }
@@ -4845,7 +4869,7 @@ declare namespace Lightsail {
   }
   export interface UntagResourceResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -4861,7 +4885,7 @@ declare namespace Lightsail {
   }
   export interface UpdateDomainEntryResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -4881,7 +4905,7 @@ declare namespace Lightsail {
   }
   export interface UpdateLoadBalancerAttributeResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -4897,7 +4921,7 @@ declare namespace Lightsail {
   }
   export interface UpdateRelationalDatabaseParametersResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }
@@ -4945,7 +4969,7 @@ declare namespace Lightsail {
   }
   export interface UpdateRelationalDatabaseResult {
     /**
-     * An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
   }

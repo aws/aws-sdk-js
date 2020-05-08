@@ -1,6 +1,17 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.671.0-->
+<!--LATEST=2.673.0-->
 <!--ENTRYINSERT-->
+
+## 2.673.0
+* feature: SageMaker: This release adds a new parameter (EnableInterContainerTrafficEncryption) to CreateProcessingJob API to allow for enabling inter-container traffic encryption on processing jobs.
+
+## 2.672.0
+* feature: CloudWatchLogs: Amazon CloudWatch Logs now offers the ability to interact with Logs Insights queries via the new PutQueryDefinition, DescribeQueryDefinitions, and DeleteQueryDefinition APIs.
+* feature: CodeBuild: Add COMMIT_MESSAGE enum for webhook filter types
+* feature: EC2: Amazon EC2 now adds warnings to identify issues when creating a launch template or launch template version.
+* feature: Lightsail: This release adds support for the following options in instance public ports: Specify source IP addresses, specify ICMP protocol like PING, and enable/disable the Lightsail browser-based SSH and RDP clients' access to your instance.
+* feature: Route53: Amazon Route 53 now supports the EU (Milan) Region (eu-south-1) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+* feature: SSM: This Patch Manager release supports creating patch baselines for Oracle Linux and Debian
 
 ## 2.671.0
 * feature: CodeStarconnections: Added support for tagging resources in AWS CodeStar Connections

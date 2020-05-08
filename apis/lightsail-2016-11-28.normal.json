@@ -232,7 +232,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Closes the public ports on a specific Amazon Lightsail instance.</p> <p>The <code>close instance public ports</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Closes ports for a specific Amazon Lightsail instance.</p> <p>The <code>CloseInstancePublicPorts</code> action supports tag-based access control via resource tags applied to the resource identified by <code>instanceName</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
     },
     "CopySnapshot": {
       "name": "CopySnapshot",
@@ -2314,7 +2314,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Returns the port states for a specific virtual private server, or <i>instance</i>.</p>"
+      "documentation": "<p>Returns the firewall port states for a specific Amazon Lightsail instance, the IP addresses allowed to connect to the instance through the ports, and the protocol.</p>"
     },
     "GetInstanceSnapshot": {
       "name": "GetInstanceSnapshot",
@@ -3461,7 +3461,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Adds public ports to an Amazon Lightsail instance.</p> <p>The <code>open instance public ports</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Opens ports for a specific Amazon Lightsail instance, and specifies the IP addresses allowed to connect to the instance through the ports, and the protocol.</p> <p>The <code>OpenInstancePublicPorts</code> action supports tag-based access control via resource tags applied to the resource identified by <code>instanceName</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
     },
     "PeerVpc": {
       "name": "PeerVpc",
@@ -3569,7 +3569,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Sets the specified open ports for an Amazon Lightsail instance, and closes all ports for every protocol not included in the current request.</p> <p>The <code>put instance public ports</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Opens ports for a specific Amazon Lightsail instance, and specifies the IP addresses allowed to connect to the instance through the ports, and the protocol. This action also closes all currently open ports that are not included in the request. Include all of the ports and the protocols you want to open in your <code>PutInstancePublicPorts</code>request. Or use the <code>OpenInstancePublicPorts</code> action to open ports without closing currently open ports.</p> <p>The <code>PutInstancePublicPorts</code> action supports tag-based access control via resource tags applied to the resource identified by <code>instanceName</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
     },
     "RebootInstance": {
       "name": "RebootInstance",
@@ -3714,7 +3714,7 @@
           "shape": "NotFoundException"
         }
       ],
-      "documentation": "<p>Sends a verification request to an email contact method to ensure it’s owned by the requester. SMS contact methods don’t need to be verified.</p> <p>A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications\">Notifications in Amazon Lightsail</a>.</p> <p>A verification request is sent to the contact method when you initially create it. Use this action to send another verification request if a previous verification request was deleted, or has expired.</p> <important> <p>Notifications are not sent to an email contact method until after it is verified, and confirmed as valid.</p> </important>"
+      "documentation": "<p>Sends a verification request to an email contact method to ensure it's owned by the requester. SMS contact methods don't need to be verified.</p> <p>A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications\">Notifications in Amazon Lightsail</a>.</p> <p>A verification request is sent to the contact method when you initially create it. Use this action to send another verification request if a previous verification request was deleted, or has expired.</p> <important> <p>Notifications are not sent to an email contact method until after it is verified, and confirmed as valid.</p> </important>"
     },
     "StartInstance": {
       "name": "StartInstance",
@@ -4276,11 +4276,11 @@
         },
         "treatMissingData": {
           "shape": "TreatMissingData",
-          "documentation": "<p>Specifies how the alarm handles missing data points.</p> <p>An alarm can treat missing data in the following ways:</p> <ul> <li> <p> <code>breaching</code> — Assume the missing data is not within the threshold. Missing data counts towards the number of times the metric is not within the threshold.</p> </li> <li> <p> <code>notBreaching</code> — Assume the missing data is within the threshold. Missing data does not count towards the number of times the metric is not within the threshold.</p> </li> <li> <p> <code>ignore</code> — Ignore the missing data. Maintains the current alarm state.</p> </li> <li> <p> <code>missing</code> — Missing data is treated as missing.</p> </li> </ul>"
+          "documentation": "<p>Specifies how the alarm handles missing data points.</p> <p>An alarm can treat missing data in the following ways:</p> <ul> <li> <p> <code>breaching</code> - Assume the missing data is not within the threshold. Missing data counts towards the number of times the metric is not within the threshold.</p> </li> <li> <p> <code>notBreaching</code> - Assume the missing data is within the threshold. Missing data does not count towards the number of times the metric is not within the threshold.</p> </li> <li> <p> <code>ignore</code> - Ignore the missing data. Maintains the current alarm state.</p> </li> <li> <p> <code>missing</code> - Missing data is treated as missing.</p> </li> </ul>"
         },
         "statistic": {
           "shape": "MetricStatistic",
-          "documentation": "<p>The statistic for the metric associated with the alarm.</p> <p>The following statistics are available:</p> <ul> <li> <p> <code>Minimum</code> — The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.</p> </li> <li> <p> <code>Maximum</code> — The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.</p> </li> <li> <p> <code>Sum</code> — All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.</p> </li> <li> <p> <code>Average</code> — The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.</p> </li> <li> <p> <code>SampleCount</code> — The count, or number, of data points used for the statistical calculation.</p> </li> </ul>"
+          "documentation": "<p>The statistic for the metric associated with the alarm.</p> <p>The following statistics are available:</p> <ul> <li> <p> <code>Minimum</code> - The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.</p> </li> <li> <p> <code>Maximum</code> - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.</p> </li> <li> <p> <code>Sum</code> - All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.</p> </li> <li> <p> <code>Average</code> - The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.</p> </li> <li> <p> <code>SampleCount</code> - The count, or number, of data points used for the statistical calculation.</p> </li> </ul>"
         },
         "metricName": {
           "shape": "MetricName",
@@ -4288,7 +4288,7 @@
         },
         "state": {
           "shape": "AlarmState",
-          "documentation": "<p>The current state of the alarm.</p> <p>An alarm has the following possible states:</p> <ul> <li> <p> <code>ALARM</code> — The metric is outside of the defined threshold.</p> </li> <li> <p> <code>INSUFFICIENT_DATA</code> — The alarm has just started, the metric is not available, or not enough data is available for the metric to determine the alarm state.</p> </li> <li> <p> <code>OK</code> — The metric is within the defined threshold.</p> </li> </ul>"
+          "documentation": "<p>The current state of the alarm.</p> <p>An alarm has the following possible states:</p> <ul> <li> <p> <code>ALARM</code> - The metric is outside of the defined threshold.</p> </li> <li> <p> <code>INSUFFICIENT_DATA</code> - The alarm has just started, the metric is not available, or not enough data is available for the metric to determine the alarm state.</p> </li> <li> <p> <code>OK</code> - The metric is within the defined threshold.</p> </li> </ul>"
         },
         "unit": {
           "shape": "MetricUnit",
@@ -4340,7 +4340,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -4371,7 +4371,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -4397,7 +4397,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -4423,7 +4423,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p> <p>These SSL/TLS certificates are only usable by Lightsail load balancers. You can't get the certificate and use it for another purpose.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p> <p>These SSL/TLS certificates are only usable by Lightsail load balancers. You can't get the certificate and use it for another purpose.</p>"
         }
       }
     },
@@ -4449,7 +4449,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -4688,11 +4688,11 @@
       "members": {
         "portInfo": {
           "shape": "PortInfo",
-          "documentation": "<p>Information about the public port you are trying to close.</p>"
+          "documentation": "<p>An object to describe the ports to close for the specified instance.</p>"
         },
         "instanceName": {
           "shape": "ResourceName",
-          "documentation": "<p>The name of the instance on which you're attempting to close the public ports.</p>"
+          "documentation": "<p>The name of the instance for which to close ports.</p>"
         }
       }
     },
@@ -4701,7 +4701,7 @@
       "members": {
         "operation": {
           "shape": "Operation",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An object that describes the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -4797,7 +4797,7 @@
         },
         "status": {
           "shape": "ContactMethodStatus",
-          "documentation": "<p>The current status of the contact method.</p> <p>A contact method has the following possible status:</p> <ul> <li> <p> <code>PendingVerification</code> — The contact method has not yet been verified, and the verification has not yet expired.</p> </li> <li> <p> <code>Valid</code> — The contact method has been verified.</p> </li> <li> <p> <code>InValid</code> — An attempt was made to verify the contact method, but the verification has expired.</p> </li> </ul>"
+          "documentation": "<p>The current status of the contact method.</p> <p>A contact method has the following possible status:</p> <ul> <li> <p> <code>PendingVerification</code> - The contact method has not yet been verified, and the verification has not yet expired.</p> </li> <li> <p> <code>Valid</code> - The contact method has been verified.</p> </li> <li> <p> <code>InValid</code> - An attempt was made to verify the contact method, but the verification has expired.</p> </li> </ul>"
         },
         "protocol": {
           "shape": "ContactProtocol",
@@ -4900,7 +4900,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -4921,7 +4921,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -4938,7 +4938,7 @@
         },
         "contactEndpoint": {
           "shape": "StringMax256",
-          "documentation": "<p>The destination of the contact method, such as an email address or a mobile phone number.</p> <p>Use the E.164 format when specifying a mobile phone number. E.164 is a standard for the phone number structure used for international telecommunication. Phone numbers that follow this format can have a maximum of 15 digits, and they are prefixed with the plus character (+) and the country code. For example, a U.S. phone number in E.164 format would be specified as +1XXX5550100. For more information, see <a href=\"https://en.wikipedia.org/wiki/E.164\">E.164</a> in Wikipedia.</p>"
+          "documentation": "<p>The destination of the contact method, such as an email address or a mobile phone number.</p> <p>Use the E.164 format when specifying a mobile phone number. E.164 is a standard for the phone number structure used for international telecommunication. Phone numbers that follow this format can have a maximum of 15 digits, and they are prefixed with the plus character (+) and the country code. For example, a U.S. phone number in E.164 format would be specified as +1XXX5550100. For more information, see <a href=\"https://en.wikipedia.org/wiki/E.164\">E.164</a> on <i>Wikipedia</i>.</p>"
         }
       }
     },
@@ -4947,7 +4947,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5002,7 +5002,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5041,7 +5041,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5074,7 +5074,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5100,7 +5100,7 @@
       "members": {
         "operation": {
           "shape": "Operation",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5125,7 +5125,7 @@
       "members": {
         "operation": {
           "shape": "Operation",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5155,7 +5155,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5222,7 +5222,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5279,7 +5279,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5316,7 +5316,7 @@
         },
         "operation": {
           "shape": "Operation",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5362,7 +5362,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5401,7 +5401,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5454,7 +5454,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5519,7 +5519,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5549,7 +5549,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5570,7 +5570,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5596,7 +5596,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5617,7 +5617,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5642,7 +5642,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5663,7 +5663,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5689,7 +5689,7 @@
       "members": {
         "operation": {
           "shape": "Operation",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5710,7 +5710,7 @@
       "members": {
         "operation": {
           "shape": "Operation",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5735,7 +5735,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5756,7 +5756,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5777,7 +5777,7 @@
       "members": {
         "operation": {
           "shape": "Operation",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5798,7 +5798,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5819,7 +5819,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5849,7 +5849,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5878,7 +5878,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5899,7 +5899,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5934,7 +5934,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5960,7 +5960,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5981,7 +5981,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -6007,7 +6007,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -6386,7 +6386,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -6496,7 +6496,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -6867,7 +6867,7 @@
         },
         "metricName": {
           "shape": "InstanceMetricName",
-          "documentation": "<p>The metric for which you want to return information.</p> <p>Valid instance metric names are listed below, along with the most useful <code>statistics</code> to include in your request, and the published <code>unit</code> value.</p> <ul> <li> <p> <b> <code>CPUUtilization</code> </b> — The percentage of allocated compute units that are currently in use on the instance. This metric identifies the processing power to run the applications on the instance. Tools in your operating system can show a lower percentage than Lightsail when the instance is not allocated a full processor core.</p> <p> <code>Statistics</code>: The most useful statistics are <code>Maximum</code> and <code>Average</code>.</p> <p> <code>Unit</code>: The published unit is <code>Percent</code>.</p> </li> <li> <p> <b> <code>NetworkIn</code> </b> — The number of bytes received on all network interfaces by the instance. This metric identifies the volume of incoming network traffic to the instance. The number reported is the number of bytes received during the period. Because this metric is reported in 5-minute intervals, divide the reported number by 300 to find Bytes/second.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Bytes</code>.</p> </li> <li> <p> <b> <code>NetworkOut</code> </b> — The number of bytes sent out on all network interfaces by the instance. This metric identifies the volume of outgoing network traffic from the instance. The number reported is the number of bytes sent during the period. Because this metric is reported in 5-minute intervals, divide the reported number by 300 to find Bytes/second.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Bytes</code>.</p> </li> <li> <p> <b> <code>StatusCheckFailed</code> </b> — Reports whether the instance passed or failed both the instance status check and the system status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>StatusCheckFailed_Instance</code> </b> — Reports whether the instance passed or failed the instance status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>StatusCheckFailed_System</code> </b> — Reports whether the instance passed or failed the system status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> </ul>"
+          "documentation": "<p>The metric for which you want to return information.</p> <p>Valid instance metric names are listed below, along with the most useful <code>statistics</code> to include in your request, and the published <code>unit</code> value.</p> <ul> <li> <p> <b> <code>CPUUtilization</code> </b> - The percentage of allocated compute units that are currently in use on the instance. This metric identifies the processing power to run the applications on the instance. Tools in your operating system can show a lower percentage than Lightsail when the instance is not allocated a full processor core.</p> <p> <code>Statistics</code>: The most useful statistics are <code>Maximum</code> and <code>Average</code>.</p> <p> <code>Unit</code>: The published unit is <code>Percent</code>.</p> </li> <li> <p> <b> <code>NetworkIn</code> </b> - The number of bytes received on all network interfaces by the instance. This metric identifies the volume of incoming network traffic to the instance. The number reported is the number of bytes received during the period. Because this metric is reported in 5-minute intervals, divide the reported number by 300 to find Bytes/second.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Bytes</code>.</p> </li> <li> <p> <b> <code>NetworkOut</code> </b> - The number of bytes sent out on all network interfaces by the instance. This metric identifies the volume of outgoing network traffic from the instance. The number reported is the number of bytes sent during the period. Because this metric is reported in 5-minute intervals, divide the reported number by 300 to find Bytes/second.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Bytes</code>.</p> </li> <li> <p> <b> <code>StatusCheckFailed</code> </b> - Reports whether the instance passed or failed both the instance status check and the system status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>StatusCheckFailed_Instance</code> </b> - Reports whether the instance passed or failed the instance status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>StatusCheckFailed_System</code> </b> - Reports whether the instance passed or failed the system status check. This metric can be either 0 (passed) or 1 (failed). This metric data is available in 1-minute (60 seconds) granularity.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> </ul>"
         },
         "period": {
           "shape": "MetricPeriod",
@@ -6883,11 +6883,11 @@
         },
         "unit": {
           "shape": "MetricUnit",
-          "documentation": "<p>The unit for the metric data request. Valid units depend on the metric data being required. For the valid units with each available metric, see the <code>metricName</code> parameter.</p>"
+          "documentation": "<p>The unit for the metric data request. Valid units depend on the metric data being requested. For the valid units to specify with each available metric, see the <code>metricName</code> parameter.</p>"
         },
         "statistics": {
           "shape": "MetricStatisticList",
-          "documentation": "<p>The statistic for the metric.</p> <p>The following statistics are available:</p> <ul> <li> <p> <code>Minimum</code> — The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.</p> </li> <li> <p> <code>Maximum</code> — The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.</p> </li> <li> <p> <code>Sum</code> — All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.</p> </li> <li> <p> <code>Average</code> — The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.</p> </li> <li> <p> <code>SampleCount</code> — The count, or number, of data points used for the statistical calculation.</p> </li> </ul>"
+          "documentation": "<p>The statistic for the metric.</p> <p>The following statistics are available:</p> <ul> <li> <p> <code>Minimum</code> - The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.</p> </li> <li> <p> <code>Maximum</code> - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.</p> </li> <li> <p> <code>Sum</code> - All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.</p> </li> <li> <p> <code>Average</code> - The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.</p> </li> <li> <p> <code>SampleCount</code> - The count, or number, of data points used for the statistical calculation.</p> </li> </ul>"
         }
       }
     },
@@ -6912,7 +6912,7 @@
       "members": {
         "instanceName": {
           "shape": "ResourceName",
-          "documentation": "<p>The name of the instance.</p>"
+          "documentation": "<p>The name of the instance for which to return firewall port states.</p>"
         }
       }
     },
@@ -6921,7 +6921,7 @@
       "members": {
         "portStates": {
           "shape": "InstancePortStateList",
-          "documentation": "<p>Information about the port states resulting from your request.</p>"
+          "documentation": "<p>An array of objects that describe the firewall port states for the specified instance.</p>"
         }
       }
     },
@@ -7093,7 +7093,7 @@
         },
         "metricName": {
           "shape": "LoadBalancerMetricName",
-          "documentation": "<p>The metric for which you want to return information.</p> <p>Valid load balancer metric names are listed below, along with the most useful <code>statistics</code> to include in your request, and the published <code>unit</code> value.</p> <ul> <li> <p> <b> <code>ClientTLSNegotiationErrorCount</code> </b> — The number of TLS connections initiated by the client that did not establish a session with the load balancer due to a TLS error generated by the load balancer. Possible causes include a mismatch of ciphers or protocols.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HealthyHostCount</code> </b> — The number of target instances that are considered healthy.</p> <p> <code>Statistics</code>: The most useful statistic are <code>Average</code>, <code>Minimum</code>, and <code>Maximum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_2XX_Count</code> </b> — The number of HTTP 2XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_3XX_Count</code> </b> — The number of HTTP 3XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_4XX_Count</code> </b> — The number of HTTP 4XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_5XX_Count</code> </b> — The number of HTTP 5XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HTTPCode_LB_4XX_Count</code> </b> — The number of HTTP 4XX client error codes that originated from the load balancer. Client errors are generated when requests are malformed or incomplete. These requests were not received by the target instance. This count does not include response codes generated by the target instances.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HTTPCode_LB_5XX_Count</code> </b> — The number of HTTP 5XX server error codes that originated from the load balancer. This does not include any response codes generated by the target instance. This metric is reported if there are no healthy instances attached to the load balancer, or if the request rate exceeds the capacity of the instances (spillover) or the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>InstanceResponseTime</code> </b> — The time elapsed, in seconds, after the request leaves the load balancer until a response from the target instance is received.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p> <p> <code>Unit</code>: The published unit is <code>Seconds</code>.</p> </li> <li> <p> <b> <code>RejectedConnectionCount</code> </b> — The number of connections that were rejected because the load balancer had reached its maximum number of connections.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>RequestCount</code> </b> — The number of requests processed over IPv4. This count includes only the requests with a response generated by a target instance of the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>UnhealthyHostCount</code> </b> — The number of target instances that are considered unhealthy.</p> <p> <code>Statistics</code>: The most useful statistic are <code>Average</code>, <code>Minimum</code>, and <code>Maximum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> </ul>"
+          "documentation": "<p>The metric for which you want to return information.</p> <p>Valid load balancer metric names are listed below, along with the most useful <code>statistics</code> to include in your request, and the published <code>unit</code> value.</p> <ul> <li> <p> <b> <code>ClientTLSNegotiationErrorCount</code> </b> - The number of TLS connections initiated by the client that did not establish a session with the load balancer due to a TLS error generated by the load balancer. Possible causes include a mismatch of ciphers or protocols.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HealthyHostCount</code> </b> - The number of target instances that are considered healthy.</p> <p> <code>Statistics</code>: The most useful statistic are <code>Average</code>, <code>Minimum</code>, and <code>Maximum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_2XX_Count</code> </b> - The number of HTTP 2XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_3XX_Count</code> </b> - The number of HTTP 3XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_4XX_Count</code> </b> - The number of HTTP 4XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HTTPCode_Instance_5XX_Count</code> </b> - The number of HTTP 5XX response codes generated by the target instances. This does not include any response codes generated by the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HTTPCode_LB_4XX_Count</code> </b> - The number of HTTP 4XX client error codes that originated from the load balancer. Client errors are generated when requests are malformed or incomplete. These requests were not received by the target instance. This count does not include response codes generated by the target instances.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>HTTPCode_LB_5XX_Count</code> </b> - The number of HTTP 5XX server error codes that originated from the load balancer. This does not include any response codes generated by the target instance. This metric is reported if there are no healthy instances attached to the load balancer, or if the request rate exceeds the capacity of the instances (spillover) or the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>InstanceResponseTime</code> </b> - The time elapsed, in seconds, after the request leaves the load balancer until a response from the target instance is received.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p> <p> <code>Unit</code>: The published unit is <code>Seconds</code>.</p> </li> <li> <p> <b> <code>RejectedConnectionCount</code> </b> - The number of connections that were rejected because the load balancer had reached its maximum number of connections.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>RequestCount</code> </b> - The number of requests processed over IPv4. This count includes only the requests with a response generated by a target instance of the load balancer.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>. Note that <code>Minimum</code>, <code>Maximum</code>, and <code>Average</code> all return <code>1</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>UnhealthyHostCount</code> </b> - The number of target instances that are considered unhealthy.</p> <p> <code>Statistics</code>: The most useful statistic are <code>Average</code>, <code>Minimum</code>, and <code>Maximum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> </ul>"
         },
         "period": {
           "shape": "MetricPeriod",
@@ -7113,7 +7113,7 @@
         },
         "statistics": {
           "shape": "MetricStatisticList",
-          "documentation": "<p>The statistic for the metric.</p> <p>The following statistics are available:</p> <ul> <li> <p> <code>Minimum</code> — The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.</p> </li> <li> <p> <code>Maximum</code> — The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.</p> </li> <li> <p> <code>Sum</code> — All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.</p> </li> <li> <p> <code>Average</code> — The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.</p> </li> <li> <p> <code>SampleCount</code> — The count, or number, of data points used for the statistical calculation.</p> </li> </ul>"
+          "documentation": "<p>The statistic for the metric.</p> <p>The following statistics are available:</p> <ul> <li> <p> <code>Minimum</code> - The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.</p> </li> <li> <p> <code>Maximum</code> - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.</p> </li> <li> <p> <code>Sum</code> - All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.</p> </li> <li> <p> <code>Average</code> - The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.</p> </li> <li> <p> <code>SampleCount</code> - The count, or number, of data points used for the statistical calculation.</p> </li> </ul>"
         }
       }
     },
@@ -7211,7 +7211,7 @@
       "members": {
         "operation": {
           "shape": "Operation",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -7236,7 +7236,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         },
         "nextPageCount": {
           "shape": "string",
@@ -7263,7 +7263,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         },
         "nextPageToken": {
           "shape": "string",
@@ -7488,7 +7488,7 @@
         },
         "metricName": {
           "shape": "RelationalDatabaseMetricName",
-          "documentation": "<p>The metric for which you want to return information.</p> <p>Valid relational database metric names are listed below, along with the most useful <code>statistics</code> to include in your request, and the published <code>unit</code> value. All relational database metric data is available in 1-minute (60 seconds) granularity.</p> <ul> <li> <p> <b> <code>CPUUtilization</code> </b> — The percentage of CPU utilization currently in use on the database.</p> <p> <code>Statistics</code>: The most useful statistics are <code>Maximum</code> and <code>Average</code>.</p> <p> <code>Unit</code>: The published unit is <code>Percent</code>.</p> </li> <li> <p> <b> <code>DatabaseConnections</code> </b> — The number of database connections in use.</p> <p> <code>Statistics</code>: The most useful statistics are <code>Maximum</code> and <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>DiskQueueDepth</code> </b> — The number of outstanding IOs (read/write requests) that are waiting to access the disk.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>FreeStorageSpace</code> </b> — The amount of available storage space.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Bytes</code>.</p> </li> <li> <p> <b> <code>NetworkReceiveThroughput</code> </b> — The incoming (Receive) network traffic on the database, including both customer database traffic and AWS traffic used for monitoring and replication.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p> <p> <code>Unit</code>: The published unit is <code>Bytes/Second</code>.</p> </li> <li> <p> <b> <code>NetworkTransmitThroughput</code> </b> — The outgoing (Transmit) network traffic on the database, including both customer database traffic and AWS traffic used for monitoring and replication.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p> <p> <code>Unit</code>: The published unit is <code>Bytes/Second</code>.</p> </li> </ul>"
+          "documentation": "<p>The metric for which you want to return information.</p> <p>Valid relational database metric names are listed below, along with the most useful <code>statistics</code> to include in your request, and the published <code>unit</code> value. All relational database metric data is available in 1-minute (60 seconds) granularity.</p> <ul> <li> <p> <b> <code>CPUUtilization</code> </b> - The percentage of CPU utilization currently in use on the database.</p> <p> <code>Statistics</code>: The most useful statistics are <code>Maximum</code> and <code>Average</code>.</p> <p> <code>Unit</code>: The published unit is <code>Percent</code>.</p> </li> <li> <p> <b> <code>DatabaseConnections</code> </b> - The number of database connections in use.</p> <p> <code>Statistics</code>: The most useful statistics are <code>Maximum</code> and <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>DiskQueueDepth</code> </b> - The number of outstanding IOs (read/write requests) that are waiting to access the disk.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Count</code>.</p> </li> <li> <p> <b> <code>FreeStorageSpace</code> </b> - The amount of available storage space.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>Bytes</code>.</p> </li> <li> <p> <b> <code>NetworkReceiveThroughput</code> </b> - The incoming (Receive) network traffic on the database, including both customer database traffic and AWS traffic used for monitoring and replication.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p> <p> <code>Unit</code>: The published unit is <code>Bytes/Second</code>.</p> </li> <li> <p> <b> <code>NetworkTransmitThroughput</code> </b> - The outgoing (Transmit) network traffic on the database, including both customer database traffic and AWS traffic used for monitoring and replication.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p> <p> <code>Unit</code>: The published unit is <code>Bytes/Second</code>.</p> </li> </ul>"
         },
         "period": {
           "shape": "MetricPeriod",
@@ -7508,7 +7508,7 @@
         },
         "statistics": {
           "shape": "MetricStatisticList",
-          "documentation": "<p>The statistic for the metric.</p> <p>The following statistics are available:</p> <ul> <li> <p> <code>Minimum</code> — The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.</p> </li> <li> <p> <code>Maximum</code> — The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.</p> </li> <li> <p> <code>Sum</code> — All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.</p> </li> <li> <p> <code>Average</code> — The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.</p> </li> <li> <p> <code>SampleCount</code> — The count, or number, of data points used for the statistical calculation.</p> </li> </ul>"
+          "documentation": "<p>The statistic for the metric.</p> <p>The following statistics are available:</p> <ul> <li> <p> <code>Minimum</code> - The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.</p> </li> <li> <p> <code>Maximum</code> - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.</p> </li> <li> <p> <code>Sum</code> - All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.</p> </li> <li> <p> <code>Average</code> - The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.</p> </li> <li> <p> <code>SampleCount</code> - The count, or number, of data points used for the statistical calculation.</p> </li> </ul>"
         }
       }
     },
@@ -7745,7 +7745,7 @@
       "members": {
         "operation": {
           "shape": "Operation",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -7907,7 +7907,7 @@
         },
         "portInfoSource": {
           "shape": "PortInfoSourceType",
-          "documentation": "<p>The port configuration to use for the new Amazon EC2 instance.</p> <p>The following configuration options are available:</p> <ul> <li> <p>DEFAULT — Use the default firewall settings from the image.</p> </li> <li> <p>INSTANCE — Use the firewall settings from the source Lightsail instance.</p> </li> <li> <p>NONE — Default to Amazon EC2.</p> </li> <li> <p>CLOSED — All ports closed.</p> </li> </ul>"
+          "documentation": "<p>The port configuration to use for the new Amazon EC2 instance.</p> <p>The following configuration options are available:</p> <ul> <li> <p> <code>DEFAULT</code> - Use the default firewall settings from the Lightsail instance blueprint.</p> </li> <li> <p> <code>INSTANCE</code> - Use the configured firewall settings from the source Lightsail instance.</p> </li> <li> <p> <code>NONE</code> - Use the default Amazon EC2 security group.</p> </li> <li> <p> <code>CLOSED</code> - All ports closed.</p> </li> </ul> <note> <p>If you configured <code>lightsail-connect</code> as a <code>cidrListAliases</code> on your instance, or if you chose to allow the Lightsail browser-based SSH or RDP clients to connect to your instance, that configuration is not carried over to your new Amazon EC2 instance.</p> </note>"
         },
         "userData": {
           "shape": "string",
@@ -8044,19 +8044,19 @@
       "members": {
         "fromPort": {
           "shape": "Port",
-          "documentation": "<p>The first port in the range.</p>"
+          "documentation": "<p>The first port in a range of open ports on an instance.</p> <p>Allowed ports:</p> <ul> <li> <p>TCP and UDP - <code>0</code> to <code>65535</code> </p> </li> <li> <p>ICMP - <code>8</code> (to configure Ping)</p> <note> <p>Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the <code>fromPort</code> parameter as <code>8</code>, and the <code>toPort</code> parameter as <code>-1</code>.</p> </note> </li> </ul>"
         },
         "toPort": {
           "shape": "Port",
-          "documentation": "<p>The last port in the range.</p>"
+          "documentation": "<p>The last port in a range of open ports on an instance.</p> <p>Allowed ports:</p> <ul> <li> <p>TCP and UDP - <code>0</code> to <code>65535</code> </p> </li> <li> <p>ICMP - <code>-1</code> (to configure Ping)</p> <note> <p>Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the <code>fromPort</code> parameter as <code>8</code>, and the <code>toPort</code> parameter as <code>-1</code>.</p> </note> </li> </ul>"
         },
         "protocol": {
           "shape": "NetworkProtocol",
-          "documentation": "<p>The protocol being used. Can be one of the following.</p> <ul> <li> <p> <code>tcp</code> - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn't require reliable data stream service, use UDP instead.</p> </li> <li> <p> <code>all</code> - All transport layer protocol types. For more general information, see <a href=\"https://en.wikipedia.org/wiki/Transport_layer\">Transport layer</a> on Wikipedia.</p> </li> <li> <p> <code>udp</code> - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don't require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.</p> </li> </ul>"
+          "documentation": "<p>The IP protocol name.</p> <p>The name can be one of the following:</p> <ul> <li> <p> <code>tcp</code> - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn't require reliable data stream service, use UDP instead.</p> </li> <li> <p> <code>all</code> - All transport layer protocol types. For more general information, see <a href=\"https://en.wikipedia.org/wiki/Transport_layer\">Transport layer</a> on <i>Wikipedia</i>.</p> </li> <li> <p> <code>udp</code> - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don't require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.</p> </li> <li> <p> <code>icmp</code> - Internet Control Message Protocol (ICMP) is used to send error messages and operational information indicating success or failure when communicating with an instance. For example, an error is indicated when an instance could not be reached.</p> <note> <p>Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the <code>fromPort</code> parameter as <code>8</code>, and the <code>toPort</code> parameter as <code>-1</code>.</p> </note> </li> </ul>"
         },
         "accessFrom": {
           "shape": "string",
-          "documentation": "<p>The location from which access is allowed (e.g., <code>Anywhere (0.0.0.0/0)</code>).</p>"
+          "documentation": "<p>The location from which access is allowed. For example, <code>Anywhere (0.0.0.0/0)</code>, or <code>Custom</code> if a specific IP address or range of IP addresses is allowed.</p>"
         },
         "accessType": {
           "shape": "PortAccessType",
@@ -8064,14 +8064,22 @@
         },
         "commonName": {
           "shape": "string",
-          "documentation": "<p>The common name.</p>"
+          "documentation": "<p>The common name of the port information.</p>"
         },
         "accessDirection": {
           "shape": "AccessDirection",
-          "documentation": "<p>The access direction (<code>inbound</code> or <code>outbound</code>).</p>"
+          "documentation": "<p>The access direction (<code>inbound</code> or <code>outbound</code>).</p> <note> <p>Lightsail currently supports only <code>inbound</code> access direction.</p> </note>"
+        },
+        "cidrs": {
+          "shape": "StringList",
+          "documentation": "<p>The IP address, or range of IP addresses in CIDR notation, that are allowed to connect to an instance through the ports, and the protocol. Lightsail supports IPv4 addresses.</p> <p>For more information about CIDR block notation, see <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation\">Classless Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>"
+        },
+        "cidrListAliases": {
+          "shape": "StringList",
+          "documentation": "<p>An alias that defines access for a preconfigured range of IP addresses.</p> <p>The only alias currently supported is <code>lightsail-connect</code>, which allows IP addresses of the browser-based RDP/SSH client in the Lightsail console to connect to your instance.</p>"
         }
       },
-      "documentation": "<p>Describes information about the instance ports.</p>"
+      "documentation": "<p>Describes information about ports for an Amazon Lightsail instance.</p>"
     },
     "InstancePortInfoList": {
       "type": "list",
@@ -8084,22 +8092,30 @@
       "members": {
         "fromPort": {
           "shape": "Port",
-          "documentation": "<p>The first port in the range.</p>"
+          "documentation": "<p>The first port in a range of open ports on an instance.</p> <p>Allowed ports:</p> <ul> <li> <p>TCP and UDP - <code>0</code> to <code>65535</code> </p> </li> <li> <p>ICMP - <code>8</code> (to configure Ping)</p> <note> <p>Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the <code>fromPort</code> parameter as <code>8</code>, and the <code>toPort</code> parameter as <code>-1</code>.</p> </note> </li> </ul>"
         },
         "toPort": {
           "shape": "Port",
-          "documentation": "<p>The last port in the range.</p>"
+          "documentation": "<p>The last port in a range of open ports on an instance.</p> <p>Allowed ports:</p> <ul> <li> <p>TCP and UDP - <code>0</code> to <code>65535</code> </p> </li> <li> <p>ICMP - <code>-1</code> (to configure Ping)</p> <note> <p>Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the <code>fromPort</code> parameter as <code>8</code>, and the <code>toPort</code> parameter as <code>-1</code>.</p> </note> </li> </ul>"
         },
         "protocol": {
           "shape": "NetworkProtocol",
-          "documentation": "<p>The protocol being used. Can be one of the following.</p> <ul> <li> <p> <code>tcp</code> - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn't require reliable data stream service, use UDP instead.</p> </li> <li> <p> <code>all</code> - All transport layer protocol types. For more general information, see <a href=\"https://en.wikipedia.org/wiki/Transport_layer\">Transport layer</a> on Wikipedia.</p> </li> <li> <p> <code>udp</code> - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don't require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.</p> </li> </ul>"
+          "documentation": "<p>The IP protocol name.</p> <p>The name can be one of the following:</p> <ul> <li> <p> <code>tcp</code> - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn't require reliable data stream service, use UDP instead.</p> </li> <li> <p> <code>all</code> - All transport layer protocol types. For more general information, see <a href=\"https://en.wikipedia.org/wiki/Transport_layer\">Transport layer</a> on <i>Wikipedia</i>.</p> </li> <li> <p> <code>udp</code> - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don't require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.</p> </li> <li> <p> <code>icmp</code> - Internet Control Message Protocol (ICMP) is used to send error messages and operational information indicating success or failure when communicating with an instance. For example, an error is indicated when an instance could not be reached.</p> <note> <p>Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the <code>fromPort</code> parameter as <code>8</code>, and the <code>toPort</code> parameter as <code>-1</code>.</p> </note> </li> </ul>"
         },
         "state": {
           "shape": "PortState",
-          "documentation": "<p>Specifies whether the instance port is <code>open</code> or <code>closed</code>.</p>"
+          "documentation": "<p>Specifies whether the instance port is <code>open</code> or <code>closed</code>.</p> <note> <p>The port state for Lightsail instances is always <code>open</code>.</p> </note>"
+        },
+        "cidrs": {
+          "shape": "StringList",
+          "documentation": "<p>The IP address, or range of IP addresses in CIDR notation, that are allowed to connect to an instance through the ports, and the protocol. Lightsail supports IPv4 addresses.</p> <p>For more information about CIDR block notation, see <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation\">Classless Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>"
+        },
+        "cidrListAliases": {
+          "shape": "StringList",
+          "documentation": "<p>An alias that defines access for a preconfigured range of IP addresses.</p> <p>The only alias currently supported is <code>lightsail-connect</code>, which allows IP addresses of the browser-based RDP/SSH client in the Lightsail console to connect to your instance.</p>"
         }
       },
-      "documentation": "<p>Describes the port state.</p>"
+      "documentation": "<p>Describes open ports on an instance, the IP addresses allowed to connect to the instance through the ports, and the protocol.</p>"
     },
     "InstancePortStateList": {
       "type": "list",
@@ -8845,7 +8861,8 @@
       "enum": [
         "tcp",
         "all",
-        "udp"
+        "udp",
+        "icmp"
       ]
     },
     "NonEmptyString": {
@@ -8867,11 +8884,11 @@
       "members": {
         "portInfo": {
           "shape": "PortInfo",
-          "documentation": "<p>An array of key-value pairs containing information about the port mappings.</p>"
+          "documentation": "<p>An object to describe the ports to open for the specified instance.</p>"
         },
         "instanceName": {
           "shape": "ResourceName",
-          "documentation": "<p>The name of the instance for which you want to open the public ports.</p>"
+          "documentation": "<p>The name of the instance for which to open ports.</p>"
         }
       }
     },
@@ -8880,7 +8897,7 @@
       "members": {
         "operation": {
           "shape": "Operation",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -9037,7 +9054,7 @@
       "members": {
         "operation": {
           "shape": "Operation",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -9086,7 +9103,7 @@
     "Port": {
       "type": "integer",
       "max": 65535,
-      "min": 0
+      "min": -1
     },
     "PortAccessType": {
       "type": "string",
@@ -9100,18 +9117,26 @@
       "members": {
         "fromPort": {
           "shape": "Port",
-          "documentation": "<p>The first port in the range.</p>"
+          "documentation": "<p>The first port in a range of open ports on an instance.</p> <p>Allowed ports:</p> <ul> <li> <p>TCP and UDP - <code>0</code> to <code>65535</code> </p> </li> <li> <p>ICMP - <code>8</code> (to configure Ping)</p> <note> <p>Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the <code>fromPort</code> parameter as <code>8</code>, and the <code>toPort</code> parameter as <code>-1</code>.</p> </note> </li> </ul>"
         },
         "toPort": {
           "shape": "Port",
-          "documentation": "<p>The last port in the range.</p>"
+          "documentation": "<p>The last port in a range of open ports on an instance.</p> <p>Allowed ports:</p> <ul> <li> <p>TCP and UDP - <code>0</code> to <code>65535</code> </p> </li> <li> <p>ICMP - <code>-1</code> (to configure Ping)</p> <note> <p>Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the <code>fromPort</code> parameter as <code>8</code>, and the <code>toPort</code> parameter as <code>-1</code>.</p> </note> </li> </ul>"
         },
         "protocol": {
           "shape": "NetworkProtocol",
-          "documentation": "<p>The protocol. </p>"
+          "documentation": "<p>The IP protocol name.</p> <p>The name can be one of the following:</p> <ul> <li> <p> <code>tcp</code> - Transmission Control Protocol (TCP) provides reliable, ordered, and error-checked delivery of streamed data between applications running on hosts communicating by an IP network. If you have an application that doesn't require reliable data stream service, use UDP instead.</p> </li> <li> <p> <code>all</code> - All transport layer protocol types. For more general information, see <a href=\"https://en.wikipedia.org/wiki/Transport_layer\">Transport layer</a> on <i>Wikipedia</i>.</p> </li> <li> <p> <code>udp</code> - With User Datagram Protocol (UDP), computer applications can send messages (or datagrams) to other hosts on an Internet Protocol (IP) network. Prior communications are not required to set up transmission channels or data paths. Applications that don't require reliable data stream service can use UDP, which provides a connectionless datagram service that emphasizes reduced latency over reliability. If you do require reliable data stream service, use TCP instead.</p> </li> <li> <p> <code>icmp</code> - Internet Control Message Protocol (ICMP) is used to send error messages and operational information indicating success or failure when communicating with an instance. For example, an error is indicated when an instance could not be reached.</p> <note> <p>Ping is the only communication supported through the ICMP protocol in Lightsail. To configure ping, specify the <code>fromPort</code> parameter as <code>8</code>, and the <code>toPort</code> parameter as <code>-1</code>.</p> </note> </li> </ul>"
+        },
+        "cidrs": {
+          "shape": "StringList",
+          "documentation": "<p>The IP address, or range of IP addresses in CIDR notation, that are allowed to connect to an instance through the ports, and the protocol. Lightsail supports IPv4 addresses.</p> <p>Examples:</p> <ul> <li> <p>To allow the IP address <code>192.0.2.44</code>, specify <code>192.0.2.44</code> or <code>192.0.2.44/32</code>. </p> </li> <li> <p>To allow the IP addresses <code>192.0.2.0</code> to <code>192.0.2.255</code>, specify <code>192.0.2.0/24</code>.</p> </li> </ul> <p>For more information about CIDR block notation, see <a href=\"https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation\">Classless Inter-Domain Routing</a> on <i>Wikipedia</i>.</p>"
+        },
+        "cidrListAliases": {
+          "shape": "StringList",
+          "documentation": "<p>An alias that defines access for a preconfigured range of IP addresses.</p> <p>The only alias currently supported is <code>lightsail-connect</code>, which allows IP addresses of the browser-based RDP/SSH client in the Lightsail console to connect to your instance.</p>"
         }
       },
-      "documentation": "<p>Describes information about the ports on your virtual private server (or <i>instance</i>).</p>"
+      "documentation": "<p>Describes ports to open on an instance, the IP addresses allowed to connect to the instance through the ports, and the protocol.</p>"
     },
     "PortInfoList": {
       "type": "list",
@@ -9182,7 +9207,7 @@
         },
         "treatMissingData": {
           "shape": "TreatMissingData",
-          "documentation": "<p>Sets how this alarm will handle missing data points.</p> <p>An alarm can treat missing data in the following ways:</p> <ul> <li> <p> <code>breaching</code> — Assume the missing data is not within the threshold. Missing data counts towards the number of times the metric is not within the threshold.</p> </li> <li> <p> <code>notBreaching</code> — Assume the missing data is within the threshold. Missing data does not count towards the number of times the metric is not within the threshold.</p> </li> <li> <p> <code>ignore</code> — Ignore the missing data. Maintains the current alarm state.</p> </li> <li> <p> <code>missing</code> — Missing data is treated as missing.</p> </li> </ul> <p>If <code>treatMissingData</code> is not specified, the default behavior of <code>missing</code> is used.</p>"
+          "documentation": "<p>Sets how this alarm will handle missing data points.</p> <p>An alarm can treat missing data in the following ways:</p> <ul> <li> <p> <code>breaching</code> - Assume the missing data is not within the threshold. Missing data counts towards the number of times the metric is not within the threshold.</p> </li> <li> <p> <code>notBreaching</code> - Assume the missing data is within the threshold. Missing data does not count towards the number of times the metric is not within the threshold.</p> </li> <li> <p> <code>ignore</code> - Ignore the missing data. Maintains the current alarm state.</p> </li> <li> <p> <code>missing</code> - Missing data is treated as missing.</p> </li> </ul> <p>If <code>treatMissingData</code> is not specified, the default behavior of <code>missing</code> is used.</p>"
         },
         "contactProtocols": {
           "shape": "ContactProtocolsList",
@@ -9190,7 +9215,7 @@
         },
         "notificationTriggers": {
           "shape": "NotificationTriggerList",
-          "documentation": "<p>The alarm states that trigger a notification.</p> <p>An alarm has the following possible states:</p> <ul> <li> <p> <code>ALARM</code> — The metric is outside of the defined threshold.</p> </li> <li> <p> <code>INSUFFICIENT_DATA</code> — The alarm has just started, the metric is not available, or not enough data is available for the metric to determine the alarm state.</p> </li> <li> <p> <code>OK</code> — The metric is within the defined threshold.</p> </li> </ul> <p>When you specify a notification trigger, the <code>ALARM</code> state must be specified. The <code>INSUFFICIENT_DATA</code> and <code>OK</code> states can be specified in addition to the <code>ALARM</code> state.</p> <ul> <li> <p>If you specify <code>OK</code> as an alarm trigger, a notification is sent when the alarm switches from an <code>ALARM</code> or <code>INSUFFICIENT_DATA</code> alarm state to an <code>OK</code> state. This can be thought of as an <i>all clear</i> alarm notification.</p> </li> <li> <p>If you specify <code>INSUFFICIENT_DATA</code> as the alarm trigger, a notification is sent when the alarm switches from an <code>OK</code> or <code>ALARM</code> alarm state to an <code>INSUFFICIENT_DATA</code> state.</p> </li> </ul> <p>The notification trigger defaults to <code>ALARM</code> if you don't specify this parameter.</p>"
+          "documentation": "<p>The alarm states that trigger a notification.</p> <p>An alarm has the following possible states:</p> <ul> <li> <p> <code>ALARM</code> - The metric is outside of the defined threshold.</p> </li> <li> <p> <code>INSUFFICIENT_DATA</code> - The alarm has just started, the metric is not available, or not enough data is available for the metric to determine the alarm state.</p> </li> <li> <p> <code>OK</code> - The metric is within the defined threshold.</p> </li> </ul> <p>When you specify a notification trigger, the <code>ALARM</code> state must be specified. The <code>INSUFFICIENT_DATA</code> and <code>OK</code> states can be specified in addition to the <code>ALARM</code> state.</p> <ul> <li> <p>If you specify <code>OK</code> as an alarm trigger, a notification is sent when the alarm switches from an <code>ALARM</code> or <code>INSUFFICIENT_DATA</code> alarm state to an <code>OK</code> state. This can be thought of as an <i>all clear</i> alarm notification.</p> </li> <li> <p>If you specify <code>INSUFFICIENT_DATA</code> as the alarm trigger, a notification is sent when the alarm switches from an <code>OK</code> or <code>ALARM</code> alarm state to an <code>INSUFFICIENT_DATA</code> state.</p> </li> </ul> <p>The notification trigger defaults to <code>ALARM</code> if you don't specify this parameter.</p>"
         },
         "notificationEnabled": {
           "shape": "boolean",
@@ -9203,7 +9228,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -9216,11 +9241,11 @@
       "members": {
         "portInfos": {
           "shape": "PortInfoList",
-          "documentation": "<p>Specifies information about the public port(s).</p>"
+          "documentation": "<p>An array of objects to describe the ports to open for the specified instance.</p>"
         },
         "instanceName": {
           "shape": "ResourceName",
-          "documentation": "<p>The Lightsail instance name of the public port(s) you are setting.</p>"
+          "documentation": "<p>The name of the instance for which to open ports.</p>"
         }
       }
     },
@@ -9229,7 +9254,7 @@
       "members": {
         "operation": {
           "shape": "Operation",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -9250,7 +9275,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -9271,7 +9296,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -9756,7 +9781,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -9826,7 +9851,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -9851,7 +9876,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -9872,7 +9897,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -9945,7 +9970,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -9970,7 +9995,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -10040,7 +10065,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -10060,7 +10085,7 @@
         },
         "state": {
           "shape": "AlarmState",
-          "documentation": "<p>The alarm state to test.</p> <p>An alarm has the following possible states that can be tested:</p> <ul> <li> <p> <code>ALARM</code> — The metric is outside of the defined threshold.</p> </li> <li> <p> <code>INSUFFICIENT_DATA</code> — The alarm has just started, the metric is not available, or not enough data is available for the metric to determine the alarm state.</p> </li> <li> <p> <code>OK</code> — The metric is within the defined threshold.</p> </li> </ul>"
+          "documentation": "<p>The alarm state to test.</p> <p>An alarm has the following possible states that can be tested:</p> <ul> <li> <p> <code>ALARM</code> - The metric is outside of the defined threshold.</p> </li> <li> <p> <code>INSUFFICIENT_DATA</code> - The alarm has just started, the metric is not available, or not enough data is available for the metric to determine the alarm state.</p> </li> <li> <p> <code>OK</code> - The metric is within the defined threshold.</p> </li> </ul>"
         }
       }
     },
@@ -10069,7 +10094,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -10095,7 +10120,7 @@
       "members": {
         "operation": {
           "shape": "Operation",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -10125,7 +10150,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -10151,7 +10176,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -10182,7 +10207,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -10208,7 +10233,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -10265,7 +10290,7 @@
       "members": {
         "operations": {
           "shape": "OperationList",
-          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the time stamp of the request, and the resources affected by the request.</p>"
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },

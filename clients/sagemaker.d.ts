@@ -37,11 +37,11 @@ declare class SageMaker extends Service {
    */
   createAlgorithm(callback?: (err: AWSError, data: SageMaker.Types.CreateAlgorithmOutput) => void): Request<SageMaker.Types.CreateAlgorithmOutput, AWSError>;
   /**
-   * Creates a running App for the specified UserProfile. Supported Apps are JupyterServer and KernelGateway. This operation is automatically invoked by Amazon SageMaker Amazon SageMaker Studio (Studio) upon access to the associated Studio Domain, and when new kernel configurations are selected by the user. A user may have multiple Apps active simultaneously. Apps will automatically terminate and be deleted when stopped from within Studio, or when the DeleteApp API is manually called. UserProfiles are limited to 5 concurrently running Apps at a time.
+   * Creates a running App for the specified UserProfile. Supported Apps are JupyterServer, KernelGateway, and TensorBoard. This operation is automatically invoked by Amazon SageMaker Studio upon access to the associated Studio Domain, and when new kernel configurations are selected by the user. A user may have multiple Apps active simultaneously. Apps will automatically terminate and be deleted when stopped from within Studio, or when the DeleteApp API is manually called. UserProfiles are limited to 5 concurrently running Apps at a time.
    */
   createApp(params: SageMaker.Types.CreateAppRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateAppResponse) => void): Request<SageMaker.Types.CreateAppResponse, AWSError>;
   /**
-   * Creates a running App for the specified UserProfile. Supported Apps are JupyterServer and KernelGateway. This operation is automatically invoked by Amazon SageMaker Amazon SageMaker Studio (Studio) upon access to the associated Studio Domain, and when new kernel configurations are selected by the user. A user may have multiple Apps active simultaneously. Apps will automatically terminate and be deleted when stopped from within Studio, or when the DeleteApp API is manually called. UserProfiles are limited to 5 concurrently running Apps at a time.
+   * Creates a running App for the specified UserProfile. Supported Apps are JupyterServer, KernelGateway, and TensorBoard. This operation is automatically invoked by Amazon SageMaker Studio upon access to the associated Studio Domain, and when new kernel configurations are selected by the user. A user may have multiple Apps active simultaneously. Apps will automatically terminate and be deleted when stopped from within Studio, or when the DeleteApp API is manually called. UserProfiles are limited to 5 concurrently running Apps at a time.
    */
   createApp(callback?: (err: AWSError, data: SageMaker.Types.CreateAppResponse) => void): Request<SageMaker.Types.CreateAppResponse, AWSError>;
   /**
@@ -69,11 +69,11 @@ declare class SageMaker extends Service {
    */
   createCompilationJob(callback?: (err: AWSError, data: SageMaker.Types.CreateCompilationJobResponse) => void): Request<SageMaker.Types.CreateCompilationJobResponse, AWSError>;
   /**
-   * Creates a Domain for Amazon SageMaker Amazon SageMaker Studio (Studio), which can be accessed by end-users in a web browser. A Domain has an associated directory, list of authorized users, and a variety of security, application, policies, and Amazon Virtual Private Cloud configurations. An AWS account is limited to one Domain, per region. Users within a domain can share notebook files and other artifacts with each other. When a Domain is created, an Amazon Elastic File System (EFS) is also created for use by all of the users within the Domain. Each user receives a private home directory within the EFS for notebooks, Git repositories, and data files. 
+   * Creates a Domain for Amazon SageMaker Studio, which can be accessed by end-users in a web browser. A Domain has an associated directory, list of authorized users, and a variety of security, application, policies, and Amazon Virtual Private Cloud configurations. An AWS account is limited to one Domain, per region. Users within a domain can share notebook files and other artifacts with each other. When a Domain is created, an Amazon Elastic File System (EFS) is also created for use by all of the users within the Domain. Each user receives a private home directory within the EFS for notebooks, Git repositories, and data files. 
    */
   createDomain(params: SageMaker.Types.CreateDomainRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateDomainResponse) => void): Request<SageMaker.Types.CreateDomainResponse, AWSError>;
   /**
-   * Creates a Domain for Amazon SageMaker Amazon SageMaker Studio (Studio), which can be accessed by end-users in a web browser. A Domain has an associated directory, list of authorized users, and a variety of security, application, policies, and Amazon Virtual Private Cloud configurations. An AWS account is limited to one Domain, per region. Users within a domain can share notebook files and other artifacts with each other. When a Domain is created, an Amazon Elastic File System (EFS) is also created for use by all of the users within the Domain. Each user receives a private home directory within the EFS for notebooks, Git repositories, and data files. 
+   * Creates a Domain for Amazon SageMaker Studio, which can be accessed by end-users in a web browser. A Domain has an associated directory, list of authorized users, and a variety of security, application, policies, and Amazon Virtual Private Cloud configurations. An AWS account is limited to one Domain, per region. Users within a domain can share notebook files and other artifacts with each other. When a Domain is created, an Amazon Elastic File System (EFS) is also created for use by all of the users within the Domain. Each user receives a private home directory within the EFS for notebooks, Git repositories, and data files. 
    */
   createDomain(callback?: (err: AWSError, data: SageMaker.Types.CreateDomainResponse) => void): Request<SageMaker.Types.CreateDomainResponse, AWSError>;
   /**
@@ -173,11 +173,11 @@ declare class SageMaker extends Service {
    */
   createNotebookInstanceLifecycleConfig(callback?: (err: AWSError, data: SageMaker.Types.CreateNotebookInstanceLifecycleConfigOutput) => void): Request<SageMaker.Types.CreateNotebookInstanceLifecycleConfigOutput, AWSError>;
   /**
-   * Creates a URL for a specified UserProfile in a Domain. When accessed in a web browser, the user will be automatically signed in to Amazon SageMaker Amazon SageMaker Studio (Studio), and granted access to all of the Apps and files associated with that Amazon Elastic File System (EFS). This operation can only be called when AuthMode equals IAM. 
+   * Creates a URL for a specified UserProfile in a Domain. When accessed in a web browser, the user will be automatically signed in to Amazon SageMaker Studio, and granted access to all of the Apps and files associated with that Amazon Elastic File System (EFS). This operation can only be called when AuthMode equals IAM. 
    */
   createPresignedDomainUrl(params: SageMaker.Types.CreatePresignedDomainUrlRequest, callback?: (err: AWSError, data: SageMaker.Types.CreatePresignedDomainUrlResponse) => void): Request<SageMaker.Types.CreatePresignedDomainUrlResponse, AWSError>;
   /**
-   * Creates a URL for a specified UserProfile in a Domain. When accessed in a web browser, the user will be automatically signed in to Amazon SageMaker Amazon SageMaker Studio (Studio), and granted access to all of the Apps and files associated with that Amazon Elastic File System (EFS). This operation can only be called when AuthMode equals IAM. 
+   * Creates a URL for a specified UserProfile in a Domain. When accessed in a web browser, the user will be automatically signed in to Amazon SageMaker Studio, and granted access to all of the Apps and files associated with that Amazon Elastic File System (EFS). This operation can only be called when AuthMode equals IAM. 
    */
   createPresignedDomainUrl(callback?: (err: AWSError, data: SageMaker.Types.CreatePresignedDomainUrlResponse) => void): Request<SageMaker.Types.CreatePresignedDomainUrlResponse, AWSError>;
   /**
@@ -229,11 +229,11 @@ declare class SageMaker extends Service {
    */
   createTrialComponent(callback?: (err: AWSError, data: SageMaker.Types.CreateTrialComponentResponse) => void): Request<SageMaker.Types.CreateTrialComponentResponse, AWSError>;
   /**
-   * Creates a new user profile. A user profile represents a single user within a Domain, and is the main way to reference a "person" for the purposes of sharing, reporting and other user-oriented features. This entity is created during on-boarding. If an administrator invites a person by email or imports them from SSO, a new UserProfile is automatically created. This entity is the primary holder of settings for an individual user and has a reference to the user's private Amazon Elastic File System (EFS) home directory. 
+   * Creates a user profile. A user profile represents a single user within a Domain, and is the main way to reference a "person" for the purposes of sharing, reporting and other user-oriented features. This entity is created during on-boarding to Amazon SageMaker Studio. If an administrator invites a person by email or imports them from SSO, a UserProfile is automatically created.   This entity is the primary holder of settings for an individual user and, through the domain, has a reference to the user's private Amazon Elastic File System (EFS) home directory. 
    */
   createUserProfile(params: SageMaker.Types.CreateUserProfileRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateUserProfileResponse) => void): Request<SageMaker.Types.CreateUserProfileResponse, AWSError>;
   /**
-   * Creates a new user profile. A user profile represents a single user within a Domain, and is the main way to reference a "person" for the purposes of sharing, reporting and other user-oriented features. This entity is created during on-boarding. If an administrator invites a person by email or imports them from SSO, a new UserProfile is automatically created. This entity is the primary holder of settings for an individual user and has a reference to the user's private Amazon Elastic File System (EFS) home directory. 
+   * Creates a user profile. A user profile represents a single user within a Domain, and is the main way to reference a "person" for the purposes of sharing, reporting and other user-oriented features. This entity is created during on-boarding to Amazon SageMaker Studio. If an administrator invites a person by email or imports them from SSO, a UserProfile is automatically created.   This entity is the primary holder of settings for an individual user and, through the domain, has a reference to the user's private Amazon Elastic File System (EFS) home directory. 
    */
   createUserProfile(callback?: (err: AWSError, data: SageMaker.Types.CreateUserProfileResponse) => void): Request<SageMaker.Types.CreateUserProfileResponse, AWSError>;
   /**
@@ -269,11 +269,11 @@ declare class SageMaker extends Service {
    */
   deleteCodeRepository(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Used to delete a domain. If you on-boarded with IAM mode, you will need to delete your domain to on-board again using SSO. Use with caution. All of the members of the domain will lose access to their EFS volume, including data, notebooks, and other artifacts. 
+   * Used to delete a domain. Use with caution. If RetentionPolicy is set to Delete, all of the members of the domain will lose access to their EFS volume, including data, notebooks, and other artifacts. 
    */
   deleteDomain(params: SageMaker.Types.DeleteDomainRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Used to delete a domain. If you on-boarded with IAM mode, you will need to delete your domain to on-board again using SSO. Use with caution. All of the members of the domain will lose access to their EFS volume, including data, notebooks, and other artifacts. 
+   * Used to delete a domain. Use with caution. If RetentionPolicy is set to Delete, all of the members of the domain will lose access to their EFS volume, including data, notebooks, and other artifacts. 
    */
   deleteDomain(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1891,7 +1891,7 @@ declare namespace SageMaker {
      */
     Tags?: TagList;
     /**
-     * The instance type and quantity.
+     * The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.
      */
     ResourceSpec?: ResourceSpec;
   }
@@ -2015,7 +2015,7 @@ declare namespace SageMaker {
      */
     Tags?: TagList;
     /**
-     * The AWS Key Management Service encryption key ID.
+     * The AWS Key Management Service (KMS) encryption key ID. Encryption with a customer master key (CMK) is not supported.
      */
     HomeEfsFileSystemKmsKeyId?: KmsKeyId;
   }
@@ -2925,7 +2925,7 @@ declare namespace SageMaker {
      */
     DomainId: DomainId;
     /**
-     * The retention policy for this domain, which specifies which resources will be retained after the Domain is deleted. By default, all resources are retained (not automatically deleted). 
+     * The retention policy for this domain, which specifies whether resources will be retained after the Domain is deleted. By default, all resources are retained (not automatically deleted). 
      */
     RetentionPolicy?: RetentionPolicy;
   }
@@ -3176,7 +3176,7 @@ declare namespace SageMaker {
      */
     FailureReason?: FailureReason;
     /**
-     * The instance type and quantity.
+     * The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.
      */
     ResourceSpec?: ResourceSpec;
   }
@@ -4449,7 +4449,7 @@ declare namespace SageMaker {
      */
     UserProfileName?: UserProfileName;
     /**
-     * The homa Amazon Elastic File System (EFS) Uid.
+     * The home Amazon Elastic File System (EFS) Uid.
      */
     HomeEfsFileSystemUid?: EfsUid;
     /**
@@ -5350,13 +5350,13 @@ declare namespace SageMaker {
   export type JsonPath = string;
   export interface JupyterServerAppSettings {
     /**
-     * The instance type and quantity.
+     * The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.
      */
     DefaultResourceSpec?: ResourceSpec;
   }
   export interface KernelGatewayAppSettings {
     /**
-     * The instance type and quantity.
+     * The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.
      */
     DefaultResourceSpec?: ResourceSpec;
   }
@@ -7319,6 +7319,10 @@ declare namespace SageMaker {
   export type NestedFiltersList = NestedFilters[];
   export interface NetworkConfig {
     /**
+     * Whether to encrypt all communications between distributed processing jobs. Choose True to encrypt communications. Encryption provides greater security for distributed processing jobs, but the processing might take longer.
+     */
+    EnableInterContainerTrafficEncryption?: Boolean;
+    /**
      * Whether to allow inbound and outbound network calls to and from the containers used for the processing job.
      */
     EnableNetworkIsolation?: Boolean;
@@ -7824,7 +7828,7 @@ declare namespace SageMaker {
     /**
      * A Template object containing the worker UI template to render.
      */
-    UiTemplate: UiTemplate;
+    UiTemplate?: UiTemplate;
     /**
      * A RenderableTask object containing a representative task to render.
      */
@@ -7902,7 +7906,7 @@ declare namespace SageMaker {
   export type ResourcePropertyName = string;
   export interface ResourceSpec {
     /**
-     * The Amazon Resource Name (ARN) of the image created on the instance.
+     * The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
      */
     SageMakerImageArn?: SageMakerImageArn;
     /**
@@ -7915,7 +7919,7 @@ declare namespace SageMaker {
   export type ResponseMIMETypes = ResponseMIMEType[];
   export interface RetentionPolicy {
     /**
-     * The home Amazon Elastic File System (EFS).
+     * The default is Retain, which specifies to keep the data stored on the EFS volume. Specify Delete to delete the data stored on the EFS volume.
      */
     HomeEfsFileSystem?: RetentionType;
   }
@@ -8252,7 +8256,7 @@ declare namespace SageMaker {
   export type TemplateUrl = string;
   export interface TensorBoardAppSettings {
     /**
-     * The instance type and quantity.
+     * The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.
      */
     DefaultResourceSpec?: ResourceSpec;
   }
@@ -8979,7 +8983,7 @@ declare namespace SageMaker {
     /**
      * The Amazon S3 bucket location of the UI template. For more information about the contents of a UI template, see  Creating Your Custom Labeling Task Template.
      */
-    UiTemplateS3Uri: S3Uri;
+    UiTemplateS3Uri?: S3Uri;
   }
   export interface UiTemplate {
     /**
