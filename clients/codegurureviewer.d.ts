@@ -230,6 +230,7 @@ declare namespace CodeGuruReviewer {
     DestinationCommit?: CommitId;
   }
   export type CommitId = string;
+  export type ConnectionArn = string;
   export interface DescribeCodeReviewRequest {
     /**
      *  The Amazon Resource Name (ARN) of the code review to describe. 
@@ -447,7 +448,7 @@ declare namespace CodeGuruReviewer {
   export type NextToken = string;
   export type Owner = string;
   export type Owners = Owner[];
-  export type ProviderType = "CodeCommit"|"GitHub"|string;
+  export type ProviderType = "CodeCommit"|"GitHub"|"Bitbucket"|string;
   export type ProviderTypes = ProviderType[];
   export type PullRequestId = string;
   export interface PutRecommendationFeedbackRequest {
@@ -539,6 +540,10 @@ declare namespace CodeGuruReviewer {
      * Information about an AWS CodeCommit repository.
      */
     CodeCommit?: CodeCommitRepository;
+    /**
+     *  Information about a Bitbucket Cloud repository. 
+     */
+    Bitbucket?: ThirdPartySourceRepository;
   }
   export interface RepositoryAssociation {
     /**
@@ -549,6 +554,10 @@ declare namespace CodeGuruReviewer {
      * The Amazon Resource Name (ARN) identifying the repository association.
      */
     AssociationArn?: Arn;
+    /**
+     *  The Amazon Resource Name (ARN) identifying the repository connection. 
+     */
+    ConnectionArn?: ConnectionArn;
     /**
      * The name of the repository.
      */
@@ -587,6 +596,10 @@ declare namespace CodeGuruReviewer {
      */
     AssociationArn?: Arn;
     /**
+     *  The Amazon Resource Name (ARN) identifying the repository connection. 
+     */
+    ConnectionArn?: ConnectionArn;
+    /**
      * The time, in milliseconds since the epoch, since the repository association was last updated. 
      */
     LastUpdatedTimeStamp?: TimeStamp;
@@ -620,6 +633,20 @@ declare namespace CodeGuruReviewer {
   }
   export type StateReason = string;
   export type Text = string;
+  export interface ThirdPartySourceRepository {
+    /**
+     *  The name of the third party source repository. 
+     */
+    Name: Name;
+    /**
+     *  The Amazon Resource Name (ARN) identifying the repository connection. 
+     */
+    ConnectionArn: ConnectionArn;
+    /**
+     *  The username of the owner of the repository. 
+     */
+    Owner: Owner;
+  }
   export type TimeStamp = Date;
   export type Type = "PullRequest"|string;
   export type UserId = string;

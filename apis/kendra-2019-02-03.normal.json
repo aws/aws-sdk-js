@@ -199,6 +199,37 @@
       ],
       "documentation": "<p>Creates a new Amazon Kendra index. Index creation is an asynchronous operation. To determine if index creation has completed, check the <code>Status</code> field returned from a call to . The <code>Status</code> field is set to <code>ACTIVE</code> when the index is ready to use.</p> <p>Once the index is active you can index your documents using the operation or using one of the supported data sources. </p>"
     },
+    "DeleteDataSource": {
+      "name": "DeleteDataSource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteDataSourceRequest"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Deletes an Amazon Kendra data source. An exception is not thrown if the data source is already being deleted. While the data source is being deleted, the <code>Status</code> field returned by a call to the operation is set to <code>DELETING</code>. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/delete-data-source.html\">Deleting Data Sources</a>.</p>"
+    },
     "DeleteFaq": {
       "name": "DeleteFaq",
       "http": {
@@ -478,6 +509,37 @@
       ],
       "documentation": "<p>Lists the Amazon Kendra indexes that you have created.</p>"
     },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceUnavailableException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Gets a list of tags associated with a specified resource. Indexes, FAQs, and data sources can have tags associated with them.</p>"
+    },
     "Query": {
       "name": "Query",
       "http": {
@@ -505,6 +567,9 @@
         },
         {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
         },
         {
           "shape": "InternalServerException"
@@ -608,6 +673,68 @@
       ],
       "documentation": "<p>Enables you to provide feedback to Amazon Kendra to improve the performance of the service. </p>"
     },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceUnavailableException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Adds the specified tag to the specified index, FAQ, or data source resource. If the tag already exists, the existing value is replaced with the new value.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "output": {
+        "shape": "UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceUnavailableException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Removes a tag from an index, FAQ, or a data source.</p>"
+    },
     "UpdateDataSource": {
       "name": "UpdateDataSource",
       "http": {
@@ -665,6 +792,9 @@
           "shape": "AccessDeniedException"
         },
         {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
           "shape": "InternalServerException"
         }
       ],
@@ -705,18 +835,18 @@
       "members": {
         "Key": {
           "shape": "String",
-          "documentation": "<p/>"
+          "documentation": "<p>The key that identifies the attribute.</p>"
         },
         "ValueType": {
           "shape": "AdditionalResultAttributeValueType",
-          "documentation": "<p/>"
+          "documentation": "<p>The data type of the <code>Value</code> property.</p>"
         },
         "Value": {
           "shape": "AdditionalResultAttributeValue",
-          "documentation": "<p/>"
+          "documentation": "<p>An object that contains the attribute value.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>An attribute returned from an index query.</p>"
     },
     "AdditionalResultAttributeList": {
       "type": "list",
@@ -740,6 +870,11 @@
         "TEXT_WITH_HIGHLIGHTS_VALUE"
       ]
     },
+    "AmazonResourceName": {
+      "type": "string",
+      "max": 1011,
+      "min": 1
+    },
     "AttributeFilter": {
       "type": "structure",
       "members": {
@@ -761,11 +896,11 @@
         },
         "ContainsAll": {
           "shape": "DocumentAttribute",
-          "documentation": "<p>Returns true when a document contains all of the specified document attributes.</p>"
+          "documentation": "<p>Returns true when a document contains all of the specified document attributes. This filter is only appicable to <code>StringListValue</code> metadata.</p>"
         },
         "ContainsAny": {
           "shape": "DocumentAttribute",
-          "documentation": "<p>Returns true when a document contains any of the specified document attributes.</p>"
+          "documentation": "<p>Returns true when a document contains any of the specified document attributes.This filter is only appicable to <code>StringListValue</code> metadata.</p>"
         },
         "GreaterThan": {
           "shape": "DocumentAttribute",
@@ -784,15 +919,13 @@
           "documentation": "<p>Performs a less than or equals operation on two document attributes. Use with a document attribute of type <code>Integer</code> or <code>Long</code>.</p>"
         }
       },
-      "documentation": "<p>Provides filtering the query results based on document attributes.</p> <p>When you use the <code>AndAllFilters</code> or <code>OrAllFilters</code>, filters you can use a total of 3 layers. For example, you can use:</p> <ol> <li> <p> <code>&lt;AndAllFilters&gt;</code> </p> </li> <li> <p> <code> &lt;OrAllFilters&gt;</code> </p> </li> <li> <p> <code> &lt;EqualTo&gt;</code> </p> </li> </ol>"
+      "documentation": "<p>Provides filtering the query results based on document attributes.</p> <p>When you use the <code>AndAllFilters</code> or <code>OrAllFilters</code>, filters you can use 2 layers under the first attribute filter. For example, you can use:</p> <p> <code>&lt;AndAllFilters&gt;</code> </p> <ol> <li> <p> <code> &lt;OrAllFilters&gt;</code> </p> </li> <li> <p> <code> &lt;EqualTo&gt;</code> </p> </li> </ol> <p>If you use more than 2 layers, you receive a <code>ValidationException</code> exception with the message \"<code>AttributeFilter</code> cannot have a depth of more than 2.\"</p>"
     },
     "AttributeFilterList": {
       "type": "list",
       "member": {
         "shape": "AttributeFilter"
-      },
-      "max": 5,
-      "min": 1
+      }
     },
     "BatchDeleteDocumentRequest": {
       "type": "structure",
@@ -808,6 +941,9 @@
         "DocumentIdList": {
           "shape": "DocumentIdList",
           "documentation": "<p>One or more identifiers for documents to delete from the index.</p>"
+        },
+        "DataSourceSyncJobMetricTarget": {
+          "shape": "DataSourceSyncJobMetricTarget"
         }
       }
     },
@@ -861,7 +997,7 @@
         },
         "Documents": {
           "shape": "DocumentList",
-          "documentation": "<p>One or more documents to add to the index. </p> <p>Each document is limited to 5 Mb, the total size of the list is limited to 50 Mb.</p>"
+          "documentation": "<p>One or more documents to add to the index. </p> <p>Documents have the following file size limits.</p> <ul> <li> <p>5 MB total size for inline documents</p> </li> <li> <p>50 MB total size for files from an S3 bucket</p> </li> <li> <p>5 MB extracted text for any file</p> </li> </ul> <p>For more information about file size and transaction per second quotas, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas</a>.</p>"
         }
       }
     },
@@ -870,7 +1006,7 @@
       "members": {
         "FailedDocuments": {
           "shape": "BatchPutDocumentResponseFailedDocuments",
-          "documentation": "<p>A list of documents that were not added to the index because the document failed a validation check. Each document contains an error message that indicates why the document couldn't be added to the index.</p> <p>If there was an error adding a document to an index the error is reported in your AWS CloudWatch log.</p>"
+          "documentation": "<p>A list of documents that were not added to the index because the document failed a validation check. Each document contains an error message that indicates why the document couldn't be added to the index.</p> <p>If there was an error adding a document to an index the error is reported in your AWS CloudWatch log. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/cloudwatch-logs.html\">Monitoring Amazon Kendra with Amazon CloudWatch Logs</a> </p>"
         }
       }
     },
@@ -899,12 +1035,28 @@
       }
     },
     "Blob": {
-      "type": "blob",
-      "max": 153600,
-      "min": 1
+      "type": "blob"
     },
     "Boolean": {
       "type": "boolean"
+    },
+    "CapacityUnitsConfiguration": {
+      "type": "structure",
+      "required": [
+        "StorageCapacityUnits",
+        "QueryCapacityUnits"
+      ],
+      "members": {
+        "StorageCapacityUnits": {
+          "shape": "StorageCapacityUnit",
+          "documentation": "<p>The amount of extra storage capacity for an index. Each capacity unit provides 150 Gb of storage space or 500,000 documents, whichever is reached first.</p>"
+        },
+        "QueryCapacityUnits": {
+          "shape": "QueryCapacityUnit",
+          "documentation": "<p>The amount of extra query capacity for an index. Each capacity unit provides 0.5 queries per second and 40,000 queries per day.</p>"
+        }
+      },
+      "documentation": "<p>Specifies capacity units configured for your index. You can add and remove capacity units to tune an index to your requirements.</p>"
     },
     "ChangeDetectingColumns": {
       "type": "list",
@@ -927,7 +1079,7 @@
         },
         "ClickTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The Unix timestamp of the data and time that the result was clicked.</p>"
+          "documentation": "<p>The Unix timestamp of the date and time that the result was clicked.</p>"
         }
       },
       "documentation": "<p>Gathers information about when a particular result was clicked by a user. Your application uses the <a>SubmitFeedback</a> operation to provide click information.</p>"
@@ -1060,6 +1212,10 @@
         "RoleArn": {
           "shape": "RoleArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of a role with permission to access the data source. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">IAM Roles for Amazon Kendra</a>.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>A list of key-value pairs that identify the data source. You can use the tags to identify and organize your resources and to control access to resources.</p>"
         }
       }
     },
@@ -1103,6 +1259,10 @@
         "RoleArn": {
           "shape": "RoleArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of a role with permission to access the S3 bucket that contains the FAQs. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">IAM Roles for Amazon Kendra</a>.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>A list of key-value pairs that identify the FAQ. You can use the tags to identify and organize your resources and to control access to resources.</p>"
         }
       }
     },
@@ -1126,6 +1286,10 @@
           "shape": "IndexName",
           "documentation": "<p>The name for the new index.</p>"
         },
+        "Edition": {
+          "shape": "IndexEdition",
+          "documentation": "<p>The Amazon Kendra edition to use for the index. Choose <code>DEVELOPER_EDITION</code> for indexes intended for development, testing, or proof of concept. Use <code>ENTERPRISE_EDITION</code> for your production databases. Once you set the edition for an index, it can't be changed. </p>"
+        },
         "RoleArn": {
           "shape": "RoleArn",
           "documentation": "<p>An IAM role that gives Amazon Kendra permissions to access your Amazon CloudWatch logs and metrics. This is also the role used when you use the <code>BatchPutDocument</code> operation to index documents from an Amazon S3 bucket.</p>"
@@ -1142,6 +1306,10 @@
           "shape": "ClientTokenName",
           "documentation": "<p>A token that you provide to identify the request to create an index. Multiple calls to the <code>CreateIndex</code> operation with the same client token will create only one index.”</p>",
           "idempotencyToken": true
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>A list of key-value pairs that identify the index. You can use the tags to identify and organize your resources and to control access to resources.</p>"
         }
       }
     },
@@ -1168,6 +1336,18 @@
         "DatabaseConfiguration": {
           "shape": "DatabaseConfiguration",
           "documentation": "<p>Provides information necessary to create a connector for a database.</p>"
+        },
+        "SalesforceConfiguration": {
+          "shape": "SalesforceConfiguration",
+          "documentation": "<p>Provides configuration information for data sources that connect to a Salesforce site.</p>"
+        },
+        "OneDriveConfiguration": {
+          "shape": "OneDriveConfiguration",
+          "documentation": "<p>Provided configuration for data sources that connect to Microsoft OneDrive.</p>"
+        },
+        "ServiceNowConfiguration": {
+          "shape": "ServiceNowConfiguration",
+          "documentation": "<p>Provides configuration for data sources that connect to ServiceNow instances.</p>"
         }
       },
       "documentation": "<p>Configuration information for a Amazon Kendra data source.</p>"
@@ -1175,7 +1355,8 @@
     "DataSourceDateFieldFormat": {
       "type": "string",
       "max": 40,
-      "min": 4
+      "min": 4,
+      "pattern": "^(?!\\s).*(?<!\\s)$"
     },
     "DataSourceFieldName": {
       "type": "string",
@@ -1284,6 +1465,10 @@
         "DataSourceErrorCode": {
           "shape": "String",
           "documentation": "<p>If the reason that the synchronization failed is due to an error with the underlying data source, this field contains a code that identifies the error.</p>"
+        },
+        "Metrics": {
+          "shape": "DataSourceSyncJobMetrics",
+          "documentation": "<p>Maps a batch delete document request to a specific data source sync job. This is optional and should only be supplied when documents are deleted by a connector.</p>"
         }
       },
       "documentation": "<p>Provides information about a synchronization job.</p>"
@@ -1294,6 +1479,56 @@
         "shape": "DataSourceSyncJob"
       }
     },
+    "DataSourceSyncJobId": {
+      "type": "string",
+      "max": 100,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9][a-zA-Z0-9_-]*"
+    },
+    "DataSourceSyncJobMetricTarget": {
+      "type": "structure",
+      "required": [
+        "DataSourceId",
+        "DataSourceSyncJobId"
+      ],
+      "members": {
+        "DataSourceId": {
+          "shape": "DataSourceId",
+          "documentation": "<p>The ID of the data source that is running the sync job.</p>"
+        },
+        "DataSourceSyncJobId": {
+          "shape": "DataSourceSyncJobId",
+          "documentation": "<p>The ID of the sync job that is running on the data source.</p>"
+        }
+      },
+      "documentation": "<p>Maps a particular data source sync job to a particular data source.</p>"
+    },
+    "DataSourceSyncJobMetrics": {
+      "type": "structure",
+      "members": {
+        "DocumentsAdded": {
+          "shape": "MetricValue",
+          "documentation": "<p>The number of documents added from the data source up to now in the data source sync.</p>"
+        },
+        "DocumentsModified": {
+          "shape": "MetricValue",
+          "documentation": "<p>The number of documents modified in the data source up to now in the data source sync run.</p>"
+        },
+        "DocumentsDeleted": {
+          "shape": "MetricValue",
+          "documentation": "<p>The number of documents deleted from the data source up to now in the data source sync run.</p>"
+        },
+        "DocumentsFailed": {
+          "shape": "MetricValue",
+          "documentation": "<p>The number of documents that failed to sync from the data source up to now in the data source sync run.</p>"
+        },
+        "DocumentsScanned": {
+          "shape": "MetricValue",
+          "documentation": "<p>The current number of documents crawled by the current sync job in the data source.</p>"
+        }
+      },
+      "documentation": "<p>Maps a batch delete document request to a specific data source sync job. This is optional and should only be supplied when documents are deleted by a connector.</p>"
+    },
     "DataSourceSyncJobStatus": {
       "type": "string",
       "enum": [
@@ -1302,7 +1537,8 @@
         "SYNCING",
         "INCOMPLETE",
         "STOPPING",
-        "ABORTED"
+        "ABORTED",
+        "SYNCING_INDEXING"
       ]
     },
     "DataSourceToIndexFieldMapping": {
@@ -1340,7 +1576,10 @@
       "enum": [
         "S3",
         "SHAREPOINT",
-        "DATABASE"
+        "DATABASE",
+        "SALESFORCE",
+        "ONEDRIVE",
+        "SERVICENOW"
       ]
     },
     "DataSourceVpcConfiguration": {
@@ -1415,6 +1654,23 @@
       "type": "integer",
       "max": 65535,
       "min": 1
+    },
+    "DeleteDataSourceRequest": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "IndexId"
+      ],
+      "members": {
+        "Id": {
+          "shape": "DataSourceId",
+          "documentation": "<p>The unique identifier of the data source to delete.</p>"
+        },
+        "IndexId": {
+          "shape": "IndexId",
+          "documentation": "<p>The unique identifier of the index associated with the data source.</p>"
+        }
+      }
     },
     "DeleteFaqRequest": {
       "type": "structure",
@@ -1599,6 +1855,10 @@
           "shape": "IndexId",
           "documentation": "<p>the name of the index.</p>"
         },
+        "Edition": {
+          "shape": "IndexEdition",
+          "documentation": "<p>The Amazon Kendra edition used for the index. You decide the edition when you create the index.</p>"
+        },
         "RoleArn": {
           "shape": "RoleArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that gives Amazon Kendra permission to write to your Amazon Cloudwatch logs.</p>"
@@ -1634,6 +1894,10 @@
         "ErrorMessage": {
           "shape": "ErrorMessage",
           "documentation": "<p>When th e<code>Status</code> field value is <code>FAILED</code>, the <code>ErrorMessage</code> field contains a message that explains why.</p>"
+        },
+        "CapacityUnits": {
+          "shape": "CapacityUnitsConfiguration",
+          "documentation": "<p>For enterprise edtion indexes, you can choose to use additional capacity to meet the needs of your application. This contains the capacity units used for the index. A 0 for the query capacity or the storage capacity indicates that the index is using the default capacity for the index.</p>"
         }
       }
     },
@@ -1715,17 +1979,13 @@
       "type": "list",
       "member": {
         "shape": "DocumentAttribute"
-      },
-      "max": 100,
-      "min": 1
+      }
     },
     "DocumentAttributeStringListValue": {
       "type": "list",
       "member": {
         "shape": "String"
-      },
-      "max": 5,
-      "min": 1
+      }
     },
     "DocumentAttributeStringValue": {
       "type": "string",
@@ -1883,7 +2143,7 @@
           "documentation": "<p>The unique key for the document attribute.</p>"
         }
       },
-      "documentation": "<p>Information a document attribute</p>"
+      "documentation": "<p>Information about a document attribute</p>"
     },
     "FacetList": {
       "type": "list",
@@ -2027,6 +2287,10 @@
           "shape": "IndexId",
           "documentation": "<p>A unique identifier for the index. Use this to identify the index when you are using operations such as <code>Query</code>, <code>DescribeIndex</code>, <code>UpdateIndex</code>, and <code>DeleteIndex</code>.</p>"
         },
+        "Edition": {
+          "shape": "IndexEdition",
+          "documentation": "<p>Indicates whether the index is a enterprise edition index or a developer edition index. </p>"
+        },
         "CreatedAt": {
           "shape": "Timestamp",
           "documentation": "<p>The Unix timestamp when the index was created.</p>"
@@ -2047,6 +2311,13 @@
       "member": {
         "shape": "IndexConfigurationSummary"
       }
+    },
+    "IndexEdition": {
+      "type": "string",
+      "enum": [
+        "DEVELOPER_EDITION",
+        "ENTERPRISE_EDITION"
+      ]
     },
     "IndexFieldName": {
       "type": "string",
@@ -2091,11 +2362,16 @@
         "ACTIVE",
         "DELETING",
         "FAILED",
+        "UPDATING",
         "SYSTEM_UPDATING"
       ]
     },
     "IndexedQuestionAnswersCount": {
       "type": "integer",
+      "min": 0
+    },
+    "IndexedTextBytes": {
+      "type": "long",
       "min": 0
     },
     "IndexedTextDocumentsCount": {
@@ -2249,6 +2525,27 @@
         }
       }
     },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceARN"
+      ],
+      "members": {
+        "ResourceARN": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the index, FAQ, or data source to get a list of tags for.</p>"
+        }
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>A list of tags associated with the index, FAQ, or data source.</p>"
+        }
+      }
+    },
     "Long": {
       "type": "long"
     },
@@ -2272,10 +2569,77 @@
       "max": 100,
       "min": 1
     },
+    "MetricValue": {
+      "type": "string",
+      "pattern": "(([1-9][0-9]*)|0)"
+    },
     "NextToken": {
       "type": "string",
       "max": 800,
       "min": 1
+    },
+    "OneDriveConfiguration": {
+      "type": "structure",
+      "required": [
+        "TenantDomain",
+        "SecretArn",
+        "OneDriveUsers"
+      ],
+      "members": {
+        "TenantDomain": {
+          "shape": "TenantDomain",
+          "documentation": "<p>Tha Azure Active Directory domain of the organization. </p>"
+        },
+        "SecretArn": {
+          "shape": "SecretArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains the user name and password to connect to OneDrive. The user namd should be the application ID for the OneDrive application, and the password is the application key for the OneDrive application.</p>"
+        },
+        "OneDriveUsers": {
+          "shape": "OneDriveUsers",
+          "documentation": "<p>A list of user accounts whose documents should be indexed.</p>"
+        },
+        "InclusionPatterns": {
+          "shape": "DataSourceInclusionsExclusionsStrings",
+          "documentation": "<p>A list of regular expression patterns. Documents that match the pattern are included in the index. Documents that don't match the pattern are excluded from the index. If a document matches both an inclusion pattern and an exclusion pattern, the document is not included in the index. </p> <p>The exclusion pattern is applied to the file name.</p>"
+        },
+        "ExclusionPatterns": {
+          "shape": "DataSourceInclusionsExclusionsStrings",
+          "documentation": "<p>List of regular expressions applied to documents. Items that match the exclusion pattern are not indexed. If you provide both an inclusion pattern and an exclusion pattern, any item that matches the exclusion pattern isn't indexed. </p> <p>The exclusion pattern is applied to the file name.</p>"
+        },
+        "FieldMappings": {
+          "shape": "DataSourceToIndexFieldMappingList",
+          "documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map Microsoft OneDrive fields to custom fields in the Amazon Kendra index. You must first create the index fields before you map OneDrive fields.</p>"
+        }
+      },
+      "documentation": "<p>Provides configuration information for data sources that connect to OneDrive.</p>"
+    },
+    "OneDriveUser": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "^(?!\\s).+@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$"
+    },
+    "OneDriveUserList": {
+      "type": "list",
+      "member": {
+        "shape": "OneDriveUser"
+      },
+      "max": 100,
+      "min": 1
+    },
+    "OneDriveUsers": {
+      "type": "structure",
+      "members": {
+        "OneDriveUserList": {
+          "shape": "OneDriveUserList",
+          "documentation": "<p>A list of users whose documents should be indexed. Specify the user names in email format, for example, <code>username@tenantdomain</code>. If you need to index the documents of more than 100 users, use the <code>OneDriveUserS3Path</code> field to specify the location of a file containing a list of users.</p>"
+        },
+        "OneDriveUserS3Path": {
+          "shape": "S3Path",
+          "documentation": "<p>The S3 bucket location of a file containing a list of users whose documents should be indexed.</p>"
+        }
+      },
+      "documentation": "<p>User accounts whose documents should be indexed.</p>"
     },
     "Order": {
       "type": "string",
@@ -2311,9 +2675,7 @@
       "type": "list",
       "member": {
         "shape": "Principal"
-      },
-      "max": 200,
-      "min": 1
+      }
     },
     "PrincipalName": {
       "type": "string",
@@ -2327,6 +2689,10 @@
         "USER",
         "GROUP"
       ]
+    },
+    "QueryCapacityUnit": {
+      "type": "integer",
+      "min": 0
     },
     "QueryId": {
       "type": "string",
@@ -2370,7 +2736,7 @@
         },
         "PageSize": {
           "shape": "Integer",
-          "documentation": "<p>Sets the number of results that are returned in each page of results. The default page size is 100.</p>"
+          "documentation": "<p>Sets the number of results that are returned in each page of results. The default page size is 10. The maximum number of results returned is 100. If you ask for more than 100 results, only 100 are returned.</p>"
         }
       }
     },
@@ -2408,7 +2774,7 @@
         },
         "AdditionalAttributes": {
           "shape": "AdditionalResultAttributeList",
-          "documentation": "<p/>"
+          "documentation": "<p>One or more additional attribues associated with the query result.</p>"
         },
         "DocumentId": {
           "shape": "DocumentId",
@@ -2550,7 +2916,7 @@
         },
         "ExclusionPatterns": {
           "shape": "DataSourceInclusionsExclusionsStrings",
-          "documentation": "<p>A list of glob patterns for documents that should not be indexed. If a document that matches an inclusion prefix also matches an exclusion pattern, the document is not indexed.</p> <p>For more information about glob patterns, see <a href=\"http://wikipedia.org/wiki/Glob_%28programming%29\">glob (programming)</a> in <i>Wikipedia</i>.</p>"
+          "documentation": "<p>A list of glob patterns for documents that should not be indexed. If a document that matches an inclusion prefix also matches an exclusion pattern, the document is not indexed.</p> <p>For more information about glob patterns, see <a href=\"https://en.wikipedia.org/wiki/Glob_(programming)\">glob (programming)</a> in <i>Wikipedia</i>.</p>"
         },
         "DocumentsMetadataConfiguration": {
           "shape": "DocumentsMetadataConfiguration"
@@ -2584,6 +2950,260 @@
         }
       },
       "documentation": "<p>Information required to find a specific file in an Amazon S3 bucket.</p>"
+    },
+    "SalesforceChatterFeedConfiguration": {
+      "type": "structure",
+      "required": [
+        "DocumentDataFieldName"
+      ],
+      "members": {
+        "DocumentDataFieldName": {
+          "shape": "DataSourceFieldName",
+          "documentation": "<p>The name of the column in the Salesforce FeedItem table that contains the content to index. Typically this is the <code>Body</code> column.</p>"
+        },
+        "DocumentTitleFieldName": {
+          "shape": "DataSourceFieldName",
+          "documentation": "<p>The name of the column in the Salesforce FeedItem table that contains the title of the document. This is typically the <code>Title</code> collumn.</p>"
+        },
+        "FieldMappings": {
+          "shape": "DataSourceToIndexFieldMappingList",
+          "documentation": "<p>Maps fields from a Salesforce chatter feed into Amazon Kendra index fields.</p>"
+        },
+        "IncludeFilterTypes": {
+          "shape": "SalesforceChatterFeedIncludeFilterTypes",
+          "documentation": "<p>Filters the documents in the feed based on status of the user. When you specify <code>ACTIVE_USERS</code> only documents from users who have an active account are indexed. When you specify <code>STANDARD_USER</code> only documents for Salesforce standard users are documented. You can specify both.</p>"
+        }
+      },
+      "documentation": "<p>Defines configuration for syncing a Salesforce chatter feed. The contents of the object comes from the Salesforce FeedItem table.</p>"
+    },
+    "SalesforceChatterFeedIncludeFilterType": {
+      "type": "string",
+      "enum": [
+        "ACTIVE_USER",
+        "STANDARD_USER"
+      ]
+    },
+    "SalesforceChatterFeedIncludeFilterTypes": {
+      "type": "list",
+      "member": {
+        "shape": "SalesforceChatterFeedIncludeFilterType"
+      },
+      "max": 2,
+      "min": 1
+    },
+    "SalesforceConfiguration": {
+      "type": "structure",
+      "required": [
+        "ServerUrl",
+        "SecretArn"
+      ],
+      "members": {
+        "ServerUrl": {
+          "shape": "Url",
+          "documentation": "<p>The instance URL for the Salesforce site that you want to index.</p>"
+        },
+        "SecretArn": {
+          "shape": "SecretArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains the key/value pairs required to connect to your Salesforce instance. The secret must contain a JSON structure with the following keys:</p> <ul> <li> <p>authenticationUrl - The OAUTH endpoint that Amazon Kendra connects to get an OAUTH token. </p> </li> <li> <p>consumerKey - The application public key generated when you created your Salesforce application.</p> </li> <li> <p>consumerSecret - The application private key generated when you created your Salesforce application.</p> </li> <li> <p>password - The password associated with the user logging in to the Salesforce instance.</p> </li> <li> <p>securityToken - The token associated with the user account logging in to the Salesforce instance.</p> </li> <li> <p>username - The user name of the user logging in to the Salesforce instance.</p> </li> </ul>"
+        },
+        "StandardObjectConfigurations": {
+          "shape": "SalesforceStandardObjectConfigurationList",
+          "documentation": "<p>Specifies the Salesforce standard objects that Amazon Kendra indexes.</p>"
+        },
+        "KnowledgeArticleConfiguration": {
+          "shape": "SalesforceKnowledgeArticleConfiguration",
+          "documentation": "<p>Specifies configuration information for the knowlege article types that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge articles and the standard fields of knowledge articles, or the custom fields of custom knowledge articles, but not both.</p>"
+        },
+        "ChatterFeedConfiguration": {
+          "shape": "SalesforceChatterFeedConfiguration",
+          "documentation": "<p>Specifies configuration information for Salesforce chatter feeds.</p>"
+        },
+        "CrawlAttachments": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether Amazon Kendra should index attachments to Salesforce objects.</p>"
+        },
+        "StandardObjectAttachmentConfiguration": {
+          "shape": "SalesforceStandardObjectAttachmentConfiguration",
+          "documentation": "<p>Provides configuration information for processing attachments to Salesforce standard objects. </p>"
+        },
+        "IncludeAttachmentFilePatterns": {
+          "shape": "DataSourceInclusionsExclusionsStrings",
+          "documentation": "<p>A list of regular expression patterns. Documents that match the patterns are included in the index. Documents that don't match the patterns are excluded from the index. If a document matches both an inclusion pattern and an exclusion pattern, the document is not included in the index.</p> <p>The regex is applied to the name of the attached file.</p>"
+        },
+        "ExcludeAttachmentFilePatterns": {
+          "shape": "DataSourceInclusionsExclusionsStrings",
+          "documentation": "<p>A list of regular expression patterns. Documents that match the patterns are excluded from the index. Documents that don't match the patterns are included in the index. If a document matches both an exclusion pattern and an inclusion pattern, the document is not included in the index.</p> <p>The regex is applied to the name of the attached file.</p>"
+        }
+      },
+      "documentation": "<p>Provides configuration information for connecting to a Salesforce data source.</p>"
+    },
+    "SalesforceCustomKnowledgeArticleTypeConfiguration": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "DocumentDataFieldName"
+      ],
+      "members": {
+        "Name": {
+          "shape": "SalesforceCustomKnowledgeArticleTypeName",
+          "documentation": "<p>The name of the configuration.</p>"
+        },
+        "DocumentDataFieldName": {
+          "shape": "DataSourceFieldName",
+          "documentation": "<p>The name of the field in the custom knowledge article that contains the document data to index.</p>"
+        },
+        "DocumentTitleFieldName": {
+          "shape": "DataSourceFieldName",
+          "documentation": "<p>The name of the field in the custom knowledge article that contains the document title.</p>"
+        },
+        "FieldMappings": {
+          "shape": "DataSourceToIndexFieldMappingList",
+          "documentation": "<p>One or more objects that map fields in the custom knowledge article to fields in the Amazon Kendra index.</p>"
+        }
+      },
+      "documentation": "<p>Provides configuration information for indexing Salesforce custom articles.</p>"
+    },
+    "SalesforceCustomKnowledgeArticleTypeConfigurationList": {
+      "type": "list",
+      "member": {
+        "shape": "SalesforceCustomKnowledgeArticleTypeConfiguration"
+      },
+      "max": 10,
+      "min": 1
+    },
+    "SalesforceCustomKnowledgeArticleTypeName": {
+      "type": "string",
+      "max": 100,
+      "min": 1,
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$"
+    },
+    "SalesforceKnowledgeArticleConfiguration": {
+      "type": "structure",
+      "required": [
+        "IncludedStates"
+      ],
+      "members": {
+        "IncludedStates": {
+          "shape": "SalesforceKnowledgeArticleStateList",
+          "documentation": "<p>Specifies the document states that should be included when Amazon Kendra indexes knowledge articles. You must specify at least one state.</p>"
+        },
+        "StandardKnowledgeArticleTypeConfiguration": {
+          "shape": "SalesforceStandardKnowledgeArticleTypeConfiguration",
+          "documentation": "<p>Provides configuration information for standard Salesforce knowledge articles.</p>"
+        },
+        "CustomKnowledgeArticleTypeConfigurations": {
+          "shape": "SalesforceCustomKnowledgeArticleTypeConfigurationList",
+          "documentation": "<p>Provides configuration information for custom Salesforce knowledge articles.</p>"
+        }
+      },
+      "documentation": "<p>Specifies configuration information for the knowlege article types that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge articles and the standard fields of knowledge articles, or the custom fields of custom knowledge articles, but not both </p>"
+    },
+    "SalesforceKnowledgeArticleState": {
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "PUBLISHED",
+        "ARCHIVED"
+      ]
+    },
+    "SalesforceKnowledgeArticleStateList": {
+      "type": "list",
+      "member": {
+        "shape": "SalesforceKnowledgeArticleState"
+      },
+      "max": 3,
+      "min": 1
+    },
+    "SalesforceStandardKnowledgeArticleTypeConfiguration": {
+      "type": "structure",
+      "required": [
+        "DocumentDataFieldName"
+      ],
+      "members": {
+        "DocumentDataFieldName": {
+          "shape": "DataSourceFieldName",
+          "documentation": "<p>The name of the field that contains the document data to index.</p>"
+        },
+        "DocumentTitleFieldName": {
+          "shape": "DataSourceFieldName",
+          "documentation": "<p>The name of the field that contains the document title.</p>"
+        },
+        "FieldMappings": {
+          "shape": "DataSourceToIndexFieldMappingList",
+          "documentation": "<p>One or more objects that map fields in the knowledge article to Amazon Kendra index fields. The index field must exist before you can map a Salesforce field to it.</p>"
+        }
+      },
+      "documentation": "<p>Provides configuration information for standard Salesforce knowledge articles.</p>"
+    },
+    "SalesforceStandardObjectAttachmentConfiguration": {
+      "type": "structure",
+      "members": {
+        "DocumentTitleFieldName": {
+          "shape": "DataSourceFieldName",
+          "documentation": "<p>The name of the field used for the document title.</p>"
+        },
+        "FieldMappings": {
+          "shape": "DataSourceToIndexFieldMappingList",
+          "documentation": "<p>One or more objects that map fields in attachments to Amazon Kendra index fields.</p>"
+        }
+      },
+      "documentation": "<p>Provides configuration information for processing attachments to Salesforce standard objects. </p>"
+    },
+    "SalesforceStandardObjectConfiguration": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "DocumentDataFieldName"
+      ],
+      "members": {
+        "Name": {
+          "shape": "SalesforceStandardObjectName",
+          "documentation": "<p>The name of the standard object.</p>"
+        },
+        "DocumentDataFieldName": {
+          "shape": "DataSourceFieldName",
+          "documentation": "<p>The name of the field in the standard object table that contains the document contents.</p>"
+        },
+        "DocumentTitleFieldName": {
+          "shape": "DataSourceFieldName",
+          "documentation": "<p>The name of the field in the standard object table that contains the document titleB.</p>"
+        },
+        "FieldMappings": {
+          "shape": "DataSourceToIndexFieldMappingList",
+          "documentation": "<p>One or more objects that map fields in the standard object to Amazon Kendra index fields. The index field must exist before you can map a Salesforce field to it.</p>"
+        }
+      },
+      "documentation": "<p>Specifies confguration information for indexing a single standard object.</p>"
+    },
+    "SalesforceStandardObjectConfigurationList": {
+      "type": "list",
+      "member": {
+        "shape": "SalesforceStandardObjectConfiguration"
+      },
+      "max": 17,
+      "min": 1
+    },
+    "SalesforceStandardObjectName": {
+      "type": "string",
+      "enum": [
+        "ACCOUNT",
+        "CAMPAIGN",
+        "CASE",
+        "CONTACT",
+        "CONTRACT",
+        "DOCUMENT",
+        "GROUP",
+        "IDEA",
+        "LEAD",
+        "OPPORTUNITY",
+        "PARTNER",
+        "PRICEBOOK",
+        "PRODUCT",
+        "PROFILE",
+        "SOLUTION",
+        "TASK",
+        "USER"
+      ]
     },
     "ScanSchedule": {
       "type": "string"
@@ -2630,6 +3250,116 @@
       },
       "documentation": "<p>Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.</p>"
     },
+    "ServiceNowBuildVersionType": {
+      "type": "string",
+      "enum": [
+        "LONDON",
+        "OTHERS"
+      ]
+    },
+    "ServiceNowConfiguration": {
+      "type": "structure",
+      "required": [
+        "HostUrl",
+        "SecretArn",
+        "ServiceNowBuildVersion"
+      ],
+      "members": {
+        "HostUrl": {
+          "shape": "ServiceNowHostUrl",
+          "documentation": "<p>The ServiceNow instance that the data source connects to. The host endpoint should look like the following: <code>{instance}.service-now.com.</code> </p>"
+        },
+        "SecretArn": {
+          "shape": "SecretArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Secret Manager secret that contains the user name and password required to connect to the ServiceNow instance.</p>"
+        },
+        "ServiceNowBuildVersion": {
+          "shape": "ServiceNowBuildVersionType",
+          "documentation": "<p>The identifier of the release that the ServiceNow host is running. If the host is not running the <code>LONDON</code> release, use <code>OTHERS</code>.</p>"
+        },
+        "KnowledgeArticleConfiguration": {
+          "shape": "ServiceNowKnowledgeArticleConfiguration",
+          "documentation": "<p>Provides configuration information for crawling knowledge articles in the ServiceNow site.</p>"
+        },
+        "ServiceCatalogConfiguration": {
+          "shape": "ServiceNowServiceCatalogConfiguration",
+          "documentation": "<p>Provides configuration information for crawling service catalogs in the ServiceNow site.</p>"
+        }
+      },
+      "documentation": "<p>Provides configuration information required to connect to a ServiceNow data source.</p>"
+    },
+    "ServiceNowHostUrl": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": "^(?!(^(https?|ftp|file):\\/\\/))[a-z0-9-]+(\\.service-now\\.com)$"
+    },
+    "ServiceNowKnowledgeArticleConfiguration": {
+      "type": "structure",
+      "required": [
+        "DocumentDataFieldName"
+      ],
+      "members": {
+        "CrawlAttachments": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether Amazon Kendra should index attachments to knowledge articles.</p>"
+        },
+        "IncludeAttachmentFilePatterns": {
+          "shape": "DataSourceInclusionsExclusionsStrings",
+          "documentation": "<p>List of regular expressions applied to knowledge articles. Items that don't match the inclusion pattern are not indexed. The regex is applied to the field specified in the <code>PatternTargetField</code>.</p>"
+        },
+        "ExcludeAttachmentFilePatterns": {
+          "shape": "DataSourceInclusionsExclusionsStrings",
+          "documentation": "<p>List of regular expressions applied to knowledge articles. Items that don't match the inclusion pattern are not indexed. The regex is applied to the field specified in the <code>PatternTargetField</code> </p>"
+        },
+        "DocumentDataFieldName": {
+          "shape": "DataSourceFieldName",
+          "documentation": "<p>The name of the ServiceNow field that is mapped to the index document contents field in the Amazon Kendra index.</p>"
+        },
+        "DocumentTitleFieldName": {
+          "shape": "DataSourceFieldName",
+          "documentation": "<p>The name of the ServiceNow field that is mapped to the index document title field.</p>"
+        },
+        "FieldMappings": {
+          "shape": "DataSourceToIndexFieldMappingList",
+          "documentation": "<p>Mapping between ServiceNow fields and Amazon Kendra index fields. You must create the index field before you map the field.</p>"
+        }
+      },
+      "documentation": "<p>Provides configuration information for crawling knowledge articles in the ServiceNow site.</p>"
+    },
+    "ServiceNowServiceCatalogConfiguration": {
+      "type": "structure",
+      "required": [
+        "DocumentDataFieldName"
+      ],
+      "members": {
+        "CrawlAttachments": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether Amazon Kendra should crawl attachments to the service catalog items. </p>"
+        },
+        "IncludeAttachmentFilePatterns": {
+          "shape": "DataSourceInclusionsExclusionsStrings",
+          "documentation": "<p>Determines the types of file attachments that are included in the index. </p>"
+        },
+        "ExcludeAttachmentFilePatterns": {
+          "shape": "DataSourceInclusionsExclusionsStrings",
+          "documentation": "<p>Determines the types of file attachments that are excluded from the index.</p>"
+        },
+        "DocumentDataFieldName": {
+          "shape": "DataSourceFieldName",
+          "documentation": "<p>The name of the ServiceNow field that is mapped to the index document contents field in the Amazon Kendra index.</p>"
+        },
+        "DocumentTitleFieldName": {
+          "shape": "DataSourceFieldName",
+          "documentation": "<p>The name of the ServiceNow field that is mapped to the index document title field.</p>"
+        },
+        "FieldMappings": {
+          "shape": "DataSourceToIndexFieldMappingList",
+          "documentation": "<p>Mapping between ServiceNow fields and Amazon Kendra index fields. You must create the index field before you map the field.</p>"
+        }
+      },
+      "documentation": "<p>Provides configuration information for crawling service catalog items in the ServiceNow site</p>"
+    },
     "SharePointConfiguration": {
       "type": "structure",
       "required": [
@@ -2664,7 +3394,7 @@
         },
         "ExclusionPatterns": {
           "shape": "DataSourceInclusionsExclusionsStrings",
-          "documentation": "<p>A list of regular expression patterns. Documents that match the patterns are excluded from the index. Documents that don't match the patterns are included in the index. If a document matches both an exclusion pattern and an inclusion pattern, the document is not included in the index.</p> <p>The regex is applied to the display URL of the SharePoint document.</p>"
+          "documentation": "<p>A list of regulary expression patterns. Documents that match the patterns are excluded from the index. Documents that don't match the patterns are included in the index. If a document matches both an exclusion pattern and an inclusion pattern, the document is not included in the index.</p> <p>The regex is applied to the display URL of the SharePoint document.</p>"
         },
         "VpcConfiguration": {
           "shape": "DataSourceVpcConfiguration"
@@ -2737,6 +3467,10 @@
         }
       }
     },
+    "StorageCapacityUnit": {
+      "type": "integer",
+      "min": 0
+    },
     "String": {
       "type": "string",
       "max": 2048,
@@ -2787,15 +3521,91 @@
       "min": 1,
       "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$"
     },
+    "Tag": {
+      "type": "structure",
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "members": {
+        "Key": {
+          "shape": "TagKey",
+          "documentation": "<p>The key for the tag. Keys are not case sensitive and must be unique for the index, FAQ, or data source.</p>"
+        },
+        "Value": {
+          "shape": "TagValue",
+          "documentation": "<p>The value associated with the tag. The value may be an empty string but it can't be null.</p>"
+        }
+      },
+      "documentation": "<p>A list of key/value pairs that identify an index, FAQ, or data source. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.</p>"
+    },
+    "TagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
+    "TagKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      },
+      "max": 200,
+      "min": 0
+    },
+    "TagList": {
+      "type": "list",
+      "member": {
+        "shape": "Tag"
+      },
+      "max": 200,
+      "min": 0
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceARN",
+        "Tags"
+      ],
+      "members": {
+        "ResourceARN": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the index, FAQ, or data source to tag.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>A list of tag keys to add to the index, FAQ, or data source. If a tag already exists, the existing value is replaced with the new value.</p>"
+        }
+      }
+    },
+    "TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValue": {
+      "type": "string",
+      "max": 256,
+      "min": 0
+    },
+    "TenantDomain": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "^([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\\.)+[a-z]{2,}$"
+    },
     "TextDocumentStatistics": {
       "type": "structure",
       "required": [
-        "IndexedTextDocumentsCount"
+        "IndexedTextDocumentsCount",
+        "IndexedTextBytes"
       ],
       "members": {
         "IndexedTextDocumentsCount": {
           "shape": "IndexedTextDocumentsCount",
           "documentation": "<p>The number of text documents indexed.</p>"
+        },
+        "IndexedTextBytes": {
+          "shape": "IndexedTextBytes",
+          "documentation": "<p>The total size, in bytes, of the indexed documents.</p>"
         }
       },
       "documentation": "<p>Provides information about text documents indexed in an index.</p>"
@@ -2832,9 +3642,28 @@
       "type": "timestamp"
     },
     "Title": {
-      "type": "string",
-      "max": 1024,
-      "min": 1
+      "type": "string"
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceARN",
+        "TagKeys"
+      ],
+      "members": {
+        "ResourceARN": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the index, FAQ, or data source to remove the tag from.</p>"
+        },
+        "TagKeys": {
+          "shape": "TagKeyList",
+          "documentation": "<p>A list of tag keys to remove from the index, FAQ, or data source. If a tag key does not exist on the resource, it is ignored.</p>"
+        }
+      }
+    },
+    "UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
     },
     "UpdateDataSourceRequest": {
       "type": "structure",
@@ -2897,6 +3726,10 @@
         "DocumentMetadataConfigurationUpdates": {
           "shape": "DocumentMetadataConfigurationList",
           "documentation": "<p>The document metadata to update. </p>"
+        },
+        "CapacityUnits": {
+          "shape": "CapacityUnitsConfiguration",
+          "documentation": "<p>Sets the number of addtional storage and query capacity units that should be used by the index. You can change the capacity of the index up to 5 times per day.</p> <p>If you are using extra storage units, you can't reduce the storage capacity below that required to meet the storage needs for your index.</p>"
         }
       }
     },
@@ -2904,7 +3737,7 @@
       "type": "string",
       "max": 2048,
       "min": 1,
-      "pattern": "^(https?|ftp|file):\\/\\/(.*)"
+      "pattern": "^(https?|ftp|file):\\/\\/([^\\s]*)"
     },
     "ValueImportanceMap": {
       "type": "map",

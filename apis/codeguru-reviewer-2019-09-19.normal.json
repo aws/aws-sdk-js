@@ -508,6 +508,12 @@
       "max": 64,
       "min": 6
     },
+    "ConnectionArn": {
+      "type": "string",
+      "max": 256,
+      "min": 0,
+      "pattern": "arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+"
+    },
     "DescribeCodeReviewRequest": {
       "type": "structure",
       "required": [
@@ -920,7 +926,8 @@
       "type": "string",
       "enum": [
         "CodeCommit",
-        "GitHub"
+        "GitHub",
+        "Bitbucket"
       ]
     },
     "ProviderTypes": {
@@ -1082,6 +1089,10 @@
         "CodeCommit": {
           "shape": "CodeCommitRepository",
           "documentation": "<p>Information about an AWS CodeCommit repository.</p>"
+        },
+        "Bitbucket": {
+          "shape": "ThirdPartySourceRepository",
+          "documentation": "<p> Information about a Bitbucket Cloud repository. </p>"
         }
       },
       "documentation": "<p>Information about a repository.</p>"
@@ -1096,6 +1107,10 @@
         "AssociationArn": {
           "shape": "Arn",
           "documentation": "<p>The Amazon Resource Name (ARN) identifying the repository association.</p>"
+        },
+        "ConnectionArn": {
+          "shape": "ConnectionArn",
+          "documentation": "<p> The Amazon Resource Name (ARN) identifying the repository connection. </p>"
         },
         "Name": {
           "shape": "Name",
@@ -1158,6 +1173,10 @@
           "shape": "Arn",
           "documentation": "<p>The Amazon Resource Name (ARN) identifying the repository association.</p>"
         },
+        "ConnectionArn": {
+          "shape": "ConnectionArn",
+          "documentation": "<p> The Amazon Resource Name (ARN) identifying the repository connection. </p>"
+        },
         "LastUpdatedTimeStamp": {
           "shape": "TimeStamp",
           "documentation": "<p>The time, in milliseconds since the epoch, since the repository association was last updated. </p>"
@@ -1213,6 +1232,29 @@
       "max": 2048,
       "min": 1
     },
+    "ThirdPartySourceRepository": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "ConnectionArn",
+        "Owner"
+      ],
+      "members": {
+        "Name": {
+          "shape": "Name",
+          "documentation": "<p> The name of the third party source repository. </p>"
+        },
+        "ConnectionArn": {
+          "shape": "ConnectionArn",
+          "documentation": "<p> The Amazon Resource Name (ARN) identifying the repository connection. </p>"
+        },
+        "Owner": {
+          "shape": "Owner",
+          "documentation": "<p> The username of the owner of the repository. </p>"
+        }
+      },
+      "documentation": "<p> Information about a third party source repository connected through CodeStar Connections. </p>"
+    },
     "TimeStamp": {
       "type": "timestamp"
     },
@@ -1236,5 +1278,5 @@
       "min": 1
     }
   },
-  "documentation": "<p>This section provides documentation for the Amazon CodeGuru Reviewer API operations.</p>"
+  "documentation": "<p>This section provides documentation for the Amazon CodeGuru Reviewer API operations. Amazon CodeGuru Reviewer is a service that uses program analysis and machine learning to detect potential defects that are difficult for developers to find and recommends fixes in your Java code.</p> <p>By proactively detecting and providing recommendations for addressing code defects and implementing best practices, CodeGuru Reviewer improves the overall quality and maintainability of your code base during the code review stage. For more information about CodeGuru Reviewer, see the <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/welcome.html\">Amazon CodeGuru Reviewer User Guide</a>.</p>"
 }

@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.673.0-->
+<!--LATEST=2.674.0-->
 <!--ENTRYINSERT-->
+
+## 2.674.0
+* feature: CodeGuruReviewer: Add Bitbucket integration APIs
+* feature: EC2: M6g instances are our next-generation general purpose instances powered by AWS Graviton2 processors
+* feature: Kendra: Amazon Kendra is now generally available. As part of general availability, we are launching * Developer edition * Ability to scale your Amazon Kendra index with capacity units * Support for new connectors * Support for new tagging API's * Support for Deleting data source * Metrics for data source sync operations * Metrics for query & storage utilization
 
 ## 2.673.0
 * feature: SageMaker: This release adds a new parameter (EnableInterContainerTrafficEncryption) to CreateProcessingJob API to allow for enabling inter-container traffic encryption on processing jobs.

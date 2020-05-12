@@ -52,6 +52,14 @@ declare class Kendra extends Service {
    */
   createIndex(callback?: (err: AWSError, data: Kendra.Types.CreateIndexResponse) => void): Request<Kendra.Types.CreateIndexResponse, AWSError>;
   /**
+   * Deletes an Amazon Kendra data source. An exception is not thrown if the data source is already being deleted. While the data source is being deleted, the Status field returned by a call to the operation is set to DELETING. For more information, see Deleting Data Sources.
+   */
+  deleteDataSource(params: Kendra.Types.DeleteDataSourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an Amazon Kendra data source. An exception is not thrown if the data source is already being deleted. While the data source is being deleted, the Status field returned by a call to the operation is set to DELETING. For more information, see Deleting Data Sources.
+   */
+  deleteDataSource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Removes an FAQ from an index.
    */
   deleteFaq(params: Kendra.Types.DeleteFaqRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -124,6 +132,14 @@ declare class Kendra extends Service {
    */
   listIndices(callback?: (err: AWSError, data: Kendra.Types.ListIndicesResponse) => void): Request<Kendra.Types.ListIndicesResponse, AWSError>;
   /**
+   * Gets a list of tags associated with a specified resource. Indexes, FAQs, and data sources can have tags associated with them.
+   */
+  listTagsForResource(params: Kendra.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Kendra.Types.ListTagsForResourceResponse) => void): Request<Kendra.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Gets a list of tags associated with a specified resource. Indexes, FAQs, and data sources can have tags associated with them.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Kendra.Types.ListTagsForResourceResponse) => void): Request<Kendra.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Searches an active index. Use this API to search your documents using query. The Query operation enables to do faceted search and to filter results based on document attributes. It also enables you to provide user context that Amazon Kendra uses to enforce document access control in the search results.  Amazon Kendra searches your index for text content and question and answer (FAQ) content. By default the response contains three types of results.   Relevant passages   Matching FAQs   Relevant documents   You can specify that the query return only one type of result using the QueryResultTypeConfig parameter.
    */
   query(params: Kendra.Types.QueryRequest, callback?: (err: AWSError, data: Kendra.Types.QueryResult) => void): Request<Kendra.Types.QueryResult, AWSError>;
@@ -156,6 +172,22 @@ declare class Kendra extends Service {
    */
   submitFeedback(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Adds the specified tag to the specified index, FAQ, or data source resource. If the tag already exists, the existing value is replaced with the new value.
+   */
+  tagResource(params: Kendra.Types.TagResourceRequest, callback?: (err: AWSError, data: Kendra.Types.TagResourceResponse) => void): Request<Kendra.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds the specified tag to the specified index, FAQ, or data source resource. If the tag already exists, the existing value is replaced with the new value.
+   */
+  tagResource(callback?: (err: AWSError, data: Kendra.Types.TagResourceResponse) => void): Request<Kendra.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes a tag from an index, FAQ, or a data source.
+   */
+  untagResource(params: Kendra.Types.UntagResourceRequest, callback?: (err: AWSError, data: Kendra.Types.UntagResourceResponse) => void): Request<Kendra.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes a tag from an index, FAQ, or a data source.
+   */
+  untagResource(callback?: (err: AWSError, data: Kendra.Types.UntagResourceResponse) => void): Request<Kendra.Types.UntagResourceResponse, AWSError>;
+  /**
    * Updates an existing Amazon Kendra data source.
    */
   updateDataSource(params: Kendra.Types.UpdateDataSourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -187,15 +219,15 @@ declare namespace Kendra {
   }
   export interface AdditionalResultAttribute {
     /**
-     * 
+     * The key that identifies the attribute.
      */
     Key: String;
     /**
-     * 
+     * The data type of the Value property.
      */
     ValueType: AdditionalResultAttributeValueType;
     /**
-     * 
+     * An object that contains the attribute value.
      */
     Value: AdditionalResultAttributeValue;
   }
@@ -207,6 +239,7 @@ declare namespace Kendra {
     TextWithHighlightsValue?: TextWithHighlights;
   }
   export type AdditionalResultAttributeValueType = "TEXT_WITH_HIGHLIGHTS_VALUE"|string;
+  export type AmazonResourceName = string;
   export interface AttributeFilter {
     /**
      * Performs a logical AND operation on all supplied filters.
@@ -225,11 +258,11 @@ declare namespace Kendra {
      */
     EqualsTo?: DocumentAttribute;
     /**
-     * Returns true when a document contains all of the specified document attributes.
+     * Returns true when a document contains all of the specified document attributes. This filter is only appicable to StringListValue metadata.
      */
     ContainsAll?: DocumentAttribute;
     /**
-     * Returns true when a document contains any of the specified document attributes.
+     * Returns true when a document contains any of the specified document attributes.This filter is only appicable to StringListValue metadata.
      */
     ContainsAny?: DocumentAttribute;
     /**
@@ -259,6 +292,7 @@ declare namespace Kendra {
      * One or more identifiers for documents to delete from the index.
      */
     DocumentIdList: DocumentIdList;
+    DataSourceSyncJobMetricTarget?: DataSourceSyncJobMetricTarget;
   }
   export interface BatchDeleteDocumentResponse {
     /**
@@ -291,13 +325,13 @@ declare namespace Kendra {
      */
     RoleArn?: RoleArn;
     /**
-     * One or more documents to add to the index.  Each document is limited to 5 Mb, the total size of the list is limited to 50 Mb.
+     * One or more documents to add to the index.  Documents have the following file size limits.   5 MB total size for inline documents   50 MB total size for files from an S3 bucket   5 MB extracted text for any file   For more information about file size and transaction per second quotas, see Quotas.
      */
     Documents: DocumentList;
   }
   export interface BatchPutDocumentResponse {
     /**
-     * A list of documents that were not added to the index because the document failed a validation check. Each document contains an error message that indicates why the document couldn't be added to the index. If there was an error adding a document to an index the error is reported in your AWS CloudWatch log.
+     * A list of documents that were not added to the index because the document failed a validation check. Each document contains an error message that indicates why the document couldn't be added to the index. If there was an error adding a document to an index the error is reported in your AWS CloudWatch log. For more information, see Monitoring Amazon Kendra with Amazon CloudWatch Logs 
      */
     FailedDocuments?: BatchPutDocumentResponseFailedDocuments;
   }
@@ -318,6 +352,16 @@ declare namespace Kendra {
   export type BatchPutDocumentResponseFailedDocuments = BatchPutDocumentResponseFailedDocument[];
   export type _Blob = Buffer|Uint8Array|Blob|string;
   export type Boolean = boolean;
+  export interface CapacityUnitsConfiguration {
+    /**
+     * The amount of extra storage capacity for an index. Each capacity unit provides 150 Gb of storage space or 500,000 documents, whichever is reached first.
+     */
+    StorageCapacityUnits: StorageCapacityUnit;
+    /**
+     * The amount of extra query capacity for an index. Each capacity unit provides 0.5 queries per second and 40,000 queries per day.
+     */
+    QueryCapacityUnits: QueryCapacityUnit;
+  }
   export type ChangeDetectingColumns = ColumnName[];
   export interface ClickFeedback {
     /**
@@ -325,7 +369,7 @@ declare namespace Kendra {
      */
     ResultId: ResultId;
     /**
-     * The Unix timestamp of the data and time that the result was clicked.
+     * The Unix timestamp of the date and time that the result was clicked.
      */
     ClickTime: Timestamp;
   }
@@ -406,6 +450,10 @@ declare namespace Kendra {
      * The Amazon Resource Name (ARN) of a role with permission to access the data source. For more information, see IAM Roles for Amazon Kendra.
      */
     RoleArn: RoleArn;
+    /**
+     * A list of key-value pairs that identify the data source. You can use the tags to identify and organize your resources and to control access to resources.
+     */
+    Tags?: TagList;
   }
   export interface CreateDataSourceResponse {
     /**
@@ -434,6 +482,10 @@ declare namespace Kendra {
      * The Amazon Resource Name (ARN) of a role with permission to access the S3 bucket that contains the FAQs. For more information, see IAM Roles for Amazon Kendra.
      */
     RoleArn: RoleArn;
+    /**
+     * A list of key-value pairs that identify the FAQ. You can use the tags to identify and organize your resources and to control access to resources.
+     */
+    Tags?: TagList;
   }
   export interface CreateFaqResponse {
     /**
@@ -446,6 +498,10 @@ declare namespace Kendra {
      * The name for the new index.
      */
     Name: IndexName;
+    /**
+     * The Amazon Kendra edition to use for the index. Choose DEVELOPER_EDITION for indexes intended for development, testing, or proof of concept. Use ENTERPRISE_EDITION for your production databases. Once you set the edition for an index, it can't be changed. 
+     */
+    Edition?: IndexEdition;
     /**
      * An IAM role that gives Amazon Kendra permissions to access your Amazon CloudWatch logs and metrics. This is also the role used when you use the BatchPutDocument operation to index documents from an Amazon S3 bucket.
      */
@@ -462,6 +518,10 @@ declare namespace Kendra {
      * A token that you provide to identify the request to create an index. Multiple calls to the CreateIndex operation with the same client token will create only one index.”
      */
     ClientToken?: ClientTokenName;
+    /**
+     * A list of key-value pairs that identify the index. You can use the tags to identify and organize your resources and to control access to resources.
+     */
+    Tags?: TagList;
   }
   export interface CreateIndexResponse {
     /**
@@ -482,6 +542,18 @@ declare namespace Kendra {
      * Provides information necessary to create a connector for a database.
      */
     DatabaseConfiguration?: DatabaseConfiguration;
+    /**
+     * Provides configuration information for data sources that connect to a Salesforce site.
+     */
+    SalesforceConfiguration?: SalesforceConfiguration;
+    /**
+     * Provided configuration for data sources that connect to Microsoft OneDrive.
+     */
+    OneDriveConfiguration?: OneDriveConfiguration;
+    /**
+     * Provides configuration for data sources that connect to ServiceNow instances.
+     */
+    ServiceNowConfiguration?: ServiceNowConfiguration;
   }
   export type DataSourceDateFieldFormat = string;
   export type DataSourceFieldName = string;
@@ -546,9 +618,46 @@ declare namespace Kendra {
      * If the reason that the synchronization failed is due to an error with the underlying data source, this field contains a code that identifies the error.
      */
     DataSourceErrorCode?: String;
+    /**
+     * Maps a batch delete document request to a specific data source sync job. This is optional and should only be supplied when documents are deleted by a connector.
+     */
+    Metrics?: DataSourceSyncJobMetrics;
   }
   export type DataSourceSyncJobHistoryList = DataSourceSyncJob[];
-  export type DataSourceSyncJobStatus = "FAILED"|"SUCCEEDED"|"SYNCING"|"INCOMPLETE"|"STOPPING"|"ABORTED"|string;
+  export type DataSourceSyncJobId = string;
+  export interface DataSourceSyncJobMetricTarget {
+    /**
+     * The ID of the data source that is running the sync job.
+     */
+    DataSourceId: DataSourceId;
+    /**
+     * The ID of the sync job that is running on the data source.
+     */
+    DataSourceSyncJobId: DataSourceSyncJobId;
+  }
+  export interface DataSourceSyncJobMetrics {
+    /**
+     * The number of documents added from the data source up to now in the data source sync.
+     */
+    DocumentsAdded?: MetricValue;
+    /**
+     * The number of documents modified in the data source up to now in the data source sync run.
+     */
+    DocumentsModified?: MetricValue;
+    /**
+     * The number of documents deleted from the data source up to now in the data source sync run.
+     */
+    DocumentsDeleted?: MetricValue;
+    /**
+     * The number of documents that failed to sync from the data source up to now in the data source sync run.
+     */
+    DocumentsFailed?: MetricValue;
+    /**
+     * The current number of documents crawled by the current sync job in the data source.
+     */
+    DocumentsScanned?: MetricValue;
+  }
+  export type DataSourceSyncJobStatus = "FAILED"|"SUCCEEDED"|"SYNCING"|"INCOMPLETE"|"STOPPING"|"ABORTED"|"SYNCING_INDEXING"|string;
   export interface DataSourceToIndexFieldMapping {
     /**
      * The name of the column or attribute in the data source.
@@ -564,7 +673,7 @@ declare namespace Kendra {
     IndexFieldName: IndexFieldName;
   }
   export type DataSourceToIndexFieldMappingList = DataSourceToIndexFieldMapping[];
-  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|string;
+  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|string;
   export interface DataSourceVpcConfiguration {
     /**
      * A list of identifiers for subnets within your Amazon VPC. The subnets should be able to connect to each other in the VPC, and they should have outgoing access to the Internet through a NAT device.
@@ -598,6 +707,16 @@ declare namespace Kendra {
   export type DatabaseHost = string;
   export type DatabaseName = string;
   export type DatabasePort = number;
+  export interface DeleteDataSourceRequest {
+    /**
+     * The unique identifier of the data source to delete.
+     */
+    Id: DataSourceId;
+    /**
+     * The unique identifier of the index associated with the data source.
+     */
+    IndexId: IndexId;
+  }
   export interface DeleteFaqRequest {
     /**
      * The identifier of the FAQ to remove.
@@ -739,6 +858,10 @@ declare namespace Kendra {
      */
     Id?: IndexId;
     /**
+     * The Amazon Kendra edition used for the index. You decide the edition when you create the index.
+     */
+    Edition?: IndexEdition;
+    /**
      * The Amazon Resource Name (ARN) of the IAM role that gives Amazon Kendra permission to write to your Amazon Cloudwatch logs.
      */
     RoleArn?: RoleArn;
@@ -774,6 +897,10 @@ declare namespace Kendra {
      * When th eStatus field value is FAILED, the ErrorMessage field contains a message that explains why.
      */
     ErrorMessage?: ErrorMessage;
+    /**
+     * For enterprise edtion indexes, you can choose to use additional capacity to meet the needs of your application. This contains the capacity units used for the index. A 0 for the query capacity or the storage capacity indicates that the index is using the default capacity for the index.
+     */
+    CapacityUnits?: CapacityUnitsConfiguration;
   }
   export type Description = string;
   export interface Document {
@@ -957,6 +1084,10 @@ declare namespace Kendra {
      */
     Id?: IndexId;
     /**
+     * Indicates whether the index is a enterprise edition index or a developer edition index. 
+     */
+    Edition?: IndexEdition;
+    /**
      * The Unix timestamp when the index was created.
      */
     CreatedAt: Timestamp;
@@ -970,6 +1101,7 @@ declare namespace Kendra {
     Status: IndexStatus;
   }
   export type IndexConfigurationSummaryList = IndexConfigurationSummary[];
+  export type IndexEdition = "DEVELOPER_EDITION"|"ENTERPRISE_EDITION"|string;
   export type IndexFieldName = string;
   export type IndexId = string;
   export type IndexName = string;
@@ -983,8 +1115,9 @@ declare namespace Kendra {
      */
     TextDocumentStatistics: TextDocumentStatistics;
   }
-  export type IndexStatus = "CREATING"|"ACTIVE"|"DELETING"|"FAILED"|"SYSTEM_UPDATING"|string;
+  export type IndexStatus = "CREATING"|"ACTIVE"|"DELETING"|"FAILED"|"UPDATING"|"SYSTEM_UPDATING"|string;
   export type IndexedQuestionAnswersCount = number;
+  export type IndexedTextBytes = number;
   export type IndexedTextDocumentsCount = number;
   export type Integer = number;
   export type KmsKeyId = string;
@@ -1092,12 +1225,63 @@ declare namespace Kendra {
      */
     NextToken?: NextToken;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the index, FAQ, or data source to get a list of tags for.
+     */
+    ResourceARN: AmazonResourceName;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * A list of tags associated with the index, FAQ, or data source.
+     */
+    Tags?: TagList;
+  }
   export type Long = number;
   export type MaxResultsIntegerForListDataSourceSyncJobsRequest = number;
   export type MaxResultsIntegerForListDataSourcesRequest = number;
   export type MaxResultsIntegerForListFaqsRequest = number;
   export type MaxResultsIntegerForListIndicesRequest = number;
+  export type MetricValue = string;
   export type NextToken = string;
+  export interface OneDriveConfiguration {
+    /**
+     * Tha Azure Active Directory domain of the organization. 
+     */
+    TenantDomain: TenantDomain;
+    /**
+     * The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains the user name and password to connect to OneDrive. The user namd should be the application ID for the OneDrive application, and the password is the application key for the OneDrive application.
+     */
+    SecretArn: SecretArn;
+    /**
+     * A list of user accounts whose documents should be indexed.
+     */
+    OneDriveUsers: OneDriveUsers;
+    /**
+     * A list of regular expression patterns. Documents that match the pattern are included in the index. Documents that don't match the pattern are excluded from the index. If a document matches both an inclusion pattern and an exclusion pattern, the document is not included in the index.  The exclusion pattern is applied to the file name.
+     */
+    InclusionPatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * List of regular expressions applied to documents. Items that match the exclusion pattern are not indexed. If you provide both an inclusion pattern and an exclusion pattern, any item that matches the exclusion pattern isn't indexed.  The exclusion pattern is applied to the file name.
+     */
+    ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * A list of DataSourceToIndexFieldMapping objects that map Microsoft OneDrive fields to custom fields in the Amazon Kendra index. You must first create the index fields before you map OneDrive fields.
+     */
+    FieldMappings?: DataSourceToIndexFieldMappingList;
+  }
+  export type OneDriveUser = string;
+  export type OneDriveUserList = OneDriveUser[];
+  export interface OneDriveUsers {
+    /**
+     * A list of users whose documents should be indexed. Specify the user names in email format, for example, username@tenantdomain. If you need to index the documents of more than 100 users, use the OneDriveUserS3Path field to specify the location of a file containing a list of users.
+     */
+    OneDriveUserList?: OneDriveUserList;
+    /**
+     * The S3 bucket location of a file containing a list of users whose documents should be indexed.
+     */
+    OneDriveUserS3Path?: S3Path;
+  }
   export type Order = "ASCENDING"|"DESCENDING"|string;
   export interface Principal {
     /**
@@ -1116,6 +1300,7 @@ declare namespace Kendra {
   export type PrincipalList = Principal[];
   export type PrincipalName = string;
   export type PrincipalType = "USER"|"GROUP"|string;
+  export type QueryCapacityUnit = number;
   export type QueryId = string;
   export interface QueryRequest {
     /**
@@ -1147,7 +1332,7 @@ declare namespace Kendra {
      */
     PageNumber?: Integer;
     /**
-     * Sets the number of results that are returned in each page of results. The default page size is 100.
+     * Sets the number of results that are returned in each page of results. The default page size is 10. The maximum number of results returned is 100. If you ask for more than 100 results, only 100 are returned.
      */
     PageSize?: Integer;
   }
@@ -1179,7 +1364,7 @@ declare namespace Kendra {
      */
     Type?: QueryResultType;
     /**
-     * 
+     * One or more additional attribues associated with the query result.
      */
     AdditionalAttributes?: AdditionalResultAttributeList;
     /**
@@ -1274,6 +1459,144 @@ declare namespace Kendra {
      */
     Key: S3ObjectKey;
   }
+  export interface SalesforceChatterFeedConfiguration {
+    /**
+     * The name of the column in the Salesforce FeedItem table that contains the content to index. Typically this is the Body column.
+     */
+    DocumentDataFieldName: DataSourceFieldName;
+    /**
+     * The name of the column in the Salesforce FeedItem table that contains the title of the document. This is typically the Title collumn.
+     */
+    DocumentTitleFieldName?: DataSourceFieldName;
+    /**
+     * Maps fields from a Salesforce chatter feed into Amazon Kendra index fields.
+     */
+    FieldMappings?: DataSourceToIndexFieldMappingList;
+    /**
+     * Filters the documents in the feed based on status of the user. When you specify ACTIVE_USERS only documents from users who have an active account are indexed. When you specify STANDARD_USER only documents for Salesforce standard users are documented. You can specify both.
+     */
+    IncludeFilterTypes?: SalesforceChatterFeedIncludeFilterTypes;
+  }
+  export type SalesforceChatterFeedIncludeFilterType = "ACTIVE_USER"|"STANDARD_USER"|string;
+  export type SalesforceChatterFeedIncludeFilterTypes = SalesforceChatterFeedIncludeFilterType[];
+  export interface SalesforceConfiguration {
+    /**
+     * The instance URL for the Salesforce site that you want to index.
+     */
+    ServerUrl: Url;
+    /**
+     * The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains the key/value pairs required to connect to your Salesforce instance. The secret must contain a JSON structure with the following keys:   authenticationUrl - The OAUTH endpoint that Amazon Kendra connects to get an OAUTH token.    consumerKey - The application public key generated when you created your Salesforce application.   consumerSecret - The application private key generated when you created your Salesforce application.   password - The password associated with the user logging in to the Salesforce instance.   securityToken - The token associated with the user account logging in to the Salesforce instance.   username - The user name of the user logging in to the Salesforce instance.  
+     */
+    SecretArn: SecretArn;
+    /**
+     * Specifies the Salesforce standard objects that Amazon Kendra indexes.
+     */
+    StandardObjectConfigurations?: SalesforceStandardObjectConfigurationList;
+    /**
+     * Specifies configuration information for the knowlege article types that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge articles and the standard fields of knowledge articles, or the custom fields of custom knowledge articles, but not both.
+     */
+    KnowledgeArticleConfiguration?: SalesforceKnowledgeArticleConfiguration;
+    /**
+     * Specifies configuration information for Salesforce chatter feeds.
+     */
+    ChatterFeedConfiguration?: SalesforceChatterFeedConfiguration;
+    /**
+     * Indicates whether Amazon Kendra should index attachments to Salesforce objects.
+     */
+    CrawlAttachments?: Boolean;
+    /**
+     * Provides configuration information for processing attachments to Salesforce standard objects. 
+     */
+    StandardObjectAttachmentConfiguration?: SalesforceStandardObjectAttachmentConfiguration;
+    /**
+     * A list of regular expression patterns. Documents that match the patterns are included in the index. Documents that don't match the patterns are excluded from the index. If a document matches both an inclusion pattern and an exclusion pattern, the document is not included in the index. The regex is applied to the name of the attached file.
+     */
+    IncludeAttachmentFilePatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * A list of regular expression patterns. Documents that match the patterns are excluded from the index. Documents that don't match the patterns are included in the index. If a document matches both an exclusion pattern and an inclusion pattern, the document is not included in the index. The regex is applied to the name of the attached file.
+     */
+    ExcludeAttachmentFilePatterns?: DataSourceInclusionsExclusionsStrings;
+  }
+  export interface SalesforceCustomKnowledgeArticleTypeConfiguration {
+    /**
+     * The name of the configuration.
+     */
+    Name: SalesforceCustomKnowledgeArticleTypeName;
+    /**
+     * The name of the field in the custom knowledge article that contains the document data to index.
+     */
+    DocumentDataFieldName: DataSourceFieldName;
+    /**
+     * The name of the field in the custom knowledge article that contains the document title.
+     */
+    DocumentTitleFieldName?: DataSourceFieldName;
+    /**
+     * One or more objects that map fields in the custom knowledge article to fields in the Amazon Kendra index.
+     */
+    FieldMappings?: DataSourceToIndexFieldMappingList;
+  }
+  export type SalesforceCustomKnowledgeArticleTypeConfigurationList = SalesforceCustomKnowledgeArticleTypeConfiguration[];
+  export type SalesforceCustomKnowledgeArticleTypeName = string;
+  export interface SalesforceKnowledgeArticleConfiguration {
+    /**
+     * Specifies the document states that should be included when Amazon Kendra indexes knowledge articles. You must specify at least one state.
+     */
+    IncludedStates: SalesforceKnowledgeArticleStateList;
+    /**
+     * Provides configuration information for standard Salesforce knowledge articles.
+     */
+    StandardKnowledgeArticleTypeConfiguration?: SalesforceStandardKnowledgeArticleTypeConfiguration;
+    /**
+     * Provides configuration information for custom Salesforce knowledge articles.
+     */
+    CustomKnowledgeArticleTypeConfigurations?: SalesforceCustomKnowledgeArticleTypeConfigurationList;
+  }
+  export type SalesforceKnowledgeArticleState = "DRAFT"|"PUBLISHED"|"ARCHIVED"|string;
+  export type SalesforceKnowledgeArticleStateList = SalesforceKnowledgeArticleState[];
+  export interface SalesforceStandardKnowledgeArticleTypeConfiguration {
+    /**
+     * The name of the field that contains the document data to index.
+     */
+    DocumentDataFieldName: DataSourceFieldName;
+    /**
+     * The name of the field that contains the document title.
+     */
+    DocumentTitleFieldName?: DataSourceFieldName;
+    /**
+     * One or more objects that map fields in the knowledge article to Amazon Kendra index fields. The index field must exist before you can map a Salesforce field to it.
+     */
+    FieldMappings?: DataSourceToIndexFieldMappingList;
+  }
+  export interface SalesforceStandardObjectAttachmentConfiguration {
+    /**
+     * The name of the field used for the document title.
+     */
+    DocumentTitleFieldName?: DataSourceFieldName;
+    /**
+     * One or more objects that map fields in attachments to Amazon Kendra index fields.
+     */
+    FieldMappings?: DataSourceToIndexFieldMappingList;
+  }
+  export interface SalesforceStandardObjectConfiguration {
+    /**
+     * The name of the standard object.
+     */
+    Name: SalesforceStandardObjectName;
+    /**
+     * The name of the field in the standard object table that contains the document contents.
+     */
+    DocumentDataFieldName: DataSourceFieldName;
+    /**
+     * The name of the field in the standard object table that contains the document titleB.
+     */
+    DocumentTitleFieldName?: DataSourceFieldName;
+    /**
+     * One or more objects that map fields in the standard object to Amazon Kendra index fields. The index field must exist before you can map a Salesforce field to it.
+     */
+    FieldMappings?: DataSourceToIndexFieldMappingList;
+  }
+  export type SalesforceStandardObjectConfigurationList = SalesforceStandardObjectConfiguration[];
+  export type SalesforceStandardObjectName = "ACCOUNT"|"CAMPAIGN"|"CASE"|"CONTACT"|"CONTRACT"|"DOCUMENT"|"GROUP"|"IDEA"|"LEAD"|"OPPORTUNITY"|"PARTNER"|"PRICEBOOK"|"PRODUCT"|"PROFILE"|"SOLUTION"|"TASK"|"USER"|string;
   export type ScanSchedule = string;
   export interface Search {
     /**
@@ -1296,6 +1619,82 @@ declare namespace Kendra {
      * The identifier of the AWS KMS customer master key (CMK). Amazon Kendra doesn't support asymmetric CMKs.
      */
     KmsKeyId?: KmsKeyId;
+  }
+  export type ServiceNowBuildVersionType = "LONDON"|"OTHERS"|string;
+  export interface ServiceNowConfiguration {
+    /**
+     * The ServiceNow instance that the data source connects to. The host endpoint should look like the following: {instance}.service-now.com. 
+     */
+    HostUrl: ServiceNowHostUrl;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Secret Manager secret that contains the user name and password required to connect to the ServiceNow instance.
+     */
+    SecretArn: SecretArn;
+    /**
+     * The identifier of the release that the ServiceNow host is running. If the host is not running the LONDON release, use OTHERS.
+     */
+    ServiceNowBuildVersion: ServiceNowBuildVersionType;
+    /**
+     * Provides configuration information for crawling knowledge articles in the ServiceNow site.
+     */
+    KnowledgeArticleConfiguration?: ServiceNowKnowledgeArticleConfiguration;
+    /**
+     * Provides configuration information for crawling service catalogs in the ServiceNow site.
+     */
+    ServiceCatalogConfiguration?: ServiceNowServiceCatalogConfiguration;
+  }
+  export type ServiceNowHostUrl = string;
+  export interface ServiceNowKnowledgeArticleConfiguration {
+    /**
+     * Indicates whether Amazon Kendra should index attachments to knowledge articles.
+     */
+    CrawlAttachments?: Boolean;
+    /**
+     * List of regular expressions applied to knowledge articles. Items that don't match the inclusion pattern are not indexed. The regex is applied to the field specified in the PatternTargetField.
+     */
+    IncludeAttachmentFilePatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * List of regular expressions applied to knowledge articles. Items that don't match the inclusion pattern are not indexed. The regex is applied to the field specified in the PatternTargetField 
+     */
+    ExcludeAttachmentFilePatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * The name of the ServiceNow field that is mapped to the index document contents field in the Amazon Kendra index.
+     */
+    DocumentDataFieldName: DataSourceFieldName;
+    /**
+     * The name of the ServiceNow field that is mapped to the index document title field.
+     */
+    DocumentTitleFieldName?: DataSourceFieldName;
+    /**
+     * Mapping between ServiceNow fields and Amazon Kendra index fields. You must create the index field before you map the field.
+     */
+    FieldMappings?: DataSourceToIndexFieldMappingList;
+  }
+  export interface ServiceNowServiceCatalogConfiguration {
+    /**
+     * Indicates whether Amazon Kendra should crawl attachments to the service catalog items. 
+     */
+    CrawlAttachments?: Boolean;
+    /**
+     * Determines the types of file attachments that are included in the index. 
+     */
+    IncludeAttachmentFilePatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * Determines the types of file attachments that are excluded from the index.
+     */
+    ExcludeAttachmentFilePatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * The name of the ServiceNow field that is mapped to the index document contents field in the Amazon Kendra index.
+     */
+    DocumentDataFieldName: DataSourceFieldName;
+    /**
+     * The name of the ServiceNow field that is mapped to the index document title field.
+     */
+    DocumentTitleFieldName?: DataSourceFieldName;
+    /**
+     * Mapping between ServiceNow fields and Amazon Kendra index fields. You must create the index field before you map the field.
+     */
+    FieldMappings?: DataSourceToIndexFieldMappingList;
   }
   export interface SharePointConfiguration {
     /**
@@ -1323,7 +1722,7 @@ declare namespace Kendra {
      */
     InclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     /**
-     * A list of regular expression patterns. Documents that match the patterns are excluded from the index. Documents that don't match the patterns are included in the index. If a document matches both an exclusion pattern and an inclusion pattern, the document is not included in the index. The regex is applied to the display URL of the SharePoint document.
+     * A list of regulary expression patterns. Documents that match the patterns are excluded from the index. Documents that don't match the patterns are included in the index. If a document matches both an exclusion pattern and an inclusion pattern, the document is not included in the index. The regex is applied to the display URL of the SharePoint document.
      */
     ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     VpcConfiguration?: DataSourceVpcConfiguration;
@@ -1364,6 +1763,7 @@ declare namespace Kendra {
      */
     IndexId: IndexId;
   }
+  export type StorageCapacityUnit = number;
   export type String = string;
   export interface SubmitFeedbackRequest {
     /**
@@ -1386,11 +1786,42 @@ declare namespace Kendra {
   export type SubnetId = string;
   export type SubnetIdList = SubnetId[];
   export type TableName = string;
+  export interface Tag {
+    /**
+     * The key for the tag. Keys are not case sensitive and must be unique for the index, FAQ, or data source.
+     */
+    Key: TagKey;
+    /**
+     * The value associated with the tag. The value may be an empty string but it can't be null.
+     */
+    Value: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the index, FAQ, or data source to tag.
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     * A list of tag keys to add to the index, FAQ, or data source. If a tag already exists, the existing value is replaced with the new value.
+     */
+    Tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
+  export type TenantDomain = string;
   export interface TextDocumentStatistics {
     /**
      * The number of text documents indexed.
      */
     IndexedTextDocumentsCount: IndexedTextDocumentsCount;
+    /**
+     * The total size, in bytes, of the indexed documents.
+     */
+    IndexedTextBytes: IndexedTextBytes;
   }
   export interface TextWithHighlights {
     /**
@@ -1414,6 +1845,18 @@ declare namespace Kendra {
   }
   export type Timestamp = Date;
   export type Title = string;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the index, FAQ, or data source to remove the tag from.
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     * A list of tag keys to remove from the index, FAQ, or data source. If a tag key does not exist on the resource, it is ignored.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateDataSourceRequest {
     /**
      * The unique identifier of the data source to update.
@@ -1462,6 +1905,10 @@ declare namespace Kendra {
      * The document metadata to update. 
      */
     DocumentMetadataConfigurationUpdates?: DocumentMetadataConfigurationList;
+    /**
+     * Sets the number of addtional storage and query capacity units that should be used by the index. You can change the capacity of the index up to 5 times per day. If you are using extra storage units, you can't reduce the storage capacity below that required to meet the storage needs for your index.
+     */
+    CapacityUnits?: CapacityUnitsConfiguration;
   }
   export type Url = string;
   export type ValueImportanceMap = {[key: string]: Importance};
