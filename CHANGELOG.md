@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.674.0-->
+<!--LATEST=2.675.0-->
 <!--ENTRYINSERT-->
+
+## 2.675.0
+* feature: WorkMail: Minor API fixes and updates to the documentation.
 
 ## 2.674.0
 * feature: CodeGuruReviewer: Add Bitbucket integration APIs

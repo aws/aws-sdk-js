@@ -285,11 +285,11 @@ declare class IoTSiteWise extends Service {
    */
   listAssetModels(callback?: (err: AWSError, data: IoTSiteWise.Types.ListAssetModelsResponse) => void): Request<IoTSiteWise.Types.ListAssetModelsResponse, AWSError>;
   /**
-   * Retrieves a paginated list of asset summaries.
+   * Retrieves a paginated list of asset summaries. You can use this operation to do the following:   List assets based on a specific asset model.   List top-level assets.   You can't use this operation to list all assets. To retrieve summaries for all of your assets, use ListAssetModels to get all of your asset model IDs. Then, use ListAssets to get all assets for each asset model.
    */
   listAssets(params: IoTSiteWise.Types.ListAssetsRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.ListAssetsResponse) => void): Request<IoTSiteWise.Types.ListAssetsResponse, AWSError>;
   /**
-   * Retrieves a paginated list of asset summaries.
+   * Retrieves a paginated list of asset summaries. You can use this operation to do the following:   List assets based on a specific asset model.   List top-level assets.   You can't use this operation to list all assets. To retrieve summaries for all of your assets, use ListAssetModels to get all of your asset model IDs. Then, use ListAssets to get all assets for each asset model.
    */
   listAssets(callback?: (err: AWSError, data: IoTSiteWise.Types.ListAssetsResponse) => void): Request<IoTSiteWise.Types.ListAssetsResponse, AWSError>;
   /**
@@ -389,19 +389,19 @@ declare class IoTSiteWise extends Service {
    */
   updateAsset(callback?: (err: AWSError, data: IoTSiteWise.Types.UpdateAssetResponse) => void): Request<IoTSiteWise.Types.UpdateAssetResponse, AWSError>;
   /**
-   * Updates an asset model and all of the assets that were created from the model. Each asset created from the model inherits the updated asset model's property and hierarchy definitions. For more information, see Updating Assets and Models in the AWS IoT SiteWise User Guide.  This action overwrites the existing model with the provided model. To avoid deleting your asset model's properties or hierarchies, you must include their definitions in the updated asset model payload. For more information, see DescribeAssetModel. If you remove a property from an asset model or update a property's formula expression, AWS IoT SiteWise deletes all previous data for that property. If you remove a hierarchy definition from an asset model, AWS IoT SiteWise disassociates every asset associated with that hierarchy. You can't change the type or data type of an existing property. 
+   * Updates an asset model and all of the assets that were created from the model. Each asset created from the model inherits the updated asset model's property and hierarchy definitions. For more information, see Updating Assets and Models in the AWS IoT SiteWise User Guide.  This action overwrites the existing model with the provided model. To avoid deleting your asset model's properties or hierarchies, you must include their IDs and definitions in the updated asset model payload. For more information, see DescribeAssetModel. If you remove a property from an asset model or update a property's formula expression, AWS IoT SiteWise deletes all previous data for that property. If you remove a hierarchy definition from an asset model, AWS IoT SiteWise disassociates every asset associated with that hierarchy. You can't change the type or data type of an existing property. 
    */
   updateAssetModel(params: IoTSiteWise.Types.UpdateAssetModelRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.UpdateAssetModelResponse) => void): Request<IoTSiteWise.Types.UpdateAssetModelResponse, AWSError>;
   /**
-   * Updates an asset model and all of the assets that were created from the model. Each asset created from the model inherits the updated asset model's property and hierarchy definitions. For more information, see Updating Assets and Models in the AWS IoT SiteWise User Guide.  This action overwrites the existing model with the provided model. To avoid deleting your asset model's properties or hierarchies, you must include their definitions in the updated asset model payload. For more information, see DescribeAssetModel. If you remove a property from an asset model or update a property's formula expression, AWS IoT SiteWise deletes all previous data for that property. If you remove a hierarchy definition from an asset model, AWS IoT SiteWise disassociates every asset associated with that hierarchy. You can't change the type or data type of an existing property. 
+   * Updates an asset model and all of the assets that were created from the model. Each asset created from the model inherits the updated asset model's property and hierarchy definitions. For more information, see Updating Assets and Models in the AWS IoT SiteWise User Guide.  This action overwrites the existing model with the provided model. To avoid deleting your asset model's properties or hierarchies, you must include their IDs and definitions in the updated asset model payload. For more information, see DescribeAssetModel. If you remove a property from an asset model or update a property's formula expression, AWS IoT SiteWise deletes all previous data for that property. If you remove a hierarchy definition from an asset model, AWS IoT SiteWise disassociates every asset associated with that hierarchy. You can't change the type or data type of an existing property. 
    */
   updateAssetModel(callback?: (err: AWSError, data: IoTSiteWise.Types.UpdateAssetModelResponse) => void): Request<IoTSiteWise.Types.UpdateAssetModelResponse, AWSError>;
   /**
-   * Updates an asset property's alias and notification state.
+   * Updates an asset property's alias and notification state.  This operation overwrites the property's existing alias and notification state. To keep your existing property's alias or notification state, you must include the existing values in the UpdateAssetProperty request. For more information, see DescribeAssetProperty. 
    */
   updateAssetProperty(params: IoTSiteWise.Types.UpdateAssetPropertyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates an asset property's alias and notification state.
+   * Updates an asset property's alias and notification state.  This operation overwrites the property's existing alias and notification state. To keep your existing property's alias or notification state, you must include the existing values in the UpdateAssetProperty request. For more information, see DescribeAssetProperty. 
    */
   updateAssetProperty(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -921,7 +921,7 @@ declare namespace IoTSiteWise {
   export type BatchPutAssetPropertyValueErrorCode = "ResourceNotFoundException"|"InvalidRequestException"|"InternalFailureException"|"ServiceUnavailableException"|"ThrottlingException"|"LimitExceededException"|"ConflictingOperationException"|"TimestampOutOfRangeException"|"AccessDeniedException"|string;
   export interface BatchPutAssetPropertyValueRequest {
     /**
-     * The list of asset property value entries for the batch put request. You can specify up to 10 entries per request. For more information, see Quotas in the AWS IoT SiteWise User Guide.
+     * The list of asset property value entries for the batch put request. You can specify up to 10 entries per request.
      */
     entries: PutAssetPropertyValueEntries;
   }
@@ -1979,11 +1979,11 @@ declare namespace IoTSiteWise {
      */
     maxResults?: MaxResults;
     /**
-     * The ID of the asset model by which to filter the list of assets. Omit the assetModelId to list all assets (of all models).
+     * The ID of the asset model by which to filter the list of assets. This parameter is required if you choose ALL for filter.
      */
     assetModelId?: ID;
     /**
-     * The hierarchy level by which to filter the requested list of assets.
+     * The filter for the requested list of assets. Choose one of the following options. Defaults to ALL.    ALL – The list includes all assets for a given asset model ID. The assetModelId parameter is required if you filter by ALL.    TOP_LEVEL – The list includes only top-level assets in the asset hierarchy tree.  
      */
     filter?: ListAssetsFilter;
   }
@@ -2360,7 +2360,7 @@ declare namespace IoTSiteWise {
      */
     propertyAlias?: AssetPropertyAlias;
     /**
-     * The list of property values to upload. You can specify up to 10 propertyValues array elements.  For more information, see Quotas in the AWS IoT SiteWise User Guide.
+     * The list of property values to upload. You can specify up to 10 propertyValues array elements. 
      */
     propertyValues: AssetPropertyValues;
   }
@@ -2511,11 +2511,11 @@ declare namespace IoTSiteWise {
      */
     propertyId: ID;
     /**
-     * The property alias that identifies the property, such as an OPC-UA server data stream path (for example, /company/windfarm/3/turbine/7/temperature). For more information, see Mapping Industrial Data Streams to Asset Properties in the AWS IoT SiteWise User Guide.
+     * The property alias that identifies the property, such as an OPC-UA server data stream path (for example, /company/windfarm/3/turbine/7/temperature). For more information, see Mapping Industrial Data Streams to Asset Properties in the AWS IoT SiteWise User Guide. If you omit this parameter, the alias is removed from the property.
      */
     propertyAlias?: PropertyAlias;
     /**
-     * The updated MQTT notification state (enabled or disabled) for this asset property. When the notification state is enabled, AWS IoT SiteWise publishes property value updates to a unique MQTT topic. For more information, see Interacting with Other Services in the AWS IoT SiteWise User Guide.
+     * The MQTT notification state (enabled or disabled) for this asset property. When the notification state is enabled, AWS IoT SiteWise publishes property value updates to a unique MQTT topic. For more information, see Interacting with Other Services in the AWS IoT SiteWise User Guide. If you omit this parameter, the notification state is set to DISABLED.
      */
     propertyNotificationState?: PropertyNotificationState;
     /**

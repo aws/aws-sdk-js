@@ -220,11 +220,11 @@ declare class WorkMail extends Service {
    */
   listMailboxPermissions(callback?: (err: AWSError, data: WorkMail.Types.ListMailboxPermissionsResponse) => void): Request<WorkMail.Types.ListMailboxPermissionsResponse, AWSError>;
   /**
-   * Returns summaries of the customer's non-deleted organizations.
+   * Returns summaries of the customer's organizations.
    */
   listOrganizations(params: WorkMail.Types.ListOrganizationsRequest, callback?: (err: AWSError, data: WorkMail.Types.ListOrganizationsResponse) => void): Request<WorkMail.Types.ListOrganizationsResponse, AWSError>;
   /**
-   * Returns summaries of the customer's non-deleted organizations.
+   * Returns summaries of the customer's organizations.
    */
   listOrganizations(callback?: (err: AWSError, data: WorkMail.Types.ListOrganizationsResponse) => void): Request<WorkMail.Types.ListOrganizationsResponse, AWSError>;
   /**
@@ -525,7 +525,7 @@ declare namespace WorkMail {
     /**
      * The identifier for the organization.
      */
-    OrganizationId?: OrganizationId;
+    OrganizationId: OrganizationId;
     /**
      * The name of the access control rule.
      */
