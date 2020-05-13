@@ -222,6 +222,7 @@ export abstract class ConfigurationServicePlaceholders {
   codestarconnections?: AWS.CodeStarconnections.Types.ClientConfiguration;
   synthetics?: AWS.Synthetics.Types.ClientConfiguration;
   iotsitewise?: AWS.IoTSiteWise.Types.ClientConfiguration;
+  macie2?: AWS.Macie2.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -446,4 +447,5 @@ export interface ConfigurationServiceApiVersions {
   codestarconnections?: AWS.CodeStarconnections.Types.apiVersion;
   synthetics?: AWS.Synthetics.Types.apiVersion;
   iotsitewise?: AWS.IoTSiteWise.Types.apiVersion;
+  macie2?: AWS.Macie2.Types.apiVersion;
 }

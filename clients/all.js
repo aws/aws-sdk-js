@@ -221,5 +221,6 @@ module.exports = {
   Detective: require('./detective'),
   CodeStarconnections: require('./codestarconnections'),
   Synthetics: require('./synthetics'),
-  IoTSiteWise: require('./iotsitewise')
+  IoTSiteWise: require('./iotsitewise'),
+  Macie2: require('./macie2')
 };

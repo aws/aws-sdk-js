@@ -93,11 +93,11 @@ declare class ElastiCache extends Service {
    */
   createCacheSubnetGroup(callback?: (err: AWSError, data: ElastiCache.Types.CreateCacheSubnetGroupResult) => void): Request<ElastiCache.Types.CreateCacheSubnetGroupResult, AWSError>;
   /**
-   * Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. For more information, see Replication Across Regions Using Global Datastore.    The GlobalReplicationGroupId is the name of the Global Datastore.   The PrimaryReplicationGroupId represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.  
+   * Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. For more information, see Replication Across Regions Using Global Datastore.    The GlobalReplicationGroupIdSuffix is the name of the Global Datastore.   The PrimaryReplicationGroupId represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.  
    */
   createGlobalReplicationGroup(params: ElastiCache.Types.CreateGlobalReplicationGroupMessage, callback?: (err: AWSError, data: ElastiCache.Types.CreateGlobalReplicationGroupResult) => void): Request<ElastiCache.Types.CreateGlobalReplicationGroupResult, AWSError>;
   /**
-   * Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. For more information, see Replication Across Regions Using Global Datastore.    The GlobalReplicationGroupId is the name of the Global Datastore.   The PrimaryReplicationGroupId represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.  
+   * Global Datastore for Redis offers fully managed, fast, reliable and secure cross-region replication. Using Global Datastore for Redis, you can create cross-region read replica clusters for ElastiCache for Redis to enable low-latency reads and disaster recovery across regions. For more information, see Replication Across Regions Using Global Datastore.    The GlobalReplicationGroupIdSuffix is the name of the Global Datastore.   The PrimaryReplicationGroupId represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.  
    */
   createGlobalReplicationGroup(callback?: (err: AWSError, data: ElastiCache.Types.CreateGlobalReplicationGroupResult) => void): Request<ElastiCache.Types.CreateGlobalReplicationGroupResult, AWSError>;
   /**
@@ -165,11 +165,11 @@ declare class ElastiCache extends Service {
    */
   deleteCacheSubnetGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deleting a Global Datastore is a two-step process:    First, you must DisassociateGlobalReplicationGroup to remove the secondary clusters in the Global Datastore.   Once the Global Datastore contains only the primary cluster, you can use DeleteGlobalReplicationGroup API to delete the Global Datastore while retainining the primary cluster using Retain…= true.   Since the Global Datastore has only a primary cluster, you can delete the Global Datastore while retaining the primary by setting RetainPrimaryCluster=true. When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the selected resources; you cannot cancel or revert this operation.  This operation is valid for Redis only. 
+   * Deleting a Global Datastore is a two-step process:    First, you must DisassociateGlobalReplicationGroup to remove the secondary clusters in the Global Datastore.   Once the Global Datastore contains only the primary cluster, you can use DeleteGlobalReplicationGroup API to delete the Global Datastore while retainining the primary cluster using Retain…= true.   Since the Global Datastore has only a primary cluster, you can delete the Global Datastore while retaining the primary by setting RetainPrimaryCluster=true. When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the selected resources; you cannot cancel or revert this operation.
    */
   deleteGlobalReplicationGroup(params: ElastiCache.Types.DeleteGlobalReplicationGroupMessage, callback?: (err: AWSError, data: ElastiCache.Types.DeleteGlobalReplicationGroupResult) => void): Request<ElastiCache.Types.DeleteGlobalReplicationGroupResult, AWSError>;
   /**
-   * Deleting a Global Datastore is a two-step process:    First, you must DisassociateGlobalReplicationGroup to remove the secondary clusters in the Global Datastore.   Once the Global Datastore contains only the primary cluster, you can use DeleteGlobalReplicationGroup API to delete the Global Datastore while retainining the primary cluster using Retain…= true.   Since the Global Datastore has only a primary cluster, you can delete the Global Datastore while retaining the primary by setting RetainPrimaryCluster=true. When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the selected resources; you cannot cancel or revert this operation.  This operation is valid for Redis only. 
+   * Deleting a Global Datastore is a two-step process:    First, you must DisassociateGlobalReplicationGroup to remove the secondary clusters in the Global Datastore.   Once the Global Datastore contains only the primary cluster, you can use DeleteGlobalReplicationGroup API to delete the Global Datastore while retainining the primary cluster using Retain…= true.   Since the Global Datastore has only a primary cluster, you can delete the Global Datastore while retaining the primary by setting RetainPrimaryCluster=true. When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the selected resources; you cannot cancel or revert this operation.
    */
   deleteGlobalReplicationGroup(callback?: (err: AWSError, data: ElastiCache.Types.DeleteGlobalReplicationGroupResult) => void): Request<ElastiCache.Types.DeleteGlobalReplicationGroupResult, AWSError>;
   /**
@@ -317,11 +317,11 @@ declare class ElastiCache extends Service {
    */
   disassociateGlobalReplicationGroup(callback?: (err: AWSError, data: ElastiCache.Types.DisassociateGlobalReplicationGroupResult) => void): Request<ElastiCache.Types.DisassociateGlobalReplicationGroupResult, AWSError>;
   /**
-   * Used to failover the primary region to a selected secondary region.
+   * Used to failover the primary region to a selected secondary region. The selected secondary region will be come primary, and all other clusters will become secondary.
    */
   failoverGlobalReplicationGroup(params: ElastiCache.Types.FailoverGlobalReplicationGroupMessage, callback?: (err: AWSError, data: ElastiCache.Types.FailoverGlobalReplicationGroupResult) => void): Request<ElastiCache.Types.FailoverGlobalReplicationGroupResult, AWSError>;
   /**
-   * Used to failover the primary region to a selected secondary region.
+   * Used to failover the primary region to a selected secondary region. The selected secondary region will be come primary, and all other clusters will become secondary.
    */
   failoverGlobalReplicationGroup(callback?: (err: AWSError, data: ElastiCache.Types.FailoverGlobalReplicationGroupResult) => void): Request<ElastiCache.Types.FailoverGlobalReplicationGroupResult, AWSError>;
   /**
@@ -389,11 +389,11 @@ declare class ElastiCache extends Service {
    */
   modifyGlobalReplicationGroup(callback?: (err: AWSError, data: ElastiCache.Types.ModifyGlobalReplicationGroupResult) => void): Request<ElastiCache.Types.ModifyGlobalReplicationGroupResult, AWSError>;
   /**
-   * Modifies the settings for a replication group. For Redis (cluster mode enabled) clusters, this operation cannot be used to change a cluster's node type or engine version. For more information, see:    Scaling for Amazon ElastiCache for Redis (cluster mode enabled) in the ElastiCache User Guide    ModifyReplicationGroupShardConfiguration in the ElastiCache API Reference    This operation is valid for Redis only. 
+   * Modifies the settings for a replication group.    Scaling for Amazon ElastiCache for Redis (cluster mode enabled) in the ElastiCache User Guide    ModifyReplicationGroupShardConfiguration in the ElastiCache API Reference    This operation is valid for Redis only. 
    */
   modifyReplicationGroup(params: ElastiCache.Types.ModifyReplicationGroupMessage, callback?: (err: AWSError, data: ElastiCache.Types.ModifyReplicationGroupResult) => void): Request<ElastiCache.Types.ModifyReplicationGroupResult, AWSError>;
   /**
-   * Modifies the settings for a replication group. For Redis (cluster mode enabled) clusters, this operation cannot be used to change a cluster's node type or engine version. For more information, see:    Scaling for Amazon ElastiCache for Redis (cluster mode enabled) in the ElastiCache User Guide    ModifyReplicationGroupShardConfiguration in the ElastiCache API Reference    This operation is valid for Redis only. 
+   * Modifies the settings for a replication group.    Scaling for Amazon ElastiCache for Redis (cluster mode enabled) in the ElastiCache User Guide    ModifyReplicationGroupShardConfiguration in the ElastiCache API Reference    This operation is valid for Redis only. 
    */
   modifyReplicationGroup(callback?: (err: AWSError, data: ElastiCache.Types.ModifyReplicationGroupResult) => void): Request<ElastiCache.Types.ModifyReplicationGroupResult, AWSError>;
   /**
@@ -413,11 +413,11 @@ declare class ElastiCache extends Service {
    */
   purchaseReservedCacheNodesOffering(callback?: (err: AWSError, data: ElastiCache.Types.PurchaseReservedCacheNodesOfferingResult) => void): Request<ElastiCache.Types.PurchaseReservedCacheNodesOfferingResult, AWSError>;
   /**
-   * Redistribute slots to ensure unifirom distribution across existing shards in the cluster.
+   * Redistribute slots to ensure uniform distribution across existing shards in the cluster.
    */
   rebalanceSlotsInGlobalReplicationGroup(params: ElastiCache.Types.RebalanceSlotsInGlobalReplicationGroupMessage, callback?: (err: AWSError, data: ElastiCache.Types.RebalanceSlotsInGlobalReplicationGroupResult) => void): Request<ElastiCache.Types.RebalanceSlotsInGlobalReplicationGroupResult, AWSError>;
   /**
-   * Redistribute slots to ensure unifirom distribution across existing shards in the cluster.
+   * Redistribute slots to ensure uniform distribution across existing shards in the cluster.
    */
   rebalanceSlotsInGlobalReplicationGroup(callback?: (err: AWSError, data: ElastiCache.Types.RebalanceSlotsInGlobalReplicationGroupResult) => void): Request<ElastiCache.Types.RebalanceSlotsInGlobalReplicationGroupResult, AWSError>;
   /**
@@ -1175,7 +1175,7 @@ declare namespace ElastiCache {
   }
   export interface CreateGlobalReplicationGroupMessage {
     /**
-     * The suffix for name of a Global Datastore. The suffix guarantees uniqueness of the Global Datastore name across multiple regions.
+     * The suffix name of a Global Datastore. The suffix guarantees uniqueness of the Global Datastore name across multiple regions.
      */
     GlobalReplicationGroupIdSuffix: String;
     /**
@@ -1228,7 +1228,7 @@ declare namespace ElastiCache {
      */
     ReplicasPerNodeGroup?: IntegerOptional;
     /**
-     * A list of node group (shard) configuration options. Each node group (shard) configuration has the following members: PrimaryAvailabilityZone, ReplicaAvailabilityZones, ReplicaCount, and Slots. If you're creating a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group, you can use this parameter to individually configure each node group (shard), or you can omit this parameter. However, when seeding a Redis (cluster mode enabled) cluster from a S3 rdb file, you must configure each node group (shard) using this parameter because you must specify the slots for each node group.
+     * A list of node group (shard) configuration options. Each node group (shard) configuration has the following members: PrimaryAvailabilityZone, ReplicaAvailabilityZones, ReplicaCount, and Slots. If you're creating a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group, you can use this parameter to individually configure each node group (shard), or you can omit this parameter. However, it is required when seeding a Redis (cluster mode enabled) cluster from a S3 rdb file. You must configure each node group (shard) using this parameter because you must specify the slots for each node group.
      */
     NodeGroupConfiguration?: NodeGroupConfigurationList;
     /**
@@ -1434,7 +1434,7 @@ declare namespace ElastiCache {
      */
     GlobalReplicationGroupId: String;
     /**
-     * If set to true, the primary replication is retained as a standalone replication group. 
+     * The primary replication group is retained as a standalone replication group. 
      */
     RetainPrimaryReplicationGroup: Boolean;
   }
@@ -1965,7 +1965,7 @@ declare namespace ElastiCache {
      */
     CacheNodeType?: String;
     /**
-     * The Elasticache engine. For preview, it is Redis only.
+     * The Elasticache engine. For Redis only.
      */
     Engine?: String;
     /**
@@ -2206,7 +2206,7 @@ declare namespace ElastiCache {
      */
     GlobalReplicationGroupId: String;
     /**
-     * If true, this parameter causes the modifications in this request and any pending modifications to be applied, asynchronously and as soon as possible, regardless of the PreferredMaintenanceWindow setting for the replication group. If false, changes to the nodes in the replication group are applied on the next maintenance reboot, or the next failure reboot, whichever occurs first. 
+     * This parameter causes the modifications in this request and any pending modifications to be applied, asynchronously and as soon as possible. Modifications to Global Replication Groups cannot be requested to be applied in PreferredMaintenceWindow. 
      */
     ApplyImmediately: Boolean;
     /**
@@ -3312,7 +3312,7 @@ declare namespace ElastiCache {
      */
     UnprocessedUpdateActions?: UnprocessedUpdateActionList;
   }
-  export type UpdateActionStatus = "not-applied"|"waiting-to-start"|"in-progress"|"stopping"|"stopped"|"complete"|string;
+  export type UpdateActionStatus = "not-applied"|"waiting-to-start"|"in-progress"|"stopping"|"stopped"|"complete"|"scheduling"|"scheduled"|"not-applicable"|string;
   export type UpdateActionStatusList = UpdateActionStatus[];
   export interface UpdateActionsMessage {
     /**

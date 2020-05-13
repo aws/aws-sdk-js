@@ -871,5 +871,8 @@
   },
   "iotsitewise": {
     "name": "IoTSiteWise"
+  },
+  "macie2": {
+    "name": "Macie2"
   }
 }
