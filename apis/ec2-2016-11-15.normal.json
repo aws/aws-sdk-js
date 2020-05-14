@@ -9922,6 +9922,11 @@
           "shape": "VpcId",
           "documentation": "<p>The ID of the VPC.</p>"
         },
+        "TagSpecifications": {
+          "shape": "TagSpecificationList",
+          "documentation": "<p>The tags to assign to the local gateway route table VPC association.</p>",
+          "locationName": "TagSpecification"
+        },
         "DryRun": {
           "shape": "Boolean",
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
@@ -10531,7 +10536,7 @@
         },
         "OutpostArn": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the Outpost.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Outpost. If you specify an Outpost ARN, you must also specify the Availability Zone of the Outpost subnet.</p>"
         },
         "VpcId": {
           "shape": "VpcId",
@@ -15291,7 +15296,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters.</p>",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>local-gateway-id</code> - The ID of a local gateway.</p> </li> <li> <p> <code>local-gateway-route-table-id</code> - The ID of the local gateway route table.</p> </li> <li> <p> <code>local-gateway-route-table-virtual-interface-group-association-id</code> - The ID of the association.</p> </li> <li> <p> <code>local-gateway-route-table-virtual-interface-group-id</code> - The ID of the virtual interface group.</p> </li> <li> <p> <code>state</code> - The state of the association.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -15333,7 +15338,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters.</p>",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>local-gateway-id</code> - The ID of a local gateway.</p> </li> <li> <p> <code>local-gateway-route-table-id</code> - The ID of the local gateway route table.</p> </li> <li> <p> <code>local-gateway-route-table-vpc-association-id</code> - The ID of the association.</p> </li> <li> <p> <code>state</code> - The state of the association.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -15375,7 +15380,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters.</p>",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>local-gateway-id</code> - The ID of a local gateway.</p> </li> <li> <p> <code>local-gateway-route-table-id</code> - The ID of a local gateway route table.</p> </li> <li> <p> <code>outpost-arn</code> - The Amazon Resource Name (ARN) of the Outpost.</p> </li> <li> <p> <code>state</code> - The state of the local gateway route table.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -15417,7 +15422,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters.</p>",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>local-gateway-id</code> - The ID of a local gateway.</p> </li> <li> <p> <code>local-gateway-virtual-interface-id</code> - The ID of the virtual interface.</p> </li> <li> <p> <code>local-gateway-virtual-interface-group-id</code> - The ID of the virtual interface group.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -15496,7 +15501,7 @@
       "members": {
         "LocalGatewayIds": {
           "shape": "LocalGatewayIdSet",
-          "documentation": "<p>The IDs of the local gateways.</p>",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>local-gateway-id</code> - The ID of a local gateway.</p> </li> <li> <p> <code>local-gateway-route-table-id</code> - The ID of the local gateway route table.</p> </li> <li> <p> <code>local-gateway-route-table-virtual-interface-group-association-id</code> - The ID of the association.</p> </li> <li> <p> <code>local-gateway-route-table-virtual-interface-group-id</code> - The ID of the virtual interface group.</p> </li> <li> <p> <code>outpost-arn</code> - The Amazon Resource Name (ARN) of the Outpost.</p> </li> <li> <p> <code>state</code> - The state of the association.</p> </li> </ul>",
           "locationName": "LocalGatewayId"
         },
         "Filters": {

@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Amazon EC2 now supports adding AWS resource tags for associations between VPCs and local gateways, at creation time."
+    },
+    {
+        "type": "feature",
+        "category": "Imagebuilder",
+        "description": "This release adds a new parameter (SupportedOsVersions) to the Components API. This parameter lists the OS versions supported by a component."
+    }
+]

@@ -446,6 +446,10 @@ declare namespace Imagebuilder {
      */
     platform?: Platform;
     /**
+     * The operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the parent image OS version during image recipe creation. 
+     */
+    supportedOsVersions?: OsVersionList;
+    /**
      * The owner of the component.
      */
     owner?: NonEmptyString;
@@ -498,6 +502,10 @@ declare namespace Imagebuilder {
      */
     platform?: Platform;
     /**
+     * The operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the parent image OS version during image recipe creation. 
+     */
+    supportedOsVersions?: OsVersionList;
+    /**
      * The type of the component denotes whether the component is used to build the image or only to test it.
      */
     type?: ComponentType;
@@ -546,6 +554,10 @@ declare namespace Imagebuilder {
      */
     platform?: Platform;
     /**
+     *  The operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the parent image OS version during image recipe creation. 
+     */
+    supportedOsVersions?: OsVersionList;
+    /**
      * The type of the component denotes whether the component is used to build the image or only to test it.
      */
     type?: ComponentType;
@@ -582,6 +594,10 @@ declare namespace Imagebuilder {
      * The platform of the component.
      */
     platform: Platform;
+    /**
+     *  The operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the parent image OS version during image recipe creation. 
+     */
+    supportedOsVersions?: OsVersionList;
     /**
      * The data of the component. Used to specify the data inline. Either data or uri can be used to specify the data within the component.
      */
@@ -2022,6 +2038,7 @@ declare namespace Imagebuilder {
   export type NonEmptyString = string;
   export type NullableBoolean = boolean;
   export type OsVersion = string;
+  export type OsVersionList = OsVersion[];
   export interface OutputResources {
     /**
      * The EC2 AMIs created by this image. 

@@ -6202,6 +6202,10 @@ declare namespace EC2 {
      */
     VpcId: VpcId;
     /**
+     * The tags to assign to the local gateway route table VPC association.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
@@ -6607,7 +6611,7 @@ declare namespace EC2 {
      */
     Ipv6CidrBlock?: String;
     /**
-     * The Amazon Resource Name (ARN) of the Outpost.
+     * The Amazon Resource Name (ARN) of the Outpost. If you specify an Outpost ARN, you must also specify the Availability Zone of the Outpost subnet.
      */
     OutpostArn?: String;
     /**
@@ -9789,7 +9793,7 @@ declare namespace EC2 {
      */
     LocalGatewayRouteTableVirtualInterfaceGroupAssociationIds?: LocalGatewayRouteTableVirtualInterfaceGroupAssociationIdSet;
     /**
-     * One or more filters.
+     * One or more filters.    local-gateway-id - The ID of a local gateway.    local-gateway-route-table-id - The ID of the local gateway route table.    local-gateway-route-table-virtual-interface-group-association-id - The ID of the association.    local-gateway-route-table-virtual-interface-group-id - The ID of the virtual interface group.    state - The state of the association.  
      */
     Filters?: FilterList;
     /**
@@ -9821,7 +9825,7 @@ declare namespace EC2 {
      */
     LocalGatewayRouteTableVpcAssociationIds?: LocalGatewayRouteTableVpcAssociationIdSet;
     /**
-     * One or more filters.
+     * One or more filters.    local-gateway-id - The ID of a local gateway.    local-gateway-route-table-id - The ID of the local gateway route table.    local-gateway-route-table-vpc-association-id - The ID of the association.    state - The state of the association.    vpc-id - The ID of the VPC.  
      */
     Filters?: FilterList;
     /**
@@ -9853,7 +9857,7 @@ declare namespace EC2 {
      */
     LocalGatewayRouteTableIds?: LocalGatewayRouteTableIdSet;
     /**
-     * One or more filters.
+     * One or more filters.    local-gateway-id - The ID of a local gateway.    local-gateway-route-table-id - The ID of a local gateway route table.    outpost-arn - The Amazon Resource Name (ARN) of the Outpost.    state - The state of the local gateway route table.  
      */
     Filters?: FilterList;
     /**
@@ -9885,7 +9889,7 @@ declare namespace EC2 {
      */
     LocalGatewayVirtualInterfaceGroupIds?: LocalGatewayVirtualInterfaceGroupIdSet;
     /**
-     * One or more filters.
+     * One or more filters.    local-gateway-id - The ID of a local gateway.    local-gateway-virtual-interface-id - The ID of the virtual interface.    local-gateway-virtual-interface-group-id - The ID of the virtual interface group.  
      */
     Filters?: FilterList;
     /**
@@ -9945,7 +9949,7 @@ declare namespace EC2 {
   }
   export interface DescribeLocalGatewaysRequest {
     /**
-     * The IDs of the local gateways.
+     * One or more filters.    local-gateway-id - The ID of a local gateway.    local-gateway-route-table-id - The ID of the local gateway route table.    local-gateway-route-table-virtual-interface-group-association-id - The ID of the association.    local-gateway-route-table-virtual-interface-group-id - The ID of the virtual interface group.    outpost-arn - The Amazon Resource Name (ARN) of the Outpost.    state - The state of the association.  
      */
     LocalGatewayIds?: LocalGatewayIdSet;
     /**
