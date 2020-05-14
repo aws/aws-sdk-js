@@ -57,17 +57,6 @@ describe('AWS.DynamoDB.Converter', function() {
       it('should convert numbers to NumberAttributeValues', function() {
         expect(input(42)).to.deep.equal({N: '42'});
       });
-      it('should convert bigint to NumberAttributeValues', function() {
-        try {
-          var largeInt = BigInt(1576706763859);
-          if (largeInt) {
-            expect(input(largeInt)).to.deep.equal({N: '1576706763859'});
-          }
-        } catch (err) {
-          expect(err.message).to.equal('BigInt is not defined');
-          expect(input(1576706763859)).to.deep.equal({N: '1576706763859'});
-        }
-      });
     });
 
     describe('null', function() {
@@ -384,21 +373,6 @@ describe('AWS.DynamoDB.Converter', function() {
           var unsafeInteger = '9007199254740991000';
           var converted = output({N: unsafeInteger}, {wrapNumbers: true});
           expect(converted.toString()).to.equal(unsafeInteger);
-        }
-      );
-
-      it('should convert NumberAttributeValues to NumberValues of BigInt',
-        function() {
-          var unsafeInteger = '9007199254740991000';
-          try {
-            var largeInt = BigInt(unsafeInteger);
-            var converted = output({N: unsafeInteger});
-            expect(converted).to.equal(largeInt);
-            expect(typeof converted).to.equal('bigint');
-          } catch (err) {
-            expect(err.message).to.equal('BigInt is not defined');
-            expect(output({N: unsafeInteger}).toString()).to.equal(unsafeInteger);
-          }
         }
       );
     });
