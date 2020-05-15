@@ -238,17 +238,28 @@ describe('AWS.DynamoDB.Converter', function() {
     });
 
     describe('sets', function() {
-      it(
-        'should be iterable',
+      let hasIterProtocol = false;
+      before(
         function() {
-          var inputList = [1, 2, 3];
-          var outputList = [];
-          for (var item of new DynamoDBSet(inputList)) {
-            outputList.push(item);
-          }
-          expect(outputList).to.deep.equal(inputList);
+          var versionParts = process.version.split('.');
+          var major = parseInt(versionParts[0]);
+          var minor = parseInt(versionParts[1]);
+          hasIterProtocol = (major > 0 || minor > 11);
         }
       );
+      if (hasIterProtocol) {
+        it(
+          'should be iterable',
+          function() {
+            var inputList = [1, 2, 3];
+            var outputList = [];
+            for (var item of new DynamoDBSet(inputList)) {
+              outputList.push(item);
+            }
+            expect(outputList).to.deep.equal(inputList);
+          }
+        );
+      }
     });
 
     describe('string sets', function() {
