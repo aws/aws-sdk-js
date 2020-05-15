@@ -2317,6 +2317,10 @@
           "shape": "TypeVersionId",
           "documentation": "<p>The ID of the default version of the type. The default version is used when the type version is not specified.</p> <p>To set the default version of a type, use <code> <a>SetTypeDefaultVersion</a> </code>. </p>"
         },
+        "IsDefaultVersion": {
+          "shape": "IsDefaultVersion",
+          "documentation": "<p>Whether the specified type version is set as the default version.</p>"
+        },
         "Description": {
           "shape": "Description",
           "documentation": "<p>The description of the registered type.</p>"
@@ -2780,6 +2784,9 @@
     "InSyncStackInstancesCount": {
       "type": "integer",
       "min": 0
+    },
+    "IsDefaultVersion": {
+      "type": "boolean"
     },
     "Key": {
       "type": "string"
@@ -5350,6 +5357,10 @@
         "VersionId": {
           "shape": "TypeVersionId",
           "documentation": "<p>The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.</p>"
+        },
+        "IsDefaultVersion": {
+          "shape": "IsDefaultVersion",
+          "documentation": "<p>Whether the specified type version is set as the default version.</p>"
         },
         "Arn": {
           "shape": "TypeArn",

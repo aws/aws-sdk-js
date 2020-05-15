@@ -493,6 +493,14 @@ declare class CloudFormation extends Service {
    */
   waitFor(state: "stackImportComplete", callback?: (err: AWSError, data: CloudFormation.Types.DescribeStacksOutput) => void): Request<CloudFormation.Types.DescribeStacksOutput, AWSError>;
   /**
+   * Waits for the stackRollbackComplete state by periodically calling the underlying CloudFormation.describeStacksoperation every 30 seconds (at most 120 times). Wait until stack status is UPDATE_ROLLBACK_COMPLETE.
+   */
+  waitFor(state: "stackRollbackComplete", params: CloudFormation.Types.DescribeStacksInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: CloudFormation.Types.DescribeStacksOutput) => void): Request<CloudFormation.Types.DescribeStacksOutput, AWSError>;
+  /**
+   * Waits for the stackRollbackComplete state by periodically calling the underlying CloudFormation.describeStacksoperation every 30 seconds (at most 120 times). Wait until stack status is UPDATE_ROLLBACK_COMPLETE.
+   */
+  waitFor(state: "stackRollbackComplete", callback?: (err: AWSError, data: CloudFormation.Types.DescribeStacksOutput) => void): Request<CloudFormation.Types.DescribeStacksOutput, AWSError>;
+  /**
    * Waits for the changeSetCreateComplete state by periodically calling the underlying CloudFormation.describeChangeSetoperation every 30 seconds (at most 120 times). Wait until change set status is CREATE_COMPLETE.
    */
   waitFor(state: "changeSetCreateComplete", params: CloudFormation.Types.DescribeChangeSetInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: CloudFormation.Types.DescribeChangeSetOutput) => void): Request<CloudFormation.Types.DescribeChangeSetOutput, AWSError>;
@@ -1317,6 +1325,10 @@ declare namespace CloudFormation {
      */
     DefaultVersionId?: TypeVersionId;
     /**
+     * Whether the specified type version is set as the default version.
+     */
+    IsDefaultVersion?: IsDefaultVersion;
+    /**
      * The description of the registered type.
      */
     Description?: Description;
@@ -1595,6 +1607,7 @@ declare namespace CloudFormation {
   export type Imports = StackName[];
   export type InProgressStackInstancesCount = number;
   export type InSyncStackInstancesCount = number;
+  export type IsDefaultVersion = boolean;
   export type Key = string;
   export type LastUpdatedTime = Date;
   export type LimitName = string;
@@ -3161,6 +3174,10 @@ declare namespace CloudFormation {
      * The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.
      */
     VersionId?: TypeVersionId;
+    /**
+     * Whether the specified type version is set as the default version.
+     */
+    IsDefaultVersion?: IsDefaultVersion;
     /**
      * The Amazon Resource Name (ARN) of the type version.
      */

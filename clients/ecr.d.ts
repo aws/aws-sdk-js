@@ -784,6 +784,10 @@ declare namespace ECR {
      * The image manifest associated with the image.
      */
     imageManifest?: ImageManifest;
+    /**
+     * The media type associated with the image manifest.
+     */
+    imageManifestMediaType?: MediaType;
   }
   export type ImageActionType = "EXPIRE"|string;
   export type ImageCount = number;
@@ -1105,6 +1109,10 @@ declare namespace ECR {
      */
     imageManifest: ImageManifest;
     /**
+     * The media type of the image manifest. If you push an image manifest that does not contain the mediaType field, you must specify the imageManifestMediaType in the request.
+     */
+    imageManifestMediaType?: MediaType;
+    /**
      * The tag to associate with the image. This parameter is required for images that use the Docker Image Manifest V2 Schema 2 or OCI formats.
      */
     imageTag?: ImageTag;
@@ -1245,7 +1253,7 @@ declare namespace ECR {
      */
     repositoryName: RepositoryName;
     /**
-     * The JSON repository policy text to apply to the repository. For more information, see Amazon ECR Repository Policy Examples in the Amazon Elastic Container Registry User Guide.
+     * The JSON repository policy text to apply to the repository. For more information, see Amazon ECR Repository Policies in the Amazon Elastic Container Registry User Guide.
      */
     policyText: RepositoryPolicyText;
     /**
@@ -1380,11 +1388,11 @@ declare namespace ECR {
      */
     uploadId: UploadId;
     /**
-     * The integer value of the first byte of the layer part.
+     * The position of the first byte of the layer part witin the overall image layer.
      */
     partFirstByte: PartSize;
     /**
-     * The integer value of the last byte of the layer part.
+     * The position of the last byte of the layer part within the overall image layer.
      */
     partLastByte: PartSize;
     /**

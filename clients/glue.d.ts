@@ -884,6 +884,14 @@ declare class Glue extends Service {
    */
   stopTrigger(callback?: (err: AWSError, data: Glue.Types.StopTriggerResponse) => void): Request<Glue.Types.StopTriggerResponse, AWSError>;
   /**
+   * Stops the execution of the specified workflow run.
+   */
+  stopWorkflowRun(params: Glue.Types.StopWorkflowRunRequest, callback?: (err: AWSError, data: Glue.Types.StopWorkflowRunResponse) => void): Request<Glue.Types.StopWorkflowRunResponse, AWSError>;
+  /**
+   * Stops the execution of the specified workflow run.
+   */
+  stopWorkflowRun(callback?: (err: AWSError, data: Glue.Types.StopWorkflowRunResponse) => void): Request<Glue.Types.StopWorkflowRunResponse, AWSError>;
+  /**
    * Adds tags to a resource. A tag is a label you can assign to an AWS resource. In AWS Glue, you can tag only certain resources. For information about what resources you can tag, see AWS Tags in AWS Glue.
    */
   tagResource(params: Glue.Types.TagResourceRequest, callback?: (err: AWSError, data: Glue.Types.TagResourceResponse) => void): Request<Glue.Types.TagResourceResponse, AWSError>;
@@ -1493,7 +1501,7 @@ declare namespace Glue {
      */
     JobName?: NameString;
     /**
-     * The condition state. Currently, the values supported are SUCCEEDED, STOPPED, TIMEOUT, and FAILED.
+     * The condition state. Currently, the only job states that a trigger can listen for are SUCCEEDED, STOPPED, FAILED, and TIMEOUT. The only crawler states that a trigger can listen for are SUCCEEDED, FAILED, and CANCELLED.
      */
     State?: JobRunState;
     /**
@@ -1636,7 +1644,7 @@ declare namespace Glue {
     LogStream?: LogStream;
   }
   export type CrawlList = Crawl[];
-  export type CrawlState = "RUNNING"|"SUCCEEDED"|"CANCELLED"|"FAILED"|string;
+  export type CrawlState = "RUNNING"|"CANCELLING"|"CANCELLED"|"SUCCEEDED"|"FAILED"|string;
   export interface Crawler {
     /**
      * The name of the crawler.
@@ -4214,7 +4222,7 @@ declare namespace Glue {
      */
     CompletedOn?: TimestampValue;
     /**
-     * The current state of the job run.
+     * The current state of the job run. For more information about the statuses of jobs that have terminated abnormally, see AWS Glue Job Run Statuses.
      */
     JobRunState?: JobRunState;
     /**
@@ -5309,6 +5317,18 @@ declare namespace Glue {
      */
     Name?: NameString;
   }
+  export interface StopWorkflowRunRequest {
+    /**
+     * The name of the workflow to stop.
+     */
+    Name: NameString;
+    /**
+     * The ID of the workflow run to stop.
+     */
+    RunId: IdString;
+  }
+  export interface StopWorkflowRunResponse {
+  }
   export interface StorageDescriptor {
     /**
      * A list of the Columns in the table.
@@ -6331,7 +6351,7 @@ declare namespace Glue {
      */
     RunningActions?: IntegerValue;
   }
-  export type WorkflowRunStatus = "RUNNING"|"COMPLETED"|string;
+  export type WorkflowRunStatus = "RUNNING"|"COMPLETED"|"STOPPING"|"STOPPED"|string;
   export type WorkflowRuns = WorkflowRun[];
   export type Workflows = Workflow[];
   export interface XMLClassifier {

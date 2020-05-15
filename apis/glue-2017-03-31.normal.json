@@ -3118,6 +3118,37 @@
       ],
       "documentation": "<p>Stops a specified trigger.</p>"
     },
+    "StopWorkflowRun": {
+      "name": "StopWorkflowRun",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StopWorkflowRunRequest"
+      },
+      "output": {
+        "shape": "StopWorkflowRunResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "IllegalWorkflowStateException"
+        }
+      ],
+      "documentation": "<p>Stops the execution of the specified workflow run.</p>"
+    },
     "TagResource": {
       "name": "TagResource",
       "http": {
@@ -4437,7 +4468,7 @@
         },
         "State": {
           "shape": "JobRunState",
-          "documentation": "<p>The condition state. Currently, the values supported are <code>SUCCEEDED</code>, <code>STOPPED</code>, <code>TIMEOUT</code>, and <code>FAILED</code>.</p>"
+          "documentation": "<p>The condition state. Currently, the only job states that a trigger can listen for are <code>SUCCEEDED</code>, <code>STOPPED</code>, <code>FAILED</code>, and <code>TIMEOUT</code>. The only crawler states that a trigger can listen for are <code>SUCCEEDED</code>, <code>FAILED</code>, and <code>CANCELLED</code>.</p>"
         },
         "CrawlerName": {
           "shape": "NameString",
@@ -4674,8 +4705,9 @@
       "type": "string",
       "enum": [
         "RUNNING",
-        "SUCCEEDED",
+        "CANCELLING",
         "CANCELLED",
+        "SUCCEEDED",
         "FAILED"
       ]
     },
@@ -8316,7 +8348,7 @@
         },
         "JobRunState": {
           "shape": "JobRunState",
-          "documentation": "<p>The current state of the job run.</p>"
+          "documentation": "<p>The current state of the job run. For more information about the statuses of jobs that have terminated abnormally, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/job-run-statuses.html\">AWS Glue Job Run Statuses</a>.</p>"
         },
         "Arguments": {
           "shape": "GenericMap",
@@ -10094,6 +10126,27 @@
         }
       }
     },
+    "StopWorkflowRunRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "RunId"
+      ],
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the workflow to stop.</p>"
+        },
+        "RunId": {
+          "shape": "IdString",
+          "documentation": "<p>The ID of the workflow run to stop.</p>"
+        }
+      }
+    },
+    "StopWorkflowRunResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "StorageDescriptor": {
       "type": "structure",
       "members": {
@@ -11610,7 +11663,9 @@
       "type": "string",
       "enum": [
         "RUNNING",
-        "COMPLETED"
+        "COMPLETED",
+        "STOPPING",
+        "STOPPED"
       ]
     },
     "WorkflowRuns": {

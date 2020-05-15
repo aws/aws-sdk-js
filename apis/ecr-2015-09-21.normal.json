@@ -681,7 +681,7 @@
           "shape": "RepositoryNotFoundException"
         }
       ],
-      "documentation": "<p>Applies a repository policy to the specified repository to control access permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicies.html\">Amazon ECR Repository Policies</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+      "documentation": "<p>Applies a repository policy to the specified repository to control access permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policies.html\">Amazon ECR Repository Policies</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
     },
     "StartImageScan": {
       "name": "StartImageScan",
@@ -1607,6 +1607,10 @@
         "imageManifest": {
           "shape": "ImageManifest",
           "documentation": "<p>The image manifest associated with the image.</p>"
+        },
+        "imageManifestMediaType": {
+          "shape": "MediaType",
+          "documentation": "<p>The media type associated with the image manifest.</p>"
         }
       },
       "documentation": "<p>An object representing an Amazon ECR image.</p>"
@@ -2179,6 +2183,10 @@
           "shape": "ImageManifest",
           "documentation": "<p>The image manifest corresponding to the image to be uploaded.</p>"
         },
+        "imageManifestMediaType": {
+          "shape": "MediaType",
+          "documentation": "<p>The media type of the image manifest. If you push an image manifest that does not contain the <code>mediaType</code> field, you must specify the <code>imageManifestMediaType</code> in the request.</p>"
+        },
         "imageTag": {
           "shape": "ImageTag",
           "documentation": "<p>The tag to associate with the image. This parameter is required for images that use the Docker Image Manifest V2 Schema 2 or OCI formats.</p>"
@@ -2404,7 +2412,7 @@
         },
         "policyText": {
           "shape": "RepositoryPolicyText",
-          "documentation": "<p>The JSON repository policy text to apply to the repository. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/RepositoryPolicyExamples.html\">Amazon ECR Repository Policy Examples</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+          "documentation": "<p>The JSON repository policy text to apply to the repository. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html\">Amazon ECR Repository Policies</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
         },
         "force": {
           "shape": "ForceFlag",
@@ -2624,11 +2632,11 @@
         },
         "partFirstByte": {
           "shape": "PartSize",
-          "documentation": "<p>The integer value of the first byte of the layer part.</p>"
+          "documentation": "<p>The position of the first byte of the layer part witin the overall image layer.</p>"
         },
         "partLastByte": {
           "shape": "PartSize",
-          "documentation": "<p>The integer value of the last byte of the layer part.</p>"
+          "documentation": "<p>The position of the last byte of the layer part within the overall image layer.</p>"
         },
         "layerPartBlob": {
           "shape": "LayerPartBlob",
