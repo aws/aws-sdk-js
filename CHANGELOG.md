@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.678.0-->
+<!--LATEST=2.679.0-->
 <!--ENTRYINSERT-->
+
+## 2.679.0
+* feature: Chime: Amazon Chime now supports redacting chat messages.
+* feature: EC2: This release changes the RunInstances CLI and SDK's so that if you do not specify a client token, a randomly generated token is used for the request to ensure idempotency.
+* feature: ECS: This release adds support for specifying environment files to add environment variables to your containers.
+* feature: QLDB: Amazon QLDB now supports Amazon Kinesis data streams. You can now emit QLDB journal data, via the new QLDB Streams feature, directly to Amazon Kinesis supporting event processing and analytics among related use cases.
 
 ## 2.678.0
 * feature: CloudFormation: This release adds support for the following features: 1. DescribeType and ListTypeVersions APIs now output a field IsDefaultVersion, indicating if a version is the default version for its type; 2. Add StackRollbackComplete waiter feature to wait until stack status is UPDATE_ROLLBACK_COMPLETE; 3. Add paginators in DescribeAccountLimits, ListChangeSets, ListStackInstances, ListStackSetOperationResults, ListStackSetOperations, ListStackSets APIs.

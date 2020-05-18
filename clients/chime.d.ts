@@ -708,6 +708,22 @@ declare class Chime extends Service {
    */
   putVoiceConnectorTerminationCredentials(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Redacts the specified message from the specified Amazon Chime conversation.
+   */
+  redactConversationMessage(params: Chime.Types.RedactConversationMessageRequest, callback?: (err: AWSError, data: Chime.Types.RedactConversationMessageResponse) => void): Request<Chime.Types.RedactConversationMessageResponse, AWSError>;
+  /**
+   * Redacts the specified message from the specified Amazon Chime conversation.
+   */
+  redactConversationMessage(callback?: (err: AWSError, data: Chime.Types.RedactConversationMessageResponse) => void): Request<Chime.Types.RedactConversationMessageResponse, AWSError>;
+  /**
+   * Redacts the specified message from the specified Amazon Chime chat room.
+   */
+  redactRoomMessage(params: Chime.Types.RedactRoomMessageRequest, callback?: (err: AWSError, data: Chime.Types.RedactRoomMessageResponse) => void): Request<Chime.Types.RedactRoomMessageResponse, AWSError>;
+  /**
+   * Redacts the specified message from the specified Amazon Chime chat room.
+   */
+  redactRoomMessage(callback?: (err: AWSError, data: Chime.Types.RedactRoomMessageResponse) => void): Request<Chime.Types.RedactRoomMessageResponse, AWSError>;
+  /**
    * Regenerates the security token for a bot.
    */
   regenerateSecurityToken(params: Chime.Types.RegenerateSecurityTokenRequest, callback?: (err: AWSError, data: Chime.Types.RegenerateSecurityTokenResponse) => void): Request<Chime.Types.RegenerateSecurityTokenResponse, AWSError>;
@@ -2921,6 +2937,38 @@ declare namespace Chime {
      * The updated termination setting details.
      */
     Termination?: Termination;
+  }
+  export interface RedactConversationMessageRequest {
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId: NonEmptyString;
+    /**
+     * The conversation ID.
+     */
+    ConversationId: NonEmptyString;
+    /**
+     * The message ID.
+     */
+    MessageId: NonEmptyString;
+  }
+  export interface RedactConversationMessageResponse {
+  }
+  export interface RedactRoomMessageRequest {
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId: NonEmptyString;
+    /**
+     * The room ID.
+     */
+    RoomId: NonEmptyString;
+    /**
+     * The message ID.
+     */
+    MessageId: NonEmptyString;
+  }
+  export interface RedactRoomMessageResponse {
   }
   export interface RegenerateSecurityTokenRequest {
     /**

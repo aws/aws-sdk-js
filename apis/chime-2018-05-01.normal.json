@@ -3323,6 +3323,82 @@
       ],
       "documentation": "<p>Adds termination SIP credentials for the specified Amazon Chime Voice Connector.</p>"
     },
+    "RedactConversationMessage": {
+      "name": "RedactConversationMessage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/accounts/{accountId}/conversations/{conversationId}/messages/{messageId}?operation=redact",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "RedactConversationMessageRequest"
+      },
+      "output": {
+        "shape": "RedactConversationMessageResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Redacts the specified message from the specified Amazon Chime conversation.</p>"
+    },
+    "RedactRoomMessage": {
+      "name": "RedactRoomMessage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/accounts/{accountId}/rooms/{roomId}/messages/{messageId}?operation=redact",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "RedactRoomMessageRequest"
+      },
+      "output": {
+        "shape": "RedactRoomMessageResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Redacts the specified message from the specified Amazon Chime chat room.</p>"
+    },
     "RegenerateSecurityToken": {
       "name": "RegenerateSecurityToken",
       "http": {
@@ -7765,6 +7841,70 @@
           "documentation": "<p>The updated termination setting details.</p>"
         }
       }
+    },
+    "RedactConversationMessageRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "ConversationId",
+        "MessageId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "ConversationId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The conversation ID.</p>",
+          "location": "uri",
+          "locationName": "conversationId"
+        },
+        "MessageId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The message ID.</p>",
+          "location": "uri",
+          "locationName": "messageId"
+        }
+      }
+    },
+    "RedactConversationMessageResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "RedactRoomMessageRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "RoomId",
+        "MessageId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "RoomId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The room ID.</p>",
+          "location": "uri",
+          "locationName": "roomId"
+        },
+        "MessageId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The message ID.</p>",
+          "location": "uri",
+          "locationName": "messageId"
+        }
+      }
+    },
+    "RedactRoomMessageResponse": {
+      "type": "structure",
+      "members": {}
     },
     "RegenerateSecurityTokenRequest": {
       "type": "structure",

@@ -749,6 +749,10 @@ declare namespace ECS {
      */
     environment?: EnvironmentVariables;
     /**
+     * A list of files containing the environment variables to pass to a container. This parameter maps to the --env-file option to docker run. You can specify up to ten environment files. The file must have a .env file extension. Each line in an environment file should contain an environment variable in VARIABLE=VALUE format. Lines beginning with # are treated as comments and are ignored. For more information on the environment variable file syntax, see Declare default environment variables in file. If there are environment variables specified using the environment parameter in a container definition, they take precedence over the variables contained within an environment file. If multiple environment files are specified that contain the same variable, they are processed from the top down. It is recommended to use unique variable names. For more information, see Specifying Environment Variables in the Amazon Elastic Container Service Developer Guide. This field is not valid for containers in tasks using the Fargate launch type.
+     */
+    environmentFiles?: EnvironmentFiles;
+    /**
      * The mount points for data volumes in your container. This parameter maps to Volumes in the Create a container section of the Docker Remote API and the --volume option to docker run. Windows containers can mount whole directories on the same drive as $env:ProgramData. Windows containers cannot mount directories on a different drive, and mount point cannot be across drives.
      */
     mountPoints?: MountPointList;
@@ -952,6 +956,10 @@ declare namespace ECS {
      * The environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the task definition. You must also specify a container name.
      */
     environment?: EnvironmentVariables;
+    /**
+     * A list of files containing the environment variables to pass to a container, instead of the value from the container definition.
+     */
+    environmentFiles?: EnvironmentFiles;
     /**
      * The number of cpu units reserved for the container, instead of the default value from the task definition. You must also specify a container name.
      */
@@ -1646,6 +1654,18 @@ declare namespace ECS {
      */
     authorizationConfig?: EFSAuthorizationConfig;
   }
+  export interface EnvironmentFile {
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon S3 object containing the environment variable file.
+     */
+    value: String;
+    /**
+     * The file type to use. The only supported value is s3.
+     */
+    type: EnvironmentFileType;
+  }
+  export type EnvironmentFileType = "s3"|string;
+  export type EnvironmentFiles = EnvironmentFile[];
   export type EnvironmentVariables = KeyValuePair[];
   export interface Failure {
     /**
@@ -1741,7 +1761,7 @@ declare namespace ECS {
   export type IpcMode = "host"|"task"|"none"|string;
   export interface KernelCapabilities {
     /**
-     * The Linux capabilities for the container that have been added to the default configuration provided by Docker. This parameter maps to CapAdd in the Create a container section of the Docker Remote API and the --cap-add option to docker run.  If you are using tasks that use the Fargate launch type, the add parameter is not supported.  Valid values: "ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" | "BLOCK_SUSPEND" | "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" | "FOWNER" | "FSETID" | "IPC_LOCK" | "IPC_OWNER" | "KILL" | "LEASE" | "LINUX_IMMUTABLE" | "MAC_ADMIN" | "MAC_OVERRIDE" | "MKNOD" | "NET_ADMIN" | "NET_BIND_SERVICE" | "NET_BROADCAST" | "NET_RAW" | "SETFCAP" | "SETGID" | "SETPCAP" | "SETUID" | "SYS_ADMIN" | "SYS_BOOT" | "SYS_CHROOT" | "SYS_MODULE" | "SYS_NICE" | "SYS_PACCT" | "SYS_PTRACE" | "SYS_RAWIO" | "SYS_RESOURCE" | "SYS_TIME" | "SYS_TTY_CONFIG" | "SYSLOG" | "WAKE_ALARM" 
+     * The Linux capabilities for the container that have been added to the default configuration provided by Docker. This parameter maps to CapAdd in the Create a container section of the Docker Remote API and the --cap-add option to docker run.  The SYS_PTRACE capability is supported for tasks that use the Fargate launch type if they are also using platform version 1.4.0. The other capabilities are not supported for any platform versions.  Valid values: "ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" | "BLOCK_SUSPEND" | "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" | "FOWNER" | "FSETID" | "IPC_LOCK" | "IPC_OWNER" | "KILL" | "LEASE" | "LINUX_IMMUTABLE" | "MAC_ADMIN" | "MAC_OVERRIDE" | "MKNOD" | "NET_ADMIN" | "NET_BIND_SERVICE" | "NET_BROADCAST" | "NET_RAW" | "SETFCAP" | "SETGID" | "SETPCAP" | "SETUID" | "SYS_ADMIN" | "SYS_BOOT" | "SYS_CHROOT" | "SYS_MODULE" | "SYS_NICE" | "SYS_PACCT" | "SYS_PTRACE" | "SYS_RAWIO" | "SYS_RESOURCE" | "SYS_TIME" | "SYS_TTY_CONFIG" | "SYSLOG" | "WAKE_ALARM" 
      */
     add?: StringList;
     /**
@@ -1762,7 +1782,7 @@ declare namespace ECS {
   export type LaunchType = "EC2"|"FARGATE"|string;
   export interface LinuxParameters {
     /**
-     * The Linux capabilities for the container that are added to or dropped from the default configuration provided by Docker.  If you are using tasks that use the Fargate launch type, capabilities is supported but the add parameter is not supported. 
+     * The Linux capabilities for the container that are added to or dropped from the default configuration provided by Docker.  For tasks that use the Fargate launch type, capabilities is supported for all platform versions but the add parameter is only supported if using platform version 1.4.0 or later. 
      */
     capabilities?: KernelCapabilities;
     /**

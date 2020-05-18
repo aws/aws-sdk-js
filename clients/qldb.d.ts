@@ -12,6 +12,14 @@ declare class QLDB extends Service {
   constructor(options?: QLDB.Types.ClientConfiguration)
   config: Config & QLDB.Types.ClientConfiguration;
   /**
+   * Ends a given Amazon QLDB journal stream. Before a stream can be canceled, its current status must be ACTIVE. You can't restart a stream after you cancel it. Canceled QLDB stream resources are subject to a 7-day retention period, so they are automatically deleted after this limit expires.
+   */
+  cancelJournalKinesisStream(params: QLDB.Types.CancelJournalKinesisStreamRequest, callback?: (err: AWSError, data: QLDB.Types.CancelJournalKinesisStreamResponse) => void): Request<QLDB.Types.CancelJournalKinesisStreamResponse, AWSError>;
+  /**
+   * Ends a given Amazon QLDB journal stream. Before a stream can be canceled, its current status must be ACTIVE. You can't restart a stream after you cancel it. Canceled QLDB stream resources are subject to a 7-day retention period, so they are automatically deleted after this limit expires.
+   */
+  cancelJournalKinesisStream(callback?: (err: AWSError, data: QLDB.Types.CancelJournalKinesisStreamResponse) => void): Request<QLDB.Types.CancelJournalKinesisStreamResponse, AWSError>;
+  /**
    * Creates a new ledger in your AWS account.
    */
   createLedger(params: QLDB.Types.CreateLedgerRequest, callback?: (err: AWSError, data: QLDB.Types.CreateLedgerResponse) => void): Request<QLDB.Types.CreateLedgerResponse, AWSError>;
@@ -28,11 +36,19 @@ declare class QLDB extends Service {
    */
   deleteLedger(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Returns information about a journal export job, including the ledger name, export ID, when it was created, current status, and its start and end time export parameters. If the export job with the given ExportId doesn't exist, then throws ResourceNotFoundException. If the ledger with the given Name doesn't exist, then throws ResourceNotFoundException.
+   * Returns detailed information about a given Amazon QLDB journal stream. The output includes the Amazon Resource Name (ARN), stream name, current status, creation time, and the parameters of your original stream creation request.
+   */
+  describeJournalKinesisStream(params: QLDB.Types.DescribeJournalKinesisStreamRequest, callback?: (err: AWSError, data: QLDB.Types.DescribeJournalKinesisStreamResponse) => void): Request<QLDB.Types.DescribeJournalKinesisStreamResponse, AWSError>;
+  /**
+   * Returns detailed information about a given Amazon QLDB journal stream. The output includes the Amazon Resource Name (ARN), stream name, current status, creation time, and the parameters of your original stream creation request.
+   */
+  describeJournalKinesisStream(callback?: (err: AWSError, data: QLDB.Types.DescribeJournalKinesisStreamResponse) => void): Request<QLDB.Types.DescribeJournalKinesisStreamResponse, AWSError>;
+  /**
+   * Returns information about a journal export job, including the ledger name, export ID, when it was created, current status, and its start and end time export parameters. This action does not return any expired export jobs. For more information, see Export Job Expiration in the Amazon QLDB Developer Guide. If the export job with the given ExportId doesn't exist, then throws ResourceNotFoundException. If the ledger with the given Name doesn't exist, then throws ResourceNotFoundException.
    */
   describeJournalS3Export(params: QLDB.Types.DescribeJournalS3ExportRequest, callback?: (err: AWSError, data: QLDB.Types.DescribeJournalS3ExportResponse) => void): Request<QLDB.Types.DescribeJournalS3ExportResponse, AWSError>;
   /**
-   * Returns information about a journal export job, including the ledger name, export ID, when it was created, current status, and its start and end time export parameters. If the export job with the given ExportId doesn't exist, then throws ResourceNotFoundException. If the ledger with the given Name doesn't exist, then throws ResourceNotFoundException.
+   * Returns information about a journal export job, including the ledger name, export ID, when it was created, current status, and its start and end time export parameters. This action does not return any expired export jobs. For more information, see Export Job Expiration in the Amazon QLDB Developer Guide. If the export job with the given ExportId doesn't exist, then throws ResourceNotFoundException. If the ledger with the given Name doesn't exist, then throws ResourceNotFoundException.
    */
   describeJournalS3Export(callback?: (err: AWSError, data: QLDB.Types.DescribeJournalS3ExportResponse) => void): Request<QLDB.Types.DescribeJournalS3ExportResponse, AWSError>;
   /**
@@ -76,19 +92,27 @@ declare class QLDB extends Service {
    */
   getRevision(callback?: (err: AWSError, data: QLDB.Types.GetRevisionResponse) => void): Request<QLDB.Types.GetRevisionResponse, AWSError>;
   /**
-   * Returns an array of journal export job descriptions for all ledgers that are associated with the current AWS account and Region. This action returns a maximum of MaxResults items, and is paginated so that you can retrieve all the items by calling ListJournalS3Exports multiple times.
+   * Returns an array of all Amazon QLDB journal stream descriptors for a given ledger. The output of each stream descriptor includes the same details that are returned by DescribeJournalKinesisStream. This action returns a maximum of MaxResults items. It is paginated so that you can retrieve all the items by calling ListJournalKinesisStreamsForLedger multiple times.
+   */
+  listJournalKinesisStreamsForLedger(params: QLDB.Types.ListJournalKinesisStreamsForLedgerRequest, callback?: (err: AWSError, data: QLDB.Types.ListJournalKinesisStreamsForLedgerResponse) => void): Request<QLDB.Types.ListJournalKinesisStreamsForLedgerResponse, AWSError>;
+  /**
+   * Returns an array of all Amazon QLDB journal stream descriptors for a given ledger. The output of each stream descriptor includes the same details that are returned by DescribeJournalKinesisStream. This action returns a maximum of MaxResults items. It is paginated so that you can retrieve all the items by calling ListJournalKinesisStreamsForLedger multiple times.
+   */
+  listJournalKinesisStreamsForLedger(callback?: (err: AWSError, data: QLDB.Types.ListJournalKinesisStreamsForLedgerResponse) => void): Request<QLDB.Types.ListJournalKinesisStreamsForLedgerResponse, AWSError>;
+  /**
+   * Returns an array of journal export job descriptions for all ledgers that are associated with the current AWS account and Region. This action returns a maximum of MaxResults items, and is paginated so that you can retrieve all the items by calling ListJournalS3Exports multiple times. This action does not return any expired export jobs. For more information, see Export Job Expiration in the Amazon QLDB Developer Guide.
    */
   listJournalS3Exports(params: QLDB.Types.ListJournalS3ExportsRequest, callback?: (err: AWSError, data: QLDB.Types.ListJournalS3ExportsResponse) => void): Request<QLDB.Types.ListJournalS3ExportsResponse, AWSError>;
   /**
-   * Returns an array of journal export job descriptions for all ledgers that are associated with the current AWS account and Region. This action returns a maximum of MaxResults items, and is paginated so that you can retrieve all the items by calling ListJournalS3Exports multiple times.
+   * Returns an array of journal export job descriptions for all ledgers that are associated with the current AWS account and Region. This action returns a maximum of MaxResults items, and is paginated so that you can retrieve all the items by calling ListJournalS3Exports multiple times. This action does not return any expired export jobs. For more information, see Export Job Expiration in the Amazon QLDB Developer Guide.
    */
   listJournalS3Exports(callback?: (err: AWSError, data: QLDB.Types.ListJournalS3ExportsResponse) => void): Request<QLDB.Types.ListJournalS3ExportsResponse, AWSError>;
   /**
-   * Returns an array of journal export job descriptions for a specified ledger. This action returns a maximum of MaxResults items, and is paginated so that you can retrieve all the items by calling ListJournalS3ExportsForLedger multiple times.
+   * Returns an array of journal export job descriptions for a specified ledger. This action returns a maximum of MaxResults items, and is paginated so that you can retrieve all the items by calling ListJournalS3ExportsForLedger multiple times. This action does not return any expired export jobs. For more information, see Export Job Expiration in the Amazon QLDB Developer Guide.
    */
   listJournalS3ExportsForLedger(params: QLDB.Types.ListJournalS3ExportsForLedgerRequest, callback?: (err: AWSError, data: QLDB.Types.ListJournalS3ExportsForLedgerResponse) => void): Request<QLDB.Types.ListJournalS3ExportsForLedgerResponse, AWSError>;
   /**
-   * Returns an array of journal export job descriptions for a specified ledger. This action returns a maximum of MaxResults items, and is paginated so that you can retrieve all the items by calling ListJournalS3ExportsForLedger multiple times.
+   * Returns an array of journal export job descriptions for a specified ledger. This action returns a maximum of MaxResults items, and is paginated so that you can retrieve all the items by calling ListJournalS3ExportsForLedger multiple times. This action does not return any expired export jobs. For more information, see Export Job Expiration in the Amazon QLDB Developer Guide.
    */
   listJournalS3ExportsForLedger(callback?: (err: AWSError, data: QLDB.Types.ListJournalS3ExportsForLedgerResponse) => void): Request<QLDB.Types.ListJournalS3ExportsForLedgerResponse, AWSError>;
   /**
@@ -107,6 +131,14 @@ declare class QLDB extends Service {
    * Returns all tags for a specified Amazon QLDB resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: QLDB.Types.ListTagsForResourceResponse) => void): Request<QLDB.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Creates a stream for a given Amazon QLDB ledger that delivers the journal data to a specified Amazon Kinesis Data Streams resource. The stream captures every document revision that is committed to your journal and sends it to the Kinesis data stream.
+   */
+  streamJournalToKinesis(params: QLDB.Types.StreamJournalToKinesisRequest, callback?: (err: AWSError, data: QLDB.Types.StreamJournalToKinesisResponse) => void): Request<QLDB.Types.StreamJournalToKinesisResponse, AWSError>;
+  /**
+   * Creates a stream for a given Amazon QLDB ledger that delivers the journal data to a specified Amazon Kinesis Data Streams resource. The stream captures every document revision that is committed to your journal and sends it to the Kinesis data stream.
+   */
+  streamJournalToKinesis(callback?: (err: AWSError, data: QLDB.Types.StreamJournalToKinesisResponse) => void): Request<QLDB.Types.StreamJournalToKinesisResponse, AWSError>;
   /**
    * Adds one or more tags to a specified Amazon QLDB resource. A resource can have up to 50 tags. If you try to create more than 50 tags for a resource, your request fails and returns an error.
    */
@@ -134,6 +166,23 @@ declare class QLDB extends Service {
 }
 declare namespace QLDB {
   export type Arn = string;
+  export type Boolean = boolean;
+  export interface CancelJournalKinesisStreamRequest {
+    /**
+     * The name of the ledger.
+     */
+    LedgerName: LedgerName;
+    /**
+     * The unique ID that QLDB assigns to each QLDB journal stream.
+     */
+    StreamId: UniqueId;
+  }
+  export interface CancelJournalKinesisStreamResponse {
+    /**
+     * The unique ID that QLDB assigns to each QLDB journal stream.
+     */
+    StreamId?: UniqueId;
+  }
   export interface CreateLedgerRequest {
     /**
      * The name of the ledger that you want to create. The name must be unique among all of your ledgers in the current AWS Region.
@@ -181,6 +230,22 @@ declare namespace QLDB {
     Name: LedgerName;
   }
   export type DeletionProtection = boolean;
+  export interface DescribeJournalKinesisStreamRequest {
+    /**
+     * The name of the ledger.
+     */
+    LedgerName: LedgerName;
+    /**
+     * The unique ID that QLDB assigns to each QLDB journal stream.
+     */
+    StreamId: UniqueId;
+  }
+  export interface DescribeJournalKinesisStreamResponse {
+    /**
+     * Information about the QLDB journal stream returned by a DescribeJournalS3Export request.
+     */
+    Stream?: JournalKinesisStreamDescription;
+  }
   export interface DescribeJournalS3ExportRequest {
     /**
      * The name of the ledger.
@@ -226,6 +291,7 @@ declare namespace QLDB {
     DeletionProtection?: DeletionProtection;
   }
   export type Digest = Buffer|Uint8Array|Blob|string;
+  export type ErrorCause = "KINESIS_STREAM_NOT_FOUND"|"IAM_PERMISSION_REVOKED"|string;
   export interface ExportJournalToS3Request {
     /**
      * The name of the ledger.
@@ -324,6 +390,53 @@ declare namespace QLDB {
     Revision: ValueHolder;
   }
   export type IonText = string;
+  export interface JournalKinesisStreamDescription {
+    /**
+     * The name of the ledger.
+     */
+    LedgerName: LedgerName;
+    /**
+     * The date and time, in epoch time format, when the QLDB journal stream was created. (Epoch time format is the number of seconds elapsed since 12:00:00 AM January 1, 1970 UTC.)
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The inclusive start date and time from which to start streaming journal data.
+     */
+    InclusiveStartTime?: Timestamp;
+    /**
+     * The exclusive date and time that specifies when the stream ends. If this parameter is blank, the stream runs indefinitely until you cancel it.
+     */
+    ExclusiveEndTime?: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for a journal stream to write data records to a Kinesis Data Streams resource.
+     */
+    RoleArn: Arn;
+    /**
+     * The unique ID that QLDB assigns to each QLDB journal stream.
+     */
+    StreamId: UniqueId;
+    /**
+     * The Amazon Resource Name (ARN) of the QLDB journal stream.
+     */
+    Arn?: Arn;
+    /**
+     * The current state of the QLDB journal stream.
+     */
+    Status: StreamStatus;
+    /**
+     * The configuration settings of the Amazon Kinesis Data Streams destination for your QLDB journal stream.
+     */
+    KinesisConfiguration: KinesisConfiguration;
+    /**
+     * The error message that describes the reason that a stream has a status of IMPAIRED or FAILED. This is not applicable to streams that have other status values.
+     */
+    ErrorCause?: ErrorCause;
+    /**
+     * The user-defined name of the QLDB journal stream.
+     */
+    StreamName: StreamName;
+  }
+  export type JournalKinesisStreamDescriptionList = JournalKinesisStreamDescription[];
   export interface JournalS3ExportDescription {
     /**
      * The name of the ledger.
@@ -356,6 +469,16 @@ declare namespace QLDB {
     RoleArn: Arn;
   }
   export type JournalS3ExportList = JournalS3ExportDescription[];
+  export interface KinesisConfiguration {
+    /**
+     * The Amazon Resource Name (ARN) of the Kinesis data stream resource.
+     */
+    StreamArn: Arn;
+    /**
+     * Enables QLDB to publish multiple stream records in a single Kinesis Data Streams record. To learn more, see KPL Key Concepts in the Amazon Kinesis Data Streams Developer Guide.
+     */
+    AggregationEnabled?: Boolean;
+  }
   export type LedgerList = LedgerSummary[];
   export type LedgerName = string;
   export type LedgerState = "CREATING"|"ACTIVE"|"DELETING"|"DELETED"|string;
@@ -372,6 +495,30 @@ declare namespace QLDB {
      * The date and time, in epoch time format, when the ledger was created. (Epoch time format is the number of seconds elapsed since 12:00:00 AM January 1, 1970 UTC.)
      */
     CreationDateTime?: Timestamp;
+  }
+  export interface ListJournalKinesisStreamsForLedgerRequest {
+    /**
+     * The name of the ledger.
+     */
+    LedgerName: LedgerName;
+    /**
+     * The maximum number of results to return in a single ListJournalKinesisStreamsForLedger request. (The actual number of results returned might be fewer.)
+     */
+    MaxResults?: MaxResults;
+    /**
+     * A pagination token, indicating that you want to retrieve the next page of results. If you received a value for NextToken in the response from a previous ListJournalKinesisStreamsForLedger call, you should use that value as input here.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListJournalKinesisStreamsForLedgerResponse {
+    /**
+     * The array of QLDB journal stream descriptors that are associated with the given ledger.
+     */
+    Streams?: JournalKinesisStreamDescriptionList;
+    /**
+     *   If NextToken is empty, the last page of results has been processed and there are no more results to be retrieved.   If NextToken is not empty, more results are available. To retrieve the next page of results, use the value of NextToken in a subsequent ListJournalKinesisStreamsForLedger call.  
+     */
+    NextToken?: NextToken;
   }
   export interface ListJournalS3ExportsForLedgerRequest {
     /**
@@ -459,7 +606,7 @@ declare namespace QLDB {
      */
     ObjectEncryptionType: S3ObjectEncryptionType;
     /**
-     * The Amazon Resource Name (ARN) for a customer master key (CMK) in AWS Key Management Service (AWS KMS). You must provide a KmsKeyArn if you specify SSE_KMS as the ObjectEncryptionType.  KmsKeyArn is not required if you specify SSE_S3 as the ObjectEncryptionType.
+     * The Amazon Resource Name (ARN) for a symmetric customer master key (CMK) in AWS Key Management Service (AWS KMS). Amazon QLDB does not support asymmetric CMKs. You must provide a KmsKeyArn if you specify SSE_KMS as the ObjectEncryptionType.  KmsKeyArn is not required if you specify SSE_S3 as the ObjectEncryptionType.
      */
     KmsKeyArn?: Arn;
   }
@@ -479,6 +626,44 @@ declare namespace QLDB {
   }
   export type S3ObjectEncryptionType = "SSE_KMS"|"SSE_S3"|"NO_ENCRYPTION"|string;
   export type S3Prefix = string;
+  export interface StreamJournalToKinesisRequest {
+    /**
+     * The name of the ledger.
+     */
+    LedgerName: LedgerName;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for a journal stream to write data records to a Kinesis Data Streams resource.
+     */
+    RoleArn: Arn;
+    /**
+     * The key-value pairs to add as tags to the stream that you want to create. Tag keys are case sensitive. Tag values are case sensitive and can be null.
+     */
+    Tags?: Tags;
+    /**
+     * The inclusive start date and time from which to start streaming journal data. This parameter must be in ISO 8601 date and time format and in Universal Coordinated Time (UTC). For example: 2019-06-13T21:36:34Z  The InclusiveStartTime cannot be in the future and must be before ExclusiveEndTime. If you provide an InclusiveStartTime that is before the ledger's CreationDateTime, QLDB effectively defaults it to the ledger's CreationDateTime.
+     */
+    InclusiveStartTime: Timestamp;
+    /**
+     * The exclusive date and time that specifies when the stream ends. If you keep this parameter blank, the stream runs indefinitely until you cancel it. The ExclusiveEndTime must be in ISO 8601 date and time format and in Universal Coordinated Time (UTC). For example: 2019-06-13T21:36:34Z 
+     */
+    ExclusiveEndTime?: Timestamp;
+    /**
+     * The configuration settings of the Kinesis Data Streams destination for your stream request.
+     */
+    KinesisConfiguration: KinesisConfiguration;
+    /**
+     * The name that you want to assign to the QLDB journal stream. User-defined names can help identify and indicate the purpose of a stream. Your stream name must be unique among other active streams for a given ledger. If you try to create a stream with the same name and configuration of an active, existing stream for the same ledger, QLDB simply returns the existing stream. Stream names have the same naming constraints as ledger names, as defined in Quotas in Amazon QLDB in the Amazon QLDB Developer Guide.
+     */
+    StreamName: StreamName;
+  }
+  export interface StreamJournalToKinesisResponse {
+    /**
+     * The unique ID that QLDB assigns to each QLDB journal stream.
+     */
+    StreamId?: UniqueId;
+  }
+  export type StreamName = string;
+  export type StreamStatus = "ACTIVE"|"COMPLETED"|"CANCELED"|"FAILED"|"IMPAIRED"|string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export interface TagResourceRequest {
