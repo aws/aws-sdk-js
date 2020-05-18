@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "Signers",
+  "description": "Added signatureHost config to override the host header when signing a request."
+}
