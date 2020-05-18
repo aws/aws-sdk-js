@@ -74,6 +74,7 @@ AWS.config.update({
     s3ForcePathStyle: true,
     signatureCache: false,
     signatureVersion: 'v4',
+    signatureHost: null,
     sslEnabled: true,
     systemClockOffset: 0,
     useAccelerateEndpoint: true

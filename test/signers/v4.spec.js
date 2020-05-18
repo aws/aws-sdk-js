@@ -58,9 +58,11 @@
         };
         signer = buildSigner(req, {
           signatureCache: true,
-          operation: operation
+          operation: operation,
+          signatureHost: 'example.com'
         });
         expect(signer.signatureCache).to.equal(true);
+        expect(signer.signatureHost).to.equal('example.com');
         return expect(signer.operation).to.equal(operation);
       });
       it('can set signatureCache to false', function() {
@@ -74,7 +76,7 @@
         });
         return expect(signer.signatureCache).to.equal(false);
       });
-      return it('defaults signatureCache to true', function() {
+      it('defaults signatureCache to true', function() {
         var operation, req;
         req = buildRequest();
         operation = {
@@ -82,6 +84,26 @@
         };
         signer = buildSigner(req);
         return expect(signer.signatureCache).to.equal(true);
+      });
+      it('can set signatureHost to example.com', function() {
+        var operation, req;
+        req = buildRequest();
+        operation = {
+          fake: 'bag'
+        };
+        signer = buildSigner(req, {
+          signatureHost: 'example.com'
+        });
+        return expect(signer.signatureHost).to.equal('example.com');
+      });
+      return it('defaults signatureHost to null', function() {
+        var operation, req;
+        req = buildRequest();
+        operation = {
+          fake: 'bag'
+        };
+        signer = buildSigner(req);
+        return expect(signer.signatureHost).to.equal(null);
       });
     });
     describe('addAuthorization', function() {

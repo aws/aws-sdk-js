@@ -267,6 +267,11 @@ export abstract class ConfigurationOptions {
      */
     signatureCache?: boolean
     /**
+     * The Host header that will be used at the signing method (overriding the API endpoint). 
+		 * Only applies to the signature version 'v4'.
+     */
+    signatureHost?: string|null
+    /**
      * The signature version to sign requests with (overriding the API configuration).
      * Possible values: 'v2'|'v3'|'v4'
      */
