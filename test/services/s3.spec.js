@@ -2174,6 +2174,32 @@ describe('AWS.S3', function() {
         done();
       });
     });
+
+    it('returns an error when the resp is 200 with incomplete body', function(done) {
+      helpers.mockHttpResponse(200, {}, '<?xml version="1.0" encoding="UTF-8"?>');
+      s3.completeMultipartUpload(function(error, data) {
+        expect(error).to.be.instanceOf(Error);
+        expect(error.code).to.equal('InternalError');
+        expect(error.message).to.equal('S3 aborted request');
+        expect(error.statusCode).to.equal(200);
+        expect(error.retryable).to.equal(true);
+        expect(data).to.equal(null);
+        done();
+      });
+    });
+
+    it('returns an error when the resp is 200 with empty body', function(done) {
+      helpers.mockHttpResponse(200, {}, '');
+      s3.completeMultipartUpload(function(error, data) {
+        expect(error).to.be.instanceOf(Error);
+        expect(error.code).to.equal('InternalError');
+        expect(error.message).to.equal('S3 aborted request');
+        expect(error.statusCode).to.equal(200);
+        expect(error.retryable).to.equal(true);
+        expect(data).to.equal(null);
+        done();
+      });
+    });
   });
 
   describe('copyObject', function() {
@@ -2203,6 +2229,19 @@ describe('AWS.S3', function() {
         expect(error).to.be.instanceOf(Error);
         expect(error.code).to.equal('InternalError');
         expect(error.message).to.equal('We encountered an internal error. Please try again.');
+        expect(error.statusCode).to.equal(200);
+        expect(error.retryable).to.equal(true);
+        expect(data).to.equal(null);
+        done();
+      });
+    });
+
+    it('returns an error when the resp is 200 with incomplete body', function(done) {
+      helpers.mockHttpResponse(200, {}, '<?xml version="1.0" encoding="UTF-8"?>');
+      s3.copyObject(function(error, data) {
+        expect(error).to.be.instanceOf(Error);
+        expect(error.code).to.equal('InternalError');
+        expect(error.message).to.equal('S3 aborted request');
         expect(error.statusCode).to.equal(200);
         expect(error.retryable).to.equal(true);
         expect(data).to.equal(null);
@@ -2255,6 +2294,32 @@ describe('AWS.S3', function() {
         expect(error).to.be.instanceOf(Error);
         expect(error.code).to.equal('InternalError');
         expect(error.message).to.equal('We encountered an internal error. Please try again.');
+        expect(error.statusCode).to.equal(200);
+        expect(error.retryable).to.equal(true);
+        expect(data).to.equal(null);
+        done();
+      });
+    });
+
+    it('returns an error when the resp is 200 with incomplete body', function(done) {
+      helpers.mockHttpResponse(200, {}, '<?xml version="1.0" encoding="UTF-8"?>');
+      s3.uploadPartCopy(function(error, data) {
+        expect(error).to.be.instanceOf(Error);
+        expect(error.code).to.equal('InternalError');
+        expect(error.message).to.equal('S3 aborted request');
+        expect(error.statusCode).to.equal(200);
+        expect(error.retryable).to.equal(true);
+        expect(data).to.equal(null);
+        done();
+      });
+    });
+
+    it('returns an error when the resp is 200 with empty body', function(done) {
+      helpers.mockHttpResponse(200, {}, '');
+      s3.uploadPartCopy(function(error, data) {
+        expect(error).to.be.instanceOf(Error);
+        expect(error.code).to.equal('InternalError');
+        expect(error.message).to.equal('S3 aborted request');
         expect(error.statusCode).to.equal(200);
         expect(error.retryable).to.equal(true);
         expect(data).to.equal(null);

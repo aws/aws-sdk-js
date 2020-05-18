@@ -45,6 +45,9 @@
       AWS.S3.ManagedUpload.prototype.minPartSize = 10;
       ref1 = [], err = ref1[0], data = ref1[1];
       helpers.spyOn(AWS.S3.prototype, 'extractError').andReturn(function() {});
+      //Because we cannot mock individual body for a series of responses, so we will just disable
+      //this function. Otherwise it will make each 'completeMultipartUpload' throws because of empty body.
+      helpers.spyOn(AWS.S3.prototype, 'extractErrorFrom200Response').andReturn(function() {});
       return upload = null;
     });
     afterEach(function() {
