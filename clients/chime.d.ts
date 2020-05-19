@@ -2535,6 +2535,7 @@ declare namespace Chime {
   export type NonEmptyString = string;
   export type NonEmptyString128 = string;
   export type NonEmptyStringList = String[];
+  export type NotificationTarget = "EventBridge"|"SNS"|"SQS"|string;
   export type NullableBoolean = boolean;
   export type NumberSelectionBehavior = "PreferSticky"|"AvoidSticky"|string;
   export interface OrderedPhoneNumber {
@@ -3115,7 +3116,18 @@ declare namespace Chime {
      * When true, media streaming to Amazon Kinesis is turned off.
      */
     Disabled?: Boolean;
+    /**
+     * The streaming notification targets.
+     */
+    StreamingNotificationTargets?: StreamingNotificationTargetList;
   }
+  export interface StreamingNotificationTarget {
+    /**
+     * The streaming notification target.
+     */
+    NotificationTarget: NotificationTarget;
+  }
+  export type StreamingNotificationTargetList = StreamingNotificationTarget[];
   export type String = string;
   export type String128 = string;
   export type StringList = String[];

@@ -168,6 +168,7 @@ declare namespace Health {
      * A JSON set of elements of the affected accounts.
      */
     affectedAccounts?: affectedAccountsList;
+    eventScopeCode?: eventScopeCode;
     /**
      * If the results of a search are large, only a portion of the results are returned, and a nextToken pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.
      */
@@ -487,6 +488,7 @@ declare namespace Health {
      * The most recent status of the event. Possible values are open, closed, and upcoming.
      */
     statusCode?: eventStatusCode;
+    eventScopeCode?: eventScopeCode;
   }
   export interface EventAccountFilter {
     /**
@@ -496,7 +498,7 @@ declare namespace Health {
     /**
      * The 12-digit AWS account numbers that contains the affected entities.
      */
-    awsAccountId: accountId;
+    awsAccountId?: accountId;
   }
   export interface EventAggregate {
     /**
@@ -666,6 +668,7 @@ declare namespace Health {
      * The category of the event type.
      */
     eventTypeCategory?: eventTypeCategory;
+    eventScopeCode?: eventScopeCode;
     /**
      * The AWS Region name of the event.
      */
@@ -776,6 +779,7 @@ declare namespace Health {
   export type eventArnList = eventArn[];
   export type eventDescription = string;
   export type eventMetadata = {[key: string]: metadataValue};
+  export type eventScopeCode = "PUBLIC"|"ACCOUNT_SPECIFIC"|"NONE"|string;
   export type eventStatusCode = "open"|"closed"|"upcoming"|string;
   export type eventStatusCodeList = eventStatusCode[];
   export type eventType = string;

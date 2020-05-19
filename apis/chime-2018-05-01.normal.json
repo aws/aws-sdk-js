@@ -7168,6 +7168,14 @@
       },
       "min": 1
     },
+    "NotificationTarget": {
+      "type": "string",
+      "enum": [
+        "EventBridge",
+        "SNS",
+        "SQS"
+      ]
+    },
     "NullableBoolean": {
       "type": "boolean"
     },
@@ -8170,9 +8178,34 @@
         "Disabled": {
           "shape": "Boolean",
           "documentation": "<p>When true, media streaming to Amazon Kinesis is turned off.</p>"
+        },
+        "StreamingNotificationTargets": {
+          "shape": "StreamingNotificationTargetList",
+          "documentation": "<p>The streaming notification targets.</p>"
         }
       },
       "documentation": "<p>The streaming configuration associated with an Amazon Chime Voice Connector. Specifies whether media streaming is enabled for sending to Amazon Kinesis, and shows the retention period for the Amazon Kinesis data, in hours.</p>"
+    },
+    "StreamingNotificationTarget": {
+      "type": "structure",
+      "required": [
+        "NotificationTarget"
+      ],
+      "members": {
+        "NotificationTarget": {
+          "shape": "NotificationTarget",
+          "documentation": "<p>The streaming notification target.</p>"
+        }
+      },
+      "documentation": "<p>The targeted recipient for a streaming configuration notification.</p>"
+    },
+    "StreamingNotificationTargetList": {
+      "type": "list",
+      "member": {
+        "shape": "StreamingNotificationTarget"
+      },
+      "max": 3,
+      "min": 1
     },
     "String": {
       "type": "string"

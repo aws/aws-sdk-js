@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.679.0-->
+<!--LATEST=2.680.0-->
 <!--ENTRYINSERT-->
+
+## 2.680.0
+* feature: Chime: You can now receive Voice Connector call events through SNS or SQS.
+* feature: EC2: This release adds support for Federated Authentication via SAML-2.0 in AWS ClientVPN.
+* feature: Health: Feature: Health: AWS Health added a new field to differentiate Public events from Account-Specific events in the API request and response. Visit https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html to learn more.
 
 ## 2.679.0
 * feature: Chime: Amazon Chime now supports redacting chat messages.

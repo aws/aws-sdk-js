@@ -344,6 +344,9 @@
           "shape": "affectedAccountsList",
           "documentation": "<p>A JSON set of elements of the affected accounts.</p>"
         },
+        "eventScopeCode": {
+          "shape": "eventScopeCode"
+        },
         "nextToken": {
           "shape": "nextToken",
           "documentation": "<p>If the results of a search are large, only a portion of the results are returned, and a <code>nextToken</code> pagination token is returned in the response. To retrieve the next batch of results, reissue the search request and include the returned token. When all results have been returned, the response does not contain a pagination token value.</p>"
@@ -783,6 +786,9 @@
         "statusCode": {
           "shape": "eventStatusCode",
           "documentation": "<p>The most recent status of the event. Possible values are <code>open</code>, <code>closed</code>, and <code>upcoming</code>.</p>"
+        },
+        "eventScopeCode": {
+          "shape": "eventScopeCode"
         }
       },
       "documentation": "<p>Summary information about an AWS Health event.</p>"
@@ -790,8 +796,7 @@
     "EventAccountFilter": {
       "type": "structure",
       "required": [
-        "eventArn",
-        "awsAccountId"
+        "eventArn"
       ],
       "members": {
         "eventArn": {
@@ -1050,6 +1055,9 @@
           "shape": "eventTypeCategory",
           "documentation": "<p>The category of the event type.</p>"
         },
+        "eventScopeCode": {
+          "shape": "eventScopeCode"
+        },
         "region": {
           "shape": "region",
           "documentation": "<p>The AWS Region name of the event.</p>"
@@ -1255,8 +1263,8 @@
     },
     "entityValue": {
       "type": "string",
-      "max": 256,
-      "pattern": ".{0,256}"
+      "max": 1224,
+      "pattern": ".{0,1224}"
     },
     "entityValueList": {
       "type": "list",
@@ -1296,6 +1304,14 @@
       "value": {
         "shape": "metadataValue"
       }
+    },
+    "eventScopeCode": {
+      "type": "string",
+      "enum": [
+        "PUBLIC",
+        "ACCOUNT_SPECIFIC",
+        "NONE"
+      ]
     },
     "eventStatusCode": {
       "type": "string",
@@ -1367,11 +1383,12 @@
       "min": 10
     },
     "metadataKey": {
-      "type": "string"
+      "type": "string",
+      "max": 32766
     },
     "metadataValue": {
       "type": "string",
-      "max": 10240
+      "max": 32766
     },
     "nextToken": {
       "type": "string",
