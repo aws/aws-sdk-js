@@ -12,53 +12,46 @@ declare class AppMesh extends Service {
   constructor(options?: AppMesh.Types.ClientConfiguration)
   config: Config & AppMesh.Types.ClientConfiguration;
   /**
-   * Creates a service mesh. A service mesh is a logical boundary for network traffic between
-         the services that reside within it.
-         After you create your service mesh, you can create virtual services, virtual nodes,
-         virtual routers, and routes to distribute traffic between the applications in your
-         mesh.
+   * Creates a service mesh.
+          A service mesh is a logical boundary for network traffic between services that are
+         represented by resources within the mesh. After you create your service mesh, you can
+         create virtual services, virtual nodes, virtual routers, and routes to distribute traffic
+         between the applications in your mesh.
+         For more information about service meshes, see Service meshes.
    */
   createMesh(params: AppMesh.Types.CreateMeshInput, callback?: (err: AWSError, data: AppMesh.Types.CreateMeshOutput) => void): Request<AppMesh.Types.CreateMeshOutput, AWSError>;
   /**
-   * Creates a service mesh. A service mesh is a logical boundary for network traffic between
-         the services that reside within it.
-         After you create your service mesh, you can create virtual services, virtual nodes,
-         virtual routers, and routes to distribute traffic between the applications in your
-         mesh.
+   * Creates a service mesh.
+          A service mesh is a logical boundary for network traffic between services that are
+         represented by resources within the mesh. After you create your service mesh, you can
+         create virtual services, virtual nodes, virtual routers, and routes to distribute traffic
+         between the applications in your mesh.
+         For more information about service meshes, see Service meshes.
    */
   createMesh(callback?: (err: AWSError, data: AppMesh.Types.CreateMeshOutput) => void): Request<AppMesh.Types.CreateMeshOutput, AWSError>;
   /**
    * Creates a route that is associated with a virtual router.
-         You can use the prefix parameter in your route specification for path-based
-         routing of requests. For example, if your virtual service name is
-            my-service.local and you want the route to match requests to
-            my-service.local/metrics, your prefix should be
-         /metrics.
-         If your route matches a request, you can distribute traffic to one or more target
-         virtual nodes with relative weighting.
+          You can route several different protocols and define a retry policy for a route.
+         Traffic can be routed to one or more virtual nodes.
          For more information about routes, see Routes.
    */
   createRoute(params: AppMesh.Types.CreateRouteInput, callback?: (err: AWSError, data: AppMesh.Types.CreateRouteOutput) => void): Request<AppMesh.Types.CreateRouteOutput, AWSError>;
   /**
    * Creates a route that is associated with a virtual router.
-         You can use the prefix parameter in your route specification for path-based
-         routing of requests. For example, if your virtual service name is
-            my-service.local and you want the route to match requests to
-            my-service.local/metrics, your prefix should be
-         /metrics.
-         If your route matches a request, you can distribute traffic to one or more target
-         virtual nodes with relative weighting.
+          You can route several different protocols and define a retry policy for a route.
+         Traffic can be routed to one or more virtual nodes.
          For more information about routes, see Routes.
    */
   createRoute(callback?: (err: AWSError, data: AppMesh.Types.CreateRouteOutput) => void): Request<AppMesh.Types.CreateRouteOutput, AWSError>;
   /**
    * Creates a virtual node within a service mesh.
-         A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS
+          A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS
          service or a Kubernetes deployment. When you create a virtual node, you can specify the
-         service discovery information for your task group.
-         Any inbound traffic that your virtual node expects should be specified as a
-            listener. Any outbound traffic that your virtual node expects to reach
-         should be specified as a backend.
+         service discovery information for your task group, and whether the proxy running in a task
+         group will communicate with other proxies using Transport Layer Security (TLS).
+         You define a listener for any inbound traffic that your virtual node
+         expects. Any virtual service that your virtual node expects to communicate to is specified
+         as a backend.
          The response metadata for your new virtual node contains the arn that is
          associated with the virtual node. Set this value (either the full ARN or the truncated
          resource name: for example, mesh/default/virtualNode/simpleapp) as the
@@ -71,17 +64,18 @@ declare class AppMesh extends Service {
                APPMESH_VIRTUAL_NODE_NAME with the
                APPMESH_VIRTUAL_NODE_CLUSTER environment variable.
          
-         For more information about virtual nodes, see Virtual Nodes.
+         For more information about virtual nodes, see Virtual nodes.
    */
   createVirtualNode(params: AppMesh.Types.CreateVirtualNodeInput, callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualNodeOutput) => void): Request<AppMesh.Types.CreateVirtualNodeOutput, AWSError>;
   /**
    * Creates a virtual node within a service mesh.
-         A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS
+          A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS
          service or a Kubernetes deployment. When you create a virtual node, you can specify the
-         service discovery information for your task group.
-         Any inbound traffic that your virtual node expects should be specified as a
-            listener. Any outbound traffic that your virtual node expects to reach
-         should be specified as a backend.
+         service discovery information for your task group, and whether the proxy running in a task
+         group will communicate with other proxies using Transport Layer Security (TLS).
+         You define a listener for any inbound traffic that your virtual node
+         expects. Any virtual service that your virtual node expects to communicate to is specified
+         as a backend.
          The response metadata for your new virtual node contains the arn that is
          associated with the virtual node. Set this value (either the full ARN or the truncated
          resource name: for example, mesh/default/virtualNode/simpleapp) as the
@@ -94,27 +88,27 @@ declare class AppMesh extends Service {
                APPMESH_VIRTUAL_NODE_NAME with the
                APPMESH_VIRTUAL_NODE_CLUSTER environment variable.
          
-         For more information about virtual nodes, see Virtual Nodes.
+         For more information about virtual nodes, see Virtual nodes.
    */
   createVirtualNode(callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualNodeOutput) => void): Request<AppMesh.Types.CreateVirtualNodeOutput, AWSError>;
   /**
    * Creates a virtual router within a service mesh.
-         Any inbound traffic that your virtual router expects should be specified as a
-            listener. 
-         Virtual routers handle traffic for one or more virtual services within your mesh. After
-         you create your virtual router, create and associate routes for your virtual router that
-         direct incoming requests to different virtual nodes.
-         For more information about virtual routers, see Virtual Routers.
+         Specify a listener for any inbound traffic that your virtual router
+         receives. Create a virtual router for each protocol and port that you need to route.
+         Virtual routers handle traffic for one or more virtual services within your mesh. After you
+         create your virtual router, create and associate routes for your virtual router that direct
+         incoming requests to different virtual nodes.
+         For more information about virtual routers, see Virtual routers.
    */
   createVirtualRouter(params: AppMesh.Types.CreateVirtualRouterInput, callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualRouterOutput) => void): Request<AppMesh.Types.CreateVirtualRouterOutput, AWSError>;
   /**
    * Creates a virtual router within a service mesh.
-         Any inbound traffic that your virtual router expects should be specified as a
-            listener. 
-         Virtual routers handle traffic for one or more virtual services within your mesh. After
-         you create your virtual router, create and associate routes for your virtual router that
-         direct incoming requests to different virtual nodes.
-         For more information about virtual routers, see Virtual Routers.
+         Specify a listener for any inbound traffic that your virtual router
+         receives. Create a virtual router for each protocol and port that you need to route.
+         Virtual routers handle traffic for one or more virtual services within your mesh. After you
+         create your virtual router, create and associate routes for your virtual router that direct
+         incoming requests to different virtual nodes.
+         For more information about virtual routers, see Virtual routers.
    */
   createVirtualRouter(callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualRouterOutput) => void): Request<AppMesh.Types.CreateVirtualRouterOutput, AWSError>;
   /**
@@ -124,7 +118,7 @@ declare class AppMesh extends Service {
          service by its virtualServiceName, and those requests are routed to the
          virtual node or virtual router that is specified as the provider for the virtual
          service.
-         For more information about virtual services, see Virtual Services.
+         For more information about virtual services, see Virtual services.
    */
   createVirtualService(params: AppMesh.Types.CreateVirtualServiceInput, callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualServiceOutput) => void): Request<AppMesh.Types.CreateVirtualServiceOutput, AWSError>;
   /**
@@ -134,7 +128,7 @@ declare class AppMesh extends Service {
          service by its virtualServiceName, and those requests are routed to the
          virtual node or virtual router that is specified as the provider for the virtual
          service.
-         For more information about virtual services, see Virtual Services.
+         For more information about virtual services, see Virtual services.
    */
   createVirtualService(callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualServiceOutput) => void): Request<AppMesh.Types.CreateVirtualServiceOutput, AWSError>;
   /**
@@ -352,7 +346,7 @@ declare namespace AppMesh {
      */
     grpcRetryEvents?: GrpcRetryPolicyEvents;
     /**
-     * Specify at least one of the following values.
+     * Specify at least one of the following values. 
          
             
                
@@ -441,7 +435,7 @@ declare namespace AppMesh {
     meshOwner: AccountId;
     /**
      * The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's
-               the ID of the mesh owner, or another account that the mesh is shared with. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with Shared Meshes.
      */
     resourceOwner: AccountId;
     /**
@@ -496,8 +490,8 @@ declare namespace AppMesh {
      */
     intervalMillis: HealthCheckIntervalMillis;
     /**
-     * The destination path for the health check request. This value is only used if the specified 
-         protocol is HTTP or HTTP/2. For any other protocol, this value is ignored.
+     * The destination path for the health check request. This value is only used if the
+         specified protocol is HTTP or HTTP/2. For any other protocol, this value is ignored.
      */
     path?: String;
     /**
@@ -506,7 +500,9 @@ declare namespace AppMesh {
      */
     port?: PortNumber;
     /**
-     * The protocol for the health check request. If you specify grpc, then your service must conform to the GRPC Health Checking Protocol.
+     * The protocol for the health check request. If you specify grpc, then your
+         service must conform to the GRPC Health
+            Checking Protocol.
      */
     protocol: PortProtocol;
     /**
@@ -747,8 +743,8 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   export type AwsCloudMapInstanceAttributeKey = string;
   export interface VirtualRouterSpec {
     /**
-     * The listeners that the virtual router is expected to receive inbound traffic from.
-         You can specify one listener.
+     * The listeners that the virtual router is expected to receive inbound traffic from. You
+         can specify one listener.
      */
     listeners?: VirtualRouterListeners;
   }
@@ -762,8 +758,8 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     backends?: Backends;
     /**
-     * The listener that the virtual node is expected to receive inbound traffic from.
-         You can specify one listener.
+     * The listener that the virtual node is expected to receive inbound traffic from. You can
+         specify one listener.
      */
     listeners?: Listeners;
     /**
@@ -772,8 +768,8 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     logging?: Logging;
     /**
      * The service discovery information for the virtual node. If your virtual node does not
-         expect ingress traffic, you can omit this parameter. If you specify a listener,
-         then you must specify service discovery information.
+         expect ingress traffic, you can omit this parameter. If you specify a
+         listener, then you must specify service discovery information.
      */
     serviceDiscovery?: ServiceDiscovery;
   }
@@ -797,7 +793,8 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   export type MaxRetries = number;
   export interface TlsValidationContextTrust {
     /**
-     * A reference to an object that represents a TLS validation context trust for an AWS Certicate Manager (ACM) certificate.
+     * A reference to an object that represents a TLS validation context trust for an AWS Certicate Manager (ACM)
+         certificate.
      */
     acm?: TlsValidationContextAcmTrust;
     /**
@@ -844,6 +841,8 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The full Amazon Resource Name (ARN) for the route.
      */
     arn: Arn;
+    createdAt: Timestamp;
+    lastUpdatedAt: Timestamp;
     /**
      * The name of the service mesh that the route resides in.
      */
@@ -855,13 +854,14 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     meshOwner: AccountId;
     /**
      * The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's
-               the ID of the mesh owner, or another account that the mesh is shared with. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with Shared Meshes.
      */
     resourceOwner: AccountId;
     /**
      * The name of the route.
      */
     routeName: ResourceName;
+    version: Long;
     /**
      * The virtual router that the route is associated with.
      */
@@ -977,7 +977,8 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     metadata?: GrpcRouteMetadataList;
     /**
-     * The method name to match from the request. If you specify a name, you must also specify a serviceName.
+     * The method name to match from the request. If you specify a name, you must also specify
+         a serviceName.
      */
     methodName?: MethodName;
     /**
@@ -1162,15 +1163,18 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
          
             
                
-                  STRICT – Listener only accepts connections with TLS enabled. 
+                  STRICT – Listener only accepts connections with TLS
+               enabled. 
             
             
                
-                  PERMISSIVE – Listener accepts connections with or without TLS enabled.
+                  PERMISSIVE – Listener accepts connections with or
+               without TLS enabled.
             
             
                
-                  DISABLED –  Listener only accepts connections without TLS. 
+                  DISABLED – Listener only accepts connections without
+               TLS. 
             
          
      */
@@ -1394,6 +1398,8 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The full Amazon Resource Name (ARN) for the virtual service.
      */
     arn: Arn;
+    createdAt: Timestamp;
+    lastUpdatedAt: Timestamp;
     /**
      * The name of the service mesh that the virtual service resides in.
      */
@@ -1405,9 +1411,10 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     meshOwner: AccountId;
     /**
      * The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's
-               the ID of the mesh owner, or another account that the mesh is shared with. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with Shared Meshes.
      */
     resourceOwner: AccountId;
+    version: Long;
     /**
      * The name of the virtual service.
      */
@@ -1424,6 +1431,8 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The full Amazon Resource Name (ARN) for the virtual router.
      */
     arn: Arn;
+    createdAt: Timestamp;
+    lastUpdatedAt: Timestamp;
     /**
      * The name of the service mesh that the virtual router resides in.
      */
@@ -1435,9 +1444,10 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     meshOwner: AccountId;
     /**
      * The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's
-               the ID of the mesh owner, or another account that the mesh is shared with. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with Shared Meshes.
      */
     resourceOwner: AccountId;
+    version: Long;
     /**
      * The name of the virtual router.
      */
@@ -1483,6 +1493,8 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The full Amazon Resource Name (ARN) for the virtual node.
      */
     arn: Arn;
+    createdAt: Timestamp;
+    lastUpdatedAt: Timestamp;
     /**
      * The name of the service mesh that the virtual node resides in.
      */
@@ -1494,9 +1506,10 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     meshOwner: AccountId;
     /**
      * The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's
-               the ID of the mesh owner, or another account that the mesh is shared with. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with Shared Meshes.
      */
     resourceOwner: AccountId;
+    version: Long;
     /**
      * The name of the virtual node.
      */
@@ -1768,6 +1781,8 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The full Amazon Resource Name (ARN) of the service mesh.
      */
     arn: Arn;
+    createdAt: Timestamp;
+    lastUpdatedAt: Timestamp;
     /**
      * The name of the service mesh.
      */
@@ -1779,9 +1794,10 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     meshOwner: AccountId;
     /**
      * The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's
-               the ID of the mesh owner, or another account that the mesh is shared with. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with Shared Meshes.
      */
     resourceOwner: AccountId;
+    version: Long;
   }
   export type MeshStatusCode = "ACTIVE"|"DELETED"|"INACTIVE"|string;
   export interface MeshData {
@@ -1866,11 +1882,12 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   export type ListRoutesLimit = number;
   export interface ClientPolicyTls {
     /**
-     * Whether the policy is enforced. The default is True, if a value isn't specified.
+     * Whether the policy is enforced. The default is True, if a value isn't
+         specified.
      */
     enforce?: Boolean;
     /**
-     * The range of ports that the policy is enforced for.
+     * One or more ports that the policy is enforced for.
      */
     ports?: PortSet;
     /**
@@ -1902,13 +1919,14 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     certificateChain: FilePath;
     /**
-     * The private key for a certificate stored on the file system of the virtual node that the proxy is running on.
+     * The private key for a certificate stored on the file system of the virtual node that the
+         proxy is running on.
      */
     privateKey: FilePath;
   }
   export interface HttpRetryPolicy {
     /**
-     * Specify at least one of the following values.
+     * Specify at least one of the following values. 
          
             
                
@@ -1966,7 +1984,8 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   export type PortNumber = number;
   export interface TlsValidationContextFileTrust {
     /**
-     * The certificate trust chain for a certificate stored on the file system of the virtual node that the proxy is running on.
+     * The certificate trust chain for a certificate stored on the file system of the virtual
+         node that the proxy is running on.
      */
     certificateChain: FilePath;
   }
@@ -2016,8 +2035,8 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     tags?: TagList;
     /**
-     * The name of the virtual router in which to create the route. If the virtual router is in a shared mesh,
-         then you must be the owner of the virtual router resource.
+     * The name of the virtual router in which to create the route. If the virtual router is in
+         a shared mesh, then you must be the owner of the virtual router resource.
      */
     virtualRouterName: ResourceName;
   }

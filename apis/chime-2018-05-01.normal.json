@@ -1974,6 +1974,43 @@
       ],
       "documentation": "<p>Gets the specified proxy session details for the specified Amazon Chime Voice Connector.</p>"
     },
+    "GetRetentionSettings": {
+      "name": "GetRetentionSettings",
+      "http": {
+        "method": "GET",
+        "requestUri": "/accounts/{accountId}/retention-settings"
+      },
+      "input": {
+        "shape": "GetRetentionSettingsRequest"
+      },
+      "output": {
+        "shape": "GetRetentionSettingsResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Gets the retention settings for the specified Amazon Chime Enterprise account. For more information about retention settings, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/chat-retention.html\">Managing Chat Retention Policies</a> in the <i>Amazon Chime Administration Guide</i>.</p>"
+    },
     "GetRoom": {
       "name": "GetRoom",
       "http": {
@@ -3092,6 +3129,47 @@
         }
       ],
       "documentation": "<p>Creates an events configuration that allows a bot to receive outgoing events sent by Amazon Chime. Choose either an HTTPS endpoint or a Lambda function ARN. For more information, see <a>Bot</a>.</p>"
+    },
+    "PutRetentionSettings": {
+      "name": "PutRetentionSettings",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/accounts/{accountId}/retention-settings",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "PutRetentionSettingsRequest"
+      },
+      "output": {
+        "shape": "PutRetentionSettingsResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Puts retention settings for the specified Amazon Chime Enterprise account. We recommend using AWS CloudTrail to monitor usage of this API for your account. For more information, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/cloudtrail.html\">Logging Amazon Chime API Calls with AWS CloudTrail</a> in the <i>Amazon Chime Administration Guide</i>.</p> <p>To turn off existing retention settings, remove the number of days from the corresponding <b>RetentionDays</b> field in the <b>RetentionSettings</b> object. For more information about retention settings, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/chat-retention.html\">Managing Chat Retention Policies</a> in the <i>Amazon Chime Administration Guide</i>.</p>"
     },
     "PutVoiceConnectorLoggingConfiguration": {
       "name": "PutVoiceConnectorLoggingConfiguration",
@@ -4818,6 +4896,16 @@
       "pattern": "[-_a-zA-Z0-9]*",
       "sensitive": true
     },
+    "ConversationRetentionSettings": {
+      "type": "structure",
+      "members": {
+        "RetentionDays": {
+          "shape": "RetentionDays",
+          "documentation": "<p>The number of days for which to retain chat conversation messages.</p>"
+        }
+      },
+      "documentation": "<p>The retention settings that determine how long to retain chat conversation messages for an Amazon Chime Enterprise account.</p>"
+    },
     "Country": {
       "type": "string",
       "pattern": "^$|^[A-Z]{2,2}$"
@@ -5984,6 +6072,33 @@
         "ProxySession": {
           "shape": "ProxySession",
           "documentation": "<p>The proxy session details.</p>"
+        }
+      }
+    },
+    "GetRetentionSettingsRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        }
+      }
+    },
+    "GetRetentionSettingsResponse": {
+      "type": "structure",
+      "members": {
+        "RetentionSettings": {
+          "shape": "RetentionSettings",
+          "documentation": "<p>The retention settings.</p>"
+        },
+        "InitiateDeletionTimestamp": {
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The timestamp representing the time at which the specified items are permanently deleted, in ISO 8601 format.</p>"
         }
       }
     },
@@ -7679,6 +7794,38 @@
         }
       }
     },
+    "PutRetentionSettingsRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "RetentionSettings"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime account ID.</p>",
+          "location": "uri",
+          "locationName": "accountId"
+        },
+        "RetentionSettings": {
+          "shape": "RetentionSettings",
+          "documentation": "<p>The retention settings.</p>"
+        }
+      }
+    },
+    "PutRetentionSettingsResponse": {
+      "type": "structure",
+      "members": {
+        "RetentionSettings": {
+          "shape": "RetentionSettings",
+          "documentation": "<p>The retention settings.</p>"
+        },
+        "InitiateDeletionTimestamp": {
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The timestamp representing the time at which the specified items are permanently deleted, in ISO 8601 format.</p>"
+        }
+      }
+    },
     "PutVoiceConnectorLoggingConfigurationRequest": {
       "type": "structure",
       "required": [
@@ -8009,6 +8156,25 @@
       "max": 99,
       "min": 1
     },
+    "RetentionDays": {
+      "type": "integer",
+      "max": 5475,
+      "min": 1
+    },
+    "RetentionSettings": {
+      "type": "structure",
+      "members": {
+        "RoomRetentionSettings": {
+          "shape": "RoomRetentionSettings",
+          "documentation": "<p>The chat room retention settings.</p>"
+        },
+        "ConversationRetentionSettings": {
+          "shape": "ConversationRetentionSettings",
+          "documentation": "<p>The chat conversation retention settings.</p>"
+        }
+      },
+      "documentation": "<p>The retention settings for an Amazon Chime Enterprise account that determine how long to retain items such as chat room messages and chat conversation messages.</p>"
+    },
     "Room": {
       "type": "structure",
       "members": {
@@ -8082,6 +8248,16 @@
         "Administrator",
         "Member"
       ]
+    },
+    "RoomRetentionSettings": {
+      "type": "structure",
+      "members": {
+        "RetentionDays": {
+          "shape": "RetentionDays",
+          "documentation": "<p>The number of days for which to retain chat room messages.</p>"
+        }
+      },
+      "documentation": "<p>The retention settings that determine how long to retain chat room messages for an Amazon Chime Enterprise account.</p>"
     },
     "SearchAvailablePhoneNumbersRequest": {
       "type": "structure",

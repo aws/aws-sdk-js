@@ -246,7 +246,7 @@
           "shape": "ResourceConflictException"
         }
       ],
-      "documentation": "<p>Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the master account. To successfully create a member, you must use this action from an account that already has Security Hub enabled. To enable Security Hub, you can use the <code> <a>EnableSecurityHub</a> </code> operation.</p> <p>After you use <code>CreateMembers</code> to create member account associations in Security Hub, you must use the <code> <a>InviteMembers</a> </code> operation to invite the accounts to enable Security Hub and become member accounts in Security Hub.</p> <p>If the account owner accepts the invitation, the account becomes a member account in Security Hub, and a permission policy is added that permits the master account to view the findings generated in the member account. When Security Hub is enabled in the invited account, findings start to be sent to both the member and master accounts.</p> <p>To remove the association between the master and member accounts, use the <code> <a>DisassociateFromMasterAccount</a> </code> or <code> <a>DisassociateMembers</a> </code> operation.</p>"
+      "documentation": "<p>Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the master account. To successfully create a member, you must use this action from an account that already has Security Hub enabled. To enable Security Hub, you can use the <code> <a>EnableSecurityHub</a> </code> operation.</p> <p>After you use <code>CreateMembers</code> to create member account associations in Security Hub, you must use the <code> <a>InviteMembers</a> </code> operation to invite the accounts to enable Security Hub and become member accounts in Security Hub.</p> <p>If the account owner accepts the invitation, the account becomes a member account in Security Hub. A permissions policy is added that permits the master account to view the findings generated in the member account. When Security Hub is enabled in the invited account, findings start to be sent to both the member and master accounts.</p> <p>To remove the association between the master and member accounts, use the <code> <a>DisassociateFromMasterAccount</a> </code> or <code> <a>DisassociateMembers</a> </code> operation.</p>"
     },
     "DeclineInvitations": {
       "name": "DeclineInvitations",
@@ -687,7 +687,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Enables the integration of a partner product with Security Hub. Integrated products send findings to Security Hub.</p> <p>When you enable a product integration, a permission policy that grants permission for the product to send findings to Security Hub is applied.</p>"
+      "documentation": "<p>Enables the integration of a partner product with Security Hub. Integrated products send findings to Security Hub.</p> <p>When you enable a product integration, a permissions policy that grants permission for the product to send findings to Security Hub is applied.</p>"
     },
     "EnableSecurityHub": {
       "name": "EnableSecurityHub",
@@ -718,7 +718,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Enables Security Hub for your account in the current Region or the Region you specify in the request.</p> <p>When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from other services that are integrated with Security Hub.</p> <p>When you use the <code>EnableSecurityHub</code> operation to enable Security Hub, you also automatically enable the CIS AWS Foundations standard. You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard. To not enable the CIS AWS Foundations standard, set <code>EnableDefaultStandards</code> to <code>false</code>.</p> <p>After you enable Security Hub, to enable a standard, use the <code> <a>BatchEnableStandards</a> </code> operation. To disable a standard, use the <code> <a>BatchDisableStandards</a> </code> operation.</p> <p>To learn more, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html\">Setting Up AWS Security Hub</a> in the <i>AWS Security Hub User Guide</i>.</p>"
+      "documentation": "<p>Enables Security Hub for your account in the current Region or the Region you specify in the request.</p> <p>When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from other services that are integrated with Security Hub.</p> <p>When you use the <code>EnableSecurityHub</code> operation to enable Security Hub, you also automatically enable the following standards.</p> <ul> <li> <p>CIS AWS Foundations</p> </li> <li> <p>AWS Foundational Security Best Practices</p> </li> </ul> <p>You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard. </p> <p>To not enable the automatically enabled standards, set <code>EnableDefaultStandards</code> to <code>false</code>.</p> <p>After you enable Security Hub, to enable a standard, use the <code> <a>BatchEnableStandards</a> </code> operation. To disable a standard, use the <code> <a>BatchDisableStandards</a> </code> operation.</p> <p>To learn more, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html\">Setting Up AWS Security Hub</a> in the <i>AWS Security Hub User Guide</i>.</p>"
     },
     "GetEnabledStandards": {
       "name": "GetEnabledStandards",
@@ -1415,7 +1415,7 @@
           "documentation": "<p>An optional element that causes CloudFront to request your content from a directory in your Amazon S3 bucket or your custom origin.</p>"
         }
       },
-      "documentation": "<p>A complex type that describes the Amazon S3 bucket, HTTP server (for example, a web server), Amazon MediaStore, or other server from which CloudFront gets your files.</p>"
+      "documentation": "<p>A complex type that describes the Amazon S3 bucket, HTTP server (for example, a web server), Amazon Elemental MediaStore, or other server from which CloudFront gets your files.</p>"
     },
     "AwsCloudFrontDistributionOriginItemList": {
       "type": "list",
@@ -1480,7 +1480,7 @@
         },
         "Type": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The type of build environment to use for related builds.</p> <p>The environment type <code>ARM_CONTAINER</code> is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), Europe (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Sydney), and Europe (Frankfurt).</p> <p>The environment type <code>LINUX_CONTAINER</code> with compute type build.general1.2xlarge is available only in regions US East (N. Virginia), US East (N. Virginia), US West (Oregon), Canada (Central), Europe (Ireland), Europe (London), Europe (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney), China (Beijing), and China (Ningxia).</p> <p>The environment type <code>LINUX_GPU_CONTAINER</code> is available only in regions US East (N. Virginia), US East (N. Virginia), US West (Oregon), Canada (Central), Europe (Ireland), Europe (London), Europe (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney) , China (Beijing), and China (Ningxia).</p> <p>Valid values: <code>WINDOWS_CONTAINER</code> | <code>LINUX_CONTAINER</code> | <code>LINUX_GPU_CONTAINER</code> | <code>ARM_CONTAINER</code> </p>"
+          "documentation": "<p>The type of build environment to use for related builds.</p> <p>The environment type <code>ARM_CONTAINER</code> is available only in Regions US East (N. Virginia), US East (Ohio), US West (Oregon), Europe (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Sydney), and Europe (Frankfurt).</p> <p>The environment type <code>LINUX_CONTAINER</code> with compute type build.general1.2xlarge is available only in Regions US East (N. Virginia), US East (N. Virginia), US West (Oregon), Canada (Central), Europe (Ireland), Europe (London), Europe (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney), China (Beijing), and China (Ningxia).</p> <p>The environment type <code>LINUX_GPU_CONTAINER</code> is available only in Regions US East (N. Virginia), US East (N. Virginia), US West (Oregon), Canada (Central), Europe (Ireland), Europe (London), Europe (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney), China (Beijing), and China (Ningxia).</p> <p>Valid values: <code>WINDOWS_CONTAINER</code> | <code>LINUX_CONTAINER</code> | <code>LINUX_GPU_CONTAINER</code> | <code>ARM_CONTAINER</code> </p>"
         }
       },
       "documentation": "<p>Information about the build environment for this build project.</p>"
@@ -1508,7 +1508,7 @@
         },
         "Location": {
           "shape": "NonEmptyString",
-          "documentation": "<p>Information about the location of the source code to be built.</p> <p>Valid values include:</p> <ul> <li> <p>For source code settings that are specified in the source action of a pipeline in AWS CodePipeline, location should not be specified. If it is specified, AWS CodePipeline ignores it. This is because AWS CodePipeline uses the settings in a pipeline's source action instead of this value.</p> </li> <li> <p>For source code in an AWS CodeCommit repository, the HTTPS clone URL to the repository that contains the source code and the buildspec file (for example, <code>https://git-codecommit.region-ID.amazonaws.com/v1/repos/repo-name</code> ).</p> </li> <li> <p>For source code in an S3 input bucket, one of the following.</p> <ul> <li> <p>The path to the ZIP file that contains the source code (for example, <code>bucket-name/path/to/object-name.zip</code>).</p> </li> <li> <p> The path to the folder that contains the source code (for example, <code>bucket-name/path/to/source-code/folder/</code>).</p> </li> </ul> </li> <li> <p>For source code in a GitHub repository, the HTTPS clone URL to the repository that contains the source and the buildspec file.</p> </li> <li> <p>For source code in a Bitbucket repository, the HTTPS clone URL to the repository that contains the source and the buildspec file. </p> </li> </ul>"
+          "documentation": "<p>Information about the location of the source code to be built.</p> <p>Valid values include:</p> <ul> <li> <p>For source code settings that are specified in the source action of a pipeline in AWS CodePipeline, location should not be specified. If it is specified, AWS CodePipeline ignores it. This is because AWS CodePipeline uses the settings in a pipeline's source action instead of this value.</p> </li> <li> <p>For source code in an AWS CodeCommit repository, the HTTPS clone URL to the repository that contains the source code and the build spec file (for example, <code>https://git-codecommit.region-ID.amazonaws.com/v1/repos/repo-name</code> ).</p> </li> <li> <p>For source code in an S3 input bucket, one of the following.</p> <ul> <li> <p>The path to the ZIP file that contains the source code (for example, <code>bucket-name/path/to/object-name.zip</code>).</p> </li> <li> <p> The path to the folder that contains the source code (for example, <code>bucket-name/path/to/source-code/folder/</code>).</p> </li> </ul> </li> <li> <p>For source code in a GitHub repository, the HTTPS clone URL to the repository that contains the source and the build spec file.</p> </li> <li> <p>For source code in a Bitbucket repository, the HTTPS clone URL to the repository that contains the source and the build spec file. </p> </li> </ul>"
         },
         "GitCloneDepth": {
           "shape": "Integer",
@@ -1732,7 +1732,7 @@
       "members": {
         "CidrIp": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The IPv4 CIDR range. You can either specify either a CIDR range or a source security group, but not both. To specify a single IPv4 address, use the /32 prefix length.</p>"
+          "documentation": "<p>The IPv4 CIDR range. You can specify either a CIDR range or a source security group, but not both. To specify a single IPv4 address, use the /32 prefix length.</p>"
         }
       },
       "documentation": "<p>A range of IPv4 addresses.</p>"
@@ -1748,7 +1748,7 @@
       "members": {
         "CidrIpv6": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The IPv6 CIDR range. You can either specify either a CIDR range or a source security group, but not both. To specify a single IPv6 address, use the /128 prefix length.</p>"
+          "documentation": "<p>The IPv6 CIDR range. You can specify either a CIDR range or a source security group, but not both. To specify a single IPv6 address, use the /128 prefix length.</p>"
         }
       },
       "documentation": "<p>A range of IPv6 addresses.</p>"
@@ -2263,7 +2263,7 @@
         },
         "CompatibleRuntimes": {
           "shape": "NonEmptyStringList",
-          "documentation": "<p>The layer's compatible runtimes. Maximum number of 5 items.</p> <p>Valid values: <code>nodejs10.x</code> | <code>nodejs12.x</code> | <code>java8</code> | <code>java11</code> | <code>python2.7</code> | <code>python3.6</code> | <code>python3.7</code> | <code>python3.8</code> | <code>dotnetcore1.0</code> | <code>dotnetcore2.1</code> | <code>go1.x</code> | <code>ruby2.5</code> | <code>provided</code> </p>"
+          "documentation": "<p>The layer's compatible runtimes. Maximum number of five items.</p> <p>Valid values: <code>nodejs10.x</code> | <code>nodejs12.x</code> | <code>java8</code> | <code>java11</code> | <code>python2.7</code> | <code>python3.6</code> | <code>python3.7</code> | <code>python3.8</code> | <code>dotnetcore1.0</code> | <code>dotnetcore2.1</code> | <code>go1.x</code> | <code>ruby2.5</code> | <code>provided</code> </p>"
         },
         "CreatedDate": {
           "shape": "NonEmptyString",
@@ -2288,7 +2288,7 @@
         },
         "Status": {
           "shape": "NonEmptyString",
-          "documentation": "<p>Describes the state of the association between the IAM role and the DB instance. The <code>Status</code> property returns one of the following values:</p> <ul> <li> <p> <code>ACTIVE</code> - the IAM role ARN is associated with the DB instance and can be used to access other AWS services on your behalf.</p> </li> <li> <p> <code>PENDING</code> - the IAM role ARN is being associated with the DB instance.</p> </li> <li> <p> <code>INVALID</code> - the IAM role ARN is associated with the DB instance, but the DB instance is unable to assume the IAM role in order to access other AWS services on your behalf. </p> </li> </ul>"
+          "documentation": "<p>Describes the state of the association between the IAM role and the DB instance. The <code>Status</code> property returns one of the following values:</p> <ul> <li> <p> <code>ACTIVE</code> - The IAM role ARN is associated with the DB instance and can be used to access other AWS services on your behalf.</p> </li> <li> <p> <code>PENDING</code> - The IAM role ARN is being associated with the DB instance.</p> </li> <li> <p> <code>INVALID</code> - The IAM role ARN is associated with the DB instance. But the DB instance is unable to assume the IAM role in order to access other AWS services on your behalf. </p> </li> </ul>"
         }
       },
       "documentation": "<p>An AWS Identity and Access Management (IAM) role associated with the DB instance.</p>"
@@ -2470,7 +2470,7 @@
       "members": {
         "ApplyServerSideEncryptionByDefault": {
           "shape": "AwsS3BucketServerSideEncryptionByDefault",
-          "documentation": "<p>Specifies the default server-side encryption to apply to new objects in the bucket. If a <code>PUT</code> Object request doesn't specify any server-side encryption, this default encryption is applied.</p>"
+          "documentation": "<p>Specifies the default server-side encryption to apply to new objects in the bucket. If a <code>PUT</code> object request doesn't specify any server-side encryption, this default encryption is applied.</p>"
         }
       },
       "documentation": "<p>An encryption rule to apply to the S3 bucket.</p>"
@@ -2509,7 +2509,7 @@
           "documentation": "<p>The identifier of the AWS Key Management Service (AWS KMS) symmetric customer managed customer master key (CMK) that was used for the object.</p>"
         }
       },
-      "documentation": "<p>Details about an AWS S3 object.</p>"
+      "documentation": "<p>Details about an Amazon S3 object.</p>"
     },
     "AwsSecurityFinding": {
       "type": "structure",
@@ -2542,7 +2542,7 @@
         },
         "GeneratorId": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers' solutions, this generator can be called a rule, a check, a detector, a plug-in, etc. </p>"
+          "documentation": "<p>The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers' solutions, this generator can be called a rule, a check, a detector, a plugin, etc. </p>"
         },
         "AwsAccountId": {
           "shape": "NonEmptyString",
@@ -2672,7 +2672,7 @@
         },
         "GeneratorId": {
           "shape": "StringFilterList",
-          "documentation": "<p>The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers' solutions, this generator can be called a rule, a check, a detector, a plug-in, etc.</p>"
+          "documentation": "<p>The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers' solutions, this generator can be called a rule, a check, a detector, a plugin, etc.</p>"
         },
         "Type": {
           "shape": "StringFilterList",
@@ -3032,7 +3032,7 @@
       "members": {
         "KmsMasterKeyId": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK.</p>"
+          "documentation": "<p>The ID of an AWS managed customer master key (CMK) for Amazon SNS or a custom CMK.</p>"
         },
         "Subscription": {
           "shape": "AwsSnsTopicSubscriptionList",
@@ -3078,7 +3078,7 @@
         },
         "KmsMasterKeyId": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The ID of an AWS-managed customer master key (CMK) for Amazon SQS or a custom CMK.</p>"
+          "documentation": "<p>The ID of an AWS managed customer master key (CMK) for Amazon SQS or a custom CMK.</p>"
         },
         "QueueName": {
           "shape": "NonEmptyString",
@@ -3100,7 +3100,7 @@
         },
         "DefaultAction": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The action to perform if none of the Rules contained in the WebACL match.</p>"
+          "documentation": "<p>The action to perform if none of the rules contained in the WebACL match.</p>"
         },
         "Rules": {
           "shape": "AwsWafWebAclRuleList",
@@ -3118,7 +3118,7 @@
       "members": {
         "Action": {
           "shape": "WafAction",
-          "documentation": "<p>Specifies the action that CloudFront or AWS WAF takes when a web request matches the conditions in the Rule. </p>"
+          "documentation": "<p>Specifies the action that CloudFront or AWS WAF takes when a web request matches the conditions in the rule. </p>"
         },
         "ExcludedRules": {
           "shape": "WafExcludedRuleList",
@@ -3130,11 +3130,11 @@
         },
         "Priority": {
           "shape": "Integer",
-          "documentation": "<p>Specifies the order in which the Rules in a WebACL are evaluated. Rules with a lower value for Priority are evaluated before Rules with a higher value. The value must be a unique integer. If you add multiple Rules to a WebACL, the values do not need to be consecutive.</p>"
+          "documentation": "<p>Specifies the order in which the rules in a WebACL are evaluated. Rules with a lower value for <code>Priority</code> are evaluated before rules with a higher value. The value must be a unique integer. If you add multiple rules to a WebACL, the values do not need to be consecutive.</p>"
         },
         "RuleId": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The identifier for a Rule.</p>"
+          "documentation": "<p>The identifier for a rule.</p>"
         },
         "Type": {
           "shape": "NonEmptyString",
@@ -3331,14 +3331,18 @@
       "members": {
         "Status": {
           "shape": "ComplianceStatus",
-          "documentation": "<p>The result of a standards check.</p>"
+          "documentation": "<p>The result of a standards check.</p> <p>The valid values for <code>Status</code> are as follows.</p> <ul> <li> <ul> <li> <p> <code>PASSED</code> - Standards check passed for all evaluated resources.</p> </li> <li> <p> <code>WARNING</code> - Some information is missing or this check is not supported for your configuration.</p> </li> <li> <p> <code>FAILED</code> - Standards check failed for at least one evaluated resource.</p> </li> <li> <p> <code>NOT_AVAILABLE</code> - Check could not be performed due to a service outage, API error, or because the result of the AWS Config evaluation was <code>NOT_APPLICABLE</code>. If the AWS Config evaluation result was <code>NOT_APPLICABLE</code>, then after 3 days, Security Hub automatically archives the finding.</p> </li> </ul> </li> </ul>"
         },
         "RelatedRequirements": {
           "shape": "RelatedRequirementsList",
-          "documentation": "<p>List of requirements that are related to a standards control.</p>"
+          "documentation": "<p>For a control, the industry or regulatory framework requirements that are related to the control. The check for that control is aligned with these requirements.</p>"
+        },
+        "StatusReasons": {
+          "shape": "StatusReasonsList",
+          "documentation": "<p>For findings generated from controls, a list of reasons behind the value of <code>Status</code>. For the list of status reason codes and their meanings, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-results.html#securityhub-standards-results-asff\">Standards-related information in the ASFF</a> in the <i>AWS Security Hub User Guide</i>. </p>"
         }
       },
-      "documentation": "<p>Exclusive to findings that are generated as the result of a check run against a specific rule in a supported security standard, such as CIS AWS Foundations. Contains security standard-related finding details.</p> <p>Values include the following:</p> <ul> <li> <p>Allowed values are the following:</p> <ul> <li> <p> <code>PASSED</code> - Standards check passed for all evaluated resources.</p> </li> <li> <p> <code>WARNING</code> - Some information is missing or this check is not supported given your configuration.</p> </li> <li> <p> <code>FAILED</code> - Standards check failed for at least one evaluated resource.</p> </li> <li> <p> <code>NOT_AVAILABLE</code> - Check could not be performed due to a service outage, API error, or because the result of the AWS Config evaluation was <code>NOT_APPLICABLE</code>. If the AWS Config evaluation result was <code> NOT_APPLICABLE</code>, then after 3 days, Security Hub automatically archives the finding.</p> </li> </ul> </li> </ul>"
+      "documentation": "<p>Contains finding details that are specific to control-based findings. Only returned for findings generated from controls.</p>"
     },
     "ComplianceStatus": {
       "type": "string",
@@ -3855,7 +3859,7 @@
       "members": {
         "Tags": {
           "shape": "TagMap",
-          "documentation": "<p>The tags to add to the Hub resource when you enable Security Hub.</p>"
+          "documentation": "<p>The tags to add to the hub resource when you enable Security Hub.</p>"
         },
         "EnableDefaultStandards": {
           "shape": "Boolean",
@@ -4871,7 +4875,7 @@
         },
         "AwsEc2NetworkInterface": {
           "shape": "AwsEc2NetworkInterfaceDetails",
-          "documentation": "<p>Details for an AWS EC2 network interface.</p>"
+          "documentation": "<p>Details for an Amazon EC2 network interface.</p>"
         },
         "AwsEc2SecurityGroup": {
           "shape": "AwsEc2SecurityGroupDetails",
@@ -4887,7 +4891,7 @@
         },
         "AwsS3Bucket": {
           "shape": "AwsS3BucketDetails",
-          "documentation": "<p>Details about an Amazon S3 Bucket related to a finding.</p>"
+          "documentation": "<p>Details about an Amazon S3 bucket related to a finding.</p>"
         },
         "AwsS3Object": {
           "shape": "AwsS3ObjectDetails",
@@ -4915,7 +4919,7 @@
         },
         "AwsRdsDbInstance": {
           "shape": "AwsRdsDbInstanceDetails",
-          "documentation": "<p>Details for an RDS database instance.</p>"
+          "documentation": "<p>Details for an Amazon RDS database instance.</p>"
         },
         "AwsSnsTopic": {
           "shape": "AwsSnsTopicDetails",
@@ -4977,7 +4981,7 @@
       "members": {
         "Product": {
           "shape": "Double",
-          "documentation": "<p>The native severity as defined by the AWS service or integrated partner product that generated the finding.</p>"
+          "documentation": "<p>Deprecated. This attribute is being deprecated. Instead of providing <code>Product</code>, provide <code>Original</code>.</p> <p>The native severity as defined by the AWS service or integrated partner product that generated the finding.</p>"
         },
         "Label": {
           "shape": "SeverityLabel",
@@ -4986,6 +4990,10 @@
         "Normalized": {
           "shape": "Integer",
           "documentation": "<p>Deprecated. This attribute is being deprecated. Instead of providing <code>Normalized</code>, provide <code>Label</code>.</p> <p>If you provide <code>Normalized</code> and do not provide <code>Label</code>, <code>Label</code> is set automatically as follows. </p> <ul> <li> <p>0 - <code>INFORMATIONAL</code> </p> </li> <li> <p>1–39 - <code>LOW</code> </p> </li> <li> <p>40–69 - <code>MEDIUM</code> </p> </li> <li> <p>70–89 - <code>HIGH</code> </p> </li> <li> <p>90–100 - <code>CRITICAL</code> </p> </li> </ul>"
+        },
+        "Original": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The native severity from the finding product that generated the finding.</p>"
         }
       },
       "documentation": "<p>The severity of the finding.</p>"
@@ -5218,6 +5226,29 @@
       "type": "list",
       "member": {
         "shape": "StandardsSubscription"
+      }
+    },
+    "StatusReason": {
+      "type": "structure",
+      "required": [
+        "ReasonCode"
+      ],
+      "members": {
+        "ReasonCode": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>A code that represents a reason for the control status. For the list of status reason codes and their meanings, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-results.html#securityhub-standards-results-asff\">Standards-related information in the ASFF</a> in the <i>AWS Security Hub User Guide</i>. </p>"
+        },
+        "Description": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The corresponding description for the status reason code.</p>"
+        }
+      },
+      "documentation": "<p>Provides additional context for the value of <code>Compliance.Status</code>.</p>"
+    },
+    "StatusReasonsList": {
+      "type": "list",
+      "member": {
+        "shape": "StatusReason"
       }
     },
     "StringFilter": {
@@ -5523,10 +5554,10 @@
       "members": {
         "Type": {
           "shape": "NonEmptyString",
-          "documentation": "<p>Specifies how you want AWS WAF to respond to requests that match the settings in a Rule.</p> <p>Valid settings include the following:</p> <ul> <li> <p> <code>ALLOW</code> - AWS WAF allows requests</p> </li> <li> <p> <code>BLOCK</code> - AWS WAF blocks requests</p> </li> <li> <p> <code>COUNT</code> - AWS WAF increments a counter of the requests that match all of the conditions in the rule. AWS WAF then continues to inspect the web request based on the remaining rules in the web ACL. You can't specify <code>COUNT</code> for the default action for a WebACL.</p> </li> </ul>"
+          "documentation": "<p>Specifies how you want AWS WAF to respond to requests that match the settings in a rule.</p> <p>Valid settings include the following:</p> <ul> <li> <p> <code>ALLOW</code> - AWS WAF allows requests</p> </li> <li> <p> <code>BLOCK</code> - AWS WAF blocks requests</p> </li> <li> <p> <code>COUNT</code> - AWS WAF increments a counter of the requests that match all of the conditions in the rule. AWS WAF then continues to inspect the web request based on the remaining rules in the web ACL. You can't specify <code>COUNT</code> for the default action for a WebACL.</p> </li> </ul>"
         }
       },
-      "documentation": "<p>Details about the action that CloudFront or AWS WAF takes when a web request matches the conditions in the Rule. </p>"
+      "documentation": "<p>Details about the action that CloudFront or AWS WAF takes when a web request matches the conditions in the rule. </p>"
     },
     "WafExcludedRule": {
       "type": "structure",
@@ -5549,7 +5580,7 @@
       "members": {
         "Type": {
           "shape": "NonEmptyString",
-          "documentation": "<p> <code>COUNT</code> overrides the action specified by the individual rule within a RuleGroup .</p> <p>If set to <code>NONE</code>, the rule's action takes place.</p>"
+          "documentation": "<p> <code>COUNT</code> overrides the action specified by the individual rule within a <code>RuleGroup</code> .</p> <p>If set to <code>NONE</code>, the rule's action takes place.</p>"
         }
       },
       "documentation": "<p>Details about an override action for a rule.</p>"

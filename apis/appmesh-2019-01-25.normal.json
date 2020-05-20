@@ -11,7 +11,7 @@
     "signingName": "appmesh",
     "uid": "appmesh-2019-01-25"
   },
-  "documentation": "<p>AWS App Mesh is a service mesh based on the Envoy proxy that makes it easy to monitor and\n         control microservices. App Mesh standardizes how your microservices communicate, giving you\n         end-to-end visibility and helping to ensure high availability for your applications.</p>\n         <p>App Mesh gives you consistent visibility and network traffic controls for every\n         microservice in an application. You can use App Mesh with AWS Fargate, Amazon ECS, Amazon EKS,\n         Kubernetes on AWS, and Amazon EC2.</p>\n         <note>\n            <p>App Mesh supports microservice applications that use service discovery naming for their\n            components. For more information about service discovery on Amazon ECS, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html\">Service Discovery</a> in the\n               <i>Amazon Elastic Container Service Developer Guide</i>. Kubernetes <code>kube-dns</code> and\n               <code>coredns</code> are supported. For more information, see <a href=\"https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/\">DNS\n               for Services and Pods</a> in the Kubernetes documentation.</p>\n         </note>",
+  "documentation": "<p>AWS App Mesh is a service mesh based on the Envoy proxy that makes it easy to monitor and\n         control microservices. App Mesh standardizes how your microservices communicate, giving you\n         end-to-end visibility and helping to ensure high availability for your applications.</p>\n         <p>App Mesh gives you consistent visibility and network traffic controls for every\n         microservice in an application. You can use App Mesh with AWS Fargate, Amazon ECS, Amazon EKS,\n         Kubernetes on AWS, and Amazon EC2.</p>\n         <note>\n            <p>App Mesh supports microservice applications that use service discovery naming for their\n            components. For more information about service discovery on Amazon ECS, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html\">Service Discovery</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. Kubernetes\n               <code>kube-dns</code> and <code>coredns</code> are supported. For more information,\n            see <a href=\"https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/\">DNS\n               for Services and Pods</a> in the Kubernetes documentation.</p>\n         </note>",
   "operations": {
     "CreateMesh": {
       "name": "CreateMesh",
@@ -52,7 +52,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Creates a service mesh. A service mesh is a logical boundary for network traffic between\n         the services that reside within it.</p>\n         <p>After you create your service mesh, you can create virtual services, virtual nodes,\n         virtual routers, and routes to distribute traffic between the applications in your\n         mesh.</p>",
+      "documentation": "<p>Creates a service mesh.</p>\n         <p> A service mesh is a logical boundary for network traffic between services that are\n         represented by resources within the mesh. After you create your service mesh, you can\n         create virtual services, virtual nodes, virtual routers, and routes to distribute traffic\n         between the applications in your mesh.</p>\n         <p>For more information about service meshes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/meshes.html\">Service meshes</a>.</p>",
       "idempotent": true
     },
     "CreateRoute": {
@@ -94,7 +94,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Creates a route that is associated with a virtual router.</p>\n         <p>You can use the <code>prefix</code> parameter in your route specification for path-based\n         routing of requests. For example, if your virtual service name is\n            <code>my-service.local</code> and you want the route to match requests to\n            <code>my-service.local/metrics</code>, your prefix should be\n         <code>/metrics</code>.</p>\n         <p>If your route matches a request, you can distribute traffic to one or more target\n         virtual nodes with relative weighting.</p>\n         <p>For more information about routes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/routes.html\">Routes</a>.</p>",
+      "documentation": "<p>Creates a route that is associated with a virtual router.</p>\n         <p> You can route several different protocols and define a retry policy for a route.\n         Traffic can be routed to one or more virtual nodes.</p>\n         <p>For more information about routes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/routes.html\">Routes</a>.</p>",
       "idempotent": true
     },
     "CreateVirtualNode": {
@@ -136,7 +136,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Creates a virtual node within a service mesh.</p>\n         <p>A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS\n         service or a Kubernetes deployment. When you create a virtual node, you can specify the\n         service discovery information for your task group.</p>\n         <p>Any inbound traffic that your virtual node expects should be specified as a\n            <code>listener</code>. Any outbound traffic that your virtual node expects to reach\n         should be specified as a <code>backend</code>.</p>\n         <p>The response metadata for your new virtual node contains the <code>arn</code> that is\n         associated with the virtual node. Set this value (either the full ARN or the truncated\n         resource name: for example, <code>mesh/default/virtualNode/simpleapp</code>) as the\n            <code>APPMESH_VIRTUAL_NODE_NAME</code> environment variable for your task group's Envoy\n         proxy container in your task definition or pod spec. This is then mapped to the\n            <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p>\n         <note>\n            <p>If you require your Envoy stats or tracing to use a different name, you can override\n            the <code>node.cluster</code> value that is set by\n               <code>APPMESH_VIRTUAL_NODE_NAME</code> with the\n               <code>APPMESH_VIRTUAL_NODE_CLUSTER</code> environment variable.</p>\n         </note>\n         <p>For more information about virtual nodes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html\">Virtual Nodes</a>.</p>",
+      "documentation": "<p>Creates a virtual node within a service mesh.</p>\n         <p> A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS\n         service or a Kubernetes deployment. When you create a virtual node, you can specify the\n         service discovery information for your task group, and whether the proxy running in a task\n         group will communicate with other proxies using Transport Layer Security (TLS).</p>\n         <p>You define a <code>listener</code> for any inbound traffic that your virtual node\n         expects. Any virtual service that your virtual node expects to communicate to is specified\n         as a <code>backend</code>.</p>\n         <p>The response metadata for your new virtual node contains the <code>arn</code> that is\n         associated with the virtual node. Set this value (either the full ARN or the truncated\n         resource name: for example, <code>mesh/default/virtualNode/simpleapp</code>) as the\n            <code>APPMESH_VIRTUAL_NODE_NAME</code> environment variable for your task group's Envoy\n         proxy container in your task definition or pod spec. This is then mapped to the\n            <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p>\n         <note>\n            <p>If you require your Envoy stats or tracing to use a different name, you can override\n            the <code>node.cluster</code> value that is set by\n               <code>APPMESH_VIRTUAL_NODE_NAME</code> with the\n               <code>APPMESH_VIRTUAL_NODE_CLUSTER</code> environment variable.</p>\n         </note>\n         <p>For more information about virtual nodes, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html\">Virtual nodes</a>.</p>",
       "idempotent": true
     },
     "CreateVirtualRouter": {
@@ -178,7 +178,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Creates a virtual router within a service mesh.</p>\n         <p>Any inbound traffic that your virtual router expects should be specified as a\n            <code>listener</code>. </p>\n         <p>Virtual routers handle traffic for one or more virtual services within your mesh. After\n         you create your virtual router, create and associate routes for your virtual router that\n         direct incoming requests to different virtual nodes.</p>\n         <p>For more information about virtual routers, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_routers.html\">Virtual Routers</a>.</p>",
+      "documentation": "<p>Creates a virtual router within a service mesh.</p>\n         <p>Specify a <code>listener</code> for any inbound traffic that your virtual router\n         receives. Create a virtual router for each protocol and port that you need to route.\n         Virtual routers handle traffic for one or more virtual services within your mesh. After you\n         create your virtual router, create and associate routes for your virtual router that direct\n         incoming requests to different virtual nodes.</p>\n         <p>For more information about virtual routers, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_routers.html\">Virtual routers</a>.</p>",
       "idempotent": true
     },
     "CreateVirtualService": {
@@ -220,7 +220,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Creates a virtual service within a service mesh.</p>\n         <p>A virtual service is an abstraction of a real service that is provided by a virtual node\n         directly or indirectly by means of a virtual router. Dependent services call your virtual\n         service by its <code>virtualServiceName</code>, and those requests are routed to the\n         virtual node or virtual router that is specified as the provider for the virtual\n         service.</p>\n         <p>For more information about virtual services, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_services.html\">Virtual Services</a>.</p>",
+      "documentation": "<p>Creates a virtual service within a service mesh.</p>\n         <p>A virtual service is an abstraction of a real service that is provided by a virtual node\n         directly or indirectly by means of a virtual router. Dependent services call your virtual\n         service by its <code>virtualServiceName</code>, and those requests are routed to the\n         virtual node or virtual router that is specified as the provider for the virtual\n         service.</p>\n         <p>For more information about virtual services, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_services.html\">Virtual services</a>.</p>",
       "idempotent": true
     },
     "DeleteMesh": {
@@ -404,6 +404,9 @@
         },
         {
           "shape": "NotFoundException"
+        },
+        {
+          "shape": "ResourceInUseException"
         },
         {
           "shape": "ServiceUnavailableException"
@@ -1125,7 +1128,7 @@
         },
         "httpRetryEvents": {
           "shape": "HttpRetryPolicyEvents",
-          "documentation": "<p>Specify at least one of the following values.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>server-error</b> – HTTP status codes 500, 501,\n                  502, 503, 504, 505, 506, 507, 508, 510, and 511</p>\n            </li>\n            <li>\n               <p>\n                  <b>gateway-error</b> – HTTP status codes 502,\n                  503, and 504</p>\n            </li>\n            <li>\n               <p>\n                  <b>client-error</b> – HTTP status code 409</p>\n            </li>\n            <li>\n               <p>\n                  <b>stream-error</b> – Retry on refused\n                  stream</p>\n            </li>\n         </ul>"
+          "documentation": "<p>Specify at least one of the following values.</p> \n         <ul>\n            <li>\n               <p>\n                  <b>server-error</b> – HTTP status codes 500, 501,\n                  502, 503, 504, 505, 506, 507, 508, 510, and 511</p>\n            </li>\n            <li>\n               <p>\n                  <b>gateway-error</b> – HTTP status codes 502,\n                  503, and 504</p>\n            </li>\n            <li>\n               <p>\n                  <b>client-error</b> – HTTP status code 409</p>\n            </li>\n            <li>\n               <p>\n                  <b>stream-error</b> – Retry on refused\n                  stream</p>\n            </li>\n         </ul>"
         },
         "maxRetries": {
           "shape": "MaxRetries",
@@ -1231,7 +1234,7 @@
         },
         "resourceOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner, or another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>"
+          "documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>"
         },
         "uid": {
           "shape": "String",
@@ -1328,7 +1331,7 @@
         },
         "path": {
           "shape": "String",
-          "documentation": "<p>The destination path for the health check request. This value is only used if the specified \n         protocol is HTTP or HTTP/2. For any other protocol, this value is ignored.</p>"
+          "documentation": "<p>The destination path for the health check request. This value is only used if the\n         specified protocol is HTTP or HTTP/2. For any other protocol, this value is ignored.</p>"
         },
         "port": {
           "shape": "PortNumber",
@@ -1336,7 +1339,7 @@
         },
         "protocol": {
           "shape": "PortProtocol",
-          "documentation": "<p>The protocol for the health check request. If you specify <code>grpc</code>, then your service must conform to the <a href=\"https://github.com/grpc/grpc/blob/master/doc/health-checking.md\">GRPC Health Checking Protocol</a>.</p>"
+          "documentation": "<p>The protocol for the health check request. If you specify <code>grpc</code>, then your\n         service must conform to the <a href=\"https://github.com/grpc/grpc/blob/master/doc/health-checking.md\">GRPC Health\n            Checking Protocol</a>.</p>"
         },
         "timeoutMillis": {
           "shape": "HealthCheckTimeoutMillis",
@@ -1757,7 +1760,7 @@
       "members": {
         "listeners": {
           "shape": "VirtualRouterListeners",
-          "documentation": "<p>The listeners that the virtual router is expected to receive inbound traffic from.\n         You can specify one listener.</p>"
+          "documentation": "<p>The listeners that the virtual router is expected to receive inbound traffic from. You\n         can specify one listener.</p>"
         }
       },
       "documentation": "<p>An object that represents the specification of a virtual router.</p>"
@@ -1775,7 +1778,7 @@
         },
         "listeners": {
           "shape": "Listeners",
-          "documentation": "<p>The listener that the virtual node is expected to receive inbound traffic from.\n         You can specify one listener.</p>"
+          "documentation": "<p>The listener that the virtual node is expected to receive inbound traffic from. You can\n         specify one listener.</p>"
         },
         "logging": {
           "shape": "Logging",
@@ -1783,7 +1786,7 @@
         },
         "serviceDiscovery": {
           "shape": "ServiceDiscovery",
-          "documentation": "<p>The service discovery information for the virtual node. If your virtual node does not\n         expect ingress traffic, you can omit this parameter. If you specify a <code>listener</code>,\n         then you must specify service discovery information.</p>"
+          "documentation": "<p>The service discovery information for the virtual node. If your virtual node does not\n         expect ingress traffic, you can omit this parameter. If you specify a\n         <code>listener</code>, then you must specify service discovery information.</p>"
         }
       },
       "documentation": "<p>An object that represents the specification of a virtual node.</p>"
@@ -1849,7 +1852,7 @@
       "members": {
         "acm": {
           "shape": "TlsValidationContextAcmTrust",
-          "documentation": "<p>A reference to an object that represents a TLS validation context trust for an AWS Certicate Manager (ACM) certificate.</p>"
+          "documentation": "<p>A reference to an object that represents a TLS validation context trust for an AWS Certicate Manager (ACM)\n         certificate.</p>"
         },
         "file": {
           "shape": "TlsValidationContextFileTrust",
@@ -1915,22 +1918,31 @@
           "documentation": "<p>The relative weight of the weighted target.</p>"
         }
       },
-      "documentation": "<p>An object that represents a target and its relative weight. Traffic is distributed across\n         targets according to their relative weight. For example, a weighted target with a relative\n         weight of 50 receives five times as much traffic as one with a relative weight of\n         10. The total weight for all targets combined must be less than or equal to 100.</p>"
+      "documentation": "<p>An object that represents a target and its relative weight. Traffic is distributed\n         across targets according to their relative weight. For example, a weighted target with a\n         relative weight of 50 receives five times as much traffic as one with a relative weight of\n         10. The total weight for all targets combined must be less than or equal to 100.</p>"
     },
     "RouteRef": {
       "type": "structure",
       "required": [
         "arn",
+        "createdAt",
+        "lastUpdatedAt",
         "meshName",
         "meshOwner",
         "resourceOwner",
         "routeName",
+        "version",
         "virtualRouterName"
       ],
       "members": {
         "arn": {
           "shape": "Arn",
           "documentation": "<p>The full Amazon Resource Name (ARN) for the route.</p>"
+        },
+        "createdAt": {
+          "shape": "Timestamp"
+        },
+        "lastUpdatedAt": {
+          "shape": "Timestamp"
         },
         "meshName": {
           "shape": "ResourceName",
@@ -1942,11 +1954,14 @@
         },
         "resourceOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner, or another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>"
+          "documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>"
         },
         "routeName": {
           "shape": "ResourceName",
           "documentation": "<p>The name of the route.</p>"
+        },
+        "version": {
+          "shape": "Long"
         },
         "virtualRouterName": {
           "shape": "ResourceName",
@@ -2063,7 +2078,7 @@
           "documentation": "<p>One or more ACM Amazon Resource Name (ARN)s.</p>"
         }
       },
-      "documentation": "<p>An object that represents a TLS validation context trust for an AWS Certicate Manager (ACM) certificate.</p>"
+      "documentation": "<p>An object that represents a TLS validation context trust for an AWS Certicate Manager (ACM)\n         certificate.</p>"
     },
     "HeaderMatchMethod": {
       "type": "structure",
@@ -2163,7 +2178,7 @@
         },
         "methodName": {
           "shape": "MethodName",
-          "documentation": "<p>The method name to match from the request. If you specify a name, you must also specify a <code>serviceName</code>.</p>"
+          "documentation": "<p>The method name to match from the request. If you specify a name, you must also specify\n         a <code>serviceName</code>.</p>"
         },
         "serviceName": {
           "shape": "ServiceName",
@@ -2453,7 +2468,7 @@
         },
         "mode": {
           "shape": "ListenerTlsMode",
-          "documentation": "<p>Specify one of the following modes.</p>\n         <ul>\n            <li>\n               <p>\n                  <b/>STRICT – Listener only accepts connections with TLS enabled. </p>\n            </li>\n            <li>\n               <p>\n                  <b/>PERMISSIVE – Listener accepts connections with or without TLS enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <b/>DISABLED –  Listener only accepts connections without TLS. </p>\n            </li>\n         </ul>"
+          "documentation": "<p>Specify one of the following modes.</p>\n         <ul>\n            <li>\n               <p>\n                  <b/>STRICT – Listener only accepts connections with TLS\n               enabled. </p>\n            </li>\n            <li>\n               <p>\n                  <b/>PERMISSIVE – Listener accepts connections with or\n               without TLS enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <b/>DISABLED – Listener only accepts connections without\n               TLS. </p>\n            </li>\n         </ul>"
         }
       },
       "documentation": "<p>An object that represents the Transport Layer Security (TLS) properties for a listener.</p>"
@@ -2851,15 +2866,24 @@
       "type": "structure",
       "required": [
         "arn",
+        "createdAt",
+        "lastUpdatedAt",
         "meshName",
         "meshOwner",
         "resourceOwner",
+        "version",
         "virtualServiceName"
       ],
       "members": {
         "arn": {
           "shape": "Arn",
           "documentation": "<p>The full Amazon Resource Name (ARN) for the virtual service.</p>"
+        },
+        "createdAt": {
+          "shape": "Timestamp"
+        },
+        "lastUpdatedAt": {
+          "shape": "Timestamp"
         },
         "meshName": {
           "shape": "ResourceName",
@@ -2871,7 +2895,10 @@
         },
         "resourceOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner, or another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>"
+          "documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>"
+        },
+        "version": {
+          "shape": "Long"
         },
         "virtualServiceName": {
           "shape": "ServiceName",
@@ -2897,15 +2924,24 @@
       "type": "structure",
       "required": [
         "arn",
+        "createdAt",
+        "lastUpdatedAt",
         "meshName",
         "meshOwner",
         "resourceOwner",
+        "version",
         "virtualRouterName"
       ],
       "members": {
         "arn": {
           "shape": "Arn",
           "documentation": "<p>The full Amazon Resource Name (ARN) for the virtual router.</p>"
+        },
+        "createdAt": {
+          "shape": "Timestamp"
+        },
+        "lastUpdatedAt": {
+          "shape": "Timestamp"
         },
         "meshName": {
           "shape": "ResourceName",
@@ -2917,7 +2953,10 @@
         },
         "resourceOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner, or another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>"
+          "documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>"
+        },
+        "version": {
+          "shape": "Long"
         },
         "virtualRouterName": {
           "shape": "ResourceName",
@@ -2994,15 +3033,24 @@
       "type": "structure",
       "required": [
         "arn",
+        "createdAt",
+        "lastUpdatedAt",
         "meshName",
         "meshOwner",
         "resourceOwner",
+        "version",
         "virtualNodeName"
       ],
       "members": {
         "arn": {
           "shape": "Arn",
           "documentation": "<p>The full Amazon Resource Name (ARN) for the virtual node.</p>"
+        },
+        "createdAt": {
+          "shape": "Timestamp"
+        },
+        "lastUpdatedAt": {
+          "shape": "Timestamp"
         },
         "meshName": {
           "shape": "ResourceName",
@@ -3014,7 +3062,10 @@
         },
         "resourceOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner, or another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>"
+          "documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>"
+        },
+        "version": {
+          "shape": "Long"
         },
         "virtualNodeName": {
           "shape": "ResourceName",
@@ -3427,7 +3478,7 @@
           "documentation": "<p>The client request scheme to match on. Specify only one.</p>"
         }
       },
-      "documentation": "<p>An object that represents the requirements for a route to match HTTP requests for a virtual\n         router.</p>"
+      "documentation": "<p>An object that represents the requirements for a route to match HTTP requests for a\n         virtual router.</p>"
     },
     "TagRef": {
       "type": "structure",
@@ -3450,14 +3501,23 @@
       "type": "structure",
       "required": [
         "arn",
+        "createdAt",
+        "lastUpdatedAt",
         "meshName",
         "meshOwner",
-        "resourceOwner"
+        "resourceOwner",
+        "version"
       ],
       "members": {
         "arn": {
           "shape": "Arn",
           "documentation": "<p>The full Amazon Resource Name (ARN) of the service mesh.</p>"
+        },
+        "createdAt": {
+          "shape": "Timestamp"
+        },
+        "lastUpdatedAt": {
+          "shape": "Timestamp"
         },
         "meshName": {
           "shape": "ResourceName",
@@ -3469,7 +3529,10 @@
         },
         "resourceOwner": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner, or another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>"
+          "documentation": "<p>The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's\n               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with Shared Meshes</a>.</p>"
+        },
+        "version": {
+          "shape": "Long"
         }
       },
       "documentation": "<p>An object that represents a service mesh returned by a list operation.</p>"
@@ -3635,11 +3698,11 @@
         "enforce": {
           "shape": "Boolean",
           "box": true,
-          "documentation": "<p>Whether the policy is enforced. The default is <code>True</code>, if a value isn't specified.</p>"
+          "documentation": "<p>Whether the policy is enforced. The default is <code>True</code>, if a value isn't\n         specified.</p>"
         },
         "ports": {
           "shape": "PortSet",
-          "documentation": "<p>The range of ports that the policy is enforced for.</p>"
+          "documentation": "<p>One or more ports that the policy is enforced for.</p>"
         },
         "validation": {
           "shape": "TlsValidationContext",
@@ -3698,10 +3761,10 @@
         },
         "privateKey": {
           "shape": "FilePath",
-          "documentation": "<p>The private key for a certificate stored on the file system of the virtual node that the proxy is running on.</p>"
+          "documentation": "<p>The private key for a certificate stored on the file system of the virtual node that the\n         proxy is running on.</p>"
         }
       },
-      "documentation": "<p>An object that represents a local file certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual-node-tls.html#virtual-node-tls-prerequisites\">Transport Layer Security (TLS)</a>.</p>"
+      "documentation": "<p>An object that represents a local file certificate.\n         The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites\">Transport Layer Security (TLS)</a>.</p>"
     },
     "HttpRetryPolicy": {
       "type": "structure",
@@ -3712,7 +3775,7 @@
       "members": {
         "httpRetryEvents": {
           "shape": "HttpRetryPolicyEvents",
-          "documentation": "<p>Specify at least one of the following values.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>server-error</b> – HTTP status codes 500, 501,\n                  502, 503, 504, 505, 506, 507, 508, 510, and 511</p>\n            </li>\n            <li>\n               <p>\n                  <b>gateway-error</b> – HTTP status codes 502,\n                  503, and 504</p>\n            </li>\n            <li>\n               <p>\n                  <b>client-error</b> – HTTP status code 409</p>\n            </li>\n            <li>\n               <p>\n                  <b>stream-error</b> – Retry on refused\n                  stream</p>\n            </li>\n         </ul>"
+          "documentation": "<p>Specify at least one of the following values.</p> \n         <ul>\n            <li>\n               <p>\n                  <b>server-error</b> – HTTP status codes 500, 501,\n                  502, 503, 504, 505, 506, 507, 508, 510, and 511</p>\n            </li>\n            <li>\n               <p>\n                  <b>gateway-error</b> – HTTP status codes 502,\n                  503, and 504</p>\n            </li>\n            <li>\n               <p>\n                  <b>client-error</b> – HTTP status code 409</p>\n            </li>\n            <li>\n               <p>\n                  <b>stream-error</b> – Retry on refused\n                  stream</p>\n            </li>\n         </ul>"
         },
         "maxRetries": {
           "shape": "MaxRetries",
@@ -3781,7 +3844,7 @@
       "members": {
         "certificateChain": {
           "shape": "FilePath",
-          "documentation": "<p>The certificate trust chain for a certificate stored on the file system of the virtual node that the proxy is running on.</p>"
+          "documentation": "<p>The certificate trust chain for a certificate stored on the file system of the virtual\n         node that the proxy is running on.</p>"
         }
       },
       "documentation": "<p>An object that represents a Transport Layer Security (TLS) validation context trust for a local file.</p>"
@@ -3850,7 +3913,7 @@
         },
         "virtualRouterName": {
           "shape": "ResourceName",
-          "documentation": "<p>The name of the virtual router in which to create the route. If the virtual router is in a shared mesh,\n         then you must be the owner of the virtual router resource.</p>",
+          "documentation": "<p>The name of the virtual router in which to create the route. If the virtual router is in\n         a shared mesh, then you must be the owner of the virtual router resource.</p>",
           "location": "uri",
           "locationName": "virtualRouterName"
         }
@@ -4057,7 +4120,7 @@
       "members": {
         "certificateArn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource Name (ARN) for the certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual-node-tls.html#virtual-node-tls-prerequisites\">Transport Layer Security (TLS)</a>.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for the certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites\">Transport Layer Security (TLS)</a>.</p>"
         }
       },
       "documentation": "<p>An object that represents an AWS Certicate Manager (ACM) certificate.</p>"

@@ -68,11 +68,11 @@ declare class SecurityHub extends Service {
    */
   createInsight(callback?: (err: AWSError, data: SecurityHub.Types.CreateInsightResponse) => void): Request<SecurityHub.Types.CreateInsightResponse, AWSError>;
   /**
-   * Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the master account. To successfully create a member, you must use this action from an account that already has Security Hub enabled. To enable Security Hub, you can use the  EnableSecurityHub  operation. After you use CreateMembers to create member account associations in Security Hub, you must use the  InviteMembers  operation to invite the accounts to enable Security Hub and become member accounts in Security Hub. If the account owner accepts the invitation, the account becomes a member account in Security Hub, and a permission policy is added that permits the master account to view the findings generated in the member account. When Security Hub is enabled in the invited account, findings start to be sent to both the member and master accounts. To remove the association between the master and member accounts, use the  DisassociateFromMasterAccount  or  DisassociateMembers  operation.
+   * Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the master account. To successfully create a member, you must use this action from an account that already has Security Hub enabled. To enable Security Hub, you can use the  EnableSecurityHub  operation. After you use CreateMembers to create member account associations in Security Hub, you must use the  InviteMembers  operation to invite the accounts to enable Security Hub and become member accounts in Security Hub. If the account owner accepts the invitation, the account becomes a member account in Security Hub. A permissions policy is added that permits the master account to view the findings generated in the member account. When Security Hub is enabled in the invited account, findings start to be sent to both the member and master accounts. To remove the association between the master and member accounts, use the  DisassociateFromMasterAccount  or  DisassociateMembers  operation.
    */
   createMembers(params: SecurityHub.Types.CreateMembersRequest, callback?: (err: AWSError, data: SecurityHub.Types.CreateMembersResponse) => void): Request<SecurityHub.Types.CreateMembersResponse, AWSError>;
   /**
-   * Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the master account. To successfully create a member, you must use this action from an account that already has Security Hub enabled. To enable Security Hub, you can use the  EnableSecurityHub  operation. After you use CreateMembers to create member account associations in Security Hub, you must use the  InviteMembers  operation to invite the accounts to enable Security Hub and become member accounts in Security Hub. If the account owner accepts the invitation, the account becomes a member account in Security Hub, and a permission policy is added that permits the master account to view the findings generated in the member account. When Security Hub is enabled in the invited account, findings start to be sent to both the member and master accounts. To remove the association between the master and member accounts, use the  DisassociateFromMasterAccount  or  DisassociateMembers  operation.
+   * Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the master account. To successfully create a member, you must use this action from an account that already has Security Hub enabled. To enable Security Hub, you can use the  EnableSecurityHub  operation. After you use CreateMembers to create member account associations in Security Hub, you must use the  InviteMembers  operation to invite the accounts to enable Security Hub and become member accounts in Security Hub. If the account owner accepts the invitation, the account becomes a member account in Security Hub. A permissions policy is added that permits the master account to view the findings generated in the member account. When Security Hub is enabled in the invited account, findings start to be sent to both the member and master accounts. To remove the association between the master and member accounts, use the  DisassociateFromMasterAccount  or  DisassociateMembers  operation.
    */
   createMembers(callback?: (err: AWSError, data: SecurityHub.Types.CreateMembersResponse) => void): Request<SecurityHub.Types.CreateMembersResponse, AWSError>;
   /**
@@ -188,19 +188,19 @@ declare class SecurityHub extends Service {
    */
   disassociateMembers(callback?: (err: AWSError, data: SecurityHub.Types.DisassociateMembersResponse) => void): Request<SecurityHub.Types.DisassociateMembersResponse, AWSError>;
   /**
-   * Enables the integration of a partner product with Security Hub. Integrated products send findings to Security Hub. When you enable a product integration, a permission policy that grants permission for the product to send findings to Security Hub is applied.
+   * Enables the integration of a partner product with Security Hub. Integrated products send findings to Security Hub. When you enable a product integration, a permissions policy that grants permission for the product to send findings to Security Hub is applied.
    */
   enableImportFindingsForProduct(params: SecurityHub.Types.EnableImportFindingsForProductRequest, callback?: (err: AWSError, data: SecurityHub.Types.EnableImportFindingsForProductResponse) => void): Request<SecurityHub.Types.EnableImportFindingsForProductResponse, AWSError>;
   /**
-   * Enables the integration of a partner product with Security Hub. Integrated products send findings to Security Hub. When you enable a product integration, a permission policy that grants permission for the product to send findings to Security Hub is applied.
+   * Enables the integration of a partner product with Security Hub. Integrated products send findings to Security Hub. When you enable a product integration, a permissions policy that grants permission for the product to send findings to Security Hub is applied.
    */
   enableImportFindingsForProduct(callback?: (err: AWSError, data: SecurityHub.Types.EnableImportFindingsForProductResponse) => void): Request<SecurityHub.Types.EnableImportFindingsForProductResponse, AWSError>;
   /**
-   * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from other services that are integrated with Security Hub. When you use the EnableSecurityHub operation to enable Security Hub, you also automatically enable the CIS AWS Foundations standard. You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard. To not enable the CIS AWS Foundations standard, set EnableDefaultStandards to false. After you enable Security Hub, to enable a standard, use the  BatchEnableStandards  operation. To disable a standard, use the  BatchDisableStandards  operation. To learn more, see Setting Up AWS Security Hub in the AWS Security Hub User Guide.
+   * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from other services that are integrated with Security Hub. When you use the EnableSecurityHub operation to enable Security Hub, you also automatically enable the following standards.   CIS AWS Foundations   AWS Foundational Security Best Practices   You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard.  To not enable the automatically enabled standards, set EnableDefaultStandards to false. After you enable Security Hub, to enable a standard, use the  BatchEnableStandards  operation. To disable a standard, use the  BatchDisableStandards  operation. To learn more, see Setting Up AWS Security Hub in the AWS Security Hub User Guide.
    */
   enableSecurityHub(params: SecurityHub.Types.EnableSecurityHubRequest, callback?: (err: AWSError, data: SecurityHub.Types.EnableSecurityHubResponse) => void): Request<SecurityHub.Types.EnableSecurityHubResponse, AWSError>;
   /**
-   * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from other services that are integrated with Security Hub. When you use the EnableSecurityHub operation to enable Security Hub, you also automatically enable the CIS AWS Foundations standard. You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard. To not enable the CIS AWS Foundations standard, set EnableDefaultStandards to false. After you enable Security Hub, to enable a standard, use the  BatchEnableStandards  operation. To disable a standard, use the  BatchDisableStandards  operation. To learn more, see Setting Up AWS Security Hub in the AWS Security Hub User Guide.
+   * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from other services that are integrated with Security Hub. When you use the EnableSecurityHub operation to enable Security Hub, you also automatically enable the following standards.   CIS AWS Foundations   AWS Foundational Security Best Practices   You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard.  To not enable the automatically enabled standards, set EnableDefaultStandards to false. After you enable Security Hub, to enable a standard, use the  BatchEnableStandards  operation. To disable a standard, use the  BatchDisableStandards  operation. To learn more, see Setting Up AWS Security Hub in the AWS Security Hub User Guide.
    */
   enableSecurityHub(callback?: (err: AWSError, data: SecurityHub.Types.EnableSecurityHubResponse) => void): Request<SecurityHub.Types.EnableSecurityHubResponse, AWSError>;
   /**
@@ -510,7 +510,7 @@ declare namespace SecurityHub {
      */
     RegistryCredential?: AwsCodeBuildProjectEnvironmentRegistryCredential;
     /**
-     * The type of build environment to use for related builds. The environment type ARM_CONTAINER is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), Europe (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Sydney), and Europe (Frankfurt). The environment type LINUX_CONTAINER with compute type build.general1.2xlarge is available only in regions US East (N. Virginia), US East (N. Virginia), US West (Oregon), Canada (Central), Europe (Ireland), Europe (London), Europe (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney), China (Beijing), and China (Ningxia). The environment type LINUX_GPU_CONTAINER is available only in regions US East (N. Virginia), US East (N. Virginia), US West (Oregon), Canada (Central), Europe (Ireland), Europe (London), Europe (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney) , China (Beijing), and China (Ningxia). Valid values: WINDOWS_CONTAINER | LINUX_CONTAINER | LINUX_GPU_CONTAINER | ARM_CONTAINER 
+     * The type of build environment to use for related builds. The environment type ARM_CONTAINER is available only in Regions US East (N. Virginia), US East (Ohio), US West (Oregon), Europe (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Sydney), and Europe (Frankfurt). The environment type LINUX_CONTAINER with compute type build.general1.2xlarge is available only in Regions US East (N. Virginia), US East (N. Virginia), US West (Oregon), Canada (Central), Europe (Ireland), Europe (London), Europe (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney), China (Beijing), and China (Ningxia). The environment type LINUX_GPU_CONTAINER is available only in Regions US East (N. Virginia), US East (N. Virginia), US West (Oregon), Canada (Central), Europe (Ireland), Europe (London), Europe (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney), China (Beijing), and China (Ningxia). Valid values: WINDOWS_CONTAINER | LINUX_CONTAINER | LINUX_GPU_CONTAINER | ARM_CONTAINER 
      */
     Type?: NonEmptyString;
   }
@@ -530,7 +530,7 @@ declare namespace SecurityHub {
      */
     Type?: NonEmptyString;
     /**
-     * Information about the location of the source code to be built. Valid values include:   For source code settings that are specified in the source action of a pipeline in AWS CodePipeline, location should not be specified. If it is specified, AWS CodePipeline ignores it. This is because AWS CodePipeline uses the settings in a pipeline's source action instead of this value.   For source code in an AWS CodeCommit repository, the HTTPS clone URL to the repository that contains the source code and the buildspec file (for example, https://git-codecommit.region-ID.amazonaws.com/v1/repos/repo-name ).   For source code in an S3 input bucket, one of the following.   The path to the ZIP file that contains the source code (for example, bucket-name/path/to/object-name.zip).    The path to the folder that contains the source code (for example, bucket-name/path/to/source-code/folder/).     For source code in a GitHub repository, the HTTPS clone URL to the repository that contains the source and the buildspec file.   For source code in a Bitbucket repository, the HTTPS clone URL to the repository that contains the source and the buildspec file.   
+     * Information about the location of the source code to be built. Valid values include:   For source code settings that are specified in the source action of a pipeline in AWS CodePipeline, location should not be specified. If it is specified, AWS CodePipeline ignores it. This is because AWS CodePipeline uses the settings in a pipeline's source action instead of this value.   For source code in an AWS CodeCommit repository, the HTTPS clone URL to the repository that contains the source code and the build spec file (for example, https://git-codecommit.region-ID.amazonaws.com/v1/repos/repo-name ).   For source code in an S3 input bucket, one of the following.   The path to the ZIP file that contains the source code (for example, bucket-name/path/to/object-name.zip).    The path to the folder that contains the source code (for example, bucket-name/path/to/source-code/folder/).     For source code in a GitHub repository, the HTTPS clone URL to the repository that contains the source and the build spec file.   For source code in a Bitbucket repository, the HTTPS clone URL to the repository that contains the source and the build spec file.   
      */
     Location?: NonEmptyString;
     /**
@@ -712,14 +712,14 @@ declare namespace SecurityHub {
   export type AwsEc2SecurityGroupIpPermissionList = AwsEc2SecurityGroupIpPermission[];
   export interface AwsEc2SecurityGroupIpRange {
     /**
-     * The IPv4 CIDR range. You can either specify either a CIDR range or a source security group, but not both. To specify a single IPv4 address, use the /32 prefix length.
+     * The IPv4 CIDR range. You can specify either a CIDR range or a source security group, but not both. To specify a single IPv4 address, use the /32 prefix length.
      */
     CidrIp?: NonEmptyString;
   }
   export type AwsEc2SecurityGroupIpRangeList = AwsEc2SecurityGroupIpRange[];
   export interface AwsEc2SecurityGroupIpv6Range {
     /**
-     * The IPv6 CIDR range. You can either specify either a CIDR range or a source security group, but not both. To specify a single IPv6 address, use the /128 prefix length.
+     * The IPv6 CIDR range. You can specify either a CIDR range or a source security group, but not both. To specify a single IPv6 address, use the /128 prefix length.
      */
     CidrIpv6?: NonEmptyString;
   }
@@ -1121,7 +1121,7 @@ declare namespace SecurityHub {
      */
     Version?: AwsLambdaLayerVersionNumber;
     /**
-     * The layer's compatible runtimes. Maximum number of 5 items. Valid values: nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore1.0 | dotnetcore2.1 | go1.x | ruby2.5 | provided 
+     * The layer's compatible runtimes. Maximum number of five items. Valid values: nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 | python3.8 | dotnetcore1.0 | dotnetcore2.1 | go1.x | ruby2.5 | provided 
      */
     CompatibleRuntimes?: NonEmptyStringList;
     /**
@@ -1140,7 +1140,7 @@ declare namespace SecurityHub {
      */
     FeatureName?: NonEmptyString;
     /**
-     * Describes the state of the association between the IAM role and the DB instance. The Status property returns one of the following values:    ACTIVE - the IAM role ARN is associated with the DB instance and can be used to access other AWS services on your behalf.    PENDING - the IAM role ARN is being associated with the DB instance.    INVALID - the IAM role ARN is associated with the DB instance, but the DB instance is unable to assume the IAM role in order to access other AWS services on your behalf.   
+     * Describes the state of the association between the IAM role and the DB instance. The Status property returns one of the following values:    ACTIVE - The IAM role ARN is associated with the DB instance and can be used to access other AWS services on your behalf.    PENDING - The IAM role ARN is being associated with the DB instance.    INVALID - The IAM role ARN is associated with the DB instance. But the DB instance is unable to assume the IAM role in order to access other AWS services on your behalf.   
      */
     Status?: NonEmptyString;
   }
@@ -1284,7 +1284,7 @@ declare namespace SecurityHub {
   }
   export interface AwsS3BucketServerSideEncryptionRule {
     /**
-     * Specifies the default server-side encryption to apply to new objects in the bucket. If a PUT Object request doesn't specify any server-side encryption, this default encryption is applied.
+     * Specifies the default server-side encryption to apply to new objects in the bucket. If a PUT object request doesn't specify any server-side encryption, this default encryption is applied.
      */
     ApplyServerSideEncryptionByDefault?: AwsS3BucketServerSideEncryptionByDefault;
   }
@@ -1329,7 +1329,7 @@ declare namespace SecurityHub {
      */
     ProductArn: NonEmptyString;
     /**
-     * The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers' solutions, this generator can be called a rule, a check, a detector, a plug-in, etc. 
+     * The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers' solutions, this generator can be called a rule, a check, a detector, a plugin, etc. 
      */
     GeneratorId: NonEmptyString;
     /**
@@ -1455,7 +1455,7 @@ declare namespace SecurityHub {
      */
     Id?: StringFilterList;
     /**
-     * The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers' solutions, this generator can be called a rule, a check, a detector, a plug-in, etc.
+     * The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers' solutions, this generator can be called a rule, a check, a detector, a plugin, etc.
      */
     GeneratorId?: StringFilterList;
     /**
@@ -1793,7 +1793,7 @@ declare namespace SecurityHub {
   export type AwsSecurityFindingList = AwsSecurityFinding[];
   export interface AwsSnsTopicDetails {
     /**
-     * The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK.
+     * The ID of an AWS managed customer master key (CMK) for Amazon SNS or a custom CMK.
      */
     KmsMasterKeyId?: NonEmptyString;
     /**
@@ -1826,7 +1826,7 @@ declare namespace SecurityHub {
      */
     KmsDataKeyReusePeriodSeconds?: Integer;
     /**
-     * The ID of an AWS-managed customer master key (CMK) for Amazon SQS or a custom CMK.
+     * The ID of an AWS managed customer master key (CMK) for Amazon SQS or a custom CMK.
      */
     KmsMasterKeyId?: NonEmptyString;
     /**
@@ -1844,7 +1844,7 @@ declare namespace SecurityHub {
      */
     Name?: NonEmptyString;
     /**
-     * The action to perform if none of the Rules contained in the WebACL match.
+     * The action to perform if none of the rules contained in the WebACL match.
      */
     DefaultAction?: NonEmptyString;
     /**
@@ -1858,7 +1858,7 @@ declare namespace SecurityHub {
   }
   export interface AwsWafWebAclRule {
     /**
-     * Specifies the action that CloudFront or AWS WAF takes when a web request matches the conditions in the Rule. 
+     * Specifies the action that CloudFront or AWS WAF takes when a web request matches the conditions in the rule. 
      */
     Action?: WafAction;
     /**
@@ -1870,11 +1870,11 @@ declare namespace SecurityHub {
      */
     OverrideAction?: WafOverrideAction;
     /**
-     * Specifies the order in which the Rules in a WebACL are evaluated. Rules with a lower value for Priority are evaluated before Rules with a higher value. The value must be a unique integer. If you add multiple Rules to a WebACL, the values do not need to be consecutive.
+     * Specifies the order in which the rules in a WebACL are evaluated. Rules with a lower value for Priority are evaluated before rules with a higher value. The value must be a unique integer. If you add multiple rules to a WebACL, the values do not need to be consecutive.
      */
     Priority?: Integer;
     /**
-     * The identifier for a Rule.
+     * The identifier for a rule.
      */
     RuleId?: NonEmptyString;
     /**
@@ -1995,13 +1995,17 @@ declare namespace SecurityHub {
   export type CategoryList = NonEmptyString[];
   export interface Compliance {
     /**
-     * The result of a standards check.
+     * The result of a standards check. The valid values for Status are as follows.      PASSED - Standards check passed for all evaluated resources.    WARNING - Some information is missing or this check is not supported for your configuration.    FAILED - Standards check failed for at least one evaluated resource.    NOT_AVAILABLE - Check could not be performed due to a service outage, API error, or because the result of the AWS Config evaluation was NOT_APPLICABLE. If the AWS Config evaluation result was NOT_APPLICABLE, then after 3 days, Security Hub automatically archives the finding.    
      */
     Status?: ComplianceStatus;
     /**
-     * List of requirements that are related to a standards control.
+     * For a control, the industry or regulatory framework requirements that are related to the control. The check for that control is aligned with these requirements.
      */
     RelatedRequirements?: RelatedRequirementsList;
+    /**
+     * For findings generated from controls, a list of reasons behind the value of Status. For the list of status reason codes and their meanings, see Standards-related information in the ASFF in the AWS Security Hub User Guide. 
+     */
+    StatusReasons?: StatusReasonsList;
   }
   export type ComplianceStatus = "PASSED"|"WARNING"|"FAILED"|"NOT_AVAILABLE"|string;
   export interface ContainerDetails {
@@ -2304,7 +2308,7 @@ declare namespace SecurityHub {
   }
   export interface EnableSecurityHubRequest {
     /**
-     * The tags to add to the Hub resource when you enable Security Hub.
+     * The tags to add to the hub resource when you enable Security Hub.
      */
     Tags?: TagMap;
     /**
@@ -2920,7 +2924,7 @@ declare namespace SecurityHub {
      */
     AwsEc2Instance?: AwsEc2InstanceDetails;
     /**
-     * Details for an AWS EC2 network interface.
+     * Details for an Amazon EC2 network interface.
      */
     AwsEc2NetworkInterface?: AwsEc2NetworkInterfaceDetails;
     /**
@@ -2936,7 +2940,7 @@ declare namespace SecurityHub {
      */
     AwsElasticsearchDomain?: AwsElasticsearchDomainDetails;
     /**
-     * Details about an Amazon S3 Bucket related to a finding.
+     * Details about an Amazon S3 bucket related to a finding.
      */
     AwsS3Bucket?: AwsS3BucketDetails;
     /**
@@ -2964,7 +2968,7 @@ declare namespace SecurityHub {
      */
     AwsLambdaLayerVersion?: AwsLambdaLayerVersionDetails;
     /**
-     * Details for an RDS database instance.
+     * Details for an Amazon RDS database instance.
      */
     AwsRdsDbInstance?: AwsRdsDbInstanceDetails;
     /**
@@ -3003,7 +3007,7 @@ declare namespace SecurityHub {
   export type SecurityGroups = NonEmptyString[];
   export interface Severity {
     /**
-     * The native severity as defined by the AWS service or integrated partner product that generated the finding.
+     * Deprecated. This attribute is being deprecated. Instead of providing Product, provide Original. The native severity as defined by the AWS service or integrated partner product that generated the finding.
      */
     Product?: Double;
     /**
@@ -3014,6 +3018,10 @@ declare namespace SecurityHub {
      * Deprecated. This attribute is being deprecated. Instead of providing Normalized, provide Label. If you provide Normalized and do not provide Label, Label is set automatically as follows.    0 - INFORMATIONAL    1–39 - LOW    40–69 - MEDIUM    70–89 - HIGH    90–100 - CRITICAL   
      */
     Normalized?: Integer;
+    /**
+     * The native severity from the finding product that generated the finding.
+     */
+    Original?: NonEmptyString;
   }
   export type SeverityLabel = "INFORMATIONAL"|"LOW"|"MEDIUM"|"HIGH"|"CRITICAL"|string;
   export type SeverityRating = "LOW"|"MEDIUM"|"HIGH"|"CRITICAL"|string;
@@ -3138,6 +3146,17 @@ declare namespace SecurityHub {
   }
   export type StandardsSubscriptionRequests = StandardsSubscriptionRequest[];
   export type StandardsSubscriptions = StandardsSubscription[];
+  export interface StatusReason {
+    /**
+     * A code that represents a reason for the control status. For the list of status reason codes and their meanings, see Standards-related information in the ASFF in the AWS Security Hub User Guide. 
+     */
+    ReasonCode: NonEmptyString;
+    /**
+     * The corresponding description for the status reason code.
+     */
+    Description?: NonEmptyString;
+  }
+  export type StatusReasonsList = StatusReason[];
   export interface StringFilter {
     /**
      * The string filter value.
@@ -3281,7 +3300,7 @@ declare namespace SecurityHub {
   export type VerificationState = "UNKNOWN"|"TRUE_POSITIVE"|"FALSE_POSITIVE"|"BENIGN_POSITIVE"|string;
   export interface WafAction {
     /**
-     * Specifies how you want AWS WAF to respond to requests that match the settings in a Rule. Valid settings include the following:    ALLOW - AWS WAF allows requests    BLOCK - AWS WAF blocks requests    COUNT - AWS WAF increments a counter of the requests that match all of the conditions in the rule. AWS WAF then continues to inspect the web request based on the remaining rules in the web ACL. You can't specify COUNT for the default action for a WebACL.  
+     * Specifies how you want AWS WAF to respond to requests that match the settings in a rule. Valid settings include the following:    ALLOW - AWS WAF allows requests    BLOCK - AWS WAF blocks requests    COUNT - AWS WAF increments a counter of the requests that match all of the conditions in the rule. AWS WAF then continues to inspect the web request based on the remaining rules in the web ACL. You can't specify COUNT for the default action for a WebACL.  
      */
     Type?: NonEmptyString;
   }

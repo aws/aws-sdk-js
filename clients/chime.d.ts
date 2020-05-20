@@ -420,6 +420,14 @@ declare class Chime extends Service {
    */
   getProxySession(callback?: (err: AWSError, data: Chime.Types.GetProxySessionResponse) => void): Request<Chime.Types.GetProxySessionResponse, AWSError>;
   /**
+   * Gets the retention settings for the specified Amazon Chime Enterprise account. For more information about retention settings, see Managing Chat Retention Policies in the Amazon Chime Administration Guide.
+   */
+  getRetentionSettings(params: Chime.Types.GetRetentionSettingsRequest, callback?: (err: AWSError, data: Chime.Types.GetRetentionSettingsResponse) => void): Request<Chime.Types.GetRetentionSettingsResponse, AWSError>;
+  /**
+   * Gets the retention settings for the specified Amazon Chime Enterprise account. For more information about retention settings, see Managing Chat Retention Policies in the Amazon Chime Administration Guide.
+   */
+  getRetentionSettings(callback?: (err: AWSError, data: Chime.Types.GetRetentionSettingsResponse) => void): Request<Chime.Types.GetRetentionSettingsResponse, AWSError>;
+  /**
    * Retrieves room details, such as the room name, for a room in an Amazon Chime Enterprise account.
    */
   getRoom(params: Chime.Types.GetRoomRequest, callback?: (err: AWSError, data: Chime.Types.GetRoomResponse) => void): Request<Chime.Types.GetRoomResponse, AWSError>;
@@ -659,6 +667,14 @@ declare class Chime extends Service {
    * Creates an events configuration that allows a bot to receive outgoing events sent by Amazon Chime. Choose either an HTTPS endpoint or a Lambda function ARN. For more information, see Bot.
    */
   putEventsConfiguration(callback?: (err: AWSError, data: Chime.Types.PutEventsConfigurationResponse) => void): Request<Chime.Types.PutEventsConfigurationResponse, AWSError>;
+  /**
+   * Puts retention settings for the specified Amazon Chime Enterprise account. We recommend using AWS CloudTrail to monitor usage of this API for your account. For more information, see Logging Amazon Chime API Calls with AWS CloudTrail in the Amazon Chime Administration Guide. To turn off existing retention settings, remove the number of days from the corresponding RetentionDays field in the RetentionSettings object. For more information about retention settings, see Managing Chat Retention Policies in the Amazon Chime Administration Guide.
+   */
+  putRetentionSettings(params: Chime.Types.PutRetentionSettingsRequest, callback?: (err: AWSError, data: Chime.Types.PutRetentionSettingsResponse) => void): Request<Chime.Types.PutRetentionSettingsResponse, AWSError>;
+  /**
+   * Puts retention settings for the specified Amazon Chime Enterprise account. We recommend using AWS CloudTrail to monitor usage of this API for your account. For more information, see Logging Amazon Chime API Calls with AWS CloudTrail in the Amazon Chime Administration Guide. To turn off existing retention settings, remove the number of days from the corresponding RetentionDays field in the RetentionSettings object. For more information about retention settings, see Managing Chat Retention Policies in the Amazon Chime Administration Guide.
+   */
+  putRetentionSettings(callback?: (err: AWSError, data: Chime.Types.PutRetentionSettingsResponse) => void): Request<Chime.Types.PutRetentionSettingsResponse, AWSError>;
   /**
    * Adds a logging configuration for the specified Amazon Chime Voice Connector. The logging configuration specifies whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.
    */
@@ -1220,6 +1236,12 @@ declare namespace Chime {
   export type Capability = "Voice"|"SMS"|string;
   export type CapabilityList = Capability[];
   export type ClientRequestToken = string;
+  export interface ConversationRetentionSettings {
+    /**
+     * The number of days for which to retain chat conversation messages.
+     */
+    RetentionDays?: RetentionDays;
+  }
   export type Country = string;
   export type CountryList = Country[];
   export type CpsLimit = number;
@@ -1852,6 +1874,22 @@ declare namespace Chime {
      * The proxy session details.
      */
     ProxySession?: ProxySession;
+  }
+  export interface GetRetentionSettingsRequest {
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId: NonEmptyString;
+  }
+  export interface GetRetentionSettingsResponse {
+    /**
+     * The retention settings.
+     */
+    RetentionSettings?: RetentionSettings;
+    /**
+     * The timestamp representing the time at which the specified items are permanently deleted, in ISO 8601 format.
+     */
+    InitiateDeletionTimestamp?: Iso8601Timestamp;
   }
   export interface GetRoomRequest {
     /**
@@ -2837,6 +2875,26 @@ declare namespace Chime {
   export interface PutEventsConfigurationResponse {
     EventsConfiguration?: EventsConfiguration;
   }
+  export interface PutRetentionSettingsRequest {
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId: NonEmptyString;
+    /**
+     * The retention settings.
+     */
+    RetentionSettings: RetentionSettings;
+  }
+  export interface PutRetentionSettingsResponse {
+    /**
+     * The retention settings.
+     */
+    RetentionSettings?: RetentionSettings;
+    /**
+     * The timestamp representing the time at which the specified items are permanently deleted, in ISO 8601 format.
+     */
+    InitiateDeletionTimestamp?: Iso8601Timestamp;
+  }
   export interface PutVoiceConnectorLoggingConfigurationRequest {
     /**
      * The Amazon Chime Voice Connector ID.
@@ -3014,6 +3072,17 @@ declare namespace Chime {
     PhoneNumber?: PhoneNumber;
   }
   export type ResultMax = number;
+  export type RetentionDays = number;
+  export interface RetentionSettings {
+    /**
+     * The chat room retention settings.
+     */
+    RoomRetentionSettings?: RoomRetentionSettings;
+    /**
+     * The chat conversation retention settings.
+     */
+    ConversationRetentionSettings?: ConversationRetentionSettings;
+  }
   export interface Room {
     /**
      * The room ID.
@@ -3062,6 +3131,12 @@ declare namespace Chime {
   }
   export type RoomMembershipList = RoomMembership[];
   export type RoomMembershipRole = "Administrator"|"Member"|string;
+  export interface RoomRetentionSettings {
+    /**
+     * The number of days for which to retain chat room messages.
+     */
+    RetentionDays?: RetentionDays;
+  }
   export interface SearchAvailablePhoneNumbersRequest {
     /**
      * The area code used to filter results.

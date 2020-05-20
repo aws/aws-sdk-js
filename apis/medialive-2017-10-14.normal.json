@@ -790,6 +790,52 @@
       ],
       "documentation": "Produces details about an input"
     },
+    "DescribeInputDevice": {
+      "name": "DescribeInputDevice",
+      "http": {
+        "method": "GET",
+        "requestUri": "/prod/inputDevices/{inputDeviceId}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeInputDeviceRequest"
+      },
+      "output": {
+        "shape": "DescribeInputDeviceResponse",
+        "documentation": "Details for the input device."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request was invalid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Unexpected internal service error."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You do not have permission to describe the input device."
+        },
+        {
+          "shape": "BadGatewayException",
+          "documentation": "Bad gateway error."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "The input device you're requesting to describe does not exist. Check the ID."
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "Gateway timeout error."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "Request limit exceeded on describe calls to the input device service."
+        }
+      ],
+      "documentation": "Gets the details for the input device"
+    },
     "DescribeInputSecurityGroup": {
       "name": "DescribeInputSecurityGroup",
       "http": {
@@ -1107,6 +1153,48 @@
         }
       ],
       "documentation": "Produces list of channels that have been created"
+    },
+    "ListInputDevices": {
+      "name": "ListInputDevices",
+      "http": {
+        "method": "GET",
+        "requestUri": "/prod/inputDevices",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListInputDevicesRequest"
+      },
+      "output": {
+        "shape": "ListInputDevicesResponse",
+        "documentation": "An array of input devices."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request was invalid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Unexpected internal service error."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You do not have permission to list input devices."
+        },
+        {
+          "shape": "BadGatewayException",
+          "documentation": "Bad gateway error."
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "Gateway timeout error."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "Request limit exceeded on list devices calls to the input device service."
+        }
+      ],
+      "documentation": "List input devices"
     },
     "ListInputSecurityGroups": {
       "name": "ListInputSecurityGroups",
@@ -1793,6 +1881,56 @@
         }
       ],
       "documentation": "Updates an input."
+    },
+    "UpdateInputDevice": {
+      "name": "UpdateInputDevice",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/prod/inputDevices/{inputDeviceId}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateInputDeviceRequest"
+      },
+      "output": {
+        "shape": "UpdateInputDeviceResponse",
+        "documentation": "Input device update is in progress."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request was invalid."
+        },
+        {
+          "shape": "UnprocessableEntityException",
+          "documentation": "Input device failed validation and could not be created."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Unexpected internal service error."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You do not have permission to update the input device."
+        },
+        {
+          "shape": "BadGatewayException",
+          "documentation": "Bad gateway error."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "The input device you're requesting to  does not exist. Check the ID."
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "Gateway timeout error."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "Request limit exceeded on update calls to the input device service."
+        }
+      ],
+      "documentation": "Updates the parameters for the input device."
     },
     "UpdateInputSecurityGroup": {
       "name": "UpdateInputSecurityGroup",
@@ -3390,6 +3528,11 @@
           "locationName": "destinations",
           "documentation": "Destination settings for PUSH type inputs."
         },
+        "InputDevices": {
+          "shape": "__listOfInputDeviceSettings",
+          "locationName": "inputDevices",
+          "documentation": "Settings for the devices."
+        },
         "InputSecurityGroups": {
           "shape": "__listOf__string",
           "locationName": "inputSecurityGroups",
@@ -4082,6 +4225,77 @@
       },
       "documentation": "Placeholder documentation for DescribeChannelResponse"
     },
+    "DescribeInputDeviceRequest": {
+      "type": "structure",
+      "members": {
+        "InputDeviceId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "inputDeviceId",
+          "documentation": "The unique ID of this input device. For example, hd-123456789abcdef."
+        }
+      },
+      "required": [
+        "InputDeviceId"
+      ],
+      "documentation": "Placeholder documentation for DescribeInputDeviceRequest"
+    },
+    "DescribeInputDeviceResponse": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "__string",
+          "locationName": "arn",
+          "documentation": "The unique ARN of the input device."
+        },
+        "ConnectionState": {
+          "shape": "InputDeviceConnectionState",
+          "locationName": "connectionState",
+          "documentation": "The state of the connection between the input device and AWS."
+        },
+        "DeviceSettingsSyncState": {
+          "shape": "DeviceSettingsSyncState",
+          "locationName": "deviceSettingsSyncState",
+          "documentation": "The status of the action to synchronize the device configuration. If you change the configuration of the input device (for example, the maximum bitrate), MediaLive sends the new data to the device. The device might not update itself immediately. SYNCED means the device has updated its configuration. SYNCING means that it has not updated its configuration."
+        },
+        "HdDeviceSettings": {
+          "shape": "InputDeviceHdSettings",
+          "locationName": "hdDeviceSettings",
+          "documentation": "Settings that describe an input device that is type HD."
+        },
+        "Id": {
+          "shape": "__string",
+          "locationName": "id",
+          "documentation": "The unique ID of the input device."
+        },
+        "MacAddress": {
+          "shape": "__string",
+          "locationName": "macAddress",
+          "documentation": "The network MAC address of the input device."
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "A name that you specify for the input device."
+        },
+        "NetworkSettings": {
+          "shape": "InputDeviceNetworkSettings",
+          "locationName": "networkSettings",
+          "documentation": "The network settings for the input device."
+        },
+        "SerialNumber": {
+          "shape": "__string",
+          "locationName": "serialNumber",
+          "documentation": "The unique serial number of the input device."
+        },
+        "Type": {
+          "shape": "InputDeviceType",
+          "locationName": "type",
+          "documentation": "The type of the input device."
+        }
+      },
+      "documentation": "Placeholder documentation for DescribeInputDeviceResponse"
+    },
     "DescribeInputRequest": {
       "type": "structure",
       "members": {
@@ -4124,6 +4338,11 @@
           "shape": "InputClass",
           "locationName": "inputClass",
           "documentation": "STANDARD - MediaLive expects two sources to be connected to this input. If the channel is also STANDARD, both sources will be ingested. If the channel is SINGLE_PIPELINE, only the first source will be ingested; the second source will always be ignored, even if the first source fails.\nSINGLE_PIPELINE - You can connect only one source to this input. If the ChannelClass is also  SINGLE_PIPELINE, this value is valid. If the ChannelClass is STANDARD, this value is not valid because the channel requires two sources in the input.\n"
+        },
+        "InputDevices": {
+          "shape": "__listOfInputDeviceSettings",
+          "locationName": "inputDevices",
+          "documentation": "Settings for the input devices."
         },
         "InputSourceType": {
           "shape": "InputSourceType",
@@ -4568,6 +4787,14 @@
         }
       },
       "documentation": "Placeholder documentation for DescribeScheduleResponse"
+    },
+    "DeviceSettingsSyncState": {
+      "type": "string",
+      "documentation": "The status of the action to synchronize the device configuration. If you change the configuration of the input device (for example, the maximum bitrate), MediaLive sends the new data to the device. The device might not update itself immediately. SYNCED means the device has updated its configuration. SYNCING means that it has not updated its configuration.",
+      "enum": [
+        "SYNCED",
+        "SYNCING"
+      ]
     },
     "DvbNitSettings": {
       "type": "structure",
@@ -5345,7 +5572,7 @@
         "OutputLockingMode": {
           "shape": "GlobalConfigurationOutputLockingMode",
           "locationName": "outputLockingMode",
-          "documentation": "Indicates how MediaLive pipelines are synchronized.\n\nPIPELINELOCKING - MediaLive will attempt to synchronize the output of each pipeline to the other.\nEPOCHLOCKING - MediaLive will attempt to synchronize the output of each pipeline to the Unix epoch."
+          "documentation": "Indicates how MediaLive pipelines are synchronized.\n\nPIPELINE_LOCKING - MediaLive will attempt to synchronize the output of each pipeline to the other.\nEPOCH_LOCKING - MediaLive will attempt to synchronize the output of each pipeline to the Unix epoch."
         },
         "OutputTimingSource": {
           "shape": "GlobalConfigurationOutputTimingSource",
@@ -5620,7 +5847,7 @@
         "FilterSettings": {
           "shape": "H264FilterSettings",
           "locationName": "filterSettings",
-          "documentation": "Settings associated with the specified filter."
+          "documentation": "Optional filters that you can apply to an encode."
         },
         "FixedAfd": {
           "shape": "FixedAfd",
@@ -5725,7 +5952,7 @@
         "QualityLevel": {
           "shape": "H264QualityLevel",
           "locationName": "qualityLevel",
-          "documentation": "If set to \"ENHANCEDQUALITY,\" improves visual quality at an increased output cost. If this video is being delivered to a MediaLive Multiplex, \"ENHANCEDQUALITY\" is always used."
+          "documentation": "Leave as STANDARD_QUALITY or choose a different value (which might result in additional costs to run the channel).\n- ENHANCED_QUALITY: Produces a slightly better video quality without an increase in the bitrate. Has an effect only when the Rate control mode is QVBR or CBR. If this channel is in a MediaLive multiplex, the value must be ENHANCED_QUALITY.\n- STANDARD_QUALITY: Valid for any Rate control mode."
         },
         "QvbrQualityLevel": {
           "shape": "__integerMin1Max10",
@@ -6427,7 +6654,7 @@
         "OutputSelection": {
           "shape": "HlsOutputSelection",
           "locationName": "outputSelection",
-          "documentation": "MANIFESTSANDSEGMENTS: Generates manifests (master manifest, if applicable, and media manifests) for this output group.\n\nVARIANTMANIFESTSANDSEGMENTS: Generates media manifests for this output group, but not a master manifest.\n\nSEGMENTSONLY: Does not generate any manifests for this output group."
+          "documentation": "MANIFESTS_AND_SEGMENTS: Generates manifests (master manifest, if applicable, and media manifests) for this output group.\n\nVARIANT_MANIFESTS_AND_SEGMENTS: Generates media manifests for this output group, but not a master manifest.\n\nSEGMENTS_ONLY: Does not generate any manifests for this output group."
         },
         "ProgramDateTime": {
           "shape": "HlsProgramDateTime",
@@ -6482,7 +6709,7 @@
         "TsFileMode": {
           "shape": "HlsTsFileMode",
           "locationName": "tsFileMode",
-          "documentation": "SEGMENTEDFILES: Emit the program as segments - multiple .ts media files.\n\nSINGLEFILE: Applies only if Mode field is VOD. Emit the program as a single .ts media file. The media manifest includes #EXT-X-BYTERANGE tags to index segments for playback. A typical use for this value is when sending the output to AWS Elemental MediaConvert, which can accept only a single media file. Playback while the channel is running is not guaranteed due to HTTP server caching."
+          "documentation": "SEGMENTED_FILES: Emit the program as segments - multiple .ts media files.\n\nSINGLE_FILE: Applies only if Mode field is VOD. Emit the program as a single .ts media file. The media manifest includes #EXT-X-BYTERANGE tags to index segments for playback. A typical use for this value is when sending the output to AWS Elemental MediaConvert, which can accept only a single media file. Playback while the channel is running is not guaranteed due to HTTP server caching."
         }
       },
       "documentation": "Hls Group Settings",
@@ -6822,6 +7049,11 @@
           "locationName": "inputClass",
           "documentation": "STANDARD - MediaLive expects two sources to be connected to this input. If the channel is also STANDARD, both sources will be ingested. If the channel is SINGLE_PIPELINE, only the first source will be ingested; the second source will always be ignored, even if the first source fails.\nSINGLE_PIPELINE - You can connect only one source to this input. If the ChannelClass is also  SINGLE_PIPELINE, this value is valid. If the ChannelClass is STANDARD, this value is not valid because the channel requires two sources in the input.\n"
         },
+        "InputDevices": {
+          "shape": "__listOfInputDeviceSettings",
+          "locationName": "inputDevices",
+          "documentation": "Settings for the input devices."
+        },
         "InputSourceType": {
           "shape": "InputSourceType",
           "locationName": "inputSourceType",
@@ -7022,6 +7254,233 @@
         }
       },
       "documentation": "The properties for a VPC type input destination."
+    },
+    "InputDeviceActiveInput": {
+      "type": "string",
+      "documentation": "The source at the input device that is currently active.",
+      "enum": [
+        "HDMI",
+        "SDI"
+      ]
+    },
+    "InputDeviceConfigurableSettings": {
+      "type": "structure",
+      "members": {
+        "ConfiguredInput": {
+          "shape": "InputDeviceConfiguredInput",
+          "locationName": "configuredInput",
+          "documentation": "The input source that you want to use. If the device has a source connected to only one of its input ports, or if you don't care which source the device sends, specify Auto. If the device has sources connected to both its input ports, and you want to use a specific source, specify the source."
+        },
+        "MaxBitrate": {
+          "shape": "__integer",
+          "locationName": "maxBitrate",
+          "documentation": "The maximum bitrate in bits per second. Set a value here to throttle the bitrate of the source video."
+        }
+      },
+      "documentation": "Configurable settings for the input device."
+    },
+    "InputDeviceConfiguredInput": {
+      "type": "string",
+      "documentation": "The source to activate (use) from the input device.",
+      "enum": [
+        "AUTO",
+        "HDMI",
+        "SDI"
+      ]
+    },
+    "InputDeviceConnectionState": {
+      "type": "string",
+      "documentation": "The state of the connection between the input device and AWS.",
+      "enum": [
+        "DISCONNECTED",
+        "CONNECTED"
+      ]
+    },
+    "InputDeviceHdSettings": {
+      "type": "structure",
+      "members": {
+        "ActiveInput": {
+          "shape": "InputDeviceActiveInput",
+          "locationName": "activeInput",
+          "documentation": "If you specified Auto as the configured input, specifies which of the sources is currently active (SDI or HDMI)."
+        },
+        "ConfiguredInput": {
+          "shape": "InputDeviceConfiguredInput",
+          "locationName": "configuredInput",
+          "documentation": "The source at the input device that is currently active. You can specify this source."
+        },
+        "DeviceState": {
+          "shape": "InputDeviceState",
+          "locationName": "deviceState",
+          "documentation": "The state of the input device."
+        },
+        "Framerate": {
+          "shape": "__double",
+          "locationName": "framerate",
+          "documentation": "The frame rate of the video source."
+        },
+        "Height": {
+          "shape": "__integer",
+          "locationName": "height",
+          "documentation": "The height of the video source, in pixels."
+        },
+        "MaxBitrate": {
+          "shape": "__integer",
+          "locationName": "maxBitrate",
+          "documentation": "The current maximum bitrate for ingesting this source, in bits per second. You can specify this maximum."
+        },
+        "ScanType": {
+          "shape": "InputDeviceScanType",
+          "locationName": "scanType",
+          "documentation": "The scan type of the video source."
+        },
+        "Width": {
+          "shape": "__integer",
+          "locationName": "width",
+          "documentation": "The width of the video source, in pixels."
+        }
+      },
+      "documentation": "Settings that describe the active source from the input device, and the video characteristics of that source."
+    },
+    "InputDeviceIpScheme": {
+      "type": "string",
+      "documentation": "Specifies whether the input device has been configured (outside of MediaLive) to use a dynamic IP address assignment (DHCP) or a static IP address.",
+      "enum": [
+        "STATIC",
+        "DHCP"
+      ]
+    },
+    "InputDeviceNetworkSettings": {
+      "type": "structure",
+      "members": {
+        "DnsAddresses": {
+          "shape": "__listOf__string",
+          "locationName": "dnsAddresses",
+          "documentation": "The DNS addresses of the input device."
+        },
+        "Gateway": {
+          "shape": "__string",
+          "locationName": "gateway",
+          "documentation": "The network gateway IP address."
+        },
+        "IpAddress": {
+          "shape": "__string",
+          "locationName": "ipAddress",
+          "documentation": "The IP address of the input device."
+        },
+        "IpScheme": {
+          "shape": "InputDeviceIpScheme",
+          "locationName": "ipScheme",
+          "documentation": "Specifies whether the input device has been configured (outside of MediaLive) to use a dynamic IP address assignment (DHCP) or a static IP address."
+        },
+        "SubnetMask": {
+          "shape": "__string",
+          "locationName": "subnetMask",
+          "documentation": "The subnet mask of the input device."
+        }
+      },
+      "documentation": "The network settings for the input device."
+    },
+    "InputDeviceRequest": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "__string",
+          "locationName": "id",
+          "documentation": "The unique ID for the device."
+        }
+      },
+      "documentation": "Settings for an input device."
+    },
+    "InputDeviceScanType": {
+      "type": "string",
+      "documentation": "The scan type of the video source.",
+      "enum": [
+        "INTERLACED",
+        "PROGRESSIVE"
+      ]
+    },
+    "InputDeviceSettings": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "__string",
+          "locationName": "id",
+          "documentation": "The unique ID for the device."
+        }
+      },
+      "documentation": "Settings for an input device."
+    },
+    "InputDeviceState": {
+      "type": "string",
+      "documentation": "The state of the input device.",
+      "enum": [
+        "IDLE",
+        "STREAMING"
+      ]
+    },
+    "InputDeviceSummary": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "__string",
+          "locationName": "arn",
+          "documentation": "The unique ARN of the input device."
+        },
+        "ConnectionState": {
+          "shape": "InputDeviceConnectionState",
+          "locationName": "connectionState",
+          "documentation": "The state of the connection between the input device and AWS."
+        },
+        "DeviceSettingsSyncState": {
+          "shape": "DeviceSettingsSyncState",
+          "locationName": "deviceSettingsSyncState",
+          "documentation": "The status of the action to synchronize the device configuration. If you change the configuration of the input device (for example, the maximum bitrate), MediaLive sends the new data to the device. The device might not update itself immediately. SYNCED means the device has updated its configuration. SYNCING means that it has not updated its configuration."
+        },
+        "HdDeviceSettings": {
+          "shape": "InputDeviceHdSettings",
+          "locationName": "hdDeviceSettings",
+          "documentation": "Settings that describe an input device that is type HD."
+        },
+        "Id": {
+          "shape": "__string",
+          "locationName": "id",
+          "documentation": "The unique ID of the input device."
+        },
+        "MacAddress": {
+          "shape": "__string",
+          "locationName": "macAddress",
+          "documentation": "The network MAC address of the input device."
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "A name that you specify for the input device."
+        },
+        "NetworkSettings": {
+          "shape": "InputDeviceNetworkSettings",
+          "locationName": "networkSettings",
+          "documentation": "Network settings for the input device."
+        },
+        "SerialNumber": {
+          "shape": "__string",
+          "locationName": "serialNumber",
+          "documentation": "The unique serial number of the input device."
+        },
+        "Type": {
+          "shape": "InputDeviceType",
+          "locationName": "type",
+          "documentation": "The type of the input device."
+        }
+      },
+      "documentation": "Details of the input device."
+    },
+    "InputDeviceType": {
+      "type": "string",
+      "documentation": "The type of the input device. For an AWS Elemental Link device that outputs resolutions up to 1080, choose \"HD\".",
+      "enum": [
+        "HD"
+      ]
     },
     "InputFilter": {
       "type": "string",
@@ -7238,6 +7697,11 @@
           "locationName": "networkInputSettings",
           "documentation": "Input settings."
         },
+        "Smpte2038DataPreference": {
+          "shape": "Smpte2038DataPreference",
+          "locationName": "smpte2038DataPreference",
+          "documentation": "Specifies whether to extract applicable ancillary data from a SMPTE-2038 source in this input. Applicable data types are captions, timecode, AFD, and SCTE-104 messages.\n- PREFER: Extract from SMPTE-2038 if present in this input, otherwise extract from another source (if any).\n- IGNORE: Never extract any ancillary data from SMPTE-2038."
+        },
         "SourceEndBehavior": {
           "shape": "InputSourceEndBehavior",
           "locationName": "sourceEndBehavior",
@@ -7382,7 +7846,8 @@
         "RTMP_PULL",
         "URL_PULL",
         "MP4_FILE",
-        "MEDIACONNECT"
+        "MEDIACONNECT",
+        "INPUT_DEVICE"
       ],
       "documentation": "Placeholder documentation for InputType"
     },
@@ -7474,6 +7939,38 @@
         }
       },
       "documentation": "Placeholder documentation for ListChannelsResponse"
+    },
+    "ListInputDevicesRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "shape": "MaxResults",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      },
+      "documentation": "Placeholder documentation for ListInputDevicesRequest"
+    },
+    "ListInputDevicesResponse": {
+      "type": "structure",
+      "members": {
+        "InputDevices": {
+          "shape": "__listOfInputDeviceSummary",
+          "locationName": "inputDevices",
+          "documentation": "The list of input devices."
+        },
+        "NextToken": {
+          "shape": "__string",
+          "locationName": "nextToken",
+          "documentation": "A token to get additional list results."
+        }
+      },
+      "documentation": "Placeholder documentation for ListInputDevicesResponse"
     },
     "ListInputSecurityGroupsRequest": {
       "type": "structure",
@@ -8184,7 +8681,7 @@
         "SegmentationTime": {
           "shape": "__doubleMin1",
           "locationName": "segmentationTime",
-          "documentation": "The length in seconds of each segment. Required unless markers is set to None_."
+          "documentation": "The length in seconds of each segment. Required unless markers is set to _none_."
         },
         "TimedMetadataBehavior": {
           "shape": "M2tsTimedMetadataBehavior",
@@ -8433,7 +8930,7 @@
         "AcquisitionPointId": {
           "shape": "__string",
           "locationName": "acquisitionPointId",
-          "documentation": "The value of the \"Acquisition Point Identity\" element used in each message placed in the sparse track.  Only enabled if sparseTrackType is not \"none\"."
+          "documentation": "The ID to include in each message in the sparse track. Ignored if sparseTrackType is NONE."
         },
         "AudioOnlyTimecodeControl": {
           "shape": "SmoothGroupAudioOnlyTimecodeControl",
@@ -8508,7 +9005,7 @@
         "SparseTrackType": {
           "shape": "SmoothGroupSparseTrackType",
           "locationName": "sparseTrackType",
-          "documentation": "If set to scte35, use incoming SCTE-35 messages to generate a sparse track in this group of MS-Smooth outputs. scte35WithoutSegmentation is the same as scte35, except EML will not start a new segment at a SCTE-35 marker. It will still encode an IDR frame at a SCTE-35 marker."
+          "documentation": "Identifies the type of data to place in the sparse track:\n- SCTE35: Insert SCTE-35 messages from the source content. With each message, insert an IDR frame to start a new segment.\n- SCTE35_WITHOUT_SEGMENTATION: Insert SCTE-35 messages from the source content. With each message, insert an IDR frame but don't start a new segment.\n- NONE: Don't generate a sparse track for any outputs in this output group."
         },
         "StreamManifestBehavior": {
           "shape": "SmoothGroupStreamManifestBehavior",
@@ -10236,6 +10733,14 @@
         "USE_EVENT_START_DATE"
       ]
     },
+    "Smpte2038DataPreference": {
+      "type": "string",
+      "documentation": "Smpte2038 Data Preference",
+      "enum": [
+        "IGNORE",
+        "PREFER"
+      ]
+    },
     "SmpteTtDestinationSettings": {
       "type": "structure",
       "members": {},
@@ -10749,12 +11254,12 @@
         "PostFilterSharpening": {
           "shape": "TemporalFilterPostFilterSharpening",
           "locationName": "postFilterSharpening",
-          "documentation": "If set to \"ENABLED,\" applies post-filter sharpening to improve visual quality. This is most beneficial when using a noisy or compressed input source and low output bitrates."
+          "documentation": "If you enable this filter, the results are the following:\n- If the source content is noisy (it contains excessive digital artifacts), the filter cleans up the source.\n- If the source content is already clean, the filter tends to decrease the bitrate, especially when the rate control mode is QVBR."
         },
         "Strength": {
           "shape": "TemporalFilterStrength",
           "locationName": "strength",
-          "documentation": "Filter strength. A higher value produces stronger filtering."
+          "documentation": "Choose a filter strength. We recommend a strength of 1 or 2. A higher strength might take out good information, resulting in an image that is overly soft."
         }
       },
       "documentation": "Temporal Filter Settings"
@@ -10765,13 +11270,6 @@
       "enum": [
         "AUTO",
         "STRENGTH_1",
-        "STRENGTH_10",
-        "STRENGTH_11",
-        "STRENGTH_12",
-        "STRENGTH_13",
-        "STRENGTH_14",
-        "STRENGTH_15",
-        "STRENGTH_16",
         "STRENGTH_2",
         "STRENGTH_3",
         "STRENGTH_4",
@@ -10779,7 +11277,14 @@
         "STRENGTH_6",
         "STRENGTH_7",
         "STRENGTH_8",
-        "STRENGTH_9"
+        "STRENGTH_9",
+        "STRENGTH_10",
+        "STRENGTH_11",
+        "STRENGTH_12",
+        "STRENGTH_13",
+        "STRENGTH_14",
+        "STRENGTH_15",
+        "STRENGTH_16"
       ]
     },
     "TimecodeConfig": {
@@ -10993,6 +11498,87 @@
       },
       "documentation": "Placeholder documentation for UpdateChannelResponse"
     },
+    "UpdateInputDeviceRequest": {
+      "type": "structure",
+      "members": {
+        "HdDeviceSettings": {
+          "shape": "InputDeviceConfigurableSettings",
+          "locationName": "hdDeviceSettings",
+          "documentation": "The settings that you want to apply to the input device."
+        },
+        "InputDeviceId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "inputDeviceId",
+          "documentation": "The unique ID of the input device. For example, hd-123456789abcdef."
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "The name that you assigned to this input device (not the unique ID)."
+        }
+      },
+      "documentation": "A request to update an input device.",
+      "required": [
+        "InputDeviceId"
+      ]
+    },
+    "UpdateInputDeviceResponse": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "__string",
+          "locationName": "arn",
+          "documentation": "The unique ARN of the input device."
+        },
+        "ConnectionState": {
+          "shape": "InputDeviceConnectionState",
+          "locationName": "connectionState",
+          "documentation": "The state of the connection between the input device and AWS."
+        },
+        "DeviceSettingsSyncState": {
+          "shape": "DeviceSettingsSyncState",
+          "locationName": "deviceSettingsSyncState",
+          "documentation": "The status of the action to synchronize the device configuration. If you change the configuration of the input device (for example, the maximum bitrate), MediaLive sends the new data to the device. The device might not update itself immediately. SYNCED means the device has updated its configuration. SYNCING means that it has not updated its configuration."
+        },
+        "HdDeviceSettings": {
+          "shape": "InputDeviceHdSettings",
+          "locationName": "hdDeviceSettings",
+          "documentation": "Settings that describe an input device that is type HD."
+        },
+        "Id": {
+          "shape": "__string",
+          "locationName": "id",
+          "documentation": "The unique ID of the input device."
+        },
+        "MacAddress": {
+          "shape": "__string",
+          "locationName": "macAddress",
+          "documentation": "The network MAC address of the input device."
+        },
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "A name that you specify for the input device."
+        },
+        "NetworkSettings": {
+          "shape": "InputDeviceNetworkSettings",
+          "locationName": "networkSettings",
+          "documentation": "The network settings for the input device."
+        },
+        "SerialNumber": {
+          "shape": "__string",
+          "locationName": "serialNumber",
+          "documentation": "The unique serial number of the input device."
+        },
+        "Type": {
+          "shape": "InputDeviceType",
+          "locationName": "type",
+          "documentation": "The type of the input device."
+        }
+      },
+      "documentation": "Placeholder documentation for UpdateInputDeviceResponse"
+    },
     "UpdateInputRequest": {
       "type": "structure",
       "members": {
@@ -11000,6 +11586,11 @@
           "shape": "__listOfInputDestinationRequest",
           "locationName": "destinations",
           "documentation": "Destination settings for PUSH type inputs."
+        },
+        "InputDevices": {
+          "shape": "__listOfInputDeviceRequest",
+          "locationName": "inputDevices",
+          "documentation": "Settings for the devices."
         },
         "InputId": {
           "shape": "__string",
@@ -11226,12 +11817,12 @@
         "RespondToAfd": {
           "shape": "VideoDescriptionRespondToAfd",
           "locationName": "respondToAfd",
-          "documentation": "Indicates how to respond to the AFD values in the input stream. RESPOND causes input video to be clipped, depending on the AFD value, input display aspect ratio, and output display aspect ratio, and (except for FRAMECAPTURE codec) includes the values in the output. PASSTHROUGH (does not apply to FRAMECAPTURE codec) ignores the AFD values and includes the values in the output, so input video is not clipped. NONE ignores the AFD values and does not include the values through to the output, so input video is not clipped."
+          "documentation": "Indicates how to respond to the AFD values in the input stream. RESPOND causes input video to be clipped, depending on the AFD value, input display aspect ratio, and output display aspect ratio, and (except for FRAME_CAPTURE codec) includes the values in the output. PASSTHROUGH (does not apply to FRAME_CAPTURE codec) ignores the AFD values and includes the values in the output, so input video is not clipped. NONE ignores the AFD values and does not include the values through to the output, so input video is not clipped."
         },
         "ScalingBehavior": {
           "shape": "VideoDescriptionScalingBehavior",
           "locationName": "scalingBehavior",
-          "documentation": "STRETCHTOOUTPUT configures the output position to stretch the video to the specified output resolution (height and width). This option will override any position value. DEFAULT may insert black boxes (pillar boxes or letter boxes) around the video to provide the specified output resolution."
+          "documentation": "STRETCH_TO_OUTPUT configures the output position to stretch the video to the specified output resolution (height and width). This option will override any position value. DEFAULT may insert black boxes (pillar boxes or letter boxes) around the video to provide the specified output resolution."
         },
         "Sharpness": {
           "shape": "__integerMin0Max100",
@@ -11752,6 +12343,27 @@
         "shape": "InputDestinationRequest"
       },
       "documentation": "Placeholder documentation for __listOfInputDestinationRequest"
+    },
+    "__listOfInputDeviceRequest": {
+      "type": "list",
+      "member": {
+        "shape": "InputDeviceRequest"
+      },
+      "documentation": "Placeholder documentation for __listOfInputDeviceRequest"
+    },
+    "__listOfInputDeviceSettings": {
+      "type": "list",
+      "member": {
+        "shape": "InputDeviceSettings"
+      },
+      "documentation": "Placeholder documentation for __listOfInputDeviceSettings"
+    },
+    "__listOfInputDeviceSummary": {
+      "type": "list",
+      "member": {
+        "shape": "InputDeviceSummary"
+      },
+      "documentation": "Placeholder documentation for __listOfInputDeviceSummary"
     },
     "__listOfInputSecurityGroup": {
       "type": "list",

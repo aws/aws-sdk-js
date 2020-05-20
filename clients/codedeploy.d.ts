@@ -29,11 +29,11 @@ declare class CodeDeploy extends Service {
    */
   batchGetApplicationRevisions(callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetApplicationRevisionsOutput) => void): Request<CodeDeploy.Types.BatchGetApplicationRevisionsOutput, AWSError>;
   /**
-   * Gets information about one or more applications. The maximum number of applications that can be returned is 25.
+   * Gets information about one or more applications. The maximum number of applications that can be returned is 100.
    */
   batchGetApplications(params: CodeDeploy.Types.BatchGetApplicationsInput, callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetApplicationsOutput) => void): Request<CodeDeploy.Types.BatchGetApplicationsOutput, AWSError>;
   /**
-   * Gets information about one or more applications. The maximum number of applications that can be returned is 25.
+   * Gets information about one or more applications. The maximum number of applications that can be returned is 100.
    */
   batchGetApplications(callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetApplicationsOutput) => void): Request<CodeDeploy.Types.BatchGetApplicationsOutput, AWSError>;
   /**
@@ -53,11 +53,11 @@ declare class CodeDeploy extends Service {
    */
   batchGetDeploymentInstances(callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetDeploymentInstancesOutput) => void): Request<CodeDeploy.Types.BatchGetDeploymentInstancesOutput, AWSError>;
   /**
-   *  Returns an array of one or more targets associated with a deployment. This method works with all compute types and should be used instead of the deprecated BatchGetDeploymentInstances. The maximum number of targets that can be returned is 25.  The type of targets returned depends on the deployment's compute platform:     EC2/On-premises: Information about EC2 instance targets.     AWS Lambda: Information about Lambda functions targets.     Amazon ECS: Information about Amazon ECS service targets.   
+   *  Returns an array of one or more targets associated with a deployment. This method works with all compute types and should be used instead of the deprecated BatchGetDeploymentInstances. The maximum number of targets that can be returned is 25.  The type of targets returned depends on the deployment's compute platform or deployment method:     EC2/On-premises: Information about EC2 instance targets.     AWS Lambda: Information about Lambda functions targets.     Amazon ECS: Information about Amazon ECS service targets.     CloudFormation: Information about targets of blue/green deployments initiated by a CloudFormation stack update.  
    */
   batchGetDeploymentTargets(params: CodeDeploy.Types.BatchGetDeploymentTargetsInput, callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetDeploymentTargetsOutput) => void): Request<CodeDeploy.Types.BatchGetDeploymentTargetsOutput, AWSError>;
   /**
-   *  Returns an array of one or more targets associated with a deployment. This method works with all compute types and should be used instead of the deprecated BatchGetDeploymentInstances. The maximum number of targets that can be returned is 25.  The type of targets returned depends on the deployment's compute platform:     EC2/On-premises: Information about EC2 instance targets.     AWS Lambda: Information about Lambda functions targets.     Amazon ECS: Information about Amazon ECS service targets.   
+   *  Returns an array of one or more targets associated with a deployment. This method works with all compute types and should be used instead of the deprecated BatchGetDeploymentInstances. The maximum number of targets that can be returned is 25.  The type of targets returned depends on the deployment's compute platform or deployment method:     EC2/On-premises: Information about EC2 instance targets.     AWS Lambda: Information about Lambda functions targets.     Amazon ECS: Information about Amazon ECS service targets.     CloudFormation: Information about targets of blue/green deployments initiated by a CloudFormation stack update.  
    */
   batchGetDeploymentTargets(callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetDeploymentTargetsOutput) => void): Request<CodeDeploy.Types.BatchGetDeploymentTargetsOutput, AWSError>;
   /**
@@ -148,6 +148,14 @@ declare class CodeDeploy extends Service {
    * Deletes a GitHub account connection.
    */
   deleteGitHubAccountToken(callback?: (err: AWSError, data: CodeDeploy.Types.DeleteGitHubAccountTokenOutput) => void): Request<CodeDeploy.Types.DeleteGitHubAccountTokenOutput, AWSError>;
+  /**
+   * Deletes resources linked to an external ID.
+   */
+  deleteResourcesByExternalId(params: CodeDeploy.Types.DeleteResourcesByExternalIdInput, callback?: (err: AWSError, data: CodeDeploy.Types.DeleteResourcesByExternalIdOutput) => void): Request<CodeDeploy.Types.DeleteResourcesByExternalIdOutput, AWSError>;
+  /**
+   * Deletes resources linked to an external ID.
+   */
+  deleteResourcesByExternalId(callback?: (err: AWSError, data: CodeDeploy.Types.DeleteResourcesByExternalIdOutput) => void): Request<CodeDeploy.Types.DeleteResourcesByExternalIdOutput, AWSError>;
   /**
    * Deregisters an on-premises instance.
    */
@@ -293,19 +301,19 @@ declare class CodeDeploy extends Service {
    */
   listOnPremisesInstances(callback?: (err: AWSError, data: CodeDeploy.Types.ListOnPremisesInstancesOutput) => void): Request<CodeDeploy.Types.ListOnPremisesInstancesOutput, AWSError>;
   /**
-   *  Returns a list of tags for the resource identified by a specified ARN. Tags are used to organize and categorize your CodeDeploy resources. 
+   *  Returns a list of tags for the resource identified by a specified Amazon Resource Name (ARN). Tags are used to organize and categorize your CodeDeploy resources. 
    */
   listTagsForResource(params: CodeDeploy.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: CodeDeploy.Types.ListTagsForResourceOutput) => void): Request<CodeDeploy.Types.ListTagsForResourceOutput, AWSError>;
   /**
-   *  Returns a list of tags for the resource identified by a specified ARN. Tags are used to organize and categorize your CodeDeploy resources. 
+   *  Returns a list of tags for the resource identified by a specified Amazon Resource Name (ARN). Tags are used to organize and categorize your CodeDeploy resources. 
    */
   listTagsForResource(callback?: (err: AWSError, data: CodeDeploy.Types.ListTagsForResourceOutput) => void): Request<CodeDeploy.Types.ListTagsForResourceOutput, AWSError>;
   /**
-   *  Sets the result of a Lambda validation function. The function validates one or both lifecycle events (BeforeAllowTraffic and AfterAllowTraffic) and returns Succeeded or Failed. 
+   *  Sets the result of a Lambda validation function. The function validates lifecycle hooks during a deployment that uses the AWS Lambda or Amazon ECS compute platform. For AWS Lambda deployments, the available lifecycle hooks are BeforeAllowTraffic and AfterAllowTraffic. For Amazon ECS deployments, the available lifecycle hooks are BeforeInstall, AfterInstall, AfterAllowTestTraffic, BeforeAllowTraffic, and AfterAllowTraffic. Lambda validation functions return Succeeded or Failed. For more information, see AppSpec 'hooks' Section for an AWS Lambda Deployment  and AppSpec 'hooks' Section for an Amazon ECS Deployment.
    */
   putLifecycleEventHookExecutionStatus(params: CodeDeploy.Types.PutLifecycleEventHookExecutionStatusInput, callback?: (err: AWSError, data: CodeDeploy.Types.PutLifecycleEventHookExecutionStatusOutput) => void): Request<CodeDeploy.Types.PutLifecycleEventHookExecutionStatusOutput, AWSError>;
   /**
-   *  Sets the result of a Lambda validation function. The function validates one or both lifecycle events (BeforeAllowTraffic and AfterAllowTraffic) and returns Succeeded or Failed. 
+   *  Sets the result of a Lambda validation function. The function validates lifecycle hooks during a deployment that uses the AWS Lambda or Amazon ECS compute platform. For AWS Lambda deployments, the available lifecycle hooks are BeforeAllowTraffic and AfterAllowTraffic. For Amazon ECS deployments, the available lifecycle hooks are BeforeInstall, AfterInstall, AfterAllowTestTraffic, BeforeAllowTraffic, and AfterAllowTraffic. Lambda validation functions return Succeeded or Failed. For more information, see AppSpec 'hooks' Section for an AWS Lambda Deployment  and AppSpec 'hooks' Section for an Amazon ECS Deployment.
    */
   putLifecycleEventHookExecutionStatus(callback?: (err: AWSError, data: CodeDeploy.Types.PutLifecycleEventHookExecutionStatusOutput) => void): Request<CodeDeploy.Types.PutLifecycleEventHookExecutionStatusOutput, AWSError>;
   /**
@@ -357,11 +365,11 @@ declare class CodeDeploy extends Service {
    */
   tagResource(callback?: (err: AWSError, data: CodeDeploy.Types.TagResourceOutput) => void): Request<CodeDeploy.Types.TagResourceOutput, AWSError>;
   /**
-   *  Disassociates a resource from a list of tags. The resource is identified by the ResourceArn input parameter. The tags are identfied by the list of keys in the TagKeys input parameter. 
+   *  Disassociates a resource from a list of tags. The resource is identified by the ResourceArn input parameter. The tags are identified by the list of keys in the TagKeys input parameter. 
    */
   untagResource(params: CodeDeploy.Types.UntagResourceInput, callback?: (err: AWSError, data: CodeDeploy.Types.UntagResourceOutput) => void): Request<CodeDeploy.Types.UntagResourceOutput, AWSError>;
   /**
-   *  Disassociates a resource from a list of tags. The resource is identified by the ResourceArn input parameter. The tags are identfied by the list of keys in the TagKeys input parameter. 
+   *  Disassociates a resource from a list of tags. The resource is identified by the ResourceArn input parameter. The tags are identified by the list of keys in the TagKeys input parameter. 
    */
   untagResource(callback?: (err: AWSError, data: CodeDeploy.Types.UntagResourceOutput) => void): Request<CodeDeploy.Types.UntagResourceOutput, AWSError>;
   /**
@@ -413,7 +421,7 @@ declare namespace CodeDeploy {
      */
     enabled?: Boolean;
     /**
-     * Indicates whether a deployment should continue if information about the current state of alarms cannot be retrieved from Amazon CloudWatch. The default value is false.   true: The deployment proceeds even if alarm status information can't be retrieved from Amazon CloudWatch.   false: The deployment stops if alarm status information can't be retrieved from Amazon CloudWatch.  
+     * Indicates whether a deployment should continue if information about the current state of alarms cannot be retrieved from Amazon CloudWatch. The default value is false.    true: The deployment proceeds even if alarm status information can't be retrieved from Amazon CloudWatch.    false: The deployment stops if alarm status information can't be retrieved from Amazon CloudWatch.  
      */
     ignorePollAlarmFailure?: Boolean;
     /**
@@ -517,7 +525,7 @@ declare namespace CodeDeploy {
   }
   export interface BatchGetApplicationsInput {
     /**
-     * A list of application names separated by spaces. The maximum number of application names you can specify is 25.
+     * A list of application names separated by spaces. The maximum number of application names you can specify is 100.
      */
     applicationNames: ApplicationsList;
   }
@@ -573,13 +581,13 @@ declare namespace CodeDeploy {
      */
     deploymentId?: DeploymentId;
     /**
-     *  The unique IDs of the deployment targets. The compute platform of the deployment determines the type of the targets and their formats. The maximum number of deployment target IDs you can specify is 25.    For deployments that use the EC2/On-premises compute platform, the target IDs are EC2 or on-premises instances IDs, and their target type is instanceTarget.     For deployments that use the AWS Lambda compute platform, the target IDs are the names of Lambda functions, and their target type is instanceTarget.     For deployments that use the Amazon ECS compute platform, the target IDs are pairs of Amazon ECS clusters and services specified using the format &lt;clustername&gt;:&lt;servicename&gt;. Their target type is ecsTarget.   
+     *  The unique IDs of the deployment targets. The compute platform of the deployment determines the type of the targets and their formats. The maximum number of deployment target IDs you can specify is 25.    For deployments that use the EC2/On-premises compute platform, the target IDs are EC2 or on-premises instances IDs, and their target type is instanceTarget.     For deployments that use the AWS Lambda compute platform, the target IDs are the names of Lambda functions, and their target type is instanceTarget.     For deployments that use the Amazon ECS compute platform, the target IDs are pairs of Amazon ECS clusters and services specified using the format &lt;clustername&gt;:&lt;servicename&gt;. Their target type is ecsTarget.     For deployments that are deployed with AWS CloudFormation, the target IDs are CloudFormation stack IDs. Their target type is cloudFormationTarget.   
      */
     targetIds?: TargetIdList;
   }
   export interface BatchGetDeploymentTargetsOutput {
     /**
-     *  A list of target objects for a deployment. Each target object contains details about the target, such as its status and lifecycle events. The type of the target objects depends on the deployment' compute platform.     EC2/On-premises: Each target object is an EC2 or on-premises instance.     AWS Lambda: The target object is a specific version of an AWS Lambda function.     Amazon ECS: The target object is an Amazon ECS service.   
+     *  A list of target objects for a deployment. Each target object contains details about the target, such as its status and lifecycle events. The type of the target objects depends on the deployment' compute platform.     EC2/On-premises: Each target object is an EC2 or on-premises instance.     AWS Lambda: The target object is a specific version of an AWS Lambda function.     Amazon ECS: The target object is an Amazon ECS service.     CloudFormation: The target object is an AWS CloudFormation blue/green deployment.   
      */
     deploymentTargets?: DeploymentTargetList;
   }
@@ -623,7 +631,7 @@ declare namespace CodeDeploy {
   }
   export interface BlueInstanceTerminationOption {
     /**
-     * The action to take on instances in the original environment after a successful blue/green deployment.   TERMINATE: Instances are terminated after a specified wait time.   KEEP_ALIVE: Instances are left running after they are deregistered from the load balancer and removed from the deployment group.  
+     * The action to take on instances in the original environment after a successful blue/green deployment.    TERMINATE: Instances are terminated after a specified wait time.    KEEP_ALIVE: Instances are left running after they are deregistered from the load balancer and removed from the deployment group.  
      */
     action?: InstanceAction;
     /**
@@ -633,6 +641,37 @@ declare namespace CodeDeploy {
   }
   export type Boolean = boolean;
   export type BundleType = "tar"|"tgz"|"zip"|"YAML"|"JSON"|string;
+  export type CloudFormationResourceType = string;
+  export interface CloudFormationTarget {
+    /**
+     * The unique ID of an AWS CloudFormation blue/green deployment.
+     */
+    deploymentId?: DeploymentId;
+    /**
+     *  The unique ID of a deployment target that has a type of CloudFormationTarget. 
+     */
+    targetId?: TargetId;
+    /**
+     *  The date and time when the target application was updated by an AWS CloudFormation blue/green deployment. 
+     */
+    lastUpdatedAt?: Time;
+    /**
+     *  The lifecycle events of the AWS CloudFormation blue/green deployment to this target application. 
+     */
+    lifecycleEvents?: LifecycleEventList;
+    /**
+     *  The status of an AWS CloudFormation blue/green deployment's target application. 
+     */
+    status?: TargetStatus;
+    /**
+     * The resource type for the AWS CloudFormation blue/green deployment.
+     */
+    resourceType?: CloudFormationResourceType;
+    /**
+     * The percentage of production traffic that the target version of an AWS CloudFormation blue/green deployment receives.
+     */
+    targetVersionWeight?: TrafficWeight;
+  }
   export type CommitId = string;
   export type ComputePlatform = "Server"|"Lambda"|"ECS"|string;
   export interface ContinueDeploymentInput {
@@ -641,7 +680,7 @@ declare namespace CodeDeploy {
      */
     deploymentId?: DeploymentId;
     /**
-     *  The status of the deployment's waiting period. READY_WAIT indicates the deployment is ready to start shifting traffic. TERMINATION_WAIT indicates the traffic is shifted, but the original target is not terminated. 
+     *  The status of the deployment's waiting period. READY_WAIT indicates that the deployment is ready to start shifting traffic. TERMINATION_WAIT indicates that the traffic is shifted, but the original target is not terminated. 
      */
     deploymentWaitType?: DeploymentWaitType;
   }
@@ -671,7 +710,7 @@ declare namespace CodeDeploy {
      */
     deploymentConfigName: DeploymentConfigName;
     /**
-     * The minimum number of healthy instances that should be available at any time during the deployment. There are two parameters expected in the input: type and value. The type parameter takes either of the following values:   HOST_COUNT: The value parameter represents the minimum number of healthy instances as an absolute value.   FLEET_PERCENT: The value parameter represents the minimum number of healthy instances as a percentage of the total number of instances in the deployment. If you specify FLEET_PERCENT, at the start of the deployment, AWS CodeDeploy converts the percentage to the equivalent number of instance and rounds up fractional instances.   The value parameter takes an integer. For example, to set a minimum of 95% healthy instance, specify a type of FLEET_PERCENT and a value of 95.
+     * The minimum number of healthy instances that should be available at any time during the deployment. There are two parameters expected in the input: type and value. The type parameter takes either of the following values:   HOST_COUNT: The value parameter represents the minimum number of healthy instances as an absolute value.   FLEET_PERCENT: The value parameter represents the minimum number of healthy instances as a percentage of the total number of instances in the deployment. If you specify FLEET_PERCENT, at the start of the deployment, AWS CodeDeploy converts the percentage to the equivalent number of instances and rounds up fractional instances.   The value parameter takes an integer. For example, to set a minimum of 95% healthy instance, specify a type of FLEET_PERCENT and a value of 95.
      */
     minimumHealthyHosts?: MinimumHealthyHosts;
     /**
@@ -699,7 +738,7 @@ declare namespace CodeDeploy {
      */
     deploymentGroupName: DeploymentGroupName;
     /**
-     * If specified, the deployment configuration name can be either one of the predefined configurations provided with AWS CodeDeploy or a custom deployment configuration that you create by calling the create deployment configuration operation. CodeDeployDefault.OneAtATime is the default deployment configuration. It is used if a configuration isn't specified for the deployment or deployment group. For more information about the predefined deployment configurations in AWS CodeDeploy, see Working with Deployment Groups in AWS CodeDeploy in the AWS CodeDeploy User Guide.
+     * If specified, the deployment configuration name can be either one of the predefined configurations provided with AWS CodeDeploy or a custom deployment configuration that you create by calling the create deployment configuration operation.  CodeDeployDefault.OneAtATime is the default deployment configuration. It is used if a configuration isn't specified for the deployment or deployment group. For more information about the predefined deployment configurations in AWS CodeDeploy, see Working with Deployment Configurations in CodeDeploy in the AWS CodeDeploy User Guide.
      */
     deploymentConfigName?: DeploymentConfigName;
     /**
@@ -715,7 +754,7 @@ declare namespace CodeDeploy {
      */
     autoScalingGroups?: AutoScalingGroupNameList;
     /**
-     * A service role ARN that allows AWS CodeDeploy to act on the user's behalf when interacting with AWS services.
+     * A service role Amazon Resource Name (ARN) that allows AWS CodeDeploy to act on the user's behalf when interacting with AWS services.
      */
     serviceRoleArn: Role;
     /**
@@ -853,6 +892,14 @@ declare namespace CodeDeploy {
      */
     tokenName?: GitHubAccountTokenName;
   }
+  export interface DeleteResourcesByExternalIdInput {
+    /**
+     * The unique ID of an external resource (for example, a CloudFormation stack ID) that is linked to one or more CodeDeploy resources.
+     */
+    externalId?: ExternalId;
+  }
+  export interface DeleteResourcesByExternalIdOutput {
+  }
   export type DeploymentConfigId = string;
   export interface DeploymentConfigInfo {
     /**
@@ -876,13 +923,13 @@ declare namespace CodeDeploy {
      */
     computePlatform?: ComputePlatform;
     /**
-     * The configuration that specifies how the deployment traffic is routed. Only deployments with a Lambda compute platform can specify this.
+     * The configuration that specifies how the deployment traffic is routed. Used for deployments with a Lambda or ECS compute platform only.
      */
     trafficRoutingConfig?: TrafficRoutingConfig;
   }
   export type DeploymentConfigName = string;
   export type DeploymentConfigsList = DeploymentConfigName[];
-  export type DeploymentCreator = "user"|"autoscaling"|"codeDeployRollback"|string;
+  export type DeploymentCreator = "user"|"autoscaling"|"codeDeployRollback"|"CodeDeploy"|"CloudFormation"|"CloudFormationRollback"|string;
   export type DeploymentGroupId = string;
   export interface DeploymentGroupInfo {
     /**
@@ -1028,7 +1075,7 @@ declare namespace CodeDeploy {
      */
     description?: Description;
     /**
-     * The means by which the deployment was created:   user: A user created the deployment.   autoscaling: Amazon EC2 Auto Scaling created the deployment.   codeDeployRollback: A rollback process created the deployment.  
+     * The means by which the deployment was created:    user: A user created the deployment.    autoscaling: Amazon EC2 Auto Scaling created the deployment.    codeDeployRollback: A rollback process created the deployment.  
      */
     creator?: DeploymentCreator;
     /**
@@ -1072,7 +1119,7 @@ declare namespace CodeDeploy {
      */
     additionalDeploymentStatusInfo?: AdditionalDeploymentStatusInfo;
     /**
-     * Information about how AWS CodeDeploy handles files that already exist in a deployment target location but weren't part of the previous successful deployment.   DISALLOW: The deployment fails. This is also the default behavior if no option is specified.   OVERWRITE: The version of the file from the application revision currently being deployed replaces the version already on the instance.   RETAIN: The version of the file already on the instance is kept and used as part of the new deployment.  
+     * Information about how AWS CodeDeploy handles files that already exist in a deployment target location but weren't part of the previous successful deployment.    DISALLOW: The deployment fails. This is also the default behavior if no option is specified.    OVERWRITE: The version of the file from the application revision currently being deployed replaces the version already on the instance.    RETAIN: The version of the file already on the instance is kept and used as part of the new deployment.  
      */
     fileExistsBehavior?: FileExistsBehavior;
     /**
@@ -1083,6 +1130,10 @@ declare namespace CodeDeploy {
      * The destination platform type for the deployment (Lambda, Server, or ECS).
      */
     computePlatform?: ComputePlatform;
+    /**
+     * The unique ID for an external resource (for example, a CloudFormation stack ID) that is linked to this deployment.
+     */
+    externalId?: ExternalId;
   }
   export type DeploymentOption = "WITH_TRAFFIC_CONTROL"|"WITHOUT_TRAFFIC_CONTROL"|string;
   export interface DeploymentOverview {
@@ -1118,11 +1169,11 @@ declare namespace CodeDeploy {
      */
     actionOnTimeout?: DeploymentReadyAction;
     /**
-     * The number of minutes to wait before the status of a blue/green deployment is changed to Stopped if rerouting is not started manually. Applies only to the STOP_DEPLOYMENT option for actionOnTimeout
+     * The number of minutes to wait before the status of a blue/green deployment is changed to Stopped if rerouting is not started manually. Applies only to the STOP_DEPLOYMENT option for actionOnTimeout.
      */
     waitTimeInMinutes?: Duration;
   }
-  export type DeploymentStatus = "Created"|"Queued"|"InProgress"|"Succeeded"|"Failed"|"Stopped"|"Ready"|string;
+  export type DeploymentStatus = "Created"|"Queued"|"InProgress"|"Baking"|"Succeeded"|"Failed"|"Stopped"|"Ready"|string;
   export type DeploymentStatusList = DeploymentStatus[];
   export type DeploymentStatusMessageList = ErrorMessage[];
   export interface DeploymentStyle {
@@ -1137,7 +1188,7 @@ declare namespace CodeDeploy {
   }
   export interface DeploymentTarget {
     /**
-     *  The deployment type that is specific to the deployment's compute platform. 
+     * The deployment type that is specific to the deployment's compute platform or deployments initiated by a CloudFormation stack update.
      */
     deploymentTargetType?: DeploymentTargetType;
     /**
@@ -1152,9 +1203,10 @@ declare namespace CodeDeploy {
      *  Information about the target for a deployment that uses the Amazon ECS compute platform. 
      */
     ecsTarget?: ECSTarget;
+    cloudFormationTarget?: CloudFormationTarget;
   }
   export type DeploymentTargetList = DeploymentTarget[];
-  export type DeploymentTargetType = "InstanceTarget"|"LambdaTarget"|"ECSTarget"|string;
+  export type DeploymentTargetType = "InstanceTarget"|"LambdaTarget"|"ECSTarget"|"CloudFormationTarget"|string;
   export type DeploymentType = "IN_PLACE"|"BLUE_GREEN"|string;
   export type DeploymentWaitType = "READY_WAIT"|"TERMINATION_WAIT"|string;
   export type DeploymentsInfoList = DeploymentInfo[];
@@ -1195,7 +1247,7 @@ declare namespace CodeDeploy {
      */
     Value?: Value;
     /**
-     * The tag filter type:   KEY_ONLY: Key only.   VALUE_ONLY: Value only.   KEY_AND_VALUE: Key and value.  
+     * The tag filter type:    KEY_ONLY: Key only.    VALUE_ONLY: Value only.    KEY_AND_VALUE: Key and value.  
      */
     Type?: EC2TagFilterType;
   }
@@ -1231,7 +1283,7 @@ declare namespace CodeDeploy {
      */
     targetId?: TargetId;
     /**
-     *  The ARN of the target. 
+     *  The Amazon Resource Name (ARN) of the target. 
      */
     targetArn?: TargetArn;
     /**
@@ -1298,7 +1350,7 @@ declare namespace CodeDeploy {
   export type ELBInfoList = ELBInfo[];
   export type ELBName = string;
   export type ETag = string;
-  export type ErrorCode = "AGENT_ISSUE"|"ALARM_ACTIVE"|"APPLICATION_MISSING"|"AUTOSCALING_VALIDATION_ERROR"|"AUTO_SCALING_CONFIGURATION"|"AUTO_SCALING_IAM_ROLE_PERMISSIONS"|"CODEDEPLOY_RESOURCE_CANNOT_BE_FOUND"|"CUSTOMER_APPLICATION_UNHEALTHY"|"DEPLOYMENT_GROUP_MISSING"|"ECS_UPDATE_ERROR"|"ELASTIC_LOAD_BALANCING_INVALID"|"ELB_INVALID_INSTANCE"|"HEALTH_CONSTRAINTS"|"HEALTH_CONSTRAINTS_INVALID"|"HOOK_EXECUTION_FAILURE"|"IAM_ROLE_MISSING"|"IAM_ROLE_PERMISSIONS"|"INTERNAL_ERROR"|"INVALID_ECS_SERVICE"|"INVALID_LAMBDA_CONFIGURATION"|"INVALID_LAMBDA_FUNCTION"|"INVALID_REVISION"|"MANUAL_STOP"|"MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION"|"MISSING_ELB_INFORMATION"|"MISSING_GITHUB_TOKEN"|"NO_EC2_SUBSCRIPTION"|"NO_INSTANCES"|"OVER_MAX_INSTANCES"|"RESOURCE_LIMIT_EXCEEDED"|"REVISION_MISSING"|"THROTTLED"|"TIMEOUT"|string;
+  export type ErrorCode = "AGENT_ISSUE"|"ALARM_ACTIVE"|"APPLICATION_MISSING"|"AUTOSCALING_VALIDATION_ERROR"|"AUTO_SCALING_CONFIGURATION"|"AUTO_SCALING_IAM_ROLE_PERMISSIONS"|"CODEDEPLOY_RESOURCE_CANNOT_BE_FOUND"|"CUSTOMER_APPLICATION_UNHEALTHY"|"DEPLOYMENT_GROUP_MISSING"|"ECS_UPDATE_ERROR"|"ELASTIC_LOAD_BALANCING_INVALID"|"ELB_INVALID_INSTANCE"|"HEALTH_CONSTRAINTS"|"HEALTH_CONSTRAINTS_INVALID"|"HOOK_EXECUTION_FAILURE"|"IAM_ROLE_MISSING"|"IAM_ROLE_PERMISSIONS"|"INTERNAL_ERROR"|"INVALID_ECS_SERVICE"|"INVALID_LAMBDA_CONFIGURATION"|"INVALID_LAMBDA_FUNCTION"|"INVALID_REVISION"|"MANUAL_STOP"|"MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION"|"MISSING_ELB_INFORMATION"|"MISSING_GITHUB_TOKEN"|"NO_EC2_SUBSCRIPTION"|"NO_INSTANCES"|"OVER_MAX_INSTANCES"|"RESOURCE_LIMIT_EXCEEDED"|"REVISION_MISSING"|"THROTTLED"|"TIMEOUT"|"CLOUDFORMATION_STACK_FAILURE"|string;
   export interface ErrorInformation {
     /**
      * For more information, see Error Codes for AWS CodeDeploy in the AWS CodeDeploy User Guide. The error code:   APPLICATION_MISSING: The application was missing. This error code is most likely raised if the application is deleted after the deployment is created, but before it is started.   DEPLOYMENT_GROUP_MISSING: The deployment group was missing. This error code is most likely raised if the deployment group is deleted after the deployment is created, but before it is started.   HEALTH_CONSTRAINTS: The deployment failed on too many instances to be successfully deployed within the instance health constraints specified.   HEALTH_CONSTRAINTS_INVALID: The revision cannot be successfully deployed within the instance health constraints specified.   IAM_ROLE_MISSING: The service role cannot be accessed.   IAM_ROLE_PERMISSIONS: The service role does not have the correct permissions.   INTERNAL_ERROR: There was an internal error.   NO_EC2_SUBSCRIPTION: The calling account is not subscribed to Amazon EC2.   NO_INSTANCES: No instances were specified, or no instances can be found.   OVER_MAX_INSTANCES: The maximum number of instances was exceeded.   THROTTLED: The operation was throttled because the calling account exceeded the throttling limits of one or more AWS services.   TIMEOUT: The deployment has timed out.   REVISION_MISSING: The revision ID was missing. This error code is most likely raised if the revision is deleted after the deployment is created, but before it is started.  
@@ -1310,6 +1362,7 @@ declare namespace CodeDeploy {
     message?: ErrorMessage;
   }
   export type ErrorMessage = string;
+  export type ExternalId = string;
   export type FileExistsBehavior = "DISALLOW"|"OVERWRITE"|"RETAIN"|string;
   export type FilterValue = string;
   export type FilterValueList = FilterValue[];
@@ -1439,7 +1492,7 @@ declare namespace CodeDeploy {
   }
   export interface GetDeploymentTargetOutput {
     /**
-     *  A deployment target that contains information about a deployment such as its status, lifecyle events, and when it was last updated. It also contains metadata about the deployment target. The deployment target metadata depends on the deployment target's type (instanceTarget, lambdaTarget, or ecsTarget). 
+     *  A deployment target that contains information about a deployment such as its status, lifecycle events, and when it was last updated. It also contains metadata about the deployment target. The deployment target metadata depends on the deployment target's type (instanceTarget, lambdaTarget, or ecsTarget). 
      */
     deploymentTarget?: DeploymentTarget;
   }
@@ -1470,7 +1523,7 @@ declare namespace CodeDeploy {
   export type GreenFleetProvisioningAction = "DISCOVER_EXISTING"|"COPY_AUTO_SCALING_GROUP"|string;
   export interface GreenFleetProvisioningOption {
     /**
-     * The method used to add instances to a replacement environment.   DISCOVER_EXISTING: Use instances that already exist or will be created manually.   COPY_AUTO_SCALING_GROUP: Use settings from a specified Auto Scaling group to define and create instances in a new Auto Scaling group.  
+     * The method used to add instances to a replacement environment.    DISCOVER_EXISTING: Use instances that already exist or will be created manually.    COPY_AUTO_SCALING_GROUP: Use settings from a specified Auto Scaling group to define and create instances in a new Auto Scaling group.  
      */
     action?: GreenFleetProvisioningAction;
   }
@@ -1525,11 +1578,11 @@ declare namespace CodeDeploy {
      */
     instanceId?: InstanceId;
     /**
-     * The deployment status for this instance:   Pending: The deployment is pending for this instance.   In Progress: The deployment is in progress for this instance.   Succeeded: The deployment has succeeded for this instance.   Failed: The deployment has failed for this instance.   Skipped: The deployment has been skipped for this instance.   Unknown: The deployment status is unknown for this instance.  
+     * The deployment status for this instance:    Pending: The deployment is pending for this instance.    In Progress: The deployment is in progress for this instance.    Succeeded: The deployment has succeeded for this instance.    Failed: The deployment has failed for this instance.    Skipped: The deployment has been skipped for this instance.    Unknown: The deployment status is unknown for this instance.  
      */
     status?: InstanceStatus;
     /**
-     * A timestamp that indicaties when the instance information was last updated.
+     * A timestamp that indicates when the instance information was last updated.
      */
     lastUpdatedAt?: Timestamp;
     /**
@@ -1552,7 +1605,7 @@ declare namespace CodeDeploy {
      */
     targetId?: TargetId;
     /**
-     *  The ARN of the target. 
+     *  The Amazon Resource Name (ARN) of the target. 
      */
     targetArn?: TargetArn;
     /**
@@ -1583,7 +1636,7 @@ declare namespace CodeDeploy {
      */
     functionName?: LambdaFunctionName;
     /**
-     *  The alias of a Lambda function. For more information, see Introduction to AWS Lambda Aliases. 
+     *  The alias of a Lambda function. For more information, see AWS Lambda Function Aliases in the AWS Lambda Developer Guide.
      */
     functionAlias?: LambdaFunctionAlias;
     /**
@@ -1610,7 +1663,7 @@ declare namespace CodeDeploy {
      */
     targetId?: TargetId;
     /**
-     *  The ARN of the target. 
+     *  The Amazon Resource Name (ARN) of the target. 
      */
     targetArn?: TargetArn;
     /**
@@ -1682,11 +1735,11 @@ declare namespace CodeDeploy {
      */
     applicationName: ApplicationName;
     /**
-     * The column name to use to sort the list results:   registerTime: Sort by the time the revisions were registered with AWS CodeDeploy.   firstUsedTime: Sort by the time the revisions were first used in a deployment.   lastUsedTime: Sort by the time the revisions were last used in a deployment.    If not specified or set to null, the results are returned in an arbitrary order. 
+     * The column name to use to sort the list results:    registerTime: Sort by the time the revisions were registered with AWS CodeDeploy.    firstUsedTime: Sort by the time the revisions were first used in a deployment.    lastUsedTime: Sort by the time the revisions were last used in a deployment.    If not specified or set to null, the results are returned in an arbitrary order. 
      */
     sortBy?: ApplicationRevisionSortBy;
     /**
-     *  The order in which to sort the list results:    ascending: ascending order.   descending: descending order.   If not specified, the results are sorted in ascending order. If set to null, the results are sorted in an arbitrary order.
+     *  The order in which to sort the list results:     ascending: ascending order.    descending: descending order.   If not specified, the results are sorted in ascending order. If set to null, the results are sorted in an arbitrary order.
      */
     sortOrder?: SortOrder;
     /**
@@ -1698,7 +1751,7 @@ declare namespace CodeDeploy {
      */
     s3KeyPrefix?: S3Key;
     /**
-     *  Whether to list revisions based on whether the revision is the target revision of an deployment group:    include: List revisions that are target revisions of a deployment group.   exclude: Do not list revisions that are target revisions of a deployment group.   ignore: List all revisions.  
+     *  Whether to list revisions based on whether the revision is the target revision of a deployment group:     include: List revisions that are target revisions of a deployment group.    exclude: Do not list revisions that are target revisions of a deployment group.    ignore: List all revisions.  
      */
     deployed?: ListStateFilterAction;
     /**
@@ -1782,7 +1835,7 @@ declare namespace CodeDeploy {
      */
     nextToken?: NextToken;
     /**
-     * A subset of instances to list by status:   Pending: Include those instances with pending deployments.   InProgress: Include those instances where deployments are still in progress.   Succeeded: Include those instances with successful deployments.   Failed: Include those instances with failed deployments.   Skipped: Include those instances with skipped deployments.   Unknown: Include those instances with deployments in an unknown state.  
+     * A subset of instances to list by status:    Pending: Include those instances with pending deployments.    InProgress: Include those instances where deployments are still in progress.    Succeeded: Include those instances with successful deployments.    Failed: Include those instances with failed deployments.    Skipped: Include those instances with skipped deployments.    Unknown: Include those instances with deployments in an unknown state.  
      */
     instanceStatusFilter?: InstanceStatusList;
     /**
@@ -1834,7 +1887,11 @@ declare namespace CodeDeploy {
      */
     deploymentGroupName?: DeploymentGroupName;
     /**
-     * A subset of deployments to list by status:   Created: Include created deployments in the resulting list.   Queued: Include queued deployments in the resulting list.   In Progress: Include in-progress deployments in the resulting list.   Succeeded: Include successful deployments in the resulting list.   Failed: Include failed deployments in the resulting list.   Stopped: Include stopped deployments in the resulting list.  
+     * The unique ID of an external resource for returning deployments linked to the external resource.
+     */
+    externalId?: ExternalId;
+    /**
+     * A subset of deployments to list by status:    Created: Include created deployments in the resulting list.    Queued: Include queued deployments in the resulting list.    In Progress: Include in-progress deployments in the resulting list.    Succeeded: Include successful deployments in the resulting list.    Failed: Include failed deployments in the resulting list.    Stopped: Include stopped deployments in the resulting list.  
      */
     includeOnlyStatuses?: DeploymentStatusList;
     /**
@@ -1874,7 +1931,7 @@ declare namespace CodeDeploy {
   }
   export interface ListOnPremisesInstancesInput {
     /**
-     * The registration status of the on-premises instances:   Deregistered: Include deregistered on-premises instances in the resulting list.   Registered: Include registered on-premises instances in the resulting list.  
+     * The registration status of the on-premises instances:    Deregistered: Include deregistered on-premises instances in the resulting list.    Registered: Include registered on-premises instances in the resulting list.  
      */
     registrationStatus?: RegistrationStatus;
     /**
@@ -1941,7 +1998,7 @@ declare namespace CodeDeploy {
      */
     value?: MinimumHealthyHostsValue;
     /**
-     * The minimum healthy instance type:   HOST_COUNT: The minimum number of healthy instance as an absolute value.   FLEET_PERCENT: The minimum number of healthy instance as a percentage of the total number of instance in the deployment.   In an example of nine instance, if a HOST_COUNT of six is specified, deploy to up to three instances at a time. The deployment is successful if six or more instances are deployed to successfully. Otherwise, the deployment fails. If a FLEET_PERCENT of 40 is specified, deploy to up to five instance at a time. The deployment is successful if four or more instance are deployed to successfully. Otherwise, the deployment fails.  In a call to the GetDeploymentConfig, CodeDeployDefault.OneAtATime returns a minimum healthy instance type of MOST_CONCURRENCY and a value of 1. This means a deployment to only one instance at a time. (You cannot set the type to MOST_CONCURRENCY, only to HOST_COUNT or FLEET_PERCENT.) In addition, with CodeDeployDefault.OneAtATime, AWS CodeDeploy attempts to ensure that all instances but one are kept in a healthy state during the deployment. Although this allows one instance at a time to be taken offline for a new deployment, it also means that if the deployment to the last instance fails, the overall deployment is still successful.  For more information, see AWS CodeDeploy Instance Health in the AWS CodeDeploy User Guide.
+     * The minimum healthy instance type:    HOST_COUNT: The minimum number of healthy instances as an absolute value.    FLEET_PERCENT: The minimum number of healthy instances as a percentage of the total number of instances in the deployment.   In an example of nine instances, if a HOST_COUNT of six is specified, deploy to up to three instances at a time. The deployment is successful if six or more instances are deployed to successfully. Otherwise, the deployment fails. If a FLEET_PERCENT of 40 is specified, deploy to up to five instances at a time. The deployment is successful if four or more instances are deployed to successfully. Otherwise, the deployment fails.  In a call to the GetDeploymentConfig, CodeDeployDefault.OneAtATime returns a minimum healthy instance type of MOST_CONCURRENCY and a value of 1. This means a deployment to only one instance at a time. (You cannot set the type to MOST_CONCURRENCY, only to HOST_COUNT or FLEET_PERCENT.) In addition, with CodeDeployDefault.OneAtATime, AWS CodeDeploy attempts to ensure that all instances but one are kept in a healthy state during the deployment. Although this allows one instance at a time to be taken offline for a new deployment, it also means that if the deployment to the last instance fails, the overall deployment is still successful.  For more information, see AWS CodeDeploy Instance Health in the AWS CodeDeploy User Guide.
      */
     type?: MinimumHealthyHostsType;
   }
@@ -2042,7 +2099,7 @@ declare namespace CodeDeploy {
   export type RevisionInfoList = RevisionInfo[];
   export interface RevisionLocation {
     /**
-     * The type of application revision:   S3: An application revision stored in Amazon S3.   GitHub: An application revision stored in GitHub (EC2/On-premises deployments only).   String: A YAML-formatted or JSON-formatted string (AWS Lambda deployments only).  
+     * The type of application revision:   S3: An application revision stored in Amazon S3.   GitHub: An application revision stored in GitHub (EC2/On-premises deployments only).   String: A YAML-formatted or JSON-formatted string (AWS Lambda deployments only).   AppSpecContent: An AppSpecContent object that contains the contents of an AppSpec file for an AWS Lambda or Amazon ECS deployment. The content is formatted as JSON or YAML stored as a RawString.  
      */
     revisionType?: RevisionLocationType;
     /**
@@ -2091,7 +2148,7 @@ declare namespace CodeDeploy {
      */
     key?: S3Key;
     /**
-     * The file type of the application revision. Must be one of the following:   tar: A tar archive file.   tgz: A compressed tar archive file.   zip: A zip archive file.  
+     * The file type of the application revision. Must be one of the following:    tar: A tar archive file.    tgz: A compressed tar archive file.    zip: A zip archive file.  
      */
     bundleType?: BundleType;
     /**
@@ -2250,21 +2307,21 @@ declare namespace CodeDeploy {
   export type Timestamp = Date;
   export interface TrafficRoute {
     /**
-     *  The ARN of one listener. The listener identifies the route between a target group and a load balancer. This is an array of strings with a maximum size of one. 
+     *  The Amazon Resource Name (ARN) of one listener. The listener identifies the route between a target group and a load balancer. This is an array of strings with a maximum size of one. 
      */
     listenerArns?: ListenerArnList;
   }
   export interface TrafficRoutingConfig {
     /**
-     * The type of traffic shifting (TimeBasedCanary or TimeBasedLinear) used by a deployment configuration .
+     * The type of traffic shifting (TimeBasedCanary or TimeBasedLinear) used by a deployment configuration.
      */
     type?: TrafficRoutingType;
     /**
-     * A configuration that shifts traffic from one version of a Lambda function to another in two increments. The original and target Lambda function versions are specified in the deployment's AppSpec file.
+     * A configuration that shifts traffic from one version of a Lambda function or ECS task set to another in two increments. The original and target Lambda function versions or ECS task sets are specified in the deployment's AppSpec file.
      */
     timeBasedCanary?: TimeBasedCanary;
     /**
-     * A configuration that shifts traffic from one version of a Lambda function to another in equal increments, with an equal number of minutes between each increment. The original and target Lambda function versions are specified in the deployment's AppSpec file.
+     * A configuration that shifts traffic from one version of a Lambda function or ECS task set to another in equal increments, with an equal number of minutes between each increment. The original and target Lambda function versions or ECS task sets are specified in the deployment's AppSpec file.
      */
     timeBasedLinear?: TimeBasedLinear;
   }
@@ -2276,7 +2333,7 @@ declare namespace CodeDeploy {
      */
     triggerName?: TriggerName;
     /**
-     * The ARN of the Amazon Simple Notification Service topic through which notifications about deployment or instance events are sent.
+     * The Amazon Resource Name (ARN) of the Amazon Simple Notification Service topic through which notifications about deployment or instance events are sent.
      */
     triggerTargetArn?: TriggerTargetArn;
     /**
@@ -2291,7 +2348,7 @@ declare namespace CodeDeploy {
   export type TriggerTargetArn = string;
   export interface UntagResourceInput {
     /**
-     *  The ARN that specifies from which resource to disassociate the tags with the keys in the TagKeys input paramter. 
+     *  The Amazon Resource Name (ARN) that specifies from which resource to disassociate the tags with the keys in the TagKeys input parameter. 
      */
     ResourceArn: Arn;
     /**
@@ -2345,7 +2402,7 @@ declare namespace CodeDeploy {
      */
     serviceRoleArn?: Role;
     /**
-     * Information about triggers to change when the deployment group is updated. For examples, see Modify Triggers in an AWS CodeDeploy Deployment Group in the AWS CodeDeploy User Guide.
+     * Information about triggers to change when the deployment group is updated. For examples, see Edit a Trigger in a CodeDeploy Deployment Group in the AWS CodeDeploy User Guide.
      */
     triggerConfigurations?: TriggerConfigList;
     /**

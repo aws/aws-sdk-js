@@ -149,6 +149,14 @@ declare class MediaLive extends Service {
    */
   describeInput(callback?: (err: AWSError, data: MediaLive.Types.DescribeInputResponse) => void): Request<MediaLive.Types.DescribeInputResponse, AWSError>;
   /**
+   * Gets the details for the input device
+   */
+  describeInputDevice(params: MediaLive.Types.DescribeInputDeviceRequest, callback?: (err: AWSError, data: MediaLive.Types.DescribeInputDeviceResponse) => void): Request<MediaLive.Types.DescribeInputDeviceResponse, AWSError>;
+  /**
+   * Gets the details for the input device
+   */
+  describeInputDevice(callback?: (err: AWSError, data: MediaLive.Types.DescribeInputDeviceResponse) => void): Request<MediaLive.Types.DescribeInputDeviceResponse, AWSError>;
+  /**
    * Produces a summary of an Input Security Group
    */
   describeInputSecurityGroup(params: MediaLive.Types.DescribeInputSecurityGroupRequest, callback?: (err: AWSError, data: MediaLive.Types.DescribeInputSecurityGroupResponse) => void): Request<MediaLive.Types.DescribeInputSecurityGroupResponse, AWSError>;
@@ -204,6 +212,14 @@ declare class MediaLive extends Service {
    * Produces list of channels that have been created
    */
   listChannels(callback?: (err: AWSError, data: MediaLive.Types.ListChannelsResponse) => void): Request<MediaLive.Types.ListChannelsResponse, AWSError>;
+  /**
+   * List input devices
+   */
+  listInputDevices(params: MediaLive.Types.ListInputDevicesRequest, callback?: (err: AWSError, data: MediaLive.Types.ListInputDevicesResponse) => void): Request<MediaLive.Types.ListInputDevicesResponse, AWSError>;
+  /**
+   * List input devices
+   */
+  listInputDevices(callback?: (err: AWSError, data: MediaLive.Types.ListInputDevicesResponse) => void): Request<MediaLive.Types.ListInputDevicesResponse, AWSError>;
   /**
    * Produces a list of Input Security Groups for an account
    */
@@ -325,6 +341,14 @@ declare class MediaLive extends Service {
    */
   updateInput(callback?: (err: AWSError, data: MediaLive.Types.UpdateInputResponse) => void): Request<MediaLive.Types.UpdateInputResponse, AWSError>;
   /**
+   * Updates the parameters for the input device.
+   */
+  updateInputDevice(params: MediaLive.Types.UpdateInputDeviceRequest, callback?: (err: AWSError, data: MediaLive.Types.UpdateInputDeviceResponse) => void): Request<MediaLive.Types.UpdateInputDeviceResponse, AWSError>;
+  /**
+   * Updates the parameters for the input device.
+   */
+  updateInputDevice(callback?: (err: AWSError, data: MediaLive.Types.UpdateInputDeviceResponse) => void): Request<MediaLive.Types.UpdateInputDeviceResponse, AWSError>;
+  /**
    * Update an Input Security Group's Whilelists.
    */
   updateInputSecurityGroup(params: MediaLive.Types.UpdateInputSecurityGroupRequest, callback?: (err: AWSError, data: MediaLive.Types.UpdateInputSecurityGroupResponse) => void): Request<MediaLive.Types.UpdateInputSecurityGroupResponse, AWSError>;
@@ -388,6 +412,30 @@ declare class MediaLive extends Service {
    * Waits for the channelDeleted state by periodically calling the underlying MediaLive.describeChanneloperation every 5 seconds (at most 84 times). Wait until a channel has been deleted
    */
   waitFor(state: "channelDeleted", callback?: (err: AWSError, data: MediaLive.Types.DescribeChannelResponse) => void): Request<MediaLive.Types.DescribeChannelResponse, AWSError>;
+  /**
+   * Waits for the inputAttached state by periodically calling the underlying MediaLive.describeInputoperation every 5 seconds (at most 20 times). Wait until an input has been attached
+   */
+  waitFor(state: "inputAttached", params: MediaLive.Types.DescribeInputRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MediaLive.Types.DescribeInputResponse) => void): Request<MediaLive.Types.DescribeInputResponse, AWSError>;
+  /**
+   * Waits for the inputAttached state by periodically calling the underlying MediaLive.describeInputoperation every 5 seconds (at most 20 times). Wait until an input has been attached
+   */
+  waitFor(state: "inputAttached", callback?: (err: AWSError, data: MediaLive.Types.DescribeInputResponse) => void): Request<MediaLive.Types.DescribeInputResponse, AWSError>;
+  /**
+   * Waits for the inputDetached state by periodically calling the underlying MediaLive.describeInputoperation every 5 seconds (at most 84 times). Wait until an input has been detached
+   */
+  waitFor(state: "inputDetached", params: MediaLive.Types.DescribeInputRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MediaLive.Types.DescribeInputResponse) => void): Request<MediaLive.Types.DescribeInputResponse, AWSError>;
+  /**
+   * Waits for the inputDetached state by periodically calling the underlying MediaLive.describeInputoperation every 5 seconds (at most 84 times). Wait until an input has been detached
+   */
+  waitFor(state: "inputDetached", callback?: (err: AWSError, data: MediaLive.Types.DescribeInputResponse) => void): Request<MediaLive.Types.DescribeInputResponse, AWSError>;
+  /**
+   * Waits for the inputDeleted state by periodically calling the underlying MediaLive.describeInputoperation every 5 seconds (at most 20 times). Wait until an input has been deleted
+   */
+  waitFor(state: "inputDeleted", params: MediaLive.Types.DescribeInputRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MediaLive.Types.DescribeInputResponse) => void): Request<MediaLive.Types.DescribeInputResponse, AWSError>;
+  /**
+   * Waits for the inputDeleted state by periodically calling the underlying MediaLive.describeInputoperation every 5 seconds (at most 20 times). Wait until an input has been deleted
+   */
+  waitFor(state: "inputDeleted", callback?: (err: AWSError, data: MediaLive.Types.DescribeInputResponse) => void): Request<MediaLive.Types.DescribeInputResponse, AWSError>;
   /**
    * Waits for the multiplexCreated state by periodically calling the underlying MediaLive.describeMultiplexoperation every 3 seconds (at most 5 times). Wait until a multiplex has been created
    */
@@ -1115,6 +1163,10 @@ creating multiple resources.
      */
     Destinations?: __listOfInputDestinationRequest;
     /**
+     * Settings for the devices.
+     */
+    InputDevices?: __listOfInputDeviceSettings;
+    /**
      * A list of security groups referenced by IDs to attach to the input.
      */
     InputSecurityGroups?: __listOf__string;
@@ -1540,6 +1592,54 @@ one destination per packager.
      */
     Tags?: Tags;
   }
+  export interface DescribeInputDeviceRequest {
+    /**
+     * The unique ID of this input device. For example, hd-123456789abcdef.
+     */
+    InputDeviceId: __string;
+  }
+  export interface DescribeInputDeviceResponse {
+    /**
+     * The unique ARN of the input device.
+     */
+    Arn?: __string;
+    /**
+     * The state of the connection between the input device and AWS.
+     */
+    ConnectionState?: InputDeviceConnectionState;
+    /**
+     * The status of the action to synchronize the device configuration. If you change the configuration of the input device (for example, the maximum bitrate), MediaLive sends the new data to the device. The device might not update itself immediately. SYNCED means the device has updated its configuration. SYNCING means that it has not updated its configuration.
+     */
+    DeviceSettingsSyncState?: DeviceSettingsSyncState;
+    /**
+     * Settings that describe an input device that is type HD.
+     */
+    HdDeviceSettings?: InputDeviceHdSettings;
+    /**
+     * The unique ID of the input device.
+     */
+    Id?: __string;
+    /**
+     * The network MAC address of the input device.
+     */
+    MacAddress?: __string;
+    /**
+     * A name that you specify for the input device.
+     */
+    Name?: __string;
+    /**
+     * The network settings for the input device.
+     */
+    NetworkSettings?: InputDeviceNetworkSettings;
+    /**
+     * The unique serial number of the input device.
+     */
+    SerialNumber?: __string;
+    /**
+     * The type of the input device.
+     */
+    Type?: InputDeviceType;
+  }
   export interface DescribeInputRequest {
     /**
      * Unique ID of the input
@@ -1569,6 +1669,10 @@ SINGLE_PIPELINE - You can connect only one source to this input. If the ChannelC
 
      */
     InputClass?: InputClass;
+    /**
+     * Settings for the input devices.
+     */
+    InputDevices?: __listOfInputDeviceSettings;
     /**
      * Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes
 during input switch actions. Presently, this functionality only works with MP4_FILE inputs.
@@ -1860,6 +1964,7 @@ during input switch actions. Presently, this functionality only works with MP4_F
      */
     ScheduleActions?: __listOfScheduleAction;
   }
+  export type DeviceSettingsSyncState = "SYNCED"|"SYNCING"|string;
   export interface DvbNitSettings {
     /**
      * The numeric value placed in the Network Information Table (NIT).
@@ -2222,8 +2327,8 @@ during input switch actions. Presently, this functionality only works with MP4_F
     /**
      * Indicates how MediaLive pipelines are synchronized.
 
-PIPELINELOCKING - MediaLive will attempt to synchronize the output of each pipeline to the other.
-EPOCHLOCKING - MediaLive will attempt to synchronize the output of each pipeline to the Unix epoch.
+PIPELINE_LOCKING - MediaLive will attempt to synchronize the output of each pipeline to the other.
+EPOCH_LOCKING - MediaLive will attempt to synchronize the output of each pipeline to the Unix epoch.
      */
     OutputLockingMode?: GlobalConfigurationOutputLockingMode;
     /**
@@ -2297,7 +2402,7 @@ EPOCHLOCKING - MediaLive will attempt to synchronize the output of each pipeline
      */
     EntropyEncoding?: H264EntropyEncoding;
     /**
-     * Settings associated with the specified filter.
+     * Optional filters that you can apply to an encode.
      */
     FilterSettings?: H264FilterSettings;
     /**
@@ -2387,7 +2492,9 @@ For VBR: Set the maximum bitrate in order to accommodate expected spikes in the 
      */
     Profile?: H264Profile;
     /**
-     * If set to "ENHANCEDQUALITY," improves visual quality at an increased output cost. If this video is being delivered to a MediaLive Multiplex, "ENHANCEDQUALITY" is always used.
+     * Leave as STANDARD_QUALITY or choose a different value (which might result in additional costs to run the channel).
+- ENHANCED_QUALITY: Produces a slightly better video quality without an increase in the bitrate. Has an effect only when the Rate control mode is QVBR or CBR. If this channel is in a MediaLive multiplex, the value must be ENHANCED_QUALITY.
+- STANDARD_QUALITY: Valid for any Rate control mode.
      */
     QualityLevel?: H264QualityLevel;
     /**
@@ -2809,11 +2916,11 @@ VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, con
      */
     Mode?: HlsMode;
     /**
-     * MANIFESTSANDSEGMENTS: Generates manifests (master manifest, if applicable, and media manifests) for this output group.
+     * MANIFESTS_AND_SEGMENTS: Generates manifests (master manifest, if applicable, and media manifests) for this output group.
 
-VARIANTMANIFESTSANDSEGMENTS: Generates media manifests for this output group, but not a master manifest.
+VARIANT_MANIFESTS_AND_SEGMENTS: Generates media manifests for this output group, but not a master manifest.
 
-SEGMENTSONLY: Does not generate any manifests for this output group.
+SEGMENTS_ONLY: Does not generate any manifests for this output group.
      */
     OutputSelection?: HlsOutputSelection;
     /**
@@ -2861,9 +2968,9 @@ For an HLS output group with MediaPackage as the destination, the DISABLED behav
      */
     TimestampDeltaMilliseconds?: __integerMin0;
     /**
-     * SEGMENTEDFILES: Emit the program as segments - multiple .ts media files.
+     * SEGMENTED_FILES: Emit the program as segments - multiple .ts media files.
 
-SINGLEFILE: Applies only if Mode field is VOD. Emit the program as a single .ts media file. The media manifest includes #EXT-X-BYTERANGE tags to index segments for playback. A typical use for this value is when sending the output to AWS Elemental MediaConvert, which can accept only a single media file. Playback while the channel is running is not guaranteed due to HTTP server caching.
+SINGLE_FILE: Applies only if Mode field is VOD. Emit the program as a single .ts media file. The media manifest includes #EXT-X-BYTERANGE tags to index segments for playback. A typical use for this value is when sending the output to AWS Elemental MediaConvert, which can accept only a single media file. Playback while the channel is running is not guaranteed due to HTTP server caching.
      */
     TsFileMode?: HlsTsFileMode;
   }
@@ -3008,6 +3115,10 @@ SINGLE_PIPELINE - You can connect only one source to this input. If the ChannelC
      */
     InputClass?: InputClass;
     /**
+     * Settings for the input devices.
+     */
+    InputDevices?: __listOfInputDeviceSettings;
+    /**
      * Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes
 during input switch actions. Presently, this functionality only works with MP4_FILE inputs.
 
@@ -3125,6 +3236,133 @@ to.
      */
     NetworkInterfaceId?: __string;
   }
+  export type InputDeviceActiveInput = "HDMI"|"SDI"|string;
+  export interface InputDeviceConfigurableSettings {
+    /**
+     * The input source that you want to use. If the device has a source connected to only one of its input ports, or if you don't care which source the device sends, specify Auto. If the device has sources connected to both its input ports, and you want to use a specific source, specify the source.
+     */
+    ConfiguredInput?: InputDeviceConfiguredInput;
+    /**
+     * The maximum bitrate in bits per second. Set a value here to throttle the bitrate of the source video.
+     */
+    MaxBitrate?: __integer;
+  }
+  export type InputDeviceConfiguredInput = "AUTO"|"HDMI"|"SDI"|string;
+  export type InputDeviceConnectionState = "DISCONNECTED"|"CONNECTED"|string;
+  export interface InputDeviceHdSettings {
+    /**
+     * If you specified Auto as the configured input, specifies which of the sources is currently active (SDI or HDMI).
+     */
+    ActiveInput?: InputDeviceActiveInput;
+    /**
+     * The source at the input device that is currently active. You can specify this source.
+     */
+    ConfiguredInput?: InputDeviceConfiguredInput;
+    /**
+     * The state of the input device.
+     */
+    DeviceState?: InputDeviceState;
+    /**
+     * The frame rate of the video source.
+     */
+    Framerate?: __double;
+    /**
+     * The height of the video source, in pixels.
+     */
+    Height?: __integer;
+    /**
+     * The current maximum bitrate for ingesting this source, in bits per second. You can specify this maximum.
+     */
+    MaxBitrate?: __integer;
+    /**
+     * The scan type of the video source.
+     */
+    ScanType?: InputDeviceScanType;
+    /**
+     * The width of the video source, in pixels.
+     */
+    Width?: __integer;
+  }
+  export type InputDeviceIpScheme = "STATIC"|"DHCP"|string;
+  export interface InputDeviceNetworkSettings {
+    /**
+     * The DNS addresses of the input device.
+     */
+    DnsAddresses?: __listOf__string;
+    /**
+     * The network gateway IP address.
+     */
+    Gateway?: __string;
+    /**
+     * The IP address of the input device.
+     */
+    IpAddress?: __string;
+    /**
+     * Specifies whether the input device has been configured (outside of MediaLive) to use a dynamic IP address assignment (DHCP) or a static IP address.
+     */
+    IpScheme?: InputDeviceIpScheme;
+    /**
+     * The subnet mask of the input device.
+     */
+    SubnetMask?: __string;
+  }
+  export interface InputDeviceRequest {
+    /**
+     * The unique ID for the device.
+     */
+    Id?: __string;
+  }
+  export type InputDeviceScanType = "INTERLACED"|"PROGRESSIVE"|string;
+  export interface InputDeviceSettings {
+    /**
+     * The unique ID for the device.
+     */
+    Id?: __string;
+  }
+  export type InputDeviceState = "IDLE"|"STREAMING"|string;
+  export interface InputDeviceSummary {
+    /**
+     * The unique ARN of the input device.
+     */
+    Arn?: __string;
+    /**
+     * The state of the connection between the input device and AWS.
+     */
+    ConnectionState?: InputDeviceConnectionState;
+    /**
+     * The status of the action to synchronize the device configuration. If you change the configuration of the input device (for example, the maximum bitrate), MediaLive sends the new data to the device. The device might not update itself immediately. SYNCED means the device has updated its configuration. SYNCING means that it has not updated its configuration.
+     */
+    DeviceSettingsSyncState?: DeviceSettingsSyncState;
+    /**
+     * Settings that describe an input device that is type HD.
+     */
+    HdDeviceSettings?: InputDeviceHdSettings;
+    /**
+     * The unique ID of the input device.
+     */
+    Id?: __string;
+    /**
+     * The network MAC address of the input device.
+     */
+    MacAddress?: __string;
+    /**
+     * A name that you specify for the input device.
+     */
+    Name?: __string;
+    /**
+     * Network settings for the input device.
+     */
+    NetworkSettings?: InputDeviceNetworkSettings;
+    /**
+     * The unique serial number of the input device.
+     */
+    SerialNumber?: __string;
+    /**
+     * The type of the input device.
+     */
+    Type?: InputDeviceType;
+  }
+  export type InputDeviceType = "HD"|string;
   export type InputFilter = "AUTO"|"DISABLED"|"FORCED"|string;
   export interface InputLocation {
     /**
@@ -3230,6 +3468,12 @@ to.
      */
     NetworkInputSettings?: NetworkInputSettings;
     /**
+     * Specifies whether to extract applicable ancillary data from a SMPTE-2038 source in this input. Applicable data types are captions, timecode, AFD, and SCTE-104 messages.
+- PREFER: Extract from SMPTE-2038 if present in this input, otherwise extract from another source (if any).
+- IGNORE: Never extract any ancillary data from SMPTE-2038.
+     */
+    Smpte2038DataPreference?: Smpte2038DataPreference;
+    /**
      * Loop input if it is a file. This allows a file input to be streamed indefinitely.
      */
     SourceEndBehavior?: InputSourceEndBehavior;
@@ -3302,7 +3546,7 @@ pulled from.
     UrlPath?: __listOf__string;
   }
   export type InputTimecodeSource = "ZEROBASED"|"EMBEDDED"|string;
-  export type InputType = "UDP_PUSH"|"RTP_PUSH"|"RTMP_PUSH"|"RTMP_PULL"|"URL_PULL"|"MP4_FILE"|"MEDIACONNECT"|string;
+  export type InputType = "UDP_PUSH"|"RTP_PUSH"|"RTMP_PUSH"|"RTMP_PULL"|"URL_PULL"|"MP4_FILE"|"MEDIACONNECT"|"INPUT_DEVICE"|string;
   export interface InputVpcRequest {
     /**
      * A list of up to 5 EC2 VPC security group IDs to attach to the Input VPC network interfaces.
@@ -3339,6 +3583,20 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
   }
   export interface ListChannelsResponse {
     Channels?: __listOfChannelSummary;
+    NextToken?: __string;
+  }
+  export interface ListInputDevicesRequest {
+    MaxResults?: MaxResults;
+    NextToken?: __string;
+  }
+  export interface ListInputDevicesResponse {
+    /**
+     * The list of input devices.
+     */
+    InputDevices?: __listOfInputDeviceSummary;
+    /**
+     * A token to get additional list results.
+     */
     NextToken?: __string;
   }
   export interface ListInputSecurityGroupsRequest {
@@ -3712,7 +3970,7 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
      */
     SegmentationStyle?: M2tsSegmentationStyle;
     /**
-     * The length in seconds of each segment. Required unless markers is set to None_.
+     * The length in seconds of each segment. Required unless markers is set to _none_.
      */
     SegmentationTime?: __doubleMin1;
     /**
@@ -3851,7 +4109,7 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
   }
   export interface MsSmoothGroupSettings {
     /**
-     * The value of the "Acquisition Point Identity" element used in each message placed in the sparse track.  Only enabled if sparseTrackType is not "none".
+     * The ID to include in each message in the sparse track. Ignored if sparseTrackType is NONE.
      */
     AcquisitionPointId?: __string;
     /**
@@ -3918,7 +4176,10 @@ Options:
      */
     SendDelayMs?: __integerMin0Max10000;
     /**
-     * If set to scte35, use incoming SCTE-35 messages to generate a sparse track in this group of MS-Smooth outputs. scte35WithoutSegmentation is the same as scte35, except EML will not start a new segment at a SCTE-35 marker. It will still encode an IDR frame at a SCTE-35 marker.
+     * Identifies the type of data to place in the sparse track:
+- SCTE35: Insert SCTE-35 messages from the source content. With each message, insert an IDR frame to start a new segment.
+- SCTE35_WITHOUT_SEGMENTATION: Insert SCTE-35 messages from the source content. With each message, insert an IDR frame but don't start a new segment.
+- NONE: Don't generate a sparse track for any outputs in this output group.
      */
     SparseTrackType?: SmoothGroupSparseTrackType;
     /**
@@ -4816,6 +5077,7 @@ Valid values: 1, 2, 4, 6, 8
   export type SmoothGroupSparseTrackType = "NONE"|"SCTE_35"|"SCTE_35_WITHOUT_SEGMENTATION"|string;
   export type SmoothGroupStreamManifestBehavior = "DO_NOT_SEND"|"SEND"|string;
   export type SmoothGroupTimestampOffsetMode = "USE_CONFIGURED_OFFSET"|"USE_EVENT_START_DATE"|string;
+  export type Smpte2038DataPreference = "IGNORE"|"PREFER"|string;
   export interface SmpteTtDestinationSettings {
   }
   export interface StandardHlsSettings {
@@ -5135,15 +5397,17 @@ one destination per packager.
   export type TemporalFilterPostFilterSharpening = "AUTO"|"DISABLED"|"ENABLED"|string;
   export interface TemporalFilterSettings {
     /**
-     * If set to "ENABLED," applies post-filter sharpening to improve visual quality. This is most beneficial when using a noisy or compressed input source and low output bitrates.
+     * If you enable this filter, the results are the following:
+- If the source content is noisy (it contains excessive digital artifacts), the filter cleans up the source.
+- If the source content is already clean, the filter tends to decrease the bitrate, especially when the rate control mode is QVBR.
      */
     PostFilterSharpening?: TemporalFilterPostFilterSharpening;
     /**
-     * Filter strength. A higher value produces stronger filtering.
+     * Choose a filter strength. We recommend a strength of 1 or 2. A higher strength might take out good information, resulting in an image that is overly soft.
      */
     Strength?: TemporalFilterStrength;
   }
-  export type TemporalFilterStrength = "AUTO"|"STRENGTH_1"|"STRENGTH_10"|"STRENGTH_11"|"STRENGTH_12"|"STRENGTH_13"|"STRENGTH_14"|"STRENGTH_15"|"STRENGTH_16"|"STRENGTH_2"|"STRENGTH_3"|"STRENGTH_4"|"STRENGTH_5"|"STRENGTH_6"|"STRENGTH_7"|"STRENGTH_8"|"STRENGTH_9"|string;
+  export type TemporalFilterStrength = "AUTO"|"STRENGTH_1"|"STRENGTH_2"|"STRENGTH_3"|"STRENGTH_4"|"STRENGTH_5"|"STRENGTH_6"|"STRENGTH_7"|"STRENGTH_8"|"STRENGTH_9"|"STRENGTH_10"|"STRENGTH_11"|"STRENGTH_12"|"STRENGTH_13"|"STRENGTH_14"|"STRENGTH_15"|"STRENGTH_16"|string;
   export interface TimecodeConfig {
     /**
      * Identifies the source for the timecode that will be associated with the events outputs.
@@ -5249,11 +5513,71 @@ one destination per packager.
   export interface UpdateChannelResponse {
     Channel?: Channel;
   }
+  export interface UpdateInputDeviceRequest {
+    /**
+     * The settings that you want to apply to the input device.
+     */
+    HdDeviceSettings?: InputDeviceConfigurableSettings;
+    /**
+     * The unique ID of the input device. For example, hd-123456789abcdef.
+     */
+    InputDeviceId: __string;
+    /**
+     * The name that you assigned to this input device (not the unique ID).
+     */
+    Name?: __string;
+  }
+  export interface UpdateInputDeviceResponse {
+    /**
+     * The unique ARN of the input device.
+     */
+    Arn?: __string;
+    /**
+     * The state of the connection between the input device and AWS.
+     */
+    ConnectionState?: InputDeviceConnectionState;
+    /**
+     * The status of the action to synchronize the device configuration. If you change the configuration of the input device (for example, the maximum bitrate), MediaLive sends the new data to the device. The device might not update itself immediately. SYNCED means the device has updated its configuration. SYNCING means that it has not updated its configuration.
+     */
+    DeviceSettingsSyncState?: DeviceSettingsSyncState;
+    /**
+     * Settings that describe an input device that is type HD.
+     */
+    HdDeviceSettings?: InputDeviceHdSettings;
+    /**
+     * The unique ID of the input device.
+     */
+    Id?: __string;
+    /**
+     * The network MAC address of the input device.
+     */
+    MacAddress?: __string;
+    /**
+     * A name that you specify for the input device.
+     */
+    Name?: __string;
+    /**
+     * The network settings for the input device.
+     */
+    NetworkSettings?: InputDeviceNetworkSettings;
+    /**
+     * The unique serial number of the input device.
+     */
+    SerialNumber?: __string;
+    /**
+     * The type of the input device.
+     */
+    Type?: InputDeviceType;
+  }
   export interface UpdateInputRequest {
     /**
      * Destination settings for PUSH type inputs.
      */
     Destinations?: __listOfInputDestinationRequest;
+    /**
+     * Settings for the devices.
+     */
+    InputDevices?: __listOfInputDeviceRequest;
     /**
      * Unique ID of the input.
      */
@@ -5377,11 +5701,11 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
      */
     Name: __string;
     /**
-     * Indicates how to respond to the AFD values in the input stream. RESPOND causes input video to be clipped, depending on the AFD value, input display aspect ratio, and output display aspect ratio, and (except for FRAMECAPTURE codec) includes the values in the output. PASSTHROUGH (does not apply to FRAMECAPTURE codec) ignores the AFD values and includes the values in the output, so input video is not clipped. NONE ignores the AFD values and does not include the values through to the output, so input video is not clipped.
+     * Indicates how to respond to the AFD values in the input stream. RESPOND causes input video to be clipped, depending on the AFD value, input display aspect ratio, and output display aspect ratio, and (except for FRAME_CAPTURE codec) includes the values in the output. PASSTHROUGH (does not apply to FRAME_CAPTURE codec) ignores the AFD values and includes the values in the output, so input video is not clipped. NONE ignores the AFD values and does not include the values through to the output, so input video is not clipped.
      */
     RespondToAfd?: VideoDescriptionRespondToAfd;
     /**
-     * STRETCHTOOUTPUT configures the output position to stretch the video to the specified output resolution (height and width). This option will override any position value. DEFAULT may insert black boxes (pillar boxes or letter boxes) around the video to provide the specified output resolution.
+     * STRETCH_TO_OUTPUT configures the output position to stretch the video to the specified output resolution (height and width). This option will override any position value. DEFAULT may insert black boxes (pillar boxes or letter boxes) around the video to provide the specified output resolution.
      */
     ScalingBehavior?: VideoDescriptionScalingBehavior;
     /**
@@ -5497,6 +5821,9 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export type __listOfInputChannelLevel = InputChannelLevel[];
   export type __listOfInputDestination = InputDestination[];
   export type __listOfInputDestinationRequest = InputDestinationRequest[];
+  export type __listOfInputDeviceRequest = InputDeviceRequest[];
+  export type __listOfInputDeviceSettings = InputDeviceSettings[];
+  export type __listOfInputDeviceSummary = InputDeviceSummary[];
   export type __listOfInputSecurityGroup = InputSecurityGroup[];
   export type __listOfInputSource = InputSource[];
   export type __listOfInputSourceRequest = InputSourceRequest[];
