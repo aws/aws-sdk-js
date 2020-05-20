@@ -17,7 +17,7 @@ export class WebIdentityCredentials extends Credentials {
     /**
      * Refreshes credentials using AWS.STS.assumeRoleWithWebIdentity().
      */
-    refresh(callback: (err: AWSError) => void): void;
+    refresh(callback: (err?: AWSError) => void): void;
 
     data: STS.Types.AssumeRoleWithWebIdentityResponse;
     params: STS.Types.AssumeRoleWithWebIdentityRequest

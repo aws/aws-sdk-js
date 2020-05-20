@@ -10,5 +10,5 @@ export class TokenFileWebIdentityCredentials extends Credentials {
     /**
      * Refreshes credentials using AWS.STS.assumeRoleWithWebIdentity().
      */
-    refresh(callback: (err: AWSError) => void): void;
+    refresh(callback: (err?: AWSError) => void): void;
 }

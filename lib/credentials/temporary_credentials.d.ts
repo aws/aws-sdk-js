@@ -17,7 +17,7 @@ export class TemporaryCredentials extends Credentials {
     /**
      * Refreshes credentials using AWS.STS.assumeRole() or AWS.STS.getSessionToken(), depending on whether an IAM role ARN was passed to the credentials constructor().
      */
-    refresh(callback: (err: AWSError) => void): void;
+    refresh(callback: (err?: AWSError) => void): void;
 
     /**
      * The master (non-temporary) credentials used to get and refresh temporary credentials from AWS STS.
