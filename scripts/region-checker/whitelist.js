@@ -4,9 +4,9 @@ var whitelist = {
         25,
         85,
         86,
-        197,
-        251,
-        252
+        201,
+        255,
+        256
     ],
     '/credentials/cognito_identity_credentials.js': [
         78,

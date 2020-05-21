@@ -86,7 +86,7 @@
     });
 
     describe('endpoint operation', function() {
-      it('adds endpiont discovery opeation name when exists', function() {
+      it('adds endpiont discovery opeation name and required flag when exists', function() {
         var api = make({
           operations: {
             DescribeEndpoints: {
@@ -117,6 +117,7 @@
           }
         });
         expect(api.endpointOperation).to.equal('describeEndpoints');
+        expect(api.hasRequiredEndpointDiscovery).to.equal(true);
         expect(api.operations.someOperation.endpointDiscoveryRequired).to.equal('NULL');
         expect(api.operations.optionalEndpointOperation.endpointDiscoveryRequired).to.equal('OPTIONAL');
         expect(api.operations.requiredEndpointOperation.endpointDiscoveryRequired).to.equal('REQUIRED');
