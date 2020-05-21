@@ -33,7 +33,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>Creates a canary. Canaries are scripts that monitor your endpoints and APIs from the outside-in. Canaries help you check the availability and latency of your web services and troubleshoot anomalies by investigating load time data, screenshots of the UI, logs, and metrics. You can set up a canary to run continuously or just once. </p> <p>Do not use <code>CreateCanary</code> to modify an existing canary. Use <a>UpdateCanary</a> instead.</p> <p>To create canaries, you must have the <code>CloudWatchSyntheticsFullAccess</code> policy. If you are creating a new IAM role for the canary, you also need the the <code>iam:CreateRole</code>, <code>iam:CreatePolicy</code> and <code>iam:AttachRolePolicy</code> permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Roles\">Necessary Roles and Permissions</a>.</p> <p>Do not include secrets or proprietary information in your canary names. The canary name makes up part of the Amazon Resource Name (ARN) for the canary, and the ARN is included in outbound calls over the internet. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/servicelens_canaries_security.html\">Security Considerations for Synthetics Canaries</a>.</p>"
+      "documentation": "<p>Creates a canary. Canaries are scripts that monitor your endpoints and APIs from the outside-in. Canaries help you check the availability and latency of your web services and troubleshoot anomalies by investigating load time data, screenshots of the UI, logs, and metrics. You can set up a canary to run continuously or just once. </p> <p>Do not use <code>CreateCanary</code> to modify an existing canary. Use <a href=\"https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_UpdateCanary.html\">UpdateCanary</a> instead.</p> <p>To create canaries, you must have the <code>CloudWatchSyntheticsFullAccess</code> policy. If you are creating a new IAM role for the canary, you also need the the <code>iam:CreateRole</code>, <code>iam:CreatePolicy</code> and <code>iam:AttachRolePolicy</code> permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Roles\">Necessary Roles and Permissions</a>.</p> <p>Do not include secrets or proprietary information in your canary names. The canary name makes up part of the Amazon Resource Name (ARN) for the canary, and the ARN is included in outbound calls over the internet. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/servicelens_canaries_security.html\">Security Considerations for Synthetics Canaries</a>.</p>"
     },
     "DeleteCanary": {
       "name": "DeleteCanary",
@@ -515,6 +515,10 @@
         "TimeoutInSeconds": {
           "shape": "MaxFifteenMinutesInSeconds",
           "documentation": "<p>How long the canary is allowed to run before it must stop. If you omit this field, the frequency of the canary is used as this value, up to a maximum of 14 minutes.</p>"
+        },
+        "MemoryInMB": {
+          "shape": "MaxSize3008",
+          "documentation": "<p>The maximum amount of memory available to the canary while it is running, in MB. The value you specify must be a multiple of 64.</p>"
         }
       },
       "documentation": "<p>A structure that contains input information for a canary run.</p>"
@@ -525,6 +529,10 @@
         "TimeoutInSeconds": {
           "shape": "MaxFifteenMinutesInSeconds",
           "documentation": "<p>How long the canary is allowed to run before it must stop.</p>"
+        },
+        "MemoryInMB": {
+          "shape": "MaxSize3008",
+          "documentation": "<p>The maximum amount of memory available to the canary while it is running, in MB. The value you must be a multiple of 64.</p>"
         }
       },
       "documentation": "<p>A structure that contains information for a canary run.</p>"
@@ -747,7 +755,7 @@
       "members": {
         "Name": {
           "shape": "CanaryName",
-          "documentation": "<p>The name of the canary that you want to delete. To find the names of your canaries, use <a>DescribeCanaries</a>.</p>",
+          "documentation": "<p>The name of the canary that you want to delete. To find the names of your canaries, use <a href=\"https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html\">DescribeCanaries</a>.</p>",
           "location": "uri",
           "locationName": "name"
         }
@@ -941,6 +949,11 @@
       "max": 1024,
       "min": 1
     },
+    "MaxSize3008": {
+      "type": "integer",
+      "max": 3008,
+      "min": 960
+    },
     "RuntimeVersion": {
       "type": "structure",
       "members": {
@@ -988,7 +1001,7 @@
       "members": {
         "Name": {
           "shape": "CanaryName",
-          "documentation": "<p>The name of the canary that you want to run. To find canary names, use <a>DescribeCanaries</a>.</p>",
+          "documentation": "<p>The name of the canary that you want to run. To find canary names, use <a href=\"https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html\">DescribeCanaries</a>.</p>",
           "location": "uri",
           "locationName": "name"
         }
@@ -1006,7 +1019,7 @@
       "members": {
         "Name": {
           "shape": "CanaryName",
-          "documentation": "<p>The name of the canary that you want to stop. To find the names of your canaries, use <a>DescribeCanaries</a>.</p>",
+          "documentation": "<p>The name of the canary that you want to stop. To find the names of your canaries, use <a href=\"https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html\">DescribeCanaries</a>.</p>",
           "location": "uri",
           "locationName": "name"
         }
@@ -1128,7 +1141,7 @@
       "members": {
         "Name": {
           "shape": "CanaryName",
-          "documentation": "<p>The name of the canary that you want to update. To find the names of your canaries, use <a>DescribeCanaries</a>.</p> <p>You cannot change the name of a canary that has already been created.</p>",
+          "documentation": "<p>The name of the canary that you want to update. To find the names of your canaries, use <a href=\"https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html\">DescribeCanaries</a>.</p> <p>You cannot change the name of a canary that has already been created.</p>",
           "location": "uri",
           "locationName": "name"
         },

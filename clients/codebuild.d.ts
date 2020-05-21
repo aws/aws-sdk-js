@@ -636,7 +636,7 @@ declare namespace CodeBuild {
      */
     encryptionKey?: NonEmptyString;
     /**
-     * A set of tags for this build project. These tags are available for use by AWS services that support AWS CodeBuild build project tags.
+     * A list of tag key and value pairs associated with this build project. These tags are available for use by AWS services that support AWS CodeBuild build project tags.
      */
     tags?: TagList;
     /**
@@ -675,6 +675,10 @@ declare namespace CodeBuild {
      *  A ReportExportConfig object that contains information about where the report group test results are exported. 
      */
     exportConfig: ReportExportConfig;
+    /**
+     *  A list of tag key and value pairs associated with this report group.  These tags are available for use by AWS services that support AWS CodeBuild report group tags.
+     */
+    tags?: TagList;
   }
   export interface CreateReportGroupOutput {
     /**
@@ -1269,7 +1273,7 @@ declare namespace CodeBuild {
      */
     encryptionKey?: NonEmptyString;
     /**
-     * The tags for this build project. These tags are available for use by AWS services that support AWS CodeBuild build project tags.
+     * A list of tag key and value pairs associated with this build project. These tags are available for use by AWS services that support AWS CodeBuild build project tags.
      */
     tags?: TagList;
     /**
@@ -1593,6 +1597,10 @@ declare namespace CodeBuild {
      *  The date and time this ReportGroup was last modified. 
      */
     lastModified?: Timestamp;
+    /**
+     *  A list of tag key and value pairs associated with this report group.  These tags are available for use by AWS services that support AWS CodeBuild report group tags.
+     */
+    tags?: TagList;
   }
   export type ReportGroupArns = NonEmptyString[];
   export type ReportGroupName = string;
@@ -1773,7 +1781,7 @@ declare namespace CodeBuild {
      */
     encryptionKeyOverride?: NonEmptyString;
     /**
-     * A unique, case sensitive identifier you provide to ensure the idempotency of the StartBuild request. The token is included in the StartBuild request and is valid for 5 minutes. If you repeat the StartBuild request with the same token, but change a parameter, AWS CodeBuild returns a parameter mismatch error. 
+     * A unique, case sensitive identifier you provide to ensure the idempotency of the StartBuild request. The token is included in the StartBuild request and is valid for 12 hours. If you repeat the StartBuild request with the same token, but change a parameter, AWS CodeBuild returns a parameter mismatch error. 
      */
     idempotencyToken?: String;
     /**
@@ -1936,7 +1944,7 @@ declare namespace CodeBuild {
      */
     encryptionKey?: NonEmptyString;
     /**
-     * The replacement set of tags for this build project. These tags are available for use by AWS services that support AWS CodeBuild build project tags.
+     * An updated list of tag key and value pairs associated with this build project. These tags are available for use by AWS services that support AWS CodeBuild build project tags.
      */
     tags?: TagList;
     /**
@@ -1971,6 +1979,10 @@ declare namespace CodeBuild {
      *  Used to specify an updated export type. Valid values are:     S3: The report results are exported to an S3 bucket.     NO_EXPORT: The report results are not exported.   
      */
     exportConfig?: ReportExportConfig;
+    /**
+     *  An updated list of tag key and value pairs associated with this report group.  These tags are available for use by AWS services that support AWS CodeBuild report group tags.
+     */
+    tags?: TagList;
   }
   export interface UpdateReportGroupOutput {
     /**
@@ -2045,7 +2057,7 @@ declare namespace CodeBuild {
   }
   export interface WebhookFilter {
     /**
-     *  The type of webhook filter. There are six webhook filter types: EVENT, ACTOR_ACCOUNT_ID, HEAD_REF, BASE_REF, FILE_PATH, and COMMIT_MESSAGE.    EVENT    A webhook event triggers a build when the provided pattern matches one of five event types: PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED, PULL_REQUEST_REOPENED, and PULL_REQUEST_MERGED. The EVENT patterns are specified as a comma-separated string. For example, PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED filters all push, pull request created, and pull request updated events.    The PULL_REQUEST_REOPENED works with GitHub and GitHub Enterprise only.     ACTOR_ACCOUNT_ID    A webhook event triggers a build when a GitHub, GitHub Enterprise, or Bitbucket account ID matches the regular expression pattern.    HEAD_REF    A webhook event triggers a build when the head reference matches the regular expression pattern. For example, refs/heads/branch-name and refs/tags/tag-name.   Works with GitHub and GitHub Enterprise push, GitHub and GitHub Enterprise pull request, Bitbucket push, and Bitbucket pull request events.    BASE_REF    A webhook event triggers a build when the base reference matches the regular expression pattern. For example, refs/heads/branch-name.    Works with pull request events only.     FILE_PATH    A webhook triggers a build when the path of a changed file matches the regular expression pattern.    Works with GitHub and Bitbucket events push and pull requests events. Also works with GitHub Enterprise push events, but does not work with GitHub Enterprise pull request events.    COMMIT_MESSAGE  A webhook triggers a build when the head commit message matches the regular expression pattern.   Works with GitHub and Bitbucket events push and pull requests events. Also works with GitHub Enterprise push events, but does not work with GitHub Enterprise pull request events.    
+     *  The type of webhook filter. There are five webhook filter types: EVENT, ACTOR_ACCOUNT_ID, HEAD_REF, BASE_REF, and FILE_PATH.    EVENT    A webhook event triggers a build when the provided pattern matches one of five event types: PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED, PULL_REQUEST_REOPENED, and PULL_REQUEST_MERGED. The EVENT patterns are specified as a comma-separated string. For example, PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED filters all push, pull request created, and pull request updated events.    The PULL_REQUEST_REOPENED works with GitHub and GitHub Enterprise only.     ACTOR_ACCOUNT_ID    A webhook event triggers a build when a GitHub, GitHub Enterprise, or Bitbucket account ID matches the regular expression pattern.    HEAD_REF    A webhook event triggers a build when the head reference matches the regular expression pattern. For example, refs/heads/branch-name and refs/tags/tag-name.   Works with GitHub and GitHub Enterprise push, GitHub and GitHub Enterprise pull request, Bitbucket push, and Bitbucket pull request events.    BASE_REF    A webhook event triggers a build when the base reference matches the regular expression pattern. For example, refs/heads/branch-name.    Works with pull request events only.     FILE_PATH    A webhook triggers a build when the path of a changed file matches the regular expression pattern.    Works with GitHub and GitHub Enterprise push events only.    
      */
     type: WebhookFilterType;
     /**

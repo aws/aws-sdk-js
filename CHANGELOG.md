@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.681.0-->
+<!--LATEST=2.682.0-->
 <!--ENTRYINSERT-->
+
+## 2.682.0
+* bugfix: Typings: When implementing `Credentials` interface's `refresh()` method, the callback needs a defined `AWSError` as arg but it may not exist in case of successful refresh. Hence, modifed the method typing to include the fact that the callback can be called with no error on success as described in the docs.
+* feature: CodeBuild: CodeBuild adds support for tagging with report groups
+* feature: EC2: From this release onwards ProvisionByoipCidr publicly supports IPv6. Updated ProvisionByoipCidr API to support tags for public IPv4 and IPv6 pools. Added NetworkBorderGroup to the DescribePublicIpv4Pools response.
+* feature: S3: Deprecates unusable input members bound to Content-MD5 header. Updates example and documentation.
+* feature: Synthetics: AWS CloudWatch Synthetics now supports configuration of allocated memory for a canary.
 
 ## 2.681.0
 * feature: AppMesh: List APIs for all resources now contain additional information: when a resource was created, last updated, and its current version number.

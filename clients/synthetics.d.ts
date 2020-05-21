@@ -240,12 +240,20 @@ declare namespace Synthetics {
      * How long the canary is allowed to run before it must stop. If you omit this field, the frequency of the canary is used as this value, up to a maximum of 14 minutes.
      */
     TimeoutInSeconds: MaxFifteenMinutesInSeconds;
+    /**
+     * The maximum amount of memory available to the canary while it is running, in MB. The value you specify must be a multiple of 64.
+     */
+    MemoryInMB?: MaxSize3008;
   }
   export interface CanaryRunConfigOutput {
     /**
      * How long the canary is allowed to run before it must stop.
      */
     TimeoutInSeconds?: MaxFifteenMinutesInSeconds;
+    /**
+     * The maximum amount of memory available to the canary while it is running, in MB. The value you must be a multiple of 64.
+     */
+    MemoryInMB?: MaxSize3008;
   }
   export type CanaryRunState = "RUNNING"|"PASSED"|"FAILED"|string;
   export type CanaryRunStateReasonCode = "CANARY_FAILURE"|"EXECUTION_FAILURE"|string;
@@ -501,6 +509,7 @@ declare namespace Synthetics {
   export type MaxOneYearInSeconds = number;
   export type MaxSize100 = number;
   export type MaxSize1024 = number;
+  export type MaxSize3008 = number;
   export interface RuntimeVersion {
     /**
      * The name of the runtime version. Currently, the only valid value is syn-1.0.  Specifies the runtime version to use for the canary. Currently, the only valid value is syn-1.0.

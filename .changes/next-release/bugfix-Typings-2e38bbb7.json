@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Typings",
-  "description": "When implementing `Credentials` interface's `refresh()` method, the callback needs a defined `AWSError` as arg but it may not exist in case of successful refresh. Hence, modifed the method typing to include the fact that the callback can be called with no error on success as described in the docs."
-}
