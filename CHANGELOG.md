@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.682.0-->
+<!--LATEST=2.683.0-->
 <!--ENTRYINSERT-->
+
+## 2.683.0
+* bugfix: DualStack: Add dualstack by modifying existing endpoint in config
+* bugfix: EndpointDiscovery: * If at least one operation requires endpoint discovery then the SDK enables endpoint discovery by default including operational endpoint discovery operations; * Users can set config `endpointDiscoveryEnabled`, env `AWS_ENDPOINT_DISCOVERY_ENABLED`, config file entry `endpoint_discovery_enabled` to `false` to explictly disable endpoint discovery, even operations the require endpoint discovery will fail; * SDK throws if endpoint discovery is explicitly disabled but operation requires endpoint discovery; * Now SDK throws more clear error message when required endpoint operation fails
+* bugfix: S3: throw exception when incomplete body is returned from CopyObject, UploadPartCopy, and CompleteMultipartUpload
+* feature: IoTSiteWise: This release adds support for the standard deviation auto-computed aggregate and improved support for portal logo images in SiteWise.
 
 ## 2.682.0
 * bugfix: Typings: When implementing `Credentials` interface's `refresh()` method, the callback needs a defined `AWSError` as arg but it may not exist in case of successful refresh. Hence, modifed the method typing to include the fact that the callback can be called with no error on success as described in the docs.

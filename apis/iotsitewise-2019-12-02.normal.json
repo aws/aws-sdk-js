@@ -437,7 +437,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Deletes an access policy that grants the specified AWS Single Sign-On identity access to the specified AWS IoT SiteWise Monitor resource. You can use this action to revoke access to an AWS IoT SiteWise Monitor resource.</p>",
+      "documentation": "<p>Deletes an access policy that grants the specified AWS Single Sign-On identity access to the specified AWS IoT SiteWise Monitor resource. You can use this operation to revoke access to an AWS IoT SiteWise Monitor resource.</p>",
       "endpoint": {
         "hostPrefix": "monitor."
       }
@@ -1576,7 +1576,7 @@
           "shape": "ConflictingOperationException"
         }
       ],
-      "documentation": "<p>Updates an asset model and all of the assets that were created from the model. Each asset created from the model inherits the updated asset model's property and hierarchy definitions. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html\">Updating Assets and Models</a> in the <i>AWS IoT SiteWise User Guide</i>.</p> <important> <p>This action overwrites the existing model with the provided model. To avoid deleting your asset model's properties or hierarchies, you must include their IDs and definitions in the updated asset model payload. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetModel.html\">DescribeAssetModel</a>.</p> <p>If you remove a property from an asset model or update a property's formula expression, AWS IoT SiteWise deletes all previous data for that property. If you remove a hierarchy definition from an asset model, AWS IoT SiteWise disassociates every asset associated with that hierarchy. You can't change the type or data type of an existing property.</p> </important>",
+      "documentation": "<p>Updates an asset model and all of the assets that were created from the model. Each asset created from the model inherits the updated asset model's property and hierarchy definitions. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html\">Updating Assets and Models</a> in the <i>AWS IoT SiteWise User Guide</i>.</p> <important> <p>This operation overwrites the existing model with the provided model. To avoid deleting your asset model's properties or hierarchies, you must include their IDs and definitions in the updated asset model payload. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetModel.html\">DescribeAssetModel</a>.</p> <p>If you remove a property from an asset model or update a property's formula expression, AWS IoT SiteWise deletes all previous data for that property. If you remove a hierarchy definition from an asset model, AWS IoT SiteWise disassociates every asset associated with that hierarchy. You can't change the type or data type of an existing property.</p> </important>",
       "endpoint": {
         "hostPrefix": "model."
       }
@@ -1837,7 +1837,8 @@
         "COUNT",
         "MAXIMUM",
         "MINIMUM",
-        "SUM"
+        "SUM",
+        "STANDARD_DEVIATION"
       ]
     },
     "AggregateTypes": {
@@ -1883,23 +1884,27 @@
       "members": {
         "average": {
           "shape": "AggregatedDoubleValue",
-          "documentation": "<p>The average (mean) value of the time series for the last time interval window.</p>"
+          "documentation": "<p>The average (mean) value of the time series over a time interval window.</p>"
         },
         "count": {
           "shape": "AggregatedDoubleValue",
-          "documentation": "<p>The count of data points in the time series for the last time interval window.</p>"
+          "documentation": "<p>The count of data points in the time series over a time interval window.</p>"
         },
         "maximum": {
           "shape": "AggregatedDoubleValue",
-          "documentation": "<p>The maximum value of the time series for the last time interval window.</p>"
+          "documentation": "<p>The maximum value of the time series over a time interval window.</p>"
         },
         "minimum": {
           "shape": "AggregatedDoubleValue",
-          "documentation": "<p>The minimum value of the time series for the last time interval window.</p>"
+          "documentation": "<p>The minimum value of the time series over a time interval window.</p>"
         },
         "sum": {
           "shape": "AggregatedDoubleValue",
-          "documentation": "<p>The sum of the time series for the last time interval window.</p>"
+          "documentation": "<p>The sum of the time series over a time interval window.</p>"
+        },
+        "standardDeviation": {
+          "shape": "AggregatedDoubleValue",
+          "documentation": "<p>The standard deviation of the time series over a time interval window.</p>"
         }
       },
       "documentation": "<p>Contains the (pre-calculated) aggregate values for an asset property.</p>"
@@ -2717,7 +2722,7 @@
         },
         "assetModelStatus": {
           "shape": "AssetModelStatus",
-          "documentation": "<p>The status of the asset model, which contains a state (<code>CREATING</code> after successfully calling this action) and any error message.</p>"
+          "documentation": "<p>The status of the asset model, which contains a state (<code>CREATING</code> after successfully calling this operation) and any error message.</p>"
         }
       }
     },
@@ -2765,7 +2770,7 @@
         },
         "assetStatus": {
           "shape": "AssetStatus",
-          "documentation": "<p>The status of the asset, which contains a state (<code>CREATING</code> after successfully calling this action) and any error message.</p>"
+          "documentation": "<p>The status of the asset, which contains a state (<code>CREATING</code> after successfully calling this operation) and any error message.</p>"
         }
       }
     },
@@ -2922,7 +2927,7 @@
         },
         "portalStatus": {
           "shape": "PortalStatus",
-          "documentation": "<p>The status of the portal, which contains a state (<code>CREATING</code> after successfully calling this action) and any error message.</p>"
+          "documentation": "<p>The status of the portal, which contains a state (<code>CREATING</code> after successfully calling this operation) and any error message.</p>"
         },
         "ssoApplicationId": {
           "shape": "SSOApplicationId",
@@ -3079,7 +3084,7 @@
       "members": {
         "assetModelStatus": {
           "shape": "AssetModelStatus",
-          "documentation": "<p>The status of the asset model, which contains a state (<code>DELETING</code> after successfully calling this action) and any error message.</p>"
+          "documentation": "<p>The status of the asset model, which contains a state (<code>DELETING</code> after successfully calling this operation) and any error message.</p>"
         }
       }
     },
@@ -3112,7 +3117,7 @@
       "members": {
         "assetStatus": {
           "shape": "AssetStatus",
-          "documentation": "<p>The status of the asset, which contains a state (<code>DELETING</code> after successfully calling this action) and any error message.</p>"
+          "documentation": "<p>The status of the asset, which contains a state (<code>DELETING</code> after successfully calling this operation) and any error message.</p>"
         }
       }
     },
@@ -3184,7 +3189,7 @@
       "members": {
         "portalStatus": {
           "shape": "PortalStatus",
-          "documentation": "<p>The status of the portal, which contains a state (<code>DELETING</code> after successfully calling this action) and any error message.</p>"
+          "documentation": "<p>The status of the portal, which contains a state (<code>DELETING</code> after successfully calling this operation) and any error message.</p>"
         }
       }
     },
@@ -3696,9 +3701,9 @@
           "shape": "Timestamp",
           "documentation": "<p>The date the portal was last updated, in Unix epoch time.</p>"
         },
-        "portalLogoImage": {
-          "shape": "Image",
-          "documentation": "<p>The portal's logo image.</p>"
+        "portalLogoImageLocation": {
+          "shape": "ImageLocation",
+          "documentation": "<p>The portal's logo image, which is available at a URL.</p>"
         },
         "roleArn": {
           "shape": "ARN",
@@ -4215,29 +4220,28 @@
     "Image": {
       "type": "structure",
       "members": {
-        "locationUrl": {
-          "shape": "Url",
-          "documentation": "<p>A URL at which the image is available. The URL is valid for 15 minutes for you to view and download the image.</p>"
+        "id": {
+          "shape": "ID",
+          "documentation": "<p>The ID of an existing image. Specify this parameter to keep an existing image.</p>"
         },
-        "lastUpdateDate": {
-          "shape": "Timestamp",
-          "documentation": "<p>The date the image was last updated, in Unix epoch time.</p>"
+        "file": {
+          "shape": "ImageFile"
         }
       },
-      "documentation": "<p>Contains an image that is available at a URL.</p>"
+      "documentation": "<p>Contains an image that is one of the following:</p> <ul> <li> <p>An image file. Choose this option to upload a new image.</p> </li> <li> <p>The ID of an existing image. Choose this option to keep an existing image.</p> </li> </ul>"
     },
     "ImageFile": {
       "type": "structure",
       "required": [
-        "encodedString",
-        "fileType"
+        "data",
+        "type"
       ],
       "members": {
-        "encodedString": {
+        "data": {
           "shape": "ImageFileData",
           "documentation": "<p>The image file contents, represented as a base64-encoded string. The file size must be less than 1 MB.</p>"
         },
-        "fileType": {
+        "type": {
           "shape": "ImageFileType",
           "documentation": "<p>The file type of the image.</p>"
         }
@@ -4245,13 +4249,33 @@
       "documentation": "<p>Contains an image file.</p>"
     },
     "ImageFileData": {
-      "type": "blob"
+      "type": "blob",
+      "max": 1500000,
+      "min": 1
     },
     "ImageFileType": {
       "type": "string",
       "enum": [
         "PNG"
       ]
+    },
+    "ImageLocation": {
+      "type": "structure",
+      "required": [
+        "id",
+        "url"
+      ],
+      "members": {
+        "id": {
+          "shape": "ID",
+          "documentation": "<p>The ID of the image.</p>"
+        },
+        "url": {
+          "shape": "Url",
+          "documentation": "<p>The URL where the image is available. The URL is valid for 15 minutes so that you can view and download the image</p>"
+        }
+      },
+      "documentation": "<p>Contains an image that is uploaded to AWS IoT SiteWise and available at a URL.</p>"
     },
     "Interval": {
       "type": "string",
@@ -4264,25 +4288,25 @@
       "members": {
         "identityType": {
           "shape": "IdentityType",
-          "documentation": "<p>The type of identity (user or group).</p>",
+          "documentation": "<p>The type of identity (user or group). This parameter is required if you specify <code>identityId</code>.</p>",
           "location": "querystring",
           "locationName": "identityType"
         },
         "identityId": {
           "shape": "IdentityId",
-          "documentation": "<p>The ID of the identity.</p>",
+          "documentation": "<p>The ID of the identity. This parameter is required if you specify <code>identityType</code>.</p>",
           "location": "querystring",
           "locationName": "identityId"
         },
         "resourceType": {
           "shape": "ResourceType",
-          "documentation": "<p>The type of resource (portal or project).</p>",
+          "documentation": "<p>The type of resource (portal or project). This parameter is required if you specify <code>resourceId</code>.</p>",
           "location": "querystring",
           "locationName": "resourceType"
         },
         "resourceId": {
           "shape": "ID",
-          "documentation": "<p>The ID of the resource.</p>",
+          "documentation": "<p>The ID of the resource. This parameter is required if you specify <code>resourceType</code>.</p>",
           "location": "querystring",
           "locationName": "resourceId"
         },
@@ -5373,7 +5397,7 @@
       "members": {
         "assetModelStatus": {
           "shape": "AssetModelStatus",
-          "documentation": "<p>The status of the asset model, which contains a state (<code>UPDATING</code> after successfully calling this action) and any error message.</p>"
+          "documentation": "<p>The status of the asset model, which contains a state (<code>UPDATING</code> after successfully calling this operation) and any error message.</p>"
         }
       }
     },
@@ -5443,7 +5467,7 @@
       "members": {
         "assetStatus": {
           "shape": "AssetStatus",
-          "documentation": "<p>The status of the asset, which contains a state (<code>UPDATING</code> after successfully calling this action) and any error message.</p>"
+          "documentation": "<p>The status of the asset, which contains a state (<code>UPDATING</code> after successfully calling this operation) and any error message.</p>"
         }
       }
     },
@@ -5571,9 +5595,8 @@
           "shape": "Email",
           "documentation": "<p>The AWS administrator's contact email address.</p>"
         },
-        "portalLogoImageFile": {
-          "shape": "ImageFile",
-          "documentation": "<p>A logo image to display in the portal. Upload a square, high-resolution image. The image is displayed on a dark background.</p>"
+        "portalLogoImage": {
+          "shape": "Image"
         },
         "roleArn": {
           "shape": "ARN",
@@ -5594,7 +5617,7 @@
       "members": {
         "portalStatus": {
           "shape": "PortalStatus",
-          "documentation": "<p>The status of the portal, which contains a state (<code>UPDATING</code> after successfully calling this action) and any error message.</p>"
+          "documentation": "<p>The status of the portal, which contains a state (<code>UPDATING</code> after successfully calling this operation) and any error message.</p>"
         }
       }
     },

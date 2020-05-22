@@ -101,11 +101,11 @@ declare class IoTSiteWise extends Service {
    */
   createProject(callback?: (err: AWSError, data: IoTSiteWise.Types.CreateProjectResponse) => void): Request<IoTSiteWise.Types.CreateProjectResponse, AWSError>;
   /**
-   * Deletes an access policy that grants the specified AWS Single Sign-On identity access to the specified AWS IoT SiteWise Monitor resource. You can use this action to revoke access to an AWS IoT SiteWise Monitor resource.
+   * Deletes an access policy that grants the specified AWS Single Sign-On identity access to the specified AWS IoT SiteWise Monitor resource. You can use this operation to revoke access to an AWS IoT SiteWise Monitor resource.
    */
   deleteAccessPolicy(params: IoTSiteWise.Types.DeleteAccessPolicyRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.DeleteAccessPolicyResponse) => void): Request<IoTSiteWise.Types.DeleteAccessPolicyResponse, AWSError>;
   /**
-   * Deletes an access policy that grants the specified AWS Single Sign-On identity access to the specified AWS IoT SiteWise Monitor resource. You can use this action to revoke access to an AWS IoT SiteWise Monitor resource.
+   * Deletes an access policy that grants the specified AWS Single Sign-On identity access to the specified AWS IoT SiteWise Monitor resource. You can use this operation to revoke access to an AWS IoT SiteWise Monitor resource.
    */
   deleteAccessPolicy(callback?: (err: AWSError, data: IoTSiteWise.Types.DeleteAccessPolicyResponse) => void): Request<IoTSiteWise.Types.DeleteAccessPolicyResponse, AWSError>;
   /**
@@ -389,11 +389,11 @@ declare class IoTSiteWise extends Service {
    */
   updateAsset(callback?: (err: AWSError, data: IoTSiteWise.Types.UpdateAssetResponse) => void): Request<IoTSiteWise.Types.UpdateAssetResponse, AWSError>;
   /**
-   * Updates an asset model and all of the assets that were created from the model. Each asset created from the model inherits the updated asset model's property and hierarchy definitions. For more information, see Updating Assets and Models in the AWS IoT SiteWise User Guide.  This action overwrites the existing model with the provided model. To avoid deleting your asset model's properties or hierarchies, you must include their IDs and definitions in the updated asset model payload. For more information, see DescribeAssetModel. If you remove a property from an asset model or update a property's formula expression, AWS IoT SiteWise deletes all previous data for that property. If you remove a hierarchy definition from an asset model, AWS IoT SiteWise disassociates every asset associated with that hierarchy. You can't change the type or data type of an existing property. 
+   * Updates an asset model and all of the assets that were created from the model. Each asset created from the model inherits the updated asset model's property and hierarchy definitions. For more information, see Updating Assets and Models in the AWS IoT SiteWise User Guide.  This operation overwrites the existing model with the provided model. To avoid deleting your asset model's properties or hierarchies, you must include their IDs and definitions in the updated asset model payload. For more information, see DescribeAssetModel. If you remove a property from an asset model or update a property's formula expression, AWS IoT SiteWise deletes all previous data for that property. If you remove a hierarchy definition from an asset model, AWS IoT SiteWise disassociates every asset associated with that hierarchy. You can't change the type or data type of an existing property. 
    */
   updateAssetModel(params: IoTSiteWise.Types.UpdateAssetModelRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.UpdateAssetModelResponse) => void): Request<IoTSiteWise.Types.UpdateAssetModelResponse, AWSError>;
   /**
-   * Updates an asset model and all of the assets that were created from the model. Each asset created from the model inherits the updated asset model's property and hierarchy definitions. For more information, see Updating Assets and Models in the AWS IoT SiteWise User Guide.  This action overwrites the existing model with the provided model. To avoid deleting your asset model's properties or hierarchies, you must include their IDs and definitions in the updated asset model payload. For more information, see DescribeAssetModel. If you remove a property from an asset model or update a property's formula expression, AWS IoT SiteWise deletes all previous data for that property. If you remove a hierarchy definition from an asset model, AWS IoT SiteWise disassociates every asset associated with that hierarchy. You can't change the type or data type of an existing property. 
+   * Updates an asset model and all of the assets that were created from the model. Each asset created from the model inherits the updated asset model's property and hierarchy definitions. For more information, see Updating Assets and Models in the AWS IoT SiteWise User Guide.  This operation overwrites the existing model with the provided model. To avoid deleting your asset model's properties or hierarchies, you must include their IDs and definitions in the updated asset model payload. For more information, see DescribeAssetModel. If you remove a property from an asset model or update a property's formula expression, AWS IoT SiteWise deletes all previous data for that property. If you remove a hierarchy definition from an asset model, AWS IoT SiteWise disassociates every asset associated with that hierarchy. You can't change the type or data type of an existing property. 
    */
   updateAssetModel(callback?: (err: AWSError, data: IoTSiteWise.Types.UpdateAssetModelResponse) => void): Request<IoTSiteWise.Types.UpdateAssetModelResponse, AWSError>;
   /**
@@ -522,7 +522,7 @@ declare namespace IoTSiteWise {
      */
     lastUpdateDate?: Timestamp;
   }
-  export type AggregateType = "AVERAGE"|"COUNT"|"MAXIMUM"|"MINIMUM"|"SUM"|string;
+  export type AggregateType = "AVERAGE"|"COUNT"|"MAXIMUM"|"MINIMUM"|"SUM"|"STANDARD_DEVIATION"|string;
   export type AggregateTypes = AggregateType[];
   export type AggregatedDoubleValue = number;
   export interface AggregatedValue {
@@ -542,25 +542,29 @@ declare namespace IoTSiteWise {
   export type AggregatedValues = AggregatedValue[];
   export interface Aggregates {
     /**
-     * The average (mean) value of the time series for the last time interval window.
+     * The average (mean) value of the time series over a time interval window.
      */
     average?: AggregatedDoubleValue;
     /**
-     * The count of data points in the time series for the last time interval window.
+     * The count of data points in the time series over a time interval window.
      */
     count?: AggregatedDoubleValue;
     /**
-     * The maximum value of the time series for the last time interval window.
+     * The maximum value of the time series over a time interval window.
      */
     maximum?: AggregatedDoubleValue;
     /**
-     * The minimum value of the time series for the last time interval window.
+     * The minimum value of the time series over a time interval window.
      */
     minimum?: AggregatedDoubleValue;
     /**
-     * The sum of the time series for the last time interval window.
+     * The sum of the time series over a time interval window.
      */
     sum?: AggregatedDoubleValue;
+    /**
+     * The standard deviation of the time series over a time interval window.
+     */
+    standardDeviation?: AggregatedDoubleValue;
   }
   export type AmazonResourceName = string;
   export type AssetErrorCode = "INTERNAL_FAILURE"|string;
@@ -1003,7 +1007,7 @@ declare namespace IoTSiteWise {
      */
     assetModelArn: ARN;
     /**
-     * The status of the asset model, which contains a state (CREATING after successfully calling this action) and any error message.
+     * The status of the asset model, which contains a state (CREATING after successfully calling this operation) and any error message.
      */
     assetModelStatus: AssetModelStatus;
   }
@@ -1035,7 +1039,7 @@ declare namespace IoTSiteWise {
      */
     assetArn: ARN;
     /**
-     * The status of the asset, which contains a state (CREATING after successfully calling this action) and any error message.
+     * The status of the asset, which contains a state (CREATING after successfully calling this operation) and any error message.
      */
     assetStatus: AssetStatus;
   }
@@ -1143,7 +1147,7 @@ declare namespace IoTSiteWise {
      */
     portalStartUrl: Url;
     /**
-     * The status of the portal, which contains a state (CREATING after successfully calling this action) and any error message.
+     * The status of the portal, which contains a state (CREATING after successfully calling this operation) and any error message.
      */
     portalStatus: PortalStatus;
     /**
@@ -1232,7 +1236,7 @@ declare namespace IoTSiteWise {
   }
   export interface DeleteAssetModelResponse {
     /**
-     * The status of the asset model, which contains a state (DELETING after successfully calling this action) and any error message.
+     * The status of the asset model, which contains a state (DELETING after successfully calling this operation) and any error message.
      */
     assetModelStatus: AssetModelStatus;
   }
@@ -1248,7 +1252,7 @@ declare namespace IoTSiteWise {
   }
   export interface DeleteAssetResponse {
     /**
-     * The status of the asset, which contains a state (DELETING after successfully calling this action) and any error message.
+     * The status of the asset, which contains a state (DELETING after successfully calling this operation) and any error message.
      */
     assetStatus: AssetStatus;
   }
@@ -1282,7 +1286,7 @@ declare namespace IoTSiteWise {
   }
   export interface DeletePortalResponse {
     /**
-     * The status of the portal, which contains a state (DELETING after successfully calling this action) and any error message.
+     * The status of the portal, which contains a state (DELETING after successfully calling this operation) and any error message.
      */
     portalStatus: PortalStatus;
   }
@@ -1610,9 +1614,9 @@ declare namespace IoTSiteWise {
      */
     portalLastUpdateDate: Timestamp;
     /**
-     * The portal's logo image.
+     * The portal's logo image, which is available at a URL.
      */
-    portalLogoImage?: Image;
+    portalLogoImageLocation?: ImageLocation;
     /**
      * The ARN of the service role that allows the portal's users to access your AWS IoT SiteWise resources on your behalf. For more information, see Using service roles for AWS IoT SiteWise Monitor in the AWS IoT SiteWise User Guide.
      */
@@ -1891,42 +1895,49 @@ declare namespace IoTSiteWise {
   export type IdentityType = "USER"|"GROUP"|string;
   export interface Image {
     /**
-     * A URL at which the image is available. The URL is valid for 15 minutes for you to view and download the image.
+     * The ID of an existing image. Specify this parameter to keep an existing image.
      */
-    locationUrl?: Url;
-    /**
-     * The date the image was last updated, in Unix epoch time.
-     */
-    lastUpdateDate?: Timestamp;
+    id?: ID;
+    file?: ImageFile;
   }
   export interface ImageFile {
     /**
      * The image file contents, represented as a base64-encoded string. The file size must be less than 1 MB.
      */
-    encodedString: ImageFileData;
+    data: ImageFileData;
     /**
      * The file type of the image.
      */
-    fileType: ImageFileType;
+    type: ImageFileType;
   }
   export type ImageFileData = Buffer|Uint8Array|Blob|string;
   export type ImageFileType = "PNG"|string;
+  export interface ImageLocation {
+    /**
+     * The ID of the image.
+     */
+    id: ID;
+    /**
+     * The URL where the image is available. The URL is valid for 15 minutes so that you can view and download the image
+     */
+    url: Url;
+  }
   export type Interval = string;
   export interface ListAccessPoliciesRequest {
     /**
-     * The type of identity (user or group).
+     * The type of identity (user or group). This parameter is required if you specify identityId.
      */
     identityType?: IdentityType;
     /**
-     * The ID of the identity.
+     * The ID of the identity. This parameter is required if you specify identityType.
      */
     identityId?: IdentityId;
     /**
-     * The type of resource (portal or project).
+     * The type of resource (portal or project). This parameter is required if you specify resourceId.
      */
     resourceType?: ResourceType;
     /**
-     * The ID of the resource.
+     * The ID of the resource. This parameter is required if you specify resourceType.
      */
     resourceId?: ID;
     /**
@@ -2497,7 +2508,7 @@ declare namespace IoTSiteWise {
   }
   export interface UpdateAssetModelResponse {
     /**
-     * The status of the asset model, which contains a state (UPDATING after successfully calling this action) and any error message.
+     * The status of the asset model, which contains a state (UPDATING after successfully calling this operation) and any error message.
      */
     assetModelStatus: AssetModelStatus;
   }
@@ -2539,7 +2550,7 @@ declare namespace IoTSiteWise {
   }
   export interface UpdateAssetResponse {
     /**
-     * The status of the asset, which contains a state (UPDATING after successfully calling this action) and any error message.
+     * The status of the asset, which contains a state (UPDATING after successfully calling this operation) and any error message.
      */
     assetStatus: AssetStatus;
   }
@@ -2618,10 +2629,7 @@ declare namespace IoTSiteWise {
      * The AWS administrator's contact email address.
      */
     portalContactEmail: Email;
-    /**
-     * A logo image to display in the portal. Upload a square, high-resolution image. The image is displayed on a dark background.
-     */
-    portalLogoImageFile?: ImageFile;
+    portalLogoImage?: Image;
     /**
      * The ARN of a service role that allows the portal's users to access your AWS IoT SiteWise resources on your behalf. For more information, see Using service roles for AWS IoT SiteWise Monitor in the AWS IoT SiteWise User Guide.
      */
@@ -2633,7 +2641,7 @@ declare namespace IoTSiteWise {
   }
   export interface UpdatePortalResponse {
     /**
-     * The status of the portal, which contains a state (UPDATING after successfully calling this action) and any error message.
+     * The status of the portal, which contains a state (UPDATING after successfully calling this operation) and any error message.
      */
     portalStatus: PortalStatus;
   }

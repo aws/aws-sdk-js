@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "DualStack",
-  "description": "Add dualstack by modifying existing endpoint in config"
-}

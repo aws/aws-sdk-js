@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "S3",
-  "description": "throw exception when incomplete body is returned from CopyObject, UploadPartCopy, and CompleteMultipartUpload"
-}

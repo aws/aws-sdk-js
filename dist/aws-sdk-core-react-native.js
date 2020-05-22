@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.682.0',
+	  VERSION: '2.683.0',
 
 	  /**
 	   * @api private
@@ -3527,6 +3527,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (operation.endpointoperation === true) {
 	      property(self, 'endpointOperation', util.string.lowerFirst(name));
 	    }
+	    if (operation.endpointdiscovery && !self.hasRequiredEndpointDiscovery) {
+	      property(
+	        self,
+	        'hasRequiredEndpointDiscovery',
+	        operation.endpointdiscovery.required === true
+	      );
+	    }
 	  }
 
 	  property(this, 'operations', new Collection(api.operations, options, function(name, operation) {
@@ -5075,7 +5082,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // set dualstack endpoint
 	      if (service.config.useDualstack && util.isDualstackAvailable(service)) {
 	        config = util.copy(config);
-	        config.endpoint = '{service}.dualstack.{region}.amazonaws.com';
+	        config.endpoint = config.endpoint.replace(
+	          /{service}\.({region}\.)?/,
+	          '{service}.dualstack.{region}.'
+	        );
 	      }
 
 	      // set global endpoint
@@ -5294,9 +5304,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *     Defaults to `true`.
 	 *
 	 * @!attribute endpointDiscoveryEnabled
-	 *   @return [Boolean] whether to enable endpoint discovery for operations that
-	 *     allow optionally using an endpoint returned by the service.
-	 *     Defaults to 'false'
+	 *   @return [Boolean|undefined] whether to call operations with endpoints
+	 *     given by service dynamically. Setting this config to `true` will enable
+	 *     endpoint discovery for all applicable operations. Setting it to `false`
+	 *     will explicitly disable endpoint discovery even though operations that
+	 *     require endpoint discovery will presumably fail. Leaving it to
+	 *     `undefined` means SDK only do endpoint discovery when it's required.
+	 *     Defaults to `undefined`
 	 *
 	 * @!attribute endpointCacheSize
 	 *   @return [Number] the size of the global cache storing endpoints from endpoint
@@ -5449,10 +5463,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *   S3 Transfer Acceleration endpoint with the S3 service. Default: `false`.
 	   * @option options clientSideMonitoring [Boolean] whether to collect and
 	   *   publish this client's performance metrics of all its API requests.
-	   * @option options endpointDiscoveryEnabled [Boolean] whether to enable endpoint
-	   *   discovery for operations that allow optionally using an endpoint returned by
-	   *   the service.
-	   *   Defaults to 'false'
+	   * @option options endpointDiscoveryEnabled [Boolean|undefined] whether to
+	   *   call operations with endpoints given by service dynamically. Setting this
+	   * config to `true` will enable endpoint discovery for all applicable operations.
+	   *   Setting it to `false` will explicitly disable endpoint discovery even though
+	   *   operations that require endpoint discovery will presumably fail. Leaving it
+	   *   to `undefined` means SDK will only do endpoint discovery when it's required.
+	   *   Defaults to `undefined`
 	   * @option options endpointCacheSize [Number] the size of the global cache storing
 	   *   endpoints from endpoint discovery operations. Once endpoint cache is created,
 	   *   updating this setting cannot change existing cache size.
@@ -5683,7 +5700,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    retryDelayOptions: {},
 	    useAccelerateEndpoint: false,
 	    clientSideMonitoring: false,
-	    endpointDiscoveryEnabled: false,
+	    endpointDiscoveryEnabled: undefined,
 	    endpointCacheSize: 1000,
 	    hostPrefixEnabled: true,
 	    stsRegionalEndpoints: 'legacy'
@@ -7217,19 +7234,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }]);
 	    endpointRequest.send(function(err, data) {
 	      if (err) {
-	        var errorParams = {
-	          code: 'EndpointDiscoveryException',
-	          message: 'Request cannot be fulfilled without specifying an endpoint',
-	          retryable: false
-	        };
-	        request.response.error = util.error(err, errorParams);
+	        request.response.error = util.error(err, { retryable: false });
 	        AWS.endpointCache.remove(cacheKey);
 
 	        //fail all the pending requests in batch
 	        if (requestQueue[cacheKeyStr]) {
 	          var pendingRequests = requestQueue[cacheKeyStr];
 	          util.arrayEach(pendingRequests, function(requestContext) {
-	            requestContext.request.response.error = util.error(err, errorParams);
+	            requestContext.request.response.error = util.error(err, { retryable: false });
 	            requestContext.callback();
 	          });
 	          delete requestQueue[cacheKeyStr];
@@ -7314,23 +7326,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	/**
-	 * If endpoint discovery should perform for this request when endpoint discovery is optional.
+	 * If endpoint discovery should perform for this request when no operation requires endpoint
+	 * discovery for the given service.
 	 * SDK performs config resolution in order like below:
-	 * 1. If turned on client configuration(default to off) then turn on endpoint discovery.
-	 * 2. If turned on in env AWS_ENABLE_ENDPOINT_DISCOVERY then turn on endpoint discovery.
-	 * 3. If turned on in shared ini config file with key 'endpoint_discovery_enabled', then
-	 *   turn on endpoint discovery.
+	 * 1. If set in client configuration.
+	 * 2. If set in env AWS_ENABLE_ENDPOINT_DISCOVERY.
+	 * 3. If set in shared ini config file with key 'endpoint_discovery_enabled'.
 	 * @param [object] request request object.
+	 * @returns [boolean|undefined] if endpoint discovery config is not set in any source, this
+	 *  function returns undefined
 	 * @api private
 	 */
-	function isEndpointDiscoveryEnabled(request) {
+	function resolveEndpointDiscoveryConfig(request) {
 	  var service = request.service || {};
-	  if (service.config.endpointDiscoveryEnabled === true) return true;
+	  if (service.config.endpointDiscoveryEnabled !== undefined) {
+	    return service.config.endpointDiscoveryEnabled;
+	  }
 
 	  //shared ini file is only available in Node
 	  //not to check env in browser
-	  if (util.isBrowser()) return false;
+	  if (util.isBrowser()) return undefined;
 
+	  // If any of recognized endpoint discovery config env is set
 	  for (var i = 0; i < endpointDiscoveryEnabledEnvs.length; i++) {
 	    var env = endpointDiscoveryEnabledEnvs[i];
 	    if (Object.prototype.hasOwnProperty.call(process.env, env)) {
@@ -7340,7 +7357,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          message: 'environmental variable ' + env + ' cannot be set to nothing'
 	        });
 	      }
-	      if (!isFalsy(process.env[env])) return true;
+	      return !isFalsy(process.env[env]);
 	    }
 	  }
 
@@ -7361,9 +7378,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        message: 'config file entry \'endpoint_discovery_enabled\' cannot be set to nothing'
 	      });
 	    }
-	    if (!isFalsy(sharedFileConfig.endpoint_discovery_enabled)) return true;
+	    return !isFalsy(sharedFileConfig.endpoint_discovery_enabled);
 	  }
-	  return false;
+	  return undefined;
 	}
 
 	/**
@@ -7378,27 +7395,35 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var operations = service.api.operations || {};
 	  var operationModel = operations[request.operation];
 	  var isEndpointDiscoveryRequired = operationModel ? operationModel.endpointDiscoveryRequired : 'NULL';
-	  var isEnabled = isEndpointDiscoveryEnabled(request);
-
-	  if (!isEnabled) {
-	    // Unless endpoint discovery is required, SDK will fallback to normal regional endpoints.
-	    if (isEndpointDiscoveryRequired === 'REQUIRED') {
-	      throw util.error(new Error(), {
-	        code: 'ConfigurationException',
-	        message: 'Endpoint Discovery is not enabled but this operation requires it.'
-	      });
-	    }
-	    return done();
+	  var isEnabled = resolveEndpointDiscoveryConfig(request);
+	  var hasRequiredEndpointDiscovery = service.api.hasRequiredEndpointDiscovery;
+	  if (isEnabled || hasRequiredEndpointDiscovery) {
+	    // Once a customer enables endpoint discovery, the SDK should start appending
+	    // the string endpoint-discovery to the user-agent on all requests.
+	    request.httpRequest.appendToUserAgent('endpoint-discovery');
 	  }
-
-	  request.httpRequest.appendToUserAgent('endpoint-discovery');
 	  switch (isEndpointDiscoveryRequired) {
 	    case 'OPTIONAL':
-	      optionalDiscoverEndpoint(request);
-	      request.addNamedListener('INVALIDATE_CACHED_ENDPOINTS', 'extractError', invalidateCachedEndpoints);
+	      if (isEnabled || hasRequiredEndpointDiscovery) {
+	        // For a given service; if at least one operation requires endpoint discovery then the SDK must enable endpoint discovery
+	        // by default for all operations of that service, including operations where endpoint discovery is optional.
+	        optionalDiscoverEndpoint(request);
+	        request.addNamedListener('INVALIDATE_CACHED_ENDPOINTS', 'extractError', invalidateCachedEndpoints);
+	      }
 	      done();
 	      break;
 	    case 'REQUIRED':
+	      if (isEnabled === false) {
+	        // For a given operation; if endpoint discovery is required and it has been disabled on the SDK client,
+	        // then the SDK must return a clear and actionable exception.
+	        request.response.error = util.error(new Error(), {
+	          code: 'ConfigurationException',
+	          message: 'Endpoint Discovery is disabled but ' + service.api.className + '.' + request.operation +
+	                    '() requires it. Please check your configurations.'
+	        });
+	        done();
+	        break;
+	      }
 	      request.addNamedListener('INVALIDATE_CACHED_ENDPOINTS', 'extractError', invalidateCachedEndpoints);
 	      requiredDiscoverEndpoint(request, done);
 	      break;
