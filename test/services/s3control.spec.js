@@ -28,6 +28,13 @@ describe('AWS.S3Control', function() {
     request.send();
     expect(request.httpRequest.headers.Host).to.eql('222.s3-control.dualstack.us-east-1.amazonaws.com');
     expect(request.httpRequest.endpoint.hostname).to.eql('222.s3-control.dualstack.us-east-1.amazonaws.com');
+
+    client = new AWS.S3Control({region: 'cn-north-1', useDualstack: true});
+    request = client.getPublicAccessBlock({AccountId: '222'});
+    helpers.mockResponse({data: {}});
+    request.send();
+    expect(request.httpRequest.headers.Host).to.eql('222.s3-control.dualstack.cn-north-1.amazonaws.com.cn');
+    expect(request.httpRequest.endpoint.hostname).to.eql('222.s3-control.dualstack.cn-north-1.amazonaws.com.cn');
   });
 
   it('append accountId to hostname when supplied and using customized endpoint', function() {
