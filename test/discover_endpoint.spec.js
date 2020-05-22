@@ -12,6 +12,7 @@ var api = {
     apiVersion: '2018-09-19',
     endpointPrefix: 'mockservice',
     serviceId: 'MockService',
+    serviceAbbreviation: 'MockService',
     protocol: 'json'
   },
   operations: {
@@ -757,7 +758,9 @@ describe('endpoint discovery', function() {
         expect(err).not.to.eql(null);
         expect(data).to.eql(null);
         expect(err.code).to.eql('ConfigurationException');
-        expect(err.message).to.eql('Endpoint Discovery is disabled but this operation requires it. Please check your configurations');
+        expect(err.message).to.eql(
+          'Endpoint Discovery is disabled but MockService.requiredEDOperation() requires it. Please check your configurations.'
+        );
       });
     });
 
@@ -774,7 +777,9 @@ describe('endpoint discovery', function() {
         expect(err).not.to.eql(null);
         // expect(data).to.eql(null);
         expect(err.code).to.eql('ConfigurationException');
-        expect(err.message).to.eql('Endpoint Discovery is disabled but this operation requires it. Please check your configurations');
+        expect(err.message).to.eql(
+          'Endpoint Discovery is disabled but MockService.requiredEDOperation() requires it. Please check your configurations.'
+        );
       });
     });
 
@@ -871,7 +876,9 @@ describe('endpoint discovery', function() {
           expect(err).not.to.eql(null);
           // expect(data).to.eql(null);
           expect(err.code).to.eql('ConfigurationException');
-          expect(err.message).to.eql('Endpoint Discovery is disabled but this operation requires it. Please check your configurations');
+          expect(err.message).to.eql(
+            'Endpoint Discovery is disabled but MockService.requiredEDOperation() requires it. Please check your configurations.'
+          );
         });
       });
 
