@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "EndpointDiscovery",
+  "description": "* If at least one operation requires endpoint discovery then the SDK enables endpoint discovery by default including operational endpoint discovery operations; * Users can set config `endpointDiscoveryEnabled`, env `AWS_ENDPOINT_DISCOVERY_ENABLED`, config file entry `endpoint_discovery_enabled` to `false` to explictly disable endpoint discovery, even operations the require endpoint discovery will fail; * SDK throws if endpoint discovery is explicitly disabled but operation requires endpoint discovery; * Now SDK throws more clear error message when required endpoint operation fails"
+}
