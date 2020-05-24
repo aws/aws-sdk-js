@@ -38,12 +38,22 @@ describe('region_config.js', function() {
     expect(service.endpoint.host).to.equal('s3.amazonaws.com');
   });
 
-  it('does not use any global endpoints in cn-*', function() {
+  it('uses "global" endpoint for IAM in cn-northwest-1', function() {
     var service = new AWS.IAM({
+      region: 'cn-northwest-1'
+    });
+    expect(service.isGlobalEndpoint).to.equal(true);
+    expect(service.signatureRegion).to.equal('cn-north-1');
+    expect(service.endpoint.host).to.equal('iam.cn-north-1.amazonaws.com.cn');
+  });
+
+  it('uses "global" endpoint for Route53 in cn-north-1', function() {
+    var service = new AWS.Route53({
       region: 'cn-north-1'
     });
-    expect(service.isGlobalEndpoint).to.equal(false);
-    expect(service.endpoint.host).to.equal('iam.cn-north-1.amazonaws.com.cn');
+    expect(service.isGlobalEndpoint).to.equal(true);
+    expect(service.signatureRegion).to.equal('cn-northwest-1');
+    expect(service.endpoint.host).to.equal('route53.amazonaws.com.cn');
   });
 
   it('enables signature version 4 signing in cn-*', function() {
@@ -85,9 +95,10 @@ describe('region_config.js', function() {
 
   it('uses us-gov endpoint for IAM in GovCloud', function() {
     var service = new AWS.IAM({
-      region: 'us-gov-west-1'
+      region: 'us-gov-east-1'
     });
-    expect(service.isGlobalEndpoint).to.equal(false);
+    expect(service.isGlobalEndpoint).to.equal(true);
+    expect(service.signatureRegion).to.equal('us-gov-west-1');
     expect(service.endpoint.host).to.equal('iam.us-gov.amazonaws.com');
   });
 
