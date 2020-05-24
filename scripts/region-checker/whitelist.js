@@ -25,8 +25,7 @@ var whitelist = {
         112
     ],
     '/request.js': [
-        315,
-        316
+        319
     ],
     '/services/s3.js': [
         70,
