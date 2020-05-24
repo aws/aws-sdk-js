@@ -16,7 +16,6 @@ function TSGenerator(options) {
     this._clientsDir = path.join(this._sdkRootDir, 'clients');
     this.metadata = null;
     this.typings = {};
-    this.fillApiModelFileNames(this._apiRootDir);
     this.streamTypes = {};
 }
 
@@ -32,8 +31,8 @@ TSGenerator.prototype.loadMetadata = function loadMetadata() {
 /**
  * Modifies metadata to include api model filenames.
  */
-TSGenerator.prototype.fillApiModelFileNames = function fillApiModelFileNames(apisPath) {
-    var modelPaths = fs.readdirSync(apisPath);
+TSGenerator.prototype.fillApiModelFileNames = function fillApiModelFileNames() {
+    var modelPaths = fs.readdirSync(this._apiRootDir);
     if (!this.metadata) {
         this.loadMetadata();
     }
@@ -639,6 +638,7 @@ TSGenerator.prototype.writeTypingsFile = function writeTypingsFile(name, directo
  * Create the typescript definition files for every service.
  */
 TSGenerator.prototype.generateAllClientTypings = function generateAllClientTypings() {
+    this.fillApiModelFileNames();
     var self = this;
     var metadata = this.metadata;
     // Iterate over every service

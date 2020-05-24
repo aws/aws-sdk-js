@@ -4,22 +4,41 @@ var fs = require('fs');
 var Translator = require('./lib/translator');
 var removeEventStreamOperations = require('./lib/remove-event-stream-ops').removeEventStreamOperations;
 var util = require('util');
+var path = require('path');
 
-var basePath = __dirname + '/../apis/';
-var paths = fs.readdirSync(basePath);
-var modelName = process.argv[2] || '';
+function ApiTranslator(basePath) {
+  this._apisPath = path.join(basePath, 'apis');
+}
 
-paths.forEach(function (path) {
-  if (path.match(new RegExp(modelName + ".+\\.normal\\.json$"))) {
-    var opath = path.replace(/\.normal\.json$/, '.min.json');
-    var data = JSON.parse(fs.readFileSync(basePath + path).toString());
-    var didModify = removeEventStreamOperations(data);
-    if (didModify) {
-      // original model modified, replace existing normal.json so docs/ts definitions are accurate
-      fs.writeFileSync(basePath + path, JSON.stringify(data, null, '  '));
-    }
-    var translated = new Translator(data, {documentation: false});
-    var json = JSON.stringify(translated, null, '  ');
-    fs.writeFileSync(basePath + opath, json);
+ApiTranslator.prototype.minimizeFile = function minimizeFile(filepath) {
+  var opath = filepath.replace(/\.normal\.json$/, '.min.json');
+  var data = JSON.parse(fs.readFileSync(path.join(this._apisPath, filepath)).toString());
+  var didModify = removeEventStreamOperations(data);
+  if (didModify) {
+    // original model modified, replace existing normal.json so docs/ts definitions are accurate
+    fs.writeFileSync(path.join(this._apisPath, filepath), JSON.stringify(data, null, '  '));
   }
-});
+  var translated = new Translator(data, {documentation: false});
+  var json = JSON.stringify(translated, null, '  ');
+  fs.writeFileSync(path.join(this._apisPath, opath), json);
+};
+
+ApiTranslator.prototype.translateAll = function translateAll(modelName) {
+  var paths = fs.readdirSync(this._apisPath);
+  var self = this;
+  paths.forEach(function(filepath) {
+    if (filepath.endsWith('.normal.json')) {
+      if (!modelName || filepath.startsWith(modelName)) {
+        self.minimizeFile(filepath);
+      }
+    }
+  });
+};
+
+if (require.main === module) {
+  var modelName = process.argv[2] || '';
+  var basePath = process.argv[3] || path.join(__dirname, '..');
+  new ApiTranslator(basePath).translateAll(modelName);
+}
+
+module.exports = ApiTranslator;
