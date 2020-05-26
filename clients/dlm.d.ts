@@ -115,16 +115,21 @@ declare namespace DLM {
     /**
      * The interval between snapshots. The supported values are 1, 2, 3, 4, 6, 8, 12, and 24.
      */
-    Interval: Interval;
+    Interval?: Interval;
     /**
      * The interval unit.
      */
-    IntervalUnit: IntervalUnitValues;
+    IntervalUnit?: IntervalUnitValues;
     /**
-     * The time, in UTC, to start the operation. The supported format is hh:mm. The operation occurs within a one-hour window following the specified time.
+     * The time, in UTC, to start the operation. The supported format is hh:mm. The operation occurs within a one-hour window following the specified time. If you do not specify a time, Amazon DLM selects a time within the next 24 hours.
      */
     Times?: TimesList;
+    /**
+     * The schedule, as a Cron expression. The schedule interval must be between 1 hour and 1 year. For more information, see Cron expressions in the Amazon CloudWatch User Guide.
+     */
+    CronExpression?: CronExpression;
   }
+  export type CronExpression = string;
   export interface CrossRegionCopyRetainRule {
     /**
      * The amount of time to retain each snapshot. The maximum is 100 years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.
@@ -317,7 +322,7 @@ declare namespace DLM {
      */
     PolicyType?: PolicyTypeValues;
     /**
-     * The resource type.
+     * The resource type. Use VOLUME to create snapshots of individual volumes or use INSTANCE to create multi-volume snapshots from the volumes for an instance.
      */
     ResourceTypes?: ResourceTypeValuesList;
     /**

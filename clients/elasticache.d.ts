@@ -683,6 +683,10 @@ declare namespace ElastiCache {
      * A flag that enables encryption at-rest when set to true. You cannot modify the value of AtRestEncryptionEnabled after the cluster is created. To enable at-rest encryption on a cluster you must set AtRestEncryptionEnabled to true when you create a cluster.  Required: Only available when creating a replication group in an Amazon VPC using redis version 3.2.6, 4.x or later. Default: false 
      */
     AtRestEncryptionEnabled?: BooleanOptional;
+    /**
+     * The ARN (Amazon Resource Name) of the cache cluster.
+     */
+    ARN?: String;
   }
   export type CacheClusterIdList = String[];
   export type CacheClusterList = CacheCluster[];
@@ -863,6 +867,10 @@ declare namespace ElastiCache {
      * Indicates whether the parameter group is associated with a Global Datastore
      */
     IsGlobal?: Boolean;
+    /**
+     * The ARN (Amazon Resource Name) of the cache parameter group.
+     */
+    ARN?: String;
   }
   export interface CacheParameterGroupDetails {
     /**
@@ -926,6 +934,10 @@ declare namespace ElastiCache {
      * A list of Amazon EC2 security groups that are associated with this cache security group.
      */
     EC2SecurityGroups?: EC2SecurityGroupList;
+    /**
+     * The ARN (Amazon Resource Name) of the cache security group.
+     */
+    ARN?: String;
   }
   export interface CacheSecurityGroupMembership {
     /**
@@ -967,6 +979,10 @@ declare namespace ElastiCache {
      * A list of subnets associated with the cache subnet group.
      */
     Subnets?: SubnetList;
+    /**
+     * The ARN (Amazon Resource Name) of the cache subnet group.
+     */
+    ARN?: String;
   }
   export interface CacheSubnetGroupMessage {
     /**
@@ -1212,7 +1228,7 @@ declare namespace ElastiCache {
      */
     AutomaticFailoverEnabled?: BooleanOptional;
     /**
-     * The number of clusters this replication group initially has. This parameter is not used if there is more than one node group (shard). You should use ReplicasPerNodeGroup instead. If AutomaticFailoverEnabled is true, the value of this parameter must be at least 2. If AutomaticFailoverEnabled is false you can omit this parameter (it will default to 1), or you can explicitly set it to a value between 2 and 6. The maximum permitted value for NumCacheClusters is 6 (1 primary plus 5 replicas).
+     * The number of nodes in the cluster. This parameter is not used if there is more than one node group (shard). You should use ReplicasPerNodeGroup instead. If AutomaticFailoverEnabled is true, the value of this parameter must be at least 2. If AutomaticFailoverEnabled is false you can omit this parameter (it will default to 1), or you can explicitly set it to a value between 2 and 6. The maximum permitted value for NumCacheClusters is 6 (1 primary plus 5 replicas).
      */
     NumCacheClusters?: IntegerOptional;
     /**
@@ -1996,6 +2012,10 @@ declare namespace ElastiCache {
      * A flag that enables encryption at rest when set to true. You cannot modify the value of AtRestEncryptionEnabled after the replication group is created. To enable encryption at rest on a replication group you must set AtRestEncryptionEnabled to true when you create the replication group.   Required: Only available when creating a replication group in an Amazon VPC using redis version 3.2.6, 4.x or later.
      */
     AtRestEncryptionEnabled?: BooleanOptional;
+    /**
+     * The ARN (Amazon Resource Name) of the global replication group.
+     */
+    ARN?: String;
   }
   export interface GlobalReplicationGroupInfo {
     /**
@@ -2763,6 +2783,10 @@ declare namespace ElastiCache {
      * The ID of the KMS key used to encrypt the disk in the cluster.
      */
     KmsKeyId?: String;
+    /**
+     * The ARN (Amazon Resource Name) of the replication group.
+     */
+    ARN?: String;
   }
   export type ReplicationGroupIdList = String[];
   export type ReplicationGroupList = ReplicationGroup[];
@@ -3137,6 +3161,10 @@ declare namespace ElastiCache {
      * The ID of the KMS key used to encrypt the snapshot.
      */
     KmsKeyId?: String;
+    /**
+     * The ARN (Amazon Resource Name) of the snapshot.
+     */
+    ARN?: String;
   }
   export type SnapshotArnsList = String[];
   export type SnapshotList = Snapshot[];

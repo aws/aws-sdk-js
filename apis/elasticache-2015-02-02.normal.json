@@ -2073,6 +2073,10 @@
         "AtRestEncryptionEnabled": {
           "shape": "BooleanOptional",
           "documentation": "<p>A flag that enables encryption at-rest when set to <code>true</code>.</p> <p>You cannot modify the value of <code>AtRestEncryptionEnabled</code> after the cluster is created. To enable at-rest encryption on a cluster you must set <code>AtRestEncryptionEnabled</code> to <code>true</code> when you create a cluster.</p> <p> <b>Required:</b> Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code>, <code>4.x</code> or later.</p> <p>Default: <code>false</code> </p>"
+        },
+        "ARN": {
+          "shape": "String",
+          "documentation": "<p>The ARN (Amazon Resource Name) of the cache cluster.</p>"
         }
       },
       "documentation": "<p>Contains all of the attributes of a specific cluster.</p>",
@@ -2334,6 +2338,10 @@
         "IsGlobal": {
           "shape": "Boolean",
           "documentation": "<p>Indicates whether the parameter group is associated with a Global Datastore</p>"
+        },
+        "ARN": {
+          "shape": "String",
+          "documentation": "<p>The ARN (Amazon Resource Name) of the cache parameter group.</p>"
         }
       },
       "documentation": "<p>Represents the output of a <code>CreateCacheParameterGroup</code> operation.</p>",
@@ -2424,6 +2432,10 @@
         "EC2SecurityGroups": {
           "shape": "EC2SecurityGroupList",
           "documentation": "<p>A list of Amazon EC2 security groups that are associated with this cache security group.</p>"
+        },
+        "ARN": {
+          "shape": "String",
+          "documentation": "<p>The ARN (Amazon Resource Name) of the cache security group.</p>"
         }
       },
       "documentation": "<p>Represents the output of one of the following operations:</p> <ul> <li> <p> <code>AuthorizeCacheSecurityGroupIngress</code> </p> </li> <li> <p> <code>CreateCacheSecurityGroup</code> </p> </li> <li> <p> <code>RevokeCacheSecurityGroupIngress</code> </p> </li> </ul>",
@@ -2496,6 +2508,10 @@
         "Subnets": {
           "shape": "SubnetList",
           "documentation": "<p>A list of subnets associated with the cache subnet group.</p>"
+        },
+        "ARN": {
+          "shape": "String",
+          "documentation": "<p>The ARN (Amazon Resource Name) of the cache subnet group.</p>"
         }
       },
       "documentation": "<p>Represents the output of one of the following operations:</p> <ul> <li> <p> <code>CreateCacheSubnetGroup</code> </p> </li> <li> <p> <code>ModifyCacheSubnetGroup</code> </p> </li> </ul>",
@@ -2871,7 +2887,7 @@
         },
         "NumCacheClusters": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The number of clusters this replication group initially has.</p> <p>This parameter is not used if there is more than one node group (shard). You should use <code>ReplicasPerNodeGroup</code> instead.</p> <p>If <code>AutomaticFailoverEnabled</code> is <code>true</code>, the value of this parameter must be at least 2. If <code>AutomaticFailoverEnabled</code> is <code>false</code> you can omit this parameter (it will default to 1), or you can explicitly set it to a value between 2 and 6.</p> <p>The maximum permitted value for <code>NumCacheClusters</code> is 6 (1 primary plus 5 replicas).</p>"
+          "documentation": "<p>The number of nodes in the cluster.</p> <p>This parameter is not used if there is more than one node group (shard). You should use <code>ReplicasPerNodeGroup</code> instead.</p> <p>If <code>AutomaticFailoverEnabled</code> is <code>true</code>, the value of this parameter must be at least 2. If <code>AutomaticFailoverEnabled</code> is <code>false</code> you can omit this parameter (it will default to 1), or you can explicitly set it to a value between 2 and 6.</p> <p>The maximum permitted value for <code>NumCacheClusters</code> is 6 (1 primary plus 5 replicas).</p>"
         },
         "PreferredCacheClusterAZs": {
           "shape": "AvailabilityZonesList",
@@ -3929,6 +3945,10 @@
         "AtRestEncryptionEnabled": {
           "shape": "BooleanOptional",
           "documentation": "<p>A flag that enables encryption at rest when set to <code>true</code>.</p> <p>You cannot modify the value of <code>AtRestEncryptionEnabled</code> after the replication group is created. To enable encryption at rest on a replication group you must set <code>AtRestEncryptionEnabled</code> to <code>true</code> when you create the replication group. </p> <p> <b>Required:</b> Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code>, <code>4.x</code> or later.</p>"
+        },
+        "ARN": {
+          "shape": "String",
+          "documentation": "<p>The ARN (Amazon Resource Name) of the global replication group.</p>"
         }
       },
       "documentation": "<p>Consists of a primary cluster that accepts writes and an associated secondary cluster that resides in a different AWS region. The secondary cluster accepts only reads. The primary cluster automatically replicates updates to the secondary cluster.</p> <ul> <li> <p>The <b>GlobalReplicationGroupIdSuffix</b> represents the name of the Global Datastore, which is what you use to associate a secondary cluster.</p> </li> </ul>",
@@ -5064,6 +5084,10 @@
         "KmsKeyId": {
           "shape": "String",
           "documentation": "<p>The ID of the KMS key used to encrypt the disk in the cluster.</p>"
+        },
+        "ARN": {
+          "shape": "String",
+          "documentation": "<p>The ARN (Amazon Resource Name) of the replication group.</p>"
         }
       },
       "documentation": "<p>Contains all of the attributes of a specific Redis replication group.</p>",
@@ -5593,6 +5617,10 @@
         "KmsKeyId": {
           "shape": "String",
           "documentation": "<p>The ID of the KMS key used to encrypt the snapshot.</p>"
+        },
+        "ARN": {
+          "shape": "String",
+          "documentation": "<p>The ARN (Amazon Resource Name) of the snapshot.</p>"
         }
       },
       "documentation": "<p>Represents a copy of an entire Redis cluster as of the time when the snapshot was taken.</p>",

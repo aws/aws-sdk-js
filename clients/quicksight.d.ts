@@ -1210,7 +1210,7 @@ declare namespace QuickSight {
      */
     Arn?: Arn;
     /**
-     * A display name for the dataset.
+     * A display name for the dashboard.
      */
     Name?: DashboardName;
     /**
@@ -1242,7 +1242,7 @@ declare namespace QuickSight {
     Message?: NonEmptyString;
   }
   export type DashboardErrorList = DashboardError[];
-  export type DashboardErrorType = "DATA_SET_NOT_FOUND"|"INTERNAL_FAILURE"|"PARAMETER_VALUE_INCOMPATIBLE"|"PARAMETER_TYPE_INVALID"|"PARAMETER_NOT_FOUND"|"COLUMN_TYPE_MISMATCH"|"COLUMN_GEOGRAPHIC_ROLE_MISMATCH"|"COLUMN_REPLACEMENT_MISSING"|string;
+  export type DashboardErrorType = "ACCESS_DENIED"|"SOURCE_NOT_FOUND"|"DATA_SET_NOT_FOUND"|"INTERNAL_FAILURE"|"PARAMETER_VALUE_INCOMPATIBLE"|"PARAMETER_TYPE_INVALID"|"PARAMETER_NOT_FOUND"|"COLUMN_TYPE_MISMATCH"|"COLUMN_GEOGRAPHIC_ROLE_MISMATCH"|"COLUMN_REPLACEMENT_MISSING"|string;
   export type DashboardFilterAttribute = "QUICKSIGHT_USER"|string;
   export type DashboardName = string;
   export interface DashboardPublishOptions {
@@ -1348,6 +1348,10 @@ declare namespace QuickSight {
      */
     SourceEntityArn?: Arn;
     /**
+     * The Amazon Resource Numbers (ARNs) for the datasets that are associated with a version of the dashboard.
+     */
+    DataSetArns?: DataSetArnsList;
+    /**
      * Description.
      */
     Description?: VersionDescription;
@@ -1429,6 +1433,7 @@ declare namespace QuickSight {
      */
     RowLevelPermissionDataSet?: RowLevelPermissionDataSet;
   }
+  export type DataSetArnsList = Arn[];
   export interface DataSetConfiguration {
     /**
      * Placeholder.
@@ -2634,7 +2639,7 @@ declare namespace QuickSight {
   }
   export interface ListDashboardsResponse {
     /**
-     * A structure that contains all of the dashboards shared with the user. This structure provides basic information about the dashboards.
+     * A structure that contains all of the dashboards in your AWS account. This structure provides basic information about the dashboards.
      */
     DashboardSummaryList?: DashboardSummaryList;
     /**
@@ -3647,7 +3652,7 @@ declare namespace QuickSight {
     Message?: NonEmptyString;
   }
   export type TemplateErrorList = TemplateError[];
-  export type TemplateErrorType = "DATA_SET_NOT_FOUND"|"INTERNAL_FAILURE"|string;
+  export type TemplateErrorType = "SOURCE_NOT_FOUND"|"DATA_SET_NOT_FOUND"|"INTERNAL_FAILURE"|string;
   export type TemplateName = string;
   export interface TemplateSourceAnalysis {
     /**
@@ -3734,7 +3739,7 @@ declare namespace QuickSight {
   }
   export interface TemplateVersionSummary {
     /**
-     * The ARN of the template version.
+     * The Amazon Resource Name (ARN) of the template version.
      */
     Arn?: Arn;
     /**

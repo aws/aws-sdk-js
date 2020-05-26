@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.683.0-->
+<!--LATEST=2.684.0-->
 <!--ENTRYINSERT-->
+
+## 2.684.0
+* feature: DLM: Allowing cron expression in the DLM policy creation schedule. 
+* feature: EC2: ebsOptimizedInfo, efaSupported and supportedVirtualizationTypes added to DescribeInstanceTypes API
+* feature: ElastiCache: Amazon ElastiCache now allows you to use resource based policies to manage access to operations performed on ElastiCache resources. Also, Amazon ElastiCache now exposes ARN (Amazon Resource Names) for ElastiCache resources such as Cache Clusters and Parameter Groups. ARNs can be used to apply IAM policies to ElastiCache resources.
+* feature: QuickSight: Add DataSetArns to QuickSight DescribeDashboard API response.
+* feature: SSM: The AWS Systems Manager GetOpsSummary API action now supports multiple OpsResultAttributes in the request. Currently, this feature only supports OpsResultAttributes with the following TypeNames: [AWS:EC2InstanceComputeOptimizer] or [AWS:EC2InstanceInformation, AWS:EC2InstanceComputeOptimizer]. These TypeNames can be used along with either or both of the following: [AWS:EC2InstanceRecommendation, AWS:RecommendationSource]
 
 ## 2.683.0
 * bugfix: DualStack: Add dualstack by modifying existing endpoint in config

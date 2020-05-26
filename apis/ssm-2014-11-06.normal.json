@@ -160,7 +160,7 @@
           "shape": "InvalidSchedule"
         }
       ],
-      "documentation": "<p>Associates the specified Systems Manager document with the specified instances or targets.</p> <p>When you associate a document with one or more instances using instance IDs or tags, SSM Agent running on the instance processes the document and configures the instance as specified.</p> <p>If you associate a document with an instance that already has an associated document, the system returns the AssociationAlreadyExists exception.</p>"
+      "documentation": "<p>Associates the specified Systems Manager document with the specified instances or targets.</p> <p>When you associate a document with one or more instances, SSM Agent running on the instance processes the document and configures the instance as specified. If you associate a document with an instance that already has an associated document, the system returns the <code>AssociationAlreadyExists</code> exception.</p>"
     },
     "CreateAssociationBatch": {
       "name": "CreateAssociationBatch",
@@ -5427,7 +5427,7 @@
         },
         "Name": {
           "shape": "DocumentName",
-          "documentation": "<p>A name for the Systems Manager document.</p> <important> <p>You can't use the following strings as document name prefixes. These are reserved by AWS for use as document name prefixes:</p> <ul> <li> <p> <code>aws</code> </p> </li> <li> <p> <code>amazon</code> </p> </li> <li> <p> <code>amzn</code> </p> </li> </ul> </important>"
+          "documentation": "<p>A name for the Systems Manager document.</p> <important> <p>You can't use the following strings as document name prefixes. These are reserved by AWS for use as document name prefixes:</p> <ul> <li> <p> <code>aws-</code> </p> </li> <li> <p> <code>amazon</code> </p> </li> <li> <p> <code>amzn</code> </p> </li> </ul> </important>"
         },
         "VersionName": {
           "shape": "DocumentVersionName",
@@ -11684,7 +11684,6 @@
       "member": {
         "shape": "OpsResultAttribute"
       },
-      "max": 1,
       "min": 1
     },
     "OutputSource": {
@@ -12840,7 +12839,7 @@
         },
         "DataType": {
           "shape": "ParameterDataType",
-          "documentation": "<p>The data type for a String parameter. Supported data types include plain text and Amazon Machine Image IDs.</p> <p> <b>The following data type values are supported.</b> </p> <ul> <li> <p> <code>text</code> </p> </li> <li> <p> <code>aws:ec2:image</code> </p> </li> </ul> <p>When you create a String parameter and specify <code>aws:ec2:image</code>, Systems Manager validates the parameter value you provide against that data type. The required format is <code>ami-12345abcdeEXAMPLE</code>. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html\">Native parameter support for Amazon Machine Image IDs</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+          "documentation": "<p>The data type for a <code>String</code> parameter. Supported data types include plain text and Amazon Machine Image IDs.</p> <p> <b>The following data type values are supported.</b> </p> <ul> <li> <p> <code>text</code> </p> </li> <li> <p> <code>aws:ec2:image</code> </p> </li> </ul> <p>When you create a <code>String</code> parameter and specify <code>aws:ec2:image</code>, Systems Manager validates the parameter value is in the required format, such as <code>ami-12345abcdeEXAMPLE</code>, and that the specified AMI is available in your AWS account. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html\">Native parameter support for Amazon Machine Image IDs</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
         }
       }
     },

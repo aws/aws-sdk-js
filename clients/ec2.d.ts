@@ -1525,19 +1525,19 @@ declare class EC2 extends Service {
    */
   describeInstanceTypeOfferings(callback?: (err: AWSError, data: EC2.Types.DescribeInstanceTypeOfferingsResult) => void): Request<EC2.Types.DescribeInstanceTypeOfferingsResult, AWSError>;
   /**
-   * Returns a list of all instance types offered in your current AWS Region. The results can be filtered by the attributes of the instance types.
+   * Describes the details of the instance types that are offered in a location. The results can be filtered by the attributes of the instance types.
    */
   describeInstanceTypes(params: EC2.Types.DescribeInstanceTypesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInstanceTypesResult) => void): Request<EC2.Types.DescribeInstanceTypesResult, AWSError>;
   /**
-   * Returns a list of all instance types offered in your current AWS Region. The results can be filtered by the attributes of the instance types.
+   * Describes the details of the instance types that are offered in a location. The results can be filtered by the attributes of the instance types.
    */
   describeInstanceTypes(callback?: (err: AWSError, data: EC2.Types.DescribeInstanceTypesResult) => void): Request<EC2.Types.DescribeInstanceTypesResult, AWSError>;
   /**
-   * Describes the specified instances or all of AWS account's instances. If you specify one or more instance IDs, Amazon EC2 returns information for those instances. If you do not specify instance IDs, Amazon EC2 returns information for all relevant instances. If you specify an instance ID that is not valid, an error is returned. If you specify an instance that you do not own, it is not included in the returned results. Recently terminated instances might appear in the returned results. This interval is usually less than one hour. If you describe instances in the rare case where an Availability Zone is experiencing a service disruption and you specify instance IDs that are in the affected zone, or do not specify any instance IDs at all, the call fails. If you describe instances and specify only instance IDs that are in an unaffected zone, the call works normally.
+   * Describes the specified instances or all instances. If you specify instance IDs, the output includes information for only the specified instances. If you specify filters, the output includes information for only those instances that meet the filter criteria. If you do not specify instance IDs or filters, the output includes information for all instances, which can affect performance. We recommend that you use pagination to ensure that the operation returns quickly and successfully. If you specify an instance ID that is not valid, an error is returned. If you specify an instance that you do not own, it is not included in the output. Recently terminated instances might appear in the returned results. This interval is usually less than one hour. If you describe instances in the rare case where an Availability Zone is experiencing a service disruption and you specify instance IDs that are in the affected zone, or do not specify any instance IDs at all, the call fails. If you describe instances and specify only instance IDs that are in an unaffected zone, the call works normally.
    */
   describeInstances(params: EC2.Types.DescribeInstancesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInstancesResult) => void): Request<EC2.Types.DescribeInstancesResult, AWSError>;
   /**
-   * Describes the specified instances or all of AWS account's instances. If you specify one or more instance IDs, Amazon EC2 returns information for those instances. If you do not specify instance IDs, Amazon EC2 returns information for all relevant instances. If you specify an instance ID that is not valid, an error is returned. If you specify an instance that you do not own, it is not included in the returned results. Recently terminated instances might appear in the returned results. This interval is usually less than one hour. If you describe instances in the rare case where an Availability Zone is experiencing a service disruption and you specify instance IDs that are in the affected zone, or do not specify any instance IDs at all, the call fails. If you describe instances and specify only instance IDs that are in an unaffected zone, the call works normally.
+   * Describes the specified instances or all instances. If you specify instance IDs, the output includes information for only the specified instances. If you specify filters, the output includes information for only those instances that meet the filter criteria. If you do not specify instance IDs or filters, the output includes information for all instances, which can affect performance. We recommend that you use pagination to ensure that the operation returns quickly and successfully. If you specify an instance ID that is not valid, an error is returned. If you specify an instance that you do not own, it is not included in the output. Recently terminated instances might appear in the returned results. This interval is usually less than one hour. If you describe instances in the rare case where an Availability Zone is experiencing a service disruption and you specify instance IDs that are in the affected zone, or do not specify any instance IDs at all, the call fails. If you describe instances and specify only instance IDs that are in an unaffected zone, the call works normally.
    */
   describeInstances(callback?: (err: AWSError, data: EC2.Types.DescribeInstancesResult) => void): Request<EC2.Types.DescribeInstancesResult, AWSError>;
   /**
@@ -4458,6 +4458,9 @@ declare namespace EC2 {
   }
   export type AvailableInstanceCapacityList = InstanceCapacity[];
   export type BareMetalFlag = boolean;
+  export type BaselineBandwidthInMbps = number;
+  export type BaselineIops = number;
+  export type BaselineThroughputInMBps = number;
   export type BatchState = "submitted"|"active"|"cancelled"|"failed"|"cancelled_running"|"cancelled_terminating"|"modifying"|string;
   export type BillingProductList = String[];
   export type _Blob = Buffer|Uint8Array|Blob|string;
@@ -9567,7 +9570,7 @@ declare namespace EC2 {
      */
     InstanceTypes?: RequestInstanceTypeList;
     /**
-     * One or more filters. Filter names and values are case-sensitive.    auto-recovery-supported - Indicates whether auto recovery is supported. (true | false)    bare-metal - Indicates whether it is a bare metal instance type. (true | false)    burstable-performance-supported - Indicates whether it is a burstable performance instance type. (true | false)    current-generation - Indicates whether this instance type is the latest generation instance type of an instance family. (true | false)    ebs-info.ebs-optimized-support - Indicates whether the instance type is EBS-optimized. (supported | unsupported | default)    ebs-info.encryption-support - Indicates whether EBS encryption is supported. (supported | unsupported)    free-tier-eligible - Indicates whether the instance type is eligible to use in the free tier. (true | false)    hibernation-supported - Indicates whether On-Demand hibernation is supported. (true | false)    hypervisor - The hypervisor used. (nitro | xen)    instance-storage-info.disk.count - The number of local disks.    instance-storage-info.disk.size-in-gb - The storage size of each instance storage disk, in GB.    instance-storage-info.disk.type - The storage technology for the local instance storage disks. (hdd | ssd)    instance-storage-info.total-size-in-gb - The total amount of storage available from all local instance storage, in GB.    instance-storage-supported - Indicates whether the instance type has local instance storage. (true | false)    memory-info.size-in-mib - The memory size.    network-info.ena-support - Indicates whether Elastic Network Adapter (ENA) is supported or required. (required | supported | unsupported)    network-info.ipv4-addresses-per-interface - The maximum number of private IPv4 addresses per network interface.    network-info.ipv6-addresses-per-interface - The maximum number of private IPv6 addresses per network interface.    network-info.ipv6-supported - Indicates whether the instance type supports IPv6. (true | false)    network-info.maximum-network-interfaces - The maximum number of network interfaces per instance.    network-info.network-performance - Describes the network performance.    processor-info.sustained-clock-speed-in-ghz - The CPU clock speed, in GHz.    vcpu-info.default-cores - The default number of cores for the instance type.    vcpu-info.default-threads-per-core - The default number of threads per core for the instance type.    vcpu-info.default-vcpus - The default number of vCPUs for the instance type.  
+     * One or more filters. Filter names and values are case-sensitive.    auto-recovery-supported - Indicates whether auto recovery is supported. (true | false)    bare-metal - Indicates whether it is a bare metal instance type. (true | false)    burstable-performance-supported - Indicates whether it is a burstable performance instance type. (true | false)    current-generation - Indicates whether this instance type is the latest generation instance type of an instance family. (true | false)    ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps - The baseline bandwidth performance for an EBS-optimized instance type, in Mbps.    ebs-info.ebs-optimized-info.baseline-throughput-in-mbps - The baseline throughput performance for an EBS-optimized instance type, in MBps.    ebs-info.ebs-optimized-info.baseline-iops - The baseline input/output storage operations per second for an EBS-optimized instance type.    ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps - The maximum bandwidth performance for an EBS-optimized instance type, in Mbps.    ebs-info.ebs-optimized-info.maximum-throughput-in-mbps - The maximum throughput performance for an EBS-optimized instance type, in MBps.    ebs-info.ebs-optimized-info.maximum-iops - The maximum input/output storage operations per second for an EBS-optimized instance type.    ebs-info.ebs-optimized-support - Indicates whether the instance type is EBS-optimized. (supported | unsupported | default)    ebs-info.encryption-support - Indicates whether EBS encryption is supported. (supported | unsupported)    free-tier-eligible - Indicates whether the instance type is eligible to use in the free tier. (true | false)    hibernation-supported - Indicates whether On-Demand hibernation is supported. (true | false)    hypervisor - The hypervisor used. (nitro | xen)    instance-storage-info.disk.count - The number of local disks.    instance-storage-info.disk.size-in-gb - The storage size of each instance storage disk, in GB.    instance-storage-info.disk.type - The storage technology for the local instance storage disks. (hdd | ssd)    instance-storage-info.total-size-in-gb - The total amount of storage available from all local instance storage, in GB.    instance-storage-supported - Indicates whether the instance type has local instance storage. (true | false)    memory-info.size-in-mib - The memory size.    network-info.ena-support - Indicates whether Elastic Network Adapter (ENA) is supported or required. (required | supported | unsupported)    network-info.efa-supported - Indicates whether the instance type supports Elastic Fabric Adapter (EFA). (true | false)    network-info.ipv4-addresses-per-interface - The maximum number of private IPv4 addresses per network interface.    network-info.ipv6-addresses-per-interface - The maximum number of private IPv6 addresses per network interface.    network-info.ipv6-supported - Indicates whether the instance type supports IPv6. (true | false)    network-info.maximum-network-interfaces - The maximum number of network interfaces per instance.    network-info.network-performance - Describes the network performance.    processor-info.sustained-clock-speed-in-ghz - The CPU clock speed, in GHz.    vcpu-info.default-cores - The default number of cores for the instance type.    vcpu-info.default-threads-per-core - The default number of threads per core for the instance type.    vcpu-info.default-vcpus - The default number of vCPUs for the instance type.  
      */
     Filters?: FilterList;
     /**
@@ -12365,6 +12368,10 @@ declare namespace EC2 {
      * Indicates whether Amazon EBS encryption is supported.
      */
     EncryptionSupport?: EbsEncryptionSupport;
+    /**
+     * Describes the optimized EBS performance for the instance type.
+     */
+    EbsOptimizedInfo?: EbsOptimizedInfo;
   }
   export interface EbsInstanceBlockDevice {
     /**
@@ -12394,7 +12401,34 @@ declare namespace EC2 {
      */
     VolumeId?: VolumeId;
   }
+  export interface EbsOptimizedInfo {
+    /**
+     * The baseline bandwidth performance for an EBS-optimized instance type, in Mbps.
+     */
+    BaselineBandwidthInMbps?: BaselineBandwidthInMbps;
+    /**
+     * The baseline throughput performance for an EBS-optimized instance type, in MBps.
+     */
+    BaselineThroughputInMBps?: BaselineThroughputInMBps;
+    /**
+     * The baseline input/output storage operations per seconds for an EBS-optimized instance type.
+     */
+    BaselineIops?: BaselineIops;
+    /**
+     * The maximum bandwidth performance for an EBS-optimized instance type, in Mbps.
+     */
+    MaximumBandwidthInMbps?: MaximumBandwidthInMbps;
+    /**
+     * The maximum throughput performance for an EBS-optimized instance type, in MBps.
+     */
+    MaximumThroughputInMBps?: MaximumThroughputInMBps;
+    /**
+     * The maximum input/output storage operations per second for an EBS-optimized instance type.
+     */
+    MaximumIops?: MaximumIops;
+  }
   export type EbsOptimizedSupport = "unsupported"|"supported"|"default"|string;
+  export type EfaSupportedFlag = boolean;
   export interface EgressOnlyInternetGateway {
     /**
      * Information about the attachment of the egress-only internet gateway.
@@ -13190,29 +13224,29 @@ declare namespace EC2 {
   }
   export interface FleetLaunchTemplateSpecification {
     /**
-     * The ID of the launch template. You must specify either a template ID or a template name.
+     * The ID of the launch template. If you specify the template ID, you can't specify the template name.
      */
     LaunchTemplateId?: String;
     /**
-     * The name of the launch template. You must specify either a template name or a template ID.
+     * The name of the launch template. If you specify the template name, you can't specify the template ID.
      */
     LaunchTemplateName?: LaunchTemplateName;
     /**
-     * The version number of the launch template. You must specify a version number.
+     * The launch template version number, $Latest, or $Default. You must specify a value, otherwise the request fails. If the value is $Latest, Amazon EC2 uses the latest version of the launch template. If the value is $Default, Amazon EC2 uses the default version of the launch template.
      */
     Version?: String;
   }
   export interface FleetLaunchTemplateSpecificationRequest {
     /**
-     * The ID of the launch template.
+     * The ID of the launch template. If you specify the template ID, you can't specify the template name.
      */
     LaunchTemplateId?: LaunchTemplateId;
     /**
-     * The name of the launch template.
+     * The name of the launch template. If you specify the template name, you can't specify the template ID.
      */
     LaunchTemplateName?: LaunchTemplateName;
     /**
-     * The version number of the launch template. Note: This is a required parameter and will be updated soon. 
+     * The launch template version number, $Latest, or $Default. You must specify a value, otherwise the request fails. If the value is $Latest, Amazon EC2 uses the latest version of the launch template. If the value is $Default, Amazon EC2 uses the default version of the launch template.
      */
     Version?: String;
   }
@@ -15721,6 +15755,10 @@ declare namespace EC2 {
      */
     SupportedRootDeviceTypes?: RootDeviceTypeList;
     /**
+     * The supported virtualization types.
+     */
+    SupportedVirtualizationTypes?: VirtualizationTypeList;
+    /**
      * Indicates whether the instance is bare metal.
      */
     BareMetal?: BareMetalFlag;
@@ -16998,6 +17036,9 @@ declare namespace EC2 {
   export type MaxIpv6AddrPerInterface = number;
   export type MaxNetworkInterfaces = number;
   export type MaxResults = number;
+  export type MaximumBandwidthInMbps = number;
+  export type MaximumIops = number;
+  export type MaximumThroughputInMBps = number;
   export type MembershipType = "static"|"igmp"|string;
   export interface MemoryInfo {
     /**
@@ -18420,6 +18461,10 @@ declare namespace EC2 {
      * Indicates whether Elastic Network Adapter (ENA) is supported.
      */
     EnaSupport?: EnaSupport;
+    /**
+     * Indicates whether Elastic Fabric Adapter (EFA) is supported.
+     */
+    EfaSupported?: EfaSupportedFlag;
   }
   export interface NetworkInterface {
     /**
@@ -21020,7 +21065,7 @@ declare namespace EC2 {
      */
     ElasticGpuSpecification?: ElasticGpuSpecifications;
     /**
-     * An elastic inference accelerator to associate with the instance. Elastic inference accelerators are a resource you can attach to your Amazon EC2 instances to accelerate your Deep Learning (DL) inference workloads.
+     * An elastic inference accelerator to associate with the instance. Elastic inference accelerators are a resource you can attach to your Amazon EC2 instances to accelerate your Deep Learning (DL) inference workloads. You cannot specify accelerators from different generations in the same request.
      */
     ElasticInferenceAccelerators?: ElasticInferenceAccelerators;
     /**
@@ -24041,6 +24086,7 @@ declare namespace EC2 {
   }
   export type VgwTelemetryList = VgwTelemetry[];
   export type VirtualizationType = "hvm"|"paravirtual"|string;
+  export type VirtualizationTypeList = VirtualizationType[];
   export interface Volume {
     /**
      * Information about the volume attachments.
