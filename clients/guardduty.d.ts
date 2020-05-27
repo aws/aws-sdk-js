@@ -715,7 +715,7 @@ declare namespace GuardDuty {
      */
     Format: IpSetFormat;
     /**
-     * The URI of the file that contains the IPSet. For example: .
+     * The URI of the file that contains the IPSet.
      */
     Location: Location;
     /**
@@ -803,7 +803,7 @@ declare namespace GuardDuty {
      */
     Format: ThreatIntelSetFormat;
     /**
-     * The URI of the file that contains the ThreatIntelSet. For example: .
+     * The URI of the file that contains the ThreatIntelSet.
      */
     Location: Location;
     /**
@@ -1281,7 +1281,7 @@ declare namespace GuardDuty {
      */
     Format: IpSetFormat;
     /**
-     * The URI of the file that contains the IPSet. For example: .
+     * The URI of the file that contains the IPSet.
      */
     Location: Location;
     /**
@@ -1353,7 +1353,7 @@ declare namespace GuardDuty {
      */
     Format: ThreatIntelSetFormat;
     /**
-     * The URI of the file that contains the ThreatIntelSet. For example: .
+     * The URI of the file that contains the ThreatIntelSet.
      */
     Location: Location;
     /**
@@ -2218,7 +2218,7 @@ declare namespace GuardDuty {
      */
     Name?: Name;
     /**
-     * The updated URI of the file that contains the IPSet. For example: .
+     * The updated URI of the file that contains the IPSet.
      */
     Location?: Location;
     /**
@@ -2270,7 +2270,7 @@ declare namespace GuardDuty {
      */
     Name?: Name;
     /**
-     * The updated URI of the file that contains the ThreateIntelSet. For example: .
+     * The updated URI of the file that contains the ThreateIntelSet.
      */
     Location?: Location;
     /**

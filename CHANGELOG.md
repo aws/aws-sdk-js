@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.684.0-->
+<!--LATEST=2.685.0-->
 <!--ENTRYINSERT-->
+
+## 2.685.0
+* feature: ELBv2: This release added support for HTTP/2 ALPN preference lists for Network Load Balancers
 
 ## 2.684.0
 * feature: DLM: Allowing cron expression in the DLM policy creation schedule. 
