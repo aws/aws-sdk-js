@@ -206,7 +206,7 @@
           "shape": "ServiceQuotaExceededException"
         }
       ],
-      "documentation": "<p>This operation allows you to request changes in your entities.</p>"
+      "documentation": "<p>This operation allows you to request changes for your entities. Within a single ChangeSet, you cannot start the same change type against the same entity multiple times. Additionally, when a ChangeSet is running, all the entities targeted by the different changes are locked until the ChangeSet has completed (either succeeded, cancelled, or failed). If you try to start a ChangeSet containing a change against an entity that is already locked, you will receive a <code>ResourceInUseException</code>.</p> <p>For example, you cannot start the ChangeSet described in the <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples\">example</a> below because it contains two changes to execute the same change type (<code>AddRevisions</code>) against the same entity (<code>entity-id@1)</code>.</p>"
     }
   },
   "shapes": {
@@ -351,6 +351,10 @@
         "Entity": {
           "shape": "Entity",
           "documentation": "<p>The entity to be changed.</p>"
+        },
+        "Details": {
+          "shape": "Json",
+          "documentation": "<p>This object contains details specific to the change type of the requested change.</p>"
         },
         "ErrorDetailList": {
           "shape": "ErrorDetailList",
@@ -503,7 +507,7 @@
       "members": {
         "Name": {
           "shape": "StringValue",
-          "documentation": "<p>The name for the entity. This value is not unique. It is defined by the provider.</p>"
+          "documentation": "<p>The name for the entity. This value is not unique. It is defined by the seller.</p>"
         },
         "EntityType": {
           "shape": "EntityType",
@@ -523,7 +527,7 @@
         },
         "Visibility": {
           "shape": "StringValue",
-          "documentation": "<p>The visibility status of the entity to subscribers. This value can be <code>Public</code> (everyone can view the entity), <code>Limited</code> (the entity is visible to limited accounts only), or <code>Restricted</code> (the entity was published and then unpublished and only existing subscribers can view it). </p>"
+          "documentation": "<p>The visibility status of the entity to buyers. This value can be <code>Public</code> (everyone can view the entity), <code>Limited</code> (the entity is visible to limited accounts only), or <code>Restricted</code> (the entity was published and then unpublished and only existing buyers can view it). </p>"
         }
       },
       "documentation": "<p>This object is a container for common summary information about the entity. The summary doesn't contain the whole entity structure, but it does contain information common across all entities.</p>"
@@ -616,7 +620,7 @@
         },
         "Sort": {
           "shape": "Sort",
-          "documentation": "<p>An object that contains two attributes, <code>sortBy</code> and <code>sortOrder</code>.</p>"
+          "documentation": "<p>An object that contains two attributes, <code>SortBy</code> and <code>SortOrder</code>.</p>"
         },
         "MaxResults": {
           "shape": "MaxResultInteger",
@@ -662,7 +666,7 @@
         },
         "Sort": {
           "shape": "Sort",
-          "documentation": "<p>An object that contains two attributes, <code>sortBy</code> and <code>sortOrder</code>.</p>"
+          "documentation": "<p>An object that contains two attributes, <code>SortBy</code> and <code>SortOrder</code>.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
@@ -731,7 +735,7 @@
           "documentation": "<p>The sorting order. Can be <code>ASCENDING</code> or <code>DESCENDING</code>. The default value is <code>DESCENDING</code>.</p>"
         }
       },
-      "documentation": "<p>An object that contains two attributes, <code>sortBy</code> and <code>sortOrder</code>.</p>"
+      "documentation": "<p>An object that contains two attributes, <code>SortBy</code> and <code>SortOrder</code>.</p>"
     },
     "SortBy": {
       "type": "string",
@@ -796,5 +800,5 @@
       "min": 1
     }
   },
-  "documentation": "<p>Catalog API actions allow you to create, describe, list, and delete changes to your published entities. An entity is a product or an offer on AWS Marketplace.</p> <p>You can automate your entity update process by integrating the AWS Marketplace Catalog API with your AWS Marketplace product build or deployment pipelines. You can also create your own applications on top of the Catalog API to manage your products on AWS Marketplace.</p>"
+  "documentation": "<p>Catalog API actions allow you to manage your entities through list, describe, and update capabilities. An entity can be a product or an offer on AWS Marketplace.</p> <p>You can automate your entity update process by integrating the AWS Marketplace Catalog API with your AWS Marketplace product build or deployment pipelines. You can also create your own applications on top of the Catalog API to manage your products on AWS Marketplace.</p>"
 }

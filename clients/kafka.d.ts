@@ -109,6 +109,18 @@ declare class Kafka extends Service {
   getBootstrapBrokers(callback?: (err: AWSError, data: Kafka.Types.GetBootstrapBrokersResponse) => void): Request<Kafka.Types.GetBootstrapBrokersResponse, AWSError>;
   /**
    * 
+            Gets the Apache Kafka versions to which you can update the MSK cluster.
+         
+   */
+  getCompatibleKafkaVersions(params: Kafka.Types.GetCompatibleKafkaVersionsRequest, callback?: (err: AWSError, data: Kafka.Types.GetCompatibleKafkaVersionsResponse) => void): Request<Kafka.Types.GetCompatibleKafkaVersionsResponse, AWSError>;
+  /**
+   * 
+            Gets the Apache Kafka versions to which you can update the MSK cluster.
+         
+   */
+  getCompatibleKafkaVersions(callback?: (err: AWSError, data: Kafka.Types.GetCompatibleKafkaVersionsResponse) => void): Request<Kafka.Types.GetCompatibleKafkaVersionsResponse, AWSError>;
+  /**
+   * 
             Returns a list of all the operations that have been performed on the specified MSK cluster.
          
    */
@@ -251,6 +263,18 @@ declare class Kafka extends Service {
          
    */
   updateClusterConfiguration(callback?: (err: AWSError, data: Kafka.Types.UpdateClusterConfigurationResponse) => void): Request<Kafka.Types.UpdateClusterConfigurationResponse, AWSError>;
+  /**
+   * 
+            Updates the Apache Kafka version for the cluster.
+         
+   */
+  updateClusterKafkaVersion(params: Kafka.Types.UpdateClusterKafkaVersionRequest, callback?: (err: AWSError, data: Kafka.Types.UpdateClusterKafkaVersionResponse) => void): Request<Kafka.Types.UpdateClusterKafkaVersionResponse, AWSError>;
+  /**
+   * 
+            Updates the Apache Kafka version for the cluster.
+         
+   */
+  updateClusterKafkaVersion(callback?: (err: AWSError, data: Kafka.Types.UpdateClusterKafkaVersionResponse) => void): Request<Kafka.Types.UpdateClusterKafkaVersionResponse, AWSError>;
   /**
    * 
             Updates the monitoring settings for the cluster. You can use this operation to specify which Apache Kafka metrics you want Amazon MSK to send to Amazon CloudWatch. You can also specify settings for open monitoring with Prometheus.
@@ -529,6 +553,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     OperationState?: __string;
     /**
      * 
+            Steps completed during the operation.
+         
+     */
+    OperationSteps?: __listOfClusterOperationStep;
+    /**
+     * 
             Type of the cluster operation.
          
      */
@@ -546,7 +576,43 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     TargetClusterInfo?: MutableClusterInfo;
   }
+  export interface ClusterOperationStep {
+    /**
+     * 
+            Information about the step and its status.
+         
+     */
+    StepInfo?: ClusterOperationStepInfo;
+    /**
+     * 
+            The name of the step.
+         
+     */
+    StepName?: __string;
+  }
+  export interface ClusterOperationStepInfo {
+    /**
+     * 
+            The steps current status.
+         
+     */
+    StepStatus?: __string;
+  }
   export type ClusterState = "ACTIVE"|"CREATING"|"UPDATING"|"DELETING"|"FAILED"|string;
+  export interface CompatibleKafkaVersion {
+    /**
+     * 
+            A Kafka version.
+            
+     */
+    SourceVersion?: __string;
+    /**
+     * 
+            A list of Kafka versions.
+            
+     */
+    TargetVersions?: __listOf__string;
+  }
   export interface Configuration {
     /**
      * 
@@ -714,7 +780,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
             The versions of Apache Kafka with which you can use this MSK configuration.
          
      */
-    KafkaVersions: __listOf__string;
+    KafkaVersions?: __listOf__string;
     /**
      * 
             The name of the configuration.
@@ -1001,6 +1067,22 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     BootstrapBrokerStringTls?: __string;
   }
+  export interface GetCompatibleKafkaVersionsRequest {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster check.
+            
+     */
+    ClusterArn?: __string;
+  }
+  export interface GetCompatibleKafkaVersionsResponse {
+    /**
+     * 
+            A list of CompatibleKafkaVersion objects.
+            
+     */
+    CompatibleKafkaVersions?: __listOfCompatibleKafkaVersion;
+  }
   export interface KafkaVersion {
     Version?: __string;
     Status?: KafkaVersionStatus;
@@ -1245,6 +1327,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     OpenMonitoring?: OpenMonitoring;
+    /**
+     * 
+            The Kafka version.
+            
+     */
+    KafkaVersion?: __string;
     LoggingInfo?: LoggingInfo;
   }
   export interface NodeExporter {
@@ -1536,6 +1624,46 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     ClusterOperationArn?: __string;
   }
+  export interface UpdateClusterKafkaVersionRequest {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster to be updated.
+            
+     */
+    ClusterArn: __string;
+    /**
+     * 
+            The custom configuration that should be applied on the new version of cluster.
+            
+     */
+    ConfigurationInfo?: ConfigurationInfo;
+    /**
+     * 
+            Current cluster version.
+            
+     */
+    CurrentVersion: __string;
+    /**
+     * 
+            Target Kafka version.
+            
+     */
+    TargetKafkaVersion: __string;
+  }
+  export interface UpdateClusterKafkaVersionResponse {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster.
+            
+     */
+    ClusterArn?: __string;
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster operation.
+            
+     */
+    ClusterOperationArn?: __string;
+  }
   export interface UpdateMonitoringRequest {
     /**
      * 
@@ -1618,6 +1746,8 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
   export type __listOfBrokerEBSVolumeInfo = BrokerEBSVolumeInfo[];
   export type __listOfClusterInfo = ClusterInfo[];
   export type __listOfClusterOperationInfo = ClusterOperationInfo[];
+  export type __listOfClusterOperationStep = ClusterOperationStep[];
+  export type __listOfCompatibleKafkaVersion = CompatibleKafkaVersion[];
   export type __listOfConfiguration = Configuration[];
   export type __listOfConfigurationRevision = ConfigurationRevision[];
   export type __listOfKafkaVersion = KafkaVersion[];

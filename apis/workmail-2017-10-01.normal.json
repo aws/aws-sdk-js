@@ -405,6 +405,32 @@
       "documentation": "<p>Deletes the specified resource. </p>",
       "idempotent": true
     },
+    "DeleteRetentionPolicy": {
+      "name": "DeleteRetentionPolicy",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteRetentionPolicyRequest"
+      },
+      "output": {
+        "shape": "DeleteRetentionPolicyResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        }
+      ],
+      "documentation": "<p>Deletes the specified retention policy from the specified organization.</p>",
+      "idempotent": true
+    },
     "DeleteUser": {
       "name": "DeleteUser",
       "http": {
@@ -685,6 +711,35 @@
         }
       ],
       "documentation": "<p>Gets the effects of an organization's access control rules as they apply to a specified IPv4 address, access protocol action, or user ID. </p>"
+    },
+    "GetDefaultRetentionPolicy": {
+      "name": "GetDefaultRetentionPolicy",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetDefaultRetentionPolicyRequest"
+      },
+      "output": {
+        "shape": "GetDefaultRetentionPolicyResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        }
+      ],
+      "documentation": "<p>Gets the default retention policy details for the specified organization.</p>",
+      "idempotent": true
     },
     "GetMailboxDetails": {
       "name": "GetMailboxDetails",
@@ -1040,6 +1095,35 @@
         }
       ],
       "documentation": "<p>Sets permissions for a user, group, or resource. This replaces any pre-existing permissions.</p>",
+      "idempotent": true
+    },
+    "PutRetentionPolicy": {
+      "name": "PutRetentionPolicy",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutRetentionPolicyRequest"
+      },
+      "output": {
+        "shape": "PutRetentionPolicyResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p>Puts a retention policy to the specified organization.</p>",
       "idempotent": true
     },
     "RegisterToWorkMail": {
@@ -1749,6 +1833,27 @@
       "type": "structure",
       "members": {}
     },
+    "DeleteRetentionPolicyRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "Id"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The organization ID.</p>"
+        },
+        "Id": {
+          "shape": "ShortString",
+          "documentation": "<p>The retention policy ID.</p>"
+        }
+      }
+    },
+    "DeleteRetentionPolicyResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "DeleteUserRequest": {
       "type": "structure",
       "required": [
@@ -2064,6 +2169,44 @@
         "DELETED"
       ]
     },
+    "FolderConfiguration": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "Action"
+      ],
+      "members": {
+        "Name": {
+          "shape": "FolderName",
+          "documentation": "<p>The folder name.</p>"
+        },
+        "Action": {
+          "shape": "RetentionAction",
+          "documentation": "<p>The action to take on the folder contents at the end of the folder configuration period.</p>"
+        },
+        "Period": {
+          "shape": "RetentionPeriod",
+          "documentation": "<p>The period of time at which the folder configuration action is applied.</p>"
+        }
+      },
+      "documentation": "<p>The configuration applied to an organization's folders by its retention policy.</p>"
+    },
+    "FolderConfigurations": {
+      "type": "list",
+      "member": {
+        "shape": "FolderConfiguration"
+      }
+    },
+    "FolderName": {
+      "type": "string",
+      "enum": [
+        "INBOX",
+        "DELETED_ITEMS",
+        "SENT_ITEMS",
+        "DRAFTS",
+        "JUNK_EMAIL"
+      ]
+    },
     "GetAccessControlEffectRequest": {
       "type": "structure",
       "required": [
@@ -2101,6 +2244,39 @@
         "MatchedRules": {
           "shape": "AccessControlRuleNameList",
           "documentation": "<p>The rules that match the given parameters, resulting in an effect.</p>"
+        }
+      }
+    },
+    "GetDefaultRetentionPolicyRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The organization ID.</p>"
+        }
+      }
+    },
+    "GetDefaultRetentionPolicyResponse": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "ShortString",
+          "documentation": "<p>The retention policy ID.</p>"
+        },
+        "Name": {
+          "shape": "ShortString",
+          "documentation": "<p>The retention policy name.</p>"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>The retention policy description.</p>"
+        },
+        "FolderConfigurations": {
+          "shape": "FolderConfigurations",
+          "documentation": "<p>The retention policy folder configurations.</p>"
         }
       }
     },
@@ -2665,6 +2841,11 @@
         "shape": "Permission"
       }
     },
+    "PolicyDescription": {
+      "type": "string",
+      "max": 256,
+      "pattern": "[\\w\\d\\s\\S\\-!?=,.;:'_]+"
+    },
     "PutAccessControlRuleRequest": {
       "type": "structure",
       "required": [
@@ -2748,6 +2929,40 @@
       }
     },
     "PutMailboxPermissionsResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "PutRetentionPolicyRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "Name",
+        "FolderConfigurations"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The organization ID.</p>"
+        },
+        "Id": {
+          "shape": "ShortString",
+          "documentation": "<p>The retention policy ID.</p>"
+        },
+        "Name": {
+          "shape": "ShortString",
+          "documentation": "<p>The retention policy name.</p>"
+        },
+        "Description": {
+          "shape": "PolicyDescription",
+          "documentation": "<p>The retention policy description.</p>"
+        },
+        "FolderConfigurations": {
+          "shape": "FolderConfigurations",
+          "documentation": "<p>The retention policy folder configurations.</p>"
+        }
+      }
+    },
+    "PutRetentionPolicyResponse": {
       "type": "structure",
       "members": {}
     },
@@ -2865,6 +3080,26 @@
       "member": {
         "shape": "Resource"
       }
+    },
+    "RetentionAction": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "DELETE",
+        "PERMANENTLY_DELETE"
+      ]
+    },
+    "RetentionPeriod": {
+      "type": "integer",
+      "box": true,
+      "max": 730,
+      "min": 1
+    },
+    "ShortString": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9_-]+"
     },
     "String": {
       "type": "string",

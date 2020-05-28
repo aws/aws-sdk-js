@@ -100,6 +100,14 @@ declare class WorkMail extends Service {
    */
   deleteResource(callback?: (err: AWSError, data: WorkMail.Types.DeleteResourceResponse) => void): Request<WorkMail.Types.DeleteResourceResponse, AWSError>;
   /**
+   * Deletes the specified retention policy from the specified organization.
+   */
+  deleteRetentionPolicy(params: WorkMail.Types.DeleteRetentionPolicyRequest, callback?: (err: AWSError, data: WorkMail.Types.DeleteRetentionPolicyResponse) => void): Request<WorkMail.Types.DeleteRetentionPolicyResponse, AWSError>;
+  /**
+   * Deletes the specified retention policy from the specified organization.
+   */
+  deleteRetentionPolicy(callback?: (err: AWSError, data: WorkMail.Types.DeleteRetentionPolicyResponse) => void): Request<WorkMail.Types.DeleteRetentionPolicyResponse, AWSError>;
+  /**
    * Deletes a user from Amazon WorkMail and all subsequent systems. Before you can delete a user, the user state must be DISABLED. Use the DescribeUser action to confirm the user state. Deleting a user is permanent and cannot be undone. WorkMail archives user mailboxes for 30 days before they are permanently removed.
    */
   deleteUser(params: WorkMail.Types.DeleteUserRequest, callback?: (err: AWSError, data: WorkMail.Types.DeleteUserResponse) => void): Request<WorkMail.Types.DeleteUserResponse, AWSError>;
@@ -171,6 +179,14 @@ declare class WorkMail extends Service {
    * Gets the effects of an organization's access control rules as they apply to a specified IPv4 address, access protocol action, or user ID. 
    */
   getAccessControlEffect(callback?: (err: AWSError, data: WorkMail.Types.GetAccessControlEffectResponse) => void): Request<WorkMail.Types.GetAccessControlEffectResponse, AWSError>;
+  /**
+   * Gets the default retention policy details for the specified organization.
+   */
+  getDefaultRetentionPolicy(params: WorkMail.Types.GetDefaultRetentionPolicyRequest, callback?: (err: AWSError, data: WorkMail.Types.GetDefaultRetentionPolicyResponse) => void): Request<WorkMail.Types.GetDefaultRetentionPolicyResponse, AWSError>;
+  /**
+   * Gets the default retention policy details for the specified organization.
+   */
+  getDefaultRetentionPolicy(callback?: (err: AWSError, data: WorkMail.Types.GetDefaultRetentionPolicyResponse) => void): Request<WorkMail.Types.GetDefaultRetentionPolicyResponse, AWSError>;
   /**
    * Requests a user's mailbox details for a specified organization and user.
    */
@@ -275,6 +291,14 @@ declare class WorkMail extends Service {
    * Sets permissions for a user, group, or resource. This replaces any pre-existing permissions.
    */
   putMailboxPermissions(callback?: (err: AWSError, data: WorkMail.Types.PutMailboxPermissionsResponse) => void): Request<WorkMail.Types.PutMailboxPermissionsResponse, AWSError>;
+  /**
+   * Puts a retention policy to the specified organization.
+   */
+  putRetentionPolicy(params: WorkMail.Types.PutRetentionPolicyRequest, callback?: (err: AWSError, data: WorkMail.Types.PutRetentionPolicyResponse) => void): Request<WorkMail.Types.PutRetentionPolicyResponse, AWSError>;
+  /**
+   * Puts a retention policy to the specified organization.
+   */
+  putRetentionPolicy(callback?: (err: AWSError, data: WorkMail.Types.PutRetentionPolicyResponse) => void): Request<WorkMail.Types.PutRetentionPolicyResponse, AWSError>;
   /**
    * Registers an existing and disabled user, group, or resource for Amazon WorkMail use by associating a mailbox and calendaring capabilities. It performs no change if the user, group, or resource is enabled and fails if the user, group, or resource is deleted. This operation results in the accumulation of costs. For more information, see Pricing. The equivalent console functionality for this operation is Enable.  Users can either be created by calling the CreateUser API operation or they can be synchronized from your directory. For more information, see DeregisterFromWorkMail.
    */
@@ -589,6 +613,18 @@ declare namespace WorkMail {
   }
   export interface DeleteResourceResponse {
   }
+  export interface DeleteRetentionPolicyRequest {
+    /**
+     * The organization ID.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The retention policy ID.
+     */
+    Id: ShortString;
+  }
+  export interface DeleteRetentionPolicyResponse {
+  }
   export interface DeleteUserRequest {
     /**
      * The organization that contains the user to be deleted.
@@ -815,6 +851,22 @@ declare namespace WorkMail {
   }
   export type EmailAddress = string;
   export type EntityState = "ENABLED"|"DISABLED"|"DELETED"|string;
+  export interface FolderConfiguration {
+    /**
+     * The folder name.
+     */
+    Name: FolderName;
+    /**
+     * The action to take on the folder contents at the end of the folder configuration period.
+     */
+    Action: RetentionAction;
+    /**
+     * The period of time at which the folder configuration action is applied.
+     */
+    Period?: RetentionPeriod;
+  }
+  export type FolderConfigurations = FolderConfiguration[];
+  export type FolderName = "INBOX"|"DELETED_ITEMS"|"SENT_ITEMS"|"DRAFTS"|"JUNK_EMAIL"|string;
   export interface GetAccessControlEffectRequest {
     /**
      * The identifier for the organization.
@@ -842,6 +894,30 @@ declare namespace WorkMail {
      * The rules that match the given parameters, resulting in an effect.
      */
     MatchedRules?: AccessControlRuleNameList;
+  }
+  export interface GetDefaultRetentionPolicyRequest {
+    /**
+     * The organization ID.
+     */
+    OrganizationId: OrganizationId;
+  }
+  export interface GetDefaultRetentionPolicyResponse {
+    /**
+     * The retention policy ID.
+     */
+    Id?: ShortString;
+    /**
+     * The retention policy name.
+     */
+    Name?: ShortString;
+    /**
+     * The retention policy description.
+     */
+    Description?: String;
+    /**
+     * The retention policy folder configurations.
+     */
+    FolderConfigurations?: FolderConfigurations;
   }
   export interface GetMailboxDetailsRequest {
     /**
@@ -1193,6 +1269,7 @@ declare namespace WorkMail {
   export type PermissionType = "FULL_ACCESS"|"SEND_AS"|"SEND_ON_BEHALF"|string;
   export type PermissionValues = PermissionType[];
   export type Permissions = Permission[];
+  export type PolicyDescription = string;
   export interface PutAccessControlRuleRequest {
     /**
      * The rule name.
@@ -1256,6 +1333,30 @@ declare namespace WorkMail {
     PermissionValues: PermissionValues;
   }
   export interface PutMailboxPermissionsResponse {
+  }
+  export interface PutRetentionPolicyRequest {
+    /**
+     * The organization ID.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The retention policy ID.
+     */
+    Id?: ShortString;
+    /**
+     * The retention policy name.
+     */
+    Name: ShortString;
+    /**
+     * The retention policy description.
+     */
+    Description?: PolicyDescription;
+    /**
+     * The retention policy folder configurations.
+     */
+    FolderConfigurations: FolderConfigurations;
+  }
+  export interface PutRetentionPolicyResponse {
   }
   export interface RegisterToWorkMailRequest {
     /**
@@ -1324,6 +1425,9 @@ declare namespace WorkMail {
   export type ResourceName = string;
   export type ResourceType = "ROOM"|"EQUIPMENT"|string;
   export type Resources = Resource[];
+  export type RetentionAction = "NONE"|"DELETE"|"PERMANENTLY_DELETE"|string;
+  export type RetentionPeriod = number;
+  export type ShortString = string;
   export type String = string;
   export interface Tag {
     /**

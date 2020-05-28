@@ -335,6 +335,52 @@
       ],
       "documentation": "\n            <p>A list of brokers that a client application can use to bootstrap.</p>\n         "
     },
+    "GetCompatibleKafkaVersions": {
+      "name": "GetCompatibleKafkaVersions",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/compatible-kafka-versions",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetCompatibleKafkaVersionsRequest"
+      },
+      "output": {
+        "shape": "GetCompatibleKafkaVersionsResponse",
+        "documentation": "\n            <p>Successful response.</p>\n         "
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "n            <p>The request isn't valid because the input is incorrect. Correct your input and then submit it again.</p>n            "
+        },
+        {
+          "shape": "UnauthorizedException",
+          "documentation": "n            <p>The request is not authorized. The provided credentials couldn't be validated.</p>n            "
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "n            <p>There was an unexpected internal server error. Retrying your request might resolve the issue.</p>n            "
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "n            <p>Access forbidden. Check your credentials and then retry your request.</p>n            "
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "n            <p>The resource could not be found due to incorrect input. Correct the input, then retry the request.</p>n            "
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "n            <p>503 response</p>n            "
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "n            <p>429 response</p>n            "
+        }
+      ],
+      "documentation": "\n            <p>Gets the Apache Kafka versions to which you can update the MSK cluster.</p>\n         "
+    },
     "ListClusterOperations": {
       "name": "ListClusterOperations",
       "http": {
@@ -750,6 +796,52 @@
       ],
       "documentation": "\n            <p>Updates the cluster with the configuration that is specified in the request body.</p>\n         "
     },
+    "UpdateClusterKafkaVersion": {
+      "name": "UpdateClusterKafkaVersion",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v1/clusters/{clusterArn}/version",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateClusterKafkaVersionRequest"
+      },
+      "output": {
+        "shape": "UpdateClusterKafkaVersionResponse",
+        "documentation": "\n            <p>Successful response.</p>\n            "
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "\n            <p>The request isn't valid because the input is incorrect. Correct your input and then submit it again.</p>\n            "
+        },
+        {
+          "shape": "UnauthorizedException",
+          "documentation": "\n            <p>The request is not authorized. The provided credentials couldn't be validated.</p>\n            "
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "\n            <p>There was an unexpected internal server error. Retrying your request might resolve the issue.</p>\n            "
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "\n            <p>Access forbidden. Check your credentials and then retry your request.</p>\n            "
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "\n            <p>The resource could not be found due to incorrect input. Correct the input, then retry the request.</p>\n            "
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "\n            <p>503 response</p>\n            "
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "\n            <p>429 response</p>\n            "
+        }
+      ],
+      "documentation": "\n            <p>Updates the Apache Kafka version for the cluster.</p>\n         "
+    },
     "UpdateMonitoring": {
       "name": "UpdateMonitoring",
       "http": {
@@ -1089,6 +1181,11 @@
           "locationName": "operationState",
           "documentation": "\n            <p>State of the cluster operation.</p>\n         "
         },
+        "OperationSteps": {
+          "shape": "__listOfClusterOperationStep",
+          "locationName": "operationSteps",
+          "documentation": "\n            <p>Steps completed during the operation.</p>\n         "
+        },
         "OperationType": {
           "shape": "__string",
           "locationName": "operationType",
@@ -1107,6 +1204,33 @@
       },
       "documentation": "\n            <p>Returns information about a cluster operation.</p>\n         "
     },
+    "ClusterOperationStep": {
+      "type": "structure",
+      "members": {
+        "StepInfo": {
+          "shape": "ClusterOperationStepInfo",
+          "locationName": "stepInfo",
+          "documentation": "\n            <p>Information about the step and its status.</p>\n         "
+        },
+        "StepName": {
+          "shape": "__string",
+          "locationName": "stepName",
+          "documentation": "\n            <p>The name of the step.</p>\n         "
+        }
+      },
+      "documentation": "\n            <p>Step taken during a cluster operation.</p>\n         "
+    },
+    "ClusterOperationStepInfo": {
+      "type": "structure",
+      "members": {
+        "StepStatus": {
+          "shape": "__string",
+          "locationName": "stepStatus",
+          "documentation": "\n            <p>The steps current status.</p>\n         "
+        }
+      },
+      "documentation": "\n            <p>State information about the operation step.</p>\n         "
+    },
     "ClusterState": {
       "type": "string",
       "documentation": "\n            <p>The state of a Kafka cluster.</p>\n         ",
@@ -1117,6 +1241,22 @@
         "DELETING",
         "FAILED"
       ]
+    },
+    "CompatibleKafkaVersion": {
+      "type": "structure",
+      "members": {
+        "SourceVersion": {
+          "shape": "__string",
+          "locationName": "sourceVersion",
+          "documentation": "\n            <p>A Kafka version.</p>\n            "
+        },
+        "TargetVersions": {
+          "shape": "__listOf__string",
+          "locationName": "targetVersions",
+          "documentation": "\n            <p>A list of Kafka versions.</p>\n            "
+        }
+      },
+      "documentation": "\n            <p>Contains source Kafka versions and compatible target Kafka versions.</p>\n        "
     },
     "Configuration": {
       "type": "structure",
@@ -1318,7 +1458,6 @@
       },
       "required": [
         "ServerProperties",
-        "KafkaVersions",
         "Name"
       ]
     },
@@ -1657,6 +1796,27 @@
         }
       }
     },
+    "GetCompatibleKafkaVersionsRequest": {
+      "type": "structure",
+      "members": {
+        "ClusterArn": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "clusterArn",
+          "documentation": "\n            <p>The Amazon Resource Name (ARN) of the cluster check.</p>\n            "
+        }
+      }
+    },
+    "GetCompatibleKafkaVersionsResponse": {
+      "type": "structure",
+      "members": {
+        "CompatibleKafkaVersions": {
+          "shape": "__listOfCompatibleKafkaVersion",
+          "locationName": "compatibleKafkaVersions",
+          "documentation": "\n            <p>A list of CompatibleKafkaVersion objects.</p>\n            "
+        }
+      }
+    },
     "KafkaVersion": {
       "type": "structure",
       "members": {
@@ -1968,6 +2128,11 @@
           "shape": "OpenMonitoring",
           "locationName": "openMonitoring",
           "documentation": "\n            <p>The settings for open monitoring.</p>\n         "
+        },
+        "KafkaVersion": {
+          "shape": "__string",
+          "locationName": "kafkaVersion",
+          "documentation": "\n            <p>The Kafka version.</p>\n            "
         },
         "LoggingInfo": {
           "shape": "LoggingInfo",
@@ -2354,6 +2519,52 @@
         }
       }
     },
+    "UpdateClusterKafkaVersionRequest": {
+      "type": "structure",
+      "members": {
+        "ClusterArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "clusterArn",
+          "documentation": "\n            <p>The Amazon Resource Name (ARN) of the cluster to be updated.</p>\n            "
+        },
+        "ConfigurationInfo": {
+          "shape": "ConfigurationInfo",
+          "locationName": "configurationInfo",
+          "documentation": "\n            <p>The custom configuration that should be applied on the new version of cluster.</p>\n            "
+        },
+        "CurrentVersion": {
+          "shape": "__string",
+          "locationName": "currentVersion",
+          "documentation": "\n            <p>Current cluster version.</p>\n            "
+        },
+        "TargetKafkaVersion": {
+          "shape": "__string",
+          "locationName": "targetKafkaVersion",
+          "documentation": "\n            <p>Target Kafka version.</p>\n            "
+        }
+      },
+      "required": [
+        "ClusterArn",
+        "TargetKafkaVersion",
+        "CurrentVersion"
+      ]
+    },
+    "UpdateClusterKafkaVersionResponse": {
+      "type": "structure",
+      "members": {
+        "ClusterArn": {
+          "shape": "__string",
+          "locationName": "clusterArn",
+          "documentation": "\n            <p>The Amazon Resource Name (ARN) of the cluster.</p>\n            "
+        },
+        "ClusterOperationArn": {
+          "shape": "__string",
+          "locationName": "clusterOperationArn",
+          "documentation": "\n            <p>The Amazon Resource Name (ARN) of the cluster operation.</p>\n            "
+        }
+      }
+    },
     "UpdateMonitoringRequest": {
       "type": "structure",
       "members": {
@@ -2473,6 +2684,18 @@
       "type": "list",
       "member": {
         "shape": "ClusterOperationInfo"
+      }
+    },
+    "__listOfClusterOperationStep": {
+      "type": "list",
+      "member": {
+        "shape": "ClusterOperationStep"
+      }
+    },
+    "__listOfCompatibleKafkaVersion": {
+      "type": "list",
+      "member": {
+        "shape": "CompatibleKafkaVersion"
       }
     },
     "__listOfConfiguration": {

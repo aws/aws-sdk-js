@@ -52,11 +52,11 @@ declare class MarketplaceCatalog extends Service {
    */
   listEntities(callback?: (err: AWSError, data: MarketplaceCatalog.Types.ListEntitiesResponse) => void): Request<MarketplaceCatalog.Types.ListEntitiesResponse, AWSError>;
   /**
-   * This operation allows you to request changes in your entities.
+   * This operation allows you to request changes for your entities. Within a single ChangeSet, you cannot start the same change type against the same entity multiple times. Additionally, when a ChangeSet is running, all the entities targeted by the different changes are locked until the ChangeSet has completed (either succeeded, cancelled, or failed). If you try to start a ChangeSet containing a change against an entity that is already locked, you will receive a ResourceInUseException. For example, you cannot start the ChangeSet described in the example below because it contains two changes to execute the same change type (AddRevisions) against the same entity (entity-id@1).
    */
   startChangeSet(params: MarketplaceCatalog.Types.StartChangeSetRequest, callback?: (err: AWSError, data: MarketplaceCatalog.Types.StartChangeSetResponse) => void): Request<MarketplaceCatalog.Types.StartChangeSetResponse, AWSError>;
   /**
-   * This operation allows you to request changes in your entities.
+   * This operation allows you to request changes for your entities. Within a single ChangeSet, you cannot start the same change type against the same entity multiple times. Additionally, when a ChangeSet is running, all the entities targeted by the different changes are locked until the ChangeSet has completed (either succeeded, cancelled, or failed). If you try to start a ChangeSet containing a change against an entity that is already locked, you will receive a ResourceInUseException. For example, you cannot start the ChangeSet described in the example below because it contains two changes to execute the same change type (AddRevisions) against the same entity (entity-id@1).
    */
   startChangeSet(callback?: (err: AWSError, data: MarketplaceCatalog.Types.StartChangeSetResponse) => void): Request<MarketplaceCatalog.Types.StartChangeSetResponse, AWSError>;
 }
@@ -140,6 +140,10 @@ declare namespace MarketplaceCatalog {
      * The entity to be changed.
      */
     Entity?: Entity;
+    /**
+     * This object contains details specific to the change type of the requested change.
+     */
+    Details?: Json;
     /**
      * An array of ErrorDetail objects associated with the change.
      */
@@ -236,7 +240,7 @@ declare namespace MarketplaceCatalog {
   }
   export interface EntitySummary {
     /**
-     * The name for the entity. This value is not unique. It is defined by the provider.
+     * The name for the entity. This value is not unique. It is defined by the seller.
      */
     Name?: StringValue;
     /**
@@ -256,7 +260,7 @@ declare namespace MarketplaceCatalog {
      */
     LastModifiedDate?: StringValue;
     /**
-     * The visibility status of the entity to subscribers. This value can be Public (everyone can view the entity), Limited (the entity is visible to limited accounts only), or Restricted (the entity was published and then unpublished and only existing subscribers can view it). 
+     * The visibility status of the entity to buyers. This value can be Public (everyone can view the entity), Limited (the entity is visible to limited accounts only), or Restricted (the entity was published and then unpublished and only existing buyers can view it). 
      */
     Visibility?: StringValue;
   }
@@ -297,7 +301,7 @@ declare namespace MarketplaceCatalog {
      */
     FilterList?: FilterList;
     /**
-     * An object that contains two attributes, sortBy and sortOrder.
+     * An object that contains two attributes, SortBy and SortOrder.
      */
     Sort?: Sort;
     /**
@@ -333,7 +337,7 @@ declare namespace MarketplaceCatalog {
      */
     FilterList?: FilterList;
     /**
-     * An object that contains two attributes, sortBy and sortOrder.
+     * An object that contains two attributes, SortBy and SortOrder.
      */
     Sort?: Sort;
     /**

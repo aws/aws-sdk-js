@@ -12,11 +12,11 @@ declare class QLDBSession extends Service {
   constructor(options?: QLDBSession.Types.ClientConfiguration)
   config: Config & QLDBSession.Types.ClientConfiguration;
   /**
-   * Sends a command to an Amazon QLDB ledger.
+   * Sends a command to an Amazon QLDB ledger.  Instead of interacting directly with this API, we recommend that you use the Amazon QLDB Driver or the QLDB Shell to execute data transactions on a ledger.   If you are working with an AWS SDK, use the QLDB Driver. The driver provides a high-level abstraction layer above this qldbsession data plane and manages SendCommand API calls for you. For information and a list of supported programming languages, see Getting started with the driver in the Amazon QLDB Developer Guide.   If you are working with the AWS Command Line Interface (AWS CLI), use the QLDB Shell. The shell is a command line interface that uses the QLDB Driver to interact with a ledger. For information, see Accessing Amazon QLDB using the QLDB Shell.   
    */
   sendCommand(params: QLDBSession.Types.SendCommandRequest, callback?: (err: AWSError, data: QLDBSession.Types.SendCommandResult) => void): Request<QLDBSession.Types.SendCommandResult, AWSError>;
   /**
-   * Sends a command to an Amazon QLDB ledger.
+   * Sends a command to an Amazon QLDB ledger.  Instead of interacting directly with this API, we recommend that you use the Amazon QLDB Driver or the QLDB Shell to execute data transactions on a ledger.   If you are working with an AWS SDK, use the QLDB Driver. The driver provides a high-level abstraction layer above this qldbsession data plane and manages SendCommand API calls for you. For information and a list of supported programming languages, see Getting started with the driver in the Amazon QLDB Developer Guide.   If you are working with the AWS Command Line Interface (AWS CLI), use the QLDB Shell. The shell is a command line interface that uses the QLDB Driver to interact with a ledger. For information, see Accessing Amazon QLDB using the QLDB Shell.   
    */
   sendCommand(callback?: (err: AWSError, data: QLDBSession.Types.SendCommandResult) => void): Request<QLDBSession.Types.SendCommandResult, AWSError>;
 }
@@ -28,7 +28,7 @@ declare namespace QLDBSession {
   export type CommitDigest = Buffer|Uint8Array|Blob|string;
   export interface CommitTransactionRequest {
     /**
-     * Specifies the transaction id of the transaction to commit.
+     * Specifies the transaction ID of the transaction to commit.
      */
     TransactionId: TransactionId;
     /**
@@ -38,7 +38,7 @@ declare namespace QLDBSession {
   }
   export interface CommitTransactionResult {
     /**
-     * The transaction id of the committed transaction.
+     * The transaction ID of the committed transaction.
      */
     TransactionId?: TransactionId;
     /**
@@ -52,7 +52,7 @@ declare namespace QLDBSession {
   }
   export interface ExecuteStatementRequest {
     /**
-     * Specifies the transaction id of the request.
+     * Specifies the transaction ID of the request.
      */
     TransactionId: TransactionId;
     /**
@@ -72,7 +72,7 @@ declare namespace QLDBSession {
   }
   export interface FetchPageRequest {
     /**
-     * Specifies the transaction id of the page to be fetched.
+     * Specifies the transaction ID of the page to be fetched.
      */
     TransactionId: TransactionId;
     /**
@@ -181,7 +181,7 @@ declare namespace QLDBSession {
   }
   export interface StartTransactionResult {
     /**
-     * The transaction id of the started transaction.
+     * The transaction ID of the started transaction.
      */
     TransactionId?: TransactionId;
   }
@@ -190,11 +190,11 @@ declare namespace QLDBSession {
   export type TransactionId = string;
   export interface ValueHolder {
     /**
-     * An Amazon Ion binary value contained in a ValueHolder structure. 
+     * An Amazon Ion binary value contained in a ValueHolder structure.
      */
     IonBinary?: IonBinary;
     /**
-     * An Amazon Ion plaintext value contained in a ValueHolder structure. 
+     * An Amazon Ion plaintext value contained in a ValueHolder structure.
      */
     IonText?: IonText;
   }

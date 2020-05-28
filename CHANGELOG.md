@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.685.0-->
+<!--LATEST=2.686.0-->
 <!--ENTRYINSERT-->
+
+## 2.686.0
+* feature: Kafka: New APIs for upgrading the Apache Kafka version of a cluster and to find out compatible upgrade paths
+* feature: MarketplaceCatalog: AWS Marketplace Catalog now supports accessing initial change payloads with DescribeChangeSet operation.
+* feature: WorkMail: This release adds support for Amazon WorkMail organization-level retention policies.
 
 ## 2.685.0
 * feature: ELBv2: This release added support for HTTP/2 ALPN preference lists for Network Load Balancers
