@@ -1,7 +1,15 @@
 var fs = require('fs');
 var path = require('path');
 
-// Generate service clients
+/**
+ * Generate service clients
+ *
+ * Pass optional path to target directory.
+ * The directory must include the apis/ folder and service customizations at
+ * `lib/services`. Clients will be generated in `clients/`.
+ *
+ * If parameter is not passed the repository root will be used.
+ */
 function ClientCreator(basePath) {
   basePath = basePath || path.join(__dirname, '..');
   this._metadataPath = path.join(basePath, 'apis', 'metadata.json');
@@ -9,6 +17,7 @@ function ClientCreator(basePath) {
   this._clientFolderPath = path.join(basePath, 'clients');
   this._serviceCustomizationsFolderPath = path.join(basePath, 'lib', 'services');
   this._packageJsonPath = path.join(basePath, 'package.json');
+  // Lazy loading values on usage to avoid side-effects in constructor
   this._apiFileNames = null;
   this._metadata = null;
 }

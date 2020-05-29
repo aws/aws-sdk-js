@@ -1,5 +1,14 @@
 #!/usr/bin/env node
 
+/*
+ * Pass optional path to target directory as command line argument.
+ *
+ * The directory must include the apis/ folder and service customizations at
+ * `lib/services`. Clients will be generated in `clients/`.
+ *
+ * If parameter is not passed the repository root will be used.
+ */
+
 var path = require('path');
 var TSGenerator = require('./lib/ts-generator');
 

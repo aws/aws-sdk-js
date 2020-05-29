@@ -14,6 +14,7 @@ function TSGenerator(options) {
     this._apiRootDir = path.join(this._sdkRootDir, 'apis');
     this._metadataPath = path.join(this._apiRootDir, 'metadata.json');
     this._clientsDir = path.join(this._sdkRootDir, 'clients');
+    // Lazy loading values on usage to avoid side-effects in constructor
     this.metadata = null;
     this.typings = {};
     this.streamTypes = {};

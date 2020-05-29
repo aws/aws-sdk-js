@@ -6,10 +6,21 @@ var removeEventStreamOperations = require('./lib/remove-event-stream-ops').remov
 var util = require('util');
 var path = require('path');
 
+/*
+ * Minimizes all .normal.json files by flattening shapes, removing
+ * documentation and removing unused shapes. The result will be written to
+ * `.min.json` file.
+ *
+ * The passed parameter is base path. The directory must include the apis/
+ * folder.
+ */
 function ApiTranslator(basePath) {
   this._apisPath = path.join(basePath, 'apis');
 }
 
+/*
+ * minimize passed .normal.json filepath into .min.json
+ */
 ApiTranslator.prototype.minimizeFile = function minimizeFile(filepath) {
   var opath = filepath.replace(/\.normal\.json$/, '.min.json');
   var data = JSON.parse(fs.readFileSync(path.join(this._apisPath, filepath)).toString());
@@ -23,6 +34,10 @@ ApiTranslator.prototype.minimizeFile = function minimizeFile(filepath) {
   fs.writeFileSync(path.join(this._apisPath, opath), json);
 };
 
+/*
+ * minimize files in api path. If optional modelName is passed only that model
+ * is minimized otherwise all .normal.json files found.
+ */
 ApiTranslator.prototype.translateAll = function translateAll(modelName) {
   var paths = fs.readdirSync(this._apisPath);
   var self = this;
@@ -35,6 +50,16 @@ ApiTranslator.prototype.translateAll = function translateAll(modelName) {
   });
 };
 
+/*
+ * if executed as script initialize the ApiTranslator and minimize API files
+ *
+ * Optional first parameter specifies which model to minimize. If omitted all
+ * files are selected.
+ *
+ * Optional second parameter specifies base path. The directory must include
+ * the apis/ folder with .normal.json files. Output is written into the same
+ * path. If parameter is not passed the repository root will be used.
+ */
 if (require.main === module) {
   var modelName = process.argv[2] || '';
   var basePath = process.argv[3] || path.join(__dirname, '..');
