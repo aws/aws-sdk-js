@@ -17,6 +17,11 @@ function minify(code) {
 }
 
 function build(options, callback) {
+  if (arguments.length === 1) {
+    callback = options;
+    options = {};
+  }
+  
   var img = require('insert-module-globals');
   img.vars.process = function() { return '{browser:true}'; };
 
