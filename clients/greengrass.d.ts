@@ -1840,7 +1840,7 @@ declare namespace Greengrass {
      */
     Executable?: __string;
     /**
-     * The memory size, in KB, which the function requires. This setting is not applicable and should be cleared when you run the Lambda function without containerization.
+     * The memory size, in MB, which the function requires. This setting is not applicable and should be cleared when you run the Lambda function without containerization.
      */
     MemorySize?: __integer;
     /**
