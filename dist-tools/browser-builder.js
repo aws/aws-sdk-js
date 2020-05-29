@@ -17,18 +17,27 @@ function minify(code) {
 }
 
 function build(options, callback) {
-  if (arguments.length === 1) {
-    callback = options;
-    options = {};
-  }
-
   var img = require('insert-module-globals');
   img.vars.process = function() { return '{browser:true}'; };
 
   if (options.services) process.env.AWS_SERVICES = options.services;
 
   var browserify = require('browserify');
-  var brOpts = { basedir: path.resolve(__dirname, '..') };
+  var brOpts = { basedir: path.resolve(__dirname, '..'), 
+                  standalone: 'AWS',
+                  detectGlobals: false,
+                  browserField : false,
+                  builtins : false,
+                  ignoreMissing: true,
+                  commondir : false,
+                  insertGlobalVars : {
+                      process: undefined,
+                      global: undefined,
+                      'Buffer.isBuffer': undefined,
+                      Buffer: undefined 
+                  }
+                };
+                
   browserify(brOpts).add('./').ignore('domain').bundle(function(err, data) {
     if (err) return callback(err);
 
@@ -46,6 +55,7 @@ if (require.main === module) {
     services: process.argv[2] || process.env.SERVICES,
     minify: process.env.MINIFY ? true : false
   };
+
   build(opts, function(err, code) {
     if (err) console.error(err.message);
     else console.log(code);
