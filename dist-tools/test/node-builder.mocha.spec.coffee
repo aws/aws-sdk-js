@@ -29,23 +29,19 @@ describe 'build', ->
         result = helpers.evalCode(code, data)
       cb(err, result)
 
-  it 'defaults to no minification', ->
-    buildBundle null, null, 'window.AWS', (err, AWS) ->
-      expect(data).to.match(/Copyright Amazon\.com/i)
-
   it 'can be minified (slow)', ->
     buildBundle null, minify: true, null, ->
       expect(data).to.match(/Copyright Amazon\.com/i) # has license
       expect(data).to.match(/function \w\(\w,\w,\w\)\{function \w\(\w,\w\)\{/)
 
   it 'can build default services into bundle', ->
-    buildBundle null, null, 'window.AWS', (err, AWS) ->
+    buildBundle null, null, 'AWS', (err, AWS) ->
       expect(new AWS.S3().api.apiVersion).to.equal(new helpers.AWS.S3().api.apiVersion)
       expect(new AWS.DynamoDB().api.apiVersion).to.equal(new helpers.AWS.DynamoDB().api.apiVersion)
       expect(new AWS.STS().api.apiVersion).to.equal(new helpers.AWS.STS().api.apiVersion)
 
   it 'can build all services into bundle', ->
-    buildBundle 'all', null, 'window.AWS', (err, AWS) ->
+    buildBundle 'all', null, 'AWS', (err, AWS) ->
       Object.keys(helpers.AWS).forEach (k) ->
         if k.serviceIdentifier
           expect(typeof AWS[k]).to.equal('object')

@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 var path = require('path');
-
 var AWS = require('../index');
 
 var license = [
