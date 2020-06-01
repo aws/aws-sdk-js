@@ -1,64 +1,16 @@
 #!/usr/bin/env node
 
+var build = require('./builder');
 var path = require('path');
 
-var AWS = require('../index');
-
-var license = [
-  '// AWS SDK for JavaScript v' + AWS.VERSION,
-  '// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.',
-  '// License at https://sdk.amazonaws.com/js/BUNDLE_LICENSE.txt'
-].join('\n') + '\n';
-
-function minify(code) {
-  var uglify = require('uglify-js');
-  var minified = uglify.minify(code, {fromString: true});
-  return minified.code;
-}
-
-function build(options, callback) {
-  if (arguments.length === 1) {
-    callback = options;
-    options = {};
-  }
-  
-  var img = require('insert-module-globals');
-  img.vars.process = function() { return '{browser:true}'; };
-
-  if (options.services) process.env.AWS_SERVICES = options.services;
-
-  var browserify = require('browserify');
-  var brOpts = { basedir: path.resolve(__dirname, '..'), 
-                  standalone: 'AWS',
-                  detectGlobals: false,
-                  browserField : false,
-                  builtins : false,
-                  ignoreMissing: true,
-                  commondir : false,
-                  insertGlobalVars : {
-                      process: undefined,
-                      global: undefined,
-                      'Buffer.isBuffer': undefined,
-                      Buffer: undefined 
-                  }
-                };
-                
-  browserify(brOpts).add('./').ignore('domain').bundle(function(err, data) {
-    if (err) return callback(err);
-
-    var code = (data || '').toString();
-    if (options.minify) code = minify(code);
-
-    code = license + code;
-    callback(null, code);
-  });
-}
+// following is set as default build options: 
+// var buildOptions = { basedir: path.resolve(__dirname, '..') };
 
 // run if we called this tool directly
 if (require.main === module) {
   var opts = {
     services: process.argv[2] || process.env.SERVICES,
-    minify: process.env.MINIFY ? true : false
+    minify: process.env.MINIFY ? true : false,
   };
 
   build(opts, function(err, code) {
@@ -66,6 +18,3 @@ if (require.main === module) {
     else console.log(code);
   });
 }
-
-build.license = license;
-module.exports = build;
