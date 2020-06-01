@@ -1136,6 +1136,10 @@
           "shape": "String",
           "documentation": "<p>The path to the Amazon S3 location where logs for this cluster are stored.</p>"
         },
+        "LogEncryptionKmsKeyId": {
+          "shape": "String",
+          "documentation": "<p> The AWS KMS customer master key (CMK) used for encrypting log files. This attribute is only available with EMR version 5.30.0 and later, excluding EMR 6.0.0. </p>"
+        },
         "RequestedAmiVersion": {
           "shape": "String",
           "documentation": "<p>The AMI version requested for this cluster.</p>"
@@ -2681,6 +2685,10 @@
           "shape": "XmlString",
           "documentation": "<p>The location in Amazon S3 where log files for the job are stored.</p>"
         },
+        "LogEncryptionKmsKeyId": {
+          "shape": "XmlString",
+          "documentation": "<p>The AWS KMS customer master key (CMK) used for encrypting log files. This attribute is only available with EMR version 5.30.0 and later, excluding EMR 6.0.0.</p>"
+        },
         "AmiVersion": {
           "shape": "XmlStringMaxLen256",
           "documentation": "<p>Applies only to Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR releases 4.0 and later, <code>ReleaseLabel</code> is used. To specify a custom AMI, use <code>CustomAmiID</code>.</p>"
@@ -3534,6 +3542,10 @@
         "LogUri": {
           "shape": "XmlString",
           "documentation": "<p>The location in Amazon S3 to write the log files of the job flow. If a value is not provided, logs are not created.</p>"
+        },
+        "LogEncryptionKmsKeyId": {
+          "shape": "XmlString",
+          "documentation": "<p>The AWS KMS customer master key (CMK) used for encrypting log files. If a value is not provided, the logs will remain encrypted by AES-256. This attribute is only available with EMR version 5.30.0 and later, excluding EMR 6.0.0.</p>"
         },
         "AdditionalInfo": {
           "shape": "XmlString",

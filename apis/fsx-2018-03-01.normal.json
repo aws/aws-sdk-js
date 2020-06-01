@@ -480,9 +480,12 @@
         },
         {
           "shape": "MissingFileSystemConfiguration"
+        },
+        {
+          "shape": "ServiceLimitExceeded"
         }
       ],
-      "documentation": "<p>Updates a file system configuration.</p>"
+      "documentation": "<p>Use this operation to update the configuration of an existing Amazon FSx file system. For an Amazon FSx for Lustre file system, you can update only the WeeklyMaintenanceStartTime. For an Amazon for Windows File Server file system, you can update the following properties:</p> <ul> <li> <p>AutomaticBackupRetentionDays</p> </li> <li> <p>DailyAutomaticBackupStartTime</p> </li> <li> <p>SelfManagedActiveDirectoryConfiguration</p> </li> <li> <p>StorageCapacity</p> </li> <li> <p>ThroughputCapacity</p> </li> <li> <p>WeeklyMaintenanceStartTime</p> </li> </ul> <p>You can update multiple properties in a single request.</p>"
     }
   },
   "shapes": {
@@ -512,6 +515,59 @@
       "max": 255,
       "min": 1,
       "pattern": "^.{1,255}$"
+    },
+    "AdministrativeAction": {
+      "type": "structure",
+      "members": {
+        "AdministrativeActionType": {
+          "shape": "AdministrativeActionType"
+        },
+        "ProgressPercent": {
+          "shape": "ProgressPercent",
+          "documentation": "<p>Provides the percent complete of a <code>STORAGE_OPTIMIZATION</code> administrative action.</p>"
+        },
+        "RequestTime": {
+          "shape": "RequestTime",
+          "documentation": "<p>Time that the administrative action request was received.</p>"
+        },
+        "Status": {
+          "shape": "Status",
+          "documentation": "<p>Describes the status of the administrative action, as follows:</p> <ul> <li> <p> <code>FAILED</code> - Amazon FSx failed to process the administrative action successfully.</p> </li> <li> <p> <code>IN_PROGRESS</code> - Amazon FSx is processing the administrative action.</p> </li> <li> <p> <code>PENDING</code> - Amazon FSx is waiting to process the administrative action.</p> </li> <li> <p> <code>COMPLETED</code> - Amazon FSx has finished processing the administrative task.</p> </li> <li> <p> <code>UPDATED_OPTIMIZING</code> - For a storage capacity increase update, Amazon FSx has updated the file system with the new storage capacity, and is now performing the storage optimization process. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html\">Managing Storage Capacity</a>.</p> </li> </ul>"
+        },
+        "TargetFileSystemValues": {
+          "shape": "FileSystem",
+          "documentation": "<p>Describes the target <code>StorageCapacity</code> or <code>ThroughputCapacity</code> value provided in the <code>UpdateFileSystem</code> operation. Returned for <code>FILE_SYSTEM_UPDATE</code> administrative actions. </p>"
+        },
+        "FailureDetails": {
+          "shape": "AdministrativeActionFailureDetails"
+        }
+      },
+      "documentation": "<p>Describes a specific Amazon FSx Administrative Action for the current Windows file system.</p>"
+    },
+    "AdministrativeActionFailureDetails": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "shape": "ErrorMessage",
+          "documentation": "<p>Error message providing details about the failure.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about a failed administrative action.</p>"
+    },
+    "AdministrativeActionType": {
+      "type": "string",
+      "documentation": "<p>Describes the type of administrative action, as follows:</p> <ul> <li> <p> <code>FILE_SYSTEM_UPDATE</code> - A file system update administrative action initiated by the user from the Amazon FSx console, API (UpdateFileSystem), or CLI (update-file-system). A</p> </li> <li> <p> <code>STORAGE_OPTIMIZATION</code> - Once the <code>FILE_SYSTEM_UPDATE</code> task to increase a file system's storage capacity completes successfully, a <code>STORAGE_OPTIMIZATION</code> task starts. Storage optimization is the process of migrating the file system data to the new, larger disks. You can track the storage migration progress using the <code>ProgressPercent</code> property. When <code>STORAGE_OPTIMIZATION</code> completes successfully, the parent <code>FILE_SYSTEM_UPDATE</code> action status changes to <code>COMPLETED</code>. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html\">Managing Storage Capacity</a>. </p> </li> </ul>",
+      "enum": [
+        "FILE_SYSTEM_UPDATE",
+        "STORAGE_OPTIMIZATION"
+      ]
+    },
+    "AdministrativeActions": {
+      "type": "list",
+      "member": {
+        "shape": "AdministrativeAction"
+      },
+      "max": 50
     },
     "ArchivePath": {
       "type": "string",
@@ -816,7 +872,7 @@
       "members": {
         "WeeklyMaintenanceStartTime": {
           "shape": "WeeklyTime",
-          "documentation": "<p>The preferred time to perform weekly maintenance, in the UTC time zone.</p>"
+          "documentation": "<p>The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone, where d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.</p>"
         },
         "ImportPath": {
           "shape": "ArchivePath",
@@ -864,7 +920,7 @@
         },
         "StorageType": {
           "shape": "StorageType",
-          "documentation": "<p>Sets the storage type for the Amazon FSx for Windows file system you're creating. Valid values are <code>SSD</code> and <code>HDD</code>.</p> <ul> <li> <p>Set to <code>SSD</code> to use solid state drive storage. SSD is supported on all Windows deployment types.</p> </li> <li> <p>Set to <code>HDD</code> to use hard disk drive storage. HDD is supported on <code>SINGLE_AZ_2</code> and <code>MULTI_AZ_1</code> Windows file system deployment types. </p> </li> </ul> <p> Default value is <code>SSD</code>. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-tco.html#saz-maz-storage-type\"> Storage Type Options</a> in the <i>Amazon FSx for Windows User Guide</i>. </p>"
+          "documentation": "<p>Sets the storage type for the Amazon FSx for Windows file system you're creating. Valid values are <code>SSD</code> and <code>HDD</code>.</p> <ul> <li> <p>Set to <code>SSD</code> to use solid state drive storage. SSD is supported on all Windows deployment types.</p> </li> <li> <p>Set to <code>HDD</code> to use hard disk drive storage. HDD is supported on <code>SINGLE_AZ_2</code> and <code>MULTI_AZ_1</code> Windows file system deployment types. </p> </li> </ul> <p> Default value is <code>SSD</code>. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-costs.html#storage-type-options\"> Storage Type Options</a> in the <i>Amazon FSx for Windows User Guide</i>. </p>"
         },
         "SubnetIds": {
           "shape": "SubnetIds",
@@ -928,7 +984,7 @@
         },
         "WeeklyMaintenanceStartTime": {
           "shape": "WeeklyTime",
-          "documentation": "<p>The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone.</p>"
+          "documentation": "<p>The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone, where d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.</p>"
         },
         "DailyAutomaticBackupStartTime": {
           "shape": "DailyTime",
@@ -1454,6 +1510,10 @@
         },
         "LustreConfiguration": {
           "shape": "LustreFileSystemConfiguration"
+        },
+        "AdministrativeActions": {
+          "shape": "AdministrativeActions",
+          "documentation": "<p>A list of administrative actions for the file system that are in process or waiting to be processed. Administrative actions describe changes to the Windows file system that you have initiated using the <code>UpdateFileSystem</code> action. </p>"
         }
       },
       "documentation": "<p>A description of a specific Amazon FSx file system.</p>"
@@ -1645,7 +1705,7 @@
       "members": {
         "WeeklyMaintenanceStartTime": {
           "shape": "WeeklyTime",
-          "documentation": "<p>The UTC time that you want to begin your weekly maintenance window.</p>"
+          "documentation": "<p>The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone. d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.</p>"
         },
         "DataRepositoryConfiguration": {
           "shape": "DataRepositoryConfiguration"
@@ -1674,6 +1734,7 @@
     "MaxResults": {
       "type": "integer",
       "documentation": "<p>The maximum number of resources to return in the response. This value must be an integer greater than zero.</p>",
+      "max": 2147483647,
       "min": 1
     },
     "Megabytes": {
@@ -1737,6 +1798,9 @@
       "enum": [
         "FAILED_FILES_ONLY"
       ]
+    },
+    "RequestTime": {
+      "type": "timestamp"
     },
     "ResourceARN": {
       "type": "string",
@@ -1838,14 +1902,25 @@
           "documentation": "<p>A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory.</p>"
         }
       },
-      "documentation": "<p>The configuration that Amazon FSx uses to join the Windows File Server instance to the self-managed Microsoft Active Directory (AD) directory.</p>"
+      "documentation": "<p>The configuration that Amazon FSx uses to join the Windows File Server instance to a self-managed Microsoft Active Directory (AD) directory.</p>"
     },
     "StartTime": {
       "type": "timestamp"
     },
+    "Status": {
+      "type": "string",
+      "enum": [
+        "FAILED",
+        "IN_PROGRESS",
+        "PENDING",
+        "COMPLETED",
+        "UPDATED_OPTIMIZING"
+      ]
+    },
     "StorageCapacity": {
       "type": "integer",
       "documentation": "<p>The storage capacity for your Amazon FSx file system, in gibibytes.</p>",
+      "max": 2147483647,
       "min": 0
     },
     "StorageType": {
@@ -1987,7 +2062,7 @@
       "members": {
         "WeeklyMaintenanceStartTime": {
           "shape": "WeeklyTime",
-          "documentation": "<p>The preferred time to perform weekly maintenance, in the UTC time zone.</p>"
+          "documentation": "<p>The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone. d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.</p>"
         }
       },
       "documentation": "<p>The configuration object for Amazon FSx for Lustre file systems used in the <code>UpdateFileSystem</code> operation.</p>"
@@ -1999,16 +2074,21 @@
       ],
       "members": {
         "FileSystemId": {
-          "shape": "FileSystemId"
+          "shape": "FileSystemId",
+          "documentation": "<p>Identifies the file system that you are updating.</p>"
         },
         "ClientRequestToken": {
           "shape": "ClientRequestToken",
-          "documentation": "<p>(Optional) A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent updates. This string is automatically filled on your behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.</p>",
+          "documentation": "<p>A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent updates. This string is automatically filled on your behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.</p>",
           "idempotencyToken": true
+        },
+        "StorageCapacity": {
+          "shape": "StorageCapacity",
+          "documentation": "<p>Use this parameter to increase the storage capacity of an Amazon FSx for Windows File Server file system. Specifies the storage capacity target value, GiB, for the file system you're updating. The storage capacity target value must be at least 10 percent (%) greater than the current storage capacity value. In order to increase storage capacity, the file system needs to have at least 16 MB/s of throughput capacity. You cannot make a storage capacity increase request if there is an existing storage capacity increase request in progress. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html\">Managing Storage Capacity</a>.</p>"
         },
         "WindowsConfiguration": {
           "shape": "UpdateFileSystemWindowsConfiguration",
-          "documentation": "<p>The configuration update for this Microsoft Windows file system. The only supported options are for backup and maintenance and for self-managed Active Directory configuration.</p>"
+          "documentation": "<p>The configuration updates for an Amazon FSx for Windows File Server file system.</p>"
         },
         "LustreConfiguration": {
           "shape": "UpdateFileSystemLustreConfiguration"
@@ -2031,22 +2111,26 @@
       "members": {
         "WeeklyMaintenanceStartTime": {
           "shape": "WeeklyTime",
-          "documentation": "<p>The preferred time to perform weekly maintenance, in the UTC time zone.</p>"
+          "documentation": "<p>The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone. Where d is the weekday number, from 1 through 7, with 1 = Monday and 7 = Sunday.</p>"
         },
         "DailyAutomaticBackupStartTime": {
           "shape": "DailyTime",
-          "documentation": "<p>The preferred time to take daily automatic backups, in the UTC time zone.</p>"
+          "documentation": "<p>The preferred time to start the daily automatic backup, in the UTC time zone, for example, <code>02:00</code> </p>"
         },
         "AutomaticBackupRetentionDays": {
           "shape": "AutomaticBackupRetentionDays",
-          "documentation": "<p>The number of days to retain automatic backups. Setting this to 0 disables automatic backups. You can retain automatic backups for a maximum of 35 days.</p>"
+          "documentation": "<p>The number of days to retain automatic daily backups. Setting this to zero (0) disables automatic daily backups. You can retain automatic daily backups for a maximum of 35 days. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#automatic-backups\">Working with Automatic Daily Backups</a>.</p>"
+        },
+        "ThroughputCapacity": {
+          "shape": "MegabytesPerSecond",
+          "documentation": "<p>Sets the target value for a file system's throughput capacity, in MB/s, that you are updating the file system to. Valid values are 8, 16, 32, 64, 128, 256, 512, 1024, 2048. You cannot make a throughput capacity update request if there is an existing throughput capacity update request in progress. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-throughput-capacity.html\">Managing Throughput Capacity</a>.</p>"
         },
         "SelfManagedActiveDirectoryConfiguration": {
           "shape": "SelfManagedActiveDirectoryConfigurationUpdates",
-          "documentation": "<p>The configuration Amazon FSx uses to join the Windows File Server instance to the self-managed Microsoft AD directory.</p>"
+          "documentation": "<p>The configuration Amazon FSx uses to join the Windows File Server instance to the self-managed Microsoft AD directory. You cannot make a self-managed Microsoft AD update request if there is an existing self-managed Microsoft AD update request in progress.</p>"
         }
       },
-      "documentation": "<p>Updates the Microsoft Windows configuration for an existing Amazon FSx for Windows File Server file system. Amazon FSx overwrites existing properties with non-null values provided in the request. If you don't specify a non-null value for a property, that property is not updated.</p>"
+      "documentation": "<p>Updates the configuration for an existing Amazon FSx for Windows File Server file system. Amazon FSx only overwrites existing properties with non-null values provided in the request.</p>"
     },
     "VpcId": {
       "type": "string",
@@ -2106,7 +2190,7 @@
         },
         "WeeklyMaintenanceStartTime": {
           "shape": "WeeklyTime",
-          "documentation": "<p>The preferred time to perform weekly maintenance, in the UTC time zone.</p>"
+          "documentation": "<p>The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone. d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.</p>"
         },
         "DailyAutomaticBackupStartTime": {
           "shape": "DailyTime",

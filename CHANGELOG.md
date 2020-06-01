@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.686.0-->
+<!--LATEST=2.687.0-->
 <!--ENTRYINSERT-->
+
+## 2.687.0
+* feature: Athena: This release adds support for connecting Athena to your own Apache Hive Metastores in addition to the AWS Glue Data Catalog. For more information, please see https://docs.aws.amazon.com/athena/latest/ug/connect-to-data-source-hive.html
+* feature: EMR: Amazon EMR now supports encrypting log files with AWS Key Management Service (KMS) customer managed keys.
+* feature: FSx: New capabilities to update storage capacity and throughput capacity of your file systems, providing the flexibility to grow file storage and to scale up or down the available performance as needed to meet evolving storage needs over time.
+* feature: KMS: AWS Key Management Service (AWS KMS): If the GenerateDataKeyPair or GenerateDataKeyPairWithoutPlaintext APIs are called on a CMK in a custom key store (origin == AWS_CLOUDHSM), they return an UnsupportedOperationException. If a call to UpdateAlias causes a customer to exceed the Alias resource quota, the UpdateAlias API returns a LimitExceededException.
+* feature: SageMaker: We are releasing HumanTaskUiArn as a new parameter in CreateLabelingJob and RenderUiTemplate which can take an ARN for a system managed UI to render a task. 
+* feature: WorkLink: Amazon WorkLink now supports resource tagging for fleets.
 
 ## 2.686.0
 * feature: Kafka: New APIs for upgrading the Apache Kafka version of a cluster and to find out compatible upgrade paths

@@ -164,6 +164,14 @@ declare class WorkLink extends Service {
    */
   listFleets(callback?: (err: AWSError, data: WorkLink.Types.ListFleetsResponse) => void): Request<WorkLink.Types.ListFleetsResponse, AWSError>;
   /**
+   * Retrieves a list of tags for the specified resource.
+   */
+  listTagsForResource(params: WorkLink.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: WorkLink.Types.ListTagsForResourceResponse) => void): Request<WorkLink.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Retrieves a list of tags for the specified resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: WorkLink.Types.ListTagsForResourceResponse) => void): Request<WorkLink.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Retrieves a list of website authorization providers associated with a specified fleet.
    */
   listWebsiteAuthorizationProviders(params: WorkLink.Types.ListWebsiteAuthorizationProvidersRequest, callback?: (err: AWSError, data: WorkLink.Types.ListWebsiteAuthorizationProvidersResponse) => void): Request<WorkLink.Types.ListWebsiteAuthorizationProvidersResponse, AWSError>;
@@ -203,6 +211,22 @@ declare class WorkLink extends Service {
    * Signs the user out from all of their devices. The user can sign in again if they have valid credentials.
    */
   signOutUser(callback?: (err: AWSError, data: WorkLink.Types.SignOutUserResponse) => void): Request<WorkLink.Types.SignOutUserResponse, AWSError>;
+  /**
+   * Adds or overwrites one or more tags for the specified resource, such as a fleet. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, this operation updates its value.
+   */
+  tagResource(params: WorkLink.Types.TagResourceRequest, callback?: (err: AWSError, data: WorkLink.Types.TagResourceResponse) => void): Request<WorkLink.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds or overwrites one or more tags for the specified resource, such as a fleet. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, this operation updates its value.
+   */
+  tagResource(callback?: (err: AWSError, data: WorkLink.Types.TagResourceResponse) => void): Request<WorkLink.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes one or more tags from the specified resource.
+   */
+  untagResource(params: WorkLink.Types.UntagResourceRequest, callback?: (err: AWSError, data: WorkLink.Types.UntagResourceResponse) => void): Request<WorkLink.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes one or more tags from the specified resource.
+   */
+  untagResource(callback?: (err: AWSError, data: WorkLink.Types.UntagResourceResponse) => void): Request<WorkLink.Types.UntagResourceResponse, AWSError>;
   /**
    * Updates the audit stream configuration for the fleet.
    */
@@ -333,10 +357,14 @@ declare namespace WorkLink {
      * The option to optimize for better performance by routing traffic through the closest AWS Region to users, which may be outside of your home Region.
      */
     OptimizeForEndUserLocation?: Boolean;
+    /**
+     *  The tags to add to the resource. A tag is a key-value pair.
+     */
+    Tags?: TagMap;
   }
   export interface CreateFleetResponse {
     /**
-     * The ARN of the fleet.
+     * The Amazon Resource Name (ARN) of the fleet.
      */
     FleetArn?: FleetArn;
   }
@@ -475,7 +503,7 @@ declare namespace WorkLink {
   }
   export interface DescribeFleetMetadataRequest {
     /**
-     * The ARN of the fleet.
+     * The Amazon Resource Name (ARN) of the fleet.
      */
     FleetArn: FleetArn;
   }
@@ -508,6 +536,10 @@ declare namespace WorkLink {
      * The current state of the fleet.
      */
     FleetStatus?: FleetStatus;
+    /**
+     * The tags attached to the resource. A tag is a key-value pair.
+     */
+    Tags?: TagMap;
   }
   export interface DescribeIdentityProviderConfigurationRequest {
     /**
@@ -633,7 +665,7 @@ declare namespace WorkLink {
   export type FleetStatus = "CREATING"|"ACTIVE"|"DELETING"|"DELETED"|"FAILED_TO_CREATE"|"FAILED_TO_DELETE"|string;
   export interface FleetSummary {
     /**
-     * The ARN of the fleet.
+     * The Amazon Resource Name (ARN) of the fleet.
      */
     FleetArn?: FleetArn;
     /**
@@ -649,7 +681,7 @@ declare namespace WorkLink {
      */
     FleetName?: FleetName;
     /**
-     * The name to display.
+     * The name of the fleet to display.
      */
     DisplayName?: DisplayName;
     /**
@@ -660,6 +692,10 @@ declare namespace WorkLink {
      * The status of the fleet.
      */
     FleetStatus?: FleetStatus;
+    /**
+     * The tags attached to the resource. A tag is a key-value pair.
+     */
+    Tags?: TagMap;
   }
   export type FleetSummaryList = FleetSummary[];
   export type Id = string;
@@ -731,6 +767,18 @@ declare namespace WorkLink {
      * The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.
      */
     NextToken?: NextToken;
+  }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the fleet.
+     */
+    ResourceArn: FleetArn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The tags attached to the resource. A tag is a key-value pair.
+     */
+    Tags?: TagMap;
   }
   export interface ListWebsiteAuthorizationProvidersRequest {
     /**
@@ -823,6 +871,34 @@ declare namespace WorkLink {
   }
   export type SubnetId = string;
   export type SubnetIds = SubnetId[];
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagMap = {[key: string]: TagValue};
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the fleet.
+     */
+    ResourceArn: FleetArn;
+    /**
+     * The tags to add to the resource. A tag is a key-value pair.
+     */
+    Tags: TagMap;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the fleet.
+     */
+    ResourceArn: FleetArn;
+    /**
+     * The list of tag keys to remove from the resource.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateAuditStreamConfigurationRequest {
     /**
      * The ARN of the fleet.

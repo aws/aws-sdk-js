@@ -586,6 +586,10 @@ declare namespace EMR {
      */
     LogUri?: String;
     /**
+     *  The AWS KMS customer master key (CMK) used for encrypting log files. This attribute is only available with EMR version 5.30.0 and later, excluding EMR 6.0.0. 
+     */
+    LogEncryptionKmsKeyId?: String;
+    /**
      * The AMI version requested for this cluster.
      */
     RequestedAmiVersion?: String;
@@ -1610,6 +1614,10 @@ declare namespace EMR {
      */
     LogUri?: XmlString;
     /**
+     * The AWS KMS customer master key (CMK) used for encrypting log files. This attribute is only available with EMR version 5.30.0 and later, excluding EMR 6.0.0.
+     */
+    LogEncryptionKmsKeyId?: XmlString;
+    /**
      * Applies only to Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR releases 4.0 and later, ReleaseLabel is used. To specify a custom AMI, use CustomAmiID.
      */
     AmiVersion?: XmlStringMaxLen256;
@@ -2188,6 +2196,10 @@ declare namespace EMR {
      * The location in Amazon S3 to write the log files of the job flow. If a value is not provided, logs are not created.
      */
     LogUri?: XmlString;
+    /**
+     * The AWS KMS customer master key (CMK) used for encrypting log files. If a value is not provided, the logs will remain encrypted by AES-256. This attribute is only available with EMR version 5.30.0 and later, excluding EMR 6.0.0.
+     */
+    LogEncryptionKmsKeyId?: XmlString;
     /**
      * A JSON string for selecting additional features.
      */

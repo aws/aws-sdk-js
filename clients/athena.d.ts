@@ -28,6 +28,14 @@ declare class Athena extends Service {
    */
   batchGetQueryExecution(callback?: (err: AWSError, data: Athena.Types.BatchGetQueryExecutionOutput) => void): Request<Athena.Types.BatchGetQueryExecutionOutput, AWSError>;
   /**
+   * Creates (registers) a data catalog with the specified name and properties. Catalogs created are visible to all users of the same AWS account.
+   */
+  createDataCatalog(params: Athena.Types.CreateDataCatalogInput, callback?: (err: AWSError, data: Athena.Types.CreateDataCatalogOutput) => void): Request<Athena.Types.CreateDataCatalogOutput, AWSError>;
+  /**
+   * Creates (registers) a data catalog with the specified name and properties. Catalogs created are visible to all users of the same AWS account.
+   */
+  createDataCatalog(callback?: (err: AWSError, data: Athena.Types.CreateDataCatalogOutput) => void): Request<Athena.Types.CreateDataCatalogOutput, AWSError>;
+  /**
    * Creates a named query in the specified workgroup. Requires that you have access to the workgroup. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
    */
   createNamedQuery(params: Athena.Types.CreateNamedQueryInput, callback?: (err: AWSError, data: Athena.Types.CreateNamedQueryOutput) => void): Request<Athena.Types.CreateNamedQueryOutput, AWSError>;
@@ -44,6 +52,14 @@ declare class Athena extends Service {
    */
   createWorkGroup(callback?: (err: AWSError, data: Athena.Types.CreateWorkGroupOutput) => void): Request<Athena.Types.CreateWorkGroupOutput, AWSError>;
   /**
+   * Deletes a data catalog.
+   */
+  deleteDataCatalog(params: Athena.Types.DeleteDataCatalogInput, callback?: (err: AWSError, data: Athena.Types.DeleteDataCatalogOutput) => void): Request<Athena.Types.DeleteDataCatalogOutput, AWSError>;
+  /**
+   * Deletes a data catalog.
+   */
+  deleteDataCatalog(callback?: (err: AWSError, data: Athena.Types.DeleteDataCatalogOutput) => void): Request<Athena.Types.DeleteDataCatalogOutput, AWSError>;
+  /**
    * Deletes the named query if you have access to the workgroup in which the query was saved. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
    */
   deleteNamedQuery(params: Athena.Types.DeleteNamedQueryInput, callback?: (err: AWSError, data: Athena.Types.DeleteNamedQueryOutput) => void): Request<Athena.Types.DeleteNamedQueryOutput, AWSError>;
@@ -59,6 +75,22 @@ declare class Athena extends Service {
    * Deletes the workgroup with the specified name. The primary workgroup cannot be deleted.
    */
   deleteWorkGroup(callback?: (err: AWSError, data: Athena.Types.DeleteWorkGroupOutput) => void): Request<Athena.Types.DeleteWorkGroupOutput, AWSError>;
+  /**
+   * Returns the specified data catalog.
+   */
+  getDataCatalog(params: Athena.Types.GetDataCatalogInput, callback?: (err: AWSError, data: Athena.Types.GetDataCatalogOutput) => void): Request<Athena.Types.GetDataCatalogOutput, AWSError>;
+  /**
+   * Returns the specified data catalog.
+   */
+  getDataCatalog(callback?: (err: AWSError, data: Athena.Types.GetDataCatalogOutput) => void): Request<Athena.Types.GetDataCatalogOutput, AWSError>;
+  /**
+   * Returns a database object for the specfied database and data catalog.
+   */
+  getDatabase(params: Athena.Types.GetDatabaseInput, callback?: (err: AWSError, data: Athena.Types.GetDatabaseOutput) => void): Request<Athena.Types.GetDatabaseOutput, AWSError>;
+  /**
+   * Returns a database object for the specfied database and data catalog.
+   */
+  getDatabase(callback?: (err: AWSError, data: Athena.Types.GetDatabaseOutput) => void): Request<Athena.Types.GetDatabaseOutput, AWSError>;
   /**
    * Returns information about a single query. Requires that you have access to the workgroup in which the query was saved.
    */
@@ -84,6 +116,14 @@ declare class Athena extends Service {
    */
   getQueryResults(callback?: (err: AWSError, data: Athena.Types.GetQueryResultsOutput) => void): Request<Athena.Types.GetQueryResultsOutput, AWSError>;
   /**
+   * Returns table metadata for the specified catalog, database, and table.
+   */
+  getTableMetadata(params: Athena.Types.GetTableMetadataInput, callback?: (err: AWSError, data: Athena.Types.GetTableMetadataOutput) => void): Request<Athena.Types.GetTableMetadataOutput, AWSError>;
+  /**
+   * Returns table metadata for the specified catalog, database, and table.
+   */
+  getTableMetadata(callback?: (err: AWSError, data: Athena.Types.GetTableMetadataOutput) => void): Request<Athena.Types.GetTableMetadataOutput, AWSError>;
+  /**
    * Returns information about the workgroup with the specified name.
    */
   getWorkGroup(params: Athena.Types.GetWorkGroupInput, callback?: (err: AWSError, data: Athena.Types.GetWorkGroupOutput) => void): Request<Athena.Types.GetWorkGroupOutput, AWSError>;
@@ -92,11 +132,27 @@ declare class Athena extends Service {
    */
   getWorkGroup(callback?: (err: AWSError, data: Athena.Types.GetWorkGroupOutput) => void): Request<Athena.Types.GetWorkGroupOutput, AWSError>;
   /**
-   * Provides a list of available query IDs only for queries saved in the specified workgroup. Requires that you have access to the workgroup. If a workgroup is not specified, lists the saved queries for the primary workgroup. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
+   * Lists the data catalogs in the current AWS account.
+   */
+  listDataCatalogs(params: Athena.Types.ListDataCatalogsInput, callback?: (err: AWSError, data: Athena.Types.ListDataCatalogsOutput) => void): Request<Athena.Types.ListDataCatalogsOutput, AWSError>;
+  /**
+   * Lists the data catalogs in the current AWS account.
+   */
+  listDataCatalogs(callback?: (err: AWSError, data: Athena.Types.ListDataCatalogsOutput) => void): Request<Athena.Types.ListDataCatalogsOutput, AWSError>;
+  /**
+   * Lists the databases in the specified data catalog.
+   */
+  listDatabases(params: Athena.Types.ListDatabasesInput, callback?: (err: AWSError, data: Athena.Types.ListDatabasesOutput) => void): Request<Athena.Types.ListDatabasesOutput, AWSError>;
+  /**
+   * Lists the databases in the specified data catalog.
+   */
+  listDatabases(callback?: (err: AWSError, data: Athena.Types.ListDatabasesOutput) => void): Request<Athena.Types.ListDatabasesOutput, AWSError>;
+  /**
+   * Provides a list of available query IDs only for queries saved in the specified workgroup. Requires that you have access to the specified workgroup. If a workgroup is not specified, lists the saved queries for the primary workgroup. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
    */
   listNamedQueries(params: Athena.Types.ListNamedQueriesInput, callback?: (err: AWSError, data: Athena.Types.ListNamedQueriesOutput) => void): Request<Athena.Types.ListNamedQueriesOutput, AWSError>;
   /**
-   * Provides a list of available query IDs only for queries saved in the specified workgroup. Requires that you have access to the workgroup. If a workgroup is not specified, lists the saved queries for the primary workgroup. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
+   * Provides a list of available query IDs only for queries saved in the specified workgroup. Requires that you have access to the specified workgroup. If a workgroup is not specified, lists the saved queries for the primary workgroup. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
    */
   listNamedQueries(callback?: (err: AWSError, data: Athena.Types.ListNamedQueriesOutput) => void): Request<Athena.Types.ListNamedQueriesOutput, AWSError>;
   /**
@@ -108,11 +164,19 @@ declare class Athena extends Service {
    */
   listQueryExecutions(callback?: (err: AWSError, data: Athena.Types.ListQueryExecutionsOutput) => void): Request<Athena.Types.ListQueryExecutionsOutput, AWSError>;
   /**
-   * Lists the tags associated with this workgroup.
+   * Lists the metadata for the tables in the specified data catalog database.
+   */
+  listTableMetadata(params: Athena.Types.ListTableMetadataInput, callback?: (err: AWSError, data: Athena.Types.ListTableMetadataOutput) => void): Request<Athena.Types.ListTableMetadataOutput, AWSError>;
+  /**
+   * Lists the metadata for the tables in the specified data catalog database.
+   */
+  listTableMetadata(callback?: (err: AWSError, data: Athena.Types.ListTableMetadataOutput) => void): Request<Athena.Types.ListTableMetadataOutput, AWSError>;
+  /**
+   * Lists the tags associated with an Athena workgroup or data catalog resource.
    */
   listTagsForResource(params: Athena.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: Athena.Types.ListTagsForResourceOutput) => void): Request<Athena.Types.ListTagsForResourceOutput, AWSError>;
   /**
-   * Lists the tags associated with this workgroup.
+   * Lists the tags associated with an Athena workgroup or data catalog resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: Athena.Types.ListTagsForResourceOutput) => void): Request<Athena.Types.ListTagsForResourceOutput, AWSError>;
   /**
@@ -124,11 +188,11 @@ declare class Athena extends Service {
    */
   listWorkGroups(callback?: (err: AWSError, data: Athena.Types.ListWorkGroupsOutput) => void): Request<Athena.Types.ListWorkGroupsOutput, AWSError>;
   /**
-   * Runs the SQL query statements contained in the Query. Requires you to have access to the workgroup in which the query ran. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
+   * Runs the SQL query statements contained in the Query. Requires you to have access to the workgroup in which the query ran. Running queries against an external catalog requires GetDataCatalog permission to the catalog. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
    */
   startQueryExecution(params: Athena.Types.StartQueryExecutionInput, callback?: (err: AWSError, data: Athena.Types.StartQueryExecutionOutput) => void): Request<Athena.Types.StartQueryExecutionOutput, AWSError>;
   /**
-   * Runs the SQL query statements contained in the Query. Requires you to have access to the workgroup in which the query ran. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
+   * Runs the SQL query statements contained in the Query. Requires you to have access to the workgroup in which the query ran. Running queries against an external catalog requires GetDataCatalog permission to the catalog. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
    */
   startQueryExecution(callback?: (err: AWSError, data: Athena.Types.StartQueryExecutionOutput) => void): Request<Athena.Types.StartQueryExecutionOutput, AWSError>;
   /**
@@ -140,21 +204,29 @@ declare class Athena extends Service {
    */
   stopQueryExecution(callback?: (err: AWSError, data: Athena.Types.StopQueryExecutionOutput) => void): Request<Athena.Types.StopQueryExecutionOutput, AWSError>;
   /**
-   * Adds one or more tags to the resource, such as a workgroup. A tag is a label that you assign to an AWS Athena resource (a workgroup). Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize resources (workgroups) in Athena, for example, by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to search and filter workgroups in your account. For best practices, see AWS Tagging Strategies. The key length is from 1 (minimum) to 128 (maximum) Unicode characters in UTF-8. The tag value length is from 0 (minimum) to 256 (maximum) Unicode characters in UTF-8. You can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you specify more than one, separate them by commas.
+   * Adds one or more tags to an Athena resource. A tag is a label that you assign to a resource. In Athena, a resource can be a workgroup or data catalog. Each tag consists of a key and an optional value, both of which you define. For example, you can use tags to categorize Athena workgroups or data catalogs by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to search and filter workgroups or data catalogs in your account. For best practices, see Tagging Best Practices. Tag keys can be from 1 to 128 UTF-8 Unicode characters, and tag values can be from 0 to 256 UTF-8 Unicode characters. Tags can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you specify more than one tag, separate them by commas.
    */
   tagResource(params: Athena.Types.TagResourceInput, callback?: (err: AWSError, data: Athena.Types.TagResourceOutput) => void): Request<Athena.Types.TagResourceOutput, AWSError>;
   /**
-   * Adds one or more tags to the resource, such as a workgroup. A tag is a label that you assign to an AWS Athena resource (a workgroup). Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize resources (workgroups) in Athena, for example, by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to search and filter workgroups in your account. For best practices, see AWS Tagging Strategies. The key length is from 1 (minimum) to 128 (maximum) Unicode characters in UTF-8. The tag value length is from 0 (minimum) to 256 (maximum) Unicode characters in UTF-8. You can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you specify more than one, separate them by commas.
+   * Adds one or more tags to an Athena resource. A tag is a label that you assign to a resource. In Athena, a resource can be a workgroup or data catalog. Each tag consists of a key and an optional value, both of which you define. For example, you can use tags to categorize Athena workgroups or data catalogs by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to search and filter workgroups or data catalogs in your account. For best practices, see Tagging Best Practices. Tag keys can be from 1 to 128 UTF-8 Unicode characters, and tag values can be from 0 to 256 UTF-8 Unicode characters. Tags can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you specify more than one tag, separate them by commas.
    */
   tagResource(callback?: (err: AWSError, data: Athena.Types.TagResourceOutput) => void): Request<Athena.Types.TagResourceOutput, AWSError>;
   /**
-   * Removes one or more tags from the workgroup resource. Takes as an input a list of TagKey Strings separated by commas, and removes their tags at the same time.
+   * Removes one or more tags from a data catalog or workgroup resource.
    */
   untagResource(params: Athena.Types.UntagResourceInput, callback?: (err: AWSError, data: Athena.Types.UntagResourceOutput) => void): Request<Athena.Types.UntagResourceOutput, AWSError>;
   /**
-   * Removes one or more tags from the workgroup resource. Takes as an input a list of TagKey Strings separated by commas, and removes their tags at the same time.
+   * Removes one or more tags from a data catalog or workgroup resource.
    */
   untagResource(callback?: (err: AWSError, data: Athena.Types.UntagResourceOutput) => void): Request<Athena.Types.UntagResourceOutput, AWSError>;
+  /**
+   * Updates the data catalog that has the specified name.
+   */
+  updateDataCatalog(params: Athena.Types.UpdateDataCatalogInput, callback?: (err: AWSError, data: Athena.Types.UpdateDataCatalogOutput) => void): Request<Athena.Types.UpdateDataCatalogOutput, AWSError>;
+  /**
+   * Updates the data catalog that has the specified name.
+   */
+  updateDataCatalog(callback?: (err: AWSError, data: Athena.Types.UpdateDataCatalogOutput) => void): Request<Athena.Types.UpdateDataCatalogOutput, AWSError>;
   /**
    * Updates the workgroup with the specified name. The workgroup's name cannot be changed.
    */
@@ -201,6 +273,21 @@ declare namespace Athena {
   export type Boolean = boolean;
   export type BoxedBoolean = boolean;
   export type BytesScannedCutoffValue = number;
+  export type CatalogNameString = string;
+  export interface Column {
+    /**
+     * The name of the column.
+     */
+    Name: NameString;
+    /**
+     * The data type of the column.
+     */
+    Type?: TypeString;
+    /**
+     * Optional information about the column.
+     */
+    Comment?: CommentString;
+  }
   export interface ColumnInfo {
     /**
      * The catalog to which the query results belong.
@@ -244,7 +331,33 @@ declare namespace Athena {
     CaseSensitive?: Boolean;
   }
   export type ColumnInfoList = ColumnInfo[];
+  export type ColumnList = Column[];
   export type ColumnNullable = "NOT_NULL"|"NULLABLE"|"UNKNOWN"|string;
+  export type CommentString = string;
+  export interface CreateDataCatalogInput {
+    /**
+     * The name of the data catalog to create. The catalog name must be unique for the AWS account and can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters.
+     */
+    Name: CatalogNameString;
+    /**
+     * The type of data catalog to create: LAMBDA for a federated catalog, GLUE for AWS Glue Catalog, or HIVE for an external hive metastore.
+     */
+    Type: DataCatalogType;
+    /**
+     * A description of the data catalog to be created.
+     */
+    Description?: DescriptionString;
+    /**
+     * Specifies the Lambda function or functions to use for creating the data catalog. This is a mapping whose values depend on the catalog type.    For the HIVE data catalog type, use the following syntax. The metadata-function parameter is required. The sdk-version parameter is optional and defaults to the currently supported version.  metadata-function=lambda_arn, sdk-version=version_number     For the LAMBDA data catalog type, use one of the following sets of required parameters, but not both.   If you have one Lambda function that processes metadata and another for reading the actual data, use the following syntax. Both parameters are required.  metadata-function=lambda_arn, record-function=lambda_arn      If you have a composite Lambda function that processes both metadata and data, use the following syntax to specify your Lambda function.  function=lambda_arn       The GLUE type has no parameters.  
+     */
+    Parameters?: ParametersMap;
+    /**
+     * A list of comma separated tags to add to the data catalog that is created.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateDataCatalogOutput {
+  }
   export interface CreateNamedQueryInput {
     /**
      * The query name.
@@ -291,12 +404,57 @@ declare namespace Athena {
      */
     Description?: WorkGroupDescriptionString;
     /**
-     * One or more tags, separated by commas, that you want to attach to the workgroup as you create it.
+     * A list of comma separated tags to add to the workgroup that is created.
      */
     Tags?: TagList;
   }
   export interface CreateWorkGroupOutput {
   }
+  export interface DataCatalog {
+    /**
+     * The name of the data catalog. The catalog name must be unique for the AWS account and can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters.
+     */
+    Name: CatalogNameString;
+    /**
+     * An optional description of the data catalog.
+     */
+    Description?: DescriptionString;
+    /**
+     * The type of data catalog: LAMBDA for a federated catalog, GLUE for AWS Glue Catalog, or HIVE for an external hive metastore.
+     */
+    Type: DataCatalogType;
+    /**
+     * Specifies the Lambda function or functions to use for the data catalog. This is a mapping whose values depend on the catalog type.    For the HIVE data catalog type, use the following syntax. The metadata-function parameter is required. The sdk-version parameter is optional and defaults to the currently supported version.  metadata-function=lambda_arn, sdk-version=version_number     For the LAMBDA data catalog type, use one of the following sets of required parameters, but not both.   If you have one Lambda function that processes metadata and another for reading the actual data, use the following syntax. Both parameters are required.  metadata-function=lambda_arn, record-function=lambda_arn      If you have a composite Lambda function that processes both metadata and data, use the following syntax to specify your Lambda function.  function=lambda_arn       The GLUE type has no parameters.  
+     */
+    Parameters?: ParametersMap;
+  }
+  export interface DataCatalogSummary {
+    /**
+     * The name of the data catalog.
+     */
+    CatalogName?: CatalogNameString;
+    /**
+     * The data catalog type.
+     */
+    Type?: DataCatalogType;
+  }
+  export type DataCatalogSummaryList = DataCatalogSummary[];
+  export type DataCatalogType = "LAMBDA"|"GLUE"|"HIVE"|string;
+  export interface Database {
+    /**
+     * The name of the database.
+     */
+    Name: NameString;
+    /**
+     * An optional description of the database.
+     */
+    Description?: DescriptionString;
+    /**
+     * A set of custom key/value pairs.
+     */
+    Parameters?: ParametersMap;
+  }
+  export type DatabaseList = Database[];
   export type DatabaseString = string;
   export type _Date = Date;
   export interface Datum {
@@ -304,6 +462,14 @@ declare namespace Athena {
      * The value of the datum.
      */
     VarCharValue?: datumString;
+  }
+  export interface DeleteDataCatalogInput {
+    /**
+     * The name of the data catalog to delete.
+     */
+    Name: CatalogNameString;
+  }
+  export interface DeleteDataCatalogOutput {
   }
   export interface DeleteNamedQueryInput {
     /**
@@ -339,6 +505,35 @@ declare namespace Athena {
   export type EncryptionOption = "SSE_S3"|"SSE_KMS"|"CSE_KMS"|string;
   export type ErrorCode = string;
   export type ErrorMessage = string;
+  export type ExpressionString = string;
+  export interface GetDataCatalogInput {
+    /**
+     * The name of the data catalog to return.
+     */
+    Name: CatalogNameString;
+  }
+  export interface GetDataCatalogOutput {
+    /**
+     * The data catalog returned.
+     */
+    DataCatalog?: DataCatalog;
+  }
+  export interface GetDatabaseInput {
+    /**
+     * The name of the data catalog that contains the database to return.
+     */
+    CatalogName: CatalogNameString;
+    /**
+     * The name of the database to return.
+     */
+    DatabaseName: NameString;
+  }
+  export interface GetDatabaseOutput {
+    /**
+     * The database returned.
+     */
+    Database?: Database;
+  }
   export interface GetNamedQueryInput {
     /**
      * The unique ID of the query. Use ListNamedQueries to get query IDs.
@@ -369,7 +564,7 @@ declare namespace Athena {
      */
     QueryExecutionId: QueryExecutionId;
     /**
-     * The token that specifies where to start pagination if a previous request was truncated.
+     * A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.
      */
     NextToken?: Token;
     /**
@@ -387,9 +582,29 @@ declare namespace Athena {
      */
     ResultSet?: ResultSet;
     /**
-     * A token to be used by the next request if this request is truncated.
+     * A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.
      */
     NextToken?: Token;
+  }
+  export interface GetTableMetadataInput {
+    /**
+     * The name of the data catalog that contains the database and table metadata to return.
+     */
+    CatalogName: CatalogNameString;
+    /**
+     * The name of the database that contains the table metadata to return.
+     */
+    DatabaseName: NameString;
+    /**
+     * The name of the table for which metadata is returned.
+     */
+    TableName: NameString;
+  }
+  export interface GetTableMetadataOutput {
+    /**
+     * An object that contains table metadata.
+     */
+    TableMetadata?: TableMetadata;
   }
   export interface GetWorkGroupInput {
     /**
@@ -405,9 +620,54 @@ declare namespace Athena {
   }
   export type IdempotencyToken = string;
   export type Integer = number;
+  export type KeyString = string;
+  export interface ListDataCatalogsInput {
+    /**
+     * A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.
+     */
+    NextToken?: Token;
+    /**
+     * Specifies the maximum number of data catalogs to return.
+     */
+    MaxResults?: MaxDataCatalogsCount;
+  }
+  export interface ListDataCatalogsOutput {
+    /**
+     * A summary list of data catalogs.
+     */
+    DataCatalogsSummary?: DataCatalogSummaryList;
+    /**
+     * A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.
+     */
+    NextToken?: Token;
+  }
+  export interface ListDatabasesInput {
+    /**
+     * The name of the data catalog that contains the databases to return.
+     */
+    CatalogName: CatalogNameString;
+    /**
+     * A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.
+     */
+    NextToken?: Token;
+    /**
+     * Specifies the maximum number of results to return.
+     */
+    MaxResults?: MaxDatabasesCount;
+  }
+  export interface ListDatabasesOutput {
+    /**
+     * A list of databases from a data catalog.
+     */
+    DatabaseList?: DatabaseList;
+    /**
+     * A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.
+     */
+    NextToken?: Token;
+  }
   export interface ListNamedQueriesInput {
     /**
-     * The token that specifies where to start pagination if a previous request was truncated.
+     * A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.
      */
     NextToken?: Token;
     /**
@@ -415,7 +675,7 @@ declare namespace Athena {
      */
     MaxResults?: MaxNamedQueriesCount;
     /**
-     * The name of the workgroup from which the named queries are returned. If a workgroup is not specified, the saved queries for the primary workgroup are returned.
+     * The name of the workgroup from which the named queries are being returned. If a workgroup is not specified, the saved queries for the primary workgroup are returned.
      */
     WorkGroup?: WorkGroupName;
   }
@@ -425,13 +685,13 @@ declare namespace Athena {
      */
     NamedQueryIds?: NamedQueryIdList;
     /**
-     * A token to be used by the next request if this request is truncated.
+     * A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.
      */
     NextToken?: Token;
   }
   export interface ListQueryExecutionsInput {
     /**
-     * The token that specifies where to start pagination if a previous request was truncated.
+     * A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.
      */
     NextToken?: Token;
     /**
@@ -439,7 +699,7 @@ declare namespace Athena {
      */
     MaxResults?: MaxQueryExecutionsCount;
     /**
-     * The name of the workgroup from which queries are returned. If a workgroup is not specified, a list of available query execution IDs for the queries in the primary workgroup is returned.
+     * The name of the workgroup from which queries are being returned. If a workgroup is not specified, a list of available query execution IDs for the queries in the primary workgroup is returned.
      */
     WorkGroup?: WorkGroupName;
   }
@@ -453,23 +713,55 @@ declare namespace Athena {
      */
     NextToken?: Token;
   }
-  export interface ListTagsForResourceInput {
+  export interface ListTableMetadataInput {
     /**
-     * Lists the tags for the workgroup resource with the specified ARN.
+     * The name of the data catalog for which table metadata should be returned.
      */
-    ResourceARN: AmazonResourceName;
+    CatalogName: CatalogNameString;
     /**
-     * The token for the next set of results, or null if there are no additional results for this request, where the request lists the tags for the workgroup resource with the specified ARN.
+     * The name of the database for which table metadata should be returned.
+     */
+    DatabaseName: NameString;
+    /**
+     * A regex filter that pattern-matches table names. If no expression is supplied, metadata for all tables are listed.
+     */
+    Expression?: ExpressionString;
+    /**
+     * A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.
      */
     NextToken?: Token;
     /**
-     * The maximum number of results to be returned per request that lists the tags for the workgroup resource.
+     * Specifies the maximum number of results to return.
+     */
+    MaxResults?: MaxTableMetadataCount;
+  }
+  export interface ListTableMetadataOutput {
+    /**
+     * A list of table metadata.
+     */
+    TableMetadataList?: TableMetadataList;
+    /**
+     * A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.
+     */
+    NextToken?: Token;
+  }
+  export interface ListTagsForResourceInput {
+    /**
+     * Lists the tags for the resource with the specified ARN.
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     * The token for the next set of results, or null if there are no additional results for this request, where the request lists the tags for the resource with the specified ARN.
+     */
+    NextToken?: Token;
+    /**
+     * The maximum number of results to be returned per request that lists the tags for the resource.
      */
     MaxResults?: MaxTagsCount;
   }
   export interface ListTagsForResourceOutput {
     /**
-     * The list of tags associated with this workgroup.
+     * The list of tags associated with the specified resource.
      */
     Tags?: TagList;
     /**
@@ -479,7 +771,7 @@ declare namespace Athena {
   }
   export interface ListWorkGroupsInput {
     /**
-     * A token to be used by the next request if this request is truncated.
+     * A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.
      */
     NextToken?: Token;
     /**
@@ -493,14 +785,17 @@ declare namespace Athena {
      */
     WorkGroups?: WorkGroupsList;
     /**
-     * A token to be used by the next request if this request is truncated.
+     * A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.
      */
     NextToken?: Token;
   }
   export type Long = number;
+  export type MaxDataCatalogsCount = number;
+  export type MaxDatabasesCount = number;
   export type MaxNamedQueriesCount = number;
   export type MaxQueryExecutionsCount = number;
   export type MaxQueryResults = number;
+  export type MaxTableMetadataCount = number;
   export type MaxTagsCount = number;
   export type MaxWorkGroupsCount = number;
   export type NameString = string;
@@ -533,6 +828,8 @@ declare namespace Athena {
   export type NamedQueryId = string;
   export type NamedQueryIdList = NamedQueryId[];
   export type NamedQueryList = NamedQuery[];
+  export type ParametersMap = {[key: string]: ParametersMapValue};
+  export type ParametersMapValue = string;
   export interface QueryExecution {
     /**
      * The unique identifier for each query execution.
@@ -569,9 +866,13 @@ declare namespace Athena {
   }
   export interface QueryExecutionContext {
     /**
-     * The name of the database.
+     * The name of the database used in the query execution.
      */
     Database?: DatabaseString;
+    /**
+     * The name of the data catalog used in the query execution.
+     */
+    Catalog?: CatalogNameString;
   }
   export type QueryExecutionId = string;
   export type QueryExecutionIdList = QueryExecutionId[];
@@ -609,7 +910,7 @@ declare namespace Athena {
   }
   export interface QueryExecutionStatus {
     /**
-     * The state of query execution. QUEUED indicates that the query has been submitted to the service, and Athena will execute the query as soon as resources are available. RUNNING indicates that the query is in execution phase. SUCCEEDED indicates that the query completed without errors. FAILED indicates that the query experienced an error and did not complete processing. CANCELLED indicates that a user input interrupted query execution. 
+     * The state of query execution. QUEUED indicates that the query has been submitted to the service, and Athena will execute the query as soon as resources are available. RUNNING indicates that the query is in execution phase. SUCCEEDED indicates that the query completed without errors. FAILED indicates that the query experienced an error and did not complete processing. CANCELLED indicates that a user input interrupted query execution.  Athena automatically retries your queries in cases of certain transient errors. As a result, you may see the query state transition from RUNNING or FAILED to QUEUED.  
      */
     State?: QueryExecutionState;
     /**
@@ -715,6 +1016,38 @@ declare namespace Athena {
   export interface StopQueryExecutionOutput {
   }
   export type String = string;
+  export interface TableMetadata {
+    /**
+     * The name of the table.
+     */
+    Name: NameString;
+    /**
+     * The time that the table was created.
+     */
+    CreateTime?: Timestamp;
+    /**
+     * The last time the table was accessed.
+     */
+    LastAccessTime?: Timestamp;
+    /**
+     * The type of table. In Athena, only EXTERNAL_TABLE is supported.
+     */
+    TableType?: TableTypeString;
+    /**
+     * A list of the columns in the table.
+     */
+    Columns?: ColumnList;
+    /**
+     * A list of the partition keys in the table.
+     */
+    PartitionKeys?: ColumnList;
+    /**
+     * A set of custom key/value pairs for table properties.
+     */
+    Parameters?: ParametersMap;
+  }
+  export type TableMetadataList = TableMetadata[];
+  export type TableTypeString = string;
   export interface Tag {
     /**
      * A tag key. The tag key length is from 1 to 128 Unicode characters in UTF-8. You can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys are case-sensitive and must be unique per resource. 
@@ -730,18 +1063,20 @@ declare namespace Athena {
   export type TagList = Tag[];
   export interface TagResourceInput {
     /**
-     * Requests that one or more tags are added to the resource (such as a workgroup) for the specified ARN.
+     * Specifies the ARN of the Athena resource (workgroup or data catalog) to which tags are to be added.
      */
     ResourceARN: AmazonResourceName;
     /**
-     * One or more tags, separated by commas, to be added to the resource, such as a workgroup.
+     * A collection of one or more tags, separated by commas, to be added to an Athena workgroup or data catalog resource.
      */
     Tags: TagList;
   }
   export interface TagResourceOutput {
   }
   export type TagValue = string;
+  export type Timestamp = Date;
   export type Token = string;
+  export type TypeString = string;
   export interface UnprocessedNamedQueryId {
     /**
      * The unique identifier of the named query.
@@ -774,15 +1109,35 @@ declare namespace Athena {
   export type UnprocessedQueryExecutionIdList = UnprocessedQueryExecutionId[];
   export interface UntagResourceInput {
     /**
-     * Removes one or more tags from the workgroup resource for the specified ARN.
+     * Specifies the ARN of the resource from which tags are to be removed.
      */
     ResourceARN: AmazonResourceName;
     /**
-     * Removes the tags associated with one or more tag keys from the workgroup resource.
+     * A comma-separated list of one or more tag keys whose tags are to be removed from the specified resource.
      */
     TagKeys: TagKeyList;
   }
   export interface UntagResourceOutput {
+  }
+  export interface UpdateDataCatalogInput {
+    /**
+     * The name of the data catalog to update. The catalog name must be unique for the AWS account and can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters.
+     */
+    Name: CatalogNameString;
+    /**
+     * Specifies the type of data catalog to update. Specify LAMBDA for a federated catalog, GLUE for AWS Glue Catalog, or HIVE for an external hive metastore.
+     */
+    Type: DataCatalogType;
+    /**
+     * New or modified text that describes the data catalog.
+     */
+    Description?: DescriptionString;
+    /**
+     * Specifies the Lambda function or functions to use for updating the data catalog. This is a mapping whose values depend on the catalog type.    For the HIVE data catalog type, use the following syntax. The metadata-function parameter is required. The sdk-version parameter is optional and defaults to the currently supported version.  metadata-function=lambda_arn, sdk-version=version_number     For the LAMBDA data catalog type, use one of the following sets of required parameters, but not both.   If you have one Lambda function that processes metadata and another for reading the actual data, use the following syntax. Both parameters are required.  metadata-function=lambda_arn, record-function=lambda_arn      If you have a composite Lambda function that processes both metadata and data, use the following syntax to specify your Lambda function.  function=lambda_arn       The GLUE type has no parameters.  
+     */
+    Parameters?: ParametersMap;
+  }
+  export interface UpdateDataCatalogOutput {
   }
   export interface UpdateWorkGroupInput {
     /**

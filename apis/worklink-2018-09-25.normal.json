@@ -578,6 +578,9 @@
           "shape": "InvalidRequestException"
         },
         {
+          "shape": "ResourceNotFoundException"
+        },
+        {
           "shape": "TooManyRequestsException"
         }
       ],
@@ -610,6 +613,25 @@
         }
       ],
       "documentation": "<p>Retrieves a list of fleets for the current account and Region.</p>"
+    },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{ResourceArn}"
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        }
+      ],
+      "documentation": "<p>Retrieves a list of tags for the specified resource.</p>"
     },
     "ListWebsiteAuthorizationProviders": {
       "name": "ListWebsiteAuthorizationProviders",
@@ -762,6 +784,44 @@
         }
       ],
       "documentation": "<p>Signs the user out from all of their devices. The user can sign in again if they have valid credentials.</p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/tags/{ResourceArn}"
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        }
+      ],
+      "documentation": "<p>Adds or overwrites one or more tags for the specified resource, such as a fleet. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, this operation updates its value.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{ResourceArn}"
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "output": {
+        "shape": "UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        }
+      ],
+      "documentation": "<p>Removes one or more tags from the specified resource.</p>"
     },
     "UpdateAuditStreamConfiguration": {
       "name": "UpdateAuditStreamConfiguration",
@@ -1046,7 +1106,8 @@
       }
     },
     "AuditStreamArn": {
-      "type": "string"
+      "type": "string",
+      "pattern": "^arn:aws:kinesis:.+:[0-9]{12}:stream/AmazonWorkLink-.*$"
     },
     "AuthorizationProviderType": {
       "type": "string",
@@ -1091,6 +1152,10 @@
         "OptimizeForEndUserLocation": {
           "shape": "Boolean",
           "documentation": "<p>The option to optimize for better performance by routing traffic through the closest AWS Region to users, which may be outside of your home Region.</p>"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p> The tags to add to the resource. A tag is a key-value pair.</p>"
         }
       }
     },
@@ -1099,7 +1164,7 @@
       "members": {
         "FleetArn": {
           "shape": "FleetArn",
-          "documentation": "<p>The ARN of the fleet.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the fleet.</p>"
         }
       }
     },
@@ -1301,7 +1366,7 @@
       "members": {
         "FleetArn": {
           "shape": "FleetArn",
-          "documentation": "<p>The ARN of the fleet.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the fleet.</p>"
         }
       }
     },
@@ -1335,6 +1400,10 @@
         "FleetStatus": {
           "shape": "FleetStatus",
           "documentation": "<p>The current state of the fleet.</p>"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags attached to the resource. A tag is a key-value pair.</p>"
         }
       }
     },
@@ -1599,7 +1668,7 @@
       "members": {
         "FleetArn": {
           "shape": "FleetArn",
-          "documentation": "<p>The ARN of the fleet.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the fleet.</p>"
         },
         "CreatedTime": {
           "shape": "DateTime",
@@ -1615,7 +1684,7 @@
         },
         "DisplayName": {
           "shape": "DisplayName",
-          "documentation": "<p>The name to display.</p>"
+          "documentation": "<p>The name of the fleet to display.</p>"
         },
         "CompanyCode": {
           "shape": "CompanyCode",
@@ -1624,6 +1693,10 @@
         "FleetStatus": {
           "shape": "FleetStatus",
           "documentation": "<p>The status of the fleet.</p>"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags attached to the resource. A tag is a key-value pair.</p>"
         }
       },
       "documentation": "<p>The summary of the fleet.</p>"
@@ -1734,6 +1807,29 @@
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+        }
+      }
+    },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "FleetArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the fleet.</p>",
+          "location": "uri",
+          "locationName": "ResourceArn"
+        }
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags attached to the resource. A tag is a key-value pair.</p>"
         }
       }
     },
@@ -1901,6 +1997,83 @@
       "member": {
         "shape": "SubnetId"
       }
+    },
+    "TagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+    },
+    "TagKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      },
+      "max": 50,
+      "min": 1
+    },
+    "TagMap": {
+      "type": "map",
+      "key": {
+        "shape": "TagKey"
+      },
+      "value": {
+        "shape": "TagValue"
+      },
+      "max": 50,
+      "min": 1
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn",
+        "Tags"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "FleetArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the fleet.</p>",
+          "location": "uri",
+          "locationName": "ResourceArn"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags to add to the resource. A tag is a key-value pair.</p>"
+        }
+      }
+    },
+    "TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValue": {
+      "type": "string",
+      "max": 256
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn",
+        "TagKeys"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "FleetArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the fleet.</p>",
+          "location": "uri",
+          "locationName": "ResourceArn"
+        },
+        "TagKeys": {
+          "shape": "TagKeyList",
+          "documentation": "<p>The list of tag keys to remove from the resource.</p>",
+          "location": "querystring",
+          "locationName": "tagKeys"
+        }
+      }
+    },
+    "UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
     },
     "UpdateAuditStreamConfigurationRequest": {
       "type": "structure",
@@ -2112,5 +2285,5 @@
       }
     }
   },
-  "documentation": "<p>Amazon WorkLink is a cloud-based service that provides secure access to internal websites and web apps from iOS phones. In a single step, your users, such as employees, can access internal websites as efficiently as they access any other public website. They enter a URL in their web browser, or choose a link to an internal website in an email. Amazon WorkLink authenticates the user's access and securely renders authorized internal web content in a secure rendering service in the AWS cloud. Amazon WorkLink doesn't download or store any internal web content on mobile devices.</p>"
+  "documentation": "<p>Amazon WorkLink is a cloud-based service that provides secure access to internal websites and web apps from iOS and Android phones. In a single step, your users, such as employees, can access internal websites as efficiently as they access any other public website. They enter a URL in their web browser, or choose a link to an internal website in an email. Amazon WorkLink authenticates the user's access and securely renders authorized internal web content in a secure rendering service in the AWS cloud. Amazon WorkLink doesn't download or store any internal web content on mobile devices.</p>"
 }

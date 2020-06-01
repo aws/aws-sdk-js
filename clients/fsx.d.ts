@@ -116,11 +116,11 @@ declare class FSx extends Service {
    */
   untagResource(callback?: (err: AWSError, data: FSx.Types.UntagResourceResponse) => void): Request<FSx.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates a file system configuration.
+   * Use this operation to update the configuration of an existing Amazon FSx file system. For an Amazon FSx for Lustre file system, you can update only the WeeklyMaintenanceStartTime. For an Amazon for Windows File Server file system, you can update the following properties:   AutomaticBackupRetentionDays   DailyAutomaticBackupStartTime   SelfManagedActiveDirectoryConfiguration   StorageCapacity   ThroughputCapacity   WeeklyMaintenanceStartTime   You can update multiple properties in a single request.
    */
   updateFileSystem(params: FSx.Types.UpdateFileSystemRequest, callback?: (err: AWSError, data: FSx.Types.UpdateFileSystemResponse) => void): Request<FSx.Types.UpdateFileSystemResponse, AWSError>;
   /**
-   * Updates a file system configuration.
+   * Use this operation to update the configuration of an existing Amazon FSx file system. For an Amazon FSx for Lustre file system, you can update only the WeeklyMaintenanceStartTime. For an Amazon for Windows File Server file system, you can update the following properties:   AutomaticBackupRetentionDays   DailyAutomaticBackupStartTime   SelfManagedActiveDirectoryConfiguration   StorageCapacity   ThroughputCapacity   WeeklyMaintenanceStartTime   You can update multiple properties in a single request.
    */
   updateFileSystem(callback?: (err: AWSError, data: FSx.Types.UpdateFileSystemResponse) => void): Request<FSx.Types.UpdateFileSystemResponse, AWSError>;
 }
@@ -137,6 +137,34 @@ declare namespace FSx {
     ActiveDirectoryId?: DirectoryId;
   }
   export type ActiveDirectoryFullyQualifiedName = string;
+  export interface AdministrativeAction {
+    AdministrativeActionType?: AdministrativeActionType;
+    /**
+     * Provides the percent complete of a STORAGE_OPTIMIZATION administrative action.
+     */
+    ProgressPercent?: ProgressPercent;
+    /**
+     * Time that the administrative action request was received.
+     */
+    RequestTime?: RequestTime;
+    /**
+     * Describes the status of the administrative action, as follows:    FAILED - Amazon FSx failed to process the administrative action successfully.    IN_PROGRESS - Amazon FSx is processing the administrative action.    PENDING - Amazon FSx is waiting to process the administrative action.    COMPLETED - Amazon FSx has finished processing the administrative task.    UPDATED_OPTIMIZING - For a storage capacity increase update, Amazon FSx has updated the file system with the new storage capacity, and is now performing the storage optimization process. For more information, see Managing Storage Capacity.  
+     */
+    Status?: Status;
+    /**
+     * Describes the target StorageCapacity or ThroughputCapacity value provided in the UpdateFileSystem operation. Returned for FILE_SYSTEM_UPDATE administrative actions. 
+     */
+    TargetFileSystemValues?: FileSystem;
+    FailureDetails?: AdministrativeActionFailureDetails;
+  }
+  export interface AdministrativeActionFailureDetails {
+    /**
+     * Error message providing details about the failure.
+     */
+    Message?: ErrorMessage;
+  }
+  export type AdministrativeActionType = "FILE_SYSTEM_UPDATE"|"STORAGE_OPTIMIZATION"|string;
+  export type AdministrativeActions = AdministrativeAction[];
   export type ArchivePath = string;
   export type AutomaticBackupRetentionDays = number;
   export interface Backup {
@@ -306,7 +334,7 @@ declare namespace FSx {
   }
   export interface CreateFileSystemLustreConfiguration {
     /**
-     * The preferred time to perform weekly maintenance, in the UTC time zone.
+     * The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone, where d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.
      */
     WeeklyMaintenanceStartTime?: WeeklyTime;
     /**
@@ -391,7 +419,7 @@ declare namespace FSx {
      */
     ThroughputCapacity: MegabytesPerSecond;
     /**
-     * The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone.
+     * The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone, where d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.
      */
     WeeklyMaintenanceStartTime?: WeeklyTime;
     /**
@@ -706,6 +734,10 @@ declare namespace FSx {
      */
     WindowsConfiguration?: WindowsFileSystemConfiguration;
     LustreConfiguration?: LustreFileSystemConfiguration;
+    /**
+     * A list of administrative actions for the file system that are in process or waiting to be processed. Administrative actions describe changes to the Windows file system that you have initiated using the UpdateFileSystem action. 
+     */
+    AdministrativeActions?: AdministrativeActions;
   }
   export type FileSystemAdministratorsGroupName = string;
   export interface FileSystemFailureDetails {
@@ -766,7 +798,7 @@ declare namespace FSx {
   export type LustreDeploymentType = "SCRATCH_1"|"SCRATCH_2"|"PERSISTENT_1"|string;
   export interface LustreFileSystemConfiguration {
     /**
-     * The UTC time that you want to begin your weekly maintenance window.
+     * The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone. d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.
      */
     WeeklyMaintenanceStartTime?: WeeklyTime;
     DataRepositoryConfiguration?: DataRepositoryConfiguration;
@@ -795,6 +827,7 @@ declare namespace FSx {
   export type ProgressPercent = number;
   export type ReportFormat = "REPORT_CSV_20191124"|string;
   export type ReportScope = "FAILED_FILES_ONLY"|string;
+  export type RequestTime = Date;
   export type ResourceARN = string;
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
@@ -861,6 +894,7 @@ declare namespace FSx {
     DnsIps?: DnsIps;
   }
   export type StartTime = Date;
+  export type Status = "FAILED"|"IN_PROGRESS"|"PENDING"|"COMPLETED"|"UPDATED_OPTIMIZING"|string;
   export type StorageCapacity = number;
   export type StorageType = "SSD"|"HDD"|string;
   export type SubnetId = string;
@@ -909,18 +943,25 @@ declare namespace FSx {
   }
   export interface UpdateFileSystemLustreConfiguration {
     /**
-     * The preferred time to perform weekly maintenance, in the UTC time zone.
+     * The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone. d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.
      */
     WeeklyMaintenanceStartTime?: WeeklyTime;
   }
   export interface UpdateFileSystemRequest {
+    /**
+     * Identifies the file system that you are updating.
+     */
     FileSystemId: FileSystemId;
     /**
-     * (Optional) A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent updates. This string is automatically filled on your behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
+     * A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent updates. This string is automatically filled on your behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
      */
     ClientRequestToken?: ClientRequestToken;
     /**
-     * The configuration update for this Microsoft Windows file system. The only supported options are for backup and maintenance and for self-managed Active Directory configuration.
+     * Use this parameter to increase the storage capacity of an Amazon FSx for Windows File Server file system. Specifies the storage capacity target value, GiB, for the file system you're updating. The storage capacity target value must be at least 10 percent (%) greater than the current storage capacity value. In order to increase storage capacity, the file system needs to have at least 16 MB/s of throughput capacity. You cannot make a storage capacity increase request if there is an existing storage capacity increase request in progress. For more information, see Managing Storage Capacity.
+     */
+    StorageCapacity?: StorageCapacity;
+    /**
+     * The configuration updates for an Amazon FSx for Windows File Server file system.
      */
     WindowsConfiguration?: UpdateFileSystemWindowsConfiguration;
     LustreConfiguration?: UpdateFileSystemLustreConfiguration;
@@ -933,19 +974,23 @@ declare namespace FSx {
   }
   export interface UpdateFileSystemWindowsConfiguration {
     /**
-     * The preferred time to perform weekly maintenance, in the UTC time zone.
+     * The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone. Where d is the weekday number, from 1 through 7, with 1 = Monday and 7 = Sunday.
      */
     WeeklyMaintenanceStartTime?: WeeklyTime;
     /**
-     * The preferred time to take daily automatic backups, in the UTC time zone.
+     * The preferred time to start the daily automatic backup, in the UTC time zone, for example, 02:00 
      */
     DailyAutomaticBackupStartTime?: DailyTime;
     /**
-     * The number of days to retain automatic backups. Setting this to 0 disables automatic backups. You can retain automatic backups for a maximum of 35 days.
+     * The number of days to retain automatic daily backups. Setting this to zero (0) disables automatic daily backups. You can retain automatic daily backups for a maximum of 35 days. For more information, see Working with Automatic Daily Backups.
      */
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
     /**
-     * The configuration Amazon FSx uses to join the Windows File Server instance to the self-managed Microsoft AD directory.
+     * Sets the target value for a file system's throughput capacity, in MB/s, that you are updating the file system to. Valid values are 8, 16, 32, 64, 128, 256, 512, 1024, 2048. You cannot make a throughput capacity update request if there is an existing throughput capacity update request in progress. For more information, see Managing Throughput Capacity.
+     */
+    ThroughputCapacity?: MegabytesPerSecond;
+    /**
+     * The configuration Amazon FSx uses to join the Windows File Server instance to the self-managed Microsoft AD directory. You cannot make a self-managed Microsoft AD update request if there is an existing self-managed Microsoft AD update request in progress.
      */
     SelfManagedActiveDirectoryConfiguration?: SelfManagedActiveDirectoryConfigurationUpdates;
   }
@@ -983,7 +1028,7 @@ declare namespace FSx {
      */
     MaintenanceOperationsInProgress?: FileSystemMaintenanceOperations;
     /**
-     * The preferred time to perform weekly maintenance, in the UTC time zone.
+     * The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone. d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.
      */
     WeeklyMaintenanceStartTime?: WeeklyTime;
     /**
