@@ -59,7 +59,7 @@ describe 'build', ->
         expect(out).to.match(/Copyright Amazon\.com/i)
         expect(out).to.contain('"2010-05-08"')
         expect(out).not.to.contain('"2006-03-01"')
-        expect(out).not.to.contaion('XMLHttpRequest')
+        expect(out).not.to.contain('XMLHttpRequest')
         done()
 
     it 'uses MINIFY environment variable to set minification mode', (done) ->
@@ -69,5 +69,5 @@ describe 'build', ->
         expect(out).to.match(/Copyright Amazon\.com/i)
         expect(out).to.match(/function \w\(\w,\w,\w\)\{function \w\(\w,\w\)\{/)
         expect(out).to.contain('"2006-03-01"')
-        expect(out).not.to.contaion('XMLHttpRequest')
+        expect(out).not.to.contain('XMLHttpRequest')
         done()
