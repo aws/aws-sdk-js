@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "Build",
+  "description": "Build parts of SDK for use in nodejs, similar to browser-builds."
+}

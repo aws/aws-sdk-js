@@ -21,7 +21,7 @@ function build(options, callback) {
     callback = options;
     options = {};
   }
-  
+
   var img = require('insert-module-globals');
   img.vars.process = function() { return '{browser:true}'; };
 

@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 
 var build = require('./builder');
-var path = require('path');
 
-// following is set as default build options: 
+// following is set as default build options:
 // var buildOptions = { basedir: path.resolve(__dirname, '..') };
 
 // run if we called this tool directly

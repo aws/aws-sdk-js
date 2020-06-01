@@ -3,7 +3,7 @@
 var build = require('./builder');
 var path = require('path');
 
-var buildOptions = { basedir: path.resolve(__dirname, '..'), 
+var buildOptions = { basedir: path.resolve(__dirname, '..'),
                     standalone: 'AWS',
                     detectGlobals: false,
                     browserField : false,
@@ -14,7 +14,7 @@ var buildOptions = { basedir: path.resolve(__dirname, '..'),
                         process: undefined,
                         global: undefined,
                         'Buffer.isBuffer': undefined,
-                        Buffer: undefined 
+                        Buffer: undefined
                     }
                   };
 
