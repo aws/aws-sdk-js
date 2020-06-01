@@ -9,7 +9,7 @@ var build = require('./builder');
 if (require.main === module) {
   var opts = {
     services: process.argv[2] || process.env.SERVICES,
-    minify: process.env.MINIFY ? true : false,
+    minify: process.env.MINIFY ? true : false
   };
 
   build(opts, function(err, code) {
