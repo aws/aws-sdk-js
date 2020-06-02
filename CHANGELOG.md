@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.687.0-->
+<!--LATEST=2.688.0-->
 <!--ENTRYINSERT-->
+
+## 2.688.0
+* feature: GuardDuty: Amazon GuardDuty findings now include S3 bucket details under the resource section if an S3 Bucket was one of the affected resources
 
 ## 2.687.0
 * feature: Athena: This release adds support for connecting Athena to your own Apache Hive Metastores in addition to the AWS Glue Data Catalog. For more information, please see https://docs.aws.amazon.com/athena/latest/ug/connect-to-data-source-hive.html

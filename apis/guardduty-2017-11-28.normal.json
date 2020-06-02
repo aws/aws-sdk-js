@@ -907,7 +907,7 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Lists details about associated member accounts for the current GuardDuty master account.</p>"
+      "documentation": "<p>Lists details about all member accounts for the current GuardDuty master account.</p>"
     },
     "ListOrganizationAdminAccounts": {
       "name": "ListOrganizationAdminAccounts",
@@ -1309,6 +1309,22 @@
       "type": "structure",
       "members": {}
     },
+    "AccessControlList": {
+      "type": "structure",
+      "members": {
+        "AllowsPublicReadAccess": {
+          "shape": "Boolean",
+          "documentation": "<p>A value that indicates whether public read access for the bucket is enabled through an Access Control List (ACL).</p>",
+          "locationName": "allowsPublicReadAccess"
+        },
+        "AllowsPublicWriteAccess": {
+          "shape": "Boolean",
+          "documentation": "<p>A value that indicates whether public write access for the bucket is enabled through an Access Control List (ACL).</p>",
+          "locationName": "allowsPublicWriteAccess"
+        }
+      },
+      "documentation": "<p>Contains information on the current access control policies for the bucket.</p>"
+    },
     "AccessKeyDetails": {
       "type": "structure",
       "members": {
@@ -1375,6 +1391,17 @@
       },
       "max": 50,
       "min": 1
+    },
+    "AccountLevelPermissions": {
+      "type": "structure",
+      "members": {
+        "BlockPublicAccess": {
+          "shape": "BlockPublicAccess",
+          "documentation": "<p>Describes the S3 Block Public Access settings of the bucket's parent account.</p>",
+          "locationName": "blockPublicAccess"
+        }
+      },
+      "documentation": "<p>Contains information about the account level permissions on the S3 bucket.</p>"
     },
     "Action": {
       "type": "structure",
@@ -1495,8 +1522,71 @@
       },
       "documentation": "<p>Contains information about the API operation.</p>"
     },
+    "BlockPublicAccess": {
+      "type": "structure",
+      "members": {
+        "IgnorePublicAcls": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates if S3 Block Public Access is set to <code>IgnorePublicAcls</code>.</p>",
+          "locationName": "ignorePublicAcls"
+        },
+        "RestrictPublicBuckets": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates if S3 Block Public Access is set to <code>RestrictPublicBuckets</code>.</p>",
+          "locationName": "restrictPublicBuckets"
+        },
+        "BlockPublicAcls": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates if S3 Block Public Access is set to <code>BlockPublicAcls</code>.</p>",
+          "locationName": "blockPublicAcls"
+        },
+        "BlockPublicPolicy": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates if S3 Block Public Access is set to <code>BlockPublicPolicy</code>.</p>",
+          "locationName": "blockPublicPolicy"
+        }
+      },
+      "documentation": "<p>Contains information on how the bucker owner's S3 Block Public Access settings are being applied to the S3 bucket. See <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html\">S3 Block Public Access</a> for more information. </p>"
+    },
     "Boolean": {
       "type": "boolean"
+    },
+    "BucketLevelPermissions": {
+      "type": "structure",
+      "members": {
+        "AccessControlList": {
+          "shape": "AccessControlList",
+          "documentation": "<p>Contains information on how Access Control Policies are applied to the bucket.</p>",
+          "locationName": "accessControlList"
+        },
+        "BucketPolicy": {
+          "shape": "BucketPolicy",
+          "documentation": "<p>Contains information on the bucket policies for the S3 bucket.</p>",
+          "locationName": "bucketPolicy"
+        },
+        "BlockPublicAccess": {
+          "shape": "BlockPublicAccess",
+          "documentation": "<p>Contains information on which account level S3 Block Public Access settings are applied to the S3 bucket.</p>",
+          "locationName": "blockPublicAccess"
+        }
+      },
+      "documentation": "<p>Contains information about the bucket level permissions for the S3 bucket.</p>"
+    },
+    "BucketPolicy": {
+      "type": "structure",
+      "members": {
+        "AllowsPublicReadAccess": {
+          "shape": "Boolean",
+          "documentation": "<p>A value that indicates whether public read access for the bucket is enabled through a bucket policy.</p>",
+          "locationName": "allowsPublicReadAccess"
+        },
+        "AllowsPublicWriteAccess": {
+          "shape": "Boolean",
+          "documentation": "<p>A value that indicates whether public write access for the bucket is enabled through a bucket policy.</p>",
+          "locationName": "allowsPublicWriteAccess"
+        }
+      },
+      "documentation": "<p>Contains information on the current bucket policies for the S3 bucket.</p>"
     },
     "City": {
       "type": "structure",
@@ -1743,7 +1833,7 @@
         },
         "Location": {
           "shape": "Location",
-          "documentation": "<p>The URI of the file that contains the IPSet.</p>",
+          "documentation": "<p>The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
           "locationName": "location"
         },
         "Activate": {
@@ -1906,7 +1996,7 @@
         },
         "Location": {
           "shape": "Location",
-          "documentation": "<p>The URI of the file that contains the ThreatIntelSet.</p>",
+          "documentation": "<p>The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
           "locationName": "location"
         },
         "Activate": {
@@ -1974,6 +2064,22 @@
           "locationName": "unprocessedAccounts"
         }
       }
+    },
+    "DefaultServerSideEncryption": {
+      "type": "structure",
+      "members": {
+        "EncryptionType": {
+          "shape": "String",
+          "documentation": "<p>The type of encryption used for objects within the S3 bucket.</p>",
+          "locationName": "encryptionType"
+        },
+        "KmsMasterKeyArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the KMS encryption key. Only available if the bucket <code>EncryptionType</code> is <code>aws:kms</code>.</p>",
+          "locationName": "kmsMasterKeyArn"
+        }
+      },
+      "documentation": "<p>Contains information on the server side encryption method used in the S3 bucket. See <a href=\"https://docs.aws.amazon.com/AmazonS3/atest/dev/serv-side-encryption.html\">S3 Server-Side Encryption</a> for more information.</p>"
     },
     "DeleteDetectorRequest": {
       "type": "structure",
@@ -2915,7 +3021,7 @@
         },
         "Location": {
           "shape": "Location",
-          "documentation": "<p>The URI of the file that contains the IPSet.</p>",
+          "documentation": "<p>The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
           "locationName": "location"
         },
         "Status": {
@@ -3052,7 +3158,7 @@
         },
         "Location": {
           "shape": "Location",
-          "documentation": "<p>The URI of the file that contains the ThreatIntelSet.</p>",
+          "documentation": "<p>The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
           "locationName": "location"
         },
         "Status": {
@@ -3372,7 +3478,7 @@
         },
         "FindingCriteria": {
           "shape": "FindingCriteria",
-          "documentation": "<p>Represents the criteria used for querying findings. Valid values include:</p> <ul> <li> <p>JSON field name</p> </li> <li> <p>accountId</p> </li> <li> <p>region</p> </li> <li> <p>confidence</p> </li> <li> <p>id</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.outpostArn</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.localIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.archived</p> <p>When this attribute is set to 'true', only archived findings are listed. When it's set to 'false', only unarchived findings are listed. When this attribute is not set, all existing findings are listed.</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>severity</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format: 1486685375000</p> </li> </ul>",
+          "documentation": "<p>Represents the criteria used for querying findings. Valid values include:</p> <ul> <li> <p>JSON field name</p> </li> <li> <p>accountId</p> </li> <li> <p>region</p> </li> <li> <p>confidence</p> </li> <li> <p>id</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.archived</p> <p>When this attribute is set to 'true', only archived findings are listed. When it's set to 'false', only unarchived findings are listed. When this attribute is not set, all existing findings are listed.</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>severity</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format: 1486685375000</p> </li> </ul>",
           "locationName": "findingCriteria"
         },
         "SortCriteria": {
@@ -3512,7 +3618,7 @@
         },
         "OnlyAssociated": {
           "shape": "String",
-          "documentation": "<p>Specifies what member accounts the response includes based on their relationship status with the master account. The default value is \"true\". If set to \"false\" the response includes all existing member accounts (including members who haven't been invited yet or have been disassociated).</p>",
+          "documentation": "<p>Specifies whether to only return associated members or to return all members (including members who haven't been invited yet or have been disassociated).</p>",
           "location": "querystring",
           "locationName": "onlyAssociated"
         }
@@ -3952,6 +4058,33 @@
       },
       "documentation": "<p>Contains information about the ISP organization of the remote IP address.</p>"
     },
+    "Owner": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "String",
+          "documentation": "<p>The canonical user ID of the bucket owner. For information about locating your canonical user ID see <a href=\"https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId\">Finding Your Account Canonical User ID.</a> </p>",
+          "locationName": "id"
+        }
+      },
+      "documentation": "<p>Contains information on the owner of the bucket.</p>"
+    },
+    "PermissionConfiguration": {
+      "type": "structure",
+      "members": {
+        "BucketLevelPermissions": {
+          "shape": "BucketLevelPermissions",
+          "documentation": "<p>Contains information about the bucket level permissions for the S3 bucket.</p>",
+          "locationName": "bucketLevelPermissions"
+        },
+        "AccountLevelPermissions": {
+          "shape": "AccountLevelPermissions",
+          "documentation": "<p>Contains information about the account level permissions on the S3 bucket.</p>",
+          "locationName": "accountLevelPermissions"
+        }
+      },
+      "documentation": "<p>Contains information about how permissions are configured for the S3 bucket.</p>"
+    },
     "PortProbeAction": {
       "type": "structure",
       "members": {
@@ -4039,6 +4172,22 @@
         "shape": "ProductCode"
       }
     },
+    "PublicAccess": {
+      "type": "structure",
+      "members": {
+        "PermissionConfiguration": {
+          "shape": "PermissionConfiguration",
+          "documentation": "<p>Contains information about how permissions are configured for the S3 bucket.</p>",
+          "locationName": "permissionConfiguration"
+        },
+        "EffectivePermission": {
+          "shape": "String",
+          "documentation": "<p>Describes the effective permission on this bucket after factoring all attached policies.</p>",
+          "locationName": "effectivePermission"
+        }
+      },
+      "documentation": "<p>Describes the public access policies that apply to the S3 bucket.</p>"
+    },
     "PublishingStatus": {
       "type": "string",
       "enum": [
@@ -4105,6 +4254,11 @@
           "documentation": "<p>The IAM access key details (IAM user information) of a user that engaged in the activity that prompted GuardDuty to generate a finding.</p>",
           "locationName": "accessKeyDetails"
         },
+        "S3BucketDetails": {
+          "shape": "S3BucketDetails",
+          "documentation": "<p>Contains information on the S3 bucket.</p>",
+          "locationName": "s3BucketDetails"
+        },
         "InstanceDetails": {
           "shape": "InstanceDetails",
           "documentation": "<p>The information about the EC2 instance associated with the activity that prompted GuardDuty to generate a finding.</p>",
@@ -4117,6 +4271,58 @@
         }
       },
       "documentation": "<p>Contains information about the AWS resource associated with the activity that prompted GuardDuty to generate a finding.</p>"
+    },
+    "S3BucketDetail": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the S3 bucket.</p>",
+          "locationName": "arn"
+        },
+        "Name": {
+          "shape": "String",
+          "documentation": "<p>The name of the S3 bucket.</p>",
+          "locationName": "name"
+        },
+        "Type": {
+          "shape": "String",
+          "documentation": "<p>Describes whether the bucket is a source or destination bucket.</p>",
+          "locationName": "type"
+        },
+        "CreatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time the bucket was created at.</p>",
+          "locationName": "createdAt"
+        },
+        "Owner": {
+          "shape": "Owner",
+          "documentation": "<p>The owner of the S3 bucket.</p>",
+          "locationName": "owner"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "documentation": "<p>All tags attached to the S3 bucket</p>",
+          "locationName": "tags"
+        },
+        "DefaultServerSideEncryption": {
+          "shape": "DefaultServerSideEncryption",
+          "documentation": "<p>Describes the server side encryption method used in the S3 bucket.</p>",
+          "locationName": "defaultServerSideEncryption"
+        },
+        "PublicAccess": {
+          "shape": "PublicAccess",
+          "documentation": "<p>Describes the public access policies that apply to the S3 bucket.</p>",
+          "locationName": "publicAccess"
+        }
+      }
+    },
+    "S3BucketDetails": {
+      "type": "list",
+      "member": {
+        "shape": "S3BucketDetail"
+      },
+      "documentation": "<p>Contains information on the S3 bucket.</p>"
     },
     "SecurityGroup": {
       "type": "structure",
@@ -4419,6 +4625,9 @@
         "shape": "String"
       }
     },
+    "Timestamp": {
+      "type": "timestamp"
+    },
     "UnarchiveFindingsRequest": {
       "type": "structure",
       "required": [
@@ -4639,7 +4848,7 @@
         },
         "Location": {
           "shape": "Location",
-          "documentation": "<p>The updated URI of the file that contains the IPSet.</p>",
+          "documentation": "<p>The updated URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
           "locationName": "location"
         },
         "Activate": {
@@ -4733,7 +4942,7 @@
         },
         "Location": {
           "shape": "Location",
-          "documentation": "<p>The updated URI of the file that contains the ThreateIntelSet.</p>",
+          "documentation": "<p>The updated URI of the file that contains the ThreateIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
           "locationName": "location"
         },
         "Activate": {

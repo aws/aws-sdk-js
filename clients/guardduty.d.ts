@@ -316,11 +316,11 @@ declare class GuardDuty extends Service {
    */
   listInvitations(callback?: (err: AWSError, data: GuardDuty.Types.ListInvitationsResponse) => void): Request<GuardDuty.Types.ListInvitationsResponse, AWSError>;
   /**
-   * Lists details about associated member accounts for the current GuardDuty master account.
+   * Lists details about all member accounts for the current GuardDuty master account.
    */
   listMembers(params: GuardDuty.Types.ListMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.ListMembersResponse) => void): Request<GuardDuty.Types.ListMembersResponse, AWSError>;
   /**
-   * Lists details about associated member accounts for the current GuardDuty master account.
+   * Lists details about all member accounts for the current GuardDuty master account.
    */
   listMembers(callback?: (err: AWSError, data: GuardDuty.Types.ListMembersResponse) => void): Request<GuardDuty.Types.ListMembersResponse, AWSError>;
   /**
@@ -469,6 +469,16 @@ declare namespace GuardDuty {
   }
   export interface AcceptInvitationResponse {
   }
+  export interface AccessControlList {
+    /**
+     * A value that indicates whether public read access for the bucket is enabled through an Access Control List (ACL).
+     */
+    AllowsPublicReadAccess?: Boolean;
+    /**
+     * A value that indicates whether public write access for the bucket is enabled through an Access Control List (ACL).
+     */
+    AllowsPublicWriteAccess?: Boolean;
+  }
   export interface AccessKeyDetails {
     /**
      * The access key ID of the user.
@@ -500,6 +510,12 @@ declare namespace GuardDuty {
   export type AccountDetails = AccountDetail[];
   export type AccountId = string;
   export type AccountIds = AccountId[];
+  export interface AccountLevelPermissions {
+    /**
+     * Describes the S3 Block Public Access settings of the bucket's parent account.
+     */
+    BlockPublicAccess?: BlockPublicAccess;
+  }
   export interface Action {
     /**
      * The GuardDuty finding activity type.
@@ -568,7 +584,49 @@ declare namespace GuardDuty {
      */
     ServiceName?: String;
   }
+  export interface BlockPublicAccess {
+    /**
+     * Indicates if S3 Block Public Access is set to IgnorePublicAcls.
+     */
+    IgnorePublicAcls?: Boolean;
+    /**
+     * Indicates if S3 Block Public Access is set to RestrictPublicBuckets.
+     */
+    RestrictPublicBuckets?: Boolean;
+    /**
+     * Indicates if S3 Block Public Access is set to BlockPublicAcls.
+     */
+    BlockPublicAcls?: Boolean;
+    /**
+     * Indicates if S3 Block Public Access is set to BlockPublicPolicy.
+     */
+    BlockPublicPolicy?: Boolean;
+  }
   export type Boolean = boolean;
+  export interface BucketLevelPermissions {
+    /**
+     * Contains information on how Access Control Policies are applied to the bucket.
+     */
+    AccessControlList?: AccessControlList;
+    /**
+     * Contains information on the bucket policies for the S3 bucket.
+     */
+    BucketPolicy?: BucketPolicy;
+    /**
+     * Contains information on which account level S3 Block Public Access settings are applied to the S3 bucket.
+     */
+    BlockPublicAccess?: BlockPublicAccess;
+  }
+  export interface BucketPolicy {
+    /**
+     * A value that indicates whether public read access for the bucket is enabled through a bucket policy.
+     */
+    AllowsPublicReadAccess?: Boolean;
+    /**
+     * A value that indicates whether public write access for the bucket is enabled through a bucket policy.
+     */
+    AllowsPublicWriteAccess?: Boolean;
+  }
   export interface City {
     /**
      * The city name of the remote IP address.
@@ -715,7 +773,7 @@ declare namespace GuardDuty {
      */
     Format: IpSetFormat;
     /**
-     * The URI of the file that contains the IPSet.
+     * The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
      */
     Location: Location;
     /**
@@ -803,7 +861,7 @@ declare namespace GuardDuty {
      */
     Format: ThreatIntelSetFormat;
     /**
-     * The URI of the file that contains the ThreatIntelSet.
+     * The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
      */
     Location: Location;
     /**
@@ -837,6 +895,16 @@ declare namespace GuardDuty {
      * A list of objects that contain the unprocessed account and a result string that explains why it was unprocessed.
      */
     UnprocessedAccounts: UnprocessedAccounts;
+  }
+  export interface DefaultServerSideEncryption {
+    /**
+     * The type of encryption used for objects within the S3 bucket.
+     */
+    EncryptionType?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS encryption key. Only available if the bucket EncryptionType is aws:kms.
+     */
+    KmsMasterKeyArn?: String;
   }
   export interface DeleteDetectorRequest {
     /**
@@ -1281,7 +1349,7 @@ declare namespace GuardDuty {
      */
     Format: IpSetFormat;
     /**
-     * The URI of the file that contains the IPSet.
+     * The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
      */
     Location: Location;
     /**
@@ -1353,7 +1421,7 @@ declare namespace GuardDuty {
      */
     Format: ThreatIntelSetFormat;
     /**
-     * The URI of the file that contains the ThreatIntelSet.
+     * The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
      */
     Location: Location;
     /**
@@ -1528,7 +1596,7 @@ declare namespace GuardDuty {
      */
     DetectorId: DetectorId;
     /**
-     * Represents the criteria used for querying findings. Valid values include:   JSON field name   accountId   region   confidence   id   resource.accessKeyDetails.accessKeyId   resource.accessKeyDetails.principalId   resource.accessKeyDetails.userName   resource.accessKeyDetails.userType   resource.instanceDetails.iamInstanceProfile.id   resource.instanceDetails.imageId   resource.instanceDetails.instanceId   resource.instanceDetails.outpostArn   resource.instanceDetails.networkInterfaces.ipv6Addresses   resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress   resource.instanceDetails.networkInterfaces.publicDnsName   resource.instanceDetails.networkInterfaces.publicIp   resource.instanceDetails.networkInterfaces.securityGroups.groupId   resource.instanceDetails.networkInterfaces.securityGroups.groupName   resource.instanceDetails.networkInterfaces.subnetId   resource.instanceDetails.networkInterfaces.vpcId   resource.instanceDetails.tags.key   resource.instanceDetails.tags.value   resource.resourceType   service.action.actionType   service.action.awsApiCallAction.api   service.action.awsApiCallAction.callerType   service.action.awsApiCallAction.remoteIpDetails.city.cityName   service.action.awsApiCallAction.remoteIpDetails.country.countryName   service.action.awsApiCallAction.remoteIpDetails.ipAddressV4   service.action.awsApiCallAction.remoteIpDetails.organization.asn   service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg   service.action.awsApiCallAction.serviceName   service.action.dnsRequestAction.domain   service.action.networkConnectionAction.blocked   service.action.networkConnectionAction.connectionDirection   service.action.networkConnectionAction.localPortDetails.port   service.action.networkConnectionAction.protocol   service.action.networkConnectionAction.localIpDetails.ipAddressV4   service.action.networkConnectionAction.remoteIpDetails.city.cityName   service.action.networkConnectionAction.remoteIpDetails.country.countryName   service.action.networkConnectionAction.remoteIpDetails.ipAddressV4   service.action.networkConnectionAction.remoteIpDetails.organization.asn   service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg   service.action.networkConnectionAction.remotePortDetails.port   service.additionalInfo.threatListName   service.archived When this attribute is set to 'true', only archived findings are listed. When it's set to 'false', only unarchived findings are listed. When this attribute is not set, all existing findings are listed.   service.resourceRole   severity   type   updatedAt Type: Timestamp in Unix Epoch millisecond format: 1486685375000  
+     * Represents the criteria used for querying findings. Valid values include:   JSON field name   accountId   region   confidence   id   resource.accessKeyDetails.accessKeyId   resource.accessKeyDetails.principalId   resource.accessKeyDetails.userName   resource.accessKeyDetails.userType   resource.instanceDetails.iamInstanceProfile.id   resource.instanceDetails.imageId   resource.instanceDetails.instanceId   resource.instanceDetails.networkInterfaces.ipv6Addresses   resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress   resource.instanceDetails.networkInterfaces.publicDnsName   resource.instanceDetails.networkInterfaces.publicIp   resource.instanceDetails.networkInterfaces.securityGroups.groupId   resource.instanceDetails.networkInterfaces.securityGroups.groupName   resource.instanceDetails.networkInterfaces.subnetId   resource.instanceDetails.networkInterfaces.vpcId   resource.instanceDetails.tags.key   resource.instanceDetails.tags.value   resource.resourceType   service.action.actionType   service.action.awsApiCallAction.api   service.action.awsApiCallAction.callerType   service.action.awsApiCallAction.remoteIpDetails.city.cityName   service.action.awsApiCallAction.remoteIpDetails.country.countryName   service.action.awsApiCallAction.remoteIpDetails.ipAddressV4   service.action.awsApiCallAction.remoteIpDetails.organization.asn   service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg   service.action.awsApiCallAction.serviceName   service.action.dnsRequestAction.domain   service.action.networkConnectionAction.blocked   service.action.networkConnectionAction.connectionDirection   service.action.networkConnectionAction.localPortDetails.port   service.action.networkConnectionAction.protocol   service.action.networkConnectionAction.remoteIpDetails.city.cityName   service.action.networkConnectionAction.remoteIpDetails.country.countryName   service.action.networkConnectionAction.remoteIpDetails.ipAddressV4   service.action.networkConnectionAction.remoteIpDetails.organization.asn   service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg   service.action.networkConnectionAction.remotePortDetails.port   service.additionalInfo.threatListName   service.archived When this attribute is set to 'true', only archived findings are listed. When it's set to 'false', only unarchived findings are listed. When this attribute is not set, all existing findings are listed.   service.resourceRole   severity   type   updatedAt Type: Timestamp in Unix Epoch millisecond format: 1486685375000  
      */
     FindingCriteria?: FindingCriteria;
     /**
@@ -1612,7 +1680,7 @@ declare namespace GuardDuty {
      */
     NextToken?: String;
     /**
-     * Specifies what member accounts the response includes based on their relationship status with the master account. The default value is "true". If set to "false" the response includes all existing member accounts (including members who haven't been invited yet or have been disassociated).
+     * Specifies whether to only return associated members or to return all members (including members who haven't been invited yet or have been disassociated).
      */
     OnlyAssociated?: String;
   }
@@ -1869,6 +1937,22 @@ declare namespace GuardDuty {
      */
     Org?: String;
   }
+  export interface Owner {
+    /**
+     * The canonical user ID of the bucket owner. For information about locating your canonical user ID see Finding Your Account Canonical User ID. 
+     */
+    Id?: String;
+  }
+  export interface PermissionConfiguration {
+    /**
+     * Contains information about the bucket level permissions for the S3 bucket.
+     */
+    BucketLevelPermissions?: BucketLevelPermissions;
+    /**
+     * Contains information about the account level permissions on the S3 bucket.
+     */
+    AccountLevelPermissions?: AccountLevelPermissions;
+  }
   export interface PortProbeAction {
     /**
      * Indicates whether EC2 blocked the port probe to the instance, such as with an ACL.
@@ -1916,6 +2000,16 @@ declare namespace GuardDuty {
     ProductType?: String;
   }
   export type ProductCodes = ProductCode[];
+  export interface PublicAccess {
+    /**
+     * Contains information about how permissions are configured for the S3 bucket.
+     */
+    PermissionConfiguration?: PermissionConfiguration;
+    /**
+     * Describes the effective permission on this bucket after factoring all attached policies.
+     */
+    EffectivePermission?: String;
+  }
   export type PublishingStatus = "PENDING_VERIFICATION"|"PUBLISHING"|"UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY"|"STOPPED"|string;
   export interface RemoteIpDetails {
     /**
@@ -1955,6 +2049,10 @@ declare namespace GuardDuty {
      */
     AccessKeyDetails?: AccessKeyDetails;
     /**
+     * Contains information on the S3 bucket.
+     */
+    S3BucketDetails?: S3BucketDetails;
+    /**
      * The information about the EC2 instance associated with the activity that prompted GuardDuty to generate a finding.
      */
     InstanceDetails?: InstanceDetails;
@@ -1963,6 +2061,41 @@ declare namespace GuardDuty {
      */
     ResourceType?: String;
   }
+  export interface S3BucketDetail {
+    /**
+     * The Amazon Resource Name (ARN) of the S3 bucket.
+     */
+    Arn?: String;
+    /**
+     * The name of the S3 bucket.
+     */
+    Name?: String;
+    /**
+     * Describes whether the bucket is a source or destination bucket.
+     */
+    Type?: String;
+    /**
+     * The date and time the bucket was created at.
+     */
+    CreatedAt?: Timestamp;
+    /**
+     * The owner of the S3 bucket.
+     */
+    Owner?: Owner;
+    /**
+     * All tags attached to the S3 bucket
+     */
+    Tags?: Tags;
+    /**
+     * Describes the server side encryption method used in the S3 bucket.
+     */
+    DefaultServerSideEncryption?: DefaultServerSideEncryption;
+    /**
+     * Describes the public access policies that apply to the S3 bucket.
+     */
+    PublicAccess?: PublicAccess;
+  }
+  export type S3BucketDetails = S3BucketDetail[];
   export interface SecurityGroup {
     /**
      * The security group ID of the EC2 instance.
@@ -2101,6 +2234,7 @@ declare namespace GuardDuty {
   }
   export type ThreatIntelligenceDetails = ThreatIntelligenceDetail[];
   export type ThreatNames = String[];
+  export type Timestamp = Date;
   export interface UnarchiveFindingsRequest {
     /**
      * The ID of the detector associated with the findings to unarchive.
@@ -2218,7 +2352,7 @@ declare namespace GuardDuty {
      */
     Name?: Name;
     /**
-     * The updated URI of the file that contains the IPSet.
+     * The updated URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
      */
     Location?: Location;
     /**
@@ -2270,7 +2404,7 @@ declare namespace GuardDuty {
      */
     Name?: Name;
     /**
-     * The updated URI of the file that contains the ThreateIntelSet.
+     * The updated URI of the file that contains the ThreateIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
      */
     Location?: Location;
     /**
