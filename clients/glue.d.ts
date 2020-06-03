@@ -3846,7 +3846,7 @@ declare namespace Glue {
      */
     CatalogId?: CatalogIdString;
     /**
-     * The name of the catalog database where the functions are located.
+     * The name of the catalog database where the functions are located. If none is provided, functions from all the databases across the catalog will be returned.
      */
     DatabaseName?: NameString;
     /**
@@ -6199,6 +6199,10 @@ declare namespace Glue {
      * The name of the function.
      */
     FunctionName?: NameString;
+    /**
+     * The name of the database where the function resides.
+     */
+    DatabaseName?: NameString;
     /**
      * The Java class that contains the function code.
      */

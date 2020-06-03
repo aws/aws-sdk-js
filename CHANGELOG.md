@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.688.0-->
+<!--LATEST=2.689.0-->
 <!--ENTRYINSERT-->
+
+## 2.689.0
+* feature: DirectConnect: This release supports the virtual interface failover test, which allows you to verify that traffic routes over redundant virtual interfaces when you bring your primary virtual interface out of service.
+* feature: ES: Amazon Elasticsearch Service now offers support for cross-cluster search, enabling you to perform searches, aggregations, and visualizations across multiple Amazon Elasticsearch Service domains with a single query or from a single Kibana interface. New feature includes the ability to setup connection, required to perform cross-cluster search, between domains using an approval workflow.
+* feature: ElastiCache: This release improves the Multi-AZ feature in ElastiCache by adding a separate flag and proper validations.
+* feature: Glue: Adding databaseName in the response for GetUserDefinedFunctions() API.
+* feature: IAM: GenerateServiceLastAccessedDetails will now return ActionLastAccessed details for certain S3 control plane actions
+* feature: MediaConvert: AWS Elemental MediaConvert SDK has added support for the encoding of VP8 or VP9 video in WebM container with Vorbis or Opus audio.
 
 ## 2.688.0
 * feature: GuardDuty: Amazon GuardDuty findings now include S3 bucket details under the resource section if an S3 Bucket was one of the affected resources

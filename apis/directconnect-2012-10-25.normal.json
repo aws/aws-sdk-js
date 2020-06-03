@@ -521,7 +521,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Creates a private virtual interface. A virtual interface is the VLAN that transports AWS Direct Connect traffic. A private virtual interface can be connected to either a Direct Connect gateway or a Virtual Private Gateway (VGW). Connecting the private virtual interface to a Direct Connect gateway enables the possibility for connecting to multiple VPCs, including VPCs in different AWS Regions. Connecting the private virtual interface to a VGW only provides access to a single VPC within the same Region.</p>"
+      "documentation": "<p>Creates a private virtual interface. A virtual interface is the VLAN that transports AWS Direct Connect traffic. A private virtual interface can be connected to either a Direct Connect gateway or a Virtual Private Gateway (VGW). Connecting the private virtual interface to a Direct Connect gateway enables the possibility for connecting to multiple VPCs, including VPCs in different AWS Regions. Connecting the private virtual interface to a VGW only provides access to a single VPC within the same Region.</p> <p>Setting the MTU of a virtual interface to 9001 (jumbo frames) can cause an update to the underlying physical connection if it wasn't updated to support jumbo frames. Updating the connection disrupts network connectivity for all virtual interfaces associated with the connection for up to 30 seconds. To check whether your connection supports jumbo frames, call <a>DescribeConnections</a>. To check whether your virtual interface supports jumbo frames, call <a>DescribeVirtualInterfaces</a>.</p>"
     },
     "CreatePublicVirtualInterface": {
       "name": "CreatePublicVirtualInterface",
@@ -577,7 +577,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Creates a transit virtual interface. A transit virtual interface should be used to access one or more transit gateways associated with Direct Connect gateways. A transit virtual interface enables the connection of multiple VPCs attached to a transit gateway to a Direct Connect gateway.</p> <important> <p>If you associate your transit gateway with one or more Direct Connect gateways, the Autonomous System Number (ASN) used by the transit gateway and the Direct Connect gateway must be different. For example, if you use the default ASN 64512 for both your the transit gateway and Direct Connect gateway, the association request fails.</p> </important>"
+      "documentation": "<p>Creates a transit virtual interface. A transit virtual interface should be used to access one or more transit gateways associated with Direct Connect gateways. A transit virtual interface enables the connection of multiple VPCs attached to a transit gateway to a Direct Connect gateway.</p> <important> <p>If you associate your transit gateway with one or more Direct Connect gateways, the Autonomous System Number (ASN) used by the transit gateway and the Direct Connect gateway must be different. For example, if you use the default ASN 64512 for both your the transit gateway and Direct Connect gateway, the association request fails.</p> </important> <p>Setting the MTU of a virtual interface to 8500 (jumbo frames) can cause an update to the underlying physical connection if it wasn't updated to support jumbo frames. Updating the connection disrupts network connectivity for all virtual interfaces associated with the connection for up to 30 seconds. To check whether your connection supports jumbo frames, call <a>DescribeConnections</a>. To check whether your virtual interface supports jumbo frames, call <a>DescribeVirtualInterfaces</a>.</p>"
     },
     "DeleteBGPPeer": {
       "name": "DeleteBGPPeer",
@@ -1126,6 +1126,72 @@
       ],
       "documentation": "<p>Disassociates a connection from a link aggregation group (LAG). The connection is interrupted and re-established as a standalone connection (the connection is not deleted; to delete the connection, use the <a>DeleteConnection</a> request). If the LAG has associated virtual interfaces or hosted connections, they remain associated with the LAG. A disassociated connection owned by an AWS Direct Connect Partner is automatically converted to an interconnect.</p> <p>If disassociating the connection would cause the LAG to fall below its setting for minimum number of operational connections, the request fails, except when it's the last member of the LAG. If all connections are disassociated, the LAG continues to exist as an empty LAG with no physical connections. </p>"
     },
+    "ListVirtualInterfaceTestHistory": {
+      "name": "ListVirtualInterfaceTestHistory",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListVirtualInterfaceTestHistoryRequest"
+      },
+      "output": {
+        "shape": "ListVirtualInterfaceTestHistoryResponse"
+      },
+      "errors": [
+        {
+          "shape": "DirectConnectServerException"
+        },
+        {
+          "shape": "DirectConnectClientException"
+        }
+      ],
+      "documentation": "<p>Lists the virtual interface failover test history.</p>"
+    },
+    "StartBgpFailoverTest": {
+      "name": "StartBgpFailoverTest",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartBgpFailoverTestRequest"
+      },
+      "output": {
+        "shape": "StartBgpFailoverTestResponse"
+      },
+      "errors": [
+        {
+          "shape": "DirectConnectServerException"
+        },
+        {
+          "shape": "DirectConnectClientException"
+        }
+      ],
+      "documentation": "<p>Starts the virtual interface failover test that verifies your configuration meets your resiliency requirements by placing the BGP peering session in the DOWN state. You can then send traffic to verify that there are no outages.</p> <p>You can run the test on public, private, transit, and hosted virtual interfaces.</p> <p>You can use <a href=\"https://docs.aws.amazon.com/directconnect/latest/APIReference/API_ListVirtualInterfaceTestHistory.html\">ListVirtualInterfaceTestHistory</a> to view the virtual interface test history.</p> <p>If you need to stop the test before the test interval completes, use <a href=\"https://docs.aws.amazon.com/directconnect/latest/APIReference/API_StopBgpFailoverTest.html\">StopBgpFailoverTest</a>.</p>"
+    },
+    "StopBgpFailoverTest": {
+      "name": "StopBgpFailoverTest",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StopBgpFailoverTestRequest"
+      },
+      "output": {
+        "shape": "StopBgpFailoverTestResponse"
+      },
+      "errors": [
+        {
+          "shape": "DirectConnectServerException"
+        },
+        {
+          "shape": "DirectConnectClientException"
+        }
+      ],
+      "documentation": "<p>Stops the virtual interface failover test.</p>"
+    },
     "TagResource": {
       "name": "TagResource",
       "http": {
@@ -1240,7 +1306,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Updates the specified attributes of the specified virtual private interface.</p> <p>Setting the MTU of a virtual interface to 9001 (jumbo frames) can cause an update to the underlying physical connection if it wasn't updated to support jumbo frames. Updating the connection disrupts network connectivity for all virtual interfaces associated with the connection for up to 30 seconds. To check whether your connection supports jumbo frames, call <a>DescribeConnections</a>. To check whether your virtual interface supports jumbo frames, call <a>DescribeVirtualInterfaces</a>.</p>"
+      "documentation": "<p>Updates the specified attributes of the specified virtual private interface.</p> <p>Setting the MTU of a virtual interface to 9001 (jumbo frames) can cause an update to the underlying physical connection if it wasn't updated to support jumbo frames. Updating the connection disrupts network connectivity for all virtual interfaces associated with the connection for up to 30 seconds. To check whether your connection supports jumbo frames, call <a>DescribeConnections</a>. To check whether your virtual q interface supports jumbo frames, call <a>DescribeVirtualInterfaces</a>.</p>"
     }
   },
   "shapes": {
@@ -1569,6 +1635,12 @@
     },
     "BGPPeerId": {
       "type": "string"
+    },
+    "BGPPeerIdList": {
+      "type": "list",
+      "member": {
+        "shape": "BGPPeerId"
+      }
     },
     "BGPPeerList": {
       "type": "list",
@@ -2815,6 +2887,12 @@
         }
       }
     },
+    "EndTime": {
+      "type": "timestamp"
+    },
+    "FailureTestHistoryStatus": {
+      "type": "string"
+    },
     "GatewayIdToAssociate": {
       "type": "string"
     },
@@ -3041,6 +3119,48 @@
         }
       }
     },
+    "ListVirtualInterfaceTestHistoryRequest": {
+      "type": "structure",
+      "members": {
+        "testId": {
+          "shape": "TestId",
+          "documentation": "<p>The ID of the virtual interface failover test.</p>"
+        },
+        "virtualInterfaceId": {
+          "shape": "VirtualInterfaceId",
+          "documentation": "<p>The ID of the virtual interface that was tested.</p>"
+        },
+        "bgpPeers": {
+          "shape": "BGPPeerIdList",
+          "documentation": "<p>The BGP peers that were placed in the DOWN state during the virtual interface failover test.</p>"
+        },
+        "status": {
+          "shape": "FailureTestHistoryStatus",
+          "documentation": "<p>The status of the virtual interface failover test.</p>"
+        },
+        "maxResults": {
+          "shape": "MaxResultSetSize",
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p> <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are returned.</p>"
+        },
+        "nextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>The token for the next page of results.</p>"
+        }
+      }
+    },
+    "ListVirtualInterfaceTestHistoryResponse": {
+      "type": "structure",
+      "members": {
+        "virtualInterfaceTestHistory": {
+          "shape": "VirtualInterfaceTestHistoryList",
+          "documentation": "<p>The ID of the tested virtual interface.</p>"
+        },
+        "nextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
+        }
+      }
+    },
     "Loa": {
       "type": "structure",
       "members": {
@@ -3160,7 +3280,7 @@
       "members": {
         "virtualInterfaceName": {
           "shape": "VirtualInterfaceName",
-          "documentation": "<p>The name of the virtual interface assigned by the customer network.</p>"
+          "documentation": "<p>The name of the virtual interface assigned by the customer network. The name has a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a hyphen (-).</p>"
         },
         "vlan": {
           "shape": "VLAN",
@@ -3215,7 +3335,7 @@
       "members": {
         "virtualInterfaceName": {
           "shape": "VirtualInterfaceName",
-          "documentation": "<p>The name of the virtual interface assigned by the customer network.</p>"
+          "documentation": "<p>The name of the virtual interface assigned by the customer network. The name has a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a hyphen (-).</p>"
         },
         "vlan": {
           "shape": "VLAN",
@@ -3262,7 +3382,7 @@
       "members": {
         "virtualInterfaceName": {
           "shape": "VirtualInterfaceName",
-          "documentation": "<p>The name of the virtual interface assigned by the customer network.</p>"
+          "documentation": "<p>The name of the virtual interface assigned by the customer network. The name has a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a hyphen (-).</p>"
         },
         "vlan": {
           "shape": "VLAN",
@@ -3309,7 +3429,7 @@
       "members": {
         "virtualInterfaceName": {
           "shape": "VirtualInterfaceName",
-          "documentation": "<p>The name of the virtual interface assigned by the customer network.</p>"
+          "documentation": "<p>The name of the virtual interface assigned by the customer network. The name has a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a hyphen (-).</p>"
         },
         "vlan": {
           "shape": "VLAN",
@@ -3351,7 +3471,7 @@
       "members": {
         "virtualInterfaceName": {
           "shape": "VirtualInterfaceName",
-          "documentation": "<p>The name of the virtual interface assigned by the customer network.</p>"
+          "documentation": "<p>The name of the virtual interface assigned by the customer network. The name has a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a hyphen (-).</p>"
         },
         "vlan": {
           "shape": "VLAN",
@@ -3397,7 +3517,7 @@
       "members": {
         "virtualInterfaceName": {
           "shape": "VirtualInterfaceName",
-          "documentation": "<p>The name of the virtual interface assigned by the customer network.</p>"
+          "documentation": "<p>The name of the virtual interface assigned by the customer network. The name has a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a hyphen (-).</p>"
         },
         "vlan": {
           "shape": "VLAN",
@@ -3506,8 +3626,61 @@
     "RouterConfig": {
       "type": "string"
     },
+    "StartBgpFailoverTestRequest": {
+      "type": "structure",
+      "required": [
+        "virtualInterfaceId"
+      ],
+      "members": {
+        "virtualInterfaceId": {
+          "shape": "VirtualInterfaceId",
+          "documentation": "<p>The ID of the virtual interface you want to test.</p>"
+        },
+        "bgpPeers": {
+          "shape": "BGPPeerIdList",
+          "documentation": "<p>The BGP peers to place in the DOWN state.</p>"
+        },
+        "testDurationInMinutes": {
+          "shape": "TestDuration",
+          "documentation": "<p>The time in minutes that the virtual interface failover test will last.</p> <p>Maximum value: 180 minutes (3 hours).</p> <p>Default: 180 minutes (3 hours).</p>"
+        }
+      }
+    },
+    "StartBgpFailoverTestResponse": {
+      "type": "structure",
+      "members": {
+        "virtualInterfaceTest": {
+          "shape": "VirtualInterfaceTestHistory",
+          "documentation": "<p>Information about the virtual interface failover test.</p>"
+        }
+      }
+    },
+    "StartTime": {
+      "type": "timestamp"
+    },
     "StateChangeError": {
       "type": "string"
+    },
+    "StopBgpFailoverTestRequest": {
+      "type": "structure",
+      "required": [
+        "virtualInterfaceId"
+      ],
+      "members": {
+        "virtualInterfaceId": {
+          "shape": "VirtualInterfaceId",
+          "documentation": "<p>The ID of the virtual interface you no longer want to test.</p>"
+        }
+      }
+    },
+    "StopBgpFailoverTestResponse": {
+      "type": "structure",
+      "members": {
+        "virtualInterfaceTest": {
+          "shape": "VirtualInterfaceTestHistory",
+          "documentation": "<p>Information about the virtual interface failover test.</p>"
+        }
+      }
     },
     "Tag": {
       "type": "structure",
@@ -3571,6 +3744,13 @@
       "max": 256,
       "min": 0,
       "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    },
+    "TestDuration": {
+      "type": "integer",
+      "box": true
+    },
+    "TestId": {
+      "type": "string"
     },
     "UntagResourceRequest": {
       "type": "structure",
@@ -3721,7 +3901,7 @@
         },
         "virtualInterfaceName": {
           "shape": "VirtualInterfaceName",
-          "documentation": "<p>The name of the virtual interface assigned by the customer network.</p>"
+          "documentation": "<p>The name of the virtual interface assigned by the customer network. The name has a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a hyphen (-).</p>"
         },
         "vlan": {
           "shape": "VLAN",
@@ -3826,6 +4006,50 @@
         "rejected",
         "unknown"
       ]
+    },
+    "VirtualInterfaceTestHistory": {
+      "type": "structure",
+      "members": {
+        "testId": {
+          "shape": "TestId",
+          "documentation": "<p>The ID of the virtual interface failover test.</p>"
+        },
+        "virtualInterfaceId": {
+          "shape": "VirtualInterfaceId",
+          "documentation": "<p>The ID of the tested virtual interface.</p>"
+        },
+        "bgpPeers": {
+          "shape": "BGPPeerIdList",
+          "documentation": "<p>The BGP peers that were put in the DOWN state as part of the virtual interface failover test.</p>"
+        },
+        "status": {
+          "shape": "FailureTestHistoryStatus",
+          "documentation": "<p>The status of the virtual interface failover test.</p>"
+        },
+        "ownerAccount": {
+          "shape": "OwnerAccount",
+          "documentation": "<p>The owner ID of the tested virtual interface.</p>"
+        },
+        "testDurationInMinutes": {
+          "shape": "TestDuration",
+          "documentation": "<p>The time that the virtual interface failover test ran in minutes.</p>"
+        },
+        "startTime": {
+          "shape": "StartTime",
+          "documentation": "<p>The time that the virtual interface moves to the DOWN state.</p>"
+        },
+        "endTime": {
+          "shape": "EndTime",
+          "documentation": "<p>The time that the virtual interface moves out of the DOWN state.</p>"
+        }
+      },
+      "documentation": "<p>Information about the virtual interface failover test.</p>"
+    },
+    "VirtualInterfaceTestHistoryList": {
+      "type": "list",
+      "member": {
+        "shape": "VirtualInterfaceTestHistory"
+      }
     },
     "VirtualInterfaceType": {
       "type": "string"

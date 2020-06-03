@@ -172,11 +172,11 @@ declare class DirectConnect extends Service {
    */
   createLag(callback?: (err: AWSError, data: DirectConnect.Types.Lag) => void): Request<DirectConnect.Types.Lag, AWSError>;
   /**
-   * Creates a private virtual interface. A virtual interface is the VLAN that transports AWS Direct Connect traffic. A private virtual interface can be connected to either a Direct Connect gateway or a Virtual Private Gateway (VGW). Connecting the private virtual interface to a Direct Connect gateway enables the possibility for connecting to multiple VPCs, including VPCs in different AWS Regions. Connecting the private virtual interface to a VGW only provides access to a single VPC within the same Region.
+   * Creates a private virtual interface. A virtual interface is the VLAN that transports AWS Direct Connect traffic. A private virtual interface can be connected to either a Direct Connect gateway or a Virtual Private Gateway (VGW). Connecting the private virtual interface to a Direct Connect gateway enables the possibility for connecting to multiple VPCs, including VPCs in different AWS Regions. Connecting the private virtual interface to a VGW only provides access to a single VPC within the same Region. Setting the MTU of a virtual interface to 9001 (jumbo frames) can cause an update to the underlying physical connection if it wasn't updated to support jumbo frames. Updating the connection disrupts network connectivity for all virtual interfaces associated with the connection for up to 30 seconds. To check whether your connection supports jumbo frames, call DescribeConnections. To check whether your virtual interface supports jumbo frames, call DescribeVirtualInterfaces.
    */
   createPrivateVirtualInterface(params: DirectConnect.Types.CreatePrivateVirtualInterfaceRequest, callback?: (err: AWSError, data: DirectConnect.Types.VirtualInterface) => void): Request<DirectConnect.Types.VirtualInterface, AWSError>;
   /**
-   * Creates a private virtual interface. A virtual interface is the VLAN that transports AWS Direct Connect traffic. A private virtual interface can be connected to either a Direct Connect gateway or a Virtual Private Gateway (VGW). Connecting the private virtual interface to a Direct Connect gateway enables the possibility for connecting to multiple VPCs, including VPCs in different AWS Regions. Connecting the private virtual interface to a VGW only provides access to a single VPC within the same Region.
+   * Creates a private virtual interface. A virtual interface is the VLAN that transports AWS Direct Connect traffic. A private virtual interface can be connected to either a Direct Connect gateway or a Virtual Private Gateway (VGW). Connecting the private virtual interface to a Direct Connect gateway enables the possibility for connecting to multiple VPCs, including VPCs in different AWS Regions. Connecting the private virtual interface to a VGW only provides access to a single VPC within the same Region. Setting the MTU of a virtual interface to 9001 (jumbo frames) can cause an update to the underlying physical connection if it wasn't updated to support jumbo frames. Updating the connection disrupts network connectivity for all virtual interfaces associated with the connection for up to 30 seconds. To check whether your connection supports jumbo frames, call DescribeConnections. To check whether your virtual interface supports jumbo frames, call DescribeVirtualInterfaces.
    */
   createPrivateVirtualInterface(callback?: (err: AWSError, data: DirectConnect.Types.VirtualInterface) => void): Request<DirectConnect.Types.VirtualInterface, AWSError>;
   /**
@@ -188,11 +188,11 @@ declare class DirectConnect extends Service {
    */
   createPublicVirtualInterface(callback?: (err: AWSError, data: DirectConnect.Types.VirtualInterface) => void): Request<DirectConnect.Types.VirtualInterface, AWSError>;
   /**
-   * Creates a transit virtual interface. A transit virtual interface should be used to access one or more transit gateways associated with Direct Connect gateways. A transit virtual interface enables the connection of multiple VPCs attached to a transit gateway to a Direct Connect gateway.  If you associate your transit gateway with one or more Direct Connect gateways, the Autonomous System Number (ASN) used by the transit gateway and the Direct Connect gateway must be different. For example, if you use the default ASN 64512 for both your the transit gateway and Direct Connect gateway, the association request fails. 
+   * Creates a transit virtual interface. A transit virtual interface should be used to access one or more transit gateways associated with Direct Connect gateways. A transit virtual interface enables the connection of multiple VPCs attached to a transit gateway to a Direct Connect gateway.  If you associate your transit gateway with one or more Direct Connect gateways, the Autonomous System Number (ASN) used by the transit gateway and the Direct Connect gateway must be different. For example, if you use the default ASN 64512 for both your the transit gateway and Direct Connect gateway, the association request fails.  Setting the MTU of a virtual interface to 8500 (jumbo frames) can cause an update to the underlying physical connection if it wasn't updated to support jumbo frames. Updating the connection disrupts network connectivity for all virtual interfaces associated with the connection for up to 30 seconds. To check whether your connection supports jumbo frames, call DescribeConnections. To check whether your virtual interface supports jumbo frames, call DescribeVirtualInterfaces.
    */
   createTransitVirtualInterface(params: DirectConnect.Types.CreateTransitVirtualInterfaceRequest, callback?: (err: AWSError, data: DirectConnect.Types.CreateTransitVirtualInterfaceResult) => void): Request<DirectConnect.Types.CreateTransitVirtualInterfaceResult, AWSError>;
   /**
-   * Creates a transit virtual interface. A transit virtual interface should be used to access one or more transit gateways associated with Direct Connect gateways. A transit virtual interface enables the connection of multiple VPCs attached to a transit gateway to a Direct Connect gateway.  If you associate your transit gateway with one or more Direct Connect gateways, the Autonomous System Number (ASN) used by the transit gateway and the Direct Connect gateway must be different. For example, if you use the default ASN 64512 for both your the transit gateway and Direct Connect gateway, the association request fails. 
+   * Creates a transit virtual interface. A transit virtual interface should be used to access one or more transit gateways associated with Direct Connect gateways. A transit virtual interface enables the connection of multiple VPCs attached to a transit gateway to a Direct Connect gateway.  If you associate your transit gateway with one or more Direct Connect gateways, the Autonomous System Number (ASN) used by the transit gateway and the Direct Connect gateway must be different. For example, if you use the default ASN 64512 for both your the transit gateway and Direct Connect gateway, the association request fails.  Setting the MTU of a virtual interface to 8500 (jumbo frames) can cause an update to the underlying physical connection if it wasn't updated to support jumbo frames. Updating the connection disrupts network connectivity for all virtual interfaces associated with the connection for up to 30 seconds. To check whether your connection supports jumbo frames, call DescribeConnections. To check whether your virtual interface supports jumbo frames, call DescribeVirtualInterfaces.
    */
   createTransitVirtualInterface(callback?: (err: AWSError, data: DirectConnect.Types.CreateTransitVirtualInterfaceResult) => void): Request<DirectConnect.Types.CreateTransitVirtualInterfaceResult, AWSError>;
   /**
@@ -388,6 +388,30 @@ declare class DirectConnect extends Service {
    */
   disassociateConnectionFromLag(callback?: (err: AWSError, data: DirectConnect.Types.Connection) => void): Request<DirectConnect.Types.Connection, AWSError>;
   /**
+   * Lists the virtual interface failover test history.
+   */
+  listVirtualInterfaceTestHistory(params: DirectConnect.Types.ListVirtualInterfaceTestHistoryRequest, callback?: (err: AWSError, data: DirectConnect.Types.ListVirtualInterfaceTestHistoryResponse) => void): Request<DirectConnect.Types.ListVirtualInterfaceTestHistoryResponse, AWSError>;
+  /**
+   * Lists the virtual interface failover test history.
+   */
+  listVirtualInterfaceTestHistory(callback?: (err: AWSError, data: DirectConnect.Types.ListVirtualInterfaceTestHistoryResponse) => void): Request<DirectConnect.Types.ListVirtualInterfaceTestHistoryResponse, AWSError>;
+  /**
+   * Starts the virtual interface failover test that verifies your configuration meets your resiliency requirements by placing the BGP peering session in the DOWN state. You can then send traffic to verify that there are no outages. You can run the test on public, private, transit, and hosted virtual interfaces. You can use ListVirtualInterfaceTestHistory to view the virtual interface test history. If you need to stop the test before the test interval completes, use StopBgpFailoverTest.
+   */
+  startBgpFailoverTest(params: DirectConnect.Types.StartBgpFailoverTestRequest, callback?: (err: AWSError, data: DirectConnect.Types.StartBgpFailoverTestResponse) => void): Request<DirectConnect.Types.StartBgpFailoverTestResponse, AWSError>;
+  /**
+   * Starts the virtual interface failover test that verifies your configuration meets your resiliency requirements by placing the BGP peering session in the DOWN state. You can then send traffic to verify that there are no outages. You can run the test on public, private, transit, and hosted virtual interfaces. You can use ListVirtualInterfaceTestHistory to view the virtual interface test history. If you need to stop the test before the test interval completes, use StopBgpFailoverTest.
+   */
+  startBgpFailoverTest(callback?: (err: AWSError, data: DirectConnect.Types.StartBgpFailoverTestResponse) => void): Request<DirectConnect.Types.StartBgpFailoverTestResponse, AWSError>;
+  /**
+   * Stops the virtual interface failover test.
+   */
+  stopBgpFailoverTest(params: DirectConnect.Types.StopBgpFailoverTestRequest, callback?: (err: AWSError, data: DirectConnect.Types.StopBgpFailoverTestResponse) => void): Request<DirectConnect.Types.StopBgpFailoverTestResponse, AWSError>;
+  /**
+   * Stops the virtual interface failover test.
+   */
+  stopBgpFailoverTest(callback?: (err: AWSError, data: DirectConnect.Types.StopBgpFailoverTestResponse) => void): Request<DirectConnect.Types.StopBgpFailoverTestResponse, AWSError>;
+  /**
    * Adds the specified tags to the specified AWS Direct Connect resource. Each resource can have a maximum of 50 tags. Each tag consists of a key and an optional value. If a tag with the same key is already associated with the resource, this action updates its value.
    */
   tagResource(params: DirectConnect.Types.TagResourceRequest, callback?: (err: AWSError, data: DirectConnect.Types.TagResourceResponse) => void): Request<DirectConnect.Types.TagResourceResponse, AWSError>;
@@ -420,11 +444,11 @@ declare class DirectConnect extends Service {
    */
   updateLag(callback?: (err: AWSError, data: DirectConnect.Types.Lag) => void): Request<DirectConnect.Types.Lag, AWSError>;
   /**
-   * Updates the specified attributes of the specified virtual private interface. Setting the MTU of a virtual interface to 9001 (jumbo frames) can cause an update to the underlying physical connection if it wasn't updated to support jumbo frames. Updating the connection disrupts network connectivity for all virtual interfaces associated with the connection for up to 30 seconds. To check whether your connection supports jumbo frames, call DescribeConnections. To check whether your virtual interface supports jumbo frames, call DescribeVirtualInterfaces.
+   * Updates the specified attributes of the specified virtual private interface. Setting the MTU of a virtual interface to 9001 (jumbo frames) can cause an update to the underlying physical connection if it wasn't updated to support jumbo frames. Updating the connection disrupts network connectivity for all virtual interfaces associated with the connection for up to 30 seconds. To check whether your connection supports jumbo frames, call DescribeConnections. To check whether your virtual q interface supports jumbo frames, call DescribeVirtualInterfaces.
    */
   updateVirtualInterfaceAttributes(params: DirectConnect.Types.UpdateVirtualInterfaceAttributesRequest, callback?: (err: AWSError, data: DirectConnect.Types.VirtualInterface) => void): Request<DirectConnect.Types.VirtualInterface, AWSError>;
   /**
-   * Updates the specified attributes of the specified virtual private interface. Setting the MTU of a virtual interface to 9001 (jumbo frames) can cause an update to the underlying physical connection if it wasn't updated to support jumbo frames. Updating the connection disrupts network connectivity for all virtual interfaces associated with the connection for up to 30 seconds. To check whether your connection supports jumbo frames, call DescribeConnections. To check whether your virtual interface supports jumbo frames, call DescribeVirtualInterfaces.
+   * Updates the specified attributes of the specified virtual private interface. Setting the MTU of a virtual interface to 9001 (jumbo frames) can cause an update to the underlying physical connection if it wasn't updated to support jumbo frames. Updating the connection disrupts network connectivity for all virtual interfaces associated with the connection for up to 30 seconds. To check whether your connection supports jumbo frames, call DescribeConnections. To check whether your virtual q interface supports jumbo frames, call DescribeVirtualInterfaces.
    */
   updateVirtualInterfaceAttributes(callback?: (err: AWSError, data: DirectConnect.Types.VirtualInterface) => void): Request<DirectConnect.Types.VirtualInterface, AWSError>;
 }
@@ -638,6 +662,7 @@ declare namespace DirectConnect {
     awsDeviceV2?: AwsDeviceV2;
   }
   export type BGPPeerId = string;
+  export type BGPPeerIdList = BGPPeerId[];
   export type BGPPeerList = BGPPeer[];
   export type BGPPeerState = "verifying"|"pending"|"available"|"deleting"|"deleted"|string;
   export type BGPStatus = "up"|"down"|"unknown"|string;
@@ -1470,6 +1495,8 @@ declare namespace DirectConnect {
      */
     lagId: LagId;
   }
+  export type EndTime = Date;
+  export type FailureTestHistoryStatus = string;
   export type GatewayIdToAssociate = string;
   export type GatewayIdentifier = string;
   export type GatewayType = "virtualPrivateGateway"|"transitGateway"|string;
@@ -1623,6 +1650,42 @@ declare namespace DirectConnect {
      */
     lags?: LagList;
   }
+  export interface ListVirtualInterfaceTestHistoryRequest {
+    /**
+     * The ID of the virtual interface failover test.
+     */
+    testId?: TestId;
+    /**
+     * The ID of the virtual interface that was tested.
+     */
+    virtualInterfaceId?: VirtualInterfaceId;
+    /**
+     * The BGP peers that were placed in the DOWN state during the virtual interface failover test.
+     */
+    bgpPeers?: BGPPeerIdList;
+    /**
+     * The status of the virtual interface failover test.
+     */
+    status?: FailureTestHistoryStatus;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. If MaxResults is given a value larger than 100, only 100 results are returned.
+     */
+    maxResults?: MaxResultSetSize;
+    /**
+     * The token for the next page of results.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListVirtualInterfaceTestHistoryResponse {
+    /**
+     * The ID of the tested virtual interface.
+     */
+    virtualInterfaceTestHistory?: VirtualInterfaceTestHistoryList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    nextToken?: PaginationToken;
+  }
   export interface Loa {
     /**
      * The binary contents of the LOA-CFA document.
@@ -1694,7 +1757,7 @@ declare namespace DirectConnect {
   }
   export interface NewPrivateVirtualInterface {
     /**
-     * The name of the virtual interface assigned by the customer network.
+     * The name of the virtual interface assigned by the customer network. The name has a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a hyphen (-).
      */
     virtualInterfaceName: VirtualInterfaceName;
     /**
@@ -1740,7 +1803,7 @@ declare namespace DirectConnect {
   }
   export interface NewPrivateVirtualInterfaceAllocation {
     /**
-     * The name of the virtual interface assigned by the customer network.
+     * The name of the virtual interface assigned by the customer network. The name has a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a hyphen (-).
      */
     virtualInterfaceName: VirtualInterfaceName;
     /**
@@ -1778,7 +1841,7 @@ declare namespace DirectConnect {
   }
   export interface NewPublicVirtualInterface {
     /**
-     * The name of the virtual interface assigned by the customer network.
+     * The name of the virtual interface assigned by the customer network. The name has a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a hyphen (-).
      */
     virtualInterfaceName: VirtualInterfaceName;
     /**
@@ -1816,7 +1879,7 @@ declare namespace DirectConnect {
   }
   export interface NewPublicVirtualInterfaceAllocation {
     /**
-     * The name of the virtual interface assigned by the customer network.
+     * The name of the virtual interface assigned by the customer network. The name has a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a hyphen (-).
      */
     virtualInterfaceName: VirtualInterfaceName;
     /**
@@ -1854,7 +1917,7 @@ declare namespace DirectConnect {
   }
   export interface NewTransitVirtualInterface {
     /**
-     * The name of the virtual interface assigned by the customer network.
+     * The name of the virtual interface assigned by the customer network. The name has a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a hyphen (-).
      */
     virtualInterfaceName?: VirtualInterfaceName;
     /**
@@ -1896,7 +1959,7 @@ declare namespace DirectConnect {
   }
   export interface NewTransitVirtualInterfaceAllocation {
     /**
-     * The name of the virtual interface assigned by the customer network.
+     * The name of the virtual interface assigned by the customer network. The name has a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a hyphen (-).
      */
     virtualInterfaceName?: VirtualInterfaceName;
     /**
@@ -1960,7 +2023,40 @@ declare namespace DirectConnect {
   }
   export type RouteFilterPrefixList = RouteFilterPrefix[];
   export type RouterConfig = string;
+  export interface StartBgpFailoverTestRequest {
+    /**
+     * The ID of the virtual interface you want to test.
+     */
+    virtualInterfaceId: VirtualInterfaceId;
+    /**
+     * The BGP peers to place in the DOWN state.
+     */
+    bgpPeers?: BGPPeerIdList;
+    /**
+     * The time in minutes that the virtual interface failover test will last. Maximum value: 180 minutes (3 hours). Default: 180 minutes (3 hours).
+     */
+    testDurationInMinutes?: TestDuration;
+  }
+  export interface StartBgpFailoverTestResponse {
+    /**
+     * Information about the virtual interface failover test.
+     */
+    virtualInterfaceTest?: VirtualInterfaceTestHistory;
+  }
+  export type StartTime = Date;
   export type StateChangeError = string;
+  export interface StopBgpFailoverTestRequest {
+    /**
+     * The ID of the virtual interface you no longer want to test.
+     */
+    virtualInterfaceId: VirtualInterfaceId;
+  }
+  export interface StopBgpFailoverTestResponse {
+    /**
+     * Information about the virtual interface failover test.
+     */
+    virtualInterfaceTest?: VirtualInterfaceTestHistory;
+  }
   export interface Tag {
     /**
      * The key.
@@ -1987,6 +2083,8 @@ declare namespace DirectConnect {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export type TestDuration = number;
+  export type TestId = string;
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource.
@@ -2083,7 +2181,7 @@ declare namespace DirectConnect {
      */
     virtualInterfaceType?: VirtualInterfaceType;
     /**
-     * The name of the virtual interface assigned by the customer network.
+     * The name of the virtual interface assigned by the customer network. The name has a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a hyphen (-).
      */
     virtualInterfaceName?: VirtualInterfaceName;
     /**
@@ -2164,6 +2262,41 @@ declare namespace DirectConnect {
   export type VirtualInterfaceName = string;
   export type VirtualInterfaceRegion = string;
   export type VirtualInterfaceState = "confirming"|"verifying"|"pending"|"available"|"down"|"deleting"|"deleted"|"rejected"|"unknown"|string;
+  export interface VirtualInterfaceTestHistory {
+    /**
+     * The ID of the virtual interface failover test.
+     */
+    testId?: TestId;
+    /**
+     * The ID of the tested virtual interface.
+     */
+    virtualInterfaceId?: VirtualInterfaceId;
+    /**
+     * The BGP peers that were put in the DOWN state as part of the virtual interface failover test.
+     */
+    bgpPeers?: BGPPeerIdList;
+    /**
+     * The status of the virtual interface failover test.
+     */
+    status?: FailureTestHistoryStatus;
+    /**
+     * The owner ID of the tested virtual interface.
+     */
+    ownerAccount?: OwnerAccount;
+    /**
+     * The time that the virtual interface failover test ran in minutes.
+     */
+    testDurationInMinutes?: TestDuration;
+    /**
+     * The time that the virtual interface moves to the DOWN state.
+     */
+    startTime?: StartTime;
+    /**
+     * The time that the virtual interface moves out of the DOWN state.
+     */
+    endTime?: EndTime;
+  }
+  export type VirtualInterfaceTestHistoryList = VirtualInterfaceTestHistory[];
   export type VirtualInterfaceType = string;
   export interface VirtualInterfaces {
     /**

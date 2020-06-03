@@ -12,6 +12,14 @@ declare class ES extends Service {
   constructor(options?: ES.Types.ClientConfiguration)
   config: Config & ES.Types.ClientConfiguration;
   /**
+   * Allows the destination domain owner to accept an inbound cross-cluster search connection request.
+   */
+  acceptInboundCrossClusterSearchConnection(params: ES.Types.AcceptInboundCrossClusterSearchConnectionRequest, callback?: (err: AWSError, data: ES.Types.AcceptInboundCrossClusterSearchConnectionResponse) => void): Request<ES.Types.AcceptInboundCrossClusterSearchConnectionResponse, AWSError>;
+  /**
+   * Allows the destination domain owner to accept an inbound cross-cluster search connection request.
+   */
+  acceptInboundCrossClusterSearchConnection(callback?: (err: AWSError, data: ES.Types.AcceptInboundCrossClusterSearchConnectionResponse) => void): Request<ES.Types.AcceptInboundCrossClusterSearchConnectionResponse, AWSError>;
+  /**
    * Attaches tags to an existing Elasticsearch domain. Tags are a set of case-sensitive key value pairs. An Elasticsearch domain may have up to 10 tags. See  Tagging Amazon Elasticsearch Service Domains for more information.
    */
   addTags(params: ES.Types.AddTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -44,6 +52,14 @@ declare class ES extends Service {
    */
   createElasticsearchDomain(callback?: (err: AWSError, data: ES.Types.CreateElasticsearchDomainResponse) => void): Request<ES.Types.CreateElasticsearchDomainResponse, AWSError>;
   /**
+   * Creates a new cross-cluster search connection from a source domain to a destination domain.
+   */
+  createOutboundCrossClusterSearchConnection(params: ES.Types.CreateOutboundCrossClusterSearchConnectionRequest, callback?: (err: AWSError, data: ES.Types.CreateOutboundCrossClusterSearchConnectionResponse) => void): Request<ES.Types.CreateOutboundCrossClusterSearchConnectionResponse, AWSError>;
+  /**
+   * Creates a new cross-cluster search connection from a source domain to a destination domain.
+   */
+  createOutboundCrossClusterSearchConnection(callback?: (err: AWSError, data: ES.Types.CreateOutboundCrossClusterSearchConnectionResponse) => void): Request<ES.Types.CreateOutboundCrossClusterSearchConnectionResponse, AWSError>;
+  /**
    * Create a package for use with Amazon ES domains.
    */
   createPackage(params: ES.Types.CreatePackageRequest, callback?: (err: AWSError, data: ES.Types.CreatePackageResponse) => void): Request<ES.Types.CreatePackageResponse, AWSError>;
@@ -63,6 +79,22 @@ declare class ES extends Service {
    * Deletes the service-linked role that Elasticsearch Service uses to manage and maintain VPC domains. Role deletion will fail if any existing VPC domains use the role. You must delete any such Elasticsearch domains before deleting the role. See Deleting Elasticsearch Service Role in VPC Endpoints for Amazon Elasticsearch Service Domains.
    */
   deleteElasticsearchServiceRole(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Allows the destination domain owner to delete an existing inbound cross-cluster search connection.
+   */
+  deleteInboundCrossClusterSearchConnection(params: ES.Types.DeleteInboundCrossClusterSearchConnectionRequest, callback?: (err: AWSError, data: ES.Types.DeleteInboundCrossClusterSearchConnectionResponse) => void): Request<ES.Types.DeleteInboundCrossClusterSearchConnectionResponse, AWSError>;
+  /**
+   * Allows the destination domain owner to delete an existing inbound cross-cluster search connection.
+   */
+  deleteInboundCrossClusterSearchConnection(callback?: (err: AWSError, data: ES.Types.DeleteInboundCrossClusterSearchConnectionResponse) => void): Request<ES.Types.DeleteInboundCrossClusterSearchConnectionResponse, AWSError>;
+  /**
+   * Allows the source domain owner to delete an existing outbound cross-cluster search connection.
+   */
+  deleteOutboundCrossClusterSearchConnection(params: ES.Types.DeleteOutboundCrossClusterSearchConnectionRequest, callback?: (err: AWSError, data: ES.Types.DeleteOutboundCrossClusterSearchConnectionResponse) => void): Request<ES.Types.DeleteOutboundCrossClusterSearchConnectionResponse, AWSError>;
+  /**
+   * Allows the source domain owner to delete an existing outbound cross-cluster search connection.
+   */
+  deleteOutboundCrossClusterSearchConnection(callback?: (err: AWSError, data: ES.Types.DeleteOutboundCrossClusterSearchConnectionResponse) => void): Request<ES.Types.DeleteOutboundCrossClusterSearchConnectionResponse, AWSError>;
   /**
    * Delete the package.
    */
@@ -103,6 +135,22 @@ declare class ES extends Service {
    *  Describe Elasticsearch Limits for a given InstanceType and ElasticsearchVersion. When modifying existing Domain, specify the  DomainName  to know what Limits are supported for modifying. 
    */
   describeElasticsearchInstanceTypeLimits(callback?: (err: AWSError, data: ES.Types.DescribeElasticsearchInstanceTypeLimitsResponse) => void): Request<ES.Types.DescribeElasticsearchInstanceTypeLimitsResponse, AWSError>;
+  /**
+   * Lists all the inbound cross-cluster search connections for a destination domain.
+   */
+  describeInboundCrossClusterSearchConnections(params: ES.Types.DescribeInboundCrossClusterSearchConnectionsRequest, callback?: (err: AWSError, data: ES.Types.DescribeInboundCrossClusterSearchConnectionsResponse) => void): Request<ES.Types.DescribeInboundCrossClusterSearchConnectionsResponse, AWSError>;
+  /**
+   * Lists all the inbound cross-cluster search connections for a destination domain.
+   */
+  describeInboundCrossClusterSearchConnections(callback?: (err: AWSError, data: ES.Types.DescribeInboundCrossClusterSearchConnectionsResponse) => void): Request<ES.Types.DescribeInboundCrossClusterSearchConnectionsResponse, AWSError>;
+  /**
+   * Lists all the outbound cross-cluster search connections for a source domain.
+   */
+  describeOutboundCrossClusterSearchConnections(params: ES.Types.DescribeOutboundCrossClusterSearchConnectionsRequest, callback?: (err: AWSError, data: ES.Types.DescribeOutboundCrossClusterSearchConnectionsResponse) => void): Request<ES.Types.DescribeOutboundCrossClusterSearchConnectionsResponse, AWSError>;
+  /**
+   * Lists all the outbound cross-cluster search connections for a source domain.
+   */
+  describeOutboundCrossClusterSearchConnections(callback?: (err: AWSError, data: ES.Types.DescribeOutboundCrossClusterSearchConnectionsResponse) => void): Request<ES.Types.DescribeOutboundCrossClusterSearchConnectionsResponse, AWSError>;
   /**
    * Describes all packages available to Amazon ES. Includes options for filtering, limiting the number of results, and pagination.
    */
@@ -212,6 +260,14 @@ declare class ES extends Service {
    */
   purchaseReservedElasticsearchInstanceOffering(callback?: (err: AWSError, data: ES.Types.PurchaseReservedElasticsearchInstanceOfferingResponse) => void): Request<ES.Types.PurchaseReservedElasticsearchInstanceOfferingResponse, AWSError>;
   /**
+   * Allows the destination domain owner to reject an inbound cross-cluster search connection request.
+   */
+  rejectInboundCrossClusterSearchConnection(params: ES.Types.RejectInboundCrossClusterSearchConnectionRequest, callback?: (err: AWSError, data: ES.Types.RejectInboundCrossClusterSearchConnectionResponse) => void): Request<ES.Types.RejectInboundCrossClusterSearchConnectionResponse, AWSError>;
+  /**
+   * Allows the destination domain owner to reject an inbound cross-cluster search connection request.
+   */
+  rejectInboundCrossClusterSearchConnection(callback?: (err: AWSError, data: ES.Types.RejectInboundCrossClusterSearchConnectionResponse) => void): Request<ES.Types.RejectInboundCrossClusterSearchConnectionResponse, AWSError>;
+  /**
    * Removes the specified set of tags from the specified Elasticsearch domain.
    */
   removeTags(params: ES.Types.RemoveTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -246,6 +302,18 @@ declare class ES extends Service {
 }
 declare namespace ES {
   export type ARN = string;
+  export interface AcceptInboundCrossClusterSearchConnectionRequest {
+    /**
+     * The id of the inbound connection that you want to accept.
+     */
+    CrossClusterSearchConnectionId: CrossClusterSearchConnectionId;
+  }
+  export interface AcceptInboundCrossClusterSearchConnectionResponse {
+    /**
+     * Specifies the InboundCrossClusterSearchConnection of accepted inbound connection. 
+     */
+    CrossClusterSearchConnection?: InboundCrossClusterSearchConnection;
+  }
   export interface AccessPoliciesStatus {
     /**
      * The access policy configured for the Elasticsearch domain. Access policies may be resource-based, IP-based, or IAM-based. See  Configuring Access Policiesfor more information.
@@ -388,6 +456,7 @@ declare namespace ES {
     SourceVersion?: ElasticsearchVersionString;
     TargetVersions?: ElasticsearchVersionList;
   }
+  export type ConnectionAlias = string;
   export interface CreateElasticsearchDomainRequest {
     /**
      * The name of the Elasticsearch domain that you are creating. Domain names are unique across the domains owned by an account within an AWS region. Domain names must start with a lowercase letter and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).
@@ -452,6 +521,42 @@ declare namespace ES {
      */
     DomainStatus?: ElasticsearchDomainStatus;
   }
+  export interface CreateOutboundCrossClusterSearchConnectionRequest {
+    /**
+     * Specifies the DomainInformation for the source Elasticsearch domain.
+     */
+    SourceDomainInfo: DomainInformation;
+    /**
+     * Specifies the DomainInformation for the destination Elasticsearch domain.
+     */
+    DestinationDomainInfo: DomainInformation;
+    /**
+     * Specifies the connection alias that will be used by the customer for this connection.
+     */
+    ConnectionAlias: ConnectionAlias;
+  }
+  export interface CreateOutboundCrossClusterSearchConnectionResponse {
+    /**
+     * Specifies the DomainInformation for the source Elasticsearch domain.
+     */
+    SourceDomainInfo?: DomainInformation;
+    /**
+     * Specifies the DomainInformation for the destination Elasticsearch domain.
+     */
+    DestinationDomainInfo?: DomainInformation;
+    /**
+     * Specifies the connection alias provided during the create connection request.
+     */
+    ConnectionAlias?: ConnectionAlias;
+    /**
+     * Specifies the OutboundCrossClusterSearchConnectionStatus for the newly created connection.
+     */
+    ConnectionStatus?: OutboundCrossClusterSearchConnectionStatus;
+    /**
+     * Unique id for the created outbound connection, which is used for subsequent operations on connection.
+     */
+    CrossClusterSearchConnectionId?: CrossClusterSearchConnectionId;
+  }
   export interface CreatePackageRequest {
     /**
      * Unique identifier for the package.
@@ -477,6 +582,8 @@ declare namespace ES {
     PackageDetails?: PackageDetails;
   }
   export type CreatedAt = Date;
+  export type CrossClusterSearchConnectionId = string;
+  export type CrossClusterSearchConnectionStatusMessage = string;
   export interface DeleteElasticsearchDomainRequest {
     /**
      * The name of the Elasticsearch domain that you want to permanently delete.
@@ -488,6 +595,30 @@ declare namespace ES {
      * The status of the Elasticsearch domain being deleted.
      */
     DomainStatus?: ElasticsearchDomainStatus;
+  }
+  export interface DeleteInboundCrossClusterSearchConnectionRequest {
+    /**
+     * The id of the inbound connection that you want to permanently delete.
+     */
+    CrossClusterSearchConnectionId: CrossClusterSearchConnectionId;
+  }
+  export interface DeleteInboundCrossClusterSearchConnectionResponse {
+    /**
+     * Specifies the InboundCrossClusterSearchConnection of deleted inbound connection. 
+     */
+    CrossClusterSearchConnection?: InboundCrossClusterSearchConnection;
+  }
+  export interface DeleteOutboundCrossClusterSearchConnectionRequest {
+    /**
+     * The id of the outbound connection that you want to permanently delete.
+     */
+    CrossClusterSearchConnectionId: CrossClusterSearchConnectionId;
+  }
+  export interface DeleteOutboundCrossClusterSearchConnectionResponse {
+    /**
+     * Specifies the OutboundCrossClusterSearchConnection of deleted outbound connection. 
+     */
+    CrossClusterSearchConnection?: OutboundCrossClusterSearchConnection;
   }
   export interface DeletePackageRequest {
     /**
@@ -555,6 +686,54 @@ declare namespace ES {
   }
   export interface DescribeElasticsearchInstanceTypeLimitsResponse {
     LimitsByRole?: LimitsByRole;
+  }
+  export interface DescribeInboundCrossClusterSearchConnectionsRequest {
+    /**
+     *  A list of filters used to match properties for inbound cross-cluster search connection. Available Filter names for this operation are:  cross-cluster-search-connection-id source-domain-info.domain-name source-domain-info.owner-id source-domain-info.region destination-domain-info.domain-name  
+     */
+    Filters?: FilterList;
+    /**
+     * Set this value to limit the number of results returned. If not specified, defaults to 100.
+     */
+    MaxResults?: MaxResults;
+    /**
+     *  NextToken is sent in case the earlier API call results contain the NextToken. It is used for pagination.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeInboundCrossClusterSearchConnectionsResponse {
+    /**
+     * Consists of list of InboundCrossClusterSearchConnection matching the specified filter criteria.
+     */
+    CrossClusterSearchConnections?: InboundCrossClusterSearchConnections;
+    /**
+     * If more results are available and NextToken is present, make the next request to the same API with the received NextToken to paginate the remaining results. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeOutboundCrossClusterSearchConnectionsRequest {
+    /**
+     *  A list of filters used to match properties for outbound cross-cluster search connection. Available Filter names for this operation are:  cross-cluster-search-connection-id destination-domain-info.domain-name destination-domain-info.owner-id destination-domain-info.region source-domain-info.domain-name  
+     */
+    Filters?: FilterList;
+    /**
+     * Set this value to limit the number of results returned. If not specified, defaults to 100.
+     */
+    MaxResults?: MaxResults;
+    /**
+     *  NextToken is sent in case the earlier API call results contain the NextToken. It is used for pagination.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeOutboundCrossClusterSearchConnectionsResponse {
+    /**
+     * Consists of list of OutboundCrossClusterSearchConnection matching the specified filter criteria.
+     */
+    CrossClusterSearchConnections?: OutboundCrossClusterSearchConnections;
+    /**
+     * If more results are available and NextToken is present, make the next request to the same API with the received NextToken to paginate the remaining results. 
+     */
+    NextToken?: NextToken;
   }
   export interface DescribePackagesFilter {
     /**
@@ -683,6 +862,11 @@ declare namespace ES {
     DomainName?: DomainName;
   }
   export type DomainInfoList = DomainInfo[];
+  export interface DomainInformation {
+    OwnerId?: OwnerId;
+    DomainName: DomainName;
+    Region?: Region;
+  }
   export type DomainName = string;
   export type DomainNameList = DomainName[];
   export interface DomainPackageDetails {
@@ -990,6 +1174,17 @@ declare namespace ES {
   }
   export type ErrorMessage = string;
   export type ErrorType = string;
+  export interface Filter {
+    /**
+     *  Specifies the name of the filter. 
+     */
+    Name?: NonEmptyString;
+    /**
+     *  Contains one or more values for the filter. 
+     */
+    Values?: ValueStringList;
+  }
+  export type FilterList = Filter[];
   export type GUID = string;
   export interface GetCompatibleElasticsearchVersionsRequest {
     DomainName?: DomainName;
@@ -1033,6 +1228,36 @@ declare namespace ES {
     UpgradeName?: UpgradeName;
   }
   export type IdentityPoolId = string;
+  export interface InboundCrossClusterSearchConnection {
+    /**
+     * Specifies the DomainInformation for the source Elasticsearch domain.
+     */
+    SourceDomainInfo?: DomainInformation;
+    /**
+     * Specifies the DomainInformation for the destination Elasticsearch domain.
+     */
+    DestinationDomainInfo?: DomainInformation;
+    /**
+     * Specifies the connection id for the inbound cross-cluster search connection.
+     */
+    CrossClusterSearchConnectionId?: CrossClusterSearchConnectionId;
+    /**
+     * Specifies the InboundCrossClusterSearchConnectionStatus for the outbound connection.
+     */
+    ConnectionStatus?: InboundCrossClusterSearchConnectionStatus;
+  }
+  export interface InboundCrossClusterSearchConnectionStatus {
+    /**
+     * The state code for inbound connection. This can be one of the following:  PENDING_ACCEPTANCE: Inbound connection is not yet accepted by destination domain owner. APPROVED: Inbound connection is pending acceptance by destination domain owner. REJECTING: Inbound connection rejection is in process. REJECTED: Inbound connection is rejected. DELETING: Inbound connection deletion is in progress. DELETED: Inbound connection is deleted and cannot be used further. 
+     */
+    StatusCode?: InboundCrossClusterSearchConnectionStatusCode;
+    /**
+     * Specifies verbose information for the inbound connection status.
+     */
+    Message?: CrossClusterSearchConnectionStatusMessage;
+  }
+  export type InboundCrossClusterSearchConnectionStatusCode = "PENDING_ACCEPTANCE"|"APPROVED"|"REJECTING"|"REJECTED"|"DELETING"|"DELETED"|string;
+  export type InboundCrossClusterSearchConnections = InboundCrossClusterSearchConnection[];
   export type InstanceCount = number;
   export interface InstanceCountLimits {
     MinimumInstanceCount?: MinimumInstanceCount;
@@ -1218,6 +1443,7 @@ declare namespace ES {
      */
     Status: OptionStatus;
   }
+  export type NonEmptyString = string;
   export type OptionState = "RequiresIndexDocuments"|"Processing"|"Active"|string;
   export interface OptionStatus {
     /**
@@ -1241,6 +1467,41 @@ declare namespace ES {
      */
     PendingDeletion?: Boolean;
   }
+  export interface OutboundCrossClusterSearchConnection {
+    /**
+     * Specifies the DomainInformation for the source Elasticsearch domain.
+     */
+    SourceDomainInfo?: DomainInformation;
+    /**
+     * Specifies the DomainInformation for the destination Elasticsearch domain.
+     */
+    DestinationDomainInfo?: DomainInformation;
+    /**
+     * Specifies the connection id for the outbound cross-cluster search connection.
+     */
+    CrossClusterSearchConnectionId?: CrossClusterSearchConnectionId;
+    /**
+     * Specifies the connection alias for the outbound cross-cluster search connection.
+     */
+    ConnectionAlias?: ConnectionAlias;
+    /**
+     * Specifies the OutboundCrossClusterSearchConnectionStatus for the outbound connection.
+     */
+    ConnectionStatus?: OutboundCrossClusterSearchConnectionStatus;
+  }
+  export interface OutboundCrossClusterSearchConnectionStatus {
+    /**
+     * The state code for outbound connection. This can be one of the following:  VALIDATING: The outbound connection request is being validated. VALIDATION_FAILED: Validation failed for the connection request. PENDING_ACCEPTANCE: Outbound connection request is validated and is not yet accepted by destination domain owner. PROVISIONING: Outbound connection request is in process. ACTIVE: Outbound connection is active and ready to use. REJECTED: Outbound connection request is rejected by destination domain owner. DELETING: Outbound connection deletion is in progress. DELETED: Outbound connection is deleted and cannot be used further. 
+     */
+    StatusCode?: OutboundCrossClusterSearchConnectionStatusCode;
+    /**
+     * Specifies verbose information for the outbound connection status.
+     */
+    Message?: CrossClusterSearchConnectionStatusMessage;
+  }
+  export type OutboundCrossClusterSearchConnectionStatusCode = "PENDING_ACCEPTANCE"|"VALIDATING"|"VALIDATION_FAILED"|"PROVISIONING"|"ACTIVE"|"REJECTED"|"DELETING"|"DELETED"|string;
+  export type OutboundCrossClusterSearchConnections = OutboundCrossClusterSearchConnection[];
+  export type OwnerId = string;
   export type PackageDescription = string;
   export interface PackageDetails {
     /**
@@ -1325,6 +1586,19 @@ declare namespace ES {
   }
   export type RecurringChargeList = RecurringCharge[];
   export type ReferencePath = string;
+  export type Region = string;
+  export interface RejectInboundCrossClusterSearchConnectionRequest {
+    /**
+     * The id of the inbound connection that you want to reject.
+     */
+    CrossClusterSearchConnectionId: CrossClusterSearchConnectionId;
+  }
+  export interface RejectInboundCrossClusterSearchConnectionResponse {
+    /**
+     * Specifies the InboundCrossClusterSearchConnection of rejected inbound connection. 
+     */
+    CrossClusterSearchConnection?: InboundCrossClusterSearchConnection;
+  }
   export interface RemoveTagsRequest {
     /**
      * Specifies the ARN for the Elasticsearch domain from which you want to delete the specified tags.
@@ -1689,6 +1963,7 @@ declare namespace ES {
      */
     SecurityGroupIds?: StringList;
   }
+  export type ValueStringList = NonEmptyString[];
   export type VolumeType = "standard"|"gp2"|"io1"|string;
   export interface ZoneAwarenessConfig {
     /**

@@ -1227,6 +1227,7 @@ declare namespace ElastiCache {
      * Specifies whether a read-only replica is automatically promoted to read/write primary if the existing primary fails. If true, Multi-AZ is enabled for this replication group. If false, Multi-AZ is disabled for this replication group.  AutomaticFailoverEnabled must be enabled for Redis (cluster mode enabled) replication groups. Default: false Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover on:   Redis versions earlier than 2.8.6.   Redis (cluster mode disabled): T1 node types.   Redis (cluster mode enabled): T1 node types.  
      */
     AutomaticFailoverEnabled?: BooleanOptional;
+    MultiAZEnabled?: BooleanOptional;
     /**
      * The number of nodes in the cluster. This parameter is not used if there is more than one node group (shard). You should use ReplicasPerNodeGroup instead. If AutomaticFailoverEnabled is true, the value of this parameter must be at least 2. If AutomaticFailoverEnabled is false you can omit this parameter (it will default to 1), or you can explicitly set it to a value between 2 and 6. The maximum permitted value for NumCacheClusters is 6 (1 primary plus 5 replicas).
      */
@@ -2270,6 +2271,7 @@ declare namespace ElastiCache {
      * Determines whether a read replica is automatically promoted to read/write primary if the existing primary encounters a failure. Valid values: true | false  Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover on:   Redis versions earlier than 2.8.6.   Redis (cluster mode disabled): T1 node types.   Redis (cluster mode enabled): T1 node types.  
      */
     AutomaticFailoverEnabled?: BooleanOptional;
+    MultiAZEnabled?: BooleanOptional;
     /**
      * Deprecated. This parameter is not used.
      */
@@ -2363,6 +2365,7 @@ declare namespace ElastiCache {
   export interface ModifyReplicationGroupShardConfigurationResult {
     ReplicationGroup?: ReplicationGroup;
   }
+  export type MultiAZStatus = "enabled"|"disabled"|string;
   export interface NodeGroup {
     /**
      * The identifier for the node group (shard). A Redis (cluster mode disabled) replication group contains only 1 node group; therefore, the node group ID is 0001. A Redis (cluster mode enabled) replication group contains 1 to 90 node groups numbered 0001 to 0090. Optionally, the user can provide the id for a node group. 
@@ -2743,6 +2746,7 @@ declare namespace ElastiCache {
      * Indicates the status of Multi-AZ with automatic failover for this Redis replication group. Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover on:   Redis versions earlier than 2.8.6.   Redis (cluster mode disabled): T1 node types.   Redis (cluster mode enabled): T1 node types.  
      */
     AutomaticFailover?: AutomaticFailoverStatus;
+    MultiAZ?: MultiAZStatus;
     /**
      * The configuration endpoint for this replication group. Use the configuration endpoint to connect to this replication group.
      */
