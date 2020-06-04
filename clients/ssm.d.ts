@@ -1069,6 +1069,7 @@ declare namespace SSM {
   export type AgentErrorCode = string;
   export type AggregatorSchemaOnly = boolean;
   export type AllowedPattern = string;
+  export type ApplyOnlyAtCronInterval = boolean;
   export type ApproveAfterDays = number;
   export interface Association {
     /**
@@ -1198,6 +1199,10 @@ declare namespace SSM {
      * The mode for generating association compliance. You can specify AUTO or MANUAL. In AUTO mode, the system uses the status of the association execution to determine the compliance status. If the association execution runs successfully, then the association is COMPLIANT. If the association execution doesn't run successfully, the association is NON-COMPLIANT. In MANUAL mode, you must specify the AssociationId as a parameter for the PutComplianceItems API action. In this case, compliance data is not managed by State Manager. It is managed by your direct call to the PutComplianceItems API action. By default, all associations use AUTO mode.
      */
     SyncCompliance?: AssociationSyncCompliance;
+    /**
+     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it.
+     */
+    ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
   }
   export type AssociationDescriptionList = AssociationDescription[];
   export interface AssociationExecution {
@@ -1418,6 +1423,10 @@ declare namespace SSM {
      * The mode for generating association compliance. You can specify AUTO or MANUAL. In AUTO mode, the system uses the status of the association execution to determine the compliance status. If the association execution runs successfully, then the association is COMPLIANT. If the association execution doesn't run successfully, the association is NON-COMPLIANT. In MANUAL mode, you must specify the AssociationId as a parameter for the PutComplianceItems API action. In this case, compliance data is not managed by State Manager. It is managed by your direct call to the PutComplianceItems API action. By default, all associations use AUTO mode.
      */
     SyncCompliance?: AssociationSyncCompliance;
+    /**
+     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it.
+     */
+    ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
   }
   export type AssociationVersionList = AssociationVersionInfo[];
   export interface AttachmentContent {
@@ -2206,6 +2215,10 @@ declare namespace SSM {
      * The mode for generating association compliance. You can specify AUTO or MANUAL. In AUTO mode, the system uses the status of the association execution to determine the compliance status. If the association execution runs successfully, then the association is COMPLIANT. If the association execution doesn't run successfully, the association is NON-COMPLIANT.  In MANUAL mode, you must specify the AssociationId as a parameter for the PutComplianceItems API action. In this case, compliance data is not managed by State Manager. It is managed by your direct call to the PutComplianceItems API action. By default, all associations use AUTO mode.
      */
     SyncCompliance?: AssociationSyncCompliance;
+    /**
+     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it.
+     */
+    ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
   }
   export interface CreateAssociationBatchResult {
     /**
@@ -2270,6 +2283,10 @@ declare namespace SSM {
      * The mode for generating association compliance. You can specify AUTO or MANUAL. In AUTO mode, the system uses the status of the association execution to determine the compliance status. If the association execution runs successfully, then the association is COMPLIANT. If the association execution doesn't run successfully, the association is NON-COMPLIANT. In MANUAL mode, you must specify the AssociationId as a parameter for the PutComplianceItems API action. In this case, compliance data is not managed by State Manager. It is managed by your direct call to the PutComplianceItems API action. By default, all associations use AUTO mode.
      */
     SyncCompliance?: AssociationSyncCompliance;
+    /**
+     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it.
+     */
+    ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
   }
   export interface CreateAssociationResult {
     /**
@@ -7998,6 +8015,10 @@ declare namespace SSM {
      * The mode for generating association compliance. You can specify AUTO or MANUAL. In AUTO mode, the system uses the status of the association execution to determine the compliance status. If the association execution runs successfully, then the association is COMPLIANT. If the association execution doesn't run successfully, the association is NON-COMPLIANT. In MANUAL mode, you must specify the AssociationId as a parameter for the PutComplianceItems API action. In this case, compliance data is not managed by State Manager. It is managed by your direct call to the PutComplianceItems API action. By default, all associations use AUTO mode.
      */
     SyncCompliance?: AssociationSyncCompliance;
+    /**
+     * By default, when you update an association, the system runs it immediately after it is updated and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you update it. Also, if you specified this option when you created the association, you can reset it. To do so, specify the no-apply-only-at-cron-interval parameter when you update the association from the command line. This parameter forces the association to run immediately after updating it and according to the interval specified.
+     */
+    ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
   }
   export interface UpdateAssociationResult {
     /**

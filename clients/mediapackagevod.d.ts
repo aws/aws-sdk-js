@@ -108,29 +108,37 @@ declare class MediaPackageVod extends Service {
    */
   listPackagingGroups(callback?: (err: AWSError, data: MediaPackageVod.Types.ListPackagingGroupsResponse) => void): Request<MediaPackageVod.Types.ListPackagingGroupsResponse, AWSError>;
   /**
-   * List tags for a given MediaPackage VOD resource
+   * Returns a list of the tags assigned to the specified resource.
    */
   listTagsForResource(params: MediaPackageVod.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: MediaPackageVod.Types.ListTagsForResourceResponse) => void): Request<MediaPackageVod.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * List tags for a given MediaPackage VOD resource
+   * Returns a list of the tags assigned to the specified resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: MediaPackageVod.Types.ListTagsForResourceResponse) => void): Request<MediaPackageVod.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Set tags for a given MediaPackage VOD resource
+   * Adds tags to the specified resource. You can specify one or more tags to add.
    */
   tagResource(params: MediaPackageVod.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Set tags for a given MediaPackage VOD resource
+   * Adds tags to the specified resource. You can specify one or more tags to add.
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete tags for a given MediaPackage VOD resource
+   * Removes tags from the specified resource. You can specify one or more tags to remove.
    */
   untagResource(params: MediaPackageVod.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete tags for a given MediaPackage VOD resource
+   * Removes tags from the specified resource. You can specify one or more tags to remove.
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates a specific packaging group. You can't change the id attribute or any other system-generated attributes.
+   */
+  updatePackagingGroup(params: MediaPackageVod.Types.UpdatePackagingGroupRequest, callback?: (err: AWSError, data: MediaPackageVod.Types.UpdatePackagingGroupResponse) => void): Request<MediaPackageVod.Types.UpdatePackagingGroupResponse, AWSError>;
+  /**
+   * Updates a specific packaging group. You can't change the id attribute or any other system-generated attributes.
+   */
+  updatePackagingGroup(callback?: (err: AWSError, data: MediaPackageVod.Types.UpdatePackagingGroupResponse) => void): Request<MediaPackageVod.Types.UpdatePackagingGroupResponse, AWSError>;
 }
 declare namespace MediaPackageVod {
   export type AdMarkers = "NONE"|"SCTE35_ENHANCED"|"PASSTHROUGH"|string;
@@ -164,6 +172,16 @@ declare namespace MediaPackageVod {
      */
     SourceRoleArn?: __string;
     Tags?: Tags;
+  }
+  export interface Authorization {
+    /**
+     * The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.
+     */
+    CdnIdentifierSecret: __string;
+    /**
+     * The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
+     */
+    SecretsRoleArn: __string;
   }
   export interface CmafEncryption {
     SpekeKeyProvider: SpekeKeyProvider;
@@ -274,6 +292,7 @@ rounded to the nearest multiple of the source fragment duration.
     Tags?: Tags;
   }
   export interface CreatePackagingGroupRequest {
+    Authorization?: Authorization;
     /**
      * The ID of the PackagingGroup.
      */
@@ -285,6 +304,7 @@ rounded to the nearest multiple of the source fragment duration.
      * The ARN of the PackagingGroup.
      */
     Arn?: __string;
+    Authorization?: Authorization;
     /**
      * The fully qualified domain name for Assets in the PackagingGroup.
      */
@@ -443,6 +463,7 @@ rounded to the nearest multiple of the source segment duration.
      * The ARN of the PackagingGroup.
      */
     Arn?: __string;
+    Authorization?: Authorization;
     /**
      * The fully qualified domain name for Assets in the PackagingGroup.
      */
@@ -601,9 +622,15 @@ rounded to the nearest multiple of the source fragment duration.
     PackagingGroups?: __listOfPackagingGroup;
   }
   export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) for the resource. You can get this from the response to any request to the resource.
+     */
     ResourceArn: __string;
   }
   export interface ListTagsForResourceResponse {
+    /**
+     * A collection of tags associated with a resource
+     */
     Tags?: __mapOf__string;
   }
   export type ManifestLayout = "FULL"|"COMPACT"|string;
@@ -653,6 +680,7 @@ rounded to the nearest multiple of the source fragment duration.
      * The ARN of the PackagingGroup.
      */
     Arn?: __string;
+    Authorization?: Authorization;
     /**
      * The fully qualified domain name for Assets in the PackagingGroup.
      */
@@ -697,16 +725,48 @@ MediaPackage will assume when accessing the key provider service.
     StreamOrder?: StreamOrder;
   }
   export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) for the resource. You can get this from the response to any request to the resource.
+     */
     ResourceArn: __string;
+    /**
+     * A collection of tags associated with a resource
+     */
     Tags: __mapOf__string;
   }
   export type Tags = {[key: string]: __string};
   export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) for the resource. You can get this from the response to any request to the resource.
+     */
     ResourceArn: __string;
     /**
-     * The key(s) of tag to be deleted
+     * A comma-separated list of the tag keys to remove from the resource.
      */
     TagKeys: __listOf__string;
+  }
+  export interface UpdatePackagingGroupRequest {
+    Authorization?: Authorization;
+    /**
+     * The ID of a MediaPackage VOD PackagingGroup resource.
+     */
+    Id: __string;
+  }
+  export interface UpdatePackagingGroupResponse {
+    /**
+     * The ARN of the PackagingGroup.
+     */
+    Arn?: __string;
+    Authorization?: Authorization;
+    /**
+     * The fully qualified domain name for Assets in the PackagingGroup.
+     */
+    DomainName?: __string;
+    /**
+     * The ID of the PackagingGroup.
+     */
+    Id?: __string;
+    Tags?: Tags;
   }
   export type __PeriodTriggersElement = "ADS"|string;
   export type __boolean = boolean;

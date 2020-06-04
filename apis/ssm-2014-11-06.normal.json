@@ -3443,6 +3443,9 @@
       "max": 1024,
       "min": 0
     },
+    "ApplyOnlyAtCronInterval": {
+      "type": "boolean"
+    },
     "ApproveAfterDays": {
       "type": "integer",
       "max": 100,
@@ -3590,6 +3593,10 @@
         "SyncCompliance": {
           "shape": "AssociationSyncCompliance",
           "documentation": "<p>The mode for generating association compliance. You can specify <code>AUTO</code> or <code>MANUAL</code>. In <code>AUTO</code> mode, the system uses the status of the association execution to determine the compliance status. If the association execution runs successfully, then the association is <code>COMPLIANT</code>. If the association execution doesn't run successfully, the association is <code>NON-COMPLIANT</code>.</p> <p>In <code>MANUAL</code> mode, you must specify the <code>AssociationId</code> as a parameter for the <a>PutComplianceItems</a> API action. In this case, compliance data is not managed by State Manager. It is managed by your direct call to the <a>PutComplianceItems</a> API action.</p> <p>By default, all associations use <code>AUTO</code> mode.</p>"
+        },
+        "ApplyOnlyAtCronInterval": {
+          "shape": "ApplyOnlyAtCronInterval",
+          "documentation": "<p>By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it.</p>"
         }
       },
       "documentation": "<p>Describes the parameters for a document.</p>"
@@ -3988,6 +3995,10 @@
         "SyncCompliance": {
           "shape": "AssociationSyncCompliance",
           "documentation": "<p>The mode for generating association compliance. You can specify <code>AUTO</code> or <code>MANUAL</code>. In <code>AUTO</code> mode, the system uses the status of the association execution to determine the compliance status. If the association execution runs successfully, then the association is <code>COMPLIANT</code>. If the association execution doesn't run successfully, the association is <code>NON-COMPLIANT</code>.</p> <p>In <code>MANUAL</code> mode, you must specify the <code>AssociationId</code> as a parameter for the <a>PutComplianceItems</a> API action. In this case, compliance data is not managed by State Manager. It is managed by your direct call to the <a>PutComplianceItems</a> API action.</p> <p>By default, all associations use <code>AUTO</code> mode.</p>"
+        },
+        "ApplyOnlyAtCronInterval": {
+          "shape": "ApplyOnlyAtCronInterval",
+          "documentation": "<p>By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it.</p>"
         }
       },
       "documentation": "<p>Information about the association version.</p>"
@@ -5320,6 +5331,10 @@
         "SyncCompliance": {
           "shape": "AssociationSyncCompliance",
           "documentation": "<p>The mode for generating association compliance. You can specify <code>AUTO</code> or <code>MANUAL</code>. In <code>AUTO</code> mode, the system uses the status of the association execution to determine the compliance status. If the association execution runs successfully, then the association is <code>COMPLIANT</code>. If the association execution doesn't run successfully, the association is <code>NON-COMPLIANT</code>. </p> <p>In <code>MANUAL</code> mode, you must specify the <code>AssociationId</code> as a parameter for the <a>PutComplianceItems</a> API action. In this case, compliance data is not managed by State Manager. It is managed by your direct call to the <a>PutComplianceItems</a> API action.</p> <p>By default, all associations use <code>AUTO</code> mode.</p>"
+        },
+        "ApplyOnlyAtCronInterval": {
+          "shape": "ApplyOnlyAtCronInterval",
+          "documentation": "<p>By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it.</p>"
         }
       },
       "documentation": "<p>Describes the association of a Systems Manager SSM document and an instance.</p>"
@@ -5394,6 +5409,10 @@
         "SyncCompliance": {
           "shape": "AssociationSyncCompliance",
           "documentation": "<p>The mode for generating association compliance. You can specify <code>AUTO</code> or <code>MANUAL</code>. In <code>AUTO</code> mode, the system uses the status of the association execution to determine the compliance status. If the association execution runs successfully, then the association is <code>COMPLIANT</code>. If the association execution doesn't run successfully, the association is <code>NON-COMPLIANT</code>.</p> <p>In <code>MANUAL</code> mode, you must specify the <code>AssociationId</code> as a parameter for the <a>PutComplianceItems</a> API action. In this case, compliance data is not managed by State Manager. It is managed by your direct call to the <a>PutComplianceItems</a> API action.</p> <p>By default, all associations use <code>AUTO</code> mode.</p>"
+        },
+        "ApplyOnlyAtCronInterval": {
+          "shape": "ApplyOnlyAtCronInterval",
+          "documentation": "<p>By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it.</p>"
         }
       }
     },
@@ -14605,6 +14624,10 @@
         "SyncCompliance": {
           "shape": "AssociationSyncCompliance",
           "documentation": "<p>The mode for generating association compliance. You can specify <code>AUTO</code> or <code>MANUAL</code>. In <code>AUTO</code> mode, the system uses the status of the association execution to determine the compliance status. If the association execution runs successfully, then the association is <code>COMPLIANT</code>. If the association execution doesn't run successfully, the association is <code>NON-COMPLIANT</code>.</p> <p>In <code>MANUAL</code> mode, you must specify the <code>AssociationId</code> as a parameter for the <a>PutComplianceItems</a> API action. In this case, compliance data is not managed by State Manager. It is managed by your direct call to the <a>PutComplianceItems</a> API action.</p> <p>By default, all associations use <code>AUTO</code> mode.</p>"
+        },
+        "ApplyOnlyAtCronInterval": {
+          "shape": "ApplyOnlyAtCronInterval",
+          "documentation": "<p>By default, when you update an association, the system runs it immediately after it is updated and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you update it.</p> <p>Also, if you specified this option when you created the association, you can reset it. To do so, specify the <code>no-apply-only-at-cron-interval</code> parameter when you update the association from the command line. This parameter forces the association to run immediately after updating it and according to the interval specified.</p>"
         }
       }
     },
