@@ -43,7 +43,7 @@ describe('region_config.js', function() {
       region: 'cn-northwest-1'
     });
     expect(service.isGlobalEndpoint).to.equal(true);
-    expect(service.signatureRegion).to.equal('cn-north-1');
+    expect(service.signingRegion).to.equal('cn-north-1');
     expect(service.endpoint.host).to.equal('iam.cn-north-1.amazonaws.com.cn');
   });
 
@@ -52,7 +52,7 @@ describe('region_config.js', function() {
       region: 'cn-north-1'
     });
     expect(service.isGlobalEndpoint).to.equal(true);
-    expect(service.signatureRegion).to.equal('cn-northwest-1');
+    expect(service.signingRegion).to.equal('cn-northwest-1');
     expect(service.endpoint.host).to.equal('route53.amazonaws.com.cn');
   });
 
@@ -98,7 +98,7 @@ describe('region_config.js', function() {
       region: 'us-gov-east-1'
     });
     expect(service.isGlobalEndpoint).to.equal(true);
-    expect(service.signatureRegion).to.equal('us-gov-west-1');
+    expect(service.signingRegion).to.equal('us-gov-west-1');
     expect(service.endpoint.host).to.equal('iam.us-gov.amazonaws.com');
   });
 

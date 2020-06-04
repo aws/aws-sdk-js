@@ -25,7 +25,7 @@
     "cn-*/route53": {
       "endpoint": "{service}.amazonaws.com.cn",
       "globalEndpoint": true,
-      "signatureRegion": "cn-northwest-1"
+      "signingRegion": "cn-northwest-1"
     },
     "us-gov-*/route53": "globalGovCloud",
 
@@ -35,7 +35,7 @@
     "cn-*/iam": {
       "endpoint": "{service}.cn-north-1.amazonaws.com.cn",
       "globalEndpoint": true,
-      "signatureRegion": "cn-north-1"
+      "signingRegion": "cn-north-1"
     },
     "us-gov-*/iam": "globalGovCloud",
 
@@ -68,12 +68,12 @@
     "globalSSL": {
       "endpoint": "https://{service}.amazonaws.com",
       "globalEndpoint": true,
-      "signatureRegion": "us-east-1"
+      "signingRegion": "us-east-1"
     },
     "globalGovCloud": {
       "endpoint": "{service}.us-gov.amazonaws.com",
       "globalEndpoint": true,
-      "signatureRegion": "us-gov-west-1"
+      "signingRegion": "us-gov-west-1"
     },
     "s3signature": {
       "endpoint": "{service}.{region}.amazonaws.com",
