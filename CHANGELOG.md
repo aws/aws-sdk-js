@@ -1,6 +1,16 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.690.0-->
+<!--LATEST=2.691.0-->
 <!--ENTRYINSERT-->
+
+## 2.691.0
+* feature: APIGateway: Amazon API Gateway now allows customers of REST APIs to skip trust chain validation for backend server certificates for HTTP and VPC Link Integration. This feature enables customers to configure their REST APIs to integrate with backends that are secured with certificates vended from private certificate authorities (CA) or certificates that are self-signed.
+* feature: CloudFront: Amazon CloudFront adds support for configurable origin connection attempts and origin connection timeout.
+* feature: ElasticBeanstalk: These API changes enable an IAM user to associate an operations role with an Elastic Beanstalk environment, so that the IAM user can call Elastic Beanstalk actions without having access to underlying downstream AWS services that these actions call.
+* feature: Personalize: [Personalize] Adds ability to create and apply filters.
+* feature: PersonalizeRuntime: [Personalize] Adds ability to apply filter to real-time recommendations
+* feature: Pinpoint: This release enables additional functionality for the Amazon Pinpoint journeys feature. With this release, you can send messages through additional channels, including SMS, push notifications, and custom channels.
+* feature: SageMakerRuntime: You can now specify the production variant to send the inference request to, when invoking a SageMaker Endpoint that is running two or more variants.
+* feature: ServiceCatalog: This release adds support for DescribeProduct and DescribeProductAsAdmin by product name, DescribeProvisioningArtifact by product name or provisioning artifact name, returning launch paths as part of DescribeProduct output and adds maximum length for provisioning artifact name and provisioning artifact description.
 
 ## 2.690.0
 * feature: EC2: New C5a instances, the latest generation of EC2's compute-optimized instances featuring AMD's 2nd Generation EPYC processors. C5a instances offer up to 96 vCPUs, 192 GiB of instance memory, 20 Gbps in Network bandwidth; New G4dn.metal bare metal instance with 8 NVIDIA T4 GPUs.

@@ -6565,6 +6565,10 @@
         "integrationResponses": {
           "shape": "MapOfIntegrationResponse",
           "documentation": "<p>Specifies the integration's responses.</p> <div class=\"remarks\"> <p/> <h4>Example: Get integration responses of a method</h4> <h5>Request</h5> <p/> <pre><code>GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200 HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com X-Amz-Date: 20160607T191449Z Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/20160607/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash} </code></pre> <h5>Response</h5> <p>The successful response returns <code>200 OK</code> status and a payload as follows:</p> <pre><code>{ \"_links\": { \"curies\": { \"href\": \"https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html\", \"name\": \"integrationresponse\", \"templated\": true }, \"self\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200\", \"title\": \"200\" }, \"integrationresponse:delete\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200\" }, \"integrationresponse:update\": { \"href\": \"/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200\" } }, \"responseParameters\": { \"method.response.header.Content-Type\": \"'application/xml'\" }, \"responseTemplates\": { \"application/json\": \"$util.urlDecode(\\\"%3CkinesisStreams%3E#foreach($stream in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E\\\")\\n\" }, \"statusCode\": \"200\" }</code></pre> <p/> </div> <div class=\"seeAlso\"> <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html\">Creating an API</a> </div>"
+        },
+        "tlsConfig": {
+          "shape": "TlsConfig",
+          "documentation": "<p>Specifies the TLS configuration for an integration.</p>"
         }
       },
       "documentation": "<p>Represents an HTTP, HTTP_PROXY, AWS, AWS_PROXY, or Mock integration.</p> <div class=\"remarks\">In the API Gateway console, the built-in Lambda integration is an AWS integration.</div> <div class=\"seeAlso\"> <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html\">Creating an API</a> </div>"
@@ -7201,6 +7205,9 @@
         "timeoutInMillis": {
           "shape": "NullableInteger",
           "documentation": "<p>Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.</p>"
+        },
+        "tlsConfig": {
+          "shape": "TlsConfig"
         }
       },
       "documentation": "<p>Sets up a method's integration.</p>"
@@ -7994,6 +8001,15 @@
     },
     "Timestamp": {
       "type": "timestamp"
+    },
+    "TlsConfig": {
+      "type": "structure",
+      "members": {
+        "insecureSkipVerification": {
+          "shape": "Boolean",
+          "documentation": "<p>Specifies whether API Gateway skips trust chain validation of the server certificate during the TLS handshake. Supported only for <code>HTTP</code> and <code>HTTP_PROXY</code> integrations. By default, API Gateway validates that certificates for integration endpoints are issued by a <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-supported-certificate-authorities-for-http-endpoints.html\">supported Certificate Authority</a>. If enabled, API Gateway skips trust chain validation of the server certificate. This is not recommended, but it enables you to use certificates that are signed by private Certificate Authorities, or certificates that are self-signed.</p>"
+        }
+      }
     },
     "UnauthorizedCacheControlHeaderStrategy": {
       "type": "string",

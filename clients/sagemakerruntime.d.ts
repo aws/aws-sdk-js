@@ -31,7 +31,7 @@ declare namespace SageMakerRuntime {
      */
     EndpointName: EndpointName;
     /**
-     * Provides input data, in the format specified in the ContentType request header. Amazon SageMaker passes all of the data in the body to the model.  For information about the format of the request body, see Common Data Formats—Inference.
+     * Provides input data, in the format specified in the ContentType request header. Amazon SageMaker passes all of the data in the body to the model.  For information about the format of the request body, see Common Data Formats-Inference.
      */
     Body: BodyBlob;
     /**
@@ -47,13 +47,17 @@ declare namespace SageMakerRuntime {
      */
     CustomAttributes?: CustomAttributesHeader;
     /**
-     * Specifies the model to be requested for an inference when invoking a multi-model endpoint. 
+     * The model to request for inference when invoking a multi-model endpoint. 
      */
     TargetModel?: TargetModelHeader;
+    /**
+     * Specify the production variant to send the inference request to when invoking an endpoint that is running two or more variants. Note that this parameter overrides the default behavior for the endpoint, which is to distribute the invocation traffic based on the variant weights.
+     */
+    TargetVariant?: TargetVariantHeader;
   }
   export interface InvokeEndpointOutput {
     /**
-     * Includes the inference provided by the model. For information about the format of the response body, see Common Data Formats—Inference.
+     * Includes the inference provided by the model. For information about the format of the response body, see Common Data Formats-Inference.
      */
     Body: BodyBlob;
     /**
@@ -70,6 +74,7 @@ declare namespace SageMakerRuntime {
     CustomAttributes?: CustomAttributesHeader;
   }
   export type TargetModelHeader = string;
+  export type TargetVariantHeader = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

@@ -1484,6 +1484,10 @@ declare namespace Pinpoint {
   }
   export interface Activity {
     /**
+     * The settings for a custom message activity. This type of activity calls an AWS Lambda function or web hook that sends messages to participants.
+     */
+    CUSTOM?: CustomMessageActivity;
+    /**
      * The settings for a yes/no split activity. This type of activity sends participants down one of two paths in a journey, based on conditions that you specify.
      */
     ConditionalSplit?: ConditionalSplitActivity;
@@ -1504,9 +1508,17 @@ declare namespace Pinpoint {
      */
     MultiCondition?: MultiConditionalSplitActivity;
     /**
+     * The settings for a push notification activity. This type of activity sends a push notification to participants.
+     */
+    PUSH?: PushMessageActivity;
+    /**
      * The settings for a random split activity. This type of activity randomly sends specified percentages of participants down one of as many as five paths in a journey, based on conditions that you specify.
      */
     RandomSplit?: RandomSplitActivity;
+    /**
+     * The settings for an SMS activity. This type of activity sends a text message to participants.
+     */
+    SMS?: SMSMessageActivity;
     /**
      * The settings for a wait activity. This type of activity waits for a certain amount of time or until a specific date and time before moving participants to the next activity in a journey.
      */
@@ -2055,7 +2067,7 @@ declare namespace Pinpoint {
      */
     Body?: __string;
     /**
-     * The type of SMS message. Valid values are: TRANSACTIONAL, the message is critical or time-sensitive, such as a one-time password that supports a customer transaction; and, PROMOTIONAL, the message isn't critical or time-sensitive, such as a marketing message.
+     * The SMS message type. Valid values are TRANSACTIONAL (for messages that are critical or time-sensitive, such as a one-time passwords) and PROMOTIONAL (for messsages that aren't critical or time-sensitive, such as marketing messages).
      */
     MessageType?: MessageType;
     /**
@@ -2118,7 +2130,7 @@ declare namespace Pinpoint {
      */
     Version?: __integer;
   }
-  export type ChannelType = "GCM"|"APNS"|"APNS_SANDBOX"|"APNS_VOIP"|"APNS_VOIP_SANDBOX"|"ADM"|"SMS"|"VOICE"|"EMAIL"|"BAIDU"|"CUSTOM"|string;
+  export type ChannelType = "PUSH"|"GCM"|"APNS"|"APNS_SANDBOX"|"APNS_VOIP"|"APNS_VOIP_SANDBOX"|"ADM"|"SMS"|"VOICE"|"EMAIL"|"BAIDU"|"CUSTOM"|string;
   export interface ChannelsResponse {
     /**
      * A map that contains a multipart response for each channel. For each item in this object, the ChannelType is the key and the Channel is the value.
@@ -2326,6 +2338,32 @@ declare namespace Pinpoint {
      * The types of endpoints to send the campaign or treatment to. Each valid value maps to a type of channel that you can associate with an endpoint by using the ChannelType property of an endpoint.
      */
     EndpointTypes?: ListOf__EndpointTypesElement;
+  }
+  export interface CustomMessageActivity {
+    /**
+     * The destination to send the custom message to. This value can be one of the following: The name or Amazon Resource Name (ARN) of an AWS Lambda function to invoke to handle delivery of the custom message. The URL for a web application or service that supports HTTPS and can receive the message. The URL has to be a full URL, including the HTTPS protocol.
+     */
+    DeliveryUri?: __string;
+    /**
+     * The types of endpoints to send the custom message to. Each valid value maps to a type of channel that you can associate with an endpoint by using the ChannelType property of an endpoint.
+     */
+    EndpointTypes?: ListOf__EndpointTypesElement;
+    /**
+     * Specifies the message data included in a custom channel message that's sent to participants in a journey.
+     */
+    MessageConfig?: JourneyCustomMessage;
+    /**
+     * The unique identifier for the next activity to perform, after Amazon Pinpoint calls the AWS Lambda function or web hook.
+     */
+    NextActivity?: __string;
+    /**
+     * The name of the custom message template to use for the message. If specified, this value must match the name of an existing message template.
+     */
+    TemplateName?: __string;
+    /**
+     * The unique identifier for the version of the message template to use for the message. If specified, this value must match the identifier for an existing template version. To retrieve a list of versions and version identifiers for a template, use the Template Versions resource. If you don't specify a value for this property, Amazon Pinpoint uses the active version of the template. The active version is typically the version of a template that's been most recently reviewed and approved for use, depending on your workflow. It isn't necessarily the latest version of a template.
+     */
+    TemplateVersion?: __string;
   }
   export interface DefaultMessage {
     /**
@@ -2780,7 +2818,7 @@ declare namespace Pinpoint {
   }
   export interface EmailMessageActivity {
     /**
-     * The "From" address to use for the message.
+     * Specifies the sender address for an email message that's sent to participants in the journey.
      */
     MessageConfig?: JourneyEmailMessage;
     /**
@@ -2788,7 +2826,7 @@ declare namespace Pinpoint {
      */
     NextActivity?: __string;
     /**
-     * The name of the email template to use for the message.
+     * The name of the email message template to use for the message. If specified, this value must match the name of an existing message template.
      */
     TemplateName?: __string;
     /**
@@ -4359,6 +4397,12 @@ declare namespace Pinpoint {
     EventsItemResponse?: MapOfEventItemResponse;
   }
   export type JobStatus = "CREATED"|"PREPARING_FOR_INITIALIZATION"|"INITIALIZING"|"PROCESSING"|"PENDING_JOB"|"COMPLETING"|"COMPLETED"|"FAILING"|"FAILED"|string;
+  export interface JourneyCustomMessage {
+    /**
+     * The message content that's passed to an AWS Lambda function or to a web hook.
+     */
+    Data?: __string;
+  }
   export interface JourneyDateRangeKpiResponse {
     /**
      * The unique identifier for the application that the metric applies to.
@@ -4453,6 +4497,12 @@ declare namespace Pinpoint {
      */
     MessagesPerSecond?: __integer;
   }
+  export interface JourneyPushMessage {
+    /**
+     * The number of seconds that the push notification service should keep the message, if the service is unable to deliver the notification the first time. This value is converted to an expiration value when it's sent to a push-notification service. If this value is 0, the service treats the notification as if it expires immediately and the service doesn't store or try to deliver the notification again. This value doesn't apply to messages that are sent through the Amazon Device Messaging (ADM) service.
+     */
+    TimeToLive?: __string;
+  }
   export interface JourneyResponse {
     /**
      * A map that contains a set of Activity objects, one object for each activity in the journey. For each Activity object, the key is the unique identifier (string) for an activity and the value is the settings for the activity.
@@ -4514,6 +4564,16 @@ declare namespace Pinpoint {
      * This object is not used or supported.
      */
     tags?: MapOf__string;
+  }
+  export interface JourneySMSMessage {
+    /**
+     * The SMS message type. Valid values are TRANSACTIONAL (for messages that are critical or time-sensitive, such as a one-time passwords) and PROMOTIONAL (for messsages that aren't critical or time-sensitive, such as marketing messages).
+     */
+    MessageType?: MessageType;
+    /**
+     * The sender ID to display as the sender of the message on a recipient's device. Support for sender IDs varies by country or region. For more information, see Supported Countries and Regions in the Amazon Pinpoint User Guide.
+     */
+    SenderId?: __string;
   }
   export interface JourneySchedule {
     /**
@@ -4946,6 +5006,24 @@ declare namespace Pinpoint {
      */
     User?: EndpointUser;
   }
+  export interface PushMessageActivity {
+    /**
+     * Specifies the time to live (TTL) value for push notifications that are sent to participants in a journey.
+     */
+    MessageConfig?: JourneyPushMessage;
+    /**
+     * The unique identifier for the next activity to perform, after the message is sent.
+     */
+    NextActivity?: __string;
+    /**
+     * The name of the push notification template to use for the message. If specified, this value must match the name of an existing message template.
+     */
+    TemplateName?: __string;
+    /**
+     * The unique identifier for the version of the push notification template to use for the message. If specified, this value must match the identifier for an existing template version. To retrieve a list of versions and version identifiers for a template, use the Template Versions resource. If you don't specify a value for this property, Amazon Pinpoint uses the active version of the template. The active version is typically the version of a template that's been most recently reviewed and approved for use, depending on your workflow. It isn't necessarily the latest version of a template.
+     */
+    TemplateVersion?: __string;
+  }
   export interface PushNotificationTemplateRequest {
     /**
      * The message template to use for the ADM (Amazon Device Messaging) channel. This message template overrides the default template for push notification channels (DefaultPushNotificationTemplate).
@@ -5284,7 +5362,7 @@ declare namespace Pinpoint {
      */
     MediaUrl?: __string;
     /**
-     * The SMS message type. Valid values are: TRANSACTIONAL, the message is critical or time-sensitive, such as a one-time password that supports a customer transaction; and, PROMOTIONAL, the message is not critical or time-sensitive, such as a marketing message.
+     * The SMS message type. Valid values are TRANSACTIONAL (for messages that are critical or time-sensitive, such as a one-time passwords) and PROMOTIONAL (for messsages that aren't critical or time-sensitive, such as marketing messages).
      */
     MessageType?: MessageType;
     /**
@@ -5299,6 +5377,24 @@ declare namespace Pinpoint {
      * The message variables to use in the SMS message. You can override the default variables with individual address variables.
      */
     Substitutions?: MapOfListOf__string;
+  }
+  export interface SMSMessageActivity {
+    /**
+     * Specifies the sender ID and message type for an SMS message that's sent to participants in a journey.
+     */
+    MessageConfig?: JourneySMSMessage;
+    /**
+     * The unique identifier for the next activity to perform, after the message is sent.
+     */
+    NextActivity?: __string;
+    /**
+     * The name of the SMS message template to use for the message. If specified, this value must match the name of an existing message template.
+     */
+    TemplateName?: __string;
+    /**
+     * The unique identifier for the version of the SMS template to use for the message. If specified, this value must match the identifier for an existing template version. To retrieve a list of versions and version identifiers for a template, use the Template Versions resource. If you don't specify a value for this property, Amazon Pinpoint uses the active version of the template. The active version is typically the version of a template that's been most recently reviewed and approved for use, depending on your workflow. It isn't necessarily the latest version of a template.
+     */
+    TemplateVersion?: __string;
   }
   export interface SMSTemplateRequest {
     /**
@@ -6617,7 +6713,7 @@ declare namespace Pinpoint {
      */
     TreatmentName?: __string;
   }
-  export type __EndpointTypesElement = "GCM"|"APNS"|"APNS_SANDBOX"|"APNS_VOIP"|"APNS_VOIP_SANDBOX"|"ADM"|"SMS"|"VOICE"|"EMAIL"|"BAIDU"|"CUSTOM"|string;
+  export type __EndpointTypesElement = "PUSH"|"GCM"|"APNS"|"APNS_SANDBOX"|"APNS_VOIP"|"APNS_VOIP_SANDBOX"|"ADM"|"SMS"|"VOICE"|"EMAIL"|"BAIDU"|"CUSTOM"|string;
   export type __boolean = boolean;
   export type __double = number;
   export type __integer = number;

@@ -28,6 +28,14 @@ declare class ElasticBeanstalk extends Service {
    */
   applyEnvironmentManagedAction(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplyEnvironmentManagedActionResult) => void): Request<ElasticBeanstalk.Types.ApplyEnvironmentManagedActionResult, AWSError>;
   /**
+   * Add or change the operations role used by an environment. After this call is made, Elastic Beanstalk uses the associated operations role for permissions to downstream services during subsequent calls acting on this environment. For more information, see Operations roles in the AWS Elastic Beanstalk Developer Guide.
+   */
+  associateEnvironmentOperationsRole(params: ElasticBeanstalk.Types.AssociateEnvironmentOperationsRoleMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Add or change the operations role used by an environment. After this call is made, Elastic Beanstalk uses the associated operations role for permissions to downstream services during subsequent calls acting on this environment. For more information, see Operations roles in the AWS Elastic Beanstalk Developer Guide.
+   */
+  associateEnvironmentOperationsRole(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Checks if the specified CNAME is available.
    */
   checkDNSAvailability(params: ElasticBeanstalk.Types.CheckDNSAvailabilityMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.CheckDNSAvailabilityResultMessage) => void): Request<ElasticBeanstalk.Types.CheckDNSAvailabilityResultMessage, AWSError>;
@@ -227,6 +235,14 @@ declare class ElasticBeanstalk extends Service {
    * Describes a platform version. Provides full details. Compare to ListPlatformVersions, which provides summary information about a list of platform versions. For definitions of platform version and other platform-related terms, see AWS Elastic Beanstalk Platforms Glossary.
    */
   describePlatformVersion(callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribePlatformVersionResult) => void): Request<ElasticBeanstalk.Types.DescribePlatformVersionResult, AWSError>;
+  /**
+   * Disassociate the operations role from an environment. After this call is made, Elastic Beanstalk uses the caller's permissions for permissions to downstream services during subsequent calls acting on this environment. For more information, see Operations roles in the AWS Elastic Beanstalk Developer Guide.
+   */
+  disassociateEnvironmentOperationsRole(params: ElasticBeanstalk.Types.DisassociateEnvironmentOperationsRoleMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Disassociate the operations role from an environment. After this call is made, Elastic Beanstalk uses the caller's permissions for permissions to downstream services during subsequent calls acting on this environment. For more information, see Operations roles in the AWS Elastic Beanstalk Developer Guide.
+   */
+  disassociateEnvironmentOperationsRole(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Returns a list of the available solution stack names, with the public version first and then in reverse chronological order.
    */
@@ -567,6 +583,16 @@ declare namespace ElasticBeanstalk {
      * The status of the managed action.
      */
     Status?: String;
+  }
+  export interface AssociateEnvironmentOperationsRoleMessage {
+    /**
+     * The name of the environment to which to set the operations role.
+     */
+    EnvironmentName: EnvironmentName;
+    /**
+     * The Amazon Resource Name (ARN) of an existing IAM role to be used as the environment's operations role.
+     */
+    OperationsRole: OperationsRole;
   }
   export type AutoCreateApplication = boolean;
   export interface AutoScalingGroup {
@@ -959,7 +985,7 @@ declare namespace ElasticBeanstalk {
      */
     SolutionStackName?: SolutionStackName;
     /**
-     * The Amazon Resource Name (ARN) of the custom platform to use with the environment. For more information, see  Custom Platforms in the AWS Elastic Beanstalk Developer Guide.  If you specify PlatformArn, don't specify SolutionStackName. 
+     * The Amazon Resource Name (ARN) of the custom platform to use with the environment. For more information, see Custom Platforms in the AWS Elastic Beanstalk Developer Guide.  If you specify PlatformArn, don't specify SolutionStackName. 
      */
     PlatformArn?: PlatformArn;
     /**
@@ -970,6 +996,10 @@ declare namespace ElasticBeanstalk {
      * A list of custom user-defined configuration options to remove from the configuration set for this new environment.
      */
     OptionsToRemove?: OptionsSpecifierList;
+    /**
+     * The Amazon Resource Name (ARN) of an existing IAM role to be used as the environment's operations role. If specified, Elastic Beanstalk uses the operations role for permissions to downstream services during this call and during subsequent calls acting on this environment. To specify an operations role, you must have the iam:PassRole permission for the role. For more information, see Operations roles in the AWS Elastic Beanstalk Developer Guide.
+     */
+    OperationsRole?: OperationsRole;
   }
   export interface CreatePlatformVersionRequest {
     /**
@@ -1408,6 +1438,12 @@ declare namespace ElasticBeanstalk {
     PlatformDescription?: PlatformDescription;
   }
   export type Description = string;
+  export interface DisassociateEnvironmentOperationsRoleMessage {
+    /**
+     * The name of the environment from which to disassociate the operations role.
+     */
+    EnvironmentName: EnvironmentName;
+  }
   export type Ec2InstanceId = string;
   export type EndpointURL = string;
   export type EnvironmentArn = string;
@@ -1492,6 +1528,10 @@ declare namespace ElasticBeanstalk {
      * The environment's Amazon Resource Name (ARN), which can be used in other API requests that require an ARN.
      */
     EnvironmentArn?: EnvironmentArn;
+    /**
+     * The Amazon Resource Name (ARN) of the environment's operations role. For more information, see Operations roles in the AWS Elastic Beanstalk Developer Guide.
+     */
+    OperationsRole?: OperationsRole;
   }
   export type EnvironmentDescriptionsList = EnvironmentDescription[];
   export interface EnvironmentDescriptionsMessage {
@@ -1952,6 +1992,7 @@ declare namespace ElasticBeanstalk {
   export type NullableLong = number;
   export type OperatingSystemName = string;
   export type OperatingSystemVersion = string;
+  export type OperationsRole = string;
   export type OptionNamespace = string;
   export type OptionRestrictionMaxLength = number;
   export type OptionRestrictionMaxValue = number;
@@ -2626,11 +2667,11 @@ declare namespace ElasticBeanstalk {
      */
     ResourceArn: ResourceArn;
     /**
-     * A list of tags to add or update. If a key of an existing tag is added, the tag's value is updated.
+     * A list of tags to add or update. If a key of an existing tag is added, the tag's value is updated. Specify at least one of these parameters: TagsToAdd, TagsToRemove.
      */
     TagsToAdd?: TagList;
     /**
-     * A list of tag keys to remove. If a tag key doesn't exist, it is silently ignored.
+     * A list of tag keys to remove. If a tag key doesn't exist, it is silently ignored. Specify at least one of these parameters: TagsToAdd, TagsToRemove.
      */
     TagsToRemove?: TagKeyList;
   }

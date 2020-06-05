@@ -1206,7 +1206,7 @@ declare namespace ServiceCatalog {
      */
     DefinitionType: ServiceActionDefinitionType;
     /**
-     * The self-service action definition. Can be one of the following:  Name  The name of the AWS Systems Manager Document. For example, AWS-RestartEC2Instance.  Version  The AWS Systems Manager automation document version. For example, "Version": "1"   AssumeRole  The Amazon Resource Name (ARN) of the role that performs the self-service actions on your behalf. For example, "AssumeRole": "arn:aws:iam::12345678910:role/ActionRole". To reuse the provisioned product launch role, set to "AssumeRole": "LAUNCH_ROLE".  Parameters  The list of parameters in JSON format. For example: [{\"Name\":\"InstanceId\",\"Type\":\"TARGET\"}] or [{\"Name\":\"InstanceId\",\"Type\":\"TEXT_VALUE\"}].  
+     * The self-service action definition. Can be one of the following:  Name  The name of the AWS Systems Manager document (SSM document). For example, AWS-RestartEC2Instance. If you are using a shared SSM document, you must provide the ARN instead of the name.  Version  The AWS Systems Manager automation document version. For example, "Version": "1"   AssumeRole  The Amazon Resource Name (ARN) of the role that performs the self-service actions on your behalf. For example, "AssumeRole": "arn:aws:iam::12345678910:role/ActionRole". To reuse the provisioned product launch role, set to "AssumeRole": "LAUNCH_ROLE".  Parameters  The list of parameters in JSON format. For example: [{\"Name\":\"InstanceId\",\"Type\":\"TARGET\"}] or [{\"Name\":\"InstanceId\",\"Type\":\"TEXT_VALUE\"}].  
      */
     Definition: ServiceActionDefinitionMap;
     /**
@@ -1471,7 +1471,11 @@ declare namespace ServiceCatalog {
     /**
      * The product identifier.
      */
-    Id: Id;
+    Id?: Id;
+    /**
+     * The product name.
+     */
+    Name?: ProductViewName;
   }
   export interface DescribeProductAsAdminOutput {
     /**
@@ -1503,7 +1507,11 @@ declare namespace ServiceCatalog {
     /**
      * The product identifier.
      */
-    Id: Id;
+    Id?: Id;
+    /**
+     * The product name.
+     */
+    Name?: ProductViewName;
   }
   export interface DescribeProductOutput {
     /**
@@ -1518,6 +1526,10 @@ declare namespace ServiceCatalog {
      * Information about the associated budgets.
      */
     Budgets?: Budgets;
+    /**
+     * Information about the associated launch paths.
+     */
+    LaunchPaths?: LaunchPaths;
   }
   export interface DescribeProductViewInput {
     /**
@@ -1599,11 +1611,19 @@ declare namespace ServiceCatalog {
     /**
      * The identifier of the provisioning artifact.
      */
-    ProvisioningArtifactId: Id;
+    ProvisioningArtifactId?: Id;
     /**
      * The product identifier.
      */
-    ProductId: Id;
+    ProductId?: Id;
+    /**
+     * The provisioning artifact name.
+     */
+    ProvisioningArtifactName?: ProvisioningArtifactName;
+    /**
+     * The product name.
+     */
+    ProductName?: ProductViewName;
     /**
      * Indicates whether a verbose level of detail is enabled.
      */
@@ -1939,6 +1959,16 @@ declare namespace ServiceCatalog {
   export type InstructionType = string;
   export type InstructionValue = string;
   export type LastRequestId = string;
+  export interface LaunchPath {
+    /**
+     * The identifier of the launch path.
+     */
+    Id?: Id;
+    /**
+     * The name of the launch path.
+     */
+    Name?: PortfolioName;
+  }
   export type LaunchPathSummaries = LaunchPathSummary[];
   export interface LaunchPathSummary {
     /**
@@ -1958,6 +1988,7 @@ declare namespace ServiceCatalog {
      */
     Name?: PortfolioName;
   }
+  export type LaunchPaths = LaunchPath[];
   export interface ListAcceptedPortfolioSharesInput {
     /**
      * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
@@ -3863,7 +3894,7 @@ declare namespace ServiceCatalog {
      */
     ProvisionedProductId: Id;
     /**
-     * A map that contains the provisioned product properties to be updated. The OWNER key only accepts user ARNs. The owner is the user that is allowed to see, update, terminate, and execute service actions in the provisioned product. The administrator can change the owner of a provisioned product to another IAM user within the same account. Both end user owners and administrators can see ownership history of the provisioned product using the ListRecordHistory API. The new owner can describe all past records for the provisioned product using the DescribeRecord API. The previous owner can no longer use DescribeRecord, but can still see the product's history from when he was an owner using ListRecordHistory. If a provisioned product ownership is assigned to an end user, they can see and perform any action through the API or Service Catalog console such as update, terminate, and execute service actions. If an end user provisions a product and the owner is updated to someone else, they will no longer be able to see or perform any actions through API or the Service Catalog console on that provisioned product.
+     * A map that contains the provisioned product properties to be updated. The OWNER key accepts user ARNs and role ARNs. The owner is the user that is allowed to see, update, terminate, and execute service actions in the provisioned product. The administrator can change the owner of a provisioned product to another IAM user within the same account. Both end user owners and administrators can see ownership history of the provisioned product using the ListRecordHistory API. The new owner can describe all past records for the provisioned product using the DescribeRecord API. The previous owner can no longer use DescribeRecord, but can still see the product's history from when he was an owner using ListRecordHistory. If a provisioned product ownership is assigned to an end user, they can see and perform any action through the API or Service Catalog console such as update, terminate, and execute service actions. If an end user provisions a product and the owner is updated to someone else, they will no longer be able to see or perform any actions through API or the Service Catalog console on that provisioned product.
      */
     ProvisionedProductProperties: ProvisionedProductProperties;
     /**

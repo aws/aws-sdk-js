@@ -78,6 +78,10 @@ declare namespace PersonalizeRuntime {
      * The contextual metadata to use when getting recommendations. Contextual metadata includes any interaction information that might be relevant when getting a user's recommendations, such as the user's current location or device type.
      */
     context?: Context;
+    /**
+     * The ARN of the filter to apply to the returned recommendations. For more information, see Using Filters with Amazon Personalize.
+     */
+    filterArn?: Arn;
   }
   export interface GetRecommendationsResponse {
     /**
@@ -95,7 +99,7 @@ declare namespace PersonalizeRuntime {
      */
     itemId?: ItemID;
     /**
-     * A numeric representation of the model's certainty in the item's suitability. For more information on scoring logic, see how-scores-work.
+     * A numeric representation of the model's certainty that the item will be the next user selection. For more information on scoring logic, see how-scores-work.
      */
     score?: Score;
   }

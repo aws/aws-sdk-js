@@ -2787,6 +2787,10 @@ declare namespace APIGateway {
      * Specifies the integration's responses.   Example: Get integration responses of a method Request  GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200 HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com X-Amz-Date: 20160607T191449Z Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/20160607/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}  Response The successful response returns 200 OK status and a payload as follows: { "_links": { "curies": { "href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html", "name": "integrationresponse", "templated": true }, "self": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "title": "200" }, "integrationresponse:delete": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" }, "integrationresponse:update": { "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" } }, "responseParameters": { "method.response.header.Content-Type": "'application/xml'" }, "responseTemplates": { "application/json": "$util.urlDecode(\"%3CkinesisStreams%3E#foreach($stream in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E\")\n" }, "statusCode": "200" }    Creating an API 
      */
     integrationResponses?: MapOfIntegrationResponse;
+    /**
+     * Specifies the TLS configuration for an integration.
+     */
+    tlsConfig?: TlsConfig;
   }
   export interface IntegrationResponse {
     /**
@@ -3101,6 +3105,7 @@ declare namespace APIGateway {
      * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.
      */
     timeoutInMillis?: NullableInteger;
+    tlsConfig?: TlsConfig;
   }
   export interface PutIntegrationResponseRequest {
     /**
@@ -3665,6 +3670,12 @@ declare namespace APIGateway {
     rateLimit?: Double;
   }
   export type Timestamp = Date;
+  export interface TlsConfig {
+    /**
+     * Specifies whether API Gateway skips trust chain validation of the server certificate during the TLS handshake. Supported only for HTTP and HTTP_PROXY integrations. By default, API Gateway validates that certificates for integration endpoints are issued by a supported Certificate Authority. If enabled, API Gateway skips trust chain validation of the server certificate. This is not recommended, but it enables you to use certificates that are signed by private Certificate Authorities, or certificates that are self-signed.
+     */
+    insecureSkipVerification?: Boolean;
+  }
   export type UnauthorizedCacheControlHeaderStrategy = "FAIL_WITH_403"|"SUCCEED_WITH_RESPONSE_HEADER"|"SUCCEED_WITHOUT_RESPONSE_HEADER"|string;
   export interface UntagResourceRequest {
     /**

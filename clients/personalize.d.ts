@@ -60,6 +60,14 @@ declare class Personalize extends Service {
    */
   createEventTracker(callback?: (err: AWSError, data: Personalize.Types.CreateEventTrackerResponse) => void): Request<Personalize.Types.CreateEventTrackerResponse, AWSError>;
   /**
+   * Creates a recommendation filter. For more information, see Using Filters with Amazon Personalize.
+   */
+  createFilter(params: Personalize.Types.CreateFilterRequest, callback?: (err: AWSError, data: Personalize.Types.CreateFilterResponse) => void): Request<Personalize.Types.CreateFilterResponse, AWSError>;
+  /**
+   * Creates a recommendation filter. For more information, see Using Filters with Amazon Personalize.
+   */
+  createFilter(callback?: (err: AWSError, data: Personalize.Types.CreateFilterResponse) => void): Request<Personalize.Types.CreateFilterResponse, AWSError>;
+  /**
    * Creates an Amazon Personalize schema from the specified schema string. The schema you create must be in Avro JSON format. Amazon Personalize recognizes three schema variants. Each schema is associated with a dataset type and has a set of required field and keywords. You specify a schema when you call CreateDataset.  Related APIs     ListSchemas     DescribeSchema     DeleteSchema   
    */
   createSchema(params: Personalize.Types.CreateSchemaRequest, callback?: (err: AWSError, data: Personalize.Types.CreateSchemaResponse) => void): Request<Personalize.Types.CreateSchemaResponse, AWSError>;
@@ -115,6 +123,14 @@ declare class Personalize extends Service {
    * Deletes the event tracker. Does not delete the event-interactions dataset from the associated dataset group. For more information on event trackers, see CreateEventTracker.
    */
   deleteEventTracker(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a filter.
+   */
+  deleteFilter(params: Personalize.Types.DeleteFilterRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a filter.
+   */
+  deleteFilter(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a schema. Before deleting a schema, you must delete all datasets referencing the schema. For more information on schemas, see CreateSchema.
    */
@@ -195,6 +211,14 @@ declare class Personalize extends Service {
    * Describes the given feature transformation.
    */
   describeFeatureTransformation(callback?: (err: AWSError, data: Personalize.Types.DescribeFeatureTransformationResponse) => void): Request<Personalize.Types.DescribeFeatureTransformationResponse, AWSError>;
+  /**
+   * Describes a filter's properties.
+   */
+  describeFilter(params: Personalize.Types.DescribeFilterRequest, callback?: (err: AWSError, data: Personalize.Types.DescribeFilterResponse) => void): Request<Personalize.Types.DescribeFilterResponse, AWSError>;
+  /**
+   * Describes a filter's properties.
+   */
+  describeFilter(callback?: (err: AWSError, data: Personalize.Types.DescribeFilterResponse) => void): Request<Personalize.Types.DescribeFilterResponse, AWSError>;
   /**
    * Describes a recipe. A recipe contains three items:   An algorithm that trains a model.   Hyperparameters that govern the training.   Feature transformation information for modifying the input data before training.   Amazon Personalize provides a set of predefined recipes. You specify a recipe when you create a solution with the CreateSolution API. CreateSolution trains a model by using the algorithm in the specified recipe and a training dataset. The solution, when deployed as a campaign, can provide recommendations using the GetRecommendations API.
    */
@@ -283,6 +307,14 @@ declare class Personalize extends Service {
    * Returns the list of event trackers associated with the account. The response provides the properties for each event tracker, including the Amazon Resource Name (ARN) and tracking ID. For more information on event trackers, see CreateEventTracker.
    */
   listEventTrackers(callback?: (err: AWSError, data: Personalize.Types.ListEventTrackersResponse) => void): Request<Personalize.Types.ListEventTrackersResponse, AWSError>;
+  /**
+   * Lists all filters that belong to a given dataset group.
+   */
+  listFilters(params: Personalize.Types.ListFiltersRequest, callback?: (err: AWSError, data: Personalize.Types.ListFiltersResponse) => void): Request<Personalize.Types.ListFiltersResponse, AWSError>;
+  /**
+   * Lists all filters that belong to a given dataset group.
+   */
+  listFilters(callback?: (err: AWSError, data: Personalize.Types.ListFiltersResponse) => void): Request<Personalize.Types.ListFiltersResponse, AWSError>;
   /**
    * Returns a list of available recipes. The response provides the properties for each recipe, including the recipe's Amazon Resource Name (ARN).
    */
@@ -406,6 +438,10 @@ declare namespace Personalize {
      * The Amazon Resource Name (ARN) of the batch inference job.
      */
     batchInferenceJobArn?: Arn;
+    /**
+     * The ARN of the filter used on the batch inference job.
+     */
+    filterArn?: Arn;
     /**
      * If the batch inference job failed, the reason for the failure.
      */
@@ -615,6 +651,10 @@ declare namespace Personalize {
      */
     solutionVersionArn: Arn;
     /**
+     * The ARN of the filter to apply to the batch inference job. For more information on using filters, see Using Filters with Amazon Personalize.
+     */
+    filterArn?: Arn;
+    /**
      * The number of recommendations to retreive.
      */
     numResults?: NumBatchResults;
@@ -744,6 +784,26 @@ declare namespace Personalize {
      * The ID of the event tracker. Include this ID in requests to the PutEvents API.
      */
     trackingId?: TrackingId;
+  }
+  export interface CreateFilterRequest {
+    /**
+     * The name of the filter to create.
+     */
+    name: Name;
+    /**
+     * The ARN of the dataset group that the filter will belong to.
+     */
+    datasetGroupArn: Arn;
+    /**
+     * The filter expression that designates the interaction types that the filter will filter out. A filter expression must follow the following format:  EXCLUDE itemId WHERE INTERACTIONS.event_type in ("EVENT_TYPE")  Where "EVENT_TYPE" is the type of event to filter out. To filter out all items with any interactions history, set "*" as the EVENT_TYPE. For more information, see Using Filters with Amazon Personalize.
+     */
+    filterExpression: FilterExpression;
+  }
+  export interface CreateFilterResponse {
+    /**
+     * The ARN of the new filter.
+     */
+    filterArn?: Arn;
   }
   export interface CreateSchemaRequest {
     /**
@@ -1139,6 +1199,12 @@ declare namespace Personalize {
      */
     eventTrackerArn: Arn;
   }
+  export interface DeleteFilterRequest {
+    /**
+     * The ARN of the filter to delete.
+     */
+    filterArn: Arn;
+  }
   export interface DeleteSchemaRequest {
     /**
      * The Amazon Resource Name (ARN) of the schema to delete.
@@ -1246,6 +1312,18 @@ declare namespace Personalize {
      * A listing of the FeatureTransformation properties.
      */
     featureTransformation?: FeatureTransformation;
+  }
+  export interface DescribeFilterRequest {
+    /**
+     * The ARN of the filter to describe.
+     */
+    filterArn: Arn;
+  }
+  export interface DescribeFilterResponse {
+    /**
+     * The filter's details.
+     */
+    filter?: Filter;
   }
   export interface DescribeRecipeRequest {
     /**
@@ -1385,6 +1463,72 @@ declare namespace Personalize {
   }
   export type FeatureTransformationParameters = {[key: string]: ParameterValue};
   export type FeaturizationParameters = {[key: string]: ParameterValue};
+  export interface Filter {
+    /**
+     * The name of the filter.
+     */
+    name?: Name;
+    /**
+     * The ARN of the filter.
+     */
+    filterArn?: Arn;
+    /**
+     * The time at which the filter was created.
+     */
+    creationDateTime?: _Date;
+    /**
+     * The time at which the filter was last updated.
+     */
+    lastUpdatedDateTime?: _Date;
+    /**
+     * The ARN of the dataset group to which the filter belongs.
+     */
+    datasetGroupArn?: Arn;
+    /**
+     * If the filter failed, the reason for its failure.
+     */
+    failureReason?: FailureReason;
+    /**
+     * Specifies the type of item interactions to filter out of recommendation results. The filter expression must follow the following format:  EXCLUDE itemId WHERE INTERACTIONS.event_type in ("EVENT_TYPE")  Where "EVENT_TYPE" is the type of event to filter out. For more information, see Using Filters with Amazon Personalize.
+     */
+    filterExpression?: FilterExpression;
+    /**
+     * The status of the filter.
+     */
+    status?: Status;
+  }
+  export type FilterExpression = string;
+  export interface FilterSummary {
+    /**
+     * The name of the filter.
+     */
+    name?: Name;
+    /**
+     * The ARN of the filter.
+     */
+    filterArn?: Arn;
+    /**
+     * The time at which the filter was created.
+     */
+    creationDateTime?: _Date;
+    /**
+     * The time at which the filter was last updated.
+     */
+    lastUpdatedDateTime?: _Date;
+    /**
+     * The ARN of the dataset group to which the filter belongs.
+     */
+    datasetGroupArn?: Arn;
+    /**
+     * If the filter failed, the reason for the failure.
+     */
+    failureReason?: FailureReason;
+    /**
+     * The status of the filter.
+     */
+    status?: Status;
+  }
+  export type Filters = FilterSummary[];
   export interface GetSolutionMetricsRequest {
     /**
      * The Amazon Resource Name (ARN) of the solution version for which to get metrics.
@@ -1611,6 +1755,30 @@ declare namespace Personalize {
     eventTrackers?: EventTrackers;
     /**
      * A token for getting the next set of event trackers (if they exist).
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListFiltersRequest {
+    /**
+     * The ARN of the dataset group that contains the filters.
+     */
+    datasetGroupArn?: Arn;
+    /**
+     * A token returned from the previous call to ListFilters for getting the next set of filters (if they exist).
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of filters to return.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListFiltersResponse {
+    /**
+     * A list of returned filters.
+     */
+    Filters?: Filters;
+    /**
+     * A token for getting the next set of filters (if they exist).
      */
     nextToken?: NextToken;
   }

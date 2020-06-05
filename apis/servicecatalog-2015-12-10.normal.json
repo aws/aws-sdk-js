@@ -759,6 +759,9 @@
       "errors": [
         {
           "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParametersException"
         }
       ],
       "documentation": "<p>Gets information about the specified product. This operation is run with administrator access.</p>"
@@ -841,6 +844,9 @@
       "errors": [
         {
           "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParametersException"
         }
       ],
       "documentation": "<p>Gets information about the specified provisioning artifact (also known as a version) for the specified product.</p>"
@@ -2732,7 +2738,7 @@
         },
         "Definition": {
           "shape": "ServiceActionDefinitionMap",
-          "documentation": "<p>The self-service action definition. Can be one of the following:</p> <dl> <dt>Name</dt> <dd> <p>The name of the AWS Systems Manager Document. For example, <code>AWS-RestartEC2Instance</code>.</p> </dd> <dt>Version</dt> <dd> <p>The AWS Systems Manager automation document version. For example, <code>\"Version\": \"1\"</code> </p> </dd> <dt>AssumeRole</dt> <dd> <p>The Amazon Resource Name (ARN) of the role that performs the self-service actions on your behalf. For example, <code>\"AssumeRole\": \"arn:aws:iam::12345678910:role/ActionRole\"</code>.</p> <p>To reuse the provisioned product launch role, set to <code>\"AssumeRole\": \"LAUNCH_ROLE\"</code>.</p> </dd> <dt>Parameters</dt> <dd> <p>The list of parameters in JSON format.</p> <p>For example: <code>[{\\\"Name\\\":\\\"InstanceId\\\",\\\"Type\\\":\\\"TARGET\\\"}]</code> or <code>[{\\\"Name\\\":\\\"InstanceId\\\",\\\"Type\\\":\\\"TEXT_VALUE\\\"}]</code>.</p> </dd> </dl>"
+          "documentation": "<p>The self-service action definition. Can be one of the following:</p> <dl> <dt>Name</dt> <dd> <p>The name of the AWS Systems Manager document (SSM document). For example, <code>AWS-RestartEC2Instance</code>.</p> <p>If you are using a shared SSM document, you must provide the ARN instead of the name.</p> </dd> <dt>Version</dt> <dd> <p>The AWS Systems Manager automation document version. For example, <code>\"Version\": \"1\"</code> </p> </dd> <dt>AssumeRole</dt> <dd> <p>The Amazon Resource Name (ARN) of the role that performs the self-service actions on your behalf. For example, <code>\"AssumeRole\": \"arn:aws:iam::12345678910:role/ActionRole\"</code>.</p> <p>To reuse the provisioned product launch role, set to <code>\"AssumeRole\": \"LAUNCH_ROLE\"</code>.</p> </dd> <dt>Parameters</dt> <dd> <p>The list of parameters in JSON format.</p> <p>For example: <code>[{\\\"Name\\\":\\\"InstanceId\\\",\\\"Type\\\":\\\"TARGET\\\"}]</code> or <code>[{\\\"Name\\\":\\\"InstanceId\\\",\\\"Type\\\":\\\"TEXT_VALUE\\\"}]</code>.</p> </dd> </dl>"
         },
         "Description": {
           "shape": "ServiceActionDescription",
@@ -3113,9 +3119,6 @@
     },
     "DescribeProductAsAdminInput": {
       "type": "structure",
-      "required": [
-        "Id"
-      ],
       "members": {
         "AcceptLanguage": {
           "shape": "AcceptLanguage",
@@ -3124,6 +3127,10 @@
         "Id": {
           "shape": "Id",
           "documentation": "<p>The product identifier.</p>"
+        },
+        "Name": {
+          "shape": "ProductViewName",
+          "documentation": "<p>The product name.</p>"
         }
       }
     },
@@ -3154,9 +3161,6 @@
     },
     "DescribeProductInput": {
       "type": "structure",
-      "required": [
-        "Id"
-      ],
       "members": {
         "AcceptLanguage": {
           "shape": "AcceptLanguage",
@@ -3165,6 +3169,10 @@
         "Id": {
           "shape": "Id",
           "documentation": "<p>The product identifier.</p>"
+        },
+        "Name": {
+          "shape": "ProductViewName",
+          "documentation": "<p>The product name.</p>"
         }
       }
     },
@@ -3182,6 +3190,10 @@
         "Budgets": {
           "shape": "Budgets",
           "documentation": "<p>Information about the associated budgets.</p>"
+        },
+        "LaunchPaths": {
+          "shape": "LaunchPaths",
+          "documentation": "<p>Information about the associated launch paths.</p>"
         }
       }
     },
@@ -3286,10 +3298,6 @@
     },
     "DescribeProvisioningArtifactInput": {
       "type": "structure",
-      "required": [
-        "ProvisioningArtifactId",
-        "ProductId"
-      ],
       "members": {
         "AcceptLanguage": {
           "shape": "AcceptLanguage",
@@ -3302,6 +3310,14 @@
         "ProductId": {
           "shape": "Id",
           "documentation": "<p>The product identifier.</p>"
+        },
+        "ProvisioningArtifactName": {
+          "shape": "ProvisioningArtifactName",
+          "documentation": "<p>The provisioning artifact name.</p>"
+        },
+        "ProductName": {
+          "shape": "ProductViewName",
+          "documentation": "<p>The product name.</p>"
         },
         "Verbose": {
           "shape": "Verbose",
@@ -3855,6 +3871,20 @@
     "LastRequestId": {
       "type": "string"
     },
+    "LaunchPath": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "Id",
+          "documentation": "<p>The identifier of the launch path.</p>"
+        },
+        "Name": {
+          "shape": "PortfolioName",
+          "documentation": "<p>The name of the launch path.</p>"
+        }
+      },
+      "documentation": "<p>A launch path object.</p>"
+    },
     "LaunchPathSummaries": {
       "type": "list",
       "member": {
@@ -3882,6 +3912,12 @@
         }
       },
       "documentation": "<p>Summary information about a product path for a user.</p>"
+    },
+    "LaunchPaths": {
+      "type": "list",
+      "member": {
+        "shape": "LaunchPath"
+      }
     },
     "ListAcceptedPortfolioSharesInput": {
       "type": "structure",
@@ -5382,7 +5418,8 @@
       "type": "timestamp"
     },
     "ProvisioningArtifactDescription": {
-      "type": "string"
+      "type": "string",
+      "max": 8192
     },
     "ProvisioningArtifactDetail": {
       "type": "structure",
@@ -5449,7 +5486,8 @@
       "type": "string"
     },
     "ProvisioningArtifactName": {
-      "type": "string"
+      "type": "string",
+      "max": 8192
     },
     "ProvisioningArtifactParameter": {
       "type": "structure",
@@ -6894,7 +6932,7 @@
         },
         "ProvisionedProductProperties": {
           "shape": "ProvisionedProductProperties",
-          "documentation": "<p>A map that contains the provisioned product properties to be updated.</p> <p>The <code>OWNER</code> key only accepts user ARNs. The owner is the user that is allowed to see, update, terminate, and execute service actions in the provisioned product.</p> <p>The administrator can change the owner of a provisioned product to another IAM user within the same account. Both end user owners and administrators can see ownership history of the provisioned product using the <code>ListRecordHistory</code> API. The new owner can describe all past records for the provisioned product using the <code>DescribeRecord</code> API. The previous owner can no longer use <code>DescribeRecord</code>, but can still see the product's history from when he was an owner using <code>ListRecordHistory</code>.</p> <p>If a provisioned product ownership is assigned to an end user, they can see and perform any action through the API or Service Catalog console such as update, terminate, and execute service actions. If an end user provisions a product and the owner is updated to someone else, they will no longer be able to see or perform any actions through API or the Service Catalog console on that provisioned product.</p>"
+          "documentation": "<p>A map that contains the provisioned product properties to be updated.</p> <p>The <code>OWNER</code> key accepts user ARNs and role ARNs. The owner is the user that is allowed to see, update, terminate, and execute service actions in the provisioned product.</p> <p>The administrator can change the owner of a provisioned product to another IAM user within the same account. Both end user owners and administrators can see ownership history of the provisioned product using the <code>ListRecordHistory</code> API. The new owner can describe all past records for the provisioned product using the <code>DescribeRecord</code> API. The previous owner can no longer use <code>DescribeRecord</code>, but can still see the product's history from when he was an owner using <code>ListRecordHistory</code>.</p> <p>If a provisioned product ownership is assigned to an end user, they can see and perform any action through the API or Service Catalog console such as update, terminate, and execute service actions. If an end user provisions a product and the owner is updated to someone else, they will no longer be able to see or perform any actions through API or the Service Catalog console on that provisioned product.</p>"
         },
         "IdempotencyToken": {
           "shape": "IdempotencyToken",
