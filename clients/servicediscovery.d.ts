@@ -148,6 +148,14 @@ declare class ServiceDiscovery extends Service {
    */
   listServices(callback?: (err: AWSError, data: ServiceDiscovery.Types.ListServicesResponse) => void): Request<ServiceDiscovery.Types.ListServicesResponse, AWSError>;
   /**
+   * Lists tags for the specified resource.
+   */
+  listTagsForResource(params: ServiceDiscovery.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.ListTagsForResourceResponse) => void): Request<ServiceDiscovery.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists tags for the specified resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: ServiceDiscovery.Types.ListTagsForResourceResponse) => void): Request<ServiceDiscovery.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Creates or updates one or more records and, optionally, creates a health check based on the settings in a specified service. When you submit a RegisterInstance request, the following occurs:   For each DNS record that you define in the service that is specified by ServiceId, a record is created or updated in the hosted zone that is associated with the corresponding namespace.   If the service includes HealthCheckConfig, a health check is created based on the settings in the health check configuration.   The health check, if any, is associated with each of the new or updated records.    One RegisterInstance request must complete before you can submit another request and specify the same service ID and instance ID.  For more information, see CreateService. When AWS Cloud Map receives a DNS query for the specified DNS name, it returns the applicable value:    If the health check is healthy: returns all the records    If the health check is unhealthy: returns the applicable value for the last healthy instance    If you didn't specify a health check configuration: returns all the records   For the current limit on the number of instances that you can register using the same namespace and using the same service, see AWS Cloud Map Limits in the AWS Cloud Map Developer Guide.
    */
   registerInstance(params: ServiceDiscovery.Types.RegisterInstanceRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.RegisterInstanceResponse) => void): Request<ServiceDiscovery.Types.RegisterInstanceResponse, AWSError>;
@@ -155,6 +163,22 @@ declare class ServiceDiscovery extends Service {
    * Creates or updates one or more records and, optionally, creates a health check based on the settings in a specified service. When you submit a RegisterInstance request, the following occurs:   For each DNS record that you define in the service that is specified by ServiceId, a record is created or updated in the hosted zone that is associated with the corresponding namespace.   If the service includes HealthCheckConfig, a health check is created based on the settings in the health check configuration.   The health check, if any, is associated with each of the new or updated records.    One RegisterInstance request must complete before you can submit another request and specify the same service ID and instance ID.  For more information, see CreateService. When AWS Cloud Map receives a DNS query for the specified DNS name, it returns the applicable value:    If the health check is healthy: returns all the records    If the health check is unhealthy: returns the applicable value for the last healthy instance    If you didn't specify a health check configuration: returns all the records   For the current limit on the number of instances that you can register using the same namespace and using the same service, see AWS Cloud Map Limits in the AWS Cloud Map Developer Guide.
    */
   registerInstance(callback?: (err: AWSError, data: ServiceDiscovery.Types.RegisterInstanceResponse) => void): Request<ServiceDiscovery.Types.RegisterInstanceResponse, AWSError>;
+  /**
+   * Adds one or more tags to the specified resource.
+   */
+  tagResource(params: ServiceDiscovery.Types.TagResourceRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.TagResourceResponse) => void): Request<ServiceDiscovery.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds one or more tags to the specified resource.
+   */
+  tagResource(callback?: (err: AWSError, data: ServiceDiscovery.Types.TagResourceResponse) => void): Request<ServiceDiscovery.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes one or more tags from the specified resource.
+   */
+  untagResource(params: ServiceDiscovery.Types.UntagResourceRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.UntagResourceResponse) => void): Request<ServiceDiscovery.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes one or more tags from the specified resource.
+   */
+  untagResource(callback?: (err: AWSError, data: ServiceDiscovery.Types.UntagResourceResponse) => void): Request<ServiceDiscovery.Types.UntagResourceResponse, AWSError>;
   /**
    * Submits a request to change the health status of a custom health check to healthy or unhealthy. You can use UpdateInstanceCustomHealthStatus to change the status only for custom health checks, which you define using HealthCheckCustomConfig when you create a service. You can't use it to change the status for Route 53 health checks, which you define using HealthCheckConfig. For more information, see HealthCheckCustomConfig.
    */
@@ -173,6 +197,7 @@ declare class ServiceDiscovery extends Service {
   updateService(callback?: (err: AWSError, data: ServiceDiscovery.Types.UpdateServiceResponse) => void): Request<ServiceDiscovery.Types.UpdateServiceResponse, AWSError>;
 }
 declare namespace ServiceDiscovery {
+  export type AmazonResourceName = string;
   export type Arn = string;
   export type AttrKey = string;
   export type AttrValue = string;
@@ -191,6 +216,10 @@ declare namespace ServiceDiscovery {
      * A description for the namespace.
      */
     Description?: ResourceDescription;
+    /**
+     * The tags to add to the namespace. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.
+     */
+    Tags?: TagList;
   }
   export interface CreateHttpNamespaceResponse {
     /**
@@ -215,6 +244,10 @@ declare namespace ServiceDiscovery {
      * The ID of the Amazon VPC that you want to associate the namespace with.
      */
     Vpc: ResourceId;
+    /**
+     * The tags to add to the namespace. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.
+     */
+    Tags?: TagList;
   }
   export interface CreatePrivateDnsNamespaceResponse {
     /**
@@ -235,6 +268,10 @@ declare namespace ServiceDiscovery {
      * A description for the namespace.
      */
     Description?: ResourceDescription;
+    /**
+     * The tags to add to the namespace. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.
+     */
+    Tags?: TagList;
   }
   export interface CreatePublicDnsNamespaceResponse {
     /**
@@ -271,6 +308,10 @@ declare namespace ServiceDiscovery {
      * A complex type that contains information about an optional custom health check.  If you specify a health check configuration, you can specify either HealthCheckCustomConfig or HealthCheckConfig but not both.  You can't add, update, or delete a HealthCheckCustomConfig configuration from an existing service.
      */
     HealthCheckCustomConfig?: HealthCheckCustomConfig;
+    /**
+     * The tags to add to the service. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.
+     */
+    Tags?: TagList;
   }
   export interface CreateServiceResponse {
     /**
@@ -327,7 +368,7 @@ declare namespace ServiceDiscovery {
     /**
      * The maximum number of instances that you want AWS Cloud Map to return in the response to a DiscoverInstances request. If you don't specify a value for MaxResults, AWS Cloud Map returns up to 100 instances.
      */
-    MaxResults?: MaxResults;
+    MaxResults?: DiscoverMaxResults;
     /**
      * A string map that contains attributes with values that you can use to filter instances by any custom attribute that you specified when you registered the instance. Only instances that match all the specified key/value pairs will be returned.
      */
@@ -343,6 +384,7 @@ declare namespace ServiceDiscovery {
      */
     Instances?: HttpInstanceSummaryList;
   }
+  export type DiscoverMaxResults = number;
   export interface DnsConfig {
     /**
      * The ID of the namespace to use for DNS configuration.
@@ -639,6 +681,18 @@ declare namespace ServiceDiscovery {
      */
     NextToken?: NextToken;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource that you want to retrieve tags for.
+     */
+    ResourceARN: AmazonResourceName;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The tags that are assigned to the resource.
+     */
+    Tags?: TagList;
+  }
   export type MaxResults = number;
   export type Message = string;
   export interface Namespace {
@@ -822,7 +876,7 @@ declare namespace ServiceDiscovery {
      */
     CreatorRequestId?: ResourceId;
     /**
-     * A string map that contains the following information for the service that you specify in ServiceId:   The attributes that apply to the records that are defined in the service.    For each attribute, the applicable value.   Supported attribute keys include the following:  AWS_ALIAS_DNS_NAME     If you want AWS Cloud Map to create an Amazon Route 53 alias record that routes traffic to an Elastic Load Balancing load balancer, specify the DNS name that is associated with the load balancer. For information about how to get the DNS name, see "DNSName" in the topic AliasTarget in the Route 53 API Reference. Note the following:   The configuration for the service that is specified by ServiceId must include settings for an A record, an AAAA record, or both.   In the service that is specified by ServiceId, the value of RoutingPolicy must be WEIGHTED.   If the service that is specified by ServiceId includes HealthCheckConfig settings, AWS Cloud Map will create the Route 53 health check, but it won't associate the health check with the alias record.   Auto naming currently doesn't support creating alias records that route traffic to AWS resources other than ELB load balancers.   If you specify a value for AWS_ALIAS_DNS_NAME, don't specify values for any of the AWS_INSTANCE attributes.    AWS_INIT_HEALTH_STATUS  If the service configuration includes HealthCheckCustomConfig, you can optionally use AWS_INIT_HEALTH_STATUS to specify the initial status of the custom health check, HEALTHY or UNHEALTHY. If you don't specify a value for AWS_INIT_HEALTH_STATUS, the initial status is HEALTHY.  AWS_INSTANCE_CNAME  If the service configuration includes a CNAME record, the domain name that you want Route 53 to return in response to DNS queries, for example, example.com. This value is required if the service specified by ServiceId includes settings for an CNAME record.  AWS_INSTANCE_IPV4  If the service configuration includes an A record, the IPv4 address that you want Route 53 to return in response to DNS queries, for example, 192.0.2.44. This value is required if the service specified by ServiceId includes settings for an A record. If the service includes settings for an SRV record, you must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.  AWS_INSTANCE_IPV6  If the service configuration includes an AAAA record, the IPv6 address that you want Route 53 to return in response to DNS queries, for example, 2001:0db8:85a3:0000:0000:abcd:0001:2345. This value is required if the service specified by ServiceId includes settings for an AAAA record. If the service includes settings for an SRV record, you must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.  AWS_INSTANCE_PORT  If the service includes an SRV record, the value that you want Route 53 to return for the port. If the service includes HealthCheckConfig, the port on the endpoint that you want Route 53 to send requests to.  This value is required if you specified settings for an SRV record or a Route 53 health check when you created the service.  Custom attributes  You can add up to 30 custom attributes. For each key-value pair, the maximum length of the attribute name is 255 characters, and the maximum length of the attribute value is 1,024 characters. 
+     * A string map that contains the following information for the service that you specify in ServiceId:   The attributes that apply to the records that are defined in the service.    For each attribute, the applicable value.   Supported attribute keys include the following:  AWS_ALIAS_DNS_NAME     If you want AWS Cloud Map to create an Amazon Route 53 alias record that routes traffic to an Elastic Load Balancing load balancer, specify the DNS name that is associated with the load balancer. For information about how to get the DNS name, see "DNSName" in the topic AliasTarget in the Route 53 API Reference. Note the following:   The configuration for the service that is specified by ServiceId must include settings for an A record, an AAAA record, or both.   In the service that is specified by ServiceId, the value of RoutingPolicy must be WEIGHTED.   If the service that is specified by ServiceId includes HealthCheckConfig settings, AWS Cloud Map will create the Route 53 health check, but it won't associate the health check with the alias record.   Auto naming currently doesn't support creating alias records that route traffic to AWS resources other than ELB load balancers.   If you specify a value for AWS_ALIAS_DNS_NAME, don't specify values for any of the AWS_INSTANCE attributes.    AWS_INIT_HEALTH_STATUS  If the service configuration includes HealthCheckCustomConfig, you can optionally use AWS_INIT_HEALTH_STATUS to specify the initial status of the custom health check, HEALTHY or UNHEALTHY. If you don't specify a value for AWS_INIT_HEALTH_STATUS, the initial status is HEALTHY.  AWS_INSTANCE_CNAME  If the service configuration includes a CNAME record, the domain name that you want Route 53 to return in response to DNS queries, for example, example.com. This value is required if the service specified by ServiceId includes settings for an CNAME record.  AWS_INSTANCE_IPV4  If the service configuration includes an A record, the IPv4 address that you want Route 53 to return in response to DNS queries, for example, 192.0.2.44. This value is required if the service specified by ServiceId includes settings for an A record. If the service includes settings for an SRV record, you must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.  AWS_INSTANCE_IPV6  If the service configuration includes an AAAA record, the IPv6 address that you want Route 53 to return in response to DNS queries, for example, 2001:0db8:85a3:0000:0000:abcd:0001:2345. This value is required if the service specified by ServiceId includes settings for an AAAA record. If the service includes settings for an SRV record, you must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.  AWS_INSTANCE_PORT  If the service includes an SRV record, the value that you want Route 53 to return for the port. If the service includes HealthCheckConfig, the port on the endpoint that you want Route 53 to send requests to.  This value is required if you specified settings for an SRV record or a Route 53 health check when you created the service.  Custom attributes  You can add up to 30 custom attributes. For each key-value pair, the maximum length of the attribute name is 255 characters, and the maximum length of the attribute value is 1,024 characters. Total size of all provided attributes (sum of all keys and values) must not exceed 5,000 characters.
      */
     Attributes: Attributes;
   }
@@ -891,7 +945,7 @@ declare namespace ServiceDiscovery {
     /**
      * A complex type that contains information about the Route 53 DNS records that you want AWS Cloud Map to create when you register an instance.
      */
-    DnsConfig: DnsConfigChange;
+    DnsConfig?: DnsConfigChange;
     HealthCheckConfig?: HealthCheckConfig;
   }
   export interface ServiceFilter {
@@ -941,7 +995,45 @@ declare namespace ServiceDiscovery {
      */
     CreateDate?: Timestamp;
   }
+  export interface Tag {
+    /**
+     * The key identifier, or name, of the tag.
+     */
+    Key: TagKey;
+    /**
+     * The string value that's associated with the key of the tag. You can set the value of a tag to an empty string, but you can't set the value of a tag to null.
+     */
+    Value: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource that you want to retrieve tags for.
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     * The tags to add to the specified resource. Specifying the tag key is required. You can set the value of a tag to an empty string, but you can't set the value of a tag to null.
+     */
+    Tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type Timestamp = Date;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource that you want to retrieve tags for.
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     * The tag keys to remove from the specified resource.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateInstanceCustomHealthStatusRequest {
     /**
      * The ID of the service that includes the configuration for the custom health check that you want to change the status for.

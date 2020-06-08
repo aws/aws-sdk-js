@@ -51,7 +51,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Authorizes the DDoS Response team (DRT) to access the specified Amazon S3 bucket containing your AWS WAF logs. You can associate up to 10 Amazon S3 buckets with your subscription.</p> <p>To use the services of the DRT and make an <code>AssociateDRTLogBucket</code> request, you must be subscribed to the <a href=\"https://aws.amazon.com/premiumsupport/business-support/\">Business Support plan</a> or the <a href=\"https://aws.amazon.com/premiumsupport/enterprise-support/\">Enterprise Support plan</a>.</p>"
+      "documentation": "<p>Authorizes the DDoS Response Team (DRT) to access the specified Amazon S3 bucket containing your AWS WAF logs. You can associate up to 10 Amazon S3 buckets with your subscription.</p> <p>To use the services of the DRT and make an <code>AssociateDRTLogBucket</code> request, you must be subscribed to the <a href=\"https://aws.amazon.com/premiumsupport/business-support/\">Business Support plan</a> or the <a href=\"https://aws.amazon.com/premiumsupport/enterprise-support/\">Enterprise Support plan</a>.</p>"
     },
     "AssociateDRTRole": {
       "name": "AssociateDRTRole",
@@ -85,7 +85,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Authorizes the DDoS Response team (DRT), using the specified role, to access your AWS account to assist with DDoS attack mitigation during potential attacks. This enables the DRT to inspect your AWS WAF configuration and create or update AWS WAF rules and web ACLs.</p> <p>You can associate only one <code>RoleArn</code> with your subscription. If you submit an <code>AssociateDRTRole</code> request for an account that already has an associated role, the new <code>RoleArn</code> will replace the existing <code>RoleArn</code>. </p> <p>Prior to making the <code>AssociateDRTRole</code> request, you must attach the <a href=\"https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy\">AWSShieldDRTAccessPolicy</a> managed policy to the role you will specify in the request. For more information see <a href=\" https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html\">Attaching and Detaching IAM Policies</a>. The role must also trust the service principal <code> drt.shield.amazonaws.com</code>. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html\">IAM JSON Policy Elements: Principal</a>.</p> <p>The DRT will have access only to your AWS WAF and Shield resources. By submitting this request, you authorize the DRT to inspect your AWS WAF and Shield configuration and create and update AWS WAF rules and web ACLs on your behalf. The DRT takes these actions only if explicitly authorized by you.</p> <p>You must have the <code>iam:PassRole</code> permission to make an <code>AssociateDRTRole</code> request. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html\">Granting a User Permissions to Pass a Role to an AWS Service</a>. </p> <p>To use the services of the DRT and make an <code>AssociateDRTRole</code> request, you must be subscribed to the <a href=\"https://aws.amazon.com/premiumsupport/business-support/\">Business Support plan</a> or the <a href=\"https://aws.amazon.com/premiumsupport/enterprise-support/\">Enterprise Support plan</a>.</p>"
+      "documentation": "<p>Authorizes the DDoS Response Team (DRT), using the specified role, to access your AWS account to assist with DDoS attack mitigation during potential attacks. This enables the DRT to inspect your AWS WAF configuration and create or update AWS WAF rules and web ACLs.</p> <p>You can associate only one <code>RoleArn</code> with your subscription. If you submit an <code>AssociateDRTRole</code> request for an account that already has an associated role, the new <code>RoleArn</code> will replace the existing <code>RoleArn</code>. </p> <p>Prior to making the <code>AssociateDRTRole</code> request, you must attach the <a href=\"https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy\">AWSShieldDRTAccessPolicy</a> managed policy to the role you will specify in the request. For more information see <a href=\" https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html\">Attaching and Detaching IAM Policies</a>. The role must also trust the service principal <code> drt.shield.amazonaws.com</code>. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html\">IAM JSON Policy Elements: Principal</a>.</p> <p>The DRT will have access only to your AWS WAF and Shield resources. By submitting this request, you authorize the DRT to inspect your AWS WAF and Shield configuration and create and update AWS WAF rules and web ACLs on your behalf. The DRT takes these actions only if explicitly authorized by you.</p> <p>You must have the <code>iam:PassRole</code> permission to make an <code>AssociateDRTRole</code> request. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html\">Granting a User Permissions to Pass a Role to an AWS Service</a>. </p> <p>To use the services of the DRT and make an <code>AssociateDRTRole</code> request, you must be subscribed to the <a href=\"https://aws.amazon.com/premiumsupport/business-support/\">Business Support plan</a> or the <a href=\"https://aws.amazon.com/premiumsupport/enterprise-support/\">Enterprise Support plan</a>.</p>"
     },
     "AssociateHealthCheck": {
       "name": "AssociateHealthCheck",
@@ -117,6 +117,37 @@
         }
       ],
       "documentation": "<p>Adds health-based detection to the Shield Advanced protection for a resource. Shield Advanced health-based detection uses the health of your AWS resource to improve responsiveness and accuracy in attack detection and mitigation. </p> <p>You define the health check in Route 53 and then associate it with your Shield Advanced protection. For more information, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/ddos-overview.html#ddos-advanced-health-check-option\">Shield Advanced Health-Based Detection</a> in the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/\">AWS WAF and AWS Shield Developer Guide</a>. </p>"
+    },
+    "AssociateProactiveEngagementDetails": {
+      "name": "AssociateProactiveEngagementDetails",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AssociateProactiveEngagementDetailsRequest"
+      },
+      "output": {
+        "shape": "AssociateProactiveEngagementDetailsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalErrorException"
+        },
+        {
+          "shape": "InvalidOperationException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "OptimisticLockException"
+        }
+      ],
+      "documentation": "<p>Initializes proactive engagement and sets the list of contacts for the DDoS Response Team (DRT) to use. You must provide at least one phone number in the emergency contact list. </p> <p>After you have initialized proactive engagement using this call, to disable or enable proactive engagement, use the calls <code>DisableProactiveEngagement</code> and <code>EnableProactiveEngagement</code>. </p> <note> <p>This call defines the list of email addresses and phone numbers that the DDoS Response Team (DRT) can use to contact you for escalations to the DRT and to initiate proactive customer support.</p> <p>The contacts that you provide in the request replace any contacts that were already defined. If you already have contacts defined and want to use them, retrieve the list using <code>DescribeEmergencyContactSettings</code> and then provide it to this call. </p> </note>"
     },
     "CreateProtection": {
       "name": "CreateProtection",
@@ -270,7 +301,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Returns the current role and list of Amazon S3 log buckets used by the DDoS Response team (DRT) to access your AWS account while assisting with attack mitigation.</p>"
+      "documentation": "<p>Returns the current role and list of Amazon S3 log buckets used by the DDoS Response Team (DRT) to access your AWS account while assisting with attack mitigation.</p>"
     },
     "DescribeEmergencyContactSettings": {
       "name": "DescribeEmergencyContactSettings",
@@ -292,7 +323,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Lists the email addresses that the DRT can use to contact you during a suspected attack.</p>"
+      "documentation": "<p>A list of email addresses and phone numbers that the DDoS Response Team (DRT) can use to contact you if you have proactive engagement enabled, for escalations to the DRT and to initiate proactive customer support.</p>"
     },
     "DescribeProtection": {
       "name": "DescribeProtection",
@@ -341,6 +372,37 @@
       ],
       "documentation": "<p>Provides details about the AWS Shield Advanced subscription for an account.</p>"
     },
+    "DisableProactiveEngagement": {
+      "name": "DisableProactiveEngagement",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DisableProactiveEngagementRequest"
+      },
+      "output": {
+        "shape": "DisableProactiveEngagementResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalErrorException"
+        },
+        {
+          "shape": "InvalidOperationException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "OptimisticLockException"
+        }
+      ],
+      "documentation": "<p>Removes authorization from the DDoS Response Team (DRT) to notify contacts about escalations to the DRT and to initiate proactive customer support.</p>"
+    },
     "DisassociateDRTLogBucket": {
       "name": "DisassociateDRTLogBucket",
       "http": {
@@ -373,7 +435,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Removes the DDoS Response team's (DRT) access to the specified Amazon S3 bucket containing your AWS WAF logs.</p> <p>To make a <code>DisassociateDRTLogBucket</code> request, you must be subscribed to the <a href=\"https://aws.amazon.com/premiumsupport/business-support/\">Business Support plan</a> or the <a href=\"https://aws.amazon.com/premiumsupport/enterprise-support/\">Enterprise Support plan</a>. However, if you are not subscribed to one of these support plans, but had been previously and had granted the DRT access to your account, you can submit a <code>DisassociateDRTLogBucket</code> request to remove this access.</p>"
+      "documentation": "<p>Removes the DDoS Response Team's (DRT) access to the specified Amazon S3 bucket containing your AWS WAF logs.</p> <p>To make a <code>DisassociateDRTLogBucket</code> request, you must be subscribed to the <a href=\"https://aws.amazon.com/premiumsupport/business-support/\">Business Support plan</a> or the <a href=\"https://aws.amazon.com/premiumsupport/enterprise-support/\">Enterprise Support plan</a>. However, if you are not subscribed to one of these support plans, but had been previously and had granted the DRT access to your account, you can submit a <code>DisassociateDRTLogBucket</code> request to remove this access.</p>"
     },
     "DisassociateDRTRole": {
       "name": "DisassociateDRTRole",
@@ -401,7 +463,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Removes the DDoS Response team's (DRT) access to your AWS account.</p> <p>To make a <code>DisassociateDRTRole</code> request, you must be subscribed to the <a href=\"https://aws.amazon.com/premiumsupport/business-support/\">Business Support plan</a> or the <a href=\"https://aws.amazon.com/premiumsupport/enterprise-support/\">Enterprise Support plan</a>. However, if you are not subscribed to one of these support plans, but had been previously and had granted the DRT access to your account, you can submit a <code>DisassociateDRTRole</code> request to remove this access.</p>"
+      "documentation": "<p>Removes the DDoS Response Team's (DRT) access to your AWS account.</p> <p>To make a <code>DisassociateDRTRole</code> request, you must be subscribed to the <a href=\"https://aws.amazon.com/premiumsupport/business-support/\">Business Support plan</a> or the <a href=\"https://aws.amazon.com/premiumsupport/enterprise-support/\">Enterprise Support plan</a>. However, if you are not subscribed to one of these support plans, but had been previously and had granted the DRT access to your account, you can submit a <code>DisassociateDRTRole</code> request to remove this access.</p>"
     },
     "DisassociateHealthCheck": {
       "name": "DisassociateHealthCheck",
@@ -430,6 +492,37 @@
         }
       ],
       "documentation": "<p>Removes health-based detection from the Shield Advanced protection for a resource. Shield Advanced health-based detection uses the health of your AWS resource to improve responsiveness and accuracy in attack detection and mitigation. </p> <p>You define the health check in Route 53 and then associate or disassociate it with your Shield Advanced protection. For more information, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/ddos-overview.html#ddos-advanced-health-check-option\">Shield Advanced Health-Based Detection</a> in the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/\">AWS WAF and AWS Shield Developer Guide</a>. </p>"
+    },
+    "EnableProactiveEngagement": {
+      "name": "EnableProactiveEngagement",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "EnableProactiveEngagementRequest"
+      },
+      "output": {
+        "shape": "EnableProactiveEngagementResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalErrorException"
+        },
+        {
+          "shape": "InvalidOperationException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "OptimisticLockException"
+        }
+      ],
+      "documentation": "<p>Authorizes the DDoS Response Team (DRT) to use email and phone to notify contacts about escalations to the DRT and to initiate proactive customer support.</p>"
     },
     "GetSubscriptionState": {
       "name": "GetSubscriptionState",
@@ -526,7 +619,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Updates the details of the list of email addresses that the DRT can use to contact you during a suspected attack.</p>"
+      "documentation": "<p>Updates the details of the list of email addresses and phone numbers that the DDoS Response Team (DRT) can use to contact you if you have proactive engagement enabled, for escalations to the DRT and to initiate proactive customer support.</p>"
     },
     "UpdateSubscription": {
       "name": "UpdateSubscription",
@@ -611,6 +704,22 @@
       }
     },
     "AssociateHealthCheckResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "AssociateProactiveEngagementDetailsRequest": {
+      "type": "structure",
+      "required": [
+        "EmergencyContactList"
+      ],
+      "members": {
+        "EmergencyContactList": {
+          "shape": "EmergencyContactList",
+          "documentation": "<p>A list of email addresses and phone numbers that the DDoS Response Team (DRT) can use to contact you for escalations to the DRT and to initiate proactive customer support. </p> <p>To enable proactive engagement, the contact list must include at least one phone number.</p> <note> <p>The contacts that you provide here replace any contacts that were already defined. If you already have contacts defined and want to use them, retrieve the list using <code>DescribeEmergencyContactSettings</code> and then provide it here. </p> </note>"
+        }
+      }
+    },
+    "AssociateProactiveEngagementDetailsResponse": {
       "type": "structure",
       "members": {}
     },
@@ -771,6 +880,12 @@
         "DISABLED"
       ]
     },
+    "ContactNotes": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "pattern": "^[\\w\\s\\.\\-,:/()+@]*$"
+    },
     "Contributor": {
       "type": "structure",
       "members": {
@@ -892,7 +1007,7 @@
       "members": {
         "EmergencyContactList": {
           "shape": "EmergencyContactList",
-          "documentation": "<p>A list of email addresses that the DRT can use to contact you during a suspected attack.</p>"
+          "documentation": "<p>A list of email addresses and phone numbers that the DDoS Response Team (DRT) can use to contact you if you have proactive engagement enabled, for escalations to the DRT and to initiate proactive customer support.</p>"
         }
       }
     },
@@ -930,6 +1045,14 @@
           "documentation": "<p>The AWS Shield Advanced subscription details for an account.</p>"
         }
       }
+    },
+    "DisableProactiveEngagementRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "DisableProactiveEngagementResponse": {
+      "type": "structure",
+      "members": {}
     },
     "DisassociateDRTLogBucketRequest": {
       "type": "structure",
@@ -997,10 +1120,18 @@
       "members": {
         "EmailAddress": {
           "shape": "EmailAddress",
-          "documentation": "<p>An email address that the DRT can use to contact you during a suspected attack.</p>"
+          "documentation": "<p>The email address for the contact.</p>"
+        },
+        "PhoneNumber": {
+          "shape": "PhoneNumber",
+          "documentation": "<p>The phone number for the contact.</p>"
+        },
+        "ContactNotes": {
+          "shape": "ContactNotes",
+          "documentation": "<p>Additional notes regarding the contact. </p>"
         }
       },
-      "documentation": "<p>Contact information that the DRT can use to contact you during a suspected attack.</p>"
+      "documentation": "<p>Contact information that the DRT can use to contact you if you have proactive engagement enabled, for escalations to the DRT and to initiate proactive customer support.</p>"
     },
     "EmergencyContactList": {
       "type": "list",
@@ -1009,6 +1140,14 @@
       },
       "max": 10,
       "min": 0
+    },
+    "EnableProactiveEngagementRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "EnableProactiveEngagementResponse": {
+      "type": "structure",
+      "members": {}
     },
     "GetSubscriptionStateRequest": {
       "type": "structure",
@@ -1167,6 +1306,20 @@
         "shape": "Mitigation"
       }
     },
+    "PhoneNumber": {
+      "type": "string",
+      "max": 40,
+      "min": 1,
+      "pattern": "^.*$"
+    },
+    "ProactiveEngagementStatus": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED",
+        "PENDING"
+      ]
+    },
     "Protection": {
       "type": "structure",
       "members": {
@@ -1285,6 +1438,10 @@
         "Limits": {
           "shape": "Limits",
           "documentation": "<p>Specifies how many protections of a given type you can create.</p>"
+        },
+        "ProactiveEngagementStatus": {
+          "shape": "ProactiveEngagementStatus",
+          "documentation": "<p>If <code>ENABLED</code>, the DDoS Response Team (DRT) will use email and phone to notify contacts about escalations to the DRT and to initiate proactive customer support.</p> <p>If <code>PENDING</code>, you have requested proactive engagement and the request is pending. The status changes to <code>ENABLED</code> when your request is fully processed.</p> <p>If <code>DISABLED</code>, the DRT will not proactively notify contacts about escalations or to initiate proactive customer support. </p>"
         }
       },
       "documentation": "<p>Information about the AWS Shield Advanced subscription for an account.</p>"
@@ -1398,7 +1555,7 @@
       "members": {
         "EmergencyContactList": {
           "shape": "EmergencyContactList",
-          "documentation": "<p>A list of email addresses that the DRT can use to contact you during a suspected attack.</p>"
+          "documentation": "<p>A list of email addresses and phone numbers that the DDoS Response Team (DRT) can use to contact you if you have proactive engagement enabled, for escalations to the DRT and to initiate proactive customer support.</p> <p>If you have proactive engagement enabled, the contact list must include at least one phone number.</p>"
         }
       }
     },
