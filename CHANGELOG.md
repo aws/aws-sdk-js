@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.692.0-->
+<!--LATEST=2.693.0-->
 <!--ENTRYINSERT-->
+
+## 2.693.0
+* feature: Transfer: This release updates the API so customers can test use of Source IP to allow, deny or limit access to data in their S3 buckets after integrating their identity provider.
 
 ## 2.692.0
 * feature: ServiceDiscovery: Added support for tagging Service and Namespace type resources  in Cloud Map
