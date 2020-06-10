@@ -256,9 +256,6 @@
           "shape": "InternalServerException"
         },
         {
-          "shape": "ResourceNotFoundException"
-        },
-        {
           "shape": "BadRequestException"
         }
       ],
@@ -791,7 +788,8 @@
       "pattern": "arn:(aws[a-zA-Z-]*)?:[a-z]+:([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:[a-zA-Z0-9-_/:.]+"
     },
     "Blob": {
-      "type": "blob"
+      "type": "blob",
+      "sensitive": true
     },
     "Configuration": {
       "type": "structure",
@@ -839,7 +837,7 @@
           "documentation": "<p>The URI location of the configuration.</p>"
         },
         "RetrievalRoleArn": {
-          "shape": "Arn",
+          "shape": "RoleArn",
           "documentation": "<p>The ARN of an IAM role with permission to access the configuration at the specified LocationUri.</p>"
         },
         "Validators": {
@@ -941,7 +939,7 @@
           "documentation": "<p>A URI to locate the configuration. You can specify a Systems Manager (SSM) document, an SSM Parameter Store parameter, or an Amazon S3 object. For an SSM document, specify either the document name in the format <code>ssm-document://&lt;Document_name&gt;</code> or the Amazon Resource Name (ARN). For a parameter, specify either the parameter name in the format <code>ssm-parameter://&lt;Parameter_name&gt;</code> or the ARN. For an Amazon S3 object, specify the URI in the following format: <code>s3://&lt;bucket&gt;/&lt;objectKey&gt; </code>. Here is an example: s3://my-bucket/my-app/us-east-1/my-config.json</p>"
         },
         "RetrievalRoleArn": {
-          "shape": "Arn",
+          "shape": "RoleArn",
           "documentation": "<p>The ARN of an IAM role with permission to access the configuration at the specified LocationUri.</p>"
         },
         "Validators": {
@@ -1285,7 +1283,7 @@
     },
     "DeploymentStrategyId": {
       "type": "string",
-      "pattern": "([a-z0-9]{4,7}|arn:aws.*)"
+      "pattern": "(^[a-z0-9]{4,7}$|^AppConfig\\.[A-Za-z0-9]{9,40}$)"
     },
     "DeploymentStrategyList": {
       "type": "list",
@@ -1737,7 +1735,7 @@
           "documentation": "<p>ARN of the Amazon CloudWatch alarm.</p>"
         },
         "AlarmRoleArn": {
-          "shape": "Arn",
+          "shape": "RoleArn",
           "documentation": "<p>ARN of an IAM role for AppConfig to monitor <code>AlarmArn</code>.</p>"
         }
       },
@@ -1781,6 +1779,12 @@
           "documentation": "<p>Metadata to assign to AppConfig resources. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.</p>"
         }
       }
+    },
+    "RoleArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 20,
+      "pattern": "^((arn):(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):(iam)::\\d{12}:role[/].*)$"
     },
     "StartDeploymentRequest": {
       "type": "structure",
@@ -1861,7 +1865,8 @@
     "StringWithLengthBetween0And32768": {
       "type": "string",
       "max": 32768,
-      "min": 0
+      "min": 0,
+      "sensitive": true
     },
     "StringWithLengthBetween1And64": {
       "type": "string",
@@ -1995,7 +2000,7 @@
           "documentation": "<p>A description of the configuration profile.</p>"
         },
         "RetrievalRoleArn": {
-          "shape": "Arn",
+          "shape": "RoleArn",
           "documentation": "<p>The ARN of an IAM role with permission to access the configuration at the specified LocationUri.</p>"
         },
         "Validators": {

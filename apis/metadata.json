@@ -874,5 +874,8 @@
   },
   "macie2": {
     "name": "Macie2"
+  },
+  "codeartifact": {
+    "name": "CodeArtifact"
   }
 }

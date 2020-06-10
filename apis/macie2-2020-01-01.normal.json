@@ -57,52 +57,6 @@
       ],
       "documentation": "<p>Accepts an Amazon Macie membership invitation that was received from a specific account.</p>"
     },
-    "ArchiveFindings": {
-      "name": "ArchiveFindings",
-      "http": {
-        "method": "POST",
-        "requestUri": "/findings/archive",
-        "responseCode": 200
-      },
-      "input": {
-        "shape": "ArchiveFindingsRequest"
-      },
-      "output": {
-        "shape": "ArchiveFindingsResponse",
-        "documentation": "<p>The request succeeded and there isn't any content to include in the body of the response (No Content).</p>"
-      },
-      "errors": [
-        {
-          "shape": "ValidationException",
-          "documentation": "<p>The request failed because it contains a syntax error.</p>"
-        },
-        {
-          "shape": "InternalServerException",
-          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure.</p>"
-        },
-        {
-          "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>The request failed because fulfilling the request would exceed one or more service quotas for your account.</p>"
-        },
-        {
-          "shape": "AccessDeniedException",
-          "documentation": "<p>The request was denied because you don't have sufficient access to the specified resource.</p>"
-        },
-        {
-          "shape": "ResourceNotFoundException",
-          "documentation": "<p>The request failed because the specified resource wasn't found.</p>"
-        },
-        {
-          "shape": "ThrottlingException",
-          "documentation": "<p>The request failed because you sent too many requests during a certain amount of time.</p>"
-        },
-        {
-          "shape": "ConflictException",
-          "documentation": "<p>The request failed because it conflicts with the current state of the specified resource.</p>"
-        }
-      ],
-      "documentation": " <p>Archives one or more findings.</p>"
-    },
     "BatchGetCustomDataIdentifiers": {
       "name": "BatchGetCustomDataIdentifiers",
       "http": {
@@ -2068,52 +2022,6 @@
       ],
       "documentation": "<p>Tests a custom data identifier.</p>"
     },
-    "UnarchiveFindings": {
-      "name": "UnarchiveFindings",
-      "http": {
-        "method": "POST",
-        "requestUri": "/findings/unarchive",
-        "responseCode": 200
-      },
-      "input": {
-        "shape": "UnarchiveFindingsRequest"
-      },
-      "output": {
-        "shape": "UnarchiveFindingsResponse",
-        "documentation": "<p>The request succeeded and there isn't any content to include in the body of the response (No Content).</p>"
-      },
-      "errors": [
-        {
-          "shape": "ValidationException",
-          "documentation": "<p>The request failed because it contains a syntax error.</p>"
-        },
-        {
-          "shape": "InternalServerException",
-          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure.</p>"
-        },
-        {
-          "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>The request failed because fulfilling the request would exceed one or more service quotas for your account.</p>"
-        },
-        {
-          "shape": "AccessDeniedException",
-          "documentation": "<p>The request was denied because you don't have sufficient access to the specified resource.</p>"
-        },
-        {
-          "shape": "ResourceNotFoundException",
-          "documentation": "<p>The request failed because the specified resource wasn't found.</p>"
-        },
-        {
-          "shape": "ThrottlingException",
-          "documentation": "<p>The request failed because you sent too many requests during a certain amount of time.</p>"
-        },
-        {
-          "shape": "ConflictException",
-          "documentation": "<p>The request failed because it conflicts with the current state of the specified resource.</p>"
-        }
-      ],
-      "documentation": " <p>Reactivates (unarchives) one or more findings.</p>"
-    },
     "UntagResource": {
       "name": "UntagResource",
       "http": {
@@ -2482,23 +2390,6 @@
         }
       },
       "documentation": "<p>Reserved for future use.</p>"
-    },
-    "ArchiveFindingsRequest": {
-      "type": "structure",
-      "members": {
-        "findingIds": {
-          "shape": "__listOf__string",
-          "locationName": "findingIds",
-          "documentation": "<p>An array of strings that lists the unique identifiers for the findings to archive.</p>"
-        }
-      },
-      "required": [
-        "findingIds"
-      ]
-    },
-    "ArchiveFindingsResponse": {
-      "type": "structure",
-      "members": {}
     },
     "AssumedRole": {
       "type": "structure",
@@ -3834,7 +3725,8 @@
       "enum": [
         "NONE",
         "AES256",
-        "aws:kms"
+        "aws:kms",
+        "UNKNOWN"
       ]
     },
     "ErrorCode": {
@@ -5984,23 +5876,6 @@
           "documentation": "<p>The number of instances of sample text that matched the detection criteria specified in the custom data identifier.</p>"
         }
       }
-    },
-    "UnarchiveFindingsRequest": {
-      "type": "structure",
-      "members": {
-        "findingIds": {
-          "shape": "__listOf__string",
-          "locationName": "findingIds",
-          "documentation": "<p>An array of strings that lists the unique identifiers for the findings to reactivate.</p>"
-        }
-      },
-      "required": [
-        "findingIds"
-      ]
-    },
-    "UnarchiveFindingsResponse": {
-      "type": "structure",
-      "members": {}
     },
     "Unit": {
       "type": "string",

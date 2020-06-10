@@ -20,14 +20,6 @@ declare class Macie2 extends Service {
    */
   acceptInvitation(callback?: (err: AWSError, data: Macie2.Types.AcceptInvitationResponse) => void): Request<Macie2.Types.AcceptInvitationResponse, AWSError>;
   /**
-   *  Archives one or more findings.
-   */
-  archiveFindings(params: Macie2.Types.ArchiveFindingsRequest, callback?: (err: AWSError, data: Macie2.Types.ArchiveFindingsResponse) => void): Request<Macie2.Types.ArchiveFindingsResponse, AWSError>;
-  /**
-   *  Archives one or more findings.
-   */
-  archiveFindings(callback?: (err: AWSError, data: Macie2.Types.ArchiveFindingsResponse) => void): Request<Macie2.Types.ArchiveFindingsResponse, AWSError>;
-  /**
    * Retrieves information about one or more custom data identifiers.
    */
   batchGetCustomDataIdentifiers(params: Macie2.Types.BatchGetCustomDataIdentifiersRequest, callback?: (err: AWSError, data: Macie2.Types.BatchGetCustomDataIdentifiersResponse) => void): Request<Macie2.Types.BatchGetCustomDataIdentifiersResponse, AWSError>;
@@ -380,14 +372,6 @@ declare class Macie2 extends Service {
    */
   testCustomDataIdentifier(callback?: (err: AWSError, data: Macie2.Types.TestCustomDataIdentifierResponse) => void): Request<Macie2.Types.TestCustomDataIdentifierResponse, AWSError>;
   /**
-   *  Reactivates (unarchives) one or more findings.
-   */
-  unarchiveFindings(params: Macie2.Types.UnarchiveFindingsRequest, callback?: (err: AWSError, data: Macie2.Types.UnarchiveFindingsResponse) => void): Request<Macie2.Types.UnarchiveFindingsResponse, AWSError>;
-  /**
-   *  Reactivates (unarchives) one or more findings.
-   */
-  unarchiveFindings(callback?: (err: AWSError, data: Macie2.Types.UnarchiveFindingsResponse) => void): Request<Macie2.Types.UnarchiveFindingsResponse, AWSError>;
-  /**
    * Removes one or more tags (keys and values) from a classification job, custom data identifier, findings filter, or member account.
    */
   untagResource(params: Macie2.Types.UntagResourceRequest, callback?: (err: AWSError, data: Macie2.Types.UntagResourceResponse) => void): Request<Macie2.Types.UntagResourceResponse, AWSError>;
@@ -503,14 +487,6 @@ declare namespace Macie2 {
      * Reserved for future use.
      */
     lastSeen?: __timestampIso8601;
-  }
-  export interface ArchiveFindingsRequest {
-    /**
-     * An array of strings that lists the unique identifiers for the findings to archive.
-     */
-    findingIds: __listOf__string;
-  }
-  export interface ArchiveFindingsResponse {
   }
   export interface AssumedRole {
     /**
@@ -1343,7 +1319,7 @@ declare namespace Macie2 {
   }
   export interface EnableOrganizationAdminAccountResponse {
   }
-  export type EncryptionType = "NONE"|"AES256"|"aws:kms"|string;
+  export type EncryptionType = "NONE"|"AES256"|"aws:kms"|"UNKNOWN"|string;
   export type ErrorCode = "ClientError"|"InternalError"|string;
   export interface FederatedUser {
     /**
@@ -2637,14 +2613,6 @@ declare namespace Macie2 {
      * The number of instances of sample text that matched the detection criteria specified in the custom data identifier.
      */
     matchCount?: __integer;
-  }
-  export interface UnarchiveFindingsRequest {
-    /**
-     * An array of strings that lists the unique identifiers for the findings to reactivate.
-     */
-    findingIds: __listOf__string;
-  }
-  export interface UnarchiveFindingsResponse {
   }
   export type Unit = "TERABYTES"|string;
   export interface UnprocessedAccount {

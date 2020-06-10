@@ -310,7 +310,7 @@ declare namespace AppConfig {
     /**
      * The ARN of an IAM role with permission to access the configuration at the specified LocationUri.
      */
-    RetrievalRoleArn?: Arn;
+    RetrievalRoleArn?: RoleArn;
     /**
      * A list of methods for validating the configuration.
      */
@@ -383,7 +383,7 @@ declare namespace AppConfig {
     /**
      * The ARN of an IAM role with permission to access the configuration at the specified LocationUri.
      */
-    RetrievalRoleArn: Arn;
+    RetrievalRoleArn: RoleArn;
     /**
      * A list of methods for validating the configuration.
      */
@@ -873,7 +873,7 @@ declare namespace AppConfig {
     /**
      * ARN of an IAM role for AppConfig to monitor AlarmArn.
      */
-    AlarmRoleArn?: Arn;
+    AlarmRoleArn?: RoleArn;
   }
   export type MonitorList = Monitor[];
   export type Name = string;
@@ -886,6 +886,7 @@ declare namespace AppConfig {
      */
     Tags?: TagMap;
   }
+  export type RoleArn = string;
   export interface StartDeploymentRequest {
     /**
      * The application ID.
@@ -992,7 +993,7 @@ declare namespace AppConfig {
     /**
      * The ARN of an IAM role with permission to access the configuration at the specified LocationUri.
      */
-    RetrievalRoleArn?: Arn;
+    RetrievalRoleArn?: RoleArn;
     /**
      * A list of methods for validating the configuration.
      */

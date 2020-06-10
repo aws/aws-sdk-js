@@ -13,6 +13,126 @@
     "uid": "compute-optimizer-2019-11-01"
   },
   "operations": {
+    "DescribeRecommendationExportJobs": {
+      "name": "DescribeRecommendationExportJobs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeRecommendationExportJobsRequest"
+      },
+      "output": {
+        "shape": "DescribeRecommendationExportJobsResponse"
+      },
+      "errors": [
+        {
+          "shape": "OptInRequiredException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "MissingAuthenticationToken"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Describes recommendation export jobs created in the last seven days.</p> <p>Use the <code>ExportAutoScalingGroupRecommendations</code> or <code>ExportEC2InstanceRecommendations</code> actions to request an export of your recommendations. Then use the <code>DescribeRecommendationExportJobs</code> action to view your export jobs.</p>"
+    },
+    "ExportAutoScalingGroupRecommendations": {
+      "name": "ExportAutoScalingGroupRecommendations",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ExportAutoScalingGroupRecommendationsRequest"
+      },
+      "output": {
+        "shape": "ExportAutoScalingGroupRecommendationsResponse"
+      },
+      "errors": [
+        {
+          "shape": "OptInRequiredException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "MissingAuthenticationToken"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p>Exports optimization recommendations for Auto Scaling groups.</p> <p>Recommendations are exported in a comma-separated values (.csv) file, and its metadata in a JavaScript Object Notation (.json) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html\">Exporting Recommendations</a> in the <i>Compute Optimizer User Guide</i>.</p> <p>You can have only one Auto Scaling group export job in progress per AWS Region.</p>"
+    },
+    "ExportEC2InstanceRecommendations": {
+      "name": "ExportEC2InstanceRecommendations",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ExportEC2InstanceRecommendationsRequest"
+      },
+      "output": {
+        "shape": "ExportEC2InstanceRecommendationsResponse"
+      },
+      "errors": [
+        {
+          "shape": "OptInRequiredException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "MissingAuthenticationToken"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p>Exports optimization recommendations for Amazon EC2 instances.</p> <p>Recommendations are exported in a comma-separated values (.csv) file, and its metadata in a JavaScript Object Notation (.json) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html\">Exporting Recommendations</a> in the <i>Compute Optimizer User Guide</i>.</p> <p>You can have only one Amazon EC2 instance export job in progress per AWS Region.</p>"
+    },
     "GetAutoScalingGroupRecommendations": {
       "name": "GetAutoScalingGroupRecommendations",
       "http": {
@@ -165,7 +285,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Returns the enrollment (opt in) status of an account to the AWS Compute Optimizer service.</p> <p>If the account is a master account of an organization, this operation also confirms the enrollment status of member accounts within the organization.</p>"
+      "documentation": "<p>Returns the enrollment (opt in) status of an account to the AWS Compute Optimizer service.</p> <p>If the account is the master account of an organization, this action also confirms the enrollment status of member accounts within the organization.</p>"
     },
     "GetRecommendationSummaries": {
       "name": "GetRecommendationSummaries",
@@ -236,7 +356,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Updates the enrollment (opt in) status of an account to the AWS Compute Optimizer service.</p> <p>If the account is a master account of an organization, this operation can also enroll member accounts within the organization.</p>"
+      "documentation": "<p>Updates the enrollment (opt in) status of an account to the AWS Compute Optimizer service.</p> <p>If the account is a master account of an organization, this action can also be used to enroll member accounts within the organization.</p>"
     }
   },
   "shapes": {
@@ -362,22 +482,261 @@
     "Code": {
       "type": "string"
     },
+    "CreationTimestamp": {
+      "type": "timestamp"
+    },
     "CurrentInstanceType": {
       "type": "string"
     },
+    "DescribeRecommendationExportJobsRequest": {
+      "type": "structure",
+      "members": {
+        "jobIds": {
+          "shape": "JobIds",
+          "documentation": "<p>The identification numbers of the export jobs to return.</p> <p>An export job ID is returned when you create an export using the <code>ExportAutoScalingGroupRecommendations</code> or <code>ExportEC2InstanceRecommendations</code> actions.</p> <p>All export jobs created in the last seven days are returned if this parameter is omitted.</p>"
+        },
+        "filters": {
+          "shape": "JobFilters",
+          "documentation": "<p>An array of objects that describe a filter to return a more specific list of export jobs.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to advance to the next page of export jobs.</p>"
+        },
+        "maxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of export jobs to return with a single request.</p> <p>To retrieve the remaining results, make another request with the returned <code>NextToken</code> value.</p>"
+        }
+      }
+    },
+    "DescribeRecommendationExportJobsResponse": {
+      "type": "structure",
+      "members": {
+        "recommendationExportJobs": {
+          "shape": "RecommendationExportJobs",
+          "documentation": "<p>An array of objects that describe recommendation export jobs.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to use to advance to the next page of export jobs.</p> <p>This value is null when there are no more pages of export jobs to return.</p>"
+        }
+      }
+    },
     "DesiredCapacity": {
       "type": "integer"
+    },
+    "DestinationBucket": {
+      "type": "string"
+    },
+    "DestinationKey": {
+      "type": "string"
+    },
+    "DestinationKeyPrefix": {
+      "type": "string"
+    },
+    "ExportAutoScalingGroupRecommendationsRequest": {
+      "type": "structure",
+      "required": [
+        "s3DestinationConfig"
+      ],
+      "members": {
+        "accountIds": {
+          "shape": "AccountIds",
+          "documentation": "<p>The IDs of the AWS accounts for which to export Auto Scaling group recommendations.</p> <p>If your account is the master account of an organization, use this parameter to specify the member accounts for which you want to export recommendations.</p> <p>This parameter cannot be specified together with the include member accounts parameter. The parameters are mutually exclusive.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the include member accounts parameter, is omitted.</p> <p>You can specify multiple account IDs per request.</p>"
+        },
+        "filters": {
+          "shape": "Filters",
+          "documentation": "<p>An array of objects that describe a filter to export a more specific set of Auto Scaling group recommendations.</p>"
+        },
+        "fieldsToExport": {
+          "shape": "ExportableAutoScalingGroupFields",
+          "documentation": "<p>The recommendations data to include in the export file.</p>"
+        },
+        "s3DestinationConfig": {
+          "shape": "S3DestinationConfig",
+          "documentation": "<p>An object to specify the destination Amazon Simple Storage Service (Amazon S3) bucket name and key prefix for the export job.</p> <p>You must create the destination Amazon S3 bucket for your recommendations export before you create the export job. Compute Optimizer does not create the S3 bucket for you. After you create the S3 bucket, ensure that it has the required permission policy to allow Compute Optimizer to write the export file to it. If you plan to specify an object prefix when you create the export job, you must include the object prefix in the policy that you add to the S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html\">Amazon S3 Bucket Policy for Compute Optimizer</a> in the <i>Compute Optimizer user guide</i>.</p>"
+        },
+        "fileFormat": {
+          "shape": "FileFormat",
+          "documentation": "<p>The format of the export file.</p> <p>The only export file format currently supported is <code>Csv</code>.</p>"
+        },
+        "includeMemberAccounts": {
+          "shape": "IncludeMemberAccounts",
+          "documentation": "<p>Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the master account of an organization.</p> <p>The member accounts must also be opted in to Compute Optimizer.</p> <p>Recommendations for member accounts of the organization are not included in the export file if this parameter is omitted.</p> <p>This parameter cannot be specified together with the account IDs parameter. The parameters are mutually exclusive.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the account IDs parameter, is omitted.</p>"
+        }
+      }
+    },
+    "ExportAutoScalingGroupRecommendationsResponse": {
+      "type": "structure",
+      "members": {
+        "jobId": {
+          "shape": "JobId",
+          "documentation": "<p>The identification number of the export job.</p> <p>Use the <code>DescribeRecommendationExportJobs</code> action, and specify the job ID to view the status of an export job.</p>"
+        },
+        "s3Destination": {
+          "shape": "S3Destination",
+          "documentation": "<p>An object that describes the destination Amazon S3 bucket of a recommendations export file.</p>"
+        }
+      }
+    },
+    "ExportDestination": {
+      "type": "structure",
+      "members": {
+        "s3": {
+          "shape": "S3Destination",
+          "documentation": "<p>An object that describes the destination Amazon Simple Storage Service (Amazon S3) bucket name and object keys of a recommendations export file, and its associated metadata file.</p>"
+        }
+      },
+      "documentation": "<p>Describes the destination of the recommendations export and metadata files.</p>"
+    },
+    "ExportEC2InstanceRecommendationsRequest": {
+      "type": "structure",
+      "required": [
+        "s3DestinationConfig"
+      ],
+      "members": {
+        "accountIds": {
+          "shape": "AccountIds",
+          "documentation": "<p>The IDs of the AWS accounts for which to export instance recommendations.</p> <p>If your account is the master account of an organization, use this parameter to specify the member accounts for which you want to export recommendations.</p> <p>This parameter cannot be specified together with the include member accounts parameter. The parameters are mutually exclusive.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the include member accounts parameter, is omitted.</p> <p>You can specify multiple account IDs per request.</p>"
+        },
+        "filters": {
+          "shape": "Filters",
+          "documentation": "<p>An array of objects that describe a filter to export a more specific set of instance recommendations.</p>"
+        },
+        "fieldsToExport": {
+          "shape": "ExportableInstanceFields",
+          "documentation": "<p>The recommendations data to include in the export file.</p>"
+        },
+        "s3DestinationConfig": {
+          "shape": "S3DestinationConfig",
+          "documentation": "<p>An object to specify the destination Amazon Simple Storage Service (Amazon S3) bucket name and key prefix for the export job.</p> <p>You must create the destination Amazon S3 bucket for your recommendations export before you create the export job. Compute Optimizer does not create the S3 bucket for you. After you create the S3 bucket, ensure that it has the required permission policy to allow Compute Optimizer to write the export file to it. If you plan to specify an object prefix when you create the export job, you must include the object prefix in the policy that you add to the S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html\">Amazon S3 Bucket Policy for Compute Optimizer</a> in the <i>Compute Optimizer user guide</i>.</p>"
+        },
+        "fileFormat": {
+          "shape": "FileFormat",
+          "documentation": "<p>The format of the export file.</p> <p>The only export file format currently supported is <code>Csv</code>.</p>"
+        },
+        "includeMemberAccounts": {
+          "shape": "IncludeMemberAccounts",
+          "documentation": "<p>Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the master account of an organization.</p> <p>The member accounts must also be opted in to Compute Optimizer.</p> <p>Recommendations for member accounts of the organization are not included in the export file if this parameter is omitted.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the account IDs parameter, is omitted.</p>"
+        }
+      }
+    },
+    "ExportEC2InstanceRecommendationsResponse": {
+      "type": "structure",
+      "members": {
+        "jobId": {
+          "shape": "JobId",
+          "documentation": "<p>The identification number of the export job.</p> <p>Use the <code>DescribeRecommendationExportJobs</code> action, and specify the job ID to view the status of an export job.</p>"
+        },
+        "s3Destination": {
+          "shape": "S3Destination",
+          "documentation": "<p>An object that describes the destination Amazon S3 bucket of a recommendations export file.</p>"
+        }
+      }
+    },
+    "ExportableAutoScalingGroupField": {
+      "type": "string",
+      "enum": [
+        "AccountId",
+        "AutoScalingGroupArn",
+        "AutoScalingGroupName",
+        "Finding",
+        "UtilizationMetricsCpuMaximum",
+        "UtilizationMetricsMemoryMaximum",
+        "LookbackPeriodInDays",
+        "CurrentConfigurationInstanceType",
+        "CurrentConfigurationDesiredCapacity",
+        "CurrentConfigurationMinSize",
+        "CurrentConfigurationMaxSize",
+        "CurrentOnDemandPrice",
+        "CurrentStandardOneYearNoUpfrontReservedPrice",
+        "CurrentStandardThreeYearNoUpfrontReservedPrice",
+        "CurrentVCpus",
+        "CurrentMemory",
+        "CurrentStorage",
+        "CurrentNetwork",
+        "RecommendationOptionsConfigurationInstanceType",
+        "RecommendationOptionsConfigurationDesiredCapacity",
+        "RecommendationOptionsConfigurationMinSize",
+        "RecommendationOptionsConfigurationMaxSize",
+        "RecommendationOptionsProjectedUtilizationMetricsCpuMaximum",
+        "RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum",
+        "RecommendationOptionsPerformanceRisk",
+        "RecommendationOptionsOnDemandPrice",
+        "RecommendationOptionsStandardOneYearNoUpfrontReservedPrice",
+        "RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice",
+        "RecommendationOptionsVcpus",
+        "RecommendationOptionsMemory",
+        "RecommendationOptionsStorage",
+        "RecommendationOptionsNetwork",
+        "LastRefreshTimestamp"
+      ]
+    },
+    "ExportableAutoScalingGroupFields": {
+      "type": "list",
+      "member": {
+        "shape": "ExportableAutoScalingGroupField"
+      }
+    },
+    "ExportableInstanceField": {
+      "type": "string",
+      "enum": [
+        "AccountId",
+        "InstanceArn",
+        "InstanceName",
+        "Finding",
+        "LookbackPeriodInDays",
+        "CurrentInstanceType",
+        "UtilizationMetricsCpuMaximum",
+        "UtilizationMetricsMemoryMaximum",
+        "CurrentOnDemandPrice",
+        "CurrentStandardOneYearNoUpfrontReservedPrice",
+        "CurrentStandardThreeYearNoUpfrontReservedPrice",
+        "CurrentVCpus",
+        "CurrentMemory",
+        "CurrentStorage",
+        "CurrentNetwork",
+        "RecommendationOptionsInstanceType",
+        "RecommendationOptionsProjectedUtilizationMetricsCpuMaximum",
+        "RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum",
+        "RecommendationOptionsPerformanceRisk",
+        "RecommendationOptionsVcpus",
+        "RecommendationOptionsMemory",
+        "RecommendationOptionsStorage",
+        "RecommendationOptionsNetwork",
+        "RecommendationOptionsOnDemandPrice",
+        "RecommendationOptionsStandardOneYearNoUpfrontReservedPrice",
+        "RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice",
+        "RecommendationsSourcesRecommendationSourceArn",
+        "RecommendationsSourcesRecommendationSourceType",
+        "LastRefreshTimestamp"
+      ]
+    },
+    "ExportableInstanceFields": {
+      "type": "list",
+      "member": {
+        "shape": "ExportableInstanceField"
+      }
+    },
+    "FailureReason": {
+      "type": "string"
+    },
+    "FileFormat": {
+      "type": "string",
+      "enum": [
+        "Csv"
+      ]
     },
     "Filter": {
       "type": "structure",
       "members": {
         "name": {
           "shape": "FilterName",
-          "documentation": "<p>The name of the filter.</p> <p>Specify <code>Finding</code> to filter the results to a specific findings classification.</p> <p>Specify <code>RecommendationSourceType</code> to filter the results to a specific resource type.</p>"
+          "documentation": "<p>The name of the filter.</p> <p>Specify <code>Finding</code> to return recommendations with a specific findings classification (e.g., <code>Overprovisioned</code>).</p> <p>Specify <code>RecommendationSourceType</code> to return recommendations of a specific resource type (e.g., <code>AutoScalingGroup</code>).</p>"
         },
         "values": {
           "shape": "FilterValues",
-          "documentation": "<p>The value of the filter.</p> <p>If you specify the <code>name</code> parameter as <code>Finding</code>, and you're recommendations for an <i>instance</i>, then the valid values are <code>Underprovisioned</code>, <code>Overprovisioned</code>, <code>NotOptimized</code>, or <code>Optimized</code>.</p> <p>If you specify the <code>name</code> parameter as <code>Finding</code>, and you're recommendations for an <i>Auto Scaling group</i>, then the valid values are <code>Optimized</code>, or <code>NotOptimized</code>.</p> <p>If you specify the <code>name</code> parameter as <code>RecommendationSourceType</code>, then the valid values are <code>EC2Instance</code>, or <code>AutoScalingGroup</code>.</p>"
+          "documentation": "<p>The value of the filter.</p> <p>If you specify the <code>name</code> parameter as <code>Finding</code>, and you request recommendations for an <i>instance</i>, then the valid values are <code>Underprovisioned</code>, <code>Overprovisioned</code>, <code>NotOptimized</code>, or <code>Optimized</code>.</p> <p>If you specify the <code>name</code> parameter as <code>Finding</code>, and you request recommendations for an <i>Auto Scaling group</i>, then the valid values are <code>Optimized</code>, or <code>NotOptimized</code>.</p> <p>If you specify the <code>name</code> parameter as <code>RecommendationSourceType</code>, then the valid values are <code>Ec2Instance</code>, or <code>AutoScalingGroup</code>.</p>"
         }
       },
       "documentation": "<p>Describes a filter that returns a more specific list of recommendations.</p>"
@@ -418,7 +777,7 @@
       "members": {
         "accountIds": {
           "shape": "AccountIds",
-          "documentation": "<p>The AWS account IDs for which to return Auto Scaling group recommendations.</p> <p>Only one account ID can be specified per request.</p>"
+          "documentation": "<p>The IDs of the AWS accounts for which to return Auto Scaling group recommendations.</p> <p>If your account is the master account of an organization, use this parameter to specify the member accounts for which you want to return Auto Scaling group recommendations.</p> <p>Only one account ID can be specified per request.</p>"
         },
         "autoScalingGroupArns": {
           "shape": "AutoScalingGroupArns",
@@ -430,7 +789,7 @@
         },
         "maxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>The maximum number of Auto Scaling group recommendations to return with a single call.</p> <p>To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.</p>"
+          "documentation": "<p>The maximum number of Auto Scaling group recommendations to return with a single request.</p> <p>To retrieve the remaining results, make another request with the returned <code>NextToken</code> value.</p>"
         },
         "filters": {
           "shape": "Filters",
@@ -468,7 +827,7 @@
         },
         "maxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>The maximum number of instance recommendations to return with a single call.</p> <p>To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.</p>"
+          "documentation": "<p>The maximum number of instance recommendations to return with a single request.</p> <p>To retrieve the remaining results, make another request with the returned <code>NextToken</code> value.</p>"
         },
         "filters": {
           "shape": "Filters",
@@ -476,7 +835,7 @@
         },
         "accountIds": {
           "shape": "AccountIds",
-          "documentation": "<p>The AWS account IDs for which to return instance recommendations.</p> <p>Only one account ID can be specified per request.</p>"
+          "documentation": "<p>The IDs of the AWS accounts for which to return instance recommendations.</p> <p>If your account is the master account of an organization, use this parameter to specify the member accounts for which you want to return instance recommendations.</p> <p>Only one account ID can be specified per request.</p>"
         }
       }
     },
@@ -588,7 +947,7 @@
       "members": {
         "accountIds": {
           "shape": "AccountIds",
-          "documentation": "<p>The AWS account IDs for which to return recommendation summaries.</p> <p>Only one account ID can be specified per request.</p>"
+          "documentation": "<p>The IDs of the AWS accounts for which to return recommendation summaries.</p> <p>If your account is the master account of an organization, use this parameter to specify the member accounts for which you want to return recommendation summaries.</p> <p>Only one account ID can be specified per request.</p>"
         },
         "nextToken": {
           "shape": "NextToken",
@@ -596,7 +955,7 @@
         },
         "maxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>The maximum number of recommendation summaries to return with a single call.</p> <p>To retrieve the remaining results, make another call with the returned <code>NextToken</code> value.</p>"
+          "documentation": "<p>The maximum number of recommendation summaries to return with a single request.</p> <p>To retrieve the remaining results, make another request with the returned <code>NextToken</code> value.</p>"
         }
       }
     },
@@ -640,7 +999,7 @@
         },
         "accountId": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS account ID of the instance recommendation.</p>"
+          "documentation": "<p>The AWS account ID of the instance.</p>"
         },
         "instanceName": {
           "shape": "InstanceName",
@@ -708,7 +1067,55 @@
     "InstanceType": {
       "type": "string"
     },
+    "JobFilter": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "JobFilterName",
+          "documentation": "<p>The name of the filter.</p> <p>Specify <code>ResourceType</code> to return export jobs of a specific resource type (e.g., <code>Ec2Instance</code>).</p> <p>Specify <code>JobStatus</code> to return export jobs with a specific status (e.g, <code>Complete</code>).</p>"
+        },
+        "values": {
+          "shape": "FilterValues",
+          "documentation": "<p>The value of the filter.</p> <p>If you specify the <code>name</code> parameter as <code>ResourceType</code>, the valid values are <code>Ec2Instance</code> or <code>AutoScalingGroup</code>.</p> <p>If you specify the <code>name</code> parameter as <code>JobStatus</code>, the valid values are <code>Queued</code>, <code>InProgress</code>, <code>Complete</code>, or <code>Failed</code>.</p>"
+        }
+      },
+      "documentation": "<p>Describes a filter that returns a more specific list of recommendation export jobs.</p> <p>This filter is used with the <code>DescribeRecommendationExportJobs</code> action.</p>"
+    },
+    "JobFilterName": {
+      "type": "string",
+      "enum": [
+        "ResourceType",
+        "JobStatus"
+      ]
+    },
+    "JobFilters": {
+      "type": "list",
+      "member": {
+        "shape": "JobFilter"
+      }
+    },
+    "JobId": {
+      "type": "string"
+    },
+    "JobIds": {
+      "type": "list",
+      "member": {
+        "shape": "JobId"
+      }
+    },
+    "JobStatus": {
+      "type": "string",
+      "enum": [
+        "Queued",
+        "InProgress",
+        "Complete",
+        "Failed"
+      ]
+    },
     "LastRefreshTimestamp": {
+      "type": "timestamp"
+    },
+    "LastUpdatedTimestamp": {
       "type": "timestamp"
     },
     "LookBackPeriodInDays": {
@@ -725,6 +1132,9 @@
       "type": "boolean"
     },
     "Message": {
+      "type": "string"
+    },
+    "MetadataKey": {
       "type": "string"
     },
     "MetricName": {
@@ -796,6 +1206,46 @@
     },
     "Rank": {
       "type": "integer"
+    },
+    "RecommendationExportJob": {
+      "type": "structure",
+      "members": {
+        "jobId": {
+          "shape": "JobId",
+          "documentation": "<p>The identification number of the export job.</p>"
+        },
+        "destination": {
+          "shape": "ExportDestination",
+          "documentation": "<p>An object that describes the destination of the export file.</p>"
+        },
+        "resourceType": {
+          "shape": "ResourceType",
+          "documentation": "<p>The resource type of the exported recommendations.</p>"
+        },
+        "status": {
+          "shape": "JobStatus",
+          "documentation": "<p>The status of the export job.</p>"
+        },
+        "creationTimestamp": {
+          "shape": "CreationTimestamp",
+          "documentation": "<p>The timestamp of when the export job was created.</p>"
+        },
+        "lastUpdatedTimestamp": {
+          "shape": "LastUpdatedTimestamp",
+          "documentation": "<p>The timestamp of when the export job was last updated.</p>"
+        },
+        "failureReason": {
+          "shape": "FailureReason",
+          "documentation": "<p>The reason for an export job failure.</p>"
+        }
+      },
+      "documentation": "<p>Describes a recommendation export job.</p> <p>Use the <code>DescribeRecommendationExportJobs</code> action to view your recommendation export jobs.</p> <p>Use the <code>ExportAutoScalingGroupRecommendations</code> or <code>ExportEC2InstanceRecommendations</code> actions to request an export of your recommendations.</p>"
+    },
+    "RecommendationExportJobs": {
+      "type": "list",
+      "member": {
+        "shape": "RecommendationExportJob"
+      }
     },
     "RecommendationOptions": {
       "type": "list",
@@ -884,6 +1334,45 @@
         "shape": "RecommendedOptionProjectedMetric"
       }
     },
+    "ResourceType": {
+      "type": "string",
+      "enum": [
+        "Ec2Instance",
+        "AutoScalingGroup"
+      ]
+    },
+    "S3Destination": {
+      "type": "structure",
+      "members": {
+        "bucket": {
+          "shape": "DestinationBucket",
+          "documentation": "<p>The name of the Amazon S3 bucket used as the destination of an export file.</p>"
+        },
+        "key": {
+          "shape": "DestinationKey",
+          "documentation": "<p>The Amazon S3 bucket key of an export file.</p> <p>The key uniquely identifies the object, or export file, in the S3 bucket.</p>"
+        },
+        "metadataKey": {
+          "shape": "MetadataKey",
+          "documentation": "<p>The Amazon S3 bucket key of a metadata file.</p> <p>The key uniquely identifies the object, or metadata file, in the S3 bucket.</p>"
+        }
+      },
+      "documentation": "<p>Describes the destination Amazon Simple Storage Service (Amazon S3) bucket name and object keys of a recommendations export file, and its associated metadata file.</p>"
+    },
+    "S3DestinationConfig": {
+      "type": "structure",
+      "members": {
+        "bucket": {
+          "shape": "DestinationBucket",
+          "documentation": "<p>The name of the Amazon S3 bucket to use as the destination for an export job.</p>"
+        },
+        "keyPrefix": {
+          "shape": "DestinationKeyPrefix",
+          "documentation": "<p>The Amazon S3 bucket prefix for an export job.</p>"
+        }
+      },
+      "documentation": "<p>Describes the destination Amazon Simple Storage Service (Amazon S3) bucket name and key prefix for a recommendations export job.</p> <p>You must create the destination Amazon S3 bucket for your recommendations export before you create the export job. Compute Optimizer does not create the S3 bucket for you. After you create the S3 bucket, ensure that it has the required permission policy to allow Compute Optimizer to write the export file to it. If you plan to specify an object prefix when you create the export job, you must include the object prefix in the policy that you add to the S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html\">Amazon S3 Bucket Policy for Compute Optimizer</a> in the <i>Compute Optimizer user guide</i>.</p>"
+    },
     "Status": {
       "type": "string",
       "enum": [
@@ -940,7 +1429,7 @@
         },
         "includeMemberAccounts": {
           "shape": "IncludeMemberAccounts",
-          "documentation": "<p>Indicates whether to enroll member accounts within the organization, if the account is a master account of an organization.</p>"
+          "documentation": "<p>Indicates whether to enroll member accounts of the organization if the your account is the master account of an organization.</p>"
         }
       }
     },
@@ -982,5 +1471,5 @@
       }
     }
   },
-  "documentation": "<p>AWS Compute Optimizer is a service that analyzes the configuration and utilization metrics of your AWS resources, such as EC2 instances and Auto Scaling groups. It reports whether your resources are optimal, and generates optimization recommendations to reduce the cost and improve the performance of your workloads. Compute Optimizer also provides recent utilization metric data, as well as projected utilization metric data for the recommendations, which you can use to evaluate which recommendation provides the best price-performance trade-off. The analysis of your usage patterns can help you decide when to move or resize your running resources, and still meet your performance and capacity requirements. For more information about Compute Optimizer, see the <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/\">AWS Compute Optimizer User Guide</a>.</p>"
+  "documentation": "<p>AWS Compute Optimizer is a service that analyzes the configuration and utilization metrics of your AWS resources, such as EC2 instances and Auto Scaling groups. It reports whether your resources are optimal, and generates optimization recommendations to reduce the cost and improve the performance of your workloads. Compute Optimizer also provides recent utilization metric data, as well as projected utilization metric data for the recommendations, which you can use to evaluate which recommendation provides the best price-performance trade-off. The analysis of your usage patterns can help you decide when to move or resize your running resources, and still meet your performance and capacity requirements. For more information about Compute Optimizer, including the required permissions to use the service, see the <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/\">AWS Compute Optimizer User Guide</a>.</p>"
 }

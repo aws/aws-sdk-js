@@ -12,6 +12,30 @@ declare class ComputeOptimizer extends Service {
   constructor(options?: ComputeOptimizer.Types.ClientConfiguration)
   config: Config & ComputeOptimizer.Types.ClientConfiguration;
   /**
+   * Describes recommendation export jobs created in the last seven days. Use the ExportAutoScalingGroupRecommendations or ExportEC2InstanceRecommendations actions to request an export of your recommendations. Then use the DescribeRecommendationExportJobs action to view your export jobs.
+   */
+  describeRecommendationExportJobs(params: ComputeOptimizer.Types.DescribeRecommendationExportJobsRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.DescribeRecommendationExportJobsResponse) => void): Request<ComputeOptimizer.Types.DescribeRecommendationExportJobsResponse, AWSError>;
+  /**
+   * Describes recommendation export jobs created in the last seven days. Use the ExportAutoScalingGroupRecommendations or ExportEC2InstanceRecommendations actions to request an export of your recommendations. Then use the DescribeRecommendationExportJobs action to view your export jobs.
+   */
+  describeRecommendationExportJobs(callback?: (err: AWSError, data: ComputeOptimizer.Types.DescribeRecommendationExportJobsResponse) => void): Request<ComputeOptimizer.Types.DescribeRecommendationExportJobsResponse, AWSError>;
+  /**
+   * Exports optimization recommendations for Auto Scaling groups. Recommendations are exported in a comma-separated values (.csv) file, and its metadata in a JavaScript Object Notation (.json) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see Exporting Recommendations in the Compute Optimizer User Guide. You can have only one Auto Scaling group export job in progress per AWS Region.
+   */
+  exportAutoScalingGroupRecommendations(params: ComputeOptimizer.Types.ExportAutoScalingGroupRecommendationsRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.ExportAutoScalingGroupRecommendationsResponse) => void): Request<ComputeOptimizer.Types.ExportAutoScalingGroupRecommendationsResponse, AWSError>;
+  /**
+   * Exports optimization recommendations for Auto Scaling groups. Recommendations are exported in a comma-separated values (.csv) file, and its metadata in a JavaScript Object Notation (.json) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see Exporting Recommendations in the Compute Optimizer User Guide. You can have only one Auto Scaling group export job in progress per AWS Region.
+   */
+  exportAutoScalingGroupRecommendations(callback?: (err: AWSError, data: ComputeOptimizer.Types.ExportAutoScalingGroupRecommendationsResponse) => void): Request<ComputeOptimizer.Types.ExportAutoScalingGroupRecommendationsResponse, AWSError>;
+  /**
+   * Exports optimization recommendations for Amazon EC2 instances. Recommendations are exported in a comma-separated values (.csv) file, and its metadata in a JavaScript Object Notation (.json) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see Exporting Recommendations in the Compute Optimizer User Guide. You can have only one Amazon EC2 instance export job in progress per AWS Region.
+   */
+  exportEC2InstanceRecommendations(params: ComputeOptimizer.Types.ExportEC2InstanceRecommendationsRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.ExportEC2InstanceRecommendationsResponse) => void): Request<ComputeOptimizer.Types.ExportEC2InstanceRecommendationsResponse, AWSError>;
+  /**
+   * Exports optimization recommendations for Amazon EC2 instances. Recommendations are exported in a comma-separated values (.csv) file, and its metadata in a JavaScript Object Notation (.json) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see Exporting Recommendations in the Compute Optimizer User Guide. You can have only one Amazon EC2 instance export job in progress per AWS Region.
+   */
+  exportEC2InstanceRecommendations(callback?: (err: AWSError, data: ComputeOptimizer.Types.ExportEC2InstanceRecommendationsResponse) => void): Request<ComputeOptimizer.Types.ExportEC2InstanceRecommendationsResponse, AWSError>;
+  /**
    * Returns Auto Scaling group recommendations. AWS Compute Optimizer currently generates recommendations for Auto Scaling groups that are configured to run instances of the M, C, R, T, and X instance families. The service does not generate recommendations for Auto Scaling groups that have a scaling policy attached to them, or that do not have the same values for desired, minimum, and maximum capacity. In order for Compute Optimizer to analyze your Auto Scaling groups, they must be of a fixed size. For more information, see the AWS Compute Optimizer User Guide.
    */
   getAutoScalingGroupRecommendations(params: ComputeOptimizer.Types.GetAutoScalingGroupRecommendationsRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.GetAutoScalingGroupRecommendationsResponse) => void): Request<ComputeOptimizer.Types.GetAutoScalingGroupRecommendationsResponse, AWSError>;
@@ -36,11 +60,11 @@ declare class ComputeOptimizer extends Service {
    */
   getEC2RecommendationProjectedMetrics(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetEC2RecommendationProjectedMetricsResponse) => void): Request<ComputeOptimizer.Types.GetEC2RecommendationProjectedMetricsResponse, AWSError>;
   /**
-   * Returns the enrollment (opt in) status of an account to the AWS Compute Optimizer service. If the account is a master account of an organization, this operation also confirms the enrollment status of member accounts within the organization.
+   * Returns the enrollment (opt in) status of an account to the AWS Compute Optimizer service. If the account is the master account of an organization, this action also confirms the enrollment status of member accounts within the organization.
    */
   getEnrollmentStatus(params: ComputeOptimizer.Types.GetEnrollmentStatusRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.GetEnrollmentStatusResponse) => void): Request<ComputeOptimizer.Types.GetEnrollmentStatusResponse, AWSError>;
   /**
-   * Returns the enrollment (opt in) status of an account to the AWS Compute Optimizer service. If the account is a master account of an organization, this operation also confirms the enrollment status of member accounts within the organization.
+   * Returns the enrollment (opt in) status of an account to the AWS Compute Optimizer service. If the account is the master account of an organization, this action also confirms the enrollment status of member accounts within the organization.
    */
   getEnrollmentStatus(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetEnrollmentStatusResponse) => void): Request<ComputeOptimizer.Types.GetEnrollmentStatusResponse, AWSError>;
   /**
@@ -52,11 +76,11 @@ declare class ComputeOptimizer extends Service {
    */
   getRecommendationSummaries(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetRecommendationSummariesResponse) => void): Request<ComputeOptimizer.Types.GetRecommendationSummariesResponse, AWSError>;
   /**
-   * Updates the enrollment (opt in) status of an account to the AWS Compute Optimizer service. If the account is a master account of an organization, this operation can also enroll member accounts within the organization.
+   * Updates the enrollment (opt in) status of an account to the AWS Compute Optimizer service. If the account is a master account of an organization, this action can also be used to enroll member accounts within the organization.
    */
   updateEnrollmentStatus(params: ComputeOptimizer.Types.UpdateEnrollmentStatusRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.UpdateEnrollmentStatusResponse) => void): Request<ComputeOptimizer.Types.UpdateEnrollmentStatusResponse, AWSError>;
   /**
-   * Updates the enrollment (opt in) status of an account to the AWS Compute Optimizer service. If the account is a master account of an organization, this operation can also enroll member accounts within the organization.
+   * Updates the enrollment (opt in) status of an account to the AWS Compute Optimizer service. If the account is a master account of an organization, this action can also be used to enroll member accounts within the organization.
    */
   updateEnrollmentStatus(callback?: (err: AWSError, data: ComputeOptimizer.Types.UpdateEnrollmentStatusResponse) => void): Request<ComputeOptimizer.Types.UpdateEnrollmentStatusResponse, AWSError>;
 }
@@ -143,15 +167,131 @@ declare namespace ComputeOptimizer {
   export type AutoScalingGroupRecommendationOptions = AutoScalingGroupRecommendationOption[];
   export type AutoScalingGroupRecommendations = AutoScalingGroupRecommendation[];
   export type Code = string;
+  export type CreationTimestamp = Date;
   export type CurrentInstanceType = string;
+  export interface DescribeRecommendationExportJobsRequest {
+    /**
+     * The identification numbers of the export jobs to return. An export job ID is returned when you create an export using the ExportAutoScalingGroupRecommendations or ExportEC2InstanceRecommendations actions. All export jobs created in the last seven days are returned if this parameter is omitted.
+     */
+    jobIds?: JobIds;
+    /**
+     * An array of objects that describe a filter to return a more specific list of export jobs.
+     */
+    filters?: JobFilters;
+    /**
+     * The token to advance to the next page of export jobs.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of export jobs to return with a single request. To retrieve the remaining results, make another request with the returned NextToken value.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface DescribeRecommendationExportJobsResponse {
+    /**
+     * An array of objects that describe recommendation export jobs.
+     */
+    recommendationExportJobs?: RecommendationExportJobs;
+    /**
+     * The token to use to advance to the next page of export jobs. This value is null when there are no more pages of export jobs to return.
+     */
+    nextToken?: NextToken;
+  }
   export type DesiredCapacity = number;
+  export type DestinationBucket = string;
+  export type DestinationKey = string;
+  export type DestinationKeyPrefix = string;
+  export interface ExportAutoScalingGroupRecommendationsRequest {
+    /**
+     * The IDs of the AWS accounts for which to export Auto Scaling group recommendations. If your account is the master account of an organization, use this parameter to specify the member accounts for which you want to export recommendations. This parameter cannot be specified together with the include member accounts parameter. The parameters are mutually exclusive. Recommendations for member accounts are not included in the export if this parameter, or the include member accounts parameter, is omitted. You can specify multiple account IDs per request.
+     */
+    accountIds?: AccountIds;
+    /**
+     * An array of objects that describe a filter to export a more specific set of Auto Scaling group recommendations.
+     */
+    filters?: Filters;
+    /**
+     * The recommendations data to include in the export file.
+     */
+    fieldsToExport?: ExportableAutoScalingGroupFields;
+    /**
+     * An object to specify the destination Amazon Simple Storage Service (Amazon S3) bucket name and key prefix for the export job. You must create the destination Amazon S3 bucket for your recommendations export before you create the export job. Compute Optimizer does not create the S3 bucket for you. After you create the S3 bucket, ensure that it has the required permission policy to allow Compute Optimizer to write the export file to it. If you plan to specify an object prefix when you create the export job, you must include the object prefix in the policy that you add to the S3 bucket. For more information, see Amazon S3 Bucket Policy for Compute Optimizer in the Compute Optimizer user guide.
+     */
+    s3DestinationConfig: S3DestinationConfig;
+    /**
+     * The format of the export file. The only export file format currently supported is Csv.
+     */
+    fileFormat?: FileFormat;
+    /**
+     * Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the master account of an organization. The member accounts must also be opted in to Compute Optimizer. Recommendations for member accounts of the organization are not included in the export file if this parameter is omitted. This parameter cannot be specified together with the account IDs parameter. The parameters are mutually exclusive. Recommendations for member accounts are not included in the export if this parameter, or the account IDs parameter, is omitted.
+     */
+    includeMemberAccounts?: IncludeMemberAccounts;
+  }
+  export interface ExportAutoScalingGroupRecommendationsResponse {
+    /**
+     * The identification number of the export job. Use the DescribeRecommendationExportJobs action, and specify the job ID to view the status of an export job.
+     */
+    jobId?: JobId;
+    /**
+     * An object that describes the destination Amazon S3 bucket of a recommendations export file.
+     */
+    s3Destination?: S3Destination;
+  }
+  export interface ExportDestination {
+    /**
+     * An object that describes the destination Amazon Simple Storage Service (Amazon S3) bucket name and object keys of a recommendations export file, and its associated metadata file.
+     */
+    s3?: S3Destination;
+  }
+  export interface ExportEC2InstanceRecommendationsRequest {
+    /**
+     * The IDs of the AWS accounts for which to export instance recommendations. If your account is the master account of an organization, use this parameter to specify the member accounts for which you want to export recommendations. This parameter cannot be specified together with the include member accounts parameter. The parameters are mutually exclusive. Recommendations for member accounts are not included in the export if this parameter, or the include member accounts parameter, is omitted. You can specify multiple account IDs per request.
+     */
+    accountIds?: AccountIds;
+    /**
+     * An array of objects that describe a filter to export a more specific set of instance recommendations.
+     */
+    filters?: Filters;
+    /**
+     * The recommendations data to include in the export file.
+     */
+    fieldsToExport?: ExportableInstanceFields;
+    /**
+     * An object to specify the destination Amazon Simple Storage Service (Amazon S3) bucket name and key prefix for the export job. You must create the destination Amazon S3 bucket for your recommendations export before you create the export job. Compute Optimizer does not create the S3 bucket for you. After you create the S3 bucket, ensure that it has the required permission policy to allow Compute Optimizer to write the export file to it. If you plan to specify an object prefix when you create the export job, you must include the object prefix in the policy that you add to the S3 bucket. For more information, see Amazon S3 Bucket Policy for Compute Optimizer in the Compute Optimizer user guide.
+     */
+    s3DestinationConfig: S3DestinationConfig;
+    /**
+     * The format of the export file. The only export file format currently supported is Csv.
+     */
+    fileFormat?: FileFormat;
+    /**
+     * Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the master account of an organization. The member accounts must also be opted in to Compute Optimizer. Recommendations for member accounts of the organization are not included in the export file if this parameter is omitted. Recommendations for member accounts are not included in the export if this parameter, or the account IDs parameter, is omitted.
+     */
+    includeMemberAccounts?: IncludeMemberAccounts;
+  }
+  export interface ExportEC2InstanceRecommendationsResponse {
+    /**
+     * The identification number of the export job. Use the DescribeRecommendationExportJobs action, and specify the job ID to view the status of an export job.
+     */
+    jobId?: JobId;
+    /**
+     * An object that describes the destination Amazon S3 bucket of a recommendations export file.
+     */
+    s3Destination?: S3Destination;
+  }
+  export type ExportableAutoScalingGroupField = "AccountId"|"AutoScalingGroupArn"|"AutoScalingGroupName"|"Finding"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"LookbackPeriodInDays"|"CurrentConfigurationInstanceType"|"CurrentConfigurationDesiredCapacity"|"CurrentConfigurationMinSize"|"CurrentConfigurationMaxSize"|"CurrentOnDemandPrice"|"CurrentStandardOneYearNoUpfrontReservedPrice"|"CurrentStandardThreeYearNoUpfrontReservedPrice"|"CurrentVCpus"|"CurrentMemory"|"CurrentStorage"|"CurrentNetwork"|"RecommendationOptionsConfigurationInstanceType"|"RecommendationOptionsConfigurationDesiredCapacity"|"RecommendationOptionsConfigurationMinSize"|"RecommendationOptionsConfigurationMaxSize"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"RecommendationOptionsPerformanceRisk"|"RecommendationOptionsOnDemandPrice"|"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice"|"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice"|"RecommendationOptionsVcpus"|"RecommendationOptionsMemory"|"RecommendationOptionsStorage"|"RecommendationOptionsNetwork"|"LastRefreshTimestamp"|string;
+  export type ExportableAutoScalingGroupFields = ExportableAutoScalingGroupField[];
+  export type ExportableInstanceField = "AccountId"|"InstanceArn"|"InstanceName"|"Finding"|"LookbackPeriodInDays"|"CurrentInstanceType"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"CurrentOnDemandPrice"|"CurrentStandardOneYearNoUpfrontReservedPrice"|"CurrentStandardThreeYearNoUpfrontReservedPrice"|"CurrentVCpus"|"CurrentMemory"|"CurrentStorage"|"CurrentNetwork"|"RecommendationOptionsInstanceType"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"RecommendationOptionsPerformanceRisk"|"RecommendationOptionsVcpus"|"RecommendationOptionsMemory"|"RecommendationOptionsStorage"|"RecommendationOptionsNetwork"|"RecommendationOptionsOnDemandPrice"|"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice"|"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice"|"RecommendationsSourcesRecommendationSourceArn"|"RecommendationsSourcesRecommendationSourceType"|"LastRefreshTimestamp"|string;
+  export type ExportableInstanceFields = ExportableInstanceField[];
+  export type FailureReason = string;
+  export type FileFormat = "Csv"|string;
   export interface Filter {
     /**
-     * The name of the filter. Specify Finding to filter the results to a specific findings classification. Specify RecommendationSourceType to filter the results to a specific resource type.
+     * The name of the filter. Specify Finding to return recommendations with a specific findings classification (e.g., Overprovisioned). Specify RecommendationSourceType to return recommendations of a specific resource type (e.g., AutoScalingGroup).
      */
     name?: FilterName;
     /**
-     * The value of the filter. If you specify the name parameter as Finding, and you're recommendations for an instance, then the valid values are Underprovisioned, Overprovisioned, NotOptimized, or Optimized. If you specify the name parameter as Finding, and you're recommendations for an Auto Scaling group, then the valid values are Optimized, or NotOptimized. If you specify the name parameter as RecommendationSourceType, then the valid values are EC2Instance, or AutoScalingGroup.
+     * The value of the filter. If you specify the name parameter as Finding, and you request recommendations for an instance, then the valid values are Underprovisioned, Overprovisioned, NotOptimized, or Optimized. If you specify the name parameter as Finding, and you request recommendations for an Auto Scaling group, then the valid values are Optimized, or NotOptimized. If you specify the name parameter as RecommendationSourceType, then the valid values are Ec2Instance, or AutoScalingGroup.
      */
     values?: FilterValues;
   }
@@ -162,7 +302,7 @@ declare namespace ComputeOptimizer {
   export type Finding = "Underprovisioned"|"Overprovisioned"|"Optimized"|"NotOptimized"|string;
   export interface GetAutoScalingGroupRecommendationsRequest {
     /**
-     * The AWS account IDs for which to return Auto Scaling group recommendations. Only one account ID can be specified per request.
+     * The IDs of the AWS accounts for which to return Auto Scaling group recommendations. If your account is the master account of an organization, use this parameter to specify the member accounts for which you want to return Auto Scaling group recommendations. Only one account ID can be specified per request.
      */
     accountIds?: AccountIds;
     /**
@@ -174,7 +314,7 @@ declare namespace ComputeOptimizer {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of Auto Scaling group recommendations to return with a single call. To retrieve the remaining results, make another call with the returned NextToken value.
+     * The maximum number of Auto Scaling group recommendations to return with a single request. To retrieve the remaining results, make another request with the returned NextToken value.
      */
     maxResults?: MaxResults;
     /**
@@ -206,7 +346,7 @@ declare namespace ComputeOptimizer {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of instance recommendations to return with a single call. To retrieve the remaining results, make another call with the returned NextToken value.
+     * The maximum number of instance recommendations to return with a single request. To retrieve the remaining results, make another request with the returned NextToken value.
      */
     maxResults?: MaxResults;
     /**
@@ -214,7 +354,7 @@ declare namespace ComputeOptimizer {
      */
     filters?: Filters;
     /**
-     * The AWS account IDs for which to return instance recommendations. Only one account ID can be specified per request.
+     * The IDs of the AWS accounts for which to return instance recommendations. If your account is the master account of an organization, use this parameter to specify the member accounts for which you want to return instance recommendations. Only one account ID can be specified per request.
      */
     accountIds?: AccountIds;
   }
@@ -293,7 +433,7 @@ declare namespace ComputeOptimizer {
   export type GetRecommendationErrors = GetRecommendationError[];
   export interface GetRecommendationSummariesRequest {
     /**
-     * The AWS account IDs for which to return recommendation summaries. Only one account ID can be specified per request.
+     * The IDs of the AWS accounts for which to return recommendation summaries. If your account is the master account of an organization, use this parameter to specify the member accounts for which you want to return recommendation summaries. Only one account ID can be specified per request.
      */
     accountIds?: AccountIds;
     /**
@@ -301,7 +441,7 @@ declare namespace ComputeOptimizer {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of recommendation summaries to return with a single call. To retrieve the remaining results, make another call with the returned NextToken value.
+     * The maximum number of recommendation summaries to return with a single request. To retrieve the remaining results, make another request with the returned NextToken value.
      */
     maxResults?: MaxResults;
   }
@@ -326,7 +466,7 @@ declare namespace ComputeOptimizer {
      */
     instanceArn?: InstanceArn;
     /**
-     * The AWS account ID of the instance recommendation.
+     * The AWS account ID of the instance.
      */
     accountId?: AccountId;
     /**
@@ -382,12 +522,29 @@ declare namespace ComputeOptimizer {
   }
   export type InstanceRecommendations = InstanceRecommendation[];
   export type InstanceType = string;
+  export interface JobFilter {
+    /**
+     * The name of the filter. Specify ResourceType to return export jobs of a specific resource type (e.g., Ec2Instance). Specify JobStatus to return export jobs with a specific status (e.g, Complete).
+     */
+    name?: JobFilterName;
+    /**
+     * The value of the filter. If you specify the name parameter as ResourceType, the valid values are Ec2Instance or AutoScalingGroup. If you specify the name parameter as JobStatus, the valid values are Queued, InProgress, Complete, or Failed.
+     */
+    values?: FilterValues;
+  }
+  export type JobFilterName = "ResourceType"|"JobStatus"|string;
+  export type JobFilters = JobFilter[];
+  export type JobId = string;
+  export type JobIds = JobId[];
+  export type JobStatus = "Queued"|"InProgress"|"Complete"|"Failed"|string;
   export type LastRefreshTimestamp = Date;
+  export type LastUpdatedTimestamp = Date;
   export type LookBackPeriodInDays = number;
   export type MaxResults = number;
   export type MaxSize = number;
   export type MemberAccountsEnrolled = boolean;
   export type Message = string;
+  export type MetadataKey = string;
   export type MetricName = "Cpu"|"Memory"|string;
   export type MetricStatistic = "Maximum"|"Average"|string;
   export type MetricValue = number;
@@ -413,6 +570,37 @@ declare namespace ComputeOptimizer {
   export type ProjectedMetrics = ProjectedMetric[];
   export type ProjectedUtilizationMetrics = UtilizationMetric[];
   export type Rank = number;
+  export interface RecommendationExportJob {
+    /**
+     * The identification number of the export job.
+     */
+    jobId?: JobId;
+    /**
+     * An object that describes the destination of the export file.
+     */
+    destination?: ExportDestination;
+    /**
+     * The resource type of the exported recommendations.
+     */
+    resourceType?: ResourceType;
+    /**
+     * The status of the export job.
+     */
+    status?: JobStatus;
+    /**
+     * The timestamp of when the export job was created.
+     */
+    creationTimestamp?: CreationTimestamp;
+    /**
+     * The timestamp of when the export job was last updated.
+     */
+    lastUpdatedTimestamp?: LastUpdatedTimestamp;
+    /**
+     * The reason for an export job failure.
+     */
+    failureReason?: FailureReason;
+  }
+  export type RecommendationExportJobs = RecommendationExportJob[];
   export type RecommendationOptions = InstanceRecommendationOption[];
   export interface RecommendationSource {
     /**
@@ -458,6 +646,31 @@ declare namespace ComputeOptimizer {
     projectedMetrics?: ProjectedMetrics;
   }
   export type RecommendedOptionProjectedMetrics = RecommendedOptionProjectedMetric[];
+  export type ResourceType = "Ec2Instance"|"AutoScalingGroup"|string;
+  export interface S3Destination {
+    /**
+     * The name of the Amazon S3 bucket used as the destination of an export file.
+     */
+    bucket?: DestinationBucket;
+    /**
+     * The Amazon S3 bucket key of an export file. The key uniquely identifies the object, or export file, in the S3 bucket.
+     */
+    key?: DestinationKey;
+    /**
+     * The Amazon S3 bucket key of a metadata file. The key uniquely identifies the object, or metadata file, in the S3 bucket.
+     */
+    metadataKey?: MetadataKey;
+  }
+  export interface S3DestinationConfig {
+    /**
+     * The name of the Amazon S3 bucket to use as the destination for an export job.
+     */
+    bucket?: DestinationBucket;
+    /**
+     * The Amazon S3 bucket prefix for an export job.
+     */
+    keyPrefix?: DestinationKeyPrefix;
+  }
   export type Status = "Active"|"Inactive"|"Pending"|"Failed"|string;
   export type StatusReason = string;
   export type Summaries = Summary[];
@@ -480,7 +693,7 @@ declare namespace ComputeOptimizer {
      */
     status: Status;
     /**
-     * Indicates whether to enroll member accounts within the organization, if the account is a master account of an organization.
+     * Indicates whether to enroll member accounts of the organization if the your account is the master account of an organization.
      */
     includeMemberAccounts?: IncludeMemberAccounts;
   }

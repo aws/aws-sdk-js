@@ -223,6 +223,7 @@ export abstract class ConfigurationServicePlaceholders {
   synthetics?: AWS.Synthetics.Types.ClientConfiguration;
   iotsitewise?: AWS.IoTSiteWise.Types.ClientConfiguration;
   macie2?: AWS.Macie2.Types.ClientConfiguration;
+  codeartifact?: AWS.CodeArtifact.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -448,4 +449,5 @@ export interface ConfigurationServiceApiVersions {
   synthetics?: AWS.Synthetics.Types.apiVersion;
   iotsitewise?: AWS.IoTSiteWise.Types.apiVersion;
   macie2?: AWS.Macie2.Types.apiVersion;
+  codeartifact?: AWS.CodeArtifact.Types.apiVersion;
 }

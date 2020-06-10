@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.693.0-->
+<!--LATEST=2.694.0-->
 <!--ENTRYINSERT-->
+
+## 2.694.0
+* feature: AppConfig: This release allows customers to choose from a list of predefined deployment strategies while starting deployments.
+* feature: CodeArtifact: Added support for AWS CodeArtifact.
+* feature: ComputeOptimizer: Compute Optimizer supports exporting recommendations to Amazon S3.
+* feature: DLM: Reducing the schedule name of DLM Lifecycle policy from 500 to 120 characters. 
+* feature: EC2: New C6g instances powered by AWS Graviton2 processors and ideal for running advanced, compute-intensive workloads; New R6g instances powered by AWS Graviton2 processors and ideal for running memory-intensive workloads.
+* feature: Macie2: This release of the Amazon Macie API removes support for the ArchiveFindings and UnarchiveFindings operations. This release also adds UNKNOWN as an encryption type for S3 bucket metadata.
+* feature: Shield: Corrections to the supported format for contact phone numbers and to the description for the create subscription action.
 
 ## 2.693.0
 * feature: Transfer: This release updates the API so customers can test use of Source IP to allow, deny or limit access to data in their S3 buckets after integrating their identity provider.

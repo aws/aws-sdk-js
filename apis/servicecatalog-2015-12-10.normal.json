@@ -113,7 +113,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Associates the specified product with the specified portfolio.</p>"
+      "documentation": "<p>Associates the specified product with the specified portfolio.</p> <p>A delegated admin is authorized to invoke this command.</p>"
     },
     "AssociateServiceActionWithProvisioningArtifact": {
       "name": "AssociateServiceActionWithProvisioningArtifact",
@@ -260,7 +260,7 @@
           "shape": "DuplicateResourceException"
         }
       ],
-      "documentation": "<p>Creates a constraint.</p>"
+      "documentation": "<p>Creates a constraint.</p> <p>A delegated admin is authorized to invoke this command.</p>"
     },
     "CreatePortfolio": {
       "name": "CreatePortfolio",
@@ -285,7 +285,7 @@
           "shape": "TagOptionNotMigratedException"
         }
       ],
-      "documentation": "<p>Creates a portfolio.</p>"
+      "documentation": "<p>Creates a portfolio.</p> <p>A delegated admin is authorized to invoke this command.</p>"
     },
     "CreatePortfolioShare": {
       "name": "CreatePortfolioShare",
@@ -316,7 +316,7 @@
           "shape": "InvalidStateException"
         }
       ],
-      "documentation": "<p>Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the master account of an Organization. AWSOrganizationsAccess must be enabled in order to create a portfolio share to an organization node.</p>"
+      "documentation": "<p>Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the master account of an organization or by a delegated administrator. You can share portfolios to an organization, an organizational unit, or a specific account.</p> <p>Note that if a delegated admin is de-registered, they can no longer create portfolio shares.</p> <p> <code>AWSOrganizationsAccess</code> must be enabled in order to create a portfolio share to an organization node.</p>"
     },
     "CreateProduct": {
       "name": "CreateProduct",
@@ -341,7 +341,7 @@
           "shape": "TagOptionNotMigratedException"
         }
       ],
-      "documentation": "<p>Creates a product.</p>"
+      "documentation": "<p>Creates a product.</p> <p>A delegated admin is authorized to invoke this command.</p>"
     },
     "CreateProvisionedProductPlan": {
       "name": "CreateProvisionedProductPlan",
@@ -460,7 +460,7 @@
           "shape": "InvalidParametersException"
         }
       ],
-      "documentation": "<p>Deletes the specified constraint.</p>"
+      "documentation": "<p>Deletes the specified constraint.</p> <p>A delegated admin is authorized to invoke this command.</p>"
     },
     "DeletePortfolio": {
       "name": "DeletePortfolio",
@@ -488,7 +488,7 @@
           "shape": "TagOptionNotMigratedException"
         }
       ],
-      "documentation": "<p>Deletes the specified portfolio.</p> <p>You cannot delete a portfolio if it was shared with you or if it has associated products, users, constraints, or shared accounts.</p>"
+      "documentation": "<p>Deletes the specified portfolio.</p> <p>You cannot delete a portfolio if it was shared with you or if it has associated products, users, constraints, or shared accounts.</p> <p>A delegated admin is authorized to invoke this command.</p>"
     },
     "DeletePortfolioShare": {
       "name": "DeletePortfolioShare",
@@ -516,7 +516,7 @@
           "shape": "InvalidStateException"
         }
       ],
-      "documentation": "<p>Stops sharing the specified portfolio with the specified account or organization node. Shares to an organization node can only be deleted by the master account of an Organization.</p>"
+      "documentation": "<p>Stops sharing the specified portfolio with the specified account or organization node. Shares to an organization node can only be deleted by the master account of an organization or by a delegated administrator.</p> <p>Note that if a delegated admin is de-registered, portfolio shares created from that account are removed.</p>"
     },
     "DeleteProduct": {
       "name": "DeleteProduct",
@@ -544,7 +544,7 @@
           "shape": "TagOptionNotMigratedException"
         }
       ],
-      "documentation": "<p>Deletes the specified product.</p> <p>You cannot delete a product if it was shared with you or is associated with a portfolio.</p>"
+      "documentation": "<p>Deletes the specified product.</p> <p>You cannot delete a product if it was shared with you or is associated with a portfolio.</p> <p>A delegated admin is authorized to invoke this command.</p>"
     },
     "DeleteProvisionedProductPlan": {
       "name": "DeleteProvisionedProductPlan",
@@ -695,7 +695,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Gets information about the specified portfolio.</p>"
+      "documentation": "<p>Gets information about the specified portfolio.</p> <p>A delegated admin is authorized to invoke this command.</p>"
     },
     "DescribePortfolioShareStatus": {
       "name": "DescribePortfolioShareStatus",
@@ -720,7 +720,7 @@
           "shape": "OperationNotSupportedException"
         }
       ],
-      "documentation": "<p>Gets the status of the specified portfolio share operation. This API can only be called by the master account in the organization.</p>"
+      "documentation": "<p>Gets the status of the specified portfolio share operation. This API can only be called by the master account in the organization or by a delegated admin.</p>"
     },
     "DescribeProduct": {
       "name": "DescribeProduct",
@@ -978,7 +978,7 @@
           "shape": "OperationNotSupportedException"
         }
       ],
-      "documentation": "<p>Disable portfolio sharing through AWS Organizations feature. This feature will not delete your current shares but it will prevent you from creating new shares throughout your organization. Current shares will not be in sync with your organization structure if it changes after calling this API. This API can only be called by the master account in the organization.</p>"
+      "documentation": "<p>Disable portfolio sharing through AWS Organizations feature. This feature will not delete your current shares but it will prevent you from creating new shares throughout your organization. Current shares will not be in sync with your organization structure if it changes after calling this API. This API can only be called by the master account in the organization.</p> <p>This API can't be invoked if there are active delegated administrators in the organization.</p> <p>Note that a delegated administrator is not authorized to invoke <code>DisableAWSOrganizationsAccess</code>.</p>"
     },
     "DisassociateBudgetFromResource": {
       "name": "DisassociateBudgetFromResource",
@@ -1044,7 +1044,7 @@
           "shape": "InvalidParametersException"
         }
       ],
-      "documentation": "<p>Disassociates the specified product from the specified portfolio. </p>"
+      "documentation": "<p>Disassociates the specified product from the specified portfolio. </p> <p>A delegated admin is authorized to invoke this command.</p>"
     },
     "DisassociateServiceActionFromProvisioningArtifact": {
       "name": "DisassociateServiceActionFromProvisioningArtifact",
@@ -1110,7 +1110,7 @@
           "shape": "OperationNotSupportedException"
         }
       ],
-      "documentation": "<p>Enable portfolio sharing feature through AWS Organizations. This API will allow Service Catalog to receive updates on your organization in order to sync your shares with the current structure. This API can only be called by the master account in the organization.</p> <p>By calling this API Service Catalog will make a call to organizations:EnableAWSServiceAccess on your behalf so that your shares can be in sync with any changes in your AWS Organizations structure.</p>"
+      "documentation": "<p>Enable portfolio sharing feature through AWS Organizations. This API will allow Service Catalog to receive updates on your organization in order to sync your shares with the current structure. This API can only be called by the master account in the organization.</p> <p>By calling this API Service Catalog will make a call to organizations:EnableAWSServiceAccess on your behalf so that your shares can be in sync with any changes in your AWS Organizations structure.</p> <p>Note that a delegated administrator is not authorized to invoke <code>EnableAWSOrganizationsAccess</code>.</p>"
     },
     "ExecuteProvisionedProductPlan": {
       "name": "ExecuteProvisionedProductPlan",
@@ -1182,7 +1182,7 @@
           "shape": "OperationNotSupportedException"
         }
       ],
-      "documentation": "<p>Get the Access Status for AWS Organization portfolio share feature. This API can only be called by the master account in the organization.</p>"
+      "documentation": "<p>Get the Access Status for AWS Organization portfolio share feature. This API can only be called by the master account in the organization or by a delegated admin.</p>"
     },
     "ListAcceptedPortfolioShares": {
       "name": "ListAcceptedPortfolioShares",
@@ -1295,7 +1295,7 @@
           "shape": "OperationNotSupportedException"
         }
       ],
-      "documentation": "<p>Lists the organization nodes that have access to the specified portfolio. This API can only be called by the master account in the organization.</p>"
+      "documentation": "<p>Lists the organization nodes that have access to the specified portfolio. This API can only be called by the master account in the organization or by a delegated admin.</p> <p>If a delegated admin is de-registered, they can no longer perform this operation.</p>"
     },
     "ListPortfolioAccess": {
       "name": "ListPortfolioAccess",
@@ -1317,7 +1317,7 @@
           "shape": "InvalidParametersException"
         }
       ],
-      "documentation": "<p>Lists the account IDs that have access to the specified portfolio.</p>"
+      "documentation": "<p>Lists the account IDs that have access to the specified portfolio.</p> <p>A delegated admin can list the accounts that have access to the shared portfolio. Note that if a delegated admin is de-registered, they can no longer perform this operation.</p>"
     },
     "ListPortfolios": {
       "name": "ListPortfolios",

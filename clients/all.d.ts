@@ -221,3 +221,4 @@ export import CodeStarconnections = require('./codestarconnections');
 export import Synthetics = require('./synthetics');
 export import IoTSiteWise = require('./iotsitewise');
 export import Macie2 = require('./macie2');
+export import CodeArtifact = require('./codeartifact');
