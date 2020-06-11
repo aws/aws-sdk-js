@@ -251,13 +251,13 @@ export abstract class ConfigurationOptions {
      */
     s3ForcePathStyle?: boolean
     /**
-     * when region is set to 'us-east-1', whether to send s3 request to global endpoints
+     * When region is set to 'us-east-1', whether to send s3 request to global endpoints
      * or 'us-east-1' regional endpoints. This config is only applicable to S3 client;
      * Defaults to 'legacy'
      */
     s3UsEast1RegionalEndpoint?: "regional"|"legacy"
     /**
-     * whether to override the request region with the region inferred
+     * Whether to override the request region with the region inferred
      * from requested resource's ARN. Only available for S3 buckets
      * Defaults to `true`
      */
@@ -300,11 +300,11 @@ export abstract class ConfigurationOptions {
      */
     endpointCacheSize?: number;
     /**
-     *  whether to marshal request parameters to the prefix of hostname.
+     * Whether to marshal request parameters to the prefix of hostname.
      */
     hostPrefixEnabled?: boolean;
     /**
-     * whether to send sts request to global endpoints or
+     * Whether to send sts request to global endpoints or
      * regional endpoints. 
      */
     stsRegionalEndpoints?: "legacy"|"regional";
