@@ -648,6 +648,10 @@ declare namespace LexModelBuildingService {
      * Checksum of the intent version created.
      */
     checksum?: String;
+    /**
+     * Configuration information, if any, for connectin an Amazon Kendra index with the AMAZON.KendraSearchIntent intent.
+     */
+    kendraConfiguration?: KendraConfiguration;
   }
   export interface CreateSlotTypeVersionRequest {
     /**
@@ -1331,6 +1335,10 @@ declare namespace LexModelBuildingService {
      * Checksum of the intent.
      */
     checksum?: String;
+    /**
+     * Configuration information, if any, to connect to an Amazon Kendra index with the AMAZON.KendraSearchIntent intent.
+     */
+    kendraConfiguration?: KendraConfiguration;
   }
   export interface GetIntentVersionsRequest {
     /**
@@ -1543,6 +1551,21 @@ declare namespace LexModelBuildingService {
   export type IntentMetadataList = IntentMetadata[];
   export type IntentName = string;
   export type IntentUtteranceList = Utterance[];
+  export interface KendraConfiguration {
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the AMAZON.KendraSearchIntent intent to search. The index must be in the same account and Region as the Amazon Lex bot. If the Amazon Kendra index does not exist, you get an exception when you call the PutIntent operation.
+     */
+    kendraIndex: KendraIndexArn;
+    /**
+     * A query filter that Amazon Lex sends to Amazon Kendra to filter the response from the query. The filter is in the format defined by Amazon Kendra. For more information, see Filtering queries. You can override this filter string with a new filter string at runtime.
+     */
+    queryFilterString?: QueryFilterString;
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role that has permission to search the Amazon Kendra index. The role must be in the same account and Region as the Amazon Lex bot. If the role does not exist, you get an exception when you call the PutIntent operation.
+     */
+    role: roleArn;
+  }
+  export type KendraIndexArn = string;
   export type KmsKeyArn = string;
   export type LambdaARN = string;
   export type ListOfUtterance = UtteranceData[];
@@ -1896,6 +1919,10 @@ declare namespace LexModelBuildingService {
      * When set to true a new numbered version of the intent is created. This is the same as calling the CreateIntentVersion operation. If you do not specify createVersion, the default is false.
      */
     createVersion?: Boolean;
+    /**
+     * Configuration information required to use the AMAZON.KendraSearchIntent intent to connect to an Amazon Kendra index. For more information, see  AMAZON.KendraSearchIntent.
+     */
+    kendraConfiguration?: KendraConfiguration;
   }
   export interface PutIntentResponse {
     /**
@@ -1962,6 +1989,10 @@ declare namespace LexModelBuildingService {
      *  True if a new version of the intent was created. If the createVersion field was not specified in the request, the createVersion field is set to false in the response.
      */
     createVersion?: Boolean;
+    /**
+     * Configuration information, if any, required to connect to an Amazon Kendra index and use the AMAZON.KendraSearchIntent intent.
+     */
+    kendraConfiguration?: KendraConfiguration;
   }
   export interface PutSlotTypeRequest {
     /**
@@ -2043,6 +2074,7 @@ declare namespace LexModelBuildingService {
      */
     slotTypeConfigurations?: SlotTypeConfigurations;
   }
+  export type QueryFilterString = string;
   export type RegexPattern = string;
   export type ResourceArn = string;
   export type ResourcePrefix = string;
@@ -2075,7 +2107,7 @@ declare namespace LexModelBuildingService {
      */
     valueElicitationPrompt?: Prompt;
     /**
-     *  Directs Lex the order in which to elicit this slot value from the user. For example, if the intent has two slots with priorities 1 and 2, AWS Lex first elicits a value for the slot with priority 1. If multiple slots share the same priority, the order in which Lex elicits values is arbitrary.
+     *  Directs Amazon Lex the order in which to elicit this slot value from the user. For example, if the intent has two slots with priorities 1 and 2, AWS Amazon Lex first elicits a value for the slot with priority 1. If multiple slots share the same priority, the order in which Amazon Lex elicits values is arbitrary.
      */
     priority?: Priority;
     /**
@@ -2272,6 +2304,7 @@ declare namespace LexModelBuildingService {
   export type UtteranceString = string;
   export type Value = string;
   export type Version = string;
+  export type roleArn = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

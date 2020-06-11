@@ -61,6 +61,14 @@ declare class ECS extends Service {
    */
   deleteAttributes(callback?: (err: AWSError, data: ECS.Types.DeleteAttributesResponse) => void): Request<ECS.Types.DeleteAttributesResponse, AWSError>;
   /**
+   * Deletes the specified capacity provider.  The FARGATE and FARGATE_SPOT capacity providers are reserved and cannot be deleted. You can disassociate them from a cluster using either the PutClusterCapacityProviders API or by deleting the cluster.  Prior to a capacity provider being deleted, the capacity provider must be removed from the capacity provider strategy from all services. The UpdateService API can be used to remove a capacity provider from a service's capacity provider strategy. When updating a service, the forceNewDeployment option can be used to ensure that any tasks using the Amazon EC2 instance capacity provided by the capacity provider are transitioned to use the capacity from the remaining capacity providers. Only capacity providers that are not associated with a cluster can be deleted. To remove a capacity provider from a cluster, you can either use PutClusterCapacityProviders or delete the cluster.
+   */
+  deleteCapacityProvider(params: ECS.Types.DeleteCapacityProviderRequest, callback?: (err: AWSError, data: ECS.Types.DeleteCapacityProviderResponse) => void): Request<ECS.Types.DeleteCapacityProviderResponse, AWSError>;
+  /**
+   * Deletes the specified capacity provider.  The FARGATE and FARGATE_SPOT capacity providers are reserved and cannot be deleted. You can disassociate them from a cluster using either the PutClusterCapacityProviders API or by deleting the cluster.  Prior to a capacity provider being deleted, the capacity provider must be removed from the capacity provider strategy from all services. The UpdateService API can be used to remove a capacity provider from a service's capacity provider strategy. When updating a service, the forceNewDeployment option can be used to ensure that any tasks using the Amazon EC2 instance capacity provided by the capacity provider are transitioned to use the capacity from the remaining capacity providers. Only capacity providers that are not associated with a cluster can be deleted. To remove a capacity provider from a cluster, you can either use PutClusterCapacityProviders or delete the cluster.
+   */
+  deleteCapacityProvider(callback?: (err: AWSError, data: ECS.Types.DeleteCapacityProviderResponse) => void): Request<ECS.Types.DeleteCapacityProviderResponse, AWSError>;
+  /**
    * Deletes the specified cluster. The cluster will transition to the INACTIVE state. Clusters with an INACTIVE status may remain discoverable in your account for a period of time. However, this behavior is subject to change in the future, so you should not rely on INACTIVE clusters persisting. You must deregister all container instances from this cluster before you may delete it. You can list the container instances in a cluster with ListContainerInstances and deregister them with DeregisterContainerInstance.
    */
   deleteCluster(params: ECS.Types.DeleteClusterRequest, callback?: (err: AWSError, data: ECS.Types.DeleteClusterResponse) => void): Request<ECS.Types.DeleteClusterResponse, AWSError>;
@@ -523,7 +531,7 @@ declare namespace ECS {
      */
     name?: String;
     /**
-     * The current status of the capacity provider. Only capacity providers in an ACTIVE state can be used in a cluster.
+     * The current status of the capacity provider. Only capacity providers in an ACTIVE state can be used in a cluster. When a capacity provider is successfully deleted, it will have an INACTIVE status.
      */
     status?: CapacityProviderStatus;
     /**
@@ -531,13 +539,21 @@ declare namespace ECS {
      */
     autoScalingGroupProvider?: AutoScalingGroupProvider;
     /**
+     * The update status of the capacity provider. The following are the possible states that will be returned.  DELETE_IN_PROGRESS  The capacity provider is in the process of being deleted.  DELETE_COMPLETE  The capacity provider has been successfully deleted and will have an INACTIVE status.  DELETE_FAILED  The capacity provider was unable to be deleted. The update status reason will provide further details about why the delete failed.  
+     */
+    updateStatus?: CapacityProviderUpdateStatus;
+    /**
+     * The update status reason. This provides further details about the update status for the capacity provider.
+     */
+    updateStatusReason?: String;
+    /**
      * The metadata that you apply to the capacity provider to help you categorize and organize it. Each tag consists of a key and an optional value, both of which you define. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8   Maximum value length - 256 Unicode characters in UTF-8   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case-sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for AWS use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.  
      */
     tags?: Tags;
   }
   export type CapacityProviderField = "TAGS"|string;
   export type CapacityProviderFieldList = CapacityProviderField[];
-  export type CapacityProviderStatus = "ACTIVE"|string;
+  export type CapacityProviderStatus = "ACTIVE"|"INACTIVE"|string;
   export type CapacityProviderStrategy = CapacityProviderStrategyItem[];
   export interface CapacityProviderStrategyItem {
     /**
@@ -555,6 +571,7 @@ declare namespace ECS {
   }
   export type CapacityProviderStrategyItemBase = number;
   export type CapacityProviderStrategyItemWeight = number;
+  export type CapacityProviderUpdateStatus = "DELETE_IN_PROGRESS"|"DELETE_COMPLETE"|"DELETE_FAILED"|string;
   export type CapacityProviders = CapacityProvider[];
   export interface Cluster {
     /**
@@ -833,7 +850,7 @@ declare namespace ECS {
      */
     dockerLabels?: DockerLabelsMap;
     /**
-     * A list of ulimits to set in the container. This parameter maps to Ulimits in the Create a container section of the Docker Remote API and the --ulimit option to docker run. Valid naming values are displayed in the Ulimit data type. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: sudo docker version --format '{{.Server.APIVersion}}'   This parameter is not supported for Windows containers. 
+     * A list of ulimits to set in the container. If a ulimit value is specified in a task definition, it will override the default values set by Docker. This parameter maps to Ulimits in the Create a container section of the Docker Remote API and the --ulimit option to docker run. Valid naming values are displayed in the Ulimit data type. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: sudo docker version --format '{{.Server.APIVersion}}'   This parameter is not supported for Windows containers. 
      */
     ulimits?: UlimitList;
     /**
@@ -1232,6 +1249,15 @@ declare namespace ECS {
      * A list of attribute objects that were successfully deleted from your resource.
      */
     attributes?: Attributes;
+  }
+  export interface DeleteCapacityProviderRequest {
+    /**
+     * The short name or full Amazon Resource Name (ARN) of the capacity provider to delete.
+     */
+    capacityProvider: String;
+  }
+  export interface DeleteCapacityProviderResponse {
+    capacityProvider?: CapacityProvider;
   }
   export interface DeleteClusterRequest {
     /**
@@ -1812,7 +1838,7 @@ declare namespace ECS {
   }
   export interface ListAccountSettingsRequest {
     /**
-     * The resource name you want to list the account settings for.
+     * The name of the account setting you want to list the settings for.
      */
     name?: SettingName;
     /**
@@ -2389,7 +2415,7 @@ declare namespace ECS {
      */
     taskRoleArn?: String;
     /**
-     * The Amazon Resource Name (ARN) of the task execution role that the Amazon ECS container agent and the Docker daemon can assume.
+     * The Amazon Resource Name (ARN) of the task execution role that grants the Amazon ECS container agent permission to make AWS API calls on your behalf. The task execution IAM role is required depending on the requirements of your task. For more information, see Amazon ECS task execution IAM role in the Amazon Elastic Container Service Developer Guide.
      */
     executionRoleArn?: String;
     /**
@@ -3137,7 +3163,7 @@ declare namespace ECS {
      */
     taskRoleArn?: String;
     /**
-     * The Amazon Resource Name (ARN) of the task execution role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role.
+     * The Amazon Resource Name (ARN) of the task execution role that grants the Amazon ECS container agent permission to make AWS API calls on your behalf. The task execution IAM role is required depending on the requirements of your task. For more information, see Amazon ECS task execution IAM role in the Amazon Elastic Container Service Developer Guide.
      */
     executionRoleArn?: String;
     /**
@@ -3229,7 +3255,7 @@ declare namespace ECS {
      */
     inferenceAcceleratorOverrides?: InferenceAcceleratorOverrides;
     /**
-     * The Amazon Resource Name (ARN) of the task execution role that the Amazon ECS container agent and the Docker daemon can assume.
+     * The Amazon Resource Name (ARN) of the task execution IAM role override for the task.
      */
     executionRoleArn?: String;
     /**
@@ -3546,7 +3572,7 @@ declare namespace ECS {
      */
     name?: String;
     /**
-     * This parameter is specified when you are using bind mount host volumes. Bind mount host volumes are supported when you are using either the EC2 or Fargate launch types. The contents of the host parameter determine whether your bind mount host volume persists on the host container instance and where it is stored. If the host parameter is empty, then the Docker daemon assigns a host path for your data volume. However, the data is not guaranteed to persist after the containers associated with it stop running. Windows containers can mount whole directories on the same drive as $env:ProgramData. Windows containers cannot mount directories on a different drive, and mount point cannot be across drives. For example, you can mount C:\my\path:C:\my\path and D:\:D:\, but not D:\my\path:C:\my\path or D:\:C:\my\path.
+     * This parameter is specified when you are using bind mount host volumes. The contents of the host parameter determine whether your bind mount host volume persists on the host container instance and where it is stored. If the host parameter is empty, then the Docker daemon assigns a host path for your data volume. However, the data is not guaranteed to persist after the containers associated with it stop running. Windows containers can mount whole directories on the same drive as $env:ProgramData. Windows containers cannot mount directories on a different drive, and mount point cannot be across drives. For example, you can mount C:\my\path:C:\my\path and D:\:D:\, but not D:\my\path:C:\my\path or D:\:C:\my\path.
      */
     host?: HostVolumeProperties;
     /**
@@ -3554,7 +3580,7 @@ declare namespace ECS {
      */
     dockerVolumeConfiguration?: DockerVolumeConfiguration;
     /**
-     * This parameter is specified when you are using an Amazon Elastic File System (Amazon EFS) file storage. Amazon EFS file systems are only supported when you are using the EC2 launch type.   EFSVolumeConfiguration remains in preview and is a Beta Service as defined by and subject to the Beta Service Participation Service Terms located at https://aws.amazon.com/service-terms ("Beta Terms"). These Beta Terms apply to your participation in this preview of EFSVolumeConfiguration. 
+     * This parameter is specified when you are using an Amazon Elastic File System file system for task storage.
      */
     efsVolumeConfiguration?: EFSVolumeConfiguration;
   }

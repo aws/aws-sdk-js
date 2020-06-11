@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.694.0-->
+<!--LATEST=2.695.0-->
 <!--ENTRYINSERT-->
+
+## 2.695.0
+* feature: ECS: This release adds support for deleting capacity providers.
+* feature: Imagebuilder: EC2 Image Builder now supports specifying a custom working directory for your build and test workflows. In addition, Image Builder now supports defining tags that are applied to ephemeral resources created by EC2 Image Builder as part of the image creation workflow. 
+* feature: IotData: As part of this release, we are introducing a new feature called named shadow, which extends the capability of AWS IoT Device Shadow to support multiple shadows for a single IoT device. With this release, customers can store different device state data into different shadows, and as a result access only the required state data when needed and reduce individual shadow size.
+* feature: LexModelBuildingService: This change adds the built-in AMAZON.KendraSearchIntent that enables integration with Amazon Kendra.
 
 ## 2.694.0
 * feature: AppConfig: This release allows customers to choose from a list of predefined deployment strategies while starting deployments.

@@ -1676,6 +1676,10 @@
         "checksum": {
           "shape": "String",
           "documentation": "<p>Checksum of the intent version created.</p>"
+        },
+        "kendraConfiguration": {
+          "shape": "KendraConfiguration",
+          "documentation": "<p>Configuration information, if any, for connectin an Amazon Kendra index with the <code>AMAZON.KendraSearchIntent</code> intent.</p>"
         }
       }
     },
@@ -2719,6 +2723,10 @@
         "checksum": {
           "shape": "String",
           "documentation": "<p>Checksum of the intent.</p>"
+        },
+        "kendraConfiguration": {
+          "shape": "KendraConfiguration",
+          "documentation": "<p>Configuration information, if any, to connect to an Amazon Kendra index with the <code>AMAZON.KendraSearchIntent</code> intent.</p>"
         }
       }
     },
@@ -2989,7 +2997,7 @@
       "type": "string",
       "max": 2048,
       "min": 20,
-      "pattern": "^arn:[\\w\\-]+:iam::[\\d]{12}:role\\/[\\w+=,\\.@\\-]{1,64}$"
+      "pattern": "^arn:[\\w\\-]+:iam::[\\d]{12}:role/.+$"
     },
     "ImportStatus": {
       "type": "string",
@@ -3068,6 +3076,34 @@
       },
       "max": 1500,
       "min": 0
+    },
+    "KendraConfiguration": {
+      "type": "structure",
+      "required": [
+        "kendraIndex",
+        "role"
+      ],
+      "members": {
+        "kendraIndex": {
+          "shape": "KendraIndexArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the AMAZON.KendraSearchIntent intent to search. The index must be in the same account and Region as the Amazon Lex bot. If the Amazon Kendra index does not exist, you get an exception when you call the <code>PutIntent</code> operation.</p>"
+        },
+        "queryFilterString": {
+          "shape": "QueryFilterString",
+          "documentation": "<p>A query filter that Amazon Lex sends to Amazon Kendra to filter the response from the query. The filter is in the format defined by Amazon Kendra. For more information, see <a href=\"http://docs.aws.amazon.com/kendra/latest/dg/filtering.html\">Filtering queries</a>.</p> <p>You can override this filter string with a new filter string at runtime.</p>"
+        },
+        "role": {
+          "shape": "roleArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that has permission to search the Amazon Kendra index. The role must be in the same account and Region as the Amazon Lex bot. If the role does not exist, you get an exception when you call the <code>PutIntent</code> operation.</p>"
+        }
+      },
+      "documentation": "<p>Provides configuration information for the AMAZON.KendraSearchIntent intent. When you use this intent, Amazon Lex searches the specified Amazon Kendra index and returns documents from the index that match the user's utterance. For more information, see <a href=\"http://docs.aws.amazon.com/lex/latest/dg/built-in-intent-kendra-search.html\"> AMAZON.KendraSearchIntent</a>.</p>"
+    },
+    "KendraIndexArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 20,
+      "pattern": "arn:aws:kendra:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:index\\/[a-zA-Z0-9][a-zA-Z0-9_-]*"
     },
     "KmsKeyArn": {
       "type": "string",
@@ -3598,6 +3634,10 @@
         "createVersion": {
           "shape": "Boolean",
           "documentation": "<p>When set to <code>true</code> a new numbered version of the intent is created. This is the same as calling the <code>CreateIntentVersion</code> operation. If you do not specify <code>createVersion</code>, the default is <code>false</code>.</p>"
+        },
+        "kendraConfiguration": {
+          "shape": "KendraConfiguration",
+          "documentation": "<p>Configuration information required to use the <code>AMAZON.KendraSearchIntent</code> intent to connect to an Amazon Kendra index. For more information, see <a href=\"http://docs.aws.amazon.com/lex/latest/dg/built-in-intent-kendra-search.html\"> AMAZON.KendraSearchIntent</a>.</p>"
         }
       }
     },
@@ -3667,6 +3707,10 @@
         "createVersion": {
           "shape": "Boolean",
           "documentation": "<p> <code>True</code> if a new version of the intent was created. If the <code>createVersion</code> field was not specified in the request, the <code>createVersion</code> field is set to false in the response.</p>"
+        },
+        "kendraConfiguration": {
+          "shape": "KendraConfiguration",
+          "documentation": "<p>Configuration information, if any, required to connect to an Amazon Kendra index and use the <code>AMAZON.KendraSearchIntent</code> intent.</p>"
         }
       }
     },
@@ -3761,6 +3805,10 @@
         }
       }
     },
+    "QueryFilterString": {
+      "type": "string",
+      "min": 0
+    },
     "RegexPattern": {
       "type": "string",
       "max": 100,
@@ -3827,7 +3875,7 @@
         },
         "priority": {
           "shape": "Priority",
-          "documentation": "<p> Directs Lex the order in which to elicit this slot value from the user. For example, if the intent has two slots with priorities 1 and 2, AWS Lex first elicits a value for the slot with priority 1.</p> <p>If multiple slots share the same priority, the order in which Lex elicits values is arbitrary.</p>"
+          "documentation": "<p> Directs Amazon Lex the order in which to elicit this slot value from the user. For example, if the intent has two slots with priorities 1 and 2, AWS Amazon Lex first elicits a value for the slot with priority 1.</p> <p>If multiple slots share the same priority, the order in which Amazon Lex elicits values is arbitrary.</p>"
         },
         "sampleUtterances": {
           "shape": "SlotUtteranceList",
@@ -4217,6 +4265,12 @@
       "max": 64,
       "min": 1,
       "pattern": "\\$LATEST|[0-9]+"
+    },
+    "roleArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 20,
+      "pattern": "arn:aws:iam::[0-9]{12}:role/.*"
     }
   },
   "documentation": "<fullname>Amazon Lex Build-Time Actions</fullname> <p> Amazon Lex is an AWS service for building conversational voice and text interfaces. Use these actions to create, update, and delete conversational bots for new and existing client applications. </p>"

@@ -220,11 +220,11 @@ declare class Imagebuilder extends Service {
    */
   listDistributionConfigurations(callback?: (err: AWSError, data: Imagebuilder.Types.ListDistributionConfigurationsResponse) => void): Request<Imagebuilder.Types.ListDistributionConfigurationsResponse, AWSError>;
   /**
-   *  Returns a list of distribution configurations. 
+   *  Returns a list of image build versions. 
    */
   listImageBuildVersions(params: Imagebuilder.Types.ListImageBuildVersionsRequest, callback?: (err: AWSError, data: Imagebuilder.Types.ListImageBuildVersionsResponse) => void): Request<Imagebuilder.Types.ListImageBuildVersionsResponse, AWSError>;
   /**
-   *  Returns a list of distribution configurations. 
+   *  Returns a list of image build versions. 
    */
   listImageBuildVersions(callback?: (err: AWSError, data: Imagebuilder.Types.ListImageBuildVersionsResponse) => void): Request<Imagebuilder.Types.ListImageBuildVersionsResponse, AWSError>;
   /**
@@ -252,11 +252,11 @@ declare class Imagebuilder extends Service {
    */
   listImageRecipes(callback?: (err: AWSError, data: Imagebuilder.Types.ListImageRecipesResponse) => void): Request<Imagebuilder.Types.ListImageRecipesResponse, AWSError>;
   /**
-   *  Returns the list of image build versions for the specified semantic version. 
+   *  Returns the list of images that you have access to. 
    */
   listImages(params: Imagebuilder.Types.ListImagesRequest, callback?: (err: AWSError, data: Imagebuilder.Types.ListImagesResponse) => void): Request<Imagebuilder.Types.ListImagesResponse, AWSError>;
   /**
-   *  Returns the list of image build versions for the specified semantic version. 
+   *  Returns the list of images that you have access to. 
    */
   listImages(callback?: (err: AWSError, data: Imagebuilder.Types.ListImagesResponse) => void): Request<Imagebuilder.Types.ListImagesResponse, AWSError>;
   /**
@@ -759,6 +759,10 @@ declare namespace Imagebuilder {
      */
     tags?: TagMap;
     /**
+     * The working directory to be used during build and test workflows.
+     */
+    workingDirectory?: NonEmptyString;
+    /**
      * The idempotency token used to make this request idempotent. 
      */
     clientToken: ClientToken;
@@ -862,6 +866,10 @@ declare namespace Imagebuilder {
      * The SNS topic on which to send image build events. 
      */
     snsTopicArn?: SnsTopicArn;
+    /**
+     * The tags attached to the resource created by Image Builder.
+     */
+    resourceTags?: ResourceTagMap;
     /**
      * The tags of the infrastructure configuration. 
      */
@@ -1128,7 +1136,7 @@ declare namespace Imagebuilder {
     /**
      * The Amazon Resource Name (ARN) of the component that you want to retrieve. Regex requires "/\d+$" suffix.
      */
-    componentBuildVersionArn: ComponentBuildVersionArn;
+    componentBuildVersionArn: ComponentVersionArnOrBuildVersionArn;
   }
   export interface GetComponentResponse {
     /**
@@ -1224,7 +1232,7 @@ declare namespace Imagebuilder {
     /**
      * The Amazon Resource Name (ARN) of the image that you want to retrieve. 
      */
-    imageBuildVersionArn: ImageBuildVersionArn;
+    imageBuildVersionArn: ImageVersionArnOrBuildVersionArn;
   }
   export interface GetImageResponse {
     /**
@@ -1433,6 +1441,10 @@ declare namespace Imagebuilder {
      * The tags of the image recipe.
      */
     tags?: TagMap;
+    /**
+     * The working directory to be used during build and test workflows.
+     */
+    workingDirectory?: NonEmptyString;
   }
   export type ImageRecipeArn = string;
   export interface ImageRecipeSummary {
@@ -1562,6 +1574,7 @@ declare namespace Imagebuilder {
     dateCreated?: DateTime;
   }
   export type ImageVersionArn = string;
+  export type ImageVersionArnOrBuildVersionArn = string;
   export type ImageVersionList = ImageVersion[];
   export interface ImportComponentRequest {
     /**
@@ -1681,6 +1694,10 @@ declare namespace Imagebuilder {
      */
     dateUpdated?: DateTime;
     /**
+     * The tags attached to the resource created by Image Builder.
+     */
+    resourceTags?: ResourceTagMap;
+    /**
      * The tags of the infrastructure configuration.
      */
     tags?: TagMap;
@@ -1707,6 +1724,10 @@ declare namespace Imagebuilder {
      * The date on which the infrastructure configuration was last updated.
      */
     dateUpdated?: DateTime;
+    /**
+     * The tags attached to the image created by Image Builder.
+     */
+    resourceTags?: ResourceTagMap;
     /**
      * The tags of the infrastructure configuration.
      */
@@ -2111,6 +2132,7 @@ declare namespace Imagebuilder {
   }
   export type ResourceName = string;
   export type ResourcePolicyDocument = string;
+  export type ResourceTagMap = {[key: string]: TagValue};
   export type RestrictedInteger = number;
   export interface S3Logs {
     /**
@@ -2320,6 +2342,10 @@ declare namespace Imagebuilder {
      * The idempotency token used to make this request idempotent. 
      */
     clientToken: ClientToken;
+    /**
+     * The tags attached to the resource created by Image Builder.
+     */
+    resourceTags?: ResourceTagMap;
   }
   export interface UpdateInfrastructureConfigurationResponse {
     /**

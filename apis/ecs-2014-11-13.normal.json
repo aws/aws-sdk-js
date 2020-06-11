@@ -37,6 +37,9 @@
         },
         {
           "shape": "LimitExceededException"
+        },
+        {
+          "shape": "UpdateInProgressException"
         }
       ],
       "documentation": "<p>Creates a new capacity provider. Capacity providers are associated with an Amazon ECS cluster and are used in capacity provider strategies to facilitate cluster auto scaling.</p> <p>Only capacity providers using an Auto Scaling group can be created. Amazon ECS tasks on AWS Fargate use the <code>FARGATE</code> and <code>FARGATE_SPOT</code> capacity providers which are already created and available to all accounts in Regions supported by AWS Fargate.</p>"
@@ -201,6 +204,31 @@
         }
       ],
       "documentation": "<p>Deletes one or more custom attributes from an Amazon ECS resource.</p>"
+    },
+    "DeleteCapacityProvider": {
+      "name": "DeleteCapacityProvider",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteCapacityProviderRequest"
+      },
+      "output": {
+        "shape": "DeleteCapacityProviderResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServerException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        }
+      ],
+      "documentation": "<p>Deletes the specified capacity provider.</p> <note> <p>The <code>FARGATE</code> and <code>FARGATE_SPOT</code> capacity providers are reserved and cannot be deleted. You can disassociate them from a cluster using either the <a>PutClusterCapacityProviders</a> API or by deleting the cluster.</p> </note> <p>Prior to a capacity provider being deleted, the capacity provider must be removed from the capacity provider strategy from all services. The <a>UpdateService</a> API can be used to remove a capacity provider from a service's capacity provider strategy. When updating a service, the <code>forceNewDeployment</code> option can be used to ensure that any tasks using the Amazon EC2 instance capacity provided by the capacity provider are transitioned to use the capacity from the remaining capacity providers. Only capacity providers that are not associated with a cluster can be deleted. To remove a capacity provider from a cluster, you can either use <a>PutClusterCapacityProviders</a> or delete the cluster.</p>"
     },
     "DeleteCluster": {
       "name": "DeleteCluster",
@@ -1628,11 +1656,19 @@
         },
         "status": {
           "shape": "CapacityProviderStatus",
-          "documentation": "<p>The current status of the capacity provider. Only capacity providers in an <code>ACTIVE</code> state can be used in a cluster.</p>"
+          "documentation": "<p>The current status of the capacity provider. Only capacity providers in an <code>ACTIVE</code> state can be used in a cluster. When a capacity provider is successfully deleted, it will have an <code>INACTIVE</code> status.</p>"
         },
         "autoScalingGroupProvider": {
           "shape": "AutoScalingGroupProvider",
           "documentation": "<p>The Auto Scaling group settings for the capacity provider.</p>"
+        },
+        "updateStatus": {
+          "shape": "CapacityProviderUpdateStatus",
+          "documentation": "<p>The update status of the capacity provider. The following are the possible states that will be returned.</p> <dl> <dt>DELETE_IN_PROGRESS</dt> <dd> <p>The capacity provider is in the process of being deleted.</p> </dd> <dt>DELETE_COMPLETE</dt> <dd> <p>The capacity provider has been successfully deleted and will have an <code>INACTIVE</code> status.</p> </dd> <dt>DELETE_FAILED</dt> <dd> <p>The capacity provider was unable to be deleted. The update status reason will provide further details about why the delete failed.</p> </dd> </dl>"
+        },
+        "updateStatusReason": {
+          "shape": "String",
+          "documentation": "<p>The update status reason. This provides further details about the update status for the capacity provider.</p>"
         },
         "tags": {
           "shape": "Tags",
@@ -1656,7 +1692,8 @@
     "CapacityProviderStatus": {
       "type": "string",
       "enum": [
-        "ACTIVE"
+        "ACTIVE",
+        "INACTIVE"
       ]
     },
     "CapacityProviderStrategy": {
@@ -1695,6 +1732,14 @@
       "type": "integer",
       "max": 1000,
       "min": 0
+    },
+    "CapacityProviderUpdateStatus": {
+      "type": "string",
+      "enum": [
+        "DELETE_IN_PROGRESS",
+        "DELETE_COMPLETE",
+        "DELETE_FAILED"
+      ]
     },
     "CapacityProviders": {
       "type": "list",
@@ -2047,7 +2092,7 @@
         },
         "ulimits": {
           "shape": "UlimitList",
-          "documentation": "<p>A list of <code>ulimits</code> to set in the container. This parameter maps to <code>Ulimits</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--ulimit</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>. Valid naming values are displayed in the <a>Ulimit</a> data type. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: <code>sudo docker version --format '{{.Server.APIVersion}}'</code> </p> <note> <p>This parameter is not supported for Windows containers.</p> </note>"
+          "documentation": "<p>A list of <code>ulimits</code> to set in the container. If a ulimit value is specified in a task definition, it will override the default values set by Docker. This parameter maps to <code>Ulimits</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--ulimit</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>. Valid naming values are displayed in the <a>Ulimit</a> data type. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: <code>sudo docker version --format '{{.Server.APIVersion}}'</code> </p> <note> <p>This parameter is not supported for Windows containers.</p> </note>"
         },
         "logConfiguration": {
           "shape": "LogConfiguration",
@@ -2574,6 +2619,26 @@
         "attributes": {
           "shape": "Attributes",
           "documentation": "<p>A list of attribute objects that were successfully deleted from your resource.</p>"
+        }
+      }
+    },
+    "DeleteCapacityProviderRequest": {
+      "type": "structure",
+      "required": [
+        "capacityProvider"
+      ],
+      "members": {
+        "capacityProvider": {
+          "shape": "String",
+          "documentation": "<p>The short name or full Amazon Resource Name (ARN) of the capacity provider to delete.</p>"
+        }
+      }
+    },
+    "DeleteCapacityProviderResponse": {
+      "type": "structure",
+      "members": {
+        "capacityProvider": {
+          "shape": "CapacityProvider"
         }
       }
     },
@@ -3505,7 +3570,7 @@
       "members": {
         "name": {
           "shape": "SettingName",
-          "documentation": "<p>The resource name you want to list the account settings for.</p>"
+          "documentation": "<p>The name of the account setting you want to list the settings for.</p>"
         },
         "value": {
           "shape": "String",
@@ -4384,7 +4449,7 @@
         },
         "executionRoleArn": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the task execution role that the Amazon ECS container agent and the Docker daemon can assume.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the task execution role that grants the Amazon ECS container agent permission to make AWS API calls on your behalf. The task execution IAM role is required depending on the requirements of your task. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html\">Amazon ECS task execution IAM role</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
         },
         "networkMode": {
           "shape": "NetworkMode",
@@ -5403,7 +5468,7 @@
         },
         "executionRoleArn": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the task execution role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the task execution role that grants the Amazon ECS container agent permission to make AWS API calls on your behalf. The task execution IAM role is required depending on the requirements of your task. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html\">Amazon ECS task execution IAM role</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
         },
         "networkMode": {
           "shape": "NetworkMode",
@@ -5546,7 +5611,7 @@
         },
         "executionRoleArn": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the task execution role that the Amazon ECS container agent and the Docker daemon can assume.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the task execution IAM role override for the task.</p>"
         },
         "memory": {
           "shape": "String",
@@ -6036,7 +6101,7 @@
         },
         "host": {
           "shape": "HostVolumeProperties",
-          "documentation": "<p>This parameter is specified when you are using bind mount host volumes. Bind mount host volumes are supported when you are using either the EC2 or Fargate launch types. The contents of the <code>host</code> parameter determine whether your bind mount host volume persists on the host container instance and where it is stored. If the <code>host</code> parameter is empty, then the Docker daemon assigns a host path for your data volume. However, the data is not guaranteed to persist after the containers associated with it stop running.</p> <p>Windows containers can mount whole directories on the same drive as <code>$env:ProgramData</code>. Windows containers cannot mount directories on a different drive, and mount point cannot be across drives. For example, you can mount <code>C:\\my\\path:C:\\my\\path</code> and <code>D:\\:D:\\</code>, but not <code>D:\\my\\path:C:\\my\\path</code> or <code>D:\\:C:\\my\\path</code>.</p>"
+          "documentation": "<p>This parameter is specified when you are using bind mount host volumes. The contents of the <code>host</code> parameter determine whether your bind mount host volume persists on the host container instance and where it is stored. If the <code>host</code> parameter is empty, then the Docker daemon assigns a host path for your data volume. However, the data is not guaranteed to persist after the containers associated with it stop running.</p> <p>Windows containers can mount whole directories on the same drive as <code>$env:ProgramData</code>. Windows containers cannot mount directories on a different drive, and mount point cannot be across drives. For example, you can mount <code>C:\\my\\path:C:\\my\\path</code> and <code>D:\\:D:\\</code>, but not <code>D:\\my\\path:C:\\my\\path</code> or <code>D:\\:C:\\my\\path</code>.</p>"
         },
         "dockerVolumeConfiguration": {
           "shape": "DockerVolumeConfiguration",
@@ -6044,10 +6109,10 @@
         },
         "efsVolumeConfiguration": {
           "shape": "EFSVolumeConfiguration",
-          "documentation": "<p>This parameter is specified when you are using an Amazon Elastic File System (Amazon EFS) file storage. Amazon EFS file systems are only supported when you are using the EC2 launch type.</p> <important> <p> <code>EFSVolumeConfiguration</code> remains in preview and is a Beta Service as defined by and subject to the Beta Service Participation Service Terms located at <a href=\"https://aws.amazon.com/service-terms\">https://aws.amazon.com/service-terms</a> (\"Beta Terms\"). These Beta Terms apply to your participation in this preview of <code>EFSVolumeConfiguration</code>.</p> </important>"
+          "documentation": "<p>This parameter is specified when you are using an Amazon Elastic File System file system for task storage.</p>"
         }
       },
-      "documentation": "<p>A data volume used in a task definition. For tasks that use a Docker volume, specify a <code>DockerVolumeConfiguration</code>. For tasks that use a bind mount host volume, specify a <code>host</code> and optional <code>sourcePath</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html\">Using Data Volumes in Tasks</a>.</p>"
+      "documentation": "<p>A data volume used in a task definition. For tasks that use Amazon Elastic File System (Amazon EFS) file storage, specify an <code>efsVolumeConfiguration</code>. For tasks that use a Docker volume, specify a <code>DockerVolumeConfiguration</code>. For tasks that use a bind mount host volume, specify a <code>host</code> and optional <code>sourcePath</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html\">Using Data Volumes in Tasks</a>.</p>"
     },
     "VolumeFrom": {
       "type": "structure",
