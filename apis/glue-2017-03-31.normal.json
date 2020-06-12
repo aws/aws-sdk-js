@@ -4776,7 +4776,7 @@
         },
         "Configuration": {
           "shape": "CrawlerConfiguration",
-          "documentation": "<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html\">Configuring a Crawler</a>.</p>"
+          "documentation": "<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html\">Configuring a Crawler</a>.</p>"
         },
         "CrawlerSecurityConfiguration": {
           "shape": "CrawlerSecurityConfiguration",
@@ -4966,7 +4966,7 @@
         },
         "Schedule": {
           "shape": "CronExpression",
-          "documentation": "<p>A <code>cron</code> expression used to specify the schedule. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, specify <code>cron(15 12 * * ? *)</code>.</p>"
+          "documentation": "<p>A <code>cron</code> expression used to specify the schedule (see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.</p>"
         },
         "Classifiers": {
           "shape": "ClassifierNameList",
@@ -4982,7 +4982,7 @@
         },
         "Configuration": {
           "shape": "CrawlerConfiguration",
-          "documentation": "<p>The crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html\">Configuring a Crawler</a>.</p>"
+          "documentation": "<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html\">Configuring a Crawler</a>.</p>"
         },
         "CrawlerSecurityConfiguration": {
           "shape": "CrawlerSecurityConfiguration",
@@ -4990,7 +4990,7 @@
         },
         "Tags": {
           "shape": "TagsMap",
-          "documentation": "<p>The tags to use with this crawler request. You can use tags to limit access to the crawler. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">AWS Tags in AWS Glue</a>.</p>"
+          "documentation": "<p>The tags to use with this crawler request. You may use tags to limit access to the crawler. For more information about tags in AWS Glue, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">AWS Tags in AWS Glue</a> in the developer guide.</p>"
         }
       }
     },
@@ -5342,7 +5342,7 @@
         },
         "JsonPath": {
           "shape": "JsonPath",
-          "documentation": "<p>A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of <code>JsonPath</code>, as described in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json\">Writing JsonPath Custom Classifiers</a>.</p>"
+          "documentation": "<p>A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json\">Writing JsonPath Custom Classifiers</a>.</p>"
         }
       },
       "documentation": "<p>Specifies a JSON classifier for <code>CreateClassifier</code> to create.</p>"
@@ -6346,6 +6346,14 @@
         "Path": {
           "shape": "Path",
           "documentation": "<p>The name of the DynamoDB table to crawl.</p>"
+        },
+        "scanAll": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>Indicates whether to scan all the records, or to sample rows from the table. Scanning all the records can take a long time when the table is not a high throughput table.</p> <p>A value of <code>true</code> means to scan all records, while a value of <code>false</code> means to sample the records. If no value is specified, the value defaults to <code>true</code>.</p>"
+        },
+        "scanRate": {
+          "shape": "NullableDouble",
+          "documentation": "<p>The percentage of the configured read capacity units to use by the AWS Glue crawler. Read capacity units is a term defined by DynamoDB, and is a numeric value that acts as rate limiter for the number of reads that can be performed on that table per second.</p> <p>The valid values are null or a value between 0.1 to 1.5. A null value is used when user does not provide a value, and defaults to 0.5 of the configured Read Capacity Unit (for provisioned tables), or 0.25 of the max configured Read Capacity Unit (for tables using on-demand mode).</p>"
         }
       },
       "documentation": "<p>Specifies an Amazon DynamoDB table to crawl.</p>"
@@ -8036,11 +8044,11 @@
         },
         "GrokPattern": {
           "shape": "GrokPattern",
-          "documentation": "<p>The grok pattern applied to a data store by this classifier. For more information, see built-in patterns in <a href=\"http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html\">Writing Custom Classifiers</a>.</p>"
+          "documentation": "<p>The grok pattern applied to a data store by this classifier. For more information, see built-in patterns in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html\">Writing Custom Classifiers</a>.</p>"
         },
         "CustomPatterns": {
           "shape": "CustomPatterns",
-          "documentation": "<p>Optional custom grok patterns defined by this classifier. For more information, see custom patterns in <a href=\"http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html\">Writing Custom Classifiers</a>.</p>"
+          "documentation": "<p>Optional custom grok patterns defined by this classifier. For more information, see custom patterns in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html\">Writing Custom Classifiers</a>.</p>"
         }
       },
       "documentation": "<p>A classifier that uses <code>grok</code> patterns.</p>"
@@ -8114,7 +8122,7 @@
         },
         "Exclusions": {
           "shape": "PathList",
-          "documentation": "<p>A list of glob patterns used to exclude from the crawl. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/add-crawler.html\">Catalog Tables with a Crawler</a>.</p>"
+          "documentation": "<p>A list of glob patterns used to exclude from the crawl. For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html\">Catalog Tables with a Crawler</a>.</p>"
         }
       },
       "documentation": "<p>Specifies a JDBC data store to crawl.</p>"
@@ -8526,7 +8534,7 @@
         },
         "JsonPath": {
           "shape": "JsonPath",
-          "documentation": "<p>A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of <code>JsonPath</code>, as described in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json\">Writing JsonPath Custom Classifiers</a>.</p>"
+          "documentation": "<p>A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json\">Writing JsonPath Custom Classifiers</a>.</p>"
         }
       },
       "documentation": "<p>A classifier for <code>JSON</code> content.</p>"
@@ -9597,7 +9605,7 @@
         },
         "Exclusions": {
           "shape": "PathList",
-          "documentation": "<p>A list of glob patterns used to exclude from the crawl. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/add-crawler.html\">Catalog Tables with a Crawler</a>.</p>"
+          "documentation": "<p>A list of glob patterns used to exclude from the crawl. For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html\">Catalog Tables with a Crawler</a>.</p>"
         }
       },
       "documentation": "<p>Specifies a data store in Amazon Simple Storage Service (Amazon S3).</p>"
@@ -9616,7 +9624,7 @@
       "members": {
         "ScheduleExpression": {
           "shape": "CronExpression",
-          "documentation": "<p>A <code>cron</code> expression used to specify the schedule. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, specify <code>cron(15 12 * * ? *)</code>.</p>"
+          "documentation": "<p>A <code>cron</code> expression used to specify the schedule (see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.</p>"
         },
         "State": {
           "shape": "ScheduleState",
@@ -10977,7 +10985,7 @@
         },
         "Schedule": {
           "shape": "CronExpression",
-          "documentation": "<p>A <code>cron</code> expression used to specify the schedule. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, specify <code>cron(15 12 * * ? *)</code>.</p>"
+          "documentation": "<p>A <code>cron</code> expression used to specify the schedule (see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.</p>"
         },
         "Classifiers": {
           "shape": "ClassifierNameList",
@@ -10993,7 +11001,7 @@
         },
         "Configuration": {
           "shape": "CrawlerConfiguration",
-          "documentation": "<p>The crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html\">Configuring a Crawler</a>.</p>"
+          "documentation": "<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html\">Configuring a Crawler</a>.</p>"
         },
         "CrawlerSecurityConfiguration": {
           "shape": "CrawlerSecurityConfiguration",
@@ -11017,7 +11025,7 @@
         },
         "Schedule": {
           "shape": "CronExpression",
-          "documentation": "<p>The updated <code>cron</code> expression used to specify the schedule. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, specify <code>cron(15 12 * * ? *)</code>.</p>"
+          "documentation": "<p>The updated <code>cron</code> expression used to specify the schedule (see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.</p>"
         }
       }
     },
@@ -11194,7 +11202,7 @@
         },
         "JsonPath": {
           "shape": "JsonPath",
-          "documentation": "<p>A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of <code>JsonPath</code>, as described in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json\">Writing JsonPath Custom Classifiers</a>.</p>"
+          "documentation": "<p>A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json\">Writing JsonPath Custom Classifiers</a>.</p>"
         }
       },
       "documentation": "<p>Specifies a JSON classifier to be updated.</p>"

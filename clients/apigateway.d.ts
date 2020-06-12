@@ -2725,7 +2725,7 @@ declare namespace APIGateway {
      */
     parameters?: MapOfStringToString;
     /**
-     * [Required] The POST request body containing external API definitions. Currently, only OpenAPI definition JSON/YAML files are supported. The maximum size of the API definition file is 2MB.
+     * [Required] The POST request body containing external API definitions. Currently, only OpenAPI definition JSON/YAML files are supported. The maximum size of the API definition file is 6MB.
      */
     body: _Blob;
   }
@@ -2776,7 +2776,7 @@ declare namespace APIGateway {
      */
     timeoutInMillis?: Integer;
     /**
-     * An API-specific tag group of related cached parameters. To be valid values for cacheKeyParameters, these parameters must also be specified for Method requestParameters.
+     * Specifies a group of related cached parameters. By default, API Gateway uses the resource ID as the cacheNamespace. You can specify the same cacheNamespace across resources to return the same cached data for requests to different resources.
      */
     cacheNamespace?: String;
     /**
@@ -3090,11 +3090,11 @@ declare namespace APIGateway {
      */
     passthroughBehavior?: String;
     /**
-     * A list of request parameters whose values are to be cached.
+     * Specifies a group of related cached parameters. By default, API Gateway uses the resource ID as the cacheNamespace. You can specify the same cacheNamespace across resources to return the same cached data for requests to different resources.
      */
     cacheNamespace?: String;
     /**
-     * An API-specific tag group of related cached parameters.
+     * A list of request parameters whose values API Gateway caches. To be valid values for cacheKeyParameters, these parameters must also be specified for Method requestParameters.
      */
     cacheKeyParameters?: ListOfString;
     /**
@@ -3232,7 +3232,7 @@ declare namespace APIGateway {
      */
     parameters?: MapOfStringToString;
     /**
-     * [Required] The PUT request body containing external API definitions. Currently, only OpenAPI definition JSON/YAML files are supported. The maximum size of the API definition file is 2MB.
+     * [Required] The PUT request body containing external API definitions. Currently, only OpenAPI definition JSON/YAML files are supported. The maximum size of the API definition file is 6MB.
      */
     body: _Blob;
   }
@@ -3672,7 +3672,7 @@ declare namespace APIGateway {
   export type Timestamp = Date;
   export interface TlsConfig {
     /**
-     * Specifies whether API Gateway skips trust chain validation of the server certificate during the TLS handshake. Supported only for HTTP and HTTP_PROXY integrations. By default, API Gateway validates that certificates for integration endpoints are issued by a supported Certificate Authority. If enabled, API Gateway skips trust chain validation of the server certificate. This is not recommended, but it enables you to use certificates that are signed by private Certificate Authorities, or certificates that are self-signed.
+     * Specifies whether or not API Gateway skips verification that the certificate for an integration endpoint is issued by a supported certificate authority. This isn’t recommended, but it enables you to use certificates that are signed by private certificate authorities, or certificates that are self-signed. If enabled, API Gateway still performs basic certificate validation, which includes checking the certificate's expiration date, hostname, and presence of a root certificate authority. Supported only for HTTP and HTTP_PROXY integrations.
      */
     insecureSkipVerification?: Boolean;
   }

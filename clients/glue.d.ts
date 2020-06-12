@@ -1833,7 +1833,7 @@ declare namespace Glue {
      */
     Targets: CrawlerTargets;
     /**
-     * A cron expression used to specify the schedule. For more information, see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, specify cron(15 12 * * ? *).
+     * A cron expression used to specify the schedule (see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
      */
     Schedule?: CronExpression;
     /**
@@ -1849,7 +1849,7 @@ declare namespace Glue {
      */
     SchemaChangePolicy?: SchemaChangePolicy;
     /**
-     * The crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
      */
     Configuration?: CrawlerConfiguration;
     /**
@@ -1857,7 +1857,7 @@ declare namespace Glue {
      */
     CrawlerSecurityConfiguration?: CrawlerSecurityConfiguration;
     /**
-     * The tags to use with this crawler request. You can use tags to limit access to the crawler. For more information, see AWS Tags in AWS Glue.
+     * The tags to use with this crawler request. You may use tags to limit access to the crawler. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide.
      */
     Tags?: TagsMap;
   }
@@ -2816,6 +2816,14 @@ declare namespace Glue {
      * The name of the DynamoDB table to crawl.
      */
     Path?: Path;
+    /**
+     * Indicates whether to scan all the records, or to sample rows from the table. Scanning all the records can take a long time when the table is not a high throughput table. A value of true means to scan all records, while a value of false means to sample the records. If no value is specified, the value defaults to true.
+     */
+    scanAll?: NullableBoolean;
+    /**
+     * The percentage of the configured read capacity units to use by the AWS Glue crawler. Read capacity units is a term defined by DynamoDB, and is a numeric value that acts as rate limiter for the number of reads that can be performed on that table per second. The valid values are null or a value between 0.1 to 1.5. A null value is used when user does not provide a value, and defaults to 0.5 of the configured Read Capacity Unit (for provisioned tables), or 0.25 of the max configured Read Capacity Unit (for tables using on-demand mode).
+     */
+    scanRate?: NullableDouble;
   }
   export type DynamoDBTargetList = DynamoDBTarget[];
   export interface Edge {
@@ -5002,7 +5010,7 @@ declare namespace Glue {
   export type ScalaCode = string;
   export interface Schedule {
     /**
-     * A cron expression used to specify the schedule. For more information, see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, specify cron(15 12 * * ? *).
+     * A cron expression used to specify the schedule (see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
      */
     ScheduleExpression?: CronExpression;
     /**
@@ -5863,7 +5871,7 @@ declare namespace Glue {
      */
     Targets?: CrawlerTargets;
     /**
-     * A cron expression used to specify the schedule. For more information, see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, specify cron(15 12 * * ? *).
+     * A cron expression used to specify the schedule (see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
      */
     Schedule?: CronExpression;
     /**
@@ -5879,7 +5887,7 @@ declare namespace Glue {
      */
     SchemaChangePolicy?: SchemaChangePolicy;
     /**
-     * The crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
      */
     Configuration?: CrawlerConfiguration;
     /**
@@ -5895,7 +5903,7 @@ declare namespace Glue {
      */
     CrawlerName: NameString;
     /**
-     * The updated cron expression used to specify the schedule. For more information, see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, specify cron(15 12 * * ? *).
+     * The updated cron expression used to specify the schedule (see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
      */
     Schedule?: CronExpression;
   }

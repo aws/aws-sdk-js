@@ -2114,7 +2114,7 @@ declare namespace CloudFormation {
      */
     LoggingConfig?: LoggingConfig;
     /**
-     * The Amazon Resource Name (ARN) of the IAM execution role to use to register the type. If your resource type calls AWS APIs in any of its handlers, you must create an  IAM execution role  that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your resource type with the appropriate credentials.
+     * The Amazon Resource Name (ARN) of the IAM role for CloudFormation to assume when invoking the resource provider. If your resource type calls AWS APIs in any of its handlers, you must create an  IAM execution role  that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. When CloudFormation needs to invoke the resource provider handler, CloudFormation assumes this execution role to create a temporary session token, which it then passes to the resource provider handler, thereby supplying your resource provider with the appropriate credentials.
      */
     ExecutionRoleArn?: RoleArn;
     /**
@@ -2516,7 +2516,7 @@ declare namespace CloudFormation {
      */
     StatusReason?: Reason;
     /**
-     * Reserved for internal use. No data returned.
+     * [Service-managed permissions] The organization root ID or organizational unit (OU) IDs that you specified for DeploymentTargets.
      */
     OrganizationalUnitId?: OrganizationalUnitId;
     /**
@@ -2556,7 +2556,7 @@ declare namespace CloudFormation {
      */
     StatusReason?: Reason;
     /**
-     * Reserved for internal use. No data returned.
+     * [Service-managed permissions] The organization root ID or organizational unit (OU) IDs that you specified for DeploymentTargets.
      */
     OrganizationalUnitId?: OrganizationalUnitId;
     /**
@@ -2817,7 +2817,7 @@ declare namespace CloudFormation {
      */
     PermissionModel?: PermissionModels;
     /**
-     * Reserved for internal use. No data returned.
+     * [Service-managed permissions] The organization root ID or organizational unit (OU) IDs that you specified for DeploymentTargets.
      */
     OrganizationalUnitIds?: OrganizationalUnitIdList;
   }
@@ -2926,7 +2926,7 @@ declare namespace CloudFormation {
      */
     FailureTolerancePercentage?: FailureTolerancePercentage;
     /**
-     * The maximum number of accounts in which to perform this operation at one time. This is dependent on the value of FailureToleranceCount—MaxConcurrentCount is at most one more than the FailureToleranceCount . Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling. Conditional: You must specify either MaxConcurrentCount or MaxConcurrentPercentage, but not both.
+     * The maximum number of accounts in which to perform this operation at one time. This is dependent on the value of FailureToleranceCount. MaxConcurrentCount is at most one more than the FailureToleranceCount. Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling. Conditional: You must specify either MaxConcurrentCount or MaxConcurrentPercentage, but not both.
      */
     MaxConcurrentCount?: MaxConcurrentCount;
     /**
@@ -2958,7 +2958,7 @@ declare namespace CloudFormation {
      */
     AccountGateResult?: AccountGateResult;
     /**
-     * Reserved for internal use. No data returned.
+     * [Service-managed permissions] The organization root ID or organizational unit (OU) IDs that you specified for DeploymentTargets.
      */
     OrganizationalUnitId?: OrganizationalUnitId;
   }

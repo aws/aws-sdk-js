@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.695.0-->
+<!--LATEST=2.696.0-->
 <!--ENTRYINSERT-->
+
+## 2.696.0
+* feature: Glue: You can now choose to crawl the entire table or just a sample of records in DynamoDB when using AWS Glue crawlers. Additionally, you can also specify a scanning rate for crawling DynamoDB tables.
+* feature: StorageGateway: Display EndpointType in DescribeGatewayInformation
 
 ## 2.695.0
 * feature: ECS: This release adds support for deleting capacity providers.
