@@ -1560,8 +1560,7 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export type AuthEventsType = AuthEventType[];
   export type AuthFlowType = "USER_SRP_AUTH"|"REFRESH_TOKEN_AUTH"|"REFRESH_TOKEN"|"CUSTOM_AUTH"|"ADMIN_NO_SRP_AUTH"|"USER_PASSWORD_AUTH"|"ADMIN_USER_PASSWORD_AUTH"|string;
-  export type AuthParametersType = {[key: string]: AuthParametersValueType};
-  export type AuthParametersValueType = string;
+  export type AuthParametersType = {[key: string]: StringType};
   export interface AuthenticationResultType {
     /**
      * The access token.

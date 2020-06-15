@@ -5297,7 +5297,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Remove the specified thing from the specified group.</p>"
+      "documentation": "<p>Remove the specified thing from the specified group.</p> <p>You must specify either a <code>thingGroupArn</code> or a <code>thingGroupName</code> to identify the thing group and either a <code>thingArn</code> or a <code>thingName</code> to identify the thing to remove from the thing group. </p>"
     },
     "ReplaceTopicRule": {
       "name": "ReplaceTopicRule",
@@ -6490,10 +6490,10 @@
       "members": {
         "criteriaList": {
           "shape": "AbortCriteriaList",
-          "documentation": "<p>The list of abort criteria to define rules to abort the job.</p>"
+          "documentation": "<p>The list of criteria that determine when and how to abort the job.</p>"
         }
       },
-      "documentation": "<p>Details of abort criteria to abort the job.</p>"
+      "documentation": "<p>The criteria that determine when and how a job abort takes place.</p>"
     },
     "AbortCriteria": {
       "type": "structure",
@@ -6506,22 +6506,22 @@
       "members": {
         "failureType": {
           "shape": "JobExecutionFailureType",
-          "documentation": "<p>The type of job execution failure to define a rule to initiate a job abort.</p>"
+          "documentation": "<p>The type of job execution failures that can initiate a job abort.</p>"
         },
         "action": {
           "shape": "AbortAction",
-          "documentation": "<p>The type of abort action to initiate a job abort.</p>"
+          "documentation": "<p>The type of job action to take to initiate the job abort.</p>"
         },
         "thresholdPercentage": {
           "shape": "AbortThresholdPercentage",
-          "documentation": "<p>The threshold as a percentage of the total number of executed things that will initiate a job abort.</p> <p>AWS IoT supports up to two digits after the decimal (for example, 10.9 and 10.99, but not 10.999).</p>"
+          "documentation": "<p>The minimum percentage of job execution failures that must occur to initiate the job abort.</p> <p>AWS IoT supports up to two digits after the decimal (for example, 10.9 and 10.99, but not 10.999).</p>"
         },
         "minNumberOfExecutedThings": {
           "shape": "MinimumNumberOfExecutedThings",
-          "documentation": "<p>Minimum number of executed things before evaluating an abort rule.</p>"
+          "documentation": "<p>The minimum number of things which must receive job execution notifications before the job can be aborted.</p>"
         }
       },
-      "documentation": "<p>Details of abort criteria to define rules to abort the job.</p>"
+      "documentation": "<p>The criteria that determine when and how a job abort takes place.</p>"
     },
     "AbortCriteriaList": {
       "type": "list",
@@ -7018,7 +7018,7 @@
         },
         "target": {
           "shape": "PolicyTarget",
-          "documentation": "<p>The <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/iot-security-identity.html\">identity</a> to which the policy is attached.</p>"
+          "documentation": "<p>The <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/security-iam.html\">identity</a> to which the policy is attached.</p>"
         }
       }
     },
@@ -7695,15 +7695,113 @@
     "AwsIotSqlVersion": {
       "type": "string"
     },
+    "AwsJobAbortConfig": {
+      "type": "structure",
+      "required": [
+        "abortCriteriaList"
+      ],
+      "members": {
+        "abortCriteriaList": {
+          "shape": "AwsJobAbortCriteriaList",
+          "documentation": "<p>The list of criteria that determine when and how to abort the job.</p>"
+        }
+      },
+      "documentation": "<p>The criteria that determine when and how a job abort takes place.</p>"
+    },
+    "AwsJobAbortCriteria": {
+      "type": "structure",
+      "required": [
+        "failureType",
+        "action",
+        "thresholdPercentage",
+        "minNumberOfExecutedThings"
+      ],
+      "members": {
+        "failureType": {
+          "shape": "AwsJobAbortCriteriaFailureType",
+          "documentation": "<p>The type of job execution failures that can initiate a job abort.</p>"
+        },
+        "action": {
+          "shape": "AwsJobAbortCriteriaAbortAction",
+          "documentation": "<p>The type of job action to take to initiate the job abort.</p>"
+        },
+        "thresholdPercentage": {
+          "shape": "AwsJobAbortCriteriaAbortThresholdPercentage",
+          "documentation": "<p>The minimum percentage of job execution failures that must occur to initiate the job abort.</p> <p>AWS IoT supports up to two digits after the decimal (for example, 10.9 and 10.99, but not 10.999).</p>"
+        },
+        "minNumberOfExecutedThings": {
+          "shape": "AwsJobAbortCriteriaMinimumNumberOfExecutedThings",
+          "documentation": "<p>The minimum number of things which must receive job execution notifications before the job can be aborted.</p>"
+        }
+      },
+      "documentation": "<p>The criteria that determine when and how a job abort takes place.</p>"
+    },
+    "AwsJobAbortCriteriaAbortAction": {
+      "type": "string",
+      "enum": [
+        "CANCEL"
+      ]
+    },
+    "AwsJobAbortCriteriaAbortThresholdPercentage": {
+      "type": "double",
+      "max": 100
+    },
+    "AwsJobAbortCriteriaFailureType": {
+      "type": "string",
+      "enum": [
+        "FAILED",
+        "REJECTED",
+        "TIMED_OUT",
+        "ALL"
+      ]
+    },
+    "AwsJobAbortCriteriaList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsJobAbortCriteria"
+      },
+      "min": 1
+    },
+    "AwsJobAbortCriteriaMinimumNumberOfExecutedThings": {
+      "type": "integer",
+      "min": 1
+    },
     "AwsJobExecutionsRolloutConfig": {
       "type": "structure",
       "members": {
         "maximumPerMinute": {
           "shape": "MaximumPerMinute",
           "documentation": "<p>The maximum number of OTA update job executions started per minute.</p>"
+        },
+        "exponentialRate": {
+          "shape": "AwsJobExponentialRolloutRate",
+          "documentation": "<p>The rate of increase for a job rollout. This parameter allows you to define an exponential rate increase for a job rollout.</p>"
         }
       },
       "documentation": "<p>Configuration for the rollout of OTA updates.</p>"
+    },
+    "AwsJobExponentialRolloutRate": {
+      "type": "structure",
+      "required": [
+        "baseRatePerMinute",
+        "incrementFactor",
+        "rateIncreaseCriteria"
+      ],
+      "members": {
+        "baseRatePerMinute": {
+          "shape": "AwsJobRolloutRatePerMinute",
+          "documentation": "<p>The minimum number of things that will be notified of a pending job, per minute, at the start of the job rollout. This is the initial rate of the rollout.</p>"
+        },
+        "incrementFactor": {
+          "shape": "AwsJobRolloutIncrementFactor",
+          "documentation": "<p>The rate of increase for a job rollout. The number of things notified is multiplied by this factor.</p>"
+        },
+        "rateIncreaseCriteria": {
+          "shape": "AwsJobRateIncreaseCriteria",
+          "documentation": "<p>The criteria to initiate the increase in rate of rollout for a job.</p> <p>AWS IoT supports up to one digit after the decimal (for example, 1.5, but not 1.55).</p>"
+        }
+      },
+      "documentation": "<p>The rate of increase for a job rollout. This parameter allows you to define an exponential rate increase for a job rollout.</p>"
     },
     "AwsJobPresignedUrlConfig": {
       "type": "structure",
@@ -7714,6 +7812,45 @@
         }
       },
       "documentation": "<p>Configuration information for pre-signed URLs. Valid when <code>protocols</code> contains HTTP.</p>"
+    },
+    "AwsJobRateIncreaseCriteria": {
+      "type": "structure",
+      "members": {
+        "numberOfNotifiedThings": {
+          "shape": "AwsJobRateIncreaseCriteriaNumberOfThings",
+          "documentation": "<p>When this number of things have been notified, it will initiate an increase in the rollout rate.</p>"
+        },
+        "numberOfSucceededThings": {
+          "shape": "AwsJobRateIncreaseCriteriaNumberOfThings",
+          "documentation": "<p>When this number of things have succeeded in their job execution, it will initiate an increase in the rollout rate.</p>"
+        }
+      },
+      "documentation": "<p>The criteria to initiate the increase in rate of rollout for a job.</p>"
+    },
+    "AwsJobRateIncreaseCriteriaNumberOfThings": {
+      "type": "integer",
+      "min": 1
+    },
+    "AwsJobRolloutIncrementFactor": {
+      "type": "double"
+    },
+    "AwsJobRolloutRatePerMinute": {
+      "type": "integer",
+      "max": 1000,
+      "min": 1
+    },
+    "AwsJobTimeoutConfig": {
+      "type": "structure",
+      "members": {
+        "inProgressTimeoutInMinutes": {
+          "shape": "AwsJobTimeoutInProgressTimeoutInMinutes",
+          "documentation": "<p>Specifies the amount of time, in minutes, this device has to finish execution of this job. The timeout interval can be anywhere between 1 minute and 7 days (1 to 10080 minutes). The in progress timer can't be updated and will apply to all job executions for the job. Whenever a job execution remains in the IN_PROGRESS status for longer than this interval, the job execution will fail and switch to the terminal <code>TIMED_OUT</code> status.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the amount of time each device has to finish its execution of the job. A timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution status is not set to another terminal state before the timer expires, it will be automatically set to <code>TIMED_OUT</code>.</p>"
+    },
+    "AwsJobTimeoutInProgressTimeoutInMinutes": {
+      "type": "long"
     },
     "Behavior": {
       "type": "structure",
@@ -8930,7 +9067,7 @@
         },
         "targets": {
           "shape": "Targets",
-          "documentation": "<p>The targeted devices to receive OTA updates.</p>"
+          "documentation": "<p>The devices targeted to receive OTA updates.</p>"
         },
         "protocols": {
           "shape": "Protocols",
@@ -8948,13 +9085,21 @@
           "shape": "AwsJobPresignedUrlConfig",
           "documentation": "<p>Configuration information for pre-signed URLs.</p>"
         },
+        "awsJobAbortConfig": {
+          "shape": "AwsJobAbortConfig",
+          "documentation": "<p>The criteria that determine when and how a job abort takes place.</p>"
+        },
+        "awsJobTimeoutConfig": {
+          "shape": "AwsJobTimeoutConfig",
+          "documentation": "<p>Specifies the amount of time each device has to finish its execution of the job. A timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution status is not set to another terminal state before the timer expires, it will be automatically set to <code>TIMED_OUT</code>.</p>"
+        },
         "files": {
           "shape": "OTAUpdateFiles",
           "documentation": "<p>The files to be streamed by the OTA update.</p>"
         },
         "roleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>The IAM role that allows access to the AWS IoT Jobs service.</p>"
+          "documentation": "<p>The IAM role that grants AWS IoT access to the Amazon S3, AWS IoT jobs and AWS Code Signing resources to create an OTA update job.</p>"
         },
         "additionalParameters": {
           "shape": "AdditionalParameterMap",
@@ -9892,7 +10037,7 @@
       "members": {
         "otaUpdateId": {
           "shape": "OTAUpdateId",
-          "documentation": "<p>The OTA update ID to delete.</p>",
+          "documentation": "<p>The ID of the OTA update to delete.</p>",
           "location": "uri",
           "locationName": "otaUpdateId"
         },
@@ -9904,7 +10049,7 @@
         },
         "forceDeleteAWSJob": {
           "shape": "ForceDeleteAWSJob",
-          "documentation": "<p>Specifies if the AWS Job associated with the OTA update should be deleted with the OTA update is deleted.</p>",
+          "documentation": "<p>Specifies if the AWS Job associated with the OTA update should be deleted when the OTA update is deleted.</p>",
           "location": "querystring",
           "locationName": "forceDeleteAWSJob"
         }

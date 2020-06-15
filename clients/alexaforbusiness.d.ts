@@ -912,7 +912,7 @@ declare namespace AlexaForBusiness {
     /**
      * The interval of the content range.
      */
-    Interval?: BusinessReportInterval;
+    Interval: BusinessReportInterval;
   }
   export type BusinessReportDeliveryTime = Date;
   export type BusinessReportDownloadUrl = string;
@@ -1153,6 +1153,10 @@ declare namespace AlexaForBusiness {
      * The client request token.
      */
     ClientRequestToken?: ClientRequestToken;
+    /**
+     * The tags for the business report schedule.
+     */
+    Tags?: TagList;
   }
   export interface CreateBusinessReportScheduleResponse {
     /**
@@ -1381,6 +1385,10 @@ declare namespace AlexaForBusiness {
      * The meeting room settings of a room profile.
      */
     MeetingRoomConfiguration?: CreateMeetingRoomConfiguration;
+    /**
+     * The tags for the profile.
+     */
+    Tags?: TagList;
   }
   export interface CreateProfileResponse {
     /**
@@ -1408,7 +1416,7 @@ declare namespace AlexaForBusiness {
      */
     Description?: RoomDescription;
     /**
-     * The profile ARN for the room.
+     * The profile ARN for the room. This is required.
      */
     ProfileArn?: Arn;
     /**
@@ -1443,6 +1451,10 @@ declare namespace AlexaForBusiness {
      * A unique, user-specified identifier for this request that ensures idempotency. 
      */
     ClientRequestToken?: ClientRequestToken;
+    /**
+     * The tags for the skill group.
+     */
+    Tags?: TagList;
   }
   export interface CreateSkillGroupResponse {
     /**
@@ -1722,7 +1734,7 @@ declare namespace AlexaForBusiness {
     /**
      * The name of the room associated with a device.
      */
-    RoomName?: RoomName;
+    RoomName?: DeviceRoomName;
     /**
      * Detailed information about a device's status.
      */
@@ -1768,6 +1780,7 @@ declare namespace AlexaForBusiness {
      */
     CertificateExpirationTime?: CertificateTime;
   }
+  export type DeviceRoomName = string;
   export type DeviceSerialNumber = string;
   export type DeviceSerialNumberForAVS = string;
   export type DeviceStatus = "READY"|"PENDING"|"WAS_OFFLINE"|"DEREGISTERED"|"FAILED"|string;
@@ -1781,7 +1794,7 @@ declare namespace AlexaForBusiness {
      */
     Code?: DeviceStatusDetailCode;
   }
-  export type DeviceStatusDetailCode = "DEVICE_SOFTWARE_UPDATE_NEEDED"|"DEVICE_WAS_OFFLINE"|"CREDENTIALS_ACCESS_FAILURE"|"TLS_VERSION_MISMATCH"|"ASSOCIATION_REJECTION"|"AUTHENTICATION_FAILURE"|"DHCP_FAILURE"|"INTERNET_UNAVAILABLE"|"DNS_FAILURE"|"UNKNOWN_FAILURE"|"CERTIFICATE_ISSUING_LIMIT_EXCEEDED"|"INVALID_CERTIFICATE_AUTHORITY"|"NETWORK_PROFILE_NOT_FOUND"|"INVALID_PASSWORD_STATE"|"PASSWORD_NOT_FOUND"|string;
+  export type DeviceStatusDetailCode = "DEVICE_SOFTWARE_UPDATE_NEEDED"|"DEVICE_WAS_OFFLINE"|"CREDENTIALS_ACCESS_FAILURE"|"TLS_VERSION_MISMATCH"|"ASSOCIATION_REJECTION"|"AUTHENTICATION_FAILURE"|"DHCP_FAILURE"|"INTERNET_UNAVAILABLE"|"DNS_FAILURE"|"UNKNOWN_FAILURE"|"CERTIFICATE_ISSUING_LIMIT_EXCEEDED"|"INVALID_CERTIFICATE_AUTHORITY"|"NETWORK_PROFILE_NOT_FOUND"|"INVALID_PASSWORD_STATE"|"PASSWORD_NOT_FOUND"|"PASSWORD_MANAGER_ACCESS_DENIED"|"CERTIFICATE_AUTHORITY_ACCESS_DENIED"|string;
   export type DeviceStatusDetails = DeviceStatusDetail[];
   export interface DeviceStatusInfo {
     /**
@@ -3193,7 +3206,7 @@ declare namespace AlexaForBusiness {
      */
     SkillTypes?: SkillTypes;
     /**
-     * The list of reviews for the skill, including Key and Value pair.
+     *  This member has been deprecated.  The list of reviews for the skill, including Key and Value pair.
      */
     Reviews?: Reviews;
     /**

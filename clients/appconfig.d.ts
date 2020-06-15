@@ -44,6 +44,14 @@ declare class AppConfig extends Service {
    */
   createEnvironment(callback?: (err: AWSError, data: AppConfig.Types.Environment) => void): Request<AppConfig.Types.Environment, AWSError>;
   /**
+   * Create a new configuration in the AppConfig configuration store.
+   */
+  createHostedConfigurationVersion(params: AppConfig.Types.CreateHostedConfigurationVersionRequest, callback?: (err: AWSError, data: AppConfig.Types.HostedConfigurationVersion) => void): Request<AppConfig.Types.HostedConfigurationVersion, AWSError>;
+  /**
+   * Create a new configuration in the AppConfig configuration store.
+   */
+  createHostedConfigurationVersion(callback?: (err: AWSError, data: AppConfig.Types.HostedConfigurationVersion) => void): Request<AppConfig.Types.HostedConfigurationVersion, AWSError>;
+  /**
    * Delete an application. Deleting an application does not delete a configuration from a host.
    */
   deleteApplication(params: AppConfig.Types.DeleteApplicationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -75,6 +83,14 @@ declare class AppConfig extends Service {
    * Delete an environment. Deleting an environment does not delete a configuration from a host.
    */
   deleteEnvironment(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete a version of a configuration from the AppConfig configuration store.
+   */
+  deleteHostedConfigurationVersion(params: AppConfig.Types.DeleteHostedConfigurationVersionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete a version of a configuration from the AppConfig configuration store.
+   */
+  deleteHostedConfigurationVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Retrieve information about an application.
    */
@@ -124,6 +140,14 @@ declare class AppConfig extends Service {
    */
   getEnvironment(callback?: (err: AWSError, data: AppConfig.Types.Environment) => void): Request<AppConfig.Types.Environment, AWSError>;
   /**
+   * Get information about a specific configuration version.
+   */
+  getHostedConfigurationVersion(params: AppConfig.Types.GetHostedConfigurationVersionRequest, callback?: (err: AWSError, data: AppConfig.Types.HostedConfigurationVersion) => void): Request<AppConfig.Types.HostedConfigurationVersion, AWSError>;
+  /**
+   * Get information about a specific configuration version.
+   */
+  getHostedConfigurationVersion(callback?: (err: AWSError, data: AppConfig.Types.HostedConfigurationVersion) => void): Request<AppConfig.Types.HostedConfigurationVersion, AWSError>;
+  /**
    * List all applications in your AWS account.
    */
   listApplications(params: AppConfig.Types.ListApplicationsRequest, callback?: (err: AWSError, data: AppConfig.Types.Applications) => void): Request<AppConfig.Types.Applications, AWSError>;
@@ -163,6 +187,14 @@ declare class AppConfig extends Service {
    * List the environments for an application.
    */
   listEnvironments(callback?: (err: AWSError, data: AppConfig.Types.Environments) => void): Request<AppConfig.Types.Environments, AWSError>;
+  /**
+   * View a list of configurations stored in the AppConfig configuration store by version.
+   */
+  listHostedConfigurationVersions(params: AppConfig.Types.ListHostedConfigurationVersionsRequest, callback?: (err: AWSError, data: AppConfig.Types.HostedConfigurationVersions) => void): Request<AppConfig.Types.HostedConfigurationVersions, AWSError>;
+  /**
+   * View a list of configurations stored in the AppConfig configuration store by version.
+   */
+  listHostedConfigurationVersions(callback?: (err: AWSError, data: AppConfig.Types.HostedConfigurationVersions) => void): Request<AppConfig.Types.HostedConfigurationVersions, AWSError>;
   /**
    * Retrieves the list of key-value tags assigned to the resource.
    */
@@ -383,7 +415,7 @@ declare namespace AppConfig {
     /**
      * The ARN of an IAM role with permission to access the configuration at the specified LocationUri.
      */
-    RetrievalRoleArn: RoleArn;
+    RetrievalRoleArn?: RoleArn;
     /**
      * A list of methods for validating the configuration.
      */
@@ -449,6 +481,32 @@ declare namespace AppConfig {
      */
     Tags?: TagMap;
   }
+  export interface CreateHostedConfigurationVersionRequest {
+    /**
+     * The application ID.
+     */
+    ApplicationId: Id;
+    /**
+     * The configuration profile ID.
+     */
+    ConfigurationProfileId: Id;
+    /**
+     * A description of the configuration.
+     */
+    Description?: Description;
+    /**
+     * The content of the configuration or the configuration data.
+     */
+    Content: _Blob;
+    /**
+     * A standard MIME type describing the format of the configuration content. For more information, see Content-Type.
+     */
+    ContentType: StringWithLengthBetween1And255;
+    /**
+     * An optional locking token used to prevent race conditions from overwriting configuration updates when creating a new version. To ensure your data is not overwritten when creating multiple hosted configuration versions in rapid succession, specify the version of the latest hosted configuration version.
+     */
+    LatestVersionNumber?: Integer;
+  }
   export interface DeleteApplicationRequest {
     /**
      * The ID of the application to delete.
@@ -480,6 +538,20 @@ declare namespace AppConfig {
      * The ID of the environment you want to delete.
      */
     EnvironmentId: Id;
+  }
+  export interface DeleteHostedConfigurationVersionRequest {
+    /**
+     * The application ID.
+     */
+    ApplicationId: Id;
+    /**
+     * The configuration profile ID.
+     */
+    ConfigurationProfileId: Id;
+    /**
+     * The versions number to delete.
+     */
+    VersionNumber: Integer;
   }
   export interface Deployment {
     /**
@@ -786,8 +858,81 @@ declare namespace AppConfig {
      */
     EnvironmentId: Id;
   }
+  export interface GetHostedConfigurationVersionRequest {
+    /**
+     * The application ID.
+     */
+    ApplicationId: Id;
+    /**
+     * The configuration profile ID.
+     */
+    ConfigurationProfileId: Id;
+    /**
+     * The version.
+     */
+    VersionNumber: Integer;
+  }
   export type GrowthFactor = number;
   export type GrowthType = "LINEAR"|"EXPONENTIAL"|string;
+  export interface HostedConfigurationVersion {
+    /**
+     * The application ID.
+     */
+    ApplicationId?: Id;
+    /**
+     * The configuration profile ID.
+     */
+    ConfigurationProfileId?: Id;
+    /**
+     * The configuration version.
+     */
+    VersionNumber?: Integer;
+    /**
+     * A description of the configuration.
+     */
+    Description?: Description;
+    /**
+     * The content of the configuration or the configuration data.
+     */
+    Content?: _Blob;
+    /**
+     * A standard MIME type describing the format of the configuration content. For more information, see Content-Type.
+     */
+    ContentType?: StringWithLengthBetween1And255;
+  }
+  export interface HostedConfigurationVersionSummary {
+    /**
+     * The application ID.
+     */
+    ApplicationId?: Id;
+    /**
+     * The configuration profile ID.
+     */
+    ConfigurationProfileId?: Id;
+    /**
+     * The configuration version.
+     */
+    VersionNumber?: Integer;
+    /**
+     * A description of the configuration.
+     */
+    Description?: Description;
+    /**
+     * A standard MIME type describing the format of the configuration content. For more information, see Content-Type.
+     */
+    ContentType?: StringWithLengthBetween1And255;
+  }
+  export type HostedConfigurationVersionSummaryList = HostedConfigurationVersionSummary[];
+  export interface HostedConfigurationVersions {
+    /**
+     * The elements from this collection.
+     */
+    Items?: HostedConfigurationVersionSummaryList;
+    /**
+     * The token for the next set of items to return. Use this token to get the next set of results.
+     */
+    NextToken?: NextToken;
+  }
   export type Id = string;
   export type Integer = number;
   export type Iso8601DateTime = Date;
@@ -854,6 +999,24 @@ declare namespace AppConfig {
     MaxResults?: MaxResults;
     /**
      * A token to start the list. Use this token to get the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListHostedConfigurationVersionsRequest {
+    /**
+     * The application ID.
+     */
+    ApplicationId: Id;
+    /**
+     * The configuration profile ID.
+     */
+    ConfigurationProfileId: Id;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * A token to start the list. Use this token to get the next set of results. 
      */
     NextToken?: NextToken;
   }
@@ -933,6 +1096,7 @@ declare namespace AppConfig {
   }
   export type String = string;
   export type StringWithLengthBetween0And32768 = string;
+  export type StringWithLengthBetween1And255 = string;
   export type StringWithLengthBetween1And64 = string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];

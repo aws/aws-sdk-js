@@ -124,13 +124,21 @@ declare class Chime extends Service {
    */
   createBot(callback?: (err: AWSError, data: Chime.Types.CreateBotResponse) => void): Request<Chime.Types.CreateBotResponse, AWSError>;
   /**
-   * Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   * Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about specifying media Regions, see Amazon Chime SDK Media Regions in the Amazon Chime Developer Guide. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
    */
   createMeeting(params: Chime.Types.CreateMeetingRequest, callback?: (err: AWSError, data: Chime.Types.CreateMeetingResponse) => void): Request<Chime.Types.CreateMeetingResponse, AWSError>;
   /**
-   * Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   * Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about specifying media Regions, see Amazon Chime SDK Media Regions in the Amazon Chime Developer Guide. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
    */
   createMeeting(callback?: (err: AWSError, data: Chime.Types.CreateMeetingResponse) => void): Request<Chime.Types.CreateMeetingResponse, AWSError>;
+  /**
+   * Creates a new Amazon Chime SDK meeting in the specified media Region, with attendees. For more information about specifying media Regions, see Amazon Chime SDK Media Regions in the Amazon Chime Developer Guide. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   */
+  createMeetingWithAttendees(params: Chime.Types.CreateMeetingWithAttendeesRequest, callback?: (err: AWSError, data: Chime.Types.CreateMeetingWithAttendeesResponse) => void): Request<Chime.Types.CreateMeetingWithAttendeesResponse, AWSError>;
+  /**
+   * Creates a new Amazon Chime SDK meeting in the specified media Region, with attendees. For more information about specifying media Regions, see Amazon Chime SDK Media Regions in the Amazon Chime Developer Guide. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   */
+  createMeetingWithAttendees(callback?: (err: AWSError, data: Chime.Types.CreateMeetingWithAttendeesResponse) => void): Request<Chime.Types.CreateMeetingWithAttendeesResponse, AWSError>;
   /**
    * Creates an order for phone numbers to be provisioned. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types. For toll-free numbers, you must use the Amazon Chime Voice Connector product type.
    */
@@ -1336,7 +1344,7 @@ declare namespace Chime {
      */
     MeetingHostId?: ExternalUserIdType;
     /**
-     * The Region in which to create the meeting. Available values: ap-northeast-1, ap-southeast-1, ap-southeast-2, ca-central-1, eu-central-1, eu-north-1, eu-west-1, eu-west-2, eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2.
+     * The Region in which to create the meeting. Default: us-east-1. Available values: ap-northeast-1, ap-southeast-1, ap-southeast-2, ca-central-1, eu-central-1, eu-north-1, eu-west-1, eu-west-2, eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2.
      */
     MediaRegion?: String;
     /**
@@ -1353,6 +1361,45 @@ declare namespace Chime {
      * The meeting information, including the meeting ID and MediaPlacement.
      */
     Meeting?: Meeting;
+  }
+  export interface CreateMeetingWithAttendeesRequest {
+    /**
+     * The unique identifier for the client request. Use a different token for different meetings.
+     */
+    ClientRequestToken: ClientRequestToken;
+    /**
+     * The external meeting ID.
+     */
+    ExternalMeetingId?: ExternalMeetingIdType;
+    /**
+     * Reserved.
+     */
+    MeetingHostId?: ExternalUserIdType;
+    /**
+     * The Region in which to create the meeting. Default: us-east-1. Available values: ap-northeast-1, ap-southeast-1, ap-southeast-2, ca-central-1, eu-central-1, eu-north-1, eu-west-1, eu-west-2, eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2.
+     */
+    MediaRegion?: String;
+    /**
+     * The tag key-value pairs.
+     */
+    Tags?: MeetingTagList;
+    NotificationsConfiguration?: MeetingNotificationConfiguration;
+    /**
+     * The request containing the attendees to create.
+     */
+    Attendees?: CreateMeetingWithAttendeesRequestItemList;
+  }
+  export type CreateMeetingWithAttendeesRequestItemList = CreateAttendeeRequestItem[];
+  export interface CreateMeetingWithAttendeesResponse {
+    Meeting?: Meeting;
+    /**
+     * The attendee information, including attendees IDs and join tokens.
+     */
+    Attendees?: AttendeeList;
+    /**
+     * If the action fails for one or more of the attendees in the request, a list of the attendees is returned, along with error codes and error messages.
+     */
+    Errors?: BatchCreateAttendeeErrorList;
   }
   export interface CreatePhoneNumberOrderRequest {
     /**

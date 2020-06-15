@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.696.0-->
+<!--LATEST=2.697.0-->
 <!--ENTRYINSERT-->
+
+## 2.697.0
+* feature: AlexaForBusiness: Adding support for optional tags in CreateBusinessReportSchedule, CreateProfile and CreateSkillGroup APIs
+* feature: AppConfig: This release adds a hosted configuration source provider. Customers can now store their application configurations directly in AppConfig, without the need for an external configuration source.
+* feature: Chime: feature: Chime: This release introduces the ability to create an AWS Chime SDK meeting with attendees.
+* feature: CognitoIdentityServiceProvider: Updated all AuthParameters to be sensitive.
+* feature: Iot: Added support for job executions rollout configuration, job abort configuration, and job executions timeout configuration for AWS IoT Over-the-Air (OTA) Update Feature.
 
 ## 2.696.0
 * feature: Glue: You can now choose to crawl the entire table or just a sample of records in DynamoDB when using AWS Glue crawlers. Additionally, you can also specify a scanning rate for crawling DynamoDB tables.

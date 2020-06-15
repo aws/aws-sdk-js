@@ -555,6 +555,9 @@
           "shape": "AliasExistsException"
         },
         {
+          "shape": "LimitExceededException"
+        },
+        {
           "shape": "InternalErrorException"
         }
       ],
@@ -5106,11 +5109,8 @@
         "shape": "StringType"
       },
       "value": {
-        "shape": "AuthParametersValueType"
-      }
-    },
-    "AuthParametersValueType": {
-      "type": "string",
+        "shape": "StringType"
+      },
       "sensitive": true
     },
     "AuthenticationResultType": {

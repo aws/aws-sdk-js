@@ -1356,11 +1356,11 @@ declare class Iot extends Service {
    */
   removeThingFromBillingGroup(callback?: (err: AWSError, data: Iot.Types.RemoveThingFromBillingGroupResponse) => void): Request<Iot.Types.RemoveThingFromBillingGroupResponse, AWSError>;
   /**
-   * Remove the specified thing from the specified group.
+   * Remove the specified thing from the specified group. You must specify either a thingGroupArn or a thingGroupName to identify the thing group and either a thingArn or a thingName to identify the thing to remove from the thing group. 
    */
   removeThingFromThingGroup(params: Iot.Types.RemoveThingFromThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.RemoveThingFromThingGroupResponse) => void): Request<Iot.Types.RemoveThingFromThingGroupResponse, AWSError>;
   /**
-   * Remove the specified thing from the specified group.
+   * Remove the specified thing from the specified group. You must specify either a thingGroupArn or a thingGroupName to identify the thing group and either a thingArn or a thingName to identify the thing to remove from the thing group. 
    */
   removeThingFromThingGroup(callback?: (err: AWSError, data: Iot.Types.RemoveThingFromThingGroupResponse) => void): Request<Iot.Types.RemoveThingFromThingGroupResponse, AWSError>;
   /**
@@ -1672,25 +1672,25 @@ declare namespace Iot {
   export type AbortAction = "CANCEL"|string;
   export interface AbortConfig {
     /**
-     * The list of abort criteria to define rules to abort the job.
+     * The list of criteria that determine when and how to abort the job.
      */
     criteriaList: AbortCriteriaList;
   }
   export interface AbortCriteria {
     /**
-     * The type of job execution failure to define a rule to initiate a job abort.
+     * The type of job execution failures that can initiate a job abort.
      */
     failureType: JobExecutionFailureType;
     /**
-     * The type of abort action to initiate a job abort.
+     * The type of job action to take to initiate the job abort.
      */
     action: AbortAction;
     /**
-     * The threshold as a percentage of the total number of executed things that will initiate a job abort. AWS IoT supports up to two digits after the decimal (for example, 10.9 and 10.99, but not 10.999).
+     * The minimum percentage of job execution failures that must occur to initiate the job abort. AWS IoT supports up to two digits after the decimal (for example, 10.9 and 10.99, but not 10.999).
      */
     thresholdPercentage: AbortThresholdPercentage;
     /**
-     * Minimum number of executed things before evaluating an abort rule.
+     * The minimum number of things which must receive job execution notifications before the job can be aborted.
      */
     minNumberOfExecutedThings: MinimumNumberOfExecutedThings;
   }
@@ -2335,11 +2335,58 @@ declare namespace Iot {
   export type AwsIotJobArn = string;
   export type AwsIotJobId = string;
   export type AwsIotSqlVersion = string;
+  export interface AwsJobAbortConfig {
+    /**
+     * The list of criteria that determine when and how to abort the job.
+     */
+    abortCriteriaList: AwsJobAbortCriteriaList;
+  }
+  export interface AwsJobAbortCriteria {
+    /**
+     * The type of job execution failures that can initiate a job abort.
+     */
+    failureType: AwsJobAbortCriteriaFailureType;
+    /**
+     * The type of job action to take to initiate the job abort.
+     */
+    action: AwsJobAbortCriteriaAbortAction;
+    /**
+     * The minimum percentage of job execution failures that must occur to initiate the job abort. AWS IoT supports up to two digits after the decimal (for example, 10.9 and 10.99, but not 10.999).
+     */
+    thresholdPercentage: AwsJobAbortCriteriaAbortThresholdPercentage;
+    /**
+     * The minimum number of things which must receive job execution notifications before the job can be aborted.
+     */
+    minNumberOfExecutedThings: AwsJobAbortCriteriaMinimumNumberOfExecutedThings;
+  }
+  export type AwsJobAbortCriteriaAbortAction = "CANCEL"|string;
+  export type AwsJobAbortCriteriaAbortThresholdPercentage = number;
+  export type AwsJobAbortCriteriaFailureType = "FAILED"|"REJECTED"|"TIMED_OUT"|"ALL"|string;
+  export type AwsJobAbortCriteriaList = AwsJobAbortCriteria[];
+  export type AwsJobAbortCriteriaMinimumNumberOfExecutedThings = number;
   export interface AwsJobExecutionsRolloutConfig {
     /**
      * The maximum number of OTA update job executions started per minute.
      */
     maximumPerMinute?: MaximumPerMinute;
+    /**
+     * The rate of increase for a job rollout. This parameter allows you to define an exponential rate increase for a job rollout.
+     */
+    exponentialRate?: AwsJobExponentialRolloutRate;
+  }
+  export interface AwsJobExponentialRolloutRate {
+    /**
+     * The minimum number of things that will be notified of a pending job, per minute, at the start of the job rollout. This is the initial rate of the rollout.
+     */
+    baseRatePerMinute: AwsJobRolloutRatePerMinute;
+    /**
+     * The rate of increase for a job rollout. The number of things notified is multiplied by this factor.
+     */
+    incrementFactor: AwsJobRolloutIncrementFactor;
+    /**
+     * The criteria to initiate the increase in rate of rollout for a job. AWS IoT supports up to one digit after the decimal (for example, 1.5, but not 1.55).
+     */
+    rateIncreaseCriteria: AwsJobRateIncreaseCriteria;
   }
   export interface AwsJobPresignedUrlConfig {
     /**
@@ -2347,6 +2394,26 @@ declare namespace Iot {
      */
     expiresInSec?: ExpiresInSeconds;
   }
+  export interface AwsJobRateIncreaseCriteria {
+    /**
+     * When this number of things have been notified, it will initiate an increase in the rollout rate.
+     */
+    numberOfNotifiedThings?: AwsJobRateIncreaseCriteriaNumberOfThings;
+    /**
+     * When this number of things have succeeded in their job execution, it will initiate an increase in the rollout rate.
+     */
+    numberOfSucceededThings?: AwsJobRateIncreaseCriteriaNumberOfThings;
+  }
+  export type AwsJobRateIncreaseCriteriaNumberOfThings = number;
+  export type AwsJobRolloutIncrementFactor = number;
+  export type AwsJobRolloutRatePerMinute = number;
+  export interface AwsJobTimeoutConfig {
+    /**
+     * Specifies the amount of time, in minutes, this device has to finish execution of this job. The timeout interval can be anywhere between 1 minute and 7 days (1 to 10080 minutes). The in progress timer can't be updated and will apply to all job executions for the job. Whenever a job execution remains in the IN_PROGRESS status for longer than this interval, the job execution will fail and switch to the terminal TIMED_OUT status.
+     */
+    inProgressTimeoutInMinutes?: AwsJobTimeoutInProgressTimeoutInMinutes;
+  }
+  export type AwsJobTimeoutInProgressTimeoutInMinutes = number;
   export interface Behavior {
     /**
      * The name you have given to the behavior.
@@ -3116,7 +3183,7 @@ declare namespace Iot {
      */
     description?: OTAUpdateDescription;
     /**
-     * The targeted devices to receive OTA updates.
+     * The devices targeted to receive OTA updates.
      */
     targets: Targets;
     /**
@@ -3136,11 +3203,19 @@ declare namespace Iot {
      */
     awsJobPresignedUrlConfig?: AwsJobPresignedUrlConfig;
     /**
+     * The criteria that determine when and how a job abort takes place.
+     */
+    awsJobAbortConfig?: AwsJobAbortConfig;
+    /**
+     * Specifies the amount of time each device has to finish its execution of the job. A timer is started when the job execution status is set to IN_PROGRESS. If the job execution status is not set to another terminal state before the timer expires, it will be automatically set to TIMED_OUT.
+     */
+    awsJobTimeoutConfig?: AwsJobTimeoutConfig;
+    /**
      * The files to be streamed by the OTA update.
      */
     files: OTAUpdateFiles;
     /**
-     * The IAM role that allows access to the AWS IoT Jobs service.
+     * The IAM role that grants AWS IoT access to the Amazon S3, AWS IoT jobs and AWS Code Signing resources to create an OTA update job.
      */
     roleArn: RoleArn;
     /**
@@ -3736,7 +3811,7 @@ declare namespace Iot {
   }
   export interface DeleteOTAUpdateRequest {
     /**
-     * The OTA update ID to delete.
+     * The ID of the OTA update to delete.
      */
     otaUpdateId: OTAUpdateId;
     /**
@@ -3744,7 +3819,7 @@ declare namespace Iot {
      */
     deleteStream?: DeleteStream;
     /**
-     * Specifies if the AWS Job associated with the OTA update should be deleted with the OTA update is deleted.
+     * Specifies if the AWS Job associated with the OTA update should be deleted when the OTA update is deleted.
      */
     forceDeleteAWSJob?: ForceDeleteAWSJob;
   }

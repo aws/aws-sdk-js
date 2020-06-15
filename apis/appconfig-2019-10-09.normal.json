@@ -111,6 +111,41 @@
       ],
       "documentation": "<p>For each application, you define one or more environments. An environment is a logical deployment group of AppConfig targets, such as applications in a <code>Beta</code> or <code>Production</code> environment. You can also define environments for application subcomponents such as the <code>Web</code>, <code>Mobile</code> and <code>Back-end</code> components for your application. You can configure Amazon CloudWatch alarms for each environment. The system monitors alarms during a configuration deployment. If an alarm is triggered, the system rolls back the configuration.</p>"
     },
+    "CreateHostedConfigurationVersion": {
+      "name": "CreateHostedConfigurationVersion",
+      "http": {
+        "method": "POST",
+        "requestUri": "/applications/{ApplicationId}/configurationprofiles/{ConfigurationProfileId}/hostedconfigurationversions",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateHostedConfigurationVersionRequest"
+      },
+      "output": {
+        "shape": "HostedConfigurationVersion"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "PayloadTooLargeException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Create a new configuration in the AppConfig configuration store.</p>"
+    },
     "DeleteApplication": {
       "name": "DeleteApplication",
       "http": {
@@ -208,6 +243,29 @@
         }
       ],
       "documentation": "<p>Delete an environment. Deleting an environment does not delete a configuration from a host.</p>"
+    },
+    "DeleteHostedConfigurationVersion": {
+      "name": "DeleteHostedConfigurationVersion",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/applications/{ApplicationId}/configurationprofiles/{ConfigurationProfileId}/hostedconfigurationversions/{VersionNumber}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteHostedConfigurationVersionRequest"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Delete a version of a configuration from the AppConfig configuration store.</p>"
     },
     "GetApplication": {
       "name": "GetApplication",
@@ -365,6 +423,32 @@
       ],
       "documentation": "<p>Retrieve information about an environment. An environment is a logical deployment group of AppConfig applications, such as applications in a <code>Production</code> environment or in an <code>EU_Region</code> environment. Each configuration deployment targets an environment. You can enable one or more Amazon CloudWatch alarms for an environment. If an alarm is triggered during a deployment, AppConfig roles back the configuration.</p>"
     },
+    "GetHostedConfigurationVersion": {
+      "name": "GetHostedConfigurationVersion",
+      "http": {
+        "method": "GET",
+        "requestUri": "/applications/{ApplicationId}/configurationprofiles/{ConfigurationProfileId}/hostedconfigurationversions/{VersionNumber}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetHostedConfigurationVersionRequest"
+      },
+      "output": {
+        "shape": "HostedConfigurationVersion"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Get information about a specific configuration version.</p>"
+    },
     "ListApplications": {
       "name": "ListApplications",
       "http": {
@@ -488,6 +572,32 @@
         }
       ],
       "documentation": "<p>List the environments for an application.</p>"
+    },
+    "ListHostedConfigurationVersions": {
+      "name": "ListHostedConfigurationVersions",
+      "http": {
+        "method": "GET",
+        "requestUri": "/applications/{ApplicationId}/configurationprofiles/{ConfigurationProfileId}/hostedconfigurationversions",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListHostedConfigurationVersionsRequest"
+      },
+      "output": {
+        "shape": "HostedConfigurationVersions"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>View a list of configurations stored in the AppConfig configuration store by version.</p>"
     },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
@@ -916,8 +1026,7 @@
       "required": [
         "ApplicationId",
         "Name",
-        "LocationUri",
-        "RetrievalRoleArn"
+        "LocationUri"
       ],
       "members": {
         "ApplicationId": {
@@ -1028,6 +1137,53 @@
         }
       }
     },
+    "CreateHostedConfigurationVersionRequest": {
+      "type": "structure",
+      "required": [
+        "ApplicationId",
+        "ConfigurationProfileId",
+        "Content",
+        "ContentType"
+      ],
+      "members": {
+        "ApplicationId": {
+          "shape": "Id",
+          "documentation": "<p>The application ID.</p>",
+          "location": "uri",
+          "locationName": "ApplicationId"
+        },
+        "ConfigurationProfileId": {
+          "shape": "Id",
+          "documentation": "<p>The configuration profile ID.</p>",
+          "location": "uri",
+          "locationName": "ConfigurationProfileId"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>A description of the configuration.</p>",
+          "location": "header",
+          "locationName": "Description"
+        },
+        "Content": {
+          "shape": "Blob",
+          "documentation": "<p>The content of the configuration or the configuration data.</p>"
+        },
+        "ContentType": {
+          "shape": "StringWithLengthBetween1And255",
+          "documentation": "<p>A standard MIME type describing the format of the configuration content. For more information, see <a href=\"https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17\">Content-Type</a>.</p>",
+          "location": "header",
+          "locationName": "Content-Type"
+        },
+        "LatestVersionNumber": {
+          "shape": "Integer",
+          "documentation": "<p>An optional locking token used to prevent race conditions from overwriting configuration updates when creating a new version. To ensure your data is not overwritten when creating multiple hosted configuration versions in rapid succession, specify the version of the latest hosted configuration version.</p>",
+          "box": true,
+          "location": "header",
+          "locationName": "Latest-Version-Number"
+        }
+      },
+      "payload": "Content"
+    },
     "DeleteApplicationRequest": {
       "type": "structure",
       "required": [
@@ -1095,6 +1251,34 @@
           "documentation": "<p>The ID of the environment you want to delete.</p>",
           "location": "uri",
           "locationName": "EnvironmentId"
+        }
+      }
+    },
+    "DeleteHostedConfigurationVersionRequest": {
+      "type": "structure",
+      "required": [
+        "ApplicationId",
+        "ConfigurationProfileId",
+        "VersionNumber"
+      ],
+      "members": {
+        "ApplicationId": {
+          "shape": "Id",
+          "documentation": "<p>The application ID.</p>",
+          "location": "uri",
+          "locationName": "ApplicationId"
+        },
+        "ConfigurationProfileId": {
+          "shape": "Id",
+          "documentation": "<p>The configuration profile ID.</p>",
+          "location": "uri",
+          "locationName": "ConfigurationProfileId"
+        },
+        "VersionNumber": {
+          "shape": "Integer",
+          "documentation": "<p>The versions number to delete.</p>",
+          "location": "uri",
+          "locationName": "VersionNumber"
         }
       }
     },
@@ -1556,6 +1740,34 @@
         }
       }
     },
+    "GetHostedConfigurationVersionRequest": {
+      "type": "structure",
+      "required": [
+        "ApplicationId",
+        "ConfigurationProfileId",
+        "VersionNumber"
+      ],
+      "members": {
+        "ApplicationId": {
+          "shape": "Id",
+          "documentation": "<p>The application ID.</p>",
+          "location": "uri",
+          "locationName": "ApplicationId"
+        },
+        "ConfigurationProfileId": {
+          "shape": "Id",
+          "documentation": "<p>The configuration profile ID.</p>",
+          "location": "uri",
+          "locationName": "ConfigurationProfileId"
+        },
+        "VersionNumber": {
+          "shape": "Integer",
+          "documentation": "<p>The version.</p>",
+          "location": "uri",
+          "locationName": "VersionNumber"
+        }
+      }
+    },
     "GrowthFactor": {
       "type": "float",
       "max": 100,
@@ -1567,6 +1779,91 @@
         "LINEAR",
         "EXPONENTIAL"
       ]
+    },
+    "HostedConfigurationVersion": {
+      "type": "structure",
+      "members": {
+        "ApplicationId": {
+          "shape": "Id",
+          "documentation": "<p>The application ID.</p>",
+          "location": "header",
+          "locationName": "Application-Id"
+        },
+        "ConfigurationProfileId": {
+          "shape": "Id",
+          "documentation": "<p>The configuration profile ID.</p>",
+          "location": "header",
+          "locationName": "Configuration-Profile-Id"
+        },
+        "VersionNumber": {
+          "shape": "Integer",
+          "documentation": "<p>The configuration version.</p>",
+          "location": "header",
+          "locationName": "Version-Number"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>A description of the configuration.</p>",
+          "location": "header",
+          "locationName": "Description"
+        },
+        "Content": {
+          "shape": "Blob",
+          "documentation": "<p>The content of the configuration or the configuration data.</p>"
+        },
+        "ContentType": {
+          "shape": "StringWithLengthBetween1And255",
+          "documentation": "<p>A standard MIME type describing the format of the configuration content. For more information, see <a href=\"https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17\">Content-Type</a>.</p>",
+          "location": "header",
+          "locationName": "Content-Type"
+        }
+      },
+      "payload": "Content"
+    },
+    "HostedConfigurationVersionSummary": {
+      "type": "structure",
+      "members": {
+        "ApplicationId": {
+          "shape": "Id",
+          "documentation": "<p>The application ID.</p>"
+        },
+        "ConfigurationProfileId": {
+          "shape": "Id",
+          "documentation": "<p>The configuration profile ID.</p>"
+        },
+        "VersionNumber": {
+          "shape": "Integer",
+          "documentation": "<p>The configuration version.</p>"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>A description of the configuration.</p>"
+        },
+        "ContentType": {
+          "shape": "StringWithLengthBetween1And255",
+          "documentation": "<p>A standard MIME type describing the format of the configuration content. For more information, see <a href=\"https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17\">Content-Type</a>.</p>"
+        }
+      },
+      "documentation": "<p>Information about the configuration.</p>"
+    },
+    "HostedConfigurationVersionSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "HostedConfigurationVersionSummary"
+      }
+    },
+    "HostedConfigurationVersions": {
+      "type": "structure",
+      "members": {
+        "Items": {
+          "shape": "HostedConfigurationVersionSummaryList",
+          "documentation": "<p>The elements from this collection.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next set of items to return. Use this token to get the next set of results.</p>"
+        }
+      }
     },
     "Id": {
       "type": "string",
@@ -1698,6 +1995,40 @@
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>A token to start the list. Use this token to get the next set of results.</p>",
+          "location": "querystring",
+          "locationName": "next_token"
+        }
+      }
+    },
+    "ListHostedConfigurationVersionsRequest": {
+      "type": "structure",
+      "required": [
+        "ApplicationId",
+        "ConfigurationProfileId"
+      ],
+      "members": {
+        "ApplicationId": {
+          "shape": "Id",
+          "documentation": "<p>The application ID.</p>",
+          "location": "uri",
+          "locationName": "ApplicationId"
+        },
+        "ConfigurationProfileId": {
+          "shape": "Id",
+          "documentation": "<p>The configuration profile ID.</p>",
+          "location": "uri",
+          "locationName": "ConfigurationProfileId"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>",
+          "box": true,
+          "location": "querystring",
+          "locationName": "max_results"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token to start the list. Use this token to get the next set of results. </p>",
           "location": "querystring",
           "locationName": "next_token"
         }
@@ -1867,6 +2198,11 @@
       "max": 32768,
       "min": 0,
       "sensitive": true
+    },
+    "StringWithLengthBetween1And255": {
+      "type": "string",
+      "max": 255,
+      "min": 1
     },
     "StringWithLengthBetween1And64": {
       "type": "string",
@@ -2155,9 +2491,9 @@
     },
     "Version": {
       "type": "string",
-      "max": 128,
+      "max": 1024,
       "min": 1
     }
   },
-  "documentation": "<fullname>AWS AppConfig</fullname> <p>Use AWS AppConfig, a capability of AWS Systems Manager, to create, manage, and quickly deploy application configurations. AppConfig supports controlled deployments to applications of any size and includes built-in validation checks and monitoring. You can use AppConfig with applications hosted on Amazon EC2 instances, AWS Lambda, containers, mobile applications, or IoT devices.</p> <p>To prevent errors when deploying application configurations, especially for production systems where a simple typo could cause an unexpected outage, AppConfig includes validators. A validator provides a syntactic or semantic check to ensure that the configuration you want to deploy works as intended. To validate your application configuration data, you provide a schema or a Lambda function that runs against the configuration. The configuration deployment or update can only proceed when the configuration data is valid.</p> <p>During a configuration deployment, AppConfig monitors the application to ensure that the deployment is successful. If the system encounters an error, AppConfig rolls back the change to minimize impact for your application users. You can configure a deployment strategy for each application or environment that includes deployment criteria, including velocity, bake time, and alarms to monitor. Similar to error monitoring, if a deployment triggers an alarm, AppConfig automatically rolls back to the previous version. </p> <p>AppConfig supports multiple use cases. Here are some examples.</p> <ul> <li> <p> <b>Application tuning</b>: Use AppConfig to carefully introduce changes to your application that can only be tested with production traffic.</p> </li> <li> <p> <b>Feature toggle</b>: Use AppConfig to turn on new features that require a timely deployment, such as a product launch or announcement. </p> </li> <li> <p> <b>User membership</b>: Use AppConfig to allow premium subscribers to access paid content. </p> </li> <li> <p> <b>Operational issues</b>: Use AppConfig to reduce stress on your application when a dependency or other external factor impacts the system.</p> </li> </ul> <p>This reference is intended to be used with the <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig.html\">AWS AppConfig User Guide</a>.</p>"
+  "documentation": "<fullname>AWS AppConfig</fullname> <p>Use AWS AppConfig, a capability of AWS Systems Manager, to create, manage, and quickly deploy application configurations. AppConfig supports controlled deployments to applications of any size and includes built-in validation checks and monitoring. You can use AppConfig with applications hosted on Amazon EC2 instances, AWS Lambda, containers, mobile applications, or IoT devices.</p> <p>To prevent errors when deploying application configurations, especially for production systems where a simple typo could cause an unexpected outage, AppConfig includes validators. A validator provides a syntactic or semantic check to ensure that the configuration you want to deploy works as intended. To validate your application configuration data, you provide a schema or a Lambda function that runs against the configuration. The configuration deployment or update can only proceed when the configuration data is valid.</p> <p>During a configuration deployment, AppConfig monitors the application to ensure that the deployment is successful. If the system encounters an error, AppConfig rolls back the change to minimize impact for your application users. You can configure a deployment strategy for each application or environment that includes deployment criteria, including velocity, bake time, and alarms to monitor. Similar to error monitoring, if a deployment triggers an alarm, AppConfig automatically rolls back to the previous version. </p> <p>AppConfig supports multiple use cases. Here are some examples.</p> <ul> <li> <p> <b>Application tuning</b>: Use AppConfig to carefully introduce changes to your application that can only be tested with production traffic.</p> </li> <li> <p> <b>Feature toggle</b>: Use AppConfig to turn on new features that require a timely deployment, such as a product launch or announcement. </p> </li> <li> <p> <b>Allow list</b>: Use AppConfig to allow premium subscribers to access paid content. </p> </li> <li> <p> <b>Operational issues</b>: Use AppConfig to reduce stress on your application when a dependency or other external factor impacts the system.</p> </li> </ul> <p>This reference is intended to be used with the <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig.html\">AWS AppConfig User Guide</a>.</p>"
 }

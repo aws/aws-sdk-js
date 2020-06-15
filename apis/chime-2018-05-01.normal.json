@@ -596,7 +596,45 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p>"
+      "documentation": "<p>Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about specifying media Regions, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html\">Amazon Chime SDK Media Regions</a> in the <i>Amazon Chime Developer Guide</i>. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p>"
+    },
+    "CreateMeetingWithAttendees": {
+      "name": "CreateMeetingWithAttendees",
+      "http": {
+        "method": "POST",
+        "requestUri": "/meetings?operation=create-attendees",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateMeetingWithAttendeesRequest"
+      },
+      "output": {
+        "shape": "CreateMeetingWithAttendeesResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Creates a new Amazon Chime SDK meeting in the specified media Region, with attendees. For more information about specifying media Regions, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/chime-sdk-meetings-regions.html\">Amazon Chime SDK Media Regions</a> in the <i>Amazon Chime Developer Guide</i>. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p>"
     },
     "CreatePhoneNumberOrder": {
       "name": "CreatePhoneNumberOrder",
@@ -5069,7 +5107,7 @@
         },
         "MediaRegion": {
           "shape": "String",
-          "documentation": "<p>The Region in which to create the meeting. Available values: <code>ap-northeast-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.</p>"
+          "documentation": "<p>The Region in which to create the meeting. Default: <code>us-east-1</code>.</p> <p>Available values: <code>ap-northeast-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.</p>"
         },
         "Tags": {
           "shape": "MeetingTagList",
@@ -5087,6 +5125,66 @@
         "Meeting": {
           "shape": "Meeting",
           "documentation": "<p>The meeting information, including the meeting ID and <code>MediaPlacement</code>.</p>"
+        }
+      }
+    },
+    "CreateMeetingWithAttendeesRequest": {
+      "type": "structure",
+      "required": [
+        "ClientRequestToken"
+      ],
+      "members": {
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "documentation": "<p>The unique identifier for the client request. Use a different token for different meetings.</p>",
+          "idempotencyToken": true
+        },
+        "ExternalMeetingId": {
+          "shape": "ExternalMeetingIdType",
+          "documentation": "<p>The external meeting ID.</p>"
+        },
+        "MeetingHostId": {
+          "shape": "ExternalUserIdType",
+          "documentation": "<p>Reserved.</p>"
+        },
+        "MediaRegion": {
+          "shape": "String",
+          "documentation": "<p>The Region in which to create the meeting. Default: <code>us-east-1</code>.</p> <p>Available values: <code>ap-northeast-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.</p>"
+        },
+        "Tags": {
+          "shape": "MeetingTagList",
+          "documentation": "<p>The tag key-value pairs.</p>"
+        },
+        "NotificationsConfiguration": {
+          "shape": "MeetingNotificationConfiguration"
+        },
+        "Attendees": {
+          "shape": "CreateMeetingWithAttendeesRequestItemList",
+          "documentation": "<p>The request containing the attendees to create.</p>"
+        }
+      }
+    },
+    "CreateMeetingWithAttendeesRequestItemList": {
+      "type": "list",
+      "member": {
+        "shape": "CreateAttendeeRequestItem"
+      },
+      "max": 5,
+      "min": 1
+    },
+    "CreateMeetingWithAttendeesResponse": {
+      "type": "structure",
+      "members": {
+        "Meeting": {
+          "shape": "Meeting"
+        },
+        "Attendees": {
+          "shape": "AttendeeList",
+          "documentation": "<p>The attendee information, including attendees IDs and join tokens.</p>"
+        },
+        "Errors": {
+          "shape": "BatchCreateAttendeeErrorList",
+          "documentation": "<p>If the action fails for one or more of the attendees in the request, a list of the attendees is returned, along with error codes and error messages.</p>"
         }
       }
     },
@@ -7165,7 +7263,7 @@
           "documentation": "<p>The SQS queue ARN.</p>"
         }
       },
-      "documentation": "<p>The configuration for resource targets to receive notifications when Amazon Chime SDK meeting and attendee events occur.</p>"
+      "documentation": "<p>The configuration for resource targets to receive notifications when Amazon Chime SDK meeting and attendee events occur. The Amazon Chime SDK supports resource targets located in the US East (N. Virginia) AWS Region (<code>us-east-1</code>).</p>"
     },
     "MeetingTagKeyList": {
       "type": "list",
