@@ -1,6 +1,5 @@
 {
   "region": "us-east-1",
-  "stsRegionalEndpoints": "regional",
   "s3": {
     "params": { "Bucket": "test-s3-bucket" }
   },
