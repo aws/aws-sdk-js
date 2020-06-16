@@ -1,15 +1,36 @@
 var fs = require('fs');
 var path = require('path');
 
-// Generate service clients
-function ClientCreator() {
-  this._metadata = require('../apis/metadata');
-  this._apisFolderPath = path.join(__dirname, '..', 'apis');
-  this._clientFolderPath = path.join(__dirname, '..', 'clients');
-  this._serviceCustomizationsFolderPath = path.join(__dirname, '..', 'lib', 'services');
-  this._packageJsonPath = path.join(__dirname, '..', 'package.json');
+/**
+ * Generate service clients
+ *
+ * Pass optional path to target directory.
+ * The directory must include the apis/ folder and service customizations at
+ * `lib/services`. Clients will be generated in `clients/`.
+ *
+ * If parameter is not passed the repository root will be used.
+ */
+function ClientCreator(basePath) {
+  basePath = basePath || path.join(__dirname, '..');
+  this._metadataPath = path.join(basePath, 'apis', 'metadata.json');
+  this._apisFolderPath = path.join(basePath, 'apis');
+  this._clientFolderPath = path.join(basePath, 'clients');
+  this._serviceCustomizationsFolderPath = path.join(basePath, 'lib', 'services');
+  this._packageJsonPath = path.join(basePath, 'package.json');
+  // Lazy loading values on usage to avoid side-effects in constructor
   this._apiFileNames = null;
+  this._metadata = null;
 }
+
+ClientCreator.prototype.loadMetadata = function loadMetadata() {
+    if (this._metadata) {
+      return this._metadata;
+    }
+
+    var metadataFile = fs.readFileSync(this._metadataPath);
+    this.metadata = JSON.parse(metadataFile);
+    return this.metadata;
+};
 
 ClientCreator.prototype.getAllApiFilenames = function getAllApiFilenames() {
     if (this._apiFileNames) {
@@ -155,7 +176,7 @@ ClientCreator.prototype.generateDefinePropertySource = function generateDefinePr
 };
 
 ClientCreator.prototype.generateAllServicesSource = function generateAllServicesSource(services, fileName) {
-  var metadata = this._metadata;
+  var metadata = this.loadMetadata();
   var self = this;
   var code = '';
   code += 'require(\'../lib/node_loader\');\n';
@@ -176,7 +197,7 @@ ClientCreator.prototype.generateAllServicesSource = function generateAllServices
 };
 
 ClientCreator.prototype.getDefaultServices = function getDefaultServices() {
-  var metadata = this._metadata;
+  var metadata = this.loadMetadata();
   var services = [];
   for (var key in metadata) {
     if (!metadata.hasOwnProperty(key)) {
@@ -190,7 +211,7 @@ ClientCreator.prototype.getDefaultServices = function getDefaultServices() {
 };
 
 ClientCreator.prototype.writeClientServices = function writeClientServices() {
-  var metadata = this._metadata;
+  var metadata = this.loadMetadata();
   var services = [];
   var corsServices = [];
   for (var key in metadata) {
