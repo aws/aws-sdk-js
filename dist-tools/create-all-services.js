@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+var path = require('path');
+
 /*
  * Pass optional path to target directory as command line argument.
  *
