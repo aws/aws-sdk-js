@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Global Services",
+  "description": "Add default signing region for IAM and Route53 in China and GovCloud"
+}
