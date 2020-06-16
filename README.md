@@ -122,6 +122,8 @@ import AWS from 'aws-sdk/global';
 import S3 from 'aws-sdk/clients/s3';
 ```
 
+**NOTE:** You need to add `"esModuleInterop": true` to compilerOptions of your `tsconfig.json`. If not possible, use like `import * as AWS from 'aws-sdk'`.
+
 In a JavaScript file:
 
 ```javascript
