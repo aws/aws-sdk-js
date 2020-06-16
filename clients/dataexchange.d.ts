@@ -581,7 +581,7 @@ declare namespace DataExchange {
     /**
      * The Amazon Resource Name (ARN) of the the AWS KMS key you want to use to encrypt the Amazon S3 objects. This parameter is required if you choose aws:kms as an encryption type.
      */
-    KmsKeyArn: __string;
+    KmsKeyArn?: __string;
     /**
      * The type of server side encryption used for encrypting the objects in Amazon S3.
      */

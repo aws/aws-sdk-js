@@ -1965,7 +1965,7 @@ declare namespace CloudFront {
      */
     CustomOriginConfig?: CustomOriginConfig;
     /**
-     * The number of times that CloudFront attempts to connect to the origin. The minimum number is 1, the maximum is 3, and the default (if you don’t specify otherwise) is 3. For more information, see Origin Connection Attempts in the Amazon CloudFront Developer Guide.
+     * The number of times that CloudFront attempts to connect to the origin. The minimum number is 1, the maximum is 3, and the default (if you don’t specify otherwise) is 3. For a custom origin (including an Amazon S3 bucket that’s configured with static website hosting), this value also specifies the number of times that CloudFront attempts to get a response from the origin, in the case of an Origin Response Timeout. For more information, see Origin Connection Attempts in the Amazon CloudFront Developer Guide.
      */
     ConnectionAttempts?: integer;
     /**

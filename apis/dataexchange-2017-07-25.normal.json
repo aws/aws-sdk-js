@@ -1351,8 +1351,7 @@
       },
       "documentation": "<p>Encryption configuration of the export job. Includes the encryption type as well as the AWS KMS key. The KMS key is only necessary if you chose the KMS encryption type.</p>",
       "required": [
-        "Type",
-        "KmsKeyArn"
+        "Type"
       ]
     },
     "GetAssetRequest": {

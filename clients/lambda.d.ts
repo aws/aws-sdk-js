@@ -318,11 +318,11 @@ declare class Lambda extends Service {
    */
   putFunctionConcurrency(callback?: (err: AWSError, data: Lambda.Types.Concurrency) => void): Request<Lambda.Types.Concurrency, AWSError>;
   /**
-   * Configures options for asynchronous invocation on a function, version, or alias. If a configuration already exists for a function, version, or alias, this operation overwrites it. If you exclude any settings, they are removed. To set one option without affecting existing settings for other options, use PutFunctionEventInvokeConfig. By default, Lambda retries an asynchronous invocation twice if the function returns an error. It retains events in a queue for up to six hours. When an event fails all processing attempts or stays in the asynchronous invocation queue for too long, Lambda discards it. To retain discarded events, configure a dead-letter queue with UpdateFunctionConfiguration. To send an invocation record to a queue, topic, function, or event bus, specify a destination. You can configure separate destinations for successful invocations (on-success) and events that fail all processing attempts (on-failure). You can configure destinations in addition to or instead of a dead-letter queue.
+   * Configures options for asynchronous invocation on a function, version, or alias. If a configuration already exists for a function, version, or alias, this operation overwrites it. If you exclude any settings, they are removed. To set one option without affecting existing settings for other options, use UpdateFunctionEventInvokeConfig. By default, Lambda retries an asynchronous invocation twice if the function returns an error. It retains events in a queue for up to six hours. When an event fails all processing attempts or stays in the asynchronous invocation queue for too long, Lambda discards it. To retain discarded events, configure a dead-letter queue with UpdateFunctionConfiguration. To send an invocation record to a queue, topic, function, or event bus, specify a destination. You can configure separate destinations for successful invocations (on-success) and events that fail all processing attempts (on-failure). You can configure destinations in addition to or instead of a dead-letter queue.
    */
   putFunctionEventInvokeConfig(params: Lambda.Types.PutFunctionEventInvokeConfigRequest, callback?: (err: AWSError, data: Lambda.Types.FunctionEventInvokeConfig) => void): Request<Lambda.Types.FunctionEventInvokeConfig, AWSError>;
   /**
-   * Configures options for asynchronous invocation on a function, version, or alias. If a configuration already exists for a function, version, or alias, this operation overwrites it. If you exclude any settings, they are removed. To set one option without affecting existing settings for other options, use PutFunctionEventInvokeConfig. By default, Lambda retries an asynchronous invocation twice if the function returns an error. It retains events in a queue for up to six hours. When an event fails all processing attempts or stays in the asynchronous invocation queue for too long, Lambda discards it. To retain discarded events, configure a dead-letter queue with UpdateFunctionConfiguration. To send an invocation record to a queue, topic, function, or event bus, specify a destination. You can configure separate destinations for successful invocations (on-success) and events that fail all processing attempts (on-failure). You can configure destinations in addition to or instead of a dead-letter queue.
+   * Configures options for asynchronous invocation on a function, version, or alias. If a configuration already exists for a function, version, or alias, this operation overwrites it. If you exclude any settings, they are removed. To set one option without affecting existing settings for other options, use UpdateFunctionEventInvokeConfig. By default, Lambda retries an asynchronous invocation twice if the function returns an error. It retains events in a queue for up to six hours. When an event fails all processing attempts or stays in the asynchronous invocation queue for too long, Lambda discards it. To retain discarded events, configure a dead-letter queue with UpdateFunctionConfiguration. To send an invocation record to a queue, topic, function, or event bus, specify a destination. You can configure separate destinations for successful invocations (on-success) and events that fail all processing attempts (on-failure). You can configure destinations in addition to or instead of a dead-letter queue.
    */
   putFunctionEventInvokeConfig(callback?: (err: AWSError, data: Lambda.Types.FunctionEventInvokeConfig) => void): Request<Lambda.Types.FunctionEventInvokeConfig, AWSError>;
   /**
@@ -580,7 +580,7 @@ declare namespace Lambda {
   export type AliasList = AliasConfiguration[];
   export interface AliasRoutingConfiguration {
     /**
-     * The name of the second alias, and the percentage of traffic that's routed to it.
+     * The second version, and the percentage of traffic that's routed to it.
      */
     AdditionalVersionWeights?: AdditionalVersionWeights;
   }
@@ -734,6 +734,10 @@ declare namespace Lambda {
      * A list of function layers to add to the function's execution environment. Specify each layer by its ARN, including the version.
      */
     Layers?: LayerList;
+    /**
+     * Connection settings for an Amazon EFS file system.
+     */
+    FileSystemConfigs?: FileSystemConfigList;
   }
   export type _Date = Date;
   export interface DeadLetterConfig {
@@ -907,6 +911,18 @@ declare namespace Lambda {
   export type EventSourceMappingsList = EventSourceMappingConfiguration[];
   export type EventSourcePosition = "TRIM_HORIZON"|"LATEST"|"AT_TIMESTAMP"|string;
   export type EventSourceToken = string;
+  export type FileSystemArn = string;
+  export interface FileSystemConfig {
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon EFS access point that provides access to the file system.
+     */
+    Arn: FileSystemArn;
+    /**
+     * The path where the function can access the file system, starting with /mnt/.
+     */
+    LocalMountPath: LocalMountPath;
+  }
+  export type FileSystemConfigList = FileSystemConfig[];
   export type FunctionArn = string;
   export interface FunctionCode {
     /**
@@ -1041,6 +1057,10 @@ declare namespace Lambda {
      * The reason code for the last update that was performed on the function.
      */
     LastUpdateStatusReasonCode?: LastUpdateStatusReasonCode;
+    /**
+     * Connection settings for an Amazon EFS file system.
+     */
+    FileSystemConfigs?: FileSystemConfigList;
   }
   export interface FunctionEventInvokeConfig {
     /**
@@ -1667,6 +1687,7 @@ declare namespace Lambda {
      */
     Versions?: FunctionList;
   }
+  export type LocalMountPath = string;
   export type LogType = "None"|"Tail"|string;
   export type Long = number;
   export type MasterRegion = string;
@@ -2132,6 +2153,10 @@ declare namespace Lambda {
      * A list of function layers to add to the function's execution environment. Specify each layer by its ARN, including the version.
      */
     Layers?: LayerList;
+    /**
+     * Connection settings for an Amazon EFS file system.
+     */
+    FileSystemConfigs?: FileSystemConfigList;
   }
   export interface UpdateFunctionEventInvokeConfigRequest {
     /**

@@ -68,11 +68,11 @@ declare class QLDB extends Service {
    */
   exportJournalToS3(callback?: (err: AWSError, data: QLDB.Types.ExportJournalToS3Response) => void): Request<QLDB.Types.ExportJournalToS3Response, AWSError>;
   /**
-   * Returns a journal block object at a specified address in a ledger. Also returns a proof of the specified block for verification if DigestTipAddress is provided. If the specified ledger doesn't exist or is in DELETING status, then throws ResourceNotFoundException. If the specified ledger is in CREATING status, then throws ResourcePreconditionNotMetException. If no block exists with the specified address, then throws InvalidParameterException.
+   * Returns a block object at a specified address in a journal. Also returns a proof of the specified block for verification if DigestTipAddress is provided. For information about the data contents in a block, see Journal contents in the Amazon QLDB Developer Guide. If the specified ledger doesn't exist or is in DELETING status, then throws ResourceNotFoundException. If the specified ledger is in CREATING status, then throws ResourcePreconditionNotMetException. If no block exists with the specified address, then throws InvalidParameterException.
    */
   getBlock(params: QLDB.Types.GetBlockRequest, callback?: (err: AWSError, data: QLDB.Types.GetBlockResponse) => void): Request<QLDB.Types.GetBlockResponse, AWSError>;
   /**
-   * Returns a journal block object at a specified address in a ledger. Also returns a proof of the specified block for verification if DigestTipAddress is provided. If the specified ledger doesn't exist or is in DELETING status, then throws ResourceNotFoundException. If the specified ledger is in CREATING status, then throws ResourcePreconditionNotMetException. If no block exists with the specified address, then throws InvalidParameterException.
+   * Returns a block object at a specified address in a journal. Also returns a proof of the specified block for verification if DigestTipAddress is provided. For information about the data contents in a block, see Journal contents in the Amazon QLDB Developer Guide. If the specified ledger doesn't exist or is in DELETING status, then throws ResourceNotFoundException. If the specified ledger is in CREATING status, then throws ResourcePreconditionNotMetException. If no block exists with the specified address, then throws InvalidParameterException.
    */
   getBlock(callback?: (err: AWSError, data: QLDB.Types.GetBlockResponse) => void): Request<QLDB.Types.GetBlockResponse, AWSError>;
   /**
@@ -132,11 +132,11 @@ declare class QLDB extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: QLDB.Types.ListTagsForResourceResponse) => void): Request<QLDB.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Creates a stream for a given Amazon QLDB ledger that delivers the journal data to a specified Amazon Kinesis Data Streams resource. The stream captures every document revision that is committed to your journal and sends it to the Kinesis data stream.
+   * Creates a journal stream for a given Amazon QLDB ledger. The stream captures every document revision that is committed to the ledger's journal and delivers the data to a specified Amazon Kinesis Data Streams resource.
    */
   streamJournalToKinesis(params: QLDB.Types.StreamJournalToKinesisRequest, callback?: (err: AWSError, data: QLDB.Types.StreamJournalToKinesisResponse) => void): Request<QLDB.Types.StreamJournalToKinesisResponse, AWSError>;
   /**
-   * Creates a stream for a given Amazon QLDB ledger that delivers the journal data to a specified Amazon Kinesis Data Streams resource. The stream captures every document revision that is committed to your journal and sends it to the Kinesis data stream.
+   * Creates a journal stream for a given Amazon QLDB ledger. The stream captures every document revision that is committed to the ledger's journal and delivers the data to a specified Amazon Kinesis Data Streams resource.
    */
   streamJournalToKinesis(callback?: (err: AWSError, data: QLDB.Types.StreamJournalToKinesisResponse) => void): Request<QLDB.Types.StreamJournalToKinesisResponse, AWSError>;
   /**
@@ -185,7 +185,7 @@ declare namespace QLDB {
   }
   export interface CreateLedgerRequest {
     /**
-     * The name of the ledger that you want to create. The name must be unique among all of your ledgers in the current AWS Region.
+     * The name of the ledger that you want to create. The name must be unique among all of your ledgers in the current AWS Region. Naming constraints for ledger names are defined in Quotas in Amazon QLDB in the Amazon QLDB Developer Guide.
      */
     Name: LedgerName;
     /**
@@ -475,7 +475,7 @@ declare namespace QLDB {
      */
     StreamArn: Arn;
     /**
-     * Enables QLDB to publish multiple stream records in a single Kinesis Data Streams record. To learn more, see KPL Key Concepts in the Amazon Kinesis Data Streams Developer Guide.
+     * Enables QLDB to publish multiple data records in a single Kinesis Data Streams record. To learn more, see KPL Key Concepts in the Amazon Kinesis Data Streams Developer Guide.
      */
     AggregationEnabled?: Boolean;
   }
@@ -644,7 +644,7 @@ declare namespace QLDB {
      */
     InclusiveStartTime: Timestamp;
     /**
-     * The exclusive date and time that specifies when the stream ends. If you keep this parameter blank, the stream runs indefinitely until you cancel it. The ExclusiveEndTime must be in ISO 8601 date and time format and in Universal Coordinated Time (UTC). For example: 2019-06-13T21:36:34Z 
+     * The exclusive date and time that specifies when the stream ends. If you don't define this parameter, the stream runs indefinitely until you cancel it. The ExclusiveEndTime must be in ISO 8601 date and time format and in Universal Coordinated Time (UTC). For example: 2019-06-13T21:36:34Z 
      */
     ExclusiveEndTime?: Timestamp;
     /**
@@ -652,7 +652,7 @@ declare namespace QLDB {
      */
     KinesisConfiguration: KinesisConfiguration;
     /**
-     * The name that you want to assign to the QLDB journal stream. User-defined names can help identify and indicate the purpose of a stream. Your stream name must be unique among other active streams for a given ledger. If you try to create a stream with the same name and configuration of an active, existing stream for the same ledger, QLDB simply returns the existing stream. Stream names have the same naming constraints as ledger names, as defined in Quotas in Amazon QLDB in the Amazon QLDB Developer Guide.
+     * The name that you want to assign to the QLDB journal stream. User-defined names can help identify and indicate the purpose of a stream. Your stream name must be unique among other active streams for a given ledger. Stream names have the same naming constraints as ledger names, as defined in Quotas in Amazon QLDB in the Amazon QLDB Developer Guide.
      */
     StreamName: StreamName;
   }

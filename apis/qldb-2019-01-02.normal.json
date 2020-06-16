@@ -202,7 +202,7 @@
           "shape": "ResourcePreconditionNotMetException"
         }
       ],
-      "documentation": "<p>Returns a journal block object at a specified address in a ledger. Also returns a proof of the specified block for verification if <code>DigestTipAddress</code> is provided.</p> <p>If the specified ledger doesn't exist or is in <code>DELETING</code> status, then throws <code>ResourceNotFoundException</code>.</p> <p>If the specified ledger is in <code>CREATING</code> status, then throws <code>ResourcePreconditionNotMetException</code>.</p> <p>If no block exists with the specified address, then throws <code>InvalidParameterException</code>.</p>"
+      "documentation": "<p>Returns a block object at a specified address in a journal. Also returns a proof of the specified block for verification if <code>DigestTipAddress</code> is provided.</p> <p>For information about the data contents in a block, see <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/journal-contents.html\">Journal contents</a> in the <i>Amazon QLDB Developer Guide</i>.</p> <p>If the specified ledger doesn't exist or is in <code>DELETING</code> status, then throws <code>ResourceNotFoundException</code>.</p> <p>If the specified ledger is in <code>CREATING</code> status, then throws <code>ResourcePreconditionNotMetException</code>.</p> <p>If no block exists with the specified address, then throws <code>InvalidParameterException</code>.</p>"
     },
     "GetDigest": {
       "name": "GetDigest",
@@ -366,7 +366,7 @@
           "shape": "ResourcePreconditionNotMetException"
         }
       ],
-      "documentation": "<p>Creates a stream for a given Amazon QLDB ledger that delivers the journal data to a specified Amazon Kinesis Data Streams resource. The stream captures every document revision that is committed to your journal and sends it to the Kinesis data stream.</p>"
+      "documentation": "<p>Creates a journal stream for a given Amazon QLDB ledger. The stream captures every document revision that is committed to the ledger's journal and delivers the data to a specified Amazon Kinesis Data Streams resource.</p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -483,7 +483,7 @@
       "members": {
         "Name": {
           "shape": "LedgerName",
-          "documentation": "<p>The name of the ledger that you want to create. The name must be unique among all of your ledgers in the current AWS Region.</p>"
+          "documentation": "<p>The name of the ledger that you want to create. The name must be unique among all of your ledgers in the current AWS Region.</p> <p>Naming constraints for ledger names are defined in <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/limits.html#limits.naming\">Quotas in Amazon QLDB</a> in the <i>Amazon QLDB Developer Guide</i>.</p>"
         },
         "Tags": {
           "shape": "Tags",
@@ -958,7 +958,7 @@
         },
         "AggregationEnabled": {
           "shape": "Boolean",
-          "documentation": "<p>Enables QLDB to publish multiple stream records in a single Kinesis Data Streams record. To learn more, see <a href=\"https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-concepts.html\">KPL Key Concepts</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>.</p>"
+          "documentation": "<p>Enables QLDB to publish multiple data records in a single Kinesis Data Streams record. To learn more, see <a href=\"https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-concepts.html\">KPL Key Concepts</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>.</p>"
         }
       },
       "documentation": "<p>The configuration settings of the Amazon Kinesis Data Streams destination for your Amazon QLDB journal stream.</p>"
@@ -1269,7 +1269,7 @@
         },
         "ExclusiveEndTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The exclusive date and time that specifies when the stream ends. If you keep this parameter blank, the stream runs indefinitely until you cancel it.</p> <p>The <code>ExclusiveEndTime</code> must be in <code>ISO 8601</code> date and time format and in Universal Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code> </p>"
+          "documentation": "<p>The exclusive date and time that specifies when the stream ends. If you don't define this parameter, the stream runs indefinitely until you cancel it.</p> <p>The <code>ExclusiveEndTime</code> must be in <code>ISO 8601</code> date and time format and in Universal Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code> </p>"
         },
         "KinesisConfiguration": {
           "shape": "KinesisConfiguration",
@@ -1277,7 +1277,7 @@
         },
         "StreamName": {
           "shape": "StreamName",
-          "documentation": "<p>The name that you want to assign to the QLDB journal stream. User-defined names can help identify and indicate the purpose of a stream.</p> <p>Your stream name must be unique among other <i>active</i> streams for a given ledger. If you try to create a stream with the same name and configuration of an active, existing stream for the same ledger, QLDB simply returns the existing stream. Stream names have the same naming constraints as ledger names, as defined in <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/limits.html#limits.naming\">Quotas in Amazon QLDB</a> in the <i>Amazon QLDB Developer Guide</i>.</p>"
+          "documentation": "<p>The name that you want to assign to the QLDB journal stream. User-defined names can help identify and indicate the purpose of a stream.</p> <p>Your stream name must be unique among other <i>active</i> streams for a given ledger. Stream names have the same naming constraints as ledger names, as defined in <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/limits.html#limits.naming\">Quotas in Amazon QLDB</a> in the <i>Amazon QLDB Developer Guide</i>.</p>"
         }
       }
     },
@@ -1443,7 +1443,7 @@
           "documentation": "<p>An Amazon Ion plaintext value contained in a <code>ValueHolder</code> structure.</p>"
         }
       },
-      "documentation": "<p>A structure that can contain an Amazon Ion value in multiple encoding formats.</p>",
+      "documentation": "<p>A structure that can contain a value in multiple encoding formats.</p>",
       "sensitive": true
     }
   },

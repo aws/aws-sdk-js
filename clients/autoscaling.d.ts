@@ -52,6 +52,14 @@ declare class AutoScaling extends Service {
    */
   batchPutScheduledUpdateGroupAction(callback?: (err: AWSError, data: AutoScaling.Types.BatchPutScheduledUpdateGroupActionAnswer) => void): Request<AutoScaling.Types.BatchPutScheduledUpdateGroupActionAnswer, AWSError>;
   /**
+   * Cancels an instance refresh operation in progress. Cancellation does not roll back any replacements that have already been completed, but it prevents new replacements from being started.  For more information, see Replacing Auto Scaling Instances Based on an Instance Refresh.
+   */
+  cancelInstanceRefresh(params: AutoScaling.Types.CancelInstanceRefreshType, callback?: (err: AWSError, data: AutoScaling.Types.CancelInstanceRefreshAnswer) => void): Request<AutoScaling.Types.CancelInstanceRefreshAnswer, AWSError>;
+  /**
+   * Cancels an instance refresh operation in progress. Cancellation does not roll back any replacements that have already been completed, but it prevents new replacements from being started.  For more information, see Replacing Auto Scaling Instances Based on an Instance Refresh.
+   */
+  cancelInstanceRefresh(callback?: (err: AWSError, data: AutoScaling.Types.CancelInstanceRefreshAnswer) => void): Request<AutoScaling.Types.CancelInstanceRefreshAnswer, AWSError>;
+  /**
    * Completes the lifecycle action for the specified token or instance with the specified result. This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:   (Optional) Create a Lambda function and a rule that allows CloudWatch Events to invoke your Lambda function when Amazon EC2 Auto Scaling launches or terminates instances.   (Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.   Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.   If you need more time, record the lifecycle action heartbeat to keep the instance in a pending state.    If you finish before the timeout period ends, complete the lifecycle action.    For more information, see Amazon EC2 Auto Scaling Lifecycle Hooks in the Amazon EC2 Auto Scaling User Guide.
    */
   completeLifecycleAction(params: AutoScaling.Types.CompleteLifecycleActionType, callback?: (err: AWSError, data: AutoScaling.Types.CompleteLifecycleActionAnswer) => void): Request<AutoScaling.Types.CompleteLifecycleActionAnswer, AWSError>;
@@ -167,6 +175,14 @@ declare class AutoScaling extends Service {
    * Describes the notification types that are supported by Amazon EC2 Auto Scaling.
    */
   describeAutoScalingNotificationTypes(callback?: (err: AWSError, data: AutoScaling.Types.DescribeAutoScalingNotificationTypesAnswer) => void): Request<AutoScaling.Types.DescribeAutoScalingNotificationTypesAnswer, AWSError>;
+  /**
+   * Describes one or more instance refreshes. You can determine the status of a request by looking at the Status parameter. The following are the possible statuses:     Pending - The request was created, but the operation has not started.    InProgress - The operation is in progress.    Successful - The operation completed successfully.    Failed - The operation failed to complete. You can troubleshoot using the status reason and the scaling activities.     Cancelling - An ongoing operation is being cancelled. Cancellation does not roll back any replacements that have already been completed, but it prevents new replacements from being started.     Cancelled - The operation is cancelled.   
+   */
+  describeInstanceRefreshes(params: AutoScaling.Types.DescribeInstanceRefreshesType, callback?: (err: AWSError, data: AutoScaling.Types.DescribeInstanceRefreshesAnswer) => void): Request<AutoScaling.Types.DescribeInstanceRefreshesAnswer, AWSError>;
+  /**
+   * Describes one or more instance refreshes. You can determine the status of a request by looking at the Status parameter. The following are the possible statuses:     Pending - The request was created, but the operation has not started.    InProgress - The operation is in progress.    Successful - The operation completed successfully.    Failed - The operation failed to complete. You can troubleshoot using the status reason and the scaling activities.     Cancelling - An ongoing operation is being cancelled. Cancellation does not roll back any replacements that have already been completed, but it prevents new replacements from being started.     Cancelled - The operation is cancelled.   
+   */
+  describeInstanceRefreshes(callback?: (err: AWSError, data: AutoScaling.Types.DescribeInstanceRefreshesAnswer) => void): Request<AutoScaling.Types.DescribeInstanceRefreshesAnswer, AWSError>;
   /**
    * Describes one or more launch configurations.
    */
@@ -391,6 +407,14 @@ declare class AutoScaling extends Service {
    * Updates the instance protection settings of the specified instances. For more information about preventing instances that are part of an Auto Scaling group from terminating on scale in, see Instance Protection in the Amazon EC2 Auto Scaling User Guide.
    */
   setInstanceProtection(callback?: (err: AWSError, data: AutoScaling.Types.SetInstanceProtectionAnswer) => void): Request<AutoScaling.Types.SetInstanceProtectionAnswer, AWSError>;
+  /**
+   * Starts a new instance refresh operation, which triggers a rolling replacement of all previously launched instances in the Auto Scaling group with a new group of instances. If successful, this call creates a new instance refresh request with a unique ID that you can use to track its progress. To query its status, call the DescribeInstanceRefreshes API. To describe the instance refreshes that have already run, call the DescribeInstanceRefreshes API. To cancel an active instance refresh operation, use the CancelInstanceRefresh API. For more information, see Replacing Auto Scaling Instances Based on an Instance Refresh.
+   */
+  startInstanceRefresh(params: AutoScaling.Types.StartInstanceRefreshType, callback?: (err: AWSError, data: AutoScaling.Types.StartInstanceRefreshAnswer) => void): Request<AutoScaling.Types.StartInstanceRefreshAnswer, AWSError>;
+  /**
+   * Starts a new instance refresh operation, which triggers a rolling replacement of all previously launched instances in the Auto Scaling group with a new group of instances. If successful, this call creates a new instance refresh request with a unique ID that you can use to track its progress. To query its status, call the DescribeInstanceRefreshes API. To describe the instance refreshes that have already run, call the DescribeInstanceRefreshes API. To cancel an active instance refresh operation, use the CancelInstanceRefresh API. For more information, see Replacing Auto Scaling Instances Based on an Instance Refresh.
+   */
+  startInstanceRefresh(callback?: (err: AWSError, data: AutoScaling.Types.StartInstanceRefreshAnswer) => void): Request<AutoScaling.Types.StartInstanceRefreshAnswer, AWSError>;
   /**
    * Suspends the specified automatic scaling processes, or all processes, for the specified Auto Scaling group. If you suspend either the Launch or Terminate process types, it can prevent other process types from functioning properly. For more information, see Suspending and Resuming Scaling Processes in the Amazon EC2 Auto Scaling User Guide. To resume processes that have been suspended, call the ResumeProcesses API.
    */
@@ -777,6 +801,18 @@ declare namespace AutoScaling {
     NoDevice?: NoDevice;
   }
   export type BlockDeviceMappings = BlockDeviceMapping[];
+  export interface CancelInstanceRefreshAnswer {
+    /**
+     * The instance refresh ID.
+     */
+    InstanceRefreshId?: XmlStringMaxLen255;
+  }
+  export interface CancelInstanceRefreshType {
+    /**
+     * The name of the Auto Scaling group.
+     */
+    AutoScalingGroupName: XmlStringMaxLen255;
+  }
   export type ClassicLinkVPCSecurityGroups = XmlStringMaxLen255[];
   export interface CompleteLifecycleActionAnswer {
   }
@@ -1096,6 +1132,34 @@ declare namespace AutoScaling {
      * The notification types.
      */
     AutoScalingNotificationTypes?: AutoScalingNotificationTypes;
+  }
+  export interface DescribeInstanceRefreshesAnswer {
+    /**
+     * The instance refreshes for the specified group. For more information, see Replacing Auto Scaling Instances Based on an Instance Refresh.
+     */
+    InstanceRefreshes?: InstanceRefreshes;
+    /**
+     * A string that indicates that the response contains more items than can be returned in a single response. To receive additional items, specify this string for the NextToken value when requesting the next set of items. This value is null when there are no more items to return.
+     */
+    NextToken?: XmlString;
+  }
+  export interface DescribeInstanceRefreshesType {
+    /**
+     * The name of the Auto Scaling group.
+     */
+    AutoScalingGroupName: XmlStringMaxLen255;
+    /**
+     * One or more instance refresh IDs.
+     */
+    InstanceRefreshIds?: InstanceRefreshIds;
+    /**
+     * The token for the next set of items to return. (You received this token from a previous call.)
+     */
+    NextToken?: XmlString;
+    /**
+     * The maximum number of items to return with this call. The default value is 50 and the maximum value is 100.
+     */
+    MaxRecords?: MaxRecords;
   }
   export interface DescribeLifecycleHookTypesAnswer {
     /**
@@ -1530,6 +1594,43 @@ declare namespace AutoScaling {
     Enabled?: MonitoringEnabled;
   }
   export type InstanceProtected = boolean;
+  export interface InstanceRefresh {
+    /**
+     * The instance refresh ID.
+     */
+    InstanceRefreshId?: XmlStringMaxLen255;
+    /**
+     * The name of the Auto Scaling group.
+     */
+    AutoScalingGroupName?: XmlStringMaxLen255;
+    /**
+     * The current status for the instance refresh operation:    Pending - The request was created, but the operation has not started.    InProgress - The operation is in progress.    Successful - The operation completed successfully.    Failed - The operation failed to complete. You can troubleshoot using the status reason and the scaling activities.     Cancelling - An ongoing operation is being cancelled. Cancellation does not roll back any replacements that have already been completed, but it prevents new replacements from being started.     Cancelled - The operation is cancelled.   
+     */
+    Status?: InstanceRefreshStatus;
+    /**
+     * Provides more details about the current status of the instance refresh. 
+     */
+    StatusReason?: XmlStringMaxLen1023;
+    /**
+     * The date and time at which the instance refresh began.
+     */
+    StartTime?: TimestampType;
+    /**
+     * The date and time at which the instance refresh ended.
+     */
+    EndTime?: TimestampType;
+    /**
+     * The percentage of the instance refresh that is complete. For each instance replacement, Amazon EC2 Auto Scaling tracks the instance's health status and warm-up time. When the instance's health status changes to healthy and the specified warm-up time passes, the instance is considered updated and added to the percentage complete.
+     */
+    PercentageComplete?: IntPercent;
+    /**
+     * The number of instances remaining to update before the instance refresh is complete.
+     */
+    InstancesToUpdate?: InstancesToUpdate;
+  }
+  export type InstanceRefreshIds = XmlStringMaxLen255[];
+  export type InstanceRefreshStatus = "Pending"|"InProgress"|"Successful"|"Failed"|"Cancelling"|"Cancelled"|string;
+  export type InstanceRefreshes = InstanceRefresh[];
   export type Instances = Instance[];
   export interface InstancesDistribution {
     /**
@@ -1557,6 +1658,8 @@ declare namespace AutoScaling {
      */
     SpotMaxPrice?: MixedInstanceSpotPrice;
   }
+  export type InstancesToUpdate = number;
+  export type IntPercent = number;
   export interface LaunchConfiguration {
     /**
      * The name of the launch configuration.
@@ -1903,14 +2006,14 @@ declare namespace AutoScaling {
      */
     PredefinedMetricType: MetricType;
     /**
-     * Identifies the resource associated with the metric type. You can't specify a resource label unless the metric type is ALBRequestCountPerTarget and there is a target group attached to the Auto Scaling group. The format is app/load-balancer-name/load-balancer-id/targetgroup/target-group-name/target-group-id , where     app/load-balancer-name/load-balancer-id  is the final portion of the load balancer ARN, and    targetgroup/target-group-name/target-group-id  is the final portion of the target group ARN.  
+     * Identifies the resource associated with the metric type. You can't specify a resource label unless the metric type is ALBRequestCountPerTarget and there is a target group attached to the Auto Scaling group. Elastic Load Balancing sends data about your load balancers to Amazon CloudWatch. CloudWatch collects the data and specifies the format to use to access the data. The format is app/load-balancer-name/load-balancer-id/targetgroup/target-group-name/target-group-id , where     app/load-balancer-name/load-balancer-id  is the final portion of the load balancer ARN, and    targetgroup/target-group-name/target-group-id  is the final portion of the target group ARN.   To find the ARN for an Application Load Balancer, use the DescribeLoadBalancers API operation. To find the ARN for the target group, use the DescribeTargetGroups API operation.
      */
     ResourceLabel?: XmlStringMaxLen1023;
   }
   export type ProcessNames = XmlStringMaxLen255[];
   export interface ProcessType {
     /**
-     * One of the following processes:    Launch     Terminate     AddToLoadBalancer     AlarmNotification     AZRebalance     HealthCheck     ReplaceUnhealthy     ScheduledActions   
+     * One of the following processes:    Launch     Terminate     AddToLoadBalancer     AlarmNotification     AZRebalance     HealthCheck     InstanceRefresh     ReplaceUnhealthy     ScheduledActions   
      */
     ProcessName: XmlStringMaxLen255;
   }
@@ -2086,6 +2189,18 @@ declare namespace AutoScaling {
      */
     InstanceId?: XmlStringMaxLen19;
   }
+  export type RefreshInstanceWarmup = number;
+  export interface RefreshPreferences {
+    /**
+     * The amount of capacity in the Auto Scaling group that must remain healthy during an instance refresh to allow the operation to continue, as a percentage of the desired capacity of the Auto Scaling group (rounded up to the nearest integer). The default is 90. 
+     */
+    MinHealthyPercentage?: IntPercent;
+    /**
+     * The number of seconds until a newly launched instance is configured and ready to use. During this time, Amazon EC2 Auto Scaling does not immediately move on to the next replacement. The default is to use the value specified for the health check grace period for the group. Note: While warming up, a newly launched instance is not counted toward the aggregated metrics of the Auto Scaling group. 
+     */
+    InstanceWarmup?: RefreshInstanceWarmup;
+  }
+  export type RefreshStrategy = "Rolling"|string;
   export type ResourceName = string;
   export type ScalingActivityStatusCode = "PendingSpotBidPlacement"|"WaitingForSpotInstanceRequestId"|"WaitingForSpotInstanceId"|"WaitingForInstanceId"|"PreInService"|"InProgress"|"WaitingForELBConnectionDraining"|"MidLifecycleAction"|"WaitingForInstanceWarmup"|"Successful"|"Failed"|"Cancelled"|string;
   export type ScalingPolicies = ScalingPolicy[];
@@ -2158,7 +2273,7 @@ declare namespace AutoScaling {
      */
     AutoScalingGroupName: ResourceName;
     /**
-     * One or more of the following processes. If you omit this parameter, all processes are specified.    Launch     Terminate     HealthCheck     ReplaceUnhealthy     AZRebalance     AlarmNotification     ScheduledActions     AddToLoadBalancer   
+     * One or more of the following processes:    Launch     Terminate     AddToLoadBalancer     AlarmNotification     AZRebalance     HealthCheck     InstanceRefresh     ReplaceUnhealthy     ScheduledActions    If you omit this parameter, all processes are specified.
      */
     ScalingProcesses?: ProcessNames;
   }
@@ -2296,6 +2411,26 @@ declare namespace AutoScaling {
   export type ShouldRespectGracePeriod = boolean;
   export type SpotInstancePools = number;
   export type SpotPrice = string;
+  export interface StartInstanceRefreshAnswer {
+    /**
+     * A unique ID for tracking the progress of the request.
+     */
+    InstanceRefreshId?: XmlStringMaxLen255;
+  }
+  export interface StartInstanceRefreshType {
+    /**
+     * The name of the Auto Scaling group.
+     */
+    AutoScalingGroupName: XmlStringMaxLen255;
+    /**
+     * The strategy to use for the instance refresh. The only valid value is Rolling. A rolling update is an update that is applied to all instances in an Auto Scaling group until all instances have been updated. A rolling update can fail due to failed health checks or if instances are on standby or are protected from scale-in. If the rolling update process fails, any instances that were already replaced are not rolled back to their previous configuration. 
+     */
+    Strategy?: RefreshStrategy;
+    /**
+     * Set of preferences associated with the instance refresh request.
+     */
+    Preferences?: RefreshPreferences;
+  }
   export interface StepAdjustment {
     /**
      * The lower bound for the difference between the alarm threshold and the CloudWatch metric. If the metric value is above the breach threshold, the lower bound is inclusive (the metric must be greater than or equal to the threshold plus the lower bound). Otherwise, it is exclusive (the metric must be greater than the threshold plus the lower bound). A null value indicates negative infinity.
