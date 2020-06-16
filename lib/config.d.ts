@@ -13,7 +13,7 @@ export class ConfigBase extends ConfigurationOptions{
     getCredentials(callback: (err: AWSError) => void): void;
     /**
      * Loads configuration data from a JSON file into this config object.
-     * Loading configuration willr eset all existing configuration on the object.
+     * Loading configuration will reset all existing configuration on the object.
      * This feature is not supported in the browser environment of the SDK.
      *
      * @param {string} path - the path relative to your process's current working directory to load configuration from.
@@ -251,13 +251,13 @@ export abstract class ConfigurationOptions {
      */
     s3ForcePathStyle?: boolean
     /**
-     * when region is set to 'us-east-1', whether to send s3 request to global endpoints
+     * When region is set to 'us-east-1', whether to send s3 request to global endpoints
      * or 'us-east-1' regional endpoints. This config is only applicable to S3 client;
      * Defaults to 'legacy'
      */
     s3UsEast1RegionalEndpoint?: "regional"|"legacy"
     /**
-     * whether to override the request region with the region inferred
+     * Whether to override the request region with the region inferred
      * from requested resource's ARN. Only available for S3 buckets
      * Defaults to `true`
      */
@@ -300,11 +300,11 @@ export abstract class ConfigurationOptions {
      */
     endpointCacheSize?: number;
     /**
-     *  whether to marshal request parameters to the prefix of hostname.
+     * Whether to marshal request parameters to the prefix of hostname.
      */
     hostPrefixEnabled?: boolean;
     /**
-     * whether to send sts request to global endpoints or
+     * Whether to send sts request to global endpoints or
      * regional endpoints. 
      */
     stsRegionalEndpoints?: "legacy"|"regional";
