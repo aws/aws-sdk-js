@@ -14,20 +14,31 @@
     },
     "*/budgets": "globalSSL",
     "*/cloudfront": "globalSSL",
-    "*/iam": "globalSSL",
     "*/sts": "globalSSL",
     "*/importexport": {
       "endpoint": "{service}.amazonaws.com",
       "signatureVersion": "v2",
       "globalEndpoint": true
     },
-    "*/route53": {
-      "endpoint": "https://{service}.amazonaws.com",
-      "signatureVersion": "v3https",
-      "globalEndpoint": true
+
+    "*/route53": "globalSSL",
+    "cn-*/route53": {
+      "endpoint": "{service}.amazonaws.com.cn",
+      "globalEndpoint": true,
+      "signingRegion": "cn-northwest-1"
     },
+    "us-gov-*/route53": "globalGovCloud",
+
     "*/waf": "globalSSL",
+
+    "*/iam": "globalSSL",
+    "cn-*/iam": {
+      "endpoint": "{service}.cn-north-1.amazonaws.com.cn",
+      "globalEndpoint": true,
+      "signingRegion": "cn-north-1"
+    },
     "us-gov-*/iam": "globalGovCloud",
+
     "us-gov-*/sts": {
       "endpoint": "{service}.{region}.amazonaws.com"
     },
@@ -56,10 +67,13 @@
   "patterns": {
     "globalSSL": {
       "endpoint": "https://{service}.amazonaws.com",
-      "globalEndpoint": true
+      "globalEndpoint": true,
+      "signingRegion": "us-east-1"
     },
     "globalGovCloud": {
-      "endpoint": "{service}.us-gov.amazonaws.com"
+      "endpoint": "{service}.us-gov.amazonaws.com",
+      "globalEndpoint": true,
+      "signingRegion": "us-gov-west-1"
     },
     "s3signature": {
       "endpoint": "{service}.{region}.amazonaws.com",
