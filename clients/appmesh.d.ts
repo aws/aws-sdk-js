@@ -430,12 +430,12 @@ declare namespace AppMesh {
     lastUpdatedAt: Timestamp;
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
-               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner: AccountId;
     /**
      * The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's
-               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with shared meshes.
      */
     resourceOwner: AccountId;
     /**
@@ -568,7 +568,7 @@ declare namespace AppMesh {
     meshName: ResourceName;
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
-               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -685,7 +685,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then
                the account that you specify must share the mesh with your account before you can create 
-             the resource in the service mesh. For more information about mesh sharing, see Working with Shared Meshes.
+             the resource in the service mesh. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -789,6 +789,12 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   export type VirtualRouterListeners = VirtualRouterListener[];
   export type PortSet = PortNumber[];
   export type HttpMethod = "CONNECT"|"DELETE"|"GET"|"HEAD"|"OPTIONS"|"PATCH"|"POST"|"PUT"|"TRACE"|string;
+  export interface ListenerTimeout {
+    grpc?: GrpcTimeout;
+    http?: HttpTimeout;
+    http2?: HttpTimeout;
+    tcp?: TcpTimeout;
+  }
   export type MeshList = MeshRef[];
   export type MaxRetries = number;
   export interface TlsValidationContextTrust {
@@ -841,7 +847,13 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The full Amazon Resource Name (ARN) for the route.
      */
     arn: Arn;
+    /**
+     * The Unix epoch timestamp in seconds for when the resource was created.
+     */
     createdAt: Timestamp;
+    /**
+     * The Unix epoch timestamp in seconds for when the resource was last updated.
+     */
     lastUpdatedAt: Timestamp;
     /**
      * The name of the service mesh that the route resides in.
@@ -849,18 +861,21 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     meshName: ResourceName;
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
-               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner: AccountId;
     /**
      * The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's
-               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with shared meshes.
      */
     resourceOwner: AccountId;
     /**
      * The name of the route.
      */
     routeName: ResourceName;
+    /**
+     * The version of the resource. Resources are created at version 1, and this version is incremented each time that they're updated.
+     */
     version: Long;
     /**
      * The virtual router that the route is associated with.
@@ -874,7 +889,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     meshName: ResourceName;
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
-               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -1027,7 +1042,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then
                the account that you specify must share the mesh with your account before you can create 
-             the resource in the service mesh. For more information about mesh sharing, see Working with Shared Meshes.
+             the resource in the service mesh. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -1095,6 +1110,10 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     virtualRouterName: ResourceName;
   }
+  export interface HttpTimeout {
+    idle?: Duration;
+    perRequest?: Duration;
+  }
   export interface DeleteVirtualServiceInput {
     /**
      * The name of the service mesh to delete the virtual service in.
@@ -1102,7 +1121,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     meshName: ResourceName;
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
-               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -1141,7 +1160,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     meshName: ResourceName;
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
-               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -1200,7 +1219,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then
                the account that you specify must share the mesh with your account before you can create 
-             the resource in the service mesh. For more information about mesh sharing, see Working with Shared Meshes.
+             the resource in the service mesh. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -1231,7 +1250,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     meshName: ResourceName;
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
-               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -1281,7 +1300,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     meshName: ResourceName;
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
-               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -1296,7 +1315,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     meshName: ResourceName;
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
-               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -1331,7 +1350,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     meshName: ResourceName;
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
-               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -1378,7 +1397,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     meshName: ResourceName;
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
-               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -1398,7 +1417,13 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The full Amazon Resource Name (ARN) for the virtual service.
      */
     arn: Arn;
+    /**
+     * The Unix epoch timestamp in seconds for when the resource was created.
+     */
     createdAt: Timestamp;
+    /**
+     * The Unix epoch timestamp in seconds for when the resource was last updated.
+     */
     lastUpdatedAt: Timestamp;
     /**
      * The name of the service mesh that the virtual service resides in.
@@ -1406,19 +1431,26 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     meshName: ResourceName;
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
-               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner: AccountId;
     /**
      * The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's
-               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with shared meshes.
      */
     resourceOwner: AccountId;
+    /**
+     * The version of the resource. Resources are created at version 1, and this version is incremented each time that they're updated.
+     */
     version: Long;
     /**
      * The name of the virtual service.
      */
     virtualServiceName: ServiceName;
+  }
+  export interface GrpcTimeout {
+    idle?: Duration;
+    perRequest?: Duration;
   }
   export interface VirtualNodeStatus {
     /**
@@ -1431,7 +1463,13 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The full Amazon Resource Name (ARN) for the virtual router.
      */
     arn: Arn;
+    /**
+     * The Unix epoch timestamp in seconds for when the resource was created.
+     */
     createdAt: Timestamp;
+    /**
+     * The Unix epoch timestamp in seconds for when the resource was last updated.
+     */
     lastUpdatedAt: Timestamp;
     /**
      * The name of the service mesh that the virtual router resides in.
@@ -1439,14 +1477,17 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     meshName: ResourceName;
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
-               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner: AccountId;
     /**
      * The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's
-               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with shared meshes.
      */
     resourceOwner: AccountId;
+    /**
+     * The version of the resource. Resources are created at version 1, and this version is incremented each time that they're updated.
+     */
     version: Long;
     /**
      * The name of the virtual router.
@@ -1493,7 +1534,13 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The full Amazon Resource Name (ARN) for the virtual node.
      */
     arn: Arn;
+    /**
+     * The Unix epoch timestamp in seconds for when the resource was created.
+     */
     createdAt: Timestamp;
+    /**
+     * The Unix epoch timestamp in seconds for when the resource was last updated.
+     */
     lastUpdatedAt: Timestamp;
     /**
      * The name of the service mesh that the virtual node resides in.
@@ -1501,14 +1548,17 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     meshName: ResourceName;
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
-               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner: AccountId;
     /**
      * The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's
-               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with shared meshes.
      */
     resourceOwner: AccountId;
+    /**
+     * The version of the resource. Resources are created at version 1, and this version is incremented each time that they're updated.
+     */
     version: Long;
     /**
      * The name of the virtual node.
@@ -1575,7 +1625,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     meshName: ResourceName;
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
-               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -1622,6 +1672,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The action to take if a match is determined.
      */
     action: TcpRouteAction;
+    timeout?: TcpTimeout;
   }
   export type VirtualNodeList = VirtualNodeRef[];
   export interface ListVirtualRoutersInput {
@@ -1642,7 +1693,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     meshName: ResourceName;
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
-               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -1673,7 +1724,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     meshName: ResourceName;
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
-               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -1708,7 +1759,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     meshName: ResourceName;
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
-               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -1781,7 +1832,13 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The full Amazon Resource Name (ARN) of the service mesh.
      */
     arn: Arn;
+    /**
+     * The Unix epoch timestamp in seconds for when the resource was created.
+     */
     createdAt: Timestamp;
+    /**
+     * The Unix epoch timestamp in seconds for when the resource was last updated.
+     */
     lastUpdatedAt: Timestamp;
     /**
      * The name of the service mesh.
@@ -1789,14 +1846,17 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     meshName: ResourceName;
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
-               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner: AccountId;
     /**
      * The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's
-               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with shared meshes.
      */
     resourceOwner: AccountId;
+    /**
+     * The version of the resource. Resources are created at version 1, and this version is incremented each time that they're updated.
+     */
     version: Long;
   }
   export type MeshStatusCode = "ACTIVE"|"DELETED"|"INACTIVE"|string;
@@ -1837,7 +1897,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     meshName: ResourceName;
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
-               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -1860,6 +1920,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The port mapping information for the listener.
      */
     portMapping: PortMapping;
+    timeout?: ListenerTimeout;
     /**
      * A reference to an object that represents the Transport Layer Security (TLS) properties for a listener.
      */
@@ -1878,6 +1939,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * An object that represents a retry policy.
      */
     retryPolicy?: GrpcRetryPolicy;
+    timeout?: GrpcTimeout;
   }
   export type ListRoutesLimit = number;
   export interface ClientPolicyTls {
@@ -1970,7 +2032,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     meshName: ResourceName;
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
-               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -2016,7 +2078,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then
                the account that you specify must share the mesh with your account before you can create 
-             the resource in the service mesh. For more information about mesh sharing, see Working with Shared Meshes.
+             the resource in the service mesh. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -2043,6 +2105,9 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   export type WeightedTargets = WeightedTarget[];
   export type HttpRouteHeaders = HttpRouteHeader[];
   export type String = string;
+  export interface TcpTimeout {
+    idle?: Duration;
+  }
   export type HttpScheme = "http"|"https"|string;
   export interface UpdateRouteInput {
     /**
@@ -2056,7 +2121,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     meshName: ResourceName;
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
-               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
     /**
@@ -2085,6 +2150,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * An object that represents a retry policy.
      */
     retryPolicy?: HttpRetryPolicy;
+    timeout?: HttpTimeout;
   }
   export interface DescribeMeshInput {
     /**
@@ -2093,7 +2159,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     meshName: ResourceName;
     /**
      * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
-               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with Shared Meshes.
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
      */
     meshOwner?: AccountId;
   }

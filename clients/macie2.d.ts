@@ -196,11 +196,11 @@ declare class Macie2 extends Service {
    */
   getBucketStatistics(callback?: (err: AWSError, data: Macie2.Types.GetBucketStatisticsResponse) => void): Request<Macie2.Types.GetBucketStatisticsResponse, AWSError>;
   /**
-   * Retrieves the configuration settings for exporting data classification results.
+   * Retrieves the configuration settings for storing data classification results.
    */
   getClassificationExportConfiguration(params: Macie2.Types.GetClassificationExportConfigurationRequest, callback?: (err: AWSError, data: Macie2.Types.GetClassificationExportConfigurationResponse) => void): Request<Macie2.Types.GetClassificationExportConfigurationResponse, AWSError>;
   /**
-   * Retrieves the configuration settings for exporting data classification results.
+   * Retrieves the configuration settings for storing data classification results.
    */
   getClassificationExportConfiguration(callback?: (err: AWSError, data: Macie2.Types.GetClassificationExportConfigurationResponse) => void): Request<Macie2.Types.GetClassificationExportConfigurationResponse, AWSError>;
   /**
@@ -348,11 +348,11 @@ declare class Macie2 extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Macie2.Types.ListTagsForResourceResponse) => void): Request<Macie2.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Creates or updates the configuration settings for exporting data classification results.
+   * Creates or updates the configuration settings for storing data classification results.
    */
   putClassificationExportConfiguration(params: Macie2.Types.PutClassificationExportConfigurationRequest, callback?: (err: AWSError, data: Macie2.Types.PutClassificationExportConfigurationResponse) => void): Request<Macie2.Types.PutClassificationExportConfigurationResponse, AWSError>;
   /**
-   * Creates or updates the configuration settings for exporting data classification results.
+   * Creates or updates the configuration settings for storing data classification results.
    */
   putClassificationExportConfiguration(callback?: (err: AWSError, data: Macie2.Types.PutClassificationExportConfigurationResponse) => void): Request<Macie2.Types.PutClassificationExportConfigurationResponse, AWSError>;
   /**
@@ -799,7 +799,7 @@ declare namespace Macie2 {
   }
   export interface ClassificationExportConfiguration {
     /**
-     * The S3 bucket to export data classification results to, and the encryption settings to use when storing results in that bucket.
+     * The S3 bucket to store data classification results in, and the encryption settings to use when storing results in that bucket.
      */
     s3Destination?: S3Destination;
   }
@@ -905,7 +905,7 @@ declare namespace Macie2 {
      */
     keywords?: __listOf__string;
     /**
-     * The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 300.
+     * The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.
      */
     maximumMatchDistance?: __integer;
     /**
@@ -929,7 +929,7 @@ declare namespace Macie2 {
   }
   export interface CreateFindingsFilterRequest {
     /**
-     * The action to perform on findings that meet the filter criteria (findingCriteria). Valid values are: ARCHIVE, automatically archive the findings; and, NOOP, don't perform any action on the findings.
+     * The action to perform on findings that meet the filter criteria (findingCriteria). Valid values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don't perform any action on the findings.
      */
     action: FindingsFilterAction;
     /**
@@ -1297,7 +1297,7 @@ declare namespace Macie2 {
      */
     clientToken?: __string;
     /**
-     * Specifies how often to publish findings for the account. This includes adding findings to AWS Security Hub and exporting finding events to Amazon CloudWatch.
+     * Specifies how often to publish updates to policy findings for the account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).
      */
     findingPublishingFrequency?: FindingPublishingFrequency;
     /**
@@ -1438,7 +1438,7 @@ declare namespace Macie2 {
      */
     ipAddressDetails?: IpAddressDetails;
     /**
-     * The name and type of entity who performed the action on the affected resource.
+     * The name and type of entity that performed the action on the affected resource.
      */
     userIdentity?: UserIdentity;
   }
@@ -1529,7 +1529,7 @@ declare namespace Macie2 {
   }
   export interface GetClassificationExportConfigurationResponse {
     /**
-     * The location that data classification results are exported to, and the encryption settings that are used when storing results in that location.
+     * The location where data classification results are stored, and the encryption settings that are used when storing results in that location.
      */
     configuration?: ClassificationExportConfiguration;
   }
@@ -1617,7 +1617,7 @@ declare namespace Macie2 {
   }
   export interface GetFindingsFilterResponse {
     /**
-     * The action that's performed on findings that meet the filter criteria (findingCriteria). Possible values are: ARCHIVE, automatically archive the findings; and, NOOP, don't perform any action on the findings.
+     * The action that's performed on findings that meet the filter criteria (findingCriteria). Possible values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don't perform any action on the findings.
      */
     action?: FindingsFilterAction;
     /**
@@ -1681,7 +1681,7 @@ declare namespace Macie2 {
      */
     createdAt?: __timestampIso8601;
     /**
-     * The frequency with which Amazon Macie publishes findings for the account. This includes adding findings to AWS Security Hub and exporting finding events to Amazon CloudWatch.
+     * The frequency with which Amazon Macie publishes updates to policy findings for the account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).
      */
     findingPublishingFrequency?: FindingPublishingFrequency;
     /**
@@ -2239,19 +2239,19 @@ declare namespace Macie2 {
      */
     action?: FindingAction;
     /**
-     * The entity who performed the action that produced the finding.
+     * The entity that performed the action that produced the finding.
      */
     actor?: FindingActor;
   }
   export interface PutClassificationExportConfigurationRequest {
     /**
-     * The location to export data classification results to, and the encryption settings to use when storing results in that location.
+     * The location to store data classification results in, and the encryption settings to use when storing results in that location.
      */
     configuration: ClassificationExportConfiguration;
   }
   export interface PutClassificationExportConfigurationResponse {
     /**
-     * The location that data classification results are exported to, and the encryption settings that are used when storing results in that location.
+     * The location where the data classification results are stored, and the encryption settings that are used when storing results in that location.
      */
     configuration?: ClassificationExportConfiguration;
   }
@@ -2332,7 +2332,7 @@ declare namespace Macie2 {
   }
   export interface S3Destination {
     /**
-     * The Amazon Resource Name (ARN) of the bucket. This must be the ARN of an existing bucket.
+     * The name of the bucket.
      */
     bucketName: __string;
     /**
@@ -2340,7 +2340,7 @@ declare namespace Macie2 {
      */
     keyPrefix?: __string;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Key Management Service master key to use for encryption of the exported results. This must be the ARN of an existing KMS key. In addition, the key must be in the same AWS Region as the bucket.
+     * The Amazon Resource Name (ARN) of the AWS Key Management Service customer master key (CMK) to use for encryption of the results. This must be the ARN of an existing CMK that's in the same AWS Region as the bucket.
      */
     kmsKeyArn: __string;
   }
@@ -2418,7 +2418,7 @@ declare namespace Macie2 {
   export type SensitiveData = SensitiveDataItem[];
   export interface SensitiveDataItem {
     /**
-     * The category of sensitive data that was detected. For example, FINANCIAL_INFORMATION, for financial information such as credit card numbers, or PERSONAL_INFORMATION, for personally identifiable information such as names and addresses.
+     * The category of sensitive data that was detected. For example: FINANCIAL_INFORMATION, for financial information such as credit card numbers; PERSONAL_INFORMATION, for personally identifiable information such as full names and mailing addresses; or, CUSTOM_IDENTIFIER, for data that was detected by a custom data identifier.
      */
     category?: SensitiveDataItemCategory;
     /**
@@ -2596,7 +2596,7 @@ declare namespace Macie2 {
      */
     keywords?: __listOf__string;
     /**
-     * The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 300.
+     * The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.
      */
     maximumMatchDistance?: __integer;
     /**
@@ -2655,7 +2655,7 @@ declare namespace Macie2 {
   }
   export interface UpdateFindingsFilterRequest {
     /**
-     * The action to perform on findings that meet the filter criteria (findingCriteria). Valid values are: ARCHIVE, automatically archive the findings; and, NOOP, don't perform any action on the findings.
+     * The action to perform on findings that meet the filter criteria (findingCriteria). Valid values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don't perform any action on the findings.
      */
     action?: FindingsFilterAction;
     /**
@@ -2691,7 +2691,7 @@ declare namespace Macie2 {
   }
   export interface UpdateMacieSessionRequest {
     /**
-     * Specifies how often to publish findings for the account. This includes adding findings to AWS Security Hub and exporting finding events to Amazon CloudWatch.
+     * Specifies how often to publish updates to policy findings for the account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).
      */
     findingPublishingFrequency?: FindingPublishingFrequency;
     /**

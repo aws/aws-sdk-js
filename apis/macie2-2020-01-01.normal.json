@@ -1112,7 +1112,7 @@
           "documentation": "<p>The request failed because it conflicts with the current state of the specified resource.</p>"
         }
       ],
-      "documentation": "<p>Retrieves the configuration settings for exporting data classification results.</p>"
+      "documentation": "<p>Retrieves the configuration settings for storing data classification results.</p>"
     },
     "GetCustomDataIdentifier": {
       "name": "GetCustomDataIdentifier",
@@ -1957,7 +1957,7 @@
           "documentation": "<p>The request failed because it conflicts with the current state of the specified resource.</p>"
         }
       ],
-      "documentation": "<p>Creates or updates the configuration settings for exporting data classification results.</p>"
+      "documentation": "<p>Creates or updates the configuration settings for storing data classification results.</p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -2853,10 +2853,10 @@
         "s3Destination": {
           "shape": "S3Destination",
           "locationName": "s3Destination",
-          "documentation": "<p>The S3 bucket to export data classification results to, and the encryption settings to use when storing results in that bucket.</p>"
+          "documentation": "<p>The S3 bucket to store data classification results in, and the encryption settings to use when storing results in that bucket.</p>"
         }
       },
-      "documentation": "<p>Specifies where to export data classification results to, and the encryption settings to use when storing results in that location. Currently, you can export classification results only to an S3 bucket.</p>"
+      "documentation": "<p>Specifies where to store data classification results, and the encryption settings to use when storing results in that location. Currently, you can store classification results only in an S3 bucket.</p>"
     },
     "ClassificationResult": {
       "type": "structure",
@@ -3009,7 +3009,7 @@
         "maximumMatchDistance": {
           "shape": "__integer",
           "locationName": "maximumMatchDistance",
-          "documentation": "<p>The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 300.</p>"
+          "documentation": "<p>The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.</p>"
         },
         "name": {
           "shape": "__string",
@@ -3044,7 +3044,7 @@
         "action": {
           "shape": "FindingsFilterAction",
           "locationName": "action",
-          "documentation": "<p>The action to perform on findings that meet the filter criteria (findingCriteria). Valid values are: ARCHIVE, automatically archive the findings; and, NOOP, don't perform any action on the findings.</p>"
+          "documentation": "<p>The action to perform on findings that meet the filter criteria (findingCriteria). Valid values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don't perform any action on the findings.</p>"
         },
         "clientToken": {
           "shape": "__string",
@@ -3683,7 +3683,7 @@
         "findingPublishingFrequency": {
           "shape": "FindingPublishingFrequency",
           "locationName": "findingPublishingFrequency",
-          "documentation": "Specifies how often to publish findings for the account. This includes adding findings to AWS Security Hub and exporting finding events to Amazon CloudWatch."
+          "documentation": "Specifies how often to publish updates to policy findings for the account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events)."
         },
         "status": {
           "shape": "MacieStatus",
@@ -3882,6 +3882,7 @@
     },
     "FindingActionType": {
       "type": "string",
+      "documentation": "<p>The type of action that occurred for the resource and produced the policy finding.</p>",
       "enum": [
         "AWS_API_CALL"
       ]
@@ -3902,10 +3903,10 @@
         "userIdentity": {
           "shape": "UserIdentity",
           "locationName": "userIdentity",
-          "documentation": "<p>The name and type of entity who performed the action on the affected resource.</p>"
+          "documentation": "<p>The name and type of entity that performed the action on the affected resource.</p>"
         }
       },
-      "documentation": "<p>Provides information about an entity who performed an action that produced a policy finding for a resource.</p>"
+      "documentation": "<p>Provides information about an entity that performed an action that produced a policy finding for a resource.</p>"
     },
     "FindingCategory": {
       "type": "string",
@@ -3928,7 +3929,7 @@
     },
     "FindingPublishingFrequency": {
       "type": "string",
-      "documentation": "<p>The frequency with which Amazon Macie publishes findings for an account. This includes adding findings to AWS Security Hub and exporting finding events to Amazon CloudWatch. Valid values are:</p>",
+      "documentation": "<p>The frequency with which Amazon Macie publishes updates to policy findings for an account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events). Valid values are:</p>",
       "enum": [
         "FIFTEEN_MINUTES",
         "ONE_HOUR",
@@ -3977,7 +3978,7 @@
     },
     "FindingsFilterAction": {
       "type": "string",
-      "documentation": "<p>The action to perform on findings that meet the filter criteria. Valid values are:</p>",
+      "documentation": "<p>The action to perform on findings that meet the filter criteria. To suppress (automatically archive) findings that meet the criteria, set this value to ARCHIVE. Valid values are:</p>",
       "enum": [
         "ARCHIVE",
         "NOOP"
@@ -4079,7 +4080,7 @@
         "configuration": {
           "shape": "ClassificationExportConfiguration",
           "locationName": "configuration",
-          "documentation": "<p>The location that data classification results are exported to, and the encryption settings that are used when storing results in that location.</p>"
+          "documentation": "<p>The location where data classification results are stored, and the encryption settings that are used when storing results in that location.</p>"
         }
       }
     },
@@ -4215,7 +4216,7 @@
         "action": {
           "shape": "FindingsFilterAction",
           "locationName": "action",
-          "documentation": "<p>The action that's performed on findings that meet the filter criteria (findingCriteria). Possible values are: ARCHIVE, automatically archive the findings; and, NOOP, don't perform any action on the findings.</p>"
+          "documentation": "<p>The action that's performed on findings that meet the filter criteria (findingCriteria). Possible values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don't perform any action on the findings.</p>"
         },
         "arn": {
           "shape": "__string",
@@ -4311,7 +4312,7 @@
         "findingPublishingFrequency": {
           "shape": "FindingPublishingFrequency",
           "locationName": "findingPublishingFrequency",
-          "documentation": "<p>The frequency with which Amazon Macie publishes findings for the account. This includes adding findings to AWS Security Hub and exporting finding events to Amazon CloudWatch.</p>"
+          "documentation": "<p>The frequency with which Amazon Macie publishes updates to policy findings for the account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).</p>"
         },
         "serviceRole": {
           "shape": "__string",
@@ -5228,7 +5229,7 @@
         "actor": {
           "shape": "FindingActor",
           "locationName": "actor",
-          "documentation": "<p>The entity who performed the action that produced the finding.</p>"
+          "documentation": "<p>The entity that performed the action that produced the finding.</p>"
         }
       },
       "documentation": "<p>Provides detailed information about a policy finding.</p>"
@@ -5239,7 +5240,7 @@
         "configuration": {
           "shape": "ClassificationExportConfiguration",
           "locationName": "configuration",
-          "documentation": "<p>The location to export data classification results to, and the encryption settings to use when storing results in that location.</p>"
+          "documentation": "<p>The location to store data classification results in, and the encryption settings to use when storing results in that location.</p>"
         }
       },
       "required": [
@@ -5252,7 +5253,7 @@
         "configuration": {
           "shape": "ClassificationExportConfiguration",
           "locationName": "configuration",
-          "documentation": "<p>The location that data classification results are exported to, and the encryption settings that are used when storing results in that location.</p>"
+          "documentation": "<p>The location where the data classification results are stored, and the encryption settings that are used when storing results in that location.</p>"
         }
       }
     },
@@ -5386,7 +5387,7 @@
         "bucketName": {
           "shape": "__string",
           "locationName": "bucketName",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the bucket. This must be the ARN of an existing bucket.</p>"
+          "documentation": "<p>The name of the bucket.</p>"
         },
         "keyPrefix": {
           "shape": "__string",
@@ -5396,10 +5397,10 @@
         "kmsKeyArn": {
           "shape": "__string",
           "locationName": "kmsKeyArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Key Management Service master key to use for encryption of the exported results. This must be the ARN of an existing KMS key. In addition, the key must be in the same AWS Region as the bucket.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Key Management Service customer master key (CMK) to use for encryption of the results. This must be the ARN of an existing CMK that's in the same AWS Region as the bucket.</p>"
         }
       },
-      "documentation": "<p>Specifies an S3 bucket to export data classification results to, and the encryption settings to use when storing results in that bucket.</p>",
+      "documentation": "<p>Specifies an S3 bucket to store data classification results in, and the encryption settings to use when storing results in that bucket.</p>",
       "required": [
         "bucketName",
         "kmsKeyArn"
@@ -5527,7 +5528,7 @@
         "category": {
           "shape": "SensitiveDataItemCategory",
           "locationName": "category",
-          "documentation": "<p>The category of sensitive data that was detected. For example, FINANCIAL_INFORMATION, for financial information such as credit card numbers, or PERSONAL_INFORMATION, for personally identifiable information such as names and addresses.</p>"
+          "documentation": "<p>The category of sensitive data that was detected. For example: FINANCIAL_INFORMATION, for financial information such as credit card numbers; PERSONAL_INFORMATION, for personally identifiable information such as full names and mailing addresses; or, CUSTOM_IDENTIFIER, for data that was detected by a custom data identifier.</p>"
         },
         "detections": {
           "shape": "DefaultDetections",
@@ -5544,6 +5545,7 @@
     },
     "SensitiveDataItemCategory": {
       "type": "string",
+      "documentation": "<p>The category of sensitive data that was detected and produced the finding.</p>",
       "enum": [
         "FINANCIAL_INFORMATION",
         "PERSONAL_INFORMATION",
@@ -5602,7 +5604,7 @@
           "documentation": "<p>The source and type of credentials that the entity obtained.</p>"
         }
       },
-      "documentation": "<p>Provides information about a session that was created for an entity who performed an action by using temporary security credentials.</p>"
+      "documentation": "<p>Provides information about a session that was created for an entity that performed an action by using temporary security credentials.</p>"
     },
     "SessionContextAttributes": {
       "type": "structure",
@@ -5849,7 +5851,7 @@
         "maximumMatchDistance": {
           "shape": "__integer",
           "locationName": "maximumMatchDistance",
-          "documentation": "<p>The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 300.</p>"
+          "documentation": "<p>The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.</p>"
         },
         "regex": {
           "shape": "__string",
@@ -5959,7 +5961,7 @@
         "action": {
           "shape": "FindingsFilterAction",
           "locationName": "action",
-          "documentation": "<p>The action to perform on findings that meet the filter criteria (findingCriteria). Valid values are: ARCHIVE, automatically archive the findings; and, NOOP, don't perform any action on the findings.</p>"
+          "documentation": "<p>The action to perform on findings that meet the filter criteria (findingCriteria). Valid values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don't perform any action on the findings.</p>"
         },
         "description": {
           "shape": "__string",
@@ -6013,7 +6015,7 @@
         "findingPublishingFrequency": {
           "shape": "FindingPublishingFrequency",
           "locationName": "findingPublishingFrequency",
-          "documentation": "Specifies how often to publish findings for the account. This includes adding findings to AWS Security Hub and exporting finding events to Amazon CloudWatch."
+          "documentation": "Specifies how often to publish updates to policy findings for the account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events)."
         },
         "status": {
           "shape": "MacieStatus",
@@ -6420,5 +6422,5 @@
       "timestampFormat": "iso8601"
     }
   },
-  "documentation": "<p>Amazon Macie</p>"
+  "documentation": "<p>Amazon Macie is a fully managed data security and data privacy service that uses machine learning and pattern matching to discover and protect your sensitive data in AWS. Macie automates the discovery of sensitive data, such as PII and intellectual property, to provide you with insight into the data that your organization stores in AWS. Macie also provides an inventory of your Amazon S3 buckets, which it continually monitors for you. If Macie detects sensitive data or potential data access issues, it generates detailed findings for you to review and act upon as necessary.</p>"
 }

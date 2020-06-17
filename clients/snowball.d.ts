@@ -289,7 +289,7 @@ declare namespace Snowball {
      */
     JobType?: JobType;
     /**
-     * The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is EDGE. For more information, see Snowball Edge Device Options in the Snowball Edge Developer Guide.
+     * The type of AWS Snowball device to use for this cluster.   For cluster jobs, AWS Snowball currently supports only the EDGE device type. 
      */
     SnowballType?: SnowballType;
     /**
@@ -371,11 +371,11 @@ declare namespace Snowball {
      */
     RoleARN: RoleARN;
     /**
-     * The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is EDGE. For more information, see Snowball Edge Device Options in the Snowball Edge Developer Guide.
+     * The type of AWS Snowball device to use for this cluster.   For cluster jobs, AWS Snowball currently supports only the EDGE device type. 
      */
     SnowballType?: SnowballType;
     /**
-     * The shipping speed for each node in this cluster. This speed doesn't dictate how soon you'll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows:   In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, Snowball Edges are delivered in one to seven days.   In the US, you have access to one-day shipping and two-day shipping.  
+     * The shipping speed for each node in this cluster. This speed doesn't dictate how soon you'll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows:    In Australia, you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, Snowballs are delivered in one to seven days.   In the United States of America (US), you have access to one-day shipping and two-day shipping.     In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, Snowball Edges are delivered in one to seven days.   In the US, you have access to one-day shipping and two-day shipping.  
      */
     ShippingOption: ShippingOption;
     /**
@@ -439,7 +439,7 @@ declare namespace Snowball {
      */
     ClusterId?: ClusterId;
     /**
-     * The type of AWS Snowball device to use for this job. Currently, the only supported device type for cluster jobs is EDGE. For more information, see Snowball Edge Device Options in the Snowball Edge Developer Guide.
+     * The type of AWS Snowball device to use for this job.   For cluster jobs, AWS Snowball currently supports only the EDGE device type.  The type of AWS Snowball device to use for this job. Currently, the only supported device type for cluster jobs is EDGE. For more information, see Snowball Edge Device Options in the Snowball Edge Developer Guide.
      */
     SnowballType?: SnowballType;
     /**
@@ -450,6 +450,10 @@ declare namespace Snowball {
      * The tax documents required in your AWS Region.
      */
     TaxDocuments?: TaxDocuments;
+    /**
+     * Defines the device configuration for an AWS Snowcone job.
+     */
+    DeviceConfiguration?: DeviceConfiguration;
   }
   export interface CreateJobResult {
     /**
@@ -534,6 +538,12 @@ declare namespace Snowball {
      * Information about a specific job part (in the case of an export job), including shipping information, job status, and other important metadata.
      */
     SubJobMetadata?: JobMetadataList;
+  }
+  export interface DeviceConfiguration {
+    /**
+     * Returns information about the device configuration for an AWS Snowcone job.
+     */
+    SnowconeDeviceConfiguration?: SnowconeDeviceConfiguration;
   }
   export interface Ec2AmiResource {
     /**
@@ -728,6 +738,7 @@ declare namespace Snowball {
      * The metadata associated with the tax documents required in your AWS Region.
      */
     TaxDocuments?: TaxDocuments;
+    DeviceConfiguration?: DeviceConfiguration;
   }
   export type JobMetadataList = JobMetadata[];
   export interface JobResource {
@@ -907,14 +918,17 @@ declare namespace Snowball {
     OutboundShipment?: Shipment;
   }
   export type ShippingOption = "SECOND_DAY"|"NEXT_DAY"|"EXPRESS"|"STANDARD"|string;
-  export type SnowballCapacity = "T50"|"T80"|"T100"|"T42"|"T98"|"NoPreference"|string;
-  export type SnowballType = "STANDARD"|"EDGE"|"EDGE_C"|"EDGE_CG"|"EDGE_S"|string;
+  export type SnowballCapacity = "T50"|"T80"|"T100"|"T42"|"T98"|"T8"|"NoPreference"|string;
+  export type SnowballType = "STANDARD"|"EDGE"|"EDGE_C"|"EDGE_CG"|"EDGE_S"|"SNC1_HDD"|string;
+  export interface SnowconeDeviceConfiguration {
+    /**
+     * Configures the wireless connection for the AWS Snowcone device.
+     */
+    WirelessConnection?: WirelessConnection;
+  }
   export type SnsTopicARN = string;
   export type String = string;
   export interface TaxDocuments {
-    /**
-     * The tax documents required in AWS Regions in India.
-     */
     IND?: INDTaxDocuments;
   }
   export type Timestamp = Date;
@@ -993,6 +1007,12 @@ declare namespace Snowball {
     ForwardingAddressId?: AddressId;
   }
   export interface UpdateJobResult {
+  }
+  export interface WirelessConnection {
+    /**
+     * Enables the Wi-Fi adapter on an AWS Snowcone device.
+     */
+    IsWifiEnabled?: Boolean;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

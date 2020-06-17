@@ -630,7 +630,7 @@
         },
         "SnowballType": {
           "shape": "SnowballType",
-          "documentation": "<p>The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html\">Snowball Edge Device Options</a> in the Snowball Edge Developer Guide.</p>"
+          "documentation": "<p>The type of AWS Snowball device to use for this cluster. </p> <note> <p>For cluster jobs, AWS Snowball currently supports only the <code>EDGE</code> device type.</p> </note>"
         },
         "CreationDate": {
           "shape": "Timestamp",
@@ -750,11 +750,11 @@
         },
         "SnowballType": {
           "shape": "SnowballType",
-          "documentation": "<p>The type of AWS Snowball device to use for this cluster. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html\">Snowball Edge Device Options</a> in the Snowball Edge Developer Guide.</p>"
+          "documentation": "<p>The type of AWS Snowball device to use for this cluster. </p> <note> <p>For cluster jobs, AWS Snowball currently supports only the <code>EDGE</code> device type.</p> </note>"
         },
         "ShippingOption": {
           "shape": "ShippingOption",
-          "documentation": "<p>The shipping speed for each node in this cluster. This speed doesn't dictate how soon you'll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows:</p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowball Edges are delivered in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day shipping and two-day shipping.</p> </li> </ul>"
+          "documentation": "<p>The shipping speed for each node in this cluster. This speed doesn't dictate how soon you'll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows: </p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowballs are delivered in one to seven days.</p> </li> <li> <p>In the United States of America (US), you have access to one-day shipping and two-day shipping.</p> </li> </ul> <ul> <li> <p>In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowball Edges are delivered in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day shipping and two-day shipping.</p> </li> </ul>"
         },
         "Notification": {
           "shape": "Notification",
@@ -824,7 +824,7 @@
         },
         "SnowballType": {
           "shape": "SnowballType",
-          "documentation": "<p>The type of AWS Snowball device to use for this job. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html\">Snowball Edge Device Options</a> in the Snowball Edge Developer Guide.</p>"
+          "documentation": "<p>The type of AWS Snowball device to use for this job. </p> <note> <p>For cluster jobs, AWS Snowball currently supports only the <code>EDGE</code> device type.</p> </note> <p>The type of AWS Snowball device to use for this job. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html\">Snowball Edge Device Options</a> in the Snowball Edge Developer Guide.</p>"
         },
         "ForwardingAddressId": {
           "shape": "AddressId",
@@ -833,6 +833,10 @@
         "TaxDocuments": {
           "shape": "TaxDocuments",
           "documentation": "<p>The tax documents required in your AWS Region.</p>"
+        },
+        "DeviceConfiguration": {
+          "shape": "DeviceConfiguration",
+          "documentation": "<p>Defines the device configuration for an AWS Snowcone job.</p>"
         }
       }
     },
@@ -959,6 +963,16 @@
           "documentation": "<p>Information about a specific job part (in the case of an export job), including shipping information, job status, and other important metadata.</p>"
         }
       }
+    },
+    "DeviceConfiguration": {
+      "type": "structure",
+      "members": {
+        "SnowconeDeviceConfiguration": {
+          "shape": "SnowconeDeviceConfiguration",
+          "documentation": "<p>Returns information about the device configuration for an AWS Snowcone job.</p>"
+        }
+      },
+      "documentation": "<p>The container for <code>SnowconeDeviceConfiguration</code>. </p>"
     },
     "Ec2AmiResource": {
       "type": "structure",
@@ -1234,6 +1248,9 @@
         "TaxDocuments": {
           "shape": "TaxDocuments",
           "documentation": "<p>The metadata associated with the tax documents required in your AWS Region.</p>"
+        },
+        "DeviceConfiguration": {
+          "shape": "DeviceConfiguration"
         }
       },
       "documentation": "<p>Contains information about a specific job including shipping information, job status, and other important metadata. This information is returned as a part of the response syntax of the <code>DescribeJob</code> action.</p>"
@@ -1548,6 +1565,7 @@
         "T100",
         "T42",
         "T98",
+        "T8",
         "NoPreference"
       ]
     },
@@ -1558,8 +1576,19 @@
         "EDGE",
         "EDGE_C",
         "EDGE_CG",
-        "EDGE_S"
+        "EDGE_S",
+        "SNC1_HDD"
       ]
+    },
+    "SnowconeDeviceConfiguration": {
+      "type": "structure",
+      "members": {
+        "WirelessConnection": {
+          "shape": "WirelessConnection",
+          "documentation": "<p>Configures the wireless connection for the AWS Snowcone device.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the device configuration for an AWS Snowcone job. </p>"
     },
     "SnsTopicARN": {
       "type": "string",
@@ -1574,8 +1603,7 @@
       "type": "structure",
       "members": {
         "IND": {
-          "shape": "INDTaxDocuments",
-          "documentation": "<p>The tax documents required in AWS Regions in India.</p>"
+          "shape": "INDTaxDocuments"
         }
       },
       "documentation": "<p>The tax documents required in your AWS Region.</p>"
@@ -1674,6 +1702,16 @@
     "UpdateJobResult": {
       "type": "structure",
       "members": {}
+    },
+    "WirelessConnection": {
+      "type": "structure",
+      "members": {
+        "IsWifiEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Enables the Wi-Fi adapter on an AWS Snowcone device.</p>"
+        }
+      },
+      "documentation": "<p>Configures the wireless connection on an AWS Snowcone device.</p>"
     }
   },
   "documentation": "<p>AWS Snowball is a petabyte-scale data transport solution that uses secure devices to transfer large amounts of data between your on-premises data centers and Amazon Simple Storage Service (Amazon S3). The Snowball commands described here provide access to the same functionality that is available in the AWS Snowball Management Console, which enables you to create and manage jobs for Snowball. To transfer data locally with a Snowball device, you'll need to use the Snowball client or the Amazon S3 API adapter for Snowball. For more information, see the <a href=\"https://docs.aws.amazon.com/AWSImportExport/latest/ug/api-reference.html\">User Guide</a>.</p>"
