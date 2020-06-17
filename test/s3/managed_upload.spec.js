@@ -998,6 +998,63 @@
               });
             });
           });
+          it('can send a synchronous stream that is larger than the part size', function(done) {
+            var partSize, streamSize;
+            partSize = 5 * 1024 * 1024;
+            streamSize = 1024 + partSize;
+            return require('crypto').randomBytes(streamSize, function(err, buf) {
+              var reqs, stream;
+              if (err) {
+                return done(err);
+              }
+              stream = new AWS.util.stream.Stream();
+              stream.read = function(n) {
+                if (!n || !buf.length) return null;
+                var chunk = buf.slice(0, n);
+                buf = buf.slice(chunk.length);
+                try {
+                  return chunk;
+                } finally {
+                  if (!buf.length) this.emit('end');
+                }
+              };
+              reqs = helpers.mockResponses([
+                {
+                  data: {
+                    UploadId: 'uploadId'
+                  }
+                }, {
+                  data: {
+                    ETag: 'ETAG1'
+                  }
+                }, {
+                  data: {
+                    ETag: 'ETAG2'
+                  }
+                }, {
+                  data: {
+                    ETag: 'FINAL_ETAG',
+                    Location: 'FINAL_LOCATION'
+                  }
+                }
+              ]);
+              upload = new AWS.S3.ManagedUpload({
+                partSize: partSize,
+                queueSize: 1,
+                params: {
+                  Body: stream
+                }
+              });
+              upload.send(function(err) {
+                if (err) {
+                  return done(err);
+                }
+                expect(helpers.operationsForRequests(reqs)).to.eql(['s3.createMultipartUpload', 's3.uploadPart', 's3.uploadPart', 's3.completeMultipartUpload']);
+                return done();
+              });
+              stream.emit('readable');
+            });
+          });
           return it('can send a stream that is exactly divisible by part size', function(done) {
             var partSize, streamSize;
             partSize = 5 * 1024 * 1024;

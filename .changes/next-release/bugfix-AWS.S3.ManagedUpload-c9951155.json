@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "AWS.S3.ManagedUpload",
+  "description": "Prevents streams from being truncated"
+}
