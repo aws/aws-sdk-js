@@ -157,11 +157,11 @@ declare class Route53 extends Service {
    */
   deleteVPCAssociationAuthorization(callback?: (err: AWSError, data: Route53.Types.DeleteVPCAssociationAuthorizationResponse) => void): Request<Route53.Types.DeleteVPCAssociationAuthorizationResponse, AWSError>;
   /**
-   * Disassociates a VPC from a Amazon Route 53 private hosted zone. Note the following:   You can't disassociate the last VPC from a private hosted zone.   You can't convert a private hosted zone into a public hosted zone.   You can submit a DisassociateVPCFromHostedZone request using either the account that created the hosted zone or the account that created the VPC.  
+   * Disassociates an Amazon Virtual Private Cloud (Amazon VPC) from an Amazon Route 53 private hosted zone. Note the following:   You can't disassociate the last Amazon VPC from a private hosted zone.   You can't convert a private hosted zone into a public hosted zone.   You can submit a DisassociateVPCFromHostedZone request using either the account that created the hosted zone or the account that created the Amazon VPC.   Some services, such as AWS Cloud Map and Amazon Elastic File System (Amazon EFS) automatically create hosted zones and associate VPCs with the hosted zones. A service can create a hosted zone using your account or using its own account. You can disassociate a VPC from a hosted zone only if the service created the hosted zone using your account. When you run DisassociateVPCFromHostedZone, if the hosted zone has a value for OwningAccount, you can use DisassociateVPCFromHostedZone. If the hosted zone has a value for OwningService, you can't use DisassociateVPCFromHostedZone.  
    */
   disassociateVPCFromHostedZone(params: Route53.Types.DisassociateVPCFromHostedZoneRequest, callback?: (err: AWSError, data: Route53.Types.DisassociateVPCFromHostedZoneResponse) => void): Request<Route53.Types.DisassociateVPCFromHostedZoneResponse, AWSError>;
   /**
-   * Disassociates a VPC from a Amazon Route 53 private hosted zone. Note the following:   You can't disassociate the last VPC from a private hosted zone.   You can't convert a private hosted zone into a public hosted zone.   You can submit a DisassociateVPCFromHostedZone request using either the account that created the hosted zone or the account that created the VPC.  
+   * Disassociates an Amazon Virtual Private Cloud (Amazon VPC) from an Amazon Route 53 private hosted zone. Note the following:   You can't disassociate the last Amazon VPC from a private hosted zone.   You can't convert a private hosted zone into a public hosted zone.   You can submit a DisassociateVPCFromHostedZone request using either the account that created the hosted zone or the account that created the Amazon VPC.   Some services, such as AWS Cloud Map and Amazon Elastic File System (Amazon EFS) automatically create hosted zones and associate VPCs with the hosted zones. A service can create a hosted zone using your account or using its own account. You can disassociate a VPC from a hosted zone only if the service created the hosted zone using your account. When you run DisassociateVPCFromHostedZone, if the hosted zone has a value for OwningAccount, you can use DisassociateVPCFromHostedZone. If the hosted zone has a value for OwningService, you can't use DisassociateVPCFromHostedZone.  
    */
   disassociateVPCFromHostedZone(callback?: (err: AWSError, data: Route53.Types.DisassociateVPCFromHostedZoneResponse) => void): Request<Route53.Types.DisassociateVPCFromHostedZoneResponse, AWSError>;
   /**
@@ -333,6 +333,14 @@ declare class Route53 extends Service {
    */
   listHostedZonesByName(callback?: (err: AWSError, data: Route53.Types.ListHostedZonesByNameResponse) => void): Request<Route53.Types.ListHostedZonesByNameResponse, AWSError>;
   /**
+   * Lists all the private hosted zones that a specified VPC is associated with, regardless of which AWS account or AWS service owns the hosted zones. The HostedZoneOwner structure in the response contains one of the following values:   An OwningAccount element, which contains the account number of either the current AWS account or another AWS account. Some services, such as AWS Cloud Map, create hosted zones using the current account.    An OwningService element, which identifies the AWS service that created and owns the hosted zone. For example, if a hosted zone was created by Amazon Elastic File System (Amazon EFS), the value of Owner is efs.amazonaws.com.   
+   */
+  listHostedZonesByVPC(params: Route53.Types.ListHostedZonesByVPCRequest, callback?: (err: AWSError, data: Route53.Types.ListHostedZonesByVPCResponse) => void): Request<Route53.Types.ListHostedZonesByVPCResponse, AWSError>;
+  /**
+   * Lists all the private hosted zones that a specified VPC is associated with, regardless of which AWS account or AWS service owns the hosted zones. The HostedZoneOwner structure in the response contains one of the following values:   An OwningAccount element, which contains the account number of either the current AWS account or another AWS account. Some services, such as AWS Cloud Map, create hosted zones using the current account.    An OwningService element, which identifies the AWS service that created and owns the hosted zone. For example, if a hosted zone was created by Amazon Elastic File System (Amazon EFS), the value of Owner is efs.amazonaws.com.   
+   */
+  listHostedZonesByVPC(callback?: (err: AWSError, data: Route53.Types.ListHostedZonesByVPCResponse) => void): Request<Route53.Types.ListHostedZonesByVPCResponse, AWSError>;
+  /**
    * Lists the configurations for DNS query logging that are associated with the current AWS account or the configuration that is associated with a specified hosted zone. For more information about DNS query logs, see CreateQueryLoggingConfig. Additional information, including the format of DNS query logs, appears in Logging DNS Queries in the Amazon Route 53 Developer Guide.
    */
   listQueryLoggingConfigs(params: Route53.Types.ListQueryLoggingConfigsRequest, callback?: (err: AWSError, data: Route53.Types.ListQueryLoggingConfigsResponse) => void): Request<Route53.Types.ListQueryLoggingConfigsResponse, AWSError>;
@@ -470,6 +478,7 @@ declare class Route53 extends Service {
   waitFor(state: "resourceRecordSetsChanged", callback?: (err: AWSError, data: Route53.Types.GetChangeResponse) => void): Request<Route53.Types.GetChangeResponse, AWSError>;
 }
 declare namespace Route53 {
+  export type AWSAccountID = string;
   export interface AccountLimit {
     /**
      * The limit that you requested. Valid values include the following:    MAX_HEALTH_CHECKS_BY_OWNER: The maximum number of health checks that you can create using the current account.    MAX_HOSTED_ZONES_BY_OWNER: The maximum number of hosted zones that you can create using the current account.    MAX_REUSABLE_DELEGATION_SETS_BY_OWNER: The maximum number of reusable delegation sets that you can create using the current account.    MAX_TRAFFIC_POLICIES_BY_OWNER: The maximum number of traffic policies that you can create using the current account.    MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER: The maximum number of traffic policy instances that you can create using the current account. (Traffic policy instances are referred to as traffic flow policy records in the Amazon Route 53 console.)  
@@ -1415,7 +1424,33 @@ declare namespace Route53 {
     Value: LimitValue;
   }
   export type HostedZoneLimitType = "MAX_RRSETS_BY_ZONE"|"MAX_VPCS_ASSOCIATED_BY_ZONE"|string;
+  export interface HostedZoneOwner {
+    /**
+     * If the hosted zone was created by an AWS account, or was created by an AWS service that creates hosted zones using the current account, OwningAccount contains the account ID of that account. For example, when you use AWS Cloud Map to create a hosted zone, Cloud Map creates the hosted zone using the current AWS account. 
+     */
+    OwningAccount?: AWSAccountID;
+    /**
+     * If an AWS service uses its own account to create a hosted zone and associate the specified VPC with that hosted zone, OwningService contains an abbreviation that identifies the service. For example, if Amazon Elastic File System (Amazon EFS) created a hosted zone and associated a VPC with the hosted zone, the value of OwningService is efs.amazonaws.com.
+     */
+    OwningService?: HostedZoneOwningService;
+  }
+  export type HostedZoneOwningService = string;
   export type HostedZoneRRSetCount = number;
+  export type HostedZoneSummaries = HostedZoneSummary[];
+  export interface HostedZoneSummary {
+    /**
+     * The Route 53 hosted zone ID of a private hosted zone that the specified VPC is associated with.
+     */
+    HostedZoneId: ResourceId;
+    /**
+     * The name of the private hosted zone, such as example.com.
+     */
+    Name: DNSName;
+    /**
+     * The owner of a private hosted zone that the specified VPC is associated with. The owner can be either an AWS account or an AWS service.
+     */
+    Owner: HostedZoneOwner;
+  }
   export type HostedZones = HostedZone[];
   export type IPAddress = string;
   export type IPAddressCidr = string;
@@ -1552,6 +1587,38 @@ declare namespace Route53 {
      * The value that you specified for the maxitems parameter in the call to ListHostedZonesByName that produced the current response.
      */
     MaxItems: PageMaxItems;
+  }
+  export interface ListHostedZonesByVPCRequest {
+    /**
+     * The ID of the Amazon VPC that you want to list hosted zones for.
+     */
+    VPCId: VPCId;
+    /**
+     * For the Amazon VPC that you specified for VPCId, the AWS Region that you created the VPC in. 
+     */
+    VPCRegion: VPCRegion;
+    /**
+     * (Optional) The maximum number of hosted zones that you want Amazon Route 53 to return. If the specified VPC is associated with more than MaxItems hosted zones, the response includes a NextToken element. NextToken contains the hosted zone ID of the first hosted zone that Route 53 will return if you submit another request.
+     */
+    MaxItems?: PageMaxItems;
+    /**
+     * If the previous response included a NextToken element, the specified VPC is associated with more hosted zones. To get more hosted zones, submit another ListHostedZonesByVPC request.  For the value of NextToken, specify the value of NextToken from the previous response. If the previous response didn't include a NextToken element, there are no more hosted zones to get.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListHostedZonesByVPCResponse {
+    /**
+     * A list that contains one HostedZoneSummary element for each hosted zone that the specified Amazon VPC is associated with. Each HostedZoneSummary element contains the hosted zone name and ID, and information about who owns the hosted zone.
+     */
+    HostedZoneSummaries: HostedZoneSummaries;
+    /**
+     * The value that you specified for MaxItems in the most recent ListHostedZonesByVPC request.
+     */
+    MaxItems: PageMaxItems;
+    /**
+     * The value that you specified for NextToken in the most recent ListHostedZonesByVPC request.
+     */
+    NextToken?: PaginationToken;
   }
   export interface ListHostedZonesRequest {
     /**

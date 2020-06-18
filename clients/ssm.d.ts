@@ -44,11 +44,11 @@ declare class SSM extends Service {
    */
   createActivation(callback?: (err: AWSError, data: SSM.Types.CreateActivationResult) => void): Request<SSM.Types.CreateActivationResult, AWSError>;
   /**
-   * Associates the specified Systems Manager document with the specified instances or targets. When you associate a document with one or more instances, SSM Agent running on the instance processes the document and configures the instance as specified. If you associate a document with an instance that already has an associated document, the system returns the AssociationAlreadyExists exception.
+   * A State Manager association defines the state that you want to maintain on your instances. For example, an association can specify that anti-virus software must be installed and running on your instances, or that certain ports must be closed. For static targets, the association specifies a schedule for when the configuration is reapplied. For dynamic targets, such as an AWS Resource Group or an AWS Autoscaling Group, State Manager applies the configuration when new instances are added to the group. The association also specifies actions to take when applying the configuration. For example, an association for anti-virus software might run once a day. If the software is not installed, then State Manager installs it. If the software is installed, but the service is not running, then the association might instruct State Manager to start the service. 
    */
   createAssociation(params: SSM.Types.CreateAssociationRequest, callback?: (err: AWSError, data: SSM.Types.CreateAssociationResult) => void): Request<SSM.Types.CreateAssociationResult, AWSError>;
   /**
-   * Associates the specified Systems Manager document with the specified instances or targets. When you associate a document with one or more instances, SSM Agent running on the instance processes the document and configures the instance as specified. If you associate a document with an instance that already has an associated document, the system returns the AssociationAlreadyExists exception.
+   * A State Manager association defines the state that you want to maintain on your instances. For example, an association can specify that anti-virus software must be installed and running on your instances, or that certain ports must be closed. For static targets, the association specifies a schedule for when the configuration is reapplied. For dynamic targets, such as an AWS Resource Group or an AWS Autoscaling Group, State Manager applies the configuration when new instances are added to the group. The association also specifies actions to take when applying the configuration. For example, an association for anti-virus software might run once a day. If the software is not installed, then State Manager installs it. If the software is installed, but the service is not running, then the association might instruct State Manager to start the service. 
    */
   createAssociation(callback?: (err: AWSError, data: SSM.Types.CreateAssociationResult) => void): Request<SSM.Types.CreateAssociationResult, AWSError>;
   /**
@@ -2364,6 +2364,10 @@ declare namespace SSM {
      */
     ScheduleTimezone?: MaintenanceWindowTimezone;
     /**
+     * The number of days to wait after the date and time specified by a CRON expression before running the maintenance window. For example, the following cron expression schedules a maintenance window to run on the third Tuesday of every month at 11:30 PM.  cron(0 30 23 ? * TUE#3 *)  If the schedule offset is 2, the maintenance window won't run until two days later.
+     */
+    ScheduleOffset?: MaintenanceWindowOffset;
+    /**
      * The duration of the maintenance window in hours.
      */
     Duration: MaintenanceWindowDurationHours;
@@ -4423,6 +4427,10 @@ declare namespace SSM {
      */
     ScheduleTimezone?: MaintenanceWindowTimezone;
     /**
+     * The number of days to wait to run a maintenance window after the scheduled CRON expression date and time.
+     */
+    ScheduleOffset?: MaintenanceWindowOffset;
+    /**
      * The next time the maintenance window will actually run, taking into account any specified times for the maintenance window to become active or inactive.
      */
     NextExecutionTime?: MaintenanceWindowStringDateTime;
@@ -5865,6 +5873,10 @@ declare namespace SSM {
      */
     ScheduleTimezone?: MaintenanceWindowTimezone;
     /**
+     * The number of days to wait to run a maintenance window after the scheduled CRON expression date and time.
+     */
+    ScheduleOffset?: MaintenanceWindowOffset;
+    /**
      * The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become inactive.
      */
     EndDate?: MaintenanceWindowStringDateTime;
@@ -5907,6 +5919,7 @@ declare namespace SSM {
   export type MaintenanceWindowLambdaQualifier = string;
   export type MaintenanceWindowMaxResults = number;
   export type MaintenanceWindowName = string;
+  export type MaintenanceWindowOffset = number;
   export type MaintenanceWindowResourceType = "INSTANCE"|"RESOURCE_GROUP"|string;
   export interface MaintenanceWindowRunCommandParameters {
     /**
@@ -6958,7 +6971,7 @@ declare namespace SSM {
      */
     Value: PSParameterValue;
     /**
-     * The type of parameter that you want to add to the system. Items in a StringList must be separated by a comma (,). You can't use other punctuation or special character to escape items in the list. If you have a parameter value that requires a comma, then use the String data type.   SecureString is not currently supported for AWS CloudFormation templates or in the China Regions. 
+     * The type of parameter that you want to add to the system.   SecureString is not currently supported for AWS CloudFormation templates or in the China Regions.  Items in a StringList must be separated by a comma (,). You can't use other punctuation or special character to escape items in the list. If you have a parameter value that requires a comma, then use the String data type.  Specifying a parameter type is not required when updating a parameter. You must specify a parameter type when creating a parameter. 
      */
     Type?: ParameterType;
     /**
@@ -7737,7 +7750,7 @@ declare namespace SSM {
      */
     Target: SessionTarget;
     /**
-     * The name of the SSM document to define the parameters and plugin settings for the session. For example, SSM-SessionManagerRunShell. If no document name is provided, a shell to the instance is launched by default.
+     * The name of the SSM document to define the parameters and plugin settings for the session. For example, SSM-SessionManagerRunShell. You can call the GetDocument API to verify the document exists before attempting to start a session. If no document name is provided, a shell to the instance is launched by default.
      */
     DocumentName?: DocumentARN;
     /**
@@ -8128,6 +8141,10 @@ declare namespace SSM {
      */
     ScheduleTimezone?: MaintenanceWindowTimezone;
     /**
+     * The number of days to wait after the date and time specified by a CRON expression before running the maintenance window. For example, the following cron expression schedules a maintenance window to run the third Tuesday of every month at 11:30 PM.  cron(0 30 23 ? * TUE#3 *)  If the schedule offset is 2, the maintenance window won't run until two days later.
+     */
+    ScheduleOffset?: MaintenanceWindowOffset;
+    /**
      * The duration of the maintenance window in hours.
      */
     Duration?: MaintenanceWindowDurationHours;
@@ -8177,6 +8194,10 @@ declare namespace SSM {
      * The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the Time Zone Database on the IANA website.
      */
     ScheduleTimezone?: MaintenanceWindowTimezone;
+    /**
+     * The number of days to wait to run a maintenance window after the scheduled CRON expression date and time.
+     */
+    ScheduleOffset?: MaintenanceWindowOffset;
     /**
      * The duration of the maintenance window in hours.
      */

@@ -160,7 +160,7 @@
           "shape": "InvalidSchedule"
         }
       ],
-      "documentation": "<p>Associates the specified Systems Manager document with the specified instances or targets.</p> <p>When you associate a document with one or more instances, SSM Agent running on the instance processes the document and configures the instance as specified. If you associate a document with an instance that already has an associated document, the system returns the <code>AssociationAlreadyExists</code> exception.</p>"
+      "documentation": "<p>A State Manager association defines the state that you want to maintain on your instances. For example, an association can specify that anti-virus software must be installed and running on your instances, or that certain ports must be closed. For static targets, the association specifies a schedule for when the configuration is reapplied. For dynamic targets, such as an AWS Resource Group or an AWS Autoscaling Group, State Manager applies the configuration when new instances are added to the group. The association also specifies actions to take when applying the configuration. For example, an association for anti-virus software might run once a day. If the software is not installed, then State Manager installs it. If the software is installed, but the service is not running, then the association might instruct State Manager to start the service. </p>"
     },
     "CreateAssociationBatch": {
       "name": "CreateAssociationBatch",
@@ -5513,6 +5513,11 @@
           "shape": "MaintenanceWindowTimezone",
           "documentation": "<p>The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: \"America/Los_Angeles\", \"etc/UTC\", or \"Asia/Seoul\". For more information, see the <a href=\"https://www.iana.org/time-zones\">Time Zone Database</a> on the IANA website.</p>"
         },
+        "ScheduleOffset": {
+          "shape": "MaintenanceWindowOffset",
+          "documentation": "<p>The number of days to wait after the date and time specified by a CRON expression before running the maintenance window.</p> <p>For example, the following cron expression schedules a maintenance window to run on the third Tuesday of every month at 11:30 PM.</p> <p> <code>cron(0 30 23 ? * TUE#3 *)</code> </p> <p>If the schedule offset is <code>2</code>, the maintenance window won't run until two days later.</p>",
+          "box": true
+        },
         "Duration": {
           "shape": "MaintenanceWindowDurationHours",
           "documentation": "<p>The duration of the maintenance window in hours.</p>"
@@ -8388,6 +8393,11 @@
           "shape": "MaintenanceWindowTimezone",
           "documentation": "<p>The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: \"America/Los_Angeles\", \"etc/UTC\", or \"Asia/Seoul\". For more information, see the <a href=\"https://www.iana.org/time-zones\">Time Zone Database</a> on the IANA website.</p>"
         },
+        "ScheduleOffset": {
+          "shape": "MaintenanceWindowOffset",
+          "documentation": "<p>The number of days to wait to run a maintenance window after the scheduled CRON expression date and time.</p>",
+          "box": true
+        },
         "NextExecutionTime": {
           "shape": "MaintenanceWindowStringDateTime",
           "documentation": "<p>The next time the maintenance window will actually run, taking into account any specified times for the maintenance window to become active or inactive.</p>"
@@ -10647,6 +10657,11 @@
           "shape": "MaintenanceWindowTimezone",
           "documentation": "<p>The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format.</p>"
         },
+        "ScheduleOffset": {
+          "shape": "MaintenanceWindowOffset",
+          "documentation": "<p>The number of days to wait to run a maintenance window after the scheduled CRON expression date and time.</p>",
+          "box": true
+        },
         "EndDate": {
           "shape": "MaintenanceWindowStringDateTime",
           "documentation": "<p>The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled to become inactive.</p>"
@@ -10725,6 +10740,11 @@
       "max": 128,
       "min": 3,
       "pattern": "^[a-zA-Z0-9_\\-.]{3,128}$"
+    },
+    "MaintenanceWindowOffset": {
+      "type": "integer",
+      "max": 6,
+      "min": 1
     },
     "MaintenanceWindowResourceType": {
       "type": "string",
@@ -12829,7 +12849,7 @@
         },
         "Type": {
           "shape": "ParameterType",
-          "documentation": "<p>The type of parameter that you want to add to the system.</p> <p>Items in a <code>StringList</code> must be separated by a comma (,). You can't use other punctuation or special character to escape items in the list. If you have a parameter value that requires a comma, then use the <code>String</code> data type.</p> <note> <p> <code>SecureString</code> is not currently supported for AWS CloudFormation templates or in the China Regions.</p> </note>"
+          "documentation": "<p>The type of parameter that you want to add to the system.</p> <note> <p> <code>SecureString</code> is not currently supported for AWS CloudFormation templates or in the China Regions.</p> </note> <p>Items in a <code>StringList</code> must be separated by a comma (,). You can't use other punctuation or special character to escape items in the list. If you have a parameter value that requires a comma, then use the <code>String</code> data type.</p> <important> <p>Specifying a parameter type is not required when updating a parameter. You must specify a parameter type when creating a parameter.</p> </important>"
         },
         "KeyId": {
           "shape": "ParameterKeyId",
@@ -14123,7 +14143,7 @@
         },
         "DocumentName": {
           "shape": "DocumentARN",
-          "documentation": "<p>The name of the SSM document to define the parameters and plugin settings for the session. For example, <code>SSM-SessionManagerRunShell</code>. If no document name is provided, a shell to the instance is launched by default.</p>"
+          "documentation": "<p>The name of the SSM document to define the parameters and plugin settings for the session. For example, <code>SSM-SessionManagerRunShell</code>. You can call the <a>GetDocument</a> API to verify the document exists before attempting to start a session. If no document name is provided, a shell to the instance is launched by default.</p>"
         },
         "Parameters": {
           "shape": "SessionManagerParameters",
@@ -14777,6 +14797,11 @@
           "shape": "MaintenanceWindowTimezone",
           "documentation": "<p>The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: \"America/Los_Angeles\", \"etc/UTC\", or \"Asia/Seoul\". For more information, see the <a href=\"https://www.iana.org/time-zones\">Time Zone Database</a> on the IANA website.</p>"
         },
+        "ScheduleOffset": {
+          "shape": "MaintenanceWindowOffset",
+          "documentation": "<p>The number of days to wait after the date and time specified by a CRON expression before running the maintenance window.</p> <p>For example, the following cron expression schedules a maintenance window to run the third Tuesday of every month at 11:30 PM.</p> <p> <code>cron(0 30 23 ? * TUE#3 *)</code> </p> <p>If the schedule offset is <code>2</code>, the maintenance window won't run until two days later.</p>",
+          "box": true
+        },
         "Duration": {
           "shape": "MaintenanceWindowDurationHours",
           "documentation": "<p>The duration of the maintenance window in hours.</p>",
@@ -14834,6 +14859,11 @@
         "ScheduleTimezone": {
           "shape": "MaintenanceWindowTimezone",
           "documentation": "<p>The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: \"America/Los_Angeles\", \"etc/UTC\", or \"Asia/Seoul\". For more information, see the <a href=\"https://www.iana.org/time-zones\">Time Zone Database</a> on the IANA website.</p>"
+        },
+        "ScheduleOffset": {
+          "shape": "MaintenanceWindowOffset",
+          "documentation": "<p>The number of days to wait to run a maintenance window after the scheduled CRON expression date and time.</p>",
+          "box": true
         },
         "Duration": {
           "shape": "MaintenanceWindowDurationHours",

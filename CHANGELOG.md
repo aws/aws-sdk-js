@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.699.0-->
+<!--LATEST=2.700.0-->
 <!--ENTRYINSERT-->
+
+## 2.700.0
+* feature: RDS: Adding support for global write forwarding on secondary clusters in an Aurora global database.
+* feature: Route53: Added a new ListHostedZonesByVPC API for customers to list all the private hosted zones that a specified VPC is associated with.
+* feature: SESV2: You can now configure Amazon SES to send event notifications when the delivery of an email is delayed because of a temporary issue. For example, you can receive a notification if the recipient's inbox is full, or if there's a temporary problem with the receiving email server.
+* feature: SSM: Added offset support for specifying the number of days to wait after the date and time specified by a CRON expression before running the maintenance window.
 
 ## 2.699.0
 * bugfix: Global Services: Add default signing region for IAM and Route53 in China and GovCloud

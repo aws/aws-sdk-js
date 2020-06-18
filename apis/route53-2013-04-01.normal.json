@@ -655,7 +655,7 @@
           "shape": "InvalidInput"
         }
       ],
-      "documentation": "<p>Disassociates a VPC from a Amazon Route 53 private hosted zone. Note the following:</p> <ul> <li> <p>You can't disassociate the last VPC from a private hosted zone.</p> </li> <li> <p>You can't convert a private hosted zone into a public hosted zone.</p> </li> <li> <p>You can submit a <code>DisassociateVPCFromHostedZone</code> request using either the account that created the hosted zone or the account that created the VPC.</p> </li> </ul>"
+      "documentation": "<p>Disassociates an Amazon Virtual Private Cloud (Amazon VPC) from an Amazon Route 53 private hosted zone. Note the following:</p> <ul> <li> <p>You can't disassociate the last Amazon VPC from a private hosted zone.</p> </li> <li> <p>You can't convert a private hosted zone into a public hosted zone.</p> </li> <li> <p>You can submit a <code>DisassociateVPCFromHostedZone</code> request using either the account that created the hosted zone or the account that created the Amazon VPC.</p> </li> <li> <p>Some services, such as AWS Cloud Map and Amazon Elastic File System (Amazon EFS) automatically create hosted zones and associate VPCs with the hosted zones. A service can create a hosted zone using your account or using its own account. You can disassociate a VPC from a hosted zone only if the service created the hosted zone using your account.</p> <p>When you run <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListHostedZonesByVPC.html\">DisassociateVPCFromHostedZone</a>, if the hosted zone has a value for <code>OwningAccount</code>, you can use <code>DisassociateVPCFromHostedZone</code>. If the hosted zone has a value for <code>OwningService</code>, you can't use <code>DisassociateVPCFromHostedZone</code>.</p> </li> </ul>"
     },
     "GetAccountLimit": {
       "name": "GetAccountLimit",
@@ -1098,6 +1098,28 @@
       ],
       "documentation": "<p>Retrieves a list of your hosted zones in lexicographic order. The response includes a <code>HostedZones</code> child element for each hosted zone created by the current AWS account. </p> <p> <code>ListHostedZonesByName</code> sorts hosted zones by name with the labels reversed. For example:</p> <p> <code>com.example.www.</code> </p> <p>Note the trailing dot, which can change the sort order in some circumstances.</p> <p>If the domain name includes escape characters or Punycode, <code>ListHostedZonesByName</code> alphabetizes the domain name using the escaped or Punycoded value, which is the format that Amazon Route 53 saves in its database. For example, to create a hosted zone for exämple.com, you specify ex\\344mple.com for the domain name. <code>ListHostedZonesByName</code> alphabetizes it as:</p> <p> <code>com.ex\\344mple.</code> </p> <p>The labels are reversed and alphabetized using the escaped value. For more information about valid domain name formats, including internationalized domain names, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html\">DNS Domain Name Format</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> <p>Route 53 returns up to 100 items in each response. If you have a lot of hosted zones, use the <code>MaxItems</code> parameter to list them in groups of up to 100. The response includes values that help navigate from one group of <code>MaxItems</code> hosted zones to the next:</p> <ul> <li> <p>The <code>DNSName</code> and <code>HostedZoneId</code> elements in the response contain the values, if any, specified for the <code>dnsname</code> and <code>hostedzoneid</code> parameters in the request that produced the current response.</p> </li> <li> <p>The <code>MaxItems</code> element in the response contains the value, if any, that you specified for the <code>maxitems</code> parameter in the request that produced the current response.</p> </li> <li> <p>If the value of <code>IsTruncated</code> in the response is true, there are more hosted zones associated with the current AWS account. </p> <p>If <code>IsTruncated</code> is false, this response includes the last hosted zone that is associated with the current account. The <code>NextDNSName</code> element and <code>NextHostedZoneId</code> elements are omitted from the response.</p> </li> <li> <p>The <code>NextDNSName</code> and <code>NextHostedZoneId</code> elements in the response contain the domain name and the hosted zone ID of the next hosted zone that is associated with the current AWS account. If you want to list more hosted zones, make another call to <code>ListHostedZonesByName</code>, and specify the value of <code>NextDNSName</code> and <code>NextHostedZoneId</code> in the <code>dnsname</code> and <code>hostedzoneid</code> parameters, respectively.</p> </li> </ul>"
     },
+    "ListHostedZonesByVPC": {
+      "name": "ListHostedZonesByVPC",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2013-04-01/hostedzonesbyvpc"
+      },
+      "input": {
+        "shape": "ListHostedZonesByVPCRequest"
+      },
+      "output": {
+        "shape": "ListHostedZonesByVPCResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInput"
+        },
+        {
+          "shape": "InvalidPaginationToken"
+        }
+      ],
+      "documentation": "<p>Lists all the private hosted zones that a specified VPC is associated with, regardless of which AWS account or AWS service owns the hosted zones. The <code>HostedZoneOwner</code> structure in the response contains one of the following values:</p> <ul> <li> <p>An <code>OwningAccount</code> element, which contains the account number of either the current AWS account or another AWS account. Some services, such as AWS Cloud Map, create hosted zones using the current account. </p> </li> <li> <p>An <code>OwningService</code> element, which identifies the AWS service that created and owns the hosted zone. For example, if a hosted zone was created by Amazon Elastic File System (Amazon EFS), the value of <code>Owner</code> is <code>efs.amazonaws.com</code>. </p> </li> </ul>"
+    },
     "ListQueryLoggingConfigs": {
       "name": "ListQueryLoggingConfigs",
       "http": {
@@ -1511,6 +1533,9 @@
     }
   },
   "shapes": {
+    "AWSAccountID": {
+      "type": "string"
+    },
     "AccountLimit": {
       "type": "structure",
       "required": [
@@ -3380,8 +3405,56 @@
         "MAX_VPCS_ASSOCIATED_BY_ZONE"
       ]
     },
+    "HostedZoneOwner": {
+      "type": "structure",
+      "members": {
+        "OwningAccount": {
+          "shape": "AWSAccountID",
+          "documentation": "<p>If the hosted zone was created by an AWS account, or was created by an AWS service that creates hosted zones using the current account, <code>OwningAccount</code> contains the account ID of that account. For example, when you use AWS Cloud Map to create a hosted zone, Cloud Map creates the hosted zone using the current AWS account. </p>"
+        },
+        "OwningService": {
+          "shape": "HostedZoneOwningService",
+          "documentation": "<p>If an AWS service uses its own account to create a hosted zone and associate the specified VPC with that hosted zone, <code>OwningService</code> contains an abbreviation that identifies the service. For example, if Amazon Elastic File System (Amazon EFS) created a hosted zone and associated a VPC with the hosted zone, the value of <code>OwningService</code> is <code>efs.amazonaws.com</code>.</p>"
+        }
+      },
+      "documentation": "<p>A complex type that identifies a hosted zone that a specified Amazon VPC is associated with and the owner of the hosted zone. If there is a value for <code>OwningAccount</code>, there is no value for <code>OwningService</code>, and vice versa. </p>"
+    },
+    "HostedZoneOwningService": {
+      "type": "string",
+      "max": 128
+    },
     "HostedZoneRRSetCount": {
       "type": "long"
+    },
+    "HostedZoneSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "HostedZoneSummary",
+        "locationName": "HostedZoneSummary"
+      }
+    },
+    "HostedZoneSummary": {
+      "type": "structure",
+      "required": [
+        "HostedZoneId",
+        "Name",
+        "Owner"
+      ],
+      "members": {
+        "HostedZoneId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The Route 53 hosted zone ID of a private hosted zone that the specified VPC is associated with.</p>"
+        },
+        "Name": {
+          "shape": "DNSName",
+          "documentation": "<p>The name of the private hosted zone, such as <code>example.com</code>.</p>"
+        },
+        "Owner": {
+          "shape": "HostedZoneOwner",
+          "documentation": "<p>The owner of a private hosted zone that the specified VPC is associated with. The owner can be either an AWS account or an AWS service.</p>"
+        }
+      },
+      "documentation": "<p>In the response to a <code>ListHostedZonesByVPC</code> request, the <code>HostedZoneSummaries</code> element contains one <code>HostedZoneSummary</code> element for each hosted zone that the specified Amazon VPC is associated with. Each <code>HostedZoneSummary</code> element contains the hosted zone name and ID, and information about who owns the hosted zone.</p>"
     },
     "HostedZones": {
       "type": "list",
@@ -3607,6 +3680,61 @@
         }
       },
       "documentation": "<p>A complex type that contains the response information for the request.</p>"
+    },
+    "ListHostedZonesByVPCRequest": {
+      "type": "structure",
+      "required": [
+        "VPCId",
+        "VPCRegion"
+      ],
+      "members": {
+        "VPCId": {
+          "shape": "VPCId",
+          "documentation": "<p>The ID of the Amazon VPC that you want to list hosted zones for.</p>",
+          "location": "querystring",
+          "locationName": "vpcid"
+        },
+        "VPCRegion": {
+          "shape": "VPCRegion",
+          "documentation": "<p>For the Amazon VPC that you specified for <code>VPCId</code>, the AWS Region that you created the VPC in. </p>",
+          "location": "querystring",
+          "locationName": "vpcregion"
+        },
+        "MaxItems": {
+          "shape": "PageMaxItems",
+          "documentation": "<p>(Optional) The maximum number of hosted zones that you want Amazon Route 53 to return. If the specified VPC is associated with more than <code>MaxItems</code> hosted zones, the response includes a <code>NextToken</code> element. <code>NextToken</code> contains the hosted zone ID of the first hosted zone that Route 53 will return if you submit another request.</p>",
+          "location": "querystring",
+          "locationName": "maxitems"
+        },
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>If the previous response included a <code>NextToken</code> element, the specified VPC is associated with more hosted zones. To get more hosted zones, submit another <code>ListHostedZonesByVPC</code> request. </p> <p>For the value of <code>NextToken</code>, specify the value of <code>NextToken</code> from the previous response.</p> <p>If the previous response didn't include a <code>NextToken</code> element, there are no more hosted zones to get.</p>",
+          "location": "querystring",
+          "locationName": "nexttoken"
+        }
+      },
+      "documentation": "<p>Lists all the private hosted zones that a specified VPC is associated with, regardless of which AWS account created the hosted zones.</p>"
+    },
+    "ListHostedZonesByVPCResponse": {
+      "type": "structure",
+      "required": [
+        "HostedZoneSummaries",
+        "MaxItems"
+      ],
+      "members": {
+        "HostedZoneSummaries": {
+          "shape": "HostedZoneSummaries",
+          "documentation": "<p>A list that contains one <code>HostedZoneSummary</code> element for each hosted zone that the specified Amazon VPC is associated with. Each <code>HostedZoneSummary</code> element contains the hosted zone name and ID, and information about who owns the hosted zone.</p>"
+        },
+        "MaxItems": {
+          "shape": "PageMaxItems",
+          "documentation": "<p>The value that you specified for <code>MaxItems</code> in the most recent <code>ListHostedZonesByVPC</code> request.</p>"
+        },
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>The value that you specified for <code>NextToken</code> in the most recent <code>ListHostedZonesByVPC</code> request.</p>"
+        }
+      }
     },
     "ListHostedZonesRequest": {
       "type": "structure",
@@ -4296,7 +4424,7 @@
     },
     "PaginationToken": {
       "type": "string",
-      "max": 256
+      "max": 1024
     },
     "Period": {
       "type": "integer",
