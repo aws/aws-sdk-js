@@ -223,7 +223,7 @@
       });
       return it('lower cases HTTP headers', function() {
         var client, headers, rawHeaders;
-        rawHeaders = "x-amzn-Foo: foo\nx-amzn-Bar: bar";
+        rawHeaders = 'x-amzn-Foo: foo\nx-amzn-Bar: bar';
         client = new AWS.XHRClient();
         headers = client.parseHeaders(rawHeaders);
         expect(headers['x-amzn-foo']).to.equal('foo');
@@ -1194,7 +1194,7 @@
             }
           }, function(err, data) {
             noError(err);
-            var records = []
+            var records = [];
             for (var i = 0; i < data.Payload.length; i++) {
               var event = data.Payload[i];
               if (event.Records) {
@@ -1207,7 +1207,7 @@
             );
             done();
           });
-        })
+        });
       });
 
       describe('upload()', function() {

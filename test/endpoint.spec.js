@@ -8,10 +8,10 @@
     it('throws error if parameter is null/undefined', function() {
       expect(function() {
         return new AWS.Endpoint(null);
-      }).to["throw"]('Invalid endpoint: null');
+      }).to['throw']('Invalid endpoint: null');
       return expect(function() {
         return new AWS.Endpoint(void 0);
-      }).to["throw"]('Invalid endpoint: undefined');
+      }).to['throw']('Invalid endpoint: undefined');
     });
     it('copy constructs Endpoint', function() {
       var endpoint, origEndpoint;

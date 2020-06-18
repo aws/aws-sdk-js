@@ -28,6 +28,14 @@ declare class MQ extends Service {
    */
   createConfiguration(callback?: (err: AWSError, data: MQ.Types.CreateConfigurationResponse) => void): Request<MQ.Types.CreateConfigurationResponse, AWSError>;
   /**
+   * Add a tag to a resource.
+   */
+  createTags(params: MQ.Types.CreateTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Add a tag to a resource.
+   */
+  createTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Creates an ActiveMQ user.
    */
   createUser(params: MQ.Types.CreateUserRequest, callback?: (err: AWSError, data: MQ.Types.CreateUserResponse) => void): Request<MQ.Types.CreateUserResponse, AWSError>;
@@ -44,6 +52,14 @@ declare class MQ extends Service {
    */
   deleteBroker(callback?: (err: AWSError, data: MQ.Types.DeleteBrokerResponse) => void): Request<MQ.Types.DeleteBrokerResponse, AWSError>;
   /**
+   * Removes a tag from a resource.
+   */
+  deleteTags(params: MQ.Types.DeleteTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes a tag from a resource.
+   */
+  deleteTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes an ActiveMQ user.
    */
   deleteUser(params: MQ.Types.DeleteUserRequest, callback?: (err: AWSError, data: MQ.Types.DeleteUserResponse) => void): Request<MQ.Types.DeleteUserResponse, AWSError>;
@@ -59,6 +75,22 @@ declare class MQ extends Service {
    * Returns information about the specified broker.
    */
   describeBroker(callback?: (err: AWSError, data: MQ.Types.DescribeBrokerResponse) => void): Request<MQ.Types.DescribeBrokerResponse, AWSError>;
+  /**
+   * Describe available engine types and versions.
+   */
+  describeBrokerEngineTypes(params: MQ.Types.DescribeBrokerEngineTypesRequest, callback?: (err: AWSError, data: MQ.Types.DescribeBrokerEngineTypesResponse) => void): Request<MQ.Types.DescribeBrokerEngineTypesResponse, AWSError>;
+  /**
+   * Describe available engine types and versions.
+   */
+  describeBrokerEngineTypes(callback?: (err: AWSError, data: MQ.Types.DescribeBrokerEngineTypesResponse) => void): Request<MQ.Types.DescribeBrokerEngineTypesResponse, AWSError>;
+  /**
+   * Describe available broker instance options.
+   */
+  describeBrokerInstanceOptions(params: MQ.Types.DescribeBrokerInstanceOptionsRequest, callback?: (err: AWSError, data: MQ.Types.DescribeBrokerInstanceOptionsResponse) => void): Request<MQ.Types.DescribeBrokerInstanceOptionsResponse, AWSError>;
+  /**
+   * Describe available broker instance options.
+   */
+  describeBrokerInstanceOptions(callback?: (err: AWSError, data: MQ.Types.DescribeBrokerInstanceOptionsResponse) => void): Request<MQ.Types.DescribeBrokerInstanceOptionsResponse, AWSError>;
   /**
    * Returns information about the specified configuration.
    */
@@ -108,6 +140,14 @@ declare class MQ extends Service {
    */
   listConfigurations(callback?: (err: AWSError, data: MQ.Types.ListConfigurationsResponse) => void): Request<MQ.Types.ListConfigurationsResponse, AWSError>;
   /**
+   * Lists tags for a resource.
+   */
+  listTags(params: MQ.Types.ListTagsRequest, callback?: (err: AWSError, data: MQ.Types.ListTagsResponse) => void): Request<MQ.Types.ListTagsResponse, AWSError>;
+  /**
+   * Lists tags for a resource.
+   */
+  listTags(callback?: (err: AWSError, data: MQ.Types.ListTagsResponse) => void): Request<MQ.Types.ListTagsResponse, AWSError>;
+  /**
    * Returns a list of all ActiveMQ users.
    */
   listUsers(params: MQ.Types.ListUsersRequest, callback?: (err: AWSError, data: MQ.Types.ListUsersResponse) => void): Request<MQ.Types.ListUsersResponse, AWSError>;
@@ -149,6 +189,22 @@ declare class MQ extends Service {
   updateUser(callback?: (err: AWSError, data: MQ.Types.UpdateUserResponse) => void): Request<MQ.Types.UpdateUserResponse, AWSError>;
 }
 declare namespace MQ {
+  export interface AvailabilityZone {
+    /**
+     * Id for the availability zone.
+     */
+    Name?: __string;
+  }
+  export interface BrokerEngineType {
+    /**
+     * The type of broker engine.
+     */
+    EngineType?: EngineType;
+    /**
+     * The list of engine versions.
+     */
+    EngineVersions?: __listOfEngineVersion;
+  }
   export interface BrokerInstance {
     /**
      * The URL of the broker's ActiveMQ Web Console.
@@ -159,11 +215,38 @@ declare namespace MQ {
      */
     Endpoints?: __listOf__string;
     /**
-     * The IP address of the ENI attached to the broker.
+     * The IP address of the Elastic Network Interface (ENI) attached to the broker.
      */
     IpAddress?: __string;
   }
+  export interface BrokerInstanceOption {
+    /**
+     * The list of available az.
+     */
+    AvailabilityZones?: __listOfAvailabilityZone;
+    /**
+     * The type of broker engine.
+     */
+    EngineType?: EngineType;
+    /**
+     * The type of broker instance.
+     */
+    HostInstanceType?: __string;
+    /**
+     * The broker's storage type.
+     */
+    StorageType?: BrokerStorageType;
+    /**
+     * The list of supported deployment modes.
+     */
+    SupportedDeploymentModes?: __listOfDeploymentMode;
+    /**
+     * The list of supported engine versions.
+     */
+    SupportedEngineVersions?: __listOf__string;
+  }
   export type BrokerState = "CREATION_IN_PROGRESS"|"CREATION_FAILED"|"DELETION_IN_PROGRESS"|"RUNNING"|"REBOOT_IN_PROGRESS"|string;
+  export type BrokerStorageType = "EBS"|"EFS"|string;
   export interface BrokerSummary {
     /**
      * The Amazon Resource Name (ARN) of the broker.
@@ -213,7 +296,7 @@ declare namespace MQ {
      */
     EngineType?: EngineType;
     /**
-     * Required. The version of the broker engine.
+     * Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
      */
     EngineVersion?: __string;
     /**
@@ -228,6 +311,10 @@ declare namespace MQ {
      * Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.
      */
     Name?: __string;
+    /**
+     * The list of all tags associated with this configuration.
+     */
+    Tags?: __mapOf__string;
   }
   export interface ConfigurationId {
     /**
@@ -289,11 +376,15 @@ declare namespace MQ {
      */
     DeploymentMode?: DeploymentMode;
     /**
+     * Encryption options for the broker.
+     */
+    EncryptionOptions?: EncryptionOptions;
+    /**
      * Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.
      */
     EngineType?: EngineType;
     /**
-     * Required. The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.0.
+     * Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
      */
     EngineVersion?: __string;
     /**
@@ -313,13 +404,21 @@ declare namespace MQ {
      */
     PubliclyAccessible?: __boolean;
     /**
-     * The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.
+     * The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.
      */
     SecurityGroups?: __listOf__string;
+    /**
+     * The broker's storage type.
+     */
+    StorageType?: BrokerStorageType;
     /**
      * The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.
      */
     SubnetIds?: __listOf__string;
+    /**
+     * Create tags when creating the broker.
+     */
+    Tags?: __mapOf__string;
     /**
      * Required. The list of ActiveMQ users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
      */
@@ -341,13 +440,17 @@ declare namespace MQ {
      */
     EngineType?: EngineType;
     /**
-     * Required. The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.0.
+     * Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
      */
     EngineVersion?: __string;
     /**
      * Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.
      */
     Name?: __string;
+    /**
+     * Create tags when creating the configuration.
+     */
+    Tags?: __mapOf__string;
   }
   export interface CreateConfigurationResponse {
     /**
@@ -370,6 +473,16 @@ declare namespace MQ {
      * Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.
      */
     Name?: __string;
+  }
+  export interface CreateTagsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource tag.
+     */
+    ResourceArn: __string;
+    /**
+     * The key-value pair for the resource tag.
+     */
+    Tags?: __mapOf__string;
   }
   export interface CreateUserRequest {
     /**
@@ -408,6 +521,16 @@ declare namespace MQ {
      */
     BrokerId?: __string;
   }
+  export interface DeleteTagsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource tag.
+     */
+    ResourceArn: __string;
+    /**
+     * An array of tag keys to delete
+     */
+    TagKeys: __listOf__string;
+  }
   export interface DeleteUserRequest {
     /**
      * The unique ID that Amazon MQ generates for the broker.
@@ -421,6 +544,70 @@ declare namespace MQ {
   export interface DeleteUserResponse {
   }
   export type DeploymentMode = "SINGLE_INSTANCE"|"ACTIVE_STANDBY_MULTI_AZ"|string;
+  export interface DescribeBrokerEngineTypesRequest {
+    /**
+     * Filter response by engine type.
+     */
+    EngineType?: __string;
+    /**
+     * The maximum number of engine types that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
+     */
+    NextToken?: __string;
+  }
+  export interface DescribeBrokerEngineTypesResponse {
+    /**
+     * List of available engine types and versions.
+     */
+    BrokerEngineTypes?: __listOfBrokerEngineType;
+    /**
+     * Required. The maximum number of engine types that can be returned per page (20 by default). This value must be an integer from 5 to 100.
+     */
+    MaxResults?: __integerMin5Max100;
+    /**
+     * The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
+     */
+    NextToken?: __string;
+  }
+  export interface DescribeBrokerInstanceOptionsRequest {
+    /**
+     * Filter response by engine type.
+     */
+    EngineType?: __string;
+    /**
+     * Filter response by host instance type.
+     */
+    HostInstanceType?: __string;
+    /**
+     * The maximum number of instance options that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
+     */
+    NextToken?: __string;
+    /**
+     * Filter response by storage type.
+     */
+    StorageType?: __string;
+  }
+  export interface DescribeBrokerInstanceOptionsResponse {
+    /**
+     * List of available broker instance options.
+     */
+    BrokerInstanceOptions?: __listOfBrokerInstanceOption;
+    /**
+     * Required. The maximum number of instance options that can be returned per page (20 by default). This value must be an integer from 5 to 100.
+     */
+    MaxResults?: __integerMin5Max100;
+    /**
+     * The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
+     */
+    NextToken?: __string;
+  }
   export interface DescribeBrokerRequest {
     /**
      * The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.
@@ -465,11 +652,15 @@ declare namespace MQ {
      */
     DeploymentMode?: DeploymentMode;
     /**
+     * Encryption options for the broker.
+     */
+    EncryptionOptions?: EncryptionOptions;
+    /**
      * Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.
      */
     EngineType?: EngineType;
     /**
-     * The version of the broker engine. Note: Currently, Amazon MQ supports only 5.15.0.
+     * The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
      */
     EngineVersion?: __string;
     /**
@@ -485,17 +676,37 @@ declare namespace MQ {
      */
     MaintenanceWindowStartTime?: WeeklyStartTime;
     /**
+     * The version of the broker engine to upgrade to. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+     */
+    PendingEngineVersion?: __string;
+    /**
+     * The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
+     */
+    PendingHostInstanceType?: __string;
+    /**
+     * The list of pending security groups to authorize connections to brokers.
+     */
+    PendingSecurityGroups?: __listOf__string;
+    /**
      * Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
      */
     PubliclyAccessible?: __boolean;
     /**
-     * Required. The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.
+     * The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.
      */
     SecurityGroups?: __listOf__string;
+    /**
+     * The broker's storage type.
+     */
+    StorageType?: BrokerStorageType;
     /**
      * The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.
      */
     SubnetIds?: __listOf__string;
+    /**
+     * The list of all tags associated with this broker.
+     */
+    Tags?: __mapOf__string;
     /**
      * The list of all ActiveMQ usernames for the specified broker.
      */
@@ -525,7 +736,7 @@ declare namespace MQ {
      */
     EngineType?: EngineType;
     /**
-     * Required. The version of the broker engine.
+     * Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
      */
     EngineVersion?: __string;
     /**
@@ -540,6 +751,10 @@ declare namespace MQ {
      * Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.
      */
     Name?: __string;
+    /**
+     * The list of all tags associated with this configuration.
+     */
+    Tags?: __mapOf__string;
   }
   export interface DescribeConfigurationRevisionRequest {
     /**
@@ -601,7 +816,23 @@ declare namespace MQ {
      */
     Username?: __string;
   }
+  export interface EncryptionOptions {
+    /**
+     * The customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.
+     */
+    KmsKeyId?: __string;
+    /**
+     * Enables the use of an AWS owned CMK using AWS Key Management Service (KMS).
+     */
+    UseAwsOwnedKey: __boolean;
+  }
   export type EngineType = "ACTIVEMQ"|string;
+  export interface EngineVersion {
+    /**
+     * Id for the version.
+     */
+    Name?: __string;
+  }
   export interface ListBrokersRequest {
     /**
      * The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
@@ -678,6 +909,18 @@ declare namespace MQ {
      */
     NextToken?: __string;
   }
+  export interface ListTagsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource tag.
+     */
+    ResourceArn: __string;
+  }
+  export interface ListTagsResponse {
+    /**
+     * The key-value pair for the resource tag.
+     */
+    Tags?: __mapOf__string;
+  }
   export interface ListUsersRequest {
     /**
      * The unique ID that Amazon MQ generates for the broker.
@@ -726,7 +969,7 @@ declare namespace MQ {
      */
     Audit?: __boolean;
     /**
-     * Location of CloudWatch Log group where audit logs will be sent.
+     * The location of the CloudWatch Logs log group where audit logs are sent.
      */
     AuditLogGroup?: __string;
     /**
@@ -734,7 +977,7 @@ declare namespace MQ {
      */
     General?: __boolean;
     /**
-     * Location of CloudWatch Log group where general logs will be sent.
+     * The location of the CloudWatch Logs log group where general logs are sent.
      */
     GeneralLogGroup?: __string;
     /**
@@ -778,6 +1021,10 @@ declare namespace MQ {
   export type SanitizationWarningReason = "DISALLOWED_ELEMENT_REMOVED"|"DISALLOWED_ATTRIBUTE_REMOVED"|"INVALID_ATTRIBUTE_VALUE_REMOVED"|string;
   export interface UpdateBrokerRequest {
     /**
+     * Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.
+     */
+    AutoMinorVersionUpgrade?: __boolean;
+    /**
      * The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.
      */
     BrokerId: __string;
@@ -786,11 +1033,27 @@ declare namespace MQ {
      */
     Configuration?: ConfigurationId;
     /**
+     * The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+     */
+    EngineVersion?: __string;
+    /**
+     * The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
+     */
+    HostInstanceType?: __string;
+    /**
      * Enables Amazon CloudWatch logging for brokers.
      */
     Logs?: Logs;
+    /**
+     * The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.
+     */
+    SecurityGroups?: __listOf__string;
   }
   export interface UpdateBrokerResponse {
+    /**
+     * The new value of automatic upgrades to new minor version for brokers.
+     */
+    AutoMinorVersionUpgrade?: __boolean;
     /**
      * Required. The unique ID that Amazon MQ generates for the broker.
      */
@@ -800,9 +1063,21 @@ declare namespace MQ {
      */
     Configuration?: ConfigurationId;
     /**
+     * The version of the broker engine to upgrade to. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+     */
+    EngineVersion?: __string;
+    /**
+     * The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
+     */
+    HostInstanceType?: __string;
+    /**
      * The list of information about logs to be enabled for the specified broker.
      */
     Logs?: Logs;
+    /**
+     * The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.
+     */
+    SecurityGroups?: __listOf__string;
   }
   export interface UpdateConfigurationRequest {
     /**
@@ -927,15 +1202,21 @@ declare namespace MQ {
   export type __boolean = boolean;
   export type __integer = number;
   export type __integerMin5Max100 = number;
+  export type __listOfAvailabilityZone = AvailabilityZone[];
+  export type __listOfBrokerEngineType = BrokerEngineType[];
   export type __listOfBrokerInstance = BrokerInstance[];
+  export type __listOfBrokerInstanceOption = BrokerInstanceOption[];
   export type __listOfBrokerSummary = BrokerSummary[];
   export type __listOfConfiguration = Configuration[];
   export type __listOfConfigurationId = ConfigurationId[];
   export type __listOfConfigurationRevision = ConfigurationRevision[];
+  export type __listOfDeploymentMode = DeploymentMode[];
+  export type __listOfEngineVersion = EngineVersion[];
   export type __listOfSanitizationWarning = SanitizationWarning[];
   export type __listOfUser = User[];
   export type __listOfUserSummary = UserSummary[];
   export type __listOf__string = __string[];
+  export type __mapOf__string = {[key: string]: __string};
   export type __string = string;
   export type __timestampIso8601 = Date;
   /**

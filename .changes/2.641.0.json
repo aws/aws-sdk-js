@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "CI",
+        "description": "add buildspec.yml from CodeBuild job"
+    },
+    {
+        "type": "feature",
+        "category": "MediaConvert",
+        "description": "AWS Elemental MediaConvert SDK has added support for: AV1 encoding in File Group MP4, DASH and CMAF DASH outputs; PCM/WAV audio output in MPEG2-TS containers; and Opus audio in Webm inputs."
+    }
+]

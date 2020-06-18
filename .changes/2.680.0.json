@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "Chime",
+        "description": "You can now receive Voice Connector call events through SNS or SQS."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds support for Federated Authentication via SAML-2.0 in AWS ClientVPN."
+    },
+    {
+        "type": "feature",
+        "category": "Health",
+        "description": "Feature: Health: AWS Health added a new field to differentiate Public events from Account-Specific events in the API request and response. Visit https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html to learn more."
+    }
+]

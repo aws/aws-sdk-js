@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "AutoScaling",
+        "description": "Introducing instance refresh, a feature that helps you update all instances in an Auto Scaling group in a rolling fashion (for example, to apply a new AMI or instance type). You can control the pace of the refresh by defining the percentage of the group that must remain running/healthy during the replacement process and the time for new instances to warm up between replacements."
+    },
+    {
+        "type": "feature",
+        "category": "DataExchange",
+        "description": "This release fixes a bug in the AWS Data Exchange Python and NodeJS SDKs. The 'KmsKeyArn' field in the create-job API was configured to be required instead of optional. We updated this field to be optional in this release."
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "Adds support for using Amazon Elastic File System (persistent storage) with AWS Lambda. This enables customers to share data across function invocations, read large reference data files, and write function output to a persistent and shared store."
+    },
+    {
+        "type": "feature",
+        "category": "Polly",
+        "description": "Amazon Polly adds new US English child voice - Kevin. Kevin is available as Neural voice only."
+    }
+]

@@ -6,8 +6,6 @@
 
   AWS = helpers.AWS;
 
-  Buffer = AWS.util.Buffer;
-
   describe('AWS.ParamValidator', function() {
     var expectError, expectValid, input, members, ref, validate;
     ref = [{}, {}], members = ref[0], input = ref[1];
@@ -31,7 +29,7 @@
       }
       return expect(function() {
         return validate(params, strict);
-      }).to["throw"](message);
+      }).to['throw'](message);
     };
     describe('empty input', function() {
       beforeEach(function() {
@@ -106,6 +104,31 @@
           hash: {
             bad: 'abc'
           }
+        });
+      });
+    });
+    describe('uri params', function() {
+      beforeEach(function() {
+        input = {
+          required: ['id'],
+          members: {
+            id: {
+              type: 'string',
+              location: 'uri'
+            }
+          }
+        };
+      });
+
+      it('throws an error if a uri parameter is empty', function() {
+        expectError({
+          id: ''
+        });
+      });
+
+      it('does not throw an error if a uri parameter is populated', function() {
+        expectValid({
+          id: 'foo'
         });
       });
     });
@@ -598,7 +621,7 @@
       });
       it('accepts Buffers', function() {
         return expectValid({
-          param: new Buffer(100)
+          param: AWS.util.buffer.alloc(100)
         });
       });
       it('accepts typed arrays', function() {
@@ -660,7 +683,7 @@
       });
       it('accepts Buffers', function() {
         return expectValid({
-          param: new Buffer(100)
+          param: AWS.util.buffer.alloc(100)
         });
       });
       it('accepts Streams', function() {
@@ -844,7 +867,7 @@
       });
       it('throws helpful messages for invalid strings', function() {
         var msg;
-        msg = "Expected params.config.settings.name to be a string";
+        msg = 'Expected params.config.settings.name to be a string';
         input.members.config.members.settings.members.name = {
           type: 'string'
         };
@@ -858,7 +881,7 @@
       });
       it('throws helpful messages for invalid integers', function() {
         var msg;
-        msg = "Expected params.config.settings.count to be a number";
+        msg = 'Expected params.config.settings.count to be a number';
         input.members.config.members.settings.members.count = {
           type: 'integer'
         };
@@ -872,7 +895,7 @@
       });
       it('throws helpful messages for invalid timestamps', function() {
         var msg;
-        msg = "Expected params.config.settings.when to be a " + "Date object, ISO-8601 string, or a UNIX timestamp";
+        msg = 'Expected params.config.settings.when to be a ' + 'Date object, ISO-8601 string, or a UNIX timestamp';
         input.members.config.members.settings.members.when = {
           type: 'timestamp'
         };
@@ -886,7 +909,7 @@
       });
       it('throws helpful messages for invalid booleans', function() {
         var msg;
-        msg = "Expected params.config.settings.enabled to be a boolean";
+        msg = 'Expected params.config.settings.enabled to be a boolean';
         return expectError(msg, {
           config: {
             settings: {
@@ -897,7 +920,7 @@
       });
       it('throws helpful messages for invalid floats', function() {
         var msg;
-        msg = "Expected params.config.settings.value to be a number";
+        msg = 'Expected params.config.settings.value to be a number';
         input.members.config.members.settings.members.value = {
           type: 'float'
         };
@@ -911,7 +934,7 @@
       });
       it('throws helpful messages for invalid base64 params', function() {
         var msg;
-        msg = "Expected params.config.settings.data to be a " + "string, Buffer, Stream, Blob, or typed array object";
+        msg = 'Expected params.config.settings.data to be a ' + 'string, Buffer, Stream, Blob, or typed array object';
         input.members.config.members.settings.members.data = {
           type: 'base64'
         };
@@ -925,7 +948,7 @@
       });
       return it('throws helpful messages for invalid binary params', function() {
         var msg;
-        msg = "Expected params.config.settings.data to be a " + "string, Buffer, Stream, Blob, or typed array object";
+        msg = 'Expected params.config.settings.data to be a ' + 'string, Buffer, Stream, Blob, or typed array object';
         input.members.config.members.settings.members.data = {
           type: 'binary'
         };
@@ -953,7 +976,7 @@
             }
           }
         };
-        msg = "There were 2 validation errors:\n" + "* MissingRequiredParameter: Missing required key 'param2' in params\n" + "* InvalidParameterType: Expected params.param1 to be a boolean";
+        msg = 'There were 2 validation errors:\n' + '* MissingRequiredParameter: Missing required key \'param2\' in params\n' + '* InvalidParameterType: Expected params.param1 to be a boolean';
         return expectError(msg, {
           param1: 'notboolean'
         });
@@ -1180,7 +1203,7 @@
           members: {
             str: {
               type: 'string',
-              "enum": ['Hemingway', 'Faulkner', 'Twain', 'Poe']
+              'enum': ['Hemingway', 'Faulkner', 'Twain', 'Poe']
             },
             map: {
               type: 'map',
@@ -1189,7 +1212,7 @@
               },
               key: {
                 type: 'string',
-                "enum": ['old', 'man', 'sea']
+                'enum': ['old', 'man', 'sea']
               }
             }
           }
@@ -1199,35 +1222,35 @@
         return expectValid({
           str: 'Dickens'
         }, {
-          "enum": false
+          'enum': false
         });
       });
       it('accepts strings matching first enum value', function() {
         return expectValid({
           str: 'Hemingway'
         }, {
-          "enum": true
+          'enum': true
         });
       });
       it('accepts strings matching last enum value', function() {
         return expectValid({
           str: 'Poe'
         }, {
-          "enum": true
+          'enum': true
         });
       });
       it('rejects strings not in enum list', function() {
         return expectError('Found string value of Shakespeare, but expected ' + 'Hemingway|Faulkner|Twain|Poe for params.str', {
           str: 'Shakespeare'
         }, {
-          "enum": true
+          'enum': true
         });
       });
       it('rejects strings not exactly in enum list', function() {
         return expectError('Found string value of twain, but expected ' + 'Hemingway|Faulkner|Twain|Poe for params.str', {
           str: 'twain'
         }, {
-          "enum": true
+          'enum': true
         });
       });
       it('accepts map keys found in enum trait', function() {
@@ -1236,7 +1259,7 @@
             old: 'abc'
           }
         }, {
-          "enum": true
+          'enum': true
         });
       });
       return it('rejects map keys not found in enum trait', function() {
@@ -1245,7 +1268,7 @@
             the: 'abc'
           }
         }, {
-          "enum": true
+          'enum': true
         });
       });
     });

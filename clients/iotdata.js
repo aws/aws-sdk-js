@@ -9,6 +9,7 @@ require('../lib/services/iotdata');
 Object.defineProperty(apiLoader.services['iotdata'], '2015-05-28', {
   get: function get() {
     var model = require('../apis/iot-data-2015-05-28.min.json');
+    model.paginators = require('../apis/iot-data-2015-05-28.paginators.json').pagination;
     return model;
   },
   enumerable: true,

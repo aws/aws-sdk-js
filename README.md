@@ -1,22 +1,22 @@
 # AWS SDK for JavaScript
 
-[![NPM](https://nodei.co/npm/aws-sdk.svg?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/aws-sdk/)
-
+[![NPM version](https://img.shields.io/npm/v/aws-sdk.svg)](https://www.npmjs.com/package/aws-sdk)
+[![NPM downloads](https://img.shields.io/npm/dm/aws-sdk.svg)](https://www.npmjs.com/package/aws-sdk)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/aws/aws-sdk-js)
 
-[![Version](https://badge.fury.io/js/aws-sdk.svg)](http://badge.fury.io/js/aws-sdk) [![Build Status](https://travis-ci.org/aws/aws-sdk-js.svg?branch=master)](https://travis-ci.org/aws/aws-sdk-js) [![Coverage Status](https://coveralls.io/repos/aws/aws-sdk-js/badge.svg?branch=master)](https://coveralls.io/r/aws/aws-sdk-js?branch=master)
+[![Build Status](https://travis-ci.org/aws/aws-sdk-js.svg?branch=master)](https://travis-ci.org/aws/aws-sdk-js)
+[![Coverage Status](https://codecov.io/gh/aws/aws-sdk-js/branch/master/graph/badge.svg)](https://codecov.io/gh/aws/aws-sdk-js)
+[![Known Vulnerabilities](https://snyk.io/test/github/aws/aws-sdk-js/badge.svg)](https://snyk.io/test/github/aws/aws-sdk-js)
 
 The official AWS SDK for JavaScript, available for browsers and mobile devices,
 or Node.js backends
 
 For release notes, see the [CHANGELOG](https://github.com/aws/aws-sdk-js/blob/master/CHANGELOG.md). Prior to v2.4.8, release notes can be found at https://aws.amazon.com/releasenotes/?tag=releasenotes%23keywords%23javascript
 
-<p class="note">
 If you are upgrading from 1.x to 2.0 of the SDK, please see the
-[upgrading](https://github.com/aws/aws-sdk-js/blob/master/UPGRADING.md) notes
+[upgrading notes](https://github.com/aws/aws-sdk-js/blob/master/UPGRADING.md)
 for information on how to migrate existing code to work with the new major
 version.
-</p>
 
 ## Installing
 
@@ -25,7 +25,7 @@ version.
 To use the SDK in the browser, simply add the following script tag to your
 HTML pages:
 
-    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.292.0.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.700.0.min.js"></script>
 
 You can also build a custom browser SDK with your specified set of AWS services.
 This can allow you to reduce the SDK's size, specify different API versions of
@@ -78,6 +78,10 @@ You can find a getting started guide at:
 
 http://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide
 
+API reference at:
+
+https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/
+
 ## Usage with TypeScript
 The AWS SDK for JavaScript bundles TypeScript definition files for use in TypeScript projects and to support tools that can read `.d.ts` files.
 Our goal is to keep these TypeScript definition files updated with each release for any public api.
@@ -111,12 +115,14 @@ In a TypeScript file:
 
 ```javascript
 // import entire SDK
-import AWS = require('aws-sdk');
+import AWS from 'aws-sdk';
 // import AWS object without services
-import AWS = require('aws-sdk/global');
+import AWS from 'aws-sdk/global';
 // import individual service
-import S3 = require('aws-sdk/clients/s3');
+import S3 from 'aws-sdk/clients/s3';
 ```
+
+**NOTE:** You need to add `"esModuleInterop": true` to compilerOptions of your `tsconfig.json`. If not possible, use like `import * as AWS from 'aws-sdk'`.
 
 In a JavaScript file:
 

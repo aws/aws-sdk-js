@@ -21,6 +21,22 @@ declare class AppStream extends Service {
    */
   associateFleet(callback?: (err: AWSError, data: AppStream.Types.AssociateFleetResult) => void): Request<AppStream.Types.AssociateFleetResult, AWSError>;
   /**
+   * Associates the specified users with the specified stacks. Users in a user pool cannot be assigned to stacks with fleets that are joined to an Active Directory domain.
+   */
+  batchAssociateUserStack(params: AppStream.Types.BatchAssociateUserStackRequest, callback?: (err: AWSError, data: AppStream.Types.BatchAssociateUserStackResult) => void): Request<AppStream.Types.BatchAssociateUserStackResult, AWSError>;
+  /**
+   * Associates the specified users with the specified stacks. Users in a user pool cannot be assigned to stacks with fleets that are joined to an Active Directory domain.
+   */
+  batchAssociateUserStack(callback?: (err: AWSError, data: AppStream.Types.BatchAssociateUserStackResult) => void): Request<AppStream.Types.BatchAssociateUserStackResult, AWSError>;
+  /**
+   * Disassociates the specified users from the specified stacks.
+   */
+  batchDisassociateUserStack(params: AppStream.Types.BatchDisassociateUserStackRequest, callback?: (err: AWSError, data: AppStream.Types.BatchDisassociateUserStackResult) => void): Request<AppStream.Types.BatchDisassociateUserStackResult, AWSError>;
+  /**
+   * Disassociates the specified users from the specified stacks.
+   */
+  batchDisassociateUserStack(callback?: (err: AWSError, data: AppStream.Types.BatchDisassociateUserStackResult) => void): Request<AppStream.Types.BatchDisassociateUserStackResult, AWSError>;
+  /**
    * Copies the image within the same region or to a new region within the same AWS account. Note that any tags you added to the image will not be copied.
    */
   copyImage(params: AppStream.Types.CopyImageRequest, callback?: (err: AWSError, data: AppStream.Types.CopyImageResponse) => void): Request<AppStream.Types.CopyImageResponse, AWSError>;
@@ -29,11 +45,11 @@ declare class AppStream extends Service {
    */
   copyImage(callback?: (err: AWSError, data: AppStream.Types.CopyImageResponse) => void): Request<AppStream.Types.CopyImageResponse, AWSError>;
   /**
-   * Creates a Directory Config object in AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.
+   * Creates a Directory Config object in AppStream 2.0. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.
    */
   createDirectoryConfig(params: AppStream.Types.CreateDirectoryConfigRequest, callback?: (err: AWSError, data: AppStream.Types.CreateDirectoryConfigResult) => void): Request<AppStream.Types.CreateDirectoryConfigResult, AWSError>;
   /**
-   * Creates a Directory Config object in AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.
+   * Creates a Directory Config object in AppStream 2.0. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.
    */
   createDirectoryConfig(callback?: (err: AWSError, data: AppStream.Types.CreateDirectoryConfigResult) => void): Request<AppStream.Types.CreateDirectoryConfigResult, AWSError>;
   /**
@@ -76,6 +92,22 @@ declare class AppStream extends Service {
    * Creates a temporary URL to start an AppStream 2.0 streaming session for the specified user. A streaming URL enables application streaming to be tested without user setup. 
    */
   createStreamingURL(callback?: (err: AWSError, data: AppStream.Types.CreateStreamingURLResult) => void): Request<AppStream.Types.CreateStreamingURLResult, AWSError>;
+  /**
+   * Creates a usage report subscription. Usage reports are generated daily.
+   */
+  createUsageReportSubscription(params: AppStream.Types.CreateUsageReportSubscriptionRequest, callback?: (err: AWSError, data: AppStream.Types.CreateUsageReportSubscriptionResult) => void): Request<AppStream.Types.CreateUsageReportSubscriptionResult, AWSError>;
+  /**
+   * Creates a usage report subscription. Usage reports are generated daily.
+   */
+  createUsageReportSubscription(callback?: (err: AWSError, data: AppStream.Types.CreateUsageReportSubscriptionResult) => void): Request<AppStream.Types.CreateUsageReportSubscriptionResult, AWSError>;
+  /**
+   * Creates a new user in the user pool.
+   */
+  createUser(params: AppStream.Types.CreateUserRequest, callback?: (err: AWSError, data: AppStream.Types.CreateUserResult) => void): Request<AppStream.Types.CreateUserResult, AWSError>;
+  /**
+   * Creates a new user in the user pool.
+   */
+  createUser(callback?: (err: AWSError, data: AppStream.Types.CreateUserResult) => void): Request<AppStream.Types.CreateUserResult, AWSError>;
   /**
    * Deletes the specified Directory Config object from AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.
    */
@@ -125,11 +157,27 @@ declare class AppStream extends Service {
    */
   deleteStack(callback?: (err: AWSError, data: AppStream.Types.DeleteStackResult) => void): Request<AppStream.Types.DeleteStackResult, AWSError>;
   /**
-   * Retrieves a list that describes one or more specified Directory Config objects for AppStream 2.0, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the information required to join streaming instances to an Active Directory domain.  Although the response syntax in this topic includes the account password, this password is not returned in the actual response.
+   * Disables usage report generation.
+   */
+  deleteUsageReportSubscription(params: AppStream.Types.DeleteUsageReportSubscriptionRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteUsageReportSubscriptionResult) => void): Request<AppStream.Types.DeleteUsageReportSubscriptionResult, AWSError>;
+  /**
+   * Disables usage report generation.
+   */
+  deleteUsageReportSubscription(callback?: (err: AWSError, data: AppStream.Types.DeleteUsageReportSubscriptionResult) => void): Request<AppStream.Types.DeleteUsageReportSubscriptionResult, AWSError>;
+  /**
+   * Deletes a user from the user pool.
+   */
+  deleteUser(params: AppStream.Types.DeleteUserRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteUserResult) => void): Request<AppStream.Types.DeleteUserResult, AWSError>;
+  /**
+   * Deletes a user from the user pool.
+   */
+  deleteUser(callback?: (err: AWSError, data: AppStream.Types.DeleteUserResult) => void): Request<AppStream.Types.DeleteUserResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more specified Directory Config objects for AppStream 2.0, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the configuration information required to join fleets and image builders to Microsoft Active Directory domains.  Although the response syntax in this topic includes the account password, this password is not returned in the actual response.
    */
   describeDirectoryConfigs(params: AppStream.Types.DescribeDirectoryConfigsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeDirectoryConfigsResult) => void): Request<AppStream.Types.DescribeDirectoryConfigsResult, AWSError>;
   /**
-   * Retrieves a list that describes one or more specified Directory Config objects for AppStream 2.0, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the information required to join streaming instances to an Active Directory domain.  Although the response syntax in this topic includes the account password, this password is not returned in the actual response.
+   * Retrieves a list that describes one or more specified Directory Config objects for AppStream 2.0, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the configuration information required to join fleets and image builders to Microsoft Active Directory domains.  Although the response syntax in this topic includes the account password, this password is not returned in the actual response.
    */
   describeDirectoryConfigs(callback?: (err: AWSError, data: AppStream.Types.DescribeDirectoryConfigsResult) => void): Request<AppStream.Types.DescribeDirectoryConfigsResult, AWSError>;
   /**
@@ -149,27 +197,27 @@ declare class AppStream extends Service {
    */
   describeImageBuilders(callback?: (err: AWSError, data: AppStream.Types.DescribeImageBuildersResult) => void): Request<AppStream.Types.DescribeImageBuildersResult, AWSError>;
   /**
-   * Retrieves a list that describes the permissions for a private image that you own. 
+   * Retrieves a list that describes the permissions for shared AWS account IDs on a private image that you own. 
    */
   describeImagePermissions(params: AppStream.Types.DescribeImagePermissionsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeImagePermissionsResult) => void): Request<AppStream.Types.DescribeImagePermissionsResult, AWSError>;
   /**
-   * Retrieves a list that describes the permissions for a private image that you own. 
+   * Retrieves a list that describes the permissions for shared AWS account IDs on a private image that you own. 
    */
   describeImagePermissions(callback?: (err: AWSError, data: AppStream.Types.DescribeImagePermissionsResult) => void): Request<AppStream.Types.DescribeImagePermissionsResult, AWSError>;
   /**
-   * Retrieves a list that describes one or more specified images, if the image names are provided. Otherwise, all images in the account are described.
+   * Retrieves a list that describes one or more specified images, if the image names or image ARNs are provided. Otherwise, all images in the account are described.
    */
   describeImages(params: AppStream.Types.DescribeImagesRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeImagesResult) => void): Request<AppStream.Types.DescribeImagesResult, AWSError>;
   /**
-   * Retrieves a list that describes one or more specified images, if the image names are provided. Otherwise, all images in the account are described.
+   * Retrieves a list that describes one or more specified images, if the image names or image ARNs are provided. Otherwise, all images in the account are described.
    */
   describeImages(callback?: (err: AWSError, data: AppStream.Types.DescribeImagesResult) => void): Request<AppStream.Types.DescribeImagesResult, AWSError>;
   /**
-   * Retrieves a list that describes the streaming sessions for a specified stack and fleet. If a user ID is provided for the stack and fleet, only streaming sessions for that user are described. If an authentication type is not provided, the default is to authenticate users using a streaming URL.
+   * Retrieves a list that describes the streaming sessions for a specified stack and fleet. If a UserId is provided for the stack and fleet, only streaming sessions for that user are described. If an authentication type is not provided, the default is to authenticate users using a streaming URL.
    */
   describeSessions(params: AppStream.Types.DescribeSessionsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeSessionsResult) => void): Request<AppStream.Types.DescribeSessionsResult, AWSError>;
   /**
-   * Retrieves a list that describes the streaming sessions for a specified stack and fleet. If a user ID is provided for the stack and fleet, only streaming sessions for that user are described. If an authentication type is not provided, the default is to authenticate users using a streaming URL.
+   * Retrieves a list that describes the streaming sessions for a specified stack and fleet. If a UserId is provided for the stack and fleet, only streaming sessions for that user are described. If an authentication type is not provided, the default is to authenticate users using a streaming URL.
    */
   describeSessions(callback?: (err: AWSError, data: AppStream.Types.DescribeSessionsResult) => void): Request<AppStream.Types.DescribeSessionsResult, AWSError>;
   /**
@@ -181,6 +229,38 @@ declare class AppStream extends Service {
    */
   describeStacks(callback?: (err: AWSError, data: AppStream.Types.DescribeStacksResult) => void): Request<AppStream.Types.DescribeStacksResult, AWSError>;
   /**
+   * Retrieves a list that describes one or more usage report subscriptions.
+   */
+  describeUsageReportSubscriptions(params: AppStream.Types.DescribeUsageReportSubscriptionsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeUsageReportSubscriptionsResult) => void): Request<AppStream.Types.DescribeUsageReportSubscriptionsResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more usage report subscriptions.
+   */
+  describeUsageReportSubscriptions(callback?: (err: AWSError, data: AppStream.Types.DescribeUsageReportSubscriptionsResult) => void): Request<AppStream.Types.DescribeUsageReportSubscriptionsResult, AWSError>;
+  /**
+   * Retrieves a list that describes the UserStackAssociation objects. You must specify either or both of the following:   The stack name   The user name (email address of the user associated with the stack) and the authentication type for the user  
+   */
+  describeUserStackAssociations(params: AppStream.Types.DescribeUserStackAssociationsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeUserStackAssociationsResult) => void): Request<AppStream.Types.DescribeUserStackAssociationsResult, AWSError>;
+  /**
+   * Retrieves a list that describes the UserStackAssociation objects. You must specify either or both of the following:   The stack name   The user name (email address of the user associated with the stack) and the authentication type for the user  
+   */
+  describeUserStackAssociations(callback?: (err: AWSError, data: AppStream.Types.DescribeUserStackAssociationsResult) => void): Request<AppStream.Types.DescribeUserStackAssociationsResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more specified users in the user pool.
+   */
+  describeUsers(params: AppStream.Types.DescribeUsersRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeUsersResult) => void): Request<AppStream.Types.DescribeUsersResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more specified users in the user pool.
+   */
+  describeUsers(callback?: (err: AWSError, data: AppStream.Types.DescribeUsersResult) => void): Request<AppStream.Types.DescribeUsersResult, AWSError>;
+  /**
+   * Disables the specified user in the user pool. Users can't sign in to AppStream 2.0 until they are re-enabled. This action does not delete the user. 
+   */
+  disableUser(params: AppStream.Types.DisableUserRequest, callback?: (err: AWSError, data: AppStream.Types.DisableUserResult) => void): Request<AppStream.Types.DisableUserResult, AWSError>;
+  /**
+   * Disables the specified user in the user pool. Users can't sign in to AppStream 2.0 until they are re-enabled. This action does not delete the user. 
+   */
+  disableUser(callback?: (err: AWSError, data: AppStream.Types.DisableUserResult) => void): Request<AppStream.Types.DisableUserResult, AWSError>;
+  /**
    * Disassociates the specified fleet from the specified stack.
    */
   disassociateFleet(params: AppStream.Types.DisassociateFleetRequest, callback?: (err: AWSError, data: AppStream.Types.DisassociateFleetResult) => void): Request<AppStream.Types.DisassociateFleetResult, AWSError>;
@@ -188,6 +268,14 @@ declare class AppStream extends Service {
    * Disassociates the specified fleet from the specified stack.
    */
   disassociateFleet(callback?: (err: AWSError, data: AppStream.Types.DisassociateFleetResult) => void): Request<AppStream.Types.DisassociateFleetResult, AWSError>;
+  /**
+   * Enables a user in the user pool. After being enabled, users can sign in to AppStream 2.0 and open applications from the stacks to which they are assigned.
+   */
+  enableUser(params: AppStream.Types.EnableUserRequest, callback?: (err: AWSError, data: AppStream.Types.EnableUserResult) => void): Request<AppStream.Types.EnableUserResult, AWSError>;
+  /**
+   * Enables a user in the user pool. After being enabled, users can sign in to AppStream 2.0 and open applications from the stacks to which they are assigned.
+   */
+  enableUser(callback?: (err: AWSError, data: AppStream.Types.EnableUserResult) => void): Request<AppStream.Types.EnableUserResult, AWSError>;
   /**
    * Immediately stops the specified streaming session.
    */
@@ -213,11 +301,11 @@ declare class AppStream extends Service {
    */
   listAssociatedStacks(callback?: (err: AWSError, data: AppStream.Types.ListAssociatedStacksResult) => void): Request<AppStream.Types.ListAssociatedStacksResult, AWSError>;
   /**
-   * Retrieves a list of all tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
+   * Retrieves a list of all tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Administration Guide.
    */
   listTagsForResource(params: AppStream.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: AppStream.Types.ListTagsForResourceResponse) => void): Request<AppStream.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Retrieves a list of all tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
+   * Retrieves a list of all tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Administration Guide.
    */
   listTagsForResource(callback?: (err: AWSError, data: AppStream.Types.ListTagsForResourceResponse) => void): Request<AppStream.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -253,35 +341,35 @@ declare class AppStream extends Service {
    */
   stopImageBuilder(callback?: (err: AWSError, data: AppStream.Types.StopImageBuilderResult) => void): Request<AppStream.Types.StopImageBuilderResult, AWSError>;
   /**
-   * Adds or overwrites one or more tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, this operation updates its value. To list the current tags for your resources, use ListTagsForResource. To disassociate tags from your resources, use UntagResource. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
+   * Adds or overwrites one or more tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, this operation updates its value. To list the current tags for your resources, use ListTagsForResource. To disassociate tags from your resources, use UntagResource. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Administration Guide.
    */
   tagResource(params: AppStream.Types.TagResourceRequest, callback?: (err: AWSError, data: AppStream.Types.TagResourceResponse) => void): Request<AppStream.Types.TagResourceResponse, AWSError>;
   /**
-   * Adds or overwrites one or more tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, this operation updates its value. To list the current tags for your resources, use ListTagsForResource. To disassociate tags from your resources, use UntagResource. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
+   * Adds or overwrites one or more tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, this operation updates its value. To list the current tags for your resources, use ListTagsForResource. To disassociate tags from your resources, use UntagResource. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Administration Guide.
    */
   tagResource(callback?: (err: AWSError, data: AppStream.Types.TagResourceResponse) => void): Request<AppStream.Types.TagResourceResponse, AWSError>;
   /**
-   * Disassociates one or more specified tags from the specified AppStream 2.0 resource. To list the current tags for your resources, use ListTagsForResource. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
+   * Disassociates one or more specified tags from the specified AppStream 2.0 resource. To list the current tags for your resources, use ListTagsForResource. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Administration Guide.
    */
   untagResource(params: AppStream.Types.UntagResourceRequest, callback?: (err: AWSError, data: AppStream.Types.UntagResourceResponse) => void): Request<AppStream.Types.UntagResourceResponse, AWSError>;
   /**
-   * Disassociates one or more specified tags from the specified AppStream 2.0 resource. To list the current tags for your resources, use ListTagsForResource. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
+   * Disassociates one or more specified tags from the specified AppStream 2.0 resource. To list the current tags for your resources, use ListTagsForResource. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Administration Guide.
    */
   untagResource(callback?: (err: AWSError, data: AppStream.Types.UntagResourceResponse) => void): Request<AppStream.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates the specified Directory Config object in AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.
+   * Updates the specified Directory Config object in AppStream 2.0. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.
    */
   updateDirectoryConfig(params: AppStream.Types.UpdateDirectoryConfigRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateDirectoryConfigResult) => void): Request<AppStream.Types.UpdateDirectoryConfigResult, AWSError>;
   /**
-   * Updates the specified Directory Config object in AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.
+   * Updates the specified Directory Config object in AppStream 2.0. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.
    */
   updateDirectoryConfig(callback?: (err: AWSError, data: AppStream.Types.UpdateDirectoryConfigResult) => void): Request<AppStream.Types.UpdateDirectoryConfigResult, AWSError>;
   /**
-   * Updates the specified fleet. If the fleet is in the STOPPED state, you can update any attribute except the fleet name. If the fleet is in the RUNNING state, you can update the DisplayName and ComputeCapacity attributes. If the fleet is in the STARTING or STOPPING state, you can't update it.
+   * Updates the specified fleet. If the fleet is in the STOPPED state, you can update any attribute except the fleet name. If the fleet is in the RUNNING state, you can update the DisplayName, ComputeCapacity, ImageARN, ImageName, IdleDisconnectTimeoutInSeconds, and DisconnectTimeoutInSeconds attributes. If the fleet is in the STARTING or STOPPING state, you can't update it.
    */
   updateFleet(params: AppStream.Types.UpdateFleetRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateFleetResult) => void): Request<AppStream.Types.UpdateFleetResult, AWSError>;
   /**
-   * Updates the specified fleet. If the fleet is in the STOPPED state, you can update any attribute except the fleet name. If the fleet is in the RUNNING state, you can update the DisplayName and ComputeCapacity attributes. If the fleet is in the STARTING or STOPPING state, you can't update it.
+   * Updates the specified fleet. If the fleet is in the STOPPED state, you can update any attribute except the fleet name. If the fleet is in the RUNNING state, you can update the DisplayName, ComputeCapacity, ImageARN, ImageName, IdleDisconnectTimeoutInSeconds, and DisconnectTimeoutInSeconds attributes. If the fleet is in the STARTING or STOPPING state, you can't update it.
    */
   updateFleet(callback?: (err: AWSError, data: AppStream.Types.UpdateFleetResult) => void): Request<AppStream.Types.UpdateFleetResult, AWSError>;
   /**
@@ -318,6 +406,18 @@ declare class AppStream extends Service {
   waitFor(state: "fleetStopped", callback?: (err: AWSError, data: AppStream.Types.DescribeFleetsResult) => void): Request<AppStream.Types.DescribeFleetsResult, AWSError>;
 }
 declare namespace AppStream {
+  export interface AccessEndpoint {
+    /**
+     * The type of interface endpoint.
+     */
+    EndpointType: AccessEndpointType;
+    /**
+     * The identifier (ID) of the VPC in which the interface endpoint is used.
+     */
+    VpceId?: String;
+  }
+  export type AccessEndpointList = AccessEndpoint[];
+  export type AccessEndpointType = "STREAMING"|string;
   export type AccountName = string;
   export type AccountPassword = string;
   export type Action = "CLIPBOARD_COPY_FROM_LOCAL_DEVICE"|"CLIPBOARD_COPY_TO_LOCAL_DEVICE"|"FILE_UPLOAD"|"FILE_DOWNLOAD"|"PRINTING_TO_LOCAL_DEVICE"|string;
@@ -327,7 +427,7 @@ declare namespace AppStream {
      */
     Name?: String;
     /**
-     * The application name for display.
+     * The application name to display.
      */
     DisplayName?: String;
     /**
@@ -351,6 +451,30 @@ declare namespace AppStream {
      */
     Metadata?: Metadata;
   }
+  export interface ApplicationSettings {
+    /**
+     * Enables or disables persistent application settings for users during their streaming sessions. 
+     */
+    Enabled: Boolean;
+    /**
+     * The path prefix for the S3 bucket where users’ persistent application settings are stored. You can allow the same persistent application settings to be used across multiple stacks by specifying the same settings group for each stack. 
+     */
+    SettingsGroup?: SettingsGroup;
+  }
+  export interface ApplicationSettingsResponse {
+    /**
+     * Specifies whether persistent application settings are enabled for users during their streaming sessions.
+     */
+    Enabled?: Boolean;
+    /**
+     * The path prefix for the S3 bucket where users’ persistent application settings are stored.
+     */
+    SettingsGroup?: SettingsGroup;
+    /**
+     * The S3 bucket where users’ persistent application settings are stored. When persistent application settings are enabled for the first time for an account in an AWS Region, an S3 bucket is created. The bucket is unique to the AWS account and the Region. 
+     */
+    S3BucketName?: String;
+  }
   export type Applications = Application[];
   export type AppstreamAgentVersion = string;
   export type Arn = string;
@@ -370,6 +494,30 @@ declare namespace AppStream {
   export type AuthenticationType = "API"|"SAML"|"USERPOOL"|string;
   export type AwsAccountId = string;
   export type AwsAccountIdList = AwsAccountId[];
+  export interface BatchAssociateUserStackRequest {
+    /**
+     * The list of UserStackAssociation objects.
+     */
+    UserStackAssociations: UserStackAssociationList;
+  }
+  export interface BatchAssociateUserStackResult {
+    /**
+     * The list of UserStackAssociationError objects.
+     */
+    errors?: UserStackAssociationErrorList;
+  }
+  export interface BatchDisassociateUserStackRequest {
+    /**
+     * The list of UserStackAssociation objects.
+     */
+    UserStackAssociations: UserStackAssociationList;
+  }
+  export interface BatchDisassociateUserStackResult {
+    /**
+     * The list of UserStackAssociationError objects.
+     */
+    errors?: UserStackAssociationErrorList;
+  }
   export type Boolean = boolean;
   export type BooleanObject = boolean;
   export interface ComputeCapacity {
@@ -430,7 +578,7 @@ declare namespace AppStream {
      */
     OrganizationalUnitDistinguishedNames: OrganizationalUnitDistinguishedNamesList;
     /**
-     * The credentials for the service account used by the streaming instance to connect to the directory.
+     * The credentials for the service account used by the fleet or image builder to connect to the directory.
      */
     ServiceAccountCredentials: ServiceAccountCredentials;
   }
@@ -470,19 +618,19 @@ declare namespace AppStream {
      */
     VpcConfig?: VpcConfig;
     /**
-     * The maximum time that a streaming session can run, in seconds. Specify a value between 600 and 57600.
+     * The maximum amount of time that a streaming session can remain active, in seconds. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance. Specify a value between 600 and 360000.
      */
     MaxUserDurationInSeconds?: Integer;
     /**
-     * The time after disconnection when a session is considered to have ended, in seconds. If a user who was disconnected reconnects within this time interval, the user is connected to their previous session. Specify a value between 60 and 57600.
+     * The amount of time that a streaming session remains active after users disconnect. If users try to reconnect to the streaming session after a disconnection or network interruption within this time interval, they are connected to their previous session. Otherwise, they are connected to a new session with a new streaming instance.  Specify a value between 60 and 360000.
      */
     DisconnectTimeoutInSeconds?: Integer;
     /**
-     * The description for display.
+     * The description to display.
      */
     Description?: Description;
     /**
-     * The fleet name for display.
+     * The fleet name to display.
      */
     DisplayName?: DisplayName;
     /**
@@ -490,9 +638,21 @@ declare namespace AppStream {
      */
     EnableDefaultInternetAccess?: BooleanObject;
     /**
-     * The information needed to join a Microsoft Active Directory domain.
+     * The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. 
      */
     DomainJoinInfo?: DomainJoinInfo;
+    /**
+     * The tags to associate with the fleet. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=.  If you do not specify a value, the value is set to an empty string. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters:  _ . : / = + \ - @ For more information, see Tagging Your Resources in the Amazon AppStream 2.0 Administration Guide.
+     */
+    Tags?: Tags;
+    /**
+     * The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the DisconnectTimeoutInSeconds time interval begins. Users are notified before they are disconnected due to inactivity. If they try to reconnect to the streaming session before the time interval specified in DisconnectTimeoutInSeconds elapses, they are connected to their previous session. Users are considered idle when they stop providing keyboard or mouse input during their streaming session. File uploads and downloads, audio in, audio out, and pixels changing do not qualify as user activity. If users continue to be idle after the time interval in IdleDisconnectTimeoutInSeconds elapses, they are disconnected. To prevent users from being disconnected due to inactivity, specify a value of 0. Otherwise, specify a value between 60 and 3600. The default value is 0.  If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don't do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity.  
+     */
+    IdleDisconnectTimeoutInSeconds?: Integer;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) AssumeRole API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the AppStream_Machine_Role credential profile on the instance. For more information, see Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances in the Amazon AppStream 2.0 Administration Guide.
+     */
+    IamRoleArn?: Arn;
   }
   export interface CreateFleetResult {
     /**
@@ -506,7 +666,7 @@ declare namespace AppStream {
      */
     Name: Name;
     /**
-     * The name of the image used to create the builder.
+     * The name of the image used to create the image builder.
      */
     ImageName?: String;
     /**
@@ -514,15 +674,15 @@ declare namespace AppStream {
      */
     ImageArn?: Arn;
     /**
-     * The instance type to use when launching the image builder.
+     * The instance type to use when launching the image builder. The following instance types are available:   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge  
      */
     InstanceType: String;
     /**
-     * The description for display.
+     * The description to display.
      */
     Description?: Description;
     /**
-     * The image builder name for display.
+     * The image builder name to display.
      */
     DisplayName?: DisplayName;
     /**
@@ -530,17 +690,29 @@ declare namespace AppStream {
      */
     VpcConfig?: VpcConfig;
     /**
+     * The Amazon Resource Name (ARN) of the IAM role to apply to the image builder. To assume a role, the image builder calls the AWS Security Token Service (STS) AssumeRole API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the AppStream_Machine_Role credential profile on the instance. For more information, see Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances in the Amazon AppStream 2.0 Administration Guide.
+     */
+    IamRoleArn?: Arn;
+    /**
      * Enables or disables default internet access for the image builder.
      */
     EnableDefaultInternetAccess?: BooleanObject;
     /**
-     * The information needed to join a Microsoft Active Directory domain.
+     * The name of the directory and organizational unit (OU) to use to join the image builder to a Microsoft Active Directory domain. 
      */
     DomainJoinInfo?: DomainJoinInfo;
     /**
      * The version of the AppStream 2.0 agent to use for this image builder. To use the latest version of the AppStream 2.0 agent, specify [LATEST]. 
      */
     AppstreamAgentVersion?: AppstreamAgentVersion;
+    /**
+     * The tags to associate with the image builder. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=.  Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters:  _ . : / = + \ - @ If you do not specify a value, the value is set to an empty string. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Administration Guide.
+     */
+    Tags?: Tags;
+    /**
+     * The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the image builder only through the specified endpoints.
+     */
+    AccessEndpoints?: AccessEndpointList;
   }
   export interface CreateImageBuilderResult {
     /**
@@ -574,11 +746,11 @@ declare namespace AppStream {
      */
     Name: Name;
     /**
-     * The description for display.
+     * The description to display.
      */
     Description?: Description;
     /**
-     * The stack name for display.
+     * The stack name to display.
      */
     DisplayName?: DisplayName;
     /**
@@ -597,6 +769,22 @@ declare namespace AppStream {
      * The actions that are enabled or disabled for users during their streaming sessions. By default, these actions are enabled. 
      */
     UserSettings?: UserSettingList;
+    /**
+     * The persistent application settings for users of a stack. When these settings are enabled, changes that users make to applications and Windows settings are automatically saved after each session and applied to the next session.
+     */
+    ApplicationSettings?: ApplicationSettings;
+    /**
+     * The tags to associate with the stack. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=.  If you do not specify a value, the value is set to an empty string. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters:  _ . : / = + \ - @ For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Administration Guide.
+     */
+    Tags?: Tags;
+    /**
+     * The list of interface VPC endpoint (interface endpoint) objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.
+     */
+    AccessEndpoints?: AccessEndpointList;
+    /**
+     * The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions.
+     */
+    EmbedHostDomains?: EmbedHostDomains;
   }
   export interface CreateStackResult {
     /**
@@ -614,7 +802,7 @@ declare namespace AppStream {
      */
     FleetName: String;
     /**
-     * The ID of the user.
+     * The identifier of the user.
      */
     UserId: StreamingUrlUserId;
     /**
@@ -626,7 +814,7 @@ declare namespace AppStream {
      */
     Validity?: Long;
     /**
-     * The session context. For more information, see Session Context in the Amazon AppStream 2.0 Developer Guide.
+     * The session context. For more information, see Session Context in the Amazon AppStream 2.0 Administration Guide.
      */
     SessionContext?: String;
   }
@@ -639,6 +827,42 @@ declare namespace AppStream {
      * The elapsed time, in seconds after the Unix epoch, when this URL expires.
      */
     Expires?: Timestamp;
+  }
+  export interface CreateUsageReportSubscriptionRequest {
+  }
+  export interface CreateUsageReportSubscriptionResult {
+    /**
+     * The Amazon S3 bucket where generated reports are stored. If you enabled on-instance session scripts and Amazon S3 logging for your session script configuration, AppStream 2.0 created an S3 bucket to store the script output. The bucket is unique to your account and Region. When you enable usage reporting in this case, AppStream 2.0 uses the same bucket to store your usage reports. If you haven't already enabled on-instance session scripts, when you enable usage reports, AppStream 2.0 creates a new S3 bucket.
+     */
+    S3BucketName?: String;
+    /**
+     * The schedule for generating usage reports.
+     */
+    Schedule?: UsageReportSchedule;
+  }
+  export interface CreateUserRequest {
+    /**
+     * The email address of the user.  Users' email addresses are case-sensitive. During login, if they specify an email address that doesn't use the same capitalization as the email address specified when their user pool account was created, a "user does not exist" error message displays. 
+     */
+    UserName: Username;
+    /**
+     * The action to take for the welcome email that is sent to a user after the user is created in the user pool. If you specify SUPPRESS, no email is sent. If you specify RESEND, do not specify the first name or last name of the user. If the value is null, the email is sent.   The temporary password in the welcome email is valid for only 7 days. If users don’t set their passwords within 7 days, you must send them a new welcome email. 
+     */
+    MessageAction?: MessageAction;
+    /**
+     * The first name, or given name, of the user.
+     */
+    FirstName?: UserAttributeValue;
+    /**
+     * The last name, or surname, of the user.
+     */
+    LastName?: UserAttributeValue;
+    /**
+     * The authentication type for the user. You must specify USERPOOL. 
+     */
+    AuthenticationType: AuthenticationType;
+  }
+  export interface CreateUserResult {
   }
   export interface DeleteDirectoryConfigRequest {
     /**
@@ -674,7 +898,7 @@ declare namespace AppStream {
      */
     Name: Name;
     /**
-     * The 12-digit ID of the AWS account for which to delete image permissions.
+     * The 12-digit identifier of the AWS account for which to delete image permissions.
      */
     SharedAccountId: AwsAccountId;
   }
@@ -699,6 +923,22 @@ declare namespace AppStream {
     Name: String;
   }
   export interface DeleteStackResult {
+  }
+  export interface DeleteUsageReportSubscriptionRequest {
+  }
+  export interface DeleteUsageReportSubscriptionResult {
+  }
+  export interface DeleteUserRequest {
+    /**
+     * The email address of the user.  Users' email addresses are case-sensitive. 
+     */
+    UserName: Username;
+    /**
+     * The authentication type for the user. You must specify USERPOOL.
+     */
+    AuthenticationType: AuthenticationType;
+  }
+  export interface DeleteUserResult {
   }
   export interface DescribeDirectoryConfigsRequest {
     /**
@@ -774,15 +1014,15 @@ declare namespace AppStream {
      */
     Name: Name;
     /**
-     * The maximum size of each results page.
+     * The maximum size of each page of results.
      */
     MaxResults?: MaxResults;
     /**
-     * The 12-digit ID of one or more AWS accounts with which the image is shared.
+     * The 12-digit identifier of one or more AWS accounts with which the image is shared.
      */
     SharedAwsAccountIds?: AwsAccountIdList;
     /**
-     * The pagination token to use to retrieve the next page of results. If this value is empty, only the first page is retrieved.
+     * The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
      */
     NextToken?: String;
   }
@@ -796,14 +1036,14 @@ declare namespace AppStream {
      */
     SharedImagePermissionsList?: SharedImagePermissionsList;
     /**
-     * The pagination token to use to retrieve the next page of results. If this value is empty, only the first page is retrieved.
+     * The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
      */
     NextToken?: String;
   }
   export type DescribeImagesMaxResults = number;
   export interface DescribeImagesRequest {
     /**
-     * The names of the images to describe.
+     * The names of the public or private images to describe.
      */
     Names?: StringList;
     /**
@@ -815,7 +1055,7 @@ declare namespace AppStream {
      */
     Type?: VisibilityType;
     /**
-     * The pagination token to use to retrieve the next page of results. If this value is empty, only the first page is retrieved.
+     * The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
      */
     NextToken?: String;
     /**
@@ -829,7 +1069,7 @@ declare namespace AppStream {
      */
     Images?: ImageList;
     /**
-     * The pagination token to use to retrieve the next page of results. If there are no more pages, this value is null.
+     * The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
      */
     NextToken?: String;
   }
@@ -843,7 +1083,7 @@ declare namespace AppStream {
      */
     FleetName: String;
     /**
-     * The user ID.
+     * The user identifier.
      */
     UserId?: UserId;
     /**
@@ -889,6 +1129,82 @@ declare namespace AppStream {
      */
     NextToken?: String;
   }
+  export interface DescribeUsageReportSubscriptionsRequest {
+    /**
+     * The maximum size of each page of results.
+     */
+    MaxResults?: Integer;
+    /**
+     * The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeUsageReportSubscriptionsResult {
+    /**
+     * Information about the usage report subscription.
+     */
+    UsageReportSubscriptions?: UsageReportSubscriptionList;
+    /**
+     * The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeUserStackAssociationsRequest {
+    /**
+     * The name of the stack that is associated with the user.
+     */
+    StackName?: String;
+    /**
+     * The email address of the user who is associated with the stack.  Users' email addresses are case-sensitive. 
+     */
+    UserName?: Username;
+    /**
+     * The authentication type for the user who is associated with the stack. You must specify USERPOOL.
+     */
+    AuthenticationType?: AuthenticationType;
+    /**
+     * The maximum size of each page of results.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeUserStackAssociationsResult {
+    /**
+     * The UserStackAssociation objects.
+     */
+    UserStackAssociations?: UserStackAssociationList;
+    /**
+     * The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeUsersRequest {
+    /**
+     * The authentication type for the users in the user pool to describe. You must specify USERPOOL.
+     */
+    AuthenticationType: AuthenticationType;
+    /**
+     * The maximum size of each page of results.
+     */
+    MaxResults?: Integer;
+    /**
+     * The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeUsersResult {
+    /**
+     * Information about users in the user pool.
+     */
+    Users?: UserList;
+    /**
+     * The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
+     */
+    NextToken?: String;
+  }
   export type Description = string;
   export interface DirectoryConfig {
     /**
@@ -900,7 +1216,7 @@ declare namespace AppStream {
      */
     OrganizationalUnitDistinguishedNames?: OrganizationalUnitDistinguishedNamesList;
     /**
-     * The credentials for the service account used by the streaming instance to connect to the directory.
+     * The credentials for the service account used by the fleet or image builder to connect to the directory.
      */
     ServiceAccountCredentials?: ServiceAccountCredentials;
     /**
@@ -911,6 +1227,18 @@ declare namespace AppStream {
   export type DirectoryConfigList = DirectoryConfig[];
   export type DirectoryName = string;
   export type DirectoryNameList = DirectoryName[];
+  export interface DisableUserRequest {
+    /**
+     * The email address of the user.  Users' email addresses are case-sensitive. 
+     */
+    UserName: Username;
+    /**
+     * The authentication type for the user. You must specify USERPOOL.
+     */
+    AuthenticationType: AuthenticationType;
+  }
+  export interface DisableUserResult {
+  }
   export interface DisassociateFleetRequest {
     /**
      * The name of the fleet.
@@ -936,9 +1264,23 @@ declare namespace AppStream {
     OrganizationalUnitDistinguishedName?: OrganizationalUnitDistinguishedName;
   }
   export type DomainList = Domain[];
+  export type EmbedHostDomain = string;
+  export type EmbedHostDomains = EmbedHostDomain[];
+  export interface EnableUserRequest {
+    /**
+     * The email address of the user.  Users' email addresses are case-sensitive. During login, if they specify an email address that doesn't use the same capitalization as the email address specified when their user pool account was created, a "user does not exist" error message displays.  
+     */
+    UserName: Username;
+    /**
+     * The authentication type for the user. You must specify USERPOOL.
+     */
+    AuthenticationType: AuthenticationType;
+  }
+  export interface EnableUserResult {
+  }
   export interface ExpireSessionRequest {
     /**
-     * The ID of the streaming session.
+     * The identifier of the streaming session.
      */
     SessionId: String;
   }
@@ -947,7 +1289,7 @@ declare namespace AppStream {
   export type FeedbackURL = string;
   export interface Fleet {
     /**
-     * The ARN for the fleet.
+     * The Amazon Resource Name (ARN) for the fleet.
      */
     Arn: Arn;
     /**
@@ -955,11 +1297,11 @@ declare namespace AppStream {
      */
     Name: String;
     /**
-     * The fleet name for display.
+     * The fleet name to display.
      */
     DisplayName?: String;
     /**
-     * The description for display.
+     * The description to display.
      */
     Description?: String;
     /**
@@ -971,7 +1313,7 @@ declare namespace AppStream {
      */
     ImageArn?: Arn;
     /**
-     * The instance type to use when launching fleet instances.
+     * The instance type to use when launching fleet instances. The following instance types are available:   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge  
      */
     InstanceType: String;
     /**
@@ -983,11 +1325,11 @@ declare namespace AppStream {
      */
     ComputeCapacityStatus: ComputeCapacityStatus;
     /**
-     * The maximum time that a streaming session can run, in seconds. Specify a value between 600 and 57600.
+     * The maximum amount of time that a streaming session can remain active, in seconds. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance.  Specify a value between 600 and 360000.
      */
     MaxUserDurationInSeconds?: Integer;
     /**
-     * The time after disconnection when a session is considered to have ended, in seconds. If a user who was disconnected reconnects within this time interval, the user is connected to their previous session. Specify a value between 60 and 57600.
+     * The amount of time that a streaming session remains active after users disconnect. If they try to reconnect to the streaming session after a disconnection or network interruption within this time interval, they are connected to their previous session. Otherwise, they are connected to a new session with a new streaming instance. Specify a value between 60 and 360000.
      */
     DisconnectTimeoutInSeconds?: Integer;
     /**
@@ -1011,11 +1353,19 @@ declare namespace AppStream {
      */
     EnableDefaultInternetAccess?: BooleanObject;
     /**
-     * The information needed to join a Microsoft Active Directory domain.
+     * The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. 
      */
     DomainJoinInfo?: DomainJoinInfo;
+    /**
+     * The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the DisconnectTimeoutInSeconds time interval begins. Users are notified before they are disconnected due to inactivity. If users try to reconnect to the streaming session before the time interval specified in DisconnectTimeoutInSeconds elapses, they are connected to their previous session. Users are considered idle when they stop providing keyboard or mouse input during their streaming session. File uploads and downloads, audio in, audio out, and pixels changing do not qualify as user activity. If users continue to be idle after the time interval in IdleDisconnectTimeoutInSeconds elapses, they are disconnected. To prevent users from being disconnected due to inactivity, specify a value of 0. Otherwise, specify a value between 60 and 3600. The default value is 0.  If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don't do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity.  
+     */
+    IdleDisconnectTimeoutInSeconds?: Integer;
+    /**
+     * The ARN of the IAM role that is applied to the fleet. To assume a role, the fleet instance calls the AWS Security Token Service (STS) AssumeRole API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the AppStream_Machine_Role credential profile on the instance. For more information, see Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances in the Amazon AppStream 2.0 Administration Guide.
+     */
+    IamRoleArn?: Arn;
   }
-  export type FleetAttribute = "VPC_CONFIGURATION"|"VPC_CONFIGURATION_SECURITY_GROUP_IDS"|"DOMAIN_JOIN_INFO"|string;
+  export type FleetAttribute = "VPC_CONFIGURATION"|"VPC_CONFIGURATION_SECURITY_GROUP_IDS"|"DOMAIN_JOIN_INFO"|"IAM_ROLE_ARN"|string;
   export type FleetAttributes = FleetAttribute[];
   export interface FleetError {
     /**
@@ -1027,7 +1377,7 @@ declare namespace AppStream {
      */
     ErrorMessage?: String;
   }
-  export type FleetErrorCode = "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION"|"IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION"|"IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION"|"NETWORK_INTERFACE_LIMIT_EXCEEDED"|"INTERNAL_SERVICE_ERROR"|"IAM_SERVICE_ROLE_IS_MISSING"|"SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES"|"IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION"|"SUBNET_NOT_FOUND"|"IMAGE_NOT_FOUND"|"INVALID_SUBNET_CONFIGURATION"|"SECURITY_GROUPS_NOT_FOUND"|"IGW_NOT_ATTACHED"|"IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION"|"DOMAIN_JOIN_ERROR_FILE_NOT_FOUND"|"DOMAIN_JOIN_ERROR_ACCESS_DENIED"|"DOMAIN_JOIN_ERROR_LOGON_FAILURE"|"DOMAIN_JOIN_ERROR_INVALID_PARAMETER"|"DOMAIN_JOIN_ERROR_MORE_DATA"|"DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN"|"DOMAIN_JOIN_ERROR_NOT_SUPPORTED"|"DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME"|"DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED"|"DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED"|"DOMAIN_JOIN_NERR_PASSWORD_EXPIRED"|"DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"|string;
+  export type FleetErrorCode = "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION"|"IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION"|"IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION"|"NETWORK_INTERFACE_LIMIT_EXCEEDED"|"INTERNAL_SERVICE_ERROR"|"IAM_SERVICE_ROLE_IS_MISSING"|"MACHINE_ROLE_IS_MISSING"|"STS_DISABLED_IN_REGION"|"SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES"|"IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION"|"SUBNET_NOT_FOUND"|"IMAGE_NOT_FOUND"|"INVALID_SUBNET_CONFIGURATION"|"SECURITY_GROUPS_NOT_FOUND"|"IGW_NOT_ATTACHED"|"IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION"|"DOMAIN_JOIN_ERROR_FILE_NOT_FOUND"|"DOMAIN_JOIN_ERROR_ACCESS_DENIED"|"DOMAIN_JOIN_ERROR_LOGON_FAILURE"|"DOMAIN_JOIN_ERROR_INVALID_PARAMETER"|"DOMAIN_JOIN_ERROR_MORE_DATA"|"DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN"|"DOMAIN_JOIN_ERROR_NOT_SUPPORTED"|"DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME"|"DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED"|"DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED"|"DOMAIN_JOIN_NERR_PASSWORD_EXPIRED"|"DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"|string;
   export type FleetErrors = FleetError[];
   export type FleetList = Fleet[];
   export type FleetState = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|string;
@@ -1046,7 +1396,7 @@ declare namespace AppStream {
      */
     BaseImageArn?: Arn;
     /**
-     * The image name for display.
+     * The image name to display.
      */
     DisplayName?: String;
     /**
@@ -1062,11 +1412,15 @@ declare namespace AppStream {
      */
     ImageBuilderSupported?: Boolean;
     /**
+     * The name of the image builder that was used to create the private image. If the image is shared, this value is null.
+     */
+    ImageBuilderName?: String;
+    /**
      * The operating system platform of the image.
      */
     Platform?: PlatformType;
     /**
-     * The description for display.
+     * The description to display.
      */
     Description?: String;
     /**
@@ -1108,11 +1462,11 @@ declare namespace AppStream {
      */
     ImageArn?: Arn;
     /**
-     * The description for display.
+     * The description to display.
      */
     Description?: String;
     /**
-     * The image builder name for display.
+     * The image builder name to display.
      */
     DisplayName?: String;
     /**
@@ -1120,13 +1474,17 @@ declare namespace AppStream {
      */
     VpcConfig?: VpcConfig;
     /**
-     * The instance type for the image builder.
+     * The instance type for the image builder. The following instance types are available:   stream.standard.medium   stream.standard.large   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge  
      */
     InstanceType?: String;
     /**
      * The operating system platform of the image builder.
      */
     Platform?: PlatformType;
+    /**
+     * The ARN of the IAM role that is applied to the image builder. To assume a role, the image builder calls the AWS Security Token Service (STS) AssumeRole API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the AppStream_Machine_Role credential profile on the instance. For more information, see Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances in the Amazon AppStream 2.0 Administration Guide.
+     */
+    IamRoleArn?: Arn;
     /**
      * The state of the image builder.
      */
@@ -1144,17 +1502,22 @@ declare namespace AppStream {
      */
     EnableDefaultInternetAccess?: BooleanObject;
     /**
-     * The information needed to join a Microsoft Active Directory domain.
+     * The name of the directory and organizational unit (OU) to use to join the image builder to a Microsoft Active Directory domain. 
      */
     DomainJoinInfo?: DomainJoinInfo;
+    NetworkAccessConfiguration?: NetworkAccessConfiguration;
     /**
      * The image builder errors.
      */
     ImageBuilderErrors?: ResourceErrors;
     /**
-     * The version of the AppStream 2.0 agent that is currently being used by this image builder. 
+     * The version of the AppStream 2.0 agent that is currently being used by the image builder. 
      */
     AppstreamAgentVersion?: AppstreamAgentVersion;
+    /**
+     * The list of virtual private cloud (VPC) interface endpoint objects. Administrators can connect to the image builder only through the specified endpoints.
+     */
+    AccessEndpoints?: AccessEndpointList;
   }
   export type ImageBuilderList = ImageBuilder[];
   export type ImageBuilderState = "PENDING"|"UPDATING_AGENT"|"RUNNING"|"STOPPING"|"STOPPED"|"REBOOTING"|"SNAPSHOTTING"|"DELETING"|"FAILED"|string;
@@ -1193,6 +1556,17 @@ declare namespace AppStream {
   }
   export type ImageStateChangeReasonCode = "INTERNAL_ERROR"|"IMAGE_BUILDER_NOT_AVAILABLE"|"IMAGE_COPY_FAILURE"|string;
   export type Integer = number;
+  export interface LastReportGenerationExecutionError {
+    /**
+     * The error code for the error that is returned when a usage report can't be generated.
+     */
+    ErrorCode?: UsageReportExecutionErrorCode;
+    /**
+     * The error message for the error that is returned when a usage report can't be generated.
+     */
+    ErrorMessage?: String;
+  }
+  export type LastReportGenerationExecutionErrors = LastReportGenerationExecutionError[];
   export interface ListAssociatedFleetsRequest {
     /**
      * The name of the stack.
@@ -1247,6 +1621,7 @@ declare namespace AppStream {
   }
   export type Long = number;
   export type MaxResults = number;
+  export type MessageAction = "SUPPRESS"|"RESEND"|string;
   export type Metadata = {[key: string]: String};
   export type Name = string;
   export interface NetworkAccessConfiguration {
@@ -1262,7 +1637,7 @@ declare namespace AppStream {
   export type OrganizationalUnitDistinguishedName = string;
   export type OrganizationalUnitDistinguishedNamesList = OrganizationalUnitDistinguishedName[];
   export type Permission = "ENABLED"|"DISABLED"|string;
-  export type PlatformType = "WINDOWS"|string;
+  export type PlatformType = "WINDOWS"|"WINDOWS_SERVER_2016"|"WINDOWS_SERVER_2019"|string;
   export type RedirectURL = string;
   export type RegionName = string;
   export interface ResourceError {
@@ -1294,7 +1669,7 @@ declare namespace AppStream {
   }
   export interface Session {
     /**
-     * The ID of the streaming session.
+     * The identifier of the streaming session.
      */
     Id: String;
     /**
@@ -1314,7 +1689,19 @@ declare namespace AppStream {
      */
     State: SessionState;
     /**
-     * The authentication method. The user is authenticated using a streaming URL (API) or SAML federation (SAML).
+     * Specifies whether a user is connected to the streaming session.
+     */
+    ConnectionState?: SessionConnectionState;
+    /**
+     * The time when a streaming instance is dedicated for the user.
+     */
+    StartTime?: Timestamp;
+    /**
+     * The time when the streaming session is set to expire. This time is based on the MaxUserDurationinSeconds value, which determines the maximum length of time that a streaming session can run. A streaming session might end earlier than the time specified in SessionMaxExpirationTime, when the DisconnectTimeOutInSeconds elapses or the user chooses to end his or her session. If the DisconnectTimeOutInSeconds elapses, or the user chooses to end his or her session, the streaming instance is terminated and the streaming session ends.
+     */
+    MaxExpirationTime?: Timestamp;
+    /**
+     * The authentication method. The user is authenticated using a streaming URL (API) or SAML 2.0 federation (SAML).
      */
     AuthenticationType?: AuthenticationType;
     /**
@@ -1322,11 +1709,13 @@ declare namespace AppStream {
      */
     NetworkAccessConfiguration?: NetworkAccessConfiguration;
   }
+  export type SessionConnectionState = "CONNECTED"|"NOT_CONNECTED"|string;
   export type SessionList = Session[];
   export type SessionState = "ACTIVE"|"PENDING"|"EXPIRED"|string;
+  export type SettingsGroup = string;
   export interface SharedImagePermissions {
     /**
-     * The 12-digit ID of the AWS account with which the image is shared.
+     * The 12-digit identifier of the AWS account with which the image is shared.
      */
     sharedAccountId: AwsAccountId;
     /**
@@ -1345,11 +1734,11 @@ declare namespace AppStream {
      */
     Name: String;
     /**
-     * The description for display.
+     * The description to display.
      */
     Description?: String;
     /**
-     * The stack name for display.
+     * The stack name to display.
      */
     DisplayName?: String;
     /**
@@ -1376,8 +1765,20 @@ declare namespace AppStream {
      * The actions that are enabled or disabled for users during their streaming sessions. By default these actions are enabled.
      */
     UserSettings?: UserSettingList;
+    /**
+     * The persistent application settings for users of the stack.
+     */
+    ApplicationSettings?: ApplicationSettingsResponse;
+    /**
+     * The list of virtual private cloud (VPC) interface endpoint objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints. 
+     */
+    AccessEndpoints?: AccessEndpointList;
+    /**
+     * The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions.
+     */
+    EmbedHostDomains?: EmbedHostDomains;
   }
-  export type StackAttribute = "STORAGE_CONNECTORS"|"STORAGE_CONNECTOR_HOMEFOLDERS"|"STORAGE_CONNECTOR_GOOGLE_DRIVE"|"STORAGE_CONNECTOR_ONE_DRIVE"|"REDIRECT_URL"|"FEEDBACK_URL"|"THEME_NAME"|"USER_SETTINGS"|string;
+  export type StackAttribute = "STORAGE_CONNECTORS"|"STORAGE_CONNECTOR_HOMEFOLDERS"|"STORAGE_CONNECTOR_GOOGLE_DRIVE"|"STORAGE_CONNECTOR_ONE_DRIVE"|"REDIRECT_URL"|"FEEDBACK_URL"|"THEME_NAME"|"USER_SETTINGS"|"EMBED_HOST_DOMAINS"|"IAM_ROLE_ARN"|"ACCESS_ENDPOINTS"|string;
   export type StackAttributes = StackAttribute[];
   export interface StackError {
     /**
@@ -1446,7 +1847,7 @@ declare namespace AppStream {
      */
     ResourceIdentifier?: ResourceIdentifier;
     /**
-     * The names of the domains for the G Suite account.
+     * The names of the domains for the account.
      */
     Domains?: DomainList;
   }
@@ -1464,7 +1865,7 @@ declare namespace AppStream {
      */
     ResourceArn: Arn;
     /**
-     * The tags to associate. A tag is a key-value pair (the value is optional). For example, Environment=Test, or, if you do not specify a value, Environment=.  If you do not specify a value, we set the value to an empty string.
+     * The tags to associate. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=.  If you do not specify a value, the value is set to an empty string. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters:  _ . : / = + \ - @
      */
     Tags: Tags;
   }
@@ -1495,7 +1896,7 @@ declare namespace AppStream {
      */
     OrganizationalUnitDistinguishedNames?: OrganizationalUnitDistinguishedNamesList;
     /**
-     * The credentials for the service account used by the streaming instance to connect to the directory.
+     * The credentials for the service account used by the fleet or image builder to connect to the directory.
      */
     ServiceAccountCredentials?: ServiceAccountCredentials;
   }
@@ -1531,11 +1932,11 @@ declare namespace AppStream {
      */
     VpcConfig?: VpcConfig;
     /**
-     * The maximum time that a streaming session can run, in seconds. Specify a value between 600 and 57600.
+     * The maximum amount of time that a streaming session can remain active, in seconds. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance. Specify a value between 600 and 360000.
      */
     MaxUserDurationInSeconds?: Integer;
     /**
-     * The time after disconnection when a session is considered to have ended, in seconds. If a user who was disconnected reconnects within this time interval, the user is connected to their previous session. Specify a value between 60 and 57600.
+     * The amount of time that a streaming session remains active after users disconnect. If users try to reconnect to the streaming session after a disconnection or network interruption within this time interval, they are connected to their previous session. Otherwise, they are connected to a new session with a new streaming instance.  Specify a value between 60 and 360000.
      */
     DisconnectTimeoutInSeconds?: Integer;
     /**
@@ -1543,11 +1944,11 @@ declare namespace AppStream {
      */
     DeleteVpcConfig?: Boolean;
     /**
-     * The description for display.
+     * The description to display.
      */
     Description?: Description;
     /**
-     * The fleet name for display.
+     * The fleet name to display.
      */
     DisplayName?: DisplayName;
     /**
@@ -1555,13 +1956,21 @@ declare namespace AppStream {
      */
     EnableDefaultInternetAccess?: BooleanObject;
     /**
-     * The information needed to join a Microsoft Active Directory domain.
+     * The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. 
      */
     DomainJoinInfo?: DomainJoinInfo;
+    /**
+     * The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the DisconnectTimeoutInSeconds time interval begins. Users are notified before they are disconnected due to inactivity. If users try to reconnect to the streaming session before the time interval specified in DisconnectTimeoutInSeconds elapses, they are connected to their previous session. Users are considered idle when they stop providing keyboard or mouse input during their streaming session. File uploads and downloads, audio in, audio out, and pixels changing do not qualify as user activity. If users continue to be idle after the time interval in IdleDisconnectTimeoutInSeconds elapses, they are disconnected.  To prevent users from being disconnected due to inactivity, specify a value of 0. Otherwise, specify a value between 60 and 3600. The default value is 0.  If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don't do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity.  
+     */
+    IdleDisconnectTimeoutInSeconds?: Integer;
     /**
      * The fleet attributes to delete.
      */
     AttributesToDelete?: FleetAttributes;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume a role, a fleet instance calls the AWS Security Token Service (STS) AssumeRole API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the AppStream_Machine_Role credential profile on the instance. For more information, see Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances in the Amazon AppStream 2.0 Administration Guide.
+     */
+    IamRoleArn?: Arn;
   }
   export interface UpdateFleetResult {
     /**
@@ -1575,7 +1984,7 @@ declare namespace AppStream {
      */
     Name: Name;
     /**
-     * The 12-digit ID of the AWS account for which you want add or update image permissions.
+     * The 12-digit identifier of the AWS account for which you want add or update image permissions.
      */
     SharedAccountId: AwsAccountId;
     /**
@@ -1587,11 +1996,11 @@ declare namespace AppStream {
   }
   export interface UpdateStackRequest {
     /**
-     * The stack name for display.
+     * The stack name to display.
      */
     DisplayName?: DisplayName;
     /**
-     * The description for display.
+     * The description to display.
      */
     Description?: Description;
     /**
@@ -1611,7 +2020,7 @@ declare namespace AppStream {
      */
     RedirectURL?: RedirectURL;
     /**
-     * The URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.
+     * The URL that users are redirected to after they choose the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.
      */
     FeedbackURL?: FeedbackURL;
     /**
@@ -1622,6 +2031,18 @@ declare namespace AppStream {
      * The actions that are enabled or disabled for users during their streaming sessions. By default, these actions are enabled.
      */
     UserSettings?: UserSettingList;
+    /**
+     * The persistent application settings for users of a stack. When these settings are enabled, changes that users make to applications and Windows settings are automatically saved after each session and applied to the next session.
+     */
+    ApplicationSettings?: ApplicationSettings;
+    /**
+     * The list of interface VPC endpoint (interface endpoint) objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints.
+     */
+    AccessEndpoints?: AccessEndpointList;
+    /**
+     * The domains where AppStream 2.0 streaming sessions can be embedded in an iframe. You must approve the domains that you want to host embedded AppStream 2.0 streaming sessions.
+     */
+    EmbedHostDomains?: EmbedHostDomains;
   }
   export interface UpdateStackResult {
     /**
@@ -1629,7 +2050,64 @@ declare namespace AppStream {
      */
     Stack?: Stack;
   }
+  export type UsageReportExecutionErrorCode = "RESOURCE_NOT_FOUND"|"ACCESS_DENIED"|"INTERNAL_SERVICE_ERROR"|string;
+  export type UsageReportSchedule = "DAILY"|string;
+  export interface UsageReportSubscription {
+    /**
+     * The Amazon S3 bucket where generated reports are stored. If you enabled on-instance session scripts and Amazon S3 logging for your session script configuration, AppStream 2.0 created an S3 bucket to store the script output. The bucket is unique to your account and Region. When you enable usage reporting in this case, AppStream 2.0 uses the same bucket to store your usage reports. If you haven't already enabled on-instance session scripts, when you enable usage reports, AppStream 2.0 creates a new S3 bucket.
+     */
+    S3BucketName?: String;
+    /**
+     * The schedule for generating usage reports.
+     */
+    Schedule?: UsageReportSchedule;
+    /**
+     * The time when the last usage report was generated.
+     */
+    LastGeneratedReportDate?: Timestamp;
+    /**
+     * The errors that were returned if usage reports couldn't be generated.
+     */
+    SubscriptionErrors?: LastReportGenerationExecutionErrors;
+  }
+  export type UsageReportSubscriptionList = UsageReportSubscription[];
+  export interface User {
+    /**
+     * The ARN of the user.
+     */
+    Arn?: Arn;
+    /**
+     * The email address of the user.  Users' email addresses are case-sensitive. 
+     */
+    UserName?: Username;
+    /**
+     * Specifies whether the user in the user pool is enabled.
+     */
+    Enabled?: Boolean;
+    /**
+     * The status of the user in the user pool. The status can be one of the following:   UNCONFIRMED – The user is created but not confirmed.   CONFIRMED – The user is confirmed.   ARCHIVED – The user is no longer active.   COMPROMISED – The user is disabled because of a potential security threat.   UNKNOWN – The user status is not known.  
+     */
+    Status?: String;
+    /**
+     * The first name, or given name, of the user.
+     */
+    FirstName?: UserAttributeValue;
+    /**
+     * The last name, or surname, of the user.
+     */
+    LastName?: UserAttributeValue;
+    /**
+     * The date and time the user was created in the user pool.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The authentication type for the user.
+     */
+    AuthenticationType: AuthenticationType;
+  }
+  export type UserAttributeValue = string;
   export type UserId = string;
+  export type UserList = User[];
   export interface UserSetting {
     /**
      * The action that is enabled or disabled.
@@ -1641,14 +2119,50 @@ declare namespace AppStream {
     Permission: Permission;
   }
   export type UserSettingList = UserSetting[];
+  export interface UserStackAssociation {
+    /**
+     * The name of the stack that is associated with the user.
+     */
+    StackName: String;
+    /**
+     * The email address of the user who is associated with the stack.  Users' email addresses are case-sensitive. 
+     */
+    UserName: Username;
+    /**
+     * The authentication type for the user.
+     */
+    AuthenticationType: AuthenticationType;
+    /**
+     * Specifies whether a welcome email is sent to a user after the user is created in the user pool.
+     */
+    SendEmailNotification?: Boolean;
+  }
+  export interface UserStackAssociationError {
+    /**
+     * Information about the user and associated stack.
+     */
+    UserStackAssociation?: UserStackAssociation;
+    /**
+     * The error code for the error that is returned when a user can’t be associated with or disassociated from a stack.
+     */
+    ErrorCode?: UserStackAssociationErrorCode;
+    /**
+     * The error message for the error that is returned when a user can’t be associated with or disassociated from a stack.
+     */
+    ErrorMessage?: String;
+  }
+  export type UserStackAssociationErrorCode = "STACK_NOT_FOUND"|"USER_NAME_NOT_FOUND"|"INTERNAL_ERROR"|string;
+  export type UserStackAssociationErrorList = UserStackAssociationError[];
+  export type UserStackAssociationList = UserStackAssociation[];
+  export type Username = string;
   export type VisibilityType = "PUBLIC"|"PRIVATE"|"SHARED"|string;
   export interface VpcConfig {
     /**
-     * The subnets to which a network interface is established from the fleet instance.
+     * The identifiers of the subnets to which a network interface is attached from the fleet instance or image builder instance. Fleet instances use one or more subnets. Image builder instances use one subnet.
      */
     SubnetIds?: SubnetIdList;
     /**
-     * The security groups for the fleet.
+     * The identifiers of the security groups for the fleet or image builder.
      */
     SecurityGroupIds?: SecurityGroupIdList;
   }

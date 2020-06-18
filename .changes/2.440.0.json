@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "Discovery",
+        "description": "The Application Discovery Service's DescribeImportTasks and BatchDeleteImportData APIs now return additional statuses for error reporting."
+    },
+    {
+        "type": "feature",
+        "category": "Kafka",
+        "description": "Amazon Kafka - Added tagging APIs"
+    },
+    {
+        "type": "feature",
+        "category": "Organizations",
+        "description": "AWS Organizations is now available in the AWS GovCloud (US) Regions, and we added a new API action for creating accounts in those Regions. For more information, see CreateGovCloudAccount in the AWS Organizations API Reference. "
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "This release adds the TimeoutAction parameter to the ScalingConfiguration of an Aurora Serverless DB cluster. You can now configure the behavior when an auto-scaling capacity change can't find a scaling point."
+    },
+    {
+        "type": "feature",
+        "category": "WorkLink",
+        "description": "Amazon WorkLink is a fully managed, cloud-based service that enables secure, one-click access to internal websites and web apps from mobile phones. This release introduces new APIs to link and manage internal websites and web apps with Amazon WorkLink fleets. "
+    }
+]

@@ -12,6 +12,14 @@ declare class ES extends Service {
   constructor(options?: ES.Types.ClientConfiguration)
   config: Config & ES.Types.ClientConfiguration;
   /**
+   * Allows the destination domain owner to accept an inbound cross-cluster search connection request.
+   */
+  acceptInboundCrossClusterSearchConnection(params: ES.Types.AcceptInboundCrossClusterSearchConnectionRequest, callback?: (err: AWSError, data: ES.Types.AcceptInboundCrossClusterSearchConnectionResponse) => void): Request<ES.Types.AcceptInboundCrossClusterSearchConnectionResponse, AWSError>;
+  /**
+   * Allows the destination domain owner to accept an inbound cross-cluster search connection request.
+   */
+  acceptInboundCrossClusterSearchConnection(callback?: (err: AWSError, data: ES.Types.AcceptInboundCrossClusterSearchConnectionResponse) => void): Request<ES.Types.AcceptInboundCrossClusterSearchConnectionResponse, AWSError>;
+  /**
    * Attaches tags to an existing Elasticsearch domain. Tags are a set of case-sensitive key value pairs. An Elasticsearch domain may have up to 10 tags. See  Tagging Amazon Elasticsearch Service Domains for more information.
    */
   addTags(params: ES.Types.AddTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -20,6 +28,22 @@ declare class ES extends Service {
    */
   addTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Associates a package with an Amazon ES domain.
+   */
+  associatePackage(params: ES.Types.AssociatePackageRequest, callback?: (err: AWSError, data: ES.Types.AssociatePackageResponse) => void): Request<ES.Types.AssociatePackageResponse, AWSError>;
+  /**
+   * Associates a package with an Amazon ES domain.
+   */
+  associatePackage(callback?: (err: AWSError, data: ES.Types.AssociatePackageResponse) => void): Request<ES.Types.AssociatePackageResponse, AWSError>;
+  /**
+   * Cancels a scheduled service software update for an Amazon ES domain. You can only perform this operation before the AutomatedUpdateDate and when the UpdateStatus is in the PENDING_UPDATE state.
+   */
+  cancelElasticsearchServiceSoftwareUpdate(params: ES.Types.CancelElasticsearchServiceSoftwareUpdateRequest, callback?: (err: AWSError, data: ES.Types.CancelElasticsearchServiceSoftwareUpdateResponse) => void): Request<ES.Types.CancelElasticsearchServiceSoftwareUpdateResponse, AWSError>;
+  /**
+   * Cancels a scheduled service software update for an Amazon ES domain. You can only perform this operation before the AutomatedUpdateDate and when the UpdateStatus is in the PENDING_UPDATE state.
+   */
+  cancelElasticsearchServiceSoftwareUpdate(callback?: (err: AWSError, data: ES.Types.CancelElasticsearchServiceSoftwareUpdateResponse) => void): Request<ES.Types.CancelElasticsearchServiceSoftwareUpdateResponse, AWSError>;
+  /**
    * Creates a new Elasticsearch domain. For more information, see Creating Elasticsearch Domains in the Amazon Elasticsearch Service Developer Guide.
    */
   createElasticsearchDomain(params: ES.Types.CreateElasticsearchDomainRequest, callback?: (err: AWSError, data: ES.Types.CreateElasticsearchDomainResponse) => void): Request<ES.Types.CreateElasticsearchDomainResponse, AWSError>;
@@ -27,6 +51,22 @@ declare class ES extends Service {
    * Creates a new Elasticsearch domain. For more information, see Creating Elasticsearch Domains in the Amazon Elasticsearch Service Developer Guide.
    */
   createElasticsearchDomain(callback?: (err: AWSError, data: ES.Types.CreateElasticsearchDomainResponse) => void): Request<ES.Types.CreateElasticsearchDomainResponse, AWSError>;
+  /**
+   * Creates a new cross-cluster search connection from a source domain to a destination domain.
+   */
+  createOutboundCrossClusterSearchConnection(params: ES.Types.CreateOutboundCrossClusterSearchConnectionRequest, callback?: (err: AWSError, data: ES.Types.CreateOutboundCrossClusterSearchConnectionResponse) => void): Request<ES.Types.CreateOutboundCrossClusterSearchConnectionResponse, AWSError>;
+  /**
+   * Creates a new cross-cluster search connection from a source domain to a destination domain.
+   */
+  createOutboundCrossClusterSearchConnection(callback?: (err: AWSError, data: ES.Types.CreateOutboundCrossClusterSearchConnectionResponse) => void): Request<ES.Types.CreateOutboundCrossClusterSearchConnectionResponse, AWSError>;
+  /**
+   * Create a package for use with Amazon ES domains.
+   */
+  createPackage(params: ES.Types.CreatePackageRequest, callback?: (err: AWSError, data: ES.Types.CreatePackageResponse) => void): Request<ES.Types.CreatePackageResponse, AWSError>;
+  /**
+   * Create a package for use with Amazon ES domains.
+   */
+  createPackage(callback?: (err: AWSError, data: ES.Types.CreatePackageResponse) => void): Request<ES.Types.CreatePackageResponse, AWSError>;
   /**
    * Permanently deletes the specified Elasticsearch domain and all of its data. Once a domain is deleted, it cannot be recovered.
    */
@@ -39,6 +79,30 @@ declare class ES extends Service {
    * Deletes the service-linked role that Elasticsearch Service uses to manage and maintain VPC domains. Role deletion will fail if any existing VPC domains use the role. You must delete any such Elasticsearch domains before deleting the role. See Deleting Elasticsearch Service Role in VPC Endpoints for Amazon Elasticsearch Service Domains.
    */
   deleteElasticsearchServiceRole(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Allows the destination domain owner to delete an existing inbound cross-cluster search connection.
+   */
+  deleteInboundCrossClusterSearchConnection(params: ES.Types.DeleteInboundCrossClusterSearchConnectionRequest, callback?: (err: AWSError, data: ES.Types.DeleteInboundCrossClusterSearchConnectionResponse) => void): Request<ES.Types.DeleteInboundCrossClusterSearchConnectionResponse, AWSError>;
+  /**
+   * Allows the destination domain owner to delete an existing inbound cross-cluster search connection.
+   */
+  deleteInboundCrossClusterSearchConnection(callback?: (err: AWSError, data: ES.Types.DeleteInboundCrossClusterSearchConnectionResponse) => void): Request<ES.Types.DeleteInboundCrossClusterSearchConnectionResponse, AWSError>;
+  /**
+   * Allows the source domain owner to delete an existing outbound cross-cluster search connection.
+   */
+  deleteOutboundCrossClusterSearchConnection(params: ES.Types.DeleteOutboundCrossClusterSearchConnectionRequest, callback?: (err: AWSError, data: ES.Types.DeleteOutboundCrossClusterSearchConnectionResponse) => void): Request<ES.Types.DeleteOutboundCrossClusterSearchConnectionResponse, AWSError>;
+  /**
+   * Allows the source domain owner to delete an existing outbound cross-cluster search connection.
+   */
+  deleteOutboundCrossClusterSearchConnection(callback?: (err: AWSError, data: ES.Types.DeleteOutboundCrossClusterSearchConnectionResponse) => void): Request<ES.Types.DeleteOutboundCrossClusterSearchConnectionResponse, AWSError>;
+  /**
+   * Delete the package.
+   */
+  deletePackage(params: ES.Types.DeletePackageRequest, callback?: (err: AWSError, data: ES.Types.DeletePackageResponse) => void): Request<ES.Types.DeletePackageResponse, AWSError>;
+  /**
+   * Delete the package.
+   */
+  deletePackage(callback?: (err: AWSError, data: ES.Types.DeletePackageResponse) => void): Request<ES.Types.DeletePackageResponse, AWSError>;
   /**
    * Returns domain configuration information about the specified Elasticsearch domain, including the domain ID, domain endpoint, and domain ARN.
    */
@@ -72,6 +136,30 @@ declare class ES extends Service {
    */
   describeElasticsearchInstanceTypeLimits(callback?: (err: AWSError, data: ES.Types.DescribeElasticsearchInstanceTypeLimitsResponse) => void): Request<ES.Types.DescribeElasticsearchInstanceTypeLimitsResponse, AWSError>;
   /**
+   * Lists all the inbound cross-cluster search connections for a destination domain.
+   */
+  describeInboundCrossClusterSearchConnections(params: ES.Types.DescribeInboundCrossClusterSearchConnectionsRequest, callback?: (err: AWSError, data: ES.Types.DescribeInboundCrossClusterSearchConnectionsResponse) => void): Request<ES.Types.DescribeInboundCrossClusterSearchConnectionsResponse, AWSError>;
+  /**
+   * Lists all the inbound cross-cluster search connections for a destination domain.
+   */
+  describeInboundCrossClusterSearchConnections(callback?: (err: AWSError, data: ES.Types.DescribeInboundCrossClusterSearchConnectionsResponse) => void): Request<ES.Types.DescribeInboundCrossClusterSearchConnectionsResponse, AWSError>;
+  /**
+   * Lists all the outbound cross-cluster search connections for a source domain.
+   */
+  describeOutboundCrossClusterSearchConnections(params: ES.Types.DescribeOutboundCrossClusterSearchConnectionsRequest, callback?: (err: AWSError, data: ES.Types.DescribeOutboundCrossClusterSearchConnectionsResponse) => void): Request<ES.Types.DescribeOutboundCrossClusterSearchConnectionsResponse, AWSError>;
+  /**
+   * Lists all the outbound cross-cluster search connections for a source domain.
+   */
+  describeOutboundCrossClusterSearchConnections(callback?: (err: AWSError, data: ES.Types.DescribeOutboundCrossClusterSearchConnectionsResponse) => void): Request<ES.Types.DescribeOutboundCrossClusterSearchConnectionsResponse, AWSError>;
+  /**
+   * Describes all packages available to Amazon ES. Includes options for filtering, limiting the number of results, and pagination.
+   */
+  describePackages(params: ES.Types.DescribePackagesRequest, callback?: (err: AWSError, data: ES.Types.DescribePackagesResponse) => void): Request<ES.Types.DescribePackagesResponse, AWSError>;
+  /**
+   * Describes all packages available to Amazon ES. Includes options for filtering, limiting the number of results, and pagination.
+   */
+  describePackages(callback?: (err: AWSError, data: ES.Types.DescribePackagesResponse) => void): Request<ES.Types.DescribePackagesResponse, AWSError>;
+  /**
    * Lists available reserved Elasticsearch instance offerings.
    */
   describeReservedElasticsearchInstanceOfferings(params: ES.Types.DescribeReservedElasticsearchInstanceOfferingsRequest, callback?: (err: AWSError, data: ES.Types.DescribeReservedElasticsearchInstanceOfferingsResponse) => void): Request<ES.Types.DescribeReservedElasticsearchInstanceOfferingsResponse, AWSError>;
@@ -88,9 +176,49 @@ declare class ES extends Service {
    */
   describeReservedElasticsearchInstances(callback?: (err: AWSError, data: ES.Types.DescribeReservedElasticsearchInstancesResponse) => void): Request<ES.Types.DescribeReservedElasticsearchInstancesResponse, AWSError>;
   /**
+   * Dissociates a package from the Amazon ES domain.
+   */
+  dissociatePackage(params: ES.Types.DissociatePackageRequest, callback?: (err: AWSError, data: ES.Types.DissociatePackageResponse) => void): Request<ES.Types.DissociatePackageResponse, AWSError>;
+  /**
+   * Dissociates a package from the Amazon ES domain.
+   */
+  dissociatePackage(callback?: (err: AWSError, data: ES.Types.DissociatePackageResponse) => void): Request<ES.Types.DissociatePackageResponse, AWSError>;
+  /**
+   *  Returns a list of upgrade compatible Elastisearch versions. You can optionally pass a  DomainName  to get all upgrade compatible Elasticsearch versions for that specific domain. 
+   */
+  getCompatibleElasticsearchVersions(params: ES.Types.GetCompatibleElasticsearchVersionsRequest, callback?: (err: AWSError, data: ES.Types.GetCompatibleElasticsearchVersionsResponse) => void): Request<ES.Types.GetCompatibleElasticsearchVersionsResponse, AWSError>;
+  /**
+   *  Returns a list of upgrade compatible Elastisearch versions. You can optionally pass a  DomainName  to get all upgrade compatible Elasticsearch versions for that specific domain. 
+   */
+  getCompatibleElasticsearchVersions(callback?: (err: AWSError, data: ES.Types.GetCompatibleElasticsearchVersionsResponse) => void): Request<ES.Types.GetCompatibleElasticsearchVersionsResponse, AWSError>;
+  /**
+   * Retrieves the complete history of the last 10 upgrades that were performed on the domain.
+   */
+  getUpgradeHistory(params: ES.Types.GetUpgradeHistoryRequest, callback?: (err: AWSError, data: ES.Types.GetUpgradeHistoryResponse) => void): Request<ES.Types.GetUpgradeHistoryResponse, AWSError>;
+  /**
+   * Retrieves the complete history of the last 10 upgrades that were performed on the domain.
+   */
+  getUpgradeHistory(callback?: (err: AWSError, data: ES.Types.GetUpgradeHistoryResponse) => void): Request<ES.Types.GetUpgradeHistoryResponse, AWSError>;
+  /**
+   * Retrieves the latest status of the last upgrade or upgrade eligibility check that was performed on the domain.
+   */
+  getUpgradeStatus(params: ES.Types.GetUpgradeStatusRequest, callback?: (err: AWSError, data: ES.Types.GetUpgradeStatusResponse) => void): Request<ES.Types.GetUpgradeStatusResponse, AWSError>;
+  /**
+   * Retrieves the latest status of the last upgrade or upgrade eligibility check that was performed on the domain.
+   */
+  getUpgradeStatus(callback?: (err: AWSError, data: ES.Types.GetUpgradeStatusResponse) => void): Request<ES.Types.GetUpgradeStatusResponse, AWSError>;
+  /**
    * Returns the name of all Elasticsearch domains owned by the current user's account. 
    */
   listDomainNames(callback?: (err: AWSError, data: ES.Types.ListDomainNamesResponse) => void): Request<ES.Types.ListDomainNamesResponse, AWSError>;
+  /**
+   * Lists all Amazon ES domains associated with the package.
+   */
+  listDomainsForPackage(params: ES.Types.ListDomainsForPackageRequest, callback?: (err: AWSError, data: ES.Types.ListDomainsForPackageResponse) => void): Request<ES.Types.ListDomainsForPackageResponse, AWSError>;
+  /**
+   * Lists all Amazon ES domains associated with the package.
+   */
+  listDomainsForPackage(callback?: (err: AWSError, data: ES.Types.ListDomainsForPackageResponse) => void): Request<ES.Types.ListDomainsForPackageResponse, AWSError>;
   /**
    * List all Elasticsearch instance types that are supported for given ElasticsearchVersion
    */
@@ -108,6 +236,14 @@ declare class ES extends Service {
    */
   listElasticsearchVersions(callback?: (err: AWSError, data: ES.Types.ListElasticsearchVersionsResponse) => void): Request<ES.Types.ListElasticsearchVersionsResponse, AWSError>;
   /**
+   * Lists all packages associated with the Amazon ES domain.
+   */
+  listPackagesForDomain(params: ES.Types.ListPackagesForDomainRequest, callback?: (err: AWSError, data: ES.Types.ListPackagesForDomainResponse) => void): Request<ES.Types.ListPackagesForDomainResponse, AWSError>;
+  /**
+   * Lists all packages associated with the Amazon ES domain.
+   */
+  listPackagesForDomain(callback?: (err: AWSError, data: ES.Types.ListPackagesForDomainResponse) => void): Request<ES.Types.ListPackagesForDomainResponse, AWSError>;
+  /**
    * Returns all tags for the given Elasticsearch domain.
    */
   listTags(params: ES.Types.ListTagsRequest, callback?: (err: AWSError, data: ES.Types.ListTagsResponse) => void): Request<ES.Types.ListTagsResponse, AWSError>;
@@ -124,6 +260,14 @@ declare class ES extends Service {
    */
   purchaseReservedElasticsearchInstanceOffering(callback?: (err: AWSError, data: ES.Types.PurchaseReservedElasticsearchInstanceOfferingResponse) => void): Request<ES.Types.PurchaseReservedElasticsearchInstanceOfferingResponse, AWSError>;
   /**
+   * Allows the destination domain owner to reject an inbound cross-cluster search connection request.
+   */
+  rejectInboundCrossClusterSearchConnection(params: ES.Types.RejectInboundCrossClusterSearchConnectionRequest, callback?: (err: AWSError, data: ES.Types.RejectInboundCrossClusterSearchConnectionResponse) => void): Request<ES.Types.RejectInboundCrossClusterSearchConnectionResponse, AWSError>;
+  /**
+   * Allows the destination domain owner to reject an inbound cross-cluster search connection request.
+   */
+  rejectInboundCrossClusterSearchConnection(callback?: (err: AWSError, data: ES.Types.RejectInboundCrossClusterSearchConnectionResponse) => void): Request<ES.Types.RejectInboundCrossClusterSearchConnectionResponse, AWSError>;
+  /**
    * Removes the specified set of tags from the specified Elasticsearch domain.
    */
   removeTags(params: ES.Types.RemoveTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -132,6 +276,14 @@ declare class ES extends Service {
    */
   removeTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Schedules a service software update for an Amazon ES domain.
+   */
+  startElasticsearchServiceSoftwareUpdate(params: ES.Types.StartElasticsearchServiceSoftwareUpdateRequest, callback?: (err: AWSError, data: ES.Types.StartElasticsearchServiceSoftwareUpdateResponse) => void): Request<ES.Types.StartElasticsearchServiceSoftwareUpdateResponse, AWSError>;
+  /**
+   * Schedules a service software update for an Amazon ES domain.
+   */
+  startElasticsearchServiceSoftwareUpdate(callback?: (err: AWSError, data: ES.Types.StartElasticsearchServiceSoftwareUpdateResponse) => void): Request<ES.Types.StartElasticsearchServiceSoftwareUpdateResponse, AWSError>;
+  /**
    * Modifies the cluster configuration of the specified Elasticsearch domain, setting as setting the instance type and the number of instances. 
    */
   updateElasticsearchDomainConfig(params: ES.Types.UpdateElasticsearchDomainConfigRequest, callback?: (err: AWSError, data: ES.Types.UpdateElasticsearchDomainConfigResponse) => void): Request<ES.Types.UpdateElasticsearchDomainConfigResponse, AWSError>;
@@ -139,9 +291,29 @@ declare class ES extends Service {
    * Modifies the cluster configuration of the specified Elasticsearch domain, setting as setting the instance type and the number of instances. 
    */
   updateElasticsearchDomainConfig(callback?: (err: AWSError, data: ES.Types.UpdateElasticsearchDomainConfigResponse) => void): Request<ES.Types.UpdateElasticsearchDomainConfigResponse, AWSError>;
+  /**
+   * Allows you to either upgrade your domain or perform an Upgrade eligibility check to a compatible Elasticsearch version.
+   */
+  upgradeElasticsearchDomain(params: ES.Types.UpgradeElasticsearchDomainRequest, callback?: (err: AWSError, data: ES.Types.UpgradeElasticsearchDomainResponse) => void): Request<ES.Types.UpgradeElasticsearchDomainResponse, AWSError>;
+  /**
+   * Allows you to either upgrade your domain or perform an Upgrade eligibility check to a compatible Elasticsearch version.
+   */
+  upgradeElasticsearchDomain(callback?: (err: AWSError, data: ES.Types.UpgradeElasticsearchDomainResponse) => void): Request<ES.Types.UpgradeElasticsearchDomainResponse, AWSError>;
 }
 declare namespace ES {
   export type ARN = string;
+  export interface AcceptInboundCrossClusterSearchConnectionRequest {
+    /**
+     * The id of the inbound connection that you want to accept.
+     */
+    CrossClusterSearchConnectionId: CrossClusterSearchConnectionId;
+  }
+  export interface AcceptInboundCrossClusterSearchConnectionResponse {
+    /**
+     * Specifies the InboundCrossClusterSearchConnection of accepted inbound connection. 
+     */
+    CrossClusterSearchConnection?: InboundCrossClusterSearchConnection;
+  }
   export interface AccessPoliciesStatus {
     /**
      * The access policy configured for the Elasticsearch domain. Access policies may be resource-based, IP-based, or IAM-based. See  Configuring Access Policiesfor more information.
@@ -184,7 +356,69 @@ declare namespace ES {
      */
     Status: OptionStatus;
   }
+  export interface AdvancedSecurityOptions {
+    /**
+     * True if advanced security is enabled.
+     */
+    Enabled?: Boolean;
+    /**
+     * True if the internal user database is enabled.
+     */
+    InternalUserDatabaseEnabled?: Boolean;
+  }
+  export interface AdvancedSecurityOptionsInput {
+    /**
+     * True if advanced security is enabled.
+     */
+    Enabled?: Boolean;
+    /**
+     * True if the internal user database is enabled.
+     */
+    InternalUserDatabaseEnabled?: Boolean;
+    /**
+     * Credentials for the master user: username and password, ARN, or both.
+     */
+    MasterUserOptions?: MasterUserOptions;
+  }
+  export interface AdvancedSecurityOptionsStatus {
+    /**
+     *  Specifies advanced security options for the specified Elasticsearch domain.
+     */
+    Options: AdvancedSecurityOptions;
+    /**
+     *  Status of the advanced security options for the specified Elasticsearch domain.
+     */
+    Status: OptionStatus;
+  }
+  export interface AssociatePackageRequest {
+    /**
+     * Internal ID of the package that you want to associate with a domain. Use DescribePackages to find this value.
+     */
+    PackageID: PackageID;
+    /**
+     * Name of the domain that you want to associate the package with.
+     */
+    DomainName: DomainName;
+  }
+  export interface AssociatePackageResponse {
+    /**
+     * DomainPackageDetails
+     */
+    DomainPackageDetails?: DomainPackageDetails;
+  }
   export type Boolean = boolean;
+  export interface CancelElasticsearchServiceSoftwareUpdateRequest {
+    /**
+     * The name of the domain that you want to stop the latest service software update on.
+     */
+    DomainName: DomainName;
+  }
+  export interface CancelElasticsearchServiceSoftwareUpdateResponse {
+    /**
+     * The current status of the Elasticsearch service software update.
+     */
+    ServiceSoftwareOptions?: ServiceSoftwareOptions;
+  }
   export type CloudWatchLogsLogGroupArn = string;
   export interface CognitoOptions {
     /**
@@ -214,9 +448,18 @@ declare namespace ES {
      */
     Status: OptionStatus;
   }
+  export type CompatibleElasticsearchVersionsList = CompatibleVersionsMap[];
+  export interface CompatibleVersionsMap {
+    /**
+     * The current version of Elasticsearch on which a domain is.
+     */
+    SourceVersion?: ElasticsearchVersionString;
+    TargetVersions?: ElasticsearchVersionList;
+  }
+  export type ConnectionAlias = string;
   export interface CreateElasticsearchDomainRequest {
     /**
-     * The name of the Elasticsearch domain that you are creating. Domain names are unique across the domains owned by an account within an AWS region. Domain names must start with a letter or number and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).
+     * The name of the Elasticsearch domain that you are creating. Domain names are unique across the domains owned by an account within an AWS region. Domain names must start with a lowercase letter and can contain the following characters: a-z (lowercase), 0-9, and - (hyphen).
      */
     DomainName: DomainName;
     /**
@@ -252,6 +495,10 @@ declare namespace ES {
      */
     EncryptionAtRestOptions?: EncryptionAtRestOptions;
     /**
+     * Specifies the NodeToNodeEncryptionOptions.
+     */
+    NodeToNodeEncryptionOptions?: NodeToNodeEncryptionOptions;
+    /**
      *  Option to allow references to indices in an HTTP request body. Must be false when configuring access to individual sub-resources. By default, the value is true. See Configuration Advanced Options for more information.
      */
     AdvancedOptions?: AdvancedOptions;
@@ -259,6 +506,14 @@ declare namespace ES {
      * Map of LogType and LogPublishingOption, each containing options to publish a given type of Elasticsearch log.
      */
     LogPublishingOptions?: LogPublishingOptions;
+    /**
+     * Options to specify configuration that will be applied to the domain endpoint.
+     */
+    DomainEndpointOptions?: DomainEndpointOptions;
+    /**
+     * Specifies advanced security options.
+     */
+    AdvancedSecurityOptions?: AdvancedSecurityOptionsInput;
   }
   export interface CreateElasticsearchDomainResponse {
     /**
@@ -266,6 +521,69 @@ declare namespace ES {
      */
     DomainStatus?: ElasticsearchDomainStatus;
   }
+  export interface CreateOutboundCrossClusterSearchConnectionRequest {
+    /**
+     * Specifies the DomainInformation for the source Elasticsearch domain.
+     */
+    SourceDomainInfo: DomainInformation;
+    /**
+     * Specifies the DomainInformation for the destination Elasticsearch domain.
+     */
+    DestinationDomainInfo: DomainInformation;
+    /**
+     * Specifies the connection alias that will be used by the customer for this connection.
+     */
+    ConnectionAlias: ConnectionAlias;
+  }
+  export interface CreateOutboundCrossClusterSearchConnectionResponse {
+    /**
+     * Specifies the DomainInformation for the source Elasticsearch domain.
+     */
+    SourceDomainInfo?: DomainInformation;
+    /**
+     * Specifies the DomainInformation for the destination Elasticsearch domain.
+     */
+    DestinationDomainInfo?: DomainInformation;
+    /**
+     * Specifies the connection alias provided during the create connection request.
+     */
+    ConnectionAlias?: ConnectionAlias;
+    /**
+     * Specifies the OutboundCrossClusterSearchConnectionStatus for the newly created connection.
+     */
+    ConnectionStatus?: OutboundCrossClusterSearchConnectionStatus;
+    /**
+     * Unique id for the created outbound connection, which is used for subsequent operations on connection.
+     */
+    CrossClusterSearchConnectionId?: CrossClusterSearchConnectionId;
+  }
+  export interface CreatePackageRequest {
+    /**
+     * Unique identifier for the package.
+     */
+    PackageName: PackageName;
+    /**
+     * Type of package. Currently supports only TXT-DICTIONARY.
+     */
+    PackageType: PackageType;
+    /**
+     * Description of the package.
+     */
+    PackageDescription?: PackageDescription;
+    /**
+     * The customer S3 location PackageSource for importing the package.
+     */
+    PackageSource: PackageSource;
+  }
+  export interface CreatePackageResponse {
+    /**
+     * Information about the package PackageDetails.
+     */
+    PackageDetails?: PackageDetails;
+  }
+  export type CreatedAt = Date;
+  export type CrossClusterSearchConnectionId = string;
+  export type CrossClusterSearchConnectionStatusMessage = string;
   export interface DeleteElasticsearchDomainRequest {
     /**
      * The name of the Elasticsearch domain that you want to permanently delete.
@@ -278,6 +596,44 @@ declare namespace ES {
      */
     DomainStatus?: ElasticsearchDomainStatus;
   }
+  export interface DeleteInboundCrossClusterSearchConnectionRequest {
+    /**
+     * The id of the inbound connection that you want to permanently delete.
+     */
+    CrossClusterSearchConnectionId: CrossClusterSearchConnectionId;
+  }
+  export interface DeleteInboundCrossClusterSearchConnectionResponse {
+    /**
+     * Specifies the InboundCrossClusterSearchConnection of deleted inbound connection. 
+     */
+    CrossClusterSearchConnection?: InboundCrossClusterSearchConnection;
+  }
+  export interface DeleteOutboundCrossClusterSearchConnectionRequest {
+    /**
+     * The id of the outbound connection that you want to permanently delete.
+     */
+    CrossClusterSearchConnectionId: CrossClusterSearchConnectionId;
+  }
+  export interface DeleteOutboundCrossClusterSearchConnectionResponse {
+    /**
+     * Specifies the OutboundCrossClusterSearchConnection of deleted outbound connection. 
+     */
+    CrossClusterSearchConnection?: OutboundCrossClusterSearchConnection;
+  }
+  export interface DeletePackageRequest {
+    /**
+     * Internal ID of the package that you want to delete. Use DescribePackages to find this value.
+     */
+    PackageID: PackageID;
+  }
+  export interface DeletePackageResponse {
+    /**
+     * PackageDetails
+     */
+    PackageDetails?: PackageDetails;
+  }
+  export type DeploymentCloseDateTimeStamp = Date;
+  export type DeploymentStatus = "PENDING_UPDATE"|"IN_PROGRESS"|"COMPLETED"|"NOT_ELIGIBLE"|"ELIGIBLE"|string;
   export interface DescribeElasticsearchDomainConfigRequest {
     /**
      * The Elasticsearch domain that you want to get information about.
@@ -331,6 +687,89 @@ declare namespace ES {
   export interface DescribeElasticsearchInstanceTypeLimitsResponse {
     LimitsByRole?: LimitsByRole;
   }
+  export interface DescribeInboundCrossClusterSearchConnectionsRequest {
+    /**
+     *  A list of filters used to match properties for inbound cross-cluster search connection. Available Filter names for this operation are:  cross-cluster-search-connection-id source-domain-info.domain-name source-domain-info.owner-id source-domain-info.region destination-domain-info.domain-name  
+     */
+    Filters?: FilterList;
+    /**
+     * Set this value to limit the number of results returned. If not specified, defaults to 100.
+     */
+    MaxResults?: MaxResults;
+    /**
+     *  NextToken is sent in case the earlier API call results contain the NextToken. It is used for pagination.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeInboundCrossClusterSearchConnectionsResponse {
+    /**
+     * Consists of list of InboundCrossClusterSearchConnection matching the specified filter criteria.
+     */
+    CrossClusterSearchConnections?: InboundCrossClusterSearchConnections;
+    /**
+     * If more results are available and NextToken is present, make the next request to the same API with the received NextToken to paginate the remaining results. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeOutboundCrossClusterSearchConnectionsRequest {
+    /**
+     *  A list of filters used to match properties for outbound cross-cluster search connection. Available Filter names for this operation are:  cross-cluster-search-connection-id destination-domain-info.domain-name destination-domain-info.owner-id destination-domain-info.region source-domain-info.domain-name  
+     */
+    Filters?: FilterList;
+    /**
+     * Set this value to limit the number of results returned. If not specified, defaults to 100.
+     */
+    MaxResults?: MaxResults;
+    /**
+     *  NextToken is sent in case the earlier API call results contain the NextToken. It is used for pagination.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeOutboundCrossClusterSearchConnectionsResponse {
+    /**
+     * Consists of list of OutboundCrossClusterSearchConnection matching the specified filter criteria.
+     */
+    CrossClusterSearchConnections?: OutboundCrossClusterSearchConnections;
+    /**
+     * If more results are available and NextToken is present, make the next request to the same API with the received NextToken to paginate the remaining results. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribePackagesFilter {
+    /**
+     * Any field from PackageDetails.
+     */
+    Name?: DescribePackagesFilterName;
+    /**
+     * A list of values for the specified field.
+     */
+    Value?: DescribePackagesFilterValues;
+  }
+  export type DescribePackagesFilterList = DescribePackagesFilter[];
+  export type DescribePackagesFilterName = "PackageID"|"PackageName"|"PackageStatus"|string;
+  export type DescribePackagesFilterValue = string;
+  export type DescribePackagesFilterValues = DescribePackagesFilterValue[];
+  export interface DescribePackagesRequest {
+    /**
+     * Only returns packages that match the DescribePackagesFilterList values.
+     */
+    Filters?: DescribePackagesFilterList;
+    /**
+     * Limits results to a maximum number of packages.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribePackagesResponse {
+    /**
+     * List of PackageDetails objects.
+     */
+    PackageDetailsList?: PackageDetailsList;
+    NextToken?: String;
+  }
   export interface DescribeReservedElasticsearchInstanceOfferingsRequest {
     /**
      * The offering identifier filter value. Use this parameter to show only the available offering that matches the specified reservation identifier.
@@ -379,6 +818,42 @@ declare namespace ES {
      */
     ReservedElasticsearchInstances?: ReservedElasticsearchInstanceList;
   }
+  export interface DissociatePackageRequest {
+    /**
+     * Internal ID of the package that you want to associate with a domain. Use DescribePackages to find this value.
+     */
+    PackageID: PackageID;
+    /**
+     * Name of the domain that you want to associate the package with.
+     */
+    DomainName: DomainName;
+  }
+  export interface DissociatePackageResponse {
+    /**
+     * DomainPackageDetails
+     */
+    DomainPackageDetails?: DomainPackageDetails;
+  }
+  export interface DomainEndpointOptions {
+    /**
+     * Specify if only HTTPS endpoint should be enabled for the Elasticsearch domain.
+     */
+    EnforceHTTPS?: Boolean;
+    /**
+     * Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain.  It can be one of the following values:  Policy-Min-TLS-1-0-2019-07:  TLS security policy which supports TLSv1.0 and higher. Policy-Min-TLS-1-2-2019-07:  TLS security policy which supports only TLSv1.2  
+     */
+    TLSSecurityPolicy?: TLSSecurityPolicy;
+  }
+  export interface DomainEndpointOptionsStatus {
+    /**
+     * Options to configure endpoint for the Elasticsearch domain.
+     */
+    Options: DomainEndpointOptions;
+    /**
+     * The status of the endpoint options for the Elasticsearch domain. See OptionStatus for the status information that's included. 
+     */
+    Status: OptionStatus;
+  }
   export type DomainId = string;
   export interface DomainInfo {
     /**
@@ -387,8 +862,49 @@ declare namespace ES {
     DomainName?: DomainName;
   }
   export type DomainInfoList = DomainInfo[];
+  export interface DomainInformation {
+    OwnerId?: OwnerId;
+    DomainName: DomainName;
+    Region?: Region;
+  }
   export type DomainName = string;
   export type DomainNameList = DomainName[];
+  export interface DomainPackageDetails {
+    /**
+     * Internal ID of the package.
+     */
+    PackageID?: PackageID;
+    /**
+     * User specified name of the package.
+     */
+    PackageName?: PackageName;
+    /**
+     * Currently supports only TXT-DICTIONARY.
+     */
+    PackageType?: PackageType;
+    /**
+     * Timestamp of the most-recent update to the association status.
+     */
+    LastUpdated?: LastUpdated;
+    /**
+     * Name of the domain you've associated a package with.
+     */
+    DomainName?: DomainName;
+    /**
+     * State of the association. Values are ASSOCIATING/ASSOCIATION_FAILED/ACTIVE/DISSOCIATING/DISSOCIATION_FAILED.
+     */
+    DomainPackageStatus?: DomainPackageStatus;
+    /**
+     * The relative path on Amazon ES nodes, which can be used as synonym_path when the package is synonym file.
+     */
+    ReferencePath?: ReferencePath;
+    /**
+     * Additional information if the package is in an error state. Null otherwise.
+     */
+    ErrorDetails?: ErrorDetails;
+  }
+  export type DomainPackageDetailsList = DomainPackageDetails[];
+  export type DomainPackageStatus = "ASSOCIATING"|"ASSOCIATION_FAILED"|"ACTIVE"|"DISSOCIATING"|"DISSOCIATION_FAILED"|string;
   export type Double = number;
   export interface EBSOptions {
     /**
@@ -418,10 +934,11 @@ declare namespace ES {
      */
     Status: OptionStatus;
   }
-  export type ESPartitionInstanceType = "m3.medium.elasticsearch"|"m3.large.elasticsearch"|"m3.xlarge.elasticsearch"|"m3.2xlarge.elasticsearch"|"m4.large.elasticsearch"|"m4.xlarge.elasticsearch"|"m4.2xlarge.elasticsearch"|"m4.4xlarge.elasticsearch"|"m4.10xlarge.elasticsearch"|"t2.micro.elasticsearch"|"t2.small.elasticsearch"|"t2.medium.elasticsearch"|"r3.large.elasticsearch"|"r3.xlarge.elasticsearch"|"r3.2xlarge.elasticsearch"|"r3.4xlarge.elasticsearch"|"r3.8xlarge.elasticsearch"|"i2.xlarge.elasticsearch"|"i2.2xlarge.elasticsearch"|"d2.xlarge.elasticsearch"|"d2.2xlarge.elasticsearch"|"d2.4xlarge.elasticsearch"|"d2.8xlarge.elasticsearch"|"c4.large.elasticsearch"|"c4.xlarge.elasticsearch"|"c4.2xlarge.elasticsearch"|"c4.4xlarge.elasticsearch"|"c4.8xlarge.elasticsearch"|"r4.large.elasticsearch"|"r4.xlarge.elasticsearch"|"r4.2xlarge.elasticsearch"|"r4.4xlarge.elasticsearch"|"r4.8xlarge.elasticsearch"|"r4.16xlarge.elasticsearch"|"i3.large.elasticsearch"|"i3.xlarge.elasticsearch"|"i3.2xlarge.elasticsearch"|"i3.4xlarge.elasticsearch"|"i3.8xlarge.elasticsearch"|"i3.16xlarge.elasticsearch"|string;
+  export type ESPartitionInstanceType = "m3.medium.elasticsearch"|"m3.large.elasticsearch"|"m3.xlarge.elasticsearch"|"m3.2xlarge.elasticsearch"|"m4.large.elasticsearch"|"m4.xlarge.elasticsearch"|"m4.2xlarge.elasticsearch"|"m4.4xlarge.elasticsearch"|"m4.10xlarge.elasticsearch"|"m5.large.elasticsearch"|"m5.xlarge.elasticsearch"|"m5.2xlarge.elasticsearch"|"m5.4xlarge.elasticsearch"|"m5.12xlarge.elasticsearch"|"r5.large.elasticsearch"|"r5.xlarge.elasticsearch"|"r5.2xlarge.elasticsearch"|"r5.4xlarge.elasticsearch"|"r5.12xlarge.elasticsearch"|"c5.large.elasticsearch"|"c5.xlarge.elasticsearch"|"c5.2xlarge.elasticsearch"|"c5.4xlarge.elasticsearch"|"c5.9xlarge.elasticsearch"|"c5.18xlarge.elasticsearch"|"ultrawarm1.medium.elasticsearch"|"ultrawarm1.large.elasticsearch"|"t2.micro.elasticsearch"|"t2.small.elasticsearch"|"t2.medium.elasticsearch"|"r3.large.elasticsearch"|"r3.xlarge.elasticsearch"|"r3.2xlarge.elasticsearch"|"r3.4xlarge.elasticsearch"|"r3.8xlarge.elasticsearch"|"i2.xlarge.elasticsearch"|"i2.2xlarge.elasticsearch"|"d2.xlarge.elasticsearch"|"d2.2xlarge.elasticsearch"|"d2.4xlarge.elasticsearch"|"d2.8xlarge.elasticsearch"|"c4.large.elasticsearch"|"c4.xlarge.elasticsearch"|"c4.2xlarge.elasticsearch"|"c4.4xlarge.elasticsearch"|"c4.8xlarge.elasticsearch"|"r4.large.elasticsearch"|"r4.xlarge.elasticsearch"|"r4.2xlarge.elasticsearch"|"r4.4xlarge.elasticsearch"|"r4.8xlarge.elasticsearch"|"r4.16xlarge.elasticsearch"|"i3.large.elasticsearch"|"i3.xlarge.elasticsearch"|"i3.2xlarge.elasticsearch"|"i3.4xlarge.elasticsearch"|"i3.8xlarge.elasticsearch"|"i3.16xlarge.elasticsearch"|string;
+  export type ESWarmPartitionInstanceType = "ultrawarm1.medium.elasticsearch"|"ultrawarm1.large.elasticsearch"|string;
   export interface ElasticsearchClusterConfig {
     /**
-     * The instance type for an Elasticsearch cluster.
+     * The instance type for an Elasticsearch cluster. UltraWarm instance types are not supported for data instances.
      */
     InstanceType?: ESPartitionInstanceType;
     /**
@@ -437,6 +954,10 @@ declare namespace ES {
      */
     ZoneAwarenessEnabled?: Boolean;
     /**
+     * Specifies the zone awareness configuration for a domain when zone awareness is enabled.
+     */
+    ZoneAwarenessConfig?: ZoneAwarenessConfig;
+    /**
      * The instance type for a dedicated master node.
      */
     DedicatedMasterType?: ESPartitionInstanceType;
@@ -444,6 +965,18 @@ declare namespace ES {
      * Total number of dedicated master nodes, active and on standby, for the cluster.
      */
     DedicatedMasterCount?: IntegerClass;
+    /**
+     * True to enable warm storage.
+     */
+    WarmEnabled?: Boolean;
+    /**
+     * The instance type for the Elasticsearch cluster's warm nodes.
+     */
+    WarmType?: ESWarmPartitionInstanceType;
+    /**
+     * The number of warm nodes in the cluster.
+     */
+    WarmCount?: IntegerClass;
   }
   export interface ElasticsearchClusterConfigStatus {
     /**
@@ -489,6 +1022,10 @@ declare namespace ES {
      */
     EncryptionAtRestOptions?: EncryptionAtRestOptionsStatus;
     /**
+     * Specifies the NodeToNodeEncryptionOptions for the Elasticsearch domain.
+     */
+    NodeToNodeEncryptionOptions?: NodeToNodeEncryptionOptionsStatus;
+    /**
      * Specifies the AdvancedOptions for the domain. See Configuring Advanced Options for more information.
      */
     AdvancedOptions?: AdvancedOptionsStatus;
@@ -496,6 +1033,14 @@ declare namespace ES {
      * Log publishing options for the given domain.
      */
     LogPublishingOptions?: LogPublishingOptionsStatus;
+    /**
+     * Specifies the DomainEndpointOptions for the Elasticsearch domain.
+     */
+    DomainEndpointOptions?: DomainEndpointOptionsStatus;
+    /**
+     * Specifies AdvancedSecurityOptions for the domain. 
+     */
+    AdvancedSecurityOptions?: AdvancedSecurityOptionsStatus;
   }
   export interface ElasticsearchDomainStatus {
     /**
@@ -530,6 +1075,10 @@ declare namespace ES {
      * The status of the Elasticsearch domain configuration. True if Amazon Elasticsearch Service is processing configuration changes. False if the configuration is active.
      */
     Processing?: Boolean;
+    /**
+     * The status of an Elasticsearch domain version upgrade. True if Amazon Elasticsearch Service is undergoing a version upgrade. False if the configuration is active.
+     */
+    UpgradeProcessing?: Boolean;
     ElasticsearchVersion?: ElasticsearchVersionString;
     /**
      * The type and number of instances in the domain cluster.
@@ -560,6 +1109,10 @@ declare namespace ES {
      */
     EncryptionAtRestOptions?: EncryptionAtRestOptions;
     /**
+     * Specifies the status of the NodeToNodeEncryptionOptions.
+     */
+    NodeToNodeEncryptionOptions?: NodeToNodeEncryptionOptions;
+    /**
      * Specifies the status of the AdvancedOptions
      */
     AdvancedOptions?: AdvancedOptions;
@@ -567,6 +1120,18 @@ declare namespace ES {
      * Log publishing options for the given domain.
      */
     LogPublishingOptions?: LogPublishingOptions;
+    /**
+     * The current status of the Elasticsearch domain's service software.
+     */
+    ServiceSoftwareOptions?: ServiceSoftwareOptions;
+    /**
+     * The current status of the Elasticsearch domain's endpoint options.
+     */
+    DomainEndpointOptions?: DomainEndpointOptions;
+    /**
+     * The current status of the Elasticsearch domain's advanced security options.
+     */
+    AdvancedSecurityOptions?: AdvancedSecurityOptions;
   }
   export type ElasticsearchDomainStatusList = ElasticsearchDomainStatus[];
   export type ElasticsearchInstanceTypeList = ESPartitionInstanceType[];
@@ -603,8 +1168,96 @@ declare namespace ES {
     Status: OptionStatus;
   }
   export type EndpointsMap = {[key: string]: ServiceUrl};
+  export interface ErrorDetails {
+    ErrorType?: ErrorType;
+    ErrorMessage?: ErrorMessage;
+  }
+  export type ErrorMessage = string;
+  export type ErrorType = string;
+  export interface Filter {
+    /**
+     *  Specifies the name of the filter. 
+     */
+    Name?: NonEmptyString;
+    /**
+     *  Contains one or more values for the filter. 
+     */
+    Values?: ValueStringList;
+  }
+  export type FilterList = Filter[];
   export type GUID = string;
+  export interface GetCompatibleElasticsearchVersionsRequest {
+    DomainName?: DomainName;
+  }
+  export interface GetCompatibleElasticsearchVersionsResponse {
+    /**
+     *  A map of compatible Elasticsearch versions returned as part of the  GetCompatibleElasticsearchVersions  operation. 
+     */
+    CompatibleElasticsearchVersions?: CompatibleElasticsearchVersionsList;
+  }
+  export interface GetUpgradeHistoryRequest {
+    DomainName: DomainName;
+    MaxResults?: MaxResults;
+    NextToken?: NextToken;
+  }
+  export interface GetUpgradeHistoryResponse {
+    /**
+     *  A list of  UpgradeHistory  objects corresponding to each Upgrade or Upgrade Eligibility Check performed on a domain returned as part of  GetUpgradeHistoryResponse  object. 
+     */
+    UpgradeHistories?: UpgradeHistoryList;
+    /**
+     * Pagination token that needs to be supplied to the next call to get the next page of results
+     */
+    NextToken?: String;
+  }
+  export interface GetUpgradeStatusRequest {
+    DomainName: DomainName;
+  }
+  export interface GetUpgradeStatusResponse {
+    /**
+     *  Represents one of 3 steps that an Upgrade or Upgrade Eligibility Check does through:  PreUpgradeCheck Snapshot Upgrade  
+     */
+    UpgradeStep?: UpgradeStep;
+    /**
+     *  One of 4 statuses that a step can go through returned as part of the  GetUpgradeStatusResponse  object. The status can take one of the following values:  In Progress Succeeded Succeeded with Issues Failed  
+     */
+    StepStatus?: UpgradeStatus;
+    /**
+     * A string that describes the update briefly
+     */
+    UpgradeName?: UpgradeName;
+  }
   export type IdentityPoolId = string;
+  export interface InboundCrossClusterSearchConnection {
+    /**
+     * Specifies the DomainInformation for the source Elasticsearch domain.
+     */
+    SourceDomainInfo?: DomainInformation;
+    /**
+     * Specifies the DomainInformation for the destination Elasticsearch domain.
+     */
+    DestinationDomainInfo?: DomainInformation;
+    /**
+     * Specifies the connection id for the inbound cross-cluster search connection.
+     */
+    CrossClusterSearchConnectionId?: CrossClusterSearchConnectionId;
+    /**
+     * Specifies the InboundCrossClusterSearchConnectionStatus for the outbound connection.
+     */
+    ConnectionStatus?: InboundCrossClusterSearchConnectionStatus;
+  }
+  export interface InboundCrossClusterSearchConnectionStatus {
+    /**
+     * The state code for inbound connection. This can be one of the following:  PENDING_ACCEPTANCE: Inbound connection is not yet accepted by destination domain owner. APPROVED: Inbound connection is pending acceptance by destination domain owner. REJECTING: Inbound connection rejection is in process. REJECTED: Inbound connection is rejected. DELETING: Inbound connection deletion is in progress. DELETED: Inbound connection is deleted and cannot be used further. 
+     */
+    StatusCode?: InboundCrossClusterSearchConnectionStatusCode;
+    /**
+     * Specifies verbose information for the inbound connection status.
+     */
+    Message?: CrossClusterSearchConnectionStatusMessage;
+  }
+  export type InboundCrossClusterSearchConnectionStatusCode = "PENDING_ACCEPTANCE"|"APPROVED"|"REJECTING"|"REJECTED"|"DELETING"|"DELETED"|string;
+  export type InboundCrossClusterSearchConnections = InboundCrossClusterSearchConnection[];
   export type InstanceCount = number;
   export interface InstanceCountLimits {
     MinimumInstanceCount?: MinimumInstanceCount;
@@ -616,7 +1269,10 @@ declare namespace ES {
   export type InstanceRole = string;
   export type Integer = number;
   export type IntegerClass = number;
+  export type Issue = string;
+  export type Issues = Issue[];
   export type KmsKeyId = string;
+  export type LastUpdated = Date;
   export type LimitName = string;
   export type LimitValue = string;
   export type LimitValueList = LimitValue[];
@@ -637,6 +1293,27 @@ declare namespace ES {
      * List of Elasticsearch domain names.
      */
     DomainNames?: DomainInfoList;
+  }
+  export interface ListDomainsForPackageRequest {
+    /**
+     * The package for which to list domains.
+     */
+    PackageID: PackageID;
+    /**
+     * Limits results to a maximum number of domains.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListDomainsForPackageResponse {
+    /**
+     * List of DomainPackageDetails objects.
+     */
+    DomainPackageDetailsList?: DomainPackageDetailsList;
+    NextToken?: String;
   }
   export interface ListElasticsearchInstanceTypesRequest {
     /**
@@ -677,6 +1354,30 @@ declare namespace ES {
     ElasticsearchVersions?: ElasticsearchVersionList;
     NextToken?: NextToken;
   }
+  export interface ListPackagesForDomainRequest {
+    /**
+     * The name of the domain for which you want to list associated packages.
+     */
+    DomainName: DomainName;
+    /**
+     * Limits results to a maximum number of packages.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListPackagesForDomainResponse {
+    /**
+     * List of DomainPackageDetails objects.
+     */
+    DomainPackageDetailsList?: DomainPackageDetailsList;
+    /**
+     * Pagination token that needs to be supplied to the next call to get the next page of results.
+     */
+    NextToken?: String;
+  }
   export interface ListTagsRequest {
     /**
      *  Specify the ARN for the Elasticsearch domain to which the tags are attached that you want to view.
@@ -708,10 +1409,41 @@ declare namespace ES {
     Status?: OptionStatus;
   }
   export type LogType = "INDEX_SLOW_LOGS"|"SEARCH_SLOW_LOGS"|"ES_APPLICATION_LOGS"|string;
+  export interface MasterUserOptions {
+    /**
+     * ARN for the master user (if IAM is enabled).
+     */
+    MasterUserARN?: ARN;
+    /**
+     * The master user's username, which is stored in the Amazon Elasticsearch Service domain's internal database.
+     */
+    MasterUserName?: Username;
+    /**
+     * The master user's password, which is stored in the Amazon Elasticsearch Service domain's internal database.
+     */
+    MasterUserPassword?: Password;
+  }
   export type MaxResults = number;
   export type MaximumInstanceCount = number;
   export type MinimumInstanceCount = number;
   export type NextToken = string;
+  export interface NodeToNodeEncryptionOptions {
+    /**
+     * Specify true to enable node-to-node encryption.
+     */
+    Enabled?: Boolean;
+  }
+  export interface NodeToNodeEncryptionOptionsStatus {
+    /**
+     * Specifies the node-to-node encryption options for the specified Elasticsearch domain.
+     */
+    Options: NodeToNodeEncryptionOptions;
+    /**
+     * Specifies the status of the node-to-node encryption options for the specified Elasticsearch domain.
+     */
+    Status: OptionStatus;
+  }
+  export type NonEmptyString = string;
   export type OptionState = "RequiresIndexDocuments"|"Processing"|"Active"|string;
   export interface OptionStatus {
     /**
@@ -735,6 +1467,88 @@ declare namespace ES {
      */
     PendingDeletion?: Boolean;
   }
+  export interface OutboundCrossClusterSearchConnection {
+    /**
+     * Specifies the DomainInformation for the source Elasticsearch domain.
+     */
+    SourceDomainInfo?: DomainInformation;
+    /**
+     * Specifies the DomainInformation for the destination Elasticsearch domain.
+     */
+    DestinationDomainInfo?: DomainInformation;
+    /**
+     * Specifies the connection id for the outbound cross-cluster search connection.
+     */
+    CrossClusterSearchConnectionId?: CrossClusterSearchConnectionId;
+    /**
+     * Specifies the connection alias for the outbound cross-cluster search connection.
+     */
+    ConnectionAlias?: ConnectionAlias;
+    /**
+     * Specifies the OutboundCrossClusterSearchConnectionStatus for the outbound connection.
+     */
+    ConnectionStatus?: OutboundCrossClusterSearchConnectionStatus;
+  }
+  export interface OutboundCrossClusterSearchConnectionStatus {
+    /**
+     * The state code for outbound connection. This can be one of the following:  VALIDATING: The outbound connection request is being validated. VALIDATION_FAILED: Validation failed for the connection request. PENDING_ACCEPTANCE: Outbound connection request is validated and is not yet accepted by destination domain owner. PROVISIONING: Outbound connection request is in process. ACTIVE: Outbound connection is active and ready to use. REJECTED: Outbound connection request is rejected by destination domain owner. DELETING: Outbound connection deletion is in progress. DELETED: Outbound connection is deleted and cannot be used further. 
+     */
+    StatusCode?: OutboundCrossClusterSearchConnectionStatusCode;
+    /**
+     * Specifies verbose information for the outbound connection status.
+     */
+    Message?: CrossClusterSearchConnectionStatusMessage;
+  }
+  export type OutboundCrossClusterSearchConnectionStatusCode = "PENDING_ACCEPTANCE"|"VALIDATING"|"VALIDATION_FAILED"|"PROVISIONING"|"ACTIVE"|"REJECTED"|"DELETING"|"DELETED"|string;
+  export type OutboundCrossClusterSearchConnections = OutboundCrossClusterSearchConnection[];
+  export type OwnerId = string;
+  export type PackageDescription = string;
+  export interface PackageDetails {
+    /**
+     * Internal ID of the package.
+     */
+    PackageID?: PackageID;
+    /**
+     * User specified name of the package.
+     */
+    PackageName?: PackageName;
+    /**
+     * Currently supports only TXT-DICTIONARY.
+     */
+    PackageType?: PackageType;
+    /**
+     * User-specified description of the package.
+     */
+    PackageDescription?: PackageDescription;
+    /**
+     * Current state of the package. Values are COPYING/COPY_FAILED/AVAILABLE/DELETING/DELETE_FAILED
+     */
+    PackageStatus?: PackageStatus;
+    /**
+     * Timestamp which tells creation date of the package.
+     */
+    CreatedAt?: CreatedAt;
+    /**
+     * Additional information if the package is in an error state. Null otherwise.
+     */
+    ErrorDetails?: ErrorDetails;
+  }
+  export type PackageDetailsList = PackageDetails[];
+  export type PackageID = string;
+  export type PackageName = string;
+  export interface PackageSource {
+    /**
+     * Name of the bucket containing the package.
+     */
+    S3BucketName?: S3BucketName;
+    /**
+     * Key (file name) of the package.
+     */
+    S3Key?: S3Key;
+  }
+  export type PackageStatus = "COPYING"|"COPY_FAILED"|"VALIDATING"|"VALIDATION_FAILED"|"AVAILABLE"|"DELETING"|"DELETED"|"DELETE_FAILED"|string;
+  export type PackageType = "TXT-DICTIONARY"|string;
+  export type Password = string;
   export type PolicyDocument = string;
   export interface PurchaseReservedElasticsearchInstanceOfferingRequest {
     /**
@@ -771,6 +1585,20 @@ declare namespace ES {
     RecurringChargeFrequency?: String;
   }
   export type RecurringChargeList = RecurringCharge[];
+  export type ReferencePath = string;
+  export type Region = string;
+  export interface RejectInboundCrossClusterSearchConnectionRequest {
+    /**
+     * The id of the inbound connection that you want to reject.
+     */
+    CrossClusterSearchConnectionId: CrossClusterSearchConnectionId;
+  }
+  export interface RejectInboundCrossClusterSearchConnectionResponse {
+    /**
+     * Specifies the InboundCrossClusterSearchConnection of rejected inbound connection. 
+     */
+    CrossClusterSearchConnection?: InboundCrossClusterSearchConnection;
+  }
   export interface RemoveTagsRequest {
     /**
      * Specifies the ARN for the Elasticsearch domain from which you want to delete the specified tags.
@@ -874,6 +1702,42 @@ declare namespace ES {
   export type ReservedElasticsearchInstanceOfferingList = ReservedElasticsearchInstanceOffering[];
   export type ReservedElasticsearchInstancePaymentOption = "ALL_UPFRONT"|"PARTIAL_UPFRONT"|"NO_UPFRONT"|string;
   export type RoleArn = string;
+  export type S3BucketName = string;
+  export type S3Key = string;
+  export interface ServiceSoftwareOptions {
+    /**
+     * The current service software version that is present on the domain.
+     */
+    CurrentVersion?: String;
+    /**
+     * The new service software version if one is available.
+     */
+    NewVersion?: String;
+    /**
+     * True if you are able to update you service software version. False if you are not able to update your service software version. 
+     */
+    UpdateAvailable?: Boolean;
+    /**
+     * True if you are able to cancel your service software version update. False if you are not able to cancel your service software version. 
+     */
+    Cancellable?: Boolean;
+    /**
+     * The status of your service software update. This field can take the following values: ELIGIBLE, PENDING_UPDATE, IN_PROGRESS, COMPLETED, and NOT_ELIGIBLE.
+     */
+    UpdateStatus?: DeploymentStatus;
+    /**
+     * The description of the UpdateStatus.
+     */
+    Description?: String;
+    /**
+     * Timestamp, in Epoch time, until which you can manually request a service software update. After this date, we automatically update your service software.
+     */
+    AutomatedUpdateDate?: DeploymentCloseDateTimeStamp;
+    /**
+     * True if a service software is never automatically updated. False if a service software is automatically updated after AutomatedUpdateDate. 
+     */
+    OptionalDeployment?: Boolean;
+  }
   export type ServiceUrl = string;
   export interface SnapshotOptions {
     /**
@@ -891,6 +1755,19 @@ declare namespace ES {
      */
     Status: OptionStatus;
   }
+  export interface StartElasticsearchServiceSoftwareUpdateRequest {
+    /**
+     * The name of the domain that you want to update to the latest service software.
+     */
+    DomainName: DomainName;
+  }
+  export interface StartElasticsearchServiceSoftwareUpdateResponse {
+    /**
+     * The current status of the Elasticsearch service software update.
+     */
+    ServiceSoftwareOptions?: ServiceSoftwareOptions;
+  }
+  export type StartTimestamp = Date;
   export type StorageSubTypeName = string;
   export interface StorageType {
     StorageTypeName?: StorageTypeName;
@@ -915,6 +1792,7 @@ declare namespace ES {
   export type StorageTypeName = string;
   export type String = string;
   export type StringList = String[];
+  export type TLSSecurityPolicy = "Policy-Min-TLS-1-0-2019-07"|"Policy-Min-TLS-1-2-2019-07"|string;
   export interface Tag {
     /**
      * Specifies the TagKey, the name of the tag. Tag keys must be unique for the Elasticsearch domain to which they are attached.
@@ -966,6 +1844,14 @@ declare namespace ES {
      * Map of LogType and LogPublishingOption, each containing options to publish a given type of Elasticsearch log.
      */
     LogPublishingOptions?: LogPublishingOptions;
+    /**
+     * Options to specify configuration that will be applied to the domain endpoint.
+     */
+    DomainEndpointOptions?: DomainEndpointOptions;
+    /**
+     * Specifies advanced security options.
+     */
+    AdvancedSecurityOptions?: AdvancedSecurityOptionsInput;
   }
   export interface UpdateElasticsearchDomainConfigResponse {
     /**
@@ -974,7 +1860,71 @@ declare namespace ES {
     DomainConfig: ElasticsearchDomainConfig;
   }
   export type UpdateTimestamp = Date;
+  export interface UpgradeElasticsearchDomainRequest {
+    DomainName: DomainName;
+    /**
+     * The version of Elasticsearch that you intend to upgrade the domain to.
+     */
+    TargetVersion: ElasticsearchVersionString;
+    /**
+     *  This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed. This will not actually perform the Upgrade. 
+     */
+    PerformCheckOnly?: Boolean;
+  }
+  export interface UpgradeElasticsearchDomainResponse {
+    DomainName?: DomainName;
+    /**
+     * The version of Elasticsearch that you intend to upgrade the domain to.
+     */
+    TargetVersion?: ElasticsearchVersionString;
+    /**
+     *  This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed. This will not actually perform the Upgrade. 
+     */
+    PerformCheckOnly?: Boolean;
+  }
+  export interface UpgradeHistory {
+    /**
+     * A string that describes the update briefly
+     */
+    UpgradeName?: UpgradeName;
+    /**
+     * UTC Timestamp at which the Upgrade API call was made in "yyyy-MM-ddTHH:mm:ssZ" format.
+     */
+    StartTimestamp?: StartTimestamp;
+    /**
+     *  The overall status of the update. The status can take one of the following values:  In Progress Succeeded Succeeded with Issues Failed  
+     */
+    UpgradeStatus?: UpgradeStatus;
+    /**
+     *  A list of  UpgradeStepItem  s representing information about each step performed as pard of a specific Upgrade or Upgrade Eligibility Check. 
+     */
+    StepsList?: UpgradeStepsList;
+  }
+  export type UpgradeHistoryList = UpgradeHistory[];
+  export type UpgradeName = string;
+  export type UpgradeStatus = "IN_PROGRESS"|"SUCCEEDED"|"SUCCEEDED_WITH_ISSUES"|"FAILED"|string;
+  export type UpgradeStep = "PRE_UPGRADE_CHECK"|"SNAPSHOT"|"UPGRADE"|string;
+  export interface UpgradeStepItem {
+    /**
+     *  Represents one of 3 steps that an Upgrade or Upgrade Eligibility Check does through:  PreUpgradeCheck Snapshot Upgrade  
+     */
+    UpgradeStep?: UpgradeStep;
+    /**
+     *  The status of a particular step during an upgrade. The status can take one of the following values:  In Progress Succeeded Succeeded with Issues Failed  
+     */
+    UpgradeStepStatus?: UpgradeStatus;
+    /**
+     * A list of strings containing detailed information about the errors encountered in a particular step.
+     */
+    Issues?: Issues;
+    /**
+     * The Floating point value representing progress percentage of a particular step.
+     */
+    ProgressPercent?: Double;
+  }
+  export type UpgradeStepsList = UpgradeStepItem[];
   export type UserPoolId = string;
+  export type Username = string;
   export interface VPCDerivedInfo {
     /**
      * The VPC Id for the Elasticsearch domain. Exists only if the domain was created with VPCOptions.
@@ -1013,7 +1963,14 @@ declare namespace ES {
      */
     SecurityGroupIds?: StringList;
   }
+  export type ValueStringList = NonEmptyString[];
   export type VolumeType = "standard"|"gp2"|"io1"|string;
+  export interface ZoneAwarenessConfig {
+    /**
+     * An integer value to indicate the number of availability zones for a domain when zone awareness is enabled. This should be equal to number of subnets if VPC endpoints is enabled
+     */
+    AvailabilityZoneCount?: IntegerClass;
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

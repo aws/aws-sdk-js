@@ -1,0 +1,27 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Typings",
+        "description": "When implementing `Credentials` interface's `refresh()` method, the callback needs a defined `AWSError` as arg but it may not exist in case of successful refresh. Hence, modifed the method typing to include the fact that the callback can be called with no error on success as described in the docs."
+    },
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "CodeBuild adds support for tagging with report groups"
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "From this release onwards ProvisionByoipCidr publicly supports IPv6. Updated ProvisionByoipCidr API to support tags for public IPv4 and IPv6 pools. Added NetworkBorderGroup to the DescribePublicIpv4Pools response."
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "Deprecates unusable input members bound to Content-MD5 header. Updates example and documentation."
+    },
+    {
+        "type": "feature",
+        "category": "Synthetics",
+        "description": "AWS CloudWatch Synthetics now supports configuration of allocated memory for a canary."
+    }
+]

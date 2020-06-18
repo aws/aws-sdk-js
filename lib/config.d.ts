@@ -13,7 +13,7 @@ export class ConfigBase extends ConfigurationOptions{
     getCredentials(callback: (err: AWSError) => void): void;
     /**
      * Loads configuration data from a JSON file into this config object.
-     * Loading configuration willr eset all existing configuration on the object.
+     * Loading configuration will reset all existing configuration on the object.
      * This feature is not supported in the browser environment of the SDK.
      *
      * @param {string} path - the path relative to your process's current working directory to load configuration from.
@@ -143,10 +143,10 @@ export interface RetryDelayOptions {
      */
     base?: number
     /**
-     * A custom function that accepts a retry count and returns the amount of time to delay in milliseconds.
+     * A custom function that accepts a retry count and error and returns the amount of time to delay in milliseconds. If the result is a non-zero negative value, no further retry attempts will be made.
      * The base option will be ignored if this option is supplied.
      */
-    customBackoff?: (retryCount: number) => number
+    customBackoff?: (retryCount: number, err?: Error) => number
 }
 
 export interface APIVersions {
@@ -251,6 +251,18 @@ export abstract class ConfigurationOptions {
      */
     s3ForcePathStyle?: boolean
     /**
+     * When region is set to 'us-east-1', whether to send s3 request to global endpoints
+     * or 'us-east-1' regional endpoints. This config is only applicable to S3 client;
+     * Defaults to 'legacy'
+     */
+    s3UsEast1RegionalEndpoint?: "regional"|"legacy"
+    /**
+     * Whether to override the request region with the region inferred
+     * from requested resource's ARN. Only available for S3 buckets
+     * Defaults to `true`
+     */
+    s3UseArnRegion?: boolean
+    /**
      * Whether the signature to sign requests with (overriding the API configuration) is cached.
      */
     signatureCache?: boolean
@@ -276,4 +288,24 @@ export abstract class ConfigurationOptions {
      * by DynamoDB.
      */
     dynamoDbCrc32?: boolean;
+    /**
+     * Whether to enable endpoint discovery for operations that allow optionally using an endpoint returned by 
+     * the service.
+     */
+    endpointDiscoveryEnabled?: boolean;
+    /**
+     * The size of the global cache storing endpoints from endpoint
+     * discovery operations. Once endpoint cache is created, updating this setting
+     * cannot change existing cache size.
+     */
+    endpointCacheSize?: number;
+    /**
+     * Whether to marshal request parameters to the prefix of hostname.
+     */
+    hostPrefixEnabled?: boolean;
+    /**
+     * Whether to send sts request to global endpoints or
+     * regional endpoints. 
+     */
+    stsRegionalEndpoints?: "legacy"|"regional";
 }

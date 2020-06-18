@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "KMS",
+        "description": "The Verify operation now returns KMSInvalidSignatureException on invalid signatures. The Sign and Verify operations now return KMSInvalidStateException when a request is made against a CMK pending deletion."
+    },
+    {
+        "type": "feature",
+        "category": "Kafka",
+        "description": "AWS MSK has added support for Open Monitoring with Prometheus."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "Adds the SSM GetCalendarState API and ChangeCalendar SSM Document type. These features enable the forthcoming Systems Manager Change Calendar feature, which will allow you to schedule events during which actions should (or should not) be performed."
+    }
+]

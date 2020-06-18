@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "AppMesh",
+        "description": "App Mesh now supports sharing a Mesh with other AWS accounts. Customers can use AWS Resource Access Manager to share their Mesh with other accounts in their organization to connection applications within a single service mesh. See https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html for details."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release provides customers with a self-service option to enable Local Zones."
+    },
+    {
+        "type": "feature",
+        "category": "GuardDuty",
+        "description": "Amazon GuardDuty findings now include the OutpostArn if the finding is generated for an AWS Outposts EC2 host."
+    },
+    {
+        "type": "feature",
+        "category": "RoboMaker",
+        "description": "Added support for streaming a GUI from robot and simulation applications"
+    },
+    {
+        "type": "feature",
+        "category": "Signer",
+        "description": "This release enables signing image format override in PutSigningProfile requests, adding two more enum fields, JSONEmbedded and JSONDetached. This release also extends the length limit of SigningProfile name from 20 to 64."
+    }
+]

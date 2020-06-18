@@ -1,3 +1,6 @@
+ignore:
+  - "vendor/"
+
 codecov:
   notify:
     after_n_builds: 4

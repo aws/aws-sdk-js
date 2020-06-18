@@ -1,0 +1,17 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Core",
+        "description": "Fixes issue where connectTimeout timers would not be cleared if a request errored out. Only affects node.js."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "Compliance Severity feature release for State Manager. Users now have the ability to select compliance severity to their association in state manager console or CLI."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "SageMaker notebook instances can now have a volume size configured."
+    }
+]

@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "Adding support in SelectObjectContent for scanning a portion of an object specified by a scan range."
+    }
+]

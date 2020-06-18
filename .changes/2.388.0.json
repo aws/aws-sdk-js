@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "MediaConvert",
+        "description": "IMF decode from a Composition Playlist for IMF specializations App #2 and App #2e; up to 99 input clippings; caption channel selection for MXF; and updated rate control for CBR jobs. Added support for acceleration in preview"
+    },
+    {
+        "type": "feature",
+        "category": "StorageGateway",
+        "description": "JoinDomain API supports two more  parameters: organizational unit(OU) and domain controllers.  Two new APIs are introduced: DetachVolume and AttachVolume."
+    }
+]

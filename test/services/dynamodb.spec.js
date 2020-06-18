@@ -68,6 +68,26 @@ describe('AWS.DynamoDB', function() {
       })();
       return expect(actualDelays).to.eql(expectedDelays);
     });
+    it('can pass error through to user-defined custom backoff', function() {
+      var customBackoff = function(retryCount, err) {
+        if (err.code === 'NetworkingError') {
+          return -1;
+        } else {
+          return 100 * retryCount;
+        }
+      };
+      var service = ddb({
+        retryDelayOptions: {
+          customBackoff: customBackoff
+        }
+      });
+      var err = {
+        code: 'NetworkingError',
+        message: 'Invalid character',
+      };
+      var delays = service.retryDelays(1, err);
+      return expect(delays).to.eql(-1);
+    });
     return it('can accept a user-defined custom backoff', function() {
       var actualDelays, customBackoff, expectedDelays, i, service;
       customBackoff = function(retryCount) {
@@ -108,7 +128,7 @@ describe('AWS.DynamoDB', function() {
         err = null;
         helpers.mockHttpResponse(200, {
           'x-amz-crc32': '0'
-        }, "{\"TableNames\":[\"mock-table\"]}");
+        }, '{"TableNames":["mock-table"]}');
         request = dynamo.listTables();
         s = request.createReadStream();
         s.on('error', function(e) {
@@ -126,7 +146,7 @@ describe('AWS.DynamoDB', function() {
       var request;
       helpers.mockHttpResponse(200, {
         'x-amz-crc32': '1575962599'
-      }, "{\"TableNames\":[\"mock-table\"]}");
+      }, '{"TableNames":["mock-table"]}');
       request = dynamo.listTables();
       return request.send(function(err, data) {
         return expect(err).to.eql(null);
@@ -135,7 +155,7 @@ describe('AWS.DynamoDB', function() {
 
     it('does not verify response checksum when no [x-amz-crc32] header', function() {
       var request;
-      helpers.mockHttpResponse(200, {}, "{\"TableNames\":[\"mock-table\"]}");
+      helpers.mockHttpResponse(200, {}, '{"TableNames":["mock-table"]}');
       request = dynamo.listTables();
       return request.send(function(err, data) {
         return expect(err).to.eql(null);
@@ -146,7 +166,7 @@ describe('AWS.DynamoDB', function() {
       var request;
       helpers.mockHttpResponse(200, {
         'x-amz-crc32': '0'
-      }, "{\"TableNames\":[\"mock-table\"]}");
+      }, '{"TableNames":["mock-table"]}');
       request = dynamo.listTables();
       return request.send(function(err, data) {
         expect(err.code).to.eql('CRC32CheckFailed');
@@ -158,7 +178,7 @@ describe('AWS.DynamoDB', function() {
       var request;
       helpers.mockHttpResponse(200, {
         'x-amz-crc32': '0'
-      }, "{\"TableNames\":[\"mock-table\"]}");
+      }, '{"TableNames":["mock-table"]}');
       request = dynamo.listTables();
       return request.send(function(err, data) {
         return expect(this.retryCount).to.eql(10);

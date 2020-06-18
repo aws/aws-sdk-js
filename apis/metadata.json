@@ -53,7 +53,10 @@
       "2016-09-07*",
       "2016-09-29*",
       "2016-11-25*",
-      "2017-03-25*"
+      "2017-03-25*",
+      "2017-10-30*",
+      "2018-06-18*",
+      "2018-11-05*"
     ],
     "cors": true
   },
@@ -241,7 +244,8 @@
     "name": "Health"
   },
   "iam": {
-    "name": "IAM"
+    "name": "IAM",
+    "cors": true
   },
   "importexport": {
     "name": "ImportExport"
@@ -354,6 +358,11 @@
     "dualstackAvailable": true,
     "cors": true
   },
+  "s3control": {
+    "name": "S3Control",
+    "dualstackAvailable": true,
+    "xmlNoDefaultLists": true
+  },
   "servicecatalog": {
     "name": "ServiceCatalog",
     "cors": true
@@ -407,7 +416,8 @@
     "name": "SWF"
   },
   "xray": {
-    "name": "XRay"
+    "name": "XRay",
+    "cors": true
   },
   "waf": {
     "name": "WAF",
@@ -459,11 +469,13 @@
     "name": "Mobile"
   },
   "pricing": {
-    "name": "Pricing"
+    "name": "Pricing",
+    "cors": true
   },
   "costexplorer": {
     "prefix": "ce",
-    "name": "CostExplorer"
+    "name": "CostExplorer",
+    "cors": true
   },
   "mediaconvert": {
     "name": "MediaConvert"
@@ -479,7 +491,8 @@
   },
   "mediastoredata": {
     "prefix": "mediastore-data",
-    "name": "MediaStoreData"
+    "name": "MediaStoreData",
+    "cors": true
   },
   "appsync": {
     "name": "AppSync"
@@ -491,7 +504,8 @@
     "name": "MQ"
   },
   "comprehend": {
-    "name": "Comprehend"
+    "name": "Comprehend",
+    "cors": true
   },
   "iotjobsdataplane": {
     "prefix": "iot-jobs-data",
@@ -504,7 +518,8 @@
   },
   "kinesisvideomedia": {
     "prefix": "kinesis-video-media",
-    "name": "KinesisVideoMedia"
+    "name": "KinesisVideoMedia",
+    "cors": true
   },
   "kinesisvideo": {
     "name": "KinesisVideo",
@@ -523,7 +538,8 @@
   },
   "resourcegroups": {
     "prefix": "resource-groups",
-    "name": "ResourceGroups"
+    "name": "ResourceGroups",
+    "cors": true
   },
   "alexaforbusiness": {
     "name": "AlexaForBusiness"
@@ -550,7 +566,8 @@
     "name": "TranscribeService"
   },
   "connect": {
-    "name": "Connect"
+    "name": "Connect",
+    "cors": true
   },
   "acmpca": {
     "prefix": "acm-pca",
@@ -564,7 +581,8 @@
     "cors": true
   },
   "iotanalytics": {
-    "name": "IoTAnalytics"
+    "name": "IoTAnalytics",
+    "cors": true
   },
   "iot1clickdevicesservice": {
     "prefix": "iot1click-devices",
@@ -591,5 +609,273 @@
   },
   "dlm": {
     "name": "DLM"
+  },
+  "signer": {
+    "name": "Signer"
+  },
+  "chime": {
+    "name": "Chime"
+  },
+  "pinpointemail": {
+    "prefix": "pinpoint-email",
+    "name": "PinpointEmail"
+  },
+  "ram": {
+    "name": "RAM"
+  },
+  "route53resolver": {
+    "name": "Route53Resolver"
+  },
+  "pinpointsmsvoice": {
+    "prefix": "sms-voice",
+    "name": "PinpointSMSVoice"
+  },
+  "quicksight": {
+    "name": "QuickSight"
+  },
+  "rdsdataservice": {
+    "prefix": "rds-data",
+    "name": "RDSDataService"
+  },
+  "amplify": {
+    "name": "Amplify"
+  },
+  "datasync": {
+    "name": "DataSync"
+  },
+  "robomaker": {
+    "name": "RoboMaker"
+  },
+  "transfer": {
+    "name": "Transfer"
+  },
+  "globalaccelerator": {
+    "name": "GlobalAccelerator"
+  },
+  "comprehendmedical": {
+    "name": "ComprehendMedical",
+    "cors": true
+  },
+  "kinesisanalyticsv2": {
+    "name": "KinesisAnalyticsV2"
+  },
+  "mediaconnect": {
+    "name": "MediaConnect"
+  },
+  "fsx": {
+    "name": "FSx"
+  },
+  "securityhub": {
+    "name": "SecurityHub"
+  },
+  "appmesh": {
+    "name": "AppMesh",
+    "versions": [
+      "2018-10-01*"
+    ]
+  },
+  "licensemanager": {
+    "prefix": "license-manager",
+    "name": "LicenseManager"
+  },
+  "kafka": {
+    "name": "Kafka"
+  },
+  "apigatewaymanagementapi": {
+    "name": "ApiGatewayManagementApi"
+  },
+  "apigatewayv2": {
+    "name": "ApiGatewayV2"
+  },
+  "docdb": {
+    "name": "DocDB"
+  },
+  "backup": {
+    "name": "Backup"
+  },
+  "worklink": {
+    "name": "WorkLink"
+  },
+  "textract": {
+    "name": "Textract"
+  },
+  "managedblockchain": {
+    "name": "ManagedBlockchain"
+  },
+  "mediapackagevod": {
+    "prefix": "mediapackage-vod",
+    "name": "MediaPackageVod"
+  },
+  "groundstation": {
+    "name": "GroundStation"
+  },
+  "iotthingsgraph": {
+    "name": "IoTThingsGraph"
+  },
+  "iotevents": {
+    "name": "IoTEvents"
+  },
+  "ioteventsdata": {
+    "prefix": "iotevents-data",
+    "name": "IoTEventsData"
+  },
+  "personalize": {
+    "name": "Personalize",
+    "cors": true
+  },
+  "personalizeevents": {
+    "prefix": "personalize-events",
+    "name": "PersonalizeEvents",
+    "cors": true
+  },
+  "personalizeruntime": {
+    "prefix": "personalize-runtime",
+    "name": "PersonalizeRuntime",
+    "cors": true
+  },
+  "applicationinsights": {
+    "prefix": "application-insights",
+    "name": "ApplicationInsights"
+  },
+  "servicequotas": {
+    "prefix": "service-quotas",
+    "name": "ServiceQuotas"
+  },
+  "ec2instanceconnect": {
+    "prefix": "ec2-instance-connect",
+    "name": "EC2InstanceConnect"
+  },
+  "eventbridge": {
+    "name": "EventBridge"
+  },
+  "lakeformation": {
+    "name": "LakeFormation"
+  },
+  "forecastservice": {
+    "prefix": "forecast",
+    "name": "ForecastService",
+    "cors": true
+  },
+  "forecastqueryservice": {
+    "prefix": "forecastquery",
+    "name": "ForecastQueryService",
+    "cors": true
+  },
+  "qldb": {
+    "name": "QLDB"
+  },
+  "qldbsession": {
+    "prefix": "qldb-session",
+    "name": "QLDBSession"
+  },
+  "workmailmessageflow": {
+    "name": "WorkMailMessageFlow"
+  },
+  "codestarnotifications": {
+    "prefix": "codestar-notifications",
+    "name": "CodeStarNotifications"
+  },
+  "savingsplans": {
+    "name": "SavingsPlans"
+  },
+  "sso": {
+    "name": "SSO"
+  },
+  "ssooidc": {
+    "prefix": "sso-oidc",
+    "name": "SSOOIDC"
+  },
+  "marketplacecatalog": {
+    "prefix": "marketplace-catalog",
+    "name": "MarketplaceCatalog"
+  },
+  "dataexchange": {
+    "name": "DataExchange"
+  },
+  "sesv2": {
+    "name": "SESV2"
+  },
+  "migrationhubconfig": {
+    "prefix": "migrationhub-config",
+    "name": "MigrationHubConfig"
+  },
+  "connectparticipant": {
+    "name": "ConnectParticipant"
+  },
+  "appconfig": {
+    "name": "AppConfig"
+  },
+  "iotsecuretunneling": {
+    "name": "IoTSecureTunneling"
+  },
+  "wafv2": {
+    "name": "WAFV2"
+  },
+  "elasticinference": {
+    "prefix": "elastic-inference",
+    "name": "ElasticInference"
+  },
+  "imagebuilder": {
+    "name": "Imagebuilder"
+  },
+  "schemas": {
+    "name": "Schemas"
+  },
+  "accessanalyzer": {
+    "name": "AccessAnalyzer"
+  },
+  "codegurureviewer": {
+    "prefix": "codeguru-reviewer",
+    "name": "CodeGuruReviewer"
+  },
+  "codeguruprofiler": {
+    "name": "CodeGuruProfiler"
+  },
+  "computeoptimizer": {
+    "prefix": "compute-optimizer",
+    "name": "ComputeOptimizer"
+  },
+  "frauddetector": {
+    "name": "FraudDetector"
+  },
+  "kendra": {
+    "name": "Kendra"
+  },
+  "networkmanager": {
+    "name": "NetworkManager"
+  },
+  "outposts": {
+    "name": "Outposts"
+  },
+  "augmentedairuntime": {
+    "prefix": "sagemaker-a2i-runtime",
+    "name": "AugmentedAIRuntime"
+  },
+  "ebs": {
+    "name": "EBS"
+  },
+  "kinesisvideosignalingchannels": {
+    "prefix": "kinesis-video-signaling",
+    "name": "KinesisVideoSignalingChannels",
+    "cors": true
+  },
+  "detective": {
+    "name": "Detective"
+  },
+  "codestarconnections": {
+    "prefix": "codestar-connections",
+    "name": "CodeStarconnections"
+  },
+  "synthetics": {
+    "name": "Synthetics"
+  },
+  "iotsitewise": {
+    "name": "IoTSiteWise"
+  },
+  "macie2": {
+    "name": "Macie2"
+  },
+  "codeartifact": {
+    "name": "CodeArtifact"
   }
 }

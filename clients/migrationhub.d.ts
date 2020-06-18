@@ -20,11 +20,11 @@ declare class MigrationHub extends Service {
    */
   associateCreatedArtifact(callback?: (err: AWSError, data: MigrationHub.Types.AssociateCreatedArtifactResult) => void): Request<MigrationHub.Types.AssociateCreatedArtifactResult, AWSError>;
   /**
-   * Associates a discovered resource ID from Application Discovery Service (ADS) with a migration task.
+   * Associates a discovered resource ID from Application Discovery Service with a migration task.
    */
   associateDiscoveredResource(params: MigrationHub.Types.AssociateDiscoveredResourceRequest, callback?: (err: AWSError, data: MigrationHub.Types.AssociateDiscoveredResourceResult) => void): Request<MigrationHub.Types.AssociateDiscoveredResourceResult, AWSError>;
   /**
-   * Associates a discovered resource ID from Application Discovery Service (ADS) with a migration task.
+   * Associates a discovered resource ID from Application Discovery Service with a migration task.
    */
   associateDiscoveredResource(callback?: (err: AWSError, data: MigrationHub.Types.AssociateDiscoveredResourceResult) => void): Request<MigrationHub.Types.AssociateDiscoveredResourceResult, AWSError>;
   /**
@@ -36,11 +36,11 @@ declare class MigrationHub extends Service {
    */
   createProgressUpdateStream(callback?: (err: AWSError, data: MigrationHub.Types.CreateProgressUpdateStreamResult) => void): Request<MigrationHub.Types.CreateProgressUpdateStreamResult, AWSError>;
   /**
-   * Deletes a progress update stream, including all of its tasks, which was previously created as an AWS resource used for access control. This API has the following traits:   The only parameter needed for DeleteProgressUpdateStream is the stream name (same as a CreateProgressUpdateStream call).   The call will return, and a background process will asynchronously delete the stream and all of its resources (tasks, associated resources, resource attributes, created artifacts).   If the stream takes time to be deleted, it might still show up on a ListProgressUpdateStreams call.    CreateProgressUpdateStream, ImportMigrationTask, NotifyMigrationTaskState, and all Associate[*] APIs realted to the tasks belonging to the stream will throw "InvalidInputException" if the stream of the same name is in the process of being deleted.   Once the stream and all of its resources are deleted, CreateProgressUpdateStream for a stream of the same name will succeed, and that stream will be an entirely new logical resource (without any resources associated with the old stream).  
+   * Deletes a progress update stream, including all of its tasks, which was previously created as an AWS resource used for access control. This API has the following traits:   The only parameter needed for DeleteProgressUpdateStream is the stream name (same as a CreateProgressUpdateStream call).   The call will return, and a background process will asynchronously delete the stream and all of its resources (tasks, associated resources, resource attributes, created artifacts).   If the stream takes time to be deleted, it might still show up on a ListProgressUpdateStreams call.    CreateProgressUpdateStream, ImportMigrationTask, NotifyMigrationTaskState, and all Associate[*] APIs related to the tasks belonging to the stream will throw "InvalidInputException" if the stream of the same name is in the process of being deleted.   Once the stream and all of its resources are deleted, CreateProgressUpdateStream for a stream of the same name will succeed, and that stream will be an entirely new logical resource (without any resources associated with the old stream).  
    */
   deleteProgressUpdateStream(params: MigrationHub.Types.DeleteProgressUpdateStreamRequest, callback?: (err: AWSError, data: MigrationHub.Types.DeleteProgressUpdateStreamResult) => void): Request<MigrationHub.Types.DeleteProgressUpdateStreamResult, AWSError>;
   /**
-   * Deletes a progress update stream, including all of its tasks, which was previously created as an AWS resource used for access control. This API has the following traits:   The only parameter needed for DeleteProgressUpdateStream is the stream name (same as a CreateProgressUpdateStream call).   The call will return, and a background process will asynchronously delete the stream and all of its resources (tasks, associated resources, resource attributes, created artifacts).   If the stream takes time to be deleted, it might still show up on a ListProgressUpdateStreams call.    CreateProgressUpdateStream, ImportMigrationTask, NotifyMigrationTaskState, and all Associate[*] APIs realted to the tasks belonging to the stream will throw "InvalidInputException" if the stream of the same name is in the process of being deleted.   Once the stream and all of its resources are deleted, CreateProgressUpdateStream for a stream of the same name will succeed, and that stream will be an entirely new logical resource (without any resources associated with the old stream).  
+   * Deletes a progress update stream, including all of its tasks, which was previously created as an AWS resource used for access control. This API has the following traits:   The only parameter needed for DeleteProgressUpdateStream is the stream name (same as a CreateProgressUpdateStream call).   The call will return, and a background process will asynchronously delete the stream and all of its resources (tasks, associated resources, resource attributes, created artifacts).   If the stream takes time to be deleted, it might still show up on a ListProgressUpdateStreams call.    CreateProgressUpdateStream, ImportMigrationTask, NotifyMigrationTaskState, and all Associate[*] APIs related to the tasks belonging to the stream will throw "InvalidInputException" if the stream of the same name is in the process of being deleted.   Once the stream and all of its resources are deleted, CreateProgressUpdateStream for a stream of the same name will succeed, and that stream will be an entirely new logical resource (without any resources associated with the old stream).  
    */
   deleteProgressUpdateStream(callback?: (err: AWSError, data: MigrationHub.Types.DeleteProgressUpdateStreamResult) => void): Request<MigrationHub.Types.DeleteProgressUpdateStreamResult, AWSError>;
   /**
@@ -68,11 +68,11 @@ declare class MigrationHub extends Service {
    */
   disassociateCreatedArtifact(callback?: (err: AWSError, data: MigrationHub.Types.DisassociateCreatedArtifactResult) => void): Request<MigrationHub.Types.DisassociateCreatedArtifactResult, AWSError>;
   /**
-   * Disassociate an Application Discovery Service (ADS) discovered resource from a migration task.
+   * Disassociate an Application Discovery Service discovered resource from a migration task.
    */
   disassociateDiscoveredResource(params: MigrationHub.Types.DisassociateDiscoveredResourceRequest, callback?: (err: AWSError, data: MigrationHub.Types.DisassociateDiscoveredResourceResult) => void): Request<MigrationHub.Types.DisassociateDiscoveredResourceResult, AWSError>;
   /**
-   * Disassociate an Application Discovery Service (ADS) discovered resource from a migration task.
+   * Disassociate an Application Discovery Service discovered resource from a migration task.
    */
   disassociateDiscoveredResource(callback?: (err: AWSError, data: MigrationHub.Types.DisassociateDiscoveredResourceResult) => void): Request<MigrationHub.Types.DisassociateDiscoveredResourceResult, AWSError>;
   /**
@@ -83,6 +83,14 @@ declare class MigrationHub extends Service {
    * Registers a new migration task which represents a server, database, etc., being migrated to AWS by a migration tool. This API is a prerequisite to calling the NotifyMigrationTaskState API as the migration tool must first register the migration task with Migration Hub.
    */
   importMigrationTask(callback?: (err: AWSError, data: MigrationHub.Types.ImportMigrationTaskResult) => void): Request<MigrationHub.Types.ImportMigrationTaskResult, AWSError>;
+  /**
+   * Lists all the migration statuses for your applications. If you use the optional ApplicationIds parameter, only the migration statuses for those applications will be returned.
+   */
+  listApplicationStates(params: MigrationHub.Types.ListApplicationStatesRequest, callback?: (err: AWSError, data: MigrationHub.Types.ListApplicationStatesResult) => void): Request<MigrationHub.Types.ListApplicationStatesResult, AWSError>;
+  /**
+   * Lists all the migration statuses for your applications. If you use the optional ApplicationIds parameter, only the migration statuses for those applications will be returned.
+   */
+  listApplicationStates(callback?: (err: AWSError, data: MigrationHub.Types.ListApplicationStatesResult) => void): Request<MigrationHub.Types.ListApplicationStatesResult, AWSError>;
   /**
    * Lists the created artifacts attached to a given migration task in an update stream. This API has the following traits:   Gets the list of the created artifacts while migration is taking place.   Shows the artifacts created by the migration tool that was associated by the AssociateCreatedArtifact API.    Lists created artifacts in a paginated interface.   
    */
@@ -132,16 +140,32 @@ declare class MigrationHub extends Service {
    */
   notifyMigrationTaskState(callback?: (err: AWSError, data: MigrationHub.Types.NotifyMigrationTaskStateResult) => void): Request<MigrationHub.Types.NotifyMigrationTaskStateResult, AWSError>;
   /**
-   * Provides identifying details of the resource being migrated so that it can be associated in the Application Discovery Service (ADS)'s repository. This association occurs asynchronously after PutResourceAttributes returns.    Keep in mind that subsequent calls to PutResourceAttributes will override previously stored attributes. For example, if it is first called with a MAC address, but later, it is desired to add an IP address, it will then be required to call it with both the IP and MAC addresses to prevent overiding the MAC address.   Note the instructions regarding the special use case of the  ResourceAttributeList  parameter when specifying any "VM" related value.      Because this is an asynchronous call, it will always return 200, whether an association occurs or not. To confirm if an association was found based on the provided details, call ListDiscoveredResources. 
+   * Provides identifying details of the resource being migrated so that it can be associated in the Application Discovery Service repository. This association occurs asynchronously after PutResourceAttributes returns.    Keep in mind that subsequent calls to PutResourceAttributes will override previously stored attributes. For example, if it is first called with a MAC address, but later, it is desired to add an IP address, it will then be required to call it with both the IP and MAC addresses to prevent overriding the MAC address.   Note the instructions regarding the special use case of the  ResourceAttributeList  parameter when specifying any "VM" related value.     Because this is an asynchronous call, it will always return 200, whether an association occurs or not. To confirm if an association was found based on the provided details, call ListDiscoveredResources. 
    */
   putResourceAttributes(params: MigrationHub.Types.PutResourceAttributesRequest, callback?: (err: AWSError, data: MigrationHub.Types.PutResourceAttributesResult) => void): Request<MigrationHub.Types.PutResourceAttributesResult, AWSError>;
   /**
-   * Provides identifying details of the resource being migrated so that it can be associated in the Application Discovery Service (ADS)'s repository. This association occurs asynchronously after PutResourceAttributes returns.    Keep in mind that subsequent calls to PutResourceAttributes will override previously stored attributes. For example, if it is first called with a MAC address, but later, it is desired to add an IP address, it will then be required to call it with both the IP and MAC addresses to prevent overiding the MAC address.   Note the instructions regarding the special use case of the  ResourceAttributeList  parameter when specifying any "VM" related value.      Because this is an asynchronous call, it will always return 200, whether an association occurs or not. To confirm if an association was found based on the provided details, call ListDiscoveredResources. 
+   * Provides identifying details of the resource being migrated so that it can be associated in the Application Discovery Service repository. This association occurs asynchronously after PutResourceAttributes returns.    Keep in mind that subsequent calls to PutResourceAttributes will override previously stored attributes. For example, if it is first called with a MAC address, but later, it is desired to add an IP address, it will then be required to call it with both the IP and MAC addresses to prevent overriding the MAC address.   Note the instructions regarding the special use case of the  ResourceAttributeList  parameter when specifying any "VM" related value.     Because this is an asynchronous call, it will always return 200, whether an association occurs or not. To confirm if an association was found based on the provided details, call ListDiscoveredResources. 
    */
   putResourceAttributes(callback?: (err: AWSError, data: MigrationHub.Types.PutResourceAttributesResult) => void): Request<MigrationHub.Types.PutResourceAttributesResult, AWSError>;
 }
 declare namespace MigrationHub {
   export type ApplicationId = string;
+  export type ApplicationIds = ApplicationId[];
+  export interface ApplicationState {
+    /**
+     * The configurationId from the Application Discovery Service that uniquely identifies an application.
+     */
+    ApplicationId?: ApplicationId;
+    /**
+     * The current status of an application.
+     */
+    ApplicationStatus?: ApplicationStatus;
+    /**
+     * The timestamp when the application status was last updated.
+     */
+    LastUpdatedTime?: UpdateDateTime;
+  }
+  export type ApplicationStateList = ApplicationState[];
   export type ApplicationStatus = "NOT_STARTED"|"IN_PROGRESS"|"COMPLETED"|string;
   export interface AssociateCreatedArtifactRequest {
     /**
@@ -149,7 +173,7 @@ declare namespace MigrationHub {
      */
     ProgressUpdateStream: ProgressUpdateStream;
     /**
-     * Unique identifier that references the migration task.
+     * Unique identifier that references the migration task. Do not store personal data in this field. 
      */
     MigrationTaskName: MigrationTaskName;
     /**
@@ -169,7 +193,7 @@ declare namespace MigrationHub {
      */
     ProgressUpdateStream: ProgressUpdateStream;
     /**
-     * The identifier given to the MigrationTask.
+     * The identifier given to the MigrationTask. Do not store personal data in this field. 
      */
     MigrationTaskName: MigrationTaskName;
     /**
@@ -186,7 +210,7 @@ declare namespace MigrationHub {
   export type ConfigurationId = string;
   export interface CreateProgressUpdateStreamRequest {
     /**
-     * The name of the ProgressUpdateStream. 
+     * The name of the ProgressUpdateStream. Do not store personal data in this field. 
      */
     ProgressUpdateStreamName: ProgressUpdateStream;
     /**
@@ -211,7 +235,7 @@ declare namespace MigrationHub {
   export type CreatedArtifactName = string;
   export interface DeleteProgressUpdateStreamRequest {
     /**
-     * The name of the ProgressUpdateStream. 
+     * The name of the ProgressUpdateStream. Do not store personal data in this field. 
      */
     ProgressUpdateStreamName: ProgressUpdateStream;
     /**
@@ -223,7 +247,7 @@ declare namespace MigrationHub {
   }
   export interface DescribeApplicationStateRequest {
     /**
-     * The configurationId in ADS that uniquely identifies the grouped application.
+     * The configurationId in Application Discovery Service that uniquely identifies the grouped application.
      */
     ApplicationId: ApplicationId;
   }
@@ -243,7 +267,7 @@ declare namespace MigrationHub {
      */
     ProgressUpdateStream: ProgressUpdateStream;
     /**
-     * The identifier given to the MigrationTask.
+     * The identifier given to the MigrationTask. Do not store personal data in this field. 
      */
     MigrationTaskName: MigrationTaskName;
   }
@@ -259,7 +283,7 @@ declare namespace MigrationHub {
      */
     ProgressUpdateStream: ProgressUpdateStream;
     /**
-     * Unique identifier that references the migration task to be disassociated with the artifact.
+     * Unique identifier that references the migration task to be disassociated with the artifact. Do not store personal data in this field. 
      */
     MigrationTaskName: MigrationTaskName;
     /**
@@ -279,11 +303,11 @@ declare namespace MigrationHub {
      */
     ProgressUpdateStream: ProgressUpdateStream;
     /**
-     * The identifier given to the MigrationTask.
+     * The identifier given to the MigrationTask. Do not store personal data in this field. 
      */
     MigrationTaskName: MigrationTaskName;
     /**
-     * ConfigurationId of the ADS resource to be disassociated.
+     * ConfigurationId of the Application Discovery Service resource to be disassociated.
      */
     ConfigurationId: ConfigurationId;
     /**
@@ -295,7 +319,7 @@ declare namespace MigrationHub {
   }
   export interface DiscoveredResource {
     /**
-     * The configurationId in ADS that uniquely identifies the on-premise resource.
+     * The configurationId in Application Discovery Service that uniquely identifies the on-premise resource.
      */
     ConfigurationId: ConfigurationId;
     /**
@@ -308,11 +332,11 @@ declare namespace MigrationHub {
   export type DryRun = boolean;
   export interface ImportMigrationTaskRequest {
     /**
-     * The name of the ProgressUpdateStream. 
+     * The name of the ProgressUpdateStream. &gt;
      */
     ProgressUpdateStream: ProgressUpdateStream;
     /**
-     * Unique identifier that references the migration task.
+     * Unique identifier that references the migration task. Do not store personal data in this field. 
      */
     MigrationTaskName: MigrationTaskName;
     /**
@@ -323,13 +347,37 @@ declare namespace MigrationHub {
   export interface ImportMigrationTaskResult {
   }
   export type LatestResourceAttributeList = ResourceAttribute[];
+  export interface ListApplicationStatesRequest {
+    /**
+     * The configurationIds from the Application Discovery Service that uniquely identifies your applications.
+     */
+    ApplicationIds?: ApplicationIds;
+    /**
+     * If a NextToken was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in NextToken.
+     */
+    NextToken?: Token;
+    /**
+     * Maximum number of results to be returned per page.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListApplicationStatesResult {
+    /**
+     * A list of Applications that exist in Application Discovery Service.
+     */
+    ApplicationStateList?: ApplicationStateList;
+    /**
+     * If a NextToken was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in NextToken.
+     */
+    NextToken?: Token;
+  }
   export interface ListCreatedArtifactsRequest {
     /**
      * The name of the ProgressUpdateStream. 
      */
     ProgressUpdateStream: ProgressUpdateStream;
     /**
-     * Unique identifier that references the migration task.
+     * Unique identifier that references the migration task. Do not store personal data in this field. 
      */
     MigrationTaskName: MigrationTaskName;
     /**
@@ -357,7 +405,7 @@ declare namespace MigrationHub {
      */
     ProgressUpdateStream: ProgressUpdateStream;
     /**
-     * The name of the MigrationTask.
+     * The name of the MigrationTask. Do not store personal data in this field. 
      */
     MigrationTaskName: MigrationTaskName;
     /**
@@ -432,7 +480,7 @@ declare namespace MigrationHub {
      */
     ProgressUpdateStream?: ProgressUpdateStream;
     /**
-     * Unique identifier that references the migration task.
+     * Unique identifier that references the migration task. Do not store personal data in this field. 
      */
     MigrationTaskName?: MigrationTaskName;
     /**
@@ -444,7 +492,7 @@ declare namespace MigrationHub {
      */
     UpdateDateTime?: UpdateDateTime;
     /**
-     * 
+     * Information about the resource that is being migrated. This data will be used to map the task to a resource in the Application Discovery Service repository.
      */
     ResourceAttributeList?: LatestResourceAttributeList;
   }
@@ -455,7 +503,7 @@ declare namespace MigrationHub {
      */
     ProgressUpdateStream?: ProgressUpdateStream;
     /**
-     * Unique identifier that references the migration task.
+     * Unique identifier that references the migration task. Do not store personal data in this field. 
      */
     MigrationTaskName?: MigrationTaskName;
     /**
@@ -463,7 +511,7 @@ declare namespace MigrationHub {
      */
     Status?: Status;
     /**
-     * 
+     * Indication of the percentage completion of the task.
      */
     ProgressPercent?: ProgressPercent;
     /**
@@ -479,13 +527,17 @@ declare namespace MigrationHub {
   export type NextUpdateSeconds = number;
   export interface NotifyApplicationStateRequest {
     /**
-     * The configurationId in ADS that uniquely identifies the grouped application.
+     * The configurationId in Application Discovery Service that uniquely identifies the grouped application.
      */
     ApplicationId: ApplicationId;
     /**
      * Status of the application - Not Started, In-Progress, Complete.
      */
     Status: ApplicationStatus;
+    /**
+     * The timestamp when the application state changed.
+     */
+    UpdateDateTime?: UpdateDateTime;
     /**
      * Optional boolean flag to indicate whether any effect should take place. Used to test if the caller has permission to make the call.
      */
@@ -499,7 +551,7 @@ declare namespace MigrationHub {
      */
     ProgressUpdateStream: ProgressUpdateStream;
     /**
-     * Unique identifier that references the migration task.
+     * Unique identifier that references the migration task. Do not store personal data in this field. 
      */
     MigrationTaskName: MigrationTaskName;
     /**
@@ -525,7 +577,7 @@ declare namespace MigrationHub {
   export type ProgressUpdateStream = string;
   export interface ProgressUpdateStreamSummary {
     /**
-     * The name of the ProgressUpdateStream. 
+     * The name of the ProgressUpdateStream. Do not store personal data in this field. 
      */
     ProgressUpdateStreamName?: ProgressUpdateStream;
   }
@@ -536,11 +588,11 @@ declare namespace MigrationHub {
      */
     ProgressUpdateStream: ProgressUpdateStream;
     /**
-     * Unique identifier that references the migration task.
+     * Unique identifier that references the migration task. Do not store personal data in this field. 
      */
     MigrationTaskName: MigrationTaskName;
     /**
-     * Information about the resource that is being migrated. This data will be used to map the task to a resource in the Application Discovery Service (ADS)'s repository.  Takes the object array of ResourceAttribute where the Type field is reserved for the following values: IPV4_ADDRESS | IPV6_ADDRESS | MAC_ADDRESS | FQDN | VM_MANAGER_ID | VM_MANAGED_OBJECT_REFERENCE | VM_NAME | VM_PATH | BIOS_ID | MOTHERBOARD_SERIAL_NUMBER where the identifying value can be a string up to 256 characters.     If any "VM" related value is set for a ResourceAttribute object, it is required that VM_MANAGER_ID, as a minimum, is always set. If VM_MANAGER_ID is not set, then all "VM" fields will be discarded and "VM" fields will not be used for matching the migration task to a server in Application Discovery Service (ADS)'s repository. See the Example section below for a use case of specifying "VM" related values.    If a server you are trying to match has multiple IP or MAC addresses, you should provide as many as you know in separate type/value pairs passed to the ResourceAttributeList parameter to maximize the chances of matching.   
+     * Information about the resource that is being migrated. This data will be used to map the task to a resource in the Application Discovery Service repository.  Takes the object array of ResourceAttribute where the Type field is reserved for the following values: IPV4_ADDRESS | IPV6_ADDRESS | MAC_ADDRESS | FQDN | VM_MANAGER_ID | VM_MANAGED_OBJECT_REFERENCE | VM_NAME | VM_PATH | BIOS_ID | MOTHERBOARD_SERIAL_NUMBER where the identifying value can be a string up to 256 characters.     If any "VM" related value is set for a ResourceAttribute object, it is required that VM_MANAGER_ID, as a minimum, is always set. If VM_MANAGER_ID is not set, then all "VM" fields will be discarded and "VM" fields will not be used for matching the migration task to a server in Application Discovery Service repository. See the Example section below for a use case of specifying "VM" related values.    If a server you are trying to match has multiple IP or MAC addresses, you should provide as many as you know in separate type/value pairs passed to the ResourceAttributeList parameter to maximize the chances of matching.   
      */
     ResourceAttributeList: ResourceAttributeList;
     /**

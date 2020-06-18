@@ -36,6 +36,14 @@ declare class ServerlessApplicationRepository extends Service {
    */
   createCloudFormationChangeSet(callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.CreateCloudFormationChangeSetResponse) => void): Request<ServerlessApplicationRepository.Types.CreateCloudFormationChangeSetResponse, AWSError>;
   /**
+   * Creates an AWS CloudFormation template.
+   */
+  createCloudFormationTemplate(params: ServerlessApplicationRepository.Types.CreateCloudFormationTemplateRequest, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.CreateCloudFormationTemplateResponse) => void): Request<ServerlessApplicationRepository.Types.CreateCloudFormationTemplateResponse, AWSError>;
+  /**
+   * Creates an AWS CloudFormation template.
+   */
+  createCloudFormationTemplate(callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.CreateCloudFormationTemplateResponse) => void): Request<ServerlessApplicationRepository.Types.CreateCloudFormationTemplateResponse, AWSError>;
+  /**
    * Deletes the specified application.
    */
   deleteApplication(params: ServerlessApplicationRepository.Types.DeleteApplicationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -60,6 +68,22 @@ declare class ServerlessApplicationRepository extends Service {
    */
   getApplicationPolicy(callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.GetApplicationPolicyResponse) => void): Request<ServerlessApplicationRepository.Types.GetApplicationPolicyResponse, AWSError>;
   /**
+   * Gets the specified AWS CloudFormation template.
+   */
+  getCloudFormationTemplate(params: ServerlessApplicationRepository.Types.GetCloudFormationTemplateRequest, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.GetCloudFormationTemplateResponse) => void): Request<ServerlessApplicationRepository.Types.GetCloudFormationTemplateResponse, AWSError>;
+  /**
+   * Gets the specified AWS CloudFormation template.
+   */
+  getCloudFormationTemplate(callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.GetCloudFormationTemplateResponse) => void): Request<ServerlessApplicationRepository.Types.GetCloudFormationTemplateResponse, AWSError>;
+  /**
+   * Retrieves the list of applications nested in the containing application.
+   */
+  listApplicationDependencies(params: ServerlessApplicationRepository.Types.ListApplicationDependenciesRequest, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.ListApplicationDependenciesResponse) => void): Request<ServerlessApplicationRepository.Types.ListApplicationDependenciesResponse, AWSError>;
+  /**
+   * Retrieves the list of applications nested in the containing application.
+   */
+  listApplicationDependencies(callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.ListApplicationDependenciesResponse) => void): Request<ServerlessApplicationRepository.Types.ListApplicationDependenciesResponse, AWSError>;
+  /**
    * Lists versions for the specified application.
    */
   listApplicationVersions(params: ServerlessApplicationRepository.Types.ListApplicationVersionsRequest, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.ListApplicationVersionsResponse) => void): Request<ServerlessApplicationRepository.Types.ListApplicationVersionsResponse, AWSError>;
@@ -76,17 +100,27 @@ declare class ServerlessApplicationRepository extends Service {
    */
   listApplications(callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.ListApplicationsResponse) => void): Request<ServerlessApplicationRepository.Types.ListApplicationsResponse, AWSError>;
   /**
-   * Sets the permission policy for an application. See
- Application Permissions
- for the list of supported actions that can be used with this operation.
+   * Sets the permission policy for an application. For the list of actions supported for this operation, see
+ Application 
+ Permissions
+ .
    */
   putApplicationPolicy(params: ServerlessApplicationRepository.Types.PutApplicationPolicyRequest, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.PutApplicationPolicyResponse) => void): Request<ServerlessApplicationRepository.Types.PutApplicationPolicyResponse, AWSError>;
   /**
-   * Sets the permission policy for an application. See
- Application Permissions
- for the list of supported actions that can be used with this operation.
+   * Sets the permission policy for an application. For the list of actions supported for this operation, see
+ Application 
+ Permissions
+ .
    */
   putApplicationPolicy(callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.PutApplicationPolicyResponse) => void): Request<ServerlessApplicationRepository.Types.PutApplicationPolicyResponse, AWSError>;
+  /**
+   * Unshares an application from an AWS Organization.This operation can be called only from the organization's master account.
+   */
+  unshareApplication(params: ServerlessApplicationRepository.Types.UnshareApplicationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Unshares an application from an AWS Organization.This operation can be called only from the organization's master account.
+   */
+  unshareApplication(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates the specified application.
    */
@@ -97,13 +131,28 @@ declare class ServerlessApplicationRepository extends Service {
   updateApplication(callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.UpdateApplicationResponse) => void): Request<ServerlessApplicationRepository.Types.UpdateApplicationResponse, AWSError>;
 }
 declare namespace ServerlessApplicationRepository {
+  export interface ApplicationDependencySummary {
+    /**
+     * The Amazon Resource Name (ARN) of the nested application.
+     */
+    ApplicationId: __string;
+    /**
+     * The semantic version of the nested application.
+     */
+    SemanticVersion: __string;
+  }
   export interface ApplicationPolicyStatement {
     /**
-     * See Application Permissions for the list of supported actions.
+     * For the list of actions supported for this operation, see Application 
+ Permissions.
      */
     Actions: __listOf__string;
     /**
-     * An AWS account ID, or * to make the application public.
+     * An array of PrinciplalOrgIDs, which corresponds to AWS IAM aws:PrincipalOrgID global condition key.
+     */
+    PrincipalOrgIDs?: __listOf__string;
+    /**
+     * An array of AWS account IDs, or * to make the application public.
      */
     Principals: __listOf__string;
     /**
@@ -129,8 +178,7 @@ declare namespace ServerlessApplicationRepository {
      */
     Description: __string;
     /**
-     * A URL with more information about the application, for example
- the location of your GitHub repository for the application.
+     * A URL with more information about the application, for example the location of your GitHub repository for the application.
      */
     HomePageUrl?: __string;
     /**
@@ -146,6 +194,7 @@ declare namespace ServerlessApplicationRepository {
      */
     SpdxLicenseId?: __string;
   }
+  export type Capability = "CAPABILITY_IAM"|"CAPABILITY_NAMED_IAM"|"CAPABILITY_AUTO_EXPAND"|"CAPABILITY_RESOURCE_POLICY"|string;
   export interface CreateApplicationRequest {
     /**
      * The name of the author publishing the app.Minimum length=1. Maximum length=127.Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";
@@ -156,8 +205,7 @@ declare namespace ServerlessApplicationRepository {
      */
     Description: __string;
     /**
-     * A URL with more information about the application, for example
- the location of your GitHub repository for the application.
+     * A URL with more information about the application, for example the location of your GitHub repository for the application.
      */
     HomePageUrl?: __string;
     /**
@@ -166,11 +214,11 @@ declare namespace ServerlessApplicationRepository {
     Labels?: __listOf__string;
     /**
      * A local text file that contains the license of the app that matches the spdxLicenseID value of your application.
- The file is of the format file://&lt;path>/&lt;filename>.Maximum size 5 MBNote: Only one of licenseBody and licenseUrl can be specified, otherwise an error will result.
+ The file has the format file://&lt;path>/&lt;filename>.Maximum size 5 MBYou can specify only one of licenseBody and licenseUrl; otherwise, an error results.
      */
     LicenseBody?: __string;
     /**
-     * A link to the S3 object that contains the license of the app that matches the spdxLicenseID value of your application.Maximum size 5 MBNote: Only one of licenseBody and licenseUrl can be specified, otherwise an error will result.
+     * A link to the S3 object that contains the license of the app that matches the spdxLicenseID value of your application.Maximum size 5 MBYou can specify only one of licenseBody and licenseUrl; otherwise, an error results.
      */
     LicenseUrl?: __string;
     /**
@@ -179,11 +227,11 @@ declare namespace ServerlessApplicationRepository {
     Name: __string;
     /**
      * A local text readme file in Markdown language that contains a more detailed description of the application and how it works.
- The file is of the format file://&lt;path>/&lt;filename>.Maximum size 5 MBNote: Only one of readmeBody and readmeUrl can be specified, otherwise an error will result.
+ The file has the format file://&lt;path>/&lt;filename>.Maximum size 5 MBYou can specify only one of readmeBody and readmeUrl; otherwise, an error results.
      */
     ReadmeBody?: __string;
     /**
-     * A link to the S3 object in Markdown language that contains a more detailed description of the application and how it works.Maximum size 5 MBNote: Only one of readmeBody and readmeUrl can be specified, otherwise an error will result.
+     * A link to the S3 object in Markdown language that contains a more detailed description of the application and how it works.Maximum size 5 MBYou can specify only one of readmeBody and readmeUrl; otherwise, an error results.
      */
     ReadmeUrl?: __string;
     /**
@@ -193,7 +241,11 @@ declare namespace ServerlessApplicationRepository {
      */
     SemanticVersion?: __string;
     /**
-     * A link to a public repository for the source code of your application.
+     * A link to the S3 object that contains the ZIP archive of the source code for this version of your application.Maximum size 50 MB
+     */
+    SourceCodeArchiveUrl?: __string;
+    /**
+     * A link to a public repository for the source code of your application, for example the URL of a specific GitHub commit.
      */
     SourceCodeUrl?: __string;
     /**
@@ -202,11 +254,11 @@ declare namespace ServerlessApplicationRepository {
     SpdxLicenseId?: __string;
     /**
      * The local raw packaged AWS SAM template file of your application.
- The file is of the format file://&lt;path>/&lt;filename>.Note: Only one of templateBody and templateUrl can be specified, otherwise an error will result.
+ The file has the format file://&lt;path>/&lt;filename>.You can specify only one of templateBody and templateUrl; otherwise an error results.
      */
     TemplateBody?: __string;
     /**
-     * A link to the S3 object cotaining the packaged AWS SAM template of your application.Note: Only one of templateBody and templateUrl can be specified, otherwise an error will result.
+     * A link to the S3 object containing the packaged AWS SAM template of your application.You can specify only one of templateBody and templateUrl; otherwise an error results.
      */
     TemplateUrl?: __string;
   }
@@ -228,10 +280,13 @@ declare namespace ServerlessApplicationRepository {
      */
     Description?: __string;
     /**
-     * A URL with more information about the application, for example
- the location of your GitHub repository for the application.
+     * A URL with more information about the application, for example the location of your GitHub repository for the application.
      */
     HomePageUrl?: __string;
+    /**
+     * Whether the author of this application has been verified. This means means that AWS has made a good faith review, as a reasonable and prudent service provider, of the information provided by the requester and has confirmed that the requester's identity is as claimed.
+     */
+    IsVerifiedAuthor?: __boolean;
     /**
      * Labels to improve discovery of apps in search results.Minimum length=1. Maximum length=127. Maximum number of labels: 10Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
      */
@@ -253,6 +308,10 @@ declare namespace ServerlessApplicationRepository {
      */
     SpdxLicenseId?: __string;
     /**
+     * The URL to the public profile of a verified author. This URL is submitted by the author.
+     */
+    VerifiedAuthorUrl?: __string;
+    /**
      * Version information about the application.
      */
     Version?: Version;
@@ -267,7 +326,11 @@ declare namespace ServerlessApplicationRepository {
      */
     SemanticVersion: __string;
     /**
-     * A link to a public repository for the source code of your application.
+     * A link to the S3 object that contains the ZIP archive of the source code for this version of your application.Maximum size 50 MB
+     */
+    SourceCodeArchiveUrl?: __string;
+    /**
+     * A link to a public repository for the source code of your application, for example the URL of a specific GitHub commit.
      */
     SourceCodeUrl?: __string;
     /**
@@ -293,13 +356,48 @@ declare namespace ServerlessApplicationRepository {
      */
     ParameterDefinitions?: __listOfParameterDefinition;
     /**
+     * A list of values that you must specify before you can deploy certain applications.
+ Some applications might include resources that can affect permissions in your AWS
+ account, for example, by creating new AWS Identity and Access Management (IAM) users.
+ For those applications, you must explicitly acknowledge their capabilities by
+ specifying this parameter.The only valid values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM,
+ CAPABILITY_RESOURCE_POLICY, and CAPABILITY_AUTO_EXPAND.The following resources require you to specify CAPABILITY_IAM or
+ CAPABILITY_NAMED_IAM:
+ AWS::IAM::Group,
+ AWS::IAM::InstanceProfile,
+ AWS::IAM::Policy, and
+ AWS::IAM::Role.
+ If the application contains IAM resources, you can specify either CAPABILITY_IAM
+ or CAPABILITY_NAMED_IAM. If the application contains IAM resources
+ with custom names, you must specify CAPABILITY_NAMED_IAM.The following resources require you to specify CAPABILITY_RESOURCE_POLICY:
+ AWS::Lambda::Permission,
+ AWS::IAM:Policy,
+ AWS::ApplicationAutoScaling::ScalingPolicy,
+ AWS::S3::BucketPolicy,
+ AWS::SQS::QueuePolicy, and
+ AWS::SNS::TopicPolicy.Applications that contain one or more nested applications require you to specify
+ CAPABILITY_AUTO_EXPAND.If your application template contains any of the above resources, we recommend that you review
+ all permissions associated with the application before deploying. If you don't specify
+ this parameter for an application that requires capabilities, the call will fail.
+     */
+    RequiredCapabilities?: __listOfCapability;
+    /**
+     * Whether all of the AWS resources contained in this application are supported in the region
+ in which it is being retrieved.
+     */
+    ResourcesSupported?: __boolean;
+    /**
      * The semantic version of the application:
  https://semver.org/
  
      */
     SemanticVersion?: __string;
     /**
-     * A link to a public repository for the source code of your application.
+     * A link to the S3 object that contains the ZIP archive of the source code for this version of your application.Maximum size 50 MB
+     */
+    SourceCodeArchiveUrl?: __string;
+    /**
+     * A link to a public repository for the source code of your application, for example the URL of a specific GitHub commit.
      */
     SourceCodeUrl?: __string;
     /**
@@ -313,9 +411,65 @@ declare namespace ServerlessApplicationRepository {
      */
     ApplicationId: __string;
     /**
+     * A list of values that you must specify before you can deploy certain applications.
+ Some applications might include resources that can affect permissions in your AWS
+ account, for example, by creating new AWS Identity and Access Management (IAM) users.
+ For those applications, you must explicitly acknowledge their capabilities by
+ specifying this parameter.The only valid values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM,
+ CAPABILITY_RESOURCE_POLICY, and CAPABILITY_AUTO_EXPAND.The following resources require you to specify CAPABILITY_IAM or
+ CAPABILITY_NAMED_IAM:
+ AWS::IAM::Group,
+ AWS::IAM::InstanceProfile,
+ AWS::IAM::Policy, and
+ AWS::IAM::Role.
+ If the application contains IAM resources, you can specify either CAPABILITY_IAM
+ or CAPABILITY_NAMED_IAM. If the application contains IAM resources
+ with custom names, you must specify CAPABILITY_NAMED_IAM.The following resources require you to specify CAPABILITY_RESOURCE_POLICY:
+ AWS::Lambda::Permission,
+ AWS::IAM:Policy,
+ AWS::ApplicationAutoScaling::ScalingPolicy,
+ AWS::S3::BucketPolicy,
+ AWS::SQS::QueuePolicy, and
+ AWS::SNS:TopicPolicy.Applications that contain one or more nested applications require you to specify
+ CAPABILITY_AUTO_EXPAND.If your application template contains any of the above resources, we recommend that you review
+ all permissions associated with the application before deploying. If you don't specify
+ this parameter for an application that requires capabilities, the call will fail.
+     */
+    Capabilities?: __listOf__string;
+    /**
+     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet
+  API.
+     */
+    ChangeSetName?: __string;
+    /**
+     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet
+  API.
+     */
+    ClientToken?: __string;
+    /**
+     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet
+  API.
+     */
+    Description?: __string;
+    /**
+     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet
+  API.
+     */
+    NotificationArns?: __listOf__string;
+    /**
      * A list of parameter values for the parameters of the application.
      */
     ParameterOverrides?: __listOfParameterValue;
+    /**
+     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet
+  API.
+     */
+    ResourceTypes?: __listOf__string;
+    /**
+     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet
+  API.
+     */
+    RollbackConfiguration?: RollbackConfiguration;
     /**
      * The semantic version of the application:
  https://semver.org/
@@ -323,11 +477,19 @@ declare namespace ServerlessApplicationRepository {
      */
     SemanticVersion?: __string;
     /**
-     * The name or the unique ID of the stack for which you are creating a change set. AWS CloudFormation generates
- the change set by comparing this stack's information with the information that you submit, such as a modified
- template or different parameter input values. Constraints: Minimum length of 1.Pattern: ([a-zA-Z][-a-zA-Z0-9]*)|(arn:\b(aws|aws-us-gov|aws-cn)\b:[-a-zA-Z0-9:/._+]*)
+     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet
+  API.
      */
     StackName: __string;
+    /**
+     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet
+  API.
+     */
+    Tags?: __listOfTag;
+    /**
+     * The UUID returned by CreateCloudFormationTemplate.Pattern: [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+     */
+    TemplateId?: __string;
   }
   export interface CreateCloudFormationChangeSetResponse {
     /**
@@ -348,6 +510,53 @@ declare namespace ServerlessApplicationRepository {
      * The unique ID of the stack.
      */
     StackId?: __string;
+  }
+  export interface CreateCloudFormationTemplateRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the application.
+     */
+    ApplicationId: __string;
+    /**
+     * The semantic version of the application:
+ https://semver.org/
+ 
+     */
+    SemanticVersion?: __string;
+  }
+  export interface CreateCloudFormationTemplateResponse {
+    /**
+     * The application Amazon Resource Name (ARN).
+     */
+    ApplicationId?: __string;
+    /**
+     * The date and time this resource was created.
+     */
+    CreationTime?: __string;
+    /**
+     * The date and time this template expires. Templates
+ expire 1 hour after creation.
+     */
+    ExpirationTime?: __string;
+    /**
+     * The semantic version of the application:
+ https://semver.org/
+ 
+     */
+    SemanticVersion?: __string;
+    /**
+     * Status of the template creation workflow.Possible values: PREPARING | ACTIVE | EXPIRED
+ 
+     */
+    Status?: Status;
+    /**
+     * The UUID returned by CreateCloudFormationTemplate.Pattern: [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+     */
+    TemplateId?: __string;
+    /**
+     * A link to the template that can be used to deploy the application using
+ AWS CloudFormation.
+     */
+    TemplateUrl?: __string;
   }
   export interface DeleteApplicationRequest {
     /**
@@ -395,10 +604,13 @@ declare namespace ServerlessApplicationRepository {
      */
     Description?: __string;
     /**
-     * A URL with more information about the application, for example
- the location of your GitHub repository for the application.
+     * A URL with more information about the application, for example the location of your GitHub repository for the application.
      */
     HomePageUrl?: __string;
+    /**
+     * Whether the author of this application has been verified. This means means that AWS has made a good faith review, as a reasonable and prudent service provider, of the information provided by the requester and has confirmed that the requester's identity is as claimed.
+     */
+    IsVerifiedAuthor?: __boolean;
     /**
      * Labels to improve discovery of apps in search results.Minimum length=1. Maximum length=127. Maximum number of labels: 10Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
      */
@@ -420,9 +632,86 @@ declare namespace ServerlessApplicationRepository {
      */
     SpdxLicenseId?: __string;
     /**
+     * The URL to the public profile of a verified author. This URL is submitted by the author.
+     */
+    VerifiedAuthorUrl?: __string;
+    /**
      * Version information about the application.
      */
     Version?: Version;
+  }
+  export interface GetCloudFormationTemplateRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the application.
+     */
+    ApplicationId: __string;
+    /**
+     * The UUID returned by CreateCloudFormationTemplate.Pattern: [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+     */
+    TemplateId: __string;
+  }
+  export interface GetCloudFormationTemplateResponse {
+    /**
+     * The application Amazon Resource Name (ARN).
+     */
+    ApplicationId?: __string;
+    /**
+     * The date and time this resource was created.
+     */
+    CreationTime?: __string;
+    /**
+     * The date and time this template expires. Templates
+ expire 1 hour after creation.
+     */
+    ExpirationTime?: __string;
+    /**
+     * The semantic version of the application:
+ https://semver.org/
+ 
+     */
+    SemanticVersion?: __string;
+    /**
+     * Status of the template creation workflow.Possible values: PREPARING | ACTIVE | EXPIRED
+ 
+     */
+    Status?: Status;
+    /**
+     * The UUID returned by CreateCloudFormationTemplate.Pattern: [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+     */
+    TemplateId?: __string;
+    /**
+     * A link to the template that can be used to deploy the application using
+ AWS CloudFormation.
+     */
+    TemplateUrl?: __string;
+  }
+  export interface ListApplicationDependenciesRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the application.
+     */
+    ApplicationId: __string;
+    /**
+     * The total number of items to return.
+     */
+    MaxItems?: MaxItems;
+    /**
+     * A token to specify where to start paginating.
+     */
+    NextToken?: __string;
+    /**
+     * The semantic version of the application to get.
+     */
+    SemanticVersion?: __string;
+  }
+  export interface ListApplicationDependenciesResponse {
+    /**
+     * An array of application summaries nested in the application.
+     */
+    Dependencies?: __listOfApplicationDependencySummary;
+    /**
+     * The token to request the next page of results.
+     */
+    NextToken?: __string;
   }
   export interface ListApplicationVersionsRequest {
     /**
@@ -567,6 +856,55 @@ declare namespace ServerlessApplicationRepository {
      */
     Statements?: __listOfApplicationPolicyStatement;
   }
+  export interface RollbackConfiguration {
+    /**
+     * This property corresponds to the content of the same name for the AWS CloudFormation RollbackConfiguration
+  Data Type.
+     */
+    MonitoringTimeInMinutes?: __integer;
+    /**
+     * This property corresponds to the content of the same name for the AWS CloudFormation RollbackConfiguration
+  Data Type.
+     */
+    RollbackTriggers?: __listOfRollbackTrigger;
+  }
+  export interface RollbackTrigger {
+    /**
+     * This property corresponds to the content of the same name for the AWS CloudFormation RollbackTrigger
+  Data Type.
+     */
+    Arn: __string;
+    /**
+     * This property corresponds to the content of the same name for the AWS CloudFormation RollbackTrigger
+  Data Type.
+     */
+    Type: __string;
+  }
+  export type Status = "PREPARING"|"ACTIVE"|"EXPIRED"|string;
+  export interface Tag {
+    /**
+     * This property corresponds to the content of the same name for the AWS CloudFormation Tag
+  Data Type.
+     */
+    Key: __string;
+    /**
+     * This property corresponds to the content of the same name for the AWS CloudFormation 
+ Tag
+ 
+ Data Type.
+     */
+    Value: __string;
+  }
+  export interface UnshareApplicationRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the application.
+     */
+    ApplicationId: __string;
+    /**
+     * The AWS Organization ID to unshare the application from.
+     */
+    OrganizationId: __string;
+  }
   export interface UpdateApplicationRequest {
     /**
      * The Amazon Resource Name (ARN) of the application.
@@ -581,8 +919,7 @@ declare namespace ServerlessApplicationRepository {
      */
     Description?: __string;
     /**
-     * A URL with more information about the application, for example
- the location of your GitHub repository for the application.
+     * A URL with more information about the application, for example the location of your GitHub repository for the application.
      */
     HomePageUrl?: __string;
     /**
@@ -616,10 +953,13 @@ declare namespace ServerlessApplicationRepository {
      */
     Description?: __string;
     /**
-     * A URL with more information about the application, for example
- the location of your GitHub repository for the application.
+     * A URL with more information about the application, for example the location of your GitHub repository for the application.
      */
     HomePageUrl?: __string;
+    /**
+     * Whether the author of this application has been verified. This means means that AWS has made a good faith review, as a reasonable and prudent service provider, of the information provided by the requester and has confirmed that the requester's identity is as claimed.
+     */
+    IsVerifiedAuthor?: __boolean;
     /**
      * Labels to improve discovery of apps in search results.Minimum length=1. Maximum length=127. Maximum number of labels: 10Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
      */
@@ -641,6 +981,10 @@ declare namespace ServerlessApplicationRepository {
      */
     SpdxLicenseId?: __string;
     /**
+     * The URL to the public profile of a verified author. This URL is submitted by the author.
+     */
+    VerifiedAuthorUrl?: __string;
+    /**
      * Version information about the application.
      */
     Version?: Version;
@@ -659,13 +1003,48 @@ declare namespace ServerlessApplicationRepository {
      */
     ParameterDefinitions: __listOfParameterDefinition;
     /**
+     * A list of values that you must specify before you can deploy certain applications.
+ Some applications might include resources that can affect permissions in your AWS
+ account, for example, by creating new AWS Identity and Access Management (IAM) users.
+ For those applications, you must explicitly acknowledge their capabilities by
+ specifying this parameter.The only valid values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM,
+ CAPABILITY_RESOURCE_POLICY, and CAPABILITY_AUTO_EXPAND.The following resources require you to specify CAPABILITY_IAM or
+ CAPABILITY_NAMED_IAM:
+ AWS::IAM::Group,
+ AWS::IAM::InstanceProfile,
+ AWS::IAM::Policy, and
+ AWS::IAM::Role.
+ If the application contains IAM resources, you can specify either CAPABILITY_IAM
+ or CAPABILITY_NAMED_IAM. If the application contains IAM resources
+ with custom names, you must specify CAPABILITY_NAMED_IAM.The following resources require you to specify CAPABILITY_RESOURCE_POLICY:
+ AWS::Lambda::Permission,
+ AWS::IAM:Policy,
+ AWS::ApplicationAutoScaling::ScalingPolicy,
+ AWS::S3::BucketPolicy,
+ AWS::SQS::QueuePolicy, and
+ AWS::SNS::TopicPolicy.Applications that contain one or more nested applications require you to specify
+ CAPABILITY_AUTO_EXPAND.If your application template contains any of the above resources, we recommend that you review
+ all permissions associated with the application before deploying. If you don't specify
+ this parameter for an application that requires capabilities, the call will fail.
+     */
+    RequiredCapabilities: __listOfCapability;
+    /**
+     * Whether all of the AWS resources contained in this application are supported in the region
+ in which it is being retrieved.
+     */
+    ResourcesSupported: __boolean;
+    /**
      * The semantic version of the application:
  https://semver.org/
  
      */
     SemanticVersion: __string;
     /**
-     * A link to a public repository for the source code of your application.
+     * A link to the S3 object that contains the ZIP archive of the source code for this version of your application.Maximum size 50 MB
+     */
+    SourceCodeArchiveUrl?: __string;
+    /**
+     * A link to a public repository for the source code of your application, for example the URL of a specific GitHub commit.
      */
     SourceCodeUrl?: __string;
     /**
@@ -689,16 +1068,20 @@ declare namespace ServerlessApplicationRepository {
      */
     SemanticVersion: __string;
     /**
-     * A link to a public repository for the source code of your application.
+     * A link to a public repository for the source code of your application, for example the URL of a specific GitHub commit.
      */
     SourceCodeUrl?: __string;
   }
   export type __boolean = boolean;
   export type __integer = number;
+  export type __listOfApplicationDependencySummary = ApplicationDependencySummary[];
   export type __listOfApplicationPolicyStatement = ApplicationPolicyStatement[];
   export type __listOfApplicationSummary = ApplicationSummary[];
+  export type __listOfCapability = Capability[];
   export type __listOfParameterDefinition = ParameterDefinition[];
   export type __listOfParameterValue = ParameterValue[];
+  export type __listOfRollbackTrigger = RollbackTrigger[];
+  export type __listOfTag = Tag[];
   export type __listOfVersionSummary = VersionSummary[];
   export type __listOf__string = __string[];
   export type __string = string;

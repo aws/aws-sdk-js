@@ -1,0 +1,52 @@
+[
+    {
+        "type": "feature",
+        "category": "AppConfig",
+        "description": "This release adds an event log to deployments. In the case of a deployment rollback, the event log details the rollback reason."
+    },
+    {
+        "type": "feature",
+        "category": "ElasticInference",
+        "description": "This release includes improvements for the Amazon Elastic Inference service."
+    },
+    {
+        "type": "feature",
+        "category": "FMS",
+        "description": "This release contains FMS wafv2 support."
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "Add two enums for MongoDB connection: Added \"CONNECTION_URL\" to \"ConnectionPropertyKey\" and added \"MONGODB\" to \"ConnectionType\""
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "AWS Lambda now supports .NET Core 3.1"
+    },
+    {
+        "type": "feature",
+        "category": "MediaStore",
+        "description": "This release adds support for CloudWatch Metrics. You can now set a policy on your container to dictate which metrics MediaStore sends to CloudWatch."
+    },
+    {
+        "type": "feature",
+        "category": "Pinpoint",
+        "description": "This release of the Amazon Pinpoint API introduces MMS support for SMS messages."
+    },
+    {
+        "type": "feature",
+        "category": "Rekognition",
+        "description": "This release adds DeleteProject and DeleteProjectVersion APIs to Amazon Rekognition Custom Labels."
+    },
+    {
+        "type": "feature",
+        "category": "StorageGateway",
+        "description": "Adding audit logging support for SMB File Shares"
+    },
+    {
+        "type": "feature",
+        "category": "WAFV2",
+        "description": "Added support for AWS Firewall Manager for WAFv2 and PermissionPolicy APIs for WAFv2."
+    }
+]

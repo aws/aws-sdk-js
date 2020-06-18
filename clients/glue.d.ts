@@ -36,11 +36,11 @@ declare class Glue extends Service {
    */
   batchDeletePartition(callback?: (err: AWSError, data: Glue.Types.BatchDeletePartitionResponse) => void): Request<Glue.Types.BatchDeletePartitionResponse, AWSError>;
   /**
-   * Deletes multiple tables at once.
+   * Deletes multiple tables at once.  After completing this operation, you no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure the immediate deletion of all related resources, before calling BatchDeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to delete any resources that belong to the table. 
    */
   batchDeleteTable(params: Glue.Types.BatchDeleteTableRequest, callback?: (err: AWSError, data: Glue.Types.BatchDeleteTableResponse) => void): Request<Glue.Types.BatchDeleteTableResponse, AWSError>;
   /**
-   * Deletes multiple tables at once.
+   * Deletes multiple tables at once.  After completing this operation, you no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure the immediate deletion of all related resources, before calling BatchDeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to delete any resources that belong to the table. 
    */
   batchDeleteTable(callback?: (err: AWSError, data: Glue.Types.BatchDeleteTableResponse) => void): Request<Glue.Types.BatchDeleteTableResponse, AWSError>;
   /**
@@ -52,6 +52,30 @@ declare class Glue extends Service {
    */
   batchDeleteTableVersion(callback?: (err: AWSError, data: Glue.Types.BatchDeleteTableVersionResponse) => void): Request<Glue.Types.BatchDeleteTableVersionResponse, AWSError>;
   /**
+   * Returns a list of resource metadata for a given list of crawler names. After calling the ListCrawlers operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
+   */
+  batchGetCrawlers(params: Glue.Types.BatchGetCrawlersRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetCrawlersResponse) => void): Request<Glue.Types.BatchGetCrawlersResponse, AWSError>;
+  /**
+   * Returns a list of resource metadata for a given list of crawler names. After calling the ListCrawlers operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
+   */
+  batchGetCrawlers(callback?: (err: AWSError, data: Glue.Types.BatchGetCrawlersResponse) => void): Request<Glue.Types.BatchGetCrawlersResponse, AWSError>;
+  /**
+   * Returns a list of resource metadata for a given list of development endpoint names. After calling the ListDevEndpoints operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
+   */
+  batchGetDevEndpoints(params: Glue.Types.BatchGetDevEndpointsRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetDevEndpointsResponse) => void): Request<Glue.Types.BatchGetDevEndpointsResponse, AWSError>;
+  /**
+   * Returns a list of resource metadata for a given list of development endpoint names. After calling the ListDevEndpoints operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
+   */
+  batchGetDevEndpoints(callback?: (err: AWSError, data: Glue.Types.BatchGetDevEndpointsResponse) => void): Request<Glue.Types.BatchGetDevEndpointsResponse, AWSError>;
+  /**
+   * Returns a list of resource metadata for a given list of job names. After calling the ListJobs operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags. 
+   */
+  batchGetJobs(params: Glue.Types.BatchGetJobsRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetJobsResponse) => void): Request<Glue.Types.BatchGetJobsResponse, AWSError>;
+  /**
+   * Returns a list of resource metadata for a given list of job names. After calling the ListJobs operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags. 
+   */
+  batchGetJobs(callback?: (err: AWSError, data: Glue.Types.BatchGetJobsResponse) => void): Request<Glue.Types.BatchGetJobsResponse, AWSError>;
+  /**
    * Retrieves partitions in a batch request.
    */
   batchGetPartition(params: Glue.Types.BatchGetPartitionRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetPartitionResponse) => void): Request<Glue.Types.BatchGetPartitionResponse, AWSError>;
@@ -59,6 +83,22 @@ declare class Glue extends Service {
    * Retrieves partitions in a batch request.
    */
   batchGetPartition(callback?: (err: AWSError, data: Glue.Types.BatchGetPartitionResponse) => void): Request<Glue.Types.BatchGetPartitionResponse, AWSError>;
+  /**
+   * Returns a list of resource metadata for a given list of trigger names. After calling the ListTriggers operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
+   */
+  batchGetTriggers(params: Glue.Types.BatchGetTriggersRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetTriggersResponse) => void): Request<Glue.Types.BatchGetTriggersResponse, AWSError>;
+  /**
+   * Returns a list of resource metadata for a given list of trigger names. After calling the ListTriggers operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
+   */
+  batchGetTriggers(callback?: (err: AWSError, data: Glue.Types.BatchGetTriggersResponse) => void): Request<Glue.Types.BatchGetTriggersResponse, AWSError>;
+  /**
+   * Returns a list of resource metadata for a given list of workflow names. After calling the ListWorkflows operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
+   */
+  batchGetWorkflows(params: Glue.Types.BatchGetWorkflowsRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetWorkflowsResponse) => void): Request<Glue.Types.BatchGetWorkflowsResponse, AWSError>;
+  /**
+   * Returns a list of resource metadata for a given list of workflow names. After calling the ListWorkflows operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
+   */
+  batchGetWorkflows(callback?: (err: AWSError, data: Glue.Types.BatchGetWorkflowsResponse) => void): Request<Glue.Types.BatchGetWorkflowsResponse, AWSError>;
   /**
    * Stops one or more job runs for a specified job definition.
    */
@@ -68,11 +108,19 @@ declare class Glue extends Service {
    */
   batchStopJobRun(callback?: (err: AWSError, data: Glue.Types.BatchStopJobRunResponse) => void): Request<Glue.Types.BatchStopJobRunResponse, AWSError>;
   /**
-   * Creates a classifier in the user's account. This may be a GrokClassifier, an XMLClassifier, or abbrev JsonClassifier, depending on which field of the request is present.
+   * Cancels (stops) a task run. Machine learning task runs are asynchronous tasks that AWS Glue runs on your behalf as part of various machine learning workflows. You can cancel a machine learning task run at any time by calling CancelMLTaskRun with a task run's parent transform's TransformID and the task run's TaskRunId. 
+   */
+  cancelMLTaskRun(params: Glue.Types.CancelMLTaskRunRequest, callback?: (err: AWSError, data: Glue.Types.CancelMLTaskRunResponse) => void): Request<Glue.Types.CancelMLTaskRunResponse, AWSError>;
+  /**
+   * Cancels (stops) a task run. Machine learning task runs are asynchronous tasks that AWS Glue runs on your behalf as part of various machine learning workflows. You can cancel a machine learning task run at any time by calling CancelMLTaskRun with a task run's parent transform's TransformID and the task run's TaskRunId. 
+   */
+  cancelMLTaskRun(callback?: (err: AWSError, data: Glue.Types.CancelMLTaskRunResponse) => void): Request<Glue.Types.CancelMLTaskRunResponse, AWSError>;
+  /**
+   * Creates a classifier in the user's account. This can be a GrokClassifier, an XMLClassifier, a JsonClassifier, or a CsvClassifier, depending on which field of the request is present.
    */
   createClassifier(params: Glue.Types.CreateClassifierRequest, callback?: (err: AWSError, data: Glue.Types.CreateClassifierResponse) => void): Request<Glue.Types.CreateClassifierResponse, AWSError>;
   /**
-   * Creates a classifier in the user's account. This may be a GrokClassifier, an XMLClassifier, or abbrev JsonClassifier, depending on which field of the request is present.
+   * Creates a classifier in the user's account. This can be a GrokClassifier, an XMLClassifier, a JsonClassifier, or a CsvClassifier, depending on which field of the request is present.
    */
   createClassifier(callback?: (err: AWSError, data: Glue.Types.CreateClassifierResponse) => void): Request<Glue.Types.CreateClassifierResponse, AWSError>;
   /**
@@ -100,11 +148,11 @@ declare class Glue extends Service {
    */
   createDatabase(callback?: (err: AWSError, data: Glue.Types.CreateDatabaseResponse) => void): Request<Glue.Types.CreateDatabaseResponse, AWSError>;
   /**
-   * Creates a new DevEndpoint.
+   * Creates a new development endpoint.
    */
   createDevEndpoint(params: Glue.Types.CreateDevEndpointRequest, callback?: (err: AWSError, data: Glue.Types.CreateDevEndpointResponse) => void): Request<Glue.Types.CreateDevEndpointResponse, AWSError>;
   /**
-   * Creates a new DevEndpoint.
+   * Creates a new development endpoint.
    */
   createDevEndpoint(callback?: (err: AWSError, data: Glue.Types.CreateDevEndpointResponse) => void): Request<Glue.Types.CreateDevEndpointResponse, AWSError>;
   /**
@@ -115,6 +163,14 @@ declare class Glue extends Service {
    * Creates a new job definition.
    */
   createJob(callback?: (err: AWSError, data: Glue.Types.CreateJobResponse) => void): Request<Glue.Types.CreateJobResponse, AWSError>;
+  /**
+   * Creates an AWS Glue machine learning transform. This operation creates the transform and all the necessary parameters to train it. Call this operation as the first step in the process of using a machine learning transform (such as the FindMatches transform) for deduplicating data. You can provide an optional Description, in addition to the parameters that you want to use for your algorithm. You must also specify certain parameters for the tasks that AWS Glue runs on your behalf as part of learning from your data and creating a high-quality machine learning transform. These parameters include Role, and optionally, AllocatedCapacity, Timeout, and MaxRetries. For more information, see Jobs.
+   */
+  createMLTransform(params: Glue.Types.CreateMLTransformRequest, callback?: (err: AWSError, data: Glue.Types.CreateMLTransformResponse) => void): Request<Glue.Types.CreateMLTransformResponse, AWSError>;
+  /**
+   * Creates an AWS Glue machine learning transform. This operation creates the transform and all the necessary parameters to train it. Call this operation as the first step in the process of using a machine learning transform (such as the FindMatches transform) for deduplicating data. You can provide an optional Description, in addition to the parameters that you want to use for your algorithm. You must also specify certain parameters for the tasks that AWS Glue runs on your behalf as part of learning from your data and creating a high-quality machine learning transform. These parameters include Role, and optionally, AllocatedCapacity, Timeout, and MaxRetries. For more information, see Jobs.
+   */
+  createMLTransform(callback?: (err: AWSError, data: Glue.Types.CreateMLTransformResponse) => void): Request<Glue.Types.CreateMLTransformResponse, AWSError>;
   /**
    * Creates a new partition.
    */
@@ -131,6 +187,14 @@ declare class Glue extends Service {
    * Transforms a directed acyclic graph (DAG) into code.
    */
   createScript(callback?: (err: AWSError, data: Glue.Types.CreateScriptResponse) => void): Request<Glue.Types.CreateScriptResponse, AWSError>;
+  /**
+   * Creates a new security configuration. A security configuration is a set of security properties that can be used by AWS Glue. You can use a security configuration to encrypt data at rest. For information about using security configurations in AWS Glue, see Encrypting Data Written by Crawlers, Jobs, and Development Endpoints.
+   */
+  createSecurityConfiguration(params: Glue.Types.CreateSecurityConfigurationRequest, callback?: (err: AWSError, data: Glue.Types.CreateSecurityConfigurationResponse) => void): Request<Glue.Types.CreateSecurityConfigurationResponse, AWSError>;
+  /**
+   * Creates a new security configuration. A security configuration is a set of security properties that can be used by AWS Glue. You can use a security configuration to encrypt data at rest. For information about using security configurations in AWS Glue, see Encrypting Data Written by Crawlers, Jobs, and Development Endpoints.
+   */
+  createSecurityConfiguration(callback?: (err: AWSError, data: Glue.Types.CreateSecurityConfigurationResponse) => void): Request<Glue.Types.CreateSecurityConfigurationResponse, AWSError>;
   /**
    * Creates a new table definition in the Data Catalog.
    */
@@ -156,6 +220,14 @@ declare class Glue extends Service {
    */
   createUserDefinedFunction(callback?: (err: AWSError, data: Glue.Types.CreateUserDefinedFunctionResponse) => void): Request<Glue.Types.CreateUserDefinedFunctionResponse, AWSError>;
   /**
+   * Creates a new workflow.
+   */
+  createWorkflow(params: Glue.Types.CreateWorkflowRequest, callback?: (err: AWSError, data: Glue.Types.CreateWorkflowResponse) => void): Request<Glue.Types.CreateWorkflowResponse, AWSError>;
+  /**
+   * Creates a new workflow.
+   */
+  createWorkflow(callback?: (err: AWSError, data: Glue.Types.CreateWorkflowResponse) => void): Request<Glue.Types.CreateWorkflowResponse, AWSError>;
+  /**
    * Removes a classifier from the Data Catalog.
    */
   deleteClassifier(params: Glue.Types.DeleteClassifierRequest, callback?: (err: AWSError, data: Glue.Types.DeleteClassifierResponse) => void): Request<Glue.Types.DeleteClassifierResponse, AWSError>;
@@ -172,27 +244,27 @@ declare class Glue extends Service {
    */
   deleteConnection(callback?: (err: AWSError, data: Glue.Types.DeleteConnectionResponse) => void): Request<Glue.Types.DeleteConnectionResponse, AWSError>;
   /**
-   * Removes a specified crawler from the Data Catalog, unless the crawler state is RUNNING.
+   * Removes a specified crawler from the AWS Glue Data Catalog, unless the crawler state is RUNNING.
    */
   deleteCrawler(params: Glue.Types.DeleteCrawlerRequest, callback?: (err: AWSError, data: Glue.Types.DeleteCrawlerResponse) => void): Request<Glue.Types.DeleteCrawlerResponse, AWSError>;
   /**
-   * Removes a specified crawler from the Data Catalog, unless the crawler state is RUNNING.
+   * Removes a specified crawler from the AWS Glue Data Catalog, unless the crawler state is RUNNING.
    */
   deleteCrawler(callback?: (err: AWSError, data: Glue.Types.DeleteCrawlerResponse) => void): Request<Glue.Types.DeleteCrawlerResponse, AWSError>;
   /**
-   * Removes a specified Database from a Data Catalog.
+   * Removes a specified database from a Data Catalog.  After completing this operation, you no longer have access to the tables (and all table versions and partitions that might belong to the tables) and the user-defined functions in the deleted database. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure the immediate deletion of all related resources, before calling DeleteDatabase, use DeleteTableVersion or BatchDeleteTableVersion, DeletePartition or BatchDeletePartition, DeleteUserDefinedFunction, and DeleteTable or BatchDeleteTable, to delete any resources that belong to the database. 
    */
   deleteDatabase(params: Glue.Types.DeleteDatabaseRequest, callback?: (err: AWSError, data: Glue.Types.DeleteDatabaseResponse) => void): Request<Glue.Types.DeleteDatabaseResponse, AWSError>;
   /**
-   * Removes a specified Database from a Data Catalog.
+   * Removes a specified database from a Data Catalog.  After completing this operation, you no longer have access to the tables (and all table versions and partitions that might belong to the tables) and the user-defined functions in the deleted database. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure the immediate deletion of all related resources, before calling DeleteDatabase, use DeleteTableVersion or BatchDeleteTableVersion, DeletePartition or BatchDeletePartition, DeleteUserDefinedFunction, and DeleteTable or BatchDeleteTable, to delete any resources that belong to the database. 
    */
   deleteDatabase(callback?: (err: AWSError, data: Glue.Types.DeleteDatabaseResponse) => void): Request<Glue.Types.DeleteDatabaseResponse, AWSError>;
   /**
-   * Deletes a specified DevEndpoint.
+   * Deletes a specified development endpoint.
    */
   deleteDevEndpoint(params: Glue.Types.DeleteDevEndpointRequest, callback?: (err: AWSError, data: Glue.Types.DeleteDevEndpointResponse) => void): Request<Glue.Types.DeleteDevEndpointResponse, AWSError>;
   /**
-   * Deletes a specified DevEndpoint.
+   * Deletes a specified development endpoint.
    */
   deleteDevEndpoint(callback?: (err: AWSError, data: Glue.Types.DeleteDevEndpointResponse) => void): Request<Glue.Types.DeleteDevEndpointResponse, AWSError>;
   /**
@@ -204,6 +276,14 @@ declare class Glue extends Service {
    */
   deleteJob(callback?: (err: AWSError, data: Glue.Types.DeleteJobResponse) => void): Request<Glue.Types.DeleteJobResponse, AWSError>;
   /**
+   * Deletes an AWS Glue machine learning transform. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by AWS Glue. If you no longer need a transform, you can delete it by calling DeleteMLTransforms. However, any AWS Glue jobs that still reference the deleted transform will no longer succeed.
+   */
+  deleteMLTransform(params: Glue.Types.DeleteMLTransformRequest, callback?: (err: AWSError, data: Glue.Types.DeleteMLTransformResponse) => void): Request<Glue.Types.DeleteMLTransformResponse, AWSError>;
+  /**
+   * Deletes an AWS Glue machine learning transform. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by AWS Glue. If you no longer need a transform, you can delete it by calling DeleteMLTransforms. However, any AWS Glue jobs that still reference the deleted transform will no longer succeed.
+   */
+  deleteMLTransform(callback?: (err: AWSError, data: Glue.Types.DeleteMLTransformResponse) => void): Request<Glue.Types.DeleteMLTransformResponse, AWSError>;
+  /**
    * Deletes a specified partition.
    */
   deletePartition(params: Glue.Types.DeletePartitionRequest, callback?: (err: AWSError, data: Glue.Types.DeletePartitionResponse) => void): Request<Glue.Types.DeletePartitionResponse, AWSError>;
@@ -212,11 +292,27 @@ declare class Glue extends Service {
    */
   deletePartition(callback?: (err: AWSError, data: Glue.Types.DeletePartitionResponse) => void): Request<Glue.Types.DeletePartitionResponse, AWSError>;
   /**
-   * Removes a table definition from the Data Catalog.
+   * Deletes a specified policy.
+   */
+  deleteResourcePolicy(params: Glue.Types.DeleteResourcePolicyRequest, callback?: (err: AWSError, data: Glue.Types.DeleteResourcePolicyResponse) => void): Request<Glue.Types.DeleteResourcePolicyResponse, AWSError>;
+  /**
+   * Deletes a specified policy.
+   */
+  deleteResourcePolicy(callback?: (err: AWSError, data: Glue.Types.DeleteResourcePolicyResponse) => void): Request<Glue.Types.DeleteResourcePolicyResponse, AWSError>;
+  /**
+   * Deletes a specified security configuration.
+   */
+  deleteSecurityConfiguration(params: Glue.Types.DeleteSecurityConfigurationRequest, callback?: (err: AWSError, data: Glue.Types.DeleteSecurityConfigurationResponse) => void): Request<Glue.Types.DeleteSecurityConfigurationResponse, AWSError>;
+  /**
+   * Deletes a specified security configuration.
+   */
+  deleteSecurityConfiguration(callback?: (err: AWSError, data: Glue.Types.DeleteSecurityConfigurationResponse) => void): Request<Glue.Types.DeleteSecurityConfigurationResponse, AWSError>;
+  /**
+   * Removes a table definition from the Data Catalog.  After completing this operation, you no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure the immediate deletion of all related resources, before calling DeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to delete any resources that belong to the table. 
    */
   deleteTable(params: Glue.Types.DeleteTableRequest, callback?: (err: AWSError, data: Glue.Types.DeleteTableResponse) => void): Request<Glue.Types.DeleteTableResponse, AWSError>;
   /**
-   * Removes a table definition from the Data Catalog.
+   * Removes a table definition from the Data Catalog.  After completing this operation, you no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure the immediate deletion of all related resources, before calling DeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to delete any resources that belong to the table. 
    */
   deleteTable(callback?: (err: AWSError, data: Glue.Types.DeleteTableResponse) => void): Request<Glue.Types.DeleteTableResponse, AWSError>;
   /**
@@ -243,6 +339,14 @@ declare class Glue extends Service {
    * Deletes an existing function definition from the Data Catalog.
    */
   deleteUserDefinedFunction(callback?: (err: AWSError, data: Glue.Types.DeleteUserDefinedFunctionResponse) => void): Request<Glue.Types.DeleteUserDefinedFunctionResponse, AWSError>;
+  /**
+   * Deletes a workflow.
+   */
+  deleteWorkflow(params: Glue.Types.DeleteWorkflowRequest, callback?: (err: AWSError, data: Glue.Types.DeleteWorkflowResponse) => void): Request<Glue.Types.DeleteWorkflowResponse, AWSError>;
+  /**
+   * Deletes a workflow.
+   */
+  deleteWorkflow(callback?: (err: AWSError, data: Glue.Types.DeleteWorkflowResponse) => void): Request<Glue.Types.DeleteWorkflowResponse, AWSError>;
   /**
    * Retrieves the status of a migration operation.
    */
@@ -308,6 +412,14 @@ declare class Glue extends Service {
    */
   getCrawlers(callback?: (err: AWSError, data: Glue.Types.GetCrawlersResponse) => void): Request<Glue.Types.GetCrawlersResponse, AWSError>;
   /**
+   * Retrieves the security configuration for a specified catalog.
+   */
+  getDataCatalogEncryptionSettings(params: Glue.Types.GetDataCatalogEncryptionSettingsRequest, callback?: (err: AWSError, data: Glue.Types.GetDataCatalogEncryptionSettingsResponse) => void): Request<Glue.Types.GetDataCatalogEncryptionSettingsResponse, AWSError>;
+  /**
+   * Retrieves the security configuration for a specified catalog.
+   */
+  getDataCatalogEncryptionSettings(callback?: (err: AWSError, data: Glue.Types.GetDataCatalogEncryptionSettingsResponse) => void): Request<Glue.Types.GetDataCatalogEncryptionSettingsResponse, AWSError>;
+  /**
    * Retrieves the definition of a specified database.
    */
   getDatabase(params: Glue.Types.GetDatabaseRequest, callback?: (err: AWSError, data: Glue.Types.GetDatabaseResponse) => void): Request<Glue.Types.GetDatabaseResponse, AWSError>;
@@ -316,11 +428,11 @@ declare class Glue extends Service {
    */
   getDatabase(callback?: (err: AWSError, data: Glue.Types.GetDatabaseResponse) => void): Request<Glue.Types.GetDatabaseResponse, AWSError>;
   /**
-   * Retrieves all Databases defined in a given Data Catalog.
+   * Retrieves all databases defined in a given Data Catalog.
    */
   getDatabases(params: Glue.Types.GetDatabasesRequest, callback?: (err: AWSError, data: Glue.Types.GetDatabasesResponse) => void): Request<Glue.Types.GetDatabasesResponse, AWSError>;
   /**
-   * Retrieves all Databases defined in a given Data Catalog.
+   * Retrieves all databases defined in a given Data Catalog.
    */
   getDatabases(callback?: (err: AWSError, data: Glue.Types.GetDatabasesResponse) => void): Request<Glue.Types.GetDatabasesResponse, AWSError>;
   /**
@@ -332,19 +444,19 @@ declare class Glue extends Service {
    */
   getDataflowGraph(callback?: (err: AWSError, data: Glue.Types.GetDataflowGraphResponse) => void): Request<Glue.Types.GetDataflowGraphResponse, AWSError>;
   /**
-   * Retrieves information about a specified DevEndpoint.
+   * Retrieves information about a specified development endpoint.  When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address, and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address. 
    */
   getDevEndpoint(params: Glue.Types.GetDevEndpointRequest, callback?: (err: AWSError, data: Glue.Types.GetDevEndpointResponse) => void): Request<Glue.Types.GetDevEndpointResponse, AWSError>;
   /**
-   * Retrieves information about a specified DevEndpoint.
+   * Retrieves information about a specified development endpoint.  When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address, and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address. 
    */
   getDevEndpoint(callback?: (err: AWSError, data: Glue.Types.GetDevEndpointResponse) => void): Request<Glue.Types.GetDevEndpointResponse, AWSError>;
   /**
-   * Retrieves all the DevEndpoints in this AWS account.
+   * Retrieves all the development endpoints in this AWS account.  When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address. 
    */
   getDevEndpoints(params: Glue.Types.GetDevEndpointsRequest, callback?: (err: AWSError, data: Glue.Types.GetDevEndpointsResponse) => void): Request<Glue.Types.GetDevEndpointsResponse, AWSError>;
   /**
-   * Retrieves all the DevEndpoints in this AWS account.
+   * Retrieves all the development endpoints in this AWS account.  When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address. 
    */
   getDevEndpoints(callback?: (err: AWSError, data: Glue.Types.GetDevEndpointsResponse) => void): Request<Glue.Types.GetDevEndpointsResponse, AWSError>;
   /**
@@ -355,6 +467,14 @@ declare class Glue extends Service {
    * Retrieves an existing job definition.
    */
   getJob(callback?: (err: AWSError, data: Glue.Types.GetJobResponse) => void): Request<Glue.Types.GetJobResponse, AWSError>;
+  /**
+   * Returns information on a job bookmark entry.
+   */
+  getJobBookmark(params: Glue.Types.GetJobBookmarkRequest, callback?: (err: AWSError, data: Glue.Types.GetJobBookmarkResponse) => void): Request<Glue.Types.GetJobBookmarkResponse, AWSError>;
+  /**
+   * Returns information on a job bookmark entry.
+   */
+  getJobBookmark(callback?: (err: AWSError, data: Glue.Types.GetJobBookmarkResponse) => void): Request<Glue.Types.GetJobBookmarkResponse, AWSError>;
   /**
    * Retrieves the metadata for a given job run.
    */
@@ -379,6 +499,38 @@ declare class Glue extends Service {
    * Retrieves all current job definitions.
    */
   getJobs(callback?: (err: AWSError, data: Glue.Types.GetJobsResponse) => void): Request<Glue.Types.GetJobsResponse, AWSError>;
+  /**
+   * Gets details for a specific task run on a machine learning transform. Machine learning task runs are asynchronous tasks that AWS Glue runs on your behalf as part of various machine learning workflows. You can check the stats of any task run by calling GetMLTaskRun with the TaskRunID and its parent transform's TransformID.
+   */
+  getMLTaskRun(params: Glue.Types.GetMLTaskRunRequest, callback?: (err: AWSError, data: Glue.Types.GetMLTaskRunResponse) => void): Request<Glue.Types.GetMLTaskRunResponse, AWSError>;
+  /**
+   * Gets details for a specific task run on a machine learning transform. Machine learning task runs are asynchronous tasks that AWS Glue runs on your behalf as part of various machine learning workflows. You can check the stats of any task run by calling GetMLTaskRun with the TaskRunID and its parent transform's TransformID.
+   */
+  getMLTaskRun(callback?: (err: AWSError, data: Glue.Types.GetMLTaskRunResponse) => void): Request<Glue.Types.GetMLTaskRunResponse, AWSError>;
+  /**
+   * Gets a list of runs for a machine learning transform. Machine learning task runs are asynchronous tasks that AWS Glue runs on your behalf as part of various machine learning workflows. You can get a sortable, filterable list of machine learning task runs by calling GetMLTaskRuns with their parent transform's TransformID and other optional parameters as documented in this section. This operation returns a list of historic runs and must be paginated.
+   */
+  getMLTaskRuns(params: Glue.Types.GetMLTaskRunsRequest, callback?: (err: AWSError, data: Glue.Types.GetMLTaskRunsResponse) => void): Request<Glue.Types.GetMLTaskRunsResponse, AWSError>;
+  /**
+   * Gets a list of runs for a machine learning transform. Machine learning task runs are asynchronous tasks that AWS Glue runs on your behalf as part of various machine learning workflows. You can get a sortable, filterable list of machine learning task runs by calling GetMLTaskRuns with their parent transform's TransformID and other optional parameters as documented in this section. This operation returns a list of historic runs and must be paginated.
+   */
+  getMLTaskRuns(callback?: (err: AWSError, data: Glue.Types.GetMLTaskRunsResponse) => void): Request<Glue.Types.GetMLTaskRunsResponse, AWSError>;
+  /**
+   * Gets an AWS Glue machine learning transform artifact and all its corresponding metadata. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by AWS Glue. You can retrieve their metadata by calling GetMLTransform.
+   */
+  getMLTransform(params: Glue.Types.GetMLTransformRequest, callback?: (err: AWSError, data: Glue.Types.GetMLTransformResponse) => void): Request<Glue.Types.GetMLTransformResponse, AWSError>;
+  /**
+   * Gets an AWS Glue machine learning transform artifact and all its corresponding metadata. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by AWS Glue. You can retrieve their metadata by calling GetMLTransform.
+   */
+  getMLTransform(callback?: (err: AWSError, data: Glue.Types.GetMLTransformResponse) => void): Request<Glue.Types.GetMLTransformResponse, AWSError>;
+  /**
+   * Gets a sortable, filterable list of existing AWS Glue machine learning transforms. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by AWS Glue, and you can retrieve their metadata by calling GetMLTransforms.
+   */
+  getMLTransforms(params: Glue.Types.GetMLTransformsRequest, callback?: (err: AWSError, data: Glue.Types.GetMLTransformsResponse) => void): Request<Glue.Types.GetMLTransformsResponse, AWSError>;
+  /**
+   * Gets a sortable, filterable list of existing AWS Glue machine learning transforms. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by AWS Glue, and you can retrieve their metadata by calling GetMLTransforms.
+   */
+  getMLTransforms(callback?: (err: AWSError, data: Glue.Types.GetMLTransformsResponse) => void): Request<Glue.Types.GetMLTransformsResponse, AWSError>;
   /**
    * Creates mappings.
    */
@@ -412,6 +564,30 @@ declare class Glue extends Service {
    */
   getPlan(callback?: (err: AWSError, data: Glue.Types.GetPlanResponse) => void): Request<Glue.Types.GetPlanResponse, AWSError>;
   /**
+   * Retrieves a specified resource policy.
+   */
+  getResourcePolicy(params: Glue.Types.GetResourcePolicyRequest, callback?: (err: AWSError, data: Glue.Types.GetResourcePolicyResponse) => void): Request<Glue.Types.GetResourcePolicyResponse, AWSError>;
+  /**
+   * Retrieves a specified resource policy.
+   */
+  getResourcePolicy(callback?: (err: AWSError, data: Glue.Types.GetResourcePolicyResponse) => void): Request<Glue.Types.GetResourcePolicyResponse, AWSError>;
+  /**
+   * Retrieves a specified security configuration.
+   */
+  getSecurityConfiguration(params: Glue.Types.GetSecurityConfigurationRequest, callback?: (err: AWSError, data: Glue.Types.GetSecurityConfigurationResponse) => void): Request<Glue.Types.GetSecurityConfigurationResponse, AWSError>;
+  /**
+   * Retrieves a specified security configuration.
+   */
+  getSecurityConfiguration(callback?: (err: AWSError, data: Glue.Types.GetSecurityConfigurationResponse) => void): Request<Glue.Types.GetSecurityConfigurationResponse, AWSError>;
+  /**
+   * Retrieves a list of all security configurations.
+   */
+  getSecurityConfigurations(params: Glue.Types.GetSecurityConfigurationsRequest, callback?: (err: AWSError, data: Glue.Types.GetSecurityConfigurationsResponse) => void): Request<Glue.Types.GetSecurityConfigurationsResponse, AWSError>;
+  /**
+   * Retrieves a list of all security configurations.
+   */
+  getSecurityConfigurations(callback?: (err: AWSError, data: Glue.Types.GetSecurityConfigurationsResponse) => void): Request<Glue.Types.GetSecurityConfigurationsResponse, AWSError>;
+  /**
    * Retrieves the Table definition in a Data Catalog for a specified table.
    */
   getTable(params: Glue.Types.GetTableRequest, callback?: (err: AWSError, data: Glue.Types.GetTableResponse) => void): Request<Glue.Types.GetTableResponse, AWSError>;
@@ -444,6 +620,14 @@ declare class Glue extends Service {
    */
   getTables(callback?: (err: AWSError, data: Glue.Types.GetTablesResponse) => void): Request<Glue.Types.GetTablesResponse, AWSError>;
   /**
+   * Retrieves a list of tags associated with a resource.
+   */
+  getTags(params: Glue.Types.GetTagsRequest, callback?: (err: AWSError, data: Glue.Types.GetTagsResponse) => void): Request<Glue.Types.GetTagsResponse, AWSError>;
+  /**
+   * Retrieves a list of tags associated with a resource.
+   */
+  getTags(callback?: (err: AWSError, data: Glue.Types.GetTagsResponse) => void): Request<Glue.Types.GetTagsResponse, AWSError>;
+  /**
    * Retrieves the definition of a trigger.
    */
   getTrigger(params: Glue.Types.GetTriggerRequest, callback?: (err: AWSError, data: Glue.Types.GetTriggerResponse) => void): Request<Glue.Types.GetTriggerResponse, AWSError>;
@@ -468,21 +652,125 @@ declare class Glue extends Service {
    */
   getUserDefinedFunction(callback?: (err: AWSError, data: Glue.Types.GetUserDefinedFunctionResponse) => void): Request<Glue.Types.GetUserDefinedFunctionResponse, AWSError>;
   /**
-   * Retrieves a multiple function definitions from the Data Catalog.
+   * Retrieves multiple function definitions from the Data Catalog.
    */
   getUserDefinedFunctions(params: Glue.Types.GetUserDefinedFunctionsRequest, callback?: (err: AWSError, data: Glue.Types.GetUserDefinedFunctionsResponse) => void): Request<Glue.Types.GetUserDefinedFunctionsResponse, AWSError>;
   /**
-   * Retrieves a multiple function definitions from the Data Catalog.
+   * Retrieves multiple function definitions from the Data Catalog.
    */
   getUserDefinedFunctions(callback?: (err: AWSError, data: Glue.Types.GetUserDefinedFunctionsResponse) => void): Request<Glue.Types.GetUserDefinedFunctionsResponse, AWSError>;
   /**
-   * Imports an existing Athena Data Catalog to AWS Glue
+   * Retrieves resource metadata for a workflow.
+   */
+  getWorkflow(params: Glue.Types.GetWorkflowRequest, callback?: (err: AWSError, data: Glue.Types.GetWorkflowResponse) => void): Request<Glue.Types.GetWorkflowResponse, AWSError>;
+  /**
+   * Retrieves resource metadata for a workflow.
+   */
+  getWorkflow(callback?: (err: AWSError, data: Glue.Types.GetWorkflowResponse) => void): Request<Glue.Types.GetWorkflowResponse, AWSError>;
+  /**
+   * Retrieves the metadata for a given workflow run. 
+   */
+  getWorkflowRun(params: Glue.Types.GetWorkflowRunRequest, callback?: (err: AWSError, data: Glue.Types.GetWorkflowRunResponse) => void): Request<Glue.Types.GetWorkflowRunResponse, AWSError>;
+  /**
+   * Retrieves the metadata for a given workflow run. 
+   */
+  getWorkflowRun(callback?: (err: AWSError, data: Glue.Types.GetWorkflowRunResponse) => void): Request<Glue.Types.GetWorkflowRunResponse, AWSError>;
+  /**
+   * Retrieves the workflow run properties which were set during the run.
+   */
+  getWorkflowRunProperties(params: Glue.Types.GetWorkflowRunPropertiesRequest, callback?: (err: AWSError, data: Glue.Types.GetWorkflowRunPropertiesResponse) => void): Request<Glue.Types.GetWorkflowRunPropertiesResponse, AWSError>;
+  /**
+   * Retrieves the workflow run properties which were set during the run.
+   */
+  getWorkflowRunProperties(callback?: (err: AWSError, data: Glue.Types.GetWorkflowRunPropertiesResponse) => void): Request<Glue.Types.GetWorkflowRunPropertiesResponse, AWSError>;
+  /**
+   * Retrieves metadata for all runs of a given workflow.
+   */
+  getWorkflowRuns(params: Glue.Types.GetWorkflowRunsRequest, callback?: (err: AWSError, data: Glue.Types.GetWorkflowRunsResponse) => void): Request<Glue.Types.GetWorkflowRunsResponse, AWSError>;
+  /**
+   * Retrieves metadata for all runs of a given workflow.
+   */
+  getWorkflowRuns(callback?: (err: AWSError, data: Glue.Types.GetWorkflowRunsResponse) => void): Request<Glue.Types.GetWorkflowRunsResponse, AWSError>;
+  /**
+   * Imports an existing Amazon Athena Data Catalog to AWS Glue
    */
   importCatalogToGlue(params: Glue.Types.ImportCatalogToGlueRequest, callback?: (err: AWSError, data: Glue.Types.ImportCatalogToGlueResponse) => void): Request<Glue.Types.ImportCatalogToGlueResponse, AWSError>;
   /**
-   * Imports an existing Athena Data Catalog to AWS Glue
+   * Imports an existing Amazon Athena Data Catalog to AWS Glue
    */
   importCatalogToGlue(callback?: (err: AWSError, data: Glue.Types.ImportCatalogToGlueResponse) => void): Request<Glue.Types.ImportCatalogToGlueResponse, AWSError>;
+  /**
+   * Retrieves the names of all crawler resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
+   */
+  listCrawlers(params: Glue.Types.ListCrawlersRequest, callback?: (err: AWSError, data: Glue.Types.ListCrawlersResponse) => void): Request<Glue.Types.ListCrawlersResponse, AWSError>;
+  /**
+   * Retrieves the names of all crawler resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
+   */
+  listCrawlers(callback?: (err: AWSError, data: Glue.Types.ListCrawlersResponse) => void): Request<Glue.Types.ListCrawlersResponse, AWSError>;
+  /**
+   * Retrieves the names of all DevEndpoint resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
+   */
+  listDevEndpoints(params: Glue.Types.ListDevEndpointsRequest, callback?: (err: AWSError, data: Glue.Types.ListDevEndpointsResponse) => void): Request<Glue.Types.ListDevEndpointsResponse, AWSError>;
+  /**
+   * Retrieves the names of all DevEndpoint resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
+   */
+  listDevEndpoints(callback?: (err: AWSError, data: Glue.Types.ListDevEndpointsResponse) => void): Request<Glue.Types.ListDevEndpointsResponse, AWSError>;
+  /**
+   * Retrieves the names of all job resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
+   */
+  listJobs(params: Glue.Types.ListJobsRequest, callback?: (err: AWSError, data: Glue.Types.ListJobsResponse) => void): Request<Glue.Types.ListJobsResponse, AWSError>;
+  /**
+   * Retrieves the names of all job resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
+   */
+  listJobs(callback?: (err: AWSError, data: Glue.Types.ListJobsResponse) => void): Request<Glue.Types.ListJobsResponse, AWSError>;
+  /**
+   *  Retrieves a sortable, filterable list of existing AWS Glue machine learning transforms in this AWS account, or the resources with the specified tag. This operation takes the optional Tags field, which you can use as a filter of the responses so that tagged resources can be retrieved as a group. If you choose to use tag filtering, only resources with the tags are retrieved. 
+   */
+  listMLTransforms(params: Glue.Types.ListMLTransformsRequest, callback?: (err: AWSError, data: Glue.Types.ListMLTransformsResponse) => void): Request<Glue.Types.ListMLTransformsResponse, AWSError>;
+  /**
+   *  Retrieves a sortable, filterable list of existing AWS Glue machine learning transforms in this AWS account, or the resources with the specified tag. This operation takes the optional Tags field, which you can use as a filter of the responses so that tagged resources can be retrieved as a group. If you choose to use tag filtering, only resources with the tags are retrieved. 
+   */
+  listMLTransforms(callback?: (err: AWSError, data: Glue.Types.ListMLTransformsResponse) => void): Request<Glue.Types.ListMLTransformsResponse, AWSError>;
+  /**
+   * Retrieves the names of all trigger resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
+   */
+  listTriggers(params: Glue.Types.ListTriggersRequest, callback?: (err: AWSError, data: Glue.Types.ListTriggersResponse) => void): Request<Glue.Types.ListTriggersResponse, AWSError>;
+  /**
+   * Retrieves the names of all trigger resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
+   */
+  listTriggers(callback?: (err: AWSError, data: Glue.Types.ListTriggersResponse) => void): Request<Glue.Types.ListTriggersResponse, AWSError>;
+  /**
+   * Lists names of workflows created in the account.
+   */
+  listWorkflows(params: Glue.Types.ListWorkflowsRequest, callback?: (err: AWSError, data: Glue.Types.ListWorkflowsResponse) => void): Request<Glue.Types.ListWorkflowsResponse, AWSError>;
+  /**
+   * Lists names of workflows created in the account.
+   */
+  listWorkflows(callback?: (err: AWSError, data: Glue.Types.ListWorkflowsResponse) => void): Request<Glue.Types.ListWorkflowsResponse, AWSError>;
+  /**
+   * Sets the security configuration for a specified catalog. After the configuration has been set, the specified encryption is applied to every catalog write thereafter.
+   */
+  putDataCatalogEncryptionSettings(params: Glue.Types.PutDataCatalogEncryptionSettingsRequest, callback?: (err: AWSError, data: Glue.Types.PutDataCatalogEncryptionSettingsResponse) => void): Request<Glue.Types.PutDataCatalogEncryptionSettingsResponse, AWSError>;
+  /**
+   * Sets the security configuration for a specified catalog. After the configuration has been set, the specified encryption is applied to every catalog write thereafter.
+   */
+  putDataCatalogEncryptionSettings(callback?: (err: AWSError, data: Glue.Types.PutDataCatalogEncryptionSettingsResponse) => void): Request<Glue.Types.PutDataCatalogEncryptionSettingsResponse, AWSError>;
+  /**
+   * Sets the Data Catalog resource policy for access control.
+   */
+  putResourcePolicy(params: Glue.Types.PutResourcePolicyRequest, callback?: (err: AWSError, data: Glue.Types.PutResourcePolicyResponse) => void): Request<Glue.Types.PutResourcePolicyResponse, AWSError>;
+  /**
+   * Sets the Data Catalog resource policy for access control.
+   */
+  putResourcePolicy(callback?: (err: AWSError, data: Glue.Types.PutResourcePolicyResponse) => void): Request<Glue.Types.PutResourcePolicyResponse, AWSError>;
+  /**
+   * Puts the specified workflow run properties for the given workflow run. If a property already exists for the specified run, then it overrides the value otherwise adds the property to existing properties.
+   */
+  putWorkflowRunProperties(params: Glue.Types.PutWorkflowRunPropertiesRequest, callback?: (err: AWSError, data: Glue.Types.PutWorkflowRunPropertiesResponse) => void): Request<Glue.Types.PutWorkflowRunPropertiesResponse, AWSError>;
+  /**
+   * Puts the specified workflow run properties for the given workflow run. If a property already exists for the specified run, then it overrides the value otherwise adds the property to existing properties.
+   */
+  putWorkflowRunProperties(callback?: (err: AWSError, data: Glue.Types.PutWorkflowRunPropertiesResponse) => void): Request<Glue.Types.PutWorkflowRunPropertiesResponse, AWSError>;
   /**
    * Resets a bookmark entry.
    */
@@ -491,6 +779,14 @@ declare class Glue extends Service {
    * Resets a bookmark entry.
    */
   resetJobBookmark(callback?: (err: AWSError, data: Glue.Types.ResetJobBookmarkResponse) => void): Request<Glue.Types.ResetJobBookmarkResponse, AWSError>;
+  /**
+   * Searches a set of tables based on properties in the table metadata as well as on the parent database. You can search against text or filter conditions.  You can only get tables that you have access to based on the security policies defined in Lake Formation. You need at least a read-only access to the table for it to be returned. If you do not have access to all the columns in the table, these columns will not be searched against when returning the list of tables back to you. If you have access to the columns but not the data in the columns, those columns and the associated metadata for those columns will be included in the search. 
+   */
+  searchTables(params: Glue.Types.SearchTablesRequest, callback?: (err: AWSError, data: Glue.Types.SearchTablesResponse) => void): Request<Glue.Types.SearchTablesResponse, AWSError>;
+  /**
+   * Searches a set of tables based on properties in the table metadata as well as on the parent database. You can search against text or filter conditions.  You can only get tables that you have access to based on the security policies defined in Lake Formation. You need at least a read-only access to the table for it to be returned. If you do not have access to all the columns in the table, these columns will not be searched against when returning the list of tables back to you. If you have access to the columns but not the data in the columns, those columns and the associated metadata for those columns will be included in the search. 
+   */
+  searchTables(callback?: (err: AWSError, data: Glue.Types.SearchTablesResponse) => void): Request<Glue.Types.SearchTablesResponse, AWSError>;
   /**
    * Starts a crawl using the specified crawler, regardless of what is scheduled. If the crawler is already running, returns a CrawlerRunningException.
    */
@@ -508,6 +804,22 @@ declare class Glue extends Service {
    */
   startCrawlerSchedule(callback?: (err: AWSError, data: Glue.Types.StartCrawlerScheduleResponse) => void): Request<Glue.Types.StartCrawlerScheduleResponse, AWSError>;
   /**
+   * Begins an asynchronous task to export all labeled data for a particular transform. This task is the only label-related API call that is not part of the typical active learning workflow. You typically use StartExportLabelsTaskRun when you want to work with all of your existing labels at the same time, such as when you want to remove or change labels that were previously submitted as truth. This API operation accepts the TransformId whose labels you want to export and an Amazon Simple Storage Service (Amazon S3) path to export the labels to. The operation returns a TaskRunId. You can check on the status of your task run by calling the GetMLTaskRun API.
+   */
+  startExportLabelsTaskRun(params: Glue.Types.StartExportLabelsTaskRunRequest, callback?: (err: AWSError, data: Glue.Types.StartExportLabelsTaskRunResponse) => void): Request<Glue.Types.StartExportLabelsTaskRunResponse, AWSError>;
+  /**
+   * Begins an asynchronous task to export all labeled data for a particular transform. This task is the only label-related API call that is not part of the typical active learning workflow. You typically use StartExportLabelsTaskRun when you want to work with all of your existing labels at the same time, such as when you want to remove or change labels that were previously submitted as truth. This API operation accepts the TransformId whose labels you want to export and an Amazon Simple Storage Service (Amazon S3) path to export the labels to. The operation returns a TaskRunId. You can check on the status of your task run by calling the GetMLTaskRun API.
+   */
+  startExportLabelsTaskRun(callback?: (err: AWSError, data: Glue.Types.StartExportLabelsTaskRunResponse) => void): Request<Glue.Types.StartExportLabelsTaskRunResponse, AWSError>;
+  /**
+   * Enables you to provide additional labels (examples of truth) to be used to teach the machine learning transform and improve its quality. This API operation is generally used as part of the active learning workflow that starts with the StartMLLabelingSetGenerationTaskRun call and that ultimately results in improving the quality of your machine learning transform.  After the StartMLLabelingSetGenerationTaskRun finishes, AWS Glue machine learning will have generated a series of questions for humans to answer. (Answering these questions is often called 'labeling' in the machine learning workflows). In the case of the FindMatches transform, these questions are of the form, “What is the correct way to group these rows together into groups composed entirely of matching records?” After the labeling process is finished, users upload their answers/labels with a call to StartImportLabelsTaskRun. After StartImportLabelsTaskRun finishes, all future runs of the machine learning transform use the new and improved labels and perform a higher-quality transformation. By default, StartMLLabelingSetGenerationTaskRun continually learns from and combines all labels that you upload unless you set Replace to true. If you set Replace to true, StartImportLabelsTaskRun deletes and forgets all previously uploaded labels and learns only from the exact set that you upload. Replacing labels can be helpful if you realize that you previously uploaded incorrect labels, and you believe that they are having a negative effect on your transform quality. You can check on the status of your task run by calling the GetMLTaskRun operation. 
+   */
+  startImportLabelsTaskRun(params: Glue.Types.StartImportLabelsTaskRunRequest, callback?: (err: AWSError, data: Glue.Types.StartImportLabelsTaskRunResponse) => void): Request<Glue.Types.StartImportLabelsTaskRunResponse, AWSError>;
+  /**
+   * Enables you to provide additional labels (examples of truth) to be used to teach the machine learning transform and improve its quality. This API operation is generally used as part of the active learning workflow that starts with the StartMLLabelingSetGenerationTaskRun call and that ultimately results in improving the quality of your machine learning transform.  After the StartMLLabelingSetGenerationTaskRun finishes, AWS Glue machine learning will have generated a series of questions for humans to answer. (Answering these questions is often called 'labeling' in the machine learning workflows). In the case of the FindMatches transform, these questions are of the form, “What is the correct way to group these rows together into groups composed entirely of matching records?” After the labeling process is finished, users upload their answers/labels with a call to StartImportLabelsTaskRun. After StartImportLabelsTaskRun finishes, all future runs of the machine learning transform use the new and improved labels and perform a higher-quality transformation. By default, StartMLLabelingSetGenerationTaskRun continually learns from and combines all labels that you upload unless you set Replace to true. If you set Replace to true, StartImportLabelsTaskRun deletes and forgets all previously uploaded labels and learns only from the exact set that you upload. Replacing labels can be helpful if you realize that you previously uploaded incorrect labels, and you believe that they are having a negative effect on your transform quality. You can check on the status of your task run by calling the GetMLTaskRun operation. 
+   */
+  startImportLabelsTaskRun(callback?: (err: AWSError, data: Glue.Types.StartImportLabelsTaskRunResponse) => void): Request<Glue.Types.StartImportLabelsTaskRunResponse, AWSError>;
+  /**
    * Starts a job run using a job definition.
    */
   startJobRun(params: Glue.Types.StartJobRunRequest, callback?: (err: AWSError, data: Glue.Types.StartJobRunResponse) => void): Request<Glue.Types.StartJobRunResponse, AWSError>;
@@ -516,6 +828,22 @@ declare class Glue extends Service {
    */
   startJobRun(callback?: (err: AWSError, data: Glue.Types.StartJobRunResponse) => void): Request<Glue.Types.StartJobRunResponse, AWSError>;
   /**
+   * Starts a task to estimate the quality of the transform.  When you provide label sets as examples of truth, AWS Glue machine learning uses some of those examples to learn from them. The rest of the labels are used as a test to estimate quality. Returns a unique identifier for the run. You can call GetMLTaskRun to get more information about the stats of the EvaluationTaskRun.
+   */
+  startMLEvaluationTaskRun(params: Glue.Types.StartMLEvaluationTaskRunRequest, callback?: (err: AWSError, data: Glue.Types.StartMLEvaluationTaskRunResponse) => void): Request<Glue.Types.StartMLEvaluationTaskRunResponse, AWSError>;
+  /**
+   * Starts a task to estimate the quality of the transform.  When you provide label sets as examples of truth, AWS Glue machine learning uses some of those examples to learn from them. The rest of the labels are used as a test to estimate quality. Returns a unique identifier for the run. You can call GetMLTaskRun to get more information about the stats of the EvaluationTaskRun.
+   */
+  startMLEvaluationTaskRun(callback?: (err: AWSError, data: Glue.Types.StartMLEvaluationTaskRunResponse) => void): Request<Glue.Types.StartMLEvaluationTaskRunResponse, AWSError>;
+  /**
+   * Starts the active learning workflow for your machine learning transform to improve the transform's quality by generating label sets and adding labels. When the StartMLLabelingSetGenerationTaskRun finishes, AWS Glue will have generated a "labeling set" or a set of questions for humans to answer. In the case of the FindMatches transform, these questions are of the form, “What is the correct way to group these rows together into groups composed entirely of matching records?”  After the labeling process is finished, you can upload your labels with a call to StartImportLabelsTaskRun. After StartImportLabelsTaskRun finishes, all future runs of the machine learning transform will use the new and improved labels and perform a higher-quality transformation.
+   */
+  startMLLabelingSetGenerationTaskRun(params: Glue.Types.StartMLLabelingSetGenerationTaskRunRequest, callback?: (err: AWSError, data: Glue.Types.StartMLLabelingSetGenerationTaskRunResponse) => void): Request<Glue.Types.StartMLLabelingSetGenerationTaskRunResponse, AWSError>;
+  /**
+   * Starts the active learning workflow for your machine learning transform to improve the transform's quality by generating label sets and adding labels. When the StartMLLabelingSetGenerationTaskRun finishes, AWS Glue will have generated a "labeling set" or a set of questions for humans to answer. In the case of the FindMatches transform, these questions are of the form, “What is the correct way to group these rows together into groups composed entirely of matching records?”  After the labeling process is finished, you can upload your labels with a call to StartImportLabelsTaskRun. After StartImportLabelsTaskRun finishes, all future runs of the machine learning transform will use the new and improved labels and perform a higher-quality transformation.
+   */
+  startMLLabelingSetGenerationTaskRun(callback?: (err: AWSError, data: Glue.Types.StartMLLabelingSetGenerationTaskRunResponse) => void): Request<Glue.Types.StartMLLabelingSetGenerationTaskRunResponse, AWSError>;
+  /**
    * Starts an existing trigger. See Triggering Jobs for information about how different types of trigger are started.
    */
   startTrigger(params: Glue.Types.StartTriggerRequest, callback?: (err: AWSError, data: Glue.Types.StartTriggerResponse) => void): Request<Glue.Types.StartTriggerResponse, AWSError>;
@@ -523,6 +851,14 @@ declare class Glue extends Service {
    * Starts an existing trigger. See Triggering Jobs for information about how different types of trigger are started.
    */
   startTrigger(callback?: (err: AWSError, data: Glue.Types.StartTriggerResponse) => void): Request<Glue.Types.StartTriggerResponse, AWSError>;
+  /**
+   * Starts a new run of the specified workflow.
+   */
+  startWorkflowRun(params: Glue.Types.StartWorkflowRunRequest, callback?: (err: AWSError, data: Glue.Types.StartWorkflowRunResponse) => void): Request<Glue.Types.StartWorkflowRunResponse, AWSError>;
+  /**
+   * Starts a new run of the specified workflow.
+   */
+  startWorkflowRun(callback?: (err: AWSError, data: Glue.Types.StartWorkflowRunResponse) => void): Request<Glue.Types.StartWorkflowRunResponse, AWSError>;
   /**
    * If the specified crawler is running, stops the crawl.
    */
@@ -548,11 +884,35 @@ declare class Glue extends Service {
    */
   stopTrigger(callback?: (err: AWSError, data: Glue.Types.StopTriggerResponse) => void): Request<Glue.Types.StopTriggerResponse, AWSError>;
   /**
-   * Modifies an existing classifier (a GrokClassifier, XMLClassifier, or JsonClassifier, depending on which field is present).
+   * Stops the execution of the specified workflow run.
+   */
+  stopWorkflowRun(params: Glue.Types.StopWorkflowRunRequest, callback?: (err: AWSError, data: Glue.Types.StopWorkflowRunResponse) => void): Request<Glue.Types.StopWorkflowRunResponse, AWSError>;
+  /**
+   * Stops the execution of the specified workflow run.
+   */
+  stopWorkflowRun(callback?: (err: AWSError, data: Glue.Types.StopWorkflowRunResponse) => void): Request<Glue.Types.StopWorkflowRunResponse, AWSError>;
+  /**
+   * Adds tags to a resource. A tag is a label you can assign to an AWS resource. In AWS Glue, you can tag only certain resources. For information about what resources you can tag, see AWS Tags in AWS Glue.
+   */
+  tagResource(params: Glue.Types.TagResourceRequest, callback?: (err: AWSError, data: Glue.Types.TagResourceResponse) => void): Request<Glue.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds tags to a resource. A tag is a label you can assign to an AWS resource. In AWS Glue, you can tag only certain resources. For information about what resources you can tag, see AWS Tags in AWS Glue.
+   */
+  tagResource(callback?: (err: AWSError, data: Glue.Types.TagResourceResponse) => void): Request<Glue.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes tags from a resource.
+   */
+  untagResource(params: Glue.Types.UntagResourceRequest, callback?: (err: AWSError, data: Glue.Types.UntagResourceResponse) => void): Request<Glue.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes tags from a resource.
+   */
+  untagResource(callback?: (err: AWSError, data: Glue.Types.UntagResourceResponse) => void): Request<Glue.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Modifies an existing classifier (a GrokClassifier, an XMLClassifier, a JsonClassifier, or a CsvClassifier, depending on which field is present).
    */
   updateClassifier(params: Glue.Types.UpdateClassifierRequest, callback?: (err: AWSError, data: Glue.Types.UpdateClassifierResponse) => void): Request<Glue.Types.UpdateClassifierResponse, AWSError>;
   /**
-   * Modifies an existing classifier (a GrokClassifier, XMLClassifier, or JsonClassifier, depending on which field is present).
+   * Modifies an existing classifier (a GrokClassifier, an XMLClassifier, a JsonClassifier, or a CsvClassifier, depending on which field is present).
    */
   updateClassifier(callback?: (err: AWSError, data: Glue.Types.UpdateClassifierResponse) => void): Request<Glue.Types.UpdateClassifierResponse, AWSError>;
   /**
@@ -588,11 +948,11 @@ declare class Glue extends Service {
    */
   updateDatabase(callback?: (err: AWSError, data: Glue.Types.UpdateDatabaseResponse) => void): Request<Glue.Types.UpdateDatabaseResponse, AWSError>;
   /**
-   * Updates a specified DevEndpoint.
+   * Updates a specified development endpoint.
    */
   updateDevEndpoint(params: Glue.Types.UpdateDevEndpointRequest, callback?: (err: AWSError, data: Glue.Types.UpdateDevEndpointResponse) => void): Request<Glue.Types.UpdateDevEndpointResponse, AWSError>;
   /**
-   * Updates a specified DevEndpoint.
+   * Updates a specified development endpoint.
    */
   updateDevEndpoint(callback?: (err: AWSError, data: Glue.Types.UpdateDevEndpointResponse) => void): Request<Glue.Types.UpdateDevEndpointResponse, AWSError>;
   /**
@@ -603,6 +963,14 @@ declare class Glue extends Service {
    * Updates an existing job definition.
    */
   updateJob(callback?: (err: AWSError, data: Glue.Types.UpdateJobResponse) => void): Request<Glue.Types.UpdateJobResponse, AWSError>;
+  /**
+   * Updates an existing machine learning transform. Call this operation to tune the algorithm parameters to achieve better results. After calling this operation, you can call the StartMLEvaluationTaskRun operation to assess how well your new parameters achieved your goals (such as improving the quality of your machine learning transform, or making it more cost-effective).
+   */
+  updateMLTransform(params: Glue.Types.UpdateMLTransformRequest, callback?: (err: AWSError, data: Glue.Types.UpdateMLTransformResponse) => void): Request<Glue.Types.UpdateMLTransformResponse, AWSError>;
+  /**
+   * Updates an existing machine learning transform. Call this operation to tune the algorithm parameters to achieve better results. After calling this operation, you can call the StartMLEvaluationTaskRun operation to assess how well your new parameters achieved your goals (such as improving the quality of your machine learning transform, or making it more cost-effective).
+   */
+  updateMLTransform(callback?: (err: AWSError, data: Glue.Types.UpdateMLTransformResponse) => void): Request<Glue.Types.UpdateMLTransformResponse, AWSError>;
   /**
    * Updates a partition.
    */
@@ -635,6 +1003,14 @@ declare class Glue extends Service {
    * Updates an existing function definition in the Data Catalog.
    */
   updateUserDefinedFunction(callback?: (err: AWSError, data: Glue.Types.UpdateUserDefinedFunctionResponse) => void): Request<Glue.Types.UpdateUserDefinedFunctionResponse, AWSError>;
+  /**
+   * Updates an existing workflow.
+   */
+  updateWorkflow(params: Glue.Types.UpdateWorkflowRequest, callback?: (err: AWSError, data: Glue.Types.UpdateWorkflowResponse) => void): Request<Glue.Types.UpdateWorkflowResponse, AWSError>;
+  /**
+   * Updates an existing workflow.
+   */
+  updateWorkflow(callback?: (err: AWSError, data: Glue.Types.UpdateWorkflowResponse) => void): Request<Glue.Types.UpdateWorkflowResponse, AWSError>;
 }
 declare namespace Glue {
   export interface Action {
@@ -643,23 +1019,31 @@ declare namespace Glue {
      */
     JobName?: NameString;
     /**
-     * Arguments to be passed to the job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
+     * The job arguments used when this trigger fires. For this job run, they replace the default arguments set in the job definition itself. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
      */
     Arguments?: GenericMap;
     /**
-     * The job run timeout in minutes. It overrides the timeout value of the job.
+     * The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours). This overrides the timeout value set in the parent job.
      */
     Timeout?: Timeout;
+    /**
+     * The name of the SecurityConfiguration structure to be used with this action.
+     */
+    SecurityConfiguration?: NameString;
     /**
      * Specifies configuration properties of a job run notification.
      */
     NotificationProperty?: NotificationProperty;
+    /**
+     * The name of the crawler to be used with this action.
+     */
+    CrawlerName?: NameString;
   }
   export type ActionList = Action[];
   export type AttemptCount = number;
   export interface BatchCreatePartitionRequest {
     /**
-     * The ID of the catalog in which the partion is to be created. Currently, this should be the AWS account ID.
+     * The ID of the catalog in which the partition is to be created. Currently, this should be the AWS account ID.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -677,13 +1061,13 @@ declare namespace Glue {
   }
   export interface BatchCreatePartitionResponse {
     /**
-     * Errors encountered when trying to create the requested partitions.
+     * The errors encountered when trying to create the requested partitions.
      */
     Errors?: PartitionErrors;
   }
   export interface BatchDeleteConnectionRequest {
     /**
-     * The ID of the Data Catalog in which the connections reside. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which the connections reside. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -703,7 +1087,7 @@ declare namespace Glue {
   }
   export interface BatchDeletePartitionRequest {
     /**
-     * The ID of the Data Catalog where the partition to be deleted resides. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the partition to be deleted resides. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -711,7 +1095,7 @@ declare namespace Glue {
      */
     DatabaseName: NameString;
     /**
-     * The name of the table where the partitions to be deleted is located.
+     * The name of the table that contains the partitions to be deleted.
      */
     TableName: NameString;
     /**
@@ -721,7 +1105,7 @@ declare namespace Glue {
   }
   export interface BatchDeletePartitionResponse {
     /**
-     * Errors encountered when trying to delete the requested partitions.
+     * The errors encountered when trying to delete the requested partitions.
      */
     Errors?: PartitionErrors;
   }
@@ -729,11 +1113,11 @@ declare namespace Glue {
   export type BatchDeleteTableNameList = NameString[];
   export interface BatchDeleteTableRequest {
     /**
-     * The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the table resides. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
-     * The name of the catalog database where the tables to delete reside. For Hive compatibility, this name is entirely lowercase.
+     * The name of the catalog database in which the tables to delete reside. For Hive compatibility, this name is entirely lowercase.
      */
     DatabaseName: NameString;
     /**
@@ -750,7 +1134,7 @@ declare namespace Glue {
   export type BatchDeleteTableVersionList = VersionString[];
   export interface BatchDeleteTableVersionRequest {
     /**
-     * The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the tables reside. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -762,7 +1146,7 @@ declare namespace Glue {
      */
     TableName: NameString;
     /**
-     * A list of the IDs of versions to be deleted.
+     * A list of the IDs of versions to be deleted. A VersionId is a string representation of an integer. Each version is incremented by 1.
      */
     VersionIds: BatchDeleteTableVersionList;
   }
@@ -771,6 +1155,54 @@ declare namespace Glue {
      * A list of errors encountered while trying to delete the specified table versions.
      */
     Errors?: TableVersionErrors;
+  }
+  export interface BatchGetCrawlersRequest {
+    /**
+     * A list of crawler names, which might be the names returned from the ListCrawlers operation.
+     */
+    CrawlerNames: CrawlerNameList;
+  }
+  export interface BatchGetCrawlersResponse {
+    /**
+     * A list of crawler definitions.
+     */
+    Crawlers?: CrawlerList;
+    /**
+     * A list of names of crawlers that were not found.
+     */
+    CrawlersNotFound?: CrawlerNameList;
+  }
+  export interface BatchGetDevEndpointsRequest {
+    /**
+     * The list of DevEndpoint names, which might be the names returned from the ListDevEndpoint operation.
+     */
+    DevEndpointNames: DevEndpointNames;
+  }
+  export interface BatchGetDevEndpointsResponse {
+    /**
+     * A list of DevEndpoint definitions.
+     */
+    DevEndpoints?: DevEndpointList;
+    /**
+     * A list of DevEndpoints not found.
+     */
+    DevEndpointsNotFound?: DevEndpointNames;
+  }
+  export interface BatchGetJobsRequest {
+    /**
+     * A list of job names, which might be the names returned from the ListJobs operation.
+     */
+    JobNames: JobNameList;
+  }
+  export interface BatchGetJobsResponse {
+    /**
+     * A list of job definitions.
+     */
+    Jobs?: JobList;
+    /**
+     * A list of names of jobs not found.
+     */
+    JobsNotFound?: JobNameList;
   }
   export interface BatchGetPartitionRequest {
     /**
@@ -796,14 +1228,50 @@ declare namespace Glue {
      */
     Partitions?: PartitionList;
     /**
-     * A list of the partition values in the request for which partions were not returned.
+     * A list of the partition values in the request for which partitions were not returned.
      */
     UnprocessedKeys?: BatchGetPartitionValueList;
   }
   export type BatchGetPartitionValueList = PartitionValueList[];
+  export interface BatchGetTriggersRequest {
+    /**
+     * A list of trigger names, which may be the names returned from the ListTriggers operation.
+     */
+    TriggerNames: TriggerNameList;
+  }
+  export interface BatchGetTriggersResponse {
+    /**
+     * A list of trigger definitions.
+     */
+    Triggers?: TriggerList;
+    /**
+     * A list of names of triggers not found.
+     */
+    TriggersNotFound?: TriggerNameList;
+  }
+  export interface BatchGetWorkflowsRequest {
+    /**
+     * A list of workflow names, which may be the names returned from the ListWorkflows operation.
+     */
+    Names: WorkflowNames;
+    /**
+     * Specifies whether to include a graph when returning the workflow resource metadata.
+     */
+    IncludeGraph?: NullableBoolean;
+  }
+  export interface BatchGetWorkflowsResponse {
+    /**
+     * A list of workflow resource metadata.
+     */
+    Workflows?: Workflows;
+    /**
+     * A list of names of workflows not found.
+     */
+    MissingWorkflows?: WorkflowNames;
+  }
   export interface BatchStopJobRunError {
     /**
-     * The name of the job definition used in the job run in question.
+     * The name of the job definition that is used in the job run in question.
      */
     JobName?: NameString;
     /**
@@ -833,7 +1301,7 @@ declare namespace Glue {
      */
     SuccessfulSubmissions?: BatchStopJobRunSuccessfulSubmissionList;
     /**
-     * A list of the errors that were encountered in tryng to stop JobRuns, including the JobRunId for which each error was encountered and details about the error.
+     * A list of the errors that were encountered in trying to stop JobRuns, including the JobRunId for which each error was encountered and details about the error.
      */
     Errors?: BatchStopJobRunErrorList;
   }
@@ -852,6 +1320,31 @@ declare namespace Glue {
   export type BooleanNullable = boolean;
   export type BooleanValue = boolean;
   export type BoundedPartitionValueList = ValueString[];
+  export interface CancelMLTaskRunRequest {
+    /**
+     * The unique identifier of the machine learning transform.
+     */
+    TransformId: HashString;
+    /**
+     * A unique identifier for the task run.
+     */
+    TaskRunId: HashString;
+  }
+  export interface CancelMLTaskRunResponse {
+    /**
+     * The unique identifier of the machine learning transform.
+     */
+    TransformId?: HashString;
+    /**
+     * The unique identifier for the task run.
+     */
+    TaskRunId?: HashString;
+    /**
+     * The status for this run.
+     */
+    Status?: TaskStatusType;
+  }
+  export type CatalogEncryptionMode = "DISABLED"|"SSE-KMS"|string;
   export type CatalogEntries = CatalogEntry[];
   export interface CatalogEntry {
     /**
@@ -866,7 +1359,7 @@ declare namespace Glue {
   export type CatalogIdString = string;
   export interface CatalogImportStatus {
     /**
-     * True if the migration has completed, or False otherwise.
+     *  True if the migration has completed, or False otherwise.
      */
     ImportCompleted?: Boolean;
     /**
@@ -878,23 +1371,50 @@ declare namespace Glue {
      */
     ImportedBy?: NameString;
   }
+  export type CatalogTablesList = NameString[];
+  export interface CatalogTarget {
+    /**
+     * The name of the database to be synchronized.
+     */
+    DatabaseName: NameString;
+    /**
+     * A list of the tables to be synchronized.
+     */
+    Tables: CatalogTablesList;
+  }
+  export type CatalogTargetList = CatalogTarget[];
   export type Classification = string;
   export interface Classifier {
     /**
-     * A GrokClassifier object.
+     * A classifier that uses grok.
      */
     GrokClassifier?: GrokClassifier;
     /**
-     * An XMLClassifier object.
+     * A classifier for XML content.
      */
     XMLClassifier?: XMLClassifier;
     /**
-     * A JsonClassifier object.
+     * A classifier for JSON content.
      */
     JsonClassifier?: JsonClassifier;
+    /**
+     * A classifier for comma-separated values (CSV).
+     */
+    CsvClassifier?: CsvClassifier;
   }
   export type ClassifierList = Classifier[];
   export type ClassifierNameList = NameString[];
+  export interface CloudWatchEncryption {
+    /**
+     * The encryption mode to use for CloudWatch data.
+     */
+    CloudWatchEncryptionMode?: CloudWatchEncryptionMode;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.
+     */
+    KmsKeyArn?: KmsKeyArn;
+  }
+  export type CloudWatchEncryptionMode = "DISABLED"|"SSE-KMS"|string;
   export type CodeGenArgName = string;
   export type CodeGenArgValue = string;
   export interface CodeGenEdge {
@@ -918,7 +1438,7 @@ declare namespace Glue {
      */
     Id: CodeGenIdentifier;
     /**
-     * The type of node this is.
+     * The type of node that this is.
      */
     NodeType: CodeGenNodeType;
     /**
@@ -952,41 +1472,73 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
-     * The datatype of data in the Column.
+     * The data type of the Column.
      */
     Type?: ColumnTypeString;
     /**
-     * Free-form text comment.
+     * A free-form text comment.
      */
     Comment?: CommentString;
+    /**
+     * These key-value pairs define properties associated with the column.
+     */
+    Parameters?: ParametersMap;
   }
   export type ColumnList = Column[];
+  export type ColumnNameString = string;
   export type ColumnTypeString = string;
   export type ColumnValueStringList = ColumnValuesString[];
   export type ColumnValuesString = string;
   export type CommentString = string;
+  export type Comparator = "EQUALS"|"GREATER_THAN"|"LESS_THAN"|"GREATER_THAN_EQUALS"|"LESS_THAN_EQUALS"|string;
   export interface Condition {
     /**
      * A logical operator.
      */
     LogicalOperator?: LogicalOperator;
     /**
-     * The name of the Job to whose JobRuns this condition applies and on which this trigger waits.
+     * The name of the job whose JobRuns this condition applies to, and on which this trigger waits.
      */
     JobName?: NameString;
     /**
-     * The condition state. Currently, the values supported are SUCCEEDED, STOPPED, TIMEOUT and FAILED.
+     * The condition state. Currently, the only job states that a trigger can listen for are SUCCEEDED, STOPPED, FAILED, and TIMEOUT. The only crawler states that a trigger can listen for are SUCCEEDED, FAILED, and CANCELLED.
      */
     State?: JobRunState;
+    /**
+     * The name of the crawler to which this condition applies.
+     */
+    CrawlerName?: NameString;
+    /**
+     * The state of the crawler to which this condition applies.
+     */
+    CrawlState?: CrawlState;
   }
   export type ConditionList = Condition[];
+  export interface ConfusionMatrix {
+    /**
+     * The number of matches in the data that the transform correctly found, in the confusion matrix for your transform.
+     */
+    NumTruePositives?: RecordsCount;
+    /**
+     * The number of nonmatches in the data that the transform incorrectly classified as a match, in the confusion matrix for your transform.
+     */
+    NumFalsePositives?: RecordsCount;
+    /**
+     * The number of nonmatches in the data that the transform correctly rejected, in the confusion matrix for your transform.
+     */
+    NumTrueNegatives?: RecordsCount;
+    /**
+     * The number of matches in the data that the transform didn't find, in the confusion matrix for your transform.
+     */
+    NumFalseNegatives?: RecordsCount;
+  }
   export interface Connection {
     /**
      * The name of the connection definition.
      */
     Name?: NameString;
     /**
-     * Description of the connection.
+     * The description of the connection.
      */
     Description?: DescriptionString;
     /**
@@ -998,23 +1550,23 @@ declare namespace Glue {
      */
     MatchCriteria?: MatchCriteria;
     /**
-     * A list of key-value pairs used as parameters for this connection.
+     * These key-value pairs define parameters for the connection:    HOST - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.    PORT - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.    USER_NAME - The name under which to log in to the database. The value string for USER_NAME is "USERNAME".    PASSWORD - A password, if one is used, for the user name.    ENCRYPTED_PASSWORD - When you enable connection password protection by setting ConnectionPasswordEncryption in the Data Catalog encryption settings, this field stores the encrypted password.    JDBC_DRIVER_JAR_URI - The Amazon Simple Storage Service (Amazon S3) path of the JAR file that contains the JDBC driver to use.    JDBC_DRIVER_CLASS_NAME - The class name of the JDBC driver to use.    JDBC_ENGINE - The name of the JDBC engine to use.    JDBC_ENGINE_VERSION - The version of the JDBC engine to use.    CONFIG_FILES - (Reserved for future use.)    INSTANCE_ID - The instance ID to use.    JDBC_CONNECTION_URL - The URL for connecting to a JDBC data source.    JDBC_ENFORCE_SSL - A Boolean string (true, false) specifying whether Secure Sockets Layer (SSL) with hostname matching is enforced for the JDBC connection on the client. The default is false.    CUSTOM_JDBC_CERT - An Amazon S3 location specifying the customer's root certificate. AWS Glue uses this root certificate to validate the customer’s certificate when connecting to the customer database. AWS Glue only handles X.509 certificates. The certificate provided must be DER-encoded and supplied in Base64 encoding PEM format.    SKIP_CUSTOM_JDBC_CERT_VALIDATION - By default, this is false. AWS Glue validates the Signature algorithm and Subject Public Key Algorithm for the customer certificate. The only permitted algorithms for the Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA. For the Subject Public Key Algorithm, the key length must be at least 2048. You can set the value of this property to true to skip AWS Glue’s validation of the customer certificate.    CUSTOM_JDBC_CERT_STRING - A custom JDBC certificate string which is used for domain match or distinguished name match to prevent a man-in-the-middle attack. In Oracle database, this is used as the SSL_SERVER_CERT_DN; in Microsoft SQL Server, this is used as the hostNameInCertificate.    CONNECTION_URL - The URL for connecting to a general (non-JDBC) data source.    KAFKA_BOOTSTRAP_SERVERS - A comma-separated list of host and port pairs that are the addresses of the Apache Kafka brokers in a Kafka cluster to which a Kafka client will connect to and bootstrap itself.  
      */
     ConnectionProperties?: ConnectionProperties;
     /**
-     * A map of physical connection requirements, such as VPC and SecurityGroup, needed for making this connection successfully.
+     * A map of physical connection requirements, such as virtual private cloud (VPC) and SecurityGroup, that are needed to make this connection successfully.
      */
     PhysicalConnectionRequirements?: PhysicalConnectionRequirements;
     /**
-     * The time this connection definition was created.
+     * The time that this connection definition was created.
      */
     CreationTime?: Timestamp;
     /**
-     * The last time this connection definition was updated.
+     * The last time that this connection definition was updated.
      */
     LastUpdatedTime?: Timestamp;
     /**
-     * The user, group or role that last updated this connection definition.
+     * The user, group, or role that last updated this connection definition.
      */
     LastUpdatedBy?: NameString;
   }
@@ -1024,11 +1576,11 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
-     * Description of the connection.
+     * The description of the connection.
      */
     Description?: DescriptionString;
     /**
-     * The type of the connection. Currently, only JDBC is supported; SFTP is not supported.
+     * The type of the connection. Currently, these types are supported:    JDBC - Designates a connection to a database through Java Database Connectivity (JDBC).    KAFKA - Designates a connection to an Apache Kafka streaming platform.    MONGODB - Designates a connection to a MongoDB document database.   SFTP is not supported.
      */
     ConnectionType: ConnectionType;
     /**
@@ -1036,32 +1588,70 @@ declare namespace Glue {
      */
     MatchCriteria?: MatchCriteria;
     /**
-     * A list of key-value pairs used as parameters for this connection.
+     * These key-value pairs define parameters for the connection.
      */
     ConnectionProperties: ConnectionProperties;
     /**
-     * A map of physical connection requirements, such as VPC and SecurityGroup, needed for making this connection successfully.
+     * A map of physical connection requirements, such as virtual private cloud (VPC) and SecurityGroup, that are needed to successfully make this connection.
      */
     PhysicalConnectionRequirements?: PhysicalConnectionRequirements;
   }
   export type ConnectionList = Connection[];
   export type ConnectionName = string;
+  export interface ConnectionPasswordEncryption {
+    /**
+     * When the ReturnConnectionPasswordEncrypted flag is set to "true", passwords remain encrypted in the responses of GetConnection and GetConnections. This encryption takes effect independently from catalog encryption. 
+     */
+    ReturnConnectionPasswordEncrypted: Boolean;
+    /**
+     * An AWS KMS key that is used to encrypt the connection password.  If connection password protection is enabled, the caller of CreateConnection and UpdateConnection needs at least kms:Encrypt permission on the specified AWS KMS key, to encrypt passwords before storing them in the Data Catalog.  You can set the decrypt permission to enable or restrict access on the password key according to your security requirements.
+     */
+    AwsKmsKeyId?: NameString;
+  }
   export type ConnectionProperties = {[key: string]: ValueString};
-  export type ConnectionPropertyKey = "HOST"|"PORT"|"USERNAME"|"PASSWORD"|"JDBC_DRIVER_JAR_URI"|"JDBC_DRIVER_CLASS_NAME"|"JDBC_ENGINE"|"JDBC_ENGINE_VERSION"|"CONFIG_FILES"|"INSTANCE_ID"|"JDBC_CONNECTION_URL"|string;
-  export type ConnectionType = "JDBC"|"SFTP"|string;
+  export type ConnectionPropertyKey = "HOST"|"PORT"|"USERNAME"|"PASSWORD"|"ENCRYPTED_PASSWORD"|"JDBC_DRIVER_JAR_URI"|"JDBC_DRIVER_CLASS_NAME"|"JDBC_ENGINE"|"JDBC_ENGINE_VERSION"|"CONFIG_FILES"|"INSTANCE_ID"|"JDBC_CONNECTION_URL"|"JDBC_ENFORCE_SSL"|"CUSTOM_JDBC_CERT"|"SKIP_CUSTOM_JDBC_CERT_VALIDATION"|"CUSTOM_JDBC_CERT_STRING"|"CONNECTION_URL"|"KAFKA_BOOTSTRAP_SERVERS"|string;
+  export type ConnectionType = "JDBC"|"SFTP"|"MONGODB"|"KAFKA"|string;
   export interface ConnectionsList {
     /**
      * A list of connections used by the job.
      */
-    Connections?: StringList;
+    Connections?: OrchestrationStringList;
   }
+  export interface Crawl {
+    /**
+     * The state of the crawler.
+     */
+    State?: CrawlState;
+    /**
+     * The date and time on which the crawl started.
+     */
+    StartedOn?: TimestampValue;
+    /**
+     * The date and time on which the crawl completed.
+     */
+    CompletedOn?: TimestampValue;
+    /**
+     * The error message associated with the crawl.
+     */
+    ErrorMessage?: DescriptionString;
+    /**
+     * The log group associated with the crawl.
+     */
+    LogGroup?: LogGroup;
+    /**
+     * The log stream associated with the crawl.
+     */
+    LogStream?: LogStream;
+  }
+  export type CrawlList = Crawl[];
+  export type CrawlState = "RUNNING"|"CANCELLING"|"CANCELLED"|"SUCCEEDED"|"FAILED"|string;
   export interface Crawler {
     /**
-     * The crawler name.
+     * The name of the crawler.
      */
     Name?: NameString;
     /**
-     * The IAM role (or ARN of an IAM role) used to access customer resources, such as data in Amazon S3.
+     * The Amazon Resource Name (ARN) of an IAM role that's used to access customer resources, such as Amazon Simple Storage Service (Amazon S3) data.
      */
     Role?: Role;
     /**
@@ -1069,7 +1659,7 @@ declare namespace Glue {
      */
     Targets?: CrawlerTargets;
     /**
-     * The database where metadata is written by this crawler.
+     * The name of the database in which the crawler's output is stored.
      */
     DatabaseName?: DatabaseName;
     /**
@@ -1077,11 +1667,11 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * A list of custom classifiers associated with the crawler.
+     * A list of UTF-8 strings that specify the custom classifiers that are associated with the crawler.
      */
     Classifiers?: ClassifierNameList;
     /**
-     * Sets the behavior when the crawler finds a changed or deleted object.
+     * The policy that specifies update and delete behaviors for the crawler.
      */
     SchemaChangePolicy?: SchemaChangePolicy;
     /**
@@ -1101,11 +1691,11 @@ declare namespace Glue {
      */
     CrawlElapsedTime?: MillisecondsCount;
     /**
-     * The time when the crawler was created.
+     * The time that the crawler was created.
      */
     CreationTime?: Timestamp;
     /**
-     * The time the crawler was last updated.
+     * The time that the crawler was last updated.
      */
     LastUpdated?: Timestamp;
     /**
@@ -1120,6 +1710,10 @@ declare namespace Glue {
      * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
      */
     Configuration?: CrawlerConfiguration;
+    /**
+     * The name of the SecurityConfiguration structure to be used by this crawler.
+     */
+    CrawlerSecurityConfiguration?: CrawlerSecurityConfiguration;
   }
   export type CrawlerConfiguration = string;
   export type CrawlerList = Crawler[];
@@ -1159,10 +1753,17 @@ declare namespace Glue {
   }
   export type CrawlerMetricsList = CrawlerMetrics[];
   export type CrawlerNameList = NameString[];
+  export interface CrawlerNodeDetails {
+    /**
+     * A list of crawls represented by the crawl node.
+     */
+    Crawls?: CrawlList;
+  }
+  export type CrawlerSecurityConfiguration = string;
   export type CrawlerState = "READY"|"RUNNING"|"STOPPING"|string;
   export interface CrawlerTargets {
     /**
-     * Specifies Amazon S3 targets.
+     * Specifies Amazon Simple Storage Service (Amazon S3) targets.
      */
     S3Targets?: S3TargetList;
     /**
@@ -1170,9 +1771,13 @@ declare namespace Glue {
      */
     JdbcTargets?: JdbcTargetList;
     /**
-     * Specifies DynamoDB targets.
+     * Specifies Amazon DynamoDB targets.
      */
     DynamoDBTargets?: DynamoDBTargetList;
+    /**
+     * Specifies AWS Glue Data Catalog targets.
+     */
+    CatalogTargets?: CatalogTargetList;
   }
   export interface CreateClassifierRequest {
     /**
@@ -1187,12 +1792,16 @@ declare namespace Glue {
      * A JsonClassifier object specifying the classifier to create.
      */
     JsonClassifier?: CreateJsonClassifierRequest;
+    /**
+     * A CsvClassifier object specifying the classifier to create.
+     */
+    CsvClassifier?: CreateCsvClassifierRequest;
   }
   export interface CreateClassifierResponse {
   }
   export interface CreateConnectionRequest {
     /**
-     * The ID of the Data Catalog in which to create the connection. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which to create the connection. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -1208,13 +1817,13 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
-     * The IAM role (or ARN of an IAM role) used by the new crawler to access customer resources.
+     * The IAM role or Amazon Resource Name (ARN) of an IAM role used by the new crawler to access customer resources.
      */
     Role: Role;
     /**
      * The AWS Glue database where results are written, such as: arn:aws:daylight:us-east-1::database/sometable/*.
      */
-    DatabaseName: DatabaseName;
+    DatabaseName?: DatabaseName;
     /**
      * A description of the new crawler.
      */
@@ -1236,23 +1845,61 @@ declare namespace Glue {
      */
     TablePrefix?: TablePrefix;
     /**
-     * Policy for the crawler's update and deletion behavior.
+     * The policy for the crawler's update and deletion behavior.
      */
     SchemaChangePolicy?: SchemaChangePolicy;
     /**
      * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
      */
     Configuration?: CrawlerConfiguration;
+    /**
+     * The name of the SecurityConfiguration structure to be used by this crawler.
+     */
+    CrawlerSecurityConfiguration?: CrawlerSecurityConfiguration;
+    /**
+     * The tags to use with this crawler request. You may use tags to limit access to the crawler. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide.
+     */
+    Tags?: TagsMap;
   }
   export interface CreateCrawlerResponse {
   }
+  export interface CreateCsvClassifierRequest {
+    /**
+     * The name of the classifier.
+     */
+    Name: NameString;
+    /**
+     * A custom symbol to denote what separates each column entry in the row.
+     */
+    Delimiter?: CsvColumnDelimiter;
+    /**
+     * A custom symbol to denote what combines content into a single column value. Must be different from the column delimiter.
+     */
+    QuoteSymbol?: CsvQuoteSymbol;
+    /**
+     * Indicates whether the CSV file contains a header.
+     */
+    ContainsHeader?: CsvHeaderOption;
+    /**
+     * A list of strings representing column names.
+     */
+    Header?: CsvHeader;
+    /**
+     * Specifies not to trim values before identifying the type of column values. The default value is true.
+     */
+    DisableValueTrimming?: NullableBoolean;
+    /**
+     * Enables the processing of files that contain only one column.
+     */
+    AllowSingleColumn?: NullableBoolean;
+  }
   export interface CreateDatabaseRequest {
     /**
-     * The ID of the Data Catalog in which to create the database. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which to create the database. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
-     * A DatabaseInput object defining the metadata database to create in the catalog.
+     * The metadata for the database.
      */
     DatabaseInput: DatabaseInput;
   }
@@ -1276,11 +1923,11 @@ declare namespace Glue {
      */
     SubnetId?: GenericString;
     /**
-     * The public key to be used by this DevEndpoint for authentication. This attribute is provided for backward compatibility, as the recommended attribute to use is public keys.
+     * The public key to be used by this DevEndpoint for authentication. This attribute is provided for backward compatibility because the recommended attribute to use is public keys.
      */
     PublicKey?: GenericString;
     /**
-     * A list of public keys to be used by the DevEndpoints for authentication. The use of this attribute is preferred over a single public key because the public keys allow you to have a different private key per client.  If you previously created an endpoint with a public key, you must remove that key to be able to set a list of public keys: call the UpdateDevEndpoint API with the public key content in the deletePublicKeys attribute, and the list of new keys in the addPublicKeys attribute. 
+     * A list of public keys to be used by the development endpoints for authentication. The use of this attribute is preferred over a single public key because the public keys allow you to have a different private key per client.  If you previously created an endpoint with a public key, you must remove that key to be able to set a list of public keys. Call the UpdateDevEndpoint API with the public key content in the deletePublicKeys attribute, and the list of new keys in the addPublicKeys attribute. 
      */
     PublicKeys?: PublicKeysList;
     /**
@@ -1288,13 +1935,37 @@ declare namespace Glue {
      */
     NumberOfNodes?: IntegerValue;
     /**
-     * Path(s) to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma. Please note that only pure Python libraries can currently be used on a DevEndpoint. Libraries that rely on C extensions, such as the pandas Python data analysis library, are not yet supported.
+     * The type of predefined worker that is allocated to the development endpoint. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.   For the G.2X worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.   Known issue: when a development endpoint is created with the G.2X WorkerType configuration, the Spark drivers for the development endpoint will run on 4 vCPU, 16 GB of memory, and a 64 GB disk. 
+     */
+    WorkerType?: WorkerType;
+    /**
+     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints.  For more information about the available AWS Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide. Development endpoints that are created without specifying a Glue version default to Glue 0.9. You can specify a version of Python support for development endpoints by using the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to Python 2.
+     */
+    GlueVersion?: GlueVersionString;
+    /**
+     * The number of workers of a defined workerType that are allocated to the development endpoint. The maximum number of workers you can define are 299 for G.1X, and 149 for G.2X. 
+     */
+    NumberOfWorkers?: NullableInteger;
+    /**
+     * The paths to one or more Python libraries in an Amazon S3 bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma.  You can only use pure Python libraries with a DevEndpoint. Libraries that rely on C extensions, such as the pandas Python data analysis library, are not yet supported. 
      */
     ExtraPythonLibsS3Path?: GenericString;
     /**
-     * Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.
+     * The path to one or more Java .jar files in an S3 bucket that should be loaded in your DevEndpoint.
      */
     ExtraJarsS3Path?: GenericString;
+    /**
+     * The name of the SecurityConfiguration structure to be used with this DevEndpoint.
+     */
+    SecurityConfiguration?: NameString;
+    /**
+     * The tags to use with this DevEndpoint. You may use tags to limit access to the DevEndpoint. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide.
+     */
+    Tags?: TagsMap;
+    /**
+     * A map of arguments used to configure the DevEndpoint.
+     */
+    Arguments?: MapValue;
   }
   export interface CreateDevEndpointResponse {
     /**
@@ -1314,7 +1985,7 @@ declare namespace Glue {
      */
     SubnetId?: GenericString;
     /**
-     * The AWS ARN of the role assigned to the new DevEndpoint.
+     * The Amazon Resource Name (ARN) of the role assigned to the new DevEndpoint.
      */
     RoleArn?: RoleArn;
     /**
@@ -1330,19 +2001,31 @@ declare namespace Glue {
      */
     NumberOfNodes?: IntegerValue;
     /**
-     * The AWS availability zone where this DevEndpoint is located.
+     * The type of predefined worker that is allocated to the development endpoint. May be a value of Standard, G.1X, or G.2X.
+     */
+    WorkerType?: WorkerType;
+    /**
+     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints. 
+     */
+    GlueVersion?: GlueVersionString;
+    /**
+     * The number of workers of a defined workerType that are allocated to the development endpoint.
+     */
+    NumberOfWorkers?: NullableInteger;
+    /**
+     * The AWS Availability Zone where this DevEndpoint is located.
      */
     AvailabilityZone?: GenericString;
     /**
-     * The ID of the VPC used by this DevEndpoint.
+     * The ID of the virtual private cloud (VPC) used by this DevEndpoint.
      */
     VpcId?: GenericString;
     /**
-     * Path(s) to one or more Python libraries in an S3 bucket that will be loaded in your DevEndpoint.
+     * The paths to one or more Python libraries in an S3 bucket that will be loaded in your DevEndpoint.
      */
     ExtraPythonLibsS3Path?: GenericString;
     /**
-     * Path to one or more Java Jars in an S3 bucket that will be loaded in your DevEndpoint.
+     * Path to one or more Java .jar files in an S3 bucket that will be loaded in your DevEndpoint.
      */
     ExtraJarsS3Path?: GenericString;
     /**
@@ -1350,9 +2033,17 @@ declare namespace Glue {
      */
     FailureReason?: GenericString;
     /**
+     * The name of the SecurityConfiguration structure being used with this DevEndpoint.
+     */
+    SecurityConfiguration?: NameString;
+    /**
      * The point in time at which this DevEndpoint was created.
      */
     CreatedTimestamp?: TimestampValue;
+    /**
+     * The map of arguments used to configure this DevEndpoint. Valid arguments are:    "--enable-glue-datacatalog": ""     "GLUE_PYTHON_VERSION": "3"     "GLUE_PYTHON_VERSION": "2"    You can specify a version of Python support for development endpoints by using the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to Python 2.
+     */
+    Arguments?: MapValue;
   }
   export interface CreateGrokClassifierRequest {
     /**
@@ -1386,7 +2077,7 @@ declare namespace Glue {
      */
     LogUri?: UriString;
     /**
-     * The name or ARN of the IAM role associated with this job.
+     * The name or Amazon Resource Name (ARN) of the IAM role associated with this job.
      */
     Role: RoleString;
     /**
@@ -1402,6 +2093,10 @@ declare namespace Glue {
      */
     DefaultArguments?: GenericMap;
     /**
+     * Non-overridable arguments for this job, specified as name-value pairs.
+     */
+    NonOverridableArguments?: GenericMap;
+    /**
      * The connections used for this job.
      */
     Connections?: ConnectionsList;
@@ -1410,17 +2105,41 @@ declare namespace Glue {
      */
     MaxRetries?: MaxRetries;
     /**
-     * The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
+     * This parameter is deprecated. Use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) to allocate to this Job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
     /**
-     * The job timeout in minutes. The default is 2880 minutes (48 hours).
+     * The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
      */
     Timeout?: Timeout;
+    /**
+     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job or an Apache Spark ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
+     */
+    MaxCapacity?: NullableDouble;
+    /**
+     * The name of the SecurityConfiguration structure to be used with this job.
+     */
+    SecurityConfiguration?: NameString;
+    /**
+     * The tags to use with this job. You may use tags to limit access to the job. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide.
+     */
+    Tags?: TagsMap;
     /**
      * Specifies configuration properties of a job notification.
      */
     NotificationProperty?: NotificationProperty;
+    /**
+     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for jobs of type Spark.  For more information about the available AWS Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide. Jobs that are created without specifying a Glue version default to Glue 0.9.
+     */
+    GlueVersion?: GlueVersionString;
+    /**
+     * The number of workers of a defined workerType that are allocated when a job runs. The maximum number of workers you can define are 299 for G.1X, and 149 for G.2X. 
+     */
+    NumberOfWorkers?: NullableInteger;
+    /**
+     * The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.   For the G.2X worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.  
+     */
+    WorkerType?: WorkerType;
   }
   export interface CreateJobResponse {
     /**
@@ -1438,9 +2157,65 @@ declare namespace Glue {
      */
     JsonPath: JsonPath;
   }
+  export interface CreateMLTransformRequest {
+    /**
+     * The unique name that you give the transform when you create it.
+     */
+    Name: NameString;
+    /**
+     * A description of the machine learning transform that is being defined. The default is an empty string.
+     */
+    Description?: DescriptionString;
+    /**
+     * A list of AWS Glue table definitions used by the transform.
+     */
+    InputRecordTables: GlueTables;
+    /**
+     * The algorithmic parameters that are specific to the transform type used. Conditionally dependent on the transform type.
+     */
+    Parameters: TransformParameters;
+    /**
+     * The name or Amazon Resource Name (ARN) of the IAM role with the required permissions. The required permissions include both AWS Glue service role permissions to AWS Glue resources, and Amazon S3 permissions required by the transform.    This role needs AWS Glue service role permissions to allow access to resources in AWS Glue. See Attach a Policy to IAM Users That Access AWS Glue.   This role needs permission to your Amazon Simple Storage Service (Amazon S3) sources, targets, temporary directory, scripts, and any libraries used by the task run for this transform.  
+     */
+    Role: RoleString;
+    /**
+     * This value determines which version of AWS Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9. For more information, see AWS Glue Versions in the developer guide.
+     */
+    GlueVersion?: GlueVersionString;
+    /**
+     * The number of AWS Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.   MaxCapacity is a mutually exclusive option with NumberOfWorkers and WorkerType.   If either NumberOfWorkers or WorkerType is set, then MaxCapacity cannot be set.   If MaxCapacity is set then neither NumberOfWorkers or WorkerType can be set.   If WorkerType is set, then NumberOfWorkers is required (and vice versa).    MaxCapacity and NumberOfWorkers must both be at least 1.   When the WorkerType field is set to a value other than Standard, the MaxCapacity field is set automatically and becomes read-only. When the WorkerType field is set to a value other than Standard, the MaxCapacity field is set automatically and becomes read-only.
+     */
+    MaxCapacity?: NullableDouble;
+    /**
+     * The type of predefined worker that is allocated when this task runs. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.   For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.    MaxCapacity is a mutually exclusive option with NumberOfWorkers and WorkerType.   If either NumberOfWorkers or WorkerType is set, then MaxCapacity cannot be set.   If MaxCapacity is set then neither NumberOfWorkers or WorkerType can be set.   If WorkerType is set, then NumberOfWorkers is required (and vice versa).    MaxCapacity and NumberOfWorkers must both be at least 1.  
+     */
+    WorkerType?: WorkerType;
+    /**
+     * The number of workers of a defined workerType that are allocated when this task runs. If WorkerType is set, then NumberOfWorkers is required (and vice versa).
+     */
+    NumberOfWorkers?: NullableInteger;
+    /**
+     * The timeout of the task run for this transform in minutes. This is the maximum time that a task run for this transform can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
+     */
+    Timeout?: Timeout;
+    /**
+     * The maximum number of times to retry a task for this transform after a task run fails.
+     */
+    MaxRetries?: NullableInteger;
+    /**
+     * The tags to use with this machine learning transform. You may use tags to limit access to the machine learning transform. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide.
+     */
+    Tags?: TagsMap;
+  }
+  export interface CreateMLTransformResponse {
+    /**
+     * A unique identifier that is generated for the transform.
+     */
+    TransformId?: HashString;
+  }
   export interface CreatePartitionRequest {
     /**
-     * The ID of the catalog in which the partion is to be created. Currently, this should be the AWS account ID.
+     * The AWS account ID of the catalog in which the partition is to be created.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -1482,6 +2257,26 @@ declare namespace Glue {
      */
     ScalaCode?: ScalaCode;
   }
+  export interface CreateSecurityConfigurationRequest {
+    /**
+     * The name for the new security configuration.
+     */
+    Name: NameString;
+    /**
+     * The encryption configuration for the new security configuration.
+     */
+    EncryptionConfiguration: EncryptionConfiguration;
+  }
+  export interface CreateSecurityConfigurationResponse {
+    /**
+     * The name assigned to the new security configuration.
+     */
+    Name?: NameString;
+    /**
+     * The time at which the new security configuration was created.
+     */
+    CreatedTimestamp?: TimestampValue;
+  }
   export interface CreateTableRequest {
     /**
      * The ID of the Data Catalog in which to create the Table. If none is supplied, the AWS account ID is used by default.
@@ -1504,6 +2299,10 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
+     * The name of the workflow associated with the trigger.
+     */
+    WorkflowName?: NameString;
+    /**
      * The type of the new trigger.
      */
     Type: TriggerType;
@@ -1524,9 +2323,13 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * Set to true to start SCHEDULED and CONDITIONAL triggers when created. True not supported for ON_DEMAND triggers.
+     * Set to true to start SCHEDULED and CONDITIONAL triggers when created. True is not supported for ON_DEMAND triggers.
      */
     StartOnCreation?: BooleanValue;
+    /**
+     * The tags to use with this trigger. You may use tags to limit access to the trigger. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide. 
+     */
+    Tags?: TagsMap;
   }
   export interface CreateTriggerResponse {
     /**
@@ -1536,7 +2339,7 @@ declare namespace Glue {
   }
   export interface CreateUserDefinedFunctionRequest {
     /**
-     * The ID of the Data Catalog in which to create the function. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which to create the function. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -1550,6 +2353,30 @@ declare namespace Glue {
   }
   export interface CreateUserDefinedFunctionResponse {
   }
+  export interface CreateWorkflowRequest {
+    /**
+     * The name to be assigned to the workflow. It should be unique within your account.
+     */
+    Name: NameString;
+    /**
+     * A description of the workflow.
+     */
+    Description?: GenericString;
+    /**
+     * A collection of properties to be used as part of each execution of the workflow.
+     */
+    DefaultRunProperties?: WorkflowRunProperties;
+    /**
+     * The tags to be used with this workflow.
+     */
+    Tags?: TagsMap;
+  }
+  export interface CreateWorkflowResponse {
+    /**
+     * The name of the workflow which was provided as part of the request.
+     */
+    Name?: NameString;
+  }
   export interface CreateXMLClassifierRequest {
     /**
      * An identifier of the data format that the classifier matches.
@@ -1560,21 +2387,84 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
-     * The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by /&gt;). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, &lt;row item_a="A" item_b="B"&gt;&lt;/row&gt; is okay, but &lt;row item_a="A" item_b="B" /&gt; is not).
+     * The XML tag designating the element that contains each record in an XML document being parsed. This can't identify a self-closing element (closed by /&gt;). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, &lt;row item_a="A" item_b="B"&gt;&lt;/row&gt; is okay, but &lt;row item_a="A" item_b="B" /&gt; is not).
      */
     RowTag?: RowTag;
   }
   export type CronExpression = string;
-  export type CustomPatterns = string;
-  export type DagEdges = CodeGenEdge[];
-  export type DagNodes = CodeGenNode[];
-  export interface Database {
+  export interface CsvClassifier {
     /**
-     * Name of the database. For Hive compatibility, this is folded to lowercase when it is stored.
+     * The name of the classifier.
      */
     Name: NameString;
     /**
-     * Description of the database.
+     * The time that this classifier was registered.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The time that this classifier was last updated.
+     */
+    LastUpdated?: Timestamp;
+    /**
+     * The version of this classifier.
+     */
+    Version?: VersionId;
+    /**
+     * A custom symbol to denote what separates each column entry in the row.
+     */
+    Delimiter?: CsvColumnDelimiter;
+    /**
+     * A custom symbol to denote what combines content into a single column value. It must be different from the column delimiter.
+     */
+    QuoteSymbol?: CsvQuoteSymbol;
+    /**
+     * Indicates whether the CSV file contains a header.
+     */
+    ContainsHeader?: CsvHeaderOption;
+    /**
+     * A list of strings representing column names.
+     */
+    Header?: CsvHeader;
+    /**
+     * Specifies not to trim values before identifying the type of column values. The default value is true.
+     */
+    DisableValueTrimming?: NullableBoolean;
+    /**
+     * Enables the processing of files that contain only one column.
+     */
+    AllowSingleColumn?: NullableBoolean;
+  }
+  export type CsvColumnDelimiter = string;
+  export type CsvHeader = NameString[];
+  export type CsvHeaderOption = "UNKNOWN"|"PRESENT"|"ABSENT"|string;
+  export type CsvQuoteSymbol = string;
+  export type CustomPatterns = string;
+  export type DagEdges = CodeGenEdge[];
+  export type DagNodes = CodeGenNode[];
+  export interface DataCatalogEncryptionSettings {
+    /**
+     * Specifies the encryption-at-rest configuration for the Data Catalog.
+     */
+    EncryptionAtRest?: EncryptionAtRest;
+    /**
+     * When connection password protection is enabled, the Data Catalog uses a customer-provided key to encrypt the password as part of CreateConnection or UpdateConnection and store it in the ENCRYPTED_PASSWORD field in the connection properties. You can enable catalog encryption or only password encryption.
+     */
+    ConnectionPasswordEncryption?: ConnectionPasswordEncryption;
+  }
+  export interface DataLakePrincipal {
+    /**
+     * An identifier for the AWS Lake Formation principal.
+     */
+    DataLakePrincipalIdentifier?: DataLakePrincipalString;
+  }
+  export type DataLakePrincipalString = string;
+  export interface Database {
+    /**
+     * The name of the database. For Hive compatibility, this is folded to lowercase when it is stored.
+     */
+    Name: NameString;
+    /**
+     * A description of the database.
      */
     Description?: DescriptionString;
     /**
@@ -1582,31 +2472,39 @@ declare namespace Glue {
      */
     LocationUri?: URI;
     /**
-     * A list of key-value pairs that define parameters and properties of the database.
+     * These key-value pairs define parameters and properties of the database.
      */
     Parameters?: ParametersMap;
     /**
      * The time at which the metadata database was created in the catalog.
      */
     CreateTime?: Timestamp;
+    /**
+     * Creates a set of default permissions on the table for principals. 
+     */
+    CreateTableDefaultPermissions?: PrincipalPermissionsList;
   }
   export interface DatabaseInput {
     /**
-     * Name of the database. For Hive compatibility, this is folded to lowercase when it is stored.
+     * The name of the database. For Hive compatibility, this is folded to lowercase when it is stored.
      */
     Name: NameString;
     /**
-     * Description of the database
+     * A description of the database.
      */
     Description?: DescriptionString;
     /**
-     * The location of the database (for example, an HDFS path).
+     * The location of the database (for example, an HDFS path). 
      */
     LocationUri?: URI;
     /**
-     * A list of key-value pairs that define parameters and properties of the database.
+     * These key-value pairs define parameters and properties of the database. These key-value pairs define parameters and properties of the database.
      */
     Parameters?: ParametersMap;
+    /**
+     * Creates a set of default permissions on the table for principals. 
+     */
+    CreateTableDefaultPermissions?: PrincipalPermissionsList;
   }
   export type DatabaseList = Database[];
   export type DatabaseName = string;
@@ -1622,7 +2520,7 @@ declare namespace Glue {
   export type DeleteConnectionNameList = NameString[];
   export interface DeleteConnectionRequest {
     /**
-     * The ID of the Data Catalog in which the connection resides. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which the connection resides. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -1634,7 +2532,7 @@ declare namespace Glue {
   }
   export interface DeleteCrawlerRequest {
     /**
-     * Name of the crawler to remove.
+     * The name of the crawler to remove.
      */
     Name: NameString;
   }
@@ -1642,11 +2540,11 @@ declare namespace Glue {
   }
   export interface DeleteDatabaseRequest {
     /**
-     * The ID of the Data Catalog in which the database resides. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which the database resides. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
-     * The name of the Database to delete. For Hive compatibility, this must be all lowercase.
+     * The name of the database to delete. For Hive compatibility, this must be all lowercase.
      */
     Name: NameString;
   }
@@ -1672,9 +2570,21 @@ declare namespace Glue {
      */
     JobName?: NameString;
   }
+  export interface DeleteMLTransformRequest {
+    /**
+     * The unique identifier of the transform to delete.
+     */
+    TransformId: HashString;
+  }
+  export interface DeleteMLTransformResponse {
+    /**
+     * The unique identifier of the transform that was deleted.
+     */
+    TransformId?: HashString;
+  }
   export interface DeletePartitionRequest {
     /**
-     * The ID of the Data Catalog where the partition to be deleted resides. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the partition to be deleted resides. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -1682,7 +2592,7 @@ declare namespace Glue {
      */
     DatabaseName: NameString;
     /**
-     * The name of the table where the partition to be deleted is located.
+     * The name of the table that contains the partition to be deleted.
      */
     TableName: NameString;
     /**
@@ -1692,9 +2602,25 @@ declare namespace Glue {
   }
   export interface DeletePartitionResponse {
   }
+  export interface DeleteResourcePolicyRequest {
+    /**
+     * The hash value returned when this policy was set.
+     */
+    PolicyHashCondition?: HashString;
+  }
+  export interface DeleteResourcePolicyResponse {
+  }
+  export interface DeleteSecurityConfigurationRequest {
+    /**
+     * The name of the security configuration to delete.
+     */
+    Name: NameString;
+  }
+  export interface DeleteSecurityConfigurationResponse {
+  }
   export interface DeleteTableRequest {
     /**
-     * The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the table resides. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -1710,7 +2636,7 @@ declare namespace Glue {
   }
   export interface DeleteTableVersionRequest {
     /**
-     * The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the tables reside. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -1722,7 +2648,7 @@ declare namespace Glue {
      */
     TableName: NameString;
     /**
-     * The ID of the table version to be deleted.
+     * The ID of the table version to be deleted. A VersionID is a string representation of an integer. Each version is incremented by 1.
      */
     VersionId: VersionString;
   }
@@ -1756,6 +2682,18 @@ declare namespace Glue {
   }
   export interface DeleteUserDefinedFunctionResponse {
   }
+  export interface DeleteWorkflowRequest {
+    /**
+     * Name of the workflow to be deleted.
+     */
+    Name: NameString;
+  }
+  export interface DeleteWorkflowResponse {
+    /**
+     * Name of the workflow specified in input.
+     */
+    Name?: NameString;
+  }
   export type DescriptionString = string;
   export type DescriptionStringRemovable = string;
   export interface DevEndpoint {
@@ -1764,7 +2702,7 @@ declare namespace Glue {
      */
     EndpointName?: GenericString;
     /**
-     * The AWS ARN of the IAM role used in this DevEndpoint.
+     * The Amazon Resource Name (ARN) of the IAM role used in this DevEndpoint.
      */
     RoleArn?: RoleArn;
     /**
@@ -1780,7 +2718,7 @@ declare namespace Glue {
      */
     YarnEndpointAddress?: GenericString;
     /**
-     * A private DNS to access the DevEndpoint within a VPC, if the DevEndpoint is created within one.
+     * A private IP address to access the DevEndpoint within a VPC if the DevEndpoint is created within one. The PrivateAddress field is present only when you create the DevEndpoint within your VPC.
      */
     PrivateAddress?: GenericString;
     /**
@@ -1788,7 +2726,7 @@ declare namespace Glue {
      */
     ZeppelinRemoteSparkInterpreterPort?: IntegerValue;
     /**
-     * The public VPC address used by this DevEndpoint.
+     * The public IP address used by this DevEndpoint. The PublicAddress field is present only when you create a non-virtual private cloud (VPC) DevEndpoint.
      */
     PublicAddress?: GenericString;
     /**
@@ -1796,11 +2734,23 @@ declare namespace Glue {
      */
     Status?: GenericString;
     /**
+     * The type of predefined worker that is allocated to the development endpoint. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.   For the G.2X worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.   Known issue: when a development endpoint is created with the G.2X WorkerType configuration, the Spark drivers for the development endpoint will run on 4 vCPU, 16 GB of memory, and a 64 GB disk. 
+     */
+    WorkerType?: WorkerType;
+    /**
+     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints.  For more information about the available AWS Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide. Development endpoints that are created without specifying a Glue version default to Glue 0.9. You can specify a version of Python support for development endpoints by using the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to Python 2.
+     */
+    GlueVersion?: GlueVersionString;
+    /**
+     * The number of workers of a defined workerType that are allocated to the development endpoint. The maximum number of workers you can define are 299 for G.1X, and 149 for G.2X. 
+     */
+    NumberOfWorkers?: NullableInteger;
+    /**
      * The number of AWS Glue Data Processing Units (DPUs) allocated to this DevEndpoint.
      */
     NumberOfNodes?: IntegerValue;
     /**
-     * The AWS availability zone where this DevEndpoint is located.
+     * The AWS Availability Zone where this DevEndpoint is located.
      */
     AvailabilityZone?: GenericString;
     /**
@@ -1808,11 +2758,11 @@ declare namespace Glue {
      */
     VpcId?: GenericString;
     /**
-     * Path(s) to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma. Please note that only pure Python libraries can currently be used on a DevEndpoint. Libraries that rely on C extensions, such as the pandas Python data analysis library, are not yet supported.
+     * The paths to one or more Python libraries in an Amazon S3 bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma.  You can only use pure Python libraries with a DevEndpoint. Libraries that rely on C extensions, such as the pandas Python data analysis library, are not currently supported. 
      */
     ExtraPythonLibsS3Path?: GenericString;
     /**
-     * Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint. Please note that only pure Java/Scala libraries can currently be used on a DevEndpoint.
+     * The path to one or more Java .jar files in an S3 bucket that should be loaded in your DevEndpoint.  You can only use pure Java/Scala libraries with a DevEndpoint. 
      */
     ExtraJarsS3Path?: GenericString;
     /**
@@ -1832,32 +2782,85 @@ declare namespace Glue {
      */
     LastModifiedTimestamp?: TimestampValue;
     /**
-     * The public key to be used by this DevEndpoint for authentication. This attribute is provided for backward compatibility, as the recommended attribute to use is public keys.
+     * The public key to be used by this DevEndpoint for authentication. This attribute is provided for backward compatibility because the recommended attribute to use is public keys.
      */
     PublicKey?: GenericString;
     /**
-     * A list of public keys to be used by the DevEndpoints for authentication. The use of this attribute is preferred over a single public key because the public keys allow you to have a different private key per client.  If you previously created an endpoint with a public key, you must remove that key to be able to set a list of public keys: call the UpdateDevEndpoint API with the public key content in the deletePublicKeys attribute, and the list of new keys in the addPublicKeys attribute. 
+     * A list of public keys to be used by the DevEndpoints for authentication. Using this attribute is preferred over a single public key because the public keys allow you to have a different private key per client.  If you previously created an endpoint with a public key, you must remove that key to be able to set a list of public keys. Call the UpdateDevEndpoint API operation with the public key content in the deletePublicKeys attribute, and the list of new keys in the addPublicKeys attribute. 
      */
     PublicKeys?: PublicKeysList;
+    /**
+     * The name of the SecurityConfiguration structure to be used with this DevEndpoint.
+     */
+    SecurityConfiguration?: NameString;
+    /**
+     * A map of arguments used to configure the DevEndpoint. Valid arguments are:    "--enable-glue-datacatalog": ""     "GLUE_PYTHON_VERSION": "3"     "GLUE_PYTHON_VERSION": "2"    You can specify a version of Python support for development endpoints by using the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to Python 2.
+     */
+    Arguments?: MapValue;
   }
   export interface DevEndpointCustomLibraries {
     /**
-     * Path(s) to one or more Python libraries in an S3 bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma. Please note that only pure Python libraries can currently be used on a DevEndpoint. Libraries that rely on C extensions, such as the pandas Python data analysis library, are not yet supported.
+     * The paths to one or more Python libraries in an Amazon Simple Storage Service (Amazon S3) bucket that should be loaded in your DevEndpoint. Multiple values must be complete paths separated by a comma.  You can only use pure Python libraries with a DevEndpoint. Libraries that rely on C extensions, such as the pandas Python data analysis library, are not currently supported. 
      */
     ExtraPythonLibsS3Path?: GenericString;
     /**
-     * Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint. Please note that only pure Java/Scala libraries can currently be used on a DevEndpoint.
+     * The path to one or more Java .jar files in an S3 bucket that should be loaded in your DevEndpoint.  You can only use pure Java/Scala libraries with a DevEndpoint. 
      */
     ExtraJarsS3Path?: GenericString;
   }
   export type DevEndpointList = DevEndpoint[];
+  export type DevEndpointNameList = NameString[];
+  export type DevEndpointNames = GenericString[];
   export interface DynamoDBTarget {
     /**
      * The name of the DynamoDB table to crawl.
      */
     Path?: Path;
+    /**
+     * Indicates whether to scan all the records, or to sample rows from the table. Scanning all the records can take a long time when the table is not a high throughput table. A value of true means to scan all records, while a value of false means to sample the records. If no value is specified, the value defaults to true.
+     */
+    scanAll?: NullableBoolean;
+    /**
+     * The percentage of the configured read capacity units to use by the AWS Glue crawler. Read capacity units is a term defined by DynamoDB, and is a numeric value that acts as rate limiter for the number of reads that can be performed on that table per second. The valid values are null or a value between 0.1 to 1.5. A null value is used when user does not provide a value, and defaults to 0.5 of the configured Read Capacity Unit (for provisioned tables), or 0.25 of the max configured Read Capacity Unit (for tables using on-demand mode).
+     */
+    scanRate?: NullableDouble;
   }
   export type DynamoDBTargetList = DynamoDBTarget[];
+  export interface Edge {
+    /**
+     * The unique of the node within the workflow where the edge starts.
+     */
+    SourceId?: NameString;
+    /**
+     * The unique of the node within the workflow where the edge ends.
+     */
+    DestinationId?: NameString;
+  }
+  export type EdgeList = Edge[];
+  export interface EncryptionAtRest {
+    /**
+     * The encryption-at-rest mode for encrypting Data Catalog data.
+     */
+    CatalogEncryptionMode: CatalogEncryptionMode;
+    /**
+     * The ID of the AWS KMS key to use for encryption at rest.
+     */
+    SseAwsKmsKeyId?: NameString;
+  }
+  export interface EncryptionConfiguration {
+    /**
+     * The encryption configuration for Amazon Simple Storage Service (Amazon S3) data.
+     */
+    S3Encryption?: S3EncryptionList;
+    /**
+     * The encryption configuration for Amazon CloudWatch.
+     */
+    CloudWatchEncryption?: CloudWatchEncryption;
+    /**
+     * The encryption configuration for job bookmarks.
+     */
+    JobBookmarksEncryption?: JobBookmarksEncryption;
+  }
   export type ErrorByName = {[key: string]: ErrorDetail};
   export interface ErrorDetail {
     /**
@@ -1870,6 +2873,16 @@ declare namespace Glue {
     ErrorMessage?: DescriptionString;
   }
   export type ErrorString = string;
+  export interface EvaluationMetrics {
+    /**
+     * The type of machine learning transform.
+     */
+    TransformType: TransformType;
+    /**
+     * The evaluation metrics for the find matches algorithm.
+     */
+    FindMatchesMetrics?: FindMatchesMetrics;
+  }
   export interface ExecutionProperty {
     /**
      * The maximum number of concurrent runs allowed for the job. The default is 1. An error is returned when this threshold is reached. The maximum value you can specify is controlled by a service limit.
@@ -1877,9 +2890,71 @@ declare namespace Glue {
     MaxConcurrentRuns?: MaxConcurrentRuns;
   }
   export type ExecutionTime = number;
+  export type ExistCondition = "MUST_EXIST"|"NOT_EXIST"|"NONE"|string;
+  export interface ExportLabelsTaskRunProperties {
+    /**
+     * The Amazon Simple Storage Service (Amazon S3) path where you will export the labels.
+     */
+    OutputS3Path?: UriString;
+  }
   export type FieldType = string;
   export type FilterString = string;
+  export interface FindMatchesMetrics {
+    /**
+     * The area under the precision/recall curve (AUPRC) is a single number measuring the overall quality of the transform, that is independent of the choice made for precision vs. recall. Higher values indicate that you have a more attractive precision vs. recall tradeoff. For more information, see Precision and recall in Wikipedia.
+     */
+    AreaUnderPRCurve?: GenericBoundedDouble;
+    /**
+     * The precision metric indicates when often your transform is correct when it predicts a match. Specifically, it measures how well the transform finds true positives from the total true positives possible. For more information, see Precision and recall in Wikipedia.
+     */
+    Precision?: GenericBoundedDouble;
+    /**
+     * The recall metric indicates that for an actual match, how often your transform predicts the match. Specifically, it measures how well the transform finds true positives from the total records in the source data. For more information, see Precision and recall in Wikipedia.
+     */
+    Recall?: GenericBoundedDouble;
+    /**
+     * The maximum F1 metric indicates the transform's accuracy between 0 and 1, where 1 is the best accuracy. For more information, see F1 score in Wikipedia.
+     */
+    F1?: GenericBoundedDouble;
+    /**
+     * The confusion matrix shows you what your transform is predicting accurately and what types of errors it is making. For more information, see Confusion matrix in Wikipedia.
+     */
+    ConfusionMatrix?: ConfusionMatrix;
+  }
+  export interface FindMatchesParameters {
+    /**
+     * The name of a column that uniquely identifies rows in the source table. Used to help identify matching records.
+     */
+    PrimaryKeyColumnName?: ColumnNameString;
+    /**
+     * The value selected when tuning your transform for a balance between precision and recall. A value of 0.5 means no preference; a value of 1.0 means a bias purely for precision, and a value of 0.0 means a bias for recall. Because this is a tradeoff, choosing values close to 1.0 means very low recall, and choosing values close to 0.0 results in very low precision. The precision metric indicates how often your model is correct when it predicts a match.  The recall metric indicates that for an actual match, how often your model predicts the match.
+     */
+    PrecisionRecallTradeoff?: GenericBoundedDouble;
+    /**
+     * The value that is selected when tuning your transform for a balance between accuracy and cost. A value of 0.5 means that the system balances accuracy and cost concerns. A value of 1.0 means a bias purely for accuracy, which typically results in a higher cost, sometimes substantially higher. A value of 0.0 means a bias purely for cost, which results in a less accurate FindMatches transform, sometimes with unacceptable accuracy. Accuracy measures how well the transform finds true positives and true negatives. Increasing accuracy requires more machine resources and cost. But it also results in increased recall.  Cost measures how many compute resources, and thus money, are consumed to run the transform.
+     */
+    AccuracyCostTradeoff?: GenericBoundedDouble;
+    /**
+     * The value to switch on or off to force the output to match the provided labels from users. If the value is True, the find matches transform forces the output to match the provided labels. The results override the normal conflation results. If the value is False, the find matches transform does not ensure all the labels provided are respected, and the results rely on the trained model. Note that setting this value to true may increase the conflation execution time.
+     */
+    EnforceProvidedLabels?: NullableBoolean;
+  }
+  export interface FindMatchesTaskRunProperties {
+    /**
+     * The job ID for the Find Matches task run.
+     */
+    JobId?: HashString;
+    /**
+     * The name assigned to the job for the Find Matches task run.
+     */
+    JobName?: NameString;
+    /**
+     * The job run ID for the Find Matches task run.
+     */
+    JobRunId?: HashString;
+  }
   export type FormatString = string;
+  export type GenericBoundedDouble = number;
   export type GenericMap = {[key: string]: GenericString};
   export type GenericString = string;
   export interface GetCatalogImportStatusRequest {
@@ -1908,7 +2983,7 @@ declare namespace Glue {
   }
   export interface GetClassifiersRequest {
     /**
-     * Size of the list to return (optional).
+     * The size of the list to return (optional).
      */
     MaxResults?: PageSize;
     /**
@@ -1928,13 +3003,17 @@ declare namespace Glue {
   }
   export interface GetConnectionRequest {
     /**
-     * The ID of the Data Catalog in which the connection resides. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which the connection resides. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
      * The name of the connection definition to retrieve.
      */
     Name: NameString;
+    /**
+     * Allows you to retrieve the connection metadata without returning the password. For instance, the AWS Glue console uses this flag to retrieve the connection, and does not display the password. Set this parameter when the caller might not have permission to use the AWS KMS key to decrypt the password, but it does have permission to access the rest of the connection properties.
+     */
+    HidePassword?: Boolean;
   }
   export interface GetConnectionResponse {
     /**
@@ -1954,13 +3033,17 @@ declare namespace Glue {
   }
   export interface GetConnectionsRequest {
     /**
-     * The ID of the Data Catalog in which the connections reside. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which the connections reside. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
-     * A filter that controls which connections will be returned.
+     * A filter that controls which connections are returned.
      */
     Filter?: GetConnectionsFilter;
+    /**
+     * Allows you to retrieve the connection metadata without returning the password. For instance, the AWS Glue console uses this flag to retrieve the connection, and does not display the password. Set this parameter when the caller might not have permission to use the AWS KMS key to decrypt the password, but it does have permission to access the rest of the connection properties.
+     */
+    HidePassword?: Boolean;
     /**
      * A continuation token, if this is a continuation call.
      */
@@ -2006,7 +3089,7 @@ declare namespace Glue {
   }
   export interface GetCrawlerRequest {
     /**
-     * Name of the crawler to retrieve metadata for.
+     * The name of the crawler to retrieve metadata for.
      */
     Name: NameString;
   }
@@ -2036,9 +3119,21 @@ declare namespace Glue {
      */
     NextToken?: Token;
   }
+  export interface GetDataCatalogEncryptionSettingsRequest {
+    /**
+     * The ID of the Data Catalog to retrieve the security configuration for. If none is provided, the AWS account ID is used by default.
+     */
+    CatalogId?: CatalogIdString;
+  }
+  export interface GetDataCatalogEncryptionSettingsResponse {
+    /**
+     * The requested security configuration.
+     */
+    DataCatalogEncryptionSettings?: DataCatalogEncryptionSettings;
+  }
   export interface GetDatabaseRequest {
     /**
-     * The ID of the Data Catalog in which the database resides. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which the database resides. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -2048,13 +3143,13 @@ declare namespace Glue {
   }
   export interface GetDatabaseResponse {
     /**
-     * The definition of the specified database in the catalog.
+     * The definition of the specified database in the Data Catalog.
      */
     Database?: Database;
   }
   export interface GetDatabasesRequest {
     /**
-     * The ID of the Data Catalog from which to retrieve Databases. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog from which to retrieve Databases. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -2094,7 +3189,7 @@ declare namespace Glue {
   }
   export interface GetDevEndpointRequest {
     /**
-     * Name of the DevEndpoint for which to retrieve information.
+     * Name of the DevEndpoint to retrieve information for.
      */
     EndpointName: GenericString;
   }
@@ -2123,6 +3218,22 @@ declare namespace Glue {
      * A continuation token, if not all DevEndpoint definitions have yet been returned.
      */
     NextToken?: GenericString;
+  }
+  export interface GetJobBookmarkRequest {
+    /**
+     * The name of the job in question.
+     */
+    JobName: JobName;
+    /**
+     * The unique run identifier associated with this job run.
+     */
+    RunId?: RunId;
+  }
+  export interface GetJobBookmarkResponse {
+    /**
+     * A structure that defines a point that a job can resume processing.
+     */
+    JobBookmarkEntry?: JobBookmarkEntry;
   }
   export interface GetJobRequest {
     /**
@@ -2172,11 +3283,11 @@ declare namespace Glue {
   }
   export interface GetJobRunsResponse {
     /**
-     * A list of job-run metatdata objects.
+     * A list of job-run metadata objects.
      */
     JobRuns?: JobRunList;
     /**
-     * A continuation token, if not all reequested job runs have been returned.
+     * A continuation token, if not all requested job runs have been returned.
      */
     NextToken?: GenericString;
   }
@@ -2200,6 +3311,198 @@ declare namespace Glue {
      */
     NextToken?: GenericString;
   }
+  export interface GetMLTaskRunRequest {
+    /**
+     * The unique identifier of the machine learning transform.
+     */
+    TransformId: HashString;
+    /**
+     * The unique identifier of the task run.
+     */
+    TaskRunId: HashString;
+  }
+  export interface GetMLTaskRunResponse {
+    /**
+     * The unique identifier of the task run.
+     */
+    TransformId?: HashString;
+    /**
+     * The unique run identifier associated with this run.
+     */
+    TaskRunId?: HashString;
+    /**
+     * The status for this task run.
+     */
+    Status?: TaskStatusType;
+    /**
+     * The names of the log groups that are associated with the task run.
+     */
+    LogGroupName?: GenericString;
+    /**
+     * The list of properties that are associated with the task run.
+     */
+    Properties?: TaskRunProperties;
+    /**
+     * The error strings that are associated with the task run.
+     */
+    ErrorString?: GenericString;
+    /**
+     * The date and time when this task run started.
+     */
+    StartedOn?: Timestamp;
+    /**
+     * The date and time when this task run was last modified.
+     */
+    LastModifiedOn?: Timestamp;
+    /**
+     * The date and time when this task run was completed.
+     */
+    CompletedOn?: Timestamp;
+    /**
+     * The amount of time (in seconds) that the task run consumed resources.
+     */
+    ExecutionTime?: ExecutionTime;
+  }
+  export interface GetMLTaskRunsRequest {
+    /**
+     * The unique identifier of the machine learning transform.
+     */
+    TransformId: HashString;
+    /**
+     * A token for pagination of the results. The default is empty.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of results to return. 
+     */
+    MaxResults?: PageSize;
+    /**
+     * The filter criteria, in the TaskRunFilterCriteria structure, for the task run.
+     */
+    Filter?: TaskRunFilterCriteria;
+    /**
+     * The sorting criteria, in the TaskRunSortCriteria structure, for the task run.
+     */
+    Sort?: TaskRunSortCriteria;
+  }
+  export interface GetMLTaskRunsResponse {
+    /**
+     * A list of task runs that are associated with the transform.
+     */
+    TaskRuns?: TaskRunList;
+    /**
+     * A pagination token, if more results are available.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface GetMLTransformRequest {
+    /**
+     * The unique identifier of the transform, generated at the time that the transform was created.
+     */
+    TransformId: HashString;
+  }
+  export interface GetMLTransformResponse {
+    /**
+     * The unique identifier of the transform, generated at the time that the transform was created.
+     */
+    TransformId?: HashString;
+    /**
+     * The unique name given to the transform when it was created.
+     */
+    Name?: NameString;
+    /**
+     * A description of the transform.
+     */
+    Description?: DescriptionString;
+    /**
+     * The last known status of the transform (to indicate whether it can be used or not). One of "NOT_READY", "READY", or "DELETING".
+     */
+    Status?: TransformStatusType;
+    /**
+     * The date and time when the transform was created.
+     */
+    CreatedOn?: Timestamp;
+    /**
+     * The date and time when the transform was last modified.
+     */
+    LastModifiedOn?: Timestamp;
+    /**
+     * A list of AWS Glue table definitions used by the transform.
+     */
+    InputRecordTables?: GlueTables;
+    /**
+     * The configuration parameters that are specific to the algorithm used.
+     */
+    Parameters?: TransformParameters;
+    /**
+     * The latest evaluation metrics.
+     */
+    EvaluationMetrics?: EvaluationMetrics;
+    /**
+     * The number of labels available for this transform.
+     */
+    LabelCount?: LabelCount;
+    /**
+     * The Map&lt;Column, Type&gt; object that represents the schema that this transform accepts. Has an upper bound of 100 columns.
+     */
+    Schema?: TransformSchema;
+    /**
+     * The name or Amazon Resource Name (ARN) of the IAM role with the required permissions.
+     */
+    Role?: RoleString;
+    /**
+     * This value determines which version of AWS Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9. For more information, see AWS Glue Versions in the developer guide.
+     */
+    GlueVersion?: GlueVersionString;
+    /**
+     * The number of AWS Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.  When the WorkerType field is set to a value other than Standard, the MaxCapacity field is set automatically and becomes read-only.
+     */
+    MaxCapacity?: NullableDouble;
+    /**
+     * The type of predefined worker that is allocated when this task runs. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.   For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.  
+     */
+    WorkerType?: WorkerType;
+    /**
+     * The number of workers of a defined workerType that are allocated when this task runs.
+     */
+    NumberOfWorkers?: NullableInteger;
+    /**
+     * The timeout for a task run for this transform in minutes. This is the maximum time that a task run for this transform can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
+     */
+    Timeout?: Timeout;
+    /**
+     * The maximum number of times to retry a task for this transform after a task run fails.
+     */
+    MaxRetries?: NullableInteger;
+  }
+  export interface GetMLTransformsRequest {
+    /**
+     * A paginated token to offset the results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: PageSize;
+    /**
+     * The filter transformation criteria.
+     */
+    Filter?: TransformFilterCriteria;
+    /**
+     * The sorting criteria.
+     */
+    Sort?: TransformSortCriteria;
+  }
+  export interface GetMLTransformsResponse {
+    /**
+     * A list of machine learning transforms.
+     */
+    Transforms: TransformList;
+    /**
+     * A pagination token, if more results are available.
+     */
+    NextToken?: PaginationToken;
+  }
   export interface GetMappingRequest {
     /**
      * Specifies the source table.
@@ -2222,7 +3525,7 @@ declare namespace Glue {
   }
   export interface GetPartitionRequest {
     /**
-     * The ID of the Data Catalog where the partition in question resides. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the partition in question resides. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -2246,7 +3549,7 @@ declare namespace Glue {
   }
   export interface GetPartitionsRequest {
     /**
-     * The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the partitions in question reside. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -2258,7 +3561,7 @@ declare namespace Glue {
      */
     TableName: NameString;
     /**
-     * An expression filtering the partitions to be returned.
+     * An expression that filters the partitions to be returned. The expression uses SQL syntax similar to the SQL WHERE filter clause. The SQL statement parser JSQLParser parses the expression.   Operators: The following are the operators that you can use in the Expression API call:  =  Checks whether the values of the two operands are equal; if yes, then the condition becomes true. Example: Assume 'variable a' holds 10 and 'variable b' holds 20.  (a = b) is not true.  &lt; &gt;  Checks whether the values of two operands are equal; if the values are not equal, then the condition becomes true. Example: (a &lt; &gt; b) is true.  &gt;  Checks whether the value of the left operand is greater than the value of the right operand; if yes, then the condition becomes true. Example: (a &gt; b) is not true.  &lt;  Checks whether the value of the left operand is less than the value of the right operand; if yes, then the condition becomes true. Example: (a &lt; b) is true.  &gt;=  Checks whether the value of the left operand is greater than or equal to the value of the right operand; if yes, then the condition becomes true. Example: (a &gt;= b) is not true.  &lt;=  Checks whether the value of the left operand is less than or equal to the value of the right operand; if yes, then the condition becomes true. Example: (a &lt;= b) is true.  AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL  Logical operators.    Supported Partition Key Types: The following are the supported partition keys.    string     date     timestamp     int     bigint     long     tinyint     smallint     decimal    If an invalid type is encountered, an exception is thrown.  The following list shows the valid operators on each type. When you define a crawler, the partitionKey type is created as a STRING, to be compatible with the catalog partitions.   Sample API Call: 
      */
     Expression?: PredicateString;
     /**
@@ -2280,7 +3583,7 @@ declare namespace Glue {
      */
     Partitions?: PartitionList;
     /**
-     * A continuation token, if the returned list of partitions does not does not include the last one.
+     * A continuation token, if the returned list of partitions does not include the last one.
      */
     NextToken?: Token;
   }
@@ -2298,7 +3601,7 @@ declare namespace Glue {
      */
     Sinks?: CatalogEntries;
     /**
-     * Parameters for the mapping.
+     * The parameters for the mapping.
      */
     Location?: Location;
     /**
@@ -2312,13 +3615,65 @@ declare namespace Glue {
      */
     PythonScript?: PythonScript;
     /**
-     * Scala code to perform the mapping.
+     * The Scala code to perform the mapping.
      */
     ScalaCode?: ScalaCode;
   }
+  export interface GetResourcePolicyRequest {
+  }
+  export interface GetResourcePolicyResponse {
+    /**
+     * Contains the requested policy document, in JSON format.
+     */
+    PolicyInJson?: PolicyJsonString;
+    /**
+     * Contains the hash value associated with this policy.
+     */
+    PolicyHash?: HashString;
+    /**
+     * The date and time at which the policy was created.
+     */
+    CreateTime?: Timestamp;
+    /**
+     * The date and time at which the policy was last updated.
+     */
+    UpdateTime?: Timestamp;
+  }
+  export interface GetSecurityConfigurationRequest {
+    /**
+     * The name of the security configuration to retrieve.
+     */
+    Name: NameString;
+  }
+  export interface GetSecurityConfigurationResponse {
+    /**
+     * The requested security configuration.
+     */
+    SecurityConfiguration?: SecurityConfiguration;
+  }
+  export interface GetSecurityConfigurationsRequest {
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: PageSize;
+    /**
+     * A continuation token, if this is a continuation call.
+     */
+    NextToken?: GenericString;
+  }
+  export interface GetSecurityConfigurationsResponse {
+    /**
+     * A list of security configurations.
+     */
+    SecurityConfigurations?: SecurityConfigurationList;
+    /**
+     * A continuation token, if there are more security configurations to return.
+     */
+    NextToken?: GenericString;
+  }
   export interface GetTableRequest {
     /**
-     * The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the table resides. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -2338,7 +3693,7 @@ declare namespace Glue {
   }
   export interface GetTableVersionRequest {
     /**
-     * The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the tables reside. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -2350,7 +3705,7 @@ declare namespace Glue {
      */
     TableName: NameString;
     /**
-     * The ID value of the table version to be retrieved.
+     * The ID value of the table version to be retrieved. A VersionID is a string representation of an integer. Each version is incremented by 1. 
      */
     VersionId?: VersionString;
   }
@@ -2363,7 +3718,7 @@ declare namespace Glue {
   export type GetTableVersionsList = TableVersion[];
   export interface GetTableVersionsRequest {
     /**
-     * The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the tables reside. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -2395,7 +3750,7 @@ declare namespace Glue {
   }
   export interface GetTablesRequest {
     /**
-     * The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the tables reside. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -2425,6 +3780,18 @@ declare namespace Glue {
      */
     NextToken?: Token;
   }
+  export interface GetTagsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource for which to retrieve tags.
+     */
+    ResourceArn: GlueResourceArn;
+  }
+  export interface GetTagsResponse {
+    /**
+     * The requested tags.
+     */
+    Tags?: TagsMap;
+  }
   export interface GetTriggerRequest {
     /**
      * The name of the trigger to retrieve.
@@ -2443,7 +3810,7 @@ declare namespace Glue {
      */
     NextToken?: GenericString;
     /**
-     * The name of the job for which to retrieve triggers. The trigger that can start this job will be returned, and if there is no such trigger, all triggers will be returned.
+     * The name of the job to retrieve triggers for. The trigger that can start this job is returned, and if there is no such trigger, all triggers are returned.
      */
     DependentJobName?: NameString;
     /**
@@ -2463,7 +3830,7 @@ declare namespace Glue {
   }
   export interface GetUserDefinedFunctionRequest {
     /**
-     * The ID of the Data Catalog where the function to be retrieved is located. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the function to be retrieved is located. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -2483,13 +3850,13 @@ declare namespace Glue {
   }
   export interface GetUserDefinedFunctionsRequest {
     /**
-     * The ID of the Data Catalog where the functions to be retrieved are located. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the functions to be retrieved are located. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
-     * The name of the catalog database where the functions are located.
+     * The name of the catalog database where the functions are located. If none is provided, functions from all the databases across the catalog will be returned.
      */
-    DatabaseName: NameString;
+    DatabaseName?: NameString;
     /**
      * An optional function-name pattern string that filters the function definitions returned.
      */
@@ -2513,6 +3880,107 @@ declare namespace Glue {
      */
     NextToken?: Token;
   }
+  export interface GetWorkflowRequest {
+    /**
+     * The name of the workflow to retrieve.
+     */
+    Name: NameString;
+    /**
+     * Specifies whether to include a graph when returning the workflow resource metadata.
+     */
+    IncludeGraph?: NullableBoolean;
+  }
+  export interface GetWorkflowResponse {
+    /**
+     * The resource metadata for the workflow.
+     */
+    Workflow?: Workflow;
+  }
+  export interface GetWorkflowRunPropertiesRequest {
+    /**
+     * Name of the workflow which was run.
+     */
+    Name: NameString;
+    /**
+     * The ID of the workflow run whose run properties should be returned.
+     */
+    RunId: IdString;
+  }
+  export interface GetWorkflowRunPropertiesResponse {
+    /**
+     * The workflow run properties which were set during the specified run.
+     */
+    RunProperties?: WorkflowRunProperties;
+  }
+  export interface GetWorkflowRunRequest {
+    /**
+     * Name of the workflow being run.
+     */
+    Name: NameString;
+    /**
+     * The ID of the workflow run.
+     */
+    RunId: IdString;
+    /**
+     * Specifies whether to include the workflow graph in response or not.
+     */
+    IncludeGraph?: NullableBoolean;
+  }
+  export interface GetWorkflowRunResponse {
+    /**
+     * The requested workflow run metadata.
+     */
+    Run?: WorkflowRun;
+  }
+  export interface GetWorkflowRunsRequest {
+    /**
+     * Name of the workflow whose metadata of runs should be returned.
+     */
+    Name: NameString;
+    /**
+     * Specifies whether to include the workflow graph in response or not.
+     */
+    IncludeGraph?: NullableBoolean;
+    /**
+     * The maximum size of the response.
+     */
+    NextToken?: GenericString;
+    /**
+     * The maximum number of workflow runs to be included in the response.
+     */
+    MaxResults?: PageSize;
+  }
+  export interface GetWorkflowRunsResponse {
+    /**
+     * A list of workflow run metadata objects.
+     */
+    Runs?: WorkflowRuns;
+    /**
+     * A continuation token, if not all requested workflow runs have been returned.
+     */
+    NextToken?: GenericString;
+  }
+  export type GlueResourceArn = string;
+  export interface GlueTable {
+    /**
+     * A database name in the AWS Glue Data Catalog.
+     */
+    DatabaseName: NameString;
+    /**
+     * A table name in the AWS Glue Data Catalog.
+     */
+    TableName: NameString;
+    /**
+     * A unique identifier for the AWS Glue Data Catalog.
+     */
+    CatalogId?: NameString;
+    /**
+     * The name of the connection to the AWS Glue Data Catalog.
+     */
+    ConnectionName?: NameString;
+  }
+  export type GlueTables = GlueTable[];
+  export type GlueVersionString = string;
   export interface GrokClassifier {
     /**
      * The name of the classifier.
@@ -2523,11 +3991,11 @@ declare namespace Glue {
      */
     Classification: Classification;
     /**
-     * The time this classifier was registered.
+     * The time that this classifier was registered.
      */
     CreationTime?: Timestamp;
     /**
-     * The time this classifier was last updated.
+     * The time that this classifier was last updated.
      */
     LastUpdated?: Timestamp;
     /**
@@ -2535,15 +4003,16 @@ declare namespace Glue {
      */
     Version?: VersionId;
     /**
-     * The grok pattern applied to a data store by this classifier. For more information, see built-in patterns in Writing Custom Classifers.
+     * The grok pattern applied to a data store by this classifier. For more information, see built-in patterns in Writing Custom Classifiers.
      */
     GrokPattern: GrokPattern;
     /**
-     * Optional custom grok patterns defined by this classifier. For more information, see custom patterns in Writing Custom Classifers.
+     * Optional custom grok patterns defined by this classifier. For more information, see custom patterns in Writing Custom Classifiers.
      */
     CustomPatterns?: CustomPatterns;
   }
   export type GrokPattern = string;
+  export type HashString = string;
   export type IdString = string;
   export interface ImportCatalogToGlueRequest {
     /**
@@ -2552,6 +4021,16 @@ declare namespace Glue {
     CatalogId?: CatalogIdString;
   }
   export interface ImportCatalogToGlueResponse {
+  }
+  export interface ImportLabelsTaskRunProperties {
+    /**
+     * The Amazon Simple Storage Service (Amazon S3) path from where you will import the labels.
+     */
+    InputS3Path?: UriString;
+    /**
+     * Indicates whether to overwrite your existing labels.
+     */
+    Replace?: ReplaceBoolean;
   }
   export type Integer = number;
   export type IntegerFlag = number;
@@ -2577,7 +4056,7 @@ declare namespace Glue {
      */
     Name?: NameString;
     /**
-     * Description of the job being defined.
+     * A description of the job.
      */
     Description?: DescriptionString;
     /**
@@ -2585,7 +4064,7 @@ declare namespace Glue {
      */
     LogUri?: UriString;
     /**
-     * The name or ARN of the IAM role associated with this job.
+     * The name or Amazon Resource Name (ARN) of the IAM role associated with this job.
      */
     Role?: RoleString;
     /**
@@ -2609,6 +4088,10 @@ declare namespace Glue {
      */
     DefaultArguments?: GenericMap;
     /**
+     * Non-overridable arguments for this job, specified as name-value pairs.
+     */
+    NonOverridableArguments?: GenericMap;
+    /**
      * The connections used for this job.
      */
     Connections?: ConnectionsList;
@@ -2617,25 +4100,45 @@ declare namespace Glue {
      */
     MaxRetries?: MaxRetries;
     /**
-     * The number of AWS Glue data processing units (DPUs) allocated to runs of this job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
+     * This field is deprecated. Use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) allocated to runs of this job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. 
      */
     AllocatedCapacity?: IntegerValue;
     /**
-     * The job timeout in minutes.
+     * The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
      */
     Timeout?: Timeout;
+    /**
+     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job or an Apache Spark ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
+     */
+    MaxCapacity?: NullableDouble;
+    /**
+     * The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.   For the G.2X worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.  
+     */
+    WorkerType?: WorkerType;
+    /**
+     * The number of workers of a defined workerType that are allocated when a job runs. The maximum number of workers you can define are 299 for G.1X, and 149 for G.2X. 
+     */
+    NumberOfWorkers?: NullableInteger;
+    /**
+     * The name of the SecurityConfiguration structure to be used with this job.
+     */
+    SecurityConfiguration?: NameString;
     /**
      * Specifies configuration properties of a job notification.
      */
     NotificationProperty?: NotificationProperty;
+    /**
+     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for jobs of type Spark.  For more information about the available AWS Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide. Jobs that are created without specifying a Glue version default to Glue 0.9.
+     */
+    GlueVersion?: GlueVersionString;
   }
   export interface JobBookmarkEntry {
     /**
-     * Name of the job in question.
+     * The name of the job in question.
      */
     JobName?: JobName;
     /**
-     * Version of the job.
+     * The version of the job.
      */
     Version?: IntegerValue;
     /**
@@ -2647,22 +4150,52 @@ declare namespace Glue {
      */
     Attempt?: IntegerValue;
     /**
+     * The unique run identifier associated with the previous job run.
+     */
+    PreviousRunId?: RunId;
+    /**
+     * The run ID number.
+     */
+    RunId?: RunId;
+    /**
      * The bookmark itself.
      */
     JobBookmark?: JsonValue;
   }
+  export interface JobBookmarksEncryption {
+    /**
+     * The encryption mode to use for job bookmarks data.
+     */
+    JobBookmarksEncryptionMode?: JobBookmarksEncryptionMode;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.
+     */
+    KmsKeyArn?: KmsKeyArn;
+  }
+  export type JobBookmarksEncryptionMode = "DISABLED"|"CSE-KMS"|string;
   export interface JobCommand {
     /**
-     * The name of the job command: this must be glueetl.
+     * The name of the job command. For an Apache Spark ETL job, this must be glueetl. For a Python shell job, it must be pythonshell.
      */
     Name?: GenericString;
     /**
-     * Specifies the S3 path to a script that executes a job (required).
+     * Specifies the Amazon Simple Storage Service (Amazon S3) path to a script that executes a job.
      */
     ScriptLocation?: ScriptLocationString;
+    /**
+     * The Python version being used to execute a Python shell job. Allowed values are 2 or 3.
+     */
+    PythonVersion?: PythonVersionString;
   }
   export type JobList = Job[];
   export type JobName = string;
+  export type JobNameList = NameString[];
+  export interface JobNodeDetails {
+    /**
+     * The information for the job runs represented by the job node.
+     */
+    JobRuns?: JobRunList;
+  }
   export interface JobRun {
     /**
      * The ID of this job run.
@@ -2689,19 +4222,19 @@ declare namespace Glue {
      */
     StartedOn?: TimestampValue;
     /**
-     * The last time this job run was modified.
+     * The last time that this job run was modified.
      */
     LastModifiedOn?: TimestampValue;
     /**
-     * The date and time this job run completed.
+     * The date and time that this job run completed.
      */
     CompletedOn?: TimestampValue;
     /**
-     * The current state of the job run.
+     * The current state of the job run. For more information about the statuses of jobs that have terminated abnormally, see AWS Glue Job Run Statuses.
      */
     JobRunState?: JobRunState;
     /**
-     * The job arguments associated with this run. These override equivalent default arguments set for the job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
+     * The job arguments associated with this run. For this job run, they replace the default arguments set in the job definition itself. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
      */
     Arguments?: GenericMap;
     /**
@@ -2713,7 +4246,7 @@ declare namespace Glue {
      */
     PredecessorRuns?: PredecessorList;
     /**
-     * The number of AWS Glue data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
+     * This field is deprecated. Use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
     /**
@@ -2721,13 +4254,37 @@ declare namespace Glue {
      */
     ExecutionTime?: ExecutionTime;
     /**
-     * The job run timeout in minutes.
+     * The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours). This overrides the timeout value set in the parent job.
      */
     Timeout?: Timeout;
+    /**
+     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job or an Apache Spark ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
+     */
+    MaxCapacity?: NullableDouble;
+    /**
+     * The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.   For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.  
+     */
+    WorkerType?: WorkerType;
+    /**
+     * The number of workers of a defined workerType that are allocated when a job runs. The maximum number of workers you can define are 299 for G.1X, and 149 for G.2X. 
+     */
+    NumberOfWorkers?: NullableInteger;
+    /**
+     * The name of the SecurityConfiguration structure to be used with this job run.
+     */
+    SecurityConfiguration?: NameString;
+    /**
+     * The name of the log group for secure logging that can be server-side encrypted in Amazon CloudWatch using AWS KMS. This name can be /aws-glue/jobs/, in which case the default encryption is NONE. If you add a role name and SecurityConfiguration name (in other words, /aws-glue/jobs-yourRoleName-yourSecurityConfigurationName/), then that security configuration is used to encrypt the log group.
+     */
+    LogGroupName?: GenericString;
     /**
      * Specifies configuration properties of a job run notification.
      */
     NotificationProperty?: NotificationProperty;
+    /**
+     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for jobs of type Spark.  For more information about the available AWS Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide. Jobs that are created without specifying a Glue version default to Glue 0.9.
+     */
+    GlueVersion?: GlueVersionString;
   }
   export type JobRunList = JobRun[];
   export type JobRunState = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|"SUCCEEDED"|"FAILED"|"TIMEOUT"|string;
@@ -2741,7 +4298,7 @@ declare namespace Glue {
      */
     LogUri?: UriString;
     /**
-     * The name or ARN of the IAM role associated with this job (required).
+     * The name or Amazon Resource Name (ARN) of the IAM role associated with this job (required).
      */
     Role?: RoleString;
     /**
@@ -2757,6 +4314,10 @@ declare namespace Glue {
      */
     DefaultArguments?: GenericMap;
     /**
+     * Non-overridable arguments for this job, specified as name-value pairs.
+     */
+    NonOverridableArguments?: GenericMap;
+    /**
      * The connections used for this job.
      */
     Connections?: ConnectionsList;
@@ -2765,17 +4326,37 @@ declare namespace Glue {
      */
     MaxRetries?: MaxRetries;
     /**
-     * The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
+     * This field is deprecated. Use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) to allocate to this job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
     /**
-     * The job timeout in minutes. The default is 2880 minutes (48 hours).
+     * The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
      */
     Timeout?: Timeout;
     /**
-     * Specifies configuration properties of a job notification.
+     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job or an Apache Spark ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
+     */
+    MaxCapacity?: NullableDouble;
+    /**
+     * The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.   For the G.2X worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.  
+     */
+    WorkerType?: WorkerType;
+    /**
+     * The number of workers of a defined workerType that are allocated when a job runs. The maximum number of workers you can define are 299 for G.1X, and 149 for G.2X. 
+     */
+    NumberOfWorkers?: NullableInteger;
+    /**
+     * The name of the SecurityConfiguration structure to be used with this job.
+     */
+    SecurityConfiguration?: NameString;
+    /**
+     * Specifies the configuration properties of a job notification.
      */
     NotificationProperty?: NotificationProperty;
+    /**
+     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for jobs of type Spark.  For more information about the available AWS Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide.
+     */
+    GlueVersion?: GlueVersionString;
   }
   export interface JsonClassifier {
     /**
@@ -2783,11 +4364,11 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
-     * The time this classifier was registered.
+     * The time that this classifier was registered.
      */
     CreationTime?: Timestamp;
     /**
-     * The time this classifier was last updated.
+     * The time that this classifier was last updated.
      */
     LastUpdated?: Timestamp;
     /**
@@ -2802,6 +4383,14 @@ declare namespace Glue {
   export type JsonPath = string;
   export type JsonValue = string;
   export type KeyString = string;
+  export type KmsKeyArn = string;
+  export type LabelCount = number;
+  export interface LabelingSetGenerationTaskRunProperties {
+    /**
+     * The Amazon Simple Storage Service (Amazon S3) path where you will generate the labeling set.
+     */
+    OutputS3Path?: UriString;
+  }
   export type Language = "PYTHON"|"SCALA"|string;
   export interface LastCrawlInfo {
     /**
@@ -2830,17 +4419,169 @@ declare namespace Glue {
     StartTime?: Timestamp;
   }
   export type LastCrawlStatus = "SUCCEEDED"|"CANCELLED"|"FAILED"|string;
+  export interface ListCrawlersRequest {
+    /**
+     * The maximum size of a list to return.
+     */
+    MaxResults?: PageSize;
+    /**
+     * A continuation token, if this is a continuation request.
+     */
+    NextToken?: Token;
+    /**
+     * Specifies to return only these tagged resources.
+     */
+    Tags?: TagsMap;
+  }
+  export interface ListCrawlersResponse {
+    /**
+     * The names of all crawlers in the account, or the crawlers with the specified tags.
+     */
+    CrawlerNames?: CrawlerNameList;
+    /**
+     * A continuation token, if the returned list does not contain the last metric available.
+     */
+    NextToken?: Token;
+  }
+  export interface ListDevEndpointsRequest {
+    /**
+     * A continuation token, if this is a continuation request.
+     */
+    NextToken?: GenericString;
+    /**
+     * The maximum size of a list to return.
+     */
+    MaxResults?: PageSize;
+    /**
+     * Specifies to return only these tagged resources.
+     */
+    Tags?: TagsMap;
+  }
+  export interface ListDevEndpointsResponse {
+    /**
+     * The names of all the DevEndpoints in the account, or the DevEndpoints with the specified tags.
+     */
+    DevEndpointNames?: DevEndpointNameList;
+    /**
+     * A continuation token, if the returned list does not contain the last metric available.
+     */
+    NextToken?: GenericString;
+  }
+  export interface ListJobsRequest {
+    /**
+     * A continuation token, if this is a continuation request.
+     */
+    NextToken?: GenericString;
+    /**
+     * The maximum size of a list to return.
+     */
+    MaxResults?: PageSize;
+    /**
+     * Specifies to return only these tagged resources.
+     */
+    Tags?: TagsMap;
+  }
+  export interface ListJobsResponse {
+    /**
+     * The names of all jobs in the account, or the jobs with the specified tags.
+     */
+    JobNames?: JobNameList;
+    /**
+     * A continuation token, if the returned list does not contain the last metric available.
+     */
+    NextToken?: GenericString;
+  }
+  export interface ListMLTransformsRequest {
+    /**
+     * A continuation token, if this is a continuation request.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum size of a list to return.
+     */
+    MaxResults?: PageSize;
+    /**
+     * A TransformFilterCriteria used to filter the machine learning transforms.
+     */
+    Filter?: TransformFilterCriteria;
+    /**
+     * A TransformSortCriteria used to sort the machine learning transforms.
+     */
+    Sort?: TransformSortCriteria;
+    /**
+     * Specifies to return only these tagged resources.
+     */
+    Tags?: TagsMap;
+  }
+  export interface ListMLTransformsResponse {
+    /**
+     * The identifiers of all the machine learning transforms in the account, or the machine learning transforms with the specified tags.
+     */
+    TransformIds: TransformIdList;
+    /**
+     * A continuation token, if the returned list does not contain the last metric available.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListTriggersRequest {
+    /**
+     * A continuation token, if this is a continuation request.
+     */
+    NextToken?: GenericString;
+    /**
+     *  The name of the job for which to retrieve triggers. The trigger that can start this job is returned. If there is no such trigger, all triggers are returned.
+     */
+    DependentJobName?: NameString;
+    /**
+     * The maximum size of a list to return.
+     */
+    MaxResults?: PageSize;
+    /**
+     * Specifies to return only these tagged resources.
+     */
+    Tags?: TagsMap;
+  }
+  export interface ListTriggersResponse {
+    /**
+     * The names of all triggers in the account, or the triggers with the specified tags.
+     */
+    TriggerNames?: TriggerNameList;
+    /**
+     * A continuation token, if the returned list does not contain the last metric available.
+     */
+    NextToken?: GenericString;
+  }
+  export interface ListWorkflowsRequest {
+    /**
+     * A continuation token, if this is a continuation request.
+     */
+    NextToken?: GenericString;
+    /**
+     * The maximum size of a list to return.
+     */
+    MaxResults?: PageSize;
+  }
+  export interface ListWorkflowsResponse {
+    /**
+     * List of names of workflows in the account.
+     */
+    Workflows?: WorkflowNames;
+    /**
+     * A continuation token, if not all workflow names have been returned.
+     */
+    NextToken?: GenericString;
+  }
   export interface Location {
     /**
      * A JDBC location.
      */
     Jdbc?: CodeGenNodeArgs;
     /**
-     * An Amazon S3 location.
+     * An Amazon Simple Storage Service (Amazon S3) location.
      */
     S3?: CodeGenNodeArgs;
     /**
-     * A DynamoDB Table location.
+     * An Amazon DynamoDB table location.
      */
     DynamoDB?: CodeGenNodeArgs;
   }
@@ -2850,6 +4591,81 @@ declare namespace Glue {
   export type LogStream = string;
   export type Logical = "AND"|"ANY"|string;
   export type LogicalOperator = "EQUALS"|string;
+  export interface MLTransform {
+    /**
+     * The unique transform ID that is generated for the machine learning transform. The ID is guaranteed to be unique and does not change.
+     */
+    TransformId?: HashString;
+    /**
+     * A user-defined name for the machine learning transform. Names are not guaranteed unique and can be changed at any time.
+     */
+    Name?: NameString;
+    /**
+     * A user-defined, long-form description text for the machine learning transform. Descriptions are not guaranteed to be unique and can be changed at any time.
+     */
+    Description?: DescriptionString;
+    /**
+     * The current status of the machine learning transform.
+     */
+    Status?: TransformStatusType;
+    /**
+     * A timestamp. The time and date that this machine learning transform was created.
+     */
+    CreatedOn?: Timestamp;
+    /**
+     * A timestamp. The last point in time when this machine learning transform was modified.
+     */
+    LastModifiedOn?: Timestamp;
+    /**
+     * A list of AWS Glue table definitions used by the transform.
+     */
+    InputRecordTables?: GlueTables;
+    /**
+     * A TransformParameters object. You can use parameters to tune (customize) the behavior of the machine learning transform by specifying what data it learns from and your preference on various tradeoffs (such as precious vs. recall, or accuracy vs. cost).
+     */
+    Parameters?: TransformParameters;
+    /**
+     * An EvaluationMetrics object. Evaluation metrics provide an estimate of the quality of your machine learning transform.
+     */
+    EvaluationMetrics?: EvaluationMetrics;
+    /**
+     * A count identifier for the labeling files generated by AWS Glue for this transform. As you create a better transform, you can iteratively download, label, and upload the labeling file.
+     */
+    LabelCount?: LabelCount;
+    /**
+     * A map of key-value pairs representing the columns and data types that this transform can run against. Has an upper bound of 100 columns.
+     */
+    Schema?: TransformSchema;
+    /**
+     * The name or Amazon Resource Name (ARN) of the IAM role with the required permissions. The required permissions include both AWS Glue service role permissions to AWS Glue resources, and Amazon S3 permissions required by the transform.    This role needs AWS Glue service role permissions to allow access to resources in AWS Glue. See Attach a Policy to IAM Users That Access AWS Glue.   This role needs permission to your Amazon Simple Storage Service (Amazon S3) sources, targets, temporary directory, scripts, and any libraries used by the task run for this transform.  
+     */
+    Role?: RoleString;
+    /**
+     * This value determines which version of AWS Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9. For more information, see AWS Glue Versions in the developer guide.
+     */
+    GlueVersion?: GlueVersionString;
+    /**
+     * The number of AWS Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.   MaxCapacity is a mutually exclusive option with NumberOfWorkers and WorkerType.   If either NumberOfWorkers or WorkerType is set, then MaxCapacity cannot be set.   If MaxCapacity is set then neither NumberOfWorkers or WorkerType can be set.   If WorkerType is set, then NumberOfWorkers is required (and vice versa).    MaxCapacity and NumberOfWorkers must both be at least 1.   When the WorkerType field is set to a value other than Standard, the MaxCapacity field is set automatically and becomes read-only.
+     */
+    MaxCapacity?: NullableDouble;
+    /**
+     * The type of predefined worker that is allocated when a task of this transform runs. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.   For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.    MaxCapacity is a mutually exclusive option with NumberOfWorkers and WorkerType.   If either NumberOfWorkers or WorkerType is set, then MaxCapacity cannot be set.   If MaxCapacity is set then neither NumberOfWorkers or WorkerType can be set.   If WorkerType is set, then NumberOfWorkers is required (and vice versa).    MaxCapacity and NumberOfWorkers must both be at least 1.  
+     */
+    WorkerType?: WorkerType;
+    /**
+     * The number of workers of a defined workerType that are allocated when a task of the transform runs. If WorkerType is set, then NumberOfWorkers is required (and vice versa).
+     */
+    NumberOfWorkers?: NullableInteger;
+    /**
+     * The timeout in minutes of the machine learning transform.
+     */
+    Timeout?: Timeout;
+    /**
+     * The maximum number of times to retry after an MLTaskRun of the machine learning transform fails.
+     */
+    MaxRetries?: NullableInteger;
+  }
+  export type MapValue = {[key: string]: GenericString};
   export interface MappingEntry {
     /**
      * The name of the source table.
@@ -2884,6 +4700,34 @@ declare namespace Glue {
   export type MillisecondsCount = number;
   export type NameString = string;
   export type NameStringList = NameString[];
+  export interface Node {
+    /**
+     * The type of AWS Glue component represented by the node.
+     */
+    Type?: NodeType;
+    /**
+     * The name of the AWS Glue component represented by the node.
+     */
+    Name?: NameString;
+    /**
+     * The unique Id assigned to the node within the workflow.
+     */
+    UniqueId?: NameString;
+    /**
+     * Details of the Trigger when the node represents a Trigger.
+     */
+    TriggerDetails?: TriggerNodeDetails;
+    /**
+     * Details of the Job when the node represents a Job.
+     */
+    JobDetails?: JobNodeDetails;
+    /**
+     * Details of the crawler when the node represents a crawler.
+     */
+    CrawlerDetails?: CrawlerNodeDetails;
+  }
+  export type NodeList = Node[];
+  export type NodeType = "CRAWLER"|"JOB"|"TRIGGER"|string;
   export type NonNegativeDouble = number;
   export type NonNegativeInteger = number;
   export interface NotificationProperty {
@@ -2893,6 +4737,10 @@ declare namespace Glue {
     NotifyDelayAfter?: NotifyDelayAfter;
   }
   export type NotifyDelayAfter = number;
+  export type NullableBoolean = boolean;
+  export type NullableDouble = number;
+  export type NullableInteger = number;
+  export type OrchestrationStringList = GenericString[];
   export interface Order {
     /**
      * The name of the column.
@@ -2905,6 +4753,7 @@ declare namespace Glue {
   }
   export type OrderList = Order[];
   export type PageSize = number;
+  export type PaginationToken = string;
   export type ParametersMap = {[key: string]: ParametersMapValue};
   export type ParametersMapValue = string;
   export interface Partition {
@@ -2913,11 +4762,11 @@ declare namespace Glue {
      */
     Values?: ValueStringList;
     /**
-     * The name of the catalog database where the table in question is located.
+     * The name of the catalog database in which to create the partition.
      */
     DatabaseName?: NameString;
     /**
-     * The name of the table in question.
+     * The name of the database table in which to create the partition.
      */
     TableName?: NameString;
     /**
@@ -2933,7 +4782,7 @@ declare namespace Glue {
      */
     StorageDescriptor?: StorageDescriptor;
     /**
-     * Partition parameters, in the form of a list of key-value pairs.
+     * These key-value pairs define partition parameters.
      */
     Parameters?: ParametersMap;
     /**
@@ -2947,14 +4796,14 @@ declare namespace Glue {
      */
     PartitionValues?: ValueStringList;
     /**
-     * Details about the partition error.
+     * The details about the partition error.
      */
     ErrorDetail?: ErrorDetail;
   }
   export type PartitionErrors = PartitionError[];
   export interface PartitionInput {
     /**
-     * The values of the partition.
+     * The values of the partition. Although this parameter is not required by the SDK, you must specify this parameter for a valid input. The values for the keys for the new partition must be passed as an array of String objects that must be ordered in the same order as the partition keys appearing in the Amazon S3 prefix. Otherwise AWS Glue will add the values to the wrong keys.
      */
     Values?: ValueStringList;
     /**
@@ -2966,7 +4815,7 @@ declare namespace Glue {
      */
     StorageDescriptor?: StorageDescriptor;
     /**
-     * Partition parameters, in the form of a list of key-value pairs.
+     * These key-value pairs define partition parameters.
      */
     Parameters?: ParametersMap;
     /**
@@ -2984,6 +4833,8 @@ declare namespace Glue {
   }
   export type Path = string;
   export type PathList = Path[];
+  export type Permission = "ALL"|"SELECT"|"ALTER"|"DROP"|"DELETE"|"INSERT"|"CREATE_DATABASE"|"CREATE_TABLE"|"DATA_LOCATION_ACCESS"|string;
+  export type PermissionList = Permission[];
   export interface PhysicalConnectionRequirements {
     /**
      * The subnet ID used by the connection.
@@ -2994,10 +4845,11 @@ declare namespace Glue {
      */
     SecurityGroupIdList?: SecurityGroupIdList;
     /**
-     * The connection's availability zone. This field is deprecated and has no effect.
+     * The connection's Availability Zone. This field is redundant because the specified subnet implies the Availability Zone to be used. Currently the field must be populated, but it will be deprecated in the future.
      */
     AvailabilityZone?: NameString;
   }
+  export type PolicyJsonString = string;
   export interface Predecessor {
     /**
      * The name of the job definition used by the predecessor job run.
@@ -3011,7 +4863,7 @@ declare namespace Glue {
   export type PredecessorList = Predecessor[];
   export interface Predicate {
     /**
-     * Optional field if only one condition is listed. If multiple conditions are listed, then this field is required.
+     * An optional field if only one condition is listed. If multiple conditions are listed, then this field is required.
      */
     Logical?: Logical;
     /**
@@ -3020,14 +4872,94 @@ declare namespace Glue {
     Conditions?: ConditionList;
   }
   export type PredicateString = string;
+  export interface PrincipalPermissions {
+    /**
+     * The principal who is granted permissions.
+     */
+    Principal?: DataLakePrincipal;
+    /**
+     * The permissions that are granted to the principal.
+     */
+    Permissions?: PermissionList;
+  }
+  export type PrincipalPermissionsList = PrincipalPermissions[];
   export type PrincipalType = "USER"|"ROLE"|"GROUP"|string;
+  export interface PropertyPredicate {
+    /**
+     * The key of the property.
+     */
+    Key?: ValueString;
+    /**
+     * The value of the property.
+     */
+    Value?: ValueString;
+    /**
+     * The comparator used to compare this property to others.
+     */
+    Comparator?: Comparator;
+  }
   export type PublicKeysList = GenericString[];
+  export interface PutDataCatalogEncryptionSettingsRequest {
+    /**
+     * The ID of the Data Catalog to set the security configuration for. If none is provided, the AWS account ID is used by default.
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The security configuration to set.
+     */
+    DataCatalogEncryptionSettings: DataCatalogEncryptionSettings;
+  }
+  export interface PutDataCatalogEncryptionSettingsResponse {
+  }
+  export interface PutResourcePolicyRequest {
+    /**
+     * Contains the policy document to set, in JSON format.
+     */
+    PolicyInJson: PolicyJsonString;
+    /**
+     * The hash value returned when the previous policy was set using PutResourcePolicy. Its purpose is to prevent concurrent modifications of a policy. Do not use this parameter if no previous policy has been set.
+     */
+    PolicyHashCondition?: HashString;
+    /**
+     * A value of MUST_EXIST is used to update a policy. A value of NOT_EXIST is used to create a new policy. If a value of NONE or a null value is used, the call will not depend on the existence of a policy.
+     */
+    PolicyExistsCondition?: ExistCondition;
+  }
+  export interface PutResourcePolicyResponse {
+    /**
+     * A hash of the policy that has just been set. This must be included in a subsequent call that overwrites or updates this policy.
+     */
+    PolicyHash?: HashString;
+  }
+  export interface PutWorkflowRunPropertiesRequest {
+    /**
+     * Name of the workflow which was run.
+     */
+    Name: NameString;
+    /**
+     * The ID of the workflow run for which the run properties should be updated.
+     */
+    RunId: IdString;
+    /**
+     * The properties to put for the specified run.
+     */
+    RunProperties: WorkflowRunProperties;
+  }
+  export interface PutWorkflowRunPropertiesResponse {
+  }
   export type PythonScript = string;
+  export type PythonVersionString = string;
+  export type RecordsCount = number;
+  export type ReplaceBoolean = boolean;
   export interface ResetJobBookmarkRequest {
     /**
      * The name of the job in question.
      */
     JobName: JobName;
+    /**
+     * The unique run identifier associated with this job run.
+     */
+    RunId?: RunId;
   }
   export interface ResetJobBookmarkResponse {
     /**
@@ -3051,6 +4983,19 @@ declare namespace Glue {
   export type RoleArn = string;
   export type RoleString = string;
   export type RowTag = string;
+  export type RunId = string;
+  export interface S3Encryption {
+    /**
+     * The encryption mode to use for Amazon S3 data.
+     */
+    S3EncryptionMode?: S3EncryptionMode;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.
+     */
+    KmsKeyArn?: KmsKeyArn;
+  }
+  export type S3EncryptionList = S3Encryption[];
+  export type S3EncryptionMode = "DISABLED"|"SSE-KMS"|"SSE-S3"|string;
   export interface S3Target {
     /**
      * The path to the Amazon S3 target.
@@ -3084,16 +5029,78 @@ declare namespace Glue {
      */
     DeleteBehavior?: DeleteBehavior;
   }
+  export interface SchemaColumn {
+    /**
+     * The name of the column.
+     */
+    Name?: ColumnNameString;
+    /**
+     * The type of data in the column.
+     */
+    DataType?: ColumnTypeString;
+  }
   export type SchemaPathString = string;
   export type ScriptLocationString = string;
+  export type SearchPropertyPredicates = PropertyPredicate[];
+  export interface SearchTablesRequest {
+    /**
+     * A unique identifier, consisting of  account_id/datalake.
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * A continuation token, included if this is a continuation call.
+     */
+    NextToken?: Token;
+    /**
+     * A list of key-value pairs, and a comparator used to filter the search results. Returns all entities matching the predicate.
+     */
+    Filters?: SearchPropertyPredicates;
+    /**
+     * A string used for a text search. Specifying a value in quotes filters based on an exact match to the value.
+     */
+    SearchText?: ValueString;
+    /**
+     * A list of criteria for sorting the results by a field name, in an ascending or descending order.
+     */
+    SortCriteria?: SortCriteria;
+    /**
+     * The maximum number of tables to return in a single response.
+     */
+    MaxResults?: PageSize;
+  }
+  export interface SearchTablesResponse {
+    /**
+     * A continuation token, present if the current list segment is not the last.
+     */
+    NextToken?: Token;
+    /**
+     * A list of the requested Table objects. The SearchTables response returns only the tables that you have access to.
+     */
+    TableList?: TableList;
+  }
+  export interface SecurityConfiguration {
+    /**
+     * The name of the security configuration.
+     */
+    Name?: NameString;
+    /**
+     * The time at which this security configuration was created.
+     */
+    CreatedTimeStamp?: TimestampValue;
+    /**
+     * The encryption configuration associated with this security configuration.
+     */
+    EncryptionConfiguration?: EncryptionConfiguration;
+  }
+  export type SecurityConfigurationList = SecurityConfiguration[];
   export type SecurityGroupIdList = NameString[];
   export interface Segment {
     /**
-     * The zero-based index number of the this segment. For example, if the total number of segments is 4, SegmentNumber values will range from zero through three.
+     * The zero-based index number of the segment. For example, if the total number of segments is 4, SegmentNumber values range from 0 through 3.
      */
     SegmentNumber: NonNegativeInteger;
     /**
-     * The total numer of segments.
+     * The total number of segments.
      */
     TotalSegments: TotalSegmentsInteger;
   }
@@ -3103,11 +5110,11 @@ declare namespace Glue {
      */
     Name?: NameString;
     /**
-     * Usually the class that implements the SerDe. An example is: org.apache.hadoop.hive.serde2.columnar.ColumnarSerDe.
+     * Usually the class that implements the SerDe. An example is org.apache.hadoop.hive.serde2.columnar.ColumnarSerDe.
      */
     SerializationLibrary?: NameString;
     /**
-     * A list of initialization parameters for the SerDe, in key-value form.
+     * These key-value pairs define initialization parameters for the SerDe.
      */
     Parameters?: ParametersMap;
   }
@@ -3125,6 +5132,19 @@ declare namespace Glue {
      */
     SkewedColumnValueLocationMaps?: LocationMap;
   }
+  export type Sort = "ASC"|"DESC"|string;
+  export type SortCriteria = SortCriterion[];
+  export interface SortCriterion {
+    /**
+     * The name of the field on which to sort.
+     */
+    FieldName?: ValueString;
+    /**
+     * An ascending or descending sort.
+     */
+    Sort?: Sort;
+  }
+  export type SortDirectionType = "DESCENDING"|"ASCENDING"|string;
   export interface StartCrawlerRequest {
     /**
      * Name of the crawler to start.
@@ -3141,6 +5161,42 @@ declare namespace Glue {
   }
   export interface StartCrawlerScheduleResponse {
   }
+  export interface StartExportLabelsTaskRunRequest {
+    /**
+     * The unique identifier of the machine learning transform.
+     */
+    TransformId: HashString;
+    /**
+     * The Amazon S3 path where you export the labels.
+     */
+    OutputS3Path: UriString;
+  }
+  export interface StartExportLabelsTaskRunResponse {
+    /**
+     * The unique identifier for the task run.
+     */
+    TaskRunId?: HashString;
+  }
+  export interface StartImportLabelsTaskRunRequest {
+    /**
+     * The unique identifier of the machine learning transform.
+     */
+    TransformId: HashString;
+    /**
+     * The Amazon Simple Storage Service (Amazon S3) path from where you import the labels.
+     */
+    InputS3Path: UriString;
+    /**
+     * Indicates whether to overwrite your existing labels.
+     */
+    ReplaceAllLabels?: ReplaceBoolean;
+  }
+  export interface StartImportLabelsTaskRunResponse {
+    /**
+     * The unique identifier for the task run.
+     */
+    TaskRunId?: HashString;
+  }
   export interface StartJobRunRequest {
     /**
      * The name of the job definition to use.
@@ -3151,27 +5207,71 @@ declare namespace Glue {
      */
     JobRunId?: IdString;
     /**
-     * The job arguments specifically for this run. They override the equivalent default arguments set for in the job definition itself. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
+     * The job arguments specifically for this run. For this job run, they replace the default arguments set in the job definition itself. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
      */
     Arguments?: GenericMap;
     /**
-     * The number of AWS Glue data processing units (DPUs) to allocate to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
+     * This field is deprecated. Use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) to allocate to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
     /**
-     * The job run timeout in minutes. It overrides the timeout value of the job.
+     * The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours). This overrides the timeout value set in the parent job.
      */
     Timeout?: Timeout;
+    /**
+     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job, or an Apache Spark ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
+     */
+    MaxCapacity?: NullableDouble;
+    /**
+     * The name of the SecurityConfiguration structure to be used with this job run.
+     */
+    SecurityConfiguration?: NameString;
     /**
      * Specifies configuration properties of a job run notification.
      */
     NotificationProperty?: NotificationProperty;
+    /**
+     * The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.   For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.  
+     */
+    WorkerType?: WorkerType;
+    /**
+     * The number of workers of a defined workerType that are allocated when a job runs. The maximum number of workers you can define are 299 for G.1X, and 149 for G.2X. 
+     */
+    NumberOfWorkers?: NullableInteger;
   }
   export interface StartJobRunResponse {
     /**
      * The ID assigned to this job run.
      */
     JobRunId?: IdString;
+  }
+  export interface StartMLEvaluationTaskRunRequest {
+    /**
+     * The unique identifier of the machine learning transform.
+     */
+    TransformId: HashString;
+  }
+  export interface StartMLEvaluationTaskRunResponse {
+    /**
+     * The unique identifier associated with this run.
+     */
+    TaskRunId?: HashString;
+  }
+  export interface StartMLLabelingSetGenerationTaskRunRequest {
+    /**
+     * The unique identifier of the machine learning transform.
+     */
+    TransformId: HashString;
+    /**
+     * The Amazon Simple Storage Service (Amazon S3) path where you generate the labeling set.
+     */
+    OutputS3Path: UriString;
+  }
+  export interface StartMLLabelingSetGenerationTaskRunResponse {
+    /**
+     * The unique run identifier that is associated with this task run.
+     */
+    TaskRunId?: HashString;
   }
   export interface StartTriggerRequest {
     /**
@@ -3184,6 +5284,18 @@ declare namespace Glue {
      * The name of the trigger that was started.
      */
     Name?: NameString;
+  }
+  export interface StartWorkflowRunRequest {
+    /**
+     * The name of the workflow to start.
+     */
+    Name: NameString;
+  }
+  export interface StartWorkflowRunResponse {
+    /**
+     * An Id for the new run.
+     */
+    RunId?: IdString;
   }
   export interface StopCrawlerRequest {
     /**
@@ -3213,13 +5325,25 @@ declare namespace Glue {
      */
     Name?: NameString;
   }
+  export interface StopWorkflowRunRequest {
+    /**
+     * The name of the workflow to stop.
+     */
+    Name: NameString;
+    /**
+     * The ID of the workflow run to stop.
+     */
+    RunId: IdString;
+  }
+  export interface StopWorkflowRunResponse {
+  }
   export interface StorageDescriptor {
     /**
      * A list of the Columns in the table.
      */
     Columns?: ColumnList;
     /**
-     * The physical location of the table. By default this takes the form of the warehouse location, followed by the database location in the warehouse, followed by the table name.
+     * The physical location of the table. By default, this takes the form of the warehouse location, followed by the database location in the warehouse, followed by the table name.
      */
     Location?: LocationString;
     /**
@@ -3231,7 +5355,7 @@ declare namespace Glue {
      */
     OutputFormat?: FormatString;
     /**
-     * True if the data in the table is compressed, or False if not.
+     *  True if the data in the table is compressed, or False if not.
      */
     Compressed?: Boolean;
     /**
@@ -3239,7 +5363,7 @@ declare namespace Glue {
      */
     NumberOfBuckets?: Integer;
     /**
-     * Serialization/deserialization (SerDe) information.
+     * The serialization/deserialization (SerDe) information.
      */
     SerdeInfo?: SerDeInfo;
     /**
@@ -3251,54 +5375,54 @@ declare namespace Glue {
      */
     SortColumns?: OrderList;
     /**
-     * User-supplied properties in key-value form.
+     * The user-supplied properties in key-value form.
      */
     Parameters?: ParametersMap;
     /**
-     * Information about values that appear very frequently in a column (skewed values).
+     * The information about values that appear frequently in a column (skewed values).
      */
     SkewedInfo?: SkewedInfo;
     /**
-     * True if the table data is stored in subdirectories, or False if not.
+     *  True if the table data is stored in subdirectories, or False if not.
      */
     StoredAsSubDirectories?: Boolean;
   }
   export type StringList = GenericString[];
   export interface Table {
     /**
-     * Name of the table. For Hive compatibility, this must be entirely lowercase.
+     * The table name. For Hive compatibility, this must be entirely lowercase.
      */
     Name: NameString;
     /**
-     * Name of the metadata database where the table metadata resides. For Hive compatibility, this must be all lowercase.
+     * The name of the database where the table metadata resides. For Hive compatibility, this must be all lowercase.
      */
     DatabaseName?: NameString;
     /**
-     * Description of the table.
+     * A description of the table.
      */
     Description?: DescriptionString;
     /**
-     * Owner of the table.
+     * The owner of the table.
      */
     Owner?: NameString;
     /**
-     * Time when the table definition was created in the Data Catalog.
+     * The time when the table definition was created in the Data Catalog.
      */
     CreateTime?: Timestamp;
     /**
-     * Last time the table was updated.
+     * The last time that the table was updated.
      */
     UpdateTime?: Timestamp;
     /**
-     * Last time the table was accessed. This is usually taken from HDFS, and may not be reliable.
+     * The last time that the table was accessed. This is usually taken from HDFS, and might not be reliable.
      */
     LastAccessTime?: Timestamp;
     /**
-     * Last time column statistics were computed for this table.
+     * The last time that column statistics were computed for this table.
      */
     LastAnalyzedTime?: Timestamp;
     /**
-     * Retention time for this table.
+     * The retention time for this table.
      */
     Retention?: NonNegativeInteger;
     /**
@@ -3306,7 +5430,7 @@ declare namespace Glue {
      */
     StorageDescriptor?: StorageDescriptor;
     /**
-     * A list of columns by which the table is partitioned. Only primitive types are supported as partition keys.
+     * A list of columns by which the table is partitioned. Only primitive types are supported as partition keys. When you create a table used by Amazon Athena, and you do not specify any partitionKeys, you must at least set the value of partitionKeys to an empty list. For example:  "PartitionKeys": [] 
      */
     PartitionKeys?: ColumnList;
     /**
@@ -3322,48 +5446,52 @@ declare namespace Glue {
      */
     TableType?: TableTypeString;
     /**
-     * Properties associated with this table, as a list of key-value pairs.
+     * These key-value pairs define properties associated with the table.
      */
     Parameters?: ParametersMap;
     /**
-     * Person or entity who created the table.
+     * The person or entity who created the table.
      */
     CreatedBy?: NameString;
+    /**
+     * Indicates whether the table has been registered with AWS Lake Formation.
+     */
+    IsRegisteredWithLakeFormation?: Boolean;
   }
   export interface TableError {
     /**
-     * Name of the table. For Hive compatibility, this must be entirely lowercase.
+     * The name of the table. For Hive compatibility, this must be entirely lowercase.
      */
     TableName?: NameString;
     /**
-     * Detail about the error.
+     * The details about the error.
      */
     ErrorDetail?: ErrorDetail;
   }
   export type TableErrors = TableError[];
   export interface TableInput {
     /**
-     * Name of the table. For Hive compatibility, this is folded to lowercase when it is stored.
+     * The table name. For Hive compatibility, this is folded to lowercase when it is stored.
      */
     Name: NameString;
     /**
-     * Description of the table.
+     * A description of the table.
      */
     Description?: DescriptionString;
     /**
-     * Owner of the table.
+     * The table owner.
      */
     Owner?: NameString;
     /**
-     * Last time the table was accessed.
+     * The last time that the table was accessed.
      */
     LastAccessTime?: Timestamp;
     /**
-     * Last time column statistics were computed for this table.
+     * The last time that column statistics were computed for this table.
      */
     LastAnalyzedTime?: Timestamp;
     /**
-     * Retention time for this table.
+     * The retention time for this table.
      */
     Retention?: NonNegativeInteger;
     /**
@@ -3371,7 +5499,7 @@ declare namespace Glue {
      */
     StorageDescriptor?: StorageDescriptor;
     /**
-     * A list of columns by which the table is partitioned. Only primitive types are supported as partition keys.
+     * A list of columns by which the table is partitioned. Only primitive types are supported as partition keys. When you create a table used by Amazon Athena, and you do not specify any partitionKeys, you must at least set the value of partitionKeys to an empty list. For example:  "PartitionKeys": [] 
      */
     PartitionKeys?: ColumnList;
     /**
@@ -3387,7 +5515,7 @@ declare namespace Glue {
      */
     TableType?: TableTypeString;
     /**
-     * Properties associated with this table, as a list of key-value pairs.
+     * These key-value pairs define properties associated with the table.
      */
     Parameters?: ParametersMap;
   }
@@ -3397,11 +5525,11 @@ declare namespace Glue {
   export type TableTypeString = string;
   export interface TableVersion {
     /**
-     * The table in question
+     * The table in question.
      */
     Table?: Table;
     /**
-     * The ID value that identifies this table version.
+     * The ID value that identifies this table version. A VersionId is a string representation of an integer. Each version is incremented by 1.
      */
     VersionId?: VersionString;
   }
@@ -3411,25 +5539,205 @@ declare namespace Glue {
      */
     TableName?: NameString;
     /**
-     * The ID value of the version in question.
+     * The ID value of the version in question. A VersionID is a string representation of an integer. Each version is incremented by 1.
      */
     VersionId?: VersionString;
     /**
-     * Detail about the error.
+     * The details about the error.
      */
     ErrorDetail?: ErrorDetail;
   }
   export type TableVersionErrors = TableVersionError[];
+  export type TagKey = string;
+  export type TagKeysList = TagKey[];
+  export interface TagResourceRequest {
+    /**
+     * The ARN of the AWS Glue resource to which to add the tags. For more information about AWS Glue resource ARNs, see the AWS Glue ARN string pattern.
+     */
+    ResourceArn: GlueResourceArn;
+    /**
+     * Tags to add to this resource.
+     */
+    TagsToAdd: TagsMap;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
+  export type TagsMap = {[key: string]: TagValue};
+  export interface TaskRun {
+    /**
+     * The unique identifier for the transform.
+     */
+    TransformId?: HashString;
+    /**
+     * The unique identifier for this task run.
+     */
+    TaskRunId?: HashString;
+    /**
+     * The current status of the requested task run.
+     */
+    Status?: TaskStatusType;
+    /**
+     * The names of the log group for secure logging, associated with this task run.
+     */
+    LogGroupName?: GenericString;
+    /**
+     * Specifies configuration properties associated with this task run.
+     */
+    Properties?: TaskRunProperties;
+    /**
+     * The list of error strings associated with this task run.
+     */
+    ErrorString?: GenericString;
+    /**
+     * The date and time that this task run started.
+     */
+    StartedOn?: Timestamp;
+    /**
+     * The last point in time that the requested task run was updated.
+     */
+    LastModifiedOn?: Timestamp;
+    /**
+     * The last point in time that the requested task run was completed.
+     */
+    CompletedOn?: Timestamp;
+    /**
+     * The amount of time (in seconds) that the task run consumed resources.
+     */
+    ExecutionTime?: ExecutionTime;
+  }
+  export interface TaskRunFilterCriteria {
+    /**
+     * The type of task run.
+     */
+    TaskRunType?: TaskType;
+    /**
+     * The current status of the task run.
+     */
+    Status?: TaskStatusType;
+    /**
+     * Filter on task runs started before this date.
+     */
+    StartedBefore?: Timestamp;
+    /**
+     * Filter on task runs started after this date.
+     */
+    StartedAfter?: Timestamp;
+  }
+  export type TaskRunList = TaskRun[];
+  export interface TaskRunProperties {
+    /**
+     * The type of task run.
+     */
+    TaskType?: TaskType;
+    /**
+     * The configuration properties for an importing labels task run.
+     */
+    ImportLabelsTaskRunProperties?: ImportLabelsTaskRunProperties;
+    /**
+     * The configuration properties for an exporting labels task run.
+     */
+    ExportLabelsTaskRunProperties?: ExportLabelsTaskRunProperties;
+    /**
+     * The configuration properties for a labeling set generation task run.
+     */
+    LabelingSetGenerationTaskRunProperties?: LabelingSetGenerationTaskRunProperties;
+    /**
+     * The configuration properties for a find matches task run.
+     */
+    FindMatchesTaskRunProperties?: FindMatchesTaskRunProperties;
+  }
+  export type TaskRunSortColumnType = "TASK_RUN_TYPE"|"STATUS"|"STARTED"|string;
+  export interface TaskRunSortCriteria {
+    /**
+     * The column to be used to sort the list of task runs for the machine learning transform.
+     */
+    Column: TaskRunSortColumnType;
+    /**
+     * The sort direction to be used to sort the list of task runs for the machine learning transform.
+     */
+    SortDirection: SortDirectionType;
+  }
+  export type TaskStatusType = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|"SUCCEEDED"|"FAILED"|"TIMEOUT"|string;
+  export type TaskType = "EVALUATION"|"LABELING_SET_GENERATION"|"IMPORT_LABELS"|"EXPORT_LABELS"|"FIND_MATCHES"|string;
   export type Timeout = number;
   export type Timestamp = Date;
   export type TimestampValue = Date;
   export type Token = string;
   export type TotalSegmentsInteger = number;
-  export interface Trigger {
+  export interface TransformFilterCriteria {
     /**
-     * Name of the trigger.
+     * A unique transform name that is used to filter the machine learning transforms.
      */
     Name?: NameString;
+    /**
+     * The type of machine learning transform that is used to filter the machine learning transforms.
+     */
+    TransformType?: TransformType;
+    /**
+     * Filters the list of machine learning transforms by the last known status of the transforms (to indicate whether a transform can be used or not). One of "NOT_READY", "READY", or "DELETING".
+     */
+    Status?: TransformStatusType;
+    /**
+     * This value determines which version of AWS Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9. For more information, see AWS Glue Versions in the developer guide.
+     */
+    GlueVersion?: GlueVersionString;
+    /**
+     * The time and date before which the transforms were created.
+     */
+    CreatedBefore?: Timestamp;
+    /**
+     * The time and date after which the transforms were created.
+     */
+    CreatedAfter?: Timestamp;
+    /**
+     * Filter on transforms last modified before this date.
+     */
+    LastModifiedBefore?: Timestamp;
+    /**
+     * Filter on transforms last modified after this date.
+     */
+    LastModifiedAfter?: Timestamp;
+    /**
+     * Filters on datasets with a specific schema. The Map&lt;Column, Type&gt; object is an array of key-value pairs representing the schema this transform accepts, where Column is the name of a column, and Type is the type of the data such as an integer or string. Has an upper bound of 100 columns.
+     */
+    Schema?: TransformSchema;
+  }
+  export type TransformIdList = HashString[];
+  export type TransformList = MLTransform[];
+  export interface TransformParameters {
+    /**
+     * The type of machine learning transform. For information about the types of machine learning transforms, see Creating Machine Learning Transforms.
+     */
+    TransformType: TransformType;
+    /**
+     * The parameters for the find matches algorithm.
+     */
+    FindMatchesParameters?: FindMatchesParameters;
+  }
+  export type TransformSchema = SchemaColumn[];
+  export type TransformSortColumnType = "NAME"|"TRANSFORM_TYPE"|"STATUS"|"CREATED"|"LAST_MODIFIED"|string;
+  export interface TransformSortCriteria {
+    /**
+     * The column to be used in the sorting criteria that are associated with the machine learning transform.
+     */
+    Column: TransformSortColumnType;
+    /**
+     * The sort direction to be used in the sorting criteria that are associated with the machine learning transform.
+     */
+    SortDirection: SortDirectionType;
+  }
+  export type TransformStatusType = "NOT_READY"|"READY"|"DELETING"|string;
+  export type TransformType = "FIND_MATCHES"|string;
+  export interface Trigger {
+    /**
+     * The name of the trigger.
+     */
+    Name?: NameString;
+    /**
+     * The name of the workflow associated with the trigger.
+     */
+    WorkflowName?: NameString;
     /**
      * Reserved for future use.
      */
@@ -3460,6 +5768,13 @@ declare namespace Glue {
     Predicate?: Predicate;
   }
   export type TriggerList = Trigger[];
+  export type TriggerNameList = NameString[];
+  export interface TriggerNodeDetails {
+    /**
+     * The information of the trigger represented by the trigger node.
+     */
+    Trigger?: Trigger;
+  }
   export type TriggerState = "CREATING"|"CREATED"|"ACTIVATING"|"ACTIVATED"|"DEACTIVATING"|"DEACTIVATED"|"DELETING"|"UPDATING"|string;
   export type TriggerType = "SCHEDULED"|"CONDITIONAL"|"ON_DEMAND"|string;
   export interface TriggerUpdate {
@@ -3485,6 +5800,18 @@ declare namespace Glue {
     Predicate?: Predicate;
   }
   export type URI = string;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource from which to remove the tags.
+     */
+    ResourceArn: GlueResourceArn;
+    /**
+     * Tags to remove from this resource.
+     */
+    TagsToRemove: TagKeysList;
+  }
+  export interface UntagResourceResponse {
+  }
   export type UpdateBehavior = "LOG"|"UPDATE_IN_DATABASE"|string;
   export interface UpdateClassifierRequest {
     /**
@@ -3499,12 +5826,16 @@ declare namespace Glue {
      * A JsonClassifier object with updated fields.
      */
     JsonClassifier?: UpdateJsonClassifierRequest;
+    /**
+     * A CsvClassifier object with updated fields.
+     */
+    CsvClassifier?: UpdateCsvClassifierRequest;
   }
   export interface UpdateClassifierResponse {
   }
   export interface UpdateConnectionRequest {
     /**
-     * The ID of the Data Catalog in which the connection resides. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which the connection resides. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -3524,7 +5855,7 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
-     * The IAM role (or ARN of an IAM role) used by the new crawler to access customer resources.
+     * The IAM role or Amazon Resource Name (ARN) of an IAM role that is used by the new crawler to access customer resources.
      */
     Role?: Role;
     /**
@@ -3552,19 +5883,23 @@ declare namespace Glue {
      */
     TablePrefix?: TablePrefix;
     /**
-     * Policy for the crawler's update and deletion behavior.
+     * The policy for the crawler's update and deletion behavior.
      */
     SchemaChangePolicy?: SchemaChangePolicy;
     /**
      * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
      */
     Configuration?: CrawlerConfiguration;
+    /**
+     * The name of the SecurityConfiguration structure to be used by this crawler.
+     */
+    CrawlerSecurityConfiguration?: CrawlerSecurityConfiguration;
   }
   export interface UpdateCrawlerResponse {
   }
   export interface UpdateCrawlerScheduleRequest {
     /**
-     * Name of the crawler whose schedule to update.
+     * The name of the crawler whose schedule to update.
      */
     CrawlerName: NameString;
     /**
@@ -3574,9 +5909,39 @@ declare namespace Glue {
   }
   export interface UpdateCrawlerScheduleResponse {
   }
+  export interface UpdateCsvClassifierRequest {
+    /**
+     * The name of the classifier.
+     */
+    Name: NameString;
+    /**
+     * A custom symbol to denote what separates each column entry in the row.
+     */
+    Delimiter?: CsvColumnDelimiter;
+    /**
+     * A custom symbol to denote what combines content into a single column value. It must be different from the column delimiter.
+     */
+    QuoteSymbol?: CsvQuoteSymbol;
+    /**
+     * Indicates whether the CSV file contains a header.
+     */
+    ContainsHeader?: CsvHeaderOption;
+    /**
+     * A list of strings representing column names.
+     */
+    Header?: CsvHeader;
+    /**
+     * Specifies not to trim values before identifying the type of column values. The default value is true.
+     */
+    DisableValueTrimming?: NullableBoolean;
+    /**
+     * Enables the processing of files that contain only one column.
+     */
+    AllowSingleColumn?: NullableBoolean;
+  }
   export interface UpdateDatabaseRequest {
     /**
-     * The ID of the Data Catalog in which the metadata database resides. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which the metadata database resides. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -3604,7 +5969,7 @@ declare namespace Glue {
      */
     AddPublicKeys?: PublicKeysList;
     /**
-     * The list of public keys to be deleted from the DevEndpoint. 
+     * The list of public keys to be deleted from the DevEndpoint.
      */
     DeletePublicKeys?: PublicKeysList;
     /**
@@ -3612,9 +5977,17 @@ declare namespace Glue {
      */
     CustomLibraries?: DevEndpointCustomLibraries;
     /**
-     * True if the list of custom libraries to be loaded in the development endpoint needs to be updated, or False otherwise.
+     *  True if the list of custom libraries to be loaded in the development endpoint needs to be updated, or False if otherwise.
      */
     UpdateEtlLibraries?: BooleanValue;
+    /**
+     * The list of argument keys to be deleted from the map of arguments used to configure the DevEndpoint.
+     */
+    DeleteArguments?: StringList;
+    /**
+     * The map of arguments to add the map of arguments used to configure the DevEndpoint. Valid arguments are:    "--enable-glue-datacatalog": ""     "GLUE_PYTHON_VERSION": "3"     "GLUE_PYTHON_VERSION": "2"    You can specify a version of Python support for development endpoints by using the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to Python 2.
+     */
+    AddArguments?: MapValue;
   }
   export interface UpdateDevEndpointResponse {
   }
@@ -3638,7 +6011,7 @@ declare namespace Glue {
   }
   export interface UpdateJobRequest {
     /**
-     * Name of the job definition to update.
+     * The name of the job definition to update.
      */
     JobName: NameString;
     /**
@@ -3662,9 +6035,61 @@ declare namespace Glue {
      */
     JsonPath?: JsonPath;
   }
+  export interface UpdateMLTransformRequest {
+    /**
+     * A unique identifier that was generated when the transform was created.
+     */
+    TransformId: HashString;
+    /**
+     * The unique name that you gave the transform when you created it.
+     */
+    Name?: NameString;
+    /**
+     * A description of the transform. The default is an empty string.
+     */
+    Description?: DescriptionString;
+    /**
+     * The configuration parameters that are specific to the transform type (algorithm) used. Conditionally dependent on the transform type.
+     */
+    Parameters?: TransformParameters;
+    /**
+     * The name or Amazon Resource Name (ARN) of the IAM role with the required permissions.
+     */
+    Role?: RoleString;
+    /**
+     * This value determines which version of AWS Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9. For more information, see AWS Glue Versions in the developer guide.
+     */
+    GlueVersion?: GlueVersionString;
+    /**
+     * The number of AWS Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.  When the WorkerType field is set to a value other than Standard, the MaxCapacity field is set automatically and becomes read-only.
+     */
+    MaxCapacity?: NullableDouble;
+    /**
+     * The type of predefined worker that is allocated when this task runs. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.   For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.  
+     */
+    WorkerType?: WorkerType;
+    /**
+     * The number of workers of a defined workerType that are allocated when this task runs.
+     */
+    NumberOfWorkers?: NullableInteger;
+    /**
+     * The timeout for a task run for this transform in minutes. This is the maximum time that a task run for this transform can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
+     */
+    Timeout?: Timeout;
+    /**
+     * The maximum number of times to retry a task for this transform after a task run fails.
+     */
+    MaxRetries?: NullableInteger;
+  }
+  export interface UpdateMLTransformResponse {
+    /**
+     * The unique identifier for the transform that was updated.
+     */
+    TransformId?: HashString;
+  }
   export interface UpdatePartitionRequest {
     /**
-     * The ID of the Data Catalog where the partition to be updated resides. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the partition to be updated resides. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -3672,7 +6097,7 @@ declare namespace Glue {
      */
     DatabaseName: NameString;
     /**
-     * The name of the table where the partition to be updated is located.
+     * The name of the table in which the partition to be updated is located.
      */
     TableName: NameString;
     /**
@@ -3680,7 +6105,7 @@ declare namespace Glue {
      */
     PartitionValueList: BoundedPartitionValueList;
     /**
-     * The new partition object to which to update the partition.
+     * The new partition object to update the partition to.
      */
     PartitionInput: PartitionInput;
   }
@@ -3688,7 +6113,7 @@ declare namespace Glue {
   }
   export interface UpdateTableRequest {
     /**
-     * The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the table resides. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -3700,7 +6125,7 @@ declare namespace Glue {
      */
     TableInput: TableInput;
     /**
-     * By default, UpdateTable always creates an archived version of the table before updating it. If skipArchive is set to true, however, UpdateTable does not create the archived version.
+     * By default, UpdateTable always creates an archived version of the table before updating it. However, if skipArchive is set to true, UpdateTable does not create the archived version.
      */
     SkipArchive?: BooleanNullable;
   }
@@ -3724,7 +6149,7 @@ declare namespace Glue {
   }
   export interface UpdateUserDefinedFunctionRequest {
     /**
-     * The ID of the Data Catalog where the function to be updated is located. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the function to be updated is located. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -3736,11 +6161,31 @@ declare namespace Glue {
      */
     FunctionName: NameString;
     /**
-     * A FunctionInput object that re-defines the function in the Data Catalog.
+     * A FunctionInput object that redefines the function in the Data Catalog.
      */
     FunctionInput: UserDefinedFunctionInput;
   }
   export interface UpdateUserDefinedFunctionResponse {
+  }
+  export interface UpdateWorkflowRequest {
+    /**
+     * Name of the workflow to be updated.
+     */
+    Name: NameString;
+    /**
+     * The description of the workflow.
+     */
+    Description?: GenericString;
+    /**
+     * A collection of properties to be used as part of each execution of the workflow.
+     */
+    DefaultRunProperties?: WorkflowRunProperties;
+  }
+  export interface UpdateWorkflowResponse {
+    /**
+     * The name of the workflow which was specified in input.
+     */
+    Name?: NameString;
   }
   export interface UpdateXMLClassifierRequest {
     /**
@@ -3752,7 +6197,7 @@ declare namespace Glue {
      */
     Classification?: Classification;
     /**
-     * The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by /&gt;). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, &lt;row item_a="A" item_b="B"&gt;&lt;/row&gt; is okay, but &lt;row item_a="A" item_b="B" /&gt; is not).
+     * The XML tag designating the element that contains each record in an XML document being parsed. This cannot identify a self-closing element (closed by /&gt;). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, &lt;row item_a="A" item_b="B"&gt;&lt;/row&gt; is okay, but &lt;row item_a="A" item_b="B" /&gt; is not).
      */
     RowTag?: RowTag;
   }
@@ -3762,6 +6207,10 @@ declare namespace Glue {
      * The name of the function.
      */
     FunctionName?: NameString;
+    /**
+     * The name of the database where the function resides.
+     */
+    DatabaseName?: NameString;
     /**
      * The Java class that contains the function code.
      */
@@ -3811,6 +6260,112 @@ declare namespace Glue {
   export type VersionId = number;
   export type VersionString = string;
   export type ViewTextString = string;
+  export type WorkerType = "Standard"|"G.1X"|"G.2X"|string;
+  export interface Workflow {
+    /**
+     * The name of the workflow representing the flow.
+     */
+    Name?: NameString;
+    /**
+     * A description of the workflow.
+     */
+    Description?: GenericString;
+    /**
+     * A collection of properties to be used as part of each execution of the workflow.
+     */
+    DefaultRunProperties?: WorkflowRunProperties;
+    /**
+     * The date and time when the workflow was created.
+     */
+    CreatedOn?: TimestampValue;
+    /**
+     * The date and time when the workflow was last modified.
+     */
+    LastModifiedOn?: TimestampValue;
+    /**
+     * The information about the last execution of the workflow.
+     */
+    LastRun?: WorkflowRun;
+    /**
+     * The graph representing all the AWS Glue components that belong to the workflow as nodes and directed connections between them as edges.
+     */
+    Graph?: WorkflowGraph;
+  }
+  export interface WorkflowGraph {
+    /**
+     * A list of the the AWS Glue components belong to the workflow represented as nodes.
+     */
+    Nodes?: NodeList;
+    /**
+     * A list of all the directed connections between the nodes belonging to the workflow.
+     */
+    Edges?: EdgeList;
+  }
+  export type WorkflowNames = NameString[];
+  export interface WorkflowRun {
+    /**
+     * Name of the workflow which was executed.
+     */
+    Name?: NameString;
+    /**
+     * The ID of this workflow run.
+     */
+    WorkflowRunId?: IdString;
+    /**
+     * The workflow run properties which were set during the run.
+     */
+    WorkflowRunProperties?: WorkflowRunProperties;
+    /**
+     * The date and time when the workflow run was started.
+     */
+    StartedOn?: TimestampValue;
+    /**
+     * The date and time when the workflow run completed.
+     */
+    CompletedOn?: TimestampValue;
+    /**
+     * The status of the workflow run.
+     */
+    Status?: WorkflowRunStatus;
+    /**
+     * The statistics of the run.
+     */
+    Statistics?: WorkflowRunStatistics;
+    /**
+     * The graph representing all the AWS Glue components that belong to the workflow as nodes and directed connections between them as edges.
+     */
+    Graph?: WorkflowGraph;
+  }
+  export type WorkflowRunProperties = {[key: string]: GenericString};
+  export interface WorkflowRunStatistics {
+    /**
+     * Total number of Actions in the workflow run.
+     */
+    TotalActions?: IntegerValue;
+    /**
+     * Total number of Actions which timed out.
+     */
+    TimeoutActions?: IntegerValue;
+    /**
+     * Total number of Actions which have failed.
+     */
+    FailedActions?: IntegerValue;
+    /**
+     * Total number of Actions which have stopped.
+     */
+    StoppedActions?: IntegerValue;
+    /**
+     * Total number of Actions which have succeeded.
+     */
+    SucceededActions?: IntegerValue;
+    /**
+     * Total number Actions in running state.
+     */
+    RunningActions?: IntegerValue;
+  }
+  export type WorkflowRunStatus = "RUNNING"|"COMPLETED"|"STOPPING"|"STOPPED"|string;
+  export type WorkflowRuns = WorkflowRun[];
+  export type Workflows = Workflow[];
   export interface XMLClassifier {
     /**
      * The name of the classifier.
@@ -3821,11 +6376,11 @@ declare namespace Glue {
      */
     Classification: Classification;
     /**
-     * The time this classifier was registered.
+     * The time that this classifier was registered.
      */
     CreationTime?: Timestamp;
     /**
-     * The time this classifier was last updated.
+     * The time that this classifier was last updated.
      */
     LastUpdated?: Timestamp;
     /**
@@ -3833,7 +6388,7 @@ declare namespace Glue {
      */
     Version?: VersionId;
     /**
-     * The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by /&gt;). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, &lt;row item_a="A" item_b="B"&gt;&lt;/row&gt; is okay, but &lt;row item_a="A" item_b="B" /&gt; is not).
+     * The XML tag designating the element that contains each record in an XML document being parsed. This can't identify a self-closing element (closed by /&gt;). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, &lt;row item_a="A" item_b="B"&gt;&lt;/row&gt; is okay, but &lt;row item_a="A" item_b="B" /&gt; is not).
      */
     RowTag?: RowTag;
   }

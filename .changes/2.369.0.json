@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "DeviceFarm",
+        "description": "Customers can now schedule runs without a need to create a Device Pool. They also get realtime information on public device availability."
+    },
+    {
+        "type": "feature",
+        "category": "StorageGateway",
+        "description": "API list-local-disks returns a list of the gateway's local disks. This release adds a field DiskAttributeList to these disks."
+    }
+]

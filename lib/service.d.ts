@@ -46,7 +46,7 @@ export class Service {
     /**
      * Override this method to setup any custom request listeners for each new request to the service.
      */
-    setupRequestListeners(): void;
+    setupRequestListeners(request: Request<any, AWSError>): void;
     /**
      * Waits for a given state.
      */

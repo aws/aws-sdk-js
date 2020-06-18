@@ -1,10 +1,28 @@
 {
   "pagination": {
+    "DescribeCustomAvailabilityZones": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "CustomAvailabilityZones"
+    },
+    "DescribeDBClusters": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "DBClusters"
+    },
     "DescribeDBEngineVersions": {
       "input_token": "Marker",
       "limit_key": "MaxRecords",
       "output_token": "Marker",
       "result_key": "DBEngineVersions"
+    },
+    "DescribeDBInstanceAutomatedBackups": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "DBInstanceAutomatedBackups"
     },
     "DescribeDBInstances": {
       "input_token": "Marker",
@@ -29,6 +47,24 @@
       "limit_key": "MaxRecords",
       "output_token": "Marker",
       "result_key": "Parameters"
+    },
+    "DescribeDBProxies": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "DBProxies"
+    },
+    "DescribeDBProxyTargetGroups": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "TargetGroups"
+    },
+    "DescribeDBProxyTargets": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "Targets"
     },
     "DescribeDBSecurityGroups": {
       "input_token": "Marker",
@@ -65,6 +101,24 @@
       "limit_key": "MaxRecords",
       "output_token": "Marker",
       "result_key": "Events"
+    },
+    "DescribeExportTasks": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "ExportTasks"
+    },
+    "DescribeGlobalClusters": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "GlobalClusters"
+    },
+    "DescribeInstallationMedia": {
+      "input_token": "Marker",
+      "limit_key": "MaxRecords",
+      "output_token": "Marker",
+      "result_key": "InstallationMedia"
     },
     "DescribeOptionGroupOptions": {
       "input_token": "Marker",

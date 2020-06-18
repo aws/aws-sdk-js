@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "CognitoIdentityServiceProvider",
+        "description": "This release adds a new setting at user pool client to prevent user existence related errors during authentication, confirmation, and password recovery related operations. This release also adds support to enable or disable specific authentication flows for a user pool client."
+    },
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "This release enhances the existing user management APIs and adds 3 new APIs - TagResource, UntagResource, and ListTagsForResource to support tagging Amazon Connect users, which facilitates more granular access controls for Amazon Connect users within an Amazon Connect instance. You can learn more about the new APIs here: https://docs.aws.amazon.com/connect/latest/APIReference/Welcome.html."
+    },
+    {
+        "type": "feature",
+        "category": "MarketplaceMetering",
+        "description": "Added CustomerNotEntitledException in MeterUsage API for Container use case."
+    },
+    {
+        "type": "feature",
+        "category": "Personalize",
+        "description": "Amazon Personalize: Adds ability to get batch recommendations by creating a batch inference job."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "Updates support for adding attachments to Systems Manager Automation documents"
+    }
+]

@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "AutoScaling",
+        "description": "Amazon EC2 Auto Scaling now supports the ability to enable/disable target tracking, step scaling, and simple scaling policies."
+    },
+    {
+        "type": "feature",
+        "category": "Chime",
+        "description": "Added AudioFallbackUrl to support Chime SDK client."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "This release supports Microsoft Active Directory authentication for Amazon Aurora."
+    }
+]

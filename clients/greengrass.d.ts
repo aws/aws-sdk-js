@@ -12,43 +12,59 @@ declare class Greengrass extends Service {
   constructor(options?: Greengrass.Types.ClientConfiguration)
   config: Config & Greengrass.Types.ClientConfiguration;
   /**
-   * Associates a role with a group. Your AWS Greengrass core will use the role to access AWS cloud services. The role's permissions should allow Greengrass core Lambda functions to perform actions against the cloud.
+   * Associates a role with a group. Your Greengrass core will use the role to access AWS cloud services. The role's permissions should allow Greengrass core Lambda functions to perform actions against the cloud.
    */
   associateRoleToGroup(params: Greengrass.Types.AssociateRoleToGroupRequest, callback?: (err: AWSError, data: Greengrass.Types.AssociateRoleToGroupResponse) => void): Request<Greengrass.Types.AssociateRoleToGroupResponse, AWSError>;
   /**
-   * Associates a role with a group. Your AWS Greengrass core will use the role to access AWS cloud services. The role's permissions should allow Greengrass core Lambda functions to perform actions against the cloud.
+   * Associates a role with a group. Your Greengrass core will use the role to access AWS cloud services. The role's permissions should allow Greengrass core Lambda functions to perform actions against the cloud.
    */
   associateRoleToGroup(callback?: (err: AWSError, data: Greengrass.Types.AssociateRoleToGroupResponse) => void): Request<Greengrass.Types.AssociateRoleToGroupResponse, AWSError>;
   /**
-   * Associates a role with your account. AWS Greengrass will use the role to access your Lambda functions and AWS IoT resources. This is necessary for deployments to succeed. The role must have at least minimum permissions in the policy ''AWSGreengrassResourceAccessRolePolicy''.
+   * Associates a role with your account. AWS IoT Greengrass will use the role to access your Lambda functions and AWS IoT resources. This is necessary for deployments to succeed. The role must have at least minimum permissions in the policy ''AWSGreengrassResourceAccessRolePolicy''.
    */
   associateServiceRoleToAccount(params: Greengrass.Types.AssociateServiceRoleToAccountRequest, callback?: (err: AWSError, data: Greengrass.Types.AssociateServiceRoleToAccountResponse) => void): Request<Greengrass.Types.AssociateServiceRoleToAccountResponse, AWSError>;
   /**
-   * Associates a role with your account. AWS Greengrass will use the role to access your Lambda functions and AWS IoT resources. This is necessary for deployments to succeed. The role must have at least minimum permissions in the policy ''AWSGreengrassResourceAccessRolePolicy''.
+   * Associates a role with your account. AWS IoT Greengrass will use the role to access your Lambda functions and AWS IoT resources. This is necessary for deployments to succeed. The role must have at least minimum permissions in the policy ''AWSGreengrassResourceAccessRolePolicy''.
    */
   associateServiceRoleToAccount(callback?: (err: AWSError, data: Greengrass.Types.AssociateServiceRoleToAccountResponse) => void): Request<Greengrass.Types.AssociateServiceRoleToAccountResponse, AWSError>;
   /**
-   * Creates a core definition. You may provide the initial version of the core definition now or use ''CreateCoreDefinitionVersion'' at a later time. AWS Greengrass groups must each contain exactly one AWS Greengrass core.
+   * Creates a connector definition. You may provide the initial version of the connector definition now or use ''CreateConnectorDefinitionVersion'' at a later time.
+   */
+  createConnectorDefinition(params: Greengrass.Types.CreateConnectorDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateConnectorDefinitionResponse) => void): Request<Greengrass.Types.CreateConnectorDefinitionResponse, AWSError>;
+  /**
+   * Creates a connector definition. You may provide the initial version of the connector definition now or use ''CreateConnectorDefinitionVersion'' at a later time.
+   */
+  createConnectorDefinition(callback?: (err: AWSError, data: Greengrass.Types.CreateConnectorDefinitionResponse) => void): Request<Greengrass.Types.CreateConnectorDefinitionResponse, AWSError>;
+  /**
+   * Creates a version of a connector definition which has already been defined.
+   */
+  createConnectorDefinitionVersion(params: Greengrass.Types.CreateConnectorDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateConnectorDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateConnectorDefinitionVersionResponse, AWSError>;
+  /**
+   * Creates a version of a connector definition which has already been defined.
+   */
+  createConnectorDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.CreateConnectorDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateConnectorDefinitionVersionResponse, AWSError>;
+  /**
+   * Creates a core definition. You may provide the initial version of the core definition now or use ''CreateCoreDefinitionVersion'' at a later time. Greengrass groups must each contain exactly one Greengrass core.
    */
   createCoreDefinition(params: Greengrass.Types.CreateCoreDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateCoreDefinitionResponse) => void): Request<Greengrass.Types.CreateCoreDefinitionResponse, AWSError>;
   /**
-   * Creates a core definition. You may provide the initial version of the core definition now or use ''CreateCoreDefinitionVersion'' at a later time. AWS Greengrass groups must each contain exactly one AWS Greengrass core.
+   * Creates a core definition. You may provide the initial version of the core definition now or use ''CreateCoreDefinitionVersion'' at a later time. Greengrass groups must each contain exactly one Greengrass core.
    */
   createCoreDefinition(callback?: (err: AWSError, data: Greengrass.Types.CreateCoreDefinitionResponse) => void): Request<Greengrass.Types.CreateCoreDefinitionResponse, AWSError>;
   /**
-   * Creates a version of a core definition that has already been defined. AWS Greengrass groups must each contain exactly one AWS Greengrass core.
+   * Creates a version of a core definition that has already been defined. Greengrass groups must each contain exactly one Greengrass core.
    */
   createCoreDefinitionVersion(params: Greengrass.Types.CreateCoreDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateCoreDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateCoreDefinitionVersionResponse, AWSError>;
   /**
-   * Creates a version of a core definition that has already been defined. AWS Greengrass groups must each contain exactly one AWS Greengrass core.
+   * Creates a version of a core definition that has already been defined. Greengrass groups must each contain exactly one Greengrass core.
    */
   createCoreDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.CreateCoreDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateCoreDefinitionVersionResponse, AWSError>;
   /**
-   * Creates a deployment.
+   * Creates a deployment. ''CreateDeployment'' requests are idempotent with respect to the ''X-Amzn-Client-Token'' token and the request parameters.
    */
   createDeployment(params: Greengrass.Types.CreateDeploymentRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateDeploymentResponse) => void): Request<Greengrass.Types.CreateDeploymentResponse, AWSError>;
   /**
-   * Creates a deployment.
+   * Creates a deployment. ''CreateDeployment'' requests are idempotent with respect to the ''X-Amzn-Client-Token'' token and the request parameters.
    */
   createDeployment(callback?: (err: AWSError, data: Greengrass.Types.CreateDeploymentResponse) => void): Request<Greengrass.Types.CreateDeploymentResponse, AWSError>;
   /**
@@ -84,11 +100,11 @@ declare class Greengrass extends Service {
    */
   createFunctionDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.CreateFunctionDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateFunctionDefinitionVersionResponse, AWSError>;
   /**
-   * Creates a group. You may provide the initial version of the group or use ''CreateGroupVersion'' at a later time.
+   * Creates a group. You may provide the initial version of the group or use ''CreateGroupVersion'' at a later time. Tip: You can use the ''gg_group_setup'' package (https://github.com/awslabs/aws-greengrass-group-setup) as a library or command-line application to create and deploy Greengrass groups.
    */
   createGroup(params: Greengrass.Types.CreateGroupRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateGroupResponse) => void): Request<Greengrass.Types.CreateGroupResponse, AWSError>;
   /**
-   * Creates a group. You may provide the initial version of the group or use ''CreateGroupVersion'' at a later time.
+   * Creates a group. You may provide the initial version of the group or use ''CreateGroupVersion'' at a later time. Tip: You can use the ''gg_group_setup'' package (https://github.com/awslabs/aws-greengrass-group-setup) as a library or command-line application to create and deploy Greengrass groups.
    */
   createGroup(callback?: (err: AWSError, data: Greengrass.Types.CreateGroupResponse) => void): Request<Greengrass.Types.CreateGroupResponse, AWSError>;
   /**
@@ -163,6 +179,14 @@ declare class Greengrass extends Service {
    * Creates a version of a subscription definition which has already been defined.
    */
   createSubscriptionDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.CreateSubscriptionDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateSubscriptionDefinitionVersionResponse, AWSError>;
+  /**
+   * Deletes a connector definition.
+   */
+  deleteConnectorDefinition(params: Greengrass.Types.DeleteConnectorDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.DeleteConnectorDefinitionResponse) => void): Request<Greengrass.Types.DeleteConnectorDefinitionResponse, AWSError>;
+  /**
+   * Deletes a connector definition.
+   */
+  deleteConnectorDefinition(callback?: (err: AWSError, data: Greengrass.Types.DeleteConnectorDefinitionResponse) => void): Request<Greengrass.Types.DeleteConnectorDefinitionResponse, AWSError>;
   /**
    * Deletes a core definition.
    */
@@ -244,6 +268,14 @@ declare class Greengrass extends Service {
    */
   getAssociatedRole(callback?: (err: AWSError, data: Greengrass.Types.GetAssociatedRoleResponse) => void): Request<Greengrass.Types.GetAssociatedRoleResponse, AWSError>;
   /**
+   * Returns the status of a bulk deployment.
+   */
+  getBulkDeploymentStatus(params: Greengrass.Types.GetBulkDeploymentStatusRequest, callback?: (err: AWSError, data: Greengrass.Types.GetBulkDeploymentStatusResponse) => void): Request<Greengrass.Types.GetBulkDeploymentStatusResponse, AWSError>;
+  /**
+   * Returns the status of a bulk deployment.
+   */
+  getBulkDeploymentStatus(callback?: (err: AWSError, data: Greengrass.Types.GetBulkDeploymentStatusResponse) => void): Request<Greengrass.Types.GetBulkDeploymentStatusResponse, AWSError>;
+  /**
    * Retrieves the connectivity information for a core.
    */
   getConnectivityInfo(params: Greengrass.Types.GetConnectivityInfoRequest, callback?: (err: AWSError, data: Greengrass.Types.GetConnectivityInfoResponse) => void): Request<Greengrass.Types.GetConnectivityInfoResponse, AWSError>;
@@ -251,6 +283,22 @@ declare class Greengrass extends Service {
    * Retrieves the connectivity information for a core.
    */
   getConnectivityInfo(callback?: (err: AWSError, data: Greengrass.Types.GetConnectivityInfoResponse) => void): Request<Greengrass.Types.GetConnectivityInfoResponse, AWSError>;
+  /**
+   * Retrieves information about a connector definition.
+   */
+  getConnectorDefinition(params: Greengrass.Types.GetConnectorDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetConnectorDefinitionResponse) => void): Request<Greengrass.Types.GetConnectorDefinitionResponse, AWSError>;
+  /**
+   * Retrieves information about a connector definition.
+   */
+  getConnectorDefinition(callback?: (err: AWSError, data: Greengrass.Types.GetConnectorDefinitionResponse) => void): Request<Greengrass.Types.GetConnectorDefinitionResponse, AWSError>;
+  /**
+   * Retrieves information about a connector definition version, including the connectors that the version contains. Connectors are prebuilt modules that interact with local infrastructure, device protocols, AWS, and other cloud services.
+   */
+  getConnectorDefinitionVersion(params: Greengrass.Types.GetConnectorDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetConnectorDefinitionVersionResponse) => void): Request<Greengrass.Types.GetConnectorDefinitionVersionResponse, AWSError>;
+  /**
+   * Retrieves information about a connector definition version, including the connectors that the version contains. Connectors are prebuilt modules that interact with local infrastructure, device protocols, AWS, and other cloud services.
+   */
+  getConnectorDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.GetConnectorDefinitionVersionResponse) => void): Request<Greengrass.Types.GetConnectorDefinitionVersionResponse, AWSError>;
   /**
    * Retrieves information about a core definition version.
    */
@@ -396,6 +444,38 @@ declare class Greengrass extends Service {
    */
   getSubscriptionDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.GetSubscriptionDefinitionVersionResponse) => void): Request<Greengrass.Types.GetSubscriptionDefinitionVersionResponse, AWSError>;
   /**
+   * Gets a paginated list of the deployments that have been started in a bulk deployment operation, and their current deployment status.
+   */
+  listBulkDeploymentDetailedReports(params: Greengrass.Types.ListBulkDeploymentDetailedReportsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListBulkDeploymentDetailedReportsResponse) => void): Request<Greengrass.Types.ListBulkDeploymentDetailedReportsResponse, AWSError>;
+  /**
+   * Gets a paginated list of the deployments that have been started in a bulk deployment operation, and their current deployment status.
+   */
+  listBulkDeploymentDetailedReports(callback?: (err: AWSError, data: Greengrass.Types.ListBulkDeploymentDetailedReportsResponse) => void): Request<Greengrass.Types.ListBulkDeploymentDetailedReportsResponse, AWSError>;
+  /**
+   * Returns a list of bulk deployments.
+   */
+  listBulkDeployments(params: Greengrass.Types.ListBulkDeploymentsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListBulkDeploymentsResponse) => void): Request<Greengrass.Types.ListBulkDeploymentsResponse, AWSError>;
+  /**
+   * Returns a list of bulk deployments.
+   */
+  listBulkDeployments(callback?: (err: AWSError, data: Greengrass.Types.ListBulkDeploymentsResponse) => void): Request<Greengrass.Types.ListBulkDeploymentsResponse, AWSError>;
+  /**
+   * Lists the versions of a connector definition, which are containers for connectors. Connectors run on the Greengrass core and contain built-in integration with local infrastructure, device protocols, AWS, and other cloud services.
+   */
+  listConnectorDefinitionVersions(params: Greengrass.Types.ListConnectorDefinitionVersionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListConnectorDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListConnectorDefinitionVersionsResponse, AWSError>;
+  /**
+   * Lists the versions of a connector definition, which are containers for connectors. Connectors run on the Greengrass core and contain built-in integration with local infrastructure, device protocols, AWS, and other cloud services.
+   */
+  listConnectorDefinitionVersions(callback?: (err: AWSError, data: Greengrass.Types.ListConnectorDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListConnectorDefinitionVersionsResponse, AWSError>;
+  /**
+   * Retrieves a list of connector definitions.
+   */
+  listConnectorDefinitions(params: Greengrass.Types.ListConnectorDefinitionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListConnectorDefinitionsResponse) => void): Request<Greengrass.Types.ListConnectorDefinitionsResponse, AWSError>;
+  /**
+   * Retrieves a list of connector definitions.
+   */
+  listConnectorDefinitions(callback?: (err: AWSError, data: Greengrass.Types.ListConnectorDefinitionsResponse) => void): Request<Greengrass.Types.ListConnectorDefinitionsResponse, AWSError>;
+  /**
    * Lists the versions of a core definition.
    */
   listCoreDefinitionVersions(params: Greengrass.Types.ListCoreDefinitionVersionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListCoreDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListCoreDefinitionVersionsResponse, AWSError>;
@@ -524,6 +604,14 @@ declare class Greengrass extends Service {
    */
   listSubscriptionDefinitions(callback?: (err: AWSError, data: Greengrass.Types.ListSubscriptionDefinitionsResponse) => void): Request<Greengrass.Types.ListSubscriptionDefinitionsResponse, AWSError>;
   /**
+   * Retrieves a list of resource tags for a resource arn.
+   */
+  listTagsForResource(params: Greengrass.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Greengrass.Types.ListTagsForResourceResponse) => void): Request<Greengrass.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Retrieves a list of resource tags for a resource arn.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Greengrass.Types.ListTagsForResourceResponse) => void): Request<Greengrass.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Resets a group's deployments.
    */
   resetDeployments(params: Greengrass.Types.ResetDeploymentsRequest, callback?: (err: AWSError, data: Greengrass.Types.ResetDeploymentsResponse) => void): Request<Greengrass.Types.ResetDeploymentsResponse, AWSError>;
@@ -532,6 +620,38 @@ declare class Greengrass extends Service {
    */
   resetDeployments(callback?: (err: AWSError, data: Greengrass.Types.ResetDeploymentsResponse) => void): Request<Greengrass.Types.ResetDeploymentsResponse, AWSError>;
   /**
+   * Deploys multiple groups in one operation. This action starts the bulk deployment of a specified set of group versions. Each group version deployment will be triggered with an adaptive rate that has a fixed upper limit. We recommend that you include an ''X-Amzn-Client-Token'' token in every ''StartBulkDeployment'' request. These requests are idempotent with respect to the token and the request parameters.
+   */
+  startBulkDeployment(params: Greengrass.Types.StartBulkDeploymentRequest, callback?: (err: AWSError, data: Greengrass.Types.StartBulkDeploymentResponse) => void): Request<Greengrass.Types.StartBulkDeploymentResponse, AWSError>;
+  /**
+   * Deploys multiple groups in one operation. This action starts the bulk deployment of a specified set of group versions. Each group version deployment will be triggered with an adaptive rate that has a fixed upper limit. We recommend that you include an ''X-Amzn-Client-Token'' token in every ''StartBulkDeployment'' request. These requests are idempotent with respect to the token and the request parameters.
+   */
+  startBulkDeployment(callback?: (err: AWSError, data: Greengrass.Types.StartBulkDeploymentResponse) => void): Request<Greengrass.Types.StartBulkDeploymentResponse, AWSError>;
+  /**
+   * Stops the execution of a bulk deployment. This action returns a status of ''Stopping'' until the deployment is stopped. You cannot start a new bulk deployment while a previous deployment is in the ''Stopping'' state. This action doesn't rollback completed deployments or cancel pending deployments.
+   */
+  stopBulkDeployment(params: Greengrass.Types.StopBulkDeploymentRequest, callback?: (err: AWSError, data: Greengrass.Types.StopBulkDeploymentResponse) => void): Request<Greengrass.Types.StopBulkDeploymentResponse, AWSError>;
+  /**
+   * Stops the execution of a bulk deployment. This action returns a status of ''Stopping'' until the deployment is stopped. You cannot start a new bulk deployment while a previous deployment is in the ''Stopping'' state. This action doesn't rollback completed deployments or cancel pending deployments.
+   */
+  stopBulkDeployment(callback?: (err: AWSError, data: Greengrass.Types.StopBulkDeploymentResponse) => void): Request<Greengrass.Types.StopBulkDeploymentResponse, AWSError>;
+  /**
+   * Adds tags to a Greengrass resource. Valid resources are 'Group', 'ConnectorDefinition', 'CoreDefinition', 'DeviceDefinition', 'FunctionDefinition', 'LoggerDefinition', 'SubscriptionDefinition', 'ResourceDefinition', and 'BulkDeployment'.
+   */
+  tagResource(params: Greengrass.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Adds tags to a Greengrass resource. Valid resources are 'Group', 'ConnectorDefinition', 'CoreDefinition', 'DeviceDefinition', 'FunctionDefinition', 'LoggerDefinition', 'SubscriptionDefinition', 'ResourceDefinition', and 'BulkDeployment'.
+   */
+  tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Remove resource tags from a Greengrass Resource.
+   */
+  untagResource(params: Greengrass.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Remove resource tags from a Greengrass Resource.
+   */
+  untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Updates the connectivity information for the core. Any devices that belong to the group which has this core will receive this information in order to find the location of the core and connect to it.
    */
   updateConnectivityInfo(params: Greengrass.Types.UpdateConnectivityInfoRequest, callback?: (err: AWSError, data: Greengrass.Types.UpdateConnectivityInfoResponse) => void): Request<Greengrass.Types.UpdateConnectivityInfoResponse, AWSError>;
@@ -539,6 +659,14 @@ declare class Greengrass extends Service {
    * Updates the connectivity information for the core. Any devices that belong to the group which has this core will receive this information in order to find the location of the core and connect to it.
    */
   updateConnectivityInfo(callback?: (err: AWSError, data: Greengrass.Types.UpdateConnectivityInfoResponse) => void): Request<Greengrass.Types.UpdateConnectivityInfoResponse, AWSError>;
+  /**
+   * Updates a connector definition.
+   */
+  updateConnectorDefinition(params: Greengrass.Types.UpdateConnectorDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.UpdateConnectorDefinitionResponse) => void): Request<Greengrass.Types.UpdateConnectorDefinitionResponse, AWSError>;
+  /**
+   * Updates a connector definition.
+   */
+  updateConnectorDefinition(callback?: (err: AWSError, data: Greengrass.Types.UpdateConnectorDefinitionResponse) => void): Request<Greengrass.Types.UpdateConnectorDefinitionResponse, AWSError>;
   /**
    * Updates a core definition.
    */
@@ -607,13 +735,13 @@ declare class Greengrass extends Service {
 declare namespace Greengrass {
   export interface AssociateRoleToGroupRequest {
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
     /**
-     * The ARN of the role you wish to associate with this group.
+     * The ARN of the role you wish to associate with this group. The existence of the role is not validated.
      */
-    RoleArn?: __string;
+    RoleArn: __string;
   }
   export interface AssociateRoleToGroupResponse {
     /**
@@ -625,7 +753,7 @@ declare namespace Greengrass {
     /**
      * The ARN of the service role you wish to associate with your account.
      */
-    RoleArn?: __string;
+    RoleArn: __string;
   }
   export interface AssociateServiceRoleToAccountResponse {
     /**
@@ -633,6 +761,71 @@ declare namespace Greengrass {
      */
     AssociatedAt?: __string;
   }
+  export interface BulkDeployment {
+    /**
+     * The ARN of the bulk deployment.
+     */
+    BulkDeploymentArn?: __string;
+    /**
+     * The ID of the bulk deployment.
+     */
+    BulkDeploymentId?: __string;
+    /**
+     * The time, in ISO format, when the deployment was created.
+     */
+    CreatedAt?: __string;
+  }
+  export interface BulkDeploymentMetrics {
+    /**
+     * The total number of records that returned a non-retryable error. For example, this can occur if a group record from the input file uses an invalid format or specifies a nonexistent group version, or if the execution role doesn't grant permission to deploy a group or group version.
+     */
+    InvalidInputRecords?: __integer;
+    /**
+     * The total number of group records from the input file that have been processed so far, or attempted.
+     */
+    RecordsProcessed?: __integer;
+    /**
+     * The total number of deployment attempts that returned a retryable error. For example, a retry is triggered if the attempt to deploy a group returns a throttling error. ''StartBulkDeployment'' retries a group deployment up to five times.
+     */
+    RetryAttempts?: __integer;
+  }
+  export interface BulkDeploymentResult {
+    /**
+     * The time, in ISO format, when the deployment was created.
+     */
+    CreatedAt?: __string;
+    /**
+     * The ARN of the group deployment.
+     */
+    DeploymentArn?: __string;
+    /**
+     * The ID of the group deployment.
+     */
+    DeploymentId?: __string;
+    /**
+     * The current status of the group deployment: ''InProgress'', ''Building'', ''Success'', or ''Failure''.
+     */
+    DeploymentStatus?: __string;
+    /**
+     * The type of the deployment.
+     */
+    DeploymentType?: DeploymentType;
+    /**
+     * Details about the error.
+     */
+    ErrorDetails?: ErrorDetails;
+    /**
+     * The error message for a failed deployment
+     */
+    ErrorMessage?: __string;
+    /**
+     * The ARN of the Greengrass group.
+     */
+    GroupArn?: __string;
+  }
+  export type BulkDeploymentResults = BulkDeploymentResult[];
+  export type BulkDeploymentStatus = "Initializing"|"Running"|"Completed"|"Stopping"|"Stopped"|"Failed"|string;
+  export type BulkDeployments = BulkDeployment[];
   export interface ConnectivityInfo {
     /**
      * The endpoint for the Greengrass core. Can be an IP address or DNS.
@@ -651,15 +844,35 @@ declare namespace Greengrass {
      */
     PortNumber?: __integer;
   }
+  export interface Connector {
+    /**
+     * The ARN of the connector.
+     */
+    ConnectorArn: __string;
+    /**
+     * A descriptive or arbitrary ID for the connector. This value must be unique within the connector definition version. Max length is 128 characters with pattern [a-zA-Z0-9:_-]+.
+     */
+    Id: __string;
+    /**
+     * The parameters or configuration that the connector uses.
+     */
+    Parameters?: __mapOf__string;
+  }
+  export interface ConnectorDefinitionVersion {
+    /**
+     * A list of references to connectors in this version, with their corresponding configuration settings.
+     */
+    Connectors?: __listOfConnector;
+  }
   export interface Core {
     /**
      * The ARN of the certificate associated with the core.
      */
-    CertificateArn?: __string;
+    CertificateArn: __string;
     /**
-     * The ID of the core.
+     * A descriptive or arbitrary ID for the core. This value must be unique within the core definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
      */
-    Id?: __string;
+    Id: __string;
     /**
      * If true, the core's local shadow is automatically synced with the cloud.
      */
@@ -667,13 +880,93 @@ declare namespace Greengrass {
     /**
      * The ARN of the thing which is the core.
      */
-    ThingArn?: __string;
+    ThingArn: __string;
   }
   export interface CoreDefinitionVersion {
     /**
      * A list of cores in the core definition version.
      */
     Cores?: __listOfCore;
+  }
+  export interface CreateConnectorDefinitionRequest {
+    /**
+     * A client token used to correlate requests and responses.
+     */
+    AmznClientToken?: __string;
+    /**
+     * Information about the initial version of the connector definition.
+     */
+    InitialVersion?: ConnectorDefinitionVersion;
+    /**
+     * The name of the connector definition.
+     */
+    Name?: __string;
+    /**
+     * Tag(s) to add to the new resource.
+     */
+    tags?: Tags;
+  }
+  export interface CreateConnectorDefinitionResponse {
+    /**
+     * The ARN of the definition.
+     */
+    Arn?: __string;
+    /**
+     * The time, in milliseconds since the epoch, when the definition was created.
+     */
+    CreationTimestamp?: __string;
+    /**
+     * The ID of the definition.
+     */
+    Id?: __string;
+    /**
+     * The time, in milliseconds since the epoch, when the definition was last updated.
+     */
+    LastUpdatedTimestamp?: __string;
+    /**
+     * The ID of the latest version associated with the definition.
+     */
+    LatestVersion?: __string;
+    /**
+     * The ARN of the latest version associated with the definition.
+     */
+    LatestVersionArn?: __string;
+    /**
+     * The name of the definition.
+     */
+    Name?: __string;
+  }
+  export interface CreateConnectorDefinitionVersionRequest {
+    /**
+     * A client token used to correlate requests and responses.
+     */
+    AmznClientToken?: __string;
+    /**
+     * The ID of the connector definition.
+     */
+    ConnectorDefinitionId: __string;
+    /**
+     * A list of references to connectors in this version, with their corresponding configuration settings.
+     */
+    Connectors?: __listOfConnector;
+  }
+  export interface CreateConnectorDefinitionVersionResponse {
+    /**
+     * The ARN of the version.
+     */
+    Arn?: __string;
+    /**
+     * The time, in milliseconds since the epoch, when the version was created.
+     */
+    CreationTimestamp?: __string;
+    /**
+     * The ID of the parent definition that the version is associated with.
+     */
+    Id?: __string;
+    /**
+     * The ID of the version.
+     */
+    Version?: __string;
   }
   export interface CreateCoreDefinitionRequest {
     /**
@@ -688,6 +981,10 @@ declare namespace Greengrass {
      * The name of the core definition.
      */
     Name?: __string;
+    /**
+     * Tag(s) to add to the new resource.
+     */
+    tags?: Tags;
   }
   export interface CreateCoreDefinitionResponse {
     /**
@@ -707,11 +1004,11 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
@@ -743,11 +1040,11 @@ declare namespace Greengrass {
      */
     CreationTimestamp?: __string;
     /**
-     * The ID of the version.
+     * The ID of the parent definition that the version is associated with.
      */
     Id?: __string;
     /**
-     * The unique ID of the version.
+     * The ID of the version.
      */
     Version?: __string;
   }
@@ -761,11 +1058,11 @@ declare namespace Greengrass {
      */
     DeploymentId?: __string;
     /**
-     * The type of deployment. When used in ''CreateDeployment'', only ''NewDeployment'' and ''Redeployment'' are valid.
+     * The type of deployment. When used for ''CreateDeployment'', only ''NewDeployment'' and ''Redeployment'' are valid.
      */
-    DeploymentType?: DeploymentType;
+    DeploymentType: DeploymentType;
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
     /**
@@ -796,6 +1093,10 @@ declare namespace Greengrass {
      * The name of the device definition.
      */
     Name?: __string;
+    /**
+     * Tag(s) to add to the new resource.
+     */
+    tags?: Tags;
   }
   export interface CreateDeviceDefinitionResponse {
     /**
@@ -815,11 +1116,11 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
@@ -851,11 +1152,11 @@ declare namespace Greengrass {
      */
     CreationTimestamp?: __string;
     /**
-     * The ID of the version.
+     * The ID of the parent definition that the version is associated with.
      */
     Id?: __string;
     /**
-     * The unique ID of the version.
+     * The ID of the version.
      */
     Version?: __string;
   }
@@ -872,6 +1173,10 @@ declare namespace Greengrass {
      * The name of the function definition.
      */
     Name?: __string;
+    /**
+     * Tag(s) to add to the new resource.
+     */
+    tags?: Tags;
   }
   export interface CreateFunctionDefinitionResponse {
     /**
@@ -891,11 +1196,11 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
@@ -908,6 +1213,10 @@ declare namespace Greengrass {
      * A client token used to correlate requests and responses.
      */
     AmznClientToken?: __string;
+    /**
+     * The default configuration that applies to all Lambda functions in this function definition version. Individual Lambda functions can override these settings.
+     */
+    DefaultConfig?: FunctionDefaultConfig;
     /**
      * The ID of the Lambda function definition.
      */
@@ -927,11 +1236,11 @@ declare namespace Greengrass {
      */
     CreationTimestamp?: __string;
     /**
-     * The ID of the version.
+     * The ID of the parent definition that the version is associated with.
      */
     Id?: __string;
     /**
-     * The unique ID of the version.
+     * The ID of the version.
      */
     Version?: __string;
   }
@@ -941,7 +1250,7 @@ declare namespace Greengrass {
      */
     AmznClientToken?: __string;
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
@@ -964,6 +1273,10 @@ declare namespace Greengrass {
      * The name of the group.
      */
     Name?: __string;
+    /**
+     * Tag(s) to add to the new resource.
+     */
+    tags?: Tags;
   }
   export interface CreateGroupResponse {
     /**
@@ -983,11 +1296,11 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
@@ -1001,6 +1314,10 @@ declare namespace Greengrass {
      */
     AmznClientToken?: __string;
     /**
+     * The ARN of the connector definition version for this group.
+     */
+    ConnectorDefinitionVersionArn?: __string;
+    /**
      * The ARN of the core definition version for this group.
      */
     CoreDefinitionVersionArn?: __string;
@@ -1013,7 +1330,7 @@ declare namespace Greengrass {
      */
     FunctionDefinitionVersionArn?: __string;
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
     /**
@@ -1021,7 +1338,7 @@ declare namespace Greengrass {
      */
     LoggerDefinitionVersionArn?: __string;
     /**
-     * The resource definition version ARN for this group.
+     * The ARN of the resource definition version for this group.
      */
     ResourceDefinitionVersionArn?: __string;
     /**
@@ -1039,11 +1356,11 @@ declare namespace Greengrass {
      */
     CreationTimestamp?: __string;
     /**
-     * The ID of the version.
+     * The ID of the parent definition that the version is associated with.
      */
     Id?: __string;
     /**
-     * The unique ID of the version.
+     * The ID of the version.
      */
     Version?: __string;
   }
@@ -1060,6 +1377,10 @@ declare namespace Greengrass {
      * The name of the logger definition.
      */
     Name?: __string;
+    /**
+     * Tag(s) to add to the new resource.
+     */
+    tags?: Tags;
   }
   export interface CreateLoggerDefinitionResponse {
     /**
@@ -1079,11 +1400,11 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
@@ -1115,11 +1436,11 @@ declare namespace Greengrass {
      */
     CreationTimestamp?: __string;
     /**
-     * The ID of the version.
+     * The ID of the parent definition that the version is associated with.
      */
     Id?: __string;
     /**
-     * The unique ID of the version.
+     * The ID of the version.
      */
     Version?: __string;
   }
@@ -1136,6 +1457,10 @@ declare namespace Greengrass {
      * The name of the resource definition.
      */
     Name?: __string;
+    /**
+     * Tag(s) to add to the new resource.
+     */
+    tags?: Tags;
   }
   export interface CreateResourceDefinitionResponse {
     /**
@@ -1155,11 +1480,11 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
@@ -1191,11 +1516,11 @@ declare namespace Greengrass {
      */
     CreationTimestamp?: __string;
     /**
-     * The ID of the version.
+     * The ID of the parent definition that the version is associated with.
      */
     Id?: __string;
     /**
-     * The unique ID of the version.
+     * The ID of the version.
      */
     Version?: __string;
   }
@@ -1204,12 +1529,12 @@ declare namespace Greengrass {
      * A client token used to correlate requests and responses.
      */
     AmznClientToken?: __string;
-    S3UrlSignerRole?: S3UrlSignerRole;
-    SoftwareToUpdate?: SoftwareToUpdate;
+    S3UrlSignerRole: S3UrlSignerRole;
+    SoftwareToUpdate: SoftwareToUpdate;
     UpdateAgentLogLevel?: UpdateAgentLogLevel;
-    UpdateTargets?: UpdateTargets;
-    UpdateTargetsArchitecture?: UpdateTargetsArchitecture;
-    UpdateTargetsOperatingSystem?: UpdateTargetsOperatingSystem;
+    UpdateTargets: UpdateTargets;
+    UpdateTargetsArchitecture: UpdateTargetsArchitecture;
+    UpdateTargetsOperatingSystem: UpdateTargetsOperatingSystem;
   }
   export interface CreateSoftwareUpdateJobResponse {
     /**
@@ -1220,6 +1545,10 @@ declare namespace Greengrass {
      * The IoT Job Id corresponding to this update.
      */
     IotJobId?: __string;
+    /**
+     * The software version installed on the device or devices after the update.
+     */
+    PlatformSoftwareVersion?: __string;
   }
   export interface CreateSubscriptionDefinitionRequest {
     /**
@@ -1234,6 +1563,10 @@ declare namespace Greengrass {
      * The name of the subscription definition.
      */
     Name?: __string;
+    /**
+     * Tag(s) to add to the new resource.
+     */
+    tags?: Tags;
   }
   export interface CreateSubscriptionDefinitionResponse {
     /**
@@ -1253,11 +1586,11 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
@@ -1289,11 +1622,11 @@ declare namespace Greengrass {
      */
     CreationTimestamp?: __string;
     /**
-     * The ID of the version.
+     * The ID of the parent definition that the version is associated with.
      */
     Id?: __string;
     /**
-     * The unique ID of the version.
+     * The ID of the version.
      */
     Version?: __string;
   }
@@ -1315,17 +1648,29 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
      * The name of the definition.
      */
     Name?: __string;
+    /**
+     * Tag(s) attached to the resource arn.
+     */
+    Tags?: Tags;
+  }
+  export interface DeleteConnectorDefinitionRequest {
+    /**
+     * The ID of the connector definition.
+     */
+    ConnectorDefinitionId: __string;
+  }
+  export interface DeleteConnectorDefinitionResponse {
   }
   export interface DeleteCoreDefinitionRequest {
     /**
@@ -1353,7 +1698,7 @@ declare namespace Greengrass {
   }
   export interface DeleteGroupRequest {
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
@@ -1411,11 +1756,11 @@ declare namespace Greengrass {
     /**
      * The ARN of the certificate associated with the device.
      */
-    CertificateArn?: __string;
+    CertificateArn: __string;
     /**
-     * The ID of the device.
+     * A descriptive or arbitrary ID for the device. This value must be unique within the device definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
      */
-    Id?: __string;
+    Id: __string;
     /**
      * If true, the device's local shadow will be automatically synced with the cloud.
      */
@@ -1423,7 +1768,7 @@ declare namespace Greengrass {
     /**
      * The thing ARN of the device.
      */
-    ThingArn?: __string;
+    ThingArn: __string;
   }
   export interface DeviceDefinitionVersion {
     /**
@@ -1433,7 +1778,7 @@ declare namespace Greengrass {
   }
   export interface DisassociateRoleFromGroupRequest {
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
@@ -1473,9 +1818,9 @@ declare namespace Greengrass {
      */
     FunctionConfiguration?: FunctionConfiguration;
     /**
-     * The ID of the Lambda function.
+     * A descriptive or arbitrary ID for the function. This value must be unique within the function definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
      */
-    Id?: __string;
+    Id: __string;
   }
   export interface FunctionConfiguration {
     /**
@@ -1495,7 +1840,7 @@ declare namespace Greengrass {
      */
     Executable?: __string;
     /**
-     * The memory size, in KB, which the function requires.
+     * The memory size, in KB, which the function requires. This setting is not applicable and should be cleared when you run the Lambda function without containerization.
      */
     MemorySize?: __integer;
     /**
@@ -1503,17 +1848,21 @@ declare namespace Greengrass {
      */
     Pinned?: __boolean;
     /**
-     * The allowed function execution time, after which Lambda should terminate the function. This timeout still applies to pinned lambdas for each request.
+     * The allowed function execution time, after which Lambda should terminate the function. This timeout still applies to pinned Lambda functions for each request.
      */
     Timeout?: __integer;
   }
   export interface FunctionConfigurationEnvironment {
     /**
-     * If true, the Lambda function is allowed to access the host's /sys folder. Use this when the Lambda function needs to read device information from /sys.
+     * If true, the Lambda function is allowed to access the host's /sys folder. Use this when the Lambda function needs to read device information from /sys. This setting applies only when you run the Lambda function in a Greengrass container.
      */
     AccessSysfs?: __boolean;
     /**
-     * A list of the resources, with their permissions, to which the Lambda function will be granted access. A Lambda function can have at most 10 resources.
+     * Configuration related to executing the Lambda function
+     */
+    Execution?: FunctionExecutionConfig;
+    /**
+     * A list of the resources, with their permissions, to which the Lambda function will be granted access. A Lambda function can have at most 10 resources. ResourceAccessPolicies apply only when you run the Lambda function in a Greengrass container.
      */
     ResourceAccessPolicies?: __listOfResourceAccessPolicy;
     /**
@@ -1521,15 +1870,41 @@ declare namespace Greengrass {
      */
     Variables?: __mapOf__string;
   }
+  export interface FunctionDefaultConfig {
+    Execution?: FunctionDefaultExecutionConfig;
+  }
+  export interface FunctionDefaultExecutionConfig {
+    IsolationMode?: FunctionIsolationMode;
+    RunAs?: FunctionRunAsConfig;
+  }
   export interface FunctionDefinitionVersion {
+    /**
+     * The default configuration that applies to all Lambda functions in this function definition version. Individual Lambda functions can override these settings.
+     */
+    DefaultConfig?: FunctionDefaultConfig;
     /**
      * A list of Lambda functions in this function definition version.
      */
     Functions?: __listOfFunction;
   }
+  export interface FunctionExecutionConfig {
+    IsolationMode?: FunctionIsolationMode;
+    RunAs?: FunctionRunAsConfig;
+  }
+  export type FunctionIsolationMode = "GreengrassContainer"|"NoContainer"|string;
+  export interface FunctionRunAsConfig {
+    /**
+     * The group ID whose permissions are used to run a Lambda function.
+     */
+    Gid?: __integer;
+    /**
+     * The user ID whose permissions are used to run a Lambda function.
+     */
+    Uid?: __integer;
+  }
   export interface GetAssociatedRoleRequest {
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
@@ -1542,6 +1917,38 @@ declare namespace Greengrass {
      * The ARN of the role that is associated with the group.
      */
     RoleArn?: __string;
+  }
+  export interface GetBulkDeploymentStatusRequest {
+    /**
+     * The ID of the bulk deployment.
+     */
+    BulkDeploymentId: __string;
+  }
+  export interface GetBulkDeploymentStatusResponse {
+    /**
+     * Relevant metrics on input records processed during bulk deployment.
+     */
+    BulkDeploymentMetrics?: BulkDeploymentMetrics;
+    /**
+     * The status of the bulk deployment.
+     */
+    BulkDeploymentStatus?: BulkDeploymentStatus;
+    /**
+     * The time, in ISO format, when the deployment was created.
+     */
+    CreatedAt?: __string;
+    /**
+     * Error details
+     */
+    ErrorDetails?: ErrorDetails;
+    /**
+     * Error message
+     */
+    ErrorMessage?: __string;
+    /**
+     * Tag(s) attached to the resource arn.
+     */
+    tags?: Tags;
   }
   export interface GetConnectivityInfoRequest {
     /**
@@ -1558,6 +1965,86 @@ declare namespace Greengrass {
      * A message about the connectivity info request.
      */
     Message?: __string;
+  }
+  export interface GetConnectorDefinitionRequest {
+    /**
+     * The ID of the connector definition.
+     */
+    ConnectorDefinitionId: __string;
+  }
+  export interface GetConnectorDefinitionResponse {
+    /**
+     * The ARN of the definition.
+     */
+    Arn?: __string;
+    /**
+     * The time, in milliseconds since the epoch, when the definition was created.
+     */
+    CreationTimestamp?: __string;
+    /**
+     * The ID of the definition.
+     */
+    Id?: __string;
+    /**
+     * The time, in milliseconds since the epoch, when the definition was last updated.
+     */
+    LastUpdatedTimestamp?: __string;
+    /**
+     * The ID of the latest version associated with the definition.
+     */
+    LatestVersion?: __string;
+    /**
+     * The ARN of the latest version associated with the definition.
+     */
+    LatestVersionArn?: __string;
+    /**
+     * The name of the definition.
+     */
+    Name?: __string;
+    /**
+     * Tag(s) attached to the resource arn.
+     */
+    tags?: Tags;
+  }
+  export interface GetConnectorDefinitionVersionRequest {
+    /**
+     * The ID of the connector definition.
+     */
+    ConnectorDefinitionId: __string;
+    /**
+     * The ID of the connector definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListConnectorDefinitionVersions'' requests. If the version is the last one that was associated with a connector definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
+     */
+    ConnectorDefinitionVersionId: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+  }
+  export interface GetConnectorDefinitionVersionResponse {
+    /**
+     * The ARN of the connector definition version.
+     */
+    Arn?: __string;
+    /**
+     * The time, in milliseconds since the epoch, when the connector definition version was created.
+     */
+    CreationTimestamp?: __string;
+    /**
+     * Information about the connector definition version.
+     */
+    Definition?: ConnectorDefinitionVersion;
+    /**
+     * The ID of the connector definition version.
+     */
+    Id?: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+    /**
+     * The version of the connector definition version.
+     */
+    Version?: __string;
   }
   export interface GetCoreDefinitionRequest {
     /**
@@ -1583,17 +2070,21 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
      * The name of the definition.
      */
     Name?: __string;
+    /**
+     * Tag(s) attached to the resource arn.
+     */
+    tags?: Tags;
   }
   export interface GetCoreDefinitionVersionRequest {
     /**
@@ -1601,7 +2092,7 @@ declare namespace Greengrass {
      */
     CoreDefinitionId: __string;
     /**
-     * The ID of the core definition version.
+     * The ID of the core definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListCoreDefinitionVersions'' requests. If the version is the last one that was associated with a core definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
      */
     CoreDefinitionVersionId: __string;
   }
@@ -1623,6 +2114,10 @@ declare namespace Greengrass {
      */
     Id?: __string;
     /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+    /**
      * The version of the core definition version.
      */
     Version?: __string;
@@ -1633,13 +2128,13 @@ declare namespace Greengrass {
      */
     DeploymentId: __string;
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
   export interface GetDeploymentStatusResponse {
     /**
-     * The status of the deployment.
+     * The status of the deployment: ''InProgress'', ''Building'', ''Success'', or ''Failure''.
      */
     DeploymentStatus?: __string;
     /**
@@ -1683,17 +2178,21 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
      * The name of the definition.
      */
     Name?: __string;
+    /**
+     * Tag(s) attached to the resource arn.
+     */
+    tags?: Tags;
   }
   export interface GetDeviceDefinitionVersionRequest {
     /**
@@ -1701,9 +2200,13 @@ declare namespace Greengrass {
      */
     DeviceDefinitionId: __string;
     /**
-     * The ID of the device definition version.
+     * The ID of the device definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListDeviceDefinitionVersions'' requests. If the version is the last one that was associated with a device definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
      */
     DeviceDefinitionVersionId: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
   }
   export interface GetDeviceDefinitionVersionResponse {
     /**
@@ -1722,6 +2225,10 @@ declare namespace Greengrass {
      * The ID of the device definition version.
      */
     Id?: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
     /**
      * The version of the device definition version.
      */
@@ -1751,17 +2258,21 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
      * The name of the definition.
      */
     Name?: __string;
+    /**
+     * Tag(s) attached to the resource arn.
+     */
+    tags?: Tags;
   }
   export interface GetFunctionDefinitionVersionRequest {
     /**
@@ -1769,9 +2280,13 @@ declare namespace Greengrass {
      */
     FunctionDefinitionId: __string;
     /**
-     * The ID of the function definition version.
+     * The ID of the function definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListFunctionDefinitionVersions'' requests. If the version is the last one that was associated with a function definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
      */
     FunctionDefinitionVersionId: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
   }
   export interface GetFunctionDefinitionVersionResponse {
     /**
@@ -1791,6 +2306,10 @@ declare namespace Greengrass {
      */
     Id?: __string;
     /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+    /**
      * The version of the function definition version.
      */
     Version?: __string;
@@ -1801,7 +2320,7 @@ declare namespace Greengrass {
      */
     CertificateAuthorityId: __string;
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
@@ -1821,7 +2340,7 @@ declare namespace Greengrass {
   }
   export interface GetGroupCertificateConfigurationRequest {
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
@@ -1841,7 +2360,7 @@ declare namespace Greengrass {
   }
   export interface GetGroupRequest {
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
@@ -1863,25 +2382,29 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
      * The name of the definition.
      */
     Name?: __string;
+    /**
+     * Tag(s) attached to the resource arn.
+     */
+    tags?: Tags;
   }
   export interface GetGroupVersionRequest {
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
     /**
-     * The ID of the group version.
+     * The ID of the group version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListGroupVersions'' requests. If the version is the last one that was associated with a group, the value also maps to the ''LatestVersion'' property of the corresponding ''GroupInformation'' object.
      */
     GroupVersionId: __string;
   }
@@ -1899,11 +2422,11 @@ declare namespace Greengrass {
      */
     Definition?: GroupVersion;
     /**
-     * The ID of the group version.
+     * The ID of the group that the version is associated with.
      */
     Id?: __string;
     /**
-     * The unique ID for the version of the group.
+     * The ID of the group version.
      */
     Version?: __string;
   }
@@ -1931,17 +2454,21 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
      * The name of the definition.
      */
     Name?: __string;
+    /**
+     * Tag(s) attached to the resource arn.
+     */
+    tags?: Tags;
   }
   export interface GetLoggerDefinitionVersionRequest {
     /**
@@ -1949,9 +2476,13 @@ declare namespace Greengrass {
      */
     LoggerDefinitionId: __string;
     /**
-     * The ID of the logger definition version.
+     * The ID of the logger definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListLoggerDefinitionVersions'' requests. If the version is the last one that was associated with a logger definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
      */
     LoggerDefinitionVersionId: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
   }
   export interface GetLoggerDefinitionVersionResponse {
     /**
@@ -1999,17 +2530,21 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
      * The name of the definition.
      */
     Name?: __string;
+    /**
+     * Tag(s) attached to the resource arn.
+     */
+    tags?: Tags;
   }
   export interface GetResourceDefinitionVersionRequest {
     /**
@@ -2017,7 +2552,7 @@ declare namespace Greengrass {
      */
     ResourceDefinitionId: __string;
     /**
-     * The ID of the resource definition version.
+     * The ID of the resource definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListResourceDefinitionVersions'' requests. If the version is the last one that was associated with a resource definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
      */
     ResourceDefinitionVersionId: __string;
   }
@@ -2079,25 +2614,33 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the definition.
+     * The ID of the latest version associated with the definition.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the definition.
+     * The ARN of the latest version associated with the definition.
      */
     LatestVersionArn?: __string;
     /**
      * The name of the definition.
      */
     Name?: __string;
+    /**
+     * Tag(s) attached to the resource arn.
+     */
+    tags?: Tags;
   }
   export interface GetSubscriptionDefinitionVersionRequest {
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
     /**
      * The ID of the subscription definition.
      */
     SubscriptionDefinitionId: __string;
     /**
-     * The ID of the subscription definition version.
+     * The ID of the subscription definition version. This value maps to the ''Version'' property of the corresponding ''VersionInformation'' object, which is returned by ''ListSubscriptionDefinitionVersions'' requests. If the version is the last one that was associated with a subscription definition, the value also maps to the ''LatestVersion'' property of the corresponding ''DefinitionInformation'' object.
      */
     SubscriptionDefinitionVersionId: __string;
   }
@@ -2118,6 +2661,10 @@ declare namespace Greengrass {
      * The ID of the subscription definition version.
      */
     Id?: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
     /**
      * The version of the subscription definition version.
      */
@@ -2151,11 +2698,11 @@ declare namespace Greengrass {
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * The latest version of the group.
+     * The ID of the latest version associated with the group.
      */
     LatestVersion?: __string;
     /**
-     * The ARN of the latest version of the group.
+     * The ARN of the latest version associated with the group.
      */
     LatestVersionArn?: __string;
     /**
@@ -2165,7 +2712,7 @@ declare namespace Greengrass {
   }
   export interface GroupOwnerSetting {
     /**
-     * If true, GreenGrass automatically adds the specified Linux OS group owner of the resource to the Lambda process privileges. Thus the Lambda process will have the file access permissions of the added Linux group.
+     * If true, AWS IoT Greengrass automatically adds the specified Linux OS group owner of the resource to the Lambda process privileges. Thus the Lambda process will have the file access permissions of the added Linux group.
      */
     AutoAddGroupOwner?: __boolean;
     /**
@@ -2174,6 +2721,10 @@ declare namespace Greengrass {
     GroupOwner?: __string;
   }
   export interface GroupVersion {
+    /**
+     * The ARN of the connector definition version for this group.
+     */
+    ConnectorDefinitionVersionArn?: __string;
     /**
      * The ARN of the core definition version for this group.
      */
@@ -2191,13 +2742,101 @@ declare namespace Greengrass {
      */
     LoggerDefinitionVersionArn?: __string;
     /**
-     * The resource definition version ARN for this group.
+     * The ARN of the resource definition version for this group.
      */
     ResourceDefinitionVersionArn?: __string;
     /**
      * The ARN of the subscription definition version for this group.
      */
     SubscriptionDefinitionVersionArn?: __string;
+  }
+  export interface ListBulkDeploymentDetailedReportsRequest {
+    /**
+     * The ID of the bulk deployment.
+     */
+    BulkDeploymentId: __string;
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListBulkDeploymentDetailedReportsResponse {
+    /**
+     * A list of the individual group deployments in the bulk deployment operation.
+     */
+    Deployments?: BulkDeploymentResults;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListBulkDeploymentsRequest {
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListBulkDeploymentsResponse {
+    /**
+     * A list of bulk deployments.
+     */
+    BulkDeployments?: BulkDeployments;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListConnectorDefinitionVersionsRequest {
+    /**
+     * The ID of the connector definition.
+     */
+    ConnectorDefinitionId: __string;
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListConnectorDefinitionVersionsResponse {
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+    /**
+     * Information about a version.
+     */
+    Versions?: __listOfVersionInformation;
+  }
+  export interface ListConnectorDefinitionsRequest {
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListConnectorDefinitionsResponse {
+    /**
+     * Information about a definition.
+     */
+    Definitions?: __listOfDefinitionInformation;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
   }
   export interface ListCoreDefinitionVersionsRequest {
     /**
@@ -2245,7 +2884,7 @@ declare namespace Greengrass {
   }
   export interface ListDeploymentsRequest {
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
     /**
@@ -2357,7 +2996,7 @@ declare namespace Greengrass {
   }
   export interface ListGroupCertificateAuthoritiesRequest {
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
@@ -2369,7 +3008,7 @@ declare namespace Greengrass {
   }
   export interface ListGroupVersionsRequest {
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
     /**
@@ -2543,6 +3182,15 @@ declare namespace Greengrass {
      */
     NextToken?: __string;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: __string;
+  }
+  export interface ListTagsForResourceResponse {
+    tags?: Tags;
+  }
   export interface LocalDeviceResourceData {
     /**
      * Group/owner related settings for local resources.
@@ -2555,7 +3203,7 @@ declare namespace Greengrass {
   }
   export interface LocalVolumeResourceData {
     /**
-     * The absolute local path of the resource inside the lambda environment.
+     * The absolute local path of the resource inside the Lambda environment.
      */
     DestinationPath?: __string;
     /**
@@ -2571,15 +3219,15 @@ declare namespace Greengrass {
     /**
      * The component that will be subject to logging.
      */
-    Component?: LoggerComponent;
+    Component: LoggerComponent;
     /**
-     * The id of the logger.
+     * A descriptive or arbitrary ID for the logger. This value must be unique within the logger definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
      */
-    Id?: __string;
+    Id: __string;
     /**
      * The level of the logs.
      */
-    Level?: LoggerLevel;
+    Level: LoggerLevel;
     /**
      * The amount of file space, in KB, to use if the local file system is used for logging purposes.
      */
@@ -2587,7 +3235,7 @@ declare namespace Greengrass {
     /**
      * The type of log output which will be used.
      */
-    Type?: LoggerType;
+    Type: LoggerType;
   }
   export type LoggerComponent = "GreengrassSystem"|"Lambda"|string;
   export interface LoggerDefinitionVersion {
@@ -2609,7 +3257,7 @@ declare namespace Greengrass {
      */
     Force?: __boolean;
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
@@ -2627,15 +3275,15 @@ declare namespace Greengrass {
     /**
      * The resource ID, used to refer to a resource in the Lambda function configuration. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''. This must be unique within a Greengrass group.
      */
-    Id?: __string;
+    Id: __string;
     /**
-     * The descriptive resource name, which is displayed on the Greengrass console. Max length 128 characters with pattern ''[a-zA-Z0-9:_-]+''. This must be unique within a Greengrass group.
+     * The descriptive resource name, which is displayed on the AWS IoT Greengrass console. Max length 128 characters with pattern ''[a-zA-Z0-9:_-]+''. This must be unique within a Greengrass group.
      */
-    Name?: __string;
+    Name: __string;
     /**
      * A container of data for all resource types.
      */
-    ResourceDataContainer?: ResourceDataContainer;
+    ResourceDataContainer: ResourceDataContainer;
   }
   export interface ResourceAccessPolicy {
     /**
@@ -2645,7 +3293,7 @@ declare namespace Greengrass {
     /**
      * The ID of the resource. (This ID is assigned to the resource when you create the resource definiton.)
      */
-    ResourceId?: __string;
+    ResourceId: __string;
   }
   export interface ResourceDataContainer {
     /**
@@ -2657,13 +3305,17 @@ declare namespace Greengrass {
      */
     LocalVolumeResourceData?: LocalVolumeResourceData;
     /**
-     * Attributes that define an S3 machine learning resource.
+     * Attributes that define an Amazon S3 machine learning resource.
      */
     S3MachineLearningModelResourceData?: S3MachineLearningModelResourceData;
     /**
-     * Attributes that define an SageMaker machine learning resource.
+     * Attributes that define an Amazon SageMaker machine learning resource.
      */
     SageMakerMachineLearningModelResourceData?: SageMakerMachineLearningModelResourceData;
+    /**
+     * Attributes that define a secret resource, which references a secret from AWS Secrets Manager.
+     */
+    SecretsManagerSecretResourceData?: SecretsManagerSecretResourceData;
   }
   export interface ResourceDefinitionVersion {
     /**
@@ -2671,11 +3323,22 @@ declare namespace Greengrass {
      */
     Resources?: __listOfResource;
   }
+  export interface ResourceDownloadOwnerSetting {
+    /**
+     * The group owner of the resource. This is the name of an existing Linux OS group on the system or a GID. The group's permissions are added to the Lambda process.
+     */
+    GroupOwner: __string;
+    /**
+     * The permissions that the group owner has to the resource. Valid values are ''rw'' (read/write) or ''ro'' (read-only).
+     */
+    GroupPermission: Permission;
+  }
   export interface S3MachineLearningModelResourceData {
     /**
      * The absolute local path of the resource inside the Lambda environment.
      */
     DestinationPath?: __string;
+    OwnerSetting?: ResourceDownloadOwnerSetting;
     /**
      * The URI of the source model in an S3 bucket. The model package must be in tar.gz or .zip format.
      */
@@ -2687,35 +3350,100 @@ declare namespace Greengrass {
      * The absolute local path of the resource inside the Lambda environment.
      */
     DestinationPath?: __string;
+    OwnerSetting?: ResourceDownloadOwnerSetting;
     /**
-     * The ARN of the SageMaker training job that represents the source model.
+     * The ARN of the Amazon SageMaker training job that represents the source model.
      */
     SageMakerJobArn?: __string;
   }
+  export interface SecretsManagerSecretResourceData {
+    /**
+     * The ARN of the Secrets Manager secret to make available on the core. The value of the secret's latest version (represented by the ''AWSCURRENT'' staging label) is included by default.
+     */
+    ARN?: __string;
+    /**
+     * Optional. The staging labels whose values you want to make available on the core, in addition to ''AWSCURRENT''.
+     */
+    AdditionalStagingLabelsToDownload?: __listOf__string;
+  }
   export type SoftwareToUpdate = "core"|"ota_agent"|string;
+  export interface StartBulkDeploymentRequest {
+    /**
+     * A client token used to correlate requests and responses.
+     */
+    AmznClientToken?: __string;
+    /**
+     * The ARN of the execution role to associate with the bulk deployment operation. This IAM role must allow the ''greengrass:CreateDeployment'' action for all group versions that are listed in the input file. This IAM role must have access to the S3 bucket containing the input file.
+     */
+    ExecutionRoleArn: __string;
+    /**
+     * The URI of the input file contained in the S3 bucket. The execution role must have ''getObject'' permissions on this bucket to access the input file. The input file is a JSON-serialized, line delimited file with UTF-8 encoding that provides a list of group and version IDs and the deployment type. This file must be less than 100 MB. Currently, AWS IoT Greengrass supports only ''NewDeployment'' deployment types.
+     */
+    InputFileUri: __string;
+    /**
+     * Tag(s) to add to the new resource.
+     */
+    tags?: Tags;
+  }
+  export interface StartBulkDeploymentResponse {
+    /**
+     * The ARN of the bulk deployment.
+     */
+    BulkDeploymentArn?: __string;
+    /**
+     * The ID of the bulk deployment.
+     */
+    BulkDeploymentId?: __string;
+  }
+  export interface StopBulkDeploymentRequest {
+    /**
+     * The ID of the bulk deployment.
+     */
+    BulkDeploymentId: __string;
+  }
+  export interface StopBulkDeploymentResponse {
+  }
   export interface Subscription {
     /**
-     * The id of the subscription.
+     * A descriptive or arbitrary ID for the subscription. This value must be unique within the subscription definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
      */
-    Id?: __string;
+    Id: __string;
     /**
-     * The source of the subscription. Can be a thing ARN, a Lambda function ARN, 'cloud' (which represents the IoT cloud), or 'GGShadowService'.
+     * The source of the subscription. Can be a thing ARN, a Lambda function ARN, a connector ARN, 'cloud' (which represents the AWS IoT cloud), or 'GGShadowService'.
      */
-    Source?: __string;
+    Source: __string;
     /**
-     * The subject of the message.
+     * The MQTT topic used to route the message.
      */
-    Subject?: __string;
+    Subject: __string;
     /**
-     * Where the message is sent to. Can be a thing ARN, a Lambda function ARN, 'cloud' (which represents the IoT cloud), or 'GGShadowService'.
+     * Where the message is sent to. Can be a thing ARN, a Lambda function ARN, a connector ARN, 'cloud' (which represents the AWS IoT cloud), or 'GGShadowService'.
      */
-    Target?: __string;
+    Target: __string;
   }
   export interface SubscriptionDefinitionVersion {
     /**
      * A list of subscriptions.
      */
     Subscriptions?: __listOfSubscription;
+  }
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: __string;
+    tags?: Tags;
+  }
+  export type Tags = {[key: string]: __string};
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: __string;
+    /**
+     * An array of tag keys to delete
+     */
+    TagKeys: __listOf__string;
   }
   export type UpdateAgentLogLevel = "NONE"|"TRACE"|"DEBUG"|"VERBOSE"|"INFO"|"WARN"|"ERROR"|"FATAL"|string;
   export interface UpdateConnectivityInfoRequest {
@@ -2737,6 +3465,18 @@ declare namespace Greengrass {
      * The new version of the connectivity info.
      */
     Version?: __string;
+  }
+  export interface UpdateConnectorDefinitionRequest {
+    /**
+     * The ID of the connector definition.
+     */
+    ConnectorDefinitionId: __string;
+    /**
+     * The name of the definition.
+     */
+    Name?: __string;
+  }
+  export interface UpdateConnectorDefinitionResponse {
   }
   export interface UpdateCoreDefinitionRequest {
     /**
@@ -2780,7 +3520,7 @@ declare namespace Greengrass {
      */
     CertificateExpiryInMilliseconds?: __string;
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
@@ -2800,7 +3540,7 @@ declare namespace Greengrass {
   }
   export interface UpdateGroupRequest {
     /**
-     * The ID of the AWS Greengrass group.
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
     /**
@@ -2847,8 +3587,8 @@ declare namespace Greengrass {
   export interface UpdateSubscriptionDefinitionResponse {
   }
   export type UpdateTargets = __string[];
-  export type UpdateTargetsArchitecture = "armv7l"|"x86_64"|"aarch64"|string;
-  export type UpdateTargetsOperatingSystem = "ubuntu"|"raspbian"|"amazon_linux"|string;
+  export type UpdateTargetsArchitecture = "armv6l"|"armv7l"|"x86_64"|"aarch64"|string;
+  export type UpdateTargetsOperatingSystem = "ubuntu"|"raspbian"|"amazon_linux"|"openwrt"|string;
   export interface VersionInformation {
     /**
      * The ARN of the version.
@@ -2859,17 +3599,18 @@ declare namespace Greengrass {
      */
     CreationTimestamp?: __string;
     /**
-     * The ID of the version.
+     * The ID of the parent definition that the version is associated with.
      */
     Id?: __string;
     /**
-     * The unique ID of the version.
+     * The ID of the version.
      */
     Version?: __string;
   }
   export type __boolean = boolean;
   export type __integer = number;
   export type __listOfConnectivityInfo = ConnectivityInfo[];
+  export type __listOfConnector = Connector[];
   export type __listOfCore = Core[];
   export type __listOfDefinitionInformation = DefinitionInformation[];
   export type __listOfDevice = Device[];
@@ -2881,6 +3622,7 @@ declare namespace Greengrass {
   export type __listOfResourceAccessPolicy = ResourceAccessPolicy[];
   export type __listOfSubscription = Subscription[];
   export type __listOfVersionInformation = VersionInformation[];
+  export type __listOf__string = __string[];
   export type __mapOf__string = {[key: string]: __string};
   export type __string = string;
   /**

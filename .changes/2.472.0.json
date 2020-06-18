@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "AWS CodeBuild adds support for source version on project level."
+    },
+    {
+        "type": "feature",
+        "category": "CodeCommit",
+        "description": "This release adds two merge strategies for merging pull requests: squash and three-way. It also adds functionality for resolving merge conflicts, testing merge outcomes, and for merging branches using one of the three supported merge strategies."
+    },
+    {
+        "type": "feature",
+        "category": "Personalize",
+        "description": "Amazon Personalize is a machine learning service that makes it easy for developers to create individualized recommendations for customers using their applications."
+    },
+    {
+        "type": "feature",
+        "category": "PersonalizeEvents",
+        "description": "Introducing Amazon Personalize  - a machine learning service that makes it easy for developers to create individualized recommendations for customers using their applications."
+    },
+    {
+        "type": "feature",
+        "category": "PersonalizeRuntime",
+        "description": "Amazon Personalize is a machine learning service that makes it easy for developers to create individualized recommendations for customers using their applications."
+    }
+]

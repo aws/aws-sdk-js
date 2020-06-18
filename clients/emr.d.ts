@@ -101,6 +101,22 @@ declare class EMR extends Service {
    */
   describeStep(callback?: (err: AWSError, data: EMR.Types.DescribeStepOutput) => void): Request<EMR.Types.DescribeStepOutput, AWSError>;
   /**
+   * Returns the Amazon EMR block public access configuration for your AWS account in the current Region. For more information see Configure Block Public Access for Amazon EMR in the Amazon EMR Management Guide.
+   */
+  getBlockPublicAccessConfiguration(params: EMR.Types.GetBlockPublicAccessConfigurationInput, callback?: (err: AWSError, data: EMR.Types.GetBlockPublicAccessConfigurationOutput) => void): Request<EMR.Types.GetBlockPublicAccessConfigurationOutput, AWSError>;
+  /**
+   * Returns the Amazon EMR block public access configuration for your AWS account in the current Region. For more information see Configure Block Public Access for Amazon EMR in the Amazon EMR Management Guide.
+   */
+  getBlockPublicAccessConfiguration(callback?: (err: AWSError, data: EMR.Types.GetBlockPublicAccessConfigurationOutput) => void): Request<EMR.Types.GetBlockPublicAccessConfigurationOutput, AWSError>;
+  /**
+   *  Fetches the attached managed scaling policy for an Amazon EMR cluster. 
+   */
+  getManagedScalingPolicy(params: EMR.Types.GetManagedScalingPolicyInput, callback?: (err: AWSError, data: EMR.Types.GetManagedScalingPolicyOutput) => void): Request<EMR.Types.GetManagedScalingPolicyOutput, AWSError>;
+  /**
+   *  Fetches the attached managed scaling policy for an Amazon EMR cluster. 
+   */
+  getManagedScalingPolicy(callback?: (err: AWSError, data: EMR.Types.GetManagedScalingPolicyOutput) => void): Request<EMR.Types.GetManagedScalingPolicyOutput, AWSError>;
+  /**
    * Provides information about the bootstrap actions associated with a cluster.
    */
   listBootstrapActions(params: EMR.Types.ListBootstrapActionsInput, callback?: (err: AWSError, data: EMR.Types.ListBootstrapActionsOutput) => void): Request<EMR.Types.ListBootstrapActionsOutput, AWSError>;
@@ -149,13 +165,21 @@ declare class EMR extends Service {
    */
   listSecurityConfigurations(callback?: (err: AWSError, data: EMR.Types.ListSecurityConfigurationsOutput) => void): Request<EMR.Types.ListSecurityConfigurationsOutput, AWSError>;
   /**
-   * Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request.
+   * Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request of filter by StepStates. You can specify a maximum of ten stepIDs.
    */
   listSteps(params: EMR.Types.ListStepsInput, callback?: (err: AWSError, data: EMR.Types.ListStepsOutput) => void): Request<EMR.Types.ListStepsOutput, AWSError>;
   /**
-   * Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request.
+   * Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request of filter by StepStates. You can specify a maximum of ten stepIDs.
    */
   listSteps(callback?: (err: AWSError, data: EMR.Types.ListStepsOutput) => void): Request<EMR.Types.ListStepsOutput, AWSError>;
+  /**
+   * Modifies the number of steps that can be executed concurrently for the cluster specified using ClusterID.
+   */
+  modifyCluster(params: EMR.Types.ModifyClusterInput, callback?: (err: AWSError, data: EMR.Types.ModifyClusterOutput) => void): Request<EMR.Types.ModifyClusterOutput, AWSError>;
+  /**
+   * Modifies the number of steps that can be executed concurrently for the cluster specified using ClusterID.
+   */
+  modifyCluster(callback?: (err: AWSError, data: EMR.Types.ModifyClusterOutput) => void): Request<EMR.Types.ModifyClusterOutput, AWSError>;
   /**
    * Modifies the target On-Demand and target Spot capacities for the instance fleet with the specified InstanceFleetID within the cluster specified using ClusterID. The call either succeeds or fails atomically.  The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. 
    */
@@ -181,6 +205,22 @@ declare class EMR extends Service {
    */
   putAutoScalingPolicy(callback?: (err: AWSError, data: EMR.Types.PutAutoScalingPolicyOutput) => void): Request<EMR.Types.PutAutoScalingPolicyOutput, AWSError>;
   /**
+   * Creates or updates an Amazon EMR block public access configuration for your AWS account in the current Region. For more information see Configure Block Public Access for Amazon EMR in the Amazon EMR Management Guide.
+   */
+  putBlockPublicAccessConfiguration(params: EMR.Types.PutBlockPublicAccessConfigurationInput, callback?: (err: AWSError, data: EMR.Types.PutBlockPublicAccessConfigurationOutput) => void): Request<EMR.Types.PutBlockPublicAccessConfigurationOutput, AWSError>;
+  /**
+   * Creates or updates an Amazon EMR block public access configuration for your AWS account in the current Region. For more information see Configure Block Public Access for Amazon EMR in the Amazon EMR Management Guide.
+   */
+  putBlockPublicAccessConfiguration(callback?: (err: AWSError, data: EMR.Types.PutBlockPublicAccessConfigurationOutput) => void): Request<EMR.Types.PutBlockPublicAccessConfigurationOutput, AWSError>;
+  /**
+   *  Creates or updates a managed scaling policy for an Amazon EMR cluster. The managed scaling policy defines the limits for resources, such as EC2 instances that can be added or terminated from a cluster. The policy only applies to the core and task nodes. The master node cannot be scaled after initial configuration. 
+   */
+  putManagedScalingPolicy(params: EMR.Types.PutManagedScalingPolicyInput, callback?: (err: AWSError, data: EMR.Types.PutManagedScalingPolicyOutput) => void): Request<EMR.Types.PutManagedScalingPolicyOutput, AWSError>;
+  /**
+   *  Creates or updates a managed scaling policy for an Amazon EMR cluster. The managed scaling policy defines the limits for resources, such as EC2 instances that can be added or terminated from a cluster. The policy only applies to the core and task nodes. The master node cannot be scaled after initial configuration. 
+   */
+  putManagedScalingPolicy(callback?: (err: AWSError, data: EMR.Types.PutManagedScalingPolicyOutput) => void): Request<EMR.Types.PutManagedScalingPolicyOutput, AWSError>;
+  /**
    * Removes an automatic scaling policy from a specified instance group within an EMR cluster.
    */
   removeAutoScalingPolicy(params: EMR.Types.RemoveAutoScalingPolicyInput, callback?: (err: AWSError, data: EMR.Types.RemoveAutoScalingPolicyOutput) => void): Request<EMR.Types.RemoveAutoScalingPolicyOutput, AWSError>;
@@ -188,6 +228,14 @@ declare class EMR extends Service {
    * Removes an automatic scaling policy from a specified instance group within an EMR cluster.
    */
   removeAutoScalingPolicy(callback?: (err: AWSError, data: EMR.Types.RemoveAutoScalingPolicyOutput) => void): Request<EMR.Types.RemoveAutoScalingPolicyOutput, AWSError>;
+  /**
+   *  Removes a managed scaling policy from a specified EMR cluster. 
+   */
+  removeManagedScalingPolicy(params: EMR.Types.RemoveManagedScalingPolicyInput, callback?: (err: AWSError, data: EMR.Types.RemoveManagedScalingPolicyOutput) => void): Request<EMR.Types.RemoveManagedScalingPolicyOutput, AWSError>;
+  /**
+   *  Removes a managed scaling policy from a specified EMR cluster. 
+   */
+  removeManagedScalingPolicy(callback?: (err: AWSError, data: EMR.Types.RemoveManagedScalingPolicyOutput) => void): Request<EMR.Types.RemoveManagedScalingPolicyOutput, AWSError>;
   /**
    * Removes tags from an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see Tag Clusters.  The following example removes the stack tag with value Prod from a cluster:
    */
@@ -213,11 +261,11 @@ declare class EMR extends Service {
    */
   setTerminationProtection(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets whether all AWS Identity and Access Management (IAM) users under your account can access the specified clusters (job flows). This action works on running clusters. You can also set the visibility of a cluster when you launch it using the VisibleToAllUsers parameter of RunJobFlow. The SetVisibleToAllUsers action can be called only by an IAM user who created the cluster or the AWS account that owns the cluster.
+   * Sets the Cluster$VisibleToAllUsers value, which determines whether the cluster is visible to all IAM users of the AWS account associated with the cluster. Only the IAM user who created the cluster or the AWS account root user can call this action. The default value, true, indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. If set to false, only the IAM user that created the cluster can perform actions. This action works on running clusters. You can override the default true setting when you create a cluster by using the VisibleToAllUsers parameter with RunJobFlow.
    */
   setVisibleToAllUsers(params: EMR.Types.SetVisibleToAllUsersInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets whether all AWS Identity and Access Management (IAM) users under your account can access the specified clusters (job flows). This action works on running clusters. You can also set the visibility of a cluster when you launch it using the VisibleToAllUsers parameter of RunJobFlow. The SetVisibleToAllUsers action can be called only by an IAM user who created the cluster or the AWS account that owns the cluster.
+   * Sets the Cluster$VisibleToAllUsers value, which determines whether the cluster is visible to all IAM users of the AWS account associated with the cluster. Only the IAM user who created the cluster or the AWS account root user can call this action. The default value, true, indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. If set to false, only the IAM user that created the cluster can perform actions. This action works on running clusters. You can override the default true setting when you create a cluster by using the VisibleToAllUsers parameter with RunJobFlow.
    */
   setVisibleToAllUsers(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -274,6 +322,10 @@ declare namespace EMR {
      * The unique identifier of the instance fleet.
      */
     InstanceFleetId?: InstanceFleetId;
+    /**
+     * The Amazon Resource Name of the cluster.
+     */
+    ClusterArn?: ArnType;
   }
   export interface AddInstanceGroupsInput {
     /**
@@ -294,6 +346,10 @@ declare namespace EMR {
      * Instance group IDs of the newly created instance groups.
      */
     InstanceGroupIds?: InstanceGroupIdsList;
+    /**
+     * The Amazon Resource Name of the cluster.
+     */
+    ClusterArn?: ArnType;
   }
   export interface AddJobFlowStepsInput {
     /**
@@ -343,6 +399,7 @@ declare namespace EMR {
     AdditionalInfo?: StringMap;
   }
   export type ApplicationList = Application[];
+  export type ArnType = string;
   export interface AutoScalingPolicy {
     /**
      * The upper and lower EC2 instance limits for an automatic scaling policy. Automatic scaling activity will not cause an instance group to grow above or below these limits.
@@ -389,6 +446,26 @@ declare namespace EMR {
      */
     StateChangeReason?: AutoScalingPolicyStateChangeReason;
   }
+  export interface BlockPublicAccessConfiguration {
+    /**
+     * Indicates whether EMR block public access is enabled (true) or disabled (false). By default, the value is false for accounts that have created EMR clusters before July 2019. For accounts created after this, the default is true.
+     */
+    BlockPublicSecurityGroupRules: Boolean;
+    /**
+     * Specifies ports and port ranges that are permitted to have security group rules that allow inbound traffic from all public sources. For example, if Port 23 (Telnet) is specified for PermittedPublicSecurityGroupRuleRanges, Amazon EMR allows cluster creation if a security group associated with the cluster has a rule that allows inbound traffic on Port 23 from IPv4 0.0.0.0/0 or IPv6 port ::/0 as the source. By default, Port 22, which is used for SSH access to the cluster EC2 instances, is in the list of PermittedPublicSecurityGroupRuleRanges.
+     */
+    PermittedPublicSecurityGroupRuleRanges?: PortRanges;
+  }
+  export interface BlockPublicAccessConfigurationMetadata {
+    /**
+     * The date and time that the configuration was created.
+     */
+    CreationDateTime: _Date;
+    /**
+     * The Amazon Resource Name that created or last modified the configuration.
+     */
+    CreatedByArn: ArnType;
+  }
   export type Boolean = boolean;
   export type BooleanObject = boolean;
   export interface BootstrapActionConfig {
@@ -428,11 +505,15 @@ declare namespace EMR {
     /**
      * The ClusterID for which specified steps will be canceled. Use RunJobFlow and ListClusters to get ClusterIDs. 
      */
-    ClusterId?: XmlStringMaxLen256;
+    ClusterId: XmlStringMaxLen256;
     /**
      * The list of StepIDs to cancel. Use ListSteps to get steps and their states for the specified cluster.
      */
-    StepIds?: StepIdsList;
+    StepIds: StepIdsList;
+    /**
+     * The option to choose for cancelling RUNNING steps. By default, the value is SEND_INTERRUPT.
+     */
+    StepCancellationOption?: StepCancellationOption;
   }
   export interface CancelStepsOutput {
     /**
@@ -447,7 +528,7 @@ declare namespace EMR {
      */
     ComparisonOperator: ComparisonOperator;
     /**
-     * The number of periods, expressed in seconds using Period, during which the alarm condition must exist before the alarm triggers automatic scaling activity. The default value is 1.
+     * The number of periods, in five-minute increments, during which the alarm condition must exist before the alarm triggers automatic scaling activity. The default value is 1.
      */
     EvaluationPeriods?: Integer;
     /**
@@ -505,6 +586,10 @@ declare namespace EMR {
      */
     LogUri?: String;
     /**
+     *  The AWS KMS customer master key (CMK) used for encrypting log files. This attribute is only available with EMR version 5.30.0 and later, excluding EMR 6.0.0. 
+     */
+    LogEncryptionKmsKeyId?: String;
+    /**
      * The AMI version requested for this cluster.
      */
     RequestedAmiVersion?: String;
@@ -513,7 +598,7 @@ declare namespace EMR {
      */
     RunningAmiVersion?: String;
     /**
-     * The Amazon EMR release label, which determines the version of open-source application packages installed on the cluster. Release labels are in the form emr-x.x.x, where x.x.x is an Amazon EMR release version, for example, emr-5.14.0. For more information about Amazon EMR release versions and included application versions and features, see http://docs.aws.amazon.com/emr/latest/ReleaseGuide/. The release label applies only to Amazon EMR releases versions 4.x and later. Earlier versions use AmiVersion.
+     * The Amazon EMR release label, which determines the version of open-source application packages installed on the cluster. Release labels are in the form emr-x.x.x, where x.x.x is an Amazon EMR release version such as emr-5.14.0. For more information about Amazon EMR release versions and included application versions and features, see https://docs.aws.amazon.com/emr/latest/ReleaseGuide/. The release label applies only to Amazon EMR releases version 4.0 and later. Earlier versions use AmiVersion.
      */
     ReleaseLabel?: String;
     /**
@@ -525,7 +610,7 @@ declare namespace EMR {
      */
     TerminationProtected?: Boolean;
     /**
-     * Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. If this value is set to true, all IAM users of that AWS account can view and manage the cluster if they have the proper policy permissions set. If this value is false, only the IAM user that created the cluster can view and manage it. This value can be changed using the SetVisibleToAllUsers action.
+     * Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. The default value, true, indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. If this value is false, only the IAM user that created the cluster can perform actions. This value can be changed on a running cluster by using the SetVisibleToAllUsers action. You can override the default value of true when you create a cluster by using the VisibleToAllUsers parameter of the RunJobFlow action.
      */
     VisibleToAllUsers?: Boolean;
     /**
@@ -580,6 +665,18 @@ declare namespace EMR {
      * Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see Use Kerberos Authentication in the EMR Management Guide.
      */
     KerberosAttributes?: KerberosAttributes;
+    /**
+     * The Amazon Resource Name of the cluster.
+     */
+    ClusterArn?: ArnType;
+    /**
+     *  The Amazon Resource Name (ARN) of the Outpost where the cluster is launched. 
+     */
+    OutpostArn?: OptionalArnType;
+    /**
+     * Specifies the number of steps that can be executed concurrently.
+     */
+    StepConcurrencyLevel?: Integer;
   }
   export type ClusterId = string;
   export type ClusterState = "STARTING"|"BOOTSTRAPPING"|"RUNNING"|"WAITING"|"TERMINATING"|"TERMINATED"|"TERMINATED_WITH_ERRORS"|string;
@@ -626,6 +723,14 @@ declare namespace EMR {
      * An approximation of the cost of the cluster, represented in m1.small/hours. This value is incremented one time for every hour an m1.small instance runs. Larger instances are weighted more, so an EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.
      */
     NormalizedInstanceHours?: Integer;
+    /**
+     * The Amazon Resource Name of the cluster.
+     */
+    ClusterArn?: ArnType;
+    /**
+     *  The Amazon Resource Name (ARN) of the Outpost where the cluster is launched. 
+     */
+    OutpostArn?: OptionalArnType;
   }
   export type ClusterSummaryList = ClusterSummary[];
   export interface ClusterTimeline {
@@ -658,6 +763,25 @@ declare namespace EMR {
   }
   export type CommandList = Command[];
   export type ComparisonOperator = "GREATER_THAN_OR_EQUAL"|"GREATER_THAN"|"LESS_THAN"|"LESS_THAN_OR_EQUAL"|string;
+  export interface ComputeLimits {
+    /**
+     *  The unit type used for specifying a managed scaling policy. 
+     */
+    UnitType: ComputeLimitsUnitType;
+    /**
+     *  The lower boundary of EC2 units. It is measured through VCPU cores or instances for instance groups and measured through units for instance fleets. Managed scaling activities are not allowed beyond this boundary. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. 
+     */
+    MinimumCapacityUnits: Integer;
+    /**
+     *  The upper boundary of EC2 units. It is measured through VCPU cores or instances for instance groups and measured through units for instance fleets. Managed scaling activities are not allowed beyond this boundary. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. 
+     */
+    MaximumCapacityUnits: Integer;
+    /**
+     *  The upper boundary of on-demand EC2 units. It is measured through VCPU cores or instances for instance groups and measured through units for instance fleets. The on-demand units are not allowed to scale beyond this boundary. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. 
+     */
+    MaximumOnDemandCapacityUnits?: Integer;
+  }
+  export type ComputeLimitsUnitType = "InstanceFleetUnits"|"Instances"|"VCPU"|string;
   export interface Configuration {
     /**
      * The classification within a configuration.
@@ -825,11 +949,11 @@ declare namespace EMR {
      */
     Ec2KeyName?: String;
     /**
-     * To launch the cluster in Amazon VPC, set this parameter to the identifier of the Amazon VPC subnet where you want the cluster to launch. If you do not specify this value, the cluster is launched in the normal AWS cloud, outside of a VPC. Amazon VPC currently does not support cluster compute quadruple extra large (cc1.4xlarge) instances. Thus, you cannot specify the cc1.4xlarge instance type for nodes of a cluster launched in a VPC.
+     * Set this parameter to the identifier of the Amazon VPC subnet where you want the cluster to launch. If you do not specify this value, and your account supports EC2-Classic, the cluster launches in EC2-Classic.
      */
     Ec2SubnetId?: String;
     /**
-     * Applies to clusters configured with the instance fleets option. Specifies the unique identifier of one or more Amazon EC2 subnets in which to launch EC2 cluster instances. Subnets must exist within the same VPC. Amazon EMR chooses the EC2 subnet with the best fit from among the list of RequestedEc2SubnetIds, and then launches all cluster instances within that Subnet. If this value is not specified, and the account and region support EC2-Classic networks, the cluster launches instances in the EC2-Classic network and uses RequestedEc2AvailabilityZones instead of this setting. If EC2-Classic is not supported, and no Subnet is specified, Amazon EMR chooses the subnet for you. RequestedEc2SubnetIDs and RequestedEc2AvailabilityZones cannot be specified together.
+     * Applies to clusters configured with the instance fleets option. Specifies the unique identifier of one or more Amazon EC2 subnets in which to launch EC2 cluster instances. Subnets must exist within the same VPC. Amazon EMR chooses the EC2 subnet with the best fit from among the list of RequestedEc2SubnetIds, and then launches all cluster instances within that Subnet. If this value is not specified, and the account and Region support EC2-Classic networks, the cluster launches instances in the EC2-Classic network and uses RequestedEc2AvailabilityZones instead of this setting. If EC2-Classic is not supported, and no Subnet is specified, Amazon EMR chooses the subnet for you. RequestedEc2SubnetIDs and RequestedEc2AvailabilityZones cannot be specified together.
      */
     RequestedEc2SubnetIds?: XmlStringMaxLen256List;
     /**
@@ -849,7 +973,7 @@ declare namespace EMR {
      */
     EmrManagedMasterSecurityGroup?: String;
     /**
-     * The identifier of the Amazon EC2 security group for the slave nodes.
+     * The identifier of the Amazon EC2 security group for the core and task nodes.
      */
     EmrManagedSlaveSecurityGroup?: String;
     /**
@@ -861,7 +985,7 @@ declare namespace EMR {
      */
     AdditionalMasterSecurityGroups?: StringList;
     /**
-     * A list of additional Amazon EC2 security group IDs for the slave nodes.
+     * A list of additional Amazon EC2 security group IDs for the core and task nodes.
      */
     AdditionalSlaveSecurityGroups?: StringList;
   }
@@ -878,6 +1002,30 @@ declare namespace EMR {
      * The path to the log file where the step failure root cause was originally recorded.
      */
     LogFile?: String;
+  }
+  export interface GetBlockPublicAccessConfigurationInput {
+  }
+  export interface GetBlockPublicAccessConfigurationOutput {
+    /**
+     * A configuration for Amazon EMR block public access. The configuration applies to all clusters created in your account for the current Region. The configuration specifies whether block public access is enabled. If block public access is enabled, security groups associated with the cluster cannot have rules that allow inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless the port is specified as an exception using PermittedPublicSecurityGroupRuleRanges in the BlockPublicAccessConfiguration. By default, Port 22 (SSH) is an exception, and public access is allowed on this port. You can change this by updating the block public access configuration to remove the exception.  For accounts that created clusters in a Region before November 25, 2019, block public access is disabled by default in that Region. To use this feature, you must manually enable and configure it. For accounts that did not create an EMR cluster in a Region before this date, block public access is enabled by default in that Region. 
+     */
+    BlockPublicAccessConfiguration: BlockPublicAccessConfiguration;
+    /**
+     * Properties that describe the AWS principal that created the BlockPublicAccessConfiguration using the PutBlockPublicAccessConfiguration action as well as the date and time that the configuration was created. Each time a configuration for block public access is updated, Amazon EMR updates this metadata.
+     */
+    BlockPublicAccessConfigurationMetadata: BlockPublicAccessConfigurationMetadata;
+  }
+  export interface GetManagedScalingPolicyInput {
+    /**
+     *  Specifies the ID of the cluster for which the managed scaling policy will be fetched. 
+     */
+    ClusterId: ClusterId;
+  }
+  export interface GetManagedScalingPolicyOutput {
+    /**
+     *  Specifies the managed scaling policy that is attached to an Amazon EMR cluster. 
+     */
+    ManagedScalingPolicy?: ManagedScalingPolicy;
   }
   export interface HadoopJarStepConfig {
     /**
@@ -1116,7 +1264,7 @@ declare namespace EMR {
      */
     InstanceGroupType?: InstanceGroupType;
     /**
-     * The maximum Spot price your are willing to pay for EC2 instances. An optional, nullable field that applies if the MarketType for the instance group is specified as SPOT. Specify the maximum spot price in USD. If the value is NULL and SPOT is specified, the maximum Spot price is set equal to the On-Demand price.
+     * The bid price for each EC2 Spot instance type as defined by InstanceType. Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
      */
     BidPrice?: String;
     /**
@@ -1139,6 +1287,18 @@ declare namespace EMR {
      *  Amazon EMR releases 4.x or later.  The list of configurations supplied for an EMR cluster instance group. You can specify a separate configuration for each instance group (master, core, and task).
      */
     Configurations?: ConfigurationList;
+    /**
+     * The version number of the requested configuration specification for this instance group.
+     */
+    ConfigurationsVersion?: Long;
+    /**
+     * A list of configurations that were successfully applied for an instance group last time.
+     */
+    LastSuccessfullyAppliedConfigurations?: ConfigurationList;
+    /**
+     * The version number of a configuration specification that was successfully applied for an instance group last time. 
+     */
+    LastSuccessfullyAppliedConfigurationsVersion?: Long;
     /**
      * The EBS block devices that are mapped to this instance group.
      */
@@ -1170,7 +1330,7 @@ declare namespace EMR {
      */
     InstanceRole: InstanceRoleType;
     /**
-     * The maximum Spot price your are willing to pay for EC2 instances. An optional, nullable field that applies if the MarketType for the instance group is specified as SPOT. Specify the maximum spot price in USD. If the value is NULL and SPOT is specified, the maximum Spot price is set equal to the On-Demand price.
+     * The bid price for each EC2 Spot instance type as defined by InstanceType. Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
      */
     BidPrice?: XmlStringMaxLen256;
     /**
@@ -1213,7 +1373,7 @@ declare namespace EMR {
      */
     InstanceRole: InstanceRoleType;
     /**
-     * The maximum Spot price your are willing to pay for EC2 instances. An optional, nullable field that applies if the MarketType for the instance group is specified as SPOT. Specified in USD. If the value is NULL and SPOT is specified, the maximum Spot price is set equal to the On-Demand price.
+     * The bid price for each EC2 Spot instance type as defined by InstanceType. Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
      */
     BidPrice?: XmlStringMaxLen256;
     /**
@@ -1274,9 +1434,13 @@ declare namespace EMR {
      * Policy for customizing shrink operations.
      */
     ShrinkPolicy?: ShrinkPolicy;
+    /**
+     * A list of new or modified configurations to apply for an instance group.
+     */
+    Configurations?: ConfigurationList;
   }
   export type InstanceGroupModifyConfigList = InstanceGroupModifyConfig[];
-  export type InstanceGroupState = "PROVISIONING"|"BOOTSTRAPPING"|"RUNNING"|"RESIZING"|"SUSPENDED"|"TERMINATING"|"TERMINATED"|"ARRESTED"|"SHUTTING_DOWN"|"ENDED"|string;
+  export type InstanceGroupState = "PROVISIONING"|"BOOTSTRAPPING"|"RUNNING"|"RECONFIGURING"|"RESIZING"|"SUSPENDED"|"TERMINATING"|"TERMINATED"|"ARRESTED"|"SHUTTING_DOWN"|"ENDED"|string;
   export interface InstanceGroupStateChangeReason {
     /**
      * The programmable code for the state change reason.
@@ -1450,6 +1614,10 @@ declare namespace EMR {
      */
     LogUri?: XmlString;
     /**
+     * The AWS KMS customer master key (CMK) used for encrypting log files. This attribute is only available with EMR version 5.30.0 and later, excluding EMR 6.0.0.
+     */
+    LogEncryptionKmsKeyId?: XmlString;
+    /**
      * Applies only to Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR releases 4.0 and later, ReleaseLabel is used. To specify a custom AMI, use CustomAmiID.
      */
     AmiVersion?: XmlStringMaxLen256;
@@ -1474,7 +1642,7 @@ declare namespace EMR {
      */
     SupportedProducts?: SupportedProductsList;
     /**
-     * Specifies whether the cluster is visible to all IAM users of the AWS account associated with the cluster. If this value is set to true, all IAM users of that AWS account can view and (if they have the proper policy permissions set) manage the cluster. If it is set to false, only the IAM user that created the cluster can view and manage it. This value can be changed using the SetVisibleToAllUsers action.
+     * Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. The default value, true, indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. If this value is false, only the IAM user that created the cluster can perform actions. This value can be changed on a running cluster by using the SetVisibleToAllUsers action. You can override the default value of true when you create a cluster by using the VisibleToAllUsers parameter of the RunJobFlow action.
      */
     VisibleToAllUsers?: Boolean;
     /**
@@ -1529,7 +1697,7 @@ declare namespace EMR {
      */
     MasterInstanceType?: InstanceType;
     /**
-     * The EC2 instance type of the slave nodes.
+     * The EC2 instance type of the core and task nodes.
      */
     SlaveInstanceType?: InstanceType;
     /**
@@ -1565,7 +1733,7 @@ declare namespace EMR {
      */
     HadoopVersion?: XmlStringMaxLen256;
     /**
-     * Applies to clusters that use the uniform instance group configuration. To launch the cluster in Amazon Virtual Private Cloud (Amazon VPC), set this parameter to the identifier of the Amazon VPC subnet where you want the cluster to launch. If you do not specify this value, the cluster launches in the normal Amazon Web Services cloud, outside of an Amazon VPC, if the account launching the cluster supports EC2 Classic networks in the region where the cluster launches. Amazon VPC currently does not support cluster compute quadruple extra large (cc1.4xlarge) instances. Thus you cannot specify the cc1.4xlarge instance type for clusters launched in an Amazon VPC.
+     * Applies to clusters that use the uniform instance group configuration. To launch the cluster in Amazon Virtual Private Cloud (Amazon VPC), set this parameter to the identifier of the Amazon VPC subnet where you want the cluster to launch. If you do not specify this value and your account supports EC2-Classic, the cluster launches in EC2-Classic.
      */
     Ec2SubnetId?: XmlStringMaxLen256;
     /**
@@ -1577,7 +1745,7 @@ declare namespace EMR {
      */
     EmrManagedMasterSecurityGroup?: XmlStringMaxLen256;
     /**
-     * The identifier of the Amazon EC2 security group for the slave nodes.
+     * The identifier of the Amazon EC2 security group for the core and task nodes.
      */
     EmrManagedSlaveSecurityGroup?: XmlStringMaxLen256;
     /**
@@ -1589,7 +1757,7 @@ declare namespace EMR {
      */
     AdditionalMasterSecurityGroups?: SecurityGroupsList;
     /**
-     * A list of additional Amazon EC2 security group IDs for the slave nodes.
+     * A list of additional Amazon EC2 security group IDs for the core and task nodes.
      */
     AdditionalSlaveSecurityGroups?: SecurityGroupsList;
   }
@@ -1607,11 +1775,11 @@ declare namespace EMR {
      */
     MasterInstanceId?: XmlString;
     /**
-     * The Amazon EC2 slave node instance type.
+     * The Amazon EC2 core and task node instance type.
      */
     SlaveInstanceType: InstanceType;
     /**
-     * The number of Amazon EC2 instances in the cluster. If the value is 1, the same instance serves as both the master and slave node. If the value is greater than 1, one instance is the master node and all others are slave nodes.
+     * The number of Amazon EC2 instances in the cluster. If the value is 1, the same instance serves as both the master and core and task node. If the value is greater than 1, one instance is the master node and all others are core and task nodes.
      */
     InstanceCount: Integer;
     /**
@@ -1834,7 +2002,7 @@ declare namespace EMR {
      */
     StepStates?: StepStateList;
     /**
-     * The filter to limit the step list based on the identifier of the steps.
+     * The filter to limit the step list based on the identifier of the steps. You can specify a maximum of ten Step IDs. The character constraint applies to the overall length of the array.
      */
     StepIds?: XmlStringList;
     /**
@@ -1852,6 +2020,13 @@ declare namespace EMR {
      */
     Marker?: Marker;
   }
+  export type Long = number;
+  export interface ManagedScalingPolicy {
+    /**
+     *  The EC2 unit limits for a managed scaling policy. The managed scaling activity of a cluster is not allowed to go above or below these limits. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. 
+     */
+    ComputeLimits?: ComputeLimits;
+  }
   export type Marker = string;
   export type MarketType = "ON_DEMAND"|"SPOT"|string;
   export interface MetricDimension {
@@ -1865,6 +2040,22 @@ declare namespace EMR {
     Value?: String;
   }
   export type MetricDimensionList = MetricDimension[];
+  export interface ModifyClusterInput {
+    /**
+     * The unique identifier of the cluster.
+     */
+    ClusterId: String;
+    /**
+     * The number of steps that can be executed concurrently. You can specify a maximum of 256 steps. 
+     */
+    StepConcurrencyLevel?: Integer;
+  }
+  export interface ModifyClusterOutput {
+    /**
+     * The number of steps that can be executed concurrently.
+     */
+    StepConcurrencyLevel?: Integer;
+  }
   export interface ModifyInstanceFleetInput {
     /**
      * The unique identifier of the cluster.
@@ -1887,6 +2078,7 @@ declare namespace EMR {
   }
   export type NewSupportedProductsList = SupportedProductConfig[];
   export type NonNegativeDouble = number;
+  export type OptionalArnType = string;
   export interface PlacementType {
     /**
      * The Amazon EC2 Availability Zone for the cluster. AvailabilityZone is used for uniform instance groups, while AvailabilityZones (plural) is used for instance fleets.
@@ -1897,6 +2089,18 @@ declare namespace EMR {
      */
     AvailabilityZones?: XmlStringMaxLen256List;
   }
+  export type Port = number;
+  export interface PortRange {
+    /**
+     * The smallest port number in a specified range of port numbers.
+     */
+    MinRange: Port;
+    /**
+     * The smallest port number in a specified range of port numbers.
+     */
+    MaxRange?: Port;
+  }
+  export type PortRanges = PortRange[];
   export interface PutAutoScalingPolicyInput {
     /**
      * Specifies the ID of a cluster. The instance group to which the automatic scaling policy is applied is within this cluster.
@@ -1924,6 +2128,30 @@ declare namespace EMR {
      * The automatic scaling policy definition.
      */
     AutoScalingPolicy?: AutoScalingPolicyDescription;
+    /**
+     * The Amazon Resource Name of the cluster.
+     */
+    ClusterArn?: ArnType;
+  }
+  export interface PutBlockPublicAccessConfigurationInput {
+    /**
+     * A configuration for Amazon EMR block public access. The configuration applies to all clusters created in your account for the current Region. The configuration specifies whether block public access is enabled. If block public access is enabled, security groups associated with the cluster cannot have rules that allow inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless the port is specified as an exception using PermittedPublicSecurityGroupRuleRanges in the BlockPublicAccessConfiguration. By default, Port 22 (SSH) is an exception, and public access is allowed on this port. You can change this by updating BlockPublicSecurityGroupRules to remove the exception.  For accounts that created clusters in a Region before November 25, 2019, block public access is disabled by default in that Region. To use this feature, you must manually enable and configure it. For accounts that did not create an EMR cluster in a Region before this date, block public access is enabled by default in that Region. 
+     */
+    BlockPublicAccessConfiguration: BlockPublicAccessConfiguration;
+  }
+  export interface PutBlockPublicAccessConfigurationOutput {
+  }
+  export interface PutManagedScalingPolicyInput {
+    /**
+     *  Specifies the ID of an EMR cluster where the managed scaling policy is attached. 
+     */
+    ClusterId: ClusterId;
+    /**
+     *  Specifies the constraints for the managed scaling policy. 
+     */
+    ManagedScalingPolicy: ManagedScalingPolicy;
+  }
+  export interface PutManagedScalingPolicyOutput {
   }
   export interface RemoveAutoScalingPolicyInput {
     /**
@@ -1936,6 +2164,14 @@ declare namespace EMR {
     InstanceGroupId: InstanceGroupId;
   }
   export interface RemoveAutoScalingPolicyOutput {
+  }
+  export interface RemoveManagedScalingPolicyInput {
+    /**
+     *  Specifies the ID of the cluster from which the managed scaling policy will be removed. 
+     */
+    ClusterId: ClusterId;
+  }
+  export interface RemoveManagedScalingPolicyOutput {
   }
   export interface RemoveTagsInput {
     /**
@@ -1961,6 +2197,10 @@ declare namespace EMR {
      */
     LogUri?: XmlString;
     /**
+     * The AWS KMS customer master key (CMK) used for encrypting log files. If a value is not provided, the logs will remain encrypted by AES-256. This attribute is only available with EMR version 5.30.0 and later, excluding EMR 6.0.0.
+     */
+    LogEncryptionKmsKeyId?: XmlString;
+    /**
      * A JSON string for selecting additional features.
      */
     AdditionalInfo?: XmlString;
@@ -1969,7 +2209,7 @@ declare namespace EMR {
      */
     AmiVersion?: XmlStringMaxLen256;
     /**
-     * The Amazon EMR release label, which determines the version of open-source application packages installed on the cluster. Release labels are in the form emr-x.x.x, where x.x.x is an Amazon EMR release version, for example, emr-5.14.0. For more information about Amazon EMR release versions and included application versions and features, see http://docs.aws.amazon.com/emr/latest/ReleaseGuide/. The release label applies only to Amazon EMR releases versions 4.x and later. Earlier versions use AmiVersion.
+     * The Amazon EMR release label, which determines the version of open-source application packages installed on the cluster. Release labels are in the form emr-x.x.x, where x.x.x is an Amazon EMR release version such as emr-5.14.0. For more information about Amazon EMR release versions and included application versions and features, see https://docs.aws.amazon.com/emr/latest/ReleaseGuide/. The release label applies only to Amazon EMR releases version 4.0 and later. Earlier versions use AmiVersion.
      */
     ReleaseLabel?: XmlStringMaxLen256;
     /**
@@ -1993,7 +2233,7 @@ declare namespace EMR {
      */
     NewSupportedProducts?: NewSupportedProductsList;
     /**
-     * For Amazon EMR releases 4.0 and later. A list of applications for the cluster. Valid values are: "Hadoop", "Hive", "Mahout", "Pig", and "Spark." They are case insensitive.
+     * Applies to Amazon EMR releases 4.0 and later. A case-insensitive list of applications for Amazon EMR to install and configure when launching the cluster. For a list of applications available for each Amazon EMR release version, see the Amazon EMR Release Guide.
      */
     Applications?: ApplicationList;
     /**
@@ -2001,7 +2241,7 @@ declare namespace EMR {
      */
     Configurations?: ConfigurationList;
     /**
-     * Whether the cluster is visible to all IAM users of the AWS account associated with the cluster. If this value is set to true, all IAM users of that AWS account can view and (if they have the proper policy permissions set) manage the cluster. If it is set to false, only the IAM user that created the cluster can view and manage it.
+     * A value of true indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. This is the default. A value of false indicates that only the IAM user who created the cluster can perform actions.
      */
     VisibleToAllUsers?: Boolean;
     /**
@@ -2044,12 +2284,24 @@ declare namespace EMR {
      * Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see Use Kerberos Authentication in the EMR Management Guide.
      */
     KerberosAttributes?: KerberosAttributes;
+    /**
+     * Specifies the number of steps that can be executed concurrently. The default value is 1. The maximum value is 256.
+     */
+    StepConcurrencyLevel?: Integer;
+    /**
+     *  The specified managed scaling policy for an Amazon EMR cluster. 
+     */
+    ManagedScalingPolicy?: ManagedScalingPolicy;
   }
   export interface RunJobFlowOutput {
     /**
      * An unique identifier for the job flow.
      */
     JobFlowId?: XmlStringMaxLen256;
+    /**
+     * The Amazon Resource Name of the cluster.
+     */
+    ClusterArn?: ArnType;
   }
   export type ScaleDownBehavior = "TERMINATE_AT_INSTANCE_HOUR"|"TERMINATE_AT_TASK_COMPLETION"|string;
   export interface ScalingAction {
@@ -2131,11 +2383,11 @@ declare namespace EMR {
   }
   export interface SetVisibleToAllUsersInput {
     /**
-     * Identifiers of the job flows to receive the new visibility setting.
+     * The unique identifier of the job flow (cluster).
      */
     JobFlowIds: XmlStringList;
     /**
-     * Whether the specified clusters are visible to all IAM users of the AWS account associated with the cluster. If this value is set to True, all IAM users of that AWS account can view and, if they have the proper IAM policy permissions set, manage the clusters. If it is set to False, only the IAM user that created a cluster can view and manage it.
+     * A value of true indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. This is the default. A value of false indicates that only the IAM user who created the cluster can perform actions.
      */
     VisibleToAllUsers: Boolean;
   }
@@ -2169,7 +2421,7 @@ declare namespace EMR {
      */
     TimeoutDurationMinutes: WholeNumber;
     /**
-     * The action to take when TargetSpotCapacity has not been fulfilled when the TimeoutDurationMinutes has expired. Spot instances are not uprovisioned within the Spot provisioining timeout. Valid values are TERMINATE_CLUSTER and SWITCH_TO_ON_DEMAND. SWITCH_TO_ON_DEMAND specifies that if no Spot instances are available, On-Demand Instances should be provisioned to fulfill any remaining Spot capacity.
+     * The action to take when TargetSpotCapacity has not been fulfilled when the TimeoutDurationMinutes has expired; that is, when all Spot instances could not be provisioned within the Spot provisioning timeout. Valid values are TERMINATE_CLUSTER and SWITCH_TO_ON_DEMAND. SWITCH_TO_ON_DEMAND specifies that if no Spot instances are available, On-Demand Instances should be provisioned to fulfill any remaining Spot capacity.
      */
     TimeoutAction: SpotProvisioningTimeoutAction;
     /**
@@ -2193,7 +2445,7 @@ declare namespace EMR {
      */
     Config?: HadoopStepConfig;
     /**
-     * This specifies what action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE.
+     * The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is provided for backward compatibility. We recommend using TERMINATE_CLUSTER instead.
      */
     ActionOnFailure?: ActionOnFailure;
     /**
@@ -2201,13 +2453,14 @@ declare namespace EMR {
      */
     Status?: StepStatus;
   }
+  export type StepCancellationOption = "SEND_INTERRUPT"|"TERMINATE_PROCESS"|string;
   export interface StepConfig {
     /**
      * The name of the step.
      */
     Name: XmlStringMaxLen256;
     /**
-     * The action to take if the step fails.
+     * The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is provided for backward compatibility. We recommend using TERMINATE_CLUSTER instead.
      */
     ActionOnFailure?: ActionOnFailure;
     /**
@@ -2297,7 +2550,7 @@ declare namespace EMR {
      */
     Config?: HadoopStepConfig;
     /**
-     * This specifies what action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE.
+     * The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is available for backward compatibility. We recommend using TERMINATE_CLUSTER instead.
      */
     ActionOnFailure?: ActionOnFailure;
     /**

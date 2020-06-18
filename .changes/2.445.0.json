@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Adds support for Elastic Fabric Adapter (EFA) ENIs. "
+    },
+    {
+        "type": "feature",
+        "category": "Transfer",
+        "description": "This release adds support for per-server host-key management. You can now specify the SSH RSA private key used by your SFTP server."
+    }
+]

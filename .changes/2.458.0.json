@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "AppStream",
+        "description": "Includes APIs for managing subscriptions to AppStream 2.0 usage reports and configuring idle disconnect timeouts on AppStream 2.0 fleets."
+    }
+]

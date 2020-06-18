@@ -2,8 +2,9 @@
 (function() {
   var helpers = require('../helpers');
   var AWS = helpers.AWS;
-  var Buffer = AWS.util.Buffer;
+  var toBuffer = AWS.util.buffer.toBuffer;
   var encode = AWS.util.base64.encode;
+  var isBrowser = AWS.util.isBrowser;
   var docClient = null;
   var NumberValue = require('../../lib/dynamodb/numberValue');
 
@@ -33,13 +34,13 @@
       it('validates type of set', function() {
         return expect(function() {
           return docClient.createSet([true, false, false]);
-        }).to["throw"]('Sets can contain string, number, or binary values');
+        }).to['throw']('Sets can contain string, number, or binary values');
       });
 
       it('detects type of sets', function() {
         expect(docClient.createSet(['1', '2', 'string']).type).to.equal('String');
         expect(docClient.createSet([1, 2, 3]).type).to.equal('Number');
-        return expect(docClient.createSet([new Buffer('foo'), new Buffer('bar')]).type).to.equal('Binary');
+        return expect(docClient.createSet([toBuffer('foo'), toBuffer('bar')]).type).to.equal('Binary');
       });
 
       it('supports sets with falsy values', function() {
@@ -52,29 +53,29 @@
           return docClient.createSet([1, 2, 'string'], {
             validate: true
           });
-        }).to["throw"]('Number Set contains String value');
+        }).to['throw']('Number Set contains String value');
         expect(function() {
           return docClient.createSet(['string', 'string', 2], {
             validate: true
           });
-        }).to["throw"]('String Set contains Number value');
+        }).to['throw']('String Set contains Number value');
         expect(function() {
-          return docClient.createSet([1, 2, new Buffer('foo')], {
+          return docClient.createSet([1, 2, toBuffer('foo')], {
             validate: true
           });
-        }).to["throw"]('Number Set contains Binary value');
+        }).to['throw']('Number Set contains Binary value');
       });
 
       it('does not validate set elements if validate: true unset', function() {
         expect(function() {
           return docClient.createSet([1, 2, 'string']);
-        }).to.not["throw"]('Number Set contains String value');
+        }).to.not['throw']('Number Set contains String value');
         expect(function() {
           return docClient.createSet(['string', 'string', 2]);
-        }).to.not["throw"]('String Set contains Number value');
+        }).to.not['throw']('String Set contains Number value');
         expect(function() {
-          return docClient.createSet([1, 2, new Buffer('foo')]);
-        }).to.not["throw"]('Number Set contains Binary value');
+          return docClient.createSet([1, 2, toBuffer('foo')]);
+        }).to.not['throw']('Number Set contains Binary value');
       });
     });
 
@@ -141,7 +142,7 @@
 
       it('translates binary buffers', function() {
         var buffer, input, params;
-        buffer = new Buffer('bar');
+        buffer = toBuffer('bar');
         input = {
           Item: {
             foo: buffer
@@ -159,7 +160,7 @@
 
       it('converts empty binary buffers to null when convertEmptyValues option set', function() {
         var buffer, client, input, params, request;
-        buffer = new Buffer('');
+        buffer = toBuffer('');
         input = {
           Item: {
             foo: buffer
@@ -182,7 +183,7 @@
 
       it('does not convert empty binary buffers to null when convertEmptyValues option not set', function() {
         var buffer, client, input, params, request;
-        buffer = new Buffer('');
+        buffer = toBuffer('');
         input = {
           Item: {
             foo: buffer
@@ -291,7 +292,7 @@
               bar: 'string',
               baz: 'string',
               quux: '',
-              fizz: new Buffer(''),
+              fizz: toBuffer(''),
               buzz: docClient.createSet([''])
             }
           }
@@ -329,7 +330,7 @@
 
       it('does not covert empty map members to null when convertEmptyValues option not set', function() {
         var client, emptyBuffer, input, params, request;
-        emptyBuffer = new Buffer('');
+        emptyBuffer = toBuffer('');
         input = {
           Item: {
             foo: {
@@ -372,7 +373,7 @@
 
       it('translates lists', function() {
         var buffer, input, params;
-        buffer = new Buffer('quux');
+        buffer = toBuffer('quux');
         input = {
           Item: {
             foo: {
@@ -404,11 +405,11 @@
 
       it('converts empty list members to null when convertEmptyValues option set', function() {
         var buffer, client, input, params, request;
-        buffer = new Buffer('quux');
+        buffer = toBuffer('quux');
         input = {
           Item: {
             foo: {
-              bar: ['string', 2, buffer, '', new Buffer(''), docClient.createSet([''])]
+              bar: ['string', 2, buffer, '', toBuffer(''), docClient.createSet([''])]
             }
           }
         };
@@ -447,8 +448,8 @@
 
       it('does not covert empty list members to null when convertEmptyValues option not set', function() {
         var buffer, client, emptyBuffer, input, params, request;
-        emptyBuffer = new Buffer('');
-        buffer = new Buffer('quux');
+        emptyBuffer = toBuffer('');
+        buffer = toBuffer('quux');
         input = {
           Item: {
             foo: {
@@ -613,9 +614,9 @@
 
       it('translates binary sets', function() {
         var bar, baz, input, params, quux, set;
-        bar = new Buffer('bar');
-        baz = new Buffer('baz');
-        quux = new Buffer('quux');
+        bar = toBuffer('bar');
+        baz = toBuffer('baz');
+        quux = toBuffer('quux');
         set = docClient.createSet([bar, baz, quux]);
         input = {
           Item: {
@@ -634,10 +635,10 @@
 
       it('removes empty binary members from sets when convertEmptyValues option set', function() {
         var bar, baz, client, empty, input, params, quux, request, set;
-        bar = new Buffer('bar');
-        baz = new Buffer('baz');
-        quux = new Buffer('quux');
-        empty = new Buffer('');
+        bar = toBuffer('bar');
+        baz = toBuffer('baz');
+        quux = toBuffer('quux');
+        empty = toBuffer('');
         set = docClient.createSet([bar, baz, quux, empty]);
         input = {
           Item: {
@@ -661,10 +662,10 @@
 
       it('removes empty binary members from sets when convertEmptyValues option set', function() {
         var bar, baz, client, empty, input, params, quux, request, set;
-        bar = new Buffer('bar');
-        baz = new Buffer('baz');
-        quux = new Buffer('quux');
-        empty = new Buffer('');
+        bar = toBuffer('bar');
+        baz = toBuffer('baz');
+        quux = toBuffer('quux');
+        empty = toBuffer('');
         set = docClient.createSet([bar, baz, quux, empty]);
         input = {
           Item: {
@@ -822,7 +823,7 @@
 
       it('translates recusive lists', function() {
         var buffer, input, params;
-        buffer = new Buffer('foo');
+        buffer = toBuffer('foo');
         input = {
           Item: {
             tags: [
@@ -1118,7 +1119,7 @@
 
       it('translates lists', function(done) {
         var buffer, output, wire;
-        buffer = new Buffer('quux');
+        buffer = toBuffer('quux');
         wire = JSON.stringify({
           Item: {
             foo: {
@@ -1245,9 +1246,9 @@
 
       it('translates binary sets', function(done) {
         var bar, baz, output, quux, set, wire;
-        bar = new Buffer('bar');
-        baz = new Buffer('baz');
-        quux = new Buffer('quux');
+        bar = toBuffer('bar');
+        baz = toBuffer('baz');
+        quux = toBuffer('quux');
         set = docClient.createSet([bar, baz, quux]);
         wire = JSON.stringify({
           Item: {
@@ -1268,6 +1269,75 @@
           }
         }, function(err, data) {
           expect(data).to.eql(output);
+          done();
+        });
+      });
+
+      it('stringifies string sets', function(done) {
+        var outputString, wire;
+        wire = JSON.stringify({
+          Item: {
+            foo: {
+              'SS': ['bar', 'baz', 'quux']
+            }
+          }
+        });
+        outputString = '{"Item":{"foo":["bar","baz","quux"]}}';
+        helpers.mockHttpResponse(200, {}, wire);
+        docClient.get({
+          Key: {
+            foo: 1
+          }
+        }, function(err, data) {
+          expect(JSON.stringify(data)).to.eql(outputString);
+          done();
+        });
+      });
+
+      it('stringifies number sets', function(done) {
+        var outputString, wire;
+        wire = JSON.stringify({
+          Item: {
+            foo: {
+              'NS': ['1', '2', '3']
+            }
+          }
+        });
+        outputString = '{"Item":{"foo":[1,2,3]}}';
+        helpers.mockHttpResponse(200, {}, wire);
+        docClient.get({
+          Key: {
+            foo: 1
+          }
+        }, function(err, data) {
+          expect(JSON.stringify(data)).to.eql(outputString);
+          done();
+        });
+      });
+
+      it('stringifies binary sets', function(done) {
+        var bar, baz, outputString, quux, wire;
+        bar = toBuffer('bar');
+        baz = toBuffer('baz');
+        quux = toBuffer('quux');
+        wire = JSON.stringify({
+          Item: {
+            foo: {
+              'BS': [encode(bar), encode(baz), encode(quux)]
+            }
+          }
+        });
+        outputString = '{"Item":{"foo":[{"type":"Buffer","data":[98,97,114]},{"type":"Buffer","data":[98,97,122]},{"type":"Buffer","data":[113,117,117,120]}]}}';
+        if (process.version < 'v0.12' && !isBrowser()) {
+          outputString = '{"Item":{"foo":[[98,97,114],[98,97,122],[113,117,117,120]]}}';
+        }
+        helpers.mockHttpResponse(200, {}, wire);
+        docClient.get({
+          Key: {
+            foo: 1
+          }
+        }, function(err, data) {
+          expect(JSON.stringify(data)).to.eql(outputString);
           done();
         });
       });
@@ -1424,7 +1494,7 @@
 
       it('translates recusive lists', function(done) {
         var buffer, output, wire;
-        buffer = new Buffer('foo');
+        buffer = toBuffer('foo');
         wire = JSON.stringify({
           Item: {
             tags: {
@@ -1624,7 +1694,7 @@
         fill(new Error('error!'), null, true);
         expect(function() {
           response.nextPage();
-        }).to["throw"]('error!');
+        }).to['throw']('error!');
       });
 
       it('sends the request if passed with a callback', function(done) {
@@ -1653,6 +1723,29 @@
           expect(err).to.equal('error!');
           expect(data).to.equal(null);
         });
+      });
+    });
+  });
+
+  describe('validate supported operations', function() {
+    var serviceClientOperationsMap = {
+      batchGet: 'batchGetItem',
+      batchWrite: 'batchWriteItem',
+      delete: 'deleteItem',
+      get: 'getItem',
+      put: 'putItem',
+      query: 'query',
+      scan: 'scan',
+      update: 'updateItem',
+      transactGet: 'transactGetItems',
+      transactWrite: 'transactWriteItems'
+    };
+    var client = new AWS.DynamoDB.DocumentClient({paramValidation: false});
+    AWS.util.arrayEach(Object.keys(serviceClientOperationsMap), function(operation) {
+      var request = client[operation]({});
+      it('operation' + operation + ' is available', function() {
+        request.emit('validate', [request]);
+        expect(request.operation).to.eql(serviceClientOperationsMap[operation]);
       });
     });
   });

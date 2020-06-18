@@ -1,5 +1,5 @@
 # language: en
-@dynamodb @dynamodb-2011-12-05 @crc32
+@dynamodb @crc32
 Feature: CRC32 response validation
 
   Scenario: Retry on corrupted request

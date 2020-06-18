@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "ElasticInference",
+        "description": "This feature allows customers to describe the accelerator types and offerings on any region where Elastic Inference is available."
+    },
+    {
+        "type": "feature",
+        "category": "Iot",
+        "description": "This release adds a new exception type to the AWS IoT SetV2LoggingLevel API."
+    }
+]

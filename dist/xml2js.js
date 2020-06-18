@@ -4891,7 +4891,7 @@ module.exports =
 	/* WEBPACK VAR INJECTION */(function(global) {/*!
 	 * The buffer module from node.js, for the browser.
 	 *
-	 * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+	 * @author   Feross Aboukhadijeh <http://feross.org>
 	 * @license  MIT
 	 */
 	/* eslint-disable no-proto */
@@ -6751,7 +6751,8 @@ module.exports =
 	    ? validLen - 4
 	    : validLen
 
-	  for (var i = 0; i < len; i += 4) {
+	  var i
+	  for (i = 0; i < len; i += 4) {
 	    tmp =
 	      (revLookup[b64.charCodeAt(i)] << 18) |
 	      (revLookup[b64.charCodeAt(i + 1)] << 12) |
@@ -6843,7 +6844,7 @@ module.exports =
 
 	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
 	  var e, m
-	  var eLen = nBytes * 8 - mLen - 1
+	  var eLen = (nBytes * 8) - mLen - 1
 	  var eMax = (1 << eLen) - 1
 	  var eBias = eMax >> 1
 	  var nBits = -7
@@ -6856,12 +6857,12 @@ module.exports =
 	  e = s & ((1 << (-nBits)) - 1)
 	  s >>= (-nBits)
 	  nBits += eLen
-	  for (; nBits > 0; e = e * 256 + buffer[offset + i], i += d, nBits -= 8) {}
+	  for (; nBits > 0; e = (e * 256) + buffer[offset + i], i += d, nBits -= 8) {}
 
 	  m = e & ((1 << (-nBits)) - 1)
 	  e >>= (-nBits)
 	  nBits += mLen
-	  for (; nBits > 0; m = m * 256 + buffer[offset + i], i += d, nBits -= 8) {}
+	  for (; nBits > 0; m = (m * 256) + buffer[offset + i], i += d, nBits -= 8) {}
 
 	  if (e === 0) {
 	    e = 1 - eBias
@@ -6876,7 +6877,7 @@ module.exports =
 
 	exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 	  var e, m, c
-	  var eLen = nBytes * 8 - mLen - 1
+	  var eLen = (nBytes * 8) - mLen - 1
 	  var eMax = (1 << eLen) - 1
 	  var eBias = eMax >> 1
 	  var rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0)
@@ -6909,7 +6910,7 @@ module.exports =
 	      m = 0
 	      e = eMax
 	    } else if (e + eBias >= 1) {
-	      m = (value * c - 1) * Math.pow(2, mLen)
+	      m = ((value * c) - 1) * Math.pow(2, mLen)
 	      e = e + eBias
 	    } else {
 	      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen)
@@ -7386,24 +7387,28 @@ module.exports =
 	if (typeof Object.create === 'function') {
 	  // implementation from standard node.js 'util' module
 	  module.exports = function inherits(ctor, superCtor) {
-	    ctor.super_ = superCtor
-	    ctor.prototype = Object.create(superCtor.prototype, {
-	      constructor: {
-	        value: ctor,
-	        enumerable: false,
-	        writable: true,
-	        configurable: true
-	      }
-	    });
+	    if (superCtor) {
+	      ctor.super_ = superCtor
+	      ctor.prototype = Object.create(superCtor.prototype, {
+	        constructor: {
+	          value: ctor,
+	          enumerable: false,
+	          writable: true,
+	          configurable: true
+	        }
+	      })
+	    }
 	  };
 	} else {
 	  // old school shim for old browsers
 	  module.exports = function inherits(ctor, superCtor) {
-	    ctor.super_ = superCtor
-	    var TempCtor = function () {}
-	    TempCtor.prototype = superCtor.prototype
-	    ctor.prototype = new TempCtor()
-	    ctor.prototype.constructor = ctor
+	    if (superCtor) {
+	      ctor.super_ = superCtor
+	      var TempCtor = function () {}
+	      TempCtor.prototype = superCtor.prototype
+	      ctor.prototype = new TempCtor()
+	      ctor.prototype.constructor = ctor
+	    }
 	  }
 	}
 
@@ -7491,7 +7496,7 @@ module.exports =
 	/*</replacement>*/
 
 	/*<replacement>*/
-	var util = __webpack_require__(41);
+	var util = Object.create(__webpack_require__(41));
 	util.inherits = __webpack_require__(34);
 	/*</replacement>*/
 
@@ -8642,7 +8647,8 @@ module.exports =
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
-	if (!process.version ||
+	if (typeof process === 'undefined' ||
+	    !process.version ||
 	    process.version.indexOf('v0.') === 0 ||
 	    process.version.indexOf('v1.') === 0 && process.version.indexOf('v1.8.') !== 0) {
 	  module.exports = { nextTick: nextTick };
@@ -9100,7 +9106,7 @@ module.exports =
 	module.exports = Duplex;
 
 	/*<replacement>*/
-	var util = __webpack_require__(41);
+	var util = Object.create(__webpack_require__(41));
 	util.inherits = __webpack_require__(34);
 	/*</replacement>*/
 
@@ -9257,7 +9263,7 @@ module.exports =
 	Writable.WritableState = WritableState;
 
 	/*<replacement>*/
-	var util = __webpack_require__(41);
+	var util = Object.create(__webpack_require__(41));
 	util.inherits = __webpack_require__(34);
 	/*</replacement>*/
 
@@ -10592,7 +10598,7 @@ module.exports =
 	var Duplex = __webpack_require__(46);
 
 	/*<replacement>*/
-	var util = __webpack_require__(41);
+	var util = Object.create(__webpack_require__(41));
 	util.inherits = __webpack_require__(34);
 	/*</replacement>*/
 
@@ -10773,7 +10779,7 @@ module.exports =
 	var Transform = __webpack_require__(52);
 
 	/*<replacement>*/
-	var util = __webpack_require__(41);
+	var util = Object.create(__webpack_require__(41));
 	util.inherits = __webpack_require__(34);
 	/*</replacement>*/
 

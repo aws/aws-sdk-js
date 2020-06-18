@@ -20,6 +20,14 @@ declare class MediaPackage extends Service {
    */
   createChannel(callback?: (err: AWSError, data: MediaPackage.Types.CreateChannelResponse) => void): Request<MediaPackage.Types.CreateChannelResponse, AWSError>;
   /**
+   * Creates a new HarvestJob record.
+   */
+  createHarvestJob(params: MediaPackage.Types.CreateHarvestJobRequest, callback?: (err: AWSError, data: MediaPackage.Types.CreateHarvestJobResponse) => void): Request<MediaPackage.Types.CreateHarvestJobResponse, AWSError>;
+  /**
+   * Creates a new HarvestJob record.
+   */
+  createHarvestJob(callback?: (err: AWSError, data: MediaPackage.Types.CreateHarvestJobResponse) => void): Request<MediaPackage.Types.CreateHarvestJobResponse, AWSError>;
+  /**
    * Creates a new OriginEndpoint record.
    */
   createOriginEndpoint(params: MediaPackage.Types.CreateOriginEndpointRequest, callback?: (err: AWSError, data: MediaPackage.Types.CreateOriginEndpointResponse) => void): Request<MediaPackage.Types.CreateOriginEndpointResponse, AWSError>;
@@ -52,6 +60,14 @@ declare class MediaPackage extends Service {
    */
   describeChannel(callback?: (err: AWSError, data: MediaPackage.Types.DescribeChannelResponse) => void): Request<MediaPackage.Types.DescribeChannelResponse, AWSError>;
   /**
+   * Gets details about an existing HarvestJob.
+   */
+  describeHarvestJob(params: MediaPackage.Types.DescribeHarvestJobRequest, callback?: (err: AWSError, data: MediaPackage.Types.DescribeHarvestJobResponse) => void): Request<MediaPackage.Types.DescribeHarvestJobResponse, AWSError>;
+  /**
+   * Gets details about an existing HarvestJob.
+   */
+  describeHarvestJob(callback?: (err: AWSError, data: MediaPackage.Types.DescribeHarvestJobResponse) => void): Request<MediaPackage.Types.DescribeHarvestJobResponse, AWSError>;
+  /**
    * Gets details about an existing OriginEndpoint.
    */
   describeOriginEndpoint(params: MediaPackage.Types.DescribeOriginEndpointRequest, callback?: (err: AWSError, data: MediaPackage.Types.DescribeOriginEndpointResponse) => void): Request<MediaPackage.Types.DescribeOriginEndpointResponse, AWSError>;
@@ -68,6 +84,14 @@ declare class MediaPackage extends Service {
    */
   listChannels(callback?: (err: AWSError, data: MediaPackage.Types.ListChannelsResponse) => void): Request<MediaPackage.Types.ListChannelsResponse, AWSError>;
   /**
+   * Returns a collection of HarvestJob records.
+   */
+  listHarvestJobs(params: MediaPackage.Types.ListHarvestJobsRequest, callback?: (err: AWSError, data: MediaPackage.Types.ListHarvestJobsResponse) => void): Request<MediaPackage.Types.ListHarvestJobsResponse, AWSError>;
+  /**
+   * Returns a collection of HarvestJob records.
+   */
+  listHarvestJobs(callback?: (err: AWSError, data: MediaPackage.Types.ListHarvestJobsResponse) => void): Request<MediaPackage.Types.ListHarvestJobsResponse, AWSError>;
+  /**
    * Returns a collection of OriginEndpoint records.
    */
   listOriginEndpoints(params: MediaPackage.Types.ListOriginEndpointsRequest, callback?: (err: AWSError, data: MediaPackage.Types.ListOriginEndpointsResponse) => void): Request<MediaPackage.Types.ListOriginEndpointsResponse, AWSError>;
@@ -76,13 +100,45 @@ declare class MediaPackage extends Service {
    */
   listOriginEndpoints(callback?: (err: AWSError, data: MediaPackage.Types.ListOriginEndpointsResponse) => void): Request<MediaPackage.Types.ListOriginEndpointsResponse, AWSError>;
   /**
-   * Changes the Channel ingest username and password.
+   * 
+   */
+  listTagsForResource(params: MediaPackage.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: MediaPackage.Types.ListTagsForResourceResponse) => void): Request<MediaPackage.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * 
+   */
+  listTagsForResource(callback?: (err: AWSError, data: MediaPackage.Types.ListTagsForResourceResponse) => void): Request<MediaPackage.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Changes the Channel's first IngestEndpoint's username and password. WARNING - This API is deprecated. Please use RotateIngestEndpointCredentials instead
    */
   rotateChannelCredentials(params: MediaPackage.Types.RotateChannelCredentialsRequest, callback?: (err: AWSError, data: MediaPackage.Types.RotateChannelCredentialsResponse) => void): Request<MediaPackage.Types.RotateChannelCredentialsResponse, AWSError>;
   /**
-   * Changes the Channel ingest username and password.
+   * Changes the Channel's first IngestEndpoint's username and password. WARNING - This API is deprecated. Please use RotateIngestEndpointCredentials instead
    */
   rotateChannelCredentials(callback?: (err: AWSError, data: MediaPackage.Types.RotateChannelCredentialsResponse) => void): Request<MediaPackage.Types.RotateChannelCredentialsResponse, AWSError>;
+  /**
+   * Rotate the IngestEndpoint's username and password, as specified by the IngestEndpoint's id.
+   */
+  rotateIngestEndpointCredentials(params: MediaPackage.Types.RotateIngestEndpointCredentialsRequest, callback?: (err: AWSError, data: MediaPackage.Types.RotateIngestEndpointCredentialsResponse) => void): Request<MediaPackage.Types.RotateIngestEndpointCredentialsResponse, AWSError>;
+  /**
+   * Rotate the IngestEndpoint's username and password, as specified by the IngestEndpoint's id.
+   */
+  rotateIngestEndpointCredentials(callback?: (err: AWSError, data: MediaPackage.Types.RotateIngestEndpointCredentialsResponse) => void): Request<MediaPackage.Types.RotateIngestEndpointCredentialsResponse, AWSError>;
+  /**
+   * 
+   */
+  tagResource(params: MediaPackage.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  untagResource(params: MediaPackage.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates an existing Channel.
    */
@@ -102,6 +158,20 @@ declare class MediaPackage extends Service {
 }
 declare namespace MediaPackage {
   export type AdMarkers = "NONE"|"SCTE35_ENHANCED"|"PASSTHROUGH"|string;
+  export type AdTriggers = __AdTriggersElement[];
+  export type AdsOnDeliveryRestrictions = "NONE"|"RESTRICTED"|"UNRESTRICTED"|"BOTH"|string;
+  export interface Authorization {
+    /**
+     * The Amazon Resource Name (ARN) for the secret in Secrets Manager that your Content Distribution Network (CDN) uses for authorization to access your endpoint.
+
+     */
+    CdnIdentifierSecret: __string;
+    /**
+     * The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.
+
+     */
+    SecretsRoleArn: __string;
+  }
   export interface Channel {
     /**
      * The Amazon Resource Name (ARN) assigned to the Channel.
@@ -116,6 +186,7 @@ declare namespace MediaPackage {
      * The ID of the Channel.
      */
     Id?: __string;
+    Tags?: Tags;
   }
   export interface CmafEncryption {
     /**
@@ -171,6 +242,7 @@ cannot be changed after a Channel is created.
 
      */
     Id: __string;
+    Tags?: Tags;
   }
   export interface CreateChannelResponse {
     /**
@@ -186,8 +258,82 @@ cannot be changed after a Channel is created.
      * The ID of the Channel.
      */
     Id?: __string;
+    Tags?: Tags;
+  }
+  export interface CreateHarvestJobRequest {
+    /**
+     * The end of the time-window which will be harvested
+
+     */
+    EndTime: __string;
+    /**
+     * The ID of the HarvestJob. The ID must be unique within the region
+and it cannot be changed after the HarvestJob is submitted
+
+     */
+    Id: __string;
+    /**
+     * The ID of the OriginEndpoint that the HarvestJob will harvest from.
+This cannot be changed after the HarvestJob is submitted.
+
+     */
+    OriginEndpointId: __string;
+    S3Destination: S3Destination;
+    /**
+     * The start of the time-window which will be harvested
+
+     */
+    StartTime: __string;
+  }
+  export interface CreateHarvestJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) assigned to the HarvestJob.
+
+     */
+    Arn?: __string;
+    /**
+     * The ID of the Channel that the HarvestJob will harvest from.
+
+     */
+    ChannelId?: __string;
+    /**
+     * The time the HarvestJob was submitted
+
+     */
+    CreatedAt?: __string;
+    /**
+     * The end of the time-window which will be harvested.
+
+     */
+    EndTime?: __string;
+    /**
+     * The ID of the HarvestJob. The ID must be unique within the region
+and it cannot be changed after the HarvestJob is submitted.
+
+     */
+    Id?: __string;
+    /**
+     * The ID of the OriginEndpoint that the HarvestJob will harvest from.
+This cannot be changed after the HarvestJob is submitted.
+
+     */
+    OriginEndpointId?: __string;
+    S3Destination?: S3Destination;
+    /**
+     * The start of the time-window which will be harvested.
+
+     */
+    StartTime?: __string;
+    /**
+     * The current status of the HarvestJob. Consider setting up a CloudWatch Event to listen for
+HarvestJobs as they succeed or fail. In the event of failure, the CloudWatch Event will
+include an explanation of why the HarvestJob failed.
+
+     */
+    Status?: Status;
   }
   export interface CreateOriginEndpointRequest {
+    Authorization?: Authorization;
     /**
      * The ID of the Channel that the OriginEndpoint will be associated with.
 This cannot be changed after the OriginEndpoint is created.
@@ -213,11 +359,19 @@ and it cannot be changed after the OriginEndpoint is created.
     ManifestName?: __string;
     MssPackage?: MssPackage;
     /**
+     * Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint
+may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be
+requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+
+     */
+    Origination?: Origination;
+    /**
      * Maximum duration (seconds) of content to retain for startover playback.
 If not specified, startover playback will be disabled for the OriginEndpoint.
 
      */
     StartoverWindowSeconds?: __integer;
+    Tags?: Tags;
     /**
      * Amount of delay (seconds) to enforce on the playback of live content.
 If not specified, there will be no time delay in effect for the OriginEndpoint.
@@ -234,6 +388,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      * The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
      */
     Arn?: __string;
+    Authorization?: Authorization;
     /**
      * The ID of the Channel the OriginEndpoint is associated with.
      */
@@ -255,11 +410,19 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
     ManifestName?: __string;
     MssPackage?: MssPackage;
     /**
+     * Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint
+may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be
+requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+
+     */
+    Origination?: Origination;
+    /**
      * Maximum duration (seconds) of content to retain for startover playback.
 If not specified, startover playback will be disabled for the OriginEndpoint.
 
      */
     StartoverWindowSeconds?: __integer;
+    Tags?: Tags;
     /**
      * Amount of delay (seconds) to enforce on the playback of live content.
 If not specified, there will be no time delay in effect for the OriginEndpoint.
@@ -283,7 +446,13 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
     SpekeKeyProvider: SpekeKeyProvider;
   }
   export interface DashPackage {
+    AdTriggers?: AdTriggers;
+    AdsOnDeliveryRestrictions?: AdsOnDeliveryRestrictions;
     Encryption?: DashEncryption;
+    /**
+     * Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.
+     */
+    ManifestLayout?: ManifestLayout;
     /**
      * Time window (in seconds) contained in each manifest.
      */
@@ -314,6 +483,10 @@ rounded to the nearest multiple of the source segment duration.
 
      */
     SegmentDurationSeconds?: __integer;
+    /**
+     * Determines the type of SegmentTemplate included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.
+     */
+    SegmentTemplateFormat?: SegmentTemplateFormat;
     StreamSelection?: StreamSelection;
     /**
      * Duration (in seconds) to delay live content before presentation.
@@ -356,6 +529,60 @@ rounded to the nearest multiple of the source segment duration.
      * The ID of the Channel.
      */
     Id?: __string;
+    Tags?: Tags;
+  }
+  export interface DescribeHarvestJobRequest {
+    /**
+     * The ID of the HarvestJob.
+     */
+    Id: __string;
+  }
+  export interface DescribeHarvestJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) assigned to the HarvestJob.
+
+     */
+    Arn?: __string;
+    /**
+     * The ID of the Channel that the HarvestJob will harvest from.
+
+     */
+    ChannelId?: __string;
+    /**
+     * The time the HarvestJob was submitted
+
+     */
+    CreatedAt?: __string;
+    /**
+     * The end of the time-window which will be harvested.
+
+     */
+    EndTime?: __string;
+    /**
+     * The ID of the HarvestJob. The ID must be unique within the region
+and it cannot be changed after the HarvestJob is submitted.
+
+     */
+    Id?: __string;
+    /**
+     * The ID of the OriginEndpoint that the HarvestJob will harvest from.
+This cannot be changed after the HarvestJob is submitted.
+
+     */
+    OriginEndpointId?: __string;
+    S3Destination?: S3Destination;
+    /**
+     * The start of the time-window which will be harvested.
+
+     */
+    StartTime?: __string;
+    /**
+     * The current status of the HarvestJob. Consider setting up a CloudWatch Event to listen for
+HarvestJobs as they succeed or fail. In the event of failure, the CloudWatch Event will
+include an explanation of why the HarvestJob failed.
+
+     */
+    Status?: Status;
   }
   export interface DescribeOriginEndpointRequest {
     /**
@@ -368,6 +595,7 @@ rounded to the nearest multiple of the source segment duration.
      * The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
      */
     Arn?: __string;
+    Authorization?: Authorization;
     /**
      * The ID of the Channel the OriginEndpoint is associated with.
      */
@@ -389,11 +617,19 @@ rounded to the nearest multiple of the source segment duration.
     ManifestName?: __string;
     MssPackage?: MssPackage;
     /**
+     * Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint
+may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be
+requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+
+     */
+    Origination?: Origination;
+    /**
      * Maximum duration (seconds) of content to retain for startover playback.
 If not specified, startover playback will be disabled for the OriginEndpoint.
 
      */
     StartoverWindowSeconds?: __integer;
+    Tags?: Tags;
     /**
      * Amount of delay (seconds) to enforce on the playback of live content.
 If not specified, there will be no time delay in effect for the OriginEndpoint.
@@ -410,6 +646,53 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
     Whitelist?: __listOf__string;
   }
   export type EncryptionMethod = "AES_128"|"SAMPLE_AES"|string;
+  export interface HarvestJob {
+    /**
+     * The Amazon Resource Name (ARN) assigned to the HarvestJob.
+
+     */
+    Arn?: __string;
+    /**
+     * The ID of the Channel that the HarvestJob will harvest from.
+
+     */
+    ChannelId?: __string;
+    /**
+     * The time the HarvestJob was submitted
+
+     */
+    CreatedAt?: __string;
+    /**
+     * The end of the time-window which will be harvested.
+
+     */
+    EndTime?: __string;
+    /**
+     * The ID of the HarvestJob. The ID must be unique within the region
+and it cannot be changed after the HarvestJob is submitted.
+
+     */
+    Id?: __string;
+    /**
+     * The ID of the OriginEndpoint that the HarvestJob will harvest from.
+This cannot be changed after the HarvestJob is submitted.
+
+     */
+    OriginEndpointId?: __string;
+    S3Destination?: S3Destination;
+    /**
+     * The start of the time-window which will be harvested.
+
+     */
+    StartTime?: __string;
+    /**
+     * The current status of the HarvestJob. Consider setting up a CloudWatch Event to listen for
+HarvestJobs as they succeed or fail. In the event of failure, the CloudWatch Event will
+include an explanation of why the HarvestJob failed.
+
+     */
+    Status?: Status;
+  }
   export interface HlsEncryption {
     /**
      * A constant initialization vector for encryption (optional).
@@ -500,6 +783,8 @@ messages in the input source.
 
      */
     AdMarkers?: AdMarkers;
+    AdTriggers?: AdTriggers;
+    AdsOnDeliveryRestrictions?: AdsOnDeliveryRestrictions;
     /**
      * The ID of the manifest. The ID must be unique within the OriginEndpoint and it cannot be changed after it is created.
      */
@@ -548,6 +833,8 @@ messages in the input source.
 
      */
     AdMarkers?: AdMarkers;
+    AdTriggers?: AdTriggers;
+    AdsOnDeliveryRestrictions?: AdsOnDeliveryRestrictions;
     Encryption?: HlsEncryption;
     /**
      * When enabled, an I-Frame only stream will be included in the output.
@@ -591,6 +878,10 @@ rounded to the nearest multiple of the source fragment duration.
   }
   export interface IngestEndpoint {
     /**
+     * The system generated unique identifier for the IngestEndpoint
+     */
+    Id?: __string;
+    /**
      * The system generated password for ingest authentication.
      */
     Password?: __string;
@@ -623,6 +914,34 @@ rounded to the nearest multiple of the source fragment duration.
      */
     NextToken?: __string;
   }
+  export interface ListHarvestJobsRequest {
+    /**
+     * When specified, the request will return only HarvestJobs associated with the given Channel ID.
+     */
+    IncludeChannelId?: __string;
+    /**
+     * When specified, the request will return only HarvestJobs in the given status.
+     */
+    IncludeStatus?: __string;
+    /**
+     * The upper bound on the number of records to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * A token used to resume pagination from the end of a previous request.
+     */
+    NextToken?: __string;
+  }
+  export interface ListHarvestJobsResponse {
+    /**
+     * A list of HarvestJob records.
+     */
+    HarvestJobs?: __listOfHarvestJob;
+    /**
+     * A token that can be used to resume pagination from the end of the collection.
+     */
+    NextToken?: __string;
+  }
   export interface ListOriginEndpointsRequest {
     /**
      * When specified, the request will return only OriginEndpoints associated with the given Channel ID.
@@ -647,6 +966,13 @@ rounded to the nearest multiple of the source fragment duration.
      */
     OriginEndpoints?: __listOfOriginEndpoint;
   }
+  export interface ListTagsForResourceRequest {
+    ResourceArn: __string;
+  }
+  export interface ListTagsForResourceResponse {
+    Tags?: __mapOf__string;
+  }
+  export type ManifestLayout = "FULL"|"COMPACT"|string;
   export type MaxResults = number;
   export interface MssEncryption {
     SpekeKeyProvider: SpekeKeyProvider;
@@ -668,6 +994,7 @@ rounded to the nearest multiple of the source fragment duration.
      * The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
      */
     Arn?: __string;
+    Authorization?: Authorization;
     /**
      * The ID of the Channel the OriginEndpoint is associated with.
      */
@@ -689,11 +1016,19 @@ rounded to the nearest multiple of the source fragment duration.
     ManifestName?: __string;
     MssPackage?: MssPackage;
     /**
+     * Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint
+may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be
+requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+
+     */
+    Origination?: Origination;
+    /**
      * Maximum duration (seconds) of content to retain for startover playback.
 If not specified, startover playback will be disabled for the OriginEndpoint.
 
      */
     StartoverWindowSeconds?: __integer;
+    Tags?: Tags;
     /**
      * Amount of delay (seconds) to enforce on the playback of live content.
 If not specified, there will be no time delay in effect for the OriginEndpoint.
@@ -709,6 +1044,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     Whitelist?: __listOf__string;
   }
+  export type Origination = "ALLOW"|"DENY"|string;
   export type PlaylistType = "NONE"|"EVENT"|"VOD"|string;
   export type Profile = "NONE"|"HBBTV_1_5"|string;
   export interface RotateChannelCredentialsRequest {
@@ -731,8 +1067,60 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      * The ID of the Channel.
      */
     Id?: __string;
+    Tags?: Tags;
   }
+  export interface RotateIngestEndpointCredentialsRequest {
+    /**
+     * The ID of the channel the IngestEndpoint is on.
+     */
+    Id: __string;
+    /**
+     * The id of the IngestEndpoint whose credentials should be rotated
+     */
+    IngestEndpointId: __string;
+  }
+  export interface RotateIngestEndpointCredentialsResponse {
+    /**
+     * The Amazon Resource Name (ARN) assigned to the Channel.
+     */
+    Arn?: __string;
+    /**
+     * A short text description of the Channel.
+     */
+    Description?: __string;
+    HlsIngest?: HlsIngest;
+    /**
+     * The ID of the Channel.
+     */
+    Id?: __string;
+    Tags?: Tags;
+  }
+  export interface S3Destination {
+    /**
+     * The name of an S3 bucket within which harvested content will be exported
+
+     */
+    BucketName: __string;
+    /**
+     * The key in the specified S3 bucket where the harvested top-level manifest will be placed.
+
+     */
+    ManifestKey: __string;
+    /**
+     * The IAM role used to write to the specified S3 bucket
+
+     */
+    RoleArn: __string;
+  }
+  export type SegmentTemplateFormat = "NUMBER_WITH_TIMELINE"|"TIME_WITH_TIMELINE"|"NUMBER_WITH_DURATION"|string;
   export interface SpekeKeyProvider {
+    /**
+     * An Amazon Resource Name (ARN) of a Certificate Manager certificate
+that MediaPackage will use for enforcing secure end-to-end data
+transfer with the key provider service.
+
+     */
+    CertificateArn?: __string;
     /**
      * The resource ID to include in key requests.
      */
@@ -752,6 +1140,7 @@ MediaPackage will assume when accessing the key provider service.
      */
     Url: __string;
   }
+  export type Status = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string;
   export type StreamOrder = "ORIGINAL"|"VIDEO_BITRATE_ASCENDING"|"VIDEO_BITRATE_DESCENDING"|string;
   export interface StreamSelection {
     /**
@@ -766,6 +1155,18 @@ MediaPackage will assume when accessing the key provider service.
      * A directive that determines the order of streams in the output.
      */
     StreamOrder?: StreamOrder;
+  }
+  export interface TagResourceRequest {
+    ResourceArn: __string;
+    Tags: __mapOf__string;
+  }
+  export type Tags = {[key: string]: __string};
+  export interface UntagResourceRequest {
+    ResourceArn: __string;
+    /**
+     * The key(s) of tag to be deleted
+     */
+    TagKeys: __listOf__string;
   }
   export interface UpdateChannelRequest {
     /**
@@ -791,8 +1192,10 @@ MediaPackage will assume when accessing the key provider service.
      * The ID of the Channel.
      */
     Id?: __string;
+    Tags?: Tags;
   }
   export interface UpdateOriginEndpointRequest {
+    Authorization?: Authorization;
     CmafPackage?: CmafPackageCreateOrUpdateParameters;
     DashPackage?: DashPackage;
     /**
@@ -809,6 +1212,13 @@ MediaPackage will assume when accessing the key provider service.
      */
     ManifestName?: __string;
     MssPackage?: MssPackage;
+    /**
+     * Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint
+may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be
+requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+
+     */
+    Origination?: Origination;
     /**
      * Maximum duration (in seconds) of content to retain for startover playback.
 If not specified, startover playback will be disabled for the OriginEndpoint.
@@ -831,6 +1241,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      * The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
      */
     Arn?: __string;
+    Authorization?: Authorization;
     /**
      * The ID of the Channel the OriginEndpoint is associated with.
      */
@@ -852,11 +1263,19 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
     ManifestName?: __string;
     MssPackage?: MssPackage;
     /**
+     * Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint
+may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be
+requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination
+
+     */
+    Origination?: Origination;
+    /**
      * Maximum duration (seconds) of content to retain for startover playback.
 If not specified, startover playback will be disabled for the OriginEndpoint.
 
      */
     StartoverWindowSeconds?: __integer;
+    Tags?: Tags;
     /**
      * Amount of delay (seconds) to enforce on the playback of live content.
 If not specified, there will be no time delay in effect for the OriginEndpoint.
@@ -872,16 +1291,19 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     Whitelist?: __listOf__string;
   }
+  export type __AdTriggersElement = "SPLICE_INSERT"|"BREAK"|"PROVIDER_ADVERTISEMENT"|"DISTRIBUTOR_ADVERTISEMENT"|"PROVIDER_PLACEMENT_OPPORTUNITY"|"DISTRIBUTOR_PLACEMENT_OPPORTUNITY"|"PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY"|"DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"|string;
   export type __PeriodTriggersElement = "ADS"|string;
   export type __boolean = boolean;
   export type __integer = number;
   export type __listOfChannel = Channel[];
+  export type __listOfHarvestJob = HarvestJob[];
   export type __listOfHlsManifest = HlsManifest[];
   export type __listOfHlsManifestCreateOrUpdateParameters = HlsManifestCreateOrUpdateParameters[];
   export type __listOfIngestEndpoint = IngestEndpoint[];
   export type __listOfOriginEndpoint = OriginEndpoint[];
   export type __listOf__PeriodTriggersElement = __PeriodTriggersElement[];
   export type __listOf__string = __string[];
+  export type __mapOf__string = {[key: string]: __string};
   export type __string = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

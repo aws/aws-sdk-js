@@ -224,7 +224,7 @@
               }
             }
           });
-          xml = "<Config xmlns=\"http://mockservice.com/xmlns\">\n  <Abc>abc</Abc>\n  <Locations>\n    <Location>a</Location>\n    <Location>b</Location>\n    <Location>c</Location>\n  </Locations>\n  <Data>\n    <member>\n      <Foo>foo1</Foo>\n      <Bar>bar1</Bar>\n    </member>\n    <member>\n      <Foo>foo2</Foo>\n      <Bar>bar2</Bar>\n    </member>\n  </Data>\n</Config>";
+          xml = '<Config xmlns="http://mockservice.com/xmlns">\n  <Abc>abc</Abc>\n  <Locations>\n    <Location>a</Location>\n    <Location>b</Location>\n    <Location>c</Location>\n  </Locations>\n  <Data>\n    <member>\n      <Foo>foo1</Foo>\n      <Bar>bar1</Bar>\n    </member>\n    <member>\n      <Foo>foo2</Foo>\n      <Bar>bar2</Bar>\n    </member>\n  </Data>\n</Config>';
           build();
           expect(request.httpRequest.method).to.equal('POST');
           expect(request.httpRequest.path).to.equal('/bucket-name?limit=123&next-marker=marker');
@@ -281,18 +281,18 @@
             }
           }
         });
-        return helpers.matchXML(build().httpRequest.body, "<RootElement xmlns=\"http://mockservice.com/xmlns\">\n  <Member1>member1</Member1>\n  <Member2>member2</Member2>\n</RootElement>");
+        return helpers.matchXML(build().httpRequest.body, '<RootElement xmlns="http://mockservice.com/xmlns">\n  <Member1>member1</Member1>\n  <Member2>member2</Member2>\n</RootElement>');
       });
     });
     describe('extractError', function() {
       var extractError;
       extractError = function(body) {
         if (body === void 0) {
-          body = "<Error>\n  <Code>InvalidArgument</Code>\n  <Message>Provided param is bad</Message>\n</Error>";
+          body = '<Error>\n  <Code>InvalidArgument</Code>\n  <Message>Provided param is bad</Message>\n</Error>';
         }
         response.httpResponse.statusCode = 400;
         response.httpResponse.statusMessage = 'Bad Request';
-        response.httpResponse.body = new Buffer(body);
+        response.httpResponse.body = AWS.util.buffer.toBuffer(body);
         return svc.extractError(response);
       };
       it('extracts the error code and message', function() {
@@ -311,8 +311,8 @@
       });
       it('returns an empty error when the body cannot be parsed', function() {
         extractError(JSON.stringify({
-          "foo": "bar",
-          "fizz": ["buzz", "pop"]
+          'foo': 'bar',
+          'fizz': ['buzz', 'pop']
         }));
         expect(response.error).to.be.instanceOf(Error);
         expect(response.error.code).to.equal(400);
@@ -320,12 +320,12 @@
         return expect(response.data).to.equal(null);
       });
       it('extracts error when inside <Errors>', function() {
-        extractError("<SomeResponse>\n  <Errors>\n    <Error>\n      <Code>code</Code><Message>msg</Message>\n    </Error>\n  </Errors>\n</SomeResponse>");
+        extractError('<SomeResponse>\n  <Errors>\n    <Error>\n      <Code>code</Code><Message>msg</Message>\n    </Error>\n  </Errors>\n</SomeResponse>');
         expect(response.error.code).to.equal('code');
         return expect(response.error.message).to.equal('msg');
       });
       return it('extracts error when <Error> is nested', function() {
-        extractError("<SomeResponse>\n  <Error>\n    <Code>code</Code><Message>msg</Message>\n  </Error>\n</SomeResponse>");
+        extractError('<SomeResponse>\n  <Error>\n    <Code>code</Code><Message>msg</Message>\n  </Error>\n</SomeResponse>');
         expect(response.error.code).to.equal('code');
         return expect(response.error.message).to.equal('msg');
       });
@@ -334,7 +334,7 @@
       var extractData;
       extractData = function(body) {
         response.httpResponse.statusCode = 200;
-        response.httpResponse.body = new Buffer(body);
+        response.httpResponse.body = AWS.util.buffer.toBuffer(body);
         return svc.extractData(response);
       };
       it('parses the xml body', function() {
@@ -352,7 +352,7 @@
             }
           }
         });
-        extractData("<xml>\n  <Foo>foo</Foo>\n  <Bar>\n    <Item>a</Item>\n    <Item>b</Item>\n    <Item>c</Item>\n  </Bar>\n</xml>");
+        extractData('<xml>\n  <Foo>foo</Foo>\n  <Bar>\n    <Item>a</Item>\n    <Item>b</Item>\n    <Item>c</Item>\n  </Bar>\n</xml>');
         return expect(response.data).to.eql({
           Foo: 'foo',
           Bar: ['a', 'b', 'c']

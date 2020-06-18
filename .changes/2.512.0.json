@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "ECS",
+        "description": "This release of Amazon Elastic Container Service (Amazon ECS) introduces support for controlling the usage of swap space on a per-container basis for Linux containers."
+    },
+    {
+        "type": "feature",
+        "category": "EMR",
+        "description": "Amazon EMR  has introduced an account level configuration called Block Public Access that allows you to block clusters with ports open to traffic from public IP sources (i.e. 0.0.0.0/0 for IPv4 and ::/0 for IPv6) from launching.  Individual ports or port ranges can be added as exceptions to allow public access."
+    },
+    {
+        "type": "feature",
+        "category": "RoboMaker",
+        "description": "Two feature release: 1. AWS RoboMaker introduces log-based simulation. Log-based simulation allows you to play back pre-recorded log data such as sensor streams for testing robotic functions like localization, mapping, and object detection. Use the AWS RoboMaker SDK to test your robotic applications.  2.  AWS RoboMaker allow customer to setup a robot deployment timeout when CreateDeploymentJob."
+    }
+]

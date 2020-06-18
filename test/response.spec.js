@@ -15,6 +15,9 @@
     beforeEach(function() {
       service = new AWS.Service({
         apiConfig: new AWS.Model.Api({
+          metadata: {
+            signingName: 'ocean-wave'
+          },
           operations: {
             op: {}
           }
@@ -95,7 +98,7 @@
         service.api.pagination = {};
         return expect(function() {
           return response.nextPage();
-        }).to["throw"]('No pagination configuration for op');
+        }).to['throw']('No pagination configuration for op');
       });
       it('returns null if there are no more pages', function() {
         fill(null, {}, true);
@@ -114,7 +117,7 @@
         fill(new Error('error!'), null, true);
         return expect(function() {
           return response.nextPage();
-        }).to["throw"]('error!');
+        }).to['throw']('error!');
       });
       it('sends the request if passed with a callback', function(done) {
         helpers.mockHttpResponse(200, {}, ['']);

@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "KMS",
+        "description": "The ConnectCustomKeyStore API now provides a new error code (SUBNET_NOT_FOUND) for customers to better troubleshoot if their \"connect-custom-key-store\" operation fails."
+    }
+]

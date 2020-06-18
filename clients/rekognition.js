@@ -9,6 +9,7 @@ Object.defineProperty(apiLoader.services['rekognition'], '2016-06-27', {
   get: function get() {
     var model = require('../apis/rekognition-2016-06-27.min.json');
     model.paginators = require('../apis/rekognition-2016-06-27.paginators.json').pagination;
+    model.waiters = require('../apis/rekognition-2016-06-27.waiters2.json').waiters;
     return model;
   },
   enumerable: true,

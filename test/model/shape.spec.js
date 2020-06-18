@@ -51,6 +51,31 @@
         return expect(shape.members.body.isStreaming).to.eql(true);
       });
     });
+
+    if (AWS.util.isNode() && AWS.util.Buffer.alloc) {
+      describe('Sensitive binary data', function() {
+        it('should not use Buffer.from() for decoding sensitive data', function() {
+          var binaryTypes = ['blob', 'binary', 'base64'];
+          for (var i = 0; i < binaryTypes.length; i++) {
+              api = new AWS.Model.Api({
+                shapes: {
+                  S2: {
+                    'type': binaryTypes[i],
+                    'sensitive': true
+                  }
+                }
+              });
+              var buf = api.shapes.S2.toType([0x11, 0x12]);
+              // The shared buffer space in NodeJS. Response sensitive data should not lay in here
+              // see: https://nodejs.org/docs/latest/api/buffer.html#buffer_buffer_from_buffer_alloc_and_buffer_allocunsafe
+              var bufferSpace = new Uint8Array(AWS.util.Buffer.from('foo').buffer);
+              expect(bufferSpace[buf.byteOffset]).to.not.eql(0x11);
+              expect(bufferSpace[buf.byteOffset+1]).to.not.eql(0x12);
+          };
+        });
+      });
+    }
+
     return describe('TimestampShape', function() {
       describe('timestampFormat', function() {
         it('can be inherited', function() {
@@ -234,7 +259,7 @@
           expect(shape.members.Date.timestampFormat).to.eql('iso8601');
         });
       });
-      
+
       describe('toType()', function() {
         it('converts unix timestamps', function() {
           var api, date, shape;

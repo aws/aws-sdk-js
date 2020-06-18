@@ -337,7 +337,7 @@ describe('AWS.DynamoDB.Converter', function() {
 
     it('should respect the `convertEmptyValues` option', function() {
       var marshalled = AWS.DynamoDB.Converter.marshall(
-        {string: '', buffer: new AWS.util.Buffer(0)},
+        {string: '', buffer: AWS.util.buffer.alloc(0)},
         {convertEmptyValues: true}
       );
 
@@ -537,6 +537,6 @@ describe('AWS.DynamoDB.Converter', function() {
 
         expect(unmarshalled.map.nestedMap.numberKey.toString())
             .to.equal('9007199254740991000');
-    })
+    });
   });
 });

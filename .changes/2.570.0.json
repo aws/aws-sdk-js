@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "CodePipeline",
+        "description": "AWS CodePipeline now supports the use of variables in action configuration."
+    },
+    {
+        "type": "feature",
+        "category": "DynamoDB",
+        "description": "Amazon DynamoDB enables you to restore your data to a new DynamoDB table using a point-in-time or on-demand backup. You now can modify the settings on the new restored table. Specifically, you can exclude some or all of the local and global secondary indexes from being created with the restored table. In addition, you can change the billing mode and provisioned capacity settings."
+    },
+    {
+        "type": "feature",
+        "category": "MarketplaceCatalog",
+        "description": "This is the first release for the AWS Marketplace Catalog service which allows you to list, describe and manage change requests on your published entities on AWS Marketplace. "
+    },
+    {
+        "type": "feature",
+        "category": "TranscribeService",
+        "description": "With this release, Amazon Transcribe now supports transcriptions from audio sources in Welsh English (en-WL), Scottish English(en-AB), Irish English(en-IE), Farsi(fa-IR), Tamil(ta-IN), Indonesian(id-ID), Portuguese (pt-PT), Dutch(nl-NL)."
+    }
+]

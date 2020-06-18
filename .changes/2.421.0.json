@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "ConfigService",
+        "description": "Config released Remediation APIs allowing Remediation of Config Rules"
+    }
+]

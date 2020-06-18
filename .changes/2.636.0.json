@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "DMS",
+        "description": "Added new settings for Kinesis target to include detailed transaction info; to capture table DDL details; to use single-line unformatted json, which can be directly queried by AWS Athena if data is streamed into S3 through AWS Kinesis Firehose. Added CdcInsertsAndUpdates in S3 target settings to allow capture ongoing insertions and updates only."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Amazon Virtual Private Cloud (VPC) NAT Gateway adds support for tagging on resource creation."
+    },
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "AWS Elemental MediaLive now supports the ability to configure the Preferred Channel Pipeline for channels contributing to a Multiplex."
+    }
+]

@@ -11,7 +11,7 @@
       return it('properly parses XML response', function() {
         var body, params, rds;
         rds = new AWS.RDS();
-        body = "<CreateDBSecurityGroupResponse xmlns=\"http://rds.amazonaws.com/doc/2013-09-09/\">\n  <CreateDBSecurityGroupResult>\n    <DBSecurityGroup>\n      <EC2SecurityGroups/>\n      <DBSecurityGroupDescription>foo</DBSecurityGroupDescription>\n      <IPRanges/>\n      <OwnerId>1234567890</OwnerId>\n      <DBSecurityGroupName>foo</DBSecurityGroupName>\n    </DBSecurityGroup>\n  </CreateDBSecurityGroupResult>\n  <ResponseMetadata>\n    <RequestId>1234567890</RequestId>\n  </ResponseMetadata>\n</CreateDBSecurityGroupResponse>";
+        body = '<CreateDBSecurityGroupResponse xmlns="http://rds.amazonaws.com/doc/2013-09-09/">\n  <CreateDBSecurityGroupResult>\n    <DBSecurityGroup>\n      <EC2SecurityGroups/>\n      <DBSecurityGroupDescription>foo</DBSecurityGroupDescription>\n      <IPRanges/>\n      <OwnerId>1234567890</OwnerId>\n      <DBSecurityGroupName>foo</DBSecurityGroupName>\n    </DBSecurityGroup>\n  </CreateDBSecurityGroupResult>\n  <ResponseMetadata>\n    <RequestId>1234567890</RequestId>\n  </ResponseMetadata>\n</CreateDBSecurityGroupResponse>';
         helpers.mockHttpResponse(200, {}, body);
         params = {
           DBSecurityGroupName: 'foo',

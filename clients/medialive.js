@@ -9,6 +9,7 @@ Object.defineProperty(apiLoader.services['medialive'], '2017-10-14', {
   get: function get() {
     var model = require('../apis/medialive-2017-10-14.min.json');
     model.paginators = require('../apis/medialive-2017-10-14.paginators.json').pagination;
+    model.waiters = require('../apis/medialive-2017-10-14.waiters2.json').waiters;
     return model;
   },
   enumerable: true,

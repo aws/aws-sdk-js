@@ -44,6 +44,30 @@ declare class DLM extends Service {
    */
   getLifecyclePolicy(callback?: (err: AWSError, data: DLM.Types.GetLifecyclePolicyResponse) => void): Request<DLM.Types.GetLifecyclePolicyResponse, AWSError>;
   /**
+   * Lists the tags for the specified resource.
+   */
+  listTagsForResource(params: DLM.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: DLM.Types.ListTagsForResourceResponse) => void): Request<DLM.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists the tags for the specified resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: DLM.Types.ListTagsForResourceResponse) => void): Request<DLM.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Adds the specified tags to the specified resource.
+   */
+  tagResource(params: DLM.Types.TagResourceRequest, callback?: (err: AWSError, data: DLM.Types.TagResourceResponse) => void): Request<DLM.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds the specified tags to the specified resource.
+   */
+  tagResource(callback?: (err: AWSError, data: DLM.Types.TagResourceResponse) => void): Request<DLM.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes the specified tags from the specified resource.
+   */
+  untagResource(params: DLM.Types.UntagResourceRequest, callback?: (err: AWSError, data: DLM.Types.UntagResourceResponse) => void): Request<DLM.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes the specified tags from the specified resource.
+   */
+  untagResource(callback?: (err: AWSError, data: DLM.Types.UntagResourceResponse) => void): Request<DLM.Types.UntagResourceResponse, AWSError>;
+  /**
    * Updates the specified lifecycle policy.
    */
   updateLifecyclePolicy(params: DLM.Types.UpdateLifecyclePolicyRequest, callback?: (err: AWSError, data: DLM.Types.UpdateLifecyclePolicyResponse) => void): Request<DLM.Types.UpdateLifecyclePolicyResponse, AWSError>;
@@ -53,6 +77,11 @@ declare class DLM extends Service {
   updateLifecyclePolicy(callback?: (err: AWSError, data: DLM.Types.UpdateLifecyclePolicyResponse) => void): Request<DLM.Types.UpdateLifecyclePolicyResponse, AWSError>;
 }
 declare namespace DLM {
+  export type AvailabilityZone = string;
+  export type AvailabilityZoneList = AvailabilityZone[];
+  export type CmkArn = string;
+  export type CopyTags = boolean;
+  export type CopyTagsNullable = boolean;
   export type Count = number;
   export interface CreateLifecyclePolicyRequest {
     /**
@@ -68,9 +97,13 @@ declare namespace DLM {
      */
     State: SettablePolicyStateValues;
     /**
-     * The configuration of the lifecycle policy. Target tags cannot be re-used across lifecycle policies.
+     * The configuration details of the lifecycle policy.
      */
     PolicyDetails: PolicyDetails;
+    /**
+     * The tags to apply to the lifecycle policy during creation.
+     */
+    Tags?: TagMap;
   }
   export interface CreateLifecyclePolicyResponse {
     /**
@@ -80,18 +113,56 @@ declare namespace DLM {
   }
   export interface CreateRule {
     /**
-     * The interval. The supported values are 12 and 24.
+     * The interval between snapshots. The supported values are 1, 2, 3, 4, 6, 8, 12, and 24.
      */
-    Interval: Interval;
+    Interval?: Interval;
     /**
      * The interval unit.
      */
-    IntervalUnit: IntervalUnitValues;
+    IntervalUnit?: IntervalUnitValues;
     /**
-     * The time, in UTC, to start the operation. The operation occurs within a one-hour window following the specified time.
+     * The time, in UTC, to start the operation. The supported format is hh:mm. The operation occurs within a one-hour window following the specified time. If you do not specify a time, Amazon DLM selects a time within the next 24 hours.
      */
     Times?: TimesList;
+    /**
+     * The schedule, as a Cron expression. The schedule interval must be between 1 hour and 1 year. For more information, see Cron expressions in the Amazon CloudWatch User Guide.
+     */
+    CronExpression?: CronExpression;
   }
+  export type CronExpression = string;
+  export interface CrossRegionCopyRetainRule {
+    /**
+     * The amount of time to retain each snapshot. The maximum is 100 years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.
+     */
+    Interval?: Interval;
+    /**
+     * The unit of time for time-based retention.
+     */
+    IntervalUnit?: RetentionIntervalUnitValues;
+  }
+  export interface CrossRegionCopyRule {
+    /**
+     * The target Region.
+     */
+    TargetRegion: TargetRegion;
+    /**
+     * To encrypt a copy of an unencrypted snapshot if encryption by default is not enabled, enable encryption using this parameter. Copies of encrypted snapshots are encrypted, even if this parameter is false or if encryption by default is not enabled.
+     */
+    Encrypted: Encrypted;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS KMS customer master key (CMK) to use for EBS encryption. If this parameter is not specified, your AWS managed CMK for EBS is used.
+     */
+    CmkArn?: CmkArn;
+    /**
+     * Copy all user-defined tags from the source snapshot to the copied snapshot.
+     */
+    CopyTags?: CopyTagsNullable;
+    /**
+     * The retention rule.
+     */
+    RetainRule?: CrossRegionCopyRetainRule;
+  }
+  export type CrossRegionCopyRules = CrossRegionCopyRule[];
   export interface DeleteLifecyclePolicyRequest {
     /**
      * The identifier of the lifecycle policy.
@@ -100,7 +171,27 @@ declare namespace DLM {
   }
   export interface DeleteLifecyclePolicyResponse {
   }
+  export type Encrypted = boolean;
+  export type ExcludeBootVolume = boolean;
   export type ExecutionRoleArn = string;
+  export interface FastRestoreRule {
+    /**
+     * The number of snapshots to be enabled with fast snapshot restore.
+     */
+    Count?: Count;
+    /**
+     * The amount of time to enable fast snapshot restore. The maximum is 100 years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.
+     */
+    Interval?: Interval;
+    /**
+     * The unit of time for enabling fast snapshot restore.
+     */
+    IntervalUnit?: RetentionIntervalUnitValues;
+    /**
+     * The Availability Zones in which to enable fast snapshot restore.
+     */
+    AvailabilityZones: AvailabilityZoneList;
+  }
   export interface GetLifecyclePoliciesRequest {
     /**
      * The identifiers of the data lifecycle policies.
@@ -115,11 +206,11 @@ declare namespace DLM {
      */
     ResourceTypes?: ResourceTypeValuesList;
     /**
-     * The target tags. Tags are strings in the format key:value.
+     * The target tag for a policy. Tags are strings in the format key=value.
      */
     TargetTags?: TargetTagsFilterList;
     /**
-     * The tags to add to the resources. Tags are strings in the format key:value. These tags are added in addition to the AWS-added lifecycle tags.
+     * The tags to add to objects created by the policy. Tags are strings in the format key=value. These user-defined tags are added in addition to the AWS-added lifecycle tags.
      */
     TagsToAdd?: TagsToAddFilterList;
   }
@@ -158,6 +249,10 @@ declare namespace DLM {
      */
     State?: GettablePolicyStateValues;
     /**
+     * The description of the status.
+     */
+    StatusMessage?: StatusMessage;
+    /**
      * The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
      */
     ExecutionRoleArn?: ExecutionRoleArn;
@@ -173,6 +268,14 @@ declare namespace DLM {
      * The configuration of the lifecycle policy
      */
     PolicyDetails?: PolicyDetails;
+    /**
+     * The tags.
+     */
+    Tags?: TagMap;
+    /**
+     * The Amazon Resource Name (ARN) of the policy.
+     */
+    PolicyArn?: PolicyArn;
   }
   export interface LifecyclePolicySummary {
     /**
@@ -187,54 +290,112 @@ declare namespace DLM {
      * The activation state of the lifecycle policy.
      */
     State?: GettablePolicyStateValues;
+    /**
+     * The tags.
+     */
+    Tags?: TagMap;
   }
   export type LifecyclePolicySummaryList = LifecyclePolicySummary[];
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: PolicyArn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * Information about the tags.
+     */
+    Tags?: TagMap;
+  }
+  export interface Parameters {
+    /**
+     * [EBS Snapshot Management – Instance policies only] Indicates whether to exclude the root volume from snapshots created using CreateSnapshots. The default is false.
+     */
+    ExcludeBootVolume?: ExcludeBootVolume;
+  }
+  export type PolicyArn = string;
   export type PolicyDescription = string;
   export interface PolicyDetails {
     /**
-     * The resource type.
+     * The valid target resource types and actions a policy can manage. The default is EBS_SNAPSHOT_MANAGEMENT.
+     */
+    PolicyType?: PolicyTypeValues;
+    /**
+     * The resource type. Use VOLUME to create snapshots of individual volumes or use INSTANCE to create multi-volume snapshots from the volumes for an instance.
      */
     ResourceTypes?: ResourceTypeValuesList;
     /**
-     * The target tags.
+     * The single tag that identifies targeted resources for this policy.
      */
     TargetTags?: TargetTagList;
     /**
-     * The schedule.
+     * The schedule of policy-defined actions.
      */
     Schedules?: ScheduleList;
+    /**
+     * A set of optional parameters for the policy. 
+     */
+    Parameters?: Parameters;
   }
   export type PolicyId = string;
   export type PolicyIdList = PolicyId[];
-  export type ResourceTypeValues = "VOLUME"|string;
+  export type PolicyTypeValues = "EBS_SNAPSHOT_MANAGEMENT"|string;
+  export type ResourceTypeValues = "VOLUME"|"INSTANCE"|string;
   export type ResourceTypeValuesList = ResourceTypeValues[];
   export interface RetainRule {
     /**
-     * The number of snapshots to keep for each volume, up to a maximum of 1000.
+     * The number of snapshots to retain for each volume, up to a maximum of 1000.
      */
-    Count: Count;
+    Count?: Count;
+    /**
+     * The amount of time to retain each snapshot. The maximum is 100 years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.
+     */
+    Interval?: Interval;
+    /**
+     * The unit of time for time-based retention.
+     */
+    IntervalUnit?: RetentionIntervalUnitValues;
   }
+  export type RetentionIntervalUnitValues = "DAYS"|"WEEKS"|"MONTHS"|"YEARS"|string;
   export interface Schedule {
     /**
      * The name of the schedule.
      */
     Name?: ScheduleName;
     /**
-     * The tags to add to policy-created resources. These tags are added in addition to the default lifecycle tags.
+     * Copy all user-defined tags on a source volume to snapshots of the volume created by this policy.
+     */
+    CopyTags?: CopyTags;
+    /**
+     * The tags to apply to policy-created resources. These user-defined tags are in addition to the AWS-added lifecycle tags.
      */
     TagsToAdd?: TagsToAddList;
     /**
-     * The create rule.
+     * A collection of key/value pairs with values determined dynamically when the policy is executed. Keys may be any valid Amazon EC2 tag key. Values must be in one of the two following formats: $(instance-id) or $(timestamp). Variable tags are only valid for EBS Snapshot Management – Instance policies.
+     */
+    VariableTags?: VariableTagsList;
+    /**
+     * The creation rule.
      */
     CreateRule?: CreateRule;
     /**
-     * The retain rule.
+     * The retention rule.
      */
     RetainRule?: RetainRule;
+    /**
+     * The rule for enabling fast snapshot restore.
+     */
+    FastRestoreRule?: FastRestoreRule;
+    /**
+     * The rule for cross-Region snapshot copies.
+     */
+    CrossRegionCopyRules?: CrossRegionCopyRules;
   }
   export type ScheduleList = Schedule[];
   export type ScheduleName = string;
   export type SettablePolicyStateValues = "ENABLED"|"DISABLED"|string;
+  export type StatusMessage = string;
   export type String = string;
   export interface Tag {
     /**
@@ -247,13 +408,42 @@ declare namespace DLM {
     Value: String;
   }
   export type TagFilter = string;
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagMap = {[key: string]: TagValue};
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: PolicyArn;
+    /**
+     * One or more tags.
+     */
+    Tags: TagMap;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type TagsToAddFilterList = TagFilter[];
   export type TagsToAddList = Tag[];
+  export type TargetRegion = string;
   export type TargetTagList = Tag[];
   export type TargetTagsFilterList = TagFilter[];
   export type Time = string;
   export type TimesList = Time[];
   export type Timestamp = Date;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: PolicyArn;
+    /**
+     * The tag keys.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateLifecyclePolicyRequest {
     /**
      * The identifier of the lifecycle policy.
@@ -272,12 +462,13 @@ declare namespace DLM {
      */
     Description?: PolicyDescription;
     /**
-     * The configuration of the lifecycle policy. Target tags cannot be re-used across policies.
+     * The configuration of the lifecycle policy. You cannot update the policy type or the resource type.
      */
     PolicyDetails?: PolicyDetails;
   }
   export interface UpdateLifecyclePolicyResponse {
   }
+  export type VariableTagsList = Tag[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

@@ -296,7 +296,7 @@
       });
 
       describe('body', function() {
-        ['GET', 'HEAD', 'DELETE'].forEach(function(method) {
+        ['HEAD', 'DELETE'].forEach(function(method) {
           it('does not populate a body on a ' + method + ' request', function() {
             request.params = {
               Data: 'abc'
@@ -315,6 +315,39 @@
               }
             });
             expect(build().httpRequest.body).to.equal('');
+          });
+        });
+
+        it('does not send empty for GET methods', function() {
+          request.params = {};
+          defop({
+            http: {
+              method: 'GET'
+            },
+            input: {
+              members: {
+                Data: {
+                  type: 'string'
+                }
+              }
+            }
+          });
+          expect(build().httpRequest.body).to.eql('');
+
+          ['POST', 'PUT'].forEach(function(method) {
+            defop({
+              http: {
+                method: method
+              },
+              input: {
+                members: {
+                  Data: {
+                    type: 'string'
+                  }
+                }
+              }
+            });
+            expect(build().httpRequest.body).to.eql('{}');
           });
         });
 
@@ -369,7 +402,7 @@
       var extractError;
       extractError = function(body) {
         response.httpResponse.statusCode = 500;
-        response.httpResponse.body = new Buffer(body);
+        response.httpResponse.body = AWS.util.buffer.toBuffer(body);
         return svc.extractError(response);
       };
       it('removes prefixes from the error code', function() {
@@ -421,7 +454,7 @@
       var extractData;
       extractData = function(body) {
         response.httpResponse.statusCode = 200;
-        response.httpResponse.body = new Buffer(body);
+        response.httpResponse.body = AWS.util.buffer.toBuffer(body);
         return svc.extractData(response);
       };
       it('JSON parses http response bodies', function() {

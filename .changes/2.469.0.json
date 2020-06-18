@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "Support specifying python version for Python shell jobs. A new parameter PythonVersion is added to the JobCommand data type."
+    }
+]

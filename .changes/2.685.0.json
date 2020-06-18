@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "ELBv2",
+        "description": "This release added support for HTTP/2 ALPN preference lists for Network Load Balancers"
+    }
+]

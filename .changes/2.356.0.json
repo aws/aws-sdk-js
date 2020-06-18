@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "AutoScaling",
+        "description": "EC2 Auto Scaling now allows users to provision and automatically scale instances across purchase options (Spot, On-Demand, and RIs) and instance types in a single Auto Scaling group (ASG)."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Amazon EC2 Fleet now supports a new request type \"Instant\" that you can use to provision capacity synchronously across instance types & purchase models and CreateFleet will return the instances launched in the API response."
+    },
+    {
+        "type": "feature",
+        "category": "MediaTailor",
+        "description": "AWS Elemental MediaTailor SDK now returns a manifest endpoint prefix for clients to initiate a DASH playback session."
+    },
+    {
+        "type": "feature",
+        "category": "ResourceGroups",
+        "description": "The AWS Resource Groups service added support for AWS CloudFormation stack-based groups."
+    },
+    {
+        "type": "feature",
+        "category": "SNS",
+        "description": "Added an optional request parameter, named Attributes, to the Amazon SNS CreateTopic API action. For more information, see the Amazon SNS API Reference (https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html)."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "SageMaker now makes the final set of metrics published from training jobs available in the DescribeTrainingJob results.  Automatic Model Tuning now supports warm start of hyperparameter tuning jobs.  Notebook instances now support a larger number of instance types to include instances from the ml.t3, ml.m5, ml.c4, ml.c5 families."
+    },
+    {
+        "type": "feature",
+        "category": "ServiceCatalog",
+        "description": "Adds support for Cloudformation StackSets in Service Catalog"
+    }
+]

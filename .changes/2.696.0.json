@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "You can now choose to crawl the entire table or just a sample of records in DynamoDB when using AWS Glue crawlers. Additionally, you can also specify a scanning rate for crawling DynamoDB tables."
+    },
+    {
+        "type": "feature",
+        "category": "StorageGateway",
+        "description": "Display EndpointType in DescribeGatewayInformation"
+    }
+]

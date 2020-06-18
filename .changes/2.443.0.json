@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "DynamoDB",
+        "description": "This update allows you to tag Amazon DynamoDB tables when you create them. Tags are labels you can attach to AWS resources to make them easier to manage, search, and filter. "
+    },
+    {
+        "type": "feature",
+        "category": "GameLift",
+        "description": "This release introduces the new Realtime Servers feature, giving game developers a lightweight yet flexible solution that eliminates the need to build a fully custom game server. The AWS SDK updates provide support for scripts, which are used to configure and customize Realtime Servers."
+    },
+    {
+        "type": "feature",
+        "category": "Inspector",
+        "description": "AWS Inspector - Improve the ListFindings API response time and decreases the maximum number of agentIDs from 500 to 99."
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "AWS Lambda now supports the GetLayerVersionByArn API."
+    }
+]

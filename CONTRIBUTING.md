@@ -65,12 +65,12 @@ Please be aware of the following notes prior to opening a pull request:
    SDK's test coverage percentage are unlikely to be merged until tests have
    been added.
 
-### Testing
+### Testing the code
 
 To run the tests locally, install `phantomjs`. You can do so using [Homebrew][homebrew]:
 
 ```
-brew install phantomjs
+brew cask install phantomjs
 ```
 
 Then, to run all tests:
@@ -86,6 +86,33 @@ npm run unit
 ```
 
 See the implementation of the `test` script in `package.json` for more options.
+
+*Optional*: run integration tests located in [features folder](./features):
+
+Make sure you have valid AWS credentials available and run then the the integration test for 
+specific service, for example:
+
+```
+AWS_REGION=[set region] node node_modules/cucumber/bin/cucumber.js --tag @s3
+```
+
+### Testing the documentation changes:
+
+To test the documentation changes, please ensure you have the following requirements installed (Please make sure you have the latest version of Ruby):
+
+* `gem install bundler`
+
+Once the bundler is installed, you need to execute the following commands, to install rake:
+
+```
+bundle install
+```
+
+Once done, please run this command to get the documentation in (doc/latest/_index.html)
+
+```
+bundle exec rake docs:api
+```
 
 ### Changelog
 

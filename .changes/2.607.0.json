@@ -1,0 +1,32 @@
+[
+    {
+        "type": "feature",
+        "category": "AlexaForBusiness",
+        "description": "Add support for CreatedTime and ConnectionStatusUpdatedTime in response of SearchDevices API."
+    },
+    {
+        "type": "feature",
+        "category": "ApplicationInsights",
+        "description": "This release adds support for a list API to retrieve the configuration events logged during periodic updates to an application by Amazon CloudWatch Application Insights. "
+    },
+    {
+        "type": "feature",
+        "category": "CloudWatch",
+        "description": "Updating DescribeAnomalyDetectors API to return AnomalyDetector Status value in response."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release provides support for a preview of bringing your own IPv6 addresses (BYOIP for IPv6) for use in AWS."
+    },
+    {
+        "type": "feature",
+        "category": "KMS",
+        "description": "The ConnectCustomKeyStore operation now provides new error codes (USER_LOGGED_IN and USER_NOT_FOUND) for customers to better troubleshoot if their connect custom key store operation fails. Password length validation during CreateCustomKeyStore now also occurs on the client side. "
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "Added reason codes to StateReasonCode (InvalidSubnet, InvalidSecurityGroup) and LastUpdateStatusReasonCode (SubnetOutOfIPAddresses, InvalidSubnet, InvalidSecurityGroup) for functions that connect to a VPC."
+    }
+]

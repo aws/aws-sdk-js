@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "DirectoryService",
+        "description": "To reduce the number of errors our customers are facing, we have modified the requirements of input parameters for two of Directory Service APIs."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Client VPN now supports Port Configuration for VPN Endpoints, allowing usage of either port 443 or port 1194."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "This release adds two new APIs (UpdateWorkforce and DescribeWorkforce) to SageMaker Ground Truth service for workforce IP whitelisting."
+    }
+]

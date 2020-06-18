@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "GlobalAccelerator",
+        "description": "API Update for AWS Global Accelerator Client IP Preservation"
+    },
+    {
+        "type": "feature",
+        "category": "MediaConvert",
+        "description": "This release adds the ability to send a job to an on-demand queue while simulating the performance of a job sent to a reserved queue. Use this setting to estimate the number of reserved transcoding slots (RTS) you need for a reserved queue."
+    },
+    {
+        "type": "feature",
+        "category": "SQS",
+        "description": "Added support for message system attributes, which currently lets you send AWS X-Ray trace IDs through Amazon SQS."
+    }
+]

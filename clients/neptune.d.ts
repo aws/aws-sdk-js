@@ -13,11 +13,11 @@ declare class Neptune extends Service {
   constructor(options?: Neptune.Types.ClientConfiguration)
   config: Config & Neptune.Types.ClientConfiguration;
   /**
-   * Associates an Identity and Access Management (IAM) role from an Neptune DB cluster. 
+   * Associates an Identity and Access Management (IAM) role from an Neptune DB cluster.
    */
   addRoleToDBCluster(params: Neptune.Types.AddRoleToDBClusterMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Associates an Identity and Access Management (IAM) role from an Neptune DB cluster. 
+   * Associates an Identity and Access Management (IAM) role from an Neptune DB cluster.
    */
   addRoleToDBCluster(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -53,11 +53,11 @@ declare class Neptune extends Service {
    */
   copyDBClusterParameterGroup(callback?: (err: AWSError, data: Neptune.Types.CopyDBClusterParameterGroupResult) => void): Request<Neptune.Types.CopyDBClusterParameterGroupResult, AWSError>;
   /**
-   * Copies a snapshot of a DB cluster. To copy a DB cluster snapshot from a shared manual DB cluster snapshot, SourceDBClusterSnapshotIdentifier must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot. You can copy an encrypted DB cluster snapshot from another AWS Region. In that case, the AWS Region where you call the CopyDBClusterSnapshot action is the destination AWS Region for the encrypted DB cluster snapshot to be copied to. To copy an encrypted DB cluster snapshot from another AWS Region, you must provide the following values:    KmsKeyId - The AWS Key Management System (AWS KMS) key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region.    PreSignedUrl - A URL that contains a Signature Version 4 signed request for the CopyDBClusterSnapshot action to be called in the source AWS Region where the DB cluster snapshot is copied from. The pre-signed URL must be a valid request for the CopyDBClusterSnapshot API action that can be executed in the source AWS Region that contains the encrypted DB cluster snapshot to be copied. The pre-signed URL request must contain the following parameter values:    KmsKeyId - The KMS key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region. This is the same identifier for both the CopyDBClusterSnapshot action that is called in the destination AWS Region, and the action contained in the pre-signed URL.    DestinationRegion - The name of the AWS Region that the DB cluster snapshot will be created in.    SourceDBClusterSnapshotIdentifier - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB cluster snapshot from the us-west-2 AWS Region, then your SourceDBClusterSnapshotIdentifier looks like the following example: arn:aws:rds:us-west-2:123456789012:cluster-snapshot:neptune-cluster1-snapshot-20161115.   To learn how to generate a Signature Version 4 signed request, see  Authenticating Requests: Using Query Parameters (AWS Signature Version 4) and  Signature Version 4 Signing Process.    TargetDBClusterSnapshotIdentifier - The identifier for the new copy of the DB cluster snapshot in the destination AWS Region.    SourceDBClusterSnapshotIdentifier - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the ARN format for the source AWS Region and is the same value as the SourceDBClusterSnapshotIdentifier in the pre-signed URL.    To cancel the copy operation once it is in progress, delete the target DB cluster snapshot identified by TargetDBClusterSnapshotIdentifier while that DB cluster snapshot is in "copying" status.
+   * Copies a snapshot of a DB cluster. To copy a DB cluster snapshot from a shared manual DB cluster snapshot, SourceDBClusterSnapshotIdentifier must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot.
    */
   copyDBClusterSnapshot(params: Neptune.Types.CopyDBClusterSnapshotMessage, callback?: (err: AWSError, data: Neptune.Types.CopyDBClusterSnapshotResult) => void): Request<Neptune.Types.CopyDBClusterSnapshotResult, AWSError>;
   /**
-   * Copies a snapshot of a DB cluster. To copy a DB cluster snapshot from a shared manual DB cluster snapshot, SourceDBClusterSnapshotIdentifier must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot. You can copy an encrypted DB cluster snapshot from another AWS Region. In that case, the AWS Region where you call the CopyDBClusterSnapshot action is the destination AWS Region for the encrypted DB cluster snapshot to be copied to. To copy an encrypted DB cluster snapshot from another AWS Region, you must provide the following values:    KmsKeyId - The AWS Key Management System (AWS KMS) key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region.    PreSignedUrl - A URL that contains a Signature Version 4 signed request for the CopyDBClusterSnapshot action to be called in the source AWS Region where the DB cluster snapshot is copied from. The pre-signed URL must be a valid request for the CopyDBClusterSnapshot API action that can be executed in the source AWS Region that contains the encrypted DB cluster snapshot to be copied. The pre-signed URL request must contain the following parameter values:    KmsKeyId - The KMS key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region. This is the same identifier for both the CopyDBClusterSnapshot action that is called in the destination AWS Region, and the action contained in the pre-signed URL.    DestinationRegion - The name of the AWS Region that the DB cluster snapshot will be created in.    SourceDBClusterSnapshotIdentifier - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB cluster snapshot from the us-west-2 AWS Region, then your SourceDBClusterSnapshotIdentifier looks like the following example: arn:aws:rds:us-west-2:123456789012:cluster-snapshot:neptune-cluster1-snapshot-20161115.   To learn how to generate a Signature Version 4 signed request, see  Authenticating Requests: Using Query Parameters (AWS Signature Version 4) and  Signature Version 4 Signing Process.    TargetDBClusterSnapshotIdentifier - The identifier for the new copy of the DB cluster snapshot in the destination AWS Region.    SourceDBClusterSnapshotIdentifier - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the ARN format for the source AWS Region and is the same value as the SourceDBClusterSnapshotIdentifier in the pre-signed URL.    To cancel the copy operation once it is in progress, delete the target DB cluster snapshot identified by TargetDBClusterSnapshotIdentifier while that DB cluster snapshot is in "copying" status.
+   * Copies a snapshot of a DB cluster. To copy a DB cluster snapshot from a shared manual DB cluster snapshot, SourceDBClusterSnapshotIdentifier must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot.
    */
   copyDBClusterSnapshot(callback?: (err: AWSError, data: Neptune.Types.CopyDBClusterSnapshotResult) => void): Request<Neptune.Types.CopyDBClusterSnapshotResult, AWSError>;
   /**
@@ -69,27 +69,27 @@ declare class Neptune extends Service {
    */
   copyDBParameterGroup(callback?: (err: AWSError, data: Neptune.Types.CopyDBParameterGroupResult) => void): Request<Neptune.Types.CopyDBParameterGroupResult, AWSError>;
   /**
-   * Creates a new Amazon Neptune DB cluster. You can use the ReplicationSourceIdentifier parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon Neptune DB instance. For cross-region replication where the DB cluster identified by ReplicationSourceIdentifier is encrypted, you must also specify the PreSignedUrl parameter.
+   * Creates a new Amazon Neptune DB cluster. You can use the ReplicationSourceIdentifier parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon Neptune DB instance. Note that when you create a new cluster using CreateDBCluster directly, deletion protection is disabled by default (when you create a new production cluster in the console, deletion protection is enabled by default). You can only delete a DB cluster if its DeletionProtection field is set to false.
    */
   createDBCluster(params: Neptune.Types.CreateDBClusterMessage, callback?: (err: AWSError, data: Neptune.Types.CreateDBClusterResult) => void): Request<Neptune.Types.CreateDBClusterResult, AWSError>;
   /**
-   * Creates a new Amazon Neptune DB cluster. You can use the ReplicationSourceIdentifier parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon Neptune DB instance. For cross-region replication where the DB cluster identified by ReplicationSourceIdentifier is encrypted, you must also specify the PreSignedUrl parameter.
+   * Creates a new Amazon Neptune DB cluster. You can use the ReplicationSourceIdentifier parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon Neptune DB instance. Note that when you create a new cluster using CreateDBCluster directly, deletion protection is disabled by default (when you create a new production cluster in the console, deletion protection is enabled by default). You can only delete a DB cluster if its DeletionProtection field is set to false.
    */
   createDBCluster(callback?: (err: AWSError, data: Neptune.Types.CreateDBClusterResult) => void): Request<Neptune.Types.CreateDBClusterResult, AWSError>;
   /**
-   * Creates a new DB cluster parameter group. Parameters in a DB cluster parameter group apply to all of the instances in a DB cluster.  A DB cluster parameter group is initially created with the default parameters for the database engine used by instances in the DB cluster. To provide custom values for any of the parameters, you must modify the group after creating it using ModifyDBClusterParameterGroup. Once you've created a DB cluster parameter group, you need to associate it with your DB cluster using ModifyDBCluster. When you associate a new DB cluster parameter group with a running DB cluster, you need to reboot the DB instances in the DB cluster without failover for the new DB cluster parameter group and associated settings to take effect.   After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon Neptune to fully complete the create action before the DB cluster parameter group is used as the default for a new DB cluster. This is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBClusterParameters command to verify that your DB cluster parameter group has been created or modified. 
+   * Creates a new DB cluster parameter group. Parameters in a DB cluster parameter group apply to all of the instances in a DB cluster.  A DB cluster parameter group is initially created with the default parameters for the database engine used by instances in the DB cluster. To provide custom values for any of the parameters, you must modify the group after creating it using ModifyDBClusterParameterGroup. Once you've created a DB cluster parameter group, you need to associate it with your DB cluster using ModifyDBCluster. When you associate a new DB cluster parameter group with a running DB cluster, you need to reboot the DB instances in the DB cluster without failover for the new DB cluster parameter group and associated settings to take effect.  After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon Neptune to fully complete the create action before the DB cluster parameter group is used as the default for a new DB cluster. This is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBClusterParameters command to verify that your DB cluster parameter group has been created or modified. 
    */
   createDBClusterParameterGroup(params: Neptune.Types.CreateDBClusterParameterGroupMessage, callback?: (err: AWSError, data: Neptune.Types.CreateDBClusterParameterGroupResult) => void): Request<Neptune.Types.CreateDBClusterParameterGroupResult, AWSError>;
   /**
-   * Creates a new DB cluster parameter group. Parameters in a DB cluster parameter group apply to all of the instances in a DB cluster.  A DB cluster parameter group is initially created with the default parameters for the database engine used by instances in the DB cluster. To provide custom values for any of the parameters, you must modify the group after creating it using ModifyDBClusterParameterGroup. Once you've created a DB cluster parameter group, you need to associate it with your DB cluster using ModifyDBCluster. When you associate a new DB cluster parameter group with a running DB cluster, you need to reboot the DB instances in the DB cluster without failover for the new DB cluster parameter group and associated settings to take effect.   After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon Neptune to fully complete the create action before the DB cluster parameter group is used as the default for a new DB cluster. This is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBClusterParameters command to verify that your DB cluster parameter group has been created or modified. 
+   * Creates a new DB cluster parameter group. Parameters in a DB cluster parameter group apply to all of the instances in a DB cluster.  A DB cluster parameter group is initially created with the default parameters for the database engine used by instances in the DB cluster. To provide custom values for any of the parameters, you must modify the group after creating it using ModifyDBClusterParameterGroup. Once you've created a DB cluster parameter group, you need to associate it with your DB cluster using ModifyDBCluster. When you associate a new DB cluster parameter group with a running DB cluster, you need to reboot the DB instances in the DB cluster without failover for the new DB cluster parameter group and associated settings to take effect.  After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon Neptune to fully complete the create action before the DB cluster parameter group is used as the default for a new DB cluster. This is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBClusterParameters command to verify that your DB cluster parameter group has been created or modified. 
    */
   createDBClusterParameterGroup(callback?: (err: AWSError, data: Neptune.Types.CreateDBClusterParameterGroupResult) => void): Request<Neptune.Types.CreateDBClusterParameterGroupResult, AWSError>;
   /**
-   * Creates a snapshot of a DB cluster. 
+   * Creates a snapshot of a DB cluster.
    */
   createDBClusterSnapshot(params: Neptune.Types.CreateDBClusterSnapshotMessage, callback?: (err: AWSError, data: Neptune.Types.CreateDBClusterSnapshotResult) => void): Request<Neptune.Types.CreateDBClusterSnapshotResult, AWSError>;
   /**
-   * Creates a snapshot of a DB cluster. 
+   * Creates a snapshot of a DB cluster.
    */
   createDBClusterSnapshot(callback?: (err: AWSError, data: Neptune.Types.CreateDBClusterSnapshotResult) => void): Request<Neptune.Types.CreateDBClusterSnapshotResult, AWSError>;
   /**
@@ -101,11 +101,11 @@ declare class Neptune extends Service {
    */
   createDBInstance(callback?: (err: AWSError, data: Neptune.Types.CreateDBInstanceResult) => void): Request<Neptune.Types.CreateDBInstanceResult, AWSError>;
   /**
-   * Creates a new DB parameter group.  A DB parameter group is initially created with the default parameters for the database engine used by the DB instance. To provide custom values for any of the parameters, you must modify the group after creating it using ModifyDBParameterGroup. Once you've created a DB parameter group, you need to associate it with your DB instance using ModifyDBInstance. When you associate a new DB parameter group with a running DB instance, you need to reboot the DB instance without failover for the new DB parameter group and associated settings to take effect.   After you create a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon Neptune to fully complete the create action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBParameters command to verify that your DB parameter group has been created or modified. 
+   * Creates a new DB parameter group. A DB parameter group is initially created with the default parameters for the database engine used by the DB instance. To provide custom values for any of the parameters, you must modify the group after creating it using ModifyDBParameterGroup. Once you've created a DB parameter group, you need to associate it with your DB instance using ModifyDBInstance. When you associate a new DB parameter group with a running DB instance, you need to reboot the DB instance without failover for the new DB parameter group and associated settings to take effect.  After you create a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon Neptune to fully complete the create action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBParameters command to verify that your DB parameter group has been created or modified. 
    */
   createDBParameterGroup(params: Neptune.Types.CreateDBParameterGroupMessage, callback?: (err: AWSError, data: Neptune.Types.CreateDBParameterGroupResult) => void): Request<Neptune.Types.CreateDBParameterGroupResult, AWSError>;
   /**
-   * Creates a new DB parameter group.  A DB parameter group is initially created with the default parameters for the database engine used by the DB instance. To provide custom values for any of the parameters, you must modify the group after creating it using ModifyDBParameterGroup. Once you've created a DB parameter group, you need to associate it with your DB instance using ModifyDBInstance. When you associate a new DB parameter group with a running DB instance, you need to reboot the DB instance without failover for the new DB parameter group and associated settings to take effect.   After you create a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon Neptune to fully complete the create action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBParameters command to verify that your DB parameter group has been created or modified. 
+   * Creates a new DB parameter group. A DB parameter group is initially created with the default parameters for the database engine used by the DB instance. To provide custom values for any of the parameters, you must modify the group after creating it using ModifyDBParameterGroup. Once you've created a DB parameter group, you need to associate it with your DB instance using ModifyDBInstance. When you associate a new DB parameter group with a running DB instance, you need to reboot the DB instance without failover for the new DB parameter group and associated settings to take effect.  After you create a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon Neptune to fully complete the create action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBParameters command to verify that your DB parameter group has been created or modified. 
    */
   createDBParameterGroup(callback?: (err: AWSError, data: Neptune.Types.CreateDBParameterGroupResult) => void): Request<Neptune.Types.CreateDBParameterGroupResult, AWSError>;
   /**
@@ -125,11 +125,11 @@ declare class Neptune extends Service {
    */
   createEventSubscription(callback?: (err: AWSError, data: Neptune.Types.CreateEventSubscriptionResult) => void): Request<Neptune.Types.CreateEventSubscriptionResult, AWSError>;
   /**
-   * The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted. 
+   * The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted. Note that the DB Cluster cannot be deleted if deletion protection is enabled. To delete it, you must first set its DeletionProtection field to False.
    */
   deleteDBCluster(params: Neptune.Types.DeleteDBClusterMessage, callback?: (err: AWSError, data: Neptune.Types.DeleteDBClusterResult) => void): Request<Neptune.Types.DeleteDBClusterResult, AWSError>;
   /**
-   * The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted. 
+   * The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted. Note that the DB Cluster cannot be deleted if deletion protection is enabled. To delete it, you must first set its DeletionProtection field to False.
    */
   deleteDBCluster(callback?: (err: AWSError, data: Neptune.Types.DeleteDBClusterResult) => void): Request<Neptune.Types.DeleteDBClusterResult, AWSError>;
   /**
@@ -149,11 +149,11 @@ declare class Neptune extends Service {
    */
   deleteDBClusterSnapshot(callback?: (err: AWSError, data: Neptune.Types.DeleteDBClusterSnapshotResult) => void): Request<Neptune.Types.DeleteDBClusterSnapshotResult, AWSError>;
   /**
-   * The DeleteDBInstance action deletes a previously provisioned DB instance. When you delete a DB instance, all automated backups for that instance are deleted and can't be recovered. Manual DB snapshots of the DB instance to be deleted by DeleteDBInstance are not deleted.  If you request a final DB snapshot the status of the Amazon Neptune DB instance is deleting until the DB snapshot is created. The API action DescribeDBInstance is used to monitor the status of this operation. The action can't be canceled or reverted once submitted.  Note that when a DB instance is in a failure state and has a status of failed, incompatible-restore, or incompatible-network, you can only delete it when the SkipFinalSnapshot parameter is set to true. If the specified DB instance is part of a DB cluster, you can't delete the DB instance if both of the following conditions are true:   The DB cluster is a Read Replica of another DB cluster.   The DB instance is the only instance in the DB cluster.   To delete a DB instance in this case, first call the PromoteReadReplicaDBCluster API action to promote the DB cluster so it's no longer a Read Replica. After the promotion completes, then call the DeleteDBInstance API action to delete the final instance in the DB cluster.
+   * The DeleteDBInstance action deletes a previously provisioned DB instance. When you delete a DB instance, all automated backups for that instance are deleted and can't be recovered. Manual DB snapshots of the DB instance to be deleted by DeleteDBInstance are not deleted.  If you request a final DB snapshot the status of the Amazon Neptune DB instance is deleting until the DB snapshot is created. The API action DescribeDBInstance is used to monitor the status of this operation. The action can't be canceled or reverted once submitted. Note that when a DB instance is in a failure state and has a status of failed, incompatible-restore, or incompatible-network, you can only delete it when the SkipFinalSnapshot parameter is set to true. You can't delete a DB instance if it is the only instance in the DB cluster, or if it has deletion protection enabled.
    */
   deleteDBInstance(params: Neptune.Types.DeleteDBInstanceMessage, callback?: (err: AWSError, data: Neptune.Types.DeleteDBInstanceResult) => void): Request<Neptune.Types.DeleteDBInstanceResult, AWSError>;
   /**
-   * The DeleteDBInstance action deletes a previously provisioned DB instance. When you delete a DB instance, all automated backups for that instance are deleted and can't be recovered. Manual DB snapshots of the DB instance to be deleted by DeleteDBInstance are not deleted.  If you request a final DB snapshot the status of the Amazon Neptune DB instance is deleting until the DB snapshot is created. The API action DescribeDBInstance is used to monitor the status of this operation. The action can't be canceled or reverted once submitted.  Note that when a DB instance is in a failure state and has a status of failed, incompatible-restore, or incompatible-network, you can only delete it when the SkipFinalSnapshot parameter is set to true. If the specified DB instance is part of a DB cluster, you can't delete the DB instance if both of the following conditions are true:   The DB cluster is a Read Replica of another DB cluster.   The DB instance is the only instance in the DB cluster.   To delete a DB instance in this case, first call the PromoteReadReplicaDBCluster API action to promote the DB cluster so it's no longer a Read Replica. After the promotion completes, then call the DeleteDBInstance API action to delete the final instance in the DB cluster.
+   * The DeleteDBInstance action deletes a previously provisioned DB instance. When you delete a DB instance, all automated backups for that instance are deleted and can't be recovered. Manual DB snapshots of the DB instance to be deleted by DeleteDBInstance are not deleted.  If you request a final DB snapshot the status of the Amazon Neptune DB instance is deleting until the DB snapshot is created. The API action DescribeDBInstance is used to monitor the status of this operation. The action can't be canceled or reverted once submitted. Note that when a DB instance is in a failure state and has a status of failed, incompatible-restore, or incompatible-network, you can only delete it when the SkipFinalSnapshot parameter is set to true. You can't delete a DB instance if it is the only instance in the DB cluster, or if it has deletion protection enabled.
    */
   deleteDBInstance(callback?: (err: AWSError, data: Neptune.Types.DeleteDBInstanceResult) => void): Request<Neptune.Types.DeleteDBInstanceResult, AWSError>;
   /**
@@ -181,11 +181,11 @@ declare class Neptune extends Service {
    */
   deleteEventSubscription(callback?: (err: AWSError, data: Neptune.Types.DeleteEventSubscriptionResult) => void): Request<Neptune.Types.DeleteEventSubscriptionResult, AWSError>;
   /**
-   *  Returns a list of DBClusterParameterGroup descriptions. If a DBClusterParameterGroupName parameter is specified, the list will contain only the description of the specified DB cluster parameter group. 
+   *  Returns a list of DBClusterParameterGroup descriptions. If a DBClusterParameterGroupName parameter is specified, the list will contain only the description of the specified DB cluster parameter group.
    */
   describeDBClusterParameterGroups(params: Neptune.Types.DescribeDBClusterParameterGroupsMessage, callback?: (err: AWSError, data: Neptune.Types.DBClusterParameterGroupsMessage) => void): Request<Neptune.Types.DBClusterParameterGroupsMessage, AWSError>;
   /**
-   *  Returns a list of DBClusterParameterGroup descriptions. If a DBClusterParameterGroupName parameter is specified, the list will contain only the description of the specified DB cluster parameter group. 
+   *  Returns a list of DBClusterParameterGroup descriptions. If a DBClusterParameterGroupName parameter is specified, the list will contain only the description of the specified DB cluster parameter group.
    */
   describeDBClusterParameterGroups(callback?: (err: AWSError, data: Neptune.Types.DBClusterParameterGroupsMessage) => void): Request<Neptune.Types.DBClusterParameterGroupsMessage, AWSError>;
   /**
@@ -213,11 +213,11 @@ declare class Neptune extends Service {
    */
   describeDBClusterSnapshots(callback?: (err: AWSError, data: Neptune.Types.DBClusterSnapshotMessage) => void): Request<Neptune.Types.DBClusterSnapshotMessage, AWSError>;
   /**
-   * Returns information about provisioned DB clusters. This API supports pagination.
+   * Returns information about provisioned DB clusters, and supports pagination.  This operation can also return information for Amazon RDS clusters and Amazon DocDB clusters. 
    */
   describeDBClusters(params: Neptune.Types.DescribeDBClustersMessage, callback?: (err: AWSError, data: Neptune.Types.DBClusterMessage) => void): Request<Neptune.Types.DBClusterMessage, AWSError>;
   /**
-   * Returns information about provisioned DB clusters. This API supports pagination.
+   * Returns information about provisioned DB clusters, and supports pagination.  This operation can also return information for Amazon RDS clusters and Amazon DocDB clusters. 
    */
   describeDBClusters(callback?: (err: AWSError, data: Neptune.Types.DBClusterMessage) => void): Request<Neptune.Types.DBClusterMessage, AWSError>;
   /**
@@ -229,19 +229,19 @@ declare class Neptune extends Service {
    */
   describeDBEngineVersions(callback?: (err: AWSError, data: Neptune.Types.DBEngineVersionMessage) => void): Request<Neptune.Types.DBEngineVersionMessage, AWSError>;
   /**
-   * Returns information about provisioned instances. This API supports pagination.
+   * Returns information about provisioned instances, and supports pagination.  This operation can also return information for Amazon RDS instances and Amazon DocDB instances. 
    */
   describeDBInstances(params: Neptune.Types.DescribeDBInstancesMessage, callback?: (err: AWSError, data: Neptune.Types.DBInstanceMessage) => void): Request<Neptune.Types.DBInstanceMessage, AWSError>;
   /**
-   * Returns information about provisioned instances. This API supports pagination.
+   * Returns information about provisioned instances, and supports pagination.  This operation can also return information for Amazon RDS instances and Amazon DocDB instances. 
    */
   describeDBInstances(callback?: (err: AWSError, data: Neptune.Types.DBInstanceMessage) => void): Request<Neptune.Types.DBInstanceMessage, AWSError>;
   /**
-   *  Returns a list of DBParameterGroup descriptions. If a DBParameterGroupName is specified, the list will contain only the description of the specified DB parameter group. 
+   * Returns a list of DBParameterGroup descriptions. If a DBParameterGroupName is specified, the list will contain only the description of the specified DB parameter group.
    */
   describeDBParameterGroups(params: Neptune.Types.DescribeDBParameterGroupsMessage, callback?: (err: AWSError, data: Neptune.Types.DBParameterGroupsMessage) => void): Request<Neptune.Types.DBParameterGroupsMessage, AWSError>;
   /**
-   *  Returns a list of DBParameterGroup descriptions. If a DBParameterGroupName is specified, the list will contain only the description of the specified DB parameter group. 
+   * Returns a list of DBParameterGroup descriptions. If a DBParameterGroupName is specified, the list will contain only the description of the specified DB parameter group.
    */
   describeDBParameterGroups(callback?: (err: AWSError, data: Neptune.Types.DBParameterGroupsMessage) => void): Request<Neptune.Types.DBParameterGroupsMessage, AWSError>;
   /**
@@ -253,11 +253,11 @@ declare class Neptune extends Service {
    */
   describeDBParameters(callback?: (err: AWSError, data: Neptune.Types.DBParameterGroupDetails) => void): Request<Neptune.Types.DBParameterGroupDetails, AWSError>;
   /**
-   * Returns a list of DBSubnetGroup descriptions. If a DBSubnetGroupName is specified, the list will contain only the descriptions of the specified DBSubnetGroup. For an overview of CIDR ranges, go to the Wikipedia Tutorial. 
+   * Returns a list of DBSubnetGroup descriptions. If a DBSubnetGroupName is specified, the list will contain only the descriptions of the specified DBSubnetGroup. For an overview of CIDR ranges, go to the Wikipedia Tutorial.
    */
   describeDBSubnetGroups(params: Neptune.Types.DescribeDBSubnetGroupsMessage, callback?: (err: AWSError, data: Neptune.Types.DBSubnetGroupMessage) => void): Request<Neptune.Types.DBSubnetGroupMessage, AWSError>;
   /**
-   * Returns a list of DBSubnetGroup descriptions. If a DBSubnetGroupName is specified, the list will contain only the descriptions of the specified DBSubnetGroup. For an overview of CIDR ranges, go to the Wikipedia Tutorial. 
+   * Returns a list of DBSubnetGroup descriptions. If a DBSubnetGroupName is specified, the list will contain only the descriptions of the specified DBSubnetGroup. For an overview of CIDR ranges, go to the Wikipedia Tutorial.
    */
   describeDBSubnetGroups(callback?: (err: AWSError, data: Neptune.Types.DBSubnetGroupMessage) => void): Request<Neptune.Types.DBSubnetGroupMessage, AWSError>;
   /**
@@ -277,11 +277,11 @@ declare class Neptune extends Service {
    */
   describeEngineDefaultParameters(callback?: (err: AWSError, data: Neptune.Types.DescribeEngineDefaultParametersResult) => void): Request<Neptune.Types.DescribeEngineDefaultParametersResult, AWSError>;
   /**
-   * Displays a list of categories for all event source types, or, if specified, for a specified source type. 
+   * Displays a list of categories for all event source types, or, if specified, for a specified source type.
    */
   describeEventCategories(params: Neptune.Types.DescribeEventCategoriesMessage, callback?: (err: AWSError, data: Neptune.Types.EventCategoriesMessage) => void): Request<Neptune.Types.EventCategoriesMessage, AWSError>;
   /**
-   * Displays a list of categories for all event source types, or, if specified, for a specified source type. 
+   * Displays a list of categories for all event source types, or, if specified, for a specified source type.
    */
   describeEventCategories(callback?: (err: AWSError, data: Neptune.Types.EventCategoriesMessage) => void): Request<Neptune.Types.EventCategoriesMessage, AWSError>;
   /**
@@ -317,11 +317,11 @@ declare class Neptune extends Service {
    */
   describePendingMaintenanceActions(callback?: (err: AWSError, data: Neptune.Types.PendingMaintenanceActionsMessage) => void): Request<Neptune.Types.PendingMaintenanceActionsMessage, AWSError>;
   /**
-   * You can call DescribeValidDBInstanceModifications to learn what modifications you can make to your DB instance. You can use this information when you call ModifyDBInstance. 
+   * You can call DescribeValidDBInstanceModifications to learn what modifications you can make to your DB instance. You can use this information when you call ModifyDBInstance.
    */
   describeValidDBInstanceModifications(params: Neptune.Types.DescribeValidDBInstanceModificationsMessage, callback?: (err: AWSError, data: Neptune.Types.DescribeValidDBInstanceModificationsResult) => void): Request<Neptune.Types.DescribeValidDBInstanceModificationsResult, AWSError>;
   /**
-   * You can call DescribeValidDBInstanceModifications to learn what modifications you can make to your DB instance. You can use this information when you call ModifyDBInstance. 
+   * You can call DescribeValidDBInstanceModifications to learn what modifications you can make to your DB instance. You can use this information when you call ModifyDBInstance.
    */
   describeValidDBInstanceModifications(callback?: (err: AWSError, data: Neptune.Types.DescribeValidDBInstanceModificationsResult) => void): Request<Neptune.Types.DescribeValidDBInstanceModificationsResult, AWSError>;
   /**
@@ -341,19 +341,19 @@ declare class Neptune extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Neptune.Types.TagListMessage) => void): Request<Neptune.Types.TagListMessage, AWSError>;
   /**
-   * Modify a setting for a DB cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. 
+   * Modify a setting for a DB cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request.
    */
   modifyDBCluster(params: Neptune.Types.ModifyDBClusterMessage, callback?: (err: AWSError, data: Neptune.Types.ModifyDBClusterResult) => void): Request<Neptune.Types.ModifyDBClusterResult, AWSError>;
   /**
-   * Modify a setting for a DB cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. 
+   * Modify a setting for a DB cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request.
    */
   modifyDBCluster(callback?: (err: AWSError, data: Neptune.Types.ModifyDBClusterResult) => void): Request<Neptune.Types.ModifyDBClusterResult, AWSError>;
   /**
-   *  Modifies the parameters of a DB cluster parameter group. To modify more than one parameter, submit a list of the following: ParameterName, ParameterValue, and ApplyMethod. A maximum of 20 parameters can be modified in a single request.   Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot without failover to the DB cluster associated with the parameter group before the change can take effect.   After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon Neptune to fully complete the create action before the parameter group is used as the default for a new DB cluster. This is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBClusterParameters command to verify that your DB cluster parameter group has been created or modified. 
+   *  Modifies the parameters of a DB cluster parameter group. To modify more than one parameter, submit a list of the following: ParameterName, ParameterValue, and ApplyMethod. A maximum of 20 parameters can be modified in a single request.  Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot without failover to the DB cluster associated with the parameter group before the change can take effect.   After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon Neptune to fully complete the create action before the parameter group is used as the default for a new DB cluster. This is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBClusterParameters command to verify that your DB cluster parameter group has been created or modified. 
    */
   modifyDBClusterParameterGroup(params: Neptune.Types.ModifyDBClusterParameterGroupMessage, callback?: (err: AWSError, data: Neptune.Types.DBClusterParameterGroupNameMessage) => void): Request<Neptune.Types.DBClusterParameterGroupNameMessage, AWSError>;
   /**
-   *  Modifies the parameters of a DB cluster parameter group. To modify more than one parameter, submit a list of the following: ParameterName, ParameterValue, and ApplyMethod. A maximum of 20 parameters can be modified in a single request.   Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot without failover to the DB cluster associated with the parameter group before the change can take effect.   After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon Neptune to fully complete the create action before the parameter group is used as the default for a new DB cluster. This is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBClusterParameters command to verify that your DB cluster parameter group has been created or modified. 
+   *  Modifies the parameters of a DB cluster parameter group. To modify more than one parameter, submit a list of the following: ParameterName, ParameterValue, and ApplyMethod. A maximum of 20 parameters can be modified in a single request.  Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot without failover to the DB cluster associated with the parameter group before the change can take effect.   After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon Neptune to fully complete the create action before the parameter group is used as the default for a new DB cluster. This is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBClusterParameters command to verify that your DB cluster parameter group has been created or modified. 
    */
   modifyDBClusterParameterGroup(callback?: (err: AWSError, data: Neptune.Types.DBClusterParameterGroupNameMessage) => void): Request<Neptune.Types.DBClusterParameterGroupNameMessage, AWSError>;
   /**
@@ -365,19 +365,19 @@ declare class Neptune extends Service {
    */
   modifyDBClusterSnapshotAttribute(callback?: (err: AWSError, data: Neptune.Types.ModifyDBClusterSnapshotAttributeResult) => void): Request<Neptune.Types.ModifyDBClusterSnapshotAttributeResult, AWSError>;
   /**
-   * Modifies settings for a DB instance. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. To learn what modifications you can make to your DB instance, call DescribeValidDBInstanceModifications before you call ModifyDBInstance. 
+   * Modifies settings for a DB instance. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. To learn what modifications you can make to your DB instance, call DescribeValidDBInstanceModifications before you call ModifyDBInstance.
    */
   modifyDBInstance(params: Neptune.Types.ModifyDBInstanceMessage, callback?: (err: AWSError, data: Neptune.Types.ModifyDBInstanceResult) => void): Request<Neptune.Types.ModifyDBInstanceResult, AWSError>;
   /**
-   * Modifies settings for a DB instance. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. To learn what modifications you can make to your DB instance, call DescribeValidDBInstanceModifications before you call ModifyDBInstance. 
+   * Modifies settings for a DB instance. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. To learn what modifications you can make to your DB instance, call DescribeValidDBInstanceModifications before you call ModifyDBInstance.
    */
   modifyDBInstance(callback?: (err: AWSError, data: Neptune.Types.ModifyDBInstanceResult) => void): Request<Neptune.Types.ModifyDBInstanceResult, AWSError>;
   /**
-   *  Modifies the parameters of a DB parameter group. To modify more than one parameter, submit a list of the following: ParameterName, ParameterValue, and ApplyMethod. A maximum of 20 parameters can be modified in a single request.   Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot without failover to the DB instance associated with the parameter group before the change can take effect.   After you modify a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon Neptune to fully complete the modify action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBParameters command to verify that your DB parameter group has been created or modified. 
+   * Modifies the parameters of a DB parameter group. To modify more than one parameter, submit a list of the following: ParameterName, ParameterValue, and ApplyMethod. A maximum of 20 parameters can be modified in a single request.  Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot without failover to the DB instance associated with the parameter group before the change can take effect.   After you modify a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon Neptune to fully complete the modify action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBParameters command to verify that your DB parameter group has been created or modified. 
    */
   modifyDBParameterGroup(params: Neptune.Types.ModifyDBParameterGroupMessage, callback?: (err: AWSError, data: Neptune.Types.DBParameterGroupNameMessage) => void): Request<Neptune.Types.DBParameterGroupNameMessage, AWSError>;
   /**
-   *  Modifies the parameters of a DB parameter group. To modify more than one parameter, submit a list of the following: ParameterName, ParameterValue, and ApplyMethod. A maximum of 20 parameters can be modified in a single request.   Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot without failover to the DB instance associated with the parameter group before the change can take effect.   After you modify a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon Neptune to fully complete the modify action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBParameters command to verify that your DB parameter group has been created or modified. 
+   * Modifies the parameters of a DB parameter group. To modify more than one parameter, submit a list of the following: ParameterName, ParameterValue, and ApplyMethod. A maximum of 20 parameters can be modified in a single request.  Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot without failover to the DB instance associated with the parameter group before the change can take effect.   After you modify a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon Neptune to fully complete the modify action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBParameters command to verify that your DB parameter group has been created or modified. 
    */
   modifyDBParameterGroup(callback?: (err: AWSError, data: Neptune.Types.DBParameterGroupNameMessage) => void): Request<Neptune.Types.DBParameterGroupNameMessage, AWSError>;
   /**
@@ -397,27 +397,27 @@ declare class Neptune extends Service {
    */
   modifyEventSubscription(callback?: (err: AWSError, data: Neptune.Types.ModifyEventSubscriptionResult) => void): Request<Neptune.Types.ModifyEventSubscriptionResult, AWSError>;
   /**
-   * Promotes a Read Replica DB cluster to a standalone DB cluster.
+   * Not supported.
    */
   promoteReadReplicaDBCluster(params: Neptune.Types.PromoteReadReplicaDBClusterMessage, callback?: (err: AWSError, data: Neptune.Types.PromoteReadReplicaDBClusterResult) => void): Request<Neptune.Types.PromoteReadReplicaDBClusterResult, AWSError>;
   /**
-   * Promotes a Read Replica DB cluster to a standalone DB cluster.
+   * Not supported.
    */
   promoteReadReplicaDBCluster(callback?: (err: AWSError, data: Neptune.Types.PromoteReadReplicaDBClusterResult) => void): Request<Neptune.Types.PromoteReadReplicaDBClusterResult, AWSError>;
   /**
-   * You might need to reboot your DB instance, usually for maintenance reasons. For example, if you make certain modifications, or if you change the DB parameter group associated with the DB instance, you must reboot the instance for the changes to take effect.  Rebooting a DB instance restarts the database engine service. Rebooting a DB instance results in a momentary outage, during which the DB instance status is set to rebooting. 
+   * You might need to reboot your DB instance, usually for maintenance reasons. For example, if you make certain modifications, or if you change the DB parameter group associated with the DB instance, you must reboot the instance for the changes to take effect. Rebooting a DB instance restarts the database engine service. Rebooting a DB instance results in a momentary outage, during which the DB instance status is set to rebooting.
    */
   rebootDBInstance(params: Neptune.Types.RebootDBInstanceMessage, callback?: (err: AWSError, data: Neptune.Types.RebootDBInstanceResult) => void): Request<Neptune.Types.RebootDBInstanceResult, AWSError>;
   /**
-   * You might need to reboot your DB instance, usually for maintenance reasons. For example, if you make certain modifications, or if you change the DB parameter group associated with the DB instance, you must reboot the instance for the changes to take effect.  Rebooting a DB instance restarts the database engine service. Rebooting a DB instance results in a momentary outage, during which the DB instance status is set to rebooting. 
+   * You might need to reboot your DB instance, usually for maintenance reasons. For example, if you make certain modifications, or if you change the DB parameter group associated with the DB instance, you must reboot the instance for the changes to take effect. Rebooting a DB instance restarts the database engine service. Rebooting a DB instance results in a momentary outage, during which the DB instance status is set to rebooting.
    */
   rebootDBInstance(callback?: (err: AWSError, data: Neptune.Types.RebootDBInstanceResult) => void): Request<Neptune.Types.RebootDBInstanceResult, AWSError>;
   /**
-   * Disassociates an Identity and Access Management (IAM) role from a DB cluster. 
+   * Disassociates an Identity and Access Management (IAM) role from a DB cluster.
    */
   removeRoleFromDBCluster(params: Neptune.Types.RemoveRoleFromDBClusterMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Disassociates an Identity and Access Management (IAM) role from a DB cluster. 
+   * Disassociates an Identity and Access Management (IAM) role from a DB cluster.
    */
   removeRoleFromDBCluster(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -437,19 +437,19 @@ declare class Neptune extends Service {
    */
   removeTagsFromResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  Modifies the parameters of a DB cluster parameter group to the default value. To reset specific parameters submit a list of the following: ParameterName and ApplyMethod. To reset the entire DB cluster parameter group, specify the DBClusterParameterGroupName and ResetAllParameters parameters.   When resetting the entire group, dynamic parameters are updated immediately and static parameters are set to pending-reboot to take effect on the next DB instance restart or RebootDBInstance request. You must call RebootDBInstance for every DB instance in your DB cluster that you want the updated static parameter to apply to.
+   *  Modifies the parameters of a DB cluster parameter group to the default value. To reset specific parameters submit a list of the following: ParameterName and ApplyMethod. To reset the entire DB cluster parameter group, specify the DBClusterParameterGroupName and ResetAllParameters parameters.  When resetting the entire group, dynamic parameters are updated immediately and static parameters are set to pending-reboot to take effect on the next DB instance restart or RebootDBInstance request. You must call RebootDBInstance for every DB instance in your DB cluster that you want the updated static parameter to apply to.
    */
   resetDBClusterParameterGroup(params: Neptune.Types.ResetDBClusterParameterGroupMessage, callback?: (err: AWSError, data: Neptune.Types.DBClusterParameterGroupNameMessage) => void): Request<Neptune.Types.DBClusterParameterGroupNameMessage, AWSError>;
   /**
-   *  Modifies the parameters of a DB cluster parameter group to the default value. To reset specific parameters submit a list of the following: ParameterName and ApplyMethod. To reset the entire DB cluster parameter group, specify the DBClusterParameterGroupName and ResetAllParameters parameters.   When resetting the entire group, dynamic parameters are updated immediately and static parameters are set to pending-reboot to take effect on the next DB instance restart or RebootDBInstance request. You must call RebootDBInstance for every DB instance in your DB cluster that you want the updated static parameter to apply to.
+   *  Modifies the parameters of a DB cluster parameter group to the default value. To reset specific parameters submit a list of the following: ParameterName and ApplyMethod. To reset the entire DB cluster parameter group, specify the DBClusterParameterGroupName and ResetAllParameters parameters.  When resetting the entire group, dynamic parameters are updated immediately and static parameters are set to pending-reboot to take effect on the next DB instance restart or RebootDBInstance request. You must call RebootDBInstance for every DB instance in your DB cluster that you want the updated static parameter to apply to.
    */
   resetDBClusterParameterGroup(callback?: (err: AWSError, data: Neptune.Types.DBClusterParameterGroupNameMessage) => void): Request<Neptune.Types.DBClusterParameterGroupNameMessage, AWSError>;
   /**
-   * Modifies the parameters of a DB parameter group to the engine/system default value. To reset specific parameters, provide a list of the following: ParameterName and ApplyMethod. To reset the entire DB parameter group, specify the DBParameterGroup name and ResetAllParameters parameters. When resetting the entire group, dynamic parameters are updated immediately and static parameters are set to pending-reboot to take effect on the next DB instance restart or RebootDBInstance request. 
+   * Modifies the parameters of a DB parameter group to the engine/system default value. To reset specific parameters, provide a list of the following: ParameterName and ApplyMethod. To reset the entire DB parameter group, specify the DBParameterGroup name and ResetAllParameters parameters. When resetting the entire group, dynamic parameters are updated immediately and static parameters are set to pending-reboot to take effect on the next DB instance restart or RebootDBInstance request.
    */
   resetDBParameterGroup(params: Neptune.Types.ResetDBParameterGroupMessage, callback?: (err: AWSError, data: Neptune.Types.DBParameterGroupNameMessage) => void): Request<Neptune.Types.DBParameterGroupNameMessage, AWSError>;
   /**
-   * Modifies the parameters of a DB parameter group to the engine/system default value. To reset specific parameters, provide a list of the following: ParameterName and ApplyMethod. To reset the entire DB parameter group, specify the DBParameterGroup name and ResetAllParameters parameters. When resetting the entire group, dynamic parameters are updated immediately and static parameters are set to pending-reboot to take effect on the next DB instance restart or RebootDBInstance request. 
+   * Modifies the parameters of a DB parameter group to the engine/system default value. To reset specific parameters, provide a list of the following: ParameterName and ApplyMethod. To reset the entire DB parameter group, specify the DBParameterGroup name and ResetAllParameters parameters. When resetting the entire group, dynamic parameters are updated immediately and static parameters are set to pending-reboot to take effect on the next DB instance restart or RebootDBInstance request.
    */
   resetDBParameterGroup(callback?: (err: AWSError, data: Neptune.Types.DBParameterGroupNameMessage) => void): Request<Neptune.Types.DBParameterGroupNameMessage, AWSError>;
   /**
@@ -461,13 +461,29 @@ declare class Neptune extends Service {
    */
   restoreDBClusterFromSnapshot(callback?: (err: AWSError, data: Neptune.Types.RestoreDBClusterFromSnapshotResult) => void): Request<Neptune.Types.RestoreDBClusterFromSnapshotResult, AWSError>;
   /**
-   * Restores a DB cluster to an arbitrary point in time. Users can restore to any point in time before LatestRestorableTime for up to BackupRetentionPeriod days. The target DB cluster is created from the source DB cluster with the same configuration as the original DB cluster, except that the new DB cluster is created with the default DB security group.   This action only restores the DB cluster, not the DB instances for that DB cluster. You must invoke the CreateDBInstance action to create DB instances for the restored DB cluster, specifying the identifier of the restored DB cluster in DBClusterIdentifier. You can create DB instances only after the RestoreDBClusterToPointInTime action has completed and the DB cluster is available. 
+   * Restores a DB cluster to an arbitrary point in time. Users can restore to any point in time before LatestRestorableTime for up to BackupRetentionPeriod days. The target DB cluster is created from the source DB cluster with the same configuration as the original DB cluster, except that the new DB cluster is created with the default DB security group.  This action only restores the DB cluster, not the DB instances for that DB cluster. You must invoke the CreateDBInstance action to create DB instances for the restored DB cluster, specifying the identifier of the restored DB cluster in DBClusterIdentifier. You can create DB instances only after the RestoreDBClusterToPointInTime action has completed and the DB cluster is available. 
    */
   restoreDBClusterToPointInTime(params: Neptune.Types.RestoreDBClusterToPointInTimeMessage, callback?: (err: AWSError, data: Neptune.Types.RestoreDBClusterToPointInTimeResult) => void): Request<Neptune.Types.RestoreDBClusterToPointInTimeResult, AWSError>;
   /**
-   * Restores a DB cluster to an arbitrary point in time. Users can restore to any point in time before LatestRestorableTime for up to BackupRetentionPeriod days. The target DB cluster is created from the source DB cluster with the same configuration as the original DB cluster, except that the new DB cluster is created with the default DB security group.   This action only restores the DB cluster, not the DB instances for that DB cluster. You must invoke the CreateDBInstance action to create DB instances for the restored DB cluster, specifying the identifier of the restored DB cluster in DBClusterIdentifier. You can create DB instances only after the RestoreDBClusterToPointInTime action has completed and the DB cluster is available. 
+   * Restores a DB cluster to an arbitrary point in time. Users can restore to any point in time before LatestRestorableTime for up to BackupRetentionPeriod days. The target DB cluster is created from the source DB cluster with the same configuration as the original DB cluster, except that the new DB cluster is created with the default DB security group.  This action only restores the DB cluster, not the DB instances for that DB cluster. You must invoke the CreateDBInstance action to create DB instances for the restored DB cluster, specifying the identifier of the restored DB cluster in DBClusterIdentifier. You can create DB instances only after the RestoreDBClusterToPointInTime action has completed and the DB cluster is available. 
    */
   restoreDBClusterToPointInTime(callback?: (err: AWSError, data: Neptune.Types.RestoreDBClusterToPointInTimeResult) => void): Request<Neptune.Types.RestoreDBClusterToPointInTimeResult, AWSError>;
+  /**
+   * Starts an Amazon Neptune DB cluster that was stopped using the AWS console, the AWS CLI stop-db-cluster command, or the StopDBCluster API.
+   */
+  startDBCluster(params: Neptune.Types.StartDBClusterMessage, callback?: (err: AWSError, data: Neptune.Types.StartDBClusterResult) => void): Request<Neptune.Types.StartDBClusterResult, AWSError>;
+  /**
+   * Starts an Amazon Neptune DB cluster that was stopped using the AWS console, the AWS CLI stop-db-cluster command, or the StopDBCluster API.
+   */
+  startDBCluster(callback?: (err: AWSError, data: Neptune.Types.StartDBClusterResult) => void): Request<Neptune.Types.StartDBClusterResult, AWSError>;
+  /**
+   * Stops an Amazon Neptune DB cluster. When you stop a DB cluster, Neptune retains the DB cluster's metadata, including its endpoints and DB parameter groups. Neptune also retains the transaction logs so you can do a point-in-time restore if necessary.
+   */
+  stopDBCluster(params: Neptune.Types.StopDBClusterMessage, callback?: (err: AWSError, data: Neptune.Types.StopDBClusterResult) => void): Request<Neptune.Types.StopDBClusterResult, AWSError>;
+  /**
+   * Stops an Amazon Neptune DB cluster. When you stop a DB cluster, Neptune retains the DB cluster's metadata, including its endpoints and DB parameter groups. Neptune also retains the transaction logs so you can do a point-in-time restore if necessary.
+   */
+  stopDBCluster(callback?: (err: AWSError, data: Neptune.Types.StopDBClusterResult) => void): Request<Neptune.Types.StopDBClusterResult, AWSError>;
   /**
    * Waits for the dBInstanceAvailable state by periodically calling the underlying Neptune.describeDBInstancesoperation every 30 seconds (at most 60 times).
    */
@@ -570,7 +586,7 @@ declare namespace Neptune {
   }
   export interface CopyDBClusterParameterGroupMessage {
     /**
-     * The identifier or Amazon Resource Name (ARN) for the source DB cluster parameter group. For information about creating an ARN, see  Constructing an Amazon Resource Name (ARN).  Constraints:   Must specify a valid DB cluster parameter group.   If the source DB cluster parameter group is in the same AWS Region as the copy, specify a valid DB parameter group identifier, for example my-db-cluster-param-group, or a valid ARN.   If the source DB parameter group is in a different AWS Region than the copy, specify a valid DB cluster parameter group ARN, for example arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1.  
+     * The identifier or Amazon Resource Name (ARN) for the source DB cluster parameter group. For information about creating an ARN, see  Constructing an Amazon Resource Name (ARN). Constraints:   Must specify a valid DB cluster parameter group.   If the source DB cluster parameter group is in the same AWS Region as the copy, specify a valid DB parameter group identifier, for example my-db-cluster-param-group, or a valid ARN.   If the source DB parameter group is in a different AWS Region than the copy, specify a valid DB cluster parameter group ARN, for example arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1.  
      */
     SourceDBClusterParameterGroupIdentifier: String;
     /**
@@ -581,6 +597,9 @@ declare namespace Neptune {
      * A description for the copied DB cluster parameter group.
      */
     TargetDBClusterParameterGroupDescription: String;
+    /**
+     * The tags to be assigned to the copied DB cluster parameter group.
+     */
     Tags?: TagList;
   }
   export interface CopyDBClusterParameterGroupResult {
@@ -588,7 +607,7 @@ declare namespace Neptune {
   }
   export interface CopyDBClusterSnapshotMessage {
     /**
-     * The identifier of the DB cluster snapshot to copy. This parameter is not case-sensitive. You can't copy an encrypted, shared DB cluster snapshot from one AWS Region to another. Constraints:   Must specify a valid system snapshot in the "available" state.   If the source snapshot is in the same AWS Region as the copy, specify a valid DB snapshot identifier.   If the source snapshot is in a different AWS Region than the copy, specify a valid DB cluster snapshot ARN.    Example: my-cluster-snapshot1 
+     * The identifier of the DB cluster snapshot to copy. This parameter is not case-sensitive. You can't copy from one AWS Region to another. Constraints:   Must specify a valid system snapshot in the "available" state.   Specify a valid DB snapshot identifier.   Example: my-cluster-snapshot1 
      */
     SourceDBClusterSnapshotIdentifier: String;
     /**
@@ -596,17 +615,20 @@ declare namespace Neptune {
      */
     TargetDBClusterSnapshotIdentifier: String;
     /**
-     * The AWS AWS KMS key ID for an encrypted DB cluster snapshot. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.  If you copy an unencrypted DB cluster snapshot and specify a value for the KmsKeyId parameter, Amazon Neptune encrypts the target DB cluster snapshot using the specified KMS encryption key.  If you copy an encrypted DB cluster snapshot from your AWS account, you can specify a value for KmsKeyId to encrypt the copy with a new KMS encryption key. If you don't specify a value for KmsKeyId, then the copy of the DB cluster snapshot is encrypted with the same KMS key as the source DB cluster snapshot.  If you copy an encrypted DB cluster snapshot that is shared from another AWS account, then you must specify a value for KmsKeyId.  To copy an encrypted DB cluster snapshot to another AWS Region, you must set KmsKeyId to the KMS key ID you want to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region. KMS encryption keys are specific to the AWS Region that they are created in, and you can't use encryption keys from one AWS Region in another AWS Region.
+     * The AWS AWS KMS key ID for an encrypted DB cluster snapshot. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key. If you copy an encrypted DB cluster snapshot from your AWS account, you can specify a value for KmsKeyId to encrypt the copy with a new KMS encryption key. If you don't specify a value for KmsKeyId, then the copy of the DB cluster snapshot is encrypted with the same KMS key as the source DB cluster snapshot. If you copy an encrypted DB cluster snapshot that is shared from another AWS account, then you must specify a value for KmsKeyId.  KMS encryption keys are specific to the AWS Region that they are created in, and you can't use encryption keys from one AWS Region in another AWS Region. You cannot encrypt an unencrypted DB cluster snapshot when you copy it. If you try to copy an unencrypted DB cluster snapshot and specify a value for the KmsKeyId parameter, an error is returned.
      */
     KmsKeyId?: String;
     /**
-     * The URL that contains a Signature Version 4 signed request for the CopyDBClusterSnapshot API action in the AWS Region that contains the source DB cluster snapshot to copy. The PreSignedUrl parameter must be used when copying an encrypted DB cluster snapshot from another AWS Region. The pre-signed URL must be a valid request for the CopyDBSClusterSnapshot API action that can be executed in the source AWS Region that contains the encrypted DB cluster snapshot to be copied. The pre-signed URL request must contain the following parameter values:    KmsKeyId - The AWS KMS key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region. This is the same identifier for both the CopyDBClusterSnapshot action that is called in the destination AWS Region, and the action contained in the pre-signed URL.    DestinationRegion - The name of the AWS Region that the DB cluster snapshot will be created in.    SourceDBClusterSnapshotIdentifier - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB cluster snapshot from the us-west-2 AWS Region, then your SourceDBClusterSnapshotIdentifier looks like the following example: arn:aws:rds:us-west-2:123456789012:cluster-snapshot:neptune-cluster1-snapshot-20161115.   To learn how to generate a Signature Version 4 signed request, see  Authenticating Requests: Using Query Parameters (AWS Signature Version 4) and  Signature Version 4 Signing Process.
+     * Not currently supported.
      */
     PreSignedUrl?: String;
     /**
      * True to copy all tags from the source DB cluster snapshot to the target DB cluster snapshot, and otherwise false. The default is false.
      */
     CopyTags?: BooleanOptional;
+    /**
+     * The tags to assign to the new DB cluster snapshot copy.
+     */
     Tags?: TagList;
   }
   export interface CopyDBClusterSnapshotResult {
@@ -614,17 +636,20 @@ declare namespace Neptune {
   }
   export interface CopyDBParameterGroupMessage {
     /**
-     *  The identifier or ARN for the source DB parameter group. For information about creating an ARN, see  Constructing an Amazon Resource Name (ARN).  Constraints:   Must specify a valid DB parameter group.   Must specify a valid DB parameter group identifier, for example my-db-param-group, or a valid ARN.  
+     * The identifier or ARN for the source DB parameter group. For information about creating an ARN, see  Constructing an Amazon Resource Name (ARN). Constraints:   Must specify a valid DB parameter group.   Must specify a valid DB parameter group identifier, for example my-db-param-group, or a valid ARN.  
      */
     SourceDBParameterGroupIdentifier: String;
     /**
-     * The identifier for the copied DB parameter group. Constraints:   Cannot be null, empty, or blank   Must contain from 1 to 255 letters, numbers, or hyphens   First character must be a letter   Cannot end with a hyphen or contain two consecutive hyphens   Example: my-db-parameter-group 
+     * The identifier for the copied DB parameter group. Constraints:   Cannot be null, empty, or blank.   Must contain from 1 to 255 letters, numbers, or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.   Example: my-db-parameter-group 
      */
     TargetDBParameterGroupIdentifier: String;
     /**
      * A description for the copied DB parameter group.
      */
     TargetDBParameterGroupDescription: String;
+    /**
+     * The tags to be assigned to the copied DB parameter group.
+     */
     Tags?: TagList;
   }
   export interface CopyDBParameterGroupResult {
@@ -632,7 +657,7 @@ declare namespace Neptune {
   }
   export interface CreateDBClusterMessage {
     /**
-     * A list of EC2 Availability Zones that instances in the DB cluster can be created in. 
+     * A list of EC2 Availability Zones that instances in the DB cluster can be created in.
      */
     AvailabilityZones?: AvailabilityZones;
     /**
@@ -640,7 +665,7 @@ declare namespace Neptune {
      */
     BackupRetentionPeriod?: IntegerOptional;
     /**
-     * A value that indicates that the DB cluster should be associated with the specified CharacterSet.
+     *  (Not supported by Neptune) 
      */
     CharacterSetName?: String;
     /**
@@ -652,7 +677,7 @@ declare namespace Neptune {
      */
     DBClusterIdentifier: String;
     /**
-     *  The name of the DB cluster parameter group to associate with this DB cluster. If this argument is omitted, the default is used.  Constraints:   If supplied, must match the name of an existing DBClusterParameterGroup.  
+     *  The name of the DB cluster parameter group to associate with this DB cluster. If this argument is omitted, the default is used. Constraints:   If supplied, must match the name of an existing DBClusterParameterGroup.  
      */
     DBClusterParameterGroupName?: String;
     /**
@@ -668,7 +693,7 @@ declare namespace Neptune {
      */
     Engine: String;
     /**
-     * The version number of the database engine to use. Example: 1.0.1 
+     * The version number of the database engine to use. Currently, setting this parameter has no effect. Example: 1.0.1 
      */
     EngineVersion?: String;
     /**
@@ -684,11 +709,11 @@ declare namespace Neptune {
      */
     MasterUserPassword?: String;
     /**
-     * A value that indicates that the DB cluster should be associated with the specified option group. Permanent options can't be removed from an option group. The option group can't be removed from a DB cluster once it is associated with a DB cluster.
+     *  (Not supported by Neptune) 
      */
     OptionGroupName?: String;
     /**
-     * The daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter.  The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. To see the time blocks available, see  Adjusting the Preferred Maintenance Window in the Amazon Neptune User Guide.  Constraints:   Must be in the format hh24:mi-hh24:mi.   Must be in Universal Coordinated Time (UTC).   Must not conflict with the preferred maintenance window.   Must be at least 30 minutes.  
+     * The daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter. The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. To see the time blocks available, see  Adjusting the Preferred Maintenance Window in the Amazon Neptune User Guide.  Constraints:   Must be in the format hh24:mi-hh24:mi.   Must be in Universal Coordinated Time (UTC).   Must not conflict with the preferred maintenance window.   Must be at least 30 minutes.  
      */
     PreferredBackupWindow?: String;
     /**
@@ -699,23 +724,34 @@ declare namespace Neptune {
      * The Amazon Resource Name (ARN) of the source DB instance or DB cluster if this DB cluster is created as a Read Replica.
      */
     ReplicationSourceIdentifier?: String;
+    /**
+     * The tags to assign to the new DB cluster.
+     */
     Tags?: TagList;
     /**
      * Specifies whether the DB cluster is encrypted.
      */
     StorageEncrypted?: BooleanOptional;
     /**
-     * The AWS KMS key identifier for an encrypted DB cluster. The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a DB cluster with the same AWS account that owns the KMS encryption key used to encrypt the new DB cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key. If an encryption key is not specified in KmsKeyId:   If ReplicationSourceIdentifier identifies an encrypted source, then Amazon Neptune will use the encryption key used to encrypt the source. Otherwise, Amazon Neptune will use your default encryption key.    If the StorageEncrypted parameter is true and ReplicationSourceIdentifier is not specified, then Amazon Neptune will use your default encryption key.   AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region. If you create a Read Replica of an encrypted DB cluster in another AWS Region, you must set KmsKeyId to a KMS key ID that is valid in the destination AWS Region. This key is used to encrypt the Read Replica in that AWS Region.
+     * The AWS KMS key identifier for an encrypted DB cluster. The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a DB cluster with the same AWS account that owns the KMS encryption key used to encrypt the new DB cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key. If an encryption key is not specified in KmsKeyId:   If ReplicationSourceIdentifier identifies an encrypted source, then Amazon Neptune will use the encryption key used to encrypt the source. Otherwise, Amazon Neptune will use your default encryption key.   If the StorageEncrypted parameter is true and ReplicationSourceIdentifier is not specified, then Amazon Neptune will use your default encryption key.   AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region. If you create a Read Replica of an encrypted DB cluster in another AWS Region, you must set KmsKeyId to a KMS key ID that is valid in the destination AWS Region. This key is used to encrypt the Read Replica in that AWS Region.
      */
     KmsKeyId?: String;
     /**
-     * A URL that contains a Signature Version 4 signed request for the CreateDBCluster action to be called in the source AWS Region where the DB cluster is replicated from. You only need to specify PreSignedUrl when you are performing cross-region replication from an encrypted DB cluster. The pre-signed URL must be a valid request for the CreateDBCluster API action that can be executed in the source AWS Region that contains the encrypted DB cluster to be copied. The pre-signed URL request must contain the following parameter values:    KmsKeyId - The AWS KMS key identifier for the key to use to encrypt the copy of the DB cluster in the destination AWS Region. This should refer to the same KMS key for both the CreateDBCluster action that is called in the destination AWS Region, and the action contained in the pre-signed URL.    DestinationRegion - The name of the AWS Region that Read Replica will be created in.    ReplicationSourceIdentifier - The DB cluster identifier for the encrypted DB cluster to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB cluster from the us-west-2 AWS Region, then your ReplicationSourceIdentifier would look like Example: arn:aws:rds:us-west-2:123456789012:cluster:neptune-cluster1.   To learn how to generate a Signature Version 4 signed request, see  Authenticating Requests: Using Query Parameters (AWS Signature Version 4) and  Signature Version 4 Signing Process.
+     * This parameter is not currently supported.
      */
     PreSignedUrl?: String;
     /**
      * True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false. Default: false 
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
+    /**
+     * The list of log types that need to be enabled for exporting to CloudWatch Logs.
+     */
+    EnableCloudwatchLogsExports?: LogTypeList;
+    /**
+     * A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is enabled.
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export interface CreateDBClusterParameterGroupMessage {
     /**
@@ -730,6 +766,9 @@ declare namespace Neptune {
      * The description for the DB cluster parameter group.
      */
     Description: String;
+    /**
+     * The tags to be assigned to the new DB cluster parameter group.
+     */
     Tags?: TagList;
   }
   export interface CreateDBClusterParameterGroupResult {
@@ -757,7 +796,7 @@ declare namespace Neptune {
   }
   export interface CreateDBInstanceMessage {
     /**
-     * The database name.  Type: String
+     * Not supported.
      */
     DBName?: String;
     /**
@@ -769,11 +808,11 @@ declare namespace Neptune {
      */
     AllocatedStorage?: IntegerOptional;
     /**
-     * The compute and memory capacity of the DB instance, for example, db.m4.large. Not all DB instance classes are available in all AWS Regions. 
+     * The compute and memory capacity of the DB instance, for example, db.m4.large. Not all DB instance classes are available in all AWS Regions.
      */
     DBInstanceClass: String;
     /**
-     * The name of the database engine to be used for this instance.  Valid Values: neptune 
+     * The name of the database engine to be used for this instance. Valid Values: neptune 
      */
     Engine: String;
     /**
@@ -781,7 +820,7 @@ declare namespace Neptune {
      */
     MasterUsername?: String;
     /**
-     * The password for the master user. The password can include any printable ASCII character except "/", """, or "@".  Not used. 
+     * The password for the master user. The password can include any printable ASCII character except "/", """, or "@".  Not used.
      */
     MasterUserPassword?: String;
     /**
@@ -793,7 +832,7 @@ declare namespace Neptune {
      */
     VpcSecurityGroupIds?: VpcSecurityGroupIdList;
     /**
-     *  The EC2 Availability Zone that the DB instance is created in.  Default: A random, system-chosen Availability Zone in the endpoint's AWS Region.  Example: us-east-1d   Constraint: The AvailabilityZone parameter can't be specified if the MultiAZ parameter is set to true. The specified Availability Zone must be in the same AWS Region as the current endpoint. 
+     *  The EC2 Availability Zone that the DB instance is created in Default: A random, system-chosen Availability Zone in the endpoint's AWS Region.  Example: us-east-1d   Constraint: The AvailabilityZone parameter can't be specified if the MultiAZ parameter is set to true. The specified Availability Zone must be in the same AWS Region as the current endpoint.
      */
     AvailabilityZone?: String;
     /**
@@ -801,7 +840,7 @@ declare namespace Neptune {
      */
     DBSubnetGroupName?: String;
     /**
-     * The time range each week during which system maintenance can occur, in Universal Coordinated Time (UTC).   Format: ddd:hh24:mi-ddd:hh24:mi  The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week.  Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun. Constraints: Minimum 30-minute window.
+     * The time range each week during which system maintenance can occur, in Universal Coordinated Time (UTC).  Format: ddd:hh24:mi-ddd:hh24:mi  The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun. Constraints: Minimum 30-minute window.
      */
     PreferredMaintenanceWindow?: String;
     /**
@@ -813,7 +852,7 @@ declare namespace Neptune {
      */
     BackupRetentionPeriod?: IntegerOptional;
     /**
-     *  The daily time range during which automated backups are created.  Not applicable. The daily time range for creating automated backups is managed by the DB cluster. For more information, see CreateDBCluster.
+     *  The daily time range during which automated backups are created. Not applicable. The daily time range for creating automated backups is managed by the DB cluster. For more information, see CreateDBCluster.
      */
     PreferredBackupWindow?: String;
     /**
@@ -825,7 +864,7 @@ declare namespace Neptune {
      */
     MultiAZ?: BooleanOptional;
     /**
-     * The version number of the database engine to use.
+     * The version number of the database engine to use. Currently, setting this parameter has no effect.
      */
     EngineVersion?: String;
     /**
@@ -837,21 +876,24 @@ declare namespace Neptune {
      */
     LicenseModel?: String;
     /**
-     * The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for the DB instance. 
+     * The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for the DB instance.
      */
     Iops?: IntegerOptional;
     /**
-     * Indicates that the DB instance should be associated with the specified option group. Permanent options, such as the TDE option for Oracle Advanced Security TDE, can't be removed from an option group, and that option group can't be removed from a DB instance once it is associated with a DB instance
+     *  (Not supported by Neptune) 
      */
     OptionGroupName?: String;
     /**
-     * Indicates that the DB instance should be associated with the specified CharacterSet. Not applicable. The character set is managed by the DB cluster. For more information, see CreateDBCluster.
+     *  (Not supported by Neptune) 
      */
     CharacterSetName?: String;
     /**
-     * This parameter is not supported.
+     * This flag should no longer be used.
      */
     PubliclyAccessible?: BooleanOptional;
+    /**
+     * The tags to assign to the new instance.
+     */
     Tags?: TagList;
     /**
      * The identifier of the DB cluster that the instance will belong to. For information on creating a DB cluster, see CreateDBCluster. Type: String
@@ -902,7 +944,7 @@ declare namespace Neptune {
      */
     PromotionTier?: IntegerOptional;
     /**
-     * The time zone of the DB instance. 
+     * The time zone of the DB instance.
      */
     Timezone?: String;
     /**
@@ -910,17 +952,21 @@ declare namespace Neptune {
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
     /**
-     * True to enable Performance Insights for the DB instance, and otherwise false. 
+     *  (Not supported by Neptune) 
      */
     EnablePerformanceInsights?: BooleanOptional;
     /**
-     * The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.
+     *  (Not supported by Neptune) 
      */
     PerformanceInsightsKMSKeyId?: String;
     /**
      * The list of log types that need to be enabled for exporting to CloudWatch Logs.
      */
     EnableCloudwatchLogsExports?: LogTypeList;
+    /**
+     * A value that indicates whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. See Deleting a DB Instance. DB instances in a DB cluster can be deleted even when deletion protection is enabled in their parent DB cluster.
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export interface CreateDBInstanceResult {
     DBInstance?: DBInstance;
@@ -938,6 +984,9 @@ declare namespace Neptune {
      * The description for the DB parameter group.
      */
     Description: String;
+    /**
+     * The tags to be assigned to the new DB parameter group.
+     */
     Tags?: TagList;
   }
   export interface CreateDBParameterGroupResult {
@@ -956,6 +1005,9 @@ declare namespace Neptune {
      * The EC2 Subnet IDs for the DB subnet group.
      */
     SubnetIds: SubnetIdentifierList;
+    /**
+     * The tags to be assigned to the new DB subnet group.
+     */
     Tags?: TagList;
   }
   export interface CreateDBSubnetGroupResult {
@@ -975,7 +1027,7 @@ declare namespace Neptune {
      */
     SourceType?: String;
     /**
-     *  A list of event categories for a SourceType that you want to subscribe to. You can see a list of the categories for a given SourceType by using the DescribeEventCategories action. 
+     *  A list of event categories for a SourceType that you want to subscribe to. You can see a list of the categories for a given SourceType by using the DescribeEventCategories action.
      */
     EventCategories?: EventCategoriesList;
     /**
@@ -983,9 +1035,12 @@ declare namespace Neptune {
      */
     SourceIds?: SourceIdsList;
     /**
-     *  A Boolean value; set to true to activate the subscription, set to false to create the subscription but not active it. 
+     *  A Boolean value; set to true to activate the subscription, set to false to create the subscription but not active it.
      */
     Enabled?: BooleanOptional;
+    /**
+     * The tags to be applied to the new event subscription.
+     */
     Tags?: TagList;
   }
   export interface CreateEventSubscriptionResult {
@@ -1005,7 +1060,7 @@ declare namespace Neptune {
      */
     BackupRetentionPeriod?: IntegerOptional;
     /**
-     * If present, specifies the name of the character set that this cluster is associated with.
+     *  (Not supported by Neptune) 
      */
     CharacterSetName?: String;
     /**
@@ -1041,7 +1096,7 @@ declare namespace Neptune {
      */
     Endpoint?: String;
     /**
-     * The reader endpoint for the DB cluster. The reader endpoint for a DB cluster load-balances connections across the Read Replicas that are available in a DB cluster. As clients request new connections to the reader endpoint, Neptune distributes the connection requests among the Read Replicas in the DB cluster. This functionality can help balance your read workload across multiple Read Replicas in your DB cluster.  If a failover occurs, and the Read Replica that you are connected to is promoted to be the primary instance, your connection is dropped. To continue sending your read workload to other Read Replicas in the cluster, you can then reconnect to the reader endpoint.
+     * The reader endpoint for the DB cluster. The reader endpoint for a DB cluster load-balances connections across the Read Replicas that are available in a DB cluster. As clients request new connections to the reader endpoint, Neptune distributes the connection requests among the Read Replicas in the DB cluster. This functionality can help balance your read workload across multiple Read Replicas in your DB cluster. If a failover occurs, and the Read Replica that you are connected to is promoted to be the primary instance, your connection is dropped. To continue sending your read workload to other Read Replicas in the cluster, you can then reconnect to the reader endpoint.
      */
     ReaderEndpoint?: String;
     /**
@@ -1069,11 +1124,11 @@ declare namespace Neptune {
      */
     MasterUsername?: String;
     /**
-     * Provides the list of option group memberships for this DB cluster.
+     *  (Not supported by Neptune) 
      */
     DBClusterOptionGroupMemberships?: DBClusterOptionGroupMemberships;
     /**
-     * Specifies the daily time range during which automated backups are created if automated backups are enabled, as determined by the BackupRetentionPeriod. 
+     * Specifies the daily time range during which automated backups are created if automated backups are enabled, as determined by the BackupRetentionPeriod.
      */
     PreferredBackupWindow?: String;
     /**
@@ -1081,7 +1136,7 @@ declare namespace Neptune {
      */
     PreferredMaintenanceWindow?: String;
     /**
-     * Contains the identifier of the source DB cluster if this DB cluster is a Read Replica.
+     * Not supported by Neptune.
      */
     ReplicationSourceIdentifier?: String;
     /**
@@ -1132,6 +1187,14 @@ declare namespace Neptune {
      * Specifies the time when the DB cluster was created, in Universal Coordinated Time (UTC).
      */
     ClusterCreateTime?: TStamp;
+    /**
+     * A list of log types that this DB cluster is configured to export to CloudWatch Logs.
+     */
+    EnabledCloudwatchLogsExports?: LogTypeList;
+    /**
+     * Indicates whether or not the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled.
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export type DBClusterList = DBCluster[];
   export interface DBClusterMember {
@@ -1148,7 +1211,7 @@ declare namespace Neptune {
      */
     DBClusterParameterGroupStatus?: String;
     /**
-     * A value that specifies the order in which a Read Replica is promoted to the primary instance after a failure of the existing primary instance. 
+     * A value that specifies the order in which a Read Replica is promoted to the primary instance after a failure of the existing primary instance.
      */
     PromotionTier?: IntegerOptional;
   }
@@ -1198,7 +1261,7 @@ declare namespace Neptune {
      */
     Parameters?: ParametersList;
     /**
-     *  An optional pagination token provided by a previous DescribeDBClusterParameters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords . 
+     *  An optional pagination token provided by a previous DescribeDBClusterParameters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords .
      */
     Marker?: String;
   }
@@ -1211,7 +1274,7 @@ declare namespace Neptune {
   }
   export interface DBClusterParameterGroupsMessage {
     /**
-     *  An optional pagination token provided by a previous DescribeDBClusterParameterGroups request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     *  An optional pagination token provided by a previous DescribeDBClusterParameterGroups request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
      */
     Marker?: String;
     /**
@@ -1236,7 +1299,7 @@ declare namespace Neptune {
      */
     AvailabilityZones?: AvailabilityZones;
     /**
-     * Specifies the identifier for the DB cluster snapshot.
+     * Specifies the identifier for a DB cluster snapshot. Must match the identifier of an existing snapshot. After you restore a DB cluster using a DBClusterSnapshotIdentifier, you must specify the same DBClusterSnapshotIdentifier for any future updates to the DB cluster. When you specify this property for an update, the DB cluster is not restored from the snapshot again, and the data in the database is not changed. However, if you don't specify the DBClusterSnapshotIdentifier, an empty DB cluster is created, and the original DB cluster is deleted. If you specify a property that is different from the previous snapshot restore property, the DB cluster is restored from the snapshot specified by the DBClusterSnapshotIdentifier, and the original DB cluster is deleted.
      */
     DBClusterSnapshotIdentifier?: String;
     /**
@@ -1366,11 +1429,11 @@ declare namespace Neptune {
      */
     DBEngineVersionDescription?: String;
     /**
-     *  The default character set for new instances of this engine version, if the CharacterSetName parameter of the CreateDBInstance API is not specified. 
+     *  (Not supported by Neptune) 
      */
     DefaultCharacterSet?: CharacterSet;
     /**
-     *  A list of the character sets supported by this engine for the CharacterSetName parameter of the CreateDBInstance action. 
+     *  (Not supported by Neptune) 
      */
     SupportedCharacterSets?: SupportedCharacterSetsList;
     /**
@@ -1378,7 +1441,7 @@ declare namespace Neptune {
      */
     ValidUpgradeTarget?: ValidUpgradeTargetList;
     /**
-     * A list of the time zones supported by this engine for the Timezone parameter of the CreateDBInstance action. 
+     * A list of the time zones supported by this engine for the Timezone parameter of the CreateDBInstance action.
      */
     SupportedTimezones?: SupportedTimezonesList;
     /**
@@ -1397,11 +1460,11 @@ declare namespace Neptune {
   export type DBEngineVersionList = DBEngineVersion[];
   export interface DBEngineVersionMessage {
     /**
-     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
      */
     Marker?: String;
     /**
-     *  A list of DBEngineVersion elements. 
+     *  A list of DBEngineVersion elements.
      */
     DBEngineVersions?: DBEngineVersionList;
   }
@@ -1443,7 +1506,7 @@ declare namespace Neptune {
      */
     InstanceCreateTime?: TStamp;
     /**
-     *  Specifies the daily time range during which automated backups are created if automated backups are enabled, as determined by the BackupRetentionPeriod. 
+     *  Specifies the daily time range during which automated backups are created if automated backups are enabled, as determined by the BackupRetentionPeriod.
      */
     PreferredBackupWindow?: String;
     /**
@@ -1451,7 +1514,7 @@ declare namespace Neptune {
      */
     BackupRetentionPeriod?: Integer;
     /**
-     *  Provides List of DB security group elements containing only DBSecurityGroup.Name and DBSecurityGroup.Status subelements. 
+     *  Provides List of DB security group elements containing only DBSecurityGroup.Name and DBSecurityGroup.Status subelements.
      */
     DBSecurityGroups?: DBSecurityGroupMembershipList;
     /**
@@ -1515,11 +1578,11 @@ declare namespace Neptune {
      */
     Iops?: IntegerOptional;
     /**
-     * Provides the list of option group memberships for this DB instance.
+     *  (Not supported by Neptune) 
      */
     OptionGroupMemberships?: OptionGroupMembershipList;
     /**
-     * If present, specifies the name of the character set that this instance is associated with.
+     *  (Not supported by Neptune) 
      */
     CharacterSetName?: String;
     /**
@@ -1527,7 +1590,7 @@ declare namespace Neptune {
      */
     SecondaryAvailabilityZone?: String;
     /**
-     * This parameter is not supported.
+     * This flag should no longer be used.
      */
     PubliclyAccessible?: Boolean;
     /**
@@ -1551,11 +1614,11 @@ declare namespace Neptune {
      */
     DBClusterIdentifier?: String;
     /**
-     * Specifies whether the DB instance is encrypted.
+     * Not supported: The encryption for DB instances is managed by the DB cluster.
      */
     StorageEncrypted?: Boolean;
     /**
-     *  If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB instance. 
+     *  Not supported: The encryption for DB instances is managed by the DB cluster.
      */
     KmsKeyId?: String;
     /**
@@ -1595,7 +1658,7 @@ declare namespace Neptune {
      */
     DBInstanceArn?: String;
     /**
-     * Not supported. 
+     * Not supported.
      */
     Timezone?: String;
     /**
@@ -1603,26 +1666,30 @@ declare namespace Neptune {
      */
     IAMDatabaseAuthenticationEnabled?: Boolean;
     /**
-     * True if Performance Insights is enabled for the DB instance, and otherwise false.
+     *  (Not supported by Neptune) 
      */
     PerformanceInsightsEnabled?: BooleanOptional;
     /**
-     * The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.
+     *  (Not supported by Neptune) 
      */
     PerformanceInsightsKMSKeyId?: String;
     /**
      * A list of log types that this DB instance is configured to export to CloudWatch Logs.
      */
     EnabledCloudwatchLogsExports?: LogTypeList;
+    /**
+     * Indicates whether or not the DB instance has deletion protection enabled. The instance can't be deleted when deletion protection is enabled. See Deleting a DB Instance.
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export type DBInstanceList = DBInstance[];
   export interface DBInstanceMessage {
     /**
-     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords . 
+     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords .
      */
     Marker?: String;
     /**
-     *  A list of DBInstance instances. 
+     *  A list of DBInstance instances.
      */
     DBInstances?: DBInstanceList;
   }
@@ -1665,11 +1732,11 @@ declare namespace Neptune {
   }
   export interface DBParameterGroupDetails {
     /**
-     *  A list of Parameter values. 
+     * A list of Parameter values.
      */
     Parameters?: ParametersList;
     /**
-     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
      */
     Marker?: String;
   }
@@ -1693,11 +1760,11 @@ declare namespace Neptune {
   export type DBParameterGroupStatusList = DBParameterGroupStatus[];
   export interface DBParameterGroupsMessage {
     /**
-     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
      */
     Marker?: String;
     /**
-     *  A list of DBParameterGroup instances. 
+     * A list of DBParameterGroup instances.
      */
     DBParameterGroups?: DBParameterGroupList;
   }
@@ -1731,7 +1798,7 @@ declare namespace Neptune {
      */
     SubnetGroupStatus?: String;
     /**
-     *  Contains a list of Subnet elements. 
+     *  Contains a list of Subnet elements.
      */
     Subnets?: SubnetList;
     /**
@@ -1741,11 +1808,11 @@ declare namespace Neptune {
   }
   export interface DBSubnetGroupMessage {
     /**
-     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
      */
     Marker?: String;
     /**
-     *  A list of DBSubnetGroup instances. 
+     *  A list of DBSubnetGroup instances.
      */
     DBSubnetGroups?: DBSubnetGroups;
   }
@@ -1756,11 +1823,11 @@ declare namespace Neptune {
      */
     DBClusterIdentifier: String;
     /**
-     *  Determines whether a final DB cluster snapshot is created before the DB cluster is deleted. If true is specified, no DB cluster snapshot is created. If false is specified, a DB cluster snapshot is created before the DB cluster is deleted.   You must specify a FinalDBSnapshotIdentifier parameter if SkipFinalSnapshot is false.  Default: false 
+     *  Determines whether a final DB cluster snapshot is created before the DB cluster is deleted. If true is specified, no DB cluster snapshot is created. If false is specified, a DB cluster snapshot is created before the DB cluster is deleted.  You must specify a FinalDBSnapshotIdentifier parameter if SkipFinalSnapshot is false.  Default: false 
      */
     SkipFinalSnapshot?: Boolean;
     /**
-     *  The DB cluster snapshot identifier of the new DB cluster snapshot created when SkipFinalSnapshot is set to false.    Specifying this parameter and also setting the SkipFinalShapshot parameter to true results in an error.   Constraints:   Must be 1 to 255 letters, numbers, or hyphens.   First character must be a letter   Cannot end with a hyphen or contain two consecutive hyphens  
+     *  The DB cluster snapshot identifier of the new DB cluster snapshot created when SkipFinalSnapshot is set to false.   Specifying this parameter and also setting the SkipFinalShapshot parameter to true results in an error.  Constraints:   Must be 1 to 255 letters, numbers, or hyphens.   First character must be a letter   Cannot end with a hyphen or contain two consecutive hyphens  
      */
     FinalDBSnapshotIdentifier?: String;
   }
@@ -1788,11 +1855,11 @@ declare namespace Neptune {
      */
     DBInstanceIdentifier: String;
     /**
-     *  Determines whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted.  Note that when a DB instance is in a failure state and has a status of 'failed', 'incompatible-restore', or 'incompatible-network', it can only be deleted when the SkipFinalSnapshot parameter is set to "true". Specify true when deleting a Read Replica.  The FinalDBSnapshotIdentifier parameter must be specified if SkipFinalSnapshot is false.  Default: false 
+     *  Determines whether a final DB snapshot is created before the DB instance is deleted. If true is specified, no DBSnapshot is created. If false is specified, a DB snapshot is created before the DB instance is deleted. Note that when a DB instance is in a failure state and has a status of 'failed', 'incompatible-restore', or 'incompatible-network', it can only be deleted when the SkipFinalSnapshot parameter is set to "true". Specify true when deleting a Read Replica.  The FinalDBSnapshotIdentifier parameter must be specified if SkipFinalSnapshot is false.  Default: false 
      */
     SkipFinalSnapshot?: Boolean;
     /**
-     *  The DBSnapshotIdentifier of the new DBSnapshot created when SkipFinalSnapshot is set to false.   Specifying this parameter and also setting the SkipFinalShapshot parameter to true results in an error.  Constraints:   Must be 1 to 255 letters or numbers.   First character must be a letter   Cannot end with a hyphen or contain two consecutive hyphens   Cannot be specified when deleting a Read Replica.  
+     *  The DBSnapshotIdentifier of the new DBSnapshot created when SkipFinalSnapshot is set to false.  Specifying this parameter and also setting the SkipFinalShapshot parameter to true results in an error.  Constraints:   Must be 1 to 255 letters or numbers.   First character must be a letter   Cannot end with a hyphen or contain two consecutive hyphens   Cannot be specified when deleting a Read Replica.  
      */
     FinalDBSnapshotIdentifier?: String;
   }
@@ -1830,11 +1897,11 @@ declare namespace Neptune {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
-     *  An optional pagination token provided by a previous DescribeDBClusterParameterGroups request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     *  An optional pagination token provided by a previous DescribeDBClusterParameterGroups request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
      */
     Marker?: String;
   }
@@ -1844,7 +1911,7 @@ declare namespace Neptune {
      */
     DBClusterParameterGroupName: String;
     /**
-     *  A value that indicates to return only parameters for a specific source. Parameter sources can be engine, service, or customer. 
+     *  A value that indicates to return only parameters for a specific source. Parameter sources can be engine, service, or customer.
      */
     Source?: String;
     /**
@@ -1852,7 +1919,7 @@ declare namespace Neptune {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -1871,11 +1938,11 @@ declare namespace Neptune {
   }
   export interface DescribeDBClusterSnapshotsMessage {
     /**
-     * The ID of the DB cluster to retrieve the list of DB cluster snapshots for. This parameter can't be used in conjunction with the DBClusterSnapshotIdentifier parameter. This parameter is not case-sensitive.  Constraints:   If supplied, must match the identifier of an existing DBCluster.  
+     * The ID of the DB cluster to retrieve the list of DB cluster snapshots for. This parameter can't be used in conjunction with the DBClusterSnapshotIdentifier parameter. This parameter is not case-sensitive. Constraints:   If supplied, must match the identifier of an existing DBCluster.  
      */
     DBClusterIdentifier?: String;
     /**
-     * A specific DB cluster snapshot identifier to describe. This parameter can't be used in conjunction with the DBClusterIdentifier parameter. This value is stored as a lowercase string.  Constraints:   If supplied, must match the identifier of an existing DBClusterSnapshot.   If this identifier is for an automated snapshot, the SnapshotType parameter must also be specified.  
+     * A specific DB cluster snapshot identifier to describe. This parameter can't be used in conjunction with the DBClusterIdentifier parameter. This value is stored as a lowercase string. Constraints:   If supplied, must match the identifier of an existing DBClusterSnapshot.   If this identifier is for an automated snapshot, the SnapshotType parameter must also be specified.  
      */
     DBClusterSnapshotIdentifier?: String;
     /**
@@ -1887,7 +1954,7 @@ declare namespace Neptune {
      */
     Filters?: FilterList;
     /**
-     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -1909,15 +1976,15 @@ declare namespace Neptune {
      */
     DBClusterIdentifier?: String;
     /**
-     * A filter that specifies one or more DB clusters to describe. Supported filters:    db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB clusters identified by these ARNs.  
+     * A filter that specifies one or more DB clusters to describe. Supported filters:    db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB clusters identified by these ARNs.    engine - Accepts an engine name (such as neptune), and restricts the results list to DB clusters created by that engine.   For example, to invoke this API from the AWS CLI and filter so that only Neptune DB clusters are returned, you could use the following command:
      */
     Filters?: FilterList;
     /**
-     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
-     * An optional pagination token provided by a previous DescribeDBClusters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     * An optional pagination token provided by a previous DescribeDBClusters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
      */
     Marker?: String;
   }
@@ -1939,11 +2006,11 @@ declare namespace Neptune {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more than the MaxRecords value is available, a pagination token called a marker is included in the response so that the following results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more than the MaxRecords value is available, a pagination token called a marker is included in the response so that the following results can be retrieved. Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
-     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
      */
     Marker?: String;
     /**
@@ -1951,11 +2018,11 @@ declare namespace Neptune {
      */
     DefaultOnly?: Boolean;
     /**
-     * If this parameter is specified and the requested engine supports the CharacterSetName parameter for CreateDBInstance, the response includes a list of supported character sets for each engine version. 
+     * If this parameter is specified and the requested engine supports the CharacterSetName parameter for CreateDBInstance, the response includes a list of supported character sets for each engine version.
      */
     ListSupportedCharacterSets?: BooleanOptional;
     /**
-     * If this parameter is specified and the requested engine supports the TimeZone parameter for CreateDBInstance, the response includes a list of supported time zones for each engine version. 
+     * If this parameter is specified and the requested engine supports the TimeZone parameter for CreateDBInstance, the response includes a list of supported time zones for each engine version.
      */
     ListSupportedTimezones?: BooleanOptional;
   }
@@ -1965,15 +2032,15 @@ declare namespace Neptune {
      */
     DBInstanceIdentifier?: String;
     /**
-     * A filter that specifies one or more DB instances to describe. Supported filters:    db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB instances associated with the DB clusters identified by these ARNs.    db-instance-id - Accepts DB instance identifiers and DB instance Amazon Resource Names (ARNs). The results list will only include information about the DB instances identified by these ARNs.  
+     * A filter that specifies one or more DB instances to describe. Supported filters:    db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB instances associated with the DB clusters identified by these ARNs.    engine - Accepts an engine name (such as neptune), and restricts the results list to DB instances created by that engine.   For example, to invoke this API from the AWS CLI and filter so that only Neptune DB instances are returned, you could use the following command:
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
-     *  An optional pagination token provided by a previous DescribeDBInstances request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     *  An optional pagination token provided by a previous DescribeDBInstances request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
      */
     Marker?: String;
   }
@@ -1987,11 +2054,11 @@ declare namespace Neptune {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
-     *  An optional pagination token provided by a previous DescribeDBParameterGroups request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     * An optional pagination token provided by a previous DescribeDBParameterGroups request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
      */
     Marker?: String;
   }
@@ -2009,11 +2076,11 @@ declare namespace Neptune {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
-     *  An optional pagination token provided by a previous DescribeDBParameters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     * An optional pagination token provided by a previous DescribeDBParameters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
      */
     Marker?: String;
   }
@@ -2027,11 +2094,11 @@ declare namespace Neptune {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
-     *  An optional pagination token provided by a previous DescribeDBSubnetGroups request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     *  An optional pagination token provided by a previous DescribeDBSubnetGroups request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
      */
     Marker?: String;
   }
@@ -2045,11 +2112,11 @@ declare namespace Neptune {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
-     *  An optional pagination token provided by a previous DescribeEngineDefaultClusterParameters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     *  An optional pagination token provided by a previous DescribeEngineDefaultClusterParameters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
      */
     Marker?: String;
   }
@@ -2066,11 +2133,11 @@ declare namespace Neptune {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
-     *  An optional pagination token provided by a previous DescribeEngineDefaultParameters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     *  An optional pagination token provided by a previous DescribeEngineDefaultParameters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
      */
     Marker?: String;
   }
@@ -2097,11 +2164,11 @@ declare namespace Neptune {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
-     *  An optional pagination token provided by a previous DescribeOrderableDBInstanceOptions request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords . 
+     *  An optional pagination token provided by a previous DescribeOrderableDBInstanceOptions request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords .
      */
     Marker?: String;
   }
@@ -2135,11 +2202,11 @@ declare namespace Neptune {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
-     *  An optional pagination token provided by a previous DescribeEvents request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     *  An optional pagination token provided by a previous DescribeEvents request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
      */
     Marker?: String;
   }
@@ -2169,11 +2236,11 @@ declare namespace Neptune {
      */
     Filters?: FilterList;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
-     *  An optional pagination token provided by a previous DescribeOrderableDBInstanceOptions request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords . 
+     *  An optional pagination token provided by a previous DescribeOrderableDBInstanceOptions request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords .
      */
     Marker?: String;
   }
@@ -2187,17 +2254,17 @@ declare namespace Neptune {
      */
     Filters?: FilterList;
     /**
-     *  An optional pagination token provided by a previous DescribePendingMaintenanceActions request. If this parameter is specified, the response includes only records beyond the marker, up to a number of records specified by MaxRecords. 
+     *  An optional pagination token provided by a previous DescribePendingMaintenanceActions request. If this parameter is specified, the response includes only records beyond the marker, up to a number of records specified by MaxRecords.
      */
     Marker?: String;
     /**
-     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. Default: 100 Constraints: Minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
   }
   export interface DescribeValidDBInstanceModificationsMessage {
     /**
-     * The customer identifier or the ARN of your DB instance. 
+     * The customer identifier or the ARN of your DB instance.
      */
     DBInstanceIdentifier: String;
   }
@@ -2256,7 +2323,7 @@ declare namespace Neptune {
      */
     DBParameterGroupFamily?: String;
     /**
-     *  An optional pagination token provided by a previous EngineDefaults request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords . 
+     *  An optional pagination token provided by a previous EngineDefaults request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords .
      */
     Marker?: String;
     /**
@@ -2354,7 +2421,7 @@ declare namespace Neptune {
   export type EventSubscriptionsList = EventSubscription[];
   export interface EventSubscriptionsMessage {
     /**
-     *  An optional pagination token provided by a previous DescribeOrderableDBInstanceOptions request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     *  An optional pagination token provided by a previous DescribeOrderableDBInstanceOptions request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
      */
     Marker?: String;
     /**
@@ -2364,11 +2431,11 @@ declare namespace Neptune {
   }
   export interface EventsMessage {
     /**
-     *  An optional pagination token provided by a previous Events request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords . 
+     *  An optional pagination token provided by a previous Events request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords .
      */
     Marker?: String;
     /**
-     *  A list of Event instances. 
+     *  A list of Event instances.
      */
     Events?: EventList;
   }
@@ -2445,15 +2512,15 @@ declare namespace Neptune {
      */
     MasterUserPassword?: String;
     /**
-     * A value that indicates that the DB cluster should be associated with the specified option group. Changing this parameter doesn't result in an outage except in the following case, and the change is applied during the next maintenance window unless the ApplyImmediately parameter is set to true for this request. If the parameter change results in an option group that enables OEM, this change can cause a brief (sub-second) period during which new connections are rejected but existing connections are not interrupted.  Permanent options can't be removed from an option group. The option group can't be removed from a DB cluster once it is associated with a DB cluster.
+     *  (Not supported by Neptune) 
      */
     OptionGroupName?: String;
     /**
-     * The daily time range during which automated backups are created if automated backups are enabled, using the BackupRetentionPeriod parameter.  The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region.  Constraints:   Must be in the format hh24:mi-hh24:mi.   Must be in Universal Coordinated Time (UTC).   Must not conflict with the preferred maintenance window.   Must be at least 30 minutes.  
+     * The daily time range during which automated backups are created if automated backups are enabled, using the BackupRetentionPeriod parameter. The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. Constraints:   Must be in the format hh24:mi-hh24:mi.   Must be in Universal Coordinated Time (UTC).   Must not conflict with the preferred maintenance window.   Must be at least 30 minutes.  
      */
     PreferredBackupWindow?: String;
     /**
-     * The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi  The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week.  Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun. Constraints: Minimum 30-minute window.
+     * The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi  The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun. Constraints: Minimum 30-minute window.
      */
     PreferredMaintenanceWindow?: String;
     /**
@@ -2461,9 +2528,17 @@ declare namespace Neptune {
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
     /**
-     * The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless the ApplyImmediately parameter is set to true. For a list of valid engine versions, see CreateDBInstance, or call DescribeDBEngineVersions.
+     * The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB cluster.
+     */
+    CloudwatchLogsExportConfiguration?: CloudwatchLogsExportConfiguration;
+    /**
+     * The version number of the database engine. Currently, setting this parameter has no effect. To upgrade your database engine to the most recent release, use the ApplyPendingMaintenanceAction API. For a list of valid engine versions, see CreateDBInstance, or call DescribeDBEngineVersions.
      */
     EngineVersion?: String;
+    /**
+     * A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export interface ModifyDBClusterParameterGroupMessage {
     /**
@@ -2505,15 +2580,15 @@ declare namespace Neptune {
      */
     DBInstanceIdentifier: String;
     /**
-     * The new amount of storage (in gibibytes) to allocate for the DB instance.  Not applicable. Storage is managed by the DB Cluster.
+     * The new amount of storage (in gibibytes) to allocate for the DB instance. Not applicable. Storage is managed by the DB Cluster.
      */
     AllocatedStorage?: IntegerOptional;
     /**
-     * The new compute and memory capacity of the DB instance, for example, db.m4.large. Not all DB instance classes are available in all AWS Regions.  If you modify the DB instance class, an outage occurs during the change. The change is applied during the next maintenance window, unless ApplyImmediately is specified as true for this request.  Default: Uses existing setting
+     * The new compute and memory capacity of the DB instance, for example, db.m4.large. Not all DB instance classes are available in all AWS Regions. If you modify the DB instance class, an outage occurs during the change. The change is applied during the next maintenance window, unless ApplyImmediately is specified as true for this request. Default: Uses existing setting
      */
     DBInstanceClass?: String;
     /**
-     * The new DB subnet group for the DB instance. You can use this parameter to move your DB instance to a different VPC.  Changing the subnet group causes an outage during the change. The change is applied during the next maintenance window, unless you specify true for the ApplyImmediately parameter.  Constraints: If supplied, must match the name of an existing DBSubnetGroup. Example: mySubnetGroup 
+     * The new DB subnet group for the DB instance. You can use this parameter to move your DB instance to a different VPC. Changing the subnet group causes an outage during the change. The change is applied during the next maintenance window, unless you specify true for the ApplyImmediately parameter. Constraints: If supplied, must match the name of an existing DBSubnetGroup. Example: mySubnetGroup 
      */
     DBSubnetGroupName?: String;
     /**
@@ -2525,11 +2600,11 @@ declare namespace Neptune {
      */
     VpcSecurityGroupIds?: VpcSecurityGroupIdList;
     /**
-     * Specifies whether the modifications in this request and any pending modifications are asynchronously applied as soon as possible, regardless of the PreferredMaintenanceWindow setting for the DB instance.   If this parameter is set to false, changes to the DB instance are applied during the next maintenance window. Some parameter changes can cause an outage and are applied on the next call to RebootDBInstance, or the next failure reboot.  Default: false 
+     * Specifies whether the modifications in this request and any pending modifications are asynchronously applied as soon as possible, regardless of the PreferredMaintenanceWindow setting for the DB instance.  If this parameter is set to false, changes to the DB instance are applied during the next maintenance window. Some parameter changes can cause an outage and are applied on the next call to RebootDBInstance, or the next failure reboot. Default: false 
      */
     ApplyImmediately?: Boolean;
     /**
-     * The new password for the master user. The password can include any printable ASCII character except "/", """, or "@". Not applicable.  Default: Uses existing setting
+     * Not applicable.
      */
     MasterUserPassword?: String;
     /**
@@ -2537,11 +2612,11 @@ declare namespace Neptune {
      */
     DBParameterGroupName?: String;
     /**
-     * The number of days to retain automated backups. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups. Not applicable. The retention period for automated backups is managed by the DB cluster. For more information, see ModifyDBCluster. Default: Uses existing setting
+     * Not applicable. The retention period for automated backups is managed by the DB cluster. For more information, see ModifyDBCluster. Default: Uses existing setting
      */
     BackupRetentionPeriod?: IntegerOptional;
     /**
-     *  The daily time range during which automated backups are created if automated backups are enabled.  Not applicable. The daily time range for creating automated backups is managed by the DB cluster. For more information, see ModifyDBCluster. Constraints:   Must be in the format hh24:mi-hh24:mi   Must be in Universal Time Coordinated (UTC)   Must not conflict with the preferred maintenance window   Must be at least 30 minutes  
+     *  The daily time range during which automated backups are created if automated backups are enabled. Not applicable. The daily time range for creating automated backups is managed by the DB cluster. For more information, see ModifyDBCluster. Constraints:   Must be in the format hh24:mi-hh24:mi   Must be in Universal Time Coordinated (UTC)   Must not conflict with the preferred maintenance window   Must be at least 30 minutes  
      */
     PreferredBackupWindow?: String;
     /**
@@ -2549,39 +2624,39 @@ declare namespace Neptune {
      */
     PreferredMaintenanceWindow?: String;
     /**
-     * Specifies if the DB instance is a Multi-AZ deployment. Changing this parameter doesn't result in an outage and the change is applied during the next maintenance window unless the ApplyImmediately parameter is set to true for this request. 
+     * Specifies if the DB instance is a Multi-AZ deployment. Changing this parameter doesn't result in an outage and the change is applied during the next maintenance window unless the ApplyImmediately parameter is set to true for this request.
      */
     MultiAZ?: BooleanOptional;
     /**
-     *  The version number of the database engine to upgrade to. Changing this parameter results in an outage and the change is applied during the next maintenance window unless the ApplyImmediately parameter is set to true for this request.  For major version upgrades, if a nondefault DB parameter group is currently in use, a new DB parameter group in the DB parameter group family for the new engine version must be specified. The new DB parameter group can be the default for that DB parameter group family.
+     * The version number of the database engine to upgrade to. Currently, setting this parameter has no effect. To upgrade your database engine to the most recent release, use the ApplyPendingMaintenanceAction API.
      */
     EngineVersion?: String;
     /**
-     * Indicates that major version upgrades are allowed. Changing this parameter doesn't result in an outage and the change is asynchronously applied as soon as possible. Constraints: This parameter must be set to true when specifying a value for the EngineVersion parameter that is a different major version than the DB instance's current version.
+     * Indicates that major version upgrades are allowed. Changing this parameter doesn't result in an outage and the change is asynchronously applied as soon as possible.
      */
     AllowMajorVersionUpgrade?: Boolean;
     /**
-     *  Indicates that minor version upgrades are applied automatically to the DB instance during the maintenance window. Changing this parameter doesn't result in an outage except in the following case and the change is asynchronously applied as soon as possible. An outage will result if this parameter is set to true during the maintenance window, and a newer minor version is available, and Neptune has enabled auto patching for that engine version. 
+     *  Indicates that minor version upgrades are applied automatically to the DB instance during the maintenance window. Changing this parameter doesn't result in an outage except in the following case and the change is asynchronously applied as soon as possible. An outage will result if this parameter is set to true during the maintenance window, and a newer minor version is available, and Neptune has enabled auto patching for that engine version.
      */
     AutoMinorVersionUpgrade?: BooleanOptional;
     /**
-     * The license model for the DB instance. Valid values: license-included | bring-your-own-license | general-public-license 
+     * Not supported.
      */
     LicenseModel?: String;
     /**
-     * The new Provisioned IOPS (I/O operations per second) value for the instance.  Changing this setting doesn't result in an outage and the change is applied during the next maintenance window unless the ApplyImmediately parameter is set to true for this request. Default: Uses existing setting
+     * The new Provisioned IOPS (I/O operations per second) value for the instance. Changing this setting doesn't result in an outage and the change is applied during the next maintenance window unless the ApplyImmediately parameter is set to true for this request. Default: Uses existing setting
      */
     Iops?: IntegerOptional;
     /**
-     *  Indicates that the DB instance should be associated with the specified option group. Changing this parameter doesn't result in an outage except in the following case and the change is applied during the next maintenance window unless the ApplyImmediately parameter is set to true for this request. If the parameter change results in an option group that enables OEM, this change can cause a brief (sub-second) period during which new connections are rejected but existing connections are not interrupted.  Permanent options, such as the TDE option for Oracle Advanced Security TDE, can't be removed from an option group, and that option group can't be removed from a DB instance once it is associated with a DB instance
+     *  (Not supported by Neptune) 
      */
     OptionGroupName?: String;
     /**
-     *  The new DB instance identifier for the DB instance when renaming a DB instance. When you change the DB instance identifier, an instance reboot will occur immediately if you set Apply Immediately to true, or will occur during the next maintenance window if Apply Immediately to false. This value is stored as a lowercase string.  Constraints:   Must contain from 1 to 63 letters, numbers, or hyphens.   The first character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.   Example: mydbinstance 
+     *  The new DB instance identifier for the DB instance when renaming a DB instance. When you change the DB instance identifier, an instance reboot will occur immediately if you set Apply Immediately to true, or will occur during the next maintenance window if Apply Immediately to false. This value is stored as a lowercase string. Constraints:   Must contain from 1 to 63 letters, numbers, or hyphens.   The first character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.   Example: mydbinstance 
      */
     NewDBInstanceIdentifier?: String;
     /**
-     * Specifies the storage type to be associated with the DB instance.  If you specify Provisioned IOPS (io1), you must also include a value for the Iops parameter.  If you choose to migrate your DB instance from using standard storage to using Provisioned IOPS, or from using Provisioned IOPS to using standard storage, the process can take time. The duration of the migration depends on several factors such as database load, storage size, storage type (standard or Provisioned IOPS), amount of IOPS provisioned (if any), and the number of prior scale storage operations. Typical migration times are under 24 hours, but the process can take up to several days in some cases. During the migration, the DB instance is available for use, but might experience performance degradation. While the migration takes place, nightly backups for the instance are suspended. No other Amazon Neptune operations can take place for the instance, including modifying the instance, rebooting the instance, deleting the instance, creating a Read Replica for the instance, and creating a DB snapshot of the instance.   Valid values: standard | gp2 | io1  Default: io1 if the Iops parameter is specified, otherwise standard 
+     * Not supported.
      */
     StorageType?: String;
     /**
@@ -2597,7 +2672,7 @@ declare namespace Neptune {
      */
     CACertificateIdentifier?: String;
     /**
-     * Not supported. 
+     * Not supported.
      */
     Domain?: String;
     /**
@@ -2613,11 +2688,11 @@ declare namespace Neptune {
      */
     DBPortNumber?: IntegerOptional;
     /**
-     * This parameter is not supported.
+     * This flag should no longer be used.
      */
     PubliclyAccessible?: BooleanOptional;
     /**
-     * The ARN for the IAM role that permits Neptune to send enhanced monitoring metrics to Amazon CloudWatch Logs. For example, arn:aws:iam:123456789012:role/emaccess.  If MonitoringInterval is set to a value other than 0, then you must supply a MonitoringRoleArn value.
+     * The ARN for the IAM role that permits Neptune to send enhanced monitoring metrics to Amazon CloudWatch Logs. For example, arn:aws:iam:123456789012:role/emaccess. If MonitoringInterval is set to a value other than 0, then you must supply a MonitoringRoleArn value.
      */
     MonitoringRoleArn?: String;
     /**
@@ -2625,7 +2700,7 @@ declare namespace Neptune {
      */
     DomainIAMRoleName?: String;
     /**
-     * A value that specifies the order in which a Read Replica is promoted to the primary instance after a failure of the existing primary instance.  Default: 1 Valid Values: 0 - 15
+     * A value that specifies the order in which a Read Replica is promoted to the primary instance after a failure of the existing primary instance. Default: 1 Valid Values: 0 - 15
      */
     PromotionTier?: IntegerOptional;
     /**
@@ -2633,17 +2708,21 @@ declare namespace Neptune {
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
     /**
-     * True to enable Performance Insights for the DB instance, and otherwise false.
+     *  (Not supported by Neptune) 
      */
     EnablePerformanceInsights?: BooleanOptional;
     /**
-     * The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.
+     *  (Not supported by Neptune) 
      */
     PerformanceInsightsKMSKeyId?: String;
     /**
      * The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance or DB cluster.
      */
     CloudwatchLogsExportConfiguration?: CloudwatchLogsExportConfiguration;
+    /**
+     * A value that indicates whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. See Deleting a DB Instance.
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export interface ModifyDBInstanceResult {
     DBInstance?: DBInstance;
@@ -2660,7 +2739,7 @@ declare namespace Neptune {
   }
   export interface ModifyDBSubnetGroupMessage {
     /**
-     * The name for the DB subnet group. This value is stored as a lowercase string. You can't modify the default subnet group.  Constraints: Must match the name of an existing DBSubnetGroup. Must not be default. Example: mySubnetgroup 
+     * The name for the DB subnet group. This value is stored as a lowercase string. You can't modify the default subnet group. Constraints: Must match the name of an existing DBSubnetGroup. Must not be default. Example: mySubnetgroup 
      */
     DBSubnetGroupName: String;
     /**
@@ -2689,11 +2768,11 @@ declare namespace Neptune {
      */
     SourceType?: String;
     /**
-     *  A list of event categories for a SourceType that you want to subscribe to. You can see a list of the categories for a given SourceType by using the DescribeEventCategories action. 
+     *  A list of event categories for a SourceType that you want to subscribe to. You can see a list of the categories for a given SourceType by using the DescribeEventCategories action.
      */
     EventCategories?: EventCategoriesList;
     /**
-     *  A Boolean value; set to true to activate the subscription. 
+     *  A Boolean value; set to true to activate the subscription.
      */
     Enabled?: BooleanOptional;
   }
@@ -2706,7 +2785,7 @@ declare namespace Neptune {
      */
     OptionGroupName?: String;
     /**
-     * The status of the DB instance's option group membership. Valid values are: in-sync, pending-apply, pending-removal, pending-maintenance-apply, pending-maintenance-removal, applying, removing, and failed. 
+     * The status of the DB instance's option group membership. Valid values are: in-sync, pending-apply, pending-removal, pending-maintenance-apply, pending-maintenance-removal, applying, removing, and failed.
      */
     Status?: String;
   }
@@ -2765,7 +2844,7 @@ declare namespace Neptune {
      */
     SupportsIAMDatabaseAuthentication?: Boolean;
     /**
-     * True if a DB instance supports Performance Insights, otherwise false.
+     *  (Not supported by Neptune) 
      */
     SupportsPerformanceInsights?: Boolean;
     /**
@@ -2800,7 +2879,7 @@ declare namespace Neptune {
      */
     OrderableDBInstanceOptions?: OrderableDBInstanceOptionsList;
     /**
-     *  An optional pagination token provided by a previous OrderableDBInstanceOptions request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords . 
+     *  An optional pagination token provided by a previous OrderableDBInstanceOptions request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords .
      */
     Marker?: String;
   }
@@ -2834,7 +2913,7 @@ declare namespace Neptune {
      */
     AllowedValues?: String;
     /**
-     *  Indicates whether (true) or not (false) the parameter can be modified. Some parameters have security or operational implications that prevent them from being changed. 
+     *  Indicates whether (true) or not (false) the parameter can be modified. Some parameters have security or operational implications that prevent them from being changed.
      */
     IsModifiable?: Boolean;
     /**
@@ -2891,17 +2970,17 @@ declare namespace Neptune {
      */
     PendingMaintenanceActions?: PendingMaintenanceActions;
     /**
-     *  An optional pagination token provided by a previous DescribePendingMaintenanceActions request. If this parameter is specified, the response includes only records beyond the marker, up to a number of records specified by MaxRecords. 
+     *  An optional pagination token provided by a previous DescribePendingMaintenanceActions request. If this parameter is specified, the response includes only records beyond the marker, up to a number of records specified by MaxRecords.
      */
     Marker?: String;
   }
   export interface PendingModifiedValues {
     /**
-     *  Contains the new DBInstanceClass for the DB instance that will be applied or is currently being applied. 
+     *  Contains the new DBInstanceClass for the DB instance that will be applied or is currently being applied.
      */
     DBInstanceClass?: String;
     /**
-     *  Contains the new AllocatedStorage size for the DB instance that will be applied or is currently being applied. 
+     *  Contains the new AllocatedStorage size for the DB instance that will be applied or is currently being applied.
      */
     AllocatedStorage?: IntegerOptional;
     /**
@@ -2933,7 +3012,7 @@ declare namespace Neptune {
      */
     Iops?: IntegerOptional;
     /**
-     *  Contains the new DBInstanceIdentifier for the DB instance that will be applied or is currently being applied. 
+     *  Contains the new DBInstanceIdentifier for the DB instance that will be applied or is currently being applied.
      */
     DBInstanceIdentifier?: String;
     /**
@@ -2945,14 +3024,17 @@ declare namespace Neptune {
      */
     CACertificateIdentifier?: String;
     /**
-     * The new DB subnet group for the DB instance. 
+     * The new DB subnet group for the DB instance.
      */
     DBSubnetGroupName?: String;
+    /**
+     * This PendingCloudwatchLogsExports structure specifies pending changes to which CloudWatch logs are enabled and which are disabled.
+     */
     PendingCloudwatchLogsExports?: PendingCloudwatchLogsExports;
   }
   export interface PromoteReadReplicaDBClusterMessage {
     /**
-     * The identifier of the DB cluster Read Replica to promote. This parameter is not case-sensitive.  Constraints:   Must match the identifier of an existing DBCluster Read Replica.   Example: my-cluster-replica1 
+     * Not supported.
      */
     DBClusterIdentifier: String;
   }
@@ -2969,7 +3051,7 @@ declare namespace Neptune {
      */
     To?: Integer;
     /**
-     * The step value for the range. For example, if you have a range of 5,000 to 10,000, with a step value of 1,000, the valid values start at 5,000 and step up by 1,000. Even though 7,500 is within the range, it isn't a valid value for the range. The valid values are 5,000, 6,000, 7,000, 8,000... 
+     * The step value for the range. For example, if you have a range of 5,000 to 10,000, with a step value of 1,000, the valid values start at 5,000 and step up by 1,000. Even though 7,500 is within the range, it isn't a valid value for the range. The valid values are 5,000, 6,000, 7,000, 8,000...
      */
     Step?: IntegerOptional;
   }
@@ -2983,7 +3065,7 @@ declare namespace Neptune {
      */
     DBInstanceIdentifier: String;
     /**
-     *  When true, the reboot is conducted through a MultiAZ failover.  Constraint: You can't specify true if the instance is not configured for MultiAZ.
+     *  When true, the reboot is conducted through a MultiAZ failover. Constraint: You can't specify true if the instance is not configured for MultiAZ.
      */
     ForceFailover?: BooleanOptional;
   }
@@ -3006,7 +3088,7 @@ declare namespace Neptune {
      */
     SubscriptionName: String;
     /**
-     *  The source identifier to be removed from the subscription, such as the DB instance identifier for a DB instance or the name of a security group. 
+     *  The source identifier to be removed from the subscription, such as the DB instance identifier for a DB instance or the name of a security group.
      */
     SourceIdentifier: String;
   }
@@ -3043,7 +3125,7 @@ declare namespace Neptune {
      */
     DBParameterGroupName: String;
     /**
-     *  Specifies whether (true) or not (false) to reset all parameters in the DB parameter group to default values.  Default: true 
+     * Specifies whether (true) or not (false) to reset all parameters in the DB parameter group to default values. Default: true 
      */
     ResetAllParameters?: Boolean;
     /**
@@ -3091,11 +3173,11 @@ declare namespace Neptune {
      */
     DBSubnetGroupName?: String;
     /**
-     * The database name for the restored DB cluster.
+     * Not supported.
      */
     DatabaseName?: String;
     /**
-     * The name of the option group to use for the restored DB cluster.
+     *  (Not supported by Neptune) 
      */
     OptionGroupName?: String;
     /**
@@ -3114,6 +3196,18 @@ declare namespace Neptune {
      * True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false. Default: false 
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
+    /**
+     * The list of logs that the restored DB cluster is to export to Amazon CloudWatch Logs.
+     */
+    EnableCloudwatchLogsExports?: LogTypeList;
+    /**
+     * The name of the DB cluster parameter group to associate with the new DB cluster. Constraints:   If supplied, must match the name of an existing DBClusterParameterGroup.  
+     */
+    DBClusterParameterGroupName?: String;
+    /**
+     * A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. 
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export interface RestoreDBClusterFromSnapshotResult {
     DBCluster?: DBCluster;
@@ -3124,7 +3218,7 @@ declare namespace Neptune {
      */
     DBClusterIdentifier: String;
     /**
-     * The type of restore to be performed. You can specify one of the following values:    full-copy - The new DB cluster is restored as a full copy of the source DB cluster.    copy-on-write - The new DB cluster is restored as a clone of the source DB cluster.   Constraints: You can't specify copy-on-write if the engine version of the source DB cluster is earlier than 1.11. If you don't specify a RestoreType value, then the new DB cluster is restored as a full copy of the source DB cluster.
+     * The type of restore to be performed. You can specify one of the following values:    full-copy - The new DB cluster is restored as a full copy of the source DB cluster.    copy-on-write - The new DB cluster is restored as a clone of the source DB cluster.   If you don't specify a RestoreType value, then the new DB cluster is restored as a full copy of the source DB cluster.
      */
     RestoreType?: String;
     /**
@@ -3136,7 +3230,7 @@ declare namespace Neptune {
      */
     RestoreToTime?: TStamp;
     /**
-     * A value that is set to true to restore the DB cluster to the latest restorable backup time, and false otherwise.  Default: false  Constraints: Cannot be specified if RestoreToTime parameter is provided.
+     * A value that is set to true to restore the DB cluster to the latest restorable backup time, and false otherwise. Default: false  Constraints: Cannot be specified if RestoreToTime parameter is provided.
      */
     UseLatestRestorableTime?: Boolean;
     /**
@@ -3148,13 +3242,16 @@ declare namespace Neptune {
      */
     DBSubnetGroupName?: String;
     /**
-     * The name of the option group for the new DB cluster.
+     *  (Not supported by Neptune) 
      */
     OptionGroupName?: String;
     /**
      * A list of VPC security groups that the new DB cluster belongs to.
      */
     VpcSecurityGroupIds?: VpcSecurityGroupIdList;
+    /**
+     * The tags to be applied to the restored DB cluster.
+     */
     Tags?: TagList;
     /**
      * The AWS KMS key identifier to use when restoring an encrypted DB cluster from an encrypted DB cluster. The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a DB cluster with the same AWS account that owns the KMS encryption key used to encrypt the new DB cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key. You can restore to a new DB cluster and encrypt the new DB cluster with a KMS key that is different than the KMS key used to encrypt the source DB cluster. The new DB cluster is encrypted with the KMS key identified by the KmsKeyId parameter. If you do not specify a value for the KmsKeyId parameter, then the following will occur:   If the DB cluster is encrypted, then the restored DB cluster is encrypted using the KMS key that was used to encrypt the source DB cluster.   If the DB cluster is not encrypted, then the restored DB cluster is not encrypted.   If DBClusterIdentifier refers to a DB cluster that is not encrypted, then the restore request is rejected.
@@ -3164,18 +3261,51 @@ declare namespace Neptune {
      * True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false. Default: false 
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
+    /**
+     * The list of logs that the restored DB cluster is to export to CloudWatch Logs.
+     */
+    EnableCloudwatchLogsExports?: LogTypeList;
+    /**
+     * The name of the DB cluster parameter group to associate with the new DB cluster. Constraints:   If supplied, must match the name of an existing DBClusterParameterGroup.  
+     */
+    DBClusterParameterGroupName?: String;
+    /**
+     * A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. 
+     */
+    DeletionProtection?: BooleanOptional;
   }
   export interface RestoreDBClusterToPointInTimeResult {
     DBCluster?: DBCluster;
   }
   export type SourceIdsList = String[];
   export type SourceType = "db-instance"|"db-parameter-group"|"db-security-group"|"db-snapshot"|"db-cluster"|"db-cluster-snapshot"|string;
+  export interface StartDBClusterMessage {
+    /**
+     * The DB cluster identifier of the Neptune DB cluster to be started. This parameter is stored as a lowercase string.
+     */
+    DBClusterIdentifier: String;
+  }
+  export interface StartDBClusterResult {
+    DBCluster?: DBCluster;
+  }
+  export interface StopDBClusterMessage {
+    /**
+     * The DB cluster identifier of the Neptune DB cluster to be stopped. This parameter is stored as a lowercase string.
+     */
+    DBClusterIdentifier: String;
+  }
+  export interface StopDBClusterResult {
+    DBCluster?: DBCluster;
+  }
   export type String = string;
   export interface Subnet {
     /**
      * Specifies the identifier of the subnet.
      */
     SubnetIdentifier?: String;
+    /**
+     * Specifies the EC2 Availability Zone that the subnet is in.
+     */
     SubnetAvailabilityZone?: AvailabilityZone;
     /**
      * Specifies the status of the subnet.
@@ -3234,25 +3364,25 @@ declare namespace Neptune {
   }
   export interface ValidDBInstanceModificationsMessage {
     /**
-     * Valid storage options for your DB instance. 
+     * Valid storage options for your DB instance.
      */
     Storage?: ValidStorageOptionsList;
   }
   export interface ValidStorageOptions {
     /**
-     * The valid storage types for your DB instance. For example, gp2, io1. 
+     * The valid storage types for your DB instance. For example, gp2, io1.
      */
     StorageType?: String;
     /**
-     * The valid range of storage in gibibytes. For example, 100 to 16384. 
+     * The valid range of storage in gibibytes. For example, 100 to 16384.
      */
     StorageSize?: RangeList;
     /**
-     * The valid range of provisioned IOPS. For example, 1000-20000. 
+     * The valid range of provisioned IOPS. For example, 1000-20000.
      */
     ProvisionedIops?: RangeList;
     /**
-     * The valid range of Provisioned IOPS to gibibytes of storage multiplier. For example, 3-10, which means that provisioned IOPS can be between 3 and 10 times storage. 
+     * The valid range of Provisioned IOPS to gibibytes of storage multiplier. For example, 3-10, which means that provisioned IOPS can be between 3 and 10 times storage.
      */
     IopsToStorageRatio?: DoubleRangeList;
   }

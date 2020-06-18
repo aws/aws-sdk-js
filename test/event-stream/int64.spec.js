@@ -1,4 +1,5 @@
-var toBuffer = require('../../lib/event-stream/to-buffer').toBuffer;
+var AWS = require('../helpers').AWS;
+var toBuffer = AWS.util.buffer.toBuffer;
 var Int64 = require('../../lib/event-stream/int64').Int64;
 
 describe('Int64', function() {
@@ -55,13 +56,13 @@ describe('Int64', function() {
 
     it('should throw when a number larger than 2^63 -1 is provided', function() {
         expect(function() {
-            Int64.fromNumber(9323372036854775807)
+            Int64.fromNumber(9323372036854775807);
         }).to.throw();
     });
 
     it('should throw when a number smaller than -1 * 2^63 is provided', function() {
         expect(function() {
-            Int64.fromNumber(-9323372036854775807)
+            Int64.fromNumber(-9323372036854775807);
         }).to.throw();
     });
 });

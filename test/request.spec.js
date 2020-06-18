@@ -8,7 +8,7 @@ AWS = helpers.AWS;
 
 MockService = helpers.MockService;
 
-Buffer = AWS.util.Buffer;
+buffer = AWS.util.buffer;
 
 describe('AWS.Request', function() {
   var service;
@@ -35,7 +35,7 @@ describe('AWS.Request', function() {
         return service.makeRequest('mockMethod', function() {
           throw new Error('error');
         });
-      }).to["throw"]('error');
+      }).to['throw']('error');
     });
     ref = ['error', 'success', 'complete'];
     for (i = 0, len = ref.length; i < len; i++) {
@@ -49,7 +49,7 @@ describe('AWS.Request', function() {
             throw new Error('error');
           });
           return req.send();
-        }).to["throw"]('error');
+        }).to['throw']('error');
       });
     }
 
@@ -66,7 +66,7 @@ describe('AWS.Request', function() {
         return req.send(function(e) {
           return err = e;
         });
-      }).not.to["throw"]('error');
+      }).not.to['throw']('error');
       expect(err.message).to.equal('error');
     });
 
@@ -679,13 +679,13 @@ describe('AWS.Request', function() {
         s = request.createReadStream();
         s.on('error', function(e) {
           error = e;
-          expect(error).to.be["null"];
+          expect(error).to.be['null'];
         });
         s.on('data', function(c) {
           return data += c.toString();
         });
         return s.on('end', function() {
-          expect(error).to.be["null"];
+          expect(error).to.be['null'];
           expect(data).to.equal('FOOBARBAZQUX');
           done();
         });
@@ -705,13 +705,13 @@ describe('AWS.Request', function() {
         s = request.createReadStream();
         s.on('error', function(e) {
           error = e;
-          expect(error).to.be["null"];
+          expect(error).to.be['null'];
         });
         s.on('data', function(c) {
           data += c.toString();
         });
         s.on('end', function() {
-          expect(error).to.be["null"];
+          expect(error).to.be['null'];
           expect(data).to.equal('FOOBARBAZQUX');
           done();
         });
@@ -733,11 +733,11 @@ describe('AWS.Request', function() {
           return data += c.toString();
         });
         s.on('end', function(a) {
-          expect(error).to.not.be["null"];
+          expect(error).to.not.be['null'];
         });
         return s.on('error', function(e) {
           error = e;
-          expect(error).to.not.be["null"];
+          expect(error).to.not.be['null'];
           expect(error.code).to.equal('StreamContentLengthMismatch');
           expect(data).to.equal('FOOBARBAZQUX');
           done();
@@ -758,13 +758,13 @@ describe('AWS.Request', function() {
         s = request.createReadStream();
         s.on('error', function(e) {
           error = e;
-          expect(error).to.not.be["null"];
+          expect(error).to.not.be['null'];
         });
         s.on('data', function(c) {
           return data += c.toString();
         });
         return s.on('end', function() {
-          expect(error).to.not.be["null"];
+          expect(error).to.not.be['null'];
           done();
         });
       });
@@ -778,10 +778,10 @@ describe('AWS.Request', function() {
         s = request.createReadStream();
         s.on('error', function(e) {
           error = e;
-          expect(error).to.be["null"];
+          expect(error).to.be['null'];
         });
         s.on('end', function() {
-          expect(error).to.be["null"];
+          expect(error).to.be['null'];
           expect(data).to.equal('FOOBARBAZQUX');
           done();
         });
@@ -815,10 +815,10 @@ describe('AWS.Request', function() {
         s = request.createReadStream();
         s.on('error', function(e) {
           error = e;
-          expect(error).to.be["null"];
+          expect(error).to.be['null'];
         });
         s.on('end', function() {
-          expect(error).to.be["null"];
+          expect(error).to.be['null'];
           expect(data).to.equal('FOOBARBAZQUX');
           done();
         });
@@ -852,13 +852,13 @@ describe('AWS.Request', function() {
         s = request.createReadStream();
         s.on('error', function(e) {
           error = e;
-          expect(error).to.not.be["null"];
+          expect(error).to.not.be['null'];
           expect(error.code).to.equal('StreamContentLengthMismatch');
           expect(data).to.equal('FOOBARBAZQUX');
           done();
         });
         s.on('end', function() {
-          expect(error).to.not.be["null"];
+          expect(error).to.not.be['null'];
         });
         return s.on('readable', function() {
           var chunk, e;
@@ -890,10 +890,10 @@ describe('AWS.Request', function() {
         s = request.createReadStream();
         s.on('error', function(e) {
           error = e;
-          expect(error).to.not.be["null"];
+          expect(error).to.not.be['null'];
         });
         s.on('end', function() {
-          expect(error).to.not.be["null"];
+          expect(error).to.not.be['null'];
           done();
         });
         return s.on('readable', function() {
@@ -921,13 +921,13 @@ describe('AWS.Request', function() {
         s = request.createReadStream();
         s.on('error', function(e) {
           error = e;
-          expect(error).to.not.be["null"];
+          expect(error).to.not.be['null'];
           expect(error.statusCode).to.equal(404);
           expect(data).to.equal('');
           done();
         });
         s.on('end', function() {
-          expect(error).to.not.be["null"];
+          expect(error).to.not.be['null'];
         });
         return s.on('data', function(c) {
           return data += c.toString();
@@ -947,13 +947,13 @@ describe('AWS.Request', function() {
         s = request.createReadStream();
         s.on('error', function(e) {
           error = e;
-          expect(error).to.not.be["null"];
+          expect(error).to.not.be['null'];
           expect(error.statusCode).to.equal(404);
           expect(data).to.equal('');
           done();
         });
         s.on('end', function() {
-          expect(error).to.not.be["null"];
+          expect(error).to.not.be['null'];
         });
         return s.on('readable', function() {
           var chunk, e;
@@ -994,7 +994,7 @@ describe('AWS.Request', function() {
           return data += c.toString();
         });
         return request.on('complete', function() {
-          expect(error).to.be["null"];
+          expect(error).to.be['null'];
           expect(data).to.equal('FOOBARBAZQUX');
           done();
         });
@@ -1018,10 +1018,10 @@ describe('AWS.Request', function() {
               AWS.util.arrayEach(['FOO', 'BAR', 'BAZ'], function(str) {
                 if (AWS.HttpClient.streamsApiVersion < 2) {
                   return process.nextTick(function() {
-                    return req.emit('data', new Buffer(str));
+                    return req.emit('data', buffer.toBuffer(str));
                   });
                 } else {
-                  req.push(new Buffer(str));
+                  req.push(buffer.toBuffer(str));
                   return process.nextTick(function() {
                     return req.emit('readable');
                   });
@@ -1083,13 +1083,13 @@ describe('AWS.Request', function() {
                   return AWS.util.abort;
                 } else {
                   if (AWS.HttpClient.streamsApiVersion === 2) {
-                    req.push(new Buffer(str));
+                    req.push(buffer.toBuffer(str));
                     return process.nextTick(function() {
                       return req.emit('readable');
                     });
                   } else {
                     return process.nextTick(function() {
-                      return req.emit('data', new Buffer(str));
+                      return req.emit('data', buffer.toBuffer(str));
                     });
                   }
                 }
@@ -1154,7 +1154,7 @@ describe('AWS.Request', function() {
           resp.writeHead(200, {
             'content-length': 512 * 1024
           });
-          resp.write(new Buffer(512 * 1024));
+          resp.write(buffer.alloc(512 * 1024));
           resp.end();
         };
         service.config.httpOptions.timeout = 5;

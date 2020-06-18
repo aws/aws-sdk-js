@@ -1,11 +1,14 @@
 {
   "name": "aws-sdk",
   "description": "AWS SDK for JavaScript",
-  "version": "2.292.0",
+  "version": "2.700.0",
   "author": {
     "name": "Amazon Web Services",
     "email": "",
     "url": "https://aws.amazon.com/"
+  },
+  "config": {
+    "test_args": "test test/json test/model test/protocol test/query test/services test/signers test/xml test/s3 test/cloudfront test/dynamodb test/polly test/rds test/publisher test/event-stream"
   },
   "homepage": "https://github.com/aws/aws-sdk-js",
   "contributors": [
@@ -16,22 +19,21 @@
     "@types/node": "6.0.92",
     "browserify": "13.1.0",
     "chai": "^3.0",
-    "codecov": "^1.0.1",
-    "coffee-script": "1.6.3",
+    "codecov": "^3.6.5",
     "coffeeify": "*",
+    "coffeescript": "^1.12.7",
     "cucumber": "0.5.x",
-    "eslint": "1.x",
+    "eslint": "^5.8.0",
     "hash-test-vectors": "^1.3.2",
     "insert-module-globals": "^7.0.0",
     "istanbul": "*",
     "jasmine": "^2.5.3",
     "jasmine-core": "^2.5.2",
     "json-loader": "^0.5.4",
-    "karma": "^1.4.1",
+    "karma": "^4.1.0",
+    "karma-chrome-launcher": "2.2.0",
     "karma-jasmine": "^1.1.0",
-    "karma-phantomjs-launcher": "1.0.2",
     "mocha": "^3.0.0",
-    "phantomjs-prebuilt": "2.1.15",
     "repl.history": "*",
     "semver": "*",
     "typescript": "2.0.8",
@@ -39,14 +41,14 @@
     "webpack": "^1.15.0"
   },
   "dependencies": {
-    "buffer": "4.9.1",
+    "buffer": "4.9.2",
     "events": "1.1.1",
-    "ieee754": "1.1.8",
+    "ieee754": "1.1.13",
     "jmespath": "0.15.0",
     "querystring": "0.2.0",
     "sax": "1.2.1",
     "url": "0.10.3",
-    "uuid": "3.1.0",
+    "uuid": "3.3.2",
     "xml2js": "0.4.19"
   },
   "main": "lib/aws.js",
@@ -121,13 +123,13 @@
     "waf"
   ],
   "scripts": {
-    "test": "node ./scripts/composite-test.js && ([ -f configuration ] && npm -s run-script integration || true)",
-    "unit": "mocha -- test test/json test/model test/protocol test/query test/services test/signers test/xml test/s3 test/cloudfront test/dynamodb test/polly test/rds test/event-stream",
-    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --reporter=lcovonly -- test test/json test/model test/protocol test/query test/services test/signers test/xml test/s3 test/cloudfront test/dynamodb test/polly test/rds test/event-stream",
+    "test": "node ./scripts/composite-test.js",
+    "unit": "mocha -- $npm_package_config_test_args",
+    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --reporter=lcovonly -- $npm_package_config_test_args",
     "browsertest": "rake browser:test && karma start",
-    "buildertest": "mocha --compilers coffee:coffee-script -s 1000 -t 10000 dist-tools/test",
+    "buildertest": "mocha --require coffeescript/register -s 1000 -t 10000 dist-tools/test/*.coffee",
     "integration": "cucumber.js",
-    "lint": "eslint lib dist-tools/*.js",
+    "lint": "eslint lib test dist-tools/*.js",
     "console": "./scripts/console",
     "testfiles": "istanbul `[ $COVERAGE ] && echo 'cover _mocha' || echo 'test mocha'`",
     "tstest": "npm -s run-script build-typings && tsc -p ./ts",
@@ -141,6 +143,7 @@
     "region-check": "node ./scripts/region-checker/index.js",
     "translate-api-test": "mocha scripts/lib/translate-api.spec.js",
     "typings-generator-test": "mocha scripts/lib/prune-shapes.spec.js",
-    "helper-test": "mocha scripts/lib/test-helper.spec.js"
+    "helper-test": "mocha scripts/lib/test-helper.spec.js",
+    "csm-functional-test": "mocha test/publisher/functional_test"
   }
 }

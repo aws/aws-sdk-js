@@ -20,11 +20,11 @@ declare class Batch extends Service {
    */
   cancelJob(callback?: (err: AWSError, data: Batch.Types.CancelJobResponse) => void): Request<Batch.Types.CancelJobResponse, AWSError>;
   /**
-   * Creates an AWS Batch compute environment. You can create MANAGED or UNMANAGED compute environments. In a managed compute environment, AWS Batch manages the compute resources within the environment, based on the compute resources that you specify. Instances launched into a managed compute environment use a recent, approved version of the Amazon ECS-optimized AMI. You can choose to use Amazon EC2 On-Demand Instances in your managed compute environment, or you can use Amazon EC2 Spot Instances that only launch when the Spot bid price is below a specified percentage of the On-Demand price. In an unmanaged compute environment, you can manage your own compute resources. This provides more compute resource configuration options, such as using a custom AMI, but you must ensure that your AMI meets the Amazon ECS container instance AMI specification. For more information, see Container Instance AMIs in the Amazon Elastic Container Service Developer Guide. After you have created your unmanaged compute environment, you can use the DescribeComputeEnvironments operation to find the Amazon ECS cluster that is associated with it and then manually launch your container instances into that Amazon ECS cluster. For more information, see Launching an Amazon ECS Container Instance in the Amazon Elastic Container Service Developer Guide.
+   * Creates an AWS Batch compute environment. You can create MANAGED or UNMANAGED compute environments. In a managed compute environment, AWS Batch manages the capacity and instance types of the compute resources within the environment. This is based on the compute resource specification that you define or the launch template that you specify when you create the compute environment. You can choose to use Amazon EC2 On-Demand Instances or Spot Instances in your managed compute environment. You can optionally set a maximum price so that Spot Instances only launch when the Spot Instance price is below a specified percentage of the On-Demand price.  Multi-node parallel jobs are not supported on Spot Instances.  In an unmanaged compute environment, you can manage your own compute resources. This provides more compute resource configuration options, such as using a custom AMI, but you must ensure that your AMI meets the Amazon ECS container instance AMI specification. For more information, see Container Instance AMIs in the Amazon Elastic Container Service Developer Guide. After you have created your unmanaged compute environment, you can use the DescribeComputeEnvironments operation to find the Amazon ECS cluster that is associated with it. Then, manually launch your container instances into that Amazon ECS cluster. For more information, see Launching an Amazon ECS Container Instance in the Amazon Elastic Container Service Developer Guide.  AWS Batch does not upgrade the AMIs in a compute environment after it is created (for example, when a newer version of the Amazon ECS-optimized AMI is available). You are responsible for the management of the guest operating system (including updates and security patches) and any additional application software or utilities that you install on the compute resources. To use a new AMI for your AWS Batch jobs:   Create a new compute environment with the new AMI.   Add the compute environment to an existing job queue.   Remove the old compute environment from your job queue.   Delete the old compute environment.   
    */
   createComputeEnvironment(params: Batch.Types.CreateComputeEnvironmentRequest, callback?: (err: AWSError, data: Batch.Types.CreateComputeEnvironmentResponse) => void): Request<Batch.Types.CreateComputeEnvironmentResponse, AWSError>;
   /**
-   * Creates an AWS Batch compute environment. You can create MANAGED or UNMANAGED compute environments. In a managed compute environment, AWS Batch manages the compute resources within the environment, based on the compute resources that you specify. Instances launched into a managed compute environment use a recent, approved version of the Amazon ECS-optimized AMI. You can choose to use Amazon EC2 On-Demand Instances in your managed compute environment, or you can use Amazon EC2 Spot Instances that only launch when the Spot bid price is below a specified percentage of the On-Demand price. In an unmanaged compute environment, you can manage your own compute resources. This provides more compute resource configuration options, such as using a custom AMI, but you must ensure that your AMI meets the Amazon ECS container instance AMI specification. For more information, see Container Instance AMIs in the Amazon Elastic Container Service Developer Guide. After you have created your unmanaged compute environment, you can use the DescribeComputeEnvironments operation to find the Amazon ECS cluster that is associated with it and then manually launch your container instances into that Amazon ECS cluster. For more information, see Launching an Amazon ECS Container Instance in the Amazon Elastic Container Service Developer Guide.
+   * Creates an AWS Batch compute environment. You can create MANAGED or UNMANAGED compute environments. In a managed compute environment, AWS Batch manages the capacity and instance types of the compute resources within the environment. This is based on the compute resource specification that you define or the launch template that you specify when you create the compute environment. You can choose to use Amazon EC2 On-Demand Instances or Spot Instances in your managed compute environment. You can optionally set a maximum price so that Spot Instances only launch when the Spot Instance price is below a specified percentage of the On-Demand price.  Multi-node parallel jobs are not supported on Spot Instances.  In an unmanaged compute environment, you can manage your own compute resources. This provides more compute resource configuration options, such as using a custom AMI, but you must ensure that your AMI meets the Amazon ECS container instance AMI specification. For more information, see Container Instance AMIs in the Amazon Elastic Container Service Developer Guide. After you have created your unmanaged compute environment, you can use the DescribeComputeEnvironments operation to find the Amazon ECS cluster that is associated with it. Then, manually launch your container instances into that Amazon ECS cluster. For more information, see Launching an Amazon ECS Container Instance in the Amazon Elastic Container Service Developer Guide.  AWS Batch does not upgrade the AMIs in a compute environment after it is created (for example, when a newer version of the Amazon ECS-optimized AMI is available). You are responsible for the management of the guest operating system (including updates and security patches) and any additional application software or utilities that you install on the compute resources. To use a new AMI for your AWS Batch jobs:   Create a new compute environment with the new AMI.   Add the compute environment to an existing job queue.   Remove the old compute environment from your job queue.   Delete the old compute environment.   
    */
   createComputeEnvironment(callback?: (err: AWSError, data: Batch.Types.CreateComputeEnvironmentResponse) => void): Request<Batch.Types.CreateComputeEnvironmentResponse, AWSError>;
   /**
@@ -44,19 +44,19 @@ declare class Batch extends Service {
    */
   deleteComputeEnvironment(callback?: (err: AWSError, data: Batch.Types.DeleteComputeEnvironmentResponse) => void): Request<Batch.Types.DeleteComputeEnvironmentResponse, AWSError>;
   /**
-   * Deletes the specified job queue. You must first disable submissions for a queue with the UpdateJobQueue operation. All jobs in the queue are terminated when you delete a job queue. It is not necessary to disassociate compute environments from a queue before submitting a DeleteJobQueue request. 
+   * Deletes the specified job queue. You must first disable submissions for a queue with the UpdateJobQueue operation. All jobs in the queue are terminated when you delete a job queue. It is not necessary to disassociate compute environments from a queue before submitting a DeleteJobQueue request.
    */
   deleteJobQueue(params: Batch.Types.DeleteJobQueueRequest, callback?: (err: AWSError, data: Batch.Types.DeleteJobQueueResponse) => void): Request<Batch.Types.DeleteJobQueueResponse, AWSError>;
   /**
-   * Deletes the specified job queue. You must first disable submissions for a queue with the UpdateJobQueue operation. All jobs in the queue are terminated when you delete a job queue. It is not necessary to disassociate compute environments from a queue before submitting a DeleteJobQueue request. 
+   * Deletes the specified job queue. You must first disable submissions for a queue with the UpdateJobQueue operation. All jobs in the queue are terminated when you delete a job queue. It is not necessary to disassociate compute environments from a queue before submitting a DeleteJobQueue request.
    */
   deleteJobQueue(callback?: (err: AWSError, data: Batch.Types.DeleteJobQueueResponse) => void): Request<Batch.Types.DeleteJobQueueResponse, AWSError>;
   /**
-   * Deregisters an AWS Batch job definition.
+   * Deregisters an AWS Batch job definition. Job definitions will be permanently deleted after 180 days.
    */
   deregisterJobDefinition(params: Batch.Types.DeregisterJobDefinitionRequest, callback?: (err: AWSError, data: Batch.Types.DeregisterJobDefinitionResponse) => void): Request<Batch.Types.DeregisterJobDefinitionResponse, AWSError>;
   /**
-   * Deregisters an AWS Batch job definition.
+   * Deregisters an AWS Batch job definition. Job definitions will be permanently deleted after 180 days.
    */
   deregisterJobDefinition(callback?: (err: AWSError, data: Batch.Types.DeregisterJobDefinitionResponse) => void): Request<Batch.Types.DeregisterJobDefinitionResponse, AWSError>;
   /**
@@ -92,27 +92,27 @@ declare class Batch extends Service {
    */
   describeJobs(callback?: (err: AWSError, data: Batch.Types.DescribeJobsResponse) => void): Request<Batch.Types.DescribeJobsResponse, AWSError>;
   /**
-   * Returns a list of task jobs for a specified job queue. You can filter the results by job status with the jobStatus parameter. If you do not specify a status, only RUNNING jobs are returned.
+   * Returns a list of AWS Batch jobs. You must specify only one of the following:   a job queue ID to return a list of jobs in that job queue   a multi-node parallel job ID to return a list of that job's nodes   an array job ID to return a list of that job's children   You can filter the results by job status with the jobStatus parameter. If you do not specify a status, only RUNNING jobs are returned.
    */
   listJobs(params: Batch.Types.ListJobsRequest, callback?: (err: AWSError, data: Batch.Types.ListJobsResponse) => void): Request<Batch.Types.ListJobsResponse, AWSError>;
   /**
-   * Returns a list of task jobs for a specified job queue. You can filter the results by job status with the jobStatus parameter. If you do not specify a status, only RUNNING jobs are returned.
+   * Returns a list of AWS Batch jobs. You must specify only one of the following:   a job queue ID to return a list of jobs in that job queue   a multi-node parallel job ID to return a list of that job's nodes   an array job ID to return a list of that job's children   You can filter the results by job status with the jobStatus parameter. If you do not specify a status, only RUNNING jobs are returned.
    */
   listJobs(callback?: (err: AWSError, data: Batch.Types.ListJobsResponse) => void): Request<Batch.Types.ListJobsResponse, AWSError>;
   /**
-   * Registers an AWS Batch job definition. 
+   * Registers an AWS Batch job definition.
    */
   registerJobDefinition(params: Batch.Types.RegisterJobDefinitionRequest, callback?: (err: AWSError, data: Batch.Types.RegisterJobDefinitionResponse) => void): Request<Batch.Types.RegisterJobDefinitionResponse, AWSError>;
   /**
-   * Registers an AWS Batch job definition. 
+   * Registers an AWS Batch job definition.
    */
   registerJobDefinition(callback?: (err: AWSError, data: Batch.Types.RegisterJobDefinitionResponse) => void): Request<Batch.Types.RegisterJobDefinitionResponse, AWSError>;
   /**
-   * Submits an AWS Batch job from a job definition. Parameters specified during SubmitJob override parameters defined in the job definition. 
+   * Submits an AWS Batch job from a job definition. Parameters specified during SubmitJob override parameters defined in the job definition.
    */
   submitJob(params: Batch.Types.SubmitJobRequest, callback?: (err: AWSError, data: Batch.Types.SubmitJobResponse) => void): Request<Batch.Types.SubmitJobResponse, AWSError>;
   /**
-   * Submits an AWS Batch job from a job definition. Parameters specified during SubmitJob override parameters defined in the job definition. 
+   * Submits an AWS Batch job from a job definition. Parameters specified during SubmitJob override parameters defined in the job definition.
    */
   submitJob(callback?: (err: AWSError, data: Batch.Types.SubmitJobResponse) => void): Request<Batch.Types.SubmitJobResponse, AWSError>;
   /**
@@ -194,6 +194,10 @@ declare namespace Batch {
      * The name of the CloudWatch Logs log stream associated with the container. The log group for AWS Batch jobs is /aws/batch/job. Each container attempt receives a log stream name when they reach the RUNNING status.
      */
     logStreamName?: String;
+    /**
+     * The network interfaces associated with the job attempt.
+     */
+    networkInterfaces?: NetworkInterfaceList;
   }
   export interface AttemptDetail {
     /**
@@ -201,11 +205,11 @@ declare namespace Batch {
      */
     container?: AttemptContainerDetail;
     /**
-     * The Unix time stamp (in seconds and milliseconds) for when the attempt was started (when the attempt transitioned from the STARTING state to the RUNNING state).
+     * The Unix timestamp (in seconds and milliseconds) for when the attempt was started (when the attempt transitioned from the STARTING state to the RUNNING state).
      */
     startedAt?: Long;
     /**
-     * The Unix time stamp (in seconds and milliseconds) for when the attempt was stopped (when the attempt transitioned from the RUNNING state to a terminal state, such as SUCCEEDED or FAILED).
+     * The Unix timestamp (in seconds and milliseconds) for when the attempt was stopped (when the attempt transitioned from the RUNNING state to a terminal state, such as SUCCEEDED or FAILED).
      */
     stoppedAt?: Long;
     /**
@@ -218,6 +222,7 @@ declare namespace Batch {
   export type CEState = "ENABLED"|"DISABLED"|string;
   export type CEStatus = "CREATING"|"UPDATING"|"DELETING"|"DELETED"|"VALID"|"INVALID"|string;
   export type CEType = "MANAGED"|"UNMANAGED"|string;
+  export type CRAllocationStrategy = "BEST_FIT"|"BEST_FIT_PROGRESSIVE"|"SPOT_CAPACITY_OPTIMIZED"|string;
   export type CRType = "EC2"|"SPOT"|string;
   export interface CancelJobRequest {
     /**
@@ -225,7 +230,7 @@ declare namespace Batch {
      */
     jobId: String;
     /**
-     * A message to attach to the job that explains the reason for canceling it. This message is returned by future DescribeJobs operations on the job. This message is also recorded in the AWS Batch activity logs. 
+     * A message to attach to the job that explains the reason for canceling it. This message is returned by future DescribeJobs operations on the job. This message is also recorded in the AWS Batch activity logs.
      */
     reason: String;
   }
@@ -233,15 +238,15 @@ declare namespace Batch {
   }
   export interface ComputeEnvironmentDetail {
     /**
-     * The name of the compute environment. 
+     * The name of the compute environment.
      */
     computeEnvironmentName: String;
     /**
-     * The Amazon Resource Name (ARN) of the compute environment. 
+     * The Amazon Resource Name (ARN) of the compute environment.
      */
     computeEnvironmentArn: String;
     /**
-     * The Amazon Resource Name (ARN) of the underlying Amazon ECS cluster used by the compute environment. 
+     * The Amazon Resource Name (ARN) of the underlying Amazon ECS cluster used by the compute environment.
      */
     ecsClusterArn: String;
     /**
@@ -249,7 +254,7 @@ declare namespace Batch {
      */
     type?: CEType;
     /**
-     * The state of the compute environment. The valid values are ENABLED or DISABLED. An ENABLED state indicates that you can register instances with the compute environment and that the associated instances can accept jobs. 
+     * The state of the compute environment. The valid values are ENABLED or DISABLED. If the state is ENABLED, then the AWS Batch scheduler can attempt to place jobs from an associated job queue on the compute resources within the environment. If the compute environment is managed, then it can scale its instances out or in automatically, based on the job queue demand. If the state is DISABLED, then the AWS Batch scheduler does not attempt to place jobs within the environment. Jobs in a STARTING or RUNNING state continue to progress normally. Managed compute environments in the DISABLED state do not scale out. However, they scale in to minvCpus value after instances become idle.
      */
     state?: CEState;
     /**
@@ -261,7 +266,7 @@ declare namespace Batch {
      */
     statusReason?: String;
     /**
-     * The compute resources defined for the compute environment. 
+     * The compute resources defined for the compute environment.
      */
     computeResources?: ComputeResource;
     /**
@@ -283,23 +288,27 @@ declare namespace Batch {
   export type ComputeEnvironmentOrders = ComputeEnvironmentOrder[];
   export interface ComputeResource {
     /**
-     * The type of compute environment.
+     * The type of compute environment: EC2 or SPOT.
      */
     type: CRType;
     /**
-     * The minimum number of EC2 vCPUs that an environment should maintain. 
+     * The allocation strategy to use for the compute resource in case not enough instances of the best fitting instance type can be allocated. This could be due to availability of the instance type in the region or Amazon EC2 service limits. If this is not specified, the default is BEST_FIT, which will use only the best fitting instance type, waiting for additional capacity if it's not available. This allocation strategy keeps costs lower but can limit scaling. If you are using Spot Fleets with BEST_FIT then the Spot Fleet IAM Role must be specified. BEST_FIT_PROGRESSIVE will select additional instance types that are large enough to meet the requirements of the jobs in the queue, with a preference for instance types with a lower cost per vCPU. SPOT_CAPACITY_OPTIMIZED is only available for Spot Instance compute resources and will select additional instance types that are large enough to meet the requirements of the jobs in the queue, with a preference for instance types that are less likely to be interrupted. For more information, see Allocation Strategies in the AWS Batch User Guide.
+     */
+    allocationStrategy?: CRAllocationStrategy;
+    /**
+     * The minimum number of Amazon EC2 vCPUs that an environment should maintain (even if the compute environment is DISABLED).
      */
     minvCpus: Integer;
     /**
-     * The maximum number of EC2 vCPUs that an environment can reach. 
+     * The maximum number of Amazon EC2 vCPUs that an environment can reach.
      */
     maxvCpus: Integer;
     /**
-     * The desired number of EC2 vCPUS in the compute environment. 
+     * The desired number of Amazon EC2 vCPUS in the compute environment.
      */
     desiredvCpus?: Integer;
     /**
-     * The instances types that may be launched. You can specify instance families to launch any instance type within those families (for example, c4 or p3), or you can specify specific sizes within a family (such as c4.8xlarge). You can also choose optimal to pick instance types (from the latest C, M, and R instance families) on the fly that match the demand of your job queues.
+     * The instances types that may be launched. You can specify instance families to launch any instance type within those families (for example, c5 or p3), or you can specify specific sizes within a family (such as c5.8xlarge). You can also choose optimal to pick instance types (from the C, M, and R instance families) on the fly that match the demand of your job queues.
      */
     instanceTypes: StringList;
     /**
@@ -307,45 +316,53 @@ declare namespace Batch {
      */
     imageId?: String;
     /**
-     * The VPC subnets into which the compute resources are launched. 
+     * The VPC subnets into which the compute resources are launched. For more information, see VPCs and Subnets in the Amazon VPC User Guide.
      */
     subnets: StringList;
     /**
-     * The EC2 security group that is associated with instances launched in the compute environment. 
+     * The Amazon EC2 security groups associated with instances launched in the compute environment. One or more security groups must be specified, either in securityGroupIds or using a launch template referenced in launchTemplate. If security groups are specified using both securityGroupIds and launchTemplate, the values in securityGroupIds will be used.
      */
-    securityGroupIds: StringList;
+    securityGroupIds?: StringList;
     /**
-     * The EC2 key pair that is used for instances launched in the compute environment.
+     * The Amazon EC2 key pair that is used for instances launched in the compute environment.
      */
     ec2KeyPair?: String;
     /**
-     * The Amazon ECS instance profile applied to Amazon EC2 instances in a compute environment. You can specify the short name or full Amazon Resource Name (ARN) of an instance profile. For example, ecsInstanceRole or arn:aws:iam::&lt;aws_account_id&gt;:instance-profile/ecsInstanceRole. For more information, see Amazon ECS Instance Role in the AWS Batch User Guide.
+     * The Amazon ECS instance profile applied to Amazon EC2 instances in a compute environment. You can specify the short name or full Amazon Resource Name (ARN) of an instance profile. For example,  ecsInstanceRole  or arn:aws:iam::&lt;aws_account_id&gt;:instance-profile/ecsInstanceRole . For more information, see Amazon ECS Instance Role in the AWS Batch User Guide.
      */
     instanceRole: String;
     /**
-     * Key-value pair tags to be applied to resources that are launched in the compute environment. 
+     * Key-value pair tags to be applied to resources that are launched in the compute environment. For AWS Batch, these take the form of "String1": "String2", where String1 is the tag key and String2 is the tag value—for example, { "Name": "AWS Batch Instance - C4OnDemand" }.
      */
     tags?: TagsMap;
     /**
-     * The minimum percentage that a Spot Instance price must be when compared with the On-Demand price for that instance type before instances are launched. For example, if your bid percentage is 20%, then the Spot price must be below 20% of the current On-Demand price for that EC2 instance.
+     * The Amazon EC2 placement group to associate with your compute resources. If you intend to submit multi-node parallel jobs to your compute environment, you should consider creating a cluster placement group and associate it with your compute resources. This keeps your multi-node parallel job on a logical grouping of instances within a single Availability Zone with high network flow potential. For more information, see Placement Groups in the Amazon EC2 User Guide for Linux Instances.
+     */
+    placementGroup?: String;
+    /**
+     * The maximum percentage that a Spot Instance price can be when compared with the On-Demand price for that instance type before instances are launched. For example, if your maximum percentage is 20%, then the Spot price must be below 20% of the current On-Demand price for that Amazon EC2 instance. You always pay the lowest (market) price and never more than your maximum percentage. If you leave this field empty, the default value is 100% of the On-Demand price.
      */
     bidPercentage?: Integer;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied to a SPOT compute environment.
+     * The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied to a SPOT compute environment. This role is required if the allocation strategy set to BEST_FIT or if the allocation strategy is not specified. For more information, see Amazon EC2 Spot Fleet Role in the AWS Batch User Guide.
      */
     spotIamFleetRole?: String;
+    /**
+     * The launch template to use for your compute resources. Any other compute resource parameters that you specify in a CreateComputeEnvironment API operation override the same parameters in the launch template. You must specify either the launch template ID or launch template name in the request, but not both. For more information, see Launch Template Support in the AWS Batch User Guide.
+     */
+    launchTemplate?: LaunchTemplateSpecification;
   }
   export interface ComputeResourceUpdate {
     /**
-     * The minimum number of EC2 vCPUs that an environment should maintain.
+     * The minimum number of Amazon EC2 vCPUs that an environment should maintain.
      */
     minvCpus?: Integer;
     /**
-     * The maximum number of EC2 vCPUs that an environment can reach.
+     * The maximum number of Amazon EC2 vCPUs that an environment can reach.
      */
     maxvCpus?: Integer;
     /**
-     * The desired number of EC2 vCPUS in the compute environment.
+     * The desired number of Amazon EC2 vCPUS in the compute environment.
      */
     desiredvCpus?: Integer;
   }
@@ -355,7 +372,7 @@ declare namespace Batch {
      */
     image?: String;
     /**
-     * The number of VCPUs allocated for the job. 
+     * The number of VCPUs allocated for the job.
      */
     vcpus?: Integer;
     /**
@@ -363,11 +380,11 @@ declare namespace Batch {
      */
     memory?: Integer;
     /**
-     * The command that is passed to the container. 
+     * The command that is passed to the container.
      */
     command?: StringList;
     /**
-     * The Amazon Resource Name (ARN) associated with the job upon execution. 
+     * The Amazon Resource Name (ARN) associated with the job upon execution.
      */
     jobRoleArn?: String;
     /**
@@ -418,6 +435,22 @@ declare namespace Batch {
      * The name of the CloudWatch Logs log stream associated with the container. The log group for AWS Batch jobs is /aws/batch/job. Each container attempt receives a log stream name when they reach the RUNNING status.
      */
     logStreamName?: String;
+    /**
+     * The instance type of the underlying host infrastructure of a multi-node parallel job.
+     */
+    instanceType?: String;
+    /**
+     * The network interfaces associated with the job.
+     */
+    networkInterfaces?: NetworkInterfaceList;
+    /**
+     * The type and amount of a resource to assign to a container. Currently, the only supported resource is GPU.
+     */
+    resourceRequirements?: ResourceRequirements;
+    /**
+     * Linux-specific modifications that are applied to the container, such as details for device mappings.
+     */
+    linuxParameters?: LinuxParameters;
   }
   export interface ContainerOverrides {
     /**
@@ -433,23 +466,31 @@ declare namespace Batch {
      */
     command?: StringList;
     /**
+     * The instance type to use for a multi-node parallel job. This parameter is not valid for single-node container jobs.
+     */
+    instanceType?: String;
+    /**
      * The environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the job definition.  Environment variables must not start with AWS_BATCH; this naming convention is reserved for variables that are set by the AWS Batch service. 
      */
     environment?: EnvironmentVariables;
+    /**
+     * The type and amount of a resource to assign to a container. This value overrides the value set in the job definition. Currently, the only supported resource is GPU.
+     */
+    resourceRequirements?: ResourceRequirements;
   }
   export interface ContainerProperties {
     /**
-     * The image used to start a container. This string is passed directly to the Docker daemon. Images in the Docker Hub registry are available by default. Other repositories are specified with  repository-url/image:tag . Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs are allowed. This parameter maps to Image in the Create a container section of the Docker Remote API and the IMAGE parameter of docker run.   Images in Amazon ECR repositories use the full registry and repository URI (for example, 012345678910.dkr.ecr.&lt;region-name&gt;.amazonaws.com/&lt;repository-name&gt;).    Images in official repositories on Docker Hub use a single name (for example, ubuntu or mongo).   Images in other repositories on Docker Hub are qualified with an organization name (for example, amazon/amazon-ecs-agent).   Images in other online repositories are qualified further by a domain name (for example, quay.io/assemblyline/ubuntu).  
+     * The image used to start a container. This string is passed directly to the Docker daemon. Images in the Docker Hub registry are available by default. Other repositories are specified with  repository-url/image:tag . Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs are allowed. This parameter maps to Image in the Create a container section of the Docker Remote API and the IMAGE parameter of docker run.   Images in Amazon ECR repositories use the full registry and repository URI (for example, 012345678910.dkr.ecr.&lt;region-name&gt;.amazonaws.com/&lt;repository-name&gt;).   Images in official repositories on Docker Hub use a single name (for example, ubuntu or mongo).   Images in other repositories on Docker Hub are qualified with an organization name (for example, amazon/amazon-ecs-agent).   Images in other online repositories are qualified further by a domain name (for example, quay.io/assemblyline/ubuntu).  
      */
-    image: String;
+    image?: String;
     /**
      * The number of vCPUs reserved for the container. This parameter maps to CpuShares in the Create a container section of the Docker Remote API and the --cpu-shares option to docker run. Each vCPU is equivalent to 1,024 CPU shares. You must specify at least one vCPU.
      */
-    vcpus: Integer;
+    vcpus?: Integer;
     /**
      * The hard limit (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed. This parameter maps to Memory in the Create a container section of the Docker Remote API and the --memory option to docker run. You must specify at least 4 MiB of memory for a job.  If you are trying to maximize your resource utilization by providing your jobs as much memory as possible for a particular instance type, see Memory Management in the AWS Batch User Guide. 
      */
-    memory: Integer;
+    memory?: Integer;
     /**
      * The command that is passed to the container. This parameter maps to Cmd in the Create a container section of the Docker Remote API and the COMMAND parameter to docker run. For more information, see https://docs.docker.com/engine/reference/builder/#cmd.
      */
@@ -486,6 +527,18 @@ declare namespace Batch {
      * The user name to use inside the container. This parameter maps to User in the Create a container section of the Docker Remote API and the --user option to docker run.
      */
     user?: String;
+    /**
+     * The instance type to use for a multi-node parallel job. Currently all node groups in a multi-node parallel job must use the same instance type. This parameter is not valid for single-node container jobs.
+     */
+    instanceType?: String;
+    /**
+     * The type and amount of a resource to assign to a container. Currently, the only supported resource is GPU.
+     */
+    resourceRequirements?: ResourceRequirements;
+    /**
+     * Linux-specific modifications that are applied to the container, such as details for device mappings.
+     */
+    linuxParameters?: LinuxParameters;
   }
   export interface ContainerSummary {
     /**
@@ -503,7 +556,7 @@ declare namespace Batch {
      */
     computeEnvironmentName: String;
     /**
-     * The type of the compute environment. 
+     * The type of the compute environment. For more information, see Compute Environments in the AWS Batch User Guide.
      */
     type: CEType;
     /**
@@ -511,7 +564,7 @@ declare namespace Batch {
      */
     state?: CEState;
     /**
-     * Details of the compute resources managed by the compute environment. This parameter is required for managed compute environments.
+     * Details of the compute resources managed by the compute environment. This parameter is required for managed compute environments. For more information, see Compute Environments in the AWS Batch User Guide.
      */
     computeResources?: ComputeResource;
     /**
@@ -525,7 +578,7 @@ declare namespace Batch {
      */
     computeEnvironmentName?: String;
     /**
-     * The Amazon Resource Name (ARN) of the compute environment. 
+     * The Amazon Resource Name (ARN) of the compute environment.
      */
     computeEnvironmentArn?: String;
   }
@@ -539,7 +592,7 @@ declare namespace Batch {
      */
     state?: JQState;
     /**
-     * The priority of the job queue. Job queues with a higher priority (or a higher integer value for the priority parameter) are evaluated first when associated with same compute environment. Priority is determined in descending order, for example, a job queue with a priority value of 10 is given scheduling preference over a job queue with a priority value of 1.
+     * The priority of the job queue. Job queues with a higher priority (or a higher integer value for the priority parameter) are evaluated first when associated with the same compute environment. Priority is determined in descending order, for example, a job queue with a priority value of 10 is given scheduling preference over a job queue with a priority value of 1.
      */
     priority: Integer;
     /**
@@ -559,7 +612,7 @@ declare namespace Batch {
   }
   export interface DeleteComputeEnvironmentRequest {
     /**
-     * The name or Amazon Resource Name (ARN) of the compute environment to delete. 
+     * The name or Amazon Resource Name (ARN) of the compute environment to delete.
      */
     computeEnvironment: String;
   }
@@ -567,7 +620,7 @@ declare namespace Batch {
   }
   export interface DeleteJobQueueRequest {
     /**
-     * The short name or full Amazon Resource Name (ARN) of the queue to delete. 
+     * The short name or full Amazon Resource Name (ARN) of the queue to delete.
      */
     jobQueue: String;
   }
@@ -575,7 +628,7 @@ declare namespace Batch {
   }
   export interface DeregisterJobDefinitionRequest {
     /**
-     * The name and revision (name:revision) or full Amazon Resource Name (ARN) of the job definition to deregister. 
+     * The name and revision (name:revision) or full Amazon Resource Name (ARN) of the job definition to deregister.
      */
     jobDefinition: String;
   }
@@ -583,7 +636,7 @@ declare namespace Batch {
   }
   export interface DescribeComputeEnvironmentsRequest {
     /**
-     * A list of up to 100 compute environment names or full Amazon Resource Name (ARN) entries. 
+     * A list of up to 100 compute environment names or full Amazon Resource Name (ARN) entries.
      */
     computeEnvironments?: StringList;
     /**
@@ -607,7 +660,7 @@ declare namespace Batch {
   }
   export interface DescribeJobDefinitionsRequest {
     /**
-     * A space-separated list of up to 100 job definition names or full Amazon Resource Name (ARN) entries.
+     * A list of up to 100 job definition names or full Amazon Resource Name (ARN) entries.
      */
     jobDefinitions?: StringList;
     /**
@@ -629,7 +682,7 @@ declare namespace Batch {
   }
   export interface DescribeJobDefinitionsResponse {
     /**
-     * The list of job definitions. 
+     * The list of job definitions.
      */
     jobDefinitions?: JobDefinitionList;
     /**
@@ -653,7 +706,7 @@ declare namespace Batch {
   }
   export interface DescribeJobQueuesResponse {
     /**
-     * The list of job queues. 
+     * The list of job queues.
      */
     jobQueues?: JobQueueDetailList;
     /**
@@ -663,20 +716,37 @@ declare namespace Batch {
   }
   export interface DescribeJobsRequest {
     /**
-     * A space-separated list of up to 100 job IDs.
+     * A list of up to 100 job IDs.
      */
     jobs: StringList;
   }
   export interface DescribeJobsResponse {
     /**
-     * The list of jobs. 
+     * The list of jobs.
      */
     jobs?: JobDetailList;
   }
+  export interface Device {
+    /**
+     * The path for the device on the host container instance.
+     */
+    hostPath: String;
+    /**
+     * The path inside the container at which to expose the host device. By default the hostPath value is used.
+     */
+    containerPath?: String;
+    /**
+     * The explicit permissions to provide to the container for the device. By default, the container has permissions for read, write, and mknod for the device.
+     */
+    permissions?: DeviceCgroupPermissions;
+  }
+  export type DeviceCgroupPermission = "READ"|"WRITE"|"MKNOD"|string;
+  export type DeviceCgroupPermissions = DeviceCgroupPermission[];
+  export type DevicesList = Device[];
   export type EnvironmentVariables = KeyValuePair[];
   export interface Host {
     /**
-     * The path on the host container instance that is presented to the container. If this parameter is empty, then the Docker daemon has assigned a host path for you. If the host parameter contains a sourcePath file location, then the data volume persists at the specified location on the host container instance until you delete it manually. If the sourcePath value does not exist on the host container instance, the Docker daemon creates it. If the location does exist, the contents of the source path folder are exported.
+     * The path on the host container instance that is presented to the container. If this parameter is empty, then the Docker daemon has assigned a host path for you. If this parameter contains a file location, then the data volume persists at the specified location on the host container instance until you delete it manually. If the source path location does not exist on the host container instance, the Docker daemon creates it. If the location does exist, the contents of the source path folder are exported.
      */
     sourcePath?: String;
   }
@@ -685,11 +755,11 @@ declare namespace Batch {
   export type JQStatus = "CREATING"|"UPDATING"|"DELETING"|"DELETED"|"VALID"|"INVALID"|string;
   export interface JobDefinition {
     /**
-     * The name of the job definition. 
+     * The name of the job definition.
      */
     jobDefinitionName: String;
     /**
-     * The Amazon Resource Name (ARN) for the job definition. 
+     * The Amazon Resource Name (ARN) for the job definition.
      */
     jobDefinitionArn: String;
     /**
@@ -705,7 +775,7 @@ declare namespace Batch {
      */
     type: String;
     /**
-     * Default parameters or parameter substitution placeholders that are set in the job definition. Parameters are specified as a key-value pair mapping. Parameters in a SubmitJob request override any corresponding parameter defaults from the job definition.
+     * Default parameters or parameter substitution placeholders that are set in the job definition. Parameters are specified as a key-value pair mapping. Parameters in a SubmitJob request override any corresponding parameter defaults from the job definition. For more information about specifying parameters, see Job Definition Parameters in the AWS Batch User Guide.
      */
     parameters?: ParametersMap;
     /**
@@ -713,16 +783,20 @@ declare namespace Batch {
      */
     retryStrategy?: RetryStrategy;
     /**
-     * An object with various properties specific to container-based jobs. 
+     * An object with various properties specific to container-based jobs.
      */
     containerProperties?: ContainerProperties;
     /**
      * The timeout configuration for jobs that are submitted with this job definition. You can specify a timeout duration after which AWS Batch terminates your jobs if they have not finished.
      */
     timeout?: JobTimeout;
+    /**
+     * An object with various properties specific to multi-node parallel jobs.
+     */
+    nodeProperties?: NodeProperties;
   }
   export type JobDefinitionList = JobDefinition[];
-  export type JobDefinitionType = "container"|string;
+  export type JobDefinitionType = "container"|"multinode"|string;
   export interface JobDependency {
     /**
      * The job ID of the AWS Batch job associated with this dependency.
@@ -748,7 +822,7 @@ declare namespace Batch {
      */
     jobQueue: String;
     /**
-     * The current status for the job.
+     * The current status for the job.  If your jobs do not progress to STARTING, see Jobs Stuck in RUNNABLE Status in the troubleshooting section of the AWS Batch User Guide. 
      */
     status: JobStatus;
     /**
@@ -756,11 +830,11 @@ declare namespace Batch {
      */
     attempts?: AttemptDetails;
     /**
-     * A short, human-readable string to provide additional details about the current status of the job. 
+     * A short, human-readable string to provide additional details about the current status of the job.
      */
     statusReason?: String;
     /**
-     * The Unix time stamp (in seconds and milliseconds) for when the job was created. For non-array jobs and parent array jobs, this is when the job entered the SUBMITTED state (at the time SubmitJob was called). For array child jobs, this is when the child job was spawned by its parent and entered the PENDING state.
+     * The Unix timestamp (in seconds and milliseconds) for when the job was created. For non-array jobs and parent array jobs, this is when the job entered the SUBMITTED state (at the time SubmitJob was called). For array child jobs, this is when the child job was spawned by its parent and entered the PENDING state.
      */
     createdAt?: Long;
     /**
@@ -768,15 +842,15 @@ declare namespace Batch {
      */
     retryStrategy?: RetryStrategy;
     /**
-     * The Unix time stamp (in seconds and milliseconds) for when the job was started (when the job transitioned from the STARTING state to the RUNNING state).
+     * The Unix timestamp (in seconds and milliseconds) for when the job was started (when the job transitioned from the STARTING state to the RUNNING state).
      */
     startedAt: Long;
     /**
-     * The Unix time stamp (in seconds and milliseconds) for when the job was stopped (when the job transitioned from the RUNNING state to a terminal state, such as SUCCEEDED or FAILED).
+     * The Unix timestamp (in seconds and milliseconds) for when the job was stopped (when the job transitioned from the RUNNING state to a terminal state, such as SUCCEEDED or FAILED).
      */
     stoppedAt?: Long;
     /**
-     * A list of job names or IDs on which this job depends.
+     * A list of job IDs on which this job depends.
      */
     dependsOn?: JobDependencyList;
     /**
@@ -784,7 +858,7 @@ declare namespace Batch {
      */
     jobDefinition: String;
     /**
-     * Additional parameters passed to the job that replace parameter substitution placeholders or override any corresponding parameter defaults from the job definition. 
+     * Additional parameters passed to the job that replace parameter substitution placeholders or override any corresponding parameter defaults from the job definition.
      */
     parameters?: ParametersMap;
     /**
@@ -792,11 +866,19 @@ declare namespace Batch {
      */
     container?: ContainerDetail;
     /**
+     * An object representing the details of a node that is associated with a multi-node parallel job.
+     */
+    nodeDetails?: NodeDetails;
+    /**
+     * An object representing the node properties of a multi-node parallel job.
+     */
+    nodeProperties?: NodeProperties;
+    /**
      * The array properties of the job, if it is an array job.
      */
     arrayProperties?: ArrayPropertiesDetail;
     /**
-     * The timeout configuration for the job. 
+     * The timeout configuration for the job.
      */
     timeout?: JobTimeout;
   }
@@ -823,7 +905,7 @@ declare namespace Batch {
      */
     statusReason?: String;
     /**
-     * The priority of the job queue. 
+     * The priority of the job queue.
      */
     priority: Integer;
     /**
@@ -843,7 +925,7 @@ declare namespace Batch {
      */
     jobName: String;
     /**
-     * The Unix time stamp for when the job was created. For non-array jobs and parent array jobs, this is when the job entered the SUBMITTED state (at the time SubmitJob was called). For array child jobs, this is when the child job was spawned by its parent and entered the PENDING state.
+     * The Unix timestamp for when the job was created. For non-array jobs and parent array jobs, this is when the job entered the SUBMITTED state (at the time SubmitJob was called). For array child jobs, this is when the child job was spawned by its parent and entered the PENDING state.
      */
     createdAt?: Long;
     /**
@@ -855,11 +937,11 @@ declare namespace Batch {
      */
     statusReason?: String;
     /**
-     * The Unix time stamp for when the job was started (when the job transitioned from the STARTING state to the RUNNING state).
+     * The Unix timestamp for when the job was started (when the job transitioned from the STARTING state to the RUNNING state).
      */
     startedAt?: Long;
     /**
-     * The Unix time stamp for when the job was stopped (when the job transitioned from the RUNNING state to a terminal state, such as SUCCEEDED or FAILED).
+     * The Unix timestamp for when the job was stopped (when the job transitioned from the RUNNING state to a terminal state, such as SUCCEEDED or FAILED).
      */
     stoppedAt?: Long;
     /**
@@ -870,6 +952,10 @@ declare namespace Batch {
      * The array properties of the job, if it is an array job.
      */
     arrayProperties?: ArrayPropertiesSummary;
+    /**
+     * The node properties for a single node in a job summary list.
+     */
+    nodeProperties?: NodePropertiesSummary;
   }
   export type JobSummaryList = JobSummary[];
   export interface JobTimeout {
@@ -888,6 +974,26 @@ declare namespace Batch {
      */
     value?: String;
   }
+  export interface LaunchTemplateSpecification {
+    /**
+     * The ID of the launch template.
+     */
+    launchTemplateId?: String;
+    /**
+     * The name of the launch template.
+     */
+    launchTemplateName?: String;
+    /**
+     * The version number of the launch template. Default: The default version of the launch template.
+     */
+    version?: String;
+  }
+  export interface LinuxParameters {
+    /**
+     * Any host devices to expose to the container. This parameter maps to Devices in the Create a container section of the Docker Remote API and the --device option to docker run.
+     */
+    devices?: DevicesList;
+  }
   export interface ListJobsRequest {
     /**
      * The name or full Amazon Resource Name (ARN) of the job queue with which to list jobs.
@@ -897,6 +1003,10 @@ declare namespace Batch {
      * The job ID for an array job. Specifying an array job ID with this parameter lists all child jobs from within the specified array.
      */
     arrayJobId?: String;
+    /**
+     * The job ID for a multi-node parallel job. Specifying a multi-node parallel job ID with this parameter lists all nodes that are associated with the specified job.
+     */
+    multiNodeJobId?: String;
     /**
      * The job status with which to filter jobs in the specified queue. If you do not specify a status, only RUNNING jobs are returned.
      */
@@ -936,6 +1046,91 @@ declare namespace Batch {
     sourceVolume?: String;
   }
   export type MountPoints = MountPoint[];
+  export interface NetworkInterface {
+    /**
+     * The attachment ID for the network interface.
+     */
+    attachmentId?: String;
+    /**
+     * The private IPv6 address for the network interface.
+     */
+    ipv6Address?: String;
+    /**
+     * The private IPv4 address for the network interface.
+     */
+    privateIpv4Address?: String;
+  }
+  export type NetworkInterfaceList = NetworkInterface[];
+  export interface NodeDetails {
+    /**
+     * The node index for the node. Node index numbering begins at zero. This index is also available on the node with the AWS_BATCH_JOB_NODE_INDEX environment variable.
+     */
+    nodeIndex?: Integer;
+    /**
+     * Specifies whether the current node is the main node for a multi-node parallel job.
+     */
+    isMainNode?: Boolean;
+  }
+  export interface NodeOverrides {
+    /**
+     * The number of nodes to use with a multi-node parallel job. This value overrides the number of nodes that are specified in the job definition. To use this override:   There must be at least one node range in your job definition that has an open upper boundary (such as : or n:).   The lower boundary of the node range specified in the job definition must be fewer than the number of nodes specified in the override.   The main node index specified in the job definition must be fewer than the number of nodes specified in the override.  
+     */
+    numNodes?: Integer;
+    /**
+     * The node property overrides for the job.
+     */
+    nodePropertyOverrides?: NodePropertyOverrides;
+  }
+  export interface NodeProperties {
+    /**
+     * The number of nodes associated with a multi-node parallel job.
+     */
+    numNodes: Integer;
+    /**
+     * Specifies the node index for the main node of a multi-node parallel job. This node index value must be fewer than the number of nodes.
+     */
+    mainNode: Integer;
+    /**
+     * A list of node ranges and their properties associated with a multi-node parallel job.
+     */
+    nodeRangeProperties: NodeRangeProperties;
+  }
+  export interface NodePropertiesSummary {
+    /**
+     * Specifies whether the current node is the main node for a multi-node parallel job.
+     */
+    isMainNode?: Boolean;
+    /**
+     * The number of nodes associated with a multi-node parallel job.
+     */
+    numNodes?: Integer;
+    /**
+     * The node index for the node. Node index numbering begins at zero. This index is also available on the node with the AWS_BATCH_JOB_NODE_INDEX environment variable.
+     */
+    nodeIndex?: Integer;
+  }
+  export interface NodePropertyOverride {
+    /**
+     * The range of nodes, using node index values, with which to override. A range of 0:3 indicates nodes with index values of 0 through 3. If the starting range value is omitted (:n), then 0 is used to start the range. If the ending range value is omitted (n:), then the highest possible node index is used to end the range.
+     */
+    targetNodes: String;
+    /**
+     * The overrides that should be sent to a node range.
+     */
+    containerOverrides?: ContainerOverrides;
+  }
+  export type NodePropertyOverrides = NodePropertyOverride[];
+  export type NodeRangeProperties = NodeRangeProperty[];
+  export interface NodeRangeProperty {
+    /**
+     * The range of nodes, using node index values. A range of 0:3 indicates nodes with index values of 0 through 3. If the starting range value is omitted (:n), then 0 is used to start the range. If the ending range value is omitted (n:), then the highest possible node index is used to end the range. Your accumulative node ranges must account for all nodes (0:n). You may nest node ranges, for example 0:10 and 4:5, in which case the 4:5 range properties override the 0:10 properties.
+     */
+    targetNodes: String;
+    /**
+     * The container details for the node range.
+     */
+    container?: ContainerProperties;
+  }
   export type ParametersMap = {[key: string]: String};
   export interface RegisterJobDefinitionRequest {
     /**
@@ -951,11 +1146,15 @@ declare namespace Batch {
      */
     parameters?: ParametersMap;
     /**
-     * An object with various properties specific for container-based jobs. This parameter is required if the type parameter is container.
+     * An object with various properties specific to single-node container-based jobs. If the job definition's type parameter is container, then you must specify either containerProperties or nodeProperties.
      */
     containerProperties?: ContainerProperties;
     /**
-     * The retry strategy to use for failed jobs that are submitted with this job definition. Any retry strategy that is specified during a SubmitJob operation overrides the retry strategy defined here. If a job is terminated due to a timeout, it is not retried. 
+     * An object with various properties specific to multi-node parallel jobs. If you specify node properties for a job, it becomes a multi-node parallel job. For more information, see Multi-node Parallel Jobs in the AWS Batch User Guide. If the job definition's type parameter is container, then you must specify either containerProperties or nodeProperties.
+     */
+    nodeProperties?: NodeProperties;
+    /**
+     * The retry strategy to use for failed jobs that are submitted with this job definition. Any retry strategy that is specified during a SubmitJob operation overrides the retry strategy defined here. If a job is terminated due to a timeout, it is not retried.
      */
     retryStrategy?: RetryStrategy;
     /**
@@ -969,7 +1168,7 @@ declare namespace Batch {
      */
     jobDefinitionName: String;
     /**
-     * The Amazon Resource Name (ARN) of the job definition. 
+     * The Amazon Resource Name (ARN) of the job definition.
      */
     jobDefinitionArn: String;
     /**
@@ -977,9 +1176,21 @@ declare namespace Batch {
      */
     revision: Integer;
   }
+  export interface ResourceRequirement {
+    /**
+     * The number of physical GPUs to reserve for the container. The number of GPUs reserved for all containers in a job should not exceed the number of available GPUs on the compute resource that the job is launched on.
+     */
+    value: String;
+    /**
+     * The type of resource to assign to a container. Currently, the only supported resource type is GPU.
+     */
+    type: ResourceType;
+  }
+  export type ResourceRequirements = ResourceRequirement[];
+  export type ResourceType = "GPU"|string;
   export interface RetryStrategy {
     /**
-     * The number of times to move a job to the RUNNABLE status. You may specify between 1 and 10 attempts. If the value of attempts is greater than one, the job is retried if it fails until it has moved to RUNNABLE that many times.
+     * The number of times to move a job to the RUNNABLE status. You may specify between 1 and 10 attempts. If the value of attempts is greater than one, the job is retried on failure the same number of attempts as the value.
      */
     attempts?: Integer;
   }
@@ -987,11 +1198,11 @@ declare namespace Batch {
   export type StringList = String[];
   export interface SubmitJobRequest {
     /**
-     * The name of the job. The first character must be alphanumeric, and up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. 
+     * The name of the job. The first character must be alphanumeric, and up to 128 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.
      */
     jobName: String;
     /**
-     * The job queue into which the job is submitted. You can specify either the name or the Amazon Resource Name (ARN) of the queue. 
+     * The job queue into which the job is submitted. You can specify either the name or the Amazon Resource Name (ARN) of the queue.
      */
     jobQueue: String;
     /**
@@ -999,11 +1210,11 @@ declare namespace Batch {
      */
     arrayProperties?: ArrayProperties;
     /**
-     * A list of dependencies for the job. A job can depend upon a maximum of 20 jobs. You can specify a SEQUENTIAL type dependency without specifying a job ID for array jobs so that each child array job completes sequentially, starting at index 0. You can also specify an N_TO_N type dependency with a job ID for array jobs so that each index child of this job must wait for the corresponding index child of each dependency to complete before it can begin.
+     * A list of dependencies for the job. A job can depend upon a maximum of 20 jobs. You can specify a SEQUENTIAL type dependency without specifying a job ID for array jobs so that each child array job completes sequentially, starting at index 0. You can also specify an N_TO_N type dependency with a job ID for array jobs. In that case, each index child of this job must wait for the corresponding index child of each dependency to complete before it can begin.
      */
     dependsOn?: JobDependencyList;
     /**
-     * The job definition used by this job. This value can be either a name:revision or the Amazon Resource Name (ARN) for the job definition.
+     * The job definition used by this job. This value can be one of name, name:revision, or the Amazon Resource Name (ARN) for the job definition. If name is specified without a revision then the latest active revision is used.
      */
     jobDefinition: String;
     /**
@@ -1015,6 +1226,10 @@ declare namespace Batch {
      */
     containerOverrides?: ContainerOverrides;
     /**
+     * A list of node overrides in JSON format that specify the node range to target and the container overrides for that node range.
+     */
+    nodeOverrides?: NodeOverrides;
+    /**
      * The retry strategy to use for failed jobs from this SubmitJob operation. When a retry strategy is specified here, it overrides the retry strategy defined in the job definition.
      */
     retryStrategy?: RetryStrategy;
@@ -1025,7 +1240,7 @@ declare namespace Batch {
   }
   export interface SubmitJobResponse {
     /**
-     * The name of the job. 
+     * The name of the job.
      */
     jobName: String;
     /**
@@ -1040,7 +1255,7 @@ declare namespace Batch {
      */
     jobId: String;
     /**
-     * A message to attach to the job that explains the reason for canceling it. This message is returned by future DescribeJobs operations on the job. This message is also recorded in the AWS Batch activity logs. 
+     * A message to attach to the job that explains the reason for canceling it. This message is returned by future DescribeJobs operations on the job. This message is also recorded in the AWS Batch activity logs.
      */
     reason: String;
   }
@@ -1081,11 +1296,11 @@ declare namespace Batch {
   }
   export interface UpdateComputeEnvironmentResponse {
     /**
-     * The name of compute environment.
+     * The name of the compute environment.
      */
     computeEnvironmentName?: String;
     /**
-     * The Amazon Resource Name (ARN) of the compute environment. 
+     * The Amazon Resource Name (ARN) of the compute environment.
      */
     computeEnvironmentArn?: String;
   }
@@ -1099,11 +1314,11 @@ declare namespace Batch {
      */
     state?: JQState;
     /**
-     * The priority of the job queue. Job queues with a higher priority (or a higher integer value for the priority parameter) are evaluated first when associated with same compute environment. Priority is determined in descending order, for example, a job queue with a priority value of 10 is given scheduling preference over a job queue with a priority value of 1.
+     * The priority of the job queue. Job queues with a higher priority (or a higher integer value for the priority parameter) are evaluated first when associated with the same compute environment. Priority is determined in descending order, for example, a job queue with a priority value of 10 is given scheduling preference over a job queue with a priority value of 1.
      */
     priority?: Integer;
     /**
-     * Details the set of compute environments mapped to a job queue and their order relative to each other. This is one of the parameters used by the job scheduler to determine which compute environment should execute a given job. 
+     * Details the set of compute environments mapped to a job queue and their order relative to each other. This is one of the parameters used by the job scheduler to determine which compute environment should execute a given job.
      */
     computeEnvironmentOrder?: ComputeEnvironmentOrders;
   }

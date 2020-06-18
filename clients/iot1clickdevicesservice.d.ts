@@ -12,64 +12,62 @@ declare class IoT1ClickDevicesService extends Service {
   constructor(options?: IoT1ClickDevicesService.Types.ClientConfiguration)
   config: Config & IoT1ClickDevicesService.Types.ClientConfiguration;
   /**
-   * Adds device(s) to your account (i.e., claim one or more devices) if and only if
- you received a claim code with the device(s).
+   * Adds device(s) to your account (i.e., claim one or more devices) if and only if you
+ received a claim code with the device(s).
    */
   claimDevicesByClaimCode(params: IoT1ClickDevicesService.Types.ClaimDevicesByClaimCodeRequest, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.ClaimDevicesByClaimCodeResponse) => void): Request<IoT1ClickDevicesService.Types.ClaimDevicesByClaimCodeResponse, AWSError>;
   /**
-   * Adds device(s) to your account (i.e., claim one or more devices) if and only if
- you received a claim code with the device(s).
+   * Adds device(s) to your account (i.e., claim one or more devices) if and only if you
+ received a claim code with the device(s).
    */
   claimDevicesByClaimCode(callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.ClaimDevicesByClaimCodeResponse) => void): Request<IoT1ClickDevicesService.Types.ClaimDevicesByClaimCodeResponse, AWSError>;
   /**
-   * Given a device ID, returns a DescribeDeviceResponse object describing
- the details of the device.
+   * Given a device ID, returns a DescribeDeviceResponse object describing the
+ details of the device.
    */
   describeDevice(params: IoT1ClickDevicesService.Types.DescribeDeviceRequest, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.DescribeDeviceResponse) => void): Request<IoT1ClickDevicesService.Types.DescribeDeviceResponse, AWSError>;
   /**
-   * Given a device ID, returns a DescribeDeviceResponse object describing
- the details of the device.
+   * Given a device ID, returns a DescribeDeviceResponse object describing the
+ details of the device.
    */
   describeDevice(callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.DescribeDeviceResponse) => void): Request<IoT1ClickDevicesService.Types.DescribeDeviceResponse, AWSError>;
   /**
    * Given a device ID, finalizes the claim request for the associated device.
- Claiming a device consists of initiating a claim, then publishing a device
- event, and finalizing the claim. For a device of type button, a
- device event can be published by simply clicking the device.
+ Claiming a device consists of initiating a claim, then publishing a device event,
+ and finalizing the claim. For a device of type button, a device event can
+ be published by simply clicking the device.
  
    */
   finalizeDeviceClaim(params: IoT1ClickDevicesService.Types.FinalizeDeviceClaimRequest, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.FinalizeDeviceClaimResponse) => void): Request<IoT1ClickDevicesService.Types.FinalizeDeviceClaimResponse, AWSError>;
   /**
    * Given a device ID, finalizes the claim request for the associated device.
- Claiming a device consists of initiating a claim, then publishing a device
- event, and finalizing the claim. For a device of type button, a
- device event can be published by simply clicking the device.
+ Claiming a device consists of initiating a claim, then publishing a device event,
+ and finalizing the claim. For a device of type button, a device event can
+ be published by simply clicking the device.
  
    */
   finalizeDeviceClaim(callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.FinalizeDeviceClaimResponse) => void): Request<IoT1ClickDevicesService.Types.FinalizeDeviceClaimResponse, AWSError>;
   /**
-   * Given a device ID, returns the invokable methods associated with the
- device.
+   * Given a device ID, returns the invokable methods associated with the device.
    */
   getDeviceMethods(params: IoT1ClickDevicesService.Types.GetDeviceMethodsRequest, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.GetDeviceMethodsResponse) => void): Request<IoT1ClickDevicesService.Types.GetDeviceMethodsResponse, AWSError>;
   /**
-   * Given a device ID, returns the invokable methods associated with the
- device.
+   * Given a device ID, returns the invokable methods associated with the device.
    */
   getDeviceMethods(callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.GetDeviceMethodsResponse) => void): Request<IoT1ClickDevicesService.Types.GetDeviceMethodsResponse, AWSError>;
   /**
    * Given a device ID, initiates a claim request for the associated device.
- Claiming a device consists of initiating a claim, then publishing a device
- event, and finalizing the claim. For a device of type button, a
- device event can be published by simply clicking the device.
+ Claiming a device consists of initiating a claim, then publishing a device event,
+ and finalizing the claim. For a device of type button, a device event can
+ be published by simply clicking the device.
  
    */
   initiateDeviceClaim(params: IoT1ClickDevicesService.Types.InitiateDeviceClaimRequest, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.InitiateDeviceClaimResponse) => void): Request<IoT1ClickDevicesService.Types.InitiateDeviceClaimResponse, AWSError>;
   /**
    * Given a device ID, initiates a claim request for the associated device.
- Claiming a device consists of initiating a claim, then publishing a device
- event, and finalizing the claim. For a device of type button, a
- device event can be published by simply clicking the device.
+ Claiming a device consists of initiating a claim, then publishing a device event,
+ and finalizing the claim. For a device of type button, a device event can
+ be published by simply clicking the device.
  
    */
   initiateDeviceClaim(callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.InitiateDeviceClaimResponse) => void): Request<IoT1ClickDevicesService.Types.InitiateDeviceClaimResponse, AWSError>;
@@ -84,13 +82,13 @@ declare class IoT1ClickDevicesService extends Service {
    */
   invokeDeviceMethod(callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.InvokeDeviceMethodResponse) => void): Request<IoT1ClickDevicesService.Types.InvokeDeviceMethodResponse, AWSError>;
   /**
-   * Using a device ID, returns a DeviceEventsResponse object containing
- an array of events for the device.
+   * Using a device ID, returns a DeviceEventsResponse object containing an
+ array of events for the device.
    */
   listDeviceEvents(params: IoT1ClickDevicesService.Types.ListDeviceEventsRequest, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.ListDeviceEventsResponse) => void): Request<IoT1ClickDevicesService.Types.ListDeviceEventsResponse, AWSError>;
   /**
-   * Using a device ID, returns a DeviceEventsResponse object containing
- an array of events for the device.
+   * Using a device ID, returns a DeviceEventsResponse object containing an
+ array of events for the device.
    */
   listDeviceEvents(callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.ListDeviceEventsResponse) => void): Request<IoT1ClickDevicesService.Types.ListDeviceEventsResponse, AWSError>;
   /**
@@ -102,6 +100,24 @@ declare class IoT1ClickDevicesService extends Service {
    */
   listDevices(callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.ListDevicesResponse) => void): Request<IoT1ClickDevicesService.Types.ListDevicesResponse, AWSError>;
   /**
+   * Lists the tags associated with the specified resource ARN.
+   */
+  listTagsForResource(params: IoT1ClickDevicesService.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.ListTagsForResourceResponse) => void): Request<IoT1ClickDevicesService.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists the tags associated with the specified resource ARN.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.ListTagsForResourceResponse) => void): Request<IoT1ClickDevicesService.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Adds or updates the tags associated with the resource ARN. See AWS IoT 1-Click Service Limits for the maximum number of tags allowed per
+ resource.
+   */
+  tagResource(params: IoT1ClickDevicesService.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Adds or updates the tags associated with the resource ARN. See AWS IoT 1-Click Service Limits for the maximum number of tags allowed per
+ resource.
+   */
+  tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Disassociates a device from your AWS account using its device ID.
    */
   unclaimDevice(params: IoT1ClickDevicesService.Types.UnclaimDeviceRequest, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.UnclaimDeviceResponse) => void): Request<IoT1ClickDevicesService.Types.UnclaimDeviceResponse, AWSError>;
@@ -109,6 +125,16 @@ declare class IoT1ClickDevicesService extends Service {
    * Disassociates a device from your AWS account using its device ID.
    */
   unclaimDevice(callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.UnclaimDeviceResponse) => void): Request<IoT1ClickDevicesService.Types.UnclaimDeviceResponse, AWSError>;
+  /**
+   * Using tag keys, deletes the tags (key/value pairs) associated with the specified
+ resource ARN.
+   */
+  untagResource(params: IoT1ClickDevicesService.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Using tag keys, deletes the tags (key/value pairs) associated with the specified
+ resource ARN.
+   */
+  untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Using a Boolean value (true or false), this operation
  enables or disables the device given a device ID.
@@ -135,8 +161,8 @@ declare namespace IoT1ClickDevicesService {
      */
     ClaimCode?: __stringMin12Max40;
     /**
-     * The total number of devices associated with the claim code that has been processed
- in the claim request.
+     * The total number of devices associated with the claim code that has been processed in
+ the claim request.
      */
     Total?: __integer;
   }
@@ -169,8 +195,12 @@ declare namespace IoT1ClickDevicesService {
   export type DeviceAttributes = {[key: string]: __string};
   export interface DeviceDescription {
     /**
-     * An array of zero or more elements of DeviceAttribute objects
- providing user specified device attributes.
+     * The ARN of the device.
+     */
+    Arn?: __string;
+    /**
+     * An array of zero or more elements of DeviceAttribute objects providing
+ user specified device attributes.
      */
     Attributes?: DeviceAttributes;
     /**
@@ -182,14 +212,18 @@ declare namespace IoT1ClickDevicesService {
      */
     Enabled?: __boolean;
     /**
-     * A value between 0 and 1 inclusive, representing the fraction of life remaining for
- the device.
+     * A value between 0 and 1 inclusive, representing the fraction of life remaining for the
+ device.
      */
     RemainingLife?: __doubleMin0Max100;
     /**
      * The type of the device, such as "button".
      */
     Type?: __string;
+    /**
+     * The tags currently associated with the AWS IoT 1-Click device.
+     */
+    Tags?: __mapOf__string;
   }
   export interface DeviceEvent {
     /**
@@ -216,6 +250,14 @@ declare namespace IoT1ClickDevicesService {
      * The unique identifier of the device.
      */
     DeviceId: __string;
+    /**
+     * A collection of key/value pairs defining the resource tags. For example, {
+ "tags": {"key1": "value1", "key2": "value2"} }. For more information, see AWS
+ Tagging Strategies.
+ 
+ 
+     */
+    Tags?: __mapOf__string;
   }
   export interface FinalizeDeviceClaimResponse {
     /**
@@ -279,8 +321,8 @@ declare namespace IoT1ClickDevicesService {
      */
     FromTimeStamp: __timestampIso8601;
     /**
-     * The maximum number of results to return per request. If not set, a default value
- of 100 is used.
+     * The maximum number of results to return per request. If not set, a default value of
+ 100 is used.
      */
     MaxResults?: MaxResults;
     /**
@@ -311,8 +353,8 @@ declare namespace IoT1ClickDevicesService {
      */
     DeviceType?: __string;
     /**
-     * The maximum number of results to return per request. If not set, a default value
- of 100 is used.
+     * The maximum number of results to return per request. If not set, a default value of
+ 100 is used.
      */
     MaxResults?: MaxResults;
     /**
@@ -330,7 +372,37 @@ declare namespace IoT1ClickDevicesService {
      */
     NextToken?: __string;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The ARN of the resource.
+     */
+    ResourceArn: __string;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * A collection of key/value pairs defining the resource tags. For example, {
+ "tags": {"key1": "value1", "key2": "value2"} }. For more information, see AWS
+ Tagging Strategies.
+ 
+ 
+     */
+    Tags?: __mapOf__string;
+  }
   export type MaxResults = number;
+  export interface TagResourceRequest {
+    /**
+     * The ARN of the resource.
+     */
+    ResourceArn: __string;
+    /**
+     * A collection of key/value pairs defining the resource tags. For example, {
+ "tags": {"key1": "value1", "key2": "value2"} }. For more information, see AWS
+ Tagging Strategies.
+ 
+ 
+     */
+    Tags: __mapOf__string;
+  }
   export interface UnclaimDeviceRequest {
     /**
      * The unique identifier of the device.
@@ -342,6 +414,16 @@ declare namespace IoT1ClickDevicesService {
      * The device's final claim state.
      */
     State?: __string;
+  }
+  export interface UntagResourceRequest {
+    /**
+     * The ARN of the resource.
+     */
+    ResourceArn: __string;
+    /**
+     * A collections of tag keys. For example, {"key1","key2"}
+     */
+    TagKeys: __listOf__string;
   }
   export interface UpdateDeviceStateRequest {
     /**
@@ -362,6 +444,8 @@ declare namespace IoT1ClickDevicesService {
   export type __listOfDeviceDescription = DeviceDescription[];
   export type __listOfDeviceEvent = DeviceEvent[];
   export type __listOfDeviceMethod = DeviceMethod[];
+  export type __listOf__string = __string[];
+  export type __mapOf__string = {[key: string]: __string};
   export type __string = string;
   export type __stringMin12Max40 = string;
   export type __timestampIso8601 = Date;

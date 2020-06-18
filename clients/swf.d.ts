@@ -140,6 +140,14 @@ declare class SWF extends Service {
    */
   listOpenWorkflowExecutions(callback?: (err: AWSError, data: SWF.Types.WorkflowExecutionInfos) => void): Request<SWF.Types.WorkflowExecutionInfos, AWSError>;
   /**
+   * List tags for a given domain.
+   */
+  listTagsForResource(params: SWF.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: SWF.Types.ListTagsForResourceOutput) => void): Request<SWF.Types.ListTagsForResourceOutput, AWSError>;
+  /**
+   * List tags for a given domain.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: SWF.Types.ListTagsForResourceOutput) => void): Request<SWF.Types.ListTagsForResourceOutput, AWSError>;
+  /**
    * Returns information about workflow types in the specified domain. The results may be split into multiple pages that can be retrieved by making the call repeatedly.  Access Control  You can use IAM policies to control this action's access to Amazon SWF resources as follows:   Use a Resource element with the domain name to limit the action to only specified domains.   Use an Action element to allow or deny permission to call this action.   You cannot use an IAM policy to constrain this action's parameters.   If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows in the Amazon SWF Developer Guide.
    */
   listWorkflowTypes(params: SWF.Types.ListWorkflowTypesInput, callback?: (err: AWSError, data: SWF.Types.WorkflowTypeInfos) => void): Request<SWF.Types.WorkflowTypeInfos, AWSError>;
@@ -252,6 +260,14 @@ declare class SWF extends Service {
    */
   startWorkflowExecution(callback?: (err: AWSError, data: SWF.Types.Run) => void): Request<SWF.Types.Run, AWSError>;
   /**
+   * Add a tag to a Amazon SWF domain.  Amazon SWF supports a maximum of 50 tags per resource. 
+   */
+  tagResource(params: SWF.Types.TagResourceInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Add a tag to a Amazon SWF domain.  Amazon SWF supports a maximum of 50 tags per resource. 
+   */
+  tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Records a WorkflowExecutionTerminated event and forces closure of the workflow execution identified by the given domain, runId, and workflowId. The child policy, registered with the workflow type or specified when starting this execution, is applied to any open child workflow executions of this workflow execution.  If the identified workflow execution was in progress, it is terminated immediately.   If a runId isn't specified, then the WorkflowExecutionTerminated event is recorded in the history of the current open workflow with the matching workflowId in the domain.   You should consider using RequestCancelWorkflowExecution action instead because it allows the workflow to gracefully close while TerminateWorkflowExecution doesn't.   Access Control  You can use IAM policies to control this action's access to Amazon SWF resources as follows:   Use a Resource element with the domain name to limit the action to only specified domains.   Use an Action element to allow or deny permission to call this action.   You cannot use an IAM policy to constrain this action's parameters.   If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows in the Amazon SWF Developer Guide.
    */
   terminateWorkflowExecution(params: SWF.Types.TerminateWorkflowExecutionInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -259,6 +275,38 @@ declare class SWF extends Service {
    * Records a WorkflowExecutionTerminated event and forces closure of the workflow execution identified by the given domain, runId, and workflowId. The child policy, registered with the workflow type or specified when starting this execution, is applied to any open child workflow executions of this workflow execution.  If the identified workflow execution was in progress, it is terminated immediately.   If a runId isn't specified, then the WorkflowExecutionTerminated event is recorded in the history of the current open workflow with the matching workflowId in the domain.   You should consider using RequestCancelWorkflowExecution action instead because it allows the workflow to gracefully close while TerminateWorkflowExecution doesn't.   Access Control  You can use IAM policies to control this action's access to Amazon SWF resources as follows:   Use a Resource element with the domain name to limit the action to only specified domains.   Use an Action element to allow or deny permission to call this action.   You cannot use an IAM policy to constrain this action's parameters.   If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows in the Amazon SWF Developer Guide.
    */
   terminateWorkflowExecution(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Undeprecates a previously deprecated activity type. After an activity type has been undeprecated, you can create new tasks of that activity type.  This operation is eventually consistent. The results are best effort and may not exactly reflect recent updates and changes.   Access Control  You can use IAM policies to control this action's access to Amazon SWF resources as follows:   Use a Resource element with the domain name to limit the action to only specified domains.   Use an Action element to allow or deny permission to call this action.   Constrain the following parameters by using a Condition element with the appropriate keys.    activityType.name: String constraint. The key is swf:activityType.name.    activityType.version: String constraint. The key is swf:activityType.version.     If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows in the Amazon SWF Developer Guide.
+   */
+  undeprecateActivityType(params: SWF.Types.UndeprecateActivityTypeInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Undeprecates a previously deprecated activity type. After an activity type has been undeprecated, you can create new tasks of that activity type.  This operation is eventually consistent. The results are best effort and may not exactly reflect recent updates and changes.   Access Control  You can use IAM policies to control this action's access to Amazon SWF resources as follows:   Use a Resource element with the domain name to limit the action to only specified domains.   Use an Action element to allow or deny permission to call this action.   Constrain the following parameters by using a Condition element with the appropriate keys.    activityType.name: String constraint. The key is swf:activityType.name.    activityType.version: String constraint. The key is swf:activityType.version.     If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows in the Amazon SWF Developer Guide.
+   */
+  undeprecateActivityType(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Undeprecates a previously deprecated domain. After a domain has been undeprecated it can be used to create new workflow executions or register new types.  This operation is eventually consistent. The results are best effort and may not exactly reflect recent updates and changes.   Access Control  You can use IAM policies to control this action's access to Amazon SWF resources as follows:   Use a Resource element with the domain name to limit the action to only specified domains.   Use an Action element to allow or deny permission to call this action.   You cannot use an IAM policy to constrain this action's parameters.   If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows in the Amazon SWF Developer Guide.
+   */
+  undeprecateDomain(params: SWF.Types.UndeprecateDomainInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Undeprecates a previously deprecated domain. After a domain has been undeprecated it can be used to create new workflow executions or register new types.  This operation is eventually consistent. The results are best effort and may not exactly reflect recent updates and changes.   Access Control  You can use IAM policies to control this action's access to Amazon SWF resources as follows:   Use a Resource element with the domain name to limit the action to only specified domains.   Use an Action element to allow or deny permission to call this action.   You cannot use an IAM policy to constrain this action's parameters.   If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows in the Amazon SWF Developer Guide.
+   */
+  undeprecateDomain(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Undeprecates a previously deprecated workflow type. After a workflow type has been undeprecated, you can create new executions of that type.   This operation is eventually consistent. The results are best effort and may not exactly reflect recent updates and changes.   Access Control  You can use IAM policies to control this action's access to Amazon SWF resources as follows:   Use a Resource element with the domain name to limit the action to only specified domains.   Use an Action element to allow or deny permission to call this action.   Constrain the following parameters by using a Condition element with the appropriate keys.    workflowType.name: String constraint. The key is swf:workflowType.name.    workflowType.version: String constraint. The key is swf:workflowType.version.     If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows in the Amazon SWF Developer Guide.
+   */
+  undeprecateWorkflowType(params: SWF.Types.UndeprecateWorkflowTypeInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Undeprecates a previously deprecated workflow type. After a workflow type has been undeprecated, you can create new executions of that type.   This operation is eventually consistent. The results are best effort and may not exactly reflect recent updates and changes.   Access Control  You can use IAM policies to control this action's access to Amazon SWF resources as follows:   Use a Resource element with the domain name to limit the action to only specified domains.   Use an Action element to allow or deny permission to call this action.   Constrain the following parameters by using a Condition element with the appropriate keys.    workflowType.name: String constraint. The key is swf:workflowType.name.    workflowType.version: String constraint. The key is swf:workflowType.version.     If the caller doesn't have sufficient permissions to invoke the action, or the parameter values fall outside the specified constraints, the action fails. The associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED. For details and example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows in the Amazon SWF Developer Guide.
+   */
+  undeprecateWorkflowType(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Remove a tag from a Amazon SWF domain.
+   */
+  untagResource(params: SWF.Types.UntagResourceInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Remove a tag from a Amazon SWF domain.
+   */
+  untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace SWF {
   export type ActivityId = string;
@@ -1056,6 +1104,10 @@ declare namespace SWF {
      * The description of the domain provided through RegisterDomain.
      */
     description?: Description;
+    /**
+     * The ARN of the domain.
+     */
+    arn?: Arn;
   }
   export type DomainInfoList = DomainInfo[];
   export interface DomainInfos {
@@ -1140,11 +1192,11 @@ declare namespace SWF {
      */
     execution: WorkflowExecution;
     /**
-     * If a NextPageToken was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextPageToken. Keep all other arguments unchanged. The configured maximumPageSize determines how many results can be returned in a single call.
+     * If NextPageToken is returned there are more results available. The value of NextPageToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return a 400 error: "Specified token has exceeded its maximum lifetime".  The configured maximumPageSize determines how many results can be returned in a single call. 
      */
     nextPageToken?: PageToken;
     /**
-     * The maximum number of results that are returned per call. nextPageToken can be used to obtain futher pages of results. The default is 1000, which is the maximum allowed page size. You can, however, specify a page size smaller than the maximum. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
+     * The maximum number of results that are returned per call. Use nextPageToken to obtain further pages of results. 
      */
     maximumPageSize?: PageSize;
     /**
@@ -1488,11 +1540,11 @@ declare namespace SWF {
      */
     registrationStatus: RegistrationStatus;
     /**
-     * If a NextPageToken was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextPageToken. Keep all other arguments unchanged. The configured maximumPageSize determines how many results can be returned in a single call.
+     * If NextPageToken is returned there are more results available. The value of NextPageToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return a 400 error: "Specified token has exceeded its maximum lifetime".  The configured maximumPageSize determines how many results can be returned in a single call. 
      */
     nextPageToken?: PageToken;
     /**
-     * The maximum number of results that are returned per call. nextPageToken can be used to obtain futher pages of results. The default is 1000, which is the maximum allowed page size. You can, however, specify a page size smaller than the maximum. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
+     * The maximum number of results that are returned per call. Use nextPageToken to obtain further pages of results. 
      */
     maximumPageSize?: PageSize;
     /**
@@ -1530,11 +1582,11 @@ declare namespace SWF {
      */
     tagFilter?: TagFilter;
     /**
-     * If a NextPageToken was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextPageToken. Keep all other arguments unchanged. The configured maximumPageSize determines how many results can be returned in a single call.
+     * If NextPageToken is returned there are more results available. The value of NextPageToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return a 400 error: "Specified token has exceeded its maximum lifetime".  The configured maximumPageSize determines how many results can be returned in a single call. 
      */
     nextPageToken?: PageToken;
     /**
-     * The maximum number of results that are returned per call. nextPageToken can be used to obtain futher pages of results. The default is 1000, which is the maximum allowed page size. You can, however, specify a page size smaller than the maximum. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
+     * The maximum number of results that are returned per call. Use nextPageToken to obtain further pages of results. 
      */
     maximumPageSize?: PageSize;
     /**
@@ -1544,7 +1596,7 @@ declare namespace SWF {
   }
   export interface ListDomainsInput {
     /**
-     * If a NextPageToken was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextPageToken. Keep all other arguments unchanged. The configured maximumPageSize determines how many results can be returned in a single call.
+     * If NextPageToken is returned there are more results available. The value of NextPageToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return a 400 error: "Specified token has exceeded its maximum lifetime".  The configured maximumPageSize determines how many results can be returned in a single call. 
      */
     nextPageToken?: PageToken;
     /**
@@ -1552,7 +1604,7 @@ declare namespace SWF {
      */
     registrationStatus: RegistrationStatus;
     /**
-     * The maximum number of results that are returned per call. nextPageToken can be used to obtain futher pages of results. The default is 1000, which is the maximum allowed page size. You can, however, specify a page size smaller than the maximum. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
+     * The maximum number of results that are returned per call. Use nextPageToken to obtain further pages of results. 
      */
     maximumPageSize?: PageSize;
     /**
@@ -1578,11 +1630,11 @@ declare namespace SWF {
      */
     tagFilter?: TagFilter;
     /**
-     * If a NextPageToken was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextPageToken. Keep all other arguments unchanged. The configured maximumPageSize determines how many results can be returned in a single call.
+     * If NextPageToken is returned there are more results available. The value of NextPageToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return a 400 error: "Specified token has exceeded its maximum lifetime".  The configured maximumPageSize determines how many results can be returned in a single call. 
      */
     nextPageToken?: PageToken;
     /**
-     * The maximum number of results that are returned per call. nextPageToken can be used to obtain futher pages of results. The default is 1000, which is the maximum allowed page size. You can, however, specify a page size smaller than the maximum. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
+     * The maximum number of results that are returned per call. Use nextPageToken to obtain further pages of results. 
      */
     maximumPageSize?: PageSize;
     /**
@@ -1593,6 +1645,18 @@ declare namespace SWF {
      * If specified, only workflow executions matching the workflow ID specified in the filter are returned.   executionFilter, typeFilter and tagFilter are mutually exclusive. You can specify at most one of these in a request. 
      */
     executionFilter?: WorkflowExecutionFilter;
+  }
+  export interface ListTagsForResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) for the Amazon SWF domain.
+     */
+    resourceArn: Arn;
+  }
+  export interface ListTagsForResourceOutput {
+    /**
+     * An array of tags associated with the domain.
+     */
+    tags?: ResourceTagList;
   }
   export interface ListWorkflowTypesInput {
     /**
@@ -1608,11 +1672,11 @@ declare namespace SWF {
      */
     registrationStatus: RegistrationStatus;
     /**
-     * If a NextPageToken was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextPageToken. Keep all other arguments unchanged. The configured maximumPageSize determines how many results can be returned in a single call.
+     * If NextPageToken is returned there are more results available. The value of NextPageToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return a 400 error: "Specified token has exceeded its maximum lifetime".  The configured maximumPageSize determines how many results can be returned in a single call. 
      */
     nextPageToken?: PageToken;
     /**
-     * The maximum number of results that are returned per call. nextPageToken can be used to obtain futher pages of results. The default is 1000, which is the maximum allowed page size. You can, however, specify a page size smaller than the maximum. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
+     * The maximum number of results that are returned per call. Use nextPageToken to obtain further pages of results. 
      */
     maximumPageSize?: PageSize;
     /**
@@ -1655,7 +1719,7 @@ declare namespace SWF {
      */
     domain: DomainName;
     /**
-     * Specifies the task list to poll for activity tasks. The specified string must not start or end with whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it must not contain the literal string arn.
+     * Specifies the task list to poll for activity tasks. The specified string must not start or end with whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it must not be the literal string arn.
      */
     taskList: TaskList;
     /**
@@ -1669,7 +1733,7 @@ declare namespace SWF {
      */
     domain: DomainName;
     /**
-     * Specifies the task list to poll for decision tasks. The specified string must not start or end with whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it must not contain the literal string arn.
+     * Specifies the task list to poll for decision tasks. The specified string must not start or end with whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it must not be the literal string arn.
      */
     taskList: TaskList;
     /**
@@ -1677,11 +1741,11 @@ declare namespace SWF {
      */
     identity?: Identity;
     /**
-     * If a NextPageToken was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextPageToken. Keep all other arguments unchanged. The configured maximumPageSize determines how many results can be returned in a single call.  The nextPageToken returned by this action cannot be used with GetWorkflowExecutionHistory to get the next page. You must call PollForDecisionTask again (with the nextPageToken) to retrieve the next page of history records. Calling PollForDecisionTask with a nextPageToken doesn't return a new decision task. 
+     * If NextPageToken is returned there are more results available. The value of NextPageToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 60 seconds. Using an expired pagination token will return a 400 error: "Specified token has exceeded its maximum lifetime".  The configured maximumPageSize determines how many results can be returned in a single call.   The nextPageToken returned by this action cannot be used with GetWorkflowExecutionHistory to get the next page. You must call PollForDecisionTask again (with the nextPageToken) to retrieve the next page of history records. Calling PollForDecisionTask with a nextPageToken doesn't return a new decision task. 
      */
     nextPageToken?: PageToken;
     /**
-     * The maximum number of results that are returned per call. nextPageToken can be used to obtain futher pages of results. The default is 1000, which is the maximum allowed page size. You can, however, specify a page size smaller than the maximum. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
+     * The maximum number of results that are returned per call. Use nextPageToken to obtain further pages of results.  This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
      */
     maximumPageSize?: PageSize;
     /**
@@ -1730,11 +1794,11 @@ declare namespace SWF {
      */
     domain: DomainName;
     /**
-     * The name of the activity type within the domain. The specified string must not start or end with whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it must not contain the literal string arn.
+     * The name of the activity type within the domain. The specified string must not start or end with whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it must not be the literal string arn.
      */
     name: Name;
     /**
-     * The version of the activity type.  The activity type consists of the name and version, the combination of which must be unique within the domain.  The specified string must not start or end with whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it must not contain the literal string arn.
+     * The version of the activity type.  The activity type consists of the name and version, the combination of which must be unique within the domain.  The specified string must not start or end with whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it must not be the literal string arn.
      */
     version: Version;
     /**
@@ -1768,7 +1832,7 @@ declare namespace SWF {
   }
   export interface RegisterDomainInput {
     /**
-     * Name of the domain to register. The name must be unique in the region that the domain is registered in. The specified string must not start or end with whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it must not contain the literal string arn.
+     * Name of the domain to register. The name must be unique in the region that the domain is registered in. The specified string must not start or end with whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it must not be the literal string arn.
      */
     name: DomainName;
     /**
@@ -1779,6 +1843,10 @@ declare namespace SWF {
      * The duration (in days) that records and histories of workflow executions on the domain should be kept by the service. After the retention period, the workflow execution isn't available in the results of visibility calls. If you pass the value NONE or 0 (zero), then the workflow execution history isn't retained. As soon as the workflow execution completes, the execution record and its history are deleted. The maximum workflow execution retention period is 90 days. For more information about Amazon SWF service limits, see: Amazon SWF Service Limits in the Amazon SWF Developer Guide.
      */
     workflowExecutionRetentionPeriodInDays: DurationInDays;
+    /**
+     * Tags to be added when registering a domain. Tags may only contain unicode letters, digits, whitespace, or these symbols: _ . : / = + - @.
+     */
+    tags?: ResourceTagList;
   }
   export interface RegisterWorkflowTypeInput {
     /**
@@ -1786,11 +1854,11 @@ declare namespace SWF {
      */
     domain: DomainName;
     /**
-     * The name of the workflow type. The specified string must not start or end with whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it must not contain the literal string arn.
+     * The name of the workflow type. The specified string must not start or end with whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it must not be the literal string arn.
      */
     name: Name;
     /**
-     * The version of the workflow type.  The workflow type consists of the name and version, the combination of which must be unique within the domain. To get a list of all currently registered workflow types, use the ListWorkflowTypes action.  The specified string must not start or end with whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it must not contain the literal string arn.
+     * The version of the workflow type.  The workflow type consists of the name and version, the combination of which must be unique within the domain. To get a list of all currently registered workflow types, use the ListWorkflowTypes action.  The specified string must not start or end with whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it must not be the literal string arn.
      */
     version: Version;
     /**
@@ -1818,7 +1886,7 @@ declare namespace SWF {
      */
     defaultChildPolicy?: ChildPolicy;
     /**
-     * The default IAM role attached to this workflow type.  Executions of this workflow type need IAM roles to invoke Lambda functions. If you don't specify an IAM role when you start this workflow type, the default Lambda role is attached to the execution. For more information, see http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html in the Amazon SWF Developer Guide. 
+     * The default IAM role attached to this workflow type.  Executions of this workflow type need IAM roles to invoke Lambda functions. If you don't specify an IAM role when you start this workflow type, the default Lambda role is attached to the execution. For more information, see https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html in the Amazon SWF Developer Guide. 
      */
     defaultLambdaRole?: Arn;
   }
@@ -1917,6 +1985,20 @@ declare namespace SWF {
      */
     runId?: WorkflowRunIdOptional;
   }
+  export interface ResourceTag {
+    /**
+     * The key of a tag.
+     */
+    key: ResourceTagKey;
+    /**
+     * The value of a tag.
+     */
+    value?: ResourceTagValue;
+  }
+  export type ResourceTagKey = string;
+  export type ResourceTagKeyList = ResourceTagKey[];
+  export type ResourceTagList = ResourceTag[];
+  export type ResourceTagValue = string;
   export interface RespondActivityTaskCanceledInput {
     /**
      * The taskToken of the ActivityTask.   taskToken is generated by the service and should be treated as an opaque value. If the task is passed to another process, its taskToken must also be passed. This enables it to provide its progress and respond with results. 
@@ -2345,7 +2427,7 @@ declare namespace SWF {
      */
     domain: DomainName;
     /**
-     * The user defined identifier associated with the workflow execution. You can use this to associate a custom identifier with the workflow execution. You may specify the same identifier if a workflow execution is logically a restart of a previous execution. You cannot have two open workflow executions with the same workflowId at the same time. The specified string must not start or end with whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it must not contain the literal string arn.
+     * The user defined identifier associated with the workflow execution. You can use this to associate a custom identifier with the workflow execution. You may specify the same identifier if a workflow execution is logically a restart of a previous execution. You cannot have two open workflow executions with the same workflowId at the same time within the same domain. The specified string must not start or end with whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it must not be the literal string arn.
      */
     workflowId: WorkflowId;
     /**
@@ -2353,7 +2435,7 @@ declare namespace SWF {
      */
     workflowType: WorkflowType;
     /**
-     * The task list to use for the decision tasks generated for this workflow execution. This overrides the defaultTaskList specified when registering the workflow type.  A task list for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default task list was specified at registration time then a fault is returned.  The specified string must not start or end with whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it must not contain the literal string arn.
+     * The task list to use for the decision tasks generated for this workflow execution. This overrides the defaultTaskList specified when registering the workflow type.  A task list for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default task list was specified at registration time then a fault is returned.  The specified string must not start or end with whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it must not be the literal string arn.
      */
     taskList?: TaskList;
     /**
@@ -2381,18 +2463,28 @@ declare namespace SWF {
      */
     childPolicy?: ChildPolicy;
     /**
-     * The IAM role to attach to this workflow execution.  Executions of this workflow type need IAM roles to invoke Lambda functions. If you don't attach an IAM role, any attempt to schedule a Lambda task fails. This results in a ScheduleLambdaFunctionFailed history event. For more information, see http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html in the Amazon SWF Developer Guide. 
+     * The IAM role to attach to this workflow execution.  Executions of this workflow type need IAM roles to invoke Lambda functions. If you don't attach an IAM role, any attempt to schedule a Lambda task fails. This results in a ScheduleLambdaFunctionFailed history event. For more information, see https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html in the Amazon SWF Developer Guide. 
      */
     lambdaRole?: Arn;
   }
   export type Tag = string;
   export interface TagFilter {
     /**
-     *  Specifies the tag that must be associated with the execution for it to meet the filter criteria.
+     *  Specifies the tag that must be associated with the execution for it to meet the filter criteria. Tags may only contain unicode letters, digits, whitespace, or these symbols: _ . : / = + - @.
      */
     tag: Tag;
   }
   export type TagList = Tag[];
+  export interface TagResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) for the Amazon SWF domain.
+     */
+    resourceArn: Arn;
+    /**
+     * The list of tags to add to a domain.  Tags may only contain unicode letters, digits, whitespace, or these symbols: _ . : / = + - @.
+     */
+    tags: ResourceTagList;
+  }
   export interface TaskList {
     /**
      * The name of the task list.
@@ -2473,6 +2565,42 @@ declare namespace SWF {
   }
   export type Timestamp = Date;
   export type Truncated = boolean;
+  export interface UndeprecateActivityTypeInput {
+    /**
+     * The name of the domain of the deprecated activity type.
+     */
+    domain: DomainName;
+    /**
+     * The activity type to undeprecate.
+     */
+    activityType: ActivityType;
+  }
+  export interface UndeprecateDomainInput {
+    /**
+     * The name of the domain of the deprecated workflow type.
+     */
+    name: DomainName;
+  }
+  export interface UndeprecateWorkflowTypeInput {
+    /**
+     * The name of the domain of the deprecated workflow type.
+     */
+    domain: DomainName;
+    /**
+     * The name of the domain of the deprecated workflow type.
+     */
+    workflowType: WorkflowType;
+  }
+  export interface UntagResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) for the Amazon SWF domain.
+     */
+    resourceArn: Arn;
+    /**
+     * The list of tags to remove from the Amazon SWF domain.
+     */
+    tagKeys: ResourceTagKeyList;
+  }
   export type Version = string;
   export type VersionOptional = string;
   export interface WorkflowExecution {
@@ -2848,7 +2976,7 @@ declare namespace SWF {
      */
     defaultChildPolicy?: ChildPolicy;
     /**
-     * The default IAM role attached to this workflow type.  Executions of this workflow type need IAM roles to invoke Lambda functions. If you don't specify an IAM role when starting this workflow type, the default Lambda role is attached to the execution. For more information, see http://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html in the Amazon SWF Developer Guide. 
+     * The default IAM role attached to this workflow type.  Executions of this workflow type need IAM roles to invoke Lambda functions. If you don't specify an IAM role when starting this workflow type, the default Lambda role is attached to the execution. For more information, see https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html in the Amazon SWF Developer Guide. 
      */
     defaultLambdaRole?: Arn;
   }

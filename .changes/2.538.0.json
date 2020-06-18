@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Amplify",
+        "description": "This release adds access logs APIs and artifact APIs for AWS Amplify Console."
+    },
+    {
+        "type": "feature",
+        "category": "ECS",
+        "description": "This release of Amazon Elastic Container Service (Amazon ECS) removes FirelensConfiguration from the DescribeTask output during the FireLens public preview."
+    }
+]

@@ -1,0 +1,359 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2019-11-02",
+    "endpointPrefix": "ebs",
+    "jsonVersion": "1.1",
+    "protocol": "rest-json",
+    "serviceAbbreviation": "Amazon EBS",
+    "serviceFullName": "Amazon Elastic Block Store",
+    "serviceId": "EBS",
+    "signatureVersion": "v4",
+    "uid": "ebs-2019-11-02"
+  },
+  "operations": {
+    "GetSnapshotBlock": {
+      "name": "GetSnapshotBlock",
+      "http": {
+        "method": "GET",
+        "requestUri": "/snapshots/{snapshotId}/blocks/{blockIndex}"
+      },
+      "input": {
+        "shape": "GetSnapshotBlockRequest"
+      },
+      "output": {
+        "shape": "GetSnapshotBlockResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Returns the data in a block in an Amazon Elastic Block Store snapshot.</p>"
+    },
+    "ListChangedBlocks": {
+      "name": "ListChangedBlocks",
+      "http": {
+        "method": "GET",
+        "requestUri": "/snapshots/{secondSnapshotId}/changedblocks"
+      },
+      "input": {
+        "shape": "ListChangedBlocksRequest"
+      },
+      "output": {
+        "shape": "ListChangedBlocksResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Returns the block indexes and block tokens for blocks that are different between two Amazon Elastic Block Store snapshots of the same volume/snapshot lineage.</p>"
+    },
+    "ListSnapshotBlocks": {
+      "name": "ListSnapshotBlocks",
+      "http": {
+        "method": "GET",
+        "requestUri": "/snapshots/{snapshotId}/blocks"
+      },
+      "input": {
+        "shape": "ListSnapshotBlocksRequest"
+      },
+      "output": {
+        "shape": "ListSnapshotBlocksResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Returns the block indexes and block tokens for blocks in an Amazon Elastic Block Store snapshot.</p>"
+    }
+  },
+  "shapes": {
+    "Block": {
+      "type": "structure",
+      "members": {
+        "BlockIndex": {
+          "shape": "BlockIndex",
+          "documentation": "<p>The block index.</p>"
+        },
+        "BlockToken": {
+          "shape": "BlockToken",
+          "documentation": "<p>The block token for the block index.</p>"
+        }
+      },
+      "documentation": "<p>A block of data in an Amazon Elastic Block Store snapshot.</p>"
+    },
+    "BlockData": {
+      "type": "blob",
+      "sensitive": true,
+      "streaming": true
+    },
+    "BlockIndex": {
+      "type": "integer"
+    },
+    "BlockSize": {
+      "type": "integer"
+    },
+    "BlockToken": {
+      "type": "string",
+      "max": 256,
+      "pattern": "^[A-Za-z0-9+/=]+$"
+    },
+    "Blocks": {
+      "type": "list",
+      "member": {
+        "shape": "Block"
+      },
+      "sensitive": true
+    },
+    "ChangedBlock": {
+      "type": "structure",
+      "members": {
+        "BlockIndex": {
+          "shape": "BlockIndex",
+          "documentation": "<p>The block index.</p>"
+        },
+        "FirstBlockToken": {
+          "shape": "BlockToken",
+          "documentation": "<p>The block token for the block index of the <code>FirstSnapshotId</code> specified in the <code>ListChangedBlocks</code> operation. This value is absent if the first snapshot does not have the changed block that is on the second snapshot.</p>"
+        },
+        "SecondBlockToken": {
+          "shape": "BlockToken",
+          "documentation": "<p>The block token for the block index of the <code>SecondSnapshotId</code> specified in the <code>ListChangedBlocks</code> operation.</p>"
+        }
+      },
+      "documentation": "<p>A block of data in an Amazon Elastic Block Store snapshot that is different from another snapshot of the same volume/snapshot lineage.</p>",
+      "sensitive": true
+    },
+    "ChangedBlocks": {
+      "type": "list",
+      "member": {
+        "shape": "ChangedBlock"
+      }
+    },
+    "Checksum": {
+      "type": "string",
+      "max": 64
+    },
+    "ChecksumAlgorithm": {
+      "type": "string",
+      "enum": [
+        "SHA256"
+      ],
+      "max": 32
+    },
+    "DataLength": {
+      "type": "integer"
+    },
+    "GetSnapshotBlockRequest": {
+      "type": "structure",
+      "required": [
+        "SnapshotId",
+        "BlockIndex",
+        "BlockToken"
+      ],
+      "members": {
+        "SnapshotId": {
+          "shape": "SnapshotId",
+          "documentation": "<p>The ID of the snapshot containing the block from which to get data.</p>",
+          "location": "uri",
+          "locationName": "snapshotId"
+        },
+        "BlockIndex": {
+          "shape": "BlockIndex",
+          "documentation": "<p>The block index of the block from which to get data.</p> <p>Obtain the <code>BlockIndex</code> by running the <code>ListChangedBlocks</code> or <code>ListSnapshotBlocks</code> operations.</p>",
+          "location": "uri",
+          "locationName": "blockIndex"
+        },
+        "BlockToken": {
+          "shape": "BlockToken",
+          "documentation": "<p>The block token of the block from which to get data.</p> <p>Obtain the <code>BlockToken</code> by running the <code>ListChangedBlocks</code> or <code>ListSnapshotBlocks</code> operations.</p>",
+          "location": "querystring",
+          "locationName": "blockToken"
+        }
+      }
+    },
+    "GetSnapshotBlockResponse": {
+      "type": "structure",
+      "members": {
+        "DataLength": {
+          "shape": "DataLength",
+          "documentation": "<p>The size of the data in the block.</p>",
+          "location": "header",
+          "locationName": "x-amz-Data-Length"
+        },
+        "BlockData": {
+          "shape": "BlockData",
+          "documentation": "<p>The data content of the block.</p>"
+        },
+        "Checksum": {
+          "shape": "Checksum",
+          "documentation": "<p>The checksum generated for the block, which is Base64 encoded.</p>",
+          "location": "header",
+          "locationName": "x-amz-Checksum"
+        },
+        "ChecksumAlgorithm": {
+          "shape": "ChecksumAlgorithm",
+          "documentation": "<p>The algorithm used to generate the checksum for the block, such as SHA256.</p>",
+          "location": "header",
+          "locationName": "x-amz-Checksum-Algorithm"
+        }
+      },
+      "payload": "BlockData"
+    },
+    "ListChangedBlocksRequest": {
+      "type": "structure",
+      "required": [
+        "SecondSnapshotId"
+      ],
+      "members": {
+        "FirstSnapshotId": {
+          "shape": "SnapshotId",
+          "documentation": "<p>The ID of the first snapshot to use for the comparison.</p> <important> <p>The <code>FirstSnapshotID</code> parameter must be specified with a <code>SecondSnapshotId</code> parameter; otherwise, an error occurs.</p> </important>",
+          "location": "querystring",
+          "locationName": "firstSnapshotId"
+        },
+        "SecondSnapshotId": {
+          "shape": "SnapshotId",
+          "documentation": "<p>The ID of the second snapshot to use for the comparison.</p> <important> <p>The <code>SecondSnapshotId</code> parameter must be specified with a <code>FirstSnapshotID</code> parameter; otherwise, an error occurs.</p> </important>",
+          "location": "uri",
+          "locationName": "secondSnapshotId"
+        },
+        "NextToken": {
+          "shape": "PageToken",
+          "documentation": "<p>The token to request the next page of results.</p>",
+          "location": "querystring",
+          "locationName": "pageToken"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The number of results to return.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "StartingBlockIndex": {
+          "shape": "BlockIndex",
+          "documentation": "<p>The block index from which the comparison should start.</p> <p>The list in the response will start from this block index or the next valid block index in the snapshots.</p>",
+          "location": "querystring",
+          "locationName": "startingBlockIndex"
+        }
+      }
+    },
+    "ListChangedBlocksResponse": {
+      "type": "structure",
+      "members": {
+        "ChangedBlocks": {
+          "shape": "ChangedBlocks",
+          "documentation": "<p>An array of objects containing information about the changed blocks.</p>"
+        },
+        "ExpiryTime": {
+          "shape": "TimeStamp",
+          "documentation": "<p>The time when the <code>BlockToken</code> expires.</p>"
+        },
+        "VolumeSize": {
+          "shape": "VolumeSize",
+          "documentation": "<p>The size of the volume in GB.</p>"
+        },
+        "BlockSize": {
+          "shape": "BlockSize",
+          "documentation": "<p>The size of the block.</p>"
+        },
+        "NextToken": {
+          "shape": "PageToken",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
+        }
+      }
+    },
+    "ListSnapshotBlocksRequest": {
+      "type": "structure",
+      "required": [
+        "SnapshotId"
+      ],
+      "members": {
+        "SnapshotId": {
+          "shape": "SnapshotId",
+          "documentation": "<p>The ID of the snapshot from which to get block indexes and block tokens.</p>",
+          "location": "uri",
+          "locationName": "snapshotId"
+        },
+        "NextToken": {
+          "shape": "PageToken",
+          "documentation": "<p>The token to request the next page of results.</p>",
+          "location": "querystring",
+          "locationName": "pageToken"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The number of results to return.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "StartingBlockIndex": {
+          "shape": "BlockIndex",
+          "documentation": "<p>The block index from which the list should start. The list in the response will start from this block index or the next valid block index in the snapshot.</p>",
+          "location": "querystring",
+          "locationName": "startingBlockIndex"
+        }
+      }
+    },
+    "ListSnapshotBlocksResponse": {
+      "type": "structure",
+      "members": {
+        "Blocks": {
+          "shape": "Blocks",
+          "documentation": "<p>An array of objects containing information about the blocks.</p>"
+        },
+        "ExpiryTime": {
+          "shape": "TimeStamp",
+          "documentation": "<p>The time when the <code>BlockToken</code> expires.</p>"
+        },
+        "VolumeSize": {
+          "shape": "VolumeSize",
+          "documentation": "<p>The size of the volume in GB.</p>"
+        },
+        "BlockSize": {
+          "shape": "BlockSize",
+          "documentation": "<p>The size of the block.</p>"
+        },
+        "NextToken": {
+          "shape": "PageToken",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return.</p>"
+        }
+      }
+    },
+    "MaxResults": {
+      "type": "integer",
+      "max": 10000,
+      "min": 100
+    },
+    "PageToken": {
+      "type": "string",
+      "max": 256,
+      "pattern": "^[A-Za-z0-9+/=]+$"
+    },
+    "SnapshotId": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "^snap-[0-9a-f]+$"
+    },
+    "TimeStamp": {
+      "type": "timestamp"
+    },
+    "VolumeSize": {
+      "type": "long"
+    }
+  },
+  "documentation": "<p>You can use the Amazon Elastic Block Store (EBS) direct APIs to directly read the data on your EBS snapshots, and identify the difference between two snapshots. You can view the details of blocks in an EBS snapshot, compare the block difference between two snapshots, and directly access the data in a snapshot. If you’re an independent software vendor (ISV) who offers backup services for EBS, the EBS direct APIs make it easier and more cost-effective to track incremental changes on your EBS volumes via EBS snapshots. This can be done without having to create new volumes from EBS snapshots.</p> <p>This API reference provides detailed information about the actions, data types, parameters, and errors of the EBS direct APIs. For more information about the elements that make up the EBS direct APIs, and examples of how to use them effectively, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html\">Accessing the Contents of an EBS Snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about the supported AWS Regions, endpoints, and service quotas for the EBS direct APIs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/ebs-service.html\">Amazon Elastic Block Store Endpoints and Quotas</a> in the <i>AWS General Reference</i>.</p>"
+}

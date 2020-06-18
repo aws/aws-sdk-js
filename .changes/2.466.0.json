@@ -1,0 +1,47 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeCommit",
+        "description": "This release adds APIs that allow adding and removing tags to a repository, and viewing tags for a repository. It also enables adding tags when creating a repository."
+    },
+    {
+        "type": "feature",
+        "category": "IoTAnalytics",
+        "description": "IoT Analytics adds the option to use your own S3 bucket to store channel and data store resources. Previously, only service-managed storage was used."
+    },
+    {
+        "type": "feature",
+        "category": "IoTEvents",
+        "description": "The AWS IoT Events service allows customers to monitor their IoT devices and sensors to detect failures or changes in operation and to trigger actions when these events occur"
+    },
+    {
+        "type": "feature",
+        "category": "IoTEventsData",
+        "description": "The AWS IoT Events service allows customers to monitor their IoT devices and sensors to detect failures or changes in operation and to trigger actions when these events occur"
+    },
+    {
+        "type": "feature",
+        "category": "Kafka",
+        "description": "Updated APIs for Amazon MSK to enable new features such as encryption in transit, client authentication, and scaling storage."
+    },
+    {
+        "type": "feature",
+        "category": "PinpointEmail",
+        "description": "You can now specify whether the Amazon Pinpoint Email service must deliver email over a connection that is encrypted using Transport Layer Security (TLS)."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "This release adds support for Activity Streams for database clusters."
+    },
+    {
+        "type": "feature",
+        "category": "RDSDataService",
+        "description": "The RDS Data API is generally available for the MySQL-compatible edition of Amazon Aurora Serverless in the US East (N. Virginia and Ohio), US West (Oregon), EU (Ireland), and Asia Pacific (Tokyo) regions. This service enables you to easily access Aurora Serverless clusters with web services-based applications including AWS Lambda and AWS AppSync. The new APIs included in this SDK release are ExecuteStatement, BatchExecuteStatement, BeginTransaction, CommitTransaction, and RollbackTransaction. The ExecuteSql API is deprecated; instead use ExecuteStatement which provides additional functionality including transaction support."
+    },
+    {
+        "type": "feature",
+        "category": "ServiceCatalog",
+        "description": "Service Catalog ListStackInstancesForProvisionedProduct API enables customers to get details of a provisioned product with type \"CFN_STACKSET\". By passing the provisioned product id, the API will list account, region and status of each stack instances that are associated with this provisioned product."
+    }
+]

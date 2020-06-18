@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.292.0',
+	  VERSION: '2.700.0',
 
 	  /**
 	   * @api private
@@ -95,17 +95,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  Protocol: {
 	    Json: __webpack_require__(13),
-	    Query: __webpack_require__(16),
-	    Rest: __webpack_require__(20),
-	    RestJson: __webpack_require__(21),
-	    RestXml: __webpack_require__(22)
+	    Query: __webpack_require__(17),
+	    Rest: __webpack_require__(21),
+	    RestJson: __webpack_require__(22),
+	    RestXml: __webpack_require__(23)
 	  },
 
 	  /**
 	   * @api private
 	   */
 	  XML: {
-	    Builder: __webpack_require__(23),
+	    Builder: __webpack_require__(24),
 	    Parser: null // conditionally set based on environment
 	  },
 
@@ -121,30 +121,33 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @api private
 	   */
 	  Model: {
-	    Api: __webpack_require__(28),
-	    Operation: __webpack_require__(29),
-	    Shape: __webpack_require__(18),
-	    Paginator: __webpack_require__(30),
-	    ResourceWaiter: __webpack_require__(31)
+	    Api: __webpack_require__(29),
+	    Operation: __webpack_require__(30),
+	    Shape: __webpack_require__(19),
+	    Paginator: __webpack_require__(31),
+	    ResourceWaiter: __webpack_require__(32)
 	  },
 
 	  /**
 	   * @api private
 	   */
-	  apiLoader: __webpack_require__(32)
+	  apiLoader: __webpack_require__(33),
+
+	  /**
+	   * @api private
+	   */
+	  EndpointCache: __webpack_require__(34).EndpointCache
 	});
-
-	__webpack_require__(33);
 	__webpack_require__(36);
-
-	__webpack_require__(39);
+	__webpack_require__(37);
 	__webpack_require__(40);
-	__webpack_require__(41);
-	__webpack_require__(45);
-	__webpack_require__(48);
+	__webpack_require__(43);
+	__webpack_require__(44);
 	__webpack_require__(49);
-	__webpack_require__(50);
-	__webpack_require__(58);
+	__webpack_require__(52);
+	__webpack_require__(53);
+	__webpack_require__(54);
+	__webpack_require__(62);
 
 	/**
 	 * @readonly
@@ -162,6 +165,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *   new AWS.S3().listBuckets(); // prints 'Request took 0.285 seconds'
 	 */
 	AWS.events = new AWS.SequentialExecutor();
+
+	//create endpoint cache lazily
+	AWS.util.memoizedProperty(AWS, 'endpointCache', function() {
+	  return new AWS.EndpointCache(AWS.config.endpointCacheSize);
+	}, true);
 
 
 /***/ }),
@@ -206,8 +214,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return agent;
 	  },
 
-	  isBrowser: function isBrowser() { return process && process.browser; },
-	  isNode: function isNode() { return !util.isBrowser(); },
 	  uriEscape: function uriEscape(string) {
 	    var output = encodeURIComponent(string);
 	    output = output.replace(/[^A-Za-z0-9_.~\-%]+/g, escape);
@@ -275,7 +281,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (string === null || typeof string === 'undefined') {
 	        return string;
 	      }
-	      var buf = (typeof util.Buffer.from === 'function' && util.Buffer.from !== Uint8Array.from) ? util.Buffer.from(string) : new util.Buffer(string);
+	      var buf = util.buffer.toBuffer(string);
 	      return buf.toString('base64');
 	    },
 
@@ -286,14 +292,37 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (string === null || typeof string === 'undefined') {
 	        return string;
 	      }
-	      return (typeof util.Buffer.from === 'function' && util.Buffer.from !== Uint8Array.from) ? util.Buffer.from(string, 'base64') : new util.Buffer(string, 'base64');
+	      return util.buffer.toBuffer(string, 'base64');
 	    }
 
 	  },
 
 	  buffer: {
+	    /**
+	     * Buffer constructor for Node buffer and buffer pollyfill
+	     */
+	    toBuffer: function(data, encoding) {
+	      return (typeof util.Buffer.from === 'function' && util.Buffer.from !== Uint8Array.from) ?
+	        util.Buffer.from(data, encoding) : new util.Buffer(data, encoding);
+	    },
+
+	    alloc: function(size, fill, encoding) {
+	      if (typeof size !== 'number') {
+	        throw new Error('size passed to alloc must be a number.');
+	      }
+	      if (typeof util.Buffer.alloc === 'function') {
+	        return util.Buffer.alloc(size, fill, encoding);
+	      } else {
+	        var buf = new util.Buffer(size);
+	        if (fill !== undefined && typeof buf.fill === 'function') {
+	          buf.fill(fill, undefined, undefined, encoding);
+	        }
+	        return buf;
+	      }
+	    },
+
 	    toStream: function toStream(buffer) {
-	      if (!util.Buffer.isBuffer(buffer)) buffer = new util.Buffer(buffer);
+	      if (!util.Buffer.isBuffer(buffer)) buffer =  util.buffer.toBuffer(buffer);
 
 	      var readable = new (util.stream.Readable)();
 	      var pos = 0;
@@ -321,7 +350,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        length += buffers[i].length;
 	      }
 
-	      buffer = new util.Buffer(length);
+	      buffer = util.buffer.alloc(length);
 
 	      for (i = 0; i < buffers.length; i++) {
 	        buffers[i].copy(buffer, offset);
@@ -335,7 +364,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  string: {
 	    byteLength: function byteLength(string) {
 	      if (string === null || string === undefined) return 0;
-	      if (typeof string === 'string') string = new util.Buffer(string);
+	      if (typeof string === 'string') string = util.buffer.toBuffer(string);
 
 	      if (typeof string.byteLength === 'number') {
 	        return string.byteLength;
@@ -383,6 +412,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  fn: {
 	    noop: function() {},
+	    callback: function (err) { if (err) throw err; },
 
 	    /**
 	     * Turn a synchronous function into as "async" function by making it call
@@ -553,7 +583,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var crc = 0 ^ -1;
 
 	      if (typeof data === 'string') {
-	        data = new util.Buffer(data);
+	        data = util.buffer.toBuffer(data);
 	      }
 
 	      for (var i = 0; i < data.length; i++) {
@@ -567,7 +597,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (!digest) digest = 'binary';
 	      if (digest === 'buffer') { digest = undefined; }
 	      if (!fn) fn = 'sha256';
-	      if (typeof string === 'string') string = new util.Buffer(string);
+	      if (typeof string === 'string') string = util.buffer.toBuffer(string);
 	      return util.crypto.lib.createHmac(fn, key).update(string).digest(digest);
 	    },
 
@@ -583,7 +613,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var hash = util.crypto.createHash(algorithm);
 	      if (!digest) { digest = 'binary'; }
 	      if (digest === 'buffer') { digest = undefined; }
-	      if (typeof data === 'string') data = new util.Buffer(data);
+	      if (typeof data === 'string') data = util.buffer.toBuffer(data);
 	      var sliceFn = util.arraySliceFn(data);
 	      var isBuffer = util.Buffer.isBuffer(data);
 	      //Identifying objects with an ArrayBuffer as buffers
@@ -742,7 +772,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      Object.defineProperty(err, 'message', {enumerable: true});
 	    }
 
-	    err.name = options && options.name || err.name || err.code || 'Error';
+	    err.name = String(options && options.name || err.name || err.code || 'Error');
 	    err.time = new Date();
 
 	    if (originalError) err.originalError = originalError;
@@ -874,7 +904,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (util.isNode()) {
 	      var Stream = util.stream.Stream;
 	      var fs = __webpack_require__(6);
-	      if (body instanceof Stream) {
+	      if (typeof Stream === 'function' && body instanceof Stream) {
 	        if (typeof body.path === 'string') { // assume file object
 	          var settings = {};
 	          if (typeof body.start === 'number') {
@@ -961,18 +991,25 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  /**
 	   * @api private
+	   * Return a function that will return a promise whose fate is decided by the
+	   * callback behavior of the given method with `methodName`. The method to be
+	   * promisified should conform to node.js convention of accepting a callback as
+	   * last argument and calling that callback with error as the first argument
+	   * and success value on the second argument.
 	   */
 	  promisifyMethod: function promisifyMethod(methodName, PromiseDependency) {
 	    return function promise() {
 	      var self = this;
+	      var args = Array.prototype.slice.call(arguments);
 	      return new PromiseDependency(function(resolve, reject) {
-	        self[methodName](function(err, data) {
+	        args.push(function(err, data) {
 	          if (err) {
 	            reject(err);
 	          } else {
 	            resolve(data);
 	          }
 	        });
+	        self[methodName].apply(self, args);
 	      });
 	    };
 	  },
@@ -991,11 +1028,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @api private
 	   */
-	  calculateRetryDelay: function calculateRetryDelay(retryCount, retryDelayOptions) {
+	  calculateRetryDelay: function calculateRetryDelay(retryCount, retryDelayOptions, err) {
 	    if (!retryDelayOptions) retryDelayOptions = {};
 	    var customBackoff = retryDelayOptions.customBackoff || null;
 	    if (typeof customBackoff === 'function') {
-	      return customBackoff(retryCount);
+	      return customBackoff(retryCount, err);
 	    }
 	    var base = typeof retryDelayOptions.base === 'number' ? retryDelayOptions.base : 100;
 	    var delay = Math.random() * (Math.pow(2, retryCount) * base);
@@ -1014,9 +1051,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var errCallback = function(err) {
 	      var maxRetries = options.maxRetries || 0;
 	      if (err && err.code === 'TimeoutError') err.retryable = true;
-	      if (err && err.retryable && retryCount < maxRetries) {
+	      var delay = util.calculateRetryDelay(retryCount, options.retryDelayOptions, err);
+	      if (err && err.retryable && retryCount < maxRetries && delay >= 0) {
 	        retryCount++;
-	        var delay = util.calculateRetryDelay(retryCount, options.retryDelayOptions);
 	        setTimeout(sendRequest, delay + (err.retryAfter || 0));
 	      } else {
 	        cb(err);
@@ -1034,7 +1071,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	          } else {
 	            var retryAfter = parseInt(httpResponse.headers['retry-after'], 10) * 1000 || 0;
 	            var err = util.error(new Error(),
-	              { retryable: statusCode >= 500 || statusCode === 429 }
+	              {
+	                statusCode: statusCode,
+	                retryable: statusCode >= 500 || statusCode === 429
+	              }
 	            );
 	            if (retryAfter && err.retryable) err.retryAfter = retryAfter;
 	            errCallback(err);
@@ -1077,6 +1117,68 @@ return /******/ (function(modules) { // webpackBootstrap
 	      setImmediate(callback);
 	    } else {
 	      setTimeout(callback, 0);
+	    }
+	  },
+
+	  /**
+	   * @api private
+	   */
+	  getRequestPayloadShape: function getRequestPayloadShape(req) {
+	    var operations = req.service.api.operations;
+	    if (!operations) return undefined;
+	    var operation = (operations || {})[req.operation];
+	    if (!operation || !operation.input || !operation.input.payload) return undefined;
+	    return operation.input.members[operation.input.payload];
+	  },
+
+	  getProfilesFromSharedConfig: function getProfilesFromSharedConfig(iniLoader, filename) {
+	    var profiles = {};
+	    var profilesFromConfig = {};
+	    if (process.env[util.configOptInEnv]) {
+	      var profilesFromConfig = iniLoader.loadFrom({
+	        isConfig: true,
+	        filename: process.env[util.sharedConfigFileEnv]
+	      });
+	    }
+	    var profilesFromCreds = iniLoader.loadFrom({
+	      filename: filename ||
+	        (process.env[util.configOptInEnv] && process.env[util.sharedCredentialsFileEnv])
+	    });
+	    for (var i = 0, profileNames = Object.keys(profilesFromConfig); i < profileNames.length; i++) {
+	      profiles[profileNames[i]] = profilesFromConfig[profileNames[i]];
+	    }
+	    for (var i = 0, profileNames = Object.keys(profilesFromCreds); i < profileNames.length; i++) {
+	      profiles[profileNames[i]] = profilesFromCreds[profileNames[i]];
+	    }
+	    return profiles;
+	  },
+
+	  /**
+	   * @api private
+	   */
+	  ARN: {
+	    validate: function validateARN(str) {
+	      return str && str.indexOf('arn:') === 0 && str.split(':').length >= 6;
+	    },
+	    parse: function parseARN(arn) {
+	      var matched = arn.split(':');
+	      return {
+	        partition: matched[1],
+	        service: matched[2],
+	        region: matched[3],
+	        accountId: matched[4],
+	        resource: matched.slice(5).join(':')
+	      };
+	    },
+	    build: function buildARN(arnObject) {
+	      if (
+	        arnObject.service === undefined ||
+	        arnObject.region === undefined ||
+	        arnObject.accountId === undefined ||
+	        arnObject.resource === undefined
+	      ) throw util.error(new Error('Input ARN object is invalid'));
+	      return 'arn:'+ (arnObject.partition || 'aws') + ':' + arnObject.service +
+	        ':' + arnObject.region + ':' + arnObject.accountId + ':' + arnObject.resource;
 	    }
 	  },
 
@@ -1576,7 +1678,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 7 */
 /***/ (function(module, exports) {
 
-	module.exports = {"acm":{"name":"ACM","cors":true},"apigateway":{"name":"APIGateway","cors":true},"applicationautoscaling":{"prefix":"application-autoscaling","name":"ApplicationAutoScaling","cors":true},"appstream":{"name":"AppStream"},"autoscaling":{"name":"AutoScaling","cors":true},"batch":{"name":"Batch"},"budgets":{"name":"Budgets"},"clouddirectory":{"name":"CloudDirectory","versions":["2016-05-10*"]},"cloudformation":{"name":"CloudFormation","cors":true},"cloudfront":{"name":"CloudFront","versions":["2013-05-12*","2013-11-11*","2014-05-31*","2014-10-21*","2014-11-06*","2015-04-17*","2015-07-27*","2015-09-17*","2016-01-13*","2016-01-28*","2016-08-01*","2016-08-20*","2016-09-07*","2016-09-29*","2016-11-25*","2017-03-25*"],"cors":true},"cloudhsm":{"name":"CloudHSM","cors":true},"cloudsearch":{"name":"CloudSearch"},"cloudsearchdomain":{"name":"CloudSearchDomain"},"cloudtrail":{"name":"CloudTrail","cors":true},"cloudwatch":{"prefix":"monitoring","name":"CloudWatch","cors":true},"cloudwatchevents":{"prefix":"events","name":"CloudWatchEvents","versions":["2014-02-03*"],"cors":true},"cloudwatchlogs":{"prefix":"logs","name":"CloudWatchLogs","cors":true},"codebuild":{"name":"CodeBuild","cors":true},"codecommit":{"name":"CodeCommit","cors":true},"codedeploy":{"name":"CodeDeploy","cors":true},"codepipeline":{"name":"CodePipeline","cors":true},"cognitoidentity":{"prefix":"cognito-identity","name":"CognitoIdentity","cors":true},"cognitoidentityserviceprovider":{"prefix":"cognito-idp","name":"CognitoIdentityServiceProvider","cors":true},"cognitosync":{"prefix":"cognito-sync","name":"CognitoSync","cors":true},"configservice":{"prefix":"config","name":"ConfigService","cors":true},"cur":{"name":"CUR","cors":true},"datapipeline":{"name":"DataPipeline"},"devicefarm":{"name":"DeviceFarm","cors":true},"directconnect":{"name":"DirectConnect","cors":true},"directoryservice":{"prefix":"ds","name":"DirectoryService"},"discovery":{"name":"Discovery"},"dms":{"name":"DMS"},"dynamodb":{"name":"DynamoDB","cors":true},"dynamodbstreams":{"prefix":"streams.dynamodb","name":"DynamoDBStreams","cors":true},"ec2":{"name":"EC2","versions":["2013-06-15*","2013-10-15*","2014-02-01*","2014-05-01*","2014-06-15*","2014-09-01*","2014-10-01*","2015-03-01*","2015-04-15*","2015-10-01*","2016-04-01*","2016-09-15*"],"cors":true},"ecr":{"name":"ECR","cors":true},"ecs":{"name":"ECS","cors":true},"efs":{"prefix":"elasticfilesystem","name":"EFS","cors":true},"elasticache":{"name":"ElastiCache","versions":["2012-11-15*","2014-03-24*","2014-07-15*","2014-09-30*"],"cors":true},"elasticbeanstalk":{"name":"ElasticBeanstalk","cors":true},"elb":{"prefix":"elasticloadbalancing","name":"ELB","cors":true},"elbv2":{"prefix":"elasticloadbalancingv2","name":"ELBv2","cors":true},"emr":{"prefix":"elasticmapreduce","name":"EMR","cors":true},"es":{"name":"ES"},"elastictranscoder":{"name":"ElasticTranscoder","cors":true},"firehose":{"name":"Firehose","cors":true},"gamelift":{"name":"GameLift","cors":true},"glacier":{"name":"Glacier"},"health":{"name":"Health"},"iam":{"name":"IAM"},"importexport":{"name":"ImportExport"},"inspector":{"name":"Inspector","versions":["2015-08-18*"],"cors":true},"iot":{"name":"Iot","cors":true},"iotdata":{"prefix":"iot-data","name":"IotData","cors":true},"kinesis":{"name":"Kinesis","cors":true},"kinesisanalytics":{"name":"KinesisAnalytics"},"kms":{"name":"KMS","cors":true},"lambda":{"name":"Lambda","cors":true},"lexruntime":{"prefix":"runtime.lex","name":"LexRuntime","cors":true},"lightsail":{"name":"Lightsail"},"machinelearning":{"name":"MachineLearning","cors":true},"marketplacecommerceanalytics":{"name":"MarketplaceCommerceAnalytics","cors":true},"marketplacemetering":{"prefix":"meteringmarketplace","name":"MarketplaceMetering"},"mturk":{"prefix":"mturk-requester","name":"MTurk","cors":true},"mobileanalytics":{"name":"MobileAnalytics","cors":true},"opsworks":{"name":"OpsWorks","cors":true},"opsworkscm":{"name":"OpsWorksCM"},"organizations":{"name":"Organizations"},"pinpoint":{"name":"Pinpoint"},"polly":{"name":"Polly","cors":true},"rds":{"name":"RDS","versions":["2014-09-01*"],"cors":true},"redshift":{"name":"Redshift","cors":true},"rekognition":{"name":"Rekognition","cors":true},"resourcegroupstaggingapi":{"name":"ResourceGroupsTaggingAPI"},"route53":{"name":"Route53","cors":true},"route53domains":{"name":"Route53Domains","cors":true},"s3":{"name":"S3","dualstackAvailable":true,"cors":true},"servicecatalog":{"name":"ServiceCatalog","cors":true},"ses":{"prefix":"email","name":"SES","cors":true},"shield":{"name":"Shield"},"simpledb":{"prefix":"sdb","name":"SimpleDB"},"sms":{"name":"SMS"},"snowball":{"name":"Snowball"},"sns":{"name":"SNS","cors":true},"sqs":{"name":"SQS","cors":true},"ssm":{"name":"SSM","cors":true},"storagegateway":{"name":"StorageGateway","cors":true},"stepfunctions":{"prefix":"states","name":"StepFunctions"},"sts":{"name":"STS","cors":true},"support":{"name":"Support"},"swf":{"name":"SWF"},"xray":{"name":"XRay"},"waf":{"name":"WAF","cors":true},"wafregional":{"prefix":"waf-regional","name":"WAFRegional"},"workdocs":{"name":"WorkDocs","cors":true},"workspaces":{"name":"WorkSpaces"},"codestar":{"name":"CodeStar"},"lexmodelbuildingservice":{"prefix":"lex-models","name":"LexModelBuildingService","cors":true},"marketplaceentitlementservice":{"prefix":"entitlement.marketplace","name":"MarketplaceEntitlementService"},"athena":{"name":"Athena"},"greengrass":{"name":"Greengrass"},"dax":{"name":"DAX"},"migrationhub":{"prefix":"AWSMigrationHub","name":"MigrationHub"},"cloudhsmv2":{"name":"CloudHSMV2"},"glue":{"name":"Glue"},"mobile":{"name":"Mobile"},"pricing":{"name":"Pricing"},"costexplorer":{"prefix":"ce","name":"CostExplorer"},"mediaconvert":{"name":"MediaConvert"},"medialive":{"name":"MediaLive"},"mediapackage":{"name":"MediaPackage"},"mediastore":{"name":"MediaStore"},"mediastoredata":{"prefix":"mediastore-data","name":"MediaStoreData"},"appsync":{"name":"AppSync"},"guardduty":{"name":"GuardDuty"},"mq":{"name":"MQ"},"comprehend":{"name":"Comprehend"},"iotjobsdataplane":{"prefix":"iot-jobs-data","name":"IoTJobsDataPlane"},"kinesisvideoarchivedmedia":{"prefix":"kinesis-video-archived-media","name":"KinesisVideoArchivedMedia","cors":true},"kinesisvideomedia":{"prefix":"kinesis-video-media","name":"KinesisVideoMedia"},"kinesisvideo":{"name":"KinesisVideo","cors":true},"sagemakerruntime":{"prefix":"runtime.sagemaker","name":"SageMakerRuntime"},"sagemaker":{"name":"SageMaker"},"translate":{"name":"Translate","cors":true},"resourcegroups":{"prefix":"resource-groups","name":"ResourceGroups"},"alexaforbusiness":{"name":"AlexaForBusiness"},"cloud9":{"name":"Cloud9"},"serverlessapplicationrepository":{"prefix":"serverlessrepo","name":"ServerlessApplicationRepository"},"servicediscovery":{"name":"ServiceDiscovery"},"workmail":{"name":"WorkMail"},"autoscalingplans":{"prefix":"autoscaling-plans","name":"AutoScalingPlans"},"transcribeservice":{"prefix":"transcribe","name":"TranscribeService"},"connect":{"name":"Connect"},"acmpca":{"prefix":"acm-pca","name":"ACMPCA"},"fms":{"name":"FMS"},"secretsmanager":{"name":"SecretsManager","cors":true},"iotanalytics":{"name":"IoTAnalytics"},"iot1clickdevicesservice":{"prefix":"iot1click-devices","name":"IoT1ClickDevicesService"},"iot1clickprojects":{"prefix":"iot1click-projects","name":"IoT1ClickProjects"},"pi":{"name":"PI"},"neptune":{"name":"Neptune"},"mediatailor":{"name":"MediaTailor"},"eks":{"name":"EKS"},"macie":{"name":"Macie"},"dlm":{"name":"DLM"}}
+	module.exports = {"acm":{"name":"ACM","cors":true},"apigateway":{"name":"APIGateway","cors":true},"applicationautoscaling":{"prefix":"application-autoscaling","name":"ApplicationAutoScaling","cors":true},"appstream":{"name":"AppStream"},"autoscaling":{"name":"AutoScaling","cors":true},"batch":{"name":"Batch"},"budgets":{"name":"Budgets"},"clouddirectory":{"name":"CloudDirectory","versions":["2016-05-10*"]},"cloudformation":{"name":"CloudFormation","cors":true},"cloudfront":{"name":"CloudFront","versions":["2013-05-12*","2013-11-11*","2014-05-31*","2014-10-21*","2014-11-06*","2015-04-17*","2015-07-27*","2015-09-17*","2016-01-13*","2016-01-28*","2016-08-01*","2016-08-20*","2016-09-07*","2016-09-29*","2016-11-25*","2017-03-25*","2017-10-30*","2018-06-18*","2018-11-05*"],"cors":true},"cloudhsm":{"name":"CloudHSM","cors":true},"cloudsearch":{"name":"CloudSearch"},"cloudsearchdomain":{"name":"CloudSearchDomain"},"cloudtrail":{"name":"CloudTrail","cors":true},"cloudwatch":{"prefix":"monitoring","name":"CloudWatch","cors":true},"cloudwatchevents":{"prefix":"events","name":"CloudWatchEvents","versions":["2014-02-03*"],"cors":true},"cloudwatchlogs":{"prefix":"logs","name":"CloudWatchLogs","cors":true},"codebuild":{"name":"CodeBuild","cors":true},"codecommit":{"name":"CodeCommit","cors":true},"codedeploy":{"name":"CodeDeploy","cors":true},"codepipeline":{"name":"CodePipeline","cors":true},"cognitoidentity":{"prefix":"cognito-identity","name":"CognitoIdentity","cors":true},"cognitoidentityserviceprovider":{"prefix":"cognito-idp","name":"CognitoIdentityServiceProvider","cors":true},"cognitosync":{"prefix":"cognito-sync","name":"CognitoSync","cors":true},"configservice":{"prefix":"config","name":"ConfigService","cors":true},"cur":{"name":"CUR","cors":true},"datapipeline":{"name":"DataPipeline"},"devicefarm":{"name":"DeviceFarm","cors":true},"directconnect":{"name":"DirectConnect","cors":true},"directoryservice":{"prefix":"ds","name":"DirectoryService"},"discovery":{"name":"Discovery"},"dms":{"name":"DMS"},"dynamodb":{"name":"DynamoDB","cors":true},"dynamodbstreams":{"prefix":"streams.dynamodb","name":"DynamoDBStreams","cors":true},"ec2":{"name":"EC2","versions":["2013-06-15*","2013-10-15*","2014-02-01*","2014-05-01*","2014-06-15*","2014-09-01*","2014-10-01*","2015-03-01*","2015-04-15*","2015-10-01*","2016-04-01*","2016-09-15*"],"cors":true},"ecr":{"name":"ECR","cors":true},"ecs":{"name":"ECS","cors":true},"efs":{"prefix":"elasticfilesystem","name":"EFS","cors":true},"elasticache":{"name":"ElastiCache","versions":["2012-11-15*","2014-03-24*","2014-07-15*","2014-09-30*"],"cors":true},"elasticbeanstalk":{"name":"ElasticBeanstalk","cors":true},"elb":{"prefix":"elasticloadbalancing","name":"ELB","cors":true},"elbv2":{"prefix":"elasticloadbalancingv2","name":"ELBv2","cors":true},"emr":{"prefix":"elasticmapreduce","name":"EMR","cors":true},"es":{"name":"ES"},"elastictranscoder":{"name":"ElasticTranscoder","cors":true},"firehose":{"name":"Firehose","cors":true},"gamelift":{"name":"GameLift","cors":true},"glacier":{"name":"Glacier"},"health":{"name":"Health"},"iam":{"name":"IAM","cors":true},"importexport":{"name":"ImportExport"},"inspector":{"name":"Inspector","versions":["2015-08-18*"],"cors":true},"iot":{"name":"Iot","cors":true},"iotdata":{"prefix":"iot-data","name":"IotData","cors":true},"kinesis":{"name":"Kinesis","cors":true},"kinesisanalytics":{"name":"KinesisAnalytics"},"kms":{"name":"KMS","cors":true},"lambda":{"name":"Lambda","cors":true},"lexruntime":{"prefix":"runtime.lex","name":"LexRuntime","cors":true},"lightsail":{"name":"Lightsail"},"machinelearning":{"name":"MachineLearning","cors":true},"marketplacecommerceanalytics":{"name":"MarketplaceCommerceAnalytics","cors":true},"marketplacemetering":{"prefix":"meteringmarketplace","name":"MarketplaceMetering"},"mturk":{"prefix":"mturk-requester","name":"MTurk","cors":true},"mobileanalytics":{"name":"MobileAnalytics","cors":true},"opsworks":{"name":"OpsWorks","cors":true},"opsworkscm":{"name":"OpsWorksCM"},"organizations":{"name":"Organizations"},"pinpoint":{"name":"Pinpoint"},"polly":{"name":"Polly","cors":true},"rds":{"name":"RDS","versions":["2014-09-01*"],"cors":true},"redshift":{"name":"Redshift","cors":true},"rekognition":{"name":"Rekognition","cors":true},"resourcegroupstaggingapi":{"name":"ResourceGroupsTaggingAPI"},"route53":{"name":"Route53","cors":true},"route53domains":{"name":"Route53Domains","cors":true},"s3":{"name":"S3","dualstackAvailable":true,"cors":true},"s3control":{"name":"S3Control","dualstackAvailable":true,"xmlNoDefaultLists":true},"servicecatalog":{"name":"ServiceCatalog","cors":true},"ses":{"prefix":"email","name":"SES","cors":true},"shield":{"name":"Shield"},"simpledb":{"prefix":"sdb","name":"SimpleDB"},"sms":{"name":"SMS"},"snowball":{"name":"Snowball"},"sns":{"name":"SNS","cors":true},"sqs":{"name":"SQS","cors":true},"ssm":{"name":"SSM","cors":true},"storagegateway":{"name":"StorageGateway","cors":true},"stepfunctions":{"prefix":"states","name":"StepFunctions"},"sts":{"name":"STS","cors":true},"support":{"name":"Support"},"swf":{"name":"SWF"},"xray":{"name":"XRay","cors":true},"waf":{"name":"WAF","cors":true},"wafregional":{"prefix":"waf-regional","name":"WAFRegional"},"workdocs":{"name":"WorkDocs","cors":true},"workspaces":{"name":"WorkSpaces"},"codestar":{"name":"CodeStar"},"lexmodelbuildingservice":{"prefix":"lex-models","name":"LexModelBuildingService","cors":true},"marketplaceentitlementservice":{"prefix":"entitlement.marketplace","name":"MarketplaceEntitlementService"},"athena":{"name":"Athena"},"greengrass":{"name":"Greengrass"},"dax":{"name":"DAX"},"migrationhub":{"prefix":"AWSMigrationHub","name":"MigrationHub"},"cloudhsmv2":{"name":"CloudHSMV2"},"glue":{"name":"Glue"},"mobile":{"name":"Mobile"},"pricing":{"name":"Pricing","cors":true},"costexplorer":{"prefix":"ce","name":"CostExplorer","cors":true},"mediaconvert":{"name":"MediaConvert"},"medialive":{"name":"MediaLive"},"mediapackage":{"name":"MediaPackage"},"mediastore":{"name":"MediaStore"},"mediastoredata":{"prefix":"mediastore-data","name":"MediaStoreData","cors":true},"appsync":{"name":"AppSync"},"guardduty":{"name":"GuardDuty"},"mq":{"name":"MQ"},"comprehend":{"name":"Comprehend","cors":true},"iotjobsdataplane":{"prefix":"iot-jobs-data","name":"IoTJobsDataPlane"},"kinesisvideoarchivedmedia":{"prefix":"kinesis-video-archived-media","name":"KinesisVideoArchivedMedia","cors":true},"kinesisvideomedia":{"prefix":"kinesis-video-media","name":"KinesisVideoMedia","cors":true},"kinesisvideo":{"name":"KinesisVideo","cors":true},"sagemakerruntime":{"prefix":"runtime.sagemaker","name":"SageMakerRuntime"},"sagemaker":{"name":"SageMaker"},"translate":{"name":"Translate","cors":true},"resourcegroups":{"prefix":"resource-groups","name":"ResourceGroups","cors":true},"alexaforbusiness":{"name":"AlexaForBusiness"},"cloud9":{"name":"Cloud9"},"serverlessapplicationrepository":{"prefix":"serverlessrepo","name":"ServerlessApplicationRepository"},"servicediscovery":{"name":"ServiceDiscovery"},"workmail":{"name":"WorkMail"},"autoscalingplans":{"prefix":"autoscaling-plans","name":"AutoScalingPlans"},"transcribeservice":{"prefix":"transcribe","name":"TranscribeService"},"connect":{"name":"Connect","cors":true},"acmpca":{"prefix":"acm-pca","name":"ACMPCA"},"fms":{"name":"FMS"},"secretsmanager":{"name":"SecretsManager","cors":true},"iotanalytics":{"name":"IoTAnalytics","cors":true},"iot1clickdevicesservice":{"prefix":"iot1click-devices","name":"IoT1ClickDevicesService"},"iot1clickprojects":{"prefix":"iot1click-projects","name":"IoT1ClickProjects"},"pi":{"name":"PI"},"neptune":{"name":"Neptune"},"mediatailor":{"name":"MediaTailor"},"eks":{"name":"EKS"},"macie":{"name":"Macie"},"dlm":{"name":"DLM"},"signer":{"name":"Signer"},"chime":{"name":"Chime"},"pinpointemail":{"prefix":"pinpoint-email","name":"PinpointEmail"},"ram":{"name":"RAM"},"route53resolver":{"name":"Route53Resolver"},"pinpointsmsvoice":{"prefix":"sms-voice","name":"PinpointSMSVoice"},"quicksight":{"name":"QuickSight"},"rdsdataservice":{"prefix":"rds-data","name":"RDSDataService"},"amplify":{"name":"Amplify"},"datasync":{"name":"DataSync"},"robomaker":{"name":"RoboMaker"},"transfer":{"name":"Transfer"},"globalaccelerator":{"name":"GlobalAccelerator"},"comprehendmedical":{"name":"ComprehendMedical","cors":true},"kinesisanalyticsv2":{"name":"KinesisAnalyticsV2"},"mediaconnect":{"name":"MediaConnect"},"fsx":{"name":"FSx"},"securityhub":{"name":"SecurityHub"},"appmesh":{"name":"AppMesh","versions":["2018-10-01*"]},"licensemanager":{"prefix":"license-manager","name":"LicenseManager"},"kafka":{"name":"Kafka"},"apigatewaymanagementapi":{"name":"ApiGatewayManagementApi"},"apigatewayv2":{"name":"ApiGatewayV2"},"docdb":{"name":"DocDB"},"backup":{"name":"Backup"},"worklink":{"name":"WorkLink"},"textract":{"name":"Textract"},"managedblockchain":{"name":"ManagedBlockchain"},"mediapackagevod":{"prefix":"mediapackage-vod","name":"MediaPackageVod"},"groundstation":{"name":"GroundStation"},"iotthingsgraph":{"name":"IoTThingsGraph"},"iotevents":{"name":"IoTEvents"},"ioteventsdata":{"prefix":"iotevents-data","name":"IoTEventsData"},"personalize":{"name":"Personalize","cors":true},"personalizeevents":{"prefix":"personalize-events","name":"PersonalizeEvents","cors":true},"personalizeruntime":{"prefix":"personalize-runtime","name":"PersonalizeRuntime","cors":true},"applicationinsights":{"prefix":"application-insights","name":"ApplicationInsights"},"servicequotas":{"prefix":"service-quotas","name":"ServiceQuotas"},"ec2instanceconnect":{"prefix":"ec2-instance-connect","name":"EC2InstanceConnect"},"eventbridge":{"name":"EventBridge"},"lakeformation":{"name":"LakeFormation"},"forecastservice":{"prefix":"forecast","name":"ForecastService","cors":true},"forecastqueryservice":{"prefix":"forecastquery","name":"ForecastQueryService","cors":true},"qldb":{"name":"QLDB"},"qldbsession":{"prefix":"qldb-session","name":"QLDBSession"},"workmailmessageflow":{"name":"WorkMailMessageFlow"},"codestarnotifications":{"prefix":"codestar-notifications","name":"CodeStarNotifications"},"savingsplans":{"name":"SavingsPlans"},"sso":{"name":"SSO"},"ssooidc":{"prefix":"sso-oidc","name":"SSOOIDC"},"marketplacecatalog":{"prefix":"marketplace-catalog","name":"MarketplaceCatalog"},"dataexchange":{"name":"DataExchange"},"sesv2":{"name":"SESV2"},"migrationhubconfig":{"prefix":"migrationhub-config","name":"MigrationHubConfig"},"connectparticipant":{"name":"ConnectParticipant"},"appconfig":{"name":"AppConfig"},"iotsecuretunneling":{"name":"IoTSecureTunneling"},"wafv2":{"name":"WAFV2"},"elasticinference":{"prefix":"elastic-inference","name":"ElasticInference"},"imagebuilder":{"name":"Imagebuilder"},"schemas":{"name":"Schemas"},"accessanalyzer":{"name":"AccessAnalyzer"},"codegurureviewer":{"prefix":"codeguru-reviewer","name":"CodeGuruReviewer"},"codeguruprofiler":{"name":"CodeGuruProfiler"},"computeoptimizer":{"prefix":"compute-optimizer","name":"ComputeOptimizer"},"frauddetector":{"name":"FraudDetector"},"kendra":{"name":"Kendra"},"networkmanager":{"name":"NetworkManager"},"outposts":{"name":"Outposts"},"augmentedairuntime":{"prefix":"sagemaker-a2i-runtime","name":"AugmentedAIRuntime"},"ebs":{"name":"EBS"},"kinesisvideosignalingchannels":{"prefix":"kinesis-video-signaling","name":"KinesisVideoSignalingChannels","cors":true},"detective":{"name":"Detective"},"codestarconnections":{"prefix":"codestar-connections","name":"CodeStarconnections"},"synthetics":{"name":"Synthetics"},"iotsitewise":{"name":"IoTSiteWise"},"macie2":{"name":"Macie2"},"codeartifact":{"name":"CodeArtifact"}}
 
 /***/ }),
 /* 8 */
@@ -1604,20 +1706,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	// Inspired by https://github.com/LiosK/UUID.js
 	// and http://docs.python.org/library/uuid.html
 
-	// random #'s we need to init node and clockseq
-	var _seedBytes = rng();
-
-	// Per 4.5, create and 48-bit node id, (47 random bits + multicast bit = 1)
-	var _nodeId = [
-	  _seedBytes[0] | 0x01,
-	  _seedBytes[1], _seedBytes[2], _seedBytes[3], _seedBytes[4], _seedBytes[5]
-	];
-
-	// Per 4.2.2, randomize (14 bit) clockseq
-	var _clockseq = (_seedBytes[6] << 8 | _seedBytes[7]) & 0x3fff;
+	var _nodeId;
+	var _clockseq;
 
 	// Previous uuid creation time
-	var _lastMSecs = 0, _lastNSecs = 0;
+	var _lastMSecs = 0;
+	var _lastNSecs = 0;
 
 	// See https://github.com/broofa/node-uuid for API details
 	function v1(options, buf, offset) {
@@ -1625,8 +1719,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var b = buf || [];
 
 	  options = options || {};
-
+	  var node = options.node || _nodeId;
 	  var clockseq = options.clockseq !== undefined ? options.clockseq : _clockseq;
+
+	  // node and clockseq need to be initialized to random values if they're not
+	  // specified.  We do this lazily to minimize issues related to insufficient
+	  // system entropy.  See #189
+	  if (node == null || clockseq == null) {
+	    var seedBytes = rng();
+	    if (node == null) {
+	      // Per 4.5, create and 48-bit node id, (47 random bits + multicast bit = 1)
+	      node = _nodeId = [
+	        seedBytes[0] | 0x01,
+	        seedBytes[1], seedBytes[2], seedBytes[3], seedBytes[4], seedBytes[5]
+	      ];
+	    }
+	    if (clockseq == null) {
+	      // Per 4.2.2, randomize (14 bit) clockseq
+	      clockseq = _clockseq = (seedBytes[6] << 8 | seedBytes[7]) & 0x3fff;
+	    }
+	  }
 
 	  // UUID timestamps are 100 nano-second units since the Gregorian epoch,
 	  // (1582-10-15 00:00).  JSNumbers aren't precise enough for this, so
@@ -1687,7 +1799,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  b[i++] = clockseq & 0xff;
 
 	  // `node`
-	  var node = options.node || _nodeId;
 	  for (var n = 0; n < 6; ++n) {
 	    b[i + n] = node[n];
 	  }
@@ -1702,29 +1813,32 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 10 */
 /***/ (function(module, exports) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {// Unique ID creation requires a high quality random # generator.  In the
+	// Unique ID creation requires a high quality random # generator.  In the
 	// browser this is a little complicated due to unknown quality of Math.random()
 	// and inconsistent support for the `crypto` API.  We do the best we can via
 	// feature-detection
-	var rng;
 
-	var crypto = global.crypto || global.msCrypto; // for IE 11
-	if (crypto && crypto.getRandomValues) {
+	// getRandomValues needs to be invoked in a context where "this" is a Crypto
+	// implementation. Also, find the complete implementation of crypto on IE11.
+	var getRandomValues = (typeof(crypto) != 'undefined' && crypto.getRandomValues && crypto.getRandomValues.bind(crypto)) ||
+	                      (typeof(msCrypto) != 'undefined' && typeof window.msCrypto.getRandomValues == 'function' && msCrypto.getRandomValues.bind(msCrypto));
+
+	if (getRandomValues) {
 	  // WHATWG crypto RNG - http://wiki.whatwg.org/wiki/Crypto
 	  var rnds8 = new Uint8Array(16); // eslint-disable-line no-undef
-	  rng = function whatwgRNG() {
-	    crypto.getRandomValues(rnds8);
+
+	  module.exports = function whatwgRNG() {
+	    getRandomValues(rnds8);
 	    return rnds8;
 	  };
-	}
-
-	if (!rng) {
+	} else {
 	  // Math.random()-based (RNG)
 	  //
 	  // If all else fails, use Math.random().  It's fast, but is of unspecified
 	  // quality.
 	  var rnds = new Array(16);
-	  rng = function() {
+
+	  module.exports = function mathRNG() {
 	    for (var i = 0, r; i < 16; i++) {
 	      if ((i & 0x03) === 0) r = Math.random() * 0x100000000;
 	      rnds[i] = r >>> ((i & 0x03) << 3) & 0xff;
@@ -1734,9 +1848,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	}
 
-	module.exports = rng;
-
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }),
 /* 11 */
@@ -1754,14 +1865,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	function bytesToUuid(buf, offset) {
 	  var i = offset || 0;
 	  var bth = byteToHex;
-	  return bth[buf[i++]] + bth[buf[i++]] +
-	          bth[buf[i++]] + bth[buf[i++]] + '-' +
-	          bth[buf[i++]] + bth[buf[i++]] + '-' +
-	          bth[buf[i++]] + bth[buf[i++]] + '-' +
-	          bth[buf[i++]] + bth[buf[i++]] + '-' +
-	          bth[buf[i++]] + bth[buf[i++]] +
-	          bth[buf[i++]] + bth[buf[i++]] +
-	          bth[buf[i++]] + bth[buf[i++]];
+	  // join used to fix memory issue caused by concatenation: https://bugs.chromium.org/p/v8/issues/detail?id=3175#c4
+	  return ([bth[buf[i++]], bth[buf[i++]], 
+		bth[buf[i++]], bth[buf[i++]], '-',
+		bth[buf[i++]], bth[buf[i++]], '-',
+		bth[buf[i++]], bth[buf[i++]], '-',
+		bth[buf[i++]], bth[buf[i++]], '-',
+		bth[buf[i++]], bth[buf[i++]],
+		bth[buf[i++]], bth[buf[i++]],
+		bth[buf[i++]], bth[buf[i++]]]).join('');
 	}
 
 	module.exports = bytesToUuid;
@@ -1778,7 +1890,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var i = buf && offset || 0;
 
 	  if (typeof(options) == 'string') {
-	    buf = options == 'binary' ? new Array(16) : null;
+	    buf = options === 'binary' ? new Array(16) : null;
 	    options = null;
 	  }
 	  options = options || {};
@@ -1809,6 +1921,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var util = __webpack_require__(2);
 	var JsonBuilder = __webpack_require__(14);
 	var JsonParser = __webpack_require__(15);
+	var populateHostPrefix = __webpack_require__(16).populateHostPrefix;
 
 	function buildRequest(req) {
 	  var httpRequest = req.httpRequest;
@@ -1822,6 +1935,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  httpRequest.body = builder.build(req.params || {}, input);
 	  httpRequest.headers['Content-Type'] = 'application/x-amz-json-' + version;
 	  httpRequest.headers['X-Amz-Target'] = target;
+
+	  populateHostPrefix(req);
 	}
 
 	function extractError(resp) {
@@ -2020,10 +2135,106 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	var util =  __webpack_require__(2);
+	var AWS = __webpack_require__(1);
+
+	/**
+	 * Prepend prefix defined by API model to endpoint that's already
+	 * constructed. This feature does not apply to operations using
+	 * endpoint discovery and can be disabled.
+	 * @api private
+	 */
+	function populateHostPrefix(request)  {
+	  var enabled = request.service.config.hostPrefixEnabled;
+	  if (!enabled) return request;
+	  var operationModel = request.service.api.operations[request.operation];
+	  //don't marshal host prefix when operation has endpoint discovery traits
+	  if (hasEndpointDiscover(request)) return request;
+	  if (operationModel.endpoint && operationModel.endpoint.hostPrefix) {
+	    var hostPrefixNotation = operationModel.endpoint.hostPrefix;
+	    var hostPrefix = expandHostPrefix(hostPrefixNotation, request.params, operationModel.input);
+	    prependEndpointPrefix(request.httpRequest.endpoint, hostPrefix);
+	    validateHostname(request.httpRequest.endpoint.hostname);
+	  }
+	  return request;
+	}
+
+	/**
+	 * @api private
+	 */
+	function hasEndpointDiscover(request) {
+	  var api = request.service.api;
+	  var operationModel = api.operations[request.operation];
+	  var isEndpointOperation = api.endpointOperation && (api.endpointOperation === util.string.lowerFirst(operationModel.name));
+	  return (operationModel.endpointDiscoveryRequired !== 'NULL' || isEndpointOperation === true);
+	}
+
+	/**
+	 * @api private
+	 */
+	function expandHostPrefix(hostPrefixNotation, params, shape) {
+	  util.each(shape.members, function(name, member) {
+	    if (member.hostLabel === true) {
+	      if (typeof params[name] !== 'string' || params[name] === '') {
+	        throw util.error(new Error(), {
+	          message: 'Parameter ' + name + ' should be a non-empty string.',
+	          code: 'InvalidParameter'
+	        });
+	      }
+	      var regex = new RegExp('\\{' + name + '\\}', 'g');
+	      hostPrefixNotation = hostPrefixNotation.replace(regex, params[name]);
+	    }
+	  });
+	  return hostPrefixNotation;
+	}
+
+	/**
+	 * @api private
+	 */
+	function prependEndpointPrefix(endpoint, prefix) {
+	  if (endpoint.host) {
+	    endpoint.host = prefix + endpoint.host;
+	  }
+	  if (endpoint.hostname) {
+	    endpoint.hostname = prefix + endpoint.hostname;
+	  }
+	}
+
+	/**
+	 * @api private
+	 */
+	function validateHostname(hostname) {
+	  var labels = hostname.split('.');
+	  //Reference: https://tools.ietf.org/html/rfc1123#section-2
+	  var hostPattern = /^[a-zA-Z0-9]{1}$|^[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9]$/;
+	  util.arrayEach(labels, function(label) {
+	    if (!label.length || label.length < 1 || label.length > 63) {
+	      throw util.error(new Error(), {
+	        code: 'ValidationError',
+	        message: 'Hostname label length should be between 1 to 63 characters, inclusive.'
+	      });
+	    }
+	    if (!hostPattern.test(label)) {
+	      throw AWS.util.error(new Error(),
+	        {code: 'ValidationError', message: label + ' is not hostname compatible.'});
+	    }
+	  });
+	}
+
+	module.exports = {
+	  populateHostPrefix: populateHostPrefix
+	};
+
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	var AWS = __webpack_require__(1);
 	var util = __webpack_require__(2);
-	var QueryParamSerializer = __webpack_require__(17);
-	var Shape = __webpack_require__(18);
+	var QueryParamSerializer = __webpack_require__(18);
+	var Shape = __webpack_require__(19);
+	var populateHostPrefix = __webpack_require__(16).populateHostPrefix;
 
 	function buildRequest(req) {
 	  var operation = req.service.api.operations[req.operation];
@@ -2042,6 +2253,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    httpRequest.params[name] = value;
 	  });
 	  httpRequest.body = util.queryParamsToString(httpRequest.params);
+
+	  populateHostPrefix(req);
 	}
 
 	function extractError(resp) {
@@ -2130,7 +2343,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var util = __webpack_require__(2);
@@ -2220,10 +2433,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var Collection = __webpack_require__(19);
+	var Collection = __webpack_require__(20);
 
 	var util = __webpack_require__(2);
 
@@ -2253,6 +2466,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  property(this, 'name', this.name || shape.xmlName || shape.queryName ||
 	    shape.locationName || memberName);
 	  property(this, 'isStreaming', shape.streaming || this.isStreaming || false);
+	  property(this, 'requiresLength', shape.requiresLength, false);
 	  property(this, 'isComposite', shape.isComposite || false);
 	  property(this, 'isShape', true, false);
 	  property(this, 'isQueryName', Boolean(shape.queryName), false);
@@ -2265,6 +2479,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  property(this, 'isEventPayload', Boolean(shape.eventpayload), false);
 	  property(this, 'isEventHeader', Boolean(shape.eventheader), false);
 	  property(this, 'isTimestampFormatSet', Boolean(shape.timestampFormat) || shape.prototype && shape.prototype.isTimestampFormatSet === true, false);
+	  property(this, 'endpointDiscoveryId', Boolean(shape.endpointdiscoveryid), false);
+	  property(this, 'hostLabel', Boolean(shape.hostLabel), false);
 
 	  if (options.documentation) {
 	    property(this, 'documentation', shape.documentation);
@@ -2577,7 +2793,22 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function BinaryShape() {
 	  Shape.apply(this, arguments);
-	  this.toType = util.base64.decode;
+	  this.toType = function(value) {
+	    var buf = util.base64.decode(value);
+	    if (this.isSensitive && util.isNode() && typeof util.Buffer.alloc === 'function') {
+	  /* Node.js can create a Buffer that is not isolated.
+	   * i.e. buf.byteLength !== buf.buffer.byteLength
+	   * This means that the sensitive data is accessible to anyone with access to buf.buffer.
+	   * If this is the node shared Buffer, then other code within this process _could_ find this secret.
+	   * Copy sensitive data to an isolated Buffer and zero the sensitive data.
+	   * While this is safe to do here, copying this code somewhere else may produce unexpected results.
+	   */
+	      var secureBuf = util.Buffer.alloc(buf.length, buf);
+	      buf.fill(0);
+	      buf = secureBuf;
+	    }
+	    return buf;
+	  };
 	  this.toWireFormat = util.base64.encode;
 	}
 
@@ -2614,24 +2845,25 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var memoizedProperty = __webpack_require__(2).memoizedProperty;
 
-	function memoize(name, value, fn, nameTr) {
+	function memoize(name, value, factory, nameTr) {
 	  memoizedProperty(this, nameTr(name), function() {
-	    return fn(name, value);
+	    return factory(name, value);
 	  });
 	}
 
-	function Collection(iterable, options, fn, nameTr) {
+	function Collection(iterable, options, factory, nameTr, callback) {
 	  nameTr = nameTr || String;
 	  var self = this;
 
 	  for (var id in iterable) {
 	    if (Object.prototype.hasOwnProperty.call(iterable, id)) {
-	      memoize.call(self, id, iterable[id], fn, nameTr);
+	      memoize.call(self, id, iterable[id], factory, nameTr);
+	      if (callback) callback(id, iterable[id]);
 	    }
 	  }
 	}
@@ -2643,10 +2875,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var util = __webpack_require__(2);
+	var populateHostPrefix = __webpack_require__(16).populateHostPrefix;
 
 	function populateMethod(req) {
 	  req.httpRequest.method = req.service.api.operations[req.operation].httpMethod;
@@ -2738,6 +2971,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  populateMethod(req);
 	  populateURI(req);
 	  populateHeaders(req);
+	  populateHostPrefix(req);
 	}
 
 	function extractError() {
@@ -2795,11 +3029,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var util = __webpack_require__(2);
-	var Rest = __webpack_require__(20);
+	var Rest = __webpack_require__(21);
 	var Json = __webpack_require__(13);
 	var JsonBuilder = __webpack_require__(14);
 	var JsonParser = __webpack_require__(15);
@@ -2824,7 +3058,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    }
 	  } else {
-	    req.httpRequest.body = builder.build(req.params, input);
+	    var body = builder.build(req.params, input);
+	    if (body !== '{}' || req.httpRequest.method !== 'GET') { //don't send empty body for GET method
+	      req.httpRequest.body = body;
+	    }
 	    applyContentTypeHeader(req);
 	  }
 	}
@@ -2842,8 +3079,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	function buildRequest(req) {
 	  Rest.buildRequest(req);
 
-	  // never send body payload on GET/HEAD/DELETE
-	  if (['GET', 'HEAD', 'DELETE'].indexOf(req.httpRequest.method) < 0) {
+	  // never send body payload on HEAD/DELETE
+	  if (['HEAD', 'DELETE'].indexOf(req.httpRequest.method) < 0) {
 	    populateBody(req);
 	  }
 	}
@@ -2897,12 +3134,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
 	var util = __webpack_require__(2);
-	var Rest = __webpack_require__(20);
+	var Rest = __webpack_require__(21);
 
 	function populateBody(req) {
 	  var input = req.service.api.operations[req.operation].input;
@@ -3011,12 +3248,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var util = __webpack_require__(2);
-	var XmlNode = __webpack_require__(24).XmlNode;
-	var XmlText = __webpack_require__(26).XmlText;
+	var XmlNode = __webpack_require__(25).XmlNode;
+	var XmlText = __webpack_require__(27).XmlText;
 
 	function XmlBuilder() { }
 
@@ -3068,8 +3305,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var entryKey = new XmlNode(xmlKey);
 	    var entryValue = new XmlNode(xmlValue);
-	    entry.addChildNode(entryKey)
-	    entry.addChildNode(entryValue)
+	    entry.addChildNode(entryKey);
+	    entry.addChildNode(entryValue);
 
 	    serialize(entryKey, key, shape.key);
 	    serialize(entryValue, value, shape.value);
@@ -3119,10 +3356,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var escapeAttribute = __webpack_require__(25).escapeAttribute;
+	var escapeAttribute = __webpack_require__(26).escapeAttribute;
 
 	/**
 	 * Represents an XML node.
@@ -3168,8 +3405,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    XmlNode: XmlNode
 	};
 
+
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports) {
 
 	/**
@@ -3186,11 +3424,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    escapeAttribute: escapeAttribute
 	};
 
+
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var escapeElement = __webpack_require__(27).escapeElement;
+	var escapeElement = __webpack_require__(28).escapeElement;
 
 	/**
 	 * Represents an XML text value.
@@ -3211,8 +3450,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    XmlText: XmlText
 	};
 
+
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports) {
 
 	/**
@@ -3229,26 +3469,32 @@ return /******/ (function(modules) { // webpackBootstrap
 	    escapeElement: escapeElement
 	};
 
+
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var Collection = __webpack_require__(19);
-	var Operation = __webpack_require__(29);
-	var Shape = __webpack_require__(18);
-	var Paginator = __webpack_require__(30);
-	var ResourceWaiter = __webpack_require__(31);
+	var Collection = __webpack_require__(20);
+	var Operation = __webpack_require__(30);
+	var Shape = __webpack_require__(19);
+	var Paginator = __webpack_require__(31);
+	var ResourceWaiter = __webpack_require__(32);
+	var metadata = __webpack_require__(7);
 
 	var util = __webpack_require__(2);
 	var property = util.property;
 	var memoizedProperty = util.memoizedProperty;
 
 	function Api(api, options) {
+	  var self = this;
 	  api = api || {};
 	  options = options || {};
 	  options.api = this;
 
 	  api.metadata = api.metadata || {};
+
+	  var serviceIdentifier = options.serviceIdentifier;
+	  delete options.serviceIdentifier;
 
 	  property(this, 'isApi', true, false);
 	  property(this, 'apiVersion', api.metadata.apiVersion);
@@ -3263,6 +3509,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  property(this, 'xmlNamespaceUri', api.metadata.xmlNamespace);
 	  property(this, 'abbreviation', api.metadata.serviceAbbreviation);
 	  property(this, 'fullName', api.metadata.serviceFullName);
+	  property(this, 'serviceId', api.metadata.serviceId);
+	  if (serviceIdentifier && metadata[serviceIdentifier]) {
+	      property(this, 'xmlNoDefaultLists', metadata[serviceIdentifier].xmlNoDefaultLists, false);
+	  }
 
 	  memoizedProperty(this, 'className', function() {
 	    var name = api.metadata.serviceAbbreviation || api.metadata.serviceFullName;
@@ -3273,9 +3523,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return name;
 	  });
 
+	  function addEndpointOperation(name, operation) {
+	    if (operation.endpointoperation === true) {
+	      property(self, 'endpointOperation', util.string.lowerFirst(name));
+	    }
+	    if (operation.endpointdiscovery && !self.hasRequiredEndpointDiscovery) {
+	      property(
+	        self,
+	        'hasRequiredEndpointDiscovery',
+	        operation.endpointdiscovery.required === true
+	      );
+	    }
+	  }
+
 	  property(this, 'operations', new Collection(api.operations, options, function(name, operation) {
 	    return new Operation(name, operation, options);
-	  }, util.string.lowerFirst));
+	  }, util.string.lowerFirst, addEndpointOperation));
 
 	  property(this, 'shapes', new Collection(api.shapes, options, function(name, shape) {
 	    return Shape.create(shape, options);
@@ -3302,10 +3565,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var Shape = __webpack_require__(18);
+	var Shape = __webpack_require__(19);
 
 	var util = __webpack_require__(2);
 	var property = util.property;
@@ -3319,9 +3582,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	  property(this, 'api', options.api, false);
 
 	  operation.http = operation.http || {};
+	  property(this, 'endpoint', operation.endpoint);
 	  property(this, 'httpMethod', operation.http.method || 'POST');
 	  property(this, 'httpPath', operation.http.requestUri || '/');
 	  property(this, 'authtype', operation.authtype || '');
+	  property(
+	    this,
+	    'endpointDiscoveryRequired',
+	    operation.endpointdiscovery ?
+	      (operation.endpointdiscovery.required ? 'REQUIRED' : 'OPTIONAL') :
+	    'NULL'
+	  );
 
 	  memoizedProperty(this, 'input', function() {
 	    if (!operation.input) {
@@ -3413,7 +3684,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var property = __webpack_require__(2).property;
@@ -3433,7 +3704,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var util = __webpack_require__(2);
@@ -3472,7 +3743,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports) {
 
 	function apiLoader(svc, version) {
@@ -3497,19 +3768,447 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 33 */
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	Object.defineProperty(exports, "__esModule", { value: true });
+	var LRU_1 = __webpack_require__(35);
+	var CACHE_SIZE = 1000;
+	/**
+	 * Inspired node-lru-cache[https://github.com/isaacs/node-lru-cache]
+	 */
+	var EndpointCache = /** @class */ (function () {
+	    function EndpointCache(maxSize) {
+	        if (maxSize === void 0) { maxSize = CACHE_SIZE; }
+	        this.maxSize = maxSize;
+	        this.cache = new LRU_1.LRUCache(maxSize);
+	    }
+	    ;
+	    Object.defineProperty(EndpointCache.prototype, "size", {
+	        get: function () {
+	            return this.cache.length;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    EndpointCache.prototype.put = function (key, value) {
+	      var keyString = typeof key !== 'string' ? EndpointCache.getKeyString(key) : key;
+	        var endpointRecord = this.populateValue(value);
+	        this.cache.put(keyString, endpointRecord);
+	    };
+	    EndpointCache.prototype.get = function (key) {
+	      var keyString = typeof key !== 'string' ? EndpointCache.getKeyString(key) : key;
+	        var now = Date.now();
+	        var records = this.cache.get(keyString);
+	        if (records) {
+	            for (var i = 0; i < records.length; i++) {
+	                var record = records[i];
+	                if (record.Expire < now) {
+	                    this.cache.remove(keyString);
+	                    return undefined;
+	                }
+	            }
+	        }
+	        return records;
+	    };
+	    EndpointCache.getKeyString = function (key) {
+	        var identifiers = [];
+	        var identifierNames = Object.keys(key).sort();
+	        for (var i = 0; i < identifierNames.length; i++) {
+	            var identifierName = identifierNames[i];
+	            if (key[identifierName] === undefined)
+	                continue;
+	            identifiers.push(key[identifierName]);
+	        }
+	        return identifiers.join(' ');
+	    };
+	    EndpointCache.prototype.populateValue = function (endpoints) {
+	        var now = Date.now();
+	        return endpoints.map(function (endpoint) { return ({
+	            Address: endpoint.Address || '',
+	            Expire: now + (endpoint.CachePeriodInMinutes || 1) * 60 * 1000
+	        }); });
+	    };
+	    EndpointCache.prototype.empty = function () {
+	        this.cache.empty();
+	    };
+	    EndpointCache.prototype.remove = function (key) {
+	      var keyString = typeof key !== 'string' ? EndpointCache.getKeyString(key) : key;
+	        this.cache.remove(keyString);
+	    };
+	    return EndpointCache;
+	}());
+	exports.EndpointCache = EndpointCache;
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports) {
+
+	"use strict";
+	Object.defineProperty(exports, "__esModule", { value: true });
+	var LinkedListNode = /** @class */ (function () {
+	    function LinkedListNode(key, value) {
+	        this.key = key;
+	        this.value = value;
+	    }
+	    return LinkedListNode;
+	}());
+	var LRUCache = /** @class */ (function () {
+	    function LRUCache(size) {
+	        this.nodeMap = {};
+	        this.size = 0;
+	        if (typeof size !== 'number' || size < 1) {
+	            throw new Error('Cache size can only be positive number');
+	        }
+	        this.sizeLimit = size;
+	    }
+	    Object.defineProperty(LRUCache.prototype, "length", {
+	        get: function () {
+	            return this.size;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    LRUCache.prototype.prependToList = function (node) {
+	        if (!this.headerNode) {
+	            this.tailNode = node;
+	        }
+	        else {
+	            this.headerNode.prev = node;
+	            node.next = this.headerNode;
+	        }
+	        this.headerNode = node;
+	        this.size++;
+	    };
+	    LRUCache.prototype.removeFromTail = function () {
+	        if (!this.tailNode) {
+	            return undefined;
+	        }
+	        var node = this.tailNode;
+	        var prevNode = node.prev;
+	        if (prevNode) {
+	            prevNode.next = undefined;
+	        }
+	        node.prev = undefined;
+	        this.tailNode = prevNode;
+	        this.size--;
+	        return node;
+	    };
+	    LRUCache.prototype.detachFromList = function (node) {
+	        if (this.headerNode === node) {
+	            this.headerNode = node.next;
+	        }
+	        if (this.tailNode === node) {
+	            this.tailNode = node.prev;
+	        }
+	        if (node.prev) {
+	            node.prev.next = node.next;
+	        }
+	        if (node.next) {
+	            node.next.prev = node.prev;
+	        }
+	        node.next = undefined;
+	        node.prev = undefined;
+	        this.size--;
+	    };
+	    LRUCache.prototype.get = function (key) {
+	        if (this.nodeMap[key]) {
+	            var node = this.nodeMap[key];
+	            this.detachFromList(node);
+	            this.prependToList(node);
+	            return node.value;
+	        }
+	    };
+	    LRUCache.prototype.remove = function (key) {
+	        if (this.nodeMap[key]) {
+	            var node = this.nodeMap[key];
+	            this.detachFromList(node);
+	            delete this.nodeMap[key];
+	        }
+	    };
+	    LRUCache.prototype.put = function (key, value) {
+	        if (this.nodeMap[key]) {
+	            this.remove(key);
+	        }
+	        else if (this.size === this.sizeLimit) {
+	            var tailNode = this.removeFromTail();
+	            var key_1 = tailNode.key;
+	            delete this.nodeMap[key_1];
+	        }
+	        var newNode = new LinkedListNode(key, value);
+	        this.nodeMap[key] = newNode;
+	        this.prependToList(newNode);
+	    };
+	    LRUCache.prototype.empty = function () {
+	        var keys = Object.keys(this.nodeMap);
+	        for (var i = 0; i < keys.length; i++) {
+	            var key = keys[i];
+	            var node = this.nodeMap[key];
+	            this.detachFromList(node);
+	            delete this.nodeMap[key];
+	        }
+	    };
+	    return LRUCache;
+	}());
+	exports.LRUCache = LRUCache;
+
+/***/ }),
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
-	var Api = __webpack_require__(28);
-	var regionConfig = __webpack_require__(34);
+
+	/**
+	 * @api private
+	 * @!method on(eventName, callback)
+	 *   Registers an event listener callback for the event given by `eventName`.
+	 *   Parameters passed to the callback function depend on the individual event
+	 *   being triggered. See the event documentation for those parameters.
+	 *
+	 *   @param eventName [String] the event name to register the listener for
+	 *   @param callback [Function] the listener callback function
+	 *   @param toHead [Boolean] attach the listener callback to the head of callback array if set to true.
+	 *     Default to be false.
+	 *   @return [AWS.SequentialExecutor] the same object for chaining
+	 */
+	AWS.SequentialExecutor = AWS.util.inherit({
+
+	  constructor: function SequentialExecutor() {
+	    this._events = {};
+	  },
+
+	  /**
+	   * @api private
+	   */
+	  listeners: function listeners(eventName) {
+	    return this._events[eventName] ? this._events[eventName].slice(0) : [];
+	  },
+
+	  on: function on(eventName, listener, toHead) {
+	    if (this._events[eventName]) {
+	      toHead ?
+	        this._events[eventName].unshift(listener) :
+	        this._events[eventName].push(listener);
+	    } else {
+	      this._events[eventName] = [listener];
+	    }
+	    return this;
+	  },
+
+	  onAsync: function onAsync(eventName, listener, toHead) {
+	    listener._isAsync = true;
+	    return this.on(eventName, listener, toHead);
+	  },
+
+	  removeListener: function removeListener(eventName, listener) {
+	    var listeners = this._events[eventName];
+	    if (listeners) {
+	      var length = listeners.length;
+	      var position = -1;
+	      for (var i = 0; i < length; ++i) {
+	        if (listeners[i] === listener) {
+	          position = i;
+	        }
+	      }
+	      if (position > -1) {
+	        listeners.splice(position, 1);
+	      }
+	    }
+	    return this;
+	  },
+
+	  removeAllListeners: function removeAllListeners(eventName) {
+	    if (eventName) {
+	      delete this._events[eventName];
+	    } else {
+	      this._events = {};
+	    }
+	    return this;
+	  },
+
+	  /**
+	   * @api private
+	   */
+	  emit: function emit(eventName, eventArgs, doneCallback) {
+	    if (!doneCallback) doneCallback = function() { };
+	    var listeners = this.listeners(eventName);
+	    var count = listeners.length;
+	    this.callListeners(listeners, eventArgs, doneCallback);
+	    return count > 0;
+	  },
+
+	  /**
+	   * @api private
+	   */
+	  callListeners: function callListeners(listeners, args, doneCallback, prevError) {
+	    var self = this;
+	    var error = prevError || null;
+
+	    function callNextListener(err) {
+	      if (err) {
+	        error = AWS.util.error(error || new Error(), err);
+	        if (self._haltHandlersOnError) {
+	          return doneCallback.call(self, error);
+	        }
+	      }
+	      self.callListeners(listeners, args, doneCallback, error);
+	    }
+
+	    while (listeners.length > 0) {
+	      var listener = listeners.shift();
+	      if (listener._isAsync) { // asynchronous listener
+	        listener.apply(self, args.concat([callNextListener]));
+	        return; // stop here, callNextListener will continue
+	      } else { // synchronous listener
+	        try {
+	          listener.apply(self, args);
+	        } catch (err) {
+	          error = AWS.util.error(error || new Error(), err);
+	        }
+	        if (error && self._haltHandlersOnError) {
+	          doneCallback.call(self, error);
+	          return;
+	        }
+	      }
+	    }
+	    doneCallback.call(self, error);
+	  },
+
+	  /**
+	   * Adds or copies a set of listeners from another list of
+	   * listeners or SequentialExecutor object.
+	   *
+	   * @param listeners [map<String,Array<Function>>, AWS.SequentialExecutor]
+	   *   a list of events and callbacks, or an event emitter object
+	   *   containing listeners to add to this emitter object.
+	   * @return [AWS.SequentialExecutor] the emitter object, for chaining.
+	   * @example Adding listeners from a map of listeners
+	   *   emitter.addListeners({
+	   *     event1: [function() { ... }, function() { ... }],
+	   *     event2: [function() { ... }]
+	   *   });
+	   *   emitter.emit('event1'); // emitter has event1
+	   *   emitter.emit('event2'); // emitter has event2
+	   * @example Adding listeners from another emitter object
+	   *   var emitter1 = new AWS.SequentialExecutor();
+	   *   emitter1.on('event1', function() { ... });
+	   *   emitter1.on('event2', function() { ... });
+	   *   var emitter2 = new AWS.SequentialExecutor();
+	   *   emitter2.addListeners(emitter1);
+	   *   emitter2.emit('event1'); // emitter2 has event1
+	   *   emitter2.emit('event2'); // emitter2 has event2
+	   */
+	  addListeners: function addListeners(listeners) {
+	    var self = this;
+
+	    // extract listeners if parameter is an SequentialExecutor object
+	    if (listeners._events) listeners = listeners._events;
+
+	    AWS.util.each(listeners, function(event, callbacks) {
+	      if (typeof callbacks === 'function') callbacks = [callbacks];
+	      AWS.util.arrayEach(callbacks, function(callback) {
+	        self.on(event, callback);
+	      });
+	    });
+
+	    return self;
+	  },
+
+	  /**
+	   * Registers an event with {on} and saves the callback handle function
+	   * as a property on the emitter object using a given `name`.
+	   *
+	   * @param name [String] the property name to set on this object containing
+	   *   the callback function handle so that the listener can be removed in
+	   *   the future.
+	   * @param (see on)
+	   * @return (see on)
+	   * @example Adding a named listener DATA_CALLBACK
+	   *   var listener = function() { doSomething(); };
+	   *   emitter.addNamedListener('DATA_CALLBACK', 'data', listener);
+	   *
+	   *   // the following prints: true
+	   *   console.log(emitter.DATA_CALLBACK == listener);
+	   */
+	  addNamedListener: function addNamedListener(name, eventName, callback, toHead) {
+	    this[name] = callback;
+	    this.addListener(eventName, callback, toHead);
+	    return this;
+	  },
+
+	  /**
+	   * @api private
+	   */
+	  addNamedAsyncListener: function addNamedAsyncListener(name, eventName, callback, toHead) {
+	    callback._isAsync = true;
+	    return this.addNamedListener(name, eventName, callback, toHead);
+	  },
+
+	  /**
+	   * Helper method to add a set of named listeners using
+	   * {addNamedListener}. The callback contains a parameter
+	   * with a handle to the `addNamedListener` method.
+	   *
+	   * @callback callback function(add)
+	   *   The callback function is called immediately in order to provide
+	   *   the `add` function to the block. This simplifies the addition of
+	   *   a large group of named listeners.
+	   *   @param add [Function] the {addNamedListener} function to call
+	   *     when registering listeners.
+	   * @example Adding a set of named listeners
+	   *   emitter.addNamedListeners(function(add) {
+	   *     add('DATA_CALLBACK', 'data', function() { ... });
+	   *     add('OTHER', 'otherEvent', function() { ... });
+	   *     add('LAST', 'lastEvent', function() { ... });
+	   *   });
+	   *
+	   *   // these properties are now set:
+	   *   emitter.DATA_CALLBACK;
+	   *   emitter.OTHER;
+	   *   emitter.LAST;
+	   */
+	  addNamedListeners: function addNamedListeners(callback) {
+	    var self = this;
+	    callback(
+	      function() {
+	        self.addNamedListener.apply(self, arguments);
+	      },
+	      function() {
+	        self.addNamedAsyncListener.apply(self, arguments);
+	      }
+	    );
+	    return this;
+	  }
+	});
+
+	/**
+	 * {on} is the prefered method.
+	 * @api private
+	 */
+	AWS.SequentialExecutor.prototype.addListener = AWS.SequentialExecutor.prototype.on;
+
+	/**
+	 * @api private
+	 */
+	module.exports = AWS.SequentialExecutor;
+
+
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {var AWS = __webpack_require__(1);
+	var Api = __webpack_require__(29);
+	var regionConfig = __webpack_require__(38);
+
 	var inherit = AWS.util.inherit;
 	var clientCount = 0;
 
 	/**
 	 * The service class representing an AWS service.
 	 *
-	 * @abstract
+	 * @class_abstract This class is an abstract class.
 	 *
 	 * @!attribute apiVersions
 	 *   @return [Array<String>] the list of API versions supported by this service.
@@ -3546,16 +4245,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  initialize: function initialize(config) {
 	    var svcConfig = AWS.config[this.serviceIdentifier];
-
 	    this.config = new AWS.Config(AWS.config);
 	    if (svcConfig) this.config.update(svcConfig, true);
 	    if (config) this.config.update(config, true);
 
 	    this.validateService();
-	    if (!this.config.endpoint) regionConfig(this);
+	    if (!this.config.endpoint) regionConfig.configureEndpoint(this);
 
 	    this.config.endpoint = this.endpointFromTemplate(this.config.endpoint);
 	    this.setEndpoint(this.config.endpoint);
+	    //enable attaching listeners to service client
+	    AWS.SequentialExecutor.call(this);
+	    AWS.Service.addDefaultMonitoringListeners(this);
+	    if ((this.config.clientSideMonitoring || AWS.Service._clientSideMonitoring) && this.publisher) {
+	      var publisher = this.publisher;
+	      this.addNamedListener('PUBLISH_API_CALL', 'apiCall', function PUBLISH_API_CALL(event) {
+	        process.nextTick(function() {publisher.eventHandler(event);});
+	      });
+	      this.addNamedListener('PUBLISH_API_ATTEMPT', 'apiCallAttempt', function PUBLISH_API_ATTEMPT(event) {
+	        process.nextTick(function() {publisher.eventHandler(event);});
+	      });
+	    }
 	  },
 
 	  /**
@@ -3691,7 +4401,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var request = new AWS.Request(this, operation, params);
 	    this.addAllRequestListeners(request);
-
+	    this.attachMonitoringEmitter(request);
 	    if (callback) request.send(callback);
 	    return request;
 	  },
@@ -3775,12 +4485,173 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  /**
+	   * Event recording metrics for a whole API call.
+	   * @returns {object} a subset of api call metrics
+	   * @api private
+	   */
+	  apiCallEvent: function apiCallEvent(request) {
+	    var api = request.service.api.operations[request.operation];
+	    var monitoringEvent = {
+	      Type: 'ApiCall',
+	      Api: api ? api.name : request.operation,
+	      Version: 1,
+	      Service: request.service.api.serviceId || request.service.api.endpointPrefix,
+	      Region: request.httpRequest.region,
+	      MaxRetriesExceeded: 0,
+	      UserAgent: request.httpRequest.getUserAgent(),
+	    };
+	    var response = request.response;
+	    if (response.httpResponse.statusCode) {
+	      monitoringEvent.FinalHttpStatusCode = response.httpResponse.statusCode;
+	    }
+	    if (response.error) {
+	      var error = response.error;
+	      var statusCode = response.httpResponse.statusCode;
+	      if (statusCode > 299) {
+	        if (error.code) monitoringEvent.FinalAwsException = error.code;
+	        if (error.message) monitoringEvent.FinalAwsExceptionMessage = error.message;
+	      } else {
+	        if (error.code || error.name) monitoringEvent.FinalSdkException = error.code || error.name;
+	        if (error.message) monitoringEvent.FinalSdkExceptionMessage = error.message;
+	      }
+	    }
+	    return monitoringEvent;
+	  },
+
+	  /**
+	   * Event recording metrics for an API call attempt.
+	   * @returns {object} a subset of api call attempt metrics
+	   * @api private
+	   */
+	  apiAttemptEvent: function apiAttemptEvent(request) {
+	    var api = request.service.api.operations[request.operation];
+	    var monitoringEvent = {
+	      Type: 'ApiCallAttempt',
+	      Api: api ? api.name : request.operation,
+	      Version: 1,
+	      Service: request.service.api.serviceId || request.service.api.endpointPrefix,
+	      Fqdn: request.httpRequest.endpoint.hostname,
+	      UserAgent: request.httpRequest.getUserAgent(),
+	    };
+	    var response = request.response;
+	    if (response.httpResponse.statusCode) {
+	      monitoringEvent.HttpStatusCode = response.httpResponse.statusCode;
+	    }
+	    if (
+	      !request._unAuthenticated &&
+	      request.service.config.credentials &&
+	      request.service.config.credentials.accessKeyId
+	    ) {
+	      monitoringEvent.AccessKey = request.service.config.credentials.accessKeyId;
+	    }
+	    if (!response.httpResponse.headers) return monitoringEvent;
+	    if (request.httpRequest.headers['x-amz-security-token']) {
+	      monitoringEvent.SessionToken = request.httpRequest.headers['x-amz-security-token'];
+	    }
+	    if (response.httpResponse.headers['x-amzn-requestid']) {
+	      monitoringEvent.XAmznRequestId = response.httpResponse.headers['x-amzn-requestid'];
+	    }
+	    if (response.httpResponse.headers['x-amz-request-id']) {
+	      monitoringEvent.XAmzRequestId = response.httpResponse.headers['x-amz-request-id'];
+	    }
+	    if (response.httpResponse.headers['x-amz-id-2']) {
+	      monitoringEvent.XAmzId2 = response.httpResponse.headers['x-amz-id-2'];
+	    }
+	    return monitoringEvent;
+	  },
+
+	  /**
+	   * Add metrics of failed request.
+	   * @api private
+	   */
+	  attemptFailEvent: function attemptFailEvent(request) {
+	    var monitoringEvent = this.apiAttemptEvent(request);
+	    var response = request.response;
+	    var error = response.error;
+	    if (response.httpResponse.statusCode > 299 ) {
+	      if (error.code) monitoringEvent.AwsException = error.code;
+	      if (error.message) monitoringEvent.AwsExceptionMessage = error.message;
+	    } else {
+	      if (error.code || error.name) monitoringEvent.SdkException = error.code || error.name;
+	      if (error.message) monitoringEvent.SdkExceptionMessage = error.message;
+	    }
+	    return monitoringEvent;
+	  },
+
+	  /**
+	   * Attach listeners to request object to fetch metrics of each request
+	   * and emit data object through \'ApiCall\' and \'ApiCallAttempt\' events.
+	   * @api private
+	   */
+	  attachMonitoringEmitter: function attachMonitoringEmitter(request) {
+	    var attemptTimestamp; //timestamp marking the beginning of a request attempt
+	    var attemptStartRealTime; //Start time of request attempt. Used to calculating attemptLatency
+	    var attemptLatency; //latency from request sent out to http response reaching SDK
+	    var callStartRealTime; //Start time of API call. Used to calculating API call latency
+	    var attemptCount = 0; //request.retryCount is not reliable here
+	    var region; //region cache region for each attempt since it can be updated in plase (e.g. s3)
+	    var callTimestamp; //timestamp when the request is created
+	    var self = this;
+	    var addToHead = true;
+
+	    request.on('validate', function () {
+	      callStartRealTime = AWS.util.realClock.now();
+	      callTimestamp = Date.now();
+	    }, addToHead);
+	    request.on('sign', function () {
+	      attemptStartRealTime = AWS.util.realClock.now();
+	      attemptTimestamp = Date.now();
+	      region = request.httpRequest.region;
+	      attemptCount++;
+	    }, addToHead);
+	    request.on('validateResponse', function() {
+	      attemptLatency = Math.round(AWS.util.realClock.now() - attemptStartRealTime);
+	    });
+	    request.addNamedListener('API_CALL_ATTEMPT', 'success', function API_CALL_ATTEMPT() {
+	      var apiAttemptEvent = self.apiAttemptEvent(request);
+	      apiAttemptEvent.Timestamp = attemptTimestamp;
+	      apiAttemptEvent.AttemptLatency = attemptLatency >= 0 ? attemptLatency : 0;
+	      apiAttemptEvent.Region = region;
+	      self.emit('apiCallAttempt', [apiAttemptEvent]);
+	    });
+	    request.addNamedListener('API_CALL_ATTEMPT_RETRY', 'retry', function API_CALL_ATTEMPT_RETRY() {
+	      var apiAttemptEvent = self.attemptFailEvent(request);
+	      apiAttemptEvent.Timestamp = attemptTimestamp;
+	      //attemptLatency may not be available if fail before response
+	      attemptLatency = attemptLatency ||
+	        Math.round(AWS.util.realClock.now() - attemptStartRealTime);
+	      apiAttemptEvent.AttemptLatency = attemptLatency >= 0 ? attemptLatency : 0;
+	      apiAttemptEvent.Region = region;
+	      self.emit('apiCallAttempt', [apiAttemptEvent]);
+	    });
+	    request.addNamedListener('API_CALL', 'complete', function API_CALL() {
+	      var apiCallEvent = self.apiCallEvent(request);
+	      apiCallEvent.AttemptCount = attemptCount;
+	      if (apiCallEvent.AttemptCount <= 0) return;
+	      apiCallEvent.Timestamp = callTimestamp;
+	      var latency = Math.round(AWS.util.realClock.now() - callStartRealTime);
+	      apiCallEvent.Latency = latency >= 0 ? latency : 0;
+	      var response = request.response;
+	      if (
+	        response.error &&
+	        response.error.retryable &&
+	        typeof response.retryCount === 'number' &&
+	        typeof response.maxRetries === 'number' &&
+	        (response.retryCount >= response.maxRetries)
+	      ) {
+	        apiCallEvent.MaxRetriesExceeded = 1;
+	      }
+	      self.emit('apiCall', [apiCallEvent]);
+	    });
+	  },
+
+	  /**
 	   * Override this method to setup any custom request listeners for each
 	   * new request to the service.
 	   *
-	   * @abstract
+	   * @method_abstract This is an abstract method.
 	   */
-	  setupRequestListeners: function setupRequestListeners() {
+	  setupRequestListeners: function setupRequestListeners(request) {
 	  },
 
 	  /**
@@ -3848,8 +4719,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @api private
 	   */
-	  retryDelays: function retryDelays(retryCount) {
-	    return AWS.util.calculateRetryDelay(retryCount, this.config.retryDelayOptions);
+	  retryDelays: function retryDelays(retryCount, err) {
+	    return AWS.util.calculateRetryDelay(retryCount, this.config.retryDelayOptions, err);
 	  },
 
 	  /**
@@ -3923,7 +4794,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  isClockSkewed: function isClockSkewed(newServerTime) {
 	    if (newServerTime) {
-	      return Math.abs(this.getSkewCorrectedDate().getTime() - newServerTime) >= 30000;
+	      return Math.abs(this.getSkewCorrectedDate().getTime() - newServerTime) >= 300000;
 	    }
 	  },
 
@@ -3932,12 +4803,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  throttledError: function throttledError(error) {
 	    // this logic varies between services
+	    if (error.statusCode === 429) return true;
 	    switch (error.code) {
 	      case 'ProvisionedThroughputExceededException':
 	      case 'Throttling':
 	      case 'ThrottlingException':
 	      case 'RequestLimitExceeded':
 	      case 'RequestThrottled':
+	      case 'RequestThrottledException':
+	      case 'TooManyRequestsException':
+	      case 'TransactionInProgressException': //dynamodb
+	      case 'EC2ThrottledException':
 	        return true;
 	      default:
 	        return false;
@@ -4033,7 +4909,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	      svc.prototype.api = serviceIdentifier;
 	      AWS.Service.defineMethods(svc);
 	    }
-
+	    AWS.SequentialExecutor.call(this.prototype);
+	    //util.clientSideMonitoring is only available in node
+	    if (!this.prototype.publisher && AWS.util.clientSideMonitoring) {
+	      var Publisher = AWS.util.clientSideMonitoring.Publisher;
+	      var configProvider = AWS.util.clientSideMonitoring.configProvider;
+	      var publisherConfig = configProvider();
+	      this.prototype.publisher = new Publisher(publisherConfig);
+	      if (publisherConfig.enabled) {
+	        //if csm is enabled in environment, SDK should send all metrics
+	        AWS.Service._clientSideMonitoring = true;
+	      }
+	    }
+	    AWS.SequentialExecutor.call(svc.prototype);
+	    AWS.Service.addDefaultMonitoringListeners(svc.prototype);
 	    return svc;
 	  },
 
@@ -4065,7 +4954,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (api.isApi) {
 	        svc.prototype.api = api;
 	      } else {
-	        svc.prototype.api = new Api(api);
+	        svc.prototype.api = new Api(api, {
+	          serviceIdentifier: superclass.serviceIdentifier
+	        });
 	      }
 	    }
 
@@ -4102,23 +4993,45 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 
 	  /**
+	   * @param attachOn attach default monitoring listeners to object
+	   *
+	   * Each monitoring event should be emitted from service client to service constructor prototype and then
+	   * to global service prototype like bubbling up. These default monitoring events listener will transfer
+	   * the monitoring events to the upper layer.
+	   * @api private
+	   */
+	  addDefaultMonitoringListeners: function addDefaultMonitoringListeners(attachOn) {
+	    attachOn.addNamedListener('MONITOR_EVENTS_BUBBLE', 'apiCallAttempt', function EVENTS_BUBBLE(event) {
+	      var baseClass = Object.getPrototypeOf(attachOn);
+	      if (baseClass._events) baseClass.emit('apiCallAttempt', [event]);
+	    });
+	    attachOn.addNamedListener('CALL_EVENTS_BUBBLE', 'apiCall', function CALL_EVENTS_BUBBLE(event) {
+	      var baseClass = Object.getPrototypeOf(attachOn);
+	      if (baseClass._events) baseClass.emit('apiCall', [event]);
+	    });
+	  },
+
+	  /**
 	   * @api private
 	   */
 	  _serviceMap: {}
 	});
+
+	AWS.util.mixin(AWS.Service, AWS.SequentialExecutor);
 
 	/**
 	 * @api private
 	 */
 	module.exports = AWS.Service;
 
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 34 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var util = __webpack_require__(2);
-	var regionConfig = __webpack_require__(35);
+	var regionConfig = __webpack_require__(39);
 
 	function generateRegionPrefix(region) {
 	  if (!region) return null;
@@ -4169,11 +5082,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // set dualstack endpoint
 	      if (service.config.useDualstack && util.isDualstackAvailable(service)) {
 	        config = util.copy(config);
-	        config.endpoint = '{service}.dualstack.{region}.amazonaws.com';
+	        config.endpoint = config.endpoint.replace(
+	          /{service}\.({region}\.)?/,
+	          '{service}.dualstack.{region}.'
+	        );
 	      }
 
 	      // set global endpoint
 	      service.isGlobalEndpoint = !!config.globalEndpoint;
+	      if (config.signingRegion) {
+	        service.signingRegion = config.signingRegion;
+	      }
 
 	      // signature version
 	      if (!config.signatureVersion) config.signatureVersion = 'v4';
@@ -4185,25 +5104,46 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	}
 
+	function getEndpointSuffix(region) {
+	  var regionRegexes = {
+	    '^(us|eu|ap|sa|ca|me)\\-\\w+\\-\\d+$': 'amazonaws.com',
+	    '^cn\\-\\w+\\-\\d+$': 'amazonaws.com.cn',
+	    '^us\\-gov\\-\\w+\\-\\d+$': 'amazonaws.com',
+	    '^us\\-iso\\-\\w+\\-\\d+$': 'c2s.ic.gov',
+	    '^us\\-isob\\-\\w+\\-\\d+$': 'sc2s.sgov.gov'
+	  };
+	  var defaultSuffix = 'amazonaws.com';
+	  var regexes = Object.keys(regionRegexes);
+	  for (var i = 0; i < regexes.length; i++) {
+	    var regionPattern = RegExp(regexes[i]);
+	    var dnsSuffix = regionRegexes[regexes[i]];
+	    if (regionPattern.test(region)) return dnsSuffix;
+	  }
+	  return defaultSuffix;
+	}
+
 	/**
 	 * @api private
 	 */
-	module.exports = configureEndpoint;
+	module.exports = {
+	  configureEndpoint: configureEndpoint,
+	  getEndpointSuffix: getEndpointSuffix
+	};
 
 
 /***/ }),
-/* 35 */
+/* 39 */
 /***/ (function(module, exports) {
 
-	module.exports = {"rules":{"*/*":{"endpoint":"{service}.{region}.amazonaws.com"},"cn-*/*":{"endpoint":"{service}.{region}.amazonaws.com.cn"},"*/budgets":"globalSSL","*/cloudfront":"globalSSL","*/iam":"globalSSL","*/sts":"globalSSL","*/importexport":{"endpoint":"{service}.amazonaws.com","signatureVersion":"v2","globalEndpoint":true},"*/route53":{"endpoint":"https://{service}.amazonaws.com","signatureVersion":"v3https","globalEndpoint":true},"*/waf":"globalSSL","us-gov-*/iam":"globalGovCloud","us-gov-*/sts":{"endpoint":"{service}.{region}.amazonaws.com"},"us-gov-west-1/s3":"s3signature","us-west-1/s3":"s3signature","us-west-2/s3":"s3signature","eu-west-1/s3":"s3signature","ap-southeast-1/s3":"s3signature","ap-southeast-2/s3":"s3signature","ap-northeast-1/s3":"s3signature","sa-east-1/s3":"s3signature","us-east-1/s3":{"endpoint":"{service}.amazonaws.com","signatureVersion":"s3"},"us-east-1/sdb":{"endpoint":"{service}.amazonaws.com","signatureVersion":"v2"},"*/sdb":{"endpoint":"{service}.{region}.amazonaws.com","signatureVersion":"v2"}},"patterns":{"globalSSL":{"endpoint":"https://{service}.amazonaws.com","globalEndpoint":true},"globalGovCloud":{"endpoint":"{service}.us-gov.amazonaws.com"},"s3signature":{"endpoint":"{service}.{region}.amazonaws.com","signatureVersion":"s3"}}}
+	module.exports = {"rules":{"*/*":{"endpoint":"{service}.{region}.amazonaws.com"},"cn-*/*":{"endpoint":"{service}.{region}.amazonaws.com.cn"},"us-iso-*/*":{"endpoint":"{service}.{region}.c2s.ic.gov"},"us-isob-*/*":{"endpoint":"{service}.{region}.sc2s.sgov.gov"},"*/budgets":"globalSSL","*/cloudfront":"globalSSL","*/sts":"globalSSL","*/importexport":{"endpoint":"{service}.amazonaws.com","signatureVersion":"v2","globalEndpoint":true},"*/route53":"globalSSL","cn-*/route53":{"endpoint":"{service}.amazonaws.com.cn","globalEndpoint":true,"signingRegion":"cn-northwest-1"},"us-gov-*/route53":"globalGovCloud","*/waf":"globalSSL","*/iam":"globalSSL","cn-*/iam":{"endpoint":"{service}.cn-north-1.amazonaws.com.cn","globalEndpoint":true,"signingRegion":"cn-north-1"},"us-gov-*/iam":"globalGovCloud","us-gov-*/sts":{"endpoint":"{service}.{region}.amazonaws.com"},"us-gov-west-1/s3":"s3signature","us-west-1/s3":"s3signature","us-west-2/s3":"s3signature","eu-west-1/s3":"s3signature","ap-southeast-1/s3":"s3signature","ap-southeast-2/s3":"s3signature","ap-northeast-1/s3":"s3signature","sa-east-1/s3":"s3signature","us-east-1/s3":{"endpoint":"{service}.amazonaws.com","signatureVersion":"s3"},"us-east-1/sdb":{"endpoint":"{service}.amazonaws.com","signatureVersion":"v2"},"*/sdb":{"endpoint":"{service}.{region}.amazonaws.com","signatureVersion":"v2"}},"patterns":{"globalSSL":{"endpoint":"https://{service}.amazonaws.com","globalEndpoint":true,"signingRegion":"us-east-1"},"globalGovCloud":{"endpoint":"{service}.us-gov.amazonaws.com","globalEndpoint":true,"signingRegion":"us-gov-west-1"},"s3signature":{"endpoint":"{service}.{region}.amazonaws.com","signatureVersion":"s3"}}}
 
 /***/ }),
-/* 36 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
-	__webpack_require__(37);
-	__webpack_require__(38);
+	__webpack_require__(41);
+	__webpack_require__(42);
 	var PromisesDependency;
 
 	/**
@@ -4285,6 +5225,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *   @return [Boolean] whether to disable S3 body signing when using signature version `v4`.
 	 *     Body signing can only be disabled when using https. Defaults to `true`.
 	 *
+	 * @!attribute s3UsEast1RegionalEndpoint
+	 *   @return ['legacy'|'regional'] when region is set to 'us-east-1', whether to send s3
+	 *     request to global endpoints or 'us-east-1' regional endpoints. This config is only
+	 *     applicable to S3 client;
+	 *     Defaults to 'legacy'
+	 * @!attribute s3UseArnRegion
+	 *   @return [Boolean] whether to override the request region with the region inferred
+	 *     from requested resource's ARN. Only available for S3 buckets
+	 *     Defaults to `true`
+	 *
 	 * @!attribute useAccelerateEndpoint
 	 *   @note This configuration option is only compatible with S3 while accessing
 	 *     dns-compatible buckets.
@@ -4296,7 +5246,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *     AWS.config.update({retryDelayOptions: {base: 300}});
 	 *     // Delays with maxRetries = 3: 300, 600, 1200
 	 *   @example Set a custom backoff function to provide delay values on retries
-	 *     AWS.config.update({retryDelayOptions: {customBackoff: function(retryCount) {
+	 *     AWS.config.update({retryDelayOptions: {customBackoff: function(retryCount, err) {
 	 *       // returns delay in ms
 	 *     }}});
 	 *   @return [map] A set of options to configure the retry delay on retryable errors.
@@ -4305,9 +5255,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *     * **base** [Integer] &mdash; The base number of milliseconds to use in the
 	 *       exponential backoff for operation retries. Defaults to 100 ms for all services except
 	 *       DynamoDB, where it defaults to 50ms.
-	 *     * **customBackoff ** [function] &mdash; A custom function that accepts a retry count
-	 *       and returns the amount of time to delay in milliseconds. The `base` option will be
-	 *       ignored if this option is supplied.
+	 *
+	 *     * **customBackoff ** [function] &mdash; A custom function that accepts a
+	 *       retry count and error and returns the amount of time to delay in
+	 *       milliseconds. If the result is a non-zero negative value, no further
+	 *       retry attempts will be made. The `base` option will be ignored if this
+	 *       option is supplied.
 	 *
 	 * @!attribute httpOptions
 	 *   @return [map] A set of options to pass to the low-level HTTP request.
@@ -4315,8 +5268,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 *     * **proxy** [String] &mdash; the URL to proxy requests through
 	 *     * **agent** [http.Agent, https.Agent] &mdash; the Agent object to perform
-	 *       HTTP requests with. Used for connection pooling. Defaults to the global
-	 *       agent (`http.globalAgent`) for non-SSL connections. Note that for
+	 *       HTTP requests with. Used for connection pooling. Note that for
 	 *       SSL connections, a special Agent object is used in order to enable
 	 *       peer certificate verification. This feature is only supported in the
 	 *       Node.js environment.
@@ -4353,6 +5305,30 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *   @return [Boolean] whether the signature to sign requests with (overriding
 	 *     the API configuration) is cached. Only applies to the signature version 'v4'.
 	 *     Defaults to `true`.
+	 *
+	 * @!attribute endpointDiscoveryEnabled
+	 *   @return [Boolean|undefined] whether to call operations with endpoints
+	 *     given by service dynamically. Setting this config to `true` will enable
+	 *     endpoint discovery for all applicable operations. Setting it to `false`
+	 *     will explicitly disable endpoint discovery even though operations that
+	 *     require endpoint discovery will presumably fail. Leaving it to
+	 *     `undefined` means SDK only do endpoint discovery when it's required.
+	 *     Defaults to `undefined`
+	 *
+	 * @!attribute endpointCacheSize
+	 *   @return [Number] the size of the global cache storing endpoints from endpoint
+	 *     discovery operations. Once endpoint cache is created, updating this setting
+	 *     cannot change existing cache size.
+	 *     Defaults to 1000
+	 *
+	 * @!attribute hostPrefixEnabled
+	 *   @return [Boolean] whether to marshal request parameters to the prefix of
+	 *     hostname. Defaults to `true`.
+	 *
+	 * @!attribute stsRegionalEndpoints
+	 *   @return ['legacy'|'regional'] whether to send sts request to global endpoints or
+	 *     regional endpoints.
+	 *     Defaults to 'legacy'
 	 */
 	AWS.Config = AWS.util.inherit({
 	  /**
@@ -4419,6 +5395,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @option options s3DisableBodySigning [Boolean] whether S3 body signing
 	   *   should be disabled when using signature version `v4`. Body signing
 	   *   can only be disabled when using https. Defaults to `true`.
+	   * @option options s3UsEast1RegionalEndpoint ['legacy'|'regional'] when region
+	   *   is set to 'us-east-1', whether to send s3 request to global endpoints or
+	   *   'us-east-1' regional endpoints. This config is only applicable to S3 client.
+	   *   Defaults to `legacy`
+	   * @option options s3UseArnRegion [Boolean] whether to override the request region
+	   *   with the region inferred from requested resource's ARN. Only available for S3 buckets
+	   *   Defaults to `true`
 	   *
 	   * @option options retryDelayOptions [map] A set of options to configure
 	   *   the retry delay on retryable errors. Currently supported options are:
@@ -4426,9 +5409,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *   * **base** [Integer] &mdash; The base number of milliseconds to use in the
 	   *     exponential backoff for operation retries. Defaults to 100 ms for all
 	   *     services except DynamoDB, where it defaults to 50ms.
-	   *   * **customBackoff ** [function] &mdash; A custom function that accepts a retry count
-	   *     and returns the amount of time to delay in milliseconds. The `base` option will be
-	   *     ignored if this option is supplied.
+	   *   * **customBackoff ** [function] &mdash; A custom function that accepts a
+	   *     retry count and error and returns the amount of time to delay in
+	   *     milliseconds. If the result is a non-zero negative value, no further
+	   *     retry attempts will be made. The `base` option will be ignored if this
+	   *     option is supplied.
 	   * @option options httpOptions [map] A set of options to pass to the low-level
 	   *   HTTP request. Currently supported options are:
 	   *
@@ -4477,6 +5462,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *   to the signature version 'v4'. Defaults to `true`.
 	   * @option options dynamoDbCrc32 [Boolean] whether to validate the CRC32
 	   *   checksum of HTTP response bodies returned by DynamoDB. Default: `true`.
+	   * @option options useAccelerateEndpoint [Boolean] Whether to use the
+	   *   S3 Transfer Acceleration endpoint with the S3 service. Default: `false`.
+	   * @option options clientSideMonitoring [Boolean] whether to collect and
+	   *   publish this client's performance metrics of all its API requests.
+	   * @option options endpointDiscoveryEnabled [Boolean|undefined] whether to
+	   *   call operations with endpoints given by service dynamically. Setting this
+	   * config to `true` will enable endpoint discovery for all applicable operations.
+	   *   Setting it to `false` will explicitly disable endpoint discovery even though
+	   *   operations that require endpoint discovery will presumably fail. Leaving it
+	   *   to `undefined` means SDK will only do endpoint discovery when it's required.
+	   *   Defaults to `undefined`
+	   * @option options endpointCacheSize [Number] the size of the global cache storing
+	   *   endpoints from endpoint discovery operations. Once endpoint cache is created,
+	   *   updating this setting cannot change existing cache size.
+	   *   Defaults to 1000
+	   * @option options hostPrefixEnabled [Boolean] whether to marshal request
+	   *   parameters to the prefix of hostname.
+	   *   Defaults to `true`.
+	   * @option options stsRegionalEndpoints ['legacy'|'regional'] whether to send sts request
+	   *   to global endpoints or regional endpoints.
+	   *   Defaults to 'legacy'.
 	   */
 	  constructor: function Config(options) {
 	    if (options === undefined) options = {};
@@ -4684,6 +5690,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    s3ForcePathStyle: false,
 	    s3BucketEndpoint: false,
 	    s3DisableBodySigning: true,
+	    s3UsEast1RegionalEndpoint: 'legacy',
+	    s3UseArnRegion: undefined,
 	    computeChecksums: true,
 	    convertResponseTypes: true,
 	    correctClockSkew: false,
@@ -4693,7 +5701,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    signatureVersion: null,
 	    signatureCache: true,
 	    retryDelayOptions: {},
-	    useAccelerateEndpoint: false
+	    useAccelerateEndpoint: false,
+	    clientSideMonitoring: false,
+	    endpointDiscoveryEnabled: undefined,
+	    endpointCacheSize: 1000,
+	    hostPrefixEnabled: true,
+	    stsRegionalEndpoints: 'legacy'
 	  },
 
 	  /**
@@ -4723,7 +5736,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      PromisesDependency = Promise;
 	    }
 	    var constructors = [AWS.Request, AWS.Credentials, AWS.CredentialProviderChain];
-	    if (AWS.S3 && AWS.S3.ManagedUpload) constructors.push(AWS.S3.ManagedUpload);
+	    if (AWS.S3) {
+	      constructors.push(AWS.S3);
+	      if (AWS.S3.ManagedUpload) {
+	        constructors.push(AWS.S3.ManagedUpload);
+	      }
+	    }
 	    AWS.util.addPromises(constructors, PromisesDependency);
 	  },
 
@@ -4744,7 +5762,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 37 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -4817,6 +5835,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    this.expired = false;
 	    this.expireTime = null;
+	    this.refreshCallbacks = [];
 	    if (arguments.length === 1 && typeof arguments[0] === 'object') {
 	      var creds = arguments[0].credentials || arguments[0];
 	      this.accessKeyId = creds.accessKeyId;
@@ -4941,6 +5960,37 @@ return /******/ (function(modules) { // webpackBootstrap
 	  refresh: function refresh(callback) {
 	    this.expired = false;
 	    callback();
+	  },
+
+	  /**
+	   * @api private
+	   * @param callback
+	   */
+	  coalesceRefresh: function coalesceRefresh(callback, sync) {
+	    var self = this;
+	    if (self.refreshCallbacks.push(callback) === 1) {
+	      self.load(function onLoad(err) {
+	        AWS.util.arrayEach(self.refreshCallbacks, function(callback) {
+	          if (sync) {
+	            callback(err);
+	          } else {
+	            // callback could throw, so defer to ensure all callbacks are notified
+	            AWS.util.defer(function () {
+	              callback(err);
+	            });
+	          }
+	        });
+	        self.refreshCallbacks.length = 0;
+	      });
+	    }
+	  },
+
+	  /**
+	   * @api private
+	   * @param callback
+	   */
+	  load: function load(callback) {
+	    callback();
 	  }
 	});
 
@@ -4964,7 +6014,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 38 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -5023,6 +6073,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    } else {
 	      this.providers = AWS.CredentialProviderChain.defaultProviders.slice(0);
 	    }
+	    this.resolveCallbacks = [];
 	  },
 
 	  /**
@@ -5063,38 +6114,45 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @return [AWS.CredentialProviderChain] the provider, for chaining.
 	   */
 	  resolve: function resolve(callback) {
-	    if (this.providers.length === 0) {
+	    var self = this;
+	    if (self.providers.length === 0) {
 	      callback(new Error('No providers'));
-	      return this;
+	      return self;
 	    }
 
-	    var index = 0;
-	    var providers = this.providers.slice(0);
+	    if (self.resolveCallbacks.push(callback) === 1) {
+	      var index = 0;
+	      var providers = self.providers.slice(0);
 
-	    function resolveNext(err, creds) {
-	      if ((!err && creds) || index === providers.length) {
-	        callback(err, creds);
-	        return;
+	      function resolveNext(err, creds) {
+	        if ((!err && creds) || index === providers.length) {
+	          AWS.util.arrayEach(self.resolveCallbacks, function (callback) {
+	            callback(err, creds);
+	          });
+	          self.resolveCallbacks.length = 0;
+	          return;
+	        }
+
+	        var provider = providers[index++];
+	        if (typeof provider === 'function') {
+	          creds = provider.call();
+	        } else {
+	          creds = provider;
+	        }
+
+	        if (creds.get) {
+	          creds.get(function (getErr) {
+	            resolveNext(getErr, getErr ? null : creds);
+	          });
+	        } else {
+	          resolveNext(null, creds);
+	        }
 	      }
 
-	      var provider = providers[index++];
-	      if (typeof provider === 'function') {
-	        creds = provider.call();
-	      } else {
-	        creds = provider;
-	      }
-
-	      if (creds.get) {
-	        creds.get(function(getErr) {
-	          resolveNext(getErr, getErr ? null : creds);
-	        });
-	      } else {
-	        resolveNext(null, creds);
-	      }
+	      resolveNext();
 	    }
 
-	    resolveNext();
-	    return this;
+	    return self;
 	  }
 	});
 
@@ -5114,12 +6172,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *   function () { return new AWS.EnvironmentCredentials('AWS'); },
 	 *   function () { return new AWS.EnvironmentCredentials('AMAZON'); },
 	 *   function () { return new AWS.SharedIniFileCredentials(); },
-	 *   function () {
-	 *     // if AWS_CONTAINER_CREDENTIALS_RELATIVE_URI is set
-	 *       return new AWS.ECSCredentials();
-	 *     // else
-	 *       return new AWS.EC2MetadataCredentials();
-	 *   }
+	 *   function () { return new AWS.ECSCredentials(); },
+	 *   function () { return new AWS.ProcessCredentials(); },
+	 *   function () { return new AWS.TokenFileWebIdentityCredentials(); },
+	 *   function () { return new AWS.EC2MetadataCredentials() }
 	 * ]
 	 * ```
 	 */
@@ -5143,7 +6199,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 39 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -5299,8 +6355,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return AWS.util.queryParamsToString(query);
 	    }
 	    return '';
-	  }
+	  },
 
+	  /**
+	   * @api private
+	   * update httpRequest endpoint with endpoint string
+	   */
+	  updateEndpoint: function updateEndpoint(endpointStr) {
+	    var newEndpoint = new AWS.Endpoint(endpointStr);
+	    this.endpoint = newEndpoint;
+	    this.path = newEndpoint.path || '/';
+	    if (this.headers['Host']) {
+	      this.headers['Host'] = newEndpoint.host;
+	    }
+	  }
 	});
 
 	/**
@@ -5375,251 +6443,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 40 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
-
-	/**
-	 * @api private
-	 * @!method on(eventName, callback)
-	 *   Registers an event listener callback for the event given by `eventName`.
-	 *   Parameters passed to the callback function depend on the individual event
-	 *   being triggered. See the event documentation for those parameters.
-	 *
-	 *   @param eventName [String] the event name to register the listener for
-	 *   @param callback [Function] the listener callback function
-	 *   @return [AWS.SequentialExecutor] the same object for chaining
-	 */
-	AWS.SequentialExecutor = AWS.util.inherit({
-
-	  constructor: function SequentialExecutor() {
-	    this._events = {};
-	  },
-
-	  /**
-	   * @api private
-	   */
-	  listeners: function listeners(eventName) {
-	    return this._events[eventName] ? this._events[eventName].slice(0) : [];
-	  },
-
-	  on: function on(eventName, listener) {
-	    if (this._events[eventName]) {
-	      this._events[eventName].push(listener);
-	    } else {
-	      this._events[eventName] = [listener];
-	    }
-	    return this;
-	  },
-
-	  /**
-	   * @api private
-	   */
-	  onAsync: function onAsync(eventName, listener) {
-	    listener._isAsync = true;
-	    return this.on(eventName, listener);
-	  },
-
-	  removeListener: function removeListener(eventName, listener) {
-	    var listeners = this._events[eventName];
-	    if (listeners) {
-	      var length = listeners.length;
-	      var position = -1;
-	      for (var i = 0; i < length; ++i) {
-	        if (listeners[i] === listener) {
-	          position = i;
-	        }
-	      }
-	      if (position > -1) {
-	        listeners.splice(position, 1);
-	      }
-	    }
-	    return this;
-	  },
-
-	  removeAllListeners: function removeAllListeners(eventName) {
-	    if (eventName) {
-	      delete this._events[eventName];
-	    } else {
-	      this._events = {};
-	    }
-	    return this;
-	  },
-
-	  /**
-	   * @api private
-	   */
-	  emit: function emit(eventName, eventArgs, doneCallback) {
-	    if (!doneCallback) doneCallback = function() { };
-	    var listeners = this.listeners(eventName);
-	    var count = listeners.length;
-	    this.callListeners(listeners, eventArgs, doneCallback);
-	    return count > 0;
-	  },
-
-	  /**
-	   * @api private
-	   */
-	  callListeners: function callListeners(listeners, args, doneCallback, prevError) {
-	    var self = this;
-	    var error = prevError || null;
-
-	    function callNextListener(err) {
-	      if (err) {
-	        error = AWS.util.error(error || new Error(), err);
-	        if (self._haltHandlersOnError) {
-	          return doneCallback.call(self, error);
-	        }
-	      }
-	      self.callListeners(listeners, args, doneCallback, error);
-	    }
-
-	    while (listeners.length > 0) {
-	      var listener = listeners.shift();
-	      if (listener._isAsync) { // asynchronous listener
-	        listener.apply(self, args.concat([callNextListener]));
-	        return; // stop here, callNextListener will continue
-	      } else { // synchronous listener
-	        try {
-	          listener.apply(self, args);
-	        } catch (err) {
-	          error = AWS.util.error(error || new Error(), err);
-	        }
-	        if (error && self._haltHandlersOnError) {
-	          doneCallback.call(self, error);
-	          return;
-	        }
-	      }
-	    }
-	    doneCallback.call(self, error);
-	  },
-
-	  /**
-	   * Adds or copies a set of listeners from another list of
-	   * listeners or SequentialExecutor object.
-	   *
-	   * @param listeners [map<String,Array<Function>>, AWS.SequentialExecutor]
-	   *   a list of events and callbacks, or an event emitter object
-	   *   containing listeners to add to this emitter object.
-	   * @return [AWS.SequentialExecutor] the emitter object, for chaining.
-	   * @example Adding listeners from a map of listeners
-	   *   emitter.addListeners({
-	   *     event1: [function() { ... }, function() { ... }],
-	   *     event2: [function() { ... }]
-	   *   });
-	   *   emitter.emit('event1'); // emitter has event1
-	   *   emitter.emit('event2'); // emitter has event2
-	   * @example Adding listeners from another emitter object
-	   *   var emitter1 = new AWS.SequentialExecutor();
-	   *   emitter1.on('event1', function() { ... });
-	   *   emitter1.on('event2', function() { ... });
-	   *   var emitter2 = new AWS.SequentialExecutor();
-	   *   emitter2.addListeners(emitter1);
-	   *   emitter2.emit('event1'); // emitter2 has event1
-	   *   emitter2.emit('event2'); // emitter2 has event2
-	   */
-	  addListeners: function addListeners(listeners) {
-	    var self = this;
-
-	    // extract listeners if parameter is an SequentialExecutor object
-	    if (listeners._events) listeners = listeners._events;
-
-	    AWS.util.each(listeners, function(event, callbacks) {
-	      if (typeof callbacks === 'function') callbacks = [callbacks];
-	      AWS.util.arrayEach(callbacks, function(callback) {
-	        self.on(event, callback);
-	      });
-	    });
-
-	    return self;
-	  },
-
-	  /**
-	   * Registers an event with {on} and saves the callback handle function
-	   * as a property on the emitter object using a given `name`.
-	   *
-	   * @param name [String] the property name to set on this object containing
-	   *   the callback function handle so that the listener can be removed in
-	   *   the future.
-	   * @param (see on)
-	   * @return (see on)
-	   * @example Adding a named listener DATA_CALLBACK
-	   *   var listener = function() { doSomething(); };
-	   *   emitter.addNamedListener('DATA_CALLBACK', 'data', listener);
-	   *
-	   *   // the following prints: true
-	   *   console.log(emitter.DATA_CALLBACK == listener);
-	   */
-	  addNamedListener: function addNamedListener(name, eventName, callback) {
-	    this[name] = callback;
-	    this.addListener(eventName, callback);
-	    return this;
-	  },
-
-	  /**
-	   * @api private
-	   */
-	  addNamedAsyncListener: function addNamedAsyncListener(name, eventName, callback) {
-	    callback._isAsync = true;
-	    return this.addNamedListener(name, eventName, callback);
-	  },
-
-	  /**
-	   * Helper method to add a set of named listeners using
-	   * {addNamedListener}. The callback contains a parameter
-	   * with a handle to the `addNamedListener` method.
-	   *
-	   * @callback callback function(add)
-	   *   The callback function is called immediately in order to provide
-	   *   the `add` function to the block. This simplifies the addition of
-	   *   a large group of named listeners.
-	   *   @param add [Function] the {addNamedListener} function to call
-	   *     when registering listeners.
-	   * @example Adding a set of named listeners
-	   *   emitter.addNamedListeners(function(add) {
-	   *     add('DATA_CALLBACK', 'data', function() { ... });
-	   *     add('OTHER', 'otherEvent', function() { ... });
-	   *     add('LAST', 'lastEvent', function() { ... });
-	   *   });
-	   *
-	   *   // these properties are now set:
-	   *   emitter.DATA_CALLBACK;
-	   *   emitter.OTHER;
-	   *   emitter.LAST;
-	   */
-	  addNamedListeners: function addNamedListeners(callback) {
-	    var self = this;
-	    callback(
-	      function() {
-	        self.addNamedListener.apply(self, arguments);
-	      },
-	      function() {
-	        self.addNamedAsyncListener.apply(self, arguments);
-	      }
-	    );
-	    return this;
-	  }
-	});
-
-	/**
-	 * {on} is the prefered method.
-	 * @api private
-	 */
-	AWS.SequentialExecutor.prototype.addListener = AWS.SequentialExecutor.prototype.on;
-
-	/**
-	 * @api private
-	 */
-	module.exports = AWS.SequentialExecutor;
-
-
-/***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var AWS = __webpack_require__(1);
-	var SequentialExecutor = __webpack_require__(40);
+	var SequentialExecutor = __webpack_require__(36);
+	var DISCOVER_ENDPOINT = __webpack_require__(45).discoverEndpoint;
 	/**
 	 * The namespace used to register global event listeners for request building
 	 * and sending.
@@ -5696,11 +6525,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  Core: new SequentialExecutor().addNamedListeners(function(add, addAsync) {
 	    addAsync('VALIDATE_CREDENTIALS', 'validate',
 	        function VALIDATE_CREDENTIALS(req, done) {
-	      if (!req.service.api.signatureVersion) return done(); // none
+	      if (!req.service.api.signatureVersion && !req.service.config.signatureVersion) return done(); // none
 	      req.service.config.getCredentials(function(err) {
 	        if (err) {
 	          req.response.error = AWS.util.error(err,
-	            {code: 'CredentialsError', message: 'Missing credentials in config'});
+	            {code: 'CredentialsError', message: 'Missing credentials in config, if using AWS_CONFIG_FILE, set AWS_SDK_LOAD_CONFIG=1'});
 	        }
 	        done();
 	      });
@@ -5752,7 +6581,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	      var operation = req.service.api.operations[req.operation];
 	      var authtype = operation ? operation.authtype : '';
-	      if (!req.service.api.signatureVersion && !authtype) return done(); // none
+	      if (!req.service.api.signatureVersion && !authtype && !req.service.config.signatureVersion) return done(); // none
 	      if (req.service.getSignerClass(req) === AWS.Signers.V4) {
 	        var body = req.httpRequest.body || '';
 	        if (authtype.indexOf('unsigned-body') >= 0) {
@@ -5775,17 +6604,25 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    add('SET_CONTENT_LENGTH', 'afterBuild', function SET_CONTENT_LENGTH(req) {
 	      var authtype = getOperationAuthtype(req);
+	      var payloadMember = AWS.util.getRequestPayloadShape(req);
 	      if (req.httpRequest.headers['Content-Length'] === undefined) {
 	        try {
 	          var length = AWS.util.string.byteLength(req.httpRequest.body);
 	          req.httpRequest.headers['Content-Length'] = length;
 	        } catch (err) {
-	          if (authtype.indexOf('unsigned-body') === -1) {
-	            throw err;
-	          } else {
-	            // Body isn't signed and may not need content length (lex)
-	            return;
+	          if (payloadMember && payloadMember.isStreaming) {
+	            if (payloadMember.requiresLength) {
+	              //streaming payload requires length(s3, glacier)
+	              throw err;
+	            } else if (authtype.indexOf('unsigned-body') >= 0) {
+	              //unbounded streaming payload(lex, mediastore)
+	              req.httpRequest.headers['Transfer-Encoding'] = 'chunked';
+	              return;
+	            } else {
+	              throw err;
+	            }
 	          }
+	          throw err;
 	        }
 	      }
 	    });
@@ -5810,12 +6647,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    });
 
+	    var addToHead = true;
+	    addAsync('DISCOVER_ENDPOINT', 'sign', DISCOVER_ENDPOINT, addToHead);
+
 	    addAsync('SIGN', 'sign', function SIGN(req, done) {
 	      var service = req.service;
 	      var operations = req.service.api.operations || {};
 	      var operation = operations[req.operation];
 	      var authtype = operation ? operation.authtype : '';
-	      if (!service.api.signatureVersion && !authtype) return done(); // none
+	      if (!service.api.signatureVersion && !authtype && !service.config.signatureVersion) return done(); // none
 
 	      service.config.getCredentials(function (err, credentials) {
 	        if (err) {
@@ -5830,7 +6670,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            service.api.signingName || service.api.endpointPrefix,
 	            {
 	              signatureCache: service.config.signatureCache,
-	              operation: operation
+	              operation: operation,
+	              signatureVersion: service.api.signatureVersion
 	            });
 	          signer.setServiceClientId(service._clientId);
 
@@ -5969,7 +6810,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      resp.httpResponse.statusCode = statusCode;
 	      resp.httpResponse.statusMessage = statusMessage;
 	      resp.httpResponse.headers = headers;
-	      resp.httpResponse.body = new AWS.util.Buffer('');
+	      resp.httpResponse.body = AWS.util.buffer.toBuffer('');
 	      resp.httpResponse.buffers = [];
 	      resp.httpResponse.numBytes = 0;
 	      var dateHeader = headers.date || headers.Date;
@@ -5993,7 +6834,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          resp.request.emit('httpDownloadProgress', [progress, resp]);
 	        }
 
-	        resp.httpResponse.buffers.push(new AWS.util.Buffer(chunk));
+	        resp.httpResponse.buffers.push(AWS.util.buffer.toBuffer(chunk));
 	      }
 	    });
 
@@ -6061,7 +6902,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (resp.error.redirect && resp.redirectCount < resp.maxRedirects) {
 	          resp.error.retryDelay = 0;
 	        } else if (resp.retryCount < resp.maxRetries) {
-	          resp.error.retryDelay = this.service.retryDelays(resp.retryCount) || 0;
+	          resp.error.retryDelay = this.service.retryDelays(resp.retryCount, resp.error) || 0;
 	        }
 	      }
 	    });
@@ -6080,7 +6921,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	      }
 
-	      if (willRetry) {
+	      // delay < 0 is a signal from customBackoff to skip retries
+	      if (willRetry && delay >= 0) {
 	        resp.error = null;
 	        setTimeout(done, delay);
 	      } else {
@@ -6127,23 +6969,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	              } else {
 	                struct[subShapeName] = subShape;
 	              }
-	            })
-	            return struct
+	            });
+	            return struct;
 	          case 'list':
 	            var list = [];
 	            AWS.util.arrayEach(shape, function(subShape, index) {
 	              list.push(filterSensitiveLog(inputShape.member, subShape));
-	            })
+	            });
 	            return list;
 	          case 'map':
 	            var map = {};
 	            AWS.util.each(shape, function(key, value) {
 	              map[key] = filterSensitiveLog(inputShape.value, value);
-	            })
+	            });
 	            return map;
 	          default:
 	            if (inputShape.isSensitive) {
-	              return '***SensitiveInformation***'
+	              return '***SensitiveInformation***';
 	            } else {
 	              return shape;
 	            }
@@ -6164,7 +7006,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          var inputShape = req.service.api.operations[req.operation].input;
 	          censoredParams = filterSensitiveLog(inputShape, req.params);
 	        }
-	        var params = __webpack_require__(42).inspect(censoredParams, true, null);
+	        var params = __webpack_require__(46).inspect(censoredParams, true, null);
 	        var message = '';
 	        if (ansi) message += '\x1B[33m';
 	        message += '[AWS ' + req.service.serviceIdentifier + ' ' + status;
@@ -6193,28 +7035,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }),
 
 	  Rest: new SequentialExecutor().addNamedListeners(function(add) {
-	    var svc = __webpack_require__(20);
-	    add('BUILD', 'build', svc.buildRequest);
-	    add('EXTRACT_DATA', 'extractData', svc.extractData);
-	    add('EXTRACT_ERROR', 'extractError', svc.extractError);
-	  }),
-
-	  RestJson: new SequentialExecutor().addNamedListeners(function(add) {
 	    var svc = __webpack_require__(21);
 	    add('BUILD', 'build', svc.buildRequest);
 	    add('EXTRACT_DATA', 'extractData', svc.extractData);
 	    add('EXTRACT_ERROR', 'extractError', svc.extractError);
 	  }),
 
-	  RestXml: new SequentialExecutor().addNamedListeners(function(add) {
+	  RestJson: new SequentialExecutor().addNamedListeners(function(add) {
 	    var svc = __webpack_require__(22);
 	    add('BUILD', 'build', svc.buildRequest);
 	    add('EXTRACT_DATA', 'extractData', svc.extractData);
 	    add('EXTRACT_ERROR', 'extractError', svc.extractError);
 	  }),
 
+	  RestXml: new SequentialExecutor().addNamedListeners(function(add) {
+	    var svc = __webpack_require__(23);
+	    add('BUILD', 'build', svc.buildRequest);
+	    add('EXTRACT_DATA', 'extractData', svc.extractData);
+	    add('EXTRACT_ERROR', 'extractError', svc.extractError);
+	  }),
+
 	  Query: new SequentialExecutor().addNamedListeners(function(add) {
-	    var svc = __webpack_require__(16);
+	    var svc = __webpack_require__(17);
 	    add('BUILD', 'build', svc.buildRequest);
 	    add('EXTRACT_DATA', 'extractData', svc.extractData);
 	    add('EXTRACT_ERROR', 'extractError', svc.extractError);
@@ -6223,7 +7065,391 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 42 */
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {var AWS = __webpack_require__(1);
+	var util = __webpack_require__(2);
+	var endpointDiscoveryEnabledEnvs = ['AWS_ENABLE_ENDPOINT_DISCOVERY', 'AWS_ENDPOINT_DISCOVERY_ENABLED'];
+
+	/**
+	 * Generate key (except resources and operation part) to index the endpoints in the cache
+	 * If input shape has endpointdiscoveryid trait then use
+	 *   accessKey + operation + resources + region + service as cache key
+	 * If input shape doesn't have endpointdiscoveryid trait then use
+	 *   accessKey + region + service as cache key
+	 * @return [map<String,String>] object with keys to index endpoints.
+	 * @api private
+	 */
+	function getCacheKey(request) {
+	  var service = request.service;
+	  var api = service.api || {};
+	  var operations = api.operations;
+	  var identifiers = {};
+	  if (service.config.region) {
+	    identifiers.region = service.config.region;
+	  }
+	  if (api.serviceId) {
+	    identifiers.serviceId = api.serviceId;
+	  }
+	  if (service.config.credentials.accessKeyId) {
+	    identifiers.accessKeyId = service.config.credentials.accessKeyId;
+	  }
+	  return identifiers;
+	}
+
+	/**
+	 * Recursive helper for marshallCustomIdentifiers().
+	 * Looks for required string input members that have 'endpointdiscoveryid' trait.
+	 * @api private
+	 */
+	function marshallCustomIdentifiersHelper(result, params, shape) {
+	  if (!shape || params === undefined || params === null) return;
+	  if (shape.type === 'structure' && shape.required && shape.required.length > 0) {
+	    util.arrayEach(shape.required, function(name) {
+	      var memberShape = shape.members[name];
+	      if (memberShape.endpointDiscoveryId === true) {
+	        var locationName = memberShape.isLocationName ? memberShape.name : name;
+	        result[locationName] = String(params[name]);
+	      } else {
+	        marshallCustomIdentifiersHelper(result, params[name], memberShape);
+	      }
+	    });
+	  }
+	}
+
+	/**
+	 * Get custom identifiers for cache key.
+	 * Identifies custom identifiers by checking each shape's `endpointDiscoveryId` trait.
+	 * @param [object] request object
+	 * @param [object] input shape of the given operation's api
+	 * @api private
+	 */
+	function marshallCustomIdentifiers(request, shape) {
+	  var identifiers = {};
+	  marshallCustomIdentifiersHelper(identifiers, request.params, shape);
+	  return identifiers;
+	}
+
+	/**
+	 * Call endpoint discovery operation when it's optional.
+	 * When endpoint is available in cache then use the cached endpoints. If endpoints
+	 * are unavailable then use regional endpoints and call endpoint discovery operation
+	 * asynchronously. This is turned off by default.
+	 * @param [object] request object
+	 * @api private
+	 */
+	function optionalDiscoverEndpoint(request) {
+	  var service = request.service;
+	  var api = service.api;
+	  var operationModel = api.operations ? api.operations[request.operation] : undefined;
+	  var inputShape = operationModel ? operationModel.input : undefined;
+
+	  var identifiers = marshallCustomIdentifiers(request, inputShape);
+	  var cacheKey = getCacheKey(request);
+	  if (Object.keys(identifiers).length > 0) {
+	    cacheKey = util.update(cacheKey, identifiers);
+	    if (operationModel) cacheKey.operation = operationModel.name;
+	  }
+	  var endpoints = AWS.endpointCache.get(cacheKey);
+	  if (endpoints && endpoints.length === 1 && endpoints[0].Address === '') {
+	    //endpoint operation is being made but response not yet received
+	    //or endpoint operation just failed in 1 minute
+	    return;
+	  } else if (endpoints && endpoints.length > 0) {
+	    //found endpoint record from cache
+	    request.httpRequest.updateEndpoint(endpoints[0].Address);
+	  } else {
+	    //endpoint record not in cache or outdated. make discovery operation
+	    var endpointRequest = service.makeRequest(api.endpointOperation, {
+	      Operation: operationModel.name,
+	      Identifiers: identifiers,
+	    });
+	    addApiVersionHeader(endpointRequest);
+	    endpointRequest.removeListener('validate', AWS.EventListeners.Core.VALIDATE_PARAMETERS);
+	    endpointRequest.removeListener('retry', AWS.EventListeners.Core.RETRY_CHECK);
+	    //put in a placeholder for endpoints already requested, prevent
+	    //too much in-flight calls
+	    AWS.endpointCache.put(cacheKey, [{
+	      Address: '',
+	      CachePeriodInMinutes: 1
+	    }]);
+	    endpointRequest.send(function(err, data) {
+	      if (data && data.Endpoints) {
+	        AWS.endpointCache.put(cacheKey, data.Endpoints);
+	      } else if (err) {
+	        AWS.endpointCache.put(cacheKey, [{
+	          Address: '',
+	          CachePeriodInMinutes: 1 //not to make more endpoint operation in next 1 minute
+	        }]);
+	      }
+	    });
+	  }
+	}
+
+	var requestQueue = {};
+
+	/**
+	 * Call endpoint discovery operation when it's required.
+	 * When endpoint is available in cache then use cached ones. If endpoints are
+	 * unavailable then SDK should call endpoint operation then use returned new
+	 * endpoint for the api call. SDK will automatically attempt to do endpoint
+	 * discovery. This is turned off by default
+	 * @param [object] request object
+	 * @api private
+	 */
+	function requiredDiscoverEndpoint(request, done) {
+	  var service = request.service;
+	  var api = service.api;
+	  var operationModel = api.operations ? api.operations[request.operation] : undefined;
+	  var inputShape = operationModel ? operationModel.input : undefined;
+
+	  var identifiers = marshallCustomIdentifiers(request, inputShape);
+	  var cacheKey = getCacheKey(request);
+	  if (Object.keys(identifiers).length > 0) {
+	    cacheKey = util.update(cacheKey, identifiers);
+	    if (operationModel) cacheKey.operation = operationModel.name;
+	  }
+	  var cacheKeyStr = AWS.EndpointCache.getKeyString(cacheKey);
+	  var endpoints = AWS.endpointCache.get(cacheKeyStr); //endpoint cache also accepts string keys
+	  if (endpoints && endpoints.length === 1 && endpoints[0].Address === '') {
+	    //endpoint operation is being made but response not yet received
+	    //push request object to a pending queue
+	    if (!requestQueue[cacheKeyStr]) requestQueue[cacheKeyStr] = [];
+	    requestQueue[cacheKeyStr].push({request: request, callback: done});
+	    return;
+	  } else if (endpoints && endpoints.length > 0) {
+	    request.httpRequest.updateEndpoint(endpoints[0].Address);
+	    done();
+	  } else {
+	    var endpointRequest = service.makeRequest(api.endpointOperation, {
+	      Operation: operationModel.name,
+	      Identifiers: identifiers,
+	    });
+	    endpointRequest.removeListener('validate', AWS.EventListeners.Core.VALIDATE_PARAMETERS);
+	    addApiVersionHeader(endpointRequest);
+
+	    //put in a placeholder for endpoints already requested, prevent
+	    //too much in-flight calls
+	    AWS.endpointCache.put(cacheKeyStr, [{
+	      Address: '',
+	      CachePeriodInMinutes: 60 //long-live cache
+	    }]);
+	    endpointRequest.send(function(err, data) {
+	      if (err) {
+	        request.response.error = util.error(err, { retryable: false });
+	        AWS.endpointCache.remove(cacheKey);
+
+	        //fail all the pending requests in batch
+	        if (requestQueue[cacheKeyStr]) {
+	          var pendingRequests = requestQueue[cacheKeyStr];
+	          util.arrayEach(pendingRequests, function(requestContext) {
+	            requestContext.request.response.error = util.error(err, { retryable: false });
+	            requestContext.callback();
+	          });
+	          delete requestQueue[cacheKeyStr];
+	        }
+	      } else if (data) {
+	        AWS.endpointCache.put(cacheKeyStr, data.Endpoints);
+	        request.httpRequest.updateEndpoint(data.Endpoints[0].Address);
+
+	        //update the endpoint for all the pending requests in batch
+	        if (requestQueue[cacheKeyStr]) {
+	          var pendingRequests = requestQueue[cacheKeyStr];
+	          util.arrayEach(pendingRequests, function(requestContext) {
+	            requestContext.request.httpRequest.updateEndpoint(data.Endpoints[0].Address);
+	            requestContext.callback();
+	          });
+	          delete requestQueue[cacheKeyStr];
+	        }
+	      }
+	      done();
+	    });
+	  }
+	}
+
+	/**
+	 * add api version header to endpoint operation
+	 * @api private
+	 */
+	function addApiVersionHeader(endpointRequest) {
+	  var api = endpointRequest.service.api;
+	  var apiVersion = api.apiVersion;
+	  if (apiVersion && !endpointRequest.httpRequest.headers['x-amz-api-version']) {
+	    endpointRequest.httpRequest.headers['x-amz-api-version'] = apiVersion;
+	  }
+	}
+
+	/**
+	 * If api call gets invalid endpoint exception, SDK should attempt to remove the invalid
+	 * endpoint from cache.
+	 * @api private
+	 */
+	function invalidateCachedEndpoints(response) {
+	  var error = response.error;
+	  var httpResponse = response.httpResponse;
+	  if (error &&
+	    (error.code === 'InvalidEndpointException' || httpResponse.statusCode === 421)
+	  ) {
+	    var request = response.request;
+	    var operations = request.service.api.operations || {};
+	    var inputShape = operations[request.operation] ? operations[request.operation].input : undefined;
+	    var identifiers = marshallCustomIdentifiers(request, inputShape);
+	    var cacheKey = getCacheKey(request);
+	    if (Object.keys(identifiers).length > 0) {
+	      cacheKey = util.update(cacheKey, identifiers);
+	      if (operations[request.operation]) cacheKey.operation = operations[request.operation].name;
+	    }
+	    AWS.endpointCache.remove(cacheKey);
+	  }
+	}
+
+	/**
+	 * If endpoint is explicitly configured, SDK should not do endpoint discovery in anytime.
+	 * @param [object] client Service client object.
+	 * @api private
+	 */
+	function hasCustomEndpoint(client) {
+	  //if set endpoint is set for specific client, enable endpoint discovery will raise an error.
+	  if (client._originalConfig && client._originalConfig.endpoint && client._originalConfig.endpointDiscoveryEnabled === true) {
+	    throw util.error(new Error(), {
+	      code: 'ConfigurationException',
+	      message: 'Custom endpoint is supplied; endpointDiscoveryEnabled must not be true.'
+	    });
+	  };
+	  var svcConfig = AWS.config[client.serviceIdentifier] || {};
+	  return Boolean(AWS.config.endpoint || svcConfig.endpoint || (client._originalConfig && client._originalConfig.endpoint));
+	}
+
+	/**
+	 * @api private
+	 */
+	function isFalsy(value) {
+	  return ['false', '0'].indexOf(value) >= 0;
+	}
+
+	/**
+	 * If endpoint discovery should perform for this request when no operation requires endpoint
+	 * discovery for the given service.
+	 * SDK performs config resolution in order like below:
+	 * 1. If set in client configuration.
+	 * 2. If set in env AWS_ENABLE_ENDPOINT_DISCOVERY.
+	 * 3. If set in shared ini config file with key 'endpoint_discovery_enabled'.
+	 * @param [object] request request object.
+	 * @returns [boolean|undefined] if endpoint discovery config is not set in any source, this
+	 *  function returns undefined
+	 * @api private
+	 */
+	function resolveEndpointDiscoveryConfig(request) {
+	  var service = request.service || {};
+	  if (service.config.endpointDiscoveryEnabled !== undefined) {
+	    return service.config.endpointDiscoveryEnabled;
+	  }
+
+	  //shared ini file is only available in Node
+	  //not to check env in browser
+	  if (util.isBrowser()) return undefined;
+
+	  // If any of recognized endpoint discovery config env is set
+	  for (var i = 0; i < endpointDiscoveryEnabledEnvs.length; i++) {
+	    var env = endpointDiscoveryEnabledEnvs[i];
+	    if (Object.prototype.hasOwnProperty.call(process.env, env)) {
+	      if (process.env[env] === '' || process.env[env] === undefined) {
+	        throw util.error(new Error(), {
+	          code: 'ConfigurationException',
+	          message: 'environmental variable ' + env + ' cannot be set to nothing'
+	        });
+	      }
+	      return !isFalsy(process.env[env]);
+	    }
+	  }
+
+	  var configFile = {};
+	  try {
+	    configFile = AWS.util.iniLoader ? AWS.util.iniLoader.loadFrom({
+	      isConfig: true,
+	      filename: process.env[AWS.util.sharedConfigFileEnv]
+	    }) : {};
+	  } catch (e) {}
+	  var sharedFileConfig = configFile[
+	    process.env.AWS_PROFILE || AWS.util.defaultProfile
+	  ] || {};
+	  if (Object.prototype.hasOwnProperty.call(sharedFileConfig, 'endpoint_discovery_enabled')) {
+	    if (sharedFileConfig.endpoint_discovery_enabled === undefined) {
+	      throw util.error(new Error(), {
+	        code: 'ConfigurationException',
+	        message: 'config file entry \'endpoint_discovery_enabled\' cannot be set to nothing'
+	      });
+	    }
+	    return !isFalsy(sharedFileConfig.endpoint_discovery_enabled);
+	  }
+	  return undefined;
+	}
+
+	/**
+	 * attach endpoint discovery logic to request object
+	 * @param [object] request
+	 * @api private
+	 */
+	function discoverEndpoint(request, done) {
+	  var service = request.service || {};
+	  if (hasCustomEndpoint(service) || request.isPresigned()) return done();
+
+	  var operations = service.api.operations || {};
+	  var operationModel = operations[request.operation];
+	  var isEndpointDiscoveryRequired = operationModel ? operationModel.endpointDiscoveryRequired : 'NULL';
+	  var isEnabled = resolveEndpointDiscoveryConfig(request);
+	  var hasRequiredEndpointDiscovery = service.api.hasRequiredEndpointDiscovery;
+	  if (isEnabled || hasRequiredEndpointDiscovery) {
+	    // Once a customer enables endpoint discovery, the SDK should start appending
+	    // the string endpoint-discovery to the user-agent on all requests.
+	    request.httpRequest.appendToUserAgent('endpoint-discovery');
+	  }
+	  switch (isEndpointDiscoveryRequired) {
+	    case 'OPTIONAL':
+	      if (isEnabled || hasRequiredEndpointDiscovery) {
+	        // For a given service; if at least one operation requires endpoint discovery then the SDK must enable endpoint discovery
+	        // by default for all operations of that service, including operations where endpoint discovery is optional.
+	        optionalDiscoverEndpoint(request);
+	        request.addNamedListener('INVALIDATE_CACHED_ENDPOINTS', 'extractError', invalidateCachedEndpoints);
+	      }
+	      done();
+	      break;
+	    case 'REQUIRED':
+	      if (isEnabled === false) {
+	        // For a given operation; if endpoint discovery is required and it has been disabled on the SDK client,
+	        // then the SDK must return a clear and actionable exception.
+	        request.response.error = util.error(new Error(), {
+	          code: 'ConfigurationException',
+	          message: 'Endpoint Discovery is disabled but ' + service.api.className + '.' + request.operation +
+	                    '() requires it. Please check your configurations.'
+	        });
+	        done();
+	        break;
+	      }
+	      request.addNamedListener('INVALIDATE_CACHED_ENDPOINTS', 'extractError', invalidateCachedEndpoints);
+	      requiredDiscoverEndpoint(request, done);
+	      break;
+	    case 'NULL':
+	    default:
+	      done();
+	      break;
+	  }
+	}
+
+	module.exports = {
+	  discoverEndpoint: discoverEndpoint,
+	  requiredDiscoverEndpoint: requiredDiscoverEndpoint,
+	  optionalDiscoverEndpoint: optionalDiscoverEndpoint,
+	  marshallCustomIdentifiers: marshallCustomIdentifiers,
+	  getCacheKey: getCacheKey,
+	  invalidateCachedEndpoint: invalidateCachedEndpoints,
+	};
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ }),
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -6751,7 +7977,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	exports.isPrimitive = isPrimitive;
 
-	exports.isBuffer = __webpack_require__(43);
+	exports.isBuffer = __webpack_require__(47);
 
 	function objectToString(o) {
 	  return Object.prototype.toString.call(o);
@@ -6795,7 +8021,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *     prototype.
 	 * @param {function} superCtor Constructor function to inherit prototype from.
 	 */
-	exports.inherits = __webpack_require__(44);
+	exports.inherits = __webpack_require__(48);
 
 	exports._extend = function(origin, add) {
 	  // Don't do anything if add isn't an object
@@ -6816,7 +8042,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(3)))
 
 /***/ }),
-/* 43 */
+/* 47 */
 /***/ (function(module, exports) {
 
 	module.exports = function isBuffer(arg) {
@@ -6827,7 +8053,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ }),
-/* 44 */
+/* 48 */
 /***/ (function(module, exports) {
 
 	if (typeof Object.create === 'function') {
@@ -6856,14 +8082,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 45 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {var AWS = __webpack_require__(1);
-	var AcceptorStateMachine = __webpack_require__(46);
+	var AcceptorStateMachine = __webpack_require__(50);
 	var inherit = AWS.util.inherit;
 	var domain = AWS.util.domain;
-	var jmespath = __webpack_require__(47);
+	var jmespath = __webpack_require__(51);
 
 	/**
 	 * @api private
@@ -6974,7 +8200,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *   on('success', function(response) {
 	 *     console.log("Success!");
 	 *   }).
-	 *   on('error', function(response) {
+	 *   on('error', function(error, response) {
 	 *     console.log("Error!");
 	 *   }).
 	 *   on('complete', function(response) {
@@ -7174,8 +8400,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var region = service.config.region;
 	    var customUserAgent = service.config.customUserAgent;
 
-	    // global endpoints sign as us-east-1
-	    if (service.isGlobalEndpoint) region = 'us-east-1';
+	    if (service.isGlobalEndpoint) {
+	      if (service.signingRegion) {
+	        region = service.signingRegion;
+	      } else {
+	        region = 'us-east-1';
+	      }
+	    }
 
 	    this.domain = domain && domain.active;
 	    this.service = service;
@@ -7272,7 +8503,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @example Aborting a request after sending
 	   *   var params = {
 	   *     Bucket: 'bucket', Key: 'key',
-	   *     Body: new Buffer(1024 * 1024 * 5) // 5MB payload
+	   *     Body: Buffer.alloc(1024 * 1024 * 5) // 5MB payload
 	   *   };
 	   *   var request = s3.putObject(params);
 	   *   request.send(function (err, data) {
@@ -7588,6 +8819,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @api private
 	   */
 	  toUnauthenticated: function toUnauthenticated() {
+	    this._unAuthenticated = true;
 	    this.removeListener('validate', AWS.EventListeners.Core.VALIDATE_CREDENTIALS);
 	    this.removeListener('sign', AWS.EventListeners.Core.SIGN);
 	    return this;
@@ -7668,7 +8900,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 46 */
+/* 50 */
 /***/ (function(module, exports) {
 
 	function AcceptorStateMachine(states, state) {
@@ -7719,7 +8951,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 47 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	(function(exports) {
@@ -9392,12 +10624,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 48 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
 	var inherit = AWS.util.inherit;
-	var jmespath = __webpack_require__(47);
+	var jmespath = __webpack_require__(51);
 
 	/**
 	 * This class encapsulates the response information
@@ -9599,7 +10831,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 49 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -9619,7 +10851,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var AWS = __webpack_require__(1);
 	var inherit = AWS.util.inherit;
-	var jmespath = __webpack_require__(47);
+	var jmespath = __webpack_require__(51);
 
 	/**
 	 * @api private
@@ -9809,7 +11041,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 50 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -9837,6 +11069,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  switch (version) {
 	    case 'v2': return AWS.Signers.V2;
 	    case 'v3': return AWS.Signers.V3;
+	    case 's3v4': return AWS.Signers.V4;
 	    case 'v4': return AWS.Signers.V4;
 	    case 's3': return AWS.Signers.S3;
 	    case 'v3https': return AWS.Signers.V3Https;
@@ -9844,16 +11077,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  throw new Error('Unknown signing version ' + version);
 	};
 
-	__webpack_require__(51);
-	__webpack_require__(52);
-	__webpack_require__(53);
-	__webpack_require__(54);
+	__webpack_require__(55);
 	__webpack_require__(56);
 	__webpack_require__(57);
+	__webpack_require__(58);
+	__webpack_require__(60);
+	__webpack_require__(61);
 
 
 /***/ }),
-/* 51 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -9907,7 +11140,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 52 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -9990,13 +11223,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 53 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
 	var inherit = AWS.util.inherit;
 
-	__webpack_require__(52);
+	__webpack_require__(56);
 
 	/**
 	 * @api private
@@ -10021,11 +11254,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 54 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
-	var v4Credentials = __webpack_require__(55);
+	var v4Credentials = __webpack_require__(59);
 	var inherit = AWS.util.inherit;
 
 	/**
@@ -10043,6 +11276,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    options = options || {};
 	    this.signatureCache = typeof options.signatureCache === 'boolean' ? options.signatureCache : true;
 	    this.operation = options.operation;
+	    this.signatureVersion = options.signatureVersion;
 	  },
 
 	  algorithm: 'AWS4-HMAC-SHA256',
@@ -10141,7 +11375,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  canonicalString: function canonicalString() {
 	    var parts = [], pathname = this.request.pathname();
-	    if (this.serviceName !== 's3') pathname = AWS.util.uriEscapePath(pathname);
+	    if (this.serviceName !== 's3' && this.signatureVersion !== 's3v4') pathname = AWS.util.uriEscapePath(pathname);
 
 	    parts.push(this.request.method);
 	    parts.push(pathname);
@@ -10241,7 +11475,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 55 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -10347,7 +11581,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 56 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -10528,7 +11762,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 57 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -10653,7 +11887,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 58 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var AWS = __webpack_require__(1);
@@ -10771,7 +12005,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (!Object.prototype.hasOwnProperty.call(params, param)) continue;
 	        // Validate any map key trait constraints
 	        this.validateMember(shape.key, param,
-	                            context + '[key=\'' + param + '\']')
+	                            context + '[key=\'' + param + '\']');
 	        this.validateMember(shape.value, params[param],
 	                            context + '[\'' + param + '\']');
 	        mapCount++;
@@ -10813,6 +12047,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.validateEnum(shape, value, context);
 	      this.validateRange(shape, value.length, context, 'string length');
 	      this.validatePattern(shape, value, context);
+	      this.validateUri(shape, value, context);
+	    }
+	  },
+
+	  validateUri: function validateUri(shape, value, context) {
+	    if (shape['location'] === 'uri') {
+	      if (value.length === 0) {
+	        this.fail('UriParameterError', 'Expected uri parameter to have length >= 1,'
+	          + ' but found "' + value +'" for ' + context);
+	      }
 	    }
 	  },
 
@@ -10900,6 +12144,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (AWS.util.isNode()) { // special check for buffer/stream in Node.js
 	      var Stream = AWS.util.stream.Stream;
 	      if (AWS.util.Buffer.isBuffer(value) || value instanceof Stream) return;
+	    } else {
+	      if (typeof Blob !== void 0 && value instanceof Blob) return;
 	    }
 
 	    var types = ['Buffer', 'Stream', 'File', 'Blob', 'ArrayBuffer', 'DataView'];

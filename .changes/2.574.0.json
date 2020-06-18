@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudFormation",
+        "description": "This release introduces APIs for the CloudFormation Registry, a new service to submit and discover resource providers with which you can manage third-party resources natively in CloudFormation."
+    },
+    {
+        "type": "feature",
+        "category": "CostExplorer",
+        "description": "add EstimatedOnDemandCostWithCurrentCommitment to GetSavingsPlansPurchaseRecommendationRequest API"
+    },
+    {
+        "type": "feature",
+        "category": "Pinpoint",
+        "description": "This release of the Amazon Pinpoint API introduces support for using and managing message templates for messages that are sent through the voice channel. It also introduces support for specifying default values for message variables in message templates. "
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "Added support for S3 Replication for existing objects. This release allows customers who have requested and been granted access to replicate existing S3 objects across buckets."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "The release contains new API and API changes for AWS Systems Manager Explorer product."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Amazon SageMaker now supports multi-model endpoints to host multiple models on an endpoint using a single inference container."
+    },
+    {
+        "type": "feature",
+        "category": "SageMakerRuntime",
+        "description": "Amazon SageMaker Runtime now supports a new TargetModel header to invoke a specific model hosted on multi model endpoints."
+    }
+]

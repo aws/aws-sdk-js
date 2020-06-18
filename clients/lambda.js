@@ -19,6 +19,7 @@ Object.defineProperty(apiLoader.services['lambda'], '2015-03-31', {
   get: function get() {
     var model = require('../apis/lambda-2015-03-31.min.json');
     model.paginators = require('../apis/lambda-2015-03-31.paginators.json').pagination;
+    model.waiters = require('../apis/lambda-2015-03-31.waiters2.json').waiters;
     return model;
   },
   enumerable: true,

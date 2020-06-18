@@ -4,12 +4,11 @@ Feature: Amazon Relational Database Service
 
   I want to use Amazon Relational Database Service
 
-  Scenario: Creating and deleting security groups
-    Given I create a RDS security group with prefix name "aws-js-sdk"
-    And the RDS security group name is in the result
-    And I describe the RDS security group
-    Then the RDS security group should be described
-    And I delete the RDS security group
+  Scenario: Describe DB security group
+    Given I run the "describeDBSecurityGroups" operation
+    Then the request should be successful
+    And the value at "DBSecurityGroups" should be a list
+    And the value at "DBSecurityGroups" should contain "DBSecurityGroupDescription" with "default"
 
   Scenario: Error handling
     Given I create a RDS security group with prefix name ""

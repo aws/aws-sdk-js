@@ -362,21 +362,21 @@ describe('AWS.ResourceWaiter', function() {
       waiter.config.acceptors = [
         {
           expected: 1,
-          matcher: "pathAny",
-          state: "failure",
-          argument: "length(baz)"
+          matcher: 'pathAny',
+          state: 'failure',
+          argument: 'length(baz)'
         },
         {
           expected: 1,
-          matcher: "pathAll",
-          state: "retry",
-          argument: "length(baz)"
+          matcher: 'pathAll',
+          state: 'retry',
+          argument: 'length(baz)'
         },
         {
           expected: true,
-          matcher: "path",
-          state: "success",
-          argument: "length(services[?!(length(deployments) == `1` && runningCount == desiredCount)]) == `0`"
+          matcher: 'path',
+          state: 'success',
+          argument: 'length(services[?!(length(deployments) == `1` && runningCount == desiredCount)]) == `0`'
         }
       ];
       waiter.wait(function (err, data) {

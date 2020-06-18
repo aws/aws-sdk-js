@@ -12,19 +12,19 @@ declare class CloudTrail extends Service {
   constructor(options?: CloudTrail.Types.ClientConfiguration)
   config: Config & CloudTrail.Types.ClientConfiguration;
   /**
-   * Adds one or more tags to a trail, up to a limit of 50. Tags must be unique per trail. Overwrites an existing tag's value when a new value is specified for an existing tag key. If you specify a key without a value, the tag will be created with the specified key and a value of null. You can tag a trail that applies to all regions only from the region in which the trail was created (that is, from its home region).
+   * Adds one or more tags to a trail, up to a limit of 50. Overwrites an existing tag's value when a new value is specified for an existing tag key. Tag key names must be unique for a trail; you cannot have two keys with the same name but different values. If you specify a key without a value, the tag will be created with the specified key and a value of null. You can tag a trail that applies to all AWS Regions only from the Region in which the trail was created (also known as its home region).
    */
   addTags(params: CloudTrail.Types.AddTagsRequest, callback?: (err: AWSError, data: CloudTrail.Types.AddTagsResponse) => void): Request<CloudTrail.Types.AddTagsResponse, AWSError>;
   /**
-   * Adds one or more tags to a trail, up to a limit of 50. Tags must be unique per trail. Overwrites an existing tag's value when a new value is specified for an existing tag key. If you specify a key without a value, the tag will be created with the specified key and a value of null. You can tag a trail that applies to all regions only from the region in which the trail was created (that is, from its home region).
+   * Adds one or more tags to a trail, up to a limit of 50. Overwrites an existing tag's value when a new value is specified for an existing tag key. Tag key names must be unique for a trail; you cannot have two keys with the same name but different values. If you specify a key without a value, the tag will be created with the specified key and a value of null. You can tag a trail that applies to all AWS Regions only from the Region in which the trail was created (also known as its home region).
    */
   addTags(callback?: (err: AWSError, data: CloudTrail.Types.AddTagsResponse) => void): Request<CloudTrail.Types.AddTagsResponse, AWSError>;
   /**
-   * Creates a trail that specifies the settings for delivery of log data to an Amazon S3 bucket. A maximum of five trails can exist in a region, irrespective of the region in which they were created.
+   * Creates a trail that specifies the settings for delivery of log data to an Amazon S3 bucket. 
    */
   createTrail(params: CloudTrail.Types.CreateTrailRequest, callback?: (err: AWSError, data: CloudTrail.Types.CreateTrailResponse) => void): Request<CloudTrail.Types.CreateTrailResponse, AWSError>;
   /**
-   * Creates a trail that specifies the settings for delivery of log data to an Amazon S3 bucket. A maximum of five trails can exist in a region, irrespective of the region in which they were created.
+   * Creates a trail that specifies the settings for delivery of log data to an Amazon S3 bucket. 
    */
   createTrail(callback?: (err: AWSError, data: CloudTrail.Types.CreateTrailResponse) => void): Request<CloudTrail.Types.CreateTrailResponse, AWSError>;
   /**
@@ -36,21 +36,37 @@ declare class CloudTrail extends Service {
    */
   deleteTrail(callback?: (err: AWSError, data: CloudTrail.Types.DeleteTrailResponse) => void): Request<CloudTrail.Types.DeleteTrailResponse, AWSError>;
   /**
-   * Retrieves settings for the trail associated with the current region for your account.
+   * Retrieves settings for one or more trails associated with the current region for your account.
    */
   describeTrails(params: CloudTrail.Types.DescribeTrailsRequest, callback?: (err: AWSError, data: CloudTrail.Types.DescribeTrailsResponse) => void): Request<CloudTrail.Types.DescribeTrailsResponse, AWSError>;
   /**
-   * Retrieves settings for the trail associated with the current region for your account.
+   * Retrieves settings for one or more trails associated with the current region for your account.
    */
   describeTrails(callback?: (err: AWSError, data: CloudTrail.Types.DescribeTrailsResponse) => void): Request<CloudTrail.Types.DescribeTrailsResponse, AWSError>;
   /**
-   * Describes the settings for the event selectors that you configured for your trail. The information returned for your event selectors includes the following:   The S3 objects that you are logging for data events.   If your event selector includes management events.   If your event selector includes read-only events, write-only events, or all.    For more information, see Logging Data and Management Events for Trails  in the AWS CloudTrail User Guide.
+   * Describes the settings for the event selectors that you configured for your trail. The information returned for your event selectors includes the following:   If your event selector includes read-only events, write-only events, or all events. This applies to both management events and data events.   If your event selector includes management events.   If your event selector includes data events, the Amazon S3 objects or AWS Lambda functions that you are logging for data events.   For more information, see Logging Data and Management Events for Trails  in the AWS CloudTrail User Guide.
    */
   getEventSelectors(params: CloudTrail.Types.GetEventSelectorsRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetEventSelectorsResponse) => void): Request<CloudTrail.Types.GetEventSelectorsResponse, AWSError>;
   /**
-   * Describes the settings for the event selectors that you configured for your trail. The information returned for your event selectors includes the following:   The S3 objects that you are logging for data events.   If your event selector includes management events.   If your event selector includes read-only events, write-only events, or all.    For more information, see Logging Data and Management Events for Trails  in the AWS CloudTrail User Guide.
+   * Describes the settings for the event selectors that you configured for your trail. The information returned for your event selectors includes the following:   If your event selector includes read-only events, write-only events, or all events. This applies to both management events and data events.   If your event selector includes management events.   If your event selector includes data events, the Amazon S3 objects or AWS Lambda functions that you are logging for data events.   For more information, see Logging Data and Management Events for Trails  in the AWS CloudTrail User Guide.
    */
   getEventSelectors(callback?: (err: AWSError, data: CloudTrail.Types.GetEventSelectorsResponse) => void): Request<CloudTrail.Types.GetEventSelectorsResponse, AWSError>;
+  /**
+   * Describes the settings for the Insights event selectors that you configured for your trail. GetInsightSelectors shows if CloudTrail Insights event logging is enabled on the trail, and if it is, which insight types are enabled. If you run GetInsightSelectors on a trail that does not have Insights events enabled, the operation throws the exception InsightNotEnabledException  For more information, see Logging CloudTrail Insights Events for Trails  in the AWS CloudTrail User Guide.
+   */
+  getInsightSelectors(params: CloudTrail.Types.GetInsightSelectorsRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetInsightSelectorsResponse) => void): Request<CloudTrail.Types.GetInsightSelectorsResponse, AWSError>;
+  /**
+   * Describes the settings for the Insights event selectors that you configured for your trail. GetInsightSelectors shows if CloudTrail Insights event logging is enabled on the trail, and if it is, which insight types are enabled. If you run GetInsightSelectors on a trail that does not have Insights events enabled, the operation throws the exception InsightNotEnabledException  For more information, see Logging CloudTrail Insights Events for Trails  in the AWS CloudTrail User Guide.
+   */
+  getInsightSelectors(callback?: (err: AWSError, data: CloudTrail.Types.GetInsightSelectorsResponse) => void): Request<CloudTrail.Types.GetInsightSelectorsResponse, AWSError>;
+  /**
+   * Returns settings information for a specified trail.
+   */
+  getTrail(params: CloudTrail.Types.GetTrailRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetTrailResponse) => void): Request<CloudTrail.Types.GetTrailResponse, AWSError>;
+  /**
+   * Returns settings information for a specified trail.
+   */
+  getTrail(callback?: (err: AWSError, data: CloudTrail.Types.GetTrailResponse) => void): Request<CloudTrail.Types.GetTrailResponse, AWSError>;
   /**
    * Returns a JSON-formatted list of information about the specified trail. Fields include information on delivery errors, Amazon SNS and Amazon S3 errors, and start and stop logging times for each trail. This operation returns trail status from a single region. To return trail status from all regions, you must call the operation on each region.
    */
@@ -76,21 +92,37 @@ declare class CloudTrail extends Service {
    */
   listTags(callback?: (err: AWSError, data: CloudTrail.Types.ListTagsResponse) => void): Request<CloudTrail.Types.ListTagsResponse, AWSError>;
   /**
-   * Looks up API activity events captured by CloudTrail that create, update, or delete resources in your account. Events for a region can be looked up for the times in which you had CloudTrail turned on in that region during the last seven days. Lookup supports the following attributes:   Event ID   Event name   Event source   Resource name   Resource type   User name   All attributes are optional. The default number of results returned is 10, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results.  The rate of lookup requests is limited to one per second per account. If this limit is exceeded, a throttling error occurs.   Events that occurred during the selected time range will not be available for lookup if CloudTrail logging was not enabled when the events occurred. 
+   * Lists trails that are in the current account.
+   */
+  listTrails(params: CloudTrail.Types.ListTrailsRequest, callback?: (err: AWSError, data: CloudTrail.Types.ListTrailsResponse) => void): Request<CloudTrail.Types.ListTrailsResponse, AWSError>;
+  /**
+   * Lists trails that are in the current account.
+   */
+  listTrails(callback?: (err: AWSError, data: CloudTrail.Types.ListTrailsResponse) => void): Request<CloudTrail.Types.ListTrailsResponse, AWSError>;
+  /**
+   * Looks up management events or CloudTrail Insights events that are captured by CloudTrail. You can look up events that occurred in a region within the last 90 days. Lookup supports the following attributes for management events:   AWS access key   Event ID   Event name   Event source   Read only   Resource name   Resource type   User name   Lookup supports the following attributes for Insights events:   Event ID   Event name   Event source   All attributes are optional. The default number of results returned is 50, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results.  The rate of lookup requests is limited to two per second per account. If this limit is exceeded, a throttling error occurs. 
    */
   lookupEvents(params: CloudTrail.Types.LookupEventsRequest, callback?: (err: AWSError, data: CloudTrail.Types.LookupEventsResponse) => void): Request<CloudTrail.Types.LookupEventsResponse, AWSError>;
   /**
-   * Looks up API activity events captured by CloudTrail that create, update, or delete resources in your account. Events for a region can be looked up for the times in which you had CloudTrail turned on in that region during the last seven days. Lookup supports the following attributes:   Event ID   Event name   Event source   Resource name   Resource type   User name   All attributes are optional. The default number of results returned is 10, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results.  The rate of lookup requests is limited to one per second per account. If this limit is exceeded, a throttling error occurs.   Events that occurred during the selected time range will not be available for lookup if CloudTrail logging was not enabled when the events occurred. 
+   * Looks up management events or CloudTrail Insights events that are captured by CloudTrail. You can look up events that occurred in a region within the last 90 days. Lookup supports the following attributes for management events:   AWS access key   Event ID   Event name   Event source   Read only   Resource name   Resource type   User name   Lookup supports the following attributes for Insights events:   Event ID   Event name   Event source   All attributes are optional. The default number of results returned is 50, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results.  The rate of lookup requests is limited to two per second per account. If this limit is exceeded, a throttling error occurs. 
    */
   lookupEvents(callback?: (err: AWSError, data: CloudTrail.Types.LookupEventsResponse) => void): Request<CloudTrail.Types.LookupEventsResponse, AWSError>;
   /**
-   * Configures an event selector for your trail. Use event selectors to specify whether you want your trail to log management and/or data events. When an event occurs in your account, CloudTrail evaluates the event selectors in all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event.  Example   You create an event selector for a trail and specify that you want write-only events.   The EC2 GetConsoleOutput and RunInstances API operations occur in your account.   CloudTrail evaluates whether the events match your event selectors.   The RunInstances is a write-only event and it matches your event selector. The trail logs the event.   The GetConsoleOutput is a read-only event but it doesn't match your event selector. The trail doesn't log the event.    The PutEventSelectors operation must be called from the region in which the trail was created; otherwise, an InvalidHomeRegionException is thrown. You can configure up to five event selectors for each trail. For more information, see Logging Data and Management Events for Trails  in the AWS CloudTrail User Guide.
+   * Configures an event selector for your trail. Use event selectors to further specify the management and data event settings for your trail. By default, trails created without specific event selectors will be configured to log all read and write management events, and no data events.  When an event occurs in your account, CloudTrail evaluates the event selectors in all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event.  Example   You create an event selector for a trail and specify that you want write-only events.   The EC2 GetConsoleOutput and RunInstances API operations occur in your account.   CloudTrail evaluates whether the events match your event selectors.   The RunInstances is a write-only event and it matches your event selector. The trail logs the event.   The GetConsoleOutput is a read-only event but it doesn't match your event selector. The trail doesn't log the event.    The PutEventSelectors operation must be called from the region in which the trail was created; otherwise, an InvalidHomeRegionException is thrown. You can configure up to five event selectors for each trail. For more information, see Logging Data and Management Events for Trails  and Limits in AWS CloudTrail in the AWS CloudTrail User Guide.
    */
   putEventSelectors(params: CloudTrail.Types.PutEventSelectorsRequest, callback?: (err: AWSError, data: CloudTrail.Types.PutEventSelectorsResponse) => void): Request<CloudTrail.Types.PutEventSelectorsResponse, AWSError>;
   /**
-   * Configures an event selector for your trail. Use event selectors to specify whether you want your trail to log management and/or data events. When an event occurs in your account, CloudTrail evaluates the event selectors in all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event.  Example   You create an event selector for a trail and specify that you want write-only events.   The EC2 GetConsoleOutput and RunInstances API operations occur in your account.   CloudTrail evaluates whether the events match your event selectors.   The RunInstances is a write-only event and it matches your event selector. The trail logs the event.   The GetConsoleOutput is a read-only event but it doesn't match your event selector. The trail doesn't log the event.    The PutEventSelectors operation must be called from the region in which the trail was created; otherwise, an InvalidHomeRegionException is thrown. You can configure up to five event selectors for each trail. For more information, see Logging Data and Management Events for Trails  in the AWS CloudTrail User Guide.
+   * Configures an event selector for your trail. Use event selectors to further specify the management and data event settings for your trail. By default, trails created without specific event selectors will be configured to log all read and write management events, and no data events.  When an event occurs in your account, CloudTrail evaluates the event selectors in all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event.  Example   You create an event selector for a trail and specify that you want write-only events.   The EC2 GetConsoleOutput and RunInstances API operations occur in your account.   CloudTrail evaluates whether the events match your event selectors.   The RunInstances is a write-only event and it matches your event selector. The trail logs the event.   The GetConsoleOutput is a read-only event but it doesn't match your event selector. The trail doesn't log the event.    The PutEventSelectors operation must be called from the region in which the trail was created; otherwise, an InvalidHomeRegionException is thrown. You can configure up to five event selectors for each trail. For more information, see Logging Data and Management Events for Trails  and Limits in AWS CloudTrail in the AWS CloudTrail User Guide.
    */
   putEventSelectors(callback?: (err: AWSError, data: CloudTrail.Types.PutEventSelectorsResponse) => void): Request<CloudTrail.Types.PutEventSelectorsResponse, AWSError>;
+  /**
+   * Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing trail. You also use PutInsightSelectors to turn off Insights event logging, by passing an empty list of insight types. In this release, only ApiCallRateInsight is supported as an Insights selector.
+   */
+  putInsightSelectors(params: CloudTrail.Types.PutInsightSelectorsRequest, callback?: (err: AWSError, data: CloudTrail.Types.PutInsightSelectorsResponse) => void): Request<CloudTrail.Types.PutInsightSelectorsResponse, AWSError>;
+  /**
+   * Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing trail. You also use PutInsightSelectors to turn off Insights event logging, by passing an empty list of insight types. In this release, only ApiCallRateInsight is supported as an Insights selector.
+   */
+  putInsightSelectors(callback?: (err: AWSError, data: CloudTrail.Types.PutInsightSelectorsResponse) => void): Request<CloudTrail.Types.PutInsightSelectorsResponse, AWSError>;
   /**
    * Removes the specified tags from a trail.
    */
@@ -127,7 +159,7 @@ declare class CloudTrail extends Service {
 declare namespace CloudTrail {
   export interface AddTagsRequest {
     /**
-     * Specifies the ARN of the trail to which one or more tags will be added. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies the ARN of the trail to which one or more tags will be added. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     ResourceId: String;
     /**
@@ -161,7 +193,7 @@ declare namespace CloudTrail {
      */
     IncludeGlobalServiceEvents?: Boolean;
     /**
-     * Specifies whether the trail is created in the current region or in all regions. The default is false.
+     * Specifies whether the trail is created in the current region or in all regions. The default is false, which creates a trail only in the region where you are signed in. As a best practice, consider creating trails that log events in all regions.
      */
     IsMultiRegionTrail?: Boolean;
     /**
@@ -177,9 +209,14 @@ declare namespace CloudTrail {
      */
     CloudWatchLogsRoleArn?: String;
     /**
-     * Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by "alias/", a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier. Examples:   alias/MyAliasName   arn:aws:kms:us-east-1:123456789012:alias/MyAliasName   arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012   12345678-1234-1234-1234-123456789012  
+     * Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by "alias/", a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier. Examples:   alias/MyAliasName   arn:aws:kms:us-east-2:123456789012:alias/MyAliasName   arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012   12345678-1234-1234-1234-123456789012  
      */
     KmsKeyId?: String;
+    /**
+     * Specifies whether the trail is created for all accounts in an organization in AWS Organizations, or only for the current AWS account. The default is false, and cannot be true unless the call is made on behalf of an AWS account that is the master account for an organization in AWS Organizations.
+     */
+    IsOrganizationTrail?: Boolean;
+    TagsList?: TagsList;
   }
   export interface CreateTrailResponse {
     /**
@@ -195,11 +232,11 @@ declare namespace CloudTrail {
      */
     S3KeyPrefix?: String;
     /**
-     * This field is deprecated. Use SnsTopicARN.
+     * This field is no longer in use. Use SnsTopicARN.
      */
     SnsTopicName?: String;
     /**
-     * Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send notifications when log files are delivered. The format of a topic ARN is:  arn:aws:sns:us-east-1:123456789012:MyTopic 
+     * Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send notifications when log files are delivered. The format of a topic ARN is:  arn:aws:sns:us-east-2:123456789012:MyTopic 
      */
     SnsTopicARN?: String;
     /**
@@ -211,7 +248,7 @@ declare namespace CloudTrail {
      */
     IsMultiRegionTrail?: Boolean;
     /**
-     * Specifies the ARN of the trail that was created. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies the ARN of the trail that was created. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     TrailARN?: String;
     /**
@@ -227,17 +264,21 @@ declare namespace CloudTrail {
      */
     CloudWatchLogsRoleArn?: String;
     /**
-     * Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:  arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012 
+     * Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:  arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012 
      */
     KmsKeyId?: String;
+    /**
+     * Specifies whether the trail is an organization trail.
+     */
+    IsOrganizationTrail?: Boolean;
   }
   export interface DataResource {
     /**
-     * The resource type in which you want to log data events. You can specify only the following value: AWS::S3::Object.
+     * The resource type in which you want to log data events. You can specify AWS::S3::Object or AWS::Lambda::Function resources.
      */
     Type?: String;
     /**
-     * A list of ARN-like strings for the specified S3 objects. To log data events for all objects in an S3 bucket, specify the bucket and an empty object prefix such as arn:aws:s3:::bucket-1/. The trail logs data events for all objects in this S3 bucket. To log data events for specific objects, specify the S3 bucket and object prefix such as arn:aws:s3:::bucket-1/example-images. The trail logs data events for objects in this S3 bucket that match the prefix.
+     * An array of Amazon Resource Name (ARN) strings or partial ARN strings for the specified objects.   To log data events for all objects in all S3 buckets in your AWS account, specify the prefix as arn:aws:s3:::.   This will also enable logging of data event activity performed by any user or role in your AWS account, even if that activity is performed on a bucket that belongs to another AWS account.     To log data events for all objects in an S3 bucket, specify the bucket and an empty object prefix such as arn:aws:s3:::bucket-1/. The trail logs data events for all objects in this S3 bucket.   To log data events for specific objects, specify the S3 bucket and object prefix such as arn:aws:s3:::bucket-1/example-images. The trail logs data events for objects in this S3 bucket that match the prefix.   To log data events for all functions in your AWS account, specify the prefix as arn:aws:lambda.  This will also enable logging of Invoke activity performed by any user or role in your AWS account, even if that activity is performed on a function that belongs to another AWS account.     To log data events for a specific Lambda function, specify the function ARN.  Lambda function ARNs are exact. For example, if you specify a function ARN arn:aws:lambda:us-west-2:111111111111:function:helloworld, data events will only be logged for arn:aws:lambda:us-west-2:111111111111:function:helloworld. They will not be logged for arn:aws:lambda:us-west-2:111111111111:function:helloworld2.   
      */
     Values?: DataResourceValues;
   }
@@ -246,7 +287,7 @@ declare namespace CloudTrail {
   export type _Date = Date;
   export interface DeleteTrailRequest {
     /**
-     * Specifies the name or the CloudTrail ARN of the trail to be deleted. The format of a trail ARN is: arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies the name or the CloudTrail ARN of the trail to be deleted. The format of a trail ARN is: arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     Name: String;
   }
@@ -254,17 +295,17 @@ declare namespace CloudTrail {
   }
   export interface DescribeTrailsRequest {
     /**
-     * Specifies a list of trail names, trail ARNs, or both, of the trails to describe. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail  If an empty list is specified, information for the trail in the current region is returned.   If an empty list is specified and IncludeShadowTrails is false, then information for all trails in the current region is returned.   If an empty list is specified and IncludeShadowTrails is null or true, then information for all trails in the current region and any associated shadow trails in other regions is returned.    If one or more trail names are specified, information is returned only if the names match the names of trails belonging only to the current region. To return information about a trail in another region, you must specify its trail ARN. 
+     * Specifies a list of trail names, trail ARNs, or both, of the trails to describe. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail  If an empty list is specified, information for the trail in the current region is returned.   If an empty list is specified and IncludeShadowTrails is false, then information for all trails in the current region is returned.   If an empty list is specified and IncludeShadowTrails is null or true, then information for all trails in the current region and any associated shadow trails in other regions is returned.    If one or more trail names are specified, information is returned only if the names match the names of trails belonging only to the current region. To return information about a trail in another region, you must specify its trail ARN. 
      */
     trailNameList?: TrailNameList;
     /**
-     * Specifies whether to include shadow trails in the response. A shadow trail is the replication in a region of a trail that was created in a different region. The default is true.
+     * Specifies whether to include shadow trails in the response. A shadow trail is the replication in a region of a trail that was created in a different region, or in the case of an organization trail, the replication of an organization trail in member accounts. If you do not include shadow trails, organization trails in a member account and region replication trails will not be returned. The default is true.
      */
     includeShadowTrails?: Boolean;
   }
   export interface DescribeTrailsResponse {
     /**
-     * The list of trail objects.
+     * The list of trail objects. Trail objects with string values are only returned if values for the objects exist in a trail's configuration. For example, SNSTopicName and SNSTopicARN are only returned in results if a trail is configured to send SNS notifications. Similarly, KMSKeyId only appears in results if a trail's log files are encrypted with AWS KMS-managed keys.
      */
     trailList?: TrailList;
   }
@@ -277,6 +318,14 @@ declare namespace CloudTrail {
      * The name of the event returned.
      */
     EventName?: String;
+    /**
+     * Information about whether the event is a write event or a read event. 
+     */
+    ReadOnly?: String;
+    /**
+     * The AWS access key ID that was used to sign the request. If the request was made with temporary security credentials, this is the access key ID of the temporary credentials.
+     */
+    AccessKeyId?: String;
     /**
      * The date and time of the event returned.
      */
@@ -298,6 +347,7 @@ declare namespace CloudTrail {
      */
     CloudTrailEvent?: String;
   }
+  export type EventCategory = "insight"|string;
   export interface EventSelector {
     /**
      * Specify if you want your trail to log read-only events, write-only events, or all. For example, the EC2 GetConsoleOutput is a read-only API operation and RunInstances is a write-only API operation.  By default, the value is All.
@@ -308,15 +358,20 @@ declare namespace CloudTrail {
      */
     IncludeManagementEvents?: Boolean;
     /**
-     * CloudTrail supports logging only data events for S3 objects. You can specify up to 250 S3 buckets and object prefixes for a trail. For more information, see Data Events in the AWS CloudTrail User Guide.
+     * CloudTrail supports data event logging for Amazon S3 objects and AWS Lambda functions. You can specify up to 250 resources for an individual event selector, but the total number of data resources cannot exceed 250 across all event selectors in a trail. This limit does not apply if you configure resource logging for all data events.  For more information, see Data Events and Limits in AWS CloudTrail in the AWS CloudTrail User Guide.
      */
     DataResources?: DataResources;
+    /**
+     * An optional list of service event sources from which you do not want management events to be logged on your trail. In this release, the list can be empty (disables the filter), or it can filter out AWS Key Management Service events by containing "kms.amazonaws.com". By default, ExcludeManagementEventSources is empty, and AWS KMS events are included in events that are logged to your trail. 
+     */
+    ExcludeManagementEventSources?: ExcludeManagementEventSources;
   }
   export type EventSelectors = EventSelector[];
   export type EventsList = Event[];
+  export type ExcludeManagementEventSources = String[];
   export interface GetEventSelectorsRequest {
     /**
-     * Specifies the name of the trail or trail ARN. If you specify a trail name, the string must meet the following requirements:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)   Start with a letter or number, and end with a letter or number   Be between 3 and 128 characters   Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are invalid.   Not be in IP address format (for example, 192.168.5.4)   If you specify a trail ARN, it must be in the format:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies the name of the trail or trail ARN. If you specify a trail name, the string must meet the following requirements:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)   Start with a letter or number, and end with a letter or number   Be between 3 and 128 characters   Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are not valid.   Not be in IP address format (for example, 192.168.5.4)   If you specify a trail ARN, it must be in the format:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     TrailName: String;
   }
@@ -330,9 +385,34 @@ declare namespace CloudTrail {
      */
     EventSelectors?: EventSelectors;
   }
+  export interface GetInsightSelectorsRequest {
+    /**
+     * Specifies the name of the trail or trail ARN. If you specify a trail name, the string must meet the following requirements:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)   Start with a letter or number, and end with a letter or number   Be between 3 and 128 characters   Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are not valid.   Not be in IP address format (for example, 192.168.5.4)   If you specify a trail ARN, it must be in the format:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
+     */
+    TrailName: String;
+  }
+  export interface GetInsightSelectorsResponse {
+    /**
+     * The Amazon Resource Name (ARN) of a trail for which you want to get Insights selectors.
+     */
+    TrailARN?: String;
+    /**
+     * A JSON string that contains the insight types you want to log on a trail. In this release, only ApiCallRateInsight is supported as an insight type.
+     */
+    InsightSelectors?: InsightSelectors;
+  }
+  export interface GetTrailRequest {
+    /**
+     * The name or the Amazon Resource Name (ARN) of the trail for which you want to retrieve settings information.
+     */
+    Name: String;
+  }
+  export interface GetTrailResponse {
+    Trail?: Trail;
+  }
   export interface GetTrailStatusRequest {
     /**
-     * Specifies the name or the CloudTrail ARN of the trail for which you are requesting status. To get the status of a shadow trail (a replication of the trail in another region), you must specify its ARN. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies the name or the CloudTrail ARN of the trail for which you are requesting status. To get the status of a shadow trail (a replication of the trail in another region), you must specify its ARN. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     Name: String;
   }
@@ -382,30 +462,38 @@ declare namespace CloudTrail {
      */
     LatestDigestDeliveryError?: String;
     /**
-     * This field is deprecated.
+     * This field is no longer in use.
      */
     LatestDeliveryAttemptTime?: String;
     /**
-     * This field is deprecated.
+     * This field is no longer in use.
      */
     LatestNotificationAttemptTime?: String;
     /**
-     * This field is deprecated.
+     * This field is no longer in use.
      */
     LatestNotificationAttemptSucceeded?: String;
     /**
-     * This field is deprecated.
+     * This field is no longer in use.
      */
     LatestDeliveryAttemptSucceeded?: String;
     /**
-     * This field is deprecated.
+     * This field is no longer in use.
      */
     TimeLoggingStarted?: String;
     /**
-     * This field is deprecated.
+     * This field is no longer in use.
      */
     TimeLoggingStopped?: String;
   }
+  export interface InsightSelector {
+    /**
+     * The type of insights to log on a trail. In this release, only ApiCallRateInsight is supported as an insight type.
+     */
+    InsightType?: InsightType;
+  }
+  export type InsightSelectors = InsightSelector[];
+  export type InsightType = "ApiCallRateInsight"|string;
   export interface ListPublicKeysRequest {
     /**
      * Optionally specifies, in UTC, the start of the time range to look up public keys for CloudTrail digest files. If not specified, the current time is used, and the current public key is returned.
@@ -432,7 +520,7 @@ declare namespace CloudTrail {
   }
   export interface ListTagsRequest {
     /**
-     * Specifies a list of trail ARNs whose tags will be listed. The list has a limit of 20 ARNs. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies a list of trail ARNs whose tags will be listed. The list has a limit of 20 ARNs. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     ResourceIdList: ResourceIdList;
     /**
@@ -450,6 +538,22 @@ declare namespace CloudTrail {
      */
     NextToken?: String;
   }
+  export interface ListTrailsRequest {
+    /**
+     * The token to use to get the next page of results after a previous API call. This token must be passed in with the same parameters that were specified in the the original call. For example, if the original call specified an AttributeKey of 'Username' with a value of 'root', the call with NextToken should include those same parameters.
+     */
+    NextToken?: String;
+  }
+  export interface ListTrailsResponse {
+    /**
+     * Returns the name, ARN, and home region of trails in the current account.
+     */
+    Trails?: Trails;
+    /**
+     * The token to use to get the next page of results after a previous API call. If the token does not appear, there are no more results to return. The token must be passed in with the same parameters as the previous call. For example, if the original call specified an AttributeKey of 'Username' with a value of 'root', the call with NextToken should include those same parameters.
+     */
+    NextToken?: String;
+  }
   export interface LookupAttribute {
     /**
      * Specifies an attribute on which to filter the events returned.
@@ -460,7 +564,7 @@ declare namespace CloudTrail {
      */
     AttributeValue: String;
   }
-  export type LookupAttributeKey = "EventId"|"EventName"|"Username"|"ResourceType"|"ResourceName"|"EventSource"|string;
+  export type LookupAttributeKey = "EventId"|"EventName"|"ReadOnly"|"Username"|"ResourceType"|"ResourceName"|"EventSource"|"AccessKeyId"|string;
   export type LookupAttributesList = LookupAttribute[];
   export interface LookupEventsRequest {
     /**
@@ -476,7 +580,11 @@ declare namespace CloudTrail {
      */
     EndTime?: _Date;
     /**
-     * The number of events to return. Possible values are 1 through 50. The default is 10.
+     * Specifies the event category. If you do not specify an event category, events of the category are not returned in the response. For example, if you do not specify insight as the value of EventCategory, no Insights events are returned.
+     */
+    EventCategory?: EventCategory;
+    /**
+     * The number of events to return. Possible values are 1 through 50. The default is 50.
      */
     MaxResults?: MaxResults;
     /**
@@ -517,7 +625,7 @@ declare namespace CloudTrail {
   export type PublicKeyList = PublicKey[];
   export interface PutEventSelectorsRequest {
     /**
-     * Specifies the name of the trail or trail ARN. If you specify a trail name, the string must meet the following requirements:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)   Start with a letter or number, and end with a letter or number   Be between 3 and 128 characters   Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are invalid.   Not be in IP address format (for example, 192.168.5.4)   If you specify a trail ARN, it must be in the format:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies the name of the trail or trail ARN. If you specify a trail name, the string must meet the following requirements:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)   Start with a letter or number, and end with a letter or number   Be between 3 and 128 characters   Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are invalid.   Not be in IP address format (for example, 192.168.5.4)   If you specify a trail ARN, it must be in the format:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     TrailName: String;
     /**
@@ -527,7 +635,7 @@ declare namespace CloudTrail {
   }
   export interface PutEventSelectorsResponse {
     /**
-     * Specifies the ARN of the trail that was updated with event selectors. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies the ARN of the trail that was updated with event selectors. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     TrailARN?: String;
     /**
@@ -535,10 +643,30 @@ declare namespace CloudTrail {
      */
     EventSelectors?: EventSelectors;
   }
+  export interface PutInsightSelectorsRequest {
+    /**
+     * The name of the CloudTrail trail for which you want to change or add Insights selectors.
+     */
+    TrailName: String;
+    /**
+     * A JSON string that contains the insight types you want to log on a trail. In this release, only ApiCallRateInsight is supported as an insight type.
+     */
+    InsightSelectors: InsightSelectors;
+  }
+  export interface PutInsightSelectorsResponse {
+    /**
+     * The Amazon Resource Name (ARN) of a trail for which you want to change or add Insights selectors.
+     */
+    TrailARN?: String;
+    /**
+     * A JSON string that contains the insight types you want to log on a trail. In this release, only ApiCallRateInsight is supported as an insight type.
+     */
+    InsightSelectors?: InsightSelectors;
+  }
   export type ReadWriteType = "ReadOnly"|"WriteOnly"|"All"|string;
   export interface RemoveTagsRequest {
     /**
-     * Specifies the ARN of the trail from which tags should be removed. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies the ARN of the trail from which tags should be removed. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     ResourceId: String;
     /**
@@ -550,7 +678,7 @@ declare namespace CloudTrail {
   }
   export interface Resource {
     /**
-     * The type of a resource referenced by the event returned. When the resource type cannot be determined, null is returned. Some examples of resource types are: Instance for EC2, Trail for CloudTrail, DBInstance for RDS, and AccessKey for IAM. For a list of resource types supported for event lookup, see Resource Types Supported for Event Lookup.
+     * The type of a resource referenced by the event returned. When the resource type cannot be determined, null is returned. Some examples of resource types are: Instance for EC2, Trail for CloudTrail, DBInstance for RDS, and AccessKey for IAM. To learn more about how to look up and filter events by the resource types supported for a service, see Filtering CloudTrail Events.
      */
     ResourceType?: String;
     /**
@@ -573,7 +701,7 @@ declare namespace CloudTrail {
   export type ResourceTagList = ResourceTag[];
   export interface StartLoggingRequest {
     /**
-     * Specifies the name or the CloudTrail ARN of the trail for which CloudTrail logs AWS API calls. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies the name or the CloudTrail ARN of the trail for which CloudTrail logs AWS API calls. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     Name: String;
   }
@@ -581,7 +709,7 @@ declare namespace CloudTrail {
   }
   export interface StopLoggingRequest {
     /**
-     * Specifies the name or the CloudTrail ARN of the trail for which CloudTrail will stop logging AWS API calls. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies the name or the CloudTrail ARN of the trail for which CloudTrail will stop logging AWS API calls. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     Name: String;
   }
@@ -613,11 +741,11 @@ declare namespace CloudTrail {
      */
     S3KeyPrefix?: String;
     /**
-     * This field is deprecated. Use SnsTopicARN.
+     * This field is no longer in use. Use SnsTopicARN.
      */
     SnsTopicName?: String;
     /**
-     * Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send notifications when log files are delivered. The format of a topic ARN is:  arn:aws:sns:us-east-1:123456789012:MyTopic 
+     * Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send notifications when log files are delivered. The format of a topic ARN is:  arn:aws:sns:us-east-2:123456789012:MyTopic 
      */
     SnsTopicARN?: String;
     /**
@@ -625,7 +753,7 @@ declare namespace CloudTrail {
      */
     IncludeGlobalServiceEvents?: Boolean;
     /**
-     * Specifies whether the trail belongs only to one region or exists in all regions.
+     * Specifies whether the trail exists only in one region or exists in all regions.
      */
     IsMultiRegionTrail?: Boolean;
     /**
@@ -633,7 +761,7 @@ declare namespace CloudTrail {
      */
     HomeRegion?: String;
     /**
-     * Specifies the ARN of the trail. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies the ARN of the trail. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     TrailARN?: String;
     /**
@@ -649,19 +777,42 @@ declare namespace CloudTrail {
      */
     CloudWatchLogsRoleArn?: String;
     /**
-     * Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:  arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012 
+     * Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:  arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012 
      */
     KmsKeyId?: String;
     /**
      * Specifies if the trail has custom event selectors.
      */
     HasCustomEventSelectors?: Boolean;
+    /**
+     * Specifies whether a trail has insight types specified in an InsightSelector list.
+     */
+    HasInsightSelectors?: Boolean;
+    /**
+     * Specifies whether the trail is an organization trail.
+     */
+    IsOrganizationTrail?: Boolean;
+  }
+  export interface TrailInfo {
+    /**
+     * The ARN of a trail.
+     */
+    TrailARN?: String;
+    /**
+     * The name of a trail.
+     */
+    Name?: String;
+    /**
+     * The AWS region in which a trail was created.
+     */
+    HomeRegion?: String;
   }
   export type TrailList = Trail[];
   export type TrailNameList = String[];
+  export type Trails = TrailInfo[];
   export interface UpdateTrailRequest {
     /**
-     * Specifies the name of the trail or trail ARN. If Name is a trail name, the string must meet the following requirements:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)   Start with a letter or number, and end with a letter or number   Be between 3 and 128 characters   Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are invalid.   Not be in IP address format (for example, 192.168.5.4)   If Name is a trail ARN, it must be in the format:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies the name of the trail or trail ARN. If Name is a trail name, the string must meet the following requirements:   Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)   Start with a letter or number, and end with a letter or number   Be between 3 and 128 characters   Have no adjacent periods, underscores or dashes. Names like my-_namespace and my--namespace are invalid.   Not be in IP address format (for example, 192.168.5.4)   If Name is a trail ARN, it must be in the format:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     Name: String;
     /**
@@ -681,7 +832,7 @@ declare namespace CloudTrail {
      */
     IncludeGlobalServiceEvents?: Boolean;
     /**
-     * Specifies whether the trail applies only to the current region or to all regions. The default is false. If the trail exists only in the current region and this value is set to true, shadow trails (replications of the trail) will be created in the other regions. If the trail exists in all regions and this value is set to false, the trail will remain in the region where it was created, and its shadow trails in other regions will be deleted.
+     * Specifies whether the trail applies only to the current region or to all regions. The default is false. If the trail exists only in the current region and this value is set to true, shadow trails (replications of the trail) will be created in the other regions. If the trail exists in all regions and this value is set to false, the trail will remain in the region where it was created, and its shadow trails in other regions will be deleted. As a best practice, consider using trails that log events in all regions.
      */
     IsMultiRegionTrail?: Boolean;
     /**
@@ -697,9 +848,13 @@ declare namespace CloudTrail {
      */
     CloudWatchLogsRoleArn?: String;
     /**
-     * Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by "alias/", a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier. Examples:   alias/MyAliasName   arn:aws:kms:us-east-1:123456789012:alias/MyAliasName   arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012   12345678-1234-1234-1234-123456789012  
+     * Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The value can be an alias name prefixed by "alias/", a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier. Examples:   alias/MyAliasName   arn:aws:kms:us-east-2:123456789012:alias/MyAliasName   arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012   12345678-1234-1234-1234-123456789012  
      */
     KmsKeyId?: String;
+    /**
+     * Specifies whether the trail is applied to all accounts in an organization in AWS Organizations, or only for the current AWS account. The default is false, and cannot be true unless the call is made on behalf of an AWS account that is the master account for an organization in AWS Organizations. If the trail is not an organization trail and this is set to true, the trail will be created in all AWS accounts that belong to the organization. If the trail is an organization trail and this is set to false, the trail will remain in the current AWS account but be deleted from all member accounts in the organization.
+     */
+    IsOrganizationTrail?: Boolean;
   }
   export interface UpdateTrailResponse {
     /**
@@ -715,11 +870,11 @@ declare namespace CloudTrail {
      */
     S3KeyPrefix?: String;
     /**
-     * This field is deprecated. Use SnsTopicARN.
+     * This field is no longer in use. Use SnsTopicARN.
      */
     SnsTopicName?: String;
     /**
-     * Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send notifications when log files are delivered. The format of a topic ARN is:  arn:aws:sns:us-east-1:123456789012:MyTopic 
+     * Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send notifications when log files are delivered. The format of a topic ARN is:  arn:aws:sns:us-east-2:123456789012:MyTopic 
      */
     SnsTopicARN?: String;
     /**
@@ -731,7 +886,7 @@ declare namespace CloudTrail {
      */
     IsMultiRegionTrail?: Boolean;
     /**
-     * Specifies the ARN of the trail that was updated. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail 
+     * Specifies the ARN of the trail that was updated. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     TrailARN?: String;
     /**
@@ -747,9 +902,13 @@ declare namespace CloudTrail {
      */
     CloudWatchLogsRoleArn?: String;
     /**
-     * Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:  arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012 
+     * Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:  arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012 
      */
     KmsKeyId?: String;
+    /**
+     * Specifies whether the trail is an organization trail.
+     */
+    IsOrganizationTrail?: Boolean;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

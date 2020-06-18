@@ -35,4 +35,6 @@ if (core.CognitoIdentityCredentials) {
 
 } else if (core.SAMLCredentials) {
     
+} else if (core.IniLoader) {
+  
 }

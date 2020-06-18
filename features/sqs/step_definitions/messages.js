@@ -28,7 +28,7 @@ module.exports = function () {
       QueueUrl: this.queueUrl,
       MessageBody: message,
       MessageAttributes: {
-        binary: { DataType: 'Binary', BinaryValue: new Buffer([1,2,3]) }
+        binary: { DataType: 'Binary', BinaryValue: Buffer.from([1,2,3]) }
       }
     };
     this.request(null, 'sendMessage', params, callback);

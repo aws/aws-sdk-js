@@ -1,0 +1,22 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Credentials",
+        "description": "fix stsConfig typing on chainable_temporary_credentials"
+    },
+    {
+        "type": "feature",
+        "category": "ApiGatewayManagementApi",
+        "description": "You can use getConnection to return information about the connection (when it is connected, IP address, etc) and deleteConnection to disconnect the given connection"
+    },
+    {
+        "type": "feature",
+        "category": "ECS",
+        "description": "This release of Amazon Elastic Container Service (Amazon ECS) introduces support for modifying the cluster settings for existing clusters, which enables you to toggle whether Container Insights is enabled or not. Support is also introduced for custom log routing using the ECS FireLens integration."
+    },
+    {
+        "type": "feature",
+        "category": "MQ",
+        "description": "Adds support for updating security groups selection of an Amazon MQ broker."
+    }
+]

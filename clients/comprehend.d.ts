@@ -52,6 +52,78 @@ declare class Comprehend extends Service {
    */
   batchDetectSyntax(callback?: (err: AWSError, data: Comprehend.Types.BatchDetectSyntaxResponse) => void): Request<Comprehend.Types.BatchDetectSyntaxResponse, AWSError>;
   /**
+   * Creates a new document classification request to analyze a single document in real-time, using a previously created and trained custom model and an endpoint.
+   */
+  classifyDocument(params: Comprehend.Types.ClassifyDocumentRequest, callback?: (err: AWSError, data: Comprehend.Types.ClassifyDocumentResponse) => void): Request<Comprehend.Types.ClassifyDocumentResponse, AWSError>;
+  /**
+   * Creates a new document classification request to analyze a single document in real-time, using a previously created and trained custom model and an endpoint.
+   */
+  classifyDocument(callback?: (err: AWSError, data: Comprehend.Types.ClassifyDocumentResponse) => void): Request<Comprehend.Types.ClassifyDocumentResponse, AWSError>;
+  /**
+   * Creates a new document classifier that you can use to categorize documents. To create a classifier you provide a set of training documents that labeled with the categories that you want to use. After the classifier is trained you can use it to categorize a set of labeled documents into the categories. For more information, see how-document-classification.
+   */
+  createDocumentClassifier(params: Comprehend.Types.CreateDocumentClassifierRequest, callback?: (err: AWSError, data: Comprehend.Types.CreateDocumentClassifierResponse) => void): Request<Comprehend.Types.CreateDocumentClassifierResponse, AWSError>;
+  /**
+   * Creates a new document classifier that you can use to categorize documents. To create a classifier you provide a set of training documents that labeled with the categories that you want to use. After the classifier is trained you can use it to categorize a set of labeled documents into the categories. For more information, see how-document-classification.
+   */
+  createDocumentClassifier(callback?: (err: AWSError, data: Comprehend.Types.CreateDocumentClassifierResponse) => void): Request<Comprehend.Types.CreateDocumentClassifierResponse, AWSError>;
+  /**
+   * Creates a model-specific endpoint for synchronous inference for a previously trained custom model 
+   */
+  createEndpoint(params: Comprehend.Types.CreateEndpointRequest, callback?: (err: AWSError, data: Comprehend.Types.CreateEndpointResponse) => void): Request<Comprehend.Types.CreateEndpointResponse, AWSError>;
+  /**
+   * Creates a model-specific endpoint for synchronous inference for a previously trained custom model 
+   */
+  createEndpoint(callback?: (err: AWSError, data: Comprehend.Types.CreateEndpointResponse) => void): Request<Comprehend.Types.CreateEndpointResponse, AWSError>;
+  /**
+   * Creates an entity recognizer using submitted files. After your CreateEntityRecognizer request is submitted, you can check job status using the API. 
+   */
+  createEntityRecognizer(params: Comprehend.Types.CreateEntityRecognizerRequest, callback?: (err: AWSError, data: Comprehend.Types.CreateEntityRecognizerResponse) => void): Request<Comprehend.Types.CreateEntityRecognizerResponse, AWSError>;
+  /**
+   * Creates an entity recognizer using submitted files. After your CreateEntityRecognizer request is submitted, you can check job status using the API. 
+   */
+  createEntityRecognizer(callback?: (err: AWSError, data: Comprehend.Types.CreateEntityRecognizerResponse) => void): Request<Comprehend.Types.CreateEntityRecognizerResponse, AWSError>;
+  /**
+   * Deletes a previously created document classifier Only those classifiers that are in terminated states (IN_ERROR, TRAINED) will be deleted. If an active inference job is using the model, a ResourceInUseException will be returned. This is an asynchronous action that puts the classifier into a DELETING state, and it is then removed by a background job. Once removed, the classifier disappears from your account and is no longer available for use. 
+   */
+  deleteDocumentClassifier(params: Comprehend.Types.DeleteDocumentClassifierRequest, callback?: (err: AWSError, data: Comprehend.Types.DeleteDocumentClassifierResponse) => void): Request<Comprehend.Types.DeleteDocumentClassifierResponse, AWSError>;
+  /**
+   * Deletes a previously created document classifier Only those classifiers that are in terminated states (IN_ERROR, TRAINED) will be deleted. If an active inference job is using the model, a ResourceInUseException will be returned. This is an asynchronous action that puts the classifier into a DELETING state, and it is then removed by a background job. Once removed, the classifier disappears from your account and is no longer available for use. 
+   */
+  deleteDocumentClassifier(callback?: (err: AWSError, data: Comprehend.Types.DeleteDocumentClassifierResponse) => void): Request<Comprehend.Types.DeleteDocumentClassifierResponse, AWSError>;
+  /**
+   * Deletes a model-specific endpoint for a previously-trained custom model. All endpoints must be deleted in order for the model to be deleted.
+   */
+  deleteEndpoint(params: Comprehend.Types.DeleteEndpointRequest, callback?: (err: AWSError, data: Comprehend.Types.DeleteEndpointResponse) => void): Request<Comprehend.Types.DeleteEndpointResponse, AWSError>;
+  /**
+   * Deletes a model-specific endpoint for a previously-trained custom model. All endpoints must be deleted in order for the model to be deleted.
+   */
+  deleteEndpoint(callback?: (err: AWSError, data: Comprehend.Types.DeleteEndpointResponse) => void): Request<Comprehend.Types.DeleteEndpointResponse, AWSError>;
+  /**
+   * Deletes an entity recognizer. Only those recognizers that are in terminated states (IN_ERROR, TRAINED) will be deleted. If an active inference job is using the model, a ResourceInUseException will be returned. This is an asynchronous action that puts the recognizer into a DELETING state, and it is then removed by a background job. Once removed, the recognizer disappears from your account and is no longer available for use. 
+   */
+  deleteEntityRecognizer(params: Comprehend.Types.DeleteEntityRecognizerRequest, callback?: (err: AWSError, data: Comprehend.Types.DeleteEntityRecognizerResponse) => void): Request<Comprehend.Types.DeleteEntityRecognizerResponse, AWSError>;
+  /**
+   * Deletes an entity recognizer. Only those recognizers that are in terminated states (IN_ERROR, TRAINED) will be deleted. If an active inference job is using the model, a ResourceInUseException will be returned. This is an asynchronous action that puts the recognizer into a DELETING state, and it is then removed by a background job. Once removed, the recognizer disappears from your account and is no longer available for use. 
+   */
+  deleteEntityRecognizer(callback?: (err: AWSError, data: Comprehend.Types.DeleteEntityRecognizerResponse) => void): Request<Comprehend.Types.DeleteEntityRecognizerResponse, AWSError>;
+  /**
+   * Gets the properties associated with a document classification job. Use this operation to get the status of a classification job.
+   */
+  describeDocumentClassificationJob(params: Comprehend.Types.DescribeDocumentClassificationJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeDocumentClassificationJobResponse) => void): Request<Comprehend.Types.DescribeDocumentClassificationJobResponse, AWSError>;
+  /**
+   * Gets the properties associated with a document classification job. Use this operation to get the status of a classification job.
+   */
+  describeDocumentClassificationJob(callback?: (err: AWSError, data: Comprehend.Types.DescribeDocumentClassificationJobResponse) => void): Request<Comprehend.Types.DescribeDocumentClassificationJobResponse, AWSError>;
+  /**
+   * Gets the properties associated with a document classifier.
+   */
+  describeDocumentClassifier(params: Comprehend.Types.DescribeDocumentClassifierRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeDocumentClassifierResponse) => void): Request<Comprehend.Types.DescribeDocumentClassifierResponse, AWSError>;
+  /**
+   * Gets the properties associated with a document classifier.
+   */
+  describeDocumentClassifier(callback?: (err: AWSError, data: Comprehend.Types.DescribeDocumentClassifierResponse) => void): Request<Comprehend.Types.DescribeDocumentClassifierResponse, AWSError>;
+  /**
    * Gets the properties associated with a dominant language detection job. Use this operation to get the status of a detection job.
    */
   describeDominantLanguageDetectionJob(params: Comprehend.Types.DescribeDominantLanguageDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeDominantLanguageDetectionJobResponse) => void): Request<Comprehend.Types.DescribeDominantLanguageDetectionJobResponse, AWSError>;
@@ -60,6 +132,14 @@ declare class Comprehend extends Service {
    */
   describeDominantLanguageDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.DescribeDominantLanguageDetectionJobResponse) => void): Request<Comprehend.Types.DescribeDominantLanguageDetectionJobResponse, AWSError>;
   /**
+   * Gets the properties associated with a specific endpoint. Use this operation to get the status of an endpoint.
+   */
+  describeEndpoint(params: Comprehend.Types.DescribeEndpointRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeEndpointResponse) => void): Request<Comprehend.Types.DescribeEndpointResponse, AWSError>;
+  /**
+   * Gets the properties associated with a specific endpoint. Use this operation to get the status of an endpoint.
+   */
+  describeEndpoint(callback?: (err: AWSError, data: Comprehend.Types.DescribeEndpointResponse) => void): Request<Comprehend.Types.DescribeEndpointResponse, AWSError>;
+  /**
    * Gets the properties associated with an entities detection job. Use this operation to get the status of a detection job.
    */
   describeEntitiesDetectionJob(params: Comprehend.Types.DescribeEntitiesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.DescribeEntitiesDetectionJobResponse, AWSError>;
@@ -67,6 +147,14 @@ declare class Comprehend extends Service {
    * Gets the properties associated with an entities detection job. Use this operation to get the status of a detection job.
    */
   describeEntitiesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.DescribeEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.DescribeEntitiesDetectionJobResponse, AWSError>;
+  /**
+   * Provides details about an entity recognizer including status, S3 buckets containing training data, recognizer metadata, metrics, and so on.
+   */
+  describeEntityRecognizer(params: Comprehend.Types.DescribeEntityRecognizerRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeEntityRecognizerResponse) => void): Request<Comprehend.Types.DescribeEntityRecognizerResponse, AWSError>;
+  /**
+   * Provides details about an entity recognizer including status, S3 buckets containing training data, recognizer metadata, metrics, and so on.
+   */
+  describeEntityRecognizer(callback?: (err: AWSError, data: Comprehend.Types.DescribeEntityRecognizerResponse) => void): Request<Comprehend.Types.DescribeEntityRecognizerResponse, AWSError>;
   /**
    * Gets the properties associated with a key phrases detection job. Use this operation to get the status of a detection job.
    */
@@ -132,6 +220,22 @@ declare class Comprehend extends Service {
    */
   detectSyntax(callback?: (err: AWSError, data: Comprehend.Types.DetectSyntaxResponse) => void): Request<Comprehend.Types.DetectSyntaxResponse, AWSError>;
   /**
+   * Gets a list of the documentation classification jobs that you have submitted.
+   */
+  listDocumentClassificationJobs(params: Comprehend.Types.ListDocumentClassificationJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListDocumentClassificationJobsResponse) => void): Request<Comprehend.Types.ListDocumentClassificationJobsResponse, AWSError>;
+  /**
+   * Gets a list of the documentation classification jobs that you have submitted.
+   */
+  listDocumentClassificationJobs(callback?: (err: AWSError, data: Comprehend.Types.ListDocumentClassificationJobsResponse) => void): Request<Comprehend.Types.ListDocumentClassificationJobsResponse, AWSError>;
+  /**
+   * Gets a list of the document classifiers that you have created.
+   */
+  listDocumentClassifiers(params: Comprehend.Types.ListDocumentClassifiersRequest, callback?: (err: AWSError, data: Comprehend.Types.ListDocumentClassifiersResponse) => void): Request<Comprehend.Types.ListDocumentClassifiersResponse, AWSError>;
+  /**
+   * Gets a list of the document classifiers that you have created.
+   */
+  listDocumentClassifiers(callback?: (err: AWSError, data: Comprehend.Types.ListDocumentClassifiersResponse) => void): Request<Comprehend.Types.ListDocumentClassifiersResponse, AWSError>;
+  /**
    * Gets a list of the dominant language detection jobs that you have submitted.
    */
   listDominantLanguageDetectionJobs(params: Comprehend.Types.ListDominantLanguageDetectionJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListDominantLanguageDetectionJobsResponse) => void): Request<Comprehend.Types.ListDominantLanguageDetectionJobsResponse, AWSError>;
@@ -140,6 +244,14 @@ declare class Comprehend extends Service {
    */
   listDominantLanguageDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListDominantLanguageDetectionJobsResponse) => void): Request<Comprehend.Types.ListDominantLanguageDetectionJobsResponse, AWSError>;
   /**
+   * Gets a list of all existing endpoints that you've created.
+   */
+  listEndpoints(params: Comprehend.Types.ListEndpointsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListEndpointsResponse) => void): Request<Comprehend.Types.ListEndpointsResponse, AWSError>;
+  /**
+   * Gets a list of all existing endpoints that you've created.
+   */
+  listEndpoints(callback?: (err: AWSError, data: Comprehend.Types.ListEndpointsResponse) => void): Request<Comprehend.Types.ListEndpointsResponse, AWSError>;
+  /**
    * Gets a list of the entity detection jobs that you have submitted.
    */
   listEntitiesDetectionJobs(params: Comprehend.Types.ListEntitiesDetectionJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListEntitiesDetectionJobsResponse) => void): Request<Comprehend.Types.ListEntitiesDetectionJobsResponse, AWSError>;
@@ -147,6 +259,14 @@ declare class Comprehend extends Service {
    * Gets a list of the entity detection jobs that you have submitted.
    */
   listEntitiesDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListEntitiesDetectionJobsResponse) => void): Request<Comprehend.Types.ListEntitiesDetectionJobsResponse, AWSError>;
+  /**
+   * Gets a list of the properties of all entity recognizers that you created, including recognizers currently in training. Allows you to filter the list of recognizers based on criteria such as status and submission time. This call returns up to 500 entity recognizers in the list, with a default number of 100 recognizers in the list. The results of this list are not in any particular order. Please get the list and sort locally if needed.
+   */
+  listEntityRecognizers(params: Comprehend.Types.ListEntityRecognizersRequest, callback?: (err: AWSError, data: Comprehend.Types.ListEntityRecognizersResponse) => void): Request<Comprehend.Types.ListEntityRecognizersResponse, AWSError>;
+  /**
+   * Gets a list of the properties of all entity recognizers that you created, including recognizers currently in training. Allows you to filter the list of recognizers based on criteria such as status and submission time. This call returns up to 500 entity recognizers in the list, with a default number of 100 recognizers in the list. The results of this list are not in any particular order. Please get the list and sort locally if needed.
+   */
+  listEntityRecognizers(callback?: (err: AWSError, data: Comprehend.Types.ListEntityRecognizersResponse) => void): Request<Comprehend.Types.ListEntityRecognizersResponse, AWSError>;
   /**
    * Get a list of key phrase detection jobs that you have submitted.
    */
@@ -164,6 +284,14 @@ declare class Comprehend extends Service {
    */
   listSentimentDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListSentimentDetectionJobsResponse) => void): Request<Comprehend.Types.ListSentimentDetectionJobsResponse, AWSError>;
   /**
+   * Lists all tags associated with a given Amazon Comprehend resource. 
+   */
+  listTagsForResource(params: Comprehend.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Comprehend.Types.ListTagsForResourceResponse) => void): Request<Comprehend.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists all tags associated with a given Amazon Comprehend resource. 
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Comprehend.Types.ListTagsForResourceResponse) => void): Request<Comprehend.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Gets a list of the topic detection jobs that you have submitted.
    */
   listTopicsDetectionJobs(params: Comprehend.Types.ListTopicsDetectionJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListTopicsDetectionJobsResponse) => void): Request<Comprehend.Types.ListTopicsDetectionJobsResponse, AWSError>;
@@ -171,6 +299,14 @@ declare class Comprehend extends Service {
    * Gets a list of the topic detection jobs that you have submitted.
    */
   listTopicsDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListTopicsDetectionJobsResponse) => void): Request<Comprehend.Types.ListTopicsDetectionJobsResponse, AWSError>;
+  /**
+   * Starts an asynchronous document classification job. Use the operation to track the progress of the job.
+   */
+  startDocumentClassificationJob(params: Comprehend.Types.StartDocumentClassificationJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartDocumentClassificationJobResponse) => void): Request<Comprehend.Types.StartDocumentClassificationJobResponse, AWSError>;
+  /**
+   * Starts an asynchronous document classification job. Use the operation to track the progress of the job.
+   */
+  startDocumentClassificationJob(callback?: (err: AWSError, data: Comprehend.Types.StartDocumentClassificationJobResponse) => void): Request<Comprehend.Types.StartDocumentClassificationJobResponse, AWSError>;
   /**
    * Starts an asynchronous dominant language detection job for a collection of documents. Use the operation to track the status of a job.
    */
@@ -180,11 +316,11 @@ declare class Comprehend extends Service {
    */
   startDominantLanguageDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StartDominantLanguageDetectionJobResponse) => void): Request<Comprehend.Types.StartDominantLanguageDetectionJobResponse, AWSError>;
   /**
-   * Starts an asynchronous entity detection job for a collection of documents. Use the operation to track the status of a job.
+   * Starts an asynchronous entity detection job for a collection of documents. Use the operation to track the status of a job. This API can be used for either standard entity detection or custom entity recognition. In order to be used for custom entity recognition, the optional EntityRecognizerArn must be used in order to provide access to the recognizer being used to detect the custom entity.
    */
   startEntitiesDetectionJob(params: Comprehend.Types.StartEntitiesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StartEntitiesDetectionJobResponse, AWSError>;
   /**
-   * Starts an asynchronous entity detection job for a collection of documents. Use the operation to track the status of a job.
+   * Starts an asynchronous entity detection job for a collection of documents. Use the operation to track the status of a job. This API can be used for either standard entity detection or custom entity recognition. In order to be used for custom entity recognition, the optional EntityRecognizerArn must be used in order to provide access to the recognizer being used to detect the custom entity.
    */
   startEntitiesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StartEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StartEntitiesDetectionJobResponse, AWSError>;
   /**
@@ -243,6 +379,46 @@ declare class Comprehend extends Service {
    * Stops a sentiment detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is be stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
   stopSentimentDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StopSentimentDetectionJobResponse) => void): Request<Comprehend.Types.StopSentimentDetectionJobResponse, AWSError>;
+  /**
+   * Stops a document classifier training job while in progress. If the training job state is TRAINING, the job is marked for termination and put into the STOP_REQUESTED state. If the training job completes before it can be stopped, it is put into the TRAINED; otherwise the training job is stopped and put into the STOPPED state and the service sends back an HTTP 200 response with an empty HTTP body. 
+   */
+  stopTrainingDocumentClassifier(params: Comprehend.Types.StopTrainingDocumentClassifierRequest, callback?: (err: AWSError, data: Comprehend.Types.StopTrainingDocumentClassifierResponse) => void): Request<Comprehend.Types.StopTrainingDocumentClassifierResponse, AWSError>;
+  /**
+   * Stops a document classifier training job while in progress. If the training job state is TRAINING, the job is marked for termination and put into the STOP_REQUESTED state. If the training job completes before it can be stopped, it is put into the TRAINED; otherwise the training job is stopped and put into the STOPPED state and the service sends back an HTTP 200 response with an empty HTTP body. 
+   */
+  stopTrainingDocumentClassifier(callback?: (err: AWSError, data: Comprehend.Types.StopTrainingDocumentClassifierResponse) => void): Request<Comprehend.Types.StopTrainingDocumentClassifierResponse, AWSError>;
+  /**
+   * Stops an entity recognizer training job while in progress. If the training job state is TRAINING, the job is marked for termination and put into the STOP_REQUESTED state. If the training job completes before it can be stopped, it is put into the TRAINED; otherwise the training job is stopped and putted into the STOPPED state and the service sends back an HTTP 200 response with an empty HTTP body.
+   */
+  stopTrainingEntityRecognizer(params: Comprehend.Types.StopTrainingEntityRecognizerRequest, callback?: (err: AWSError, data: Comprehend.Types.StopTrainingEntityRecognizerResponse) => void): Request<Comprehend.Types.StopTrainingEntityRecognizerResponse, AWSError>;
+  /**
+   * Stops an entity recognizer training job while in progress. If the training job state is TRAINING, the job is marked for termination and put into the STOP_REQUESTED state. If the training job completes before it can be stopped, it is put into the TRAINED; otherwise the training job is stopped and putted into the STOPPED state and the service sends back an HTTP 200 response with an empty HTTP body.
+   */
+  stopTrainingEntityRecognizer(callback?: (err: AWSError, data: Comprehend.Types.StopTrainingEntityRecognizerResponse) => void): Request<Comprehend.Types.StopTrainingEntityRecognizerResponse, AWSError>;
+  /**
+   * Associates a specific tag with an Amazon Comprehend resource. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department. 
+   */
+  tagResource(params: Comprehend.Types.TagResourceRequest, callback?: (err: AWSError, data: Comprehend.Types.TagResourceResponse) => void): Request<Comprehend.Types.TagResourceResponse, AWSError>;
+  /**
+   * Associates a specific tag with an Amazon Comprehend resource. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department. 
+   */
+  tagResource(callback?: (err: AWSError, data: Comprehend.Types.TagResourceResponse) => void): Request<Comprehend.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes a specific tag associated with an Amazon Comprehend resource. 
+   */
+  untagResource(params: Comprehend.Types.UntagResourceRequest, callback?: (err: AWSError, data: Comprehend.Types.UntagResourceResponse) => void): Request<Comprehend.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes a specific tag associated with an Amazon Comprehend resource. 
+   */
+  untagResource(callback?: (err: AWSError, data: Comprehend.Types.UntagResourceResponse) => void): Request<Comprehend.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Updates information about the specified endpoint.
+   */
+  updateEndpoint(params: Comprehend.Types.UpdateEndpointRequest, callback?: (err: AWSError, data: Comprehend.Types.UpdateEndpointResponse) => void): Request<Comprehend.Types.UpdateEndpointResponse, AWSError>;
+  /**
+   * Updates information about the specified endpoint.
+   */
+  updateEndpoint(callback?: (err: AWSError, data: Comprehend.Types.UpdateEndpointResponse) => void): Request<Comprehend.Types.UpdateEndpointResponse, AWSError>;
 }
 declare namespace Comprehend {
   export type AnyLengthString = string;
@@ -288,7 +464,7 @@ declare namespace Comprehend {
      */
     TextList: StringList;
     /**
-     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
   }
@@ -318,7 +494,7 @@ declare namespace Comprehend {
      */
     TextList: StringList;
     /**
-     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
   }
@@ -352,7 +528,7 @@ declare namespace Comprehend {
      */
     TextList: StringList;
     /**
-     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
   }
@@ -382,7 +558,7 @@ declare namespace Comprehend {
      */
     TextList: StringList;
     /**
-     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the following languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.
      */
     LanguageCode: SyntaxLanguageCode;
   }
@@ -411,7 +587,248 @@ declare namespace Comprehend {
     ErrorMessage?: String;
   }
   export type BatchItemErrorList = BatchItemError[];
+  export interface ClassifierEvaluationMetrics {
+    /**
+     * The fraction of the labels that were correct recognized. It is computed by dividing the number of labels in the test documents that were correctly recognized by the total number of labels in the test documents.
+     */
+    Accuracy?: Double;
+    /**
+     * A measure of the usefulness of the classifier results in the test data. High precision means that the classifier returned substantially more relevant results than irrelevant ones.
+     */
+    Precision?: Double;
+    /**
+     * A measure of how complete the classifier results are for the test data. High recall means that the classifier returned most of the relevant results. 
+     */
+    Recall?: Double;
+    /**
+     * A measure of how accurate the classifier results are for the test data. It is derived from the Precision and Recall values. The F1Score is the harmonic average of the two scores. The highest score is 1, and the worst score is 0. 
+     */
+    F1Score?: Double;
+    /**
+     * A measure of the usefulness of the recognizer results in the test data. High precision means that the recognizer returned substantially more relevant results than irrelevant ones. Unlike the Precision metric which comes from averaging the precision of all available labels, this is based on the overall score of all precision scores added together.
+     */
+    MicroPrecision?: Double;
+    /**
+     * A measure of how complete the classifier results are for the test data. High recall means that the classifier returned most of the relevant results. Specifically, this indicates how many of the correct categories in the text that the model can predict. It is a percentage of correct categories in the text that can found. Instead of averaging the recall scores of all labels (as with Recall), micro Recall is based on the overall score of all recall scores added together.
+     */
+    MicroRecall?: Double;
+    /**
+     * A measure of how accurate the classifier results are for the test data. It is a combination of the Micro Precision and Micro Recall values. The Micro F1Score is the harmonic mean of the two scores. The highest score is 1, and the worst score is 0.
+     */
+    MicroF1Score?: Double;
+    /**
+     * Indicates the fraction of labels that are incorrectly predicted. Also seen as the fraction of wrong labels compared to the total number of labels. Scores closer to zero are better.
+     */
+    HammingLoss?: Double;
+  }
+  export interface ClassifierMetadata {
+    /**
+     * The number of labels in the input data. 
+     */
+    NumberOfLabels?: Integer;
+    /**
+     * The number of documents in the input data that were used to train the classifier. Typically this is 80 to 90 percent of the input documents.
+     */
+    NumberOfTrainedDocuments?: Integer;
+    /**
+     * The number of documents in the input data that were used to test the classifier. Typically this is 10 to 20 percent of the input documents.
+     */
+    NumberOfTestDocuments?: Integer;
+    /**
+     *  Describes the result metrics for the test data associated with an documentation classifier.
+     */
+    EvaluationMetrics?: ClassifierEvaluationMetrics;
+  }
+  export interface ClassifyDocumentRequest {
+    /**
+     * The document text to be analyzed.
+     */
+    Text: String;
+    /**
+     * The Amazon Resource Number (ARN) of the endpoint.
+     */
+    EndpointArn: DocumentClassifierEndpointArn;
+  }
+  export interface ClassifyDocumentResponse {
+    /**
+     * The classes used by the document being analyzed. These are used for multi-class trained models. Individual classes are mutually exclusive and each document is expected to have only a single class assigned to it. For example, an animal can be a dog or a cat, but not both at the same time. 
+     */
+    Classes?: ListOfClasses;
+    /**
+     * The labels used the document being analyzed. These are used for multi-label trained models. Individual labels represent different categories that are related in some manner and are not multually exclusive. For example, a movie can be just an action movie, or it can be an action movie, a science fiction movie, and a comedy, all at the same time. 
+     */
+    Labels?: ListOfLabels;
+  }
   export type ClientRequestTokenString = string;
+  export type ComprehendArn = string;
+  export type ComprehendArnName = string;
+  export type ComprehendEndpointArn = string;
+  export type ComprehendEndpointName = string;
+  export type ComprehendModelArn = string;
+  export interface CreateDocumentClassifierRequest {
+    /**
+     * The name of the document classifier.
+     */
+    DocumentClassifierName: ComprehendArnName;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn: IamRoleArn;
+    /**
+     * Tags to be associated with the document classifier being created. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department. 
+     */
+    Tags?: TagList;
+    /**
+     * Specifies the format and location of the input data for the job.
+     */
+    InputDataConfig: DocumentClassifierInputDataConfig;
+    /**
+     * Enables the addition of output results configuration parameters for custom classifier jobs.
+     */
+    OutputDataConfig?: DocumentClassifierOutputDataConfig;
+    /**
+     * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
+     */
+    ClientRequestToken?: ClientRequestTokenString;
+    /**
+     * The language of the input documents. You can specify any of the following languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.
+     */
+    LanguageCode: LanguageCode;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
+    /**
+     * Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your custom classifier. For more information, see Amazon VPC. 
+     */
+    VpcConfig?: VpcConfig;
+    /**
+     * Indicates the mode in which the classifier will be trained. The classifier can be trained in multi-class mode, which identifies one and only one class for each document, or multi-label mode, which identifies one or more labels for each document. In multi-label mode, multiple labels for an individual document are separated by a delimiter. The default delimiter between labels is a pipe (|).
+     */
+    Mode?: DocumentClassifierMode;
+  }
+  export interface CreateDocumentClassifierResponse {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the document classifier.
+     */
+    DocumentClassifierArn?: DocumentClassifierArn;
+  }
+  export interface CreateEndpointRequest {
+    /**
+     * This is the descriptive suffix that becomes part of the EndpointArn used for all subsequent requests to this resource. 
+     */
+    EndpointName: ComprehendEndpointName;
+    /**
+     * The Amazon Resource Number (ARN) of the model to which the endpoint will be attached.
+     */
+    ModelArn: ComprehendModelArn;
+    /**
+     *  The desired number of inference units to be used by the model using this endpoint. Each inference unit represents of a throughput of 100 characters per second.
+     */
+    DesiredInferenceUnits: InferenceUnitsInteger;
+    /**
+     * An idempotency token provided by the customer. If this token matches a previous endpoint creation request, Amazon Comprehend will not return a ResourceInUseException. 
+     */
+    ClientRequestToken?: ClientRequestTokenString;
+    /**
+     * Tags associated with the endpoint being created. A tag is a key-value pair that adds metadata to the endpoint. For example, a tag with "Sales" as the key might be added to an endpoint to indicate its use by the sales department. 
+     */
+    Tags?: TagList;
+  }
+  export interface CreateEndpointResponse {
+    /**
+     * The Amazon Resource Number (ARN) of the endpoint being created.
+     */
+    EndpointArn?: ComprehendEndpointArn;
+  }
+  export interface CreateEntityRecognizerRequest {
+    /**
+     * The name given to the newly created recognizer. Recognizer names can be a maximum of 256 characters. Alphanumeric characters, hyphens (-) and underscores (_) are allowed. The name must be unique in the account/region.
+     */
+    RecognizerName: ComprehendArnName;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn: IamRoleArn;
+    /**
+     * Tags to be associated with the entity recognizer being created. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department. 
+     */
+    Tags?: TagList;
+    /**
+     * Specifies the format and location of the input data. The S3 bucket containing the input data must be located in the same region as the entity recognizer being created. 
+     */
+    InputDataConfig: EntityRecognizerInputDataConfig;
+    /**
+     *  A unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
+     */
+    ClientRequestToken?: ClientRequestTokenString;
+    /**
+     *  The language of the input documents. All documents must be in the same language. Only English ("en") is currently supported. 
+     */
+    LanguageCode: LanguageCode;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
+    /**
+     * Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your custom entity recognizer. For more information, see Amazon VPC. 
+     */
+    VpcConfig?: VpcConfig;
+  }
+  export interface CreateEntityRecognizerResponse {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the entity recognizer.
+     */
+    EntityRecognizerArn?: EntityRecognizerArn;
+  }
+  export interface DeleteDocumentClassifierRequest {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the document classifier. 
+     */
+    DocumentClassifierArn: DocumentClassifierArn;
+  }
+  export interface DeleteDocumentClassifierResponse {
+  }
+  export interface DeleteEndpointRequest {
+    /**
+     * The Amazon Resource Number (ARN) of the endpoint being deleted.
+     */
+    EndpointArn: ComprehendEndpointArn;
+  }
+  export interface DeleteEndpointResponse {
+  }
+  export interface DeleteEntityRecognizerRequest {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the entity recognizer.
+     */
+    EntityRecognizerArn: EntityRecognizerArn;
+  }
+  export interface DeleteEntityRecognizerResponse {
+  }
+  export interface DescribeDocumentClassificationJobRequest {
+    /**
+     * The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
+     */
+    JobId: JobId;
+  }
+  export interface DescribeDocumentClassificationJobResponse {
+    /**
+     * An object that describes the properties associated with the document classification job.
+     */
+    DocumentClassificationJobProperties?: DocumentClassificationJobProperties;
+  }
+  export interface DescribeDocumentClassifierRequest {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the document classifier. The operation returns this identifier in its response.
+     */
+    DocumentClassifierArn: DocumentClassifierArn;
+  }
+  export interface DescribeDocumentClassifierResponse {
+    /**
+     * An object that contains the properties associated with a document classifier.
+     */
+    DocumentClassifierProperties?: DocumentClassifierProperties;
+  }
   export interface DescribeDominantLanguageDetectionJobRequest {
     /**
      * The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
@@ -424,6 +841,18 @@ declare namespace Comprehend {
      */
     DominantLanguageDetectionJobProperties?: DominantLanguageDetectionJobProperties;
   }
+  export interface DescribeEndpointRequest {
+    /**
+     * The Amazon Resource Number (ARN) of the endpoint being described.
+     */
+    EndpointArn: ComprehendEndpointArn;
+  }
+  export interface DescribeEndpointResponse {
+    /**
+     * Describes information associated with the specific endpoint.
+     */
+    EndpointProperties?: EndpointProperties;
+  }
   export interface DescribeEntitiesDetectionJobRequest {
     /**
      * The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
@@ -435,6 +864,18 @@ declare namespace Comprehend {
      * An object that contains the properties associated with an entities detection job.
      */
     EntitiesDetectionJobProperties?: EntitiesDetectionJobProperties;
+  }
+  export interface DescribeEntityRecognizerRequest {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the entity recognizer.
+     */
+    EntityRecognizerArn: EntityRecognizerArn;
+  }
+  export interface DescribeEntityRecognizerResponse {
+    /**
+     * Describes information associated with an entity recognizer.
+     */
+    EntityRecognizerProperties?: EntityRecognizerProperties;
   }
   export interface DescribeKeyPhrasesDetectionJobRequest {
     /**
@@ -490,7 +931,7 @@ declare namespace Comprehend {
      */
     Text: String;
     /**
-     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
   }
@@ -506,7 +947,7 @@ declare namespace Comprehend {
      */
     Text: String;
     /**
-     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
   }
@@ -522,7 +963,7 @@ declare namespace Comprehend {
      */
     Text: String;
     /**
-     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
   }
@@ -542,7 +983,7 @@ declare namespace Comprehend {
      */
     Text: String;
     /**
-     * The language code of the input documents. You can specify English ("en") or Spanish ("es").
+     * The language code of the input documents. You can specify any of the following languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt").
      */
     LanguageCode: SyntaxLanguageCode;
   }
@@ -551,6 +992,195 @@ declare namespace Comprehend {
      * A collection of syntax tokens describing the text. For each token, the response provides the text, the token type, where the text begins and ends, and the level of confidence that Amazon Comprehend has that the token is correct. For a list of token types, see how-syntax.
      */
     SyntaxTokens?: ListOfSyntaxTokens;
+  }
+  export interface DocumentClass {
+    /**
+     * The name of the class.
+     */
+    Name?: String;
+    /**
+     * The confidence score that Amazon Comprehend has this class correctly attributed.
+     */
+    Score?: Float;
+  }
+  export interface DocumentClassificationJobFilter {
+    /**
+     * Filters on the name of the job.
+     */
+    JobName?: JobName;
+    /**
+     * Filters the list based on job status. Returns only jobs with the specified status.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in ascending order, oldest to newest.
+     */
+    SubmitTimeBefore?: Timestamp;
+    /**
+     * Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in descending order, newest to oldest.
+     */
+    SubmitTimeAfter?: Timestamp;
+  }
+  export interface DocumentClassificationJobProperties {
+    /**
+     * The identifier assigned to the document classification job.
+     */
+    JobId?: JobId;
+    /**
+     * The name that you assigned to the document classification job.
+     */
+    JobName?: JobName;
+    /**
+     * The current status of the document classification job. If the status is FAILED, the Message field shows the reason for the failure.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * A description of the status of the job.
+     */
+    Message?: AnyLengthString;
+    /**
+     * The time that the document classification job was submitted for processing.
+     */
+    SubmitTime?: Timestamp;
+    /**
+     * The time that the document classification job completed.
+     */
+    EndTime?: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) that identifies the document classifier. 
+     */
+    DocumentClassifierArn?: DocumentClassifierArn;
+    /**
+     * The input data configuration that you supplied when you created the document classification job.
+     */
+    InputDataConfig?: InputDataConfig;
+    /**
+     * The output data configuration that you supplied when you created the document classification job.
+     */
+    OutputDataConfig?: OutputDataConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn?: IamRoleArn;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
+    /**
+     *  Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your document classification job. For more information, see Amazon VPC. 
+     */
+    VpcConfig?: VpcConfig;
+  }
+  export type DocumentClassificationJobPropertiesList = DocumentClassificationJobProperties[];
+  export type DocumentClassifierArn = string;
+  export type DocumentClassifierEndpointArn = string;
+  export interface DocumentClassifierFilter {
+    /**
+     * Filters the list of classifiers based on status. 
+     */
+    Status?: ModelStatus;
+    /**
+     * Filters the list of classifiers based on the time that the classifier was submitted for processing. Returns only classifiers submitted before the specified time. Classifiers are returned in ascending order, oldest to newest.
+     */
+    SubmitTimeBefore?: Timestamp;
+    /**
+     * Filters the list of classifiers based on the time that the classifier was submitted for processing. Returns only classifiers submitted after the specified time. Classifiers are returned in descending order, newest to oldest.
+     */
+    SubmitTimeAfter?: Timestamp;
+  }
+  export interface DocumentClassifierInputDataConfig {
+    /**
+     * The Amazon S3 URI for the input data. The S3 bucket must be in the same region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of input files. For example, if you use the URI S3://bucketName/prefix, if the prefix is a single file, Amazon Comprehend uses that file as input. If more than one file begins with the prefix, Amazon Comprehend uses all of them as input.
+     */
+    S3Uri: S3Uri;
+    /**
+     * Indicates the delimiter used to separate each label for training a multi-label classifier. The default delimiter between labels is a pipe (|). You can use a different character as a delimiter (if it's an allowed character) by specifying it under Delimiter for labels. If the training documents use a delimiter other than the default or the delimiter you specify, the labels on that line will be combined to make a single unique label, such as LABELLABELLABEL.
+     */
+    LabelDelimiter?: LabelDelimiter;
+  }
+  export type DocumentClassifierMode = "MULTI_CLASS"|"MULTI_LABEL"|string;
+  export interface DocumentClassifierOutputDataConfig {
+    /**
+     * When you use the OutputDataConfig object while creating a custom classifier, you specify the Amazon S3 location where you want to write the confusion matrix. The URI must be in the same region as the API endpoint that you are calling. The location is used as the prefix for the actual location of this output file. When the custom classifier job is finished, the service creates the output file in a directory specific to the job. The S3Uri field contains the location of the output file, called output.tar.gz. It is a compressed archive that contains the confusion matrix.
+     */
+    S3Uri?: S3Uri;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt the output results from an analysis job. The KmsKeyId can be one of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"    KMS Key Alias: "alias/ExampleAlias"    ARN of a KMS Key Alias: "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"   
+     */
+    KmsKeyId?: KmsKeyId;
+  }
+  export interface DocumentClassifierProperties {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the document classifier.
+     */
+    DocumentClassifierArn?: DocumentClassifierArn;
+    /**
+     * The language code for the language of the documents that the classifier was trained on.
+     */
+    LanguageCode?: LanguageCode;
+    /**
+     * The status of the document classifier. If the status is TRAINED the classifier is ready to use. If the status is FAILED you can see additional information about why the classifier wasn't trained in the Message field.
+     */
+    Status?: ModelStatus;
+    /**
+     * Additional information about the status of the classifier.
+     */
+    Message?: AnyLengthString;
+    /**
+     * The time that the document classifier was submitted for training.
+     */
+    SubmitTime?: Timestamp;
+    /**
+     * The time that training the document classifier completed.
+     */
+    EndTime?: Timestamp;
+    /**
+     * Indicates the time when the training starts on documentation classifiers. You are billed for the time interval between this time and the value of TrainingEndTime. 
+     */
+    TrainingStartTime?: Timestamp;
+    /**
+     * The time that training of the document classifier was completed. Indicates the time when the training completes on documentation classifiers. You are billed for the time interval between this time and the value of TrainingStartTime.
+     */
+    TrainingEndTime?: Timestamp;
+    /**
+     * The input data configuration that you supplied when you created the document classifier for training.
+     */
+    InputDataConfig?: DocumentClassifierInputDataConfig;
+    /**
+     *  Provides output results configuration parameters for custom classifier jobs.
+     */
+    OutputDataConfig?: DocumentClassifierOutputDataConfig;
+    /**
+     * Information about the document classifier, including the number of documents used for training the classifier, the number of documents used for test the classifier, and an accuracy rating.
+     */
+    ClassifierMetadata?: ClassifierMetadata;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn?: IamRoleArn;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
+    /**
+     *  Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your custom classifier. For more information, see Amazon VPC. 
+     */
+    VpcConfig?: VpcConfig;
+    /**
+     * Indicates the mode in which the specific classifier was trained. This also indicates the format of input documents and the format of the confusion matrix. Each classifier can only be trained in one mode and this cannot be changed once the classifier is trained.
+     */
+    Mode?: DocumentClassifierMode;
+  }
+  export type DocumentClassifierPropertiesList = DocumentClassifierProperties[];
+  export interface DocumentLabel {
+    /**
+     * The name of the label.
+     */
+    Name?: String;
+    /**
+     * The confidence score that Amazon Comprehend has this label correctly attributed.
+     */
+    Score?: Float;
   }
   export interface DominantLanguage {
     /**
@@ -617,8 +1247,71 @@ declare namespace Comprehend {
      * The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn?: IamRoleArn;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
+    /**
+     *  Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your dominant language detection job. For more information, see Amazon VPC. 
+     */
+    VpcConfig?: VpcConfig;
   }
   export type DominantLanguageDetectionJobPropertiesList = DominantLanguageDetectionJobProperties[];
+  export type Double = number;
+  export interface EndpointFilter {
+    /**
+     * The Amazon Resource Number (ARN) of the model to which the endpoint is attached.
+     */
+    ModelArn?: ComprehendModelArn;
+    /**
+     * Specifies the status of the endpoint being returned. Possible values are: Creating, Ready, Updating, Deleting, Failed.
+     */
+    Status?: EndpointStatus;
+    /**
+     * Specifies a date before which the returned endpoint or endpoints were created.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * Specifies a date after which the returned endpoint or endpoints were created.
+     */
+    CreationTimeAfter?: Timestamp;
+  }
+  export interface EndpointProperties {
+    /**
+     * The Amazon Resource Number (ARN) of the endpoint.
+     */
+    EndpointArn?: ComprehendEndpointArn;
+    /**
+     * Specifies the status of the endpoint. Because the endpoint updates and creation are asynchronous, so customers will need to wait for the endpoint to be Ready status before making inference requests.
+     */
+    Status?: EndpointStatus;
+    /**
+     * Specifies a reason for failure in cases of Failed status.
+     */
+    Message?: AnyLengthString;
+    /**
+     * The Amazon Resource Number (ARN) of the model to which the endpoint is attached.
+     */
+    ModelArn?: ComprehendModelArn;
+    /**
+     * The desired number of inference units to be used by the model using this endpoint. Each inference unit represents of a throughput of 100 characters per second.
+     */
+    DesiredInferenceUnits?: InferenceUnitsInteger;
+    /**
+     * The number of inference units currently used by the model using this endpoint.
+     */
+    CurrentInferenceUnits?: InferenceUnitsInteger;
+    /**
+     * The creation date and time of the endpoint.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The date and time that the endpoint was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+  }
+  export type EndpointPropertiesList = EndpointProperties[];
+  export type EndpointStatus = "CREATING"|"DELETING"|"FAILED"|"IN_SERVICE"|"UPDATING"|string;
   export interface EntitiesDetectionJobFilter {
     /**
      * Filters on the name of the job.
@@ -663,6 +1356,10 @@ declare namespace Comprehend {
      */
     EndTime?: Timestamp;
     /**
+     * The Amazon Resource Name (ARN) that identifies the entity recognizer.
+     */
+    EntityRecognizerArn?: EntityRecognizerArn;
+    /**
      * The input data configuration that you supplied when you created the entities detection job.
      */
     InputDataConfig?: InputDataConfig;
@@ -678,6 +1375,14 @@ declare namespace Comprehend {
      * The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn?: IamRoleArn;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
+    /**
+     *  Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your entity detection job. For more information, see Amazon VPC. 
+     */
+    VpcConfig?: VpcConfig;
   }
   export type EntitiesDetectionJobPropertiesList = EntitiesDetectionJobProperties[];
   export interface Entity {
@@ -702,9 +1407,185 @@ declare namespace Comprehend {
      */
     EndOffset?: Integer;
   }
+  export interface EntityRecognizerAnnotations {
+    /**
+     *  Specifies the Amazon S3 location where the annotations for an entity recognizer are located. The URI must be in the same region as the API endpoint that you are calling.
+     */
+    S3Uri: S3Uri;
+  }
+  export type EntityRecognizerArn = string;
+  export interface EntityRecognizerDocuments {
+    /**
+     *  Specifies the Amazon S3 location where the training documents for an entity recognizer are located. The URI must be in the same region as the API endpoint that you are calling.
+     */
+    S3Uri: S3Uri;
+  }
+  export interface EntityRecognizerEntityList {
+    /**
+     * Specifies the Amazon S3 location where the entity list is located. The URI must be in the same region as the API endpoint that you are calling.
+     */
+    S3Uri: S3Uri;
+  }
+  export interface EntityRecognizerEvaluationMetrics {
+    /**
+     * A measure of the usefulness of the recognizer results in the test data. High precision means that the recognizer returned substantially more relevant results than irrelevant ones. 
+     */
+    Precision?: Double;
+    /**
+     * A measure of how complete the recognizer results are for the test data. High recall means that the recognizer returned most of the relevant results.
+     */
+    Recall?: Double;
+    /**
+     * A measure of how accurate the recognizer results are for the test data. It is derived from the Precision and Recall values. The F1Score is the harmonic average of the two scores. The highest score is 1, and the worst score is 0. 
+     */
+    F1Score?: Double;
+  }
+  export interface EntityRecognizerFilter {
+    /**
+     * The status of an entity recognizer.
+     */
+    Status?: ModelStatus;
+    /**
+     * Filters the list of entities based on the time that the list was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in descending order, newest to oldest.
+     */
+    SubmitTimeBefore?: Timestamp;
+    /**
+     * Filters the list of entities based on the time that the list was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in ascending order, oldest to newest.
+     */
+    SubmitTimeAfter?: Timestamp;
+  }
+  export interface EntityRecognizerInputDataConfig {
+    /**
+     * The entity types in the input data for an entity recognizer. A maximum of 12 entity types can be used at one time to train an entity recognizer.
+     */
+    EntityTypes: EntityTypesList;
+    /**
+     * S3 location of the documents folder for an entity recognizer
+     */
+    Documents: EntityRecognizerDocuments;
+    /**
+     * S3 location of the annotations file for an entity recognizer.
+     */
+    Annotations?: EntityRecognizerAnnotations;
+    /**
+     * S3 location of the entity list for an entity recognizer.
+     */
+    EntityList?: EntityRecognizerEntityList;
+  }
+  export interface EntityRecognizerMetadata {
+    /**
+     *  The number of documents in the input data that were used to train the entity recognizer. Typically this is 80 to 90 percent of the input documents.
+     */
+    NumberOfTrainedDocuments?: Integer;
+    /**
+     *  The number of documents in the input data that were used to test the entity recognizer. Typically this is 10 to 20 percent of the input documents.
+     */
+    NumberOfTestDocuments?: Integer;
+    /**
+     * Detailed information about the accuracy of an entity recognizer.
+     */
+    EvaluationMetrics?: EntityRecognizerEvaluationMetrics;
+    /**
+     * Entity types from the metadata of an entity recognizer.
+     */
+    EntityTypes?: EntityRecognizerMetadataEntityTypesList;
+  }
+  export type EntityRecognizerMetadataEntityTypesList = EntityRecognizerMetadataEntityTypesListItem[];
+  export interface EntityRecognizerMetadataEntityTypesListItem {
+    /**
+     * Type of entity from the list of entity types in the metadata of an entity recognizer. 
+     */
+    Type?: AnyLengthString;
+    /**
+     * Detailed information about the accuracy of the entity recognizer for a specific item on the list of entity types. 
+     */
+    EvaluationMetrics?: EntityTypesEvaluationMetrics;
+    /**
+     * Indicates the number of times the given entity type was seen in the training data. 
+     */
+    NumberOfTrainMentions?: Integer;
+  }
+  export interface EntityRecognizerProperties {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the entity recognizer.
+     */
+    EntityRecognizerArn?: EntityRecognizerArn;
+    /**
+     *  The language of the input documents. All documents must be in the same language. Only English ("en") is currently supported.
+     */
+    LanguageCode?: LanguageCode;
+    /**
+     * Provides the status of the entity recognizer.
+     */
+    Status?: ModelStatus;
+    /**
+     *  A description of the status of the recognizer.
+     */
+    Message?: AnyLengthString;
+    /**
+     * The time that the recognizer was submitted for processing.
+     */
+    SubmitTime?: Timestamp;
+    /**
+     * The time that the recognizer creation completed.
+     */
+    EndTime?: Timestamp;
+    /**
+     * The time that training of the entity recognizer started.
+     */
+    TrainingStartTime?: Timestamp;
+    /**
+     * The time that training of the entity recognizer was completed.
+     */
+    TrainingEndTime?: Timestamp;
+    /**
+     * The input data properties of an entity recognizer.
+     */
+    InputDataConfig?: EntityRecognizerInputDataConfig;
+    /**
+     *  Provides information about an entity recognizer.
+     */
+    RecognizerMetadata?: EntityRecognizerMetadata;
+    /**
+     *  The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn?: IamRoleArn;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
+    /**
+     *  Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your custom entity recognizer. For more information, see Amazon VPC. 
+     */
+    VpcConfig?: VpcConfig;
+  }
+  export type EntityRecognizerPropertiesList = EntityRecognizerProperties[];
   export type EntityType = "PERSON"|"LOCATION"|"ORGANIZATION"|"COMMERCIAL_ITEM"|"EVENT"|"DATE"|"QUANTITY"|"TITLE"|"OTHER"|string;
+  export type EntityTypeName = string;
+  export interface EntityTypesEvaluationMetrics {
+    /**
+     * A measure of the usefulness of the recognizer results for a specific entity type in the test data. High precision means that the recognizer returned substantially more relevant results than irrelevant ones. 
+     */
+    Precision?: Double;
+    /**
+     * A measure of how complete the recognizer results are for a specific entity type in the test data. High recall means that the recognizer returned most of the relevant results.
+     */
+    Recall?: Double;
+    /**
+     * A measure of how accurate the recognizer results are for for a specific entity type in the test data. It is derived from the Precision and Recall values. The F1Score is the harmonic average of the two scores. The highest score is 1, and the worst score is 0. 
+     */
+    F1Score?: Double;
+  }
+  export type EntityTypesList = EntityTypesListItem[];
+  export interface EntityTypesListItem {
+    /**
+     * Entity type of an item on an entity type list.
+     */
+    Type: EntityTypeName;
+  }
   export type Float = number;
   export type IamRoleArn = string;
+  export type InferenceUnitsInteger = number;
   export interface InputDataConfig {
     /**
      * The Amazon S3 URI for the input data. The URI must be in same region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of data files.  For example, if you use the URI S3://bucketName/prefix, if the prefix is a single file, Amazon Comprehend uses that file as input. If more than one file begins with the prefix, Amazon Comprehend uses all of them as input.
@@ -797,9 +1678,67 @@ declare namespace Comprehend {
      * The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn?: IamRoleArn;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
+    /**
+     *  Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your key phrases detection job. For more information, see Amazon VPC. 
+     */
+    VpcConfig?: VpcConfig;
   }
   export type KeyPhrasesDetectionJobPropertiesList = KeyPhrasesDetectionJobProperties[];
-  export type LanguageCode = "en"|"es"|string;
+  export type KmsKeyId = string;
+  export type LabelDelimiter = string;
+  export type LanguageCode = "en"|"es"|"fr"|"de"|"it"|"pt"|"ar"|"hi"|"ja"|"ko"|"zh"|"zh-TW"|string;
+  export interface ListDocumentClassificationJobsRequest {
+    /**
+     * Filters the jobs that are returned. You can filter jobs on their names, status, or the date and time that they were submitted. You can only set one filter at a time.
+     */
+    Filter?: DocumentClassificationJobFilter;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in each page. The default is 100.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListDocumentClassificationJobsResponse {
+    /**
+     * A list containing the properties of each job returned.
+     */
+    DocumentClassificationJobPropertiesList?: DocumentClassificationJobPropertiesList;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+  }
+  export interface ListDocumentClassifiersRequest {
+    /**
+     * Filters the jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.
+     */
+    Filter?: DocumentClassifierFilter;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in each page. The default is 100.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListDocumentClassifiersResponse {
+    /**
+     * A list containing the properties of each job returned.
+     */
+    DocumentClassifierPropertiesList?: DocumentClassifierPropertiesList;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+  }
   export interface ListDominantLanguageDetectionJobsRequest {
     /**
      * Filters that jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.
@@ -819,6 +1758,30 @@ declare namespace Comprehend {
      * A list containing the properties of each job that is returned.
      */
     DominantLanguageDetectionJobPropertiesList?: DominantLanguageDetectionJobPropertiesList;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+  }
+  export interface ListEndpointsRequest {
+    /**
+     * Filters the endpoints that are returned. You can filter endpoints on their name, model, status, or the date and time that they were created. You can only set one filter at a time. 
+     */
+    Filter?: EndpointFilter;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in each page. The default is 100.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListEndpointsResponse {
+    /**
+     * Displays a list of endpoint properties being retrieved by the service in response to the request.
+     */
+    EndpointPropertiesList?: EndpointPropertiesList;
     /**
      * Identifies the next page of results to return.
      */
@@ -848,6 +1811,30 @@ declare namespace Comprehend {
      */
     NextToken?: String;
   }
+  export interface ListEntityRecognizersRequest {
+    /**
+     * Filters the list of entities returned. You can filter on Status, SubmitTimeBefore, or SubmitTimeAfter. You can only set one filter at a time.
+     */
+    Filter?: EntityRecognizerFilter;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+    /**
+     *  The maximum number of results to return on each page. The default is 100.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListEntityRecognizersResponse {
+    /**
+     * The list of properties of an entity recognizer.
+     */
+    EntityRecognizerPropertiesList?: EntityRecognizerPropertiesList;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+  }
   export interface ListKeyPhrasesDetectionJobsRequest {
     /**
      * Filters the jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.
@@ -872,6 +1859,7 @@ declare namespace Comprehend {
      */
     NextToken?: String;
   }
+  export type ListOfClasses = DocumentClass[];
   export type ListOfDetectDominantLanguageResult = BatchDetectDominantLanguageItemResult[];
   export type ListOfDetectEntitiesResult = BatchDetectEntitiesItemResult[];
   export type ListOfDetectKeyPhrasesResult = BatchDetectKeyPhrasesItemResult[];
@@ -880,6 +1868,7 @@ declare namespace Comprehend {
   export type ListOfDominantLanguages = DominantLanguage[];
   export type ListOfEntities = Entity[];
   export type ListOfKeyPhrases = KeyPhrase[];
+  export type ListOfLabels = DocumentLabel[];
   export type ListOfSyntaxTokens = SyntaxToken[];
   export interface ListSentimentDetectionJobsRequest {
     /**
@@ -904,6 +1893,22 @@ declare namespace Comprehend {
      * Identifies the next page of results to return.
      */
     NextToken?: String;
+  }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the given Amazon Comprehend resource you are querying. 
+     */
+    ResourceArn: ComprehendArn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the given Amazon Comprehend resource you are querying.
+     */
+    ResourceArn?: ComprehendArn;
+    /**
+     * Tags associated with the Amazon Comprehend resource being queried. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department. 
+     */
+    Tags?: TagList;
   }
   export interface ListTopicsDetectionJobsRequest {
     /**
@@ -930,12 +1935,17 @@ declare namespace Comprehend {
     NextToken?: String;
   }
   export type MaxResultsInteger = number;
+  export type ModelStatus = "SUBMITTED"|"TRAINING"|"DELETING"|"STOP_REQUESTED"|"STOPPED"|"IN_ERROR"|"TRAINED"|string;
   export type NumberOfTopicsInteger = number;
   export interface OutputDataConfig {
     /**
      * When you use the OutputDataConfig object with asynchronous operations, you specify the Amazon S3 location where you want to write the output data. The URI must be in the same region as the API endpoint that you are calling. The location is used as the prefix for the actual location of the output file. When the topic detection job is finished, the service creates an output file in a directory specific to the job. The S3Uri field contains the location of the output file, called output.tar.gz. It is a compressed archive that contains the ouput of the operation.
      */
     S3Uri: S3Uri;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt the output results from an analysis job. The KmsKeyId can be one of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"    KMS Key Alias: "alias/ExampleAlias"    ARN of a KMS Key Alias: "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"   
+     */
+    KmsKeyId?: KmsKeyId;
   }
   export interface PartOfSpeechTag {
     /**
@@ -947,8 +1957,10 @@ declare namespace Comprehend {
      */
     Score?: Float;
   }
-  export type PartOfSpeechTagType = "ADJ"|"ADP"|"ADV"|"AUX"|"CONJ"|"DET"|"INTJ"|"NOUN"|"NUM"|"O"|"PART"|"PRON"|"PROPN"|"PUNCT"|"SCONJ"|"SYM"|"VERB"|string;
+  export type PartOfSpeechTagType = "ADJ"|"ADP"|"ADV"|"AUX"|"CONJ"|"CCONJ"|"DET"|"INTJ"|"NOUN"|"NUM"|"O"|"PART"|"PRON"|"PROPN"|"PUNCT"|"SCONJ"|"SYM"|"VERB"|string;
   export type S3Uri = string;
+  export type SecurityGroupId = string;
+  export type SecurityGroupIds = SecurityGroupId[];
   export interface SentimentDetectionJobFilter {
     /**
      * Filters on the name of the job.
@@ -1008,6 +2020,14 @@ declare namespace Comprehend {
      * The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn?: IamRoleArn;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
+    /**
+     *  Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your sentiment detection job. For more information, see Amazon VPC. 
+     */
+    VpcConfig?: VpcConfig;
   }
   export type SentimentDetectionJobPropertiesList = SentimentDetectionJobProperties[];
   export interface SentimentScore {
@@ -1029,6 +2049,50 @@ declare namespace Comprehend {
     Mixed?: Float;
   }
   export type SentimentType = "POSITIVE"|"NEGATIVE"|"NEUTRAL"|"MIXED"|string;
+  export interface StartDocumentClassificationJobRequest {
+    /**
+     * The identifier of the job.
+     */
+    JobName?: JobName;
+    /**
+     * The Amazon Resource Name (ARN) of the document classifier to use to process the job.
+     */
+    DocumentClassifierArn: DocumentClassifierArn;
+    /**
+     * Specifies the format and location of the input data for the job.
+     */
+    InputDataConfig: InputDataConfig;
+    /**
+     * Specifies where to send the output files.
+     */
+    OutputDataConfig: OutputDataConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn: IamRoleArn;
+    /**
+     * A unique identifier for the request. If you do not set the client request token, Amazon Comprehend generates one.
+     */
+    ClientRequestToken?: ClientRequestTokenString;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
+    /**
+     * Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your document classification job. For more information, see Amazon VPC. 
+     */
+    VpcConfig?: VpcConfig;
+  }
+  export interface StartDocumentClassificationJobResponse {
+    /**
+     * The identifier generated for the job. To get the status of the job, use this identifier with the operation.
+     */
+    JobId?: JobId;
+    /**
+     * The status of the job:   SUBMITTED - The job has been received and queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. For details, use the operation.   STOP_REQUESTED - Amazon Comprehend has received a stop request for the job and is processing the request.   STOPPED - The job was successfully stopped without completing.  
+     */
+    JobStatus?: JobStatus;
+  }
   export interface StartDominantLanguageDetectionJobRequest {
     /**
      * Specifies the format and location of the input data for the job.
@@ -1050,6 +2114,14 @@ declare namespace Comprehend {
      * A unique identifier for the request. If you do not set the client request token, Amazon Comprehend generates one.
      */
     ClientRequestToken?: ClientRequestTokenString;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
+    /**
+     * Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your dominant language detection job. For more information, see Amazon VPC. 
+     */
+    VpcConfig?: VpcConfig;
   }
   export interface StartDominantLanguageDetectionJobResponse {
     /**
@@ -1079,13 +2151,25 @@ declare namespace Comprehend {
      */
     JobName?: JobName;
     /**
-     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+     * The Amazon Resource Name (ARN) that identifies the specific entity recognizer to be used by the StartEntitiesDetectionJob. This ARN is optional and is only used for a custom entity recognition job.
+     */
+    EntityRecognizerArn?: EntityRecognizerArn;
+    /**
+     * The language of the input documents. All documents must be in the same language. You can specify any of the languages supported by Amazon Comprehend. If custom entities recognition is used, this parameter is ignored and the language used for training the model is used instead.
      */
     LanguageCode: LanguageCode;
     /**
      * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
      */
     ClientRequestToken?: ClientRequestTokenString;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
+    /**
+     * Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your entity detection job. For more information, see Amazon VPC. 
+     */
+    VpcConfig?: VpcConfig;
   }
   export interface StartEntitiesDetectionJobResponse {
     /**
@@ -1093,7 +2177,7 @@ declare namespace Comprehend {
      */
     JobId?: JobId;
     /**
-     * The status of the job.    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the operation.  
+     * The status of the job.    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the operation.   STOP_REQUESTED - Amazon Comprehend has received a stop request for the job and is processing the request.   STOPPED - The job was successfully stopped without completing.  
      */
     JobStatus?: JobStatus;
   }
@@ -1115,13 +2199,21 @@ declare namespace Comprehend {
      */
     JobName?: JobName;
     /**
-     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
     /**
      * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
      */
     ClientRequestToken?: ClientRequestTokenString;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
+    /**
+     *  Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your key phrases detection job. For more information, see Amazon VPC. 
+     */
+    VpcConfig?: VpcConfig;
   }
   export interface StartKeyPhrasesDetectionJobResponse {
     /**
@@ -1151,13 +2243,21 @@ declare namespace Comprehend {
      */
     JobName?: JobName;
     /**
-     * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
     /**
      * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
      */
     ClientRequestToken?: ClientRequestTokenString;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
+    /**
+     * Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your sentiment detection job. For more information, see Amazon VPC. 
+     */
+    VpcConfig?: VpcConfig;
   }
   export interface StartSentimentDetectionJobResponse {
     /**
@@ -1194,6 +2294,14 @@ declare namespace Comprehend {
      * A unique identifier for the request. If you do not set the client request token, Amazon Comprehend generates one.
      */
     ClientRequestToken?: ClientRequestTokenString;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
+    /**
+     * Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your topic detection job. For more information, see Amazon VPC. 
+     */
+    VpcConfig?: VpcConfig;
   }
   export interface StartTopicsDetectionJobResponse {
     /**
@@ -1269,9 +2377,27 @@ declare namespace Comprehend {
      */
     JobStatus?: JobStatus;
   }
+  export interface StopTrainingDocumentClassifierRequest {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the document classifier currently being trained.
+     */
+    DocumentClassifierArn: DocumentClassifierArn;
+  }
+  export interface StopTrainingDocumentClassifierResponse {
+  }
+  export interface StopTrainingEntityRecognizerRequest {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the entity recognizer currently being trained.
+     */
+    EntityRecognizerArn: EntityRecognizerArn;
+  }
+  export interface StopTrainingEntityRecognizerResponse {
+  }
   export type String = string;
   export type StringList = String[];
-  export type SyntaxLanguageCode = "en"|string;
+  export type SubnetId = string;
+  export type Subnets = SubnetId[];
+  export type SyntaxLanguageCode = "en"|"es"|"fr"|"de"|"it"|"pt"|string;
   export interface SyntaxToken {
     /**
      * A unique identifier for a token.
@@ -1294,6 +2420,32 @@ declare namespace Comprehend {
      */
     PartOfSpeech?: PartOfSpeechTag;
   }
+  export interface Tag {
+    /**
+     * The initial part of a key-value pair that forms a tag associated with a given resource. For instance, if you want to show which resources are used by which departments, you might use “Department” as the key portion of the pair, with multiple possible values such as “sales,” “legal,” and “administration.” 
+     */
+    Key: TagKey;
+    /**
+     *  The second part of a key-value pair that forms a tag associated with a given resource. For instance, if you want to show which resources are used by which departments, you might use “Department” as the initial (key) portion of the pair, with a value of “sales” to indicate the sales department. 
+     */
+    Value?: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the given Amazon Comprehend resource to which you want to associate the tags. 
+     */
+    ResourceArn: ComprehendArn;
+    /**
+     * Tags being associated with a specific Amazon Comprehend resource. There can be a maximum of 50 tags (both existing and pending) associated with a specific resource. 
+     */
+    Tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type Timestamp = Date;
   export interface TopicsDetectionJobFilter {
     /**
@@ -1350,8 +2502,54 @@ declare namespace Comprehend {
      * The number of topics to detect supplied when you created the topic detection job. The default is 10. 
      */
     NumberOfTopics?: Integer;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your job data. 
+     */
+    DataAccessRoleArn?: IamRoleArn;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
+    /**
+     * Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your topic detection job. For more information, see Amazon VPC. 
+     */
+    VpcConfig?: VpcConfig;
   }
   export type TopicsDetectionJobPropertiesList = TopicsDetectionJobProperties[];
+  export interface UntagResourceRequest {
+    /**
+     *  The Amazon Resource Name (ARN) of the given Amazon Comprehend resource from which you want to remove the tags. 
+     */
+    ResourceArn: ComprehendArn;
+    /**
+     * The initial part of a key-value pair that forms a tag being removed from a given resource. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department. Keys must be unique and cannot be duplicated for a particular resource. 
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
+  export interface UpdateEndpointRequest {
+    /**
+     * The Amazon Resource Number (ARN) of the endpoint being updated.
+     */
+    EndpointArn: ComprehendEndpointArn;
+    /**
+     *  The desired number of inference units to be used by the model using this endpoint. Each inference unit represents of a throughput of 100 characters per second.
+     */
+    DesiredInferenceUnits: InferenceUnitsInteger;
+  }
+  export interface UpdateEndpointResponse {
+  }
+  export interface VpcConfig {
+    /**
+     * The ID number for a security group on an instance of your private VPC. Security groups on your VPC function serve as a virtual firewall to control inbound and outbound traffic and provides security for the resources that you’ll be accessing on the VPC. This ID number is preceded by "sg-", for instance: "sg-03b388029b0a285ea". For more information, see Security Groups for your VPC. 
+     */
+    SecurityGroupIds: SecurityGroupIds;
+    /**
+     * The ID for each subnet being used in your private VPC. This subnet is a subset of the a range of IPv4 addresses used by the VPC and is specific to a given availability zone in the VPC’s region. This ID number is preceded by "subnet-", for instance: "subnet-04ccf456919e69055". For more information, see VPCs and Subnets. 
+     */
+    Subnets: Subnets;
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

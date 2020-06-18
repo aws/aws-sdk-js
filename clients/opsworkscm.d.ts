@@ -29,11 +29,11 @@ declare class OpsWorksCM extends Service {
    */
   createBackup(callback?: (err: AWSError, data: OpsWorksCM.Types.CreateBackupResponse) => void): Request<OpsWorksCM.Types.CreateBackupResponse, AWSError>;
   /**
-   *  Creates and immedately starts a new server. The server is ready to use when it is in the HEALTHY state. By default, you can create a maximum of 10 servers.   This operation is asynchronous.   A LimitExceededException is thrown when you have created the maximum number of servers (10). A ResourceAlreadyExistsException is thrown when a server with the same name already exists in the account. A ResourceNotFoundException is thrown when you specify a backup ID that is not valid or is for a backup that does not exist. A ValidationException is thrown when parameters of the request are not valid.   If you do not specify a security group by adding the SecurityGroupIds parameter, AWS OpsWorks creates a new security group.   Chef Automate: The default security group opens the Chef server to the world on TCP port 443. If a KeyName is present, AWS OpsWorks enables SSH access. SSH is also open to the world on TCP port 22.   Puppet Enterprise: The default security group opens TCP ports 22, 443, 4433, 8140, 8142, 8143, and 8170. If a KeyName is present, AWS OpsWorks enables SSH access. SSH is also open to the world on TCP port 22.  By default, your server is accessible from any IP address. We recommend that you update your security group rules to allow access from known IP addresses and address ranges only. To edit security group rules, open Security Groups in the navigation pane of the EC2 management console. 
+   *  Creates and immedately starts a new server. The server is ready to use when it is in the HEALTHY state. By default, you can create a maximum of 10 servers.   This operation is asynchronous.   A LimitExceededException is thrown when you have created the maximum number of servers (10). A ResourceAlreadyExistsException is thrown when a server with the same name already exists in the account. A ResourceNotFoundException is thrown when you specify a backup ID that is not valid or is for a backup that does not exist. A ValidationException is thrown when parameters of the request are not valid.   If you do not specify a security group by adding the SecurityGroupIds parameter, AWS OpsWorks creates a new security group.   Chef Automate: The default security group opens the Chef server to the world on TCP port 443. If a KeyName is present, AWS OpsWorks enables SSH access. SSH is also open to the world on TCP port 22.   Puppet Enterprise: The default security group opens TCP ports 22, 443, 4433, 8140, 8142, 8143, and 8170. If a KeyName is present, AWS OpsWorks enables SSH access. SSH is also open to the world on TCP port 22.  By default, your server is accessible from any IP address. We recommend that you update your security group rules to allow access from known IP addresses and address ranges only. To edit security group rules, open Security Groups in the navigation pane of the EC2 management console.  To specify your own domain for a server, and provide your own self-signed or CA-signed certificate and private key, specify values for CustomDomain, CustomCertificate, and CustomPrivateKey.
    */
   createServer(params: OpsWorksCM.Types.CreateServerRequest, callback?: (err: AWSError, data: OpsWorksCM.Types.CreateServerResponse) => void): Request<OpsWorksCM.Types.CreateServerResponse, AWSError>;
   /**
-   *  Creates and immedately starts a new server. The server is ready to use when it is in the HEALTHY state. By default, you can create a maximum of 10 servers.   This operation is asynchronous.   A LimitExceededException is thrown when you have created the maximum number of servers (10). A ResourceAlreadyExistsException is thrown when a server with the same name already exists in the account. A ResourceNotFoundException is thrown when you specify a backup ID that is not valid or is for a backup that does not exist. A ValidationException is thrown when parameters of the request are not valid.   If you do not specify a security group by adding the SecurityGroupIds parameter, AWS OpsWorks creates a new security group.   Chef Automate: The default security group opens the Chef server to the world on TCP port 443. If a KeyName is present, AWS OpsWorks enables SSH access. SSH is also open to the world on TCP port 22.   Puppet Enterprise: The default security group opens TCP ports 22, 443, 4433, 8140, 8142, 8143, and 8170. If a KeyName is present, AWS OpsWorks enables SSH access. SSH is also open to the world on TCP port 22.  By default, your server is accessible from any IP address. We recommend that you update your security group rules to allow access from known IP addresses and address ranges only. To edit security group rules, open Security Groups in the navigation pane of the EC2 management console. 
+   *  Creates and immedately starts a new server. The server is ready to use when it is in the HEALTHY state. By default, you can create a maximum of 10 servers.   This operation is asynchronous.   A LimitExceededException is thrown when you have created the maximum number of servers (10). A ResourceAlreadyExistsException is thrown when a server with the same name already exists in the account. A ResourceNotFoundException is thrown when you specify a backup ID that is not valid or is for a backup that does not exist. A ValidationException is thrown when parameters of the request are not valid.   If you do not specify a security group by adding the SecurityGroupIds parameter, AWS OpsWorks creates a new security group.   Chef Automate: The default security group opens the Chef server to the world on TCP port 443. If a KeyName is present, AWS OpsWorks enables SSH access. SSH is also open to the world on TCP port 22.   Puppet Enterprise: The default security group opens TCP ports 22, 443, 4433, 8140, 8142, 8143, and 8170. If a KeyName is present, AWS OpsWorks enables SSH access. SSH is also open to the world on TCP port 22.  By default, your server is accessible from any IP address. We recommend that you update your security group rules to allow access from known IP addresses and address ranges only. To edit security group rules, open Security Groups in the navigation pane of the EC2 management console.  To specify your own domain for a server, and provide your own self-signed or CA-signed certificate and private key, specify values for CustomDomain, CustomCertificate, and CustomPrivateKey.
    */
   createServer(callback?: (err: AWSError, data: OpsWorksCM.Types.CreateServerResponse) => void): Request<OpsWorksCM.Types.CreateServerResponse, AWSError>;
   /**
@@ -53,11 +53,11 @@ declare class OpsWorksCM extends Service {
    */
   deleteServer(callback?: (err: AWSError, data: OpsWorksCM.Types.DeleteServerResponse) => void): Request<OpsWorksCM.Types.DeleteServerResponse, AWSError>;
   /**
-   *  Describes your account attributes, and creates requests to increase limits before they are reached or exceeded.   This operation is synchronous. 
+   *  Describes your OpsWorks-CM account attributes.   This operation is synchronous. 
    */
   describeAccountAttributes(params: OpsWorksCM.Types.DescribeAccountAttributesRequest, callback?: (err: AWSError, data: OpsWorksCM.Types.DescribeAccountAttributesResponse) => void): Request<OpsWorksCM.Types.DescribeAccountAttributesResponse, AWSError>;
   /**
-   *  Describes your account attributes, and creates requests to increase limits before they are reached or exceeded.   This operation is synchronous. 
+   *  Describes your OpsWorks-CM account attributes.   This operation is synchronous. 
    */
   describeAccountAttributes(callback?: (err: AWSError, data: OpsWorksCM.Types.DescribeAccountAttributesResponse) => void): Request<OpsWorksCM.Types.DescribeAccountAttributesResponse, AWSError>;
   /**
@@ -101,11 +101,27 @@ declare class OpsWorksCM extends Service {
    */
   disassociateNode(callback?: (err: AWSError, data: OpsWorksCM.Types.DisassociateNodeResponse) => void): Request<OpsWorksCM.Types.DisassociateNodeResponse, AWSError>;
   /**
-   *  Restores a backup to a server that is in a CONNECTION_LOST, HEALTHY, RUNNING, UNHEALTHY, or TERMINATED state. When you run RestoreServer, the server's EC2 instance is deleted, and a new EC2 instance is configured. RestoreServer maintains the existing server endpoint, so configuration management of the server's client devices (nodes) should continue to work.   This operation is asynchronous.   An InvalidStateException is thrown when the server is not in a valid state. A ResourceNotFoundException is thrown when the server does not exist. A ValidationException is raised when parameters of the request are not valid. 
+   *  Exports a specified server engine attribute as a base64-encoded string. For example, you can export user data that you can use in EC2 to associate nodes with a server.   This operation is synchronous.   A ValidationException is raised when parameters of the request are not valid. A ResourceNotFoundException is thrown when the server does not exist. An InvalidStateException is thrown when the server is in any of the following states: CREATING, TERMINATED, FAILED or DELETING. 
+   */
+  exportServerEngineAttribute(params: OpsWorksCM.Types.ExportServerEngineAttributeRequest, callback?: (err: AWSError, data: OpsWorksCM.Types.ExportServerEngineAttributeResponse) => void): Request<OpsWorksCM.Types.ExportServerEngineAttributeResponse, AWSError>;
+  /**
+   *  Exports a specified server engine attribute as a base64-encoded string. For example, you can export user data that you can use in EC2 to associate nodes with a server.   This operation is synchronous.   A ValidationException is raised when parameters of the request are not valid. A ResourceNotFoundException is thrown when the server does not exist. An InvalidStateException is thrown when the server is in any of the following states: CREATING, TERMINATED, FAILED or DELETING. 
+   */
+  exportServerEngineAttribute(callback?: (err: AWSError, data: OpsWorksCM.Types.ExportServerEngineAttributeResponse) => void): Request<OpsWorksCM.Types.ExportServerEngineAttributeResponse, AWSError>;
+  /**
+   * Returns a list of tags that are applied to the specified AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise servers or backups.
+   */
+  listTagsForResource(params: OpsWorksCM.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: OpsWorksCM.Types.ListTagsForResourceResponse) => void): Request<OpsWorksCM.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Returns a list of tags that are applied to the specified AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise servers or backups.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: OpsWorksCM.Types.ListTagsForResourceResponse) => void): Request<OpsWorksCM.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   *  Restores a backup to a server that is in a CONNECTION_LOST, HEALTHY, RUNNING, UNHEALTHY, or TERMINATED state. When you run RestoreServer, the server's EC2 instance is deleted, and a new EC2 instance is configured. RestoreServer maintains the existing server endpoint, so configuration management of the server's client devices (nodes) should continue to work.  Restoring from a backup is performed by creating a new EC2 instance. If restoration is successful, and the server is in a HEALTHY state, AWS OpsWorks CM switches traffic over to the new instance. After restoration is finished, the old EC2 instance is maintained in a Running or Stopped state, but is eventually terminated.  This operation is asynchronous.   An InvalidStateException is thrown when the server is not in a valid state. A ResourceNotFoundException is thrown when the server does not exist. A ValidationException is raised when parameters of the request are not valid. 
    */
   restoreServer(params: OpsWorksCM.Types.RestoreServerRequest, callback?: (err: AWSError, data: OpsWorksCM.Types.RestoreServerResponse) => void): Request<OpsWorksCM.Types.RestoreServerResponse, AWSError>;
   /**
-   *  Restores a backup to a server that is in a CONNECTION_LOST, HEALTHY, RUNNING, UNHEALTHY, or TERMINATED state. When you run RestoreServer, the server's EC2 instance is deleted, and a new EC2 instance is configured. RestoreServer maintains the existing server endpoint, so configuration management of the server's client devices (nodes) should continue to work.   This operation is asynchronous.   An InvalidStateException is thrown when the server is not in a valid state. A ResourceNotFoundException is thrown when the server does not exist. A ValidationException is raised when parameters of the request are not valid. 
+   *  Restores a backup to a server that is in a CONNECTION_LOST, HEALTHY, RUNNING, UNHEALTHY, or TERMINATED state. When you run RestoreServer, the server's EC2 instance is deleted, and a new EC2 instance is configured. RestoreServer maintains the existing server endpoint, so configuration management of the server's client devices (nodes) should continue to work.  Restoring from a backup is performed by creating a new EC2 instance. If restoration is successful, and the server is in a HEALTHY state, AWS OpsWorks CM switches traffic over to the new instance. After restoration is finished, the old EC2 instance is maintained in a Running or Stopped state, but is eventually terminated.  This operation is asynchronous.   An InvalidStateException is thrown when the server is not in a valid state. A ResourceNotFoundException is thrown when the server does not exist. A ValidationException is raised when parameters of the request are not valid. 
    */
   restoreServer(callback?: (err: AWSError, data: OpsWorksCM.Types.RestoreServerResponse) => void): Request<OpsWorksCM.Types.RestoreServerResponse, AWSError>;
   /**
@@ -117,6 +133,22 @@ declare class OpsWorksCM extends Service {
    */
   startMaintenance(callback?: (err: AWSError, data: OpsWorksCM.Types.StartMaintenanceResponse) => void): Request<OpsWorksCM.Types.StartMaintenanceResponse, AWSError>;
   /**
+   * Applies tags to an AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise server, or to server backups.
+   */
+  tagResource(params: OpsWorksCM.Types.TagResourceRequest, callback?: (err: AWSError, data: OpsWorksCM.Types.TagResourceResponse) => void): Request<OpsWorksCM.Types.TagResourceResponse, AWSError>;
+  /**
+   * Applies tags to an AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise server, or to server backups.
+   */
+  tagResource(callback?: (err: AWSError, data: OpsWorksCM.Types.TagResourceResponse) => void): Request<OpsWorksCM.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes specified tags from an AWS OpsWorks-CM server or backup.
+   */
+  untagResource(params: OpsWorksCM.Types.UntagResourceRequest, callback?: (err: AWSError, data: OpsWorksCM.Types.UntagResourceResponse) => void): Request<OpsWorksCM.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes specified tags from an AWS OpsWorks-CM server or backup.
+   */
+  untagResource(callback?: (err: AWSError, data: OpsWorksCM.Types.UntagResourceResponse) => void): Request<OpsWorksCM.Types.UntagResourceResponse, AWSError>;
+  /**
    *  Updates settings for a server.   This operation is synchronous. 
    */
   updateServer(params: OpsWorksCM.Types.UpdateServerRequest, callback?: (err: AWSError, data: OpsWorksCM.Types.UpdateServerResponse) => void): Request<OpsWorksCM.Types.UpdateServerResponse, AWSError>;
@@ -125,11 +157,11 @@ declare class OpsWorksCM extends Service {
    */
   updateServer(callback?: (err: AWSError, data: OpsWorksCM.Types.UpdateServerResponse) => void): Request<OpsWorksCM.Types.UpdateServerResponse, AWSError>;
   /**
-   *  Updates engine-specific attributes on a specified server. The server enters the MODIFYING state when this operation is in progress. Only one update can occur at a time. You can use this command to reset a Chef server's private key (CHEF_PIVOTAL_KEY), a Chef server's admin password (CHEF_DELIVERY_ADMIN_PASSWORD), or a Puppet server's admin password (PUPPET_ADMIN_PASSWORD).   This operation is asynchronous.   This operation can only be called for servers in HEALTHY or UNHEALTHY states. Otherwise, an InvalidStateException is raised. A ResourceNotFoundException is thrown when the server does not exist. A ValidationException is raised when parameters of the request are not valid. 
+   *  Updates engine-specific attributes on a specified server. The server enters the MODIFYING state when this operation is in progress. Only one update can occur at a time. You can use this command to reset a Chef server's public key (CHEF_PIVOTAL_KEY) or a Puppet server's admin password (PUPPET_ADMIN_PASSWORD).   This operation is asynchronous.   This operation can only be called for servers in HEALTHY or UNHEALTHY states. Otherwise, an InvalidStateException is raised. A ResourceNotFoundException is thrown when the server does not exist. A ValidationException is raised when parameters of the request are not valid. 
    */
   updateServerEngineAttributes(params: OpsWorksCM.Types.UpdateServerEngineAttributesRequest, callback?: (err: AWSError, data: OpsWorksCM.Types.UpdateServerEngineAttributesResponse) => void): Request<OpsWorksCM.Types.UpdateServerEngineAttributesResponse, AWSError>;
   /**
-   *  Updates engine-specific attributes on a specified server. The server enters the MODIFYING state when this operation is in progress. Only one update can occur at a time. You can use this command to reset a Chef server's private key (CHEF_PIVOTAL_KEY), a Chef server's admin password (CHEF_DELIVERY_ADMIN_PASSWORD), or a Puppet server's admin password (PUPPET_ADMIN_PASSWORD).   This operation is asynchronous.   This operation can only be called for servers in HEALTHY or UNHEALTHY states. Otherwise, an InvalidStateException is raised. A ResourceNotFoundException is thrown when the server does not exist. A ValidationException is raised when parameters of the request are not valid. 
+   *  Updates engine-specific attributes on a specified server. The server enters the MODIFYING state when this operation is in progress. Only one update can occur at a time. You can use this command to reset a Chef server's public key (CHEF_PIVOTAL_KEY) or a Puppet server's admin password (PUPPET_ADMIN_PASSWORD).   This operation is asynchronous.   This operation can only be called for servers in HEALTHY or UNHEALTHY states. Otherwise, an InvalidStateException is raised. A ResourceNotFoundException is thrown when the server does not exist. A ValidationException is raised when parameters of the request are not valid. 
    */
   updateServerEngineAttributes(callback?: (err: AWSError, data: OpsWorksCM.Types.UpdateServerEngineAttributesResponse) => void): Request<OpsWorksCM.Types.UpdateServerEngineAttributesResponse, AWSError>;
   /**
@@ -142,6 +174,7 @@ declare class OpsWorksCM extends Service {
   waitFor(state: "nodeAssociated", callback?: (err: AWSError, data: OpsWorksCM.Types.DescribeNodeAssociationStatusResponse) => void): Request<OpsWorksCM.Types.DescribeNodeAssociationStatusResponse, AWSError>;
 }
 declare namespace OpsWorksCM {
+  export type AWSOpsWorksCMResourceArn = string;
   export interface AccountAttribute {
     /**
      *  The attribute name. The following are supported attribute names.     ServerLimit: The number of current servers/maximum number of servers allowed. By default, you can have a maximum of 10 servers.     ManualBackupLimit: The number of current manual backups/maximum number of backups allowed. By default, you can have a maximum of 50 manual backups saved.   
@@ -292,6 +325,10 @@ declare namespace OpsWorksCM {
      *  A user-defined description of the backup. 
      */
     Description?: String;
+    /**
+     * A map that contains tag keys and tag values to attach to an AWS OpsWorks-CM server backup.   The key cannot be empty.   The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: + - = . _ : /    The value can be a maximum 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: + - = . _ : /    Leading and trailing white spaces are trimmed from both the key and value.   A maximum of 50 user-applied tags is allowed for tag-supported AWS OpsWorks-CM resources.  
+     */
+    Tags?: TagList;
   }
   export interface CreateBackupResponse {
     /**
@@ -305,11 +342,23 @@ declare namespace OpsWorksCM {
      */
     AssociatePublicIpAddress?: Boolean;
     /**
+     * An optional public endpoint of a server, such as https://aws.my-company.com. To access the server, create a CNAME DNS record in your preferred DNS service that points the custom domain to the endpoint that is generated when the server is created (the value of the CreateServer Endpoint attribute). You cannot access the server by using the generated Endpoint value if the server is using a custom domain. If you specify a custom domain, you must also specify values for CustomCertificate and CustomPrivateKey.
+     */
+    CustomDomain?: CustomDomain;
+    /**
+     * A PEM-formatted HTTPS certificate. The value can be be a single, self-signed certificate, or a certificate chain. If you specify a custom certificate, you must also specify values for CustomDomain and CustomPrivateKey. The following are requirements for the CustomCertificate value:   You can provide either a self-signed, custom certificate, or the full certificate chain.   The certificate must be a valid X509 certificate, or a certificate chain in PEM format.   The certificate must be valid at the time of upload. A certificate can't be used before its validity period begins (the certificate's NotBefore date), or after it expires (the certificate's NotAfter date).   The certificate’s common name or subject alternative names (SANs), if present, must match the value of CustomDomain.   The certificate must match the value of CustomPrivateKey.  
+     */
+    CustomCertificate?: CustomCertificate;
+    /**
+     * A private key in PEM format for connecting to the server by using HTTPS. The private key must not be encrypted; it cannot be protected by a password or passphrase. If you specify a custom private key, you must also specify values for CustomDomain and CustomCertificate.
+     */
+    CustomPrivateKey?: CustomPrivateKey;
+    /**
      *  Enable or disable scheduled backups. Valid values are true or false. The default value is true. 
      */
     DisableAutomatedBackup?: Boolean;
     /**
-     *  The configuration management engine to use. Valid values include Chef and Puppet. 
+     *  The configuration management engine to use. Valid values include ChefAutomate and Puppet. 
      */
     Engine?: String;
     /**
@@ -321,7 +370,7 @@ declare namespace OpsWorksCM {
      */
     EngineVersion?: String;
     /**
-     * Optional engine attributes on a specified server.   Attributes accepted in a Chef createServer request:     CHEF_PIVOTAL_KEY: A base64-encoded RSA private key that is not stored by AWS OpsWorks for Chef Automate. This private key is required to access the Chef API. When no CHEF_PIVOTAL_KEY is set, one is generated and returned in the response.     CHEF_DELIVERY_ADMIN_PASSWORD: The password for the administrative user in the Chef Automate GUI. The password length is a minimum of eight characters, and a maximum of 32. The password can contain letters, numbers, and special characters (!/@#$%^&amp;+=_). The password must contain at least one lower case letter, one upper case letter, one number, and one special character. When no CHEF_DELIVERY_ADMIN_PASSWORD is set, one is generated and returned in the response.    Attributes accepted in a Puppet createServer request:     PUPPET_ADMIN_PASSWORD: To work with the Puppet Enterprise console, a password must use ASCII characters.  
+     * Optional engine attributes on a specified server.   Attributes accepted in a Chef createServer request:     CHEF_AUTOMATE_PIVOTAL_KEY: A base64-encoded RSA public key. The corresponding private key is required to access the Chef API. When no CHEF_AUTOMATE_PIVOTAL_KEY is set, a private key is generated and returned in the response.     CHEF_AUTOMATE_ADMIN_PASSWORD: The password for the administrative user in the Chef Automate web-based dashboard. The password length is a minimum of eight characters, and a maximum of 32. The password can contain letters, numbers, and special characters (!/@#$%^&amp;+=_). The password must contain at least one lower case letter, one upper case letter, one number, and one special character. When no CHEF_AUTOMATE_ADMIN_PASSWORD is set, one is generated and returned in the response.    Attributes accepted in a Puppet createServer request:     PUPPET_ADMIN_PASSWORD: To work with the Puppet Enterprise console, a password must use ASCII characters.    PUPPET_R10K_REMOTE: The r10k remote is the URL of your control repository (for example, ssh://git@your.git-repo.com:user/control-repo.git). Specifying an r10k remote opens TCP port 8170.    PUPPET_R10K_PRIVATE_KEY: If you are using a private Git repository, add PUPPET_R10K_PRIVATE_KEY to specify a PEM-encoded private SSH key.  
      */
     EngineAttributes?: EngineAttributes;
     /**
@@ -337,7 +386,7 @@ declare namespace OpsWorksCM {
      */
     InstanceProfileArn: InstanceProfileArn;
     /**
-     *  The Amazon EC2 instance type to use. For example, m4.large. Recommended instance types include t2.medium and greater, m4.*, or c4.xlarge and greater. 
+     *  The Amazon EC2 instance type to use. For example, m5.large. 
      */
     InstanceType: String;
     /**
@@ -365,6 +414,10 @@ declare namespace OpsWorksCM {
      */
     SubnetIds?: Strings;
     /**
+     * A map that contains tag keys and tag values to attach to an AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise server.   The key cannot be empty.   The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: + - = . _ : / @    The value can be a maximum 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: + - = . _ : / @    Leading and trailing white spaces are trimmed from both the key and value.   A maximum of 50 user-applied tags is allowed for any AWS OpsWorks-CM server.  
+     */
+    Tags?: TagList;
+    /**
      *  If you specify this field, AWS OpsWorks CM creates the server by using the backup represented by BackupId. 
      */
     BackupId?: BackupId;
@@ -375,6 +428,9 @@ declare namespace OpsWorksCM {
      */
     Server?: Server;
   }
+  export type CustomCertificate = string;
+  export type CustomDomain = string;
+  export type CustomPrivateKey = string;
   export interface DeleteBackupRequest {
     /**
      * The ID of the backup to delete. Run the DescribeBackups command to get a list of backup IDs. Backup IDs are in the format ServerName-yyyyMMddHHmmssSSS. 
@@ -409,11 +465,11 @@ declare namespace OpsWorksCM {
      */
     ServerName?: ServerName;
     /**
-     * NextToken is a string that is returned in some command responses. It indicates that not all entries have been returned, and that you must run at least one more request to get remaining items. To get remaining results, call DescribeBackups again, and assign the token from the previous results as the value of the nextToken parameter. If there are no more results, the response object's nextToken parameter value is null. Setting a nextToken value that was not returned in your previous results causes an InvalidNextTokenException to occur.
+     * This is not currently implemented for DescribeBackups requests.
      */
     NextToken?: NextToken;
     /**
-     * To receive a paginated response, use this parameter to specify the maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a NextToken value that you can assign to the NextToken request parameter to get the next set of results. 
+     * This is not currently implemented for DescribeBackups requests.
      */
     MaxResults?: MaxResults;
   }
@@ -423,7 +479,7 @@ declare namespace OpsWorksCM {
      */
     Backups?: Backups;
     /**
-     * NextToken is a string that is returned in some command responses. It indicates that not all entries have been returned, and that you must run at least one more request to get remaining items. To get remaining results, call DescribeBackups again, and assign the token from the previous results as the value of the nextToken parameter. If there are no more results, the response object's nextToken parameter value is null. Setting a nextToken value that was not returned in your previous results causes an InvalidNextTokenException to occur. 
+     * This is not currently implemented for DescribeBackups requests.
      */
     NextToken?: String;
   }
@@ -477,21 +533,21 @@ declare namespace OpsWorksCM {
      */
     ServerName?: ServerName;
     /**
-     * NextToken is a string that is returned in some command responses. It indicates that not all entries have been returned, and that you must run at least one more request to get remaining items. To get remaining results, call DescribeServers again, and assign the token from the previous results as the value of the nextToken parameter. If there are no more results, the response object's nextToken parameter value is null. Setting a nextToken value that was not returned in your previous results causes an InvalidNextTokenException to occur. 
+     * This is not currently implemented for DescribeServers requests. 
      */
     NextToken?: NextToken;
     /**
-     * To receive a paginated response, use this parameter to specify the maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a NextToken value that you can assign to the NextToken request parameter to get the next set of results. 
+     * This is not currently implemented for DescribeServers requests. 
      */
     MaxResults?: MaxResults;
   }
   export interface DescribeServersResponse {
     /**
-     * Contains the response to a DescribeServers request.  For Puppet Server: DescribeServersResponse$Servers$EngineAttributes contains PUPPET_API_CA_CERT. This is the PEM-encoded CA certificate that is used by the Puppet API over TCP port number 8140. The CA certificate is also used to sign node certificates.
+     * Contains the response to a DescribeServers request.  For Chef Automate servers: If DescribeServersResponse$Servers$EngineAttributes includes CHEF_MAJOR_UPGRADE_AVAILABLE, you can upgrade the Chef Automate server to Chef Automate 2. To be eligible for upgrade, a server running Chef Automate 1 must have had at least one successful maintenance run after November 1, 2019.  For Puppet Server: DescribeServersResponse$Servers$EngineAttributes contains PUPPET_API_CA_CERT. This is the PEM-encoded CA certificate that is used by the Puppet API over TCP port number 8140. The CA certificate is also used to sign node certificates.
      */
     Servers?: Servers;
     /**
-     * NextToken is a string that is returned in some command responses. It indicates that not all entries have been returned, and that you must run at least one more request to get remaining items. To get remaining results, call DescribeServers again, and assign the token from the previous results as the value of the nextToken parameter. If there are no more results, the response object's nextToken parameter value is null. Setting a nextToken value that was not returned in your previous results causes an InvalidNextTokenException to occur. 
+     * This is not currently implemented for DescribeServers requests. 
      */
     NextToken?: String;
   }
@@ -528,9 +584,57 @@ declare namespace OpsWorksCM {
   export type EngineAttributeName = string;
   export type EngineAttributeValue = string;
   export type EngineAttributes = EngineAttribute[];
+  export interface ExportServerEngineAttributeRequest {
+    /**
+     * The name of the export attribute. Currently, the supported export attribute is Userdata. This exports a user data script that includes parameters and values provided in the InputAttributes list.
+     */
+    ExportAttributeName: String;
+    /**
+     * The name of the server from which you are exporting the attribute.
+     */
+    ServerName: ServerName;
+    /**
+     * The list of engine attributes. The list type is EngineAttribute. An EngineAttribute list item is a pair that includes an attribute name and its value. For the Userdata ExportAttributeName, the following are supported engine attribute names.    RunList In Chef, a list of roles or recipes that are run in the specified order. In Puppet, this parameter is ignored.    OrganizationName In Chef, an organization name. AWS OpsWorks for Chef Automate always creates the organization default. In Puppet, this parameter is ignored.    NodeEnvironment In Chef, a node environment (for example, development, staging, or one-box). In Puppet, this parameter is ignored.    NodeClientVersion In Chef, the version of the Chef engine (three numbers separated by dots, such as 13.8.5). If this attribute is empty, OpsWorks for Chef Automate uses the most current version. In Puppet, this parameter is ignored.  
+     */
+    InputAttributes?: EngineAttributes;
+  }
+  export interface ExportServerEngineAttributeResponse {
+    /**
+     * The requested engine attribute pair with attribute name and value.
+     */
+    EngineAttribute?: EngineAttribute;
+    /**
+     * The server name used in the request.
+     */
+    ServerName?: ServerName;
+  }
   export type InstanceProfileArn = string;
   export type Integer = number;
   export type KeyPair = string;
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Number (ARN) of an AWS OpsWorks for Chef Automate or AWS OpsWorks for Puppet Enterprise server for which you want to show applied tags. For example, arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE.
+     */
+    ResourceArn: AWSOpsWorksCMResourceArn;
+    /**
+     * NextToken is a string that is returned in some command responses. It indicates that not all entries have been returned, and that you must run at least one more request to get remaining items. To get remaining results, call ListTagsForResource again, and assign the token from the previous results as the value of the nextToken parameter. If there are no more results, the response object's nextToken parameter value is null. Setting a nextToken value that was not returned in your previous results causes an InvalidNextTokenException to occur.
+     */
+    NextToken?: NextToken;
+    /**
+     * To receive a paginated response, use this parameter to specify the maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a NextToken value that you can assign to the NextToken request parameter to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * Tags that have been applied to the resource.
+     */
+    Tags?: TagList;
+    /**
+     * A token that you can use as the value of NextToken in subsequent calls to the API to show more results.
+     */
+    NextToken?: NextToken;
+  }
   export type MaintenanceStatus = "SUCCESS"|"FAILED"|string;
   export type MaxResults = number;
   export type NextToken = string;
@@ -547,7 +651,7 @@ declare namespace OpsWorksCM {
      */
     ServerName: ServerName;
     /**
-     *  The type of the instance to create. Valid values must be specified in the following format: ^([cm][34]|t2).* For example, m4.large. Valid values are t2.medium, m4.large, and m4.2xlarge. If you do not specify this parameter, RestoreServer uses the instance type from the specified backup. 
+     *  The type of instance to restore. Valid values must be specified in the following format: ^([cm][34]|t2).* For example, m5.large. Valid values are m5.large, r5.xlarge, and r5.2xlarge. If you do not specify this parameter, RestoreServer uses the instance type from the specified backup. 
      */
     InstanceType?: String;
     /**
@@ -579,15 +683,19 @@ declare namespace OpsWorksCM {
      */
     CloudFormationStackArn?: String;
     /**
+     * An optional public endpoint of a server, such as https://aws.my-company.com. You cannot access the server by using the Endpoint value if the server has a CustomDomain specified.
+     */
+    CustomDomain?: CustomDomain;
+    /**
      * Disables automated backups. The number of stored backups is dependent on the value of PreferredBackupCount. 
      */
     DisableAutomatedBackup?: Boolean;
     /**
-     *  A DNS name that can be used to access the engine. Example: myserver-asdfghjkl.us-east-1.opsworks.io 
+     *  A DNS name that can be used to access the engine. Example: myserver-asdfghjkl.us-east-1.opsworks.io. You cannot access the server by using the Endpoint value if the server has a CustomDomain specified. 
      */
     Endpoint?: String;
     /**
-     * The engine type of the server. Valid values in this release include Chef and Puppet. 
+     * The engine type of the server. Valid values in this release include ChefAutomate and Puppet. 
      */
     Engine?: String;
     /**
@@ -595,7 +703,7 @@ declare namespace OpsWorksCM {
      */
     EngineModel?: String;
     /**
-     * The response of a createServer() request returns the master credential to access the server in EngineAttributes. These credentials are not stored by AWS OpsWorks CM; they are returned only as part of the result of createServer().   Attributes returned in a createServer response for Chef     CHEF_PIVOTAL_KEY: A base64-encoded RSA private key that is generated by AWS OpsWorks for Chef Automate. This private key is required to access the Chef API.    CHEF_STARTER_KIT: A base64-encoded ZIP file. The ZIP file contains a Chef starter kit, which includes a README, a configuration file, and the required RSA private key. Save this file, unzip it, and then change to the directory where you've unzipped the file contents. From this directory, you can run Knife commands.    Attributes returned in a createServer response for Puppet     PUPPET_STARTER_KIT: A base64-encoded ZIP file. The ZIP file contains a Puppet starter kit, including a README and a required private key. Save this file, unzip it, and then change to the directory where you've unzipped the file contents.    PUPPET_ADMIN_PASSWORD: An administrator password that you can use to sign in to the Puppet Enterprise console after the server is online.  
+     * The response of a createServer() request returns the master credential to access the server in EngineAttributes. These credentials are not stored by AWS OpsWorks CM; they are returned only as part of the result of createServer().   Attributes returned in a createServer response for Chef     CHEF_AUTOMATE_PIVOTAL_KEY: A base64-encoded RSA private key that is generated by AWS OpsWorks for Chef Automate. This private key is required to access the Chef API.    CHEF_STARTER_KIT: A base64-encoded ZIP file. The ZIP file contains a Chef starter kit, which includes a README, a configuration file, and the required RSA private key. Save this file, unzip it, and then change to the directory where you've unzipped the file contents. From this directory, you can run Knife commands.    Attributes returned in a createServer response for Puppet     PUPPET_STARTER_KIT: A base64-encoded ZIP file. The ZIP file contains a Puppet starter kit, including a README and a required private key. Save this file, unzip it, and then change to the directory where you've unzipped the file contents.    PUPPET_ADMIN_PASSWORD: An administrator password that you can use to sign in to the Puppet Enterprise console after the server is online.  
      */
     EngineAttributes?: EngineAttributes;
     /**
@@ -680,7 +788,7 @@ declare namespace OpsWorksCM {
      */
     ServerName: ServerName;
     /**
-     * Engine attributes that are specific to the server on which you want to run maintenance. 
+     * Engine attributes that are specific to the server on which you want to run maintenance.  Attributes accepted in a StartMaintenance request for Chef     CHEF_MAJOR_UPGRADE: If a Chef Automate server is eligible for upgrade to Chef Automate 2, add this engine attribute to a StartMaintenance request and set the value to true to upgrade the server to Chef Automate 2. For more information, see Upgrade an AWS OpsWorks for Chef Automate Server to Chef Automate 2.   
      */
     EngineAttributes?: EngineAttributes;
   }
@@ -692,8 +800,46 @@ declare namespace OpsWorksCM {
   }
   export type String = string;
   export type Strings = String[];
+  export interface Tag {
+    /**
+     * A tag key, such as Stage or Name. A tag key cannot be empty. The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: + - = . _ : / 
+     */
+    Key: TagKey;
+    /**
+     * An optional tag value, such as Production or test-owcm-server. The value can be a maximum of 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: + - = . _ : / 
+     */
+    Value: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Number (ARN) of a resource to which you want to apply tags. For example, arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE.
+     */
+    ResourceArn: AWSOpsWorksCMResourceArn;
+    /**
+     * A map that contains tag keys and tag values to attach to AWS OpsWorks-CM servers or backups.   The key cannot be empty.   The key can be a maximum of 127 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: + - = . _ : /    The value can be a maximum 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: + - = . _ : /    Leading and trailing white spaces are trimmed from both the key and value.   A maximum of 50 user-applied tags is allowed for any AWS OpsWorks-CM server or backup.  
+     */
+    Tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type TimeWindowDefinition = string;
   export type Timestamp = Date;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Number (ARN) of a resource from which you want to remove tags. For example, arn:aws:opsworks-cm:us-west-2:123456789012:server/test-owcm-server/EXAMPLE-66b0-4196-8274-d1a2bEXAMPLE.
+     */
+    ResourceArn: AWSOpsWorksCMResourceArn;
+    /**
+     * The keys of tags that you want to remove.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateServerEngineAttributesRequest {
     /**
      * The name of the server to update. 

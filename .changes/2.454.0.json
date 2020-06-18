@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "DataSync",
+        "description": "AWS DataSync now enables exclude and include filters to control what files and directories will be copied as part of a task execution."
+    },
+    {
+        "type": "feature",
+        "category": "IoTAnalytics",
+        "description": "ContentDeliveryRule to support sending dataset to S3 and glue"
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "AWS Lambda now supports Node.js v10"
+    },
+    {
+        "type": "feature",
+        "category": "core",
+        "description": "Add support for requiresLength trait for streaming payload and send chunked transfer encode when allowed"
+    }
+]

@@ -1,6 +1,17 @@
 require 'ostruct'
 
 module Documentor
+  def service_overview(rules)
+    docs = documentation(rules)
+    docs = docs || '';
+    docs = docs.gsub(/<fullname>.+?<\/fullname>/, '')
+    docs = docs.gsub(/(.*?)\{(\S*?)\}/, '\1[\2]') ## replace {} in format string with []
+    if docs && (docs.include? 'runtime aspects of your deployed APIs')
+      puts docs
+    end
+    docs == '' ? nil : docs
+  end
+
   def documentation(rules)
     docs = rules['documentation'] || ''
     docs = docs.gsub(/<!--.*?-->/m, '')
@@ -37,12 +48,25 @@ class ModelDocumentor
 
   def initialize(klass, api)
     api_version = api['metadata']['apiVersion']
+    service_desc = service_overview(api)
     @lines = []
     @lines << ''
     @lines << <<-DOCS.strip
 Constructs a service interface object. Each API operation is exposed as a
 function on service.
+DOCS
 
+    if service_desc
+      @lines << <<-DOCS.strip
+
+### Service Description
+      
+#{service_desc}
+
+DOCS
+    end
+
+    @lines << <<-DOCS.strip
 ### Sending a Request Using #{klass}
 
 ```javascript
@@ -195,7 +219,7 @@ class MethodDocumentor
       lines << "    try {"
       lines << "      const result = await #{klass.downcase}.#{method_name(operation_name)}({/** params **/}).promise();"
       lines << ""
-      lines << "      const events = data.#{@eventStreamOutputName};"
+      lines << "      const events = result.#{@eventStreamOutputName};"
       lines << ""
       lines << "      for await (const event of events) {"
       lines << "        // Check the top-level field to determine which event this is."
@@ -237,6 +261,9 @@ class MethodDocumentor
     desc = documentation(operation)
     desc ||= "Calls the #{method_name(operation_name, false)} API operation."
     desc = desc.gsub(/^\s+/, '').strip
+    if klass === 'S3' && (['CreateBucket', 'ListBuckets', 'DeleteBucket'].include? operation_name)
+      desc = desc + '<p>Note: This operation cannot be used in a browser. S3 does not support CORS on this operation.</p>'
+    end
 
     event_stream_output(operation, api)
 
@@ -249,7 +276,7 @@ class MethodDocumentor
     ## @param tags
 
     @lines << "@param params [Object]"
-    @lines += shapes(api, operation['input'], options).map {|line| "  " + line }
+    @lines += shapes(api, operation['input'], {:in_output => false}.merge(options)).map {|line| "  " + line }
     if examples
       examples.each do |example|
         begin
@@ -288,7 +315,7 @@ class MethodDocumentor
     @lines << "  @param data [Object] the de-serialized data returned from"
     @lines << "    the request. Set to `null` if a request error occurs."
 
-    output = shapes(api, operation['output'], options)
+    output = shapes(api, operation['output'], {:in_output => true}.merge(options))
     output = output.map {|line| "    " + line }
     if output.size > 0
       @lines << "    The `data` object has the following properties:"
@@ -567,12 +594,12 @@ class ExampleShapeVisitor
   end
 
   def visit_integer(node, required = false)
-    "0"
+    "'NUMBER_VALUE'"
   end
   alias visit_long visit_integer
 
   def visit_float(node, required = false)
-    "0.0"
+    "'NUMBER_VALUE'"
   end
   alias visit_double visit_float
   alias visit_bigdecimal visit_float
@@ -582,7 +609,7 @@ class ExampleShapeVisitor
   end
 
   def visit_binary(node, required = false)
-    value = "new Buffer('...') || 'STRING_VALUE'"
+    value = "Buffer.from('...') || 'STRING_VALUE'"
     if node['streaming']
       value += " || streamObject"
     else
@@ -617,7 +644,7 @@ class ShapeDocumentor
   attr_reader :prefix
   attr_reader :type
 
-  def self.type_for(rules)
+  def self.type_for(rules, options={})
     type = rules['type']
     normalizedType = type
 
@@ -646,9 +673,13 @@ class ShapeDocumentor
     elsif type == 'boolean'
       normalizedType = 'Boolean'
     elsif type == 'binary' || type == 'blob'
-      normalizedType = 'Buffer'
+      normalizedType = "Buffer"
       unless rules['eventpayload']
-        normalizedType += ', Typed Array, Blob, String'
+        if !!options[:in_output]
+          normalizedType += "(Node.js), Typed Array(Browser)"
+        else
+          normalizedType += ", Typed Array, Blob, String"
+        end
       end
     elsif type == 'timestamp'
       normalizedType = 'Date'
@@ -671,7 +702,7 @@ class ShapeDocumentor
     @prefix = options[:prefix] || ''
     @required = !!options[:required]
     @visited = options[:visited] || Hash.new { 0 }
-    @type = self.class.type_for(rules)
+    @type = self.class.type_for(rules, options)
     @isEventStream = rules['eventstream']
     @lines = []
     @nested_lines = []

@@ -21,11 +21,11 @@ declare class Redshift extends Service {
    */
   acceptReservedNodeExchange(callback?: (err: AWSError, data: Redshift.Types.AcceptReservedNodeExchangeOutputMessage) => void): Request<Redshift.Types.AcceptReservedNodeExchangeOutputMessage, AWSError>;
   /**
-   * Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group. If you authorize access to an Amazon EC2 security group, specify EC2SecurityGroupName and EC2SecurityGroupOwnerId. The Amazon EC2 security group and Amazon Redshift cluster must be in the same AWS region.  If you authorize access to a CIDR/IP address range, specify CIDRIP. For an overview of CIDR blocks, see the Wikipedia article on Classless Inter-Domain Routing.  You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to Working with Security Groups in the Amazon Redshift Cluster Management Guide.
+   * Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group. If you authorize access to an Amazon EC2 security group, specify EC2SecurityGroupName and EC2SecurityGroupOwnerId. The Amazon EC2 security group and Amazon Redshift cluster must be in the same AWS Region.  If you authorize access to a CIDR/IP address range, specify CIDRIP. For an overview of CIDR blocks, see the Wikipedia article on Classless Inter-Domain Routing.  You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to Working with Security Groups in the Amazon Redshift Cluster Management Guide.
    */
   authorizeClusterSecurityGroupIngress(params: Redshift.Types.AuthorizeClusterSecurityGroupIngressMessage, callback?: (err: AWSError, data: Redshift.Types.AuthorizeClusterSecurityGroupIngressResult) => void): Request<Redshift.Types.AuthorizeClusterSecurityGroupIngressResult, AWSError>;
   /**
-   * Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group. If you authorize access to an Amazon EC2 security group, specify EC2SecurityGroupName and EC2SecurityGroupOwnerId. The Amazon EC2 security group and Amazon Redshift cluster must be in the same AWS region.  If you authorize access to a CIDR/IP address range, specify CIDRIP. For an overview of CIDR blocks, see the Wikipedia article on Classless Inter-Domain Routing.  You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to Working with Security Groups in the Amazon Redshift Cluster Management Guide.
+   * Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group. If you authorize access to an Amazon EC2 security group, specify EC2SecurityGroupName and EC2SecurityGroupOwnerId. The Amazon EC2 security group and Amazon Redshift cluster must be in the same AWS Region.  If you authorize access to a CIDR/IP address range, specify CIDRIP. For an overview of CIDR blocks, see the Wikipedia article on Classless Inter-Domain Routing.  You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to Working with Security Groups in the Amazon Redshift Cluster Management Guide.
    */
   authorizeClusterSecurityGroupIngress(callback?: (err: AWSError, data: Redshift.Types.AuthorizeClusterSecurityGroupIngressResult) => void): Request<Redshift.Types.AuthorizeClusterSecurityGroupIngressResult, AWSError>;
   /**
@@ -37,6 +37,30 @@ declare class Redshift extends Service {
    */
   authorizeSnapshotAccess(callback?: (err: AWSError, data: Redshift.Types.AuthorizeSnapshotAccessResult) => void): Request<Redshift.Types.AuthorizeSnapshotAccessResult, AWSError>;
   /**
+   * Deletes a set of cluster snapshots.
+   */
+  batchDeleteClusterSnapshots(params: Redshift.Types.BatchDeleteClusterSnapshotsRequest, callback?: (err: AWSError, data: Redshift.Types.BatchDeleteClusterSnapshotsResult) => void): Request<Redshift.Types.BatchDeleteClusterSnapshotsResult, AWSError>;
+  /**
+   * Deletes a set of cluster snapshots.
+   */
+  batchDeleteClusterSnapshots(callback?: (err: AWSError, data: Redshift.Types.BatchDeleteClusterSnapshotsResult) => void): Request<Redshift.Types.BatchDeleteClusterSnapshotsResult, AWSError>;
+  /**
+   * Modifies the settings for a set of cluster snapshots.
+   */
+  batchModifyClusterSnapshots(params: Redshift.Types.BatchModifyClusterSnapshotsMessage, callback?: (err: AWSError, data: Redshift.Types.BatchModifyClusterSnapshotsOutputMessage) => void): Request<Redshift.Types.BatchModifyClusterSnapshotsOutputMessage, AWSError>;
+  /**
+   * Modifies the settings for a set of cluster snapshots.
+   */
+  batchModifyClusterSnapshots(callback?: (err: AWSError, data: Redshift.Types.BatchModifyClusterSnapshotsOutputMessage) => void): Request<Redshift.Types.BatchModifyClusterSnapshotsOutputMessage, AWSError>;
+  /**
+   * Cancels a resize operation for a cluster.
+   */
+  cancelResize(params: Redshift.Types.CancelResizeMessage, callback?: (err: AWSError, data: Redshift.Types.ResizeProgressMessage) => void): Request<Redshift.Types.ResizeProgressMessage, AWSError>;
+  /**
+   * Cancels a resize operation for a cluster.
+   */
+  cancelResize(callback?: (err: AWSError, data: Redshift.Types.ResizeProgressMessage) => void): Request<Redshift.Types.ResizeProgressMessage, AWSError>;
+  /**
    * Copies the specified automated cluster snapshot to a new manual cluster snapshot. The source must be an automated snapshot and it must be in the available state. When you delete a cluster, Amazon Redshift deletes any automated snapshots of the cluster. Also, when the retention period of the snapshot expires, Amazon Redshift automatically deletes it. If you want to keep an automated snapshot for a longer period, you can make a manual copy of the snapshot. Manual snapshots are retained until you delete them.  For more information about working with snapshots, go to Amazon Redshift Snapshots in the Amazon Redshift Cluster Management Guide.
    */
   copyClusterSnapshot(params: Redshift.Types.CopyClusterSnapshotMessage, callback?: (err: AWSError, data: Redshift.Types.CopyClusterSnapshotResult) => void): Request<Redshift.Types.CopyClusterSnapshotResult, AWSError>;
@@ -45,11 +69,11 @@ declare class Redshift extends Service {
    */
   copyClusterSnapshot(callback?: (err: AWSError, data: Redshift.Types.CopyClusterSnapshotResult) => void): Request<Redshift.Types.CopyClusterSnapshotResult, AWSError>;
   /**
-   * Creates a new cluster. To create a cluster in Virtual Private Cloud (VPC), you must provide a cluster subnet group name. The cluster subnet group identifies the subnets of your VPC that Amazon Redshift uses when creating the cluster. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
+   * Creates a new cluster with the specified parameters. To create a cluster in Virtual Private Cloud (VPC), you must provide a cluster subnet group name. The cluster subnet group identifies the subnets of your VPC that Amazon Redshift uses when creating the cluster. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
   createCluster(params: Redshift.Types.CreateClusterMessage, callback?: (err: AWSError, data: Redshift.Types.CreateClusterResult) => void): Request<Redshift.Types.CreateClusterResult, AWSError>;
   /**
-   * Creates a new cluster. To create a cluster in Virtual Private Cloud (VPC), you must provide a cluster subnet group name. The cluster subnet group identifies the subnets of your VPC that Amazon Redshift uses when creating the cluster. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
+   * Creates a new cluster with the specified parameters. To create a cluster in Virtual Private Cloud (VPC), you must provide a cluster subnet group name. The cluster subnet group identifies the subnets of your VPC that Amazon Redshift uses when creating the cluster. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
   createCluster(callback?: (err: AWSError, data: Redshift.Types.CreateClusterResult) => void): Request<Redshift.Types.CreateClusterResult, AWSError>;
   /**
@@ -109,6 +133,14 @@ declare class Redshift extends Service {
    */
   createHsmConfiguration(callback?: (err: AWSError, data: Redshift.Types.CreateHsmConfigurationResult) => void): Request<Redshift.Types.CreateHsmConfigurationResult, AWSError>;
   /**
+   * Creates a scheduled action. A scheduled action contains a schedule and an Amazon Redshift API action. For example, you can create a schedule of when to run the ResizeCluster API operation. 
+   */
+  createScheduledAction(params: Redshift.Types.CreateScheduledActionMessage, callback?: (err: AWSError, data: Redshift.Types.ScheduledAction) => void): Request<Redshift.Types.ScheduledAction, AWSError>;
+  /**
+   * Creates a scheduled action. A scheduled action contains a schedule and an Amazon Redshift API action. For example, you can create a schedule of when to run the ResizeCluster API operation. 
+   */
+  createScheduledAction(callback?: (err: AWSError, data: Redshift.Types.ScheduledAction) => void): Request<Redshift.Types.ScheduledAction, AWSError>;
+  /**
    * Creates a snapshot copy grant that permits Amazon Redshift to use a customer master key (CMK) from AWS Key Management Service (AWS KMS) to encrypt copied snapshots in a destination region.  For more information about managing snapshot copy grants, go to Amazon Redshift Database Encryption in the Amazon Redshift Cluster Management Guide. 
    */
   createSnapshotCopyGrant(params: Redshift.Types.CreateSnapshotCopyGrantMessage, callback?: (err: AWSError, data: Redshift.Types.CreateSnapshotCopyGrantResult) => void): Request<Redshift.Types.CreateSnapshotCopyGrantResult, AWSError>;
@@ -117,19 +149,35 @@ declare class Redshift extends Service {
    */
   createSnapshotCopyGrant(callback?: (err: AWSError, data: Redshift.Types.CreateSnapshotCopyGrantResult) => void): Request<Redshift.Types.CreateSnapshotCopyGrantResult, AWSError>;
   /**
-   * Adds one or more tags to a specified resource. A resource can have up to 50 tags. If you try to create more than 50 tags for a resource, you will receive an error and the attempt will fail. If you specify a key that already exists for the resource, the value for that key will be updated with the new value.
+   * Create a snapshot schedule that can be associated to a cluster and which overrides the default system backup schedule. 
+   */
+  createSnapshotSchedule(params: Redshift.Types.CreateSnapshotScheduleMessage, callback?: (err: AWSError, data: Redshift.Types.SnapshotSchedule) => void): Request<Redshift.Types.SnapshotSchedule, AWSError>;
+  /**
+   * Create a snapshot schedule that can be associated to a cluster and which overrides the default system backup schedule. 
+   */
+  createSnapshotSchedule(callback?: (err: AWSError, data: Redshift.Types.SnapshotSchedule) => void): Request<Redshift.Types.SnapshotSchedule, AWSError>;
+  /**
+   * Adds tags to a cluster. A resource can have up to 50 tags. If you try to create more than 50 tags for a resource, you will receive an error and the attempt will fail. If you specify a key that already exists for the resource, the value for that key will be updated with the new value.
    */
   createTags(params: Redshift.Types.CreateTagsMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds one or more tags to a specified resource. A resource can have up to 50 tags. If you try to create more than 50 tags for a resource, you will receive an error and the attempt will fail. If you specify a key that already exists for the resource, the value for that key will be updated with the new value.
+   * Adds tags to a cluster. A resource can have up to 50 tags. If you try to create more than 50 tags for a resource, you will receive an error and the attempt will fail. If you specify a key that already exists for the resource, the value for that key will be updated with the new value.
    */
   createTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a previously provisioned cluster. A successful response from the web service indicates that the request was received correctly. Use DescribeClusters to monitor the status of the deletion. The delete operation cannot be canceled or reverted once submitted. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide. If you want to shut down the cluster and retain it for future use, set SkipFinalClusterSnapshot to false and specify a name for FinalClusterSnapshotIdentifier. You can later restore this snapshot to resume using the cluster. If a final cluster snapshot is requested, the status of the cluster will be "final-snapshot" while the snapshot is being taken, then it's "deleting" once Amazon Redshift begins deleting the cluster.   For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
+   * Creates a usage limit for a specified Amazon Redshift feature on a cluster. The usage limit is identified by the returned usage limit identifier.
+   */
+  createUsageLimit(params: Redshift.Types.CreateUsageLimitMessage, callback?: (err: AWSError, data: Redshift.Types.UsageLimit) => void): Request<Redshift.Types.UsageLimit, AWSError>;
+  /**
+   * Creates a usage limit for a specified Amazon Redshift feature on a cluster. The usage limit is identified by the returned usage limit identifier.
+   */
+  createUsageLimit(callback?: (err: AWSError, data: Redshift.Types.UsageLimit) => void): Request<Redshift.Types.UsageLimit, AWSError>;
+  /**
+   * Deletes a previously provisioned cluster without its final snapshot being created. A successful response from the web service indicates that the request was received correctly. Use DescribeClusters to monitor the status of the deletion. The delete operation cannot be canceled or reverted once submitted. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide. If you want to shut down the cluster and retain it for future use, set SkipFinalClusterSnapshot to false and specify a name for FinalClusterSnapshotIdentifier. You can later restore this snapshot to resume using the cluster. If a final cluster snapshot is requested, the status of the cluster will be "final-snapshot" while the snapshot is being taken, then it's "deleting" once Amazon Redshift begins deleting the cluster.   For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
   deleteCluster(params: Redshift.Types.DeleteClusterMessage, callback?: (err: AWSError, data: Redshift.Types.DeleteClusterResult) => void): Request<Redshift.Types.DeleteClusterResult, AWSError>;
   /**
-   * Deletes a previously provisioned cluster. A successful response from the web service indicates that the request was received correctly. Use DescribeClusters to monitor the status of the deletion. The delete operation cannot be canceled or reverted once submitted. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide. If you want to shut down the cluster and retain it for future use, set SkipFinalClusterSnapshot to false and specify a name for FinalClusterSnapshotIdentifier. You can later restore this snapshot to resume using the cluster. If a final cluster snapshot is requested, the status of the cluster will be "final-snapshot" while the snapshot is being taken, then it's "deleting" once Amazon Redshift begins deleting the cluster.   For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
+   * Deletes a previously provisioned cluster without its final snapshot being created. A successful response from the web service indicates that the request was received correctly. Use DescribeClusters to monitor the status of the deletion. The delete operation cannot be canceled or reverted once submitted. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide. If you want to shut down the cluster and retain it for future use, set SkipFinalClusterSnapshot to false and specify a name for FinalClusterSnapshotIdentifier. You can later restore this snapshot to resume using the cluster. If a final cluster snapshot is requested, the status of the cluster will be "final-snapshot" while the snapshot is being taken, then it's "deleting" once Amazon Redshift begins deleting the cluster.   For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
   deleteCluster(callback?: (err: AWSError, data: Redshift.Types.DeleteClusterResult) => void): Request<Redshift.Types.DeleteClusterResult, AWSError>;
   /**
@@ -189,6 +237,14 @@ declare class Redshift extends Service {
    */
   deleteHsmConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes a scheduled action. 
+   */
+  deleteScheduledAction(params: Redshift.Types.DeleteScheduledActionMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a scheduled action. 
+   */
+  deleteScheduledAction(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes the specified snapshot copy grant.
    */
   deleteSnapshotCopyGrant(params: Redshift.Types.DeleteSnapshotCopyGrantMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -197,13 +253,37 @@ declare class Redshift extends Service {
    */
   deleteSnapshotCopyGrant(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a tag or tags from a resource. You must provide the ARN of the resource from which you want to delete the tag or tags.
+   * Deletes a snapshot schedule.
+   */
+  deleteSnapshotSchedule(params: Redshift.Types.DeleteSnapshotScheduleMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a snapshot schedule.
+   */
+  deleteSnapshotSchedule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes tags from a resource. You must provide the ARN of the resource from which you want to delete the tag or tags.
    */
   deleteTags(params: Redshift.Types.DeleteTagsMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a tag or tags from a resource. You must provide the ARN of the resource from which you want to delete the tag or tags.
+   * Deletes tags from a resource. You must provide the ARN of the resource from which you want to delete the tag or tags.
    */
   deleteTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a usage limit from a cluster.
+   */
+  deleteUsageLimit(params: Redshift.Types.DeleteUsageLimitMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a usage limit from a cluster.
+   */
+  deleteUsageLimit(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Returns a list of attributes attached to an account
+   */
+  describeAccountAttributes(params: Redshift.Types.DescribeAccountAttributesMessage, callback?: (err: AWSError, data: Redshift.Types.AccountAttributeList) => void): Request<Redshift.Types.AccountAttributeList, AWSError>;
+  /**
+   * Returns a list of attributes attached to an account
+   */
+  describeAccountAttributes(callback?: (err: AWSError, data: Redshift.Types.AccountAttributeList) => void): Request<Redshift.Types.AccountAttributeList, AWSError>;
   /**
    * Returns an array of ClusterDbRevision objects.
    */
@@ -333,11 +413,19 @@ declare class Redshift extends Service {
    */
   describeLoggingStatus(callback?: (err: AWSError, data: Redshift.Types.LoggingStatus) => void): Request<Redshift.Types.LoggingStatus, AWSError>;
   /**
-   * Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific AWS region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
+   * Returns properties of possible node configurations such as node type, number of nodes, and disk usage for the specified action type.
+   */
+  describeNodeConfigurationOptions(params: Redshift.Types.DescribeNodeConfigurationOptionsMessage, callback?: (err: AWSError, data: Redshift.Types.NodeConfigurationOptionsMessage) => void): Request<Redshift.Types.NodeConfigurationOptionsMessage, AWSError>;
+  /**
+   * Returns properties of possible node configurations such as node type, number of nodes, and disk usage for the specified action type.
+   */
+  describeNodeConfigurationOptions(callback?: (err: AWSError, data: Redshift.Types.NodeConfigurationOptionsMessage) => void): Request<Redshift.Types.NodeConfigurationOptionsMessage, AWSError>;
+  /**
+   * Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific AWS Region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
   describeOrderableClusterOptions(params: Redshift.Types.DescribeOrderableClusterOptionsMessage, callback?: (err: AWSError, data: Redshift.Types.OrderableClusterOptionsMessage) => void): Request<Redshift.Types.OrderableClusterOptionsMessage, AWSError>;
   /**
-   * Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific AWS region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
+   * Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific AWS Region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
   describeOrderableClusterOptions(callback?: (err: AWSError, data: Redshift.Types.OrderableClusterOptionsMessage) => void): Request<Redshift.Types.OrderableClusterOptionsMessage, AWSError>;
   /**
@@ -365,6 +453,14 @@ declare class Redshift extends Service {
    */
   describeResize(callback?: (err: AWSError, data: Redshift.Types.ResizeProgressMessage) => void): Request<Redshift.Types.ResizeProgressMessage, AWSError>;
   /**
+   * Describes properties of scheduled actions. 
+   */
+  describeScheduledActions(params: Redshift.Types.DescribeScheduledActionsMessage, callback?: (err: AWSError, data: Redshift.Types.ScheduledActionsMessage) => void): Request<Redshift.Types.ScheduledActionsMessage, AWSError>;
+  /**
+   * Describes properties of scheduled actions. 
+   */
+  describeScheduledActions(callback?: (err: AWSError, data: Redshift.Types.ScheduledActionsMessage) => void): Request<Redshift.Types.ScheduledActionsMessage, AWSError>;
+  /**
    * Returns a list of snapshot copy grants owned by the AWS account in the destination region.  For more information about managing snapshot copy grants, go to Amazon Redshift Database Encryption in the Amazon Redshift Cluster Management Guide. 
    */
   describeSnapshotCopyGrants(params: Redshift.Types.DescribeSnapshotCopyGrantsMessage, callback?: (err: AWSError, data: Redshift.Types.SnapshotCopyGrantMessage) => void): Request<Redshift.Types.SnapshotCopyGrantMessage, AWSError>;
@@ -372,6 +468,18 @@ declare class Redshift extends Service {
    * Returns a list of snapshot copy grants owned by the AWS account in the destination region.  For more information about managing snapshot copy grants, go to Amazon Redshift Database Encryption in the Amazon Redshift Cluster Management Guide. 
    */
   describeSnapshotCopyGrants(callback?: (err: AWSError, data: Redshift.Types.SnapshotCopyGrantMessage) => void): Request<Redshift.Types.SnapshotCopyGrantMessage, AWSError>;
+  /**
+   * Returns a list of snapshot schedules. 
+   */
+  describeSnapshotSchedules(params: Redshift.Types.DescribeSnapshotSchedulesMessage, callback?: (err: AWSError, data: Redshift.Types.DescribeSnapshotSchedulesOutputMessage) => void): Request<Redshift.Types.DescribeSnapshotSchedulesOutputMessage, AWSError>;
+  /**
+   * Returns a list of snapshot schedules. 
+   */
+  describeSnapshotSchedules(callback?: (err: AWSError, data: Redshift.Types.DescribeSnapshotSchedulesOutputMessage) => void): Request<Redshift.Types.DescribeSnapshotSchedulesOutputMessage, AWSError>;
+  /**
+   * Returns account level backups storage size and provisional storage.
+   */
+  describeStorage(callback?: (err: AWSError, data: Redshift.Types.CustomerStorageMessage) => void): Request<Redshift.Types.CustomerStorageMessage, AWSError>;
   /**
    * Lists the status of one or more table restore requests made using the RestoreTableFromClusterSnapshot API action. If you don't specify a value for the TableRestoreRequestId parameter, then DescribeTableRestoreStatus returns the status of all table restore requests ordered by the date and time of the request in ascending order. Otherwise DescribeTableRestoreStatus returns the status of the table specified by TableRestoreRequestId.
    */
@@ -388,6 +496,14 @@ declare class Redshift extends Service {
    * Returns a list of tags. You can return tags from a specific resource by specifying an ARN, or you can return all tags for a given type of resource, such as clusters, snapshots, and so on. The following are limitations for DescribeTags:    You cannot specify an ARN and a resource-type value together in the same request.   You cannot use the MaxRecords and Marker parameters together with the ARN parameter.   The MaxRecords parameter can be a range from 10 to 50 results to return in a request.   If you specify both tag keys and tag values in the same request, Amazon Redshift returns all resources that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all resources that have any combination of those values are returned. If both tag keys and values are omitted from the request, resources are returned regardless of whether they have tag keys or values associated with them.
    */
   describeTags(callback?: (err: AWSError, data: Redshift.Types.TaggedResourceListMessage) => void): Request<Redshift.Types.TaggedResourceListMessage, AWSError>;
+  /**
+   * Shows usage limits on a cluster. Results are filtered based on the combination of input usage limit identifier, cluster identifier, and feature type parameters:   If usage limit identifier, cluster identifier, and feature type are not provided, then all usage limit objects for the current account in the current region are returned.   If usage limit identifier is provided, then the corresponding usage limit object is returned.   If cluster identifier is provided, then all usage limit objects for the specified cluster are returned.   If cluster identifier and feature type are provided, then all usage limit objects for the combination of cluster and feature are returned.  
+   */
+  describeUsageLimits(params: Redshift.Types.DescribeUsageLimitsMessage, callback?: (err: AWSError, data: Redshift.Types.UsageLimitList) => void): Request<Redshift.Types.UsageLimitList, AWSError>;
+  /**
+   * Shows usage limits on a cluster. Results are filtered based on the combination of input usage limit identifier, cluster identifier, and feature type parameters:   If usage limit identifier, cluster identifier, and feature type are not provided, then all usage limit objects for the current account in the current region are returned.   If usage limit identifier is provided, then the corresponding usage limit object is returned.   If cluster identifier is provided, then all usage limit objects for the specified cluster are returned.   If cluster identifier and feature type are provided, then all usage limit objects for the combination of cluster and feature are returned.  
+   */
+  describeUsageLimits(callback?: (err: AWSError, data: Redshift.Types.UsageLimitList) => void): Request<Redshift.Types.UsageLimitList, AWSError>;
   /**
    * Stops logging information, such as queries and connection attempts, for the specified Amazon Redshift cluster.
    */
@@ -437,11 +553,11 @@ declare class Redshift extends Service {
    */
   getReservedNodeExchangeOfferings(callback?: (err: AWSError, data: Redshift.Types.GetReservedNodeExchangeOfferingsOutputMessage) => void): Request<Redshift.Types.GetReservedNodeExchangeOfferingsOutputMessage, AWSError>;
   /**
-   * Modifies the settings for a cluster. For example, you can add another security or parameter group, update the preferred maintenance window, or change the master user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide. You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change.
+   * Modifies the settings for a cluster. You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change. You can add another security or parameter group, or change the master user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
   modifyCluster(params: Redshift.Types.ModifyClusterMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyClusterResult) => void): Request<Redshift.Types.ModifyClusterResult, AWSError>;
   /**
-   * Modifies the settings for a cluster. For example, you can add another security or parameter group, update the preferred maintenance window, or change the master user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide. You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change.
+   * Modifies the settings for a cluster. You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change. You can add another security or parameter group, or change the master user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
   modifyCluster(callback?: (err: AWSError, data: Redshift.Types.ModifyClusterResult) => void): Request<Redshift.Types.ModifyClusterResult, AWSError>;
   /**
@@ -461,6 +577,14 @@ declare class Redshift extends Service {
    */
   modifyClusterIamRoles(callback?: (err: AWSError, data: Redshift.Types.ModifyClusterIamRolesResult) => void): Request<Redshift.Types.ModifyClusterIamRolesResult, AWSError>;
   /**
+   * Modifies the maintenance settings of a cluster.
+   */
+  modifyClusterMaintenance(params: Redshift.Types.ModifyClusterMaintenanceMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyClusterMaintenanceResult) => void): Request<Redshift.Types.ModifyClusterMaintenanceResult, AWSError>;
+  /**
+   * Modifies the maintenance settings of a cluster.
+   */
+  modifyClusterMaintenance(callback?: (err: AWSError, data: Redshift.Types.ModifyClusterMaintenanceResult) => void): Request<Redshift.Types.ModifyClusterMaintenanceResult, AWSError>;
+  /**
    * Modifies the parameters of a parameter group.  For more information about parameters and parameter groups, go to Amazon Redshift Parameter Groups in the Amazon Redshift Cluster Management Guide.
    */
   modifyClusterParameterGroup(params: Redshift.Types.ModifyClusterParameterGroupMessage, callback?: (err: AWSError, data: Redshift.Types.ClusterParameterGroupNameMessage) => void): Request<Redshift.Types.ClusterParameterGroupNameMessage, AWSError>;
@@ -468,6 +592,22 @@ declare class Redshift extends Service {
    * Modifies the parameters of a parameter group.  For more information about parameters and parameter groups, go to Amazon Redshift Parameter Groups in the Amazon Redshift Cluster Management Guide.
    */
   modifyClusterParameterGroup(callback?: (err: AWSError, data: Redshift.Types.ClusterParameterGroupNameMessage) => void): Request<Redshift.Types.ClusterParameterGroupNameMessage, AWSError>;
+  /**
+   * Modifies the settings for a snapshot. This exanmple modifies the manual retention period setting for a cluster snapshot.
+   */
+  modifyClusterSnapshot(params: Redshift.Types.ModifyClusterSnapshotMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyClusterSnapshotResult) => void): Request<Redshift.Types.ModifyClusterSnapshotResult, AWSError>;
+  /**
+   * Modifies the settings for a snapshot. This exanmple modifies the manual retention period setting for a cluster snapshot.
+   */
+  modifyClusterSnapshot(callback?: (err: AWSError, data: Redshift.Types.ModifyClusterSnapshotResult) => void): Request<Redshift.Types.ModifyClusterSnapshotResult, AWSError>;
+  /**
+   * Modifies a snapshot schedule for a cluster.
+   */
+  modifyClusterSnapshotSchedule(params: Redshift.Types.ModifyClusterSnapshotScheduleMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Modifies a snapshot schedule for a cluster.
+   */
+  modifyClusterSnapshotSchedule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Modifies a cluster subnet group to include the specified list of VPC subnets. The operation replaces the existing list of subnets with the new list of subnets.
    */
@@ -485,13 +625,45 @@ declare class Redshift extends Service {
    */
   modifyEventSubscription(callback?: (err: AWSError, data: Redshift.Types.ModifyEventSubscriptionResult) => void): Request<Redshift.Types.ModifyEventSubscriptionResult, AWSError>;
   /**
-   * Modifies the number of days to retain automated snapshots in the destination region after they are copied from the source region.
+   * Modifies a scheduled action. 
+   */
+  modifyScheduledAction(params: Redshift.Types.ModifyScheduledActionMessage, callback?: (err: AWSError, data: Redshift.Types.ScheduledAction) => void): Request<Redshift.Types.ScheduledAction, AWSError>;
+  /**
+   * Modifies a scheduled action. 
+   */
+  modifyScheduledAction(callback?: (err: AWSError, data: Redshift.Types.ScheduledAction) => void): Request<Redshift.Types.ScheduledAction, AWSError>;
+  /**
+   * Modifies the number of days to retain snapshots in the destination AWS Region after they are copied from the source AWS Region. By default, this operation only changes the retention period of copied automated snapshots. The retention periods for both new and existing copied automated snapshots are updated with the new retention period. You can set the manual option to change only the retention periods of copied manual snapshots. If you set this option, only newly copied manual snapshots have the new retention period. 
    */
   modifySnapshotCopyRetentionPeriod(params: Redshift.Types.ModifySnapshotCopyRetentionPeriodMessage, callback?: (err: AWSError, data: Redshift.Types.ModifySnapshotCopyRetentionPeriodResult) => void): Request<Redshift.Types.ModifySnapshotCopyRetentionPeriodResult, AWSError>;
   /**
-   * Modifies the number of days to retain automated snapshots in the destination region after they are copied from the source region.
+   * Modifies the number of days to retain snapshots in the destination AWS Region after they are copied from the source AWS Region. By default, this operation only changes the retention period of copied automated snapshots. The retention periods for both new and existing copied automated snapshots are updated with the new retention period. You can set the manual option to change only the retention periods of copied manual snapshots. If you set this option, only newly copied manual snapshots have the new retention period. 
    */
   modifySnapshotCopyRetentionPeriod(callback?: (err: AWSError, data: Redshift.Types.ModifySnapshotCopyRetentionPeriodResult) => void): Request<Redshift.Types.ModifySnapshotCopyRetentionPeriodResult, AWSError>;
+  /**
+   * Modifies a snapshot schedule. Any schedule associated with a cluster is modified asynchronously.
+   */
+  modifySnapshotSchedule(params: Redshift.Types.ModifySnapshotScheduleMessage, callback?: (err: AWSError, data: Redshift.Types.SnapshotSchedule) => void): Request<Redshift.Types.SnapshotSchedule, AWSError>;
+  /**
+   * Modifies a snapshot schedule. Any schedule associated with a cluster is modified asynchronously.
+   */
+  modifySnapshotSchedule(callback?: (err: AWSError, data: Redshift.Types.SnapshotSchedule) => void): Request<Redshift.Types.SnapshotSchedule, AWSError>;
+  /**
+   * Modifies a usage limit in a cluster. You can't modify the feature type or period of a usage limit.
+   */
+  modifyUsageLimit(params: Redshift.Types.ModifyUsageLimitMessage, callback?: (err: AWSError, data: Redshift.Types.UsageLimit) => void): Request<Redshift.Types.UsageLimit, AWSError>;
+  /**
+   * Modifies a usage limit in a cluster. You can't modify the feature type or period of a usage limit.
+   */
+  modifyUsageLimit(callback?: (err: AWSError, data: Redshift.Types.UsageLimit) => void): Request<Redshift.Types.UsageLimit, AWSError>;
+  /**
+   * Pauses a cluster.
+   */
+  pauseCluster(params: Redshift.Types.PauseClusterMessage, callback?: (err: AWSError, data: Redshift.Types.PauseClusterResult) => void): Request<Redshift.Types.PauseClusterResult, AWSError>;
+  /**
+   * Pauses a cluster.
+   */
+  pauseCluster(callback?: (err: AWSError, data: Redshift.Types.PauseClusterResult) => void): Request<Redshift.Types.PauseClusterResult, AWSError>;
   /**
    * Allows you to purchase reserved nodes. Amazon Redshift offers a predefined set of reserved node offerings. You can purchase one or more of the offerings. You can call the DescribeReservedNodeOfferings API to obtain the available reserved node offerings. You can call this API by providing a specific reserved node offering and the number of nodes you want to reserve.   For more information about reserved node offerings, go to Purchasing Reserved Nodes in the Amazon Redshift Cluster Management Guide.
    */
@@ -517,6 +689,14 @@ declare class Redshift extends Service {
    */
   resetClusterParameterGroup(callback?: (err: AWSError, data: Redshift.Types.ClusterParameterGroupNameMessage) => void): Request<Redshift.Types.ClusterParameterGroupNameMessage, AWSError>;
   /**
+   * Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method.  Elastic resize operations have the following restrictions:   You can only resize clusters of the following types:   dc2.large   dc2.8xlarge   ds2.xlarge   ds2.8xlarge   ra3.4xlarge   ra3.16xlarge     The type of nodes that you add must match the node type for the cluster.  
+   */
+  resizeCluster(params: Redshift.Types.ResizeClusterMessage, callback?: (err: AWSError, data: Redshift.Types.ResizeClusterResult) => void): Request<Redshift.Types.ResizeClusterResult, AWSError>;
+  /**
+   * Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method.  Elastic resize operations have the following restrictions:   You can only resize clusters of the following types:   dc2.large   dc2.8xlarge   ds2.xlarge   ds2.8xlarge   ra3.4xlarge   ra3.16xlarge     The type of nodes that you add must match the node type for the cluster.  
+   */
+  resizeCluster(callback?: (err: AWSError, data: Redshift.Types.ResizeClusterResult) => void): Request<Redshift.Types.ResizeClusterResult, AWSError>;
+  /**
    * Creates a new cluster from a snapshot. By default, Amazon Redshift creates the resulting cluster with the same configuration as the original cluster from which the snapshot was created, except that the new cluster is created with the default cluster security and parameter groups. After Amazon Redshift creates the cluster, you can use the ModifyCluster API to associate a different security group and different parameter group with the restored cluster. If you are using a DS node type, you can also choose to change to another DS node type of the same size during restore. If you restore a cluster into a VPC, you must provide a cluster subnet group where you want the cluster restored.  For more information about working with snapshots, go to Amazon Redshift Snapshots in the Amazon Redshift Cluster Management Guide.
    */
   restoreFromClusterSnapshot(params: Redshift.Types.RestoreFromClusterSnapshotMessage, callback?: (err: AWSError, data: Redshift.Types.RestoreFromClusterSnapshotResult) => void): Request<Redshift.Types.RestoreFromClusterSnapshotResult, AWSError>;
@@ -532,6 +712,14 @@ declare class Redshift extends Service {
    * Creates a new table from a table in an Amazon Redshift cluster snapshot. You must create the new table within the Amazon Redshift cluster that the snapshot was taken from. You cannot use RestoreTableFromClusterSnapshot to restore a table with the same name as an existing table in an Amazon Redshift cluster. That is, you cannot overwrite an existing table in a cluster with a restored table. If you want to replace your original table with a new, restored table, then rename or drop your original table before you call RestoreTableFromClusterSnapshot. When you have renamed your original table, then you can pass the original name of the table as the NewTableName parameter value in the call to RestoreTableFromClusterSnapshot. This way, you can replace the original table with the table created from the snapshot.
    */
   restoreTableFromClusterSnapshot(callback?: (err: AWSError, data: Redshift.Types.RestoreTableFromClusterSnapshotResult) => void): Request<Redshift.Types.RestoreTableFromClusterSnapshotResult, AWSError>;
+  /**
+   * Resumes a paused cluster.
+   */
+  resumeCluster(params: Redshift.Types.ResumeClusterMessage, callback?: (err: AWSError, data: Redshift.Types.ResumeClusterResult) => void): Request<Redshift.Types.ResumeClusterResult, AWSError>;
+  /**
+   * Resumes a paused cluster.
+   */
+  resumeCluster(callback?: (err: AWSError, data: Redshift.Types.ResumeClusterResult) => void): Request<Redshift.Types.ResumeClusterResult, AWSError>;
   /**
    * Revokes an ingress rule in an Amazon Redshift security group for a previously authorized IP range or Amazon EC2 security group. To add an ingress rule, see AuthorizeClusterSecurityGroupIngress. For information about managing security groups, go to Amazon Redshift Cluster Security Groups in the Amazon Redshift Cluster Management Guide. 
    */
@@ -601,7 +789,26 @@ declare namespace Redshift {
     TargetReservedNodeOfferingId: String;
   }
   export interface AcceptReservedNodeExchangeOutputMessage {
+    /**
+     * 
+     */
     ExchangedReservedNode?: ReservedNode;
+  }
+  export interface AccountAttribute {
+    /**
+     * The name of the attribute.
+     */
+    AttributeName?: String;
+    /**
+     * A list of attribute values.
+     */
+    AttributeValues?: AttributeValueList;
+  }
+  export interface AccountAttributeList {
+    /**
+     * A list of attributes assigned to an account.
+     */
+    AccountAttributes?: AttributeList;
   }
   export interface AccountWithRestoreAccess {
     /**
@@ -614,6 +821,17 @@ declare namespace Redshift {
     AccountAlias?: String;
   }
   export type AccountsWithRestoreAccessList = AccountWithRestoreAccess[];
+  export type ActionType = "restore-cluster"|"recommend-node-config"|"resize-cluster"|string;
+  export type AssociatedClusterList = ClusterAssociatedToSchedule[];
+  export type AttributeList = AccountAttribute[];
+  export type AttributeNameList = String[];
+  export type AttributeValueList = AttributeValueTarget[];
+  export interface AttributeValueTarget {
+    /**
+     * The value of the attribute.
+     */
+    AttributeValue?: String;
+  }
   export interface AuthorizeClusterSecurityGroupIngressMessage {
     /**
      * The name of the security group to which the ingress rule is added.
@@ -657,11 +875,62 @@ declare namespace Redshift {
      * The name of the availability zone.
      */
     Name?: String;
+    /**
+     * 
+     */
     SupportedPlatforms?: SupportedPlatformsList;
   }
   export type AvailabilityZoneList = AvailabilityZone[];
+  export interface BatchDeleteClusterSnapshotsRequest {
+    /**
+     * A list of identifiers for the snapshots that you want to delete.
+     */
+    Identifiers: DeleteClusterSnapshotMessageList;
+  }
+  export interface BatchDeleteClusterSnapshotsResult {
+    /**
+     * A list of the snapshot identifiers that were deleted. 
+     */
+    Resources?: SnapshotIdentifierList;
+    /**
+     * A list of any errors returned.
+     */
+    Errors?: BatchSnapshotOperationErrorList;
+  }
+  export interface BatchModifyClusterSnapshotsMessage {
+    /**
+     * A list of snapshot identifiers you want to modify.
+     */
+    SnapshotIdentifierList: SnapshotIdentifierList;
+    /**
+     * The number of days that a manual snapshot is retained. If you specify the value -1, the manual snapshot is retained indefinitely. The number must be either -1 or an integer between 1 and 3,653. If you decrease the manual snapshot retention period from its current value, existing manual snapshots that fall outside of the new retention period will return an error. If you want to suppress the errors and delete the snapshots, use the force option. 
+     */
+    ManualSnapshotRetentionPeriod?: IntegerOptional;
+    /**
+     * A boolean value indicating whether to override an exception if the retention period has passed. 
+     */
+    Force?: Boolean;
+  }
+  export interface BatchModifyClusterSnapshotsOutputMessage {
+    /**
+     * A list of the snapshots that were modified.
+     */
+    Resources?: SnapshotIdentifierList;
+    /**
+     * A list of any errors returned.
+     */
+    Errors?: BatchSnapshotOperationErrors;
+  }
+  export type BatchSnapshotOperationErrorList = SnapshotErrorMessage[];
+  export type BatchSnapshotOperationErrors = SnapshotErrorMessage[];
   export type Boolean = boolean;
   export type BooleanOptional = boolean;
+  export interface CancelResizeMessage {
+    /**
+     * The unique identifier for the cluster that you want to cancel a resize operation for.
+     */
+    ClusterIdentifier: String;
+  }
   export interface Cluster {
     /**
      * The unique identifier of the cluster.
@@ -672,9 +941,13 @@ declare namespace Redshift {
      */
     NodeType?: String;
     /**
-     *  The current state of the cluster. Possible values are the following:    available     creating     deleting     final-snapshot     hardware-failure     incompatible-hsm     incompatible-network     incompatible-parameters     incompatible-restore     modifying     rebooting     renaming     resizing     rotating-keys     storage-full     updating-hsm   
+     *  The current state of the cluster. Possible values are the following:    available     available, prep-for-resize     available, resize-cleanup     cancelling-resize     creating     deleting     final-snapshot     hardware-failure     incompatible-hsm     incompatible-network     incompatible-parameters     incompatible-restore     modifying     paused     rebooting     renaming     resizing     rotating-keys     storage-full     updating-hsm   
      */
     ClusterStatus?: String;
+    /**
+     * The availability status of the cluster for queries. Possible values are the following:   Available - The cluster is available for queries.    Unavailable - The cluster is not available for queries.   Maintenance - The cluster is intermittently available for queries due to maintenance activities.   Modifying - The cluster is intermittently available for queries due to changes that modify the cluster.   Failed - The cluster failed and is not available for queries.  
+     */
+    ClusterAvailabilityStatus?: String;
     /**
      * The status of a modify operation, if any, initiated for the cluster.
      */
@@ -699,6 +972,10 @@ declare namespace Redshift {
      * The number of days that automatic cluster snapshots are retained.
      */
     AutomatedSnapshotRetentionPeriod?: Integer;
+    /**
+     * The default number of days to retain a manual snapshot. If the value is -1, the snapshot is retained indefinitely. This setting doesn't change the retention period of existing snapshots. The value must be either -1 or an integer between 1 and 3,653.
+     */
+    ManualSnapshotRetentionPeriod?: Integer;
     /**
      * A list of cluster security group that are associated with the cluster. Each security group is represented by an element that contains ClusterSecurityGroup.Name and ClusterSecurityGroup.Status subelements.  Cluster security groups are used when the cluster is not created in an Amazon Virtual Private Cloud (VPC). Clusters that are created in a VPC use VPC security groups, which are listed by the VpcSecurityGroups parameter. 
      */
@@ -736,7 +1013,7 @@ declare namespace Redshift {
      */
     ClusterVersion?: String;
     /**
-     * A Boolean value that, if true, indicates that major version upgrades will be applied automatically to the cluster during the maintenance window. 
+     * A boolean value that, if true, indicates that major version upgrades will be applied automatically to the cluster during the maintenance window. 
      */
     AllowVersionUpgrade?: Boolean;
     /**
@@ -744,17 +1021,21 @@ declare namespace Redshift {
      */
     NumberOfNodes?: Integer;
     /**
-     * A Boolean value that, if true, indicates that the cluster can be accessed from a public network.
+     * A boolean value that, if true, indicates that the cluster can be accessed from a public network.
      */
     PubliclyAccessible?: Boolean;
     /**
-     * A Boolean value that, if true, indicates that data in the cluster is encrypted at rest.
+     * A boolean value that, if true, indicates that data in the cluster is encrypted at rest.
      */
     Encrypted?: Boolean;
     /**
      * A value that describes the status of a cluster restore action. This parameter returns null if the cluster was not created by restoring a snapshot.
      */
     RestoreStatus?: RestoreStatus;
+    /**
+     * 
+     */
+    DataTransferProgress?: DataTransferProgress;
     /**
      * A value that reports whether the Amazon Redshift cluster has finished applying any hardware security module (HSM) settings changes specified in a modify cluster command. Values: active, applying
      */
@@ -803,6 +1084,48 @@ declare namespace Redshift {
      * The name of the maintenance track for the cluster.
      */
     MaintenanceTrackName?: String;
+    /**
+     * The number of nodes that you can resize the cluster to with the elastic resize method. 
+     */
+    ElasticResizeNumberOfNodeOptions?: String;
+    /**
+     * Describes a group of DeferredMaintenanceWindow objects.
+     */
+    DeferredMaintenanceWindows?: DeferredMaintenanceWindowsList;
+    /**
+     * A unique identifier for the cluster snapshot schedule.
+     */
+    SnapshotScheduleIdentifier?: String;
+    /**
+     * The current state of the cluster snapshot schedule.
+     */
+    SnapshotScheduleState?: ScheduleState;
+    /**
+     * The date and time when the next snapshot is expected to be taken for clusters with a valid snapshot schedule and backups enabled. 
+     */
+    ExpectedNextSnapshotScheduleTime?: TStamp;
+    /**
+     *  The status of next expected snapshot for clusters having a valid snapshot schedule and backups enabled. Possible values are the following:   OnTrack - The next snapshot is expected to be taken on time.    Pending - The next snapshot is pending to be taken.   
+     */
+    ExpectedNextSnapshotScheduleTimeStatus?: String;
+    /**
+     * The date and time in UTC when system maintenance can begin.
+     */
+    NextMaintenanceWindowStartTime?: TStamp;
+    /**
+     * Returns the following:   AllowCancelResize: a boolean value indicating if the resize operation can be cancelled.   ResizeType: Returns ClassicResize  
+     */
+    ResizeInfo?: ResizeInfo;
+  }
+  export interface ClusterAssociatedToSchedule {
+    /**
+     * 
+     */
+    ClusterIdentifier?: String;
+    /**
+     * 
+     */
+    ScheduleAssociationState?: ScheduleState;
   }
   export interface ClusterCredentials {
     /**
@@ -1007,6 +1330,10 @@ declare namespace Redshift {
      */
     RetentionPeriod?: Long;
     /**
+     * The number of days that automated snapshots are retained in the destination region after they are copied from a source region. If the value is -1, the manual snapshot is retained indefinitely.  The value must be either -1 or an integer between 1 and 3,653.
+     */
+    ManualSnapshotRetentionPeriod?: Integer;
+    /**
      * The name of the snapshot copy grant.
      */
     SnapshotCopyGrantName?: String;
@@ -1096,6 +1423,10 @@ declare namespace Redshift {
      * The identifier given to the new manual snapshot. Constraints:   Cannot be null, empty, or blank.   Must contain from 1 to 255 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.   Must be unique for the AWS account that is making the request.  
      */
     TargetSnapshotIdentifier: String;
+    /**
+     * The number of days that a manual snapshot is retained. If the value is -1, the manual snapshot is retained indefinitely.  The value must be either -1 or an integer between 1 and 3,653. The default value is -1.
+     */
+    ManualSnapshotRetentionPeriod?: IntegerOptional;
   }
   export interface CopyClusterSnapshotResult {
     Snapshot?: Snapshot;
@@ -1114,7 +1445,7 @@ declare namespace Redshift {
      */
     ClusterType?: String;
     /**
-     * The node type to be provisioned for the cluster. For information about node types, go to  Working with Clusters in the Amazon Redshift Cluster Management Guide.  Valid Values: ds2.xlarge | ds2.8xlarge | ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge 
+     * The node type to be provisioned for the cluster. For information about node types, go to  Working with Clusters in the Amazon Redshift Cluster Management Guide.  Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.4xlarge | ra3.16xlarge 
      */
     NodeType: String;
     /**
@@ -1138,7 +1469,7 @@ declare namespace Redshift {
      */
     ClusterSubnetGroupName?: String;
     /**
-     * The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision the cluster. For example, if you have several EC2 instances running in a specific Availability Zone, then you might want the cluster to be provisioned in the same zone in order to decrease network latency. Default: A random, system-chosen Availability Zone in the region that is specified by the endpoint. Example: us-east-1d  Constraint: The specified Availability Zone must be in the same region as the current endpoint.
+     * The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision the cluster. For example, if you have several EC2 instances running in a specific Availability Zone, then you might want the cluster to be provisioned in the same zone in order to decrease network latency. Default: A random, system-chosen Availability Zone in the region that is specified by the endpoint. Example: us-east-2d  Constraint: The specified Availability Zone must be in the same region as the current endpoint.
      */
     AvailabilityZone?: String;
     /**
@@ -1153,6 +1484,10 @@ declare namespace Redshift {
      * The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with CreateClusterSnapshot.  Default: 1  Constraints: Must be a value from 0 to 35.
      */
     AutomatedSnapshotRetentionPeriod?: IntegerOptional;
+    /**
+     * The default number of days to retain a manual snapshot. If the value is -1, the snapshot is retained indefinitely. This setting doesn't change the retention period of existing snapshots. The value must be either -1 or an integer between 1 and 3,653.
+     */
+    ManualSnapshotRetentionPeriod?: IntegerOptional;
     /**
      * The port number on which the cluster accepts incoming connections. The cluster is accessible only via the JDBC and ODBC connection strings. Part of the connection string requires the port on which the cluster will listen for incoming connections. Default: 5439  Valid Values: 1150-65535 
      */
@@ -1213,6 +1548,10 @@ declare namespace Redshift {
      * An optional parameter for the name of the maintenance track for the cluster. If you don't provide a maintenance track name, the cluster is assigned to the current track.
      */
     MaintenanceTrackName?: String;
+    /**
+     * A unique identifier for the snapshot schedule.
+     */
+    SnapshotScheduleIdentifier?: String;
   }
   export interface CreateClusterParameterGroupMessage {
     /**
@@ -1265,6 +1604,10 @@ declare namespace Redshift {
      */
     ClusterIdentifier: String;
     /**
+     * The number of days that a manual snapshot is retained. If the value is -1, the manual snapshot is retained indefinitely.  The value must be either -1 or an integer between 1 and 3,653. The default value is -1.
+     */
+    ManualSnapshotRetentionPeriod?: IntegerOptional;
+    /**
      * A list of tag instances.
      */
     Tags?: TagList;
@@ -1303,7 +1646,7 @@ declare namespace Redshift {
      */
     SnsTopicArn: String;
     /**
-     * The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your AWS account. You must specify a source type in order to specify source IDs. Valid values: cluster, cluster-parameter-group, cluster-security-group, and cluster-snapshot.
+     * The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your AWS account. You must specify a source type in order to specify source IDs. Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.
      */
     SourceType?: String;
     /**
@@ -1311,7 +1654,7 @@ declare namespace Redshift {
      */
     SourceIds?: SourceIdsList;
     /**
-     * Specifies the Amazon Redshift event categories to be published by the event notification subscription. Values: Configuration, Management, Monitoring, Security
+     * Specifies the Amazon Redshift event categories to be published by the event notification subscription. Values: configuration, management, monitoring, security
      */
     EventCategories?: EventCategoriesList;
     /**
@@ -1319,7 +1662,7 @@ declare namespace Redshift {
      */
     Severity?: String;
     /**
-     * A Boolean value; set to true to activate the subscription, set to false to create the subscription but not active it. 
+     * A boolean value; set to true to activate the subscription, and set to false to create the subscription but not activate it. 
      */
     Enabled?: BooleanOptional;
     /**
@@ -1376,6 +1719,40 @@ declare namespace Redshift {
   export interface CreateHsmConfigurationResult {
     HsmConfiguration?: HsmConfiguration;
   }
+  export interface CreateScheduledActionMessage {
+    /**
+     * The name of the scheduled action. The name must be unique within an account. For more information about this parameter, see ScheduledAction. 
+     */
+    ScheduledActionName: String;
+    /**
+     * A JSON format string of the Amazon Redshift API operation with input parameters. For more information about this parameter, see ScheduledAction. 
+     */
+    TargetAction: ScheduledActionType;
+    /**
+     * The schedule in at( ) or cron( ) format. For more information about this parameter, see ScheduledAction.
+     */
+    Schedule: String;
+    /**
+     * The IAM role to assume to run the target action. For more information about this parameter, see ScheduledAction. 
+     */
+    IamRole: String;
+    /**
+     * The description of the scheduled action. 
+     */
+    ScheduledActionDescription?: String;
+    /**
+     * The start time in UTC of the scheduled action. Before this time, the scheduled action does not trigger. For more information about this parameter, see ScheduledAction.
+     */
+    StartTime?: TStamp;
+    /**
+     * The end time in UTC of the scheduled action. After this time, the scheduled action does not trigger. For more information about this parameter, see ScheduledAction. 
+     */
+    EndTime?: TStamp;
+    /**
+     * If true, the schedule is enabled. If false, the scheduled action does not trigger. For more information about state of the scheduled action, see ScheduledAction. 
+     */
+    Enable?: BooleanOptional;
+  }
   export interface CreateSnapshotCopyGrantMessage {
     /**
      * The name of the snapshot copy grant. This name must be unique in the region for the AWS account. Constraints:   Must contain from 1 to 63 alphanumeric characters or hyphens.   Alphabetic characters must be lowercase.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.   Must be unique for all clusters within an AWS account.  
@@ -1393,15 +1770,107 @@ declare namespace Redshift {
   export interface CreateSnapshotCopyGrantResult {
     SnapshotCopyGrant?: SnapshotCopyGrant;
   }
+  export interface CreateSnapshotScheduleMessage {
+    /**
+     * The definition of the snapshot schedule. The definition is made up of schedule expressions, for example "cron(30 12 *)" or "rate(12 hours)". 
+     */
+    ScheduleDefinitions?: ScheduleDefinitionList;
+    /**
+     * A unique identifier for a snapshot schedule. Only alphanumeric characters are allowed for the identifier.
+     */
+    ScheduleIdentifier?: String;
+    /**
+     * The description of the snapshot schedule.
+     */
+    ScheduleDescription?: String;
+    /**
+     * An optional set of tags you can use to search for the schedule.
+     */
+    Tags?: TagList;
+    /**
+     * 
+     */
+    DryRun?: BooleanOptional;
+    /**
+     * 
+     */
+    NextInvocations?: IntegerOptional;
+  }
   export interface CreateTagsMessage {
     /**
-     * The Amazon Resource Name (ARN) to which you want to add the tag or tags. For example, arn:aws:redshift:us-east-1:123456789:cluster:t1. 
+     * The Amazon Resource Name (ARN) to which you want to add the tag or tags. For example, arn:aws:redshift:us-east-2:123456789:cluster:t1. 
      */
     ResourceName: String;
     /**
      * One or more name/value pairs to add as tags to the specified resource. Each tag name is passed in with the parameter Key and the corresponding value is passed in with the parameter Value. The Key and Value parameters are separated by a comma (,). Separate multiple tags with a space. For example, --tags "Key"="owner","Value"="admin" "Key"="environment","Value"="test" "Key"="version","Value"="1.0". 
      */
     Tags: TagList;
+  }
+  export interface CreateUsageLimitMessage {
+    /**
+     * The identifier of the cluster that you want to limit usage.
+     */
+    ClusterIdentifier: String;
+    /**
+     * The Amazon Redshift feature that you want to limit.
+     */
+    FeatureType: UsageLimitFeatureType;
+    /**
+     * The type of limit. Depending on the feature type, this can be based on a time duration or data size. If FeatureType is spectrum, then LimitType must be data-scanned. If FeatureType is concurrency-scaling, then LimitType must be time. 
+     */
+    LimitType: UsageLimitLimitType;
+    /**
+     * The limit amount. If time-based, this amount is in minutes. If data-based, this amount is in terabytes (TB). The value must be a positive number. 
+     */
+    Amount: Long;
+    /**
+     * The time period that the amount applies to. A weekly period begins on Sunday. The default is monthly. 
+     */
+    Period?: UsageLimitPeriod;
+    /**
+     * The action that Amazon Redshift takes when the limit is reached. The default is log. For more information about this parameter, see UsageLimit.
+     */
+    BreachAction?: UsageLimitBreachAction;
+    /**
+     * A list of tag instances.
+     */
+    Tags?: TagList;
+  }
+  export interface CustomerStorageMessage {
+    /**
+     * The total amount of storage currently used for snapshots.
+     */
+    TotalBackupSizeInMegaBytes?: Double;
+    /**
+     * The total amount of storage currently provisioned.
+     */
+    TotalProvisionedStorageInMegaBytes?: Double;
+  }
+  export interface DataTransferProgress {
+    /**
+     * Describes the status of the cluster. While the transfer is in progress the status is transferringdata.
+     */
+    Status?: String;
+    /**
+     * Describes the data transfer rate in MB's per second.
+     */
+    CurrentRateInMegaBytesPerSecond?: DoubleOptional;
+    /**
+     * Describes the total amount of data to be transfered in megabytes.
+     */
+    TotalDataInMegaBytes?: Long;
+    /**
+     * Describes the total amount of data that has been transfered in MB's.
+     */
+    DataTransferredInMegaBytes?: Long;
+    /**
+     * Describes the estimated number of seconds remaining to complete the transfer.
+     */
+    EstimatedTimeToCompletionInSeconds?: LongOptional;
+    /**
+     * Describes the number of seconds that have elapsed during the data transfer.
+     */
+    ElapsedTimeInSeconds?: LongOptional;
   }
   export type DbGroupList = String[];
   export interface DefaultClusterParameters {
@@ -1418,6 +1887,21 @@ declare namespace Redshift {
      */
     Parameters?: ParametersList;
   }
+  export interface DeferredMaintenanceWindow {
+    /**
+     * A unique identifier for the maintenance window.
+     */
+    DeferMaintenanceIdentifier?: String;
+    /**
+     *  A timestamp for the beginning of the time period when we defer maintenance.
+     */
+    DeferMaintenanceStartTime?: TStamp;
+    /**
+     *  A timestamp for the end of the time period when we defer maintenance.
+     */
+    DeferMaintenanceEndTime?: TStamp;
+  }
+  export type DeferredMaintenanceWindowsList = DeferredMaintenanceWindow[];
   export interface DeleteClusterMessage {
     /**
      * The identifier of the cluster to be deleted. Constraints:   Must contain lowercase characters.   Must contain from 1 to 63 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.  
@@ -1431,6 +1915,10 @@ declare namespace Redshift {
      * The identifier of the final snapshot that is to be created immediately before deleting the cluster. If this parameter is provided, SkipFinalClusterSnapshot must be false.  Constraints:   Must be 1 to 255 alphanumeric characters.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.  
      */
     FinalClusterSnapshotIdentifier?: String;
+    /**
+     * The number of days that a manual snapshot is retained. If the value is -1, the manual snapshot is retained indefinitely. The value must be either -1 or an integer between 1 and 3,653. The default value is -1.
+     */
+    FinalClusterSnapshotRetentionPeriod?: IntegerOptional;
   }
   export interface DeleteClusterParameterGroupMessage {
     /**
@@ -1449,7 +1937,7 @@ declare namespace Redshift {
   }
   export interface DeleteClusterSnapshotMessage {
     /**
-     * The unique identifier of the manual snapshot to be deleted. Constraints: Must be the name of an existing snapshot that is in the available state.
+     * The unique identifier of the manual snapshot to be deleted. Constraints: Must be the name of an existing snapshot that is in the available, failed, or cancelled state.
      */
     SnapshotIdentifier: String;
     /**
@@ -1457,6 +1945,7 @@ declare namespace Redshift {
      */
     SnapshotClusterIdentifier?: String;
   }
+  export type DeleteClusterSnapshotMessageList = DeleteClusterSnapshotMessage[];
   export interface DeleteClusterSnapshotResult {
     Snapshot?: Snapshot;
   }
@@ -1484,21 +1973,45 @@ declare namespace Redshift {
      */
     HsmConfigurationIdentifier: String;
   }
+  export interface DeleteScheduledActionMessage {
+    /**
+     * The name of the scheduled action to delete. 
+     */
+    ScheduledActionName: String;
+  }
   export interface DeleteSnapshotCopyGrantMessage {
     /**
      * The name of the snapshot copy grant to delete.
      */
     SnapshotCopyGrantName: String;
   }
+  export interface DeleteSnapshotScheduleMessage {
+    /**
+     * A unique identifier of the snapshot schedule to delete.
+     */
+    ScheduleIdentifier: String;
+  }
   export interface DeleteTagsMessage {
     /**
-     * The Amazon Resource Name (ARN) from which you want to remove the tag or tags. For example, arn:aws:redshift:us-east-1:123456789:cluster:t1. 
+     * The Amazon Resource Name (ARN) from which you want to remove the tag or tags. For example, arn:aws:redshift:us-east-2:123456789:cluster:t1. 
      */
     ResourceName: String;
     /**
      * The tag key that you want to delete.
      */
     TagKeys: TagKeyList;
+  }
+  export interface DeleteUsageLimitMessage {
+    /**
+     * The identifier of the usage limit to delete.
+     */
+    UsageLimitId: String;
+  }
+  export interface DescribeAccountAttributesMessage {
+    /**
+     * A list of attribute names.
+     */
+    AttributeNames?: AttributeNameList;
   }
   export interface DescribeClusterDbRevisionsMessage {
     /**
@@ -1578,7 +2091,7 @@ declare namespace Redshift {
   }
   export interface DescribeClusterSnapshotsMessage {
     /**
-     * The identifier of the cluster for which information about snapshots is requested.
+     * The identifier of the cluster which generated the requested snapshots.
      */
     ClusterIdentifier?: String;
     /**
@@ -1618,9 +2131,13 @@ declare namespace Redshift {
      */
     TagValues?: TagValueList;
     /**
-     * A value that indicates whether to return snapshots only for an existing cluster. Table-level restore can be performed only using a snapshot of an existing cluster, that is, a cluster that has not been deleted. If ClusterExists is set to true, ClusterIdentifier is required.
+     * A value that indicates whether to return snapshots only for an existing cluster. You can perform table-level restore only by using a snapshot of an existing cluster, that is, a cluster that has not been deleted. Values for this parameter work as follows:    If ClusterExists is set to true, ClusterIdentifier is required.   If ClusterExists is set to false and ClusterIdentifier isn't specified, all snapshots associated with deleted clusters (orphaned snapshots) are returned.    If ClusterExists is set to false and ClusterIdentifier is specified for a deleted cluster, snapshots associated with that cluster are returned.   If ClusterExists is set to false and ClusterIdentifier is specified for an existing cluster, no snapshots are returned.   
      */
     ClusterExists?: BooleanOptional;
+    /**
+     * 
+     */
+    SortingEntities?: SnapshotSortingEntityList;
   }
   export interface DescribeClusterSubnetGroupsMessage {
     /**
@@ -1717,7 +2234,7 @@ declare namespace Redshift {
   }
   export interface DescribeEventCategoriesMessage {
     /**
-     * The source type, such as cluster or parameter group, to which the described event categories apply. Valid values: cluster, cluster-snapshot, cluster-parameter-group, and cluster-security-group.
+     * The source type, such as cluster or parameter group, to which the described event categories apply. Valid values: cluster, cluster-snapshot, cluster-parameter-group, cluster-security-group, and scheduled-action.
      */
     SourceType?: String;
   }
@@ -1823,6 +2340,36 @@ declare namespace Redshift {
      */
     ClusterIdentifier: String;
   }
+  export interface DescribeNodeConfigurationOptionsMessage {
+    /**
+     * The action type to evaluate for possible node configurations. Specify "restore-cluster" to get configuration combinations based on an existing snapshot. Specify "recommend-node-config" to get configuration recommendations based on an existing cluster or snapshot. Specify "resize-cluster" to get configuration combinations for elastic resize based on an existing cluster. 
+     */
+    ActionType: ActionType;
+    /**
+     * The identifier of the cluster to evaluate for possible node configurations.
+     */
+    ClusterIdentifier?: String;
+    /**
+     * The identifier of the snapshot to evaluate for possible node configurations.
+     */
+    SnapshotIdentifier?: String;
+    /**
+     * The AWS customer account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.
+     */
+    OwnerAccount?: String;
+    /**
+     * A set of name, operator, and value items to filter the results.
+     */
+    Filters?: NodeConfigurationOptionsFilterList;
+    /**
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeNodeConfigurationOptions request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     */
+    Marker?: String;
+    /**
+     * The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.  Default: 500  Constraints: minimum 100, maximum 500.
+     */
+    MaxRecords?: IntegerOptional;
+  }
   export interface DescribeOrderableClusterOptionsMessage {
     /**
      * The version filter value. Specify this parameter to show only the available offerings matching the specified version. Default: All versions. Constraints: Must be one of the version returned from DescribeClusterVersions.
@@ -1875,6 +2422,40 @@ declare namespace Redshift {
      */
     ClusterIdentifier: String;
   }
+  export interface DescribeScheduledActionsMessage {
+    /**
+     * The name of the scheduled action to retrieve. 
+     */
+    ScheduledActionName?: String;
+    /**
+     * The type of the scheduled actions to retrieve. 
+     */
+    TargetActionType?: ScheduledActionTypeValues;
+    /**
+     * The start time in UTC of the scheduled actions to retrieve. Only active scheduled actions that have invocations after this time are retrieved.
+     */
+    StartTime?: TStamp;
+    /**
+     * The end time in UTC of the scheduled action to retrieve. Only active scheduled actions that have invocations before this time are retrieved.
+     */
+    EndTime?: TStamp;
+    /**
+     * If true, retrieve only active scheduled actions. If false, retrieve only disabled scheduled actions. 
+     */
+    Active?: BooleanOptional;
+    /**
+     * List of scheduled action filters. 
+     */
+    Filters?: ScheduledActionFilterList;
+    /**
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeScheduledActions request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     */
+    Marker?: String;
+    /**
+     * The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.  Default: 100  Constraints: minimum 20, maximum 100.
+     */
+    MaxRecords?: IntegerOptional;
+  }
   export interface DescribeSnapshotCopyGrantsMessage {
     /**
      * The name of the snapshot copy grant.
@@ -1897,6 +2478,42 @@ declare namespace Redshift {
      */
     TagValues?: TagValueList;
   }
+  export interface DescribeSnapshotSchedulesMessage {
+    /**
+     * The unique identifier for the cluster whose snapshot schedules you want to view.
+     */
+    ClusterIdentifier?: String;
+    /**
+     * A unique identifier for a snapshot schedule.
+     */
+    ScheduleIdentifier?: String;
+    /**
+     * The key value for a snapshot schedule tag.
+     */
+    TagKeys?: TagKeyList;
+    /**
+     * The value corresponding to the key of the snapshot schedule tag.
+     */
+    TagValues?: TagValueList;
+    /**
+     * A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the marker parameter and retrying the command. If the marker field is empty, all response records have been retrieved for the request.
+     */
+    Marker?: String;
+    /**
+     * The maximum number or response records to return in each call. If the number of remaining response records exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.
+     */
+    MaxRecords?: IntegerOptional;
+  }
+  export interface DescribeSnapshotSchedulesOutputMessage {
+    /**
+     * A list of SnapshotSchedules.
+     */
+    SnapshotSchedules?: SnapshotScheduleList;
+    /**
+     * A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the marker parameter and retrying the command. If the marker field is empty, all response records have been retrieved for the request.
+     */
+    Marker?: String;
+  }
   export interface DescribeTableRestoreStatusMessage {
     /**
      * The Amazon Redshift cluster that the table is being restored to.
@@ -1917,7 +2534,7 @@ declare namespace Redshift {
   }
   export interface DescribeTagsMessage {
     /**
-     * The Amazon Resource Name (ARN) for which you want to describe the tag or tags. For example, arn:aws:redshift:us-east-1:123456789:cluster:t1. 
+     * The Amazon Resource Name (ARN) for which you want to describe the tag or tags. For example, arn:aws:redshift:us-east-2:123456789:cluster:t1. 
      */
     ResourceName?: String;
     /**
@@ -1938,6 +2555,36 @@ declare namespace Redshift {
     TagKeys?: TagKeyList;
     /**
      * A tag value or values for which you want to return all matching resources that are associated with the specified value or values. For example, suppose that you have resources tagged with values called admin and test. If you specify both of these tag values in the request, Amazon Redshift returns a response with all resources that have either or both of these tag values associated with them.
+     */
+    TagValues?: TagValueList;
+  }
+  export interface DescribeUsageLimitsMessage {
+    /**
+     * The identifier of the usage limit to describe.
+     */
+    UsageLimitId?: String;
+    /**
+     * The identifier of the cluster for which you want to describe usage limits.
+     */
+    ClusterIdentifier?: String;
+    /**
+     * The feature type for which you want to describe usage limits.
+     */
+    FeatureType?: UsageLimitFeatureType;
+    /**
+     * The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.  Default: 100  Constraints: minimum 20, maximum 100.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeUsageLimits request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     */
+    Marker?: String;
+    /**
+     * A tag key or keys for which you want to return all matching usage limit objects that are associated with the specified key or keys. For example, suppose that you have parameter groups that are tagged with keys called owner and environment. If you specify both of these tag keys in the request, Amazon Redshift returns a response with the usage limit objects have either or both of these tag keys associated with them.
+     */
+    TagKeys?: TagKeyList;
+    /**
+     * A tag value or values for which you want to return all matching usage limit objects that are associated with the specified tag value or values. For example, suppose that you have parameter groups that are tagged with values called admin and test. If you specify both of these tag values in the request, Amazon Redshift returns a response with the usage limit objects that have either or both of these tag values associated with them.
      */
     TagValues?: TagValueList;
   }
@@ -2008,7 +2655,7 @@ declare namespace Redshift {
      */
     ClusterIdentifier: String;
     /**
-     * The destination region that you want to copy snapshots to. Constraints: Must be the name of a valid region. For more information, see Regions and Endpoints in the Amazon Web Services General Reference. 
+     * The destination AWS Region that you want to copy snapshots to. Constraints: Must be the name of a valid AWS Region. For more information, see Regions and Endpoints in the Amazon Web Services General Reference. 
      */
     DestinationRegion: String;
     /**
@@ -2019,6 +2666,10 @@ declare namespace Redshift {
      * The name of the snapshot copy grant to use when snapshots of an AWS KMS-encrypted cluster are copied to the destination region.
      */
     SnapshotCopyGrantName?: String;
+    /**
+     * The number of days to retain newly copied snapshots in the destination AWS Region after they are copied from the source AWS Region. If the value is -1, the manual snapshot is retained indefinitely.  The value must be either -1 or an integer between 1 and 3,653.
+     */
+    ManualSnapshotRetentionPeriod?: IntegerOptional;
   }
   export interface EnableSnapshotCopyResult {
     Cluster?: Cluster;
@@ -2123,7 +2774,7 @@ declare namespace Redshift {
      */
     SubscriptionCreationTime?: TStamp;
     /**
-     * The source type of the events returned the Amazon Redshift event notification, such as cluster, or cluster-snapshot.
+     * The source type of the events returned by the Amazon Redshift event notification, such as cluster, cluster-snapshot, cluster-parameter-group, cluster-security-group, or scheduled-action. 
      */
     SourceType?: String;
     /**
@@ -2139,7 +2790,7 @@ declare namespace Redshift {
      */
     Severity?: String;
     /**
-     * A Boolean value indicating whether the subscription is enabled. true indicates the subscription is enabled.
+     * A boolean value indicating whether the subscription is enabled; true indicates that the subscription is enabled.
      */
     Enabled?: Boolean;
     /**
@@ -2353,6 +3004,7 @@ declare namespace Redshift {
      */
     UpdateTargets?: EligibleTracksToUpdateList;
   }
+  export type Mode = "standard"|"high-performance"|string;
   export interface ModifyClusterDbRevisionMessage {
     /**
      * The unique identifier of a cluster whose database revision you want to modify.  Example: examplecluster 
@@ -2383,6 +3035,35 @@ declare namespace Redshift {
   export interface ModifyClusterIamRolesResult {
     Cluster?: Cluster;
   }
+  export interface ModifyClusterMaintenanceMessage {
+    /**
+     * A unique identifier for the cluster.
+     */
+    ClusterIdentifier: String;
+    /**
+     * A boolean indicating whether to enable the deferred maintenance window. 
+     */
+    DeferMaintenance?: BooleanOptional;
+    /**
+     * A unique identifier for the deferred maintenance window.
+     */
+    DeferMaintenanceIdentifier?: String;
+    /**
+     * A timestamp indicating the start time for the deferred maintenance window.
+     */
+    DeferMaintenanceStartTime?: TStamp;
+    /**
+     * A timestamp indicating end time for the deferred maintenance window. If you specify an end time, you can't specify a duration.
+     */
+    DeferMaintenanceEndTime?: TStamp;
+    /**
+     * An integer indicating the duration of the maintenance window in days. If you specify a duration, you can't specify an end time. The duration must be 45 days or less.
+     */
+    DeferMaintenanceDuration?: IntegerOptional;
+  }
+  export interface ModifyClusterMaintenanceResult {
+    Cluster?: Cluster;
+  }
   export interface ModifyClusterMessage {
     /**
      * The unique identifier of the cluster to be modified. Example: examplecluster 
@@ -2393,11 +3074,11 @@ declare namespace Redshift {
      */
     ClusterType?: String;
     /**
-     * The new node type of the cluster. If you specify a new node type, you must also specify the number of nodes parameter. When you submit your request to resize a cluster, Amazon Redshift sets access permissions for the cluster to read-only. After Amazon Redshift provisions a new cluster according to your resize requirements, there will be a temporary outage while the old cluster is deleted and your connection is switched to the new cluster. When the new connection is complete, the original access permissions for the cluster are restored. You can use DescribeResize to track the progress of the resize request.  Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge 
+     * The new node type of the cluster. If you specify a new node type, you must also specify the number of nodes parameter.  For more information about resizing clusters, go to Resizing Clusters in Amazon Redshift in the Amazon Redshift Cluster Management Guide. Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.4xlarge | ra3.16xlarge 
      */
     NodeType?: String;
     /**
-     * The new number of nodes of the cluster. If you specify a new number of nodes, you must also specify the node type parameter. When you submit your request to resize a cluster, Amazon Redshift sets access permissions for the cluster to read-only. After Amazon Redshift provisions a new cluster according to your resize requirements, there will be a temporary outage while the old cluster is deleted and your connection is switched to the new cluster. When the new connection is complete, the original access permissions for the cluster are restored. You can use DescribeResize to track the progress of the resize request.  Valid Values: Integer greater than 0.
+     * The new number of nodes of the cluster. If you specify a new number of nodes, you must also specify the node type parameter.  For more information about resizing clusters, go to Resizing Clusters in Amazon Redshift in the Amazon Redshift Cluster Management Guide. Valid Values: Integer greater than 0.
      */
     NumberOfNodes?: IntegerOptional;
     /**
@@ -2420,6 +3101,10 @@ declare namespace Redshift {
      * The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with CreateClusterSnapshot.  If you decrease the automated snapshot retention period from its current value, existing automated snapshots that fall outside of the new retention period will be immediately deleted. Default: Uses existing setting. Constraints: Must be a value from 0 to 35.
      */
     AutomatedSnapshotRetentionPeriod?: IntegerOptional;
+    /**
+     * The default for number of days that a newly created manual snapshot is retained. If the value is -1, the manual snapshot is retained indefinitely. This value doesn't retroactively change the retention periods of existing manual snapshots. The value must be either -1 or an integer between 1 and 3,653. The default value is -1.
+     */
+    ManualSnapshotRetentionPeriod?: IntegerOptional;
     /**
      * The weekly time range (in UTC) during which system maintenance can occur, if necessary. If system maintenance is necessary during the window, it may result in an outage. This maintenance window change is made immediately. If the new maintenance window indicates the current time, there must be at least 120 minutes between the current time and end of the window in order to ensure that pending changes are applied. Default: Uses existing setting. Format: ddd:hh24:mi-ddd:hh24:mi, for example wed:07:30-wed:08:00. Valid Days: Mon | Tue | Wed | Thu | Fri | Sat | Sun Constraints: Must be at least 30 minutes.
      */
@@ -2460,6 +3145,14 @@ declare namespace Redshift {
      * The name for the maintenance track that you want to assign for the cluster. This name change is asynchronous. The new track name stays in the PendingModifiedValues for the cluster until the next maintenance window. When the maintenance track changes, the cluster is switched to the latest cluster release available for the maintenance track. At this point, the maintenance track name is applied.
      */
     MaintenanceTrackName?: String;
+    /**
+     * Indicates whether the cluster is encrypted. If the value is encrypted (true) and you provide a value for the KmsKeyId parameter, we encrypt the cluster with the provided KmsKeyId. If you don't provide a KmsKeyId, we encrypt with the default key. In the China region we use legacy encryption if you specify that the cluster is encrypted. If the value is not encrypted (false), then the cluster is decrypted. 
+     */
+    Encrypted?: BooleanOptional;
+    /**
+     * The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.
+     */
+    KmsKeyId?: String;
   }
   export interface ModifyClusterParameterGroupMessage {
     /**
@@ -2473,6 +3166,37 @@ declare namespace Redshift {
   }
   export interface ModifyClusterResult {
     Cluster?: Cluster;
+  }
+  export interface ModifyClusterSnapshotMessage {
+    /**
+     * The identifier of the snapshot whose setting you want to modify.
+     */
+    SnapshotIdentifier: String;
+    /**
+     * The number of days that a manual snapshot is retained. If the value is -1, the manual snapshot is retained indefinitely. If the manual snapshot falls outside of the new retention period, you can specify the force option to immediately delete the snapshot. The value must be either -1 or an integer between 1 and 3,653.
+     */
+    ManualSnapshotRetentionPeriod?: IntegerOptional;
+    /**
+     * A Boolean option to override an exception if the retention period has already passed.
+     */
+    Force?: Boolean;
+  }
+  export interface ModifyClusterSnapshotResult {
+    Snapshot?: Snapshot;
+  }
+  export interface ModifyClusterSnapshotScheduleMessage {
+    /**
+     * A unique identifier for the cluster whose snapshot schedule you want to modify. 
+     */
+    ClusterIdentifier: String;
+    /**
+     * A unique alphanumeric identifier for the schedule that you want to associate with the cluster.
+     */
+    ScheduleIdentifier?: String;
+    /**
+     * A boolean to indicate whether to remove the assoiciation between the cluster and the schedule.
+     */
+    DisassociateSchedule?: BooleanOptional;
   }
   export interface ModifyClusterSubnetGroupMessage {
     /**
@@ -2501,7 +3225,7 @@ declare namespace Redshift {
      */
     SnsTopicArn?: String;
     /**
-     * The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your AWS account. You must specify a source type in order to specify source IDs. Valid values: cluster, cluster-parameter-group, cluster-security-group, and cluster-snapshot.
+     * The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your AWS account. You must specify a source type in order to specify source IDs. Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.
      */
     SourceType?: String;
     /**
@@ -2509,7 +3233,7 @@ declare namespace Redshift {
      */
     SourceIds?: SourceIdsList;
     /**
-     * Specifies the Amazon Redshift event categories to be published by the event notification subscription. Values: Configuration, Management, Monitoring, Security
+     * Specifies the Amazon Redshift event categories to be published by the event notification subscription. Values: configuration, management, monitoring, security
      */
     EventCategories?: EventCategoriesList;
     /**
@@ -2524,19 +3248,127 @@ declare namespace Redshift {
   export interface ModifyEventSubscriptionResult {
     EventSubscription?: EventSubscription;
   }
+  export interface ModifyScheduledActionMessage {
+    /**
+     * The name of the scheduled action to modify. 
+     */
+    ScheduledActionName: String;
+    /**
+     * A modified JSON format of the scheduled action. For more information about this parameter, see ScheduledAction. 
+     */
+    TargetAction?: ScheduledActionType;
+    /**
+     * A modified schedule in either at( ) or cron( ) format. For more information about this parameter, see ScheduledAction.
+     */
+    Schedule?: String;
+    /**
+     * A different IAM role to assume to run the target action. For more information about this parameter, see ScheduledAction.
+     */
+    IamRole?: String;
+    /**
+     * A modified description of the scheduled action. 
+     */
+    ScheduledActionDescription?: String;
+    /**
+     * A modified start time of the scheduled action. For more information about this parameter, see ScheduledAction. 
+     */
+    StartTime?: TStamp;
+    /**
+     * A modified end time of the scheduled action. For more information about this parameter, see ScheduledAction. 
+     */
+    EndTime?: TStamp;
+    /**
+     * A modified enable flag of the scheduled action. If true, the scheduled action is active. If false, the scheduled action is disabled. 
+     */
+    Enable?: BooleanOptional;
+  }
   export interface ModifySnapshotCopyRetentionPeriodMessage {
     /**
-     * The unique identifier of the cluster for which you want to change the retention period for automated snapshots that are copied to a destination region. Constraints: Must be the valid name of an existing cluster that has cross-region snapshot copy enabled.
+     * The unique identifier of the cluster for which you want to change the retention period for either automated or manual snapshots that are copied to a destination AWS Region. Constraints: Must be the valid name of an existing cluster that has cross-region snapshot copy enabled.
      */
     ClusterIdentifier: String;
     /**
-     * The number of days to retain automated snapshots in the destination region after they are copied from the source region. If you decrease the retention period for automated snapshots that are copied to a destination region, Amazon Redshift will delete any existing automated snapshots that were copied to the destination region and that fall outside of the new retention period. Constraints: Must be at least 1 and no more than 35.
+     * The number of days to retain automated snapshots in the destination AWS Region after they are copied from the source AWS Region. By default, this only changes the retention period of copied automated snapshots.  If you decrease the retention period for automated snapshots that are copied to a destination AWS Region, Amazon Redshift deletes any existing automated snapshots that were copied to the destination AWS Region and that fall outside of the new retention period. Constraints: Must be at least 1 and no more than 35 for automated snapshots.  If you specify the manual option, only newly copied manual snapshots will have the new retention period.  If you specify the value of -1 newly copied manual snapshots are retained indefinitely. Constraints: The number of days must be either -1 or an integer between 1 and 3,653 for manual snapshots.
      */
     RetentionPeriod: Integer;
+    /**
+     * Indicates whether to apply the snapshot retention period to newly copied manual snapshots instead of automated snapshots.
+     */
+    Manual?: Boolean;
   }
   export interface ModifySnapshotCopyRetentionPeriodResult {
     Cluster?: Cluster;
   }
+  export interface ModifySnapshotScheduleMessage {
+    /**
+     * A unique alphanumeric identifier of the schedule to modify.
+     */
+    ScheduleIdentifier: String;
+    /**
+     * An updated list of schedule definitions. A schedule definition is made up of schedule expressions, for example, "cron(30 12 *)" or "rate(12 hours)".
+     */
+    ScheduleDefinitions: ScheduleDefinitionList;
+  }
+  export interface ModifyUsageLimitMessage {
+    /**
+     * The identifier of the usage limit to modify.
+     */
+    UsageLimitId: String;
+    /**
+     * The new limit amount. For more information about this parameter, see UsageLimit. 
+     */
+    Amount?: LongOptional;
+    /**
+     * The new action that Amazon Redshift takes when the limit is reached. For more information about this parameter, see UsageLimit. 
+     */
+    BreachAction?: UsageLimitBreachAction;
+  }
+  export interface NodeConfigurationOption {
+    /**
+     * The node type, such as, "ds2.8xlarge".
+     */
+    NodeType?: String;
+    /**
+     * The number of nodes.
+     */
+    NumberOfNodes?: Integer;
+    /**
+     * The estimated disk utilizaton percentage.
+     */
+    EstimatedDiskUtilizationPercent?: DoubleOptional;
+    /**
+     * The category of the node configuration recommendation.
+     */
+    Mode?: Mode;
+  }
+  export type NodeConfigurationOptionList = NodeConfigurationOption[];
+  export interface NodeConfigurationOptionsFilter {
+    /**
+     * The name of the element to filter.
+     */
+    Name?: NodeConfigurationOptionsFilterName;
+    /**
+     * The filter operator. If filter Name is NodeType only the 'in' operator is supported. Provide one value to evaluate for 'eq', 'lt', 'le', 'gt', and 'ge'. Provide two values to evaluate for 'between'. Provide a list of values for 'in'.
+     */
+    Operator?: OperatorType;
+    /**
+     * List of values. Compare Name using Operator to Values. If filter Name is NumberOfNodes, then values can range from 0 to 200. If filter Name is EstimatedDiskUtilizationPercent, then values can range from 0 to 100. For example, filter NumberOfNodes (name) GT (operator) 3 (values).
+     */
+    Values?: ValueStringList;
+  }
+  export type NodeConfigurationOptionsFilterList = NodeConfigurationOptionsFilter[];
+  export type NodeConfigurationOptionsFilterName = "NodeType"|"NumberOfNodes"|"EstimatedDiskUtilizationPercent"|"Mode"|string;
+  export interface NodeConfigurationOptionsMessage {
+    /**
+     * A list of valid node configurations.
+     */
+    NodeConfigurationOptionList?: NodeConfigurationOptionList;
+    /**
+     * A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the Marker parameter and retrying the command. If the Marker field is empty, all response records have been retrieved for the request. 
+     */
+    Marker?: String;
+  }
+  export type OperatorType = "eq"|"lt"|"gt"|"le"|"ge"|"in"|"between"|string;
   export interface OrderableClusterOption {
     /**
      * The version of the orderable cluster.
@@ -2607,6 +3439,15 @@ declare namespace Redshift {
   export type ParameterApplyType = "static"|"dynamic"|string;
   export type ParameterGroupList = ClusterParameterGroup[];
   export type ParametersList = Parameter[];
+  export interface PauseClusterMessage {
+    /**
+     * The identifier of the cluster to be paused.
+     */
+    ClusterIdentifier: String;
+  }
+  export interface PauseClusterResult {
+    Cluster?: Cluster;
+  }
   export type PendingActionsList = String[];
   export interface PendingModifiedValues {
     /**
@@ -2649,6 +3490,10 @@ declare namespace Redshift {
      * The name of the maintenance track that the cluster will change to during the next maintenance window.
      */
     MaintenanceTrackName?: String;
+    /**
+     * The encryption type for a cluster. Possible values are: KMS and None. For the China region the possible values are None, and Legacy. 
+     */
+    EncryptionType?: String;
   }
   export interface PurchaseReservedNodeOfferingMessage {
     /**
@@ -2732,6 +3577,9 @@ declare namespace Redshift {
      * The recurring charges for the reserved node.
      */
     RecurringCharges?: RecurringChargeList;
+    /**
+     * 
+     */
     ReservedNodeOfferingType?: ReservedNodeOfferingType;
   }
   export type ReservedNodeList = ReservedNode[];
@@ -2768,6 +3616,9 @@ declare namespace Redshift {
      * The charge to your account regardless of whether you are creating any clusters using the node offering. Recurring charges are only in effect for heavy-utilization reserved nodes.
      */
     RecurringCharges?: RecurringChargeList;
+    /**
+     * 
+     */
     ReservedNodeOfferingType?: ReservedNodeOfferingType;
   }
   export type ReservedNodeOfferingList = ReservedNodeOffering[];
@@ -2806,6 +3657,41 @@ declare namespace Redshift {
      */
     Parameters?: ParametersList;
   }
+  export interface ResizeClusterMessage {
+    /**
+     * The unique identifier for the cluster to resize.
+     */
+    ClusterIdentifier: String;
+    /**
+     * The new cluster type for the specified cluster.
+     */
+    ClusterType?: String;
+    /**
+     * The new node type for the nodes you are adding. If not specified, the cluster's current node type is used.
+     */
+    NodeType?: String;
+    /**
+     * The new number of nodes for the cluster.
+     */
+    NumberOfNodes?: Integer;
+    /**
+     * A boolean value indicating whether the resize operation is using the classic resize process. If you don't provide this parameter or set the value to false, the resize type is elastic. 
+     */
+    Classic?: BooleanOptional;
+  }
+  export interface ResizeClusterResult {
+    Cluster?: Cluster;
+  }
+  export interface ResizeInfo {
+    /**
+     * Returns the value ClassicResize.
+     */
+    ResizeType?: String;
+    /**
+     * A boolean value indicating if the resize operation can be cancelled.
+     */
+    AllowCancelResize?: Boolean;
+  }
   export interface ResizeProgressMessage {
     /**
      * The node type that the cluster will have after the resize operation is complete.
@@ -2820,7 +3706,7 @@ declare namespace Redshift {
      */
     TargetClusterType?: String;
     /**
-     * The status of the resize operation. Valid Values: NONE | IN_PROGRESS | FAILED | SUCCEEDED 
+     * The status of the resize operation. Valid Values: NONE | IN_PROGRESS | FAILED | SUCCEEDED | CANCELLING 
      */
     Status?: String;
     /**
@@ -2855,6 +3741,22 @@ declare namespace Redshift {
      * The estimated time remaining, in seconds, until the resize operation is complete. This value is calculated based on the average resize rate and the estimated amount of data remaining to be processed. Once the resize operation is complete, this value will be 0.
      */
     EstimatedTimeToCompletionInSeconds?: LongOptional;
+    /**
+     * An enum with possible values of ClassicResize and ElasticResize. These values describe the type of resize operation being performed. 
+     */
+    ResizeType?: String;
+    /**
+     * An optional string to provide additional details about the resize action.
+     */
+    Message?: String;
+    /**
+     * The type of encryption for the cluster after the resize is complete. Possible values are KMS and None. In the China region possible values are: Legacy and None.
+     */
+    TargetEncryptionType?: String;
+    /**
+     * The percent of data transferred from source cluster to target cluster.
+     */
+    DataTransferProgressPercent?: DoubleOptional;
   }
   export type RestorableNodeTypeList = String[];
   export interface RestoreFromClusterSnapshotMessage {
@@ -2875,7 +3777,7 @@ declare namespace Redshift {
      */
     Port?: IntegerOptional;
     /**
-     * The Amazon EC2 Availability Zone in which to restore the cluster. Default: A random, system-chosen Availability Zone. Example: us-east-1a 
+     * The Amazon EC2 Availability Zone in which to restore the cluster. Default: A random, system-chosen Availability Zone. Example: us-east-2a 
      */
     AvailabilityZone?: String;
     /**
@@ -2927,11 +3829,15 @@ declare namespace Redshift {
      */
     AutomatedSnapshotRetentionPeriod?: IntegerOptional;
     /**
+     * The default number of days to retain a manual snapshot. If the value is -1, the snapshot is retained indefinitely. This setting doesn't change the retention period of existing snapshots. The value must be either -1 or an integer between 1 and 3,653.
+     */
+    ManualSnapshotRetentionPeriod?: IntegerOptional;
+    /**
      * The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster that you restore from a shared snapshot.
      */
     KmsKeyId?: String;
     /**
-     * The node type that the restored cluster will be provisioned with. Default: The node type of the cluster from which the snapshot was taken. You can modify this if you are using any DS node type. In that case, you can choose to restore into another DS node type of the same size. For example, you can restore ds1.8xlarge into ds2.8xlarge, or ds1.xlarge into ds2.xlarge. If you have a DC instance type, you must restore into that same instance type and size. In other words, you can only restore a dc1.large instance type into another dc1.large instance type or dc2.large instance type. You can't restore dc1.8xlarge to dc2.8xlarge. First restore to a dc1.8xlareg cluster, then resize to a dc2.8large cluster. For more information about node types, see  About Clusters and Nodes in the Amazon Redshift Cluster Management Guide. 
+     * The node type that the restored cluster will be provisioned with. Default: The node type of the cluster from which the snapshot was taken. You can modify this if you are using any DS node type. In that case, you can choose to restore into another DS node type of the same size. For example, you can restore ds1.8xlarge into ds2.8xlarge, or ds1.xlarge into ds2.xlarge. If you have a DC instance type, you must restore into that same instance type and size. In other words, you can only restore a dc1.large instance type into another dc1.large instance type or dc2.large instance type. You can't restore dc1.8xlarge to dc2.8xlarge. First restore to a dc1.8xlarge cluster, then resize to a dc2.8large cluster. For more information about node types, see  About Clusters and Nodes in the Amazon Redshift Cluster Management Guide. 
      */
     NodeType?: String;
     /**
@@ -2950,6 +3856,14 @@ declare namespace Redshift {
      * The name of the maintenance track for the restored cluster. When you take a snapshot, the snapshot inherits the MaintenanceTrack value from the cluster. The snapshot might be on a different track than the cluster that was the source for the snapshot. For example, suppose that you take a snapshot of a cluster that is on the current track and then change the cluster to be on the trailing track. In this case, the snapshot and the source cluster are on different tracks.
      */
     MaintenanceTrackName?: String;
+    /**
+     * A unique identifier for the snapshot schedule.
+     */
+    SnapshotScheduleIdentifier?: String;
+    /**
+     * The number of nodes specified when provisioning the restored cluster.
+     */
+    NumberOfNodes?: IntegerOptional;
   }
   export interface RestoreFromClusterSnapshotResult {
     Cluster?: Cluster;
@@ -2960,23 +3874,23 @@ declare namespace Redshift {
      */
     Status?: String;
     /**
-     * The number of megabytes per second being transferred from the backup storage. Returns the average rate for a completed backup.
+     * The number of megabytes per second being transferred from the backup storage. Returns the average rate for a completed backup. This field is only updated when you restore to DC2 and DS2 node types. 
      */
     CurrentRestoreRateInMegaBytesPerSecond?: Double;
     /**
-     * The size of the set of snapshot data used to restore the cluster.
+     * The size of the set of snapshot data used to restore the cluster. This field is only updated when you restore to DC2 and DS2 node types. 
      */
     SnapshotSizeInMegaBytes?: Long;
     /**
-     * The number of megabytes that have been transferred from snapshot storage.
+     * The number of megabytes that have been transferred from snapshot storage. This field is only updated when you restore to DC2 and DS2 node types. 
      */
     ProgressInMegaBytes?: Long;
     /**
-     * The amount of time an in-progress restore has been running, or the amount of time it took a completed restore to finish.
+     * The amount of time an in-progress restore has been running, or the amount of time it took a completed restore to finish. This field is only updated when you restore to DC2 and DS2 node types. 
      */
     ElapsedTimeInSeconds?: Long;
     /**
-     * The estimate of the time remaining before the restore will complete. Returns 0 for a completed restore.
+     * The estimate of the time remaining before the restore will complete. Returns 0 for a completed restore. This field is only updated when you restore to DC2 and DS2 node types. 
      */
     EstimatedTimeToCompletionInSeconds?: Long;
   }
@@ -3016,6 +3930,15 @@ declare namespace Redshift {
   }
   export interface RestoreTableFromClusterSnapshotResult {
     TableRestoreStatus?: TableRestoreStatus;
+  }
+  export interface ResumeClusterMessage {
+    /**
+     * The identifier of the cluster to be resumed.
+     */
+    ClusterIdentifier: String;
+  }
+  export interface ResumeClusterResult {
+    Cluster?: Cluster;
   }
   export interface RevisionTarget {
     /**
@@ -3079,6 +4002,87 @@ declare namespace Redshift {
   export interface RotateEncryptionKeyResult {
     Cluster?: Cluster;
   }
+  export type ScheduleDefinitionList = String[];
+  export type ScheduleState = "MODIFYING"|"ACTIVE"|"FAILED"|string;
+  export interface ScheduledAction {
+    /**
+     * The name of the scheduled action. 
+     */
+    ScheduledActionName?: String;
+    /**
+     * A JSON format string of the Amazon Redshift API operation with input parameters.  "{\"ResizeCluster\":{\"NodeType\":\"ds2.8xlarge\",\"ClusterIdentifier\":\"my-test-cluster\",\"NumberOfNodes\":3}}". 
+     */
+    TargetAction?: ScheduledActionType;
+    /**
+     * The schedule for a one-time (at format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Format of at expressions is "at(yyyy-mm-ddThh:mm:ss)". For example, "at(2016-03-04T17:27:00)". Format of cron expressions is "cron(Minutes Hours Day-of-month Month Day-of-week Year)". For example, "cron(0 10 ? * MON *)". For more information, see Cron Expressions in the Amazon CloudWatch Events User Guide.
+     */
+    Schedule?: String;
+    /**
+     * The IAM role to assume to run the scheduled action. This IAM role must have permission to run the Amazon Redshift API operation in the scheduled action. This IAM role must allow the Amazon Redshift scheduler (Principal scheduler.redshift.amazonaws.com) to assume permissions on your behalf. For more information about the IAM role to use with the Amazon Redshift scheduler, see Using Identity-Based Policies for Amazon Redshift in the Amazon Redshift Cluster Management Guide. 
+     */
+    IamRole?: String;
+    /**
+     * The description of the scheduled action. 
+     */
+    ScheduledActionDescription?: String;
+    /**
+     * The state of the scheduled action. For example, DISABLED. 
+     */
+    State?: ScheduledActionState;
+    /**
+     * List of times when the scheduled action will run. 
+     */
+    NextInvocations?: ScheduledActionTimeList;
+    /**
+     * The start time in UTC when the schedule is active. Before this time, the scheduled action does not trigger. 
+     */
+    StartTime?: TStamp;
+    /**
+     * The end time in UTC when the schedule is no longer active. After this time, the scheduled action does not trigger. 
+     */
+    EndTime?: TStamp;
+  }
+  export interface ScheduledActionFilter {
+    /**
+     * The type of element to filter. 
+     */
+    Name: ScheduledActionFilterName;
+    /**
+     * List of values. Compare if the value (of type defined by Name) equals an item in the list of scheduled actions. 
+     */
+    Values: ValueStringList;
+  }
+  export type ScheduledActionFilterList = ScheduledActionFilter[];
+  export type ScheduledActionFilterName = "cluster-identifier"|"iam-role"|string;
+  export type ScheduledActionList = ScheduledAction[];
+  export type ScheduledActionState = "ACTIVE"|"DISABLED"|string;
+  export type ScheduledActionTimeList = TStamp[];
+  export interface ScheduledActionType {
+    /**
+     * An action that runs a ResizeCluster API operation. 
+     */
+    ResizeCluster?: ResizeClusterMessage;
+    /**
+     * An action that runs a PauseCluster API operation. 
+     */
+    PauseCluster?: PauseClusterMessage;
+    /**
+     * An action that runs a ResumeCluster API operation. 
+     */
+    ResumeCluster?: ResumeClusterMessage;
+  }
+  export type ScheduledActionTypeValues = "ResizeCluster"|"PauseCluster"|"ResumeCluster"|string;
+  export interface ScheduledActionsMessage {
+    /**
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeScheduledActions request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     */
+    Marker?: String;
+    /**
+     * List of retrieved scheduled actions. 
+     */
+    ScheduledActions?: ScheduledActionList;
+  }
+  export type ScheduledSnapshotTimeList = TStamp[];
   export type SensitiveString = string;
   export interface Snapshot {
     /**
@@ -3090,11 +4094,11 @@ declare namespace Redshift {
      */
     ClusterIdentifier?: String;
     /**
-     * The time (UTC) when Amazon Redshift began the snapshot. A snapshot contains a copy of the cluster data as of this exact time.
+     * The time (in UTC format) when Amazon Redshift began the snapshot. A snapshot contains a copy of the cluster data as of this exact time.
      */
     SnapshotCreateTime?: TStamp;
     /**
-     * The snapshot status. The value of the status depends on the API operation used.     CreateClusterSnapshot and CopyClusterSnapshot returns status as "creating".     DescribeClusterSnapshots returns status as "creating", "available", "final snapshot", or "failed".    DeleteClusterSnapshot returns status as "deleted".  
+     * The snapshot status. The value of the status depends on the API operation used:     CreateClusterSnapshot and CopyClusterSnapshot returns status as "creating".     DescribeClusterSnapshots returns status as "creating", "available", "final snapshot", or "failed".    DeleteClusterSnapshot returns status as "deleted".  
      */
     Status?: String;
     /**
@@ -3118,7 +4122,7 @@ declare namespace Redshift {
      */
     ClusterVersion?: String;
     /**
-     * The snapshot type. Snapshots created using CreateClusterSnapshot and CopyClusterSnapshot will be of type "manual". 
+     * The snapshot type. Snapshots created using CreateClusterSnapshot and CopyClusterSnapshot are of type "manual". 
      */
     SnapshotType?: String;
     /**
@@ -3201,7 +4205,20 @@ declare namespace Redshift {
      * The name of the maintenance track for the snapshot.
      */
     MaintenanceTrackName?: String;
+    /**
+     * The number of days that a manual snapshot is retained. If the value is -1, the manual snapshot is retained indefinitely.  The value must be either -1 or an integer between 1 and 3,653.
+     */
+    ManualSnapshotRetentionPeriod?: IntegerOptional;
+    /**
+     * The number of days until a manual snapshot will pass its retention period.
+     */
+    ManualSnapshotRemainingDays?: IntegerOptional;
+    /**
+     * A timestamp representing the start of the retention period for the snapshot.
+     */
+    SnapshotRetentionStartTime?: TStamp;
   }
+  export type SnapshotAttributeToSortBy = "SOURCE_TYPE"|"TOTAL_SIZE"|"CREATE_TIME"|string;
   export interface SnapshotCopyGrant {
     /**
      * The name of the snapshot copy grant.
@@ -3227,6 +4244,25 @@ declare namespace Redshift {
      */
     SnapshotCopyGrants?: SnapshotCopyGrantList;
   }
+  export interface SnapshotErrorMessage {
+    /**
+     * A unique identifier for the snapshot returning the error.
+     */
+    SnapshotIdentifier?: String;
+    /**
+     * A unique identifier for the cluster.
+     */
+    SnapshotClusterIdentifier?: String;
+    /**
+     * The failure code for the error.
+     */
+    FailureCode?: String;
+    /**
+     * The text message describing the error.
+     */
+    FailureReason?: String;
+  }
+  export type SnapshotIdentifierList = String[];
   export type SnapshotList = Snapshot[];
   export interface SnapshotMessage {
     /**
@@ -3238,14 +4274,60 @@ declare namespace Redshift {
      */
     Snapshots?: SnapshotList;
   }
+  export interface SnapshotSchedule {
+    /**
+     * A list of ScheduleDefinitions.
+     */
+    ScheduleDefinitions?: ScheduleDefinitionList;
+    /**
+     * A unique identifier for the schedule.
+     */
+    ScheduleIdentifier?: String;
+    /**
+     * The description of the schedule.
+     */
+    ScheduleDescription?: String;
+    /**
+     * An optional set of tags describing the schedule.
+     */
+    Tags?: TagList;
+    /**
+     * 
+     */
+    NextInvocations?: ScheduledSnapshotTimeList;
+    /**
+     * The number of clusters associated with the schedule.
+     */
+    AssociatedClusterCount?: IntegerOptional;
+    /**
+     * A list of clusters associated with the schedule. A maximum of 100 clusters is returned.
+     */
+    AssociatedClusters?: AssociatedClusterList;
+  }
+  export type SnapshotScheduleList = SnapshotSchedule[];
+  export interface SnapshotSortingEntity {
+    /**
+     * The category for sorting the snapshots.
+     */
+    Attribute: SnapshotAttributeToSortBy;
+    /**
+     * The order for listing the attributes.
+     */
+    SortOrder?: SortByOrder;
+  }
+  export type SnapshotSortingEntityList = SnapshotSortingEntity[];
+  export type SortByOrder = "ASC"|"DESC"|string;
   export type SourceIdsList = String[];
-  export type SourceType = "cluster"|"cluster-parameter-group"|"cluster-security-group"|"cluster-snapshot"|string;
+  export type SourceType = "cluster"|"cluster-parameter-group"|"cluster-security-group"|"cluster-snapshot"|"scheduled-action"|string;
   export type String = string;
   export interface Subnet {
     /**
      * The identifier of the subnet.
      */
     SubnetIdentifier?: String;
+    /**
+     * 
+     */
     SubnetAvailabilityZone?: AvailabilityZone;
     /**
      * The status of the subnet.
@@ -3254,7 +4336,17 @@ declare namespace Redshift {
   }
   export type SubnetIdentifierList = String[];
   export type SubnetList = Subnet[];
+  export interface SupportedOperation {
+    /**
+     * A list of the supported operations.
+     */
+    OperationName?: String;
+  }
+  export type SupportedOperationList = SupportedOperation[];
   export interface SupportedPlatform {
+    /**
+     * 
+     */
     Name?: String;
   }
   export type SupportedPlatformsList = SupportedPlatform[];
@@ -3348,7 +4440,7 @@ declare namespace Redshift {
      */
     Tag?: Tag;
     /**
-     * The Amazon Resource Name (ARN) with which the tag is associated. For example, arn:aws:redshift:us-east-1:123456789:cluster:t1.
+     * The Amazon Resource Name (ARN) with which the tag is associated, for example: arn:aws:redshift:us-east-2:123456789:cluster:t1.
      */
     ResourceName?: String;
     /**
@@ -3387,7 +4479,61 @@ declare namespace Redshift {
      * The cluster version for the new maintenance track.
      */
     DatabaseVersion?: String;
+    /**
+     * A list of operations supported by the maintenance track.
+     */
+    SupportedOperations?: SupportedOperationList;
   }
+  export interface UsageLimit {
+    /**
+     * The identifier of the usage limit.
+     */
+    UsageLimitId?: String;
+    /**
+     * The identifier of the cluster with a usage limit.
+     */
+    ClusterIdentifier?: String;
+    /**
+     * The Amazon Redshift feature to which the limit applies.
+     */
+    FeatureType?: UsageLimitFeatureType;
+    /**
+     * The type of limit. Depending on the feature type, this can be based on a time duration or data size.
+     */
+    LimitType?: UsageLimitLimitType;
+    /**
+     * The limit amount. If time-based, this amount is in minutes. If data-based, this amount is in terabytes (TB).
+     */
+    Amount?: Long;
+    /**
+     * The time period that the amount applies to. A weekly period begins on Sunday. The default is monthly. 
+     */
+    Period?: UsageLimitPeriod;
+    /**
+     * The action that Amazon Redshift takes when the limit is reached. Possible values are:     log - To log an event in a system table. The default is log.    emit-metric - To emit CloudWatch metrics.    disable - To disable the feature until the next usage period begins.  
+     */
+    BreachAction?: UsageLimitBreachAction;
+    /**
+     * A list of tag instances.
+     */
+    Tags?: TagList;
+  }
+  export type UsageLimitBreachAction = "log"|"emit-metric"|"disable"|string;
+  export type UsageLimitFeatureType = "spectrum"|"concurrency-scaling"|string;
+  export type UsageLimitLimitType = "time"|"data-scanned"|string;
+  export interface UsageLimitList {
+    /**
+     * Contains the output from the DescribeUsageLimits action. 
+     */
+    UsageLimits?: UsageLimits;
+    /**
+     * A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the Marker parameter and retrying the command. If the Marker field is empty, all response records have been retrieved for the request. 
+     */
+    Marker?: String;
+  }
+  export type UsageLimitPeriod = "daily"|"weekly"|"monthly"|string;
+  export type UsageLimits = UsageLimit[];
+  export type ValueStringList = String[];
   export type VpcSecurityGroupIdList = String[];
   export interface VpcSecurityGroupMembership {
     /**

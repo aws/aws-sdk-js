@@ -13,7 +13,7 @@ namespace :reactnative do
     mkdir_p "test/browser/build"
     cp "dist/aws-sdk-react-native.js", "test/browser/build/aws-sdk-all.js"
     files = "test/helpers.js ";
-    files += Dir.glob("test/**/*.spec.js").sort().join(" ")
+    files += Dir.glob("test/**/*.spec.js").sort().delete_if{|name| name.start_with?("test/publisher")}.join(" ")
     sh({"SERVICES" => "all"}, $BROWSERIFY +
        " -i domain #{files} > #{$BROWSERIFY_TEST}")
     rm_f "test/configuration.js"

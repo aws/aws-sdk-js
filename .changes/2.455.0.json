@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "Chime",
+        "description": "Amazon Chime private bots GA release."
+    },
+    {
+        "type": "feature",
+        "category": "Comprehend",
+        "description": "With this release AWS Comprehend now supports Virtual Private Cloud for Asynchronous Batch Processing jobs"
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Pagination support for ec2.DescribeSubnets, ec2.DescribeDhcpOptions "
+    },
+    {
+        "type": "feature",
+        "category": "StorageGateway",
+        "description": "Add Tags parameter to CreateSnapshot and UpdateSnapshotSchedule APIs, used for creating tags on create for one off snapshots and scheduled snapshots."
+    }
+]

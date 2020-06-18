@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Amazon VPC Flow Logs adds support for tags and tagging on resource creation."
+    }
+]
