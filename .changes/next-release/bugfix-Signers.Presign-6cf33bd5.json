@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Request Signing",
-  "description": "Better handle colons in accessKeyIds when presigning URLs."
-}

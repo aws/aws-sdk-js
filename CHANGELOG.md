@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.700.0-->
+<!--LATEST=2.701.0-->
 <!--ENTRYINSERT-->
+
+## 2.701.0
+* bugfix: Request Signing: Better handle colons in accessKeyIds when presigning URLs.
+* feature: EC2: Adds support to tag elastic-gpu on the RunInstances api
+* feature: MediaLive: AWS Elemental MediaLive now supports Input Prepare schedule actions. This feature improves existing input switching by allowing users to prepare an input prior to switching to it.
+* feature: OpsWorksCM: Documentation updates for AWS OpsWorks CM.
 
 ## 2.700.0
 * feature: RDS: Adding support for global write forwarding on secondary clusters in an Aurora global database.

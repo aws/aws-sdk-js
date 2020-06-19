@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.700.0',
+	  VERSION: '2.701.0',
 
 	  /**
 	   * @api private
@@ -11819,8 +11819,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var auth = request.httpRequest.headers['Authorization'].split(' ');
 	  if (auth[0] === 'AWS') {
 	    auth = auth[1].split(':');
-	    queryParams['AWSAccessKeyId'] = auth[0];
-	    queryParams['Signature'] = auth[1];
+	    queryParams['Signature'] = auth.pop();
+	    queryParams['AWSAccessKeyId'] = auth.join(':');
 
 	    AWS.util.each(request.httpRequest.headers, function (key, value) {
 	      if (key === expiresHeader) key = 'Expires';
