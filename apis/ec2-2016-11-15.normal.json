@@ -748,7 +748,7 @@
       "output": {
         "shape": "CreateInstanceExportTaskResult"
       },
-      "documentation": "<p>Exports a running or stopped instance to an S3 bucket.</p> <p>For information about the supported operating systems, image formats, and known limitations for the types of instances you can export, see <a href=\"https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html\">Exporting an Instance as a VM Using VM Import/Export</a> in the <i>VM Import/Export User Guide</i>.</p>"
+      "documentation": "<p>Exports a running or stopped instance to an Amazon S3 bucket.</p> <p>For information about the supported operating systems, image formats, and known limitations for the types of instances you can export, see <a href=\"https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html\">Exporting an Instance as a VM Using VM Import/Export</a> in the <i>VM Import/Export User Guide</i>.</p>"
     },
     "CreateInternetGateway": {
       "name": "CreateInternetGateway",
@@ -2244,7 +2244,7 @@
       "output": {
         "shape": "DescribeExportImageTasksResult"
       },
-      "documentation": "<p>Describes the specified export image tasks or all your export image tasks.</p>"
+      "documentation": "<p>Describes the specified export image tasks or all of your export image tasks.</p>"
     },
     "DescribeExportTasks": {
       "name": "DescribeExportTasks",
@@ -2258,7 +2258,7 @@
       "output": {
         "shape": "DescribeExportTasksResult"
       },
-      "documentation": "<p>Describes the specified export instance tasks or all your export instance tasks.</p>"
+      "documentation": "<p>Describes the specified export instance tasks or all of your export instance tasks.</p>"
     },
     "DescribeFastSnapshotRestores": {
       "name": "DescribeFastSnapshotRestores",
@@ -9718,7 +9718,7 @@
       "members": {
         "Description": {
           "shape": "String",
-          "documentation": "<p>A description for the conversion task or the resource being exported. The maximum length is 255 bytes.</p>",
+          "documentation": "<p>A description for the conversion task or the resource being exported. The maximum length is 255 characters.</p>",
           "locationName": "description"
         },
         "ExportToS3Task": {
@@ -9735,6 +9735,11 @@
           "shape": "ExportEnvironment",
           "documentation": "<p>The target virtualization environment.</p>",
           "locationName": "targetEnvironment"
+        },
+        "TagSpecifications": {
+          "shape": "TagSpecificationList",
+          "documentation": "<p>The tags to apply to the instance export task during creation.</p>",
+          "locationName": "TagSpecification"
         }
       }
     },
@@ -19939,7 +19944,7 @@
         },
         "Description": {
           "shape": "String",
-          "documentation": "<p>A description of the image being exported. The maximum length is 255 bytes.</p>"
+          "documentation": "<p>A description of the image being exported. The maximum length is 255 characters.</p>"
         },
         "DiskImageFormat": {
           "shape": "DiskImageFormat",
@@ -19955,11 +19960,16 @@
         },
         "S3ExportLocation": {
           "shape": "ExportTaskS3LocationRequest",
-          "documentation": "<p>Information about the destination S3 bucket. The bucket must exist and grant WRITE and READ_ACP permissions to the AWS account vm-import-export@amazon.com.</p>"
+          "documentation": "<p>Information about the destination Amazon S3 bucket. The bucket must exist and grant WRITE and READ_ACP permissions to the AWS account vm-import-export@amazon.com.</p>"
         },
         "RoleName": {
           "shape": "String",
-          "documentation": "<p>The name of the role that grants VM Import/Export permission to export images to your S3 bucket. If this parameter is not specified, the default role is named 'vmimport'.</p>"
+          "documentation": "<p>The name of the role that grants VM Import/Export permission to export images to your Amazon S3 bucket. If this parameter is not specified, the default role is named 'vmimport'.</p>"
+        },
+        "TagSpecifications": {
+          "shape": "TagSpecificationList",
+          "documentation": "<p>The tags to apply to the image being exported.</p>",
+          "locationName": "TagSpecification"
         }
       }
     },
@@ -19988,7 +19998,7 @@
         },
         "RoleName": {
           "shape": "String",
-          "documentation": "<p>The name of the role that grants VM Import/Export permission to export images to your S3 bucket.</p>",
+          "documentation": "<p>The name of the role that grants VM Import/Export permission to export images to your Amazon S3 bucket.</p>",
           "locationName": "roleName"
         },
         "Progress": {
@@ -19998,7 +20008,7 @@
         },
         "S3ExportLocation": {
           "shape": "ExportTaskS3Location",
-          "documentation": "<p>Information about the destination S3 bucket.</p>",
+          "documentation": "<p>Information about the destination Amazon S3 bucket.</p>",
           "locationName": "s3ExportLocation"
         },
         "Status": {
@@ -20010,6 +20020,11 @@
           "shape": "String",
           "documentation": "<p>The status message for the export image task.</p>",
           "locationName": "statusMessage"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>Any tags assigned to the image being exported.</p>",
+          "locationName": "tagSet"
         }
       }
     },
@@ -20038,7 +20053,7 @@
         },
         "S3ExportLocation": {
           "shape": "ExportTaskS3Location",
-          "documentation": "<p>Information about the destination S3 bucket.</p>",
+          "documentation": "<p>Information about the destination Amazon S3 bucket.</p>",
           "locationName": "s3ExportLocation"
         },
         "Status": {
@@ -20050,6 +20065,11 @@
           "shape": "String",
           "documentation": "<p>The status message for the export image task.</p>",
           "locationName": "statusMessage"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>Any tags assigned to the image being exported.</p>",
+          "locationName": "tagSet"
         }
       },
       "documentation": "<p>Describes an export image task.</p>"
@@ -20134,7 +20154,7 @@
       "members": {
         "S3Bucket": {
           "shape": "String",
-          "documentation": "<p>The destination S3 bucket.</p>",
+          "documentation": "<p>The destination Amazon S3 bucket.</p>",
           "locationName": "s3Bucket"
         },
         "S3Prefix": {
@@ -20153,7 +20173,7 @@
       "members": {
         "S3Bucket": {
           "shape": "String",
-          "documentation": "<p>The destination S3 bucket.</p>"
+          "documentation": "<p>The destination Amazon S3 bucket.</p>"
         },
         "S3Prefix": {
           "shape": "String",
@@ -20186,7 +20206,7 @@
         },
         "S3Bucket": {
           "shape": "String",
-          "documentation": "<p>The S3 bucket for the destination image. The destination bucket must exist and grant WRITE and READ_ACP permissions to the AWS account <code>vm-import-export@amazon.com</code>.</p>",
+          "documentation": "<p>The Amazon S3 bucket for the destination image. The destination bucket must exist and grant WRITE and READ_ACP permissions to the AWS account <code>vm-import-export@amazon.com</code>.</p>",
           "locationName": "s3Bucket"
         },
         "S3Key": {
@@ -20212,12 +20232,12 @@
         },
         "S3Bucket": {
           "shape": "String",
-          "documentation": "<p>The S3 bucket for the destination image. The destination bucket must exist and grant WRITE and READ_ACP permissions to the AWS account <code>vm-import-export@amazon.com</code>.</p>",
+          "documentation": "<p>The Amazon S3 bucket for the destination image. The destination bucket must exist and grant WRITE and READ_ACP permissions to the AWS account <code>vm-import-export@amazon.com</code>.</p>",
           "locationName": "s3Bucket"
         },
         "S3Prefix": {
           "shape": "String",
-          "documentation": "<p>The image is written to a single object in the S3 bucket at the S3 key s3prefix + exportTaskId + '.' + diskImageFormat.</p>",
+          "documentation": "<p>The image is written to a single object in the Amazon S3 bucket at the S3 key s3prefix + exportTaskId + '.' + diskImageFormat.</p>",
           "locationName": "s3Prefix"
         }
       },
@@ -22592,7 +22612,7 @@
         },
         "Format": {
           "shape": "String",
-          "documentation": "<p>The format of the disk image being imported.</p> <p>Valid values: <code>VHD</code> | <code>VMDK</code> | <code>OVA</code> </p>"
+          "documentation": "<p>The format of the disk image being imported.</p> <p>Valid values: <code>OVA</code> | <code>VHD</code> | <code>VHDX</code> |<code>VMDK</code> </p>"
         },
         "SnapshotId": {
           "shape": "SnapshotId",
@@ -22774,6 +22794,11 @@
         "LicenseSpecifications": {
           "shape": "ImportImageLicenseSpecificationListRequest",
           "documentation": "<p>The ARNs of the license configurations.</p>"
+        },
+        "TagSpecifications": {
+          "shape": "TagSpecificationList",
+          "documentation": "<p>The tags to apply to the image being imported.</p>",
+          "locationName": "TagSpecification"
         }
       }
     },
@@ -22792,7 +22817,7 @@
         },
         "Encrypted": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether the AMI is encypted.</p>",
+          "documentation": "<p>Indicates whether the AMI is encrypted.</p>",
           "locationName": "encrypted"
         },
         "Hypervisor": {
@@ -22806,12 +22831,12 @@
           "locationName": "imageId"
         },
         "ImportTaskId": {
-          "shape": "String",
+          "shape": "ImportImageTaskId",
           "documentation": "<p>The task ID of the import image task.</p>",
           "locationName": "importTaskId"
         },
         "KmsKeyId": {
-          "shape": "String",
+          "shape": "KmsKeyId",
           "documentation": "<p>The identifier for the symmetric AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to create the encrypted AMI.</p>",
           "locationName": "kmsKeyId"
         },
@@ -22849,6 +22874,11 @@
           "shape": "ImportImageLicenseSpecificationListResponse",
           "documentation": "<p>The ARNs of the license configurations.</p>",
           "locationName": "licenseSpecifications"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>Any tags assigned to the image being imported.</p>",
+          "locationName": "tagSet"
         }
       }
     },
@@ -23209,6 +23239,11 @@
         "RoleName": {
           "shape": "String",
           "documentation": "<p>The name of the role to use when not using the default role, 'vmimport'.</p>"
+        },
+        "TagSpecifications": {
+          "shape": "TagSpecificationList",
+          "documentation": "<p>The tags to apply to the snapshot being imported.</p>",
+          "locationName": "TagSpecification"
         }
       }
     },
@@ -23229,6 +23264,11 @@
           "shape": "SnapshotTaskDetail",
           "documentation": "<p>Information about the import snapshot task.</p>",
           "locationName": "snapshotTaskDetail"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>Any tags assigned to the snapshot being imported.</p>",
+          "locationName": "tagSet"
         }
       }
     },
@@ -32934,14 +32974,19 @@
         "dhcp-options",
         "elastic-ip",
         "elastic-gpu",
+        "export-image-task",
+        "export-instance-task",
         "fleet",
         "fpga-image",
         "host-reservation",
         "image",
+        "import-image-task",
+        "import-snapshot-task",
         "instance",
         "internet-gateway",
         "key-pair",
         "launch-template",
+        "local-gateway-route-table-vpc-association",
         "natgateway",
         "network-acl",
         "network-interface",
@@ -34937,7 +34982,7 @@
         },
         "UserBucket": {
           "shape": "UserBucketDetails",
-          "documentation": "<p>The S3 bucket for the disk image.</p>",
+          "documentation": "<p>The Amazon S3 bucket for the disk image.</p>",
           "locationName": "userBucket"
         }
       },
@@ -34967,7 +35012,7 @@
         },
         "UserBucket": {
           "shape": "UserBucket",
-          "documentation": "<p>The S3 bucket for the disk image.</p>"
+          "documentation": "<p>The Amazon S3 bucket for the disk image.</p>"
         }
       },
       "documentation": "<p>The disk container object for the import snapshot request.</p>"
@@ -35115,7 +35160,7 @@
         },
         "UserBucket": {
           "shape": "UserBucketDetails",
-          "documentation": "<p>The S3 bucket for the disk image.</p>",
+          "documentation": "<p>The Amazon S3 bucket for the disk image.</p>",
           "locationName": "userBucket"
         }
       },
@@ -38445,21 +38490,21 @@
       "members": {
         "S3Bucket": {
           "shape": "String",
-          "documentation": "<p>The name of the S3 bucket where the disk image is located.</p>"
+          "documentation": "<p>The name of the Amazon S3 bucket where the disk image is located.</p>"
         },
         "S3Key": {
           "shape": "String",
           "documentation": "<p>The file name of the disk image.</p>"
         }
       },
-      "documentation": "<p>Describes the S3 bucket for the disk image.</p>"
+      "documentation": "<p>Describes the Amazon S3 bucket for the disk image.</p>"
     },
     "UserBucketDetails": {
       "type": "structure",
       "members": {
         "S3Bucket": {
           "shape": "String",
-          "documentation": "<p>The S3 bucket from which the disk image was created.</p>",
+          "documentation": "<p>The Amazon S3 bucket from which the disk image was created.</p>",
           "locationName": "s3Bucket"
         },
         "S3Key": {
@@ -38468,7 +38513,7 @@
           "locationName": "s3Key"
         }
       },
-      "documentation": "<p>Describes the S3 bucket for the disk image.</p>"
+      "documentation": "<p>Describes the Amazon S3 bucket for the disk image.</p>"
     },
     "UserData": {
       "type": "structure",
@@ -39158,7 +39203,6 @@
       "enum": [
         "standard",
         "io1",
-        "io2",
         "gp2",
         "sc1",
         "st1"

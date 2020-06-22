@@ -69,19 +69,19 @@ declare class Rekognition extends Service {
    */
   deleteFaces(callback?: (err: AWSError, data: Rekognition.Types.DeleteFacesResponse) => void): Request<Rekognition.Types.DeleteFacesResponse, AWSError>;
   /**
-   * Deletes an Amazon Rekognition Custom Labels project. To delete a project you must first delete all versions of the model associated with the project. To delete a version of a model, see DeleteProjectVersion. This operation requires permissions to perform the rekognition:DeleteProject action. 
+   * Deletes an Amazon Rekognition Custom Labels project. To delete a project you must first delete all models associated with the project. To delete a model, see DeleteProjectVersion. This operation requires permissions to perform the rekognition:DeleteProject action. 
    */
   deleteProject(params: Rekognition.Types.DeleteProjectRequest, callback?: (err: AWSError, data: Rekognition.Types.DeleteProjectResponse) => void): Request<Rekognition.Types.DeleteProjectResponse, AWSError>;
   /**
-   * Deletes an Amazon Rekognition Custom Labels project. To delete a project you must first delete all versions of the model associated with the project. To delete a version of a model, see DeleteProjectVersion. This operation requires permissions to perform the rekognition:DeleteProject action. 
+   * Deletes an Amazon Rekognition Custom Labels project. To delete a project you must first delete all models associated with the project. To delete a model, see DeleteProjectVersion. This operation requires permissions to perform the rekognition:DeleteProject action. 
    */
   deleteProject(callback?: (err: AWSError, data: Rekognition.Types.DeleteProjectResponse) => void): Request<Rekognition.Types.DeleteProjectResponse, AWSError>;
   /**
-   * Deletes a version of a model.  You must first stop the model before you can delete it. To check if a model is running, use the Status field returned from DescribeProjectVersions. To stop a running model call StopProjectVersion.  This operation requires permissions to perform the rekognition:DeleteProjectVersion action. 
+   * Deletes an Amazon Rekognition Custom Labels model.  You can't delete a model if it is running or if it is training. To check the status of a model, use the Status field returned from DescribeProjectVersions. To stop a running model call StopProjectVersion. If the model is training, wait until it finishes. This operation requires permissions to perform the rekognition:DeleteProjectVersion action. 
    */
   deleteProjectVersion(params: Rekognition.Types.DeleteProjectVersionRequest, callback?: (err: AWSError, data: Rekognition.Types.DeleteProjectVersionResponse) => void): Request<Rekognition.Types.DeleteProjectVersionResponse, AWSError>;
   /**
-   * Deletes a version of a model.  You must first stop the model before you can delete it. To check if a model is running, use the Status field returned from DescribeProjectVersions. To stop a running model call StopProjectVersion.  This operation requires permissions to perform the rekognition:DeleteProjectVersion action. 
+   * Deletes an Amazon Rekognition Custom Labels model.  You can't delete a model if it is running or if it is training. To check the status of a model, use the Status field returned from DescribeProjectVersions. To stop a running model call StopProjectVersion. If the model is training, wait until it finishes. This operation requires permissions to perform the rekognition:DeleteProjectVersion action. 
    */
   deleteProjectVersion(callback?: (err: AWSError, data: Rekognition.Types.DeleteProjectVersionResponse) => void): Request<Rekognition.Types.DeleteProjectVersionResponse, AWSError>;
   /**
@@ -221,6 +221,14 @@ declare class Rekognition extends Service {
    */
   getPersonTracking(callback?: (err: AWSError, data: Rekognition.Types.GetPersonTrackingResponse) => void): Request<Rekognition.Types.GetPersonTrackingResponse, AWSError>;
   /**
+   * Gets the segment detection results of a Amazon Rekognition Video analysis started by StartSegmentDetection. Segment detection with Amazon Rekognition Video is an asynchronous operation. You start segment detection by calling StartSegmentDetection which returns a job identifier (JobId). When the segment detection operation finishes, Amazon Rekognition publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to StartSegmentDetection. To get the results of the segment detection operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. if so, call GetSegmentDetection and pass the job identifier (JobId) from the initial call of StartSegmentDetection.  GetSegmentDetection returns detected segments in an array (Segments) of SegmentDetection objects. Segments is sorted by the segment types specified in the SegmentTypes input parameter of StartSegmentDetection. Each element of the array includes the detected segment, the precentage confidence in the acuracy of the detected segment, the type of the segment, and the frame in which the segment was detected. Use SelectedSegmentTypes to find out the type of segment detection requested in the call to StartSegmentDetection. Use the MaxResults parameter to limit the number of segment detections returned. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetSegmentDetection and populate the NextToken request parameter with the token value returned from the previous call to GetSegmentDetection. For more information, see Detecting Video Segments in Stored Video in the Amazon Rekognition Developer Guide.
+   */
+  getSegmentDetection(params: Rekognition.Types.GetSegmentDetectionRequest, callback?: (err: AWSError, data: Rekognition.Types.GetSegmentDetectionResponse) => void): Request<Rekognition.Types.GetSegmentDetectionResponse, AWSError>;
+  /**
+   * Gets the segment detection results of a Amazon Rekognition Video analysis started by StartSegmentDetection. Segment detection with Amazon Rekognition Video is an asynchronous operation. You start segment detection by calling StartSegmentDetection which returns a job identifier (JobId). When the segment detection operation finishes, Amazon Rekognition publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to StartSegmentDetection. To get the results of the segment detection operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. if so, call GetSegmentDetection and pass the job identifier (JobId) from the initial call of StartSegmentDetection.  GetSegmentDetection returns detected segments in an array (Segments) of SegmentDetection objects. Segments is sorted by the segment types specified in the SegmentTypes input parameter of StartSegmentDetection. Each element of the array includes the detected segment, the precentage confidence in the acuracy of the detected segment, the type of the segment, and the frame in which the segment was detected. Use SelectedSegmentTypes to find out the type of segment detection requested in the call to StartSegmentDetection. Use the MaxResults parameter to limit the number of segment detections returned. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetSegmentDetection and populate the NextToken request parameter with the token value returned from the previous call to GetSegmentDetection. For more information, see Detecting Video Segments in Stored Video in the Amazon Rekognition Developer Guide.
+   */
+  getSegmentDetection(callback?: (err: AWSError, data: Rekognition.Types.GetSegmentDetectionResponse) => void): Request<Rekognition.Types.GetSegmentDetectionResponse, AWSError>;
+  /**
    * Gets the text detection results of a Amazon Rekognition Video analysis started by StartTextDetection. Text detection with Amazon Rekognition Video is an asynchronous operation. You start text detection by calling StartTextDetection which returns a job identifier (JobId) When the text detection operation finishes, Amazon Rekognition publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to StartTextDetection. To get the results of the text detection operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. if so, call GetTextDetection and pass the job identifier (JobId) from the initial call of StartLabelDetection.  GetTextDetection returns an array of detected text (TextDetections) sorted by the time the text was detected, up to 50 words per frame of video. Each element of the array includes the detected text, the precentage confidence in the acuracy of the detected text, the time the text was detected, bounding box information for where the text was located, and unique identifiers for words and their lines. Use MaxResults parameter to limit the number of text detections returned. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetTextDetection and populate the NextToken request parameter with the token value returned from the previous call to GetTextDetection.
    */
   getTextDetection(params: Rekognition.Types.GetTextDetectionRequest, callback?: (err: AWSError, data: Rekognition.Types.GetTextDetectionResponse) => void): Request<Rekognition.Types.GetTextDetectionResponse, AWSError>;
@@ -229,11 +237,11 @@ declare class Rekognition extends Service {
    */
   getTextDetection(callback?: (err: AWSError, data: Rekognition.Types.GetTextDetectionResponse) => void): Request<Rekognition.Types.GetTextDetectionResponse, AWSError>;
   /**
-   * Detects faces in the input image and adds them to the specified collection.  Amazon Rekognition doesn't save the actual faces that are detected. Instead, the underlying detection algorithm first detects the faces in the input image. For each face, the algorithm extracts facial features into a feature vector, and stores it in the backend database. Amazon Rekognition uses feature vectors when it performs face match and search operations using the SearchFaces and SearchFacesByImage operations. For more information, see Adding Faces to a Collection in the Amazon Rekognition Developer Guide. To get the number of faces in a collection, call DescribeCollection.  If you're using version 1.0 of the face detection model, IndexFaces indexes the 15 largest faces in the input image. Later versions of the face detection model index the 100 largest faces in the input image.  If you're using version 4 or later of the face model, image orientation information is not returned in the OrientationCorrection field.  To determine which version of the model you're using, call DescribeCollection and supply the collection ID. You can also get the model version from the value of FaceModelVersion in the response from IndexFaces  For more information, see Model Versioning in the Amazon Rekognition Developer Guide. If you provide the optional ExternalImageID for the input image you provided, Amazon Rekognition associates this ID with all faces that it detects. When you call the ListFaces operation, the response returns the external ID. You can use this external image ID to create a client-side index to associate the faces with each image. You can then use the index to find all faces in an image. You can specify the maximum number of faces to index with the MaxFaces input parameter. This is useful when you want to index the largest faces in an image and don't want to index smaller faces, such as those belonging to people standing in the background. The QualityFilter input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. By default, IndexFaces chooses the quality bar that's used to filter faces. You can also explicitly choose the quality bar. Use QualityFilter, to set the quality bar by specifying LOW, MEDIUM, or HIGH. If you do not want to filter detected faces, specify NONE.   To use quality filtering, you need a collection associated with version 3 of the face model or higher. To get the version of the face model associated with a collection, call DescribeCollection.   Information about faces detected in an image, but not indexed, is returned in an array of UnindexedFace objects, UnindexedFaces. Faces aren't indexed for reasons such as:   The number of faces detected exceeds the value of the MaxFaces request parameter.   The face is too small compared to the image dimensions.   The face is too blurry.   The image is too dark.   The face has an extreme pose.   The face doesn’t have enough detail to be suitable for face search.   In response, the IndexFaces operation returns an array of metadata for all detected faces, FaceRecords. This includes:    The bounding box, BoundingBox, of the detected face.    A confidence value, Confidence, which indicates the confidence that the bounding box contains a face.   A face ID, FaceId, assigned by the service for each face that's detected and stored.   An image ID, ImageId, assigned by the service for the input image.   If you request all facial attributes (by using the detectionAttributes parameter), Amazon Rekognition returns detailed facial attributes, such as facial landmarks (for example, location of eye and mouth) and other facial attributes. If you provide the same image, specify the same collection, and use the same external ID in the IndexFaces operation, Amazon Rekognition doesn't save duplicate face metadata.  The input image is passed either as base64-encoded image bytes, or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes isn't supported. The image must be formatted as a PNG or JPEG file.  This operation requires permissions to perform the rekognition:IndexFaces action.
+   * Detects faces in the input image and adds them to the specified collection.  Amazon Rekognition doesn't save the actual faces that are detected. Instead, the underlying detection algorithm first detects the faces in the input image. For each face, the algorithm extracts facial features into a feature vector, and stores it in the backend database. Amazon Rekognition uses feature vectors when it performs face match and search operations using the SearchFaces and SearchFacesByImage operations. For more information, see Adding Faces to a Collection in the Amazon Rekognition Developer Guide. To get the number of faces in a collection, call DescribeCollection.  If you're using version 1.0 of the face detection model, IndexFaces indexes the 15 largest faces in the input image. Later versions of the face detection model index the 100 largest faces in the input image.  If you're using version 4 or later of the face model, image orientation information is not returned in the OrientationCorrection field.  To determine which version of the model you're using, call DescribeCollection and supply the collection ID. You can also get the model version from the value of FaceModelVersion in the response from IndexFaces  For more information, see Model Versioning in the Amazon Rekognition Developer Guide. If you provide the optional ExternalImageId for the input image you provided, Amazon Rekognition associates this ID with all faces that it detects. When you call the ListFaces operation, the response returns the external ID. You can use this external image ID to create a client-side index to associate the faces with each image. You can then use the index to find all faces in an image. You can specify the maximum number of faces to index with the MaxFaces input parameter. This is useful when you want to index the largest faces in an image and don't want to index smaller faces, such as those belonging to people standing in the background. The QualityFilter input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. By default, IndexFaces chooses the quality bar that's used to filter faces. You can also explicitly choose the quality bar. Use QualityFilter, to set the quality bar by specifying LOW, MEDIUM, or HIGH. If you do not want to filter detected faces, specify NONE.   To use quality filtering, you need a collection associated with version 3 of the face model or higher. To get the version of the face model associated with a collection, call DescribeCollection.   Information about faces detected in an image, but not indexed, is returned in an array of UnindexedFace objects, UnindexedFaces. Faces aren't indexed for reasons such as:   The number of faces detected exceeds the value of the MaxFaces request parameter.   The face is too small compared to the image dimensions.   The face is too blurry.   The image is too dark.   The face has an extreme pose.   The face doesn’t have enough detail to be suitable for face search.   In response, the IndexFaces operation returns an array of metadata for all detected faces, FaceRecords. This includes:    The bounding box, BoundingBox, of the detected face.    A confidence value, Confidence, which indicates the confidence that the bounding box contains a face.   A face ID, FaceId, assigned by the service for each face that's detected and stored.   An image ID, ImageId, assigned by the service for the input image.   If you request all facial attributes (by using the detectionAttributes parameter), Amazon Rekognition returns detailed facial attributes, such as facial landmarks (for example, location of eye and mouth) and other facial attributes. If you provide the same image, specify the same collection, and use the same external ID in the IndexFaces operation, Amazon Rekognition doesn't save duplicate face metadata.  The input image is passed either as base64-encoded image bytes, or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes isn't supported. The image must be formatted as a PNG or JPEG file.  This operation requires permissions to perform the rekognition:IndexFaces action.
    */
   indexFaces(params: Rekognition.Types.IndexFacesRequest, callback?: (err: AWSError, data: Rekognition.Types.IndexFacesResponse) => void): Request<Rekognition.Types.IndexFacesResponse, AWSError>;
   /**
-   * Detects faces in the input image and adds them to the specified collection.  Amazon Rekognition doesn't save the actual faces that are detected. Instead, the underlying detection algorithm first detects the faces in the input image. For each face, the algorithm extracts facial features into a feature vector, and stores it in the backend database. Amazon Rekognition uses feature vectors when it performs face match and search operations using the SearchFaces and SearchFacesByImage operations. For more information, see Adding Faces to a Collection in the Amazon Rekognition Developer Guide. To get the number of faces in a collection, call DescribeCollection.  If you're using version 1.0 of the face detection model, IndexFaces indexes the 15 largest faces in the input image. Later versions of the face detection model index the 100 largest faces in the input image.  If you're using version 4 or later of the face model, image orientation information is not returned in the OrientationCorrection field.  To determine which version of the model you're using, call DescribeCollection and supply the collection ID. You can also get the model version from the value of FaceModelVersion in the response from IndexFaces  For more information, see Model Versioning in the Amazon Rekognition Developer Guide. If you provide the optional ExternalImageID for the input image you provided, Amazon Rekognition associates this ID with all faces that it detects. When you call the ListFaces operation, the response returns the external ID. You can use this external image ID to create a client-side index to associate the faces with each image. You can then use the index to find all faces in an image. You can specify the maximum number of faces to index with the MaxFaces input parameter. This is useful when you want to index the largest faces in an image and don't want to index smaller faces, such as those belonging to people standing in the background. The QualityFilter input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. By default, IndexFaces chooses the quality bar that's used to filter faces. You can also explicitly choose the quality bar. Use QualityFilter, to set the quality bar by specifying LOW, MEDIUM, or HIGH. If you do not want to filter detected faces, specify NONE.   To use quality filtering, you need a collection associated with version 3 of the face model or higher. To get the version of the face model associated with a collection, call DescribeCollection.   Information about faces detected in an image, but not indexed, is returned in an array of UnindexedFace objects, UnindexedFaces. Faces aren't indexed for reasons such as:   The number of faces detected exceeds the value of the MaxFaces request parameter.   The face is too small compared to the image dimensions.   The face is too blurry.   The image is too dark.   The face has an extreme pose.   The face doesn’t have enough detail to be suitable for face search.   In response, the IndexFaces operation returns an array of metadata for all detected faces, FaceRecords. This includes:    The bounding box, BoundingBox, of the detected face.    A confidence value, Confidence, which indicates the confidence that the bounding box contains a face.   A face ID, FaceId, assigned by the service for each face that's detected and stored.   An image ID, ImageId, assigned by the service for the input image.   If you request all facial attributes (by using the detectionAttributes parameter), Amazon Rekognition returns detailed facial attributes, such as facial landmarks (for example, location of eye and mouth) and other facial attributes. If you provide the same image, specify the same collection, and use the same external ID in the IndexFaces operation, Amazon Rekognition doesn't save duplicate face metadata.  The input image is passed either as base64-encoded image bytes, or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes isn't supported. The image must be formatted as a PNG or JPEG file.  This operation requires permissions to perform the rekognition:IndexFaces action.
+   * Detects faces in the input image and adds them to the specified collection.  Amazon Rekognition doesn't save the actual faces that are detected. Instead, the underlying detection algorithm first detects the faces in the input image. For each face, the algorithm extracts facial features into a feature vector, and stores it in the backend database. Amazon Rekognition uses feature vectors when it performs face match and search operations using the SearchFaces and SearchFacesByImage operations. For more information, see Adding Faces to a Collection in the Amazon Rekognition Developer Guide. To get the number of faces in a collection, call DescribeCollection.  If you're using version 1.0 of the face detection model, IndexFaces indexes the 15 largest faces in the input image. Later versions of the face detection model index the 100 largest faces in the input image.  If you're using version 4 or later of the face model, image orientation information is not returned in the OrientationCorrection field.  To determine which version of the model you're using, call DescribeCollection and supply the collection ID. You can also get the model version from the value of FaceModelVersion in the response from IndexFaces  For more information, see Model Versioning in the Amazon Rekognition Developer Guide. If you provide the optional ExternalImageId for the input image you provided, Amazon Rekognition associates this ID with all faces that it detects. When you call the ListFaces operation, the response returns the external ID. You can use this external image ID to create a client-side index to associate the faces with each image. You can then use the index to find all faces in an image. You can specify the maximum number of faces to index with the MaxFaces input parameter. This is useful when you want to index the largest faces in an image and don't want to index smaller faces, such as those belonging to people standing in the background. The QualityFilter input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. By default, IndexFaces chooses the quality bar that's used to filter faces. You can also explicitly choose the quality bar. Use QualityFilter, to set the quality bar by specifying LOW, MEDIUM, or HIGH. If you do not want to filter detected faces, specify NONE.   To use quality filtering, you need a collection associated with version 3 of the face model or higher. To get the version of the face model associated with a collection, call DescribeCollection.   Information about faces detected in an image, but not indexed, is returned in an array of UnindexedFace objects, UnindexedFaces. Faces aren't indexed for reasons such as:   The number of faces detected exceeds the value of the MaxFaces request parameter.   The face is too small compared to the image dimensions.   The face is too blurry.   The image is too dark.   The face has an extreme pose.   The face doesn’t have enough detail to be suitable for face search.   In response, the IndexFaces operation returns an array of metadata for all detected faces, FaceRecords. This includes:    The bounding box, BoundingBox, of the detected face.    A confidence value, Confidence, which indicates the confidence that the bounding box contains a face.   A face ID, FaceId, assigned by the service for each face that's detected and stored.   An image ID, ImageId, assigned by the service for the input image.   If you request all facial attributes (by using the detectionAttributes parameter), Amazon Rekognition returns detailed facial attributes, such as facial landmarks (for example, location of eye and mouth) and other facial attributes. If you provide the same image, specify the same collection, and use the same external ID in the IndexFaces operation, Amazon Rekognition doesn't save duplicate face metadata.  The input image is passed either as base64-encoded image bytes, or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes isn't supported. The image must be formatted as a PNG or JPEG file.  This operation requires permissions to perform the rekognition:IndexFaces action.
    */
   indexFaces(callback?: (err: AWSError, data: Rekognition.Types.IndexFacesResponse) => void): Request<Rekognition.Types.IndexFacesResponse, AWSError>;
   /**
@@ -341,6 +349,14 @@ declare class Rekognition extends Service {
    */
   startProjectVersion(callback?: (err: AWSError, data: Rekognition.Types.StartProjectVersionResponse) => void): Request<Rekognition.Types.StartProjectVersionResponse, AWSError>;
   /**
+   * Starts asynchronous detection of segment detection in a stored video. Amazon Rekognition Video can detect segments in a video stored in an Amazon S3 bucket. Use Video to specify the bucket name and the filename of the video. StartSegmentDetection returns a job identifier (JobId) which you use to get the results of the operation. When segment detection is finished, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic that you specify in NotificationChannel. You can use the Filters (StartSegmentDetectionFilters) input parameter to specify the minimum detection confidence returned in the response. Within Filters, use ShotFilter (StartShotDetectionFilter) to filter detected shots. Use TechnicalCueFilter (StartTechnicalCueDetectionFilter) to filter technical cues.  To get the results of the segment detection operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. if so, call GetSegmentDetection and pass the job identifier (JobId) from the initial call to StartSegmentDetection.  For more information, see Detecting Video Segments in Stored Video in the Amazon Rekognition Developer Guide.
+   */
+  startSegmentDetection(params: Rekognition.Types.StartSegmentDetectionRequest, callback?: (err: AWSError, data: Rekognition.Types.StartSegmentDetectionResponse) => void): Request<Rekognition.Types.StartSegmentDetectionResponse, AWSError>;
+  /**
+   * Starts asynchronous detection of segment detection in a stored video. Amazon Rekognition Video can detect segments in a video stored in an Amazon S3 bucket. Use Video to specify the bucket name and the filename of the video. StartSegmentDetection returns a job identifier (JobId) which you use to get the results of the operation. When segment detection is finished, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic that you specify in NotificationChannel. You can use the Filters (StartSegmentDetectionFilters) input parameter to specify the minimum detection confidence returned in the response. Within Filters, use ShotFilter (StartShotDetectionFilter) to filter detected shots. Use TechnicalCueFilter (StartTechnicalCueDetectionFilter) to filter technical cues.  To get the results of the segment detection operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. if so, call GetSegmentDetection and pass the job identifier (JobId) from the initial call to StartSegmentDetection.  For more information, see Detecting Video Segments in Stored Video in the Amazon Rekognition Developer Guide.
+   */
+  startSegmentDetection(callback?: (err: AWSError, data: Rekognition.Types.StartSegmentDetectionResponse) => void): Request<Rekognition.Types.StartSegmentDetectionResponse, AWSError>;
+  /**
    * Starts processing a stream processor. You create a stream processor by calling CreateStreamProcessor. To tell StartStreamProcessor which stream processor to start, use the value of the Name field specified in the call to CreateStreamProcessor.
    */
   startStreamProcessor(params: Rekognition.Types.StartStreamProcessorRequest, callback?: (err: AWSError, data: Rekognition.Types.StartStreamProcessorResponse) => void): Request<Rekognition.Types.StartStreamProcessorResponse, AWSError>;
@@ -406,6 +422,25 @@ declare namespace Rekognition {
   export type Assets = Asset[];
   export type Attribute = "DEFAULT"|"ALL"|string;
   export type Attributes = Attribute[];
+  export interface AudioMetadata {
+    /**
+     * The audio codec used to encode or decode the audio stream. 
+     */
+    Codec?: String;
+    /**
+     * The duration of the audio stream in milliseconds.
+     */
+    DurationMillis?: ULong;
+    /**
+     * The sample rate for the audio stream.
+     */
+    SampleRate?: ULong;
+    /**
+     * The number of audio channels in the segement.
+     */
+    NumberOfChannels?: ULong;
+  }
+  export type AudioMetadataList = AudioMetadata[];
   export interface Beard {
     /**
      * Boolean value that indicates whether the face has beard or not.
@@ -795,7 +830,7 @@ declare namespace Rekognition {
      */
     ProjectArn: ProjectArn;
     /**
-     * A list of model version names that you want to describe. You can add up to 10 model version names to the list. If you don't specify a value, all model descriptions are returned.
+     * A list of model version names that you want to describe. You can add up to 10 model version names to the list. If you don't specify a value, all model descriptions are returned. A version name is part of a model (ProjectVersion) ARN. For example, my-model.2020-01-21T09.10.15 is the version name in the following ARN. arn:aws:rekognition:us-east-1:123456789012:project/getting-started/version/my-model.2020-01-21T09.10.15/1234567890123.
      */
     VersionNames?: VersionNames;
     /**
@@ -1484,9 +1519,53 @@ declare namespace Rekognition {
      */
     Persons?: PersonDetections;
   }
+  export interface GetSegmentDetectionRequest {
+    /**
+     * Job identifier for the text detection operation for which you want results returned. You get the job identifer from an initial call to StartSegmentDetection.
+     */
+    JobId: JobId;
+    /**
+     * Maximum number of results to return per paginated call. The largest value you can specify is 1000.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * If the response is truncated, Amazon Rekognition Video returns this token that you can use in the subsequent request to retrieve the next set of text.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface GetSegmentDetectionResponse {
+    /**
+     * Current status of the segment detection job.
+     */
+    JobStatus?: VideoJobStatus;
+    /**
+     * If the job fails, StatusMessage provides a descriptive error message.
+     */
+    StatusMessage?: StatusMessage;
+    /**
+     * Currently, Amazon Rekognition Video returns a single object in the VideoMetadata array. The object contains information about the video stream in the input file that Amazon Rekognition Video chose to analyze. The VideoMetadata object includes the video codec, video format and other information. Video metadata is returned in each page of information returned by GetSegmentDetection.
+     */
+    VideoMetadata?: VideoMetadataList;
+    /**
+     * An array of objects. There can be multiple audio streams. Each AudioMetadata object contains metadata for a single audio stream. Audio information in an AudioMetadata objects includes the audio codec, the number of audio channels, the duration of the audio stream, and the sample rate. Audio metadata is returned in each page of information returned by GetSegmentDetection.
+     */
+    AudioMetadata?: AudioMetadataList;
+    /**
+     * If the previous response was incomplete (because there are more labels to retrieve), Amazon Rekognition Video returns a pagination token in the response. You can use this pagination token to retrieve the next set of text.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * An array of segments detected in a video.
+     */
+    Segments?: SegmentDetections;
+    /**
+     * An array containing the segment types requested in the call to StartSegmentDetection. 
+     */
+    SelectedSegmentTypes?: SegmentTypesInfo;
+  }
   export interface GetTextDetectionRequest {
     /**
-     * Job identifier for the label detection operation for which you want results returned. You get the job identifer from an initial call to StartTextDetection.
+     * Job identifier for the text detection operation for which you want results returned. You get the job identifer from an initial call to StartTextDetection.
      */
     JobId: JobId;
     /**
@@ -1548,7 +1627,7 @@ declare namespace Rekognition {
      */
     HumanLoopName: HumanLoopName;
     /**
-     * The Amazon Resource Name (ARN) of the flow definition.
+     * The Amazon Resource Name (ARN) of the flow definition. You can create a flow definition by using the Amazon Sagemaker CreateFlowDefinition Operation. 
      */
     FlowDefinitionArn: FlowDefinitionArn;
     /**
@@ -2104,6 +2183,69 @@ declare namespace Rekognition {
      */
     FaceModelVersion?: String;
   }
+  export type SegmentConfidence = number;
+  export interface SegmentDetection {
+    /**
+     * The type of the segment. Valid values are TECHNICAL_CUE and SHOT.
+     */
+    Type?: SegmentType;
+    /**
+     * The start time of the detected segment in milliseconds from the start of the video.
+     */
+    StartTimestampMillis?: Timestamp;
+    /**
+     * The end time of the detected segment, in milliseconds, from the start of the video.
+     */
+    EndTimestampMillis?: Timestamp;
+    /**
+     * The duration of the detected segment in milliseconds. 
+     */
+    DurationMillis?: ULong;
+    /**
+     * The frame-accurate SMPTE timecode, from the start of a video, for the start of a detected segment. StartTimecode is in HH:MM:SS:fr format (and ;fr for drop frame-rates). 
+     */
+    StartTimecodeSMPTE?: Timecode;
+    /**
+     * The frame-accurate SMPTE timecode, from the start of a video, for the end of a detected segment. EndTimecode is in HH:MM:SS:fr format (and ;fr for drop frame-rates).
+     */
+    EndTimecodeSMPTE?: Timecode;
+    /**
+     * The duration of the timecode for the detected segment in SMPTE format.
+     */
+    DurationSMPTE?: Timecode;
+    /**
+     * If the segment is a technical cue, contains information about the technical cue.
+     */
+    TechnicalCueSegment?: TechnicalCueSegment;
+    /**
+     * If the segment is a shot detection, contains information about the shot detection.
+     */
+    ShotSegment?: ShotSegment;
+  }
+  export type SegmentDetections = SegmentDetection[];
+  export type SegmentType = "TECHNICAL_CUE"|"SHOT"|string;
+  export interface SegmentTypeInfo {
+    /**
+     * The type of a segment (technical cue or shot detection).
+     */
+    Type?: SegmentType;
+    /**
+     * The version of the model used to detect segments.
+     */
+    ModelVersion?: String;
+  }
+  export type SegmentTypes = SegmentType[];
+  export type SegmentTypesInfo = SegmentTypeInfo[];
+  export interface ShotSegment {
+    /**
+     * An Identifier for a shot detection segment detected in a video 
+     */
+    Index?: ULong;
+    /**
+     * The confidence that Amazon Rekognition Video has in the accuracy of the detected segment.
+     */
+    Confidence?: SegmentConfidence;
+  }
   export interface Smile {
     /**
      * Boolean value that indicates whether the face is smiling or not.
@@ -2294,6 +2436,51 @@ declare namespace Rekognition {
      */
     Status?: ProjectVersionStatus;
   }
+  export interface StartSegmentDetectionFilters {
+    /**
+     * Filters that are specific to technical cues.
+     */
+    TechnicalCueFilter?: StartTechnicalCueDetectionFilter;
+    /**
+     * Filters that are specific to shot detections.
+     */
+    ShotFilter?: StartShotDetectionFilter;
+  }
+  export interface StartSegmentDetectionRequest {
+    Video: Video;
+    /**
+     * Idempotent token used to identify the start request. If you use the same token with multiple StartSegmentDetection requests, the same JobId is returned. Use ClientRequestToken to prevent the same job from being accidently started more than once. 
+     */
+    ClientRequestToken?: ClientRequestToken;
+    /**
+     * The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the segment detection operation.
+     */
+    NotificationChannel?: NotificationChannel;
+    /**
+     * An identifier you specify that's returned in the completion notification that's published to your Amazon Simple Notification Service topic. For example, you can use JobTag to group related jobs and identify them in the completion notification.
+     */
+    JobTag?: JobTag;
+    /**
+     * Filters for technical cue or shot detection.
+     */
+    Filters?: StartSegmentDetectionFilters;
+    /**
+     * An array of segment types to detect in the video. Valid values are TECHNICAL_CUE and SHOT.
+     */
+    SegmentTypes: SegmentTypes;
+  }
+  export interface StartSegmentDetectionResponse {
+    /**
+     * Unique identifier for the segment detection job. The JobId is returned from StartSegmentDetection. 
+     */
+    JobId?: JobId;
+  }
+  export interface StartShotDetectionFilter {
+    /**
+     * Specifies the minimum confidence that Amazon Rekognition Video must have in order to return a detected segment. Confidence represents how certain Amazon Rekognition is that a segment is correctly identified. 0 is the lowest confidence. 100 is the highest confidence. Amazon Rekognition Video doesn't return any segments with a confidence level lower than this specified value. If you don't specify MinSegmentConfidence, the GetSegmentDetection returns segments with confidence values greater than or equal to 50 percent.
+     */
+    MinSegmentConfidence?: SegmentConfidence;
+  }
   export interface StartStreamProcessorRequest {
     /**
      * The name of the stream processor to start processing.
@@ -2301,6 +2488,12 @@ declare namespace Rekognition {
     Name: StreamProcessorName;
   }
   export interface StartStreamProcessorResponse {
+  }
+  export interface StartTechnicalCueDetectionFilter {
+    /**
+     * Specifies the minimum confidence that Amazon Rekognition Video must have in order to return a detected segment. Confidence represents how certain Amazon Rekognition is that a segment is correctly identified. 0 is the lowest confidence. 100 is the highest confidence. Amazon Rekognition Video doesn't return any segments with a confidence level lower than this specified value. If you don't specify MinSegmentConfidence, GetSegmentDetection returns segments with confidence values greater than or equal to 50 percent.
+     */
+    MinSegmentConfidence?: SegmentConfidence;
   }
   export interface StartTextDetectionFilters {
     /**
@@ -2401,6 +2594,17 @@ declare namespace Rekognition {
      */
     Confidence?: Percent;
   }
+  export interface TechnicalCueSegment {
+    /**
+     * The type of the technical cue.
+     */
+    Type?: TechnicalCueType;
+    /**
+     * The confidence that Amazon Rekognition Video has in the accuracy of the detected segment.
+     */
+    Confidence?: SegmentConfidence;
+  }
+  export type TechnicalCueType = "ColorBars"|"EndCredits"|"BlackFrames"|string;
   export interface TestingData {
     /**
      * The assets used for testing.
@@ -2460,6 +2664,7 @@ declare namespace Rekognition {
   }
   export type TextDetectionResults = TextDetectionResult[];
   export type TextTypes = "LINE"|"WORD"|string;
+  export type Timecode = string;
   export type Timestamp = number;
   export interface TrainingData {
     /**
@@ -2527,6 +2732,7 @@ declare namespace Rekognition {
      */
     FrameWidth?: ULong;
   }
+  export type VideoMetadataList = VideoMetadata[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

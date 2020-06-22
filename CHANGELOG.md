@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.701.0-->
+<!--LATEST=2.702.0-->
 <!--ENTRYINSERT-->
+
+## 2.702.0
+* bugfix: EFS: Check for ValidationException in integration tests
+* feature: EC2: This release adds Tag On Create feature support for the ImportImage, ImportSnapshot, ExportImage and CreateInstanceExportTask APIs.
+* feature: EMR: Adding support for MaximumCoreCapacityUnits parameter for EMR Managed Scaling. It allows users to control how many units/nodes are added to the CORE group/fleet. Remaining units/nodes are added to the TASK groups/fleet in the cluster.
+* feature: RDS: Added paginators for various APIs.
+* feature: Rekognition: This update adds the ability to detect black frames, end credits, shots, and color bars in stored videos
+* feature: SQS: AWS SQS adds pagination support for ListQueues and ListDeadLetterSourceQueues APIs
 
 ## 2.701.0
 * bugfix: Request Signing: Better handle colons in accessKeyIds when presigning URLs.

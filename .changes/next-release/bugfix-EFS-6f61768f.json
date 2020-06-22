@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "EFS",
-  "description": "Check for ValidationException in integration tests"
-}

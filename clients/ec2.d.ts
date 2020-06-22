@@ -437,11 +437,11 @@ declare class EC2 extends Service {
    */
   createImage(callback?: (err: AWSError, data: EC2.Types.CreateImageResult) => void): Request<EC2.Types.CreateImageResult, AWSError>;
   /**
-   * Exports a running or stopped instance to an S3 bucket. For information about the supported operating systems, image formats, and known limitations for the types of instances you can export, see Exporting an Instance as a VM Using VM Import/Export in the VM Import/Export User Guide.
+   * Exports a running or stopped instance to an Amazon S3 bucket. For information about the supported operating systems, image formats, and known limitations for the types of instances you can export, see Exporting an Instance as a VM Using VM Import/Export in the VM Import/Export User Guide.
    */
   createInstanceExportTask(params: EC2.Types.CreateInstanceExportTaskRequest, callback?: (err: AWSError, data: EC2.Types.CreateInstanceExportTaskResult) => void): Request<EC2.Types.CreateInstanceExportTaskResult, AWSError>;
   /**
-   * Exports a running or stopped instance to an S3 bucket. For information about the supported operating systems, image formats, and known limitations for the types of instances you can export, see Exporting an Instance as a VM Using VM Import/Export in the VM Import/Export User Guide.
+   * Exports a running or stopped instance to an Amazon S3 bucket. For information about the supported operating systems, image formats, and known limitations for the types of instances you can export, see Exporting an Instance as a VM Using VM Import/Export in the VM Import/Export User Guide.
    */
   createInstanceExportTask(callback?: (err: AWSError, data: EC2.Types.CreateInstanceExportTaskResult) => void): Request<EC2.Types.CreateInstanceExportTaskResult, AWSError>;
   /**
@@ -1333,19 +1333,19 @@ declare class EC2 extends Service {
    */
   describeElasticGpus(callback?: (err: AWSError, data: EC2.Types.DescribeElasticGpusResult) => void): Request<EC2.Types.DescribeElasticGpusResult, AWSError>;
   /**
-   * Describes the specified export image tasks or all your export image tasks.
+   * Describes the specified export image tasks or all of your export image tasks.
    */
   describeExportImageTasks(params: EC2.Types.DescribeExportImageTasksRequest, callback?: (err: AWSError, data: EC2.Types.DescribeExportImageTasksResult) => void): Request<EC2.Types.DescribeExportImageTasksResult, AWSError>;
   /**
-   * Describes the specified export image tasks or all your export image tasks.
+   * Describes the specified export image tasks or all of your export image tasks.
    */
   describeExportImageTasks(callback?: (err: AWSError, data: EC2.Types.DescribeExportImageTasksResult) => void): Request<EC2.Types.DescribeExportImageTasksResult, AWSError>;
   /**
-   * Describes the specified export instance tasks or all your export instance tasks.
+   * Describes the specified export instance tasks or all of your export instance tasks.
    */
   describeExportTasks(params: EC2.Types.DescribeExportTasksRequest, callback?: (err: AWSError, data: EC2.Types.DescribeExportTasksResult) => void): Request<EC2.Types.DescribeExportTasksResult, AWSError>;
   /**
-   * Describes the specified export instance tasks or all your export instance tasks.
+   * Describes the specified export instance tasks or all of your export instance tasks.
    */
   describeExportTasks(callback?: (err: AWSError, data: EC2.Types.DescribeExportTasksResult) => void): Request<EC2.Types.DescribeExportTasksResult, AWSError>;
   /**
@@ -6055,7 +6055,7 @@ declare namespace EC2 {
   }
   export interface CreateInstanceExportTaskRequest {
     /**
-     * A description for the conversion task or the resource being exported. The maximum length is 255 bytes.
+     * A description for the conversion task or the resource being exported. The maximum length is 255 characters.
      */
     Description?: String;
     /**
@@ -6070,6 +6070,10 @@ declare namespace EC2 {
      * The target virtualization environment.
      */
     TargetEnvironment?: ExportEnvironment;
+    /**
+     * The tags to apply to the instance export task during creation.
+     */
+    TagSpecifications?: TagSpecificationList;
   }
   export interface CreateInstanceExportTaskResult {
     /**
@@ -12810,7 +12814,7 @@ declare namespace EC2 {
      */
     ClientToken?: String;
     /**
-     * A description of the image being exported. The maximum length is 255 bytes.
+     * A description of the image being exported. The maximum length is 255 characters.
      */
     Description?: String;
     /**
@@ -12826,13 +12830,17 @@ declare namespace EC2 {
      */
     ImageId: ImageId;
     /**
-     * Information about the destination S3 bucket. The bucket must exist and grant WRITE and READ_ACP permissions to the AWS account vm-import-export@amazon.com.
+     * Information about the destination Amazon S3 bucket. The bucket must exist and grant WRITE and READ_ACP permissions to the AWS account vm-import-export@amazon.com.
      */
     S3ExportLocation: ExportTaskS3LocationRequest;
     /**
-     * The name of the role that grants VM Import/Export permission to export images to your S3 bucket. If this parameter is not specified, the default role is named 'vmimport'.
+     * The name of the role that grants VM Import/Export permission to export images to your Amazon S3 bucket. If this parameter is not specified, the default role is named 'vmimport'.
      */
     RoleName?: String;
+    /**
+     * The tags to apply to the image being exported.
+     */
+    TagSpecifications?: TagSpecificationList;
   }
   export interface ExportImageResult {
     /**
@@ -12852,7 +12860,7 @@ declare namespace EC2 {
      */
     ImageId?: String;
     /**
-     * The name of the role that grants VM Import/Export permission to export images to your S3 bucket.
+     * The name of the role that grants VM Import/Export permission to export images to your Amazon S3 bucket.
      */
     RoleName?: String;
     /**
@@ -12860,7 +12868,7 @@ declare namespace EC2 {
      */
     Progress?: String;
     /**
-     * Information about the destination S3 bucket.
+     * Information about the destination Amazon S3 bucket.
      */
     S3ExportLocation?: ExportTaskS3Location;
     /**
@@ -12871,6 +12879,10 @@ declare namespace EC2 {
      * The status message for the export image task.
      */
     StatusMessage?: String;
+    /**
+     * Any tags assigned to the image being exported.
+     */
+    Tags?: TagList;
   }
   export interface ExportImageTask {
     /**
@@ -12890,7 +12902,7 @@ declare namespace EC2 {
      */
     Progress?: String;
     /**
-     * Information about the destination S3 bucket.
+     * Information about the destination Amazon S3 bucket.
      */
     S3ExportLocation?: ExportTaskS3Location;
     /**
@@ -12901,6 +12913,10 @@ declare namespace EC2 {
      * The status message for the export image task.
      */
     StatusMessage?: String;
+    /**
+     * Any tags assigned to the image being exported.
+     */
+    Tags?: TagList;
   }
   export type ExportImageTaskId = string;
   export type ExportImageTaskIdList = ExportImageTaskId[];
@@ -12940,7 +12956,7 @@ declare namespace EC2 {
   export type ExportTaskList = ExportTask[];
   export interface ExportTaskS3Location {
     /**
-     * The destination S3 bucket.
+     * The destination Amazon S3 bucket.
      */
     S3Bucket?: String;
     /**
@@ -12950,7 +12966,7 @@ declare namespace EC2 {
   }
   export interface ExportTaskS3LocationRequest {
     /**
-     * The destination S3 bucket.
+     * The destination Amazon S3 bucket.
      */
     S3Bucket: String;
     /**
@@ -12969,7 +12985,7 @@ declare namespace EC2 {
      */
     DiskImageFormat?: DiskImageFormat;
     /**
-     * The S3 bucket for the destination image. The destination bucket must exist and grant WRITE and READ_ACP permissions to the AWS account vm-import-export@amazon.com.
+     * The Amazon S3 bucket for the destination image. The destination bucket must exist and grant WRITE and READ_ACP permissions to the AWS account vm-import-export@amazon.com.
      */
     S3Bucket?: String;
     /**
@@ -12987,11 +13003,11 @@ declare namespace EC2 {
      */
     DiskImageFormat?: DiskImageFormat;
     /**
-     * The S3 bucket for the destination image. The destination bucket must exist and grant WRITE and READ_ACP permissions to the AWS account vm-import-export@amazon.com.
+     * The Amazon S3 bucket for the destination image. The destination bucket must exist and grant WRITE and READ_ACP permissions to the AWS account vm-import-export@amazon.com.
      */
     S3Bucket?: String;
     /**
-     * The image is written to a single object in the S3 bucket at the S3 key s3prefix + exportTaskId + '.' + diskImageFormat.
+     * The image is written to a single object in the Amazon S3 bucket at the S3 key s3prefix + exportTaskId + '.' + diskImageFormat.
      */
     S3Prefix?: String;
   }
@@ -14452,7 +14468,7 @@ declare namespace EC2 {
      */
     DeviceName?: String;
     /**
-     * The format of the disk image being imported. Valid values: VHD | VMDK | OVA 
+     * The format of the disk image being imported. Valid values: OVA | VHD | VHDX |VMDK 
      */
     Format?: String;
     /**
@@ -14561,6 +14577,10 @@ declare namespace EC2 {
      * The ARNs of the license configurations.
      */
     LicenseSpecifications?: ImportImageLicenseSpecificationListRequest;
+    /**
+     * The tags to apply to the image being imported.
+     */
+    TagSpecifications?: TagSpecificationList;
   }
   export interface ImportImageResult {
     /**
@@ -14572,7 +14592,7 @@ declare namespace EC2 {
      */
     Description?: String;
     /**
-     * Indicates whether the AMI is encypted.
+     * Indicates whether the AMI is encrypted.
      */
     Encrypted?: Boolean;
     /**
@@ -14586,11 +14606,11 @@ declare namespace EC2 {
     /**
      * The task ID of the import image task.
      */
-    ImportTaskId?: String;
+    ImportTaskId?: ImportImageTaskId;
     /**
      * The identifier for the symmetric AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to create the encrypted AMI.
      */
-    KmsKeyId?: String;
+    KmsKeyId?: KmsKeyId;
     /**
      * The license type of the virtual machine.
      */
@@ -14619,6 +14639,10 @@ declare namespace EC2 {
      * The ARNs of the license configurations.
      */
     LicenseSpecifications?: ImportImageLicenseSpecificationListResponse;
+    /**
+     * Any tags assigned to the image being imported.
+     */
+    Tags?: TagList;
   }
   export interface ImportImageTask {
     /**
@@ -14876,6 +14900,10 @@ declare namespace EC2 {
      * The name of the role to use when not using the default role, 'vmimport'.
      */
     RoleName?: String;
+    /**
+     * The tags to apply to the snapshot being imported.
+     */
+    TagSpecifications?: TagSpecificationList;
   }
   export interface ImportSnapshotResult {
     /**
@@ -14890,6 +14918,10 @@ declare namespace EC2 {
      * Information about the import snapshot task.
      */
     SnapshotTaskDetail?: SnapshotTaskDetail;
+    /**
+     * Any tags assigned to the snapshot being imported.
+     */
+    Tags?: TagList;
   }
   export interface ImportSnapshotTask {
     /**
@@ -20573,7 +20605,7 @@ declare namespace EC2 {
   }
   export type ResourceIdList = TaggableResourceId[];
   export type ResourceList = String[];
-  export type ResourceType = "client-vpn-endpoint"|"customer-gateway"|"dedicated-host"|"dhcp-options"|"elastic-ip"|"elastic-gpu"|"fleet"|"fpga-image"|"host-reservation"|"image"|"instance"|"internet-gateway"|"key-pair"|"launch-template"|"natgateway"|"network-acl"|"network-interface"|"placement-group"|"reserved-instances"|"route-table"|"security-group"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-multicast-domain"|"transit-gateway-route-table"|"volume"|"vpc"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|string;
+  export type ResourceType = "client-vpn-endpoint"|"customer-gateway"|"dedicated-host"|"dhcp-options"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"internet-gateway"|"key-pair"|"launch-template"|"local-gateway-route-table-vpc-association"|"natgateway"|"network-acl"|"network-interface"|"placement-group"|"reserved-instances"|"route-table"|"security-group"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-multicast-domain"|"transit-gateway-route-table"|"volume"|"vpc"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|string;
   export interface ResponseError {
     /**
      * The error code.
@@ -21918,7 +21950,7 @@ declare namespace EC2 {
      */
     Url?: String;
     /**
-     * The S3 bucket for the disk image.
+     * The Amazon S3 bucket for the disk image.
      */
     UserBucket?: UserBucketDetails;
   }
@@ -21937,7 +21969,7 @@ declare namespace EC2 {
      */
     Url?: String;
     /**
-     * The S3 bucket for the disk image.
+     * The Amazon S3 bucket for the disk image.
      */
     UserBucket?: UserBucket;
   }
@@ -22030,7 +22062,7 @@ declare namespace EC2 {
      */
     Url?: String;
     /**
-     * The S3 bucket for the disk image.
+     * The Amazon S3 bucket for the disk image.
      */
     UserBucket?: UserBucketDetails;
   }
@@ -23963,7 +23995,7 @@ declare namespace EC2 {
   export type UsageClassTypeList = UsageClassType[];
   export interface UserBucket {
     /**
-     * The name of the S3 bucket where the disk image is located.
+     * The name of the Amazon S3 bucket where the disk image is located.
      */
     S3Bucket?: String;
     /**
@@ -23973,7 +24005,7 @@ declare namespace EC2 {
   }
   export interface UserBucketDetails {
     /**
-     * The S3 bucket from which the disk image was created.
+     * The Amazon S3 bucket from which the disk image was created.
      */
     S3Bucket?: String;
     /**
@@ -24356,7 +24388,7 @@ declare namespace EC2 {
   }
   export type VolumeStatusList = VolumeStatusItem[];
   export type VolumeStatusName = "io-enabled"|"io-performance"|string;
-  export type VolumeType = "standard"|"io1"|"io2"|"gp2"|"sc1"|"st1"|string;
+  export type VolumeType = "standard"|"io1"|"gp2"|"sc1"|"st1"|string;
   export interface Vpc {
     /**
      * The primary IPv4 CIDR block for the VPC.

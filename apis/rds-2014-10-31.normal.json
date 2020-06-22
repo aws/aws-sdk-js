@@ -11343,7 +11343,7 @@
         },
         "DBClusterIdentifier": {
           "shape": "String",
-          "documentation": "<p>The name of the DB cluster to create from the source data in the Amazon S3 bucket. This parameter is isn't case-sensitive.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Can't end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>my-cluster1</code> </p>"
+          "documentation": "<p>The name of the DB cluster to create from the source data in the Amazon S3 bucket. This parameter isn't case-sensitive.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Can't end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>my-cluster1</code> </p>"
         },
         "DBClusterParameterGroupName": {
           "shape": "String",
@@ -11410,7 +11410,7 @@
         },
         "SourceEngineVersion": {
           "shape": "String",
-          "documentation": "<p>The version of the database that the backup files were created from.</p> <p>MySQL version 5.5 and 5.6 are supported. </p> <p>Example: <code>5.6.22</code> </p>"
+          "documentation": "<p>The version of the database that the backup files were created from.</p> <p>MySQL versions 5.5, 5.6, and 5.7 are supported. </p> <p>Example: <code>5.6.40</code> </p>"
         },
         "S3BucketName": {
           "shape": "String",
@@ -11929,7 +11929,7 @@
         },
         "SourceEngineVersion": {
           "shape": "String",
-          "documentation": "<p>The engine version of your source database. </p> <p>Valid Values: <code>5.6</code> </p>"
+          "documentation": "<p>The version of the database that the backup files were created from.</p> <p>MySQL versions 5.6 and 5.7 are supported. </p> <p>Example: <code>5.6.40</code> </p>"
         },
         "S3BucketName": {
           "shape": "String",

@@ -6756,7 +6756,7 @@ declare namespace RDS {
      */
     DatabaseName?: String;
     /**
-     * The name of the DB cluster to create from the source data in the Amazon S3 bucket. This parameter is isn't case-sensitive. Constraints:   Must contain from 1 to 63 letters, numbers, or hyphens.   First character must be a letter.   Can't end with a hyphen or contain two consecutive hyphens.   Example: my-cluster1 
+     * The name of the DB cluster to create from the source data in the Amazon S3 bucket. This parameter isn't case-sensitive. Constraints:   Must contain from 1 to 63 letters, numbers, or hyphens.   First character must be a letter.   Can't end with a hyphen or contain two consecutive hyphens.   Example: my-cluster1 
      */
     DBClusterIdentifier: String;
     /**
@@ -6821,7 +6821,7 @@ declare namespace RDS {
      */
     SourceEngine: String;
     /**
-     * The version of the database that the backup files were created from. MySQL version 5.5 and 5.6 are supported.  Example: 5.6.22 
+     * The version of the database that the backup files were created from. MySQL versions 5.5, 5.6, and 5.7 are supported.  Example: 5.6.40 
      */
     SourceEngineVersion: String;
     /**
@@ -7279,7 +7279,7 @@ declare namespace RDS {
      */
     SourceEngine: String;
     /**
-     * The engine version of your source database.  Valid Values: 5.6 
+     * The version of the database that the backup files were created from. MySQL versions 5.6 and 5.7 are supported.  Example: 5.6.40 
      */
     SourceEngineVersion: String;
     /**
