@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.702.0-->
+<!--LATEST=2.703.0-->
 <!--ENTRYINSERT-->
+
+## 2.703.0
+* feature: MediaTailor: AWS Elemental MediaTailor SDK now allows configuration of Bumper.
+* feature: Organizations: Added a new error message to support the requirement for a Business License on AWS accounts in China to create an organization.
 
 ## 2.702.0
 * bugfix: EFS: Check for ValidationException in integration tests

@@ -889,6 +889,9 @@
         },
         {
           "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "UnsupportedAPIEndpointException"
         }
       ],
       "documentation": "<p>Disables the integration of an AWS service (the service that is specified by <code>ServicePrincipal</code>) with AWS Organizations. When you disable integration, the specified service no longer can create a <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html\">service-linked role</a> in <i>new</i> accounts in your organization. This means the service can't perform operations on your behalf on any new accounts in your organization. The service can still perform operations in older accounts until the service completes its clean-up from AWS Organizations.</p> <p/> <important> <p>We recommend that you disable integration between AWS Organizations and the specified AWS service by using the console or commands that are provided by the specified service. Doing so ensures that the other service is aware that it can clean up any resources that are required only for the integration. How the service cleans up its resources in the organization's accounts depends on that service. For more information, see the documentation for the other AWS service.</p> </important> <p>After you perform the <code>DisableAWSServiceAccess</code> operation, the specified service can no longer perform operations in your organization's accounts unless the operations are explicitly permitted by the IAM policies that are attached to your roles.</p> <p>For more information about integrating other services with AWS Organizations, including the list of services that work with Organizations, see <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html\">Integrating AWS Organizations with Other AWS Services</a> in the <i>AWS Organizations User Guide.</i> </p> <p>This operation can be called only from the organization's master account.</p>"
@@ -972,6 +975,9 @@
         },
         {
           "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "UnsupportedAPIEndpointException"
         }
       ],
       "documentation": "<p>Enables the integration of an AWS service (the service that is specified by <code>ServicePrincipal</code>) with AWS Organizations. When you enable integration, you allow the specified service to create a <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html\">service-linked role</a> in all the accounts in your organization. This allows the service to perform operations on your behalf in your organization and its accounts.</p> <important> <p>We recommend that you enable integration between AWS Organizations and the specified AWS service by using the console or commands that are provided by the specified service. Doing so ensures that the service is aware that it can create the resources that are required for the integration. How the service creates those resources in the organization's accounts depends on that service. For more information, see the documentation for the other AWS service.</p> </important> <p>For more information about enabling services to integrate with AWS Organizations, see <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html\">Integrating AWS Organizations with Other AWS Services</a> in the <i>AWS Organizations User Guide.</i> </p> <p>This operation can be called only from the organization's master account and only if the organization has <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">enabled all features</a>.</p>"
@@ -1178,6 +1184,9 @@
         },
         {
           "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "UnsupportedAPIEndpointException"
         }
       ],
       "documentation": "<p>Returns a list of the AWS services that you enabled to integrate with your organization. After a service on this list creates the resources that it requires for the integration, it can perform operations on your organization and its accounts.</p> <p>For more information about integrating other services with AWS Organizations, including the list of services that currently work with Organizations, see <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html\">Integrating AWS Organizations with Other AWS Services</a> in the <i>AWS Organizations User Guide.</i> </p> <p>This operation can be called only from the organization's master account or by a member account that is a delegated administrator for an AWS service.</p>"

@@ -155,6 +155,20 @@
         }
       }
     },
+    "Bumper": {
+      "type": "structure",
+      "documentation": "<p>The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. </p>",
+      "members": {
+        "EndUrl": {
+          "documentation": "<p>The URL for the end bumper asset. </p>",
+          "shape": "__string"
+        },
+        "StartUrl": {
+          "documentation": "<p>The URL for the start bumper asset. </p>",
+          "shape": "__string"
+        }
+      }
+    },
     "CdnConfiguration": {
       "documentation": "<p>The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. </p>",
       "members": {
@@ -242,6 +256,10 @@
         "AvailSuppression": {
           "shape": "AvailSuppression",
           "documentation": "<p>The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.</p>"
+        },
+        "Bumper": {
+          "shape": "Bumper",
+          "documentation": "<p>The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. </p>"
         },
         "CdnConfiguration": {
           "documentation": "<p>The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. </p>",
@@ -388,6 +406,10 @@
           "documentation": "<p>The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.</p>",
           "shape": "AvailSuppression"
         },
+        "Bumper": {
+          "shape": "Bumper",
+          "documentation": "<p>The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. </p>"
+        },
         "CdnConfiguration": {
           "documentation": "<p>The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. </p>",
           "shape": "CdnConfiguration"
@@ -464,6 +486,10 @@
           "shape": "AvailSuppression",
           "documentation": "<p>The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.</p>"
         },
+        "Bumper": {
+          "shape": "Bumper",
+          "documentation": "<p>The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. </p>"
+        },
         "CdnConfiguration": {
           "documentation": "<p>The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. </p>",
           "shape": "CdnConfiguration"
@@ -513,6 +539,10 @@
         "AvailSuppression": {
           "shape": "AvailSuppression",
           "documentation": "<p>The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.</p>"
+        },
+        "Bumper": {
+          "shape": "Bumper",
+          "documentation": "<p>The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. </p>"
         },
         "CdnConfiguration": {
           "documentation": "<p>The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. </p>",
