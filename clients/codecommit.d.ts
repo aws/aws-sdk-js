@@ -220,27 +220,35 @@ declare class CodeCommit extends Service {
    */
   getBranch(callback?: (err: AWSError, data: CodeCommit.Types.GetBranchOutput) => void): Request<CodeCommit.Types.GetBranchOutput, AWSError>;
   /**
-   * Returns the content of a comment made on a change, file, or commit in a repository.
+   * Returns the content of a comment made on a change, file, or commit in a repository.   Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of reactions from active identities, use GetCommentReactions. 
    */
   getComment(params: CodeCommit.Types.GetCommentInput, callback?: (err: AWSError, data: CodeCommit.Types.GetCommentOutput) => void): Request<CodeCommit.Types.GetCommentOutput, AWSError>;
   /**
-   * Returns the content of a comment made on a change, file, or commit in a repository.
+   * Returns the content of a comment made on a change, file, or commit in a repository.   Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of reactions from active identities, use GetCommentReactions. 
    */
   getComment(callback?: (err: AWSError, data: CodeCommit.Types.GetCommentOutput) => void): Request<CodeCommit.Types.GetCommentOutput, AWSError>;
   /**
-   * Returns information about comments made on the comparison between two commits.
+   * Returns information about reactions to a specified comment ID. Reactions from users who have been deleted will not be included in the count.
+   */
+  getCommentReactions(params: CodeCommit.Types.GetCommentReactionsInput, callback?: (err: AWSError, data: CodeCommit.Types.GetCommentReactionsOutput) => void): Request<CodeCommit.Types.GetCommentReactionsOutput, AWSError>;
+  /**
+   * Returns information about reactions to a specified comment ID. Reactions from users who have been deleted will not be included in the count.
+   */
+  getCommentReactions(callback?: (err: AWSError, data: CodeCommit.Types.GetCommentReactionsOutput) => void): Request<CodeCommit.Types.GetCommentReactionsOutput, AWSError>;
+  /**
+   * Returns information about comments made on the comparison between two commits.  Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of reactions from active identities, use GetCommentReactions. 
    */
   getCommentsForComparedCommit(params: CodeCommit.Types.GetCommentsForComparedCommitInput, callback?: (err: AWSError, data: CodeCommit.Types.GetCommentsForComparedCommitOutput) => void): Request<CodeCommit.Types.GetCommentsForComparedCommitOutput, AWSError>;
   /**
-   * Returns information about comments made on the comparison between two commits.
+   * Returns information about comments made on the comparison between two commits.  Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of reactions from active identities, use GetCommentReactions. 
    */
   getCommentsForComparedCommit(callback?: (err: AWSError, data: CodeCommit.Types.GetCommentsForComparedCommitOutput) => void): Request<CodeCommit.Types.GetCommentsForComparedCommitOutput, AWSError>;
   /**
-   * Returns comments made on a pull request.
+   * Returns comments made on a pull request.  Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of reactions from active identities, use GetCommentReactions. 
    */
   getCommentsForPullRequest(params: CodeCommit.Types.GetCommentsForPullRequestInput, callback?: (err: AWSError, data: CodeCommit.Types.GetCommentsForPullRequestOutput) => void): Request<CodeCommit.Types.GetCommentsForPullRequestOutput, AWSError>;
   /**
-   * Returns comments made on a pull request.
+   * Returns comments made on a pull request.  Reaction counts might include numbers from user identities who were deleted after the reaction was made. For a count of reactions from active identities, use GetCommentReactions. 
    */
   getCommentsForPullRequest(callback?: (err: AWSError, data: CodeCommit.Types.GetCommentsForPullRequestOutput) => void): Request<CodeCommit.Types.GetCommentsForPullRequestOutput, AWSError>;
   /**
@@ -475,6 +483,14 @@ declare class CodeCommit extends Service {
    * Posts a comment in reply to an existing comment on a comparison between commits or a pull request.
    */
   postCommentReply(callback?: (err: AWSError, data: CodeCommit.Types.PostCommentReplyOutput) => void): Request<CodeCommit.Types.PostCommentReplyOutput, AWSError>;
+  /**
+   * Adds or updates a reaction to a specified comment for the user whose identity is used to make the request. You can only add or update a reaction for yourself. You cannot add, modify, or delete a reaction for another user.
+   */
+  putCommentReaction(params: CodeCommit.Types.PutCommentReactionInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Adds or updates a reaction to a specified comment for the user whose identity is used to make the request. You can only add or update a reaction for yourself. You cannot add, modify, or delete a reaction for another user.
+   */
+  putCommentReaction(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Adds or updates a file in a branch in an AWS CodeCommit repository, and generates a commit for the addition in the specified branch.
    */
@@ -982,6 +998,7 @@ declare namespace CodeCommit {
   }
   export type BranchName = string;
   export type BranchNameList = BranchName[];
+  export type CallerReactions = ReactionValue[];
   export type CapitalBoolean = boolean;
   export type ChangeTypeEnum = "A"|"M"|"D"|string;
   export type ClientRequestToken = string;
@@ -1020,6 +1037,14 @@ declare namespace CodeCommit {
      * A unique, client-generated idempotency token that, when provided in a request, ensures the request cannot be repeated with a changed parameter. If a request is received with the same parameters and a token is included, the request returns information about the initial request that used that token.
      */
     clientRequestToken?: ClientRequestToken;
+    /**
+     * The emoji reactions to a comment, if any, submitted by the user whose credentials are associated with the call to the API.
+     */
+    callerReactions?: CallerReactions;
+    /**
+     * A string to integer map that represents the number of individual users who have responded to a comment with the specified reactions.
+     */
+    reactionCounts?: ReactionCountsMap;
   }
   export type CommentId = string;
   export type Comments = Comment[];
@@ -1194,6 +1219,7 @@ declare namespace CodeCommit {
   export type ConflictResolutionStrategyTypeEnum = "NONE"|"ACCEPT_SOURCE"|"ACCEPT_DESTINATION"|"AUTOMERGE"|string;
   export type Conflicts = Conflict[];
   export type Content = string;
+  export type Count = number;
   export interface CreateApprovalRuleTemplateInput {
     /**
      * The name of the approval rule template. Provide descriptive names, because this name is applied to the approval rules created automatically in associated repositories.
@@ -1838,6 +1864,34 @@ declare namespace CodeCommit {
      * The contents of the comment.
      */
     comment?: Comment;
+  }
+  export interface GetCommentReactionsInput {
+    /**
+     * The ID of the comment for which you want to get reactions information.
+     */
+    commentId: CommentId;
+    /**
+     * Optional. The Amazon Resource Name (ARN) of the user or identity for which you want to get reaction information.
+     */
+    reactionUserArn?: Arn;
+    /**
+     * An enumeration token that, when provided in a request, returns the next batch of the results. 
+     */
+    nextToken?: NextToken;
+    /**
+     * A non-zero, non-negative integer used to limit the number of returned results. The default is the same as the allowed maximum, 1,000.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface GetCommentReactionsOutput {
+    /**
+     * An array of reactions to the specified comment.
+     */
+    reactionsForComment: ReactionsForCommentList;
+    /**
+     * An enumeration token that can be used in a request to return the next batch of the results.
+     */
+    nextToken?: NextToken;
   }
   export interface GetCommentsForComparedCommitInput {
     /**
@@ -3158,6 +3212,16 @@ declare namespace CodeCommit {
     mergeMetadata?: MergeMetadata;
   }
   export type PullRequestTargetList = PullRequestTarget[];
+  export interface PutCommentReactionInput {
+    /**
+     * The ID of the comment to which you want to add or update a reaction.
+     */
+    commentId: CommentId;
+    /**
+     * The emoji reaction you want to add or update. To remove a reaction, provide a value of blank or null. You can also provide the value of none. For information about emoji reaction values supported in AWS CodeCommit, see the AWS CodeCommit User Guide.
+     */
+    reactionValue: ReactionValue;
+  }
   export type PutFileEntries = PutFileEntry[];
   export interface PutFileEntry {
     /**
@@ -3245,6 +3309,41 @@ declare namespace CodeCommit {
      */
     configurationId?: RepositoryTriggersConfigurationId;
   }
+  export type ReactionCountsMap = {[key: string]: Count};
+  export type ReactionEmoji = string;
+  export interface ReactionForComment {
+    /**
+     * The reaction for a specified comment.
+     */
+    reaction?: ReactionValueFormats;
+    /**
+     * The Amazon Resource Names (ARNs) of users who have provided reactions to the comment.
+     */
+    reactionUsers?: ReactionUsersList;
+    /**
+     * A numerical count of users who reacted with the specified emoji whose identities have been subsequently deleted from IAM. While these IAM users or roles no longer exist, the reactions might still appear in total reaction counts.
+     */
+    reactionsFromDeletedUsersCount?: Count;
+  }
+  export type ReactionShortCode = string;
+  export type ReactionUnicode = string;
+  export type ReactionUsersList = Arn[];
+  export type ReactionValue = string;
+  export interface ReactionValueFormats {
+    /**
+     * The Emoji Version 1.0 graphic of the reaction. These graphics are interpreted slightly differently on different operating systems.
+     */
+    emoji?: ReactionEmoji;
+    /**
+     * The emoji short code for the reaction. Short codes are interpreted slightly differently on different operating systems. 
+     */
+    shortCode?: ReactionShortCode;
+    /**
+     * The Unicode codepoint for the reaction.
+     */
+    unicode?: ReactionUnicode;
+  }
+  export type ReactionsForCommentList = ReactionForComment[];
   export type ReferenceName = string;
   export type RelativeFileVersionEnum = "BEFORE"|"AFTER"|string;
   export type ReplaceContentEntries = ReplaceContentEntry[];

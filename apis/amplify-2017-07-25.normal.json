@@ -42,7 +42,7 @@
           "shape": "DependentServiceFailureException"
         }
       ],
-      "documentation": "<p> Creates a new Amplify App. </p>"
+      "documentation": "<p> Creates a new Amplify app. </p>"
     },
     "CreateBackendEnvironment": {
       "name": "CreateBackendEnvironment",
@@ -73,7 +73,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p> Creates a new backend environment for an Amplify App. </p>"
+      "documentation": "<p> Creates a new backend environment for an Amplify app. </p>"
     },
     "CreateBranch": {
       "name": "CreateBranch",
@@ -107,7 +107,7 @@
           "shape": "DependentServiceFailureException"
         }
       ],
-      "documentation": "<p> Creates a new Branch for an Amplify App. </p>"
+      "documentation": "<p> Creates a new branch for an Amplify app. </p>"
     },
     "CreateDeployment": {
       "name": "CreateDeployment",
@@ -135,7 +135,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p> Create a deployment for manual deploy apps. (Apps are not connected to repository) </p>"
+      "documentation": "<p> Creates a deployment for a manually deployed Amplify app. Manually deployed apps are not connected to a repository. </p>"
     },
     "CreateDomainAssociation": {
       "name": "CreateDomainAssociation",
@@ -169,7 +169,7 @@
           "shape": "DependentServiceFailureException"
         }
       ],
-      "documentation": "<p> Create a new DomainAssociation on an App </p>"
+      "documentation": "<p> Creates a new domain association for an Amplify app. This action associates a custom domain with the Amplify app </p>"
     },
     "CreateWebhook": {
       "name": "CreateWebhook",
@@ -203,7 +203,7 @@
           "shape": "DependentServiceFailureException"
         }
       ],
-      "documentation": "<p> Create a new webhook on an App. </p>"
+      "documentation": "<p> Creates a new webhook on an Amplify app. </p>"
     },
     "DeleteApp": {
       "name": "DeleteApp",
@@ -234,7 +234,7 @@
           "shape": "DependentServiceFailureException"
         }
       ],
-      "documentation": "<p> Delete an existing Amplify App by appId. </p>"
+      "documentation": "<p> Deletes an existing Amplify app specified by an app ID. </p>"
     },
     "DeleteBackendEnvironment": {
       "name": "DeleteBackendEnvironment",
@@ -265,7 +265,7 @@
           "shape": "DependentServiceFailureException"
         }
       ],
-      "documentation": "<p> Delete backend environment for an Amplify App. </p>"
+      "documentation": "<p> Deletes a backend environment for an Amplify app. </p>"
     },
     "DeleteBranch": {
       "name": "DeleteBranch",
@@ -296,7 +296,7 @@
           "shape": "DependentServiceFailureException"
         }
       ],
-      "documentation": "<p> Deletes a branch for an Amplify App. </p>"
+      "documentation": "<p> Deletes a branch for an Amplify app. </p>"
     },
     "DeleteDomainAssociation": {
       "name": "DeleteDomainAssociation",
@@ -327,7 +327,7 @@
           "shape": "DependentServiceFailureException"
         }
       ],
-      "documentation": "<p> Deletes a DomainAssociation. </p>"
+      "documentation": "<p> Deletes a domain association for an Amplify app. </p>"
     },
     "DeleteJob": {
       "name": "DeleteJob",
@@ -358,7 +358,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p> Delete a job, for an Amplify branch, part of Amplify App. </p>"
+      "documentation": "<p> Deletes a job for a branch of an Amplify app. </p>"
     },
     "DeleteWebhook": {
       "name": "DeleteWebhook",
@@ -417,7 +417,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p> Retrieve website access logs for a specific time range via a pre-signed URL. </p>"
+      "documentation": "<p> Returns the website access logs for a specific time range using a presigned URL. </p>"
     },
     "GetApp": {
       "name": "GetApp",
@@ -445,7 +445,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p> Retrieves an existing Amplify App by appId. </p>"
+      "documentation": "<p> Returns an existing Amplify app by appID. </p>"
     },
     "GetArtifactUrl": {
       "name": "GetArtifactUrl",
@@ -476,7 +476,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p> Retrieves artifact info that corresponds to a artifactId. </p>"
+      "documentation": "<p> Returns the artifact info that corresponds to an artifact id. </p>"
     },
     "GetBackendEnvironment": {
       "name": "GetBackendEnvironment",
@@ -504,7 +504,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p> Retrieves a backend environment for an Amplify App. </p>"
+      "documentation": "<p> Returns a backend environment for an Amplify app. </p>"
     },
     "GetBranch": {
       "name": "GetBranch",
@@ -532,7 +532,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p> Retrieves a branch for an Amplify App. </p>"
+      "documentation": "<p> Returns a branch for an Amplify app. </p>"
     },
     "GetDomainAssociation": {
       "name": "GetDomainAssociation",
@@ -560,7 +560,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p> Retrieves domain info that corresponds to an appId and domainName. </p>"
+      "documentation": "<p> Returns the domain information for an Amplify app. </p>"
     },
     "GetJob": {
       "name": "GetJob",
@@ -591,7 +591,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p> Get a job for a branch, part of an Amplify App. </p>"
+      "documentation": "<p> Returns a job for a branch of an Amplify app. </p>"
     },
     "GetWebhook": {
       "name": "GetWebhook",
@@ -622,7 +622,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p> Retrieves webhook info that corresponds to a webhookId. </p>"
+      "documentation": "<p> Returns the webhook information that corresponds to a specified webhook ID. </p>"
     },
     "ListApps": {
       "name": "ListApps",
@@ -647,7 +647,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p> Lists existing Amplify Apps. </p>"
+      "documentation": "<p> Returns a list of the existing Amplify apps. </p>"
     },
     "ListArtifacts": {
       "name": "ListArtifacts",
@@ -675,7 +675,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p> List artifacts with an app, a branch, a job and an artifact type. </p>"
+      "documentation": "<p> Returns a list of artifacts for a specified app, branch, and job. </p>"
     },
     "ListBackendEnvironments": {
       "name": "ListBackendEnvironments",
@@ -700,7 +700,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p> Lists backend environments for an Amplify App. </p>"
+      "documentation": "<p> Lists the backend environments for an Amplify app. </p>"
     },
     "ListBranches": {
       "name": "ListBranches",
@@ -725,7 +725,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p> Lists branches for an Amplify App. </p>"
+      "documentation": "<p> Lists the branches of an Amplify app. </p>"
     },
     "ListDomainAssociations": {
       "name": "ListDomainAssociations",
@@ -750,7 +750,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p> List domains with an app </p>"
+      "documentation": "<p> Returns the domain associations for an Amplify app. </p>"
     },
     "ListJobs": {
       "name": "ListJobs",
@@ -778,7 +778,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p> List Jobs for a branch, part of an Amplify App. </p>"
+      "documentation": "<p> Lists the jobs for a branch of an Amplify app. </p>"
     },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
@@ -803,7 +803,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p> List tags for resource. </p>"
+      "documentation": "<p> Returns a list of tags for a specified Amazon Resource Name (ARN). </p>"
     },
     "ListWebhooks": {
       "name": "ListWebhooks",
@@ -831,7 +831,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p> List webhooks with an app. </p>"
+      "documentation": "<p> Returns a list of webhooks for an Amplify app. </p>"
     },
     "StartDeployment": {
       "name": "StartDeployment",
@@ -862,7 +862,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p> Start a deployment for manual deploy apps. (Apps are not connected to repository) </p>"
+      "documentation": "<p> Starts a deployment for a manually deployed app. Manually deployed apps are not connected to a repository. </p>"
     },
     "StartJob": {
       "name": "StartJob",
@@ -893,7 +893,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p> Starts a new job for a branch, part of an Amplify App. </p>"
+      "documentation": "<p> Starts a new job for a branch of an Amplify app. </p>"
     },
     "StopJob": {
       "name": "StopJob",
@@ -924,7 +924,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p> Stop a job that is in progress, for an Amplify branch, part of Amplify App. </p>"
+      "documentation": "<p> Stops a job that is in progress for a branch of an Amplify app. </p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -949,7 +949,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p> Tag resource with tag key and value. </p>"
+      "documentation": "<p> Tags the resource with a tag key and value. </p>"
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -974,7 +974,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p> Untag resource with resourceArn. </p>"
+      "documentation": "<p> Untags a resource with a specified Amazon Resource Name (ARN). </p>"
     },
     "UpdateApp": {
       "name": "UpdateApp",
@@ -1002,7 +1002,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p> Updates an existing Amplify App. </p>"
+      "documentation": "<p> Updates an existing Amplify app. </p>"
     },
     "UpdateBranch": {
       "name": "UpdateBranch",
@@ -1033,7 +1033,7 @@
           "shape": "DependentServiceFailureException"
         }
       ],
-      "documentation": "<p> Updates a branch for an Amplify App. </p>"
+      "documentation": "<p> Updates a branch for an Amplify app. </p>"
     },
     "UpdateDomainAssociation": {
       "name": "UpdateDomainAssociation",
@@ -1064,7 +1064,7 @@
           "shape": "DependentServiceFailureException"
         }
       ],
-      "documentation": "<p> Create a new DomainAssociation on an App </p>"
+      "documentation": "<p> Creates a new domain association for an Amplify app.</p>"
     },
     "UpdateWebhook": {
       "name": "UpdateWebhook",
@@ -1095,14 +1095,15 @@
           "shape": "DependentServiceFailureException"
         }
       ],
-      "documentation": "<p> Update a webhook. </p>"
+      "documentation": "<p> Updates a webhook. </p>"
     }
   },
   "shapes": {
     "AccessToken": {
       "type": "string",
       "max": 255,
-      "min": 1
+      "min": 1,
+      "sensitive": true
     },
     "ActiveJobId": {
       "type": "string",
@@ -1127,90 +1128,94 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for the Amplify App. </p>"
+          "documentation": "<p> The unique ID of the Amplify app. </p>"
         },
         "appArn": {
           "shape": "AppArn",
-          "documentation": "<p> ARN for the Amplify App. </p>"
+          "documentation": "<p> The Amazon Resource Name (ARN) of the Amplify app. </p>"
         },
         "name": {
           "shape": "Name",
-          "documentation": "<p> Name for the Amplify App. </p>"
+          "documentation": "<p> The name for the Amplify app. </p>"
         },
         "tags": {
           "shape": "TagMap",
-          "documentation": "<p> Tag for Amplify App. </p>"
+          "documentation": "<p> The tag for the Amplify app. </p>"
         },
         "description": {
           "shape": "Description",
-          "documentation": "<p> Description for the Amplify App. </p>"
+          "documentation": "<p> The description for the Amplify app. </p>"
         },
         "repository": {
           "shape": "Repository",
-          "documentation": "<p> Repository for the Amplify App. </p>"
+          "documentation": "<p> The repository for the Amplify app. </p>"
         },
         "platform": {
           "shape": "Platform",
-          "documentation": "<p> Platform for the Amplify App. </p>"
+          "documentation": "<p> The platform for the Amplify app. </p>"
         },
         "createTime": {
           "shape": "CreateTime",
-          "documentation": "<p> Create date / time for the Amplify App. </p>"
+          "documentation": "<p> Creates a date and time for the Amplify app. </p>"
         },
         "updateTime": {
           "shape": "UpdateTime",
-          "documentation": "<p> Update date / time for the Amplify App. </p>"
+          "documentation": "<p> Updates the date and time for the Amplify app. </p>"
         },
         "iamServiceRoleArn": {
           "shape": "ServiceRoleArn",
-          "documentation": "<p> IAM service role ARN for the Amplify App. </p>"
+          "documentation": "<p> The AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) of the Amplify app. </p>"
         },
         "environmentVariables": {
           "shape": "EnvironmentVariables",
-          "documentation": "<p> Environment Variables for the Amplify App. </p>"
+          "documentation": "<p> The environment variables for the Amplify app. </p>"
         },
         "defaultDomain": {
           "shape": "DefaultDomain",
-          "documentation": "<p> Default domain for the Amplify App. </p>"
+          "documentation": "<p> The default domain for the Amplify app. </p>"
         },
         "enableBranchAutoBuild": {
           "shape": "EnableBranchAutoBuild",
-          "documentation": "<p> Enables auto-building of branches for the Amplify App. </p>"
+          "documentation": "<p> Enables the auto-building of branches for the Amplify app. </p>"
+        },
+        "enableBranchAutoDeletion": {
+          "shape": "EnableBranchAutoDeletion",
+          "documentation": "<p> Automatically disconnects a branch in the Amplify Console when you delete a branch from your Git repository. </p>"
         },
         "enableBasicAuth": {
           "shape": "EnableBasicAuth",
-          "documentation": "<p> Enables Basic Authorization for branches for the Amplify App. </p>"
+          "documentation": "<p> Enables basic authorization for the Amplify app's branches. </p>"
         },
         "basicAuthCredentials": {
           "shape": "BasicAuthCredentials",
-          "documentation": "<p> Basic Authorization credentials for branches for the Amplify App. </p>"
+          "documentation": "<p> The basic authorization credentials for branches for the Amplify app. </p>"
         },
         "customRules": {
           "shape": "CustomRules",
-          "documentation": "<p> Custom redirect / rewrite rules for the Amplify App. </p>"
+          "documentation": "<p> Describes the custom redirect and rewrite rules for the Amplify app. </p>"
         },
         "productionBranch": {
           "shape": "ProductionBranch",
-          "documentation": "<p> Structure with Production Branch information. </p>"
+          "documentation": "<p> Describes the information about a production branch of the Amplify app. </p>"
         },
         "buildSpec": {
           "shape": "BuildSpec",
-          "documentation": "<p> BuildSpec content for Amplify App. </p>"
+          "documentation": "<p> Describes the content of the build specification (build spec) for the Amplify app. </p>"
         },
         "enableAutoBranchCreation": {
           "shape": "EnableAutoBranchCreation",
-          "documentation": "<p> Enables automated branch creation for the Amplify App. </p>"
+          "documentation": "<p> Enables automated branch creation for the Amplify app. </p>"
         },
         "autoBranchCreationPatterns": {
           "shape": "AutoBranchCreationPatterns",
-          "documentation": "<p> Automated branch creation glob patterns for the Amplify App. </p>"
+          "documentation": "<p> Describes the automated branch creation glob patterns for the Amplify app. </p>"
         },
         "autoBranchCreationConfig": {
           "shape": "AutoBranchCreationConfig",
-          "documentation": "<p> Automated branch creation config for the Amplify App. </p>"
+          "documentation": "<p> Describes the automated branch creation configuration for the Amplify app. </p>"
         }
       },
-      "documentation": "<p> Amplify App represents different branches of a repository for building, deploying, and hosting. </p>"
+      "documentation": "<p> Represents the different branches of a repository for building, deploying, and hosting an Amplify app. </p>"
     },
     "AppArn": {
       "type": "string",
@@ -1236,14 +1241,14 @@
       "members": {
         "artifactFileName": {
           "shape": "ArtifactFileName",
-          "documentation": "<p> File name for the artifact. </p>"
+          "documentation": "<p> The file name for the artifact. </p>"
         },
         "artifactId": {
           "shape": "ArtifactId",
-          "documentation": "<p> Unique Id for a artifact. </p>"
+          "documentation": "<p> The unique ID for the artifact. </p>"
         }
       },
-      "documentation": "<p> Structure for artifact. </p>"
+      "documentation": "<p> Describes an artifact. </p>"
     },
     "ArtifactFileName": {
       "type": "string",
@@ -1283,42 +1288,42 @@
       "members": {
         "stage": {
           "shape": "Stage",
-          "documentation": "<p> Stage for the auto created branch. </p>"
+          "documentation": "<p> Describes the current stage for the autocreated branch. </p>"
         },
         "framework": {
           "shape": "Framework",
-          "documentation": "<p> Framework for the auto created branch. </p>"
+          "documentation": "<p> The framework for the autocreated branch. </p>"
         },
         "enableAutoBuild": {
           "shape": "EnableAutoBuild",
-          "documentation": "<p> Enables auto building for the auto created branch. </p>"
+          "documentation": "<p> Enables auto building for the autocreated branch. </p>"
         },
         "environmentVariables": {
           "shape": "EnvironmentVariables",
-          "documentation": "<p> Environment Variables for the auto created branch. </p>"
+          "documentation": "<p> The environment variables for the autocreated branch. </p>"
         },
         "basicAuthCredentials": {
           "shape": "BasicAuthCredentials",
-          "documentation": "<p> Basic Authorization credentials for the auto created branch. </p>"
+          "documentation": "<p> The basic authorization credentials for the autocreated branch. </p>"
         },
         "enableBasicAuth": {
           "shape": "EnableBasicAuth",
-          "documentation": "<p> Enables Basic Auth for the auto created branch. </p>"
+          "documentation": "<p> Enables basic authorization for the autocreated branch. </p>"
         },
         "buildSpec": {
           "shape": "BuildSpec",
-          "documentation": "<p> BuildSpec for the auto created branch. </p>"
+          "documentation": "<p> The build specification (build spec) for the autocreated branch. </p>"
         },
         "enablePullRequestPreview": {
           "shape": "EnablePullRequestPreview",
-          "documentation": "<p> Enables Pull Request Preview for auto created branch. </p>"
+          "documentation": "<p> Enables pull request preview for the autocreated branch. </p>"
         },
         "pullRequestEnvironmentName": {
           "shape": "PullRequestEnvironmentName",
-          "documentation": "<p> The Amplify Environment name for the pull request. </p>"
+          "documentation": "<p> The Amplify environment name for the pull request. </p>"
         }
       },
-      "documentation": "<p> Structure with auto branch creation config. </p>"
+      "documentation": "<p> Describes the automated branch creation configuration. </p>"
     },
     "AutoBranchCreationPattern": {
       "type": "string",
@@ -1331,6 +1336,22 @@
         "shape": "AutoBranchCreationPattern"
       }
     },
+    "AutoSubDomainCreationPattern": {
+      "type": "string",
+      "max": 2048,
+      "min": 1
+    },
+    "AutoSubDomainCreationPatterns": {
+      "type": "list",
+      "member": {
+        "shape": "AutoSubDomainCreationPattern"
+      }
+    },
+    "AutoSubDomainIAMRole": {
+      "type": "string",
+      "max": 1000,
+      "pattern": "^$|^arn:aws:iam::\\d{12}:role.+"
+    },
     "BackendEnvironment": {
       "type": "structure",
       "required": [
@@ -1342,30 +1363,30 @@
       "members": {
         "backendEnvironmentArn": {
           "shape": "BackendEnvironmentArn",
-          "documentation": "<p> Arn for a backend environment, part of an Amplify App. </p>"
+          "documentation": "<p> The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. </p>"
         },
         "environmentName": {
           "shape": "EnvironmentName",
-          "documentation": "<p> Name for a backend environment, part of an Amplify App. </p>"
+          "documentation": "<p> The name for a backend environment that is part of an Amplify app. </p>"
         },
         "stackName": {
           "shape": "StackName",
-          "documentation": "<p> CloudFormation stack name of backend environment. </p>"
+          "documentation": "<p> The AWS CloudFormation stack name of a backend environment. </p>"
         },
         "deploymentArtifacts": {
           "shape": "DeploymentArtifacts",
-          "documentation": "<p> Name of deployment artifacts. </p>"
+          "documentation": "<p> The name of deployment artifacts. </p>"
         },
         "createTime": {
           "shape": "CreateTime",
-          "documentation": "<p> Creation date and time for a backend environment, part of an Amplify App. </p>"
+          "documentation": "<p> The creation date and time for a backend environment that is part of an Amplify app. </p>"
         },
         "updateTime": {
           "shape": "UpdateTime",
-          "documentation": "<p> Last updated date and time for a backend environment, part of an Amplify App. </p>"
+          "documentation": "<p> The last updated date and time for a backend environment that is part of an Amplify app. </p>"
         }
       },
-      "documentation": "<p> Backend environment for an Amplify App. </p>"
+      "documentation": "<p> Describes the backend environment for an Amplify app. </p>"
     },
     "BackendEnvironmentArn": {
       "type": "string",
@@ -1380,7 +1401,8 @@
     },
     "BasicAuthCredentials": {
       "type": "string",
-      "max": 2000
+      "max": 2000,
+      "sensitive": true
     },
     "Branch": {
       "type": "structure",
@@ -1406,95 +1428,95 @@
       "members": {
         "branchArn": {
           "shape": "BranchArn",
-          "documentation": "<p> ARN for a branch, part of an Amplify App. </p>"
+          "documentation": "<p> The Amazon Resource Name (ARN) for a branch that is part of an Amplify app. </p>"
         },
         "branchName": {
           "shape": "BranchName",
-          "documentation": "<p> Name for a branch, part of an Amplify App. </p>"
+          "documentation": "<p> The name for the branch that is part of an Amplify app. </p>"
         },
         "description": {
           "shape": "Description",
-          "documentation": "<p> Description for a branch, part of an Amplify App. </p>"
+          "documentation": "<p> The description for the branch that is part of an Amplify app. </p>"
         },
         "tags": {
           "shape": "TagMap",
-          "documentation": "<p> Tag for branch for Amplify App. </p>"
+          "documentation": "<p> The tag for the branch of an Amplify app. </p>"
         },
         "stage": {
           "shape": "Stage",
-          "documentation": "<p> Stage for a branch, part of an Amplify App. </p>"
+          "documentation": "<p> The current stage for the branch that is part of an Amplify app. </p>"
         },
         "displayName": {
           "shape": "DisplayName",
-          "documentation": "<p> Display name for a branch, will use as the default domain prefix. </p>"
+          "documentation": "<p> The display name for the branch. This is used as the default domain prefix. </p>"
         },
         "enableNotification": {
           "shape": "EnableNotification",
-          "documentation": "<p> Enables notifications for a branch, part of an Amplify App. </p>"
+          "documentation": "<p> Enables notifications for a branch that is part of an Amplify app. </p>"
         },
         "createTime": {
           "shape": "CreateTime",
-          "documentation": "<p> Creation date and time for a branch, part of an Amplify App. </p>"
+          "documentation": "<p> The creation date and time for a branch that is part of an Amplify app. </p>"
         },
         "updateTime": {
           "shape": "UpdateTime",
-          "documentation": "<p> Last updated date and time for a branch, part of an Amplify App. </p>"
+          "documentation": "<p> The last updated date and time for a branch that is part of an Amplify app. </p>"
         },
         "environmentVariables": {
           "shape": "EnvironmentVariables",
-          "documentation": "<p> Environment Variables specific to a branch, part of an Amplify App. </p>"
+          "documentation": "<p> The environment variables specific to a branch of an Amplify app. </p>"
         },
         "enableAutoBuild": {
           "shape": "EnableAutoBuild",
-          "documentation": "<p> Enables auto-building on push for a branch, part of an Amplify App. </p>"
+          "documentation": "<p> Enables auto-building on push for a branch of an Amplify app. </p>"
         },
         "customDomains": {
           "shape": "CustomDomains",
-          "documentation": "<p> Custom domains for a branch, part of an Amplify App. </p>"
+          "documentation": "<p> The custom domains for a branch of an Amplify app. </p>"
         },
         "framework": {
           "shape": "Framework",
-          "documentation": "<p> Framework for a branch, part of an Amplify App. </p>"
+          "documentation": "<p> The framework for a branch of an Amplify app. </p>"
         },
         "activeJobId": {
           "shape": "ActiveJobId",
-          "documentation": "<p> Id of the active job for a branch, part of an Amplify App. </p>"
+          "documentation": "<p> The ID of the active job for a branch of an Amplify app. </p>"
         },
         "totalNumberOfJobs": {
           "shape": "TotalNumberOfJobs",
-          "documentation": "<p> Total number of Jobs part of an Amplify App. </p>"
+          "documentation": "<p> The total number of jobs that are part of an Amplify app. </p>"
         },
         "enableBasicAuth": {
           "shape": "EnableBasicAuth",
-          "documentation": "<p> Enables Basic Authorization for a branch, part of an Amplify App. </p>"
+          "documentation": "<p> Enables basic authorization for a branch of an Amplify app. </p>"
         },
         "thumbnailUrl": {
           "shape": "ThumbnailUrl",
-          "documentation": "<p> Thumbnail URL for the branch. </p>"
+          "documentation": "<p> The thumbnail URL for the branch of an Amplify app. </p>"
         },
         "basicAuthCredentials": {
           "shape": "BasicAuthCredentials",
-          "documentation": "<p> Basic Authorization credentials for a branch, part of an Amplify App. </p>"
+          "documentation": "<p> The basic authorization credentials for a branch of an Amplify app. </p>"
         },
         "buildSpec": {
           "shape": "BuildSpec",
-          "documentation": "<p> BuildSpec content for branch for Amplify App. </p>"
+          "documentation": "<p> The build specification (build spec) content for the branch of an Amplify app. </p>"
         },
         "ttl": {
           "shape": "TTL",
-          "documentation": "<p> The content TTL for the website in seconds. </p>"
+          "documentation": "<p> The content Time to Live (TTL) for the website in seconds. </p>"
         },
         "associatedResources": {
           "shape": "AssociatedResources",
-          "documentation": "<p> List of custom resources that are linked to this branch. </p>"
+          "documentation": "<p> A list of custom resources that are linked to this branch. </p>"
         },
         "enablePullRequestPreview": {
           "shape": "EnablePullRequestPreview",
-          "documentation": "<p> Enables Pull Request Preview for this branch. </p>"
+          "documentation": "<p> Enables pull request preview for the branch. </p>"
         },
         "pullRequestEnvironmentName": {
           "shape": "PullRequestEnvironmentName",
-          "documentation": "<p> The Amplify Environment name for the pull request. </p>"
+          "documentation": "<p> The Amplify environment name for the pull request. </p>"
         },
         "destinationBranch": {
           "shape": "BranchName",
@@ -1506,10 +1528,10 @@
         },
         "backendEnvironmentArn": {
           "shape": "BackendEnvironmentArn",
-          "documentation": "<p> ARN for a Backend Environment, part of an Amplify App. </p>"
+          "documentation": "<p> The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. </p>"
         }
       },
-      "documentation": "<p> Branch for an Amplify App, which maps to a 3rd party repository branch. </p>"
+      "documentation": "<p> The branch for an Amplify app, which maps to a third-party repository branch. </p>"
     },
     "BranchArn": {
       "type": "string",
@@ -1529,7 +1551,7 @@
     },
     "BuildSpec": {
       "type": "string",
-      "documentation": "<p> BuildSpec file for Amplify app build. </p>",
+      "documentation": "<p> The build specification (build spec) file for an Amplify app build. </p>",
       "max": 25000,
       "min": 1
     },
@@ -1564,74 +1586,78 @@
       "members": {
         "name": {
           "shape": "Name",
-          "documentation": "<p> Name for the Amplify App </p>"
+          "documentation": "<p> The name for the Amplify app. </p>"
         },
         "description": {
           "shape": "Description",
-          "documentation": "<p> Description for an Amplify App </p>"
+          "documentation": "<p> The description for an Amplify app. </p>"
         },
         "repository": {
           "shape": "Repository",
-          "documentation": "<p> Repository for an Amplify App </p>"
+          "documentation": "<p> The repository for an Amplify app. </p>"
         },
         "platform": {
           "shape": "Platform",
-          "documentation": "<p> Platform / framework for an Amplify App </p>"
+          "documentation": "<p> The platform or framework for an Amplify app. </p>"
         },
         "iamServiceRoleArn": {
           "shape": "ServiceRoleArn",
-          "documentation": "<p> AWS IAM service role for an Amplify App </p>"
+          "documentation": "<p> The AWS Identity and Access Management (IAM) service role for an Amplify app. </p>"
         },
         "oauthToken": {
           "shape": "OauthToken",
-          "documentation": "<p> OAuth token for 3rd party source control system for an Amplify App, used to create webhook and read-only deploy key. OAuth token is not stored. </p>"
+          "documentation": "<p> The OAuth token for a third-party source control system for an Amplify app. The OAuth token is used to create a webhook and a read-only deploy key. The OAuth token is not stored. </p>"
         },
         "accessToken": {
           "shape": "AccessToken",
-          "documentation": "<p> Personal Access token for 3rd party source control system for an Amplify App, used to create webhook and read-only deploy key. Token is not stored. </p>"
+          "documentation": "<p> The personal access token for a third-party source control system for an Amplify app. The personal access token is used to create a webhook and a read-only deploy key. The token is not stored. </p>"
         },
         "environmentVariables": {
           "shape": "EnvironmentVariables",
-          "documentation": "<p> Environment variables map for an Amplify App. </p>"
+          "documentation": "<p> The environment variables map for an Amplify app. </p>"
         },
         "enableBranchAutoBuild": {
           "shape": "EnableBranchAutoBuild",
-          "documentation": "<p> Enable the auto building of branches for an Amplify App. </p>"
+          "documentation": "<p> Enables the auto building of branches for an Amplify app. </p>"
+        },
+        "enableBranchAutoDeletion": {
+          "shape": "EnableBranchAutoDeletion",
+          "documentation": "<p> Automatically disconnects a branch in the Amplify Console when you delete a branch from your Git repository. </p>"
         },
         "enableBasicAuth": {
           "shape": "EnableBasicAuth",
-          "documentation": "<p> Enable Basic Authorization for an Amplify App, this will apply to all branches part of this App. </p>"
+          "documentation": "<p> Enables basic authorization for an Amplify app. This will apply to all branches that are part of this app. </p>"
         },
         "basicAuthCredentials": {
           "shape": "BasicAuthCredentials",
-          "documentation": "<p> Credentials for Basic Authorization for an Amplify App. </p>"
+          "documentation": "<p> The credentials for basic authorization for an Amplify app. </p>"
         },
         "customRules": {
           "shape": "CustomRules",
-          "documentation": "<p> Custom rewrite / redirect rules for an Amplify App. </p>"
+          "documentation": "<p> The custom rewrite and redirect rules for an Amplify app. </p>"
         },
         "tags": {
           "shape": "TagMap",
-          "documentation": "<p> Tag for an Amplify App </p>"
+          "documentation": "<p> The tag for an Amplify app. </p>"
         },
         "buildSpec": {
           "shape": "BuildSpec",
-          "documentation": "<p> BuildSpec for an Amplify App </p>"
+          "documentation": "<p> The build specification (build spec) for an Amplify app. </p>"
         },
         "enableAutoBranchCreation": {
           "shape": "EnableAutoBranchCreation",
-          "documentation": "<p> Enables automated branch creation for the Amplify App. </p>"
+          "documentation": "<p> Enables automated branch creation for the Amplify app. </p>"
         },
         "autoBranchCreationPatterns": {
           "shape": "AutoBranchCreationPatterns",
-          "documentation": "<p> Automated branch creation glob patterns for the Amplify App. </p>"
+          "documentation": "<p> The automated branch creation glob patterns for the Amplify app. </p>"
         },
         "autoBranchCreationConfig": {
           "shape": "AutoBranchCreationConfig",
-          "documentation": "<p> Automated branch creation config for the Amplify App. </p>"
+          "documentation": "<p> The automated branch creation configuration for the Amplify app. </p>"
         }
       },
-      "documentation": "<p> Request structure used to create Apps in Amplify. </p>"
+      "documentation": "<p> The request structure used to create apps in Amplify. </p>"
     },
     "CreateAppResult": {
       "type": "structure",
@@ -1653,24 +1679,24 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "documentation": "<p> The unique ID for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         },
         "environmentName": {
           "shape": "EnvironmentName",
-          "documentation": "<p> Name for the backend environment. </p>"
+          "documentation": "<p> The name for the backend environment. </p>"
         },
         "stackName": {
           "shape": "StackName",
-          "documentation": "<p> CloudFormation stack name of backend environment. </p>"
+          "documentation": "<p> The AWS CloudFormation stack name of a backend environment. </p>"
         },
         "deploymentArtifacts": {
           "shape": "DeploymentArtifacts",
-          "documentation": "<p> Name of deployment artifacts. </p>"
+          "documentation": "<p> The name of deployment artifacts. </p>"
         }
       },
-      "documentation": "<p> Request structure for a backend environment create request. </p>"
+      "documentation": "<p> The request structure for the backend environment create request. </p>"
     },
     "CreateBackendEnvironmentResult": {
       "type": "structure",
@@ -1680,10 +1706,10 @@
       "members": {
         "backendEnvironment": {
           "shape": "BackendEnvironment",
-          "documentation": "<p> Backend environment structure for an amplify App. </p>"
+          "documentation": "<p> Describes the backend environment for an Amplify app. </p>"
         }
       },
-      "documentation": "<p> Result structure for create backend environment. </p>"
+      "documentation": "<p> The result structure for the create backend environment request. </p>"
     },
     "CreateBranchRequest": {
       "type": "structure",
@@ -1694,25 +1720,25 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "documentation": "<p> The unique ID for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         },
         "branchName": {
           "shape": "BranchName",
-          "documentation": "<p> Name for the branch. </p>"
+          "documentation": "<p> The name for the branch. </p>"
         },
         "description": {
           "shape": "Description",
-          "documentation": "<p> Description for the branch. </p>"
+          "documentation": "<p> The description for the branch. </p>"
         },
         "stage": {
           "shape": "Stage",
-          "documentation": "<p> Stage for the branch. </p>"
+          "documentation": "<p> Describes the current stage for the branch. </p>"
         },
         "framework": {
           "shape": "Framework",
-          "documentation": "<p> Framework for the branch. </p>"
+          "documentation": "<p> The framework for the branch. </p>"
         },
         "enableNotification": {
           "shape": "EnableNotification",
@@ -1724,46 +1750,46 @@
         },
         "environmentVariables": {
           "shape": "EnvironmentVariables",
-          "documentation": "<p> Environment Variables for the branch. </p>"
+          "documentation": "<p> The environment variables for the branch. </p>"
         },
         "basicAuthCredentials": {
           "shape": "BasicAuthCredentials",
-          "documentation": "<p> Basic Authorization credentials for the branch. </p>"
+          "documentation": "<p> The basic authorization credentials for the branch. </p>"
         },
         "enableBasicAuth": {
           "shape": "EnableBasicAuth",
-          "documentation": "<p> Enables Basic Auth for the branch. </p>"
+          "documentation": "<p> Enables basic authorization for the branch. </p>"
         },
         "tags": {
           "shape": "TagMap",
-          "documentation": "<p> Tag for the branch. </p>"
+          "documentation": "<p> The tag for the branch. </p>"
         },
         "buildSpec": {
           "shape": "BuildSpec",
-          "documentation": "<p> BuildSpec for the branch. </p>"
+          "documentation": "<p> The build specification (build spec) for the branch. </p>"
         },
         "ttl": {
           "shape": "TTL",
-          "documentation": "<p> The content TTL for the website in seconds. </p>"
+          "documentation": "<p> The content Time To Live (TTL) for the website in seconds. </p>"
         },
         "displayName": {
           "shape": "DisplayName",
-          "documentation": "<p> Display name for a branch, will use as the default domain prefix. </p>"
+          "documentation": "<p> The display name for a branch. This is used as the default domain prefix. </p>"
         },
         "enablePullRequestPreview": {
           "shape": "EnablePullRequestPreview",
-          "documentation": "<p> Enables Pull Request Preview for this branch. </p>"
+          "documentation": "<p> Enables pull request preview for this branch. </p>"
         },
         "pullRequestEnvironmentName": {
           "shape": "PullRequestEnvironmentName",
-          "documentation": "<p> The Amplify Environment name for the pull request. </p>"
+          "documentation": "<p> The Amplify environment name for the pull request. </p>"
         },
         "backendEnvironmentArn": {
           "shape": "BackendEnvironmentArn",
-          "documentation": "<p> ARN for a Backend Environment, part of an Amplify App. </p>"
+          "documentation": "<p> The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. </p>"
         }
       },
-      "documentation": "<p> Request structure for a branch create request. </p>"
+      "documentation": "<p> The request structure for the create branch request. </p>"
     },
     "CreateBranchResult": {
       "type": "structure",
@@ -1773,10 +1799,10 @@
       "members": {
         "branch": {
           "shape": "Branch",
-          "documentation": "<p> Branch structure for an Amplify App. </p>"
+          "documentation": "<p> Describes the branch for an Amplify app, which maps to a third-party repository branch. </p>"
         }
       },
-      "documentation": "<p> Result structure for create branch request. </p>"
+      "documentation": "<p> The result structure for create branch request. </p>"
     },
     "CreateDeploymentRequest": {
       "type": "structure",
@@ -1787,22 +1813,22 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "documentation": "<p> The unique ID for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         },
         "branchName": {
           "shape": "BranchName",
-          "documentation": "<p> Name for the branch, for the Job. </p>",
+          "documentation": "<p> The name for the branch, for the job. </p>",
           "location": "uri",
           "locationName": "branchName"
         },
         "fileMap": {
           "shape": "FileMap",
-          "documentation": "<p> Optional file map that contains file name as the key and file content md5 hash as the value. If this argument is provided, the service will generate different upload url per file. Otherwise, the service will only generate a single upload url for the zipped files. </p>"
+          "documentation": "<p> An optional file map that contains the file name as the key and the file content md5 hash as the value. If this argument is provided, the service will generate a unique upload URL per file. Otherwise, the service will only generate a single upload URL for the zipped files. </p>"
         }
       },
-      "documentation": "<p> Request structure for create a new deployment. </p>"
+      "documentation": "<p> The request structure for the create a new deployment request. </p>"
     },
     "CreateDeploymentResult": {
       "type": "structure",
@@ -1813,18 +1839,18 @@
       "members": {
         "jobId": {
           "shape": "JobId",
-          "documentation": "<p> The jobId for this deployment, will supply to start deployment api. </p>"
+          "documentation": "<p> The job ID for this deployment. will supply to start deployment api. </p>"
         },
         "fileUploadUrls": {
           "shape": "FileUploadUrls",
-          "documentation": "<p> When the fileMap argument is provided in the request, the fileUploadUrls will contain a map of file names to upload url. </p>"
+          "documentation": "<p> When the <code>fileMap</code> argument is provided in the request, <code>fileUploadUrls</code> will contain a map of file names to upload URLs. </p>"
         },
         "zipUploadUrl": {
           "shape": "UploadUrl",
-          "documentation": "<p> When the fileMap argument is NOT provided. This zipUploadUrl will be returned. </p>"
+          "documentation": "<p> When the <code>fileMap</code> argument is not provided in the request, this <code>zipUploadUrl</code> is returned. </p>"
         }
       },
-      "documentation": "<p> Result structure for create a new deployment. </p>"
+      "documentation": "<p> The result structure for the create a new deployment request. </p>"
     },
     "CreateDomainAssociationRequest": {
       "type": "structure",
@@ -1836,24 +1862,32 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "documentation": "<p> The unique ID for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         },
         "domainName": {
           "shape": "DomainName",
-          "documentation": "<p> Domain name for the Domain Association. </p>"
+          "documentation": "<p> The domain name for the domain association. </p>"
         },
         "enableAutoSubDomain": {
           "shape": "EnableAutoSubDomain",
-          "documentation": "<p> Enables automated creation of Subdomains for branches. (Currently not supported) </p>"
+          "documentation": "<p> Enables the automated creation of subdomains for branches. </p>"
         },
         "subDomainSettings": {
           "shape": "SubDomainSettings",
-          "documentation": "<p> Setting structure for the Subdomain. </p>"
+          "documentation": "<p> The setting for the subdomain. </p>"
+        },
+        "autoSubDomainCreationPatterns": {
+          "shape": "AutoSubDomainCreationPatterns",
+          "documentation": "<p> Sets the branch patterns for automatic subdomain creation. </p>"
+        },
+        "autoSubDomainIAMRole": {
+          "shape": "AutoSubDomainIAMRole",
+          "documentation": "<p> The required AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) for automatically creating subdomains. </p>"
         }
       },
-      "documentation": "<p> Request structure for create Domain Association request. </p>"
+      "documentation": "<p> The request structure for the create domain association request. </p>"
     },
     "CreateDomainAssociationResult": {
       "type": "structure",
@@ -1863,10 +1897,10 @@
       "members": {
         "domainAssociation": {
           "shape": "DomainAssociation",
-          "documentation": "<p> Domain Association structure. </p>"
+          "documentation": "<p> Describes the structure of a domain association, which associates a custom domain with an Amplify app. </p>"
         }
       },
-      "documentation": "<p> Result structure for the create Domain Association request. </p>"
+      "documentation": "<p> The result structure for the create domain association request. </p>"
     },
     "CreateTime": {
       "type": "timestamp"
@@ -1880,20 +1914,20 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "documentation": "<p> The unique ID for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         },
         "branchName": {
           "shape": "BranchName",
-          "documentation": "<p> Name for a branch, part of an Amplify App. </p>"
+          "documentation": "<p> The name for a branch that is part of an Amplify app. </p>"
         },
         "description": {
           "shape": "Description",
-          "documentation": "<p> Description for a webhook. </p>"
+          "documentation": "<p> The description for a webhook. </p>"
         }
       },
-      "documentation": "<p> Request structure for create webhook request. </p>"
+      "documentation": "<p> The request structure for the create webhook request. </p>"
     },
     "CreateWebhookResult": {
       "type": "structure",
@@ -1903,10 +1937,10 @@
       "members": {
         "webhook": {
           "shape": "Webhook",
-          "documentation": "<p> Webhook structure. </p>"
+          "documentation": "<p> Describes a webhook that connects repository events to an Amplify app. </p>"
         }
       },
-      "documentation": "<p> Result structure for the create webhook request. </p>"
+      "documentation": "<p> The result structure for the create webhook request. </p>"
     },
     "CustomDomain": {
       "type": "string",
@@ -1940,10 +1974,10 @@
         },
         "condition": {
           "shape": "Condition",
-          "documentation": "<p> The condition for a URL rewrite or redirect rule, e.g. country code. </p>"
+          "documentation": "<p> The condition for a URL rewrite or redirect rule, such as a country code. </p>"
         }
       },
-      "documentation": "<p> Custom rewrite / redirect rule. </p>"
+      "documentation": "<p> Describes a custom rewrite or redirect rule. </p>"
     },
     "CustomRules": {
       "type": "list",
@@ -1968,12 +2002,12 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "documentation": "<p> The unique ID for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         }
       },
-      "documentation": "<p> Request structure for an Amplify App delete request. </p>"
+      "documentation": "<p> Describes the request structure for the delete app request. </p>"
     },
     "DeleteAppResult": {
       "type": "structure",
@@ -1985,7 +2019,7 @@
           "shape": "App"
         }
       },
-      "documentation": "<p> Result structure for an Amplify App delete request. </p>"
+      "documentation": "<p> The result structure for the delete app request. </p>"
     },
     "DeleteBackendEnvironmentRequest": {
       "type": "structure",
@@ -1996,18 +2030,18 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id of an Amplify App. </p>",
+          "documentation": "<p> The unique ID of an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         },
         "environmentName": {
           "shape": "EnvironmentName",
-          "documentation": "<p> Name of a backend environment of an Amplify App. </p>",
+          "documentation": "<p> The name of a backend environment of an Amplify app. </p>",
           "location": "uri",
           "locationName": "environmentName"
         }
       },
-      "documentation": "<p> Request structure for delete backend environment request. </p>"
+      "documentation": "<p> The request structure for the delete backend environment request. </p>"
     },
     "DeleteBackendEnvironmentResult": {
       "type": "structure",
@@ -2017,10 +2051,10 @@
       "members": {
         "backendEnvironment": {
           "shape": "BackendEnvironment",
-          "documentation": "<p> Backend environment structure for an Amplify App. </p>"
+          "documentation": "<p> Describes the backend environment for an Amplify app. </p>"
         }
       },
-      "documentation": "<p> Result structure of a delete backend environment result. </p>"
+      "documentation": "<p> The result structure of the delete backend environment result. </p>"
     },
     "DeleteBranchRequest": {
       "type": "structure",
@@ -2031,18 +2065,18 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "documentation": "<p> The unique ID for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         },
         "branchName": {
           "shape": "BranchName",
-          "documentation": "<p> Name for the branch. </p>",
+          "documentation": "<p> The name for the branch. </p>",
           "location": "uri",
           "locationName": "branchName"
         }
       },
-      "documentation": "<p> Request structure for delete branch request. </p>"
+      "documentation": "<p> The request structure for the delete branch request. </p>"
     },
     "DeleteBranchResult": {
       "type": "structure",
@@ -2052,10 +2086,10 @@
       "members": {
         "branch": {
           "shape": "Branch",
-          "documentation": "<p> Branch structure for an Amplify App. </p>"
+          "documentation": "<p> The branch for an Amplify app, which maps to a third-party repository branch. </p>"
         }
       },
-      "documentation": "<p> Result structure for delete branch request. </p>"
+      "documentation": "<p> The result structure for the delete branch request. </p>"
     },
     "DeleteDomainAssociationRequest": {
       "type": "structure",
@@ -2066,18 +2100,18 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "documentation": "<p> The unique id for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         },
         "domainName": {
           "shape": "DomainName",
-          "documentation": "<p> Name of the domain. </p>",
+          "documentation": "<p> The name of the domain. </p>",
           "location": "uri",
           "locationName": "domainName"
         }
       },
-      "documentation": "<p> Request structure for the delete Domain Association request. </p>"
+      "documentation": "<p> The request structure for the delete domain association request. </p>"
     },
     "DeleteDomainAssociationResult": {
       "type": "structure",
@@ -2100,24 +2134,24 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "documentation": "<p> The unique ID for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         },
         "branchName": {
           "shape": "BranchName",
-          "documentation": "<p> Name for the branch, for the Job. </p>",
+          "documentation": "<p> The name for the branch, for the job. </p>",
           "location": "uri",
           "locationName": "branchName"
         },
         "jobId": {
           "shape": "JobId",
-          "documentation": "<p> Unique Id for the Job. </p>",
+          "documentation": "<p> The unique ID for the job. </p>",
           "location": "uri",
           "locationName": "jobId"
         }
       },
-      "documentation": "<p> Request structure for delete job request. </p>"
+      "documentation": "<p> The request structure for the delete job request. </p>"
     },
     "DeleteJobResult": {
       "type": "structure",
@@ -2129,7 +2163,7 @@
           "shape": "JobSummary"
         }
       },
-      "documentation": "<p> Result structure for the delete job request. </p>"
+      "documentation": "<p> The result structure for the delete job request. </p>"
     },
     "DeleteWebhookRequest": {
       "type": "structure",
@@ -2139,12 +2173,12 @@
       "members": {
         "webhookId": {
           "shape": "WebhookId",
-          "documentation": "<p> Unique Id for a webhook. </p>",
+          "documentation": "<p> The unique ID for a webhook. </p>",
           "location": "uri",
           "locationName": "webhookId"
         }
       },
-      "documentation": "<p> Request structure for the delete webhook request. </p>"
+      "documentation": "<p> The request structure for the delete webhook request. </p>"
     },
     "DeleteWebhookResult": {
       "type": "structure",
@@ -2154,10 +2188,10 @@
       "members": {
         "webhook": {
           "shape": "Webhook",
-          "documentation": "<p> Webhook structure. </p>"
+          "documentation": "<p> Describes a webhook that connects repository events to an Amplify app. </p>"
         }
       },
-      "documentation": "<p> Result structure for the delete webhook request. </p>"
+      "documentation": "<p> The result structure for the delete webhook request. </p>"
     },
     "DeploymentArtifacts": {
       "type": "string",
@@ -2185,34 +2219,42 @@
       "members": {
         "domainAssociationArn": {
           "shape": "DomainAssociationArn",
-          "documentation": "<p> ARN for the Domain Association. </p>"
+          "documentation": "<p> The Amazon Resource Name (ARN) for the domain association. </p>"
         },
         "domainName": {
           "shape": "DomainName",
-          "documentation": "<p> Name of the domain. </p>"
+          "documentation": "<p> The name of the domain. </p>"
         },
         "enableAutoSubDomain": {
           "shape": "EnableAutoSubDomain",
-          "documentation": "<p> Enables automated creation of Subdomains for branches. (Currently not supported) </p>"
+          "documentation": "<p> Enables the automated creation of subdomains for branches. </p>"
+        },
+        "autoSubDomainCreationPatterns": {
+          "shape": "AutoSubDomainCreationPatterns",
+          "documentation": "<p> Sets branch patterns for automatic subdomain creation. </p>"
+        },
+        "autoSubDomainIAMRole": {
+          "shape": "AutoSubDomainIAMRole",
+          "documentation": "<p> The required AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) for automatically creating subdomains. </p>"
         },
         "domainStatus": {
           "shape": "DomainStatus",
-          "documentation": "<p> Status fo the Domain Association. </p>"
+          "documentation": "<p> The current status of the domain association. </p>"
         },
         "statusReason": {
           "shape": "StatusReason",
-          "documentation": "<p> Reason for the current status of the Domain Association. </p>"
+          "documentation": "<p> The reason for the current status of the domain association. </p>"
         },
         "certificateVerificationDNSRecord": {
           "shape": "CertificateVerificationDNSRecord",
-          "documentation": "<p> DNS Record for certificate verification. </p>"
+          "documentation": "<p> The DNS record for certificate verification. </p>"
         },
         "subDomains": {
           "shape": "SubDomains",
-          "documentation": "<p> Subdomains for the Domain Association. </p>"
+          "documentation": "<p> The subdomains for the domain association. </p>"
         }
       },
-      "documentation": "<p> Structure for Domain Association, which associates a custom domain with an Amplify App. </p>"
+      "documentation": "<p> Describes a domain association that associates a custom domain with an Amplify app. </p>"
     },
     "DomainAssociationArn": {
       "type": "string",
@@ -2259,6 +2301,9 @@
       "type": "boolean"
     },
     "EnableBranchAutoBuild": {
+      "type": "boolean"
+    },
+    "EnableBranchAutoDeletion": {
       "type": "boolean"
     },
     "EnableNotification": {
@@ -2327,34 +2372,34 @@
       "members": {
         "startTime": {
           "shape": "StartTime",
-          "documentation": "<p> The time at which the logs should start, inclusive. </p>"
+          "documentation": "<p> The time at which the logs should start. The time range specified is inclusive of the start time. </p>"
         },
         "endTime": {
           "shape": "EndTime",
-          "documentation": "<p> The time at which the logs should end, inclusive. </p>"
+          "documentation": "<p> The time at which the logs should end. The time range specified is inclusive of the end time. </p>"
         },
         "domainName": {
           "shape": "DomainName",
-          "documentation": "<p> Name of the domain. </p>"
+          "documentation": "<p> The name of the domain. </p>"
         },
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "documentation": "<p> The unique ID for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         }
       },
-      "documentation": "<p> Request structure for the generate access logs request. </p>"
+      "documentation": "<p> The request structure for the generate access logs request. </p>"
     },
     "GenerateAccessLogsResult": {
       "type": "structure",
       "members": {
         "logUrl": {
           "shape": "LogUrl",
-          "documentation": "<p> Pre-signed URL for the requested access logs. </p>"
+          "documentation": "<p> The pre-signed URL for the requested access logs. </p>"
         }
       },
-      "documentation": "<p> Result structure for the generate access logs request. </p>"
+      "documentation": "<p> The result structure for the generate access logs request. </p>"
     },
     "GetAppRequest": {
       "type": "structure",
@@ -2364,12 +2409,12 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "documentation": "<p> The unique ID for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         }
       },
-      "documentation": "<p> Request structure for get App request. </p>"
+      "documentation": "<p> The request structure for the get app request. </p>"
     },
     "GetAppResult": {
       "type": "structure",
@@ -2390,12 +2435,12 @@
       "members": {
         "artifactId": {
           "shape": "ArtifactId",
-          "documentation": "<p> Unique Id for a artifact. </p>",
+          "documentation": "<p> The unique ID for an artifact. </p>",
           "location": "uri",
           "locationName": "artifactId"
         }
       },
-      "documentation": "<p> Request structure for the get artifact request. </p>"
+      "documentation": "<p> Returns the request structure for the get artifact request. </p>"
     },
     "GetArtifactUrlResult": {
       "type": "structure",
@@ -2406,14 +2451,14 @@
       "members": {
         "artifactId": {
           "shape": "ArtifactId",
-          "documentation": "<p> Unique Id for a artifact. </p>"
+          "documentation": "<p> The unique ID for an artifact. </p>"
         },
         "artifactUrl": {
           "shape": "ArtifactUrl",
-          "documentation": "<p> Presigned url for the artifact. </p>"
+          "documentation": "<p> The presigned URL for the artifact. </p>"
         }
       },
-      "documentation": "<p> Result structure for the get artifact request. </p>"
+      "documentation": "<p> Returns the result structure for the get artifact request. </p>"
     },
     "GetBackendEnvironmentRequest": {
       "type": "structure",
@@ -2424,18 +2469,18 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "documentation": "<p> The unique id for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         },
         "environmentName": {
           "shape": "EnvironmentName",
-          "documentation": "<p> Name for the backend environment. </p>",
+          "documentation": "<p> The name for the backend environment. </p>",
           "location": "uri",
           "locationName": "environmentName"
         }
       },
-      "documentation": "<p> Request structure for get backend environment request. </p>"
+      "documentation": "<p> The request structure for the get backend environment request. </p>"
     },
     "GetBackendEnvironmentResult": {
       "type": "structure",
@@ -2445,10 +2490,10 @@
       "members": {
         "backendEnvironment": {
           "shape": "BackendEnvironment",
-          "documentation": "<p> Backend environment structure for an an Amplify App. </p>"
+          "documentation": "<p> Describes the backend environment for an Amplify app. </p>"
         }
       },
-      "documentation": "<p> Result structure for get backend environment result. </p>"
+      "documentation": "<p> The result structure for the get backend environment result. </p>"
     },
     "GetBranchRequest": {
       "type": "structure",
@@ -2459,18 +2504,18 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "documentation": "<p> The unique ID for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         },
         "branchName": {
           "shape": "BranchName",
-          "documentation": "<p> Name for the branch. </p>",
+          "documentation": "<p> The name for the branch. </p>",
           "location": "uri",
           "locationName": "branchName"
         }
       },
-      "documentation": "<p> Request structure for get branch request. </p>"
+      "documentation": "<p> The request structure for the get branch request. </p>"
     },
     "GetBranchResult": {
       "type": "structure",
@@ -2492,18 +2537,18 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "documentation": "<p> The unique id for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         },
         "domainName": {
           "shape": "DomainName",
-          "documentation": "<p> Name of the domain. </p>",
+          "documentation": "<p> The name of the domain. </p>",
           "location": "uri",
           "locationName": "domainName"
         }
       },
-      "documentation": "<p> Request structure for the get Domain Association request. </p>"
+      "documentation": "<p> The request structure for the get domain association request. </p>"
     },
     "GetDomainAssociationResult": {
       "type": "structure",
@@ -2513,10 +2558,10 @@
       "members": {
         "domainAssociation": {
           "shape": "DomainAssociation",
-          "documentation": "<p> Domain Association structure. </p>"
+          "documentation": "<p> Describes the structure of a domain association, which associates a custom domain with an Amplify app. </p>"
         }
       },
-      "documentation": "<p> Result structure for the get Domain Association request. </p>"
+      "documentation": "<p> The result structure for the get domain association request. </p>"
     },
     "GetJobRequest": {
       "type": "structure",
@@ -2528,24 +2573,24 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "documentation": "<p> The unique ID for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         },
         "branchName": {
           "shape": "BranchName",
-          "documentation": "<p> Name for the branch, for the Job. </p>",
+          "documentation": "<p> The branch name for the job. </p>",
           "location": "uri",
           "locationName": "branchName"
         },
         "jobId": {
           "shape": "JobId",
-          "documentation": "<p> Unique Id for the Job. </p>",
+          "documentation": "<p> The unique ID for the job. </p>",
           "location": "uri",
           "locationName": "jobId"
         }
       },
-      "documentation": "<p> Request structure for get job request. </p>"
+      "documentation": "<p> The request structure for the get job request. </p>"
     },
     "GetJobResult": {
       "type": "structure",
@@ -2566,12 +2611,12 @@
       "members": {
         "webhookId": {
           "shape": "WebhookId",
-          "documentation": "<p> Unique Id for a webhook. </p>",
+          "documentation": "<p> The unique ID for a webhook. </p>",
           "location": "uri",
           "locationName": "webhookId"
         }
       },
-      "documentation": "<p> Request structure for the get webhook request. </p>"
+      "documentation": "<p> The request structure for the get webhook request. </p>"
     },
     "GetWebhookResult": {
       "type": "structure",
@@ -2581,10 +2626,10 @@
       "members": {
         "webhook": {
           "shape": "Webhook",
-          "documentation": "<p> Webhook structure. </p>"
+          "documentation": "<p> Describes the structure of a webhook. </p>"
         }
       },
-      "documentation": "<p> Result structure for the get webhook request. </p>"
+      "documentation": "<p> The result structure for the get webhook request. </p>"
     },
     "Job": {
       "type": "structure",
@@ -2595,14 +2640,14 @@
       "members": {
         "summary": {
           "shape": "JobSummary",
-          "documentation": "<p> Summary for an execution job for an Amplify App. </p>"
+          "documentation": "<p> Describes the summary for an execution job for an Amplify app. </p>"
         },
         "steps": {
           "shape": "Steps",
-          "documentation": "<p> Execution steps for an execution job, for an Amplify App. </p>"
+          "documentation": "<p> The execution steps for an execution job, for an Amplify app. </p>"
         }
       },
-      "documentation": "<p> Structure for an execution job for an Amplify App. </p>"
+      "documentation": "<p> Describes an execution job for an Amplify app. </p>"
     },
     "JobArn": {
       "type": "string",
@@ -2649,42 +2694,42 @@
       "members": {
         "jobArn": {
           "shape": "JobArn",
-          "documentation": "<p> Arn for the Job. </p>"
+          "documentation": "<p> The Amazon Resource Name (ARN) for the job. </p>"
         },
         "jobId": {
           "shape": "JobId",
-          "documentation": "<p> Unique Id for the Job. </p>"
+          "documentation": "<p> The unique ID for the job. </p>"
         },
         "commitId": {
           "shape": "CommitId",
-          "documentation": "<p> Commit Id from 3rd party repository provider for the Job. </p>"
+          "documentation": "<p> The commit ID from a third-party repository provider for the job. </p>"
         },
         "commitMessage": {
           "shape": "CommitMessage",
-          "documentation": "<p> Commit message from 3rd party repository provider for the Job. </p>"
+          "documentation": "<p> The commit message from a third-party repository provider for the job. </p>"
         },
         "commitTime": {
           "shape": "CommitTime",
-          "documentation": "<p> Commit date / time for the Job. </p>"
+          "documentation": "<p> The commit date and time for the job. </p>"
         },
         "startTime": {
           "shape": "StartTime",
-          "documentation": "<p> Start date / time for the Job. </p>"
+          "documentation": "<p> The start date and time for the job. </p>"
         },
         "status": {
           "shape": "JobStatus",
-          "documentation": "<p> Status for the Job. </p>"
+          "documentation": "<p> The current status for the job. </p>"
         },
         "endTime": {
           "shape": "EndTime",
-          "documentation": "<p> End date / time for the Job. </p>"
+          "documentation": "<p> The end date and time for the job. </p>"
         },
         "jobType": {
           "shape": "JobType",
-          "documentation": "<p> Type for the Job. \\n \"RELEASE\": Manually released from source by using StartJob API. \"RETRY\": Manually retried by using StartJob API. \"WEB_HOOK\": Automatically triggered by WebHooks. </p>"
+          "documentation": "<p> The type for the job. If the value is <code>RELEASE</code>, the job was manually released from its source by using the <code>StartJob</code> API. If the value is <code>RETRY</code>, the job was manually retried using the <code>StartJob</code> API. If the value is <code>WEB_HOOK</code>, the job was automatically triggered by webhooks. </p>"
         }
       },
-      "documentation": "<p> Structure for the summary of a Job. </p>"
+      "documentation": "<p> Describes the summary for an execution job for an Amplify app. </p>"
     },
     "JobType": {
       "type": "string",
@@ -2704,18 +2749,18 @@
       "members": {
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p> Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. </p>",
+          "documentation": "<p> A pagination token. If non-null, the pagination token is returned in a result. Pass its value in another request to retrieve more entries. </p>",
           "location": "querystring",
           "locationName": "nextToken"
         },
         "maxResults": {
           "shape": "MaxResults",
-          "documentation": "<p> Maximum number of records to list in a single response. </p>",
+          "documentation": "<p> The maximum number of records to list in a single response. </p>",
           "location": "querystring",
           "locationName": "maxResults"
         }
       },
-      "documentation": "<p> Request structure for an Amplify App list request. </p>"
+      "documentation": "<p> The request structure for the list apps request. </p>"
     },
     "ListAppsResult": {
       "type": "structure",
@@ -2725,14 +2770,14 @@
       "members": {
         "apps": {
           "shape": "Apps",
-          "documentation": "<p> List of Amplify Apps. </p>"
+          "documentation": "<p> A list of Amplify apps. </p>"
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p> Pagination token. Set to null to start listing Apps from start. If non-null pagination token is returned in a result, then pass its value in here to list more projects. </p>"
+          "documentation": "<p> A pagination token. Set to null to start listing apps from start. If non-null, the pagination token is returned in a result. Pass its value in here to list more projects. </p>"
         }
       },
-      "documentation": "<p> Result structure for an Amplify App list request. </p>"
+      "documentation": "<p> The result structure for an Amplify app list request. </p>"
     },
     "ListArtifactsRequest": {
       "type": "structure",
@@ -2744,36 +2789,36 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "documentation": "<p> The unique ID for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         },
         "branchName": {
           "shape": "BranchName",
-          "documentation": "<p> Name for a branch, part of an Amplify App. </p>",
+          "documentation": "<p> The name of a branch that is part of an Amplify app. </p>",
           "location": "uri",
           "locationName": "branchName"
         },
         "jobId": {
           "shape": "JobId",
-          "documentation": "<p> Unique Id for an Job. </p>",
+          "documentation": "<p> The unique ID for a job. </p>",
           "location": "uri",
           "locationName": "jobId"
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p> Pagination token. Set to null to start listing artifacts from start. If non-null pagination token is returned in a result, then pass its value in here to list more artifacts. </p>",
+          "documentation": "<p> A pagination token. Set to null to start listing artifacts from start. If a non-null pagination token is returned in a result, pass its value in here to list more artifacts. </p>",
           "location": "querystring",
           "locationName": "nextToken"
         },
         "maxResults": {
           "shape": "MaxResults",
-          "documentation": "<p> Maximum number of records to list in a single response. </p>",
+          "documentation": "<p> The maximum number of records to list in a single response. </p>",
           "location": "querystring",
           "locationName": "maxResults"
         }
       },
-      "documentation": "<p> Request structure for the list artifacts request. </p>"
+      "documentation": "<p> Describes the request structure for the list artifacts request. </p>"
     },
     "ListArtifactsResult": {
       "type": "structure",
@@ -2783,14 +2828,14 @@
       "members": {
         "artifacts": {
           "shape": "Artifacts",
-          "documentation": "<p> List of artifacts. </p>"
+          "documentation": "<p> A list of artifacts. </p>"
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p> Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. </p>"
+          "documentation": "<p> A pagination token. If a non-null pagination token is returned in a result, pass its value in another request to retrieve more entries. </p>"
         }
       },
-      "documentation": "<p> Result structure for the list artifacts request. </p>"
+      "documentation": "<p> The result structure for the list artifacts request. </p>"
     },
     "ListBackendEnvironmentsRequest": {
       "type": "structure",
@@ -2800,28 +2845,30 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an amplify App. </p>",
+          "documentation": "<p> The unique ID for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         },
         "environmentName": {
           "shape": "EnvironmentName",
-          "documentation": "<p> Name of the backend environment </p>"
+          "documentation": "<p> The name of the backend environment </p>",
+          "location": "querystring",
+          "locationName": "environmentName"
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p> Pagination token. Set to null to start listing backen environments from start. If a non-null pagination token is returned in a result, then pass its value in here to list more backend environments. </p>",
+          "documentation": "<p> A pagination token. Set to null to start listing backend environments from the start. If a non-null pagination token is returned in a result, pass its value in here to list more backend environments. </p>",
           "location": "querystring",
           "locationName": "nextToken"
         },
         "maxResults": {
           "shape": "MaxResults",
-          "documentation": "<p> Maximum number of records to list in a single response. </p>",
+          "documentation": "<p> The maximum number of records to list in a single response. </p>",
           "location": "querystring",
           "locationName": "maxResults"
         }
       },
-      "documentation": "<p> Request structure for list backend environments request. </p>"
+      "documentation": "<p> The request structure for the list backend environments request. </p>"
     },
     "ListBackendEnvironmentsResult": {
       "type": "structure",
@@ -2831,14 +2878,14 @@
       "members": {
         "backendEnvironments": {
           "shape": "BackendEnvironments",
-          "documentation": "<p> List of backend environments for an Amplify App. </p>"
+          "documentation": "<p> The list of backend environments for an Amplify app. </p>"
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p> Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. </p>"
+          "documentation": "<p> A pagination token. If a non-null pagination token is returned in a result, pass its value in another request to retrieve more entries. </p>"
         }
       },
-      "documentation": "<p> Result structure for list backend environments result. </p>"
+      "documentation": "<p> The result structure for the list backend environments result. </p>"
     },
     "ListBranchesRequest": {
       "type": "structure",
@@ -2848,24 +2895,24 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "documentation": "<p> The unique ID for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p> Pagination token. Set to null to start listing branches from start. If a non-null pagination token is returned in a result, then pass its value in here to list more branches. </p>",
+          "documentation": "<p> A pagination token. Set to null to start listing branches from the start. If a non-null pagination token is returned in a result, pass its value in here to list more branches. </p>",
           "location": "querystring",
           "locationName": "nextToken"
         },
         "maxResults": {
           "shape": "MaxResults",
-          "documentation": "<p> Maximum number of records to list in a single response. </p>",
+          "documentation": "<p> The maximum number of records to list in a single response. </p>",
           "location": "querystring",
           "locationName": "maxResults"
         }
       },
-      "documentation": "<p> Request structure for list branches request. </p>"
+      "documentation": "<p> The request structure for the list branches request. </p>"
     },
     "ListBranchesResult": {
       "type": "structure",
@@ -2875,14 +2922,14 @@
       "members": {
         "branches": {
           "shape": "Branches",
-          "documentation": "<p> List of branches for an Amplify App. </p>"
+          "documentation": "<p> A list of branches for an Amplify app. </p>"
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p> Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. </p>"
+          "documentation": "<p> A pagination token. If a non-null pagination token is returned in a result, pass its value in another request to retrieve more entries. </p>"
         }
       },
-      "documentation": "<p> Result structure for list branches request. </p>"
+      "documentation": "<p> The result structure for the list branches request. </p>"
     },
     "ListDomainAssociationsRequest": {
       "type": "structure",
@@ -2892,24 +2939,24 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "documentation": "<p> The unique ID for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p> Pagination token. Set to null to start listing Apps from start. If non-null pagination token is returned in a result, then pass its value in here to list more projects. </p>",
+          "documentation": "<p> A pagination token. Set to null to start listing apps from the start. If non-null, a pagination token is returned in a result. Pass its value in here to list more projects. </p>",
           "location": "querystring",
           "locationName": "nextToken"
         },
         "maxResults": {
           "shape": "MaxResults",
-          "documentation": "<p> Maximum number of records to list in a single response. </p>",
+          "documentation": "<p> The maximum number of records to list in a single response. </p>",
           "location": "querystring",
           "locationName": "maxResults"
         }
       },
-      "documentation": "<p> Request structure for the list Domain Associations request. </p>"
+      "documentation": "<p> The request structure for the list domain associations request. </p>"
     },
     "ListDomainAssociationsResult": {
       "type": "structure",
@@ -2919,14 +2966,14 @@
       "members": {
         "domainAssociations": {
           "shape": "DomainAssociations",
-          "documentation": "<p> List of Domain Associations. </p>"
+          "documentation": "<p> A list of domain associations. </p>"
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p> Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. </p>"
+          "documentation": "<p> A pagination token. If non-null, a pagination token is returned in a result. Pass its value in another request to retrieve more entries. </p>"
         }
       },
-      "documentation": "<p> Result structure for the list Domain Association request. </p>"
+      "documentation": "<p> The result structure for the list domain association request. </p>"
     },
     "ListJobsRequest": {
       "type": "structure",
@@ -2937,30 +2984,30 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "documentation": "<p> The unique ID for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         },
         "branchName": {
           "shape": "BranchName",
-          "documentation": "<p> Name for a branch. </p>",
+          "documentation": "<p> The name for a branch. </p>",
           "location": "uri",
           "locationName": "branchName"
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p> Pagination token. Set to null to start listing steps from start. If a non-null pagination token is returned in a result, then pass its value in here to list more steps. </p>",
+          "documentation": "<p> A pagination token. Set to null to start listing steps from the start. If a non-null pagination token is returned in a result, pass its value in here to list more steps. </p>",
           "location": "querystring",
           "locationName": "nextToken"
         },
         "maxResults": {
           "shape": "MaxResults",
-          "documentation": "<p> Maximum number of records to list in a single response. </p>",
+          "documentation": "<p> The maximum number of records to list in a single response. </p>",
           "location": "querystring",
           "locationName": "maxResults"
         }
       },
-      "documentation": "<p> Request structure for list job request. </p>"
+      "documentation": "<p> The request structure for the list jobs request. </p>"
     },
     "ListJobsResult": {
       "type": "structure",
@@ -2970,14 +3017,14 @@
       "members": {
         "jobSummaries": {
           "shape": "JobSummaries",
-          "documentation": "<p> Result structure for list job result request. </p>"
+          "documentation": "<p> The result structure for the list job result request. </p>"
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p> Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. </p>"
+          "documentation": "<p> A pagination token. If non-null the pagination token is returned in a result. Pass its value in another request to retrieve more entries. </p>"
         }
       },
-      "documentation": "<p> Maximum number of records to list in a single response. </p>"
+      "documentation": "<p> The maximum number of records to list in a single response. </p>"
     },
     "ListTagsForResourceRequest": {
       "type": "structure",
@@ -2987,22 +3034,22 @@
       "members": {
         "resourceArn": {
           "shape": "ResourceArn",
-          "documentation": "<p> Resource arn used to list tags. </p>",
+          "documentation": "<p> The Amazon Resource Name (ARN) to use to list tags. </p>",
           "location": "uri",
           "locationName": "resourceArn"
         }
       },
-      "documentation": "<p> Request structure used to list tags for resource. </p>"
+      "documentation": "<p> The request structure to use to list tags for a resource. </p>"
     },
     "ListTagsForResourceResponse": {
       "type": "structure",
       "members": {
         "tags": {
           "shape": "TagMap",
-          "documentation": "<p> Tags result for response. </p>"
+          "documentation": "<p> A list of tags for the specified The Amazon Resource Name (ARN). </p>"
         }
       },
-      "documentation": "<p> Response for list tags. </p>"
+      "documentation": "<p> The response for the list tags for resource request. </p>"
     },
     "ListWebhooksRequest": {
       "type": "structure",
@@ -3012,24 +3059,24 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "documentation": "<p> The unique ID for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p> Pagination token. Set to null to start listing webhooks from start. If non-null pagination token is returned in a result, then pass its value in here to list more webhooks. </p>",
+          "documentation": "<p> A pagination token. Set to null to start listing webhooks from the start. If non-null,the pagination token is returned in a result. Pass its value in here to list more webhooks. </p>",
           "location": "querystring",
           "locationName": "nextToken"
         },
         "maxResults": {
           "shape": "MaxResults",
-          "documentation": "<p> Maximum number of records to list in a single response. </p>",
+          "documentation": "<p> The maximum number of records to list in a single response. </p>",
           "location": "querystring",
           "locationName": "maxResults"
         }
       },
-      "documentation": "<p> Request structure for the list webhooks request. </p>"
+      "documentation": "<p> The request structure for the list webhooks request. </p>"
     },
     "ListWebhooksResult": {
       "type": "structure",
@@ -3039,14 +3086,14 @@
       "members": {
         "webhooks": {
           "shape": "Webhooks",
-          "documentation": "<p> List of webhooks. </p>"
+          "documentation": "<p> A list of webhooks. </p>"
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p> Pagination token. If non-null pagination token is returned in a result, then pass its value in another request to fetch more entries. </p>"
+          "documentation": "<p> A pagination token. If non-null, the pagination token is returned in a result. Pass its value in another request to retrieve more entries. </p>"
         }
       },
-      "documentation": "<p> Result structure for the list webhooks request. </p>"
+      "documentation": "<p> The result structure for the list webhooks request. </p>"
     },
     "LogUrl": {
       "type": "string",
@@ -3072,7 +3119,8 @@
     },
     "OauthToken": {
       "type": "string",
-      "max": 100
+      "max": 100,
+      "sensitive": true
     },
     "Platform": {
       "type": "string",
@@ -3085,22 +3133,22 @@
       "members": {
         "lastDeployTime": {
           "shape": "LastDeployTime",
-          "documentation": "<p> Last Deploy Time of Production Branch. </p>"
+          "documentation": "<p> The last deploy time of the production branch. </p>"
         },
         "status": {
           "shape": "Status",
-          "documentation": "<p> Status of Production Branch. </p>"
+          "documentation": "<p> The status of the production branch. </p>"
         },
         "thumbnailUrl": {
           "shape": "ThumbnailUrl",
-          "documentation": "<p> Thumbnail URL for Production Branch. </p>"
+          "documentation": "<p> The thumbnail URL for the production branch. </p>"
         },
         "branchName": {
           "shape": "BranchName",
-          "documentation": "<p> Branch Name for Production Branch. </p>"
+          "documentation": "<p> The branch name for the production branch. </p>"
         }
       },
-      "documentation": "<p> Structure with Production Branch information. </p>"
+      "documentation": "<p> Describes the information about a production branch for an Amplify app. </p>"
     },
     "PullRequestEnvironmentName": {
       "type": "string",
@@ -3161,26 +3209,26 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "documentation": "<p> The unique ID for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         },
         "branchName": {
           "shape": "BranchName",
-          "documentation": "<p> Name for the branch, for the Job. </p>",
+          "documentation": "<p> The name for the branch, for the job. </p>",
           "location": "uri",
           "locationName": "branchName"
         },
         "jobId": {
           "shape": "JobId",
-          "documentation": "<p> The job id for this deployment, generated by create deployment request. </p>"
+          "documentation": "<p> The job ID for this deployment, generated by the create deployment request. </p>"
         },
         "sourceUrl": {
           "shape": "SourceUrl",
-          "documentation": "<p> The sourceUrl for this deployment, used when calling start deployment without create deployment. SourceUrl can be any HTTP GET url that is public accessible and downloads a single zip. </p>"
+          "documentation": "<p> The source URL for this deployment, used when calling start deployment without create deployment. The source URL can be any HTTP GET URL that is publicly accessible and downloads a single .zip file. </p>"
         }
       },
-      "documentation": "<p> Request structure for start a deployment. </p>"
+      "documentation": "<p> The request structure for the start a deployment request. </p>"
     },
     "StartDeploymentResult": {
       "type": "structure",
@@ -3190,10 +3238,10 @@
       "members": {
         "jobSummary": {
           "shape": "JobSummary",
-          "documentation": "<p> Summary for the Job. </p>"
+          "documentation": "<p> The summary for the job. </p>"
         }
       },
-      "documentation": "<p> Result structure for start a deployment. </p>"
+      "documentation": "<p> The result structure for the start a deployment request. </p>"
     },
     "StartJobRequest": {
       "type": "structure",
@@ -3205,42 +3253,42 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "documentation": "<p> The unique ID for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         },
         "branchName": {
           "shape": "BranchName",
-          "documentation": "<p> Name for the branch, for the Job. </p>",
+          "documentation": "<p> The branch name for the job. </p>",
           "location": "uri",
           "locationName": "branchName"
         },
         "jobId": {
           "shape": "JobId",
-          "documentation": "<p> Unique Id for an existing job. Required for \"RETRY\" JobType. </p>"
+          "documentation": "<p> The unique ID for an existing job. This is required if the value of <code>jobType</code> is <code>RETRY</code>. </p>"
         },
         "jobType": {
           "shape": "JobType",
-          "documentation": "<p> Type for the Job. Available JobTypes are: \\n \"RELEASE\": Start a new job with the latest change from the specified branch. Only available for apps that have connected to a repository. \"RETRY\": Retry an existing job. JobId is required for this type of job. </p>"
+          "documentation": "<p> Describes the type for the job. The job type <code>RELEASE</code> starts a new job with the latest change from the specified branch. This value is available only for apps that are connected to a repository. The job type <code>RETRY</code> retries an existing job. If the job type value is <code>RETRY</code>, the <code>jobId</code> is also required. </p>"
         },
         "jobReason": {
           "shape": "JobReason",
-          "documentation": "<p> Descriptive reason for starting this job. </p>"
+          "documentation": "<p> A descriptive reason for starting this job. </p>"
         },
         "commitId": {
           "shape": "CommitId",
-          "documentation": "<p> Commit Id from 3rd party repository provider for the Job. </p>"
+          "documentation": "<p> The commit ID from a third-party repository provider for the job. </p>"
         },
         "commitMessage": {
           "shape": "CommitMessage",
-          "documentation": "<p> Commit message from 3rd party repository provider for the Job. </p>"
+          "documentation": "<p> The commit message from a third-party repository provider for the job. </p>"
         },
         "commitTime": {
           "shape": "CommitTime",
-          "documentation": "<p> Commit date / time for the Job. </p>"
+          "documentation": "<p> The commit date and time for the job. </p>"
         }
       },
-      "documentation": "<p> Request structure for Start job request. </p>"
+      "documentation": "<p> The request structure for the start job request. </p>"
     },
     "StartJobResult": {
       "type": "structure",
@@ -3250,10 +3298,10 @@
       "members": {
         "jobSummary": {
           "shape": "JobSummary",
-          "documentation": "<p> Summary for the Job. </p>"
+          "documentation": "<p> The summary for the job. </p>"
         }
       },
-      "documentation": "<p> Result structure for run job request. </p>"
+      "documentation": "<p> The result structure for the run job request. </p>"
     },
     "StartTime": {
       "type": "timestamp"
@@ -3278,50 +3326,50 @@
       "members": {
         "stepName": {
           "shape": "StepName",
-          "documentation": "<p> Name of the execution step. </p>"
+          "documentation": "<p> The name of the execution step. </p>"
         },
         "startTime": {
           "shape": "StartTime",
-          "documentation": "<p> Start date/ time of the execution step. </p>"
+          "documentation": "<p> The start date and time of the execution step. </p>"
         },
         "status": {
           "shape": "JobStatus",
-          "documentation": "<p> Status of the execution step. </p>"
+          "documentation": "<p> The status of the execution step. </p>"
         },
         "endTime": {
           "shape": "EndTime",
-          "documentation": "<p> End date/ time of the execution step. </p>"
+          "documentation": "<p> The end date and time of the execution step. </p>"
         },
         "logUrl": {
           "shape": "LogUrl",
-          "documentation": "<p> URL to the logs for the execution step. </p>"
+          "documentation": "<p> The URL to the logs for the execution step. </p>"
         },
         "artifactsUrl": {
           "shape": "ArtifactsUrl",
-          "documentation": "<p> URL to the artifact for the execution step. </p>"
+          "documentation": "<p> The URL to the artifact for the execution step. </p>"
         },
         "testArtifactsUrl": {
           "shape": "TestArtifactsUrl",
-          "documentation": "<p> URL to the test artifact for the execution step. </p>"
+          "documentation": "<p> The URL to the test artifact for the execution step. </p>"
         },
         "testConfigUrl": {
           "shape": "TestConfigUrl",
-          "documentation": "<p> URL to the test config for the execution step. </p>"
+          "documentation": "<p> The URL to the test configuration for the execution step. </p>"
         },
         "screenshots": {
           "shape": "Screenshots",
-          "documentation": "<p> List of screenshot URLs for the execution step, if relevant. </p>"
+          "documentation": "<p> The list of screenshot URLs for the execution step, if relevant. </p>"
         },
         "statusReason": {
           "shape": "StatusReason",
-          "documentation": "<p> The reason for current step status. </p>"
+          "documentation": "<p> The reason for the current step status. </p>"
         },
         "context": {
           "shape": "Context",
-          "documentation": "<p> The context for current step, will include build image if step is build. </p>"
+          "documentation": "<p> The context for the current step. Includes a build image if the step is build. </p>"
         }
       },
-      "documentation": "<p> Structure for an execution step for an execution job, for an Amplify App. </p>"
+      "documentation": "<p> Describes an execution step, for an execution job, for an Amplify app. </p>"
     },
     "StepName": {
       "type": "string",
@@ -3343,24 +3391,24 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "documentation": "<p> The unique ID for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         },
         "branchName": {
           "shape": "BranchName",
-          "documentation": "<p> Name for the branch, for the Job. </p>",
+          "documentation": "<p> The name for the branch, for the job. </p>",
           "location": "uri",
           "locationName": "branchName"
         },
         "jobId": {
           "shape": "JobId",
-          "documentation": "<p> Unique Id for the Job. </p>",
+          "documentation": "<p> The unique id for the job. </p>",
           "location": "uri",
           "locationName": "jobId"
         }
       },
-      "documentation": "<p> Request structure for stop job request. </p>"
+      "documentation": "<p> The request structure for the stop job request. </p>"
     },
     "StopJobResult": {
       "type": "structure",
@@ -3370,10 +3418,10 @@
       "members": {
         "jobSummary": {
           "shape": "JobSummary",
-          "documentation": "<p> Summary for the Job. </p>"
+          "documentation": "<p> The summary for the job. </p>"
         }
       },
-      "documentation": "<p> Result structure for the stop job request. </p>"
+      "documentation": "<p> The result structure for the stop job request. </p>"
     },
     "SubDomain": {
       "type": "structure",
@@ -3385,18 +3433,18 @@
       "members": {
         "subDomainSetting": {
           "shape": "SubDomainSetting",
-          "documentation": "<p> Setting structure for the Subdomain. </p>"
+          "documentation": "<p> Describes the settings for the subdomain. </p>"
         },
         "verified": {
           "shape": "Verified",
-          "documentation": "<p> Verified status of the Subdomain </p>"
+          "documentation": "<p> The verified status of the subdomain </p>"
         },
         "dnsRecord": {
           "shape": "DNSRecord",
-          "documentation": "<p> DNS record for the Subdomain. </p>"
+          "documentation": "<p> The DNS record for the subdomain. </p>"
         }
       },
-      "documentation": "<p> Subdomain for the Domain Association. </p>"
+      "documentation": "<p> The subdomain for the domain association. </p>"
     },
     "SubDomainSetting": {
       "type": "structure",
@@ -3407,14 +3455,14 @@
       "members": {
         "prefix": {
           "shape": "DomainPrefix",
-          "documentation": "<p> Prefix setting for the Subdomain. </p>"
+          "documentation": "<p> The prefix setting for the subdomain. </p>"
         },
         "branchName": {
           "shape": "BranchName",
-          "documentation": "<p> Branch name setting for the Subdomain. </p>"
+          "documentation": "<p> The branch name setting for the subdomain. </p>"
         }
       },
-      "documentation": "<p> Setting for the Subdomain. </p>"
+      "documentation": "<p> Describes the settings for the subdomain. </p>"
     },
     "SubDomainSettings": {
       "type": "list",
@@ -3432,7 +3480,7 @@
     },
     "TTL": {
       "type": "string",
-      "documentation": "<p> The content TTL for the website in seconds. </p>"
+      "documentation": "<p> The content Time to Live (TTL) for the website in seconds. </p>"
     },
     "TagKey": {
       "type": "string",
@@ -3468,21 +3516,21 @@
       "members": {
         "resourceArn": {
           "shape": "ResourceArn",
-          "documentation": "<p> Resource arn used to tag resource. </p>",
+          "documentation": "<p> The Amazon Resource Name (ARN) to use to tag a resource. </p>",
           "location": "uri",
           "locationName": "resourceArn"
         },
         "tags": {
           "shape": "TagMap",
-          "documentation": "<p> Tags used to tag resource. </p>"
+          "documentation": "<p> The tags used to tag the resource. </p>"
         }
       },
-      "documentation": "<p> Request structure used to tag resource. </p>"
+      "documentation": "<p> The request structure to tag a resource with a tag key and value. </p>"
     },
     "TagResourceResponse": {
       "type": "structure",
       "members": {},
-      "documentation": "<p> Response for tag resource. </p>"
+      "documentation": "<p> The response for the tag resource request. </p>"
     },
     "TagValue": {
       "type": "string",
@@ -3523,23 +3571,23 @@
       "members": {
         "resourceArn": {
           "shape": "ResourceArn",
-          "documentation": "<p> Resource arn used to untag resource. </p>",
+          "documentation": "<p> The Amazon Resource Name (ARN) to use to untag a resource. </p>",
           "location": "uri",
           "locationName": "resourceArn"
         },
         "tagKeys": {
           "shape": "TagKeyList",
-          "documentation": "<p> Tag keys used to untag resource. </p>",
+          "documentation": "<p> The tag keys to use to untag a resource. </p>",
           "location": "querystring",
           "locationName": "tagKeys"
         }
       },
-      "documentation": "<p> Request structure used to untag resource. </p>"
+      "documentation": "<p> The request structure for the untag resource request. </p>"
     },
     "UntagResourceResponse": {
       "type": "structure",
       "members": {},
-      "documentation": "<p> Response for untag resource. </p>"
+      "documentation": "<p> The response for the untag resource request. </p>"
     },
     "UpdateAppRequest": {
       "type": "structure",
@@ -3549,76 +3597,80 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "documentation": "<p> The unique ID for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         },
         "name": {
           "shape": "Name",
-          "documentation": "<p> Name for an Amplify App. </p>"
+          "documentation": "<p> The name for an Amplify app. </p>"
         },
         "description": {
           "shape": "Description",
-          "documentation": "<p> Description for an Amplify App. </p>"
+          "documentation": "<p> The description for an Amplify app. </p>"
         },
         "platform": {
           "shape": "Platform",
-          "documentation": "<p> Platform for an Amplify App. </p>"
+          "documentation": "<p> The platform for an Amplify app. </p>"
         },
         "iamServiceRoleArn": {
           "shape": "ServiceRoleArn",
-          "documentation": "<p> IAM service role for an Amplify App. </p>"
+          "documentation": "<p> The AWS Identity and Access Management (IAM) service role for an Amplify app. </p>"
         },
         "environmentVariables": {
           "shape": "EnvironmentVariables",
-          "documentation": "<p> Environment Variables for an Amplify App. </p>"
+          "documentation": "<p> The environment variables for an Amplify app. </p>"
         },
         "enableBranchAutoBuild": {
           "shape": "EnableAutoBuild",
-          "documentation": "<p> Enables branch auto-building for an Amplify App. </p>"
+          "documentation": "<p> Enables branch auto-building for an Amplify app. </p>"
+        },
+        "enableBranchAutoDeletion": {
+          "shape": "EnableBranchAutoDeletion",
+          "documentation": "<p> Automatically disconnects a branch in the Amplify Console when you delete a branch from your Git repository. </p>"
         },
         "enableBasicAuth": {
           "shape": "EnableBasicAuth",
-          "documentation": "<p> Enables Basic Authorization for an Amplify App. </p>"
+          "documentation": "<p> Enables basic authorization for an Amplify app. </p>"
         },
         "basicAuthCredentials": {
           "shape": "BasicAuthCredentials",
-          "documentation": "<p> Basic Authorization credentials for an Amplify App. </p>"
+          "documentation": "<p> The basic authorization credentials for an Amplify app. </p>"
         },
         "customRules": {
           "shape": "CustomRules",
-          "documentation": "<p> Custom redirect / rewrite rules for an Amplify App. </p>"
+          "documentation": "<p> The custom redirect and rewrite rules for an Amplify app. </p>"
         },
         "buildSpec": {
           "shape": "BuildSpec",
-          "documentation": "<p> BuildSpec for an Amplify App. </p>"
+          "documentation": "<p> The build specification (build spec) for an Amplify app. </p>"
         },
         "enableAutoBranchCreation": {
           "shape": "EnableAutoBranchCreation",
-          "documentation": "<p> Enables automated branch creation for the Amplify App. </p>"
+          "documentation": "<p> Enables automated branch creation for the Amplify app. </p>"
         },
         "autoBranchCreationPatterns": {
           "shape": "AutoBranchCreationPatterns",
-          "documentation": "<p> Automated branch creation glob patterns for the Amplify App. </p>"
+          "documentation": "<p> Describes the automated branch creation glob patterns for the Amplify app. </p>"
         },
         "autoBranchCreationConfig": {
           "shape": "AutoBranchCreationConfig",
-          "documentation": "<p> Automated branch creation branchConfig for the Amplify App. </p>"
+          "documentation": "<p> The automated branch creation configuration for the Amplify app. </p>"
         },
         "repository": {
           "shape": "Repository",
-          "documentation": "<p> Repository for an Amplify App </p>"
+          "documentation": "<p> The name of the repository for an Amplify app </p>"
         },
         "oauthToken": {
           "shape": "OauthToken",
-          "documentation": "<p> OAuth token for 3rd party source control system for an Amplify App, used to create webhook and read-only deploy key. OAuth token is not stored. </p>"
+          "documentation": "<p> The OAuth token for a third-party source control system for an Amplify app. The token is used to create a webhook and a read-only deploy key. The OAuth token is not stored. </p>"
         },
         "accessToken": {
           "shape": "AccessToken",
-          "documentation": "<p> Personal Access token for 3rd party source control system for an Amplify App, used to create webhook and read-only deploy key. Token is not stored. </p>"
+          "documentation": "<p> The personal access token for a third-party source control system for an Amplify app. The token is used to create webhook and a read-only deploy key. The token is not stored. </p>"
         }
       },
-      "documentation": "<p> Request structure for update App request. </p>"
+      "documentation": "<p> The request structure for the update app request. </p>"
     },
     "UpdateAppResult": {
       "type": "structure",
@@ -3628,10 +3680,10 @@
       "members": {
         "app": {
           "shape": "App",
-          "documentation": "<p> App structure for the updated App. </p>"
+          "documentation": "<p> Represents the updated Amplify app. </p>"
         }
       },
-      "documentation": "<p> Result structure for an Amplify App update request. </p>"
+      "documentation": "<p> The result structure for an Amplify app update request. </p>"
     },
     "UpdateBranchRequest": {
       "type": "structure",
@@ -3642,27 +3694,27 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "documentation": "<p> The unique ID for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         },
         "branchName": {
           "shape": "BranchName",
-          "documentation": "<p> Name for the branch. </p>",
+          "documentation": "<p> The name for the branch. </p>",
           "location": "uri",
           "locationName": "branchName"
         },
         "description": {
           "shape": "Description",
-          "documentation": "<p> Description for the branch. </p>"
+          "documentation": "<p> The description for the branch. </p>"
         },
         "framework": {
           "shape": "Framework",
-          "documentation": "<p> Framework for the branch. </p>"
+          "documentation": "<p> The framework for the branch. </p>"
         },
         "stage": {
           "shape": "Stage",
-          "documentation": "<p> Stage for the branch. </p>"
+          "documentation": "<p> Describes the current stage for the branch. </p>"
         },
         "enableNotification": {
           "shape": "EnableNotification",
@@ -3674,42 +3726,42 @@
         },
         "environmentVariables": {
           "shape": "EnvironmentVariables",
-          "documentation": "<p> Environment Variables for the branch. </p>"
+          "documentation": "<p> The environment variables for the branch. </p>"
         },
         "basicAuthCredentials": {
           "shape": "BasicAuthCredentials",
-          "documentation": "<p> Basic Authorization credentials for the branch. </p>"
+          "documentation": "<p> The basic authorization credentials for the branch. </p>"
         },
         "enableBasicAuth": {
           "shape": "EnableBasicAuth",
-          "documentation": "<p> Enables Basic Auth for the branch. </p>"
+          "documentation": "<p> Enables basic authorization for the branch. </p>"
         },
         "buildSpec": {
           "shape": "BuildSpec",
-          "documentation": "<p> BuildSpec for the branch. </p>"
+          "documentation": "<p> The build specification (build spec) for the branch. </p>"
         },
         "ttl": {
           "shape": "TTL",
-          "documentation": "<p> The content TTL for the website in seconds. </p>"
+          "documentation": "<p> The content Time to Live (TTL) for the website in seconds. </p>"
         },
         "displayName": {
           "shape": "DisplayName",
-          "documentation": "<p> Display name for a branch, will use as the default domain prefix. </p>"
+          "documentation": "<p> The display name for a branch. This is used as the default domain prefix. </p>"
         },
         "enablePullRequestPreview": {
           "shape": "EnablePullRequestPreview",
-          "documentation": "<p> Enables Pull Request Preview for this branch. </p>"
+          "documentation": "<p> Enables pull request preview for this branch. </p>"
         },
         "pullRequestEnvironmentName": {
           "shape": "PullRequestEnvironmentName",
-          "documentation": "<p> The Amplify Environment name for the pull request. </p>"
+          "documentation": "<p> The Amplify environment name for the pull request. </p>"
         },
         "backendEnvironmentArn": {
           "shape": "BackendEnvironmentArn",
-          "documentation": "<p> ARN for a Backend Environment, part of an Amplify App. </p>"
+          "documentation": "<p> The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. </p>"
         }
       },
-      "documentation": "<p> Request structure for update branch request. </p>"
+      "documentation": "<p> The request structure for the update branch request. </p>"
     },
     "UpdateBranchResult": {
       "type": "structure",
@@ -3719,10 +3771,10 @@
       "members": {
         "branch": {
           "shape": "Branch",
-          "documentation": "<p> Branch structure for an Amplify App. </p>"
+          "documentation": "<p> The branch for an Amplify app, which maps to a third-party repository branch. </p>"
         }
       },
-      "documentation": "<p> Result structure for update branch request. </p>"
+      "documentation": "<p> The result structure for the update branch request. </p>"
     },
     "UpdateDomainAssociationRequest": {
       "type": "structure",
@@ -3734,26 +3786,34 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p> Unique Id for an Amplify App. </p>",
+          "documentation": "<p> The unique ID for an Amplify app. </p>",
           "location": "uri",
           "locationName": "appId"
         },
         "domainName": {
           "shape": "DomainName",
-          "documentation": "<p> Name of the domain. </p>",
+          "documentation": "<p> The name of the domain. </p>",
           "location": "uri",
           "locationName": "domainName"
         },
         "enableAutoSubDomain": {
           "shape": "EnableAutoSubDomain",
-          "documentation": "<p> Enables automated creation of Subdomains for branches. (Currently not supported) </p>"
+          "documentation": "<p> Enables the automated creation of subdomains for branches. </p>"
         },
         "subDomainSettings": {
           "shape": "SubDomainSettings",
-          "documentation": "<p> Setting structure for the Subdomain. </p>"
+          "documentation": "<p> Describes the settings for the subdomain. </p>"
+        },
+        "autoSubDomainCreationPatterns": {
+          "shape": "AutoSubDomainCreationPatterns",
+          "documentation": "<p> Sets the branch patterns for automatic subdomain creation. </p>"
+        },
+        "autoSubDomainIAMRole": {
+          "shape": "AutoSubDomainIAMRole",
+          "documentation": "<p> The required AWS Identity and Access Management (IAM) service role for the Amazon Resource Name (ARN) for automatically creating subdomains. </p>"
         }
       },
-      "documentation": "<p> Request structure for update Domain Association request. </p>"
+      "documentation": "<p> The request structure for the update domain association request. </p>"
     },
     "UpdateDomainAssociationResult": {
       "type": "structure",
@@ -3763,10 +3823,10 @@
       "members": {
         "domainAssociation": {
           "shape": "DomainAssociation",
-          "documentation": "<p> Domain Association structure. </p>"
+          "documentation": "<p> Describes a domain association, which associates a custom domain with an Amplify app. </p>"
         }
       },
-      "documentation": "<p> Result structure for the update Domain Association request. </p>"
+      "documentation": "<p> The result structure for the update domain association request. </p>"
     },
     "UpdateTime": {
       "type": "timestamp"
@@ -3779,20 +3839,20 @@
       "members": {
         "webhookId": {
           "shape": "WebhookId",
-          "documentation": "<p> Unique Id for a webhook. </p>",
+          "documentation": "<p> The unique ID for a webhook. </p>",
           "location": "uri",
           "locationName": "webhookId"
         },
         "branchName": {
           "shape": "BranchName",
-          "documentation": "<p> Name for a branch, part of an Amplify App. </p>"
+          "documentation": "<p> The name for a branch that is part of an Amplify app. </p>"
         },
         "description": {
           "shape": "Description",
-          "documentation": "<p> Description for a webhook. </p>"
+          "documentation": "<p> The description for a webhook. </p>"
         }
       },
-      "documentation": "<p> Request structure for update webhook request. </p>"
+      "documentation": "<p> The request structure for the update webhook request. </p>"
     },
     "UpdateWebhookResult": {
       "type": "structure",
@@ -3802,10 +3862,10 @@
       "members": {
         "webhook": {
           "shape": "Webhook",
-          "documentation": "<p> Webhook structure. </p>"
+          "documentation": "<p> Describes a webhook that connects repository events to an Amplify app. </p>"
         }
       },
-      "documentation": "<p> Result structure for the update webhook request. </p>"
+      "documentation": "<p> The result structure for the update webhook request. </p>"
     },
     "UploadUrl": {
       "type": "string",
@@ -3828,34 +3888,34 @@
       "members": {
         "webhookArn": {
           "shape": "WebhookArn",
-          "documentation": "<p> ARN for the webhook. </p>"
+          "documentation": "<p> The Amazon Resource Name (ARN) for the webhook. </p>"
         },
         "webhookId": {
           "shape": "WebhookId",
-          "documentation": "<p> Id of the webhook. </p>"
+          "documentation": "<p> The ID of the webhook. </p>"
         },
         "webhookUrl": {
           "shape": "WebhookUrl",
-          "documentation": "<p> Url of the webhook. </p>"
+          "documentation": "<p> The URL of the webhook. </p>"
         },
         "branchName": {
           "shape": "BranchName",
-          "documentation": "<p> Name for a branch, part of an Amplify App. </p>"
+          "documentation": "<p> The name for a branch that is part of an Amplify app. </p>"
         },
         "description": {
           "shape": "Description",
-          "documentation": "<p> Description for a webhook. </p>"
+          "documentation": "<p> The description for a webhook. </p>"
         },
         "createTime": {
           "shape": "CreateTime",
-          "documentation": "<p> Create date / time for a webhook. </p>"
+          "documentation": "<p> The create date and time for a webhook. </p>"
         },
         "updateTime": {
           "shape": "UpdateTime",
-          "documentation": "<p> Update date / time for a webhook. </p>"
+          "documentation": "<p> Updates the date and time for a webhook. </p>"
         }
       },
-      "documentation": "<p> Structure for webhook, which associates a webhook with an Amplify App. </p>"
+      "documentation": "<p> Describes a webhook that connects repository events to an Amplify app. </p>"
     },
     "WebhookArn": {
       "type": "string",
@@ -3876,5 +3936,5 @@
       }
     }
   },
-  "documentation": "<p> Amplify is a fully managed continuous deployment and hosting service for modern web apps. </p>"
+  "documentation": "<p> Welcome to the AWS Amplify API documentation. This reference provides descriptions of the actions and data types for the Amplify API.</p> <p>Amplify enables developers to develop and deploy cloud-powered mobile and web apps. The Amplify Console provides a continuous delivery and hosting service for web applications. For more information, see the <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html\">Amplify Console User Guide</a>. The Amplify Framework is a comprehensive set of SDKs, libraries, tools, and documentation for client app development. For more information, see the <a href=\"https://aws-amplify.github.io/docs/\">Amplify Framework.</a> </p>"
 }

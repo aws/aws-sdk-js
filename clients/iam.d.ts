@@ -21,11 +21,11 @@ declare class IAM extends Service {
    */
   addClientIDToOpenIDConnectProvider(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds the specified IAM role to the specified instance profile. An instance profile can contain only one role, and this limit cannot be increased. You can remove the existing role and then add a different role to an instance profile. You must then wait for the change to appear across all of AWS because of eventual consistency. To force the change, you must disassociate the instance profile and then associate the instance profile, or you can stop your instance and then restart it.  The caller of this API must be granted the PassRole permission on the IAM role by a permissions policy.  For more information about roles, go to Working with Roles. For more information about instance profiles, go to About Instance Profiles.
+   * Adds the specified IAM role to the specified instance profile. An instance profile can contain only one role. (The number and size of IAM resources in an AWS account are limited. For more information, see IAM and STS Quotas in the IAM User Guide.) You can remove the existing role and then add a different role to an instance profile. You must then wait for the change to appear across all of AWS because of eventual consistency. To force the change, you must disassociate the instance profile and then associate the instance profile, or you can stop your instance and then restart it.  The caller of this API must be granted the PassRole permission on the IAM role by a permissions policy.  For more information about roles, go to Working with Roles. For more information about instance profiles, go to About Instance Profiles.
    */
   addRoleToInstanceProfile(params: IAM.Types.AddRoleToInstanceProfileRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds the specified IAM role to the specified instance profile. An instance profile can contain only one role, and this limit cannot be increased. You can remove the existing role and then add a different role to an instance profile. You must then wait for the change to appear across all of AWS because of eventual consistency. To force the change, you must disassociate the instance profile and then associate the instance profile, or you can stop your instance and then restart it.  The caller of this API must be granted the PassRole permission on the IAM role by a permissions policy.  For more information about roles, go to Working with Roles. For more information about instance profiles, go to About Instance Profiles.
+   * Adds the specified IAM role to the specified instance profile. An instance profile can contain only one role. (The number and size of IAM resources in an AWS account are limited. For more information, see IAM and STS Quotas in the IAM User Guide.) You can remove the existing role and then add a different role to an instance profile. You must then wait for the change to appear across all of AWS because of eventual consistency. To force the change, you must disassociate the instance profile and then associate the instance profile, or you can stop your instance and then restart it.  The caller of this API must be granted the PassRole permission on the IAM role by a permissions policy.  For more information about roles, go to Working with Roles. For more information about instance profiles, go to About Instance Profiles.
    */
   addRoleToInstanceProfile(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -69,11 +69,11 @@ declare class IAM extends Service {
    */
   changePassword(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  Creates a new AWS secret access key and corresponding AWS access key ID for the specified user. The default status for new keys is Active. If you do not specify a user name, IAM determines the user name implicitly based on the AWS access key ID signing the request. This operation works for access keys under the AWS account. Consequently, you can use this operation to manage AWS account root user credentials. This is true even if the AWS account has no associated users.  For information about limits on the number of keys you can create, see Limitations on IAM Entities in the IAM User Guide.  To ensure the security of your AWS account, the secret access key is accessible only during key and user creation. You must save the key (for example, in a text file) if you want to be able to access it again. If a secret key is lost, you can delete the access keys for the associated user and then create new keys. 
+   *  Creates a new AWS secret access key and corresponding AWS access key ID for the specified user. The default status for new keys is Active. If you do not specify a user name, IAM determines the user name implicitly based on the AWS access key ID signing the request. This operation works for access keys under the AWS account. Consequently, you can use this operation to manage AWS account root user credentials. This is true even if the AWS account has no associated users. The number and size of IAM resources in an AWS account are limited. For more information, see IAM and STS Quotas in the IAM User Guide.  To ensure the security of your AWS account, the secret access key is accessible only during key and user creation. You must save the key (for example, in a text file) if you want to be able to access it again. If a secret key is lost, you can delete the access keys for the associated user and then create new keys. 
    */
   createAccessKey(params: IAM.Types.CreateAccessKeyRequest, callback?: (err: AWSError, data: IAM.Types.CreateAccessKeyResponse) => void): Request<IAM.Types.CreateAccessKeyResponse, AWSError>;
   /**
-   *  Creates a new AWS secret access key and corresponding AWS access key ID for the specified user. The default status for new keys is Active. If you do not specify a user name, IAM determines the user name implicitly based on the AWS access key ID signing the request. This operation works for access keys under the AWS account. Consequently, you can use this operation to manage AWS account root user credentials. This is true even if the AWS account has no associated users.  For information about limits on the number of keys you can create, see Limitations on IAM Entities in the IAM User Guide.  To ensure the security of your AWS account, the secret access key is accessible only during key and user creation. You must save the key (for example, in a text file) if you want to be able to access it again. If a secret key is lost, you can delete the access keys for the associated user and then create new keys. 
+   *  Creates a new AWS secret access key and corresponding AWS access key ID for the specified user. The default status for new keys is Active. If you do not specify a user name, IAM determines the user name implicitly based on the AWS access key ID signing the request. This operation works for access keys under the AWS account. Consequently, you can use this operation to manage AWS account root user credentials. This is true even if the AWS account has no associated users. The number and size of IAM resources in an AWS account are limited. For more information, see IAM and STS Quotas in the IAM User Guide.  To ensure the security of your AWS account, the secret access key is accessible only during key and user creation. You must save the key (for example, in a text file) if you want to be able to access it again. If a secret key is lost, you can delete the access keys for the associated user and then create new keys. 
    */
   createAccessKey(callback?: (err: AWSError, data: IAM.Types.CreateAccessKeyResponse) => void): Request<IAM.Types.CreateAccessKeyResponse, AWSError>;
   /**
@@ -85,19 +85,19 @@ declare class IAM extends Service {
    */
   createAccountAlias(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a new group.  For information about the number of groups you can create, see Limitations on IAM Entities in the IAM User Guide.
+   * Creates a new group. The number and size of IAM resources in an AWS account are limited. For more information, see IAM and STS Quotas in the IAM User Guide.
    */
   createGroup(params: IAM.Types.CreateGroupRequest, callback?: (err: AWSError, data: IAM.Types.CreateGroupResponse) => void): Request<IAM.Types.CreateGroupResponse, AWSError>;
   /**
-   * Creates a new group.  For information about the number of groups you can create, see Limitations on IAM Entities in the IAM User Guide.
+   * Creates a new group. The number and size of IAM resources in an AWS account are limited. For more information, see IAM and STS Quotas in the IAM User Guide.
    */
   createGroup(callback?: (err: AWSError, data: IAM.Types.CreateGroupResponse) => void): Request<IAM.Types.CreateGroupResponse, AWSError>;
   /**
-   *  Creates a new instance profile. For information about instance profiles, go to About Instance Profiles.  For information about the number of instance profiles you can create, see Limitations on IAM Entities in the IAM User Guide.
+   *  Creates a new instance profile. For information about instance profiles, go to About Instance Profiles. The number and size of IAM resources in an AWS account are limited. For more information, see IAM and STS Quotas in the IAM User Guide.
    */
   createInstanceProfile(params: IAM.Types.CreateInstanceProfileRequest, callback?: (err: AWSError, data: IAM.Types.CreateInstanceProfileResponse) => void): Request<IAM.Types.CreateInstanceProfileResponse, AWSError>;
   /**
-   *  Creates a new instance profile. For information about instance profiles, go to About Instance Profiles.  For information about the number of instance profiles you can create, see Limitations on IAM Entities in the IAM User Guide.
+   *  Creates a new instance profile. For information about instance profiles, go to About Instance Profiles. The number and size of IAM resources in an AWS account are limited. For more information, see IAM and STS Quotas in the IAM User Guide.
    */
   createInstanceProfile(callback?: (err: AWSError, data: IAM.Types.CreateInstanceProfileResponse) => void): Request<IAM.Types.CreateInstanceProfileResponse, AWSError>;
   /**
@@ -133,11 +133,11 @@ declare class IAM extends Service {
    */
   createPolicyVersion(callback?: (err: AWSError, data: IAM.Types.CreatePolicyVersionResponse) => void): Request<IAM.Types.CreatePolicyVersionResponse, AWSError>;
   /**
-   * Creates a new role for your AWS account. For more information about roles, go to IAM Roles. For information about limitations on role names and the number of roles you can create, go to Limitations on IAM Entities in the IAM User Guide.
+   * Creates a new role for your AWS account. For more information about roles, go to IAM Roles. The number and size of IAM resources in an AWS account are limited. For more information, see IAM and STS Quotas in the IAM User Guide.
    */
   createRole(params: IAM.Types.CreateRoleRequest, callback?: (err: AWSError, data: IAM.Types.CreateRoleResponse) => void): Request<IAM.Types.CreateRoleResponse, AWSError>;
   /**
-   * Creates a new role for your AWS account. For more information about roles, go to IAM Roles. For information about limitations on role names and the number of roles you can create, go to Limitations on IAM Entities in the IAM User Guide.
+   * Creates a new role for your AWS account. For more information about roles, go to IAM Roles. The number and size of IAM resources in an AWS account are limited. For more information, see IAM and STS Quotas in the IAM User Guide.
    */
   createRole(callback?: (err: AWSError, data: IAM.Types.CreateRoleResponse) => void): Request<IAM.Types.CreateRoleResponse, AWSError>;
   /**
@@ -165,19 +165,19 @@ declare class IAM extends Service {
    */
   createServiceSpecificCredential(callback?: (err: AWSError, data: IAM.Types.CreateServiceSpecificCredentialResponse) => void): Request<IAM.Types.CreateServiceSpecificCredentialResponse, AWSError>;
   /**
-   * Creates a new IAM user for your AWS account.  For information about limitations on the number of IAM users you can create, see Limitations on IAM Entities in the IAM User Guide.
+   * Creates a new IAM user for your AWS account. The number and size of IAM resources in an AWS account are limited. For more information, see IAM and STS Quotas in the IAM User Guide.
    */
   createUser(params: IAM.Types.CreateUserRequest, callback?: (err: AWSError, data: IAM.Types.CreateUserResponse) => void): Request<IAM.Types.CreateUserResponse, AWSError>;
   /**
-   * Creates a new IAM user for your AWS account.  For information about limitations on the number of IAM users you can create, see Limitations on IAM Entities in the IAM User Guide.
+   * Creates a new IAM user for your AWS account. The number and size of IAM resources in an AWS account are limited. For more information, see IAM and STS Quotas in the IAM User Guide.
    */
   createUser(callback?: (err: AWSError, data: IAM.Types.CreateUserResponse) => void): Request<IAM.Types.CreateUserResponse, AWSError>;
   /**
-   * Creates a new virtual MFA device for the AWS account. After creating the virtual MFA, use EnableMFADevice to attach the MFA device to an IAM user. For more information about creating and working with virtual MFA devices, go to Using a Virtual MFA Device in the IAM User Guide. For information about limits on the number of MFA devices you can create, see Limitations on Entities in the IAM User Guide.  The seed information contained in the QR code and the Base32 string should be treated like any other secret access information. In other words, protect the seed information as you would your AWS access keys or your passwords. After you provision your virtual device, you should ensure that the information is destroyed following secure procedures. 
+   * Creates a new virtual MFA device for the AWS account. After creating the virtual MFA, use EnableMFADevice to attach the MFA device to an IAM user. For more information about creating and working with virtual MFA devices, go to Using a Virtual MFA Device in the IAM User Guide. The number and size of IAM resources in an AWS account are limited. For more information, see IAM and STS Quotas in the IAM User Guide.  The seed information contained in the QR code and the Base32 string should be treated like any other secret access information. In other words, protect the seed information as you would your AWS access keys or your passwords. After you provision your virtual device, you should ensure that the information is destroyed following secure procedures. 
    */
   createVirtualMFADevice(params: IAM.Types.CreateVirtualMFADeviceRequest, callback?: (err: AWSError, data: IAM.Types.CreateVirtualMFADeviceResponse) => void): Request<IAM.Types.CreateVirtualMFADeviceResponse, AWSError>;
   /**
-   * Creates a new virtual MFA device for the AWS account. After creating the virtual MFA, use EnableMFADevice to attach the MFA device to an IAM user. For more information about creating and working with virtual MFA devices, go to Using a Virtual MFA Device in the IAM User Guide. For information about limits on the number of MFA devices you can create, see Limitations on Entities in the IAM User Guide.  The seed information contained in the QR code and the Base32 string should be treated like any other secret access information. In other words, protect the seed information as you would your AWS access keys or your passwords. After you provision your virtual device, you should ensure that the information is destroyed following secure procedures. 
+   * Creates a new virtual MFA device for the AWS account. After creating the virtual MFA, use EnableMFADevice to attach the MFA device to an IAM user. For more information about creating and working with virtual MFA devices, go to Using a Virtual MFA Device in the IAM User Guide. The number and size of IAM resources in an AWS account are limited. For more information, see IAM and STS Quotas in the IAM User Guide.  The seed information contained in the QR code and the Base32 string should be treated like any other secret access information. In other words, protect the seed information as you would your AWS access keys or your passwords. After you provision your virtual device, you should ensure that the information is destroyed following secure procedures. 
    */
   createVirtualMFADevice(callback?: (err: AWSError, data: IAM.Types.CreateVirtualMFADeviceResponse) => void): Request<IAM.Types.CreateVirtualMFADeviceResponse, AWSError>;
   /**
@@ -441,7 +441,7 @@ declare class IAM extends Service {
    */
   getAccountPasswordPolicy(callback?: (err: AWSError, data: IAM.Types.GetAccountPasswordPolicyResponse) => void): Request<IAM.Types.GetAccountPasswordPolicyResponse, AWSError>;
   /**
-   * Retrieves information about IAM entity usage and IAM quotas in the AWS account.  For information about limitations on IAM entities, see Limitations on IAM Entities in the IAM User Guide.
+   * Retrieves information about IAM entity usage and IAM quotas in the AWS account. The number and size of IAM resources in an AWS account are limited. For more information, see IAM and STS Quotas in the IAM User Guide.
    */
   getAccountSummary(callback?: (err: AWSError, data: IAM.Types.GetAccountSummaryResponse) => void): Request<IAM.Types.GetAccountSummaryResponse, AWSError>;
   /**
