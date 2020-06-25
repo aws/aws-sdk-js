@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.704.0-->
+<!--LATEST=2.705.0-->
 <!--ENTRYINSERT-->
+
+## 2.705.0
+* feature: EC2: Added support for tag-on-create for Host Reservations in Dedicated Hosts. You can now specify tags when you create a Host Reservation for a Dedicated Host. For more information about tagging, see AWS Tagging Strategies.
+* feature: Glue: This release adds new APIs to support column level statistics in AWS Glue Data Catalog
 
 ## 2.704.0
 * feature: Amplify: This release of AWS Amplify Console introduces support for automatically creating custom subdomains for branches based on user-defined glob patterns, as well as automatically cleaning up Amplify branches when their corresponding git branches are deleted.

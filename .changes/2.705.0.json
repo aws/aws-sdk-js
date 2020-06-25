@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Added support for tag-on-create for Host Reservations in Dedicated Hosts. You can now specify tags when you create a Host Reservation for a Dedicated Host. For more information about tagging, see AWS Tagging Strategies."
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "This release adds new APIs to support column level statistics in AWS Glue Data Catalog"
+    }
+]
