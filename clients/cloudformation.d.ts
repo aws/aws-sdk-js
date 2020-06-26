@@ -293,11 +293,11 @@ declare class CloudFormation extends Service {
    */
   listImports(callback?: (err: AWSError, data: CloudFormation.Types.ListImportsOutput) => void): Request<CloudFormation.Types.ListImportsOutput, AWSError>;
   /**
-   * Returns summary information about stack instances that are associated with the specified stack set. You can filter for stack instances that are associated with a specific AWS account name or Region.
+   * Returns summary information about stack instances that are associated with the specified stack set. You can filter for stack instances that are associated with a specific AWS account name or Region, or that have a specific status.
    */
   listStackInstances(params: CloudFormation.Types.ListStackInstancesInput, callback?: (err: AWSError, data: CloudFormation.Types.ListStackInstancesOutput) => void): Request<CloudFormation.Types.ListStackInstancesOutput, AWSError>;
   /**
-   * Returns summary information about stack instances that are associated with the specified stack set. You can filter for stack instances that are associated with a specific AWS account name or Region.
+   * Returns summary information about stack instances that are associated with the specified stack set. You can filter for stack instances that are associated with a specific AWS account name or Region, or that have a specific status.
    */
   listStackInstances(callback?: (err: AWSError, data: CloudFormation.Types.ListStackInstancesOutput) => void): Request<CloudFormation.Types.ListStackInstancesOutput, AWSError>;
   /**
@@ -1682,6 +1682,10 @@ declare namespace CloudFormation {
      */
     MaxResults?: MaxResults;
     /**
+     * The status that stack instances are filtered by.
+     */
+    Filters?: StackInstanceFilters;
+    /**
      * The name of the AWS account that you want to list stack instances for.
      */
     StackInstanceAccount?: Account;
@@ -2226,7 +2230,7 @@ declare namespace CloudFormation {
   }
   export interface ResourceToImport {
     /**
-     * The type of resource to import into your stack, such as AWS::S3::Bucket. 
+     * The type of resource to import into your stack, such as AWS::S3::Bucket. For a list of supported resource types, see Resources that support import operations in the AWS CloudFormation User Guide.
      */
     ResourceType: ResourceType;
     /**
@@ -2512,6 +2516,10 @@ declare namespace CloudFormation {
      */
     Status?: StackInstanceStatus;
     /**
+     * The detailed status of the stack instance.
+     */
+    StackInstanceStatus?: StackInstanceComprehensiveStatus;
+    /**
      * The explanation for the specific status code that is assigned to this stack instance.
      */
     StatusReason?: Reason;
@@ -2528,6 +2536,26 @@ declare namespace CloudFormation {
      */
     LastDriftCheckTimestamp?: Timestamp;
   }
+  export interface StackInstanceComprehensiveStatus {
+    /**
+     *    CANCELLED: The operation in the specified account and Region has been cancelled. This is either because a user has stopped the stack set operation, or because the failure tolerance of the stack set operation has been exceeded.    FAILED: The operation in the specified account and Region failed. If the stack set operation fails in enough accounts within a Region, the failure tolerance for the stack set operation as a whole might be exceeded.    INOPERABLE: A DeleteStackInstances operation has failed and left the stack in an unstable state. Stacks in this state are excluded from further UpdateStackSet operations. You might need to perform a DeleteStackInstances operation, with RetainStacks set to true, to delete the stack instance, and then delete the stack manually.    PENDING: The operation in the specified account and Region has yet to start.    RUNNING: The operation in the specified account and Region is currently in progress.    SUCCEEDED: The operation in the specified account and Region completed successfully.  
+     */
+    DetailedStatus?: StackInstanceDetailedStatus;
+  }
+  export type StackInstanceDetailedStatus = "PENDING"|"RUNNING"|"SUCCEEDED"|"FAILED"|"CANCELLED"|"INOPERABLE"|string;
+  export interface StackInstanceFilter {
+    /**
+     * The type of filter to apply.
+     */
+    Name?: StackInstanceFilterName;
+    /**
+     * The status to filter by.
+     */
+    Values?: StackInstanceFilterValues;
+  }
+  export type StackInstanceFilterName = "DETAILED_STATUS"|string;
+  export type StackInstanceFilterValues = string;
+  export type StackInstanceFilters = StackInstanceFilter[];
   export type StackInstanceStatus = "CURRENT"|"OUTDATED"|"INOPERABLE"|string;
   export type StackInstanceSummaries = StackInstanceSummary[];
   export interface StackInstanceSummary {
@@ -2555,6 +2583,10 @@ declare namespace CloudFormation {
      * The explanation for the specific status code assigned to this stack instance.
      */
     StatusReason?: Reason;
+    /**
+     * The detailed status of the stack instance.
+     */
+    StackInstanceStatus?: StackInstanceComprehensiveStatus;
     /**
      * [Service-managed permissions] The organization root ID or organizational unit (OU) IDs that you specified for DeploymentTargets.
      */

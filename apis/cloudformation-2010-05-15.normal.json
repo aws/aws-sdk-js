@@ -732,7 +732,7 @@
           "shape": "StackSetNotFoundException"
         }
       ],
-      "documentation": "<p>Returns summary information about stack instances that are associated with the specified stack set. You can filter for stack instances that are associated with a specific AWS account name or Region.</p>"
+      "documentation": "<p>Returns summary information about stack instances that are associated with the specified stack set. You can filter for stack instances that are associated with a specific AWS account name or Region, or that have a specific status.</p>"
     },
     "ListStackResources": {
       "name": "ListStackResources",
@@ -2900,6 +2900,10 @@
           "shape": "MaxResults",
           "documentation": "<p>The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a <code>NextToken</code> value that you can assign to the <code>NextToken</code> request parameter to get the next set of results.</p>"
         },
+        "Filters": {
+          "shape": "StackInstanceFilters",
+          "documentation": "<p>The status that stack instances are filtered by.</p>"
+        },
         "StackInstanceAccount": {
           "shape": "Account",
           "documentation": "<p>The name of the AWS account that you want to list stack instances for.</p>"
@@ -3862,7 +3866,7 @@
       "members": {
         "ResourceType": {
           "shape": "ResourceType",
-          "documentation": "<p>The type of resource to import into your stack, such as <code>AWS::S3::Bucket</code>. </p>"
+          "documentation": "<p>The type of resource to import into your stack, such as <code>AWS::S3::Bucket</code>. For a list of supported resource types, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html\">Resources that support import operations</a> in the AWS CloudFormation User Guide.</p>"
         },
         "LogicalResourceId": {
           "shape": "LogicalResourceId",
@@ -4303,6 +4307,10 @@
           "shape": "StackInstanceStatus",
           "documentation": "<p>The status of the stack instance, in terms of its synchronization with its associated stack set.</p> <ul> <li> <p> <code>INOPERABLE</code>: A <code>DeleteStackInstances</code> operation has failed and left the stack in an unstable state. Stacks in this state are excluded from further <code>UpdateStackSet</code> operations. You might need to perform a <code>DeleteStackInstances</code> operation, with <code>RetainStacks</code> set to <code>true</code>, to delete the stack instance, and then delete the stack manually.</p> </li> <li> <p> <code>OUTDATED</code>: The stack isn't currently up to date with the stack set because:</p> <ul> <li> <p>The associated stack failed during a <code>CreateStackSet</code> or <code>UpdateStackSet</code> operation. </p> </li> <li> <p>The stack was part of a <code>CreateStackSet</code> or <code>UpdateStackSet</code> operation that failed or was stopped before the stack was created or updated. </p> </li> </ul> </li> <li> <p> <code>CURRENT</code>: The stack is currently up to date with the stack set.</p> </li> </ul>"
         },
+        "StackInstanceStatus": {
+          "shape": "StackInstanceComprehensiveStatus",
+          "documentation": "<p>The detailed status of the stack instance.</p>"
+        },
         "StatusReason": {
           "shape": "Reason",
           "documentation": "<p>The explanation for the specific status code that is assigned to this stack instance.</p>"
@@ -4321,6 +4329,59 @@
         }
       },
       "documentation": "<p>An AWS CloudFormation stack, in a specific account and Region, that's part of a stack set operation. A stack instance is a reference to an attempted or actual stack in a given account within a given Region. A stack instance can exist without a stack—for example, if the stack couldn't be created for some reason. A stack instance is associated with only one stack set. Each stack instance contains the ID of its associated stack set, as well as the ID of the actual stack and the stack status.</p>"
+    },
+    "StackInstanceComprehensiveStatus": {
+      "type": "structure",
+      "members": {
+        "DetailedStatus": {
+          "shape": "StackInstanceDetailedStatus",
+          "documentation": "<ul> <li> <p> <code>CANCELLED</code>: The operation in the specified account and Region has been cancelled. This is either because a user has stopped the stack set operation, or because the failure tolerance of the stack set operation has been exceeded.</p> </li> <li> <p> <code>FAILED</code>: The operation in the specified account and Region failed. If the stack set operation fails in enough accounts within a Region, the failure tolerance for the stack set operation as a whole might be exceeded.</p> </li> <li> <p> <code>INOPERABLE</code>: A <code>DeleteStackInstances</code> operation has failed and left the stack in an unstable state. Stacks in this state are excluded from further <code>UpdateStackSet</code> operations. You might need to perform a <code>DeleteStackInstances</code> operation, with <code>RetainStacks</code> set to <code>true</code>, to delete the stack instance, and then delete the stack manually.</p> </li> <li> <p> <code>PENDING</code>: The operation in the specified account and Region has yet to start.</p> </li> <li> <p> <code>RUNNING</code>: The operation in the specified account and Region is currently in progress.</p> </li> <li> <p> <code>SUCCEEDED</code>: The operation in the specified account and Region completed successfully.</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>The detailed status of the stack instance.</p>"
+    },
+    "StackInstanceDetailedStatus": {
+      "type": "string",
+      "enum": [
+        "PENDING",
+        "RUNNING",
+        "SUCCEEDED",
+        "FAILED",
+        "CANCELLED",
+        "INOPERABLE"
+      ]
+    },
+    "StackInstanceFilter": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "StackInstanceFilterName",
+          "documentation": "<p>The type of filter to apply.</p>"
+        },
+        "Values": {
+          "shape": "StackInstanceFilterValues",
+          "documentation": "<p>The status to filter by.</p>"
+        }
+      },
+      "documentation": "<p>The status that stack instances are filtered by.</p>"
+    },
+    "StackInstanceFilterName": {
+      "type": "string",
+      "enum": [
+        "DETAILED_STATUS"
+      ]
+    },
+    "StackInstanceFilterValues": {
+      "type": "string",
+      "max": 10,
+      "min": 6
+    },
+    "StackInstanceFilters": {
+      "type": "list",
+      "member": {
+        "shape": "StackInstanceFilter"
+      },
+      "max": 1
     },
     "StackInstanceStatus": {
       "type": "string",
@@ -4362,6 +4423,10 @@
         "StatusReason": {
           "shape": "Reason",
           "documentation": "<p>The explanation for the specific status code assigned to this stack instance.</p>"
+        },
+        "StackInstanceStatus": {
+          "shape": "StackInstanceComprehensiveStatus",
+          "documentation": "<p>The detailed status of the stack instance.</p>"
         },
         "OrganizationalUnitId": {
           "shape": "OrganizationalUnitId",

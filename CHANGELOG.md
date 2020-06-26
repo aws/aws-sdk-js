@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.705.0-->
+<!--LATEST=2.706.0-->
 <!--ENTRYINSERT-->
+
+## 2.706.0
+* feature: CloudFormation: ListStackInstances and DescribeStackInstance now return a new `StackInstanceStatus` object that contains `DetailedStatus` values: a disambiguation of the more generic `Status` value. ListStackInstances output can now be filtered on `DetailedStatus` using the new `Filters` parameter.
+* feature: CognitoIdentityServiceProvider: Don't require Authorization for InitiateAuth and RespondToAuthChallenge.
+* feature: QuickSight: Added support for cross-region DataSource credentials copying.
+* feature: SageMaker: The new 'ModelClientConfig' parameter being added for CreateTransformJob and DescribeTransformJob api actions enable customers to configure model invocation related parameters such as timeout and retry.
 
 ## 2.705.0
 * feature: EC2: Added support for tag-on-create for Host Reservations in Dedicated Hosts. You can now specify tags when you create a Host Reservation for a Dedicated Host. For more information about tagging, see AWS Tagging Strategies.
