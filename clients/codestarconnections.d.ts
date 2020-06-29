@@ -20,6 +20,14 @@ declare class CodeStarconnections extends Service {
    */
   createConnection(callback?: (err: AWSError, data: CodeStarconnections.Types.CreateConnectionOutput) => void): Request<CodeStarconnections.Types.CreateConnectionOutput, AWSError>;
   /**
+   * Creates a resource that represents the infrastructure where a third-party provider is installed. The host is used when you create connections to an installed third-party provider type, such as GitHub Enterprise Server. You create one host for all connections to that provider.  A host created through the CLI or the SDK is in `PENDING` status by default. You can make its status `AVAILABLE` by setting up the host in the console. 
+   */
+  createHost(params: CodeStarconnections.Types.CreateHostInput, callback?: (err: AWSError, data: CodeStarconnections.Types.CreateHostOutput) => void): Request<CodeStarconnections.Types.CreateHostOutput, AWSError>;
+  /**
+   * Creates a resource that represents the infrastructure where a third-party provider is installed. The host is used when you create connections to an installed third-party provider type, such as GitHub Enterprise Server. You create one host for all connections to that provider.  A host created through the CLI or the SDK is in `PENDING` status by default. You can make its status `AVAILABLE` by setting up the host in the console. 
+   */
+  createHost(callback?: (err: AWSError, data: CodeStarconnections.Types.CreateHostOutput) => void): Request<CodeStarconnections.Types.CreateHostOutput, AWSError>;
+  /**
    * The connection to be deleted.
    */
   deleteConnection(params: CodeStarconnections.Types.DeleteConnectionInput, callback?: (err: AWSError, data: CodeStarconnections.Types.DeleteConnectionOutput) => void): Request<CodeStarconnections.Types.DeleteConnectionOutput, AWSError>;
@@ -27,6 +35,14 @@ declare class CodeStarconnections extends Service {
    * The connection to be deleted.
    */
   deleteConnection(callback?: (err: AWSError, data: CodeStarconnections.Types.DeleteConnectionOutput) => void): Request<CodeStarconnections.Types.DeleteConnectionOutput, AWSError>;
+  /**
+   * The host to be deleted. Before you delete a host, all connections associated to the host must be deleted.  A host cannot be deleted if it is in the VPC_CONFIG_INITIALIZING or VPC_CONFIG_DELETING state. 
+   */
+  deleteHost(params: CodeStarconnections.Types.DeleteHostInput, callback?: (err: AWSError, data: CodeStarconnections.Types.DeleteHostOutput) => void): Request<CodeStarconnections.Types.DeleteHostOutput, AWSError>;
+  /**
+   * The host to be deleted. Before you delete a host, all connections associated to the host must be deleted.  A host cannot be deleted if it is in the VPC_CONFIG_INITIALIZING or VPC_CONFIG_DELETING state. 
+   */
+  deleteHost(callback?: (err: AWSError, data: CodeStarconnections.Types.DeleteHostOutput) => void): Request<CodeStarconnections.Types.DeleteHostOutput, AWSError>;
   /**
    * Returns the connection ARN and details such as status, owner, and provider type.
    */
@@ -36,6 +52,14 @@ declare class CodeStarconnections extends Service {
    */
   getConnection(callback?: (err: AWSError, data: CodeStarconnections.Types.GetConnectionOutput) => void): Request<CodeStarconnections.Types.GetConnectionOutput, AWSError>;
   /**
+   * Returns the host ARN and details such as status, provider type, endpoint, and, if applicable, the VPC configuration.
+   */
+  getHost(params: CodeStarconnections.Types.GetHostInput, callback?: (err: AWSError, data: CodeStarconnections.Types.GetHostOutput) => void): Request<CodeStarconnections.Types.GetHostOutput, AWSError>;
+  /**
+   * Returns the host ARN and details such as status, provider type, endpoint, and, if applicable, the VPC configuration.
+   */
+  getHost(callback?: (err: AWSError, data: CodeStarconnections.Types.GetHostOutput) => void): Request<CodeStarconnections.Types.GetHostOutput, AWSError>;
+  /**
    * Lists the connections associated with your account.
    */
   listConnections(params: CodeStarconnections.Types.ListConnectionsInput, callback?: (err: AWSError, data: CodeStarconnections.Types.ListConnectionsOutput) => void): Request<CodeStarconnections.Types.ListConnectionsOutput, AWSError>;
@@ -43,6 +67,14 @@ declare class CodeStarconnections extends Service {
    * Lists the connections associated with your account.
    */
   listConnections(callback?: (err: AWSError, data: CodeStarconnections.Types.ListConnectionsOutput) => void): Request<CodeStarconnections.Types.ListConnectionsOutput, AWSError>;
+  /**
+   * Lists the hosts associated with your account.
+   */
+  listHosts(params: CodeStarconnections.Types.ListHostsInput, callback?: (err: AWSError, data: CodeStarconnections.Types.ListHostsOutput) => void): Request<CodeStarconnections.Types.ListHostsOutput, AWSError>;
+  /**
+   * Lists the hosts associated with your account.
+   */
+  listHosts(callback?: (err: AWSError, data: CodeStarconnections.Types.ListHostsOutput) => void): Request<CodeStarconnections.Types.ListHostsOutput, AWSError>;
   /**
    * Gets the set of key-value pairs (metadata) that are used to manage the resource.
    */
@@ -81,7 +113,7 @@ declare namespace CodeStarconnections {
      */
     ConnectionArn?: ConnectionArn;
     /**
-     * The name of the external provider where your third-party code repository is configured. Currently, the valid provider type is Bitbucket.
+     * The name of the external provider where your third-party code repository is configured. The valid provider type is Bitbucket.
      */
     ProviderType?: ProviderType;
     /**
@@ -92,6 +124,10 @@ declare namespace CodeStarconnections {
      * The current status of the connection. 
      */
     ConnectionStatus?: ConnectionStatus;
+    /**
+     * The Amazon Resource Name (ARN) of the host associated with the connection.
+     */
+    HostArn?: HostArn;
   }
   export type ConnectionArn = string;
   export type ConnectionList = Connection[];
@@ -99,9 +135,9 @@ declare namespace CodeStarconnections {
   export type ConnectionStatus = "PENDING"|"AVAILABLE"|"ERROR"|string;
   export interface CreateConnectionInput {
     /**
-     * The name of the external provider where your third-party code repository is configured. Currently, the valid provider type is Bitbucket.
+     * The name of the external provider where your third-party code repository is configured. The valid provider type is Bitbucket.
      */
-    ProviderType: ProviderType;
+    ProviderType?: ProviderType;
     /**
      * The name of the connection to be created. The name must be unique in the calling AWS account.
      */
@@ -110,6 +146,10 @@ declare namespace CodeStarconnections {
      * The key-value pair to use when tagging the resource.
      */
     Tags?: TagList;
+    /**
+     * The Amazon Resource Name (ARN) of the host associated with the connection to be created.
+     */
+    HostArn?: HostArn;
   }
   export interface CreateConnectionOutput {
     /**
@@ -121,6 +161,30 @@ declare namespace CodeStarconnections {
      */
     Tags?: TagList;
   }
+  export interface CreateHostInput {
+    /**
+     * The name of the host to be created. The name must be unique in the calling AWS account.
+     */
+    Name: HostName;
+    /**
+     * The name of the installed provider to be associated with your connection. The host resource represents the infrastructure where your provider type is installed. The valid provider type is GitHub Enterprise Server.
+     */
+    ProviderType: ProviderType;
+    /**
+     * The endpoint of the infrastructure to be represented by the host after it is created.
+     */
+    ProviderEndpoint: Url;
+    /**
+     * The VPC configuration to be provisioned for the host. A VPC must be configured and the infrastructure to be represented by the host must already be connected to the VPC.
+     */
+    VpcConfiguration?: VpcConfiguration;
+  }
+  export interface CreateHostOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the host to be created.
+     */
+    HostArn?: HostArn;
+  }
   export interface DeleteConnectionInput {
     /**
      * The Amazon Resource Name (ARN) of the connection to be deleted.  The ARN is never reused if the connection is deleted. 
@@ -128,6 +192,14 @@ declare namespace CodeStarconnections {
     ConnectionArn: ConnectionArn;
   }
   export interface DeleteConnectionOutput {
+  }
+  export interface DeleteHostInput {
+    /**
+     * The Amazon Resource Name (ARN) of the host to be deleted.
+     */
+    HostArn: HostArn;
+  }
+  export interface DeleteHostOutput {
   }
   export interface GetConnectionInput {
     /**
@@ -141,11 +213,78 @@ declare namespace CodeStarconnections {
      */
     Connection?: Connection;
   }
+  export interface GetHostInput {
+    /**
+     * The Amazon Resource Name (ARN) of the requested host.
+     */
+    HostArn: HostArn;
+  }
+  export interface GetHostOutput {
+    /**
+     * The name of the requested host.
+     */
+    Name?: HostName;
+    /**
+     * The status of the requested host.
+     */
+    Status?: HostStatus;
+    /**
+     * The provider type of the requested host, such as GitHub Enterprise Server.
+     */
+    ProviderType?: ProviderType;
+    /**
+     * The endpoint of the infrastructure represented by the requested host.
+     */
+    ProviderEndpoint?: Url;
+    /**
+     * The VPC configuration of the requested host.
+     */
+    VpcConfiguration?: VpcConfiguration;
+  }
+  export interface Host {
+    /**
+     * The name of the host.
+     */
+    Name?: HostName;
+    /**
+     * The Amazon Resource Name (ARN) of the host.
+     */
+    HostArn?: HostArn;
+    /**
+     * The name of the installed provider to be associated with your connection. The host resource represents the infrastructure where your provider type is installed. The valid provider type is GitHub Enterprise Server.
+     */
+    ProviderType?: ProviderType;
+    /**
+     * The endpoint of the infrastructure where your provider type is installed.
+     */
+    ProviderEndpoint?: Url;
+    /**
+     * The VPC configuration provisioned for the host.
+     */
+    VpcConfiguration?: VpcConfiguration;
+    /**
+     * The status of the host, such as PENDING, AVAILABLE, VPC_CONFIG_DELETING, VPC_CONFIG_INITIALIZING, and VPC_CONFIG_FAILED_INITIALIZATION.
+     */
+    Status?: HostStatus;
+    /**
+     * The status description for the host.
+     */
+    StatusMessage?: HostStatusMessage;
+  }
+  export type HostArn = string;
+  export type HostList = Host[];
+  export type HostName = string;
+  export type HostStatus = string;
+  export type HostStatusMessage = string;
   export interface ListConnectionsInput {
     /**
      * Filters the list of connections to those associated with a specified provider, such as Bitbucket.
      */
     ProviderTypeFilter?: ProviderType;
+    /**
+     * Filters the list of connections to those associated with a specified host.
+     */
+    HostArnFilter?: HostArn;
     /**
      * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned nextToken value.
      */
@@ -165,6 +304,26 @@ declare namespace CodeStarconnections {
      */
     NextToken?: NextToken;
   }
+  export interface ListHostsInput {
+    /**
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token that was returned from the previous ListHosts call, which can be used to return the next set of hosts in the list.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListHostsOutput {
+    /**
+     * A list of hosts and the details for each host, such as status, endpoint, and provider type.
+     */
+    Hosts?: HostList;
+    /**
+     * A token that can be used in the next ListHosts call. To view all items in the list, continue to call this operation with each subsequent token until no more nextToken values are returned.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListTagsForResourceInput {
     /**
      * The Amazon Resource Name (ARN) of the resource for which you want to get information about tags, if any.
@@ -179,7 +338,11 @@ declare namespace CodeStarconnections {
   }
   export type MaxResults = number;
   export type NextToken = string;
-  export type ProviderType = "Bitbucket"|string;
+  export type ProviderType = "Bitbucket"|"GitHubEnterpriseServer"|string;
+  export type SecurityGroupId = string;
+  export type SecurityGroupIds = SecurityGroupId[];
+  export type SubnetId = string;
+  export type SubnetIds = SubnetId[];
   export interface Tag {
     /**
      * The tag's key.
@@ -206,6 +369,7 @@ declare namespace CodeStarconnections {
   export interface TagResourceOutput {
   }
   export type TagValue = string;
+  export type TlsCertificate = string;
   export interface UntagResourceInput {
     /**
      * The Amazon Resource Name (ARN) of the resource to remove tags from.
@@ -218,6 +382,26 @@ declare namespace CodeStarconnections {
   }
   export interface UntagResourceOutput {
   }
+  export type Url = string;
+  export interface VpcConfiguration {
+    /**
+     * The ID of the Amazon VPC connected to the infrastructure where your provider type is installed.
+     */
+    VpcId: VpcId;
+    /**
+     * The ID of the subnet or subnets associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
+     */
+    SubnetIds: SubnetIds;
+    /**
+     * The ID of the security group or security groups associated with the Amazon VPC connected to the infrastructure where your provider type is installed.
+     */
+    SecurityGroupIds: SecurityGroupIds;
+    /**
+     * The value of the Transport Layer Security (TLS) certificate associated with the infrastructure where your provider type is installed.
+     */
+    TlsCertificate?: TlsCertificate;
+  }
+  export type VpcId = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

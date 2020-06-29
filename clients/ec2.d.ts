@@ -493,6 +493,14 @@ declare class EC2 extends Service {
    */
   createLocalGatewayRouteTableVpcAssociation(callback?: (err: AWSError, data: EC2.Types.CreateLocalGatewayRouteTableVpcAssociationResult) => void): Request<EC2.Types.CreateLocalGatewayRouteTableVpcAssociationResult, AWSError>;
   /**
+   * Creates a managed prefix list. You can specify one or more entries for the prefix list. Each entry consists of a CIDR block and an optional description. You must specify the maximum number of entries for the prefix list. The maximum number of entries cannot be changed later.
+   */
+  createManagedPrefixList(params: EC2.Types.CreateManagedPrefixListRequest, callback?: (err: AWSError, data: EC2.Types.CreateManagedPrefixListResult) => void): Request<EC2.Types.CreateManagedPrefixListResult, AWSError>;
+  /**
+   * Creates a managed prefix list. You can specify one or more entries for the prefix list. Each entry consists of a CIDR block and an optional description. You must specify the maximum number of entries for the prefix list. The maximum number of entries cannot be changed later.
+   */
+  createManagedPrefixList(callback?: (err: AWSError, data: EC2.Types.CreateManagedPrefixListResult) => void): Request<EC2.Types.CreateManagedPrefixListResult, AWSError>;
+  /**
    * Creates a NAT gateway in the specified public subnet. This action creates a network interface in the specified subnet with a private IP address from the IP address range of the subnet. Internet-bound traffic from a private subnet can be routed to the NAT gateway, therefore enabling instances in the private subnet to connect to the internet. For more information, see NAT Gateways in the Amazon Virtual Private Cloud User Guide.
    */
   createNatGateway(params: EC2.Types.CreateNatGatewayRequest, callback?: (err: AWSError, data: EC2.Types.CreateNatGatewayResult) => void): Request<EC2.Types.CreateNatGatewayResult, AWSError>;
@@ -597,11 +605,11 @@ declare class EC2 extends Service {
    */
   createSpotDatafeedSubscription(callback?: (err: AWSError, data: EC2.Types.CreateSpotDatafeedSubscriptionResult) => void): Request<EC2.Types.CreateSpotDatafeedSubscriptionResult, AWSError>;
   /**
-   * Creates a subnet in an existing VPC. When you create each subnet, you provide the VPC ID and IPv4 CIDR block for the subnet. After you create a subnet, you can't change its CIDR block. The size of the subnet's IPv4 CIDR block can be the same as a VPC's IPv4 CIDR block, or a subset of a VPC's IPv4 CIDR block. If you create more than one subnet in a VPC, the subnets' CIDR blocks must not overlap. The smallest IPv4 subnet (and VPC) you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). If you've associated an IPv6 CIDR block with your VPC, you can create a subnet with an IPv6 CIDR block that uses a /64 prefix length.   AWS reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for use.  If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. If you launch an instance in a VPC using an Amazon EBS-backed AMI, the IP address doesn't change if you stop and restart the instance (unlike a similar instance launched outside a VPC, which gets a new IP address when restarted). It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information about subnets, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide.
+   * Creates a subnet in a specified VPC. You must specify an IPv4 CIDR block for the subnet. After you create a subnet, you can't change its CIDR block. The allowed block size is between a /16 netmask (65,536 IP addresses) and /28 netmask (16 IP addresses). The CIDR block must not overlap with the CIDR block of an existing subnet in the VPC. If you've associated an IPv6 CIDR block with your VPC, you can create a subnet with an IPv6 CIDR block that uses a /64 prefix length.   AWS reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for use.  If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. When you stop an instance in a subnet, it retains its private IPv4 address. It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information about subnets, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide.
    */
   createSubnet(params: EC2.Types.CreateSubnetRequest, callback?: (err: AWSError, data: EC2.Types.CreateSubnetResult) => void): Request<EC2.Types.CreateSubnetResult, AWSError>;
   /**
-   * Creates a subnet in an existing VPC. When you create each subnet, you provide the VPC ID and IPv4 CIDR block for the subnet. After you create a subnet, you can't change its CIDR block. The size of the subnet's IPv4 CIDR block can be the same as a VPC's IPv4 CIDR block, or a subset of a VPC's IPv4 CIDR block. If you create more than one subnet in a VPC, the subnets' CIDR blocks must not overlap. The smallest IPv4 subnet (and VPC) you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). If you've associated an IPv6 CIDR block with your VPC, you can create a subnet with an IPv6 CIDR block that uses a /64 prefix length.   AWS reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for use.  If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. If you launch an instance in a VPC using an Amazon EBS-backed AMI, the IP address doesn't change if you stop and restart the instance (unlike a similar instance launched outside a VPC, which gets a new IP address when restarted). It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information about subnets, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide.
+   * Creates a subnet in a specified VPC. You must specify an IPv4 CIDR block for the subnet. After you create a subnet, you can't change its CIDR block. The allowed block size is between a /16 netmask (65,536 IP addresses) and /28 netmask (16 IP addresses). The CIDR block must not overlap with the CIDR block of an existing subnet in the VPC. If you've associated an IPv6 CIDR block with your VPC, you can create a subnet with an IPv6 CIDR block that uses a /64 prefix length.   AWS reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for use.  If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. When you stop an instance in a subnet, it retains its private IPv4 address. It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information about subnets, see Your VPC and Subnets in the Amazon Virtual Private Cloud User Guide.
    */
   createSubnet(callback?: (err: AWSError, data: EC2.Types.CreateSubnetResult) => void): Request<EC2.Types.CreateSubnetResult, AWSError>;
   /**
@@ -876,6 +884,14 @@ declare class EC2 extends Service {
    * Deletes the specified association between a VPC and local gateway route table.
    */
   deleteLocalGatewayRouteTableVpcAssociation(callback?: (err: AWSError, data: EC2.Types.DeleteLocalGatewayRouteTableVpcAssociationResult) => void): Request<EC2.Types.DeleteLocalGatewayRouteTableVpcAssociationResult, AWSError>;
+  /**
+   * Deletes the specified managed prefix list. You must first remove all references to the prefix list in your resources.
+   */
+  deleteManagedPrefixList(params: EC2.Types.DeleteManagedPrefixListRequest, callback?: (err: AWSError, data: EC2.Types.DeleteManagedPrefixListResult) => void): Request<EC2.Types.DeleteManagedPrefixListResult, AWSError>;
+  /**
+   * Deletes the specified managed prefix list. You must first remove all references to the prefix list in your resources.
+   */
+  deleteManagedPrefixList(callback?: (err: AWSError, data: EC2.Types.DeleteManagedPrefixListResult) => void): Request<EC2.Types.DeleteManagedPrefixListResult, AWSError>;
   /**
    * Deletes the specified NAT gateway. Deleting a NAT gateway disassociates its Elastic IP address, but does not release the address from your account. Deleting a NAT gateway does not delete any NAT gateway routes in your route tables.
    */
@@ -1629,6 +1645,14 @@ declare class EC2 extends Service {
    */
   describeLocalGateways(callback?: (err: AWSError, data: EC2.Types.DescribeLocalGatewaysResult) => void): Request<EC2.Types.DescribeLocalGatewaysResult, AWSError>;
   /**
+   * Describes your managed prefix lists and any AWS-managed prefix lists. To view the entries for your prefix list, use GetManagedPrefixListEntries.
+   */
+  describeManagedPrefixLists(params: EC2.Types.DescribeManagedPrefixListsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeManagedPrefixListsResult) => void): Request<EC2.Types.DescribeManagedPrefixListsResult, AWSError>;
+  /**
+   * Describes your managed prefix lists and any AWS-managed prefix lists. To view the entries for your prefix list, use GetManagedPrefixListEntries.
+   */
+  describeManagedPrefixLists(callback?: (err: AWSError, data: EC2.Types.DescribeManagedPrefixListsResult) => void): Request<EC2.Types.DescribeManagedPrefixListsResult, AWSError>;
+  /**
    * Describes your Elastic IP addresses that are being moved to the EC2-VPC platform, or that are being restored to the EC2-Classic platform. This request does not return information about any other Elastic IP addresses in your account.
    */
   describeMovingAddresses(params: EC2.Types.DescribeMovingAddressesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeMovingAddressesResult) => void): Request<EC2.Types.DescribeMovingAddressesResult, AWSError>;
@@ -1685,11 +1709,11 @@ declare class EC2 extends Service {
    */
   describePlacementGroups(callback?: (err: AWSError, data: EC2.Types.DescribePlacementGroupsResult) => void): Request<EC2.Types.DescribePlacementGroupsResult, AWSError>;
   /**
-   * Describes available AWS services in a prefix list format, which includes the prefix list name and prefix list ID of the service and the IP address range for the service. A prefix list ID is required for creating an outbound security group rule that allows traffic from a VPC to access an AWS service through a gateway VPC endpoint. Currently, the services that support this action are Amazon S3 and Amazon DynamoDB.
+   * Describes available AWS services in a prefix list format, which includes the prefix list name and prefix list ID of the service and the IP address range for the service. We recommend that you use DescribeManagedPrefixLists instead.
    */
   describePrefixLists(params: EC2.Types.DescribePrefixListsRequest, callback?: (err: AWSError, data: EC2.Types.DescribePrefixListsResult) => void): Request<EC2.Types.DescribePrefixListsResult, AWSError>;
   /**
-   * Describes available AWS services in a prefix list format, which includes the prefix list name and prefix list ID of the service and the IP address range for the service. A prefix list ID is required for creating an outbound security group rule that allows traffic from a VPC to access an AWS service through a gateway VPC endpoint. Currently, the services that support this action are Amazon S3 and Amazon DynamoDB.
+   * Describes available AWS services in a prefix list format, which includes the prefix list name and prefix list ID of the service and the IP address range for the service. We recommend that you use DescribeManagedPrefixLists instead.
    */
   describePrefixLists(callback?: (err: AWSError, data: EC2.Types.DescribePrefixListsResult) => void): Request<EC2.Types.DescribePrefixListsResult, AWSError>;
   /**
@@ -2405,6 +2429,22 @@ declare class EC2 extends Service {
    */
   getLaunchTemplateData(callback?: (err: AWSError, data: EC2.Types.GetLaunchTemplateDataResult) => void): Request<EC2.Types.GetLaunchTemplateDataResult, AWSError>;
   /**
+   * Gets information about the resources that are associated with the specified managed prefix list.
+   */
+  getManagedPrefixListAssociations(params: EC2.Types.GetManagedPrefixListAssociationsRequest, callback?: (err: AWSError, data: EC2.Types.GetManagedPrefixListAssociationsResult) => void): Request<EC2.Types.GetManagedPrefixListAssociationsResult, AWSError>;
+  /**
+   * Gets information about the resources that are associated with the specified managed prefix list.
+   */
+  getManagedPrefixListAssociations(callback?: (err: AWSError, data: EC2.Types.GetManagedPrefixListAssociationsResult) => void): Request<EC2.Types.GetManagedPrefixListAssociationsResult, AWSError>;
+  /**
+   * Gets information about the entries for a specified managed prefix list.
+   */
+  getManagedPrefixListEntries(params: EC2.Types.GetManagedPrefixListEntriesRequest, callback?: (err: AWSError, data: EC2.Types.GetManagedPrefixListEntriesResult) => void): Request<EC2.Types.GetManagedPrefixListEntriesResult, AWSError>;
+  /**
+   * Gets information about the entries for a specified managed prefix list.
+   */
+  getManagedPrefixListEntries(callback?: (err: AWSError, data: EC2.Types.GetManagedPrefixListEntriesResult) => void): Request<EC2.Types.GetManagedPrefixListEntriesResult, AWSError>;
+  /**
    * Retrieves the encrypted administrator password for a running Windows instance. The Windows password is generated at boot by the EC2Config service or EC2Launch scripts (Windows Server 2016 and later). This usually only happens the first time an instance is launched. For more information, see EC2Config and EC2Launch in the Amazon Elastic Compute Cloud User Guide. For the EC2Config service, the password is not generated for rebundled AMIs unless Ec2SetPassword is enabled before bundling. The password is encrypted using the key pair that you specified when you launched the instance. You must provide the corresponding key pair file. When you launch an instance, password generation and encryption may take a few minutes. If you try to retrieve the password before it's available, the output returns an empty string. We recommend that you wait up to 15 minutes after launching an instance before trying to retrieve the generated password.
    */
   getPasswordData(params: EC2.Types.GetPasswordDataRequest, callback?: (err: AWSError, data: EC2.Types.GetPasswordDataResult) => void): Request<EC2.Types.GetPasswordDataResult, AWSError>;
@@ -2644,6 +2684,14 @@ declare class EC2 extends Service {
    * Modifies a launch template. You can specify which version of the launch template to set as the default version. When launching an instance, the default version applies when a launch template version is not specified.
    */
   modifyLaunchTemplate(callback?: (err: AWSError, data: EC2.Types.ModifyLaunchTemplateResult) => void): Request<EC2.Types.ModifyLaunchTemplateResult, AWSError>;
+  /**
+   * Modifies the specified managed prefix list. Adding or removing entries in a prefix list creates a new version of the prefix list. Changing the name of the prefix list does not affect the version. If you specify a current version number that does not match the true current version number, the request fails.
+   */
+  modifyManagedPrefixList(params: EC2.Types.ModifyManagedPrefixListRequest, callback?: (err: AWSError, data: EC2.Types.ModifyManagedPrefixListResult) => void): Request<EC2.Types.ModifyManagedPrefixListResult, AWSError>;
+  /**
+   * Modifies the specified managed prefix list. Adding or removing entries in a prefix list creates a new version of the prefix list. Changing the name of the prefix list does not affect the version. If you specify a current version number that does not match the true current version number, the request fails.
+   */
+  modifyManagedPrefixList(callback?: (err: AWSError, data: EC2.Types.ModifyManagedPrefixListResult) => void): Request<EC2.Types.ModifyManagedPrefixListResult, AWSError>;
   /**
    * Modifies the specified network interface attribute. You can specify only one attribute at a time. You can use this action to attach and detach security groups from an existing EC2 instance.
    */
@@ -3076,6 +3124,14 @@ declare class EC2 extends Service {
    * Restores an Elastic IP address that was previously moved to the EC2-VPC platform back to the EC2-Classic platform. You cannot move an Elastic IP address that was originally allocated for use in EC2-VPC. The Elastic IP address must not be associated with an instance or network interface.
    */
   restoreAddressToClassic(callback?: (err: AWSError, data: EC2.Types.RestoreAddressToClassicResult) => void): Request<EC2.Types.RestoreAddressToClassicResult, AWSError>;
+  /**
+   * Restores the entries from a previous version of a managed prefix list to a new version of the prefix list.
+   */
+  restoreManagedPrefixListVersion(params: EC2.Types.RestoreManagedPrefixListVersionRequest, callback?: (err: AWSError, data: EC2.Types.RestoreManagedPrefixListVersionResult) => void): Request<EC2.Types.RestoreManagedPrefixListVersionResult, AWSError>;
+  /**
+   * Restores the entries from a previous version of a managed prefix list to a new version of the prefix list.
+   */
+  restoreManagedPrefixListVersion(callback?: (err: AWSError, data: EC2.Types.RestoreManagedPrefixListVersionResult) => void): Request<EC2.Types.RestoreManagedPrefixListVersionResult, AWSError>;
   /**
    * Removes an ingress authorization rule from a Client VPN endpoint. 
    */
@@ -3622,6 +3678,17 @@ declare namespace EC2 {
   }
   export type ActiveInstanceSet = ActiveInstance[];
   export type ActivityStatus = "error"|"pending_fulfillment"|"pending_termination"|"fulfilled"|string;
+  export type AddPrefixListEntries = AddPrefixListEntry[];
+  export interface AddPrefixListEntry {
+    /**
+     * The CIDR block.
+     */
+    Cidr: String;
+    /**
+     * A description for the entry. Constraints: Up to 255 characters in length.
+     */
+    Description?: String;
+  }
   export interface Address {
     /**
      * The ID of the instance that the address is associated with (if any).
@@ -6231,6 +6298,42 @@ declare namespace EC2 {
      */
     LocalGatewayRouteTableVpcAssociation?: LocalGatewayRouteTableVpcAssociation;
   }
+  export interface CreateManagedPrefixListRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * A name for the prefix list. Constraints: Up to 255 characters in length. The name cannot start with com.amazonaws.
+     */
+    PrefixListName: String;
+    /**
+     * One or more entries for the prefix list.
+     */
+    Entries?: AddPrefixListEntries;
+    /**
+     * The maximum number of entries for the prefix list.
+     */
+    MaxEntries: Integer;
+    /**
+     * The tags to apply to the prefix list during creation.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * The IP address type. Valid Values: IPv4 | IPv6 
+     */
+    AddressFamily: String;
+    /**
+     * Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency. Constraints: Up to 255 UTF-8 characters in length.
+     */
+    ClientToken?: String;
+  }
+  export interface CreateManagedPrefixListResult {
+    /**
+     * Information about the prefix list.
+     */
+    PrefixList?: ManagedPrefixList;
+  }
   export interface CreateNatGatewayRequest {
     /**
      * The allocation ID of an Elastic IP address to associate with the NAT gateway. If the Elastic IP address is associated with another resource, you must first disassociate it.
@@ -6265,7 +6368,7 @@ declare namespace EC2 {
   }
   export interface CreateNetworkAclEntryRequest {
     /**
-     * The IPv4 network range to allow or deny, in CIDR notation (for example 172.16.0.0/24).
+     * The IPv4 network range to allow or deny, in CIDR notation (for example 172.16.0.0/24). We modify the specified CIDR block to its canonical form; for example, if you specify 100.68.0.18/18, we modify it to 100.68.0.0/18.
      */
     CidrBlock?: String;
     /**
@@ -6448,13 +6551,17 @@ declare namespace EC2 {
   }
   export interface CreateRouteRequest {
     /**
-     * The IPv4 CIDR address block used for the destination match. Routing decisions are based on the most specific match.
+     * The IPv4 CIDR address block used for the destination match. Routing decisions are based on the most specific match. We modify the specified CIDR block to its canonical form; for example, if you specify 100.68.0.18/18, we modify it to 100.68.0.0/18.
      */
     DestinationCidrBlock?: String;
     /**
      * The IPv6 CIDR block used for the destination match. Routing decisions are based on the most specific match.
      */
     DestinationIpv6CidrBlock?: String;
+    /**
+     * The ID of a prefix list used for the destination match.
+     */
+    DestinationPrefixListId?: PrefixListResourceId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -6618,7 +6725,7 @@ declare namespace EC2 {
      */
     AvailabilityZoneId?: String;
     /**
-     * The IPv4 network range for the subnet, in CIDR notation. For example, 10.0.0.0/24.
+     * The IPv4 network range for the subnet, in CIDR notation. For example, 10.0.0.0/24. We modify the specified CIDR block to its canonical form; for example, if you specify 100.68.0.18/18, we modify it to 100.68.0.0/18.
      */
     CidrBlock: String;
     /**
@@ -7225,7 +7332,7 @@ declare namespace EC2 {
   }
   export interface CreateVpcRequest {
     /**
-     * The IPv4 network range for the VPC, in CIDR notation. For example, 10.0.0.0/16.
+     * The IPv4 network range for the VPC, in CIDR notation. For example, 10.0.0.0/16. We modify the specified CIDR block to its canonical form; for example, if you specify 100.68.0.18/18, we modify it to 100.68.0.0/18.
      */
     CidrBlock: String;
     /**
@@ -7697,6 +7804,22 @@ declare namespace EC2 {
      */
     LocalGatewayRouteTableVpcAssociation?: LocalGatewayRouteTableVpcAssociation;
   }
+  export interface DeleteManagedPrefixListRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the prefix list.
+     */
+    PrefixListId: PrefixListResourceId;
+  }
+  export interface DeleteManagedPrefixListResult {
+    /**
+     * Information about the prefix list.
+     */
+    PrefixList?: ManagedPrefixList;
+  }
   export interface DeleteNatGatewayRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -7822,6 +7945,10 @@ declare namespace EC2 {
      * The IPv6 CIDR range for the route. The value you specify must match the CIDR for the route exactly.
      */
     DestinationIpv6CidrBlock?: String;
+    /**
+     * The ID of the prefix list for the route.
+     */
+    DestinationPrefixListId?: PrefixListResourceId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -9994,6 +10121,38 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export interface DescribeManagedPrefixListsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * One or more filters.    owner-id - The ID of the prefix list owner.    prefix-list-id - The ID of the prefix list.    prefix-list-name - The name of the prefix list.  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: PrefixListMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * One or more prefix list IDs.
+     */
+    PrefixListIds?: ValueStringList;
+  }
+  export interface DescribeManagedPrefixListsResult {
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+    /**
+     * Information about the prefix lists.
+     */
+    PrefixLists?: ManagedPrefixListSet;
+  }
   export type DescribeMovingAddressesMaxResults = number;
   export interface DescribeMovingAddressesRequest {
     /**
@@ -10161,7 +10320,7 @@ declare namespace EC2 {
   export type DescribeNetworkInterfacesMaxResults = number;
   export interface DescribeNetworkInterfacesRequest {
     /**
-     * One or more filters.    addresses.private-ip-address - The private IPv4 addresses associated with the network interface.    addresses.primary - Whether the private IPv4 address is the primary IP address associated with the network interface.     addresses.association.public-ip - The association ID returned when the network interface was associated with the Elastic IP address (IPv4).    addresses.association.owner-id - The owner ID of the addresses associated with the network interface.    association.association-id - The association ID returned when the network interface was associated with an IPv4 address.    association.allocation-id - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.    association.ip-owner-id - The owner of the Elastic IP address (IPv4) associated with the network interface.    association.public-ip - The address of the Elastic IP address (IPv4) bound to the network interface.    association.public-dns-name - The public DNS name for the network interface (IPv4).    attachment.attachment-id - The ID of the interface attachment.    attachment.attach-time - The time that the network interface was attached to an instance.    attachment.delete-on-termination - Indicates whether the attachment is deleted when an instance is terminated.    attachment.device-index - The device index to which the network interface is attached.    attachment.instance-id - The ID of the instance to which the network interface is attached.    attachment.instance-owner-id - The owner ID of the instance to which the network interface is attached.    attachment.nat-gateway-id - The ID of the NAT gateway to which the network interface is attached.    attachment.status - The status of the attachment (attaching | attached | detaching | detached).    availability-zone - The Availability Zone of the network interface.    description - The description of the network interface.    group-id - The ID of a security group associated with the network interface.    group-name - The name of a security group associated with the network interface.    ipv6-addresses.ipv6-address - An IPv6 address associated with the network interface.    mac-address - The MAC address of the network interface.    network-interface-id - The ID of the network interface.    owner-id - The AWS account ID of the network interface owner.    private-ip-address - The private IPv4 address or addresses of the network interface.    private-dns-name - The private DNS name of the network interface (IPv4).    requester-id - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).    requester-managed - Indicates whether the network interface is being managed by an AWS service (for example, AWS Management Console, Auto Scaling, and so on).    source-dest-check - Indicates whether the network interface performs source/destination checking. A value of true means checking is enabled, and false means checking is disabled. The value must be false for the network interface to perform network address translation (NAT) in your VPC.     status - The status of the network interface. If the network interface is not attached to an instance, the status is available; if a network interface is attached to an instance the status is in-use.    subnet-id - The ID of the subnet for the network interface.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC for the network interface.  
+     * One or more filters.    addresses.private-ip-address - The private IPv4 addresses associated with the network interface.    addresses.primary - Whether the private IPv4 address is the primary IP address associated with the network interface.     addresses.association.public-ip - The association ID returned when the network interface was associated with the Elastic IP address (IPv4).    addresses.association.owner-id - The owner ID of the addresses associated with the network interface.    association.association-id - The association ID returned when the network interface was associated with an IPv4 address.    association.allocation-id - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.    association.ip-owner-id - The owner of the Elastic IP address (IPv4) associated with the network interface.    association.public-ip - The address of the Elastic IP address (IPv4) bound to the network interface.    association.public-dns-name - The public DNS name for the network interface (IPv4).    attachment.attachment-id - The ID of the interface attachment.    attachment.attach-time - The time that the network interface was attached to an instance.    attachment.delete-on-termination - Indicates whether the attachment is deleted when an instance is terminated.    attachment.device-index - The device index to which the network interface is attached.    attachment.instance-id - The ID of the instance to which the network interface is attached.    attachment.instance-owner-id - The owner ID of the instance to which the network interface is attached.    attachment.status - The status of the attachment (attaching | attached | detaching | detached).    availability-zone - The Availability Zone of the network interface.    description - The description of the network interface.    group-id - The ID of a security group associated with the network interface.    group-name - The name of a security group associated with the network interface.    ipv6-addresses.ipv6-address - An IPv6 address associated with the network interface.    mac-address - The MAC address of the network interface.    network-interface-id - The ID of the network interface.    owner-id - The AWS account ID of the network interface owner.    private-ip-address - The private IPv4 address or addresses of the network interface.    private-dns-name - The private DNS name of the network interface (IPv4).    requester-id - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).    requester-managed - Indicates whether the network interface is being managed by an AWS service (for example, AWS Management Console, Auto Scaling, and so on).    source-dest-check - Indicates whether the network interface performs source/destination checking. A value of true means checking is enabled, and false means checking is disabled. The value must be false for the network interface to perform network address translation (NAT) in your VPC.     status - The status of the network interface. If the network interface is not attached to an instance, the status is available; if a network interface is attached to an instance the status is in-use.    subnet-id - The ID of the subnet for the network interface.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC for the network interface.  
      */
     Filters?: FilterList;
     /**
@@ -10605,7 +10764,7 @@ declare namespace EC2 {
   export type DescribeSecurityGroupsMaxResults = number;
   export interface DescribeSecurityGroupsRequest {
     /**
-     * The filters. If using multiple filters for rules, the results include security groups for which any combination of rules - not necessarily a single rule - match all filters.    description - The description of the security group.    egress.ip-permission.cidr - An IPv4 CIDR block for an outbound security group rule.    egress.ip-permission.from-port - For an outbound rule, the start of port range for the TCP and UDP protocols, or an ICMP type number.    egress.ip-permission.group-id - The ID of a security group that has been referenced in an outbound security group rule.    egress.ip-permission.group-name - The name of a security group that has been referenced in an outbound security group rule.    egress.ip-permission.ipv6-cidr - An IPv6 CIDR block for an outbound security group rule.    egress.ip-permission.prefix-list-id - The ID (prefix) of the AWS service to which a security group rule allows outbound access.    egress.ip-permission.protocol - The IP protocol for an outbound security group rule (tcp | udp | icmp or a protocol number).    egress.ip-permission.to-port - For an outbound rule, the end of port range for the TCP and UDP protocols, or an ICMP code.    egress.ip-permission.user-id - The ID of an AWS account that has been referenced in an outbound security group rule.    group-id - The ID of the security group.     group-name - The name of the security group.    ip-permission.cidr - An IPv4 CIDR block for an inbound security group rule.    ip-permission.from-port - For an inbound rule, the start of port range for the TCP and UDP protocols, or an ICMP type number.    ip-permission.group-id - The ID of a security group that has been referenced in an inbound security group rule.    ip-permission.group-name - The name of a security group that has been referenced in an inbound security group rule.    ip-permission.ipv6-cidr - An IPv6 CIDR block for an inbound security group rule.    ip-permission.prefix-list-id - The ID (prefix) of the AWS service from which a security group rule allows inbound access.    ip-permission.protocol - The IP protocol for an inbound security group rule (tcp | udp | icmp or a protocol number).    ip-permission.to-port - For an inbound rule, the end of port range for the TCP and UDP protocols, or an ICMP code.    ip-permission.user-id - The ID of an AWS account that has been referenced in an inbound security group rule.    owner-id - The AWS account ID of the owner of the security group.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC specified when the security group was created.  
+     * The filters. If using multiple filters for rules, the results include security groups for which any combination of rules - not necessarily a single rule - match all filters.    description - The description of the security group.    egress.ip-permission.cidr - An IPv4 CIDR block for an outbound security group rule.    egress.ip-permission.from-port - For an outbound rule, the start of port range for the TCP and UDP protocols, or an ICMP type number.    egress.ip-permission.group-id - The ID of a security group that has been referenced in an outbound security group rule.    egress.ip-permission.group-name - The name of a security group that has been referenced in an outbound security group rule.    egress.ip-permission.ipv6-cidr - An IPv6 CIDR block for an outbound security group rule.    egress.ip-permission.prefix-list-id - The ID of a prefix list to which a security group rule allows outbound access.    egress.ip-permission.protocol - The IP protocol for an outbound security group rule (tcp | udp | icmp or a protocol number).    egress.ip-permission.to-port - For an outbound rule, the end of port range for the TCP and UDP protocols, or an ICMP code.    egress.ip-permission.user-id - The ID of an AWS account that has been referenced in an outbound security group rule.    group-id - The ID of the security group.     group-name - The name of the security group.    ip-permission.cidr - An IPv4 CIDR block for an inbound security group rule.    ip-permission.from-port - For an inbound rule, the start of port range for the TCP and UDP protocols, or an ICMP type number.    ip-permission.group-id - The ID of a security group that has been referenced in an inbound security group rule.    ip-permission.group-name - The name of a security group that has been referenced in an inbound security group rule.    ip-permission.ipv6-cidr - An IPv6 CIDR block for an inbound security group rule.    ip-permission.prefix-list-id - The ID of a prefix list from which a security group rule allows inbound access.    ip-permission.protocol - The IP protocol for an inbound security group rule (tcp | udp | icmp or a protocol number).    ip-permission.to-port - For an inbound rule, the end of port range for the TCP and UDP protocols, or an ICMP code.    ip-permission.user-id - The ID of an AWS account that has been referenced in an inbound security group rule.    owner-id - The AWS account ID of the owner of the security group.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC specified when the security group was created.  
      */
     Filters?: FilterList;
     /**
@@ -13728,6 +13887,67 @@ declare namespace EC2 {
      */
     LaunchTemplateData?: ResponseLaunchTemplateData;
   }
+  export type GetManagedPrefixListAssociationsMaxResults = number;
+  export interface GetManagedPrefixListAssociationsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the prefix list.
+     */
+    PrefixListId: PrefixListResourceId;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: GetManagedPrefixListAssociationsMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetManagedPrefixListAssociationsResult {
+    /**
+     * Information about the associations.
+     */
+    PrefixListAssociations?: PrefixListAssociationSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
+  export interface GetManagedPrefixListEntriesRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the prefix list.
+     */
+    PrefixListId: PrefixListResourceId;
+    /**
+     * The version of the prefix list for which to return the entries. The default is the current version.
+     */
+    TargetVersion?: Long;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: PrefixListMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface GetManagedPrefixListEntriesResult {
+    /**
+     * Information about the prefix list entries.
+     */
+    Entries?: PrefixListEntrySet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
   export interface GetPasswordDataRequest {
     /**
      * The ID of the Windows instance.
@@ -15944,7 +16164,7 @@ declare namespace EC2 {
      */
     Ipv6Ranges?: Ipv6RangeList;
     /**
-     * [VPC only] The prefix list IDs for an AWS service. With outbound rules, this is the AWS service to access through a VPC endpoint from instances associated with the security group.
+     * [VPC only] The prefix list IDs.
      */
     PrefixListIds?: PrefixListIdList;
     /**
@@ -17068,6 +17288,49 @@ declare namespace EC2 {
   export type LocationType = "region"|"availability-zone"|"availability-zone-id"|string;
   export type LogDestinationType = "cloud-watch-logs"|"s3"|string;
   export type Long = number;
+  export interface ManagedPrefixList {
+    /**
+     * The ID of the prefix list.
+     */
+    PrefixListId?: PrefixListResourceId;
+    /**
+     * The IP address version.
+     */
+    AddressFamily?: String;
+    /**
+     * The state of the prefix list.
+     */
+    State?: PrefixListState;
+    /**
+     * The state message.
+     */
+    StateMessage?: String;
+    /**
+     * The Amazon Resource Name (ARN) for the prefix list.
+     */
+    PrefixListArn?: ResourceArn;
+    /**
+     * The name of the prefix list.
+     */
+    PrefixListName?: String;
+    /**
+     * The maximum number of entries for the prefix list.
+     */
+    MaxEntries?: Integer;
+    /**
+     * The version of the prefix list.
+     */
+    Version?: Long;
+    /**
+     * The tags for the prefix list.
+     */
+    Tags?: TagList;
+    /**
+     * The ID of the owner of the prefix list.
+     */
+    OwnerId?: String;
+  }
+  export type ManagedPrefixListSet = ManagedPrefixList[];
   export type MarketType = "spot"|string;
   export type MaxIpv4AddrPerInterface = number;
   export type MaxIpv6AddrPerInterface = number;
@@ -17614,6 +17877,38 @@ declare namespace EC2 {
      * Information about the launch template.
      */
     LaunchTemplate?: LaunchTemplate;
+  }
+  export interface ModifyManagedPrefixListRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the prefix list.
+     */
+    PrefixListId: PrefixListResourceId;
+    /**
+     * The current version of the prefix list.
+     */
+    CurrentVersion?: Long;
+    /**
+     * A name for the prefix list.
+     */
+    PrefixListName?: String;
+    /**
+     * One or more entries to add to the prefix list.
+     */
+    AddEntries?: AddPrefixListEntries;
+    /**
+     * One or more entries to remove from the prefix list.
+     */
+    RemoveEntries?: RemovePrefixListEntries;
+  }
+  export interface ModifyManagedPrefixListResult {
+    /**
+     * Information about the prefix list.
+     */
+    PrefixList?: ManagedPrefixList;
   }
   export interface ModifyNetworkInterfaceAttributeRequest {
     /**
@@ -19062,6 +19357,28 @@ declare namespace EC2 {
      */
     PrefixListName?: String;
   }
+  export interface PrefixListAssociation {
+    /**
+     * The ID of the resource.
+     */
+    ResourceId?: String;
+    /**
+     * The owner of the resource.
+     */
+    ResourceOwner?: String;
+  }
+  export type PrefixListAssociationSet = PrefixListAssociation[];
+  export interface PrefixListEntry {
+    /**
+     * The CIDR block.
+     */
+    Cidr?: String;
+    /**
+     * The description.
+     */
+    Description?: String;
+  }
+  export type PrefixListEntrySet = PrefixListEntry[];
   export interface PrefixListId {
     /**
      * A description for the security group rule that references this prefix list ID. Constraints: Up to 255 characters in length. Allowed characters are a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=;{}!$*
@@ -19074,9 +19391,11 @@ declare namespace EC2 {
   }
   export type PrefixListIdList = PrefixListId[];
   export type PrefixListIdSet = String[];
+  export type PrefixListMaxResults = number;
   export type PrefixListResourceId = string;
   export type PrefixListResourceIdStringList = PrefixListResourceId[];
   export type PrefixListSet = PrefixList[];
+  export type PrefixListState = "create-in-progress"|"create-complete"|"create-failed"|"modify-in-progress"|"modify-complete"|"modify-failed"|"restore-in-progress"|"restore-complete"|"restore-failed"|"delete-in-progress"|"delete-complete"|"delete-failed"|string;
   export interface PriceSchedule {
     /**
      * The current price schedule, as determined by the term remaining for the Reserved Instance in the listing. A specific price schedule is always in effect, but only one price schedule can be active at any time. Take, for example, a Reserved Instance listing that has five months remaining in its term. When you specify price schedules for five months and two months, this means that schedule 1, covering the first three months of the remaining term, will be active during months 5, 4, and 3. Then schedule 2, covering the last two months of the term, will be active for months 2 and 1.
@@ -19723,6 +20042,13 @@ declare namespace EC2 {
      */
     Unsuccessful?: UnsuccessfulItemList;
   }
+  export type RemovePrefixListEntries = RemovePrefixListEntry[];
+  export interface RemovePrefixListEntry {
+    /**
+     * The CIDR block.
+     */
+    Cidr: String;
+  }
   export interface ReplaceIamInstanceProfileAssociationRequest {
     /**
      * The IAM instance profile.
@@ -19810,6 +20136,10 @@ declare namespace EC2 {
      * The IPv6 CIDR address block used for the destination match. The value that you provide must match the CIDR of an existing route in the table.
      */
     DestinationIpv6CidrBlock?: String;
+    /**
+     * The ID of the prefix list for the route.
+     */
+    DestinationPrefixListId?: PrefixListResourceId;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -20607,6 +20937,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
   }
+  export type ResourceArn = string;
   export type ResourceIdList = TaggableResourceId[];
   export type ResourceList = String[];
   export type ResourceType = "client-vpn-endpoint"|"customer-gateway"|"dedicated-host"|"dhcp-options"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"internet-gateway"|"key-pair"|"launch-template"|"local-gateway-route-table-vpc-association"|"natgateway"|"network-acl"|"network-interface"|"placement-group"|"reserved-instances"|"route-table"|"security-group"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-multicast-domain"|"transit-gateway-route-table"|"volume"|"vpc"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|string;
@@ -20748,6 +21079,30 @@ declare namespace EC2 {
      * The move status for the IP address.
      */
     Status?: Status;
+  }
+  export interface RestoreManagedPrefixListVersionRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the prefix list.
+     */
+    PrefixListId: PrefixListResourceId;
+    /**
+     * The version to restore.
+     */
+    PreviousVersion: Long;
+    /**
+     * The current version number for the prefix list.
+     */
+    CurrentVersion: Long;
+  }
+  export interface RestoreManagedPrefixListVersionResult {
+    /**
+     * Information about the prefix list.
+     */
+    PrefixList?: ManagedPrefixList;
   }
   export interface RevokeClientVpnIngressRequest {
     /**
@@ -22548,7 +22903,7 @@ declare namespace EC2 {
      */
     IpRanges?: IpRanges;
     /**
-     * The prefix list IDs for an AWS service. Not applicable for stale security group rules.
+     * The prefix list IDs. Not applicable for stale security group rules.
      */
     PrefixListIds?: PrefixListIdSet;
     /**
@@ -22838,7 +23193,7 @@ declare namespace EC2 {
   export type TagList = Tag[];
   export interface TagSpecification {
     /**
-     * The type of resource to tag. Currently, the resource types that support tagging on creation are: capacity-reservation | client-vpn-endpoint | dedicated-host | fleet | fpga-image | host-reservation | instance | ipv4pool-ec2 | ipv6pool-ec2 | key-pair | launch-template | natgateway | spot-fleet-request | placement-group | snapshot | traffic-mirror-filter | traffic-mirror-session | traffic-mirror-target | transit-gateway | transit-gateway-attachment | transit-gateway-route-table | vpc-endpoint (for interface and gateway endpoints) | vpc-endpoint-service (for AWS PrivateLink) | volume | vpc-flow-log. To tag a resource after it has been created, see CreateTags.
+     * The type of resource to tag. Currently, the resource types that support tagging on creation are: capacity-reservation | client-vpn-endpoint | dedicated-host | fleet | fpga-image | host-reservation | instance | ipv4pool-ec2 | ipv6pool-ec2 | key-pair | launch-template | natgateway | spot-fleet-request | placement-group | prefix-list | snapshot | traffic-mirror-filter | traffic-mirror-session | traffic-mirror-target | transit-gateway | transit-gateway-attachment | transit-gateway-route-table | vpc-endpoint (for interface and gateway endpoints) | vpc-endpoint-service (for AWS PrivateLink) | volume | vpc-flow-log. To tag a resource after it has been created, see CreateTags.
      */
     ResourceType?: ResourceType;
     /**

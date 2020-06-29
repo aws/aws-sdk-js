@@ -889,7 +889,7 @@
           "shape": "ResourceContentionFault"
         }
       ],
-      "documentation": "<p>Executes the specified policy.</p>"
+      "documentation": "<p>Executes the specified policy. This can be useful for testing the design of your scaling policy.</p>"
     },
     "ExitStandby": {
       "name": "ExitStandby",
@@ -2570,11 +2570,11 @@
       "members": {
         "SnapshotId": {
           "shape": "XmlStringMaxLen255",
-          "documentation": "<p>The snapshot ID of the volume to use.</p> <p> <code>SnapshotId</code> is optional if you specify a volume size. If you specify both <code>SnapshotId</code> and <code>VolumeSize</code>, the volume size must be equal or greater than the size of the snapshot.</p>"
+          "documentation": "<p>The snapshot ID of the volume to use.</p> <p>You must specify either a <code>VolumeSize</code> or a <code>SnapshotId</code>.</p>"
         },
         "VolumeSize": {
           "shape": "BlockDeviceEbsVolumeSize",
-          "documentation": "<p>The volume size, in Gibibytes (GiB).</p> <p>This can be a number from 1-1,024 for <code>standard</code>, 4-16,384 for <code>io1</code>, 1-16,384 for <code>gp2</code>, and 500-16,384 for <code>st1</code> and <code>sc1</code>. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size.</p> <p>Default: If you create a volume from a snapshot and you don't specify a volume size, the default is the snapshot size.</p> <note> <p>At least one of <code>VolumeSize</code> or <code>SnapshotId</code> is required.</p> </note>"
+          "documentation": "<p>The volume size, in Gibibytes (GiB).</p> <p>This can be a number from 1-1,024 for <code>standard</code>, 4-16,384 for <code>io1</code>, 1-16,384 for <code>gp2</code>, and 500-16,384 for <code>st1</code> and <code>sc1</code>. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size.</p> <p>Default: If you create a volume from a snapshot and you don't specify a volume size, the default is the snapshot size.</p> <p>You must specify either a <code>VolumeSize</code> or a <code>SnapshotId</code>. If you specify both <code>SnapshotId</code> and <code>VolumeSize</code>, the volume size must be equal or greater than the size of the snapshot.</p>"
         },
         "VolumeType": {
           "shape": "BlockDeviceEbsVolumeType",
@@ -2688,7 +2688,7 @@
         },
         "HonorCooldown": {
           "shape": "HonorCooldown",
-          "documentation": "<p>Indicates whether Amazon EC2 Auto Scaling waits for the cooldown period to complete before executing the policy.</p> <p>This parameter is not supported if the policy type is <code>StepScaling</code> or <code>TargetTrackingScaling</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html\">Scaling Cooldowns for Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+          "documentation": "<p>Indicates whether Amazon EC2 Auto Scaling waits for the cooldown period to complete before executing the policy.</p> <p>Valid only if the policy type is <code>SimpleScaling</code>. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html\">Scaling Cooldowns for Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
         },
         "MetricValue": {
           "shape": "MetricScale",

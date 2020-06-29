@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.706.0-->
+<!--LATEST=2.707.0-->
 <!--ENTRYINSERT-->
+
+## 2.707.0
+* feature: CodeGuruProfiler: Amazon CodeGuru Profiler is now generally available. The Profiler helps developers to optimize their software, troubleshoot issues in production, and identify their most expensive lines of code. As part of general availability, we are launching: Profiling of AWS Lambda functions, Anomaly detection in CPU profiles, Color My Code on flame graphs, Expanding presence to 10 AWS regions.
+* feature: CodeStarconnections: Updated and new APIs in support of hosts for connections to installed provider types. New integration with the GitHub Enterprise Server provider type.
+* feature: EC2: Virtual Private Cloud (VPC) customers can now create and manage their own Prefix Lists to simplify VPC configurations.
 
 ## 2.706.0
 * feature: CloudFormation: ListStackInstances and DescribeStackInstance now return a new `StackInstanceStatus` object that contains `DetailedStatus` values: a disambiguation of the more generic `Status` value. ListStackInstances output can now be filtered on `DetailedStatus` using the new `Filters` parameter.

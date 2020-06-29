@@ -320,11 +320,11 @@ declare class AutoScaling extends Service {
    */
   enterStandby(callback?: (err: AWSError, data: AutoScaling.Types.EnterStandbyAnswer) => void): Request<AutoScaling.Types.EnterStandbyAnswer, AWSError>;
   /**
-   * Executes the specified policy.
+   * Executes the specified policy. This can be useful for testing the design of your scaling policy.
    */
   executePolicy(params: AutoScaling.Types.ExecutePolicyType, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Executes the specified policy.
+   * Executes the specified policy. This can be useful for testing the design of your scaling policy.
    */
   executePolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1408,11 +1408,11 @@ declare namespace AutoScaling {
   export type DisableScaleIn = boolean;
   export interface Ebs {
     /**
-     * The snapshot ID of the volume to use.  SnapshotId is optional if you specify a volume size. If you specify both SnapshotId and VolumeSize, the volume size must be equal or greater than the size of the snapshot.
+     * The snapshot ID of the volume to use. You must specify either a VolumeSize or a SnapshotId.
      */
     SnapshotId?: XmlStringMaxLen255;
     /**
-     * The volume size, in Gibibytes (GiB). This can be a number from 1-1,024 for standard, 4-16,384 for io1, 1-16,384 for gp2, and 500-16,384 for st1 and sc1. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size. Default: If you create a volume from a snapshot and you don't specify a volume size, the default is the snapshot size.  At least one of VolumeSize or SnapshotId is required. 
+     * The volume size, in Gibibytes (GiB). This can be a number from 1-1,024 for standard, 4-16,384 for io1, 1-16,384 for gp2, and 500-16,384 for st1 and sc1. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size. Default: If you create a volume from a snapshot and you don't specify a volume size, the default is the snapshot size. You must specify either a VolumeSize or a SnapshotId. If you specify both SnapshotId and VolumeSize, the volume size must be equal or greater than the size of the snapshot.
      */
     VolumeSize?: BlockDeviceEbsVolumeSize;
     /**
@@ -1489,7 +1489,7 @@ declare namespace AutoScaling {
      */
     PolicyName: ResourceName;
     /**
-     * Indicates whether Amazon EC2 Auto Scaling waits for the cooldown period to complete before executing the policy. This parameter is not supported if the policy type is StepScaling or TargetTrackingScaling. For more information, see Scaling Cooldowns for Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide.
+     * Indicates whether Amazon EC2 Auto Scaling waits for the cooldown period to complete before executing the policy. Valid only if the policy type is SimpleScaling. For more information, see Scaling Cooldowns for Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide.
      */
     HonorCooldown?: HonorCooldown;
     /**

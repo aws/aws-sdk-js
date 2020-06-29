@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeGuruProfiler",
+        "description": "Amazon CodeGuru Profiler is now generally available. The Profiler helps developers to optimize their software, troubleshoot issues in production, and identify their most expensive lines of code. As part of general availability, we are launching: Profiling of AWS Lambda functions, Anomaly detection in CPU profiles, Color My Code on flame graphs, Expanding presence to 10 AWS regions."
+    },
+    {
+        "type": "feature",
+        "category": "CodeStarconnections",
+        "description": "Updated and new APIs in support of hosts for connections to installed provider types. New integration with the GitHub Enterprise Server provider type."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Virtual Private Cloud (VPC) customers can now create and manage their own Prefix Lists to simplify VPC configurations."
+    }
+]
