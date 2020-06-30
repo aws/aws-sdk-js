@@ -741,7 +741,7 @@
           "shape": "DBProxyQuotaExceededFault"
         }
       ],
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Creates a new DB proxy.</p>"
+      "documentation": "<p>Creates a new DB proxy.</p>"
     },
     "CreateDBSecurityGroup": {
       "name": "CreateDBSecurityGroup",
@@ -1141,7 +1141,7 @@
           "shape": "InvalidDBProxyStateFault"
         }
       ],
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Deletes an existing proxy.</p>"
+      "documentation": "<p>Deletes an existing proxy.</p>"
     },
     "DeleteDBSecurityGroup": {
       "name": "DeleteDBSecurityGroup",
@@ -1319,7 +1319,7 @@
           "shape": "InvalidDBProxyStateFault"
         }
       ],
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Remove the association between one or more <code>DBProxyTarget</code> data structures and a <code>DBProxyTargetGroup</code>.</p>"
+      "documentation": "<p>Remove the association between one or more <code>DBProxyTarget</code> data structures and a <code>DBProxyTargetGroup</code>.</p>"
     },
     "DescribeAccountAttributes": {
       "name": "DescribeAccountAttributes",
@@ -1652,7 +1652,7 @@
           "shape": "DBProxyNotFoundFault"
         }
       ],
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns information about DB proxies.</p>"
+      "documentation": "<p>Returns information about DB proxies.</p>"
     },
     "DescribeDBProxyTargetGroups": {
       "name": "DescribeDBProxyTargetGroups",
@@ -1678,7 +1678,7 @@
           "shape": "InvalidDBProxyStateFault"
         }
       ],
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns information about DB proxy target groups, represented by <code>DBProxyTargetGroup</code> data structures.</p>"
+      "documentation": "<p>Returns information about DB proxy target groups, represented by <code>DBProxyTargetGroup</code> data structures.</p>"
     },
     "DescribeDBProxyTargets": {
       "name": "DescribeDBProxyTargets",
@@ -1707,7 +1707,7 @@
           "shape": "InvalidDBProxyStateFault"
         }
       ],
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns information about <code>DBProxyTarget</code> objects. This API supports pagination.</p>"
+      "documentation": "<p>Returns information about <code>DBProxyTarget</code> objects. This API supports pagination.</p>"
     },
     "DescribeDBSecurityGroups": {
       "name": "DescribeDBSecurityGroups",
@@ -2476,7 +2476,7 @@
           "shape": "InvalidDBProxyStateFault"
         }
       ],
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Changes the settings for an existing DB proxy.</p>"
+      "documentation": "<p>Changes the settings for an existing DB proxy.</p>"
     },
     "ModifyDBProxyTargetGroup": {
       "name": "ModifyDBProxyTargetGroup",
@@ -2502,7 +2502,7 @@
           "shape": "InvalidDBProxyStateFault"
         }
       ],
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Modifies the properties of a <code>DBProxyTargetGroup</code>.</p>"
+      "documentation": "<p>Modifies the properties of a <code>DBProxyTargetGroup</code>.</p>"
     },
     "ModifyDBSnapshot": {
       "name": "ModifyDBSnapshot",
@@ -2797,7 +2797,7 @@
           "shape": "InvalidDBProxyStateFault"
         }
       ],
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Associate one or more <code>DBProxyTarget</code> data structures with a <code>DBProxyTargetGroup</code>.</p>"
+      "documentation": "<p>Associate one or more <code>DBProxyTarget</code> data structures with a <code>DBProxyTargetGroup</code>.</p>"
     },
     "RemoveFromGlobalCluster": {
       "name": "RemoveFromGlobalCluster",
@@ -4101,10 +4101,10 @@
         },
         "InitQuery": {
           "shape": "String",
-          "documentation": "<p> One or more SQL statements for the proxy to run when opening each new database connection. Typically used with <code>SET</code> statements to make sure that each connection has identical settings such as time zone and character set. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single <code>SET</code> statement, such as <code>SET x=1, y=2</code>. </p> <p> <code>InitQuery</code> is not currently supported for PostgreSQL.</p> <p>Default: no initialization query</p>"
+          "documentation": "<p> One or more SQL statements for the proxy to run when opening each new database connection. Typically used with <code>SET</code> statements to make sure that each connection has identical settings such as time zone and character set. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single <code>SET</code> statement, such as <code>SET x=1, y=2</code>. </p> <p>Default: no initialization query</p>"
         }
       },
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Specifies the settings that control the size and behavior of the connection pool associated with a <code>DBProxyTargetGroup</code>.</p>"
+      "documentation": "<p>Specifies the settings that control the size and behavior of the connection pool associated with a <code>DBProxyTargetGroup</code>.</p>"
     },
     "ConnectionPoolConfigurationInfo": {
       "type": "structure",
@@ -4127,10 +4127,10 @@
         },
         "InitQuery": {
           "shape": "String",
-          "documentation": "<p> One or more SQL statements for the proxy to run when opening each new database connection. Typically used with <code>SET</code> statements to make sure that each connection has identical settings such as time zone and character set. This setting is empty by default. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single <code>SET</code> statement, such as <code>SET x=1, y=2</code>. </p> <p> <code>InitQuery</code> is not currently supported for PostgreSQL.</p>"
+          "documentation": "<p> One or more SQL statements for the proxy to run when opening each new database connection. Typically used with <code>SET</code> statements to make sure that each connection has identical settings such as time zone and character set. This setting is empty by default. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single <code>SET</code> statement, such as <code>SET x=1, y=2</code>. </p>"
         }
       },
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Displays the settings that control the size and behavior of the connection pool associated with a <code>DBProxyTarget</code>.</p>"
+      "documentation": "<p>Displays the settings that control the size and behavior of the connection pool associated with a <code>DBProxyTarget</code>.</p>"
     },
     "CopyDBClusterParameterGroupMessage": {
       "type": "structure",
@@ -6658,7 +6658,7 @@
           "documentation": "<p>The date and time when the proxy was last updated.</p>"
         }
       },
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>The data structure representing a proxy managed by the RDS Proxy.</p> <p>This data type is used as a response element in the <code>DescribeDBProxies</code> action.</p>"
+      "documentation": "<p>The data structure representing a proxy managed by the RDS Proxy.</p> <p>This data type is used as a response element in the <code>DescribeDBProxies</code> action.</p>"
     },
     "DBProxyList": {
       "type": "list",
@@ -6712,7 +6712,7 @@
           "documentation": "<p>Information about the connection health of the RDS Proxy target.</p>"
         }
       },
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Contains the details for an RDS Proxy target. It represents an RDS DB instance or Aurora DB cluster that the proxy can connect to. One or more targets are associated with an RDS Proxy target group.</p> <p>This data type is used as a response element in the <code>DescribeDBProxyTargets</code> action.</p>"
+      "documentation": "<p>Contains the details for an RDS Proxy target. It represents an RDS DB instance or Aurora DB cluster that the proxy can connect to. One or more targets are associated with an RDS Proxy target group.</p> <p>This data type is used as a response element in the <code>DescribeDBProxyTargets</code> action.</p>"
     },
     "DBProxyTargetGroup": {
       "type": "structure",
@@ -6750,7 +6750,7 @@
           "documentation": "<p>The date and time when the target group was last updated.</p>"
         }
       },
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Represents a set of RDS DB instances, Aurora DB clusters, or both that a proxy can connect to. Currently, each target group is associated with exactly one RDS DB instance or Aurora DB cluster.</p> <p>This data type is used as a response element in the <code>DescribeDBProxyTargetGroups</code> action.</p>"
+      "documentation": "<p>Represents a set of RDS DB instances, Aurora DB clusters, or both that a proxy can connect to. Currently, each target group is associated with exactly one RDS DB instance or Aurora DB cluster.</p> <p>This data type is used as a response element in the <code>DescribeDBProxyTargetGroups</code> action.</p>"
     },
     "DBSecurityGroup": {
       "type": "structure",
@@ -12604,7 +12604,7 @@
           "documentation": "<p>A description of the health of the RDS Proxy target. If the <code>State</code> is <code>AVAILABLE</code>, a description is not included.</p>"
         }
       },
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Information about the connection health of an RDS Proxy target.</p>"
+      "documentation": "<p>Information about the connection health of an RDS Proxy target.</p>"
     },
     "TargetHealthReason": {
       "type": "string",
@@ -12697,7 +12697,7 @@
           "documentation": "<p>Whether to require or disallow AWS Identity and Access Management (IAM) authentication for connections to the proxy.</p>"
         }
       },
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Specifies the details of authentication used by a proxy to log in as a specific database user.</p>"
+      "documentation": "<p>Specifies the details of authentication used by a proxy to log in as a specific database user.</p>"
     },
     "UserAuthConfigInfo": {
       "type": "structure",
@@ -12723,7 +12723,7 @@
           "documentation": "<p>Whether to require or disallow AWS Identity and Access Management (IAM) authentication for connections to the proxy.</p>"
         }
       },
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns the details of authentication used by a proxy to log in as a specific database user.</p>"
+      "documentation": "<p>Returns the details of authentication used by a proxy to log in as a specific database user.</p>"
     },
     "UserAuthConfigInfoList": {
       "type": "list",

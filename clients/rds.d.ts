@@ -182,11 +182,11 @@ declare class RDS extends Service {
    */
   createDBParameterGroup(callback?: (err: AWSError, data: RDS.Types.CreateDBParameterGroupResult) => void): Request<RDS.Types.CreateDBParameterGroupResult, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Creates a new DB proxy.
+   * Creates a new DB proxy.
    */
   createDBProxy(params: RDS.Types.CreateDBProxyRequest, callback?: (err: AWSError, data: RDS.Types.CreateDBProxyResponse) => void): Request<RDS.Types.CreateDBProxyResponse, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Creates a new DB proxy.
+   * Creates a new DB proxy.
    */
   createDBProxy(callback?: (err: AWSError, data: RDS.Types.CreateDBProxyResponse) => void): Request<RDS.Types.CreateDBProxyResponse, AWSError>;
   /**
@@ -302,11 +302,11 @@ declare class RDS extends Service {
    */
   deleteDBParameterGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Deletes an existing proxy.
+   * Deletes an existing proxy.
    */
   deleteDBProxy(params: RDS.Types.DeleteDBProxyRequest, callback?: (err: AWSError, data: RDS.Types.DeleteDBProxyResponse) => void): Request<RDS.Types.DeleteDBProxyResponse, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Deletes an existing proxy.
+   * Deletes an existing proxy.
    */
   deleteDBProxy(callback?: (err: AWSError, data: RDS.Types.DeleteDBProxyResponse) => void): Request<RDS.Types.DeleteDBProxyResponse, AWSError>;
   /**
@@ -366,11 +366,11 @@ declare class RDS extends Service {
    */
   deleteOptionGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Remove the association between one or more DBProxyTarget data structures and a DBProxyTargetGroup.
+   * Remove the association between one or more DBProxyTarget data structures and a DBProxyTargetGroup.
    */
   deregisterDBProxyTargets(params: RDS.Types.DeregisterDBProxyTargetsRequest, callback?: (err: AWSError, data: RDS.Types.DeregisterDBProxyTargetsResponse) => void): Request<RDS.Types.DeregisterDBProxyTargetsResponse, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Remove the association between one or more DBProxyTarget data structures and a DBProxyTargetGroup.
+   * Remove the association between one or more DBProxyTarget data structures and a DBProxyTargetGroup.
    */
   deregisterDBProxyTargets(callback?: (err: AWSError, data: RDS.Types.DeregisterDBProxyTargetsResponse) => void): Request<RDS.Types.DeregisterDBProxyTargetsResponse, AWSError>;
   /**
@@ -502,27 +502,27 @@ declare class RDS extends Service {
    */
   describeDBParameters(callback?: (err: AWSError, data: RDS.Types.DBParameterGroupDetails) => void): Request<RDS.Types.DBParameterGroupDetails, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Returns information about DB proxies.
+   * Returns information about DB proxies.
    */
   describeDBProxies(params: RDS.Types.DescribeDBProxiesRequest, callback?: (err: AWSError, data: RDS.Types.DescribeDBProxiesResponse) => void): Request<RDS.Types.DescribeDBProxiesResponse, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Returns information about DB proxies.
+   * Returns information about DB proxies.
    */
   describeDBProxies(callback?: (err: AWSError, data: RDS.Types.DescribeDBProxiesResponse) => void): Request<RDS.Types.DescribeDBProxiesResponse, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Returns information about DB proxy target groups, represented by DBProxyTargetGroup data structures.
+   * Returns information about DB proxy target groups, represented by DBProxyTargetGroup data structures.
    */
   describeDBProxyTargetGroups(params: RDS.Types.DescribeDBProxyTargetGroupsRequest, callback?: (err: AWSError, data: RDS.Types.DescribeDBProxyTargetGroupsResponse) => void): Request<RDS.Types.DescribeDBProxyTargetGroupsResponse, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Returns information about DB proxy target groups, represented by DBProxyTargetGroup data structures.
+   * Returns information about DB proxy target groups, represented by DBProxyTargetGroup data structures.
    */
   describeDBProxyTargetGroups(callback?: (err: AWSError, data: RDS.Types.DescribeDBProxyTargetGroupsResponse) => void): Request<RDS.Types.DescribeDBProxyTargetGroupsResponse, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Returns information about DBProxyTarget objects. This API supports pagination.
+   * Returns information about DBProxyTarget objects. This API supports pagination.
    */
   describeDBProxyTargets(params: RDS.Types.DescribeDBProxyTargetsRequest, callback?: (err: AWSError, data: RDS.Types.DescribeDBProxyTargetsResponse) => void): Request<RDS.Types.DescribeDBProxyTargetsResponse, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Returns information about DBProxyTarget objects. This API supports pagination.
+   * Returns information about DBProxyTarget objects. This API supports pagination.
    */
   describeDBProxyTargets(callback?: (err: AWSError, data: RDS.Types.DescribeDBProxyTargetsResponse) => void): Request<RDS.Types.DescribeDBProxyTargetsResponse, AWSError>;
   /**
@@ -782,19 +782,19 @@ declare class RDS extends Service {
    */
   modifyDBParameterGroup(callback?: (err: AWSError, data: RDS.Types.DBParameterGroupNameMessage) => void): Request<RDS.Types.DBParameterGroupNameMessage, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Changes the settings for an existing DB proxy.
+   * Changes the settings for an existing DB proxy.
    */
   modifyDBProxy(params: RDS.Types.ModifyDBProxyRequest, callback?: (err: AWSError, data: RDS.Types.ModifyDBProxyResponse) => void): Request<RDS.Types.ModifyDBProxyResponse, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Changes the settings for an existing DB proxy.
+   * Changes the settings for an existing DB proxy.
    */
   modifyDBProxy(callback?: (err: AWSError, data: RDS.Types.ModifyDBProxyResponse) => void): Request<RDS.Types.ModifyDBProxyResponse, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Modifies the properties of a DBProxyTargetGroup.
+   * Modifies the properties of a DBProxyTargetGroup.
    */
   modifyDBProxyTargetGroup(params: RDS.Types.ModifyDBProxyTargetGroupRequest, callback?: (err: AWSError, data: RDS.Types.ModifyDBProxyTargetGroupResponse) => void): Request<RDS.Types.ModifyDBProxyTargetGroupResponse, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Modifies the properties of a DBProxyTargetGroup.
+   * Modifies the properties of a DBProxyTargetGroup.
    */
   modifyDBProxyTargetGroup(callback?: (err: AWSError, data: RDS.Types.ModifyDBProxyTargetGroupResponse) => void): Request<RDS.Types.ModifyDBProxyTargetGroupResponse, AWSError>;
   /**
@@ -878,11 +878,11 @@ declare class RDS extends Service {
    */
   rebootDBInstance(callback?: (err: AWSError, data: RDS.Types.RebootDBInstanceResult) => void): Request<RDS.Types.RebootDBInstanceResult, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Associate one or more DBProxyTarget data structures with a DBProxyTargetGroup.
+   * Associate one or more DBProxyTarget data structures with a DBProxyTargetGroup.
    */
   registerDBProxyTargets(params: RDS.Types.RegisterDBProxyTargetsRequest, callback?: (err: AWSError, data: RDS.Types.RegisterDBProxyTargetsResponse) => void): Request<RDS.Types.RegisterDBProxyTargetsResponse, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Associate one or more DBProxyTarget data structures with a DBProxyTargetGroup.
+   * Associate one or more DBProxyTarget data structures with a DBProxyTargetGroup.
    */
   registerDBProxyTargets(callback?: (err: AWSError, data: RDS.Types.RegisterDBProxyTargetsResponse) => void): Request<RDS.Types.RegisterDBProxyTargetsResponse, AWSError>;
   /**
@@ -1357,7 +1357,7 @@ declare namespace RDS {
      */
     SessionPinningFilters?: StringList;
     /**
-     *  One or more SQL statements for the proxy to run when opening each new database connection. Typically used with SET statements to make sure that each connection has identical settings such as time zone and character set. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single SET statement, such as SET x=1, y=2.   InitQuery is not currently supported for PostgreSQL. Default: no initialization query
+     *  One or more SQL statements for the proxy to run when opening each new database connection. Typically used with SET statements to make sure that each connection has identical settings such as time zone and character set. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single SET statement, such as SET x=1, y=2.  Default: no initialization query
      */
     InitQuery?: String;
   }
@@ -1379,7 +1379,7 @@ declare namespace RDS {
      */
     SessionPinningFilters?: StringList;
     /**
-     *  One or more SQL statements for the proxy to run when opening each new database connection. Typically used with SET statements to make sure that each connection has identical settings such as time zone and character set. This setting is empty by default. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single SET statement, such as SET x=1, y=2.   InitQuery is not currently supported for PostgreSQL.
+     *  One or more SQL statements for the proxy to run when opening each new database connection. Typically used with SET statements to make sure that each connection has identical settings such as time zone and character set. This setting is empty by default. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single SET statement, such as SET x=1, y=2. 
      */
     InitQuery?: String;
   }
