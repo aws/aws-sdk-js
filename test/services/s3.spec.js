@@ -3493,6 +3493,23 @@ describe('AWS.S3', function() {
       });
     });
 
+    it('should correctly generate access point endpoint with no client config', function(done) {
+      helpers.mockHttpResponse(200, {}, '');
+      client = new AWS.S3();
+      var request = client.getObject({
+        Bucket: 'arn:aws:s3:us-west-2:123456789012:accesspoint/myendpoint',
+        Key: 'key'
+      });
+      request.send(function(err, data) {
+        expect(err).to.not.exist;
+        expect(request.httpRequest.endpoint.hostname).to.equal(
+          'myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com'
+        );
+        expect(request.httpRequest.path).to.equal('/key');
+        done();
+      });
+    });
+
     it('should correctly generate access point endpoint containing \':\'', function(done) {
       helpers.mockHttpResponse(200, {}, '');
       var request = s3.getObject({
