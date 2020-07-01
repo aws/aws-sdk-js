@@ -1,0 +1,37 @@
+[
+    {
+        "type": "bugfix",
+        "category": "S3",
+        "description": "Fixed a bug where S3 client throws when client config is undefined and Bucket is an AccessPoint ARN"
+    },
+    {
+        "type": "feature",
+        "category": "AppSync",
+        "description": "AWS AppSync supports new 12xlarge instance for server-side API caching"
+    },
+    {
+        "type": "feature",
+        "category": "Chime",
+        "description": "This release supports third party emergency call routing configuration for Amazon Chime Voice Connectors."
+    },
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "Support build status config in project source"
+    },
+    {
+        "type": "feature",
+        "category": "Imagebuilder",
+        "description": "EC2 Image Builder adds support for encrypted AMI distribution."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "This release adds the exceptions KMSKeyNotAccessibleFault and InvalidDBClusterStateFault to the Amazon RDS ModifyDBInstance API."
+    },
+    {
+        "type": "feature",
+        "category": "SecurityHub",
+        "description": "This release adds additional details for findings. There are now finding details for auto scaling groups, EC2 volumes, and EC2 VPCs. You can identify detected vulnerabilities and provide related network paths."
+    }
+]

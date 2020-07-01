@@ -1343,6 +1343,32 @@
         "shape": "AvailabilityZone"
       }
     },
+    "AwsAutoScalingAutoScalingGroupDetails": {
+      "type": "structure",
+      "members": {
+        "LaunchConfigurationName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the launch configuration.</p>"
+        },
+        "LoadBalancerNames": {
+          "shape": "StringList",
+          "documentation": "<p>The list of load balancers associated with the group.</p>"
+        },
+        "HealthCheckType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The service to use for the health checks.</p>"
+        },
+        "HealthCheckGracePeriod": {
+          "shape": "Integer",
+          "documentation": "<p>The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before it checks the health status of an EC2 instance that has come into service.</p>"
+        },
+        "CreatedTime": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The datetime when the auto scaling group was created.</p>"
+        }
+      },
+      "documentation": "<p>Provides details about an auto scaling group.</p>"
+    },
     "AwsCloudFrontDistributionDetails": {
       "type": "structure",
       "members": {
@@ -1810,6 +1836,90 @@
       "member": {
         "shape": "AwsEc2SecurityGroupUserIdGroupPair"
       }
+    },
+    "AwsEc2VolumeAttachment": {
+      "type": "structure",
+      "members": {
+        "AttachTime": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The datetime when the attachment initiated.</p>"
+        },
+        "DeleteOnTermination": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the EBS volume is deleted when the EC2 instance is terminated.</p>"
+        },
+        "InstanceId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the EC2 instance.</p>"
+        },
+        "Status": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The attachment state of the volume.</p>"
+        }
+      },
+      "documentation": "<p>An attachment to an AWS EC2 volume.</p>"
+    },
+    "AwsEc2VolumeAttachmentList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEc2VolumeAttachment"
+      }
+    },
+    "AwsEc2VolumeDetails": {
+      "type": "structure",
+      "members": {
+        "CreateTime": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The datetime when the volume was created.</p>"
+        },
+        "Encrypted": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the volume is encrypted.</p>"
+        },
+        "Size": {
+          "shape": "Integer",
+          "documentation": "<p>The size of the volume, in GiBs.</p>"
+        },
+        "SnapshotId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The snapshot from which the volume was created.</p>"
+        },
+        "Status": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The volume state.</p>"
+        },
+        "KmsKeyId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to protect the volume encryption key for the volume.</p>"
+        },
+        "Attachments": {
+          "shape": "AwsEc2VolumeAttachmentList",
+          "documentation": "<p>The volume attachments.</p>"
+        }
+      },
+      "documentation": "<p>Details about an EC2 volume.</p>"
+    },
+    "AwsEc2VpcDetails": {
+      "type": "structure",
+      "members": {
+        "CidrBlockAssociationSet": {
+          "shape": "CidrBlockAssociationList",
+          "documentation": "<p>Information about the IPv4 CIDR blocks associated with the VPC.</p>"
+        },
+        "Ipv6CidrBlockAssociationSet": {
+          "shape": "Ipv6CidrBlockAssociationList",
+          "documentation": "<p>Information about the IPv6 CIDR blocks associated with the VPC.</p>"
+        },
+        "DhcpOptionsId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the set of Dynamic Host Configuration Protocol (DHCP) options that are associated with the VPC. If the default options are associated with the VPC, then this is default.</p>"
+        },
+        "State": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The current state of the VPC.</p>"
+        }
+      },
+      "documentation": "<p>Details about an EC2 VPC.</p>"
     },
     "AwsElasticsearchDomainDetails": {
       "type": "structure",
@@ -2612,6 +2722,10 @@
           "shape": "Network",
           "documentation": "<p>The details of network-related information about a finding.</p>"
         },
+        "NetworkPath": {
+          "shape": "NetworkPathList",
+          "documentation": "<p>Provides information about a network path that is relevant to a finding. Each entry under <code>NetworkPath</code> represents a component of that path.</p>"
+        },
         "Process": {
           "shape": "ProcessDetails",
           "documentation": "<p>The details of process-related information about a finding.</p>"
@@ -2651,6 +2765,10 @@
         "Note": {
           "shape": "Note",
           "documentation": "<p>A user-defined note added to a finding.</p>"
+        },
+        "Vulnerabilities": {
+          "shape": "VulnerabilityList",
+          "documentation": "<p>Provides a list of vulnerabilities associated with the findings.</p>"
         }
       },
       "documentation": "<p>Provides consistent format for the contents of the Security Hub-aggregated findings. <code>AwsSecurityFinding</code> format enables you to share findings between AWS security services and third-party solutions, and security standards checks.</p> <note> <p>A finding is a potential security issue generated either by AWS services (Amazon GuardDuty, Amazon Inspector, and Amazon Macie) or by the integrated third-party solutions and standards checks.</p> </note>"
@@ -3326,6 +3444,30 @@
         "shape": "NonEmptyString"
       }
     },
+    "CidrBlockAssociation": {
+      "type": "structure",
+      "members": {
+        "AssociationId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The association ID for the IPv4 CIDR block.</p>"
+        },
+        "CidrBlock": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The IPv4 CIDR block.</p>"
+        },
+        "CidrBlockState": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Information about the state of the IPv4 CIDR block.</p>"
+        }
+      },
+      "documentation": "<p>An IPv4 CIDR block association.</p>"
+    },
+    "CidrBlockAssociationList": {
+      "type": "list",
+      "member": {
+        "shape": "CidrBlockAssociation"
+      }
+    },
     "Compliance": {
       "type": "structure",
       "members": {
@@ -3466,6 +3608,30 @@
           "shape": "ResultList",
           "documentation": "<p>The list of AWS accounts that were not processed. For each account, the list includes the account ID and the email address.</p>"
         }
+      }
+    },
+    "Cvss": {
+      "type": "structure",
+      "members": {
+        "Version": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The version of CVSS for the CVSS score.</p>"
+        },
+        "BaseScore": {
+          "shape": "Double",
+          "documentation": "<p>The base CVSS score.</p>"
+        },
+        "BaseVector": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The base scoring vector for the CVSS score.</p>"
+        }
+      },
+      "documentation": "<p>CVSS scores from the advisory related to the vulnerability.</p>"
+    },
+    "CvssList": {
+      "type": "list",
+      "member": {
+        "shape": "Cvss"
       }
     },
     "DateFilter": {
@@ -4245,6 +4411,30 @@
         "shape": "IpFilter"
       }
     },
+    "Ipv6CidrBlockAssociation": {
+      "type": "structure",
+      "members": {
+        "AssociationId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The association ID for the IPv6 CIDR block.</p>"
+        },
+        "Ipv6CidrBlock": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The IPv6 CIDR block.</p>"
+        },
+        "CidrBlockState": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Information about the state of the CIDR block.</p>"
+        }
+      },
+      "documentation": "<p>An IPV6 CIDR block association.</p>"
+    },
+    "Ipv6CidrBlockAssociationList": {
+      "type": "list",
+      "member": {
+        "shape": "Ipv6CidrBlockAssociation"
+      }
+    },
     "KeywordFilter": {
       "type": "structure",
       "members": {
@@ -4535,6 +4725,10 @@
           "shape": "NonEmptyString",
           "documentation": "<p>The protocol of network-related information about a finding.</p>"
         },
+        "OpenPortRange": {
+          "shape": "PortRange",
+          "documentation": "<p>The range of open ports that is present on the network.</p>"
+        },
         "SourceIpV4": {
           "shape": "NonEmptyString",
           "documentation": "<p>The source IPv4 address of network-related information about a finding.</p>"
@@ -4580,6 +4774,66 @@
         "IN",
         "OUT"
       ]
+    },
+    "NetworkHeader": {
+      "type": "structure",
+      "members": {
+        "Protocol": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The protocol used for the component.</p>"
+        },
+        "Destination": {
+          "shape": "NetworkPathComponentDetails",
+          "documentation": "<p>Information about the destination of the component.</p>"
+        },
+        "Source": {
+          "shape": "NetworkPathComponentDetails",
+          "documentation": "<p>Information about the origin of the component.</p>"
+        }
+      },
+      "documentation": "<p>Details about a network path component that occurs before or after the current component.</p>"
+    },
+    "NetworkPathComponent": {
+      "type": "structure",
+      "members": {
+        "ComponentId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of a component in the network path.</p>"
+        },
+        "ComponentType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of component.</p>"
+        },
+        "Egress": {
+          "shape": "NetworkHeader",
+          "documentation": "<p>Information about the component that comes after the current component in the network path.</p>"
+        },
+        "Ingress": {
+          "shape": "NetworkHeader",
+          "documentation": "<p>Information about the component that comes before the current node in the network path.</p>"
+        }
+      },
+      "documentation": "<p>Information about a network path component.</p>"
+    },
+    "NetworkPathComponentDetails": {
+      "type": "structure",
+      "members": {
+        "Address": {
+          "shape": "StringList",
+          "documentation": "<p>The IP addresses of the destination.</p>"
+        },
+        "PortRanges": {
+          "shape": "PortRangeList",
+          "documentation": "<p>A list of port ranges for the destination.</p>"
+        }
+      },
+      "documentation": "<p>Information about the destination of the next component in the network path.</p>"
+    },
+    "NetworkPathList": {
+      "type": "list",
+      "member": {
+        "shape": "NetworkPathComponent"
+      }
     },
     "NextToken": {
       "type": "string"
@@ -4666,6 +4920,26 @@
         "aws-cn",
         "aws-us-gov"
       ]
+    },
+    "PortRange": {
+      "type": "structure",
+      "members": {
+        "Begin": {
+          "shape": "Integer",
+          "documentation": "<p>The first port in the port range.</p>"
+        },
+        "End": {
+          "shape": "Integer",
+          "documentation": "<p>The last port in the port range.</p>"
+        }
+      },
+      "documentation": "<p>A range of ports.</p>"
+    },
+    "PortRangeList": {
+      "type": "list",
+      "member": {
+        "shape": "PortRange"
+      }
     },
     "ProcessDetails": {
       "type": "structure",
@@ -4861,6 +5135,10 @@
     "ResourceDetails": {
       "type": "structure",
       "members": {
+        "AwsAutoScalingAutoScalingGroup": {
+          "shape": "AwsAutoScalingAutoScalingGroupDetails",
+          "documentation": "<p>Details for an autoscaling group.</p>"
+        },
         "AwsCodeBuildProject": {
           "shape": "AwsCodeBuildProjectDetails",
           "documentation": "<p>Details for an AWS CodeBuild project.</p>"
@@ -4880,6 +5158,14 @@
         "AwsEc2SecurityGroup": {
           "shape": "AwsEc2SecurityGroupDetails",
           "documentation": "<p>Details for an EC2 security group.</p>"
+        },
+        "AwsEc2Volume": {
+          "shape": "AwsEc2VolumeDetails",
+          "documentation": "<p>Details for an EC2 volume.</p>"
+        },
+        "AwsEc2Vpc": {
+          "shape": "AwsEc2VpcDetails",
+          "documentation": "<p>Details for an EC2 VPC.</p>"
         },
         "AwsElbv2LoadBalancer": {
           "shape": "AwsElbv2LoadBalancerDetails",
@@ -5034,6 +5320,38 @@
         }
       },
       "documentation": "<p>Updates to the severity information for a finding.</p>"
+    },
+    "SoftwarePackage": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the software package.</p>"
+        },
+        "Version": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The version of the software package.</p>"
+        },
+        "Epoch": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The epoch of the software package.</p>"
+        },
+        "Release": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The release of the software package.</p>"
+        },
+        "Architecture": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The architecture used for the software package.</p>"
+        }
+      },
+      "documentation": "<p>Information about a software package.</p>"
+    },
+    "SoftwarePackageList": {
+      "type": "list",
+      "member": {
+        "shape": "SoftwarePackage"
+      }
     },
     "SortCriteria": {
       "type": "list",
@@ -5532,7 +5850,7 @@
         },
         "DisabledReason": {
           "shape": "NonEmptyString",
-          "documentation": "<p>A description of the reason why you are disabling a security standard control.</p>"
+          "documentation": "<p>A description of the reason why you are disabling a security standard control. If you are disabling a control, then this is required.</p>"
         }
       }
     },
@@ -5548,6 +5866,74 @@
         "FALSE_POSITIVE",
         "BENIGN_POSITIVE"
       ]
+    },
+    "Vulnerability": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "Id": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the vulnerability.</p>"
+        },
+        "VulnerablePackages": {
+          "shape": "SoftwarePackageList",
+          "documentation": "<p>List of software packages that have the vulnerability.</p>"
+        },
+        "Cvss": {
+          "shape": "CvssList",
+          "documentation": "<p>CVSS scores from the advisory related to the vulnerability.</p>"
+        },
+        "RelatedVulnerabilities": {
+          "shape": "StringList",
+          "documentation": "<p>List of vulnerabilities that are related to this vulnerability.</p>"
+        },
+        "Vendor": {
+          "shape": "VulnerabilityVendor",
+          "documentation": "<p>Information about the vendor that generates the vulnerability report.</p>"
+        },
+        "ReferenceUrls": {
+          "shape": "StringList",
+          "documentation": "<p>A list of URLs that provide additional information about the vulnerability.</p>"
+        }
+      },
+      "documentation": "<p>A vulnerability associated with a finding.</p>"
+    },
+    "VulnerabilityList": {
+      "type": "list",
+      "member": {
+        "shape": "Vulnerability"
+      }
+    },
+    "VulnerabilityVendor": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the vendor.</p>"
+        },
+        "Url": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The URL of the vulnerability advisory.</p>"
+        },
+        "VendorSeverity": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The severity that the vendor assigned to the vulnerability.</p>"
+        },
+        "VendorCreatedAt": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The datetime when the vulnerability advisory was created.</p>"
+        },
+        "VendorUpdatedAt": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The datetime when the vulnerability advisory was last updated.</p>"
+        }
+      },
+      "documentation": "<p>A vendor that generates a vulnerability report.</p>"
     },
     "WafAction": {
       "type": "structure",

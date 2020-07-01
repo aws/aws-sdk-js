@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.708.0-->
+<!--LATEST=2.709.0-->
 <!--ENTRYINSERT-->
+
+## 2.709.0
+* bugfix: S3: Fixed a bug where S3 client throws when client config is undefined and Bucket is an AccessPoint ARN
+* feature: AppSync: AWS AppSync supports new 12xlarge instance for server-side API caching
+* feature: Chime: This release supports third party emergency call routing configuration for Amazon Chime Voice Connectors.
+* feature: CodeBuild: Support build status config in project source
+* feature: Imagebuilder: EC2 Image Builder adds support for encrypted AMI distribution.
+* feature: RDS: This release adds the exceptions KMSKeyNotAccessibleFault and InvalidDBClusterStateFault to the Amazon RDS ModifyDBInstance API.
+* feature: SecurityHub: This release adds additional details for findings. There are now finding details for auto scaling groups, EC2 volumes, and EC2 VPCs. You can identify detected vulnerabilities and provide related network paths.
 
 ## 2.708.0
 * feature: CodeGuruReviewer: Release GitHub Enterprise Server source provider integration

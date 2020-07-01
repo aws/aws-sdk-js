@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "S3",
-  "description": "Fixed a bug where S3 client throws when client config is undefined and Bucket is an AccessPoint ARN"
-}

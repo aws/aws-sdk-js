@@ -401,6 +401,28 @@ declare namespace SecurityHub {
     SubnetId?: NonEmptyString;
   }
   export type AvailabilityZones = AvailabilityZone[];
+  export interface AwsAutoScalingAutoScalingGroupDetails {
+    /**
+     * The name of the launch configuration.
+     */
+    LaunchConfigurationName?: NonEmptyString;
+    /**
+     * The list of load balancers associated with the group.
+     */
+    LoadBalancerNames?: StringList;
+    /**
+     * The service to use for the health checks.
+     */
+    HealthCheckType?: NonEmptyString;
+    /**
+     * The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before it checks the health status of an EC2 instance that has come into service.
+     */
+    HealthCheckGracePeriod?: Integer;
+    /**
+     * The datetime when the auto scaling group was created.
+     */
+    CreatedTime?: NonEmptyString;
+  }
   export interface AwsCloudFrontDistributionDetails {
     /**
      * The domain name corresponding to the distribution.
@@ -758,6 +780,73 @@ declare namespace SecurityHub {
     VpcPeeringConnectionId?: NonEmptyString;
   }
   export type AwsEc2SecurityGroupUserIdGroupPairList = AwsEc2SecurityGroupUserIdGroupPair[];
+  export interface AwsEc2VolumeAttachment {
+    /**
+     * The datetime when the attachment initiated.
+     */
+    AttachTime?: NonEmptyString;
+    /**
+     * Whether the EBS volume is deleted when the EC2 instance is terminated.
+     */
+    DeleteOnTermination?: Boolean;
+    /**
+     * The identifier of the EC2 instance.
+     */
+    InstanceId?: NonEmptyString;
+    /**
+     * The attachment state of the volume.
+     */
+    Status?: NonEmptyString;
+  }
+  export type AwsEc2VolumeAttachmentList = AwsEc2VolumeAttachment[];
+  export interface AwsEc2VolumeDetails {
+    /**
+     * The datetime when the volume was created.
+     */
+    CreateTime?: NonEmptyString;
+    /**
+     * Whether the volume is encrypted.
+     */
+    Encrypted?: Boolean;
+    /**
+     * The size of the volume, in GiBs.
+     */
+    Size?: Integer;
+    /**
+     * The snapshot from which the volume was created.
+     */
+    SnapshotId?: NonEmptyString;
+    /**
+     * The volume state.
+     */
+    Status?: NonEmptyString;
+    /**
+     * The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to protect the volume encryption key for the volume.
+     */
+    KmsKeyId?: NonEmptyString;
+    /**
+     * The volume attachments.
+     */
+    Attachments?: AwsEc2VolumeAttachmentList;
+  }
+  export interface AwsEc2VpcDetails {
+    /**
+     * Information about the IPv4 CIDR blocks associated with the VPC.
+     */
+    CidrBlockAssociationSet?: CidrBlockAssociationList;
+    /**
+     * Information about the IPv6 CIDR blocks associated with the VPC.
+     */
+    Ipv6CidrBlockAssociationSet?: Ipv6CidrBlockAssociationList;
+    /**
+     * The identifier of the set of Dynamic Host Configuration Protocol (DHCP) options that are associated with the VPC. If the default options are associated with the VPC, then this is default.
+     */
+    DhcpOptionsId?: NonEmptyString;
+    /**
+     * The current state of the VPC.
+     */
+    State?: NonEmptyString;
+  }
   export interface AwsElasticsearchDomainDetails {
     /**
      * IAM policy document specifying the access policies for the new Amazon ES domain.
@@ -1401,6 +1490,10 @@ declare namespace SecurityHub {
      */
     Network?: Network;
     /**
+     * Provides information about a network path that is relevant to a finding. Each entry under NetworkPath represents a component of that path.
+     */
+    NetworkPath?: NetworkPathList;
+    /**
      * The details of process-related information about a finding.
      */
     Process?: ProcessDetails;
@@ -1440,6 +1533,10 @@ declare namespace SecurityHub {
      * A user-defined note added to a finding.
      */
     Note?: Note;
+    /**
+     * Provides a list of vulnerabilities associated with the findings.
+     */
+    Vulnerabilities?: VulnerabilityList;
   }
   export interface AwsSecurityFindingFilters {
     /**
@@ -1993,6 +2090,21 @@ declare namespace SecurityHub {
   export type BatchUpdateFindingsUnprocessedFindingsList = BatchUpdateFindingsUnprocessedFinding[];
   export type Boolean = boolean;
   export type CategoryList = NonEmptyString[];
+  export interface CidrBlockAssociation {
+    /**
+     * The association ID for the IPv4 CIDR block.
+     */
+    AssociationId?: NonEmptyString;
+    /**
+     * The IPv4 CIDR block.
+     */
+    CidrBlock?: NonEmptyString;
+    /**
+     * Information about the state of the IPv4 CIDR block.
+     */
+    CidrBlockState?: NonEmptyString;
+  }
+  export type CidrBlockAssociationList = CidrBlockAssociation[];
   export interface Compliance {
     /**
      * The result of a standards check. The valid values for Status are as follows.      PASSED - Standards check passed for all evaluated resources.    WARNING - Some information is missing or this check is not supported for your configuration.    FAILED - Standards check failed for at least one evaluated resource.    NOT_AVAILABLE - Check could not be performed due to a service outage, API error, or because the result of the AWS Config evaluation was NOT_APPLICABLE. If the AWS Config evaluation result was NOT_APPLICABLE, then after 3 days, Security Hub automatically archives the finding.    
@@ -2079,6 +2191,21 @@ declare namespace SecurityHub {
      */
     UnprocessedAccounts?: ResultList;
   }
+  export interface Cvss {
+    /**
+     * The version of CVSS for the CVSS score.
+     */
+    Version?: NonEmptyString;
+    /**
+     * The base CVSS score.
+     */
+    BaseScore?: Double;
+    /**
+     * The base scoring vector for the CVSS score.
+     */
+    BaseVector?: NonEmptyString;
+  }
+  export type CvssList = Cvss[];
   export interface DateFilter {
     /**
      * A start date for the date filter.
@@ -2539,6 +2666,21 @@ declare namespace SecurityHub {
     Cidr?: NonEmptyString;
   }
   export type IpFilterList = IpFilter[];
+  export interface Ipv6CidrBlockAssociation {
+    /**
+     * The association ID for the IPv6 CIDR block.
+     */
+    AssociationId?: NonEmptyString;
+    /**
+     * The IPv6 CIDR block.
+     */
+    Ipv6CidrBlock?: NonEmptyString;
+    /**
+     * Information about the state of the CIDR block.
+     */
+    CidrBlockState?: NonEmptyString;
+  }
+  export type Ipv6CidrBlockAssociationList = Ipv6CidrBlockAssociation[];
   export interface KeywordFilter {
     /**
      * A value for the keyword.
@@ -2707,6 +2849,10 @@ declare namespace SecurityHub {
      */
     Protocol?: NonEmptyString;
     /**
+     * The range of open ports that is present on the network.
+     */
+    OpenPortRange?: PortRange;
+    /**
      * The source IPv4 address of network-related information about a finding.
      */
     SourceIpV4?: NonEmptyString;
@@ -2744,6 +2890,49 @@ declare namespace SecurityHub {
     DestinationDomain?: NonEmptyString;
   }
   export type NetworkDirection = "IN"|"OUT"|string;
+  export interface NetworkHeader {
+    /**
+     * The protocol used for the component.
+     */
+    Protocol?: NonEmptyString;
+    /**
+     * Information about the destination of the component.
+     */
+    Destination?: NetworkPathComponentDetails;
+    /**
+     * Information about the origin of the component.
+     */
+    Source?: NetworkPathComponentDetails;
+  }
+  export interface NetworkPathComponent {
+    /**
+     * The identifier of a component in the network path.
+     */
+    ComponentId?: NonEmptyString;
+    /**
+     * The type of component.
+     */
+    ComponentType?: NonEmptyString;
+    /**
+     * Information about the component that comes after the current component in the network path.
+     */
+    Egress?: NetworkHeader;
+    /**
+     * Information about the component that comes before the current node in the network path.
+     */
+    Ingress?: NetworkHeader;
+  }
+  export interface NetworkPathComponentDetails {
+    /**
+     * The IP addresses of the destination.
+     */
+    Address?: StringList;
+    /**
+     * A list of port ranges for the destination.
+     */
+    PortRanges?: PortRangeList;
+  }
+  export type NetworkPathList = NetworkPathComponent[];
   export type NextToken = string;
   export type NonEmptyString = string;
   export type NonEmptyStringList = NonEmptyString[];
@@ -2787,6 +2976,17 @@ declare namespace SecurityHub {
   }
   export type NumberFilterList = NumberFilter[];
   export type Partition = "aws"|"aws-cn"|"aws-us-gov"|string;
+  export interface PortRange {
+    /**
+     * The first port in the port range.
+     */
+    Begin?: Integer;
+    /**
+     * The last port in the port range.
+     */
+    End?: Integer;
+  }
+  export type PortRangeList = PortRange[];
   export interface ProcessDetails {
     /**
      * The name of the process.
@@ -2912,6 +3112,10 @@ declare namespace SecurityHub {
   export type ResourceArn = string;
   export interface ResourceDetails {
     /**
+     * Details for an autoscaling group.
+     */
+    AwsAutoScalingAutoScalingGroup?: AwsAutoScalingAutoScalingGroupDetails;
+    /**
      * Details for an AWS CodeBuild project.
      */
     AwsCodeBuildProject?: AwsCodeBuildProjectDetails;
@@ -2931,6 +3135,14 @@ declare namespace SecurityHub {
      * Details for an EC2 security group.
      */
     AwsEc2SecurityGroup?: AwsEc2SecurityGroupDetails;
+    /**
+     * Details for an EC2 volume.
+     */
+    AwsEc2Volume?: AwsEc2VolumeDetails;
+    /**
+     * Details for an EC2 VPC.
+     */
+    AwsEc2Vpc?: AwsEc2VpcDetails;
     /**
      * Details about a load balancer.
      */
@@ -3039,6 +3251,29 @@ declare namespace SecurityHub {
      */
     Label?: SeverityLabel;
   }
+  export interface SoftwarePackage {
+    /**
+     * The name of the software package.
+     */
+    Name?: NonEmptyString;
+    /**
+     * The version of the software package.
+     */
+    Version?: NonEmptyString;
+    /**
+     * The epoch of the software package.
+     */
+    Epoch?: NonEmptyString;
+    /**
+     * The release of the software package.
+     */
+    Release?: NonEmptyString;
+    /**
+     * The architecture used for the software package.
+     */
+    Architecture?: NonEmptyString;
+  }
+  export type SoftwarePackageList = SoftwarePackage[];
   export type SortCriteria = SortCriterion[];
   export interface SortCriterion {
     /**
@@ -3291,13 +3526,62 @@ declare namespace SecurityHub {
      */
     ControlStatus?: ControlStatus;
     /**
-     * A description of the reason why you are disabling a security standard control.
+     * A description of the reason why you are disabling a security standard control. If you are disabling a control, then this is required.
      */
     DisabledReason?: NonEmptyString;
   }
   export interface UpdateStandardsControlResponse {
   }
   export type VerificationState = "UNKNOWN"|"TRUE_POSITIVE"|"FALSE_POSITIVE"|"BENIGN_POSITIVE"|string;
+  export interface Vulnerability {
+    /**
+     * The identifier of the vulnerability.
+     */
+    Id: NonEmptyString;
+    /**
+     * List of software packages that have the vulnerability.
+     */
+    VulnerablePackages?: SoftwarePackageList;
+    /**
+     * CVSS scores from the advisory related to the vulnerability.
+     */
+    Cvss?: CvssList;
+    /**
+     * List of vulnerabilities that are related to this vulnerability.
+     */
+    RelatedVulnerabilities?: StringList;
+    /**
+     * Information about the vendor that generates the vulnerability report.
+     */
+    Vendor?: VulnerabilityVendor;
+    /**
+     * A list of URLs that provide additional information about the vulnerability.
+     */
+    ReferenceUrls?: StringList;
+  }
+  export type VulnerabilityList = Vulnerability[];
+  export interface VulnerabilityVendor {
+    /**
+     * The name of the vendor.
+     */
+    Name: NonEmptyString;
+    /**
+     * The URL of the vulnerability advisory.
+     */
+    Url?: NonEmptyString;
+    /**
+     * The severity that the vendor assigned to the vulnerability.
+     */
+    VendorSeverity?: NonEmptyString;
+    /**
+     * The datetime when the vulnerability advisory was created.
+     */
+    VendorCreatedAt?: NonEmptyString;
+    /**
+     * The datetime when the vulnerability advisory was last updated.
+     */
+    VendorUpdatedAt?: NonEmptyString;
+  }
   export interface WafAction {
     /**
      * Specifies how you want AWS WAF to respond to requests that match the settings in a rule. Valid settings include the following:    ALLOW - AWS WAF allows requests    BLOCK - AWS WAF blocks requests    COUNT - AWS WAF increments a counter of the requests that match all of the conditions in the rule. AWS WAF then continues to inspect the web request based on the remaining rules in the web ACL. You can't specify COUNT for the default action for a WebACL.  

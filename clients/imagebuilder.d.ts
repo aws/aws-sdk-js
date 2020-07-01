@@ -383,6 +383,10 @@ declare namespace Imagebuilder {
      */
     amiTags?: TagMap;
     /**
+     *  The KMS key identifier used to encrypt the distributed image. 
+     */
+    kmsKeyId?: NonEmptyString;
+    /**
      *  Launch permissions can be used to configure which AWS accounts can use the AMI to launch instances. 
      */
     launchPermission?: LaunchPermissionConfiguration;
