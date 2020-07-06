@@ -1,6 +1,68 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.700.0-->
+<!--LATEST=2.710.0-->
 <!--ENTRYINSERT-->
+
+## 2.710.0
+* feature: IoTSiteWise: This release supports optional start date and end date parameters for the GetAssetPropertyValueHistory API.
+* feature: QuickSight: Add Theme APIs and update Dashboard APIs to support theme overrides.
+* feature: RDS: Adds support for Amazon RDS on AWS Outposts.
+
+## 2.709.0
+* bugfix: S3: Fixed a bug where S3 client throws when client config is undefined and Bucket is an AccessPoint ARN
+* feature: AppSync: AWS AppSync supports new 12xlarge instance for server-side API caching
+* feature: Chime: This release supports third party emergency call routing configuration for Amazon Chime Voice Connectors.
+* feature: CodeBuild: Support build status config in project source
+* feature: Imagebuilder: EC2 Image Builder adds support for encrypted AMI distribution.
+* feature: RDS: This release adds the exceptions KMSKeyNotAccessibleFault and InvalidDBClusterStateFault to the Amazon RDS ModifyDBInstance API.
+* feature: SecurityHub: This release adds additional details for findings. There are now finding details for auto scaling groups, EC2 volumes, and EC2 VPCs. You can identify detected vulnerabilities and provide related network paths.
+
+## 2.708.0
+* feature: CodeGuruReviewer: Release GitHub Enterprise Server source provider integration
+* feature: ComprehendMedical: This release adds the relationships between MedicalCondition and Anatomy in DetectEntitiesV2 API.
+* feature: EC2: Added support for tag-on-create for CreateVpc, CreateEgressOnlyInternetGateway, CreateSecurityGroup, CreateSubnet, CreateNetworkInterface, CreateNetworkAcl, CreateDhcpOptions and CreateInternetGateway. You can now specify tags when creating any of these resources. For more information about tagging, see AWS Tagging Strategies.
+* feature: ECR: Add a new parameter (ImageDigest) and a new exception (ImageDigestDoesNotMatchException) to PutImage API to support pushing image by digest.
+
+## 2.707.0
+* feature: CodeGuruProfiler: Amazon CodeGuru Profiler is now generally available. The Profiler helps developers to optimize their software, troubleshoot issues in production, and identify their most expensive lines of code. As part of general availability, we are launching: Profiling of AWS Lambda functions, Anomaly detection in CPU profiles, Color My Code on flame graphs, Expanding presence to 10 AWS regions.
+* feature: CodeStarconnections: Updated and new APIs in support of hosts for connections to installed provider types. New integration with the GitHub Enterprise Server provider type.
+* feature: EC2: Virtual Private Cloud (VPC) customers can now create and manage their own Prefix Lists to simplify VPC configurations.
+
+## 2.706.0
+* feature: CloudFormation: ListStackInstances and DescribeStackInstance now return a new `StackInstanceStatus` object that contains `DetailedStatus` values: a disambiguation of the more generic `Status` value. ListStackInstances output can now be filtered on `DetailedStatus` using the new `Filters` parameter.
+* feature: CognitoIdentityServiceProvider: Don't require Authorization for InitiateAuth and RespondToAuthChallenge.
+* feature: QuickSight: Added support for cross-region DataSource credentials copying.
+* feature: SageMaker: The new 'ModelClientConfig' parameter being added for CreateTransformJob and DescribeTransformJob api actions enable customers to configure model invocation related parameters such as timeout and retry.
+
+## 2.705.0
+* feature: EC2: Added support for tag-on-create for Host Reservations in Dedicated Hosts. You can now specify tags when you create a Host Reservation for a Dedicated Host. For more information about tagging, see AWS Tagging Strategies.
+* feature: Glue: This release adds new APIs to support column level statistics in AWS Glue Data Catalog
+
+## 2.704.0
+* feature: Amplify: This release of AWS Amplify Console introduces support for automatically creating custom subdomains for branches based on user-defined glob patterns, as well as automatically cleaning up Amplify branches when their corresponding git branches are deleted.
+* feature: Backup: Customers can now manage and monitor their backups in a policied manner across their AWS accounts, via an integration between AWS Backup and AWS Organizations
+* feature: CodeCommit: This release introduces support for reactions to CodeCommit comments. Users will be able to select from a pre-defined list of emojis to express their reaction to any comments.
+* feature: EMR: Amazon EMR customers can now set allocation strategies for On-Demand and Spot instances in their EMR clusters with instance fleets. These allocation strategies use real-time capacity insights to provision clusters faster and make the most efficient use of available spare capacity to allocate Spot instances to reduce interruptions. 
+* feature: FSx: This release adds the capability to take highly-durable, incremental backups of your FSx for Lustre persistent file systems. This capability makes it easy to further protect your file system data and to meet business and regulatory compliance requirements.
+* feature: Honeycode: Introducing Amazon Honeycode - a fully managed service that allows you to quickly build mobile and web apps for teams without programming.
+* feature: Organizations: This release adds support for a new backup policy type for AWS Organizations.
+
+## 2.703.0
+* feature: MediaTailor: AWS Elemental MediaTailor SDK now allows configuration of Bumper.
+* feature: Organizations: Added a new error message to support the requirement for a Business License on AWS accounts in China to create an organization.
+
+## 2.702.0
+* bugfix: EFS: Check for ValidationException in integration tests
+* feature: EC2: This release adds Tag On Create feature support for the ImportImage, ImportSnapshot, ExportImage and CreateInstanceExportTask APIs.
+* feature: EMR: Adding support for MaximumCoreCapacityUnits parameter for EMR Managed Scaling. It allows users to control how many units/nodes are added to the CORE group/fleet. Remaining units/nodes are added to the TASK groups/fleet in the cluster.
+* feature: RDS: Added paginators for various APIs.
+* feature: Rekognition: This update adds the ability to detect black frames, end credits, shots, and color bars in stored videos
+* feature: SQS: AWS SQS adds pagination support for ListQueues and ListDeadLetterSourceQueues APIs
+
+## 2.701.0
+* bugfix: Request Signing: Better handle colons in accessKeyIds when presigning URLs.
+* feature: EC2: Adds support to tag elastic-gpu on the RunInstances api
+* feature: MediaLive: AWS Elemental MediaLive now supports Input Prepare schedule actions. This feature improves existing input switching by allowing users to prepare an input prior to switching to it.
+* feature: OpsWorksCM: Documentation updates for AWS OpsWorks CM.
 
 ## 2.700.0
 * feature: RDS: Adding support for global write forwarding on secondary clusters in an Aurora global database.

@@ -268,6 +268,14 @@ declare class Chime extends Service {
    */
   deleteVoiceConnector(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes the emergency calling configuration details from the specified Amazon Chime Voice Connector.
+   */
+  deleteVoiceConnectorEmergencyCallingConfiguration(params: Chime.Types.DeleteVoiceConnectorEmergencyCallingConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the emergency calling configuration details from the specified Amazon Chime Voice Connector.
+   */
+  deleteVoiceConnectorEmergencyCallingConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes the specified Amazon Chime Voice Connector group. Any VoiceConnectorItems and phone numbers associated with the group must be removed before it can be deleted.
    */
   deleteVoiceConnectorGroup(params: Chime.Types.DeleteVoiceConnectorGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -276,11 +284,11 @@ declare class Chime extends Service {
    */
   deleteVoiceConnectorGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the origination settings for the specified Amazon Chime Voice Connector.
+   * Deletes the origination settings for the specified Amazon Chime Voice Connector.  If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to deleting the origination settings. 
    */
   deleteVoiceConnectorOrigination(params: Chime.Types.DeleteVoiceConnectorOriginationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the origination settings for the specified Amazon Chime Voice Connector.
+   * Deletes the origination settings for the specified Amazon Chime Voice Connector.  If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to deleting the origination settings. 
    */
   deleteVoiceConnectorOrigination(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -300,11 +308,11 @@ declare class Chime extends Service {
    */
   deleteVoiceConnectorStreamingConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the termination settings for the specified Amazon Chime Voice Connector.
+   * Deletes the termination settings for the specified Amazon Chime Voice Connector.  If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to deleting the termination settings. 
    */
   deleteVoiceConnectorTermination(params: Chime.Types.DeleteVoiceConnectorTerminationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the termination settings for the specified Amazon Chime Voice Connector.
+   * Deletes the termination settings for the specified Amazon Chime Voice Connector.  If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to deleting the termination settings. 
    */
   deleteVoiceConnectorTermination(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -467,6 +475,14 @@ declare class Chime extends Service {
    * Retrieves details for the specified Amazon Chime Voice Connector, such as timestamps, name, outbound host, and encryption requirements.
    */
   getVoiceConnector(callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorResponse) => void): Request<Chime.Types.GetVoiceConnectorResponse, AWSError>;
+  /**
+   * Gets the emergency calling configuration details for the specified Amazon Chime Voice Connector.
+   */
+  getVoiceConnectorEmergencyCallingConfiguration(params: Chime.Types.GetVoiceConnectorEmergencyCallingConfigurationRequest, callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorEmergencyCallingConfigurationResponse) => void): Request<Chime.Types.GetVoiceConnectorEmergencyCallingConfigurationResponse, AWSError>;
+  /**
+   * Gets the emergency calling configuration details for the specified Amazon Chime Voice Connector.
+   */
+  getVoiceConnectorEmergencyCallingConfiguration(callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorEmergencyCallingConfigurationResponse) => void): Request<Chime.Types.GetVoiceConnectorEmergencyCallingConfigurationResponse, AWSError>;
   /**
    * Retrieves details for the specified Amazon Chime Voice Connector group, such as timestamps, name, and associated VoiceConnectorItems.
    */
@@ -684,6 +700,14 @@ declare class Chime extends Service {
    */
   putRetentionSettings(callback?: (err: AWSError, data: Chime.Types.PutRetentionSettingsResponse) => void): Request<Chime.Types.PutRetentionSettingsResponse, AWSError>;
   /**
+   * Puts emergency calling configuration details to the specified Amazon Chime Voice Connector, such as emergency phone numbers and calling countries. Origination and termination settings must be enabled for the Amazon Chime Voice Connector before emergency calling can be configured.
+   */
+  putVoiceConnectorEmergencyCallingConfiguration(params: Chime.Types.PutVoiceConnectorEmergencyCallingConfigurationRequest, callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorEmergencyCallingConfigurationResponse) => void): Request<Chime.Types.PutVoiceConnectorEmergencyCallingConfigurationResponse, AWSError>;
+  /**
+   * Puts emergency calling configuration details to the specified Amazon Chime Voice Connector, such as emergency phone numbers and calling countries. Origination and termination settings must be enabled for the Amazon Chime Voice Connector before emergency calling can be configured.
+   */
+  putVoiceConnectorEmergencyCallingConfiguration(callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorEmergencyCallingConfigurationResponse) => void): Request<Chime.Types.PutVoiceConnectorEmergencyCallingConfigurationResponse, AWSError>;
+  /**
    * Adds a logging configuration for the specified Amazon Chime Voice Connector. The logging configuration specifies whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.
    */
   putVoiceConnectorLoggingConfiguration(params: Chime.Types.PutVoiceConnectorLoggingConfigurationRequest, callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorLoggingConfigurationResponse) => void): Request<Chime.Types.PutVoiceConnectorLoggingConfigurationResponse, AWSError>;
@@ -692,11 +716,11 @@ declare class Chime extends Service {
    */
   putVoiceConnectorLoggingConfiguration(callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorLoggingConfigurationResponse) => void): Request<Chime.Types.PutVoiceConnectorLoggingConfigurationResponse, AWSError>;
   /**
-   * Adds origination settings for the specified Amazon Chime Voice Connector.
+   * Adds origination settings for the specified Amazon Chime Voice Connector.  If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to turning off origination settings. 
    */
   putVoiceConnectorOrigination(params: Chime.Types.PutVoiceConnectorOriginationRequest, callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorOriginationResponse) => void): Request<Chime.Types.PutVoiceConnectorOriginationResponse, AWSError>;
   /**
-   * Adds origination settings for the specified Amazon Chime Voice Connector.
+   * Adds origination settings for the specified Amazon Chime Voice Connector.  If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to turning off origination settings. 
    */
   putVoiceConnectorOrigination(callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorOriginationResponse) => void): Request<Chime.Types.PutVoiceConnectorOriginationResponse, AWSError>;
   /**
@@ -716,11 +740,11 @@ declare class Chime extends Service {
    */
   putVoiceConnectorStreamingConfiguration(callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorStreamingConfigurationResponse) => void): Request<Chime.Types.PutVoiceConnectorStreamingConfigurationResponse, AWSError>;
   /**
-   * Adds termination settings for the specified Amazon Chime Voice Connector.
+   * Adds termination settings for the specified Amazon Chime Voice Connector.  If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to turning off termination settings. 
    */
   putVoiceConnectorTermination(params: Chime.Types.PutVoiceConnectorTerminationRequest, callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorTerminationResponse) => void): Request<Chime.Types.PutVoiceConnectorTerminationResponse, AWSError>;
   /**
-   * Adds termination settings for the specified Amazon Chime Voice Connector.
+   * Adds termination settings for the specified Amazon Chime Voice Connector.  If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to turning off termination settings. 
    */
   putVoiceConnectorTermination(callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorTerminationResponse) => void): Request<Chime.Types.PutVoiceConnectorTerminationResponse, AWSError>;
   /**
@@ -990,6 +1014,7 @@ declare namespace Chime {
      */
     AlexaForBusinessRoomArn?: SensitiveString;
   }
+  export type Alpha2CountryCode = string;
   export type AreaCode = string;
   export type Arn = string;
   export interface AssociatePhoneNumberWithUserRequest {
@@ -1016,7 +1041,7 @@ declare namespace Chime {
     /**
      * List of phone numbers, in E.164 format.
      */
-    E164PhoneNumbers?: E164PhoneNumberList;
+    E164PhoneNumbers: E164PhoneNumberList;
     /**
      * If true, associates the provided phone numbers with the provided Amazon Chime Voice Connector Group and removes any previously existing associations. If false, does not associate any phone numbers that have previously existing associations.
      */
@@ -1036,7 +1061,7 @@ declare namespace Chime {
     /**
      * List of phone numbers, in E.164 format.
      */
-    E164PhoneNumbers?: E164PhoneNumberList;
+    E164PhoneNumbers: E164PhoneNumberList;
     /**
      * If true, associates the provided phone numbers with the provided Amazon Chime Voice Connector and removes any previously existing associations. If false, does not associate any phone numbers that have previously existing associations.
      */
@@ -1569,6 +1594,21 @@ declare namespace Chime {
     Password?: SensitiveString;
   }
   export type CredentialList = Credential[];
+  export interface DNISEmergencyCallingConfiguration {
+    /**
+     * The DNIS phone number to route emergency calls to, in E.164 format.
+     */
+    EmergencyPhoneNumber: E164PhoneNumber;
+    /**
+     * The DNIS phone number to route test emergency calls to, in E.164 format.
+     */
+    TestPhoneNumber?: E164PhoneNumber;
+    /**
+     * The country from which emergency calls are allowed, in ISO 3166-1 alpha-2 format.
+     */
+    CallingCountry: Alpha2CountryCode;
+  }
+  export type DNISEmergencyCallingConfigurationList = DNISEmergencyCallingConfiguration[];
   export type DataRetentionInHours = number;
   export interface DeleteAccountRequest {
     /**
@@ -1644,6 +1684,12 @@ declare namespace Chime {
      */
     RoomId: NonEmptyString;
   }
+  export interface DeleteVoiceConnectorEmergencyCallingConfigurationRequest {
+    /**
+     * The Amazon Chime Voice Connector ID.
+     */
+    VoiceConnectorId: NonEmptyString;
+  }
   export interface DeleteVoiceConnectorGroupRequest {
     /**
      * The Amazon Chime Voice Connector group ID.
@@ -1682,7 +1728,7 @@ declare namespace Chime {
     /**
      * The RFC2617 compliant username associated with the SIP credentials, in US-ASCII format.
      */
-    Usernames?: SensitiveStringList;
+    Usernames: SensitiveStringList;
   }
   export interface DeleteVoiceConnectorTerminationRequest {
     /**
@@ -1710,7 +1756,7 @@ declare namespace Chime {
     /**
      * List of phone numbers, in E.164 format.
      */
-    E164PhoneNumbers?: E164PhoneNumberList;
+    E164PhoneNumbers: E164PhoneNumberList;
   }
   export interface DisassociatePhoneNumbersFromVoiceConnectorGroupResponse {
     /**
@@ -1726,7 +1772,7 @@ declare namespace Chime {
     /**
      * List of phone numbers, in E.164 format.
      */
-    E164PhoneNumbers?: E164PhoneNumberList;
+    E164PhoneNumbers: E164PhoneNumberList;
   }
   export interface DisassociatePhoneNumbersFromVoiceConnectorResponse {
     /**
@@ -1750,6 +1796,12 @@ declare namespace Chime {
   export type E164PhoneNumberList = E164PhoneNumber[];
   export type EmailAddress = string;
   export type EmailStatus = "NotSent"|"Sent"|"Failed"|string;
+  export interface EmergencyCallingConfiguration {
+    /**
+     * The Dialed Number Identification Service (DNIS) emergency calling configuration details.
+     */
+    DNIS?: DNISEmergencyCallingConfigurationList;
+  }
   export type ErrorCode = "BadRequest"|"Conflict"|"Forbidden"|"NotFound"|"PreconditionFailed"|"ResourceLimitExceeded"|"ServiceFailure"|"AccessDenied"|"ServiceUnavailable"|"Throttled"|"Unauthorized"|"Unprocessable"|"VoiceConnectorGroupAssociationsExist"|"PhoneNumberAssociationsExist"|string;
   export interface EventsConfiguration {
     /**
@@ -1985,6 +2037,18 @@ declare namespace Chime {
      * The user settings.
      */
     UserSettings?: UserSettings;
+  }
+  export interface GetVoiceConnectorEmergencyCallingConfigurationRequest {
+    /**
+     * The Amazon Chime Voice Connector ID.
+     */
+    VoiceConnectorId: NonEmptyString;
+  }
+  export interface GetVoiceConnectorEmergencyCallingConfigurationResponse {
+    /**
+     * The emergency calling configuration details.
+     */
+    EmergencyCallingConfiguration?: EmergencyCallingConfiguration;
   }
   export interface GetVoiceConnectorGroupRequest {
     /**
@@ -2941,6 +3005,22 @@ declare namespace Chime {
      * The timestamp representing the time at which the specified items are permanently deleted, in ISO 8601 format.
      */
     InitiateDeletionTimestamp?: Iso8601Timestamp;
+  }
+  export interface PutVoiceConnectorEmergencyCallingConfigurationRequest {
+    /**
+     * The Amazon Chime Voice Connector ID.
+     */
+    VoiceConnectorId: NonEmptyString;
+    /**
+     * The emergency calling configuration details.
+     */
+    EmergencyCallingConfiguration: EmergencyCallingConfiguration;
+  }
+  export interface PutVoiceConnectorEmergencyCallingConfigurationResponse {
+    /**
+     * The emergency calling configuration details.
+     */
+    EmergencyCallingConfiguration?: EmergencyCallingConfiguration;
   }
   export interface PutVoiceConnectorLoggingConfigurationRequest {
     /**

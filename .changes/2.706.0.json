@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudFormation",
+        "description": "ListStackInstances and DescribeStackInstance now return a new `StackInstanceStatus` object that contains `DetailedStatus` values: a disambiguation of the more generic `Status` value. ListStackInstances output can now be filtered on `DetailedStatus` using the new `Filters` parameter."
+    },
+    {
+        "type": "feature",
+        "category": "CognitoIdentityServiceProvider",
+        "description": "Don't require Authorization for InitiateAuth and RespondToAuthChallenge."
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "Added support for cross-region DataSource credentials copying."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "The new 'ModelClientConfig' parameter being added for CreateTransformJob and DescribeTransformJob api actions enable customers to configure model invocation related parameters such as timeout and retry."
+    }
+]

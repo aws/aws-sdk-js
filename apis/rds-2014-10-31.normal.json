@@ -741,7 +741,7 @@
           "shape": "DBProxyQuotaExceededFault"
         }
       ],
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Creates a new DB proxy.</p>"
+      "documentation": "<p>Creates a new DB proxy.</p>"
     },
     "CreateDBSecurityGroup": {
       "name": "CreateDBSecurityGroup",
@@ -1141,7 +1141,7 @@
           "shape": "InvalidDBProxyStateFault"
         }
       ],
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Deletes an existing proxy.</p>"
+      "documentation": "<p>Deletes an existing proxy.</p>"
     },
     "DeleteDBSecurityGroup": {
       "name": "DeleteDBSecurityGroup",
@@ -1319,7 +1319,7 @@
           "shape": "InvalidDBProxyStateFault"
         }
       ],
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Remove the association between one or more <code>DBProxyTarget</code> data structures and a <code>DBProxyTargetGroup</code>.</p>"
+      "documentation": "<p>Remove the association between one or more <code>DBProxyTarget</code> data structures and a <code>DBProxyTargetGroup</code>.</p>"
     },
     "DescribeAccountAttributes": {
       "name": "DescribeAccountAttributes",
@@ -1652,7 +1652,7 @@
           "shape": "DBProxyNotFoundFault"
         }
       ],
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns information about DB proxies.</p>"
+      "documentation": "<p>Returns information about DB proxies.</p>"
     },
     "DescribeDBProxyTargetGroups": {
       "name": "DescribeDBProxyTargetGroups",
@@ -1678,7 +1678,7 @@
           "shape": "InvalidDBProxyStateFault"
         }
       ],
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns information about DB proxy target groups, represented by <code>DBProxyTargetGroup</code> data structures.</p>"
+      "documentation": "<p>Returns information about DB proxy target groups, represented by <code>DBProxyTargetGroup</code> data structures.</p>"
     },
     "DescribeDBProxyTargets": {
       "name": "DescribeDBProxyTargets",
@@ -1707,7 +1707,7 @@
           "shape": "InvalidDBProxyStateFault"
         }
       ],
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns information about <code>DBProxyTarget</code> objects. This API supports pagination.</p>"
+      "documentation": "<p>Returns information about <code>DBProxyTarget</code> objects. This API supports pagination.</p>"
     },
     "DescribeDBSecurityGroups": {
       "name": "DescribeDBSecurityGroups",
@@ -2425,6 +2425,12 @@
         },
         {
           "shape": "BackupPolicyNotFoundFault"
+        },
+        {
+          "shape": "KMSKeyNotAccessibleFault"
+        },
+        {
+          "shape": "InvalidDBClusterStateFault"
         }
       ],
       "documentation": "<p>Modifies settings for a DB instance. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. To learn what modifications you can make to your DB instance, call <code>DescribeValidDBInstanceModifications</code> before you call <code>ModifyDBInstance</code>. </p>"
@@ -2476,7 +2482,7 @@
           "shape": "InvalidDBProxyStateFault"
         }
       ],
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Changes the settings for an existing DB proxy.</p>"
+      "documentation": "<p>Changes the settings for an existing DB proxy.</p>"
     },
     "ModifyDBProxyTargetGroup": {
       "name": "ModifyDBProxyTargetGroup",
@@ -2502,7 +2508,7 @@
           "shape": "InvalidDBProxyStateFault"
         }
       ],
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Modifies the properties of a <code>DBProxyTargetGroup</code>.</p>"
+      "documentation": "<p>Modifies the properties of a <code>DBProxyTargetGroup</code>.</p>"
     },
     "ModifyDBSnapshot": {
       "name": "ModifyDBSnapshot",
@@ -2797,7 +2803,7 @@
           "shape": "InvalidDBProxyStateFault"
         }
       ],
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Associate one or more <code>DBProxyTarget</code> data structures with a <code>DBProxyTargetGroup</code>.</p>"
+      "documentation": "<p>Associate one or more <code>DBProxyTarget</code> data structures with a <code>DBProxyTargetGroup</code>.</p>"
     },
     "RemoveFromGlobalCluster": {
       "name": "RemoveFromGlobalCluster",
@@ -4101,10 +4107,10 @@
         },
         "InitQuery": {
           "shape": "String",
-          "documentation": "<p> One or more SQL statements for the proxy to run when opening each new database connection. Typically used with <code>SET</code> statements to make sure that each connection has identical settings such as time zone and character set. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single <code>SET</code> statement, such as <code>SET x=1, y=2</code>. </p> <p> <code>InitQuery</code> is not currently supported for PostgreSQL.</p> <p>Default: no initialization query</p>"
+          "documentation": "<p> One or more SQL statements for the proxy to run when opening each new database connection. Typically used with <code>SET</code> statements to make sure that each connection has identical settings such as time zone and character set. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single <code>SET</code> statement, such as <code>SET x=1, y=2</code>. </p> <p>Default: no initialization query</p>"
         }
       },
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Specifies the settings that control the size and behavior of the connection pool associated with a <code>DBProxyTargetGroup</code>.</p>"
+      "documentation": "<p>Specifies the settings that control the size and behavior of the connection pool associated with a <code>DBProxyTargetGroup</code>.</p>"
     },
     "ConnectionPoolConfigurationInfo": {
       "type": "structure",
@@ -4127,10 +4133,10 @@
         },
         "InitQuery": {
           "shape": "String",
-          "documentation": "<p> One or more SQL statements for the proxy to run when opening each new database connection. Typically used with <code>SET</code> statements to make sure that each connection has identical settings such as time zone and character set. This setting is empty by default. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single <code>SET</code> statement, such as <code>SET x=1, y=2</code>. </p> <p> <code>InitQuery</code> is not currently supported for PostgreSQL.</p>"
+          "documentation": "<p> One or more SQL statements for the proxy to run when opening each new database connection. Typically used with <code>SET</code> statements to make sure that each connection has identical settings such as time zone and character set. This setting is empty by default. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single <code>SET</code> statement, such as <code>SET x=1, y=2</code>. </p>"
         }
       },
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Displays the settings that control the size and behavior of the connection pool associated with a <code>DBProxyTarget</code>.</p>"
+      "documentation": "<p>Displays the settings that control the size and behavior of the connection pool associated with a <code>DBProxyTarget</code>.</p>"
     },
     "CopyDBClusterParameterGroupMessage": {
       "type": "structure",
@@ -4928,7 +4934,7 @@
         },
         "Domain": {
           "shape": "String",
-          "documentation": "<p>The Active Directory directory ID to create the DB instance in.</p> <p>For Oracle DB instances, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB instance. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html\"> Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p> <p>For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html\"> Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the <i>Amazon RDS User Guide</i>.</p>"
+          "documentation": "<p>The Active Directory directory ID to create the DB instance in.</p> <p>For Oracle DB instances, Amazon RDS can use Kerberos authentication to authenticate users that connect to the DB instance. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html\"> Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p> <p>For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html\"> Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the <i>Amazon RDS User Guide</i>.</p>"
         },
         "DomainIAMRoleName": {
           "shape": "String",
@@ -6658,7 +6664,7 @@
           "documentation": "<p>The date and time when the proxy was last updated.</p>"
         }
       },
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>The data structure representing a proxy managed by the RDS Proxy.</p> <p>This data type is used as a response element in the <code>DescribeDBProxies</code> action.</p>"
+      "documentation": "<p>The data structure representing a proxy managed by the RDS Proxy.</p> <p>This data type is used as a response element in the <code>DescribeDBProxies</code> action.</p>"
     },
     "DBProxyList": {
       "type": "list",
@@ -6712,7 +6718,7 @@
           "documentation": "<p>Information about the connection health of the RDS Proxy target.</p>"
         }
       },
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Contains the details for an RDS Proxy target. It represents an RDS DB instance or Aurora DB cluster that the proxy can connect to. One or more targets are associated with an RDS Proxy target group.</p> <p>This data type is used as a response element in the <code>DescribeDBProxyTargets</code> action.</p>"
+      "documentation": "<p>Contains the details for an RDS Proxy target. It represents an RDS DB instance or Aurora DB cluster that the proxy can connect to. One or more targets are associated with an RDS Proxy target group.</p> <p>This data type is used as a response element in the <code>DescribeDBProxyTargets</code> action.</p>"
     },
     "DBProxyTargetGroup": {
       "type": "structure",
@@ -6750,7 +6756,7 @@
           "documentation": "<p>The date and time when the target group was last updated.</p>"
         }
       },
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Represents a set of RDS DB instances, Aurora DB clusters, or both that a proxy can connect to. Currently, each target group is associated with exactly one RDS DB instance or Aurora DB cluster.</p> <p>This data type is used as a response element in the <code>DescribeDBProxyTargetGroups</code> action.</p>"
+      "documentation": "<p>Represents a set of RDS DB instances, Aurora DB clusters, or both that a proxy can connect to. Currently, each target group is associated with exactly one RDS DB instance or Aurora DB cluster.</p> <p>This data type is used as a response element in the <code>DescribeDBProxyTargetGroups</code> action.</p>"
     },
     "DBSecurityGroup": {
       "type": "structure",
@@ -9658,7 +9664,7 @@
         },
         "Domain": {
           "shape": "String",
-          "documentation": "<p>The Active Directory directory ID to move the DB instance to. Specify <code>none</code> to remove the instance from its current domain. The domain must be created prior to this operation. Currently, only Microsoft SQL Server and Oracle DB instances can be created in an Active Directory Domain. </p> <p>For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html\"> Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the <i>Amazon RDS User Guide</i>.</p> <p>For Oracle DB instances, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB instance. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html\"> Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p>"
+          "documentation": "<p>The Active Directory directory ID to move the DB instance to. Specify <code>none</code> to remove the instance from its current domain. The domain must be created prior to this operation. Currently, only Microsoft SQL Server and Oracle DB instances can be created in an Active Directory Domain. </p> <p>For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html\"> Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the <i>Amazon RDS User Guide</i>.</p> <p>For Oracle DB instances, Amazon RDS can use Kerberos authentication to authenticate users that connect to the DB instance. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html\"> Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p>"
         },
         "CopyTagsToSnapshot": {
           "shape": "BooleanOptional",
@@ -10532,6 +10538,10 @@
         "SupportsKerberosAuthentication": {
           "shape": "BooleanOptional",
           "documentation": "<p>Whether a DB instance supports Kerberos Authentication.</p>"
+        },
+        "OutpostCapable": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether a DB instance supports RDS on Outposts.</p> <p>For more information about RDS on Outposts, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Amazon RDS on AWS Outposts</a> in the <i>Amazon RDS User Guide.</i> </p>"
         }
       },
       "documentation": "<p>Contains a list of available options for a DB instance.</p> <p> This data type is used as a response element in the <code>DescribeOrderableDBInstanceOptions</code> action. </p>",
@@ -10557,6 +10567,16 @@
         }
       },
       "documentation": "<p> Contains the result of a successful invocation of the <code>DescribeOrderableDBInstanceOptions</code> action. </p>"
+    },
+    "Outpost": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Outpost.</p>"
+        }
+      },
+      "documentation": "<p>A data type that represents an Outpost.</p> <p>For more information about RDS on Outposts, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Amazon RDS on AWS Outposts</a> in the <i>Amazon RDS User Guide.</i> </p>"
     },
     "Parameter": {
       "type": "structure",
@@ -11343,7 +11363,7 @@
         },
         "DBClusterIdentifier": {
           "shape": "String",
-          "documentation": "<p>The name of the DB cluster to create from the source data in the Amazon S3 bucket. This parameter is isn't case-sensitive.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Can't end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>my-cluster1</code> </p>"
+          "documentation": "<p>The name of the DB cluster to create from the source data in the Amazon S3 bucket. This parameter isn't case-sensitive.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Can't end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>my-cluster1</code> </p>"
         },
         "DBClusterParameterGroupName": {
           "shape": "String",
@@ -11410,7 +11430,7 @@
         },
         "SourceEngineVersion": {
           "shape": "String",
-          "documentation": "<p>The version of the database that the backup files were created from.</p> <p>MySQL version 5.5 and 5.6 are supported. </p> <p>Example: <code>5.6.22</code> </p>"
+          "documentation": "<p>The version of the database that the backup files were created from.</p> <p>MySQL versions 5.5, 5.6, and 5.7 are supported. </p> <p>Example: <code>5.6.40</code> </p>"
         },
         "S3BucketName": {
           "shape": "String",
@@ -11742,7 +11762,7 @@
         },
         "Domain": {
           "shape": "String",
-          "documentation": "<p>Specify the Active Directory directory ID to restore the DB instance in. The domain must be created prior to this operation. Currently, only Microsoft SQL Server and Oracle DB instances can be created in an Active Directory Domain. </p> <p>For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html\"> Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the <i>Amazon RDS User Guide</i>.</p> <p>For Oracle DB instances, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB instance. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html\"> Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p>"
+          "documentation": "<p>Specify the Active Directory directory ID to restore the DB instance in. The domain must be created prior to this operation. Currently, only Microsoft SQL Server and Oracle DB instances can be created in an Active Directory Domain. </p> <p>For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html\"> Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the <i>Amazon RDS User Guide</i>.</p> <p>For Oracle DB instances, Amazon RDS can use Kerberos authentication to authenticate users that connect to the DB instance. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html\"> Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p>"
         },
         "CopyTagsToSnapshot": {
           "shape": "BooleanOptional",
@@ -11929,7 +11949,7 @@
         },
         "SourceEngineVersion": {
           "shape": "String",
-          "documentation": "<p>The engine version of your source database. </p> <p>Valid Values: <code>5.6</code> </p>"
+          "documentation": "<p>The version of the database that the backup files were created from.</p> <p>MySQL versions 5.6 and 5.7 are supported. </p> <p>Example: <code>5.6.40</code> </p>"
         },
         "S3BucketName": {
           "shape": "String",
@@ -12076,7 +12096,7 @@
         },
         "Domain": {
           "shape": "String",
-          "documentation": "<p>Specify the Active Directory directory ID to restore the DB instance in. The domain must be created prior to this operation. Currently, only Microsoft SQL Server and Oracle DB instances can be created in an Active Directory Domain. </p> <p>For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html\"> Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the <i>Amazon RDS User Guide</i>.</p> <p>For Oracle DB instances, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB instance. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html\"> Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p>"
+          "documentation": "<p>Specify the Active Directory directory ID to restore the DB instance in. The domain must be created prior to this operation. Currently, only Microsoft SQL Server and Oracle DB instances can be created in an Active Directory Domain. </p> <p>For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html\"> Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the <i>Amazon RDS User Guide</i>.</p> <p>For Oracle DB instances, Amazon RDS can use Kerberos authentication to authenticate users that connect to the DB instance. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html\"> Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p>"
         },
         "DomainIAMRoleName": {
           "shape": "String",
@@ -12507,17 +12527,21 @@
       "members": {
         "SubnetIdentifier": {
           "shape": "String",
-          "documentation": "<p>Specifies the identifier of the subnet.</p>"
+          "documentation": "<p>The identifier of the subnet.</p>"
         },
         "SubnetAvailabilityZone": {
           "shape": "AvailabilityZone"
         },
+        "SubnetOutpost": {
+          "shape": "Outpost",
+          "documentation": "<p>If the subnet is associated with an Outpost, this value specifies the Outpost.</p> <p>For more information about RDS on Outposts, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Amazon RDS on AWS Outposts</a> in the <i>Amazon RDS User Guide.</i> </p>"
+        },
         "SubnetStatus": {
           "shape": "String",
-          "documentation": "<p>Specifies the status of the subnet.</p>"
+          "documentation": "<p>The status of the subnet.</p>"
         }
       },
-      "documentation": "<p> This data type is used as a response element in the <code>DescribeDBSubnetGroups</code> action. </p>"
+      "documentation": "<p> This data type is used as a response element for the <code>DescribeDBSubnetGroups</code> operation. </p>"
     },
     "SubnetIdentifierList": {
       "type": "list",
@@ -12604,7 +12628,7 @@
           "documentation": "<p>A description of the health of the RDS Proxy target. If the <code>State</code> is <code>AVAILABLE</code>, a description is not included.</p>"
         }
       },
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Information about the connection health of an RDS Proxy target.</p>"
+      "documentation": "<p>Information about the connection health of an RDS Proxy target.</p>"
     },
     "TargetHealthReason": {
       "type": "string",
@@ -12697,7 +12721,7 @@
           "documentation": "<p>Whether to require or disallow AWS Identity and Access Management (IAM) authentication for connections to the proxy.</p>"
         }
       },
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Specifies the details of authentication used by a proxy to log in as a specific database user.</p>"
+      "documentation": "<p>Specifies the details of authentication used by a proxy to log in as a specific database user.</p>"
     },
     "UserAuthConfigInfo": {
       "type": "structure",
@@ -12723,7 +12747,7 @@
           "documentation": "<p>Whether to require or disallow AWS Identity and Access Management (IAM) authentication for connections to the proxy.</p>"
         }
       },
-      "documentation": "<note> <p>This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.</p> </note> <p>Returns the details of authentication used by a proxy to log in as a specific database user.</p>"
+      "documentation": "<p>Returns the details of authentication used by a proxy to log in as a specific database user.</p>"
     },
     "UserAuthConfigInfoList": {
       "type": "list",

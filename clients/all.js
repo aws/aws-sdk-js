@@ -223,5 +223,6 @@ module.exports = {
   Synthetics: require('./synthetics'),
   IoTSiteWise: require('./iotsitewise'),
   Macie2: require('./macie2'),
-  CodeArtifact: require('./codeartifact')
+  CodeArtifact: require('./codeartifact'),
+  Honeycode: require('./honeycode')
 };

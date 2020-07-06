@@ -236,6 +236,22 @@ declare class Glue extends Service {
    */
   deleteClassifier(callback?: (err: AWSError, data: Glue.Types.DeleteClassifierResponse) => void): Request<Glue.Types.DeleteClassifierResponse, AWSError>;
   /**
+   * Delete the partition column statistics of a column.
+   */
+  deleteColumnStatisticsForPartition(params: Glue.Types.DeleteColumnStatisticsForPartitionRequest, callback?: (err: AWSError, data: Glue.Types.DeleteColumnStatisticsForPartitionResponse) => void): Request<Glue.Types.DeleteColumnStatisticsForPartitionResponse, AWSError>;
+  /**
+   * Delete the partition column statistics of a column.
+   */
+  deleteColumnStatisticsForPartition(callback?: (err: AWSError, data: Glue.Types.DeleteColumnStatisticsForPartitionResponse) => void): Request<Glue.Types.DeleteColumnStatisticsForPartitionResponse, AWSError>;
+  /**
+   * Retrieves table statistics of columns.
+   */
+  deleteColumnStatisticsForTable(params: Glue.Types.DeleteColumnStatisticsForTableRequest, callback?: (err: AWSError, data: Glue.Types.DeleteColumnStatisticsForTableResponse) => void): Request<Glue.Types.DeleteColumnStatisticsForTableResponse, AWSError>;
+  /**
+   * Retrieves table statistics of columns.
+   */
+  deleteColumnStatisticsForTable(callback?: (err: AWSError, data: Glue.Types.DeleteColumnStatisticsForTableResponse) => void): Request<Glue.Types.DeleteColumnStatisticsForTableResponse, AWSError>;
+  /**
    * Deletes a connection from the Data Catalog.
    */
   deleteConnection(params: Glue.Types.DeleteConnectionRequest, callback?: (err: AWSError, data: Glue.Types.DeleteConnectionResponse) => void): Request<Glue.Types.DeleteConnectionResponse, AWSError>;
@@ -371,6 +387,22 @@ declare class Glue extends Service {
    * Lists all classifier objects in the Data Catalog.
    */
   getClassifiers(callback?: (err: AWSError, data: Glue.Types.GetClassifiersResponse) => void): Request<Glue.Types.GetClassifiersResponse, AWSError>;
+  /**
+   * Retrieves partition statistics of columns.
+   */
+  getColumnStatisticsForPartition(params: Glue.Types.GetColumnStatisticsForPartitionRequest, callback?: (err: AWSError, data: Glue.Types.GetColumnStatisticsForPartitionResponse) => void): Request<Glue.Types.GetColumnStatisticsForPartitionResponse, AWSError>;
+  /**
+   * Retrieves partition statistics of columns.
+   */
+  getColumnStatisticsForPartition(callback?: (err: AWSError, data: Glue.Types.GetColumnStatisticsForPartitionResponse) => void): Request<Glue.Types.GetColumnStatisticsForPartitionResponse, AWSError>;
+  /**
+   * Retrieves table statistics of columns.
+   */
+  getColumnStatisticsForTable(params: Glue.Types.GetColumnStatisticsForTableRequest, callback?: (err: AWSError, data: Glue.Types.GetColumnStatisticsForTableResponse) => void): Request<Glue.Types.GetColumnStatisticsForTableResponse, AWSError>;
+  /**
+   * Retrieves table statistics of columns.
+   */
+  getColumnStatisticsForTable(callback?: (err: AWSError, data: Glue.Types.GetColumnStatisticsForTableResponse) => void): Request<Glue.Types.GetColumnStatisticsForTableResponse, AWSError>;
   /**
    * Retrieves a connection definition from the Data Catalog.
    */
@@ -916,6 +948,22 @@ declare class Glue extends Service {
    */
   updateClassifier(callback?: (err: AWSError, data: Glue.Types.UpdateClassifierResponse) => void): Request<Glue.Types.UpdateClassifierResponse, AWSError>;
   /**
+   * Creates or updates partition statistics of columns.
+   */
+  updateColumnStatisticsForPartition(params: Glue.Types.UpdateColumnStatisticsForPartitionRequest, callback?: (err: AWSError, data: Glue.Types.UpdateColumnStatisticsForPartitionResponse) => void): Request<Glue.Types.UpdateColumnStatisticsForPartitionResponse, AWSError>;
+  /**
+   * Creates or updates partition statistics of columns.
+   */
+  updateColumnStatisticsForPartition(callback?: (err: AWSError, data: Glue.Types.UpdateColumnStatisticsForPartitionResponse) => void): Request<Glue.Types.UpdateColumnStatisticsForPartitionResponse, AWSError>;
+  /**
+   * Creates or updates table statistics of columns.
+   */
+  updateColumnStatisticsForTable(params: Glue.Types.UpdateColumnStatisticsForTableRequest, callback?: (err: AWSError, data: Glue.Types.UpdateColumnStatisticsForTableResponse) => void): Request<Glue.Types.UpdateColumnStatisticsForTableResponse, AWSError>;
+  /**
+   * Creates or updates table statistics of columns.
+   */
+  updateColumnStatisticsForTable(callback?: (err: AWSError, data: Glue.Types.UpdateColumnStatisticsForTableResponse) => void): Request<Glue.Types.UpdateColumnStatisticsForTableResponse, AWSError>;
+  /**
    * Updates a connection definition in the Data Catalog.
    */
   updateConnection(params: Glue.Types.UpdateConnectionRequest, callback?: (err: AWSError, data: Glue.Types.UpdateConnectionResponse) => void): Request<Glue.Types.UpdateConnectionResponse, AWSError>;
@@ -1316,7 +1364,36 @@ declare namespace Glue {
     JobRunId?: IdString;
   }
   export type BatchStopJobRunSuccessfulSubmissionList = BatchStopJobRunSuccessfulSubmission[];
+  export interface BinaryColumnStatisticsData {
+    /**
+     * Maximum length of the column.
+     */
+    MaximumLength: NonNegativeLong;
+    /**
+     * Average length of the column.
+     */
+    AverageLength: NonNegativeDouble;
+    /**
+     * Number of nulls.
+     */
+    NumberOfNulls: NonNegativeLong;
+  }
+  export type _Blob = Buffer|Uint8Array|Blob|string;
   export type Boolean = boolean;
+  export interface BooleanColumnStatisticsData {
+    /**
+     * Number of true value.
+     */
+    NumberOfTrues: NonNegativeLong;
+    /**
+     * Number of false value.
+     */
+    NumberOfFalses: NonNegativeLong;
+    /**
+     * Number of nulls.
+     */
+    NumberOfNulls: NonNegativeLong;
+  }
   export type BooleanNullable = boolean;
   export type BooleanValue = boolean;
   export type BoundedPartitionValueList = ValueString[];
@@ -1484,8 +1561,84 @@ declare namespace Glue {
      */
     Parameters?: ParametersMap;
   }
+  export interface ColumnError {
+    /**
+     * The name of the column.
+     */
+    ColumnName?: NameString;
+    /**
+     * The error message occurred during operation.
+     */
+    Error?: ErrorDetail;
+  }
+  export type ColumnErrors = ColumnError[];
   export type ColumnList = Column[];
   export type ColumnNameString = string;
+  export interface ColumnStatistics {
+    /**
+     * The name of the column.
+     */
+    ColumnName: NameString;
+    /**
+     * The type of the column.
+     */
+    ColumnType: TypeString;
+    /**
+     * The analyzed time of the column statistics.
+     */
+    AnalyzedTime: Timestamp;
+    /**
+     * The statistics of the column.
+     */
+    StatisticsData: ColumnStatisticsData;
+  }
+  export interface ColumnStatisticsData {
+    /**
+     * The name of the column.
+     */
+    Type: ColumnStatisticsType;
+    /**
+     * Boolean Column Statistics Data.
+     */
+    BooleanColumnStatisticsData?: BooleanColumnStatisticsData;
+    /**
+     * Date Column Statistics Data.
+     */
+    DateColumnStatisticsData?: DateColumnStatisticsData;
+    /**
+     * Decimal Column Statistics Data.
+     */
+    DecimalColumnStatisticsData?: DecimalColumnStatisticsData;
+    /**
+     * Double Column Statistics Data.
+     */
+    DoubleColumnStatisticsData?: DoubleColumnStatisticsData;
+    /**
+     * Long Column Statistics Data.
+     */
+    LongColumnStatisticsData?: LongColumnStatisticsData;
+    /**
+     * String Column Statistics Data.
+     */
+    StringColumnStatisticsData?: StringColumnStatisticsData;
+    /**
+     * Binary Column Statistics Data.
+     */
+    BinaryColumnStatisticsData?: BinaryColumnStatisticsData;
+  }
+  export interface ColumnStatisticsError {
+    /**
+     * The ColumnStatistics of the column.
+     */
+    ColumnStatistics?: ColumnStatistics;
+    /**
+     * The error message occurred during operation.
+     */
+    Error?: ErrorDetail;
+  }
+  export type ColumnStatisticsErrors = ColumnStatisticsError[];
+  export type ColumnStatisticsList = ColumnStatistics[];
+  export type ColumnStatisticsType = "BOOLEAN"|"DATE"|"DECIMAL"|"DOUBLE"|"LONG"|"STRING"|"BINARY"|string;
   export type ColumnTypeString = string;
   export type ColumnValueStringList = ColumnValuesString[];
   export type ColumnValuesString = string;
@@ -2508,6 +2661,52 @@ declare namespace Glue {
   }
   export type DatabaseList = Database[];
   export type DatabaseName = string;
+  export interface DateColumnStatisticsData {
+    /**
+     * Minimum value of the column.
+     */
+    MinimumValue?: Timestamp;
+    /**
+     * Maximum value of the column.
+     */
+    MaximumValue?: Timestamp;
+    /**
+     * Number of nulls.
+     */
+    NumberOfNulls: NonNegativeLong;
+    /**
+     * Number of distinct values.
+     */
+    NumberOfDistinctValues: NonNegativeLong;
+  }
+  export interface DecimalColumnStatisticsData {
+    /**
+     * Minimum value of the column.
+     */
+    MinimumValue?: DecimalNumber;
+    /**
+     * Maximum value of the column.
+     */
+    MaximumValue?: DecimalNumber;
+    /**
+     * Number of nulls.
+     */
+    NumberOfNulls: NonNegativeLong;
+    /**
+     * Number of distinct values.
+     */
+    NumberOfDistinctValues: NonNegativeLong;
+  }
+  export interface DecimalNumber {
+    /**
+     * The unscaled numeric value.
+     */
+    UnscaledValue: _Blob;
+    /**
+     * The scale that determines where the decimal point falls in the unscaled value.
+     */
+    Scale: Integer;
+  }
   export type DeleteBehavior = "LOG"|"DELETE_FROM_DATABASE"|"DEPRECATE_IN_DATABASE"|string;
   export interface DeleteClassifierRequest {
     /**
@@ -2516,6 +2715,50 @@ declare namespace Glue {
     Name: NameString;
   }
   export interface DeleteClassifierResponse {
+  }
+  export interface DeleteColumnStatisticsForPartitionRequest {
+    /**
+     * The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The name of the catalog database where the partitions reside.
+     */
+    DatabaseName: NameString;
+    /**
+     * The name of the partitions' table.
+     */
+    TableName: NameString;
+    /**
+     * A list of partition values identifying the partition.
+     */
+    PartitionValues: ValueStringList;
+    /**
+     * Name of the column.
+     */
+    ColumnName: NameString;
+  }
+  export interface DeleteColumnStatisticsForPartitionResponse {
+  }
+  export interface DeleteColumnStatisticsForTableRequest {
+    /**
+     * The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The name of the catalog database where the partitions reside.
+     */
+    DatabaseName: NameString;
+    /**
+     * The name of the partitions' table.
+     */
+    TableName: NameString;
+    /**
+     * The name of the column.
+     */
+    ColumnName: NameString;
+  }
+  export interface DeleteColumnStatisticsForTableResponse {
   }
   export type DeleteConnectionNameList = NameString[];
   export interface DeleteConnectionRequest {
@@ -2811,6 +3054,25 @@ declare namespace Glue {
   export type DevEndpointList = DevEndpoint[];
   export type DevEndpointNameList = NameString[];
   export type DevEndpointNames = GenericString[];
+  export type Double = number;
+  export interface DoubleColumnStatisticsData {
+    /**
+     * Minimum value of the column.
+     */
+    MinimumValue?: Double;
+    /**
+     * Maximum value of the column.
+     */
+    MaximumValue?: Double;
+    /**
+     * Number of nulls.
+     */
+    NumberOfNulls: NonNegativeLong;
+    /**
+     * Number of distinct values.
+     */
+    NumberOfDistinctValues: NonNegativeLong;
+  }
   export interface DynamoDBTarget {
     /**
      * The name of the DynamoDB table to crawl.
@@ -3000,6 +3262,67 @@ declare namespace Glue {
      * A continuation token.
      */
     NextToken?: Token;
+  }
+  export type GetColumnNamesList = NameString[];
+  export interface GetColumnStatisticsForPartitionRequest {
+    /**
+     * The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The name of the catalog database where the partitions reside.
+     */
+    DatabaseName: NameString;
+    /**
+     * The name of the partitions' table.
+     */
+    TableName: NameString;
+    /**
+     * A list of partition values identifying the partition.
+     */
+    PartitionValues: ValueStringList;
+    /**
+     * A list of the column names.
+     */
+    ColumnNames: GetColumnNamesList;
+  }
+  export interface GetColumnStatisticsForPartitionResponse {
+    /**
+     * List of ColumnStatistics that failed to be retrieved.
+     */
+    ColumnStatisticsList?: ColumnStatisticsList;
+    /**
+     * Error occurred during retrieving column statistics data.
+     */
+    Errors?: ColumnErrors;
+  }
+  export interface GetColumnStatisticsForTableRequest {
+    /**
+     * The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The name of the catalog database where the partitions reside.
+     */
+    DatabaseName: NameString;
+    /**
+     * The name of the partitions' table.
+     */
+    TableName: NameString;
+    /**
+     * A list of the column names.
+     */
+    ColumnNames: GetColumnNamesList;
+  }
+  export interface GetColumnStatisticsForTableResponse {
+    /**
+     * List of ColumnStatistics that failed to be retrieved.
+     */
+    ColumnStatisticsList?: ColumnStatisticsList;
+    /**
+     * List of ColumnStatistics that failed to be retrieved.
+     */
+    Errors?: ColumnErrors;
   }
   export interface GetConnectionRequest {
     /**
@@ -4591,6 +4914,25 @@ declare namespace Glue {
   export type LogStream = string;
   export type Logical = "AND"|"ANY"|string;
   export type LogicalOperator = "EQUALS"|string;
+  export type Long = number;
+  export interface LongColumnStatisticsData {
+    /**
+     * Minimum value of the column.
+     */
+    MinimumValue?: Long;
+    /**
+     * Maximum value of the column.
+     */
+    MaximumValue?: Long;
+    /**
+     * Number of nulls.
+     */
+    NumberOfNulls: NonNegativeLong;
+    /**
+     * Number of distinct values.
+     */
+    NumberOfDistinctValues: NonNegativeLong;
+  }
   export interface MLTransform {
     /**
      * The unique transform ID that is generated for the machine learning transform. The ID is guaranteed to be unique and does not change.
@@ -4730,6 +5072,7 @@ declare namespace Glue {
   export type NodeType = "CRAWLER"|"JOB"|"TRIGGER"|string;
   export type NonNegativeDouble = number;
   export type NonNegativeInteger = number;
+  export type NonNegativeLong = number;
   export interface NotificationProperty {
     /**
      * After a job run starts, the number of minutes to wait before sending a job run delay notification.
@@ -5387,6 +5730,24 @@ declare namespace Glue {
      */
     StoredAsSubDirectories?: Boolean;
   }
+  export interface StringColumnStatisticsData {
+    /**
+     * Maximum value of the column.
+     */
+    MaximumLength: NonNegativeLong;
+    /**
+     * Average value of the column.
+     */
+    AverageLength: NonNegativeDouble;
+    /**
+     * Number of nulls.
+     */
+    NumberOfNulls: NonNegativeLong;
+    /**
+     * Number of distinct values.
+     */
+    NumberOfDistinctValues: NonNegativeLong;
+  }
   export type StringList = GenericString[];
   export interface Table {
     /**
@@ -5799,6 +6160,7 @@ declare namespace Glue {
      */
     Predicate?: Predicate;
   }
+  export type TypeString = string;
   export type URI = string;
   export interface UntagResourceRequest {
     /**
@@ -5833,6 +6195,59 @@ declare namespace Glue {
   }
   export interface UpdateClassifierResponse {
   }
+  export interface UpdateColumnStatisticsForPartitionRequest {
+    /**
+     * The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The name of the catalog database where the partitions reside.
+     */
+    DatabaseName: NameString;
+    /**
+     * The name of the partitions' table.
+     */
+    TableName: NameString;
+    /**
+     * A list of partition values identifying the partition.
+     */
+    PartitionValues: ValueStringList;
+    /**
+     * A list of the column statistics.
+     */
+    ColumnStatisticsList: UpdateColumnStatisticsList;
+  }
+  export interface UpdateColumnStatisticsForPartitionResponse {
+    /**
+     * Error occurred during updating column statistics data.
+     */
+    Errors?: ColumnStatisticsErrors;
+  }
+  export interface UpdateColumnStatisticsForTableRequest {
+    /**
+     * The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The name of the catalog database where the partitions reside.
+     */
+    DatabaseName: NameString;
+    /**
+     * The name of the partitions' table.
+     */
+    TableName: NameString;
+    /**
+     * A list of the column statistics.
+     */
+    ColumnStatisticsList: UpdateColumnStatisticsList;
+  }
+  export interface UpdateColumnStatisticsForTableResponse {
+    /**
+     * List of ColumnStatisticsErrors.
+     */
+    Errors?: ColumnStatisticsErrors;
+  }
+  export type UpdateColumnStatisticsList = ColumnStatistics[];
   export interface UpdateConnectionRequest {
     /**
      * The ID of the Data Catalog in which the connection resides. If none is provided, the AWS account ID is used by default.

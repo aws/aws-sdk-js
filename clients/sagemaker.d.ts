@@ -2573,6 +2573,10 @@ declare namespace SageMaker {
      */
     MaxConcurrentTransforms?: MaxConcurrentTransforms;
     /**
+     * Configures the timeout and maximum number of retries for processing a transform job invocation.
+     */
+    ModelClientConfig?: ModelClientConfig;
+    /**
      * The maximum allowed size of the payload, in MB. A payload is the data portion of a record (without metadata). The value in MaxPayloadInMB must be greater than, or equal to, the size of a single record. To estimate the size of a record in MB, divide the size of your dataset by the number of records. To ensure that the records fit within the maximum payload size, we recommend using a slightly larger value. The default value is 6 MB.  For cases where the payload might be arbitrarily large and is transmitted using HTTP chunked encoding, set the value to 0. This feature works only in supported algorithms. Currently, Amazon SageMaker built-in algorithms do not support HTTP chunked encoding.
      */
     MaxPayloadInMB?: MaxPayloadInMB;
@@ -4127,7 +4131,7 @@ declare namespace SageMaker {
      */
     LabelingJobArn?: LabelingJobArn;
     /**
-     * 
+     * The Amazon Resource Name (ARN) of an AutoML job.
      */
     AutoMLJobArn?: AutoMLJobArn;
     /**
@@ -4267,6 +4271,10 @@ declare namespace SageMaker {
      */
     MaxConcurrentTransforms?: MaxConcurrentTransforms;
     /**
+     * The timeout and maximum number of retries for processing a transform job invocation.
+     */
+    ModelClientConfig?: ModelClientConfig;
+    /**
      * The maximum payload size, in MB, used in the transform job.
      */
     MaxPayloadInMB?: MaxPayloadInMB;
@@ -4307,7 +4315,7 @@ declare namespace SageMaker {
      */
     LabelingJobArn?: LabelingJobArn;
     /**
-     * 
+     * The Amazon Resource Name (ARN) of the AutoML transform job.
      */
     AutoMLJobArn?: AutoMLJobArn;
     DataProcessing?: DataProcessing;
@@ -4773,7 +4781,7 @@ declare namespace SageMaker {
      */
     Name: ResourcePropertyName;
     /**
-     * A Boolean binary operator that is used to evaluate the filter. The operator field contains one of the following values:  Equals  The value of Name equals Value.  NotEquals  The value of Name doesn't equal Value.  GreaterThan  The value of Name is greater than Value. Not supported for text properties.  GreaterThanOrEqualTo  The value of Name is greater than or equal to Value. Not supported for text properties.  LessThan  The value of Name is less than Value. Not supported for text properties.  LessThanOrEqualTo  The value of Name is less than or equal to Value. Not supported for text properties.  Contains  The value of Name contains the string Value. A SearchExpression can include only one Contains operator. Only supported for text properties.  Exists  The Name property exists.  NotExists  The Name property does not exist.  In  The value of Name is one of the comma delimited strings in Value. Only supported for text properties.  
+     * A Boolean binary operator that is used to evaluate the filter. The operator field contains one of the following values:  Equals  The value of Name equals Value.  NotEquals  The value of Name doesn't equal Value.  Exists  The Name property exists.  NotExists  The Name property does not exist.  GreaterThan  The value of Name is greater than Value. Not supported for text properties.  GreaterThanOrEqualTo  The value of Name is greater than or equal to Value. Not supported for text properties.  LessThan  The value of Name is less than Value. Not supported for text properties.  LessThanOrEqualTo  The value of Name is less than or equal to Value. Not supported for text properties.  In  The value of Name is one of the comma delimited strings in Value. Only supported for text properties.  Contains  The value of Name contains the string Value. Only supported for text properties. A SearchExpression can include the Contains operator multiple times when the value of Name is one of the following:    Experiment.DisplayName     Experiment.ExperimentName     Experiment.Tags     Trial.DisplayName     Trial.TrialName     Trial.Tags     TrialComponent.DisplayName     TrialComponent.TrialComponentName     TrialComponent.Tags     TrialComponent.InputArtifacts     TrialComponent.OutputArtifacts    A SearchExpression can include only one Contains operator for all other values of Name. In these cases, if you include multiple Contains operators in the SearchExpression, the result is the following error message: "'CONTAINS' operator usage limit of 1 exceeded."  
      */
     Operator?: Operator;
     /**
@@ -5342,6 +5350,8 @@ declare namespace SageMaker {
     MaxValue: ParameterValue;
   }
   export type IntegerParameterRanges = IntegerParameterRange[];
+  export type InvocationsMaxRetries = number;
+  export type InvocationsTimeoutInSeconds = number;
   export type JobReferenceCode = string;
   export type JobReferenceCodeContains = string;
   export type JoinSource = "Input"|"None"|string;
@@ -6961,6 +6971,16 @@ declare namespace SageMaker {
      * The path of the S3 object that contains the model artifacts. For example, s3://bucket-name/keynameprefix/model.tar.gz.
      */
     S3ModelArtifacts: S3Uri;
+  }
+  export interface ModelClientConfig {
+    /**
+     * The timeout value in seconds for an invocation request.
+     */
+    InvocationsTimeoutInSeconds?: InvocationsTimeoutInSeconds;
+    /**
+     * The maximum number of retries when invocation requests are failing.
+     */
+    InvocationsMaxRetries?: InvocationsMaxRetries;
   }
   export type ModelName = string;
   export type ModelNameContains = string;

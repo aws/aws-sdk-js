@@ -1406,7 +1406,11 @@
         },
         "MaximumOnDemandCapacityUnits": {
           "shape": "Integer",
-          "documentation": "<p> The upper boundary of on-demand EC2 units. It is measured through VCPU cores or instances for instance groups and measured through units for instance fleets. The on-demand units are not allowed to scale beyond this boundary. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. </p>"
+          "documentation": "<p> The upper boundary of On-Demand EC2 units. It is measured through VCPU cores or instances for instance groups and measured through units for instance fleets. The On-Demand units are not allowed to scale beyond this boundary. The parameter is used to split capacity allocation between On-Demand and Spot instances. </p>"
+        },
+        "MaximumCoreCapacityUnits": {
+          "shape": "Integer",
+          "documentation": "<p> The upper boundary of EC2 units for core node type in a cluster. It is measured through VCPU cores or instances for instance groups and measured through units for instance fleets. The core units are not allowed to scale beyond this boundary. The parameter is used to split capacity allocation between core and task nodes. </p>"
         }
       },
       "documentation": "<p> The EC2 unit limits for a managed scaling policy. The managed scaling activity of a cluster can not be above or below these limits. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. </p>"
@@ -2032,16 +2036,17 @@
     },
     "InstanceFleetProvisioningSpecifications": {
       "type": "structure",
-      "required": [
-        "SpotSpecification"
-      ],
       "members": {
         "SpotSpecification": {
           "shape": "SpotProvisioningSpecification",
-          "documentation": "<p>The launch specification for Spot instances in the fleet, which determines the defined duration and provisioning timeout behavior.</p>"
+          "documentation": "<p>The launch specification for Spot instances in the fleet, which determines the defined duration, provisioning timeout behavior, and allocation strategy.</p>"
+        },
+        "OnDemandSpecification": {
+          "shape": "OnDemandProvisioningSpecification",
+          "documentation": "<p> The launch specification for On-Demand instances in the instance fleet, which determines the allocation strategy. </p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. On-Demand instances allocation strategy is available in Amazon EMR version 5.12.1 and later.</p> </note>"
         }
       },
-      "documentation": "<p>The launch specification for Spot instances in the fleet, which determines the defined duration and provisioning timeout behavior.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>"
+      "documentation": "<p>The launch specification for Spot instances in the fleet, which determines the defined duration, provisioning timeout behavior, and allocation strategy.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. On-Demand and Spot instance allocation strategies are available in Amazon EMR version 5.12.1 and later.</p> </note>"
     },
     "InstanceFleetState": {
       "type": "string",
@@ -3331,6 +3336,25 @@
       "type": "double",
       "min": 0
     },
+    "OnDemandProvisioningAllocationStrategy": {
+      "type": "string",
+      "enum": [
+        "lowest-price"
+      ]
+    },
+    "OnDemandProvisioningSpecification": {
+      "type": "structure",
+      "required": [
+        "AllocationStrategy"
+      ],
+      "members": {
+        "AllocationStrategy": {
+          "shape": "OnDemandProvisioningAllocationStrategy",
+          "documentation": "<p> Specifies the strategy to use in launching On-Demand instance fleets. Currently, the only option is lowest-price (the default), which launches the lowest price first. </p>"
+        }
+      },
+      "documentation": "<p> The launch specification for On-Demand instances in the instance fleet, which determines the allocation strategy. </p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. On-Demand instances allocation strategy is available in Amazon EMR version 5.12.1 and later.</p> </note>"
+    },
     "OptionalArnType": {
       "type": "string",
       "max": 2048,
@@ -3858,6 +3882,12 @@
       },
       "documentation": "<p>An automatic scaling configuration, which describes how the policy adds or removes instances, the cooldown period, and the number of EC2 instances that will be added each time the CloudWatch metric alarm condition is satisfied.</p>"
     },
+    "SpotProvisioningAllocationStrategy": {
+      "type": "string",
+      "enum": [
+        "capacity-optimized"
+      ]
+    },
     "SpotProvisioningSpecification": {
       "type": "structure",
       "required": [
@@ -3876,9 +3906,13 @@
         "BlockDurationMinutes": {
           "shape": "WholeNumber",
           "documentation": "<p>The defined duration for Spot instances (also known as Spot blocks) in minutes. When specified, the Spot instance does not terminate before the defined duration expires, and defined duration pricing for Spot instances applies. Valid values are 60, 120, 180, 240, 300, or 360. The duration period starts as soon as a Spot instance receives its instance ID. At the end of the duration, Amazon EC2 marks the Spot instance for termination and provides a Spot instance termination notice, which gives the instance a two-minute warning before it terminates. </p>"
+        },
+        "AllocationStrategy": {
+          "shape": "SpotProvisioningAllocationStrategy",
+          "documentation": "<p> Specifies the strategy to use in launching Spot instance fleets. Currently, the only option is capacity-optimized (the default), which launches instances from Spot instance pools with optimal capacity for the number of instances that are launching. </p>"
         }
       },
-      "documentation": "<p>The launch specification for Spot instances in the instance fleet, which determines the defined duration and provisioning timeout behavior.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>"
+      "documentation": "<p>The launch specification for Spot instances in the instance fleet, which determines the defined duration, provisioning timeout behavior, and allocation strategy.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. Spot instance allocation strategy is available in Amazon EMR version 5.12.1 and later.</p> </note>"
     },
     "SpotProvisioningTimeoutAction": {
       "type": "string",

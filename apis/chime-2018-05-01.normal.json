@@ -1244,6 +1244,41 @@
       ],
       "documentation": "<p>Deletes the specified Amazon Chime Voice Connector. Any phone numbers associated with the Amazon Chime Voice Connector must be disassociated from it before it can be deleted.</p>"
     },
+    "DeleteVoiceConnectorEmergencyCallingConfiguration": {
+      "name": "DeleteVoiceConnectorEmergencyCallingConfiguration",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/voice-connectors/{voiceConnectorId}/emergency-calling-configuration",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteVoiceConnectorEmergencyCallingConfigurationRequest"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Deletes the emergency calling configuration details from the specified Amazon Chime Voice Connector.</p>"
+    },
     "DeleteVoiceConnectorGroup": {
       "name": "DeleteVoiceConnectorGroup",
       "http": {
@@ -1315,7 +1350,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Deletes the origination settings for the specified Amazon Chime Voice Connector.</p>"
+      "documentation": "<p>Deletes the origination settings for the specified Amazon Chime Voice Connector.</p> <note> <p>If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to deleting the origination settings.</p> </note>"
     },
     "DeleteVoiceConnectorProxy": {
       "name": "DeleteVoiceConnectorProxy",
@@ -1420,7 +1455,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Deletes the termination settings for the specified Amazon Chime Voice Connector.</p>"
+      "documentation": "<p>Deletes the termination settings for the specified Amazon Chime Voice Connector.</p> <note> <p>If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to deleting the termination settings.</p> </note>"
     },
     "DeleteVoiceConnectorTerminationCredentials": {
       "name": "DeleteVoiceConnectorTerminationCredentials",
@@ -2200,6 +2235,44 @@
         }
       ],
       "documentation": "<p>Retrieves details for the specified Amazon Chime Voice Connector, such as timestamps, name, outbound host, and encryption requirements.</p>"
+    },
+    "GetVoiceConnectorEmergencyCallingConfiguration": {
+      "name": "GetVoiceConnectorEmergencyCallingConfiguration",
+      "http": {
+        "method": "GET",
+        "requestUri": "/voice-connectors/{voiceConnectorId}/emergency-calling-configuration",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetVoiceConnectorEmergencyCallingConfigurationRequest"
+      },
+      "output": {
+        "shape": "GetVoiceConnectorEmergencyCallingConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Gets the emergency calling configuration details for the specified Amazon Chime Voice Connector.</p>"
     },
     "GetVoiceConnectorGroup": {
       "name": "GetVoiceConnectorGroup",
@@ -3209,6 +3282,44 @@
       ],
       "documentation": "<p>Puts retention settings for the specified Amazon Chime Enterprise account. We recommend using AWS CloudTrail to monitor usage of this API for your account. For more information, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/cloudtrail.html\">Logging Amazon Chime API Calls with AWS CloudTrail</a> in the <i>Amazon Chime Administration Guide</i>.</p> <p>To turn off existing retention settings, remove the number of days from the corresponding <b>RetentionDays</b> field in the <b>RetentionSettings</b> object. For more information about retention settings, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/chat-retention.html\">Managing Chat Retention Policies</a> in the <i>Amazon Chime Administration Guide</i>.</p>"
     },
+    "PutVoiceConnectorEmergencyCallingConfiguration": {
+      "name": "PutVoiceConnectorEmergencyCallingConfiguration",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/voice-connectors/{voiceConnectorId}/emergency-calling-configuration",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "PutVoiceConnectorEmergencyCallingConfigurationRequest"
+      },
+      "output": {
+        "shape": "PutVoiceConnectorEmergencyCallingConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Puts emergency calling configuration details to the specified Amazon Chime Voice Connector, such as emergency phone numbers and calling countries. Origination and termination settings must be enabled for the Amazon Chime Voice Connector before emergency calling can be configured.</p>"
+    },
     "PutVoiceConnectorLoggingConfiguration": {
       "name": "PutVoiceConnectorLoggingConfiguration",
       "http": {
@@ -3283,7 +3394,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Adds origination settings for the specified Amazon Chime Voice Connector.</p>"
+      "documentation": "<p>Adds origination settings for the specified Amazon Chime Voice Connector.</p> <note> <p>If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to turning off origination settings.</p> </note>"
     },
     "PutVoiceConnectorProxy": {
       "name": "PutVoiceConnectorProxy",
@@ -3402,7 +3513,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Adds termination settings for the specified Amazon Chime Voice Connector.</p>"
+      "documentation": "<p>Adds termination settings for the specified Amazon Chime Voice Connector.</p> <note> <p>If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to turning off termination settings.</p> </note>"
     },
     "PutVoiceConnectorTerminationCredentials": {
       "name": "PutVoiceConnectorTerminationCredentials",
@@ -4458,6 +4569,10 @@
       },
       "documentation": "<p>The Alexa for Business metadata associated with an Amazon Chime user, used to integrate Alexa for Business with a device.</p>"
     },
+    "Alpha2CountryCode": {
+      "type": "string",
+      "pattern": "[A-Z]{2}"
+    },
     "AreaCode": {
       "type": "string",
       "pattern": "^$|^[0-9]{3,3}$"
@@ -4502,7 +4617,8 @@
     "AssociatePhoneNumbersWithVoiceConnectorGroupRequest": {
       "type": "structure",
       "required": [
-        "VoiceConnectorGroupId"
+        "VoiceConnectorGroupId",
+        "E164PhoneNumbers"
       ],
       "members": {
         "VoiceConnectorGroupId": {
@@ -4533,7 +4649,8 @@
     "AssociatePhoneNumbersWithVoiceConnectorRequest": {
       "type": "structure",
       "required": [
-        "VoiceConnectorId"
+        "VoiceConnectorId",
+        "E164PhoneNumbers"
       ],
       "members": {
         "VoiceConnectorId": {
@@ -5448,6 +5565,34 @@
         "shape": "Credential"
       }
     },
+    "DNISEmergencyCallingConfiguration": {
+      "type": "structure",
+      "required": [
+        "EmergencyPhoneNumber",
+        "CallingCountry"
+      ],
+      "members": {
+        "EmergencyPhoneNumber": {
+          "shape": "E164PhoneNumber",
+          "documentation": "<p>The DNIS phone number to route emergency calls to, in E.164 format.</p>"
+        },
+        "TestPhoneNumber": {
+          "shape": "E164PhoneNumber",
+          "documentation": "<p>The DNIS phone number to route test emergency calls to, in E.164 format.</p>"
+        },
+        "CallingCountry": {
+          "shape": "Alpha2CountryCode",
+          "documentation": "<p>The country from which emergency calls are allowed, in ISO 3166-1 alpha-2 format.</p>"
+        }
+      },
+      "documentation": "<p>The Dialed Number Identification Service (DNIS) emergency calling configuration details associated with an Amazon Chime Voice Connector's emergency calling configuration.</p>"
+    },
+    "DNISEmergencyCallingConfigurationList": {
+      "type": "list",
+      "member": {
+        "shape": "DNISEmergencyCallingConfiguration"
+      }
+    },
     "DataRetentionInHours": {
       "type": "integer",
       "min": 0
@@ -5610,6 +5755,20 @@
         }
       }
     },
+    "DeleteVoiceConnectorEmergencyCallingConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "VoiceConnectorId"
+      ],
+      "members": {
+        "VoiceConnectorId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime Voice Connector ID.</p>",
+          "location": "uri",
+          "locationName": "voiceConnectorId"
+        }
+      }
+    },
     "DeleteVoiceConnectorGroupRequest": {
       "type": "structure",
       "required": [
@@ -5683,6 +5842,7 @@
     "DeleteVoiceConnectorTerminationCredentialsRequest": {
       "type": "structure",
       "required": [
+        "Usernames",
         "VoiceConnectorId"
       ],
       "members": {
@@ -5740,7 +5900,8 @@
     "DisassociatePhoneNumbersFromVoiceConnectorGroupRequest": {
       "type": "structure",
       "required": [
-        "VoiceConnectorGroupId"
+        "VoiceConnectorGroupId",
+        "E164PhoneNumbers"
       ],
       "members": {
         "VoiceConnectorGroupId": {
@@ -5767,7 +5928,8 @@
     "DisassociatePhoneNumbersFromVoiceConnectorRequest": {
       "type": "structure",
       "required": [
-        "VoiceConnectorId"
+        "VoiceConnectorId",
+        "E164PhoneNumbers"
       ],
       "members": {
         "VoiceConnectorId": {
@@ -5837,6 +5999,16 @@
         "Sent",
         "Failed"
       ]
+    },
+    "EmergencyCallingConfiguration": {
+      "type": "structure",
+      "members": {
+        "DNIS": {
+          "shape": "DNISEmergencyCallingConfigurationList",
+          "documentation": "<p>The Dialed Number Identification Service (DNIS) emergency calling configuration details.</p>"
+        }
+      },
+      "documentation": "<p>The emergency calling configuration details associated with an Amazon Chime Voice Connector.</p>"
     },
     "ErrorCode": {
       "type": "string",
@@ -6287,6 +6459,29 @@
         "UserSettings": {
           "shape": "UserSettings",
           "documentation": "<p>The user settings.</p>"
+        }
+      }
+    },
+    "GetVoiceConnectorEmergencyCallingConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "VoiceConnectorId"
+      ],
+      "members": {
+        "VoiceConnectorId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime Voice Connector ID.</p>",
+          "location": "uri",
+          "locationName": "voiceConnectorId"
+        }
+      }
+    },
+    "GetVoiceConnectorEmergencyCallingConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "EmergencyCallingConfiguration": {
+          "shape": "EmergencyCallingConfiguration",
+          "documentation": "<p>The emergency calling configuration details.</p>"
         }
       }
     },
@@ -7921,6 +8116,34 @@
         "InitiateDeletionTimestamp": {
           "shape": "Iso8601Timestamp",
           "documentation": "<p>The timestamp representing the time at which the specified items are permanently deleted, in ISO 8601 format.</p>"
+        }
+      }
+    },
+    "PutVoiceConnectorEmergencyCallingConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "VoiceConnectorId",
+        "EmergencyCallingConfiguration"
+      ],
+      "members": {
+        "VoiceConnectorId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime Voice Connector ID.</p>",
+          "location": "uri",
+          "locationName": "voiceConnectorId"
+        },
+        "EmergencyCallingConfiguration": {
+          "shape": "EmergencyCallingConfiguration",
+          "documentation": "<p>The emergency calling configuration details.</p>"
+        }
+      }
+    },
+    "PutVoiceConnectorEmergencyCallingConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "EmergencyCallingConfiguration": {
+          "shape": "EmergencyCallingConfiguration",
+          "documentation": "<p>The emergency calling configuration details.</p>"
         }
       }
     },

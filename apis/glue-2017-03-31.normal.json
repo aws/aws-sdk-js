@@ -859,6 +859,68 @@
       ],
       "documentation": "<p>Removes a classifier from the Data Catalog.</p>"
     },
+    "DeleteColumnStatisticsForPartition": {
+      "name": "DeleteColumnStatisticsForPartition",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteColumnStatisticsForPartitionRequest"
+      },
+      "output": {
+        "shape": "DeleteColumnStatisticsForPartitionResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "GlueEncryptionException"
+        }
+      ],
+      "documentation": "<p>Delete the partition column statistics of a column.</p>"
+    },
+    "DeleteColumnStatisticsForTable": {
+      "name": "DeleteColumnStatisticsForTable",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteColumnStatisticsForTableRequest"
+      },
+      "output": {
+        "shape": "DeleteColumnStatisticsForTableResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "GlueEncryptionException"
+        }
+      ],
+      "documentation": "<p>Retrieves table statistics of columns.</p>"
+    },
     "DeleteConnection": {
       "name": "DeleteConnection",
       "http": {
@@ -1307,6 +1369,68 @@
         }
       ],
       "documentation": "<p>Lists all classifier objects in the Data Catalog.</p>"
+    },
+    "GetColumnStatisticsForPartition": {
+      "name": "GetColumnStatisticsForPartition",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetColumnStatisticsForPartitionRequest"
+      },
+      "output": {
+        "shape": "GetColumnStatisticsForPartitionResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "GlueEncryptionException"
+        }
+      ],
+      "documentation": "<p>Retrieves partition statistics of columns.</p>"
+    },
+    "GetColumnStatisticsForTable": {
+      "name": "GetColumnStatisticsForTable",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetColumnStatisticsForTableRequest"
+      },
+      "output": {
+        "shape": "GetColumnStatisticsForTableResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "GlueEncryptionException"
+        }
+      ],
+      "documentation": "<p>Retrieves table statistics of columns.</p>"
     },
     "GetConnection": {
       "name": "GetConnection",
@@ -3233,6 +3357,68 @@
       ],
       "documentation": "<p>Modifies an existing classifier (a <code>GrokClassifier</code>, an <code>XMLClassifier</code>, a <code>JsonClassifier</code>, or a <code>CsvClassifier</code>, depending on which field is present).</p>"
     },
+    "UpdateColumnStatisticsForPartition": {
+      "name": "UpdateColumnStatisticsForPartition",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateColumnStatisticsForPartitionRequest"
+      },
+      "output": {
+        "shape": "UpdateColumnStatisticsForPartitionResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "GlueEncryptionException"
+        }
+      ],
+      "documentation": "<p>Creates or updates partition statistics of columns.</p>"
+    },
+    "UpdateColumnStatisticsForTable": {
+      "name": "UpdateColumnStatisticsForTable",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateColumnStatisticsForTableRequest"
+      },
+      "output": {
+        "shape": "UpdateColumnStatisticsForTableResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "GlueEncryptionException"
+        }
+      ],
+      "documentation": "<p>Creates or updates table statistics of columns.</p>"
+    },
     "UpdateConnection": {
       "name": "UpdateConnection",
       "http": {
@@ -4098,8 +4284,57 @@
         "shape": "BatchStopJobRunSuccessfulSubmission"
       }
     },
+    "BinaryColumnStatisticsData": {
+      "type": "structure",
+      "required": [
+        "MaximumLength",
+        "AverageLength",
+        "NumberOfNulls"
+      ],
+      "members": {
+        "MaximumLength": {
+          "shape": "NonNegativeLong",
+          "documentation": "<p>Maximum length of the column.</p>"
+        },
+        "AverageLength": {
+          "shape": "NonNegativeDouble",
+          "documentation": "<p>Average length of the column.</p>"
+        },
+        "NumberOfNulls": {
+          "shape": "NonNegativeLong",
+          "documentation": "<p>Number of nulls.</p>"
+        }
+      },
+      "documentation": "<p>Defines a binary column statistics data.</p>"
+    },
+    "Blob": {
+      "type": "blob"
+    },
     "Boolean": {
       "type": "boolean"
+    },
+    "BooleanColumnStatisticsData": {
+      "type": "structure",
+      "required": [
+        "NumberOfTrues",
+        "NumberOfFalses",
+        "NumberOfNulls"
+      ],
+      "members": {
+        "NumberOfTrues": {
+          "shape": "NonNegativeLong",
+          "documentation": "<p>Number of true value.</p>"
+        },
+        "NumberOfFalses": {
+          "shape": "NonNegativeLong",
+          "documentation": "<p>Number of false value.</p>"
+        },
+        "NumberOfNulls": {
+          "shape": "NonNegativeLong",
+          "documentation": "<p>Number of nulls.</p>"
+        }
+      },
+      "documentation": "<p>Defines a boolean column statistics.</p>"
     },
     "BooleanNullable": {
       "type": "boolean"
@@ -4412,6 +4647,26 @@
       },
       "documentation": "<p>A column in a <code>Table</code>.</p>"
     },
+    "ColumnError": {
+      "type": "structure",
+      "members": {
+        "ColumnName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the column.</p>"
+        },
+        "Error": {
+          "shape": "ErrorDetail",
+          "documentation": "<p>The error message occurred during operation.</p>"
+        }
+      },
+      "documentation": "<p>Defines a column containing error.</p>"
+    },
+    "ColumnErrors": {
+      "type": "list",
+      "member": {
+        "shape": "ColumnError"
+      }
+    },
     "ColumnList": {
       "type": "list",
       "member": {
@@ -4423,6 +4678,113 @@
       "max": 1024,
       "min": 1,
       "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+    },
+    "ColumnStatistics": {
+      "type": "structure",
+      "required": [
+        "ColumnName",
+        "ColumnType",
+        "AnalyzedTime",
+        "StatisticsData"
+      ],
+      "members": {
+        "ColumnName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the column.</p>"
+        },
+        "ColumnType": {
+          "shape": "TypeString",
+          "documentation": "<p>The type of the column.</p>"
+        },
+        "AnalyzedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The analyzed time of the column statistics.</p>"
+        },
+        "StatisticsData": {
+          "shape": "ColumnStatisticsData",
+          "documentation": "<p>The statistics of the column.</p>"
+        }
+      },
+      "documentation": "<p>Defines a column statistics.</p>"
+    },
+    "ColumnStatisticsData": {
+      "type": "structure",
+      "required": [
+        "Type"
+      ],
+      "members": {
+        "Type": {
+          "shape": "ColumnStatisticsType",
+          "documentation": "<p>The name of the column.</p>"
+        },
+        "BooleanColumnStatisticsData": {
+          "shape": "BooleanColumnStatisticsData",
+          "documentation": "<p>Boolean Column Statistics Data.</p>"
+        },
+        "DateColumnStatisticsData": {
+          "shape": "DateColumnStatisticsData",
+          "documentation": "<p>Date Column Statistics Data.</p>"
+        },
+        "DecimalColumnStatisticsData": {
+          "shape": "DecimalColumnStatisticsData",
+          "documentation": "<p>Decimal Column Statistics Data.</p>"
+        },
+        "DoubleColumnStatisticsData": {
+          "shape": "DoubleColumnStatisticsData",
+          "documentation": "<p>Double Column Statistics Data.</p>"
+        },
+        "LongColumnStatisticsData": {
+          "shape": "LongColumnStatisticsData",
+          "documentation": "<p>Long Column Statistics Data.</p>"
+        },
+        "StringColumnStatisticsData": {
+          "shape": "StringColumnStatisticsData",
+          "documentation": "<p>String Column Statistics Data.</p>"
+        },
+        "BinaryColumnStatisticsData": {
+          "shape": "BinaryColumnStatisticsData",
+          "documentation": "<p>Binary Column Statistics Data.</p>"
+        }
+      },
+      "documentation": "<p>Defines a column statistics data.</p>"
+    },
+    "ColumnStatisticsError": {
+      "type": "structure",
+      "members": {
+        "ColumnStatistics": {
+          "shape": "ColumnStatistics",
+          "documentation": "<p>The ColumnStatistics of the column.</p>"
+        },
+        "Error": {
+          "shape": "ErrorDetail",
+          "documentation": "<p>The error message occurred during operation.</p>"
+        }
+      },
+      "documentation": "<p>Defines a column containing error.</p>"
+    },
+    "ColumnStatisticsErrors": {
+      "type": "list",
+      "member": {
+        "shape": "ColumnStatisticsError"
+      }
+    },
+    "ColumnStatisticsList": {
+      "type": "list",
+      "member": {
+        "shape": "ColumnStatistics"
+      }
+    },
+    "ColumnStatisticsType": {
+      "type": "string",
+      "enum": [
+        "BOOLEAN",
+        "DATE",
+        "DECIMAL",
+        "DOUBLE",
+        "LONG",
+        "STRING",
+        "BINARY"
+      ]
     },
     "ColumnTypeString": {
       "type": "string",
@@ -5861,6 +6223,76 @@
     "DatabaseName": {
       "type": "string"
     },
+    "DateColumnStatisticsData": {
+      "type": "structure",
+      "required": [
+        "NumberOfNulls",
+        "NumberOfDistinctValues"
+      ],
+      "members": {
+        "MinimumValue": {
+          "shape": "Timestamp",
+          "documentation": "<p>Minimum value of the column.</p>"
+        },
+        "MaximumValue": {
+          "shape": "Timestamp",
+          "documentation": "<p>Maximum value of the column.</p>"
+        },
+        "NumberOfNulls": {
+          "shape": "NonNegativeLong",
+          "documentation": "<p>Number of nulls.</p>"
+        },
+        "NumberOfDistinctValues": {
+          "shape": "NonNegativeLong",
+          "documentation": "<p>Number of distinct values.</p>"
+        }
+      },
+      "documentation": "<p>Defines a date column statistics data.</p>"
+    },
+    "DecimalColumnStatisticsData": {
+      "type": "structure",
+      "required": [
+        "NumberOfNulls",
+        "NumberOfDistinctValues"
+      ],
+      "members": {
+        "MinimumValue": {
+          "shape": "DecimalNumber",
+          "documentation": "<p>Minimum value of the column.</p>"
+        },
+        "MaximumValue": {
+          "shape": "DecimalNumber",
+          "documentation": "<p>Maximum value of the column.</p>"
+        },
+        "NumberOfNulls": {
+          "shape": "NonNegativeLong",
+          "documentation": "<p>Number of nulls.</p>"
+        },
+        "NumberOfDistinctValues": {
+          "shape": "NonNegativeLong",
+          "documentation": "<p>Number of distinct values.</p>"
+        }
+      },
+      "documentation": "<p>Defines a decimal column statistics data.</p>"
+    },
+    "DecimalNumber": {
+      "type": "structure",
+      "required": [
+        "UnscaledValue",
+        "Scale"
+      ],
+      "members": {
+        "UnscaledValue": {
+          "shape": "Blob",
+          "documentation": "<p>The unscaled numeric value.</p>"
+        },
+        "Scale": {
+          "shape": "Integer",
+          "documentation": "<p>The scale that determines where the decimal point falls in the unscaled value.</p>"
+        }
+      },
+      "documentation": "<p>Contains a numeric value in decimal format.</p>"
+    },
     "DeleteBehavior": {
       "type": "string",
       "enum": [
@@ -5882,6 +6314,71 @@
       }
     },
     "DeleteClassifierResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeleteColumnStatisticsForPartitionRequest": {
+      "type": "structure",
+      "required": [
+        "DatabaseName",
+        "TableName",
+        "PartitionValues",
+        "ColumnName"
+      ],
+      "members": {
+        "CatalogId": {
+          "shape": "CatalogIdString",
+          "documentation": "<p>The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the catalog database where the partitions reside.</p>"
+        },
+        "TableName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the partitions' table.</p>"
+        },
+        "PartitionValues": {
+          "shape": "ValueStringList",
+          "documentation": "<p>A list of partition values identifying the partition.</p>"
+        },
+        "ColumnName": {
+          "shape": "NameString",
+          "documentation": "<p>Name of the column.</p>"
+        }
+      }
+    },
+    "DeleteColumnStatisticsForPartitionResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeleteColumnStatisticsForTableRequest": {
+      "type": "structure",
+      "required": [
+        "DatabaseName",
+        "TableName",
+        "ColumnName"
+      ],
+      "members": {
+        "CatalogId": {
+          "shape": "CatalogIdString",
+          "documentation": "<p>The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the catalog database where the partitions reside.</p>"
+        },
+        "TableName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the partitions' table.</p>"
+        },
+        "ColumnName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the column.</p>"
+        }
+      }
+    },
+    "DeleteColumnStatisticsForTableResponse": {
       "type": "structure",
       "members": {}
     },
@@ -6340,6 +6837,35 @@
       "max": 25,
       "min": 1
     },
+    "Double": {
+      "type": "double"
+    },
+    "DoubleColumnStatisticsData": {
+      "type": "structure",
+      "required": [
+        "NumberOfNulls",
+        "NumberOfDistinctValues"
+      ],
+      "members": {
+        "MinimumValue": {
+          "shape": "Double",
+          "documentation": "<p>Minimum value of the column.</p>"
+        },
+        "MaximumValue": {
+          "shape": "Double",
+          "documentation": "<p>Maximum value of the column.</p>"
+        },
+        "NumberOfNulls": {
+          "shape": "NonNegativeLong",
+          "documentation": "<p>Number of nulls.</p>"
+        },
+        "NumberOfDistinctValues": {
+          "shape": "NonNegativeLong",
+          "documentation": "<p>Number of distinct values.</p>"
+        }
+      },
+      "documentation": "<p>Defines a double column statistics data.</p>"
+    },
     "DynamoDBTarget": {
       "type": "structure",
       "members": {
@@ -6653,6 +7179,97 @@
         "NextToken": {
           "shape": "Token",
           "documentation": "<p>A continuation token.</p>"
+        }
+      }
+    },
+    "GetColumnNamesList": {
+      "type": "list",
+      "member": {
+        "shape": "NameString"
+      },
+      "max": 100,
+      "min": 0
+    },
+    "GetColumnStatisticsForPartitionRequest": {
+      "type": "structure",
+      "required": [
+        "DatabaseName",
+        "TableName",
+        "PartitionValues",
+        "ColumnNames"
+      ],
+      "members": {
+        "CatalogId": {
+          "shape": "CatalogIdString",
+          "documentation": "<p>The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the catalog database where the partitions reside.</p>"
+        },
+        "TableName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the partitions' table.</p>"
+        },
+        "PartitionValues": {
+          "shape": "ValueStringList",
+          "documentation": "<p>A list of partition values identifying the partition.</p>"
+        },
+        "ColumnNames": {
+          "shape": "GetColumnNamesList",
+          "documentation": "<p>A list of the column names.</p>"
+        }
+      }
+    },
+    "GetColumnStatisticsForPartitionResponse": {
+      "type": "structure",
+      "members": {
+        "ColumnStatisticsList": {
+          "shape": "ColumnStatisticsList",
+          "documentation": "<p>List of ColumnStatistics that failed to be retrieved.</p>"
+        },
+        "Errors": {
+          "shape": "ColumnErrors",
+          "documentation": "<p>Error occurred during retrieving column statistics data.</p>"
+        }
+      }
+    },
+    "GetColumnStatisticsForTableRequest": {
+      "type": "structure",
+      "required": [
+        "DatabaseName",
+        "TableName",
+        "ColumnNames"
+      ],
+      "members": {
+        "CatalogId": {
+          "shape": "CatalogIdString",
+          "documentation": "<p>The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the catalog database where the partitions reside.</p>"
+        },
+        "TableName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the partitions' table.</p>"
+        },
+        "ColumnNames": {
+          "shape": "GetColumnNamesList",
+          "documentation": "<p>A list of the column names.</p>"
+        }
+      }
+    },
+    "GetColumnStatisticsForTableResponse": {
+      "type": "structure",
+      "members": {
+        "ColumnStatisticsList": {
+          "shape": "ColumnStatisticsList",
+          "documentation": "<p>List of ColumnStatistics that failed to be retrieved.</p>"
+        },
+        "Errors": {
+          "shape": "ColumnErrors",
+          "documentation": "<p>List of ColumnStatistics that failed to be retrieved.</p>"
         }
       }
     },
@@ -8861,6 +9478,35 @@
         "EQUALS"
       ]
     },
+    "Long": {
+      "type": "long"
+    },
+    "LongColumnStatisticsData": {
+      "type": "structure",
+      "required": [
+        "NumberOfNulls",
+        "NumberOfDistinctValues"
+      ],
+      "members": {
+        "MinimumValue": {
+          "shape": "Long",
+          "documentation": "<p>Minimum value of the column.</p>"
+        },
+        "MaximumValue": {
+          "shape": "Long",
+          "documentation": "<p>Maximum value of the column.</p>"
+        },
+        "NumberOfNulls": {
+          "shape": "NonNegativeLong",
+          "documentation": "<p>Number of nulls.</p>"
+        },
+        "NumberOfDistinctValues": {
+          "shape": "NonNegativeLong",
+          "documentation": "<p>Number of distinct values.</p>"
+        }
+      },
+      "documentation": "<p>Defines a long column statistics data.</p>"
+    },
     "MLTransform": {
       "type": "structure",
       "members": {
@@ -9071,6 +9717,10 @@
     },
     "NonNegativeInteger": {
       "type": "integer",
+      "min": 0
+    },
+    "NonNegativeLong": {
+      "type": "long",
       "min": 0
     },
     "NotificationProperty": {
@@ -10209,6 +10859,34 @@
       },
       "documentation": "<p>Describes the physical storage of table data.</p>"
     },
+    "StringColumnStatisticsData": {
+      "type": "structure",
+      "required": [
+        "MaximumLength",
+        "AverageLength",
+        "NumberOfNulls",
+        "NumberOfDistinctValues"
+      ],
+      "members": {
+        "MaximumLength": {
+          "shape": "NonNegativeLong",
+          "documentation": "<p>Maximum value of the column.</p>"
+        },
+        "AverageLength": {
+          "shape": "NonNegativeDouble",
+          "documentation": "<p>Average value of the column.</p>"
+        },
+        "NumberOfNulls": {
+          "shape": "NonNegativeLong",
+          "documentation": "<p>Number of nulls.</p>"
+        },
+        "NumberOfDistinctValues": {
+          "shape": "NonNegativeLong",
+          "documentation": "<p>Number of distinct values.</p>"
+        }
+      },
+      "documentation": "<p>Defines a string column statistics data.</p>"
+    },
     "StringList": {
       "type": "list",
       "member": {
@@ -10873,6 +11551,12 @@
       },
       "documentation": "<p>A structure used to provide information used to update a trigger. This object updates the previous trigger definition by overwriting it completely.</p>"
     },
+    "TypeString": {
+      "type": "string",
+      "max": 20000,
+      "min": 0,
+      "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+    },
     "URI": {
       "type": "string",
       "max": 1024,
@@ -10931,6 +11615,89 @@
     "UpdateClassifierResponse": {
       "type": "structure",
       "members": {}
+    },
+    "UpdateColumnStatisticsForPartitionRequest": {
+      "type": "structure",
+      "required": [
+        "DatabaseName",
+        "TableName",
+        "PartitionValues",
+        "ColumnStatisticsList"
+      ],
+      "members": {
+        "CatalogId": {
+          "shape": "CatalogIdString",
+          "documentation": "<p>The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the catalog database where the partitions reside.</p>"
+        },
+        "TableName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the partitions' table.</p>"
+        },
+        "PartitionValues": {
+          "shape": "ValueStringList",
+          "documentation": "<p>A list of partition values identifying the partition.</p>"
+        },
+        "ColumnStatisticsList": {
+          "shape": "UpdateColumnStatisticsList",
+          "documentation": "<p>A list of the column statistics.</p>"
+        }
+      }
+    },
+    "UpdateColumnStatisticsForPartitionResponse": {
+      "type": "structure",
+      "members": {
+        "Errors": {
+          "shape": "ColumnStatisticsErrors",
+          "documentation": "<p>Error occurred during updating column statistics data.</p>"
+        }
+      }
+    },
+    "UpdateColumnStatisticsForTableRequest": {
+      "type": "structure",
+      "required": [
+        "DatabaseName",
+        "TableName",
+        "ColumnStatisticsList"
+      ],
+      "members": {
+        "CatalogId": {
+          "shape": "CatalogIdString",
+          "documentation": "<p>The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.</p>"
+        },
+        "DatabaseName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the catalog database where the partitions reside.</p>"
+        },
+        "TableName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the partitions' table.</p>"
+        },
+        "ColumnStatisticsList": {
+          "shape": "UpdateColumnStatisticsList",
+          "documentation": "<p>A list of the column statistics.</p>"
+        }
+      }
+    },
+    "UpdateColumnStatisticsForTableResponse": {
+      "type": "structure",
+      "members": {
+        "Errors": {
+          "shape": "ColumnStatisticsErrors",
+          "documentation": "<p>List of ColumnStatisticsErrors.</p>"
+        }
+      }
+    },
+    "UpdateColumnStatisticsList": {
+      "type": "list",
+      "member": {
+        "shape": "ColumnStatistics"
+      },
+      "max": 25,
+      "min": 0
     },
     "UpdateConnectionRequest": {
       "type": "structure",

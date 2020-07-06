@@ -877,5 +877,8 @@
   },
   "codeartifact": {
     "name": "CodeArtifact"
+  },
+  "honeycode": {
+    "name": "Honeycode"
   }
 }

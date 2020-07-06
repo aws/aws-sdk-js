@@ -374,7 +374,7 @@ declare namespace AppSync {
      */
     atRestEncryptionEnabled?: Boolean;
     /**
-     * The cache instance type.    T2_SMALL: A t2.small instance type.    T2_MEDIUM: A t2.medium instance type.    R4_LARGE: A r4.large instance type.    R4_XLARGE: A r4.xlarge instance type.    R4_2XLARGE: A r4.2xlarge instance type.    R4_4XLARGE: A r4.4xlarge instance type.    R4_8XLARGE: A r4.8xlarge instance type.  
+     * The cache instance type. Valid values are     SMALL     MEDIUM     LARGE     XLARGE     LARGE_2X     LARGE_4X     LARGE_8X (not available in all regions)    LARGE_12X    Historically, instance types were identified by an EC2-style value. As of July 2020, this is deprecated, and the generic identifiers above should be used. The following legacy instance types are avaible, but their use is discouraged:    T2_SMALL: A t2.small instance type.    T2_MEDIUM: A t2.medium instance type.    R4_LARGE: A r4.large instance type.    R4_XLARGE: A r4.xlarge instance type.    R4_2XLARGE: A r4.2xlarge instance type.    R4_4XLARGE: A r4.4xlarge instance type.    R4_8XLARGE: A r4.8xlarge instance type.  
      */
     type?: ApiCacheType;
     /**
@@ -383,7 +383,7 @@ declare namespace AppSync {
     status?: ApiCacheStatus;
   }
   export type ApiCacheStatus = "AVAILABLE"|"CREATING"|"DELETING"|"MODIFYING"|"FAILED"|string;
-  export type ApiCacheType = "T2_SMALL"|"T2_MEDIUM"|"R4_LARGE"|"R4_XLARGE"|"R4_2XLARGE"|"R4_4XLARGE"|"R4_8XLARGE"|string;
+  export type ApiCacheType = "T2_SMALL"|"T2_MEDIUM"|"R4_LARGE"|"R4_XLARGE"|"R4_2XLARGE"|"R4_4XLARGE"|"R4_8XLARGE"|"SMALL"|"MEDIUM"|"LARGE"|"XLARGE"|"LARGE_2X"|"LARGE_4X"|"LARGE_8X"|"LARGE_12X"|string;
   export type ApiCachingBehavior = "FULL_REQUEST_CACHING"|"PER_RESOLVER_CACHING"|string;
   export interface ApiKey {
     /**
@@ -474,7 +474,7 @@ declare namespace AppSync {
      */
     apiCachingBehavior: ApiCachingBehavior;
     /**
-     * The cache instance type.    T2_SMALL: A t2.small instance type.    T2_MEDIUM: A t2.medium instance type.    R4_LARGE: A r4.large instance type.    R4_XLARGE: A r4.xlarge instance type.    R4_2XLARGE: A r4.2xlarge instance type.    R4_4XLARGE: A r4.4xlarge instance type.    R4_8XLARGE: A r4.8xlarge instance type.  
+     * The cache instance type. Valid values are     SMALL     MEDIUM     LARGE     XLARGE     LARGE_2X     LARGE_4X     LARGE_8X (not available in all regions)    LARGE_12X    Historically, instance types were identified by an EC2-style value. As of July 2020, this is deprecated, and the generic identifiers above should be used. The following legacy instance types are avaible, but their use is discouraged:    T2_SMALL: A t2.small instance type.    T2_MEDIUM: A t2.medium instance type.    R4_LARGE: A r4.large instance type.    R4_XLARGE: A r4.xlarge instance type.    R4_2XLARGE: A r4.2xlarge instance type.    R4_4XLARGE: A r4.4xlarge instance type.    R4_8XLARGE: A r4.8xlarge instance type.  
      */
     type: ApiCacheType;
   }
@@ -1351,7 +1351,7 @@ declare namespace AppSync {
      */
     awsRegion?: String;
     /**
-     * Amazon RDS cluster identifier.
+     * Amazon RDS cluster ARN.
      */
     dbClusterIdentifier?: String;
     /**
@@ -1522,7 +1522,7 @@ declare namespace AppSync {
      */
     apiCachingBehavior: ApiCachingBehavior;
     /**
-     * The cache instance type.    T2_SMALL: A t2.small instance type.    T2_MEDIUM: A t2.medium instance type.    R4_LARGE: A r4.large instance type.    R4_XLARGE: A r4.xlarge instance type.    R4_2XLARGE: A r4.2xlarge instance type.    R4_4XLARGE: A r4.4xlarge instance type.    R4_8XLARGE: A r4.8xlarge instance type.  
+     * The cache instance type. Valid values are     SMALL     MEDIUM     LARGE     XLARGE     LARGE_2X     LARGE_4X     LARGE_8X (not available in all regions)    LARGE_12X    Historically, instance types were identified by an EC2-style value. As of July 2020, this is deprecated, and the generic identifiers above should be used. The following legacy instance types are avaible, but their use is discouraged:    T2_SMALL: A t2.small instance type.    T2_MEDIUM: A t2.medium instance type.    R4_LARGE: A r4.large instance type.    R4_XLARGE: A r4.xlarge instance type.    R4_2XLARGE: A r4.2xlarge instance type.    R4_4XLARGE: A r4.4xlarge instance type.    R4_8XLARGE: A r4.8xlarge instance type.  
      */
     type: ApiCacheType;
   }

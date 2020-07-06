@@ -182,11 +182,11 @@ declare class RDS extends Service {
    */
   createDBParameterGroup(callback?: (err: AWSError, data: RDS.Types.CreateDBParameterGroupResult) => void): Request<RDS.Types.CreateDBParameterGroupResult, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Creates a new DB proxy.
+   * Creates a new DB proxy.
    */
   createDBProxy(params: RDS.Types.CreateDBProxyRequest, callback?: (err: AWSError, data: RDS.Types.CreateDBProxyResponse) => void): Request<RDS.Types.CreateDBProxyResponse, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Creates a new DB proxy.
+   * Creates a new DB proxy.
    */
   createDBProxy(callback?: (err: AWSError, data: RDS.Types.CreateDBProxyResponse) => void): Request<RDS.Types.CreateDBProxyResponse, AWSError>;
   /**
@@ -302,11 +302,11 @@ declare class RDS extends Service {
    */
   deleteDBParameterGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Deletes an existing proxy.
+   * Deletes an existing proxy.
    */
   deleteDBProxy(params: RDS.Types.DeleteDBProxyRequest, callback?: (err: AWSError, data: RDS.Types.DeleteDBProxyResponse) => void): Request<RDS.Types.DeleteDBProxyResponse, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Deletes an existing proxy.
+   * Deletes an existing proxy.
    */
   deleteDBProxy(callback?: (err: AWSError, data: RDS.Types.DeleteDBProxyResponse) => void): Request<RDS.Types.DeleteDBProxyResponse, AWSError>;
   /**
@@ -366,11 +366,11 @@ declare class RDS extends Service {
    */
   deleteOptionGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Remove the association between one or more DBProxyTarget data structures and a DBProxyTargetGroup.
+   * Remove the association between one or more DBProxyTarget data structures and a DBProxyTargetGroup.
    */
   deregisterDBProxyTargets(params: RDS.Types.DeregisterDBProxyTargetsRequest, callback?: (err: AWSError, data: RDS.Types.DeregisterDBProxyTargetsResponse) => void): Request<RDS.Types.DeregisterDBProxyTargetsResponse, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Remove the association between one or more DBProxyTarget data structures and a DBProxyTargetGroup.
+   * Remove the association between one or more DBProxyTarget data structures and a DBProxyTargetGroup.
    */
   deregisterDBProxyTargets(callback?: (err: AWSError, data: RDS.Types.DeregisterDBProxyTargetsResponse) => void): Request<RDS.Types.DeregisterDBProxyTargetsResponse, AWSError>;
   /**
@@ -502,27 +502,27 @@ declare class RDS extends Service {
    */
   describeDBParameters(callback?: (err: AWSError, data: RDS.Types.DBParameterGroupDetails) => void): Request<RDS.Types.DBParameterGroupDetails, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Returns information about DB proxies.
+   * Returns information about DB proxies.
    */
   describeDBProxies(params: RDS.Types.DescribeDBProxiesRequest, callback?: (err: AWSError, data: RDS.Types.DescribeDBProxiesResponse) => void): Request<RDS.Types.DescribeDBProxiesResponse, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Returns information about DB proxies.
+   * Returns information about DB proxies.
    */
   describeDBProxies(callback?: (err: AWSError, data: RDS.Types.DescribeDBProxiesResponse) => void): Request<RDS.Types.DescribeDBProxiesResponse, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Returns information about DB proxy target groups, represented by DBProxyTargetGroup data structures.
+   * Returns information about DB proxy target groups, represented by DBProxyTargetGroup data structures.
    */
   describeDBProxyTargetGroups(params: RDS.Types.DescribeDBProxyTargetGroupsRequest, callback?: (err: AWSError, data: RDS.Types.DescribeDBProxyTargetGroupsResponse) => void): Request<RDS.Types.DescribeDBProxyTargetGroupsResponse, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Returns information about DB proxy target groups, represented by DBProxyTargetGroup data structures.
+   * Returns information about DB proxy target groups, represented by DBProxyTargetGroup data structures.
    */
   describeDBProxyTargetGroups(callback?: (err: AWSError, data: RDS.Types.DescribeDBProxyTargetGroupsResponse) => void): Request<RDS.Types.DescribeDBProxyTargetGroupsResponse, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Returns information about DBProxyTarget objects. This API supports pagination.
+   * Returns information about DBProxyTarget objects. This API supports pagination.
    */
   describeDBProxyTargets(params: RDS.Types.DescribeDBProxyTargetsRequest, callback?: (err: AWSError, data: RDS.Types.DescribeDBProxyTargetsResponse) => void): Request<RDS.Types.DescribeDBProxyTargetsResponse, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Returns information about DBProxyTarget objects. This API supports pagination.
+   * Returns information about DBProxyTarget objects. This API supports pagination.
    */
   describeDBProxyTargets(callback?: (err: AWSError, data: RDS.Types.DescribeDBProxyTargetsResponse) => void): Request<RDS.Types.DescribeDBProxyTargetsResponse, AWSError>;
   /**
@@ -782,19 +782,19 @@ declare class RDS extends Service {
    */
   modifyDBParameterGroup(callback?: (err: AWSError, data: RDS.Types.DBParameterGroupNameMessage) => void): Request<RDS.Types.DBParameterGroupNameMessage, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Changes the settings for an existing DB proxy.
+   * Changes the settings for an existing DB proxy.
    */
   modifyDBProxy(params: RDS.Types.ModifyDBProxyRequest, callback?: (err: AWSError, data: RDS.Types.ModifyDBProxyResponse) => void): Request<RDS.Types.ModifyDBProxyResponse, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Changes the settings for an existing DB proxy.
+   * Changes the settings for an existing DB proxy.
    */
   modifyDBProxy(callback?: (err: AWSError, data: RDS.Types.ModifyDBProxyResponse) => void): Request<RDS.Types.ModifyDBProxyResponse, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Modifies the properties of a DBProxyTargetGroup.
+   * Modifies the properties of a DBProxyTargetGroup.
    */
   modifyDBProxyTargetGroup(params: RDS.Types.ModifyDBProxyTargetGroupRequest, callback?: (err: AWSError, data: RDS.Types.ModifyDBProxyTargetGroupResponse) => void): Request<RDS.Types.ModifyDBProxyTargetGroupResponse, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Modifies the properties of a DBProxyTargetGroup.
+   * Modifies the properties of a DBProxyTargetGroup.
    */
   modifyDBProxyTargetGroup(callback?: (err: AWSError, data: RDS.Types.ModifyDBProxyTargetGroupResponse) => void): Request<RDS.Types.ModifyDBProxyTargetGroupResponse, AWSError>;
   /**
@@ -878,11 +878,11 @@ declare class RDS extends Service {
    */
   rebootDBInstance(callback?: (err: AWSError, data: RDS.Types.RebootDBInstanceResult) => void): Request<RDS.Types.RebootDBInstanceResult, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Associate one or more DBProxyTarget data structures with a DBProxyTargetGroup.
+   * Associate one or more DBProxyTarget data structures with a DBProxyTargetGroup.
    */
   registerDBProxyTargets(params: RDS.Types.RegisterDBProxyTargetsRequest, callback?: (err: AWSError, data: RDS.Types.RegisterDBProxyTargetsResponse) => void): Request<RDS.Types.RegisterDBProxyTargetsResponse, AWSError>;
   /**
-   *  This is prerelease documentation for the RDS Database Proxy feature in preview release. It is subject to change.  Associate one or more DBProxyTarget data structures with a DBProxyTargetGroup.
+   * Associate one or more DBProxyTarget data structures with a DBProxyTargetGroup.
    */
   registerDBProxyTargets(callback?: (err: AWSError, data: RDS.Types.RegisterDBProxyTargetsResponse) => void): Request<RDS.Types.RegisterDBProxyTargetsResponse, AWSError>;
   /**
@@ -1357,7 +1357,7 @@ declare namespace RDS {
      */
     SessionPinningFilters?: StringList;
     /**
-     *  One or more SQL statements for the proxy to run when opening each new database connection. Typically used with SET statements to make sure that each connection has identical settings such as time zone and character set. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single SET statement, such as SET x=1, y=2.   InitQuery is not currently supported for PostgreSQL. Default: no initialization query
+     *  One or more SQL statements for the proxy to run when opening each new database connection. Typically used with SET statements to make sure that each connection has identical settings such as time zone and character set. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single SET statement, such as SET x=1, y=2.  Default: no initialization query
      */
     InitQuery?: String;
   }
@@ -1379,7 +1379,7 @@ declare namespace RDS {
      */
     SessionPinningFilters?: StringList;
     /**
-     *  One or more SQL statements for the proxy to run when opening each new database connection. Typically used with SET statements to make sure that each connection has identical settings such as time zone and character set. This setting is empty by default. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single SET statement, such as SET x=1, y=2.   InitQuery is not currently supported for PostgreSQL.
+     *  One or more SQL statements for the proxy to run when opening each new database connection. Typically used with SET statements to make sure that each connection has identical settings such as time zone and character set. This setting is empty by default. For multiple statements, use semicolons as the separator. You can also include multiple variables in a single SET statement, such as SET x=1, y=2. 
      */
     InitQuery?: String;
   }
@@ -2024,7 +2024,7 @@ declare namespace RDS {
      */
     DeletionProtection?: BooleanOptional;
     /**
-     * The Active Directory directory ID to create the DB instance in. For Oracle DB instances, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB instance. For more information, see  Using Kerberos Authentication with Amazon RDS for Oracle in the Amazon RDS User Guide. For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see  Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server in the Amazon RDS User Guide.
+     * The Active Directory directory ID to create the DB instance in. For Oracle DB instances, Amazon RDS can use Kerberos authentication to authenticate users that connect to the DB instance. For more information, see  Using Kerberos Authentication with Amazon RDS for Oracle in the Amazon RDS User Guide. For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see  Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server in the Amazon RDS User Guide.
      */
     Domain?: String;
     /**
@@ -5565,7 +5565,7 @@ declare namespace RDS {
      */
     CACertificateIdentifier?: String;
     /**
-     * The Active Directory directory ID to move the DB instance to. Specify none to remove the instance from its current domain. The domain must be created prior to this operation. Currently, only Microsoft SQL Server and Oracle DB instances can be created in an Active Directory Domain.  For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see  Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server in the Amazon RDS User Guide. For Oracle DB instances, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB instance. For more information, see  Using Kerberos Authentication with Amazon RDS for Oracle in the Amazon RDS User Guide.
+     * The Active Directory directory ID to move the DB instance to. Specify none to remove the instance from its current domain. The domain must be created prior to this operation. Currently, only Microsoft SQL Server and Oracle DB instances can be created in an Active Directory Domain.  For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see  Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server in the Amazon RDS User Guide. For Oracle DB instances, Amazon RDS can use Kerberos authentication to authenticate users that connect to the DB instance. For more information, see  Using Kerberos Authentication with Amazon RDS for Oracle in the Amazon RDS User Guide.
      */
     Domain?: String;
     /**
@@ -6218,6 +6218,10 @@ declare namespace RDS {
      * Whether a DB instance supports Kerberos Authentication.
      */
     SupportsKerberosAuthentication?: BooleanOptional;
+    /**
+     * Whether a DB instance supports RDS on Outposts. For more information about RDS on Outposts, see Amazon RDS on AWS Outposts in the Amazon RDS User Guide. 
+     */
+    OutpostCapable?: Boolean;
   }
   export type OrderableDBInstanceOptionsList = OrderableDBInstanceOption[];
   export interface OrderableDBInstanceOptionsMessage {
@@ -6229,6 +6233,12 @@ declare namespace RDS {
      *  An optional pagination token provided by a previous OrderableDBInstanceOptions request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords . 
      */
     Marker?: String;
+  }
+  export interface Outpost {
+    /**
+     * The Amazon Resource Name (ARN) of the Outpost.
+     */
+    Arn?: String;
   }
   export interface Parameter {
     /**
@@ -6756,7 +6766,7 @@ declare namespace RDS {
      */
     DatabaseName?: String;
     /**
-     * The name of the DB cluster to create from the source data in the Amazon S3 bucket. This parameter is isn't case-sensitive. Constraints:   Must contain from 1 to 63 letters, numbers, or hyphens.   First character must be a letter.   Can't end with a hyphen or contain two consecutive hyphens.   Example: my-cluster1 
+     * The name of the DB cluster to create from the source data in the Amazon S3 bucket. This parameter isn't case-sensitive. Constraints:   Must contain from 1 to 63 letters, numbers, or hyphens.   First character must be a letter.   Can't end with a hyphen or contain two consecutive hyphens.   Example: my-cluster1 
      */
     DBClusterIdentifier: String;
     /**
@@ -6821,7 +6831,7 @@ declare namespace RDS {
      */
     SourceEngine: String;
     /**
-     * The version of the database that the backup files were created from. MySQL version 5.5 and 5.6 are supported.  Example: 5.6.22 
+     * The version of the database that the backup files were created from. MySQL versions 5.5, 5.6, and 5.7 are supported.  Example: 5.6.40 
      */
     SourceEngineVersion: String;
     /**
@@ -7110,7 +7120,7 @@ declare namespace RDS {
      */
     VpcSecurityGroupIds?: VpcSecurityGroupIdList;
     /**
-     * Specify the Active Directory directory ID to restore the DB instance in. The domain must be created prior to this operation. Currently, only Microsoft SQL Server and Oracle DB instances can be created in an Active Directory Domain.  For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see  Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server in the Amazon RDS User Guide. For Oracle DB instances, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB instance. For more information, see  Using Kerberos Authentication with Amazon RDS for Oracle in the Amazon RDS User Guide.
+     * Specify the Active Directory directory ID to restore the DB instance in. The domain must be created prior to this operation. Currently, only Microsoft SQL Server and Oracle DB instances can be created in an Active Directory Domain.  For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see  Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server in the Amazon RDS User Guide. For Oracle DB instances, Amazon RDS can use Kerberos authentication to authenticate users that connect to the DB instance. For more information, see  Using Kerberos Authentication with Amazon RDS for Oracle in the Amazon RDS User Guide.
      */
     Domain?: String;
     /**
@@ -7279,7 +7289,7 @@ declare namespace RDS {
      */
     SourceEngine: String;
     /**
-     * The engine version of your source database.  Valid Values: 5.6 
+     * The version of the database that the backup files were created from. MySQL versions 5.6 and 5.7 are supported.  Example: 5.6.40 
      */
     SourceEngineVersion: String;
     /**
@@ -7413,7 +7423,7 @@ declare namespace RDS {
      */
     VpcSecurityGroupIds?: VpcSecurityGroupIdList;
     /**
-     * Specify the Active Directory directory ID to restore the DB instance in. The domain must be created prior to this operation. Currently, only Microsoft SQL Server and Oracle DB instances can be created in an Active Directory Domain.  For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see  Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server in the Amazon RDS User Guide. For Oracle DB instances, Amazon RDS can use Kerberos Authentication to authenticate users that connect to the DB instance. For more information, see  Using Kerberos Authentication with Amazon RDS for Oracle in the Amazon RDS User Guide.
+     * Specify the Active Directory directory ID to restore the DB instance in. The domain must be created prior to this operation. Currently, only Microsoft SQL Server and Oracle DB instances can be created in an Active Directory Domain.  For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to authenticate users that connect to the DB instance. For more information, see  Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server in the Amazon RDS User Guide. For Oracle DB instances, Amazon RDS can use Kerberos authentication to authenticate users that connect to the DB instance. For more information, see  Using Kerberos Authentication with Amazon RDS for Oracle in the Amazon RDS User Guide.
      */
     Domain?: String;
     /**
@@ -7697,12 +7707,16 @@ declare namespace RDS {
   export type StringSensitive = string;
   export interface Subnet {
     /**
-     * Specifies the identifier of the subnet.
+     * The identifier of the subnet.
      */
     SubnetIdentifier?: String;
     SubnetAvailabilityZone?: AvailabilityZone;
     /**
-     * Specifies the status of the subnet.
+     * If the subnet is associated with an Outpost, this value specifies the Outpost. For more information about RDS on Outposts, see Amazon RDS on AWS Outposts in the Amazon RDS User Guide. 
+     */
+    SubnetOutpost?: Outpost;
+    /**
+     * The status of the subnet.
      */
     SubnetStatus?: String;
   }

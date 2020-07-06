@@ -79,6 +79,16 @@ declare namespace MediaTailor {
      */
     Value?: __string;
   }
+  export interface Bumper {
+    /**
+     * The URL for the end bumper asset. 
+     */
+    EndUrl?: __string;
+    /**
+     * The URL for the start bumper asset. 
+     */
+    StartUrl?: __string;
+  }
   export interface CdnConfiguration {
     /**
      * A non-default content delivery network (CDN) to serve ad segments. By default, AWS Elemental MediaTailor uses Amazon CloudFront with default cache settings as its CDN for ad segments. To set up an alternate CDN, create a rule in your CDN for the following origin: ads.mediatailor.&lt;region>.amazonaws.com. Then specify the rule's name in this AdSegmentUrlPrefix. When AWS Elemental MediaTailor serves a manifest, it reports your CDN as the source for ad segments.
@@ -136,6 +146,10 @@ declare namespace MediaTailor {
      * The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.
      */
     AvailSuppression?: AvailSuppression;
+    /**
+     * The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. 
+     */
+    Bumper?: Bumper;
     /**
      * The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. 
      */
@@ -244,6 +258,10 @@ declare namespace MediaTailor {
      */
     AvailSuppression?: AvailSuppression;
     /**
+     * The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. 
+     */
+    Bumper?: Bumper;
+    /**
      * The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. 
      */
     CdnConfiguration?: CdnConfiguration;
@@ -312,6 +330,10 @@ declare namespace MediaTailor {
      */
     AvailSuppression?: AvailSuppression;
     /**
+     * The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. 
+     */
+    Bumper?: Bumper;
+    /**
      * The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. 
      */
     CdnConfiguration?: CdnConfiguration;
@@ -357,6 +379,10 @@ declare namespace MediaTailor {
      * The configuration for Avail Suppression. Ad suppression can be used to turn off ad personalization in a long manifest, or if a viewer joins mid-break.
      */
     AvailSuppression?: AvailSuppression;
+    /**
+     * The configuration for bumpers. Bumpers are short audio or video clips that play at the start or before the end of an ad break. 
+     */
+    Bumper?: Bumper;
     /**
      * The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. 
      */

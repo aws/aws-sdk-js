@@ -1,0 +1,32 @@
+[
+    {
+        "type": "bugfix",
+        "category": "EFS",
+        "description": "Check for ValidationException in integration tests"
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds Tag On Create feature support for the ImportImage, ImportSnapshot, ExportImage and CreateInstanceExportTask APIs."
+    },
+    {
+        "type": "feature",
+        "category": "EMR",
+        "description": "Adding support for MaximumCoreCapacityUnits parameter for EMR Managed Scaling. It allows users to control how many units/nodes are added to the CORE group/fleet. Remaining units/nodes are added to the TASK groups/fleet in the cluster."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "Added paginators for various APIs."
+    },
+    {
+        "type": "feature",
+        "category": "Rekognition",
+        "description": "This update adds the ability to detect black frames, end credits, shots, and color bars in stored videos"
+    },
+    {
+        "type": "feature",
+        "category": "SQS",
+        "description": "AWS SQS adds pagination support for ListQueues and ListDeadLetterSourceQueues APIs"
+    }
+]

@@ -124,11 +124,11 @@ declare class Backup extends Service {
    */
   describeRecoveryPoint(callback?: (err: AWSError, data: Backup.Types.DescribeRecoveryPointOutput) => void): Request<Backup.Types.DescribeRecoveryPointOutput, AWSError>;
   /**
-   * Returns the current service opt-in settings for the region. If the service has a value set to true, AWS Backup will attempt to protect that service's resources in this region, when included in an on-demand backup or scheduled backup plan. If the value is set to false for a service, AWS Backup will not attempt to protect that service's resources in this region.
+   * Returns the current service opt-in settings for the Region. If the service has a value set to true, AWS Backup attempts to protect that service's resources in this Region, when included in an on-demand backup or scheduled backup plan. If the value is set to false for a service, AWS Backup does not attempt to protect that service's resources in this Region.
    */
   describeRegionSettings(params: Backup.Types.DescribeRegionSettingsInput, callback?: (err: AWSError, data: Backup.Types.DescribeRegionSettingsOutput) => void): Request<Backup.Types.DescribeRegionSettingsOutput, AWSError>;
   /**
-   * Returns the current service opt-in settings for the region. If the service has a value set to true, AWS Backup will attempt to protect that service's resources in this region, when included in an on-demand backup or scheduled backup plan. If the value is set to false for a service, AWS Backup will not attempt to protect that service's resources in this region.
+   * Returns the current service opt-in settings for the Region. If the service has a value set to true, AWS Backup attempts to protect that service's resources in this Region, when included in an on-demand backup or scheduled backup plan. If the value is set to false for a service, AWS Backup does not attempt to protect that service's resources in this Region.
    */
   describeRegionSettings(callback?: (err: AWSError, data: Backup.Types.DescribeRegionSettingsOutput) => void): Request<Backup.Types.DescribeRegionSettingsOutput, AWSError>;
   /**
@@ -384,17 +384,22 @@ declare class Backup extends Service {
    */
   updateRecoveryPointLifecycle(callback?: (err: AWSError, data: Backup.Types.UpdateRecoveryPointLifecycleOutput) => void): Request<Backup.Types.UpdateRecoveryPointLifecycleOutput, AWSError>;
   /**
-   * Updates the current service opt-in settings for the region. If the service has a value set to true, AWS Backup will attempt to protect that service's resources in this region, when included in an on-demand backup or scheduled backup plan. If the value is set to false for a service, AWS Backup will not attempt to protect that service's resources in this region.
+   * Updates the current service opt-in settings for the Region. If the service has a value set to true, AWS Backup attempts to protect that service's resources in this Region, when included in an on-demand backup or scheduled backup plan. If the value is set to false for a service, AWS Backup does not attempt to protect that service's resources in this Region.
    */
   updateRegionSettings(params: Backup.Types.UpdateRegionSettingsInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the current service opt-in settings for the region. If the service has a value set to true, AWS Backup will attempt to protect that service's resources in this region, when included in an on-demand backup or scheduled backup plan. If the value is set to false for a service, AWS Backup will not attempt to protect that service's resources in this region.
+   * Updates the current service opt-in settings for the Region. If the service has a value set to true, AWS Backup attempts to protect that service's resources in this Region, when included in an on-demand backup or scheduled backup plan. If the value is set to false for a service, AWS Backup does not attempt to protect that service's resources in this Region.
    */
   updateRegionSettings(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace Backup {
   export type ARN = string;
+  export type AccountId = string;
   export interface BackupJob {
+    /**
+     * The account ID that owns the backup job.
+     */
+    AccountId?: AccountId;
     /**
      * Uniquely identifies a request to AWS Backup to back up a resource.
      */
@@ -478,7 +483,7 @@ declare namespace Backup {
   }
   export interface BackupPlanInput {
     /**
-     * The display name of a backup plan.
+     * The optional display name of a backup plan.
      */
     BackupPlanName: BackupPlanName;
     /**
@@ -723,6 +728,10 @@ declare namespace Backup {
   export type CopyActions = CopyAction[];
   export interface CopyJob {
     /**
+     * The account ID that owns the copy job.
+     */
+    AccountId?: AccountId;
+    /**
      * Uniquely identifies a copy job.
      */
     CopyJobId?: string;
@@ -747,11 +756,11 @@ declare namespace Backup {
      */
     ResourceArn?: ARN;
     /**
-     * The date and time a copy job is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM. 
+     * The date and time a copy job is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
      */
     CreationDate?: timestamp;
     /**
-     * The date and time a copy job is completed, in Unix format and Coordinated Universal Time (UTC). The value of CompletionDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM. 
+     * The date and time a copy job is completed, in Unix format and Coordinated Universal Time (UTC). The value of CompletionDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
      */
     CompletionDate?: timestamp;
     /**
@@ -887,7 +896,7 @@ declare namespace Backup {
      */
     BackupPlanArn?: ARN;
     /**
-     * The date and time a backup plan is deleted, in Unix format and Coordinated Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     * The date and time a backup plan is deleted, in Unix format and Coordinated Universal Time (UTC). The value of DeletionDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
      */
     DeletionDate?: timestamp;
     /**
@@ -941,6 +950,10 @@ declare namespace Backup {
   }
   export interface DescribeBackupJobOutput {
     /**
+     * Returns the account ID that owns the backup job.
+     */
+    AccountId?: AccountId;
+    /**
      * Uniquely identifies a request to AWS Backup to back up a resource.
      */
     BackupJobId?: string;
@@ -965,7 +978,7 @@ declare namespace Backup {
      */
     CreationDate?: timestamp;
     /**
-     * The date and time that a job to create a backup job is completed, in Unix format and Coordinated Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     * The date and time that a job to create a backup job is completed, in Unix format and Coordinated Universal Time (UTC). The value of CompletionDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
      */
     CompletionDate?: timestamp;
     /**
@@ -1169,6 +1182,10 @@ declare namespace Backup {
   }
   export interface DescribeRestoreJobOutput {
     /**
+     * Returns the account ID that owns the restore job.
+     */
+    AccountId?: AccountId;
+    /**
      * Uniquely identifies the job that restores a recovery point.
      */
     RestoreJobId?: string;
@@ -1189,7 +1206,7 @@ declare namespace Backup {
      */
     Status?: RestoreJobStatus;
     /**
-     * A detailed message explaining the status of a job to restore a recovery point.
+     * A message showing the status of a job to restore a recovery point.
      */
     StatusMessage?: string;
     /**
@@ -1212,6 +1229,10 @@ declare namespace Backup {
      * An Amazon Resource Name (ARN) that uniquely identifies a resource whose recovery point is being restored. The format of the ARN depends on the resource type of the backed-up resource.
      */
     CreatedResourceArn?: ARN;
+    /**
+     * Returns metadata associated with a restore job listed by resource type.
+     */
+    ResourceType?: ResourceType;
   }
   export interface ExportBackupPlanTemplateInput {
     /**
@@ -1285,7 +1306,7 @@ declare namespace Backup {
      */
     CreationDate?: timestamp;
     /**
-     * The date and time that a backup plan is deleted, in Unix format and Coordinated Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     * The date and time that a backup plan is deleted, in Unix format and Coordinated Universal Time (UTC). The value of DeletionDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
      */
     DeletionDate?: timestamp;
     /**
@@ -1395,7 +1416,7 @@ declare namespace Backup {
   }
   export interface GetSupportedResourceTypesOutput {
     /**
-     * Contains a string with the supported AWS resource types:    EBS for Amazon Elastic Block Store    Storage Gateway for AWS Storage Gateway    RDS for Amazon Relational Database Service    DDB for Amazon DynamoDB    EFS for Amazon Elastic File System  
+     * Contains a string with the supported AWS resource types:    DynamoDB for Amazon DynamoDB    EBS for Amazon Elastic Block Store    EC2 for Amazon Elastic Compute Cloud    EFS for Amazon Elastic File System    RDS for Amazon Relational Database Service    Storage Gateway for AWS Storage Gateway  
      */
     ResourceTypes?: ResourceTypes;
   }
@@ -1442,9 +1463,13 @@ declare namespace Backup {
      */
     ByCreatedAfter?: timestamp;
     /**
-     * Returns only backup jobs for the specified resources:    DynamoDB for Amazon DynamoDB    EBS for Amazon Elastic Block Store    EFS for Amazon Elastic File System    RDS for Amazon Relational Database Service    Storage Gateway for AWS Storage Gateway  
+     * Returns only backup jobs for the specified resources:    DynamoDB for Amazon DynamoDB    EBS for Amazon Elastic Block Store    EC2 for Amazon Elastic Compute Cloud    EFS for Amazon Elastic File System    RDS for Amazon Relational Database Service    Storage Gateway for AWS Storage Gateway  
      */
     ByResourceType?: ResourceType;
+    /**
+     * The account ID to list the jobs from. Returns only backup jobs associated with the specified account ID.
+     */
+    ByAccountId?: AccountId;
   }
   export interface ListBackupJobsOutput {
     /**
@@ -1594,13 +1619,17 @@ declare namespace Backup {
      */
     ByCreatedAfter?: timestamp;
     /**
-     * Returns only backup jobs for the specified resources:    EBS for Amazon Elastic Block Store    EFS for Amazon Elastic File System    RDS for Amazon Relational Database Service    Storage Gateway for AWS Storage Gateway  
+     * Returns only backup jobs for the specified resources:    DynamoDB for Amazon DynamoDB    EBS for Amazon Elastic Block Store    EC2 for Amazon Elastic Compute Cloud    EFS for Amazon Elastic File System    RDS for Amazon Relational Database Service    Storage Gateway for AWS Storage Gateway  
      */
     ByResourceType?: ResourceType;
     /**
      * An Amazon Resource Name (ARN) that uniquely identifies a source backup vault to copy from; for example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault. 
      */
     ByDestinationVaultArn?: string;
+    /**
+     * The account ID to list the jobs from. Returns only copy jobs associated with the specified account ID.
+     */
+    ByAccountId?: AccountId;
   }
   export interface ListCopyJobsOutput {
     /**
@@ -1710,6 +1739,22 @@ declare namespace Backup {
      * The maximum number of items to be returned.
      */
     MaxResults?: MaxResults;
+    /**
+     * The account ID to list the jobs from. Returns only restore jobs associated with the specified account ID.
+     */
+    ByAccountId?: AccountId;
+    /**
+     * Returns only restore jobs that were created before the specified date.
+     */
+    ByCreatedBefore?: timestamp;
+    /**
+     * Returns only restore jobs that were created after the specified date.
+     */
+    ByCreatedAfter?: timestamp;
+    /**
+     * Returns only restore jobs associated with the specified job status.
+     */
+    ByStatus?: RestoreJobStatus;
   }
   export interface ListRestoreJobsOutput {
     /**
@@ -1911,6 +1956,10 @@ declare namespace Backup {
   export type RestoreJobsList = RestoreJobsListMember[];
   export interface RestoreJobsListMember {
     /**
+     * The account ID that owns the restore job.
+     */
+    AccountId?: AccountId;
+    /**
      * Uniquely identifies the job that restores a recovery point.
      */
     RestoreJobId?: string;
@@ -1954,6 +2003,10 @@ declare namespace Backup {
      * An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
      */
     CreatedResourceArn?: ARN;
+    /**
+     * The resource type of the listed restore jobs; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.
+     */
+    ResourceType?: ResourceType;
   }
   export interface StartBackupJobInput {
     /**
@@ -2054,7 +2107,7 @@ declare namespace Backup {
      */
     IdempotencyToken?: string;
     /**
-     * Starts a job to restore a recovery point for one of the following resources:    EBS for Amazon Elastic Block Store    Storage Gateway for AWS Storage Gateway    RDS for Amazon Relational Database Service    DDB for Amazon DynamoDB    EFS for Amazon Elastic File System  
+     * Starts a job to restore a recovery point for one of the following resources:    DynamoDB for Amazon DynamoDB    EBS for Amazon Elastic Block Store    EC2 for Amazon Elastic Compute Cloud    EFS for Amazon Elastic File System    RDS for Amazon Relational Database Service    Storage Gateway for AWS Storage Gateway  
      */
     ResourceType?: ResourceType;
   }

@@ -1116,6 +1116,10 @@ declare namespace ECR {
      * The tag to associate with the image. This parameter is required for images that use the Docker Image Manifest V2 Schema 2 or OCI formats.
      */
     imageTag?: ImageTag;
+    /**
+     * The image digest of the image manifest corresponding to the image.
+     */
+    imageDigest?: ImageDigest;
   }
   export interface PutImageResponse {
     /**
