@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.709.0-->
+<!--LATEST=2.710.0-->
 <!--ENTRYINSERT-->
+
+## 2.710.0
+* feature: IoTSiteWise: This release supports optional start date and end date parameters for the GetAssetPropertyValueHistory API.
+* feature: QuickSight: Add Theme APIs and update Dashboard APIs to support theme overrides.
+* feature: RDS: Adds support for Amazon RDS on AWS Outposts.
 
 ## 2.709.0
 * bugfix: S3: Fixed a bug where S3 client throws when client config is undefined and Bucket is an AccessPoint ARN

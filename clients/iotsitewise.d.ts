@@ -1815,11 +1815,11 @@ declare namespace IoTSiteWise {
     /**
      * The exclusive start of the range from which to query historical data, expressed in seconds in Unix epoch time.
      */
-    startDate: Timestamp;
+    startDate?: Timestamp;
     /**
      * The inclusive end of the range from which to query historical data, expressed in seconds in Unix epoch time.
      */
-    endDate: Timestamp;
+    endDate?: Timestamp;
     /**
      * The quality by which to filter asset data.
      */

@@ -92,6 +92,22 @@ declare class QuickSight extends Service {
    */
   createTemplateAlias(callback?: (err: AWSError, data: QuickSight.Types.CreateTemplateAliasResponse) => void): Request<QuickSight.Types.CreateTemplateAliasResponse, AWSError>;
   /**
+   * Creates a theme. A theme is set of configuration options for color and layout. Themes apply to analyses and dashboards. For more information, see Using Themes in Amazon QuickSight in the Amazon QuickSight User Guide.
+   */
+  createTheme(params: QuickSight.Types.CreateThemeRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateThemeResponse) => void): Request<QuickSight.Types.CreateThemeResponse, AWSError>;
+  /**
+   * Creates a theme. A theme is set of configuration options for color and layout. Themes apply to analyses and dashboards. For more information, see Using Themes in Amazon QuickSight in the Amazon QuickSight User Guide.
+   */
+  createTheme(callback?: (err: AWSError, data: QuickSight.Types.CreateThemeResponse) => void): Request<QuickSight.Types.CreateThemeResponse, AWSError>;
+  /**
+   * Creates a theme alias for a theme.
+   */
+  createThemeAlias(params: QuickSight.Types.CreateThemeAliasRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateThemeAliasResponse) => void): Request<QuickSight.Types.CreateThemeAliasResponse, AWSError>;
+  /**
+   * Creates a theme alias for a theme.
+   */
+  createThemeAlias(callback?: (err: AWSError, data: QuickSight.Types.CreateThemeAliasResponse) => void): Request<QuickSight.Types.CreateThemeAliasResponse, AWSError>;
+  /**
    * Deletes a dashboard.
    */
   deleteDashboard(params: QuickSight.Types.DeleteDashboardRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteDashboardResponse) => void): Request<QuickSight.Types.DeleteDashboardResponse, AWSError>;
@@ -155,6 +171,22 @@ declare class QuickSight extends Service {
    * Deletes the item that the specified template alias points to. If you provide a specific alias, you delete the version of the template that the alias points to.
    */
   deleteTemplateAlias(callback?: (err: AWSError, data: QuickSight.Types.DeleteTemplateAliasResponse) => void): Request<QuickSight.Types.DeleteTemplateAliasResponse, AWSError>;
+  /**
+   * Deletes a theme.
+   */
+  deleteTheme(params: QuickSight.Types.DeleteThemeRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteThemeResponse) => void): Request<QuickSight.Types.DeleteThemeResponse, AWSError>;
+  /**
+   * Deletes a theme.
+   */
+  deleteTheme(callback?: (err: AWSError, data: QuickSight.Types.DeleteThemeResponse) => void): Request<QuickSight.Types.DeleteThemeResponse, AWSError>;
+  /**
+   * Deletes the version of the theme that the specified theme alias points to. If you provide a specific alias, you delete the version of the theme that the alias points to.
+   */
+  deleteThemeAlias(params: QuickSight.Types.DeleteThemeAliasRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteThemeAliasResponse) => void): Request<QuickSight.Types.DeleteThemeAliasResponse, AWSError>;
+  /**
+   * Deletes the version of the theme that the specified theme alias points to. If you provide a specific alias, you delete the version of the theme that the alias points to.
+   */
+  deleteThemeAlias(callback?: (err: AWSError, data: QuickSight.Types.DeleteThemeAliasResponse) => void): Request<QuickSight.Types.DeleteThemeAliasResponse, AWSError>;
   /**
    * Deletes the Amazon QuickSight user that is associated with the identity of the AWS Identity and Access Management (IAM) user or role that's making the call. The IAM user isn't deleted as a result of this call. 
    */
@@ -267,6 +299,30 @@ declare class QuickSight extends Service {
    * Describes read and write permissions on a template.
    */
   describeTemplatePermissions(callback?: (err: AWSError, data: QuickSight.Types.DescribeTemplatePermissionsResponse) => void): Request<QuickSight.Types.DescribeTemplatePermissionsResponse, AWSError>;
+  /**
+   * Describes a theme.
+   */
+  describeTheme(params: QuickSight.Types.DescribeThemeRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeThemeResponse) => void): Request<QuickSight.Types.DescribeThemeResponse, AWSError>;
+  /**
+   * Describes a theme.
+   */
+  describeTheme(callback?: (err: AWSError, data: QuickSight.Types.DescribeThemeResponse) => void): Request<QuickSight.Types.DescribeThemeResponse, AWSError>;
+  /**
+   * Describes the alias for a theme.
+   */
+  describeThemeAlias(params: QuickSight.Types.DescribeThemeAliasRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeThemeAliasResponse) => void): Request<QuickSight.Types.DescribeThemeAliasResponse, AWSError>;
+  /**
+   * Describes the alias for a theme.
+   */
+  describeThemeAlias(callback?: (err: AWSError, data: QuickSight.Types.DescribeThemeAliasResponse) => void): Request<QuickSight.Types.DescribeThemeAliasResponse, AWSError>;
+  /**
+   * Describes the read and write permissions for a theme.
+   */
+  describeThemePermissions(params: QuickSight.Types.DescribeThemePermissionsRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeThemePermissionsResponse) => void): Request<QuickSight.Types.DescribeThemePermissionsResponse, AWSError>;
+  /**
+   * Describes the read and write permissions for a theme.
+   */
+  describeThemePermissions(callback?: (err: AWSError, data: QuickSight.Types.DescribeThemePermissionsResponse) => void): Request<QuickSight.Types.DescribeThemePermissionsResponse, AWSError>;
   /**
    * Returns information about a user, given the user name. 
    */
@@ -387,6 +443,30 @@ declare class QuickSight extends Service {
    * Lists all the templates in the current Amazon QuickSight account.
    */
   listTemplates(callback?: (err: AWSError, data: QuickSight.Types.ListTemplatesResponse) => void): Request<QuickSight.Types.ListTemplatesResponse, AWSError>;
+  /**
+   * Lists all the aliases of a theme.
+   */
+  listThemeAliases(params: QuickSight.Types.ListThemeAliasesRequest, callback?: (err: AWSError, data: QuickSight.Types.ListThemeAliasesResponse) => void): Request<QuickSight.Types.ListThemeAliasesResponse, AWSError>;
+  /**
+   * Lists all the aliases of a theme.
+   */
+  listThemeAliases(callback?: (err: AWSError, data: QuickSight.Types.ListThemeAliasesResponse) => void): Request<QuickSight.Types.ListThemeAliasesResponse, AWSError>;
+  /**
+   * Lists all the versions of the themes in the current AWS account.
+   */
+  listThemeVersions(params: QuickSight.Types.ListThemeVersionsRequest, callback?: (err: AWSError, data: QuickSight.Types.ListThemeVersionsResponse) => void): Request<QuickSight.Types.ListThemeVersionsResponse, AWSError>;
+  /**
+   * Lists all the versions of the themes in the current AWS account.
+   */
+  listThemeVersions(callback?: (err: AWSError, data: QuickSight.Types.ListThemeVersionsResponse) => void): Request<QuickSight.Types.ListThemeVersionsResponse, AWSError>;
+  /**
+   * Lists all the themes in the current AWS account.
+   */
+  listThemes(params: QuickSight.Types.ListThemesRequest, callback?: (err: AWSError, data: QuickSight.Types.ListThemesResponse) => void): Request<QuickSight.Types.ListThemesResponse, AWSError>;
+  /**
+   * Lists all the themes in the current AWS account.
+   */
+  listThemes(callback?: (err: AWSError, data: QuickSight.Types.ListThemesResponse) => void): Request<QuickSight.Types.ListThemesResponse, AWSError>;
   /**
    * Lists the Amazon QuickSight groups that an Amazon QuickSight user is a member of.
    */
@@ -532,6 +612,30 @@ declare class QuickSight extends Service {
    */
   updateTemplatePermissions(callback?: (err: AWSError, data: QuickSight.Types.UpdateTemplatePermissionsResponse) => void): Request<QuickSight.Types.UpdateTemplatePermissionsResponse, AWSError>;
   /**
+   * Updates a theme.
+   */
+  updateTheme(params: QuickSight.Types.UpdateThemeRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateThemeResponse) => void): Request<QuickSight.Types.UpdateThemeResponse, AWSError>;
+  /**
+   * Updates a theme.
+   */
+  updateTheme(callback?: (err: AWSError, data: QuickSight.Types.UpdateThemeResponse) => void): Request<QuickSight.Types.UpdateThemeResponse, AWSError>;
+  /**
+   * Updates an alias of a theme.
+   */
+  updateThemeAlias(params: QuickSight.Types.UpdateThemeAliasRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateThemeAliasResponse) => void): Request<QuickSight.Types.UpdateThemeAliasResponse, AWSError>;
+  /**
+   * Updates an alias of a theme.
+   */
+  updateThemeAlias(callback?: (err: AWSError, data: QuickSight.Types.UpdateThemeAliasResponse) => void): Request<QuickSight.Types.UpdateThemeAliasResponse, AWSError>;
+  /**
+   * Updates the resource permissions for a theme. Permissions apply to the action to grant or revoke permissions on, for example "quicksight:DescribeTheme". Theme permissions apply in groupings. Valid groupings include the following for the three levels of permissions, which are user, owner, or no permissions:    User    "quicksight:DescribeTheme"     "quicksight:DescribeThemeAlias"     "quicksight:ListThemeAliases"     "quicksight:ListThemeVersions"      Owner    "quicksight:DescribeTheme"     "quicksight:DescribeThemeAlias"     "quicksight:ListThemeAliases"     "quicksight:ListThemeVersions"     "quicksight:DeleteTheme"     "quicksight:UpdateTheme"     "quicksight:CreateThemeAlias"     "quicksight:DeleteThemeAlias"     "quicksight:UpdateThemeAlias"     "quicksight:UpdateThemePermissions"     "quicksight:DescribeThemePermissions"      To specify no permissions, omit the permissions list.  
+   */
+  updateThemePermissions(params: QuickSight.Types.UpdateThemePermissionsRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateThemePermissionsResponse) => void): Request<QuickSight.Types.UpdateThemePermissionsResponse, AWSError>;
+  /**
+   * Updates the resource permissions for a theme. Permissions apply to the action to grant or revoke permissions on, for example "quicksight:DescribeTheme". Theme permissions apply in groupings. Valid groupings include the following for the three levels of permissions, which are user, owner, or no permissions:    User    "quicksight:DescribeTheme"     "quicksight:DescribeThemeAlias"     "quicksight:ListThemeAliases"     "quicksight:ListThemeVersions"      Owner    "quicksight:DescribeTheme"     "quicksight:DescribeThemeAlias"     "quicksight:ListThemeAliases"     "quicksight:ListThemeVersions"     "quicksight:DeleteTheme"     "quicksight:UpdateTheme"     "quicksight:CreateThemeAlias"     "quicksight:DeleteThemeAlias"     "quicksight:UpdateThemeAlias"     "quicksight:UpdateThemePermissions"     "quicksight:DescribeThemePermissions"      To specify no permissions, omit the permissions list.  
+   */
+  updateThemePermissions(callback?: (err: AWSError, data: QuickSight.Types.UpdateThemePermissionsResponse) => void): Request<QuickSight.Types.UpdateThemePermissionsResponse, AWSError>;
+  /**
    * Updates an Amazon QuickSight user.
    */
   updateUser(params: QuickSight.Types.UpdateUserRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateUserResponse) => void): Request<QuickSight.Types.UpdateUserResponse, AWSError>;
@@ -603,6 +707,7 @@ declare namespace QuickSight {
     Database: Database;
   }
   export type AwsAccountId = string;
+  export type AwsAndAccountId = string;
   export interface AwsIotAnalyticsParameters {
     /**
      * Dataset name.
@@ -610,6 +715,12 @@ declare namespace QuickSight {
     DataSetName: DataSetName;
   }
   export type Boolean = boolean;
+  export interface BorderStyle {
+    /**
+     * The option to enable display of borders for visuals.
+     */
+    Show?: boolean;
+  }
   export interface CalculatedColumn {
     /**
      * Column name.
@@ -673,6 +784,7 @@ declare namespace QuickSight {
   }
   export type Catalog = string;
   export type ClusterId = string;
+  export type ColorList = HexColor[];
   export type ColumnDataType = "STRING"|"INTEGER"|"DECIMAL"|"DATETIME"|string;
   export interface ColumnGroup {
     /**
@@ -746,7 +858,7 @@ declare namespace QuickSight {
      */
     Name: DashboardName;
     /**
-     * A structure that contains the parameters of the dashboard. These are parameter overrides for a dashboard. A dashboard can have any type of parameters, and some parameters might accept multiple values. 
+     * The parameters for the creation of the dashboard, which you want to use to override the default settings. A dashboard can have any type of parameters, and some parameters might accept multiple values. 
      */
     Parameters?: Parameters;
     /**
@@ -766,13 +878,17 @@ declare namespace QuickSight {
      */
     VersionDescription?: VersionDescription;
     /**
-     * Options for publishing the dashboard when you create it:    AvailabilityStatus for AdHocFilteringOption - This status can be either ENABLED or DISABLED. When this is set to DISABLED, QuickSight disables the left filter pane on the published dashboard, which can be used for ad hoc (one-time) filtering. This option is ENABLED by default.     AvailabilityStatus for ExportToCSVOption - This status can be either ENABLED or DISABLED. The visual option to export data to .csv format isn't enabled when this is set to DISABLED. This option is ENABLED by default.     VisibilityState for SheetControlsOption - This visibility state can be either COLLAPSED or EXPANDED. This option is COLLAPSED by default.  
+     * Options for publishing the dashboard when you create it:    AvailabilityStatus for AdHocFilteringOption - This status can be either ENABLED or DISABLED. When this is set to DISABLED, QuickSight disables the left filter pane on the published dashboard, which can be used for ad hoc (one-time) filtering. This option is ENABLED by default.     AvailabilityStatus for ExportToCSVOption - This status can be either ENABLED or DISABLED. The visual option to export data to .csv format isn't enabled when this is set to DISABLED. This option is ENABLED by default.     VisibilityState for SheetControlsOption - This visibility state can be either COLLAPSED or EXPANDED. This option is COLLAPSED by default.   
      */
     DashboardPublishOptions?: DashboardPublishOptions;
+    /**
+     * The Amazon Resource Name (ARN) of the theme that is being used for this dashboard. If you add a value for this field, it overrides the value that is used in the source entity. The theme ARN must exist in the same AWS account where you create the dashboard.
+     */
+    ThemeArn?: Arn;
   }
   export interface CreateDashboardResponse {
     /**
-     * The Amazon Resource Name (ARN) of the dashboard.
+     * The ARN of the dashboard.
      */
     Arn?: Arn;
     /**
@@ -1172,6 +1288,98 @@ declare namespace QuickSight {
      */
     RequestId?: String;
   }
+  export interface CreateThemeAliasRequest {
+    /**
+     * The ID of the AWS account that contains the theme for the new theme alias.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * An ID for the theme alias.
+     */
+    ThemeId: RestrictiveResourceId;
+    /**
+     * The name that you want to give to the theme alias that you are creating. The alias name can't begin with a $. Alias names that start with $ are reserved by Amazon QuickSight. 
+     */
+    AliasName: AliasName;
+    /**
+     * The version number of the theme.
+     */
+    ThemeVersionNumber: VersionNumber;
+  }
+  export interface CreateThemeAliasResponse {
+    /**
+     * Information about the theme alias.
+     */
+    ThemeAlias?: ThemeAlias;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The AWS request ID for this operation.
+     */
+    RequestId?: String;
+  }
+  export interface CreateThemeRequest {
+    /**
+     * The ID of the AWS account where you want to store the new theme. 
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * An ID for the theme that you want to create. The theme ID is unique per AWS Region in each AWS account.
+     */
+    ThemeId: RestrictiveResourceId;
+    /**
+     * A display name for the theme.
+     */
+    Name: ThemeName;
+    /**
+     * The ID of the theme that a custom theme will inherit from. All themes inherit from one of the starting themes defined by Amazon QuickSight. For a list of the starting themes, use ListThemes or choose Themes from within a QuickSight analysis. 
+     */
+    BaseThemeId: RestrictiveResourceId;
+    /**
+     * A description of the first version of the theme that you're creating. Every time UpdateTheme is called, a new version is created. Each version of the theme has a description of the version in the VersionDescription field.
+     */
+    VersionDescription?: VersionDescription;
+    /**
+     * The theme configuration, which contains the theme display properties.
+     */
+    Configuration: ThemeConfiguration;
+    /**
+     * A valid grouping of resource permissions to apply to the new theme. 
+     */
+    Permissions?: ResourcePermissionList;
+    /**
+     * A map of the key-value pairs for the resource tag or tags that you want to add to the resource.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateThemeResponse {
+    /**
+     * The Amazon Resource Name (ARN) for the theme.
+     */
+    Arn?: Arn;
+    /**
+     * The Amazon Resource Name (ARN) for the new theme.
+     */
+    VersionArn?: Arn;
+    /**
+     * The ID of the theme.
+     */
+    ThemeId?: RestrictiveResourceId;
+    /**
+     * The theme creation status.
+     */
+    CreationStatus?: ResourceStatus;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The AWS request ID for this operation.
+     */
+    RequestId?: String;
+  }
   export interface CredentialPair {
     /**
      * User name.
@@ -1388,6 +1596,20 @@ declare namespace QuickSight {
     Description?: VersionDescription;
   }
   export type DashboardVersionSummaryList = DashboardVersionSummary[];
+  export interface DataColorPalette {
+    /**
+     * The hexadecimal codes for the colors.
+     */
+    Colors?: ColorList;
+    /**
+     * The minimum and maximum hexadecimal codes that describe a color gradient. 
+     */
+    MinMaxGradient?: ColorList;
+    /**
+     * The hexadecimal code of a color that applies to charts where a lack of data is highlighted.
+     */
+    EmptyFillColor?: HexColor;
+  }
   export interface DataSet {
     /**
      * The Amazon Resource Name (ARN) of the resource.
@@ -1915,6 +2137,74 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
   }
+  export interface DeleteThemeAliasRequest {
+    /**
+     * The ID of the AWS account that contains the theme alias to delete.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID for the theme that the specified alias is for.
+     */
+    ThemeId: RestrictiveResourceId;
+    /**
+     * The unique name for the theme alias to delete.
+     */
+    AliasName: AliasName;
+  }
+  export interface DeleteThemeAliasResponse {
+    /**
+     * The name for the theme alias.
+     */
+    AliasName?: AliasName;
+    /**
+     * The Amazon Resource Name (ARN) of the theme resource using the deleted alias.
+     */
+    Arn?: Arn;
+    /**
+     * The AWS request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * An ID for the theme associated with the deletion.
+     */
+    ThemeId?: RestrictiveResourceId;
+  }
+  export interface DeleteThemeRequest {
+    /**
+     * The ID of the AWS account that contains the theme that you're deleting.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * An ID for the theme that you want to delete.
+     */
+    ThemeId: RestrictiveResourceId;
+    /**
+     * The version of the theme that you want to delete.   Note: If you don't provide a version number, you're using this call to DeleteTheme to delete all versions of the theme.
+     */
+    VersionNumber?: VersionNumber;
+  }
+  export interface DeleteThemeResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    Arn?: Arn;
+    /**
+     * The AWS request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * An ID for the theme.
+     */
+    ThemeId?: RestrictiveResourceId;
+  }
   export interface DeleteUserByPrincipalIdRequest {
     /**
      * The principal ID of the user.
@@ -2311,6 +2601,99 @@ declare namespace QuickSight {
      * The HTTP status of the request.
      */
     Status?: StatusCode;
+    RequestId?: String;
+  }
+  export interface DescribeThemeAliasRequest {
+    /**
+     * The ID of the AWS account that contains the theme alias that you're describing.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID for the theme.
+     */
+    ThemeId: RestrictiveResourceId;
+    /**
+     * The name of the theme alias that you want to describe.
+     */
+    AliasName: AliasName;
+  }
+  export interface DescribeThemeAliasResponse {
+    /**
+     * Information about the theme alias.
+     */
+    ThemeAlias?: ThemeAlias;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The AWS request ID for this operation.
+     */
+    RequestId?: String;
+  }
+  export interface DescribeThemePermissionsRequest {
+    /**
+     * The ID of the AWS account that contains the theme that you're describing.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID for the theme that you want to describe permissions for.
+     */
+    ThemeId: RestrictiveResourceId;
+  }
+  export interface DescribeThemePermissionsResponse {
+    /**
+     * The ID for the theme.
+     */
+    ThemeId?: RestrictiveResourceId;
+    /**
+     * The Amazon Resource Name (ARN) of the theme.
+     */
+    ThemeArn?: Arn;
+    /**
+     * A list of resource permissions set on the theme. 
+     */
+    Permissions?: ResourcePermissionList;
+    /**
+     * The AWS request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
+  export interface DescribeThemeRequest {
+    /**
+     * The ID of the AWS account that contains the theme that you're describing.
+     */
+    AwsAccountId: AwsAndAccountId;
+    /**
+     * The ID for the theme.
+     */
+    ThemeId: RestrictiveResourceId;
+    /**
+     * The version number for the version to describe. If a VersionNumber parameter value isn't provided, the latest version of the theme is described.
+     */
+    VersionNumber?: VersionNumber;
+    /**
+     * The alias of the theme that you want to describe. If you name a specific alias, you describe the version that the alias points to. You can specify the latest version of the theme by providing the keyword $LATEST in the AliasName parameter. The keyword $PUBLISHED doesn't apply to themes.
+     */
+    AliasName?: AliasName;
+  }
+  export interface DescribeThemeResponse {
+    /**
+     * The information about the theme that you are describing.
+     */
+    Theme?: Theme;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The AWS request ID for this operation.
+     */
+    RequestId?: String;
   }
   export interface DescribeUserRequest {
     /**
@@ -2462,6 +2845,13 @@ declare namespace QuickSight {
   export type GroupMemberList = GroupMember[];
   export type GroupMemberName = string;
   export type GroupName = string;
+  export interface GutterStyle {
+    /**
+     * This Boolean value controls whether to display a gutter space between sheet tiles. 
+     */
+    Show?: boolean;
+  }
+  export type HexColor = string;
   export type Host = string;
   export interface IAMPolicyAssignment {
     /**
@@ -3049,6 +3439,114 @@ declare namespace QuickSight {
      */
     RequestId?: String;
   }
+  export interface ListThemeAliasesRequest {
+    /**
+     * The ID of the AWS account that contains the theme aliases that you're listing.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID for the theme.
+     */
+    ThemeId: RestrictiveResourceId;
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListThemeAliasesResponse {
+    /**
+     * A structure containing the list of the theme's aliases.
+     */
+    ThemeAliasList?: ThemeAliasList;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The AWS request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    NextToken?: String;
+  }
+  export interface ListThemeVersionsRequest {
+    /**
+     * The ID of the AWS account that contains the themes that you're listing.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID for the theme.
+     */
+    ThemeId: RestrictiveResourceId;
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListThemeVersionsResponse {
+    /**
+     * A structure containing a list of all the versions of the specified theme.
+     */
+    ThemeVersionSummaryList?: ThemeVersionSummaryList;
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    NextToken?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The AWS request ID for this operation.
+     */
+    RequestId?: String;
+  }
+  export interface ListThemesRequest {
+    /**
+     * The ID of the AWS account that contains the themes that you're listing.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The type of themes that you want to list. Valid options include the following:    ALL (default)- Display all existing themes.    CUSTOM - Display only the themes created by people using Amazon QuickSight.    QUICKSIGHT - Display only the starting themes defined by QuickSight.  
+     */
+    Type?: ThemeType;
+  }
+  export interface ListThemesResponse {
+    /**
+     * Information about the themes in the list.
+     */
+    ThemeSummaryList?: ThemeSummaryList;
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    NextToken?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The AWS request ID for this operation.
+     */
+    RequestId?: String;
+  }
   export interface ListUserGroupsRequest {
     /**
      * The Amazon QuickSight user name that you want to list group memberships for.
@@ -3163,6 +3661,12 @@ declare namespace QuickSight {
      * Amazon S3 key that identifies an object.
      */
     Key: S3Key;
+  }
+  export interface MarginStyle {
+    /**
+     * This Boolean value controls whether to display sheet margins.
+     */
+    Show?: boolean;
   }
   export interface MariaDbParameters {
     /**
@@ -3406,7 +3910,7 @@ declare namespace QuickSight {
   export type ResourceName = string;
   export interface ResourcePermission {
     /**
-     * The Amazon Resource Name (ARN) of an Amazon QuickSight user or group, or an IAM ARN. If you are using cross-account resource sharing, this is the IAM ARN of an account root. Otherwise, it is the ARN of a QuickSight user or group. .
+     * The Amazon Resource Name (ARN) of the principal. This can be one of the following:   The ARN of an Amazon QuickSight user, group, or namespace. (This is most common.)   The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight ARN. Use this option only to share resources (templates) across AWS accounts. (This is less common.)   
      */
     Principal: Principal;
     /**
@@ -3509,6 +4013,16 @@ declare namespace QuickSight {
      * Visibility state.
      */
     VisibilityState?: DashboardUIState;
+  }
+  export interface SheetStyle {
+    /**
+     * The display options for tiles.
+     */
+    Tile?: TileStyle;
+    /**
+     * The layout options for tiles.
+     */
+    TileLayout?: TileLayoutStyle;
   }
   export type SiteBaseUrl = string;
   export interface SnowflakeParameters {
@@ -3789,6 +4303,176 @@ declare namespace QuickSight {
     Database: Database;
   }
   export type TextQualifier = "DOUBLE_QUOTE"|"SINGLE_QUOTE"|string;
+  export interface Theme {
+    /**
+     * The Amazon Resource Name (ARN) of the theme.
+     */
+    Arn?: Arn;
+    /**
+     * The name that the user gives to the theme.
+     */
+    Name?: ThemeName;
+    /**
+     * The identifier that the user gives to the theme.
+     */
+    ThemeId?: RestrictiveResourceId;
+    Version?: ThemeVersion;
+    /**
+     * The date and time that the theme was created.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The date and time that the theme was last updated.
+     */
+    LastUpdatedTime?: Timestamp;
+    /**
+     * The type of theme, based on how it was created. Valid values include: QUICKSIGHT and CUSTOM.
+     */
+    Type?: ThemeType;
+  }
+  export interface ThemeAlias {
+    /**
+     * The Amazon Resource Name (ARN) of the theme alias.
+     */
+    Arn?: Arn;
+    /**
+     * The display name of the theme alias.
+     */
+    AliasName?: AliasName;
+    /**
+     * The version number of the theme alias.
+     */
+    ThemeVersionNumber?: VersionNumber;
+  }
+  export type ThemeAliasList = ThemeAlias[];
+  export interface ThemeConfiguration {
+    /**
+     * Color properties that apply to chart data colors.
+     */
+    DataColorPalette?: DataColorPalette;
+    /**
+     * Color properties that apply to the UI and to charts, excluding the colors that apply to data. 
+     */
+    UIColorPalette?: UIColorPalette;
+    /**
+     * Display options related to sheets.
+     */
+    Sheet?: SheetStyle;
+  }
+  export interface ThemeError {
+    /**
+     * The type of error.
+     */
+    Type?: ThemeErrorType;
+    /**
+     * The error message.
+     */
+    Message?: NonEmptyString;
+  }
+  export type ThemeErrorList = ThemeError[];
+  export type ThemeErrorType = "INTERNAL_FAILURE"|string;
+  export type ThemeName = string;
+  export interface ThemeSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    Arn?: Arn;
+    /**
+     * the display name for the theme.
+     */
+    Name?: ThemeName;
+    /**
+     * The ID of the theme. This ID is unique per AWS Region for each AWS account.
+     */
+    ThemeId?: RestrictiveResourceId;
+    /**
+     * The latest version number for the theme. 
+     */
+    LatestVersionNumber?: VersionNumber;
+    /**
+     * The date and time that this theme was created.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The last date and time that this theme was updated.
+     */
+    LastUpdatedTime?: Timestamp;
+  }
+  export type ThemeSummaryList = ThemeSummary[];
+  export type ThemeType = "QUICKSIGHT"|"CUSTOM"|"ALL"|string;
+  export interface ThemeVersion {
+    /**
+     * The version number of the theme.
+     */
+    VersionNumber?: VersionNumber;
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    Arn?: Arn;
+    /**
+     * The description of the theme.
+     */
+    Description?: VersionDescription;
+    /**
+     * The Amazon QuickSight-defined ID of the theme that a custom theme inherits from. All themes initially inherit from a default QuickSight theme.
+     */
+    BaseThemeId?: RestrictiveResourceId;
+    /**
+     * The date and time that this theme version was created.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The theme configuration, which contains all the theme display properties.
+     */
+    Configuration?: ThemeConfiguration;
+    /**
+     * Errors associated with the theme.
+     */
+    Errors?: ThemeErrorList;
+    /**
+     * The status of the theme version.
+     */
+    Status?: ResourceStatus;
+  }
+  export interface ThemeVersionSummary {
+    /**
+     * The version number of the theme version.
+     */
+    VersionNumber?: VersionNumber;
+    /**
+     * The Amazon Resource Name (ARN) of the theme version.
+     */
+    Arn?: Arn;
+    /**
+     * The description of the theme version.
+     */
+    Description?: VersionDescription;
+    /**
+     * The date and time that this theme version was created.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The status of the theme version.
+     */
+    Status?: ResourceStatus;
+  }
+  export type ThemeVersionSummaryList = ThemeVersionSummary[];
+  export interface TileLayoutStyle {
+    /**
+     * The gutter settings that apply between tiles. 
+     */
+    Gutter?: GutterStyle;
+    /**
+     * The margin settings that apply around the outside edge of sheets.
+     */
+    Margin?: MarginStyle;
+  }
+  export interface TileStyle {
+    /**
+     * The border around a tile.
+     */
+    Border?: BorderStyle;
+  }
   export type Timestamp = Date;
   export type TimestampList = Timestamp[];
   export interface TransformOperation {
@@ -3829,6 +4513,72 @@ declare namespace QuickSight {
     MaxRows: PositiveInteger;
   }
   export type TypeCastFormat = string;
+  export interface UIColorPalette {
+    /**
+     * The color of text and other foreground elements that appear over the primary background regions, such as grid lines, borders, table banding, icons, and so on.
+     */
+    PrimaryForeground?: HexColor;
+    /**
+     * The background color that applies to visuals and other high emphasis UI.
+     */
+    PrimaryBackground?: HexColor;
+    /**
+     * The foreground color that applies to any sheet title, sheet control text, or UI that appears over the secondary background.
+     */
+    SecondaryForeground?: HexColor;
+    /**
+     * The background color that applies to the sheet background and sheet controls.
+     */
+    SecondaryBackground?: HexColor;
+    /**
+     * This color is that applies to selected states and buttons.
+     */
+    Accent?: HexColor;
+    /**
+     * The foreground color that applies to any text or other elements that appear over the accent color.
+     */
+    AccentForeground?: HexColor;
+    /**
+     * The color that applies to error messages.
+     */
+    Danger?: HexColor;
+    /**
+     * The foreground color that applies to any text or other elements that appear over the error color.
+     */
+    DangerForeground?: HexColor;
+    /**
+     * This color that applies to warning and informational messages.
+     */
+    Warning?: HexColor;
+    /**
+     * The foreground color that applies to any text or other elements that appear over the warning color.
+     */
+    WarningForeground?: HexColor;
+    /**
+     * The color that applies to success messages, for example the check mark for a successful download.
+     */
+    Success?: HexColor;
+    /**
+     * The foreground color that applies to any text or other elements that appear over the success color.
+     */
+    SuccessForeground?: HexColor;
+    /**
+     * The color that applies to the names of fields that are identified as dimensions.
+     */
+    Dimension?: HexColor;
+    /**
+     * The foreground color that applies to any text or other elements that appear over the dimension color.
+     */
+    DimensionForeground?: HexColor;
+    /**
+     * The color that applies to the names of fields that are identified as measures.
+     */
+    Measure?: HexColor;
+    /**
+     * The foreground color that applies to any text or other elements that appear over the measure color.
+     */
+    MeasureForeground?: HexColor;
+  }
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource that you want to untag.
@@ -3939,7 +4689,7 @@ declare namespace QuickSight {
      */
     SourceEntity: DashboardSourceEntity;
     /**
-     * A structure that contains the parameters of the dashboard. These are parameter overrides for a dashboard. A dashboard can have any type of parameters, and some parameters might accept multiple values. 
+     * A structure that contains the parameters of the dashboard. These are parameter overrides for a dashboard. A dashboard can have any type of parameters, and some parameters might accept multiple values.
      */
     Parameters?: Parameters;
     /**
@@ -3950,6 +4700,10 @@ declare namespace QuickSight {
      * Options for publishing the dashboard when you create it:    AvailabilityStatus for AdHocFilteringOption - This status can be either ENABLED or DISABLED. When this is set to DISABLED, QuickSight disables the left filter pane on the published dashboard, which can be used for ad hoc (one-time) filtering. This option is ENABLED by default.     AvailabilityStatus for ExportToCSVOption - This status can be either ENABLED or DISABLED. The visual option to export data to .csv format isn't enabled when this is set to DISABLED. This option is ENABLED by default.     VisibilityState for SheetControlsOption - This visibility state can be either COLLAPSED or EXPANDED. This option is COLLAPSED by default.   
      */
     DashboardPublishOptions?: DashboardPublishOptions;
+    /**
+     * The Amazon Resource Name (ARN) of the theme that is being used for this dashboard. If you add a value for this field, it overrides the value that was originally associated with the entity. The theme ARN must exist in the same AWS account where you create the dashboard.
+     */
+    ThemeArn?: Arn;
   }
   export interface UpdateDashboardResponse {
     /**
@@ -4359,6 +5113,130 @@ declare namespace QuickSight {
     VersionArn?: Arn;
     /**
      * The creation status of the template.
+     */
+    CreationStatus?: ResourceStatus;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The AWS request ID for this operation.
+     */
+    RequestId?: String;
+  }
+  export interface UpdateThemeAliasRequest {
+    /**
+     * The ID of the AWS account that contains the theme alias that you're updating.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID for the theme.
+     */
+    ThemeId: RestrictiveResourceId;
+    /**
+     * The name of the theme alias that you want to update.
+     */
+    AliasName: AliasName;
+    /**
+     * The version number of the theme that the alias should reference.
+     */
+    ThemeVersionNumber: VersionNumber;
+  }
+  export interface UpdateThemeAliasResponse {
+    /**
+     * Information about the theme alias.
+     */
+    ThemeAlias?: ThemeAlias;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The AWS request ID for this operation.
+     */
+    RequestId?: String;
+  }
+  export interface UpdateThemePermissionsRequest {
+    /**
+     * The ID of the AWS account that contains the theme.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID for the theme.
+     */
+    ThemeId: RestrictiveResourceId;
+    /**
+     * A list of resource permissions to be granted for the theme.
+     */
+    GrantPermissions?: UpdateResourcePermissionList;
+    /**
+     * A list of resource permissions to be revoked from the theme.
+     */
+    RevokePermissions?: UpdateResourcePermissionList;
+  }
+  export interface UpdateThemePermissionsResponse {
+    /**
+     * The ID for the theme.
+     */
+    ThemeId?: RestrictiveResourceId;
+    /**
+     * The Amazon Resource Name (ARN) of the theme.
+     */
+    ThemeArn?: Arn;
+    /**
+     * The resulting list of resource permissions for the theme.
+     */
+    Permissions?: ResourcePermissionList;
+    /**
+     * The AWS request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
+  export interface UpdateThemeRequest {
+    /**
+     * The ID of the AWS account that contains the theme that you're updating.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID for the theme.
+     */
+    ThemeId: RestrictiveResourceId;
+    /**
+     * The name for the theme.
+     */
+    Name?: ThemeName;
+    /**
+     * The theme ID, defined by Amazon QuickSight, that a custom theme inherits from. All themes initially inherit from a default QuickSight theme.
+     */
+    BaseThemeId: RestrictiveResourceId;
+    /**
+     * A description of the theme version that you're updating Every time that you call UpdateTheme, you create a new version of the theme. Each version of the theme maintains a description of the version in VersionDescription.
+     */
+    VersionDescription?: VersionDescription;
+    /**
+     * The theme configuration, which contains the theme display properties.
+     */
+    Configuration?: ThemeConfiguration;
+  }
+  export interface UpdateThemeResponse {
+    /**
+     * The ID for the theme.
+     */
+    ThemeId?: RestrictiveResourceId;
+    /**
+     * The Amazon Resource Name (ARN) for the theme.
+     */
+    Arn?: Arn;
+    /**
+     * The Amazon Resource Name (ARN) for the new version of the theme.
+     */
+    VersionArn?: Arn;
+    /**
+     * The creation status of the theme.
      */
     CreationStatus?: ResourceStatus;
     /**
