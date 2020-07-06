@@ -5111,9 +5111,9 @@
         "shape": "StringType"
       },
       "value": {
-        "shape": "StringType"
-      },
-      "sensitive": true
+        "shape": "StringType",
+        "sensitive": true
+      }
     },
     "AuthenticationResultType": {
       "type": "structure",
