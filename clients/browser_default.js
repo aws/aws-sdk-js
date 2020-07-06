@@ -58,6 +58,7 @@ module.exports = {
   S3: require('./s3'),
   ServiceCatalog: require('./servicecatalog'),
   SES: require('./ses'),
+  SESV2: require('./sesv2'),
   SNS: require('./sns'),
   SQS: require('./sqs'),
   SSM: require('./ssm'),
