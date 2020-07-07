@@ -11002,14 +11002,12 @@
         }
       },
       "documentation": "<p>Defines the values for a task parameter.</p>",
-      "sensitive": true
     },
     "MaintenanceWindowTaskParameterValueList": {
       "type": "list",
       "member": {
         "shape": "MaintenanceWindowTaskParameterValue"
-      },
-      "sensitive": true
+      }
     },
     "MaintenanceWindowTaskParameters": {
       "type": "map",
@@ -11018,15 +11016,13 @@
       },
       "value": {
         "shape": "MaintenanceWindowTaskParameterValueExpression"
-      },
-      "sensitive": true
+      }
     },
     "MaintenanceWindowTaskParametersList": {
       "type": "list",
       "member": {
         "shape": "MaintenanceWindowTaskParameters"
-      },
-      "sensitive": true
+      }
     },
     "MaintenanceWindowTaskPriority": {
       "type": "integer",

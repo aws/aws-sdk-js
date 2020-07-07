@@ -1420,11 +1420,11 @@
         "shape": "String"
       },
       "value": {
-        "shape": "String"
+        "shape": "String",
+        "sensitive": true
       },
       "max": 10,
-      "min": 1,
-      "sensitive": true
+      "min": 1
     },
     "ChannelStatus": {
       "type": "string",

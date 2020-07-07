@@ -108,14 +108,14 @@
     "BlockToken": {
       "type": "string",
       "max": 256,
-      "pattern": "^[A-Za-z0-9+/=]+$"
+      "pattern": "^[A-Za-z0-9+/=]+$",
+      "sensitive": true
     },
     "Blocks": {
       "type": "list",
       "member": {
         "shape": "Block"
-      },
-      "sensitive": true
+      }
     },
     "ChangedBlock": {
       "type": "structure",
@@ -133,8 +133,7 @@
           "documentation": "<p>The block token for the block index of the <code>SecondSnapshotId</code> specified in the <code>ListChangedBlocks</code> operation.</p>"
         }
       },
-      "documentation": "<p>A block of data in an Amazon Elastic Block Store snapshot that is different from another snapshot of the same volume/snapshot lineage.</p>",
-      "sensitive": true
+      "documentation": "<p>A block of data in an Amazon Elastic Block Store snapshot that is different from another snapshot of the same volume/snapshot lineage.</p>"
     },
     "ChangedBlocks": {
       "type": "list",

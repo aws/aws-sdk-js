@@ -2738,19 +2738,21 @@
       "members": {
         "AccessKeyId": {
           "shape": "NonEmptyString",
-          "documentation": "<p>Temporary key allowing access to the Amazon GameLift S3 account.</p>"
+          "documentation": "<p>Temporary key allowing access to the Amazon GameLift S3 account.</p>",
+          "sensitive": true
         },
         "SecretAccessKey": {
           "shape": "NonEmptyString",
-          "documentation": "<p>Temporary secret key allowing access to the Amazon GameLift S3 account.</p>"
+          "documentation": "<p>Temporary secret key allowing access to the Amazon GameLift S3 account.</p>",
+          "sensitive": true
         },
         "SessionToken": {
           "shape": "NonEmptyString",
-          "documentation": "<p>Token used to associate a specific build ID with the files uploaded using these credentials.</p>"
+          "documentation": "<p>Token used to associate a specific build ID with the files uploaded using these credentials.</p>",
+          "sensitive": true
         }
       },
-      "documentation": "<p>Temporary access credentials used for uploading game build files to Amazon GameLift. They are valid for a limited time. If they expire before you upload your game build, get a new set by calling <a>RequestUploadCredentials</a>.</p>",
-      "sensitive": true
+      "documentation": "<p>Temporary access credentials used for uploading game build files to Amazon GameLift. They are valid for a limited time. If they expire before you upload your game build, get a new set by calling <a>RequestUploadCredentials</a>.</p>"
     },
     "BackfillMode": {
       "type": "string",
@@ -5643,11 +5645,11 @@
         },
         "Secret": {
           "shape": "NonEmptyString",
-          "documentation": "<p>Secret string. For Windows instances, the secret is a password for use with Windows Remote Desktop. For Linux instances, it is a private key (which must be saved as a <code>.pem</code> file) for use with SSH.</p>"
+          "documentation": "<p>Secret string. For Windows instances, the secret is a password for use with Windows Remote Desktop. For Linux instances, it is a private key (which must be saved as a <code>.pem</code> file) for use with SSH.</p>",
+          "sensitive": true
         }
       },
       "documentation": "<p>Set of credentials required to remotely access a fleet instance. Access credentials are requested by calling <a>GetInstanceAccess</a> and returned in an <a>InstanceAccess</a> object.</p>",
-      "sensitive": true
     },
     "InstanceDefinition": {
       "type": "structure",

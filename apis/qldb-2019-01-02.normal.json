@@ -1443,8 +1443,7 @@
           "documentation": "<p>An Amazon Ion plaintext value contained in a <code>ValueHolder</code> structure.</p>"
         }
       },
-      "documentation": "<p>A structure that can contain a value in multiple encoding formats.</p>",
-      "sensitive": true
+      "documentation": "<p>A structure that can contain a value in multiple encoding formats.</p>"
     }
   },
   "documentation": "<p>The control plane for Amazon QLDB</p>"

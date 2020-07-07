@@ -2219,8 +2219,7 @@
       },
       "value": {
         "shape": "EnvironmentVariableValue"
-      },
-      "sensitive": true
+      }
     },
     "EventSourceMappingConfiguration": {
       "type": "structure",

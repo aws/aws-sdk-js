@@ -3448,14 +3448,14 @@
       },
       "value": {
         "shape": "MetadataValue"
-      },
-      "sensitive": true
+      }
     },
     "MetadataKey": {
       "type": "string"
     },
     "MetadataValue": {
-      "type": "string"
+      "type": "string",
+      "sensitive": true
     },
     "ProtectedResource": {
       "type": "structure",
@@ -3941,9 +3941,9 @@
     "TagKeyList": {
       "type": "list",
       "member": {
-        "shape": "string"
-      },
-      "sensitive": true
+        "shape": "string",
+        "sensitive": true
+      }
     },
     "TagResourceInput": {
       "type": "structure",
@@ -3965,7 +3965,8 @@
       }
     },
     "TagValue": {
-      "type": "string"
+      "type": "string",
+      "sensitive": true
     },
     "Tags": {
       "type": "map",
@@ -3974,8 +3975,7 @@
       },
       "value": {
         "shape": "TagValue"
-      },
-      "sensitive": true
+      }
     },
     "UntagResourceInput": {
       "type": "structure",

@@ -39149,11 +39149,11 @@
         "Data": {
           "shape": "String",
           "documentation": "<p>The user data. If you are using an AWS SDK or command line tool, Base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide Base64-encoded text.</p>",
-          "locationName": "data"
+          "locationName": "data",
+          "sensitive": true
         }
       },
-      "documentation": "<p>Describes the user data for an instance.</p>",
-      "sensitive": true
+      "documentation": "<p>Describes the user data for an instance.</p>"
     },
     "UserGroupStringList": {
       "type": "list",

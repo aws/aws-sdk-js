@@ -908,9 +908,9 @@
         "shape": "String"
       },
       "value": {
-        "shape": "String"
-      },
-      "sensitive": true
+        "shape": "String",
+        "sensitive": true
+      }
     },
     "StringUrlWithLength": {
       "type": "string",

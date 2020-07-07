@@ -1460,8 +1460,7 @@
       },
       "value": {
         "shape": "ModelEndpointDataBlob"
-      },
-      "sensitive": true
+      }
     },
     "ExternalModelList": {
       "type": "list",
@@ -1952,7 +1951,8 @@
       "members": {
         "byteBuffer": {
           "shape": "blob",
-          "documentation": "<p>The byte buffer of the Amazon SageMaker model endpoint input data blob.</p>"
+          "documentation": "<p>The byte buffer of the Amazon SageMaker model endpoint input data blob.</p>",
+          "sensitive": true
         },
         "contentType": {
           "shape": "contentType",

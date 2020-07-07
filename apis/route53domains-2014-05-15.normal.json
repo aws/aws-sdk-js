@@ -733,7 +733,8 @@
         },
         "Password": {
           "shape": "String",
-          "documentation": "<p>The password that was returned by the <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html\">TransferDomainToAnotherAwsAccount</a> request. </p>"
+          "documentation": "<p>The password that was returned by the <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html\">TransferDomainToAnotherAwsAccount</a> request. </p>",
+          "sensitive": true
         }
       },
       "documentation": "<p>The AcceptDomainTransferFromAnotherAwsAccount request includes the following elements.</p>"
@@ -754,7 +755,8 @@
     },
     "AddressLine": {
       "type": "string",
-      "max": 255
+      "max": 255,
+      "sensitive": true
     },
     "BillingRecord": {
       "type": "structure",
@@ -938,16 +940,17 @@
           "documentation": "<p>A list of name-value pairs for parameters required by certain top-level domains.</p>"
         }
       },
-      "documentation": "<p>ContactDetail includes the following elements.</p>",
-      "sensitive": true
+      "documentation": "<p>ContactDetail includes the following elements.</p>"
     },
     "ContactName": {
       "type": "string",
-      "max": 255
+      "max": 255,
+      "sensitive": true
     },
     "ContactNumber": {
       "type": "string",
-      "max": 30
+      "max": 30,
+      "sensitive": true
     },
     "ContactType": {
       "type": "string",
@@ -1361,7 +1364,8 @@
     },
     "Email": {
       "type": "string",
-      "max": 254
+      "max": 254,
+      "sensitive": true
     },
     "EnableDomainAutoRenewRequest": {
       "type": "structure",
@@ -1468,10 +1472,12 @@
     },
     "ExtraParamValue": {
       "type": "string",
-      "max": 2048
+      "max": 2048,
+      "sensitive": true
     },
     "FIAuthKey": {
-      "type": "string"
+      "type": "string",
+      "sensitive": true
     },
     "GetContactReachabilityStatusRequest": {
       "type": "structure",
@@ -2242,7 +2248,8 @@
         },
         "Password": {
           "shape": "String",
-          "documentation": "<p>To finish transferring a domain to another AWS account, the account that the domain is being transferred to must submit an <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AcceptDomainTransferFromAnotherAwsAccount.html\">AcceptDomainTransferFromAnotherAwsAccount</a> request. The request must include the value of the <code>Password</code> element that was returned in the <code>TransferDomainToAnotherAwsAccount</code> response.</p>"
+          "documentation": "<p>To finish transferring a domain to another AWS account, the account that the domain is being transferred to must submit an <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AcceptDomainTransferFromAnotherAwsAccount.html\">AcceptDomainTransferFromAnotherAwsAccount</a> request. The request must include the value of the <code>Password</code> element that was returned in the <code>TransferDomainToAnotherAwsAccount</code> response.</p>",
+          "sensitive": true
         }
       },
       "documentation": "<p>The <code>TransferDomainToAnotherAwsAccount</code> response includes the following elements.</p>"

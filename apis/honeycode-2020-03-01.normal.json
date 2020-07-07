@@ -127,15 +127,16 @@
         },
         "rawValue": {
           "shape": "RawValue",
-          "documentation": "<p>The raw value of the data. e.g. jsmith@example.com</p>"
+          "documentation": "<p>The raw value of the data. e.g. jsmith@example.com</p>",
+          "sensitive": true
         },
         "formattedValue": {
           "shape": "FormattedValue",
-          "documentation": "<p>The formatted value of the data. e.g. John Smith.</p>"
+          "documentation": "<p>The formatted value of the data. e.g. John Smith.</p>",
+          "sensitive": true
         }
       },
       "documentation": "<p>The data in a particular data cell defined on the screen.</p>",
-      "sensitive": true
     },
     "DataItems": {
       "type": "list",
@@ -370,11 +371,11 @@
       "members": {
         "rawValue": {
           "shape": "RawValue",
-          "documentation": "<p>Raw value of the variable.</p>"
+          "documentation": "<p>Raw value of the variable.</p>",
+          "sensitive": true
         }
       },
       "documentation": "<p>The input variables to the app to be used by the InvokeScreenAutomation action request.</p>",
-      "sensitive": true
     },
     "VariableValueMap": {
       "type": "map",
