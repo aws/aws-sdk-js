@@ -136,7 +136,7 @@
           "sensitive": true
         }
       },
-      "documentation": "<p>The data in a particular data cell defined on the screen.</p>",
+      "documentation": "<p>The data in a particular data cell defined on the screen.</p>"
     },
     "DataItems": {
       "type": "list",
@@ -375,7 +375,7 @@
           "sensitive": true
         }
       },
-      "documentation": "<p>The input variables to the app to be used by the InvokeScreenAutomation action request.</p>",
+      "documentation": "<p>The input variables to the app to be used by the InvokeScreenAutomation action request.</p>"
     },
     "VariableValueMap": {
       "type": "map",

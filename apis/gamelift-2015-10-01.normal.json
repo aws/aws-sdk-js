@@ -5649,7 +5649,7 @@
           "sensitive": true
         }
       },
-      "documentation": "<p>Set of credentials required to remotely access a fleet instance. Access credentials are requested by calling <a>GetInstanceAccess</a> and returned in an <a>InstanceAccess</a> object.</p>",
+      "documentation": "<p>Set of credentials required to remotely access a fleet instance. Access credentials are requested by calling <a>GetInstanceAccess</a> and returned in an <a>InstanceAccess</a> object.</p>"
     },
     "InstanceDefinition": {
       "type": "structure",
