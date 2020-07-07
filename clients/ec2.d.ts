@@ -2541,11 +2541,11 @@ declare class EC2 extends Service {
    */
   importVolume(callback?: (err: AWSError, data: EC2.Types.ImportVolumeResult) => void): Request<EC2.Types.ImportVolumeResult, AWSError>;
   /**
-   * Enables or disables an Availability Zone group for your account. Use describe-availability-zones to view the value for GroupName.
+   * Enables or disables an Availability Zone group for your account. Use  DescribeAvailabilityZones to view the value for GroupName.
    */
   modifyAvailabilityZoneGroup(params: EC2.Types.ModifyAvailabilityZoneGroupRequest, callback?: (err: AWSError, data: EC2.Types.ModifyAvailabilityZoneGroupResult) => void): Request<EC2.Types.ModifyAvailabilityZoneGroupResult, AWSError>;
   /**
-   * Enables or disables an Availability Zone group for your account. Use describe-availability-zones to view the value for GroupName.
+   * Enables or disables an Availability Zone group for your account. Use  DescribeAvailabilityZones to view the value for GroupName.
    */
   modifyAvailabilityZoneGroup(callback?: (err: AWSError, data: EC2.Types.ModifyAvailabilityZoneGroupResult) => void): Request<EC2.Types.ModifyAvailabilityZoneGroupResult, AWSError>;
   /**
@@ -4470,7 +4470,7 @@ declare namespace EC2 {
   export type AutoRecoveryFlag = boolean;
   export interface AvailabilityZone {
     /**
-     * The state of the Availability Zone or Local Zone.
+     * The state of the Zone.
      */
     State?: AvailabilityZoneState;
     /**
@@ -4478,7 +4478,7 @@ declare namespace EC2 {
      */
     OptInStatus?: AvailabilityZoneOptInStatus;
     /**
-     * Any messages about the Availability Zone or Local Zone.
+     * Any messages about the Zone.
      */
     Messages?: AvailabilityZoneMessageList;
     /**
@@ -4486,11 +4486,11 @@ declare namespace EC2 {
      */
     RegionName?: String;
     /**
-     * The name of the Availability Zone or Local Zone.
+     * The name of the Zone.
      */
     ZoneName?: String;
     /**
-     * The ID of the Availability Zone or Local Zone.
+     * The ID of the Zone.
      */
     ZoneId?: String;
     /**
@@ -4501,11 +4501,23 @@ declare namespace EC2 {
      * The name of the location from which the address is advertised.
      */
     NetworkBorderGroup?: String;
+    /**
+     * The type of zone. The valid values are availability-zone and local-zone.
+     */
+    ZoneType?: String;
+    /**
+     * The name of the zone that handles some of the Local Zone control plane operations, such as API calls.
+     */
+    ParentZoneName?: String;
+    /**
+     * The ID of the zone that handles some of the Local Zone control plane operations, such as API calls.
+     */
+    ParentZoneId?: String;
   }
   export type AvailabilityZoneList = AvailabilityZone[];
   export interface AvailabilityZoneMessage {
     /**
-     * The message about the Availability Zone or Local Zone.
+     * The message about the Zone.
      */
     Message?: String;
   }
@@ -8494,15 +8506,15 @@ declare namespace EC2 {
   }
   export interface DescribeAvailabilityZonesRequest {
     /**
-     * The filters.    group-name - For Availability Zones, use the Region name. For Local Zones, use the name of the group associated with the Local Zone (for example, us-west-2-lax-1).    message - The Availability Zone or Local Zone message.    opt-in-status - The opt in status (opted-in, and not-opted-in | opt-in-not-required).    region-name - The name of the Region for the Availability Zone or Local Zone (for example, us-east-1).    state - The state of the Availability Zone or Local Zone (available | information | impaired | unavailable).    zone-id - The ID of the Availability Zone (for example, use1-az1) or the Local Zone (for example, use usw2-lax1-az1).    zone-name - The name of the Availability Zone (for example, us-east-1a) or the Local Zone (for example, use us-west-2-lax-1a).  
+     * The filters.    group-name - For Availability Zones, use the Region name. For Local Zones, use the name of the group associated with the Local Zone (for example, us-west-2-lax-1).    message - The Zone message.    opt-in-status - The opt in status (opted-in, and not-opted-in | opt-in-not-required).    region-name - The name of the Region for the Zone (for example, us-east-1).    state - The state of the Availability Zone or Local Zone (available | information | impaired | unavailable).    zone-id - The ID of the Availability Zone (for example, use1-az1) or the Local Zone (for example, use usw2-lax1-az1).    zone-name - The name of the Availability Zone (for example, us-east-1a) or the Local Zone (for example, use us-west-2-lax-1a).  
      */
     Filters?: FilterList;
     /**
-     * The names of the Availability Zones and Local Zones.
+     * The names of the Zones.
      */
     ZoneNames?: ZoneNameStringList;
     /**
-     * The IDs of the Availability Zones and Local Zones.
+     * The IDs of the Zones.
      */
     ZoneIds?: ZoneIdStringList;
     /**
@@ -8516,7 +8528,7 @@ declare namespace EC2 {
   }
   export interface DescribeAvailabilityZonesResult {
     /**
-     * Information about the Availability Zones and Local Zones.
+     * Information about the Zones.
      */
     AvailabilityZones?: AvailabilityZoneList;
   }

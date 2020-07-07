@@ -44,19 +44,19 @@ declare class LakeFormation extends Service {
    */
   describeResource(callback?: (err: AWSError, data: LakeFormation.Types.DescribeResourceResponse) => void): Request<LakeFormation.Types.DescribeResourceResponse, AWSError>;
   /**
-   * The AWS Lake Formation principal.
+   * Retrieves the list of the data lake administrators of a Lake Formation-managed data lake. 
    */
   getDataLakeSettings(params: LakeFormation.Types.GetDataLakeSettingsRequest, callback?: (err: AWSError, data: LakeFormation.Types.GetDataLakeSettingsResponse) => void): Request<LakeFormation.Types.GetDataLakeSettingsResponse, AWSError>;
   /**
-   * The AWS Lake Formation principal.
+   * Retrieves the list of the data lake administrators of a Lake Formation-managed data lake. 
    */
   getDataLakeSettings(callback?: (err: AWSError, data: LakeFormation.Types.GetDataLakeSettingsResponse) => void): Request<LakeFormation.Types.GetDataLakeSettingsResponse, AWSError>;
   /**
-   * Returns the permissions for a specified table or database resource located at a path in Amazon S3.
+   * Returns the Lake Formation permissions for a specified table or database resource located at a path in Amazon S3. GetEffectivePermissionsForPath will not return databases and tables if the catalog is encrypted.
    */
   getEffectivePermissionsForPath(params: LakeFormation.Types.GetEffectivePermissionsForPathRequest, callback?: (err: AWSError, data: LakeFormation.Types.GetEffectivePermissionsForPathResponse) => void): Request<LakeFormation.Types.GetEffectivePermissionsForPathResponse, AWSError>;
   /**
-   * Returns the permissions for a specified table or database resource located at a path in Amazon S3.
+   * Returns the Lake Formation permissions for a specified table or database resource located at a path in Amazon S3. GetEffectivePermissionsForPath will not return databases and tables if the catalog is encrypted.
    */
   getEffectivePermissionsForPath(callback?: (err: AWSError, data: LakeFormation.Types.GetEffectivePermissionsForPathResponse) => void): Request<LakeFormation.Types.GetEffectivePermissionsForPathResponse, AWSError>;
   /**
@@ -84,19 +84,19 @@ declare class LakeFormation extends Service {
    */
   listResources(callback?: (err: AWSError, data: LakeFormation.Types.ListResourcesResponse) => void): Request<LakeFormation.Types.ListResourcesResponse, AWSError>;
   /**
-   * The AWS Lake Formation principal.
+   * Sets the list of data lake administrators who have admin privileges on all resources managed by Lake Formation. For more information on admin privileges, see Granting Lake Formation Permissions. This API replaces the current list of data lake admins with the new list being passed. To add an admin, fetch the current list and add the new admin to that list and pass that list in this API.
    */
   putDataLakeSettings(params: LakeFormation.Types.PutDataLakeSettingsRequest, callback?: (err: AWSError, data: LakeFormation.Types.PutDataLakeSettingsResponse) => void): Request<LakeFormation.Types.PutDataLakeSettingsResponse, AWSError>;
   /**
-   * The AWS Lake Formation principal.
+   * Sets the list of data lake administrators who have admin privileges on all resources managed by Lake Formation. For more information on admin privileges, see Granting Lake Formation Permissions. This API replaces the current list of data lake admins with the new list being passed. To add an admin, fetch the current list and add the new admin to that list and pass that list in this API.
    */
   putDataLakeSettings(callback?: (err: AWSError, data: LakeFormation.Types.PutDataLakeSettingsResponse) => void): Request<LakeFormation.Types.PutDataLakeSettingsResponse, AWSError>;
   /**
-   * Registers the resource as managed by the Data Catalog. To add or update data, Lake Formation needs read/write access to the chosen Amazon S3 path. Choose a role that you know has permission to do this, or choose the AWSServiceRoleForLakeFormationDataAccess service-linked role. When you register the first Amazon S3 path, the service-linked role and a new inline policy are created on your behalf. Lake Formation adds the first path to the inline policy and attaches it to the service-linked role. When you register subsequent paths, Lake Formation adds the path to the existing policy.
+   * Registers the resource as managed by the Data Catalog. To add or update data, Lake Formation needs read/write access to the chosen Amazon S3 path. Choose a role that you know has permission to do this, or choose the AWSServiceRoleForLakeFormationDataAccess service-linked role. When you register the first Amazon S3 path, the service-linked role and a new inline policy are created on your behalf. Lake Formation adds the first path to the inline policy and attaches it to the service-linked role. When you register subsequent paths, Lake Formation adds the path to the existing policy. The following request registers a new location and gives AWS Lake Formation permission to use the service-linked role to access that location.  ResourceArn = arn:aws:s3:::my-bucket UseServiceLinkedRole = true  If UseServiceLinkedRole is not set to true, you must provide or set the RoleArn:  arn:aws:iam::12345:role/my-data-access-role 
    */
   registerResource(params: LakeFormation.Types.RegisterResourceRequest, callback?: (err: AWSError, data: LakeFormation.Types.RegisterResourceResponse) => void): Request<LakeFormation.Types.RegisterResourceResponse, AWSError>;
   /**
-   * Registers the resource as managed by the Data Catalog. To add or update data, Lake Formation needs read/write access to the chosen Amazon S3 path. Choose a role that you know has permission to do this, or choose the AWSServiceRoleForLakeFormationDataAccess service-linked role. When you register the first Amazon S3 path, the service-linked role and a new inline policy are created on your behalf. Lake Formation adds the first path to the inline policy and attaches it to the service-linked role. When you register subsequent paths, Lake Formation adds the path to the existing policy.
+   * Registers the resource as managed by the Data Catalog. To add or update data, Lake Formation needs read/write access to the chosen Amazon S3 path. Choose a role that you know has permission to do this, or choose the AWSServiceRoleForLakeFormationDataAccess service-linked role. When you register the first Amazon S3 path, the service-linked role and a new inline policy are created on your behalf. Lake Formation adds the first path to the inline policy and attaches it to the service-linked role. When you register subsequent paths, Lake Formation adds the path to the existing policy. The following request registers a new location and gives AWS Lake Formation permission to use the service-linked role to access that location.  ResourceArn = arn:aws:s3:::my-bucket UseServiceLinkedRole = true  If UseServiceLinkedRole is not set to true, you must provide or set the RoleArn:  arn:aws:iam::12345:role/my-data-access-role 
    */
   registerResource(callback?: (err: AWSError, data: LakeFormation.Types.RegisterResourceResponse) => void): Request<LakeFormation.Types.RegisterResourceResponse, AWSError>;
   /**
@@ -205,25 +205,37 @@ declare namespace LakeFormation {
   export type DataLakeResourceType = "CATALOG"|"DATABASE"|"TABLE"|"DATA_LOCATION"|string;
   export interface DataLakeSettings {
     /**
-     * A list of AWS Lake Formation principals.
+     * A list of AWS Lake Formation principals. Supported principals are IAM users or IAM roles.
      */
     DataLakeAdmins?: DataLakePrincipalList;
     /**
-     * A list of up to three principal permissions entries for default create database permissions.
+     * A structure representing a list of up to three principal permissions entries for default create database permissions.
      */
     CreateDatabaseDefaultPermissions?: PrincipalPermissionsList;
     /**
-     * A list of up to three principal permissions entries for default create table permissions.
+     * A structure representing a list of up to three principal permissions entries for default create table permissions.
      */
     CreateTableDefaultPermissions?: PrincipalPermissionsList;
+    /**
+     * A list of the resource-owning account IDs that the caller's account can use to share their user access details (user ARNs). The user ARNs can be logged in the resource owner's AWS CloudTrail log. You may want to specify this property when you are in a high-trust boundary, such as the same team or company. 
+     */
+    TrustedResourceOwners?: TrustedResourceOwners;
   }
   export interface DataLocationResource {
+    /**
+     * The identifier for the Data Catalog where the location is registered with AWS Lake Formation. By default, it is the account ID of the caller.
+     */
+    CatalogId?: CatalogIdString;
     /**
      * The Amazon Resource Name (ARN) that uniquely identifies the data location resource.
      */
     ResourceArn: ResourceArnString;
   }
   export interface DatabaseResource {
+    /**
+     * The identifier for the Data Catalog. By default, it is the account ID of the caller.
+     */
+    CatalogId?: CatalogIdString;
     /**
      * The name of the database resource. Unique to the Data Catalog.
      */
@@ -284,7 +296,7 @@ declare namespace LakeFormation {
   }
   export interface GetDataLakeSettingsResponse {
     /**
-     * A list of AWS Lake Formation principals. 
+     * A structure representing a list of AWS Lake Formation principals designated as data lake administrators.
      */
     DataLakeSettings?: DataLakeSettings;
   }
@@ -406,7 +418,7 @@ declare namespace LakeFormation {
   export type NameString = string;
   export type NullableBoolean = boolean;
   export type PageSize = number;
-  export type Permission = "ALL"|"SELECT"|"ALTER"|"DROP"|"DELETE"|"INSERT"|"CREATE_DATABASE"|"CREATE_TABLE"|"DATA_LOCATION_ACCESS"|string;
+  export type Permission = "ALL"|"SELECT"|"ALTER"|"DROP"|"DELETE"|"INSERT"|"DESCRIBE"|"CREATE_DATABASE"|"CREATE_TABLE"|"DATA_LOCATION_ACCESS"|string;
   export type PermissionList = Permission[];
   export interface PrincipalPermissions {
     /**
@@ -444,7 +456,7 @@ declare namespace LakeFormation {
      */
     CatalogId?: CatalogIdString;
     /**
-     * A list of AWS Lake Formation principals.
+     * A structure representing a list of AWS Lake Formation principals designated as data lake administrators.
      */
     DataLakeSettings: DataLakeSettings;
   }
@@ -456,11 +468,11 @@ declare namespace LakeFormation {
      */
     ResourceArn: ResourceArnString;
     /**
-     * Designates a trusted caller, an IAM principal, by registering this caller with the Data Catalog. 
+     * Designates an AWS Identity and Access Management (IAM) service-linked role by registering this role with the Data Catalog. A service-linked role is a unique type of IAM role that is linked directly to Lake Formation. For more information, see Using Service-Linked Roles for Lake Formation.
      */
     UseServiceLinkedRole?: NullableBoolean;
     /**
-     * The identifier for the role.
+     * The identifier for the role that registers the resource.
      */
     RoleArn?: IAMRoleArn;
   }
@@ -532,23 +544,37 @@ declare namespace LakeFormation {
   export type StringValueList = StringValue[];
   export interface TableResource {
     /**
+     * The identifier for the Data Catalog. By default, it is the account ID of the caller.
+     */
+    CatalogId?: CatalogIdString;
+    /**
      * The name of the database for the table. Unique to a Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database privileges to a principal. 
      */
     DatabaseName: NameString;
     /**
      * The name of the table.
      */
-    Name: NameString;
+    Name?: NameString;
+    /**
+     * A wildcard object representing every table under a database. At least one of TableResource$Name or TableResource$TableWildcard is required.
+     */
+    TableWildcard?: TableWildcard;
+  }
+  export interface TableWildcard {
   }
   export interface TableWithColumnsResource {
     /**
+     * The identifier for the Data Catalog. By default, it is the account ID of the caller.
+     */
+    CatalogId?: CatalogIdString;
+    /**
      * The name of the database for the table with columns resource. Unique to the Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database privileges to a principal. 
      */
-    DatabaseName?: NameString;
+    DatabaseName: NameString;
     /**
      * The name of the table resource. A table is a metadata definition that represents your data. You can Grant and Revoke table privileges to a principal. 
      */
-    Name?: NameString;
+    Name: NameString;
     /**
      * The list of column names for the table. At least one of ColumnNames or ColumnWildcard is required.
      */
@@ -559,6 +585,7 @@ declare namespace LakeFormation {
     ColumnWildcard?: ColumnWildcard;
   }
   export type Token = string;
+  export type TrustedResourceOwners = CatalogIdString[];
   export interface UpdateResourceRequest {
     /**
      * The new role to use for the given resource registered in AWS Lake Formation.

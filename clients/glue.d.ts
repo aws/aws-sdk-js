@@ -596,6 +596,14 @@ declare class Glue extends Service {
    */
   getPlan(callback?: (err: AWSError, data: Glue.Types.GetPlanResponse) => void): Request<Glue.Types.GetPlanResponse, AWSError>;
   /**
+   * Retrieves the security configurations for the resource policies set on individual resources, and also the account-level policy.
+   */
+  getResourcePolicies(params: Glue.Types.GetResourcePoliciesRequest, callback?: (err: AWSError, data: Glue.Types.GetResourcePoliciesResponse) => void): Request<Glue.Types.GetResourcePoliciesResponse, AWSError>;
+  /**
+   * Retrieves the security configurations for the resource policies set on individual resources, and also the account-level policy.
+   */
+  getResourcePolicies(callback?: (err: AWSError, data: Glue.Types.GetResourcePoliciesResponse) => void): Request<Glue.Types.GetResourcePoliciesResponse, AWSError>;
+  /**
    * Retrieves a specified resource policy.
    */
   getResourcePolicy(params: Glue.Types.GetResourcePolicyRequest, callback?: (err: AWSError, data: Glue.Types.GetResourcePolicyResponse) => void): Request<Glue.Types.GetResourcePolicyResponse, AWSError>;
@@ -1695,7 +1703,7 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * The type of the connection. Currently, only JDBC is supported; SFTP is not supported.
+     * The type of the connection. Currently, SFTP is not supported.
      */
     ConnectionType?: ConnectionType;
     /**
@@ -2636,6 +2644,24 @@ declare namespace Glue {
      * Creates a set of default permissions on the table for principals. 
      */
     CreateTableDefaultPermissions?: PrincipalPermissionsList;
+    /**
+     * A DatabaseIdentifier structure that describes a target database for resource linking.
+     */
+    TargetDatabase?: DatabaseIdentifier;
+    /**
+     * The ID of the Data Catalog in which the database resides.
+     */
+    CatalogId?: CatalogIdString;
+  }
+  export interface DatabaseIdentifier {
+    /**
+     * The ID of the Data Catalog in which the database resides.
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The name of the catalog database.
+     */
+    DatabaseName?: NameString;
   }
   export interface DatabaseInput {
     /**
@@ -2658,6 +2684,10 @@ declare namespace Glue {
      * Creates a set of default permissions on the table for principals. 
      */
     CreateTableDefaultPermissions?: PrincipalPermissionsList;
+    /**
+     * A DatabaseIdentifier structure that describes a target database for resource linking.
+     */
+    TargetDatabase?: DatabaseIdentifier;
   }
   export type DatabaseList = Database[];
   export type DatabaseName = string;
@@ -2850,6 +2880,10 @@ declare namespace Glue {
      * The hash value returned when this policy was set.
      */
     PolicyHashCondition?: HashString;
+    /**
+     * The ARN of the AWS Glue resource for the resource policy to be deleted.
+     */
+    ResourceArn?: GlueResourceArn;
   }
   export interface DeleteResourcePolicyResponse {
   }
@@ -3099,6 +3133,7 @@ declare namespace Glue {
     DestinationId?: NameString;
   }
   export type EdgeList = Edge[];
+  export type EnableHybridValues = "TRUE"|"FALSE"|string;
   export interface EncryptionAtRest {
     /**
      * The encryption-at-rest mode for encrypting Data Catalog data.
@@ -3350,7 +3385,7 @@ declare namespace Glue {
      */
     MatchCriteria?: MatchCriteria;
     /**
-     * The type of connections to return. Currently, only JDBC is supported; SFTP is not supported.
+     * The type of connections to return. Currently, SFTP is not supported.
      */
     ConnectionType?: ConnectionType;
   }
@@ -3483,6 +3518,10 @@ declare namespace Glue {
      * The maximum number of databases to return in one response.
      */
     MaxResults?: PageSize;
+    /**
+     * Allows you to specify that you want to list the databases shared with your account. The allowable values are FOREIGN or ALL.    If set to FOREIGN, will list the databases shared with your account.    If set to ALL, will list the databases shared with your account, as well as the databases in yor local account.   
+     */
+    ResourceShareType?: ResourceShareType;
   }
   export interface GetDatabasesResponse {
     /**
@@ -3942,7 +3981,32 @@ declare namespace Glue {
      */
     ScalaCode?: ScalaCode;
   }
+  export interface GetResourcePoliciesRequest {
+    /**
+     * A continuation token, if this is a continuation request.
+     */
+    NextToken?: Token;
+    /**
+     * The maximum size of a list to return.
+     */
+    MaxResults?: PageSize;
+  }
+  export interface GetResourcePoliciesResponse {
+    /**
+     * A list of the individual resource policies and the account-level resource policy.
+     */
+    GetResourcePoliciesResponseList?: GetResourcePoliciesResponseList;
+    /**
+     * A continuation token, if the returned list does not contain the last resource policy available.
+     */
+    NextToken?: Token;
+  }
+  export type GetResourcePoliciesResponseList = GluePolicy[];
   export interface GetResourcePolicyRequest {
+    /**
+     * The ARN of the AWS Glue resource for the resource policy to be retrieved. For more information about AWS Glue resource ARNs, see the AWS Glue ARN string pattern 
+     */
+    ResourceArn?: GlueResourceArn;
   }
   export interface GetResourcePolicyResponse {
     /**
@@ -4282,6 +4346,24 @@ declare namespace Glue {
      * A continuation token, if not all requested workflow runs have been returned.
      */
     NextToken?: GenericString;
+  }
+  export interface GluePolicy {
+    /**
+     * Contains the requested policy document, in JSON format.
+     */
+    PolicyInJson?: PolicyJsonString;
+    /**
+     * Contains the hash value associated with this policy.
+     */
+    PolicyHash?: HashString;
+    /**
+     * The date and time at which the policy was created.
+     */
+    CreateTime?: Timestamp;
+    /**
+     * The date and time at which the policy was last updated.
+     */
+    UpdateTime?: Timestamp;
   }
   export type GlueResourceArn = string;
   export interface GlueTable {
@@ -5132,6 +5214,10 @@ declare namespace Glue {
      * The last time at which column statistics were computed for this partition.
      */
     LastAnalyzedTime?: Timestamp;
+    /**
+     * The ID of the Data Catalog in which the partition resides.
+     */
+    CatalogId?: CatalogIdString;
   }
   export interface PartitionError {
     /**
@@ -5260,6 +5346,10 @@ declare namespace Glue {
      */
     PolicyInJson: PolicyJsonString;
     /**
+     * The ARN of the AWS Glue resource for the resource policy to be set. For more information about AWS Glue resource ARNs, see the AWS Glue ARN string pattern 
+     */
+    ResourceArn?: GlueResourceArn;
+    /**
      * The hash value returned when the previous policy was set using PutResourcePolicy. Its purpose is to prevent concurrent modifications of a policy. Do not use this parameter if no previous policy has been set.
      */
     PolicyHashCondition?: HashString;
@@ -5267,6 +5357,10 @@ declare namespace Glue {
      * A value of MUST_EXIST is used to update a policy. A value of NOT_EXIST is used to create a new policy. If a value of NONE or a null value is used, the call will not depend on the existence of a policy.
      */
     PolicyExistsCondition?: ExistCondition;
+    /**
+     * Allows you to specify if you want to use both resource-level and account/catalog-level resource policies. A resource-level policy is a policy attached to an individual resource such as a database or a table. The default value of NO indicates that resource-level policies cannot co-exist with an account-level policy. A value of YES means the use of both resource-level and account/catalog-level resource policies is allowed.
+     */
+    EnableHybrid?: EnableHybridValues;
   }
   export interface PutResourcePolicyResponse {
     /**
@@ -5310,6 +5404,7 @@ declare namespace Glue {
      */
     JobBookmarkEntry?: JobBookmarkEntry;
   }
+  export type ResourceShareType = "FOREIGN"|"ALL"|string;
   export type ResourceType = "JAR"|"FILE"|"ARCHIVE"|string;
   export interface ResourceUri {
     /**
@@ -5410,6 +5505,10 @@ declare namespace Glue {
      * The maximum number of tables to return in a single response.
      */
     MaxResults?: PageSize;
+    /**
+     * Allows you to specify that you want to search the tables shared with your account. The allowable values are FOREIGN or ALL.    If set to FOREIGN, will search the tables shared with your account.    If set to ALL, will search the tables shared with your account, as well as the tables in yor local account.   
+     */
+    ResourceShareType?: ResourceShareType;
   }
   export interface SearchTablesResponse {
     /**
@@ -5818,6 +5917,14 @@ declare namespace Glue {
      * Indicates whether the table has been registered with AWS Lake Formation.
      */
     IsRegisteredWithLakeFormation?: Boolean;
+    /**
+     * A TableIdentifier structure that describes a target table for resource linking.
+     */
+    TargetTable?: TableIdentifier;
+    /**
+     * The ID of the Data Catalog in which the table resides.
+     */
+    CatalogId?: CatalogIdString;
   }
   export interface TableError {
     /**
@@ -5830,6 +5937,20 @@ declare namespace Glue {
     ErrorDetail?: ErrorDetail;
   }
   export type TableErrors = TableError[];
+  export interface TableIdentifier {
+    /**
+     * The ID of the Data Catalog in which the table resides.
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The name of the catalog database that contains the target table.
+     */
+    DatabaseName?: NameString;
+    /**
+     * The name of the target table.
+     */
+    Name?: NameString;
+  }
   export interface TableInput {
     /**
      * The table name. For Hive compatibility, this is folded to lowercase when it is stored.
@@ -5879,6 +6000,10 @@ declare namespace Glue {
      * These key-value pairs define properties associated with the table.
      */
     Parameters?: ParametersMap;
+    /**
+     * A TableIdentifier structure that describes a target table for resource linking.
+     */
+    TargetTable?: TableIdentifier;
   }
   export type TableList = Table[];
   export type TableName = string;
@@ -6623,7 +6748,7 @@ declare namespace Glue {
      */
     FunctionName?: NameString;
     /**
-     * The name of the database where the function resides.
+     * The name of the catalog database that contains the function.
      */
     DatabaseName?: NameString;
     /**
@@ -6646,6 +6771,10 @@ declare namespace Glue {
      * The resource URIs for the function.
      */
     ResourceUris?: ResourceUriList;
+    /**
+     * The ID of the Data Catalog in which the function resides.
+     */
+    CatalogId?: CatalogIdString;
   }
   export interface UserDefinedFunctionInput {
     /**

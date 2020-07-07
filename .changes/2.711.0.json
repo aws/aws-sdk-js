@@ -1,0 +1,32 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudFront",
+        "description": "Amazon CloudFront adds support for a new security policy, TLSv1.2_2019."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "DescribeAvailabilityZones now returns additional data about Availability Zones and Local Zones."
+    },
+    {
+        "type": "feature",
+        "category": "EFS",
+        "description": "This release adds support for automatic backups of Amazon EFS file systems to further simplify backup management. "
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "AWS Glue Data Catalog supports cross account sharing of tables through AWS Lake Formation"
+    },
+    {
+        "type": "feature",
+        "category": "LakeFormation",
+        "description": " AWS Lake Formation supports sharing tables with other AWS accounts and organizations"
+    },
+    {
+        "type": "feature",
+        "category": "StorageGateway",
+        "description": "Adding support for file-system driven directory refresh, Case Sensitivity toggle for SMB File Shares, and S3 Prefixes and custom File Share names"
+    }
+]

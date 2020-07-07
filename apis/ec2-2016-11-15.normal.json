@@ -4334,7 +4334,7 @@
       "output": {
         "shape": "ModifyAvailabilityZoneGroupResult"
       },
-      "documentation": "<p>Enables or disables an Availability Zone group for your account.</p> <p>Use <a href=\"https://docs.aws.amazon.com/AWSEC2ApiDocReef/build/server-root/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html\">describe-availability-zones</a> to view the value for <code>GroupName</code>.</p>"
+      "documentation": "<p>Enables or disables an Availability Zone group for your account.</p> <p>Use <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html\"> DescribeAvailabilityZones</a> to view the value for <code>GroupName</code>.</p>"
     },
     "ModifyCapacityReservation": {
       "name": "ModifyCapacityReservation",
@@ -7098,7 +7098,7 @@
       "members": {
         "State": {
           "shape": "AvailabilityZoneState",
-          "documentation": "<p>The state of the Availability Zone or Local Zone.</p>",
+          "documentation": "<p>The state of the Zone.</p>",
           "locationName": "zoneState"
         },
         "OptInStatus": {
@@ -7108,7 +7108,7 @@
         },
         "Messages": {
           "shape": "AvailabilityZoneMessageList",
-          "documentation": "<p>Any messages about the Availability Zone or Local Zone.</p>",
+          "documentation": "<p>Any messages about the Zone.</p>",
           "locationName": "messageSet"
         },
         "RegionName": {
@@ -7118,12 +7118,12 @@
         },
         "ZoneName": {
           "shape": "String",
-          "documentation": "<p>The name of the Availability Zone or Local Zone.</p>",
+          "documentation": "<p>The name of the Zone.</p>",
           "locationName": "zoneName"
         },
         "ZoneId": {
           "shape": "String",
-          "documentation": "<p>The ID of the Availability Zone or Local Zone.</p>",
+          "documentation": "<p>The ID of the Zone.</p>",
           "locationName": "zoneId"
         },
         "GroupName": {
@@ -7135,9 +7135,24 @@
           "shape": "String",
           "documentation": "<p>The name of the location from which the address is advertised.</p>",
           "locationName": "networkBorderGroup"
+        },
+        "ZoneType": {
+          "shape": "String",
+          "documentation": "<p>The type of zone. The valid values are <code>availability-zone</code> and <code>local-zone</code>.</p>",
+          "locationName": "zoneType"
+        },
+        "ParentZoneName": {
+          "shape": "String",
+          "documentation": "<p>The name of the zone that handles some of the Local Zone control plane operations, such as API calls.</p>",
+          "locationName": "parentZoneName"
+        },
+        "ParentZoneId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the zone that handles some of the Local Zone control plane operations, such as API calls.</p>",
+          "locationName": "parentZoneId"
         }
       },
-      "documentation": "<p>Describes an Availability Zone or Local Zone.</p>"
+      "documentation": "<p>Describes a Zone.</p>"
     },
     "AvailabilityZoneList": {
       "type": "list",
@@ -7151,11 +7166,11 @@
       "members": {
         "Message": {
           "shape": "String",
-          "documentation": "<p>The message about the Availability Zone or Local Zone.</p>",
+          "documentation": "<p>The message about the Zone.</p>",
           "locationName": "message"
         }
       },
-      "documentation": "<p>Describes a message about an Availability Zone or Local Zone.</p>"
+      "documentation": "<p>Describes a message about a Zone.</p>"
     },
     "AvailabilityZoneMessageList": {
       "type": "list",
@@ -13470,17 +13485,17 @@
       "members": {
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>The filters.</p> <ul> <li> <p> <code>group-name</code> - For Availability Zones, use the Region name. For Local Zones, use the name of the group associated with the Local Zone (for example, <code>us-west-2-lax-1</code>).</p> </li> <li> <p> <code>message</code> - The Availability Zone or Local Zone message.</p> </li> <li> <p> <code>opt-in-status</code> - The opt in status (<code>opted-in</code>, and <code>not-opted-in</code> | <code>opt-in-not-required</code>).</p> </li> <li> <p> <code>region-name</code> - The name of the Region for the Availability Zone or Local Zone (for example, <code>us-east-1</code>).</p> </li> <li> <p> <code>state</code> - The state of the Availability Zone or Local Zone (<code>available</code> | <code>information</code> | <code>impaired</code> | <code>unavailable</code>).</p> </li> <li> <p> <code>zone-id</code> - The ID of the Availability Zone (for example, <code>use1-az1</code>) or the Local Zone (for example, use <code>usw2-lax1-az1</code>).</p> </li> <li> <p> <code>zone-name</code> - The name of the Availability Zone (for example, <code>us-east-1a</code>) or the Local Zone (for example, use <code>us-west-2-lax-1a</code>).</p> </li> </ul>",
+          "documentation": "<p>The filters.</p> <ul> <li> <p> <code>group-name</code> - For Availability Zones, use the Region name. For Local Zones, use the name of the group associated with the Local Zone (for example, <code>us-west-2-lax-1</code>).</p> </li> <li> <p> <code>message</code> - The Zone message.</p> </li> <li> <p> <code>opt-in-status</code> - The opt in status (<code>opted-in</code>, and <code>not-opted-in</code> | <code>opt-in-not-required</code>).</p> </li> <li> <p> <code>region-name</code> - The name of the Region for the Zone (for example, <code>us-east-1</code>).</p> </li> <li> <p> <code>state</code> - The state of the Availability Zone or Local Zone (<code>available</code> | <code>information</code> | <code>impaired</code> | <code>unavailable</code>).</p> </li> <li> <p> <code>zone-id</code> - The ID of the Availability Zone (for example, <code>use1-az1</code>) or the Local Zone (for example, use <code>usw2-lax1-az1</code>).</p> </li> <li> <p> <code>zone-name</code> - The name of the Availability Zone (for example, <code>us-east-1a</code>) or the Local Zone (for example, use <code>us-west-2-lax-1a</code>).</p> </li> </ul>",
           "locationName": "Filter"
         },
         "ZoneNames": {
           "shape": "ZoneNameStringList",
-          "documentation": "<p>The names of the Availability Zones and Local Zones.</p>",
+          "documentation": "<p>The names of the Zones.</p>",
           "locationName": "ZoneName"
         },
         "ZoneIds": {
           "shape": "ZoneIdStringList",
-          "documentation": "<p>The IDs of the Availability Zones and Local Zones.</p>",
+          "documentation": "<p>The IDs of the Zones.</p>",
           "locationName": "ZoneId"
         },
         "AllAvailabilityZones": {
@@ -13499,7 +13514,7 @@
       "members": {
         "AvailabilityZones": {
           "shape": "AvailabilityZoneList",
-          "documentation": "<p>Information about the Availability Zones and Local Zones.</p>",
+          "documentation": "<p>Information about the Zones.</p>",
           "locationName": "availabilityZoneInfo"
         }
       }

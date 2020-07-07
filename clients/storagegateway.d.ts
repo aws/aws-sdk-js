@@ -468,11 +468,11 @@ declare class StorageGateway extends Service {
    */
   notifyWhenUploaded(callback?: (err: AWSError, data: StorageGateway.Types.NotifyWhenUploadedOutput) => void): Request<StorageGateway.Types.NotifyWhenUploadedOutput, AWSError>;
   /**
-   * Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket's contents and cached the results. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see Getting notified about file operations in the AWS Storage Gateway User Guide. When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn't necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through an CloudWatch event when your RefreshCache operation completes. Throttle limit: This API is asynchronous so the gateway will accept no more than two refreshes at any time. We recommend using the refresh-complete CloudWatch event notification before issuing additional requests. For more information, see Getting notified about file operations in the AWS Storage Gateway User Guide. If you invoke the RefreshCache API when two requests are already being processed, any new request will cause an InvalidGatewayRequestException error because too many requests were sent to the server. For more information, see Getting notified about file operations in the AWS Storage Gateway User Guide.
+   * Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed, or replaced since the gateway last listed the bucket's contents and cached the results. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see Getting notified about file operations in the AWS Storage Gateway User Guide. When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn't necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through an CloudWatch event when your RefreshCache operation completes. Throttle limit: This API is asynchronous so the gateway will accept no more than two refreshes at any time. We recommend using the refresh-complete CloudWatch event notification before issuing additional requests. For more information, see Getting notified about file operations in the AWS Storage Gateway User Guide. If you invoke the RefreshCache API when two requests are already being processed, any new request will cause an InvalidGatewayRequestException error because too many requests were sent to the server. For more information, see Getting notified about file operations in the AWS Storage Gateway User Guide.
    */
   refreshCache(params: StorageGateway.Types.RefreshCacheInput, callback?: (err: AWSError, data: StorageGateway.Types.RefreshCacheOutput) => void): Request<StorageGateway.Types.RefreshCacheOutput, AWSError>;
   /**
-   * Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket's contents and cached the results. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see Getting notified about file operations in the AWS Storage Gateway User Guide. When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn't necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through an CloudWatch event when your RefreshCache operation completes. Throttle limit: This API is asynchronous so the gateway will accept no more than two refreshes at any time. We recommend using the refresh-complete CloudWatch event notification before issuing additional requests. For more information, see Getting notified about file operations in the AWS Storage Gateway User Guide. If you invoke the RefreshCache API when two requests are already being processed, any new request will cause an InvalidGatewayRequestException error because too many requests were sent to the server. For more information, see Getting notified about file operations in the AWS Storage Gateway User Guide.
+   * Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed, or replaced since the gateway last listed the bucket's contents and cached the results. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see Getting notified about file operations in the AWS Storage Gateway User Guide. When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn't necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through an CloudWatch event when your RefreshCache operation completes. Throttle limit: This API is asynchronous so the gateway will accept no more than two refreshes at any time. We recommend using the refresh-complete CloudWatch event notification before issuing additional requests. For more information, see Getting notified about file operations in the AWS Storage Gateway User Guide. If you invoke the RefreshCache API when two requests are already being processed, any new request will cause an InvalidGatewayRequestException error because too many requests were sent to the server. For more information, see Getting notified about file operations in the AWS Storage Gateway User Guide.
    */
   refreshCache(callback?: (err: AWSError, data: StorageGateway.Types.RefreshCacheOutput) => void): Request<StorageGateway.Types.RefreshCacheOutput, AWSError>;
   /**
@@ -804,6 +804,13 @@ declare namespace StorageGateway {
   export type BandwidthType = string;
   export type BandwidthUploadRateLimit = number;
   export type Boolean = boolean;
+  export interface CacheAttributes {
+    /**
+     * Refreshes a file share's cache by using Time To Live (TTL). TTL is the length of time since the last refresh after which access to the directory would cause the file gateway to first refresh that directory's contents from the Amazon S3 bucket. The TTL duration is in seconds. Valid Values: 300 to 2,592,000 seconds (5 minutes to 30 days)
+     */
+    CacheStaleTimeoutInSeconds?: CacheStaleTimeoutInSeconds;
+  }
+  export type CacheStaleTimeoutInSeconds = number;
   export interface CachediSCSIVolume {
     /**
      * The Amazon Resource Name (ARN) of the storage volume.
@@ -882,6 +889,7 @@ declare namespace StorageGateway {
      */
     TapeARN?: TapeARN;
   }
+  export type CaseSensitivity = "ClientSpecified"|"CaseSensitive"|string;
   export type ChapCredentials = ChapInfo[];
   export interface ChapInfo {
     /**
@@ -979,7 +987,7 @@ declare namespace StorageGateway {
      */
     Role: Role;
     /**
-     * The ARN of the backed storage used for storing file data.
+     * The ARN of the backend storage used for storing file data. A prefix name can be added to the S3 bucket name. It must end with a "/".
      */
     LocationARN: LocationARN;
     /**
@@ -1014,6 +1022,14 @@ declare namespace StorageGateway {
      * A list of up to 50 tags that can be assigned to the NFS file share. Each tag is a key-value pair.  Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag's key is 128 characters, and the maximum length for a tag's value is 256. 
      */
     Tags?: Tags;
+    /**
+     * The name of the file share. Optional.   FileShareName must be set if an S3 prefix name is set in LocationARN. 
+     */
+    FileShareName?: FileShareName;
+    /**
+     * Refresh cache information.
+     */
+    CacheAttributes?: CacheAttributes;
   }
   export interface CreateNFSFileShareOutput {
     /**
@@ -1043,7 +1059,7 @@ declare namespace StorageGateway {
      */
     Role: Role;
     /**
-     * The ARN of the backed storage used for storing file data.
+     * The ARN of the backend storage used for storing file data. A prefix name can be added to the S3 bucket name. It must end with a "/".
      */
     LocationARN: LocationARN;
     /**
@@ -1071,15 +1087,15 @@ declare namespace StorageGateway {
      */
     SMBACLEnabled?: Boolean;
     /**
-     * A list of users in the Active Directory that will be granted administrator privileges on the file share. These users can do all file operations as the super-user.  Use this option very carefully, because any user in this list can do anything they like on the file share, regardless of file permissions. 
+     * A list of users or groups in the Active Directory that will be granted administrator privileges on the file share. These users can do all file operations as the super-user. Acceptable formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1.  Use this option very carefully, because any user in this list can do anything they like on the file share, regardless of file permissions. 
      */
     AdminUserList?: FileShareUserList;
     /**
-     * A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. For example, @group1. Can only be set if Authentication is set to ActiveDirectory.
+     * A list of users or groups in the Active Directory that are allowed to access the file  share. A group must be prefixed with the @ character. Acceptable formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if Authentication is set to ActiveDirectory.
      */
     ValidUserList?: FileShareUserList;
     /**
-     * A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. For example, @group1. Can only be set if Authentication is set to ActiveDirectory.
+     * A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. Acceptable formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if Authentication is set to ActiveDirectory.
      */
     InvalidUserList?: FileShareUserList;
     /**
@@ -1091,9 +1107,21 @@ declare namespace StorageGateway {
      */
     Authentication?: Authentication;
     /**
+     * The case of an object name in an Amazon S3 bucket. For ClientSpecified, the client determines the case sensitivity. For CaseSensitive, the gateway determines the case sensitivity. The default value is ClientSpecified.
+     */
+    CaseSensitivity?: CaseSensitivity;
+    /**
      * A list of up to 50 tags that can be assigned to the NFS file share. Each tag is a key-value pair.  Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag's key is 128 characters, and the maximum length for a tag's value is 256. 
      */
     Tags?: Tags;
+    /**
+     * The name of the file share. Optional.   FileShareName must be set if an S3 prefix name is set in LocationARN. 
+     */
+    FileShareName?: FileShareName;
+    /**
+     * Refresh cache information.
+     */
+    CacheAttributes?: CacheAttributes;
   }
   export interface CreateSMBFileShareOutput {
     /**
@@ -1890,6 +1918,7 @@ declare namespace StorageGateway {
     GatewayARN?: GatewayARN;
   }
   export type FileShareInfoList = FileShareInfo[];
+  export type FileShareName = string;
   export type FileShareStatus = string;
   export type FileShareType = "NFS"|"SMB"|string;
   export type FileShareUser = string;
@@ -2203,6 +2232,14 @@ declare namespace StorageGateway {
      * A list of up to 50 tags assigned to the NFS file share, sorted alphabetically by key name. Each tag is a key-value pair. For a gateway with more than 10 tags assigned, you can view all tags using the ListTagsForResource API operation.
      */
     Tags?: Tags;
+    /**
+     * The name of the file share. Optional.   FileShareName must be set if an S3 prefix name is set in LocationARN. 
+     */
+    FileShareName?: FileShareName;
+    /**
+     * Refresh cache information.
+     */
+    CacheAttributes?: CacheAttributes;
   }
   export type NFSFileShareInfoList = NFSFileShareInfo[];
   export interface NetworkInterface {
@@ -2348,15 +2385,15 @@ declare namespace StorageGateway {
      */
     SMBACLEnabled?: Boolean;
     /**
-     * A list of users or groups in the Active Directory that have administrator rights to the file share. A group must be prefixed with the @ character. For example @group1. Can only be set if Authentication is set to ActiveDirectory.
+     * A list of users or groups in the Active Directory that have administrator rights to the file share. A group must be prefixed with the @ character. Acceptable formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if Authentication is set to ActiveDirectory.
      */
     AdminUserList?: FileShareUserList;
     /**
-     * A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. For example, @group1. Can only be set if Authentication is set to ActiveDirectory.
+     * A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. Acceptable formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if Authentication is set to ActiveDirectory.
      */
     ValidUserList?: FileShareUserList;
     /**
-     * A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. For example @group1. Can only be set if Authentication is set to ActiveDirectory.
+     * A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. Acceptable formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if Authentication is set to ActiveDirectory.
      */
     InvalidUserList?: FileShareUserList;
     /**
@@ -2365,9 +2402,21 @@ declare namespace StorageGateway {
     AuditDestinationARN?: AuditDestinationARN;
     Authentication?: Authentication;
     /**
+     * The case of an object name in an Amazon S3 bucket. For ClientSpecified, the client determines the case sensitivity. For CaseSensitive, the gateway determines the case sensitivity. The default value is ClientSpecified.
+     */
+    CaseSensitivity?: CaseSensitivity;
+    /**
      * A list of up to 50 tags assigned to the SMB file share, sorted alphabetically by key name. Each tag is a key-value pair. For a gateway with more than 10 tags assigned, you can view all tags using the ListTagsForResource API operation.
      */
     Tags?: Tags;
+    /**
+     * The name of the file share. Optional.   FileShareName must be set if an S3 prefix name is set in LocationARN. 
+     */
+    FileShareName?: FileShareName;
+    /**
+     * Refresh cache information.
+     */
+    CacheAttributes?: CacheAttributes;
   }
   export type SMBFileShareInfoList = SMBFileShareInfo[];
   export type SMBGuestPassword = string;
@@ -2775,6 +2824,14 @@ declare namespace StorageGateway {
      * A value that sets who pays the cost of the request and the cost associated with data download from the S3 bucket. If this value is set to true, the requester pays the costs; otherwise, the S3 bucket owner pays. However, the S3 bucket owner always pays the cost of storing data.   RequesterPays is a configuration for the S3 bucket that backs the file share, so make sure that the configuration on the file share is the same as the S3 bucket configuration.  Valid Values: true | false 
      */
     RequesterPays?: Boolean;
+    /**
+     * The name of the file share. Optional.   FileShareName must be set if an S3 prefix name is set in LocationARN. 
+     */
+    FileShareName?: FileShareName;
+    /**
+     * Refresh cache information.
+     */
+    CacheAttributes?: CacheAttributes;
   }
   export interface UpdateNFSFileShareOutput {
     /**
@@ -2820,21 +2877,33 @@ declare namespace StorageGateway {
      */
     SMBACLEnabled?: Boolean;
     /**
-     * A list of users in the Active Directory that have administrator rights to the file share. A group must be prefixed with the @ character. For example, @group1. Can only be set if Authentication is set to ActiveDirectory.
+     * A list of users or groups in the Active Directory that have administrator rights to the file share. A group must be prefixed with the @ character. Acceptable formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if Authentication is set to ActiveDirectory.
      */
     AdminUserList?: FileShareUserList;
     /**
-     * A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. For example, @group1. Can only be set if Authentication is set to ActiveDirectory.
+     * A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. Acceptable formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if Authentication is set to ActiveDirectory.
      */
     ValidUserList?: FileShareUserList;
     /**
-     * A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. For example @group1. Can only be set if Authentication is set to ActiveDirectory.
+     * A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. Acceptable formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if Authentication is set to ActiveDirectory.
      */
     InvalidUserList?: FileShareUserList;
     /**
      * The Amazon Resource Name (ARN) of the storage used for the audit logs.
      */
     AuditDestinationARN?: AuditDestinationARN;
+    /**
+     * The case of an object name in an Amazon S3 bucket. For ClientSpecified, the client determines the case sensitivity. For CaseSensitive, the gateway determines the case sensitivity. The default value is ClientSpecified.
+     */
+    CaseSensitivity?: CaseSensitivity;
+    /**
+     * The name of the file share. Optional.   FileShareName must be set if an S3 prefix name is set in LocationARN. 
+     */
+    FileShareName?: FileShareName;
+    /**
+     * Refresh cache information.
+     */
+    CacheAttributes?: CacheAttributes;
   }
   export interface UpdateSMBFileShareOutput {
     /**

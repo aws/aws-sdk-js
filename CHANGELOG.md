@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.710.0-->
+<!--LATEST=2.711.0-->
 <!--ENTRYINSERT-->
+
+## 2.711.0
+* feature: CloudFront: Amazon CloudFront adds support for a new security policy, TLSv1.2_2019.
+* feature: EC2: DescribeAvailabilityZones now returns additional data about Availability Zones and Local Zones.
+* feature: EFS: This release adds support for automatic backups of Amazon EFS file systems to further simplify backup management. 
+* feature: Glue: AWS Glue Data Catalog supports cross account sharing of tables through AWS Lake Formation
+* feature: LakeFormation:  AWS Lake Formation supports sharing tables with other AWS accounts and organizations
+* feature: StorageGateway: Adding support for file-system driven directory refresh, Case Sensitivity toggle for SMB File Shares, and S3 Prefixes and custom File Share names
 
 ## 2.710.0
 * feature: IoTSiteWise: This release supports optional start date and end date parameters for the GetAssetPropertyValueHistory API.

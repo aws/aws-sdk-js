@@ -92,6 +92,14 @@ declare class EFS extends Service {
    */
   describeAccessPoints(callback?: (err: AWSError, data: EFS.Types.DescribeAccessPointsResponse) => void): Request<EFS.Types.DescribeAccessPointsResponse, AWSError>;
   /**
+   * Returns the backup policy for the specified EFS file system.
+   */
+  describeBackupPolicy(params: EFS.Types.DescribeBackupPolicyRequest, callback?: (err: AWSError, data: EFS.Types.BackupPolicyDescription) => void): Request<EFS.Types.BackupPolicyDescription, AWSError>;
+  /**
+   * Returns the backup policy for the specified EFS file system.
+   */
+  describeBackupPolicy(callback?: (err: AWSError, data: EFS.Types.BackupPolicyDescription) => void): Request<EFS.Types.BackupPolicyDescription, AWSError>;
+  /**
    * Returns the FileSystemPolicy for the specified EFS file system. This operation requires permissions for the elasticfilesystem:DescribeFileSystemPolicy action.
    */
   describeFileSystemPolicy(params: EFS.Types.DescribeFileSystemPolicyRequest, callback?: (err: AWSError, data: EFS.Types.FileSystemPolicyDescription) => void): Request<EFS.Types.FileSystemPolicyDescription, AWSError>;
@@ -155,6 +163,14 @@ declare class EFS extends Service {
    * Modifies the set of security groups in effect for a mount target. When you create a mount target, Amazon EFS also creates a new network interface. For more information, see CreateMountTarget. This operation replaces the security groups in effect for the network interface associated with a mount target, with the SecurityGroups provided in the request. This operation requires that the network interface of the mount target has been created and the lifecycle state of the mount target is not deleted.  The operation requires permissions for the following actions:    elasticfilesystem:ModifyMountTargetSecurityGroups action on the mount target's file system.     ec2:ModifyNetworkInterfaceAttribute action on the mount target's network interface.   
    */
   modifyMountTargetSecurityGroups(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the file system's backup policy. Use this action to start or stop automatic backups of the file system. 
+   */
+  putBackupPolicy(params: EFS.Types.PutBackupPolicyRequest, callback?: (err: AWSError, data: EFS.Types.BackupPolicyDescription) => void): Request<EFS.Types.BackupPolicyDescription, AWSError>;
+  /**
+   * Updates the file system's backup policy. Use this action to start or stop automatic backups of the file system. 
+   */
+  putBackupPolicy(callback?: (err: AWSError, data: EFS.Types.BackupPolicyDescription) => void): Request<EFS.Types.BackupPolicyDescription, AWSError>;
   /**
    * Applies an Amazon EFS FileSystemPolicy to an Amazon EFS file system. A file system policy is an IAM resource-based policy and can contain multiple policy statements. A file system always has exactly one file system policy, which can be the default policy or an explicit policy set or updated using this API operation. When an explicit policy is set, it overrides the default policy. For more information about the default file system policy, see Default EFS File System Policy.  This operation requires permissions for the elasticfilesystem:PutFileSystemPolicy action.
    */
@@ -245,6 +261,18 @@ declare namespace EFS {
   export type AvailabilityZoneId = string;
   export type AvailabilityZoneName = string;
   export type AwsAccountId = string;
+  export interface BackupPolicy {
+    /**
+     * Describes the status of the file system's backup policy.     ENABLED - EFS is automatically backing up the file system.      ENABLING - EFS is turning on automatic backups for the file system.      DISABLED - automatic back ups are turned off for the file system.      DISABLED - EFS is turning off automatic backups for the file system.   
+     */
+    Status: Status;
+  }
+  export interface BackupPolicyDescription {
+    /**
+     * Describes the file system's backup policy, indicating whether automatic backups are turned on or off..
+     */
+    BackupPolicy?: BackupPolicy;
+  }
   export type BypassPolicyLockoutSafetyCheck = boolean;
   export type ClientToken = string;
   export interface CreateAccessPointRequest {
@@ -404,6 +432,12 @@ declare namespace EFS {
      */
     NextToken?: Token;
   }
+  export interface DescribeBackupPolicyRequest {
+    /**
+     * Specifies which EFS file system to retrieve the BackupPolicy for.
+     */
+    FileSystemId: FileSystemId;
+  }
   export interface DescribeFileSystemPolicyRequest {
     /**
      * Specifies which EFS file system to retrieve the FileSystemPolicy for.
@@ -525,6 +559,7 @@ declare namespace EFS {
     NextMarker?: Marker;
   }
   export type Encrypted = boolean;
+  export type FileSystemArn = string;
   export interface FileSystemDescription {
     /**
      * The AWS account that created the file system. If the file system was created by an IAM user, the parent account to which the user belongs is the owner.
@@ -538,6 +573,10 @@ declare namespace EFS {
      * The ID of the file system, assigned by Amazon EFS.
      */
     FileSystemId: FileSystemId;
+    /**
+     * The Amazon Resource Name (ARN) for the EFS file system, in the format arn:aws:elasticfilesystem:region:account-id:file-system/file-system-id . Example with sample data: arn:aws:elasticfilesystem:us-west-2:1111333322228888:file-system/fs-01234567 
+     */
+    FileSystemArn?: FileSystemArn;
     /**
      * The time that the file system was created, in seconds (since 1970-01-01T00:00:00Z).
      */
@@ -707,6 +746,10 @@ declare namespace EFS {
      * The name of the Availability Zone (AZ) that the mount target resides in. AZs are independently mapped to names for each AWS account. For example, the Availability Zone us-east-1a for your AWS account might not be the same location as us-east-1a for another AWS account.
      */
     AvailabilityZoneName?: AvailabilityZoneName;
+    /**
+     * The Virtual Private Cloud (VPC) ID that the mount target is configured in.
+     */
+    VpcId?: VpcId;
   }
   export type MountTargetDescriptions = MountTargetDescription[];
   export type MountTargetId = string;
@@ -733,6 +776,16 @@ declare namespace EFS {
     SecondaryGids?: SecondaryGids;
   }
   export type ProvisionedThroughputInMibps = number;
+  export interface PutBackupPolicyRequest {
+    /**
+     * Specifies which EFS file system to update the backup policy for.
+     */
+    FileSystemId: FileSystemId;
+    /**
+     * The backup policy included in the PutBackupPolicy request.
+     */
+    BackupPolicy: BackupPolicy;
+  }
   export interface PutFileSystemPolicyRequest {
     /**
      * The ID of the EFS file system that you want to create or update the FileSystemPolicy for.
@@ -771,6 +824,7 @@ declare namespace EFS {
   export type SecondaryGids = Gid[];
   export type SecurityGroup = string;
   export type SecurityGroups = SecurityGroup[];
+  export type Status = "ENABLED"|"ENABLING"|"DISABLED"|"DISABLING"|string;
   export type SubnetId = string;
   export interface Tag {
     /**
@@ -825,6 +879,7 @@ declare namespace EFS {
      */
     ProvisionedThroughputInMibps?: ProvisionedThroughputInMibps;
   }
+  export type VpcId = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
