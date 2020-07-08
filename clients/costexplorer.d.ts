@@ -92,11 +92,11 @@ declare class CostExplorer extends Service {
    */
   getReservationUtilization(callback?: (err: AWSError, data: CostExplorer.Types.GetReservationUtilizationResponse) => void): Request<CostExplorer.Types.GetReservationUtilizationResponse, AWSError>;
   /**
-   * Creates recommendations that helps you save cost by identifying idle and underutilized Amazon EC2 instances. Recommendations are generated to either downsize or terminate instances, along with providing savings detail and metrics. For details on calculation and function, see Optimizing Your Cost with Rightsizing Recommendations.
+   * Creates recommendations that help you save cost by identifying idle and underutilized Amazon EC2 instances. Recommendations are generated to either downsize or terminate instances, along with providing savings detail and metrics. For details on calculation and function, see Optimizing Your Cost with Rightsizing Recommendations in the AWS Billing and Cost Management User Guide.
    */
   getRightsizingRecommendation(params: CostExplorer.Types.GetRightsizingRecommendationRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetRightsizingRecommendationResponse) => void): Request<CostExplorer.Types.GetRightsizingRecommendationResponse, AWSError>;
   /**
-   * Creates recommendations that helps you save cost by identifying idle and underutilized Amazon EC2 instances. Recommendations are generated to either downsize or terminate instances, along with providing savings detail and metrics. For details on calculation and function, see Optimizing Your Cost with Rightsizing Recommendations.
+   * Creates recommendations that help you save cost by identifying idle and underutilized Amazon EC2 instances. Recommendations are generated to either downsize or terminate instances, along with providing savings detail and metrics. For details on calculation and function, see Optimizing Your Cost with Rightsizing Recommendations in the AWS Billing and Cost Management User Guide.
    */
   getRightsizingRecommendation(callback?: (err: AWSError, data: CostExplorer.Types.GetRightsizingRecommendationResponse) => void): Request<CostExplorer.Types.GetRightsizingRecommendationResponse, AWSError>;
   /**
@@ -328,6 +328,10 @@ declare namespace CostExplorer {
      * Resource ID of the current instance.
      */
     ResourceId?: GenericString;
+    /**
+     * The name you've given an instance. This field will show as blank if you haven't given the instance a name.
+     */
+    InstanceName?: GenericString;
     /**
      * Cost allocation resource tags applied to the instance.
      */
@@ -903,7 +907,7 @@ declare namespace CostExplorer {
   export interface GetRightsizingRecommendationRequest {
     Filter?: Expression;
     /**
-     *  Enables you to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings associated with recommendations with consideration of existing Savings Plans or RI benefits, or niether. 
+     *  Enables you to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings associated with recommendations with consideration of existing Savings Plans or RI benefits, or neither. 
      */
     Configuration?: RightsizingRecommendationConfiguration;
     /**
@@ -937,7 +941,7 @@ declare namespace CostExplorer {
      */
     NextPageToken?: NextPageToken;
     /**
-     * Enables you to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings associated with recommendations with consideration of existing Savings Plans or RI benefits, or niether. 
+     *  Enables you to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings associated with recommendations with consideration of existing Savings Plans or RI benefits, or neither. 
      */
     Configuration?: RightsizingRecommendationConfiguration;
   }
@@ -987,7 +991,7 @@ declare namespace CostExplorer {
      */
     SavingsPlansType: SupportedSavingsPlansType;
     /**
-     * The savings plan recommendation term used to generated these recommendations.
+     * The savings plan recommendation term used to generate these recommendations.
      */
     TermInYears: TermInYears;
     /**
@@ -1623,7 +1627,7 @@ declare namespace CostExplorer {
      */
     RecommendationId?: GenericString;
     /**
-     *  The time stamp for when Amazon Web Services made this recommendation.
+     *  The timestamp for when Amazon Web Services made this recommendation.
      */
     GenerationTimestamp?: GenericString;
     /**
@@ -1645,7 +1649,7 @@ declare namespace CostExplorer {
      */
     SavingsCurrencyCode?: GenericString;
     /**
-     *  Savings percentage based on the recommended modifications, relative to the total On Demand costs associated with these instances.
+     *  Savings percentage based on the recommended modifications, relative to the total On-Demand costs associated with these instances.
      */
     SavingsPercentage?: GenericString;
   }

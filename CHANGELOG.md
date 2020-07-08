@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.711.0-->
+<!--LATEST=2.712.0-->
 <!--ENTRYINSERT-->
+
+## 2.712.0
+* feature: CostExplorer: Customers can now see Instance Name alongside each rightsizing recommendation.
+* feature: EC2: EC2 Spot now enables customers to tag their Spot Instances Requests on creation.
+* feature: ForecastService: With this release, Amazon Forecast now supports the ability to add a tag to any resource via the launch of three new APIs: TagResouce, UntagResource and ListTagsForResource. A tag is a simple label consisting of a customer-defined key and an optional value allowing for easier resource management.
+* feature: Organizations: AI services opt out policies enable you to control what AI service data is collected and stored for the accounts in your organization. By default, AWS artificial intelligence (AI) services collect and store data as part of operating and supporting the continuous improvement life cycle for each service. You can use these policies to opt out of this process for all of your AWS accounts to ensure that your data is not persisted within AWS AI service data stores or used for service improvements.
 
 ## 2.711.0
 * feature: CloudFront: Amazon CloudFront adds support for a new security policy, TLSv1.2_2019.

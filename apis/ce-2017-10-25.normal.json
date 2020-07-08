@@ -290,7 +290,7 @@
           "shape": "InvalidNextTokenException"
         }
       ],
-      "documentation": "<p>Creates recommendations that helps you save cost by identifying idle and underutilized Amazon EC2 instances.</p> <p>Recommendations are generated to either downsize or terminate instances, along with providing savings detail and metrics. For details on calculation and function, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-what-is.html\">Optimizing Your Cost with Rightsizing Recommendations</a>.</p>"
+      "documentation": "<p>Creates recommendations that help you save cost by identifying idle and underutilized Amazon EC2 instances.</p> <p>Recommendations are generated to either downsize or terminate instances, along with providing savings detail and metrics. For details on calculation and function, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-rightsizing.html\">Optimizing Your Cost with Rightsizing Recommendations</a> in the <i>AWS Billing and Cost Management User Guide</i>.</p>"
     },
     "GetSavingsPlansCoverage": {
       "name": "GetSavingsPlansCoverage",
@@ -801,6 +801,10 @@
         "ResourceId": {
           "shape": "GenericString",
           "documentation": "<p>Resource ID of the current instance.</p>"
+        },
+        "InstanceName": {
+          "shape": "GenericString",
+          "documentation": "<p>The name you've given an instance. This field will show as blank if you haven't given the instance a name.</p>"
         },
         "Tags": {
           "shape": "TagValuesList",
@@ -1592,7 +1596,7 @@
         },
         "Configuration": {
           "shape": "RightsizingRecommendationConfiguration",
-          "documentation": "<p> Enables you to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings associated with recommendations with consideration of existing Savings Plans or RI benefits, or niether. </p>"
+          "documentation": "<p> Enables you to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings associated with recommendations with consideration of existing Savings Plans or RI benefits, or neither. </p>"
         },
         "Service": {
           "shape": "GenericString",
@@ -1629,7 +1633,7 @@
         },
         "Configuration": {
           "shape": "RightsizingRecommendationConfiguration",
-          "documentation": "<p>Enables you to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings associated with recommendations with consideration of existing Savings Plans or RI benefits, or niether. </p>"
+          "documentation": "<p> Enables you to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings associated with recommendations with consideration of existing Savings Plans or RI benefits, or neither. </p>"
         }
       }
     },
@@ -1701,7 +1705,7 @@
         },
         "TermInYears": {
           "shape": "TermInYears",
-          "documentation": "<p>The savings plan recommendation term used to generated these recommendations.</p>"
+          "documentation": "<p>The savings plan recommendation term used to generate these recommendations.</p>"
         },
         "PaymentOption": {
           "shape": "PaymentOption",
@@ -2648,7 +2652,7 @@
           "documentation": "<p> The option to consider RI or Savings Plans discount benefits in your savings calculation. The default value is <code>TRUE</code>. </p>"
         }
       },
-      "documentation": "<p> Enables you to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings associated with recommendations with consideration of existing Savings Plans or RI benefits, or niether. </p>"
+      "documentation": "<p> Enables you to customize recommendations across two attributes. You can choose to view recommendations for instances within the same instance families or across different instance families. You can also choose to view your estimated savings associated with recommendations with consideration of existing Savings Plans or RI benefits, or neither. </p>"
     },
     "RightsizingRecommendationList": {
       "type": "list",
@@ -2665,7 +2669,7 @@
         },
         "GenerationTimestamp": {
           "shape": "GenericString",
-          "documentation": "<p> The time stamp for when Amazon Web Services made this recommendation.</p>"
+          "documentation": "<p> The timestamp for when Amazon Web Services made this recommendation.</p>"
         },
         "LookbackPeriodInDays": {
           "shape": "LookbackPeriodInDays",
@@ -2691,7 +2695,7 @@
         },
         "SavingsPercentage": {
           "shape": "GenericString",
-          "documentation": "<p> Savings percentage based on the recommended modifications, relative to the total On Demand costs associated with these instances.</p>"
+          "documentation": "<p> Savings percentage based on the recommended modifications, relative to the total On-Demand costs associated with these instances.</p>"
         }
       },
       "documentation": "<p> Summary of rightsizing recommendations </p>"

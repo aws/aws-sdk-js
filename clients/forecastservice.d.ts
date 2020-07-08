@@ -28,27 +28,27 @@ declare class ForecastService extends Service {
    */
   createDatasetGroup(callback?: (err: AWSError, data: ForecastService.Types.CreateDatasetGroupResponse) => void): Request<ForecastService.Types.CreateDatasetGroupResponse, AWSError>;
   /**
-   * Imports your training data to an Amazon Forecast dataset. You provide the location of your training data in an Amazon Simple Storage Service (Amazon S3) bucket and the Amazon Resource Name (ARN) of the dataset that you want to import the data to. You must specify a DataSource object that includes an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the data. For more information, see aws-forecast-iam-roles. The training data must be in CSV format. The delimiter must be a comma (,). You can specify the path to a specific CSV file, the S3 bucket, or to a folder in the S3 bucket. For the latter two cases, Amazon Forecast imports all files up to the limit of 10,000 files. To get a list of all your dataset import jobs, filtered by specified criteria, use the ListDatasetImportJobs operation.
+   * Imports your training data to an Amazon Forecast dataset. You provide the location of your training data in an Amazon Simple Storage Service (Amazon S3) bucket and the Amazon Resource Name (ARN) of the dataset that you want to import the data to. You must specify a DataSource object that includes an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the data, as Amazon Forecast makes a copy of your data and processes it in an internal AWS system. For more information, see aws-forecast-iam-roles. The training data must be in CSV format. The delimiter must be a comma (,). You can specify the path to a specific CSV file, the S3 bucket, or to a folder in the S3 bucket. For the latter two cases, Amazon Forecast imports all files up to the limit of 10,000 files. Because dataset imports are not aggregated, your most recent dataset import is the one that is used when training a predictor or generating a forecast. Make sure that your most recent dataset import contains all of the data you want to model off of, and not just the new data collected since the previous import. To get a list of all your dataset import jobs, filtered by specified criteria, use the ListDatasetImportJobs operation.
    */
   createDatasetImportJob(params: ForecastService.Types.CreateDatasetImportJobRequest, callback?: (err: AWSError, data: ForecastService.Types.CreateDatasetImportJobResponse) => void): Request<ForecastService.Types.CreateDatasetImportJobResponse, AWSError>;
   /**
-   * Imports your training data to an Amazon Forecast dataset. You provide the location of your training data in an Amazon Simple Storage Service (Amazon S3) bucket and the Amazon Resource Name (ARN) of the dataset that you want to import the data to. You must specify a DataSource object that includes an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the data. For more information, see aws-forecast-iam-roles. The training data must be in CSV format. The delimiter must be a comma (,). You can specify the path to a specific CSV file, the S3 bucket, or to a folder in the S3 bucket. For the latter two cases, Amazon Forecast imports all files up to the limit of 10,000 files. To get a list of all your dataset import jobs, filtered by specified criteria, use the ListDatasetImportJobs operation.
+   * Imports your training data to an Amazon Forecast dataset. You provide the location of your training data in an Amazon Simple Storage Service (Amazon S3) bucket and the Amazon Resource Name (ARN) of the dataset that you want to import the data to. You must specify a DataSource object that includes an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the data, as Amazon Forecast makes a copy of your data and processes it in an internal AWS system. For more information, see aws-forecast-iam-roles. The training data must be in CSV format. The delimiter must be a comma (,). You can specify the path to a specific CSV file, the S3 bucket, or to a folder in the S3 bucket. For the latter two cases, Amazon Forecast imports all files up to the limit of 10,000 files. Because dataset imports are not aggregated, your most recent dataset import is the one that is used when training a predictor or generating a forecast. Make sure that your most recent dataset import contains all of the data you want to model off of, and not just the new data collected since the previous import. To get a list of all your dataset import jobs, filtered by specified criteria, use the ListDatasetImportJobs operation.
    */
   createDatasetImportJob(callback?: (err: AWSError, data: ForecastService.Types.CreateDatasetImportJobResponse) => void): Request<ForecastService.Types.CreateDatasetImportJobResponse, AWSError>;
   /**
-   * Creates a forecast for each item in the TARGET_TIME_SERIES dataset that was used to train the predictor. This is known as inference. To retrieve the forecast for a single item at low latency, use the operation. To export the complete forecast into your Amazon Simple Storage Service (Amazon S3) bucket, use the CreateForecastExportJob operation. The range of the forecast is determined by the ForecastHorizon value, which you specify in the CreatePredictor request, multiplied by the DataFrequency value, which you specify in the CreateDataset request. When you query a forecast, you can request a specific date range within the forecast. To get a list of all your forecasts, use the ListForecasts operation.  The forecasts generated by Amazon Forecast are in the same time zone as the dataset that was used to create the predictor.  For more information, see howitworks-forecast.  The Status of the forecast must be ACTIVE before you can query or export the forecast. Use the DescribeForecast operation to get the status. 
+   * Creates a forecast for each item in the TARGET_TIME_SERIES dataset that was used to train the predictor. This is known as inference. To retrieve the forecast for a single item at low latency, use the operation. To export the complete forecast into your Amazon Simple Storage Service (Amazon S3) bucket, use the CreateForecastExportJob operation. The range of the forecast is determined by the ForecastHorizon value, which you specify in the CreatePredictor request. When you query a forecast, you can request a specific date range within the forecast. To get a list of all your forecasts, use the ListForecasts operation.  The forecasts generated by Amazon Forecast are in the same time zone as the dataset that was used to create the predictor.  For more information, see howitworks-forecast.  The Status of the forecast must be ACTIVE before you can query or export the forecast. Use the DescribeForecast operation to get the status. 
    */
   createForecast(params: ForecastService.Types.CreateForecastRequest, callback?: (err: AWSError, data: ForecastService.Types.CreateForecastResponse) => void): Request<ForecastService.Types.CreateForecastResponse, AWSError>;
   /**
-   * Creates a forecast for each item in the TARGET_TIME_SERIES dataset that was used to train the predictor. This is known as inference. To retrieve the forecast for a single item at low latency, use the operation. To export the complete forecast into your Amazon Simple Storage Service (Amazon S3) bucket, use the CreateForecastExportJob operation. The range of the forecast is determined by the ForecastHorizon value, which you specify in the CreatePredictor request, multiplied by the DataFrequency value, which you specify in the CreateDataset request. When you query a forecast, you can request a specific date range within the forecast. To get a list of all your forecasts, use the ListForecasts operation.  The forecasts generated by Amazon Forecast are in the same time zone as the dataset that was used to create the predictor.  For more information, see howitworks-forecast.  The Status of the forecast must be ACTIVE before you can query or export the forecast. Use the DescribeForecast operation to get the status. 
+   * Creates a forecast for each item in the TARGET_TIME_SERIES dataset that was used to train the predictor. This is known as inference. To retrieve the forecast for a single item at low latency, use the operation. To export the complete forecast into your Amazon Simple Storage Service (Amazon S3) bucket, use the CreateForecastExportJob operation. The range of the forecast is determined by the ForecastHorizon value, which you specify in the CreatePredictor request. When you query a forecast, you can request a specific date range within the forecast. To get a list of all your forecasts, use the ListForecasts operation.  The forecasts generated by Amazon Forecast are in the same time zone as the dataset that was used to create the predictor.  For more information, see howitworks-forecast.  The Status of the forecast must be ACTIVE before you can query or export the forecast. Use the DescribeForecast operation to get the status. 
    */
   createForecast(callback?: (err: AWSError, data: ForecastService.Types.CreateForecastResponse) => void): Request<ForecastService.Types.CreateForecastResponse, AWSError>;
   /**
-   * Exports a forecast created by the CreateForecast operation to your Amazon Simple Storage Service (Amazon S3) bucket. The forecast file name will match the following conventions: &lt;ForecastExportJobName&gt;_&lt;ExportTimestamp&gt;_&lt;PageNumber&gt; where the &lt;ExportTimestamp&gt; component is in Java SimpleDateFormat (yyyy-MM-ddTHH-mm-ssZ). You must specify a DataDestination object that includes an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the Amazon S3 bucket. For more information, see aws-forecast-iam-roles. For more information, see howitworks-forecast. To get a list of all your forecast export jobs, use the ListForecastExportJobs operation.  The Status of the forecast export job must be ACTIVE before you can access the forecast in your Amazon S3 bucket. To get the status, use the DescribeForecastExportJob operation. 
+   * Exports a forecast created by the CreateForecast operation to your Amazon Simple Storage Service (Amazon S3) bucket. The forecast file name will match the following conventions: &lt;ForecastExportJobName&gt;_&lt;ExportTimestamp&gt;_&lt;PartNumber&gt; where the &lt;ExportTimestamp&gt; component is in Java SimpleDateFormat (yyyy-MM-ddTHH-mm-ssZ). You must specify a DataDestination object that includes an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the Amazon S3 bucket. For more information, see aws-forecast-iam-roles. For more information, see howitworks-forecast. To get a list of all your forecast export jobs, use the ListForecastExportJobs operation.  The Status of the forecast export job must be ACTIVE before you can access the forecast in your Amazon S3 bucket. To get the status, use the DescribeForecastExportJob operation. 
    */
   createForecastExportJob(params: ForecastService.Types.CreateForecastExportJobRequest, callback?: (err: AWSError, data: ForecastService.Types.CreateForecastExportJobResponse) => void): Request<ForecastService.Types.CreateForecastExportJobResponse, AWSError>;
   /**
-   * Exports a forecast created by the CreateForecast operation to your Amazon Simple Storage Service (Amazon S3) bucket. The forecast file name will match the following conventions: &lt;ForecastExportJobName&gt;_&lt;ExportTimestamp&gt;_&lt;PageNumber&gt; where the &lt;ExportTimestamp&gt; component is in Java SimpleDateFormat (yyyy-MM-ddTHH-mm-ssZ). You must specify a DataDestination object that includes an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the Amazon S3 bucket. For more information, see aws-forecast-iam-roles. For more information, see howitworks-forecast. To get a list of all your forecast export jobs, use the ListForecastExportJobs operation.  The Status of the forecast export job must be ACTIVE before you can access the forecast in your Amazon S3 bucket. To get the status, use the DescribeForecastExportJob operation. 
+   * Exports a forecast created by the CreateForecast operation to your Amazon Simple Storage Service (Amazon S3) bucket. The forecast file name will match the following conventions: &lt;ForecastExportJobName&gt;_&lt;ExportTimestamp&gt;_&lt;PartNumber&gt; where the &lt;ExportTimestamp&gt; component is in Java SimpleDateFormat (yyyy-MM-ddTHH-mm-ssZ). You must specify a DataDestination object that includes an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the Amazon S3 bucket. For more information, see aws-forecast-iam-roles. For more information, see howitworks-forecast. To get a list of all your forecast export jobs, use the ListForecastExportJobs operation.  The Status of the forecast export job must be ACTIVE before you can access the forecast in your Amazon S3 bucket. To get the status, use the DescribeForecastExportJob operation. 
    */
   createForecastExportJob(callback?: (err: AWSError, data: ForecastService.Types.CreateForecastExportJobResponse) => void): Request<ForecastService.Types.CreateForecastExportJobResponse, AWSError>;
   /**
@@ -60,11 +60,11 @@ declare class ForecastService extends Service {
    */
   createPredictor(callback?: (err: AWSError, data: ForecastService.Types.CreatePredictorResponse) => void): Request<ForecastService.Types.CreatePredictorResponse, AWSError>;
   /**
-   * Deletes an Amazon Forecast dataset that was created using the CreateDataset operation. You can only delete datasets that have a status of ACTIVE or CREATE_FAILED. To get the status use the DescribeDataset operation.
+   * Deletes an Amazon Forecast dataset that was created using the CreateDataset operation. You can only delete datasets that have a status of ACTIVE or CREATE_FAILED. To get the status use the DescribeDataset operation.  Forecast does not automatically update any dataset groups that contain the deleted dataset. In order to update the dataset group, use the operation, omitting the deleted dataset's ARN. 
    */
   deleteDataset(params: ForecastService.Types.DeleteDatasetRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an Amazon Forecast dataset that was created using the CreateDataset operation. You can only delete datasets that have a status of ACTIVE or CREATE_FAILED. To get the status use the DescribeDataset operation.
+   * Deletes an Amazon Forecast dataset that was created using the CreateDataset operation. You can only delete datasets that have a status of ACTIVE or CREATE_FAILED. To get the status use the DescribeDataset operation.  Forecast does not automatically update any dataset groups that contain the deleted dataset. In order to update the dataset group, use the operation, omitting the deleted dataset's ARN. 
    */
   deleteDataset(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -212,6 +212,30 @@ declare class ForecastService extends Service {
    */
   listPredictors(callback?: (err: AWSError, data: ForecastService.Types.ListPredictorsResponse) => void): Request<ForecastService.Types.ListPredictorsResponse, AWSError>;
   /**
+   * Lists the tags for an Amazon Forecast resource.
+   */
+  listTagsForResource(params: ForecastService.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: ForecastService.Types.ListTagsForResourceResponse) => void): Request<ForecastService.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists the tags for an Amazon Forecast resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: ForecastService.Types.ListTagsForResourceResponse) => void): Request<ForecastService.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are also deleted.
+   */
+  tagResource(params: ForecastService.Types.TagResourceRequest, callback?: (err: AWSError, data: ForecastService.Types.TagResourceResponse) => void): Request<ForecastService.Types.TagResourceResponse, AWSError>;
+  /**
+   * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are also deleted.
+   */
+  tagResource(callback?: (err: AWSError, data: ForecastService.Types.TagResourceResponse) => void): Request<ForecastService.Types.TagResourceResponse, AWSError>;
+  /**
+   * Deletes the specified tags from a resource.
+   */
+  untagResource(params: ForecastService.Types.UntagResourceRequest, callback?: (err: AWSError, data: ForecastService.Types.UntagResourceResponse) => void): Request<ForecastService.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Deletes the specified tags from a resource.
+   */
+  untagResource(callback?: (err: AWSError, data: ForecastService.Types.UntagResourceResponse) => void): Request<ForecastService.Types.UntagResourceResponse, AWSError>;
+  /**
    * Replaces the datasets in a dataset group with the specified datasets.  The Status of the dataset group must be ACTIVE before you can use the dataset group to create a predictor. Use the DescribeDatasetGroup operation to get the status. 
    */
   updateDatasetGroup(params: ForecastService.Types.UpdateDatasetGroupRequest, callback?: (err: AWSError, data: ForecastService.Types.UpdateDatasetGroupResponse) => void): Request<ForecastService.Types.UpdateDatasetGroupResponse, AWSError>;
@@ -268,6 +292,10 @@ declare namespace ForecastService {
      * An array of Amazon Resource Names (ARNs) of the datasets that you want to include in the dataset group.
      */
     DatasetArns?: ArnList;
+    /**
+     * The optional metadata that you apply to the dataset group to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50.   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8.   Maximum value length - 256 Unicode characters in UTF-8.   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.  
+     */
+    Tags?: Tags;
   }
   export interface CreateDatasetGroupResponse {
     /**
@@ -292,6 +320,10 @@ declare namespace ForecastService {
      * The format of timestamps in the dataset. The format that you specify depends on the DataFrequency specified when the dataset was created. The following formats are supported   "yyyy-MM-dd" For the following data frequencies: Y, M, W, and D   "yyyy-MM-dd HH:mm:ss" For the following data frequencies: H, 30min, 15min, and 1min; and optionally, for: Y, M, W, and D   If the format isn't specified, Amazon Forecast expects the format to be "yyyy-MM-dd HH:mm:ss".
      */
     TimestampFormat?: TimestampFormat;
+    /**
+     * The optional metadata that you apply to the dataset import job to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50.   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8.   Maximum value length - 256 Unicode characters in UTF-8.   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.  
+     */
+    Tags?: Tags;
   }
   export interface CreateDatasetImportJobResponse {
     /**
@@ -324,6 +356,10 @@ declare namespace ForecastService {
      * An AWS Key Management Service (KMS) key and the AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the key.
      */
     EncryptionConfig?: EncryptionConfig;
+    /**
+     * The optional metadata that you apply to the dataset to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50.   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8.   Maximum value length - 256 Unicode characters in UTF-8.   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.  
+     */
+    Tags?: Tags;
   }
   export interface CreateDatasetResponse {
     /**
@@ -344,6 +380,10 @@ declare namespace ForecastService {
      * The location where you want to save the forecast and an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the location. The forecast must be exported to an Amazon S3 bucket. If encryption is used, Destination must include an AWS Key Management Service (KMS) key. The IAM role must allow Amazon Forecast permission to access the key.
      */
     Destination: DataDestination;
+    /**
+     * The optional metadata that you apply to the forecast export job to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50.   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8.   Maximum value length - 256 Unicode characters in UTF-8.   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.  
+     */
+    Tags?: Tags;
   }
   export interface CreateForecastExportJobResponse {
     /**
@@ -361,9 +401,13 @@ declare namespace ForecastService {
      */
     PredictorArn: Arn;
     /**
-     * The quantiles at which probabilistic forecasts are generated. You can specify up to 5 quantiles per forecast. Accepted values include 0.01 to 0.99 (increments of .01 only) and mean. The mean forecast is different from the median (0.50) when the distribution is not symmetric (e.g. Beta, Negative Binomial). The default value is ["0.1", "0.5", "0.9"].
+     * The quantiles at which probabilistic forecasts are generated. You can currently specify up to 5 quantiles per forecast. Accepted values include 0.01 to 0.99 (increments of .01 only) and mean. The mean forecast is different from the median (0.50) when the distribution is not symmetric (for example, Beta and Negative Binomial). The default value is ["0.1", "0.5", "0.9"].
      */
     ForecastTypes?: ForecastTypes;
+    /**
+     * The optional metadata that you apply to the forecast to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50.   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8.   Maximum value length - 256 Unicode characters in UTF-8.   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.  
+     */
+    Tags?: Tags;
   }
   export interface CreateForecastResponse {
     /**
@@ -416,6 +460,10 @@ declare namespace ForecastService {
      * An AWS Key Management Service (KMS) key and the AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the key.
      */
     EncryptionConfig?: EncryptionConfig;
+    /**
+     * The optional metadata that you apply to the predictor to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50.   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8.   Maximum value length - 256 Unicode characters in UTF-8.   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.  
+     */
+    Tags?: Tags;
   }
   export interface CreatePredictorResponse {
     /**
@@ -741,7 +789,7 @@ declare namespace ForecastService {
      */
     ForecastName?: Name;
     /**
-     * The quantiles at which proababilistic forecasts were generated.
+     * The quantiles at which probabilistic forecasts were generated.
      */
     ForecastTypes?: ForecastTypes;
     /**
@@ -889,7 +937,7 @@ declare namespace ForecastService {
   export type EvaluationType = "SUMMARY"|"COMPUTED"|string;
   export interface Featurization {
     /**
-     * The name of the schema attribute that specifies the data field to be featurized. Only the target field of the TARGET_TIME_SERIES dataset type is supported. For example, for the RETAIL domain, the target is demand, and for the CUSTOM domain, the target is target_value.
+     * The name of the schema attribute that specifies the data field to be featurized. Amazon Forecast supports the target field of the TARGET_TIME_SERIES and the RELATED_TIME_SERIES datasets. For example, for the RETAIL domain, the target is demand, and for the CUSTOM domain, the target is target_value. For more information, see howitworks-missing-values.
      */
     AttributeName: Name;
     /**
@@ -907,7 +955,7 @@ declare namespace ForecastService {
      */
     ForecastDimensions?: ForecastDimensions;
     /**
-     * An array of featurization (transformation) information for the fields of a dataset. Only a single featurization is supported.
+     * An array of featurization (transformation) information for the fields of a dataset.
      */
     Featurizations?: Featurizations;
   }
@@ -917,7 +965,7 @@ declare namespace ForecastService {
      */
     FeaturizationMethodName: FeaturizationMethodName;
     /**
-     * The method parameters (key-value pairs). Specify these parameters to override the default values. The following list shows the parameters and their valid values. Bold signifies the default value.    aggregation: sum, avg, first, min, max     frontfill: none     middlefill: zero, nan (not a number)    backfill: zero, nan   
+     * The method parameters (key-value pairs), which are a map of override parameters. Specify these parameters to override the default values. Related Time Series attributes do not accept aggregation parameters. The following list shows the parameters and their valid values for the "filling" featurization method for a Target Time Series dataset. Bold signifies the default value.    aggregation: sum, avg, first, min, max     frontfill: none     middlefill: zero, nan (not a number), value, median, mean, min, max     backfill: zero, nan, value, median, mean, min, max    The following list shows the parameters and their valid values for a Related Time Series featurization method (there are no defaults):    middlefill: zero, value, median, mean, min, max     backfill: zero, value, median, mean, min, max     futurefill: zero, value, median, mean, min, max   
      */
     FeaturizationMethodParameters?: FeaturizationMethodParameters;
   }
@@ -1197,6 +1245,18 @@ declare namespace ForecastService {
      */
     NextToken?: NextToken;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resources are Forecast dataset groups, datasets, dataset import jobs, predictors, forecasts, and forecast export jobs.
+     */
+    ResourceArn: Arn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The tags for the resource.
+     */
+    Tags?: Tags;
+  }
   export type MaxResults = number;
   export type Message = string;
   export interface Metrics {
@@ -1351,11 +1411,37 @@ declare namespace ForecastService {
      */
     Name: Name;
     /**
-     * One of the following 2 letter country codes:   "AU" - AUSTRALIA   "DE" - GERMANY   "JP" - JAPAN   "US" - UNITED_STATES   "UK" - UNITED_KINGDOM  
+     * One of the following 2 letter country codes:   "AR" - ARGENTINA   "AT" - AUSTRIA   "AU" - AUSTRALIA   "BE" - BELGIUM   "BR" - BRAZIL   "CA" - CANADA   "CN" - CHINA   "CZ" - CZECH REPUBLIC   "DK" - DENMARK   "EC" - ECUADOR   "FI" - FINLAND   "FR" - FRANCE   "DE" - GERMANY   "HU" - HUNGARY   "IE" - IRELAND   "IN" - INDIA   "IT" - ITALY   "JP" - JAPAN   "KR" - KOREA   "LU" - LUXEMBOURG   "MX" - MEXICO   "NL" - NETHERLANDS   "NO" - NORWAY   "PL" - POLAND   "PT" - PORTUGAL   "RU" - RUSSIA   "ZA" - SOUTH AFRICA   "ES" - SPAIN   "SE" - SWEDEN   "CH" - SWITZERLAND   "US" - UNITED STATES   "UK" - UNITED KINGDOM  
      */
     Value: Value;
   }
   export type SupplementaryFeatures = SupplementaryFeature[];
+  export interface Tag {
+    /**
+     * One part of a key-value pair that makes up a tag. A key is a general label that acts like a category for more specific tag values.
+     */
+    Key: TagKey;
+    /**
+     * The optional part of a key-value pair that makes up a tag. A value acts as a descriptor within a tag category (key).
+     */
+    Value: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeys = TagKey[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resources are Forecast dataset groups, datasets, dataset import jobs, predictors, forecasts, and forecast export jobs.
+     */
+    ResourceArn: Arn;
+    /**
+     * The tags to add to the resource. A tag is an array of key-value pairs. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50.   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8.   Maximum value length - 256 Unicode characters in UTF-8.   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.  
+     */
+    Tags: Tags;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
+  export type Tags = Tag[];
   export type TestWindowDetails = TestWindowSummary[];
   export interface TestWindowSummary {
     /**
@@ -1379,6 +1465,18 @@ declare namespace ForecastService {
   export type Timestamp = Date;
   export type TimestampFormat = string;
   export type TrainingParameters = {[key: string]: ParameterValue};
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resources are Forecast dataset groups, datasets, dataset import jobs, predictors, forecasts, and forecast exports.
+     */
+    ResourceArn: Arn;
+    /**
+     * The keys of the tags to be removed.
+     */
+    TagKeys: TagKeys;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateDatasetGroupRequest {
     /**
      * The ARN of the dataset group.

@@ -112,7 +112,7 @@
           "shape": "PolicyChangesInProgressException"
         }
       ],
-      "documentation": "<p>Attaches a policy to a root, an organizational unit (OU), or an individual account. How the policy affects accounts depends on the type of policy. Refer to the <i>AWS Organizations User Guide</i> for information about each policy type:</p> <ul> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html\">BACKUP_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html\">SERVICE_CONTROL_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html\">TAG_POLICY</a> </p> </li> </ul> <p>This operation can be called only from the organization's master account.</p>"
+      "documentation": "<p>Attaches a policy to a root, an organizational unit (OU), or an individual account. How the policy affects accounts depends on the type of policy. Refer to the <i>AWS Organizations User Guide</i> for information about each policy type:</p> <ul> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html\">AISERVICES_OPT_OUT_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html\">BACKUP_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html\">SERVICE_CONTROL_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html\">TAG_POLICY</a> </p> </li> </ul> <p>This operation can be called only from the organization's master account.</p>"
     },
     "CancelHandshake": {
       "name": "CancelHandshake",
@@ -2386,7 +2386,7 @@
         },
         "Type": {
           "shape": "PolicyType",
-          "documentation": "<p>The type of policy to create. You can specify one of the following values:</p> <ul> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html\">BACKUP_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html\">SERVICE_CONTROL_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html\">TAG_POLICY</a> </p> </li> </ul>"
+          "documentation": "<p>The type of policy to create. You can specify one of the following values:</p> <ul> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html\">AISERVICES_OPT_OUT_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html\">BACKUP_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html\">SERVICE_CONTROL_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html\">TAG_POLICY</a> </p> </li> </ul>"
         }
       }
     },
@@ -2575,7 +2575,7 @@
       "members": {
         "PolicyType": {
           "shape": "EffectivePolicyType",
-          "documentation": "<p>The type of policy that you want information about. You can specify one of the following values:</p> <ul> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html\">BACKUP_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html\">TAG_POLICY</a> </p> </li> </ul>"
+          "documentation": "<p>The type of policy that you want information about. You can specify one of the following values:</p> <ul> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html\">AISERVICES_OPT_OUT_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html\">BACKUP_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html\">TAG_POLICY</a> </p> </li> </ul>"
         },
         "TargetId": {
           "shape": "PolicyTargetId",
@@ -2618,7 +2618,7 @@
       "members": {
         "Organization": {
           "shape": "Organization",
-          "documentation": "<p>A structure that contains information about the organization.</p>"
+          "documentation": "<p>A structure that contains information about the organization.</p> <important> <p>The <code>AvailablePolicyTypes</code> part of the response is deprecated, and you shouldn't use it in your apps. It doesn't include any policy type supported by Organizations other than SCPs. To determine which policy types are enabled in your organization, use the <code> <a>ListRoots</a> </code> operation.</p> </important>"
         }
       }
     },
@@ -2706,7 +2706,7 @@
         },
         "PolicyType": {
           "shape": "PolicyType",
-          "documentation": "<p>The policy type that you want to disable in this root. You can specify one of the following values:</p> <ul> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html\">BACKUP_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html\">SERVICE_CONTROL_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html\">TAG_POLICY</a> </p> </li> </ul>"
+          "documentation": "<p>The policy type that you want to disable in this root. You can specify one of the following values:</p> <ul> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html\">AISERVICES_OPT_OUT_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html\">BACKUP_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html\">SERVICE_CONTROL_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html\">TAG_POLICY</a> </p> </li> </ul>"
         }
       }
     },
@@ -2745,7 +2745,8 @@
       "type": "string",
       "enum": [
         "TAG_POLICY",
-        "BACKUP_POLICY"
+        "BACKUP_POLICY",
+        "AISERVICES_OPT_OUT_POLICY"
       ]
     },
     "Email": {
@@ -2793,7 +2794,7 @@
         },
         "PolicyType": {
           "shape": "PolicyType",
-          "documentation": "<p>The policy type that you want to enable. You can specify one of the following values:</p> <ul> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html\">BACKUP_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html\">SERVICE_CONTROL_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html\">TAG_POLICY</a> </p> </li> </ul>"
+          "documentation": "<p>The policy type that you want to enable. You can specify one of the following values:</p> <ul> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html\">AISERVICES_OPT_OUT_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html\">BACKUP_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html\">SERVICE_CONTROL_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html\">TAG_POLICY</a> </p> </li> </ul>"
         }
       }
     },
@@ -3381,7 +3382,7 @@
         },
         "Filter": {
           "shape": "PolicyType",
-          "documentation": "<p>The type of policy that you want to include in the returned list. You must specify one of the following values:</p> <ul> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html\">BACKUP_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html\">SERVICE_CONTROL_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html\">TAG_POLICY</a> </p> </li> </ul>"
+          "documentation": "<p>The type of policy that you want to include in the returned list. You must specify one of the following values:</p> <ul> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html\">AISERVICES_OPT_OUT_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html\">BACKUP_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html\">SERVICE_CONTROL_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html\">TAG_POLICY</a> </p> </li> </ul>"
         },
         "NextToken": {
           "shape": "NextToken",
@@ -3414,7 +3415,7 @@
       "members": {
         "Filter": {
           "shape": "PolicyType",
-          "documentation": "<p>Specifies the type of policy that you want to include in the response. You must specify one of the following values:</p> <ul> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html\">BACKUP_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html\">SERVICE_CONTROL_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html\">TAG_POLICY</a> </p> </li> </ul>"
+          "documentation": "<p>Specifies the type of policy that you want to include in the response. You must specify one of the following values:</p> <ul> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html\">AISERVICES_OPT_OUT_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html\">BACKUP_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html\">SERVICE_CONTROL_POLICY</a> </p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html\">TAG_POLICY</a> </p> </li> </ul>"
         },
         "NextToken": {
           "shape": "NextToken",
@@ -3589,7 +3590,7 @@
         },
         "AvailablePolicyTypes": {
           "shape": "PolicyTypes",
-          "documentation": "<p>A list of policy types that are enabled for this organization. For example, if your organization has all features enabled, then service control policies (SCPs) are included in the list.</p> <note> <p>Even if a policy type is shown as available in the organization, you can separately enable and disable them at the root level by using <a>EnablePolicyType</a> and <a>DisablePolicyType</a>. Use <a>ListRoots</a> to see the status of a policy type in that root.</p> </note>"
+          "documentation": "<important> <p>Do not use. This field is deprecated and doesn't provide complete information about the policies in your organization.</p> </important> <p>To determine the policies that are enabled and available for use in your organization, use the <a>ListRoots</a> operation instead.</p>"
         }
       },
       "documentation": "<p>Contains details about an organization. An organization is a collection of accounts that are centrally managed together using consolidated billing, organized hierarchically with organizational units (OUs), and controlled with policies .</p>"
@@ -3794,7 +3795,8 @@
       "enum": [
         "SERVICE_CONTROL_POLICY",
         "TAG_POLICY",
-        "BACKUP_POLICY"
+        "BACKUP_POLICY",
+        "AISERVICES_OPT_OUT_POLICY"
       ]
     },
     "PolicyTypeStatus": {

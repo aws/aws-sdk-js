@@ -20,11 +20,11 @@ declare class Organizations extends Service {
    */
   acceptHandshake(callback?: (err: AWSError, data: Organizations.Types.AcceptHandshakeResponse) => void): Request<Organizations.Types.AcceptHandshakeResponse, AWSError>;
   /**
-   * Attaches a policy to a root, an organizational unit (OU), or an individual account. How the policy affects accounts depends on the type of policy. Refer to the AWS Organizations User Guide for information about each policy type:    BACKUP_POLICY     SERVICE_CONTROL_POLICY     TAG_POLICY    This operation can be called only from the organization's master account.
+   * Attaches a policy to a root, an organizational unit (OU), or an individual account. How the policy affects accounts depends on the type of policy. Refer to the AWS Organizations User Guide for information about each policy type:    AISERVICES_OPT_OUT_POLICY     BACKUP_POLICY     SERVICE_CONTROL_POLICY     TAG_POLICY    This operation can be called only from the organization's master account.
    */
   attachPolicy(params: Organizations.Types.AttachPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Attaches a policy to a root, an organizational unit (OU), or an individual account. How the policy affects accounts depends on the type of policy. Refer to the AWS Organizations User Guide for information about each policy type:    BACKUP_POLICY     SERVICE_CONTROL_POLICY     TAG_POLICY    This operation can be called only from the organization's master account.
+   * Attaches a policy to a root, an organizational unit (OU), or an individual account. How the policy affects accounts depends on the type of policy. Refer to the AWS Organizations User Guide for information about each policy type:    AISERVICES_OPT_OUT_POLICY     BACKUP_POLICY     SERVICE_CONTROL_POLICY     TAG_POLICY    This operation can be called only from the organization's master account.
    */
   attachPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -620,7 +620,7 @@ declare namespace Organizations {
      */
     Name: PolicyName;
     /**
-     * The type of policy to create. You can specify one of the following values:    BACKUP_POLICY     SERVICE_CONTROL_POLICY     TAG_POLICY   
+     * The type of policy to create. You can specify one of the following values:    AISERVICES_OPT_OUT_POLICY     BACKUP_POLICY     SERVICE_CONTROL_POLICY     TAG_POLICY   
      */
     Type: PolicyType;
   }
@@ -736,7 +736,7 @@ declare namespace Organizations {
   }
   export interface DescribeEffectivePolicyRequest {
     /**
-     * The type of policy that you want information about. You can specify one of the following values:    BACKUP_POLICY     TAG_POLICY   
+     * The type of policy that you want information about. You can specify one of the following values:    AISERVICES_OPT_OUT_POLICY     BACKUP_POLICY     TAG_POLICY   
      */
     PolicyType: EffectivePolicyType;
     /**
@@ -764,7 +764,7 @@ declare namespace Organizations {
   }
   export interface DescribeOrganizationResponse {
     /**
-     * A structure that contains information about the organization.
+     * A structure that contains information about the organization.  The AvailablePolicyTypes part of the response is deprecated, and you shouldn't use it in your apps. It doesn't include any policy type supported by Organizations other than SCPs. To determine which policy types are enabled in your organization, use the  ListRoots  operation. 
      */
     Organization?: Organization;
   }
@@ -814,7 +814,7 @@ declare namespace Organizations {
      */
     RootId: RootId;
     /**
-     * The policy type that you want to disable in this root. You can specify one of the following values:    BACKUP_POLICY     SERVICE_CONTROL_POLICY     TAG_POLICY   
+     * The policy type that you want to disable in this root. You can specify one of the following values:    AISERVICES_OPT_OUT_POLICY     BACKUP_POLICY     SERVICE_CONTROL_POLICY     TAG_POLICY   
      */
     PolicyType: PolicyType;
   }
@@ -842,7 +842,7 @@ declare namespace Organizations {
      */
     PolicyType?: EffectivePolicyType;
   }
-  export type EffectivePolicyType = "TAG_POLICY"|"BACKUP_POLICY"|string;
+  export type EffectivePolicyType = "TAG_POLICY"|"BACKUP_POLICY"|"AISERVICES_OPT_OUT_POLICY"|string;
   export type Email = string;
   export interface EnableAWSServiceAccessRequest {
     /**
@@ -864,7 +864,7 @@ declare namespace Organizations {
      */
     RootId: RootId;
     /**
-     * The policy type that you want to enable. You can specify one of the following values:    BACKUP_POLICY     SERVICE_CONTROL_POLICY     TAG_POLICY   
+     * The policy type that you want to enable. You can specify one of the following values:    AISERVICES_OPT_OUT_POLICY     BACKUP_POLICY     SERVICE_CONTROL_POLICY     TAG_POLICY   
      */
     PolicyType: PolicyType;
   }
@@ -1248,7 +1248,7 @@ declare namespace Organizations {
      */
     TargetId: PolicyTargetId;
     /**
-     * The type of policy that you want to include in the returned list. You must specify one of the following values:    BACKUP_POLICY     SERVICE_CONTROL_POLICY     TAG_POLICY   
+     * The type of policy that you want to include in the returned list. You must specify one of the following values:    AISERVICES_OPT_OUT_POLICY     BACKUP_POLICY     SERVICE_CONTROL_POLICY     TAG_POLICY   
      */
     Filter: PolicyType;
     /**
@@ -1272,7 +1272,7 @@ declare namespace Organizations {
   }
   export interface ListPoliciesRequest {
     /**
-     * Specifies the type of policy that you want to include in the response. You must specify one of the following values:    BACKUP_POLICY     SERVICE_CONTROL_POLICY     TAG_POLICY   
+     * Specifies the type of policy that you want to include in the response. You must specify one of the following values:    AISERVICES_OPT_OUT_POLICY     BACKUP_POLICY     SERVICE_CONTROL_POLICY     TAG_POLICY   
      */
     Filter: PolicyType;
     /**
@@ -1400,7 +1400,7 @@ declare namespace Organizations {
      */
     MasterAccountEmail?: Email;
     /**
-     * A list of policy types that are enabled for this organization. For example, if your organization has all features enabled, then service control policies (SCPs) are included in the list.  Even if a policy type is shown as available in the organization, you can separately enable and disable them at the root level by using EnablePolicyType and DisablePolicyType. Use ListRoots to see the status of a policy type in that root. 
+     *  Do not use. This field is deprecated and doesn't provide complete information about the policies in your organization.  To determine the policies that are enabled and available for use in your organization, use the ListRoots operation instead.
      */
     AvailablePolicyTypes?: PolicyTypes;
   }
@@ -1500,7 +1500,7 @@ declare namespace Organizations {
     Type?: TargetType;
   }
   export type PolicyTargets = PolicyTargetSummary[];
-  export type PolicyType = "SERVICE_CONTROL_POLICY"|"TAG_POLICY"|"BACKUP_POLICY"|string;
+  export type PolicyType = "SERVICE_CONTROL_POLICY"|"TAG_POLICY"|"BACKUP_POLICY"|"AISERVICES_OPT_OUT_POLICY"|string;
   export type PolicyTypeStatus = "ENABLED"|"PENDING_ENABLE"|"PENDING_DISABLE"|string;
   export interface PolicyTypeSummary {
     /**
