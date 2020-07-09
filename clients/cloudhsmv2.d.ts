@@ -139,7 +139,7 @@ declare namespace CloudHSMV2 {
      */
     CopyTimestamp?: Timestamp;
     /**
-     * The AWS region that contains the source backup from which the new backup was copied.
+     * The AWS Region that contains the source backup from which the new backup was copied.
      */
     SourceRegion?: Region;
     /**
@@ -147,13 +147,16 @@ declare namespace CloudHSMV2 {
      */
     SourceBackup?: BackupId;
     /**
-     * The identifier (ID) of the cluster containing the source backup from which the new backup was copied. .
+     * The identifier (ID) of the cluster containing the source backup from which the new backup was copied.
      */
     SourceCluster?: ClusterId;
     /**
      * The date and time when the backup will be permanently deleted.
      */
     DeleteTimestamp?: Timestamp;
+    /**
+     * The list of tags for the backup.
+     */
     TagList?: TagList;
   }
   export type BackupId = string;
@@ -237,6 +240,9 @@ declare namespace CloudHSMV2 {
      * Contains one or more certificates or a certificate signing request (CSR).
      */
     Certificates?: Certificates;
+    /**
+     * The list of tags for the cluster.
+     */
     TagList?: TagList;
   }
   export type ClusterId = string;
@@ -251,6 +257,9 @@ declare namespace CloudHSMV2 {
      * The ID of the backup that will be copied to the destination region. 
      */
     BackupId: BackupId;
+    /**
+     * Tags to apply to the destination backup during creation. If you specify tags, only these tags will be applied to the destination backup. If you do not specify tags, the service copies tags from the source backup to the destination backup.
+     */
     TagList?: TagList;
   }
   export interface CopyBackupToRegionResponse {
@@ -272,6 +281,9 @@ declare namespace CloudHSMV2 {
      * The identifier (ID) of the cluster backup to restore. Use this value to restore the cluster from a backup instead of creating a new cluster. To find the backup ID, use DescribeBackups.
      */
     SourceBackupId?: BackupId;
+    /**
+     * Tags to apply to the CloudHSM cluster during creation.
+     */
     TagList?: TagList;
   }
   export interface CreateClusterResponse {

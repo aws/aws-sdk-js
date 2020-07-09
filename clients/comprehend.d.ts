@@ -60,11 +60,11 @@ declare class Comprehend extends Service {
    */
   classifyDocument(callback?: (err: AWSError, data: Comprehend.Types.ClassifyDocumentResponse) => void): Request<Comprehend.Types.ClassifyDocumentResponse, AWSError>;
   /**
-   * Creates a new document classifier that you can use to categorize documents. To create a classifier you provide a set of training documents that labeled with the categories that you want to use. After the classifier is trained you can use it to categorize a set of labeled documents into the categories. For more information, see how-document-classification.
+   * Creates a new document classifier that you can use to categorize documents. To create a classifier, you provide a set of training documents that labeled with the categories that you want to use. After the classifier is trained you can use it to categorize a set of labeled documents into the categories. For more information, see how-document-classification.
    */
   createDocumentClassifier(params: Comprehend.Types.CreateDocumentClassifierRequest, callback?: (err: AWSError, data: Comprehend.Types.CreateDocumentClassifierResponse) => void): Request<Comprehend.Types.CreateDocumentClassifierResponse, AWSError>;
   /**
-   * Creates a new document classifier that you can use to categorize documents. To create a classifier you provide a set of training documents that labeled with the categories that you want to use. After the classifier is trained you can use it to categorize a set of labeled documents into the categories. For more information, see how-document-classification.
+   * Creates a new document classifier that you can use to categorize documents. To create a classifier, you provide a set of training documents that labeled with the categories that you want to use. After the classifier is trained you can use it to categorize a set of labeled documents into the categories. For more information, see how-document-classification.
    */
   createDocumentClassifier(callback?: (err: AWSError, data: Comprehend.Types.CreateDocumentClassifierResponse) => void): Request<Comprehend.Types.CreateDocumentClassifierResponse, AWSError>;
   /**
@@ -436,7 +436,7 @@ declare namespace Comprehend {
     /**
      * A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document should contain at least 20 characters and must contain fewer than 5,000 bytes of UTF-8 encoded characters.
      */
-    TextList: StringList;
+    TextList: CustomerInputStringList;
   }
   export interface BatchDetectDominantLanguageResponse {
     /**
@@ -462,7 +462,7 @@ declare namespace Comprehend {
     /**
      * A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document must contain fewer than 5,000 bytes of UTF-8 encoded characters.
      */
-    TextList: StringList;
+    TextList: CustomerInputStringList;
     /**
      * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
      */
@@ -492,7 +492,7 @@ declare namespace Comprehend {
     /**
      * A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document must contain fewer that 5,000 bytes of UTF-8 encoded characters.
      */
-    TextList: StringList;
+    TextList: CustomerInputStringList;
     /**
      * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
      */
@@ -526,7 +526,7 @@ declare namespace Comprehend {
     /**
      * A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document must contain fewer that 5,000 bytes of UTF-8 encoded characters.
      */
-    TextList: StringList;
+    TextList: CustomerInputStringList;
     /**
      * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
      */
@@ -556,7 +556,7 @@ declare namespace Comprehend {
     /**
      * A list containing the text of the input documents. The list can contain a maximum of 25 documents. Each document must contain fewer that 5,000 bytes of UTF-8 encoded characters.
      */
-    TextList: StringList;
+    TextList: CustomerInputStringList;
     /**
      * The language of the input documents. You can specify any of the following languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must be in the same language.
      */
@@ -631,7 +631,7 @@ declare namespace Comprehend {
      */
     NumberOfTrainedDocuments?: Integer;
     /**
-     * The number of documents in the input data that were used to test the classifier. Typically this is 10 to 20 percent of the input documents.
+     * The number of documents in the input data that were used to test the classifier. Typically this is 10 to 20 percent of the input documents, up to 10,000 documents.
      */
     NumberOfTestDocuments?: Integer;
     /**
@@ -643,7 +643,7 @@ declare namespace Comprehend {
     /**
      * The document text to be analyzed.
      */
-    Text: String;
+    Text: CustomerInputString;
     /**
      * The Amazon Resource Number (ARN) of the endpoint.
      */
@@ -781,6 +781,8 @@ declare namespace Comprehend {
      */
     EntityRecognizerArn?: EntityRecognizerArn;
   }
+  export type CustomerInputString = string;
+  export type CustomerInputStringList = CustomerInputString[];
   export interface DeleteDocumentClassifierRequest {
     /**
      * The Amazon Resource Name (ARN) that identifies the document classifier. 
@@ -917,7 +919,7 @@ declare namespace Comprehend {
     /**
      * A UTF-8 text string. Each string should contain at least 20 characters and must contain fewer that 5,000 bytes of UTF-8 encoded characters.
      */
-    Text: String;
+    Text: CustomerInputString;
   }
   export interface DetectDominantLanguageResponse {
     /**
@@ -929,15 +931,19 @@ declare namespace Comprehend {
     /**
      * A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8 encoded characters.
      */
-    Text: String;
+    Text: CustomerInputString;
     /**
-     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
+     * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language. If your request includes the endpoint for a custom entity recognition model, Amazon Comprehend uses the language of your custom model, and it ignores any language code that you specify here.
      */
-    LanguageCode: LanguageCode;
+    LanguageCode?: LanguageCode;
+    /**
+     * The Amazon Resource Name of an endpoint that is associated with a custom entity recognition model. Provide an endpoint if you want to detect entities by using your own custom model instead of the default model that is used by Amazon Comprehend. If you specify an endpoint, Amazon Comprehend uses the language of your custom model, and it ignores any language code that you provide in your request.
+     */
+    EndpointArn?: EntityRecognizerEndpointArn;
   }
   export interface DetectEntitiesResponse {
     /**
-     * A collection of entities identified in the input text. For each entity, the response provides the entity text, entity type, where the entity text begins and ends, and the level of confidence that Amazon Comprehend has in the detection. For a list of entity types, see how-entities. 
+     * A collection of entities identified in the input text. For each entity, the response provides the entity text, entity type, where the entity text begins and ends, and the level of confidence that Amazon Comprehend has in the detection.  If your request uses a custom entity recognition model, Amazon Comprehend detects the entities that the model is trained to recognize. Otherwise, it detects the default entity types. For a list of default entity types, see how-entities.
      */
     Entities?: ListOfEntities;
   }
@@ -945,7 +951,7 @@ declare namespace Comprehend {
     /**
      * A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8 encoded characters.
      */
-    Text: String;
+    Text: CustomerInputString;
     /**
      * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
      */
@@ -961,7 +967,7 @@ declare namespace Comprehend {
     /**
      * A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8 encoded characters.
      */
-    Text: String;
+    Text: CustomerInputString;
     /**
      * The language of the input documents. You can specify any of the primary languages supported by Amazon Comprehend. All documents must be in the same language.
      */
@@ -981,7 +987,7 @@ declare namespace Comprehend {
     /**
      * A UTF-8 string. Each string must contain fewer that 5,000 bytes of UTF encoded characters.
      */
-    Text: String;
+    Text: CustomerInputString;
     /**
      * The language code of the input documents. You can specify any of the following languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt").
      */
@@ -1013,11 +1019,11 @@ declare namespace Comprehend {
      */
     JobStatus?: JobStatus;
     /**
-     * Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in ascending order, oldest to newest.
+     * Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.
      */
     SubmitTimeBefore?: Timestamp;
     /**
-     * Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in descending order, newest to oldest.
+     * Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.
      */
     SubmitTimeAfter?: Timestamp;
   }
@@ -1420,6 +1426,7 @@ declare namespace Comprehend {
      */
     S3Uri: S3Uri;
   }
+  export type EntityRecognizerEndpointArn = string;
   export interface EntityRecognizerEntityList {
     /**
      * Specifies the Amazon S3 location where the entity list is located. The URI must be in the same region as the API endpoint that you are calling.
@@ -2394,7 +2401,6 @@ declare namespace Comprehend {
   export interface StopTrainingEntityRecognizerResponse {
   }
   export type String = string;
-  export type StringList = String[];
   export type SubnetId = string;
   export type Subnets = SubnetId[];
   export type SyntaxLanguageCode = "en"|"es"|"fr"|"de"|"it"|"pt"|string;

@@ -12,6 +12,20 @@ declare class AppMesh extends Service {
   constructor(options?: AppMesh.Types.ClientConfiguration)
   config: Config & AppMesh.Types.ClientConfiguration;
   /**
+   * Creates a gateway route.
+         A gateway route is attached to a virtual gateway and routes traffic to an existing
+         virtual service. If a route matches a request, it can distribute traffic to a target virtual service.
+         For more information about gateway routes, see Gateway routes.
+   */
+  createGatewayRoute(params: AppMesh.Types.CreateGatewayRouteInput, callback?: (err: AWSError, data: AppMesh.Types.CreateGatewayRouteOutput) => void): Request<AppMesh.Types.CreateGatewayRouteOutput, AWSError>;
+  /**
+   * Creates a gateway route.
+         A gateway route is attached to a virtual gateway and routes traffic to an existing
+         virtual service. If a route matches a request, it can distribute traffic to a target virtual service.
+         For more information about gateway routes, see Gateway routes.
+   */
+  createGatewayRoute(callback?: (err: AWSError, data: AppMesh.Types.CreateGatewayRouteOutput) => void): Request<AppMesh.Types.CreateGatewayRouteOutput, AWSError>;
+  /**
    * Creates a service mesh.
           A service mesh is a logical boundary for network traffic between services that are
          represented by resources within the mesh. After you create your service mesh, you can
@@ -43,6 +57,24 @@ declare class AppMesh extends Service {
          For more information about routes, see Routes.
    */
   createRoute(callback?: (err: AWSError, data: AppMesh.Types.CreateRouteOutput) => void): Request<AppMesh.Types.CreateRouteOutput, AWSError>;
+  /**
+   * Creates a virtual gateway.
+         A virtual gateway allows resources outside your mesh to communicate to resources that
+         are inside your mesh. The virtual gateway represents an Envoy proxy running in an Amazon ECS
+         task, in a Kubernetes service, or on an Amazon EC2 instance. Unlike a virtual node, which
+         represents an Envoy running with an application, a virtual gateway represents Envoy deployed by itself.
+         For more information about virtual gateways, see Virtual gateways.
+   */
+  createVirtualGateway(params: AppMesh.Types.CreateVirtualGatewayInput, callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualGatewayOutput) => void): Request<AppMesh.Types.CreateVirtualGatewayOutput, AWSError>;
+  /**
+   * Creates a virtual gateway.
+         A virtual gateway allows resources outside your mesh to communicate to resources that
+         are inside your mesh. The virtual gateway represents an Envoy proxy running in an Amazon ECS
+         task, in a Kubernetes service, or on an Amazon EC2 instance. Unlike a virtual node, which
+         represents an Envoy running with an application, a virtual gateway represents Envoy deployed by itself.
+         For more information about virtual gateways, see Virtual gateways.
+   */
+  createVirtualGateway(callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualGatewayOutput) => void): Request<AppMesh.Types.CreateVirtualGatewayOutput, AWSError>;
   /**
    * Creates a virtual node within a service mesh.
           A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS
@@ -132,6 +164,14 @@ declare class AppMesh extends Service {
    */
   createVirtualService(callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualServiceOutput) => void): Request<AppMesh.Types.CreateVirtualServiceOutput, AWSError>;
   /**
+   * Deletes an existing gateway route.
+   */
+  deleteGatewayRoute(params: AppMesh.Types.DeleteGatewayRouteInput, callback?: (err: AWSError, data: AppMesh.Types.DeleteGatewayRouteOutput) => void): Request<AppMesh.Types.DeleteGatewayRouteOutput, AWSError>;
+  /**
+   * Deletes an existing gateway route.
+   */
+  deleteGatewayRoute(callback?: (err: AWSError, data: AppMesh.Types.DeleteGatewayRouteOutput) => void): Request<AppMesh.Types.DeleteGatewayRouteOutput, AWSError>;
+  /**
    * Deletes an existing service mesh.
          You must delete all resources (virtual services, routes, virtual routers, and virtual
          nodes) in the service mesh before you can delete the mesh itself.
@@ -151,6 +191,16 @@ declare class AppMesh extends Service {
    * Deletes an existing route.
    */
   deleteRoute(callback?: (err: AWSError, data: AppMesh.Types.DeleteRouteOutput) => void): Request<AppMesh.Types.DeleteRouteOutput, AWSError>;
+  /**
+   * Deletes an existing virtual gateway. You cannot delete a virtual gateway if any gateway
+         routes are associated to it.
+   */
+  deleteVirtualGateway(params: AppMesh.Types.DeleteVirtualGatewayInput, callback?: (err: AWSError, data: AppMesh.Types.DeleteVirtualGatewayOutput) => void): Request<AppMesh.Types.DeleteVirtualGatewayOutput, AWSError>;
+  /**
+   * Deletes an existing virtual gateway. You cannot delete a virtual gateway if any gateway
+         routes are associated to it.
+   */
+  deleteVirtualGateway(callback?: (err: AWSError, data: AppMesh.Types.DeleteVirtualGatewayOutput) => void): Request<AppMesh.Types.DeleteVirtualGatewayOutput, AWSError>;
   /**
    * Deletes an existing virtual node.
          You must delete any virtual services that list a virtual node as a service provider
@@ -184,6 +234,14 @@ declare class AppMesh extends Service {
    */
   deleteVirtualService(callback?: (err: AWSError, data: AppMesh.Types.DeleteVirtualServiceOutput) => void): Request<AppMesh.Types.DeleteVirtualServiceOutput, AWSError>;
   /**
+   * Describes an existing gateway route.
+   */
+  describeGatewayRoute(params: AppMesh.Types.DescribeGatewayRouteInput, callback?: (err: AWSError, data: AppMesh.Types.DescribeGatewayRouteOutput) => void): Request<AppMesh.Types.DescribeGatewayRouteOutput, AWSError>;
+  /**
+   * Describes an existing gateway route.
+   */
+  describeGatewayRoute(callback?: (err: AWSError, data: AppMesh.Types.DescribeGatewayRouteOutput) => void): Request<AppMesh.Types.DescribeGatewayRouteOutput, AWSError>;
+  /**
    * Describes an existing service mesh.
    */
   describeMesh(params: AppMesh.Types.DescribeMeshInput, callback?: (err: AWSError, data: AppMesh.Types.DescribeMeshOutput) => void): Request<AppMesh.Types.DescribeMeshOutput, AWSError>;
@@ -199,6 +257,14 @@ declare class AppMesh extends Service {
    * Describes an existing route.
    */
   describeRoute(callback?: (err: AWSError, data: AppMesh.Types.DescribeRouteOutput) => void): Request<AppMesh.Types.DescribeRouteOutput, AWSError>;
+  /**
+   * Describes an existing virtual gateway.
+   */
+  describeVirtualGateway(params: AppMesh.Types.DescribeVirtualGatewayInput, callback?: (err: AWSError, data: AppMesh.Types.DescribeVirtualGatewayOutput) => void): Request<AppMesh.Types.DescribeVirtualGatewayOutput, AWSError>;
+  /**
+   * Describes an existing virtual gateway.
+   */
+  describeVirtualGateway(callback?: (err: AWSError, data: AppMesh.Types.DescribeVirtualGatewayOutput) => void): Request<AppMesh.Types.DescribeVirtualGatewayOutput, AWSError>;
   /**
    * Describes an existing virtual node.
    */
@@ -224,6 +290,16 @@ declare class AppMesh extends Service {
    */
   describeVirtualService(callback?: (err: AWSError, data: AppMesh.Types.DescribeVirtualServiceOutput) => void): Request<AppMesh.Types.DescribeVirtualServiceOutput, AWSError>;
   /**
+   * Returns a list of existing gateway routes that are associated to a virtual
+         gateway.
+   */
+  listGatewayRoutes(params: AppMesh.Types.ListGatewayRoutesInput, callback?: (err: AWSError, data: AppMesh.Types.ListGatewayRoutesOutput) => void): Request<AppMesh.Types.ListGatewayRoutesOutput, AWSError>;
+  /**
+   * Returns a list of existing gateway routes that are associated to a virtual
+         gateway.
+   */
+  listGatewayRoutes(callback?: (err: AWSError, data: AppMesh.Types.ListGatewayRoutesOutput) => void): Request<AppMesh.Types.ListGatewayRoutesOutput, AWSError>;
+  /**
    * Returns a list of existing service meshes.
    */
   listMeshes(params: AppMesh.Types.ListMeshesInput, callback?: (err: AWSError, data: AppMesh.Types.ListMeshesOutput) => void): Request<AppMesh.Types.ListMeshesOutput, AWSError>;
@@ -247,6 +323,14 @@ declare class AppMesh extends Service {
    * List the tags for an App Mesh resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: AppMesh.Types.ListTagsForResourceOutput) => void): Request<AppMesh.Types.ListTagsForResourceOutput, AWSError>;
+  /**
+   * Returns a list of existing virtual gateways in a service mesh.
+   */
+  listVirtualGateways(params: AppMesh.Types.ListVirtualGatewaysInput, callback?: (err: AWSError, data: AppMesh.Types.ListVirtualGatewaysOutput) => void): Request<AppMesh.Types.ListVirtualGatewaysOutput, AWSError>;
+  /**
+   * Returns a list of existing virtual gateways in a service mesh.
+   */
+  listVirtualGateways(callback?: (err: AWSError, data: AppMesh.Types.ListVirtualGatewaysOutput) => void): Request<AppMesh.Types.ListVirtualGatewaysOutput, AWSError>;
   /**
    * Returns a list of existing virtual nodes.
    */
@@ -294,6 +378,16 @@ declare class AppMesh extends Service {
    */
   untagResource(callback?: (err: AWSError, data: AppMesh.Types.UntagResourceOutput) => void): Request<AppMesh.Types.UntagResourceOutput, AWSError>;
   /**
+   * Updates an existing gateway route that is associated to a specified virtual gateway in a
+         service mesh.
+   */
+  updateGatewayRoute(params: AppMesh.Types.UpdateGatewayRouteInput, callback?: (err: AWSError, data: AppMesh.Types.UpdateGatewayRouteOutput) => void): Request<AppMesh.Types.UpdateGatewayRouteOutput, AWSError>;
+  /**
+   * Updates an existing gateway route that is associated to a specified virtual gateway in a
+         service mesh.
+   */
+  updateGatewayRoute(callback?: (err: AWSError, data: AppMesh.Types.UpdateGatewayRouteOutput) => void): Request<AppMesh.Types.UpdateGatewayRouteOutput, AWSError>;
+  /**
    * Updates an existing service mesh.
    */
   updateMesh(params: AppMesh.Types.UpdateMeshInput, callback?: (err: AWSError, data: AppMesh.Types.UpdateMeshOutput) => void): Request<AppMesh.Types.UpdateMeshOutput, AWSError>;
@@ -309,6 +403,14 @@ declare class AppMesh extends Service {
    * Updates an existing route for a specified service mesh and virtual router.
    */
   updateRoute(callback?: (err: AWSError, data: AppMesh.Types.UpdateRouteOutput) => void): Request<AppMesh.Types.UpdateRouteOutput, AWSError>;
+  /**
+   * Updates an existing virtual gateway in a specified service mesh.
+   */
+  updateVirtualGateway(params: AppMesh.Types.UpdateVirtualGatewayInput, callback?: (err: AWSError, data: AppMesh.Types.UpdateVirtualGatewayOutput) => void): Request<AppMesh.Types.UpdateVirtualGatewayOutput, AWSError>;
+  /**
+   * Updates an existing virtual gateway in a specified service mesh.
+   */
+  updateVirtualGateway(callback?: (err: AWSError, data: AppMesh.Types.UpdateVirtualGatewayOutput) => void): Request<AppMesh.Types.UpdateVirtualGatewayOutput, AWSError>;
   /**
    * Updates an existing virtual node in a specified service mesh.
    */
@@ -415,6 +517,63 @@ declare namespace AppMesh {
      */
     virtualRouters: VirtualRouterList;
   }
+  export interface CreateVirtualGatewayInput {
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+     */
+    clientToken?: String;
+    /**
+     * The name of the service mesh to create the virtual gateway in.
+     */
+    meshName: ResourceName;
+    /**
+     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then
+               the account that you specify must share the mesh with your account before you can create 
+             the resource in the service mesh. For more information about mesh sharing, see Working with shared meshes.
+     */
+    meshOwner?: AccountId;
+    /**
+     * The virtual gateway specification to apply.
+     */
+    spec: VirtualGatewaySpec;
+    /**
+     * Optional metadata that you can apply to the virtual gateway to assist with
+         categorization and organization. Each tag consists of a key and an optional value, both of
+         which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have
+            a maximum length of 256 characters.
+     */
+    tags?: TagList;
+    /**
+     * The name to use for the virtual gateway.
+     */
+    virtualGatewayName: ResourceName;
+  }
+  export interface UpdateVirtualGatewayInput {
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+     */
+    clientToken?: String;
+    /**
+     * The name of the service mesh that the virtual gateway resides in.
+     */
+    meshName: ResourceName;
+    /**
+     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     */
+    meshOwner?: AccountId;
+    /**
+     * The new virtual gateway specification to apply. This overwrites the existing
+         data.
+     */
+    spec: VirtualGatewaySpec;
+    /**
+     * The name of the virtual gateway to update.
+     */
+    virtualGatewayName: ResourceName;
+  }
   export interface ResourceMetadata {
     /**
      * The full Amazon Resource Name (ARN) for the resource.
@@ -443,8 +602,7 @@ declare namespace AppMesh {
      */
     uid: String;
     /**
-     * The version of the resource. Resources are created at version 1, and this version is
-         incremented each time that they're updated.
+     * The version of the resource. Resources are created at version 1, and this version is incremented each time that they're updated.
      */
     version: Long;
   }
@@ -476,6 +634,17 @@ declare namespace AppMesh {
      * The name of the virtual service that is acting as a virtual node backend.
      */
     virtualServiceName: ServiceName;
+  }
+  export interface HttpGatewayRouteMatch {
+    /**
+     * Specifies the path to match requests with. This parameter must always start with
+            /, which by itself matches all requests to the virtual service name. You
+         can also match for path-based routing of requests. For example, if your virtual service
+         name is my-service.local and you want the route to match requests to
+            my-service.local/metrics, your prefix should be
+         /metrics.
+     */
+    prefix: String;
   }
   export type GrpcRouteMetadataList = GrpcRouteMetadata[];
   export type ListenerTlsMode = "DISABLED"|"PERMISSIVE"|"STRICT"|string;
@@ -516,6 +685,7 @@ declare namespace AppMesh {
      */
     unhealthyThreshold: HealthCheckThreshold;
   }
+  export type VirtualGatewayHealthCheckTimeoutMillis = number;
   export interface EgressFilter {
     /**
      * The egress filter type. By default, the type is DROP_ALL, which allows
@@ -533,13 +703,74 @@ declare namespace AppMesh {
      */
     tls?: ClientPolicyTls;
   }
+  export type VirtualGatewayHealthCheckIntervalMillis = number;
   export type Boolean = boolean;
+  export interface VirtualGatewaySpec {
+    /**
+     * A reference to an object that represents the defaults for backends.
+     */
+    backendDefaults?: VirtualGatewayBackendDefaults;
+    /**
+     * The listeners that the mesh endpoint is expected to receive inbound traffic from. You
+         can specify one listener.
+     */
+    listeners: VirtualGatewayListeners;
+    logging?: VirtualGatewayLogging;
+  }
   export type HttpRetryPolicyEvent = string;
+  export interface VirtualGatewayFileAccessLog {
+    /**
+     * The file path to write access logs to. You can use /dev/stdout to send
+         access logs to standard out and configure your Envoy container to use a log driver, such as
+            awslogs, to export the access logs to a log storage service such as Amazon
+         CloudWatch Logs. You can also specify a path in the Envoy container's file system to write
+         the files to disk.
+     */
+    path: FilePath;
+  }
   export interface DescribeVirtualServiceOutput {
     /**
      * The full description of your virtual service.
      */
     virtualService: VirtualServiceData;
+  }
+  export interface CreateGatewayRouteInput {
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+     */
+    clientToken?: String;
+    /**
+     * The name to use for the gateway route.
+     */
+    gatewayRouteName: ResourceName;
+    /**
+     * The name of the service mesh to create the gateway route in.
+     */
+    meshName: ResourceName;
+    /**
+     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then
+               the account that you specify must share the mesh with your account before you can create 
+             the resource in the service mesh. For more information about mesh sharing, see Working with shared meshes.
+     */
+    meshOwner?: AccountId;
+    /**
+     * The gateway route specification to apply.
+     */
+    spec: GatewayRouteSpec;
+    /**
+     * Optional metadata that you can apply to the gateway route to assist with categorization
+         and organization. Each tag consists of a key and an optional value, both of which you
+         define. Tag keys can have a maximum character length of 128 characters, and tag values can have
+            a maximum length of 256 characters.
+     */
+    tags?: TagList;
+    /**
+     * The name of the virtual gateway to associate the gateway route with. If the virtual
+         gateway is in a shared mesh, then you must be the owner of the virtual gateway
+         resource.
+     */
+    virtualGatewayName: ResourceName;
   }
   export type CertificateAuthorityArns = Arn[];
   export interface DescribeVirtualNodeOutput {
@@ -549,17 +780,66 @@ declare namespace AppMesh {
     virtualNode: VirtualNodeData;
   }
   export type AwsCloudMapName = string;
+  export interface VirtualGatewayData {
+    /**
+     * The name of the service mesh that the virtual gateway resides in.
+     */
+    meshName: ResourceName;
+    metadata: ResourceMetadata;
+    /**
+     * The specifications of the virtual gateway.
+     */
+    spec: VirtualGatewaySpec;
+    /**
+     * The current status of the virtual gateway.
+     */
+    status: VirtualGatewayStatus;
+    /**
+     * The name of the virtual gateway.
+     */
+    virtualGatewayName: ResourceName;
+  }
   export interface CreateRouteOutput {
     /**
      * The full description of your mesh following the create call.
      */
     route: RouteData;
   }
+  export interface VirtualGatewayListener {
+    /**
+     * The health check information for the listener.
+     */
+    healthCheck?: VirtualGatewayHealthCheckPolicy;
+    /**
+     * The port mapping information for the listener.
+     */
+    portMapping: VirtualGatewayPortMapping;
+    /**
+     * A reference to an object that represents the Transport Layer Security (TLS) properties for the listener.
+     */
+    tls?: VirtualGatewayListenerTls;
+  }
   export interface DnsServiceDiscovery {
     /**
      * Specifies the DNS service discovery hostname for the virtual node. 
      */
     hostname: Hostname;
+  }
+  export interface VirtualGatewayPortMapping {
+    /**
+     * The port used for the port mapping. Specify one protocol.
+     */
+    port: PortNumber;
+    /**
+     * The protocol used for the port mapping.
+     */
+    protocol: VirtualGatewayPortProtocol;
+  }
+  export interface DeleteVirtualGatewayOutput {
+    /**
+     * The virtual gateway that was deleted.
+     */
+    virtualGateway: VirtualGatewayData;
   }
   export interface DeleteRouteInput {
     /**
@@ -604,7 +884,35 @@ declare namespace AppMesh {
   }
   export interface UntagResourceOutput {
   }
+  export type ListGatewayRoutesLimit = number;
   export type TcpRetryPolicyEvent = "connection-error"|string;
+  export interface VirtualGatewayListenerTls {
+    /**
+     * An object that represents a Transport Layer Security (TLS) certificate.
+     */
+    certificate: VirtualGatewayListenerTlsCertificate;
+    /**
+     * Specify one of the following modes.
+         
+            
+               
+                  STRICT – Listener only accepts connections with TLS
+               enabled. 
+            
+            
+               
+                  PERMISSIVE – Listener accepts connections with or
+               without TLS enabled.
+            
+            
+               
+                  DISABLED – Listener only accepts connections without
+               TLS. 
+            
+         
+     */
+    mode: VirtualGatewayListenerTlsMode;
+  }
   export interface Backend {
     /**
      * Specifies a virtual service to use as a backend for a virtual node. 
@@ -634,6 +942,50 @@ declare namespace AppMesh {
         
      */
     nextToken?: String;
+  }
+  export interface VirtualGatewayListenerTlsFileCertificate {
+    /**
+     * The certificate chain for the certificate.
+     */
+    certificateChain: FilePath;
+    /**
+     * The private key for a certificate stored on the file system of the mesh endpoint that
+         the proxy is running on.
+     */
+    privateKey: FilePath;
+  }
+  export interface ListGatewayRoutesInput {
+    /**
+     * The maximum number of results returned by ListGatewayRoutes in paginated
+         output. When you use this parameter, ListGatewayRoutes returns only
+            limit results in a single page along with a nextToken response
+         element. You can see the remaining results of the initial request by sending another
+            ListGatewayRoutes request with the returned nextToken value.
+         This value can be between 1 and 100. If you don't use this
+         parameter, ListGatewayRoutes returns up to 100 results and a
+            nextToken value if applicable.
+     */
+    limit?: ListGatewayRoutesLimit;
+    /**
+     * The name of the service mesh to list gateway routes in.
+     */
+    meshName: ResourceName;
+    /**
+     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     */
+    meshOwner?: AccountId;
+    /**
+     * The nextToken value returned from a previous paginated
+            ListGatewayRoutes request where limit was used and the results
+         exceeded the value of that parameter. Pagination continues from the end of the previous
+         results that returned the nextToken value.
+     */
+    nextToken?: String;
+    /**
+     * The name of the virtual gateway to list gateway routes in.
+     */
+    virtualGatewayName: ResourceName;
   }
   export interface VirtualRouterData {
     /**
@@ -671,6 +1023,43 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The service mesh specification to apply.
      */
     spec?: MeshSpec;
+  }
+  export interface VirtualGatewayHealthCheckPolicy {
+    /**
+     * The number of consecutive successful health checks that must occur before declaring the
+         listener healthy.
+     */
+    healthyThreshold: VirtualGatewayHealthCheckThreshold;
+    /**
+     * The time period in milliseconds between each health check execution.
+     */
+    intervalMillis: VirtualGatewayHealthCheckIntervalMillis;
+    /**
+     * The destination path for the health check request. This value is only used if the
+         specified protocol is HTTP or HTTP/2. For any other protocol, this value is ignored.
+     */
+    path?: String;
+    /**
+     * The destination port for the health check request. This port must match the port defined
+         in the PortMapping for the listener.
+     */
+    port?: PortNumber;
+    /**
+     * The protocol for the health check request. If you specify grpc, then your
+         service must conform to the GRPC Health
+            Checking Protocol.
+     */
+    protocol: VirtualGatewayPortProtocol;
+    /**
+     * The amount of time to wait when receiving a response from the health check, in
+         milliseconds.
+     */
+    timeoutMillis: VirtualGatewayHealthCheckTimeoutMillis;
+    /**
+     * The number of consecutive failed health checks that must occur before declaring a
+         virtual gateway unhealthy.
+     */
+    unhealthyThreshold: VirtualGatewayHealthCheckThreshold;
   }
   export interface CreateVirtualRouterInput {
     /**
@@ -729,6 +1118,16 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     status: VirtualServiceStatusCode;
   }
   export type HttpRetryPolicyEvents = HttpRetryPolicyEvent[];
+  export interface VirtualGatewayListenerTlsCertificate {
+    /**
+     * A reference to an object that represents an AWS Certicate Manager (ACM) certificate.
+     */
+    acm?: VirtualGatewayListenerTlsAcmCertificate;
+    /**
+     * A reference to an object that represents a local file certificate.
+     */
+    file?: VirtualGatewayListenerTlsFileCertificate;
+  }
   export interface ListenerTlsCertificate {
     /**
      * A reference to an object that represents an AWS Certicate Manager (ACM) certificate.
@@ -747,6 +1146,12 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
          can specify one listener.
      */
     listeners?: VirtualRouterListeners;
+  }
+  export interface GatewayRouteVirtualService {
+    /**
+     * The name of the virtual service that traffic is routed to.
+     */
+    virtualServiceName: ResourceName;
   }
   export interface VirtualNodeSpec {
     /**
@@ -787,16 +1192,64 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     nextToken?: String;
   }
   export type VirtualRouterListeners = VirtualRouterListener[];
+  export interface GatewayRouteSpec {
+    /**
+     * An object that represents the specification of a gRPC gateway route.
+     */
+    grpcRoute?: GrpcGatewayRoute;
+    /**
+     * An object that represents the specification of an HTTP/2 gateway route.
+     */
+    http2Route?: HttpGatewayRoute;
+    /**
+     * An object that represents the specification of an HTTP gateway route.
+     */
+    httpRoute?: HttpGatewayRoute;
+  }
   export type PortSet = PortNumber[];
   export type HttpMethod = "CONNECT"|"DELETE"|"GET"|"HEAD"|"OPTIONS"|"PATCH"|"POST"|"PUT"|"TRACE"|string;
+  export interface VirtualGatewayBackendDefaults {
+    /**
+     * A reference to an object that represents a client policy.
+     */
+    clientPolicy?: VirtualGatewayClientPolicy;
+  }
   export interface ListenerTimeout {
     grpc?: GrpcTimeout;
+    /**
+     * An object that represents types of timeouts. 
+     */
     http?: HttpTimeout;
+    /**
+     * An object that represents types of timeouts. 
+     */
     http2?: HttpTimeout;
+    /**
+     * An object that represents types of timeouts. 
+     */
     tcp?: TcpTimeout;
   }
   export type MeshList = MeshRef[];
   export type MaxRetries = number;
+  export interface DescribeGatewayRouteInput {
+    /**
+     * The name of the gateway route to describe.
+     */
+    gatewayRouteName: ResourceName;
+    /**
+     * The name of the service mesh that the gateway route resides in.
+     */
+    meshName: ResourceName;
+    /**
+     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     */
+    meshOwner?: AccountId;
+    /**
+     * The name of the virtual gateway that the gateway route is associated with.
+     */
+    virtualGatewayName: ResourceName;
+  }
   export interface TlsValidationContextTrust {
     /**
      * A reference to an object that represents a TLS validation context trust for an AWS Certicate Manager (ACM)
@@ -818,6 +1271,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     protocol: PortProtocol;
   }
+  export type VirtualGatewayHealthCheckThreshold = number;
   export interface ListVirtualServicesOutput {
     /**
      * The nextToken value to include in a future ListVirtualServices
@@ -841,6 +1295,39 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The relative weight of the weighted target.
      */
     weight: PercentInt;
+  }
+  export interface GrpcGatewayRoute {
+    /**
+     * An object that represents the action to take if a match is determined.
+     */
+    action: GrpcGatewayRouteAction;
+    /**
+     * An object that represents the criteria for determining a request match.
+     */
+    match: GrpcGatewayRouteMatch;
+  }
+  export interface GatewayRouteData {
+    /**
+     * The name of the gateway route.
+     */
+    gatewayRouteName: ResourceName;
+    /**
+     * The name of the service mesh that the resource resides in. 
+     */
+    meshName: ResourceName;
+    metadata: ResourceMetadata;
+    /**
+     * The specifications of the gateway route.
+     */
+    spec: GatewayRouteSpec;
+    /**
+     * The status of the gateway route.
+     */
+    status: GatewayRouteStatus;
+    /**
+     * The virtual gateway that the gateway route is associated with.
+     */
+    virtualGatewayName: ResourceName;
   }
   export interface RouteRef {
     /**
@@ -961,9 +1448,37 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     mesh: MeshData;
   }
+  export interface VirtualGatewayClientPolicyTls {
+    /**
+     * Whether the policy is enforced. The default is True, if a value isn't
+         specified.
+     */
+    enforce?: Boolean;
+    /**
+     * One or more ports that the policy is enforced for.
+     */
+    ports?: PortSet;
+    /**
+     * A reference to an object that represents a TLS validation context.
+     */
+    validation: VirtualGatewayTlsValidationContext;
+  }
   export type EgressFilterType = "ALLOW_ALL"|"DROP_ALL"|string;
   export type DurationValue = number;
   export type Hostname = string;
+  export interface VirtualGatewayStatus {
+    /**
+     * The current status.
+     */
+    status: VirtualGatewayStatusCode;
+  }
+  export interface GatewayRouteStatus {
+    /**
+     * The current status for the gateway route.
+     */
+    status: GatewayRouteStatusCode;
+  }
+  export type VirtualGatewayListeners = VirtualGatewayListener[];
   export interface TagResourceInput {
     /**
      * The Amazon Resource Name (ARN) of the resource to add tags to.
@@ -975,6 +1490,31 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
             a maximum length of 256 characters.
      */
     tags: TagList;
+  }
+  export interface CreateVirtualGatewayOutput {
+    /**
+     * The full description of your virtual gateway following the create call.
+     */
+    virtualGateway: VirtualGatewayData;
+  }
+  export interface ListVirtualGatewaysOutput {
+    /**
+     * The nextToken value to include in a future ListVirtualGateways
+         request. When the results of a ListVirtualGateways request exceed
+            limit, you can use this value to retrieve the next page of results. This
+         value is null when there are no more results to return.
+     */
+    nextToken?: String;
+    /**
+     * The list of existing virtual gateways for the specified service mesh.
+     */
+    virtualGateways: VirtualGatewayList;
+  }
+  export interface VirtualGatewayTlsValidationContext {
+    /**
+     * A reference to an object that represents a TLS validation context trust.
+     */
+    trust: VirtualGatewayTlsValidationContextTrust;
   }
   export interface VirtualServiceProvider {
     /**
@@ -1084,6 +1624,66 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     tcpRoute?: TcpRoute;
   }
+  export interface GatewayRouteRef {
+    /**
+     * The full Amazon Resource Name (ARN) for the gateway route.
+     */
+    arn: Arn;
+    /**
+     * The Unix epoch timestamp in seconds for when the resource was created.
+     */
+    createdAt: Timestamp;
+    /**
+     * The name of the gateway route.
+     */
+    gatewayRouteName: ResourceName;
+    /**
+     * The Unix epoch timestamp in seconds for when the resource was last updated.
+     */
+    lastUpdatedAt: Timestamp;
+    /**
+     * The name of the service mesh that the resource resides in. 
+     */
+    meshName: ResourceName;
+    /**
+     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     */
+    meshOwner: AccountId;
+    /**
+     * The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's
+               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with shared meshes.
+     */
+    resourceOwner: AccountId;
+    /**
+     * The version of the resource. Resources are created at version 1, and this version is incremented each time that they're updated.
+     */
+    version: Long;
+    /**
+     * The virtual gateway that the gateway route is associated with.
+     */
+    virtualGatewayName: ResourceName;
+  }
+  export interface VirtualGatewayListenerTlsAcmCertificate {
+    /**
+     * The Amazon Resource Name (ARN) for the certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see Transport Layer Security (TLS).
+     */
+    certificateArn: Arn;
+  }
+  export interface ListGatewayRoutesOutput {
+    /**
+     * The list of existing gateway routes for the specified service mesh and virtual
+         gateway.
+     */
+    gatewayRoutes: GatewayRouteList;
+    /**
+     * The nextToken value to include in a future ListGatewayRoutes
+         request. When the results of a ListGatewayRoutes request exceed
+            limit, you can use this value to retrieve the next page of results. This
+         value is null when there are no more results to return.
+     */
+    nextToken?: String;
+  }
   export interface CreateVirtualServiceOutput {
     /**
      * The full description of your virtual service following the create call.
@@ -1135,13 +1735,35 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     trust: TlsValidationContextTrust;
   }
+  export type GatewayRouteStatusCode = "ACTIVE"|"DELETED"|"INACTIVE"|string;
   export interface DeleteVirtualRouterOutput {
     /**
      * The virtual router that was deleted.
      */
     virtualRouter: VirtualRouterData;
   }
+  export interface DescribeVirtualGatewayInput {
+    /**
+     * The name of the service mesh that the gateway route resides in.
+     */
+    meshName: ResourceName;
+    /**
+     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     */
+    meshOwner?: AccountId;
+    /**
+     * The name of the virtual gateway to describe.
+     */
+    virtualGatewayName: ResourceName;
+  }
   export type TagsLimit = number;
+  export interface GrpcGatewayRouteAction {
+    /**
+     * An object that represents the target that traffic is routed to when a request matches the gateway route.
+     */
+    target: GatewayRouteTarget;
+  }
   export interface DeleteVirtualNodeOutput {
     /**
      * The virtual node that was deleted.
@@ -1262,6 +1884,18 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     virtualRouterName: ResourceName;
   }
+  export interface HttpGatewayRouteAction {
+    /**
+     * An object that represents the target that traffic is routed to when a request matches the gateway route.
+     */
+    target: GatewayRouteTarget;
+  }
+  export interface GrpcGatewayRouteMatch {
+    /**
+     * The fully qualified domain name for the service to match from the request.
+     */
+    serviceName?: ServiceName;
+  }
   export interface ListTagsForResourceInput {
     /**
      * The maximum number of tag results returned by ListTagsForResource in
@@ -1287,6 +1921,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     resourceArn: Arn;
   }
   export type GrpcRetryPolicyEvents = GrpcRetryPolicyEvent[];
+  export type VirtualGatewayStatusCode = "ACTIVE"|"DELETED"|"INACTIVE"|string;
   export interface DescribeMeshOutput {
     /**
      * The full description of your service mesh.
@@ -1307,6 +1942,12 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The name of the virtual router to delete.
      */
     virtualRouterName: ResourceName;
+  }
+  export interface UpdateGatewayRouteOutput {
+    /**
+     * A full description of the gateway route that was updated.
+     */
+    gatewayRoute: GatewayRouteData;
   }
   export interface DescribeRouteInput {
     /**
@@ -1336,6 +1977,13 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   export type Listeners = Listener[];
   export type Backends = Backend[];
   export type PortProtocol = "grpc"|"http"|"http2"|"tcp"|string;
+  export interface DeleteGatewayRouteOutput {
+    /**
+     * The gateway route that was deleted.
+     */
+    gatewayRoute: GatewayRouteData;
+  }
+  export type VirtualGatewayList = VirtualGatewayRef[];
   export type VirtualNodeStatusCode = "ACTIVE"|"DELETED"|"INACTIVE"|string;
   export type ServiceName = string;
   export interface UpdateVirtualServiceInput {
@@ -1449,7 +2097,13 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     virtualServiceName: ServiceName;
   }
   export interface GrpcTimeout {
+    /**
+     * An object that represents an idle timeout. An idle timeout bounds the amount of time that a connection may be idle. The default value is none.
+     */
     idle?: Duration;
+    /**
+     * An object that represents a per request timeout. The default value is 15 seconds. If you set a higher timeout, then make sure that the higher value is set for each App Mesh resource in a conversation. For example, if a virtual node backend uses a virtual router provider to route to another virtual node, then the timeout should be greater than 15 seconds for the source and destination virtual node and the route.
+     */
     perRequest?: Duration;
   }
   export interface VirtualNodeStatus {
@@ -1593,6 +2247,13 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     weightedTargets: WeightedTargets;
   }
+  export interface VirtualGatewayTlsValidationContextFileTrust {
+    /**
+     * The certificate trust chain for a certificate stored on the file system of the virtual
+         node that the proxy is running on.
+     */
+    certificateChain: FilePath;
+  }
   export interface UpdateMeshOutput {
     mesh: MeshData;
   }
@@ -1646,12 +2307,25 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     value: AwsCloudMapInstanceAttributeValue;
   }
+  export type VirtualGatewayListenerTlsMode = "DISABLED"|"PERMISSIVE"|"STRICT"|string;
   export interface VirtualServiceSpec {
     /**
      * The App Mesh object that is acting as the provider for a virtual service. You can specify
          a single virtual node or virtual router.
      */
     provider?: VirtualServiceProvider;
+  }
+  export interface VirtualGatewayTlsValidationContextAcmTrust {
+    /**
+     * One or more ACM Amazon Resource Name (ARN)s.
+     */
+    certificateAuthorityArns: VirtualGatewayCertificateAuthorityArns;
+  }
+  export interface VirtualGatewayAccessLog {
+    /**
+     * The file object to send virtual gateway access logs to.
+     */
+    file?: VirtualGatewayFileAccessLog;
   }
   export interface MatchRange {
     /**
@@ -1672,9 +2346,18 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The action to take if a match is determined.
      */
     action: TcpRouteAction;
+    /**
+     * An object that represents types of timeouts. 
+     */
     timeout?: TcpTimeout;
   }
   export type VirtualNodeList = VirtualNodeRef[];
+  export interface UpdateVirtualGatewayOutput {
+    /**
+     * A full description of the virtual gateway that was updated.
+     */
+    virtualGateway: VirtualGatewayData;
+  }
   export interface ListVirtualRoutersInput {
     /**
      * The maximum number of results returned by ListVirtualRouters in paginated
@@ -1770,12 +2453,30 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     nextToken?: String;
   }
+  export interface VirtualGatewayClientPolicy {
+    /**
+     * A reference to an object that represents a Transport Layer Security (TLS) client policy.
+     */
+    tls?: VirtualGatewayClientPolicyTls;
+  }
   export type ListVirtualNodesLimit = number;
   export type HealthCheckTimeoutMillis = number;
   export type ResourceName = string;
   export type Timestamp = Date;
+  export interface VirtualGatewayLogging {
+    /**
+     * The access log configuration.
+     */
+    accessLog?: VirtualGatewayAccessLog;
+  }
   export type HeaderMatch = string;
   export type AccountId = string;
+  export interface GatewayRouteTarget {
+    /**
+     * An object that represents a virtual service gateway route target.
+     */
+    virtualService: GatewayRouteVirtualService;
+  }
   export interface Duration {
     /**
      * A unit of time.
@@ -1859,6 +2560,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     version: Long;
   }
+  export type ListVirtualGatewaysLimit = number;
   export type MeshStatusCode = "ACTIVE"|"DELETED"|"INACTIVE"|string;
   export interface MeshData {
     /**
@@ -1878,6 +2580,13 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     status: MeshStatus;
   }
+  export interface CreateGatewayRouteOutput {
+    /**
+     * The full description of your gateway route following the create call.
+     */
+    gatewayRoute: GatewayRouteData;
+  }
+  export type GatewayRouteList = GatewayRouteRef[];
   export interface VirtualRouterStatus {
     /**
      * The current status of the virtual router.
@@ -1889,6 +2598,21 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * An object that represents the targets that traffic is routed to when a request matches the route.
      */
     weightedTargets: WeightedTargets;
+  }
+  export interface DeleteVirtualGatewayInput {
+    /**
+     * The name of the service mesh to delete the virtual gateway from.
+     */
+    meshName: ResourceName;
+    /**
+     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     */
+    meshOwner?: AccountId;
+    /**
+     * The name of the virtual gateway to delete.
+     */
+    virtualGatewayName: ResourceName;
   }
   export interface DescribeVirtualNodeInput {
     /**
@@ -1920,6 +2644,9 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The port mapping information for the listener.
      */
     portMapping: PortMapping;
+    /**
+     * An object that represents timeouts for different protocols.
+     */
     timeout?: ListenerTimeout;
     /**
      * A reference to an object that represents the Transport Layer Security (TLS) properties for a listener.
@@ -1939,6 +2666,9 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * An object that represents a retry policy.
      */
     retryPolicy?: GrpcRetryPolicy;
+    /**
+     * An object that represents types of timeouts. 
+     */
     timeout?: GrpcTimeout;
   }
   export type ListRoutesLimit = number;
@@ -1957,17 +2687,39 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     validation: TlsValidationContext;
   }
+  export interface VirtualGatewayTlsValidationContextTrust {
+    /**
+     * A reference to an object that represents a TLS validation context trust for an AWS Certicate Manager (ACM)
+         certificate.
+     */
+    acm?: VirtualGatewayTlsValidationContextAcmTrust;
+    /**
+     * An object that represents a TLS validation context trust for a local file.
+     */
+    file?: VirtualGatewayTlsValidationContextFileTrust;
+  }
   export interface DeleteVirtualServiceOutput {
     /**
      * The virtual service that was deleted.
      */
     virtualService: VirtualServiceData;
   }
+  export type VirtualGatewayPortProtocol = "grpc"|"http"|"http2"|string;
   export interface VirtualNodeServiceProvider {
     /**
      * The name of the virtual node that is acting as a service provider.
      */
     virtualNodeName: ResourceName;
+  }
+  export interface HttpGatewayRoute {
+    /**
+     * An object that represents the action to take if a match is determined.
+     */
+    action: HttpGatewayRouteAction;
+    /**
+     * An object that represents the criteria for determining a request match.
+     */
+    match: HttpGatewayRouteMatch;
   }
   export interface BackendDefaults {
     /**
@@ -2043,6 +2795,63 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   export interface TagResourceOutput {
   }
   export type RouteList = RouteRef[];
+  export interface UpdateGatewayRouteInput {
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+     */
+    clientToken?: String;
+    /**
+     * The name of the gateway route to update.
+     */
+    gatewayRouteName: ResourceName;
+    /**
+     * The name of the service mesh that the gateway route resides in.
+     */
+    meshName: ResourceName;
+    /**
+     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     */
+    meshOwner?: AccountId;
+    /**
+     * The new gateway route specification to apply. This overwrites the existing data.
+     */
+    spec: GatewayRouteSpec;
+    /**
+     * The name of the virtual gateway that the gateway route is associated with.
+     */
+    virtualGatewayName: ResourceName;
+  }
+  export interface ListVirtualGatewaysInput {
+    /**
+     * The maximum number of results returned by ListVirtualGateways in paginated
+         output. When you use this parameter, ListVirtualGateways returns only
+            limit results in a single page along with a nextToken response
+         element. You can see the remaining results of the initial request by sending another
+            ListVirtualGateways request with the returned nextToken value.
+         This value can be between 1 and 100. If you don't use this
+         parameter, ListVirtualGateways returns up to 100 results and
+         a nextToken value if applicable.
+     */
+    limit?: ListVirtualGatewaysLimit;
+    /**
+     * The name of the service mesh to list virtual gateways in.
+     */
+    meshName: ResourceName;
+    /**
+     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     */
+    meshOwner?: AccountId;
+    /**
+     * The nextToken value returned from a previous paginated
+            ListVirtualGateways request where limit was used and the
+         results exceeded the value of that parameter. Pagination continues from the end of the
+         previous results that returned the nextToken value.
+     */
+    nextToken?: String;
+  }
   export type PortNumber = number;
   export interface TlsValidationContextFileTrust {
     /**
@@ -2102,6 +2911,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     virtualRouterName: ResourceName;
   }
+  export type VirtualGatewayCertificateAuthorityArns = Arn[];
   export type WeightedTargets = WeightedTarget[];
   export type HttpRouteHeaders = HttpRouteHeader[];
   export type String = string;
@@ -2109,6 +2919,25 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     idle?: Duration;
   }
   export type HttpScheme = "http"|"https"|string;
+  export interface DeleteGatewayRouteInput {
+    /**
+     * The name of the gateway route to delete.
+     */
+    gatewayRouteName: ResourceName;
+    /**
+     * The name of the service mesh to delete the gateway route from.
+     */
+    meshName: ResourceName;
+    /**
+     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     */
+    meshOwner?: AccountId;
+    /**
+     * The name of the virtual gateway to delete the route from.
+     */
+    virtualGatewayName: ResourceName;
+  }
   export interface UpdateRouteInput {
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
@@ -2150,6 +2979,9 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * An object that represents a retry policy.
      */
     retryPolicy?: HttpRetryPolicy;
+    /**
+     * An object that represents types of timeouts. 
+     */
     timeout?: HttpTimeout;
   }
   export interface DescribeMeshInput {
@@ -2163,11 +2995,59 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     meshOwner?: AccountId;
   }
+  export interface VirtualGatewayRef {
+    /**
+     * The full Amazon Resource Name (ARN) for the resource.
+     */
+    arn: Arn;
+    /**
+     * The Unix epoch timestamp in seconds for when the resource was created.
+     */
+    createdAt: Timestamp;
+    /**
+     * The Unix epoch timestamp in seconds for when the resource was last updated.
+     */
+    lastUpdatedAt: Timestamp;
+    /**
+     * The name of the service mesh that the resource resides in.
+     */
+    meshName: ResourceName;
+    /**
+     * The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see Working with shared meshes.
+     */
+    meshOwner: AccountId;
+    /**
+     * The AWS IAM account ID of the resource owner. If the account ID is not your own, then it's
+               the ID of the mesh owner or of another account that the mesh is shared with. For more information about mesh sharing, see Working with shared meshes.
+     */
+    resourceOwner: AccountId;
+    /**
+     * The version of the resource. Resources are created at version 1, and this version is incremented each time that they're updated.
+     */
+    version: Long;
+    /**
+     * The name of the resource.
+     */
+    virtualGatewayName: ResourceName;
+  }
   export interface MeshSpec {
     /**
      * The egress filter rules for the service mesh.
      */
     egressFilter?: EgressFilter;
+  }
+  export interface DescribeVirtualGatewayOutput {
+    /**
+     * The full description of your virtual gateway.
+     */
+    virtualGateway: VirtualGatewayData;
+  }
+  export interface DescribeGatewayRouteOutput {
+    /**
+     * The full description of your gateway route.
+     */
+    gatewayRoute: GatewayRouteData;
   }
   export interface ListTagsForResourceOutput {
     /**

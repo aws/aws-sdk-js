@@ -365,7 +365,7 @@ declare namespace Amplify {
      */
     enableBranchAutoBuild: EnableBranchAutoBuild;
     /**
-     *  Automatically disconnects a branch in the Amplify Console when you delete a branch from your Git repository. 
+     *  Automatically disconnect a branch in the Amplify Console when you delete a branch from your Git repository. 
      */
     enableBranchAutoDeletion?: EnableBranchAutoDeletion;
     /**
