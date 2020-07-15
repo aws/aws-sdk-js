@@ -225,6 +225,7 @@ export abstract class ConfigurationServicePlaceholders {
   macie2?: AWS.Macie2.Types.ClientConfiguration;
   codeartifact?: AWS.CodeArtifact.Types.ClientConfiguration;
   honeycode?: AWS.Honeycode.Types.ClientConfiguration;
+  ivs?: AWS.IVS.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -452,4 +453,5 @@ export interface ConfigurationServiceApiVersions {
   macie2?: AWS.Macie2.Types.apiVersion;
   codeartifact?: AWS.CodeArtifact.Types.apiVersion;
   honeycode?: AWS.Honeycode.Types.apiVersion;
+  ivs?: AWS.IVS.Types.apiVersion;
 }

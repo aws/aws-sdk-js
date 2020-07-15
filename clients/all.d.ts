@@ -223,3 +223,4 @@ export import IoTSiteWise = require('./iotsitewise');
 export import Macie2 = require('./macie2');
 export import CodeArtifact = require('./codeartifact');
 export import Honeycode = require('./honeycode');
+export import IVS = require('./ivs');
