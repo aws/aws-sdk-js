@@ -959,146 +959,14 @@
                 members: {
                   foo: {
                     type: 'string',
-                    sensitive: true
                   }
-                }
-              },
-              output: {}
-            }
-          }
-        };
-      });
-
-      it('with sensitive trait in shape\'s own property', function() {
-        var api = new AWS.Model.Api(apiJSON);
-        var CustomMockService = MockServiceFromApi(api);
-        service = new CustomMockService({logger: logger});
-        helpers.mockHttpResponse(200, {}, []);
-        logger.log = logfn;
-        var request = service.makeRequest('mockMethod', {
-          foo: 'secret_key_id'
-        });
-        request.send();
-        expect(data.indexOf('secret_key_id')).to.equal(-1);
-        expect(JSON.stringify(request.params).indexOf('secret_key_id') >= 0).to.equal(true);
-      });
-
-      it('from input shape of structure and with un-inlined shape', function() {
-        var api = new AWS.Model.Api({
-          operations: {
-            mockMethod: {
-              input: {
-                type: 'structure',
-                members: {
-                  foo: {
-                    shape: 'S1'
-                  },
-                  baz: {
-                    type: 'structure',
-                    members: {
-                      bar: {}
-                    }
-                  }
-                }
+                },
               },
               output: {}
             }
           },
-          shapes: {
-            S1: {
-              type: 'blob',
-              sensitive: true
-            }
-          }
-        });
-        var CustomMockService = MockServiceFromApi(api);
-        service = new CustomMockService({logger: logger});
-        helpers.mockHttpResponse(200, {}, []);
-        logger.log = logfn;
-        service.makeRequest('mockMethod', {
-          foo: 'secret_key_id',
-          baz: {
-            bar: 'should log'
-          },
-          qux: 'nonsense'
-        }).send();
-        expect(data.indexOf('secret_key_id')).to.equal(-1);
-        expect(data.indexOf('bar: \'should log\'') >= 0).to.equal(true);
-        expect(data.indexOf('qux: \'nonsense\'') >= 0).to.equal(true);
-      });
-
-      it('from input shape of list', function() {
-        apiJSON.operations.mockMethod.input.members.foo = {
-          type: 'list',
-          member: {
-            sensitive: true
-          }
+          shapes: {}
         };
-        var api = new AWS.Model.Api(apiJSON);
-        var CustomMockService = MockServiceFromApi(api);
-        service = new CustomMockService({logger: logger});
-        helpers.mockHttpResponse(200, {}, []);
-        logger.log = logfn;
-        service.makeRequest('mockMethod', {
-          foo: ['secret_key_id', 'secret_access_key']
-        }).send();
-        expect(data.indexOf('secret_key_id')).to.equal(-1);
-        expect(data.indexOf('secret_access_key')).to.equal(-1);
-      });
-
-      it('from input shape of map', function() {
-        apiJSON.operations.mockMethod.input.members.foo = {
-          type: 'map',
-          key: {
-            type: 'string'
-          },
-          value: {
-            type: 'string',
-            sensitive: true
-          }
-        };
-        var api = new AWS.Model.Api(apiJSON);
-        var CustomMockService = MockServiceFromApi(api);
-        service = new CustomMockService({logger: logger});
-        helpers.mockHttpResponse(200, {}, []);
-        logger.log = logfn;
-        service.makeRequest('mockMethod', {
-          foo: {
-            key0: 'secret_key_id',
-            key1: 'secret_key_id'
-          }
-        }).send();
-        expect(data.indexOf('secret_key_id')).to.equal(-1);
-      });
-
-      it('with recursive input shape', function() {
-        apiJSON.operations.mockMethod.input.members.foo = {
-          type: 'map',
-          key: {
-            type: 'string'
-          },
-          value: {
-            type: 'list',
-            member: {
-              type: 'structure',
-              members: {
-                bar: {sensitive: true}
-              }
-            }
-          }
-        };
-        var api = new AWS.Model.Api(apiJSON);
-        var CustomMockService = MockServiceFromApi(api);
-        service = new CustomMockService({logger: logger});
-        helpers.mockHttpResponse(200, {}, []);
-        logger.log = logfn;
-        service.makeRequest('mockMethod', {
-          foo: {
-            key0: [{bar: 'secret_key_id'}, {bar: 'secret_access_key'}]
-          }
-        }).send();
-        expect(data.indexOf('secret_key_id')).to.equal(-1);
-        expect(data.indexOf('secret_access_key')).to.equal(-1);
       });
 
       it('from input shape of scalars', function() {
@@ -1126,7 +994,7 @@
           member: {
             type: 'structure',
             members: {
-              bar: {},
+              bar: { sensitive: true },
               baz: {}
             }
           }
@@ -1137,11 +1005,260 @@
         helpers.mockHttpResponse(200, {}, []);
         logger.log = logfn;
         service.makeRequest('mockMethod', {
-          foo: [undefined, {bar: 'bar'}]
+          foo: [undefined, {bar: 'secret_key_id'}]
         }).send();
-        expect(data.indexOf('bar: \'bar\'') >= 0).to.equal(true);
-        expect(data.indexOf('undefined') >= 0).to.equal(true);
-        expect(data.indexOf('{}')).to.equal(-1);
+        console.log(data);
+        expect(data.indexOf('secret_key_id')).to.equal(-1);
+        expect(data.indexOf('undefined')).to.be.greaterThan(-1);
+      });
+
+      it('from structure shape with sensitive trait', function() {
+        apiJSON.operations.mockMethod.input.sensitive = true;
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        var request = service.makeRequest('mockMethod', {
+          foo: 'secret_key_id'
+        });
+        request.send();
+        expect(data.indexOf('secret_key_id')).to.equal(-1);
+        expect(data.indexOf('foo')).to.equal(-1);
+      });
+
+      it('from list shape with sensitive trait', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'list',
+          member: {
+            type: 'string'
+          },
+          sensitive: true
+        };
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        service.makeRequest('mockMethod', {
+          foo: ['secret_key_id', 'secret_access_key']
+        }).send();
+        expect(data.indexOf('secret_key_id')).to.equal(-1);
+        expect(data.indexOf('secret_access_key')).to.equal(-1);
+      });
+
+      it('from map shape with sensitive trait', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'map',
+          key: {
+            type: 'string'
+          },
+          value: {
+            type: 'string'
+          },
+          sensitive: true
+        };
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        service.makeRequest('mockMethod', {
+          foo: {
+            key0: 'secret_key_id',
+            key1: 'secret_key_id'
+          }
+        }).send();
+        expect(data.indexOf('key0')).to.equal(-1);
+        expect(data.indexOf('key1')).to.equal(-1);
+        expect(data.indexOf('secret_key_id')).to.equal(-1);
+      });
+
+      it('from array of array shapes with sensitive trait', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'list',
+          member: {
+            type: 'list',
+            member: {
+              type: 'string',
+              sensitive: true
+            },
+          }
+        };
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        service.makeRequest('mockMethod', {
+          foo: [['secret_access_key_a', 'secret_access_key_b']]
+        }).send();
+        expect(data.indexOf('secret_access_key_a')).to.equal(-1);
+        expect(data.indexOf('secret_access_key_b')).to.equal(-1);
+      });
+
+      it('from array of structure shapes with sensitive trait', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'list',
+          member: {
+            type: 'structure',
+            members: {
+              bar: {shape: 'S1'}
+            }
+          }
+        };
+        apiJSON.shapes.S1 = {
+          type: 'string',
+          sensitive: true
+        };
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        service.makeRequest('mockMethod', {
+          foo: [{bar: 'secret_access_key_a'}, {bar: 'secret_access_key_b'}]
+        }).send();
+        expect(data.indexOf('bar')).to.be.greaterThan(-1);
+        expect(data.indexOf('secret_access_key_a')).to.equal(-1);
+        expect(data.indexOf('secret_access_key_b')).to.equal(-1);
+      });
+
+      it('from array of map shapes with sensitive trait', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'list',
+          member: {
+            type: 'map',
+            key: {},
+            value: { sensitive: true }
+          }
+        };
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        service.makeRequest('mockMethod', {
+          foo: [{
+            bar: 'secret_access_key_a',
+            qux: 'secret_access_key_b'
+          }]
+        }).send();
+        expect(data.indexOf('bar')).to.be.greaterThan(-1);
+        expect(data.indexOf('qux')).to.be.greaterThan(-1);
+        expect(data.indexOf('secret_access_key_a')).to.equal(-1);
+        expect(data.indexOf('secret_access_key_b')).to.equal(-1);
+      });
+
+      it('from structure of array shapes with sensitive trait', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'structure',
+          members: {
+            bar: { shape: 'S1' }
+          }
+        };
+        apiJSON.shapes.S1 = {
+          type: 'list',
+          member: {
+            type: 'string'
+          },
+          sensitive: true
+        };
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        service.makeRequest('mockMethod', {
+          foo: {bar: ['secret_access_key']}
+        }).send();
+        expect(data.indexOf('secret_access_key')).to.equal(-1);
+      });
+
+      it('from structure of structure shapes with sensitive trait', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'structure',
+          members: {
+            bar: { shape: 'S1' }
+          }
+        };
+        apiJSON.shapes.S1 = {
+          type: 'structure',
+          members: {
+            qux: { shape: 'S2'}
+          },
+        };
+        apiJSON.shapes.S2 = {
+          sensitive: true
+        };
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        service.makeRequest('mockMethod', {
+          foo: {bar: {qux: 'secret_access_key'}}
+        }).send();
+        expect(data.indexOf('bar')).to.be.greaterThan(-1);
+        expect(data.indexOf('qux')).to.be.greaterThan(-1);
+        expect(data.indexOf('secret_access_key')).to.equal(-1);
+      });
+
+      it('from structure of map shapes with sensitive trait', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'structure',
+          members: {
+            bar: { shape: 'S1' }
+          }
+        };
+        apiJSON.shapes.S1 = {
+          type: 'map',
+          key: {},
+          value: { shape: 'S2' },
+        };
+        apiJSON.shapes.S2 = { sensitive: true };
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        service.makeRequest('mockMethod', {
+          foo: {
+            bar: {key0: 'secret_access_key_0', key1: 'secret_access_key_1'}
+          }
+        }).send();
+        expect(data.indexOf('bar')).to.be.greaterThan(-1);
+        expect(data.indexOf('secret_access_key_0')).to.equal(-1);
+        expect(data.indexOf('secret_access_key_1')).to.equal(-1);
+      });
+
+      it('from map of structure shapes with sensitive trait', function() {
+        apiJSON.operations.mockMethod.input.members.foo = {
+          type: 'map',
+          key: {},
+          value: { shape: 'S1' }
+        };
+        apiJSON.shapes.S1 = {
+          type: 'structure',
+          members: {
+            bar: { shape: 'S2' }
+          }
+        };
+        apiJSON.shapes.S2 = { sensitive: true };
+        var api = new AWS.Model.Api(apiJSON);
+        var CustomMockService = MockServiceFromApi(api);
+        service = new CustomMockService({logger: logger});
+        helpers.mockHttpResponse(200, {}, []);
+        logger.log = logfn;
+        service.makeRequest('mockMethod', {
+          foo: {
+            key0: { bar: 'secret_access_key_0' },
+            key1: { bar: 'secret_access_key_1' }
+          }
+        }).send();
+        expect(data.indexOf('bar')).to.be.greaterThan(-1);
+        expect(data.indexOf('secret_access_key_0')).to.equal(-1);
+        expect(data.indexOf('secret_access_key_1')).to.equal(-1);
       });
     });
 
