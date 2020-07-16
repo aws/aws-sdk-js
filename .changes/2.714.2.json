@@ -1,0 +1,7 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Releasing",
+        "description": "remove aws-sdk-2.714.0.tgz file"
+    }
+]

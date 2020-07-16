@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.714.1-->
+<!--LATEST=2.714.2-->
 <!--ENTRYINSERT-->
+
+## 2.714.2
+* bugfix: Releasing: remove aws-sdk-2.714.0.tgz file
 
 ## 2.714.1
 * bugfix: Logger: Fix the bug that SDK logs the sensitive data in structure, map, and list parameters
