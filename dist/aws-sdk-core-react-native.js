@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.714.0',
+	  VERSION: '2.714.1',
 
 	  /**
 	   * @api private
@@ -6960,6 +6960,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (!shape) {
 	          return shape;
 	        }
+	        if (inputShape.isSensitive) {
+	          return '***SensitiveInformation***';
+	        }
 	        switch (inputShape.type) {
 	          case 'structure':
 	            var struct = {};
@@ -6984,11 +6987,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            });
 	            return map;
 	          default:
-	            if (inputShape.isSensitive) {
-	              return '***SensitiveInformation***';
-	            } else {
-	              return shape;
-	            }
+	            return shape;
 	        }
 	      }
 

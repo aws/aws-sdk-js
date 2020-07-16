@@ -1,0 +1,7 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Logger",
+        "description": "Fix the bug that SDK logs the sensitive data in structure, map, and list parameters"
+    }
+]

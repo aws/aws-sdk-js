@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.714.0-->
+<!--LATEST=2.714.1-->
 <!--ENTRYINSERT-->
+
+## 2.714.1
+* bugfix: Logger: Fix the bug that SDK logs the sensitive data in structure, map, and list parameters
 
 ## 2.714.0
 * feature: IVS: Introducing Amazon Interactive Video Service - a managed live streaming solution that is quick and easy to set up, and ideal for creating interactive video experiences.
