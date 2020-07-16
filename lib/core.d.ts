@@ -14,6 +14,7 @@ export {ProcessCredentials} from './credentials/process_credentials';
 export {TemporaryCredentials} from './credentials/temporary_credentials';
 export {ChainableTemporaryCredentials} from './credentials/chainable_temporary_credentials';
 export {WebIdentityCredentials} from './credentials/web_identity_credentials';
+export {TokenFileWebIdentityCredentials} from './credentials/token_file_web_identity_credentials';
 export {Endpoint} from './endpoint';
 export {EventListeners} from './event_listeners';
 export {HttpRequest} from './http_request';
