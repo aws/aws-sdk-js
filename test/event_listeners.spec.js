@@ -1007,7 +1007,6 @@
         service.makeRequest('mockMethod', {
           foo: [undefined, {bar: 'secret_key_id'}]
         }).send();
-        console.log(data);
         expect(data.indexOf('secret_key_id')).to.equal(-1);
         expect(data.indexOf('undefined')).to.be.greaterThan(-1);
       });
