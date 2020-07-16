@@ -12,6 +12,10 @@ export class EC2MetadataCredentials extends Credentials {
              * Timeout in milliseconds.
              */
             timeout?: number
+            /**
+            * Connection timeout in milliseconds.
+            */
+           connectTimeout?: number
         }
         maxRetries?: number
     }
