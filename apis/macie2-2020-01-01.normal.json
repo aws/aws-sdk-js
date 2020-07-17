@@ -468,7 +468,7 @@
           "documentation": "<p>The request failed because it conflicts with the current state of the specified resource.</p>"
         }
       ],
-      "documentation": "<p>Deletes a custom data identifier.</p>"
+      "documentation": "<p>Soft deletes a custom data identifier.</p>"
     },
     "DeleteFindingsFilter": {
       "name": "DeleteFindingsFilter",
@@ -1618,7 +1618,7 @@
           "documentation": "<p>The request failed because it conflicts with the current state of the specified resource.</p>"
         }
       ],
-      "documentation": "<p>Retrieves information about the status and settings for one or more classification jobs.</p>"
+      "documentation": "<p>Retrieves a subset of information about one or more classification jobs.</p>"
     },
     "ListCustomDataIdentifiers": {
       "name": "ListCustomDataIdentifiers",
@@ -2371,25 +2371,25 @@
         "api": {
           "shape": "__string",
           "locationName": "api",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The name of the operation that was invoked most recently and produced the finding.</p>"
         },
         "apiServiceName": {
           "shape": "__string",
           "locationName": "apiServiceName",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The URL of the AWS service that provides the operation, for example: s3.amazonaws.com.</p>"
         },
         "firstSeen": {
           "shape": "__timestampIso8601",
           "locationName": "firstSeen",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The first date and time, in UTC and extended ISO 8601 format, when any operation was invoked and produced the finding.</p>"
         },
         "lastSeen": {
           "shape": "__timestampIso8601",
           "locationName": "lastSeen",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The most recent date and time, in UTC and extended ISO 8601 format, when the specified operation (api) was invoked and produced the finding.</p>"
         }
       },
-      "documentation": "<p>Reserved for future use.</p>"
+      "documentation": "<p>Provides information about an API operation that an entity invoked for an affected resource.</p>"
     },
     "AssumedRole": {
       "type": "structure",
@@ -2397,30 +2397,30 @@
         "accessKeyId": {
           "shape": "__string",
           "locationName": "accessKeyId",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The AWS access key ID that identifies the credentials.</p>"
         },
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The unique identifier for the AWS account that owns the entity that was used to get the credentials.</p>"
         },
         "arn": {
           "shape": "__string",
           "locationName": "arn",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the entity that was used to get the credentials.</p>"
         },
         "principalId": {
           "shape": "__string",
           "locationName": "principalId",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The unique identifier for the entity that was used to get the credentials.</p>"
         },
         "sessionContext": {
           "shape": "SessionContext",
           "locationName": "sessionContext",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The details of the session that was created for the credentials, including the entity that issued the session.</p>"
         }
       },
-      "documentation": "<p>Reserved for future use.</p>"
+      "documentation": "<p>Provides information about an identity that performed an action on an affected resource by using temporary security credentials. The credentials were obtained using the AssumeRole operation of the AWS Security Token Service (AWS STS) API.</p>"
     },
     "AwsAccount": {
       "type": "structure",
@@ -2428,15 +2428,15 @@
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The unique identifier for the AWS account.</p>"
         },
         "principalId": {
           "shape": "__string",
           "locationName": "principalId",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The unique identifier for the entity that performed the action.</p>"
         }
       },
-      "documentation": "<p>Reserved for future use.</p>"
+      "documentation": "<p>Provides information about an AWS account and entity that performed an action on an affected resource. The action was performed using the credentials for an AWS account other than your own account.</p>"
     },
     "AwsService": {
       "type": "structure",
@@ -2444,10 +2444,10 @@
         "invokedBy": {
           "shape": "__string",
           "locationName": "invokedBy",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The name of the AWS service that performed the action.</p>"
         }
       },
-      "documentation": "<p>Reserved for future use.</p>"
+      "documentation": "<p>Provides information about an AWS service that performed an action on an affected resource.</p>"
     },
     "BatchGetCustomDataIdentifierSummary": {
       "type": "structure",
@@ -2542,20 +2542,20 @@
         "publiclyAccessible": {
           "shape": "__long",
           "locationName": "publiclyAccessible",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The total number of buckets that allow the general public to have read or write access to the bucket.</p>"
         },
         "publiclyReadable": {
           "shape": "__long",
           "locationName": "publiclyReadable",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The total number of buckets that allow the general public to have read access to the bucket.</p>"
         },
         "publiclyWritable": {
           "shape": "__long",
           "locationName": "publiclyWritable",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The total number of buckets that allow the general public to have write access to the bucket.</p>"
         }
       },
-      "documentation": "<p>The total number of buckets that are publicly accessible, based on a combination of permissions settings for each bucket.</p>"
+      "documentation": "<p>Provides information about the number of S3 buckets that are publicly accessible based on a combination of permissions settings for each bucket.</p>"
     },
     "BucketCountByEncryptionType": {
       "type": "structure",
@@ -2563,20 +2563,20 @@
         "kmsManaged": {
           "shape": "__long",
           "locationName": "kmsManaged",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": " <p>The total number of buckets that use an AWS Key Management Service (AWS KMS) customer master key (CMK) to encrypt objects. These buckets use AWS KMS AWS-managed (AWS-KMS) encryption or AWS KMS customer-managed (SSE-KMS) encryption.</p>"
         },
         "s3Managed": {
           "shape": "__long",
           "locationName": "s3Managed",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The total number of buckets that use an Amazon S3-managed key to encrypt objects. These buckets use Amazon S3-managed (SSE-S3) encryption.</p>"
         },
         "unencrypted": {
           "shape": "__long",
           "locationName": "unencrypted",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The total number of buckets that don't encrypt objects by default. Default encryption is disabled for these buckets.</p>"
         }
       },
-      "documentation": "<p>The total number of buckets, grouped by server-side encryption type. This object also reports the total number of buckets that aren't encrypted.</p>"
+      "documentation": "<p>Provides information about the number of S3 buckets that use certain types of server-side encryption or don't encrypt objects by default.</p>"
     },
     "BucketCountBySharedAccessType": {
       "type": "structure",
@@ -2584,20 +2584,20 @@
         "external": {
           "shape": "__long",
           "locationName": "external",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The total number of buckets that are shared with an AWS account that isn't part of the same Amazon Macie organization.</p>"
         },
         "internal": {
           "shape": "__long",
           "locationName": "internal",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The total number of buckets that are shared with an AWS account that's part of the same Amazon Macie organization.</p>"
         },
         "notShared": {
           "shape": "__long",
           "locationName": "notShared",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The total number of buckets that aren't shared with any other AWS accounts.</p>"
         }
       },
-      "documentation": "<p>The total number of buckets that are shared with another AWS account or configured to support cross-origin resource sharing (CORS).</p>"
+      "documentation": "<p>Provides information about the number of S3 buckets that are shared with other AWS accounts.</p>"
     },
     "BucketCriteria": {
       "type": "map",
@@ -2697,7 +2697,7 @@
         "classifiableObjectCount": {
           "shape": "__long",
           "locationName": "classifiableObjectCount",
-          "documentation": "<p>The total number of objects that Amazon Macie can monitor and analyze in the bucket. These objects use a file format, file extension, or content type that Amazon Macie supports.</p>"
+          "documentation": "<p>The total number of objects that Amazon Macie can analyze in the bucket. These objects use a file format, file extension, or content type that Amazon Macie supports.</p>"
         },
         "lastUpdated": {
           "shape": "__timestampIso8601",
@@ -2732,7 +2732,7 @@
         "sharedAccess": {
           "shape": "SharedAccess",
           "locationName": "sharedAccess",
-          "documentation": "<p>Specifies whether the bucket is shared with another AWS account or configured to support cross-origin resource sharing (CORS). Valid values are:</p> <ul><li><p>EXTERNAL - The bucket is shared with an AWS account that isn’t part of the Amazon Macie organization.</p></li> <li><p>INTERNAL - The bucket is shared with an AWS account that's part of the Amazon Macie organization.</p></li> <li><p>NOT_SHARED - The bucket isn't shared with other AWS accounts.</p></li></ul>"
+          "documentation": "<p>Specifies whether the bucket is shared with another AWS account. Valid values are:</p> <ul><li><p>EXTERNAL - The bucket is shared with an AWS account that isn’t part of the same Amazon Macie organization.</p></li> <li><p>INTERNAL - The bucket is shared with an AWS account that's part of the same Amazon Macie organization.</p></li> <li><p>NOT_SHARED - The bucket isn't shared with other AWS accounts.</p></li></ul>"
         },
         "sizeInBytes": {
           "shape": "__long",
@@ -2771,7 +2771,7 @@
           "documentation": "<p>The bucket-level permissions settings for the bucket.</p>"
         }
       },
-      "documentation": "<p>The account-level and bucket-level permissions settings for an S3 bucket, or the bucket that contains an object.</p>"
+      "documentation": "<p>The account-level and bucket-level permissions settings for an S3 bucket.</p>"
     },
     "BucketPolicy": {
       "type": "structure",
@@ -2887,7 +2887,7 @@
           "documentation": "<p>The status of the finding.</p>"
         }
       },
-      "documentation": "<p>Provides detailed information about a sensitive data finding, including the types and number of occurrences of the data that was found.</p>"
+      "documentation": "<p>Provides detailed information about a sensitive data finding, including the types and number of occurrences of the sensitive data that was found.</p>"
     },
     "ClassificationResultStatus": {
       "type": "structure",
@@ -2922,7 +2922,7 @@
         "description": {
           "shape": "__string",
           "locationName": "description",
-          "documentation": "<p>A custom description of the job. The description can contain as many as 512 characters.</p>"
+          "documentation": "<p>A custom description of the job. The description can contain as many as 200 characters.</p>"
         },
         "initialRun": {
           "shape": "__boolean",
@@ -2937,7 +2937,7 @@
         "name": {
           "shape": "__string",
           "locationName": "name",
-          "documentation": "<p>A custom name for the job. The name must contain at least 3 characters and can contain as many as 64 characters.</p>"
+          "documentation": "<p>A custom name for the job. The name can contain as many as 500 characters.</p>"
         },
         "s3JobDefinition": {
           "shape": "S3JobDefinition",
@@ -2994,7 +2994,7 @@
         "description": {
           "shape": "__string",
           "locationName": "description",
-          "documentation": "<p>A custom description of the custom data identifier. The description can contain up to 120 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the description of a custom data identifier. Other users of your account might be able to see the identifier's description, depending on the actions that they're allowed to perform in Amazon Macie.</p>"
+          "documentation": "<p>A custom description of the custom data identifier. The description can contain as many as 512 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the description of a custom data identifier. Other users of your account might be able to see the identifier's description, depending on the actions that they're allowed to perform in Amazon Macie.</p>"
         },
         "ignoreWords": {
           "shape": "__listOf__string",
@@ -3014,12 +3014,12 @@
         "name": {
           "shape": "__string",
           "locationName": "name",
-          "documentation": "<p>A custom name for the custom data identifier. The name can contain as many as 120 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the name of a custom data identifier. Other users of your account might be able to see the identifier's name, depending on the actions that they're allowed to perform in Amazon Macie.</p>"
+          "documentation": "<p>A custom name for the custom data identifier. The name can contain as many as 128 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the name of a custom data identifier. Other users of your account might be able to see the identifier's name, depending on the actions that they're allowed to perform in Amazon Macie.</p>"
         },
         "regex": {
           "shape": "__string",
           "locationName": "regex",
-          "documentation": "<p>The regular expression (regex) that defines the pattern to match. The expression can contain as many as 500 characters.</p>"
+          "documentation": "<p>The regular expression (<i>regex</i>) that defines the pattern to match. The expression can contain as many as 512 characters.</p>"
         },
         "tags": {
           "shape": "TagMap",
@@ -3264,7 +3264,7 @@
         "detections": {
           "shape": "CustomDetections",
           "locationName": "detections",
-          "documentation": "<p>The names of the custom data identifiers that detected the data, and the number of occurrences of the data that each identifier detected.</p>"
+          "documentation": "<p>The custom data identifiers that detected the data, and the number of occurrences of the data that each identifier detected.</p>"
         },
         "totalCount": {
           "shape": "__long",
@@ -3297,7 +3297,7 @@
     },
     "CustomDetections": {
       "type": "list",
-      "documentation": "<p>Reserved for future use.</p>",
+      "documentation": "<p>Provides information about custom data identifiers that produced a sensitive data finding, and the number of occurrences of the data that each identifier detected.</p>",
       "member": {
         "shape": "CustomDetection"
       }
@@ -3305,7 +3305,7 @@
     "DailySchedule": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>Run the job once a day, every day. If specified, this is an empty object.</p>"
+      "documentation": "<p>Specifies that a classification job runs once a day, every day. This is an empty object.</p>"
     },
     "DayOfWeek": {
       "type": "string",
@@ -3356,11 +3356,11 @@
           "documentation": "<p>The type of data that was detected. For example, AWS_CREDENTIALS, PHONE_NUMBER, or ADDRESS.</p>"
         }
       },
-      "documentation": "<p>Provides information about sensitive data that was detected by managed data identifiers and produced a finding.</p>"
+      "documentation": "<p>Provides information about sensitive data that was detected by managed data identifiers and produced a sensitive data finding.</p>"
     },
     "DefaultDetections": {
       "type": "list",
-      "documentation": "<p>Reserved for future use.</p>",
+      "documentation": "<p>Provides information about sensitive data that was detected by managed data identifiers and produced a sensitive data finding, and the number of occurrences of each type of sensitive data that was detected.</p>",
       "member": {
         "shape": "DefaultDetection"
       }
@@ -3538,12 +3538,12 @@
         "jobStatus": {
           "shape": "JobStatus",
           "locationName": "jobStatus",
-          "documentation": "<p>The current status of the job. Possible value are:</p> <ul><li><p>CANCELLED - The job was cancelled by you or a user of the master account for your organization. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job's access to the bucket.</p></li> <li><p>COMPLETE - Amazon Macie finished processing all the data specified for the job.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to jobs that occur only once.</p></li> <li><p>PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account.</p></li> <li><p>RUNNING - The job is in progress.</p></li></ul>"
+          "documentation": "<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - The job was cancelled by you or a user of the master account for your organization. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job's access to the bucket.</p></li> <li><p>COMPLETE - Amazon Macie finished processing all the data specified for the job.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to jobs that occur only once.</p></li> <li><p>PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account.</p></li> <li><p>RUNNING - The job is in progress.</p></li></ul>"
         },
         "jobType": {
           "shape": "JobType",
           "locationName": "jobType",
-          "documentation": "<p>The schedule for running the job. Possible value are:</p> <ul><li><p>ONE_TIME - The job ran or will run only once.</p></li> <li><p>SCHEDULED - The job runs on a daily, weekly, or monthly basis. The scheduleFrequency property indicates the recurrence pattern for the job.</p></li></ul>"
+          "documentation": "<p>The schedule for running the job. Possible values are:</p> <ul><li><p>ONE_TIME - The job ran or will run only once.</p></li> <li><p>SCHEDULED - The job runs on a daily, weekly, or monthly basis. The scheduleFrequency property indicates the recurrence pattern for the job.</p></li></ul>"
         },
         "lastRunTime": {
           "shape": "__timestampIso8601",
@@ -3568,7 +3568,7 @@
         "scheduleFrequency": {
           "shape": "JobScheduleFrequency",
           "locationName": "scheduleFrequency",
-          "documentation": "<p>The recurrence pattern for running the job. If the job is configured to run every day, this value is an empty dailySchedule object. If the job is configured to run only once, this value is null.</p>"
+          "documentation": "<p>The recurrence pattern for running the job. If the job is configured to run only once, this value is null.</p>"
         },
         "statistics": {
           "shape": "Statistics",
@@ -3659,10 +3659,10 @@
         "domainName": {
           "shape": "__string",
           "locationName": "domainName",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The name of the domain.</p>"
         }
       },
-      "documentation": "<p>The DNS name of the entity that performed the action on the affected resource.</p>"
+      "documentation": "<p>Provides information about the domain name of the device that an entity used to perform an action on an affected resource.</p>"
     },
     "EffectivePermission": {
       "type": "string",
@@ -3721,7 +3721,7 @@
     },
     "EncryptionType": {
       "type": "string",
-      "documentation": "<p>The server-side encryption algorithm that's used when storing the S3 bucket or object. Valid values are:</p>",
+      "documentation": "<p>The type of server-side encryption that's used to encrypt objects in the S3 bucket. Valid values are:</p>",
       "enum": [
         "NONE",
         "AES256",
@@ -3743,30 +3743,30 @@
         "accessKeyId": {
           "shape": "__string",
           "locationName": "accessKeyId",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The AWS access key ID that identifies the credentials.</p>"
         },
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The unique identifier for the AWS account that owns the entity that was used to get the credentials.</p>"
         },
         "arn": {
           "shape": "__string",
           "locationName": "arn",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the entity that was used to get the credentials.</p>"
         },
         "principalId": {
           "shape": "__string",
           "locationName": "principalId",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The unique identifier for the entity that was used to get the credentials.</p>"
         },
         "sessionContext": {
           "shape": "SessionContext",
           "locationName": "sessionContext",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The details of the session that was created for the credentials, including the entity that issued the session.</p>"
         }
       },
-      "documentation": "<p>Reserved for future use.</p>"
+      "documentation": "<p>Provides information about an identity that performed an action on an affected resource by using temporary security credentials. The credentials were obtained using the GetFederationToken operation of the AWS Security Token Service (AWS STS) API.</p>"
     },
     "Finding": {
       "type": "structure",
@@ -3774,7 +3774,7 @@
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>The identifier for the AWS account that the finding applies to. This is typically the account that owns the affected resource.</p>"
+          "documentation": "<p>The unique identifier for the AWS account that the finding applies to. This is typically the account that owns the affected resource.</p>"
         },
         "archived": {
           "shape": "__boolean",
@@ -3875,14 +3875,14 @@
         "apiCallDetails": {
           "shape": "ApiCallDetails",
           "locationName": "apiCallDetails",
-          "documentation": "<p>For the affected resource:</p> <ul><li><p>The name of the operation that was invoked most recently and produced the finding (api).</p></li> <li><p>The first date and time when any operation was invoked and produced the finding (firstSeen).</p></li> <li><p>The most recent date and time when the specified operation was invoked and produced the finding (lastSeen).</p></li></ul> <p>All date and time values are in UTC and extended ISO 8601 format.</p>"
+          "documentation": "<p>The invocation details of the API operation that an entity invoked for the affected resource, if the value for the actionType property is AWS_API_CALL.</p>"
         }
       },
       "documentation": "<p>Provides information about an action that occurred for a resource and produced a policy finding.</p>"
     },
     "FindingActionType": {
       "type": "string",
-      "documentation": "<p>The type of action that occurred for the resource and produced the policy finding.</p>",
+      "documentation": "<p>The type of action that occurred for the resource and produced the policy finding:</p>",
       "enum": [
         "AWS_API_CALL"
       ]
@@ -3893,17 +3893,17 @@
         "domainDetails": {
           "shape": "DomainDetails",
           "locationName": "domainDetails",
-          "documentation": "<p>The DNS name of the entity that performed the action on the affected resource.</p>"
+          "documentation": "<p>The domain name of the device that the entity used to perform the action on the affected resource.</p>"
         },
         "ipAddressDetails": {
           "shape": "IpAddressDetails",
           "locationName": "ipAddressDetails",
-          "documentation": "<p>The IP address of the device that the entity used to perform the action on the affected resource. This object also provides information such as the owner and geographical location for the IP address.</p>"
+          "documentation": "<p>The IP address of the device that the entity used to perform the action on the affected resource. This object also provides information such as the owner and geographic location for the IP address.</p>"
         },
         "userIdentity": {
           "shape": "UserIdentity",
           "locationName": "userIdentity",
-          "documentation": "<p>The name and type of entity that performed the action on the affected resource.</p>"
+          "documentation": "<p>The type and other characteristics of the entity that performed the action on the affected resource.</p>"
         }
       },
       "documentation": "<p>Provides information about an entity that performed an action that produced a policy finding for a resource.</p>"
@@ -3958,7 +3958,7 @@
           "documentation": "<p>The sort order to apply to the results, based on the value for the property specified by the attributeName property. Valid values are: ASC, sort the results in ascending order; and, DESC, sort the results in descending order.</p>"
         }
       },
-      "documentation": "<p>Specifies criteria for sorting the results of a query for information about findings.</p>"
+      "documentation": "<p>Specifies criteria for sorting the results of a query that retrieves aggregated statistical data about findings.</p>"
     },
     "FindingType": {
       "type": "string",
@@ -3987,6 +3987,11 @@
     "FindingsFilterListItem": {
       "type": "structure",
       "members": {
+        "action": {
+          "shape": "FindingsFilterAction",
+          "locationName": "action",
+          "documentation": "<p>The action that's performed on findings that meet the filter criteria. Possible values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don't perform any action on the findings.</p>"
+        },
         "arn": {
           "shape": "__string",
           "locationName": "arn",
@@ -4031,7 +4036,7 @@
         "bucketCountByEffectivePermission": {
           "shape": "BucketCountByEffectivePermission",
           "locationName": "bucketCountByEffectivePermission",
-          "documentation": "<p>The total number of buckets that are publicly accessible, based on a combination of permissions settings for each bucket.</p>"
+          "documentation": "<p>The total number of buckets that are publicly accessible based on a combination of permissions settings for each bucket.</p>"
         },
         "bucketCountByEncryptionType": {
           "shape": "BucketCountByEncryptionType",
@@ -4041,12 +4046,12 @@
         "bucketCountBySharedAccessType": {
           "shape": "BucketCountBySharedAccessType",
           "locationName": "bucketCountBySharedAccessType",
-          "documentation": "<p>The total number of buckets that are shared with another AWS account or configured to support cross-origin resource sharing (CORS).</p>"
+          "documentation": "<p>The total number of buckets that are shared with another AWS account.</p>"
         },
         "classifiableObjectCount": {
           "shape": "__long",
           "locationName": "classifiableObjectCount",
-          "documentation": "<p>The total number of objects that Amazon Macie can monitor and analyze in all the buckets. These objects use a file format, file extension, or content type that Amazon Macie supports.</p>"
+          "documentation": "<p>The total number of objects that Amazon Macie can analyze in all the buckets. These objects use a file format, file extension, or content type that Amazon Macie supports.</p>"
         },
         "lastUpdated": {
           "shape": "__timestampIso8601",
@@ -4149,7 +4154,7 @@
         "regex": {
           "shape": "__string",
           "locationName": "regex",
-          "documentation": "<p>The regular expression (regex) that defines the pattern to match.</p>"
+          "documentation": "<p>The regular expression (<i>regex</i>) that defines the pattern to match.</p>"
         },
         "tags": {
           "shape": "TagMap",
@@ -4317,7 +4322,7 @@
         "serviceRole": {
           "shape": "__string",
           "locationName": "serviceRole",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the service-level role that allows Amazon Macie to monitor and analyze data in AWS resources for the account.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the service-linked role that allows Amazon Macie to monitor and analyze data in AWS resources for the account.</p>"
         },
         "status": {
           "shape": "MacieStatus",
@@ -4481,7 +4486,7 @@
           "documentation": "<p>The name of the property that defines the group in the query results, as specified by the groupBy property in the query request.</p>"
         }
       },
-      "documentation": "<p>Provides a group of results for a query that retrieved information about findings.</p>"
+      "documentation": "<p>Provides a group of results for a query that retrieved aggregated statistical data about findings.</p>"
     },
     "IamUser": {
       "type": "structure",
@@ -4489,25 +4494,25 @@
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The unique identifier for the AWS account that's associated with the IAM user who performed the action.</p>"
         },
         "arn": {
           "shape": "__string",
           "locationName": "arn",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the principal that performed the action. The last section of the ARN contains the name of the user who performed the action.</p>"
         },
         "principalId": {
           "shape": "__string",
           "locationName": "principalId",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The unique identifier for the IAM user who performed the action.</p>"
         },
         "userName": {
           "shape": "__string",
           "locationName": "userName",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The user name of the IAM user who performed the action.</p>"
         }
       },
-      "documentation": "<p>Reserved for future use.</p>"
+      "documentation": "<p>Provides information about an AWS Identity and Access Management (IAM) user who performed an action on an affected resource.</p>"
     },
     "Invitation": {
       "type": "structure",
@@ -4541,30 +4546,30 @@
         "ipAddressV4": {
           "shape": "__string",
           "locationName": "ipAddressV4",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The Internet Protocol version 4 (IPv4) address of the device.</p>"
         },
         "ipCity": {
           "shape": "IpCity",
           "locationName": "ipCity",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The city that the IP address originated from.</p>"
         },
         "ipCountry": {
           "shape": "IpCountry",
           "locationName": "ipCountry",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The country that the IP address originated from.</p>"
         },
         "ipGeoLocation": {
           "shape": "IpGeoLocation",
           "locationName": "ipGeoLocation",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The geographic coordinates of the location that the IP address originated from.</p>"
         },
         "ipOwner": {
           "shape": "IpOwner",
           "locationName": "ipOwner",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The registered owner of the IP address.</p>"
         }
       },
-      "documentation": "<p>The IP address of the device that the entity used to perform the action on the affected resource. This object also provides information such as the owner and geographical location for the IP address.</p>"
+      "documentation": "<p>Provides information about the IP address of the device that an entity used to perform an action on an affected resource.</p>"
     },
     "IpCity": {
       "type": "structure",
@@ -4572,10 +4577,10 @@
         "name": {
           "shape": "__string",
           "locationName": "name",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The name of the city.</p>"
         }
       },
-      "documentation": "<p>Reserved for future use.</p>"
+      "documentation": "<p>Provides information about the city that an IP address originated from.</p>"
     },
     "IpCountry": {
       "type": "structure",
@@ -4583,15 +4588,15 @@
         "code": {
           "shape": "__string",
           "locationName": "code",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The two-character code, in ISO 3166-1 alpha-2 format, for the country that the IP address originated from. For example, US for the United States.</p>"
         },
         "name": {
           "shape": "__string",
           "locationName": "name",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The name of the country that the IP address originated from.</p>"
         }
       },
-      "documentation": "<p>Reserved for future use.</p>"
+      "documentation": "<p>Provides information about the country that an IP address originated from.</p>"
     },
     "IpGeoLocation": {
       "type": "structure",
@@ -4599,15 +4604,15 @@
         "lat": {
           "shape": "__double",
           "locationName": "lat",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The latitude coordinate of the location, rounded to four decimal places.</p>"
         },
         "lon": {
           "shape": "__double",
           "locationName": "lon",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The longitude coordinate of the location, rounded to four decimal places.</p>"
         }
       },
-      "documentation": "<p>Reserved for future use.</p>"
+      "documentation": "<p>Provides geographic coordinates that indicate where a specified IP address originated from.</p>"
     },
     "IpOwner": {
       "type": "structure",
@@ -4615,25 +4620,25 @@
         "asn": {
           "shape": "__string",
           "locationName": "asn",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The autonomous system number (ASN) for the autonomous system that included the IP address.</p>"
         },
         "asnOrg": {
           "shape": "__string",
           "locationName": "asnOrg",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The organization identifier that's associated with the autonomous system number (ASN) for the autonomous system that included the IP address.</p>"
         },
         "isp": {
           "shape": "__string",
           "locationName": "isp",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The name of the internet service provider (ISP) that owned the IP address.</p>"
         },
         "org": {
           "shape": "__string",
           "locationName": "org",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The name of the organization that owned the IP address.</p>"
         }
       },
-      "documentation": "<p>Reserved for future use.</p>"
+      "documentation": "<p>Provides information about the registered owner of an IP address.</p>"
     },
     "JobComparator": {
       "type": "string",
@@ -4654,17 +4659,17 @@
         "dailySchedule": {
           "shape": "DailySchedule",
           "locationName": "dailySchedule",
-          "documentation": "<p>Run the job once a day, every day. If specified, this is an empty object.</p>"
+          "documentation": "<p>Specifies a daily recurrence pattern for running the job.</p>"
         },
         "monthlySchedule": {
           "shape": "MonthlySchedule",
           "locationName": "monthlySchedule",
-          "documentation": "<p>Run the job once a month, on a specific day of the month. This value can be an integer from 1 through 30.</p>"
+          "documentation": "<p>Specifies a monthly recurrence pattern for running the job.</p>"
         },
         "weeklySchedule": {
           "shape": "WeeklySchedule",
           "locationName": "weeklySchedule",
-          "documentation": "<p>Run the job once a week, on a specific day of the week. Valid values are: MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, and SUNDAY.</p>"
+          "documentation": "<p>Specifies a weekly recurrence pattern for running the job.</p>"
         }
       },
       "documentation": "<p>Specifies the recurrence pattern for running a classification job.</p>"
@@ -4675,15 +4680,15 @@
         "simpleScopeTerm": {
           "shape": "SimpleScopeTerm",
           "locationName": "simpleScopeTerm",
-          "documentation": "<p>A property-based condition that defines a property, operator, and one or more values for including or excluding an object from a job.</p>"
+          "documentation": "<p>A property-based condition that defines a property, operator, and one or more values for including or excluding an object from the job.</p>"
         },
         "tagScopeTerm": {
           "shape": "TagScopeTerm",
           "locationName": "tagScopeTerm",
-          "documentation": "<p>A tag-based condition that defines a property, operator, and one or more values for including or excluding an object from a job.</p>"
+          "documentation": "<p>A tag-based condition that defines the operator and a tag key or tag keys and values for including or excluding an object from the job.</p>"
         }
       },
-      "documentation": "<p>Specifies one or more conditions that determine which objects a classification job analyzes.</p>"
+      "documentation": "<p>Specifies a property- or tag-based condition that defines criteria for including or excluding objects from a classification job.</p>"
     },
     "JobScopingBlock": {
       "type": "structure",
@@ -4691,14 +4696,14 @@
         "and": {
           "shape": "__listOfJobScopeTerm",
           "locationName": "and",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>An array of conditions, one for each condition that determines which objects to include or exclude from the job.</p>"
         }
       },
-      "documentation": "<p>Reserved for future use.</p>"
+      "documentation": "<p>Specifies one or more property- and tag-based conditions that define criteria for including or excluding objects from a classification job.</p>"
     },
     "JobStatus": {
       "type": "string",
-      "documentation": "<p>The current status of a classification job. Valid values are:</p>",
+      "documentation": "<p>The current status of a classification job. Possible values are:</p>",
       "enum": [
         "RUNNING",
         "PAUSED",
@@ -4728,12 +4733,12 @@
         "jobStatus": {
           "shape": "JobStatus",
           "locationName": "jobStatus",
-          "documentation": "<p>The current status of the job. Possible value are:</p> <ul><li><p>CANCELLED - The job was cancelled by you or a user of the master account for your organization. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job's access to the bucket.</p></li> <li><p>COMPLETE - Amazon Macie finished processing all the data specified for the job.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to jobs that occur only once.</p></li> <li><p>PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account.</p></li> <li><p>RUNNING - The job is in progress.</p></li></ul>"
+          "documentation": "<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - The job was cancelled by you or a user of the master account for your organization. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job's access to the bucket.</p></li> <li><p>COMPLETE - Amazon Macie finished processing all the data specified for the job.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to jobs that occur only once.</p></li> <li><p>PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account.</p></li> <li><p>RUNNING - The job is in progress.</p></li></ul>"
         },
         "jobType": {
           "shape": "JobType",
           "locationName": "jobType",
-          "documentation": "<p>The schedule for running the job. Possible value are:</p> <ul><li><p>ONE_TIME - The job ran or will run only once.</p></li> <li><p>SCHEDULED - The job runs on a daily, weekly, or monthly basis.</p></li></ul>"
+          "documentation": "<p>The schedule for running the job. Possible values are:</p> <ul><li><p>ONE_TIME - The job ran or will run only once.</p></li> <li><p>SCHEDULED - The job runs on a daily, weekly, or monthly basis.</p></li></ul>"
         },
         "name": {
           "shape": "__string",
@@ -4769,7 +4774,7 @@
     },
     "KeyValuePairList": {
       "type": "list",
-      "documentation": "<p>Reserved for future use.</p>",
+      "documentation": "<p>Provides information about the tags that are associated with an S3 bucket or object. Each tag consists of a required tag key and an associated tag value.</p>",
       "member": {
         "shape": "KeyValuePair"
       }
@@ -5180,10 +5185,10 @@
         "dayOfMonth": {
           "shape": "__integer",
           "locationName": "dayOfMonth",
-          "documentation": "<p>Run the job once a month, on a specific day of the month. This value can be an integer from 1 through 30.</p>"
+          "documentation": "<p>The numeric day of the month when Amazon Macie runs the job. This value can be an integer from 1 through 30.</p>"
         }
       },
-      "documentation": "<p>Run the job once a month, on a specific day of the month. This value can be an integer from 1 through 30.</p>"
+      "documentation": "<p>Specifies a monthly recurrence pattern for running a classification job.</p>"
     },
     "ObjectCountByEncryptionType": {
       "type": "structure",
@@ -5224,7 +5229,7 @@
         "action": {
           "shape": "FindingAction",
           "locationName": "action",
-          "documentation": "<p>The action that occurred and produced the finding.</p>"
+          "documentation": "<p>The action that produced the finding.</p>"
         },
         "actor": {
           "shape": "FindingActor",
@@ -5232,7 +5237,7 @@
           "documentation": "<p>The entity that performed the action that produced the finding.</p>"
         }
       },
-      "documentation": "<p>Provides detailed information about a policy finding.</p>"
+      "documentation": "<p>Provides the details of a policy finding.</p>"
     },
     "PutClassificationExportConfigurationRequest": {
       "type": "structure",
@@ -5268,7 +5273,9 @@
         "Removed",
         "Resigned",
         "EmailVerificationInProgress",
-        "EmailVerificationFailed"
+        "EmailVerificationFailed",
+        "RegionDisabled",
+        "AccountSuspended"
       ]
     },
     "ReplicationDetails": {
@@ -5397,7 +5404,7 @@
         "kmsKeyArn": {
           "shape": "__string",
           "locationName": "kmsKeyArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Key Management Service customer master key (CMK) to use for encryption of the results. This must be the ARN of an existing CMK that's in the same AWS Region as the bucket.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for encryption of the results. This must be the ARN of an existing CMK that's in the same AWS Region as the bucket.</p>"
         }
       },
       "documentation": "<p>Specifies an S3 bucket to store data classification results in, and the encryption settings to use when storing results in that bucket.</p>",
@@ -5417,7 +5424,7 @@
         "scoping": {
           "shape": "Scoping",
           "locationName": "scoping",
-          "documentation": "<p>A JobScopeTerm object that specifies conditions for including or excluding objects from the job.</p>"
+          "documentation": "<p>The property- and tag-based conditions that determine which objects to include or exclude from the analysis.</p>"
         }
       },
       "documentation": "<p>Specifies which S3 buckets contain the objects that a classification job analyzes, and the scope of that analysis.</p>"
@@ -5501,19 +5508,19 @@
     },
     "Scoping": {
       "type": "structure",
-      "documentation": "<p>An object that specifies conditions for including or excluding objects from the job.</p>",
       "members": {
         "excludes": {
           "shape": "JobScopingBlock",
           "locationName": "excludes",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The property- or tag-based conditions that determine which objects to exclude from the analysis.</p>"
         },
         "includes": {
           "shape": "JobScopingBlock",
           "locationName": "includes",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The property- or tag-based conditions that determine which objects to include in the analysis.</p>"
         }
-      }
+      },
+      "documentation": "<p>Specifies one or more property- and tag-based conditions that refine the scope of a classification job. These conditions define criteria that determine which objects a job analyzes.</p>"
     },
     "SensitiveData": {
       "type": "list",
@@ -5545,7 +5552,7 @@
     },
     "SensitiveDataItemCategory": {
       "type": "string",
-      "documentation": "<p>The category of sensitive data that was detected and produced the finding.</p>",
+      "documentation": "<p>The category of sensitive data that was detected and produced the finding. Possible values are:</p>",
       "enum": [
         "FINANCIAL_INFORMATION",
         "PERSONAL_INFORMATION",
@@ -5601,7 +5608,7 @@
         "sessionIssuer": {
           "shape": "SessionIssuer",
           "locationName": "sessionIssuer",
-          "documentation": "<p>The source and type of credentials that the entity obtained.</p>"
+          "documentation": "<p>The source and type of credentials that were issued to the entity.</p>"
         }
       },
       "documentation": "<p>Provides information about a session that was created for an entity that performed an action by using temporary security credentials.</p>"
@@ -5612,7 +5619,7 @@
         "creationDate": {
           "shape": "__timestampIso8601",
           "locationName": "creationDate",
-          "documentation": "<p>The date and time, in ISO 8601 format, when the credentials were issued.</p>"
+          "documentation": "<p>The date and time, in UTC and ISO 8601 format, when the credentials were issued.</p>"
         },
         "mfaAuthenticated": {
           "shape": "__boolean",
@@ -5628,7 +5635,7 @@
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>The account that owns the entity that was used to get the credentials.</p>"
+          "documentation": "<p>The unique identifier for the AWS account that owns the entity that was used to get the credentials.</p>"
         },
         "arn": {
           "shape": "__string",
@@ -5638,7 +5645,7 @@
         "principalId": {
           "shape": "__string",
           "locationName": "principalId",
-          "documentation": "<p>The internal identifier for the entity that was used to get the credentials.</p>"
+          "documentation": "<p>The unique identifier for the entity that was used to get the credentials.</p>"
         },
         "type": {
           "shape": "__string",
@@ -5671,7 +5678,7 @@
     },
     "SeverityDescription": {
       "type": "string",
-      "documentation": "<p>The textual representation of the finding's severity. Valid values are:</p>",
+      "documentation": "<p>The textual representation of the finding's severity. Possible values are:</p>",
       "enum": [
         "Low",
         "Medium",
@@ -5741,7 +5748,7 @@
     },
     "StorageClass": {
       "type": "string",
-      "documentation": "<p>The storage class of the S3 bucket or object. Valid values are:</p>",
+      "documentation": "<p>The storage class of the S3 bucket or object. Possible values are:</p>",
       "enum": [
         "STANDARD",
         "REDUCED_REDUNDANCY",
@@ -5856,7 +5863,7 @@
         "regex": {
           "shape": "__string",
           "locationName": "regex",
-          "documentation": "<p>The regular expression (regex) that defines the pattern to match. The expression can contain as many as 500 characters.</p>"
+          "documentation": "<p>The regular expression (<i>regex</i>) that defines the pattern to match. The expression can contain as many as 512 characters.</p>"
         },
         "sampleText": {
           "shape": "__string",
@@ -6101,7 +6108,7 @@
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>The AWS account ID for the account that the data applies to.</p>"
+          "documentation": "<p>The unique identifier for the AWS account that the data applies to.</p>"
         },
         "freeTrialStartDate": {
           "shape": "__timestampIso8601",
@@ -6134,7 +6141,7 @@
     },
     "UsageStatisticsFilterKey": {
       "type": "string",
-      "documentation": "<p>The field to use to filter the results of a query for account quotas and usage data.</p>",
+      "documentation": "<p>The field to use to filter the results of a query for account quotas and usage data:</p>",
       "enum": [
         "accountId"
       ]
@@ -6157,7 +6164,7 @@
     },
     "UsageStatisticsSortKey": {
       "type": "string",
-      "documentation": "<p>The field to use to sort the results of a query for account quotas and usage data.</p>",
+      "documentation": "<p>The field to use to sort the results of a query for account quotas and usage data. Valid values are:</p>",
       "enum": [
         "accountId",
         "total"
@@ -6197,34 +6204,41 @@
       "members": {
         "assumedRole": {
           "shape": "AssumedRole",
-          "locationName": "assumedRole"
+          "locationName": "assumedRole",
+          "documentation": "<p>If the action was performed with temporary security credentials that were obtained using the AssumeRole operation of the AWS Security Token Service (AWS STS) API, the identifiers, session context, and other details about the identity.</p>"
         },
         "awsAccount": {
           "shape": "AwsAccount",
-          "locationName": "awsAccount"
+          "locationName": "awsAccount",
+          "documentation": "<p>If the action was performed using the credentials for another AWS account, the details of that account.</p>"
         },
         "awsService": {
           "shape": "AwsService",
-          "locationName": "awsService"
+          "locationName": "awsService",
+          "documentation": "<p>If the action was performed by an AWS account that belongs to an AWS service, the name of the service.</p>"
         },
         "federatedUser": {
           "shape": "FederatedUser",
-          "locationName": "federatedUser"
+          "locationName": "federatedUser",
+          "documentation": "<p>If the action was performed with temporary security credentials that were obtained using the GetFederationToken operation of the AWS Security Token Service (AWS STS) API, the identifiers, session context, and other details about the identity.</p>"
         },
         "iamUser": {
           "shape": "IamUser",
-          "locationName": "iamUser"
+          "locationName": "iamUser",
+          "documentation": "<p>If the action was performed using the credentials for an AWS Identity and Access Management (IAM) user, the name and other details about the user.</p>"
         },
         "root": {
           "shape": "UserIdentityRoot",
-          "locationName": "root"
+          "locationName": "root",
+          "documentation": "<p>If the action was performed using the credentials for your AWS account, the details of your account.</p>"
         },
         "type": {
           "shape": "UserIdentityType",
-          "locationName": "type"
+          "locationName": "type",
+          "documentation": "<p>The type of entity that performed the action.</p>"
         }
       },
-      "documentation": "<p>The name and type of entity who performed the action on the affected resource.</p>"
+      "documentation": "<p>Provides information about the type and other characteristics of an entity that performed an action on an affected resource.</p>"
     },
     "UserIdentityRoot": {
       "type": "structure",
@@ -6232,24 +6246,24 @@
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The unique identifier for the AWS account.</p>"
         },
         "arn": {
           "shape": "__string",
           "locationName": "arn",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the principal that performed the action. The last section of the ARN contains the name of the user or role that performed the action.</p>"
         },
         "principalId": {
           "shape": "__string",
           "locationName": "principalId",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The unique identifier for the entity that performed the action.</p>"
         }
       },
-      "documentation": "<p>Reserved for future use.</p>"
+      "documentation": "<p>Provides information about an AWS account and entity that performed an action on an affected resource. The action was performed using the credentials for your AWS account.</p>"
     },
     "UserIdentityType": {
       "type": "string",
-      "documentation": "<p>Reserved for future use.</p>",
+      "documentation": "<p>The type of entity that performed the action on the affected resource. Possible values are:</p>",
       "enum": [
         "AssumedRole",
         "IAMUser",
@@ -6265,10 +6279,10 @@
         "dayOfWeek": {
           "shape": "DayOfWeek",
           "locationName": "dayOfWeek",
-          "documentation": "<p>Run the job once a week, on a specific day of the week. Valid values are: MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, and SUNDAY.</p>"
+          "documentation": "<p>The day of the week when Amazon Macie runs the job.</p>"
         }
       },
-      "documentation": "<p>Reserved for future use.</p>"
+      "documentation": "<p>Specifies a weekly recurrence pattern for running a classification job.</p>"
     },
     "__boolean": {
       "type": "boolean"

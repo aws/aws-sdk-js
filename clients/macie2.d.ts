@@ -84,11 +84,11 @@ declare class Macie2 extends Service {
    */
   declineInvitations(callback?: (err: AWSError, data: Macie2.Types.DeclineInvitationsResponse) => void): Request<Macie2.Types.DeclineInvitationsResponse, AWSError>;
   /**
-   * Deletes a custom data identifier.
+   * Soft deletes a custom data identifier.
    */
   deleteCustomDataIdentifier(params: Macie2.Types.DeleteCustomDataIdentifierRequest, callback?: (err: AWSError, data: Macie2.Types.DeleteCustomDataIdentifierResponse) => void): Request<Macie2.Types.DeleteCustomDataIdentifierResponse, AWSError>;
   /**
-   * Deletes a custom data identifier.
+   * Soft deletes a custom data identifier.
    */
   deleteCustomDataIdentifier(callback?: (err: AWSError, data: Macie2.Types.DeleteCustomDataIdentifierResponse) => void): Request<Macie2.Types.DeleteCustomDataIdentifierResponse, AWSError>;
   /**
@@ -284,11 +284,11 @@ declare class Macie2 extends Service {
    */
   getUsageTotals(callback?: (err: AWSError, data: Macie2.Types.GetUsageTotalsResponse) => void): Request<Macie2.Types.GetUsageTotalsResponse, AWSError>;
   /**
-   * Retrieves information about the status and settings for one or more classification jobs.
+   * Retrieves a subset of information about one or more classification jobs.
    */
   listClassificationJobs(params: Macie2.Types.ListClassificationJobsRequest, callback?: (err: AWSError, data: Macie2.Types.ListClassificationJobsResponse) => void): Request<Macie2.Types.ListClassificationJobsResponse, AWSError>;
   /**
-   * Retrieves information about the status and settings for one or more classification jobs.
+   * Retrieves a subset of information about one or more classification jobs.
    */
   listClassificationJobs(callback?: (err: AWSError, data: Macie2.Types.ListClassificationJobsResponse) => void): Request<Macie2.Types.ListClassificationJobsResponse, AWSError>;
   /**
@@ -472,57 +472,57 @@ declare namespace Macie2 {
   export type AdminStatus = "ENABLED"|"DISABLING_IN_PROGRESS"|string;
   export interface ApiCallDetails {
     /**
-     * Reserved for future use.
+     * The name of the operation that was invoked most recently and produced the finding.
      */
     api?: __string;
     /**
-     * Reserved for future use.
+     * The URL of the AWS service that provides the operation, for example: s3.amazonaws.com.
      */
     apiServiceName?: __string;
     /**
-     * Reserved for future use.
+     * The first date and time, in UTC and extended ISO 8601 format, when any operation was invoked and produced the finding.
      */
     firstSeen?: __timestampIso8601;
     /**
-     * Reserved for future use.
+     * The most recent date and time, in UTC and extended ISO 8601 format, when the specified operation (api) was invoked and produced the finding.
      */
     lastSeen?: __timestampIso8601;
   }
   export interface AssumedRole {
     /**
-     * Reserved for future use.
+     * The AWS access key ID that identifies the credentials.
      */
     accessKeyId?: __string;
     /**
-     * Reserved for future use.
+     * The unique identifier for the AWS account that owns the entity that was used to get the credentials.
      */
     accountId?: __string;
     /**
-     * Reserved for future use.
+     * The Amazon Resource Name (ARN) of the entity that was used to get the credentials.
      */
     arn?: __string;
     /**
-     * Reserved for future use.
+     * The unique identifier for the entity that was used to get the credentials.
      */
     principalId?: __string;
     /**
-     * Reserved for future use.
+     * The details of the session that was created for the credentials, including the entity that issued the session.
      */
     sessionContext?: SessionContext;
   }
   export interface AwsAccount {
     /**
-     * Reserved for future use.
+     * The unique identifier for the AWS account.
      */
     accountId?: __string;
     /**
-     * Reserved for future use.
+     * The unique identifier for the entity that performed the action.
      */
     principalId?: __string;
   }
   export interface AwsService {
     /**
-     * Reserved for future use.
+     * The name of the AWS service that performed the action.
      */
     invokedBy?: __string;
   }
@@ -588,43 +588,43 @@ declare namespace Macie2 {
   }
   export interface BucketCountByEffectivePermission {
     /**
-     * Reserved for future use.
+     * The total number of buckets that allow the general public to have read or write access to the bucket.
      */
     publiclyAccessible?: __long;
     /**
-     * Reserved for future use.
+     * The total number of buckets that allow the general public to have read access to the bucket.
      */
     publiclyReadable?: __long;
     /**
-     * Reserved for future use.
+     * The total number of buckets that allow the general public to have write access to the bucket.
      */
     publiclyWritable?: __long;
   }
   export interface BucketCountByEncryptionType {
     /**
-     * Reserved for future use.
+     *  The total number of buckets that use an AWS Key Management Service (AWS KMS) customer master key (CMK) to encrypt objects. These buckets use AWS KMS AWS-managed (AWS-KMS) encryption or AWS KMS customer-managed (SSE-KMS) encryption.
      */
     kmsManaged?: __long;
     /**
-     * Reserved for future use.
+     * The total number of buckets that use an Amazon S3-managed key to encrypt objects. These buckets use Amazon S3-managed (SSE-S3) encryption.
      */
     s3Managed?: __long;
     /**
-     * Reserved for future use.
+     * The total number of buckets that don't encrypt objects by default. Default encryption is disabled for these buckets.
      */
     unencrypted?: __long;
   }
   export interface BucketCountBySharedAccessType {
     /**
-     * Reserved for future use.
+     * The total number of buckets that are shared with an AWS account that isn't part of the same Amazon Macie organization.
      */
     external?: __long;
     /**
-     * Reserved for future use.
+     * The total number of buckets that are shared with an AWS account that's part of the same Amazon Macie organization.
      */
     internal?: __long;
     /**
-     * Reserved for future use.
+     * The total number of buckets that aren't shared with any other AWS accounts.
      */
     notShared?: __long;
   }
@@ -691,7 +691,7 @@ declare namespace Macie2 {
      */
     bucketName?: __string;
     /**
-     * The total number of objects that Amazon Macie can monitor and analyze in the bucket. These objects use a file format, file extension, or content type that Amazon Macie supports.
+     * The total number of objects that Amazon Macie can analyze in the bucket. These objects use a file format, file extension, or content type that Amazon Macie supports.
      */
     classifiableObjectCount?: __long;
     /**
@@ -719,7 +719,7 @@ declare namespace Macie2 {
      */
     replicationDetails?: ReplicationDetails;
     /**
-     * Specifies whether the bucket is shared with another AWS account or configured to support cross-origin resource sharing (CORS). Valid values are: EXTERNAL - The bucket is shared with an AWS account that isn’t part of the Amazon Macie organization. INTERNAL - The bucket is shared with an AWS account that's part of the Amazon Macie organization. NOT_SHARED - The bucket isn't shared with other AWS accounts.
+     * Specifies whether the bucket is shared with another AWS account. Valid values are: EXTERNAL - The bucket is shared with an AWS account that isn’t part of the same Amazon Macie organization. INTERNAL - The bucket is shared with an AWS account that's part of the same Amazon Macie organization. NOT_SHARED - The bucket isn't shared with other AWS accounts.
      */
     sharedAccess?: SharedAccess;
     /**
@@ -845,7 +845,7 @@ declare namespace Macie2 {
      */
     customDataIdentifierIds?: __listOf__string;
     /**
-     * A custom description of the job. The description can contain as many as 512 characters.
+     * A custom description of the job. The description can contain as many as 200 characters.
      */
     description?: __string;
     /**
@@ -857,7 +857,7 @@ declare namespace Macie2 {
      */
     jobType: JobType;
     /**
-     * A custom name for the job. The name must contain at least 3 characters and can contain as many as 64 characters.
+     * A custom name for the job. The name can contain as many as 500 characters.
      */
     name: __string;
     /**
@@ -893,7 +893,7 @@ declare namespace Macie2 {
      */
     clientToken?: __string;
     /**
-     * A custom description of the custom data identifier. The description can contain up to 120 characters. We strongly recommend that you avoid including any sensitive data in the description of a custom data identifier. Other users of your account might be able to see the identifier's description, depending on the actions that they're allowed to perform in Amazon Macie.
+     * A custom description of the custom data identifier. The description can contain as many as 512 characters. We strongly recommend that you avoid including any sensitive data in the description of a custom data identifier. Other users of your account might be able to see the identifier's description, depending on the actions that they're allowed to perform in Amazon Macie.
      */
     description?: __string;
     /**
@@ -909,11 +909,11 @@ declare namespace Macie2 {
      */
     maximumMatchDistance?: __integer;
     /**
-     * A custom name for the custom data identifier. The name can contain as many as 120 characters. We strongly recommend that you avoid including any sensitive data in the name of a custom data identifier. Other users of your account might be able to see the identifier's name, depending on the actions that they're allowed to perform in Amazon Macie.
+     * A custom name for the custom data identifier. The name can contain as many as 128 characters. We strongly recommend that you avoid including any sensitive data in the name of a custom data identifier. Other users of your account might be able to see the identifier's name, depending on the actions that they're allowed to perform in Amazon Macie.
      */
     name?: __string;
     /**
-     * The regular expression (regex) that defines the pattern to match. The expression can contain as many as 500 characters.
+     * The regular expression (regex) that defines the pattern to match. The expression can contain as many as 512 characters.
      */
     regex?: __string;
     /**
@@ -1063,7 +1063,7 @@ declare namespace Macie2 {
   }
   export interface CustomDataIdentifiers {
     /**
-     * The names of the custom data identifiers that detected the data, and the number of occurrences of the data that each identifier detected.
+     * The custom data identifiers that detected the data, and the number of occurrences of the data that each identifier detected.
      */
     detections?: CustomDetections;
     /**
@@ -1212,11 +1212,11 @@ declare namespace Macie2 {
      */
     jobId?: __string;
     /**
-     * The current status of the job. Possible value are: CANCELLED - The job was cancelled by you or a user of the master account for your organization. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job's access to the bucket. COMPLETE - Amazon Macie finished processing all the data specified for the job. IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to jobs that occur only once. PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account. RUNNING - The job is in progress.
+     * The current status of the job. Possible values are: CANCELLED - The job was cancelled by you or a user of the master account for your organization. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job's access to the bucket. COMPLETE - Amazon Macie finished processing all the data specified for the job. IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to jobs that occur only once. PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account. RUNNING - The job is in progress.
      */
     jobStatus?: JobStatus;
     /**
-     * The schedule for running the job. Possible value are: ONE_TIME - The job ran or will run only once. SCHEDULED - The job runs on a daily, weekly, or monthly basis. The scheduleFrequency property indicates the recurrence pattern for the job.
+     * The schedule for running the job. Possible values are: ONE_TIME - The job ran or will run only once. SCHEDULED - The job runs on a daily, weekly, or monthly basis. The scheduleFrequency property indicates the recurrence pattern for the job.
      */
     jobType?: JobType;
     /**
@@ -1236,7 +1236,7 @@ declare namespace Macie2 {
      */
     samplingPercentage?: __integer;
     /**
-     * The recurrence pattern for running the job. If the job is configured to run every day, this value is an empty dailySchedule object. If the job is configured to run only once, this value is null.
+     * The recurrence pattern for running the job. If the job is configured to run only once, this value is null.
      */
     scheduleFrequency?: JobScheduleFrequency;
     /**
@@ -1286,7 +1286,7 @@ declare namespace Macie2 {
   }
   export interface DomainDetails {
     /**
-     * Reserved for future use.
+     * The name of the domain.
      */
     domainName?: __string;
   }
@@ -1323,29 +1323,29 @@ declare namespace Macie2 {
   export type ErrorCode = "ClientError"|"InternalError"|string;
   export interface FederatedUser {
     /**
-     * Reserved for future use.
+     * The AWS access key ID that identifies the credentials.
      */
     accessKeyId?: __string;
     /**
-     * Reserved for future use.
+     * The unique identifier for the AWS account that owns the entity that was used to get the credentials.
      */
     accountId?: __string;
     /**
-     * Reserved for future use.
+     * The Amazon Resource Name (ARN) of the entity that was used to get the credentials.
      */
     arn?: __string;
     /**
-     * Reserved for future use.
+     * The unique identifier for the entity that was used to get the credentials.
      */
     principalId?: __string;
     /**
-     * Reserved for future use.
+     * The details of the session that was created for the credentials, including the entity that issued the session.
      */
     sessionContext?: SessionContext;
   }
   export interface Finding {
     /**
-     * The identifier for the AWS account that the finding applies to. This is typically the account that owns the affected resource.
+     * The unique identifier for the AWS account that the finding applies to. This is typically the account that owns the affected resource.
      */
     accountId?: __string;
     /**
@@ -1423,22 +1423,22 @@ declare namespace Macie2 {
      */
     actionType?: FindingActionType;
     /**
-     * For the affected resource: The name of the operation that was invoked most recently and produced the finding (api). The first date and time when any operation was invoked and produced the finding (firstSeen). The most recent date and time when the specified operation was invoked and produced the finding (lastSeen). All date and time values are in UTC and extended ISO 8601 format.
+     * The invocation details of the API operation that an entity invoked for the affected resource, if the value for the actionType property is AWS_API_CALL.
      */
     apiCallDetails?: ApiCallDetails;
   }
   export type FindingActionType = "AWS_API_CALL"|string;
   export interface FindingActor {
     /**
-     * The DNS name of the entity that performed the action on the affected resource.
+     * The domain name of the device that the entity used to perform the action on the affected resource.
      */
     domainDetails?: DomainDetails;
     /**
-     * The IP address of the device that the entity used to perform the action on the affected resource. This object also provides information such as the owner and geographical location for the IP address.
+     * The IP address of the device that the entity used to perform the action on the affected resource. This object also provides information such as the owner and geographic location for the IP address.
      */
     ipAddressDetails?: IpAddressDetails;
     /**
-     * The name and type of entity that performed the action on the affected resource.
+     * The type and other characteristics of the entity that performed the action on the affected resource.
      */
     userIdentity?: UserIdentity;
   }
@@ -1464,6 +1464,10 @@ declare namespace Macie2 {
   export type FindingType = "SensitiveData:S3Object/Multiple"|"SensitiveData:S3Object/Financial"|"SensitiveData:S3Object/Personal"|"SensitiveData:S3Object/Credentials"|"SensitiveData:S3Object/CustomIdentifier"|"Policy:IAMUser/S3BucketPublic"|"Policy:IAMUser/S3BucketSharedExternally"|"Policy:IAMUser/S3BucketReplicatedExternally"|"Policy:IAMUser/S3BucketEncryptionDisabled"|"Policy:IAMUser/S3BlockPublicAccessDisabled"|string;
   export type FindingsFilterAction = "ARCHIVE"|"NOOP"|string;
   export interface FindingsFilterListItem {
+    /**
+     * The action that's performed on findings that meet the filter criteria. Possible values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don't perform any action on the findings.
+     */
+    action?: FindingsFilterAction;
     /**
      * The Amazon Resource Name (ARN) of the filter.
      */
@@ -1493,7 +1497,7 @@ declare namespace Macie2 {
      */
     bucketCount?: __long;
     /**
-     * The total number of buckets that are publicly accessible, based on a combination of permissions settings for each bucket.
+     * The total number of buckets that are publicly accessible based on a combination of permissions settings for each bucket.
      */
     bucketCountByEffectivePermission?: BucketCountByEffectivePermission;
     /**
@@ -1501,11 +1505,11 @@ declare namespace Macie2 {
      */
     bucketCountByEncryptionType?: BucketCountByEncryptionType;
     /**
-     * The total number of buckets that are shared with another AWS account or configured to support cross-origin resource sharing (CORS).
+     * The total number of buckets that are shared with another AWS account.
      */
     bucketCountBySharedAccessType?: BucketCountBySharedAccessType;
     /**
-     * The total number of objects that Amazon Macie can monitor and analyze in all the buckets. These objects use a file format, file extension, or content type that Amazon Macie supports.
+     * The total number of objects that Amazon Macie can analyze in all the buckets. These objects use a file format, file extension, or content type that Amazon Macie supports.
      */
     classifiableObjectCount?: __long;
     /**
@@ -1685,7 +1689,7 @@ declare namespace Macie2 {
      */
     findingPublishingFrequency?: FindingPublishingFrequency;
     /**
-     * The Amazon Resource Name (ARN) of the service-level role that allows Amazon Macie to monitor and analyze data in AWS resources for the account.
+     * The Amazon Resource Name (ARN) of the service-linked role that allows Amazon Macie to monitor and analyze data in AWS resources for the account.
      */
     serviceRole?: __string;
     /**
@@ -1794,19 +1798,19 @@ declare namespace Macie2 {
   }
   export interface IamUser {
     /**
-     * Reserved for future use.
+     * The unique identifier for the AWS account that's associated with the IAM user who performed the action.
      */
     accountId?: __string;
     /**
-     * Reserved for future use.
+     * The Amazon Resource Name (ARN) of the principal that performed the action. The last section of the ARN contains the name of the user who performed the action.
      */
     arn?: __string;
     /**
-     * Reserved for future use.
+     * The unique identifier for the IAM user who performed the action.
      */
     principalId?: __string;
     /**
-     * Reserved for future use.
+     * The user name of the IAM user who performed the action.
      */
     userName?: __string;
   }
@@ -1830,98 +1834,98 @@ declare namespace Macie2 {
   }
   export interface IpAddressDetails {
     /**
-     * Reserved for future use.
+     * The Internet Protocol version 4 (IPv4) address of the device.
      */
     ipAddressV4?: __string;
     /**
-     * Reserved for future use.
+     * The city that the IP address originated from.
      */
     ipCity?: IpCity;
     /**
-     * Reserved for future use.
+     * The country that the IP address originated from.
      */
     ipCountry?: IpCountry;
     /**
-     * Reserved for future use.
+     * The geographic coordinates of the location that the IP address originated from.
      */
     ipGeoLocation?: IpGeoLocation;
     /**
-     * Reserved for future use.
+     * The registered owner of the IP address.
      */
     ipOwner?: IpOwner;
   }
   export interface IpCity {
     /**
-     * Reserved for future use.
+     * The name of the city.
      */
     name?: __string;
   }
   export interface IpCountry {
     /**
-     * Reserved for future use.
+     * The two-character code, in ISO 3166-1 alpha-2 format, for the country that the IP address originated from. For example, US for the United States.
      */
     code?: __string;
     /**
-     * Reserved for future use.
+     * The name of the country that the IP address originated from.
      */
     name?: __string;
   }
   export interface IpGeoLocation {
     /**
-     * Reserved for future use.
+     * The latitude coordinate of the location, rounded to four decimal places.
      */
     lat?: __double;
     /**
-     * Reserved for future use.
+     * The longitude coordinate of the location, rounded to four decimal places.
      */
     lon?: __double;
   }
   export interface IpOwner {
     /**
-     * Reserved for future use.
+     * The autonomous system number (ASN) for the autonomous system that included the IP address.
      */
     asn?: __string;
     /**
-     * Reserved for future use.
+     * The organization identifier that's associated with the autonomous system number (ASN) for the autonomous system that included the IP address.
      */
     asnOrg?: __string;
     /**
-     * Reserved for future use.
+     * The name of the internet service provider (ISP) that owned the IP address.
      */
     isp?: __string;
     /**
-     * Reserved for future use.
+     * The name of the organization that owned the IP address.
      */
     org?: __string;
   }
   export type JobComparator = "EQ"|"GT"|"GTE"|"LT"|"LTE"|"NE"|"CONTAINS"|string;
   export interface JobScheduleFrequency {
     /**
-     * Run the job once a day, every day. If specified, this is an empty object.
+     * Specifies a daily recurrence pattern for running the job.
      */
     dailySchedule?: DailySchedule;
     /**
-     * Run the job once a month, on a specific day of the month. This value can be an integer from 1 through 30.
+     * Specifies a monthly recurrence pattern for running the job.
      */
     monthlySchedule?: MonthlySchedule;
     /**
-     * Run the job once a week, on a specific day of the week. Valid values are: MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, and SUNDAY.
+     * Specifies a weekly recurrence pattern for running the job.
      */
     weeklySchedule?: WeeklySchedule;
   }
   export interface JobScopeTerm {
     /**
-     * A property-based condition that defines a property, operator, and one or more values for including or excluding an object from a job.
+     * A property-based condition that defines a property, operator, and one or more values for including or excluding an object from the job.
      */
     simpleScopeTerm?: SimpleScopeTerm;
     /**
-     * A tag-based condition that defines a property, operator, and one or more values for including or excluding an object from a job.
+     * A tag-based condition that defines the operator and a tag key or tag keys and values for including or excluding an object from the job.
      */
     tagScopeTerm?: TagScopeTerm;
   }
   export interface JobScopingBlock {
     /**
-     * Reserved for future use.
+     * An array of conditions, one for each condition that determines which objects to include or exclude from the job.
      */
     and?: __listOfJobScopeTerm;
   }
@@ -1940,11 +1944,11 @@ declare namespace Macie2 {
      */
     jobId?: __string;
     /**
-     * The current status of the job. Possible value are: CANCELLED - The job was cancelled by you or a user of the master account for your organization. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job's access to the bucket. COMPLETE - Amazon Macie finished processing all the data specified for the job. IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to jobs that occur only once. PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account. RUNNING - The job is in progress.
+     * The current status of the job. Possible values are: CANCELLED - The job was cancelled by you or a user of the master account for your organization. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job's access to the bucket. COMPLETE - Amazon Macie finished processing all the data specified for the job. IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to jobs that occur only once. PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account. RUNNING - The job is in progress.
      */
     jobStatus?: JobStatus;
     /**
-     * The schedule for running the job. Possible value are: ONE_TIME - The job ran or will run only once. SCHEDULED - The job runs on a daily, weekly, or monthly basis.
+     * The schedule for running the job. Possible values are: ONE_TIME - The job ran or will run only once. SCHEDULED - The job runs on a daily, weekly, or monthly basis.
      */
     jobType?: JobType;
     /**
@@ -2210,7 +2214,7 @@ declare namespace Macie2 {
   }
   export interface MonthlySchedule {
     /**
-     * Run the job once a month, on a specific day of the month. This value can be an integer from 1 through 30.
+     * The numeric day of the month when Amazon Macie runs the job. This value can be an integer from 1 through 30.
      */
     dayOfMonth?: __integer;
   }
@@ -2235,7 +2239,7 @@ declare namespace Macie2 {
   export type OrderBy = "ASC"|"DESC"|string;
   export interface PolicyDetails {
     /**
-     * The action that occurred and produced the finding.
+     * The action that produced the finding.
      */
     action?: FindingAction;
     /**
@@ -2255,7 +2259,7 @@ declare namespace Macie2 {
      */
     configuration?: ClassificationExportConfiguration;
   }
-  export type RelationshipStatus = "Enabled"|"Paused"|"Invited"|"Created"|"Removed"|"Resigned"|"EmailVerificationInProgress"|"EmailVerificationFailed"|string;
+  export type RelationshipStatus = "Enabled"|"Paused"|"Invited"|"Created"|"Removed"|"Resigned"|"EmailVerificationInProgress"|"EmailVerificationFailed"|"RegionDisabled"|"AccountSuspended"|string;
   export interface ReplicationDetails {
     /**
      * Specifies whether the bucket is configured to replicate one or more objects to any destination.
@@ -2340,7 +2344,7 @@ declare namespace Macie2 {
      */
     keyPrefix?: __string;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Key Management Service customer master key (CMK) to use for encryption of the results. This must be the ARN of an existing CMK that's in the same AWS Region as the bucket.
+     * The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for encryption of the results. This must be the ARN of an existing CMK that's in the same AWS Region as the bucket.
      */
     kmsKeyArn: __string;
   }
@@ -2350,7 +2354,7 @@ declare namespace Macie2 {
      */
     bucketDefinitions?: __listOfS3BucketDefinitionForJob;
     /**
-     * A JobScopeTerm object that specifies conditions for including or excluding objects from the job.
+     * The property- and tag-based conditions that determine which objects to include or exclude from the analysis.
      */
     scoping?: Scoping;
   }
@@ -2407,11 +2411,11 @@ declare namespace Macie2 {
   export type ScopeFilterKey = "BUCKET_CREATION_DATE"|"OBJECT_EXTENSION"|"OBJECT_LAST_MODIFIED_DATE"|"OBJECT_SIZE"|"TAG"|string;
   export interface Scoping {
     /**
-     * Reserved for future use.
+     * The property- or tag-based conditions that determine which objects to exclude from the analysis.
      */
     excludes?: JobScopingBlock;
     /**
-     * Reserved for future use.
+     * The property- or tag-based conditions that determine which objects to include in the analysis.
      */
     includes?: JobScopingBlock;
   }
@@ -2461,13 +2465,13 @@ declare namespace Macie2 {
      */
     attributes?: SessionContextAttributes;
     /**
-     * The source and type of credentials that the entity obtained.
+     * The source and type of credentials that were issued to the entity.
      */
     sessionIssuer?: SessionIssuer;
   }
   export interface SessionContextAttributes {
     /**
-     * The date and time, in ISO 8601 format, when the credentials were issued.
+     * The date and time, in UTC and ISO 8601 format, when the credentials were issued.
      */
     creationDate?: __timestampIso8601;
     /**
@@ -2477,7 +2481,7 @@ declare namespace Macie2 {
   }
   export interface SessionIssuer {
     /**
-     * The account that owns the entity that was used to get the credentials.
+     * The unique identifier for the AWS account that owns the entity that was used to get the credentials.
      */
     accountId?: __string;
     /**
@@ -2485,7 +2489,7 @@ declare namespace Macie2 {
      */
     arn?: __string;
     /**
-     * The internal identifier for the entity that was used to get the credentials.
+     * The unique identifier for the entity that was used to get the credentials.
      */
     principalId?: __string;
     /**
@@ -2600,7 +2604,7 @@ declare namespace Macie2 {
      */
     maximumMatchDistance?: __integer;
     /**
-     * The regular expression (regex) that defines the pattern to match. The expression can contain as many as 500 characters.
+     * The regular expression (regex) that defines the pattern to match. The expression can contain as many as 512 characters.
      */
     regex: __string;
     /**
@@ -2741,7 +2745,7 @@ declare namespace Macie2 {
   }
   export interface UsageRecord {
     /**
-     * The AWS account ID for the account that the data applies to.
+     * The unique identifier for the AWS account that the data applies to.
      */
     accountId?: __string;
     /**
@@ -2791,32 +2795,53 @@ declare namespace Macie2 {
   }
   export type UsageType = "DATA_INVENTORY_EVALUATION"|"SENSITIVE_DATA_DISCOVERY"|string;
   export interface UserIdentity {
+    /**
+     * If the action was performed with temporary security credentials that were obtained using the AssumeRole operation of the AWS Security Token Service (AWS STS) API, the identifiers, session context, and other details about the identity.
+     */
     assumedRole?: AssumedRole;
+    /**
+     * If the action was performed using the credentials for another AWS account, the details of that account.
+     */
     awsAccount?: AwsAccount;
+    /**
+     * If the action was performed by an AWS account that belongs to an AWS service, the name of the service.
+     */
     awsService?: AwsService;
+    /**
+     * If the action was performed with temporary security credentials that were obtained using the GetFederationToken operation of the AWS Security Token Service (AWS STS) API, the identifiers, session context, and other details about the identity.
+     */
     federatedUser?: FederatedUser;
+    /**
+     * If the action was performed using the credentials for an AWS Identity and Access Management (IAM) user, the name and other details about the user.
+     */
     iamUser?: IamUser;
+    /**
+     * If the action was performed using the credentials for your AWS account, the details of your account.
+     */
     root?: UserIdentityRoot;
+    /**
+     * The type of entity that performed the action.
+     */
     type?: UserIdentityType;
   }
   export interface UserIdentityRoot {
     /**
-     * Reserved for future use.
+     * The unique identifier for the AWS account.
      */
     accountId?: __string;
     /**
-     * Reserved for future use.
+     * The Amazon Resource Name (ARN) of the principal that performed the action. The last section of the ARN contains the name of the user or role that performed the action.
      */
     arn?: __string;
     /**
-     * Reserved for future use.
+     * The unique identifier for the entity that performed the action.
      */
     principalId?: __string;
   }
   export type UserIdentityType = "AssumedRole"|"IAMUser"|"FederatedUser"|"Root"|"AWSAccount"|"AWSService"|string;
   export interface WeeklySchedule {
     /**
-     * Run the job once a week, on a specific day of the week. Valid values are: MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, and SUNDAY.
+     * The day of the week when Amazon Macie runs the job.
      */
     dayOfWeek?: DayOfWeek;
   }

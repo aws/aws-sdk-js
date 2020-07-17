@@ -9,6 +9,7 @@ Object.defineProperty(apiLoader.services['elasticbeanstalk'], '2010-12-01', {
   get: function get() {
     var model = require('../apis/elasticbeanstalk-2010-12-01.min.json');
     model.paginators = require('../apis/elasticbeanstalk-2010-12-01.paginators.json').pagination;
+    model.waiters = require('../apis/elasticbeanstalk-2010-12-01.waiters2.json').waiters;
     return model;
   },
   enumerable: true,

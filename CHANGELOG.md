@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.714.2-->
+<!--LATEST=2.715.0-->
 <!--ENTRYINSERT-->
+
+## 2.715.0
+* bugfix: Types: Export missing TokenFileWebIdentityCredentials class
+* feature: Connect: This release adds a set of Amazon Connect APIs to programmatically control call recording with start, stop, pause and resume functions.
+* feature: EC2: Documentation updates for EC2
+* feature: ElasticBeanstalk: Add waiters for `EnvironmentExists`, `EnvironmentUpdated`, and `EnvironmentTerminated`. Add paginators for `DescribeEnvironmentManagedActionHistory` and `ListPlatformVersions`.
+* feature: Macie2: This release of the Amazon Macie API includes miscellaneous updates and improvements to the documentation.
 
 ## 2.714.2
 * bugfix: Releasing: remove aws-sdk-2.714.0.tgz file

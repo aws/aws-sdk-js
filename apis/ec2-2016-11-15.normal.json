@@ -2678,7 +2678,7 @@
       "output": {
         "shape": "DescribeLaunchTemplateVersionsResult"
       },
-      "documentation": "<p>Describes one or more versions of a specified launch template. You can describe all versions, individual versions, or a range of versions.</p>"
+      "documentation": "<p>Describes one or more versions of a specified launch template. You can describe all versions, individual versions, or a range of versions. You can also describe all the latest versions or all the default versions of all the launch templates in your account.</p>"
     },
     "DescribeLaunchTemplates": {
       "name": "DescribeLaunchTemplates",
@@ -4124,7 +4124,7 @@
       "output": {
         "shape": "GetLaunchTemplateDataResult"
       },
-      "documentation": "<p>Retrieves the configuration data of the specified instance. You can use this data to create a launch template.</p>"
+      "documentation": "<p>Retrieves the configuration data of the specified instance. You can use this data to create a launch template. </p> <p>This action calls on other describe actions to get instance information. Depending on your instance configuration, you may need to allow the following actions in your IAM policy: DescribeSpotInstanceRequests, DescribeInstanceCreditSpecifications, DescribeVolumes, DescribeInstanceAttribute, and DescribeElasticGpus. Or, you can allow <code>describe*</code> depending on your instance requirements.</p>"
     },
     "GetManagedPrefixListAssociations": {
       "name": "GetManagedPrefixListAssociations",
@@ -4962,7 +4962,7 @@
       "output": {
         "shape": "RegisterImageResult"
       },
-      "documentation": "<p>Registers an AMI. When you're creating an AMI, this is the final step you must complete before you can launch an instance from the AMI. For more information about creating AMIs, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html\">Creating Your Own AMIs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <note> <p>For Amazon EBS-backed instances, <a>CreateImage</a> creates and registers the AMI in a single request, so you don't have to register the AMI yourself.</p> </note> <p>You can also use <code>RegisterImage</code> to create an Amazon EBS-backed Linux AMI from a snapshot of a root device volume. You specify the snapshot using the block device mapping. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-launch-snapshot.html\">Launching a Linux Instance from a Backup</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can't register an image where a secondary (non-root) snapshot has AWS Marketplace product codes.</p> <p>Windows and some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE Linux Enterprise Server (SLES), use the EC2 billing product code associated with an AMI to verify the subscription status for package updates. To create a new AMI for operating systems that require a billing product code, instead of registering the AMI, do the following to preserve the billing product code association:</p> <ol> <li> <p>Launch an instance from an existing AMI with that billing product code.</p> </li> <li> <p>Customize the instance.</p> </li> <li> <p>Create an AMI from the instance using <a>CreateImage</a>.</p> </li> </ol> <p>If you purchase a Reserved Instance to apply to an On-Demand Instance that was launched from an AMI with a billing product code, make sure that the Reserved Instance has the matching billing product code. If you purchase a Reserved Instance without the matching billing product code, the Reserved Instance will not be applied to the On-Demand Instance. For information about how to obtain the platform details and billing information of an AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html\">Obtaining Billing Information</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. If you make changes to an image, deregister the previous image and register the new image.</p>"
+      "documentation": "<p>Registers an AMI. When you're creating an AMI, this is the final step you must complete before you can launch an instance from the AMI. For more information about creating AMIs, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html\">Creating your own AMIs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <note> <p>For Amazon EBS-backed instances, <a>CreateImage</a> creates and registers the AMI in a single request, so you don't have to register the AMI yourself.</p> </note> <p>You can also use <code>RegisterImage</code> to create an Amazon EBS-backed Linux AMI from a snapshot of a root device volume. You specify the snapshot using the block device mapping. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-launch-snapshot.html\">Launching a Linux instance from a backup</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>If any snapshots have AWS Marketplace product codes, they are copied to the new AMI.</p> <p>Windows and some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE Linux Enterprise Server (SLES), use the EC2 billing product code associated with an AMI to verify the subscription status for package updates. To create a new AMI for operating systems that require a billing product code, instead of registering the AMI, do the following to preserve the billing product code association:</p> <ol> <li> <p>Launch an instance from an existing AMI with that billing product code.</p> </li> <li> <p>Customize the instance.</p> </li> <li> <p>Create an AMI from the instance using <a>CreateImage</a>.</p> </li> </ol> <p>If you purchase a Reserved Instance to apply to an On-Demand Instance that was launched from an AMI with a billing product code, make sure that the Reserved Instance has the matching billing product code. If you purchase a Reserved Instance without the matching billing product code, the Reserved Instance will not be applied to the On-Demand Instance. For information about how to obtain the platform details and billing information of an AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html\">Obtaining billing information</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. If you make changes to an image, deregister the previous image and register the new image.</p>"
     },
     "RegisterInstanceEventNotificationAttributes": {
       "name": "RegisterInstanceEventNotificationAttributes",
@@ -5955,10 +5955,10 @@
       "members": {
         "Domain": {
           "shape": "DomainType",
-          "documentation": "<p>Set to <code>vpc</code> to allocate the address for use with instances in a VPC.</p> <p>Default: The address is for use with instances in EC2-Classic.</p>"
+          "documentation": "<p>Indicates whether the Elastic IP address is for use with instances in a VPC or instances in EC2-Classic.</p> <p>Default: If the Region supports EC2-Classic, the default is <code>standard</code>. Otherwise, the default is <code>vpc</code>.</p>"
         },
         "Address": {
-          "shape": "String",
+          "shape": "PublicIpAddress",
           "documentation": "<p>[EC2-VPC] The Elastic IP address to recover or an IPv4 address from an address pool.</p>"
         },
         "PublicIpv4Pool": {
@@ -6005,7 +6005,7 @@
         },
         "Domain": {
           "shape": "DomainType",
-          "documentation": "<p>Indicates whether this Elastic IP address is for use with instances in EC2-Classic (<code>standard</code>) or instances in a VPC (<code>vpc</code>).</p>",
+          "documentation": "<p>Indicates whether the Elastic IP address is for use with instances in a VPC (<code>vpc</code>) or instances in EC2-Classic (<code>standard</code>).</p>",
           "locationName": "domain"
         },
         "CustomerOwnedIp": {
@@ -6946,11 +6946,11 @@
         },
         "AccessGroupId": {
           "shape": "String",
-          "documentation": "<p>The ID of the group to grant access to, for example, the Active Directory group or identity provider (IdP) group.</p>"
+          "documentation": "<p>The ID of the group to grant access to, for example, the Active Directory group or identity provider (IdP) group. Required if <code>AuthorizeAllGroups</code> is <code>false</code> or not specified.</p>"
         },
         "AuthorizeAllGroups": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether to grant access to all clients. Use <code>true</code> to grant all clients who successfully establish a VPN connection access to the network.</p>"
+          "documentation": "<p>Indicates whether to grant access to all clients. Specify <code>true</code> to grant all clients who successfully establish a VPN connection access to the network. Must be set to <code>true</code> if <code>AccessGroupId</code> is not specified.</p>"
         },
         "Description": {
           "shape": "String",
@@ -8778,7 +8778,7 @@
         },
         "CloudwatchLogGroup": {
           "shape": "String",
-          "documentation": "<p>The name of the CloudWatch Logs log group.</p>"
+          "documentation": "<p>The name of the CloudWatch Logs log group. Required if connection logging is enabled.</p>"
         },
         "CloudwatchLogStream": {
           "shape": "String",
@@ -8848,6 +8848,13 @@
     },
     "ConnectionNotificationId": {
       "type": "string"
+    },
+    "ConnectionNotificationIdsList": {
+      "type": "list",
+      "member": {
+        "shape": "ConnectionNotificationId",
+        "locationName": "item"
+      }
     },
     "ConnectionNotificationSet": {
       "type": "list",
@@ -8947,7 +8954,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
         },
         "SourceFpgaImageId": {
-          "shape": "FpgaImageId",
+          "shape": "String",
           "documentation": "<p>The ID of the source AFI.</p>"
         },
         "Description": {
@@ -11768,11 +11775,11 @@
       "members": {
         "CpuCredits": {
           "shape": "String",
-          "documentation": "<p>The credit option for CPU usage of a T2 or T3 instance. Valid values are <code>standard</code> and <code>unlimited</code>.</p>",
+          "documentation": "<p>The credit option for CPU usage of a T2, T3, or T3a instance. Valid values are <code>standard</code> and <code>unlimited</code>.</p>",
           "locationName": "cpuCredits"
         }
       },
-      "documentation": "<p>Describes the credit option for CPU usage of a T2 or T3 instance.</p>"
+      "documentation": "<p>Describes the credit option for CPU usage of a T2, T3, or T3a instance.</p>"
     },
     "CreditSpecificationRequest": {
       "type": "structure",
@@ -11782,10 +11789,10 @@
       "members": {
         "CpuCredits": {
           "shape": "String",
-          "documentation": "<p>The credit option for CPU usage of a T2 or T3 instance. Valid values are <code>standard</code> and <code>unlimited</code>.</p>"
+          "documentation": "<p>The credit option for CPU usage of a T2, T3, or T3a instance. Valid values are <code>standard</code> and <code>unlimited</code>.</p>"
         }
       },
-      "documentation": "<p>The credit option for CPU usage of a T2 or T3 instance.</p>"
+      "documentation": "<p>The credit option for CPU usage of a T2, T3, or T3a instance.</p>"
     },
     "CurrencyCodeValues": {
       "type": "string",
@@ -13081,7 +13088,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
         },
         "ConnectionNotificationIds": {
-          "shape": "ValueStringList",
+          "shape": "ConnectionNotificationIdsList",
           "documentation": "<p>One or more notification IDs.</p>",
           "locationName": "ConnectionNotificationId"
         }
@@ -13485,7 +13492,7 @@
       "members": {
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>The filters.</p> <ul> <li> <p> <code>group-name</code> - For Availability Zones, use the Region name. For Local Zones, use the name of the group associated with the Local Zone (for example, <code>us-west-2-lax-1</code>).</p> </li> <li> <p> <code>message</code> - The Zone message.</p> </li> <li> <p> <code>opt-in-status</code> - The opt in status (<code>opted-in</code>, and <code>not-opted-in</code> | <code>opt-in-not-required</code>).</p> </li> <li> <p> <code>region-name</code> - The name of the Region for the Zone (for example, <code>us-east-1</code>).</p> </li> <li> <p> <code>state</code> - The state of the Availability Zone or Local Zone (<code>available</code> | <code>information</code> | <code>impaired</code> | <code>unavailable</code>).</p> </li> <li> <p> <code>zone-id</code> - The ID of the Availability Zone (for example, <code>use1-az1</code>) or the Local Zone (for example, use <code>usw2-lax1-az1</code>).</p> </li> <li> <p> <code>zone-name</code> - The name of the Availability Zone (for example, <code>us-east-1a</code>) or the Local Zone (for example, use <code>us-west-2-lax-1a</code>).</p> </li> </ul>",
+          "documentation": "<p>The filters.</p> <ul> <li> <p> <code>group-name</code> - For Availability Zones, use the Region name. For Local Zones, use the name of the group associated with the Local Zone (for example, <code>us-west-2-lax-1</code>).</p> </li> <li> <p> <code>message</code> - The Zone message.</p> </li> <li> <p> <code>opt-in-status</code> - The opt in status (<code>opted-in</code>, and <code>not-opted-in</code> | <code>opt-in-not-required</code>).</p> </li> <li> <p>The ID of the zone that handles some of the Local Zone control plane operations, such as API calls.</p> </li> <li> <p> <code>region-name</code> - The name of the Region for the Zone (for example, <code>us-east-1</code>).</p> </li> <li> <p> <code>state</code> - The state of the Availability Zone or Local Zone (<code>available</code> | <code>information</code> | <code>impaired</code> | <code>unavailable</code>).</p> </li> <li> <p> <code>zone-id</code> - The ID of the Availability Zone (for example, <code>use1-az1</code>) or the Local Zone (for example, use <code>usw2-lax1-az1</code>).</p> </li> <li> <p> <code>zone-type</code> - The type of zone, for example, <code>local-zone</code>.</p> </li> <li> <p> <code>zone-name</code> - The name of the Availability Zone (for example, <code>us-east-1a</code>) or the Local Zone (for example, use <code>us-west-2-lax-1a</code>).</p> </li> <li> <p> <code>zone-type</code> - The type of zone, for example, <code>local-zone</code>.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "ZoneNames": {
@@ -14965,7 +14972,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>The filters.</p> <ul> <li> <p> <code>architecture</code> - The image architecture (<code>i386</code> | <code>x86_64</code> | <code>arm64</code>).</p> </li> <li> <p> <code>block-device-mapping.delete-on-termination</code> - A Boolean value that indicates whether the Amazon EBS volume is deleted on instance termination.</p> </li> <li> <p> <code>block-device-mapping.device-name</code> - The device name specified in the block device mapping (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p> </li> <li> <p> <code>block-device-mapping.snapshot-id</code> - The ID of the snapshot used for the EBS volume.</p> </li> <li> <p> <code>block-device-mapping.volume-size</code> - The volume size of the EBS volume, in GiB.</p> </li> <li> <p> <code>block-device-mapping.volume-type</code> - The volume type of the EBS volume (<code>gp2</code> | <code>io1</code> | <code>st1 </code>| <code>sc1</code> | <code>standard</code>).</p> </li> <li> <p> <code>block-device-mapping.encrypted</code> - A Boolean that indicates whether the EBS volume is encrypted.</p> </li> <li> <p> <code>description</code> - The description of the image (provided during image creation).</p> </li> <li> <p> <code>ena-support</code> - A Boolean that indicates whether enhanced networking with ENA is enabled.</p> </li> <li> <p> <code>hypervisor</code> - The hypervisor type (<code>ovm</code> | <code>xen</code>).</p> </li> <li> <p> <code>image-id</code> - The ID of the image.</p> </li> <li> <p> <code>image-type</code> - The image type (<code>machine</code> | <code>kernel</code> | <code>ramdisk</code>).</p> </li> <li> <p> <code>is-public</code> - A Boolean that indicates whether the image is public.</p> </li> <li> <p> <code>kernel-id</code> - The kernel ID.</p> </li> <li> <p> <code>manifest-location</code> - The location of the image manifest.</p> </li> <li> <p> <code>name</code> - The name of the AMI (provided during image creation).</p> </li> <li> <p> <code>owner-alias</code> - String value from an Amazon-maintained list (<code>amazon</code> | <code>aws-marketplace</code> | <code>microsoft</code>) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM console.</p> </li> <li> <p> <code>owner-id</code> - The AWS account ID of the image owner.</p> </li> <li> <p> <code>platform</code> - The platform. To only list Windows-based AMIs, use <code>windows</code>.</p> </li> <li> <p> <code>product-code</code> - The product code.</p> </li> <li> <p> <code>product-code.type</code> - The type of the product code (<code>devpay</code> | <code>marketplace</code>).</p> </li> <li> <p> <code>ramdisk-id</code> - The RAM disk ID.</p> </li> <li> <p> <code>root-device-name</code> - The device name of the root device volume (for example, <code>/dev/sda1</code>).</p> </li> <li> <p> <code>root-device-type</code> - The type of the root device volume (<code>ebs</code> | <code>instance-store</code>).</p> </li> <li> <p> <code>state</code> - The state of the image (<code>available</code> | <code>pending</code> | <code>failed</code>).</p> </li> <li> <p> <code>state-reason-code</code> - The reason code for the state change.</p> </li> <li> <p> <code>state-reason-message</code> - The message for the state change.</p> </li> <li> <p> <code>sriov-net-support</code> - A value of <code>simple</code> indicates that enhanced networking with the Intel 82599 VF interface is enabled.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>virtualization-type</code> - The virtualization type (<code>paravirtual</code> | <code>hvm</code>).</p> </li> </ul>",
+          "documentation": "<p>The filters.</p> <ul> <li> <p> <code>architecture</code> - The image architecture (<code>i386</code> | <code>x86_64</code> | <code>arm64</code>).</p> </li> <li> <p> <code>block-device-mapping.delete-on-termination</code> - A Boolean value that indicates whether the Amazon EBS volume is deleted on instance termination.</p> </li> <li> <p> <code>block-device-mapping.device-name</code> - The device name specified in the block device mapping (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p> </li> <li> <p> <code>block-device-mapping.snapshot-id</code> - The ID of the snapshot used for the EBS volume.</p> </li> <li> <p> <code>block-device-mapping.volume-size</code> - The volume size of the EBS volume, in GiB.</p> </li> <li> <p> <code>block-device-mapping.volume-type</code> - The volume type of the EBS volume (<code>gp2</code> | <code>io1</code> | <code>st1 </code>| <code>sc1</code> | <code>standard</code>).</p> </li> <li> <p> <code>block-device-mapping.encrypted</code> - A Boolean that indicates whether the EBS volume is encrypted.</p> </li> <li> <p> <code>description</code> - The description of the image (provided during image creation).</p> </li> <li> <p> <code>ena-support</code> - A Boolean that indicates whether enhanced networking with ENA is enabled.</p> </li> <li> <p> <code>hypervisor</code> - The hypervisor type (<code>ovm</code> | <code>xen</code>).</p> </li> <li> <p> <code>image-id</code> - The ID of the image.</p> </li> <li> <p> <code>image-type</code> - The image type (<code>machine</code> | <code>kernel</code> | <code>ramdisk</code>).</p> </li> <li> <p> <code>is-public</code> - A Boolean that indicates whether the image is public.</p> </li> <li> <p> <code>kernel-id</code> - The kernel ID.</p> </li> <li> <p> <code>manifest-location</code> - The location of the image manifest.</p> </li> <li> <p> <code>name</code> - The name of the AMI (provided during image creation).</p> </li> <li> <p> <code>owner-alias</code> - The owner alias, from an Amazon-maintained list (<code>amazon</code> | <code>aws-marketplace</code>). This is not the user-configured AWS account alias set using the IAM console. We recommend that you use the related parameter instead of this filter.</p> </li> <li> <p> <code>owner-id</code> - The AWS account ID of the owner. We recommend that you use the related parameter instead of this filter.</p> </li> <li> <p> <code>platform</code> - The platform. To only list Windows-based AMIs, use <code>windows</code>.</p> </li> <li> <p> <code>product-code</code> - The product code.</p> </li> <li> <p> <code>product-code.type</code> - The type of the product code (<code>devpay</code> | <code>marketplace</code>).</p> </li> <li> <p> <code>ramdisk-id</code> - The RAM disk ID.</p> </li> <li> <p> <code>root-device-name</code> - The device name of the root device volume (for example, <code>/dev/sda1</code>).</p> </li> <li> <p> <code>root-device-type</code> - The type of the root device volume (<code>ebs</code> | <code>instance-store</code>).</p> </li> <li> <p> <code>state</code> - The state of the image (<code>available</code> | <code>pending</code> | <code>failed</code>).</p> </li> <li> <p> <code>state-reason-code</code> - The reason code for the state change.</p> </li> <li> <p> <code>state-reason-message</code> - The message for the state change.</p> </li> <li> <p> <code>sriov-net-support</code> - A value of <code>simple</code> indicates that enhanced networking with the Intel 82599 VF interface is enabled.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>virtualization-type</code> - The virtualization type (<code>paravirtual</code> | <code>hvm</code>).</p> </li> </ul>",
           "locationName": "Filter"
         },
         "ImageIds": {
@@ -14975,7 +14982,7 @@
         },
         "Owners": {
           "shape": "OwnerStringList",
-          "documentation": "<p>Filters the images by the owner. Specify an AWS account ID, <code>self</code> (owner is the sender of the request), or an AWS owner alias (valid values are <code>amazon</code> | <code>aws-marketplace</code> | <code>microsoft</code>). Omitting this option returns all images for which you have launch permissions, regardless of ownership.</p>",
+          "documentation": "<p>Scopes the results to images with the specified owners. You can specify a combination of AWS account IDs, <code>self</code>, <code>amazon</code>, and <code>aws-marketplace</code>. If you omit this parameter, the results include all images for which you have launch permissions, regardless of ownership.</p>",
           "locationName": "Owner"
         },
         "DryRun": {
@@ -15477,15 +15484,15 @@
         },
         "LaunchTemplateId": {
           "shape": "LaunchTemplateId",
-          "documentation": "<p>The ID of the launch template. You must specify either the launch template ID or launch template name in the request.</p>"
+          "documentation": "<p>The ID of the launch template. To describe one or more versions of a specified launch template, you must specify either the launch template ID or the launch template name in the request. To describe all the latest or default launch template versions in your account, you must omit this parameter.</p>"
         },
         "LaunchTemplateName": {
           "shape": "LaunchTemplateName",
-          "documentation": "<p>The name of the launch template. You must specify either the launch template ID or launch template name in the request.</p>"
+          "documentation": "<p>The name of the launch template. To describe one or more versions of a specified launch template, you must specify either the launch template ID or the launch template name in the request. To describe all the latest or default launch template versions in your account, you must omit this parameter.</p>"
         },
         "Versions": {
           "shape": "VersionStringList",
-          "documentation": "<p>One or more versions of the launch template.</p>",
+          "documentation": "<p>One or more versions of the launch template. Valid values depend on whether you are describing a specified launch template (by ID or name) or all launch templates in your account.</p> <p>To describe one or more versions of a specified launch template, valid values are <code>$Latest</code>, <code>$Default</code>, and numbers.</p> <p>To describe all launch templates in your account that are defined as the latest version, the valid value is <code>$Latest</code>. To describe all launch templates in your account that are defined as the default version, the valid value is <code>$Default</code>. You can specify <code>$Latest</code> and <code>$Default</code> in the same call. You cannot specify numbers.</p>",
           "locationName": "LaunchTemplateVersion"
         },
         "MinVersion": {
@@ -16566,7 +16573,7 @@
       "members": {
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>association.route-table-association-id</code> - The ID of an association ID for the route table.</p> </li> <li> <p> <code>association.route-table-id</code> - The ID of the route table involved in the association.</p> </li> <li> <p> <code>association.subnet-id</code> - The ID of the subnet involved in the association.</p> </li> <li> <p> <code>association.main</code> - Indicates whether the route table is the main route table for the VPC (<code>true</code> | <code>false</code>). Route tables that do not have an association ID are not returned in the response.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the route table.</p> </li> <li> <p> <code>route-table-id</code> - The ID of the route table.</p> </li> <li> <p> <code>route.destination-cidr-block</code> - The IPv4 CIDR range specified in a route in the table.</p> </li> <li> <p> <code>route.destination-ipv6-cidr-block</code> - The IPv6 CIDR range specified in a route in the route table.</p> </li> <li> <p> <code>route.destination-prefix-list-id</code> - The ID (prefix) of the AWS service specified in a route in the table.</p> </li> <li> <p> <code>route.egress-only-internet-gateway-id</code> - The ID of an egress-only Internet gateway specified in a route in the route table.</p> </li> <li> <p> <code>route.gateway-id</code> - The ID of a gateway specified in a route in the table.</p> </li> <li> <p> <code>route.instance-id</code> - The ID of an instance specified in a route in the table.</p> </li> <li> <p> <code>route.nat-gateway-id</code> - The ID of a NAT gateway.</p> </li> <li> <p> <code>route.transit-gateway-id</code> - The ID of a transit gateway.</p> </li> <li> <p> <code>route.origin</code> - Describes how the route was created. <code>CreateRouteTable</code> indicates that the route was automatically created when the route table was created; <code>CreateRoute</code> indicates that the route was manually added to the route table; <code>EnableVgwRoutePropagation</code> indicates that the route was propagated by route propagation.</p> </li> <li> <p> <code>route.state</code> - The state of a route in the route table (<code>active</code> | <code>blackhole</code>). The blackhole state indicates that the route's target isn't available (for example, the specified gateway isn't attached to the VPC, the specified NAT instance has been terminated, and so on).</p> </li> <li> <p> <code>route.vpc-peering-connection-id</code> - The ID of a VPC peering connection specified in a route in the table.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of a transit gateway.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC for the route table.</p> </li> </ul>",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>association.route-table-association-id</code> - The ID of an association ID for the route table.</p> </li> <li> <p> <code>association.route-table-id</code> - The ID of the route table involved in the association.</p> </li> <li> <p> <code>association.subnet-id</code> - The ID of the subnet involved in the association.</p> </li> <li> <p> <code>association.main</code> - Indicates whether the route table is the main route table for the VPC (<code>true</code> | <code>false</code>). Route tables that do not have an association ID are not returned in the response.</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the route table.</p> </li> <li> <p> <code>route-table-id</code> - The ID of the route table.</p> </li> <li> <p> <code>route.destination-cidr-block</code> - The IPv4 CIDR range specified in a route in the table.</p> </li> <li> <p> <code>route.destination-ipv6-cidr-block</code> - The IPv6 CIDR range specified in a route in the route table.</p> </li> <li> <p> <code>route.destination-prefix-list-id</code> - The ID (prefix) of the AWS service specified in a route in the table.</p> </li> <li> <p> <code>route.egress-only-internet-gateway-id</code> - The ID of an egress-only Internet gateway specified in a route in the route table.</p> </li> <li> <p> <code>route.gateway-id</code> - The ID of a gateway specified in a route in the table.</p> </li> <li> <p> <code>route.instance-id</code> - The ID of an instance specified in a route in the table.</p> </li> <li> <p> <code>route.nat-gateway-id</code> - The ID of a NAT gateway.</p> </li> <li> <p> <code>route.transit-gateway-id</code> - The ID of a transit gateway.</p> </li> <li> <p> <code>route.origin</code> - Describes how the route was created. <code>CreateRouteTable</code> indicates that the route was automatically created when the route table was created; <code>CreateRoute</code> indicates that the route was manually added to the route table; <code>EnableVgwRoutePropagation</code> indicates that the route was propagated by route propagation.</p> </li> <li> <p> <code>route.state</code> - The state of a route in the route table (<code>active</code> | <code>blackhole</code>). The blackhole state indicates that the route's target isn't available (for example, the specified gateway isn't attached to the VPC, the specified NAT instance has been terminated, and so on).</p> </li> <li> <p> <code>route.vpc-peering-connection-id</code> - The ID of a VPC peering connection specified in a route in the table.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC for the route table.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "DryRun": {
@@ -24379,7 +24386,7 @@
     "InstanceIdSet": {
       "type": "list",
       "member": {
-        "shape": "String",
+        "shape": "InstanceId",
         "locationName": "item"
       }
     },
@@ -31376,6 +31383,9 @@
       },
       "documentation": "<p>Reserved. If you need to sustain traffic greater than the <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html\">documented limits</a>, contact us through the <a href=\"https://console.aws.amazon.com/support/home?\">Support Center</a>.</p>"
     },
+    "PublicIpAddress": {
+      "type": "string"
+    },
     "PublicIpStringList": {
       "type": "list",
       "member": {
@@ -32621,7 +32631,7 @@
         },
         "CreditSpecification": {
           "shape": "CreditSpecificationRequest",
-          "documentation": "<p>The credit option for CPU usage of the instance. Valid for T2 or T3 instances only.</p>"
+          "documentation": "<p>The credit option for CPU usage of the instance. Valid for T2, T3, or T3a instances only.</p>"
         },
         "CpuOptions": {
           "shape": "LaunchTemplateCpuOptionsRequest",
@@ -37065,7 +37075,7 @@
       "members": {
         "ResourceType": {
           "shape": "ResourceType",
-          "documentation": "<p>The type of resource to tag. Currently, the resource types that support tagging on creation are: <code>capacity-reservation</code> | <code>client-vpn-endpoint</code> | <code>dedicated-host</code> | <code>dhcp-options</code> | <code>export-image-task</code> | <code>export-instance-task</code> | <code>fleet</code> | <code>fpga-image</code> | <code>host-reservation</code> | <code>import-image-task</code> | <code>import-snapshot-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>ipv4pool-ec2</code> | <code>ipv6pool-ec2</code> | <code>key-pair</code> | <code>launch-template</code> | <code>placement-group</code> | <code>prefix-list</code> | <code>launch-template</code> | <code>natgateway</code> | <code>network-acl</code> | <code>security-group</code> | <code>spot-fleet-request</code> | <code>snapshot</code> | <code>subnet</code> | <code>traffic-mirror-filter</code> | <code>traffic-mirror-session</code> | <code>traffic-mirror-target</code> | <code>transit-gateway</code> | <code>transit-gateway-attachment</code> | <code>transit-gateway-route-table</code> | <code>volume</code> |<code>vpc</code> | <code>vpc-endpoint</code> (for interface and gateway endpoints) | <code>vpc-endpoint-service</code> (for AWS PrivateLink) | <code>vpc-flow-log</code>.</p> <p>To tag a resource after it has been created, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html\">CreateTags</a>.</p>",
+          "documentation": "<p>The type of resource to tag. Currently, the resource types that support tagging on creation are: <code>capacity-reservation</code> | <code>client-vpn-endpoint</code> | <code>dedicated-host</code> | <code>dhcp-options</code> | <code>export-image-task</code> | <code>export-instance-task</code> | <code>fleet</code> | <code>fpga-image</code> | <code>host-reservation</code> | <code>import-image-task</code> | <code>import-snapshot-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>ipv4pool-ec2</code> | <code>ipv6pool-ec2</code> | <code>key-pair</code> | <code>launch-template</code> | <code>placement-group</code> | <code>prefix-list</code> | <code>natgateway</code> | <code>network-acl</code> | <code>security-group</code> | <code>spot-fleet-request</code> | <code>spot-instances-request</code> | <code>snapshot</code> | <code>subnet</code> | <code>traffic-mirror-filter</code> | <code>traffic-mirror-session</code> | <code>traffic-mirror-target</code> | <code>transit-gateway</code> | <code>transit-gateway-attachment</code> | <code>transit-gateway-route-table</code> | <code>volume</code> |<code>vpc</code> | <code>vpc-endpoint</code> (for interface and gateway endpoints) | <code>vpc-endpoint-service</code> (for AWS PrivateLink) | <code>vpc-flow-log</code>.</p> <p>To tag a resource after it has been created, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html\">CreateTags</a>.</p>",
           "locationName": "resourceType"
         },
         "Tags": {
@@ -38436,27 +38446,27 @@
       "members": {
         "AmazonSideAsn": {
           "shape": "Long",
-          "documentation": "<p>A private Autonomous System Number (ASN) for the Amazon side of a BGP session. The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs.</p>"
+          "documentation": "<p>A private Autonomous System Number (ASN) for the Amazon side of a BGP session. The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs. The default is <code>64512</code>.</p>"
         },
         "AutoAcceptSharedAttachments": {
           "shape": "AutoAcceptSharedAttachmentsValue",
-          "documentation": "<p>Enable or disable automatic acceptance of attachment requests. The default is <code>disable</code>.</p>"
+          "documentation": "<p>Enable or disable automatic acceptance of attachment requests. Disabled by default.</p>"
         },
         "DefaultRouteTableAssociation": {
           "shape": "DefaultRouteTableAssociationValue",
-          "documentation": "<p>Enable or disable automatic association with the default association route table. The default is <code>enable</code>.</p>"
+          "documentation": "<p>Enable or disable automatic association with the default association route table. Enabled by default.</p>"
         },
         "DefaultRouteTablePropagation": {
           "shape": "DefaultRouteTablePropagationValue",
-          "documentation": "<p>Enable or disable automatic propagation of routes to the default propagation route table. The default is <code>enable</code>.</p>"
+          "documentation": "<p>Enable or disable automatic propagation of routes to the default propagation route table. Enabled by default.</p>"
         },
         "VpnEcmpSupport": {
           "shape": "VpnEcmpSupportValue",
-          "documentation": "<p>Enable or disable Equal Cost Multipath Protocol support.</p>"
+          "documentation": "<p>Enable or disable Equal Cost Multipath Protocol support. Enabled by default.</p>"
         },
         "DnsSupport": {
           "shape": "DnsSupportValue",
-          "documentation": "<p>Enable or disable DNS support.</p>"
+          "documentation": "<p>Enable or disable DNS support. Enabled by default.</p>"
         },
         "MulticastSupport": {
           "shape": "MulticastSupportValue",

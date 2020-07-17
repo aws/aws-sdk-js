@@ -1581,11 +1581,11 @@ declare class EC2 extends Service {
    */
   describeKeyPairs(callback?: (err: AWSError, data: EC2.Types.DescribeKeyPairsResult) => void): Request<EC2.Types.DescribeKeyPairsResult, AWSError>;
   /**
-   * Describes one or more versions of a specified launch template. You can describe all versions, individual versions, or a range of versions.
+   * Describes one or more versions of a specified launch template. You can describe all versions, individual versions, or a range of versions. You can also describe all the latest versions or all the default versions of all the launch templates in your account.
    */
   describeLaunchTemplateVersions(params: EC2.Types.DescribeLaunchTemplateVersionsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeLaunchTemplateVersionsResult) => void): Request<EC2.Types.DescribeLaunchTemplateVersionsResult, AWSError>;
   /**
-   * Describes one or more versions of a specified launch template. You can describe all versions, individual versions, or a range of versions.
+   * Describes one or more versions of a specified launch template. You can describe all versions, individual versions, or a range of versions. You can also describe all the latest versions or all the default versions of all the launch templates in your account.
    */
   describeLaunchTemplateVersions(callback?: (err: AWSError, data: EC2.Types.DescribeLaunchTemplateVersionsResult) => void): Request<EC2.Types.DescribeLaunchTemplateVersionsResult, AWSError>;
   /**
@@ -2421,11 +2421,11 @@ declare class EC2 extends Service {
    */
   getHostReservationPurchasePreview(callback?: (err: AWSError, data: EC2.Types.GetHostReservationPurchasePreviewResult) => void): Request<EC2.Types.GetHostReservationPurchasePreviewResult, AWSError>;
   /**
-   * Retrieves the configuration data of the specified instance. You can use this data to create a launch template.
+   * Retrieves the configuration data of the specified instance. You can use this data to create a launch template.  This action calls on other describe actions to get instance information. Depending on your instance configuration, you may need to allow the following actions in your IAM policy: DescribeSpotInstanceRequests, DescribeInstanceCreditSpecifications, DescribeVolumes, DescribeInstanceAttribute, and DescribeElasticGpus. Or, you can allow describe* depending on your instance requirements.
    */
   getLaunchTemplateData(params: EC2.Types.GetLaunchTemplateDataRequest, callback?: (err: AWSError, data: EC2.Types.GetLaunchTemplateDataResult) => void): Request<EC2.Types.GetLaunchTemplateDataResult, AWSError>;
   /**
-   * Retrieves the configuration data of the specified instance. You can use this data to create a launch template.
+   * Retrieves the configuration data of the specified instance. You can use this data to create a launch template.  This action calls on other describe actions to get instance information. Depending on your instance configuration, you may need to allow the following actions in your IAM policy: DescribeSpotInstanceRequests, DescribeInstanceCreditSpecifications, DescribeVolumes, DescribeInstanceAttribute, and DescribeElasticGpus. Or, you can allow describe* depending on your instance requirements.
    */
   getLaunchTemplateData(callback?: (err: AWSError, data: EC2.Types.GetLaunchTemplateDataResult) => void): Request<EC2.Types.GetLaunchTemplateDataResult, AWSError>;
   /**
@@ -2917,11 +2917,11 @@ declare class EC2 extends Service {
    */
   rebootInstances(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Registers an AMI. When you're creating an AMI, this is the final step you must complete before you can launch an instance from the AMI. For more information about creating AMIs, see Creating Your Own AMIs in the Amazon Elastic Compute Cloud User Guide.  For Amazon EBS-backed instances, CreateImage creates and registers the AMI in a single request, so you don't have to register the AMI yourself.  You can also use RegisterImage to create an Amazon EBS-backed Linux AMI from a snapshot of a root device volume. You specify the snapshot using the block device mapping. For more information, see Launching a Linux Instance from a Backup in the Amazon Elastic Compute Cloud User Guide. You can't register an image where a secondary (non-root) snapshot has AWS Marketplace product codes. Windows and some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE Linux Enterprise Server (SLES), use the EC2 billing product code associated with an AMI to verify the subscription status for package updates. To create a new AMI for operating systems that require a billing product code, instead of registering the AMI, do the following to preserve the billing product code association:   Launch an instance from an existing AMI with that billing product code.   Customize the instance.   Create an AMI from the instance using CreateImage.   If you purchase a Reserved Instance to apply to an On-Demand Instance that was launched from an AMI with a billing product code, make sure that the Reserved Instance has the matching billing product code. If you purchase a Reserved Instance without the matching billing product code, the Reserved Instance will not be applied to the On-Demand Instance. For information about how to obtain the platform details and billing information of an AMI, see Obtaining Billing Information in the Amazon Elastic Compute Cloud User Guide. If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. If you make changes to an image, deregister the previous image and register the new image.
+   * Registers an AMI. When you're creating an AMI, this is the final step you must complete before you can launch an instance from the AMI. For more information about creating AMIs, see Creating your own AMIs in the Amazon Elastic Compute Cloud User Guide.  For Amazon EBS-backed instances, CreateImage creates and registers the AMI in a single request, so you don't have to register the AMI yourself.  You can also use RegisterImage to create an Amazon EBS-backed Linux AMI from a snapshot of a root device volume. You specify the snapshot using the block device mapping. For more information, see Launching a Linux instance from a backup in the Amazon Elastic Compute Cloud User Guide. If any snapshots have AWS Marketplace product codes, they are copied to the new AMI. Windows and some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE Linux Enterprise Server (SLES), use the EC2 billing product code associated with an AMI to verify the subscription status for package updates. To create a new AMI for operating systems that require a billing product code, instead of registering the AMI, do the following to preserve the billing product code association:   Launch an instance from an existing AMI with that billing product code.   Customize the instance.   Create an AMI from the instance using CreateImage.   If you purchase a Reserved Instance to apply to an On-Demand Instance that was launched from an AMI with a billing product code, make sure that the Reserved Instance has the matching billing product code. If you purchase a Reserved Instance without the matching billing product code, the Reserved Instance will not be applied to the On-Demand Instance. For information about how to obtain the platform details and billing information of an AMI, see Obtaining billing information in the Amazon Elastic Compute Cloud User Guide. If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. If you make changes to an image, deregister the previous image and register the new image.
    */
   registerImage(params: EC2.Types.RegisterImageRequest, callback?: (err: AWSError, data: EC2.Types.RegisterImageResult) => void): Request<EC2.Types.RegisterImageResult, AWSError>;
   /**
-   * Registers an AMI. When you're creating an AMI, this is the final step you must complete before you can launch an instance from the AMI. For more information about creating AMIs, see Creating Your Own AMIs in the Amazon Elastic Compute Cloud User Guide.  For Amazon EBS-backed instances, CreateImage creates and registers the AMI in a single request, so you don't have to register the AMI yourself.  You can also use RegisterImage to create an Amazon EBS-backed Linux AMI from a snapshot of a root device volume. You specify the snapshot using the block device mapping. For more information, see Launching a Linux Instance from a Backup in the Amazon Elastic Compute Cloud User Guide. You can't register an image where a secondary (non-root) snapshot has AWS Marketplace product codes. Windows and some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE Linux Enterprise Server (SLES), use the EC2 billing product code associated with an AMI to verify the subscription status for package updates. To create a new AMI for operating systems that require a billing product code, instead of registering the AMI, do the following to preserve the billing product code association:   Launch an instance from an existing AMI with that billing product code.   Customize the instance.   Create an AMI from the instance using CreateImage.   If you purchase a Reserved Instance to apply to an On-Demand Instance that was launched from an AMI with a billing product code, make sure that the Reserved Instance has the matching billing product code. If you purchase a Reserved Instance without the matching billing product code, the Reserved Instance will not be applied to the On-Demand Instance. For information about how to obtain the platform details and billing information of an AMI, see Obtaining Billing Information in the Amazon Elastic Compute Cloud User Guide. If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. If you make changes to an image, deregister the previous image and register the new image.
+   * Registers an AMI. When you're creating an AMI, this is the final step you must complete before you can launch an instance from the AMI. For more information about creating AMIs, see Creating your own AMIs in the Amazon Elastic Compute Cloud User Guide.  For Amazon EBS-backed instances, CreateImage creates and registers the AMI in a single request, so you don't have to register the AMI yourself.  You can also use RegisterImage to create an Amazon EBS-backed Linux AMI from a snapshot of a root device volume. You specify the snapshot using the block device mapping. For more information, see Launching a Linux instance from a backup in the Amazon Elastic Compute Cloud User Guide. If any snapshots have AWS Marketplace product codes, they are copied to the new AMI. Windows and some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE Linux Enterprise Server (SLES), use the EC2 billing product code associated with an AMI to verify the subscription status for package updates. To create a new AMI for operating systems that require a billing product code, instead of registering the AMI, do the following to preserve the billing product code association:   Launch an instance from an existing AMI with that billing product code.   Customize the instance.   Create an AMI from the instance using CreateImage.   If you purchase a Reserved Instance to apply to an On-Demand Instance that was launched from an AMI with a billing product code, make sure that the Reserved Instance has the matching billing product code. If you purchase a Reserved Instance without the matching billing product code, the Reserved Instance will not be applied to the On-Demand Instance. For information about how to obtain the platform details and billing information of an AMI, see Obtaining billing information in the Amazon Elastic Compute Cloud User Guide. If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. If you make changes to an image, deregister the previous image and register the new image.
    */
   registerImage(callback?: (err: AWSError, data: EC2.Types.RegisterImageResult) => void): Request<EC2.Types.RegisterImageResult, AWSError>;
   /**
@@ -3763,13 +3763,13 @@ declare namespace EC2 {
   export type Affinity = "default"|"host"|string;
   export interface AllocateAddressRequest {
     /**
-     * Set to vpc to allocate the address for use with instances in a VPC. Default: The address is for use with instances in EC2-Classic.
+     * Indicates whether the Elastic IP address is for use with instances in a VPC or instances in EC2-Classic. Default: If the Region supports EC2-Classic, the default is standard. Otherwise, the default is vpc.
      */
     Domain?: DomainType;
     /**
      * [EC2-VPC] The Elastic IP address to recover or an IPv4 address from an address pool.
      */
-    Address?: String;
+    Address?: PublicIpAddress;
     /**
      * The ID of an address pool that you own. Use this parameter to let Amazon EC2 select an address from the address pool. To specify a specific address from the address pool, use the Address parameter instead.
      */
@@ -3805,7 +3805,7 @@ declare namespace EC2 {
      */
     NetworkBorderGroup?: String;
     /**
-     * Indicates whether this Elastic IP address is for use with instances in EC2-Classic (standard) or instances in a VPC (vpc).
+     * Indicates whether the Elastic IP address is for use with instances in a VPC (vpc) or instances in EC2-Classic (standard).
      */
     Domain?: DomainType;
     /**
@@ -4359,11 +4359,11 @@ declare namespace EC2 {
      */
     TargetNetworkCidr: String;
     /**
-     * The ID of the group to grant access to, for example, the Active Directory group or identity provider (IdP) group.
+     * The ID of the group to grant access to, for example, the Active Directory group or identity provider (IdP) group. Required if AuthorizeAllGroups is false or not specified.
      */
     AccessGroupId?: String;
     /**
-     * Indicates whether to grant access to all clients. Use true to grant all clients who successfully establish a VPN connection access to the network.
+     * Indicates whether to grant access to all clients. Specify true to grant all clients who successfully establish a VPN connection access to the network. Must be set to true if AccessGroupId is not specified.
      */
     AuthorizeAllGroups?: Boolean;
     /**
@@ -5385,7 +5385,7 @@ declare namespace EC2 {
      */
     Enabled?: Boolean;
     /**
-     * The name of the CloudWatch Logs log group.
+     * The name of the CloudWatch Logs log group. Required if connection logging is enabled.
      */
     CloudwatchLogGroup?: String;
     /**
@@ -5438,6 +5438,7 @@ declare namespace EC2 {
     ConnectionNotificationState?: ConnectionNotificationState;
   }
   export type ConnectionNotificationId = string;
+  export type ConnectionNotificationIdsList = ConnectionNotificationId[];
   export type ConnectionNotificationSet = ConnectionNotification[];
   export type ConnectionNotificationState = "Enabled"|"Disabled"|string;
   export type ConnectionNotificationType = "Topic"|string;
@@ -5483,7 +5484,7 @@ declare namespace EC2 {
     /**
      * The ID of the source AFI.
      */
-    SourceFpgaImageId: FpgaImageId;
+    SourceFpgaImageId: String;
     /**
      * The description for the new AFI.
      */
@@ -7482,13 +7483,13 @@ declare namespace EC2 {
   }
   export interface CreditSpecification {
     /**
-     * The credit option for CPU usage of a T2 or T3 instance. Valid values are standard and unlimited.
+     * The credit option for CPU usage of a T2, T3, or T3a instance. Valid values are standard and unlimited.
      */
     CpuCredits?: String;
   }
   export interface CreditSpecificationRequest {
     /**
-     * The credit option for CPU usage of a T2 or T3 instance. Valid values are standard and unlimited.
+     * The credit option for CPU usage of a T2, T3, or T3a instance. Valid values are standard and unlimited.
      */
     CpuCredits: String;
   }
@@ -8252,7 +8253,7 @@ declare namespace EC2 {
     /**
      * One or more notification IDs.
      */
-    ConnectionNotificationIds: ValueStringList;
+    ConnectionNotificationIds: ConnectionNotificationIdsList;
   }
   export interface DeleteVpcEndpointConnectionNotificationsResult {
     /**
@@ -8506,7 +8507,7 @@ declare namespace EC2 {
   }
   export interface DescribeAvailabilityZonesRequest {
     /**
-     * The filters.    group-name - For Availability Zones, use the Region name. For Local Zones, use the name of the group associated with the Local Zone (for example, us-west-2-lax-1).    message - The Zone message.    opt-in-status - The opt in status (opted-in, and not-opted-in | opt-in-not-required).    region-name - The name of the Region for the Zone (for example, us-east-1).    state - The state of the Availability Zone or Local Zone (available | information | impaired | unavailable).    zone-id - The ID of the Availability Zone (for example, use1-az1) or the Local Zone (for example, use usw2-lax1-az1).    zone-name - The name of the Availability Zone (for example, us-east-1a) or the Local Zone (for example, use us-west-2-lax-1a).  
+     * The filters.    group-name - For Availability Zones, use the Region name. For Local Zones, use the name of the group associated with the Local Zone (for example, us-west-2-lax-1).    message - The Zone message.    opt-in-status - The opt in status (opted-in, and not-opted-in | opt-in-not-required).   The ID of the zone that handles some of the Local Zone control plane operations, such as API calls.    region-name - The name of the Region for the Zone (for example, us-east-1).    state - The state of the Availability Zone or Local Zone (available | information | impaired | unavailable).    zone-id - The ID of the Availability Zone (for example, use1-az1) or the Local Zone (for example, use usw2-lax1-az1).    zone-type - The type of zone, for example, local-zone.    zone-name - The name of the Availability Zone (for example, us-east-1a) or the Local Zone (for example, use us-west-2-lax-1a).    zone-type - The type of zone, for example, local-zone.  
      */
     Filters?: FilterList;
     /**
@@ -9526,7 +9527,7 @@ declare namespace EC2 {
      */
     ExecutableUsers?: ExecutableByStringList;
     /**
-     * The filters.    architecture - The image architecture (i386 | x86_64 | arm64).    block-device-mapping.delete-on-termination - A Boolean value that indicates whether the Amazon EBS volume is deleted on instance termination.    block-device-mapping.device-name - The device name specified in the block device mapping (for example, /dev/sdh or xvdh).    block-device-mapping.snapshot-id - The ID of the snapshot used for the EBS volume.    block-device-mapping.volume-size - The volume size of the EBS volume, in GiB.    block-device-mapping.volume-type - The volume type of the EBS volume (gp2 | io1 | st1 | sc1 | standard).    block-device-mapping.encrypted - A Boolean that indicates whether the EBS volume is encrypted.    description - The description of the image (provided during image creation).    ena-support - A Boolean that indicates whether enhanced networking with ENA is enabled.    hypervisor - The hypervisor type (ovm | xen).    image-id - The ID of the image.    image-type - The image type (machine | kernel | ramdisk).    is-public - A Boolean that indicates whether the image is public.    kernel-id - The kernel ID.    manifest-location - The location of the image manifest.    name - The name of the AMI (provided during image creation).    owner-alias - String value from an Amazon-maintained list (amazon | aws-marketplace | microsoft) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM console.    owner-id - The AWS account ID of the image owner.    platform - The platform. To only list Windows-based AMIs, use windows.    product-code - The product code.    product-code.type - The type of the product code (devpay | marketplace).    ramdisk-id - The RAM disk ID.    root-device-name - The device name of the root device volume (for example, /dev/sda1).    root-device-type - The type of the root device volume (ebs | instance-store).    state - The state of the image (available | pending | failed).    state-reason-code - The reason code for the state change.    state-reason-message - The message for the state change.    sriov-net-support - A value of simple indicates that enhanced networking with the Intel 82599 VF interface is enabled.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    virtualization-type - The virtualization type (paravirtual | hvm).  
+     * The filters.    architecture - The image architecture (i386 | x86_64 | arm64).    block-device-mapping.delete-on-termination - A Boolean value that indicates whether the Amazon EBS volume is deleted on instance termination.    block-device-mapping.device-name - The device name specified in the block device mapping (for example, /dev/sdh or xvdh).    block-device-mapping.snapshot-id - The ID of the snapshot used for the EBS volume.    block-device-mapping.volume-size - The volume size of the EBS volume, in GiB.    block-device-mapping.volume-type - The volume type of the EBS volume (gp2 | io1 | st1 | sc1 | standard).    block-device-mapping.encrypted - A Boolean that indicates whether the EBS volume is encrypted.    description - The description of the image (provided during image creation).    ena-support - A Boolean that indicates whether enhanced networking with ENA is enabled.    hypervisor - The hypervisor type (ovm | xen).    image-id - The ID of the image.    image-type - The image type (machine | kernel | ramdisk).    is-public - A Boolean that indicates whether the image is public.    kernel-id - The kernel ID.    manifest-location - The location of the image manifest.    name - The name of the AMI (provided during image creation).    owner-alias - The owner alias, from an Amazon-maintained list (amazon | aws-marketplace). This is not the user-configured AWS account alias set using the IAM console. We recommend that you use the related parameter instead of this filter.    owner-id - The AWS account ID of the owner. We recommend that you use the related parameter instead of this filter.    platform - The platform. To only list Windows-based AMIs, use windows.    product-code - The product code.    product-code.type - The type of the product code (devpay | marketplace).    ramdisk-id - The RAM disk ID.    root-device-name - The device name of the root device volume (for example, /dev/sda1).    root-device-type - The type of the root device volume (ebs | instance-store).    state - The state of the image (available | pending | failed).    state-reason-code - The reason code for the state change.    state-reason-message - The message for the state change.    sriov-net-support - A value of simple indicates that enhanced networking with the Intel 82599 VF interface is enabled.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    virtualization-type - The virtualization type (paravirtual | hvm).  
      */
     Filters?: FilterList;
     /**
@@ -9534,7 +9535,7 @@ declare namespace EC2 {
      */
     ImageIds?: ImageIdStringList;
     /**
-     * Filters the images by the owner. Specify an AWS account ID, self (owner is the sender of the request), or an AWS owner alias (valid values are amazon | aws-marketplace | microsoft). Omitting this option returns all images for which you have launch permissions, regardless of ownership.
+     * Scopes the results to images with the specified owners. You can specify a combination of AWS account IDs, self, amazon, and aws-marketplace. If you omit this parameter, the results include all images for which you have launch permissions, regardless of ownership.
      */
     Owners?: OwnerStringList;
     /**
@@ -9898,15 +9899,15 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * The ID of the launch template. You must specify either the launch template ID or launch template name in the request.
+     * The ID of the launch template. To describe one or more versions of a specified launch template, you must specify either the launch template ID or the launch template name in the request. To describe all the latest or default launch template versions in your account, you must omit this parameter.
      */
     LaunchTemplateId?: LaunchTemplateId;
     /**
-     * The name of the launch template. You must specify either the launch template ID or launch template name in the request.
+     * The name of the launch template. To describe one or more versions of a specified launch template, you must specify either the launch template ID or the launch template name in the request. To describe all the latest or default launch template versions in your account, you must omit this parameter.
      */
     LaunchTemplateName?: LaunchTemplateName;
     /**
-     * One or more versions of the launch template.
+     * One or more versions of the launch template. Valid values depend on whether you are describing a specified launch template (by ID or name) or all launch templates in your account. To describe one or more versions of a specified launch template, valid values are $Latest, $Default, and numbers. To describe all launch templates in your account that are defined as the latest version, the valid value is $Latest. To describe all launch templates in your account that are defined as the default version, the valid value is $Default. You can specify $Latest and $Default in the same call. You cannot specify numbers.
      */
     Versions?: VersionStringList;
     /**
@@ -10682,7 +10683,7 @@ declare namespace EC2 {
   export type DescribeRouteTablesMaxResults = number;
   export interface DescribeRouteTablesRequest {
     /**
-     * One or more filters.    association.route-table-association-id - The ID of an association ID for the route table.    association.route-table-id - The ID of the route table involved in the association.    association.subnet-id - The ID of the subnet involved in the association.    association.main - Indicates whether the route table is the main route table for the VPC (true | false). Route tables that do not have an association ID are not returned in the response.    owner-id - The ID of the AWS account that owns the route table.    route-table-id - The ID of the route table.    route.destination-cidr-block - The IPv4 CIDR range specified in a route in the table.    route.destination-ipv6-cidr-block - The IPv6 CIDR range specified in a route in the route table.    route.destination-prefix-list-id - The ID (prefix) of the AWS service specified in a route in the table.    route.egress-only-internet-gateway-id - The ID of an egress-only Internet gateway specified in a route in the route table.    route.gateway-id - The ID of a gateway specified in a route in the table.    route.instance-id - The ID of an instance specified in a route in the table.    route.nat-gateway-id - The ID of a NAT gateway.    route.transit-gateway-id - The ID of a transit gateway.    route.origin - Describes how the route was created. CreateRouteTable indicates that the route was automatically created when the route table was created; CreateRoute indicates that the route was manually added to the route table; EnableVgwRoutePropagation indicates that the route was propagated by route propagation.    route.state - The state of a route in the route table (active | blackhole). The blackhole state indicates that the route's target isn't available (for example, the specified gateway isn't attached to the VPC, the specified NAT instance has been terminated, and so on).    route.vpc-peering-connection-id - The ID of a VPC peering connection specified in a route in the table.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    transit-gateway-id - The ID of a transit gateway.    vpc-id - The ID of the VPC for the route table.  
+     * One or more filters.    association.route-table-association-id - The ID of an association ID for the route table.    association.route-table-id - The ID of the route table involved in the association.    association.subnet-id - The ID of the subnet involved in the association.    association.main - Indicates whether the route table is the main route table for the VPC (true | false). Route tables that do not have an association ID are not returned in the response.    owner-id - The ID of the AWS account that owns the route table.    route-table-id - The ID of the route table.    route.destination-cidr-block - The IPv4 CIDR range specified in a route in the table.    route.destination-ipv6-cidr-block - The IPv6 CIDR range specified in a route in the route table.    route.destination-prefix-list-id - The ID (prefix) of the AWS service specified in a route in the table.    route.egress-only-internet-gateway-id - The ID of an egress-only Internet gateway specified in a route in the route table.    route.gateway-id - The ID of a gateway specified in a route in the table.    route.instance-id - The ID of an instance specified in a route in the table.    route.nat-gateway-id - The ID of a NAT gateway.    route.transit-gateway-id - The ID of a transit gateway.    route.origin - Describes how the route was created. CreateRouteTable indicates that the route was automatically created when the route table was created; CreateRoute indicates that the route was manually added to the route table; EnableVgwRoutePropagation indicates that the route was propagated by route propagation.    route.state - The state of a route in the route table (active | blackhole). The blackhole state indicates that the route's target isn't available (for example, the specified gateway isn't attached to the VPC, the specified NAT instance has been terminated, and so on).    route.vpc-peering-connection-id - The ID of a VPC peering connection specified in a route in the table.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC for the route table.  
      */
     Filters?: FilterList;
     /**
@@ -15641,7 +15642,7 @@ declare namespace EC2 {
   }
   export type InstanceHealthStatus = "healthy"|"unhealthy"|string;
   export type InstanceId = string;
-  export type InstanceIdSet = String[];
+  export type InstanceIdSet = InstanceId[];
   export type InstanceIdStringList = InstanceId[];
   export type InstanceIdsSet = InstanceId[];
   export type InstanceInterruptionBehavior = "hibernate"|"stop"|"terminate"|string;
@@ -19618,6 +19619,7 @@ declare namespace EC2 {
      */
     Status?: String;
   }
+  export type PublicIpAddress = string;
   export type PublicIpStringList = String[];
   export interface PublicIpv4Pool {
     /**
@@ -20402,7 +20404,7 @@ declare namespace EC2 {
      */
     InstanceMarketOptions?: LaunchTemplateInstanceMarketOptionsRequest;
     /**
-     * The credit option for CPU usage of the instance. Valid for T2 or T3 instances only.
+     * The credit option for CPU usage of the instance. Valid for T2, T3, or T3a instances only.
      */
     CreditSpecification?: CreditSpecificationRequest;
     /**
@@ -23245,7 +23247,7 @@ declare namespace EC2 {
   export type TagList = Tag[];
   export interface TagSpecification {
     /**
-     * The type of resource to tag. Currently, the resource types that support tagging on creation are: capacity-reservation | client-vpn-endpoint | dedicated-host | dhcp-options | export-image-task | export-instance-task | fleet | fpga-image | host-reservation | import-image-task | import-snapshot-task | instance | internet-gateway | ipv4pool-ec2 | ipv6pool-ec2 | key-pair | launch-template | placement-group | prefix-list | launch-template | natgateway | network-acl | security-group | spot-fleet-request | snapshot | subnet | traffic-mirror-filter | traffic-mirror-session | traffic-mirror-target | transit-gateway | transit-gateway-attachment | transit-gateway-route-table | volume |vpc | vpc-endpoint (for interface and gateway endpoints) | vpc-endpoint-service (for AWS PrivateLink) | vpc-flow-log. To tag a resource after it has been created, see CreateTags.
+     * The type of resource to tag. Currently, the resource types that support tagging on creation are: capacity-reservation | client-vpn-endpoint | dedicated-host | dhcp-options | export-image-task | export-instance-task | fleet | fpga-image | host-reservation | import-image-task | import-snapshot-task | instance | internet-gateway | ipv4pool-ec2 | ipv6pool-ec2 | key-pair | launch-template | placement-group | prefix-list | natgateway | network-acl | security-group | spot-fleet-request | spot-instances-request | snapshot | subnet | traffic-mirror-filter | traffic-mirror-session | traffic-mirror-target | transit-gateway | transit-gateway-attachment | transit-gateway-route-table | volume |vpc | vpc-endpoint (for interface and gateway endpoints) | vpc-endpoint-service (for AWS PrivateLink) | vpc-flow-log. To tag a resource after it has been created, see CreateTags.
      */
     ResourceType?: ResourceType;
     /**
@@ -24008,27 +24010,27 @@ declare namespace EC2 {
   export type TransitGatewayPropagationState = "enabling"|"enabled"|"disabling"|"disabled"|string;
   export interface TransitGatewayRequestOptions {
     /**
-     * A private Autonomous System Number (ASN) for the Amazon side of a BGP session. The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs.
+     * A private Autonomous System Number (ASN) for the Amazon side of a BGP session. The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs. The default is 64512.
      */
     AmazonSideAsn?: Long;
     /**
-     * Enable or disable automatic acceptance of attachment requests. The default is disable.
+     * Enable or disable automatic acceptance of attachment requests. Disabled by default.
      */
     AutoAcceptSharedAttachments?: AutoAcceptSharedAttachmentsValue;
     /**
-     * Enable or disable automatic association with the default association route table. The default is enable.
+     * Enable or disable automatic association with the default association route table. Enabled by default.
      */
     DefaultRouteTableAssociation?: DefaultRouteTableAssociationValue;
     /**
-     * Enable or disable automatic propagation of routes to the default propagation route table. The default is enable.
+     * Enable or disable automatic propagation of routes to the default propagation route table. Enabled by default.
      */
     DefaultRouteTablePropagation?: DefaultRouteTablePropagationValue;
     /**
-     * Enable or disable Equal Cost Multipath Protocol support.
+     * Enable or disable Equal Cost Multipath Protocol support. Enabled by default.
      */
     VpnEcmpSupport?: VpnEcmpSupportValue;
     /**
-     * Enable or disable DNS support.
+     * Enable or disable DNS support. Enabled by default.
      */
     DnsSupport?: DnsSupportValue;
     /**

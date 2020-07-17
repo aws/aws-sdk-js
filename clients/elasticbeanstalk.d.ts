@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -375,6 +376,30 @@ declare class ElasticBeanstalk extends Service {
    * Takes a set of configuration settings and either a configuration template or environment, and determines whether those values are valid. This action returns a list of messages indicating any errors or warnings associated with the selection of option values.
    */
   validateConfigurationSettings(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ConfigurationSettingsValidationMessages) => void): Request<ElasticBeanstalk.Types.ConfigurationSettingsValidationMessages, AWSError>;
+  /**
+   * Waits for the environmentExists state by periodically calling the underlying ElasticBeanstalk.describeEnvironmentsoperation every 20 seconds (at most 20 times).
+   */
+  waitFor(state: "environmentExists", params: ElasticBeanstalk.Types.DescribeEnvironmentsMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.EnvironmentDescriptionsMessage, AWSError>;
+  /**
+   * Waits for the environmentExists state by periodically calling the underlying ElasticBeanstalk.describeEnvironmentsoperation every 20 seconds (at most 20 times).
+   */
+  waitFor(state: "environmentExists", callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.EnvironmentDescriptionsMessage, AWSError>;
+  /**
+   * Waits for the environmentUpdated state by periodically calling the underlying ElasticBeanstalk.describeEnvironmentsoperation every 20 seconds (at most 20 times).
+   */
+  waitFor(state: "environmentUpdated", params: ElasticBeanstalk.Types.DescribeEnvironmentsMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.EnvironmentDescriptionsMessage, AWSError>;
+  /**
+   * Waits for the environmentUpdated state by periodically calling the underlying ElasticBeanstalk.describeEnvironmentsoperation every 20 seconds (at most 20 times).
+   */
+  waitFor(state: "environmentUpdated", callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.EnvironmentDescriptionsMessage, AWSError>;
+  /**
+   * Waits for the environmentTerminated state by periodically calling the underlying ElasticBeanstalk.describeEnvironmentsoperation every 20 seconds (at most 20 times).
+   */
+  waitFor(state: "environmentTerminated", params: ElasticBeanstalk.Types.DescribeEnvironmentsMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.EnvironmentDescriptionsMessage, AWSError>;
+  /**
+   * Waits for the environmentTerminated state by periodically calling the underlying ElasticBeanstalk.describeEnvironmentsoperation every 20 seconds (at most 20 times).
+   */
+  waitFor(state: "environmentTerminated", callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.EnvironmentDescriptionsMessage, AWSError>;
 }
 declare namespace ElasticBeanstalk {
   export type ARN = string;

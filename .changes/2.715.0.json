@@ -1,0 +1,27 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Types",
+        "description": "Export missing TokenFileWebIdentityCredentials class"
+    },
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "This release adds a set of Amazon Connect APIs to programmatically control call recording with start, stop, pause and resume functions."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Documentation updates for EC2"
+    },
+    {
+        "type": "feature",
+        "category": "ElasticBeanstalk",
+        "description": "Add waiters for `EnvironmentExists`, `EnvironmentUpdated`, and `EnvironmentTerminated`. Add paginators for `DescribeEnvironmentManagedActionHistory` and `ListPlatformVersions`."
+    },
+    {
+        "type": "feature",
+        "category": "Macie2",
+        "description": "This release of the Amazon Macie API includes miscellaneous updates and improvements to the documentation."
+    }
+]
