@@ -1,4 +1,4 @@
-var whitelist = {
+var allowlist = {
     '/config.js': [
         24,
         25,
@@ -45,5 +45,5 @@ var whitelist = {
 };
 
 module.exports = {
-    whitelist: whitelist
+    allowlist: allowlist
 };
