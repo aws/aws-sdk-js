@@ -1,6 +1,6 @@
 var fs = require('fs');
 var path = require('path');
-var whitelist = require('./whitelist').whitelist;
+var allowlist = require('./allowlist').allowlist;
 
 function checkFile(location) {
     var file = fs.readFileSync(location);
@@ -57,7 +57,7 @@ function checkForRegions() {
 
     regionMatches.forEach(function(match) {
         var normalizedPath = match.file.substring(libPath.length);
-        if (whitelist[normalizedPath] && whitelist[normalizedPath].indexOf(match.line) >= 0) {
+        if (allowlist[normalizedPath] && allowlist[normalizedPath].indexOf(match.line) >= 0) {
             return;
         }
         warnings.push('File: ' + normalizedPath + '\tLine ' + match.line + ':\t' + match.code.trim());
