@@ -2883,6 +2883,14 @@ declare namespace RDS {
      * The status of the DB engine version, either available or deprecated.
      */
     Status?: String;
+    /**
+     * A value that indicates whether you can use Aurora parallel query with a specific DB engine version.
+     */
+    SupportsParallelQuery?: Boolean;
+    /**
+     * A value that indicates whether you can use Aurora global databases with a specific DB engine version.
+     */
+    SupportsGlobalDatabases?: Boolean;
   }
   export type DBEngineVersionList = DBEngineVersion[];
   export interface DBEngineVersionMessage {
@@ -6222,6 +6230,10 @@ declare namespace RDS {
      * Whether a DB instance supports RDS on Outposts. For more information about RDS on Outposts, see Amazon RDS on AWS Outposts in the Amazon RDS User Guide. 
      */
     OutpostCapable?: Boolean;
+    /**
+     * A value that indicates whether you can use Aurora global databases with a specific combination of other DB engine attributes.
+     */
+    SupportsGlobalDatabases?: Boolean;
   }
   export type OrderableDBInstanceOptionsList = OrderableDBInstanceOption[];
   export interface OrderableDBInstanceOptionsMessage {

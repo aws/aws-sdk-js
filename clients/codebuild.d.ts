@@ -491,6 +491,10 @@ declare namespace CodeBuild {
      *  An array of ProjectFileSystemLocation objects for a CodeBuild build project. A ProjectFileSystemLocation object specifies the identifier, location, mountOptions, mountPoint, and type of a file system created using Amazon Elastic File System. 
      */
     fileSystemLocations?: ProjectFileSystemLocations;
+    /**
+     * Contains information about the debug session for this build.
+     */
+    debugSession?: DebugSession;
   }
   export interface BuildArtifacts {
     /**
@@ -717,6 +721,16 @@ declare namespace CodeBuild {
     webhook?: Webhook;
   }
   export type CredentialProviderType = "SECRETS_MANAGER"|string;
+  export interface DebugSession {
+    /**
+     * Specifies if session debugging is enabled for this build.
+     */
+    sessionEnabled?: WrapperBoolean;
+    /**
+     * Contains the identifier of the Session Manager session used for the build. To work with the paused build, you open this session to examine, control, and resume the build.
+     */
+    sessionTarget?: NonEmptyString;
+  }
   export interface DeleteProjectInput {
     /**
      * The name of the build project.
@@ -834,7 +848,7 @@ declare namespace CodeBuild {
     languages?: EnvironmentLanguages;
   }
   export type EnvironmentPlatforms = EnvironmentPlatform[];
-  export type EnvironmentType = "WINDOWS_CONTAINER"|"LINUX_CONTAINER"|"LINUX_GPU_CONTAINER"|"ARM_CONTAINER"|string;
+  export type EnvironmentType = "WINDOWS_CONTAINER"|"LINUX_CONTAINER"|"LINUX_GPU_CONTAINER"|"ARM_CONTAINER"|"WINDOWS_SERVER_2019_CONTAINER"|string;
   export interface EnvironmentVariable {
     /**
      * The name or key of the environment variable.
@@ -1056,7 +1070,7 @@ declare namespace CodeBuild {
      */
     nextToken?: String;
     /**
-     *  The list of returned report group ARNs. 
+     *  The list of report ARNs. 
      */
     reports?: ReportArns;
   }
@@ -1814,6 +1828,10 @@ declare namespace CodeBuild {
      *  The type of credentials AWS CodeBuild uses to pull images in your build. There are two valid values:     CODEBUILD specifies that AWS CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust AWS CodeBuild's service principal.    SERVICE_ROLE specifies that AWS CodeBuild uses your build project's service role.     When using a cross-account or private registry image, you must use SERVICE_ROLE credentials. When using an AWS CodeBuild curated image, you must use CODEBUILD credentials. 
      */
     imagePullCredentialsTypeOverride?: ImagePullCredentialsType;
+    /**
+     * Specifies if session debugging is enabled for this build. For more information, see Viewing a running build in Session Manager.
+     */
+    debugSessionEnabled?: WrapperBoolean;
   }
   export interface StartBuildOutput {
     /**

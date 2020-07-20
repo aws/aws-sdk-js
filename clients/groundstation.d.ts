@@ -214,6 +214,12 @@ declare class GroundStation extends Service {
 }
 declare namespace GroundStation {
   export type AngleUnits = "DEGREE_ANGLE"|"RADIAN"|string;
+  export interface AntennaDemodDecodeDetails {
+    /**
+     * Name of an antenna demod decode output node used in a contact.
+     */
+    outputNode?: String;
+  }
   export interface AntennaDownlinkConfig {
     /**
      * Object that describes a spectral Config.
@@ -243,6 +249,10 @@ declare namespace GroundStation {
      * EIRP of the target.
      */
     targetEirp: Eirp;
+    /**
+     * Whether or not uplink transmit is disabled.
+     */
+    transmitDisabled?: Boolean;
   }
   export type BandwidthUnits = "GHz"|"MHz"|"kHz"|string;
   export type Boolean = boolean;
@@ -254,6 +264,13 @@ declare namespace GroundStation {
   }
   export type ConfigArn = string;
   export type ConfigCapabilityType = "antenna-downlink"|"antenna-downlink-demod-decode"|"antenna-uplink"|"dataflow-endpoint"|"tracking"|"uplink-echo"|string;
+  export interface ConfigDetails {
+    /**
+     * Details for antenna demod decode Config in a contact.
+     */
+    antennaDemodDecodeDetails?: AntennaDemodDecodeDetails;
+    endpointDetails?: EndpointDetails;
+  }
   export interface ConfigIdResponse {
     /**
      * ARN of a Config.
@@ -430,6 +447,10 @@ declare namespace GroundStation {
     trackingConfigArn: ConfigArn;
   }
   export type Criticality = "PREFERRED"|"REMOVED"|"REQUIRED"|string;
+  export interface DataflowDetail {
+    destination?: Destination;
+    source?: Source;
+  }
   export type DataflowEdge = ConfigArn[];
   export type DataflowEdgeList = DataflowEdge[];
   export interface DataflowEndpoint {
@@ -437,6 +458,10 @@ declare namespace GroundStation {
      * Socket address of a dataflow endpoint.
      */
     address?: SocketAddress;
+    /**
+     * Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.
+     */
+    mtu?: DataflowEndpointmtuInteger;
     /**
      * Name of a dataflow endpoint.
      */
@@ -474,6 +499,8 @@ declare namespace GroundStation {
      */
     dataflowEndpointGroupId?: String;
   }
+  export type DataflowEndpointmtuInteger = number;
+  export type DataflowList = DataflowDetail[];
   export interface DecodeConfig {
     /**
      * Unvalidated JSON of a decode Config.
@@ -524,6 +551,10 @@ declare namespace GroundStation {
      */
     contactStatus?: ContactStatus;
     /**
+     * List describing source and destination details for each dataflow edge.
+     */
+    dataflowList?: DataflowList;
+    /**
      * End time of a contact.
      */
     endTime?: Timestamp;
@@ -568,6 +599,24 @@ declare namespace GroundStation {
      */
     tags?: TagsMap;
   }
+  export interface Destination {
+    /**
+     * Additional details for a Config, if type is dataflow endpoint or antenna demod decode.
+     */
+    configDetails?: ConfigDetails;
+    /**
+     * UUID of a Config.
+     */
+    configId?: String;
+    /**
+     * Type of a Config.
+     */
+    configType?: ConfigCapabilityType;
+    /**
+     * Region of a dataflow destination.
+     */
+    dataflowDestinationRegion?: String;
+  }
   export type Double = number;
   export type DurationInSeconds = number;
   export interface Eirp {
@@ -576,7 +625,7 @@ declare namespace GroundStation {
      */
     units: EirpUnits;
     /**
-     * Value of an EIRP.
+     * Value of an EIRP. Valid values are between 20.0 to 50.0 dBW.
      */
     value: Double;
   }
@@ -609,7 +658,7 @@ declare namespace GroundStation {
      */
     units: FrequencyUnits;
     /**
-     * Frequency value.
+     * Frequency value. Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
      */
     value: Double;
   }
@@ -619,7 +668,7 @@ declare namespace GroundStation {
      */
     units: BandwidthUnits;
     /**
-     * Frequency bandwidth value.
+     * Frequency bandwidth value. AWS Ground Station currently has the following bandwidth limitations:   For AntennaDownlinkDemodDecodeconfig, valid values are between 125 kHz to 650 MHz.   For AntennaDownlinkconfig, valid values are between 10 kHz to 54 MHz.   For AntennaUplinkConfig, valid values are between 10 kHz to 54 MHz.  
      */
     value: Double;
   }
@@ -1065,17 +1114,35 @@ declare namespace GroundStation {
      */
     port: Integer;
   }
+  export interface Source {
+    /**
+     * Additional details for a Config, if type is dataflow endpoint or antenna demod decode.
+     */
+    configDetails?: ConfigDetails;
+    /**
+     * UUID of a Config.
+     */
+    configId?: String;
+    /**
+     * Type of a Config.
+     */
+    configType?: ConfigCapabilityType;
+    /**
+     * Region of a dataflow source.
+     */
+    dataflowSourceRegion?: String;
+  }
   export interface SpectrumConfig {
     /**
-     * Bandwidth of a spectral Config.
+     * Bandwidth of a spectral Config. AWS Ground Station currently has the following bandwidth limitations:   For AntennaDownlinkDemodDecodeconfig, valid values are between 125 kHz to 650 MHz.   For AntennaDownlinkconfig valid values are between 10 kHz to 54 MHz.   For AntennaUplinkConfig, valid values are between 10 kHz to 54 MHz.  
      */
     bandwidth: FrequencyBandwidth;
     /**
-     * Center frequency of a spectral Config.
+     * Center frequency of a spectral Config. Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
      */
     centerFrequency: Frequency;
     /**
-     * Polarization of a spectral Config.
+     * Polarization of a spectral Config. Capturing both "RIGHT_HAND" and "LEFT_HAND" polarization requires two separate configs.
      */
     polarization?: Polarization;
   }
@@ -1175,11 +1242,11 @@ declare namespace GroundStation {
   }
   export interface UplinkSpectrumConfig {
     /**
-     * Center frequency of an uplink spectral Config.
+     * Center frequency of an uplink spectral Config. Valid values are between 2025 to 2120 MHz.
      */
     centerFrequency: Frequency;
     /**
-     * Polarization of an uplink spectral Config.
+     * Polarization of an uplink spectral Config. Capturing both "RIGHT_HAND" and "LEFT_HAND" polarization requires two separate configs.
      */
     polarization?: Polarization;
   }

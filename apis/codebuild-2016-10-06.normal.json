@@ -1005,6 +1005,10 @@
         "fileSystemLocations": {
           "shape": "ProjectFileSystemLocations",
           "documentation": "<p> An array of <code>ProjectFileSystemLocation</code> objects for a CodeBuild build project. A <code>ProjectFileSystemLocation</code> object specifies the <code>identifier</code>, <code>location</code>, <code>mountOptions</code>, <code>mountPoint</code>, and <code>type</code> of a file system created using Amazon Elastic File System. </p>"
+        },
+        "debugSession": {
+          "shape": "DebugSession",
+          "documentation": "<p>Contains information about the debug session for this build.</p>"
         }
       },
       "documentation": "<p>Information about a build.</p>"
@@ -1366,6 +1370,20 @@
         "SECRETS_MANAGER"
       ]
     },
+    "DebugSession": {
+      "type": "structure",
+      "members": {
+        "sessionEnabled": {
+          "shape": "WrapperBoolean",
+          "documentation": "<p>Specifies if session debugging is enabled for this build.</p>"
+        },
+        "sessionTarget": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Contains the identifier of the Session Manager session used for the build. To work with the paused build, you open this session to examine, control, and resume the build.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about the debug session for a build. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html\">Viewing a running build in Session Manager</a>.</p>"
+    },
     "DeleteProjectInput": {
       "type": "structure",
       "required": [
@@ -1574,7 +1592,8 @@
         "WINDOWS_CONTAINER",
         "LINUX_CONTAINER",
         "LINUX_GPU_CONTAINER",
-        "ARM_CONTAINER"
+        "ARM_CONTAINER",
+        "WINDOWS_SERVER_2019_CONTAINER"
       ]
     },
     "EnvironmentVariable": {
@@ -1951,7 +1970,7 @@
         },
         "reports": {
           "shape": "ReportArns",
-          "documentation": "<p> The list of returned report group ARNs. </p>"
+          "documentation": "<p> The list of report ARNs. </p>"
         }
       }
     },
@@ -3073,6 +3092,10 @@
         "imagePullCredentialsTypeOverride": {
           "shape": "ImagePullCredentialsType",
           "documentation": "<p> The type of credentials AWS CodeBuild uses to pull images in your build. There are two valid values: </p> <ul> <li> <p> <code>CODEBUILD</code> specifies that AWS CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust AWS CodeBuild's service principal.</p> </li> <li> <p> <code>SERVICE_ROLE</code> specifies that AWS CodeBuild uses your build project's service role. </p> </li> </ul> <p> When using a cross-account or private registry image, you must use SERVICE_ROLE credentials. When using an AWS CodeBuild curated image, you must use CODEBUILD credentials. </p>"
+        },
+        "debugSessionEnabled": {
+          "shape": "WrapperBoolean",
+          "documentation": "<p>Specifies if session debugging is enabled for this build. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html\">Viewing a running build in Session Manager</a>.</p>"
         }
       }
     },

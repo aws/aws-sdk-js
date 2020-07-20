@@ -14,6 +14,14 @@ declare class CloudFront extends CloudFrontCustomizations {
   constructor(options?: CloudFront.Types.ClientConfiguration)
   config: Config & CloudFront.Types.ClientConfiguration;
   /**
+   * Creates a cache policy. After you create a cache policy, you can attach it to one or more cache behaviors. When it’s attached to a cache behavior, the cache policy determines the following:   The values that CloudFront includes in the cache key. These values can include HTTP headers, cookies, and URL query strings. CloudFront uses the cache key to find an object in its cache that it can return to the viewer.   The default, minimum, and maximum time to live (TTL) values that you want objects to stay in the CloudFront cache.   The headers, cookies, and query strings that are included in the cache key are automatically included in requests that CloudFront sends to the origin. CloudFront sends a request when it can’t find an object in its cache that matches the request’s cache key. If you want to send values to the origin but not include them in the cache key, use CreateOriginRequestPolicy. For more information about cache policies, see Controlling the cache key in the Amazon CloudFront Developer Guide.
+   */
+  createCachePolicy(params: CloudFront.Types.CreateCachePolicyRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateCachePolicyResult) => void): Request<CloudFront.Types.CreateCachePolicyResult, AWSError>;
+  /**
+   * Creates a cache policy. After you create a cache policy, you can attach it to one or more cache behaviors. When it’s attached to a cache behavior, the cache policy determines the following:   The values that CloudFront includes in the cache key. These values can include HTTP headers, cookies, and URL query strings. CloudFront uses the cache key to find an object in its cache that it can return to the viewer.   The default, minimum, and maximum time to live (TTL) values that you want objects to stay in the CloudFront cache.   The headers, cookies, and query strings that are included in the cache key are automatically included in requests that CloudFront sends to the origin. CloudFront sends a request when it can’t find an object in its cache that matches the request’s cache key. If you want to send values to the origin but not include them in the cache key, use CreateOriginRequestPolicy. For more information about cache policies, see Controlling the cache key in the Amazon CloudFront Developer Guide.
+   */
+  createCachePolicy(callback?: (err: AWSError, data: CloudFront.Types.CreateCachePolicyResult) => void): Request<CloudFront.Types.CreateCachePolicyResult, AWSError>;
+  /**
    * Creates a new origin access identity. If you're using Amazon S3 for your origin, you can use an origin access identity to require users to access your content using a CloudFront URL instead of the Amazon S3 URL. For more information about how to use origin access identities, see Serving Private Content through CloudFront in the Amazon CloudFront Developer Guide.
    */
   createCloudFrontOriginAccessIdentity(params: CloudFront.Types.CreateCloudFrontOriginAccessIdentityRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateCloudFrontOriginAccessIdentityResult) => void): Request<CloudFront.Types.CreateCloudFrontOriginAccessIdentityResult, AWSError>;
@@ -62,6 +70,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   createInvalidation(callback?: (err: AWSError, data: CloudFront.Types.CreateInvalidationResult) => void): Request<CloudFront.Types.CreateInvalidationResult, AWSError>;
   /**
+   * Creates an origin request policy. After you create an origin request policy, you can attach it to one or more cache behaviors. When it’s attached to a cache behavior, the origin request policy determines the values that CloudFront includes in requests that it sends to the origin. Each request that CloudFront sends to the origin includes the following:   The request body and the URL path (without the domain name) from the viewer request.   The headers that CloudFront automatically includes in every origin request, including Host, User-Agent, and X-Amz-Cf-Id.   All HTTP headers, cookies, and URL query strings that are specified in the cache policy or the origin request policy. These can include items from the viewer request and, in the case of headers, additional ones that are added by CloudFront.   CloudFront sends a request when it can’t find a valid object in its cache that matches the request. If you want to send values to the origin and also include them in the cache key, use CreateCachePolicy. For more information about origin request policies, see Controlling origin requests in the Amazon CloudFront Developer Guide.
+   */
+  createOriginRequestPolicy(params: CloudFront.Types.CreateOriginRequestPolicyRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateOriginRequestPolicyResult) => void): Request<CloudFront.Types.CreateOriginRequestPolicyResult, AWSError>;
+  /**
+   * Creates an origin request policy. After you create an origin request policy, you can attach it to one or more cache behaviors. When it’s attached to a cache behavior, the origin request policy determines the values that CloudFront includes in requests that it sends to the origin. Each request that CloudFront sends to the origin includes the following:   The request body and the URL path (without the domain name) from the viewer request.   The headers that CloudFront automatically includes in every origin request, including Host, User-Agent, and X-Amz-Cf-Id.   All HTTP headers, cookies, and URL query strings that are specified in the cache policy or the origin request policy. These can include items from the viewer request and, in the case of headers, additional ones that are added by CloudFront.   CloudFront sends a request when it can’t find a valid object in its cache that matches the request. If you want to send values to the origin and also include them in the cache key, use CreateCachePolicy. For more information about origin request policies, see Controlling origin requests in the Amazon CloudFront Developer Guide.
+   */
+  createOriginRequestPolicy(callback?: (err: AWSError, data: CloudFront.Types.CreateOriginRequestPolicyResult) => void): Request<CloudFront.Types.CreateOriginRequestPolicyResult, AWSError>;
+  /**
    * Add a new public key to CloudFront to use, for example, for field-level encryption. You can add a maximum of 10 public keys with one AWS account.
    */
   createPublicKey(params: CloudFront.Types.CreatePublicKeyRequest, callback?: (err: AWSError, data: CloudFront.Types.CreatePublicKeyResult) => void): Request<CloudFront.Types.CreatePublicKeyResult, AWSError>;
@@ -85,6 +101,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Create a new streaming distribution with tags.
    */
   createStreamingDistributionWithTags(callback?: (err: AWSError, data: CloudFront.Types.CreateStreamingDistributionWithTagsResult) => void): Request<CloudFront.Types.CreateStreamingDistributionWithTagsResult, AWSError>;
+  /**
+   * Deletes a cache policy. You cannot delete a cache policy if it’s attached to a cache behavior. First update your distributions to remove the cache policy from all cache behaviors, then delete the cache policy. To delete a cache policy, you must provide the policy’s identifier and version. To get these values, you can use ListCachePolicies or GetCachePolicy.
+   */
+  deleteCachePolicy(params: CloudFront.Types.DeleteCachePolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a cache policy. You cannot delete a cache policy if it’s attached to a cache behavior. First update your distributions to remove the cache policy from all cache behaviors, then delete the cache policy. To delete a cache policy, you must provide the policy’s identifier and version. To get these values, you can use ListCachePolicies or GetCachePolicy.
+   */
+  deleteCachePolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Delete an origin access identity. 
    */
@@ -118,6 +142,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   deleteFieldLevelEncryptionProfile(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes an origin request policy. You cannot delete an origin request policy if it’s attached to any cache behaviors. First update your distributions to remove the origin request policy from all cache behaviors, then delete the origin request policy. To delete an origin request policy, you must provide the policy’s identifier and version. To get the identifier, you can use ListOriginRequestPolicies or GetOriginRequestPolicy.
+   */
+  deleteOriginRequestPolicy(params: CloudFront.Types.DeleteOriginRequestPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an origin request policy. You cannot delete an origin request policy if it’s attached to any cache behaviors. First update your distributions to remove the origin request policy from all cache behaviors, then delete the origin request policy. To delete an origin request policy, you must provide the policy’s identifier and version. To get the identifier, you can use ListOriginRequestPolicies or GetOriginRequestPolicy.
+   */
+  deleteOriginRequestPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Remove a public key you previously added to CloudFront.
    */
   deletePublicKey(params: CloudFront.Types.DeletePublicKeyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -133,6 +165,22 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Delete a streaming distribution. To delete an RTMP distribution using the CloudFront API, perform the following steps.  To delete an RTMP distribution using the CloudFront API:   Disable the RTMP distribution.   Submit a GET Streaming Distribution Config request to get the current configuration and the Etag header for the distribution.    Update the XML document that was returned in the response to your GET Streaming Distribution Config request to change the value of Enabled to false.   Submit a PUT Streaming Distribution Config request to update the configuration for your distribution. In the request body, include the XML document that you updated in Step 3. Then set the value of the HTTP If-Match header to the value of the ETag header that CloudFront returned when you submitted the GET Streaming Distribution Config request in Step 2.   Review the response to the PUT Streaming Distribution Config request to confirm that the distribution was successfully disabled.   Submit a GET Streaming Distribution Config request to confirm that your changes have propagated. When propagation is complete, the value of Status is Deployed.   Submit a DELETE Streaming Distribution request. Set the value of the HTTP If-Match header to the value of the ETag header that CloudFront returned when you submitted the GET Streaming Distribution Config request in Step 2.   Review the response to your DELETE Streaming Distribution request to confirm that the distribution was successfully deleted.   For information about deleting a distribution using the CloudFront console, see Deleting a Distribution in the Amazon CloudFront Developer Guide.
    */
   deleteStreamingDistribution(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Gets a cache policy, including the following metadata:   The policy’s identifier.   The date and time when the policy was last modified.   To get a cache policy, you must provide the policy’s identifier. If the cache policy is attached to a distribution’s cache behavior, you can get the policy’s identifier using ListDistributions or GetDistribution. If the cache policy is not attached to a cache behavior, you can get the identifier using ListCachePolicies.
+   */
+  getCachePolicy(params: CloudFront.Types.GetCachePolicyRequest, callback?: (err: AWSError, data: CloudFront.Types.GetCachePolicyResult) => void): Request<CloudFront.Types.GetCachePolicyResult, AWSError>;
+  /**
+   * Gets a cache policy, including the following metadata:   The policy’s identifier.   The date and time when the policy was last modified.   To get a cache policy, you must provide the policy’s identifier. If the cache policy is attached to a distribution’s cache behavior, you can get the policy’s identifier using ListDistributions or GetDistribution. If the cache policy is not attached to a cache behavior, you can get the identifier using ListCachePolicies.
+   */
+  getCachePolicy(callback?: (err: AWSError, data: CloudFront.Types.GetCachePolicyResult) => void): Request<CloudFront.Types.GetCachePolicyResult, AWSError>;
+  /**
+   * Gets a cache policy configuration. To get a cache policy configuration, you must provide the policy’s identifier. If the cache policy is attached to a distribution’s cache behavior, you can get the policy’s identifier using ListDistributions or GetDistribution. If the cache policy is not attached to a cache behavior, you can get the identifier using ListCachePolicies.
+   */
+  getCachePolicyConfig(params: CloudFront.Types.GetCachePolicyConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.GetCachePolicyConfigResult) => void): Request<CloudFront.Types.GetCachePolicyConfigResult, AWSError>;
+  /**
+   * Gets a cache policy configuration. To get a cache policy configuration, you must provide the policy’s identifier. If the cache policy is attached to a distribution’s cache behavior, you can get the policy’s identifier using ListDistributions or GetDistribution. If the cache policy is not attached to a cache behavior, you can get the identifier using ListCachePolicies.
+   */
+  getCachePolicyConfig(callback?: (err: AWSError, data: CloudFront.Types.GetCachePolicyConfigResult) => void): Request<CloudFront.Types.GetCachePolicyConfigResult, AWSError>;
   /**
    * Get the information about an origin access identity. 
    */
@@ -206,6 +254,22 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   getInvalidation(callback?: (err: AWSError, data: CloudFront.Types.GetInvalidationResult) => void): Request<CloudFront.Types.GetInvalidationResult, AWSError>;
   /**
+   * Gets an origin request policy, including the following metadata:   The policy’s identifier.   The date and time when the policy was last modified.   To get an origin request policy, you must provide the policy’s identifier. If the origin request policy is attached to a distribution’s cache behavior, you can get the policy’s identifier using ListDistributions or GetDistribution. If the origin request policy is not attached to a cache behavior, you can get the identifier using ListOriginRequestPolicies.
+   */
+  getOriginRequestPolicy(params: CloudFront.Types.GetOriginRequestPolicyRequest, callback?: (err: AWSError, data: CloudFront.Types.GetOriginRequestPolicyResult) => void): Request<CloudFront.Types.GetOriginRequestPolicyResult, AWSError>;
+  /**
+   * Gets an origin request policy, including the following metadata:   The policy’s identifier.   The date and time when the policy was last modified.   To get an origin request policy, you must provide the policy’s identifier. If the origin request policy is attached to a distribution’s cache behavior, you can get the policy’s identifier using ListDistributions or GetDistribution. If the origin request policy is not attached to a cache behavior, you can get the identifier using ListOriginRequestPolicies.
+   */
+  getOriginRequestPolicy(callback?: (err: AWSError, data: CloudFront.Types.GetOriginRequestPolicyResult) => void): Request<CloudFront.Types.GetOriginRequestPolicyResult, AWSError>;
+  /**
+   * Gets an origin request policy configuration. To get an origin request policy configuration, you must provide the policy’s identifier. If the origin request policy is attached to a distribution’s cache behavior, you can get the policy’s identifier using ListDistributions or GetDistribution. If the origin request policy is not attached to a cache behavior, you can get the identifier using ListOriginRequestPolicies.
+   */
+  getOriginRequestPolicyConfig(params: CloudFront.Types.GetOriginRequestPolicyConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.GetOriginRequestPolicyConfigResult) => void): Request<CloudFront.Types.GetOriginRequestPolicyConfigResult, AWSError>;
+  /**
+   * Gets an origin request policy configuration. To get an origin request policy configuration, you must provide the policy’s identifier. If the origin request policy is attached to a distribution’s cache behavior, you can get the policy’s identifier using ListDistributions or GetDistribution. If the origin request policy is not attached to a cache behavior, you can get the identifier using ListOriginRequestPolicies.
+   */
+  getOriginRequestPolicyConfig(callback?: (err: AWSError, data: CloudFront.Types.GetOriginRequestPolicyConfigResult) => void): Request<CloudFront.Types.GetOriginRequestPolicyConfigResult, AWSError>;
+  /**
    * Get the public key information.
    */
   getPublicKey(params: CloudFront.Types.GetPublicKeyRequest, callback?: (err: AWSError, data: CloudFront.Types.GetPublicKeyResult) => void): Request<CloudFront.Types.GetPublicKeyResult, AWSError>;
@@ -238,6 +302,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   getStreamingDistributionConfig(callback?: (err: AWSError, data: CloudFront.Types.GetStreamingDistributionConfigResult) => void): Request<CloudFront.Types.GetStreamingDistributionConfigResult, AWSError>;
   /**
+   * Gets a list of cache policies. You can optionally apply a filter to return only the managed policies created by AWS, or only the custom policies created in your AWS account. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   */
+  listCachePolicies(params: CloudFront.Types.ListCachePoliciesRequest, callback?: (err: AWSError, data: CloudFront.Types.ListCachePoliciesResult) => void): Request<CloudFront.Types.ListCachePoliciesResult, AWSError>;
+  /**
+   * Gets a list of cache policies. You can optionally apply a filter to return only the managed policies created by AWS, or only the custom policies created in your AWS account. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   */
+  listCachePolicies(callback?: (err: AWSError, data: CloudFront.Types.ListCachePoliciesResult) => void): Request<CloudFront.Types.ListCachePoliciesResult, AWSError>;
+  /**
    * Lists origin access identities.
    */
   listCloudFrontOriginAccessIdentities(params: CloudFront.Types.ListCloudFrontOriginAccessIdentitiesRequest, callback?: (err: AWSError, data: CloudFront.Types.ListCloudFrontOriginAccessIdentitiesResult) => void): Request<CloudFront.Types.ListCloudFrontOriginAccessIdentitiesResult, AWSError>;
@@ -253,6 +325,22 @@ declare class CloudFront extends CloudFrontCustomizations {
    * List CloudFront distributions.
    */
   listDistributions(callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsResult) => void): Request<CloudFront.Types.ListDistributionsResult, AWSError>;
+  /**
+   * Gets a list of distribution IDs for distributions that have a cache behavior that’s associated with the specified cache policy. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   */
+  listDistributionsByCachePolicyId(params: CloudFront.Types.ListDistributionsByCachePolicyIdRequest, callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsByCachePolicyIdResult) => void): Request<CloudFront.Types.ListDistributionsByCachePolicyIdResult, AWSError>;
+  /**
+   * Gets a list of distribution IDs for distributions that have a cache behavior that’s associated with the specified cache policy. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   */
+  listDistributionsByCachePolicyId(callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsByCachePolicyIdResult) => void): Request<CloudFront.Types.ListDistributionsByCachePolicyIdResult, AWSError>;
+  /**
+   * Gets a list of distribution IDs for distributions that have a cache behavior that’s associated with the specified origin request policy. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   */
+  listDistributionsByOriginRequestPolicyId(params: CloudFront.Types.ListDistributionsByOriginRequestPolicyIdRequest, callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsByOriginRequestPolicyIdResult) => void): Request<CloudFront.Types.ListDistributionsByOriginRequestPolicyIdResult, AWSError>;
+  /**
+   * Gets a list of distribution IDs for distributions that have a cache behavior that’s associated with the specified origin request policy. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   */
+  listDistributionsByOriginRequestPolicyId(callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsByOriginRequestPolicyIdResult) => void): Request<CloudFront.Types.ListDistributionsByOriginRequestPolicyIdResult, AWSError>;
   /**
    * List the distributions that are associated with a specified AWS WAF web ACL. 
    */
@@ -285,6 +373,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Lists invalidation batches. 
    */
   listInvalidations(callback?: (err: AWSError, data: CloudFront.Types.ListInvalidationsResult) => void): Request<CloudFront.Types.ListInvalidationsResult, AWSError>;
+  /**
+   * Gets a list of origin request policies. You can optionally apply a filter to return only the managed policies created by AWS, or only the custom policies created in your AWS account. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   */
+  listOriginRequestPolicies(params: CloudFront.Types.ListOriginRequestPoliciesRequest, callback?: (err: AWSError, data: CloudFront.Types.ListOriginRequestPoliciesResult) => void): Request<CloudFront.Types.ListOriginRequestPoliciesResult, AWSError>;
+  /**
+   * Gets a list of origin request policies. You can optionally apply a filter to return only the managed policies created by AWS, or only the custom policies created in your AWS account. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   */
+  listOriginRequestPolicies(callback?: (err: AWSError, data: CloudFront.Types.ListOriginRequestPoliciesResult) => void): Request<CloudFront.Types.ListOriginRequestPoliciesResult, AWSError>;
   /**
    * List all public keys that have been added to CloudFront for this account.
    */
@@ -326,6 +422,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Updates a cache policy configuration. When you update a cache policy configuration, all the fields are updated with the values provided in the request. You cannot update some fields independent of others. To update a cache policy configuration:   Use GetCachePolicyConfig to get the current configuration.   Locally modify the fields in the cache policy configuration that you want to update.   Call UpdateCachePolicy by providing the entire cache policy configuration, including the fields that you modified and those that you didn’t.  
+   */
+  updateCachePolicy(params: CloudFront.Types.UpdateCachePolicyRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateCachePolicyResult) => void): Request<CloudFront.Types.UpdateCachePolicyResult, AWSError>;
+  /**
+   * Updates a cache policy configuration. When you update a cache policy configuration, all the fields are updated with the values provided in the request. You cannot update some fields independent of others. To update a cache policy configuration:   Use GetCachePolicyConfig to get the current configuration.   Locally modify the fields in the cache policy configuration that you want to update.   Call UpdateCachePolicy by providing the entire cache policy configuration, including the fields that you modified and those that you didn’t.  
+   */
+  updateCachePolicy(callback?: (err: AWSError, data: CloudFront.Types.UpdateCachePolicyResult) => void): Request<CloudFront.Types.UpdateCachePolicyResult, AWSError>;
+  /**
    * Update an origin access identity. 
    */
   updateCloudFrontOriginAccessIdentity(params: CloudFront.Types.UpdateCloudFrontOriginAccessIdentityRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateCloudFrontOriginAccessIdentityResult) => void): Request<CloudFront.Types.UpdateCloudFrontOriginAccessIdentityResult, AWSError>;
@@ -357,6 +461,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Update a field-level encryption profile. 
    */
   updateFieldLevelEncryptionProfile(callback?: (err: AWSError, data: CloudFront.Types.UpdateFieldLevelEncryptionProfileResult) => void): Request<CloudFront.Types.UpdateFieldLevelEncryptionProfileResult, AWSError>;
+  /**
+   * Updates an origin request policy configuration. When you update an origin request policy configuration, all the fields are updated with the values provided in the request. You cannot update some fields independent of others. To update an origin request policy configuration:   Use GetOriginRequestPolicyConfig to get the current configuration.   Locally modify the fields in the origin request policy configuration that you want to update.   Call UpdateOriginRequestPolicy by providing the entire origin request policy configuration, including the fields that you modified and those that you didn’t.  
+   */
+  updateOriginRequestPolicy(params: CloudFront.Types.UpdateOriginRequestPolicyRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateOriginRequestPolicyResult) => void): Request<CloudFront.Types.UpdateOriginRequestPolicyResult, AWSError>;
+  /**
+   * Updates an origin request policy configuration. When you update an origin request policy configuration, all the fields are updated with the values provided in the request. You cannot update some fields independent of others. To update an origin request policy configuration:   Use GetOriginRequestPolicyConfig to get the current configuration.   Locally modify the fields in the origin request policy configuration that you want to update.   Call UpdateOriginRequestPolicy by providing the entire origin request policy configuration, including the fields that you modified and those that you didn’t.  
+   */
+  updateOriginRequestPolicy(callback?: (err: AWSError, data: CloudFront.Types.UpdateOriginRequestPolicyResult) => void): Request<CloudFront.Types.UpdateOriginRequestPolicyResult, AWSError>;
   /**
    * Update public key information. Note that the only value you can change is the comment.
    */
@@ -460,10 +572,6 @@ declare namespace CloudFront {
      */
     TargetOriginId: string;
     /**
-     * A complex type that specifies how CloudFront handles query strings, cookies, and HTTP headers.
-     */
-    ForwardedValues: ForwardedValues;
-    /**
      * A complex type that specifies the AWS accounts, if any, that you want to allow to create signed URLs for private content. If you want to require signed URLs in requests for objects in the target origin that match the PathPattern for this cache behavior, specify true for Enabled, and specify the applicable values for Quantity and Items. For more information, see Serving Private Content with Signed URLs and Signed Cookies in the Amazon CloudFront Developer Guide.  If you don’t want to require signed URLs in requests for objects that match PathPattern, specify false for Enabled and 0 for Quantity. Omit Items. To add, change, or remove one or more trusted signers, change Enabled to true (if it’s currently false), change Quantity as applicable, and specify all of the trusted signers that you want to include in the updated distribution.
      */
     TrustedSigners: TrustedSigners;
@@ -471,23 +579,11 @@ declare namespace CloudFront {
      * The protocol that viewers can use to access the files in the origin specified by TargetOriginId when a request matches the path pattern in PathPattern. You can specify the following options:    allow-all: Viewers can use HTTP or HTTPS.    redirect-to-https: If a viewer submits an HTTP request, CloudFront returns an HTTP status code of 301 (Moved Permanently) to the viewer along with the HTTPS URL. The viewer then resubmits the request using the new URL.     https-only: If a viewer sends an HTTP request, CloudFront returns an HTTP status code of 403 (Forbidden).    For more information about requiring the HTTPS protocol, see Requiring HTTPS Between Viewers and CloudFront in the Amazon CloudFront Developer Guide.  The only way to guarantee that viewers retrieve an object that was fetched from the origin using HTTPS is never to use any other protocol to fetch the object. If you have recently changed from HTTP to HTTPS, we recommend that you clear your objects’ cache because cached objects are protocol agnostic. That means that an edge location will return an object from the cache regardless of whether the current request protocol matches the protocol used previously. For more information, see Managing Cache Expiration in the Amazon CloudFront Developer Guide. 
      */
     ViewerProtocolPolicy: ViewerProtocolPolicy;
-    /**
-     * The minimum amount of time that you want objects to stay in CloudFront caches before CloudFront forwards another request to your origin to determine whether the object has been updated. For more information, see  Managing How Long Content Stays in an Edge Cache (Expiration) in the  Amazon CloudFront Developer Guide. You must specify 0 for MinTTL if you configure CloudFront to forward all headers to your origin (under Headers, if you specify 1 for Quantity and * for Name).
-     */
-    MinTTL: long;
     AllowedMethods?: AllowedMethods;
     /**
      * Indicates whether you want to distribute media files in the Microsoft Smooth Streaming format using the origin that is associated with this cache behavior. If so, specify true; if not, specify false. If you specify true for SmoothStreaming, you can still distribute other content using this cache behavior if the content matches the value of PathPattern. 
      */
     SmoothStreaming?: boolean;
-    /**
-     * The default amount of time that you want objects to stay in CloudFront caches before CloudFront forwards another request to your origin to determine whether the object has been updated. The value that you specify applies only when your origin does not add HTTP headers such as Cache-Control max-age, Cache-Control s-maxage, and Expires to objects. For more information, see Managing How Long Content Stays in an Edge Cache (Expiration) in the Amazon CloudFront Developer Guide.
-     */
-    DefaultTTL?: long;
-    /**
-     * The maximum amount of time that you want objects to stay in CloudFront caches before CloudFront forwards another request to your origin to determine whether the object has been updated. The value that you specify applies only when your origin adds HTTP headers such as Cache-Control max-age, Cache-Control s-maxage, and Expires to objects. For more information, see Managing How Long Content Stays in an Edge Cache (Expiration) in the Amazon CloudFront Developer Guide.
-     */
-    MaxTTL?: long;
     /**
      * Whether you want CloudFront to automatically compress certain files for this cache behavior. If so, specify true; if not, specify false. For more information, see Serving Compressed Files in the Amazon CloudFront Developer Guide.
      */
@@ -500,6 +596,30 @@ declare namespace CloudFront {
      * The value of ID for the field-level encryption configuration that you want CloudFront to use for encrypting specific fields of data for this cache behavior.
      */
     FieldLevelEncryptionId?: string;
+    /**
+     * The unique identifier of the cache policy that is attached to this cache behavior. For more information, see CreateCachePolicy.
+     */
+    CachePolicyId?: string;
+    /**
+     * The unique identifier of the origin request policy that is attached to this cache behavior. For more information, see CreateOriginRequestPolicy.
+     */
+    OriginRequestPolicyId?: string;
+    /**
+     * This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. If you want to include values in the cache key, use a CachePolicy. See CreateCachePolicy. If you want to send values to the origin but not include them in the cache key, use an OriginRequestPolicy. See CreateOriginRequestPolicy. A complex type that specifies how CloudFront handles query strings, cookies, and HTTP headers.
+     */
+    ForwardedValues?: ForwardedValues;
+    /**
+     * This field is deprecated. We recommend that you use the MinTTL field in CachePolicyConfig instead of this field. The minimum amount of time that you want objects to stay in CloudFront caches before CloudFront forwards another request to your origin to determine whether the object has been updated. For more information, see  Managing How Long Content Stays in an Edge Cache (Expiration) in the  Amazon CloudFront Developer Guide. You must specify 0 for MinTTL if you configure CloudFront to forward all headers to your origin (under Headers, if you specify 1 for Quantity and * for Name).
+     */
+    MinTTL?: long;
+    /**
+     * This field is deprecated. We recommend that you use the DefaultTTL field in CachePolicyConfig instead of this field. The default amount of time that you want objects to stay in CloudFront caches before CloudFront forwards another request to your origin to determine whether the object has been updated. The value that you specify applies only when your origin does not add HTTP headers such as Cache-Control max-age, Cache-Control s-maxage, and Expires to objects. For more information, see Managing How Long Content Stays in an Edge Cache (Expiration) in the Amazon CloudFront Developer Guide.
+     */
+    DefaultTTL?: long;
+    /**
+     * This field is deprecated. We recommend that you use the MaxTTL field in CachePolicyConfig instead of this field. The maximum amount of time that you want objects to stay in CloudFront caches before CloudFront forwards another request to your origin to determine whether the object has been updated. The value that you specify applies only when your origin adds HTTP headers such as Cache-Control max-age, Cache-Control s-maxage, and Expires to objects. For more information, see Managing How Long Content Stays in an Edge Cache (Expiration) in the Amazon CloudFront Developer Guide.
+     */
+    MaxTTL?: long;
   }
   export type CacheBehaviorList = CacheBehavior[];
   export interface CacheBehaviors {
@@ -512,6 +632,103 @@ declare namespace CloudFront {
      */
     Items?: CacheBehaviorList;
   }
+  export interface CachePolicy {
+    /**
+     * The unique identifier for the cache policy.
+     */
+    Id: string;
+    /**
+     * The date and time when the cache policy was last modified.
+     */
+    LastModifiedTime: timestamp;
+    /**
+     * The cache policy configuration.
+     */
+    CachePolicyConfig: CachePolicyConfig;
+  }
+  export interface CachePolicyConfig {
+    /**
+     * A comment to describe the cache policy.
+     */
+    Comment?: string;
+    /**
+     * A unique name to identify the cache policy.
+     */
+    Name: string;
+    /**
+     * The default amount of time, in seconds, that you want objects to stay in the CloudFront cache before CloudFront sends another request to the origin to see if the object has been updated. CloudFront uses this value as the object’s time to live (TTL) only when the origin does not send Cache-Control or Expires headers with the object. For more information, see Managing How Long Content Stays in an Edge Cache (Expiration) in the Amazon CloudFront Developer Guide. The default value for this field is 86400 seconds (one day). If the value of MinTTL is more than 86400 seconds, then the default value for this field is the same as the value of MinTTL.
+     */
+    DefaultTTL?: long;
+    /**
+     * The maximum amount of time, in seconds, that you want objects to stay in the CloudFront cache before CloudFront sends another request to the origin to see if the object has been updated. CloudFront uses this value only when the origin sends Cache-Control or Expires headers with the object. For more information, see Managing How Long Content Stays in an Edge Cache (Expiration) in the Amazon CloudFront Developer Guide. The default value for this field is 31536000 seconds (one year). If the value of MinTTL or DefaultTTL is more than 31536000 seconds, then the default value for this field is the same as the value of DefaultTTL.
+     */
+    MaxTTL?: long;
+    /**
+     * The minimum amount of time, in seconds, that you want objects to stay in the CloudFront cache before CloudFront sends another request to the origin to see if the object has been updated. For more information, see Managing How Long Content Stays in an Edge Cache (Expiration) in the Amazon CloudFront Developer Guide.
+     */
+    MinTTL: long;
+    /**
+     * The HTTP headers, cookies, and URL query strings to include in the cache key. The values included in the cache key are automatically included in requests that CloudFront sends to the origin.
+     */
+    ParametersInCacheKeyAndForwardedToOrigin?: ParametersInCacheKeyAndForwardedToOrigin;
+  }
+  export type CachePolicyCookieBehavior = "none"|"whitelist"|"allExcept"|"all"|string;
+  export interface CachePolicyCookiesConfig {
+    /**
+     * Determines whether any cookies in viewer requests are included in the cache key and automatically included in requests that CloudFront sends to the origin. Valid values are:    none – Cookies in viewer requests are not included in the cache key and are not automatically included in requests that CloudFront sends to the origin. Even when this field is set to none, any cookies that are listed in an OriginRequestPolicy are included in origin requests.    whitelist – The cookies in viewer requests that are listed in the CookieNames type are included in the cache key and automatically included in requests that CloudFront sends to the origin.    allExcept – All cookies in viewer requests that are  not  listed in the CookieNames type are included in the cache key and automatically included in requests that CloudFront sends to the origin.    all – All cookies in viewer requests are included in the cache key and are automatically included in requests that CloudFront sends to the origin.  
+     */
+    CookieBehavior: CachePolicyCookieBehavior;
+    Cookies?: CookieNames;
+  }
+  export type CachePolicyHeaderBehavior = "none"|"whitelist"|string;
+  export interface CachePolicyHeadersConfig {
+    /**
+     * Determines whether any HTTP headers are included in the cache key and automatically included in requests that CloudFront sends to the origin. Valid values are:    none – HTTP headers are not included in the cache key and are not automatically included in requests that CloudFront sends to the origin. Even when this field is set to none, any headers that are listed in an OriginRequestPolicy are included in origin requests.    whitelist – The HTTP headers that are listed in the Headers type are included in the cache key and are automatically included in requests that CloudFront sends to the origin.  
+     */
+    HeaderBehavior: CachePolicyHeaderBehavior;
+    Headers?: Headers;
+  }
+  export interface CachePolicyList {
+    /**
+     * If there are more items in the list than are in this response, this element is present. It contains the value that you should use in the Marker field of a subsequent request to continue listing cache policies where you left off.
+     */
+    NextMarker?: string;
+    /**
+     * The maximum number of cache policies requested.
+     */
+    MaxItems: integer;
+    /**
+     * The total number of cache policies returned in the response.
+     */
+    Quantity: integer;
+    /**
+     * Contains the cache policies in the list.
+     */
+    Items?: CachePolicySummaryList;
+  }
+  export type CachePolicyQueryStringBehavior = "none"|"whitelist"|"allExcept"|"all"|string;
+  export interface CachePolicyQueryStringsConfig {
+    /**
+     * Determines whether any URL query strings in viewer requests are included in the cache key and automatically included in requests that CloudFront sends to the origin. Valid values are:    none – Query strings in viewer requests are not included in the cache key and are not automatically included in requests that CloudFront sends to the origin. Even when this field is set to none, any query strings that are listed in an OriginRequestPolicy are included in origin requests.    whitelist – The query strings in viewer requests that are listed in the QueryStringNames type are included in the cache key and automatically included in requests that CloudFront sends to the origin.    allExcept – All query strings in viewer requests that are  not  listed in the QueryStringNames type are included in the cache key and automatically included in requests that CloudFront sends to the origin.    all – All query strings in viewer requests are included in the cache key and are automatically included in requests that CloudFront sends to the origin.  
+     */
+    QueryStringBehavior: CachePolicyQueryStringBehavior;
+    /**
+     * Contains the specific query strings in viewer requests that either  are  or  are not  included in the cache key and automatically included in requests that CloudFront sends to the origin. The behavior depends on whether the QueryStringBehavior field in the CachePolicyQueryStringsConfig type is set to whitelist (the listed query strings  are  included) or allExcept (the listed query strings  are not  included, but all other query strings are).
+     */
+    QueryStrings?: QueryStringNames;
+  }
+  export interface CachePolicySummary {
+    /**
+     * The type of cache policy, either managed (created by AWS) or custom (created in this AWS account).
+     */
+    Type: CachePolicyType;
+    /**
+     * The cache policy.
+     */
+    CachePolicy: CachePolicy;
+  }
+  export type CachePolicySummaryList = CachePolicySummary[];
+  export type CachePolicyType = "managed"|"custom"|string;
   export interface CachedMethods {
     /**
      * The number of HTTP methods for which you want CloudFront to cache responses. Valid values are 2 (for caching responses to GET and HEAD requests) and 3 (for caching responses to GET, HEAD, and OPTIONS requests).
@@ -627,23 +844,43 @@ declare namespace CloudFront {
   export type CookieNameList = string[];
   export interface CookieNames {
     /**
-     * The number of different cookies that you want CloudFront to forward to the origin for this cache behavior. The value must equal the number of items that are in the Items field. When you set Forward = whitelist (in the CookiePreferences object), this value must be 1 or higher.
+     * The number of cookie names in the Items list.
      */
     Quantity: integer;
     /**
-     * A complex type that contains one Name element for each cookie that you want CloudFront to forward to the origin for this cache behavior. It must contain the same number of items that is specified in the Quantity field. When you set Forward = whitelist (in the CookiePreferences object), this field must contain at least one item.
+     * A list of cookie names.
      */
     Items?: CookieNameList;
   }
   export interface CookiePreference {
     /**
-     * Specifies which cookies to forward to the origin for this cache behavior: all, none, or the list of cookies specified in the WhitelistedNames complex type. Amazon S3 doesn't process cookies. When the cache behavior is forwarding requests to an Amazon S3 origin, specify none for the Forward element.
+     * This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. If you want to include cookies in the cache key, use CookiesConfig in a cache policy. See CreateCachePolicy. If you want to send cookies to the origin but not include them in the cache key, use CookiesConfig in an origin request policy. See CreateOriginRequestPolicy. Specifies which cookies to forward to the origin for this cache behavior: all, none, or the list of cookies specified in the WhitelistedNames complex type. Amazon S3 doesn't process cookies. When the cache behavior is forwarding requests to an Amazon S3 origin, specify none for the Forward element.
      */
     Forward: ItemSelection;
     /**
-     * Required if you specify whitelist for the value of Forward. A complex type that specifies how many different cookies you want CloudFront to forward to the origin for this cache behavior and, if you want to forward selected cookies, the names of those cookies. If you specify all or none for the value of Forward, omit WhitelistedNames. If you change the value of Forward from whitelist to all or none and you don't delete the WhitelistedNames element and its child elements, CloudFront deletes them automatically. For the current limit on the number of cookie names that you can whitelist for each cache behavior, see  CloudFront Limits in the AWS General Reference.
+     * This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. If you want to include cookies in the cache key, use CookiesConfig in a cache policy. See CreateCachePolicy. If you want to send cookies to the origin but not include them in the cache key, use CookiesConfig in an origin request policy. See CreateOriginRequestPolicy. Required if you specify whitelist for the value of Forward. A complex type that specifies how many different cookies you want CloudFront to forward to the origin for this cache behavior and, if you want to forward selected cookies, the names of those cookies. If you specify all or none for the value of Forward, omit WhitelistedNames. If you change the value of Forward from whitelist to all or none and you don't delete the WhitelistedNames element and its child elements, CloudFront deletes them automatically. For the current limit on the number of cookie names that you can whitelist for each cache behavior, see  CloudFront Limits in the AWS General Reference.
      */
     WhitelistedNames?: CookieNames;
+  }
+  export interface CreateCachePolicyRequest {
+    /**
+     * A cache policy configuration.
+     */
+    CachePolicyConfig: CachePolicyConfig;
+  }
+  export interface CreateCachePolicyResult {
+    /**
+     * A cache policy.
+     */
+    CachePolicy?: CachePolicy;
+    /**
+     * The fully qualified URI of the cache policy just created.
+     */
+    Location?: string;
+    /**
+     * The current version of the cache policy.
+     */
+    ETag?: string;
   }
   export interface CreateCloudFrontOriginAccessIdentityRequest {
     /**
@@ -764,6 +1001,26 @@ declare namespace CloudFront {
      * The invalidation's information.
      */
     Invalidation?: Invalidation;
+  }
+  export interface CreateOriginRequestPolicyRequest {
+    /**
+     * An origin request policy configuration.
+     */
+    OriginRequestPolicyConfig: OriginRequestPolicyConfig;
+  }
+  export interface CreateOriginRequestPolicyResult {
+    /**
+     * An origin request policy.
+     */
+    OriginRequestPolicy?: OriginRequestPolicy;
+    /**
+     * The fully qualified URI of the origin request policy just created.
+     */
+    Location?: string;
+    /**
+     * The current version of the origin request policy.
+     */
+    ETag?: string;
   }
   export interface CreatePublicKeyRequest {
     /**
@@ -896,10 +1153,6 @@ declare namespace CloudFront {
      */
     TargetOriginId: string;
     /**
-     * A complex type that specifies how CloudFront handles query strings, cookies, and HTTP headers.
-     */
-    ForwardedValues: ForwardedValues;
-    /**
      * A complex type that specifies the AWS accounts, if any, that you want to allow to create signed URLs for private content. If you want to require signed URLs in requests for objects in the target origin that match the PathPattern for this cache behavior, specify true for Enabled, and specify the applicable values for Quantity and Items. For more information, see Serving Private Content with Signed URLs and Signed Cookies in the Amazon CloudFront Developer Guide. If you don’t want to require signed URLs in requests for objects that match PathPattern, specify false for Enabled and 0 for Quantity. Omit Items. To add, change, or remove one or more trusted signers, change Enabled to true (if it’s currently false), change Quantity as applicable, and specify all of the trusted signers that you want to include in the updated distribution.
      */
     TrustedSigners: TrustedSigners;
@@ -907,23 +1160,11 @@ declare namespace CloudFront {
      * The protocol that viewers can use to access the files in the origin specified by TargetOriginId when a request matches the path pattern in PathPattern. You can specify the following options:    allow-all: Viewers can use HTTP or HTTPS.    redirect-to-https: If a viewer submits an HTTP request, CloudFront returns an HTTP status code of 301 (Moved Permanently) to the viewer along with the HTTPS URL. The viewer then resubmits the request using the new URL.    https-only: If a viewer sends an HTTP request, CloudFront returns an HTTP status code of 403 (Forbidden).   For more information about requiring the HTTPS protocol, see Requiring HTTPS Between Viewers and CloudFront in the Amazon CloudFront Developer Guide.  The only way to guarantee that viewers retrieve an object that was fetched from the origin using HTTPS is never to use any other protocol to fetch the object. If you have recently changed from HTTP to HTTPS, we recommend that you clear your objects’ cache because cached objects are protocol agnostic. That means that an edge location will return an object from the cache regardless of whether the current request protocol matches the protocol used previously. For more information, see Managing Cache Expiration in the Amazon CloudFront Developer Guide. 
      */
     ViewerProtocolPolicy: ViewerProtocolPolicy;
-    /**
-     * The minimum amount of time that you want objects to stay in CloudFront caches before CloudFront forwards another request to your origin to determine whether the object has been updated. For more information, see Managing How Long Content Stays in an Edge Cache (Expiration) in the Amazon CloudFront Developer Guide. You must specify 0 for MinTTL if you configure CloudFront to forward all headers to your origin (under Headers, if you specify 1 for Quantity and * for Name).
-     */
-    MinTTL: long;
     AllowedMethods?: AllowedMethods;
     /**
      * Indicates whether you want to distribute media files in the Microsoft Smooth Streaming format using the origin that is associated with this cache behavior. If so, specify true; if not, specify false. If you specify true for SmoothStreaming, you can still distribute other content using this cache behavior if the content matches the value of PathPattern. 
      */
     SmoothStreaming?: boolean;
-    /**
-     * The default amount of time that you want objects to stay in CloudFront caches before CloudFront forwards another request to your origin to determine whether the object has been updated. The value that you specify applies only when your origin does not add HTTP headers such as Cache-Control max-age, Cache-Control s-maxage, and Expires to objects. For more information, see Managing How Long Content Stays in an Edge Cache (Expiration) in the Amazon CloudFront Developer Guide.
-     */
-    DefaultTTL?: long;
-    /**
-     * The maximum amount of time that you want objects to stay in CloudFront caches before CloudFront forwards another request to your origin to determine whether the object has been updated. The value that you specify applies only when your origin adds HTTP headers such as Cache-Control max-age, Cache-Control s-maxage, and Expires to objects. For more information, see Managing How Long Content Stays in an Edge Cache (Expiration) in the Amazon CloudFront Developer Guide.
-     */
-    MaxTTL?: long;
     /**
      * Whether you want CloudFront to automatically compress certain files for this cache behavior. If so, specify true; if not, specify false. For more information, see Serving Compressed Files in the Amazon CloudFront Developer Guide.
      */
@@ -936,6 +1177,40 @@ declare namespace CloudFront {
      * The value of ID for the field-level encryption configuration that you want CloudFront to use for encrypting specific fields of data for the default cache behavior.
      */
     FieldLevelEncryptionId?: string;
+    /**
+     * The unique identifier of the cache policy that is attached to the default cache behavior. For more information, see CachePolicy.
+     */
+    CachePolicyId?: string;
+    /**
+     * The unique identifier of the origin request policy that is attached to the default cache behavior. For more information, see OriginRequestPolicy.
+     */
+    OriginRequestPolicyId?: string;
+    /**
+     * This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. If you want to include values in the cache key, use a CachePolicy. See CreateCachePolicy. If you want to send values to the origin but not include them in the cache key, use an OriginRequestPolicy. See CreateOriginRequestPolicy. A complex type that specifies how CloudFront handles query strings, cookies, and HTTP headers.
+     */
+    ForwardedValues?: ForwardedValues;
+    /**
+     * This field is deprecated. We recommend that you use the MinTTL field in CachePolicyConfig instead of this field. The minimum amount of time that you want objects to stay in CloudFront caches before CloudFront forwards another request to your origin to determine whether the object has been updated. For more information, see Managing How Long Content Stays in an Edge Cache (Expiration) in the Amazon CloudFront Developer Guide. You must specify 0 for MinTTL if you configure CloudFront to forward all headers to your origin (under Headers, if you specify 1 for Quantity and * for Name).
+     */
+    MinTTL?: long;
+    /**
+     * This field is deprecated. We recommend that you use the DefaultTTL field in CachePolicyConfig instead of this field. The default amount of time that you want objects to stay in CloudFront caches before CloudFront forwards another request to your origin to determine whether the object has been updated. The value that you specify applies only when your origin does not add HTTP headers such as Cache-Control max-age, Cache-Control s-maxage, and Expires to objects. For more information, see Managing How Long Content Stays in an Edge Cache (Expiration) in the Amazon CloudFront Developer Guide.
+     */
+    DefaultTTL?: long;
+    /**
+     * This field is deprecated. We recommend that you use the MaxTTL field in CachePolicyConfig instead of this field. The maximum amount of time that you want objects to stay in CloudFront caches before CloudFront forwards another request to your origin to determine whether the object has been updated. The value that you specify applies only when your origin adds HTTP headers such as Cache-Control max-age, Cache-Control s-maxage, and Expires to objects. For more information, see Managing How Long Content Stays in an Edge Cache (Expiration) in the Amazon CloudFront Developer Guide.
+     */
+    MaxTTL?: long;
+  }
+  export interface DeleteCachePolicyRequest {
+    /**
+     * The unique identifier for the cache policy that you are deleting. To get the identifier, you can use ListCachePolicies.
+     */
+    Id: string;
+    /**
+     * The version of the cache policy that you are deleting. The version is the cache policy’s ETag value, which you can get using ListCachePolicies, GetCachePolicy, or GetCachePolicyConfig.
+     */
+    IfMatch?: string;
   }
   export interface DeleteCloudFrontOriginAccessIdentityRequest {
     /**
@@ -974,6 +1249,16 @@ declare namespace CloudFront {
     Id: string;
     /**
      * The value of the ETag header that you received when retrieving the profile to delete. For example: E2QWRUHAPOMQZL.
+     */
+    IfMatch?: string;
+  }
+  export interface DeleteOriginRequestPolicyRequest {
+    /**
+     * The unique identifier for the origin request policy that you are deleting. To get the identifier, you can use ListOriginRequestPolicies.
+     */
+    Id: string;
+    /**
+     * The version of the origin request policy that you are deleting. The version is the origin request policy’s ETag value, which you can get using ListOriginRequestPolicies, GetOriginRequestPolicy, or GetOriginRequestPolicyConfig.
      */
     IfMatch?: string;
   }
@@ -1115,6 +1400,33 @@ declare namespace CloudFront {
      */
     Tags: Tags;
   }
+  export interface DistributionIdList {
+    /**
+     * The value provided in the Marker request field.
+     */
+    Marker: string;
+    /**
+     * Contains the value that you should use in the Marker field of a subsequent request to continue listing distribution IDs where you left off.
+     */
+    NextMarker?: string;
+    /**
+     * The maximum number of distribution IDs requested.
+     */
+    MaxItems: integer;
+    /**
+     * A flag that indicates whether more distribution IDs remain to be listed. If your results were truncated, you can make a subsequent request using the Marker request field to retrieve more distribution IDs in the list.
+     */
+    IsTruncated: boolean;
+    /**
+     * The total number of distribution IDs returned in the response.
+     */
+    Quantity: integer;
+    /**
+     * Contains the distribution IDs in the list.
+     */
+    Items?: DistributionIdListSummary;
+  }
+  export type DistributionIdListSummary = string[];
   export interface DistributionList {
     /**
      * The value you provided for the Marker request parameter.
@@ -1410,19 +1722,19 @@ declare namespace CloudFront {
   export type Format = "URLEncoded"|string;
   export interface ForwardedValues {
     /**
-     * Indicates whether you want CloudFront to forward query strings to the origin that is associated with this cache behavior and cache based on the query string parameters. CloudFront behavior depends on the value of QueryString and on the values that you specify for QueryStringCacheKeys, if any: If you specify true for QueryString and you don't specify any values for QueryStringCacheKeys, CloudFront forwards all query string parameters to the origin and caches based on all query string parameters. Depending on how many query string parameters and values you have, this can adversely affect performance because CloudFront must forward more requests to the origin. If you specify true for QueryString and you specify one or more values for QueryStringCacheKeys, CloudFront forwards all query string parameters to the origin, but it only caches based on the query string parameters that you specify. If you specify false for QueryString, CloudFront doesn't forward any query string parameters to the origin, and doesn't cache based on query string parameters. For more information, see Configuring CloudFront to Cache Based on Query String Parameters in the Amazon CloudFront Developer Guide.
+     * This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. If you want to include query strings in the cache key, use QueryStringsConfig in a cache policy. See CreateCachePolicy. If you want to send query strings to the origin but not include them in the cache key, use QueryStringsConfig in an origin request policy. See CreateOriginRequestPolicy. Indicates whether you want CloudFront to forward query strings to the origin that is associated with this cache behavior and cache based on the query string parameters. CloudFront behavior depends on the value of QueryString and on the values that you specify for QueryStringCacheKeys, if any: If you specify true for QueryString and you don't specify any values for QueryStringCacheKeys, CloudFront forwards all query string parameters to the origin and caches based on all query string parameters. Depending on how many query string parameters and values you have, this can adversely affect performance because CloudFront must forward more requests to the origin. If you specify true for QueryString and you specify one or more values for QueryStringCacheKeys, CloudFront forwards all query string parameters to the origin, but it only caches based on the query string parameters that you specify. If you specify false for QueryString, CloudFront doesn't forward any query string parameters to the origin, and doesn't cache based on query string parameters. For more information, see Configuring CloudFront to Cache Based on Query String Parameters in the Amazon CloudFront Developer Guide.
      */
     QueryString: boolean;
     /**
-     * A complex type that specifies whether you want CloudFront to forward cookies to the origin and, if so, which ones. For more information about forwarding cookies to the origin, see How CloudFront Forwards, Caches, and Logs Cookies in the Amazon CloudFront Developer Guide.
+     * This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. If you want to include cookies in the cache key, use CookiesConfig in a cache policy. See CreateCachePolicy. If you want to send cookies to the origin but not include them in the cache key, use CookiesConfig in an origin request policy. See CreateOriginRequestPolicy. A complex type that specifies whether you want CloudFront to forward cookies to the origin and, if so, which ones. For more information about forwarding cookies to the origin, see How CloudFront Forwards, Caches, and Logs Cookies in the Amazon CloudFront Developer Guide.
      */
     Cookies: CookiePreference;
     /**
-     * A complex type that specifies the Headers, if any, that you want CloudFront to forward to the origin for this cache behavior (whitelisted headers). For the headers that you specify, CloudFront also caches separate versions of a specified object that is based on the header values in viewer requests. For more information, see  Caching Content Based on Request Headers in the Amazon CloudFront Developer Guide.
+     * This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. If you want to include headers in the cache key, use HeadersConfig in a cache policy. See CreateCachePolicy. If you want to send headers to the origin but not include them in the cache key, use HeadersConfig in an origin request policy. See CreateOriginRequestPolicy. A complex type that specifies the Headers, if any, that you want CloudFront to forward to the origin for this cache behavior (whitelisted headers). For the headers that you specify, CloudFront also caches separate versions of a specified object that is based on the header values in viewer requests. For more information, see  Caching Content Based on Request Headers in the Amazon CloudFront Developer Guide.
      */
     Headers?: Headers;
     /**
-     * A complex type that contains information about the query string parameters that you want CloudFront to use for caching for this cache behavior.
+     * This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. If you want to include query strings in the cache key, use QueryStringsConfig in a cache policy. See CreateCachePolicy. If you want to send query strings to the origin but not include them in the cache key, use an QueryStringsConfig in an origin request policy. See CreateOriginRequestPolicy. A complex type that contains information about the query string parameters that you want CloudFront to use for caching for this cache behavior.
      */
     QueryStringCacheKeys?: QueryStringCacheKeys;
   }
@@ -1441,6 +1753,38 @@ declare namespace CloudFront {
     Items?: LocationList;
   }
   export type GeoRestrictionType = "blacklist"|"whitelist"|"none"|string;
+  export interface GetCachePolicyConfigRequest {
+    /**
+     * The unique identifier for the cache policy. If the cache policy is attached to a distribution’s cache behavior, you can get the policy’s identifier using ListDistributions or GetDistribution. If the cache policy is not attached to a cache behavior, you can get the identifier using ListCachePolicies.
+     */
+    Id: string;
+  }
+  export interface GetCachePolicyConfigResult {
+    /**
+     * The cache policy configuration.
+     */
+    CachePolicyConfig?: CachePolicyConfig;
+    /**
+     * The current version of the cache policy.
+     */
+    ETag?: string;
+  }
+  export interface GetCachePolicyRequest {
+    /**
+     * The unique identifier for the cache policy. If the cache policy is attached to a distribution’s cache behavior, you can get the policy’s identifier using ListDistributions or GetDistribution. If the cache policy is not attached to a cache behavior, you can get the identifier using ListCachePolicies.
+     */
+    Id: string;
+  }
+  export interface GetCachePolicyResult {
+    /**
+     * The cache policy.
+     */
+    CachePolicy?: CachePolicy;
+    /**
+     * The current version of the cache policy.
+     */
+    ETag?: string;
+  }
   export interface GetCloudFrontOriginAccessIdentityConfigRequest {
     /**
      * The identity's ID. 
@@ -1585,6 +1929,38 @@ declare namespace CloudFront {
      */
     Invalidation?: Invalidation;
   }
+  export interface GetOriginRequestPolicyConfigRequest {
+    /**
+     * The unique identifier for the origin request policy. If the origin request policy is attached to a distribution’s cache behavior, you can get the policy’s identifier using ListDistributions or GetDistribution. If the origin request policy is not attached to a cache behavior, you can get the identifier using ListOriginRequestPolicies.
+     */
+    Id: string;
+  }
+  export interface GetOriginRequestPolicyConfigResult {
+    /**
+     * The origin request policy configuration.
+     */
+    OriginRequestPolicyConfig?: OriginRequestPolicyConfig;
+    /**
+     * The current version of the origin request policy.
+     */
+    ETag?: string;
+  }
+  export interface GetOriginRequestPolicyRequest {
+    /**
+     * The unique identifier for the origin request policy. If the origin request policy is attached to a distribution’s cache behavior, you can get the policy’s identifier using ListDistributions or GetDistribution. If the origin request policy is not attached to a cache behavior, you can get the identifier using ListOriginRequestPolicies.
+     */
+    Id: string;
+  }
+  export interface GetOriginRequestPolicyResult {
+    /**
+     * The origin request policy.
+     */
+    OriginRequestPolicy?: OriginRequestPolicy;
+    /**
+     * The current version of the origin request policy.
+     */
+    ETag?: string;
+  }
   export interface GetPublicKeyConfigRequest {
     /**
      * Request the ID for the public key configuration.
@@ -1652,11 +2028,11 @@ declare namespace CloudFront {
   export type HeaderList = string[];
   export interface Headers {
     /**
-     * The number of different headers that you want CloudFront to base caching on for this cache behavior. You can configure each cache behavior in a web distribution to do one of the following:    Forward all headers to your origin: Specify 1 for Quantity and * for Name.  CloudFront doesn't cache the objects that are associated with this cache behavior. Instead, CloudFront sends every request to the origin.      Forward a whitelist of headers you specify: Specify the number of headers that you want CloudFront to base caching on. Then specify the header names in Name elements. CloudFront caches your objects based on the values in the specified headers.    Forward only the default headers: Specify 0 for Quantity and omit Items. In this configuration, CloudFront doesn't cache based on the values in the request headers.   Regardless of which option you choose, CloudFront forwards headers to your origin based on whether the origin is an S3 bucket or a custom origin. See the following documentation:    S3 bucket: See HTTP Request Headers That CloudFront Removes or Updates     Custom origin: See HTTP Request Headers and CloudFront Behavior   
+     * The number of header names in the Items list.
      */
     Quantity: integer;
     /**
-     * A list that contains one Name element for each header that you want CloudFront to use for caching in this cache behavior. If Quantity is 0, omit Items.
+     * A list of HTTP header names.
      */
     Items?: HeaderList;
   }
@@ -1750,7 +2126,7 @@ declare namespace CloudFront {
      */
     LambdaFunctionARN: LambdaFunctionARN;
     /**
-     * Specifies the event type that triggers a Lambda function invocation. You can specify the following values:    viewer-request: The function executes when CloudFront receives a request from a viewer and before it checks to see whether the requested object is in the edge cache.     origin-request: The function executes only when CloudFront forwards a request to your origin. When the requested object is in the edge cache, the function doesn't execute.    origin-response: The function executes after CloudFront receives a response from the origin and before it caches the object in the response. When the requested object is in the edge cache, the function doesn't execute.    viewer-response: The function executes before CloudFront returns the requested object to the viewer. The function executes regardless of whether the object was already in the edge cache. If the origin returns an HTTP status code other than HTTP 200 (OK), the function doesn't execute.  
+     * Specifies the event type that triggers a Lambda function invocation. You can specify the following values:    viewer-request: The function executes when CloudFront receives a request from a viewer and before it checks to see whether the requested object is in the edge cache.     origin-request: The function executes only when CloudFront sends a request to your origin. When the requested object is in the edge cache, the function doesn't execute.    origin-response: The function executes after CloudFront receives a response from the origin and before it caches the object in the response. When the requested object is in the edge cache, the function doesn't execute.    viewer-response: The function executes before CloudFront returns the requested object to the viewer. The function executes regardless of whether the object was already in the edge cache. If the origin returns an HTTP status code other than HTTP 200 (OK), the function doesn't execute.  
      */
     EventType: EventType;
     /**
@@ -1769,6 +2145,26 @@ declare namespace CloudFront {
      */
     Items?: LambdaFunctionAssociationList;
   }
+  export interface ListCachePoliciesRequest {
+    /**
+     * A filter to return only the specified kinds of cache policies. Valid values are:    managed – Returns only the managed policies created by AWS.    custom – Returns only the custom policies created in your AWS account.  
+     */
+    Type?: CachePolicyType;
+    /**
+     * Use this field when paginating results to indicate where to begin in your list of cache policies. The response includes cache policies in the list that occur after the marker. To get the next page of the list, set this field’s value to the value of NextMarker from the current page’s response.
+     */
+    Marker?: string;
+    /**
+     * The maximum number of cache policies that you want in the response.
+     */
+    MaxItems?: string;
+  }
+  export interface ListCachePoliciesResult {
+    /**
+     * A list of cache policies.
+     */
+    CachePolicyList?: CachePolicyList;
+  }
   export interface ListCloudFrontOriginAccessIdentitiesRequest {
     /**
      * Use this when paginating results to indicate where to begin in your list of origin access identities. The results include identities in the list that occur after the marker. To get the next page of results, set the Marker to the value of the NextMarker from the current page's response (which is also the ID of the last identity on that page).
@@ -1784,6 +2180,46 @@ declare namespace CloudFront {
      * The CloudFrontOriginAccessIdentityList type. 
      */
     CloudFrontOriginAccessIdentityList?: CloudFrontOriginAccessIdentityList;
+  }
+  export interface ListDistributionsByCachePolicyIdRequest {
+    /**
+     * Use this field when paginating results to indicate where to begin in your list of distribution IDs. The response includes distribution IDs in the list that occur after the marker. To get the next page of the list, set this field’s value to the value of NextMarker from the current page’s response.
+     */
+    Marker?: string;
+    /**
+     * The maximum number of distribution IDs that you want in the response.
+     */
+    MaxItems?: string;
+    /**
+     * The ID of the cache policy whose associated distribution IDs you want to list.
+     */
+    CachePolicyId: string;
+  }
+  export interface ListDistributionsByCachePolicyIdResult {
+    /**
+     * A list of distribution IDs.
+     */
+    DistributionIdList?: DistributionIdList;
+  }
+  export interface ListDistributionsByOriginRequestPolicyIdRequest {
+    /**
+     * Use this field when paginating results to indicate where to begin in your list of distribution IDs. The response includes distribution IDs in the list that occur after the marker. To get the next page of the list, set this field’s value to the value of NextMarker from the current page’s response.
+     */
+    Marker?: string;
+    /**
+     * The maximum number of distribution IDs that you want in the response.
+     */
+    MaxItems?: string;
+    /**
+     * The ID of the origin request policy whose associated distribution IDs you want to list.
+     */
+    OriginRequestPolicyId: string;
+  }
+  export interface ListDistributionsByOriginRequestPolicyIdResult {
+    /**
+     * A list of distribution IDs.
+     */
+    DistributionIdList?: DistributionIdList;
   }
   export interface ListDistributionsByWebACLIdRequest {
     /**
@@ -1872,6 +2308,26 @@ declare namespace CloudFront {
      * Information about invalidation batches. 
      */
     InvalidationList?: InvalidationList;
+  }
+  export interface ListOriginRequestPoliciesRequest {
+    /**
+     * A filter to return only the specified kinds of origin request policies. Valid values are:    managed – Returns only the managed policies created by AWS.    custom – Returns only the custom policies created in your AWS account.  
+     */
+    Type?: OriginRequestPolicyType;
+    /**
+     * Use this field when paginating results to indicate where to begin in your list of origin request policies. The response includes origin request policies in the list that occur after the marker. To get the next page of the list, set this field’s value to the value of NextMarker from the current page’s response.
+     */
+    Marker?: string;
+    /**
+     * The maximum number of origin request policies that you want in the response.
+     */
+    MaxItems?: string;
+  }
+  export interface ListOriginRequestPoliciesResult {
+    /**
+     * A list of origin request policies.
+     */
+    OriginRequestPolicyList?: OriginRequestPolicyList;
   }
   export interface ListPublicKeysRequest {
     /**
@@ -1975,7 +2431,7 @@ declare namespace CloudFront {
   }
   export interface OriginCustomHeader {
     /**
-     * The name of a header that you want CloudFront to forward to your origin. For more information, see Forwarding Custom Headers to Your Origin (Web Distributions Only) in the  Amazon CloudFront Developer Guide.
+     * The name of a header that you want CloudFront to send to your origin. For more information, see Adding Custom Headers to Origin Requests in the  Amazon CloudFront Developer Guide.
      */
     HeaderName: string;
     /**
@@ -2034,6 +2490,99 @@ declare namespace CloudFront {
   }
   export type OriginList = Origin[];
   export type OriginProtocolPolicy = "http-only"|"match-viewer"|"https-only"|string;
+  export interface OriginRequestPolicy {
+    /**
+     * The unique identifier for the origin request policy.
+     */
+    Id: string;
+    /**
+     * The date and time when the origin request policy was last modified.
+     */
+    LastModifiedTime: timestamp;
+    /**
+     * The origin request policy configuration.
+     */
+    OriginRequestPolicyConfig: OriginRequestPolicyConfig;
+  }
+  export interface OriginRequestPolicyConfig {
+    /**
+     * A comment to describe the origin request policy.
+     */
+    Comment?: string;
+    /**
+     * A unique name to identify the origin request policy.
+     */
+    Name: string;
+    /**
+     * The HTTP headers to include in origin requests. These can include headers from viewer requests and additional headers added by CloudFront.
+     */
+    HeadersConfig: OriginRequestPolicyHeadersConfig;
+    /**
+     * The cookies from viewer requests to include in origin requests.
+     */
+    CookiesConfig: OriginRequestPolicyCookiesConfig;
+    /**
+     * The URL query strings from viewer requests to include in origin requests.
+     */
+    QueryStringsConfig: OriginRequestPolicyQueryStringsConfig;
+  }
+  export type OriginRequestPolicyCookieBehavior = "none"|"whitelist"|"all"|string;
+  export interface OriginRequestPolicyCookiesConfig {
+    /**
+     * Determines whether cookies in viewer requests are included in requests that CloudFront sends to the origin. Valid values are:    none – Cookies in viewer requests are not included in requests that CloudFront sends to the origin. Even when this field is set to none, any cookies that are listed in a CachePolicy are included in origin requests.    whitelist – The cookies in viewer requests that are listed in the CookieNames type are included in requests that CloudFront sends to the origin.    all – All cookies in viewer requests are included in requests that CloudFront sends to the origin.  
+     */
+    CookieBehavior: OriginRequestPolicyCookieBehavior;
+    Cookies?: CookieNames;
+  }
+  export type OriginRequestPolicyHeaderBehavior = "none"|"whitelist"|"allViewer"|"allViewerAndWhitelistCloudFront"|string;
+  export interface OriginRequestPolicyHeadersConfig {
+    /**
+     * Determines whether any HTTP headers are included in requests that CloudFront sends to the origin. Valid values are:    none – HTTP headers are not included in requests that CloudFront sends to the origin. Even when this field is set to none, any headers that are listed in a CachePolicy are included in origin requests.    whitelist – The HTTP headers that are listed in the Headers type are included in requests that CloudFront sends to the origin.    allViewer – All HTTP headers in viewer requests are included in requests that CloudFront sends to the origin.    allViewerAndWhitelistCloudFront – All HTTP headers in viewer requests and the additional CloudFront headers that are listed in the Headers type are included in requests that CloudFront sends to the origin. The additional headers are added by CloudFront.  
+     */
+    HeaderBehavior: OriginRequestPolicyHeaderBehavior;
+    Headers?: Headers;
+  }
+  export interface OriginRequestPolicyList {
+    /**
+     * If there are more items in the list than are in this response, this element is present. It contains the value that you should use in the Marker field of a subsequent request to continue listing origin request policies where you left off.
+     */
+    NextMarker?: string;
+    /**
+     * The maximum number of origin request policies requested.
+     */
+    MaxItems: integer;
+    /**
+     * The total number of origin request policies returned in the response.
+     */
+    Quantity: integer;
+    /**
+     * Contains the origin request policies in the list.
+     */
+    Items?: OriginRequestPolicySummaryList;
+  }
+  export type OriginRequestPolicyQueryStringBehavior = "none"|"whitelist"|"all"|string;
+  export interface OriginRequestPolicyQueryStringsConfig {
+    /**
+     * Determines whether any URL query strings in viewer requests are included in requests that CloudFront sends to the origin. Valid values are:    none – Query strings in viewer requests are not included in requests that CloudFront sends to the origin. Even when this field is set to none, any query strings that are listed in a CachePolicy are included in origin requests.    whitelist – The query strings in viewer requests that are listed in the QueryStringNames type are included in requests that CloudFront sends to the origin.    all – All query strings in viewer requests are included in requests that CloudFront sends to the origin.  
+     */
+    QueryStringBehavior: OriginRequestPolicyQueryStringBehavior;
+    /**
+     * Contains a list of the query strings in viewer requests that are included in requests that CloudFront sends to the origin.
+     */
+    QueryStrings?: QueryStringNames;
+  }
+  export interface OriginRequestPolicySummary {
+    /**
+     * The type of origin request policy, either managed (created by AWS) or custom (created in this AWS account).
+     */
+    Type: OriginRequestPolicyType;
+    /**
+     * The origin request policy.
+     */
+    OriginRequestPolicy: OriginRequestPolicy;
+  }
+  export type OriginRequestPolicySummaryList = OriginRequestPolicySummary[];
+  export type OriginRequestPolicyType = "managed"|"custom"|string;
   export interface OriginSslProtocols {
     /**
      * The number of SSL/TLS protocols that you want to allow CloudFront to use when establishing an HTTPS connection with this origin. 
@@ -2053,6 +2602,24 @@ declare namespace CloudFront {
      * A complex type that contains origins or origin groups for this distribution.
      */
     Items: OriginList;
+  }
+  export interface ParametersInCacheKeyAndForwardedToOrigin {
+    /**
+     * A flag that determines whether the Accept-Encoding HTTP header is included in the cache key and included in requests that CloudFront sends to the origin. If this field is true and the viewer request includes the Accept-Encoding header, then CloudFront normalizes the value of the viewer’s Accept-Encoding header to one of the following:    Accept-Encoding: gzip (if gzip is in the viewer’s Accept-Encoding header)    Accept-Encoding: identity (if gzip is not in the viewer’s Accept-Encoding header)   CloudFront includes the normalized header in the cache key and includes it in requests that CloudFront sends to the origin. If this field is false, then CloudFront treats the Accept-Encoding header the same as any other HTTP header in the viewer request. By default, it’s not included in the cache key and it’s not included in origin requests. You can manually add Accept-Encoding to the headers whitelist like any other HTTP header. When this field is true, you should not whitelist the Accept-Encoding header in the cache policy or in an origin request policy attached to the same cache behavior. For more information, see Cache compressed objects in the Amazon CloudFront Developer Guide.
+     */
+    EnableAcceptEncodingGzip: boolean;
+    /**
+     * An object that determines whether any HTTP headers (and if so, which headers) are included in the cache key and automatically included in requests that CloudFront sends to the origin.
+     */
+    HeadersConfig: CachePolicyHeadersConfig;
+    /**
+     * An object that determines whether any cookies in viewer requests (and if so, which cookies) are included in the cache key and automatically included in requests that CloudFront sends to the origin.
+     */
+    CookiesConfig: CachePolicyCookiesConfig;
+    /**
+     * An object that determines whether any URL query strings in viewer requests (and if so, which query strings) are included in the cache key and automatically included in requests that CloudFront sends to the origin.
+     */
+    QueryStringsConfig: CachePolicyQueryStringsConfig;
   }
   export type PathList = string[];
   export interface Paths {
@@ -2181,6 +2748,17 @@ declare namespace CloudFront {
     Items?: QueryStringCacheKeysList;
   }
   export type QueryStringCacheKeysList = string[];
+  export interface QueryStringNames {
+    /**
+     * The number of query string names in the Items list.
+     */
+    Quantity: integer;
+    /**
+     * A list of query string names.
+     */
+    Items?: QueryStringNamesList;
+  }
+  export type QueryStringNamesList = string[];
   export type ResourceARN = string;
   export interface Restrictions {
     /**
@@ -2450,6 +3028,30 @@ declare namespace CloudFront {
      */
     TagKeys: TagKeys;
   }
+  export interface UpdateCachePolicyRequest {
+    /**
+     * A cache policy configuration.
+     */
+    CachePolicyConfig: CachePolicyConfig;
+    /**
+     * The unique identifier for the cache policy that you are updating. The identifier is returned in a cache behavior’s CachePolicyId field in the response to GetDistributionConfig.
+     */
+    Id: string;
+    /**
+     * The version of the cache policy that you are updating. The version is returned in the cache policy’s ETag field in the response to GetCachePolicyConfig.
+     */
+    IfMatch?: string;
+  }
+  export interface UpdateCachePolicyResult {
+    /**
+     * A cache policy.
+     */
+    CachePolicy?: CachePolicy;
+    /**
+     * The current version of the cache policy.
+     */
+    ETag?: string;
+  }
   export interface UpdateCloudFrontOriginAccessIdentityRequest {
     /**
      * The identity's configuration information.
@@ -2546,6 +3148,30 @@ declare namespace CloudFront {
      */
     ETag?: string;
   }
+  export interface UpdateOriginRequestPolicyRequest {
+    /**
+     * An origin request policy configuration.
+     */
+    OriginRequestPolicyConfig: OriginRequestPolicyConfig;
+    /**
+     * The unique identifier for the origin request policy that you are updating. The identifier is returned in a cache behavior’s OriginRequestPolicyId field in the response to GetDistributionConfig.
+     */
+    Id: string;
+    /**
+     * The version of the origin request policy that you are updating. The version is returned in the origin request policy’s ETag field in the response to GetOriginRequestPolicyConfig.
+     */
+    IfMatch?: string;
+  }
+  export interface UpdateOriginRequestPolicyResult {
+    /**
+     * An origin request policy.
+     */
+    OriginRequestPolicy?: OriginRequestPolicy;
+    /**
+     * The current version of the origin request policy.
+     */
+    ETag?: string;
+  }
   export interface UpdatePublicKeyRequest {
     /**
      * Request to update public key information.
@@ -2631,7 +3257,7 @@ declare namespace CloudFront {
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
-  export type apiVersion = "2013-05-12"|"2013-11-11"|"2014-05-31"|"2014-10-21"|"2014-11-06"|"2015-04-17"|"2015-07-27"|"2015-09-17"|"2016-01-13"|"2016-01-28"|"2016-08-01"|"2016-08-20"|"2016-09-07"|"2016-09-29"|"2016-11-25"|"2016-11-25"|"2017-03-25"|"2017-03-25"|"2017-10-30"|"2017-10-30"|"2018-06-18"|"2018-06-18"|"2018-11-05"|"2018-11-05"|"2019-03-26"|"latest"|string;
+  export type apiVersion = "2013-05-12"|"2013-11-11"|"2014-05-31"|"2014-10-21"|"2014-11-06"|"2015-04-17"|"2015-07-27"|"2015-09-17"|"2016-01-13"|"2016-01-28"|"2016-08-01"|"2016-08-20"|"2016-09-07"|"2016-09-29"|"2016-11-25"|"2016-11-25"|"2017-03-25"|"2017-03-25"|"2017-10-30"|"2017-10-30"|"2018-06-18"|"2018-06-18"|"2018-11-05"|"2018-11-05"|"2019-03-26"|"2019-03-26"|"2020-05-31"|"latest"|string;
   export interface ClientApiVersions {
     /**
      * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

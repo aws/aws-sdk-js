@@ -33,6 +33,9 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Creates a batch of variables.</p>"
@@ -58,6 +61,9 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Gets a batch of variables.</p>"
@@ -86,9 +92,37 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Creates a detector version. The detector version starts in a <code>DRAFT</code> status.</p>"
+    },
+    "CreateModel": {
+      "name": "CreateModel",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateModelRequest"
+      },
+      "output": {
+        "shape": "CreateModelResult"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Creates a model using the specified model type.</p>"
     },
     "CreateModelVersion": {
       "name": "CreateModelVersion",
@@ -110,13 +144,13 @@
           "shape": "ResourceNotFoundException"
         },
         {
-          "shape": "InternalServerException"
+          "shape": "AccessDeniedException"
         },
         {
-          "shape": "ThrottlingException"
+          "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Creates a version of the model using the specified model type. </p>"
+      "documentation": "<p>Creates a version of the model using the specified model type and model id. </p>"
     },
     "CreateRule": {
       "name": "CreateRule",
@@ -139,6 +173,9 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Creates a rule for use with the specified detector. </p>"
@@ -164,6 +201,9 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Creates a variable.</p>"
@@ -192,6 +232,9 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Deletes the detector. Before deleting a detector, you must first delete all detector versions and rule versions associated with the detector.</p>"
@@ -223,6 +266,9 @@
         },
         {
           "shape": "ConflictException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Deletes the detector version. You cannot delete detector versions that are in <code>ACTIVE</code> status.</p>"
@@ -245,21 +291,24 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Deletes the specified event.</p>"
     },
-    "DeleteRuleVersion": {
-      "name": "DeleteRuleVersion",
+    "DeleteRule": {
+      "name": "DeleteRule",
       "http": {
         "method": "POST",
         "requestUri": "/"
       },
       "input": {
-        "shape": "DeleteRuleVersionRequest"
+        "shape": "DeleteRuleRequest"
       },
       "output": {
-        "shape": "DeleteRuleVersionResult"
+        "shape": "DeleteRuleResult"
       },
       "errors": [
         {
@@ -273,9 +322,12 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Deletes the rule version. You cannot delete a rule version if it is used by an <code>ACTIVE</code> or <code>INACTIVE</code> detector version.</p>"
+      "documentation": "<p>Deletes the rule. You cannot delete a rule if it is used by an <code>ACTIVE</code> or <code>INACTIVE</code> detector version.</p>"
     },
     "DescribeDetector": {
       "name": "DescribeDetector",
@@ -301,6 +353,9 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Gets all versions for a specified detector.</p>"
@@ -328,7 +383,7 @@
           "shape": "InternalServerException"
         },
         {
-          "shape": "ThrottlingException"
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Gets all of the model versions for the specified model type or for the specified model type and model ID. You can also get details for a single, specified model version. </p>"
@@ -357,6 +412,9 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Gets a particular detector version. </p>"
@@ -385,9 +443,99 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Gets all of detectors. This is a paginated API. If you provide a null <code>maxSizePerPage</code>, this actions retrieves a maximum of 10 records per page. If you provide a <code>maxSizePerPage</code>, the value must be between 5 and 10. To get the next page results, provide the pagination token from the <code>GetEventTypesResponse</code> as part of your request. A null pagination token fetches the records from the beginning. </p>"
+      "documentation": "<p>Gets all detectors or a single detector if a <code>detectorId</code> is specified. This is a paginated API. If you provide a null <code>maxResults</code>, this action retrieves a maximum of 10 records per page. If you provide a <code>maxResults</code>, the value must be between 5 and 10. To get the next page results, provide the pagination token from the <code>GetDetectorsResponse</code> as part of your request. A null pagination token fetches the records from the beginning. </p>"
+    },
+    "GetEntityTypes": {
+      "name": "GetEntityTypes",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetEntityTypesRequest"
+      },
+      "output": {
+        "shape": "GetEntityTypesResult"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Gets all entity types or a specific entity type if a name is specified. This is a paginated API. If you provide a null <code>maxResults</code>, this action retrieves a maximum of 10 records per page. If you provide a <code>maxResults</code>, the value must be between 5 and 10. To get the next page results, provide the pagination token from the <code>GetEntityTypesResponse</code> as part of your request. A null pagination token fetches the records from the beginning. </p>"
+    },
+    "GetEventPrediction": {
+      "name": "GetEventPrediction",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetEventPredictionRequest"
+      },
+      "output": {
+        "shape": "GetEventPredictionResult"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Evaluates an event against a detector version. If a version ID is not provided, the detector’s (<code>ACTIVE</code>) version is used.</p>"
+    },
+    "GetEventTypes": {
+      "name": "GetEventTypes",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetEventTypesRequest"
+      },
+      "output": {
+        "shape": "GetEventTypesResult"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Gets all event types or a specific event type if name is provided. This is a paginated API. If you provide a null <code>maxResults</code>, this action retrieves a maximum of 10 records per page. If you provide a <code>maxResults</code>, the value must be between 5 and 10. To get the next page results, provide the pagination token from the <code>GetEventTypesResponse</code> as part of your request. A null pagination token fetches the records from the beginning. </p>"
     },
     "GetExternalModels": {
       "name": "GetExternalModels",
@@ -413,9 +561,62 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Gets the details for one or more Amazon SageMaker models that have been imported into the service. This is a paginated API. If you provide a null <code>maxSizePerPage</code>, this actions retrieves a maximum of 10 records per page. If you provide a <code>maxSizePerPage</code>, the value must be between 5 and 10. To get the next page results, provide the pagination token from the <code>GetExternalModelsResult</code> as part of your request. A null pagination token fetches the records from the beginning. </p>"
+      "documentation": "<p>Gets the details for one or more Amazon SageMaker models that have been imported into the service. This is a paginated API. If you provide a null <code>maxResults</code>, this actions retrieves a maximum of 10 records per page. If you provide a <code>maxResults</code>, the value must be between 5 and 10. To get the next page results, provide the pagination token from the <code>GetExternalModelsResult</code> as part of your request. A null pagination token fetches the records from the beginning. </p>"
+    },
+    "GetKMSEncryptionKey": {
+      "name": "GetKMSEncryptionKey",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "output": {
+        "shape": "GetKMSEncryptionKeyResult"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Gets the encryption key if a Key Management Service (KMS) customer master key (CMK) has been specified to be used to encrypt content in Amazon Fraud Detector.</p>"
+    },
+    "GetLabels": {
+      "name": "GetLabels",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetLabelsRequest"
+      },
+      "output": {
+        "shape": "GetLabelsResult"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Gets all labels or a specific label if name is provided. This is a paginated API. If you provide a null <code>maxResults</code>, this action retrieves a maximum of 50 records per page. If you provide a <code>maxResults</code>, the value must be between 10 and 50. To get the next page results, provide the pagination token from the <code>GetGetLabelsResponse</code> as part of your request. A null pagination token fetches the records from the beginning. </p>"
     },
     "GetModelVersion": {
       "name": "GetModelVersion",
@@ -440,10 +641,10 @@
           "shape": "InternalServerException"
         },
         {
-          "shape": "ThrottlingException"
+          "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Gets a model version. </p>"
+      "documentation": "<p>Gets the details of the specified model version.</p>"
     },
     "GetModels": {
       "name": "GetModels",
@@ -468,10 +669,10 @@
           "shape": "InternalServerException"
         },
         {
-          "shape": "ThrottlingException"
+          "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Gets all of the models for the AWS account, or the specified model type, or gets a single model for the specified model type, model ID combination. </p>"
+      "documentation": "<p>Gets one or more models. Gets all models for the AWS account if no model type and no model id provided. Gets all models for the AWS account and model type, if the model type is specified but model id is not provided. Gets a specific model if (model type, model id) tuple is specified. </p> <p>This is a paginated API. If you provide a null <code>maxResults</code>, this action retrieves a maximum of 10 records per page. If you provide a <code>maxResults</code>, the value must be between 1 and 10. To get the next page results, provide the pagination token from the response as part of your request. A null pagination token fetches the records from the beginning.</p>"
     },
     "GetOutcomes": {
       "name": "GetOutcomes",
@@ -497,9 +698,12 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Gets one or more outcomes. This is a paginated API. If you provide a null <code>maxSizePerPage</code>, this actions retrieves a maximum of 10 records per page. If you provide a <code>maxSizePerPage</code>, the value must be between 50 and 100. To get the next page results, provide the pagination token from the <code>GetOutcomesResult</code> as part of your request. A null pagination token fetches the records from the beginning. </p>"
+      "documentation": "<p>Gets one or more outcomes. This is a paginated API. If you provide a null <code>maxResults</code>, this actions retrieves a maximum of 100 records per page. If you provide a <code>maxResults</code>, the value must be between 50 and 100. To get the next page results, provide the pagination token from the <code>GetOutcomesResult</code> as part of your request. A null pagination token fetches the records from the beginning. </p>"
     },
     "GetPrediction": {
       "name": "GetPrediction",
@@ -525,6 +729,9 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Evaluates an event against a detector version. If a version ID is not provided, the detector’s (<code>ACTIVE</code>) version is used. </p>"
@@ -553,9 +760,12 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Gets all rules available for the specified detector.</p>"
+      "documentation": "<p>Get all rules for a detector (paginated) if <code>ruleId</code> and <code>ruleVersion</code> are not specified. Gets all rules for the detector and the <code>ruleId</code> if present (paginated). Gets a specific rule if both the <code>ruleId</code> and the <code>ruleVersion</code> are specified.</p> <p>This is a paginated API. Providing null maxResults results in retrieving maximum of 100 records per page. If you provide maxResults the value must be between 50 and 100. To get the next page result, a provide a pagination token from GetRulesResult as part of your request. Null pagination token fetches the records from the beginning.</p>"
     },
     "GetVariables": {
       "name": "GetVariables",
@@ -581,9 +791,37 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Gets all of the variables or the specific variable. This is a paginated API. Providing null <code>maxSizePerPage</code> results in retrieving maximum of 100 records per page. If you provide <code>maxSizePerPage</code> the value must be between 50 and 100. To get the next page result, a provide a pagination token from <code>GetVariablesResult</code> as part of your request. Null pagination token fetches the records from the beginning. </p>"
+    },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResult"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Lists all tags associated with the resource. This is a paginated API. To get the next page results, provide the pagination token from the response as part of your request. A null pagination token fetches the records from the beginning. </p>"
     },
     "PutDetector": {
       "name": "PutDetector",
@@ -606,9 +844,62 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Creates or updates a detector. </p>"
+    },
+    "PutEntityType": {
+      "name": "PutEntityType",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutEntityTypeRequest"
+      },
+      "output": {
+        "shape": "PutEntityTypeResult"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Creates or updates an entity type. An entity represents who is performing the event. As part of a fraud prediction, you pass the entity ID to indicate the specific entity who performed the event. An entity type classifies the entity. Example classifications include customer, merchant, or account.</p>"
+    },
+    "PutEventType": {
+      "name": "PutEventType",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutEventTypeRequest"
+      },
+      "output": {
+        "shape": "PutEventTypeResult"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Creates or updates an event type. An event is a business activity that is evaluated for fraud risk. With Amazon Fraud Detector, you generate fraud predictions for events. An event type defines the structure for an event sent to Amazon Fraud Detector. This includes the variables sent as part of the event, the entity performing the event (such as a customer), and the labels that classify the event. Example event types include online payment transactions, account registrations, and authentications.</p>"
     },
     "PutExternalModel": {
       "name": "PutExternalModel",
@@ -631,21 +922,52 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Creates or updates an Amazon SageMaker model endpoint. You can also use this action to update the configuration of the model endpoint, including the IAM role and/or the mapped variables. </p>"
     },
-    "PutModel": {
-      "name": "PutModel",
+    "PutKMSEncryptionKey": {
+      "name": "PutKMSEncryptionKey",
       "http": {
         "method": "POST",
         "requestUri": "/"
       },
       "input": {
-        "shape": "PutModelRequest"
+        "shape": "PutKMSEncryptionKeyRequest"
       },
       "output": {
-        "shape": "PutModelResult"
+        "shape": "PutKMSEncryptionKeyResult"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Specifies the Key Management Service (KMS) customer master key (CMK) to be used to encrypt content in Amazon Fraud Detector.</p>"
+    },
+    "PutLabel": {
+      "name": "PutLabel",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutLabelRequest"
+      },
+      "output": {
+        "shape": "PutLabelResult"
       },
       "errors": [
         {
@@ -655,10 +977,10 @@
           "shape": "InternalServerException"
         },
         {
-          "shape": "ThrottlingException"
+          "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Creates or updates a model. </p>"
+      "documentation": "<p>Creates or updates label. A label classifies an event as fraudulent or legitimate. Labels are associated with event types and used to train supervised machine learning models in Amazon Fraud Detector. </p>"
     },
     "PutOutcome": {
       "name": "PutOutcome",
@@ -681,9 +1003,62 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Creates or updates an outcome. </p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResult"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Assigns tags to a resource.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "output": {
+        "shape": "UntagResourceResult"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Removes tags from a resource.</p>"
     },
     "UpdateDetectorVersion": {
       "name": "UpdateDetectorVersion",
@@ -709,9 +1084,12 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p> Updates a detector version. The detector version attributes that you can update include models, external model endpoints, rules, and description. You can only update a <code>DRAFT</code> detector version.</p>"
+      "documentation": "<p> Updates a detector version. The detector version attributes that you can update include models, external model endpoints, rules, rule execution mode, and description. You can only update a <code>DRAFT</code> detector version.</p>"
     },
     "UpdateDetectorVersionMetadata": {
       "name": "UpdateDetectorVersionMetadata",
@@ -734,6 +1112,9 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Updates the detector version's description. You can update the metadata for any detector version (<code>DRAFT, ACTIVE,</code> or <code>INACTIVE</code>). </p>"
@@ -762,9 +1143,40 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Updates the detector version’s status. You can perform the following promotions or demotions using <code>UpdateDetectorVersionStatus</code>: <code>DRAFT</code> to <code>ACTIVE</code>, <code>ACTIVE</code> to <code>INACTIVE</code>, and <code>INACTIVE</code> to <code>ACTIVE</code>.</p>"
+    },
+    "UpdateModel": {
+      "name": "UpdateModel",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateModelRequest"
+      },
+      "output": {
+        "shape": "UpdateModelResult"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Updates a model. You can update the description attribute using this action.</p>"
     },
     "UpdateModelVersion": {
       "name": "UpdateModelVersion",
@@ -786,13 +1198,41 @@
           "shape": "ResourceNotFoundException"
         },
         {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Updates a model version. Updating a model version retrains an existing model version using updated training data and produces a new minor version of the model. You can update the training data set location and data access role attributes using this action. This action creates and trains a new minor version of the model, for example version 1.01, 1.02, 1.03.</p>"
+    },
+    "UpdateModelVersionStatus": {
+      "name": "UpdateModelVersionStatus",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateModelVersionStatusRequest"
+      },
+      "output": {
+        "shape": "UpdateModelVersionStatusResult"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
           "shape": "InternalServerException"
         },
         {
-          "shape": "ThrottlingException"
+          "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Updates a model version. You can update the description and status attributes using this action. You can perform the following status updates: </p> <ol> <li> <p>Change the <code>TRAINING_COMPLETE</code> status to <code>ACTIVE</code> </p> </li> <li> <p>Change <code>ACTIVE</code> back to <code>TRAINING_COMPLETE</code> </p> </li> </ol>"
+      "documentation": "<p>Updates the status of a model version.</p> <p>You can perform the following status updates:</p> <ol> <li> <p>Change the <code>TRAINING_COMPLETE</code> status to <code>ACTIVE</code>.</p> </li> <li> <p>Change <code>ACTIVE</code>to <code>INACTIVE</code>.</p> </li> </ol>"
     },
     "UpdateRuleMetadata": {
       "name": "UpdateRuleMetadata",
@@ -818,9 +1258,12 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Updates a rule's metadata. </p>"
+      "documentation": "<p>Updates a rule's metadata. The description attribute can be updated.</p>"
     },
     "UpdateRuleVersion": {
       "name": "UpdateRuleVersion",
@@ -846,9 +1289,12 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Updates a rule version resulting in a new rule version. </p>"
+      "documentation": "<p>Updates a rule version resulting in a new rule version. Updates a rule version resulting in a new rule version (version 1, 2, 3 ...). </p>"
     },
     "UpdateVariable": {
       "name": "UpdateVariable",
@@ -874,6 +1320,9 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Updates a variable.</p>"
@@ -913,6 +1362,10 @@
         "variableEntries": {
           "shape": "VariableEntryList",
           "documentation": "<p>The list of variables for the batch create variable request.</p>"
+        },
+        "tags": {
+          "shape": "tagList",
+          "documentation": "<p>A collection of key and value pairs.</p>"
         }
       }
     },
@@ -1004,6 +1457,10 @@
         "ruleExecutionMode": {
           "shape": "RuleExecutionMode",
           "documentation": "<p>The rule execution mode for the rules included in the detector version.</p> <p>You can define and edit the rule mode at the detector version level, when it is in draft status.</p> <p>If you specify <code>FIRST_MATCHED</code>, Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at the first matched rule. Amazon Fraud dectector then provides the outcomes for that single rule.</p> <p>If you specifiy <code>ALL_MATCHED</code>, Amazon Fraud Detector evaluates all rules and returns the outcomes for all matched rules. </p> <p>The default behavior is <code>FIRST_MATCHED</code>.</p>"
+        },
+        "tags": {
+          "shape": "tagList",
+          "documentation": "<p>A collection of key and value pairs.</p>"
         }
       }
     },
@@ -1024,11 +1481,47 @@
         }
       }
     },
+    "CreateModelRequest": {
+      "type": "structure",
+      "required": [
+        "modelId",
+        "modelType",
+        "eventTypeName"
+      ],
+      "members": {
+        "modelId": {
+          "shape": "identifier",
+          "documentation": "<p>The model ID.</p>"
+        },
+        "modelType": {
+          "shape": "ModelTypeEnum",
+          "documentation": "<p>The model type. </p>"
+        },
+        "description": {
+          "shape": "description",
+          "documentation": "<p>The model description. </p>"
+        },
+        "eventTypeName": {
+          "shape": "string",
+          "documentation": "<p>The name of the event type.</p>"
+        },
+        "tags": {
+          "shape": "tagList",
+          "documentation": "<p>A collection of key and value pairs.</p>"
+        }
+      }
+    },
+    "CreateModelResult": {
+      "type": "structure",
+      "members": {}
+    },
     "CreateModelVersionRequest": {
       "type": "structure",
       "required": [
         "modelId",
-        "modelType"
+        "modelType",
+        "trainingDataSource",
+        "trainingDataSchema"
       ],
       "members": {
         "modelId": {
@@ -1039,9 +1532,21 @@
           "shape": "ModelTypeEnum",
           "documentation": "<p>The model type.</p>"
         },
-        "description": {
-          "shape": "description",
-          "documentation": "<p>The model version description.</p>"
+        "trainingDataSource": {
+          "shape": "TrainingDataSourceEnum",
+          "documentation": "<p>The training data source location in Amazon S3. </p>"
+        },
+        "trainingDataSchema": {
+          "shape": "TrainingDataSchema",
+          "documentation": "<p>The training data schema.</p>"
+        },
+        "externalEventsDetail": {
+          "shape": "ExternalEventsDetail",
+          "documentation": "<p>Details for the external events data used for model version training. Required if <code>trainingDataSource</code> is <code>EXTERNAL_EVENTS</code>.</p>"
+        },
+        "tags": {
+          "shape": "tagList",
+          "documentation": "<p>A collection of key and value pairs.</p>"
         }
       }
     },
@@ -1050,7 +1555,7 @@
       "members": {
         "modelId": {
           "shape": "identifier",
-          "documentation": "<p>The model ID. </p>"
+          "documentation": "<p>The model ID.</p>"
         },
         "modelType": {
           "shape": "ModelTypeEnum",
@@ -1058,7 +1563,7 @@
         },
         "modelVersionNumber": {
           "shape": "nonEmptyString",
-          "documentation": "<p>The version of the model. </p>"
+          "documentation": "<p>The model version number of the model version created.</p>"
         },
         "status": {
           "shape": "string",
@@ -1099,6 +1604,10 @@
         "outcomes": {
           "shape": "NonEmptyListOfStrings",
           "documentation": "<p>The outcome or outcomes returned when the rule expression matches.</p>"
+        },
+        "tags": {
+          "shape": "tagList",
+          "documentation": "<p>A collection of key and value pairs.</p>"
         }
       }
     },
@@ -1142,7 +1651,11 @@
         },
         "variableType": {
           "shape": "string",
-          "documentation": "<p>The variable type.</p>"
+          "documentation": "<p>The variable type.</p> <p>Valid Values: <code>AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT | SHIPPING_ZIP | USERAGENT</code> </p>"
+        },
+        "tags": {
+          "shape": "tagList",
+          "documentation": "<p>A collection of key and value pairs.</p>"
         }
       }
     },
@@ -1176,6 +1689,20 @@
         "BOOLEAN"
       ]
     },
+    "DataValidationMetrics": {
+      "type": "structure",
+      "members": {
+        "fileLevelMessages": {
+          "shape": "fileValidationMessageList",
+          "documentation": "<p>The file-specific model training validation messages.</p>"
+        },
+        "fieldLevelMessages": {
+          "shape": "fieldValidationMessageList",
+          "documentation": "<p>The field-specific model training validation messages.</p>"
+        }
+      },
+      "documentation": "<p>The model training validation messages.</p>"
+    },
     "DeleteDetectorRequest": {
       "type": "structure",
       "required": [
@@ -1204,7 +1731,7 @@
           "documentation": "<p>The ID of the parent detector for the detector version to delete.</p>"
         },
         "detectorVersionId": {
-          "shape": "nonEmptyString",
+          "shape": "wholeNumberVersionString",
           "documentation": "<p>The ID of the detector version to delete.</p>"
         }
       }
@@ -1216,12 +1743,17 @@
     "DeleteEventRequest": {
       "type": "structure",
       "required": [
-        "eventId"
+        "eventId",
+        "eventTypeName"
       ],
       "members": {
         "eventId": {
           "shape": "string",
           "documentation": "<p>The ID of the event to delete.</p>"
+        },
+        "eventTypeName": {
+          "shape": "string",
+          "documentation": "<p>The name of the event type.</p>"
         }
       }
     },
@@ -1229,29 +1761,18 @@
       "type": "structure",
       "members": {}
     },
-    "DeleteRuleVersionRequest": {
+    "DeleteRuleRequest": {
       "type": "structure",
       "required": [
-        "detectorId",
-        "ruleId",
-        "ruleVersion"
+        "rule"
       ],
       "members": {
-        "detectorId": {
-          "shape": "identifier",
-          "documentation": "<p>The ID of the detector that includes the rule version to delete.</p>"
-        },
-        "ruleId": {
-          "shape": "identifier",
-          "documentation": "<p>The rule ID of the rule version to delete.</p>"
-        },
-        "ruleVersion": {
-          "shape": "nonEmptyString",
-          "documentation": "<p>The rule version to delete.</p>"
+        "rule": {
+          "shape": "Rule"
         }
       }
     },
-    "DeleteRuleVersionResult": {
+    "DeleteRuleResult": {
       "type": "structure",
       "members": {}
     },
@@ -1289,6 +1810,10 @@
         "nextToken": {
           "shape": "string",
           "documentation": "<p>The next token to be used for subsequent requests.</p>"
+        },
+        "arn": {
+          "shape": "fraudDetectorArn",
+          "documentation": "<p>The detector ARN.</p>"
         }
       }
     },
@@ -1300,8 +1825,8 @@
           "documentation": "<p>The model ID.</p>"
         },
         "modelVersionNumber": {
-          "shape": "nonEmptyString",
-          "documentation": "<p>The model version. </p>"
+          "shape": "floatVersionString",
+          "documentation": "<p>The model version number.</p>"
         },
         "modelType": {
           "shape": "ModelTypeEnum",
@@ -1312,7 +1837,7 @@
           "documentation": "<p>The next token from the previous results.</p>"
         },
         "maxResults": {
-          "shape": "MaxResults",
+          "shape": "modelsMaxPageSize",
           "documentation": "<p>The maximum number of results to return.</p>"
         }
       }
@@ -1321,7 +1846,7 @@
       "type": "structure",
       "members": {
         "modelVersionDetails": {
-          "shape": "ModelVersionDetailList",
+          "shape": "modelVersionDetailList",
           "documentation": "<p>The model version details.</p>"
         },
         "nextToken": {
@@ -1341,6 +1866,10 @@
           "shape": "description",
           "documentation": "<p>The detector description.</p>"
         },
+        "eventTypeName": {
+          "shape": "identifier",
+          "documentation": "<p>The name of the event type.</p>"
+        },
         "lastUpdatedTime": {
           "shape": "time",
           "documentation": "<p>Timestamp of when the detector was last updated.</p>"
@@ -1348,6 +1877,10 @@
         "createdTime": {
           "shape": "time",
           "documentation": "<p>Timestamp of when the detector was created.</p>"
+        },
+        "arn": {
+          "shape": "fraudDetectorArn",
+          "documentation": "<p>The detector ARN.</p>"
         }
       },
       "documentation": "<p>The detector.</p>"
@@ -1406,6 +1939,46 @@
       "max": 10,
       "min": 5
     },
+    "Entity": {
+      "type": "structure",
+      "members": {
+        "entityType": {
+          "shape": "string",
+          "documentation": "<p>The entity type.</p>"
+        },
+        "entityId": {
+          "shape": "identifier",
+          "documentation": "<p>The entity ID. If you do not know the <code>entityId</code>, you can pass <code>unknown</code>, which is areserved string literal.</p>"
+        }
+      },
+      "documentation": "<p>The entity details. </p>"
+    },
+    "EntityType": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "string",
+          "documentation": "<p>The entity type name.</p>"
+        },
+        "description": {
+          "shape": "description",
+          "documentation": "<p>The entity type description.</p>"
+        },
+        "lastUpdatedTime": {
+          "shape": "time",
+          "documentation": "<p>Timestamp of when the entity type was last updated.</p>"
+        },
+        "createdTime": {
+          "shape": "time",
+          "documentation": "<p>Timestamp of when the entity type was created.</p>"
+        },
+        "arn": {
+          "shape": "fraudDetectorArn",
+          "documentation": "<p>The entity type ARN.</p>"
+        }
+      },
+      "documentation": "<p>The entity type details.</p>"
+    },
     "EventAttributeMap": {
       "type": "map",
       "key": {
@@ -1415,12 +1988,82 @@
         "shape": "attributeValue"
       }
     },
+    "EventType": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "string",
+          "documentation": "<p>The event type name.</p>"
+        },
+        "description": {
+          "shape": "description",
+          "documentation": "<p>The event type description.</p>"
+        },
+        "eventVariables": {
+          "shape": "ListOfStrings",
+          "documentation": "<p>The event type event variables.</p>"
+        },
+        "labels": {
+          "shape": "ListOfStrings",
+          "documentation": "<p>The event type labels.</p>"
+        },
+        "entityTypes": {
+          "shape": "NonEmptyListOfStrings",
+          "documentation": "<p>The event type entity types.</p>"
+        },
+        "lastUpdatedTime": {
+          "shape": "time",
+          "documentation": "<p>Timestamp of when the event type was last updated.</p>"
+        },
+        "createdTime": {
+          "shape": "time",
+          "documentation": "<p>Timestamp of when the event type was created.</p>"
+        },
+        "arn": {
+          "shape": "fraudDetectorArn",
+          "documentation": "<p>The entity type ARN.</p>"
+        }
+      },
+      "documentation": "<p>The event type details.</p>"
+    },
+    "EventVariableMap": {
+      "type": "map",
+      "key": {
+        "shape": "variableName"
+      },
+      "value": {
+        "shape": "variableValue"
+      },
+      "min": 1
+    },
+    "ExternalEventsDetail": {
+      "type": "structure",
+      "required": [
+        "dataLocation",
+        "dataAccessRoleArn"
+      ],
+      "members": {
+        "dataLocation": {
+          "shape": "s3BucketLocation",
+          "documentation": "<p>The Amazon S3 bucket location for the data.</p>"
+        },
+        "dataAccessRoleArn": {
+          "shape": "iamRoleArn",
+          "documentation": "<p>The ARN of the role that provides Amazon Fraud Detector access to the data location.</p>"
+        }
+      },
+      "documentation": "<p>Details for the external events data used for model version training.</p>"
+    },
     "ExternalModel": {
       "type": "structure",
       "members": {
         "modelEndpoint": {
           "shape": "string",
           "documentation": "<p>The Amazon SageMaker model endpoints.</p>"
+        },
+        "eventTypeName": {
+          "shape": "identifier",
+          "documentation": "<p>The event type names.</p>"
         },
         "modelSource": {
           "shape": "ModelSource",
@@ -1449,6 +2092,10 @@
         "createdTime": {
           "shape": "time",
           "documentation": "<p>Timestamp of when the model was last created.</p>"
+        },
+        "arn": {
+          "shape": "fraudDetectorArn",
+          "documentation": "<p>The model ARN.</p>"
         }
       },
       "documentation": "<p>The Amazon SageMaker model.</p>"
@@ -1475,6 +2122,50 @@
       "max": 10,
       "min": 5
     },
+    "FieldValidationMessage": {
+      "type": "structure",
+      "members": {
+        "fieldName": {
+          "shape": "string",
+          "documentation": "<p>The field name.</p>"
+        },
+        "identifier": {
+          "shape": "string",
+          "documentation": "<p>The message ID.</p>"
+        },
+        "title": {
+          "shape": "string",
+          "documentation": "<p>The message title.</p>"
+        },
+        "content": {
+          "shape": "string",
+          "documentation": "<p>The message content.</p>"
+        },
+        "type": {
+          "shape": "string",
+          "documentation": "<p>The message type.</p>"
+        }
+      },
+      "documentation": "<p>The message details.</p>"
+    },
+    "FileValidationMessage": {
+      "type": "structure",
+      "members": {
+        "title": {
+          "shape": "string",
+          "documentation": "<p>The message title.</p>"
+        },
+        "content": {
+          "shape": "string",
+          "documentation": "<p>The message content.</p>"
+        },
+        "type": {
+          "shape": "string",
+          "documentation": "<p>The message type.</p>"
+        }
+      },
+      "documentation": "<p>The message details.</p>"
+    },
     "GetDetectorVersionRequest": {
       "type": "structure",
       "required": [
@@ -1487,7 +2178,7 @@
           "documentation": "<p>The detector ID.</p>"
         },
         "detectorVersionId": {
-          "shape": "nonEmptyString",
+          "shape": "wholeNumberVersionString",
           "documentation": "<p>The detector version ID.</p>"
         }
       }
@@ -1500,7 +2191,7 @@
           "documentation": "<p>The detector ID.</p>"
         },
         "detectorVersionId": {
-          "shape": "nonEmptyString",
+          "shape": "wholeNumberVersionString",
           "documentation": "<p>The detector version ID.</p>"
         },
         "description": {
@@ -1534,6 +2225,10 @@
         "ruleExecutionMode": {
           "shape": "RuleExecutionMode",
           "documentation": "<p>The execution mode of the rule in the dectector</p> <p> <code>FIRST_MATCHED</code> indicates that Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at the first matched rule. Amazon Fraud dectector then provides the outcomes for that single rule.</p> <p> <code>ALL_MATCHED</code> indicates that Amazon Fraud Detector evaluates all rules and returns the outcomes for all matched rules. You can define and edit the rule mode at the detector version level, when it is in draft status.</p>"
+        },
+        "arn": {
+          "shape": "fraudDetectorArn",
+          "documentation": "<p>The detector version ARN.</p>"
         }
       }
     },
@@ -1560,6 +2255,124 @@
         "detectors": {
           "shape": "DetectorList",
           "documentation": "<p>The detectors.</p>"
+        },
+        "nextToken": {
+          "shape": "string",
+          "documentation": "<p>The next page token.</p>"
+        }
+      }
+    },
+    "GetEntityTypesRequest": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "identifier",
+          "documentation": "<p>The name.</p>"
+        },
+        "nextToken": {
+          "shape": "string",
+          "documentation": "<p>The next token for the subsequent request.</p>"
+        },
+        "maxResults": {
+          "shape": "entityTypesMaxResults",
+          "documentation": "<p>The maximum number of objects to return for the request.</p>"
+        }
+      }
+    },
+    "GetEntityTypesResult": {
+      "type": "structure",
+      "members": {
+        "entityTypes": {
+          "shape": "entityTypeList",
+          "documentation": "<p>An array of entity types.</p>"
+        },
+        "nextToken": {
+          "shape": "string",
+          "documentation": "<p>The next page token.</p>"
+        }
+      }
+    },
+    "GetEventPredictionRequest": {
+      "type": "structure",
+      "required": [
+        "detectorId",
+        "eventId",
+        "eventTypeName",
+        "entities",
+        "eventTimestamp",
+        "eventVariables"
+      ],
+      "members": {
+        "detectorId": {
+          "shape": "string",
+          "documentation": "<p>The detector ID.</p>"
+        },
+        "detectorVersionId": {
+          "shape": "string",
+          "documentation": "<p>The detector version ID.</p>"
+        },
+        "eventId": {
+          "shape": "string",
+          "documentation": "<p>The unique ID used to identify the event.</p>"
+        },
+        "eventTypeName": {
+          "shape": "string",
+          "documentation": "<p>The event type associated with the detector specified for the prediction.</p>"
+        },
+        "entities": {
+          "shape": "listOfEntities",
+          "documentation": "<p>The entity type (associated with the detector's event type) and specific entity ID representing who performed the event. If an entity id is not available, use \"UNKNOWN.\"</p>"
+        },
+        "eventTimestamp": {
+          "shape": "string",
+          "documentation": "<p>Timestamp that defines when the event under evaluation occurred.</p>"
+        },
+        "eventVariables": {
+          "shape": "EventVariableMap",
+          "documentation": "<p>Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.</p>"
+        },
+        "externalModelEndpointDataBlobs": {
+          "shape": "ExternalModelEndpointDataBlobMap",
+          "documentation": "<p>The Amazon SageMaker model endpoint input data blobs.</p>"
+        }
+      }
+    },
+    "GetEventPredictionResult": {
+      "type": "structure",
+      "members": {
+        "modelScores": {
+          "shape": "ListOfModelScores",
+          "documentation": "<p>The model scores. Amazon Fraud Detector generates model scores between 0 and 1000, where 0 is low fraud risk and 1000 is high fraud risk. Model scores are directly related to the false positive rate (FPR). For example, a score of 600 corresponds to an estimated 10% false positive rate whereas a score of 900 corresponds to an estimated 2% false positive rate.</p>"
+        },
+        "ruleResults": {
+          "shape": "ListOfRuleResults",
+          "documentation": "<p>The results.</p>"
+        }
+      }
+    },
+    "GetEventTypesRequest": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "identifier",
+          "documentation": "<p>The name.</p>"
+        },
+        "nextToken": {
+          "shape": "string",
+          "documentation": "<p>The next token for the subsequent request.</p>"
+        },
+        "maxResults": {
+          "shape": "eventTypesMaxResults",
+          "documentation": "<p>The maximum number of objects to return for the request.</p>"
+        }
+      }
+    },
+    "GetEventTypesResult": {
+      "type": "structure",
+      "members": {
+        "eventTypes": {
+          "shape": "eventTypeList",
+          "documentation": "<p>An array of event types.</p>"
         },
         "nextToken": {
           "shape": "string",
@@ -1597,6 +2410,45 @@
         }
       }
     },
+    "GetKMSEncryptionKeyResult": {
+      "type": "structure",
+      "members": {
+        "kmsKey": {
+          "shape": "KMSKey",
+          "documentation": "<p>The KMS encryption key.</p>"
+        }
+      }
+    },
+    "GetLabelsRequest": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "identifier",
+          "documentation": "<p>The name of the label or labels to get.</p>"
+        },
+        "nextToken": {
+          "shape": "string",
+          "documentation": "<p>The next token for the subsequent request.</p>"
+        },
+        "maxResults": {
+          "shape": "labelsMaxResults",
+          "documentation": "<p>The maximum number of objects to return for the request.</p>"
+        }
+      }
+    },
+    "GetLabelsResult": {
+      "type": "structure",
+      "members": {
+        "labels": {
+          "shape": "labelList",
+          "documentation": "<p>An array of labels.</p>"
+        },
+        "nextToken": {
+          "shape": "string",
+          "documentation": "<p>The next page token.</p>"
+        }
+      }
+    },
     "GetModelVersionRequest": {
       "type": "structure",
       "required": [
@@ -1607,15 +2459,15 @@
       "members": {
         "modelId": {
           "shape": "identifier",
-          "documentation": "<p>The model ID. </p>"
+          "documentation": "<p>The model ID.</p>"
         },
         "modelType": {
           "shape": "ModelTypeEnum",
-          "documentation": "<p>The model type. </p>"
+          "documentation": "<p>The model type.</p>"
         },
         "modelVersionNumber": {
-          "shape": "nonEmptyString",
-          "documentation": "<p>The model version. </p>"
+          "shape": "floatVersionString",
+          "documentation": "<p>The model version number.</p>"
         }
       }
     },
@@ -1624,44 +2476,56 @@
       "members": {
         "modelId": {
           "shape": "identifier",
-          "documentation": "<p>The model ID. </p>"
+          "documentation": "<p>The model ID.</p>"
         },
         "modelType": {
           "shape": "ModelTypeEnum",
-          "documentation": "<p>The model type. </p>"
+          "documentation": "<p>The model type.</p>"
         },
         "modelVersionNumber": {
-          "shape": "nonEmptyString",
-          "documentation": "<p>The model version. </p>"
+          "shape": "floatVersionString",
+          "documentation": "<p>The model version number.</p>"
         },
-        "description": {
-          "shape": "description",
-          "documentation": "<p>The model version description.</p>"
+        "trainingDataSource": {
+          "shape": "TrainingDataSourceEnum",
+          "documentation": "<p>The training data source.</p>"
+        },
+        "trainingDataSchema": {
+          "shape": "TrainingDataSchema",
+          "documentation": "<p>The training data schema.</p>"
+        },
+        "externalEventsDetail": {
+          "shape": "ExternalEventsDetail",
+          "documentation": "<p>The event details.</p>"
         },
         "status": {
           "shape": "string",
-          "documentation": "<p>The model version status. </p>"
+          "documentation": "<p>The model version status.</p>"
+        },
+        "arn": {
+          "shape": "fraudDetectorArn",
+          "documentation": "<p>The model version ARN.</p>"
         }
       }
     },
     "GetModelsRequest": {
       "type": "structure",
       "members": {
-        "modelType": {
-          "shape": "ModelTypeEnum",
-          "documentation": "<p>The model type.</p>"
-        },
         "modelId": {
           "shape": "identifier",
           "documentation": "<p>The model ID.</p>"
         },
+        "modelType": {
+          "shape": "ModelTypeEnum",
+          "documentation": "<p>The model type.</p>"
+        },
         "nextToken": {
           "shape": "string",
-          "documentation": "<p>The next token for the request.</p>"
+          "documentation": "<p>The next token for the subsequent request.</p>"
         },
         "maxResults": {
-          "shape": "MaxResults",
-          "documentation": "<p>The maximum results to return for the request.</p>"
+          "shape": "modelsMaxPageSize",
+          "documentation": "<p>The maximum number of objects to return for the request. </p>"
         }
       }
     },
@@ -1670,11 +2534,11 @@
       "members": {
         "nextToken": {
           "shape": "string",
-          "documentation": "<p>The next token for subsequent requests. </p>"
+          "documentation": "<p>The next page token to be used in subsequent requests.</p>"
         },
         "models": {
-          "shape": "ModelList",
-          "documentation": "<p>The returned models. </p>"
+          "shape": "modelList",
+          "documentation": "<p>The array of models.</p>"
         }
       }
     },
@@ -1769,7 +2633,7 @@
           "documentation": "<p>The detector ID.</p>"
         },
         "ruleVersion": {
-          "shape": "nonEmptyString",
+          "shape": "wholeNumberVersionString",
           "documentation": "<p>The rule version.</p>"
         },
         "nextToken": {
@@ -1825,9 +2689,6 @@
         }
       }
     },
-    "IsOpaque": {
-      "type": "boolean"
-    },
     "JsonKeyToVariableMap": {
       "type": "map",
       "key": {
@@ -1837,29 +2698,57 @@
         "shape": "string"
       }
     },
-    "LabelMapper": {
-      "type": "map",
-      "key": {
-        "shape": "string"
+    "KMSKey": {
+      "type": "structure",
+      "members": {
+        "kmsEncryptionKeyArn": {
+          "shape": "KmsEncryptionKeyArn",
+          "documentation": "<p>The encryption key ARN.</p>"
+        }
       },
-      "value": {
-        "shape": "ListOfStrings"
-      }
+      "documentation": "<p>The KMS key details.</p>"
+    },
+    "KmsEncryptionKeyArn": {
+      "type": "string",
+      "max": 80,
+      "min": 7,
+      "pattern": "^\\w{8}-\\w{4}-\\w{4}-\\w{4}-\\w{12}$|DEFAULT|arn:[a-zA-Z0-9-]+:kms:[a-zA-Z0-9-]+:\\d{12}:key:[a-zA-Z0-9-_]+|[a-zA-Z0-9-_]\\S+"
+    },
+    "Label": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "string",
+          "documentation": "<p>The label name.</p>"
+        },
+        "description": {
+          "shape": "description",
+          "documentation": "<p>The label description.</p>"
+        },
+        "lastUpdatedTime": {
+          "shape": "time",
+          "documentation": "<p>Timestamp of when the label was last updated.</p>"
+        },
+        "createdTime": {
+          "shape": "time",
+          "documentation": "<p>Timestamp of when the event type was created.</p>"
+        },
+        "arn": {
+          "shape": "fraudDetectorArn",
+          "documentation": "<p>The label ARN.</p>"
+        }
+      },
+      "documentation": "<p>The label details.</p>"
     },
     "LabelSchema": {
       "type": "structure",
       "required": [
-        "labelKey",
         "labelMapper"
       ],
       "members": {
-        "labelKey": {
-          "shape": "string",
-          "documentation": "<p>The label key.</p>"
-        },
         "labelMapper": {
-          "shape": "LabelMapper",
-          "documentation": "<p>The label mapper maps the Amazon Fraud Detector supported label to the appropriate source labels. For example, if <code>\"FRAUD\"</code> and <code>\"LEGIT\"</code> are Amazon Fraud Detector supported labels, this mapper could be: <code>{\"FRAUD\" =&gt; [\"0\"]</code>, \"LEGIT\" =&gt; [\"1\"]} or <code>{\"FRAUD\" =&gt; [\"false\"], \"LEGIT\" =&gt; [\"true\"]}</code> or <code>{\"FRAUD\" =&gt; [\"fraud\", \"abuse\"], \"LEGIT\" =&gt; [\"legit\", \"safe\"]}</code>. The value part of the mapper is a list, because you may have multiple variants for a single Amazon Fraud Detector label. </p>"
+          "shape": "labelMapper",
+          "documentation": "<p>The label mapper maps the Amazon Fraud Detector supported model classification labels (<code>FRAUD</code>, <code>LEGIT</code>) to the appropriate event type labels. For example, if \"<code>FRAUD</code>\" and \"<code>LEGIT</code>\" are Amazon Fraud Detector supported labels, this mapper could be: <code>{\"FRAUD\" =&gt; [\"0\"]</code>, <code>\"LEGIT\" =&gt; [\"1\"]}</code> or <code>{\"FRAUD\" =&gt; [\"false\"]</code>, <code>\"LEGIT\" =&gt; [\"true\"]}</code> or <code>{\"FRAUD\" =&gt; [\"fraud\", \"abuse\"]</code>, <code>\"LEGIT\" =&gt; [\"legit\", \"safe\"]}</code>. The value part of the mapper is a list, because you may have multiple label variants from your event type for a single Amazon Fraud Detector label. </p>"
         }
       },
       "documentation": "<p>The label schema.</p>"
@@ -1894,20 +2783,60 @@
         "shape": "string"
       }
     },
-    "MaxResults": {
-      "type": "integer",
-      "box": true,
-      "max": 10,
-      "min": 1
-    },
-    "MetricsMap": {
-      "type": "map",
-      "key": {
-        "shape": "string"
-      },
-      "value": {
-        "shape": "string"
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceARN"
+      ],
+      "members": {
+        "resourceARN": {
+          "shape": "fraudDetectorArn",
+          "documentation": "<p>The ARN that specifies the resource whose tags you want to list.</p>"
+        },
+        "nextToken": {
+          "shape": "string",
+          "documentation": "<p>The next token from the previous results.</p>"
+        },
+        "maxResults": {
+          "shape": "TagsMaxResults",
+          "documentation": "<p>The maximum number of objects to return for the request. </p>"
+        }
       }
+    },
+    "ListTagsForResourceResult": {
+      "type": "structure",
+      "members": {
+        "tags": {
+          "shape": "tagList",
+          "documentation": "<p>A collection of key and value pairs.</p>"
+        },
+        "nextToken": {
+          "shape": "string",
+          "documentation": "<p>The next token for subsequent requests. </p>"
+        }
+      }
+    },
+    "MetricDataPoint": {
+      "type": "structure",
+      "members": {
+        "fpr": {
+          "shape": "float",
+          "documentation": "<p>The false positive rate. This is the percentage of total legitimate events that are incorrectly predicted as fraud.</p>"
+        },
+        "precision": {
+          "shape": "float",
+          "documentation": "<p>The percentage of fraud events correctly predicted as fraudulent as compared to all events predicted as fraudulent.</p>"
+        },
+        "tpr": {
+          "shape": "float",
+          "documentation": "<p>The true positive rate. This is the percentage of total fraud the model detects. Also known as capture rate.</p>"
+        },
+        "threshold": {
+          "shape": "float",
+          "documentation": "<p>The model threshold that specifies an acceptable fraud capture rate. For example, a threshold of 500 means any model score 500 or above is labeled as fraud.</p>"
+        }
+      },
+      "documentation": "<p>Model performance metrics data points.</p>"
     },
     "Model": {
       "type": "structure",
@@ -1924,25 +2853,21 @@
           "shape": "description",
           "documentation": "<p>The model description.</p>"
         },
-        "trainingDataSource": {
-          "shape": "TrainingDataSource",
-          "documentation": "<p>The model training data source in Amazon S3.</p>"
+        "eventTypeName": {
+          "shape": "string",
+          "documentation": "<p>The name of the event type.</p>"
         },
-        "modelVariables": {
-          "shape": "ModelVariablesList",
-          "documentation": "<p>The model input variables.</p>"
-        },
-        "labelSchema": {
-          "shape": "LabelSchema",
-          "documentation": "<p>The model label schema.</p>"
+        "createdTime": {
+          "shape": "time",
+          "documentation": "<p>Timestamp of when the model was created.</p>"
         },
         "lastUpdatedTime": {
           "shape": "time",
           "documentation": "<p>Timestamp of last time the model was updated.</p>"
         },
-        "createdTime": {
-          "shape": "time",
-          "documentation": "<p>Timestamp of when the model was created.</p>"
+        "arn": {
+          "shape": "fraudDetectorArn",
+          "documentation": "<p>The ARN of the model.</p>"
         }
       },
       "documentation": "<p>The model.</p>"
@@ -1971,16 +2896,16 @@
     "ModelInputConfiguration": {
       "type": "structure",
       "required": [
-        "isOpaque"
+        "useEventVariables"
       ],
       "members": {
         "format": {
           "shape": "ModelInputDataFormat",
           "documentation": "<p> The format of the model input configuration. The format differs depending on if it is passed through to SageMaker or constructed by Amazon Fraud Detector.</p>"
         },
-        "isOpaque": {
-          "shape": "IsOpaque",
-          "documentation": "<p> For an opaque-model, the input to the model will be a ByteBuffer blob provided in the getPrediction request, and will be passed to SageMaker as-is. For non-opaque models, the input will be constructed by Amazon Fraud Detector based on the model-configuration. </p>"
+        "useEventVariables": {
+          "shape": "UseEventVariables",
+          "documentation": "<p>The event variables.</p>"
         },
         "jsonInputTemplate": {
           "shape": "string",
@@ -1991,7 +2916,7 @@
           "documentation": "<p> Template for constructing the CSV input-data sent to SageMaker. At event-evaluation, the placeholders for variable-names in the template will be replaced with the variable values before being sent to SageMaker. </p>"
         }
       },
-      "documentation": "<p>The model input configuration.</p>"
+      "documentation": "<p>The Amazon SageMaker model input configuration.</p>"
     },
     "ModelInputDataFormat": {
       "type": "string",
@@ -1999,12 +2924,6 @@
         "TEXT_CSV",
         "APPLICATION_JSON"
       ]
-    },
-    "ModelList": {
-      "type": "list",
-      "member": {
-        "shape": "Model"
-      }
     },
     "ModelOutputConfiguration": {
       "type": "structure",
@@ -2025,7 +2944,7 @@
           "documentation": "<p>A map of CSV index values in the SageMaker response to the Amazon Fraud Detector variables. </p>"
         }
       },
-      "documentation": "<p>Provides the model output configuration.</p>"
+      "documentation": "<p>Provides the Amazon Sagemaker model output configuration.</p>"
     },
     "ModelOutputDataFormat": {
       "type": "string",
@@ -2069,32 +2988,6 @@
         "ONLINE_FRAUD_INSIGHTS"
       ]
     },
-    "ModelVariable": {
-      "type": "structure",
-      "required": [
-        "name"
-      ],
-      "members": {
-        "name": {
-          "shape": "string",
-          "documentation": "<p>The model variable's name.&gt;</p>"
-        },
-        "index": {
-          "shape": "ModelVariableIndex",
-          "documentation": "<p>The model variable's index.&gt;</p>"
-        }
-      },
-      "documentation": "<p>The model variable.&gt;</p>"
-    },
-    "ModelVariableIndex": {
-      "type": "integer"
-    },
-    "ModelVariablesList": {
-      "type": "list",
-      "member": {
-        "shape": "ModelVariable"
-      }
-    },
     "ModelVersion": {
       "type": "structure",
       "required": [
@@ -2105,7 +2998,7 @@
       "members": {
         "modelId": {
           "shape": "identifier",
-          "documentation": "<p>The parent model ID.</p>"
+          "documentation": "<p>The model ID.</p>"
         },
         "modelType": {
           "shape": "ModelTypeEnum",
@@ -2113,7 +3006,11 @@
         },
         "modelVersionNumber": {
           "shape": "nonEmptyString",
-          "documentation": "<p>The model version.</p>"
+          "documentation": "<p>The model version number.</p>"
+        },
+        "arn": {
+          "shape": "fraudDetectorArn",
+          "documentation": "<p>The model version ARN.</p>"
         }
       },
       "documentation": "<p>The model version.</p>"
@@ -2130,36 +3027,28 @@
           "documentation": "<p>The model type.</p>"
         },
         "modelVersionNumber": {
-          "shape": "nonEmptyString",
-          "documentation": "<p>The model version.</p>"
-        },
-        "description": {
-          "shape": "description",
-          "documentation": "<p>The model description.</p>"
+          "shape": "floatVersionString",
+          "documentation": "<p>The model version number.</p>"
         },
         "status": {
           "shape": "string",
-          "documentation": "<p>The model status.</p>"
+          "documentation": "<p>The status of the model version.</p>"
         },
         "trainingDataSource": {
-          "shape": "TrainingDataSource",
-          "documentation": "<p>The model training data source.</p>"
+          "shape": "TrainingDataSourceEnum",
+          "documentation": "<p>The model version training data source.</p>"
         },
-        "modelVariables": {
-          "shape": "ModelVariablesList",
-          "documentation": "<p>The model variables.</p>"
+        "trainingDataSchema": {
+          "shape": "TrainingDataSchema",
+          "documentation": "<p>The training data schema.</p>"
         },
-        "labelSchema": {
-          "shape": "LabelSchema",
-          "documentation": "<p>The model label schema.</p>"
+        "externalEventsDetail": {
+          "shape": "ExternalEventsDetail",
+          "documentation": "<p>The event details.</p>"
         },
-        "validationMetrics": {
-          "shape": "MetricsMap",
-          "documentation": "<p>The model validation metrics.</p>"
-        },
-        "trainingMetrics": {
-          "shape": "MetricsMap",
-          "documentation": "<p>The model training metrics.</p>"
+        "trainingResult": {
+          "shape": "TrainingResult",
+          "documentation": "<p>The training results.</p>"
         },
         "lastUpdatedTime": {
           "shape": "time",
@@ -2168,15 +3057,13 @@
         "createdTime": {
           "shape": "time",
           "documentation": "<p>The timestamp when the model was created.</p>"
+        },
+        "arn": {
+          "shape": "fraudDetectorArn",
+          "documentation": "<p>The model version ARN.</p>"
         }
       },
-      "documentation": "<p>Provides the model version details. </p>"
-    },
-    "ModelVersionDetailList": {
-      "type": "list",
-      "member": {
-        "shape": "ModelVersionDetail"
-      }
+      "documentation": "<p>The details of the model version.</p>"
     },
     "ModelVersionStatus": {
       "type": "string",
@@ -2188,6 +3075,8 @@
         "ACTIVE",
         "INACTIVATE_IN_PROGRESS",
         "INACTIVE",
+        "DELETE_REQUESTED",
+        "DELETE_IN_PROGRESS",
         "ERROR"
       ]
     },
@@ -2224,6 +3113,10 @@
         "createdTime": {
           "shape": "time",
           "documentation": "<p>The timestamp when the outcome was created.</p>"
+        },
+        "arn": {
+          "shape": "fraudDetectorArn",
+          "documentation": "<p>The outcome ARN.</p>"
         }
       },
       "documentation": "<p>The outcome.</p>"
@@ -2243,7 +3136,8 @@
     "PutDetectorRequest": {
       "type": "structure",
       "required": [
-        "detectorId"
+        "detectorId",
+        "eventTypeName"
       ],
       "members": {
         "detectorId": {
@@ -2253,10 +3147,80 @@
         "description": {
           "shape": "description",
           "documentation": "<p>The description of the detector.</p>"
+        },
+        "eventTypeName": {
+          "shape": "identifier",
+          "documentation": "<p>The name of the event type.</p>"
+        },
+        "tags": {
+          "shape": "tagList",
+          "documentation": "<p>A collection of key and value pairs.</p>"
         }
       }
     },
     "PutDetectorResult": {
+      "type": "structure",
+      "members": {}
+    },
+    "PutEntityTypeRequest": {
+      "type": "structure",
+      "required": [
+        "name"
+      ],
+      "members": {
+        "name": {
+          "shape": "identifier",
+          "documentation": "<p>The name of the entity type.</p>"
+        },
+        "description": {
+          "shape": "description",
+          "documentation": "<p>The description.</p>"
+        },
+        "tags": {
+          "shape": "tagList",
+          "documentation": "<p>A collection of key and value pairs.</p>"
+        }
+      }
+    },
+    "PutEntityTypeResult": {
+      "type": "structure",
+      "members": {}
+    },
+    "PutEventTypeRequest": {
+      "type": "structure",
+      "required": [
+        "name",
+        "eventVariables",
+        "entityTypes"
+      ],
+      "members": {
+        "name": {
+          "shape": "identifier",
+          "documentation": "<p>The name.</p>"
+        },
+        "description": {
+          "shape": "description",
+          "documentation": "<p>The description of the event type.</p>"
+        },
+        "eventVariables": {
+          "shape": "NonEmptyListOfStrings",
+          "documentation": "<p>The event type variables.</p>"
+        },
+        "labels": {
+          "shape": "ListOfStrings",
+          "documentation": "<p>The event type labels.</p>"
+        },
+        "entityTypes": {
+          "shape": "NonEmptyListOfStrings",
+          "documentation": "<p>The entity type for the event type. Example entity types: customer, merchant, account.</p>"
+        },
+        "tags": {
+          "shape": "tagList",
+          "documentation": "<p>A collection of key and value pairs.</p>"
+        }
+      }
+    },
+    "PutEventTypeResult": {
       "type": "structure",
       "members": {}
     },
@@ -2272,8 +3236,12 @@
       ],
       "members": {
         "modelEndpoint": {
-          "shape": "string",
+          "shape": "sageMakerEndpointIdentifier",
           "documentation": "<p>The model endpoints name.</p>"
+        },
+        "eventTypeName": {
+          "shape": "identifier",
+          "documentation": "<p>The event type name.</p>"
         },
         "modelSource": {
           "shape": "ModelSource",
@@ -2294,6 +3262,10 @@
         "modelEndpointStatus": {
           "shape": "ModelEndpointStatus",
           "documentation": "<p>The model endpoint’s status in Amazon Fraud Detector.</p>"
+        },
+        "tags": {
+          "shape": "tagList",
+          "documentation": "<p>A collection of key and value pairs.</p>"
         }
       }
     },
@@ -2301,43 +3273,43 @@
       "type": "structure",
       "members": {}
     },
-    "PutModelRequest": {
+    "PutKMSEncryptionKeyRequest": {
       "type": "structure",
       "required": [
-        "modelId",
-        "modelType",
-        "trainingDataSource",
-        "modelVariables",
-        "labelSchema"
+        "kmsEncryptionKeyArn"
       ],
       "members": {
-        "modelId": {
-          "shape": "identifier",
-          "documentation": "<p>The model ID.</p>"
-        },
-        "modelType": {
-          "shape": "ModelTypeEnum",
-          "documentation": "<p>The model type. </p>"
-        },
-        "description": {
-          "shape": "description",
-          "documentation": "<p>The model description. </p>"
-        },
-        "trainingDataSource": {
-          "shape": "TrainingDataSource",
-          "documentation": "<p>The training data source location in Amazon S3. </p>"
-        },
-        "modelVariables": {
-          "shape": "ModelVariablesList",
-          "documentation": "<p>The model input variables.</p>"
-        },
-        "labelSchema": {
-          "shape": "LabelSchema",
-          "documentation": "<p>The label schema.</p>"
+        "kmsEncryptionKeyArn": {
+          "shape": "KmsEncryptionKeyArn",
+          "documentation": "<p>The KMS encryption key ARN.</p>"
         }
       }
     },
-    "PutModelResult": {
+    "PutKMSEncryptionKeyResult": {
+      "type": "structure",
+      "members": {}
+    },
+    "PutLabelRequest": {
+      "type": "structure",
+      "required": [
+        "name"
+      ],
+      "members": {
+        "name": {
+          "shape": "identifier",
+          "documentation": "<p>The label name.</p>"
+        },
+        "description": {
+          "shape": "description",
+          "documentation": "<p>The label description.</p>"
+        },
+        "tags": {
+          "shape": "tagList",
+          "documentation": "<p/>"
+        }
+      }
+    },
+    "PutLabelResult": {
       "type": "structure",
       "members": {}
     },
@@ -2354,6 +3326,10 @@
         "description": {
           "shape": "description",
           "documentation": "<p>The outcome description.</p>"
+        },
+        "tags": {
+          "shape": "tagList",
+          "documentation": "<p>A collection of key and value pairs.</p>"
         }
       }
     },
@@ -2396,7 +3372,7 @@
           "documentation": "<p>The rule ID.</p>"
         },
         "ruleVersion": {
-          "shape": "nonEmptyString",
+          "shape": "wholeNumberVersionString",
           "documentation": "<p>The rule version.</p>"
         }
       },
@@ -2418,7 +3394,7 @@
           "documentation": "<p>The detector for which the rule is associated.</p>"
         },
         "ruleVersion": {
-          "shape": "nonEmptyString",
+          "shape": "wholeNumberVersionString",
           "documentation": "<p>The rule version.</p>"
         },
         "expression": {
@@ -2440,6 +3416,10 @@
         "createdTime": {
           "shape": "time",
           "documentation": "<p>The timestamp of when the rule was created.</p>"
+        },
+        "arn": {
+          "shape": "fraudDetectorArn",
+          "documentation": "<p>The rule ARN.</p>"
         }
       },
       "documentation": "<p>The details of the rule.</p>"
@@ -2483,23 +3463,122 @@
       "max": 100,
       "min": 50
     },
-    "TrainingDataSource": {
+    "Tag": {
       "type": "structure",
       "required": [
-        "dataLocation",
-        "dataAccessRoleArn"
+        "key",
+        "value"
       ],
       "members": {
-        "dataLocation": {
-          "shape": "s3BucketLocation",
-          "documentation": "<p>The data location of the training data source.</p>"
+        "key": {
+          "shape": "tagKey",
+          "documentation": "<p>A tag key.</p>"
         },
-        "dataAccessRoleArn": {
-          "shape": "iamRoleArn",
-          "documentation": "<p>The data access role ARN for the training data source.</p>"
+        "value": {
+          "shape": "tagValue",
+          "documentation": "<p>A value assigned to a tag key.</p>"
         }
       },
-      "documentation": "<p>The training data source.</p>"
+      "documentation": "<p>A key and value pair. </p>"
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceARN",
+        "tags"
+      ],
+      "members": {
+        "resourceARN": {
+          "shape": "fraudDetectorArn",
+          "documentation": "<p>The resource ARN.</p>"
+        },
+        "tags": {
+          "shape": "tagList",
+          "documentation": "<p>The tags to assign to the resource.</p>"
+        }
+      }
+    },
+    "TagResourceResult": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagsMaxResults": {
+      "type": "integer",
+      "box": true,
+      "max": 50,
+      "min": 50
+    },
+    "TrainingDataSchema": {
+      "type": "structure",
+      "required": [
+        "modelVariables",
+        "labelSchema"
+      ],
+      "members": {
+        "modelVariables": {
+          "shape": "ListOfStrings",
+          "documentation": "<p>The training data schema variables.</p>"
+        },
+        "labelSchema": {
+          "shape": "LabelSchema"
+        }
+      },
+      "documentation": "<p>The training data schema.</p>"
+    },
+    "TrainingDataSourceEnum": {
+      "type": "string",
+      "enum": [
+        "EXTERNAL_EVENTS"
+      ]
+    },
+    "TrainingMetrics": {
+      "type": "structure",
+      "members": {
+        "auc": {
+          "shape": "float",
+          "documentation": "<p>The area under the curve. This summarizes true positive rate (TPR) and false positive rate (FPR) across all possible model score thresholds. A model with no predictive power has an AUC of 0.5, whereas a perfect model has a score of 1.0.</p>"
+        },
+        "metricDataPoints": {
+          "shape": "metricDataPointsList",
+          "documentation": "<p>The data points details.</p>"
+        }
+      },
+      "documentation": "<p>The training metric details.</p>"
+    },
+    "TrainingResult": {
+      "type": "structure",
+      "members": {
+        "dataValidationMetrics": {
+          "shape": "DataValidationMetrics",
+          "documentation": "<p>The validation metrics.</p>"
+        },
+        "trainingMetrics": {
+          "shape": "TrainingMetrics",
+          "documentation": "<p>The training metric details.</p>"
+        }
+      },
+      "documentation": "<p>The training result details.</p>"
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceARN",
+        "tagKeys"
+      ],
+      "members": {
+        "resourceARN": {
+          "shape": "fraudDetectorArn",
+          "documentation": "<p>The ARN of the resource from which to remove the tag.</p>"
+        },
+        "tagKeys": {
+          "shape": "tagKeyList",
+          "documentation": "<p>The resource ARN.</p>"
+        }
+      }
+    },
+    "UntagResourceResult": {
+      "type": "structure",
+      "members": {}
     },
     "UpdateDetectorVersionMetadataRequest": {
       "type": "structure",
@@ -2514,7 +3593,7 @@
           "documentation": "<p>The detector ID.</p>"
         },
         "detectorVersionId": {
-          "shape": "nonEmptyString",
+          "shape": "wholeNumberVersionString",
           "documentation": "<p>The detector version ID. </p>"
         },
         "description": {
@@ -2541,7 +3620,7 @@
           "documentation": "<p>The parent detector ID for the detector version you want to update.</p>"
         },
         "detectorVersionId": {
-          "shape": "nonEmptyString",
+          "shape": "wholeNumberVersionString",
           "documentation": "<p>The detector version ID. </p>"
         },
         "externalModelEndpoints": {
@@ -2583,7 +3662,7 @@
           "documentation": "<p>The detector ID. </p>"
         },
         "detectorVersionId": {
-          "shape": "nonEmptyString",
+          "shape": "wholeNumberVersionString",
           "documentation": "<p>The detector version ID. </p>"
         },
         "status": {
@@ -2596,14 +3675,11 @@
       "type": "structure",
       "members": {}
     },
-    "UpdateModelVersionRequest": {
+    "UpdateModelRequest": {
       "type": "structure",
       "required": [
         "modelId",
-        "modelType",
-        "modelVersionNumber",
-        "description",
-        "status"
+        "modelType"
       ],
       "members": {
         "modelId": {
@@ -2614,21 +3690,95 @@
           "shape": "ModelTypeEnum",
           "documentation": "<p>The model type.</p>"
         },
-        "modelVersionNumber": {
-          "shape": "nonEmptyString",
-          "documentation": "<p>The model version.</p>"
-        },
         "description": {
           "shape": "description",
-          "documentation": "<p>The model description.</p>"
+          "documentation": "<p>The new model description.</p>"
+        }
+      }
+    },
+    "UpdateModelResult": {
+      "type": "structure",
+      "members": {}
+    },
+    "UpdateModelVersionRequest": {
+      "type": "structure",
+      "required": [
+        "modelId",
+        "modelType",
+        "majorVersionNumber"
+      ],
+      "members": {
+        "modelId": {
+          "shape": "identifier",
+          "documentation": "<p>The model ID.</p>"
         },
-        "status": {
-          "shape": "ModelVersionStatus",
-          "documentation": "<p>The new model status.</p>"
+        "modelType": {
+          "shape": "ModelTypeEnum",
+          "documentation": "<p>The model type.</p>"
+        },
+        "majorVersionNumber": {
+          "shape": "wholeNumberVersionString",
+          "documentation": "<p>The major version number.</p>"
+        },
+        "externalEventsDetail": {
+          "shape": "ExternalEventsDetail",
+          "documentation": "<p>The event details.</p>"
+        },
+        "tags": {
+          "shape": "tagList",
+          "documentation": "<p>A collection of key and value pairs.</p>"
         }
       }
     },
     "UpdateModelVersionResult": {
+      "type": "structure",
+      "members": {
+        "modelId": {
+          "shape": "identifier",
+          "documentation": "<p>The model ID.</p>"
+        },
+        "modelType": {
+          "shape": "ModelTypeEnum",
+          "documentation": "<p>The model type.</p>"
+        },
+        "modelVersionNumber": {
+          "shape": "floatVersionString",
+          "documentation": "<p>The model version number of the model version updated.</p>"
+        },
+        "status": {
+          "shape": "string",
+          "documentation": "<p>The status of the updated model version.</p>"
+        }
+      }
+    },
+    "UpdateModelVersionStatusRequest": {
+      "type": "structure",
+      "required": [
+        "modelId",
+        "modelType",
+        "modelVersionNumber",
+        "status"
+      ],
+      "members": {
+        "modelId": {
+          "shape": "identifier",
+          "documentation": "<p>The model ID of the model version to update.</p>"
+        },
+        "modelType": {
+          "shape": "ModelTypeEnum",
+          "documentation": "<p>The model type.</p>"
+        },
+        "modelVersionNumber": {
+          "shape": "floatVersionString",
+          "documentation": "<p>The model version number.</p>"
+        },
+        "status": {
+          "shape": "ModelVersionStatus",
+          "documentation": "<p>The model version status.</p>"
+        }
+      }
+    },
+    "UpdateModelVersionStatusResult": {
       "type": "structure",
       "members": {}
     },
@@ -2681,6 +3831,10 @@
         "outcomes": {
           "shape": "NonEmptyListOfStrings",
           "documentation": "<p>The outcomes.</p>"
+        },
+        "tags": {
+          "shape": "tagList",
+          "documentation": "<p>The tags to assign to the rule version.</p>"
         }
       }
     },
@@ -2721,6 +3875,9 @@
       "type": "structure",
       "members": {}
     },
+    "UseEventVariables": {
+      "type": "boolean"
+    },
     "Variable": {
       "type": "structure",
       "members": {
@@ -2746,7 +3903,7 @@
         },
         "variableType": {
           "shape": "string",
-          "documentation": "<p>The variable type of the variable.</p>"
+          "documentation": "<p>The variable type of the variable.</p> <p>Valid Values: <code>AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT | SHIPPING_ZIP | USERAGENT</code> </p>"
         },
         "lastUpdatedTime": {
           "shape": "time",
@@ -2755,6 +3912,10 @@
         "createdTime": {
           "shape": "time",
           "documentation": "<p>The time when the variable was created.</p>"
+        },
+        "arn": {
+          "shape": "fraudDetectorArn",
+          "documentation": "<p>The ARN of the variable.</p>"
         }
       },
       "documentation": "<p>The variable.</p>"
@@ -2764,30 +3925,30 @@
       "members": {
         "name": {
           "shape": "string",
-          "documentation": "<p>The name of the variable entry.</p>"
+          "documentation": "<p>The name of the variable.</p>"
         },
         "dataType": {
           "shape": "string",
-          "documentation": "<p>The data type of the variable entry.</p>"
+          "documentation": "<p>The data type of the variable.</p>"
         },
         "dataSource": {
           "shape": "string",
-          "documentation": "<p>The data source of the variable entry.</p>"
+          "documentation": "<p>The data source of the variable.</p>"
         },
         "defaultValue": {
           "shape": "string",
-          "documentation": "<p>The default value of the variable entry.</p>"
+          "documentation": "<p>The default value of the variable.</p>"
         },
         "description": {
           "shape": "string",
-          "documentation": "<p>The description of the variable entry.</p>"
+          "documentation": "<p>The description of the variable.</p>"
         },
         "variableType": {
           "shape": "string",
-          "documentation": "<p>The type of the variable entry.</p>"
+          "documentation": "<p>The type of the variable.</p> <p>Valid Values: <code>AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT | SHIPPING_ZIP | USERAGENT</code> </p>"
         }
       },
-      "documentation": "<p>The variable entry in a list.</p>"
+      "documentation": "<p>A variable in the list of variables for the batch create variable request.</p>"
     },
     "VariableEntryList": {
       "type": "list",
@@ -2833,14 +3994,60 @@
       "max": 128,
       "min": 1
     },
+    "entityTypeList": {
+      "type": "list",
+      "member": {
+        "shape": "EntityType"
+      }
+    },
+    "entityTypesMaxResults": {
+      "type": "integer",
+      "box": true,
+      "max": 10,
+      "min": 5
+    },
+    "eventTypeList": {
+      "type": "list",
+      "member": {
+        "shape": "EventType"
+      }
+    },
+    "eventTypesMaxResults": {
+      "type": "integer",
+      "box": true,
+      "max": 10,
+      "min": 5
+    },
+    "fieldValidationMessageList": {
+      "type": "list",
+      "member": {
+        "shape": "FieldValidationMessage"
+      }
+    },
+    "fileValidationMessageList": {
+      "type": "list",
+      "member": {
+        "shape": "FileValidationMessage"
+      }
+    },
     "float": {
       "type": "float"
+    },
+    "floatVersionString": {
+      "type": "string",
+      "pattern": "^[1-9][0-9]{0,3}\\.[0-9]{1,2}$"
+    },
+    "fraudDetectorArn": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "^arn\\:aws[a-z-]{0,15}\\:frauddetector\\:[a-z0-9-]{3,20}\\:[0-9]{12}\\:[^\\s]{2,128}$"
     },
     "iamRoleArn": {
       "type": "string",
       "max": 256,
       "min": 1,
-      "pattern": "^arn\\:aws\\:iam\\:\\:[0-9]{12}\\:role\\/[^\\s]{2,64}$"
+      "pattern": "^arn\\:aws[a-z-]{0,15}\\:iam\\:\\:[0-9]{12}\\:role\\/[^\\s]{2,64}$"
     },
     "identifier": {
       "type": "string",
@@ -2851,6 +4058,57 @@
     "integer": {
       "type": "integer"
     },
+    "labelList": {
+      "type": "list",
+      "member": {
+        "shape": "Label"
+      }
+    },
+    "labelMapper": {
+      "type": "map",
+      "key": {
+        "shape": "string"
+      },
+      "value": {
+        "shape": "ListOfStrings"
+      }
+    },
+    "labelsMaxResults": {
+      "type": "integer",
+      "box": true,
+      "max": 50,
+      "min": 10
+    },
+    "listOfEntities": {
+      "type": "list",
+      "member": {
+        "shape": "Entity"
+      }
+    },
+    "metricDataPointsList": {
+      "type": "list",
+      "member": {
+        "shape": "MetricDataPoint"
+      }
+    },
+    "modelList": {
+      "type": "list",
+      "member": {
+        "shape": "Model"
+      }
+    },
+    "modelVersionDetailList": {
+      "type": "list",
+      "member": {
+        "shape": "ModelVersionDetail"
+      }
+    },
+    "modelsMaxPageSize": {
+      "type": "integer",
+      "box": true,
+      "max": 10,
+      "min": 1
+    },
     "nonEmptyString": {
       "type": "string",
       "min": 1
@@ -2858,7 +4116,8 @@
     "ruleExpression": {
       "type": "string",
       "max": 4096,
-      "min": 1
+      "min": 1,
+      "sensitive": true
     },
     "s3BucketLocation": {
       "type": "string",
@@ -2866,11 +4125,59 @@
       "min": 1,
       "pattern": "^s3:\\/\\/(.+)$"
     },
+    "sageMakerEndpointIdentifier": {
+      "type": "string",
+      "max": 63,
+      "min": 1,
+      "pattern": "^[0-9A-Za-z_-]+$"
+    },
     "string": {
       "type": "string"
     },
+    "tagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    },
+    "tagKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "tagKey"
+      },
+      "max": 50,
+      "min": 0
+    },
+    "tagList": {
+      "type": "list",
+      "member": {
+        "shape": "Tag"
+      },
+      "max": 200,
+      "min": 0
+    },
+    "tagValue": {
+      "type": "string",
+      "max": 256,
+      "min": 0
+    },
     "time": {
       "type": "string"
+    },
+    "variableName": {
+      "type": "string",
+      "max": 64,
+      "min": 1
+    },
+    "variableValue": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "sensitive": true
+    },
+    "wholeNumberVersionString": {
+      "type": "string",
+      "pattern": "^([1-9][0-9]*)$"
     }
   },
   "documentation": "<p>This is the Amazon Fraud Detector API Reference. This guide is for developers who need detailed information about Amazon Fraud Detector API actions, data types, and errors. For more information about Amazon Fraud Detector features, see the <a href=\"https://docs.aws.amazon.com/frauddetector/latest/ug/\">Amazon Fraud Detector User Guide</a>.</p>"

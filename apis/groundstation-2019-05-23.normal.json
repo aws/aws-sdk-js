@@ -681,6 +681,16 @@
         "RADIAN"
       ]
     },
+    "AntennaDemodDecodeDetails": {
+      "type": "structure",
+      "members": {
+        "outputNode": {
+          "shape": "String",
+          "documentation": "<p>Name of an antenna demod decode output node used in a contact.</p>"
+        }
+      },
+      "documentation": "<p>Details about an antenna demod decode <code>Config</code> used in a contact.</p>"
+    },
     "AntennaDownlinkConfig": {
       "type": "structure",
       "required": [
@@ -731,6 +741,10 @@
         "targetEirp": {
           "shape": "Eirp",
           "documentation": "<p>EIRP of the target.</p>"
+        },
+        "transmitDisabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether or not uplink transmit is disabled.</p>"
         }
       },
       "documentation": "<p>Information about the uplink <code>Config</code> of an antenna.</p>"
@@ -775,6 +789,19 @@
         "tracking",
         "uplink-echo"
       ]
+    },
+    "ConfigDetails": {
+      "type": "structure",
+      "members": {
+        "antennaDemodDecodeDetails": {
+          "shape": "AntennaDemodDecodeDetails",
+          "documentation": "<p>Details for antenna demod decode <code>Config</code> in a contact.</p>"
+        },
+        "endpointDetails": {
+          "shape": "EndpointDetails"
+        }
+      },
+      "documentation": "<p>Details for certain <code>Config</code> object types in a contact.</p>"
     },
     "ConfigIdResponse": {
       "type": "structure",
@@ -1030,6 +1057,18 @@
         "REQUIRED"
       ]
     },
+    "DataflowDetail": {
+      "type": "structure",
+      "members": {
+        "destination": {
+          "shape": "Destination"
+        },
+        "source": {
+          "shape": "Source"
+        }
+      },
+      "documentation": "<p>Information about a dataflow edge used in a contact.</p>"
+    },
     "DataflowEdge": {
       "type": "list",
       "member": {
@@ -1050,6 +1089,10 @@
         "address": {
           "shape": "SocketAddress",
           "documentation": "<p>Socket address of a dataflow endpoint.</p>"
+        },
+        "mtu": {
+          "shape": "DataflowEndpointmtuInteger",
+          "documentation": "<p>Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.</p>"
         },
         "name": {
           "shape": "SafeName",
@@ -1111,6 +1154,18 @@
         }
       },
       "documentation": "<p>Item in a list of <code>DataflowEndpoint</code> groups.</p>"
+    },
+    "DataflowEndpointmtuInteger": {
+      "type": "integer",
+      "box": true,
+      "max": 1500,
+      "min": 1400
+    },
+    "DataflowList": {
+      "type": "list",
+      "member": {
+        "shape": "DataflowDetail"
+      }
     },
     "DecodeConfig": {
       "type": "structure",
@@ -1216,6 +1271,10 @@
           "shape": "ContactStatus",
           "documentation": "<p>Status of a contact.</p>"
         },
+        "dataflowList": {
+          "shape": "DataflowList",
+          "documentation": "<p>List describing source and destination details for each dataflow edge.</p>"
+        },
         "endTime": {
           "shape": "Timestamp",
           "documentation": "<p>End time of a contact.</p>"
@@ -1263,12 +1322,35 @@
       },
       "documentation": "<p/>"
     },
+    "Destination": {
+      "type": "structure",
+      "members": {
+        "configDetails": {
+          "shape": "ConfigDetails",
+          "documentation": "<p>Additional details for a <code>Config</code>, if type is dataflow endpoint or antenna demod decode.</p>"
+        },
+        "configId": {
+          "shape": "String",
+          "documentation": "<p>UUID of a <code>Config</code>.</p>"
+        },
+        "configType": {
+          "shape": "ConfigCapabilityType",
+          "documentation": "<p>Type of a <code>Config</code>.</p>"
+        },
+        "dataflowDestinationRegion": {
+          "shape": "String",
+          "documentation": "<p>Region of a dataflow destination.</p>"
+        }
+      },
+      "documentation": "<p>Dataflow details for the destination side.</p>"
+    },
     "Double": {
       "type": "double",
       "box": true
     },
     "DurationInSeconds": {
       "type": "integer",
+      "box": true,
       "max": 21600,
       "min": 1
     },
@@ -1285,7 +1367,7 @@
         },
         "value": {
           "shape": "Double",
-          "documentation": "<p>Value of an EIRP.</p>"
+          "documentation": "<p>Value of an EIRP. Valid values are between 20.0 to 50.0 dBW.</p>"
         }
       },
       "documentation": "<p>Object that represents EIRP.</p>"
@@ -1357,7 +1439,7 @@
         },
         "value": {
           "shape": "Double",
-          "documentation": "<p>Frequency value.</p>"
+          "documentation": "<p>Frequency value. Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.</p>"
         }
       },
       "documentation": "<p>Object that describes the frequency.</p>"
@@ -1375,10 +1457,10 @@
         },
         "value": {
           "shape": "Double",
-          "documentation": "<p>Frequency bandwidth value.</p>"
+          "documentation": "<p>Frequency bandwidth value. AWS Ground Station currently has the following bandwidth limitations:</p> <ul> <li> <p>For <code>AntennaDownlinkDemodDecodeconfig</code>, valid values are between 125 kHz to 650 MHz.</p> </li> <li> <p>For <code>AntennaDownlinkconfig</code>, valid values are between 10 kHz to 54 MHz.</p> </li> <li> <p>For <code>AntennaUplinkConfig</code>, valid values are between 10 kHz to 54 MHz.</p> </li> </ul>"
         }
       },
-      "documentation": "<p>Object that describes the frequency bandwidth.</p>"
+      "documentation": "<p>Object that describes the frequency bandwidth. </p>"
     },
     "FrequencyUnits": {
       "type": "string",
@@ -2083,6 +2165,28 @@
       },
       "documentation": "<p>Information about the socket address.</p>"
     },
+    "Source": {
+      "type": "structure",
+      "members": {
+        "configDetails": {
+          "shape": "ConfigDetails",
+          "documentation": "<p>Additional details for a <code>Config</code>, if type is dataflow endpoint or antenna demod decode.</p>"
+        },
+        "configId": {
+          "shape": "String",
+          "documentation": "<p>UUID of a <code>Config</code>.</p>"
+        },
+        "configType": {
+          "shape": "ConfigCapabilityType",
+          "documentation": "<p>Type of a <code>Config</code>.</p>"
+        },
+        "dataflowSourceRegion": {
+          "shape": "String",
+          "documentation": "<p>Region of a dataflow source.</p>"
+        }
+      },
+      "documentation": "<p>Dataflow details for the source side.</p>"
+    },
     "SpectrumConfig": {
       "type": "structure",
       "required": [
@@ -2092,15 +2196,15 @@
       "members": {
         "bandwidth": {
           "shape": "FrequencyBandwidth",
-          "documentation": "<p>Bandwidth of a spectral <code>Config</code>.</p>"
+          "documentation": "<p>Bandwidth of a spectral <code>Config</code>. AWS Ground Station currently has the following bandwidth limitations:</p> <ul> <li> <p>For <code>AntennaDownlinkDemodDecodeconfig</code>, valid values are between 125 kHz to 650 MHz.</p> </li> <li> <p>For <code>AntennaDownlinkconfig</code> valid values are between 10 kHz to 54 MHz.</p> </li> <li> <p>For <code>AntennaUplinkConfig</code>, valid values are between 10 kHz to 54 MHz.</p> </li> </ul>"
         },
         "centerFrequency": {
           "shape": "Frequency",
-          "documentation": "<p>Center frequency of a spectral <code>Config</code>.</p>"
+          "documentation": "<p>Center frequency of a spectral <code>Config</code>. Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.</p>"
         },
         "polarization": {
           "shape": "Polarization",
-          "documentation": "<p>Polarization of a spectral <code>Config</code>.</p>"
+          "documentation": "<p>Polarization of a spectral <code>Config</code>. Capturing both <code>\"RIGHT_HAND\"</code> and <code>\"LEFT_HAND\"</code> polarization requires two separate configs.</p>"
         }
       },
       "documentation": "<p>Object that describes a spectral <code>Config</code>.</p>"
@@ -2300,11 +2404,11 @@
       "members": {
         "centerFrequency": {
           "shape": "Frequency",
-          "documentation": "<p>Center frequency of an uplink spectral <code>Config</code>.</p>"
+          "documentation": "<p>Center frequency of an uplink spectral <code>Config</code>. Valid values are between 2025 to 2120 MHz.</p>"
         },
         "polarization": {
           "shape": "Polarization",
-          "documentation": "<p>Polarization of an uplink spectral <code>Config</code>.</p>"
+          "documentation": "<p>Polarization of an uplink spectral <code>Config</code>. Capturing both <code>\"RIGHT_HAND\"</code> and <code>\"LEFT_HAND\"</code> polarization requires two separate configs.</p>"
         }
       },
       "documentation": "<p>Information about the uplink spectral <code>Config</code>.</p>"

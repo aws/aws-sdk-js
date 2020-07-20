@@ -20,6 +20,14 @@ declare class FMS extends Service {
    */
   associateAdminAccount(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Permanently deletes an AWS Firewall Manager applications list.
+   */
+  deleteAppsList(params: FMS.Types.DeleteAppsListRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Permanently deletes an AWS Firewall Manager applications list.
+   */
+  deleteAppsList(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes an AWS Firewall Manager association with the IAM role and the Amazon Simple Notification Service (SNS) topic that is used to record AWS Firewall Manager SNS logs.
    */
   deleteNotificationChannel(params: FMS.Types.DeleteNotificationChannelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -36,6 +44,14 @@ declare class FMS extends Service {
    */
   deletePolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Permanently deletes an AWS Firewall Manager protocols list.
+   */
+  deleteProtocolsList(params: FMS.Types.DeleteProtocolsListRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Permanently deletes an AWS Firewall Manager protocols list.
+   */
+  deleteProtocolsList(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Disassociates the account that has been set as the AWS Firewall Manager administrator account. To set a different account as the administrator account, you must submit an AssociateAdminAccount request.
    */
   disassociateAdminAccount(params: FMS.Types.DisassociateAdminAccountRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -51,6 +67,14 @@ declare class FMS extends Service {
    * Returns the AWS Organizations master account that is associated with AWS Firewall Manager as the AWS Firewall Manager administrator.
    */
   getAdminAccount(callback?: (err: AWSError, data: FMS.Types.GetAdminAccountResponse) => void): Request<FMS.Types.GetAdminAccountResponse, AWSError>;
+  /**
+   * Returns information about the specified AWS Firewall Manager applications list.
+   */
+  getAppsList(params: FMS.Types.GetAppsListRequest, callback?: (err: AWSError, data: FMS.Types.GetAppsListResponse) => void): Request<FMS.Types.GetAppsListResponse, AWSError>;
+  /**
+   * Returns information about the specified AWS Firewall Manager applications list.
+   */
+  getAppsList(callback?: (err: AWSError, data: FMS.Types.GetAppsListResponse) => void): Request<FMS.Types.GetAppsListResponse, AWSError>;
   /**
    * Returns detailed compliance information about the specified member account. Details include resources that are in and out of compliance with the specified policy. Resources are considered noncompliant for AWS WAF and Shield Advanced policies if the specified policy has not been applied to them. Resources are considered noncompliant for security group policies if they are in scope of the policy, they violate one or more of the policy rules, and remediation is disabled or not possible. 
    */
@@ -84,11 +108,35 @@ declare class FMS extends Service {
    */
   getProtectionStatus(callback?: (err: AWSError, data: FMS.Types.GetProtectionStatusResponse) => void): Request<FMS.Types.GetProtectionStatusResponse, AWSError>;
   /**
-   * Returns an array of PolicyComplianceStatus objects in the response. Use PolicyComplianceStatus to get a summary of which member accounts are protected by the specified policy. 
+   * Returns information about the specified AWS Firewall Manager protocols list.
+   */
+  getProtocolsList(params: FMS.Types.GetProtocolsListRequest, callback?: (err: AWSError, data: FMS.Types.GetProtocolsListResponse) => void): Request<FMS.Types.GetProtocolsListResponse, AWSError>;
+  /**
+   * Returns information about the specified AWS Firewall Manager protocols list.
+   */
+  getProtocolsList(callback?: (err: AWSError, data: FMS.Types.GetProtocolsListResponse) => void): Request<FMS.Types.GetProtocolsListResponse, AWSError>;
+  /**
+   * Retrieves violations for a resource based on the specified AWS Firewall Manager policy and AWS account.
+   */
+  getViolationDetails(params: FMS.Types.GetViolationDetailsRequest, callback?: (err: AWSError, data: FMS.Types.GetViolationDetailsResponse) => void): Request<FMS.Types.GetViolationDetailsResponse, AWSError>;
+  /**
+   * Retrieves violations for a resource based on the specified AWS Firewall Manager policy and AWS account.
+   */
+  getViolationDetails(callback?: (err: AWSError, data: FMS.Types.GetViolationDetailsResponse) => void): Request<FMS.Types.GetViolationDetailsResponse, AWSError>;
+  /**
+   * Returns an array of AppsListDataSummary objects.
+   */
+  listAppsLists(params: FMS.Types.ListAppsListsRequest, callback?: (err: AWSError, data: FMS.Types.ListAppsListsResponse) => void): Request<FMS.Types.ListAppsListsResponse, AWSError>;
+  /**
+   * Returns an array of AppsListDataSummary objects.
+   */
+  listAppsLists(callback?: (err: AWSError, data: FMS.Types.ListAppsListsResponse) => void): Request<FMS.Types.ListAppsListsResponse, AWSError>;
+  /**
+   * Returns an array of PolicyComplianceStatus objects. Use PolicyComplianceStatus to get a summary of which member accounts are protected by the specified policy. 
    */
   listComplianceStatus(params: FMS.Types.ListComplianceStatusRequest, callback?: (err: AWSError, data: FMS.Types.ListComplianceStatusResponse) => void): Request<FMS.Types.ListComplianceStatusResponse, AWSError>;
   /**
-   * Returns an array of PolicyComplianceStatus objects in the response. Use PolicyComplianceStatus to get a summary of which member accounts are protected by the specified policy. 
+   * Returns an array of PolicyComplianceStatus objects. Use PolicyComplianceStatus to get a summary of which member accounts are protected by the specified policy. 
    */
   listComplianceStatus(callback?: (err: AWSError, data: FMS.Types.ListComplianceStatusResponse) => void): Request<FMS.Types.ListComplianceStatusResponse, AWSError>;
   /**
@@ -100,13 +148,21 @@ declare class FMS extends Service {
    */
   listMemberAccounts(callback?: (err: AWSError, data: FMS.Types.ListMemberAccountsResponse) => void): Request<FMS.Types.ListMemberAccountsResponse, AWSError>;
   /**
-   * Returns an array of PolicySummary objects in the response.
+   * Returns an array of PolicySummary objects.
    */
   listPolicies(params: FMS.Types.ListPoliciesRequest, callback?: (err: AWSError, data: FMS.Types.ListPoliciesResponse) => void): Request<FMS.Types.ListPoliciesResponse, AWSError>;
   /**
-   * Returns an array of PolicySummary objects in the response.
+   * Returns an array of PolicySummary objects.
    */
   listPolicies(callback?: (err: AWSError, data: FMS.Types.ListPoliciesResponse) => void): Request<FMS.Types.ListPoliciesResponse, AWSError>;
+  /**
+   * Returns an array of ProtocolsListDataSummary objects.
+   */
+  listProtocolsLists(params: FMS.Types.ListProtocolsListsRequest, callback?: (err: AWSError, data: FMS.Types.ListProtocolsListsResponse) => void): Request<FMS.Types.ListProtocolsListsResponse, AWSError>;
+  /**
+   * Returns an array of ProtocolsListDataSummary objects.
+   */
+  listProtocolsLists(callback?: (err: AWSError, data: FMS.Types.ListProtocolsListsResponse) => void): Request<FMS.Types.ListProtocolsListsResponse, AWSError>;
   /**
    * Retrieves the list of tags for the specified AWS resource. 
    */
@@ -115,6 +171,14 @@ declare class FMS extends Service {
    * Retrieves the list of tags for the specified AWS resource. 
    */
   listTagsForResource(callback?: (err: AWSError, data: FMS.Types.ListTagsForResourceResponse) => void): Request<FMS.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Creates an AWS Firewall Manager applications list.
+   */
+  putAppsList(params: FMS.Types.PutAppsListRequest, callback?: (err: AWSError, data: FMS.Types.PutAppsListResponse) => void): Request<FMS.Types.PutAppsListResponse, AWSError>;
+  /**
+   * Creates an AWS Firewall Manager applications list.
+   */
+  putAppsList(callback?: (err: AWSError, data: FMS.Types.PutAppsListResponse) => void): Request<FMS.Types.PutAppsListResponse, AWSError>;
   /**
    * Designates the IAM role and Amazon Simple Notification Service (SNS) topic that AWS Firewall Manager uses to record SNS logs.
    */
@@ -131,6 +195,14 @@ declare class FMS extends Service {
    * Creates an AWS Firewall Manager policy. Firewall Manager provides the following types of policies:    A Shield Advanced policy, which applies Shield Advanced protection to specified accounts and resources   An AWS WAF policy (type WAFV2), which defines rule groups to run first in the corresponding AWS WAF web ACL and rule groups to run last in the web ACL.   An AWS WAF Classic policy (type WAF), which defines a rule group.    A security group policy, which manages VPC security groups across your AWS organization.    Each policy is specific to one of the types. If you want to enforce more than one policy type across accounts, create multiple policies. You can create multiple policies for each type. You must be subscribed to Shield Advanced to create a Shield Advanced policy. For more information about subscribing to Shield Advanced, see CreateSubscription.
    */
   putPolicy(callback?: (err: AWSError, data: FMS.Types.PutPolicyResponse) => void): Request<FMS.Types.PutPolicyResponse, AWSError>;
+  /**
+   * Creates an AWS Firewall Manager protocols list.
+   */
+  putProtocolsList(params: FMS.Types.PutProtocolsListRequest, callback?: (err: AWSError, data: FMS.Types.PutProtocolsListResponse) => void): Request<FMS.Types.PutProtocolsListResponse, AWSError>;
+  /**
+   * Creates an AWS Firewall Manager protocols list.
+   */
+  putProtocolsList(callback?: (err: AWSError, data: FMS.Types.PutProtocolsListResponse) => void): Request<FMS.Types.PutProtocolsListResponse, AWSError>;
   /**
    * Adds one or more tags to an AWS resource.
    */
@@ -151,13 +223,117 @@ declare class FMS extends Service {
 declare namespace FMS {
   export type AWSAccountId = string;
   export type AccountRoleStatus = "READY"|"CREATING"|"PENDING_DELETION"|"DELETING"|"DELETED"|string;
+  export interface App {
+    /**
+     * The application's name.
+     */
+    AppName: ResourceName;
+    /**
+     * The IP protocol name or number. The name can be one of tcp, udp, or icmp. For information on possible numbers, see Protocol Numbers.
+     */
+    Protocol: Protocol;
+    /**
+     * The application's port number, for example 80.
+     */
+    Port: IPPortNumber;
+  }
+  export type AppsList = App[];
+  export interface AppsListData {
+    /**
+     * The ID of the AWS Firewall Manager applications list.
+     */
+    ListId?: ListId;
+    /**
+     * The name of the AWS Firewall Manager applications list.
+     */
+    ListName: ResourceName;
+    /**
+     * A unique identifier for each update to the list. When you update the list, the update token must match the token of the current version of the application list. You can retrieve the update token by getting the list. 
+     */
+    ListUpdateToken?: UpdateToken;
+    /**
+     * The time that the AWS Firewall Manager applications list was created.
+     */
+    CreateTime?: TimeStamp;
+    /**
+     * The time that the AWS Firewall Manager applications list was last updated.
+     */
+    LastUpdateTime?: TimeStamp;
+    /**
+     * An array of applications in the AWS Firewall Manager applications list.
+     */
+    AppsList: AppsList;
+    /**
+     * A map of previous version numbers to their corresponding App object arrays.
+     */
+    PreviousAppsList?: PreviousAppsList;
+  }
+  export interface AppsListDataSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the applications list.
+     */
+    ListArn?: ResourceArn;
+    /**
+     * The ID of the applications list.
+     */
+    ListId?: ListId;
+    /**
+     * The name of the applications list.
+     */
+    ListName?: ResourceName;
+    /**
+     * An array of App objects in the AWS Firewall Manager applications list.
+     */
+    AppsList?: AppsList;
+  }
+  export type AppsListsData = AppsListDataSummary[];
   export interface AssociateAdminAccountRequest {
     /**
      * The AWS account ID to associate with AWS Firewall Manager as the AWS Firewall Manager administrator account. This can be an AWS Organizations master account or a member account. For more information about AWS Organizations and master accounts, see Managing the AWS Accounts in Your Organization. 
      */
     AdminAccount: AWSAccountId;
   }
+  export interface AwsEc2InstanceViolation {
+    /**
+     * The resource ID of the EC2 instance.
+     */
+    ViolationTarget?: ViolationTarget;
+    /**
+     * Violations for network interfaces associated with the EC2 instance.
+     */
+    AwsEc2NetworkInterfaceViolations?: AwsEc2NetworkInterfaceViolations;
+  }
+  export interface AwsEc2NetworkInterfaceViolation {
+    /**
+     * The resource ID of the network interface.
+     */
+    ViolationTarget?: ViolationTarget;
+    /**
+     * List of security groups that violate the rules specified in the master security group of the AWS Firewall Manager policy.
+     */
+    ViolatingSecurityGroups?: ResourceIdList;
+  }
+  export type AwsEc2NetworkInterfaceViolations = AwsEc2NetworkInterfaceViolation[];
+  export interface AwsVPCSecurityGroupViolation {
+    /**
+     * The security group rule that is being evaluated.
+     */
+    ViolationTarget?: ViolationTarget;
+    /**
+     * A description of the security group that violates the policy.
+     */
+    ViolationTargetDescription?: LengthBoundedString;
+    /**
+     * List of rules specified in the security group of the AWS Firewall Manager policy that partially match the ViolationTarget rule.
+     */
+    PartialMatches?: PartialMatches;
+    /**
+     * Remediation options for the rule specified in the ViolationTarget.
+     */
+    PossibleSecurityGroupRemediationActions?: SecurityGroupRemediationActions;
+  }
   export type Boolean = boolean;
+  export type CIDR = string;
   export interface ComplianceViolator {
     /**
      * The resource ID.
@@ -177,17 +353,29 @@ declare namespace FMS {
   export type CustomerPolicyScopeIdList = CustomerPolicyScopeId[];
   export type CustomerPolicyScopeIdType = "ACCOUNT"|"ORG_UNIT"|string;
   export type CustomerPolicyScopeMap = {[key: string]: CustomerPolicyScopeIdList};
+  export interface DeleteAppsListRequest {
+    /**
+     * The ID of the applications list that you want to delete. You can retrieve this ID from PutAppsList, ListAppsLists, and GetAppsList.
+     */
+    ListId: ListId;
+  }
   export interface DeleteNotificationChannelRequest {
   }
   export interface DeletePolicyRequest {
     /**
-     * The ID of the policy that you want to delete. PolicyId is returned by PutPolicy and by ListPolicies.
+     * The ID of the policy that you want to delete. You can retrieve this ID from PutPolicy and ListPolicies.
      */
     PolicyId: PolicyId;
     /**
      * If True, the request performs cleanup according to the policy type.  For AWS WAF and Shield Advanced policies, the cleanup does the following:   Deletes rule groups created by AWS Firewall Manager   Removes web ACLs from in-scope resources   Deletes web ACLs that contain no rules or rule groups   For security group policies, the cleanup does the following for each security group in the policy:   Disassociates the security group from in-scope resources    Deletes the security group if it was created through Firewall Manager and if it's no longer associated with any resources through another policy   After the cleanup, in-scope resources are no longer protected by web ACLs in this policy. Protection of out-of-scope resources remains unchanged. Scope is determined by tags that you create and accounts that you associate with the policy. When creating the policy, if you specify that only resources in specific accounts or with specific tags are in scope of the policy, those accounts and resources are handled by the policy. All others are out of scope. If you don't specify tags or accounts, all resources are in scope. 
      */
     DeleteAllPolicyResources?: Boolean;
+  }
+  export interface DeleteProtocolsListRequest {
+    /**
+     * The ID of the protocols list that you want to delete. You can retrieve this ID from PutProtocolsList, ListProtocolsLists, and GetProtocolsLost.
+     */
+    ListId: ListId;
   }
   export type DependentServiceName = "AWSCONFIG"|"AWSWAF"|"AWSSHIELD_ADVANCED"|"AWSVPC"|string;
   export type DetailedInfo = string;
@@ -219,6 +407,26 @@ declare namespace FMS {
      * The status of the AWS account that you set as the AWS Firewall Manager administrator.
      */
     RoleStatus?: AccountRoleStatus;
+  }
+  export interface GetAppsListRequest {
+    /**
+     * The ID of the AWS Firewall Manager applications list that you want the details for.
+     */
+    ListId: ListId;
+    /**
+     * Specifies whether the list to retrieve is a default list owned by AWS Firewall Manager.
+     */
+    DefaultList?: Boolean;
+  }
+  export interface GetAppsListResponse {
+    /**
+     * Information about the specified AWS Firewall Manager applications list.
+     */
+    AppsList?: AppsListData;
+    /**
+     * The Amazon Resource Name (ARN) of the applications list.
+     */
+    AppsListArn?: ResourceArn;
   }
   export interface GetComplianceDetailRequest {
     /**
@@ -308,7 +516,77 @@ declare namespace FMS {
      */
     NextToken?: PaginationToken;
   }
+  export interface GetProtocolsListRequest {
+    /**
+     * The ID of the AWS Firewall Manager protocols list that you want the details for.
+     */
+    ListId: ListId;
+    /**
+     * Specifies whether the list to retrieve is a default list owned by AWS Firewall Manager.
+     */
+    DefaultList?: Boolean;
+  }
+  export interface GetProtocolsListResponse {
+    /**
+     * Information about the specified AWS Firewall Manager protocols list.
+     */
+    ProtocolsList?: ProtocolsListData;
+    /**
+     * The Amazon Resource Name (ARN) of the specified protocols list.
+     */
+    ProtocolsListArn?: ResourceArn;
+  }
+  export interface GetViolationDetailsRequest {
+    /**
+     * The ID of the AWS Firewall Manager policy that you want the details for. This currently only supports security group content audit policies.
+     */
+    PolicyId: PolicyId;
+    /**
+     * The AWS account ID that you want the details for.
+     */
+    MemberAccount: AWSAccountId;
+    /**
+     * The ID of the resource that has violations.
+     */
+    ResourceId: ResourceId;
+    /**
+     * The resource type. This is in the format shown in the AWS Resource Types Reference. Supported resource types are: AWS::EC2::Instance, AWS::EC2::NetworkInterface, or AWS::EC2::SecurityGroup. 
+     */
+    ResourceType: ResourceType;
+  }
+  export interface GetViolationDetailsResponse {
+    /**
+     * Violation detail for a resource.
+     */
+    ViolationDetail?: ViolationDetail;
+  }
+  export type IPPortNumber = number;
   export type IssueInfoMap = {[key: string]: DetailedInfo};
+  export type LengthBoundedString = string;
+  export interface ListAppsListsRequest {
+    /**
+     * Specifies whether the lists to retrieve are default lists owned by AWS Firewall Manager.
+     */
+    DefaultLists?: Boolean;
+    /**
+     * If you specify a value for MaxResults in your list request, and you have more objects than the maximum, AWS Firewall Manager returns this token in the response. For all but the first request, you provide the token returned by the prior request in the request parameters, to retrieve the next batch of objects.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of objects that you want AWS Firewall Manager to return for this request. If more objects are available, in the response, AWS Firewall Manager provides a NextToken value that you can use in a subsequent call to get the next batch of objects. If you don't specify this, AWS Firewall Manager returns all available objects.
+     */
+    MaxResults: PaginationMaxResults;
+  }
+  export interface ListAppsListsResponse {
+    /**
+     * An array of AppsListDataSummary objects.
+     */
+    AppsLists?: AppsListsData;
+    /**
+     * If you specify a value for MaxResults in your list request, and you have more objects than the maximum, AWS Firewall Manager returns this token in the response. You can use this token in subsequent requests to retrieve the next batch of objects.
+     */
+    NextToken?: PaginationToken;
+  }
   export interface ListComplianceStatusRequest {
     /**
      * The ID of the AWS Firewall Manager policy that you want the details for.
@@ -333,6 +611,7 @@ declare namespace FMS {
      */
     NextToken?: PaginationToken;
   }
+  export type ListId = string;
   export interface ListMemberAccountsRequest {
     /**
      * If you specify a value for MaxResults and you have more account IDs than the number that you specify for MaxResults, AWS Firewall Manager returns a NextToken value in the response that allows you to list another group of IDs. For the second and subsequent ListMemberAccountsRequest requests, specify the value of NextToken from the previous response to get information about another batch of member account IDs.
@@ -373,9 +652,33 @@ declare namespace FMS {
      */
     NextToken?: PaginationToken;
   }
+  export interface ListProtocolsListsRequest {
+    /**
+     * Specifies whether the lists to retrieve are default lists owned by AWS Firewall Manager.
+     */
+    DefaultLists?: Boolean;
+    /**
+     * If you specify a value for MaxResults in your list request, and you have more objects than the maximum, AWS Firewall Manager returns this token in the response. For all but the first request, you provide the token returned by the prior request in the request parameters, to retrieve the next batch of objects.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of objects that you want AWS Firewall Manager to return for this request. If more objects are available, in the response, AWS Firewall Manager provides a NextToken value that you can use in a subsequent call to get the next batch of objects. If you don't specify this, AWS Firewall Manager returns all available objects.
+     */
+    MaxResults: PaginationMaxResults;
+  }
+  export interface ListProtocolsListsResponse {
+    /**
+     * An array of ProtocolsListDataSummary objects.
+     */
+    ProtocolsLists?: ProtocolsListsData;
+    /**
+     * If you specify a value for MaxResults in your list request, and you have more objects than the maximum, AWS Firewall Manager returns this token in the response. You can use this token in subsequent requests to retrieve the next batch of objects.
+     */
+    NextToken?: PaginationToken;
+  }
   export interface ListTagsForResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource to return tags for. The Firewall Manager policy is the only AWS resource that supports tagging, so this ARN is a policy ARN..
+     * The Amazon Resource Name (ARN) of the resource to return tags for. The AWS Firewall Manager resources that support tagging are policies, applications lists, and protocols lists. 
      */
     ResourceArn: ResourceArn;
   }
@@ -389,13 +692,24 @@ declare namespace FMS {
   export type MemberAccounts = AWSAccountId[];
   export type PaginationMaxResults = number;
   export type PaginationToken = string;
+  export interface PartialMatch {
+    /**
+     * The reference rule from the master security group of the AWS Firewall Manager policy.
+     */
+    Reference?: ReferenceRule;
+    /**
+     * The violation reason.
+     */
+    TargetViolationReasons?: TargetViolationReasons;
+  }
+  export type PartialMatches = PartialMatch[];
   export interface Policy {
     /**
      * The ID of the AWS Firewall Manager policy.
      */
     PolicyId?: PolicyId;
     /**
-     * The friendly name of the AWS Firewall Manager policy.
+     * The name of the AWS Firewall Manager policy.
      */
     PolicyName: ResourceName;
     /**
@@ -475,7 +789,7 @@ declare namespace FMS {
      */
     PolicyId?: PolicyId;
     /**
-     * The friendly name of the AWS Firewall Manager policy.
+     * The name of the AWS Firewall Manager policy.
      */
     PolicyName?: ResourceName;
     /**
@@ -508,7 +822,7 @@ declare namespace FMS {
      */
     PolicyId?: PolicyId;
     /**
-     * The friendly name of the specified policy.
+     * The name of the specified policy.
      */
     PolicyName?: ResourceName;
     /**
@@ -526,7 +840,81 @@ declare namespace FMS {
   }
   export type PolicySummaryList = PolicySummary[];
   export type PolicyUpdateToken = string;
+  export type PreviousAppsList = {[key: string]: AppsList};
+  export type PreviousListVersion = string;
+  export type PreviousProtocolsList = {[key: string]: ProtocolsList};
   export type ProtectionData = string;
+  export type Protocol = string;
+  export type ProtocolsList = Protocol[];
+  export interface ProtocolsListData {
+    /**
+     * The ID of the AWS Firewall Manager protocols list.
+     */
+    ListId?: ListId;
+    /**
+     * The name of the AWS Firewall Manager protocols list.
+     */
+    ListName: ResourceName;
+    /**
+     * A unique identifier for each update to the list. When you update the list, the update token must match the token of the current version of the application list. You can retrieve the update token by getting the list. 
+     */
+    ListUpdateToken?: UpdateToken;
+    /**
+     * The time that the AWS Firewall Manager protocols list was created.
+     */
+    CreateTime?: TimeStamp;
+    /**
+     * The time that the AWS Firewall Manager protocols list was last updated.
+     */
+    LastUpdateTime?: TimeStamp;
+    /**
+     * An array of protocols in the AWS Firewall Manager protocols list.
+     */
+    ProtocolsList: ProtocolsList;
+    /**
+     * A map of previous version numbers to their corresponding protocol arrays.
+     */
+    PreviousProtocolsList?: PreviousProtocolsList;
+  }
+  export interface ProtocolsListDataSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the specified protocols list.
+     */
+    ListArn?: ResourceArn;
+    /**
+     * The ID of the specified protocols list.
+     */
+    ListId?: ListId;
+    /**
+     * The name of the specified protocols list.
+     */
+    ListName?: ResourceName;
+    /**
+     * An array of protocols in the AWS Firewall Manager protocols list.
+     */
+    ProtocolsList?: ProtocolsList;
+  }
+  export type ProtocolsListsData = ProtocolsListDataSummary[];
+  export interface PutAppsListRequest {
+    /**
+     * The details of the AWS Firewall Manager applications list to be created.
+     */
+    AppsList: AppsListData;
+    /**
+     * The tags associated with the resource.
+     */
+    TagList?: TagList;
+  }
+  export interface PutAppsListResponse {
+    /**
+     * The details of the AWS Firewall Manager applications list.
+     */
+    AppsList?: AppsListData;
+    /**
+     * The Amazon Resource Name (ARN) of the applications list.
+     */
+    AppsListArn?: ResourceArn;
+  }
   export interface PutNotificationChannelRequest {
     /**
      * The Amazon Resource Name (ARN) of the SNS topic that collects notifications from AWS Firewall Manager.
@@ -549,17 +937,41 @@ declare namespace FMS {
   }
   export interface PutPolicyResponse {
     /**
-     * The details of the AWS Firewall Manager policy that was created.
+     * The details of the AWS Firewall Manager policy.
      */
     Policy?: Policy;
     /**
-     * The Amazon Resource Name (ARN) of the policy that was created.
+     * The Amazon Resource Name (ARN) of the policy.
      */
     PolicyArn?: ResourceArn;
   }
+  export interface PutProtocolsListRequest {
+    /**
+     * The details of the AWS Firewall Manager protocols list to be created.
+     */
+    ProtocolsList: ProtocolsListData;
+    /**
+     * The tags associated with the resource.
+     */
+    TagList?: TagList;
+  }
+  export interface PutProtocolsListResponse {
+    /**
+     * The details of the AWS Firewall Manager protocols list.
+     */
+    ProtocolsList?: ProtocolsListData;
+    /**
+     * The Amazon Resource Name (ARN) of the protocols list.
+     */
+    ProtocolsListArn?: ResourceArn;
+  }
+  export type ReferenceRule = string;
+  export type RemediationActionDescription = string;
+  export type RemediationActionType = "REMOVE"|"MODIFY"|string;
   export type ResourceArn = string;
   export type ResourceCount = number;
   export type ResourceId = string;
+  export type ResourceIdList = ResourceId[];
   export type ResourceName = string;
   export interface ResourceTag {
     /**
@@ -576,13 +988,73 @@ declare namespace FMS {
   export type ResourceTags = ResourceTag[];
   export type ResourceType = string;
   export type ResourceTypeList = ResourceType[];
+  export interface ResourceViolation {
+    /**
+     * Violation details for security groups.
+     */
+    AwsVPCSecurityGroupViolation?: AwsVPCSecurityGroupViolation;
+    /**
+     * Violation details for network interface.
+     */
+    AwsEc2NetworkInterfaceViolation?: AwsEc2NetworkInterfaceViolation;
+    /**
+     * Violation details for an EC2 instance.
+     */
+    AwsEc2InstanceViolation?: AwsEc2InstanceViolation;
+  }
+  export type ResourceViolations = ResourceViolation[];
+  export interface SecurityGroupRemediationAction {
+    /**
+     * The remediation action that will be performed.
+     */
+    RemediationActionType?: RemediationActionType;
+    /**
+     * Brief description of the action that will be performed.
+     */
+    Description?: RemediationActionDescription;
+    /**
+     * The final state of the rule specified in the ViolationTarget after it is remediated.
+     */
+    RemediationResult?: SecurityGroupRuleDescription;
+    /**
+     * Indicates if the current action is the default action.
+     */
+    IsDefaultAction?: Boolean;
+  }
+  export type SecurityGroupRemediationActions = SecurityGroupRemediationAction[];
+  export interface SecurityGroupRuleDescription {
+    /**
+     * The IPv4 ranges for the security group rule.
+     */
+    IPV4Range?: CIDR;
+    /**
+     * The IPv6 ranges for the security group rule.
+     */
+    IPV6Range?: CIDR;
+    /**
+     * The ID of the prefix list for the security group rule.
+     */
+    PrefixListId?: ResourceId;
+    /**
+     * The IP protocol name (tcp, udp, icmp, icmpv6) or number.
+     */
+    Protocol?: LengthBoundedString;
+    /**
+     * The start of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number. A value of -1 indicates all ICMP/ICMPv6 types.
+     */
+    FromPort?: IPPortNumber;
+    /**
+     * The end of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of -1 indicates all ICMP/ICMPv6 codes.
+     */
+    ToPort?: IPPortNumber;
+  }
   export interface SecurityServicePolicyData {
     /**
      * The service that the policy is using to protect the resources. This specifies the type of policy that is created, either an AWS WAF policy, a Shield Advanced policy, or a security group policy. For security group policies, Firewall Manager supports one security group for each common policy and for each content audit policy. This is an adjustable limit that you can increase by contacting AWS Support.
      */
     Type: SecurityServiceType;
     /**
-     * Details about the service that are specific to the service type, in JSON format. For service type SHIELD_ADVANCED, this is an empty string.   Example: WAFV2   "ManagedServiceData": "{\"type\":\"WAFV2\",\"defaultAction\":{\"type\":\"ALLOW\"},\"preProcessRuleGroups\":[{\"managedRuleGroupIdentifier\":null,\"ruleGroupArn\":\"rulegrouparn\",\"overrideAction\":{\"type\":\"COUNT\"},\"excludedRules\":[{\"name\":\"EntityName\"}],\"ruleGroupType\":\"RuleGroup\"}],\"postProcessRuleGroups\":[{\"managedRuleGroupIdentifier\":{\"managedRuleGroupName\":\"AWSManagedRulesAdminProtectionRuleSet\",\"vendor\":\"AWS\"},\"ruleGroupArn\":\"rulegrouparn\",\"overrideAction\":{\"type\":\"NONE\"},\"excludedRules\":[],\"ruleGroupType\":\"ManagedRuleGroup\"}],\"overrideCustomerWebACLAssociation\":false}"    Example: WAF Classic   "ManagedServiceData": "{\"type\": \"WAF\", \"ruleGroups\": [{\"id\": \"12345678-1bcd-9012-efga-0987654321ab\", \"overrideAction\" : {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\": \"BLOCK\"}}    Example: SECURITY_GROUPS_COMMON   "SecurityServicePolicyData":{"Type":"SECURITY_GROUPS_COMMON","ManagedServiceData":"{\"type\":\"SECURITY_GROUPS_COMMON\",\"revertManualSecurityGroupChanges\":false,\"exclusiveResourceSecurityGroupManagement\":false, \"applyToAllEC2InstanceENIs\":false,\"securityGroups\":[{\"id\":\" sg-000e55995d61a06bd\"}]}"},"RemediationEnabled":false,"ResourceType":"AWS::EC2::NetworkInterface"}    Example: SECURITY_GROUPS_CONTENT_AUDIT   "SecurityServicePolicyData":{"Type":"SECURITY_GROUPS_CONTENT_AUDIT","ManagedServiceData":"{\"type\":\"SECURITY_GROUPS_CONTENT_AUDIT\",\"securityGroups\":[{\"id\":\" sg-000e55995d61a06bd \"}],\"securityGroupAction\":{\"type\":\"ALLOW\"}}"},"RemediationEnabled":false,"ResourceType":"AWS::EC2::NetworkInterface"}  The security group action for content audit can be ALLOW or DENY. For ALLOW, all in-scope security group rules must be within the allowed range of the policy's security group rules. For DENY, all in-scope security group rules must not contain a value or a range that matches a rule value or range in the policy security group.   Example: SECURITY_GROUPS_USAGE_AUDIT   "SecurityServicePolicyData":{"Type":"SECURITY_GROUPS_USAGE_AUDIT","ManagedServiceData":"{\"type\":\"SECURITY_GROUPS_USAGE_AUDIT\",\"deleteUnusedSecurityGroups\":true,\"coalesceRedundantSecurityGroups\":true}"},"RemediationEnabled":false,"Resou rceType":"AWS::EC2::SecurityGroup"}   
+     * Details about the service that are specific to the service type, in JSON format. For service type SHIELD_ADVANCED, this is an empty string.   Example: WAFV2   "ManagedServiceData": "{\"type\":\"WAFV2\",\"defaultAction\":{\"type\":\"ALLOW\"},\"preProcessRuleGroups\":[{\"managedRuleGroupIdentifier\":null,\"ruleGroupArn\":\"rulegrouparn\",\"overrideAction\":{\"type\":\"COUNT\"},\"excludeRules\":[{\"name\":\"EntityName\"}],\"ruleGroupType\":\"RuleGroup\"}],\"postProcessRuleGroups\":[{\"managedRuleGroupIdentifier\":{\"managedRuleGroupName\":\"AWSManagedRulesAdminProtectionRuleSet\",\"vendorName\":\"AWS\"},\"ruleGroupArn\":\"rulegrouparn\",\"overrideAction\":{\"type\":\"NONE\"},\"excludeRules\":[],\"ruleGroupType\":\"ManagedRuleGroup\"}],\"overrideCustomerWebACLAssociation\":false}"    Example: WAF Classic   "ManagedServiceData": "{\"type\": \"WAF\", \"ruleGroups\": [{\"id\": \"12345678-1bcd-9012-efga-0987654321ab\", \"overrideAction\" : {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\": \"BLOCK\"}}    Example: SECURITY_GROUPS_COMMON   "SecurityServicePolicyData":{"Type":"SECURITY_GROUPS_COMMON","ManagedServiceData":"{\"type\":\"SECURITY_GROUPS_COMMON\",\"revertManualSecurityGroupChanges\":false,\"exclusiveResourceSecurityGroupManagement\":false, \"applyToAllEC2InstanceENIs\":false,\"securityGroups\":[{\"id\":\" sg-000e55995d61a06bd\"}]}"},"RemediationEnabled":false,"ResourceType":"AWS::EC2::NetworkInterface"}    Example: SECURITY_GROUPS_CONTENT_AUDIT   "SecurityServicePolicyData":{"Type":"SECURITY_GROUPS_CONTENT_AUDIT","ManagedServiceData":"{\"type\":\"SECURITY_GROUPS_CONTENT_AUDIT\",\"securityGroups\":[{\"id\":\" sg-000e55995d61a06bd \"}],\"securityGroupAction\":{\"type\":\"ALLOW\"}}"},"RemediationEnabled":false,"ResourceType":"AWS::EC2::NetworkInterface"}  The security group action for content audit can be ALLOW or DENY. For ALLOW, all in-scope security group rules must be within the allowed range of the policy's security group rules. For DENY, all in-scope security group rules must not contain a value or a range that matches a rule value or range in the policy security group.   Example: SECURITY_GROUPS_USAGE_AUDIT   "SecurityServicePolicyData":{"Type":"SECURITY_GROUPS_USAGE_AUDIT","ManagedServiceData":"{\"type\":\"SECURITY_GROUPS_USAGE_AUDIT\",\"deleteUnusedSecurityGroups\":true,\"coalesceRedundantSecurityGroups\":true}"},"RemediationEnabled":false,"Resou rceType":"AWS::EC2::SecurityGroup"}   
      */
     ManagedServiceData?: ManagedServiceData;
   }
@@ -602,7 +1074,7 @@ declare namespace FMS {
   export type TagList = Tag[];
   export interface TagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource. The Firewall Manager policy is the only AWS resource that supports tagging, so this ARN is a policy ARN.
+     * The Amazon Resource Name (ARN) of the resource to return tags for. The AWS Firewall Manager resources that support tagging are policies, applications lists, and protocols lists. 
      */
     ResourceArn: ResourceArn;
     /**
@@ -613,10 +1085,12 @@ declare namespace FMS {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export type TargetViolationReason = string;
+  export type TargetViolationReasons = TargetViolationReason[];
   export type TimeStamp = Date;
   export interface UntagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource. The Firewall Manager policy is the only AWS resource that supports tagging, so this ARN is a policy ARN.
+     * The Amazon Resource Name (ARN) of the resource to return tags for. The AWS Firewall Manager resources that support tagging are policies, applications lists, and protocols lists. 
      */
     ResourceArn: ResourceArn;
     /**
@@ -626,7 +1100,39 @@ declare namespace FMS {
   }
   export interface UntagResourceResponse {
   }
+  export type UpdateToken = string;
+  export interface ViolationDetail {
+    /**
+     * The ID of the AWS Firewall Manager policy that the violation details were requested for.
+     */
+    PolicyId: PolicyId;
+    /**
+     * The AWS account that the violation details were requested for.
+     */
+    MemberAccount: AWSAccountId;
+    /**
+     * The resource ID that the violation details were requested for.
+     */
+    ResourceId: ResourceId;
+    /**
+     * The resource type that the violation details were requested for.
+     */
+    ResourceType: ResourceType;
+    /**
+     * List of violations for the requested resource.
+     */
+    ResourceViolations: ResourceViolations;
+    /**
+     * The ResourceTag objects associated with the resource.
+     */
+    ResourceTags?: TagList;
+    /**
+     * Brief description for the requested resource.
+     */
+    ResourceDescription?: LengthBoundedString;
+  }
   export type ViolationReason = "WEB_ACL_MISSING_RULE_GROUP"|"RESOURCE_MISSING_WEB_ACL"|"RESOURCE_INCORRECT_WEB_ACL"|"RESOURCE_MISSING_SHIELD_PROTECTION"|"RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION"|"RESOURCE_MISSING_SECURITY_GROUP"|"RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP"|"SECURITY_GROUP_UNUSED"|"SECURITY_GROUP_REDUNDANT"|string;
+  export type ViolationTarget = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

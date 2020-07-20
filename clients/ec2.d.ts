@@ -5350,6 +5350,10 @@ declare namespace EC2 {
      * The tags.
      */
     Tags?: TagList;
+    /**
+     * The ARN of the address pool.
+     */
+    PoolArn?: ResourceArn;
   }
   export type CoipPoolId = string;
   export type CoipPoolIdSet = CoipPoolId[];
@@ -6651,6 +6655,10 @@ declare namespace EC2 {
      * The ID of the VPC.
      */
     VpcId: VpcId;
+    /**
+     * The tags to assign to the route table.
+     */
+    TagSpecifications?: TagSpecificationList;
   }
   export interface CreateRouteTableResult {
     /**
@@ -7368,6 +7376,10 @@ declare namespace EC2 {
      * The Region code for the accepter VPC, if the accepter VPC is located in a Region other than the Region in which you make the request. Default: The Region in which you make the request.
      */
     PeerRegion?: String;
+    /**
+     * The tags to assign to the peering connection.
+     */
+    TagSpecifications?: TagSpecificationList;
   }
   export interface CreateVpcPeeringConnectionResult {
     /**

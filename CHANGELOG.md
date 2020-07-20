@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.715.0-->
+<!--LATEST=2.716.0-->
 <!--ENTRYINSERT-->
+
+## 2.716.0
+* feature: CloudFront: CloudFront adds support for cache policies and origin request policies. With these new policies, you can now more granularly control the query string, header, and cookie values that are included in the cache key and in requests that CloudFront sends to your origin.
+* feature: CodeBuild: AWS CodeBuild adds support for Session Manager and Windows 2019 Environment type
+* feature: EC2: Added support for tag-on-create for CreateVpcPeeringConnection and CreateRouteTable. You can now specify tags when creating any of these resources. For more information about tagging, see AWS Tagging Strategies. Add poolArn to the response of DescribeCoipPools.
+* feature: FMS: Added managed policies for auditing security group rules, including the use of managed application and protocol lists.
+* feature: FraudDetector: Introduced flexible model training dataset requirements for Online Fraud Insights so that customers can choose any two inputs to train a model instead of being required to use 'email' and 'IP address' at minimum. Added support for resource ARNs, resource tags, resource-based IAM policies and identity-based policies that limit access to a resource based on tags. Added support for customer-managed customer master key (CMK) data encryption. Added new Event Type, Entity Type, and Label APIs. An event type defines the structure for an event sent to Amazon Fraud Detector, including the variables sent as part of the event, the entity performing the event, and the labels that classify the event. Introduced the GetEventPrediction API.
+* feature: GroundStation: Adds optional MTU property to DataflowEndpoint and adds contact source and destination details to DescribeContact response.
+* feature: RDS: Add a new SupportsParallelQuery output field to DescribeDBEngineVersions. This field shows whether the engine version supports parallelquery. Add a new SupportsGlobalDatabases output field to DescribeDBEngineVersions and DescribeOrderableDBInstanceOptions. This field shows whether global database is supported by engine version or the combination of engine version and instance class.
 
 ## 2.715.0
 * bugfix: Types: Export missing TokenFileWebIdentityCredentials class

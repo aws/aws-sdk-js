@@ -8706,6 +8706,11 @@
           "shape": "TagList",
           "documentation": "<p>The tags.</p>",
           "locationName": "tagSet"
+        },
+        "PoolArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The ARN of the address pool.</p>",
+          "locationName": "poolArn"
         }
       },
       "documentation": "<p>Describes a customer-owned address pool.</p>"
@@ -10610,6 +10615,11 @@
           "shape": "VpcId",
           "documentation": "<p>The ID of the VPC.</p>",
           "locationName": "vpcId"
+        },
+        "TagSpecifications": {
+          "shape": "TagSpecificationList",
+          "documentation": "<p>The tags to assign to the route table.</p>",
+          "locationName": "TagSpecification"
         }
       }
     },
@@ -11601,6 +11611,11 @@
         "PeerRegion": {
           "shape": "String",
           "documentation": "<p>The Region code for the accepter VPC, if the accepter VPC is located in a Region other than the Region in which you make the request.</p> <p>Default: The Region in which you make the request.</p>"
+        },
+        "TagSpecifications": {
+          "shape": "TagSpecificationList",
+          "documentation": "<p>The tags to assign to the peering connection.</p>",
+          "locationName": "TagSpecification"
         }
       }
     },
