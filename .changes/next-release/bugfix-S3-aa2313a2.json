@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "S3",
+  "description": "Add validation for AccountId in S3 AccessPoint"
+}
