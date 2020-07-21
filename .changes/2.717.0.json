@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeGuruProfiler",
+        "description": "Amazon CodeGuru Profiler now supports resource tagging APIs, tags-on-create and tag-based access control features. You can now tag profiling groups for better resource and access control management."
+    }
+]

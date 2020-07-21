@@ -417,6 +417,32 @@
       ],
       "documentation": "<p> Returns a list of profiling groups. The profiling groups are returned as <a href=\"https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html\"> <code>ProfilingGroupDescription</code> </a> objects. </p>"
     },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p> Returns a list of the tags that are assigned to a specified resource. </p>"
+    },
     "PostAgentProfile": {
       "name": "PostAgentProfile",
       "http": {
@@ -569,6 +595,59 @@
         }
       ],
       "documentation": "<p>Sends feedback to CodeGuru Profiler about whether the anomaly detected by the analysis is useful or not.</p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p> Use to assign one or more tags to a resource. </p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "output": {
+        "shape": "UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p> Use to remove one or more tags from a resource. </p>",
+      "idempotent": true
     },
     "UpdateProfilingGroup": {
       "name": "UpdateProfilingGroup",
@@ -986,6 +1065,10 @@
         "profilingGroupName": {
           "shape": "ProfilingGroupName",
           "documentation": "<p>The name of the profiling group to create.</p>"
+        },
+        "tags": {
+          "shape": "TagsMap",
+          "documentation": "<p> A list of tags to add to the created profiling group. </p>"
         }
       },
       "documentation": "<p>The structure representing the createProfiliingGroupRequest.</p>"
@@ -1117,8 +1200,7 @@
     "FleetInstanceId": {
       "type": "string",
       "max": 255,
-      "min": 1,
-      "pattern": "^[\\w-.:/]+$"
+      "min": 1
     },
     "FrameMetric": {
       "type": "structure",
@@ -1610,6 +1692,29 @@
       },
       "documentation": "<p>The structure representing the listProfilingGroupsResponse.</p>"
     },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "ProfilingGroupArn",
+          "documentation": "<p> The Amazon Resource Name (ARN) of the resource that contains the tags to return. </p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        }
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "tags": {
+          "shape": "TagsMap",
+          "documentation": "<p> The list of tags assigned to the specified resource. This is the list of tags returned in the response. </p>"
+        }
+      }
+    },
     "Locale": {
       "type": "string",
       "documentation": "<p>BCP47 language code. Supported locales: de-DE, en-GB, en-US, es-ES, fr-FR, it-IT, ja-JP, ko-KR, pt-BR, zh-CN, zh-TW</p>"
@@ -1865,6 +1970,10 @@
         "profilingStatus": {
           "shape": "ProfilingStatus",
           "documentation": "<p> A <a href=\"https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingStatus.html\"> <code>ProfilingStatus</code> </a> object that includes information about the last time a profile agent pinged back, the last time a profile was received, and the aggregation period and start time for the most recent aggregated profile. </p>"
+        },
+        "tags": {
+          "shape": "TagsMap",
+          "documentation": "<p> A list of the tags that belong to this profiling group. </p>"
         },
         "updatedAt": {
           "shape": "Timestamp",
@@ -2130,6 +2239,44 @@
       "members": {},
       "documentation": "<p>The structure representing the SubmitFeedbackResponse.</p>"
     },
+    "TagKeys": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "tags"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "ProfilingGroupArn",
+          "documentation": "<p> The Amazon Resource Name (ARN) of the resource that the tags are added to. </p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        },
+        "tags": {
+          "shape": "TagsMap",
+          "documentation": "<p> The list of tags that are added to the specified resource. </p>"
+        }
+      }
+    },
+    "TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagsMap": {
+      "type": "map",
+      "key": {
+        "shape": "String"
+      },
+      "value": {
+        "shape": "String"
+      }
+    },
     "TargetFrame": {
       "type": "list",
       "member": {
@@ -2173,6 +2320,31 @@
       "value": {
         "shape": "ListOfTimestamps"
       }
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "tagKeys"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "ProfilingGroupArn",
+          "documentation": "<p> The Amazon Resource Name (ARN) of the resource that contains the tags to remove. </p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        },
+        "tagKeys": {
+          "shape": "TagKeys",
+          "documentation": "<p> A list of tag keys. Existing tags of resources with keys in this list are removed from the specified resource. </p>",
+          "location": "querystring",
+          "locationName": "tagKeys"
+        }
+      }
+    },
+    "UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
     },
     "UpdateProfilingGroupRequest": {
       "type": "structure",

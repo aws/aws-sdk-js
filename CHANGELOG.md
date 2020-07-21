@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.716.0-->
+<!--LATEST=2.717.0-->
 <!--ENTRYINSERT-->
+
+## 2.717.0
+* feature: CodeGuruProfiler: Amazon CodeGuru Profiler now supports resource tagging APIs, tags-on-create and tag-based access control features. You can now tag profiling groups for better resource and access control management.
 
 ## 2.716.0
 * feature: CloudFront: CloudFront adds support for cache policies and origin request policies. With these new policies, you can now more granularly control the query string, header, and cookie values that are included in the cache key and in requests that CloudFront sends to your origin.

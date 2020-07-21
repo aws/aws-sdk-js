@@ -124,6 +124,14 @@ declare class CodeGuruProfiler extends Service {
    */
   listProfilingGroups(callback?: (err: AWSError, data: CodeGuruProfiler.Types.ListProfilingGroupsResponse) => void): Request<CodeGuruProfiler.Types.ListProfilingGroupsResponse, AWSError>;
   /**
+   *  Returns a list of the tags that are assigned to a specified resource. 
+   */
+  listTagsForResource(params: CodeGuruProfiler.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: CodeGuruProfiler.Types.ListTagsForResourceResponse) => void): Request<CodeGuruProfiler.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   *  Returns a list of the tags that are assigned to a specified resource. 
+   */
+  listTagsForResource(callback?: (err: AWSError, data: CodeGuruProfiler.Types.ListTagsForResourceResponse) => void): Request<CodeGuruProfiler.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    *  Submits profiling data to an aggregated profile of a profiling group. To get an aggregated profile that is created with this profiling data, use  GetProfile . 
    */
   postAgentProfile(params: CodeGuruProfiler.Types.PostAgentProfileRequest, callback?: (err: AWSError, data: CodeGuruProfiler.Types.PostAgentProfileResponse) => void): Request<CodeGuruProfiler.Types.PostAgentProfileResponse, AWSError>;
@@ -163,6 +171,22 @@ declare class CodeGuruProfiler extends Service {
    * Sends feedback to CodeGuru Profiler about whether the anomaly detected by the analysis is useful or not.
    */
   submitFeedback(callback?: (err: AWSError, data: CodeGuruProfiler.Types.SubmitFeedbackResponse) => void): Request<CodeGuruProfiler.Types.SubmitFeedbackResponse, AWSError>;
+  /**
+   *  Use to assign one or more tags to a resource. 
+   */
+  tagResource(params: CodeGuruProfiler.Types.TagResourceRequest, callback?: (err: AWSError, data: CodeGuruProfiler.Types.TagResourceResponse) => void): Request<CodeGuruProfiler.Types.TagResourceResponse, AWSError>;
+  /**
+   *  Use to assign one or more tags to a resource. 
+   */
+  tagResource(callback?: (err: AWSError, data: CodeGuruProfiler.Types.TagResourceResponse) => void): Request<CodeGuruProfiler.Types.TagResourceResponse, AWSError>;
+  /**
+   *  Use to remove one or more tags from a resource. 
+   */
+  untagResource(params: CodeGuruProfiler.Types.UntagResourceRequest, callback?: (err: AWSError, data: CodeGuruProfiler.Types.UntagResourceResponse) => void): Request<CodeGuruProfiler.Types.UntagResourceResponse, AWSError>;
+  /**
+   *  Use to remove one or more tags from a resource. 
+   */
+  untagResource(callback?: (err: AWSError, data: CodeGuruProfiler.Types.UntagResourceResponse) => void): Request<CodeGuruProfiler.Types.UntagResourceResponse, AWSError>;
   /**
    * Updates a profiling group.
    */
@@ -369,6 +393,10 @@ declare namespace CodeGuruProfiler {
      * The name of the profiling group to create.
      */
     profilingGroupName: ProfilingGroupName;
+    /**
+     *  A list of tags to add to the created profiling group. 
+     */
+    tags?: TagsMap;
   }
   export interface CreateProfilingGroupResponse {
     /**
@@ -687,6 +715,18 @@ declare namespace CodeGuruProfiler {
      */
     profilingGroups?: ProfilingGroupDescriptions;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     *  The Amazon Resource Name (ARN) of the resource that contains the tags to return. 
+     */
+    resourceArn: ProfilingGroupArn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     *  The list of tags assigned to the specified resource. This is the list of tags returned in the response. 
+     */
+    tags?: TagsMap;
+  }
   export type Locale = string;
   export interface Match {
     /**
@@ -817,6 +857,10 @@ declare namespace CodeGuruProfiler {
      *  A  ProfilingStatus  object that includes information about the last time a profile agent pinged back, the last time a profile was received, and the aggregation period and start time for the most recent aggregated profile. 
      */
     profilingStatus?: ProfilingStatus;
+    /**
+     *  A list of the tags that belong to this profiling group. 
+     */
+    tags?: TagsMap;
     /**
      *  The date and time when the profiling group was last updated. Specify using the ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020 1:15:02 PM UTC. 
      */
@@ -957,6 +1001,20 @@ declare namespace CodeGuruProfiler {
   }
   export interface SubmitFeedbackResponse {
   }
+  export type TagKeys = String[];
+  export interface TagResourceRequest {
+    /**
+     *  The Amazon Resource Name (ARN) of the resource that the tags are added to. 
+     */
+    resourceArn: ProfilingGroupArn;
+    /**
+     *  The list of tags that are added to the specified resource. 
+     */
+    tags: TagsMap;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagsMap = {[key: string]: String};
   export type TargetFrame = String[];
   export type TargetFrames = TargetFrame[];
   export type ThreadStates = String[];
@@ -968,6 +1026,18 @@ declare namespace CodeGuruProfiler {
     value: Timestamp;
   }
   export type UnprocessedEndTimeMap = {[key: string]: ListOfTimestamps};
+  export interface UntagResourceRequest {
+    /**
+     *  The Amazon Resource Name (ARN) of the resource that contains the tags to remove. 
+     */
+    resourceArn: ProfilingGroupArn;
+    /**
+     *  A list of tag keys. Existing tags of resources with keys in this list are removed from the specified resource. 
+     */
+    tagKeys: TagKeys;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateProfilingGroupRequest {
     /**
      *  Specifies whether profiling is enabled or disabled for a profiling group. 
