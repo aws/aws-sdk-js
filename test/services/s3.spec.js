@@ -21,42 +21,42 @@ describe('AWS.S3', function() {
     return done();
   });
 
-  describe('isDnsCompatible', function() {
+  describe('dnsCompatibleBucketName', function() {
     it('must be at least 3 characters', function() {
-      expect(s3.isDnsCompatible('aa')).to.equal(false);
+      expect(s3.dnsCompatibleBucketName('aa')).to.equal(false);
     });
 
     it('must not be longer than 63 characters', function() {
       var b;
       b = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
-      expect(s3.isDnsCompatible(b)).to.equal(false);
+      expect(s3.dnsCompatibleBucketName(b)).to.equal(false);
     });
 
     it('must start with a lower-cased letter or number', function() {
-      expect(s3.isDnsCompatible('Abc')).to.equal(false);
-      expect(s3.isDnsCompatible('-bc')).to.equal(false);
-      expect(s3.isDnsCompatible('abc')).to.equal(true);
+      expect(s3.dnsCompatibleBucketName('Abc')).to.equal(false);
+      expect(s3.dnsCompatibleBucketName('-bc')).to.equal(false);
+      expect(s3.dnsCompatibleBucketName('abc')).to.equal(true);
     });
 
     it('must end with a lower-cased letter or number', function() {
-      expect(s3.isDnsCompatible('abC')).to.equal(false);
-      expect(s3.isDnsCompatible('ab-')).to.equal(false);
-      expect(s3.isDnsCompatible('abc')).to.equal(true);
+      expect(s3.dnsCompatibleBucketName('abC')).to.equal(false);
+      expect(s3.dnsCompatibleBucketName('ab-')).to.equal(false);
+      expect(s3.dnsCompatibleBucketName('abc')).to.equal(true);
     });
 
     it('may not contain multiple contiguous dots', function() {
-      expect(s3.isDnsCompatible('abc.123')).to.equal(true);
-      expect(s3.isDnsCompatible('abc..123')).to.equal(false);
+      expect(s3.dnsCompatibleBucketName('abc.123')).to.equal(true);
+      expect(s3.dnsCompatibleBucketName('abc..123')).to.equal(false);
     });
 
     it('may only contain letters numbers and dots', function() {
-      expect(s3.isDnsCompatible('abc123')).to.equal(true);
-      expect(s3.isDnsCompatible('abc_123')).to.equal(false);
+      expect(s3.dnsCompatibleBucketName('abc123')).to.equal(true);
+      expect(s3.dnsCompatibleBucketName('abc_123')).to.equal(false);
     });
 
     it('must not look like an ip address', function() {
-      expect(s3.isDnsCompatible('1.2.3.4')).to.equal(false);
-      expect(s3.isDnsCompatible('a.b.c.d')).to.equal(true);
+      expect(s3.dnsCompatibleBucketName('1.2.3.4')).to.equal(false);
+      expect(s3.dnsCompatibleBucketName('a.b.c.d')).to.equal(true);
     });
   });
 
