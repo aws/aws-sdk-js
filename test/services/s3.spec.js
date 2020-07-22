@@ -3785,6 +3785,36 @@ describe('AWS.S3', function() {
       });
     });
 
+    it('should throw if supplied empty accountId in ARN', function(done) {
+      s3 = new AWS.S3();
+      helpers.mockHttpResponse(200, {}, '');
+      var request = s3.getObject({
+        Bucket: 'arn:aws:s3:us-west-2::accesspoint:mybucket',
+        Key: 'key'
+      });
+      request.send(function(err, data) {
+        expect(err).to.exist;
+        expect(err.name).to.equal('InvalidAccessPointARN');
+        expect(err.message).to.equal('Access point ARN accountID does not match regex "[0-9]{12}"');
+        done();
+      });
+    });
+
+    it('should throw if supplied invalid accountId in ARN', function(done) {
+      s3 = new AWS.S3();
+      helpers.mockHttpResponse(200, {}, '');
+      var request = s3.getObject({
+        Bucket: 'arn:aws:s3:us-west-2:1234567890:accesspoint:mybucket',
+        Key: 'key'
+      });
+      request.send(function(err, data) {
+        expect(err).to.exist;
+        expect(err.name).to.equal('InvalidAccessPointARN');
+        expect(err.message).to.equal('Access point ARN accountID does not match regex "[0-9]{12}"');
+        done();
+      });
+    });
+
     it('should throw if access point ARN is not for access point resournce', function(done) {
       s3 = new AWS.S3();
       helpers.mockHttpResponse(200, {}, '');
