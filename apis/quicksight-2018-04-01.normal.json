@@ -45,6 +45,43 @@
       ],
       "documentation": "<p>Cancels an ongoing ingestion of data into SPICE.</p>"
     },
+    "CreateAccountCustomization": {
+      "name": "CreateAccountCustomization",
+      "http": {
+        "method": "POST",
+        "requestUri": "/accounts/{AwsAccountId}/customizations"
+      },
+      "input": {
+        "shape": "CreateAccountCustomizationRequest"
+      },
+      "output": {
+        "shape": "CreateAccountCustomizationResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceExistsException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ResourceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Creates a customization for the Amazon QuickSight subscription associated with your AWS account.</p>"
+    },
     "CreateDashboard": {
       "name": "CreateDashboard",
       "http": {
@@ -319,6 +356,52 @@
       ],
       "documentation": "<p>Creates and starts a new SPICE ingestion on a dataset</p> <p>Any ingestions operating on tagged datasets inherit the same tags automatically for use in access control. For an example, see <a href=\"https://aws.amazon.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/\">How do I create an IAM policy to control access to Amazon EC2 resources using tags?</a> in the AWS Knowledge Center. Tags are visible on the tagged dataset, but not on the ingestion resource.</p>"
     },
+    "CreateNamespace": {
+      "name": "CreateNamespace",
+      "http": {
+        "method": "POST",
+        "requestUri": "/accounts/{AwsAccountId}"
+      },
+      "input": {
+        "shape": "CreateNamespaceRequest"
+      },
+      "output": {
+        "shape": "CreateNamespaceResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ResourceExistsException"
+        },
+        {
+          "shape": "PreconditionNotMetException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ResourceUnavailableException"
+        }
+      ],
+      "documentation": "<p>(Enterprise edition only) Creates a new namespace for you to use with Amazon QuickSight.</p> <p>A namespace allows you to isolate the QuickSight users and groups that are registered for that namespace. Users that access the namespace can share assets only with other users or groups in the same namespace. They can't see users and groups in other namespaces. You can create a namespace after your AWS account is subscribed to QuickSight. The namespace must be unique within the AWS account. By default, there is a limit of 100 namespaces per AWS account. To increase your limit, create a ticket with AWS Support. </p>"
+    },
     "CreateTemplate": {
       "name": "CreateTemplate",
       "http": {
@@ -481,6 +564,40 @@
         }
       ],
       "documentation": "<p>Creates a theme alias for a theme.</p>"
+    },
+    "DeleteAccountCustomization": {
+      "name": "DeleteAccountCustomization",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/accounts/{AwsAccountId}/customizations"
+      },
+      "input": {
+        "shape": "DeleteAccountCustomizationRequest"
+      },
+      "output": {
+        "shape": "DeleteAccountCustomizationResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ResourceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Deletes customizations for the QuickSight subscription on your AWS account.</p>"
     },
     "DeleteDashboard": {
       "name": "DeleteDashboard",
@@ -689,6 +806,43 @@
       ],
       "documentation": "<p>Deletes an existing IAM policy assignment.</p>"
     },
+    "DeleteNamespace": {
+      "name": "DeleteNamespace",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/accounts/{AwsAccountId}/namespaces/{Namespace}"
+      },
+      "input": {
+        "shape": "DeleteNamespaceRequest"
+      },
+      "output": {
+        "shape": "DeleteNamespaceResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "PreconditionNotMetException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ResourceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Deletes a namespace and the users and groups that are associated with the namespace. This is an asynchronous process. Assets including dashboards, analyses, datasets and data sources are not deleted. To delete these assets, you use the APIs for the relevant asset. </p>"
+    },
     "DeleteTemplate": {
       "name": "DeleteTemplate",
       "http": {
@@ -854,6 +1008,9 @@
           "shape": "ThrottlingException"
         },
         {
+          "shape": "PreconditionNotMetException"
+        },
+        {
           "shape": "InternalFailureException"
         },
         {
@@ -888,6 +1045,9 @@
           "shape": "ThrottlingException"
         },
         {
+          "shape": "PreconditionNotMetException"
+        },
+        {
           "shape": "InternalFailureException"
         },
         {
@@ -895,6 +1055,74 @@
         }
       ],
       "documentation": "<p>Deletes a user identified by its principal ID. </p>"
+    },
+    "DescribeAccountCustomization": {
+      "name": "DescribeAccountCustomization",
+      "http": {
+        "method": "GET",
+        "requestUri": "/accounts/{AwsAccountId}/customizations"
+      },
+      "input": {
+        "shape": "DescribeAccountCustomizationRequest"
+      },
+      "output": {
+        "shape": "DescribeAccountCustomizationResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ResourceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Describes the customizations associated with your AWS account.</p>"
+    },
+    "DescribeAccountSettings": {
+      "name": "DescribeAccountSettings",
+      "http": {
+        "method": "GET",
+        "requestUri": "/accounts/{AwsAccountId}/settings"
+      },
+      "input": {
+        "shape": "DescribeAccountSettingsRequest"
+      },
+      "output": {
+        "shape": "DescribeAccountSettingsResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ResourceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Describes the settings that were used when your QuickSight subscription was first created in this AWS Account.</p>"
     },
     "DescribeDashboard": {
       "name": "DescribeDashboard",
@@ -1190,6 +1418,40 @@
       ],
       "documentation": "<p>Describes a SPICE ingestion.</p>"
     },
+    "DescribeNamespace": {
+      "name": "DescribeNamespace",
+      "http": {
+        "method": "GET",
+        "requestUri": "/accounts/{AwsAccountId}/namespaces/{Namespace}"
+      },
+      "input": {
+        "shape": "DescribeNamespaceRequest"
+      },
+      "output": {
+        "shape": "DescribeNamespaceResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ResourceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Describes the current namespace.</p>"
+    },
     "DescribeTemplate": {
       "name": "DescribeTemplate",
       "http": {
@@ -1423,6 +1685,9 @@
           "shape": "ThrottlingException"
         },
         {
+          "shape": "PreconditionNotMetException"
+        },
+        {
           "shape": "InternalFailureException"
         },
         {
@@ -1479,6 +1744,49 @@
         }
       ],
       "documentation": "<p>Generates a URL and authorization code that you can embed in your web server code. Before you use this command, make sure that you have configured the dashboards and permissions. </p> <p>Currently, you can use <code>GetDashboardEmbedURL</code> only from the server, not from the user's browser. The following rules apply to the combination of URL and authorization code:</p> <ul> <li> <p>They must be used together.</p> </li> <li> <p>They can be used one time only.</p> </li> <li> <p>They are valid for 5 minutes after you run this command.</p> </li> <li> <p>The resulting user session is valid for 10 hours.</p> </li> </ul> <p> For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedding-dashboards.html\">Embedding Amazon QuickSight Dashboards</a> in the <i>Amazon QuickSight User Guide</i> or <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/qs-dev-embedded-dashboards.html\">Embedding Amazon QuickSight Dashboards</a> in the <i>Amazon QuickSight API Reference</i>.</p>"
+    },
+    "GetSessionEmbedUrl": {
+      "name": "GetSessionEmbedUrl",
+      "http": {
+        "method": "GET",
+        "requestUri": "/accounts/{AwsAccountId}/session-embed-url"
+      },
+      "input": {
+        "shape": "GetSessionEmbedUrlRequest"
+      },
+      "output": {
+        "shape": "GetSessionEmbedUrlResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceExistsException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "QuickSightUserNotFoundException"
+        },
+        {
+          "shape": "SessionLifetimeInMinutesInvalidException"
+        },
+        {
+          "shape": "UnsupportedUserEditionException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Generates a session URL and authorization code that you can embed in your web server code. </p>"
     },
     "ListDashboardVersions": {
       "name": "ListDashboardVersions",
@@ -1792,6 +2100,46 @@
       ],
       "documentation": "<p>Lists the history of SPICE ingestions for a dataset.</p>"
     },
+    "ListNamespaces": {
+      "name": "ListNamespaces",
+      "http": {
+        "method": "GET",
+        "requestUri": "/accounts/{AwsAccountId}/namespaces"
+      },
+      "input": {
+        "shape": "ListNamespacesRequest"
+      },
+      "output": {
+        "shape": "ListNamespacesResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
+        },
+        {
+          "shape": "PreconditionNotMetException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ResourceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Lists the namespaces for the specified AWS account.</p>"
+    },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
       "http": {
@@ -2059,6 +2407,9 @@
           "shape": "ThrottlingException"
         },
         {
+          "shape": "PreconditionNotMetException"
+        },
+        {
           "shape": "InternalFailureException"
         },
         {
@@ -2094,6 +2445,9 @@
         },
         {
           "shape": "InvalidNextTokenException"
+        },
+        {
+          "shape": "PreconditionNotMetException"
         },
         {
           "shape": "InternalFailureException"
@@ -2245,6 +2599,74 @@
         }
       ],
       "documentation": "<p>Removes a tag or tags from a resource.</p>"
+    },
+    "UpdateAccountCustomization": {
+      "name": "UpdateAccountCustomization",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/accounts/{AwsAccountId}/customizations"
+      },
+      "input": {
+        "shape": "UpdateAccountCustomizationRequest"
+      },
+      "output": {
+        "shape": "UpdateAccountCustomizationResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ResourceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Updates customizations associated with the QuickSight subscription on your AWS account.</p>"
+    },
+    "UpdateAccountSettings": {
+      "name": "UpdateAccountSettings",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/accounts/{AwsAccountId}/settings"
+      },
+      "input": {
+        "shape": "UpdateAccountSettingsRequest"
+      },
+      "output": {
+        "shape": "UpdateAccountSettingsResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ResourceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Updates the settings for the Amazon QuickSight subscription in your AWS Account.</p>"
     },
     "UpdateDashboard": {
       "name": "UpdateDashboard",
@@ -2812,6 +3234,9 @@
           "shape": "ThrottlingException"
         },
         {
+          "shape": "PreconditionNotMetException"
+        },
+        {
           "shape": "InternalFailureException"
         },
         {
@@ -2822,6 +3247,38 @@
     }
   },
   "shapes": {
+    "AccountCustomization": {
+      "type": "structure",
+      "members": {
+        "DefaultTheme": {
+          "shape": "Arn",
+          "documentation": "<p>The default theme for this QuickSight subscription.</p>"
+        }
+      },
+      "documentation": "<p>The customizations associated with your AWS account for QuickSight.</p>"
+    },
+    "AccountSettings": {
+      "type": "structure",
+      "members": {
+        "AccountName": {
+          "shape": "String",
+          "documentation": "<p>The name associated with the QuickSight subscription in your AWS account.</p>"
+        },
+        "Edition": {
+          "shape": "Edition",
+          "documentation": "<p>The edition of QuickSight that you're currently subscribed to.</p>"
+        },
+        "DefaultNamespace": {
+          "shape": "Namespace",
+          "documentation": "<p>The default QuickSight namespace for your AWS account.</p>"
+        },
+        "NotificationEmail": {
+          "shape": "String",
+          "documentation": "<p>The main notification email for your QuickSight subscription.</p>"
+        }
+      },
+      "documentation": "<p>The QuickSight settings associated with your AWS account.</p>"
+    },
     "ActionList": {
       "type": "list",
       "member": {
@@ -3236,6 +3693,57 @@
     "CopySourceArn": {
       "type": "string",
       "pattern": "^arn:[-a-z0-9]*:quicksight:[-a-z0-9]*:[0-9]{12}:datasource/.+"
+    },
+    "CreateAccountCustomizationRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "AccountCustomization"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The ID for the AWS account that you want to customize QuickSight for.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "Namespace": {
+          "shape": "Namespace",
+          "documentation": "<p>The namespace associated with the customization that you're creating.</p>",
+          "location": "querystring",
+          "locationName": "namespace"
+        },
+        "AccountCustomization": {
+          "shape": "AccountCustomization",
+          "documentation": "<p>The customizations you're adding to the QuickSight subscription for the AWS account. For example, you could add a default theme by setting <code>AccountCustomization</code> to the midnight theme (<code>DefaultTheme=\"arn:aws:quicksight::aws:theme/MIDNIGHT\"</code>) or to a custom theme (<code>DefaultTheme=\"arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639\"</code>).</p>"
+        }
+      }
+    },
+    "CreateAccountCustomizationResponse": {
+      "type": "structure",
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The ID for the AWS account that you want to customize QuickSight for.</p>"
+        },
+        "Namespace": {
+          "shape": "Namespace",
+          "documentation": "<p>The namespace associated with the customization you're creating. </p>"
+        },
+        "AccountCustomization": {
+          "shape": "AccountCustomization",
+          "documentation": "<p>The customizations you're adding to the QuickSight subscription for the AWS account.</p>"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The AWS request ID for this operation.</p>"
+        },
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The HTTP status of the request.</p>",
+          "location": "statusCode"
+        }
+      }
     },
     "CreateColumnsOperation": {
       "type": "structure",
@@ -3719,6 +4227,68 @@
         },
         "RequestId": {
           "shape": "string",
+          "documentation": "<p>The AWS request ID for this operation.</p>"
+        },
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The HTTP status of the request.</p>",
+          "location": "statusCode"
+        }
+      }
+    },
+    "CreateNamespaceRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "Namespace",
+        "IdentityStore"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The ID for the AWS account that you want to create the QuickSight namespace in.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "Namespace": {
+          "shape": "Namespace",
+          "documentation": "<p>The name that you want to use to describe the new namespace.</p>"
+        },
+        "IdentityStore": {
+          "shape": "IdentityStore",
+          "documentation": "<p>Specifies the type of your user identity directory. Currently, this supports users with an identity type of <code>QUICKSIGHT</code>.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags that you want to associate with the namespace that you're creating.</p>"
+        }
+      }
+    },
+    "CreateNamespaceResponse": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the QuickSight namespace you created. </p>"
+        },
+        "Name": {
+          "shape": "Namespace",
+          "documentation": "<p>The name of the new namespace that you created.</p>"
+        },
+        "CapacityRegion": {
+          "shape": "String",
+          "documentation": "<p>The AWS Region that you want to use for the free SPICE capacity for the new namespace. This is set to the region that you run CreateNamespace in. </p>"
+        },
+        "CreationStatus": {
+          "shape": "NamespaceStatus",
+          "documentation": "<p>The status of the creation of the namespace. This is an asynchronous process. A status of <code>CREATED</code> means that your namespace is ready to use. If an error occurs, it indicates if the process is <code>retryable</code> or <code>non-retryable</code>. In the case of a non-retryable error, refer to the error message for follow-up actions.</p>"
+        },
+        "IdentityStore": {
+          "shape": "IdentityStore",
+          "documentation": "<p>Specifies the type of your user identity directory. Currently, this supports users with an identity type of <code>QUICKSIGHT</code>.</p>"
+        },
+        "RequestId": {
+          "shape": "String",
           "documentation": "<p>The AWS request ID for this operation.</p>"
         },
         "Status": {
@@ -4784,6 +5354,40 @@
       },
       "max": 100
     },
+    "DeleteAccountCustomizationRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The ID for the AWS account that you want to delete QuickSight customizations from.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "Namespace": {
+          "shape": "Namespace",
+          "documentation": "<p>The namespace associated with the customization that you're deleting.</p>",
+          "location": "querystring",
+          "locationName": "namespace"
+        }
+      }
+    },
+    "DeleteAccountCustomizationResponse": {
+      "type": "structure",
+      "members": {
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The AWS request ID for this operation.</p>"
+        },
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The HTTP status of the request.</p>",
+          "location": "statusCode"
+        }
+      }
+    },
     "DeleteDashboardRequest": {
       "type": "structure",
       "required": [
@@ -5045,6 +5649,41 @@
           "shape": "IAMPolicyAssignmentName",
           "documentation": "<p>The name of the assignment. </p>"
         },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The AWS request ID for this operation.</p>"
+        },
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The HTTP status of the request.</p>",
+          "location": "statusCode"
+        }
+      }
+    },
+    "DeleteNamespaceRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "Namespace"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The ID for the AWS account that you want to delete the QuickSight namespace from.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "Namespace": {
+          "shape": "Namespace",
+          "documentation": "<p>The namespace that you want to delete.</p>",
+          "location": "uri",
+          "locationName": "Namespace"
+        }
+      }
+    },
+    "DeleteNamespaceResponse": {
+      "type": "structure",
+      "members": {
         "RequestId": {
           "shape": "String",
           "documentation": "<p>The AWS request ID for this operation.</p>"
@@ -5351,6 +5990,90 @@
       "type": "string",
       "max": 1,
       "min": 1
+    },
+    "DescribeAccountCustomizationRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The ID for the AWS account that you want to describe QuickSight customizations for.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "Namespace": {
+          "shape": "Namespace",
+          "documentation": "<p>The namespace associated with the customization that you're describing.</p>",
+          "location": "querystring",
+          "locationName": "namespace"
+        },
+        "Resolved": {
+          "shape": "boolean",
+          "documentation": "<p>The status of the creation of the customization. This is an asynchronous process. A status of <code>CREATED</code> means that your customization is ready to use.</p>",
+          "location": "querystring",
+          "locationName": "resolved"
+        }
+      }
+    },
+    "DescribeAccountCustomizationResponse": {
+      "type": "structure",
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The ID for the AWS account that you want to describe QuickSight customizations for.</p>"
+        },
+        "Namespace": {
+          "shape": "Namespace",
+          "documentation": "<p>The namespace associated with the customization that you're describing.</p>"
+        },
+        "AccountCustomization": {
+          "shape": "AccountCustomization",
+          "documentation": "<p>The customizations associated with QuickSight.</p>"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The AWS request ID for this operation.</p>"
+        },
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The HTTP status of the request.</p>",
+          "location": "statusCode"
+        }
+      }
+    },
+    "DescribeAccountSettingsRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The ID for the AWS account that contains the QuickSight namespaces that you want to list.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        }
+      }
+    },
+    "DescribeAccountSettingsResponse": {
+      "type": "structure",
+      "members": {
+        "AccountSettings": {
+          "shape": "AccountSettings",
+          "documentation": "<p>The settings associated with the QuickSight subscription associated with this AWS account. This information includes the edition of Amazon QuickSight that you subscribed to (Standard or Enterprise) and the notification email for the QuickSight subscription. The QuickSight console, the QuickSight subscription is sometimes referred to as a QuickSight \"account\" even though it is technically not an account, but a subscription in your AWS account.</p>"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The AWS request ID for this operation.</p>"
+        },
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The HTTP status of the request.</p>",
+          "location": "statusCode"
+        }
+      }
     },
     "DescribeDashboardPermissionsRequest": {
       "type": "structure",
@@ -5760,6 +6483,45 @@
         }
       }
     },
+    "DescribeNamespaceRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "Namespace"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The ID for the AWS account that contains the QuickSight namespace that you want to describe.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "Namespace": {
+          "shape": "Namespace",
+          "documentation": "<p>The namespace that you want to describe.</p>",
+          "location": "uri",
+          "locationName": "Namespace"
+        }
+      }
+    },
+    "DescribeNamespaceResponse": {
+      "type": "structure",
+      "members": {
+        "Namespace": {
+          "shape": "NamespaceInfoV2",
+          "documentation": "<p>The information about the namespace that you're describing. The response includes the namespace ARN, name, AWS Region, creation status, and identity store. <code>DescribeNamespace</code> also works for namespaces that are in the process of being created. For incomplete namespaces, this API lists the namespace error types and messages associated with the creation process.</p>"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The AWS request ID for this operation.</p>"
+        },
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The HTTP status of the request.</p>",
+          "location": "statusCode"
+        }
+      }
+    },
     "DescribeTemplateAliasRequest": {
       "type": "structure",
       "required": [
@@ -5899,7 +6661,8 @@
           "location": "statusCode"
         },
         "RequestId": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The AWS request ID for this operation.</p>"
         }
       }
     },
@@ -6107,9 +6870,21 @@
         "shape": "Double"
       }
     },
+    "Edition": {
+      "type": "string",
+      "enum": [
+        "STANDARD",
+        "ENTERPRISE"
+      ]
+    },
     "EmbeddingUrl": {
       "type": "string",
       "sensitive": true
+    },
+    "EntryPoint": {
+      "type": "string",
+      "max": 1000,
+      "min": 1
     },
     "ErrorInfo": {
       "type": "structure",
@@ -6281,6 +7056,56 @@
         }
       }
     },
+    "GetSessionEmbedUrlRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The ID for the AWS account that contains the QuickSight session that you're embedding.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "EntryPoint": {
+          "shape": "EntryPoint",
+          "documentation": "<p>The entry point for the embedded session.</p>",
+          "location": "querystring",
+          "locationName": "entry-point"
+        },
+        "SessionLifetimeInMinutes": {
+          "shape": "SessionLifetimeInMinutes",
+          "documentation": "<p>How many minutes the session is valid. The session lifetime must be 15-600 minutes.</p>",
+          "location": "querystring",
+          "locationName": "session-lifetime"
+        },
+        "UserArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon QuickSight user's Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type. You can use this for any Amazon QuickSight users in your account (readers, authors, or admins) authenticated as one of the following:</p> <ul> <li> <p>Active Directory (AD) users or group members</p> </li> <li> <p>Invited nonfederated users</p> </li> <li> <p>IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation.</p> </li> </ul>",
+          "location": "querystring",
+          "locationName": "user-arn"
+        }
+      }
+    },
+    "GetSessionEmbedUrlResponse": {
+      "type": "structure",
+      "members": {
+        "EmbedUrl": {
+          "shape": "EmbeddingUrl",
+          "documentation": "<p>A single-use URL that you can put into your server-side web page to embed your QuickSight session. This URL is valid for 5 minutes. The API provides the URL with an <code>auth_code</code> value that enables one (and only one) sign-on to a user session that is valid for 10 hours. </p>"
+        },
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The HTTP status of the request.</p>",
+          "location": "statusCode"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The AWS request ID for this operation.</p>"
+        }
+      }
+    },
     "Group": {
       "type": "structure",
       "members": {
@@ -6439,6 +7264,12 @@
       "member": {
         "shape": "IdentityName"
       }
+    },
+    "IdentityStore": {
+      "type": "string",
+      "enum": [
+        "QUICKSIGHT"
+      ]
     },
     "IdentityType": {
       "type": "string",
@@ -7210,6 +8041,55 @@
         }
       }
     },
+    "ListNamespacesRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The ID for the AWS account that contains the QuickSight namespaces that you want to list.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>A pagination token that can be used in a subsequent request.</p>",
+          "location": "querystring",
+          "locationName": "next-token"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to return.</p>",
+          "box": true,
+          "location": "querystring",
+          "locationName": "max-results"
+        }
+      }
+    },
+    "ListNamespacesResponse": {
+      "type": "structure",
+      "members": {
+        "Namespaces": {
+          "shape": "Namespaces",
+          "documentation": "<p>The information about the namespaces in this AWS account. The response includes the namespace ARN, name, AWS Region, notification email address, creation status, and identity store.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>A pagination token that can be used in a subsequent request.</p>"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The AWS request ID for this operation.</p>"
+        },
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The HTTP status of the request.</p>",
+          "location": "statusCode"
+        }
+      }
+    },
     "ListTagsForResourceRequest": {
       "type": "structure",
       "required": [
@@ -7841,6 +8721,73 @@
       "max": 64,
       "pattern": "^[a-zA-Z0-9._-]*$"
     },
+    "NamespaceError": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "shape": "NamespaceErrorType",
+          "documentation": "<p>The error type.</p>"
+        },
+        "Message": {
+          "shape": "String",
+          "documentation": "<p>The message for the error.</p>"
+        }
+      },
+      "documentation": "<p>Errors that occur during namespace creation.</p>"
+    },
+    "NamespaceErrorType": {
+      "type": "string",
+      "enum": [
+        "PERMISSION_DENIED",
+        "INTERNAL_SERVICE_ERROR"
+      ]
+    },
+    "NamespaceInfoV2": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "Namespace",
+          "documentation": "<p>The name of the error.</p>"
+        },
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The namespace ARN.</p>"
+        },
+        "CapacityRegion": {
+          "shape": "String",
+          "documentation": "<p>The namespace AWS Region.</p>"
+        },
+        "CreationStatus": {
+          "shape": "NamespaceStatus",
+          "documentation": "<p>The creation status of a namespace that is not yet completely created.</p>"
+        },
+        "IdentityStore": {
+          "shape": "IdentityStore",
+          "documentation": "<p>The identity store used for the namespace.</p>"
+        },
+        "NamespaceError": {
+          "shape": "NamespaceError",
+          "documentation": "<p>An error that occured when the namespace was created.</p>"
+        }
+      },
+      "documentation": "<p>The error type.</p>"
+    },
+    "NamespaceStatus": {
+      "type": "string",
+      "enum": [
+        "CREATED",
+        "CREATING",
+        "DELETING",
+        "RETRYABLE_FAILURE",
+        "NON_RETRYABLE_FAILURE"
+      ]
+    },
+    "Namespaces": {
+      "type": "list",
+      "member": {
+        "shape": "NamespaceInfoV2"
+      }
+    },
     "NonEmptyString": {
       "type": "string",
       "pattern": ".*\\S.*"
@@ -8129,6 +9076,10 @@
         "UserName": {
           "shape": "UserName",
           "documentation": "<p>The Amazon QuickSight user name that you want to create for the user you are registering.</p>"
+        },
+        "CustomPermissionsName": {
+          "shape": "RoleName",
+          "documentation": "<p>(Enterprise edition only) The name of the custom permissions profile that you want to assign to this user. Currently, custom permissions profile names are assigned to permissions profiles in the QuickSight console. You use this API to assign the named set of permissions to a QuickSight user. </p> <p>Customizing permissions in the QuickSight UI allows you to control a user's access to the following operations:</p> <ul> <li> <p/> </li> <li> <p/> </li> <li> <p/> </li> <li> <p/> </li> </ul> <p>QuickSight custom permissions are applied through IAM policies. Therefore, they override the permissions typically granted by assigning QuickSight users to one of the default security cohorts (admin, author, reader) in QuickSight.</p> <p>This feature is available only to QuickSight Enterprise edition subscriptions that use SAML 2.0-Based Federation for Single Sign-On (SSO).</p>"
         }
       }
     },
@@ -8259,6 +9210,12 @@
       "min": 1,
       "pattern": "[\\w\\-]+"
     },
+    "RoleName": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "^[a-zA-Z0-9+=,.@_-]+$"
+    },
     "RoleSessionName": {
       "type": "string",
       "max": 64,
@@ -8288,6 +9245,10 @@
         "PermissionPolicy"
       ],
       "members": {
+        "Namespace": {
+          "shape": "Namespace",
+          "documentation": "<p>The namespace associated with the row-level permissions dataset.</p>"
+        },
         "Arn": {
           "shape": "Arn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the permission dataset.</p>"
@@ -9349,6 +10310,94 @@
         }
       }
     },
+    "UpdateAccountCustomizationRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "AccountCustomization"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The ID for the AWS account that you want to update QuickSight customizations for.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "Namespace": {
+          "shape": "Namespace",
+          "documentation": "<p>The namespace associated with the customization that you're updating.</p>",
+          "location": "querystring",
+          "locationName": "namespace"
+        },
+        "AccountCustomization": {
+          "shape": "AccountCustomization",
+          "documentation": "<p>The customizations you want to update in QuickSight.</p>"
+        }
+      }
+    },
+    "UpdateAccountCustomizationResponse": {
+      "type": "structure",
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The ID for the AWS account that you want to update QuickSight customizations for.</p>"
+        },
+        "Namespace": {
+          "shape": "Namespace",
+          "documentation": "<p>The namespace associated with the customization that you're updating.</p>"
+        },
+        "AccountCustomization": {
+          "shape": "AccountCustomization",
+          "documentation": "<p>The customizations associated with your QuickSight subscription.</p>"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The AWS request ID for this operation.</p>"
+        },
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The HTTP status of the request.</p>",
+          "location": "statusCode"
+        }
+      }
+    },
+    "UpdateAccountSettingsRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "DefaultNamespace"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The ID for the AWS account that contains the QuickSight namespaces that you want to list.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "DefaultNamespace": {
+          "shape": "Namespace",
+          "documentation": "<p>The default namespace for this AWS Account. Currently, the default is <code>default</code>. IAM users who register for the first time with QuickSight provide an email that becomes associated with the default namespace.</p>"
+        },
+        "NotificationEmail": {
+          "shape": "String",
+          "documentation": "<p>Email address used to send notifications regarding administration of QuickSight.</p>"
+        }
+      }
+    },
+    "UpdateAccountSettingsResponse": {
+      "type": "structure",
+      "members": {
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The AWS request ID for this operation.</p>"
+        },
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The HTTP status of the request.</p>",
+          "location": "statusCode"
+        }
+      }
+    },
     "UpdateDashboardPermissionsRequest": {
       "type": "structure",
       "required": [
@@ -10288,6 +11337,14 @@
         "Role": {
           "shape": "UserRole",
           "documentation": "<p>The Amazon QuickSight role of the user. The user role can be one of the following:</p> <ul> <li> <p> <code>READER</code>: A user who has read-only access to dashboards.</p> </li> <li> <p> <code>AUTHOR</code>: A user who can create data sources, datasets, analyses, and dashboards.</p> </li> <li> <p> <code>ADMIN</code>: A user who is an author, who can also manage Amazon QuickSight settings.</p> </li> </ul>"
+        },
+        "CustomPermissionsName": {
+          "shape": "RoleName",
+          "documentation": "<p>The name of the custom permissions profile that you want to assign to this user. Currently, custom permissions profile names are assigned to permissions profiles in the QuickSight console. You use this API to assign the named set of permissions to a QuickSight user. </p>"
+        },
+        "UnapplyCustomPermissions": {
+          "shape": "Boolean",
+          "documentation": "<p>A flag that you use to indicate that you want to remove all custom permissions from this user. Using this parameter resets the user to the state it was in before a custom permissions profile was applied. This parameter defaults to NULL and it doesn't accept any other value.</p>"
         }
       }
     },
@@ -10367,6 +11424,10 @@
         "PrincipalId": {
           "shape": "String",
           "documentation": "<p>The principal ID of the user.</p>"
+        },
+        "CustomPermissionsName": {
+          "shape": "RoleName",
+          "documentation": "<p>The custom permissions profile associated with this user.</p>"
         }
       },
       "documentation": "<p>A registered user of Amazon QuickSight. Currently, an Amazon QuickSight subscription can't contain more than 20 million users.</p>"

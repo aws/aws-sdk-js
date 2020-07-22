@@ -20,6 +20,14 @@ declare class QuickSight extends Service {
    */
   cancelIngestion(callback?: (err: AWSError, data: QuickSight.Types.CancelIngestionResponse) => void): Request<QuickSight.Types.CancelIngestionResponse, AWSError>;
   /**
+   * Creates a customization for the Amazon QuickSight subscription associated with your AWS account.
+   */
+  createAccountCustomization(params: QuickSight.Types.CreateAccountCustomizationRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateAccountCustomizationResponse) => void): Request<QuickSight.Types.CreateAccountCustomizationResponse, AWSError>;
+  /**
+   * Creates a customization for the Amazon QuickSight subscription associated with your AWS account.
+   */
+  createAccountCustomization(callback?: (err: AWSError, data: QuickSight.Types.CreateAccountCustomizationResponse) => void): Request<QuickSight.Types.CreateAccountCustomizationResponse, AWSError>;
+  /**
    * Creates a dashboard from a template. To first create a template, see the CreateTemplate API operation. A dashboard is an entity in QuickSight that identifies QuickSight reports, created from analyses. You can share QuickSight dashboards. With the right permissions, you can create scheduled email reports from them. The CreateDashboard, DescribeDashboard, and ListDashboardsByUser API operations act on the dashboard entity. If you have the correct permissions, you can create a dashboard from a template that exists in a different AWS account.
    */
   createDashboard(params: QuickSight.Types.CreateDashboardRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateDashboardResponse) => void): Request<QuickSight.Types.CreateDashboardResponse, AWSError>;
@@ -76,6 +84,14 @@ declare class QuickSight extends Service {
    */
   createIngestion(callback?: (err: AWSError, data: QuickSight.Types.CreateIngestionResponse) => void): Request<QuickSight.Types.CreateIngestionResponse, AWSError>;
   /**
+   * (Enterprise edition only) Creates a new namespace for you to use with Amazon QuickSight. A namespace allows you to isolate the QuickSight users and groups that are registered for that namespace. Users that access the namespace can share assets only with other users or groups in the same namespace. They can't see users and groups in other namespaces. You can create a namespace after your AWS account is subscribed to QuickSight. The namespace must be unique within the AWS account. By default, there is a limit of 100 namespaces per AWS account. To increase your limit, create a ticket with AWS Support. 
+   */
+  createNamespace(params: QuickSight.Types.CreateNamespaceRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateNamespaceResponse) => void): Request<QuickSight.Types.CreateNamespaceResponse, AWSError>;
+  /**
+   * (Enterprise edition only) Creates a new namespace for you to use with Amazon QuickSight. A namespace allows you to isolate the QuickSight users and groups that are registered for that namespace. Users that access the namespace can share assets only with other users or groups in the same namespace. They can't see users and groups in other namespaces. You can create a namespace after your AWS account is subscribed to QuickSight. The namespace must be unique within the AWS account. By default, there is a limit of 100 namespaces per AWS account. To increase your limit, create a ticket with AWS Support. 
+   */
+  createNamespace(callback?: (err: AWSError, data: QuickSight.Types.CreateNamespaceResponse) => void): Request<QuickSight.Types.CreateNamespaceResponse, AWSError>;
+  /**
    * Creates a template from an existing QuickSight analysis or template. You can use the resulting template to create a dashboard. A template is an entity in QuickSight that encapsulates the metadata required to create an analysis and that you can use to create s dashboard. A template adds a layer of abstraction by using placeholders to replace the dataset associated with the analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets that follow the same schema that was used to create the source analysis and template.
    */
   createTemplate(params: QuickSight.Types.CreateTemplateRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateTemplateResponse) => void): Request<QuickSight.Types.CreateTemplateResponse, AWSError>;
@@ -107,6 +123,14 @@ declare class QuickSight extends Service {
    * Creates a theme alias for a theme.
    */
   createThemeAlias(callback?: (err: AWSError, data: QuickSight.Types.CreateThemeAliasResponse) => void): Request<QuickSight.Types.CreateThemeAliasResponse, AWSError>;
+  /**
+   * Deletes customizations for the QuickSight subscription on your AWS account.
+   */
+  deleteAccountCustomization(params: QuickSight.Types.DeleteAccountCustomizationRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteAccountCustomizationResponse) => void): Request<QuickSight.Types.DeleteAccountCustomizationResponse, AWSError>;
+  /**
+   * Deletes customizations for the QuickSight subscription on your AWS account.
+   */
+  deleteAccountCustomization(callback?: (err: AWSError, data: QuickSight.Types.DeleteAccountCustomizationResponse) => void): Request<QuickSight.Types.DeleteAccountCustomizationResponse, AWSError>;
   /**
    * Deletes a dashboard.
    */
@@ -156,6 +180,14 @@ declare class QuickSight extends Service {
    */
   deleteIAMPolicyAssignment(callback?: (err: AWSError, data: QuickSight.Types.DeleteIAMPolicyAssignmentResponse) => void): Request<QuickSight.Types.DeleteIAMPolicyAssignmentResponse, AWSError>;
   /**
+   * Deletes a namespace and the users and groups that are associated with the namespace. This is an asynchronous process. Assets including dashboards, analyses, datasets and data sources are not deleted. To delete these assets, you use the APIs for the relevant asset. 
+   */
+  deleteNamespace(params: QuickSight.Types.DeleteNamespaceRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteNamespaceResponse) => void): Request<QuickSight.Types.DeleteNamespaceResponse, AWSError>;
+  /**
+   * Deletes a namespace and the users and groups that are associated with the namespace. This is an asynchronous process. Assets including dashboards, analyses, datasets and data sources are not deleted. To delete these assets, you use the APIs for the relevant asset. 
+   */
+  deleteNamespace(callback?: (err: AWSError, data: QuickSight.Types.DeleteNamespaceResponse) => void): Request<QuickSight.Types.DeleteNamespaceResponse, AWSError>;
+  /**
    * Deletes a template.
    */
   deleteTemplate(params: QuickSight.Types.DeleteTemplateRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteTemplateResponse) => void): Request<QuickSight.Types.DeleteTemplateResponse, AWSError>;
@@ -203,6 +235,22 @@ declare class QuickSight extends Service {
    * Deletes a user identified by its principal ID. 
    */
   deleteUserByPrincipalId(callback?: (err: AWSError, data: QuickSight.Types.DeleteUserByPrincipalIdResponse) => void): Request<QuickSight.Types.DeleteUserByPrincipalIdResponse, AWSError>;
+  /**
+   * Describes the customizations associated with your AWS account.
+   */
+  describeAccountCustomization(params: QuickSight.Types.DescribeAccountCustomizationRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeAccountCustomizationResponse) => void): Request<QuickSight.Types.DescribeAccountCustomizationResponse, AWSError>;
+  /**
+   * Describes the customizations associated with your AWS account.
+   */
+  describeAccountCustomization(callback?: (err: AWSError, data: QuickSight.Types.DescribeAccountCustomizationResponse) => void): Request<QuickSight.Types.DescribeAccountCustomizationResponse, AWSError>;
+  /**
+   * Describes the settings that were used when your QuickSight subscription was first created in this AWS Account.
+   */
+  describeAccountSettings(params: QuickSight.Types.DescribeAccountSettingsRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeAccountSettingsResponse) => void): Request<QuickSight.Types.DescribeAccountSettingsResponse, AWSError>;
+  /**
+   * Describes the settings that were used when your QuickSight subscription was first created in this AWS Account.
+   */
+  describeAccountSettings(callback?: (err: AWSError, data: QuickSight.Types.DescribeAccountSettingsResponse) => void): Request<QuickSight.Types.DescribeAccountSettingsResponse, AWSError>;
   /**
    * Provides a summary for a dashboard.
    */
@@ -276,6 +324,14 @@ declare class QuickSight extends Service {
    */
   describeIngestion(callback?: (err: AWSError, data: QuickSight.Types.DescribeIngestionResponse) => void): Request<QuickSight.Types.DescribeIngestionResponse, AWSError>;
   /**
+   * Describes the current namespace.
+   */
+  describeNamespace(params: QuickSight.Types.DescribeNamespaceRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeNamespaceResponse) => void): Request<QuickSight.Types.DescribeNamespaceResponse, AWSError>;
+  /**
+   * Describes the current namespace.
+   */
+  describeNamespace(callback?: (err: AWSError, data: QuickSight.Types.DescribeNamespaceResponse) => void): Request<QuickSight.Types.DescribeNamespaceResponse, AWSError>;
+  /**
    * Describes a template's metadata.
    */
   describeTemplate(params: QuickSight.Types.DescribeTemplateRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeTemplateResponse) => void): Request<QuickSight.Types.DescribeTemplateResponse, AWSError>;
@@ -339,6 +395,14 @@ declare class QuickSight extends Service {
    * Generates a URL and authorization code that you can embed in your web server code. Before you use this command, make sure that you have configured the dashboards and permissions.  Currently, you can use GetDashboardEmbedURL only from the server, not from the user's browser. The following rules apply to the combination of URL and authorization code:   They must be used together.   They can be used one time only.   They are valid for 5 minutes after you run this command.   The resulting user session is valid for 10 hours.    For more information, see Embedding Amazon QuickSight Dashboards in the Amazon QuickSight User Guide or Embedding Amazon QuickSight Dashboards in the Amazon QuickSight API Reference.
    */
   getDashboardEmbedUrl(callback?: (err: AWSError, data: QuickSight.Types.GetDashboardEmbedUrlResponse) => void): Request<QuickSight.Types.GetDashboardEmbedUrlResponse, AWSError>;
+  /**
+   * Generates a session URL and authorization code that you can embed in your web server code. 
+   */
+  getSessionEmbedUrl(params: QuickSight.Types.GetSessionEmbedUrlRequest, callback?: (err: AWSError, data: QuickSight.Types.GetSessionEmbedUrlResponse) => void): Request<QuickSight.Types.GetSessionEmbedUrlResponse, AWSError>;
+  /**
+   * Generates a session URL and authorization code that you can embed in your web server code. 
+   */
+  getSessionEmbedUrl(callback?: (err: AWSError, data: QuickSight.Types.GetSessionEmbedUrlResponse) => void): Request<QuickSight.Types.GetSessionEmbedUrlResponse, AWSError>;
   /**
    * Lists all the versions of the dashboards in the QuickSight subscription.
    */
@@ -411,6 +475,14 @@ declare class QuickSight extends Service {
    * Lists the history of SPICE ingestions for a dataset.
    */
   listIngestions(callback?: (err: AWSError, data: QuickSight.Types.ListIngestionsResponse) => void): Request<QuickSight.Types.ListIngestionsResponse, AWSError>;
+  /**
+   * Lists the namespaces for the specified AWS account.
+   */
+  listNamespaces(params: QuickSight.Types.ListNamespacesRequest, callback?: (err: AWSError, data: QuickSight.Types.ListNamespacesResponse) => void): Request<QuickSight.Types.ListNamespacesResponse, AWSError>;
+  /**
+   * Lists the namespaces for the specified AWS account.
+   */
+  listNamespaces(callback?: (err: AWSError, data: QuickSight.Types.ListNamespacesResponse) => void): Request<QuickSight.Types.ListNamespacesResponse, AWSError>;
   /**
    * Lists the tags assigned to a resource.
    */
@@ -515,6 +587,22 @@ declare class QuickSight extends Service {
    * Removes a tag or tags from a resource.
    */
   untagResource(callback?: (err: AWSError, data: QuickSight.Types.UntagResourceResponse) => void): Request<QuickSight.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Updates customizations associated with the QuickSight subscription on your AWS account.
+   */
+  updateAccountCustomization(params: QuickSight.Types.UpdateAccountCustomizationRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateAccountCustomizationResponse) => void): Request<QuickSight.Types.UpdateAccountCustomizationResponse, AWSError>;
+  /**
+   * Updates customizations associated with the QuickSight subscription on your AWS account.
+   */
+  updateAccountCustomization(callback?: (err: AWSError, data: QuickSight.Types.UpdateAccountCustomizationResponse) => void): Request<QuickSight.Types.UpdateAccountCustomizationResponse, AWSError>;
+  /**
+   * Updates the settings for the Amazon QuickSight subscription in your AWS Account.
+   */
+  updateAccountSettings(params: QuickSight.Types.UpdateAccountSettingsRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateAccountSettingsResponse) => void): Request<QuickSight.Types.UpdateAccountSettingsResponse, AWSError>;
+  /**
+   * Updates the settings for the Amazon QuickSight subscription in your AWS Account.
+   */
+  updateAccountSettings(callback?: (err: AWSError, data: QuickSight.Types.UpdateAccountSettingsResponse) => void): Request<QuickSight.Types.UpdateAccountSettingsResponse, AWSError>;
   /**
    * Updates a dashboard in an AWS account.
    */
@@ -645,6 +733,30 @@ declare class QuickSight extends Service {
   updateUser(callback?: (err: AWSError, data: QuickSight.Types.UpdateUserResponse) => void): Request<QuickSight.Types.UpdateUserResponse, AWSError>;
 }
 declare namespace QuickSight {
+  export interface AccountCustomization {
+    /**
+     * The default theme for this QuickSight subscription.
+     */
+    DefaultTheme?: Arn;
+  }
+  export interface AccountSettings {
+    /**
+     * The name associated with the QuickSight subscription in your AWS account.
+     */
+    AccountName?: String;
+    /**
+     * The edition of QuickSight that you're currently subscribed to.
+     */
+    Edition?: Edition;
+    /**
+     * The default QuickSight namespace for your AWS account.
+     */
+    DefaultNamespace?: Namespace;
+    /**
+     * The main notification email for your QuickSight subscription.
+     */
+    NotificationEmail?: String;
+  }
   export type ActionList = String[];
   export interface ActiveIAMPolicyAssignment {
     /**
@@ -838,6 +950,42 @@ declare namespace QuickSight {
   }
   export type ColumnTagList = ColumnTag[];
   export type CopySourceArn = string;
+  export interface CreateAccountCustomizationRequest {
+    /**
+     * The ID for the AWS account that you want to customize QuickSight for.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The namespace associated with the customization that you're creating.
+     */
+    Namespace?: Namespace;
+    /**
+     * The customizations you're adding to the QuickSight subscription for the AWS account. For example, you could add a default theme by setting AccountCustomization to the midnight theme (DefaultTheme="arn:aws:quicksight::aws:theme/MIDNIGHT") or to a custom theme (DefaultTheme="arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639").
+     */
+    AccountCustomization: AccountCustomization;
+  }
+  export interface CreateAccountCustomizationResponse {
+    /**
+     * The ID for the AWS account that you want to customize QuickSight for.
+     */
+    AwsAccountId?: AwsAccountId;
+    /**
+     * The namespace associated with the customization you're creating. 
+     */
+    Namespace?: Namespace;
+    /**
+     * The customizations you're adding to the QuickSight subscription for the AWS account.
+     */
+    AccountCustomization?: AccountCustomization;
+    /**
+     * The AWS request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
   export interface CreateColumnsOperation {
     /**
      * Calculated columns to create.
@@ -1195,6 +1343,54 @@ declare namespace QuickSight {
      * The AWS request ID for this operation.
      */
     RequestId?: string;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
+  export interface CreateNamespaceRequest {
+    /**
+     * The ID for the AWS account that you want to create the QuickSight namespace in.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The name that you want to use to describe the new namespace.
+     */
+    Namespace: Namespace;
+    /**
+     * Specifies the type of your user identity directory. Currently, this supports users with an identity type of QUICKSIGHT.
+     */
+    IdentityStore: IdentityStore;
+    /**
+     * The tags that you want to associate with the namespace that you're creating.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateNamespaceResponse {
+    /**
+     * The ARN of the QuickSight namespace you created. 
+     */
+    Arn?: Arn;
+    /**
+     * The name of the new namespace that you created.
+     */
+    Name?: Namespace;
+    /**
+     * The AWS Region that you want to use for the free SPICE capacity for the new namespace. This is set to the region that you run CreateNamespace in. 
+     */
+    CapacityRegion?: String;
+    /**
+     * The status of the creation of the namespace. This is an asynchronous process. A status of CREATED means that your namespace is ready to use. If an error occurs, it indicates if the process is retryable or non-retryable. In the case of a non-retryable error, refer to the error message for follow-up actions.
+     */
+    CreationStatus?: NamespaceStatus;
+    /**
+     * Specifies the type of your user identity directory. Currently, this supports users with an identity type of QUICKSIGHT.
+     */
+    IdentityStore?: IdentityStore;
+    /**
+     * The AWS request ID for this operation.
+     */
+    RequestId?: String;
     /**
      * The HTTP status of the request.
      */
@@ -1901,6 +2097,26 @@ declare namespace QuickSight {
     Values: DoubleList;
   }
   export type DecimalParameterList = DecimalParameter[];
+  export interface DeleteAccountCustomizationRequest {
+    /**
+     * The ID for the AWS account that you want to delete QuickSight customizations from.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The namespace associated with the customization that you're deleting.
+     */
+    Namespace?: Namespace;
+  }
+  export interface DeleteAccountCustomizationResponse {
+    /**
+     * The AWS request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
   export interface DeleteDashboardRequest {
     /**
      * The ID of the AWS account that contains the dashboard that you're deleting.
@@ -2060,6 +2276,26 @@ declare namespace QuickSight {
      * The name of the assignment. 
      */
     AssignmentName?: IAMPolicyAssignmentName;
+    /**
+     * The AWS request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
+  export interface DeleteNamespaceRequest {
+    /**
+     * The ID for the AWS account that you want to delete the QuickSight namespace from.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The namespace that you want to delete.
+     */
+    Namespace: Namespace;
+  }
+  export interface DeleteNamespaceResponse {
     /**
      * The AWS request ID for this operation.
      */
@@ -2254,6 +2490,62 @@ declare namespace QuickSight {
     Status?: StatusCode;
   }
   export type Delimiter = string;
+  export interface DescribeAccountCustomizationRequest {
+    /**
+     * The ID for the AWS account that you want to describe QuickSight customizations for.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The namespace associated with the customization that you're describing.
+     */
+    Namespace?: Namespace;
+    /**
+     * The status of the creation of the customization. This is an asynchronous process. A status of CREATED means that your customization is ready to use.
+     */
+    Resolved?: boolean;
+  }
+  export interface DescribeAccountCustomizationResponse {
+    /**
+     * The ID for the AWS account that you want to describe QuickSight customizations for.
+     */
+    AwsAccountId?: AwsAccountId;
+    /**
+     * The namespace associated with the customization that you're describing.
+     */
+    Namespace?: Namespace;
+    /**
+     * The customizations associated with QuickSight.
+     */
+    AccountCustomization?: AccountCustomization;
+    /**
+     * The AWS request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
+  export interface DescribeAccountSettingsRequest {
+    /**
+     * The ID for the AWS account that contains the QuickSight namespaces that you want to list.
+     */
+    AwsAccountId: AwsAccountId;
+  }
+  export interface DescribeAccountSettingsResponse {
+    /**
+     * The settings associated with the QuickSight subscription associated with this AWS account. This information includes the edition of Amazon QuickSight that you subscribed to (Standard or Enterprise) and the notification email for the QuickSight subscription. The QuickSight console, the QuickSight subscription is sometimes referred to as a QuickSight "account" even though it is technically not an account, but a subscription in your AWS account.
+     */
+    AccountSettings?: AccountSettings;
+    /**
+     * The AWS request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
   export interface DescribeDashboardPermissionsRequest {
     /**
      * The ID of the AWS account that contains the dashboard that you're describing permissions for.
@@ -2514,6 +2806,30 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
   }
+  export interface DescribeNamespaceRequest {
+    /**
+     * The ID for the AWS account that contains the QuickSight namespace that you want to describe.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The namespace that you want to describe.
+     */
+    Namespace: Namespace;
+  }
+  export interface DescribeNamespaceResponse {
+    /**
+     * The information about the namespace that you're describing. The response includes the namespace ARN, name, AWS Region, creation status, and identity store. DescribeNamespace also works for namespaces that are in the process of being created. For incomplete namespaces, this API lists the namespace error types and messages associated with the creation process.
+     */
+    Namespace?: NamespaceInfoV2;
+    /**
+     * The AWS request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
   export interface DescribeTemplateAliasRequest {
     /**
      * The ID of the AWS account that contains the template alias that you're describing.
@@ -2601,6 +2917,9 @@ declare namespace QuickSight {
      * The HTTP status of the request.
      */
     Status?: StatusCode;
+    /**
+     * The AWS request ID for this operation.
+     */
     RequestId?: String;
   }
   export interface DescribeThemeAliasRequest {
@@ -2726,7 +3045,9 @@ declare namespace QuickSight {
   export type Domain = string;
   export type Double = number;
   export type DoubleList = Double[];
+  export type Edition = "STANDARD"|"ENTERPRISE"|string;
   export type EmbeddingUrl = string;
+  export type EntryPoint = string;
   export interface ErrorInfo {
     /**
      * Error type.
@@ -2801,6 +3122,38 @@ declare namespace QuickSight {
   export interface GetDashboardEmbedUrlResponse {
     /**
      * A single-use URL that you can put into your server-side webpage to embed your dashboard. This URL is valid for 5 minutes. The API provides the URL with an auth_code value that enables one (and only one) sign-on to a user session that is valid for 10 hours. 
+     */
+    EmbedUrl?: EmbeddingUrl;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The AWS request ID for this operation.
+     */
+    RequestId?: String;
+  }
+  export interface GetSessionEmbedUrlRequest {
+    /**
+     * The ID for the AWS account that contains the QuickSight session that you're embedding.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The entry point for the embedded session.
+     */
+    EntryPoint?: EntryPoint;
+    /**
+     * How many minutes the session is valid. The session lifetime must be 15-600 minutes.
+     */
+    SessionLifetimeInMinutes?: SessionLifetimeInMinutes;
+    /**
+     * The Amazon QuickSight user's Amazon Resource Name (ARN), for use with QUICKSIGHT identity type. You can use this for any Amazon QuickSight users in your account (readers, authors, or admins) authenticated as one of the following:   Active Directory (AD) users or group members   Invited nonfederated users   IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation.  
+     */
+    UserArn?: Arn;
+  }
+  export interface GetSessionEmbedUrlResponse {
+    /**
+     * A single-use URL that you can put into your server-side web page to embed your QuickSight session. This URL is valid for 5 minutes. The API provides the URL with an auth_code value that enables one (and only one) sign-on to a user session that is valid for 10 hours. 
      */
     EmbedUrl?: EmbeddingUrl;
     /**
@@ -2894,6 +3247,7 @@ declare namespace QuickSight {
   export type IdentityMap = {[key: string]: IdentityNameList};
   export type IdentityName = string;
   export type IdentityNameList = IdentityName[];
+  export type IdentityStore = "QUICKSIGHT"|string;
   export type IdentityType = "IAM"|"QUICKSIGHT"|string;
   export interface Ingestion {
     /**
@@ -3315,6 +3669,38 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
   }
+  export interface ListNamespacesRequest {
+    /**
+     * The ID for the AWS account that contains the QuickSight namespaces that you want to list.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * A pagination token that can be used in a subsequent request.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListNamespacesResponse {
+    /**
+     * The information about the namespaces in this AWS account. The response includes the namespace ARN, name, AWS Region, notification email address, creation status, and identity store.
+     */
+    Namespaces?: Namespaces;
+    /**
+     * A pagination token that can be used in a subsequent request.
+     */
+    NextToken?: String;
+    /**
+     * The AWS request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource that you want a list of tags for.
@@ -3698,6 +4084,45 @@ declare namespace QuickSight {
     Database: Database;
   }
   export type Namespace = string;
+  export interface NamespaceError {
+    /**
+     * The error type.
+     */
+    Type?: NamespaceErrorType;
+    /**
+     * The message for the error.
+     */
+    Message?: String;
+  }
+  export type NamespaceErrorType = "PERMISSION_DENIED"|"INTERNAL_SERVICE_ERROR"|string;
+  export interface NamespaceInfoV2 {
+    /**
+     * The name of the error.
+     */
+    Name?: Namespace;
+    /**
+     * The namespace ARN.
+     */
+    Arn?: Arn;
+    /**
+     * The namespace AWS Region.
+     */
+    CapacityRegion?: String;
+    /**
+     * The creation status of a namespace that is not yet completely created.
+     */
+    CreationStatus?: NamespaceStatus;
+    /**
+     * The identity store used for the namespace.
+     */
+    IdentityStore?: IdentityStore;
+    /**
+     * An error that occured when the namespace was created.
+     */
+    NamespaceError?: NamespaceError;
+  }
+  export type NamespaceStatus = "CREATED"|"CREATING"|"DELETING"|"RETRYABLE_FAILURE"|"NON_RETRYABLE_FAILURE"|string;
+  export type Namespaces = NamespaceInfoV2[];
   export type NonEmptyString = string;
   export type OnClause = string;
   export type OptionalPort = number;
@@ -3857,6 +4282,10 @@ declare namespace QuickSight {
      * The Amazon QuickSight user name that you want to create for the user you are registering.
      */
     UserName?: UserName;
+    /**
+     * (Enterprise edition only) The name of the custom permissions profile that you want to assign to this user. Currently, custom permissions profile names are assigned to permissions profiles in the QuickSight console. You use this API to assign the named set of permissions to a QuickSight user.  Customizing permissions in the QuickSight UI allows you to control a user's access to the following operations:               QuickSight custom permissions are applied through IAM policies. Therefore, they override the permissions typically granted by assigning QuickSight users to one of the default security cohorts (admin, author, reader) in QuickSight. This feature is available only to QuickSight Enterprise edition subscriptions that use SAML 2.0-Based Federation for Single Sign-On (SSO).
+     */
+    CustomPermissionsName?: RoleName;
   }
   export interface RegisterUserResponse {
     /**
@@ -3921,6 +4350,7 @@ declare namespace QuickSight {
   export type ResourcePermissionList = ResourcePermission[];
   export type ResourceStatus = "CREATION_IN_PROGRESS"|"CREATION_SUCCESSFUL"|"CREATION_FAILED"|"UPDATE_IN_PROGRESS"|"UPDATE_SUCCESSFUL"|"UPDATE_FAILED"|string;
   export type RestrictiveResourceId = string;
+  export type RoleName = string;
   export type RoleSessionName = string;
   export interface RowInfo {
     /**
@@ -3933,6 +4363,10 @@ declare namespace QuickSight {
     RowsDropped?: long;
   }
   export interface RowLevelPermissionDataSet {
+    /**
+     * The namespace associated with the row-level permissions dataset.
+     */
+    Namespace?: Namespace;
     /**
      * The Amazon Resource Name (ARN) of the permission dataset.
      */
@@ -4590,6 +5024,66 @@ declare namespace QuickSight {
     TagKeys: TagKeyList;
   }
   export interface UntagResourceResponse {
+    /**
+     * The AWS request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
+  export interface UpdateAccountCustomizationRequest {
+    /**
+     * The ID for the AWS account that you want to update QuickSight customizations for.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The namespace associated with the customization that you're updating.
+     */
+    Namespace?: Namespace;
+    /**
+     * The customizations you want to update in QuickSight.
+     */
+    AccountCustomization: AccountCustomization;
+  }
+  export interface UpdateAccountCustomizationResponse {
+    /**
+     * The ID for the AWS account that you want to update QuickSight customizations for.
+     */
+    AwsAccountId?: AwsAccountId;
+    /**
+     * The namespace associated with the customization that you're updating.
+     */
+    Namespace?: Namespace;
+    /**
+     * The customizations associated with your QuickSight subscription.
+     */
+    AccountCustomization?: AccountCustomization;
+    /**
+     * The AWS request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
+  export interface UpdateAccountSettingsRequest {
+    /**
+     * The ID for the AWS account that contains the QuickSight namespaces that you want to list.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The default namespace for this AWS Account. Currently, the default is default. IAM users who register for the first time with QuickSight provide an email that becomes associated with the default namespace.
+     */
+    DefaultNamespace: Namespace;
+    /**
+     * Email address used to send notifications regarding administration of QuickSight.
+     */
+    NotificationEmail?: String;
+  }
+  export interface UpdateAccountSettingsResponse {
     /**
      * The AWS request ID for this operation.
      */
@@ -5269,6 +5763,14 @@ declare namespace QuickSight {
      * The Amazon QuickSight role of the user. The user role can be one of the following:    READER: A user who has read-only access to dashboards.    AUTHOR: A user who can create data sources, datasets, analyses, and dashboards.    ADMIN: A user who is an author, who can also manage Amazon QuickSight settings.  
      */
     Role: UserRole;
+    /**
+     * The name of the custom permissions profile that you want to assign to this user. Currently, custom permissions profile names are assigned to permissions profiles in the QuickSight console. You use this API to assign the named set of permissions to a QuickSight user. 
+     */
+    CustomPermissionsName?: RoleName;
+    /**
+     * A flag that you use to indicate that you want to remove all custom permissions from this user. Using this parameter resets the user to the state it was in before a custom permissions profile was applied. This parameter defaults to NULL and it doesn't accept any other value.
+     */
+    UnapplyCustomPermissions?: Boolean;
   }
   export interface UpdateUserResponse {
     /**
@@ -5335,6 +5837,10 @@ declare namespace QuickSight {
      * The principal ID of the user.
      */
     PrincipalId?: String;
+    /**
+     * The custom permissions profile associated with this user.
+     */
+    CustomPermissionsName?: RoleName;
   }
   export type UserList = User[];
   export type UserName = string;

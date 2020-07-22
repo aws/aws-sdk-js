@@ -836,6 +836,52 @@
       ],
       "documentation": "Gets the details for the input device"
     },
+    "DescribeInputDeviceThumbnail": {
+      "name": "DescribeInputDeviceThumbnail",
+      "http": {
+        "method": "GET",
+        "requestUri": "/prod/inputDevices/{inputDeviceId}/thumbnailData",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeInputDeviceThumbnailRequest"
+      },
+      "output": {
+        "shape": "DescribeInputDeviceThumbnailResponse",
+        "documentation": "Latest InputDevice Thumbnail"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request was invalid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Unexpected internal service error."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You do not have permission to describe input device thumbnail."
+        },
+        {
+          "shape": "BadGatewayException",
+          "documentation": "Bad gateway error."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "Input device not found."
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "Gateway timeout error."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "Request limit exceeded on get thumbnail calls to the input device service."
+        }
+      ],
+      "documentation": "Get the latest thumbnail data for the input device."
+    },
     "DescribeInputSecurityGroup": {
       "name": "DescribeInputSecurityGroup",
       "http": {
@@ -2479,9 +2525,9 @@
           "documentation": "Audio codec settings."
         },
         "LanguageCode": {
-          "shape": "__stringMin3Max3",
+          "shape": "__stringMin1Max35",
           "locationName": "languageCode",
-          "documentation": "Indicates the language of the audio output track. Only used if languageControlMode is useConfigured, or there is no ISO 639 language code specified in the input."
+          "documentation": "RFC 5646 language code representing the language of the audio output track. Only used if languageControlMode is useConfigured, or there is no ISO 639 language code specified in the input."
         },
         "LanguageCodeControl": {
           "shape": "AudioDescriptionLanguageCodeControl",
@@ -4296,6 +4342,64 @@
       },
       "documentation": "Placeholder documentation for DescribeInputDeviceResponse"
     },
+    "DescribeInputDeviceThumbnailRequest": {
+      "type": "structure",
+      "members": {
+        "InputDeviceId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "inputDeviceId",
+          "documentation": "The unique ID of this input device. For example, hd-123456789abcdef."
+        },
+        "Accept": {
+          "shape": "AcceptHeader",
+          "location": "header",
+          "locationName": "accept",
+          "documentation": "The HTTP Accept header. Indicates the requested type for the thumbnail."
+        }
+      },
+      "required": [
+        "InputDeviceId",
+        "Accept"
+      ],
+      "documentation": "Placeholder documentation for DescribeInputDeviceThumbnailRequest"
+    },
+    "DescribeInputDeviceThumbnailResponse": {
+      "type": "structure",
+      "members": {
+        "Body": {
+          "shape": "InputDeviceThumbnail",
+          "locationName": "body",
+          "documentation": "The binary data for the thumbnail that the Link device has most recently sent to MediaLive."
+        },
+        "ContentType": {
+          "shape": "ContentType",
+          "location": "header",
+          "locationName": "Content-Type",
+          "documentation": "Specifies the media type of the thumbnail."
+        },
+        "ContentLength": {
+          "shape": "__long",
+          "location": "header",
+          "locationName": "Content-Length",
+          "documentation": "The length of the content."
+        },
+        "ETag": {
+          "shape": "__string",
+          "location": "header",
+          "locationName": "ETag",
+          "documentation": "The unique, cacheable version of this thumbnail."
+        },
+        "LastModified": {
+          "shape": "__timestamp",
+          "location": "header",
+          "locationName": "Last-Modified",
+          "documentation": "The date and time the thumbnail was last updated at the device."
+        }
+      },
+      "documentation": "Placeholder documentation for DescribeInputDeviceThumbnailResponse",
+      "payload": "Body"
+    },
     "DescribeInputRequest": {
       "type": "structure",
       "members": {
@@ -5964,7 +6068,7 @@
           "documentation": "Pixel Aspect Ratio denominator."
         },
         "ParNumerator": {
-          "shape": "__integer",
+          "shape": "__integerMin1",
           "locationName": "parNumerator",
           "documentation": "Pixel Aspect Ratio numerator."
         },
@@ -6319,7 +6423,7 @@
         "RateControlMode": {
           "shape": "H265RateControlMode",
           "locationName": "rateControlMode",
-          "documentation": "Rate control mode.\n\nQVBR: Quality will match the specified quality level except when it is constrained by the\nmaximum bitrate.  Recommended if you or your viewers pay for bandwidth.\n\nCBR: Quality varies, depending on the video complexity. Recommended only if you distribute\nyour assets to devices that cannot handle variable bitrates."
+          "documentation": "Rate control mode.\n\nQVBR: Quality will match the specified quality level except when it is constrained by the\nmaximum bitrate.  Recommended if you or your viewers pay for bandwidth.\n\nCBR: Quality varies, depending on the video complexity. Recommended only if you distribute\nyour assets to devices that cannot handle variable bitrates.\n\nMultiplex: This rate control mode is only supported (and is required) when the video is being\ndelivered to a MediaLive Multiplex in which case the rate control configuration is controlled\nby the properties within the Multiplex Program."
         },
         "ScanType": {
           "shape": "H265ScanType",
@@ -7647,10 +7751,7 @@
           "documentation": "The value for the variable portion of the URL for the dynamic input, for this instance of the input. Each time you use the same dynamic input in an input switch action, you can provide a different value, in order to connect the input to a different content source."
         }
       },
-      "documentation": "Action to prepare an input for a future immediate input switch.",
-      "required": [
-        "InputAttachmentNameReference"
-      ]
+      "documentation": "Action to prepare an input for a future immediate input switch."
     },
     "InputResolution": {
       "type": "string",
@@ -11989,6 +12090,25 @@
       "members": {},
       "documentation": "Webvtt Destination Settings"
     },
+    "AcceptHeader": {
+      "type": "string",
+      "enum": [
+        "image/jpeg"
+      ],
+      "documentation": "The HTTP Accept header. Indicates the requested type for the thumbnail."
+    },
+    "ContentType": {
+      "type": "string",
+      "enum": [
+        "image/jpeg"
+      ],
+      "documentation": "Specifies the media type of the thumbnail."
+    },
+    "InputDeviceThumbnail": {
+      "type": "blob",
+      "streaming": true,
+      "description": "The binary data for the thumbnail that the Link device has most recently sent to MediaLive."
+    },
     "__double": {
       "type": "double",
       "documentation": "Placeholder documentation for __double"
@@ -12586,6 +12706,10 @@
       },
       "documentation": "Placeholder documentation for __listOf__string"
     },
+    "__long": {
+      "type": "long",
+      "documentation": "Placeholder documentation for __long"
+    },
     "__longMin0Max1099511627775": {
       "type": "long",
       "min": 0,
@@ -12635,6 +12759,12 @@
       "max": 256,
       "documentation": "Placeholder documentation for __stringMin1Max256"
     },
+    "__stringMin1Max35": {
+      "type": "string",
+      "min": 1,
+      "max": 35,
+      "documentation": "Placeholder documentation for __stringMin1Max35"
+    },
     "__stringMin32Max32": {
       "type": "string",
       "min": 32,
@@ -12658,6 +12788,10 @@
       "min": 6,
       "max": 6,
       "documentation": "Placeholder documentation for __stringMin6Max6"
+    },
+    "__timestamp": {
+      "type": "timestamp",
+      "documentation": "Placeholder documentation for __timestamp"
     }
   },
   "documentation": "API for AWS Elemental MediaLive"

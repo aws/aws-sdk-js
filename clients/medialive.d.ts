@@ -5,6 +5,7 @@ import {Service} from '../lib/service';
 import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
+import {Readable} from 'stream';
 interface Blob {}
 declare class MediaLive extends Service {
   /**
@@ -156,6 +157,14 @@ declare class MediaLive extends Service {
    * Gets the details for the input device
    */
   describeInputDevice(callback?: (err: AWSError, data: MediaLive.Types.DescribeInputDeviceResponse) => void): Request<MediaLive.Types.DescribeInputDeviceResponse, AWSError>;
+  /**
+   * Get the latest thumbnail data for the input device.
+   */
+  describeInputDeviceThumbnail(params: MediaLive.Types.DescribeInputDeviceThumbnailRequest, callback?: (err: AWSError, data: MediaLive.Types.DescribeInputDeviceThumbnailResponse) => void): Request<MediaLive.Types.DescribeInputDeviceThumbnailResponse, AWSError>;
+  /**
+   * Get the latest thumbnail data for the input device.
+   */
+  describeInputDeviceThumbnail(callback?: (err: AWSError, data: MediaLive.Types.DescribeInputDeviceThumbnailResponse) => void): Request<MediaLive.Types.DescribeInputDeviceThumbnailResponse, AWSError>;
   /**
    * Produces a summary of an Input Security Group
    */
@@ -626,9 +635,9 @@ Note that this field and audioType are both ignored if inputType is broadcasterM
      */
     CodecSettings?: AudioCodecSettings;
     /**
-     * Indicates the language of the audio output track. Only used if languageControlMode is useConfigured, or there is no ISO 639 language code specified in the input.
+     * RFC 5646 language code representing the language of the audio output track. Only used if languageControlMode is useConfigured, or there is no ISO 639 language code specified in the input.
      */
-    LanguageCode?: __stringMin3Max3;
+    LanguageCode?: __stringMin1Max35;
     /**
      * Choosing followInput will cause the ISO 639 language code of the output to follow the ISO 639 language code of the input. The languageCode will be used when useConfigured is set, or when followInput is selected but there is no ISO 639 language code specified by the input.
      */
@@ -1640,6 +1649,38 @@ one destination per packager.
      */
     Type?: InputDeviceType;
   }
+  export interface DescribeInputDeviceThumbnailRequest {
+    /**
+     * The unique ID of this input device. For example, hd-123456789abcdef.
+     */
+    InputDeviceId: __string;
+    /**
+     * The HTTP Accept header. Indicates the requested type for the thumbnail.
+     */
+    Accept: AcceptHeader;
+  }
+  export interface DescribeInputDeviceThumbnailResponse {
+    /**
+     * The binary data for the thumbnail that the Link device has most recently sent to MediaLive.
+     */
+    Body?: InputDeviceThumbnail;
+    /**
+     * Specifies the media type of the thumbnail.
+     */
+    ContentType?: ContentType;
+    /**
+     * The length of the content.
+     */
+    ContentLength?: __long;
+    /**
+     * The unique, cacheable version of this thumbnail.
+     */
+    ETag?: __string;
+    /**
+     * The date and time the thumbnail was last updated at the device.
+     */
+    LastModified?: __timestamp;
+  }
   export interface DescribeInputRequest {
     /**
      * Unique ID of the input
@@ -2498,7 +2539,7 @@ For VBR: Set the maximum bitrate in order to accommodate expected spikes in the 
     /**
      * Pixel Aspect Ratio numerator.
      */
-    ParNumerator?: __integer;
+    ParNumerator?: __integerMin1;
     /**
      * H.264 Profile.
      */
@@ -2700,6 +2741,10 @@ maximum bitrate.  Recommended if you or your viewers pay for bandwidth.
 
 CBR: Quality varies, depending on the video complexity. Recommended only if you distribute
 your assets to devices that cannot handle variable bitrates.
+
+Multiplex: This rate control mode is only supported (and is required) when the video is being
+delivered to a MediaLive Multiplex in which case the rate control configuration is controlled
+by the properties within the Multiplex Program.
      */
     RateControlMode?: H265RateControlMode;
     /**
@@ -3423,7 +3468,7 @@ to.
     /**
      * The name of the input attachment that should be prepared by this action. If no name is provided, the action will stop the most recent prepare (if any) when activated.
      */
-    InputAttachmentNameReference: __string;
+    InputAttachmentNameReference?: __string;
     /**
      * Settings to let you create a clip of the file input, in order to set up the input to ingest only a portion of the file.
      */
@@ -5783,6 +5828,9 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   }
   export interface WebvttDestinationSettings {
   }
+  export type AcceptHeader = "image/jpeg"|string;
+  export type ContentType = "image/jpeg"|string;
+  export type InputDeviceThumbnail = Buffer|Uint8Array|Blob|string|Readable;
   export type __double = number;
   export type __doubleMin0 = number;
   export type __doubleMin1 = number;
@@ -5878,6 +5926,7 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export type __listOfVideoDescription = VideoDescription[];
   export type __listOf__integer = __integer[];
   export type __listOf__string = __string[];
+  export type __long = number;
   export type __longMin0Max1099511627775 = number;
   export type __longMin0Max4294967295 = number;
   export type __longMin0Max8589934591 = number;
@@ -5887,10 +5936,12 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export type __stringMin1 = string;
   export type __stringMin1Max255 = string;
   export type __stringMin1Max256 = string;
+  export type __stringMin1Max35 = string;
   export type __stringMin32Max32 = string;
   export type __stringMin34Max34 = string;
   export type __stringMin3Max3 = string;
   export type __stringMin6Max6 = string;
+  export type __timestamp = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
