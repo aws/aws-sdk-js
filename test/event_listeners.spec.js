@@ -118,7 +118,7 @@
         expect(errorHandler.calls.length).to.equal(0);
         return expect(successHandler.calls.length).not.to.equal(0);
       });
-      [null, undefined].forEach(region => {
+      [null, undefined].forEach(function(region) {
         it(`sends error event if region is ${region}`, function() {
           var call, request;
           helpers.mockHttpResponse(200, {}, '');
