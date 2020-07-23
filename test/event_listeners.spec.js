@@ -118,16 +118,18 @@
         expect(errorHandler.calls.length).to.equal(0);
         return expect(successHandler.calls.length).not.to.equal(0);
       });
-      it('sends error event if region is not set', function() {
-        var call, request;
-        helpers.mockHttpResponse(200, {}, '');
-        service.config.region = null;
-        request = makeRequest(function() {});
-        call = errorHandler.calls[0];
-        expect(errorHandler.calls.length).not.to.equal(0);
-        expect(call['arguments'][0]).to.be.instanceOf(Error);
-        expect(call['arguments'][0].code).to.equal('ConfigError');
-        return expect(call['arguments'][0].message).to.match(/Missing region in config/);
+      [null, undefined].forEach(region => {
+        it(`sends error event if region is ${region}`, function() {
+          var call, request;
+          helpers.mockHttpResponse(200, {}, '');
+          service.config.region = region;
+          request = makeRequest(function() {});
+          call = errorHandler.calls[0];
+          expect(errorHandler.calls.length).not.to.equal(0);
+          expect(call['arguments'][0]).to.be.instanceOf(Error);
+          expect(call['arguments'][0].code).to.equal('ConfigError');
+          return expect(call['arguments'][0].message).to.match(/Missing region in config/);
+        });
       });
       return it('ignores region validation if service has global endpoint', function() {
         helpers.mockHttpResponse(200, {}, '');
