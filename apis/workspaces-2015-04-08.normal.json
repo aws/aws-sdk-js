@@ -265,7 +265,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image and un-share the image if it is shared with other accounts. </p>"
+      "documentation": "<p>Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image and unshare the image if it is shared with other accounts. </p>"
     },
     "DeregisterWorkspaceDirectory": {
       "name": "DeregisterWorkspaceDirectory",
@@ -439,6 +439,31 @@
         }
       ],
       "documentation": "<p>Describes the available directories that are registered with Amazon WorkSpaces.</p>"
+    },
+    "DescribeWorkspaceImagePermissions": {
+      "name": "DescribeWorkspaceImagePermissions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeWorkspaceImagePermissionsRequest"
+      },
+      "output": {
+        "shape": "DescribeWorkspaceImagePermissionsResult"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidParameterValuesException"
+        }
+      ],
+      "documentation": "<p>Describes the permissions that the owner of an image has granted to other AWS accounts for an image.</p>"
     },
     "DescribeWorkspaceImages": {
       "name": "DescribeWorkspaceImages",
@@ -806,7 +831,7 @@
           "shape": "ResourceUnavailableException"
         }
       ],
-      "documentation": "<p>Modifies the specified WorkSpace properties.</p>"
+      "documentation": "<p>Modifies the specified WorkSpace properties. For important information about how to modify the size of the root and user volumes, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html\"> Modify a WorkSpace</a>. </p>"
     },
     "ModifyWorkspaceState": {
       "name": "ModifyWorkspaceState",
@@ -859,7 +884,7 @@
       "output": {
         "shape": "RebuildWorkspacesResult"
       },
-      "documentation": "<p>Rebuilds the specified WorkSpace.</p> <p>You cannot rebuild a WorkSpace unless its state is <code>AVAILABLE</code>, <code>ERROR</code>, <code>UNHEALTHY</code>, or <code>STOPPED</code>.</p> <p>Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html\">Rebuild a WorkSpace</a>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.</p>"
+      "documentation": "<p>Rebuilds the specified WorkSpace.</p> <p>You cannot rebuild a WorkSpace unless its state is <code>AVAILABLE</code>, <code>ERROR</code>, <code>UNHEALTHY</code>, <code>STOPPED</code>, or <code>REBOOTING</code>.</p> <p>Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html\">Rebuild a WorkSpace</a>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.</p>"
     },
     "RegisterWorkspaceDirectory": {
       "name": "RegisterWorkspaceDirectory",
@@ -1026,6 +1051,37 @@
         }
       ],
       "documentation": "<p>Replaces the current rules of the specified IP access control group with the specified rules.</p>"
+    },
+    "UpdateWorkspaceImagePermission": {
+      "name": "UpdateWorkspaceImagePermission",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateWorkspaceImagePermissionRequest"
+      },
+      "output": {
+        "shape": "UpdateWorkspaceImagePermissionResult"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceUnavailableException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidParameterValuesException"
+        },
+        {
+          "shape": "OperationNotSupportedException"
+        }
+      ],
+      "documentation": "<p>Shares or unshares an image with one account by specifying whether that account has permission to copy the image. If the copy image permission is granted, the image is shared with that account. If the copy image permission is revoked, the image is unshared with the account.</p> <note> <ul> <li> <p>To delete an image that has been shared, you must unshare the image before you delete it.</p> </li> <li> <p>Sharing Bring Your Own License (BYOL) images across AWS accounts isn't supported at this time in the AWS GovCloud (US-West) Region. To share BYOL images across accounts in the AWS GovCloud (US-West) Region, contact AWS Support.</p> </li> </ul> </note>"
     }
   },
   "shapes": {
@@ -1120,6 +1176,10 @@
     "AuthorizeIpRulesResult": {
       "type": "structure",
       "members": {}
+    },
+    "AwsAccount": {
+      "type": "string",
+      "pattern": "^\\d{12}$"
     },
     "BooleanObject": {
       "type": "boolean"
@@ -1377,7 +1437,7 @@
         },
         "CustomSecurityGroupId": {
           "shape": "SecurityGroupId",
-          "documentation": "<p>The identifier of any security groups to apply to WorkSpaces when they are created.</p>"
+          "documentation": "<p>The identifier of the default security group to apply to WorkSpaces when they are created. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-security-groups.html\"> Security Groups for Your WorkSpaces</a>.</p>"
         },
         "UserEnabledAsLocalAdministrator": {
           "shape": "BooleanObject",
@@ -1630,12 +1690,53 @@
         }
       }
     },
+    "DescribeWorkspaceImagePermissionsRequest": {
+      "type": "structure",
+      "required": [
+        "ImageId"
+      ],
+      "members": {
+        "ImageId": {
+          "shape": "WorkspaceImageId",
+          "documentation": "<p>The identifier of the image.</p>"
+        },
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the next set of results.</p>"
+        },
+        "MaxResults": {
+          "shape": "Limit",
+          "documentation": "<p>The maximum number of items to return.</p>"
+        }
+      }
+    },
+    "DescribeWorkspaceImagePermissionsResult": {
+      "type": "structure",
+      "members": {
+        "ImageId": {
+          "shape": "WorkspaceImageId",
+          "documentation": "<p>The identifier of the image.</p>"
+        },
+        "ImagePermissions": {
+          "shape": "ImagePermissions",
+          "documentation": "<p>The identifiers of the AWS accounts that the image has been shared with.</p>"
+        },
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>The token to use to retrieve the next set of results, or null if no more results are available.</p>"
+        }
+      }
+    },
     "DescribeWorkspaceImagesRequest": {
       "type": "structure",
       "members": {
         "ImageIds": {
           "shape": "WorkspaceImageIdList",
           "documentation": "<p>The identifier of the image.</p>"
+        },
+        "ImageType": {
+          "shape": "ImageType",
+          "documentation": "<p>The type (owned or shared) of the image.</p>"
         },
         "NextToken": {
           "shape": "PaginationToken",
@@ -1884,6 +1985,29 @@
         }
       },
       "documentation": "<p>Describes a WorkSpace that could not be rebooted. (<a>RebootWorkspaces</a>), rebuilt (<a>RebuildWorkspaces</a>), restored (<a>RestoreWorkspace</a>), terminated (<a>TerminateWorkspaces</a>), started (<a>StartWorkspaces</a>), or stopped (<a>StopWorkspaces</a>).</p>"
+    },
+    "ImagePermission": {
+      "type": "structure",
+      "members": {
+        "SharedAccountId": {
+          "shape": "AwsAccount",
+          "documentation": "<p>The identifier of the AWS account that an image has been shared with.</p>"
+        }
+      },
+      "documentation": "<p>Describes the AWS accounts that have been granted permission to use a shared image.</p>"
+    },
+    "ImagePermissions": {
+      "type": "list",
+      "member": {
+        "shape": "ImagePermission"
+      }
+    },
+    "ImageType": {
+      "type": "string",
+      "enum": [
+        "OWNED",
+        "SHARED"
+      ]
     },
     "ImportWorkspaceImageRequest": {
       "type": "structure",
@@ -2721,6 +2845,32 @@
       "type": "structure",
       "members": {}
     },
+    "UpdateWorkspaceImagePermissionRequest": {
+      "type": "structure",
+      "required": [
+        "ImageId",
+        "AllowCopyImage",
+        "SharedAccountId"
+      ],
+      "members": {
+        "ImageId": {
+          "shape": "WorkspaceImageId",
+          "documentation": "<p>The identifier of the image.</p>"
+        },
+        "AllowCopyImage": {
+          "shape": "BooleanObject",
+          "documentation": "<p>The permission to copy the image. This permission can be revoked only after an image has been shared.</p>"
+        },
+        "SharedAccountId": {
+          "shape": "AwsAccount",
+          "documentation": "<p>The identifier of the AWS account to share or unshare the image with.</p>"
+        }
+      }
+    },
+    "UpdateWorkspaceImagePermissionResult": {
+      "type": "structure",
+      "members": {}
+    },
     "UserName": {
       "type": "string",
       "max": 63,
@@ -3074,6 +3224,14 @@
         "ErrorMessage": {
           "shape": "Description",
           "documentation": "<p>The text of the error message that is returned for the image.</p>"
+        },
+        "Created": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date when the image was created. If the image has been shared, the AWS account that the image has been shared with sees the original creation date of the image.</p>"
+        },
+        "OwnerAccountId": {
+          "shape": "AwsAccount",
+          "documentation": "<p>The identifier of the AWS account that owns the image.</p>"
         }
       },
       "documentation": "<p>Describes a WorkSpace image.</p>"
@@ -3153,11 +3311,11 @@
         },
         "RootVolumeSizeGib": {
           "shape": "RootVolumeSizeGib",
-          "documentation": "<p>The size of the root volume.</p>"
+          "documentation": "<p>The size of the root volume. For important information about how to modify the size of the root and user volumes, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html\">Modify a WorkSpace</a>.</p>"
         },
         "UserVolumeSizeGib": {
           "shape": "UserVolumeSizeGib",
-          "documentation": "<p>The size of the user storage.</p>"
+          "documentation": "<p>The size of the user storage. For important information about how to modify the size of the root and user volumes, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html\">Modify a WorkSpace</a>.</p>"
         },
         "ComputeTypeName": {
           "shape": "Compute",

@@ -166,6 +166,7 @@ declare namespace FSx {
   export type AdministrativeActionType = "FILE_SYSTEM_UPDATE"|"STORAGE_OPTIMIZATION"|string;
   export type AdministrativeActions = AdministrativeAction[];
   export type ArchivePath = string;
+  export type AutoImportPolicyType = "NONE"|"NEW"|"NEW_CHANGED"|string;
   export type AutomaticBackupRetentionDays = number;
   export interface Backup {
     /**
@@ -355,6 +356,10 @@ declare namespace FSx {
      */
     DeploymentType?: LustreDeploymentType;
     /**
+     * Use this property to turn the Autoimport feature on and off. AutoImport enables your FSx for Lustre file system to automatically update its contents with changes that have been made to its linked Amazon S3 data repository. You can set the policy to have one the following values:    NONE - (Default) Autoimport is turned off. Changes to your S3 repository will not be reflected on the FSx file system.    NEW - Autoimport is turned on; only new files in the linked S3 repository will be imported to the FSx file system. Updates to existing files and deleted files will not be imported to the FSx file system.    NEW_CHANGED - Autoimport is turned on; new files and changes to existing files in the linked S3 repository will be imported to the FSx file system. Files deleted in S3 are not deleted in the FSx file system.    NEW_CHANGED_DELETED - Autoimport is turned on; new files, changes to existing files, and deleted files in the linked S3 repository will be imported to the FSx file system.   
+     */
+    AutoImportPolicy?: AutoImportPolicyType;
+    /**
      *  Required for the PERSISTENT_1 deployment type, describes the amount of read and write throughput for each 1 tebibyte of storage, in MB/s/TiB. File system throughput capacity is calculated by multiplying ﬁle system storage capacity (TiB) by the PerUnitStorageThroughput (MB/s/TiB). For a 2.4 TiB ﬁle system, provisioning 50 MB/s/TiB of PerUnitStorageThroughput yields 117 MB/s of ﬁle system throughput. You pay for the amount of throughput that you provision.  Valid values are 50, 100, 200.
      */
     PerUnitStorageThroughput?: PerUnitStorageThroughput;
@@ -447,6 +452,10 @@ declare namespace FSx {
   export type DailyTime = string;
   export interface DataRepositoryConfiguration {
     /**
+     * Describes the state of the file system's S3 durable data repository, if it is configured with an S3 repository. The lifecycle can have the following values:    CREATING - Amazon FSx is creating the new data repository.    AVAILABLE - The data repository is available for use.    MISCONFIGURED - The data repository is in a failed but recoverable state.    UPDATING - The data repository is undergoing a customer initiated update.  
+     */
+    Lifecycle?: DataRepositoryLifecycle;
+    /**
      * The import path to the Amazon S3 bucket (and optional prefix) that you're using as the data repository for your FSx for Lustre file system, for example s3://import-bucket/optional-prefix. If a prefix is specified after the Amazon S3 bucket name, only object keys with that prefix are loaded into the file system.
      */
     ImportPath?: ArchivePath;
@@ -458,7 +467,16 @@ declare namespace FSx {
      * For files imported from a data repository, this value determines the stripe count and maximum amount of data per file (in MiB) stored on a single physical disk. The maximum number of disks that a single file can be striped across is limited by the total number of disks that make up the file system. The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500 GiB). Amazon S3 objects have a maximum size of 5 TB.
      */
     ImportedFileChunkSize?: Megabytes;
+    /**
+     * Describes the data repository's AutoImportPolicy. AutoImport enables your FSx for Lustre file system to automatically update its contents with changes that have been made to its linked Amazon S3 data repository. The policy can have the following values:    NONE - (Default) Autoimport is turned off, Changes to your S3 repository will not be reflected on the FSx file system.    NEW - Autoimport is turned on; only new files in the linked S3 repository will be imported to the FSx file system. Updates to existing files and deleted files will not be imported to the FSx file system.    NEW_CHANGED - Autoimport is turned on; new files and changes to existing files in the linked S3 repository will be imported to the FSx file system. Files deleted in S3 are not deleted in the FSx file system.    NEW_CHANGED_DELETED - Autoimport is turned on; new files, changes to existing files, and deleted files in the linked S3 repository will be imported to the FSx file system.   
+     */
+    AutoImportPolicy?: AutoImportPolicyType;
+    FailureDetails?: DataRepositoryFailureDetails;
   }
+  export interface DataRepositoryFailureDetails {
+    Message?: ErrorMessage;
+  }
+  export type DataRepositoryLifecycle = "CREATING"|"AVAILABLE"|"MISCONFIGURED"|"UPDATING"|"DELETING"|string;
   export interface DataRepositoryTask {
     /**
      * The system-generated, unique 17-digit ID of the data repository task.
@@ -939,11 +957,11 @@ declare namespace FSx {
     /**
      * A value that specifies the TagKey, the name of the tag. Tag keys must be unique for the resource to which they are attached.
      */
-    Key?: TagKey;
+    Key: TagKey;
     /**
      * A value that specifies the TagValue, the value assigned to the corresponding tag key. Tag values can be null and don't have to be unique in a tag set. For example, you can have a key-value pair in a tag set of finances : April and also of payroll : April.
      */
-    Value?: TagValue;
+    Value: TagValue;
   }
   export type TagKey = string;
   export type TagKeys = TagKey[];
@@ -983,6 +1001,10 @@ declare namespace FSx {
     WeeklyMaintenanceStartTime?: WeeklyTime;
     DailyAutomaticBackupStartTime?: DailyTime;
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
+    /**
+     * Use this property to turn the Autoimport feature on and off. AutoImport enables your FSx for Lustre file system to automatically update its contents with changes that have been made to its linked Amazon S3 data repository. You can set the policy to have one the following values:    NONE - (Default) Autoimport is turned off. Changes to your S3 repository will not be reflected on the FSx file system.    NEW - Autoimport is turned on; only new files in the linked S3 repository will be imported to the FSx file system. Updates to existing files and deleted files will not be imported to the FSx file system.    NEW_CHANGED - Autoimport is turned on; new files and changes to existing files in the linked S3 repository will be imported to the FSx file system. Files deleted in S3 are not deleted in the FSx file system.    NEW_CHANGED_DELETED - Autoimport is turned on; new files, changes to existing files, and deleted files in the linked S3 repository will be imported to the FSx file system.   
+     */
+    AutoImportPolicy?: AutoImportPolicyType;
   }
   export interface UpdateFileSystemRequest {
     /**

@@ -49,6 +49,40 @@
       ],
       "documentation": "<p>Allocates a static IP address.</p>"
     },
+    "AttachCertificateToDistribution": {
+      "name": "AttachCertificateToDistribution",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AttachCertificateToDistributionRequest"
+      },
+      "output": {
+        "shape": "AttachCertificateToDistributionResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "OperationFailureException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Attaches an SSL/TLS certificate to your Amazon Lightsail content delivery network (CDN) distribution.</p> <p>After the certificate is attached, your distribution accepts HTTPS traffic for all of the domains that are associated with the certificate.</p> <p>Use the <code>CreateCertificate</code> action to create a certificate that you can attach to your distribution.</p> <important> <p>Only certificates created in the <code>us-east-1</code> AWS Region can be attached to Lightsail distributions. Lightsail distributions are global resources that can reference an origin in any AWS Region, and distribute its content globally. However, all distributions are located in the <code>us-east-1</code> Region.</p> </important>"
+    },
     "AttachDisk": {
       "name": "AttachDisk",
       "http": {
@@ -271,6 +305,37 @@
       ],
       "documentation": "<p>Copies a manual snapshot of an instance or disk as another manual snapshot, or copies an automatic snapshot of an instance or disk as a manual snapshot. This operation can also be used to copy a manual or automatic snapshot of an instance or a disk from one AWS Region to another in Amazon Lightsail.</p> <p>When copying a <i>manual snapshot</i>, be sure to define the <code>source region</code>, <code>source snapshot name</code>, and <code>target snapshot name</code> parameters.</p> <p>When copying an <i>automatic snapshot</i>, be sure to define the <code>source region</code>, <code>source resource name</code>, <code>target snapshot name</code>, and either the <code>restore date</code> or the <code>use latest restorable auto snapshot</code> parameters.</p>"
     },
+    "CreateCertificate": {
+      "name": "CreateCertificate",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateCertificateRequest"
+      },
+      "output": {
+        "shape": "CreateCertificateResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Creates an SSL/TLS certificate for a Amazon Lightsail content delivery network (CDN) distribution.</p> <p>After the certificate is created, use the <code>AttachCertificateToDistribution</code> action to attach the certificate to your distribution.</p> <important> <p>Only certificates created in the <code>us-east-1</code> AWS Region can be attached to Lightsail distributions. Lightsail distributions are global resources that can reference an origin in any AWS Region, and distribute its content globally. However, all distributions are located in the <code>us-east-1</code> Region.</p> </important>"
+    },
     "CreateCloudFormationStack": {
       "name": "CreateCloudFormationStack",
       "http": {
@@ -452,6 +517,40 @@
         }
       ],
       "documentation": "<p>Creates a snapshot of a block storage disk. You can use snapshots for backups, to make copies of disks, and to save data before shutting down a Lightsail instance.</p> <p>You can take a snapshot of an attached disk that is in use; however, snapshots only capture data that has been written to your disk at the time the snapshot command is issued. This may exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the disk long enough to take a snapshot, your snapshot should be complete. Nevertheless, if you cannot pause all file writes to the disk, you should unmount the disk from within the Lightsail instance, issue the create disk snapshot command, and then remount the disk to ensure a consistent and complete snapshot. You may remount and use your disk while the snapshot status is pending.</p> <p>You can also use this operation to create a snapshot of an instance's system volume. You might want to do this, for example, to recover data from the system volume of a botched instance or to create a backup of the system volume like you would for a block storage disk. To create a snapshot of a system volume, just define the <code>instance name</code> parameter when issuing the snapshot command, and a snapshot of the defined instance's system volume will be created. After the snapshot is available, you can create a block storage disk from the snapshot and attach it to a running instance to access the data on the disk.</p> <p>The <code>create disk snapshot</code> operation supports tag-based access control via request tags. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+    },
+    "CreateDistribution": {
+      "name": "CreateDistribution",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateDistributionRequest"
+      },
+      "output": {
+        "shape": "CreateDistributionResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "OperationFailureException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Creates an Amazon Lightsail content delivery network (CDN) distribution.</p> <p>A distribution is a globally distributed network of caching servers that improve the performance of your website or web application hosted on a Lightsail instance. For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-content-delivery-networks\">Content delivery networks in Amazon Lightsail</a>.</p>"
     },
     "CreateDomain": {
       "name": "CreateDomain",
@@ -928,6 +1027,37 @@
       ],
       "documentation": "<p>Deletes an automatic snapshot of an instance or disk. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Lightsail Dev Guide</a>.</p>"
     },
+    "DeleteCertificate": {
+      "name": "DeleteCertificate",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteCertificateRequest"
+      },
+      "output": {
+        "shape": "DeleteCertificateResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Deletes an SSL/TLS certificate for your Amazon Lightsail content delivery network (CDN) distribution.</p> <p>Certificates that are currently attached to a distribution cannot be deleted. Use the <code>DetachCertificateFromDistribution</code> action to detach a certificate from a distribution.</p>"
+    },
     "DeleteContactMethod": {
       "name": "DeleteContactMethod",
       "http": {
@@ -1035,6 +1165,40 @@
         }
       ],
       "documentation": "<p>Deletes the specified disk snapshot.</p> <p>When you make periodic snapshots of a disk, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the disk.</p> <p>The <code>delete disk snapshot</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>disk snapshot name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+    },
+    "DeleteDistribution": {
+      "name": "DeleteDistribution",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteDistributionRequest"
+      },
+      "output": {
+        "shape": "DeleteDistributionResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "OperationFailureException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Deletes your Amazon Lightsail content delivery network (CDN) distribution.</p>"
     },
     "DeleteDomain": {
       "name": "DeleteDomain",
@@ -1405,6 +1569,40 @@
         }
       ],
       "documentation": "<p>Deletes a database snapshot in Amazon Lightsail.</p> <p>The <code>delete relational database snapshot</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+    },
+    "DetachCertificateFromDistribution": {
+      "name": "DetachCertificateFromDistribution",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DetachCertificateFromDistributionRequest"
+      },
+      "output": {
+        "shape": "DetachCertificateFromDistributionResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "OperationFailureException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Detaches an SSL/TLS certificate from your Amazon Lightsail content delivery network (CDN) distribution.</p> <p>After the certificate is detached, your distribution stops accepting traffic for all of the domains that are associated with the certificate.</p>"
     },
     "DetachDisk": {
       "name": "DetachDisk",
@@ -1838,6 +2036,37 @@
       ],
       "documentation": "<p>Returns the list of bundles that are available for purchase. A bundle describes the specs for your virtual private server (or <i>instance</i>).</p>"
     },
+    "GetCertificates": {
+      "name": "GetCertificates",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetCertificatesRequest"
+      },
+      "output": {
+        "shape": "GetCertificatesResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Returns information about one or more Amazon Lightsail SSL/TLS certificates.</p> <note> <p>To get a summary of a certificate, ommit <code>includeCertificateDetails</code> from your request. The response will include only the certificate Amazon Resource Name (ARN), certificate name, domain name, and tags.</p> </note>"
+    },
     "GetCloudFormationStackRecords": {
       "name": "GetCloudFormationStackRecords",
       "http": {
@@ -2056,6 +2285,142 @@
         }
       ],
       "documentation": "<p>Returns information about all block storage disks in your AWS account and region.</p>"
+    },
+    "GetDistributionBundles": {
+      "name": "GetDistributionBundles",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetDistributionBundlesRequest"
+      },
+      "output": {
+        "shape": "GetDistributionBundlesResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "OperationFailureException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Returns the list bundles that can be applied to you Amazon Lightsail content delivery network (CDN) distributions.</p> <p>A distribution bundle specifies the monthly network transfer quota and monthly cost of your dsitribution.</p>"
+    },
+    "GetDistributionLatestCacheReset": {
+      "name": "GetDistributionLatestCacheReset",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetDistributionLatestCacheResetRequest"
+      },
+      "output": {
+        "shape": "GetDistributionLatestCacheResetResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "OperationFailureException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Returns the timestamp and status of the last cache reset of a specific Amazon Lightsail content delivery network (CDN) distribution.</p>"
+    },
+    "GetDistributionMetricData": {
+      "name": "GetDistributionMetricData",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetDistributionMetricDataRequest"
+      },
+      "output": {
+        "shape": "GetDistributionMetricDataResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "OperationFailureException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Returns the data points of a specific metric for an Amazon Lightsail content delivery network (CDN) distribution.</p> <p>Metrics report the utilization of your resources, and the error counts generated by them. Monitor and collect metric data regularly to maintain the reliability, availability, and performance of your resources.</p>"
+    },
+    "GetDistributions": {
+      "name": "GetDistributions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetDistributionsRequest"
+      },
+      "output": {
+        "shape": "GetDistributionsResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "OperationFailureException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Returns information about one or more of your Amazon Lightsail content delivery network (CDN) distributions.</p>"
     },
     "GetDomain": {
       "name": "GetDomain",
@@ -3682,6 +4047,40 @@
       ],
       "documentation": "<p>Deletes a specific static IP from your account.</p>"
     },
+    "ResetDistributionCache": {
+      "name": "ResetDistributionCache",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ResetDistributionCacheRequest"
+      },
+      "output": {
+        "shape": "ResetDistributionCacheResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "OperationFailureException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Deletes currently cached content from your Amazon Lightsail content delivery network (CDN) distribution.</p> <p>After resetting the cache, the next time a content request is made, your distribution pulls, serves, and caches it from the origin.</p>"
+    },
     "SendContactMethodVerification": {
       "name": "SendContactMethodVerification",
       "http": {
@@ -4008,6 +4407,74 @@
         }
       ],
       "documentation": "<p>Deletes the specified set of tag keys and their values from the specified Amazon Lightsail resource.</p> <p>The <code>untag resource</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by <code>resource name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+    },
+    "UpdateDistribution": {
+      "name": "UpdateDistribution",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateDistributionRequest"
+      },
+      "output": {
+        "shape": "UpdateDistributionResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "OperationFailureException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Updates an existing Amazon Lightsail content delivery network (CDN) distribution.</p> <p>Use this action to update the configuration of your existing distribution</p>"
+    },
+    "UpdateDistributionBundle": {
+      "name": "UpdateDistributionBundle",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateDistributionBundleRequest"
+      },
+      "output": {
+        "shape": "UpdateDistributionBundleResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "OperationFailureException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Updates the bundle of your Amazon Lightsail content delivery network (CDN) distribution.</p> <p>A distribution bundle specifies the monthly network transfer quota and monthly cost of your dsitribution.</p> <p>Update your distribution's bundle if your distribution is going over its monthly network transfer quota and is incurring an overage fee.</p> <p>You can update your distribution's bundle only one time within your monthly AWS billing cycle. To determine if you can update your distribution's bundle, use the <code>GetDistributions</code> action. The <code>ableToUpdateBundle</code> parameter in the result will indicate whether you can currently update your distribution's bundle.</p>"
     },
     "UpdateDomainEntry": {
       "name": "UpdateDomainEntry",
@@ -4344,6 +4811,32 @@
         }
       }
     },
+    "AttachCertificateToDistributionRequest": {
+      "type": "structure",
+      "required": [
+        "distributionName",
+        "certificateName"
+      ],
+      "members": {
+        "distributionName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the distribution that the certificate will be attached to.</p> <p>Use the <code>GetDistributions</code> action to get a list of distribution names that you can specify.</p>"
+        },
+        "certificateName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the certificate to attach to a distribution.</p> <p>Only certificates with a status of <code>ISSUED</code> can be attached to a distribution.</p> <p>Use the <code>GetCertificates</code> action to get a list of certificate names that you can specify.</p> <note> <p>This is the name of the certificate resource type and is used only to reference the certificate in other API actions. It can be different than the domain name of the certificate. For example, your certificate name might be <code>WordPress-Blog-Certificate</code> and the domain name of the certificate might be <code>example.com</code>.</p> </note>"
+        }
+      }
+    },
+    "AttachCertificateToDistributionResult": {
+      "type": "structure",
+      "members": {
+        "operation": {
+          "shape": "Operation",
+          "documentation": "<p>An object that describes the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
+        }
+      }
+    },
     "AttachDiskRequest": {
       "type": "structure",
       "required": [
@@ -4556,6 +5049,13 @@
     "Base64": {
       "type": "string"
     },
+    "BehaviorEnum": {
+      "type": "string",
+      "enum": [
+        "dont-cache",
+        "cache"
+      ]
+    },
     "Blueprint": {
       "type": "structure",
       "members": {
@@ -4677,6 +5177,217 @@
       "type": "list",
       "member": {
         "shape": "Bundle"
+      }
+    },
+    "CacheBehavior": {
+      "type": "structure",
+      "members": {
+        "behavior": {
+          "shape": "BehaviorEnum",
+          "documentation": "<p>The cache behavior of the distribution.</p> <p>The following cache behaviors can be specified:</p> <ul> <li> <p> <b> <code>cache</code> </b> - This option is best for static sites. When specified, your distribution caches and serves your entire website as static content. This behavior is ideal for websites with static content that doesn't change depending on who views it, or for websites that don't use cookies, headers, or query strings to personalize content.</p> </li> <li> <p> <b> <code>dont-cache</code> </b> - This option is best for sites that serve a mix of static and dynamic content. When specified, your distribution caches and serve only the content that is specified in the distribution's <code>CacheBehaviorPerPath</code> parameter. This behavior is ideal for websites or web applications that use cookies, headers, and query strings to personalize content for individual users.</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>Describes the default cache behavior of an Amazon Lightsail content delivery network (CDN) distribution.</p>"
+    },
+    "CacheBehaviorList": {
+      "type": "list",
+      "member": {
+        "shape": "CacheBehaviorPerPath"
+      }
+    },
+    "CacheBehaviorPerPath": {
+      "type": "structure",
+      "members": {
+        "path": {
+          "shape": "string",
+          "documentation": "<p>The path to a directory or file to cached, or not cache. Use an asterisk symbol to specify wildcard directories (<code>path/to/assets/*</code>), and file types (<code>*.html, *jpg, *js</code>). Directories and file paths are case-sensitive.</p> <p>Examples:</p> <ul> <li> <p>Specify the following to cache all files in the document root of an Apache web server running on a Lightsail instance.</p> <p> <code>var/www/html/</code> </p> </li> <li> <p>Specify the following file to cache only the index page in the document root of an Apache web server.</p> <p> <code>var/www/html/index.html</code> </p> </li> <li> <p>Specify the following to cache only the .html files in the document root of an Apache web server.</p> <p> <code>var/www/html/*.html</code> </p> </li> <li> <p>Specify the following to cache only the .jpg, .png, and .gif files in the images sub-directory of the document root of an Apache web server.</p> <p> <code>var/www/html/images/*.jpg</code> </p> <p> <code>var/www/html/images/*.png</code> </p> <p> <code>var/www/html/images/*.gif</code> </p> <p>Specify the following to cache all files in the images sub-directory of the document root of an Apache web server.</p> <p> <code>var/www/html/images/</code> </p> </li> </ul>"
+        },
+        "behavior": {
+          "shape": "BehaviorEnum",
+          "documentation": "<p>The cache behavior for the specified path.</p> <p>You can specify one of the following per-path cache behaviors:</p> <ul> <li> <p> <b> <code>cache</code> </b> - This behavior caches the specified path. </p> </li> <li> <p> <b> <code>dont-cache</code> </b> - This behavior doesn't cache the specified path. </p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>Describes the per-path cache behavior of an Amazon Lightsail content delivery network (CDN) distribution.</p> <p>A per-path cache behavior is used to override, or add an exception to, the default cache behavior of a distribution. For example, if the <code>cacheBehavior</code> is set to <code>cache</code>, then a per-path cache behavior can be used to specify a directory, file, or file type that your distribution will cache. Alternately, if the distribution's <code>cacheBehavior</code> is <code>dont-cache</code>, then a per-path cache behavior can be used to specify a directory, file, or file type that your distribution will not cache.</p> <p>if the cacheBehavior's behavior is set to 'cache', then</p>"
+    },
+    "CacheSettings": {
+      "type": "structure",
+      "members": {
+        "defaultTTL": {
+          "shape": "long",
+          "documentation": "<p>The default amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the content has been updated.</p> <note> <p>The value specified applies only when the origin does not add HTTP headers such as <code>Cache-Control max-age</code>, <code>Cache-Control s-maxage</code>, and <code>Expires</code> to objects.</p> </note>"
+        },
+        "minimumTTL": {
+          "shape": "long",
+          "documentation": "<p>The minimum amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the object has been updated.</p> <p>A value of <code>0</code> must be specified for <code>minimumTTL</code> if the distribution is configured to forward all headers to the origin.</p>"
+        },
+        "maximumTTL": {
+          "shape": "long",
+          "documentation": "<p>The maximum amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the object has been updated.</p> <p>The value specified applies only when the origin adds HTTP headers such as <code>Cache-Control max-age</code>, <code>Cache-Control s-maxage</code>, and <code>Expires</code> to objects.</p>"
+        },
+        "allowedHTTPMethods": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The HTTP methods that are processed and forwarded to the distribution's origin.</p> <p>You can specify the following options:</p> <ul> <li> <p> <code>GET,HEAD</code> - The distribution forwards the <code>GET</code> and <code>HEAD</code> methods.</p> </li> <li> <p> <code>GET,HEAD,OPTIONS</code> - The distribution forwards the <code>GET</code>, <code>HEAD</code>, and <code>OPTIONS</code> methods.</p> </li> <li> <p> <code>GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE</code> - The distribution forwards the <code>GET</code>, <code>HEAD</code>, <code>OPTIONS</code>, <code>PUT</code>, <code>PATCH</code>, <code>POST</code>, and <code>DELETE</code> methods.</p> </li> </ul> <p>If you specify the third option, you might need to restrict access to your distribution's origin so users can't perform operations that you don't want them to. For example, you might not want users to have permission to delete objects from your origin.</p>"
+        },
+        "cachedHTTPMethods": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The HTTP method responses that are cached by your distribution.</p> <p>You can specify the following options:</p> <ul> <li> <p> <code>GET,HEAD</code> - The distribution caches responses to the <code>GET</code> and <code>HEAD</code> methods.</p> </li> <li> <p> <code>GET,HEAD,OPTIONS</code> - The distribution caches responses to the <code>GET</code>, <code>HEAD</code>, and <code>OPTIONS</code> methods.</p> </li> </ul>"
+        },
+        "forwardedCookies": {
+          "shape": "CookieObject",
+          "documentation": "<p>An object that describes the cookies that are forwarded to the origin. Your content is cached based on the cookies that are forwarded.</p>"
+        },
+        "forwardedHeaders": {
+          "shape": "HeaderObject",
+          "documentation": "<p>An object that describes the headers that are forwarded to the origin. Your content is cached based on the headers that are forwarded.</p>"
+        },
+        "forwardedQueryStrings": {
+          "shape": "QueryStringObject",
+          "documentation": "<p>An object that describes the query strings that are forwarded to the origin. Your content is cached based on the query strings that are forwarded.</p>"
+        }
+      },
+      "documentation": "<p>Describes the cache settings of an Amazon Lightsail content delivery network (CDN) distribution.</p> <p>These settings apply only to your distribution's <code>cacheBehaviors</code> (including the <code>defaultCacheBehavior</code>) that have a <code>behavior</code> of <code>cache</code>.</p>"
+    },
+    "Certificate": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the certificate.</p>"
+        },
+        "name": {
+          "shape": "CertificateName",
+          "documentation": "<p>The name of the certificate (e.g., <code>my-certificate</code>).</p>"
+        },
+        "domainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The domain name of the certificate.</p>"
+        },
+        "status": {
+          "shape": "CertificateStatus",
+          "documentation": "<p>The validation status of the certificate.</p>"
+        },
+        "serialNumber": {
+          "shape": "SerialNumber",
+          "documentation": "<p>The serial number of the certificate.</p>"
+        },
+        "subjectAlternativeNames": {
+          "shape": "SubjectAlternativeNameList",
+          "documentation": "<p>An array of strings that specify the alternate domains (e.g., <code>example2.com</code>) and subdomains (e.g., <code>blog.example.com</code>) of the certificate.</p>"
+        },
+        "domainValidationRecords": {
+          "shape": "DomainValidationRecordList",
+          "documentation": "<p>An array of objects that describe the domain validation records of the certificate.</p>"
+        },
+        "requestFailureReason": {
+          "shape": "RequestFailureReason",
+          "documentation": "<p>The validation failure reason, if any, of the certificate.</p> <p>The following failure reasons are possible:</p> <ul> <li> <p> <b> <code>NO_AVAILABLE_CONTACTS</code> </b> - This failure applies to email validation, which is not available for Lightsail certificates.</p> </li> <li> <p> <b> <code>ADDITIONAL_VERIFICATION_REQUIRED</code> </b> - Lightsail requires additional information to process this certificate request. This can happen as a fraud-protection measure, such as when the domain ranks within the Alexa top 1000 websites. To provide the required information, use the <a href=\"https://console.aws.amazon.com/support/home\">AWS Support Center</a> to contact AWS Support.</p> <note> <p>You cannot request a certificate for Amazon-owned domain names such as those ending in amazonaws.com, cloudfront.net, or elasticbeanstalk.com.</p> </note> </li> <li> <p> <b> <code>DOMAIN_NOT_ALLOWED</code> </b> - One or more of the domain names in the certificate request was reported as an unsafe domain by <a href=\"https://www.virustotal.com/gui/home/url\">VirusTotal</a>. To correct the problem, search for your domain name on the <a href=\"https://www.virustotal.com/gui/home/url\">VirusTotal</a> website. If your domain is reported as suspicious, see <a href=\"https://www.google.com/webmasters/hacked/?hl=en\">Google Help for Hacked Websites</a> to learn what you can do.</p> <p>If you believe that the result is a false positive, notify the organization that is reporting the domain. VirusTotal is an aggregate of several antivirus and URL scanners and cannot remove your domain from a block list itself. After you correct the problem and the VirusTotal registry has been updated, request a new certificate.</p> <p>If you see this error and your domain is not included in the VirusTotal list, visit the <a href=\"https://console.aws.amazon.com/support/home\">AWS Support Center</a> and create a case.</p> </li> <li> <p> <b> <code>INVALID_PUBLIC_DOMAIN</code> </b> - One or more of the domain names in the certificate request is not valid. Typically, this is because a domain name in the request is not a valid top-level domain. Try to request a certificate again, correcting any spelling errors or typos that were in the failed request, and ensure that all domain names in the request are for valid top-level domains. For example, you cannot request a certificate for <code>example.invalidpublicdomain</code> because <code>invalidpublicdomain</code> is not a valid top-level domain.</p> </li> <li> <p> <b> <code>OTHER</code> </b> - Typically, this failure occurs when there is a typographical error in one or more of the domain names in the certificate request. Try to request a certificate again, correcting any spelling errors or typos that were in the failed request. </p> </li> </ul>"
+        },
+        "inUseResourceCount": {
+          "shape": "InUseResourceCount",
+          "documentation": "<p>The number of Lightsail resources that the certificate is attached to.</p>"
+        },
+        "keyAlgorithm": {
+          "shape": "KeyAlgorithm",
+          "documentation": "<p>The algorithm used to generate the key pair (the public and private key) of the certificate.</p>"
+        },
+        "createdAt": {
+          "shape": "IsoDate",
+          "documentation": "<p>The timestamp when the certificate was created.</p>"
+        },
+        "issuedAt": {
+          "shape": "IsoDate",
+          "documentation": "<p>The timestamp when the certificate was issued.</p>"
+        },
+        "issuerCA": {
+          "shape": "IssuerCA",
+          "documentation": "<p>The certificate authority that issued the certificate.</p>"
+        },
+        "notBefore": {
+          "shape": "IsoDate",
+          "documentation": "<p>The timestamp when the certificate is first valid.</p>"
+        },
+        "notAfter": {
+          "shape": "IsoDate",
+          "documentation": "<p>The timestamp when the certificate expires.</p>"
+        },
+        "eligibleToRenew": {
+          "shape": "EligibleToRenew",
+          "documentation": "<p>The renewal eligibility of the certificate.</p>"
+        },
+        "renewalSummary": {
+          "shape": "RenewalSummary",
+          "documentation": "<p>An object that describes the status of the certificate renewal managed by Lightsail.</p>"
+        },
+        "revokedAt": {
+          "shape": "IsoDate",
+          "documentation": "<p>The timestamp when the certificate was revoked. This value is present only when the certificate status is <code>REVOKED</code>.</p>"
+        },
+        "revocationReason": {
+          "shape": "RevocationReason",
+          "documentation": "<p>The reason the certificate was revoked. This value is present only when the certificate status is <code>REVOKED</code>.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail Dev Guide</a>.</p>"
+        },
+        "supportCode": {
+          "shape": "string",
+          "documentation": "<p>The support code. Include this code in your email to support when you have questions about your Lightsail certificate. This code enables our support team to look up your Lightsail information more easily.</p>"
+        }
+      },
+      "documentation": "<p>Describes the full details of an Amazon Lightsail SSL/TLS certificate.</p> <note> <p>To get a summary of a certificate, use the <code>GetCertificates</code> action and ommit <code>includeCertificateDetails</code> from your request. The response will include only the certificate Amazon Resource Name (ARN), certificate name, domain name, and tags.</p> </note>"
+    },
+    "CertificateName": {
+      "type": "string"
+    },
+    "CertificateStatus": {
+      "type": "string",
+      "enum": [
+        "PENDING_VALIDATION",
+        "ISSUED",
+        "INACTIVE",
+        "EXPIRED",
+        "VALIDATION_TIMED_OUT",
+        "REVOKED",
+        "FAILED"
+      ]
+    },
+    "CertificateStatusList": {
+      "type": "list",
+      "member": {
+        "shape": "CertificateStatus"
+      }
+    },
+    "CertificateSummary": {
+      "type": "structure",
+      "members": {
+        "certificateArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the certificate.</p>"
+        },
+        "certificateName": {
+          "shape": "CertificateName",
+          "documentation": "<p>The name of the certificate.</p>"
+        },
+        "domainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The domain name of the certificate.</p>"
+        },
+        "certificateDetail": {
+          "shape": "Certificate",
+          "documentation": "<p>An object that describes a certificate in detail.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail Dev Guide</a>.</p>"
+        }
+      },
+      "documentation": "<p>Describes an Amazon Lightsail SSL/TLS certificate.</p>"
+    },
+    "CertificateSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "CertificateSummary"
       }
     },
     "CloseInstancePublicPortsRequest": {
@@ -4862,6 +5573,20 @@
         "shape": "ContactProtocol"
       }
     },
+    "CookieObject": {
+      "type": "structure",
+      "members": {
+        "option": {
+          "shape": "ForwardValues",
+          "documentation": "<p>Specifies which cookies to forward to the distribution's origin for a cache behavior: <code>all</code>, <code>none</code>, or <code>allow-list</code> to forward only the cookies specified in the <code>cookiesAllowList</code> parameter.</p>"
+        },
+        "cookiesAllowList": {
+          "shape": "StringList",
+          "documentation": "<p>The specific cookies to forward to your distribution's origin.</p>"
+        }
+      },
+      "documentation": "<p>Describes whether an Amazon Lightsail content delivery network (CDN) distribution forwards cookies to the origin and, if so, which ones.</p> <p>For the cookies that you specify, your distribution caches separate versions of the specified content based on the cookie values in viewer requests.</p>"
+    },
     "CopySnapshotRequest": {
       "type": "structure",
       "required": [
@@ -4898,6 +5623,44 @@
     "CopySnapshotResult": {
       "type": "structure",
       "members": {
+        "operations": {
+          "shape": "OperationList",
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
+        }
+      }
+    },
+    "CreateCertificateRequest": {
+      "type": "structure",
+      "required": [
+        "certificateName",
+        "domainName"
+      ],
+      "members": {
+        "certificateName": {
+          "shape": "CertificateName",
+          "documentation": "<p>The name for the certificate.</p>"
+        },
+        "domainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The domain name (e.g., <code>example.com</code>) for the certificate.</p>"
+        },
+        "subjectAlternativeNames": {
+          "shape": "SubjectAlternativeNameList",
+          "documentation": "<p>An array of strings that specify the alternate domains (e.g., <code>example2.com</code>) and subdomains (e.g., <code>blog.example.com</code>) for the certificate.</p> <p>You can specify a maximum of nine alternate domains (in addition to the primary domain name).</p> <p>Wildcard domain entries (e.g., <code>*.example.com</code>) are not supported.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tag keys and optional values to add to the certificate during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
+        }
+      }
+    },
+    "CreateCertificateResult": {
+      "type": "structure",
+      "members": {
+        "certificate": {
+          "shape": "CertificateSummary",
+          "documentation": "<p>An object that describes the certificate created.</p>"
+        },
         "operations": {
           "shape": "OperationList",
           "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
@@ -4977,7 +5740,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>"
+          "documentation": "<p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
         },
         "addOns": {
           "shape": "AddOnRequestList",
@@ -5028,7 +5791,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>"
+          "documentation": "<p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
         },
         "addOns": {
           "shape": "AddOnRequestList",
@@ -5065,7 +5828,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>"
+          "documentation": "<p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
         }
       }
     },
@@ -5074,6 +5837,58 @@
       "members": {
         "operations": {
           "shape": "OperationList",
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
+        }
+      }
+    },
+    "CreateDistributionRequest": {
+      "type": "structure",
+      "required": [
+        "distributionName",
+        "origin",
+        "defaultCacheBehavior",
+        "bundleId"
+      ],
+      "members": {
+        "distributionName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name for the distribution.</p>"
+        },
+        "origin": {
+          "shape": "InputOrigin",
+          "documentation": "<p>An object that describes the origin resource for the distribution, such as a Lightsail instance or load balancer.</p> <p>The distribution pulls, caches, and serves content from the origin.</p>"
+        },
+        "defaultCacheBehavior": {
+          "shape": "CacheBehavior",
+          "documentation": "<p>An object that describes the default cache behavior for the distribution.</p>"
+        },
+        "cacheBehaviorSettings": {
+          "shape": "CacheSettings",
+          "documentation": "<p>An object that describes the cache behavior settings for the distribution.</p>"
+        },
+        "cacheBehaviors": {
+          "shape": "CacheBehaviorList",
+          "documentation": "<p>An array of objects that describe the per-path cache behavior for the distribution.</p>"
+        },
+        "bundleId": {
+          "shape": "string",
+          "documentation": "<p>The bundle ID to use for the distribution.</p> <p>A distribution bundle describes the specifications of your distribution, such as the monthly cost and monthly network transfer quota.</p> <p>Use the <code>GetDistributionBundles</code> action to get a list of distribution bundle IDs that you can specify.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tag keys and optional values to add to the distribution during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
+        }
+      }
+    },
+    "CreateDistributionResult": {
+      "type": "structure",
+      "members": {
+        "distribution": {
+          "shape": "LightsailDistribution",
+          "documentation": "<p>An object that describes the distribution created.</p>"
+        },
+        "operation": {
+          "shape": "Operation",
           "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
@@ -5116,7 +5931,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>"
+          "documentation": "<p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
         }
       }
     },
@@ -5146,7 +5961,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>"
+          "documentation": "<p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
         }
       }
     },
@@ -5197,7 +6012,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>"
+          "documentation": "<p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
         },
         "addOns": {
           "shape": "AddOnRequestList",
@@ -5266,7 +6081,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>"
+          "documentation": "<p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
         },
         "addOns": {
           "shape": "AddOnRequestList",
@@ -5295,7 +6110,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>"
+          "documentation": "<p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
         }
       }
     },
@@ -5353,7 +6168,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>"
+          "documentation": "<p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
         }
       }
     },
@@ -5392,7 +6207,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>"
+          "documentation": "<p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
         }
       }
     },
@@ -5445,7 +6260,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>"
+          "documentation": "<p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
         }
       }
     },
@@ -5510,7 +6325,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>"
+          "documentation": "<p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
         }
       }
     },
@@ -5540,7 +6355,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values to add to the resource during create.</p> <p>To tag a resource after it has been created, see the <code>tag resource</code> operation.</p>"
+          "documentation": "<p>The tag keys and optional values to add to the resource during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
         }
       }
     },
@@ -5592,6 +6407,27 @@
       }
     },
     "DeleteAutoSnapshotResult": {
+      "type": "structure",
+      "members": {
+        "operations": {
+          "shape": "OperationList",
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
+        }
+      }
+    },
+    "DeleteCertificateRequest": {
+      "type": "structure",
+      "required": [
+        "certificateName"
+      ],
+      "members": {
+        "certificateName": {
+          "shape": "CertificateName",
+          "documentation": "<p>The name of the certificate to delete.</p> <p>Use the <code>GetCertificates</code> action to get a list of certificate names that you can specify.</p>"
+        }
+      }
+    },
+    "DeleteCertificateResult": {
       "type": "structure",
       "members": {
         "operations": {
@@ -5664,6 +6500,24 @@
         "operations": {
           "shape": "OperationList",
           "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
+        }
+      }
+    },
+    "DeleteDistributionRequest": {
+      "type": "structure",
+      "members": {
+        "distributionName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the distribution to delete.</p> <p>Use the <code>GetDistributions</code> action to get a list of distribution names that you can specify.</p>"
+        }
+      }
+    },
+    "DeleteDistributionResult": {
+      "type": "structure",
+      "members": {
+        "operation": {
+          "shape": "Operation",
+          "documentation": "<p>An object that describes the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
     },
@@ -5916,6 +6770,27 @@
         }
       },
       "documentation": "<p>Describes the destination of a record.</p>"
+    },
+    "DetachCertificateFromDistributionRequest": {
+      "type": "structure",
+      "required": [
+        "distributionName"
+      ],
+      "members": {
+        "distributionName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the distribution from which to detach the certificate.</p> <p>Use the <code>GetDistributions</code> action to get a list of distribution names that you can specify.</p>"
+        }
+      }
+    },
+    "DetachCertificateFromDistributionResult": {
+      "type": "structure",
+      "members": {
+        "operation": {
+          "shape": "Operation",
+          "documentation": "<p>An object that describes the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
+        }
+      }
     },
     "DetachDiskRequest": {
       "type": "structure",
@@ -6242,6 +7117,55 @@
         "unknown"
       ]
     },
+    "DistributionBundle": {
+      "type": "structure",
+      "members": {
+        "bundleId": {
+          "shape": "string",
+          "documentation": "<p>The ID of the bundle.</p>"
+        },
+        "name": {
+          "shape": "string",
+          "documentation": "<p>The name of the distribution bundle.</p>"
+        },
+        "price": {
+          "shape": "float",
+          "documentation": "<p>The monthly price, in US dollars, of the bundle.</p>"
+        },
+        "transferPerMonthInGb": {
+          "shape": "integer",
+          "documentation": "<p>The monthly network transfer quota of the bundle.</p>"
+        },
+        "isActive": {
+          "shape": "boolean",
+          "documentation": "<p>Indicates whether the bundle is active, and can be specified for a new distribution.</p>"
+        }
+      },
+      "documentation": "<p>Describes the specifications of a distribution bundle.</p>"
+    },
+    "DistributionBundleList": {
+      "type": "list",
+      "member": {
+        "shape": "DistributionBundle"
+      }
+    },
+    "DistributionList": {
+      "type": "list",
+      "member": {
+        "shape": "LightsailDistribution"
+      }
+    },
+    "DistributionMetricName": {
+      "type": "string",
+      "enum": [
+        "Requests",
+        "BytesDownloaded",
+        "BytesUploaded",
+        "TotalErrorRate",
+        "Http4xxErrorRate",
+        "Http5xxErrorRate"
+      ]
+    },
     "Domain": {
       "type": "structure",
       "members": {
@@ -6347,6 +7271,26 @@
         "shape": "DomainName"
       }
     },
+    "DomainValidationRecord": {
+      "type": "structure",
+      "members": {
+        "domainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The domain name of the certificate validation record. For example, <code>example.com</code> or <code>www.example.com</code>.</p>"
+        },
+        "resourceRecord": {
+          "shape": "ResourceRecord",
+          "documentation": "<p>An object that describes the DNS records to add to your domain's DNS to validate it for the certificate.</p>"
+        }
+      },
+      "documentation": "<p>Describes the domain validation records of an Amazon Lightsail SSL/TLS certificate.</p>"
+    },
+    "DomainValidationRecordList": {
+      "type": "list",
+      "member": {
+        "shape": "DomainValidationRecord"
+      }
+    },
     "DownloadDefaultKeyPairRequest": {
       "type": "structure",
       "members": {}
@@ -6363,6 +7307,9 @@
           "documentation": "<p>A base64-encoded RSA private key.</p>"
         }
       }
+    },
+    "EligibleToRenew": {
+      "type": "string"
     },
     "EnableAddOnRequest": {
       "type": "structure",
@@ -6500,6 +7447,14 @@
         }
       }
     },
+    "ForwardValues": {
+      "type": "string",
+      "enum": [
+        "none",
+        "allow-list",
+        "all"
+      ]
+    },
     "GetActiveNamesRequest": {
       "type": "structure",
       "members": {
@@ -6633,6 +7588,32 @@
         }
       }
     },
+    "GetCertificatesRequest": {
+      "type": "structure",
+      "members": {
+        "certificateStatuses": {
+          "shape": "CertificateStatusList",
+          "documentation": "<p>The status of the certificates for which to return information.</p> <p>For example, specify <code>ISSUED</code> to return only certificates with an <code>ISSUED</code> status.</p> <p>When omitted, the response includes all of your certificates in the AWS region where the request is made, regardless of their current status.</p>"
+        },
+        "includeCertificateDetails": {
+          "shape": "IncludeCertificateDetails",
+          "documentation": "<p>Indicates whether to include detailed information about the certificates in the response.</p> <p>When omitted, the response includes only the certificate names, Amazon Resource Names (ARNs), domain names, and tags.</p>"
+        },
+        "certificateName": {
+          "shape": "CertificateName",
+          "documentation": "<p>The name for the certificate for which to return information.</p> <p>When omitted, the response includes all of your certificates in the AWS region where the request is made.</p>"
+        }
+      }
+    },
+    "GetCertificatesResult": {
+      "type": "structure",
+      "members": {
+        "certificates": {
+          "shape": "CertificateSummaryList",
+          "documentation": "<p>An object that describes certificates.</p>"
+        }
+      }
+    },
     "GetCloudFormationStackRecordsRequest": {
       "type": "structure",
       "members": {
@@ -6756,6 +7737,122 @@
         "nextPageToken": {
           "shape": "string",
           "documentation": "<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetDisks</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
+        }
+      }
+    },
+    "GetDistributionBundlesRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "GetDistributionBundlesResult": {
+      "type": "structure",
+      "members": {
+        "bundles": {
+          "shape": "DistributionBundleList",
+          "documentation": "<p>An object that describes a distribution bundle.</p>"
+        }
+      }
+    },
+    "GetDistributionLatestCacheResetRequest": {
+      "type": "structure",
+      "members": {
+        "distributionName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the distribution for which to return the timestamp of the last cache reset.</p> <p>Use the <code>GetDistributions</code> action to get a list of distribution names that you can specify.</p> <p>When omitted, the response includes the latest cache reset timestamp of all your distributions.</p>"
+        }
+      }
+    },
+    "GetDistributionLatestCacheResetResult": {
+      "type": "structure",
+      "members": {
+        "status": {
+          "shape": "string",
+          "documentation": "<p>The status of the last cache reset.</p>"
+        },
+        "createTime": {
+          "shape": "IsoDate",
+          "documentation": "<p>The timestamp of the last cache reset (e.g., <code>1479734909.17</code>) in Unix time format.</p>"
+        }
+      }
+    },
+    "GetDistributionMetricDataRequest": {
+      "type": "structure",
+      "required": [
+        "distributionName",
+        "metricName",
+        "startTime",
+        "endTime",
+        "period",
+        "unit",
+        "statistics"
+      ],
+      "members": {
+        "distributionName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the distribution for which to get metric data.</p> <p>Use the <code>GetDistributions</code> action to get a list of distribution names that you can specify.</p>"
+        },
+        "metricName": {
+          "shape": "DistributionMetricName",
+          "documentation": "<p>The metric for which you want to return information.</p> <p>Valid distribution metric names are listed below, along with the most useful <code>statistics</code> to include in your request, and the published <code>unit</code> value.</p> <ul> <li> <p> <b> <code>Requests</code> </b> - The total number of viewer requests received by your Lightsail distribution, for all HTTP methods, and for both HTTP and HTTPS requests.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>None</code>.</p> </li> <li> <p> <b> <code>BytesDownloaded</code> </b> - The number of bytes downloaded by viewers for GET, HEAD, and OPTIONS requests.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>None</code>.</p> </li> <li> <p> <b> <code>BytesUploaded </code> </b> - The number of bytes uploaded to your origin by your Lightsail distribution, using POST and PUT requests.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Sum</code>.</p> <p> <code>Unit</code>: The published unit is <code>None</code>.</p> </li> <li> <p> <b> <code>TotalErrorRate</code> </b> - The percentage of all viewer requests for which the response's HTTP status code was 4xx or 5xx.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p> <p> <code>Unit</code>: The published unit is <code>Percent</code>.</p> </li> <li> <p> <b> <code>4xxErrorRate</code> </b> - The percentage of all viewer requests for which the response's HTTP status cod was 4xx. In these cases, the client or client viewer may have made an error. For example, a status code of 404 (Not Found) means that the client requested an object that could not be found.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p> <p> <code>Unit</code>: The published unit is <code>Percent</code>.</p> </li> <li> <p> <b> <code>5xxErrorRate</code> </b> - The percentage of all viewer requests for which the response's HTTP status code was 5xx. In these cases, the origin server did not satisfy the requests. For example, a status code of 503 (Service Unavailable) means that the origin server is currently unavailable.</p> <p> <code>Statistics</code>: The most useful statistic is <code>Average</code>.</p> <p> <code>Unit</code>: The published unit is <code>Percent</code>.</p> </li> </ul>"
+        },
+        "startTime": {
+          "shape": "timestamp",
+          "documentation": "<p>The start of the time interval for which to get metric data.</p> <p>Constraints:</p> <ul> <li> <p>Specified in Coordinated Universal Time (UTC).</p> </li> <li> <p>Specified in the Unix time format.</p> <p>For example, if you wish to use a start time of October 1, 2018, at 8 PM UTC, specify <code>1538424000</code> as the start time.</p> </li> </ul> <p>You can convert a human-friendly time to Unix time format using a converter like <a href=\"https://www.epochconverter.com/\">Epoch converter</a>.</p>"
+        },
+        "endTime": {
+          "shape": "timestamp",
+          "documentation": "<p>The end of the time interval for which to get metric data.</p> <p>Constraints:</p> <ul> <li> <p>Specified in Coordinated Universal Time (UTC).</p> </li> <li> <p>Specified in the Unix time format.</p> <p>For example, if you wish to use an end time of October 1, 2018, at 9 PM UTC, specify <code>1538427600</code> as the end time.</p> </li> </ul> <p>You can convert a human-friendly time to Unix time format using a converter like <a href=\"https://www.epochconverter.com/\">Epoch converter</a>.</p>"
+        },
+        "period": {
+          "shape": "MetricPeriod",
+          "documentation": "<p>The granularity, in seconds, for the metric data points that will be returned.</p>"
+        },
+        "unit": {
+          "shape": "MetricUnit",
+          "documentation": "<p>The unit for the metric data request.</p> <p>Valid units depend on the metric data being requested. For the valid units with each available metric, see the <code>metricName</code> parameter.</p>"
+        },
+        "statistics": {
+          "shape": "MetricStatisticList",
+          "documentation": "<p>The statistic for the metric.</p> <p>The following statistics are available:</p> <ul> <li> <p> <code>Minimum</code> - The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.</p> </li> <li> <p> <code>Maximum</code> - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.</p> </li> <li> <p> <code>Sum</code> - All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.</p> </li> <li> <p> <code>Average</code> - The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.</p> </li> <li> <p> <code>SampleCount</code> - The count, or number, of data points used for the statistical calculation.</p> </li> </ul>"
+        }
+      }
+    },
+    "GetDistributionMetricDataResult": {
+      "type": "structure",
+      "members": {
+        "metricName": {
+          "shape": "DistributionMetricName",
+          "documentation": "<p>The name of the metric returned.</p>"
+        },
+        "metricData": {
+          "shape": "MetricDatapointList",
+          "documentation": "<p>An array of objects that describe the metric data returned.</p>"
+        }
+      }
+    },
+    "GetDistributionsRequest": {
+      "type": "structure",
+      "members": {
+        "distributionName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the distribution for which to return information.</p> <p>Use the <code>GetDistributions</code> action to get a list of distribution names that you can specify.</p> <p>When omitted, the response includes all of your distributions in the AWS Region where the request is made.</p>"
+        },
+        "pageToken": {
+          "shape": "string",
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>To get a page token, perform an initial <code>GetDistributions</code> request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.</p>"
+        }
+      }
+    },
+    "GetDistributionsResult": {
+      "type": "structure",
+      "members": {
+        "distributions": {
+          "shape": "DistributionList",
+          "documentation": "<p>An array of objects that describe your distributions.</p>"
+        },
+        "nextPageToken": {
+          "shape": "string",
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetDistributions</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
         }
       }
     },
@@ -7683,6 +8780,46 @@
         }
       }
     },
+    "HeaderEnum": {
+      "type": "string",
+      "enum": [
+        "Accept",
+        "Accept-Charset",
+        "Accept-Datetime",
+        "Accept-Encoding",
+        "Accept-Language",
+        "Authorization",
+        "CloudFront-Forwarded-Proto",
+        "CloudFront-Is-Desktop-Viewer",
+        "CloudFront-Is-Mobile-Viewer",
+        "CloudFront-Is-SmartTV-Viewer",
+        "CloudFront-Is-Tablet-Viewer",
+        "CloudFront-Viewer-Country",
+        "Host",
+        "Origin",
+        "Referer"
+      ]
+    },
+    "HeaderForwardList": {
+      "type": "list",
+      "member": {
+        "shape": "HeaderEnum"
+      }
+    },
+    "HeaderObject": {
+      "type": "structure",
+      "members": {
+        "option": {
+          "shape": "ForwardValues",
+          "documentation": "<p>The headers that you want your distribution to forward to your origin and base caching on.</p> <p>You can configure your distribution to do one of the following:</p> <ul> <li> <p> <b> <code>all</code> </b> - Forward all headers to your origin.</p> </li> <li> <p> <b> <code>none</code> </b> - Forward only the default headers.</p> </li> <li> <p> <b> <code>allow-list</code> </b> - Forward only the headers you specify using the <code>headersAllowList</code> parameter.</p> </li> </ul>"
+        },
+        "headersAllowList": {
+          "shape": "HeaderForwardList",
+          "documentation": "<p>The specific headers to forward to your distribution's origin.</p>"
+        }
+      },
+      "documentation": "<p>Describes the request headers that a Lightsail distribution bases caching on.</p> <p>For the headers that you specify, your distribution caches separate versions of the specified content based on the header values in viewer requests. For example, suppose viewer requests for <code>logo.jpg</code> contain a custom <code>product</code> header that has a value of either <code>acme</code> or <code>apex</code>, and you configure your distribution to cache your content based on values in the <code>product</code> header. Your distribution forwards the <code>product</code> header to the origin and caches the response from the origin once for each header value. </p>"
+    },
     "HostKeyAttributes": {
       "type": "structure",
       "members": {
@@ -7749,6 +8886,30 @@
         }
       }
     },
+    "InUseResourceCount": {
+      "type": "integer"
+    },
+    "IncludeCertificateDetails": {
+      "type": "boolean"
+    },
+    "InputOrigin": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the origin resource.</p>"
+        },
+        "regionName": {
+          "shape": "RegionName",
+          "documentation": "<p>The AWS Region name of the origin resource.</p>"
+        },
+        "protocolPolicy": {
+          "shape": "OriginProtocolPolicyEnum",
+          "documentation": "<p>The protocol that your Amazon Lightsail distribution uses when establishing a connection with your origin to pull content.</p>"
+        }
+      },
+      "documentation": "<p>Describes the origin resource of an Amazon Lightsail content delivery network (CDN) distribution.</p> <p>An origin can be a Lightsail instance or load balancer. A distribution pulls content from an origin, caches it, and serves it to viewers via a worldwide network of edge servers.</p>"
+    },
     "Instance": {
       "type": "structure",
       "members": {
@@ -7766,7 +8927,7 @@
         },
         "createdAt": {
           "shape": "IsoDate",
-          "documentation": "<p>The timestamp when the instance was created (e.g., <code>1479734909.17</code>).</p>"
+          "documentation": "<p>The timestamp when the instance was created (e.g., <code>1479734909.17</code>) in Unix time format.</p>"
         },
         "location": {
           "shape": "ResourceLocation",
@@ -8265,6 +9426,12 @@
     "IsoDate": {
       "type": "timestamp"
     },
+    "IssuerCA": {
+      "type": "string"
+    },
+    "KeyAlgorithm": {
+      "type": "string"
+    },
     "KeyPair": {
       "type": "structure",
       "members": {
@@ -8308,6 +9475,88 @@
       "member": {
         "shape": "KeyPair"
       }
+    },
+    "LightsailDistribution": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the distribution.</p>"
+        },
+        "arn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the distribution.</p>"
+        },
+        "supportCode": {
+          "shape": "string",
+          "documentation": "<p>The support code. Include this code in your email to support when you have questions about your Lightsail distribution. This code enables our support team to look up your Lightsail information more easily.</p>"
+        },
+        "createdAt": {
+          "shape": "IsoDate",
+          "documentation": "<p>The timestamp when the distribution was created.</p>"
+        },
+        "location": {
+          "shape": "ResourceLocation",
+          "documentation": "<p>An object that describes the location of the distribution, such as the AWS Region and Availability Zone.</p> <note> <p>Lightsail distributions are global resources that can reference an origin in any AWS Region, and distribute its content globally. However, all distributions are located in the <code>us-east-1</code> Region.</p> </note>"
+        },
+        "resourceType": {
+          "shape": "ResourceType",
+          "documentation": "<p>The Lightsail resource type (e.g., <code>Distribution</code>).</p>"
+        },
+        "alternativeDomainNames": {
+          "shape": "StringList",
+          "documentation": "<p>The alternate domain names of the distribution.</p>"
+        },
+        "status": {
+          "shape": "string",
+          "documentation": "<p>The status of the distribution.</p>"
+        },
+        "isEnabled": {
+          "shape": "boolean",
+          "documentation": "<p>Indicates whether the distribution is enabled.</p>"
+        },
+        "domainName": {
+          "shape": "string",
+          "documentation": "<p>The domain name of the distribution.</p>"
+        },
+        "bundleId": {
+          "shape": "string",
+          "documentation": "<p>The ID of the bundle currently applied to the distribution.</p>"
+        },
+        "certificateName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the SSL/TLS certificate attached to the distribution, if any.</p>"
+        },
+        "origin": {
+          "shape": "Origin",
+          "documentation": "<p>An object that describes the origin resource of the distribution, such as a Lightsail instance or load balancer.</p> <p>The distribution pulls, caches, and serves content from the origin.</p>"
+        },
+        "originPublicDNS": {
+          "shape": "string",
+          "documentation": "<p>The public DNS of the origin.</p>"
+        },
+        "defaultCacheBehavior": {
+          "shape": "CacheBehavior",
+          "documentation": "<p>An object that describes the default cache behavior of the distribution.</p>"
+        },
+        "cacheBehaviorSettings": {
+          "shape": "CacheSettings",
+          "documentation": "<p>An object that describes the cache behavior settings of the distribution.</p>"
+        },
+        "cacheBehaviors": {
+          "shape": "CacheBehaviorList",
+          "documentation": "<p>An array of objects that describe the per-path cache behavior of the distribution.</p>"
+        },
+        "ableToUpdateBundle": {
+          "shape": "boolean",
+          "documentation": "<p>Indicates whether the bundle that is currently applied to your distribution, specified using the <code>distributionName</code> parameter, can be changed to another bundle.</p> <p>Use the <code>UpdateDistributionBundle</code> action to change your distribution's bundle.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail Dev Guide</a>.</p>"
+        }
+      },
+      "documentation": "<p>Describes an Amazon Lightsail content delivery network (CDN) distribution.</p>"
     },
     "LoadBalancer": {
       "type": "structure",
@@ -8489,7 +9738,7 @@
         },
         "failureReason": {
           "shape": "LoadBalancerTlsCertificateFailureReason",
-          "documentation": "<p>The reason for the SSL/TLS certificate validation failure.</p>"
+          "documentation": "<p>The validation failure reason, if any, of the certificate.</p> <p>The following failure reasons are possible:</p> <ul> <li> <p> <b> <code>NO_AVAILABLE_CONTACTS</code> </b> - This failure applies to email validation, which is not available for Lightsail certificates.</p> </li> <li> <p> <b> <code>ADDITIONAL_VERIFICATION_REQUIRED</code> </b> - Lightsail requires additional information to process this certificate request. This can happen as a fraud-protection measure, such as when the domain ranks within the Alexa top 1000 websites. To provide the required information, use the <a href=\"https://console.aws.amazon.com/support/home\">AWS Support Center</a> to contact AWS Support.</p> <note> <p>You cannot request a certificate for Amazon-owned domain names such as those ending in amazonaws.com, cloudfront.net, or elasticbeanstalk.com.</p> </note> </li> <li> <p> <b> <code>DOMAIN_NOT_ALLOWED</code> </b> - One or more of the domain names in the certificate request was reported as an unsafe domain by <a href=\"https://www.virustotal.com/gui/home/url\">VirusTotal</a>. To correct the problem, search for your domain name on the <a href=\"https://www.virustotal.com/gui/home/url\">VirusTotal</a> website. If your domain is reported as suspicious, see <a href=\"https://www.google.com/webmasters/hacked/?hl=en\">Google Help for Hacked Websites</a> to learn what you can do.</p> <p>If you believe that the result is a false positive, notify the organization that is reporting the domain. VirusTotal is an aggregate of several antivirus and URL scanners and cannot remove your domain from a block list itself. After you correct the problem and the VirusTotal registry has been updated, request a new certificate.</p> <p>If you see this error and your domain is not included in the VirusTotal list, visit the <a href=\"https://console.aws.amazon.com/support/home\">AWS Support Center</a> and create a case.</p> </li> <li> <p> <b> <code>INVALID_PUBLIC_DOMAIN</code> </b> - One or more of the domain names in the certificate request is not valid. Typically, this is because a domain name in the request is not a valid top-level domain. Try to request a certificate again, correcting any spelling errors or typos that were in the failed request, and ensure that all domain names in the request are for valid top-level domains. For example, you cannot request a certificate for <code>example.invalidpublicdomain</code> because <code>invalidpublicdomain</code> is not a valid top-level domain.</p> </li> <li> <p> <b> <code>OTHER</code> </b> - Typically, this failure occurs when there is a typographical error in one or more of the domain names in the certificate request. Try to request a certificate again, correcting any spelling errors or typos that were in the failed request. </p> </li> </ul>"
         },
         "issuedAt": {
           "shape": "IsoDate",
@@ -8501,7 +9750,7 @@
         },
         "keyAlgorithm": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The algorithm that was used to generate the key pair (the public and private key).</p>"
+          "documentation": "<p>The algorithm used to generate the key pair (the public and private key).</p>"
         },
         "notAfter": {
           "shape": "IsoDate",
@@ -8513,15 +9762,15 @@
         },
         "renewalSummary": {
           "shape": "LoadBalancerTlsCertificateRenewalSummary",
-          "documentation": "<p>An object containing information about the status of Lightsail's managed renewal for the certificate.</p>"
+          "documentation": "<p>An object that describes the status of the certificate renewal managed by Lightsail.</p>"
         },
         "revocationReason": {
           "shape": "LoadBalancerTlsCertificateRevocationReason",
-          "documentation": "<p>The reason the certificate was revoked. Valid values are below.</p>"
+          "documentation": "<p>The reason the certificate was revoked. This value is present only when the certificate status is <code>REVOKED</code>.</p>"
         },
         "revokedAt": {
           "shape": "IsoDate",
-          "documentation": "<p>The timestamp when the SSL/TLS certificate was revoked.</p>"
+          "documentation": "<p>The timestamp when the certificate was revoked. This value is present only when the certificate status is <code>REVOKED</code>.</p>"
         },
         "serial": {
           "shape": "NonEmptyString",
@@ -8537,7 +9786,7 @@
         },
         "subjectAlternativeNames": {
           "shape": "StringList",
-          "documentation": "<p>One or more domains or subdomains included in the certificate. This list contains the domain names that are bound to the public key that is contained in the certificate. The subject alternative names include the canonical domain name (CNAME) of the certificate and additional domain names that can be used to connect to the website, such as <code>example.com</code>, <code>www.example.com</code>, or <code>m.example.com</code>.</p>"
+          "documentation": "<p>An array of strings that specify the alternate domains (e.g., <code>example2.com</code>) and subdomains (e.g., <code>blog.example.com</code>) for the certificate.</p>"
         }
       },
       "documentation": "<p>Describes a load balancer SSL/TLS certificate.</p> <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p>"
@@ -8632,14 +9881,14 @@
       "members": {
         "renewalStatus": {
           "shape": "LoadBalancerTlsCertificateRenewalStatus",
-          "documentation": "<p>The status of Lightsail's managed renewal of the certificate. Valid values are listed below.</p>"
+          "documentation": "<p>The renewal status of the certificate.</p> <p>The following renewal status are possible:</p> <ul> <li> <p> <b> <code>PendingAutoRenewal</code> </b> - Lightsail is attempting to automatically validate the domain names of the certificate. No further action is required. </p> </li> <li> <p> <b> <code>PendingValidation</code> </b> - Lightsail couldn't automatically validate one or more domain names of the certificate. You must take action to validate these domain names or the certificate won't be renewed. Check to make sure your certificate's domain validation records exist in your domain's DNS, and that your certificate remains in use.</p> </li> <li> <p> <b> <code>Success</code> </b> - All domain names in the certificate are validated, and Lightsail renewed the certificate. No further action is required. </p> </li> <li> <p> <b> <code>Failed</code> </b> - One or more domain names were not validated before the certificate expired, and Lightsail did not renew the certificate. You can request a new certificate using the <code>CreateCertificate</code> action.</p> </li> </ul>"
         },
         "domainValidationOptions": {
           "shape": "LoadBalancerTlsCertificateDomainValidationOptionList",
           "documentation": "<p>Contains information about the validation of each domain name in the certificate, as it pertains to Lightsail's managed renewal. This is different from the initial validation that occurs as a result of the RequestCertificate request.</p>"
         }
       },
-      "documentation": "<p>Contains information about the status of Lightsail's managed renewal for the certificate.</p>"
+      "documentation": "<p>Contains information about the status of Lightsail's managed renewal for the certificate.</p> <p>The renewal status of the certificate.</p> <p>The following renewal status are possible:</p> <ul> <li> <p> <b> <code>PendingAutoRenewal</code> </b> - Lightsail is attempting to automatically validate the domain names in the certificate. No further action is required. </p> </li> <li> <p> <b> <code>PendingValidation</code> </b> - Lightsail couldn't automatically validate one or more domain names in the certificate. You must take action to validate these domain names or the certificate won't be renewed. If you used DNS validation, check to make sure your certificate's domain validation records exist in your domain's DNS, and that your certificate remains in use.</p> </li> <li> <p> <b> <code>Success</code> </b> - All domain names in the certificate are validated, and Lightsail renewed the certificate. No further action is required. </p> </li> <li> <p> <b> <code>Failed</code> </b> - One or more domain names were not validated before the certificate expired, and Lightsail did not renew the certificate. You can request a new certificate using the <code>CreateCertificate</code> action.</p> </li> </ul>"
     },
     "LoadBalancerTlsCertificateRevocationReason": {
       "type": "string",
@@ -9032,7 +10281,45 @@
         "CreateContactMethod",
         "GetContactMethods",
         "SendContactMethodVerification",
-        "DeleteContactMethod"
+        "DeleteContactMethod",
+        "CreateDistribution",
+        "UpdateDistribution",
+        "DeleteDistribution",
+        "ResetDistributionCache",
+        "AttachCertificateToDistribution",
+        "DetachCertificateFromDistribution",
+        "UpdateDistributionBundle",
+        "CreateCertificate",
+        "DeleteCertificate"
+      ]
+    },
+    "Origin": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the origin resource.</p>"
+        },
+        "resourceType": {
+          "shape": "ResourceType",
+          "documentation": "<p>The resource type of the origin resource (e.g., <i>Instance</i>).</p>"
+        },
+        "regionName": {
+          "shape": "RegionName",
+          "documentation": "<p>The AWS Region name of the origin resource.</p>"
+        },
+        "protocolPolicy": {
+          "shape": "OriginProtocolPolicyEnum",
+          "documentation": "<p>The protocol that your Amazon Lightsail distribution uses when establishing a connection with your origin to pull content.</p>"
+        }
+      },
+      "documentation": "<p>Describes the origin resource of an Amazon Lightsail content delivery network (CDN) distribution.</p> <p>An origin can be a Lightsail instance or load balancer. A distribution pulls content from an origin, caches it, and serves it to viewers via a worldwide network of edge servers.</p>"
+    },
+    "OriginProtocolPolicyEnum": {
+      "type": "string",
+      "enum": [
+        "http-only",
+        "https-only"
       ]
     },
     "PasswordData": {
@@ -9261,6 +10548,20 @@
           "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
+    },
+    "QueryStringObject": {
+      "type": "structure",
+      "members": {
+        "option": {
+          "shape": "boolean",
+          "documentation": "<p>Indicates whether the distribution forwards and caches based on query strings.</p>"
+        },
+        "queryStringsAllowList": {
+          "shape": "StringList",
+          "documentation": "<p>The specific query strings that the distribution forwards to the origin.</p> <p>Your distribution will cache content based on the specified query strings.</p> <p>If the <code>option</code> parameter is true, then your distribution forwards all query strings, regardless of what you specify using the <code>queryStringsAllowList</code> parameter.</p>"
+        }
+      },
+      "documentation": "<p>Describes the query string parameters that an Amazon Lightsail content delivery network (CDN) distribution to bases caching on.</p> <p>For the query strings that you specify, your distribution caches separate versions of the specified content based on the query string values in viewer requests.</p>"
     },
     "RebootInstanceRequest": {
       "type": "structure",
@@ -9789,6 +11090,69 @@
         }
       }
     },
+    "RenewalStatus": {
+      "type": "string",
+      "enum": [
+        "PendingAutoRenewal",
+        "PendingValidation",
+        "Success",
+        "Failed"
+      ]
+    },
+    "RenewalStatusReason": {
+      "type": "string"
+    },
+    "RenewalSummary": {
+      "type": "structure",
+      "members": {
+        "domainValidationRecords": {
+          "shape": "DomainValidationRecordList",
+          "documentation": "<p>An array of objects that describe the domain validation records of the certificate.</p>"
+        },
+        "renewalStatus": {
+          "shape": "RenewalStatus",
+          "documentation": "<p>The renewal status of the certificate.</p> <p>The following renewal status are possible:</p> <ul> <li> <p> <b> <code>PendingAutoRenewal</code> </b> - Lightsail is attempting to automatically validate the domain names of the certificate. No further action is required. </p> </li> <li> <p> <b> <code>PendingValidation</code> </b> - Lightsail couldn't automatically validate one or more domain names of the certificate. You must take action to validate these domain names or the certificate won't be renewed. Check to make sure your certificate's domain validation records exist in your domain's DNS, and that your certificate remains in use.</p> </li> <li> <p> <b> <code>Success</code> </b> - All domain names in the certificate are validated, and Lightsail renewed the certificate. No further action is required. </p> </li> <li> <p> <b> <code>Failed</code> </b> - One or more domain names were not validated before the certificate expired, and Lightsail did not renew the certificate. You can request a new certificate using the <code>CreateCertificate</code> action.</p> </li> </ul>"
+        },
+        "renewalStatusReason": {
+          "shape": "RenewalStatusReason",
+          "documentation": "<p>The reason for the renewal status of the certificate.</p>"
+        },
+        "updatedAt": {
+          "shape": "IsoDate",
+          "documentation": "<p>The timestamp when the certificate was last updated.</p>"
+        }
+      },
+      "documentation": "<p>Describes the status of a SSL/TLS certificate renewal managed by Amazon Lightsail.</p>"
+    },
+    "RequestFailureReason": {
+      "type": "string"
+    },
+    "ResetDistributionCacheRequest": {
+      "type": "structure",
+      "members": {
+        "distributionName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the distribution for which to reset cache.</p> <p>Use the <code>GetDistributions</code> action to get a list of distribution names that you can specify.</p>"
+        }
+      }
+    },
+    "ResetDistributionCacheResult": {
+      "type": "structure",
+      "members": {
+        "status": {
+          "shape": "string",
+          "documentation": "<p>The status of the reset cache request.</p>"
+        },
+        "createTime": {
+          "shape": "IsoDate",
+          "documentation": "<p>The timestamp of the reset cache request (e.g., <code>1479734909.17</code>) in Unix time format.</p>"
+        },
+        "operation": {
+          "shape": "Operation",
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
+        }
+      }
+    },
     "ResourceArn": {
       "type": "string",
       "pattern": "^arn:(aws[^:]*):([a-zA-Z0-9-]+):([a-z0-9-]+):([0-9]+):([a-zA-Z]+)/([a-zA-Z0-9-]+)$"
@@ -9817,6 +11181,24 @@
         "shape": "ResourceName"
       }
     },
+    "ResourceRecord": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "string",
+          "documentation": "<p>The name of the record.</p>"
+        },
+        "type": {
+          "shape": "string",
+          "documentation": "<p>The DNS record type.</p>"
+        },
+        "value": {
+          "shape": "string",
+          "documentation": "<p>The value for the DNS record.</p>"
+        }
+      },
+      "documentation": "<p>Describes the domain name system (DNS) records to add to your domain's DNS to validate it for an Amazon Lightsail certificate.</p>"
+    },
     "ResourceType": {
       "type": "string",
       "enum": [
@@ -9835,8 +11217,13 @@
         "ExportSnapshotRecord",
         "CloudFormationStackRecord",
         "Alarm",
-        "ContactMethod"
+        "ContactMethod",
+        "Distribution",
+        "Certificate"
       ]
+    },
+    "RevocationReason": {
+      "type": "string"
     },
     "SendContactMethodVerificationRequest": {
       "type": "structure",
@@ -9862,6 +11249,9 @@
     "SensitiveString": {
       "type": "string",
       "sensitive": true
+    },
+    "SerialNumber": {
+      "type": "string"
     },
     "StartInstanceRequest": {
       "type": "structure",
@@ -10014,6 +11404,12 @@
       "max": 256,
       "min": 1
     },
+    "SubjectAlternativeNameList": {
+      "type": "list",
+      "member": {
+        "shape": "DomainName"
+      }
+    },
     "Tag": {
       "type": "structure",
       "members": {
@@ -10154,6 +11550,68 @@
       "members": {
         "operations": {
           "shape": "OperationList",
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
+        }
+      }
+    },
+    "UpdateDistributionBundleRequest": {
+      "type": "structure",
+      "members": {
+        "distributionName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the distribution for which to update the bundle.</p> <p>Use the <code>GetDistributions</code> action to get a list of distribution names that you can specify.</p>"
+        },
+        "bundleId": {
+          "shape": "string",
+          "documentation": "<p>The bundle ID of the new bundle to apply to your distribution.</p> <p>Use the <code>GetDistributionBundles</code> action to get a list of distribution bundle IDs that you can specify.</p>"
+        }
+      }
+    },
+    "UpdateDistributionBundleResult": {
+      "type": "structure",
+      "members": {
+        "operation": {
+          "shape": "Operation"
+        }
+      }
+    },
+    "UpdateDistributionRequest": {
+      "type": "structure",
+      "required": [
+        "distributionName"
+      ],
+      "members": {
+        "distributionName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the distribution to update.</p> <p>Use the <code>GetDistributions</code> action to get a list of distribution names that you can specify.</p>"
+        },
+        "origin": {
+          "shape": "InputOrigin",
+          "documentation": "<p>An object that describes the origin resource for the distribution, such as a Lightsail instance or load balancer.</p> <p>The distribution pulls, caches, and serves content from the origin.</p>"
+        },
+        "defaultCacheBehavior": {
+          "shape": "CacheBehavior",
+          "documentation": "<p>An object that describes the default cache behavior for the distribution.</p>"
+        },
+        "cacheBehaviorSettings": {
+          "shape": "CacheSettings",
+          "documentation": "<p>An object that describes the cache behavior settings for the distribution.</p> <note> <p>The <code>cacheBehaviorSettings</code> specified in your <code>UpdateDistributionRequest</code> will replace your distribution's existing settings.</p> </note>"
+        },
+        "cacheBehaviors": {
+          "shape": "CacheBehaviorList",
+          "documentation": "<p>An array of objects that describe the per-path cache behavior for the distribution.</p>"
+        },
+        "isEnabled": {
+          "shape": "boolean",
+          "documentation": "<p>Indicates whether to enable the distribution.</p>"
+        }
+      }
+    },
+    "UpdateDistributionResult": {
+      "type": "structure",
+      "members": {
+        "operation": {
+          "shape": "Operation",
           "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
         }
       }
@@ -10310,6 +11768,9 @@
     "integer": {
       "type": "integer"
     },
+    "long": {
+      "type": "long"
+    },
     "string": {
       "type": "string"
     },
@@ -10317,5 +11778,5 @@
       "type": "timestamp"
     }
   },
-  "documentation": "<p>Amazon Lightsail is the easiest way to get started with AWS for developers who just need virtual private servers. Lightsail includes everything you need to launch your project quickly - a virtual machine, a managed database, SSD-based storage, data transfer, DNS management, and a static IP - for a low, predictable price. You manage those Lightsail servers through the Lightsail console or by using the API or command-line interface (CLI).</p> <p>For more information about Lightsail concepts and tasks, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/all\">Lightsail Dev Guide</a>.</p> <p>To use the Lightsail API or the CLI, you will need to use AWS Identity and Access Management (IAM) to generate access keys. For details about how to set this up, see the <a href=\"http://lightsail.aws.amazon.com/ls/docs/how-to/article/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli\">Lightsail Dev Guide</a>.</p>"
+  "documentation": "<p>Amazon Lightsail is the easiest way to get started with Amazon Web Services (AWS) for developers who need to build websites or web applications. It includes everything you need to launch your project quickly – instances (virtual private servers), managed databases, SSD-based block storage, static IP addresses, load balancers, content delivery network (CDN) distributions, DNS management of registered domains, and snapshots (backups) – for a low, predictable monthly price.</p> <p>You can manage your Lightsail resources using the Lightsail console, Lightsail API, AWS Command Line Interface (AWS CLI), or SDKs. For more information about Lightsail concepts and tasks, see the <a href=\"http://lightsail.aws.amazon.com/ls/docs/how-to/article/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli\">Lightsail Dev Guide</a>.</p> <p>This API Reference provides detailed information about the actions, data types, parameters, and errors of the Lightsail service. For more information about the supported AWS Regions, endpoints, and service quotas for the Lightsail service, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/lightsail.html\">Amazon Lightsail Endpoints and Quotas</a> in the <i>AWS General Reference</i>.</p>"
 }

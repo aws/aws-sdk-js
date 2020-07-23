@@ -20,6 +20,14 @@ declare class Lightsail extends Service {
    */
   allocateStaticIp(callback?: (err: AWSError, data: Lightsail.Types.AllocateStaticIpResult) => void): Request<Lightsail.Types.AllocateStaticIpResult, AWSError>;
   /**
+   * Attaches an SSL/TLS certificate to your Amazon Lightsail content delivery network (CDN) distribution. After the certificate is attached, your distribution accepts HTTPS traffic for all of the domains that are associated with the certificate. Use the CreateCertificate action to create a certificate that you can attach to your distribution.  Only certificates created in the us-east-1 AWS Region can be attached to Lightsail distributions. Lightsail distributions are global resources that can reference an origin in any AWS Region, and distribute its content globally. However, all distributions are located in the us-east-1 Region. 
+   */
+  attachCertificateToDistribution(params: Lightsail.Types.AttachCertificateToDistributionRequest, callback?: (err: AWSError, data: Lightsail.Types.AttachCertificateToDistributionResult) => void): Request<Lightsail.Types.AttachCertificateToDistributionResult, AWSError>;
+  /**
+   * Attaches an SSL/TLS certificate to your Amazon Lightsail content delivery network (CDN) distribution. After the certificate is attached, your distribution accepts HTTPS traffic for all of the domains that are associated with the certificate. Use the CreateCertificate action to create a certificate that you can attach to your distribution.  Only certificates created in the us-east-1 AWS Region can be attached to Lightsail distributions. Lightsail distributions are global resources that can reference an origin in any AWS Region, and distribute its content globally. However, all distributions are located in the us-east-1 Region. 
+   */
+  attachCertificateToDistribution(callback?: (err: AWSError, data: Lightsail.Types.AttachCertificateToDistributionResult) => void): Request<Lightsail.Types.AttachCertificateToDistributionResult, AWSError>;
+  /**
    * Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name. The attach disk operation supports tag-based access control via resource tags applied to the resource identified by disk name. For more information, see the Lightsail Dev Guide.
    */
   attachDisk(params: Lightsail.Types.AttachDiskRequest, callback?: (err: AWSError, data: Lightsail.Types.AttachDiskResult) => void): Request<Lightsail.Types.AttachDiskResult, AWSError>;
@@ -68,6 +76,14 @@ declare class Lightsail extends Service {
    */
   copySnapshot(callback?: (err: AWSError, data: Lightsail.Types.CopySnapshotResult) => void): Request<Lightsail.Types.CopySnapshotResult, AWSError>;
   /**
+   * Creates an SSL/TLS certificate for a Amazon Lightsail content delivery network (CDN) distribution. After the certificate is created, use the AttachCertificateToDistribution action to attach the certificate to your distribution.  Only certificates created in the us-east-1 AWS Region can be attached to Lightsail distributions. Lightsail distributions are global resources that can reference an origin in any AWS Region, and distribute its content globally. However, all distributions are located in the us-east-1 Region. 
+   */
+  createCertificate(params: Lightsail.Types.CreateCertificateRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateCertificateResult) => void): Request<Lightsail.Types.CreateCertificateResult, AWSError>;
+  /**
+   * Creates an SSL/TLS certificate for a Amazon Lightsail content delivery network (CDN) distribution. After the certificate is created, use the AttachCertificateToDistribution action to attach the certificate to your distribution.  Only certificates created in the us-east-1 AWS Region can be attached to Lightsail distributions. Lightsail distributions are global resources that can reference an origin in any AWS Region, and distribute its content globally. However, all distributions are located in the us-east-1 Region. 
+   */
+  createCertificate(callback?: (err: AWSError, data: Lightsail.Types.CreateCertificateResult) => void): Request<Lightsail.Types.CreateCertificateResult, AWSError>;
+  /**
    * Creates an AWS CloudFormation stack, which creates a new Amazon EC2 instance from an exported Amazon Lightsail snapshot. This operation results in a CloudFormation stack record that can be used to track the AWS CloudFormation stack created. Use the get cloud formation stack records operation to get a list of the CloudFormation stacks created.  Wait until after your new Amazon EC2 instance is created before running the create cloud formation stack operation again with the same export snapshot record. 
    */
   createCloudFormationStack(params: Lightsail.Types.CreateCloudFormationStackRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateCloudFormationStackResult) => void): Request<Lightsail.Types.CreateCloudFormationStackResult, AWSError>;
@@ -107,6 +123,14 @@ declare class Lightsail extends Service {
    * Creates a snapshot of a block storage disk. You can use snapshots for backups, to make copies of disks, and to save data before shutting down a Lightsail instance. You can take a snapshot of an attached disk that is in use; however, snapshots only capture data that has been written to your disk at the time the snapshot command is issued. This may exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the disk long enough to take a snapshot, your snapshot should be complete. Nevertheless, if you cannot pause all file writes to the disk, you should unmount the disk from within the Lightsail instance, issue the create disk snapshot command, and then remount the disk to ensure a consistent and complete snapshot. You may remount and use your disk while the snapshot status is pending. You can also use this operation to create a snapshot of an instance's system volume. You might want to do this, for example, to recover data from the system volume of a botched instance or to create a backup of the system volume like you would for a block storage disk. To create a snapshot of a system volume, just define the instance name parameter when issuing the snapshot command, and a snapshot of the defined instance's system volume will be created. After the snapshot is available, you can create a block storage disk from the snapshot and attach it to a running instance to access the data on the disk. The create disk snapshot operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
    */
   createDiskSnapshot(callback?: (err: AWSError, data: Lightsail.Types.CreateDiskSnapshotResult) => void): Request<Lightsail.Types.CreateDiskSnapshotResult, AWSError>;
+  /**
+   * Creates an Amazon Lightsail content delivery network (CDN) distribution. A distribution is a globally distributed network of caching servers that improve the performance of your website or web application hosted on a Lightsail instance. For more information, see Content delivery networks in Amazon Lightsail.
+   */
+  createDistribution(params: Lightsail.Types.CreateDistributionRequest, callback?: (err: AWSError, data: Lightsail.Types.CreateDistributionResult) => void): Request<Lightsail.Types.CreateDistributionResult, AWSError>;
+  /**
+   * Creates an Amazon Lightsail content delivery network (CDN) distribution. A distribution is a globally distributed network of caching servers that improve the performance of your website or web application hosted on a Lightsail instance. For more information, see Content delivery networks in Amazon Lightsail.
+   */
+  createDistribution(callback?: (err: AWSError, data: Lightsail.Types.CreateDistributionResult) => void): Request<Lightsail.Types.CreateDistributionResult, AWSError>;
   /**
    * Creates a domain resource for the specified domain (e.g., example.com). The create domain operation supports tag-based access control via request tags. For more information, see the Lightsail Dev Guide.
    */
@@ -212,6 +236,14 @@ declare class Lightsail extends Service {
    */
   deleteAutoSnapshot(callback?: (err: AWSError, data: Lightsail.Types.DeleteAutoSnapshotResult) => void): Request<Lightsail.Types.DeleteAutoSnapshotResult, AWSError>;
   /**
+   * Deletes an SSL/TLS certificate for your Amazon Lightsail content delivery network (CDN) distribution. Certificates that are currently attached to a distribution cannot be deleted. Use the DetachCertificateFromDistribution action to detach a certificate from a distribution.
+   */
+  deleteCertificate(params: Lightsail.Types.DeleteCertificateRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteCertificateResult) => void): Request<Lightsail.Types.DeleteCertificateResult, AWSError>;
+  /**
+   * Deletes an SSL/TLS certificate for your Amazon Lightsail content delivery network (CDN) distribution. Certificates that are currently attached to a distribution cannot be deleted. Use the DetachCertificateFromDistribution action to detach a certificate from a distribution.
+   */
+  deleteCertificate(callback?: (err: AWSError, data: Lightsail.Types.DeleteCertificateResult) => void): Request<Lightsail.Types.DeleteCertificateResult, AWSError>;
+  /**
    * Deletes a contact method. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail.
    */
   deleteContactMethod(params: Lightsail.Types.DeleteContactMethodRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteContactMethodResult) => void): Request<Lightsail.Types.DeleteContactMethodResult, AWSError>;
@@ -235,6 +267,14 @@ declare class Lightsail extends Service {
    * Deletes the specified disk snapshot. When you make periodic snapshots of a disk, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the disk. The delete disk snapshot operation supports tag-based access control via resource tags applied to the resource identified by disk snapshot name. For more information, see the Lightsail Dev Guide.
    */
   deleteDiskSnapshot(callback?: (err: AWSError, data: Lightsail.Types.DeleteDiskSnapshotResult) => void): Request<Lightsail.Types.DeleteDiskSnapshotResult, AWSError>;
+  /**
+   * Deletes your Amazon Lightsail content delivery network (CDN) distribution.
+   */
+  deleteDistribution(params: Lightsail.Types.DeleteDistributionRequest, callback?: (err: AWSError, data: Lightsail.Types.DeleteDistributionResult) => void): Request<Lightsail.Types.DeleteDistributionResult, AWSError>;
+  /**
+   * Deletes your Amazon Lightsail content delivery network (CDN) distribution.
+   */
+  deleteDistribution(callback?: (err: AWSError, data: Lightsail.Types.DeleteDistributionResult) => void): Request<Lightsail.Types.DeleteDistributionResult, AWSError>;
   /**
    * Deletes the specified domain recordset and all of its domain records. The delete domain operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Lightsail Dev Guide.
    */
@@ -315,6 +355,14 @@ declare class Lightsail extends Service {
    * Deletes a database snapshot in Amazon Lightsail. The delete relational database snapshot operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the Lightsail Dev Guide.
    */
   deleteRelationalDatabaseSnapshot(callback?: (err: AWSError, data: Lightsail.Types.DeleteRelationalDatabaseSnapshotResult) => void): Request<Lightsail.Types.DeleteRelationalDatabaseSnapshotResult, AWSError>;
+  /**
+   * Detaches an SSL/TLS certificate from your Amazon Lightsail content delivery network (CDN) distribution. After the certificate is detached, your distribution stops accepting traffic for all of the domains that are associated with the certificate.
+   */
+  detachCertificateFromDistribution(params: Lightsail.Types.DetachCertificateFromDistributionRequest, callback?: (err: AWSError, data: Lightsail.Types.DetachCertificateFromDistributionResult) => void): Request<Lightsail.Types.DetachCertificateFromDistributionResult, AWSError>;
+  /**
+   * Detaches an SSL/TLS certificate from your Amazon Lightsail content delivery network (CDN) distribution. After the certificate is detached, your distribution stops accepting traffic for all of the domains that are associated with the certificate.
+   */
+  detachCertificateFromDistribution(callback?: (err: AWSError, data: Lightsail.Types.DetachCertificateFromDistributionResult) => void): Request<Lightsail.Types.DetachCertificateFromDistributionResult, AWSError>;
   /**
    * Detaches a stopped block storage disk from a Lightsail instance. Make sure to unmount any file systems on the device within your operating system before stopping the instance and detaching the disk. The detach disk operation supports tag-based access control via resource tags applied to the resource identified by disk name. For more information, see the Lightsail Dev Guide.
    */
@@ -412,6 +460,14 @@ declare class Lightsail extends Service {
    */
   getBundles(callback?: (err: AWSError, data: Lightsail.Types.GetBundlesResult) => void): Request<Lightsail.Types.GetBundlesResult, AWSError>;
   /**
+   * Returns information about one or more Amazon Lightsail SSL/TLS certificates.  To get a summary of a certificate, ommit includeCertificateDetails from your request. The response will include only the certificate Amazon Resource Name (ARN), certificate name, domain name, and tags. 
+   */
+  getCertificates(params: Lightsail.Types.GetCertificatesRequest, callback?: (err: AWSError, data: Lightsail.Types.GetCertificatesResult) => void): Request<Lightsail.Types.GetCertificatesResult, AWSError>;
+  /**
+   * Returns information about one or more Amazon Lightsail SSL/TLS certificates.  To get a summary of a certificate, ommit includeCertificateDetails from your request. The response will include only the certificate Amazon Resource Name (ARN), certificate name, domain name, and tags. 
+   */
+  getCertificates(callback?: (err: AWSError, data: Lightsail.Types.GetCertificatesResult) => void): Request<Lightsail.Types.GetCertificatesResult, AWSError>;
+  /**
    * Returns the CloudFormation stack record created as a result of the create cloud formation stack operation. An AWS CloudFormation stack is used to create a new Amazon EC2 instance from an exported Lightsail snapshot.
    */
   getCloudFormationStackRecords(params: Lightsail.Types.GetCloudFormationStackRecordsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetCloudFormationStackRecordsResult) => void): Request<Lightsail.Types.GetCloudFormationStackRecordsResult, AWSError>;
@@ -459,6 +515,38 @@ declare class Lightsail extends Service {
    * Returns information about all block storage disks in your AWS account and region.
    */
   getDisks(callback?: (err: AWSError, data: Lightsail.Types.GetDisksResult) => void): Request<Lightsail.Types.GetDisksResult, AWSError>;
+  /**
+   * Returns the list bundles that can be applied to you Amazon Lightsail content delivery network (CDN) distributions. A distribution bundle specifies the monthly network transfer quota and monthly cost of your dsitribution.
+   */
+  getDistributionBundles(params: Lightsail.Types.GetDistributionBundlesRequest, callback?: (err: AWSError, data: Lightsail.Types.GetDistributionBundlesResult) => void): Request<Lightsail.Types.GetDistributionBundlesResult, AWSError>;
+  /**
+   * Returns the list bundles that can be applied to you Amazon Lightsail content delivery network (CDN) distributions. A distribution bundle specifies the monthly network transfer quota and monthly cost of your dsitribution.
+   */
+  getDistributionBundles(callback?: (err: AWSError, data: Lightsail.Types.GetDistributionBundlesResult) => void): Request<Lightsail.Types.GetDistributionBundlesResult, AWSError>;
+  /**
+   * Returns the timestamp and status of the last cache reset of a specific Amazon Lightsail content delivery network (CDN) distribution.
+   */
+  getDistributionLatestCacheReset(params: Lightsail.Types.GetDistributionLatestCacheResetRequest, callback?: (err: AWSError, data: Lightsail.Types.GetDistributionLatestCacheResetResult) => void): Request<Lightsail.Types.GetDistributionLatestCacheResetResult, AWSError>;
+  /**
+   * Returns the timestamp and status of the last cache reset of a specific Amazon Lightsail content delivery network (CDN) distribution.
+   */
+  getDistributionLatestCacheReset(callback?: (err: AWSError, data: Lightsail.Types.GetDistributionLatestCacheResetResult) => void): Request<Lightsail.Types.GetDistributionLatestCacheResetResult, AWSError>;
+  /**
+   * Returns the data points of a specific metric for an Amazon Lightsail content delivery network (CDN) distribution. Metrics report the utilization of your resources, and the error counts generated by them. Monitor and collect metric data regularly to maintain the reliability, availability, and performance of your resources.
+   */
+  getDistributionMetricData(params: Lightsail.Types.GetDistributionMetricDataRequest, callback?: (err: AWSError, data: Lightsail.Types.GetDistributionMetricDataResult) => void): Request<Lightsail.Types.GetDistributionMetricDataResult, AWSError>;
+  /**
+   * Returns the data points of a specific metric for an Amazon Lightsail content delivery network (CDN) distribution. Metrics report the utilization of your resources, and the error counts generated by them. Monitor and collect metric data regularly to maintain the reliability, availability, and performance of your resources.
+   */
+  getDistributionMetricData(callback?: (err: AWSError, data: Lightsail.Types.GetDistributionMetricDataResult) => void): Request<Lightsail.Types.GetDistributionMetricDataResult, AWSError>;
+  /**
+   * Returns information about one or more of your Amazon Lightsail content delivery network (CDN) distributions.
+   */
+  getDistributions(params: Lightsail.Types.GetDistributionsRequest, callback?: (err: AWSError, data: Lightsail.Types.GetDistributionsResult) => void): Request<Lightsail.Types.GetDistributionsResult, AWSError>;
+  /**
+   * Returns information about one or more of your Amazon Lightsail content delivery network (CDN) distributions.
+   */
+  getDistributions(callback?: (err: AWSError, data: Lightsail.Types.GetDistributionsResult) => void): Request<Lightsail.Types.GetDistributionsResult, AWSError>;
   /**
    * Returns information about a specific domain recordset.
    */
@@ -812,6 +900,14 @@ declare class Lightsail extends Service {
    */
   releaseStaticIp(callback?: (err: AWSError, data: Lightsail.Types.ReleaseStaticIpResult) => void): Request<Lightsail.Types.ReleaseStaticIpResult, AWSError>;
   /**
+   * Deletes currently cached content from your Amazon Lightsail content delivery network (CDN) distribution. After resetting the cache, the next time a content request is made, your distribution pulls, serves, and caches it from the origin.
+   */
+  resetDistributionCache(params: Lightsail.Types.ResetDistributionCacheRequest, callback?: (err: AWSError, data: Lightsail.Types.ResetDistributionCacheResult) => void): Request<Lightsail.Types.ResetDistributionCacheResult, AWSError>;
+  /**
+   * Deletes currently cached content from your Amazon Lightsail content delivery network (CDN) distribution. After resetting the cache, the next time a content request is made, your distribution pulls, serves, and caches it from the origin.
+   */
+  resetDistributionCache(callback?: (err: AWSError, data: Lightsail.Types.ResetDistributionCacheResult) => void): Request<Lightsail.Types.ResetDistributionCacheResult, AWSError>;
+  /**
    * Sends a verification request to an email contact method to ensure it's owned by the requester. SMS contact methods don't need to be verified. A contact method is used to send you notifications about your Amazon Lightsail resources. You can add one email address and one mobile phone number contact method in each AWS Region. However, SMS text messaging is not supported in some AWS Regions, and SMS text messages cannot be sent to some countries/regions. For more information, see Notifications in Amazon Lightsail. A verification request is sent to the contact method when you initially create it. Use this action to send another verification request if a previous verification request was deleted, or has expired.  Notifications are not sent to an email contact method until after it is verified, and confirmed as valid. 
    */
   sendContactMethodVerification(params: Lightsail.Types.SendContactMethodVerificationRequest, callback?: (err: AWSError, data: Lightsail.Types.SendContactMethodVerificationResult) => void): Request<Lightsail.Types.SendContactMethodVerificationResult, AWSError>;
@@ -883,6 +979,22 @@ declare class Lightsail extends Service {
    * Deletes the specified set of tag keys and their values from the specified Amazon Lightsail resource. The untag resource operation supports tag-based access control via request tags and resource tags applied to the resource identified by resource name. For more information, see the Lightsail Dev Guide.
    */
   untagResource(callback?: (err: AWSError, data: Lightsail.Types.UntagResourceResult) => void): Request<Lightsail.Types.UntagResourceResult, AWSError>;
+  /**
+   * Updates an existing Amazon Lightsail content delivery network (CDN) distribution. Use this action to update the configuration of your existing distribution
+   */
+  updateDistribution(params: Lightsail.Types.UpdateDistributionRequest, callback?: (err: AWSError, data: Lightsail.Types.UpdateDistributionResult) => void): Request<Lightsail.Types.UpdateDistributionResult, AWSError>;
+  /**
+   * Updates an existing Amazon Lightsail content delivery network (CDN) distribution. Use this action to update the configuration of your existing distribution
+   */
+  updateDistribution(callback?: (err: AWSError, data: Lightsail.Types.UpdateDistributionResult) => void): Request<Lightsail.Types.UpdateDistributionResult, AWSError>;
+  /**
+   * Updates the bundle of your Amazon Lightsail content delivery network (CDN) distribution. A distribution bundle specifies the monthly network transfer quota and monthly cost of your dsitribution. Update your distribution's bundle if your distribution is going over its monthly network transfer quota and is incurring an overage fee. You can update your distribution's bundle only one time within your monthly AWS billing cycle. To determine if you can update your distribution's bundle, use the GetDistributions action. The ableToUpdateBundle parameter in the result will indicate whether you can currently update your distribution's bundle.
+   */
+  updateDistributionBundle(params: Lightsail.Types.UpdateDistributionBundleRequest, callback?: (err: AWSError, data: Lightsail.Types.UpdateDistributionBundleResult) => void): Request<Lightsail.Types.UpdateDistributionBundleResult, AWSError>;
+  /**
+   * Updates the bundle of your Amazon Lightsail content delivery network (CDN) distribution. A distribution bundle specifies the monthly network transfer quota and monthly cost of your dsitribution. Update your distribution's bundle if your distribution is going over its monthly network transfer quota and is incurring an overage fee. You can update your distribution's bundle only one time within your monthly AWS billing cycle. To determine if you can update your distribution's bundle, use the GetDistributions action. The ableToUpdateBundle parameter in the result will indicate whether you can currently update your distribution's bundle.
+   */
+  updateDistributionBundle(callback?: (err: AWSError, data: Lightsail.Types.UpdateDistributionBundleResult) => void): Request<Lightsail.Types.UpdateDistributionBundleResult, AWSError>;
   /**
    * Updates a domain recordset after it is created. The update domain entry operation supports tag-based access control via resource tags applied to the resource identified by domain name. For more information, see the Lightsail Dev Guide.
    */
@@ -1045,6 +1157,22 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
+  export interface AttachCertificateToDistributionRequest {
+    /**
+     * The name of the distribution that the certificate will be attached to. Use the GetDistributions action to get a list of distribution names that you can specify.
+     */
+    distributionName: ResourceName;
+    /**
+     * The name of the certificate to attach to a distribution. Only certificates with a status of ISSUED can be attached to a distribution. Use the GetCertificates action to get a list of certificate names that you can specify.  This is the name of the certificate resource type and is used only to reference the certificate in other API actions. It can be different than the domain name of the certificate. For example, your certificate name might be WordPress-Blog-Certificate and the domain name of the certificate might be example.com. 
+     */
+    certificateName: ResourceName;
+  }
+  export interface AttachCertificateToDistributionResult {
+    /**
+     * An object that describes the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
+     */
+    operation?: Operation;
+  }
   export interface AttachDiskRequest {
     /**
      * The unique Lightsail disk name (e.g., my-disk).
@@ -1164,6 +1292,7 @@ declare namespace Lightsail {
   }
   export type AvailabilityZoneList = AvailabilityZone[];
   export type Base64 = string;
+  export type BehaviorEnum = "dont-cache"|"cache"|string;
   export interface Blueprint {
     /**
      * The ID for the virtual private server image (e.g., app_wordpress_4_4 or app_lamp_7_0).
@@ -1263,6 +1392,169 @@ declare namespace Lightsail {
     supportedPlatforms?: InstancePlatformList;
   }
   export type BundleList = Bundle[];
+  export interface CacheBehavior {
+    /**
+     * The cache behavior of the distribution. The following cache behaviors can be specified:     cache  - This option is best for static sites. When specified, your distribution caches and serves your entire website as static content. This behavior is ideal for websites with static content that doesn't change depending on who views it, or for websites that don't use cookies, headers, or query strings to personalize content.     dont-cache  - This option is best for sites that serve a mix of static and dynamic content. When specified, your distribution caches and serve only the content that is specified in the distribution's CacheBehaviorPerPath parameter. This behavior is ideal for websites or web applications that use cookies, headers, and query strings to personalize content for individual users.  
+     */
+    behavior?: BehaviorEnum;
+  }
+  export type CacheBehaviorList = CacheBehaviorPerPath[];
+  export interface CacheBehaviorPerPath {
+    /**
+     * The path to a directory or file to cached, or not cache. Use an asterisk symbol to specify wildcard directories (path/to/assets/*), and file types (*.html, *jpg, *js). Directories and file paths are case-sensitive. Examples:   Specify the following to cache all files in the document root of an Apache web server running on a Lightsail instance.  var/www/html/    Specify the following file to cache only the index page in the document root of an Apache web server.  var/www/html/index.html    Specify the following to cache only the .html files in the document root of an Apache web server.  var/www/html/*.html    Specify the following to cache only the .jpg, .png, and .gif files in the images sub-directory of the document root of an Apache web server.  var/www/html/images/*.jpg   var/www/html/images/*.png   var/www/html/images/*.gif  Specify the following to cache all files in the images sub-directory of the document root of an Apache web server.  var/www/html/images/   
+     */
+    path?: string;
+    /**
+     * The cache behavior for the specified path. You can specify one of the following per-path cache behaviors:     cache  - This behavior caches the specified path.      dont-cache  - This behavior doesn't cache the specified path.   
+     */
+    behavior?: BehaviorEnum;
+  }
+  export interface CacheSettings {
+    /**
+     * The default amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the content has been updated.  The value specified applies only when the origin does not add HTTP headers such as Cache-Control max-age, Cache-Control s-maxage, and Expires to objects. 
+     */
+    defaultTTL?: long;
+    /**
+     * The minimum amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the object has been updated. A value of 0 must be specified for minimumTTL if the distribution is configured to forward all headers to the origin.
+     */
+    minimumTTL?: long;
+    /**
+     * The maximum amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the object has been updated. The value specified applies only when the origin adds HTTP headers such as Cache-Control max-age, Cache-Control s-maxage, and Expires to objects.
+     */
+    maximumTTL?: long;
+    /**
+     * The HTTP methods that are processed and forwarded to the distribution's origin. You can specify the following options:    GET,HEAD - The distribution forwards the GET and HEAD methods.    GET,HEAD,OPTIONS - The distribution forwards the GET, HEAD, and OPTIONS methods.    GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE - The distribution forwards the GET, HEAD, OPTIONS, PUT, PATCH, POST, and DELETE methods.   If you specify the third option, you might need to restrict access to your distribution's origin so users can't perform operations that you don't want them to. For example, you might not want users to have permission to delete objects from your origin.
+     */
+    allowedHTTPMethods?: NonEmptyString;
+    /**
+     * The HTTP method responses that are cached by your distribution. You can specify the following options:    GET,HEAD - The distribution caches responses to the GET and HEAD methods.    GET,HEAD,OPTIONS - The distribution caches responses to the GET, HEAD, and OPTIONS methods.  
+     */
+    cachedHTTPMethods?: NonEmptyString;
+    /**
+     * An object that describes the cookies that are forwarded to the origin. Your content is cached based on the cookies that are forwarded.
+     */
+    forwardedCookies?: CookieObject;
+    /**
+     * An object that describes the headers that are forwarded to the origin. Your content is cached based on the headers that are forwarded.
+     */
+    forwardedHeaders?: HeaderObject;
+    /**
+     * An object that describes the query strings that are forwarded to the origin. Your content is cached based on the query strings that are forwarded.
+     */
+    forwardedQueryStrings?: QueryStringObject;
+  }
+  export interface Certificate {
+    /**
+     * The Amazon Resource Name (ARN) of the certificate.
+     */
+    arn?: NonEmptyString;
+    /**
+     * The name of the certificate (e.g., my-certificate).
+     */
+    name?: CertificateName;
+    /**
+     * The domain name of the certificate.
+     */
+    domainName?: DomainName;
+    /**
+     * The validation status of the certificate.
+     */
+    status?: CertificateStatus;
+    /**
+     * The serial number of the certificate.
+     */
+    serialNumber?: SerialNumber;
+    /**
+     * An array of strings that specify the alternate domains (e.g., example2.com) and subdomains (e.g., blog.example.com) of the certificate.
+     */
+    subjectAlternativeNames?: SubjectAlternativeNameList;
+    /**
+     * An array of objects that describe the domain validation records of the certificate.
+     */
+    domainValidationRecords?: DomainValidationRecordList;
+    /**
+     * The validation failure reason, if any, of the certificate. The following failure reasons are possible:     NO_AVAILABLE_CONTACTS  - This failure applies to email validation, which is not available for Lightsail certificates.     ADDITIONAL_VERIFICATION_REQUIRED  - Lightsail requires additional information to process this certificate request. This can happen as a fraud-protection measure, such as when the domain ranks within the Alexa top 1000 websites. To provide the required information, use the AWS Support Center to contact AWS Support.  You cannot request a certificate for Amazon-owned domain names such as those ending in amazonaws.com, cloudfront.net, or elasticbeanstalk.com.      DOMAIN_NOT_ALLOWED  - One or more of the domain names in the certificate request was reported as an unsafe domain by VirusTotal. To correct the problem, search for your domain name on the VirusTotal website. If your domain is reported as suspicious, see Google Help for Hacked Websites to learn what you can do. If you believe that the result is a false positive, notify the organization that is reporting the domain. VirusTotal is an aggregate of several antivirus and URL scanners and cannot remove your domain from a block list itself. After you correct the problem and the VirusTotal registry has been updated, request a new certificate. If you see this error and your domain is not included in the VirusTotal list, visit the AWS Support Center and create a case.     INVALID_PUBLIC_DOMAIN  - One or more of the domain names in the certificate request is not valid. Typically, this is because a domain name in the request is not a valid top-level domain. Try to request a certificate again, correcting any spelling errors or typos that were in the failed request, and ensure that all domain names in the request are for valid top-level domains. For example, you cannot request a certificate for example.invalidpublicdomain because invalidpublicdomain is not a valid top-level domain.     OTHER  - Typically, this failure occurs when there is a typographical error in one or more of the domain names in the certificate request. Try to request a certificate again, correcting any spelling errors or typos that were in the failed request.   
+     */
+    requestFailureReason?: RequestFailureReason;
+    /**
+     * The number of Lightsail resources that the certificate is attached to.
+     */
+    inUseResourceCount?: InUseResourceCount;
+    /**
+     * The algorithm used to generate the key pair (the public and private key) of the certificate.
+     */
+    keyAlgorithm?: KeyAlgorithm;
+    /**
+     * The timestamp when the certificate was created.
+     */
+    createdAt?: IsoDate;
+    /**
+     * The timestamp when the certificate was issued.
+     */
+    issuedAt?: IsoDate;
+    /**
+     * The certificate authority that issued the certificate.
+     */
+    issuerCA?: IssuerCA;
+    /**
+     * The timestamp when the certificate is first valid.
+     */
+    notBefore?: IsoDate;
+    /**
+     * The timestamp when the certificate expires.
+     */
+    notAfter?: IsoDate;
+    /**
+     * The renewal eligibility of the certificate.
+     */
+    eligibleToRenew?: EligibleToRenew;
+    /**
+     * An object that describes the status of the certificate renewal managed by Lightsail.
+     */
+    renewalSummary?: RenewalSummary;
+    /**
+     * The timestamp when the certificate was revoked. This value is present only when the certificate status is REVOKED.
+     */
+    revokedAt?: IsoDate;
+    /**
+     * The reason the certificate was revoked. This value is present only when the certificate status is REVOKED.
+     */
+    revocationReason?: RevocationReason;
+    /**
+     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Lightsail Dev Guide.
+     */
+    tags?: TagList;
+    /**
+     * The support code. Include this code in your email to support when you have questions about your Lightsail certificate. This code enables our support team to look up your Lightsail information more easily.
+     */
+    supportCode?: string;
+  }
+  export type CertificateName = string;
+  export type CertificateStatus = "PENDING_VALIDATION"|"ISSUED"|"INACTIVE"|"EXPIRED"|"VALIDATION_TIMED_OUT"|"REVOKED"|"FAILED"|string;
+  export type CertificateStatusList = CertificateStatus[];
+  export interface CertificateSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the certificate.
+     */
+    certificateArn?: NonEmptyString;
+    /**
+     * The name of the certificate.
+     */
+    certificateName?: CertificateName;
+    /**
+     * The domain name of the certificate.
+     */
+    domainName?: DomainName;
+    /**
+     * An object that describes a certificate in detail.
+     */
+    certificateDetail?: Certificate;
+    /**
+     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Lightsail Dev Guide.
+     */
+    tags?: TagList;
+  }
+  export type CertificateSummaryList = CertificateSummary[];
   export interface CloseInstancePublicPortsRequest {
     /**
      * An object to describe the ports to close for the specified instance.
@@ -1371,6 +1663,16 @@ declare namespace Lightsail {
   export type ContactMethodsList = ContactMethod[];
   export type ContactProtocol = "Email"|"SMS"|string;
   export type ContactProtocolsList = ContactProtocol[];
+  export interface CookieObject {
+    /**
+     * Specifies which cookies to forward to the distribution's origin for a cache behavior: all, none, or allow-list to forward only the cookies specified in the cookiesAllowList parameter.
+     */
+    option?: ForwardValues;
+    /**
+     * The specific cookies to forward to your distribution's origin.
+     */
+    cookiesAllowList?: StringList;
+  }
   export interface CopySnapshotRequest {
     /**
      * The name of the source manual snapshot to copy. Constraint:   Define this parameter only when copying a manual snapshot as another manual snapshot.  
@@ -1398,6 +1700,34 @@ declare namespace Lightsail {
     sourceRegion: RegionName;
   }
   export interface CopySnapshotResult {
+    /**
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
+     */
+    operations?: OperationList;
+  }
+  export interface CreateCertificateRequest {
+    /**
+     * The name for the certificate.
+     */
+    certificateName: CertificateName;
+    /**
+     * The domain name (e.g., example.com) for the certificate.
+     */
+    domainName: DomainName;
+    /**
+     * An array of strings that specify the alternate domains (e.g., example2.com) and subdomains (e.g., blog.example.com) for the certificate. You can specify a maximum of nine alternate domains (in addition to the primary domain name). Wildcard domain entries (e.g., *.example.com) are not supported.
+     */
+    subjectAlternativeNames?: SubjectAlternativeNameList;
+    /**
+     * The tag keys and optional values to add to the certificate during create. Use the TagResource action to tag a resource after it's created.
+     */
+    tags?: TagList;
+  }
+  export interface CreateCertificateResult {
+    /**
+     * An object that describes the certificate created.
+     */
+    certificate?: CertificateSummary;
     /**
      * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
@@ -1449,7 +1779,7 @@ declare namespace Lightsail {
      */
     sizeInGb: integer;
     /**
-     * The tag keys and optional values to add to the resource during create. To tag a resource after it has been created, see the tag resource operation.
+     * The tag keys and optional values to add to the resource during create. Use the TagResource action to tag a resource after it's created.
      */
     tags?: TagList;
     /**
@@ -1489,7 +1819,7 @@ declare namespace Lightsail {
      */
     sizeInGb: integer;
     /**
-     * The tag keys and optional values to add to the resource during create. To tag a resource after it has been created, see the tag resource operation.
+     * The tag keys and optional values to add to the resource during create. Use the TagResource action to tag a resource after it's created.
      */
     tags?: TagList;
     /**
@@ -1517,7 +1847,7 @@ declare namespace Lightsail {
      */
     instanceName?: ResourceName;
     /**
-     * The tag keys and optional values to add to the resource during create. To tag a resource after it has been created, see the tag resource operation.
+     * The tag keys and optional values to add to the resource during create. Use the TagResource action to tag a resource after it's created.
      */
     tags?: TagList;
   }
@@ -1526,6 +1856,46 @@ declare namespace Lightsail {
      * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
+  }
+  export interface CreateDistributionRequest {
+    /**
+     * The name for the distribution.
+     */
+    distributionName: ResourceName;
+    /**
+     * An object that describes the origin resource for the distribution, such as a Lightsail instance or load balancer. The distribution pulls, caches, and serves content from the origin.
+     */
+    origin: InputOrigin;
+    /**
+     * An object that describes the default cache behavior for the distribution.
+     */
+    defaultCacheBehavior: CacheBehavior;
+    /**
+     * An object that describes the cache behavior settings for the distribution.
+     */
+    cacheBehaviorSettings?: CacheSettings;
+    /**
+     * An array of objects that describe the per-path cache behavior for the distribution.
+     */
+    cacheBehaviors?: CacheBehaviorList;
+    /**
+     * The bundle ID to use for the distribution. A distribution bundle describes the specifications of your distribution, such as the monthly cost and monthly network transfer quota. Use the GetDistributionBundles action to get a list of distribution bundle IDs that you can specify.
+     */
+    bundleId: string;
+    /**
+     * The tag keys and optional values to add to the distribution during create. Use the TagResource action to tag a resource after it's created.
+     */
+    tags?: TagList;
+  }
+  export interface CreateDistributionResult {
+    /**
+     * An object that describes the distribution created.
+     */
+    distribution?: LightsailDistribution;
+    /**
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
+     */
+    operation?: Operation;
   }
   export interface CreateDomainEntryRequest {
     /**
@@ -1549,7 +1919,7 @@ declare namespace Lightsail {
      */
     domainName: DomainName;
     /**
-     * The tag keys and optional values to add to the resource during create. To tag a resource after it has been created, see the tag resource operation.
+     * The tag keys and optional values to add to the resource during create. Use the TagResource action to tag a resource after it's created.
      */
     tags?: TagList;
   }
@@ -1569,7 +1939,7 @@ declare namespace Lightsail {
      */
     instanceName: ResourceName;
     /**
-     * The tag keys and optional values to add to the resource during create. To tag a resource after it has been created, see the tag resource operation.
+     * The tag keys and optional values to add to the resource during create. Use the TagResource action to tag a resource after it's created.
      */
     tags?: TagList;
   }
@@ -1609,7 +1979,7 @@ declare namespace Lightsail {
      */
     keyPairName?: ResourceName;
     /**
-     * The tag keys and optional values to add to the resource during create. To tag a resource after it has been created, see the tag resource operation.
+     * The tag keys and optional values to add to the resource during create. Use the TagResource action to tag a resource after it's created.
      */
     tags?: TagList;
     /**
@@ -1665,7 +2035,7 @@ declare namespace Lightsail {
      */
     keyPairName?: ResourceName;
     /**
-     * The tag keys and optional values to add to the resource during create. To tag a resource after it has been created, see the tag resource operation.
+     * The tag keys and optional values to add to the resource during create. Use the TagResource action to tag a resource after it's created.
      */
     tags?: TagList;
     /**
@@ -1685,7 +2055,7 @@ declare namespace Lightsail {
      */
     keyPairName: ResourceName;
     /**
-     * The tag keys and optional values to add to the resource during create. To tag a resource after it has been created, see the tag resource operation.
+     * The tag keys and optional values to add to the resource during create. Use the TagResource action to tag a resource after it's created.
      */
     tags?: TagList;
   }
@@ -1733,7 +2103,7 @@ declare namespace Lightsail {
      */
     certificateAlternativeNames?: DomainNameList;
     /**
-     * The tag keys and optional values to add to the resource during create. To tag a resource after it has been created, see the tag resource operation.
+     * The tag keys and optional values to add to the resource during create. Use the TagResource action to tag a resource after it's created.
      */
     tags?: TagList;
   }
@@ -1761,7 +2131,7 @@ declare namespace Lightsail {
      */
     certificateAlternativeNames?: DomainNameList;
     /**
-     * The tag keys and optional values to add to the resource during create. To tag a resource after it has been created, see the tag resource operation.
+     * The tag keys and optional values to add to the resource during create. Use the TagResource action to tag a resource after it's created.
      */
     tags?: TagList;
   }
@@ -1805,7 +2175,7 @@ declare namespace Lightsail {
      */
     useLatestRestorableTime?: boolean;
     /**
-     * The tag keys and optional values to add to the resource during create. To tag a resource after it has been created, see the tag resource operation.
+     * The tag keys and optional values to add to the resource during create. Use the TagResource action to tag a resource after it's created.
      */
     tags?: TagList;
   }
@@ -1857,7 +2227,7 @@ declare namespace Lightsail {
      */
     publiclyAccessible?: boolean;
     /**
-     * The tag keys and optional values to add to the resource during create. To tag a resource after it has been created, see the tag resource operation.
+     * The tag keys and optional values to add to the resource during create. Use the TagResource action to tag a resource after it's created.
      */
     tags?: TagList;
   }
@@ -1877,7 +2247,7 @@ declare namespace Lightsail {
      */
     relationalDatabaseSnapshotName: ResourceName;
     /**
-     * The tag keys and optional values to add to the resource during create. To tag a resource after it has been created, see the tag resource operation.
+     * The tag keys and optional values to add to the resource during create. Use the TagResource action to tag a resource after it's created.
      */
     tags?: TagList;
   }
@@ -1910,6 +2280,18 @@ declare namespace Lightsail {
     date: AutoSnapshotDate;
   }
   export interface DeleteAutoSnapshotResult {
+    /**
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
+     */
+    operations?: OperationList;
+  }
+  export interface DeleteCertificateRequest {
+    /**
+     * The name of the certificate to delete. Use the GetCertificates action to get a list of certificate names that you can specify.
+     */
+    certificateName: CertificateName;
+  }
+  export interface DeleteCertificateResult {
     /**
      * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
@@ -1954,6 +2336,18 @@ declare namespace Lightsail {
      * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
+  }
+  export interface DeleteDistributionRequest {
+    /**
+     * The name of the distribution to delete. Use the GetDistributions action to get a list of distribution names that you can specify.
+     */
+    distributionName?: ResourceName;
+  }
+  export interface DeleteDistributionResult {
+    /**
+     * An object that describes the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
+     */
+    operation?: Operation;
   }
   export interface DeleteDomainEntryRequest {
     /**
@@ -2108,6 +2502,18 @@ declare namespace Lightsail {
      * The destination service of the record.
      */
     service?: NonEmptyString;
+  }
+  export interface DetachCertificateFromDistributionRequest {
+    /**
+     * The name of the distribution from which to detach the certificate. Use the GetDistributions action to get a list of distribution names that you can specify.
+     */
+    distributionName: ResourceName;
+  }
+  export interface DetachCertificateFromDistributionResult {
+    /**
+     * An object that describes the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
+     */
+    operation?: Operation;
   }
   export interface DetachDiskRequest {
     /**
@@ -2337,6 +2743,31 @@ declare namespace Lightsail {
   export type DiskSnapshotList = DiskSnapshot[];
   export type DiskSnapshotState = "pending"|"completed"|"error"|"unknown"|string;
   export type DiskState = "pending"|"error"|"available"|"in-use"|"unknown"|string;
+  export interface DistributionBundle {
+    /**
+     * The ID of the bundle.
+     */
+    bundleId?: string;
+    /**
+     * The name of the distribution bundle.
+     */
+    name?: string;
+    /**
+     * The monthly price, in US dollars, of the bundle.
+     */
+    price?: float;
+    /**
+     * The monthly network transfer quota of the bundle.
+     */
+    transferPerMonthInGb?: integer;
+    /**
+     * Indicates whether the bundle is active, and can be specified for a new distribution.
+     */
+    isActive?: boolean;
+  }
+  export type DistributionBundleList = DistributionBundle[];
+  export type DistributionList = LightsailDistribution[];
+  export type DistributionMetricName = "Requests"|"BytesDownloaded"|"BytesUploaded"|"TotalErrorRate"|"Http4xxErrorRate"|"Http5xxErrorRate"|string;
   export interface Domain {
     /**
      * The name of the domain.
@@ -2404,6 +2835,17 @@ declare namespace Lightsail {
   export type DomainList = Domain[];
   export type DomainName = string;
   export type DomainNameList = DomainName[];
+  export interface DomainValidationRecord {
+    /**
+     * The domain name of the certificate validation record. For example, example.com or www.example.com.
+     */
+    domainName?: DomainName;
+    /**
+     * An object that describes the DNS records to add to your domain's DNS to validate it for the certificate.
+     */
+    resourceRecord?: ResourceRecord;
+  }
+  export type DomainValidationRecordList = DomainValidationRecord[];
   export interface DownloadDefaultKeyPairRequest {
   }
   export interface DownloadDefaultKeyPairResult {
@@ -2416,6 +2858,7 @@ declare namespace Lightsail {
      */
     privateKeyBase64?: Base64;
   }
+  export type EligibleToRenew = string;
   export interface EnableAddOnRequest {
     /**
      * The name of the source resource for which to enable or modify the add-on.
@@ -2514,6 +2957,7 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
+  export type ForwardValues = "none"|"allow-list"|"all"|string;
   export interface GetActiveNamesRequest {
     /**
      * The token to advance to the next page of results from your request. To get a page token, perform an initial GetActiveNames request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
@@ -2614,6 +3058,26 @@ declare namespace Lightsail {
      */
     nextPageToken?: string;
   }
+  export interface GetCertificatesRequest {
+    /**
+     * The status of the certificates for which to return information. For example, specify ISSUED to return only certificates with an ISSUED status. When omitted, the response includes all of your certificates in the AWS region where the request is made, regardless of their current status.
+     */
+    certificateStatuses?: CertificateStatusList;
+    /**
+     * Indicates whether to include detailed information about the certificates in the response. When omitted, the response includes only the certificate names, Amazon Resource Names (ARNs), domain names, and tags.
+     */
+    includeCertificateDetails?: IncludeCertificateDetails;
+    /**
+     * The name for the certificate for which to return information. When omitted, the response includes all of your certificates in the AWS region where the request is made.
+     */
+    certificateName?: CertificateName;
+  }
+  export interface GetCertificatesResult {
+    /**
+     * An object that describes certificates.
+     */
+    certificates?: CertificateSummaryList;
+  }
   export interface GetCloudFormationStackRecordsRequest {
     /**
      * The token to advance to the next page of results from your request. To get a page token, perform an initial GetClouFormationStackRecords request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
@@ -2695,6 +3159,90 @@ declare namespace Lightsail {
     disks?: DiskList;
     /**
      * The token to advance to the next page of resutls from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetDisks request and specify the next page token using the pageToken parameter.
+     */
+    nextPageToken?: string;
+  }
+  export interface GetDistributionBundlesRequest {
+  }
+  export interface GetDistributionBundlesResult {
+    /**
+     * An object that describes a distribution bundle.
+     */
+    bundles?: DistributionBundleList;
+  }
+  export interface GetDistributionLatestCacheResetRequest {
+    /**
+     * The name of the distribution for which to return the timestamp of the last cache reset. Use the GetDistributions action to get a list of distribution names that you can specify. When omitted, the response includes the latest cache reset timestamp of all your distributions.
+     */
+    distributionName?: ResourceName;
+  }
+  export interface GetDistributionLatestCacheResetResult {
+    /**
+     * The status of the last cache reset.
+     */
+    status?: string;
+    /**
+     * The timestamp of the last cache reset (e.g., 1479734909.17) in Unix time format.
+     */
+    createTime?: IsoDate;
+  }
+  export interface GetDistributionMetricDataRequest {
+    /**
+     * The name of the distribution for which to get metric data. Use the GetDistributions action to get a list of distribution names that you can specify.
+     */
+    distributionName: ResourceName;
+    /**
+     * The metric for which you want to return information. Valid distribution metric names are listed below, along with the most useful statistics to include in your request, and the published unit value.     Requests  - The total number of viewer requests received by your Lightsail distribution, for all HTTP methods, and for both HTTP and HTTPS requests.  Statistics: The most useful statistic is Sum.  Unit: The published unit is None.     BytesDownloaded  - The number of bytes downloaded by viewers for GET, HEAD, and OPTIONS requests.  Statistics: The most useful statistic is Sum.  Unit: The published unit is None.     BytesUploaded   - The number of bytes uploaded to your origin by your Lightsail distribution, using POST and PUT requests.  Statistics: The most useful statistic is Sum.  Unit: The published unit is None.     TotalErrorRate  - The percentage of all viewer requests for which the response's HTTP status code was 4xx or 5xx.  Statistics: The most useful statistic is Average.  Unit: The published unit is Percent.     4xxErrorRate  - The percentage of all viewer requests for which the response's HTTP status cod was 4xx. In these cases, the client or client viewer may have made an error. For example, a status code of 404 (Not Found) means that the client requested an object that could not be found.  Statistics: The most useful statistic is Average.  Unit: The published unit is Percent.     5xxErrorRate  - The percentage of all viewer requests for which the response's HTTP status code was 5xx. In these cases, the origin server did not satisfy the requests. For example, a status code of 503 (Service Unavailable) means that the origin server is currently unavailable.  Statistics: The most useful statistic is Average.  Unit: The published unit is Percent.  
+     */
+    metricName: DistributionMetricName;
+    /**
+     * The start of the time interval for which to get metric data. Constraints:   Specified in Coordinated Universal Time (UTC).   Specified in the Unix time format. For example, if you wish to use a start time of October 1, 2018, at 8 PM UTC, specify 1538424000 as the start time.   You can convert a human-friendly time to Unix time format using a converter like Epoch converter.
+     */
+    startTime: timestamp;
+    /**
+     * The end of the time interval for which to get metric data. Constraints:   Specified in Coordinated Universal Time (UTC).   Specified in the Unix time format. For example, if you wish to use an end time of October 1, 2018, at 9 PM UTC, specify 1538427600 as the end time.   You can convert a human-friendly time to Unix time format using a converter like Epoch converter.
+     */
+    endTime: timestamp;
+    /**
+     * The granularity, in seconds, for the metric data points that will be returned.
+     */
+    period: MetricPeriod;
+    /**
+     * The unit for the metric data request. Valid units depend on the metric data being requested. For the valid units with each available metric, see the metricName parameter.
+     */
+    unit: MetricUnit;
+    /**
+     * The statistic for the metric. The following statistics are available:    Minimum - The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.    Maximum - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.    Sum - All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.    Average - The value of Sum / SampleCount during the specified period. By comparing this statistic with the Minimum and Maximum values, you can determine the full scope of a metric and how close the average use is to the Minimum and Maximum values. This comparison helps you to know when to increase or decrease your resources.    SampleCount - The count, or number, of data points used for the statistical calculation.  
+     */
+    statistics: MetricStatisticList;
+  }
+  export interface GetDistributionMetricDataResult {
+    /**
+     * The name of the metric returned.
+     */
+    metricName?: DistributionMetricName;
+    /**
+     * An array of objects that describe the metric data returned.
+     */
+    metricData?: MetricDatapointList;
+  }
+  export interface GetDistributionsRequest {
+    /**
+     * The name of the distribution for which to return information. Use the GetDistributions action to get a list of distribution names that you can specify. When omitted, the response includes all of your distributions in the AWS Region where the request is made.
+     */
+    distributionName?: ResourceName;
+    /**
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetDistributions request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
+     */
+    pageToken?: string;
+  }
+  export interface GetDistributionsResult {
+    /**
+     * An array of objects that describe your distributions.
+     */
+    distributions?: DistributionList;
+    /**
+     * The token to advance to the next page of results from your request. A next page token is not returned if there are no more results to display. To get the next page of results, perform another GetDistributions request and specify the next page token using the pageToken parameter.
      */
     nextPageToken?: string;
   }
@@ -3326,6 +3874,18 @@ declare namespace Lightsail {
      */
     nextPageToken?: string;
   }
+  export type HeaderEnum = "Accept"|"Accept-Charset"|"Accept-Datetime"|"Accept-Encoding"|"Accept-Language"|"Authorization"|"CloudFront-Forwarded-Proto"|"CloudFront-Is-Desktop-Viewer"|"CloudFront-Is-Mobile-Viewer"|"CloudFront-Is-SmartTV-Viewer"|"CloudFront-Is-Tablet-Viewer"|"CloudFront-Viewer-Country"|"Host"|"Origin"|"Referer"|string;
+  export type HeaderForwardList = HeaderEnum[];
+  export interface HeaderObject {
+    /**
+     * The headers that you want your distribution to forward to your origin and base caching on. You can configure your distribution to do one of the following:     all  - Forward all headers to your origin.     none  - Forward only the default headers.     allow-list  - Forward only the headers you specify using the headersAllowList parameter.  
+     */
+    option?: ForwardValues;
+    /**
+     * The specific headers to forward to your distribution's origin.
+     */
+    headersAllowList?: HeaderForwardList;
+  }
   export interface HostKeyAttributes {
     /**
      * The SSH host key algorithm or the RDP certificate format. For SSH host keys, the algorithm may be ssh-rsa, ecdsa-sha2-nistp256, ssh-ed25519, etc. For RDP certificates, the algorithm is always x509-cert.
@@ -3373,6 +3933,22 @@ declare namespace Lightsail {
      */
     operation?: Operation;
   }
+  export type InUseResourceCount = number;
+  export type IncludeCertificateDetails = boolean;
+  export interface InputOrigin {
+    /**
+     * The name of the origin resource.
+     */
+    name?: ResourceName;
+    /**
+     * The AWS Region name of the origin resource.
+     */
+    regionName?: RegionName;
+    /**
+     * The protocol that your Amazon Lightsail distribution uses when establishing a connection with your origin to pull content.
+     */
+    protocolPolicy?: OriginProtocolPolicyEnum;
+  }
   export interface Instance {
     /**
      * The name the user gave the instance (e.g., Amazon_Linux-1GB-Ohio-1).
@@ -3387,7 +3963,7 @@ declare namespace Lightsail {
      */
     supportCode?: string;
     /**
-     * The timestamp when the instance was created (e.g., 1479734909.17).
+     * The timestamp when the instance was created (e.g., 1479734909.17) in Unix time format.
      */
     createdAt?: IsoDate;
     /**
@@ -3735,6 +4311,8 @@ declare namespace Lightsail {
     isPeered?: boolean;
   }
   export type IsoDate = Date;
+  export type IssuerCA = string;
+  export type KeyAlgorithm = string;
   export interface KeyPair {
     /**
      * The friendly name of the SSH key pair.
@@ -3770,6 +4348,84 @@ declare namespace Lightsail {
     fingerprint?: Base64;
   }
   export type KeyPairList = KeyPair[];
+  export interface LightsailDistribution {
+    /**
+     * The name of the distribution.
+     */
+    name?: ResourceName;
+    /**
+     * The Amazon Resource Name (ARN) of the distribution.
+     */
+    arn?: NonEmptyString;
+    /**
+     * The support code. Include this code in your email to support when you have questions about your Lightsail distribution. This code enables our support team to look up your Lightsail information more easily.
+     */
+    supportCode?: string;
+    /**
+     * The timestamp when the distribution was created.
+     */
+    createdAt?: IsoDate;
+    /**
+     * An object that describes the location of the distribution, such as the AWS Region and Availability Zone.  Lightsail distributions are global resources that can reference an origin in any AWS Region, and distribute its content globally. However, all distributions are located in the us-east-1 Region. 
+     */
+    location?: ResourceLocation;
+    /**
+     * The Lightsail resource type (e.g., Distribution).
+     */
+    resourceType?: ResourceType;
+    /**
+     * The alternate domain names of the distribution.
+     */
+    alternativeDomainNames?: StringList;
+    /**
+     * The status of the distribution.
+     */
+    status?: string;
+    /**
+     * Indicates whether the distribution is enabled.
+     */
+    isEnabled?: boolean;
+    /**
+     * The domain name of the distribution.
+     */
+    domainName?: string;
+    /**
+     * The ID of the bundle currently applied to the distribution.
+     */
+    bundleId?: string;
+    /**
+     * The name of the SSL/TLS certificate attached to the distribution, if any.
+     */
+    certificateName?: ResourceName;
+    /**
+     * An object that describes the origin resource of the distribution, such as a Lightsail instance or load balancer. The distribution pulls, caches, and serves content from the origin.
+     */
+    origin?: Origin;
+    /**
+     * The public DNS of the origin.
+     */
+    originPublicDNS?: string;
+    /**
+     * An object that describes the default cache behavior of the distribution.
+     */
+    defaultCacheBehavior?: CacheBehavior;
+    /**
+     * An object that describes the cache behavior settings of the distribution.
+     */
+    cacheBehaviorSettings?: CacheSettings;
+    /**
+     * An array of objects that describe the per-path cache behavior of the distribution.
+     */
+    cacheBehaviors?: CacheBehaviorList;
+    /**
+     * Indicates whether the bundle that is currently applied to your distribution, specified using the distributionName parameter, can be changed to another bundle. Use the UpdateDistributionBundle action to change your distribution's bundle.
+     */
+    ableToUpdateBundle?: boolean;
+    /**
+     * The tag keys and optional values for the resource. For more information about tags in Lightsail, see the Lightsail Dev Guide.
+     */
+    tags?: TagList;
+  }
   export interface LoadBalancer {
     /**
      * The name of the load balancer (e.g., my-load-balancer).
@@ -3892,7 +4548,7 @@ declare namespace Lightsail {
      */
     domainValidationRecords?: LoadBalancerTlsCertificateDomainValidationRecordList;
     /**
-     * The reason for the SSL/TLS certificate validation failure.
+     * The validation failure reason, if any, of the certificate. The following failure reasons are possible:     NO_AVAILABLE_CONTACTS  - This failure applies to email validation, which is not available for Lightsail certificates.     ADDITIONAL_VERIFICATION_REQUIRED  - Lightsail requires additional information to process this certificate request. This can happen as a fraud-protection measure, such as when the domain ranks within the Alexa top 1000 websites. To provide the required information, use the AWS Support Center to contact AWS Support.  You cannot request a certificate for Amazon-owned domain names such as those ending in amazonaws.com, cloudfront.net, or elasticbeanstalk.com.      DOMAIN_NOT_ALLOWED  - One or more of the domain names in the certificate request was reported as an unsafe domain by VirusTotal. To correct the problem, search for your domain name on the VirusTotal website. If your domain is reported as suspicious, see Google Help for Hacked Websites to learn what you can do. If you believe that the result is a false positive, notify the organization that is reporting the domain. VirusTotal is an aggregate of several antivirus and URL scanners and cannot remove your domain from a block list itself. After you correct the problem and the VirusTotal registry has been updated, request a new certificate. If you see this error and your domain is not included in the VirusTotal list, visit the AWS Support Center and create a case.     INVALID_PUBLIC_DOMAIN  - One or more of the domain names in the certificate request is not valid. Typically, this is because a domain name in the request is not a valid top-level domain. Try to request a certificate again, correcting any spelling errors or typos that were in the failed request, and ensure that all domain names in the request are for valid top-level domains. For example, you cannot request a certificate for example.invalidpublicdomain because invalidpublicdomain is not a valid top-level domain.     OTHER  - Typically, this failure occurs when there is a typographical error in one or more of the domain names in the certificate request. Try to request a certificate again, correcting any spelling errors or typos that were in the failed request.   
      */
     failureReason?: LoadBalancerTlsCertificateFailureReason;
     /**
@@ -3904,7 +4560,7 @@ declare namespace Lightsail {
      */
     issuer?: NonEmptyString;
     /**
-     * The algorithm that was used to generate the key pair (the public and private key).
+     * The algorithm used to generate the key pair (the public and private key).
      */
     keyAlgorithm?: NonEmptyString;
     /**
@@ -3916,15 +4572,15 @@ declare namespace Lightsail {
      */
     notBefore?: IsoDate;
     /**
-     * An object containing information about the status of Lightsail's managed renewal for the certificate.
+     * An object that describes the status of the certificate renewal managed by Lightsail.
      */
     renewalSummary?: LoadBalancerTlsCertificateRenewalSummary;
     /**
-     * The reason the certificate was revoked. Valid values are below.
+     * The reason the certificate was revoked. This value is present only when the certificate status is REVOKED.
      */
     revocationReason?: LoadBalancerTlsCertificateRevocationReason;
     /**
-     * The timestamp when the SSL/TLS certificate was revoked.
+     * The timestamp when the certificate was revoked. This value is present only when the certificate status is REVOKED.
      */
     revokedAt?: IsoDate;
     /**
@@ -3940,7 +4596,7 @@ declare namespace Lightsail {
      */
     subject?: NonEmptyString;
     /**
-     * One or more domains or subdomains included in the certificate. This list contains the domain names that are bound to the public key that is contained in the certificate. The subject alternative names include the canonical domain name (CNAME) of the certificate and additional domain names that can be used to connect to the website, such as example.com, www.example.com, or m.example.com.
+     * An array of strings that specify the alternate domains (e.g., example2.com) and subdomains (e.g., blog.example.com) for the certificate.
      */
     subjectAlternativeNames?: StringList;
   }
@@ -3984,7 +4640,7 @@ declare namespace Lightsail {
   export type LoadBalancerTlsCertificateRenewalStatus = "PENDING_AUTO_RENEWAL"|"PENDING_VALIDATION"|"SUCCESS"|"FAILED"|string;
   export interface LoadBalancerTlsCertificateRenewalSummary {
     /**
-     * The status of Lightsail's managed renewal of the certificate. Valid values are listed below.
+     * The renewal status of the certificate. The following renewal status are possible:     PendingAutoRenewal  - Lightsail is attempting to automatically validate the domain names of the certificate. No further action is required.      PendingValidation  - Lightsail couldn't automatically validate one or more domain names of the certificate. You must take action to validate these domain names or the certificate won't be renewed. Check to make sure your certificate's domain validation records exist in your domain's DNS, and that your certificate remains in use.     Success  - All domain names in the certificate are validated, and Lightsail renewed the certificate. No further action is required.      Failed  - One or more domain names were not validated before the certificate expired, and Lightsail did not renew the certificate. You can request a new certificate using the CreateCertificate action.  
      */
     renewalStatus?: LoadBalancerTlsCertificateRenewalStatus;
     /**
@@ -4143,7 +4799,26 @@ declare namespace Lightsail {
   }
   export type OperationList = Operation[];
   export type OperationStatus = "NotStarted"|"Started"|"Failed"|"Completed"|"Succeeded"|string;
-  export type OperationType = "DeleteKnownHostKeys"|"DeleteInstance"|"CreateInstance"|"StopInstance"|"StartInstance"|"RebootInstance"|"OpenInstancePublicPorts"|"PutInstancePublicPorts"|"CloseInstancePublicPorts"|"AllocateStaticIp"|"ReleaseStaticIp"|"AttachStaticIp"|"DetachStaticIp"|"UpdateDomainEntry"|"DeleteDomainEntry"|"CreateDomain"|"DeleteDomain"|"CreateInstanceSnapshot"|"DeleteInstanceSnapshot"|"CreateInstancesFromSnapshot"|"CreateLoadBalancer"|"DeleteLoadBalancer"|"AttachInstancesToLoadBalancer"|"DetachInstancesFromLoadBalancer"|"UpdateLoadBalancerAttribute"|"CreateLoadBalancerTlsCertificate"|"DeleteLoadBalancerTlsCertificate"|"AttachLoadBalancerTlsCertificate"|"CreateDisk"|"DeleteDisk"|"AttachDisk"|"DetachDisk"|"CreateDiskSnapshot"|"DeleteDiskSnapshot"|"CreateDiskFromSnapshot"|"CreateRelationalDatabase"|"UpdateRelationalDatabase"|"DeleteRelationalDatabase"|"CreateRelationalDatabaseFromSnapshot"|"CreateRelationalDatabaseSnapshot"|"DeleteRelationalDatabaseSnapshot"|"UpdateRelationalDatabaseParameters"|"StartRelationalDatabase"|"RebootRelationalDatabase"|"StopRelationalDatabase"|"EnableAddOn"|"DisableAddOn"|"PutAlarm"|"GetAlarms"|"DeleteAlarm"|"TestAlarm"|"CreateContactMethod"|"GetContactMethods"|"SendContactMethodVerification"|"DeleteContactMethod"|string;
+  export type OperationType = "DeleteKnownHostKeys"|"DeleteInstance"|"CreateInstance"|"StopInstance"|"StartInstance"|"RebootInstance"|"OpenInstancePublicPorts"|"PutInstancePublicPorts"|"CloseInstancePublicPorts"|"AllocateStaticIp"|"ReleaseStaticIp"|"AttachStaticIp"|"DetachStaticIp"|"UpdateDomainEntry"|"DeleteDomainEntry"|"CreateDomain"|"DeleteDomain"|"CreateInstanceSnapshot"|"DeleteInstanceSnapshot"|"CreateInstancesFromSnapshot"|"CreateLoadBalancer"|"DeleteLoadBalancer"|"AttachInstancesToLoadBalancer"|"DetachInstancesFromLoadBalancer"|"UpdateLoadBalancerAttribute"|"CreateLoadBalancerTlsCertificate"|"DeleteLoadBalancerTlsCertificate"|"AttachLoadBalancerTlsCertificate"|"CreateDisk"|"DeleteDisk"|"AttachDisk"|"DetachDisk"|"CreateDiskSnapshot"|"DeleteDiskSnapshot"|"CreateDiskFromSnapshot"|"CreateRelationalDatabase"|"UpdateRelationalDatabase"|"DeleteRelationalDatabase"|"CreateRelationalDatabaseFromSnapshot"|"CreateRelationalDatabaseSnapshot"|"DeleteRelationalDatabaseSnapshot"|"UpdateRelationalDatabaseParameters"|"StartRelationalDatabase"|"RebootRelationalDatabase"|"StopRelationalDatabase"|"EnableAddOn"|"DisableAddOn"|"PutAlarm"|"GetAlarms"|"DeleteAlarm"|"TestAlarm"|"CreateContactMethod"|"GetContactMethods"|"SendContactMethodVerification"|"DeleteContactMethod"|"CreateDistribution"|"UpdateDistribution"|"DeleteDistribution"|"ResetDistributionCache"|"AttachCertificateToDistribution"|"DetachCertificateFromDistribution"|"UpdateDistributionBundle"|"CreateCertificate"|"DeleteCertificate"|string;
+  export interface Origin {
+    /**
+     * The name of the origin resource.
+     */
+    name?: ResourceName;
+    /**
+     * The resource type of the origin resource (e.g., Instance).
+     */
+    resourceType?: ResourceType;
+    /**
+     * The AWS Region name of the origin resource.
+     */
+    regionName?: RegionName;
+    /**
+     * The protocol that your Amazon Lightsail distribution uses when establishing a connection with your origin to pull content.
+     */
+    protocolPolicy?: OriginProtocolPolicyEnum;
+  }
+  export type OriginProtocolPolicyEnum = "http-only"|"https-only"|string;
   export interface PasswordData {
     /**
      * The encrypted password. Ciphertext will be an empty string if access to your new instance is not ready yet. When you create an instance, it can take up to 15 minutes for the instance to be ready.  If you use the default key pair (LightsailDefaultKeyPair), the decrypted password will be available in the password field. If you are using a custom key pair, you need to use your own means of decryption. If you change the Administrator password on the instance, Lightsail will continue to return the original ciphertext value. When accessing the instance using RDP, you need to manually enter the Administrator password after changing it from the default. 
@@ -4286,6 +4961,16 @@ declare namespace Lightsail {
      * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operation?: Operation;
+  }
+  export interface QueryStringObject {
+    /**
+     * Indicates whether the distribution forwards and caches based on query strings.
+     */
+    option?: boolean;
+    /**
+     * The specific query strings that the distribution forwards to the origin. Your distribution will cache content based on the specified query strings. If the option parameter is true, then your distribution forwards all query strings, regardless of what you specify using the queryStringsAllowList parameter.
+     */
+    queryStringsAllowList?: StringList;
   }
   export interface RebootInstanceRequest {
     /**
@@ -4669,6 +5354,47 @@ declare namespace Lightsail {
      */
     operations?: OperationList;
   }
+  export type RenewalStatus = "PendingAutoRenewal"|"PendingValidation"|"Success"|"Failed"|string;
+  export type RenewalStatusReason = string;
+  export interface RenewalSummary {
+    /**
+     * An array of objects that describe the domain validation records of the certificate.
+     */
+    domainValidationRecords?: DomainValidationRecordList;
+    /**
+     * The renewal status of the certificate. The following renewal status are possible:     PendingAutoRenewal  - Lightsail is attempting to automatically validate the domain names of the certificate. No further action is required.      PendingValidation  - Lightsail couldn't automatically validate one or more domain names of the certificate. You must take action to validate these domain names or the certificate won't be renewed. Check to make sure your certificate's domain validation records exist in your domain's DNS, and that your certificate remains in use.     Success  - All domain names in the certificate are validated, and Lightsail renewed the certificate. No further action is required.      Failed  - One or more domain names were not validated before the certificate expired, and Lightsail did not renew the certificate. You can request a new certificate using the CreateCertificate action.  
+     */
+    renewalStatus?: RenewalStatus;
+    /**
+     * The reason for the renewal status of the certificate.
+     */
+    renewalStatusReason?: RenewalStatusReason;
+    /**
+     * The timestamp when the certificate was last updated.
+     */
+    updatedAt?: IsoDate;
+  }
+  export type RequestFailureReason = string;
+  export interface ResetDistributionCacheRequest {
+    /**
+     * The name of the distribution for which to reset cache. Use the GetDistributions action to get a list of distribution names that you can specify.
+     */
+    distributionName?: ResourceName;
+  }
+  export interface ResetDistributionCacheResult {
+    /**
+     * The status of the reset cache request.
+     */
+    status?: string;
+    /**
+     * The timestamp of the reset cache request (e.g., 1479734909.17) in Unix time format.
+     */
+    createTime?: IsoDate;
+    /**
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
+     */
+    operation?: Operation;
+  }
   export type ResourceArn = string;
   export interface ResourceLocation {
     /**
@@ -4682,7 +5408,22 @@ declare namespace Lightsail {
   }
   export type ResourceName = string;
   export type ResourceNameList = ResourceName[];
-  export type ResourceType = "Instance"|"StaticIp"|"KeyPair"|"InstanceSnapshot"|"Domain"|"PeeredVpc"|"LoadBalancer"|"LoadBalancerTlsCertificate"|"Disk"|"DiskSnapshot"|"RelationalDatabase"|"RelationalDatabaseSnapshot"|"ExportSnapshotRecord"|"CloudFormationStackRecord"|"Alarm"|"ContactMethod"|string;
+  export interface ResourceRecord {
+    /**
+     * The name of the record.
+     */
+    name?: string;
+    /**
+     * The DNS record type.
+     */
+    type?: string;
+    /**
+     * The value for the DNS record.
+     */
+    value?: string;
+  }
+  export type ResourceType = "Instance"|"StaticIp"|"KeyPair"|"InstanceSnapshot"|"Domain"|"PeeredVpc"|"LoadBalancer"|"LoadBalancerTlsCertificate"|"Disk"|"DiskSnapshot"|"RelationalDatabase"|"RelationalDatabaseSnapshot"|"ExportSnapshotRecord"|"CloudFormationStackRecord"|"Alarm"|"ContactMethod"|"Distribution"|"Certificate"|string;
+  export type RevocationReason = string;
   export interface SendContactMethodVerificationRequest {
     /**
      * The protocol to verify, such as Email or SMS (text messaging).
@@ -4696,6 +5437,7 @@ declare namespace Lightsail {
     operations?: OperationList;
   }
   export type SensitiveString = string;
+  export type SerialNumber = string;
   export interface StartInstanceRequest {
     /**
      * The name of the instance (a virtual private server) to start.
@@ -4793,6 +5535,7 @@ declare namespace Lightsail {
   }
   export type StringList = string[];
   export type StringMax256 = string;
+  export type SubjectAlternativeNameList = DomainName[];
   export interface Tag {
     /**
      * The key of the tag. Constraints: Tag keys accept a maximum of 128 letters, numbers, spaces in UTF-8, or the following characters: + - = . _ : / @
@@ -4872,6 +5615,51 @@ declare namespace Lightsail {
      * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
      */
     operations?: OperationList;
+  }
+  export interface UpdateDistributionBundleRequest {
+    /**
+     * The name of the distribution for which to update the bundle. Use the GetDistributions action to get a list of distribution names that you can specify.
+     */
+    distributionName?: ResourceName;
+    /**
+     * The bundle ID of the new bundle to apply to your distribution. Use the GetDistributionBundles action to get a list of distribution bundle IDs that you can specify.
+     */
+    bundleId?: string;
+  }
+  export interface UpdateDistributionBundleResult {
+    operation?: Operation;
+  }
+  export interface UpdateDistributionRequest {
+    /**
+     * The name of the distribution to update. Use the GetDistributions action to get a list of distribution names that you can specify.
+     */
+    distributionName: ResourceName;
+    /**
+     * An object that describes the origin resource for the distribution, such as a Lightsail instance or load balancer. The distribution pulls, caches, and serves content from the origin.
+     */
+    origin?: InputOrigin;
+    /**
+     * An object that describes the default cache behavior for the distribution.
+     */
+    defaultCacheBehavior?: CacheBehavior;
+    /**
+     * An object that describes the cache behavior settings for the distribution.  The cacheBehaviorSettings specified in your UpdateDistributionRequest will replace your distribution's existing settings. 
+     */
+    cacheBehaviorSettings?: CacheSettings;
+    /**
+     * An array of objects that describe the per-path cache behavior for the distribution.
+     */
+    cacheBehaviors?: CacheBehaviorList;
+    /**
+     * Indicates whether to enable the distribution.
+     */
+    isEnabled?: boolean;
+  }
+  export interface UpdateDistributionResult {
+    /**
+     * An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.
+     */
+    operation?: Operation;
   }
   export interface UpdateDomainEntryRequest {
     /**
@@ -4976,6 +5764,7 @@ declare namespace Lightsail {
   export type double = number;
   export type float = number;
   export type integer = number;
+  export type long = number;
   export type timestamp = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

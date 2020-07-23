@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.718.0-->
+<!--LATEST=2.719.0-->
 <!--ENTRYINSERT-->
+
+## 2.719.0
+* feature: ConfigService: Adding service linked configuration aggregation support along with new enums for config resource coverage
+* feature: FSx: Adds support for AutoImport, a new FSx for Lustre feature that allows customers to configure their FSx file system to automatically update its contents when new objects are added to S3 or existing objects are overwritten.
+* feature: Glue: Added new ConnectionProperties: "KAFKA_SSL_ENABLED" (to toggle SSL connections) and "KAFKA_CUSTOM_CERT" (import CA certificate file)
+* feature: Lightsail: This release adds support for Amazon Lightsail content delivery network (CDN) distributions and SSL/TLS certificates.
+* feature: WorkSpaces: Added UpdateWorkspaceImagePermission API to share Amazon WorkSpaces images across AWS accounts.
 
 ## 2.718.0
 * bugfix: S3: Add validation for AccountId in S3 AccessPoint

@@ -76,11 +76,11 @@ declare class WorkSpaces extends Service {
    */
   deleteTags(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteTagsResult) => void): Request<WorkSpaces.Types.DeleteTagsResult, AWSError>;
   /**
-   * Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image and un-share the image if it is shared with other accounts. 
+   * Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image and unshare the image if it is shared with other accounts. 
    */
   deleteWorkspaceImage(params: WorkSpaces.Types.DeleteWorkspaceImageRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteWorkspaceImageResult) => void): Request<WorkSpaces.Types.DeleteWorkspaceImageResult, AWSError>;
   /**
-   * Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image and un-share the image if it is shared with other accounts. 
+   * Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image and unshare the image if it is shared with other accounts. 
    */
   deleteWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteWorkspaceImageResult) => void): Request<WorkSpaces.Types.DeleteWorkspaceImageResult, AWSError>;
   /**
@@ -147,6 +147,14 @@ declare class WorkSpaces extends Service {
    * Describes the available directories that are registered with Amazon WorkSpaces.
    */
   describeWorkspaceDirectories(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceDirectoriesResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceDirectoriesResult, AWSError>;
+  /**
+   * Describes the permissions that the owner of an image has granted to other AWS accounts for an image.
+   */
+  describeWorkspaceImagePermissions(params: WorkSpaces.Types.DescribeWorkspaceImagePermissionsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceImagePermissionsResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceImagePermissionsResult, AWSError>;
+  /**
+   * Describes the permissions that the owner of an image has granted to other AWS accounts for an image.
+   */
+  describeWorkspaceImagePermissions(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceImagePermissionsResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceImagePermissionsResult, AWSError>;
   /**
    * Retrieves a list that describes one or more specified images, if the image identifiers are provided. Otherwise, all images in the account are described. 
    */
@@ -252,11 +260,11 @@ declare class WorkSpaces extends Service {
    */
   modifyWorkspaceCreationProperties(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyWorkspaceCreationPropertiesResult) => void): Request<WorkSpaces.Types.ModifyWorkspaceCreationPropertiesResult, AWSError>;
   /**
-   * Modifies the specified WorkSpace properties.
+   * Modifies the specified WorkSpace properties. For important information about how to modify the size of the root and user volumes, see  Modify a WorkSpace. 
    */
   modifyWorkspaceProperties(params: WorkSpaces.Types.ModifyWorkspacePropertiesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyWorkspacePropertiesResult) => void): Request<WorkSpaces.Types.ModifyWorkspacePropertiesResult, AWSError>;
   /**
-   * Modifies the specified WorkSpace properties.
+   * Modifies the specified WorkSpace properties. For important information about how to modify the size of the root and user volumes, see  Modify a WorkSpace. 
    */
   modifyWorkspaceProperties(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyWorkspacePropertiesResult) => void): Request<WorkSpaces.Types.ModifyWorkspacePropertiesResult, AWSError>;
   /**
@@ -276,11 +284,11 @@ declare class WorkSpaces extends Service {
    */
   rebootWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.RebootWorkspacesResult) => void): Request<WorkSpaces.Types.RebootWorkspacesResult, AWSError>;
   /**
-   * Rebuilds the specified WorkSpace. You cannot rebuild a WorkSpace unless its state is AVAILABLE, ERROR, UNHEALTHY, or STOPPED. Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see Rebuild a WorkSpace. This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.
+   * Rebuilds the specified WorkSpace. You cannot rebuild a WorkSpace unless its state is AVAILABLE, ERROR, UNHEALTHY, STOPPED, or REBOOTING. Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see Rebuild a WorkSpace. This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.
    */
   rebuildWorkspaces(params: WorkSpaces.Types.RebuildWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.RebuildWorkspacesResult) => void): Request<WorkSpaces.Types.RebuildWorkspacesResult, AWSError>;
   /**
-   * Rebuilds the specified WorkSpace. You cannot rebuild a WorkSpace unless its state is AVAILABLE, ERROR, UNHEALTHY, or STOPPED. Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see Rebuild a WorkSpace. This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.
+   * Rebuilds the specified WorkSpace. You cannot rebuild a WorkSpace unless its state is AVAILABLE, ERROR, UNHEALTHY, STOPPED, or REBOOTING. Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see Rebuild a WorkSpace. This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.
    */
   rebuildWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.RebuildWorkspacesResult) => void): Request<WorkSpaces.Types.RebuildWorkspacesResult, AWSError>;
   /**
@@ -339,6 +347,14 @@ declare class WorkSpaces extends Service {
    * Replaces the current rules of the specified IP access control group with the specified rules.
    */
   updateRulesOfIpGroup(callback?: (err: AWSError, data: WorkSpaces.Types.UpdateRulesOfIpGroupResult) => void): Request<WorkSpaces.Types.UpdateRulesOfIpGroupResult, AWSError>;
+  /**
+   * Shares or unshares an image with one account by specifying whether that account has permission to copy the image. If the copy image permission is granted, the image is shared with that account. If the copy image permission is revoked, the image is unshared with the account.    To delete an image that has been shared, you must unshare the image before you delete it.   Sharing Bring Your Own License (BYOL) images across AWS accounts isn't supported at this time in the AWS GovCloud (US-West) Region. To share BYOL images across accounts in the AWS GovCloud (US-West) Region, contact AWS Support.   
+   */
+  updateWorkspaceImagePermission(params: WorkSpaces.Types.UpdateWorkspaceImagePermissionRequest, callback?: (err: AWSError, data: WorkSpaces.Types.UpdateWorkspaceImagePermissionResult) => void): Request<WorkSpaces.Types.UpdateWorkspaceImagePermissionResult, AWSError>;
+  /**
+   * Shares or unshares an image with one account by specifying whether that account has permission to copy the image. If the copy image permission is granted, the image is shared with that account. If the copy image permission is revoked, the image is unshared with the account.    To delete an image that has been shared, you must unshare the image before you delete it.   Sharing Bring Your Own License (BYOL) images across AWS accounts isn't supported at this time in the AWS GovCloud (US-West) Region. To share BYOL images across accounts in the AWS GovCloud (US-West) Region, contact AWS Support.   
+   */
+  updateWorkspaceImagePermission(callback?: (err: AWSError, data: WorkSpaces.Types.UpdateWorkspaceImagePermissionResult) => void): Request<WorkSpaces.Types.UpdateWorkspaceImagePermissionResult, AWSError>;
 }
 declare namespace WorkSpaces {
   export type ARN = string;
@@ -395,6 +411,7 @@ declare namespace WorkSpaces {
   }
   export interface AuthorizeIpRulesResult {
   }
+  export type AwsAccount = string;
   export type BooleanObject = boolean;
   export type BundleId = string;
   export type BundleIdList = BundleId[];
@@ -526,7 +543,7 @@ declare namespace WorkSpaces {
      */
     DefaultOu?: DefaultOu;
     /**
-     * The identifier of any security groups to apply to WorkSpaces when they are created.
+     * The identifier of the default security group to apply to WorkSpaces when they are created. For more information, see  Security Groups for Your WorkSpaces.
      */
     CustomSecurityGroupId?: SecurityGroupId;
     /**
@@ -698,11 +715,43 @@ declare namespace WorkSpaces {
      */
     NextToken?: PaginationToken;
   }
+  export interface DescribeWorkspaceImagePermissionsRequest {
+    /**
+     * The identifier of the image.
+     */
+    ImageId: WorkspaceImageId;
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of items to return.
+     */
+    MaxResults?: Limit;
+  }
+  export interface DescribeWorkspaceImagePermissionsResult {
+    /**
+     * The identifier of the image.
+     */
+    ImageId?: WorkspaceImageId;
+    /**
+     * The identifiers of the AWS accounts that the image has been shared with.
+     */
+    ImagePermissions?: ImagePermissions;
+    /**
+     * The token to use to retrieve the next set of results, or null if no more results are available.
+     */
+    NextToken?: PaginationToken;
+  }
   export interface DescribeWorkspaceImagesRequest {
     /**
      * The identifier of the image.
      */
     ImageIds?: WorkspaceImageIdList;
+    /**
+     * The type (owned or shared) of the image.
+     */
+    ImageType?: ImageType;
     /**
      * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
      */
@@ -848,6 +897,14 @@ declare namespace WorkSpaces {
      */
     ErrorMessage?: Description;
   }
+  export interface ImagePermission {
+    /**
+     * The identifier of the AWS account that an image has been shared with.
+     */
+    SharedAccountId?: AwsAccount;
+  }
+  export type ImagePermissions = ImagePermission[];
+  export type ImageType = "OWNED"|"SHARED"|string;
   export interface ImportWorkspaceImageRequest {
     /**
      * The identifier of the EC2 image.
@@ -1265,6 +1322,22 @@ declare namespace WorkSpaces {
   }
   export interface UpdateRulesOfIpGroupResult {
   }
+  export interface UpdateWorkspaceImagePermissionRequest {
+    /**
+     * The identifier of the image.
+     */
+    ImageId: WorkspaceImageId;
+    /**
+     * The permission to copy the image. This permission can be revoked only after an image has been shared.
+     */
+    AllowCopyImage: BooleanObject;
+    /**
+     * The identifier of the AWS account to share or unshare the image with.
+     */
+    SharedAccountId: AwsAccount;
+  }
+  export interface UpdateWorkspaceImagePermissionResult {
+  }
   export type UserName = string;
   export interface UserStorage {
     /**
@@ -1549,6 +1622,14 @@ declare namespace WorkSpaces {
      * The text of the error message that is returned for the image.
      */
     ErrorMessage?: Description;
+    /**
+     * The date when the image was created. If the image has been shared, the AWS account that the image has been shared with sees the original creation date of the image.
+     */
+    Created?: Timestamp;
+    /**
+     * The identifier of the AWS account that owns the image.
+     */
+    OwnerAccountId?: AwsAccount;
   }
   export type WorkspaceImageDescription = string;
   export type WorkspaceImageErrorCode = string;
@@ -1570,11 +1651,11 @@ declare namespace WorkSpaces {
      */
     RunningModeAutoStopTimeoutInMinutes?: RunningModeAutoStopTimeoutInMinutes;
     /**
-     * The size of the root volume.
+     * The size of the root volume. For important information about how to modify the size of the root and user volumes, see Modify a WorkSpace.
      */
     RootVolumeSizeGib?: RootVolumeSizeGib;
     /**
-     * The size of the user storage.
+     * The size of the user storage. For important information about how to modify the size of the root and user volumes, see Modify a WorkSpace.
      */
     UserVolumeSizeGib?: UserVolumeSizeGib;
     /**

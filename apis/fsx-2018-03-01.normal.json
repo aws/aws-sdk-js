@@ -578,6 +578,14 @@
       "min": 3,
       "pattern": "^[^\\u0000\\u0085\\u2028\\u2029\\r\\n]{3,4357}$"
     },
+    "AutoImportPolicyType": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "NEW",
+        "NEW_CHANGED"
+      ]
+    },
     "AutomaticBackupRetentionDays": {
       "type": "integer",
       "documentation": "<p>The number of days to retain automatic backups. Setting this to 0 disables automatic backups. You can retain automatic backups for a maximum of 35 days. The default is 0.</p>",
@@ -896,6 +904,10 @@
           "shape": "LustreDeploymentType",
           "documentation": "<p> Choose <code>SCRATCH_1</code> and <code>SCRATCH_2</code> deployment types when you need temporary storage and shorter-term processing of data. The <code>SCRATCH_2</code> deployment type provides in-transit encryption of data and higher burst throughput capacity than <code>SCRATCH_1</code>.</p> <note> <p>This option can only be set for for PERSISTENT_1 deployments types.</p> </note> <p>Choose <code>PERSISTENT_1</code> deployment type for longer-term storage and workloads and encryption of data in transit. To learn more about deployment types, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html\"> FSx for Lustre Deployment Options</a>.</p> <p>Encryption of data in-transit is automatically enabled when you access a <code>SCRATCH_2</code> or <code>PERSISTENT_1</code> file system from Amazon EC2 instances that <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data- protection.html\">support this feature</a>. (Default = <code>SCRATCH_1</code>) </p> <p>Encryption of data in-transit for <code>SCRATCH_2</code> and <code>PERSISTENT_1</code> deployment types is supported when accessed from supported instance types in supported AWS Regions. To learn more, <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html\">Encrypting Data in Transit</a>.</p>"
         },
+        "AutoImportPolicy": {
+          "shape": "AutoImportPolicyType",
+          "documentation": "<p>Use this property to turn the Autoimport feature on and off. AutoImport enables your FSx for Lustre file system to automatically update its contents with changes that have been made to its linked Amazon S3 data repository. You can set the policy to have one the following values:</p> <ul> <li> <p> <code>NONE</code> - (Default) Autoimport is turned off. Changes to your S3 repository will not be reflected on the FSx file system.</p> </li> <li> <p> <code>NEW</code> - Autoimport is turned on; only new files in the linked S3 repository will be imported to the FSx file system. Updates to existing files and deleted files will not be imported to the FSx file system.</p> </li> <li> <p> <code>NEW_CHANGED</code> - Autoimport is turned on; new files and changes to existing files in the linked S3 repository will be imported to the FSx file system. Files deleted in S3 are not deleted in the FSx file system.</p> </li> <li> <p> <code>NEW_CHANGED_DELETED</code> - Autoimport is turned on; new files, changes to existing files, and deleted files in the linked S3 repository will be imported to the FSx file system. </p> </li> </ul>"
+        },
         "PerUnitStorageThroughput": {
           "shape": "PerUnitStorageThroughput",
           "documentation": "<p> Required for the <code>PERSISTENT_1</code> deployment type, describes the amount of read and write throughput for each 1 tebibyte of storage, in MB/s/TiB. File system throughput capacity is calculated by multiplying ﬁle system storage capacity (TiB) by the PerUnitStorageThroughput (MB/s/TiB). For a 2.4 TiB ﬁle system, provisioning 50 MB/s/TiB of PerUnitStorageThroughput yields 117 MB/s of ﬁle system throughput. You pay for the amount of throughput that you provision. </p> <p>Valid values are 50, 100, 200.</p>"
@@ -1038,6 +1050,10 @@
     "DataRepositoryConfiguration": {
       "type": "structure",
       "members": {
+        "Lifecycle": {
+          "shape": "DataRepositoryLifecycle",
+          "documentation": "<p>Describes the state of the file system's S3 durable data repository, if it is configured with an S3 repository. The lifecycle can have the following values:</p> <ul> <li> <p> <code>CREATING</code> - Amazon FSx is creating the new data repository.</p> </li> <li> <p> <code>AVAILABLE</code> - The data repository is available for use.</p> </li> <li> <p> <code>MISCONFIGURED</code> - The data repository is in a failed but recoverable state.</p> </li> <li> <p> <code>UPDATING</code> - The data repository is undergoing a customer initiated update.</p> </li> </ul>"
+        },
         "ImportPath": {
           "shape": "ArchivePath",
           "documentation": "<p>The import path to the Amazon S3 bucket (and optional prefix) that you're using as the data repository for your FSx for Lustre file system, for example <code>s3://import-bucket/optional-prefix</code>. If a prefix is specified after the Amazon S3 bucket name, only object keys with that prefix are loaded into the file system.</p>"
@@ -1049,9 +1065,35 @@
         "ImportedFileChunkSize": {
           "shape": "Megabytes",
           "documentation": "<p>For files imported from a data repository, this value determines the stripe count and maximum amount of data per file (in MiB) stored on a single physical disk. The maximum number of disks that a single file can be striped across is limited by the total number of disks that make up the file system.</p> <p>The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500 GiB). Amazon S3 objects have a maximum size of 5 TB.</p>"
+        },
+        "AutoImportPolicy": {
+          "shape": "AutoImportPolicyType",
+          "documentation": "<p>Describes the data repository's <code>AutoImportPolicy</code>. AutoImport enables your FSx for Lustre file system to automatically update its contents with changes that have been made to its linked Amazon S3 data repository. The policy can have the following values:</p> <ul> <li> <p> <code>NONE</code> - (Default) Autoimport is turned off, Changes to your S3 repository will not be reflected on the FSx file system.</p> </li> <li> <p> <code>NEW</code> - Autoimport is turned on; only new files in the linked S3 repository will be imported to the FSx file system. Updates to existing files and deleted files will not be imported to the FSx file system.</p> </li> <li> <p> <code>NEW_CHANGED</code> - Autoimport is turned on; new files and changes to existing files in the linked S3 repository will be imported to the FSx file system. Files deleted in S3 are not deleted in the FSx file system.</p> </li> <li> <p> <code>NEW_CHANGED_DELETED</code> - Autoimport is turned on; new files, changes to existing files, and deleted files in the linked S3 repository will be imported to the FSx file system. </p> </li> </ul>"
+        },
+        "FailureDetails": {
+          "shape": "DataRepositoryFailureDetails"
         }
       },
       "documentation": "<p>The data repository configuration object for Lustre file systems returned in the response of the <code>CreateFileSystem</code> operation.</p>"
+    },
+    "DataRepositoryFailureDetails": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "shape": "ErrorMessage"
+        }
+      },
+      "documentation": "<p>Provides detailed information about the data respository if its <code>Lifecycle</code> is set to <code>MISCONFIGURED</code>.</p>"
+    },
+    "DataRepositoryLifecycle": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "AVAILABLE",
+        "MISCONFIGURED",
+        "UPDATING",
+        "DELETING"
+      ]
     },
     "DataRepositoryTask": {
       "type": "structure",
@@ -2012,6 +2054,10 @@
     },
     "Tag": {
       "type": "structure",
+      "required": [
+        "Key",
+        "Value"
+      ],
       "members": {
         "Key": {
           "shape": "TagKey",
@@ -2130,6 +2176,10 @@
         },
         "AutomaticBackupRetentionDays": {
           "shape": "AutomaticBackupRetentionDays"
+        },
+        "AutoImportPolicy": {
+          "shape": "AutoImportPolicyType",
+          "documentation": "<p>Use this property to turn the Autoimport feature on and off. AutoImport enables your FSx for Lustre file system to automatically update its contents with changes that have been made to its linked Amazon S3 data repository. You can set the policy to have one the following values:</p> <ul> <li> <p> <code>NONE</code> - (Default) Autoimport is turned off. Changes to your S3 repository will not be reflected on the FSx file system.</p> </li> <li> <p> <code>NEW</code> - Autoimport is turned on; only new files in the linked S3 repository will be imported to the FSx file system. Updates to existing files and deleted files will not be imported to the FSx file system.</p> </li> <li> <p> <code>NEW_CHANGED</code> - Autoimport is turned on; new files and changes to existing files in the linked S3 repository will be imported to the FSx file system. Files deleted in S3 are not deleted in the FSx file system.</p> </li> <li> <p> <code>NEW_CHANGED_DELETED</code> - Autoimport is turned on; new files, changes to existing files, and deleted files in the linked S3 repository will be imported to the FSx file system. </p> </li> </ul>"
         }
       },
       "documentation": "<p>The configuration object for Amazon FSx for Lustre file systems used in the <code>UpdateFileSystem</code> operation.</p>"
