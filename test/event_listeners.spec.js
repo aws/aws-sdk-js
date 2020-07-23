@@ -119,7 +119,7 @@
         return expect(successHandler.calls.length).not.to.equal(0);
       });
       [null, undefined].forEach(function(region) {
-        it(`sends error event if region is ${region}`, function() {
+        it('sends error event if region is ' + region, function() {
           var call, request;
           helpers.mockHttpResponse(200, {}, '');
           service.config.region = region;
