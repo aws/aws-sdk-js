@@ -140,7 +140,7 @@
         '-starts-and-ends-with-dash-',
         '-',
         'c0nt@in$-$ymb01$',
-        '0123456789012345678901234567890123456789012345678901234567890123',
+        '0123456789012345678901234567890123456789012345678901234567890123', // 64 characters
       ].forEach(function(region) {
         it('sends error event if region is "' + region + '"', function() {
           var call, request;
@@ -155,6 +155,23 @@
         });
       });
 
+      [
+        'a',
+        'ab',
+        'abc',
+        'contains-dashes-in-the-middle',
+        '123StartsWithNumbers',
+        'EndsWithNumbers123',
+        '123StartsAndEndsWithNumbers000',
+        '012345678901234567890123456789012345678901234567890123456789012', // 63 characters
+      ].forEach(function(region) {
+        it('successful region validation if region is "' + region + '"', function() {
+          helpers.mockHttpResponse(200, {}, '');
+          service.config.region = region;
+          makeRequest(function() {});
+          return expect(errorHandler.calls.length).to.equal(0);
+        });
+      });
       return it('ignores region validation if service has global endpoint', function() {
         helpers.mockHttpResponse(200, {}, '');
         service.config.region = null;
