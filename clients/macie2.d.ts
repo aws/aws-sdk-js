@@ -703,7 +703,7 @@ declare namespace Macie2 {
      */
     objectCount?: __long;
     /**
-     * The total number of objects that are in the bucket, grouped by server-side encryption type. This includes a grouping that reports the total number of objects that aren't encrypted.
+     * The total number of objects that are in the bucket, grouped by server-side encryption type. This includes a grouping that reports the total number of objects that aren't encrypted or use client-side encryption.
      */
     objectCountByEncryptionType?: ObjectCountByEncryptionType;
     /**
@@ -1751,7 +1751,7 @@ declare namespace Macie2 {
   }
   export interface GetUsageStatisticsRequest {
     /**
-     * The criteria to use to filter the query results.
+     * An array of objects, one for each condition to use to filter the query results. If the array contains more than one object, Amazon Macie uses an AND operator to join the conditions specified by the objects.
      */
     filterBy?: __listOfUsageStatisticsFilter;
     /**
@@ -2220,19 +2220,19 @@ declare namespace Macie2 {
   }
   export interface ObjectCountByEncryptionType {
     /**
-     * Reserved for future use.
+     * The total number of objects that are encrypted using a customer-managed key. The objects use customer-provided server-side (SSE-C) encryption.
      */
     customerManaged?: __long;
     /**
-     * Reserved for future use.
+     * The total number of objects that are encrypted using an AWS Key Management Service (AWS KMS) customer master key (CMK). The objects use AWS KMS AWS-managed (AWS-KMS) encryption or AWS KMS customer-managed (SSE-KMS) encryption.
      */
     kmsManaged?: __long;
     /**
-     * Reserved for future use.
+     * The total number of objects that are encrypted using an Amazon S3-managed key. The objects use Amazon S3-managed (SSE-S3) encryption.
      */
     s3Managed?: __long;
     /**
-     * Reserved for future use.
+     * The total number of objects that aren't encrypted or use client-side encryption.
      */
     unencrypted?: __long;
   }
@@ -2749,7 +2749,7 @@ declare namespace Macie2 {
      */
     accountId?: __string;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when the free trial period started for the account. This value is null if the account didn't participate in the free trial.
+     * The date and time, in UTC and extended ISO 8601 format, when the free trial started for the account.
      */
     freeTrialStartDate?: __timestampIso8601;
     /**
@@ -2759,15 +2759,20 @@ declare namespace Macie2 {
   }
   export interface UsageStatisticsFilter {
     /**
-     * The field to use to filter the results. The only supported value is accountId.
+     * The operator to use in the condition. If the value for the key property is accountId, this value must be CONTAINS. If the value for the key property is any other supported field, this value can be EQ, GT, GTE, LT, LTE, or NE.
+     */
+    comparator?: UsageStatisticsFilterComparator;
+    /**
+     * The field to use in the condition.
      */
     key?: UsageStatisticsFilterKey;
     /**
-     * An array that lists the AWS account ID for each account to include in the results.
+     * An array that lists values to use in the condition, based on the value for the field specified by the key property. If the value for the key property is accountId, this array can specify multiple values. Otherwise, this array can specify only one value. Valid values for each supported field are: accountId - The unique identifier for an AWS account. freeTrialStartDate - The date and time, in UTC and extended ISO 8601 format, when the free trial started for an account. serviceLimit - A Boolean (true or false) value that indicates whether an account has reached its monthly quota. total - A string that represents the current, estimated month-to-date cost for an account.
      */
     values?: __listOf__string;
   }
-  export type UsageStatisticsFilterKey = "accountId"|string;
+  export type UsageStatisticsFilterComparator = "GT"|"GTE"|"LT"|"LTE"|"EQ"|"NE"|"CONTAINS"|string;
+  export type UsageStatisticsFilterKey = "accountId"|"serviceLimit"|"freeTrialStartDate"|"total"|string;
   export interface UsageStatisticsSortBy {
     /**
      * The field to sort the results by.
@@ -2778,7 +2783,7 @@ declare namespace Macie2 {
      */
     orderBy?: OrderBy;
   }
-  export type UsageStatisticsSortKey = "accountId"|"total"|string;
+  export type UsageStatisticsSortKey = "accountId"|"total"|"serviceLimitValue"|"freeTrialStartDate"|string;
   export interface UsageTotal {
     /**
      * The type of currency that the value for the metric (estimatedCost) is reported in.

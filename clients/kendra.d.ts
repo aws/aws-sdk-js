@@ -702,6 +702,10 @@ declare namespace Kendra {
      * Information about the database column that provides information for user context filtering.
      */
     AclConfiguration?: AclConfiguration;
+    /**
+     * Provides information about how Amazon Kendra uses quote marks around SQL identifiers when querying a database data source.
+     */
+    SqlConfiguration?: SqlConfiguration;
   }
   export type DatabaseEngineType = "RDS_AURORA_MYSQL"|"RDS_AURORA_POSTGRESQL"|"RDS_MYSQL"|"RDS_POSTGRESQL"|string;
   export type DatabaseHost = string;
@@ -959,7 +963,7 @@ declare namespace Kendra {
      */
     LongValue?: Long;
     /**
-     * A date value expressed as seconds from the Unix epoch.
+     * A date expressed as an ISO 8601 string.
      */
     DateValue?: Timestamp;
   }
@@ -1302,6 +1306,7 @@ declare namespace Kendra {
   export type PrincipalType = "USER"|"GROUP"|string;
   export type QueryCapacityUnit = number;
   export type QueryId = string;
+  export type QueryIdentifiersEnclosingOption = "DOUBLE_QUOTES"|"NONE"|string;
   export interface QueryRequest {
     /**
      * The unique identifier of the index to search. The identifier is returned in the response from the operation.
@@ -1335,6 +1340,10 @@ declare namespace Kendra {
      * Sets the number of results that are returned in each page of results. The default page size is 10. The maximum number of results returned is 100. If you ask for more than 100 results, only 100 are returned.
      */
     PageSize?: Integer;
+    /**
+     * Provides information that determines how the results of the query are sorted. You can set the field that Amazon Kendra should sort the results on, and specify whether the results should be sorted in ascending or descending order. In the case of ties in sorting the results, the results are sorted by relevance. If you don't provide sorting configuration, the results are sorted by the relevance that Amazon Kendra determines for the result.
+     */
+    SortingConfiguration?: SortingConfiguration;
   }
   export interface QueryResult {
     /**
@@ -1611,6 +1620,10 @@ declare namespace Kendra {
      * Determines whether the field is returned in the query response. The default is true.
      */
     Displayable?: Boolean;
+    /**
+     * Determines whether the field can be used to sort the results of a query. If you specify sorting on a field that does not have Sortable set to true, Amazon Kendra returns an exception. The default is false.
+     */
+    Sortable?: Boolean;
   }
   export type SecretArn = string;
   export type SecurityGroupIdList = VpcSecurityGroupId[];
@@ -1722,7 +1735,7 @@ declare namespace Kendra {
      */
     InclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     /**
-     * A list of regulary expression patterns. Documents that match the patterns are excluded from the index. Documents that don't match the patterns are included in the index. If a document matches both an exclusion pattern and an inclusion pattern, the document is not included in the index. The regex is applied to the display URL of the SharePoint document.
+     * A list of regular expression patterns. Documents that match the patterns are excluded from the index. Documents that don't match the patterns are included in the index. If a document matches both an exclusion pattern and an inclusion pattern, the document is not included in the index. The regex is applied to the display URL of the SharePoint document.
      */
     ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     VpcConfiguration?: DataSourceVpcConfiguration;
@@ -1737,6 +1750,23 @@ declare namespace Kendra {
   }
   export type SharePointUrlList = Url[];
   export type SharePointVersion = "SHAREPOINT_ONLINE"|string;
+  export type SortOrder = "DESC"|"ASC"|string;
+  export interface SortingConfiguration {
+    /**
+     * The name of the document attribute used to sort the response. You can use any field that has the Sortable flag set to true. You can also sort by any of the following built-in attributes:   _category   _created_at   _last_updated_at   _version   _view_count  
+     */
+    DocumentAttributeKey: DocumentAttributeKey;
+    /**
+     * The order that the results should be returned in. In case of ties, the relevance assigned to the result by Amazon Kendra is used as the tie-breaker.
+     */
+    SortOrder: SortOrder;
+  }
+  export interface SqlConfiguration {
+    /**
+     * Determines whether Amazon Kendra encloses SQL identifiers in double quotes (") when making a database query. By default, Amazon Kendra passes SQL identifiers the way that they are entered into the data source configuration. It does not change the case of identifiers or enclose them in quotes. PostgreSQL internally converts uppercase characters to lower case characters in identifiers unless they are quoted. Choosing this option encloses identifiers in quotes so that PostgreSQL does not convert the character's case. For MySQL databases, you must enable the ansi_quotes option when you choose this option.
+     */
+    QueryIdentifiersEnclosingOption?: QueryIdentifiersEnclosingOption;
+  }
   export interface StartDataSourceSyncJobRequest {
     /**
      * The identifier of the data source to synchronize.

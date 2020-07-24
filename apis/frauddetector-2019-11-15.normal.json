@@ -705,37 +705,6 @@
       ],
       "documentation": "<p>Gets one or more outcomes. This is a paginated API. If you provide a null <code>maxResults</code>, this actions retrieves a maximum of 100 records per page. If you provide a <code>maxResults</code>, the value must be between 50 and 100. To get the next page results, provide the pagination token from the <code>GetOutcomesResult</code> as part of your request. A null pagination token fetches the records from the beginning. </p>"
     },
-    "GetPrediction": {
-      "name": "GetPrediction",
-      "http": {
-        "method": "POST",
-        "requestUri": "/"
-      },
-      "input": {
-        "shape": "GetPredictionRequest"
-      },
-      "output": {
-        "shape": "GetPredictionResult"
-      },
-      "errors": [
-        {
-          "shape": "ValidationException"
-        },
-        {
-          "shape": "ResourceNotFoundException"
-        },
-        {
-          "shape": "InternalServerException"
-        },
-        {
-          "shape": "ThrottlingException"
-        },
-        {
-          "shape": "AccessDeniedException"
-        }
-      ],
-      "documentation": "<p>Evaluates an event against a detector version. If a version ID is not provided, the detector’s (<code>ACTIVE</code>) version is used. </p>"
-    },
     "GetRules": {
       "name": "GetRules",
       "http": {
@@ -1651,7 +1620,7 @@
         },
         "variableType": {
           "shape": "string",
-          "documentation": "<p>The variable type.</p> <p>Valid Values: <code>AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT | SHIPPING_ZIP | USERAGENT</code> </p>"
+          "documentation": "<p>The variable type. For more information see <a href=\"https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types\">Variable types</a>. </p> <p>Valid Values: <code>AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT | SHIPPING_ZIP | USERAGENT</code> </p>"
         },
         "tags": {
           "shape": "tagList",
@@ -1979,15 +1948,6 @@
       },
       "documentation": "<p>The entity type details.</p>"
     },
-    "EventAttributeMap": {
-      "type": "map",
-      "key": {
-        "shape": "attributeKey"
-      },
-      "value": {
-        "shape": "attributeValue"
-      }
-    },
     "EventType": {
       "type": "structure",
       "members": {
@@ -2069,8 +2029,8 @@
           "shape": "ModelSource",
           "documentation": "<p>The source of the model.</p>"
         },
-        "role": {
-          "shape": "Role",
+        "invokeModelEndpointRoleArn": {
+          "shape": "string",
           "documentation": "<p>The role used to invoke the model. </p>"
         },
         "inputConfiguration": {
@@ -2308,7 +2268,7 @@
           "documentation": "<p>The detector ID.</p>"
         },
         "detectorVersionId": {
-          "shape": "string",
+          "shape": "wholeNumberVersionString",
           "documentation": "<p>The detector version ID.</p>"
         },
         "eventId": {
@@ -2569,52 +2529,6 @@
         "nextToken": {
           "shape": "string",
           "documentation": "<p>The next page token for subsequent requests.</p>"
-        }
-      }
-    },
-    "GetPredictionRequest": {
-      "type": "structure",
-      "required": [
-        "detectorId",
-        "eventId"
-      ],
-      "members": {
-        "detectorId": {
-          "shape": "string",
-          "documentation": "<p>The detector ID. </p>"
-        },
-        "detectorVersionId": {
-          "shape": "string",
-          "documentation": "<p>The detector version ID.</p>"
-        },
-        "eventId": {
-          "shape": "string",
-          "documentation": "<p>The unique ID used to identify the event.</p>"
-        },
-        "eventAttributes": {
-          "shape": "EventAttributeMap",
-          "documentation": "<p>Names of variables you defined in Amazon Fraud Detector to represent event data elements and their corresponding values for the event you are sending for evaluation.</p>"
-        },
-        "externalModelEndpointDataBlobs": {
-          "shape": "ExternalModelEndpointDataBlobMap",
-          "documentation": "<p>The Amazon SageMaker model endpoint input data blobs.</p>"
-        }
-      }
-    },
-    "GetPredictionResult": {
-      "type": "structure",
-      "members": {
-        "outcomes": {
-          "shape": "ListOfStrings",
-          "documentation": "<p>The prediction outcomes.</p>"
-        },
-        "modelScores": {
-          "shape": "ListOfModelScores",
-          "documentation": "<p>The model scores for models used in the detector version.</p>"
-        },
-        "ruleResults": {
-          "shape": "ListOfRuleResults",
-          "documentation": "<p>The rule results in the prediction.</p>"
         }
       }
     },
@@ -3068,16 +2982,8 @@
     "ModelVersionStatus": {
       "type": "string",
       "enum": [
-        "TRAINING_IN_PROGRESS",
-        "TRAINING_COMPLETE",
-        "ACTIVATE_REQUESTED",
-        "ACTIVATE_IN_PROGRESS",
         "ACTIVE",
-        "INACTIVATE_IN_PROGRESS",
-        "INACTIVE",
-        "DELETE_REQUESTED",
-        "DELETE_IN_PROGRESS",
-        "ERROR"
+        "INACTIVE"
       ]
     },
     "NameList": {
@@ -3229,7 +3135,7 @@
       "required": [
         "modelEndpoint",
         "modelSource",
-        "role",
+        "invokeModelEndpointRoleArn",
         "inputConfiguration",
         "outputConfiguration",
         "modelEndpointStatus"
@@ -3247,8 +3153,8 @@
           "shape": "ModelSource",
           "documentation": "<p>The source of the model.</p>"
         },
-        "role": {
-          "shape": "Role",
+        "invokeModelEndpointRoleArn": {
+          "shape": "string",
           "documentation": "<p>The IAM role used to invoke the model endpoint.</p>"
         },
         "inputConfiguration": {
@@ -3336,24 +3242,6 @@
     "PutOutcomeResult": {
       "type": "structure",
       "members": {}
-    },
-    "Role": {
-      "type": "structure",
-      "required": [
-        "arn",
-        "name"
-      ],
-      "members": {
-        "arn": {
-          "shape": "string",
-          "documentation": "<p>The role ARN.</p>"
-        },
-        "name": {
-          "shape": "string",
-          "documentation": "<p>The role name.</p>"
-        }
-      },
-      "documentation": "<p>The role used to invoke external model endpoints.</p>"
     },
     "Rule": {
       "type": "structure",
@@ -3867,7 +3755,7 @@
         },
         "variableType": {
           "shape": "string",
-          "documentation": "<p>The variable type.</p>"
+          "documentation": "<p>The variable type. For more information see <a href=\"https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types\">Variable types</a>.</p>"
         }
       }
     },
@@ -3887,7 +3775,7 @@
         },
         "dataType": {
           "shape": "DataType",
-          "documentation": "<p>The data type of the variable.</p>"
+          "documentation": "<p>The data type of the variable. For more information see <a href=\"https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types\">Variable types</a>.</p>"
         },
         "dataSource": {
           "shape": "DataSource",
@@ -3945,7 +3833,7 @@
         },
         "variableType": {
           "shape": "string",
-          "documentation": "<p>The type of the variable.</p> <p>Valid Values: <code>AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT | SHIPPING_ZIP | USERAGENT</code> </p>"
+          "documentation": "<p>The type of the variable. For more information see <a href=\"https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types\">Variable types</a>.</p> <p>Valid Values: <code>AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT | SHIPPING_ZIP | USERAGENT</code> </p>"
         }
       },
       "documentation": "<p>A variable in the list of variables for the batch create variable request.</p>"
@@ -3969,17 +3857,6 @@
       "box": true,
       "max": 100,
       "min": 50
-    },
-    "attributeKey": {
-      "type": "string",
-      "max": 64,
-      "min": 1
-    },
-    "attributeValue": {
-      "type": "string",
-      "max": 256,
-      "min": 1,
-      "sensitive": true
     },
     "blob": {
       "type": "blob"
@@ -4035,6 +3912,8 @@
     },
     "floatVersionString": {
       "type": "string",
+      "max": 7,
+      "min": 3,
       "pattern": "^[1-9][0-9]{0,3}\\.[0-9]{1,2}$"
     },
     "fraudDetectorArn": {
@@ -4177,6 +4056,8 @@
     },
     "wholeNumberVersionString": {
       "type": "string",
+      "max": 5,
+      "min": 1,
       "pattern": "^([1-9][0-9]*)$"
     }
   },

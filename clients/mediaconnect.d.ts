@@ -410,6 +410,10 @@ declare namespace MediaConnect {
      */
     EntitlementArn: __string;
     /**
+     * An indication of whether the entitlement is enabled.
+     */
+    EntitlementStatus?: EntitlementStatus;
+    /**
      * The name of the entitlement.
      */
     Name: __string;
@@ -418,6 +422,7 @@ declare namespace MediaConnect {
      */
     Subscribers: __listOf__string;
   }
+  export type EntitlementStatus = "ENABLED"|"DISABLED"|string;
   export interface FailoverConfig {
     /**
      * Search window time to look for dash-7 packets
@@ -479,6 +484,10 @@ declare namespace MediaConnect {
      * The type of encryption that will be used on the output that is associated with this entitlement.
      */
     Encryption?: Encryption;
+    /**
+     * An indication of whether the new entitlement should be enabled or disabled as soon as it is created. If you don’t specify the entitlementStatus field in your request, MediaConnect sets it to ENABLED.
+     */
+    EntitlementStatus?: EntitlementStatus;
     /**
      * The name of the entitlement. This value must be unique within the current flow.
      */
@@ -974,6 +983,10 @@ declare namespace MediaConnect {
      * The ARN of the entitlement that you want to update.
      */
     EntitlementArn: __string;
+    /**
+     * An indication of whether you want to enable the entitlement to allow access, or disable it to stop streaming content to the subscriber’s flow temporarily. If you don’t specify the entitlementStatus field in your request, MediaConnect leaves the value unchanged.
+     */
+    EntitlementStatus?: EntitlementStatus;
     /**
      * The flow that is associated with the entitlement that you want to update.
      */

@@ -200,14 +200,6 @@ declare class FraudDetector extends Service {
    */
   getOutcomes(callback?: (err: AWSError, data: FraudDetector.Types.GetOutcomesResult) => void): Request<FraudDetector.Types.GetOutcomesResult, AWSError>;
   /**
-   * Evaluates an event against a detector version. If a version ID is not provided, the detector’s (ACTIVE) version is used. 
-   */
-  getPrediction(params: FraudDetector.Types.GetPredictionRequest, callback?: (err: AWSError, data: FraudDetector.Types.GetPredictionResult) => void): Request<FraudDetector.Types.GetPredictionResult, AWSError>;
-  /**
-   * Evaluates an event against a detector version. If a version ID is not provided, the detector’s (ACTIVE) version is used. 
-   */
-  getPrediction(callback?: (err: AWSError, data: FraudDetector.Types.GetPredictionResult) => void): Request<FraudDetector.Types.GetPredictionResult, AWSError>;
-  /**
    * Get all rules for a detector (paginated) if ruleId and ruleVersion are not specified. Gets all rules for the detector and the ruleId if present (paginated). Gets a specific rule if both the ruleId and the ruleVersion are specified. This is a paginated API. Providing null maxResults results in retrieving maximum of 100 records per page. If you provide maxResults the value must be between 50 and 100. To get the next page result, a provide a pagination token from GetRulesResult as part of your request. Null pagination token fetches the records from the beginning.
    */
   getRules(params: FraudDetector.Types.GetRulesRequest, callback?: (err: AWSError, data: FraudDetector.Types.GetRulesResult) => void): Request<FraudDetector.Types.GetRulesResult, AWSError>;
@@ -609,7 +601,7 @@ declare namespace FraudDetector {
      */
     description?: string;
     /**
-     * The variable type. Valid Values: AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT | SHIPPING_ZIP | USERAGENT 
+     * The variable type. For more information see Variable types.  Valid Values: AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT | SHIPPING_ZIP | USERAGENT 
      */
     variableType?: string;
     /**
@@ -814,7 +806,6 @@ declare namespace FraudDetector {
      */
     arn?: fraudDetectorArn;
   }
-  export type EventAttributeMap = {[key: string]: attributeValue};
   export interface EventType {
     /**
      * The event type name.
@@ -876,7 +867,7 @@ declare namespace FraudDetector {
     /**
      * The role used to invoke the model. 
      */
-    role?: Role;
+    invokeModelEndpointRoleArn?: string;
     /**
      * The input configuration.
      */
@@ -1053,7 +1044,7 @@ declare namespace FraudDetector {
     /**
      * The detector version ID.
      */
-    detectorVersionId?: string;
+    detectorVersionId?: wholeNumberVersionString;
     /**
      * The unique ID used to identify the event.
      */
@@ -1266,42 +1257,6 @@ declare namespace FraudDetector {
      * The next page token for subsequent requests.
      */
     nextToken?: string;
-  }
-  export interface GetPredictionRequest {
-    /**
-     * The detector ID. 
-     */
-    detectorId: string;
-    /**
-     * The detector version ID.
-     */
-    detectorVersionId?: string;
-    /**
-     * The unique ID used to identify the event.
-     */
-    eventId: string;
-    /**
-     * Names of variables you defined in Amazon Fraud Detector to represent event data elements and their corresponding values for the event you are sending for evaluation.
-     */
-    eventAttributes?: EventAttributeMap;
-    /**
-     * The Amazon SageMaker model endpoint input data blobs.
-     */
-    externalModelEndpointDataBlobs?: ExternalModelEndpointDataBlobMap;
-  }
-  export interface GetPredictionResult {
-    /**
-     * The prediction outcomes.
-     */
-    outcomes?: ListOfStrings;
-    /**
-     * The model scores for models used in the detector version.
-     */
-    modelScores?: ListOfModelScores;
-    /**
-     * The rule results in the prediction.
-     */
-    ruleResults?: ListOfRuleResults;
   }
   export interface GetRulesRequest {
     /**
@@ -1594,7 +1549,7 @@ declare namespace FraudDetector {
      */
     arn?: fraudDetectorArn;
   }
-  export type ModelVersionStatus = "TRAINING_IN_PROGRESS"|"TRAINING_COMPLETE"|"ACTIVATE_REQUESTED"|"ACTIVATE_IN_PROGRESS"|"ACTIVE"|"INACTIVATE_IN_PROGRESS"|"INACTIVE"|"DELETE_REQUESTED"|"DELETE_IN_PROGRESS"|"ERROR"|string;
+  export type ModelVersionStatus = "ACTIVE"|"INACTIVE"|string;
   export type NameList = string[];
   export type NonEmptyListOfStrings = string[];
   export interface Outcome {
@@ -1701,7 +1656,7 @@ declare namespace FraudDetector {
     /**
      * The IAM role used to invoke the model endpoint.
      */
-    role: Role;
+    invokeModelEndpointRoleArn: string;
     /**
      * The model endpoint input configuration.
      */
@@ -1760,16 +1715,6 @@ declare namespace FraudDetector {
     tags?: tagList;
   }
   export interface PutOutcomeResult {
-  }
-  export interface Role {
-    /**
-     * The role ARN.
-     */
-    arn: string;
-    /**
-     * The role name.
-     */
-    name: string;
   }
   export interface Rule {
     /**
@@ -2102,7 +2047,7 @@ declare namespace FraudDetector {
      */
     description?: string;
     /**
-     * The variable type.
+     * The variable type. For more information see Variable types.
      */
     variableType?: string;
   }
@@ -2115,7 +2060,7 @@ declare namespace FraudDetector {
      */
     name?: string;
     /**
-     * The data type of the variable.
+     * The data type of the variable. For more information see Variable types.
      */
     dataType?: DataType;
     /**
@@ -2169,15 +2114,13 @@ declare namespace FraudDetector {
      */
     description?: string;
     /**
-     * The type of the variable. Valid Values: AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT | SHIPPING_ZIP | USERAGENT 
+     * The type of the variable. For more information see Variable types. Valid Values: AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT | SHIPPING_ZIP | USERAGENT 
      */
     variableType?: string;
   }
   export type VariableEntryList = VariableEntry[];
   export type VariableList = Variable[];
   export type VariablesMaxResults = number;
-  export type attributeKey = string;
-  export type attributeValue = string;
   export type blob = Buffer|Uint8Array|Blob|string;
   export type contentType = string;
   export type description = string;

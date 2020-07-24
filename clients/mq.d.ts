@@ -189,6 +189,7 @@ declare class MQ extends Service {
   updateUser(callback?: (err: AWSError, data: MQ.Types.UpdateUserResponse) => void): Request<MQ.Types.UpdateUserResponse, AWSError>;
 }
 declare namespace MQ {
+  export type AuthenticationStrategy = "SIMPLE"|"LDAP"|string;
   export interface AvailabilityZone {
     /**
      * Id for the availability zone.
@@ -284,6 +285,10 @@ declare namespace MQ {
      */
     Arn?: __string;
     /**
+     * The authentication strategy associated with the configuration.
+     */
+    AuthenticationStrategy?: AuthenticationStrategy;
+    /**
      * Required. The date and time of the configuration revision.
      */
     Created?: __timestampIso8601;
@@ -356,6 +361,10 @@ declare namespace MQ {
   }
   export interface CreateBrokerRequest {
     /**
+     * The authentication strategy used to secure the broker.
+     */
+    AuthenticationStrategy?: AuthenticationStrategy;
+    /**
      * Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.
      */
     AutoMinorVersionUpgrade?: __boolean;
@@ -391,6 +400,10 @@ declare namespace MQ {
      * Required. The broker's instance type.
      */
     HostInstanceType?: __string;
+    /**
+     * The metadata of the LDAP server used to authenticate and authorize connections to the broker.
+     */
+    LdapServerMetadata?: LdapServerMetadataInput;
     /**
      * Enables Amazon CloudWatch logging for brokers.
      */
@@ -436,6 +449,10 @@ declare namespace MQ {
   }
   export interface CreateConfigurationRequest {
     /**
+     * The authentication strategy associated with the configuration.
+     */
+    AuthenticationStrategy?: AuthenticationStrategy;
+    /**
      * Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.
      */
     EngineType?: EngineType;
@@ -457,6 +474,10 @@ declare namespace MQ {
      * Required. The Amazon Resource Name (ARN) of the configuration.
      */
     Arn?: __string;
+    /**
+     * The authentication strategy associated with the configuration.
+     */
+    AuthenticationStrategy?: AuthenticationStrategy;
     /**
      * Required. The date and time of the configuration.
      */
@@ -511,7 +532,7 @@ declare namespace MQ {
   export type DayOfWeek = "MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|"SUNDAY"|string;
   export interface DeleteBrokerRequest {
     /**
-     * The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.
+     * The unique ID that Amazon MQ generates for the broker.
      */
     BrokerId: __string;
   }
@@ -616,6 +637,10 @@ declare namespace MQ {
   }
   export interface DescribeBrokerResponse {
     /**
+     * The authentication strategy used to secure the broker.
+     */
+    AuthenticationStrategy?: AuthenticationStrategy;
+    /**
      * Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.
      */
     AutoMinorVersionUpgrade?: __boolean;
@@ -668,6 +693,10 @@ declare namespace MQ {
      */
     HostInstanceType?: __string;
     /**
+     * The metadata of the LDAP server used to authenticate and authorize connections to the broker.
+     */
+    LdapServerMetadata?: LdapServerMetadataOutput;
+    /**
      * The list of information about logs currently enabled and pending to be deployed for the specified broker.
      */
     Logs?: LogsSummary;
@@ -676,6 +705,10 @@ declare namespace MQ {
      */
     MaintenanceWindowStartTime?: WeeklyStartTime;
     /**
+     * The authentication strategy that will be applied when the broker is rebooted.
+     */
+    PendingAuthenticationStrategy?: AuthenticationStrategy;
+    /**
      * The version of the broker engine to upgrade to. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
      */
     PendingEngineVersion?: __string;
@@ -683,6 +716,10 @@ declare namespace MQ {
      * The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
      */
     PendingHostInstanceType?: __string;
+    /**
+     * The metadata of the LDAP server that will be used to authenticate and authorize connections to the broker once it is rebooted.
+     */
+    PendingLdapServerMetadata?: LdapServerMetadataOutput;
     /**
      * The list of pending security groups to authorize connections to brokers.
      */
@@ -723,6 +760,10 @@ declare namespace MQ {
      * Required. The ARN of the configuration.
      */
     Arn?: __string;
+    /**
+     * The authentication strategy associated with the configuration.
+     */
+    AuthenticationStrategy?: AuthenticationStrategy;
     /**
      * Required. The date and time of the configuration revision.
      */
@@ -818,7 +859,7 @@ declare namespace MQ {
   }
   export interface EncryptionOptions {
     /**
-     * The customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.
+     * The symmetric customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.
      */
     KmsKeyId?: __string;
     /**
@@ -832,6 +873,94 @@ declare namespace MQ {
      * Id for the version.
      */
     Name?: __string;
+  }
+  export interface LdapServerMetadataInput {
+    /**
+     * Fully qualified domain name of the LDAP server. Optional failover server.
+     */
+    Hosts?: __listOf__string;
+    /**
+     * Fully qualified name of the directory to search for a user’s groups.
+     */
+    RoleBase?: __string;
+    /**
+     * Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query.
+     */
+    RoleName?: __string;
+    /**
+     * The search criteria for groups.
+     */
+    RoleSearchMatching?: __string;
+    /**
+     * The directory search scope for the role. If set to true, scope is to search the entire sub-tree.
+     */
+    RoleSearchSubtree?: __boolean;
+    /**
+     * Service account password.
+     */
+    ServiceAccountPassword?: __string;
+    /**
+     * Service account username.
+     */
+    ServiceAccountUsername?: __string;
+    /**
+     * Fully qualified name of the directory where you want to search for users.
+     */
+    UserBase?: __string;
+    /**
+     * Specifies the name of the LDAP attribute for the user group membership.
+     */
+    UserRoleName?: __string;
+    /**
+     * The search criteria for users.
+     */
+    UserSearchMatching?: __string;
+    /**
+     * The directory search scope for the user. If set to true, scope is to search the entire sub-tree.
+     */
+    UserSearchSubtree?: __boolean;
+  }
+  export interface LdapServerMetadataOutput {
+    /**
+     * Fully qualified domain name of the LDAP server. Optional failover server.
+     */
+    Hosts?: __listOf__string;
+    /**
+     * Fully qualified name of the directory to search for a user’s groups.
+     */
+    RoleBase?: __string;
+    /**
+     * Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query.
+     */
+    RoleName?: __string;
+    /**
+     * The search criteria for groups.
+     */
+    RoleSearchMatching?: __string;
+    /**
+     * The directory search scope for the role. If set to true, scope is to search the entire sub-tree.
+     */
+    RoleSearchSubtree?: __boolean;
+    /**
+     * Service account username.
+     */
+    ServiceAccountUsername?: __string;
+    /**
+     * Fully qualified name of the directory where you want to search for users.
+     */
+    UserBase?: __string;
+    /**
+     * Specifies the name of the LDAP attribute for the user group membership.
+     */
+    UserRoleName?: __string;
+    /**
+     * The search criteria for users.
+     */
+    UserSearchMatching?: __string;
+    /**
+     * The directory search scope for the user. If set to true, scope is to search the entire sub-tree.
+     */
+    UserSearchSubtree?: __boolean;
   }
   export interface ListBrokersRequest {
     /**
@@ -1021,11 +1150,15 @@ declare namespace MQ {
   export type SanitizationWarningReason = "DISALLOWED_ELEMENT_REMOVED"|"DISALLOWED_ATTRIBUTE_REMOVED"|"INVALID_ATTRIBUTE_VALUE_REMOVED"|string;
   export interface UpdateBrokerRequest {
     /**
+     * The authentication strategy used to secure the broker.
+     */
+    AuthenticationStrategy?: AuthenticationStrategy;
+    /**
      * Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.
      */
     AutoMinorVersionUpgrade?: __boolean;
     /**
-     * The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.
+     * The unique ID that Amazon MQ generates for the broker.
      */
     BrokerId: __string;
     /**
@@ -1041,6 +1174,10 @@ declare namespace MQ {
      */
     HostInstanceType?: __string;
     /**
+     * The metadata of the LDAP server used to authenticate and authorize connections to the broker.
+     */
+    LdapServerMetadata?: LdapServerMetadataInput;
+    /**
      * Enables Amazon CloudWatch logging for brokers.
      */
     Logs?: Logs;
@@ -1050,6 +1187,10 @@ declare namespace MQ {
     SecurityGroups?: __listOf__string;
   }
   export interface UpdateBrokerResponse {
+    /**
+     * The authentication strategy used to secure the broker.
+     */
+    AuthenticationStrategy?: AuthenticationStrategy;
     /**
      * The new value of automatic upgrades to new minor version for brokers.
      */
@@ -1070,6 +1211,10 @@ declare namespace MQ {
      * The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
      */
     HostInstanceType?: __string;
+    /**
+     * The metadata of the LDAP server used to authenticate and authorize connections to the broker.
+     */
+    LdapServerMetadata?: LdapServerMetadataOutput;
     /**
      * The list of information about logs to be enabled for the specified broker.
      */

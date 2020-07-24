@@ -757,6 +757,14 @@
     }
   },
   "shapes": {
+    "AuthenticationStrategy": {
+      "type": "string",
+      "documentation": "The authentication strategy used to secure the broker.",
+      "enum": [
+        "SIMPLE",
+        "LDAP"
+      ]
+    },
     "AvailabilityZone": {
       "type": "structure",
       "members": {
@@ -918,6 +926,11 @@
           "locationName": "arn",
           "documentation": "Required. The ARN of the configuration."
         },
+        "AuthenticationStrategy": {
+          "shape": "AuthenticationStrategy",
+          "locationName": "authenticationStrategy",
+          "documentation": "The authentication strategy associated with the configuration."
+        },
         "Created": {
           "shape": "__timestampIso8601",
           "locationName": "created",
@@ -1022,6 +1035,11 @@
     "CreateBrokerRequest": {
       "type": "structure",
       "members": {
+        "AuthenticationStrategy": {
+          "shape": "AuthenticationStrategy",
+          "locationName": "authenticationStrategy",
+          "documentation": "The authentication strategy used to secure the broker."
+        },
         "AutoMinorVersionUpgrade": {
           "shape": "__boolean",
           "locationName": "autoMinorVersionUpgrade",
@@ -1067,6 +1085,11 @@
           "shape": "__string",
           "locationName": "hostInstanceType",
           "documentation": "Required. The broker's instance type."
+        },
+        "LdapServerMetadata": {
+          "shape": "LdapServerMetadataInput",
+          "locationName": "ldapServerMetadata",
+          "documentation": "The metadata of the LDAP server used to authenticate and authorize connections to the broker."
         },
         "Logs": {
           "shape": "Logs",
@@ -1129,6 +1152,11 @@
     "CreateConfigurationRequest": {
       "type": "structure",
       "members": {
+        "AuthenticationStrategy": {
+          "shape": "AuthenticationStrategy",
+          "locationName": "authenticationStrategy",
+          "documentation": "The authentication strategy associated with the configuration."
+        },
         "EngineType": {
           "shape": "EngineType",
           "locationName": "engineType",
@@ -1159,6 +1187,11 @@
           "shape": "__string",
           "locationName": "arn",
           "documentation": "Required. The Amazon Resource Name (ARN) of the configuration."
+        },
+        "AuthenticationStrategy": {
+          "shape": "AuthenticationStrategy",
+          "locationName": "authenticationStrategy",
+          "documentation": "The authentication strategy associated with the configuration."
         },
         "Created": {
           "shape": "__timestampIso8601",
@@ -1262,7 +1295,7 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "broker-id",
-          "documentation": "The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters."
+          "documentation": "The unique ID that Amazon MQ generates for the broker."
         }
       },
       "required": [
@@ -1448,6 +1481,11 @@
     "DescribeBrokerResponse": {
       "type": "structure",
       "members": {
+        "AuthenticationStrategy": {
+          "shape": "AuthenticationStrategy",
+          "locationName": "authenticationStrategy",
+          "documentation": "The authentication strategy used to secure the broker."
+        },
         "AutoMinorVersionUpgrade": {
           "shape": "__boolean",
           "locationName": "autoMinorVersionUpgrade",
@@ -1513,6 +1551,11 @@
           "locationName": "hostInstanceType",
           "documentation": "The broker's instance type."
         },
+        "LdapServerMetadata": {
+          "shape": "LdapServerMetadataOutput",
+          "locationName": "ldapServerMetadata",
+          "documentation": "The metadata of the LDAP server used to authenticate and authorize connections to the broker."
+        },
         "Logs": {
           "shape": "LogsSummary",
           "locationName": "logs",
@@ -1523,6 +1566,11 @@
           "locationName": "maintenanceWindowStartTime",
           "documentation": "The parameters that determine the WeeklyStartTime."
         },
+        "PendingAuthenticationStrategy": {
+          "shape": "AuthenticationStrategy",
+          "locationName": "pendingAuthenticationStrategy",
+          "documentation": "The authentication strategy that will be applied when the broker is rebooted."
+        },
         "PendingEngineVersion": {
           "shape": "__string",
           "locationName": "pendingEngineVersion",
@@ -1532,6 +1580,11 @@
           "shape": "__string",
           "locationName": "pendingHostInstanceType",
           "documentation": "The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types"
+        },
+        "PendingLdapServerMetadata": {
+          "shape": "LdapServerMetadataOutput",
+          "locationName": "pendingLdapServerMetadata",
+          "documentation": "The metadata of the LDAP server that will be used to authenticate and authorize connections to the broker once it is rebooted."
         },
         "PendingSecurityGroups": {
           "shape": "__listOf__string",
@@ -1591,6 +1644,11 @@
           "shape": "__string",
           "locationName": "arn",
           "documentation": "Required. The ARN of the configuration."
+        },
+        "AuthenticationStrategy": {
+          "shape": "AuthenticationStrategy",
+          "locationName": "authenticationStrategy",
+          "documentation": "The authentication strategy associated with the configuration."
         },
         "Created": {
           "shape": "__timestampIso8601",
@@ -1737,7 +1795,7 @@
         "KmsKeyId": {
           "shape": "__string",
           "locationName": "kmsKeyId",
-          "documentation": "The customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data."
+          "documentation": "The symmetric customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data."
         },
         "UseAwsOwnedKey": {
           "shape": "__boolean",
@@ -1767,6 +1825,123 @@
         }
       },
       "documentation": "Id of the engine version."
+    },
+    "LdapServerMetadataInput": {
+      "type": "structure",
+      "members": {
+        "Hosts": {
+          "shape": "__listOf__string",
+          "locationName": "hosts",
+          "documentation": "Fully qualified domain name of the LDAP server. Optional failover server."
+        },
+        "RoleBase": {
+          "shape": "__string",
+          "locationName": "roleBase",
+          "documentation": "Fully qualified name of the directory to search for a user’s groups."
+        },
+        "RoleName": {
+          "shape": "__string",
+          "locationName": "roleName",
+          "documentation": "Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query."
+        },
+        "RoleSearchMatching": {
+          "shape": "__string",
+          "locationName": "roleSearchMatching",
+          "documentation": "The search criteria for groups."
+        },
+        "RoleSearchSubtree": {
+          "shape": "__boolean",
+          "locationName": "roleSearchSubtree",
+          "documentation": "The directory search scope for the role. If set to true, scope is to search the entire sub-tree."
+        },
+        "ServiceAccountPassword": {
+          "shape": "__string",
+          "locationName": "serviceAccountPassword",
+          "documentation": "Service account password."
+        },
+        "ServiceAccountUsername": {
+          "shape": "__string",
+          "locationName": "serviceAccountUsername",
+          "documentation": "Service account username."
+        },
+        "UserBase": {
+          "shape": "__string",
+          "locationName": "userBase",
+          "documentation": "Fully qualified name of the directory where you want to search for users."
+        },
+        "UserRoleName": {
+          "shape": "__string",
+          "locationName": "userRoleName",
+          "documentation": "Specifies the name of the LDAP attribute for the user group membership."
+        },
+        "UserSearchMatching": {
+          "shape": "__string",
+          "locationName": "userSearchMatching",
+          "documentation": "The search criteria for users."
+        },
+        "UserSearchSubtree": {
+          "shape": "__boolean",
+          "locationName": "userSearchSubtree",
+          "documentation": "The directory search scope for the user. If set to true, scope is to search the entire sub-tree."
+        }
+      },
+      "documentation": "The metadata of the LDAP server used to authenticate and authorize connections to the broker."
+    },
+    "LdapServerMetadataOutput": {
+      "type": "structure",
+      "members": {
+        "Hosts": {
+          "shape": "__listOf__string",
+          "locationName": "hosts",
+          "documentation": "Fully qualified domain name of the LDAP server. Optional failover server."
+        },
+        "RoleBase": {
+          "shape": "__string",
+          "locationName": "roleBase",
+          "documentation": "Fully qualified name of the directory to search for a user’s groups."
+        },
+        "RoleName": {
+          "shape": "__string",
+          "locationName": "roleName",
+          "documentation": "Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query."
+        },
+        "RoleSearchMatching": {
+          "shape": "__string",
+          "locationName": "roleSearchMatching",
+          "documentation": "The search criteria for groups."
+        },
+        "RoleSearchSubtree": {
+          "shape": "__boolean",
+          "locationName": "roleSearchSubtree",
+          "documentation": "The directory search scope for the role. If set to true, scope is to search the entire sub-tree."
+        },
+        "ServiceAccountUsername": {
+          "shape": "__string",
+          "locationName": "serviceAccountUsername",
+          "documentation": "Service account username."
+        },
+        "UserBase": {
+          "shape": "__string",
+          "locationName": "userBase",
+          "documentation": "Fully qualified name of the directory where you want to search for users."
+        },
+        "UserRoleName": {
+          "shape": "__string",
+          "locationName": "userRoleName",
+          "documentation": "Specifies the name of the LDAP attribute for the user group membership."
+        },
+        "UserSearchMatching": {
+          "shape": "__string",
+          "locationName": "userSearchMatching",
+          "documentation": "The search criteria for users."
+        },
+        "UserSearchSubtree": {
+          "shape": "__boolean",
+          "locationName": "userSearchSubtree",
+          "documentation": "The directory search scope for the user. If set to true, scope is to search the entire sub-tree."
+        }
+      },
+      "documentation": "The metadata of the LDAP server used to authenticate and authorize connections to the broker."
     },
     "ListBrokersRequest": {
       "type": "structure",
@@ -2082,6 +2257,11 @@
     "UpdateBrokerRequest": {
       "type": "structure",
       "members": {
+        "AuthenticationStrategy": {
+          "shape": "AuthenticationStrategy",
+          "locationName": "authenticationStrategy",
+          "documentation": "The authentication strategy used to secure the broker."
+        },
         "AutoMinorVersionUpgrade": {
           "shape": "__boolean",
           "locationName": "autoMinorVersionUpgrade",
@@ -2091,7 +2271,7 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "broker-id",
-          "documentation": "The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters."
+          "documentation": "The unique ID that Amazon MQ generates for the broker."
         },
         "Configuration": {
           "shape": "ConfigurationId",
@@ -2107,6 +2287,11 @@
           "shape": "__string",
           "locationName": "hostInstanceType",
           "documentation": "The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types"
+        },
+        "LdapServerMetadata": {
+          "shape": "LdapServerMetadataInput",
+          "locationName": "ldapServerMetadata",
+          "documentation": "The metadata of the LDAP server used to authenticate and authorize connections to the broker."
         },
         "Logs": {
           "shape": "Logs",
@@ -2127,6 +2312,11 @@
     "UpdateBrokerResponse": {
       "type": "structure",
       "members": {
+        "AuthenticationStrategy": {
+          "shape": "AuthenticationStrategy",
+          "locationName": "authenticationStrategy",
+          "documentation": "The authentication strategy used to secure the broker."
+        },
         "AutoMinorVersionUpgrade": {
           "shape": "__boolean",
           "locationName": "autoMinorVersionUpgrade",
@@ -2151,6 +2341,11 @@
           "shape": "__string",
           "locationName": "hostInstanceType",
           "documentation": "The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types"
+        },
+        "LdapServerMetadata": {
+          "shape": "LdapServerMetadataOutput",
+          "locationName": "ldapServerMetadata",
+          "documentation": "The metadata of the LDAP server used to authenticate and authorize connections to the broker."
         },
         "Logs": {
           "shape": "Logs",

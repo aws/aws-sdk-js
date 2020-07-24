@@ -2712,7 +2712,7 @@
         "objectCountByEncryptionType": {
           "shape": "ObjectCountByEncryptionType",
           "locationName": "objectCountByEncryptionType",
-          "documentation": "<p>The total number of objects that are in the bucket, grouped by server-side encryption type. This includes a grouping that reports the total number of objects that aren't encrypted.</p>"
+          "documentation": "<p>The total number of objects that are in the bucket, grouped by server-side encryption type. This includes a grouping that reports the total number of objects that aren't encrypted or use client-side encryption.</p>"
         },
         "publicAccess": {
           "shape": "BucketPublicAccess",
@@ -4415,7 +4415,7 @@
         "filterBy": {
           "shape": "__listOfUsageStatisticsFilter",
           "locationName": "filterBy",
-          "documentation": "<p>The criteria to use to filter the query results.</p>"
+          "documentation": "<p>An array of objects, one for each condition to use to filter the query results. If the array contains more than one object, Amazon Macie uses an AND operator to join the conditions specified by the objects.</p>"
         },
         "maxResults": {
           "shape": "__integer",
@@ -5196,25 +5196,25 @@
         "customerManaged": {
           "shape": "__long",
           "locationName": "customerManaged",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The total number of objects that are encrypted using a customer-managed key. The objects use customer-provided server-side (SSE-C) encryption.</p>"
         },
         "kmsManaged": {
           "shape": "__long",
           "locationName": "kmsManaged",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The total number of objects that are encrypted using an AWS Key Management Service (AWS KMS) customer master key (CMK). The objects use AWS KMS AWS-managed (AWS-KMS) encryption or AWS KMS customer-managed (SSE-KMS) encryption.</p>"
         },
         "s3Managed": {
           "shape": "__long",
           "locationName": "s3Managed",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The total number of objects that are encrypted using an Amazon S3-managed key. The objects use Amazon S3-managed (SSE-S3) encryption.</p>"
         },
         "unencrypted": {
           "shape": "__long",
           "locationName": "unencrypted",
-          "documentation": "<p>Reserved for future use.</p>"
+          "documentation": "<p>The total number of objects that aren't encrypted or use client-side encryption.</p>"
         }
       },
-      "documentation": "<p>The total number of objects that are in the bucket, grouped by server-side encryption type. This includes a grouping that reports the total number of objects that aren't encrypted.</p>"
+      "documentation": "<p>Provides information about the number of objects that are in an S3 bucket and use certain types of server-side encryption, use client-side encryption, or aren't encrypted.</p>"
     },
     "OrderBy": {
       "type": "string",
@@ -6113,7 +6113,7 @@
         "freeTrialStartDate": {
           "shape": "__timestampIso8601",
           "locationName": "freeTrialStartDate",
-          "documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when the free trial period started for the account. This value is null if the account didn't participate in the free trial.</p>"
+          "documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when the free trial started for the account.</p>"
         },
         "usage": {
           "shape": "__listOfUsageByAccount",
@@ -6126,24 +6126,45 @@
     "UsageStatisticsFilter": {
       "type": "structure",
       "members": {
+        "comparator": {
+          "shape": "UsageStatisticsFilterComparator",
+          "locationName": "comparator",
+          "documentation": "<p>The operator to use in the condition. If the value for the key property is accountId, this value must be CONTAINS. If the value for the key property is any other supported field, this value can be EQ, GT, GTE, LT, LTE, or NE.</p>"
+        },
         "key": {
           "shape": "UsageStatisticsFilterKey",
           "locationName": "key",
-          "documentation": "<p>The field to use to filter the results. The only supported value is accountId.</p>"
+          "documentation": "<p>The field to use in the condition.</p>"
         },
         "values": {
           "shape": "__listOf__string",
           "locationName": "values",
-          "documentation": "<p>An array that lists the AWS account ID for each account to include in the results.</p>"
+          "documentation": "<p>An array that lists values to use in the condition, based on the value for the field specified by the key property. If the value for the key property is accountId, this array can specify multiple values. Otherwise, this array can specify only one value.</p> <p>Valid values for each supported field are:</p> <ul><li><p>accountId - The unique identifier for an AWS account.</p></li></ul> <ul><li><p>freeTrialStartDate - The date and time, in UTC and extended ISO 8601 format, when the free trial started for an account.</p></li></ul> <ul><li><p>serviceLimit - A Boolean (true or false) value that indicates whether an account has reached its monthly quota.</p></li></ul> <ul><li><p>total - A string that represents the current, estimated month-to-date cost for an account.</p></li></ul>"
         }
       },
-      "documentation": "<p>Specifies criteria for filtering the results of a query for account quotas and usage data.</p>"
+      "documentation": "<p>Specifies a condition for filtering the results of a query for account quotas and usage data.</p>"
+    },
+    "UsageStatisticsFilterComparator": {
+      "type": "string",
+      "documentation": "<p>The operator to use in a condition that filters the results of a query for account quotas and usage data. Valid values are:</p>",
+      "enum": [
+        "GT",
+        "GTE",
+        "LT",
+        "LTE",
+        "EQ",
+        "NE",
+        "CONTAINS"
+      ]
     },
     "UsageStatisticsFilterKey": {
       "type": "string",
-      "documentation": "<p>The field to use to filter the results of a query for account quotas and usage data:</p>",
+      "documentation": "<p>The field to use in a condition that filters the results of a query for account quotas and usage data. Valid values are:</p>",
       "enum": [
-        "accountId"
+        "accountId",
+        "serviceLimit",
+        "freeTrialStartDate",
+        "total"
       ]
     },
     "UsageStatisticsSortBy": {
@@ -6167,7 +6188,9 @@
       "documentation": "<p>The field to use to sort the results of a query for account quotas and usage data. Valid values are:</p>",
       "enum": [
         "accountId",
-        "total"
+        "total",
+        "serviceLimitValue",
+        "freeTrialStartDate"
       ]
     },
     "UsageTotal": {
