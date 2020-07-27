@@ -118,16 +118,59 @@
         expect(errorHandler.calls.length).to.equal(0);
         return expect(successHandler.calls.length).not.to.equal(0);
       });
-      it('sends error event if region is not set', function() {
-        var call, request;
-        helpers.mockHttpResponse(200, {}, '');
-        service.config.region = null;
-        request = makeRequest(function() {});
-        call = errorHandler.calls[0];
-        expect(errorHandler.calls.length).not.to.equal(0);
-        expect(call['arguments'][0]).to.be.instanceOf(Error);
-        expect(call['arguments'][0].code).to.equal('ConfigError');
-        return expect(call['arguments'][0].message).to.match(/Missing region in config/);
+
+      [null, undefined, ''].forEach(function(region) {
+        it('sends error event if region is ' + region, function() {
+          var call, request;
+          helpers.mockHttpResponse(200, {}, '');
+          service.config.region = region;
+          request = makeRequest(function() {});
+          call = errorHandler.calls[0];
+          expect(errorHandler.calls.length).not.to.equal(0);
+          expect(call['arguments'][0]).to.be.instanceOf(Error);
+          expect(call['arguments'][0].code).to.equal('ConfigError');
+          return expect(call['arguments'][0].message).to.match(/Missing region in config/);
+        });
+      });
+
+      [
+        'has_underscore',
+        '-starts-with-dash',
+        'ends-with-dash-',
+        '-starts-and-ends-with-dash-',
+        '-',
+        'c0nt@in$-$ymb01$',
+        '0123456789012345678901234567890123456789012345678901234567890123', // 64 characters
+      ].forEach(function(region) {
+        it('sends error event if region is "' + region + '"', function() {
+          var call, request;
+          helpers.mockHttpResponse(200, {}, '');
+          service.config.region = region;
+          request = makeRequest(function() {});
+          call = errorHandler.calls[0];
+          expect(errorHandler.calls.length).not.to.equal(0);
+          expect(call['arguments'][0]).to.be.instanceOf(Error);
+          expect(call['arguments'][0].code).to.equal('ConfigError');
+          return expect(call['arguments'][0].message).to.match(/Invalid region in config/);
+        });
+      });
+
+      [
+        'a',
+        'ab',
+        'abc',
+        'contains-dashes-in-the-middle',
+        '123StartsWithNumbers',
+        'EndsWithNumbers123',
+        '123StartsAndEndsWithNumbers000',
+        '012345678901234567890123456789012345678901234567890123456789012', // 63 characters
+      ].forEach(function(region) {
+        it('successful region validation if region is "' + region + '"', function() {
+          helpers.mockHttpResponse(200, {}, '');
+          service.config.region = region;
+          makeRequest(function() {});
+          return expect(errorHandler.calls.length).to.equal(0);
+        });
       });
       return it('ignores region validation if service has global endpoint', function() {
         helpers.mockHttpResponse(200, {}, '');

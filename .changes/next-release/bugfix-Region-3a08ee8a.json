@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Region",
+  "description": "Add region validation using DNS Host label regex"
+}
