@@ -29,6 +29,14 @@ declare class DMS extends Service {
    */
   applyPendingMaintenanceAction(callback?: (err: AWSError, data: DMS.Types.ApplyPendingMaintenanceActionResponse) => void): Request<DMS.Types.ApplyPendingMaintenanceActionResponse, AWSError>;
   /**
+   * Cancels a single premigration assessment run. This operation prevents any individual assessments from running if they haven't started running. It also attempts to cancel any individual assessments that are currently running.
+   */
+  cancelReplicationTaskAssessmentRun(params: DMS.Types.CancelReplicationTaskAssessmentRunMessage, callback?: (err: AWSError, data: DMS.Types.CancelReplicationTaskAssessmentRunResponse) => void): Request<DMS.Types.CancelReplicationTaskAssessmentRunResponse, AWSError>;
+  /**
+   * Cancels a single premigration assessment run. This operation prevents any individual assessments from running if they haven't started running. It also attempts to cancel any individual assessments that are currently running.
+   */
+  cancelReplicationTaskAssessmentRun(callback?: (err: AWSError, data: DMS.Types.CancelReplicationTaskAssessmentRunResponse) => void): Request<DMS.Types.CancelReplicationTaskAssessmentRunResponse, AWSError>;
+  /**
    * Creates an endpoint using the provided settings.
    */
   createEndpoint(params: DMS.Types.CreateEndpointMessage, callback?: (err: AWSError, data: DMS.Types.CreateEndpointResponse) => void): Request<DMS.Types.CreateEndpointResponse, AWSError>;
@@ -125,6 +133,14 @@ declare class DMS extends Service {
    */
   deleteReplicationTask(callback?: (err: AWSError, data: DMS.Types.DeleteReplicationTaskResponse) => void): Request<DMS.Types.DeleteReplicationTaskResponse, AWSError>;
   /**
+   * Deletes the record of a single premigration assessment run. This operation removes all metadata that AWS DMS maintains about this assessment run. However, the operation leaves untouched all information about this assessment run that is stored in your Amazon S3 bucket.
+   */
+  deleteReplicationTaskAssessmentRun(params: DMS.Types.DeleteReplicationTaskAssessmentRunMessage, callback?: (err: AWSError, data: DMS.Types.DeleteReplicationTaskAssessmentRunResponse) => void): Request<DMS.Types.DeleteReplicationTaskAssessmentRunResponse, AWSError>;
+  /**
+   * Deletes the record of a single premigration assessment run. This operation removes all metadata that AWS DMS maintains about this assessment run. However, the operation leaves untouched all information about this assessment run that is stored in your Amazon S3 bucket.
+   */
+  deleteReplicationTaskAssessmentRun(callback?: (err: AWSError, data: DMS.Types.DeleteReplicationTaskAssessmentRunResponse) => void): Request<DMS.Types.DeleteReplicationTaskAssessmentRunResponse, AWSError>;
+  /**
    * Lists all of the AWS DMS attributes for a customer account. These attributes include AWS DMS quotas for the account and a unique account identifier in a particular DMS region. DMS quotas include a list of resource quotas supported by the account, such as the number of replication instances allowed. The description for each resource quota, includes the quota name, current usage toward that quota, and the quota's maximum value. DMS uses the unique account identifier to name each artifact used by DMS in the given region. This command does not take any parameters.
    */
   describeAccountAttributes(params: DMS.Types.DescribeAccountAttributesMessage, callback?: (err: AWSError, data: DMS.Types.DescribeAccountAttributesResponse) => void): Request<DMS.Types.DescribeAccountAttributesResponse, AWSError>;
@@ -132,6 +148,14 @@ declare class DMS extends Service {
    * Lists all of the AWS DMS attributes for a customer account. These attributes include AWS DMS quotas for the account and a unique account identifier in a particular DMS region. DMS quotas include a list of resource quotas supported by the account, such as the number of replication instances allowed. The description for each resource quota, includes the quota name, current usage toward that quota, and the quota's maximum value. DMS uses the unique account identifier to name each artifact used by DMS in the given region. This command does not take any parameters.
    */
   describeAccountAttributes(callback?: (err: AWSError, data: DMS.Types.DescribeAccountAttributesResponse) => void): Request<DMS.Types.DescribeAccountAttributesResponse, AWSError>;
+  /**
+   * Provides a list of individual assessments that you can specify for a new premigration assessment run, given one or more parameters. If you specify an existing migration task, this operation provides the default individual assessments you can specify for that task. Otherwise, the specified parameters model elements of a possible migration task on which to base a premigration assessment run. To use these migration task modeling parameters, you must specify an existing replication instance, a source database engine, a target database engine, and a migration type. This combination of parameters potentially limits the default individual assessments available for an assessment run created for a corresponding migration task. If you specify no parameters, this operation provides a list of all possible individual assessments that you can specify for an assessment run. If you specify any one of the task modeling parameters, you must specify all of them or the operation cannot provide a list of individual assessments. The only parameter that you can specify alone is for an existing migration task. The specified task definition then determines the default list of individual assessments that you can specify in an assessment run for the task.
+   */
+  describeApplicableIndividualAssessments(params: DMS.Types.DescribeApplicableIndividualAssessmentsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeApplicableIndividualAssessmentsResponse) => void): Request<DMS.Types.DescribeApplicableIndividualAssessmentsResponse, AWSError>;
+  /**
+   * Provides a list of individual assessments that you can specify for a new premigration assessment run, given one or more parameters. If you specify an existing migration task, this operation provides the default individual assessments you can specify for that task. Otherwise, the specified parameters model elements of a possible migration task on which to base a premigration assessment run. To use these migration task modeling parameters, you must specify an existing replication instance, a source database engine, a target database engine, and a migration type. This combination of parameters potentially limits the default individual assessments available for an assessment run created for a corresponding migration task. If you specify no parameters, this operation provides a list of all possible individual assessments that you can specify for an assessment run. If you specify any one of the task modeling parameters, you must specify all of them or the operation cannot provide a list of individual assessments. The only parameter that you can specify alone is for an existing migration task. The specified task definition then determines the default list of individual assessments that you can specify in an assessment run for the task.
+   */
+  describeApplicableIndividualAssessments(callback?: (err: AWSError, data: DMS.Types.DescribeApplicableIndividualAssessmentsResponse) => void): Request<DMS.Types.DescribeApplicableIndividualAssessmentsResponse, AWSError>;
   /**
    * Provides a description of the certificate.
    */
@@ -244,6 +268,22 @@ declare class DMS extends Service {
    * Returns the task assessment results from Amazon S3. This action always returns the latest results.
    */
   describeReplicationTaskAssessmentResults(callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTaskAssessmentResultsResponse) => void): Request<DMS.Types.DescribeReplicationTaskAssessmentResultsResponse, AWSError>;
+  /**
+   * Returns a paginated list of premigration assessment runs based on filter settings. These filter settings can specify a combination of premigration assessment runs, migration tasks, replication instances, and assessment run status values.  This operation doesn't return information about individual assessments. For this information, see the DescribeReplicationTaskIndividualAssessments operation.  
+   */
+  describeReplicationTaskAssessmentRuns(params: DMS.Types.DescribeReplicationTaskAssessmentRunsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTaskAssessmentRunsResponse) => void): Request<DMS.Types.DescribeReplicationTaskAssessmentRunsResponse, AWSError>;
+  /**
+   * Returns a paginated list of premigration assessment runs based on filter settings. These filter settings can specify a combination of premigration assessment runs, migration tasks, replication instances, and assessment run status values.  This operation doesn't return information about individual assessments. For this information, see the DescribeReplicationTaskIndividualAssessments operation.  
+   */
+  describeReplicationTaskAssessmentRuns(callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTaskAssessmentRunsResponse) => void): Request<DMS.Types.DescribeReplicationTaskAssessmentRunsResponse, AWSError>;
+  /**
+   * Returns a paginated list of individual assessments based on filter settings. These filter settings can specify a combination of premigration assessment runs, migration tasks, and assessment status values.
+   */
+  describeReplicationTaskIndividualAssessments(params: DMS.Types.DescribeReplicationTaskIndividualAssessmentsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTaskIndividualAssessmentsResponse) => void): Request<DMS.Types.DescribeReplicationTaskIndividualAssessmentsResponse, AWSError>;
+  /**
+   * Returns a paginated list of individual assessments based on filter settings. These filter settings can specify a combination of premigration assessment runs, migration tasks, and assessment status values.
+   */
+  describeReplicationTaskIndividualAssessments(callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTaskIndividualAssessmentsResponse) => void): Request<DMS.Types.DescribeReplicationTaskIndividualAssessmentsResponse, AWSError>;
   /**
    * Returns information about replication tasks for your account in the current region.
    */
@@ -373,11 +413,19 @@ declare class DMS extends Service {
    */
   startReplicationTaskAssessment(callback?: (err: AWSError, data: DMS.Types.StartReplicationTaskAssessmentResponse) => void): Request<DMS.Types.StartReplicationTaskAssessmentResponse, AWSError>;
   /**
-   * Stops the replication task. 
+   * Starts a new premigration assessment run for one or more individual assessments of a migration task. The assessments that you can specify depend on the source and target database engine and the migration type defined for the given task. To run this operation, your migration task must already be created. After you run this operation, you can review the status of each individual assessment. You can also run the migration task manually after the assessment run and its individual assessments complete.
+   */
+  startReplicationTaskAssessmentRun(params: DMS.Types.StartReplicationTaskAssessmentRunMessage, callback?: (err: AWSError, data: DMS.Types.StartReplicationTaskAssessmentRunResponse) => void): Request<DMS.Types.StartReplicationTaskAssessmentRunResponse, AWSError>;
+  /**
+   * Starts a new premigration assessment run for one or more individual assessments of a migration task. The assessments that you can specify depend on the source and target database engine and the migration type defined for the given task. To run this operation, your migration task must already be created. After you run this operation, you can review the status of each individual assessment. You can also run the migration task manually after the assessment run and its individual assessments complete.
+   */
+  startReplicationTaskAssessmentRun(callback?: (err: AWSError, data: DMS.Types.StartReplicationTaskAssessmentRunResponse) => void): Request<DMS.Types.StartReplicationTaskAssessmentRunResponse, AWSError>;
+  /**
+   * Stops the replication task.
    */
   stopReplicationTask(params: DMS.Types.StopReplicationTaskMessage, callback?: (err: AWSError, data: DMS.Types.StopReplicationTaskResponse) => void): Request<DMS.Types.StopReplicationTaskResponse, AWSError>;
   /**
-   * Stops the replication task. 
+   * Stops the replication task.
    */
   stopReplicationTask(callback?: (err: AWSError, data: DMS.Types.StopReplicationTaskResponse) => void): Request<DMS.Types.StopReplicationTaskResponse, AWSError>;
   /**
@@ -512,6 +560,18 @@ declare namespace DMS {
   export type AvailabilityZonesList = String[];
   export type Boolean = boolean;
   export type BooleanOptional = boolean;
+  export interface CancelReplicationTaskAssessmentRunMessage {
+    /**
+     * Amazon Resource Name (ARN) of the premigration assessment run to be canceled.
+     */
+    ReplicationTaskAssessmentRunArn: String;
+  }
+  export interface CancelReplicationTaskAssessmentRunResponse {
+    /**
+     * The ReplicationTaskAssessmentRun object for the canceled assessment run.
+     */
+    ReplicationTaskAssessmentRun?: ReplicationTaskAssessmentRun;
+  }
   export interface Certificate {
     /**
      * A customer-assigned name for the certificate. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.
@@ -678,6 +738,30 @@ declare namespace DMS {
      */
     NeptuneSettings?: NeptuneSettings;
     RedshiftSettings?: RedshiftSettings;
+    /**
+     * Settings in JSON format for the source and target PostgreSQL endpoint. For information about other available settings, see Extra connection attributes when using PostgreSQL as a source for AWS DMS and  Extra connection attributes when using PostgreSQL as a target for AWS DMS in the AWS Database Migration Service User Guide. 
+     */
+    PostgreSQLSettings?: PostgreSQLSettings;
+    /**
+     * Settings in JSON format for the source and target MySQL endpoint. For information about other available settings, see Extra connection attributes when using MySQL as a source for AWS DMS and Extra connection attributes when using a MySQL-compatible database as a target for AWS DMS in the AWS Database Migration Service User Guide. 
+     */
+    MySQLSettings?: MySQLSettings;
+    /**
+     * Settings in JSON format for the source and target Oracle endpoint. For information about other available settings, see Extra connection attributes when using Oracle as a source for AWS DMS and  Extra connection attributes when using Oracle as a target for AWS DMS in the AWS Database Migration Service User Guide. 
+     */
+    OracleSettings?: OracleSettings;
+    /**
+     * Settings in JSON format for the source and target SAP ASE endpoint. For information about other available settings, see Extra connection attributes when using SAP ASE as a source for AWS DMS and Extra connection attributes when using SAP ASE as a target for AWS DMS in the AWS Database Migration Service User Guide. 
+     */
+    SybaseSettings?: SybaseSettings;
+    /**
+     * Settings in JSON format for the source and target Microsoft SQL Server endpoint. For information about other available settings, see Extra connection attributes when using SQL Server as a source for AWS DMS and  Extra connection attributes when using SQL Server as a target for AWS DMS in the AWS Database Migration Service User Guide. 
+     */
+    MicrosoftSQLServerSettings?: MicrosoftSQLServerSettings;
+    /**
+     * Settings in JSON format for the source IBM Db2 LUW endpoint. For information about other available settings, see Extra connection attributes when using Db2 LUW as a source for AWS DMS in the AWS Database Migration Service User Guide. 
+     */
+    IBMDb2Settings?: IBMDb2Settings;
   }
   export interface CreateEndpointResponse {
     /**
@@ -938,6 +1022,18 @@ declare namespace DMS {
   }
   export interface DeleteReplicationSubnetGroupResponse {
   }
+  export interface DeleteReplicationTaskAssessmentRunMessage {
+    /**
+     * Amazon Resource Name (ARN) of the premigration assessment run to be deleted.
+     */
+    ReplicationTaskAssessmentRunArn: String;
+  }
+  export interface DeleteReplicationTaskAssessmentRunResponse {
+    /**
+     * The ReplicationTaskAssessmentRun object for the deleted assessment run.
+     */
+    ReplicationTaskAssessmentRun?: ReplicationTaskAssessmentRun;
+  }
   export interface DeleteReplicationTaskMessage {
     /**
      * The Amazon Resource Name (ARN) of the replication task to be deleted.
@@ -962,9 +1058,49 @@ declare namespace DMS {
      */
     UniqueAccountIdentifier?: String;
   }
+  export interface DescribeApplicableIndividualAssessmentsMessage {
+    /**
+     * Amazon Resource Name (ARN) of a migration task on which you want to base the default list of individual assessments.
+     */
+    ReplicationTaskArn?: String;
+    /**
+     * ARN of a replication instance on which you want to base the default list of individual assessments.
+     */
+    ReplicationInstanceArn?: String;
+    /**
+     * Name of a database engine that the specified replication instance supports as a source.
+     */
+    SourceEngineName?: String;
+    /**
+     * Name of a database engine that the specified replication instance supports as a target.
+     */
+    TargetEngineName?: String;
+    /**
+     * Name of the migration type that each provided individual assessment must support.
+     */
+    MigrationType?: MigrationTypeValue;
+    /**
+     * Maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * Optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+     */
+    Marker?: String;
+  }
+  export interface DescribeApplicableIndividualAssessmentsResponse {
+    /**
+     * List of names for the individual assessments supported by the premigration assessment run that you start based on the specified request parameters. For more information on the available individual assessments, including compatibility with different migration task configurations, see Working with premigration assessment runs in the AWS Database Migration Service User Guide. 
+     */
+    IndividualAssessmentNames?: IndividualAssessmentNameList;
+    /**
+     * Pagination token returned for you to pass to a subsequent request. If you pass this token as the Marker value in a subsequent request, the response includes only records beyond the marker, up to the value specified in the request by MaxRecords.
+     */
+    Marker?: String;
+  }
   export interface DescribeCertificatesMessage {
     /**
-     * Filters applied to the certificate described in the form of key-value pairs.
+     * Filters applied to the certificates described in the form of key-value pairs.
      */
     Filters?: FilterList;
     /**
@@ -1012,7 +1148,7 @@ declare namespace DMS {
   }
   export interface DescribeEndpointTypesMessage {
     /**
-     * Filters applied to the describe action. Valid filter names: engine-name | endpoint-type
+     * Filters applied to the endpoint types. Valid filter names: engine-name | endpoint-type
      */
     Filters?: FilterList;
     /**
@@ -1036,7 +1172,7 @@ declare namespace DMS {
   }
   export interface DescribeEndpointsMessage {
     /**
-     * Filters applied to the describe action. Valid filter names: endpoint-arn | endpoint-type | endpoint-id | engine-name
+     * Filters applied to the endpoints. Valid filter names: endpoint-arn | endpoint-type | endpoint-id | engine-name
      */
     Filters?: FilterList;
     /**
@@ -1064,7 +1200,7 @@ declare namespace DMS {
      */
     SourceType?: String;
     /**
-     * Filters applied to the action.
+     * Filters applied to the event categories.
      */
     Filters?: FilterList;
   }
@@ -1080,7 +1216,7 @@ declare namespace DMS {
      */
     SubscriptionName?: String;
     /**
-     * Filters applied to the action.
+     * Filters applied to event subscriptions.
      */
     Filters?: FilterList;
     /**
@@ -1128,7 +1264,7 @@ declare namespace DMS {
      */
     EventCategories?: EventCategoriesList;
     /**
-     * Filters applied to the action.
+     * Filters applied to events.
      */
     Filters?: FilterList;
     /**
@@ -1240,7 +1376,7 @@ declare namespace DMS {
   }
   export interface DescribeReplicationInstancesMessage {
     /**
-     * Filters applied to the describe action. Valid filter names: replication-instance-arn | replication-instance-id | replication-instance-class | engine-version
+     * Filters applied to replication instances. Valid filter names: replication-instance-arn | replication-instance-id | replication-instance-class | engine-version
      */
     Filters?: FilterList;
     /**
@@ -1264,7 +1400,7 @@ declare namespace DMS {
   }
   export interface DescribeReplicationSubnetGroupsMessage {
     /**
-     * Filters applied to the describe action. Valid filter names: replication-subnet-group-id
+     * Filters applied to replication subnet groups. Valid filter names: replication-subnet-group-id
      */
     Filters?: FilterList;
     /**
@@ -1314,9 +1450,57 @@ declare namespace DMS {
      */
     ReplicationTaskAssessmentResults?: ReplicationTaskAssessmentResultList;
   }
+  export interface DescribeReplicationTaskAssessmentRunsMessage {
+    /**
+     * Filters applied to the premigration assessment runs described in the form of key-value pairs. Valid filter names: replication-task-assessment-run-arn, replication-task-arn, replication-instance-arn, status 
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+     */
+    Marker?: String;
+  }
+  export interface DescribeReplicationTaskAssessmentRunsResponse {
+    /**
+     * A pagination token returned for you to pass to a subsequent request. If you pass this token as the Marker value in a subsequent request, the response includes only records beyond the marker, up to the value specified in the request by MaxRecords.
+     */
+    Marker?: String;
+    /**
+     * One or more premigration assessment runs as specified by Filters.
+     */
+    ReplicationTaskAssessmentRuns?: ReplicationTaskAssessmentRunList;
+  }
+  export interface DescribeReplicationTaskIndividualAssessmentsMessage {
+    /**
+     * Filters applied to the individual assessments described in the form of key-value pairs. Valid filter names: replication-task-assessment-run-arn, replication-task-arn, status 
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+     */
+    Marker?: String;
+  }
+  export interface DescribeReplicationTaskIndividualAssessmentsResponse {
+    /**
+     * A pagination token returned for you to pass to a subsequent request. If you pass this token as the Marker value in a subsequent request, the response includes only records beyond the marker, up to the value specified in the request by MaxRecords.
+     */
+    Marker?: String;
+    /**
+     * One or more individual assessments as specified by Filters.
+     */
+    ReplicationTaskIndividualAssessments?: ReplicationTaskIndividualAssessmentList;
+  }
   export interface DescribeReplicationTasksMessage {
     /**
-     * Filters applied to the describe action. Valid filter names: replication-task-arn | replication-task-id | migration-type | endpoint-arn | replication-instance-arn
+     * Filters applied to replication tasks. Valid filter names: replication-task-arn | replication-task-id | migration-type | endpoint-arn | replication-instance-arn
      */
     Filters?: FilterList;
     /**
@@ -1380,7 +1564,7 @@ declare namespace DMS {
      */
     Marker?: String;
     /**
-     * Filters applied to the describe table statistics action. Valid filter names: schema-name | table-name | table-state A combination of filters creates an AND condition where each record matches all specified filters.
+     * Filters applied to table statistics. Valid filter names: schema-name | table-name | table-state A combination of filters creates an AND condition where each record matches all specified filters.
      */
     Filters?: FilterList;
   }
@@ -1505,7 +1689,7 @@ declare namespace DMS {
      */
     ExternalId?: String;
     /**
-     * The settings for the target DynamoDB database. For more information, see the DynamoDBSettings structure.
+     * The settings for the DynamoDB target endpoint. For more information, see the DynamoDBSettings structure.
      */
     DynamoDbSettings?: DynamoDbSettings;
     /**
@@ -1540,6 +1724,30 @@ declare namespace DMS {
      * Settings for the Amazon Redshift endpoint.
      */
     RedshiftSettings?: RedshiftSettings;
+    /**
+     * The settings for the PostgreSQL source and target endpoint. For more information, see the PostgreSQLSettings structure.
+     */
+    PostgreSQLSettings?: PostgreSQLSettings;
+    /**
+     * The settings for the MySQL source and target endpoint. For more information, see the MySQLSettings structure.
+     */
+    MySQLSettings?: MySQLSettings;
+    /**
+     * The settings for the Oracle source and target endpoint. For more information, see the OracleSettings structure.
+     */
+    OracleSettings?: OracleSettings;
+    /**
+     * The settings for the SAP ASE source and target endpoint. For more information, see the SybaseSettings structure.
+     */
+    SybaseSettings?: SybaseSettings;
+    /**
+     * The settings for the Microsoft SQL Server source and target endpoint. For more information, see the MicrosoftSQLServerSettings structure.
+     */
+    MicrosoftSQLServerSettings?: MicrosoftSQLServerSettings;
+    /**
+     * The settings for the IBM Db2 LUW source endpoint. For more information, see the IBMDb2Settings structure. 
+     */
+    IBMDb2Settings?: IBMDb2Settings;
   }
   export type EndpointList = Endpoint[];
   export interface Event {
@@ -1616,18 +1824,41 @@ declare namespace DMS {
     Enabled?: Boolean;
   }
   export type EventSubscriptionsList = EventSubscription[];
+  export type ExcludeTestList = String[];
   export interface Filter {
     /**
-     * The name of the filter.
+     * The name of the filter as specified for a Describe* or similar operation.
      */
     Name: String;
     /**
-     * The filter value.
+     * The filter value, which can specify one or more values used to narrow the returned results.
      */
     Values: FilterValueList;
   }
   export type FilterList = Filter[];
   export type FilterValueList = String[];
+  export interface IBMDb2Settings {
+    /**
+     * Database name for the endpoint.
+     */
+    DatabaseName?: String;
+    /**
+     * Endpoint connection password.
+     */
+    Password?: SecretString;
+    /**
+     * Endpoint TCP port.
+     */
+    Port?: IntegerOptional;
+    /**
+     * Fully qualified domain name of the endpoint.
+     */
+    ServerName?: String;
+    /**
+     * Endpoint connection user name.
+     */
+    Username?: String;
+  }
   export interface ImportCertificateMessage {
     /**
      * A customer-assigned name for the certificate. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.
@@ -1652,6 +1883,8 @@ declare namespace DMS {
      */
     Certificate?: Certificate;
   }
+  export type IncludeTestList = String[];
+  export type IndividualAssessmentNameList = String[];
   export type Integer = number;
   export type IntegerOptional = number;
   export interface KafkaSettings {
@@ -1663,6 +1896,30 @@ declare namespace DMS {
      * The topic to which you migrate the data. If you don't specify a topic, AWS DMS specifies "kafka-default-topic" as the migration topic.
      */
     Topic?: String;
+    /**
+     * The output format for the records created on the endpoint. The message format is JSON (default) or JSON_UNFORMATTED (a single line with no tab).
+     */
+    MessageFormat?: MessageFormatValue;
+    /**
+     * Provides detailed transaction information from the source database. This information includes a commit timestamp, a log position, and values for transaction_id, previous transaction_id, and transaction_record_id (the record offset within a transaction). The default is False.
+     */
+    IncludeTransactionDetails?: BooleanOptional;
+    /**
+     * Shows the partition value within the Kafka message output, unless the partition type is schema-table-type. The default is False.
+     */
+    IncludePartitionValue?: BooleanOptional;
+    /**
+     * Prefixes schema and table names to partition values, when the partition type is primary-key-type. Doing this increases data distribution among Kafka partitions. For example, suppose that a SysBench schema has thousands of tables and each table has only limited range for a primary key. In this case, the same primary key is sent from thousands of tables to the same partition, which causes throttling. The default is False.
+     */
+    PartitionIncludeSchemaTable?: BooleanOptional;
+    /**
+     * Includes any data definition language (DDL) operations that change the table in the control data, such as rename-table, drop-table, add-column, drop-column, and rename-column. The default is False.
+     */
+    IncludeTableAlterOperations?: BooleanOptional;
+    /**
+     * Shows detailed control information for table definition, column definition, and table and column changes in the Kafka message output. The default is False.
+     */
+    IncludeControlDetails?: BooleanOptional;
   }
   export type KeyList = String[];
   export interface KinesisSettings {
@@ -1713,6 +1970,28 @@ declare namespace DMS {
   }
   export type Long = number;
   export type MessageFormatValue = "json"|"json-unformatted"|string;
+  export interface MicrosoftSQLServerSettings {
+    /**
+     * Endpoint TCP port.
+     */
+    Port?: IntegerOptional;
+    /**
+     * Database name for the endpoint.
+     */
+    DatabaseName?: String;
+    /**
+     * Endpoint connection password.
+     */
+    Password?: SecretString;
+    /**
+     * Fully qualified domain name of the endpoint.
+     */
+    ServerName?: String;
+    /**
+     * Endpoint connection user name.
+     */
+    Username?: String;
+  }
   export type MigrationTypeValue = "full-load"|"cdc"|"full-load-and-cdc"|string;
   export interface ModifyEndpointMessage {
     /**
@@ -1804,6 +2083,30 @@ declare namespace DMS {
      */
     NeptuneSettings?: NeptuneSettings;
     RedshiftSettings?: RedshiftSettings;
+    /**
+     * Settings in JSON format for the source and target PostgreSQL endpoint. For information about other available settings, see Extra connection attributes when using PostgreSQL as a source for AWS DMS and  Extra connection attributes when using PostgreSQL as a target for AWS DMS in the AWS Database Migration Service User Guide. 
+     */
+    PostgreSQLSettings?: PostgreSQLSettings;
+    /**
+     * Settings in JSON format for the source and target MySQL endpoint. For information about other available settings, see Extra connection attributes when using MySQL as a source for AWS DMS and Extra connection attributes when using a MySQL-compatible database as a target for AWS DMS in the AWS Database Migration Service User Guide. 
+     */
+    MySQLSettings?: MySQLSettings;
+    /**
+     * Settings in JSON format for the source and target Oracle endpoint. For information about other available settings, see Extra connection attributes when using Oracle as a source for AWS DMS and  Extra connection attributes when using Oracle as a target for AWS DMS in the AWS Database Migration Service User Guide. 
+     */
+    OracleSettings?: OracleSettings;
+    /**
+     * Settings in JSON format for the source and target SAP ASE endpoint. For information about other available settings, see Extra connection attributes when using SAP ASE as a source for AWS DMS and Extra connection attributes when using SAP ASE as a target for AWS DMS in the AWS Database Migration Service User Guide. 
+     */
+    SybaseSettings?: SybaseSettings;
+    /**
+     * Settings in JSON format for the source and target Microsoft SQL Server endpoint. For information about other available settings, see Extra connection attributes when using SQL Server as a source for AWS DMS and  Extra connection attributes when using SQL Server as a target for AWS DMS in the AWS Database Migration Service User Guide. 
+     */
+    MicrosoftSQLServerSettings?: MicrosoftSQLServerSettings;
+    /**
+     * Settings in JSON format for the source IBM Db2 LUW endpoint. For information about other available settings, see Extra connection attributes when using Db2 LUW as a source for AWS DMS in the AWS Database Migration Service User Guide. 
+     */
+    IBMDb2Settings?: IBMDb2Settings;
   }
   export interface ModifyEndpointResponse {
     /**
@@ -2005,6 +2308,28 @@ declare namespace DMS {
      */
     KmsKeyId?: String;
   }
+  export interface MySQLSettings {
+    /**
+     * Database name for the endpoint.
+     */
+    DatabaseName?: String;
+    /**
+     * Endpoint connection password.
+     */
+    Password?: SecretString;
+    /**
+     * Endpoint TCP port.
+     */
+    Port?: IntegerOptional;
+    /**
+     * Fully qualified domain name of the endpoint.
+     */
+    ServerName?: String;
+    /**
+     * Endpoint connection user name.
+     */
+    Username?: String;
+  }
   export interface NeptuneSettings {
     /**
      * The Amazon Resource Name (ARN) of the service role that you created for the Neptune target endpoint. For more information, see Creating an IAM Service Role for Accessing Amazon Neptune as a Target in the AWS Database Migration Service User Guide.  
@@ -2036,6 +2361,48 @@ declare namespace DMS {
     IamAuthEnabled?: BooleanOptional;
   }
   export type NestingLevelValue = "none"|"one"|string;
+  export interface OracleSettings {
+    /**
+     * For an Oracle source endpoint, your Oracle Automatic Storage Management (ASM) password. You can set this value from the  asm_user_password  value. You set this value as part of the comma-separated value that you set to the Password request parameter when you create the endpoint to access transaction logs using Binary Reader. For more information, see Configuration for change data capture (CDC) on an Oracle source database.
+     */
+    AsmPassword?: SecretString;
+    /**
+     * For an Oracle source endpoint, your ASM server address. You can set this value from the asm_server value. You set asm_server as part of the extra connection attribute string to access an Oracle server with Binary Reader that uses ASM. For more information, see Configuration for change data capture (CDC) on an Oracle source database.
+     */
+    AsmServer?: String;
+    /**
+     * For an Oracle source endpoint, your ASM user name. You can set this value from the asm_user value. You set asm_user as part of the extra connection attribute string to access an Oracle server with Binary Reader that uses ASM. For more information, see Configuration for change data capture (CDC) on an Oracle source database.
+     */
+    AsmUser?: String;
+    /**
+     * Database name for the endpoint.
+     */
+    DatabaseName?: String;
+    /**
+     * Endpoint connection password.
+     */
+    Password?: SecretString;
+    /**
+     * Endpoint TCP port.
+     */
+    Port?: IntegerOptional;
+    /**
+     * For an Oracle source endpoint, the transparent data encryption (TDE) password required by AWM DMS to access Oracle redo logs encrypted by TDE using Binary Reader. It is also the  TDE_Password  part of the comma-separated value you set to the Password request parameter when you create the endpoint. The SecurityDbEncryptian setting is related to this SecurityDbEncryptionName setting. For more information, see  Supported encryption methods for using Oracle as a source for AWS DMS in the AWS Database Migration Service User Guide. 
+     */
+    SecurityDbEncryption?: SecretString;
+    /**
+     * For an Oracle source endpoint, the name of a key used for the transparent data encryption (TDE) of the columns and tablespaces in an Oracle source database that is encrypted using TDE. The key value is the value of the SecurityDbEncryption setting. For more information on setting the key name value of SecurityDbEncryptionName, see the information and example for setting the securityDbEncryptionName extra connection attribute in  Supported encryption methods for using Oracle as a source for AWS DMS in the AWS Database Migration Service User Guide.
+     */
+    SecurityDbEncryptionName?: String;
+    /**
+     * Fully qualified domain name of the endpoint.
+     */
+    ServerName?: String;
+    /**
+     * Endpoint connection user name.
+     */
+    Username?: String;
+  }
   export interface OrderableReplicationInstance {
     /**
      * The version of the replication engine.
@@ -2104,6 +2471,28 @@ declare namespace DMS {
   }
   export type PendingMaintenanceActionDetails = PendingMaintenanceAction[];
   export type PendingMaintenanceActions = ResourcePendingMaintenanceActions[];
+  export interface PostgreSQLSettings {
+    /**
+     * Database name for the endpoint.
+     */
+    DatabaseName?: String;
+    /**
+     * Endpoint connection password.
+     */
+    Password?: SecretString;
+    /**
+     * Endpoint TCP port.
+     */
+    Port?: IntegerOptional;
+    /**
+     * Fully qualified domain name of the endpoint.
+     */
+    ServerName?: String;
+    /**
+     * Endpoint connection user name.
+     */
+    Username?: String;
+  }
   export interface RebootReplicationInstanceMessage {
     /**
      * The Amazon Resource Name (ARN) of the replication instance.
@@ -2554,6 +2943,90 @@ declare namespace DMS {
     S3ObjectUrl?: String;
   }
   export type ReplicationTaskAssessmentResultList = ReplicationTaskAssessmentResult[];
+  export interface ReplicationTaskAssessmentRun {
+    /**
+     * Amazon Resource Name (ARN) of this assessment run.
+     */
+    ReplicationTaskAssessmentRunArn?: String;
+    /**
+     * ARN of the migration task associated with this premigration assessment run.
+     */
+    ReplicationTaskArn?: String;
+    /**
+     * Assessment run status.  This status can have one of the following values:    "cancelling" – The assessment run was canceled by the CancelReplicationTaskAssessmentRun operation.    "deleting" – The assessment run was deleted by the DeleteReplicationTaskAssessmentRun operation.    "failed" – At least one individual assessment completed with a failed status.    "error-provisioning" – An internal error occurred while resources were provisioned (during provisioning status).    "error-executing" – An internal error occurred while individual assessments ran (during running status).    "invalid state" – The assessment run is in an unknown state.    "passed" – All individual assessments have completed, and none has a failed status.    "provisioning" – Resources required to run individual assessments are being provisioned.    "running" – Individual assessments are being run.    "starting" – The assessment run is starting, but resources are not yet being provisioned for individual assessments.  
+     */
+    Status?: String;
+    /**
+     * Date on which the assessment run was created using the StartReplicationTaskAssessmentRun operation.
+     */
+    ReplicationTaskAssessmentRunCreationDate?: TStamp;
+    /**
+     * Indication of the completion progress for the individual assessments specified to run.
+     */
+    AssessmentProgress?: ReplicationTaskAssessmentRunProgress;
+    /**
+     * Last message generated by an individual assessment failure.
+     */
+    LastFailureMessage?: String;
+    /**
+     * ARN of the service role used to start the assessment run using the StartReplicationTaskAssessmentRun operation.
+     */
+    ServiceAccessRoleArn?: String;
+    /**
+     * Amazon S3 bucket where AWS DMS stores the results of this assessment run.
+     */
+    ResultLocationBucket?: String;
+    /**
+     * Folder in an Amazon S3 bucket where AWS DMS stores the results of this assessment run.
+     */
+    ResultLocationFolder?: String;
+    /**
+     * Encryption mode used to encrypt the assessment run results.
+     */
+    ResultEncryptionMode?: String;
+    /**
+     * ARN of the AWS KMS encryption key used to encrypt the assessment run results.
+     */
+    ResultKmsKeyArn?: String;
+    /**
+     * Unique name of the assessment run.
+     */
+    AssessmentRunName?: String;
+  }
+  export type ReplicationTaskAssessmentRunList = ReplicationTaskAssessmentRun[];
+  export interface ReplicationTaskAssessmentRunProgress {
+    /**
+     * The number of individual assessments that are specified to run.
+     */
+    IndividualAssessmentCount?: Integer;
+    /**
+     * The number of individual assessments that have completed, successfully or not.
+     */
+    IndividualAssessmentCompletedCount?: Integer;
+  }
+  export interface ReplicationTaskIndividualAssessment {
+    /**
+     * Amazon Resource Name (ARN) of this individual assessment.
+     */
+    ReplicationTaskIndividualAssessmentArn?: String;
+    /**
+     * ARN of the premigration assessment run that is created to run this individual assessment.
+     */
+    ReplicationTaskAssessmentRunArn?: String;
+    /**
+     * Name of this individual assessment.
+     */
+    IndividualAssessmentName?: String;
+    /**
+     * Individual assessment status. This status can have one of the following values:    "cancelled"     "error"     "failed"     "passed"     "pending"     "running"   
+     */
+    Status?: String;
+    /**
+     * Date when this individual assessment was started as part of running the StartReplicationTaskAssessmentRun operation.
+     */
+    ReplicationTaskIndividualAssessmentStartDate?: TStamp;
+  }
+  export type ReplicationTaskIndividualAssessmentList = ReplicationTaskIndividualAssessment[];
   export type ReplicationTaskList = ReplicationTask[];
   export interface ReplicationTaskStats {
     /**
@@ -2713,6 +3186,50 @@ declare namespace DMS {
      */
     ReplicationTask?: ReplicationTask;
   }
+  export interface StartReplicationTaskAssessmentRunMessage {
+    /**
+     * Amazon Resource Name (ARN) of the migration task associated with the premigration assessment run that you want to start.
+     */
+    ReplicationTaskArn: String;
+    /**
+     * ARN of a service role needed to start the assessment run.
+     */
+    ServiceAccessRoleArn: String;
+    /**
+     * Amazon S3 bucket where you want AWS DMS to store the results of this assessment run.
+     */
+    ResultLocationBucket: String;
+    /**
+     * Folder within an Amazon S3 bucket where you want AWS DMS to store the results of this assessment run.
+     */
+    ResultLocationFolder?: String;
+    /**
+     * Encryption mode that you can specify to encrypt the results of this assessment run. If you don't specify this request parameter, AWS DMS stores the assessment run results without encryption. You can specify one of the options following:    "SSE_S3" – The server-side encryption provided as a default by Amazon S3.    "SSE_KMS" – AWS Key Management Service (AWS KMS) encryption. This encryption can use either a custom KMS encryption key that you specify or the default KMS encryption key that DMS provides.  
+     */
+    ResultEncryptionMode?: String;
+    /**
+     * ARN of a custom KMS encryption key that you specify when you set ResultEncryptionMode to "SSE_KMS".
+     */
+    ResultKmsKeyArn?: String;
+    /**
+     * Unique name to identify the assessment run.
+     */
+    AssessmentRunName: String;
+    /**
+     * Space-separated list of names for specific individual assessments that you want to include. These names come from the default list of individual assessments that AWS DMS supports for the associated migration task. This task is specified by ReplicationTaskArn.  You can't set a value for IncludeOnly if you also set a value for Exclude in the API operation.  To identify the names of the default individual assessments that AWS DMS supports for the associated migration task, run the DescribeApplicableIndividualAssessments operation using its own ReplicationTaskArn request parameter. 
+     */
+    IncludeOnly?: IncludeTestList;
+    /**
+     * Space-separated list of names for specific individual assessments that you want to exclude. These names come from the default list of individual assessments that AWS DMS supports for the associated migration task. This task is specified by ReplicationTaskArn.  You can't set a value for Exclude if you also set a value for IncludeOnly in the API operation. To identify the names of the default individual assessments that AWS DMS supports for the associated migration task, run the DescribeApplicableIndividualAssessments operation using its own ReplicationTaskArn request parameter. 
+     */
+    Exclude?: ExcludeTestList;
+  }
+  export interface StartReplicationTaskAssessmentRunResponse {
+    /**
+     * The premigration assessment run that was started.
+     */
+    ReplicationTaskAssessmentRun?: ReplicationTaskAssessmentRun;
+  }
   export interface StartReplicationTaskMessage {
     /**
      * The Amazon Resource Name (ARN) of the replication task to be started.
@@ -2794,6 +3311,28 @@ declare namespace DMS {
     EngineDisplayName?: String;
   }
   export type SupportedEndpointTypeList = SupportedEndpointType[];
+  export interface SybaseSettings {
+    /**
+     * Database name for the endpoint.
+     */
+    DatabaseName?: String;
+    /**
+     * Endpoint connection password.
+     */
+    Password?: SecretString;
+    /**
+     * Endpoint TCP port.
+     */
+    Port?: IntegerOptional;
+    /**
+     * Fully qualified domain name of the endpoint.
+     */
+    ServerName?: String;
+    /**
+     * Endpoint connection user name.
+     */
+    Username?: String;
+  }
   export type TStamp = Date;
   export type TableListToReload = TableToReload[];
   export interface TableStatistics {
@@ -2879,11 +3418,11 @@ declare namespace DMS {
     /**
      * The schema name of the table to be reloaded.
      */
-    SchemaName?: String;
+    SchemaName: String;
     /**
      * The table name of the table to be reloaded.
      */
-    TableName?: String;
+    TableName: String;
   }
   export interface Tag {
     /**

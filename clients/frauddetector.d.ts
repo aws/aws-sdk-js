@@ -479,7 +479,7 @@ declare namespace FraudDetector {
     /**
      * The model ID.
      */
-    modelId: identifier;
+    modelId: modelIdentifier;
     /**
      * The model type. 
      */
@@ -503,7 +503,7 @@ declare namespace FraudDetector {
     /**
      * The model ID. 
      */
-    modelId: identifier;
+    modelId: modelIdentifier;
     /**
      * The model type.
      */
@@ -529,7 +529,7 @@ declare namespace FraudDetector {
     /**
      * The model ID.
      */
-    modelId?: identifier;
+    modelId?: modelIdentifier;
     /**
      * The model type.
      */
@@ -697,7 +697,7 @@ declare namespace FraudDetector {
     /**
      * The model ID.
      */
-    modelId?: identifier;
+    modelId?: modelIdentifier;
     /**
      * The model version number.
      */
@@ -778,11 +778,11 @@ declare namespace FraudDetector {
     /**
      * The entity type.
      */
-    entityType?: string;
+    entityType: string;
     /**
      * The entity ID. If you do not know the entityId, you can pass unknown, which is areserved string literal.
      */
-    entityId?: identifier;
+    entityId: identifier;
   }
   export interface EntityType {
     /**
@@ -856,10 +856,6 @@ declare namespace FraudDetector {
      * The Amazon SageMaker model endpoints.
      */
     modelEndpoint?: string;
-    /**
-     * The event type names.
-     */
-    eventTypeName?: identifier;
     /**
      * The source of the model.
      */
@@ -1162,7 +1158,7 @@ declare namespace FraudDetector {
     /**
      * The model ID.
      */
-    modelId: identifier;
+    modelId: modelIdentifier;
     /**
      * The model type.
      */
@@ -1176,7 +1172,7 @@ declare namespace FraudDetector {
     /**
      * The model ID.
      */
-    modelId?: identifier;
+    modelId?: modelIdentifier;
     /**
      * The model type.
      */
@@ -1210,7 +1206,7 @@ declare namespace FraudDetector {
     /**
      * The model ID.
      */
-    modelId?: identifier;
+    modelId?: modelIdentifier;
     /**
      * The model type.
      */
@@ -1401,7 +1397,7 @@ declare namespace FraudDetector {
     /**
      * The model ID.
      */
-    modelId?: identifier;
+    modelId?: modelIdentifier;
     /**
      * The model type.
      */
@@ -1439,6 +1435,10 @@ declare namespace FraudDetector {
   }
   export type ModelEndpointStatus = "ASSOCIATED"|"DISSOCIATED"|string;
   export interface ModelInputConfiguration {
+    /**
+     * The event type name.
+     */
+    eventTypeName?: identifier;
     /**
      *  The format of the model input configuration. The format differs depending on if it is passed through to SageMaker or constructed by Amazon Fraud Detector.
      */
@@ -1489,7 +1489,7 @@ declare namespace FraudDetector {
     /**
      * The model ID.
      */
-    modelId: identifier;
+    modelId: modelIdentifier;
     /**
      * The model type.
      */
@@ -1507,7 +1507,7 @@ declare namespace FraudDetector {
     /**
      * The model ID.
      */
-    modelId?: identifier;
+    modelId?: modelIdentifier;
     /**
      * The model type.
      */
@@ -1645,10 +1645,6 @@ declare namespace FraudDetector {
      * The model endpoints name.
      */
     modelEndpoint: sageMakerEndpointIdentifier;
-    /**
-     * The event type name.
-     */
-    eventTypeName?: identifier;
     /**
      * The source of the model.
      */
@@ -1917,7 +1913,7 @@ declare namespace FraudDetector {
     /**
      * The model ID.
      */
-    modelId: identifier;
+    modelId: modelIdentifier;
     /**
      * The model type.
      */
@@ -1933,7 +1929,7 @@ declare namespace FraudDetector {
     /**
      * The model ID.
      */
-    modelId: identifier;
+    modelId: modelIdentifier;
     /**
      * The model type.
      */
@@ -1955,7 +1951,7 @@ declare namespace FraudDetector {
     /**
      * The model ID.
      */
-    modelId?: identifier;
+    modelId?: modelIdentifier;
     /**
      * The model type.
      */
@@ -1973,7 +1969,7 @@ declare namespace FraudDetector {
     /**
      * The model ID of the model version to update.
      */
-    modelId: identifier;
+    modelId: modelIdentifier;
     /**
      * The model type.
      */
@@ -2141,6 +2137,7 @@ declare namespace FraudDetector {
   export type labelsMaxResults = number;
   export type listOfEntities = Entity[];
   export type metricDataPointsList = MetricDataPoint[];
+  export type modelIdentifier = string;
   export type modelList = Model[];
   export type modelVersionDetailList = ModelVersionDetail[];
   export type modelsMaxPageSize = number;

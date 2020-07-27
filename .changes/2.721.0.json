@@ -1,0 +1,32 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Region",
+        "description": "Add region validation using DNS Host label regex"
+    },
+    {
+        "type": "feature",
+        "category": "DMS",
+        "description": "Basic endpoint settings for relational databases, Preflight validation API."
+    },
+    {
+        "type": "feature",
+        "category": "DataSync",
+        "description": "Today AWS DataSync releases support for self-managed object storage Locations and the new TransferMode Option."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "m6gd, c6gd, r6gd instances are powered by AWS Graviton2 processors and support local NVMe instance storage"
+    },
+    {
+        "type": "feature",
+        "category": "FraudDetector",
+        "description": "Moved the eventTypeName attribute for PutExternalModel API to inputConfiguration. Model ID's no longer allow hyphens."
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "Add ability to manually resume workflows in AWS Glue providing customers further control over the orchestration of ETL workloads."
+    }
+]

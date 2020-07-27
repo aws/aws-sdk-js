@@ -12,19 +12,19 @@ declare class DataSync extends Service {
   constructor(options?: DataSync.Types.ClientConfiguration)
   config: Config & DataSync.Types.ClientConfiguration;
   /**
-   * Cancels execution of a task.  When you cancel a task execution, the transfer of some files are abruptly interrupted. The contents of files that are transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution on the same task and you allow the task execution to complete, file content on the destination is complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, AWS DataSync successfully complete the transfer when you start the next task execution.
+   * Cancels execution of a task.  When you cancel a task execution, the transfer of some files is abruptly interrupted. The contents of files that are transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution on the same task and you allow the task execution to complete, file content on the destination is complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, AWS DataSync successfully complete the transfer when you start the next task execution.
    */
   cancelTaskExecution(params: DataSync.Types.CancelTaskExecutionRequest, callback?: (err: AWSError, data: DataSync.Types.CancelTaskExecutionResponse) => void): Request<DataSync.Types.CancelTaskExecutionResponse, AWSError>;
   /**
-   * Cancels execution of a task.  When you cancel a task execution, the transfer of some files are abruptly interrupted. The contents of files that are transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution on the same task and you allow the task execution to complete, file content on the destination is complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, AWS DataSync successfully complete the transfer when you start the next task execution.
+   * Cancels execution of a task.  When you cancel a task execution, the transfer of some files is abruptly interrupted. The contents of files that are transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution on the same task and you allow the task execution to complete, file content on the destination is complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, AWS DataSync successfully complete the transfer when you start the next task execution.
    */
   cancelTaskExecution(callback?: (err: AWSError, data: DataSync.Types.CancelTaskExecutionResponse) => void): Request<DataSync.Types.CancelTaskExecutionResponse, AWSError>;
   /**
-   * Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region. You can activate the agent in a VPC (Virtual private Cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public Internet. You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run.  Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks. 
+   * Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region. You can activate the agent in a VPC (virtual private cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public Internet. You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run.  Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks. 
    */
   createAgent(params: DataSync.Types.CreateAgentRequest, callback?: (err: AWSError, data: DataSync.Types.CreateAgentResponse) => void): Request<DataSync.Types.CreateAgentResponse, AWSError>;
   /**
-   * Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region. You can activate the agent in a VPC (Virtual private Cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public Internet. You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run.  Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks. 
+   * Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region. You can activate the agent in a VPC (virtual private cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public Internet. You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run.  Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks. 
    */
   createAgent(callback?: (err: AWSError, data: DataSync.Types.CreateAgentResponse) => void): Request<DataSync.Types.CreateAgentResponse, AWSError>;
   /**
@@ -44,13 +44,21 @@ declare class DataSync extends Service {
    */
   createLocationFsxWindows(callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxWindowsResponse) => void): Request<DataSync.Types.CreateLocationFsxWindowsResponse, AWSError>;
   /**
-   * Defines a file system on a Network File System (NFS) server that can be read from or written to
+   * Defines a file system on a Network File System (NFS) server that can be read from or written to.
    */
   createLocationNfs(params: DataSync.Types.CreateLocationNfsRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationNfsResponse) => void): Request<DataSync.Types.CreateLocationNfsResponse, AWSError>;
   /**
-   * Defines a file system on a Network File System (NFS) server that can be read from or written to
+   * Defines a file system on a Network File System (NFS) server that can be read from or written to.
    */
   createLocationNfs(callback?: (err: AWSError, data: DataSync.Types.CreateLocationNfsResponse) => void): Request<DataSync.Types.CreateLocationNfsResponse, AWSError>;
+  /**
+   * Creates an endpoint for a self-managed object storage bucket.
+   */
+  createLocationObjectStorage(params: DataSync.Types.CreateLocationObjectStorageRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationObjectStorageResponse) => void): Request<DataSync.Types.CreateLocationObjectStorageResponse, AWSError>;
+  /**
+   * Creates an endpoint for a self-managed object storage bucket.
+   */
+  createLocationObjectStorage(callback?: (err: AWSError, data: DataSync.Types.CreateLocationObjectStorageResponse) => void): Request<DataSync.Types.CreateLocationObjectStorageResponse, AWSError>;
   /**
    * Creates an endpoint for an Amazon S3 bucket. For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section. For more information, see https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location in the AWS DataSync User Guide. 
    */
@@ -60,11 +68,11 @@ declare class DataSync extends Service {
    */
   createLocationS3(callback?: (err: AWSError, data: DataSync.Types.CreateLocationS3Response) => void): Request<DataSync.Types.CreateLocationS3Response, AWSError>;
   /**
-   * Defines a file system on an Server Message Block (SMB) server that can be read from or written to.
+   * Defines a file system on a Server Message Block (SMB) server that can be read from or written to.
    */
   createLocationSmb(params: DataSync.Types.CreateLocationSmbRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationSmbResponse) => void): Request<DataSync.Types.CreateLocationSmbResponse, AWSError>;
   /**
-   * Defines a file system on an Server Message Block (SMB) server that can be read from or written to.
+   * Defines a file system on a Server Message Block (SMB) server that can be read from or written to.
    */
   createLocationSmb(callback?: (err: AWSError, data: DataSync.Types.CreateLocationSmbResponse) => void): Request<DataSync.Types.CreateLocationSmbResponse, AWSError>;
   /**
@@ -124,13 +132,21 @@ declare class DataSync extends Service {
    */
   describeLocationFsxWindows(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationFsxWindowsResponse) => void): Request<DataSync.Types.DescribeLocationFsxWindowsResponse, AWSError>;
   /**
-   * Returns metadata, such as the path information, about a NFS location.
+   * Returns metadata, such as the path information, about an NFS location.
    */
   describeLocationNfs(params: DataSync.Types.DescribeLocationNfsRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationNfsResponse) => void): Request<DataSync.Types.DescribeLocationNfsResponse, AWSError>;
   /**
-   * Returns metadata, such as the path information, about a NFS location.
+   * Returns metadata, such as the path information, about an NFS location.
    */
   describeLocationNfs(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationNfsResponse) => void): Request<DataSync.Types.DescribeLocationNfsResponse, AWSError>;
+  /**
+   * Returns metadata about a self-managed object storage server location.
+   */
+  describeLocationObjectStorage(params: DataSync.Types.DescribeLocationObjectStorageRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationObjectStorageResponse) => void): Request<DataSync.Types.DescribeLocationObjectStorageResponse, AWSError>;
+  /**
+   * Returns metadata about a self-managed object storage server location.
+   */
+  describeLocationObjectStorage(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationObjectStorageResponse) => void): Request<DataSync.Types.DescribeLocationObjectStorageResponse, AWSError>;
   /**
    * Returns metadata, such as bucket name, about an Amazon S3 bucket location.
    */
@@ -140,11 +156,11 @@ declare class DataSync extends Service {
    */
   describeLocationS3(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationS3Response) => void): Request<DataSync.Types.DescribeLocationS3Response, AWSError>;
   /**
-   * Returns metadata, such as the path and user information about a SMB location.
+   * Returns metadata, such as the path and user information about an SMB location.
    */
   describeLocationSmb(params: DataSync.Types.DescribeLocationSmbRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationSmbResponse) => void): Request<DataSync.Types.DescribeLocationSmbResponse, AWSError>;
   /**
-   * Returns metadata, such as the path and user information about a SMB location.
+   * Returns metadata, such as the path and user information about an SMB location.
    */
   describeLocationSmb(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationSmbResponse) => void): Request<DataSync.Types.DescribeLocationSmbResponse, AWSError>;
   /**
@@ -172,19 +188,19 @@ declare class DataSync extends Service {
    */
   listAgents(callback?: (err: AWSError, data: DataSync.Types.ListAgentsResponse) => void): Request<DataSync.Types.ListAgentsResponse, AWSError>;
   /**
-   * Returns a lists of source and destination locations. If you have more locations than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a token that you can specify in your next request to fetch the next page of locations.
+   * Returns a list of source and destination locations. If you have more locations than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a token that you can specify in your next request to fetch the next page of locations.
    */
   listLocations(params: DataSync.Types.ListLocationsRequest, callback?: (err: AWSError, data: DataSync.Types.ListLocationsResponse) => void): Request<DataSync.Types.ListLocationsResponse, AWSError>;
   /**
-   * Returns a lists of source and destination locations. If you have more locations than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a token that you can specify in your next request to fetch the next page of locations.
+   * Returns a list of source and destination locations. If you have more locations than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a token that you can specify in your next request to fetch the next page of locations.
    */
   listLocations(callback?: (err: AWSError, data: DataSync.Types.ListLocationsResponse) => void): Request<DataSync.Types.ListLocationsResponse, AWSError>;
   /**
-   * Returns all the tags associated with a specified resources. 
+   * Returns all the tags associated with a specified resource. 
    */
   listTagsForResource(params: DataSync.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: DataSync.Types.ListTagsForResourceResponse) => void): Request<DataSync.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Returns all the tags associated with a specified resources. 
+   * Returns all the tags associated with a specified resource. 
    */
   listTagsForResource(callback?: (err: AWSError, data: DataSync.Types.ListTagsForResourceResponse) => void): Request<DataSync.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -286,9 +302,9 @@ declare namespace DataSync {
     /**
      * The key-value pair that represents the tag that you want to associate with the agent. The value can be an empty string. This value helps you manage, filter, and search for your agents.  Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @.  
      */
-    Tags?: TagList;
+    Tags?: InputTagList;
     /**
-     * The ID of the VPC (Virtual Private Cloud) endpoint that the agent has access to. This is the client-side VPC endpoint, also called a PrivateLink. If you don't have a PrivateLink VPC endpoint, see Creating a VPC Endpoint Service Configuration in the AWS VPC User Guide. VPC endpoint ID looks like this: vpce-01234d5aff67890e1.
+     * The ID of the VPC (virtual private cloud) endpoint that the agent has access to. This is the client-side VPC endpoint, also called a PrivateLink. If you don't have a PrivateLink VPC endpoint, see Creating a VPC Endpoint Service Configuration in the Amazon VPC User Guide. VPC endpoint ID looks like this: vpce-01234d5aff67890e1.
      */
     VpcEndpointId?: VpcEndpointId;
     /**
@@ -308,7 +324,7 @@ declare namespace DataSync {
   }
   export interface CreateLocationEfsRequest {
     /**
-     * A subdirectory in the location’s path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination. By default, AWS DataSync uses the root directory.   Subdirectory must be specified with forward slashes. For example /path/to/folder. 
+     * A subdirectory in the location’s path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination. By default, AWS DataSync uses the root directory.   Subdirectory must be specified with forward slashes. For example, /path/to/folder. 
      */
     Subdirectory?: EfsSubdirectory;
     /**
@@ -322,7 +338,7 @@ declare namespace DataSync {
     /**
      * The key-value pair that represents a tag that you want to add to the resource. The value can be an empty string. This value helps you manage, filter, and search for your resources. We recommend that you create a name tag for your location.
      */
-    Tags?: TagList;
+    Tags?: InputTagList;
   }
   export interface CreateLocationEfsResponse {
     /**
@@ -346,7 +362,7 @@ declare namespace DataSync {
     /**
      * The key-value pair that represents a tag that you want to add to the resource. The value can be an empty string. This value helps you manage, filter, and search for your resources. We recommend that you create a name tag for your location.
      */
-    Tags?: TagList;
+    Tags?: InputTagList;
     /**
      * The user who has the permissions to access files and folders in the FSx for Windows file system.
      */
@@ -368,15 +384,15 @@ declare namespace DataSync {
   }
   export interface CreateLocationNfsRequest {
     /**
-     * The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that's exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network.  To see all the paths exported by your NFS server. run "showmount -e nfs-server-name" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication.  To transfer all the data in the folder you specified, DataSync needs to have permissions to read all the data. To ensure this, either configure the NFS export with no_root_squash, or ensure that the permissions for all of the files that you want DataSync allow read access for all users. Doing either enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access. For information about NFS export configuration, see 18.7. The /etc/exports Configuration File in the Red Hat Enterprise Linux documentation.
+     * The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that's exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network.  To see all the paths exported by your NFS server. run "showmount -e nfs-server-name" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication.  To transfer all the data in the folder you specified, DataSync needs to have permissions to read all the data. To ensure this, either configure the NFS export with no_root_squash, or ensure that the permissions for all of the files that you want DataSync allow read access for all users. Doing either enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access. If you are copying data to or from your AWS Snowcone device, see NFS Server on AWS Snowcone for more information. For information about NFS export configuration, see 18.7. The /etc/exports Configuration File in the Red Hat Enterprise Linux documentation.
      */
     Subdirectory: NfsSubdirectory;
     /**
-     * The name of the NFS server. This value is the IP address or Domain Name Service (DNS) name of the NFS server. An agent that is installed on-premises uses this host name to mount the NFS server in a network.   This name must either be DNS-compliant or must be an IP version 4 (IPv4) address. 
+     * The name of the NFS server. This value is the IP address or Domain Name Service (DNS) name of the NFS server. An agent that is installed on-premises uses this host name to mount the NFS server in a network.  If you are copying data to or from your AWS Snowcone device, see NFS Server on AWS Snowcone for more information.  This name must either be DNS-compliant or must be an IP version 4 (IPv4) address. 
      */
     ServerHostname: ServerHostname;
     /**
-     * Contains a list of Amazon Resource Names (ARNs) of agents that are used to connect to an NFS server.
+     * Contains a list of Amazon Resource Names (ARNs) of agents that are used to connect to an NFS server.  If you are copying data to or from your AWS Snowcone device, see NFS Server on AWS Snowcone for more information.
      */
     OnPremConfig: OnPremConfig;
     /**
@@ -386,11 +402,55 @@ declare namespace DataSync {
     /**
      * The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
      */
-    Tags?: TagList;
+    Tags?: InputTagList;
   }
   export interface CreateLocationNfsResponse {
     /**
      * The Amazon Resource Name (ARN) of the source NFS file system location that is created.
+     */
+    LocationArn?: LocationArn;
+  }
+  export interface CreateLocationObjectStorageRequest {
+    /**
+     * The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server. An agent uses this host name to mount the object storage server in a network. 
+     */
+    ServerHostname: ServerHostname;
+    /**
+     * The port that your self-managed object storage server accepts inbound network traffic on. The server port is set by default to TCP 80 (HTTP) or TCP 443 (HTTPS). You can specify a custom port if your self-managed object storage server requires one.
+     */
+    ServerPort?: ObjectStorageServerPort;
+    /**
+     * The protocol that the object storage server uses to communicate. Valid values are HTTP or HTTPS.
+     */
+    ServerProtocol?: ObjectStorageServerProtocol;
+    /**
+     * The subdirectory in the self-managed object storage server that is used to read data from.
+     */
+    Subdirectory?: S3Subdirectory;
+    /**
+     * The bucket on the self-managed object storage server that is used to read data from.
+     */
+    BucketName: ObjectStorageBucketName;
+    /**
+     * Optional. The access key is used if credentials are required to access the self-managed object storage server.
+     */
+    AccessKey?: ObjectStorageAccessKey;
+    /**
+     * Optional. The secret key is used if credentials are required to access the self-managed object storage server.
+     */
+    SecretKey?: ObjectStorageSecretKey;
+    /**
+     * The Amazon Resource Name (ARN) of the agents associated with the self-managed object storage server location.
+     */
+    AgentArns: AgentArnList;
+    /**
+     * The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
+     */
+    Tags?: InputTagList;
+  }
+  export interface CreateLocationObjectStorageResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the agents associated with the self-managed object storage server location.
      */
     LocationArn?: LocationArn;
   }
@@ -411,7 +471,7 @@ declare namespace DataSync {
     /**
      * The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
      */
-    Tags?: TagList;
+    Tags?: InputTagList;
   }
   export interface CreateLocationS3Response {
     /**
@@ -421,7 +481,7 @@ declare namespace DataSync {
   }
   export interface CreateLocationSmbRequest {
     /**
-     * The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination. The SMB path should be a path that's exported by the SMB server, or a subdirectory of that path. The path should be such that it can be mounted by other SMB clients in your network.   Subdirectory must be specified with forward slashes. For example /path/to/folder.  To transfer all the data in the folder you specified, DataSync needs to have permissions to mount the SMB share, as well as to access all the data in that share. To ensure this, either ensure that the user/password specified belongs to the user who can mount the share, and who has the appropriate permissions for all of the files and directories that you want DataSync to access, or use credentials of a member of the Backup Operators group to mount the share. Doing either enables the agent to access the data. For the agent to access directories, you must additionally enable all execute access.
+     * The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination. The SMB path should be a path that's exported by the SMB server, or a subdirectory of that path. The path should be such that it can be mounted by other SMB clients in your network.   Subdirectory must be specified with forward slashes. For example, /path/to/folder.  To transfer all the data in the folder you specified, DataSync needs to have permissions to mount the SMB share, as well as to access all the data in that share. To ensure this, either ensure that the user/password specified belongs to the user who can mount the share, and who has the appropriate permissions for all of the files and directories that you want DataSync to access, or use credentials of a member of the Backup Operators group to mount the share. Doing either enables the agent to access the data. For the agent to access directories, you must additionally enable all execute access.
      */
     Subdirectory: SmbSubdirectory;
     /**
@@ -451,7 +511,7 @@ declare namespace DataSync {
     /**
      * The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
      */
-    Tags?: TagList;
+    Tags?: InputTagList;
   }
   export interface CreateLocationSmbResponse {
     /**
@@ -469,7 +529,7 @@ declare namespace DataSync {
      */
     DestinationLocationArn: LocationArn;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that is used to monitor and log events in the task.  For more information on these groups, see Working with Log Groups and Log Streams in the Amazon CloudWatch User Guide.  For more information about how to use CloudWatch Logs with DataSync, see Monitoring Your Task in the AWS DataSync User Guide. 
+     * The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that is used to monitor and log events in the task. 
      */
     CloudWatchLogGroupArn?: LogGroupArn;
     /**
@@ -477,7 +537,7 @@ declare namespace DataSync {
      */
     Name?: TagValue;
     /**
-     * The set of configuration options that control the behavior of a single execution of the task that occurs when you call StartTaskExecution. You can configure these options to preserve metadata such as user ID (UID) and group ID (GID), file permissions, data integrity verification, and so on. For each individual task execution, you can override these options by specifying the OverrideOptions before starting a the task execution. For more information, see the operation. 
+     * The set of configuration options that control the behavior of a single execution of the task that occurs when you call StartTaskExecution. You can configure these options to preserve metadata such as user ID (UID) and group ID (GID), file permissions, data integrity verification, and so on. For each individual task execution, you can override these options by specifying the OverrideOptions before starting the task execution. For more information, see the operation. 
      */
     Options?: Options;
     /**
@@ -491,7 +551,7 @@ declare namespace DataSync {
     /**
      * The key-value pair that represents the tag that you want to add to the resource. The value can be an empty string. 
      */
-    Tags?: TagList;
+    Tags?: InputTagList;
   }
   export interface CreateTaskResponse {
     /**
@@ -551,7 +611,7 @@ declare namespace DataSync {
      */
     CreationTime?: Time;
     /**
-     * The type of endpoint that your agent is connected to. If the endpoint is a VPC endpoint, the agent is not accessible over the public Internet. 
+     * The type of endpoint that your agent is connected to. If the endpoint is a VPC endpoint, the agent is not accessible over the public internet. 
      */
     EndpointType?: EndpointType;
     /**
@@ -567,7 +627,7 @@ declare namespace DataSync {
   }
   export interface DescribeLocationEfsResponse {
     /**
-     * The Amazon resource Name (ARN) of the EFS location that was described.
+     * The Amazon Resource Name (ARN) of the EFS location that was described.
      */
     LocationArn?: LocationArn;
     /**
@@ -588,7 +648,7 @@ declare namespace DataSync {
   }
   export interface DescribeLocationFsxWindowsResponse {
     /**
-     * The Amazon resource Name (ARN) of the FSx for Windows location that was described.
+     * The Amazon Resource Name (ARN) of the FSx for Windows location that was described.
      */
     LocationArn?: LocationArn;
     /**
@@ -596,7 +656,7 @@ declare namespace DataSync {
      */
     LocationUri?: LocationUri;
     /**
-     * The Amazon Resource Names (ARNs) of the security groups that are configured for the for the FSx for Windows file system.
+     * The Amazon Resource Names (ARNs) of the security groups that are configured for the FSx for Windows file system.
      */
     SecurityGroupArns?: Ec2SecurityGroupArnList;
     /**
@@ -614,13 +674,13 @@ declare namespace DataSync {
   }
   export interface DescribeLocationNfsRequest {
     /**
-     * The Amazon resource Name (ARN) of the NFS location to describe.
+     * The Amazon Resource Name (ARN) of the NFS location to describe.
      */
     LocationArn: LocationArn;
   }
   export interface DescribeLocationNfsResponse {
     /**
-     * The Amazon resource Name (ARN) of the NFS location that was described.
+     * The Amazon Resource Name (ARN) of the NFS location that was described.
      */
     LocationArn?: LocationArn;
     /**
@@ -634,6 +694,42 @@ declare namespace DataSync {
     MountOptions?: NfsMountOptions;
     /**
      * The time that the NFS location was created.
+     */
+    CreationTime?: Time;
+  }
+  export interface DescribeLocationObjectStorageRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the self-managed object storage server location that was described.
+     */
+    LocationArn: LocationArn;
+  }
+  export interface DescribeLocationObjectStorageResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the self-managed object storage server location to describe.
+     */
+    LocationArn?: LocationArn;
+    /**
+     * The URL of the source self-managed object storage server location that was described.
+     */
+    LocationUri?: LocationUri;
+    /**
+     * Optional. The access key is used if credentials are required to access the self-managed object storage server.
+     */
+    AccessKey?: ObjectStorageAccessKey;
+    /**
+     * The port that your self-managed object storage server accepts inbound network traffic on. The server port is set by default to TCP 80 (HTTP) or TCP 443 (HTTPS).
+     */
+    ServerPort?: ObjectStorageServerPort;
+    /**
+     * The protocol that the object storage server uses to communicate. Valid values are HTTP or HTTPS.
+     */
+    ServerProtocol?: ObjectStorageServerProtocol;
+    /**
+     * The Amazon Resource Name (ARN) of the agents associated with the self-managed object storage server location.
+     */
+    AgentArns?: AgentArnList;
+    /**
+     * The time that the self-managed object storage server agent was created.
      */
     CreationTime?: Time;
   }
@@ -664,13 +760,13 @@ declare namespace DataSync {
   }
   export interface DescribeLocationSmbRequest {
     /**
-     * The Amazon resource Name (ARN) of the SMB location to describe.
+     * The Amazon Resource Name (ARN) of the SMB location to describe.
      */
     LocationArn: LocationArn;
   }
   export interface DescribeLocationSmbResponse {
     /**
-     * The Amazon resource Name (ARN) of the SMB location that was described.
+     * The Amazon Resource Name (ARN) of the SMB location that was described.
      */
     LocationArn?: LocationArn;
     /**
@@ -855,6 +951,7 @@ declare namespace DataSync {
   export type FsxWindowsSubdirectory = string;
   export type Gid = "NONE"|"INT_VALUE"|"NAME"|"BOTH"|string;
   export type IamRoleArn = string;
+  export type InputTagList = TagListEntry[];
   export interface ListAgentsRequest {
     /**
      * The maximum number of agents to list.
@@ -913,7 +1010,7 @@ declare namespace DataSync {
     /**
      * Array of resource tags.
      */
-    Tags?: TagList;
+    Tags?: OutputTagList;
     /**
      * An opaque string that indicates the position at which to begin returning the next list of resource tags.
      */
@@ -990,6 +1087,11 @@ declare namespace DataSync {
   }
   export type NfsSubdirectory = string;
   export type NfsVersion = "AUTOMATIC"|"NFS3"|"NFS4_0"|"NFS4_1"|string;
+  export type ObjectStorageAccessKey = string;
+  export type ObjectStorageBucketName = string;
+  export type ObjectStorageSecretKey = string;
+  export type ObjectStorageServerPort = number;
+  export type ObjectStorageServerProtocol = "HTTPS"|"HTTP"|string;
   export interface OnPremConfig {
     /**
      * ARNs)of the agents to use for an NFS location.
@@ -998,7 +1100,7 @@ declare namespace DataSync {
   }
   export interface Options {
     /**
-     * A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred.  Default value: POINT_IN_TIME_CONSISTENT. POINT_IN_TIME_CONSISTENT: Perform verification (recommended).  ONLY_FILES_TRANSFERRED: Perform verification on only files that were transferred. NONE: Skip verification.
+     * A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred. For more information, see create-task  Default value: POINT_IN_TIME_CONSISTENT. ONLY_FILES_TRANSFERRED (recommended): Perform verification only on files that were transferred.  POINT_IN_TIME_CONSISTENT: Scan the entire source and entire destination at the end of the transfer to verify that source and destination are fully synchronized. This option isn't supported when transferring to S3 Glacier or S3 Glacier Deep Archive storage classes. NONE: No additional verification is done at the end of the transfer, but all data transmissions are integrity-checked with checksum verification during the transfer.
      */
     VerifyMode?: VerifyMode;
     /**
@@ -1038,14 +1140,19 @@ declare namespace DataSync {
      */
     BytesPerSecond?: BytesPerSecond;
     /**
-     * A value that determines whether tasks should be queued before executing the tasks. If set to ENABLED, the tasks will be queued. The default is ENABLED. If you use the same agent to run multiple tasks you can enable the tasks to run in series. For more information see queue-task-execution.
+     * A value that determines whether tasks should be queued before executing the tasks. If set to ENABLED, the tasks will be queued. The default is ENABLED. If you use the same agent to run multiple tasks, you can enable the tasks to run in series. For more information, see queue-task-execution.
      */
     TaskQueueing?: TaskQueueing;
     /**
-     * A value that determines the type of logs DataSync will deliver to your AWS CloudWatch Logs file. If set to OFF, no logs will be delivered. BASIC will deliver a few logs per transfer operation and TRANSFER will deliver a verbose log that contains logs for every file that is transferred.
+     * A value that determines the type of logs that DataSync publishes to a log stream in the Amazon CloudWatch log group that you provide. For more information about providing a log group for DataSync, see CloudWatchLogGroupArn. If set to OFF, no logs are published. BASIC publishes logs on errors for individual files transferred, and TRANSFER publishes logs for every file or object that is transferred and integrity checked.
      */
     LogLevel?: LogLevel;
+    /**
+     * TransferMode has two values: CHANGED and ALL. CHANGED performs an "incremental" or "delta sync", it compares file modification time between source and destination to determine which files need to be transferred. ALL skips destination inventory and transfers all files discovered on the source.
+     */
+    TransferMode?: TransferMode;
   }
+  export type OutputTagList = TagListEntry[];
   export type OverwriteMode = "ALWAYS"|"NEVER"|string;
   export type PLSecurityGroupArnList = Ec2SecurityGroupArn[];
   export type PLSubnetArnList = Ec2SubnetArn[];
@@ -1055,11 +1162,11 @@ declare namespace DataSync {
   export type PreserveDevices = "NONE"|"PRESERVE"|string;
   export interface PrivateLinkConfig {
     /**
-     * The ID of the VPC endpoint that is configured for an agent. An agent that is configured with a VPC endpoint will not be accessible over the public Internet.
+     * The ID of the VPC endpoint that is configured for an agent. An agent that is configured with a VPC endpoint will not be accessible over the public internet.
      */
     VpcEndpointId?: VpcEndpointId;
     /**
-     * The private endpoint that is configured for an agent that has access to IP addresses in a PrivateLink. An agent that is configured with this endpoint will not be accessible over the public Internet.
+     * The private endpoint that is configured for an agent that has access to IP addresses in a PrivateLink. An agent that is configured with this endpoint will not be accessible over the public internet.
      */
     PrivateLinkEndpoint?: Endpoint;
     /**
@@ -1113,7 +1220,6 @@ declare namespace DataSync {
   }
   export type TagKey = string;
   export type TagKeyList = TagKey[];
-  export type TagList = TagListEntry[];
   export interface TagListEntry {
     /**
      * The key for an AWS resource tag.
@@ -1132,7 +1238,7 @@ declare namespace DataSync {
     /**
      * The tags to apply.
      */
-    Tags: TagList;
+    Tags: InputTagList;
   }
   export interface TagResourceResponse {
   }
@@ -1214,6 +1320,7 @@ declare namespace DataSync {
   }
   export type TaskStatus = "AVAILABLE"|"CREATING"|"QUEUED"|"RUNNING"|"UNAVAILABLE"|string;
   export type Time = Date;
+  export type TransferMode = "CHANGED"|"ALL"|string;
   export type Uid = "NONE"|"INT_VALUE"|"NAME"|"BOTH"|string;
   export interface UntagResourceRequest {
     /**

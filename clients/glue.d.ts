@@ -820,6 +820,14 @@ declare class Glue extends Service {
    */
   resetJobBookmark(callback?: (err: AWSError, data: Glue.Types.ResetJobBookmarkResponse) => void): Request<Glue.Types.ResetJobBookmarkResponse, AWSError>;
   /**
+   * Restarts any completed nodes in a workflow run and resumes the run execution.
+   */
+  resumeWorkflowRun(params: Glue.Types.ResumeWorkflowRunRequest, callback?: (err: AWSError, data: Glue.Types.ResumeWorkflowRunResponse) => void): Request<Glue.Types.ResumeWorkflowRunResponse, AWSError>;
+  /**
+   * Restarts any completed nodes in a workflow run and resumes the run execution.
+   */
+  resumeWorkflowRun(callback?: (err: AWSError, data: Glue.Types.ResumeWorkflowRunResponse) => void): Request<Glue.Types.ResumeWorkflowRunResponse, AWSError>;
+  /**
    * Searches a set of tables based on properties in the table metadata as well as on the parent database. You can search against text or filter conditions.  You can only get tables that you have access to based on the security policies defined in Lake Formation. You need at least a read-only access to the table for it to be returned. If you do not have access to all the columns in the table, these columns will not be searched against when returning the list of tables back to you. If you have access to the columns but not the data in the columns, those columns and the associated metadata for those columns will be included in the search. 
    */
   searchTables(params: Glue.Types.SearchTablesRequest, callback?: (err: AWSError, data: Glue.Types.SearchTablesResponse) => void): Request<Glue.Types.SearchTablesResponse, AWSError>;
@@ -1662,7 +1670,7 @@ declare namespace Glue {
      */
     JobName?: NameString;
     /**
-     * The condition state. Currently, the only job states that a trigger can listen for are SUCCEEDED, STOPPED, FAILED, and TIMEOUT. The only crawler states that a trigger can listen for are SUCCEEDED, FAILED, and CANCELLED.
+     * The condition state. Currently, the values supported are SUCCEEDED, STOPPED, TIMEOUT, and FAILED.
      */
     State?: JobRunState;
     /**
@@ -2274,7 +2282,7 @@ declare namespace Glue {
      */
     Timeout?: Timeout;
     /**
-     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job or an Apache Spark ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
+     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job or an Apache Spark ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl") or Apache Spark streaming ETL job (JobCommand.Name="gluestreaming"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
      */
     MaxCapacity?: NullableDouble;
     /**
@@ -4513,7 +4521,7 @@ declare namespace Glue {
      */
     Timeout?: Timeout;
     /**
-     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job or an Apache Spark ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
+     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job, an Apache Spark ETL job, or an Apache Spark streaming ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl") or Apache Spark streaming ETL job (JobCommand.Name="gluestreaming"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
      */
     MaxCapacity?: NullableDouble;
     /**
@@ -4580,7 +4588,7 @@ declare namespace Glue {
   export type JobBookmarksEncryptionMode = "DISABLED"|"CSE-KMS"|string;
   export interface JobCommand {
     /**
-     * The name of the job command. For an Apache Spark ETL job, this must be glueetl. For a Python shell job, it must be pythonshell.
+     * The name of the job command. For an Apache Spark ETL job, this must be glueetl. For a Python shell job, it must be pythonshell. For an Apache Spark streaming ETL job, this must be gluestreaming.
      */
     Name?: GenericString;
     /**
@@ -4635,7 +4643,7 @@ declare namespace Glue {
      */
     CompletedOn?: TimestampValue;
     /**
-     * The current state of the job run. For more information about the statuses of jobs that have terminated abnormally, see AWS Glue Job Run Statuses.
+     * The current state of the job run.
      */
     JobRunState?: JobRunState;
     /**
@@ -4739,7 +4747,7 @@ declare namespace Glue {
      */
     Timeout?: Timeout;
     /**
-     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job or an Apache Spark ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
+     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job or an Apache Spark ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl") or Apache Spark streaming ETL job (JobCommand.Name="gluestreaming"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
      */
     MaxCapacity?: NullableDouble;
     /**
@@ -5150,6 +5158,7 @@ declare namespace Glue {
      */
     CrawlerDetails?: CrawlerNodeDetails;
   }
+  export type NodeIdList = NameString[];
   export type NodeList = Node[];
   export type NodeType = "CRAWLER"|"JOB"|"TRIGGER"|string;
   export type NonNegativeDouble = number;
@@ -5417,6 +5426,30 @@ declare namespace Glue {
     Uri?: URI;
   }
   export type ResourceUriList = ResourceUri[];
+  export interface ResumeWorkflowRunRequest {
+    /**
+     * The name of the workflow to resume.
+     */
+    Name: NameString;
+    /**
+     * The ID of the workflow run to resume.
+     */
+    RunId: IdString;
+    /**
+     * A list of the node IDs for the nodes you want to restart. The nodes that are to be restarted must have an execution attempt in the original run.
+     */
+    NodeIds: NodeIdList;
+  }
+  export interface ResumeWorkflowRunResponse {
+    /**
+     * The new ID assigned to the resumed workflow run. Each resume of a workflow run will have a new run ID.
+     */
+    RunId?: IdString;
+    /**
+     * A list of the node IDs for the nodes that were actually restarted.
+     */
+    NodeIds?: NodeIdList;
+  }
   export type Role = string;
   export type RoleArn = string;
   export type RoleString = string;
@@ -6848,13 +6881,17 @@ declare namespace Glue {
   export type WorkflowNames = NameString[];
   export interface WorkflowRun {
     /**
-     * Name of the workflow which was executed.
+     * Name of the workflow that was executed.
      */
     Name?: NameString;
     /**
      * The ID of this workflow run.
      */
     WorkflowRunId?: IdString;
+    /**
+     * The ID of the previous workflow run.
+     */
+    PreviousRunId?: IdString;
     /**
      * The workflow run properties which were set during the run.
      */
@@ -6887,19 +6924,19 @@ declare namespace Glue {
      */
     TotalActions?: IntegerValue;
     /**
-     * Total number of Actions which timed out.
+     * Total number of Actions that timed out.
      */
     TimeoutActions?: IntegerValue;
     /**
-     * Total number of Actions which have failed.
+     * Total number of Actions that have failed.
      */
     FailedActions?: IntegerValue;
     /**
-     * Total number of Actions which have stopped.
+     * Total number of Actions that have stopped.
      */
     StoppedActions?: IntegerValue;
     /**
-     * Total number of Actions which have succeeded.
+     * Total number of Actions that have succeeded.
      */
     SucceededActions?: IntegerValue;
     /**

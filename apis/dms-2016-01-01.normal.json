@@ -50,6 +50,31 @@
       ],
       "documentation": "<p>Applies a pending maintenance action to a resource (for example, to a replication instance).</p>"
     },
+    "CancelReplicationTaskAssessmentRun": {
+      "name": "CancelReplicationTaskAssessmentRun",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CancelReplicationTaskAssessmentRunMessage"
+      },
+      "output": {
+        "shape": "CancelReplicationTaskAssessmentRunResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedFault"
+        },
+        {
+          "shape": "ResourceNotFoundFault"
+        },
+        {
+          "shape": "InvalidResourceStateFault"
+        }
+      ],
+      "documentation": "<p>Cancels a single premigration assessment run.</p> <p>This operation prevents any individual assessments from running if they haven't started running. It also attempts to cancel any individual assessments that are currently running.</p>"
+    },
     "CreateEndpoint": {
       "name": "CreateEndpoint",
       "http": {
@@ -401,6 +426,31 @@
       ],
       "documentation": "<p>Deletes the specified replication task.</p>"
     },
+    "DeleteReplicationTaskAssessmentRun": {
+      "name": "DeleteReplicationTaskAssessmentRun",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteReplicationTaskAssessmentRunMessage"
+      },
+      "output": {
+        "shape": "DeleteReplicationTaskAssessmentRunResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedFault"
+        },
+        {
+          "shape": "ResourceNotFoundFault"
+        },
+        {
+          "shape": "InvalidResourceStateFault"
+        }
+      ],
+      "documentation": "<p>Deletes the record of a single premigration assessment run.</p> <p>This operation removes all metadata that AWS DMS maintains about this assessment run. However, the operation leaves untouched all information about this assessment run that is stored in your Amazon S3 bucket.</p>"
+    },
     "DescribeAccountAttributes": {
       "name": "DescribeAccountAttributes",
       "http": {
@@ -414,6 +464,31 @@
         "shape": "DescribeAccountAttributesResponse"
       },
       "documentation": "<p>Lists all of the AWS DMS attributes for a customer account. These attributes include AWS DMS quotas for the account and a unique account identifier in a particular DMS region. DMS quotas include a list of resource quotas supported by the account, such as the number of replication instances allowed. The description for each resource quota, includes the quota name, current usage toward that quota, and the quota's maximum value. DMS uses the unique account identifier to name each artifact used by DMS in the given region.</p> <p>This command does not take any parameters.</p>"
+    },
+    "DescribeApplicableIndividualAssessments": {
+      "name": "DescribeApplicableIndividualAssessments",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeApplicableIndividualAssessmentsMessage"
+      },
+      "output": {
+        "shape": "DescribeApplicableIndividualAssessmentsResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedFault"
+        },
+        {
+          "shape": "ResourceNotFoundFault"
+        },
+        {
+          "shape": "InvalidResourceStateFault"
+        }
+      ],
+      "documentation": "<p>Provides a list of individual assessments that you can specify for a new premigration assessment run, given one or more parameters.</p> <p>If you specify an existing migration task, this operation provides the default individual assessments you can specify for that task. Otherwise, the specified parameters model elements of a possible migration task on which to base a premigration assessment run.</p> <p>To use these migration task modeling parameters, you must specify an existing replication instance, a source database engine, a target database engine, and a migration type. This combination of parameters potentially limits the default individual assessments available for an assessment run created for a corresponding migration task.</p> <p>If you specify no parameters, this operation provides a list of all possible individual assessments that you can specify for an assessment run. If you specify any one of the task modeling parameters, you must specify all of them or the operation cannot provide a list of individual assessments. The only parameter that you can specify alone is for an existing migration task. The specified task definition then determines the default list of individual assessments that you can specify in an assessment run for the task.</p>"
     },
     "DescribeCertificates": {
       "name": "DescribeCertificates",
@@ -666,6 +741,44 @@
         }
       ],
       "documentation": "<p>Returns the task assessment results from Amazon S3. This action always returns the latest results.</p>"
+    },
+    "DescribeReplicationTaskAssessmentRuns": {
+      "name": "DescribeReplicationTaskAssessmentRuns",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeReplicationTaskAssessmentRunsMessage"
+      },
+      "output": {
+        "shape": "DescribeReplicationTaskAssessmentRunsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Returns a paginated list of premigration assessment runs based on filter settings.</p> <p>These filter settings can specify a combination of premigration assessment runs, migration tasks, replication instances, and assessment run status values.</p> <note> <p>This operation doesn't return information about individual assessments. For this information, see the <code>DescribeReplicationTaskIndividualAssessments</code> operation. </p> </note>"
+    },
+    "DescribeReplicationTaskIndividualAssessments": {
+      "name": "DescribeReplicationTaskIndividualAssessments",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeReplicationTaskIndividualAssessmentsMessage"
+      },
+      "output": {
+        "shape": "DescribeReplicationTaskIndividualAssessmentsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Returns a paginated list of individual assessments based on filter settings.</p> <p>These filter settings can specify a combination of premigration assessment runs, migration tasks, and assessment status values.</p>"
     },
     "DescribeReplicationTasks": {
       "name": "DescribeReplicationTasks",
@@ -1085,6 +1198,58 @@
       ],
       "documentation": "<p> Starts the replication task assessment for unsupported data types in the source database. </p>"
     },
+    "StartReplicationTaskAssessmentRun": {
+      "name": "StartReplicationTaskAssessmentRun",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartReplicationTaskAssessmentRunMessage"
+      },
+      "output": {
+        "shape": "StartReplicationTaskAssessmentRunResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedFault"
+        },
+        {
+          "shape": "ResourceNotFoundFault"
+        },
+        {
+          "shape": "InvalidResourceStateFault"
+        },
+        {
+          "shape": "KMSAccessDeniedFault"
+        },
+        {
+          "shape": "KMSDisabledFault"
+        },
+        {
+          "shape": "KMSFault"
+        },
+        {
+          "shape": "KMSInvalidStateFault"
+        },
+        {
+          "shape": "KMSNotFoundFault"
+        },
+        {
+          "shape": "KMSKeyNotAccessibleFault"
+        },
+        {
+          "shape": "S3AccessDeniedFault"
+        },
+        {
+          "shape": "S3ResourceNotFoundFault"
+        },
+        {
+          "shape": "ResourceAlreadyExistsFault"
+        }
+      ],
+      "documentation": "<p>Starts a new premigration assessment run for one or more individual assessments of a migration task.</p> <p>The assessments that you can specify depend on the source and target database engine and the migration type defined for the given task. To run this operation, your migration task must already be created. After you run this operation, you can review the status of each individual assessment. You can also run the migration task manually after the assessment run and its individual assessments complete.</p>"
+    },
     "StopReplicationTask": {
       "name": "StopReplicationTask",
       "http": {
@@ -1105,7 +1270,7 @@
           "shape": "InvalidResourceStateFault"
         }
       ],
-      "documentation": "<p>Stops the replication task.</p> <p/>"
+      "documentation": "<p>Stops the replication task.</p>"
     },
     "TestConnection": {
       "name": "TestConnection",
@@ -1253,6 +1418,29 @@
     },
     "BooleanOptional": {
       "type": "boolean"
+    },
+    "CancelReplicationTaskAssessmentRunMessage": {
+      "type": "structure",
+      "required": [
+        "ReplicationTaskAssessmentRunArn"
+      ],
+      "members": {
+        "ReplicationTaskAssessmentRunArn": {
+          "shape": "String",
+          "documentation": "<p>Amazon Resource Name (ARN) of the premigration assessment run to be canceled.</p>"
+        }
+      },
+      "documentation": "<p/>"
+    },
+    "CancelReplicationTaskAssessmentRunResponse": {
+      "type": "structure",
+      "members": {
+        "ReplicationTaskAssessmentRun": {
+          "shape": "ReplicationTaskAssessmentRun",
+          "documentation": "<p>The <code>ReplicationTaskAssessmentRun</code> object for the canceled assessment run.</p>"
+        }
+      },
+      "documentation": "<p/>"
     },
     "Certificate": {
       "type": "structure",
@@ -1454,6 +1642,30 @@
         },
         "RedshiftSettings": {
           "shape": "RedshiftSettings"
+        },
+        "PostgreSQLSettings": {
+          "shape": "PostgreSQLSettings",
+          "documentation": "<p>Settings in JSON format for the source and target PostgreSQL endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.ConnectionAttrib\">Extra connection attributes when using PostgreSQL as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.PostgreSQL.ConnectionAttrib\"> Extra connection attributes when using PostgreSQL as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
+        },
+        "MySQLSettings": {
+          "shape": "MySQLSettings",
+          "documentation": "<p>Settings in JSON format for the source and target MySQL endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.ConnectionAttrib\">Extra connection attributes when using MySQL as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.ConnectionAttrib\">Extra connection attributes when using a MySQL-compatible database as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
+        },
+        "OracleSettings": {
+          "shape": "OracleSettings",
+          "documentation": "<p>Settings in JSON format for the source and target Oracle endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.ConnectionAttrib\">Extra connection attributes when using Oracle as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Oracle.ConnectionAttrib\"> Extra connection attributes when using Oracle as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
+        },
+        "SybaseSettings": {
+          "shape": "SybaseSettings",
+          "documentation": "<p>Settings in JSON format for the source and target SAP ASE endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SAP.ConnectionAttrib\">Extra connection attributes when using SAP ASE as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SAP.ConnectionAttrib\">Extra connection attributes when using SAP ASE as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
+        },
+        "MicrosoftSQLServerSettings": {
+          "shape": "MicrosoftSQLServerSettings",
+          "documentation": "<p>Settings in JSON format for the source and target Microsoft SQL Server endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SQLServer.ConnectionAttrib\">Extra connection attributes when using SQL Server as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SQLServer.ConnectionAttrib\"> Extra connection attributes when using SQL Server as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
+        },
+        "IBMDb2Settings": {
+          "shape": "IBMDb2Settings",
+          "documentation": "<p>Settings in JSON format for the source IBM Db2 LUW endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.ConnectionAttrib\">Extra connection attributes when using Db2 LUW as a source for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
         }
       },
       "documentation": "<p/>"
@@ -1844,6 +2056,29 @@
       "members": {},
       "documentation": "<p/>"
     },
+    "DeleteReplicationTaskAssessmentRunMessage": {
+      "type": "structure",
+      "required": [
+        "ReplicationTaskAssessmentRunArn"
+      ],
+      "members": {
+        "ReplicationTaskAssessmentRunArn": {
+          "shape": "String",
+          "documentation": "<p>Amazon Resource Name (ARN) of the premigration assessment run to be deleted.</p>"
+        }
+      },
+      "documentation": "<p/>"
+    },
+    "DeleteReplicationTaskAssessmentRunResponse": {
+      "type": "structure",
+      "members": {
+        "ReplicationTaskAssessmentRun": {
+          "shape": "ReplicationTaskAssessmentRun",
+          "documentation": "<p>The <code>ReplicationTaskAssessmentRun</code> object for the deleted assessment run.</p>"
+        }
+      },
+      "documentation": "<p/>"
+    },
     "DeleteReplicationTaskMessage": {
       "type": "structure",
       "required": [
@@ -1886,12 +2121,60 @@
       },
       "documentation": "<p/>"
     },
+    "DescribeApplicableIndividualAssessmentsMessage": {
+      "type": "structure",
+      "members": {
+        "ReplicationTaskArn": {
+          "shape": "String",
+          "documentation": "<p>Amazon Resource Name (ARN) of a migration task on which you want to base the default list of individual assessments.</p>"
+        },
+        "ReplicationInstanceArn": {
+          "shape": "String",
+          "documentation": "<p>ARN of a replication instance on which you want to base the default list of individual assessments.</p>"
+        },
+        "SourceEngineName": {
+          "shape": "String",
+          "documentation": "<p>Name of a database engine that the specified replication instance supports as a source.</p>"
+        },
+        "TargetEngineName": {
+          "shape": "String",
+          "documentation": "<p>Name of a database engine that the specified replication instance supports as a target.</p>"
+        },
+        "MigrationType": {
+          "shape": "MigrationTypeValue",
+          "documentation": "<p>Name of the migration type that each provided individual assessment must support.</p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>Optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>"
+        }
+      },
+      "documentation": "<p/>"
+    },
+    "DescribeApplicableIndividualAssessmentsResponse": {
+      "type": "structure",
+      "members": {
+        "IndividualAssessmentNames": {
+          "shape": "IndividualAssessmentNameList",
+          "documentation": "<p>List of names for the individual assessments supported by the premigration assessment run that you start based on the specified request parameters. For more information on the available individual assessments, including compatibility with different migration task configurations, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html\">Working with premigration assessment runs</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>Pagination token returned for you to pass to a subsequent request. If you pass this token as the <code>Marker</code> value in a subsequent request, the response includes only records beyond the marker, up to the value specified in the request by <code>MaxRecords</code>.</p>"
+        }
+      },
+      "documentation": "<p/>"
+    },
     "DescribeCertificatesMessage": {
       "type": "structure",
       "members": {
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>Filters applied to the certificate described in the form of key-value pairs.</p>"
+          "documentation": "<p>Filters applied to the certificates described in the form of key-value pairs.</p>"
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
@@ -1953,7 +2236,7 @@
       "members": {
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>Filters applied to the describe action.</p> <p>Valid filter names: engine-name | endpoint-type</p>"
+          "documentation": "<p>Filters applied to the endpoint types.</p> <p>Valid filter names: engine-name | endpoint-type</p>"
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
@@ -1985,7 +2268,7 @@
       "members": {
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>Filters applied to the describe action.</p> <p>Valid filter names: endpoint-arn | endpoint-type | endpoint-id | engine-name</p>"
+          "documentation": "<p>Filters applied to the endpoints.</p> <p>Valid filter names: endpoint-arn | endpoint-type | endpoint-id | engine-name</p>"
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
@@ -2021,7 +2304,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>Filters applied to the action.</p>"
+          "documentation": "<p>Filters applied to the event categories.</p>"
         }
       },
       "documentation": "<p/>"
@@ -2045,7 +2328,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>Filters applied to the action.</p>"
+          "documentation": "<p>Filters applied to event subscriptions.</p>"
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
@@ -2101,7 +2384,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>Filters applied to the action.</p>"
+          "documentation": "<p>Filters applied to events.</p>"
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
@@ -2257,7 +2540,7 @@
       "members": {
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>Filters applied to the describe action.</p> <p>Valid filter names: replication-instance-arn | replication-instance-id | replication-instance-class | engine-version</p>"
+          "documentation": "<p>Filters applied to replication instances.</p> <p>Valid filter names: replication-instance-arn | replication-instance-id | replication-instance-class | engine-version</p>"
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
@@ -2289,7 +2572,7 @@
       "members": {
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>Filters applied to the describe action.</p> <p>Valid filter names: replication-subnet-group-id</p>"
+          "documentation": "<p>Filters applied to replication subnet groups.</p> <p>Valid filter names: replication-subnet-group-id</p>"
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
@@ -2352,12 +2635,76 @@
       },
       "documentation": "<p/>"
     },
+    "DescribeReplicationTaskAssessmentRunsMessage": {
+      "type": "structure",
+      "members": {
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>Filters applied to the premigration assessment runs described in the form of key-value pairs.</p> <p>Valid filter names: <code>replication-task-assessment-run-arn</code>, <code>replication-task-arn</code>, <code>replication-instance-arn</code>, <code>status</code> </p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>"
+        }
+      },
+      "documentation": "<p/>"
+    },
+    "DescribeReplicationTaskAssessmentRunsResponse": {
+      "type": "structure",
+      "members": {
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>A pagination token returned for you to pass to a subsequent request. If you pass this token as the <code>Marker</code> value in a subsequent request, the response includes only records beyond the marker, up to the value specified in the request by <code>MaxRecords</code>.</p>"
+        },
+        "ReplicationTaskAssessmentRuns": {
+          "shape": "ReplicationTaskAssessmentRunList",
+          "documentation": "<p>One or more premigration assessment runs as specified by <code>Filters</code>.</p>"
+        }
+      },
+      "documentation": "<p/>"
+    },
+    "DescribeReplicationTaskIndividualAssessmentsMessage": {
+      "type": "structure",
+      "members": {
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>Filters applied to the individual assessments described in the form of key-value pairs.</p> <p>Valid filter names: <code>replication-task-assessment-run-arn</code>, <code>replication-task-arn</code>, <code>status</code> </p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>"
+        }
+      },
+      "documentation": "<p/>"
+    },
+    "DescribeReplicationTaskIndividualAssessmentsResponse": {
+      "type": "structure",
+      "members": {
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>A pagination token returned for you to pass to a subsequent request. If you pass this token as the <code>Marker</code> value in a subsequent request, the response includes only records beyond the marker, up to the value specified in the request by <code>MaxRecords</code>.</p>"
+        },
+        "ReplicationTaskIndividualAssessments": {
+          "shape": "ReplicationTaskIndividualAssessmentList",
+          "documentation": "<p>One or more individual assessments as specified by <code>Filters</code>.</p>"
+        }
+      },
+      "documentation": "<p/>"
+    },
     "DescribeReplicationTasksMessage": {
       "type": "structure",
       "members": {
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>Filters applied to the describe action.</p> <p>Valid filter names: replication-task-arn | replication-task-id | migration-type | endpoint-arn | replication-instance-arn</p>"
+          "documentation": "<p>Filters applied to replication tasks.</p> <p>Valid filter names: replication-task-arn | replication-task-id | migration-type | endpoint-arn | replication-instance-arn</p>"
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
@@ -2443,7 +2790,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>Filters applied to the describe table statistics action.</p> <p>Valid filter names: schema-name | table-name | table-state</p> <p>A combination of filters creates an AND condition where each record matches all specified filters.</p>"
+          "documentation": "<p>Filters applied to table statistics.</p> <p>Valid filter names: schema-name | table-name | table-state</p> <p>A combination of filters creates an AND condition where each record matches all specified filters.</p>"
         }
       },
       "documentation": "<p/>"
@@ -2616,7 +2963,7 @@
         },
         "DynamoDbSettings": {
           "shape": "DynamoDbSettings",
-          "documentation": "<p>The settings for the target DynamoDB database. For more information, see the <code>DynamoDBSettings</code> structure.</p>"
+          "documentation": "<p>The settings for the DynamoDB target endpoint. For more information, see the <code>DynamoDBSettings</code> structure.</p>"
         },
         "S3Settings": {
           "shape": "S3Settings",
@@ -2649,6 +2996,30 @@
         "RedshiftSettings": {
           "shape": "RedshiftSettings",
           "documentation": "<p>Settings for the Amazon Redshift endpoint.</p>"
+        },
+        "PostgreSQLSettings": {
+          "shape": "PostgreSQLSettings",
+          "documentation": "<p>The settings for the PostgreSQL source and target endpoint. For more information, see the <code>PostgreSQLSettings</code> structure.</p>"
+        },
+        "MySQLSettings": {
+          "shape": "MySQLSettings",
+          "documentation": "<p>The settings for the MySQL source and target endpoint. For more information, see the <code>MySQLSettings</code> structure.</p>"
+        },
+        "OracleSettings": {
+          "shape": "OracleSettings",
+          "documentation": "<p>The settings for the Oracle source and target endpoint. For more information, see the <code>OracleSettings</code> structure.</p>"
+        },
+        "SybaseSettings": {
+          "shape": "SybaseSettings",
+          "documentation": "<p>The settings for the SAP ASE source and target endpoint. For more information, see the <code>SybaseSettings</code> structure.</p>"
+        },
+        "MicrosoftSQLServerSettings": {
+          "shape": "MicrosoftSQLServerSettings",
+          "documentation": "<p>The settings for the Microsoft SQL Server source and target endpoint. For more information, see the <code>MicrosoftSQLServerSettings</code> structure.</p>"
+        },
+        "IBMDb2Settings": {
+          "shape": "IBMDb2Settings",
+          "documentation": "<p>The settings for the IBM Db2 LUW source endpoint. For more information, see the <code>IBMDb2Settings</code> structure. </p>"
         }
       },
       "documentation": "<p>Describes an endpoint of a database instance in response to operations such as the following:</p> <ul> <li> <p> <code>CreateEndpoint</code> </p> </li> <li> <p> <code>DescribeEndpoint</code> </p> </li> <li> <p> <code>DescribeEndpointTypes</code> </p> </li> <li> <p> <code>ModifyEndpoint</code> </p> </li> </ul>"
@@ -2765,6 +3136,12 @@
         "shape": "EventSubscription"
       }
     },
+    "ExcludeTestList": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
+    },
     "Filter": {
       "type": "structure",
       "required": [
@@ -2774,14 +3151,14 @@
       "members": {
         "Name": {
           "shape": "String",
-          "documentation": "<p>The name of the filter.</p>"
+          "documentation": "<p>The name of the filter as specified for a <code>Describe*</code> or similar operation.</p>"
         },
         "Values": {
           "shape": "FilterValueList",
-          "documentation": "<p>The filter value.</p>"
+          "documentation": "<p>The filter value, which can specify one or more values used to narrow the returned results.</p>"
         }
       },
-      "documentation": "<p>Identifies the name and value of a source filter object used to limit the number and type of records transferred from your source to your target.</p>"
+      "documentation": "<p>Identifies the name and value of a filter object. This filter is used to limit the number and type of AWS DMS objects that are returned for a particular <code>Describe*</code> or similar operation.</p>"
     },
     "FilterList": {
       "type": "list",
@@ -2794,6 +3171,32 @@
       "member": {
         "shape": "String"
       }
+    },
+    "IBMDb2Settings": {
+      "type": "structure",
+      "members": {
+        "DatabaseName": {
+          "shape": "String",
+          "documentation": "<p>Database name for the endpoint.</p>"
+        },
+        "Password": {
+          "shape": "SecretString",
+          "documentation": "<p>Endpoint connection password.</p>"
+        },
+        "Port": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Endpoint TCP port.</p>"
+        },
+        "ServerName": {
+          "shape": "String",
+          "documentation": "<p>Fully qualified domain name of the endpoint.</p>"
+        },
+        "Username": {
+          "shape": "String",
+          "documentation": "<p>Endpoint connection user name.</p>"
+        }
+      },
+      "documentation": "<p>Provides information that defines an IBM Db2 LUW endpoint.</p>"
     },
     "ImportCertificateMessage": {
       "type": "structure",
@@ -2828,6 +3231,18 @@
         }
       }
     },
+    "IncludeTestList": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
+    },
+    "IndividualAssessmentNameList": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
+    },
     "Integer": {
       "type": "integer"
     },
@@ -2844,6 +3259,30 @@
         "Topic": {
           "shape": "String",
           "documentation": "<p>The topic to which you migrate the data. If you don't specify a topic, AWS DMS specifies <code>\"kafka-default-topic\"</code> as the migration topic.</p>"
+        },
+        "MessageFormat": {
+          "shape": "MessageFormatValue",
+          "documentation": "<p>The output format for the records created on the endpoint. The message format is <code>JSON</code> (default) or <code>JSON_UNFORMATTED</code> (a single line with no tab).</p>"
+        },
+        "IncludeTransactionDetails": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Provides detailed transaction information from the source database. This information includes a commit timestamp, a log position, and values for <code>transaction_id</code>, previous <code>transaction_id</code>, and <code>transaction_record_id</code> (the record offset within a transaction). The default is <code>False</code>.</p>"
+        },
+        "IncludePartitionValue": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Shows the partition value within the Kafka message output, unless the partition type is <code>schema-table-type</code>. The default is <code>False</code>.</p>"
+        },
+        "PartitionIncludeSchemaTable": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Prefixes schema and table names to partition values, when the partition type is <code>primary-key-type</code>. Doing this increases data distribution among Kafka partitions. For example, suppose that a SysBench schema has thousands of tables and each table has only limited range for a primary key. In this case, the same primary key is sent from thousands of tables to the same partition, which causes throttling. The default is <code>False</code>.</p>"
+        },
+        "IncludeTableAlterOperations": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Includes any data definition language (DDL) operations that change the table in the control data, such as <code>rename-table</code>, <code>drop-table</code>, <code>add-column</code>, <code>drop-column</code>, and <code>rename-column</code>. The default is <code>False</code>.</p>"
+        },
+        "IncludeControlDetails": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Shows detailed control information for table definition, column definition, and table and column changes in the Kafka message output. The default is <code>False</code>.</p>"
         }
       },
       "documentation": "<p>Provides information that describes an Apache Kafka endpoint. This information includes the output format of records applied to the endpoint and details of transaction and control table data information.</p>"
@@ -2924,6 +3363,32 @@
         "json",
         "json-unformatted"
       ]
+    },
+    "MicrosoftSQLServerSettings": {
+      "type": "structure",
+      "members": {
+        "Port": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Endpoint TCP port.</p>"
+        },
+        "DatabaseName": {
+          "shape": "String",
+          "documentation": "<p>Database name for the endpoint.</p>"
+        },
+        "Password": {
+          "shape": "SecretString",
+          "documentation": "<p>Endpoint connection password.</p>"
+        },
+        "ServerName": {
+          "shape": "String",
+          "documentation": "<p>Fully qualified domain name of the endpoint.</p>"
+        },
+        "Username": {
+          "shape": "String",
+          "documentation": "<p>Endpoint connection user name.</p>"
+        }
+      },
+      "documentation": "<p>Provides information that defines a Microsoft SQL Server endpoint.</p>"
     },
     "MigrationTypeValue": {
       "type": "string",
@@ -3029,6 +3494,30 @@
         },
         "RedshiftSettings": {
           "shape": "RedshiftSettings"
+        },
+        "PostgreSQLSettings": {
+          "shape": "PostgreSQLSettings",
+          "documentation": "<p>Settings in JSON format for the source and target PostgreSQL endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.ConnectionAttrib\">Extra connection attributes when using PostgreSQL as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.PostgreSQL.ConnectionAttrib\"> Extra connection attributes when using PostgreSQL as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
+        },
+        "MySQLSettings": {
+          "shape": "MySQLSettings",
+          "documentation": "<p>Settings in JSON format for the source and target MySQL endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.ConnectionAttrib\">Extra connection attributes when using MySQL as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.ConnectionAttrib\">Extra connection attributes when using a MySQL-compatible database as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
+        },
+        "OracleSettings": {
+          "shape": "OracleSettings",
+          "documentation": "<p>Settings in JSON format for the source and target Oracle endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.ConnectionAttrib\">Extra connection attributes when using Oracle as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Oracle.ConnectionAttrib\"> Extra connection attributes when using Oracle as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
+        },
+        "SybaseSettings": {
+          "shape": "SybaseSettings",
+          "documentation": "<p>Settings in JSON format for the source and target SAP ASE endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SAP.ConnectionAttrib\">Extra connection attributes when using SAP ASE as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SAP.ConnectionAttrib\">Extra connection attributes when using SAP ASE as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
+        },
+        "MicrosoftSQLServerSettings": {
+          "shape": "MicrosoftSQLServerSettings",
+          "documentation": "<p>Settings in JSON format for the source and target Microsoft SQL Server endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SQLServer.ConnectionAttrib\">Extra connection attributes when using SQL Server as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SQLServer.ConnectionAttrib\"> Extra connection attributes when using SQL Server as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
+        },
+        "IBMDb2Settings": {
+          "shape": "IBMDb2Settings",
+          "documentation": "<p>Settings in JSON format for the source IBM Db2 LUW endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.ConnectionAttrib\">Extra connection attributes when using Db2 LUW as a source for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
         }
       },
       "documentation": "<p/>"
@@ -3286,6 +3775,32 @@
       },
       "documentation": "<p>Provides information that defines a MongoDB endpoint.</p>"
     },
+    "MySQLSettings": {
+      "type": "structure",
+      "members": {
+        "DatabaseName": {
+          "shape": "String",
+          "documentation": "<p>Database name for the endpoint.</p>"
+        },
+        "Password": {
+          "shape": "SecretString",
+          "documentation": "<p>Endpoint connection password.</p>"
+        },
+        "Port": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Endpoint TCP port.</p>"
+        },
+        "ServerName": {
+          "shape": "String",
+          "documentation": "<p>Fully qualified domain name of the endpoint.</p>"
+        },
+        "Username": {
+          "shape": "String",
+          "documentation": "<p>Endpoint connection user name.</p>"
+        }
+      },
+      "documentation": "<p>Provides information that defines a MySQL endpoint.</p>"
+    },
     "NeptuneSettings": {
       "type": "structure",
       "required": [
@@ -3330,6 +3845,52 @@
         "none",
         "one"
       ]
+    },
+    "OracleSettings": {
+      "type": "structure",
+      "members": {
+        "AsmPassword": {
+          "shape": "SecretString",
+          "documentation": "<p>For an Oracle source endpoint, your Oracle Automatic Storage Management (ASM) password. You can set this value from the <code> <i>asm_user_password</i> </code> value. You set this value as part of the comma-separated value that you set to the <code>Password</code> request parameter when you create the endpoint to access transaction logs using Binary Reader. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration\">Configuration for change data capture (CDC) on an Oracle source database</a>.</p>"
+        },
+        "AsmServer": {
+          "shape": "String",
+          "documentation": "<p>For an Oracle source endpoint, your ASM server address. You can set this value from the <code>asm_server</code> value. You set <code>asm_server</code> as part of the extra connection attribute string to access an Oracle server with Binary Reader that uses ASM. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration\">Configuration for change data capture (CDC) on an Oracle source database</a>.</p>"
+        },
+        "AsmUser": {
+          "shape": "String",
+          "documentation": "<p>For an Oracle source endpoint, your ASM user name. You can set this value from the <code>asm_user</code> value. You set <code>asm_user</code> as part of the extra connection attribute string to access an Oracle server with Binary Reader that uses ASM. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration\">Configuration for change data capture (CDC) on an Oracle source database</a>.</p>"
+        },
+        "DatabaseName": {
+          "shape": "String",
+          "documentation": "<p>Database name for the endpoint.</p>"
+        },
+        "Password": {
+          "shape": "SecretString",
+          "documentation": "<p>Endpoint connection password.</p>"
+        },
+        "Port": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Endpoint TCP port.</p>"
+        },
+        "SecurityDbEncryption": {
+          "shape": "SecretString",
+          "documentation": "<p>For an Oracle source endpoint, the transparent data encryption (TDE) password required by AWM DMS to access Oracle redo logs encrypted by TDE using Binary Reader. It is also the <code> <i>TDE_Password</i> </code> part of the comma-separated value you set to the <code>Password</code> request parameter when you create the endpoint. The <code>SecurityDbEncryptian</code> setting is related to this <code>SecurityDbEncryptionName</code> setting. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.Encryption\"> Supported encryption methods for using Oracle as a source for AWS DMS</a> in the <i>AWS Database Migration Service User Guide</i>. </p>"
+        },
+        "SecurityDbEncryptionName": {
+          "shape": "String",
+          "documentation": "<p>For an Oracle source endpoint, the name of a key used for the transparent data encryption (TDE) of the columns and tablespaces in an Oracle source database that is encrypted using TDE. The key value is the value of the <code>SecurityDbEncryption</code> setting. For more information on setting the key name value of <code>SecurityDbEncryptionName</code>, see the information and example for setting the <code>securityDbEncryptionName</code> extra connection attribute in <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.Encryption\"> Supported encryption methods for using Oracle as a source for AWS DMS</a> in the <i>AWS Database Migration Service User Guide</i>.</p>"
+        },
+        "ServerName": {
+          "shape": "String",
+          "documentation": "<p>Fully qualified domain name of the endpoint.</p>"
+        },
+        "Username": {
+          "shape": "String",
+          "documentation": "<p>Endpoint connection user name.</p>"
+        }
+      },
+      "documentation": "<p>Provides information that defines an Oracle endpoint.</p>"
     },
     "OrderableReplicationInstance": {
       "type": "structure",
@@ -3427,6 +3988,32 @@
       "member": {
         "shape": "ResourcePendingMaintenanceActions"
       }
+    },
+    "PostgreSQLSettings": {
+      "type": "structure",
+      "members": {
+        "DatabaseName": {
+          "shape": "String",
+          "documentation": "<p>Database name for the endpoint.</p>"
+        },
+        "Password": {
+          "shape": "SecretString",
+          "documentation": "<p>Endpoint connection password.</p>"
+        },
+        "Port": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Endpoint TCP port.</p>"
+        },
+        "ServerName": {
+          "shape": "String",
+          "documentation": "<p>Fully qualified domain name of the endpoint.</p>"
+        },
+        "Username": {
+          "shape": "String",
+          "documentation": "<p>Endpoint connection user name.</p>"
+        }
+      },
+      "documentation": "<p>Provides information that defines a PostgreSQL endpoint.</p>"
     },
     "RebootReplicationInstanceMessage": {
       "type": "structure",
@@ -4008,6 +4595,112 @@
         "shape": "ReplicationTaskAssessmentResult"
       }
     },
+    "ReplicationTaskAssessmentRun": {
+      "type": "structure",
+      "members": {
+        "ReplicationTaskAssessmentRunArn": {
+          "shape": "String",
+          "documentation": "<p>Amazon Resource Name (ARN) of this assessment run.</p>"
+        },
+        "ReplicationTaskArn": {
+          "shape": "String",
+          "documentation": "<p>ARN of the migration task associated with this premigration assessment run.</p>"
+        },
+        "Status": {
+          "shape": "String",
+          "documentation": "<p>Assessment run status. </p> <p>This status can have one of the following values:</p> <ul> <li> <p> <code>\"cancelling\"</code> – The assessment run was canceled by the <code>CancelReplicationTaskAssessmentRun</code> operation.</p> </li> <li> <p> <code>\"deleting\"</code> – The assessment run was deleted by the <code>DeleteReplicationTaskAssessmentRun</code> operation.</p> </li> <li> <p> <code>\"failed\"</code> – At least one individual assessment completed with a <code>failed</code> status.</p> </li> <li> <p> <code>\"error-provisioning\"</code> – An internal error occurred while resources were provisioned (during <code>provisioning</code> status).</p> </li> <li> <p> <code>\"error-executing\"</code> – An internal error occurred while individual assessments ran (during <code>running</code> status).</p> </li> <li> <p> <code>\"invalid state\"</code> – The assessment run is in an unknown state.</p> </li> <li> <p> <code>\"passed\"</code> – All individual assessments have completed, and none has a <code>failed</code> status.</p> </li> <li> <p> <code>\"provisioning\"</code> – Resources required to run individual assessments are being provisioned.</p> </li> <li> <p> <code>\"running\"</code> – Individual assessments are being run.</p> </li> <li> <p> <code>\"starting\"</code> – The assessment run is starting, but resources are not yet being provisioned for individual assessments.</p> </li> </ul>"
+        },
+        "ReplicationTaskAssessmentRunCreationDate": {
+          "shape": "TStamp",
+          "documentation": "<p>Date on which the assessment run was created using the <code>StartReplicationTaskAssessmentRun</code> operation.</p>"
+        },
+        "AssessmentProgress": {
+          "shape": "ReplicationTaskAssessmentRunProgress",
+          "documentation": "<p>Indication of the completion progress for the individual assessments specified to run.</p>"
+        },
+        "LastFailureMessage": {
+          "shape": "String",
+          "documentation": "<p>Last message generated by an individual assessment failure.</p>"
+        },
+        "ServiceAccessRoleArn": {
+          "shape": "String",
+          "documentation": "<p>ARN of the service role used to start the assessment run using the <code>StartReplicationTaskAssessmentRun</code> operation.</p>"
+        },
+        "ResultLocationBucket": {
+          "shape": "String",
+          "documentation": "<p>Amazon S3 bucket where AWS DMS stores the results of this assessment run.</p>"
+        },
+        "ResultLocationFolder": {
+          "shape": "String",
+          "documentation": "<p>Folder in an Amazon S3 bucket where AWS DMS stores the results of this assessment run.</p>"
+        },
+        "ResultEncryptionMode": {
+          "shape": "String",
+          "documentation": "<p>Encryption mode used to encrypt the assessment run results.</p>"
+        },
+        "ResultKmsKeyArn": {
+          "shape": "String",
+          "documentation": "<p>ARN of the AWS KMS encryption key used to encrypt the assessment run results.</p>"
+        },
+        "AssessmentRunName": {
+          "shape": "String",
+          "documentation": "<p>Unique name of the assessment run.</p>"
+        }
+      },
+      "documentation": "<p>Provides information that describes a premigration assessment run that you have started using the <code>StartReplicationTaskAssessmentRun</code> operation.</p> <p>Some of the information appears based on other operations that can return the <code>ReplicationTaskAssessmentRun</code> object.</p>"
+    },
+    "ReplicationTaskAssessmentRunList": {
+      "type": "list",
+      "member": {
+        "shape": "ReplicationTaskAssessmentRun"
+      }
+    },
+    "ReplicationTaskAssessmentRunProgress": {
+      "type": "structure",
+      "members": {
+        "IndividualAssessmentCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of individual assessments that are specified to run.</p>"
+        },
+        "IndividualAssessmentCompletedCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of individual assessments that have completed, successfully or not.</p>"
+        }
+      },
+      "documentation": "<p>The progress values reported by the <code>AssessmentProgress</code> response element.</p>"
+    },
+    "ReplicationTaskIndividualAssessment": {
+      "type": "structure",
+      "members": {
+        "ReplicationTaskIndividualAssessmentArn": {
+          "shape": "String",
+          "documentation": "<p>Amazon Resource Name (ARN) of this individual assessment.</p>"
+        },
+        "ReplicationTaskAssessmentRunArn": {
+          "shape": "String",
+          "documentation": "<p>ARN of the premigration assessment run that is created to run this individual assessment.</p>"
+        },
+        "IndividualAssessmentName": {
+          "shape": "String",
+          "documentation": "<p>Name of this individual assessment.</p>"
+        },
+        "Status": {
+          "shape": "String",
+          "documentation": "<p>Individual assessment status.</p> <p>This status can have one of the following values:</p> <ul> <li> <p> <code>\"cancelled\"</code> </p> </li> <li> <p> <code>\"error\"</code> </p> </li> <li> <p> <code>\"failed\"</code> </p> </li> <li> <p> <code>\"passed\"</code> </p> </li> <li> <p> <code>\"pending\"</code> </p> </li> <li> <p> <code>\"running\"</code> </p> </li> </ul>"
+        },
+        "ReplicationTaskIndividualAssessmentStartDate": {
+          "shape": "TStamp",
+          "documentation": "<p>Date when this individual assessment was started as part of running the <code>StartReplicationTaskAssessmentRun</code> operation.</p>"
+        }
+      },
+      "documentation": "<p>Provides information that describes an individual assessment from a premigration assessment run.</p>"
+    },
+    "ReplicationTaskIndividualAssessmentList": {
+      "type": "list",
+      "member": {
+        "shape": "ReplicationTaskIndividualAssessment"
+      }
+    },
     "ReplicationTaskList": {
       "type": "list",
       "member": {
@@ -4213,6 +4906,64 @@
       },
       "documentation": "<p/>"
     },
+    "StartReplicationTaskAssessmentRunMessage": {
+      "type": "structure",
+      "required": [
+        "ReplicationTaskArn",
+        "ServiceAccessRoleArn",
+        "ResultLocationBucket",
+        "AssessmentRunName"
+      ],
+      "members": {
+        "ReplicationTaskArn": {
+          "shape": "String",
+          "documentation": "<p>Amazon Resource Name (ARN) of the migration task associated with the premigration assessment run that you want to start.</p>"
+        },
+        "ServiceAccessRoleArn": {
+          "shape": "String",
+          "documentation": "<p>ARN of a service role needed to start the assessment run.</p>"
+        },
+        "ResultLocationBucket": {
+          "shape": "String",
+          "documentation": "<p>Amazon S3 bucket where you want AWS DMS to store the results of this assessment run.</p>"
+        },
+        "ResultLocationFolder": {
+          "shape": "String",
+          "documentation": "<p>Folder within an Amazon S3 bucket where you want AWS DMS to store the results of this assessment run.</p>"
+        },
+        "ResultEncryptionMode": {
+          "shape": "String",
+          "documentation": "<p>Encryption mode that you can specify to encrypt the results of this assessment run. If you don't specify this request parameter, AWS DMS stores the assessment run results without encryption. You can specify one of the options following:</p> <ul> <li> <p> <code>\"SSE_S3\"</code> – The server-side encryption provided as a default by Amazon S3.</p> </li> <li> <p> <code>\"SSE_KMS\"</code> – AWS Key Management Service (AWS KMS) encryption. This encryption can use either a custom KMS encryption key that you specify or the default KMS encryption key that DMS provides.</p> </li> </ul>"
+        },
+        "ResultKmsKeyArn": {
+          "shape": "String",
+          "documentation": "<p>ARN of a custom KMS encryption key that you specify when you set <code>ResultEncryptionMode</code> to <code>\"SSE_KMS</code>\".</p>"
+        },
+        "AssessmentRunName": {
+          "shape": "String",
+          "documentation": "<p>Unique name to identify the assessment run.</p>"
+        },
+        "IncludeOnly": {
+          "shape": "IncludeTestList",
+          "documentation": "<p>Space-separated list of names for specific individual assessments that you want to include. These names come from the default list of individual assessments that AWS DMS supports for the associated migration task. This task is specified by <code>ReplicationTaskArn</code>.</p> <note> <p>You can't set a value for <code>IncludeOnly</code> if you also set a value for <code>Exclude</code> in the API operation. </p> <p>To identify the names of the default individual assessments that AWS DMS supports for the associated migration task, run the <code>DescribeApplicableIndividualAssessments</code> operation using its own <code>ReplicationTaskArn</code> request parameter.</p> </note>"
+        },
+        "Exclude": {
+          "shape": "ExcludeTestList",
+          "documentation": "<p>Space-separated list of names for specific individual assessments that you want to exclude. These names come from the default list of individual assessments that AWS DMS supports for the associated migration task. This task is specified by <code>ReplicationTaskArn</code>.</p> <note> <p>You can't set a value for <code>Exclude</code> if you also set a value for <code>IncludeOnly</code> in the API operation.</p> <p>To identify the names of the default individual assessments that AWS DMS supports for the associated migration task, run the <code>DescribeApplicableIndividualAssessments</code> operation using its own <code>ReplicationTaskArn</code> request parameter.</p> </note>"
+        }
+      },
+      "documentation": "<p/>"
+    },
+    "StartReplicationTaskAssessmentRunResponse": {
+      "type": "structure",
+      "members": {
+        "ReplicationTaskAssessmentRun": {
+          "shape": "ReplicationTaskAssessmentRun",
+          "documentation": "<p>The premigration assessment run that was started.</p>"
+        }
+      },
+      "documentation": "<p/>"
+    },
     "StartReplicationTaskMessage": {
       "type": "structure",
       "required": [
@@ -4349,6 +5100,32 @@
         "shape": "SupportedEndpointType"
       }
     },
+    "SybaseSettings": {
+      "type": "structure",
+      "members": {
+        "DatabaseName": {
+          "shape": "String",
+          "documentation": "<p>Database name for the endpoint.</p>"
+        },
+        "Password": {
+          "shape": "SecretString",
+          "documentation": "<p>Endpoint connection password.</p>"
+        },
+        "Port": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Endpoint TCP port.</p>"
+        },
+        "ServerName": {
+          "shape": "String",
+          "documentation": "<p>Fully qualified domain name of the endpoint.</p>"
+        },
+        "Username": {
+          "shape": "String",
+          "documentation": "<p>Endpoint connection user name.</p>"
+        }
+      },
+      "documentation": "<p>Provides information that defines a SAP ASE endpoint.</p>"
+    },
     "TStamp": {
       "type": "timestamp"
     },
@@ -4448,6 +5225,10 @@
     },
     "TableToReload": {
       "type": "structure",
+      "required": [
+        "SchemaName",
+        "TableName"
+      ],
       "members": {
         "SchemaName": {
           "shape": "String",

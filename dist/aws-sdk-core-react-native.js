@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.720.0',
+	  VERSION: '2.721.0',
 
 	  /**
 	   * @api private
@@ -6536,9 +6536,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    });
 
 	    add('VALIDATE_REGION', 'validate', function VALIDATE_REGION(req) {
-	      if (!req.service.config.region && !req.service.isGlobalEndpoint) {
-	        req.response.error = AWS.util.error(new Error(),
-	          {code: 'ConfigError', message: 'Missing region in config'});
+	      if (!req.service.isGlobalEndpoint) {
+	        var dnsHostRegex = new RegExp(/^([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9])$/);
+	        if (!req.service.config.region) {
+	          req.response.error = AWS.util.error(new Error(),
+	            {code: 'ConfigError', message: 'Missing region in config'});
+	        } else if (!dnsHostRegex.test(req.service.config.region)) {
+	          req.response.error = AWS.util.error(new Error(),
+	            {code: 'ConfigError', message: 'Invalid region in config'});
+	        }
 	      }
 	    });
 

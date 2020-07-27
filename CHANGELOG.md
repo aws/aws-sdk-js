@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.720.0-->
+<!--LATEST=2.721.0-->
 <!--ENTRYINSERT-->
+
+## 2.721.0
+* bugfix: Region: Add region validation using DNS Host label regex
+* feature: DMS: Basic endpoint settings for relational databases, Preflight validation API.
+* feature: DataSync: Today AWS DataSync releases support for self-managed object storage Locations and the new TransferMode Option.
+* feature: EC2: m6gd, c6gd, r6gd instances are powered by AWS Graviton2 processors and support local NVMe instance storage
+* feature: FraudDetector: Moved the eventTypeName attribute for PutExternalModel API to inputConfiguration. Model ID's no longer allow hyphens.
+* feature: Glue: Add ability to manually resume workflows in AWS Glue providing customers further control over the orchestration of ETL workloads.
 
 ## 2.720.0
 * feature: CloudWatch: AWS CloudWatch ListMetrics now supports an optional parameter (RecentlyActive) to filter results by only metrics that have received new datapoints in the past 3 hours. This enables more targeted metric data retrieval through the Get APIs
