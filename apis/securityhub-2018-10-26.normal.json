@@ -1208,6 +1208,37 @@
       ],
       "documentation": "<p>Updates the Security Hub insight identified by the specified insight ARN.</p>"
     },
+    "UpdateSecurityHubConfiguration": {
+      "name": "UpdateSecurityHubConfiguration",
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/accounts"
+      },
+      "input": {
+        "shape": "UpdateSecurityHubConfigurationRequest"
+      },
+      "output": {
+        "shape": "UpdateSecurityHubConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InvalidAccessException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Updates configuration options for Security Hub.</p>"
+    },
     "UpdateStandardsControl": {
       "name": "UpdateStandardsControl",
       "http": {
@@ -3078,7 +3109,7 @@
         },
         "WorkflowState": {
           "shape": "StringFilterList",
-          "documentation": "<p>The workflow state of a finding.</p>"
+          "documentation": "<p>The workflow state of a finding.</p> <p>Note that this field is deprecated. To search for a finding based on its workflow status, use <code>WorkflowStatus</code>.</p>"
         },
         "WorkflowStatus": {
           "shape": "StringFilterList",
@@ -3844,6 +3875,10 @@
         "SubscribedAt": {
           "shape": "NonEmptyString",
           "documentation": "<p>The date and time when Security Hub was enabled in the account.</p>"
+        },
+        "AutoEnableControls": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether to automatically enable new controls when they are added to standards that are enabled.</p> <p>If set to <code>true</code>, then new controls for enabled standards are enabled automatically. If set to <code>false</code>, then new controls are not enabled.</p>"
         }
       }
     },
@@ -4081,7 +4116,7 @@
       "members": {
         "Filters": {
           "shape": "AwsSecurityFindingFilters",
-          "documentation": "<p>The finding attributes used to define a condition to filter the returned findings.</p>"
+          "documentation": "<p>The finding attributes used to define a condition to filter the returned findings.</p> <p>Note that in the available filter fields, <code>WorkflowState</code> is deprecated. To search for a finding based on its workflow status, use <code>WorkflowStatus</code>.</p>"
         },
         "SortCriteria": {
           "shape": "SortCriteria",
@@ -5271,18 +5306,18 @@
         },
         "Label": {
           "shape": "SeverityLabel",
-          "documentation": "<p>The severity value of the finding. The allowed values are the following.</p> <ul> <li> <p> <code>INFORMATIONAL</code> - No issue was found.</p> </li> <li> <p> <code>LOW</code> - The issue does not require action on its own.</p> </li> <li> <p> <code>MEDIUM</code> - The issue must be addressed but not urgently.</p> </li> <li> <p> <code>HIGH</code> - The issue must be addressed as a priority.</p> </li> <li> <p> <code>CRITICAL</code> - The issue must be remediated immediately to avoid it escalating.</p> </li> </ul>"
+          "documentation": "<p>The severity value of the finding. The allowed values are the following.</p> <ul> <li> <p> <code>INFORMATIONAL</code> - No issue was found.</p> </li> <li> <p> <code>LOW</code> - The issue does not require action on its own.</p> </li> <li> <p> <code>MEDIUM</code> - The issue must be addressed but not urgently.</p> </li> <li> <p> <code>HIGH</code> - The issue must be addressed as a priority.</p> </li> <li> <p> <code>CRITICAL</code> - The issue must be remediated immediately to avoid it escalating.</p> </li> </ul> <p>If you provide <code>Normalized</code> and do not provide <code>Label</code>, then <code>Label</code> is set automatically as follows. </p> <ul> <li> <p>0 - <code>INFORMATIONAL</code> </p> </li> <li> <p>1–39 - <code>LOW</code> </p> </li> <li> <p>40–69 - <code>MEDIUM</code> </p> </li> <li> <p>70–89 - <code>HIGH</code> </p> </li> <li> <p>90–100 - <code>CRITICAL</code> </p> </li> </ul>"
         },
         "Normalized": {
           "shape": "Integer",
-          "documentation": "<p>Deprecated. This attribute is being deprecated. Instead of providing <code>Normalized</code>, provide <code>Label</code>.</p> <p>If you provide <code>Normalized</code> and do not provide <code>Label</code>, <code>Label</code> is set automatically as follows. </p> <ul> <li> <p>0 - <code>INFORMATIONAL</code> </p> </li> <li> <p>1–39 - <code>LOW</code> </p> </li> <li> <p>40–69 - <code>MEDIUM</code> </p> </li> <li> <p>70–89 - <code>HIGH</code> </p> </li> <li> <p>90–100 - <code>CRITICAL</code> </p> </li> </ul>"
+          "documentation": "<p>Deprecated. The normalized severity of a finding. This attribute is being deprecated. Instead of providing <code>Normalized</code>, provide <code>Label</code>.</p> <p>If you provide <code>Label</code> and do not provide <code>Normalized</code>, then <code>Normalized</code> is set automatically as follows.</p> <ul> <li> <p> <code>INFORMATIONAL</code> - 0</p> </li> <li> <p> <code>LOW</code> - 1</p> </li> <li> <p> <code>MEDIUM</code> - 40</p> </li> <li> <p> <code>HIGH</code> - 70</p> </li> <li> <p> <code>CRITICAL</code> - 90</p> </li> </ul>"
         },
         "Original": {
           "shape": "NonEmptyString",
           "documentation": "<p>The native severity from the finding product that generated the finding.</p>"
         }
       },
-      "documentation": "<p>The severity of the finding.</p>"
+      "documentation": "<p>The severity of the finding.</p> <p>The finding provider can provide the initial severity, but cannot update it after that. The severity can only be updated by a master account. It cannot be updated by a member account.</p> <p>The finding must have either <code>Label</code> or <code>Normalized</code> populated. If only one of these attributes is populated, then Security Hub automatically populates the other one. If neither attribute is populated, then the finding is invalid. <code>Label</code> is the preferred attribute.</p>"
     },
     "SeverityLabel": {
       "type": "string",
@@ -5829,6 +5864,19 @@
       }
     },
     "UpdateInsightResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "UpdateSecurityHubConfigurationRequest": {
+      "type": "structure",
+      "members": {
+        "AutoEnableControls": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether to automatically enable new controls when they are added to standards that are enabled.</p> <p>By default, this is set to <code>true</code>, and new controls are enabled automatically. To not automatically enable new controls, set this to <code>false</code>. </p>"
+        }
+      }
+    },
+    "UpdateSecurityHubConfigurationResponse": {
       "type": "structure",
       "members": {}
     },

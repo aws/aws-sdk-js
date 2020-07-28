@@ -340,6 +340,14 @@ declare class SecurityHub extends Service {
    */
   updateInsight(callback?: (err: AWSError, data: SecurityHub.Types.UpdateInsightResponse) => void): Request<SecurityHub.Types.UpdateInsightResponse, AWSError>;
   /**
+   * Updates configuration options for Security Hub.
+   */
+  updateSecurityHubConfiguration(params: SecurityHub.Types.UpdateSecurityHubConfigurationRequest, callback?: (err: AWSError, data: SecurityHub.Types.UpdateSecurityHubConfigurationResponse) => void): Request<SecurityHub.Types.UpdateSecurityHubConfigurationResponse, AWSError>;
+  /**
+   * Updates configuration options for Security Hub.
+   */
+  updateSecurityHubConfiguration(callback?: (err: AWSError, data: SecurityHub.Types.UpdateSecurityHubConfigurationResponse) => void): Request<SecurityHub.Types.UpdateSecurityHubConfigurationResponse, AWSError>;
+  /**
    * Used to control whether an individual security standard control is enabled or disabled.
    */
   updateStandardsControl(params: SecurityHub.Types.UpdateStandardsControlRequest, callback?: (err: AWSError, data: SecurityHub.Types.UpdateStandardsControlResponse) => void): Request<SecurityHub.Types.UpdateStandardsControlResponse, AWSError>;
@@ -1840,7 +1848,7 @@ declare namespace SecurityHub {
      */
     VerificationState?: StringFilterList;
     /**
-     * The workflow state of a finding.
+     * The workflow state of a finding. Note that this field is deprecated. To search for a finding based on its workflow status, use WorkflowStatus.
      */
     WorkflowState?: StringFilterList;
     /**
@@ -2331,6 +2339,10 @@ declare namespace SecurityHub {
      * The date and time when Security Hub was enabled in the account.
      */
     SubscribedAt?: NonEmptyString;
+    /**
+     * Whether to automatically enable new controls when they are added to standards that are enabled. If set to true, then new controls for enabled standards are enabled automatically. If set to false, then new controls are not enabled.
+     */
+    AutoEnableControls?: Boolean;
   }
   export interface DescribeProductsRequest {
     /**
@@ -2472,7 +2484,7 @@ declare namespace SecurityHub {
   }
   export interface GetFindingsRequest {
     /**
-     * The finding attributes used to define a condition to filter the returned findings.
+     * The finding attributes used to define a condition to filter the returned findings. Note that in the available filter fields, WorkflowState is deprecated. To search for a finding based on its workflow status, use WorkflowStatus.
      */
     Filters?: AwsSecurityFindingFilters;
     /**
@@ -3223,11 +3235,11 @@ declare namespace SecurityHub {
      */
     Product?: Double;
     /**
-     * The severity value of the finding. The allowed values are the following.    INFORMATIONAL - No issue was found.    LOW - The issue does not require action on its own.    MEDIUM - The issue must be addressed but not urgently.    HIGH - The issue must be addressed as a priority.    CRITICAL - The issue must be remediated immediately to avoid it escalating.  
+     * The severity value of the finding. The allowed values are the following.    INFORMATIONAL - No issue was found.    LOW - The issue does not require action on its own.    MEDIUM - The issue must be addressed but not urgently.    HIGH - The issue must be addressed as a priority.    CRITICAL - The issue must be remediated immediately to avoid it escalating.   If you provide Normalized and do not provide Label, then Label is set automatically as follows.    0 - INFORMATIONAL    1–39 - LOW    40–69 - MEDIUM    70–89 - HIGH    90–100 - CRITICAL   
      */
     Label?: SeverityLabel;
     /**
-     * Deprecated. This attribute is being deprecated. Instead of providing Normalized, provide Label. If you provide Normalized and do not provide Label, Label is set automatically as follows.    0 - INFORMATIONAL    1–39 - LOW    40–69 - MEDIUM    70–89 - HIGH    90–100 - CRITICAL   
+     * Deprecated. The normalized severity of a finding. This attribute is being deprecated. Instead of providing Normalized, provide Label. If you provide Label and do not provide Normalized, then Normalized is set automatically as follows.    INFORMATIONAL - 0    LOW - 1    MEDIUM - 40    HIGH - 70    CRITICAL - 90  
      */
     Normalized?: Integer;
     /**
@@ -3515,6 +3527,14 @@ declare namespace SecurityHub {
     GroupByAttribute?: NonEmptyString;
   }
   export interface UpdateInsightResponse {
+  }
+  export interface UpdateSecurityHubConfigurationRequest {
+    /**
+     * Whether to automatically enable new controls when they are added to standards that are enabled. By default, this is set to true, and new controls are enabled automatically. To not automatically enable new controls, set this to false. 
+     */
+    AutoEnableControls?: Boolean;
+  }
+  export interface UpdateSecurityHubConfigurationResponse {
   }
   export interface UpdateStandardsControlRequest {
     /**

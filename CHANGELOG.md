@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.721.0-->
+<!--LATEST=2.722.0-->
 <!--ENTRYINSERT-->
+
+## 2.722.0
+* feature: AutoScaling: Now you can enable Instance Metadata Service Version 2 (IMDSv2) or disable the instance metadata endpoint with Launch Configurations.
+* feature: EC2: Introduces support for tag-on-create capability for the following APIs: CreateVpnConnection, CreateVpnGateway, and CreateCustomerGateway. A user can now add tags while creating these resources. For further detail, please see AWS Tagging Strategies.
+* feature: IVS: Added a new error code, PendingVerification, to differentiate between errors caused by insufficient IAM permissions and errors caused by account verification.
+* feature: Imagebuilder: This release updates distribution configurations to allow periods in AMI names.
+* feature: MediaLive: AWS Elemental MediaLive now supports several new features: EBU-TT-D captions in Microsoft Smooth outputs; interlaced video in HEVC outputs; video noise reduction (using temporal filtering) in HEVC outputs.
+* feature: RDS: Adds reporting of manual cluster snapshot quota to DescribeAccountAttributes API
+* feature: SecurityHub: Added UpdateSecurityHubConfiguration API. Security Hub now allows customers to choose whether to automatically enable new controls that are added to an existing standard that the customer enabled. For example, if you enabled Foundational Security Best Practices for an account, you can automatically enable new controls as we add them to that standard. By default, new controls are enabled.
 
 ## 2.721.0
 * bugfix: Region: Add region validation using DNS Host label regex

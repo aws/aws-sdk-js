@@ -1675,7 +1675,7 @@
       "type": "string",
       "max": 127,
       "min": 1,
-      "pattern": "^[-_A-Za-z0-9{][-_A-Za-z0-9\\s:{}]+[-_A-Za-z0-9}]$"
+      "pattern": "^[-_A-Za-z0-9{][-_A-Za-z0-9\\s:{}\\.]+[-_A-Za-z0-9}]$"
     },
     "Arn": {
       "type": "string"
@@ -3688,7 +3688,7 @@
       "members": {
         "filters": {
           "shape": "FilterList",
-          "documentation": "<p>The filters. </p>"
+          "documentation": "<p>The filters. </p> <ul> <li> <p> <code>name</code> - The name of this distribution configuration.</p> </li> </ul>"
         },
         "maxResults": {
           "shape": "RestrictedInteger",

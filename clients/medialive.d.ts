@@ -958,6 +958,7 @@ Alternate rendition that the client will not try to play back by default. Repres
     AribDestinationSettings?: AribDestinationSettings;
     BurnInDestinationSettings?: BurnInDestinationSettings;
     DvbSubDestinationSettings?: DvbSubDestinationSettings;
+    EbuTtDDestinationSettings?: EbuTtDDestinationSettings;
     EmbeddedDestinationSettings?: EmbeddedDestinationSettings;
     EmbeddedPlusScte20DestinationSettings?: EmbeddedPlusScte20DestinationSettings;
     RtmpCaptionInfoDestinationSettings?: RtmpCaptionInfoDestinationSettings;
@@ -2223,6 +2224,33 @@ during input switch actions. Presently, this functionality only works with MP4_F
   export type Eac3StereoDownmix = "DPL2"|"LO_RO"|"LT_RT"|"NOT_INDICATED"|string;
   export type Eac3SurroundExMode = "DISABLED"|"ENABLED"|"NOT_INDICATED"|string;
   export type Eac3SurroundMode = "DISABLED"|"ENABLED"|"NOT_INDICATED"|string;
+  export interface EbuTtDDestinationSettings {
+    /**
+     * Specifies how to handle the gap between the lines (in multi-line captions).
+
+- enabled: Fill with the captions background color (as specified in the input captions).
+- disabled: Leave the gap unfilled.
+     */
+    FillLineGap?: EbuTtDFillLineGapControl;
+    /**
+     * Specifies the font family to include in the font data attached to the EBU-TT captions. Valid only if styleControl is set to include. If you leave this field empty, the font family is set to "monospaced". (If styleControl is set to exclude, the font family is always set to "monospaced".)
+
+You specify only the font family. All other style information (color, bold, position and so on) is copied from the input captions. The size is always set to 100% to allow the downstream player to choose the size.
+
+- Enter a list of font families, as a comma-separated list of font names, in order of preference. The name can be a font family (such as “Arial”), or a generic font family (such as “serif”), or “default” (to let the downstream player choose the font).
+- Leave blank to set the family to “monospace”.
+     */
+    FontFamily?: __string;
+    /**
+     * Specifies the style information (font color, font position, and so on) to include in the font data that is attached to the EBU-TT captions.
+
+- include: Take the style information (font color, font position, and so on) from the source captions and include that information in the font data attached to the EBU-TT captions. This option is valid only if the source captions are Embedded or Teletext.
+- exclude: In the font data attached to the EBU-TT captions, set the font family to "monospaced". Do not include any other style information.
+     */
+    StyleControl?: EbuTtDDestinationStyleControl;
+  }
+  export type EbuTtDDestinationStyleControl = "EXCLUDE"|"INCLUDE"|string;
+  export type EbuTtDFillLineGapControl = "DISABLED"|"ENABLED"|string;
   export type EmbeddedConvert608To708 = "DISABLED"|"UPCONVERT"|string;
   export interface EmbeddedDestinationSettings {
   }
@@ -2631,13 +2659,16 @@ This field is optional; when no value is specified the encoder will choose the n
     Rec601Settings?: Rec601Settings;
     Rec709Settings?: Rec709Settings;
   }
+  export interface H265FilterSettings {
+    TemporalFilterSettings?: TemporalFilterSettings;
+  }
   export type H265FlickerAq = "DISABLED"|"ENABLED"|string;
   export type H265GopSizeUnits = "FRAMES"|"SECONDS"|string;
   export type H265Level = "H265_LEVEL_1"|"H265_LEVEL_2"|"H265_LEVEL_2_1"|"H265_LEVEL_3"|"H265_LEVEL_3_1"|"H265_LEVEL_4"|"H265_LEVEL_4_1"|"H265_LEVEL_5"|"H265_LEVEL_5_1"|"H265_LEVEL_5_2"|"H265_LEVEL_6"|"H265_LEVEL_6_1"|"H265_LEVEL_6_2"|"H265_LEVEL_AUTO"|string;
   export type H265LookAheadRateControl = "HIGH"|"LOW"|"MEDIUM"|string;
   export type H265Profile = "MAIN"|"MAIN_10BIT"|string;
   export type H265RateControlMode = "CBR"|"MULTIPLEX"|"QVBR"|string;
-  export type H265ScanType = "PROGRESSIVE"|string;
+  export type H265ScanType = "INTERLACED"|"PROGRESSIVE"|string;
   export type H265SceneChangeDetect = "DISABLED"|"ENABLED"|string;
   export interface H265Settings {
     /**
@@ -2668,6 +2699,10 @@ This field is optional; when no value is specified the encoder will choose the n
      * Color Space settings
      */
     ColorSpaceSettings?: H265ColorSpaceSettings;
+    /**
+     * Optional filters that you can apply to an encode.
+     */
+    FilterSettings?: H265FilterSettings;
     /**
      * Four bit AFD value to write on all frames of video in the output stream. Only valid when afdSignaling is set to 'Fixed'.
      */
@@ -3085,7 +3120,7 @@ SINGLE_FILE: Applies only if Mode field is VOD. Emit the program as a single .ts
   }
   export type HlsMediaStoreStorageClass = "TEMPORAL"|string;
   export type HlsMode = "LIVE"|"VOD"|string;
-  export type HlsOutputSelection = "MANIFESTS_AND_SEGMENTS"|"SEGMENTS_ONLY"|string;
+  export type HlsOutputSelection = "MANIFESTS_AND_SEGMENTS"|"SEGMENTS_ONLY"|"VARIANT_MANIFESTS_AND_SEGMENTS"|string;
   export interface HlsOutputSettings {
     /**
      * Only applicable when this output is referencing an H.265 video description.

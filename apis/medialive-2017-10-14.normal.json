@@ -3188,6 +3188,10 @@
           "shape": "DvbSubDestinationSettings",
           "locationName": "dvbSubDestinationSettings"
         },
+        "EbuTtDDestinationSettings": {
+          "shape": "EbuTtDDestinationSettings",
+          "locationName": "ebuTtDDestinationSettings"
+        },
         "EmbeddedDestinationSettings": {
           "shape": "EmbeddedDestinationSettings",
           "locationName": "embeddedDestinationSettings"
@@ -5367,6 +5371,43 @@
         "NOT_INDICATED"
       ]
     },
+    "EbuTtDDestinationSettings": {
+      "type": "structure",
+      "members": {
+        "FillLineGap": {
+          "shape": "EbuTtDFillLineGapControl",
+          "locationName": "fillLineGap",
+          "documentation": "Specifies how to handle the gap between the lines (in multi-line captions).\n\n- enabled: Fill with the captions background color (as specified in the input captions).\n- disabled: Leave the gap unfilled."
+        },
+        "FontFamily": {
+          "shape": "__string",
+          "locationName": "fontFamily",
+          "documentation": "Specifies the font family to include in the font data attached to the EBU-TT captions. Valid only if styleControl is set to include. If you leave this field empty, the font family is set to \"monospaced\". (If styleControl is set to exclude, the font family is always set to \"monospaced\".)\n\nYou specify only the font family. All other style information (color, bold, position and so on) is copied from the input captions. The size is always set to 100% to allow the downstream player to choose the size.\n\n- Enter a list of font families, as a comma-separated list of font names, in order of preference. The name can be a font family (such as “Arial”), or a generic font family (such as “serif”), or “default” (to let the downstream player choose the font).\n- Leave blank to set the family to “monospace”."
+        },
+        "StyleControl": {
+          "shape": "EbuTtDDestinationStyleControl",
+          "locationName": "styleControl",
+          "documentation": "Specifies the style information (font color, font position, and so on) to include in the font data that is attached to the EBU-TT captions.\n\n- include: Take the style information (font color, font position, and so on) from the source captions and include that information in the font data attached to the EBU-TT captions. This option is valid only if the source captions are Embedded or Teletext.\n- exclude: In the font data attached to the EBU-TT captions, set the font family to \"monospaced\". Do not include any other style information."
+        }
+      },
+      "documentation": "Ebu Tt DDestination Settings"
+    },
+    "EbuTtDDestinationStyleControl": {
+      "type": "string",
+      "documentation": "Ebu Tt DDestination Style Control",
+      "enum": [
+        "EXCLUDE",
+        "INCLUDE"
+      ]
+    },
+    "EbuTtDFillLineGapControl": {
+      "type": "string",
+      "documentation": "Ebu Tt DFill Line Gap Control",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ]
+    },
     "EmbeddedConvert608To708": {
       "type": "string",
       "documentation": "Embedded Convert608 To708",
@@ -6230,6 +6271,16 @@
       },
       "documentation": "H265 Color Space Settings"
     },
+    "H265FilterSettings": {
+      "type": "structure",
+      "members": {
+        "TemporalFilterSettings": {
+          "shape": "TemporalFilterSettings",
+          "locationName": "temporalFilterSettings"
+        }
+      },
+      "documentation": "H265 Filter Settings"
+    },
     "H265FlickerAq": {
       "type": "string",
       "documentation": "H265 Flicker Aq",
@@ -6296,6 +6347,7 @@
       "type": "string",
       "documentation": "H265 Scan Type",
       "enum": [
+        "INTERLACED",
         "PROGRESSIVE"
       ]
     },
@@ -6344,6 +6396,11 @@
           "shape": "H265ColorSpaceSettings",
           "locationName": "colorSpaceSettings",
           "documentation": "Color Space settings"
+        },
+        "FilterSettings": {
+          "shape": "H265FilterSettings",
+          "locationName": "filterSettings",
+          "documentation": "Optional filters that you can apply to an encode."
         },
         "FixedAfd": {
           "shape": "FixedAfd",
@@ -6984,7 +7041,8 @@
       "documentation": "Hls Output Selection",
       "enum": [
         "MANIFESTS_AND_SEGMENTS",
-        "SEGMENTS_ONLY"
+        "SEGMENTS_ONLY",
+        "VARIANT_MANIFESTS_AND_SEGMENTS"
       ]
     },
     "HlsOutputSettings": {

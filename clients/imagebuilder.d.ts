@@ -1832,7 +1832,7 @@ declare namespace Imagebuilder {
   }
   export interface ListDistributionConfigurationsRequest {
     /**
-     * The filters. 
+     * The filters.     name - The name of this distribution configuration.  
      */
     filters?: FilterList;
     /**

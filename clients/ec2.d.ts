@@ -5809,6 +5809,10 @@ declare namespace EC2 {
      */
     Type: GatewayType;
     /**
+     * The tags to apply to the customer gateway.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
      * A name for the customer gateway device. Length Constraints: Up to 255 characters.
      */
     DeviceName?: String;
@@ -7452,6 +7456,10 @@ declare namespace EC2 {
      * The options for the VPN connection.
      */
     Options?: VpnConnectionOptionsSpecification;
+    /**
+     * The tags to apply to the VPN connection.
+     */
+    TagSpecifications?: TagSpecificationList;
   }
   export interface CreateVpnConnectionResult {
     /**
@@ -7478,6 +7486,10 @@ declare namespace EC2 {
      * The type of VPN connection this virtual private gateway supports.
      */
     Type: GatewayType;
+    /**
+     * The tags to apply to the virtual private gateway.
+     */
+    TagSpecifications?: TagSpecificationList;
     /**
      * A private Autonomous System Number (ASN) for the Amazon side of a BGP session. If you're using a 16-bit ASN, it must be in the 64512 to 65534 range. If you're using a 32-bit ASN, it must be in the 4200000000 to 4294967294 range. Default: 64512
      */
@@ -23259,7 +23271,7 @@ declare namespace EC2 {
   export type TagList = Tag[];
   export interface TagSpecification {
     /**
-     * The type of resource to tag. Currently, the resource types that support tagging on creation are: capacity-reservation | client-vpn-endpoint | dedicated-host | dhcp-options | export-image-task | export-instance-task | fleet | fpga-image | host-reservation | import-image-task | import-snapshot-task | instance | internet-gateway | ipv4pool-ec2 | ipv6pool-ec2 | key-pair | launch-template | placement-group | prefix-list | natgateway | network-acl | security-group | spot-fleet-request | spot-instances-request | snapshot | subnet | traffic-mirror-filter | traffic-mirror-session | traffic-mirror-target | transit-gateway | transit-gateway-attachment | transit-gateway-route-table | volume |vpc | vpc-endpoint (for interface and gateway endpoints) | vpc-endpoint-service (for AWS PrivateLink) | vpc-flow-log. To tag a resource after it has been created, see CreateTags.
+     * The type of resource to tag. Currently, the resource types that support tagging on creation are: capacity-reservation | client-vpn-endpoint | customer-gateway | dedicated-host | dhcp-options | export-image-task | export-instance-task | fleet | fpga-image | host-reservation | import-image-task | import-snapshot-task | instance | internet-gateway | ipv4pool-ec2 | ipv6pool-ec2 | key-pair | launch-template | placement-group | prefix-list | natgateway | network-acl | route-table | security-group | spot-fleet-request | spot-instances-request | snapshot | subnet | traffic-mirror-filter | traffic-mirror-session | traffic-mirror-target | transit-gateway | transit-gateway-attachment | transit-gateway-route-table | volume |vpc |  vpc-peering-connection | vpc-endpoint (for interface and gateway endpoints) | vpc-endpoint-service (for AWS PrivateLink) | vpc-flow-log | vpn-connection | vpn-gateway. To tag a resource after it has been created, see CreateTags.
      */
     ResourceType?: ResourceType;
     /**

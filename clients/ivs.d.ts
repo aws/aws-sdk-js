@@ -36,35 +36,35 @@ declare class IVS extends Service {
    */
   createChannel(callback?: (err: AWSError, data: IVS.Types.CreateChannelResponse) => void): Request<IVS.Types.CreateChannelResponse, AWSError>;
   /**
-   * Creates a stream key, used to initiate a stream, for a specified channel ARN. Note that CreateChannel creates a stream key. If you subsequently use CreateStreamKey on the same channel, it will fail because a stream key already exists and there is a limit of 1 stream key per channel. To reset the stream key on a channel, use DeleteStreamKey and then CreateStreamKey.
+   * Creates a stream key, used to initiate a stream, for the specified channel ARN. Note that CreateChannel creates a stream key. If you subsequently use CreateStreamKey on the same channel, it will fail because a stream key already exists and there is a limit of 1 stream key per channel. To reset the stream key on a channel, use DeleteStreamKey and then CreateStreamKey.
    */
   createStreamKey(params: IVS.Types.CreateStreamKeyRequest, callback?: (err: AWSError, data: IVS.Types.CreateStreamKeyResponse) => void): Request<IVS.Types.CreateStreamKeyResponse, AWSError>;
   /**
-   * Creates a stream key, used to initiate a stream, for a specified channel ARN. Note that CreateChannel creates a stream key. If you subsequently use CreateStreamKey on the same channel, it will fail because a stream key already exists and there is a limit of 1 stream key per channel. To reset the stream key on a channel, use DeleteStreamKey and then CreateStreamKey.
+   * Creates a stream key, used to initiate a stream, for the specified channel ARN. Note that CreateChannel creates a stream key. If you subsequently use CreateStreamKey on the same channel, it will fail because a stream key already exists and there is a limit of 1 stream key per channel. To reset the stream key on a channel, use DeleteStreamKey and then CreateStreamKey.
    */
   createStreamKey(callback?: (err: AWSError, data: IVS.Types.CreateStreamKeyResponse) => void): Request<IVS.Types.CreateStreamKeyResponse, AWSError>;
   /**
-   * Deletes a specified channel and its associated stream keys.
+   * Deletes the specified channel and its associated stream keys.
    */
   deleteChannel(params: IVS.Types.DeleteChannelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a specified channel and its associated stream keys.
+   * Deletes the specified channel and its associated stream keys.
    */
   deleteChannel(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the stream key for a specified ARN, so it can no longer be used to stream.
+   * Deletes the stream key for the specified ARN, so it can no longer be used to stream.
    */
   deleteStreamKey(params: IVS.Types.DeleteStreamKeyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the stream key for a specified ARN, so it can no longer be used to stream.
+   * Deletes the stream key for the specified ARN, so it can no longer be used to stream.
    */
   deleteStreamKey(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Gets the channel configuration for a specified channel ARN. See also BatchGetChannel.
+   * Gets the channel configuration for the specified channel ARN. See also BatchGetChannel.
    */
   getChannel(params: IVS.Types.GetChannelRequest, callback?: (err: AWSError, data: IVS.Types.GetChannelResponse) => void): Request<IVS.Types.GetChannelResponse, AWSError>;
   /**
-   * Gets the channel configuration for a specified channel ARN. See also BatchGetChannel.
+   * Gets the channel configuration for the specified channel ARN. See also BatchGetChannel.
    */
   getChannel(callback?: (err: AWSError, data: IVS.Types.GetChannelResponse) => void): Request<IVS.Types.GetChannelResponse, AWSError>;
   /**
@@ -84,67 +84,67 @@ declare class IVS extends Service {
    */
   getStreamKey(callback?: (err: AWSError, data: IVS.Types.GetStreamKeyResponse) => void): Request<IVS.Types.GetStreamKeyResponse, AWSError>;
   /**
-   * Gets summary information about channels. This list can be filtered to match a specified string.
+   * Gets summary information about all channels in your account, in the AWS region where the API request is processed. This list can be filtered to match a specified string.
    */
   listChannels(params: IVS.Types.ListChannelsRequest, callback?: (err: AWSError, data: IVS.Types.ListChannelsResponse) => void): Request<IVS.Types.ListChannelsResponse, AWSError>;
   /**
-   * Gets summary information about channels. This list can be filtered to match a specified string.
+   * Gets summary information about all channels in your account, in the AWS region where the API request is processed. This list can be filtered to match a specified string.
    */
   listChannels(callback?: (err: AWSError, data: IVS.Types.ListChannelsResponse) => void): Request<IVS.Types.ListChannelsResponse, AWSError>;
   /**
-   * Gets summary information about stream keys. The list can be filtered to a particular channel.
+   * Gets summary information about stream keys for the specified channel.
    */
   listStreamKeys(params: IVS.Types.ListStreamKeysRequest, callback?: (err: AWSError, data: IVS.Types.ListStreamKeysResponse) => void): Request<IVS.Types.ListStreamKeysResponse, AWSError>;
   /**
-   * Gets summary information about stream keys. The list can be filtered to a particular channel.
+   * Gets summary information about stream keys for the specified channel.
    */
   listStreamKeys(callback?: (err: AWSError, data: IVS.Types.ListStreamKeysResponse) => void): Request<IVS.Types.ListStreamKeysResponse, AWSError>;
   /**
-   * Gets summary information about live streams.
+   * Gets summary information about live streams in your account, in the AWS region where the API request is processed.
    */
   listStreams(params: IVS.Types.ListStreamsRequest, callback?: (err: AWSError, data: IVS.Types.ListStreamsResponse) => void): Request<IVS.Types.ListStreamsResponse, AWSError>;
   /**
-   * Gets summary information about live streams.
+   * Gets summary information about live streams in your account, in the AWS region where the API request is processed.
    */
   listStreams(callback?: (err: AWSError, data: IVS.Types.ListStreamsResponse) => void): Request<IVS.Types.ListStreamsResponse, AWSError>;
   /**
-   * Gets information about the tags for a specified ARN.
+   * Gets information about AWS tags for the specified ARN.
    */
   listTagsForResource(params: IVS.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: IVS.Types.ListTagsForResourceResponse) => void): Request<IVS.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Gets information about the tags for a specified ARN.
+   * Gets information about AWS tags for the specified ARN.
    */
   listTagsForResource(callback?: (err: AWSError, data: IVS.Types.ListTagsForResourceResponse) => void): Request<IVS.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Inserts metadata into an RTMP stream for a specified channel. A maximum of 5 requests per second per channel is allowed, each with a maximum 1KB payload.
+   * Inserts metadata into an RTMPS stream for the specified channel. A maximum of 5 requests per second per channel is allowed, each with a maximum 1KB payload.
    */
   putMetadata(params: IVS.Types.PutMetadataRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Inserts metadata into an RTMP stream for a specified channel. A maximum of 5 requests per second per channel is allowed, each with a maximum 1KB payload.
+   * Inserts metadata into an RTMPS stream for the specified channel. A maximum of 5 requests per second per channel is allowed, each with a maximum 1KB payload.
    */
   putMetadata(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Disconnects the stream for the specified channel. This disconnects the incoming RTMP stream from the client. Can be used in conjunction with DeleteStreamKey to prevent further streaming to a channel.  Many streaming client-software libraries automatically reconnect a dropped RTMP session, so to stop the stream permanently, you may want to first revoke the streamKey attached to the channel. 
+   * Disconnects the incoming RTMPS stream for the specified channel. Can be used in conjunction with DeleteStreamKey to prevent further streaming to a channel.  Many streaming client-software libraries automatically reconnect a dropped RTMPS session, so to stop the stream permanently, you may want to first revoke the streamKey attached to the channel. 
    */
   stopStream(params: IVS.Types.StopStreamRequest, callback?: (err: AWSError, data: IVS.Types.StopStreamResponse) => void): Request<IVS.Types.StopStreamResponse, AWSError>;
   /**
-   * Disconnects the stream for the specified channel. This disconnects the incoming RTMP stream from the client. Can be used in conjunction with DeleteStreamKey to prevent further streaming to a channel.  Many streaming client-software libraries automatically reconnect a dropped RTMP session, so to stop the stream permanently, you may want to first revoke the streamKey attached to the channel. 
+   * Disconnects the incoming RTMPS stream for the specified channel. Can be used in conjunction with DeleteStreamKey to prevent further streaming to a channel.  Many streaming client-software libraries automatically reconnect a dropped RTMPS session, so to stop the stream permanently, you may want to first revoke the streamKey attached to the channel. 
    */
   stopStream(callback?: (err: AWSError, data: IVS.Types.StopStreamResponse) => void): Request<IVS.Types.StopStreamResponse, AWSError>;
   /**
-   * Adds or updates tags for a resource with a specified ARN.
+   * Adds or updates tags for the AWS resource with the specified ARN.
    */
   tagResource(params: IVS.Types.TagResourceRequest, callback?: (err: AWSError, data: IVS.Types.TagResourceResponse) => void): Request<IVS.Types.TagResourceResponse, AWSError>;
   /**
-   * Adds or updates tags for a resource with a specified ARN.
+   * Adds or updates tags for the AWS resource with the specified ARN.
    */
   tagResource(callback?: (err: AWSError, data: IVS.Types.TagResourceResponse) => void): Request<IVS.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes tags for a resource with a specified ARN.
+   * Removes tags from the resource with the specified ARN.
    */
   untagResource(params: IVS.Types.UntagResourceRequest, callback?: (err: AWSError, data: IVS.Types.UntagResourceResponse) => void): Request<IVS.Types.UntagResourceResponse, AWSError>;
   /**
-   * Removes tags for a resource with a specified ARN.
+   * Removes tags from the resource with the specified ARN.
    */
   untagResource(callback?: (err: AWSError, data: IVS.Types.UntagResourceResponse) => void): Request<IVS.Types.UntagResourceResponse, AWSError>;
   /**
@@ -209,7 +209,7 @@ declare namespace IVS {
      */
     latencyMode?: ChannelLatencyMode;
     /**
-     * Channel type, which determines the allowable resolution and bitrate. STANDARD: The stream is transcoded; resolution (width, in landscape orientation) can be up to 1080p or the input source resolution, whichever is lower; and bitrate can be up to 8.5 Mbps. BASIC: The stream is transfixed; resolution can be up to 480p; and bitrate can be up to 1.5 Mbps. Default STANDARD.
+     * Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately. Valid values:    STANDARD: Multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps.    BASIC: Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Vertical resolution can be up to 480 and bitrate can be up to 1.5 Mbps.   Default: STANDARD.
      */
     type?: ChannelType;
     /**
@@ -260,7 +260,7 @@ declare namespace IVS {
      */
     latencyMode?: ChannelLatencyMode;
     /**
-     * Channel type, which determines the allowable resolution and bitrate. STANDARD: The stream is transcoded; resolution (width, in landscape orientation) can be up to 1080p or the input source resolution, whichever is lower; and bitrate can be up to 8.5 Mbps. BASIC: The stream is transfixed; resolution can be up to 480p; and bitrate can be up to 1.5 Mbps. Default: STANDARD.
+     * Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately. Valid values:    STANDARD: Multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps.    BASIC: Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Vertical resolution can be up to 480 and bitrate can be up to 1.5 Mbps.   Default: STANDARD.
      */
     type?: ChannelType;
     /**
@@ -284,7 +284,7 @@ declare namespace IVS {
   }
   export interface CreateStreamKeyResponse {
     /**
-     * Stream key used to authenticate an RTMP stream for ingestion.
+     * Stream key used to authenticate an RTMPS stream for ingestion.
      */
     streamKey?: StreamKey;
   }
@@ -576,7 +576,7 @@ declare namespace IVS {
      */
     latencyMode?: ChannelLatencyMode;
     /**
-     * Channel type, which determines the allowable resolution and bitrate. STANDARD: The stream is transcoded; resolution (width, in landscape orientation) can be up to 1080p or the input source resolution, whichever is lower; and bitrate can be up to 8.5 Mbps. BASIC: The stream is transfixed; resolution can be up to 480p; and bitrate can be up to 1.5 Mbps. Default STANDARD.
+     * Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately. Valid values:    STANDARD: Multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps.    BASIC: Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Vertical resolution can be up to 480 and bitrate can be up to 1.5 Mbps.   Default: STANDARD.
      */
     type?: ChannelType;
   }
