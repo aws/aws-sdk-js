@@ -41,13 +41,13 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Creates a group with a specified name, description, and resource query.</p>"
+      "documentation": "<p>Creates a resource group with the specified name and description. You can optionally include a resource query, or a service configuration.</p>"
     },
     "DeleteGroup": {
       "name": "DeleteGroup",
       "http": {
-        "method": "DELETE",
-        "requestUri": "/groups/{GroupName}"
+        "method": "POST",
+        "requestUri": "/delete-group"
       },
       "input": {
         "shape": "DeleteGroupInput"
@@ -75,13 +75,13 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Deletes a specified resource group. Deleting a resource group does not delete resources that are members of the group; it only deletes the group structure.</p>"
+      "documentation": "<p>Deletes the specified resource group. Deleting a resource group does not delete any resources that are members of the group; it only deletes the group structure.</p>"
     },
     "GetGroup": {
       "name": "GetGroup",
       "http": {
-        "method": "GET",
-        "requestUri": "/groups/{GroupName}"
+        "method": "POST",
+        "requestUri": "/get-group"
       },
       "input": {
         "shape": "GetGroupInput"
@@ -111,11 +111,45 @@
       ],
       "documentation": "<p>Returns information about a specified resource group.</p>"
     },
+    "GetGroupConfiguration": {
+      "name": "GetGroupConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/get-group-configuration"
+      },
+      "input": {
+        "shape": "GetGroupConfigurationInput"
+      },
+      "output": {
+        "shape": "GetGroupConfigurationOutput"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "MethodNotAllowedException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        }
+      ],
+      "documentation": "<p>Returns the service configuration associated with the specified resource group. AWS Resource Groups supports configurations for the following resource group types:</p> <ul> <li> <p> <code>AWS::EC2::CapacityReservationPool</code> - Amazon EC2 capacity reservation pools. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group\">Working with capacity reservation groups</a> in the <i>EC2 Users Guide</i>.</p> </li> </ul>"
+    },
     "GetGroupQuery": {
       "name": "GetGroupQuery",
       "http": {
-        "method": "GET",
-        "requestUri": "/groups/{GroupName}/query"
+        "method": "POST",
+        "requestUri": "/get-group-query"
       },
       "input": {
         "shape": "GetGroupQueryInput"
@@ -143,7 +177,7 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Returns the resource query associated with the specified resource group.</p>"
+      "documentation": "<p>Retrieves the resource query associated with the specified resource group.</p>"
     },
     "GetTags": {
       "name": "GetTags",
@@ -179,11 +213,45 @@
       ],
       "documentation": "<p>Returns a list of tags that are associated with a resource group, specified by an ARN.</p>"
     },
+    "GroupResources": {
+      "name": "GroupResources",
+      "http": {
+        "method": "POST",
+        "requestUri": "/group-resources"
+      },
+      "input": {
+        "shape": "GroupResourcesInput"
+      },
+      "output": {
+        "shape": "GroupResourcesOutput"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "MethodNotAllowedException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        }
+      ],
+      "documentation": "<p>Adds the specified resources to the specified group.</p>"
+    },
     "ListGroupResources": {
       "name": "ListGroupResources",
       "http": {
         "method": "POST",
-        "requestUri": "/groups/{GroupName}/resource-identifiers-list"
+        "requestUri": "/list-group-resources"
       },
       "input": {
         "shape": "ListGroupResourcesInput"
@@ -313,7 +381,41 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Adds tags to a resource group with the specified ARN. Existing tags on a resource group are not changed if they are not specified in the request parameters.</p>"
+      "documentation": "<p>Adds tags to a resource group with the specified ARN. Existing tags on a resource group are not changed if they are not specified in the request parameters.</p> <important> <p>Do not store personally identifiable information (PII) or other confidential or sensitive information in tags. We use tags to provide you with billing and administration services. Tags are not intended to be used for private or sensitive data.</p> </important>"
+    },
+    "UngroupResources": {
+      "name": "UngroupResources",
+      "http": {
+        "method": "POST",
+        "requestUri": "/ungroup-resources"
+      },
+      "input": {
+        "shape": "UngroupResourcesInput"
+      },
+      "output": {
+        "shape": "UngroupResourcesOutput"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "MethodNotAllowedException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        }
+      ],
+      "documentation": "<p>Removes the specified resources from the specified group.</p>"
     },
     "Untag": {
       "name": "Untag",
@@ -347,13 +449,13 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Deletes specified tags from a specified resource.</p>"
+      "documentation": "<p>Deletes tags from a specified resource group.</p>"
     },
     "UpdateGroup": {
       "name": "UpdateGroup",
       "http": {
-        "method": "PUT",
-        "requestUri": "/groups/{GroupName}"
+        "method": "POST",
+        "requestUri": "/update-group"
       },
       "input": {
         "shape": "UpdateGroupInput"
@@ -381,13 +483,13 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Updates an existing group with a new or changed description. You cannot update the name of a resource group.</p>"
+      "documentation": "<p>Updates the description for an existing group. You cannot update the name of a resource group.</p>"
     },
     "UpdateGroupQuery": {
       "name": "UpdateGroupQuery",
       "http": {
-        "method": "PUT",
-        "requestUri": "/groups/{GroupName}/query"
+        "method": "POST",
+        "requestUri": "/update-group-query"
       },
       "input": {
         "shape": "UpdateGroupQueryInput"
@@ -422,25 +524,28 @@
     "CreateGroupInput": {
       "type": "structure",
       "required": [
-        "Name",
-        "ResourceQuery"
+        "Name"
       ],
       "members": {
         "Name": {
           "shape": "GroupName",
-          "documentation": "<p>The name of the group, which is the identifier of the group in other operations. A resource group name cannot be updated after it is created. A resource group name can have a maximum of 128 characters, including letters, numbers, hyphens, dots, and underscores. The name cannot start with <code>AWS</code> or <code>aws</code>; these are reserved. A resource group name must be unique within your account.</p>"
+          "documentation": "<p>The name of the group, which is the identifier of the group in other operations. You can't change the name of a resource group after you create it. A resource group name can consist of letters, numbers, hyphens, periods, and underscores. The name cannot start with <code>AWS</code> or <code>aws</code>; these are reserved. A resource group name must be unique within each AWS Region in your AWS account.</p>"
         },
         "Description": {
-          "shape": "GroupDescription",
-          "documentation": "<p>The description of the resource group. Descriptions can have a maximum of 511 characters, including letters, numbers, hyphens, underscores, punctuation, and spaces.</p>"
+          "shape": "Description",
+          "documentation": "<p>The description of the resource group. Descriptions can consist of letters, numbers, hyphens, underscores, periods, and spaces.</p>"
         },
         "ResourceQuery": {
           "shape": "ResourceQuery",
-          "documentation": "<p>The resource query that determines which AWS resources are members of this group.</p>"
+          "documentation": "<p>The resource query that determines which AWS resources are members of this group.</p> <note> <p>You can specify either a <code>ResourceQuery</code> or a <code>Configuration</code>, but not both.</p> </note>"
         },
         "Tags": {
           "shape": "Tags",
-          "documentation": "<p>The tags to add to the group. A tag is a string-to-string map of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.</p>"
+          "documentation": "<p>The tags to add to the group. A tag is key-value pair string.</p>"
+        },
+        "Configuration": {
+          "shape": "GroupConfigurationList",
+          "documentation": "<p>A configuration associates the resource group with an AWS service and specifies how the service can interact with the resources in the group. A configuration is an array of <a>GroupConfigurationItem</a> elements.</p> <note> <p>You can specify either a <code>Configuration</code> or a <code>ResourceQuery</code> in a group, but not both.</p> </note>"
         }
       }
     },
@@ -449,7 +554,7 @@
       "members": {
         "Group": {
           "shape": "Group",
-          "documentation": "<p>A full description of the resource group after it is created.</p>"
+          "documentation": "<p>The description of the resource group.</p>"
         },
         "ResourceQuery": {
           "shape": "ResourceQuery",
@@ -458,20 +563,25 @@
         "Tags": {
           "shape": "Tags",
           "documentation": "<p>The tags associated with the group.</p>"
+        },
+        "GroupConfiguration": {
+          "shape": "GroupConfiguration",
+          "documentation": "<p>The service configuration associated with the resource group. AWS Resource Groups supports adding service configurations for the following resource group types:</p> <ul> <li> <p> <code>AWS::EC2::CapacityReservationPool</code> - Amazon EC2 capacity reservation pools. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group\">Working with capacity reservation groups</a> in the <i>EC2 Users Guide</i>.</p> </li> </ul>"
         }
       }
     },
     "DeleteGroupInput": {
       "type": "structure",
-      "required": [
-        "GroupName"
-      ],
       "members": {
         "GroupName": {
           "shape": "GroupName",
-          "documentation": "<p>The name of the resource group to delete.</p>",
-          "location": "uri",
-          "locationName": "GroupName"
+          "documentation": "<p>Don't use this parameter. Use <code>Group</code> instead.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "This field is deprecated, use Group instead."
+        },
+        "Group": {
+          "shape": "GroupString",
+          "documentation": "<p>The name or the ARN of the resource group to delete.</p>"
         }
       }
     },
@@ -484,17 +594,75 @@
         }
       }
     },
+    "Description": {
+      "type": "string",
+      "max": 512,
+      "pattern": "[\\sa-zA-Z0-9_\\.-]*"
+    },
+    "ErrorCode": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
+    "ErrorMessage": {
+      "type": "string",
+      "max": 1024,
+      "min": 1
+    },
+    "FailedResource": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The ARN of the resource that failed to be added or removed.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "ErrorMessage",
+          "documentation": "<p>The error message text associated with the failure.</p>"
+        },
+        "ErrorCode": {
+          "shape": "ErrorCode",
+          "documentation": "<p>The error code associated with the failure.</p>"
+        }
+      },
+      "documentation": "<p>A resource that failed to be added to or removed from a group.</p>"
+    },
+    "FailedResourceList": {
+      "type": "list",
+      "member": {
+        "shape": "FailedResource"
+      }
+    },
+    "GetGroupConfigurationInput": {
+      "type": "structure",
+      "members": {
+        "Group": {
+          "shape": "GroupString",
+          "documentation": "<p>The name or the ARN of the resource group.</p>"
+        }
+      }
+    },
+    "GetGroupConfigurationOutput": {
+      "type": "structure",
+      "members": {
+        "GroupConfiguration": {
+          "shape": "GroupConfiguration",
+          "documentation": "<p>The configuration associated with the specified group.</p>"
+        }
+      }
+    },
     "GetGroupInput": {
       "type": "structure",
-      "required": [
-        "GroupName"
-      ],
       "members": {
         "GroupName": {
           "shape": "GroupName",
-          "documentation": "<p>The name of the resource group.</p>",
-          "location": "uri",
-          "locationName": "GroupName"
+          "documentation": "<p>Don't use this parameter. Use <code>Group</code> instead.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "This field is deprecated, use Group instead."
+        },
+        "Group": {
+          "shape": "GroupString",
+          "documentation": "<p>The name or the ARN of the resource group to retrieve.</p>"
         }
       }
     },
@@ -509,15 +677,16 @@
     },
     "GetGroupQueryInput": {
       "type": "structure",
-      "required": [
-        "GroupName"
-      ],
       "members": {
         "GroupName": {
           "shape": "GroupName",
-          "documentation": "<p>The name of the resource group.</p>",
-          "location": "uri",
-          "locationName": "GroupName"
+          "documentation": "<p>Don't use this parameter. Use <code>Group</code> instead.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "This field is deprecated, use Group instead."
+        },
+        "Group": {
+          "shape": "GroupString",
+          "documentation": "<p>The name or the ARN of the resource group to query.</p>"
         }
       }
     },
@@ -538,7 +707,7 @@
       "members": {
         "Arn": {
           "shape": "GroupArn",
-          "documentation": "<p>The ARN of the resource group for which you want a list of tags. The resource must exist within the account you are using.</p>",
+          "documentation": "<p>The ARN of the resource group whose tags you want to retrieve.</p>",
           "location": "uri",
           "locationName": "Arn"
         }
@@ -566,29 +735,121 @@
       "members": {
         "GroupArn": {
           "shape": "GroupArn",
-          "documentation": "<p>The ARN of a resource group.</p>"
+          "documentation": "<p>The ARN of the resource group.</p>"
         },
         "Name": {
           "shape": "GroupName",
-          "documentation": "<p>The name of a resource group.</p>"
+          "documentation": "<p>The name of the resource group.</p>"
         },
         "Description": {
-          "shape": "GroupDescription",
+          "shape": "Description",
           "documentation": "<p>The description of the resource group.</p>"
         }
       },
-      "documentation": "<p>A resource group.</p>"
+      "documentation": "<p>A resource group that contains AWS resources. You can assign resources to the group by associating either of the following elements with the group:</p> <ul> <li> <p> <a>ResourceQuery</a> - Use a resource query to specify a set of tag keys and values. All resources in the same AWS Region and AWS account that have those keys with the same values are included in the group. You can add a resource query when you create the group.</p> </li> <li> <p> <a>GroupConfiguration</a> - Use a service configuration to associate the group with an AWS service. The configuration specifies which resource types can be included in the group.</p> </li> </ul>"
     },
     "GroupArn": {
       "type": "string",
       "max": 1600,
       "min": 12,
-      "pattern": "arn:aws(-[a-z]+)*:resource-groups:[a-z]{2}-[a-z]+-\\d{1}:[0-9]{12}:group/[a-zA-Z0-9_\\.-]{1,128}"
+      "pattern": "arn:aws(-[a-z]+)*:resource-groups:[a-z]{2}(-[a-z]+)+-\\d{1}:[0-9]{12}:group/[a-zA-Z0-9_\\.-]{1,128}"
     },
-    "GroupDescription": {
+    "GroupConfiguration": {
+      "type": "structure",
+      "members": {
+        "Configuration": {
+          "shape": "GroupConfigurationList",
+          "documentation": "<p>The configuration currently associated with the group and in effect.</p>"
+        },
+        "ProposedConfiguration": {
+          "shape": "GroupConfigurationList",
+          "documentation": "<p>If present, the new configuration that is in the process of being applied to the group.</p>"
+        },
+        "Status": {
+          "shape": "GroupConfigurationStatus",
+          "documentation": "<p>The current status of an attempt to update the group configuration.</p>"
+        },
+        "FailureReason": {
+          "shape": "GroupConfigurationFailureReason",
+          "documentation": "<p>If present, the reason why a request to update the group configuration failed.</p>"
+        }
+      },
+      "documentation": "<p>A service configuration associated with a resource group. The configuration options are determined by the AWS service that defines the <code>Type</code>, and specifies which resources can be included in the group. You can add a service configuration when you create the group.</p>"
+    },
+    "GroupConfigurationFailureReason": {
+      "type": "string"
+    },
+    "GroupConfigurationItem": {
+      "type": "structure",
+      "required": [
+        "Type"
+      ],
+      "members": {
+        "Type": {
+          "shape": "GroupConfigurationType",
+          "documentation": "<p>Specifies the type of group configuration item. Each item must have a unique value for <code>type</code>.</p> <p>You can specify the following string values:</p> <ul> <li> <p> <code>AWS::EC2::CapacityReservationPool</code> </p> <p>For more information about EC2 capacity reservation groups, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group\">Working with capacity reservation groups</a> in the <i>EC2 Users Guide</i>.</p> </li> <li> <p> <code>AWS::ResourceGroups::Generic</code> - Supports parameters that configure the behavior of resource groups of any type.</p> </li> </ul>"
+        },
+        "Parameters": {
+          "shape": "GroupParameterList",
+          "documentation": "<p>A collection of parameters for this group configuration item.</p>"
+        }
+      },
+      "documentation": "<p>An item in a group configuration. A group configuration can have one or more items.</p>"
+    },
+    "GroupConfigurationList": {
+      "type": "list",
+      "member": {
+        "shape": "GroupConfigurationItem"
+      },
+      "max": 2
+    },
+    "GroupConfigurationParameter": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "GroupConfigurationParameterName",
+          "documentation": "<p>The name of the group configuration parameter.</p> <p>You can specify the following string values:</p> <ul> <li> <p>For configuration item type <code>AWS::ResourceGroups::Generic</code>:</p> <ul> <li> <p> <code>allowed-resource-types</code> </p> <p>Specifies the types of resources that you can add to this group by using the <a>GroupResources</a> operation.</p> </li> </ul> </li> <li> <p>For configuration item type <code>AWS::EC2::CapacityReservationPool</code>:</p> <ul> <li> <p>None - This configuration item type doesn't support any parameters.</p> </li> </ul> <p>For more information about EC2 capacity reservation groups, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group\">Working with capacity reservation groups</a> in the <i>EC2 Users Guide</i>.</p> </li> </ul>"
+        },
+        "Values": {
+          "shape": "GroupConfigurationParameterValueList",
+          "documentation": "<p>The values of for this parameter.</p> <p>You can specify the following string value:</p> <ul> <li> <p>For item type <code>allowed-resource-types</code>: the only supported parameter value is <code>AWS::EC2::CapacityReservation</code>.</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>A parameter for a group configuration item.</p>"
+    },
+    "GroupConfigurationParameterName": {
       "type": "string",
-      "max": 512,
-      "pattern": "[\\sa-zA-Z0-9_\\.-]*"
+      "max": 40,
+      "min": 1,
+      "pattern": "[a-z-]+"
+    },
+    "GroupConfigurationParameterValue": {
+      "type": "string",
+      "max": 40,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9:]+"
+    },
+    "GroupConfigurationParameterValueList": {
+      "type": "list",
+      "member": {
+        "shape": "GroupConfigurationParameterValue"
+      }
+    },
+    "GroupConfigurationStatus": {
+      "type": "string",
+      "enum": [
+        "UPDATING",
+        "UPDATE_COMPLETE",
+        "UPDATE_FAILED"
+      ]
+    },
+    "GroupConfigurationType": {
+      "type": "string",
+      "max": 40,
+      "pattern": "AWS::[a-zA-Z0-9]+::[a-zA-Z0-9]+"
     },
     "GroupFilter": {
       "type": "structure",
@@ -606,7 +867,7 @@
           "documentation": "<p>One or more filter values. Allowed filter values vary by group filter name, and are case-sensitive.</p>"
         }
       },
-      "documentation": "<p>A filter name and value pair that is used to obtain more specific results from a list of groups.</p>"
+      "documentation": "<p>A filter collection that you can use to restrict the results from a <code>List</code> operation to only those you want to include.</p>"
     },
     "GroupFilterList": {
       "type": "list",
@@ -617,7 +878,8 @@
     "GroupFilterName": {
       "type": "string",
       "enum": [
-        "resource-type"
+        "resource-type",
+        "configuration-type"
       ]
     },
     "GroupFilterValue": {
@@ -639,14 +901,14 @@
       "members": {
         "GroupName": {
           "shape": "GroupName",
-          "documentation": "<p>The name of a resource group.</p>"
+          "documentation": "<p>The name of the resource group.</p>"
         },
         "GroupArn": {
           "shape": "GroupArn",
-          "documentation": "<p>The ARN of a resource group.</p>"
+          "documentation": "<p>The ARN of the resource group.</p>"
         }
       },
-      "documentation": "<p>The ARN and group name of a group.</p>"
+      "documentation": "<p>The unique identifiers for a resource group.</p>"
     },
     "GroupIdentifierList": {
       "type": "list",
@@ -666,6 +928,12 @@
       "min": 1,
       "pattern": "[a-zA-Z0-9_\\.-]+"
     },
+    "GroupParameterList": {
+      "type": "list",
+      "member": {
+        "shape": "GroupConfigurationParameter"
+      }
+    },
     "GroupQuery": {
       "type": "structure",
       "required": [
@@ -675,42 +943,75 @@
       "members": {
         "GroupName": {
           "shape": "GroupName",
-          "documentation": "<p>The name of a resource group that is associated with a specific resource query.</p>"
+          "documentation": "<p>The name of the resource group that is associated with the specified resource query.</p>"
         },
         "ResourceQuery": {
           "shape": "ResourceQuery",
-          "documentation": "<p>The resource query which determines which AWS resources are members of the associated resource group.</p>"
+          "documentation": "<p>The resource query that determines which AWS resources are members of the associated resource group.</p>"
         }
       },
-      "documentation": "<p>The underlying resource query of a resource group. Resources that match query results are part of the group.</p>"
+      "documentation": "<p>A mapping of a query attached to a resource group that determines the AWS resources that are members of the group.</p>"
+    },
+    "GroupResourcesInput": {
+      "type": "structure",
+      "required": [
+        "Group",
+        "ResourceArns"
+      ],
+      "members": {
+        "Group": {
+          "shape": "GroupString",
+          "documentation": "<p>The name or the ARN of the resource group to add resources to.</p>"
+        },
+        "ResourceArns": {
+          "shape": "ResourceArnList",
+          "documentation": "<p>The list of ARNs for resources to be added to the group. </p>"
+        }
+      }
+    },
+    "GroupResourcesOutput": {
+      "type": "structure",
+      "members": {
+        "Succeeded": {
+          "shape": "ResourceArnList",
+          "documentation": "<p>The ARNs of the resources that were successfully added to the group by this operation.</p>"
+        },
+        "Failed": {
+          "shape": "FailedResourceList",
+          "documentation": "<p>The ARNs of the resources that failed to be added to the group by this operation.</p>"
+        }
+      }
+    },
+    "GroupString": {
+      "type": "string",
+      "max": 1600,
+      "min": 1,
+      "pattern": "(arn:aws(-[a-z]+)*:resource-groups:[a-z]{2}(-[a-z]+)+-\\d{1}:[0-9]{12}:group/)?[a-zA-Z0-9_\\.-]{1,128}"
     },
     "ListGroupResourcesInput": {
       "type": "structure",
-      "required": [
-        "GroupName"
-      ],
       "members": {
         "GroupName": {
           "shape": "GroupName",
-          "documentation": "<p>The name of the resource group.</p>",
-          "location": "uri",
-          "locationName": "GroupName"
+          "documentation": "<p>Don't use this parameter. Use <code>Group</code> instead.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "This field is deprecated, use Group instead."
+        },
+        "Group": {
+          "shape": "GroupString",
+          "documentation": "<p>The name or the ARN of the resource group</p>"
         },
         "Filters": {
           "shape": "ResourceFilterList",
-          "documentation": "<p>Filters, formatted as ResourceFilter objects, that you want to apply to a ListGroupResources operation.</p> <ul> <li> <p> <code>resource-type</code> - Filter resources by their type. Specify up to five resource types in the format AWS::ServiceCode::ResourceType. For example, AWS::EC2::Instance, or AWS::S3::Bucket.</p> </li> </ul>"
+          "documentation": "<p>Filters, formatted as <a>ResourceFilter</a> objects, that you want to apply to a <code>ListGroupResources</code> operation. Filters the results to include only those of the specified resource types.</p> <ul> <li> <p> <code>resource-type</code> - Filter resources by their type. Specify up to five resource types in the format <code>AWS::ServiceCode::ResourceType</code>. For example, <code>AWS::EC2::Instance</code>, or <code>AWS::S3::Bucket</code>. </p> </li> </ul> <p>When you specify a <code>resource-type</code> filter for <code>ListGroupResources</code>, AWS Resource Groups validates your filter resource types against the types that are defined in the query associated with the group. For example, if a group contains only S3 buckets because its query specifies only that resource type, but your <code>resource-type</code> filter includes EC2 instances, AWS Resource Groups does not filter for EC2 instances. In this case, a <code>ListGroupResources</code> request returns a <code>BadRequestException</code> error with a message similar to the following:</p> <p> <code>The resource types specified as filters in the request are not valid.</code> </p> <p>The error includes a list of resource types that failed the validation because they are not part of the query associated with the group. This validation doesn't occur when the group query specifies <code>AWS::AllSupported</code>, because a group based on such a query can contain any of the allowed resource types for the query type (tag-based or AWS CloudFormation stack-based queries).</p>"
         },
         "MaxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>The maximum number of group member ARNs that are returned in a single call by ListGroupResources, in paginated output. By default, this number is 50.</p>",
-          "location": "querystring",
-          "locationName": "maxResults"
+          "documentation": "<p>The total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The NextToken value that is returned in a paginated ListGroupResources request. To get the next page of results, run the call again, add the NextToken parameter, and specify the NextToken value.</p>",
-          "location": "querystring",
-          "locationName": "nextToken"
+          "documentation": "<p>The parameter for receiving additional results if you receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> response indicates that more output is available. Set this parameter to the value provided by a previous call's <code>NextToken</code> response to indicate where the output should continue from.</p>"
         }
       }
     },
@@ -723,7 +1024,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The NextToken value to include in a subsequent <code>ListGroupResources</code> request, to get more results.</p>"
+          "documentation": "<p>If present, indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.</p>"
         },
         "QueryErrors": {
           "shape": "QueryErrorList",
@@ -736,17 +1037,17 @@
       "members": {
         "Filters": {
           "shape": "GroupFilterList",
-          "documentation": "<p>Filters, formatted as GroupFilter objects, that you want to apply to a ListGroups operation.</p> <ul> <li> <p> <code>resource-type</code> - Filter groups by resource type. Specify up to five resource types in the format AWS::ServiceCode::ResourceType. For example, AWS::EC2::Instance, or AWS::S3::Bucket.</p> </li> </ul>"
+          "documentation": "<p>Filters, formatted as <a>GroupFilter</a> objects, that you want to apply to a <code>ListGroups</code> operation.</p> <ul> <li> <p> <code>resource-type</code> - Filter the results to include only those of the specified resource types. Specify up to five resource types in the format <code>AWS::<i>ServiceCode</i>::<i>ResourceType</i> </code>. For example, <code>AWS::EC2::Instance</code>, or <code>AWS::S3::Bucket</code>.</p> </li> <li> <p> <code>configuration-type</code> - Filter the results to include only those groups that have the specified configuration types attached. The current supported values are:</p> <ul> <li> <p>AWS:EC2::CapacityReservationPool</p> </li> </ul> </li> </ul>"
         },
         "MaxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>The maximum number of resource group results that are returned by ListGroups in paginated output. By default, this number is 50.</p>",
+          "documentation": "<p>The total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p>",
           "location": "querystring",
           "locationName": "maxResults"
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The NextToken value that is returned in a paginated <code>ListGroups</code> request. To get the next page of results, run the call again, add the NextToken parameter, and specify the NextToken value.</p>",
+          "documentation": "<p>The parameter for receiving additional results if you receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> response indicates that more output is available. Set this parameter to the value provided by a previous call's <code>NextToken</code> response to indicate where the output should continue from.</p>",
           "location": "querystring",
           "locationName": "nextToken"
         }
@@ -757,17 +1058,17 @@
       "members": {
         "GroupIdentifiers": {
           "shape": "GroupIdentifierList",
-          "documentation": "<p>A list of GroupIdentifier objects. Each identifier is an object that contains both the GroupName and the GroupArn.</p>"
+          "documentation": "<p>A list of <a>GroupIdentifier</a> objects. Each identifier is an object that contains both the <code>Name</code> and the <code>GroupArn</code>.</p>"
         },
         "Groups": {
           "shape": "GroupList",
-          "documentation": "<p>A list of resource groups.</p>",
+          "documentation": "<p>This output element is deprecated and shouldn't be used. Refer to <code>GroupIdentifiers</code> instead.</p>",
           "deprecated": true,
           "deprecatedMessage": "This field is deprecated, use GroupIdentifiers instead."
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The NextToken value to include in a subsequent <code>ListGroups</code> request, to get more results.</p>"
+          "documentation": "<p>If present, indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.</p>"
         }
       }
     },
@@ -829,7 +1130,15 @@
     },
     "ResourceArn": {
       "type": "string",
-      "pattern": "arn:aws(-[a-z]+)*:[a-z0-9\\-]*:([a-z]{2}-[a-z]+-\\d{1})?:([0-9]{12})?:.+"
+      "pattern": "arn:aws(-[a-z]+)*:[a-z0-9\\-]*:([a-z]{2}(-[a-z]+)+-\\d{1})?:([0-9]{12})?:.+"
+    },
+    "ResourceArnList": {
+      "type": "list",
+      "member": {
+        "shape": "ResourceArn"
+      },
+      "max": 10,
+      "min": 1
     },
     "ResourceFilter": {
       "type": "structure",
@@ -904,7 +1213,7 @@
       "members": {
         "Type": {
           "shape": "QueryType",
-          "documentation": "<p>The type of the query. The valid values in this release are <code>TAG_FILTERS_1_0</code> and <code>CLOUDFORMATION_STACK_1_0</code>.</p> <p> <i> <code>TAG_FILTERS_1_0:</code> </i> A JSON syntax that lets you specify a collection of simple tag filters for resource types and tags, as supported by the AWS Tagging API <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html\">GetResources</a> operation. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches <i>any</i> of the specified values.</p> <p>For example, consider the following sample query for resources that have two tags, <code>Stage</code> and <code>Version</code>, with two values each. (<code>[{\"Key\":\"Stage\",\"Values\":[\"Test\",\"Deploy\"]},{\"Key\":\"Version\",\"Values\":[\"1\",\"2\"]}]</code>) The results of this query might include the following.</p> <ul> <li> <p>An EC2 instance that has the following two tags: <code>{\"Key\":\"Stage\",\"Value\":\"Deploy\"}</code>, and <code>{\"Key\":\"Version\",\"Value\":\"2\"}</code> </p> </li> <li> <p>An S3 bucket that has the following two tags: {\"Key\":\"Stage\",\"Value\":\"Test\"}, and {\"Key\":\"Version\",\"Value\":\"1\"}</p> </li> </ul> <p>The query would not return the following results, however. The following EC2 instance does not have all tag keys specified in the filter, so it is rejected. The RDS database has all of the tag keys, but no values that match at least one of the specified tag key values in the filter.</p> <ul> <li> <p>An EC2 instance that has only the following tag: <code>{\"Key\":\"Stage\",\"Value\":\"Deploy\"}</code>.</p> </li> <li> <p>An RDS database that has the following two tags: <code>{\"Key\":\"Stage\",\"Value\":\"Archived\"}</code>, and <code>{\"Key\":\"Version\",\"Value\":\"4\"}</code> </p> </li> </ul> <p> <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i> A JSON syntax that lets you specify a CloudFormation stack ARN.</p>"
+          "documentation": "<p>The type of the query. The valid values in this release are the following:</p> <ul> <li> <p> <i> <code>TAG_FILTERS_1_0:</code> </i> A JSON syntax that lets you specify a collection of simple tag filters for resource types and tags, as supported by the AWS Tagging API <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html\">GetResources</a> operation. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches <i>any</i> of the specified values.</p> <p>For example, consider the following sample query for resources that have two tags, <code>Stage</code> and <code>Version</code>, with two values each. (<code>[{\"Key\":\"Stage\",\"Values\":[\"Test\",\"Deploy\"]},{\"Key\":\"Version\",\"Values\":[\"1\",\"2\"]}]</code>) The results of this query might include the following.</p> <ul> <li> <p>An EC2 instance that has the following two tags: <code>{\"Key\":\"Stage\",\"Value\":\"Deploy\"}</code>, and <code>{\"Key\":\"Version\",\"Value\":\"2\"}</code> </p> </li> <li> <p>An S3 bucket that has the following two tags: <code>{\"Key\":\"Stage\",\"Value\":\"Test\"}</code>, and <code>{\"Key\":\"Version\",\"Value\":\"1\"}</code> </p> </li> </ul> <p>The query would not return the following results, however. The following EC2 instance does not have all tag keys specified in the filter, so it is rejected. The RDS database has all of the tag keys, but no values that match at least one of the specified tag key values in the filter.</p> <ul> <li> <p>An EC2 instance that has only the following tag: <code>{\"Key\":\"Stage\",\"Value\":\"Deploy\"}</code>.</p> </li> <li> <p>An RDS database that has the following two tags: <code>{\"Key\":\"Stage\",\"Value\":\"Archived\"}</code>, and <code>{\"Key\":\"Version\",\"Value\":\"4\"}</code> </p> </li> </ul> </li> <li> <p> <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i> A JSON syntax that lets you specify a CloudFormation stack ARN.</p> </li> </ul>"
         },
         "Query": {
           "shape": "Query",
@@ -925,15 +1234,15 @@
       "members": {
         "ResourceQuery": {
           "shape": "ResourceQuery",
-          "documentation": "<p>The search query, using the same formats that are supported for resource group definition.</p>"
+          "documentation": "<p>The search query, using the same formats that are supported for resource group definition. For more information, see <a>CreateGroup</a>.</p>"
         },
         "MaxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>The maximum number of group member ARNs returned by <code>SearchResources</code> in paginated output. By default, this number is 50.</p>"
+          "documentation": "<p>The total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the maximum you specify, the <code>NextToken</code> response element is present and has a value (is not null). Include that value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The NextToken value that is returned in a paginated <code>SearchResources</code> request. To get the next page of results, run the call again, add the NextToken parameter, and specify the NextToken value.</p>"
+          "documentation": "<p>The parameter for receiving additional results if you receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> response indicates that more output is available. Set this parameter to the value provided by a previous call's <code>NextToken</code> response to indicate where the output should continue from.</p>"
         }
       }
     },
@@ -946,7 +1255,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The NextToken value to include in a subsequent <code>SearchResources</code> request, to get more results.</p>"
+          "documentation": "<p>If present, indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>.</p>"
         },
         "QueryErrors": {
           "shape": "QueryErrorList",
@@ -963,13 +1272,13 @@
       "members": {
         "Arn": {
           "shape": "GroupArn",
-          "documentation": "<p>The ARN of the resource to which to add tags.</p>",
+          "documentation": "<p>The ARN of the resource group to which to add tags.</p>",
           "location": "uri",
           "locationName": "Arn"
         },
         "Tags": {
           "shape": "Tags",
-          "documentation": "<p>The tags to add to the specified resource. A tag is a string-to-string map of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.</p>"
+          "documentation": "<p>The tags to add to the specified resource group. A tag is a string-to-string map of key-value pairs.</p>"
         }
       }
     },
@@ -994,7 +1303,7 @@
         },
         "Tags": {
           "shape": "Tags",
-          "documentation": "<p>The tags that have been added to the specified resource.</p>"
+          "documentation": "<p>The tags that have been added to the specified resource group.</p>"
         }
       }
     },
@@ -1013,6 +1322,36 @@
         "shape": "TagValue"
       }
     },
+    "UngroupResourcesInput": {
+      "type": "structure",
+      "required": [
+        "Group",
+        "ResourceArns"
+      ],
+      "members": {
+        "Group": {
+          "shape": "GroupString",
+          "documentation": "<p>The name or the ARN of the resource group from which to remove the resources.</p>"
+        },
+        "ResourceArns": {
+          "shape": "ResourceArnList",
+          "documentation": "<p>The ARNs of the resources to be removed from the group.</p>"
+        }
+      }
+    },
+    "UngroupResourcesOutput": {
+      "type": "structure",
+      "members": {
+        "Succeeded": {
+          "shape": "ResourceArnList",
+          "documentation": "<p>The ARNs of the resources that were successfully removed from the group.</p>"
+        },
+        "Failed": {
+          "shape": "FailedResourceList",
+          "documentation": "<p>The resources that failed to be removed from the group.</p>"
+        }
+      }
+    },
     "UntagInput": {
       "type": "structure",
       "required": [
@@ -1022,7 +1361,7 @@
       "members": {
         "Arn": {
           "shape": "GroupArn",
-          "documentation": "<p>The ARN of the resource from which to remove tags.</p>",
+          "documentation": "<p>The ARN of the resource group from which to remove tags. The command removed both the specified keys and any values associated with those keys.</p>",
           "location": "uri",
           "locationName": "Arn"
         },
@@ -1037,29 +1376,30 @@
       "members": {
         "Arn": {
           "shape": "GroupArn",
-          "documentation": "<p>The ARN of the resource from which tags have been removed.</p>"
+          "documentation": "<p>The ARN of the resource group from which tags have been removed.</p>"
         },
         "Keys": {
           "shape": "TagKeyList",
-          "documentation": "<p>The keys of tags that have been removed.</p>"
+          "documentation": "<p>The keys of the tags that were removed.</p>"
         }
       }
     },
     "UpdateGroupInput": {
       "type": "structure",
-      "required": [
-        "GroupName"
-      ],
       "members": {
         "GroupName": {
           "shape": "GroupName",
-          "documentation": "<p>The name of the resource group for which you want to update its description.</p>",
-          "location": "uri",
-          "locationName": "GroupName"
+          "documentation": "<p>Don't use this parameter. Use <code>Group</code> instead.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "This field is deprecated, use Group instead."
+        },
+        "Group": {
+          "shape": "GroupString",
+          "documentation": "<p>The name or the ARN of the resource group to modify.</p>"
         },
         "Description": {
-          "shape": "GroupDescription",
-          "documentation": "<p>The description of the resource group. Descriptions can have a maximum of 511 characters, including letters, numbers, hyphens, underscores, punctuation, and spaces.</p>"
+          "shape": "Description",
+          "documentation": "<p>The new description that you want to update the resource group with. Descriptions can contain letters, numbers, hyphens, underscores, periods, and spaces.</p>"
         }
       }
     },
@@ -1068,26 +1408,29 @@
       "members": {
         "Group": {
           "shape": "Group",
-          "documentation": "<p>The full description of the resource group after it has been updated.</p>"
+          "documentation": "<p>The update description of the resource group.</p>"
         }
       }
     },
     "UpdateGroupQueryInput": {
       "type": "structure",
       "required": [
-        "GroupName",
         "ResourceQuery"
       ],
       "members": {
         "GroupName": {
           "shape": "GroupName",
-          "documentation": "<p>The name of the resource group for which you want to edit the query.</p>",
-          "location": "uri",
-          "locationName": "GroupName"
+          "documentation": "<p>Don't use this parameter. Use <code>Group</code> instead.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "This field is deprecated, use Group instead."
+        },
+        "Group": {
+          "shape": "GroupString",
+          "documentation": "<p>The name or the ARN of the resource group to query.</p>"
         },
         "ResourceQuery": {
           "shape": "ResourceQuery",
-          "documentation": "<p>The resource query that determines which AWS resources are members of the resource group.</p>"
+          "documentation": "<p>The resource query to determine which AWS resources are members of this resource group.</p>"
         }
       }
     },
@@ -1096,7 +1439,7 @@
       "members": {
         "GroupQuery": {
           "shape": "GroupQuery",
-          "documentation": "<p>The resource query associated with the resource group after the update.</p>"
+          "documentation": "<p>The updated resource query associated with the resource group after the update.</p>"
         }
       }
     }

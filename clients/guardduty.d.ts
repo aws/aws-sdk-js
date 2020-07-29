@@ -252,6 +252,14 @@ declare class GuardDuty extends Service {
    */
   getMasterAccount(callback?: (err: AWSError, data: GuardDuty.Types.GetMasterAccountResponse) => void): Request<GuardDuty.Types.GetMasterAccountResponse, AWSError>;
   /**
+   * Describes which data sources are enabled for the member account's detector.
+   */
+  getMemberDetectors(params: GuardDuty.Types.GetMemberDetectorsRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetMemberDetectorsResponse) => void): Request<GuardDuty.Types.GetMemberDetectorsResponse, AWSError>;
+  /**
+   * Describes which data sources are enabled for the member account's detector.
+   */
+  getMemberDetectors(callback?: (err: AWSError, data: GuardDuty.Types.GetMemberDetectorsResponse) => void): Request<GuardDuty.Types.GetMemberDetectorsResponse, AWSError>;
+  /**
    * Retrieves GuardDuty member accounts (to the current GuardDuty master account) specified by the account IDs.
    */
   getMembers(params: GuardDuty.Types.GetMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetMembersResponse) => void): Request<GuardDuty.Types.GetMembersResponse, AWSError>;
@@ -316,11 +324,11 @@ declare class GuardDuty extends Service {
    */
   listInvitations(callback?: (err: AWSError, data: GuardDuty.Types.ListInvitationsResponse) => void): Request<GuardDuty.Types.ListInvitationsResponse, AWSError>;
   /**
-   * Lists details about all member accounts for the current GuardDuty master account.
+   * Lists details about associated member accounts for the current GuardDuty master account.
    */
   listMembers(params: GuardDuty.Types.ListMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.ListMembersResponse) => void): Request<GuardDuty.Types.ListMembersResponse, AWSError>;
   /**
-   * Lists details about all member accounts for the current GuardDuty master account.
+   * Lists details about associated member accounts for the current GuardDuty master account.
    */
   listMembers(callback?: (err: AWSError, data: GuardDuty.Types.ListMembersResponse) => void): Request<GuardDuty.Types.ListMembersResponse, AWSError>;
   /**
@@ -427,6 +435,14 @@ declare class GuardDuty extends Service {
    * Updates the IPSet specified by the IPSet ID.
    */
   updateIPSet(callback?: (err: AWSError, data: GuardDuty.Types.UpdateIPSetResponse) => void): Request<GuardDuty.Types.UpdateIPSetResponse, AWSError>;
+  /**
+   * Contains information on member accounts to be updated.
+   */
+  updateMemberDetectors(params: GuardDuty.Types.UpdateMemberDetectorsRequest, callback?: (err: AWSError, data: GuardDuty.Types.UpdateMemberDetectorsResponse) => void): Request<GuardDuty.Types.UpdateMemberDetectorsResponse, AWSError>;
+  /**
+   * Contains information on member accounts to be updated.
+   */
+  updateMemberDetectors(callback?: (err: AWSError, data: GuardDuty.Types.UpdateMemberDetectorsResponse) => void): Request<GuardDuty.Types.UpdateMemberDetectorsResponse, AWSError>;
   /**
    * Updates the delegated administrator account with the values provided.
    */
@@ -634,6 +650,12 @@ declare namespace GuardDuty {
     CityName?: String;
   }
   export type ClientToken = string;
+  export interface CloudTrailConfigurationResult {
+    /**
+     * Describes whether CloudTrail is enabled as a data source for the detector.
+     */
+    Status: DataSourceStatus;
+  }
   export interface Condition {
     /**
      * Represents the equal condition to be applied to a single field when querying for findings.
@@ -709,6 +731,10 @@ declare namespace GuardDuty {
      */
     FindingPublishingFrequency?: FindingPublishingFrequency;
     /**
+     * An object that describes which data sources will be enabled for the detector.
+     */
+    DataSources?: DataSourceConfigurations;
+    /**
      * The tags to be added to a new detector resource.
      */
     Tags?: TagMap;
@@ -773,7 +799,7 @@ declare namespace GuardDuty {
      */
     Format: IpSetFormat;
     /**
-     * The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+     * The URI of the file that contains the IPSet.
      */
     Location: Location;
     /**
@@ -861,7 +887,7 @@ declare namespace GuardDuty {
      */
     Format: ThreatIntelSetFormat;
     /**
-     * The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+     * The URI of the file that contains the ThreatIntelSet.
      */
     Location: Location;
     /**
@@ -884,6 +910,37 @@ declare namespace GuardDuty {
     ThreatIntelSetId: String;
   }
   export type Criterion = {[key: string]: Condition};
+  export interface DNSLogsConfigurationResult {
+    /**
+     * Denotes whether DNS logs is enabled as a data source.
+     */
+    Status: DataSourceStatus;
+  }
+  export interface DataSourceConfigurations {
+    /**
+     * Describes whether S3 data event logs are enabled as a data source.
+     */
+    S3Logs?: S3LogsConfiguration;
+  }
+  export interface DataSourceConfigurationsResult {
+    /**
+     * An object that contains information on the status of CloudTrail as a data source.
+     */
+    CloudTrail: CloudTrailConfigurationResult;
+    /**
+     * An object that contains information on the status of DNS logs as a data source.
+     */
+    DNSLogs: DNSLogsConfigurationResult;
+    /**
+     * An object that contains information on the status of VPC flow logs as a data source.
+     */
+    FlowLogs: FlowLogsConfigurationResult;
+    /**
+     * An object that contains information on the status of S3 Data event logs as a data source.
+     */
+    S3Logs: S3LogsConfigurationResult;
+  }
+  export type DataSourceStatus = "ENABLED"|"DISABLED"|string;
   export interface DeclineInvitationsRequest {
     /**
      * A list of account IDs of the AWS accounts that sent invitations to the current member account that you want to decline invitations from.
@@ -1005,6 +1062,10 @@ declare namespace GuardDuty {
      * Indicates whether the maximum number of allowed member accounts are already associated with the delegated administrator master account.
      */
     MemberAccountLimitReached: Boolean;
+    /**
+     * An object that describes which data sources are enabled automatically for member accounts.
+     */
+    DataSources?: OrganizationDataSourceConfigurationsResult;
   }
   export interface DescribePublishingDestinationRequest {
     /**
@@ -1211,6 +1272,12 @@ declare namespace GuardDuty {
   export type FindingType = string;
   export type FindingTypes = FindingType[];
   export type Findings = Finding[];
+  export interface FlowLogsConfigurationResult {
+    /**
+     * Denotes whether VPC flow logs is enabled as a data source.
+     */
+    Status: DataSourceStatus;
+  }
   export interface GeoLocation {
     /**
      * The latitude information of the remote IP address.
@@ -1248,6 +1315,10 @@ declare namespace GuardDuty {
      * The last-updated timestamp for the detector.
      */
     UpdatedAt?: String;
+    /**
+     * An object that describes which data sources are enabled for the detector.
+     */
+    DataSources?: DataSourceConfigurationsResult;
     /**
      * The tags of the detector resource.
      */
@@ -1349,7 +1420,7 @@ declare namespace GuardDuty {
      */
     Format: IpSetFormat;
     /**
-     * The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+     * The URI of the file that contains the IPSet.
      */
     Location: Location;
     /**
@@ -1380,6 +1451,26 @@ declare namespace GuardDuty {
      * The master account details.
      */
     Master: Master;
+  }
+  export interface GetMemberDetectorsRequest {
+    /**
+     * The detector ID for the master account.
+     */
+    DetectorId: DetectorId;
+    /**
+     * The account ID of the member account.
+     */
+    AccountIds: AccountIds;
+  }
+  export interface GetMemberDetectorsResponse {
+    /**
+     * An object that describes which data sources are enabled for a member account.
+     */
+    MemberDataSourceConfigurations: MemberDataSourceConfigurations;
+    /**
+     * A list of member account IDs that were unable to be processed along with an explanation for why they were not processed.
+     */
+    UnprocessedAccounts: UnprocessedAccounts;
   }
   export interface GetMembersRequest {
     /**
@@ -1421,7 +1512,7 @@ declare namespace GuardDuty {
      */
     Format: ThreatIntelSetFormat;
     /**
-     * The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+     * The URI of the file that contains the ThreatIntelSet.
      */
     Location: Location;
     /**
@@ -1596,7 +1687,7 @@ declare namespace GuardDuty {
      */
     DetectorId: DetectorId;
     /**
-     * Represents the criteria used for querying findings. Valid values include:   JSON field name   accountId   region   confidence   id   resource.accessKeyDetails.accessKeyId   resource.accessKeyDetails.principalId   resource.accessKeyDetails.userName   resource.accessKeyDetails.userType   resource.instanceDetails.iamInstanceProfile.id   resource.instanceDetails.imageId   resource.instanceDetails.instanceId   resource.instanceDetails.networkInterfaces.ipv6Addresses   resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress   resource.instanceDetails.networkInterfaces.publicDnsName   resource.instanceDetails.networkInterfaces.publicIp   resource.instanceDetails.networkInterfaces.securityGroups.groupId   resource.instanceDetails.networkInterfaces.securityGroups.groupName   resource.instanceDetails.networkInterfaces.subnetId   resource.instanceDetails.networkInterfaces.vpcId   resource.instanceDetails.tags.key   resource.instanceDetails.tags.value   resource.resourceType   service.action.actionType   service.action.awsApiCallAction.api   service.action.awsApiCallAction.callerType   service.action.awsApiCallAction.remoteIpDetails.city.cityName   service.action.awsApiCallAction.remoteIpDetails.country.countryName   service.action.awsApiCallAction.remoteIpDetails.ipAddressV4   service.action.awsApiCallAction.remoteIpDetails.organization.asn   service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg   service.action.awsApiCallAction.serviceName   service.action.dnsRequestAction.domain   service.action.networkConnectionAction.blocked   service.action.networkConnectionAction.connectionDirection   service.action.networkConnectionAction.localPortDetails.port   service.action.networkConnectionAction.protocol   service.action.networkConnectionAction.remoteIpDetails.city.cityName   service.action.networkConnectionAction.remoteIpDetails.country.countryName   service.action.networkConnectionAction.remoteIpDetails.ipAddressV4   service.action.networkConnectionAction.remoteIpDetails.organization.asn   service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg   service.action.networkConnectionAction.remotePortDetails.port   service.additionalInfo.threatListName   service.archived When this attribute is set to 'true', only archived findings are listed. When it's set to 'false', only unarchived findings are listed. When this attribute is not set, all existing findings are listed.   service.resourceRole   severity   type   updatedAt Type: Timestamp in Unix Epoch millisecond format: 1486685375000  
+     * Represents the criteria used for querying findings. Valid values include:   JSON field name   accountId   region   confidence   id   resource.accessKeyDetails.accessKeyId   resource.accessKeyDetails.principalId   resource.accessKeyDetails.userName   resource.accessKeyDetails.userType   resource.instanceDetails.iamInstanceProfile.id   resource.instanceDetails.imageId   resource.instanceDetails.instanceId   resource.instanceDetails.outpostArn   resource.instanceDetails.networkInterfaces.ipv6Addresses   resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress   resource.instanceDetails.networkInterfaces.publicDnsName   resource.instanceDetails.networkInterfaces.publicIp   resource.instanceDetails.networkInterfaces.securityGroups.groupId   resource.instanceDetails.networkInterfaces.securityGroups.groupName   resource.instanceDetails.networkInterfaces.subnetId   resource.instanceDetails.networkInterfaces.vpcId   resource.instanceDetails.tags.key   resource.instanceDetails.tags.value   resource.resourceType   service.action.actionType   service.action.awsApiCallAction.api   service.action.awsApiCallAction.callerType   service.action.awsApiCallAction.remoteIpDetails.city.cityName   service.action.awsApiCallAction.remoteIpDetails.country.countryName   service.action.awsApiCallAction.remoteIpDetails.ipAddressV4   service.action.awsApiCallAction.remoteIpDetails.organization.asn   service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg   service.action.awsApiCallAction.serviceName   service.action.dnsRequestAction.domain   service.action.networkConnectionAction.blocked   service.action.networkConnectionAction.connectionDirection   service.action.networkConnectionAction.localPortDetails.port   service.action.networkConnectionAction.protocol   service.action.networkConnectionAction.localIpDetails.ipAddressV4   service.action.networkConnectionAction.remoteIpDetails.city.cityName   service.action.networkConnectionAction.remoteIpDetails.country.countryName   service.action.networkConnectionAction.remoteIpDetails.ipAddressV4   service.action.networkConnectionAction.remoteIpDetails.organization.asn   service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg   service.action.networkConnectionAction.remotePortDetails.port   service.additionalInfo.threatListName   service.archived When this attribute is set to 'true', only archived findings are listed. When it's set to 'false', only unarchived findings are listed. When this attribute is not set, all existing findings are listed.   service.resourceRole   severity   type   updatedAt Type: Timestamp in Unix Epoch millisecond format: 1486685375000  
      */
     FindingCriteria?: FindingCriteria;
     /**
@@ -1680,7 +1771,7 @@ declare namespace GuardDuty {
      */
     NextToken?: String;
     /**
-     * Specifies whether to only return associated members or to return all members (including members who haven't been invited yet or have been disassociated).
+     * Specifies what member accounts the response includes based on their relationship status with the master account. The default value is "true". If set to "false" the response includes all existing member accounts (including members who haven't been invited yet or have been disassociated).
      */
     OnlyAssociated?: String;
   }
@@ -1841,6 +1932,17 @@ declare namespace GuardDuty {
      */
     UpdatedAt: String;
   }
+  export interface MemberDataSourceConfiguration {
+    /**
+     * The account ID for the member account.
+     */
+    AccountId: AccountId;
+    /**
+     * Contains information on the status of data sources for the account.
+     */
+    DataSources: DataSourceConfigurationsResult;
+  }
+  export type MemberDataSourceConfigurations = MemberDataSourceConfiguration[];
   export type Members = Member[];
   export type Name = string;
   export type Neq = String[];
@@ -1936,6 +2038,30 @@ declare namespace GuardDuty {
      * The name of the internet provider.
      */
     Org?: String;
+  }
+  export interface OrganizationDataSourceConfigurations {
+    /**
+     * Describes whether S3 data event logs are enabled for new members of the organization.
+     */
+    S3Logs?: OrganizationS3LogsConfiguration;
+  }
+  export interface OrganizationDataSourceConfigurationsResult {
+    /**
+     * Describes whether S3 data event logs are enabled as a data source.
+     */
+    S3Logs: OrganizationS3LogsConfigurationResult;
+  }
+  export interface OrganizationS3LogsConfiguration {
+    /**
+     * A value that contains information on whether S3 data event logs will be enabled automatically as a data source for the organization.
+     */
+    AutoEnable: Boolean;
+  }
+  export interface OrganizationS3LogsConfigurationResult {
+    /**
+     * A value that describes whether S3 data event logs are automatically enabled for new members of the organization.
+     */
+    AutoEnable: Boolean;
   }
   export interface Owner {
     /**
@@ -2096,6 +2222,18 @@ declare namespace GuardDuty {
     PublicAccess?: PublicAccess;
   }
   export type S3BucketDetails = S3BucketDetail[];
+  export interface S3LogsConfiguration {
+    /**
+     *  The status of S3 data event logs as a data source.
+     */
+    Enable: Boolean;
+  }
+  export interface S3LogsConfigurationResult {
+    /**
+     * A value that describes whether S3 data event logs are automatically enabled for new members of the organization.
+     */
+    Status: DataSourceStatus;
+  }
   export interface SecurityGroup {
     /**
      * The security group ID of the EC2 instance.
@@ -2283,6 +2421,10 @@ declare namespace GuardDuty {
      * An enum value that specifies how frequently findings are exported, such as to CloudWatch Events.
      */
     FindingPublishingFrequency?: FindingPublishingFrequency;
+    /**
+     * An object that describes which data sources will be updated.
+     */
+    DataSources?: DataSourceConfigurations;
   }
   export interface UpdateDetectorResponse {
   }
@@ -2352,7 +2494,7 @@ declare namespace GuardDuty {
      */
     Name?: Name;
     /**
-     * The updated URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+     * The updated URI of the file that contains the IPSet.
      */
     Location?: Location;
     /**
@@ -2361,6 +2503,26 @@ declare namespace GuardDuty {
     Activate?: Boolean;
   }
   export interface UpdateIPSetResponse {
+  }
+  export interface UpdateMemberDetectorsRequest {
+    /**
+     * The detector ID of the master account.
+     */
+    DetectorId: DetectorId;
+    /**
+     * A list of member account IDs to be updated.
+     */
+    AccountIds: AccountIds;
+    /**
+     * An object describes which data sources will be updated.
+     */
+    DataSources?: DataSourceConfigurations;
+  }
+  export interface UpdateMemberDetectorsResponse {
+    /**
+     * A list of member account IDs that were unable to be processed along with an explanation for why they were not processed.
+     */
+    UnprocessedAccounts: UnprocessedAccounts;
   }
   export interface UpdateOrganizationConfigurationRequest {
     /**
@@ -2371,6 +2533,10 @@ declare namespace GuardDuty {
      * Indicates whether to automatically enable member accounts in the organization.
      */
     AutoEnable: Boolean;
+    /**
+     * An object describes which data sources will be updated.
+     */
+    DataSources?: OrganizationDataSourceConfigurations;
   }
   export interface UpdateOrganizationConfigurationResponse {
   }
@@ -2404,7 +2570,7 @@ declare namespace GuardDuty {
      */
     Name?: Name;
     /**
-     * The updated URI of the file that contains the ThreateIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+     * The updated URI of the file that contains the ThreateIntelSet.
      */
     Location?: Location;
     /**

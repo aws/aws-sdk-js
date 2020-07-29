@@ -702,6 +702,29 @@
       ],
       "documentation": "<p>Provides the details for the GuardDuty master account associated with the current GuardDuty member account.</p>"
     },
+    "GetMemberDetectors": {
+      "name": "GetMemberDetectors",
+      "http": {
+        "method": "POST",
+        "requestUri": "/detector/{detectorId}/member/detector/get",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetMemberDetectorsRequest"
+      },
+      "output": {
+        "shape": "GetMemberDetectorsResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        }
+      ],
+      "documentation": "<p>Describes which data sources are enabled for the member account's detector.</p>"
+    },
     "GetMembers": {
       "name": "GetMembers",
       "http": {
@@ -907,7 +930,7 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Lists details about all member accounts for the current GuardDuty master account.</p>"
+      "documentation": "<p>Lists details about associated member accounts for the current GuardDuty master account.</p>"
     },
     "ListOrganizationAdminAccounts": {
       "name": "ListOrganizationAdminAccounts",
@@ -1207,6 +1230,29 @@
         }
       ],
       "documentation": "<p>Updates the IPSet specified by the IPSet ID.</p>"
+    },
+    "UpdateMemberDetectors": {
+      "name": "UpdateMemberDetectors",
+      "http": {
+        "method": "POST",
+        "requestUri": "/detector/{detectorId}/member/detector/update",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateMemberDetectorsRequest"
+      },
+      "output": {
+        "shape": "UpdateMemberDetectorsResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        }
+      ],
+      "documentation": "<p>Contains information on member accounts to be updated.</p>"
     },
     "UpdateOrganizationConfiguration": {
       "name": "UpdateOrganizationConfiguration",
@@ -1604,6 +1650,20 @@
       "max": 64,
       "min": 0
     },
+    "CloudTrailConfigurationResult": {
+      "type": "structure",
+      "required": [
+        "Status"
+      ],
+      "members": {
+        "Status": {
+          "shape": "DataSourceStatus",
+          "documentation": "<p>Describes whether CloudTrail is enabled as a data source for the detector.</p>",
+          "locationName": "status"
+        }
+      },
+      "documentation": "<p>Contains information on the status of CloudTrail as a data source for the detector.</p>"
+    },
     "Condition": {
       "type": "structure",
       "members": {
@@ -1723,6 +1783,11 @@
           "documentation": "<p>An enum value that specifies how frequently updated findings are exported.</p>",
           "locationName": "findingPublishingFrequency"
         },
+        "DataSources": {
+          "shape": "DataSourceConfigurations",
+          "documentation": "<p>An object that describes which data sources will be enabled for the detector.</p>",
+          "locationName": "dataSources"
+        },
         "Tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags to be added to a new detector resource.</p>",
@@ -1833,7 +1898,7 @@
         },
         "Location": {
           "shape": "Location",
-          "documentation": "<p>The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
+          "documentation": "<p>The URI of the file that contains the IPSet.</p>",
           "locationName": "location"
         },
         "Activate": {
@@ -1996,7 +2061,7 @@
         },
         "Location": {
           "shape": "Location",
-          "documentation": "<p>The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
+          "documentation": "<p>The URI of the file that contains the ThreatIntelSet.</p>",
           "locationName": "location"
         },
         "Activate": {
@@ -2038,6 +2103,72 @@
       "value": {
         "shape": "Condition"
       }
+    },
+    "DNSLogsConfigurationResult": {
+      "type": "structure",
+      "required": [
+        "Status"
+      ],
+      "members": {
+        "Status": {
+          "shape": "DataSourceStatus",
+          "documentation": "<p>Denotes whether DNS logs is enabled as a data source.</p>",
+          "locationName": "status"
+        }
+      },
+      "documentation": "<p>Contains information on the status of DNS logs as a data source.</p>"
+    },
+    "DataSourceConfigurations": {
+      "type": "structure",
+      "members": {
+        "S3Logs": {
+          "shape": "S3LogsConfiguration",
+          "documentation": "<p>Describes whether S3 data event logs are enabled as a data source.</p>",
+          "locationName": "s3Logs"
+        }
+      },
+      "documentation": "<p>Contains information about which data sources are enabled.</p>"
+    },
+    "DataSourceConfigurationsResult": {
+      "type": "structure",
+      "required": [
+        "CloudTrail",
+        "DNSLogs",
+        "FlowLogs",
+        "S3Logs"
+      ],
+      "members": {
+        "CloudTrail": {
+          "shape": "CloudTrailConfigurationResult",
+          "documentation": "<p>An object that contains information on the status of CloudTrail as a data source.</p>",
+          "locationName": "cloudTrail"
+        },
+        "DNSLogs": {
+          "shape": "DNSLogsConfigurationResult",
+          "documentation": "<p>An object that contains information on the status of DNS logs as a data source.</p>",
+          "locationName": "dnsLogs"
+        },
+        "FlowLogs": {
+          "shape": "FlowLogsConfigurationResult",
+          "documentation": "<p>An object that contains information on the status of VPC flow logs as a data source.</p>",
+          "locationName": "flowLogs"
+        },
+        "S3Logs": {
+          "shape": "S3LogsConfigurationResult",
+          "documentation": "<p>An object that contains information on the status of S3 Data event logs as a data source.</p>",
+          "locationName": "s3Logs"
+        }
+      },
+      "documentation": "<p>Contains information on the status of data sources for the detector.</p>"
+    },
+    "DataSourceStatus": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ],
+      "max": 300,
+      "min": 1
     },
     "DeclineInvitationsRequest": {
       "type": "structure",
@@ -2288,6 +2419,11 @@
           "shape": "Boolean",
           "documentation": "<p>Indicates whether the maximum number of allowed member accounts are already associated with the delegated administrator master account.</p>",
           "locationName": "memberAccountLimitReached"
+        },
+        "DataSources": {
+          "shape": "OrganizationDataSourceConfigurationsResult",
+          "documentation": "<p>An object that describes which data sources are enabled automatically for member accounts.</p>",
+          "locationName": "dataSources"
         }
       }
     },
@@ -2773,6 +2909,20 @@
       "max": 50,
       "min": 0
     },
+    "FlowLogsConfigurationResult": {
+      "type": "structure",
+      "required": [
+        "Status"
+      ],
+      "members": {
+        "Status": {
+          "shape": "DataSourceStatus",
+          "documentation": "<p>Denotes whether VPC flow logs is enabled as a data source.</p>",
+          "locationName": "status"
+        }
+      },
+      "documentation": "<p>Contains information on the status of VPC flow logs as a data source.</p>"
+    },
     "GeoLocation": {
       "type": "structure",
       "members": {
@@ -2834,6 +2984,11 @@
           "shape": "String",
           "documentation": "<p>The last-updated timestamp for the detector.</p>",
           "locationName": "updatedAt"
+        },
+        "DataSources": {
+          "shape": "DataSourceConfigurationsResult",
+          "documentation": "<p>An object that describes which data sources are enabled for the detector.</p>",
+          "locationName": "dataSources"
         },
         "Tags": {
           "shape": "TagMap",
@@ -3021,7 +3176,7 @@
         },
         "Location": {
           "shape": "Location",
-          "documentation": "<p>The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
+          "documentation": "<p>The URI of the file that contains the IPSet.</p>",
           "locationName": "location"
         },
         "Status": {
@@ -3074,6 +3229,45 @@
           "shape": "Master",
           "documentation": "<p>The master account details.</p>",
           "locationName": "master"
+        }
+      }
+    },
+    "GetMemberDetectorsRequest": {
+      "type": "structure",
+      "required": [
+        "DetectorId",
+        "AccountIds"
+      ],
+      "members": {
+        "DetectorId": {
+          "shape": "DetectorId",
+          "documentation": "<p>The detector ID for the master account.</p>",
+          "location": "uri",
+          "locationName": "detectorId"
+        },
+        "AccountIds": {
+          "shape": "AccountIds",
+          "documentation": "<p>The account ID of the member account.</p>",
+          "locationName": "accountIds"
+        }
+      }
+    },
+    "GetMemberDetectorsResponse": {
+      "type": "structure",
+      "required": [
+        "MemberDataSourceConfigurations",
+        "UnprocessedAccounts"
+      ],
+      "members": {
+        "MemberDataSourceConfigurations": {
+          "shape": "MemberDataSourceConfigurations",
+          "documentation": "<p>An object that describes which data sources are enabled for a member account.</p>",
+          "locationName": "members"
+        },
+        "UnprocessedAccounts": {
+          "shape": "UnprocessedAccounts",
+          "documentation": "<p>A list of member account IDs that were unable to be processed along with an explanation for why they were not processed.</p>",
+          "locationName": "unprocessedAccounts"
         }
       }
     },
@@ -3158,7 +3352,7 @@
         },
         "Location": {
           "shape": "Location",
-          "documentation": "<p>The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
+          "documentation": "<p>The URI of the file that contains the ThreatIntelSet.</p>",
           "locationName": "location"
         },
         "Status": {
@@ -3478,7 +3672,7 @@
         },
         "FindingCriteria": {
           "shape": "FindingCriteria",
-          "documentation": "<p>Represents the criteria used for querying findings. Valid values include:</p> <ul> <li> <p>JSON field name</p> </li> <li> <p>accountId</p> </li> <li> <p>region</p> </li> <li> <p>confidence</p> </li> <li> <p>id</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.archived</p> <p>When this attribute is set to 'true', only archived findings are listed. When it's set to 'false', only unarchived findings are listed. When this attribute is not set, all existing findings are listed.</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>severity</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format: 1486685375000</p> </li> </ul>",
+          "documentation": "<p>Represents the criteria used for querying findings. Valid values include:</p> <ul> <li> <p>JSON field name</p> </li> <li> <p>accountId</p> </li> <li> <p>region</p> </li> <li> <p>confidence</p> </li> <li> <p>id</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.outpostArn</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.localIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.archived</p> <p>When this attribute is set to 'true', only archived findings are listed. When it's set to 'false', only unarchived findings are listed. When this attribute is not set, all existing findings are listed.</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>severity</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format: 1486685375000</p> </li> </ul>",
           "locationName": "findingCriteria"
         },
         "SortCriteria": {
@@ -3618,7 +3812,7 @@
         },
         "OnlyAssociated": {
           "shape": "String",
-          "documentation": "<p>Specifies whether to only return associated members or to return all members (including members who haven't been invited yet or have been disassociated).</p>",
+          "documentation": "<p>Specifies what member accounts the response includes based on their relationship status with the master account. The default value is \"true\". If set to \"false\" the response includes all existing member accounts (including members who haven't been invited yet or have been disassociated).</p>",
           "location": "querystring",
           "locationName": "onlyAssociated"
         }
@@ -3897,6 +4091,34 @@
       },
       "documentation": "<p>Contains information about the member account. </p>"
     },
+    "MemberDataSourceConfiguration": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "DataSources"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The account ID for the member account.</p>",
+          "locationName": "accountId"
+        },
+        "DataSources": {
+          "shape": "DataSourceConfigurationsResult",
+          "documentation": "<p>Contains information on the status of data sources for the account.</p>",
+          "locationName": "dataSources"
+        }
+      },
+      "documentation": "<p>Contains information on which data sources are enabled for a member account.</p>"
+    },
+    "MemberDataSourceConfigurations": {
+      "type": "list",
+      "member": {
+        "shape": "MemberDataSourceConfiguration"
+      },
+      "max": 50,
+      "min": 1
+    },
     "Members": {
       "type": "list",
       "member": {
@@ -4057,6 +4279,59 @@
         }
       },
       "documentation": "<p>Contains information about the ISP organization of the remote IP address.</p>"
+    },
+    "OrganizationDataSourceConfigurations": {
+      "type": "structure",
+      "members": {
+        "S3Logs": {
+          "shape": "OrganizationS3LogsConfiguration",
+          "documentation": "<p>Describes whether S3 data event logs are enabled for new members of the organization.</p>",
+          "locationName": "s3Logs"
+        }
+      },
+      "documentation": "<p>An object that contains information on which data sources will be configured to be automatically enabled for new members within the organization.</p>"
+    },
+    "OrganizationDataSourceConfigurationsResult": {
+      "type": "structure",
+      "required": [
+        "S3Logs"
+      ],
+      "members": {
+        "S3Logs": {
+          "shape": "OrganizationS3LogsConfigurationResult",
+          "documentation": "<p>Describes whether S3 data event logs are enabled as a data source.</p>",
+          "locationName": "s3Logs"
+        }
+      },
+      "documentation": "<p>An object that contains information on which data sources are automatically enabled for new members within the organization.</p>"
+    },
+    "OrganizationS3LogsConfiguration": {
+      "type": "structure",
+      "required": [
+        "AutoEnable"
+      ],
+      "members": {
+        "AutoEnable": {
+          "shape": "Boolean",
+          "documentation": "<p>A value that contains information on whether S3 data event logs will be enabled automatically as a data source for the organization.</p>",
+          "locationName": "autoEnable"
+        }
+      },
+      "documentation": "<p>Describes whether S3 data event logs will be automatically enabled for new members of the organization.</p>"
+    },
+    "OrganizationS3LogsConfigurationResult": {
+      "type": "structure",
+      "required": [
+        "AutoEnable"
+      ],
+      "members": {
+        "AutoEnable": {
+          "shape": "Boolean",
+          "documentation": "<p>A value that describes whether S3 data event logs are automatically enabled for new members of the organization.</p>",
+          "locationName": "autoEnable"
+        }
+      },
+      "documentation": "<p>The current configuration of S3 data event logs as a data source for the organization.</p>"
     },
     "Owner": {
       "type": "structure",
@@ -4315,14 +4590,42 @@
           "documentation": "<p>Describes the public access policies that apply to the S3 bucket.</p>",
           "locationName": "publicAccess"
         }
-      }
+      },
+      "documentation": "<p>Contains information on the S3 bucket.</p>"
     },
     "S3BucketDetails": {
       "type": "list",
       "member": {
         "shape": "S3BucketDetail"
+      }
+    },
+    "S3LogsConfiguration": {
+      "type": "structure",
+      "required": [
+        "Enable"
+      ],
+      "members": {
+        "Enable": {
+          "shape": "Boolean",
+          "documentation": "<p> The status of S3 data event logs as a data source.</p>",
+          "locationName": "enable"
+        }
       },
-      "documentation": "<p>Contains information on the S3 bucket.</p>"
+      "documentation": "<p>Describes whether S3 data event logs will be enabled as a data source.</p>"
+    },
+    "S3LogsConfigurationResult": {
+      "type": "structure",
+      "required": [
+        "Status"
+      ],
+      "members": {
+        "Status": {
+          "shape": "DataSourceStatus",
+          "documentation": "<p>A value that describes whether S3 data event logs are automatically enabled for new members of the organization.</p>",
+          "locationName": "status"
+        }
+      },
+      "documentation": "<p>Describes whether S3 data event logs will be enabled as a data source.</p>"
     },
     "SecurityGroup": {
       "type": "structure",
@@ -4726,6 +5029,11 @@
           "shape": "FindingPublishingFrequency",
           "documentation": "<p>An enum value that specifies how frequently findings are exported, such as to CloudWatch Events.</p>",
           "locationName": "findingPublishingFrequency"
+        },
+        "DataSources": {
+          "shape": "DataSourceConfigurations",
+          "documentation": "<p>An object that describes which data sources will be updated.</p>",
+          "locationName": "dataSources"
         }
       }
     },
@@ -4848,7 +5156,7 @@
         },
         "Location": {
           "shape": "Location",
-          "documentation": "<p>The updated URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
+          "documentation": "<p>The updated URI of the file that contains the IPSet.</p>",
           "locationName": "location"
         },
         "Activate": {
@@ -4861,6 +5169,44 @@
     "UpdateIPSetResponse": {
       "type": "structure",
       "members": {}
+    },
+    "UpdateMemberDetectorsRequest": {
+      "type": "structure",
+      "required": [
+        "DetectorId",
+        "AccountIds"
+      ],
+      "members": {
+        "DetectorId": {
+          "shape": "DetectorId",
+          "documentation": "<p>The detector ID of the master account.</p>",
+          "location": "uri",
+          "locationName": "detectorId"
+        },
+        "AccountIds": {
+          "shape": "AccountIds",
+          "documentation": "<p>A list of member account IDs to be updated.</p>",
+          "locationName": "accountIds"
+        },
+        "DataSources": {
+          "shape": "DataSourceConfigurations",
+          "documentation": "<p>An object describes which data sources will be updated.</p>",
+          "locationName": "dataSources"
+        }
+      }
+    },
+    "UpdateMemberDetectorsResponse": {
+      "type": "structure",
+      "required": [
+        "UnprocessedAccounts"
+      ],
+      "members": {
+        "UnprocessedAccounts": {
+          "shape": "UnprocessedAccounts",
+          "documentation": "<p>A list of member account IDs that were unable to be processed along with an explanation for why they were not processed.</p>",
+          "locationName": "unprocessedAccounts"
+        }
+      }
     },
     "UpdateOrganizationConfigurationRequest": {
       "type": "structure",
@@ -4879,6 +5225,11 @@
           "shape": "Boolean",
           "documentation": "<p>Indicates whether to automatically enable member accounts in the organization.</p>",
           "locationName": "autoEnable"
+        },
+        "DataSources": {
+          "shape": "OrganizationDataSourceConfigurations",
+          "documentation": "<p>An object describes which data sources will be updated.</p>",
+          "locationName": "dataSources"
         }
       }
     },
@@ -4942,7 +5293,7 @@
         },
         "Location": {
           "shape": "Location",
-          "documentation": "<p>The updated URI of the file that contains the ThreateIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
+          "documentation": "<p>The updated URI of the file that contains the ThreateIntelSet.</p>",
           "locationName": "location"
         },
         "Activate": {

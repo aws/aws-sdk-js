@@ -2413,6 +2413,14 @@ declare class EC2 extends Service {
    */
   getEbsEncryptionByDefault(callback?: (err: AWSError, data: EC2.Types.GetEbsEncryptionByDefaultResult) => void): Request<EC2.Types.GetEbsEncryptionByDefaultResult, AWSError>;
   /**
+   * Lists the resource groups to which a Capacity Reservation has been added.
+   */
+  getGroupsForCapacityReservation(params: EC2.Types.GetGroupsForCapacityReservationRequest, callback?: (err: AWSError, data: EC2.Types.GetGroupsForCapacityReservationResult) => void): Request<EC2.Types.GetGroupsForCapacityReservationResult, AWSError>;
+  /**
+   * Lists the resource groups to which a Capacity Reservation has been added.
+   */
+  getGroupsForCapacityReservation(callback?: (err: AWSError, data: EC2.Types.GetGroupsForCapacityReservationResult) => void): Request<EC2.Types.GetGroupsForCapacityReservationResult, AWSError>;
+  /**
    * Preview a reservation purchase with configurations that match those of your Dedicated Host. You must have active Dedicated Hosts in your account before you purchase a reservation. This is a preview of the PurchaseHostReservation action and does not result in the offering being purchased.
    */
   getHostReservationPurchasePreview(params: EC2.Types.GetHostReservationPurchasePreviewRequest, callback?: (err: AWSError, data: EC2.Types.GetHostReservationPurchasePreviewResult) => void): Request<EC2.Types.GetHostReservationPurchasePreviewResult, AWSError>;
@@ -4911,6 +4919,17 @@ declare namespace EC2 {
      */
     Tags?: TagList;
   }
+  export interface CapacityReservationGroup {
+    /**
+     * The ARN of the resource group.
+     */
+    GroupArn?: String;
+    /**
+     * The ID of the AWS account that owns the resource group.
+     */
+    OwnerId?: String;
+  }
+  export type CapacityReservationGroupSet = CapacityReservationGroup[];
   export type CapacityReservationId = string;
   export type CapacityReservationIdSet = CapacityReservationId[];
   export type CapacityReservationInstancePlatform = "Linux/UNIX"|"Red Hat Enterprise Linux"|"SUSE Linux"|"Windows"|"Windows with SQL Server"|"Windows with SQL Server Enterprise"|"Windows with SQL Server Standard"|"Windows with SQL Server Web"|"Linux with SQL Server Standard"|"Linux with SQL Server Web"|"Linux with SQL Server Enterprise"|string;
@@ -4930,11 +4949,11 @@ declare namespace EC2 {
   export type CapacityReservationSet = CapacityReservation[];
   export interface CapacityReservationSpecification {
     /**
-     * Indicates the instance's Capacity Reservation preferences. Possible preferences include:    open - The instance can run in any open Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).    none - The instance avoids running in a Capacity Reservation even if one is available. The instance runs as an On-Demand Instance.   When CapacityReservationPreference is not specified, it defaults to open.
+     * Indicates the instance's Capacity Reservation preferences. Possible preferences include:    open - The instance can run in any open Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).    none - The instance avoids running in a Capacity Reservation even if one is available. The instance runs as an On-Demand Instance.  
      */
     CapacityReservationPreference?: CapacityReservationPreference;
     /**
-     * Information about the target Capacity Reservation.
+     * Information about the target Capacity Reservation or Capacity Reservation group.
      */
     CapacityReservationTarget?: CapacityReservationTarget;
   }
@@ -4944,22 +4963,30 @@ declare namespace EC2 {
      */
     CapacityReservationPreference?: CapacityReservationPreference;
     /**
-     * Information about the targeted Capacity Reservation.
+     * Information about the targeted Capacity Reservation or Capacity Reservation group.
      */
     CapacityReservationTarget?: CapacityReservationTargetResponse;
   }
   export type CapacityReservationState = "active"|"expired"|"cancelled"|"pending"|"failed"|string;
   export interface CapacityReservationTarget {
     /**
-     * The ID of the Capacity Reservation.
+     * The ID of the Capacity Reservation in which to run the instance.
      */
     CapacityReservationId?: CapacityReservationId;
+    /**
+     * The ARN of the Capacity Reservation resource group in which to run the instance.
+     */
+    CapacityReservationResourceGroupArn?: String;
   }
   export interface CapacityReservationTargetResponse {
     /**
-     * The ID of the Capacity Reservation.
+     * The ID of the targeted Capacity Reservation.
      */
     CapacityReservationId?: String;
+    /**
+     * The ARN of the targeted Capacity Reservation group.
+     */
+    CapacityReservationResourceGroupArn?: String;
   }
   export type CapacityReservationTenancy = "default"|"dedicated"|string;
   export interface CertificateAuthentication {
@@ -5625,7 +5652,7 @@ declare namespace EC2 {
   }
   export interface CreateCapacityReservationRequest {
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency. Constraint: Maximum 64 ASCII characters.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
      */
     ClientToken?: String;
     /**
@@ -8609,11 +8636,11 @@ declare namespace EC2 {
      */
     CapacityReservationIds?: CapacityReservationIdSet;
     /**
-     * The token to retrieve the next page of results.
+     * The token to use to retrieve the next page of results.
      */
     NextToken?: String;
     /**
-     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned nextToken value.
+     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned nextToken value. This value can be between 5 and 500. If maxResults is given a larger value than 500, you receive an error.
      */
     MaxResults?: DescribeCapacityReservationsMaxResults;
     /**
@@ -13745,11 +13772,11 @@ declare namespace EC2 {
      */
     CapacityReservationId: CapacityReservationId;
     /**
-     * The token to retrieve the next page of results.
+     * The token to use to retrieve the next page of results.
      */
     NextToken?: String;
     /**
-     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned nextToken value. Valid range: Minimum value of 1. Maximum value of 1000.
+     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned nextToken value. This value can be between 5 and 500. If maxResults is given a larger value than 500, you receive an error. Valid range: Minimum value of 1. Maximum value of 1000.
      */
     MaxResults?: GetCapacityReservationUsageRequestMaxResults;
     /**
@@ -13915,6 +13942,35 @@ declare namespace EC2 {
      * Indicates whether encryption by default is enabled.
      */
     EbsEncryptionByDefault?: Boolean;
+  }
+  export interface GetGroupsForCapacityReservationRequest {
+    /**
+     * The ID of the Capacity Reservation.
+     */
+    CapacityReservationId: CapacityReservationId;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned nextToken value. This value can be between 5 and 500. If maxResults is given a larger value than 500, you receive an error.
+     */
+    MaxResults?: GetGroupsForCapacityReservationRequestMaxResults;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export type GetGroupsForCapacityReservationRequestMaxResults = number;
+  export interface GetGroupsForCapacityReservationResult {
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+    /**
+     * Information about the resource groups to which the Capacity Reservation has been added.
+     */
+    CapacityReservationGroups?: CapacityReservationGroupSet;
   }
   export interface GetHostReservationPurchasePreviewRequest {
     /**
@@ -16540,7 +16596,7 @@ declare namespace EC2 {
      */
     CapacityReservationPreference?: CapacityReservationPreference;
     /**
-     * Information about the target Capacity Reservation.
+     * Information about the target Capacity Reservation or Capacity Reservation group.
      */
     CapacityReservationTarget?: CapacityReservationTarget;
   }
@@ -16550,7 +16606,7 @@ declare namespace EC2 {
      */
     CapacityReservationPreference?: CapacityReservationPreference;
     /**
-     * Information about the target Capacity Reservation.
+     * Information about the target Capacity Reservation or Capacity Reservation group.
      */
     CapacityReservationTarget?: CapacityReservationTargetResponse;
   }

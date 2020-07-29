@@ -60,11 +60,11 @@ declare class Firehose extends Service {
    */
   putRecord(callback?: (err: AWSError, data: Firehose.Types.PutRecordOutput) => void): Request<Firehose.Types.PutRecordOutput, AWSError>;
   /**
-   * Writes multiple data records into a delivery stream in a single call, which can achieve higher throughput per producer than when writing single records. To write single data records into a delivery stream, use PutRecord. Applications using these operations are referred to as producers. By default, each delivery stream can take in up to 2,000 transactions per second, 5,000 records per second, or 5 MB per second. If you use PutRecord and PutRecordBatch, the limits are an aggregate across these two operations for each delivery stream. For more information about limits, see Amazon Kinesis Data Firehose Limits. Each PutRecordBatch request supports up to 500 records. Each record in the request can be as large as 1,000 KB (before 64-bit encoding), up to a limit of 4 MB for the entire request. These limits cannot be changed. You must specify the name of the delivery stream and the data record when using PutRecord. The data record consists of a data blob that can be up to 1,000 KB in size, and any kind of data. For example, it could be a segment from a log file, geographic location data, website clickstream data, and so on. Kinesis Data Firehose buffers records before delivering them to the destination. To disambiguate the data blobs at the destination, a common solution is to use delimiters in the data, such as a newline (\n) or some other character unique within the data. This allows the consumer application to parse individual data items when reading the data from the destination. The PutRecordBatch response includes a count of failed records, FailedPutCount, and an array of responses, RequestResponses. Even if the PutRecordBatch call succeeds, the value of FailedPutCount may be greater than 0, indicating that there are records for which the operation didn't succeed. Each entry in the RequestResponses array provides additional information about the processed record. It directly correlates with a record in the request array using the same ordering, from the top to the bottom. The response array always includes the same number of records as the request array. RequestResponses includes both successfully and unsuccessfully processed records. Kinesis Data Firehose tries to process all records in each PutRecordBatch request. A single record failure does not stop the processing of subsequent records.  A successfully processed record includes a RecordId value, which is unique for the record. An unsuccessfully processed record includes ErrorCode and ErrorMessage values. ErrorCode reflects the type of error, and is one of the following values: ServiceUnavailableException or InternalFailure. ErrorMessage provides more detailed information about the error. If there is an internal server error or a timeout, the write might have completed or it might have failed. If FailedPutCount is greater than 0, retry the request, resending only those records that might have failed processing. This minimizes the possible duplicate records and also reduces the total bytes sent (and corresponding charges). We recommend that you handle any duplicates at the destination. If PutRecordBatch throws ServiceUnavailableException, back off and retry. If the exception persists, it is possible that the throughput limits have been exceeded for the delivery stream. Data records sent to Kinesis Data Firehose are stored for 24 hours from the time they are added to a delivery stream as it attempts to send the records to the destination. If the destination is unreachable for more than 24 hours, the data is no longer available.  Don't concatenate two or more base64 strings to form the data fields of your records. Instead, concatenate the raw data, then perform base64 encoding. 
+   * Writes multiple data records into a delivery stream in a single call, which can achieve higher throughput per producer than when writing single records. To write single data records into a delivery stream, use PutRecord. Applications using these operations are referred to as producers. For information about service quota, see Amazon Kinesis Data Firehose Quota. Each PutRecordBatch request supports up to 500 records. Each record in the request can be as large as 1,000 KB (before 64-bit encoding), up to a limit of 4 MB for the entire request. These limits cannot be changed. You must specify the name of the delivery stream and the data record when using PutRecord. The data record consists of a data blob that can be up to 1,000 KB in size, and any kind of data. For example, it could be a segment from a log file, geographic location data, website clickstream data, and so on. Kinesis Data Firehose buffers records before delivering them to the destination. To disambiguate the data blobs at the destination, a common solution is to use delimiters in the data, such as a newline (\n) or some other character unique within the data. This allows the consumer application to parse individual data items when reading the data from the destination. The PutRecordBatch response includes a count of failed records, FailedPutCount, and an array of responses, RequestResponses. Even if the PutRecordBatch call succeeds, the value of FailedPutCount may be greater than 0, indicating that there are records for which the operation didn't succeed. Each entry in the RequestResponses array provides additional information about the processed record. It directly correlates with a record in the request array using the same ordering, from the top to the bottom. The response array always includes the same number of records as the request array. RequestResponses includes both successfully and unsuccessfully processed records. Kinesis Data Firehose tries to process all records in each PutRecordBatch request. A single record failure does not stop the processing of subsequent records.  A successfully processed record includes a RecordId value, which is unique for the record. An unsuccessfully processed record includes ErrorCode and ErrorMessage values. ErrorCode reflects the type of error, and is one of the following values: ServiceUnavailableException or InternalFailure. ErrorMessage provides more detailed information about the error. If there is an internal server error or a timeout, the write might have completed or it might have failed. If FailedPutCount is greater than 0, retry the request, resending only those records that might have failed processing. This minimizes the possible duplicate records and also reduces the total bytes sent (and corresponding charges). We recommend that you handle any duplicates at the destination. If PutRecordBatch throws ServiceUnavailableException, back off and retry. If the exception persists, it is possible that the throughput limits have been exceeded for the delivery stream. Data records sent to Kinesis Data Firehose are stored for 24 hours from the time they are added to a delivery stream as it attempts to send the records to the destination. If the destination is unreachable for more than 24 hours, the data is no longer available.  Don't concatenate two or more base64 strings to form the data fields of your records. Instead, concatenate the raw data, then perform base64 encoding. 
    */
   putRecordBatch(params: Firehose.Types.PutRecordBatchInput, callback?: (err: AWSError, data: Firehose.Types.PutRecordBatchOutput) => void): Request<Firehose.Types.PutRecordBatchOutput, AWSError>;
   /**
-   * Writes multiple data records into a delivery stream in a single call, which can achieve higher throughput per producer than when writing single records. To write single data records into a delivery stream, use PutRecord. Applications using these operations are referred to as producers. By default, each delivery stream can take in up to 2,000 transactions per second, 5,000 records per second, or 5 MB per second. If you use PutRecord and PutRecordBatch, the limits are an aggregate across these two operations for each delivery stream. For more information about limits, see Amazon Kinesis Data Firehose Limits. Each PutRecordBatch request supports up to 500 records. Each record in the request can be as large as 1,000 KB (before 64-bit encoding), up to a limit of 4 MB for the entire request. These limits cannot be changed. You must specify the name of the delivery stream and the data record when using PutRecord. The data record consists of a data blob that can be up to 1,000 KB in size, and any kind of data. For example, it could be a segment from a log file, geographic location data, website clickstream data, and so on. Kinesis Data Firehose buffers records before delivering them to the destination. To disambiguate the data blobs at the destination, a common solution is to use delimiters in the data, such as a newline (\n) or some other character unique within the data. This allows the consumer application to parse individual data items when reading the data from the destination. The PutRecordBatch response includes a count of failed records, FailedPutCount, and an array of responses, RequestResponses. Even if the PutRecordBatch call succeeds, the value of FailedPutCount may be greater than 0, indicating that there are records for which the operation didn't succeed. Each entry in the RequestResponses array provides additional information about the processed record. It directly correlates with a record in the request array using the same ordering, from the top to the bottom. The response array always includes the same number of records as the request array. RequestResponses includes both successfully and unsuccessfully processed records. Kinesis Data Firehose tries to process all records in each PutRecordBatch request. A single record failure does not stop the processing of subsequent records.  A successfully processed record includes a RecordId value, which is unique for the record. An unsuccessfully processed record includes ErrorCode and ErrorMessage values. ErrorCode reflects the type of error, and is one of the following values: ServiceUnavailableException or InternalFailure. ErrorMessage provides more detailed information about the error. If there is an internal server error or a timeout, the write might have completed or it might have failed. If FailedPutCount is greater than 0, retry the request, resending only those records that might have failed processing. This minimizes the possible duplicate records and also reduces the total bytes sent (and corresponding charges). We recommend that you handle any duplicates at the destination. If PutRecordBatch throws ServiceUnavailableException, back off and retry. If the exception persists, it is possible that the throughput limits have been exceeded for the delivery stream. Data records sent to Kinesis Data Firehose are stored for 24 hours from the time they are added to a delivery stream as it attempts to send the records to the destination. If the destination is unreachable for more than 24 hours, the data is no longer available.  Don't concatenate two or more base64 strings to form the data fields of your records. Instead, concatenate the raw data, then perform base64 encoding. 
+   * Writes multiple data records into a delivery stream in a single call, which can achieve higher throughput per producer than when writing single records. To write single data records into a delivery stream, use PutRecord. Applications using these operations are referred to as producers. For information about service quota, see Amazon Kinesis Data Firehose Quota. Each PutRecordBatch request supports up to 500 records. Each record in the request can be as large as 1,000 KB (before 64-bit encoding), up to a limit of 4 MB for the entire request. These limits cannot be changed. You must specify the name of the delivery stream and the data record when using PutRecord. The data record consists of a data blob that can be up to 1,000 KB in size, and any kind of data. For example, it could be a segment from a log file, geographic location data, website clickstream data, and so on. Kinesis Data Firehose buffers records before delivering them to the destination. To disambiguate the data blobs at the destination, a common solution is to use delimiters in the data, such as a newline (\n) or some other character unique within the data. This allows the consumer application to parse individual data items when reading the data from the destination. The PutRecordBatch response includes a count of failed records, FailedPutCount, and an array of responses, RequestResponses. Even if the PutRecordBatch call succeeds, the value of FailedPutCount may be greater than 0, indicating that there are records for which the operation didn't succeed. Each entry in the RequestResponses array provides additional information about the processed record. It directly correlates with a record in the request array using the same ordering, from the top to the bottom. The response array always includes the same number of records as the request array. RequestResponses includes both successfully and unsuccessfully processed records. Kinesis Data Firehose tries to process all records in each PutRecordBatch request. A single record failure does not stop the processing of subsequent records.  A successfully processed record includes a RecordId value, which is unique for the record. An unsuccessfully processed record includes ErrorCode and ErrorMessage values. ErrorCode reflects the type of error, and is one of the following values: ServiceUnavailableException or InternalFailure. ErrorMessage provides more detailed information about the error. If there is an internal server error or a timeout, the write might have completed or it might have failed. If FailedPutCount is greater than 0, retry the request, resending only those records that might have failed processing. This minimizes the possible duplicate records and also reduces the total bytes sent (and corresponding charges). We recommend that you handle any duplicates at the destination. If PutRecordBatch throws ServiceUnavailableException, back off and retry. If the exception persists, it is possible that the throughput limits have been exceeded for the delivery stream. Data records sent to Kinesis Data Firehose are stored for 24 hours from the time they are added to a delivery stream as it attempts to send the records to the destination. If the destination is unreachable for more than 24 hours, the data is no longer available.  Don't concatenate two or more base64 strings to form the data fields of your records. Instead, concatenate the raw data, then perform base64 encoding. 
    */
   putRecordBatch(callback?: (err: AWSError, data: Firehose.Types.PutRecordBatchOutput) => void): Request<Firehose.Types.PutRecordBatchOutput, AWSError>;
   /**
@@ -140,6 +140,7 @@ declare namespace Firehose {
   export type ClusterJDBCURL = string;
   export type ColumnToJsonKeyMappings = {[key: string]: NonEmptyString};
   export type CompressionFormat = "UNCOMPRESSED"|"GZIP"|"ZIP"|"Snappy"|"HADOOP_SNAPPY"|string;
+  export type ContentEncoding = "NONE"|"GZIP"|string;
   export interface CopyCommand {
     /**
      * The name of the target table. The table must already exist in the database.
@@ -192,6 +193,10 @@ declare namespace Firehose {
      * The destination in Splunk. You can specify only one destination.
      */
     SplunkDestinationConfiguration?: SplunkDestinationConfiguration;
+    /**
+     * Enables configuring Kinesis Firehose to deliver data to any HTTP endpoint destination. You can specify only one destination.
+     */
+    HttpEndpointDestinationConfiguration?: HttpEndpointDestinationConfiguration;
     /**
      * A set of tags to assign to the delivery stream. A tag is a key-value pair that you can define and assign to AWS resources. Tags are metadata. For example, you can add friendly names and descriptions or other types of information that can help you distinguish the delivery stream. For more information about tags, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide. You can specify up to 50 tags when creating a delivery stream.
      */
@@ -379,6 +384,10 @@ declare namespace Firehose {
      * The destination in Splunk.
      */
     SplunkDestinationDescription?: SplunkDestinationDescription;
+    /**
+     * Describes the specified HTTP endpoint destination.
+     */
+    HttpEndpointDestinationDescription?: HttpEndpointDestinationDescription;
   }
   export type DestinationDescriptionList = DestinationDescription[];
   export type DestinationId = string;
@@ -429,7 +438,7 @@ declare namespace Firehose {
      */
     RetryOptions?: ElasticsearchRetryOptions;
     /**
-     * Defines how documents should be delivered to Amazon S3. When it is set to FailedDocumentsOnly, Kinesis Data Firehose writes any documents that could not be indexed to the configured Amazon S3 destination, with elasticsearch-failed/ appended to the key prefix. When set to AllDocuments, Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed documents with elasticsearch-failed/ appended to the prefix. For more information, see Amazon S3 Backup for the Amazon ES Destination. Default value is FailedDocumentsOnly.
+     * Defines how documents should be delivered to Amazon S3. When it is set to FailedDocumentsOnly, Kinesis Data Firehose writes any documents that could not be indexed to the configured Amazon S3 destination, with elasticsearch-failed/ appended to the key prefix. When set to AllDocuments, Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed documents with elasticsearch-failed/ appended to the prefix. For more information, see Amazon S3 Backup for the Amazon ES Destination. Default value is FailedDocumentsOnly. You can't change this backup mode after you create the delivery stream. 
      */
     S3BackupMode?: ElasticsearchS3BackupMode;
     /**
@@ -612,7 +621,7 @@ declare namespace Firehose {
      */
     ProcessingConfiguration?: ProcessingConfiguration;
     /**
-     * The Amazon S3 backup mode.
+     * The Amazon S3 backup mode. After you create a delivery stream, you can update it to enable Amazon S3 backup if it is disabled. If backup is enabled, you can't update the delivery stream to disable it. 
      */
     S3BackupMode?: S3BackupMode;
     /**
@@ -712,7 +721,7 @@ declare namespace Firehose {
      */
     ProcessingConfiguration?: ProcessingConfiguration;
     /**
-     * Enables or disables Amazon S3 backup mode.
+     * You can update a delivery stream to enable Amazon S3 backup if it is disabled. If backup is enabled, you can't update the delivery stream to disable it. 
      */
     S3BackupMode?: S3BackupMode;
     /**
@@ -744,6 +753,163 @@ declare namespace Firehose {
      */
     TimestampFormats?: ListOfNonEmptyStrings;
   }
+  export type HttpEndpointAccessKey = string;
+  export type HttpEndpointAttributeName = string;
+  export type HttpEndpointAttributeValue = string;
+  export interface HttpEndpointBufferingHints {
+    /**
+     * Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5.  We recommend setting this parameter to a value greater than the amount of data you typically ingest into the delivery stream in 10 seconds. For example, if you typically ingest data at 1 MB/sec, the value should be 10 MB or higher. 
+     */
+    SizeInMBs?: HttpEndpointBufferingSizeInMBs;
+    /**
+     * Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300 (5 minutes). 
+     */
+    IntervalInSeconds?: HttpEndpointBufferingIntervalInSeconds;
+  }
+  export type HttpEndpointBufferingIntervalInSeconds = number;
+  export type HttpEndpointBufferingSizeInMBs = number;
+  export interface HttpEndpointCommonAttribute {
+    /**
+     * The name of the HTTP endpoint common attribute.
+     */
+    AttributeName: HttpEndpointAttributeName;
+    /**
+     * The value of the HTTP endpoint common attribute.
+     */
+    AttributeValue: HttpEndpointAttributeValue;
+  }
+  export type HttpEndpointCommonAttributesList = HttpEndpointCommonAttribute[];
+  export interface HttpEndpointConfiguration {
+    /**
+     * The URL of the HTTP endpoint selected as the destination.
+     */
+    Url: HttpEndpointUrl;
+    /**
+     * The name of the HTTP endpoint selected as the destination.
+     */
+    Name?: HttpEndpointName;
+    /**
+     * The access key required for Kinesis Firehose to authenticate with the HTTP endpoint selected as the destination.
+     */
+    AccessKey?: HttpEndpointAccessKey;
+  }
+  export interface HttpEndpointDescription {
+    /**
+     * The URL of the HTTP endpoint selected as the destination.
+     */
+    Url?: HttpEndpointUrl;
+    /**
+     * The name of the HTTP endpoint selected as the destination.
+     */
+    Name?: HttpEndpointName;
+  }
+  export interface HttpEndpointDestinationConfiguration {
+    /**
+     * The configuration of the HTTP endpoint selected as the destination.
+     */
+    EndpointConfiguration: HttpEndpointConfiguration;
+    /**
+     * The buffering options that can be used before data is delivered to the specified destination. Kinesis Data Firehose treats these options as hints, and it might choose to use more optimal values. The SizeInMBs and IntervalInSeconds parameters are optional. However, if you specify a value for one of them, you must also provide a value for the other. 
+     */
+    BufferingHints?: HttpEndpointBufferingHints;
+    CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+    /**
+     * The configuration of the requeste sent to the HTTP endpoint specified as the destination.
+     */
+    RequestConfiguration?: HttpEndpointRequestConfiguration;
+    ProcessingConfiguration?: ProcessingConfiguration;
+    /**
+     * Kinesis Data Firehose uses this IAM role for all the permissions that the delivery stream needs.
+     */
+    RoleARN?: RoleARN;
+    /**
+     * Describes the retry behavior in case Kinesis Data Firehose is unable to deliver data to the specified HTTP endpoint destination, or if it doesn't receive a valid acknowledgment of receipt from the specified HTTP endpoint destination.
+     */
+    RetryOptions?: HttpEndpointRetryOptions;
+    /**
+     * Describes the S3 bucket backup options for the data that Kinesis Data Firehose delivers to the HTTP endpoint destination. You can back up all documents (AllData) or only the documents that Kinesis Data Firehose could not deliver to the specified HTTP endpoint destination (FailedDataOnly).
+     */
+    S3BackupMode?: HttpEndpointS3BackupMode;
+    S3Configuration: S3DestinationConfiguration;
+  }
+  export interface HttpEndpointDestinationDescription {
+    /**
+     * The configuration of the specified HTTP endpoint destination.
+     */
+    EndpointConfiguration?: HttpEndpointDescription;
+    /**
+     * Describes buffering options that can be applied to the data before it is delivered to the HTTPS endpoint destination. Kinesis Data Firehose teats these options as hints, and it might choose to use more optimal values. The SizeInMBs and IntervalInSeconds parameters are optional. However, if specify a value for one of them, you must also provide a value for the other. 
+     */
+    BufferingHints?: HttpEndpointBufferingHints;
+    CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+    /**
+     * The configuration of request sent to the HTTP endpoint specified as the destination.
+     */
+    RequestConfiguration?: HttpEndpointRequestConfiguration;
+    ProcessingConfiguration?: ProcessingConfiguration;
+    /**
+     * Kinesis Data Firehose uses this IAM role for all the permissions that the delivery stream needs.
+     */
+    RoleARN?: RoleARN;
+    /**
+     * Describes the retry behavior in case Kinesis Data Firehose is unable to deliver data to the specified HTTP endpoint destination, or if it doesn't receive a valid acknowledgment of receipt from the specified HTTP endpoint destination.
+     */
+    RetryOptions?: HttpEndpointRetryOptions;
+    /**
+     * Describes the S3 bucket backup options for the data that Kinesis Firehose delivers to the HTTP endpoint destination. You can back up all documents (AllData) or only the documents that Kinesis Data Firehose could not deliver to the specified HTTP endpoint destination (FailedDataOnly).
+     */
+    S3BackupMode?: HttpEndpointS3BackupMode;
+    S3DestinationDescription?: S3DestinationDescription;
+  }
+  export interface HttpEndpointDestinationUpdate {
+    /**
+     * Describes the configuration of the HTTP endpoint destination.
+     */
+    EndpointConfiguration?: HttpEndpointConfiguration;
+    /**
+     * Describes buffering options that can be applied to the data before it is delivered to the HTTPS endpoint destination. Kinesis Data Firehose teats these options as hints, and it might choose to use more optimal values. The SizeInMBs and IntervalInSeconds parameters are optional. However, if specify a value for one of them, you must also provide a value for the other. 
+     */
+    BufferingHints?: HttpEndpointBufferingHints;
+    CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+    /**
+     * The configuration of the request sent to the HTTP endpoint specified as the destination.
+     */
+    RequestConfiguration?: HttpEndpointRequestConfiguration;
+    ProcessingConfiguration?: ProcessingConfiguration;
+    /**
+     * Kinesis Data Firehose uses this IAM role for all the permissions that the delivery stream needs.
+     */
+    RoleARN?: RoleARN;
+    /**
+     * Describes the retry behavior in case Kinesis Data Firehose is unable to deliver data to the specified HTTP endpoint destination, or if it doesn't receive a valid acknowledgment of receipt from the specified HTTP endpoint destination.
+     */
+    RetryOptions?: HttpEndpointRetryOptions;
+    /**
+     * Describes the S3 bucket backup options for the data that Kinesis Firehose delivers to the HTTP endpoint destination. You can back up all documents (AllData) or only the documents that Kinesis Data Firehose could not deliver to the specified HTTP endpoint destination (FailedDataOnly).
+     */
+    S3BackupMode?: HttpEndpointS3BackupMode;
+    S3Update?: S3DestinationUpdate;
+  }
+  export type HttpEndpointName = string;
+  export interface HttpEndpointRequestConfiguration {
+    /**
+     * Kinesis Data Firehose uses the content encoding to compress the body of a request before sending the request to the destination. For more information, see Content-Encoding in MDN Web Docs, the official Mozilla documentation.
+     */
+    ContentEncoding?: ContentEncoding;
+    /**
+     * Describes the metadata sent to the HTTP endpoint destination.
+     */
+    CommonAttributes?: HttpEndpointCommonAttributesList;
+  }
+  export type HttpEndpointRetryDurationInSeconds = number;
+  export interface HttpEndpointRetryOptions {
+    /**
+     * The total amount of time that Kinesis Data Firehose spends on retries. This duration starts after the initial attempt to send data to the custom destination via HTTPS endpoint fails. It doesn't include the periods during which Kinesis Data Firehose waits for acknowledgment from the specified destination after each attempt. 
+     */
+    DurationInSeconds?: HttpEndpointRetryDurationInSeconds;
+  }
+  export type HttpEndpointS3BackupMode = "FailedDataOnly"|"AllData"|string;
+  export type HttpEndpointUrl = string;
   export interface InputFormatConfiguration {
     /**
      * Specifies which deserializer to use. You can choose either the Apache Hive JSON SerDe or the OpenX JSON SerDe. If both are non-null, the server rejects the request.
@@ -1076,7 +1242,7 @@ declare namespace Firehose {
      */
     ProcessingConfiguration?: ProcessingConfiguration;
     /**
-     * The Amazon S3 backup mode.
+     * The Amazon S3 backup mode. After you create a delivery stream, you can update it to enable Amazon S3 backup if it is disabled. If backup is enabled, you can't update the delivery stream to disable it. 
      */
     S3BackupMode?: RedshiftS3BackupMode;
     /**
@@ -1164,7 +1330,7 @@ declare namespace Firehose {
      */
     ProcessingConfiguration?: ProcessingConfiguration;
     /**
-     * The Amazon S3 backup mode.
+     * You can update a delivery stream to enable Amazon S3 backup if it is disabled. If backup is enabled, you can't update the delivery stream to disable it. 
      */
     S3BackupMode?: RedshiftS3BackupMode;
     /**
@@ -1354,7 +1520,7 @@ declare namespace Firehose {
      */
     RetryOptions?: SplunkRetryOptions;
     /**
-     * Defines how documents should be delivered to Amazon S3. When set to FailedDocumentsOnly, Kinesis Data Firehose writes any data that could not be indexed to the configured Amazon S3 destination. When set to AllDocuments, Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed documents to Amazon S3. Default value is FailedDocumentsOnly. 
+     * Defines how documents should be delivered to Amazon S3. When set to FailedEventsOnly, Kinesis Data Firehose writes any data that could not be indexed to the configured Amazon S3 destination. When set to AllEvents, Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed documents to Amazon S3. The default value is FailedEventsOnly. You can update this backup mode from FailedEventsOnly to AllEvents. You can't update it from AllEvents to FailedEventsOnly.
      */
     S3BackupMode?: SplunkS3BackupMode;
     /**
@@ -1430,7 +1596,7 @@ declare namespace Firehose {
      */
     RetryOptions?: SplunkRetryOptions;
     /**
-     * Defines how documents should be delivered to Amazon S3. When set to FailedDocumentsOnly, Kinesis Data Firehose writes any data that could not be indexed to the configured Amazon S3 destination. When set to AllDocuments, Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed documents to Amazon S3. Default value is FailedDocumentsOnly. 
+     * Specifies how you want Kinesis Data Firehose to back up documents to Amazon S3. When set to FailedDocumentsOnly, Kinesis Data Firehose writes any data that could not be indexed to the configured Amazon S3 destination. When set to AllEvents, Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed documents to Amazon S3. The default value is FailedEventsOnly. You can update this backup mode from FailedEventsOnly to AllEvents. You can't update it from AllEvents to FailedEventsOnly.
      */
     S3BackupMode?: SplunkS3BackupMode;
     /**
@@ -1547,6 +1713,10 @@ declare namespace Firehose {
      * Describes an update for a destination in Splunk.
      */
     SplunkDestinationUpdate?: SplunkDestinationUpdate;
+    /**
+     * Describes an update to the specified HTTP endpoint destination.
+     */
+    HttpEndpointDestinationUpdate?: HttpEndpointDestinationUpdate;
   }
   export interface UpdateDestinationOutput {
   }
@@ -1557,11 +1727,11 @@ declare namespace Firehose {
      */
     SubnetIds: SubnetIdList;
     /**
-     * The ARN of the IAM role that you want the delivery stream to use to create endpoints in the destination VPC.
+     * The ARN of the IAM role that you want the delivery stream to use to create endpoints in the destination VPC. You can use your existing Kinesis Data Firehose delivery role or you can specify a new role. In either case, make sure that the role trusts the Kinesis Data Firehose service principal and that it grants the following permissions:    ec2:DescribeVpcs     ec2:DescribeVpcAttribute     ec2:DescribeSubnets     ec2:DescribeSecurityGroups     ec2:DescribeNetworkInterfaces     ec2:CreateNetworkInterface     ec2:CreateNetworkInterfacePermission     ec2:DeleteNetworkInterface    If you revoke these permissions after you create the delivery stream, Kinesis Data Firehose can't scale out by creating more ENIs when necessary. You might therefore see a degradation in performance.
      */
     RoleARN: RoleARN;
     /**
-     * The IDs of the security groups that you want Kinesis Data Firehose to use when it creates ENIs in the VPC of the Amazon ES destination.
+     * The IDs of the security groups that you want Kinesis Data Firehose to use when it creates ENIs in the VPC of the Amazon ES destination. You can use the same security group that the Amazon ES domain uses or different ones. If you specify different security groups here, ensure that they allow outbound HTTPS traffic to the Amazon ES domain's security group. Also ensure that the Amazon ES domain's security group allows HTTPS traffic from the security groups specified here. If you use the same security group for both your delivery stream and the Amazon ES domain, make sure the security group inbound rule allows HTTPS traffic. For more information about security group rules, see Security group rules in the Amazon VPC documentation.
      */
     SecurityGroupIds: SecurityGroupIdList;
   }
@@ -1571,11 +1741,11 @@ declare namespace Firehose {
      */
     SubnetIds: SubnetIdList;
     /**
-     * The ARN of the IAM role that you want the delivery stream uses to create endpoints in the destination VPC.
+     * The ARN of the IAM role that the delivery stream uses to create endpoints in the destination VPC. You can use your existing Kinesis Data Firehose delivery role or you can specify a new role. In either case, make sure that the role trusts the Kinesis Data Firehose service principal and that it grants the following permissions:    ec2:DescribeVpcs     ec2:DescribeVpcAttribute     ec2:DescribeSubnets     ec2:DescribeSecurityGroups     ec2:DescribeNetworkInterfaces     ec2:CreateNetworkInterface     ec2:CreateNetworkInterfacePermission     ec2:DeleteNetworkInterface    If you revoke these permissions after you create the delivery stream, Kinesis Data Firehose can't scale out by creating more ENIs when necessary. You might therefore see a degradation in performance.
      */
     RoleARN: RoleARN;
     /**
-     * The IDs of the security groups that Kinesis Data Firehose uses when it creates ENIs in the VPC of the Amazon ES destination.
+     * The IDs of the security groups that Kinesis Data Firehose uses when it creates ENIs in the VPC of the Amazon ES destination. You can use the same security group that the Amazon ES domain uses or different ones. If you specify different security groups, ensure that they allow outbound HTTPS traffic to the Amazon ES domain's security group. Also ensure that the Amazon ES domain's security group allows HTTPS traffic from the security groups specified here. If you use the same security group for both your delivery stream and the Amazon ES domain, make sure the security group inbound rule allows HTTPS traffic. For more information about security group rules, see Security group rules in the Amazon VPC documentation.
      */
     SecurityGroupIds: SecurityGroupIdList;
     /**

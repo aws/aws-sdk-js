@@ -420,9 +420,13 @@ declare namespace ECR {
      */
     imageTagMutability?: ImageTagMutability;
     /**
-     * The image scanning configuration for the repository. This setting determines whether images are scanned for known vulnerabilities after being pushed to the repository.
+     * The image scanning configuration for the repository. This determines whether images are scanned for known vulnerabilities after being pushed to the repository.
      */
     imageScanningConfiguration?: ImageScanningConfiguration;
+    /**
+     * The encryption configuration for the repository. This determines how the contents of your repository are encrypted at rest.
+     */
+    encryptionConfiguration?: EncryptionConfiguration;
   }
   export interface CreateRepositoryResponse {
     /**
@@ -615,6 +619,17 @@ declare namespace ECR {
      */
     nextToken?: NextToken;
   }
+  export interface EncryptionConfiguration {
+    /**
+     * The encryption type to use. If you use the KMS encryption type, the contents of the repository will be encrypted using server-side encryption with customer master keys (CMKs) stored in AWS KMS. When you use AWS KMS to encrypt your data, you can either use the default AWS managed CMK for Amazon ECR, or specify your own CMK, which you already created. For more information, see Protecting Data Using Server-Side Encryption with CMKs Stored in AWS Key Management Service (SSE-KMS) in the Amazon Simple Storage Service Console Developer Guide.. If you use the AES256 encryption type, Amazon ECR uses server-side encryption with Amazon S3-managed encryption keys which encrypts the images in the repository using an AES-256 encryption algorithm. For more information, see Protecting Data Using Server-Side Encryption with Amazon S3-Managed Encryption Keys (SSE-S3) in the Amazon Simple Storage Service Console Developer Guide..
+     */
+    encryptionType: EncryptionType;
+    /**
+     * If you use the KMS encryption type, specify the CMK to use for encryption. The alias, key ID, or full ARN of the CMK can be specified. The key must exist in the same Region as the repository. If no key is specified, the default AWS managed CMK for Amazon ECR will be used.
+     */
+    kmsKey?: KmsKey;
+  }
+  export type EncryptionType = "AES256"|"KMS"|string;
   export type EvaluationTimestamp = Date;
   export type ExpirationTimestamp = Date;
   export type FindingDescription = string;
@@ -841,7 +856,7 @@ declare namespace ECR {
      */
     failureReason?: ImageFailureReason;
   }
-  export type ImageFailureCode = "InvalidImageDigest"|"InvalidImageTag"|"ImageTagDoesNotMatchDigest"|"ImageNotFound"|"MissingDigestAndTag"|"ImageReferencedByManifestList"|string;
+  export type ImageFailureCode = "InvalidImageDigest"|"InvalidImageTag"|"ImageTagDoesNotMatchDigest"|"ImageNotFound"|"MissingDigestAndTag"|"ImageReferencedByManifestList"|"KmsError"|string;
   export type ImageFailureList = ImageFailure[];
   export type ImageFailureReason = string;
   export interface ImageIdentifier {
@@ -952,6 +967,7 @@ declare namespace ECR {
      */
     partSize?: PartSize;
   }
+  export type KmsKey = string;
   export interface Layer {
     /**
      * The sha256 digest of the image layer.
@@ -1113,7 +1129,7 @@ declare namespace ECR {
      */
     imageManifestMediaType?: MediaType;
     /**
-     * The tag to associate with the image. This parameter is required for images that use the Docker Image Manifest V2 Schema 2 or OCI formats.
+     * The tag to associate with the image. This parameter is required for images that use the Docker Image Manifest V2 Schema 2 or Open Container Initiative (OCI) formats.
      */
     imageTag?: ImageTag;
     /**
@@ -1226,7 +1242,7 @@ declare namespace ECR {
      */
     repositoryName?: RepositoryName;
     /**
-     * The URI for the repository. You can use this URI for Docker push or pull operations.
+     * The URI for the repository. You can use this URI for container image push and pull operations.
      */
     repositoryUri?: Url;
     /**
@@ -1238,6 +1254,10 @@ declare namespace ECR {
      */
     imageTagMutability?: ImageTagMutability;
     imageScanningConfiguration?: ImageScanningConfiguration;
+    /**
+     * The encryption configuration for the repository. This determines how the contents of your repository are encrypted at rest.
+     */
+    encryptionConfiguration?: EncryptionConfiguration;
   }
   export type RepositoryList = Repository[];
   export type RepositoryName = string;
