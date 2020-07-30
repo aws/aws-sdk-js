@@ -626,6 +626,52 @@
       ],
       "documentation": "\n            <p>Returns a list of the tags associated with the specified resource.</p>\n         "
     },
+    "RebootBroker": {
+      "name": "RebootBroker",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v1/clusters/{clusterArn}/reboot-broker",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "RebootBrokerRequest"
+      },
+      "output": {
+        "shape": "RebootBrokerResponse",
+        "documentation": "\n            <p>Successful response.</p>\n         "
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "\n            <p>The request isn't valid because the input is incorrect. Correct your input and then submit it again.</p>\n         "
+        },
+        {
+          "shape": "UnauthorizedException",
+          "documentation": "\n            <p>The request is not authorized. The provided credentials couldn't be validated.</p>\n         "
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "\n            <p>There was an unexpected internal server error. Retrying your request might resolve the issue.</p>\n         "
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "\n            <p>Access forbidden. Check your credentials and then retry your request.</p>\n         "
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "\n            <p>The resource could not be found due to incorrect input. Correct the input, then retry the request.</p>\n         "
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "\n            <p>503 response</p>\n         "
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "\n            <p>429 response</p>\n            "
+        }
+      ],
+      "documentation": "Reboots brokers."
+    },
     "TagResource": {
       "name": "TagResource",
       "http": {
@@ -2256,6 +2302,42 @@
         }
       },
       "documentation": "\n            <p>Prometheus settings.</p>\n         "
+    },
+    "RebootBrokerRequest": {
+      "type": "structure",
+      "members": {
+        "BrokerIds": {
+          "shape": "__listOf__string",
+          "locationName": "brokerIds",
+          "documentation": "\n            <p>The list of broker IDs to be rebooted.</p>\n         "
+        },
+        "ClusterArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "clusterArn",
+          "documentation": "\n            <p>The Amazon Resource Name (ARN) of the cluster to be updated.</p>\n         "
+        }
+      },
+      "documentation": "Reboots a node.",
+      "required": [
+        "ClusterArn",
+        "BrokerIds"
+      ]
+    },
+    "RebootBrokerResponse": {
+      "type": "structure",
+      "members": {
+        "ClusterArn": {
+          "shape": "__string",
+          "locationName": "clusterArn",
+          "documentation": "\n            <p>The Amazon Resource Name (ARN) of the cluster.</p>\n         "
+        },
+        "ClusterOperationArn": {
+          "shape": "__string",
+          "locationName": "clusterOperationArn",
+          "documentation": "\n            <p>The Amazon Resource Name (ARN) of the cluster operation.</p>\n         "
+        }
+      }
     },
     "S3": {
       "type": "structure",

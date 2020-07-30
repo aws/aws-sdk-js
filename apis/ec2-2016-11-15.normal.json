@@ -7975,7 +7975,8 @@
         "Windows with SQL Server Web",
         "Linux with SQL Server Standard",
         "Linux with SQL Server Web",
-        "Linux with SQL Server Enterprise"
+        "Linux with SQL Server Enterprise",
+        "Windows BYOL"
       ]
     },
     "CapacityReservationOptions": {

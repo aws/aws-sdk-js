@@ -204,6 +204,14 @@ declare class Kafka extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Kafka.Types.ListTagsForResourceResponse) => void): Request<Kafka.Types.ListTagsForResourceResponse, AWSError>;
   /**
+   * Reboots brokers.
+   */
+  rebootBroker(params: Kafka.Types.RebootBrokerRequest, callback?: (err: AWSError, data: Kafka.Types.RebootBrokerResponse) => void): Request<Kafka.Types.RebootBrokerResponse, AWSError>;
+  /**
+   * Reboots brokers.
+   */
+  rebootBroker(callback?: (err: AWSError, data: Kafka.Types.RebootBrokerResponse) => void): Request<Kafka.Types.RebootBrokerResponse, AWSError>;
+  /**
    * 
             Adds tags to the specified MSK resource.
          
@@ -1410,6 +1418,34 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     NodeExporter?: NodeExporterInfo;
+  }
+  export interface RebootBrokerRequest {
+    /**
+     * 
+            The list of broker IDs to be rebooted.
+         
+     */
+    BrokerIds: __listOf__string;
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster to be updated.
+         
+     */
+    ClusterArn: __string;
+  }
+  export interface RebootBrokerResponse {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster.
+         
+     */
+    ClusterArn?: __string;
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster operation.
+         
+     */
+    ClusterOperationArn?: __string;
   }
   export interface S3 {
     Bucket?: __string;

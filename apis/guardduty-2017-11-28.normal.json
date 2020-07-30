@@ -79,7 +79,7 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Creates a single Amazon GuardDuty detector. A detector is a resource that represents the GuardDuty service. To start using GuardDuty, you must create a detector in each Region where you enable the service. You can have only one detector per account per Region.</p>"
+      "documentation": "<p>Creates a single Amazon GuardDuty detector. A detector is a resource that represents the GuardDuty service. To start using GuardDuty, you must create a detector in each Region where you enable the service. You can have only one detector per account per Region. All data sources are enabled in a new detector by default.</p>"
     },
     "CreateFilter": {
       "name": "CreateFilter",
@@ -148,7 +148,7 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Creates member accounts of the current AWS account by specifying a list of AWS account IDs. The current AWS account can then invite these members to manage GuardDuty in their accounts.</p>"
+      "documentation": "<p>Creates member accounts of the current AWS account by specifying a list of AWS account IDs. This step is a prerequisite for managing the associated member accounts either by invitation or through an organization.</p> <p>When using <code>Create Members</code> as an organizations delegated administrator this action will enable GuardDuty in the added member accounts, with the exception of the organization master account, which must enable GuardDuty prior to being added as a member.</p> <p>If you are adding accounts by invitation use this action after GuardDuty has been enabled in potential member accounts and before using <a href=\"https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html\"> <code>Invite Members</code> </a>.</p>"
     },
     "CreatePublishingDestination": {
       "name": "CreatePublishingDestination",
@@ -771,6 +771,29 @@
       ],
       "documentation": "<p>Retrieves the ThreatIntelSet that is specified by the ThreatIntelSet ID.</p>"
     },
+    "GetUsageStatistics": {
+      "name": "GetUsageStatistics",
+      "http": {
+        "method": "POST",
+        "requestUri": "/detector/{detectorId}/usage/statistics",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetUsageStatisticsRequest"
+      },
+      "output": {
+        "shape": "GetUsageStatisticsResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        }
+      ],
+      "documentation": "<p>Lists Amazon GuardDuty usage statistics over the last 30 days for the specified detector ID. For newly enabled detectors or data sources the cost returned will include only the usage so far under 30 days, this may differ from the cost metrics in the console, which projects usage over 30 days to provide a monthly cost estimate. For more information see <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/monitoring_costs.html#usage-calculations\">Understanding How Usage Costs are Calculated</a>.</p>"
+    },
     "InviteMembers": {
       "name": "InviteMembers",
       "http": {
@@ -930,7 +953,7 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Lists details about associated member accounts for the current GuardDuty master account.</p>"
+      "documentation": "<p>Lists details about all member accounts for the current GuardDuty master account.</p>"
     },
     "ListOrganizationAdminAccounts": {
       "name": "ListOrganizationAdminAccounts",
@@ -1898,7 +1921,7 @@
         },
         "Location": {
           "shape": "Location",
-          "documentation": "<p>The URI of the file that contains the IPSet.</p>",
+          "documentation": "<p>The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
           "locationName": "location"
         },
         "Activate": {
@@ -2061,7 +2084,7 @@
         },
         "Location": {
           "shape": "Location",
-          "documentation": "<p>The URI of the file that contains the ThreatIntelSet.</p>",
+          "documentation": "<p>The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
           "locationName": "location"
         },
         "Activate": {
@@ -2118,6 +2141,15 @@
       },
       "documentation": "<p>Contains information on the status of DNS logs as a data source.</p>"
     },
+    "DataSource": {
+      "type": "string",
+      "enum": [
+        "FLOW_LOGS",
+        "CLOUD_TRAIL",
+        "DNS_LOGS",
+        "S3_LOGS"
+      ]
+    },
     "DataSourceConfigurations": {
       "type": "structure",
       "members": {
@@ -2160,6 +2192,12 @@
         }
       },
       "documentation": "<p>Contains information on the status of data sources for the detector.</p>"
+    },
+    "DataSourceList": {
+      "type": "list",
+      "member": {
+        "shape": "DataSource"
+      }
     },
     "DataSourceStatus": {
       "type": "string",
@@ -3176,7 +3214,7 @@
         },
         "Location": {
           "shape": "Location",
-          "documentation": "<p>The URI of the file that contains the IPSet.</p>",
+          "documentation": "<p>The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
           "locationName": "location"
         },
         "Status": {
@@ -3352,7 +3390,7 @@
         },
         "Location": {
           "shape": "Location",
-          "documentation": "<p>The URI of the file that contains the ThreatIntelSet.</p>",
+          "documentation": "<p>The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
           "locationName": "location"
         },
         "Status": {
@@ -3364,6 +3402,62 @@
           "shape": "TagMap",
           "documentation": "<p>The tags of the threat list resource.</p>",
           "locationName": "tags"
+        }
+      }
+    },
+    "GetUsageStatisticsRequest": {
+      "type": "structure",
+      "required": [
+        "DetectorId",
+        "UsageStatisticType",
+        "UsageCriteria"
+      ],
+      "members": {
+        "DetectorId": {
+          "shape": "DetectorId",
+          "documentation": "<p>The ID of the detector that specifies the GuardDuty service whose usage statistics you want to retrieve.</p>",
+          "location": "uri",
+          "locationName": "detectorId"
+        },
+        "UsageStatisticType": {
+          "shape": "UsageStatisticType",
+          "documentation": "<p>The type of usage statistics to retrieve.</p>",
+          "locationName": "usageStatisticsType"
+        },
+        "UsageCriteria": {
+          "shape": "UsageCriteria",
+          "documentation": "<p>Represents the criteria used for querying usage.</p>",
+          "locationName": "usageCriteria"
+        },
+        "Unit": {
+          "shape": "String",
+          "documentation": "<p>The currency unit you would like to view your usage statistics in. Current valid values are USD.</p>",
+          "locationName": "unit"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to return in the response.</p>",
+          "locationName": "maxResults"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the NextToken value returned from the previous request to continue listing results after the first page.</p>",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "GetUsageStatisticsResponse": {
+      "type": "structure",
+      "members": {
+        "UsageStatistics": {
+          "shape": "UsageStatistics",
+          "documentation": "<p>The usage statistics object. If a UsageStatisticType was provided, the objects representing other types will be null.</p>",
+          "locationName": "usageStatistics"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The pagination parameter to be used on the next list operation to retrieve more items.</p>",
+          "locationName": "nextToken"
         }
       }
     },
@@ -3515,12 +3609,12 @@
         },
         "DisableEmailNotification": {
           "shape": "Boolean",
-          "documentation": "<p>A Boolean value that specifies whether you want to disable email notification to the accounts that you’re inviting to GuardDuty as members.</p>",
+          "documentation": "<p>A Boolean value that specifies whether you want to disable email notification to the accounts that you are inviting to GuardDuty as members.</p>",
           "locationName": "disableEmailNotification"
         },
         "Message": {
           "shape": "String",
-          "documentation": "<p>The invitation message that you want to send to the accounts that you’re inviting to GuardDuty as members.</p>",
+          "documentation": "<p>The invitation message that you want to send to the accounts that you're inviting to GuardDuty as members.</p>",
           "locationName": "message"
         }
       }
@@ -3672,7 +3766,7 @@
         },
         "FindingCriteria": {
           "shape": "FindingCriteria",
-          "documentation": "<p>Represents the criteria used for querying findings. Valid values include:</p> <ul> <li> <p>JSON field name</p> </li> <li> <p>accountId</p> </li> <li> <p>region</p> </li> <li> <p>confidence</p> </li> <li> <p>id</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.outpostArn</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.localIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.archived</p> <p>When this attribute is set to 'true', only archived findings are listed. When it's set to 'false', only unarchived findings are listed. When this attribute is not set, all existing findings are listed.</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>severity</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format: 1486685375000</p> </li> </ul>",
+          "documentation": "<p>Represents the criteria used for querying findings. Valid values include:</p> <ul> <li> <p>JSON field name</p> </li> <li> <p>accountId</p> </li> <li> <p>region</p> </li> <li> <p>confidence</p> </li> <li> <p>id</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.archived</p> <p>When this attribute is set to 'true', only archived findings are listed. When it's set to 'false', only unarchived findings are listed. When this attribute is not set, all existing findings are listed.</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>severity</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: Timestamp in Unix Epoch millisecond format: 1486685375000</p> </li> </ul>",
           "locationName": "findingCriteria"
         },
         "SortCriteria": {
@@ -3812,7 +3906,7 @@
         },
         "OnlyAssociated": {
           "shape": "String",
-          "documentation": "<p>Specifies what member accounts the response includes based on their relationship status with the master account. The default value is \"true\". If set to \"false\" the response includes all existing member accounts (including members who haven't been invited yet or have been disassociated).</p>",
+          "documentation": "<p>Specifies whether to only return associated members or to return all members (including members who haven't been invited yet or have been disassociated).</p>",
           "location": "querystring",
           "locationName": "onlyAssociated"
         }
@@ -4547,6 +4641,12 @@
       },
       "documentation": "<p>Contains information about the AWS resource associated with the activity that prompted GuardDuty to generate a finding.</p>"
     },
+    "ResourceList": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
+    },
     "S3BucketDetail": {
       "type": "structure",
       "members": {
@@ -4931,6 +5031,22 @@
     "Timestamp": {
       "type": "timestamp"
     },
+    "Total": {
+      "type": "structure",
+      "members": {
+        "Amount": {
+          "shape": "String",
+          "documentation": "<p>The total usage.</p>",
+          "locationName": "amount"
+        },
+        "Unit": {
+          "shape": "String",
+          "documentation": "<p>The currency unit that the amount is given in.</p>",
+          "locationName": "unit"
+        }
+      },
+      "documentation": "<p>Contains the total usage with the corresponding currency unit for that value.</p>"
+    },
     "UnarchiveFindingsRequest": {
       "type": "structure",
       "required": [
@@ -5156,7 +5272,7 @@
         },
         "Location": {
           "shape": "Location",
-          "documentation": "<p>The updated URI of the file that contains the IPSet.</p>",
+          "documentation": "<p>The updated URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
           "locationName": "location"
         },
         "Activate": {
@@ -5293,7 +5409,7 @@
         },
         "Location": {
           "shape": "Location",
-          "documentation": "<p>The updated URI of the file that contains the ThreateIntelSet.</p>",
+          "documentation": "<p>The updated URI of the file that contains the ThreateIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>",
           "locationName": "location"
         },
         "Activate": {
@@ -5306,6 +5422,131 @@
     "UpdateThreatIntelSetResponse": {
       "type": "structure",
       "members": {}
+    },
+    "UsageAccountResult": {
+      "type": "structure",
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The Account ID that generated usage.</p>",
+          "locationName": "accountId"
+        },
+        "Total": {
+          "shape": "Total",
+          "documentation": "<p>Represents the total of usage for the Account ID.</p>",
+          "locationName": "total"
+        }
+      },
+      "documentation": "<p>Contains information on the total of usage based on account IDs.</p>"
+    },
+    "UsageAccountResultList": {
+      "type": "list",
+      "member": {
+        "shape": "UsageAccountResult"
+      }
+    },
+    "UsageCriteria": {
+      "type": "structure",
+      "required": [
+        "DataSources"
+      ],
+      "members": {
+        "AccountIds": {
+          "shape": "AccountIds",
+          "documentation": "<p>The account IDs to aggregate usage statistics from.</p>",
+          "locationName": "accountIds"
+        },
+        "DataSources": {
+          "shape": "DataSourceList",
+          "documentation": "<p>The data sources to aggregate usage statistics from.</p>",
+          "locationName": "dataSources"
+        },
+        "Resources": {
+          "shape": "ResourceList",
+          "documentation": "<p>The resources to aggregate usage statistics from. Only accepts exact resource names.</p>",
+          "locationName": "resources"
+        }
+      },
+      "documentation": "<p>Contains information about the criteria used to query usage statistics.</p>"
+    },
+    "UsageDataSourceResult": {
+      "type": "structure",
+      "members": {
+        "DataSource": {
+          "shape": "DataSource",
+          "documentation": "<p>The data source type that generated usage.</p>",
+          "locationName": "dataSource"
+        },
+        "Total": {
+          "shape": "Total",
+          "documentation": "<p>Represents the total of usage for the specified data source.</p>",
+          "locationName": "total"
+        }
+      },
+      "documentation": "<p>Contains information on the result of usage based on data source type.</p>"
+    },
+    "UsageDataSourceResultList": {
+      "type": "list",
+      "member": {
+        "shape": "UsageDataSourceResult"
+      }
+    },
+    "UsageResourceResult": {
+      "type": "structure",
+      "members": {
+        "Resource": {
+          "shape": "String",
+          "documentation": "<p>The AWS resource that generated usage.</p>",
+          "locationName": "resource"
+        },
+        "Total": {
+          "shape": "Total",
+          "documentation": "<p>Represents the sum total of usage for the specified resource type.</p>",
+          "locationName": "total"
+        }
+      },
+      "documentation": "<p>Contains information on the sum of usage based on an AWS resource.</p>"
+    },
+    "UsageResourceResultList": {
+      "type": "list",
+      "member": {
+        "shape": "UsageResourceResult"
+      }
+    },
+    "UsageStatisticType": {
+      "type": "string",
+      "enum": [
+        "SUM_BY_ACCOUNT",
+        "SUM_BY_DATA_SOURCE",
+        "SUM_BY_RESOURCE",
+        "TOP_RESOURCES"
+      ]
+    },
+    "UsageStatistics": {
+      "type": "structure",
+      "members": {
+        "SumByAccount": {
+          "shape": "UsageAccountResultList",
+          "documentation": "<p>The usage statistic sum organized by account ID.</p>",
+          "locationName": "sumByAccount"
+        },
+        "SumByDataSource": {
+          "shape": "UsageDataSourceResultList",
+          "documentation": "<p>The usage statistic sum organized by on data source.</p>",
+          "locationName": "sumByDataSource"
+        },
+        "SumByResource": {
+          "shape": "UsageResourceResultList",
+          "documentation": "<p>The usage statistic sum organized by resource.</p>",
+          "locationName": "sumByResource"
+        },
+        "TopResources": {
+          "shape": "UsageResourceResultList",
+          "documentation": "<p>Lists the top 50 resources that have generated the most GuardDuty usage, in order from most to least expensive.</p>",
+          "locationName": "topResources"
+        }
+      },
+      "documentation": "<p>Contains the result of GuardDuty usage. If a UsageStatisticType is provided the result for other types will be null. </p>"
     }
   },
   "documentation": "<p>Amazon GuardDuty is a continuous security monitoring service that analyzes and processes the following data sources: VPC Flow Logs, AWS CloudTrail event logs, and DNS logs. It uses threat intelligence feeds (such as lists of malicious IPs and domains) and machine learning to identify unexpected, potentially unauthorized, and malicious activity within your AWS environment. This can include issues like escalations of privileges, uses of exposed credentials, or communication with malicious IPs, URLs, or domains. For example, GuardDuty can detect compromised EC2 instances that serve malware or mine bitcoin. </p> <p>GuardDuty also monitors AWS account access behavior for signs of compromise. Some examples of this are unauthorized infrastructure deployments such as EC2 instances deployed in a Region that has never been used, or unusual API calls like a password policy change to reduce password strength. </p> <p>GuardDuty informs you of the status of your AWS environment by producing security findings that you can view in the GuardDuty console or through Amazon CloudWatch events. For more information, see the <i> <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html\">Amazon GuardDuty User Guide</a> </i>. </p>"

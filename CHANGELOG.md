@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.723.0-->
+<!--LATEST=2.724.0-->
 <!--ENTRYINSERT-->
+
+## 2.724.0
+* feature: CodeBuild: Adding support for BuildBatch, and CodeCoverage APIs. BuildBatch allows you to model your project environment in source, and helps start multiple builds with a single API call. CodeCoverage allows you to track your code coverage using AWS CodeBuild. 
+* feature: EC2: EC2 On-Demand Capacity Reservations now adds support to bring your own licenses (BYOL) of Windows operating system to launch EC2 instances. 
+* feature: GuardDuty: GuardDuty can now provide detailed cost metrics broken down by account, data source, and S3 resources, based on the past 30 days of usage.  This new feature also supports viewing cost metrics for all member accounts as a GuardDuty master.
+* feature: Kafka: Amazon MSK has added a new API that allows you to reboot brokers within a cluster. 
+* feature: SESV2: This release makes more API operations available to customers in version 2 of the Amazon SES API. With these additions, customers can now access sending authorization, custom verification email, and template API operations.  With this release, Amazon SES is also providing new and updated APIs to allow customers to request production access.
+* feature: ServiceCatalog: This release adds support for ProvisionProduct, UpdateProvisionedProduct & DescribeProvisioningParameters by product name, provisioning artifact name and path name. In addition DescribeProvisioningParameters now returns a list of provisioning artifact outputs.
 
 ## 2.723.0
 * feature: EC2: Adding support to target EC2 On-Demand Capacity Reservations within an AWS Resource Group to launch EC2 instances.

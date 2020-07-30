@@ -28,11 +28,11 @@ declare class GuardDuty extends Service {
    */
   archiveFindings(callback?: (err: AWSError, data: GuardDuty.Types.ArchiveFindingsResponse) => void): Request<GuardDuty.Types.ArchiveFindingsResponse, AWSError>;
   /**
-   * Creates a single Amazon GuardDuty detector. A detector is a resource that represents the GuardDuty service. To start using GuardDuty, you must create a detector in each Region where you enable the service. You can have only one detector per account per Region.
+   * Creates a single Amazon GuardDuty detector. A detector is a resource that represents the GuardDuty service. To start using GuardDuty, you must create a detector in each Region where you enable the service. You can have only one detector per account per Region. All data sources are enabled in a new detector by default.
    */
   createDetector(params: GuardDuty.Types.CreateDetectorRequest, callback?: (err: AWSError, data: GuardDuty.Types.CreateDetectorResponse) => void): Request<GuardDuty.Types.CreateDetectorResponse, AWSError>;
   /**
-   * Creates a single Amazon GuardDuty detector. A detector is a resource that represents the GuardDuty service. To start using GuardDuty, you must create a detector in each Region where you enable the service. You can have only one detector per account per Region.
+   * Creates a single Amazon GuardDuty detector. A detector is a resource that represents the GuardDuty service. To start using GuardDuty, you must create a detector in each Region where you enable the service. You can have only one detector per account per Region. All data sources are enabled in a new detector by default.
    */
   createDetector(callback?: (err: AWSError, data: GuardDuty.Types.CreateDetectorResponse) => void): Request<GuardDuty.Types.CreateDetectorResponse, AWSError>;
   /**
@@ -52,11 +52,11 @@ declare class GuardDuty extends Service {
    */
   createIPSet(callback?: (err: AWSError, data: GuardDuty.Types.CreateIPSetResponse) => void): Request<GuardDuty.Types.CreateIPSetResponse, AWSError>;
   /**
-   * Creates member accounts of the current AWS account by specifying a list of AWS account IDs. The current AWS account can then invite these members to manage GuardDuty in their accounts.
+   * Creates member accounts of the current AWS account by specifying a list of AWS account IDs. This step is a prerequisite for managing the associated member accounts either by invitation or through an organization. When using Create Members as an organizations delegated administrator this action will enable GuardDuty in the added member accounts, with the exception of the organization master account, which must enable GuardDuty prior to being added as a member. If you are adding accounts by invitation use this action after GuardDuty has been enabled in potential member accounts and before using  Invite Members .
    */
   createMembers(params: GuardDuty.Types.CreateMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.CreateMembersResponse) => void): Request<GuardDuty.Types.CreateMembersResponse, AWSError>;
   /**
-   * Creates member accounts of the current AWS account by specifying a list of AWS account IDs. The current AWS account can then invite these members to manage GuardDuty in their accounts.
+   * Creates member accounts of the current AWS account by specifying a list of AWS account IDs. This step is a prerequisite for managing the associated member accounts either by invitation or through an organization. When using Create Members as an organizations delegated administrator this action will enable GuardDuty in the added member accounts, with the exception of the organization master account, which must enable GuardDuty prior to being added as a member. If you are adding accounts by invitation use this action after GuardDuty has been enabled in potential member accounts and before using  Invite Members .
    */
   createMembers(callback?: (err: AWSError, data: GuardDuty.Types.CreateMembersResponse) => void): Request<GuardDuty.Types.CreateMembersResponse, AWSError>;
   /**
@@ -276,6 +276,14 @@ declare class GuardDuty extends Service {
    */
   getThreatIntelSet(callback?: (err: AWSError, data: GuardDuty.Types.GetThreatIntelSetResponse) => void): Request<GuardDuty.Types.GetThreatIntelSetResponse, AWSError>;
   /**
+   * Lists Amazon GuardDuty usage statistics over the last 30 days for the specified detector ID. For newly enabled detectors or data sources the cost returned will include only the usage so far under 30 days, this may differ from the cost metrics in the console, which projects usage over 30 days to provide a monthly cost estimate. For more information see Understanding How Usage Costs are Calculated.
+   */
+  getUsageStatistics(params: GuardDuty.Types.GetUsageStatisticsRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetUsageStatisticsResponse) => void): Request<GuardDuty.Types.GetUsageStatisticsResponse, AWSError>;
+  /**
+   * Lists Amazon GuardDuty usage statistics over the last 30 days for the specified detector ID. For newly enabled detectors or data sources the cost returned will include only the usage so far under 30 days, this may differ from the cost metrics in the console, which projects usage over 30 days to provide a monthly cost estimate. For more information see Understanding How Usage Costs are Calculated.
+   */
+  getUsageStatistics(callback?: (err: AWSError, data: GuardDuty.Types.GetUsageStatisticsResponse) => void): Request<GuardDuty.Types.GetUsageStatisticsResponse, AWSError>;
+  /**
    * Invites other AWS accounts (created as members of the current AWS account by CreateMembers) to enable GuardDuty, and allow the current AWS account to view and manage these accounts' GuardDuty findings on their behalf as the master account.
    */
   inviteMembers(params: GuardDuty.Types.InviteMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.InviteMembersResponse) => void): Request<GuardDuty.Types.InviteMembersResponse, AWSError>;
@@ -324,11 +332,11 @@ declare class GuardDuty extends Service {
    */
   listInvitations(callback?: (err: AWSError, data: GuardDuty.Types.ListInvitationsResponse) => void): Request<GuardDuty.Types.ListInvitationsResponse, AWSError>;
   /**
-   * Lists details about associated member accounts for the current GuardDuty master account.
+   * Lists details about all member accounts for the current GuardDuty master account.
    */
   listMembers(params: GuardDuty.Types.ListMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.ListMembersResponse) => void): Request<GuardDuty.Types.ListMembersResponse, AWSError>;
   /**
-   * Lists details about associated member accounts for the current GuardDuty master account.
+   * Lists details about all member accounts for the current GuardDuty master account.
    */
   listMembers(callback?: (err: AWSError, data: GuardDuty.Types.ListMembersResponse) => void): Request<GuardDuty.Types.ListMembersResponse, AWSError>;
   /**
@@ -799,7 +807,7 @@ declare namespace GuardDuty {
      */
     Format: IpSetFormat;
     /**
-     * The URI of the file that contains the IPSet.
+     * The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
      */
     Location: Location;
     /**
@@ -887,7 +895,7 @@ declare namespace GuardDuty {
      */
     Format: ThreatIntelSetFormat;
     /**
-     * The URI of the file that contains the ThreatIntelSet.
+     * The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
      */
     Location: Location;
     /**
@@ -916,6 +924,7 @@ declare namespace GuardDuty {
      */
     Status: DataSourceStatus;
   }
+  export type DataSource = "FLOW_LOGS"|"CLOUD_TRAIL"|"DNS_LOGS"|"S3_LOGS"|string;
   export interface DataSourceConfigurations {
     /**
      * Describes whether S3 data event logs are enabled as a data source.
@@ -940,6 +949,7 @@ declare namespace GuardDuty {
      */
     S3Logs: S3LogsConfigurationResult;
   }
+  export type DataSourceList = DataSource[];
   export type DataSourceStatus = "ENABLED"|"DISABLED"|string;
   export interface DeclineInvitationsRequest {
     /**
@@ -1420,7 +1430,7 @@ declare namespace GuardDuty {
      */
     Format: IpSetFormat;
     /**
-     * The URI of the file that contains the IPSet.
+     * The URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
      */
     Location: Location;
     /**
@@ -1512,7 +1522,7 @@ declare namespace GuardDuty {
      */
     Format: ThreatIntelSetFormat;
     /**
-     * The URI of the file that contains the ThreatIntelSet.
+     * The URI of the file that contains the ThreatIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
      */
     Location: Location;
     /**
@@ -1523,6 +1533,42 @@ declare namespace GuardDuty {
      * The tags of the threat list resource.
      */
     Tags?: TagMap;
+  }
+  export interface GetUsageStatisticsRequest {
+    /**
+     * The ID of the detector that specifies the GuardDuty service whose usage statistics you want to retrieve.
+     */
+    DetectorId: DetectorId;
+    /**
+     * The type of usage statistics to retrieve.
+     */
+    UsageStatisticType: UsageStatisticType;
+    /**
+     * Represents the criteria used for querying usage.
+     */
+    UsageCriteria: UsageCriteria;
+    /**
+     * The currency unit you would like to view your usage statistics in. Current valid values are USD.
+     */
+    Unit?: String;
+    /**
+     * The maximum number of results to return in the response.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the NextToken value returned from the previous request to continue listing results after the first page.
+     */
+    NextToken?: String;
+  }
+  export interface GetUsageStatisticsResponse {
+    /**
+     * The usage statistics object. If a UsageStatisticType was provided, the objects representing other types will be null.
+     */
+    UsageStatistics?: UsageStatistics;
+    /**
+     * The pagination parameter to be used on the next list operation to retrieve more items.
+     */
+    NextToken?: String;
   }
   export type GuardDutyArn = string;
   export interface IamInstanceProfile {
@@ -1619,11 +1665,11 @@ declare namespace GuardDuty {
      */
     AccountIds: AccountIds;
     /**
-     * A Boolean value that specifies whether you want to disable email notification to the accounts that you’re inviting to GuardDuty as members.
+     * A Boolean value that specifies whether you want to disable email notification to the accounts that you are inviting to GuardDuty as members.
      */
     DisableEmailNotification?: Boolean;
     /**
-     * The invitation message that you want to send to the accounts that you’re inviting to GuardDuty as members.
+     * The invitation message that you want to send to the accounts that you're inviting to GuardDuty as members.
      */
     Message?: String;
   }
@@ -1687,7 +1733,7 @@ declare namespace GuardDuty {
      */
     DetectorId: DetectorId;
     /**
-     * Represents the criteria used for querying findings. Valid values include:   JSON field name   accountId   region   confidence   id   resource.accessKeyDetails.accessKeyId   resource.accessKeyDetails.principalId   resource.accessKeyDetails.userName   resource.accessKeyDetails.userType   resource.instanceDetails.iamInstanceProfile.id   resource.instanceDetails.imageId   resource.instanceDetails.instanceId   resource.instanceDetails.outpostArn   resource.instanceDetails.networkInterfaces.ipv6Addresses   resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress   resource.instanceDetails.networkInterfaces.publicDnsName   resource.instanceDetails.networkInterfaces.publicIp   resource.instanceDetails.networkInterfaces.securityGroups.groupId   resource.instanceDetails.networkInterfaces.securityGroups.groupName   resource.instanceDetails.networkInterfaces.subnetId   resource.instanceDetails.networkInterfaces.vpcId   resource.instanceDetails.tags.key   resource.instanceDetails.tags.value   resource.resourceType   service.action.actionType   service.action.awsApiCallAction.api   service.action.awsApiCallAction.callerType   service.action.awsApiCallAction.remoteIpDetails.city.cityName   service.action.awsApiCallAction.remoteIpDetails.country.countryName   service.action.awsApiCallAction.remoteIpDetails.ipAddressV4   service.action.awsApiCallAction.remoteIpDetails.organization.asn   service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg   service.action.awsApiCallAction.serviceName   service.action.dnsRequestAction.domain   service.action.networkConnectionAction.blocked   service.action.networkConnectionAction.connectionDirection   service.action.networkConnectionAction.localPortDetails.port   service.action.networkConnectionAction.protocol   service.action.networkConnectionAction.localIpDetails.ipAddressV4   service.action.networkConnectionAction.remoteIpDetails.city.cityName   service.action.networkConnectionAction.remoteIpDetails.country.countryName   service.action.networkConnectionAction.remoteIpDetails.ipAddressV4   service.action.networkConnectionAction.remoteIpDetails.organization.asn   service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg   service.action.networkConnectionAction.remotePortDetails.port   service.additionalInfo.threatListName   service.archived When this attribute is set to 'true', only archived findings are listed. When it's set to 'false', only unarchived findings are listed. When this attribute is not set, all existing findings are listed.   service.resourceRole   severity   type   updatedAt Type: Timestamp in Unix Epoch millisecond format: 1486685375000  
+     * Represents the criteria used for querying findings. Valid values include:   JSON field name   accountId   region   confidence   id   resource.accessKeyDetails.accessKeyId   resource.accessKeyDetails.principalId   resource.accessKeyDetails.userName   resource.accessKeyDetails.userType   resource.instanceDetails.iamInstanceProfile.id   resource.instanceDetails.imageId   resource.instanceDetails.instanceId   resource.instanceDetails.networkInterfaces.ipv6Addresses   resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress   resource.instanceDetails.networkInterfaces.publicDnsName   resource.instanceDetails.networkInterfaces.publicIp   resource.instanceDetails.networkInterfaces.securityGroups.groupId   resource.instanceDetails.networkInterfaces.securityGroups.groupName   resource.instanceDetails.networkInterfaces.subnetId   resource.instanceDetails.networkInterfaces.vpcId   resource.instanceDetails.tags.key   resource.instanceDetails.tags.value   resource.resourceType   service.action.actionType   service.action.awsApiCallAction.api   service.action.awsApiCallAction.callerType   service.action.awsApiCallAction.remoteIpDetails.city.cityName   service.action.awsApiCallAction.remoteIpDetails.country.countryName   service.action.awsApiCallAction.remoteIpDetails.ipAddressV4   service.action.awsApiCallAction.remoteIpDetails.organization.asn   service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg   service.action.awsApiCallAction.serviceName   service.action.dnsRequestAction.domain   service.action.networkConnectionAction.blocked   service.action.networkConnectionAction.connectionDirection   service.action.networkConnectionAction.localPortDetails.port   service.action.networkConnectionAction.protocol   service.action.networkConnectionAction.remoteIpDetails.city.cityName   service.action.networkConnectionAction.remoteIpDetails.country.countryName   service.action.networkConnectionAction.remoteIpDetails.ipAddressV4   service.action.networkConnectionAction.remoteIpDetails.organization.asn   service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg   service.action.networkConnectionAction.remotePortDetails.port   service.additionalInfo.threatListName   service.archived When this attribute is set to 'true', only archived findings are listed. When it's set to 'false', only unarchived findings are listed. When this attribute is not set, all existing findings are listed.   service.resourceRole   severity   type   updatedAt Type: Timestamp in Unix Epoch millisecond format: 1486685375000  
      */
     FindingCriteria?: FindingCriteria;
     /**
@@ -1771,7 +1817,7 @@ declare namespace GuardDuty {
      */
     NextToken?: String;
     /**
-     * Specifies what member accounts the response includes based on their relationship status with the master account. The default value is "true". If set to "false" the response includes all existing member accounts (including members who haven't been invited yet or have been disassociated).
+     * Specifies whether to only return associated members or to return all members (including members who haven't been invited yet or have been disassociated).
      */
     OnlyAssociated?: String;
   }
@@ -2187,6 +2233,7 @@ declare namespace GuardDuty {
      */
     ResourceType?: String;
   }
+  export type ResourceList = String[];
   export interface S3BucketDetail {
     /**
      * The Amazon Resource Name (ARN) of the S3 bucket.
@@ -2373,6 +2420,16 @@ declare namespace GuardDuty {
   export type ThreatIntelligenceDetails = ThreatIntelligenceDetail[];
   export type ThreatNames = String[];
   export type Timestamp = Date;
+  export interface Total {
+    /**
+     * The total usage.
+     */
+    Amount?: String;
+    /**
+     * The currency unit that the amount is given in.
+     */
+    Unit?: String;
+  }
   export interface UnarchiveFindingsRequest {
     /**
      * The ID of the detector associated with the findings to unarchive.
@@ -2494,7 +2551,7 @@ declare namespace GuardDuty {
      */
     Name?: Name;
     /**
-     * The updated URI of the file that contains the IPSet.
+     * The updated URI of the file that contains the IPSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
      */
     Location?: Location;
     /**
@@ -2570,7 +2627,7 @@ declare namespace GuardDuty {
      */
     Name?: Name;
     /**
-     * The updated URI of the file that contains the ThreateIntelSet.
+     * The updated URI of the file that contains the ThreateIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
      */
     Location?: Location;
     /**
@@ -2579,6 +2636,72 @@ declare namespace GuardDuty {
     Activate?: Boolean;
   }
   export interface UpdateThreatIntelSetResponse {
+  }
+  export interface UsageAccountResult {
+    /**
+     * The Account ID that generated usage.
+     */
+    AccountId?: AccountId;
+    /**
+     * Represents the total of usage for the Account ID.
+     */
+    Total?: Total;
+  }
+  export type UsageAccountResultList = UsageAccountResult[];
+  export interface UsageCriteria {
+    /**
+     * The account IDs to aggregate usage statistics from.
+     */
+    AccountIds?: AccountIds;
+    /**
+     * The data sources to aggregate usage statistics from.
+     */
+    DataSources: DataSourceList;
+    /**
+     * The resources to aggregate usage statistics from. Only accepts exact resource names.
+     */
+    Resources?: ResourceList;
+  }
+  export interface UsageDataSourceResult {
+    /**
+     * The data source type that generated usage.
+     */
+    DataSource?: DataSource;
+    /**
+     * Represents the total of usage for the specified data source.
+     */
+    Total?: Total;
+  }
+  export type UsageDataSourceResultList = UsageDataSourceResult[];
+  export interface UsageResourceResult {
+    /**
+     * The AWS resource that generated usage.
+     */
+    Resource?: String;
+    /**
+     * Represents the sum total of usage for the specified resource type.
+     */
+    Total?: Total;
+  }
+  export type UsageResourceResultList = UsageResourceResult[];
+  export type UsageStatisticType = "SUM_BY_ACCOUNT"|"SUM_BY_DATA_SOURCE"|"SUM_BY_RESOURCE"|"TOP_RESOURCES"|string;
+  export interface UsageStatistics {
+    /**
+     * The usage statistic sum organized by account ID.
+     */
+    SumByAccount?: UsageAccountResultList;
+    /**
+     * The usage statistic sum organized by on data source.
+     */
+    SumByDataSource?: UsageDataSourceResultList;
+    /**
+     * The usage statistic sum organized by resource.
+     */
+    SumByResource?: UsageResourceResultList;
+    /**
+     * Lists the top 50 resources that have generated the most GuardDuty usage, in order from most to least expensive.
+     */
+    TopResources?: UsageResourceResultList;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

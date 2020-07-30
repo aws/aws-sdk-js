@@ -100,11 +100,11 @@ declare class ServiceCatalog extends Service {
    */
   createPortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.CreatePortfolioOutput) => void): Request<ServiceCatalog.Types.CreatePortfolioOutput, AWSError>;
   /**
-   * Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the master account of an organization or by a delegated administrator. You can share portfolios to an organization, an organizational unit, or a specific account. Note that if a delegated admin is de-registered, they can no longer create portfolio shares.  AWSOrganizationsAccess must be enabled in order to create a portfolio share to an organization node.
+   * Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the master account of an organization or by a delegated administrator. You can share portfolios to an organization, an organizational unit, or a specific account. Note that if a delegated admin is de-registered, they can no longer create portfolio shares.  AWSOrganizationsAccess must be enabled in order to create a portfolio share to an organization node. You can't share a shared resource. This includes portfolios that contain a shared product.
    */
   createPortfolioShare(params: ServiceCatalog.Types.CreatePortfolioShareInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreatePortfolioShareOutput) => void): Request<ServiceCatalog.Types.CreatePortfolioShareOutput, AWSError>;
   /**
-   * Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the master account of an organization or by a delegated administrator. You can share portfolios to an organization, an organizational unit, or a specific account. Note that if a delegated admin is de-registered, they can no longer create portfolio shares.  AWSOrganizationsAccess must be enabled in order to create a portfolio share to an organization node.
+   * Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the master account of an organization or by a delegated administrator. You can share portfolios to an organization, an organizational unit, or a specific account. Note that if a delegated admin is de-registered, they can no longer create portfolio shares.  AWSOrganizationsAccess must be enabled in order to create a portfolio share to an organization node. You can't share a shared resource. This includes portfolios that contain a shared product.
    */
   createPortfolioShare(callback?: (err: AWSError, data: ServiceCatalog.Types.CreatePortfolioShareOutput) => void): Request<ServiceCatalog.Types.CreatePortfolioShareOutput, AWSError>;
   /**
@@ -1649,17 +1649,29 @@ declare namespace ServiceCatalog {
      */
     AcceptLanguage?: AcceptLanguage;
     /**
-     * The product identifier.
+     * The product identifier. You must provide the product name or ID, but not both.
      */
-    ProductId: Id;
+    ProductId?: Id;
     /**
-     * The identifier of the provisioning artifact.
+     * The name of the product. You must provide the name or ID, but not both.
      */
-    ProvisioningArtifactId: Id;
+    ProductName?: ProductViewName;
     /**
-     * The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use ListLaunchPaths.
+     * The identifier of the provisioning artifact. You must provide the name or ID, but not both.
+     */
+    ProvisioningArtifactId?: Id;
+    /**
+     * The name of the provisioning artifact. You must provide the name or ID, but not both.
+     */
+    ProvisioningArtifactName?: ProvisioningArtifactName;
+    /**
+     * The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use ListLaunchPaths. You must provide the name or ID, but not both.
      */
     PathId?: Id;
+    /**
+     * The name of the path. You must provide the name or ID, but not both.
+     */
+    PathName?: PortfolioDisplayName;
   }
   export interface DescribeProvisioningParametersOutput {
     /**
@@ -1682,6 +1694,10 @@ declare namespace ServiceCatalog {
      * An object that contains information about preferences, such as regions and accounts, for the provisioning artifact.
      */
     ProvisioningArtifactPreferences?: ProvisioningArtifactPreferences;
+    /**
+     * The output of the provisioning artifact.
+     */
+    ProvisioningArtifactOutputs?: ProvisioningArtifactOutputs;
   }
   export interface DescribeRecordInput {
     /**
@@ -2540,6 +2556,7 @@ declare namespace ServiceCatalog {
   export type OrganizationNodeType = "ORGANIZATION"|"ORGANIZATIONAL_UNIT"|"ACCOUNT"|string;
   export type OrganizationNodeValue = string;
   export type OrganizationNodes = OrganizationNode[];
+  export type OutputDescription = string;
   export type OutputKey = string;
   export type OutputValue = string;
   export type PageSize = number;
@@ -2701,17 +2718,29 @@ declare namespace ServiceCatalog {
      */
     AcceptLanguage?: AcceptLanguage;
     /**
-     * The product identifier.
+     * The product identifier. You must provide the name or ID, but not both.
      */
-    ProductId: Id;
+    ProductId?: Id;
     /**
-     * The identifier of the provisioning artifact.
+     * The name of the product. You must provide the name or ID, but not both.
      */
-    ProvisioningArtifactId: Id;
+    ProductName?: ProductViewName;
     /**
-     * The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use ListLaunchPaths.
+     * The identifier of the provisioning artifact. You must provide the name or ID, but not both.
+     */
+    ProvisioningArtifactId?: Id;
+    /**
+     * The name of the provisioning artifact. You must provide the name or ID, but not both.
+     */
+    ProvisioningArtifactName?: ProvisioningArtifactName;
+    /**
+     * The path identifier of the product. This value is optional if the product has a default path, and required if the product has more than one path. To list the paths for a product, use ListLaunchPaths. You must provide the name or ID, but not both.
      */
     PathId?: Id;
+    /**
+     * The name of the path. You must provide the name or ID, but not both.
+     */
+    PathName?: PortfolioDisplayName;
     /**
      * A user-friendly name for the provisioned product. This value must be unique for the AWS account and cannot be updated after the product is provisioned.
      */
@@ -3017,6 +3046,18 @@ declare namespace ServiceCatalog {
   export type ProvisioningArtifactInfoKey = string;
   export type ProvisioningArtifactInfoValue = string;
   export type ProvisioningArtifactName = string;
+  export interface ProvisioningArtifactOutput {
+    /**
+     * The provisioning artifact output key.
+     */
+    Key?: ProvisioningArtifactOutputKey;
+    /**
+     * Description of the provisioning artifact output key.
+     */
+    Description?: OutputDescription;
+  }
+  export type ProvisioningArtifactOutputKey = string;
+  export type ProvisioningArtifactOutputs = ProvisioningArtifactOutput[];
   export interface ProvisioningArtifactParameter {
     /**
      * The parameter key.
@@ -3846,21 +3887,33 @@ declare namespace ServiceCatalog {
      */
     ProvisionedProductName?: ProvisionedProductNameOrArn;
     /**
-     * The identifier of the provisioned product. You cannot specify both ProvisionedProductName and ProvisionedProductId.
+     * The identifier of the provisioned product. You must provide the name or ID, but not both.
      */
     ProvisionedProductId?: Id;
     /**
-     * The identifier of the product.
+     * The identifier of the product. You must provide the name or ID, but not both.
      */
     ProductId?: Id;
+    /**
+     * The name of the product. You must provide the name or ID, but not both.
+     */
+    ProductName?: ProductViewName;
     /**
      * The identifier of the provisioning artifact.
      */
     ProvisioningArtifactId?: Id;
     /**
-     * The new path identifier. This value is optional if the product has a default path, and required if the product has more than one path.
+     * The name of the provisioning artifact. You must provide the name or ID, but not both.
+     */
+    ProvisioningArtifactName?: ProvisioningArtifactName;
+    /**
+     * The path identifier. This value is optional if the product has a default path, and required if the product has more than one path. You must provide the name or ID, but not both.
      */
     PathId?: Id;
+    /**
+     * The name of the path. You must provide the name or ID, but not both.
+     */
+    PathName?: PortfolioDisplayName;
     /**
      * The new parameters.
      */

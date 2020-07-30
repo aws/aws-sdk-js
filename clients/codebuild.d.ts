@@ -20,6 +20,14 @@ declare class CodeBuild extends Service {
    */
   batchDeleteBuilds(callback?: (err: AWSError, data: CodeBuild.Types.BatchDeleteBuildsOutput) => void): Request<CodeBuild.Types.BatchDeleteBuildsOutput, AWSError>;
   /**
+   * Retrieves information about one or more batch builds.
+   */
+  batchGetBuildBatches(params: CodeBuild.Types.BatchGetBuildBatchesInput, callback?: (err: AWSError, data: CodeBuild.Types.BatchGetBuildBatchesOutput) => void): Request<CodeBuild.Types.BatchGetBuildBatchesOutput, AWSError>;
+  /**
+   * Retrieves information about one or more batch builds.
+   */
+  batchGetBuildBatches(callback?: (err: AWSError, data: CodeBuild.Types.BatchGetBuildBatchesOutput) => void): Request<CodeBuild.Types.BatchGetBuildBatchesOutput, AWSError>;
+  /**
    * Gets information about one or more builds.
    */
   batchGetBuilds(params: CodeBuild.Types.BatchGetBuildsInput, callback?: (err: AWSError, data: CodeBuild.Types.BatchGetBuildsOutput) => void): Request<CodeBuild.Types.BatchGetBuildsOutput, AWSError>;
@@ -76,6 +84,14 @@ declare class CodeBuild extends Service {
    */
   createWebhook(callback?: (err: AWSError, data: CodeBuild.Types.CreateWebhookOutput) => void): Request<CodeBuild.Types.CreateWebhookOutput, AWSError>;
   /**
+   * Deletes a batch build.
+   */
+  deleteBuildBatch(params: CodeBuild.Types.DeleteBuildBatchInput, callback?: (err: AWSError, data: CodeBuild.Types.DeleteBuildBatchOutput) => void): Request<CodeBuild.Types.DeleteBuildBatchOutput, AWSError>;
+  /**
+   * Deletes a batch build.
+   */
+  deleteBuildBatch(callback?: (err: AWSError, data: CodeBuild.Types.DeleteBuildBatchOutput) => void): Request<CodeBuild.Types.DeleteBuildBatchOutput, AWSError>;
+  /**
    *  Deletes a build project. When you delete a project, its builds are not deleted. 
    */
   deleteProject(params: CodeBuild.Types.DeleteProjectInput, callback?: (err: AWSError, data: CodeBuild.Types.DeleteProjectOutput) => void): Request<CodeBuild.Types.DeleteProjectOutput, AWSError>;
@@ -124,6 +140,14 @@ declare class CodeBuild extends Service {
    */
   deleteWebhook(callback?: (err: AWSError, data: CodeBuild.Types.DeleteWebhookOutput) => void): Request<CodeBuild.Types.DeleteWebhookOutput, AWSError>;
   /**
+   * Retrieves one or more code coverage reports.
+   */
+  describeCodeCoverages(params: CodeBuild.Types.DescribeCodeCoveragesInput, callback?: (err: AWSError, data: CodeBuild.Types.DescribeCodeCoveragesOutput) => void): Request<CodeBuild.Types.DescribeCodeCoveragesOutput, AWSError>;
+  /**
+   * Retrieves one or more code coverage reports.
+   */
+  describeCodeCoverages(callback?: (err: AWSError, data: CodeBuild.Types.DescribeCodeCoveragesOutput) => void): Request<CodeBuild.Types.DescribeCodeCoveragesOutput, AWSError>;
+  /**
    *  Returns a list of details about test cases for a report. 
    */
   describeTestCases(params: CodeBuild.Types.DescribeTestCasesInput, callback?: (err: AWSError, data: CodeBuild.Types.DescribeTestCasesOutput) => void): Request<CodeBuild.Types.DescribeTestCasesOutput, AWSError>;
@@ -155,6 +179,22 @@ declare class CodeBuild extends Service {
    * Resets the cache for a project.
    */
   invalidateProjectCache(callback?: (err: AWSError, data: CodeBuild.Types.InvalidateProjectCacheOutput) => void): Request<CodeBuild.Types.InvalidateProjectCacheOutput, AWSError>;
+  /**
+   * Retrieves the identifiers of your build batches in the current region.
+   */
+  listBuildBatches(params: CodeBuild.Types.ListBuildBatchesInput, callback?: (err: AWSError, data: CodeBuild.Types.ListBuildBatchesOutput) => void): Request<CodeBuild.Types.ListBuildBatchesOutput, AWSError>;
+  /**
+   * Retrieves the identifiers of your build batches in the current region.
+   */
+  listBuildBatches(callback?: (err: AWSError, data: CodeBuild.Types.ListBuildBatchesOutput) => void): Request<CodeBuild.Types.ListBuildBatchesOutput, AWSError>;
+  /**
+   * Retrieves the identifiers of the build batches for a specific project.
+   */
+  listBuildBatchesForProject(params: CodeBuild.Types.ListBuildBatchesForProjectInput, callback?: (err: AWSError, data: CodeBuild.Types.ListBuildBatchesForProjectOutput) => void): Request<CodeBuild.Types.ListBuildBatchesForProjectOutput, AWSError>;
+  /**
+   * Retrieves the identifiers of the build batches for a specific project.
+   */
+  listBuildBatchesForProject(callback?: (err: AWSError, data: CodeBuild.Types.ListBuildBatchesForProjectOutput) => void): Request<CodeBuild.Types.ListBuildBatchesForProjectOutput, AWSError>;
   /**
    * Gets a list of build IDs, with each build ID representing a single build.
    */
@@ -244,6 +284,22 @@ declare class CodeBuild extends Service {
    */
   putResourcePolicy(callback?: (err: AWSError, data: CodeBuild.Types.PutResourcePolicyOutput) => void): Request<CodeBuild.Types.PutResourcePolicyOutput, AWSError>;
   /**
+   * Restarts a build.
+   */
+  retryBuild(params: CodeBuild.Types.RetryBuildInput, callback?: (err: AWSError, data: CodeBuild.Types.RetryBuildOutput) => void): Request<CodeBuild.Types.RetryBuildOutput, AWSError>;
+  /**
+   * Restarts a build.
+   */
+  retryBuild(callback?: (err: AWSError, data: CodeBuild.Types.RetryBuildOutput) => void): Request<CodeBuild.Types.RetryBuildOutput, AWSError>;
+  /**
+   * Restarts a batch build.
+   */
+  retryBuildBatch(params: CodeBuild.Types.RetryBuildBatchInput, callback?: (err: AWSError, data: CodeBuild.Types.RetryBuildBatchOutput) => void): Request<CodeBuild.Types.RetryBuildBatchOutput, AWSError>;
+  /**
+   * Restarts a batch build.
+   */
+  retryBuildBatch(callback?: (err: AWSError, data: CodeBuild.Types.RetryBuildBatchOutput) => void): Request<CodeBuild.Types.RetryBuildBatchOutput, AWSError>;
+  /**
    * Starts running a build.
    */
   startBuild(params: CodeBuild.Types.StartBuildInput, callback?: (err: AWSError, data: CodeBuild.Types.StartBuildOutput) => void): Request<CodeBuild.Types.StartBuildOutput, AWSError>;
@@ -252,6 +308,14 @@ declare class CodeBuild extends Service {
    */
   startBuild(callback?: (err: AWSError, data: CodeBuild.Types.StartBuildOutput) => void): Request<CodeBuild.Types.StartBuildOutput, AWSError>;
   /**
+   * Starts a batch build for a project.
+   */
+  startBuildBatch(params: CodeBuild.Types.StartBuildBatchInput, callback?: (err: AWSError, data: CodeBuild.Types.StartBuildBatchOutput) => void): Request<CodeBuild.Types.StartBuildBatchOutput, AWSError>;
+  /**
+   * Starts a batch build for a project.
+   */
+  startBuildBatch(callback?: (err: AWSError, data: CodeBuild.Types.StartBuildBatchOutput) => void): Request<CodeBuild.Types.StartBuildBatchOutput, AWSError>;
+  /**
    * Attempts to stop running a build.
    */
   stopBuild(params: CodeBuild.Types.StopBuildInput, callback?: (err: AWSError, data: CodeBuild.Types.StopBuildOutput) => void): Request<CodeBuild.Types.StopBuildOutput, AWSError>;
@@ -259,6 +323,14 @@ declare class CodeBuild extends Service {
    * Attempts to stop running a build.
    */
   stopBuild(callback?: (err: AWSError, data: CodeBuild.Types.StopBuildOutput) => void): Request<CodeBuild.Types.StopBuildOutput, AWSError>;
+  /**
+   * Stops a running batch build.
+   */
+  stopBuildBatch(params: CodeBuild.Types.StopBuildBatchInput, callback?: (err: AWSError, data: CodeBuild.Types.StopBuildBatchOutput) => void): Request<CodeBuild.Types.StopBuildBatchOutput, AWSError>;
+  /**
+   * Stops a running batch build.
+   */
+  stopBuildBatch(callback?: (err: AWSError, data: CodeBuild.Types.StopBuildBatchOutput) => void): Request<CodeBuild.Types.StopBuildBatchOutput, AWSError>;
   /**
    * Changes the settings of a build project.
    */
@@ -304,6 +376,22 @@ declare namespace CodeBuild {
      * Information about any builds that could not be successfully deleted.
      */
     buildsNotDeleted?: BuildsNotDeleted;
+  }
+  export interface BatchGetBuildBatchesInput {
+    /**
+     * An array that contains the batch build identifiers to retrieve.
+     */
+    ids: BuildBatchIds;
+  }
+  export interface BatchGetBuildBatchesOutput {
+    /**
+     * An array of BuildBatch objects that represent the retrieved batch builds.
+     */
+    buildBatches?: BuildBatches;
+    /**
+     * An array that contains the identifiers of any batch builds that are not found.
+     */
+    buildBatchesNotFound?: BuildBatchIds;
   }
   export interface BatchGetBuildsInput {
     /**
@@ -368,6 +456,16 @@ declare namespace CodeBuild {
      *  An array of ARNs passed to BatchGetReportGroups that are not associated with a Report. 
      */
     reportsNotFound?: ReportArns;
+  }
+  export interface BatchRestrictions {
+    /**
+     * Specifies the maximum number of builds allowed.
+     */
+    maximumBuildsAllowed?: WrapperInt;
+    /**
+     * An array of strings that specify the compute types that are allowed for the batch build. See Build environment compute types in the AWS CodeBuild User Guide for these values. 
+     */
+    computeTypesAllowed?: ComputeTypesAllowed;
   }
   export type Boolean = boolean;
   export interface Build {
@@ -495,6 +593,10 @@ declare namespace CodeBuild {
      * Contains information about the debug session for this build.
      */
     debugSession?: DebugSession;
+    /**
+     * The ARN of the batch build that this build is a member of, if applicable.
+     */
+    buildBatchArn?: String;
   }
   export interface BuildArtifacts {
     /**
@@ -523,6 +625,165 @@ declare namespace CodeBuild {
     artifactIdentifier?: String;
   }
   export type BuildArtifactsList = BuildArtifacts[];
+  export interface BuildBatch {
+    /**
+     * The identifier of the batch build.
+     */
+    id?: NonEmptyString;
+    /**
+     * The ARN of the batch build.
+     */
+    arn?: NonEmptyString;
+    /**
+     * The date and time that the batch build started.
+     */
+    startTime?: Timestamp;
+    /**
+     * The date and time that the batch build ended.
+     */
+    endTime?: Timestamp;
+    /**
+     * The current phase of the batch build.
+     */
+    currentPhase?: String;
+    /**
+     * The status of the batch build.
+     */
+    buildBatchStatus?: StatusType;
+    /**
+     * The identifier of the version of the source code to be built.
+     */
+    sourceVersion?: NonEmptyString;
+    /**
+     * The identifier of the resolved version of this batch build's source code.   For AWS CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID.   For AWS CodePipeline, the source revision provided by AWS CodePipeline.   For Amazon Simple Storage Service (Amazon S3), this does not apply.  
+     */
+    resolvedSourceVersion?: NonEmptyString;
+    /**
+     * The name of the batch build project.
+     */
+    projectName?: NonEmptyString;
+    /**
+     * An array of BuildBatchPhase objects the specify the phases of the batch build.
+     */
+    phases?: BuildBatchPhases;
+    source?: ProjectSource;
+    /**
+     * An array of ProjectSource objects that define the sources for the batch build.
+     */
+    secondarySources?: ProjectSources;
+    /**
+     * An array of ProjectSourceVersion objects. Each ProjectSourceVersion must be one of:    For AWS CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example, pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.  
+     */
+    secondarySourceVersions?: ProjectSecondarySourceVersions;
+    /**
+     * A BuildArtifacts object the defines the build artifacts for this batch build.
+     */
+    artifacts?: BuildArtifacts;
+    /**
+     * An array of BuildArtifacts objects the define the build artifacts for this batch build.
+     */
+    secondaryArtifacts?: BuildArtifactsList;
+    cache?: ProjectCache;
+    environment?: ProjectEnvironment;
+    /**
+     * The name of a service role used for builds in the batch.
+     */
+    serviceRole?: NonEmptyString;
+    logConfig?: LogsConfig;
+    /**
+     * Specifies the maximum amount of time, in minutes, that the build in a batch must be completed in.
+     */
+    buildTimeoutInMinutes?: WrapperInt;
+    /**
+     * Specifies the amount of time, in minutes, that the batch build is allowed to be queued before it times out.
+     */
+    queuedTimeoutInMinutes?: WrapperInt;
+    /**
+     * Indicates if the batch build is complete.
+     */
+    complete?: Boolean;
+    /**
+     * The entity that started the batch build. Valid values include:   If AWS CodePipeline started the build, the pipeline's name (for example, codepipeline/my-demo-pipeline).   If an AWS Identity and Access Management (IAM) user started the build, the user's name.   If the Jenkins plugin for AWS CodeBuild started the build, the string CodeBuild-Jenkins-Plugin.  
+     */
+    initiator?: String;
+    vpcConfig?: VpcConfig;
+    /**
+     * The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the batch build output artifacts.  You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/alias-name ).
+     */
+    encryptionKey?: NonEmptyString;
+    /**
+     * The number of the batch build. For each project, the buildBatchNumber of its first batch build is 1. The buildBatchNumber of each subsequent batch build is incremented by 1. If a batch build is deleted, the buildBatchNumber of other batch builds does not change.
+     */
+    buildBatchNumber?: WrapperLong;
+    /**
+     * An array of ProjectFileSystemLocation objects for the batch build project. A ProjectFileSystemLocation object specifies the identifier, location, mountOptions, mountPoint, and type of a file system created using Amazon Elastic File System. 
+     */
+    fileSystemLocations?: ProjectFileSystemLocations;
+    buildBatchConfig?: ProjectBuildBatchConfig;
+    /**
+     * An array of BuildGroup objects that define the build groups for the batch build.
+     */
+    buildGroups?: BuildGroups;
+  }
+  export interface BuildBatchFilter {
+    /**
+     * The status of the batch builds to retrieve. Only batch builds that have this status will be retrieved.
+     */
+    status?: StatusType;
+  }
+  export type BuildBatchIds = NonEmptyString[];
+  export interface BuildBatchPhase {
+    /**
+     * The name of the batch build phase. Valid values include:  COMBINE_ARTIFACTS  Build output artifacts are being combined and uploaded to the output location.  DOWNLOAD_BATCHSPEC  The batch build specification is being downloaded.  FAILED  One or more of the builds failed.  IN_PROGRESS  The batch build is in progress.  STOPPED  The batch build was stopped.  SUBMITTED  The btach build has been submitted.  SUCCEEDED  The batch build succeeded.  
+     */
+    phaseType?: BuildBatchPhaseType;
+    /**
+     * The current status of the batch build phase. Valid values include:  FAILED  The build phase failed.  FAULT  The build phase faulted.  IN_PROGRESS  The build phase is still in progress.  QUEUED  The build has been submitted and is queued behind other submitted builds.  STOPPED  The build phase stopped.  SUCCEEDED  The build phase succeeded.  TIMED_OUT  The build phase timed out.  
+     */
+    phaseStatus?: StatusType;
+    /**
+     * When the batch build phase started, expressed in Unix time format.
+     */
+    startTime?: Timestamp;
+    /**
+     * When the batch build phase ended, expressed in Unix time format.
+     */
+    endTime?: Timestamp;
+    /**
+     * How long, in seconds, between the starting and ending times of the batch build's phase.
+     */
+    durationInSeconds?: WrapperLong;
+    /**
+     * Additional information about the batch build phase. Especially to help troubleshoot a failed btach build.
+     */
+    contexts?: PhaseContexts;
+  }
+  export type BuildBatchPhaseType = "SUBMITTED"|"DOWNLOAD_BATCHSPEC"|"IN_PROGRESS"|"COMBINE_ARTIFACTS"|"SUCCEEDED"|"FAILED"|"STOPPED"|string;
+  export type BuildBatchPhases = BuildBatchPhase[];
+  export type BuildBatches = BuildBatch[];
+  export interface BuildGroup {
+    /**
+     * Contains the identifier of the build group.
+     */
+    identifier?: String;
+    /**
+     * An array of strings that contain the identifiers of the build groups that this build group depends on.
+     */
+    dependsOn?: Identifiers;
+    /**
+     * Specifies if failures in this build group can be ignored.
+     */
+    ignoreFailure?: Boolean;
+    /**
+     * A BuildSummary object that contains a summary of the current build group.
+     */
+    currentBuildSummary?: BuildSummary;
+    /**
+     * An array of BuildSummary objects that contain summaries of previous build groups.
+     */
+    priorBuildSummaryList?: BuildSummaries;
+  }
+  export type BuildGroups = BuildGroup[];
   export type BuildIds = NonEmptyString[];
   export interface BuildNotDeleted {
     /**
@@ -540,7 +801,7 @@ declare namespace CodeBuild {
      */
     phaseType?: BuildPhaseType;
     /**
-     * The current status of the build phase. Valid values include:    FAILED: The build phase failed.    FAULT: The build phase faulted.    IN_PROGRESS: The build phase is still in progress.    QUEUED: The build has been submitted and is queued behind other submitted builds.    STOPPED: The build phase stopped.    SUCCEEDED: The build phase succeeded.    TIMED_OUT: The build phase timed out.  
+     * The current status of the build phase. Valid values include:  FAILED  The build phase failed.  FAULT  The build phase faulted.  IN_PROGRESS  The build phase is still in progress.  QUEUED  The build has been submitted and is queued behind other submitted builds.  STOPPED  The build phase stopped.  SUCCEEDED  The build phase succeeded.  TIMED_OUT  The build phase timed out.  
      */
     phaseStatus?: StatusType;
     /**
@@ -573,6 +834,29 @@ declare namespace CodeBuild {
      */
     targetUrl?: String;
   }
+  export type BuildSummaries = BuildSummary[];
+  export interface BuildSummary {
+    /**
+     * The batch build ARN.
+     */
+    arn?: String;
+    /**
+     * When the build was started, expressed in Unix time format.
+     */
+    requestedOn?: Timestamp;
+    /**
+     * The status of the build group.  FAILED  The build group failed.  FAULT  The build group faulted.  IN_PROGRESS  The build group is still in progress.  STOPPED  The build group stopped.  SUCCEEDED  The build group succeeded.  TIMED_OUT  The build group timed out.  
+     */
+    buildStatus?: StatusType;
+    /**
+     * A ResolvedArtifact object that represents the primary build artifacts for the build group.
+     */
+    primaryArtifact?: ResolvedArtifact;
+    /**
+     * An array of ResolvedArtifact objects that represents the secondary build artifacts for the build group.
+     */
+    secondaryArtifacts?: ResolvedSecondaryArtifacts;
+  }
   export type Builds = Build[];
   export type BuildsNotDeleted = BuildNotDeleted[];
   export type CacheMode = "LOCAL_DOCKER_LAYER_CACHE"|"LOCAL_SOURCE_CACHE"|"LOCAL_CUSTOM_CACHE"|string;
@@ -591,7 +875,77 @@ declare namespace CodeBuild {
      */
     streamName?: String;
   }
+  export interface CodeCoverage {
+    /**
+     * The identifier of the code coverage report.
+     */
+    id?: NonEmptyString;
+    /**
+     * The ARN of the report.
+     */
+    reportARN?: NonEmptyString;
+    /**
+     * The path of the test report file.
+     */
+    filePath?: NonEmptyString;
+    /**
+     * The percentage of lines that are covered by your tests.
+     */
+    lineCoveragePercentage?: Percentage;
+    /**
+     * The number of lines that are covered by your tests.
+     */
+    linesCovered?: NonNegativeInt;
+    /**
+     * The number of lines that are not covered by your tests.
+     */
+    linesMissed?: NonNegativeInt;
+    /**
+     * The percentage of branches that are covered by your tests.
+     */
+    branchCoveragePercentage?: Percentage;
+    /**
+     * The number of conditional branches that are covered by your tests.
+     */
+    branchesCovered?: NonNegativeInt;
+    /**
+     * The number of conditional branches that are not covered by your tests.
+     */
+    branchesMissed?: NonNegativeInt;
+    /**
+     * The date and time that the tests were run.
+     */
+    expired?: Timestamp;
+  }
+  export interface CodeCoverageReportSummary {
+    /**
+     * The percentage of lines that are covered by your tests.
+     */
+    lineCoveragePercentage?: Percentage;
+    /**
+     * The number of lines that are covered by your tests.
+     */
+    linesCovered?: NonNegativeInt;
+    /**
+     * The number of lines that are not covered by your tests.
+     */
+    linesMissed?: NonNegativeInt;
+    /**
+     * The percentage of branches that are covered by your tests.
+     */
+    branchCoveragePercentage?: Percentage;
+    /**
+     * The number of conditional branches that are covered by your tests.
+     */
+    branchesCovered?: NonNegativeInt;
+    /**
+     * The number of conditional branches that are not covered by your tests.
+     */
+    branchesMissed?: NonNegativeInt;
+  }
+  export type CodeCoverages = CodeCoverage[];
   export type ComputeType = "BUILD_GENERAL1_SMALL"|"BUILD_GENERAL1_MEDIUM"|"BUILD_GENERAL1_LARGE"|"BUILD_GENERAL1_2XLARGE"|string;
+  export type ComputeTypesAllowed = NonEmptyString[];
   export interface CreateProjectInput {
     /**
      * The name of the build project.
@@ -606,15 +960,15 @@ declare namespace CodeBuild {
      */
     source: ProjectSource;
     /**
-     *  An array of ProjectSource objects. 
+     * An array of ProjectSource objects. 
      */
     secondarySources?: ProjectSources;
     /**
-     *  A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:    For AWS CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.    If sourceVersion is specified at the build level, then that version takes precedence over this sourceVersion (at the project level).   For more information, see Source Version Sample with CodeBuild in the AWS CodeBuild User Guide. 
+     * A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:    For AWS CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.   If sourceVersion is specified at the build level, then that version takes precedence over this sourceVersion (at the project level).  For more information, see Source Version Sample with CodeBuild in the AWS CodeBuild User Guide. 
      */
     sourceVersion?: String;
     /**
-     *  An array of ProjectSourceVersion objects. If secondarySourceVersions is specified at the build level, then they take precedence over these secondarySourceVersions (at the project level). 
+     * An array of ProjectSourceVersion objects. If secondarySourceVersions is specified at the build level, then they take precedence over these secondarySourceVersions (at the project level). 
      */
     secondarySourceVersions?: ProjectSecondarySourceVersions;
     /**
@@ -622,7 +976,7 @@ declare namespace CodeBuild {
      */
     artifacts: ProjectArtifacts;
     /**
-     *  An array of ProjectArtifacts objects. 
+     * An array of ProjectArtifacts objects. 
      */
     secondaryArtifacts?: ProjectArtifactsList;
     /**
@@ -642,11 +996,11 @@ declare namespace CodeBuild {
      */
     timeoutInMinutes?: TimeOut;
     /**
-     *  The number of minutes a build is allowed to be queued before it times out. 
+     * The number of minutes a build is allowed to be queued before it times out. 
      */
     queuedTimeoutInMinutes?: TimeOut;
     /**
-     * The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.   You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/alias-name ).
+     * The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.  You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/alias-name ).
      */
     encryptionKey?: NonEmptyString;
     /**
@@ -662,13 +1016,17 @@ declare namespace CodeBuild {
      */
     badgeEnabled?: WrapperBoolean;
     /**
-     *  Information about logs for the build project. These can be logs in Amazon CloudWatch Logs, logs uploaded to a specified S3 bucket, or both. 
+     * Information about logs for the build project. These can be logs in Amazon CloudWatch Logs, logs uploaded to a specified S3 bucket, or both. 
      */
     logsConfig?: LogsConfig;
     /**
      *  An array of ProjectFileSystemLocation objects for a CodeBuild build project. A ProjectFileSystemLocation object specifies the identifier, location, mountOptions, mountPoint, and type of a file system created using Amazon Elastic File System. 
      */
     fileSystemLocations?: ProjectFileSystemLocations;
+    /**
+     * A ProjectBuildBatchConfig object that defines the batch build options for the project.
+     */
+    buildBatchConfig?: ProjectBuildBatchConfig;
   }
   export interface CreateProjectOutput {
     /**
@@ -706,13 +1064,17 @@ declare namespace CodeBuild {
      */
     projectName: ProjectName;
     /**
-     * A regular expression used to determine which repository branches are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If branchFilter is empty, then all branches are built.   It is recommended that you use filterGroups instead of branchFilter.  
+     * A regular expression used to determine which repository branches are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If branchFilter is empty, then all branches are built.  It is recommended that you use filterGroups instead of branchFilter.  
      */
     branchFilter?: String;
     /**
-     *  An array of arrays of WebhookFilter objects used to determine which webhooks are triggered. At least one WebhookFilter in the array must specify EVENT as its type.   For a build to be triggered, at least one filter group in the filterGroups array must pass. For a filter group to pass, each of its filters must pass. 
+     * An array of arrays of WebhookFilter objects used to determine which webhooks are triggered. At least one WebhookFilter in the array must specify EVENT as its type.  For a build to be triggered, at least one filter group in the filterGroups array must pass. For a filter group to pass, each of its filters must pass. 
      */
     filterGroups?: FilterGroups;
+    /**
+     * Specifies the type of build this webhook will trigger.
+     */
+    buildType?: WebhookBuildType;
   }
   export interface CreateWebhookOutput {
     /**
@@ -730,6 +1092,26 @@ declare namespace CodeBuild {
      * Contains the identifier of the Session Manager session used for the build. To work with the paused build, you open this session to examine, control, and resume the build.
      */
     sessionTarget?: NonEmptyString;
+  }
+  export interface DeleteBuildBatchInput {
+    /**
+     * The identifier of the batch build to delete.
+     */
+    id: NonEmptyString;
+  }
+  export interface DeleteBuildBatchOutput {
+    /**
+     * The status code.
+     */
+    statusCode?: String;
+    /**
+     * An array of strings that contain the identifiers of the builds that were deleted.
+     */
+    buildsDeleted?: BuildIds;
+    /**
+     * An array of BuildNotDeleted objects that specify the builds that could not be deleted.
+     */
+    buildsNotDeleted?: BuildsNotDeleted;
   }
   export interface DeleteProjectInput {
     /**
@@ -782,6 +1164,46 @@ declare namespace CodeBuild {
     projectName: ProjectName;
   }
   export interface DeleteWebhookOutput {
+  }
+  export interface DescribeCodeCoveragesInput {
+    /**
+     *  The ARN of the report for which test cases are returned. 
+     */
+    reportArn: NonEmptyString;
+    /**
+     * The nextToken value returned from a previous call to DescribeCodeCoverages. This specifies the next item to return. To return the beginning of the list, exclude this parameter.
+     */
+    nextToken?: String;
+    /**
+     * The maximum number of results to return.
+     */
+    maxResults?: PageSize;
+    /**
+     * Specifies if the results are sorted in ascending or descending order.
+     */
+    sortOrder?: SortOrderType;
+    /**
+     * Specifies how the results are sorted. Possible values are:  FILE_PATH  The results are sorted by file path.  LINE_COVERAGE_PERCENTAGE  The results are sorted by the percentage of lines that are covered.  
+     */
+    sortBy?: ReportCodeCoverageSortByType;
+    /**
+     * The minimum line coverage percentage to report.
+     */
+    minLineCoveragePercentage?: Percentage;
+    /**
+     * The maximum line coverage percentage to report.
+     */
+    maxLineCoveragePercentage?: Percentage;
+  }
+  export interface DescribeCodeCoveragesOutput {
+    /**
+     * If there are more items to return, this contains a token that is passed to a subsequent call to DescribeCodeCoverages to retrieve the next set of items.
+     */
+    nextToken?: String;
+    /**
+     * An array of CodeCoverage objects that contain the results.
+     */
+    codeCoverages?: CodeCoverages;
   }
   export interface DescribeTestCasesInput {
     /**
@@ -898,6 +1320,7 @@ declare namespace CodeBuild {
      */
     fetchSubmodules: WrapperBoolean;
   }
+  export type Identifiers = NonEmptyString[];
   export type ImagePullCredentialsType = "CODEBUILD"|"SERVICE_ROLE"|string;
   export type ImageVersions = String[];
   export interface ImportSourceCredentialsInput {
@@ -938,6 +1361,66 @@ declare namespace CodeBuild {
   }
   export type KeyInput = string;
   export type LanguageType = "JAVA"|"PYTHON"|"NODE_JS"|"RUBY"|"GOLANG"|"DOCKER"|"ANDROID"|"DOTNET"|"BASE"|"PHP"|string;
+  export interface ListBuildBatchesForProjectInput {
+    /**
+     * The name of the project.
+     */
+    projectName?: NonEmptyString;
+    /**
+     * A BuildBatchFilter object that specifies the filters for the search.
+     */
+    filter?: BuildBatchFilter;
+    /**
+     * The maximum number of results to return.
+     */
+    maxResults?: PageSize;
+    /**
+     * Specifies the sort order of the returned items. Valid values include:    ASCENDING: List the batch build identifiers in ascending order by identifier.    DESCENDING: List the batch build identifiers in descending order by identifier.  
+     */
+    sortOrder?: SortOrderType;
+    /**
+     * The nextToken value returned from a previous call to ListBuildBatchesForProject. This specifies the next item to return. To return the beginning of the list, exclude this parameter.
+     */
+    nextToken?: String;
+  }
+  export interface ListBuildBatchesForProjectOutput {
+    /**
+     * An array of strings that contains the batch build identifiers.
+     */
+    ids?: BuildBatchIds;
+    /**
+     * If there are more items to return, this contains a token that is passed to a subsequent call to ListBuildBatchesForProject to retrieve the next set of items.
+     */
+    nextToken?: String;
+  }
+  export interface ListBuildBatchesInput {
+    /**
+     * A BuildBatchFilter object that specifies the filters for the search.
+     */
+    filter?: BuildBatchFilter;
+    /**
+     * The maximum number of results to return.
+     */
+    maxResults?: PageSize;
+    /**
+     * Specifies the sort order of the returned items. Valid values include:    ASCENDING: List the batch build identifiers in ascending order by identifier.    DESCENDING: List the batch build identifiers in descending order by identifier.  
+     */
+    sortOrder?: SortOrderType;
+    /**
+     * The nextToken value returned from a previous call to ListBuildBatches. This specifies the next item to return. To return the beginning of the list, exclude this parameter.
+     */
+    nextToken?: String;
+  }
+  export interface ListBuildBatchesOutput {
+    /**
+     * An array of strings that contains the batch build identifiers.
+     */
+    ids?: BuildBatchIds;
+    /**
+     * If there are more items to return, this contains a token that is passed to a subsequent call to ListBuildBatches to retrieve the next set of items.
+     */
+    nextToken?: String;
+  }
   export interface ListBuildsForProjectInput {
     /**
      * The name of the AWS CodeBuild project.
@@ -1222,7 +1705,9 @@ declare namespace CodeBuild {
     networkInterfaceId?: NonEmptyString;
   }
   export type NonEmptyString = string;
+  export type NonNegativeInt = number;
   export type PageSize = number;
+  export type Percentage = number;
   export interface PhaseContext {
     /**
      * The status code for the context of the build phase.
@@ -1253,15 +1738,15 @@ declare namespace CodeBuild {
      */
     source?: ProjectSource;
     /**
-     *  An array of ProjectSource objects. 
+     * An array of ProjectSource objects. 
      */
     secondarySources?: ProjectSources;
     /**
-     * A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:   For AWS CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.    If sourceVersion is specified at the build level, then that version takes precedence over this sourceVersion (at the project level).   For more information, see Source Version Sample with CodeBuild in the AWS CodeBuild User Guide. 
+     * A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:   For AWS CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.   If sourceVersion is specified at the build level, then that version takes precedence over this sourceVersion (at the project level).  For more information, see Source Version Sample with CodeBuild in the AWS CodeBuild User Guide. 
      */
     sourceVersion?: String;
     /**
-     *  An array of ProjectSourceVersion objects. If secondarySourceVersions is specified at the build level, then they take over these secondarySourceVersions (at the project level). 
+     * An array of ProjectSourceVersion objects. If secondarySourceVersions is specified at the build level, then they take over these secondarySourceVersions (at the project level). 
      */
     secondarySourceVersions?: ProjectSecondarySourceVersions;
     /**
@@ -1269,7 +1754,7 @@ declare namespace CodeBuild {
      */
     artifacts?: ProjectArtifacts;
     /**
-     *  An array of ProjectArtifacts objects. 
+     * An array of ProjectArtifacts objects. 
      */
     secondaryArtifacts?: ProjectArtifactsList;
     /**
@@ -1289,11 +1774,11 @@ declare namespace CodeBuild {
      */
     timeoutInMinutes?: TimeOut;
     /**
-     *  The number of minutes a build is allowed to be queued before it times out. 
+     * The number of minutes a build is allowed to be queued before it times out. 
      */
     queuedTimeoutInMinutes?: TimeOut;
     /**
-     * The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.   You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/alias-name ).
+     * The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.  You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/alias-name ).
      */
     encryptionKey?: NonEmptyString;
     /**
@@ -1321,13 +1806,17 @@ declare namespace CodeBuild {
      */
     badge?: ProjectBadge;
     /**
-     *  Information about logs for the build project. A project can create logs in Amazon CloudWatch Logs, an S3 bucket, or both. 
+     * Information about logs for the build project. A project can create logs in Amazon CloudWatch Logs, an S3 bucket, or both. 
      */
     logsConfig?: LogsConfig;
     /**
      *  An array of ProjectFileSystemLocation objects for a CodeBuild build project. A ProjectFileSystemLocation object specifies the identifier, location, mountOptions, mountPoint, and type of a file system created using Amazon Elastic File System. 
      */
     fileSystemLocations?: ProjectFileSystemLocations;
+    /**
+     * A ProjectBuildBatchConfig object that defines the batch build options for the project.
+     */
+    buildBatchConfig?: ProjectBuildBatchConfig;
   }
   export type ProjectArns = NonEmptyString[];
   export interface ProjectArtifacts {
@@ -1378,6 +1867,24 @@ declare namespace CodeBuild {
      * The publicly-accessible URL through which you can access the build badge for your project.  The publicly accessible URL through which you can access the build badge for your project. 
      */
     badgeRequestUrl?: String;
+  }
+  export interface ProjectBuildBatchConfig {
+    /**
+     * Specifies the service role ARN for the batch build project.
+     */
+    serviceRole?: NonEmptyString;
+    /**
+     * Specifies if the build artifacts for the batch build should be combined into a single artifact location.
+     */
+    combineArtifacts?: WrapperBoolean;
+    /**
+     * A BatchRestrictions object that specifies the restrictions for the batch build.
+     */
+    restrictions?: BatchRestrictions;
+    /**
+     * Specifies the maximum amount of time, in minutes, that the batch build must be completed in.
+     */
+    timeoutInMins?: WrapperInt;
   }
   export interface ProjectCache {
     /**
@@ -1542,7 +2049,7 @@ declare namespace CodeBuild {
      */
     arn?: NonEmptyString;
     /**
-     *  The type of the report that was run. 
+     * The type of the report that was run.  CODE_COVERAGE  A code coverage report.  TEST  A test report.  
      */
     type?: ReportType;
     /**
@@ -1581,8 +2088,13 @@ declare namespace CodeBuild {
      *  A TestReportSummary object that contains information about this test report. 
      */
     testSummary?: TestReportSummary;
+    /**
+     * A CodeCoverageReportSummary object that contains a code coverage summary for this report.
+     */
+    codeCoverageSummary?: CodeCoverageReportSummary;
   }
   export type ReportArns = NonEmptyString[];
+  export type ReportCodeCoverageSortByType = "LINE_COVERAGE_PERCENTAGE"|"FILE_PATH"|string;
   export interface ReportExportConfig {
     /**
      *  The export configuration type. Valid values are:     S3: The report results are exported to an S3 bucket.     NO_EXPORT: The report results are not exported.   
@@ -1637,8 +2149,54 @@ declare namespace CodeBuild {
   export type ReportPackagingType = "ZIP"|"NONE"|string;
   export type ReportStatusCounts = {[key: string]: WrapperInt};
   export type ReportStatusType = "GENERATING"|"SUCCEEDED"|"FAILED"|"INCOMPLETE"|"DELETING"|string;
-  export type ReportType = "TEST"|string;
+  export type ReportType = "TEST"|"CODE_COVERAGE"|string;
   export type Reports = Report[];
+  export interface ResolvedArtifact {
+    /**
+     * Specifies the type of artifact.
+     */
+    type?: ArtifactsType;
+    /**
+     * The location of the artifact.
+     */
+    location?: String;
+    /**
+     * The identifier of the artifact.
+     */
+    identifier?: String;
+  }
+  export type ResolvedSecondaryArtifacts = ResolvedArtifact[];
+  export interface RetryBuildBatchInput {
+    /**
+     * Specifies the identifier of the batch build to restart.
+     */
+    id?: NonEmptyString;
+    /**
+     * A unique, case sensitive identifier you provide to ensure the idempotency of the RetryBuildBatch request. The token is included in the RetryBuildBatch request and is valid for five minutes. If you repeat the RetryBuildBatch request with the same token, but change a parameter, AWS CodeBuild returns a parameter mismatch error.
+     */
+    idempotencyToken?: String;
+    /**
+     * Specifies the type of retry to perform.
+     */
+    retryType?: RetryBuildBatchType;
+  }
+  export interface RetryBuildBatchOutput {
+    buildBatch?: BuildBatch;
+  }
+  export type RetryBuildBatchType = "RETRY_ALL_BUILDS"|"RETRY_FAILED_BUILDS"|string;
+  export interface RetryBuildInput {
+    /**
+     * Specifies the identifier of the build to restart.
+     */
+    id?: NonEmptyString;
+    /**
+     * A unique, case sensitive identifier you provide to ensure the idempotency of the RetryBuild request. The token is included in the RetryBuild request and is valid for five minutes. If you repeat the RetryBuild request with the same token, but change a parameter, AWS CodeBuild returns a parameter mismatch error.
+     */
+    idempotencyToken?: String;
+  }
+  export interface RetryBuildOutput {
+    build?: Build;
+  }
   export interface S3LogsConfig {
     /**
      * The current status of the S3 build logs. Valid values are:    ENABLED: S3 build logs are enabled for this build project.    DISABLED: S3 build logs are not enabled for this build project.  
@@ -1707,6 +2265,134 @@ declare namespace CodeBuild {
   }
   export type SourceCredentialsInfos = SourceCredentialsInfo[];
   export type SourceType = "CODECOMMIT"|"CODEPIPELINE"|"GITHUB"|"S3"|"BITBUCKET"|"GITHUB_ENTERPRISE"|"NO_SOURCE"|string;
+  export interface StartBuildBatchInput {
+    /**
+     * The name of the project.
+     */
+    projectName: NonEmptyString;
+    /**
+     * An array of ProjectSource objects that override the secondary sources defined in the batch build project.
+     */
+    secondarySourcesOverride?: ProjectSources;
+    /**
+     * An array of ProjectSourceVersion objects that override the secondary source versions in the batch build project.
+     */
+    secondarySourcesVersionOverride?: ProjectSecondarySourceVersions;
+    /**
+     * The version of the batch build input to be built, for this build only. If not specified, the latest version is used. If specified, the contents depends on the source provider:  AWS CodeCommit  The commit ID, branch, or Git tag to use.  GitHub  The commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.  Bitbucket  The commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.  Amazon Simple Storage Service (Amazon S3)  The version ID of the object that represents the build input ZIP file to use.   If sourceVersion is specified at the project level, then this sourceVersion (at the build level) takes precedence.  For more information, see Source Version Sample with CodeBuild in the AWS CodeBuild User Guide. 
+     */
+    sourceVersion?: String;
+    /**
+     * An array of ProjectArtifacts objects that contains information about the build output artifact overrides for the build project.
+     */
+    artifactsOverride?: ProjectArtifacts;
+    /**
+     * An array of ProjectArtifacts objects that override the secondary artifacts defined in the batch build project.
+     */
+    secondaryArtifactsOverride?: ProjectArtifactsList;
+    /**
+     * An array of EnvironmentVariable objects that override, or add to, the environment variables defined in the batch build project.
+     */
+    environmentVariablesOverride?: EnvironmentVariables;
+    /**
+     * The source input type that overrides the source input defined in the batch build project.
+     */
+    sourceTypeOverride?: SourceType;
+    /**
+     * A location that overrides, for this batch build, the source location defined in the batch build project.
+     */
+    sourceLocationOverride?: String;
+    /**
+     * A SourceAuth object that overrides the one defined in the batch build project. This override applies only if the build project's source is BitBucket or GitHub.
+     */
+    sourceAuthOverride?: SourceAuth;
+    /**
+     * The user-defined depth of history, with a minimum value of 0, that overrides, for this batch build only, any previous depth of history defined in the batch build project.
+     */
+    gitCloneDepthOverride?: GitCloneDepth;
+    /**
+     * A GitSubmodulesConfig object that overrides the Git submodules configuration for this batch build.
+     */
+    gitSubmodulesConfigOverride?: GitSubmodulesConfig;
+    /**
+     * A buildspec file declaration that overrides, for this build only, the latest one already defined in the build project. If this value is set, it can be either an inline buildspec definition, the path to an alternate buildspec file relative to the value of the built-in CODEBUILD_SRC_DIR environment variable, or the path to an S3 bucket. The bucket must be in the same AWS Region as the build project. Specify the buildspec file using its ARN (for example, arn:aws:s3:::my-codebuild-sample2/buildspec.yml). If this value is not provided or is set to an empty string, the source code must contain a buildspec file in its root directory. For more information, see Buildspec File Name and Storage Location. 
+     */
+    buildspecOverride?: String;
+    /**
+     * Enable this flag to override the insecure SSL setting that is specified in the batch build project. The insecure SSL setting determines whether to ignore SSL warnings while connecting to the project source code. This override applies only if the build's source is GitHub Enterprise.
+     */
+    insecureSslOverride?: WrapperBoolean;
+    /**
+     * Set to true to report to your source provider the status of a batch build's start and completion. If you use this option with a source provider other than GitHub, GitHub Enterprise, or Bitbucket, an invalidInputException is thrown.   The status of a build triggered by a webhook is always reported to your source provider.  
+     */
+    reportBuildBatchStatusOverride?: WrapperBoolean;
+    /**
+     * A container type for this batch build that overrides the one specified in the batch build project.
+     */
+    environmentTypeOverride?: EnvironmentType;
+    /**
+     * The name of an image for this batch build that overrides the one specified in the batch build project.
+     */
+    imageOverride?: NonEmptyString;
+    /**
+     * The name of a compute type for this batch build that overrides the one specified in the batch build project.
+     */
+    computeTypeOverride?: ComputeType;
+    /**
+     * The name of a certificate for this batch build that overrides the one specified in the batch build project.
+     */
+    certificateOverride?: String;
+    /**
+     * A ProjectCache object that specifies cache overrides.
+     */
+    cacheOverride?: ProjectCache;
+    /**
+     * The name of a service role for this batch build that overrides the one specified in the batch build project.
+     */
+    serviceRoleOverride?: NonEmptyString;
+    /**
+     * Enable this flag to override privileged mode in the batch build project.
+     */
+    privilegedModeOverride?: WrapperBoolean;
+    /**
+     * Overrides the build timeout specified in the batch build project.
+     */
+    buildTimeoutInMinutesOverride?: TimeOut;
+    /**
+     * The number of minutes a batch build is allowed to be queued before it times out.
+     */
+    queuedTimeoutInMinutesOverride?: TimeOut;
+    /**
+     * The AWS Key Management Service (AWS KMS) customer master key (CMK) that overrides the one specified in the batch build project. The CMK key encrypts the build output artifacts.  You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/alias-name ).
+     */
+    encryptionKeyOverride?: NonEmptyString;
+    /**
+     * A unique, case sensitive identifier you provide to ensure the idempotency of the StartBuildBatch request. The token is included in the StartBuildBatch request and is valid for five minutes. If you repeat the StartBuildBatch request with the same token, but change a parameter, AWS CodeBuild returns a parameter mismatch error.
+     */
+    idempotencyToken?: String;
+    /**
+     * A LogsConfig object that override the log settings defined in the batch build project.
+     */
+    logsConfigOverride?: LogsConfig;
+    /**
+     * A RegistryCredential object that overrides credentials for access to a private registry.
+     */
+    registryCredentialOverride?: RegistryCredential;
+    /**
+     * The type of credentials AWS CodeBuild uses to pull images in your batch build. There are two valid values:   CODEBUILD  Specifies that AWS CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust AWS CodeBuild's service principal.  SERVICE_ROLE  Specifies that AWS CodeBuild uses your build project's service role.    When using a cross-account or private registry image, you must use SERVICE_ROLE credentials. When using an AWS CodeBuild curated image, you must use CODEBUILD credentials. 
+     */
+    imagePullCredentialsTypeOverride?: ImagePullCredentialsType;
+    /**
+     * A BuildBatchConfigOverride object that contains batch build configuration overrides.
+     */
+    buildBatchConfigOverride?: ProjectBuildBatchConfig;
+  }
+  export interface StartBuildBatchOutput {
+    /**
+     * A BuildBatch object that contains information about the batch build.
+     */
+    buildBatch?: BuildBatch;
+  }
   export interface StartBuildInput {
     /**
      * The name of the AWS CodeBuild build project to start running a build.
@@ -1721,7 +2407,7 @@ declare namespace CodeBuild {
      */
     secondarySourcesVersionOverride?: ProjectSecondarySourceVersions;
     /**
-     * A version of the build input to be built, for this build only. If not specified, the latest version is used. If specified, must be one of:   For AWS CodeCommit: the commit ID, branch, or Git tag to use.   For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.   For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP file to use.    If sourceVersion is specified at the project level, then this sourceVersion (at the build level) takes precedence.   For more information, see Source Version Sample with CodeBuild in the AWS CodeBuild User Guide. 
+     * The version of the build input to be built, for this build only. If not specified, the latest version is used. If specified, the contents depends on the source provider:  AWS CodeCommit  The commit ID, branch, or Git tag to use.  GitHub  The commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format pr/pull-request-ID (for example pr/25). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.  Bitbucket  The commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.  Amazon Simple Storage Service (Amazon S3)  The version ID of the object that represents the build input ZIP file to use.   If sourceVersion is specified at the project level, then this sourceVersion (at the build level) takes precedence.  For more information, see Source Version Sample with CodeBuild in the AWS CodeBuild User Guide. 
      */
     sourceVersion?: String;
     /**
@@ -1825,7 +2511,7 @@ declare namespace CodeBuild {
      */
     registryCredentialOverride?: RegistryCredential;
     /**
-     *  The type of credentials AWS CodeBuild uses to pull images in your build. There are two valid values:     CODEBUILD specifies that AWS CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust AWS CodeBuild's service principal.    SERVICE_ROLE specifies that AWS CodeBuild uses your build project's service role.     When using a cross-account or private registry image, you must use SERVICE_ROLE credentials. When using an AWS CodeBuild curated image, you must use CODEBUILD credentials. 
+     * The type of credentials AWS CodeBuild uses to pull images in your build. There are two valid values:   CODEBUILD  Specifies that AWS CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust AWS CodeBuild's service principal.  SERVICE_ROLE  Specifies that AWS CodeBuild uses your build project's service role.    When using a cross-account or private registry image, you must use SERVICE_ROLE credentials. When using an AWS CodeBuild curated image, you must use CODEBUILD credentials. 
      */
     imagePullCredentialsTypeOverride?: ImagePullCredentialsType;
     /**
@@ -1840,6 +2526,15 @@ declare namespace CodeBuild {
     build?: Build;
   }
   export type StatusType = "SUCCEEDED"|"FAILED"|"FAULT"|"TIMED_OUT"|"IN_PROGRESS"|"STOPPED"|string;
+  export interface StopBuildBatchInput {
+    /**
+     * The identifier of the batch build to stop.
+     */
+    id: NonEmptyString;
+  }
+  export interface StopBuildBatchOutput {
+    buildBatch?: BuildBatch;
+  }
   export interface StopBuildInput {
     /**
      * The ID of the build.
@@ -1999,6 +2694,7 @@ declare namespace CodeBuild {
      *  An array of ProjectFileSystemLocation objects for a CodeBuild build project. A ProjectFileSystemLocation object specifies the identifier, location, mountOptions, mountPoint, and type of a file system created using Amazon Elastic File System. 
      */
     fileSystemLocations?: ProjectFileSystemLocations;
+    buildBatchConfig?: ProjectBuildBatchConfig;
   }
   export interface UpdateProjectOutput {
     /**
@@ -2043,6 +2739,10 @@ declare namespace CodeBuild {
      *  An array of arrays of WebhookFilter objects used to determine if a webhook event can trigger a build. A filter group must contain at least one EVENT WebhookFilter. 
      */
     filterGroups?: FilterGroups;
+    /**
+     * Specifies the type of build this webhook will trigger.
+     */
+    buildType?: WebhookBuildType;
   }
   export interface UpdateWebhookOutput {
     /**
@@ -2071,26 +2771,31 @@ declare namespace CodeBuild {
      */
     url?: NonEmptyString;
     /**
-     *  The AWS CodeBuild endpoint where webhook events are sent.
+     * The AWS CodeBuild endpoint where webhook events are sent.
      */
     payloadUrl?: NonEmptyString;
     /**
-     *  The secret token of the associated repository.    A Bitbucket webhook does not support secret.  
+     * The secret token of the associated repository.   A Bitbucket webhook does not support secret.  
      */
     secret?: NonEmptyString;
     /**
-     * A regular expression used to determine which repository branches are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If branchFilter is empty, then all branches are built.   It is recommended that you use filterGroups instead of branchFilter.  
+     * A regular expression used to determine which repository branches are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If branchFilter is empty, then all branches are built.  It is recommended that you use filterGroups instead of branchFilter.  
      */
     branchFilter?: String;
     /**
-     *  An array of arrays of WebhookFilter objects used to determine which webhooks are triggered. At least one WebhookFilter in the array must specify EVENT as its type.   For a build to be triggered, at least one filter group in the filterGroups array must pass. For a filter group to pass, each of its filters must pass. 
+     * An array of arrays of WebhookFilter objects used to determine which webhooks are triggered. At least one WebhookFilter in the array must specify EVENT as its type.  For a build to be triggered, at least one filter group in the filterGroups array must pass. For a filter group to pass, each of its filters must pass. 
      */
     filterGroups?: FilterGroups;
     /**
-     *  A timestamp that indicates the last time a repository's secret token was modified. 
+     * Specifies the type of build this webhook will trigger.
+     */
+    buildType?: WebhookBuildType;
+    /**
+     * A timestamp that indicates the last time a repository's secret token was modified. 
      */
     lastModifiedSecret?: Timestamp;
   }
+  export type WebhookBuildType = "BUILD"|"BUILD_BATCH"|string;
   export interface WebhookFilter {
     /**
      *  The type of webhook filter. There are six webhook filter types: EVENT, ACTOR_ACCOUNT_ID, HEAD_REF, BASE_REF, FILE_PATH, and COMMIT_MESSAGE.    EVENT    A webhook event triggers a build when the provided pattern matches one of five event types: PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED, PULL_REQUEST_REOPENED, and PULL_REQUEST_MERGED. The EVENT patterns are specified as a comma-separated string. For example, PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED filters all push, pull request created, and pull request updated events.    The PULL_REQUEST_REOPENED works with GitHub and GitHub Enterprise only.     ACTOR_ACCOUNT_ID    A webhook event triggers a build when a GitHub, GitHub Enterprise, or Bitbucket account ID matches the regular expression pattern.    HEAD_REF    A webhook event triggers a build when the head reference matches the regular expression pattern. For example, refs/heads/branch-name and refs/tags/tag-name.   Works with GitHub and GitHub Enterprise push, GitHub and GitHub Enterprise pull request, Bitbucket push, and Bitbucket pull request events.    BASE_REF    A webhook event triggers a build when the base reference matches the regular expression pattern. For example, refs/heads/branch-name.    Works with pull request events only.     FILE_PATH    A webhook triggers a build when the path of a changed file matches the regular expression pattern.    Works with GitHub and Bitbucket events push and pull requests events. Also works with GitHub Enterprise push events, but does not work with GitHub Enterprise pull request events.    COMMIT_MESSAGE  A webhook triggers a build when the head commit message matches the regular expression pattern.   Works with GitHub and Bitbucket events push and pull requests events. Also works with GitHub Enterprise push events, but does not work with GitHub Enterprise pull request events.    

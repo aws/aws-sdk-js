@@ -78,6 +78,37 @@
       ],
       "documentation": "<p>Create an event destination. <i>Events</i> include message sends, deliveries, opens, clicks, bounces, and complaints. <i>Event destinations</i> are places that you can send information about these events to. For example, you can send event data to Amazon SNS to receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.</p> <p>A single configuration set can include more than one event destination.</p>"
     },
+    "CreateCustomVerificationEmailTemplate": {
+      "name": "CreateCustomVerificationEmailTemplate",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v2/email/custom-verification-email-templates"
+      },
+      "input": {
+        "shape": "CreateCustomVerificationEmailTemplateRequest"
+      },
+      "output": {
+        "shape": "CreateCustomVerificationEmailTemplateResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "AlreadyExistsException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p>Creates a new custom verification email template.</p> <p>For more information about custom verification email templates, see <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html\">Using Custom Verification Email Templates</a> in the <i>Amazon SES Developer Guide</i>.</p> <p>You can execute this operation no more than once per second.</p>"
+    },
     "CreateDedicatedIpPool": {
       "name": "CreateDedicatedIpPool",
       "http": {
@@ -183,6 +214,65 @@
       ],
       "documentation": "<p>Starts the process of verifying an email identity. An <i>identity</i> is an email address or domain that you use when you send email. Before you can use an identity to send email, you first have to verify it. By verifying an identity, you demonstrate that you're the owner of the identity, and that you've given Amazon SES API v2 permission to send email from the identity.</p> <p>When you verify an email address, Amazon SES sends an email to the address. Your email address is verified as soon as you follow the link in the verification email. </p> <p>When you verify a domain without specifying the <code>DkimSigningAttributes</code> object, this operation provides a set of DKIM tokens. You can convert these tokens into CNAME records, which you then add to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. This verification method is known as <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a>.</p> <p>Alternatively, you can perform the verification process by providing your own public-private key pair. This verification method is known as Bring Your Own DKIM (BYODKIM). To use BYODKIM, your call to the <code>CreateEmailIdentity</code> operation has to include the <code>DkimSigningAttributes</code> object. When you specify this object, you provide a selector (a component of the DNS record name that identifies the public key that you want to use for DKIM authentication) and a private key.</p>"
     },
+    "CreateEmailIdentityPolicy": {
+      "name": "CreateEmailIdentityPolicy",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v2/email/identities/{EmailIdentity}/policies/{PolicyName}"
+      },
+      "input": {
+        "shape": "CreateEmailIdentityPolicyRequest"
+      },
+      "output": {
+        "shape": "CreateEmailIdentityPolicyResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "AlreadyExistsException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "BadRequestException"
+        }
+      ],
+      "documentation": "<p>Creates the specified sending authorization policy for the given identity (an email address or a domain).</p> <note> <p>This API is for the identity owner only. If you have not verified the identity, this API will return an error.</p> </note> <p>Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>.</p> <p>You can execute this operation no more than once per second.</p>"
+    },
+    "CreateEmailTemplate": {
+      "name": "CreateEmailTemplate",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v2/email/templates"
+      },
+      "input": {
+        "shape": "CreateEmailTemplateRequest"
+      },
+      "output": {
+        "shape": "CreateEmailTemplateResponse"
+      },
+      "errors": [
+        {
+          "shape": "AlreadyExistsException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p>Creates an email template. Email templates enable you to send personalized email to one or more destinations in a single API operation. For more information, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html\">Amazon SES Developer Guide</a>.</p> <p>You can execute this operation no more than once per second.</p>"
+    },
     "DeleteConfigurationSet": {
       "name": "DeleteConfigurationSet",
       "http": {
@@ -235,6 +325,31 @@
         }
       ],
       "documentation": "<p>Delete an event destination.</p> <p> <i>Events</i> include message sends, deliveries, opens, clicks, bounces, and complaints. <i>Event destinations</i> are places that you can send information about these events to. For example, you can send event data to Amazon SNS to receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.</p>"
+    },
+    "DeleteCustomVerificationEmailTemplate": {
+      "name": "DeleteCustomVerificationEmailTemplate",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v2/email/custom-verification-email-templates/{TemplateName}"
+      },
+      "input": {
+        "shape": "DeleteCustomVerificationEmailTemplateRequest"
+      },
+      "output": {
+        "shape": "DeleteCustomVerificationEmailTemplateResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "BadRequestException"
+        }
+      ],
+      "documentation": "<p>Deletes an existing custom verification email template.</p> <p>For more information about custom verification email templates, see <a href=\"https://docs.aws.amazon.com/es/latest/DeveloperGuide/send-email-verify-address-custom.html\">Using Custom Verification Email Templates</a> in the <i>Amazon SES Developer Guide</i>.</p> <p>You can execute this operation no more than once per second.</p>"
     },
     "DeleteDedicatedIpPool": {
       "name": "DeleteDedicatedIpPool",
@@ -291,6 +406,56 @@
         }
       ],
       "documentation": "<p>Deletes an email identity. An identity can be either an email address or a domain name.</p>"
+    },
+    "DeleteEmailIdentityPolicy": {
+      "name": "DeleteEmailIdentityPolicy",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v2/email/identities/{EmailIdentity}/policies/{PolicyName}"
+      },
+      "input": {
+        "shape": "DeleteEmailIdentityPolicyRequest"
+      },
+      "output": {
+        "shape": "DeleteEmailIdentityPolicyResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "BadRequestException"
+        }
+      ],
+      "documentation": "<p>Deletes the specified sending authorization policy for the given identity (an email address or a domain). This API returns successfully even if a policy with the specified name does not exist.</p> <note> <p>This API is for the identity owner only. If you have not verified the identity, this API will return an error.</p> </note> <p>Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>.</p> <p>You can execute this operation no more than once per second.</p>"
+    },
+    "DeleteEmailTemplate": {
+      "name": "DeleteEmailTemplate",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v2/email/templates/{TemplateName}"
+      },
+      "input": {
+        "shape": "DeleteEmailTemplateRequest"
+      },
+      "output": {
+        "shape": "DeleteEmailTemplateResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "BadRequestException"
+        }
+      ],
+      "documentation": "<p>Deletes an email template.</p> <p>You can execute this operation no more than once per second.</p>"
     },
     "DeleteSuppressedDestination": {
       "name": "DeleteSuppressedDestination",
@@ -413,6 +578,31 @@
         }
       ],
       "documentation": "<p>Retrieve a list of event destinations that are associated with a configuration set.</p> <p> <i>Events</i> include message sends, deliveries, opens, clicks, bounces, and complaints. <i>Event destinations</i> are places that you can send information about these events to. For example, you can send event data to Amazon SNS to receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.</p>"
+    },
+    "GetCustomVerificationEmailTemplate": {
+      "name": "GetCustomVerificationEmailTemplate",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v2/email/custom-verification-email-templates/{TemplateName}"
+      },
+      "input": {
+        "shape": "GetCustomVerificationEmailTemplateRequest"
+      },
+      "output": {
+        "shape": "GetCustomVerificationEmailTemplateResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "BadRequestException"
+        }
+      ],
+      "documentation": "<p>Returns the custom email verification template for the template name you specify.</p> <p>For more information about custom verification email templates, see <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html\">Using Custom Verification Email Templates</a> in the <i>Amazon SES Developer Guide</i>.</p> <p>You can execute this operation no more than once per second.</p>"
     },
     "GetDedicatedIp": {
       "name": "GetDedicatedIp",
@@ -587,7 +777,57 @@
           "shape": "BadRequestException"
         }
       ],
-      "documentation": "<p>Provides information about a specific identity, including the identity's verification status, its DKIM authentication status, and its custom Mail-From settings.</p>"
+      "documentation": "<p>Provides information about a specific identity, including the identity's verification status, sending authorization policies, its DKIM authentication status, and its custom Mail-From settings.</p>"
+    },
+    "GetEmailIdentityPolicies": {
+      "name": "GetEmailIdentityPolicies",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v2/email/identities/{EmailIdentity}/policies"
+      },
+      "input": {
+        "shape": "GetEmailIdentityPoliciesRequest"
+      },
+      "output": {
+        "shape": "GetEmailIdentityPoliciesResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "BadRequestException"
+        }
+      ],
+      "documentation": "<p>Returns the requested sending authorization policies for the given identity (an email address or a domain). The policies are returned as a map of policy names to policy contents. You can retrieve a maximum of 20 policies at a time.</p> <note> <p>This API is for the identity owner only. If you have not verified the identity, this API will return an error.</p> </note> <p>Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>.</p> <p>You can execute this operation no more than once per second.</p>"
+    },
+    "GetEmailTemplate": {
+      "name": "GetEmailTemplate",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v2/email/templates/{TemplateName}"
+      },
+      "input": {
+        "shape": "GetEmailTemplateRequest"
+      },
+      "output": {
+        "shape": "GetEmailTemplateResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "BadRequestException"
+        }
+      ],
+      "documentation": "<p>Displays the template object (which includes the subject line, HTML part and text part) for the template you specify.</p> <p>You can execute this operation no more than once per second.</p>"
     },
     "GetSuppressedDestination": {
       "name": "GetSuppressedDestination",
@@ -635,6 +875,28 @@
         }
       ],
       "documentation": "<p>List all of the configuration sets associated with your account in the current region.</p> <p> <i>Configuration sets</i> are groups of rules that you can apply to the emails you send. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email.</p>"
+    },
+    "ListCustomVerificationEmailTemplates": {
+      "name": "ListCustomVerificationEmailTemplates",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v2/email/custom-verification-email-templates"
+      },
+      "input": {
+        "shape": "ListCustomVerificationEmailTemplatesRequest"
+      },
+      "output": {
+        "shape": "ListCustomVerificationEmailTemplatesResponse"
+      },
+      "errors": [
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "BadRequestException"
+        }
+      ],
+      "documentation": "<p>Lists the existing custom verification email templates for your account in the current AWS Region.</p> <p>For more information about custom verification email templates, see <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html\">Using Custom Verification Email Templates</a> in the <i>Amazon SES Developer Guide</i>.</p> <p>You can execute this operation no more than once per second.</p>"
     },
     "ListDedicatedIpPools": {
       "name": "ListDedicatedIpPools",
@@ -730,6 +992,28 @@
       ],
       "documentation": "<p>Returns a list of all of the email identities that are associated with your AWS account. An identity can be either an email address or a domain. This operation returns identities that are verified as well as those that aren't. This operation returns identities that are associated with Amazon SES and Amazon Pinpoint.</p>"
     },
+    "ListEmailTemplates": {
+      "name": "ListEmailTemplates",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v2/email/templates"
+      },
+      "input": {
+        "shape": "ListEmailTemplatesRequest"
+      },
+      "output": {
+        "shape": "ListEmailTemplatesResponse"
+      },
+      "errors": [
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "BadRequestException"
+        }
+      ],
+      "documentation": "<p>Lists the email templates present in your Amazon SES account in the current AWS Region.</p> <p>You can execute this operation no more than once per second.</p>"
+    },
     "ListSuppressedDestinations": {
       "name": "ListSuppressedDestinations",
       "http": {
@@ -801,6 +1085,31 @@
         }
       ],
       "documentation": "<p>Enable or disable the automatic warm-up feature for dedicated IP addresses.</p>"
+    },
+    "PutAccountDetails": {
+      "name": "PutAccountDetails",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v2/email/account/details"
+      },
+      "input": {
+        "shape": "PutAccountDetailsRequest"
+      },
+      "output": {
+        "shape": "PutAccountDetailsResponse"
+      },
+      "errors": [
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        }
+      ],
+      "documentation": "<p>Update your Amazon SES account details.</p>"
     },
     "PutAccountSendingAttributes": {
       "name": "PutAccountSendingAttributes",
@@ -1174,6 +1483,83 @@
       ],
       "documentation": "<p>Adds an email address to the suppression list for your account.</p>"
     },
+    "SendBulkEmail": {
+      "name": "SendBulkEmail",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v2/email/outbound-bulk-emails"
+      },
+      "input": {
+        "shape": "SendBulkEmailRequest"
+      },
+      "output": {
+        "shape": "SendBulkEmailResponse"
+      },
+      "errors": [
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "AccountSuspendedException"
+        },
+        {
+          "shape": "SendingPausedException"
+        },
+        {
+          "shape": "MessageRejected"
+        },
+        {
+          "shape": "MailFromDomainNotVerifiedException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "BadRequestException"
+        }
+      ],
+      "documentation": "<p>Composes an email message to multiple destinations.</p>"
+    },
+    "SendCustomVerificationEmail": {
+      "name": "SendCustomVerificationEmail",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v2/email/outbound-custom-verification-emails"
+      },
+      "input": {
+        "shape": "SendCustomVerificationEmailRequest"
+      },
+      "output": {
+        "shape": "SendCustomVerificationEmailResponse"
+      },
+      "errors": [
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "MessageRejected"
+        },
+        {
+          "shape": "SendingPausedException"
+        },
+        {
+          "shape": "MailFromDomainNotVerifiedException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "BadRequestException"
+        }
+      ],
+      "documentation": "<p>Adds an email address to the list of identities for your Amazon SES account in the current AWS Region and attempts to verify it. As a result of executing this operation, a customized verification email is sent to the specified address.</p> <p>To use this operation, you must first create a custom verification email template. For more information about creating and using custom verification email templates, see <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html\">Using Custom Verification Email Templates</a> in the <i>Amazon SES Developer Guide</i>.</p> <p>You can execute this operation no more than once per second.</p>"
+    },
     "SendEmail": {
       "name": "SendEmail",
       "http": {
@@ -1212,7 +1598,7 @@
           "shape": "BadRequestException"
         }
       ],
-      "documentation": "<p>Sends an email message. You can use the Amazon SES API v2 to send two types of messages:</p> <ul> <li> <p> <b>Simple</b> – A standard email message. When you create this type of message, you specify the sender, the recipient, and the message body, and Amazon SES assembles the message for you.</p> </li> <li> <p> <b>Raw</b> – A raw, MIME-formatted email message. When you send this type of email, you have to specify all of the message headers, as well as the message body. You can use this message type to send messages that contain attachments. The message that you specify has to be a valid MIME message.</p> </li> </ul>"
+      "documentation": "<p>Sends an email message. You can use the Amazon SES API v2 to send two types of messages:</p> <ul> <li> <p> <b>Simple</b> – A standard email message. When you create this type of message, you specify the sender, the recipient, and the message body, and Amazon SES assembles the message for you.</p> </li> <li> <p> <b>Raw</b> – A raw, MIME-formatted email message. When you send this type of email, you have to specify all of the message headers, as well as the message body. You can use this message type to send messages that contain attachments. The message that you specify has to be a valid MIME message.</p> </li> <li> <p> <b>Templated</b> – A message that contains personalization tags. When you send this type of email, Amazon SES API v2 automatically replaces the tags with values that you specify.</p> </li> </ul>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -1241,6 +1627,31 @@
         }
       ],
       "documentation": "<p>Add one or more tags (keys and values) to a specified resource. A <i>tag</i> is a label that you optionally define and associate with a resource. Tags can help you categorize and manage resources in different ways, such as by purpose, owner, environment, or other criteria. A resource can have as many as 50 tags.</p> <p>Each tag consists of a required <i>tag key</i> and an associated <i>tag value</i>, both of which you define. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.</p>"
+    },
+    "TestRenderEmailTemplate": {
+      "name": "TestRenderEmailTemplate",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v2/email/templates/{TemplateName}/render"
+      },
+      "input": {
+        "shape": "TestRenderEmailTemplateRequest"
+      },
+      "output": {
+        "shape": "TestRenderEmailTemplateResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "BadRequestException"
+        }
+      ],
+      "documentation": "<p>Creates a preview of the MIME content of an email when provided with a template and a set of replacement data.</p> <p>You can execute this operation no more than once per second.</p>"
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -1294,9 +1705,130 @@
         }
       ],
       "documentation": "<p>Update the configuration of an event destination for a configuration set.</p> <p> <i>Events</i> include message sends, deliveries, opens, clicks, bounces, and complaints. <i>Event destinations</i> are places that you can send information about these events to. For example, you can send event data to Amazon SNS to receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.</p>"
+    },
+    "UpdateCustomVerificationEmailTemplate": {
+      "name": "UpdateCustomVerificationEmailTemplate",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v2/email/custom-verification-email-templates/{TemplateName}"
+      },
+      "input": {
+        "shape": "UpdateCustomVerificationEmailTemplateRequest"
+      },
+      "output": {
+        "shape": "UpdateCustomVerificationEmailTemplateResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "documentation": "<p>Updates an existing custom verification email template.</p> <p>For more information about custom verification email templates, see <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html\">Using Custom Verification Email Templates</a> in the <i>Amazon SES Developer Guide</i>.</p> <p>You can execute this operation no more than once per second.</p>"
+    },
+    "UpdateEmailIdentityPolicy": {
+      "name": "UpdateEmailIdentityPolicy",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v2/email/identities/{EmailIdentity}/policies/{PolicyName}"
+      },
+      "input": {
+        "shape": "UpdateEmailIdentityPolicyRequest"
+      },
+      "output": {
+        "shape": "UpdateEmailIdentityPolicyResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "BadRequestException"
+        }
+      ],
+      "documentation": "<p>Updates the specified sending authorization policy for the given identity (an email address or a domain). This API returns successfully even if a policy with the specified name does not exist.</p> <note> <p>This API is for the identity owner only. If you have not verified the identity, this API will return an error.</p> </note> <p>Sending authorization is a feature that enables an identity owner to authorize other senders to use its identities. For information about using sending authorization, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>.</p> <p>You can execute this operation no more than once per second.</p>"
+    },
+    "UpdateEmailTemplate": {
+      "name": "UpdateEmailTemplate",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v2/email/templates/{TemplateName}"
+      },
+      "input": {
+        "shape": "UpdateEmailTemplateRequest"
+      },
+      "output": {
+        "shape": "UpdateEmailTemplateResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "BadRequestException"
+        }
+      ],
+      "documentation": "<p>Updates an email template. Email templates enable you to send personalized email to one or more destinations in a single API operation. For more information, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html\">Amazon SES Developer Guide</a>.</p> <p>You can execute this operation no more than once per second.</p>"
     }
   },
   "shapes": {
+    "AccountDetails": {
+      "type": "structure",
+      "members": {
+        "MailType": {
+          "shape": "MailType",
+          "documentation": "<p>The type of email your account is sending. The mail type can be one of the following:</p> <ul> <li> <p> <code>MARKETING</code> – Most of your sending traffic is to keep your customers informed of your latest offering.</p> </li> <li> <p> <code>TRANSACTIONAL</code> – Most of your sending traffic is to communicate during a transaction with a customer.</p> </li> </ul>"
+        },
+        "WebsiteURL": {
+          "shape": "WebsiteURL",
+          "documentation": "<p>The URL of your website. This information helps us better understand the type of content that you plan to send.</p>"
+        },
+        "ContactLanguage": {
+          "shape": "ContactLanguage",
+          "documentation": "<p>The language you would prefer for the case. The contact language can be one of <code>ENGLISH</code> or <code>JAPANESE</code>.</p>"
+        },
+        "UseCaseDescription": {
+          "shape": "UseCaseDescription",
+          "documentation": "<p>A description of the types of email that you plan to send.</p>"
+        },
+        "AdditionalContactEmailAddresses": {
+          "shape": "AdditionalContactEmailAddresses",
+          "documentation": "<p>Additional email addresses where updates are sent about your account review process.</p>"
+        },
+        "ReviewDetails": {
+          "shape": "ReviewDetails",
+          "documentation": "<p>Information about the review of the latest details you submitted.</p>"
+        }
+      },
+      "documentation": "<p>An object that contains information about your account details.</p>"
+    },
+    "AdditionalContactEmailAddress": {
+      "type": "string",
+      "max": 254,
+      "min": 6,
+      "pattern": "^(.+)@(.+)$",
+      "sensitive": true
+    },
+    "AdditionalContactEmailAddresses": {
+      "type": "list",
+      "member": {
+        "shape": "AdditionalContactEmailAddress"
+      },
+      "max": 4,
+      "min": 1,
+      "sensitive": true
+    },
     "AmazonResourceName": {
       "type": "string"
     },
@@ -1369,7 +1901,91 @@
       },
       "documentation": "<p>Represents the body of the email message.</p>"
     },
+    "BulkEmailContent": {
+      "type": "structure",
+      "members": {
+        "Template": {
+          "shape": "Template",
+          "documentation": "<p>The template to use for the bulk email message.</p>"
+        }
+      },
+      "documentation": "<p>An object that contains the body of the message. You can specify a template message.</p>"
+    },
+    "BulkEmailEntry": {
+      "type": "structure",
+      "required": [
+        "Destination"
+      ],
+      "members": {
+        "Destination": {
+          "shape": "Destination",
+          "documentation": "<p>Represents the destination of the message, consisting of To:, CC:, and BCC: fields.</p> <note> <p>Amazon SES does not support the SMTPUTF8 extension, as described in <a href=\"https://tools.ietf.org/html/rfc6531\">RFC6531</a>. For this reason, the local part of a destination email address (the part of the email address that precedes the @ sign) may only contain <a href=\"https://en.wikipedia.org/wiki/Email_address#Local-part\">7-bit ASCII characters</a>. If the domain part of an address (the part after the @ sign) contains non-ASCII characters, they must be encoded using Punycode, as described in <a href=\"https://tools.ietf.org/html/rfc3492.html\">RFC3492</a>.</p> </note>"
+        },
+        "ReplacementTags": {
+          "shape": "MessageTagList",
+          "documentation": "<p>A list of tags, in the form of name/value pairs, to apply to an email that you send using the <code>SendBulkTemplatedEmail</code> operation. Tags correspond to characteristics of the email that you define, so that you can publish email sending events.</p>"
+        },
+        "ReplacementEmailContent": {
+          "shape": "ReplacementEmailContent",
+          "documentation": "<p>The <code>ReplacementEmailContent</code> associated with a <code>BulkEmailEntry</code>.</p>"
+        }
+      }
+    },
+    "BulkEmailEntryList": {
+      "type": "list",
+      "member": {
+        "shape": "BulkEmailEntry"
+      },
+      "documentation": "<p>A list of <code>BulkEmailEntry</code> objects.</p>"
+    },
+    "BulkEmailEntryResult": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "BulkEmailStatus",
+          "documentation": "<p>The status of a message sent using the <code>SendBulkTemplatedEmail</code> operation.</p> <p>Possible values for this parameter include:</p> <ul> <li> <p>SUCCESS: Amazon SES accepted the message, and will attempt to deliver it to the recipients.</p> </li> <li> <p>MESSAGE_REJECTED: The message was rejected because it contained a virus.</p> </li> <li> <p>MAIL_FROM_DOMAIN_NOT_VERIFIED: The sender's email address or domain was not verified.</p> </li> <li> <p>CONFIGURATION_SET_DOES_NOT_EXIST: The configuration set you specified does not exist.</p> </li> <li> <p>TEMPLATE_DOES_NOT_EXIST: The template you specified does not exist.</p> </li> <li> <p>ACCOUNT_SUSPENDED: Your account has been shut down because of issues related to your email sending practices.</p> </li> <li> <p>ACCOUNT_THROTTLED: The number of emails you can send has been reduced because your account has exceeded its allocated sending limit.</p> </li> <li> <p>ACCOUNT_DAILY_QUOTA_EXCEEDED: You have reached or exceeded the maximum number of emails you can send from your account in a 24-hour period.</p> </li> <li> <p>INVALID_SENDING_POOL_NAME: The configuration set you specified refers to an IP pool that does not exist.</p> </li> <li> <p>ACCOUNT_SENDING_PAUSED: Email sending for the Amazon SES account was disabled using the <a href=\"https://docs.aws.amazon.com/ses/latest/APIReference/API_UpdateAccountSendingEnabled.html\">UpdateAccountSendingEnabled</a> operation.</p> </li> <li> <p>CONFIGURATION_SET_SENDING_PAUSED: Email sending for this configuration set was disabled using the <a href=\"https://docs.aws.amazon.com/ses/latest/APIReference/API_UpdateConfigurationSetSendingEnabled.html\">UpdateConfigurationSetSendingEnabled</a> operation.</p> </li> <li> <p>INVALID_PARAMETER_VALUE: One or more of the parameters you specified when calling this operation was invalid. See the error message for additional information.</p> </li> <li> <p>TRANSIENT_FAILURE: Amazon SES was unable to process your request because of a temporary issue.</p> </li> <li> <p>FAILED: Amazon SES was unable to process your request. See the error message for additional information.</p> </li> </ul>"
+        },
+        "Error": {
+          "shape": "ErrorMessage",
+          "documentation": "<p>A description of an error that prevented a message being sent using the <code>SendBulkTemplatedEmail</code> operation.</p>"
+        },
+        "MessageId": {
+          "shape": "OutboundMessageId",
+          "documentation": "<p>The unique message identifier returned from the <code>SendBulkTemplatedEmail</code> operation.</p>"
+        }
+      },
+      "documentation": "<p>The result of the <code>SendBulkEmail</code> operation of each specified <code>BulkEmailEntry</code>.</p>"
+    },
+    "BulkEmailEntryResultList": {
+      "type": "list",
+      "member": {
+        "shape": "BulkEmailEntryResult"
+      },
+      "documentation": "<p>A list of <code>BulkMailEntry</code> objects.</p>"
+    },
+    "BulkEmailStatus": {
+      "type": "string",
+      "enum": [
+        "SUCCESS",
+        "MESSAGE_REJECTED",
+        "MAIL_FROM_DOMAIN_NOT_VERIFIED",
+        "CONFIGURATION_SET_NOT_FOUND",
+        "TEMPLATE_NOT_FOUND",
+        "ACCOUNT_SUSPENDED",
+        "ACCOUNT_THROTTLED",
+        "ACCOUNT_DAILY_QUOTA_EXCEEDED",
+        "INVALID_SENDING_POOL_NAME",
+        "ACCOUNT_SENDING_PAUSED",
+        "CONFIGURATION_SET_SENDING_PAUSED",
+        "INVALID_PARAMETER",
+        "TRANSIENT_FAILURE",
+        "FAILED"
+      ]
+    },
     "CampaignId": {
+      "type": "string"
+    },
+    "CaseId": {
       "type": "string"
     },
     "Charset": {
@@ -1426,6 +2042,13 @@
       "member": {
         "shape": "ConfigurationSetName"
       }
+    },
+    "ContactLanguage": {
+      "type": "string",
+      "enum": [
+        "EN",
+        "JA"
+      ]
     },
     "Content": {
       "type": "structure",
@@ -1515,6 +2138,49 @@
       "members": {},
       "documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request fails.</p>"
     },
+    "CreateCustomVerificationEmailTemplateRequest": {
+      "type": "structure",
+      "required": [
+        "TemplateName",
+        "FromEmailAddress",
+        "TemplateSubject",
+        "TemplateContent",
+        "SuccessRedirectionURL",
+        "FailureRedirectionURL"
+      ],
+      "members": {
+        "TemplateName": {
+          "shape": "EmailTemplateName",
+          "documentation": "<p>The name of the custom verification email template.</p>"
+        },
+        "FromEmailAddress": {
+          "shape": "EmailAddress",
+          "documentation": "<p>The email address that the custom verification email is sent from.</p>"
+        },
+        "TemplateSubject": {
+          "shape": "EmailTemplateSubject",
+          "documentation": "<p>The subject line of the custom verification email.</p>"
+        },
+        "TemplateContent": {
+          "shape": "TemplateContent",
+          "documentation": "<p>The content of the custom verification email. The total size of the email must be less than 10 MB. The message body may contain HTML, with some limitations. For more information, see <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html#custom-verification-emails-faq\">Custom Verification Email Frequently Asked Questions</a> in the <i>Amazon SES Developer Guide</i>.</p>"
+        },
+        "SuccessRedirectionURL": {
+          "shape": "SuccessRedirectionURL",
+          "documentation": "<p>The URL that the recipient of the verification email is sent to if his or her address is successfully verified.</p>"
+        },
+        "FailureRedirectionURL": {
+          "shape": "FailureRedirectionURL",
+          "documentation": "<p>The URL that the recipient of the verification email is sent to if his or her address is not successfully verified.</p>"
+        }
+      },
+      "documentation": "<p>Represents a request to create a custom verification email template.</p>"
+    },
+    "CreateCustomVerificationEmailTemplateResponse": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p>If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.</p>"
+    },
     "CreateDedicatedIpPoolRequest": {
       "type": "structure",
       "required": [
@@ -1581,6 +2247,38 @@
       },
       "documentation": "<p>Information about the predictive inbox placement test that you created.</p>"
     },
+    "CreateEmailIdentityPolicyRequest": {
+      "type": "structure",
+      "required": [
+        "EmailIdentity",
+        "PolicyName",
+        "Policy"
+      ],
+      "members": {
+        "EmailIdentity": {
+          "shape": "Identity",
+          "documentation": "<p>The email identity for which you want to create a policy.</p>",
+          "location": "uri",
+          "locationName": "EmailIdentity"
+        },
+        "PolicyName": {
+          "shape": "PolicyName",
+          "documentation": "<p>The name of the policy.</p> <p>The policy name cannot exceed 64 characters and can only include alphanumeric characters, dashes, and underscores.</p>",
+          "location": "uri",
+          "locationName": "PolicyName"
+        },
+        "Policy": {
+          "shape": "Policy",
+          "documentation": "<p>The text of the policy in JSON format. The policy cannot exceed 4 KB.</p> <p>For information about the syntax of sending authorization policies, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-policies.html\">Amazon SES Developer Guide</a>.</p>"
+        }
+      },
+      "documentation": "<p>Represents a request to create a sending authorization policy for an identity. Sending authorization is an Amazon SES feature that enables you to authorize other senders to use your identities. For information, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-identity-owner-tasks-management.html\">Amazon SES Developer Guide</a>.</p>"
+    },
+    "CreateEmailIdentityPolicyResponse": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request fails.</p>"
+    },
     "CreateEmailIdentityRequest": {
       "type": "structure",
       "required": [
@@ -1620,9 +2318,65 @@
       },
       "documentation": "<p>If the email identity is a domain, this object contains information about the DKIM verification status for the domain.</p> <p>If the email identity is an email address, this object is empty. </p>"
     },
+    "CreateEmailTemplateRequest": {
+      "type": "structure",
+      "required": [
+        "TemplateName",
+        "TemplateContent"
+      ],
+      "members": {
+        "TemplateName": {
+          "shape": "EmailTemplateName",
+          "documentation": "<p>The name of the template you want to create.</p>"
+        },
+        "TemplateContent": {
+          "shape": "EmailTemplateContent",
+          "documentation": "<p>The content of the email template, composed of a subject line, an HTML part, and a text-only part.</p>"
+        }
+      },
+      "documentation": "<p>Represents a request to create an email template. For more information, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html\">Amazon SES Developer Guide</a>.</p>"
+    },
+    "CreateEmailTemplateResponse": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p>If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.</p>"
+    },
     "CustomRedirectDomain": {
       "type": "string",
       "documentation": "<p>The domain that you want to use for tracking open and click events.</p>"
+    },
+    "CustomVerificationEmailTemplateMetadata": {
+      "type": "structure",
+      "members": {
+        "TemplateName": {
+          "shape": "EmailTemplateName",
+          "documentation": "<p>The name of the custom verification email template.</p>"
+        },
+        "FromEmailAddress": {
+          "shape": "EmailAddress",
+          "documentation": "<p>The email address that the custom verification email is sent from.</p>"
+        },
+        "TemplateSubject": {
+          "shape": "EmailTemplateSubject",
+          "documentation": "<p>The subject line of the custom verification email.</p>"
+        },
+        "SuccessRedirectionURL": {
+          "shape": "SuccessRedirectionURL",
+          "documentation": "<p>The URL that the recipient of the verification email is sent to if his or her address is successfully verified.</p>"
+        },
+        "FailureRedirectionURL": {
+          "shape": "FailureRedirectionURL",
+          "documentation": "<p>The URL that the recipient of the verification email is sent to if his or her address is not successfully verified.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about a custom verification email template.</p>"
+    },
+    "CustomVerificationEmailTemplatesList": {
+      "type": "list",
+      "member": {
+        "shape": "CustomVerificationEmailTemplateMetadata"
+      },
+      "documentation": "<p>A list of the custom verification email templates that exist in your account.</p>"
     },
     "DailyVolume": {
       "type": "structure",
@@ -1733,6 +2487,26 @@
       "members": {},
       "documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request fails.</p>"
     },
+    "DeleteCustomVerificationEmailTemplateRequest": {
+      "type": "structure",
+      "required": [
+        "TemplateName"
+      ],
+      "members": {
+        "TemplateName": {
+          "shape": "EmailTemplateName",
+          "documentation": "<p>The name of the custom verification email template that you want to delete.</p>",
+          "location": "uri",
+          "locationName": "TemplateName"
+        }
+      },
+      "documentation": "<p>Represents a request to delete an existing custom verification email template.</p>"
+    },
+    "DeleteCustomVerificationEmailTemplateResponse": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p>If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.</p>"
+    },
     "DeleteDedicatedIpPoolRequest": {
       "type": "structure",
       "required": [
@@ -1749,6 +2523,33 @@
       "documentation": "<p>A request to delete a dedicated IP pool.</p>"
     },
     "DeleteDedicatedIpPoolResponse": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request fails.</p>"
+    },
+    "DeleteEmailIdentityPolicyRequest": {
+      "type": "structure",
+      "required": [
+        "EmailIdentity",
+        "PolicyName"
+      ],
+      "members": {
+        "EmailIdentity": {
+          "shape": "Identity",
+          "documentation": "<p>The email identity for which you want to delete a policy.</p>",
+          "location": "uri",
+          "locationName": "EmailIdentity"
+        },
+        "PolicyName": {
+          "shape": "PolicyName",
+          "documentation": "<p>The name of the policy.</p> <p>The policy name cannot exceed 64 characters and can only include alphanumeric characters, dashes, and underscores.</p>",
+          "location": "uri",
+          "locationName": "PolicyName"
+        }
+      },
+      "documentation": "<p>Represents a request to delete a sending authorization policy for an identity. Sending authorization is an Amazon SES feature that enables you to authorize other senders to use your identities. For information, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-identity-owner-tasks-management.html\">Amazon SES Developer Guide</a>.</p>"
+    },
+    "DeleteEmailIdentityPolicyResponse": {
       "type": "structure",
       "members": {},
       "documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request fails.</p>"
@@ -1772,6 +2573,26 @@
       "type": "structure",
       "members": {},
       "documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request fails.</p>"
+    },
+    "DeleteEmailTemplateRequest": {
+      "type": "structure",
+      "required": [
+        "TemplateName"
+      ],
+      "members": {
+        "TemplateName": {
+          "shape": "EmailTemplateName",
+          "documentation": "<p>The name of the template to be deleted.</p>",
+          "location": "uri",
+          "locationName": "TemplateName"
+        }
+      },
+      "documentation": "<p>Represents a request to delete an email template. For more information, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html\">Amazon SES Developer Guide</a>.</p>"
+    },
+    "DeleteEmailTemplateResponse": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p>If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.</p>"
     },
     "DeleteSuppressedDestinationRequest": {
       "type": "structure",
@@ -2118,8 +2939,75 @@
       },
       "documentation": "<p>An object that defines the entire content of the email, including the message headers and the body content. You can create a simple email message, in which you specify the subject and the text and HTML versions of the message body. You can also create raw messages, in which you specify a complete MIME-formatted message. Raw messages can include attachments and custom headers.</p>"
     },
+    "EmailTemplateContent": {
+      "type": "structure",
+      "members": {
+        "Subject": {
+          "shape": "EmailTemplateSubject",
+          "documentation": "<p>The subject line of the email.</p>"
+        },
+        "Text": {
+          "shape": "EmailTemplateText",
+          "documentation": "<p>The email body that will be visible to recipients whose email clients do not display HTML.</p>"
+        },
+        "Html": {
+          "shape": "EmailTemplateHtml",
+          "documentation": "<p>The HTML body of the email.</p>"
+        }
+      },
+      "documentation": "<p>The content of the email, composed of a subject line, an HTML part, and a text-only part.</p>"
+    },
+    "EmailTemplateData": {
+      "type": "string",
+      "documentation": "<p>An object that defines the values to use for message variables in the template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the value to use for that variable.</p>",
+      "max": 262144
+    },
+    "EmailTemplateHtml": {
+      "type": "string",
+      "documentation": "<p>The HTML body of the email.</p>"
+    },
+    "EmailTemplateMetadata": {
+      "type": "structure",
+      "members": {
+        "TemplateName": {
+          "shape": "EmailTemplateName",
+          "documentation": "<p>The name of the template.</p>"
+        },
+        "CreatedTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time and date the template was created.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about an email template.</p>"
+    },
+    "EmailTemplateMetadataList": {
+      "type": "list",
+      "member": {
+        "shape": "EmailTemplateMetadata"
+      },
+      "documentation": "<p>A list of the EmailTemplateMetadata object.</p>"
+    },
+    "EmailTemplateName": {
+      "type": "string",
+      "documentation": "<p>The name of the template. You will refer to this name when you send email using the <code>SendTemplatedEmail</code> or <code>SendBulkTemplatedEmail</code> operations.</p>",
+      "min": 1
+    },
+    "EmailTemplateSubject": {
+      "type": "string",
+      "documentation": "<p>The subject line of the email.</p>"
+    },
+    "EmailTemplateText": {
+      "type": "string",
+      "documentation": "<p>The email body that will be visible to recipients whose email clients do not display HTML.</p>"
+    },
     "Enabled": {
       "type": "boolean"
+    },
+    "EnabledWrapper": {
+      "type": "boolean"
+    },
+    "ErrorMessage": {
+      "type": "string"
     },
     "Esp": {
       "type": "string"
@@ -2229,6 +3117,10 @@
         "shape": "EventType"
       }
     },
+    "FailureRedirectionURL": {
+      "type": "string",
+      "documentation": "<p>The URL that the recipient of the verification email is sent to if his or her address is not successfully verified.</p>"
+    },
     "FeedbackId": {
       "type": "string"
     },
@@ -2266,6 +3158,10 @@
         "SuppressionAttributes": {
           "shape": "SuppressionAttributes",
           "documentation": "<p>An object that contains information about the email address suppression preferences for your account in the current AWS Region.</p>"
+        },
+        "Details": {
+          "shape": "AccountDetails",
+          "documentation": "<p>An object that defines your account details.</p>"
         }
       },
       "documentation": "<p>A list of details about the email-sending capabilities of your Amazon SES account in the current AWS Region.</p>"
@@ -2371,6 +3267,51 @@
         }
       },
       "documentation": "<p>Information about a configuration set.</p>"
+    },
+    "GetCustomVerificationEmailTemplateRequest": {
+      "type": "structure",
+      "required": [
+        "TemplateName"
+      ],
+      "members": {
+        "TemplateName": {
+          "shape": "EmailTemplateName",
+          "documentation": "<p>The name of the custom verification email template that you want to retrieve.</p>",
+          "location": "uri",
+          "locationName": "TemplateName"
+        }
+      },
+      "documentation": "<p>Represents a request to retrieve an existing custom verification email template.</p>"
+    },
+    "GetCustomVerificationEmailTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "TemplateName": {
+          "shape": "EmailTemplateName",
+          "documentation": "<p>The name of the custom verification email template.</p>"
+        },
+        "FromEmailAddress": {
+          "shape": "EmailAddress",
+          "documentation": "<p>The email address that the custom verification email is sent from.</p>"
+        },
+        "TemplateSubject": {
+          "shape": "EmailTemplateSubject",
+          "documentation": "<p>The subject line of the custom verification email.</p>"
+        },
+        "TemplateContent": {
+          "shape": "TemplateContent",
+          "documentation": "<p>The content of the custom verification email.</p>"
+        },
+        "SuccessRedirectionURL": {
+          "shape": "SuccessRedirectionURL",
+          "documentation": "<p>The URL that the recipient of the verification email is sent to if his or her address is successfully verified.</p>"
+        },
+        "FailureRedirectionURL": {
+          "shape": "FailureRedirectionURL",
+          "documentation": "<p>The URL that the recipient of the verification email is sent to if his or her address is not successfully verified.</p>"
+        }
+      },
+      "documentation": "<p>The following elements are returned by the service.</p>"
     },
     "GetDedicatedIpRequest": {
       "type": "structure",
@@ -2590,6 +3531,31 @@
       },
       "documentation": "<p>An object that includes statistics that are related to the domain that you specified.</p>"
     },
+    "GetEmailIdentityPoliciesRequest": {
+      "type": "structure",
+      "required": [
+        "EmailIdentity"
+      ],
+      "members": {
+        "EmailIdentity": {
+          "shape": "Identity",
+          "documentation": "<p>The email identity that you want to retrieve policies for.</p>",
+          "location": "uri",
+          "locationName": "EmailIdentity"
+        }
+      },
+      "documentation": "<p>A request to return the policies of an email identity.</p>"
+    },
+    "GetEmailIdentityPoliciesResponse": {
+      "type": "structure",
+      "members": {
+        "Policies": {
+          "shape": "PolicyMap",
+          "documentation": "<p>A map of policy names to policies.</p>"
+        }
+      },
+      "documentation": "<p>Identity policies associated with email identity.</p>"
+    },
     "GetEmailIdentityRequest": {
       "type": "structure",
       "required": [
@@ -2628,12 +3594,49 @@
           "shape": "MailFromAttributes",
           "documentation": "<p>An object that contains information about the Mail-From attributes for the email identity.</p>"
         },
+        "Policies": {
+          "shape": "PolicyMap",
+          "documentation": "<p>A map of policy names to policies.</p>"
+        },
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>An array of objects that define the tags (keys and values) that are associated with the email identity.</p>"
         }
       },
       "documentation": "<p>Details about an email identity.</p>"
+    },
+    "GetEmailTemplateRequest": {
+      "type": "structure",
+      "required": [
+        "TemplateName"
+      ],
+      "members": {
+        "TemplateName": {
+          "shape": "EmailTemplateName",
+          "documentation": "<p>The name of the template you want to retrieve.</p>",
+          "location": "uri",
+          "locationName": "TemplateName"
+        }
+      },
+      "documentation": "<p>Represents a request to display the template object (which includes the subject line, HTML part and text part) for the template you specify.</p>"
+    },
+    "GetEmailTemplateResponse": {
+      "type": "structure",
+      "required": [
+        "TemplateName",
+        "TemplateContent"
+      ],
+      "members": {
+        "TemplateName": {
+          "shape": "EmailTemplateName",
+          "documentation": "<p>The name of the template you want to retrieve.</p>"
+        },
+        "TemplateContent": {
+          "shape": "EmailTemplateContent",
+          "documentation": "<p>The content of the email template, composed of a subject line, an HTML part, and a text-only part.</p>"
+        }
+      },
+      "documentation": "<p>The following element is returned by the service.</p>"
     },
     "GetSuppressedDestinationRequest": {
       "type": "structure",
@@ -2664,7 +3667,8 @@
       "documentation": "<p>Information about the suppressed email address.</p>"
     },
     "Identity": {
-      "type": "string"
+      "type": "string",
+      "min": 1
     },
     "IdentityInfo": {
       "type": "structure",
@@ -2809,6 +3813,38 @@
         }
       },
       "documentation": "<p>A list of configuration sets in your Amazon SES account in the current AWS Region.</p>"
+    },
+    "ListCustomVerificationEmailTemplatesRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token returned from a previous call to <code>ListCustomVerificationEmailTemplates</code> to indicate the position in the list of custom verification email templates.</p>",
+          "location": "querystring",
+          "locationName": "NextToken"
+        },
+        "PageSize": {
+          "shape": "MaxItems",
+          "documentation": "<p>The number of results to show in a single call to <code>ListCustomVerificationEmailTemplates</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p> <p>The value you specify has to be at least 1, and can be no more than 50.</p>",
+          "location": "querystring",
+          "locationName": "PageSize"
+        }
+      },
+      "documentation": "<p>Represents a request to list the existing custom verification email templates for your account.</p>"
+    },
+    "ListCustomVerificationEmailTemplatesResponse": {
+      "type": "structure",
+      "members": {
+        "CustomVerificationEmailTemplates": {
+          "shape": "CustomVerificationEmailTemplatesList",
+          "documentation": "<p>A list of the custom verification email templates that exist in your account.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token indicating that there are additional custom verification email templates available to be listed. Pass this token to a subsequent call to <code>ListCustomVerificationEmailTemplates</code> to retrieve the next 50 custom verification email templates.</p>"
+        }
+      },
+      "documentation": "<p>The following elements are returned by the service.</p>"
     },
     "ListDedicatedIpPoolsRequest": {
       "type": "structure",
@@ -2967,6 +4003,38 @@
       },
       "documentation": "<p>A list of all of the identities that you've attempted to verify, regardless of whether or not those identities were successfully verified.</p>"
     },
+    "ListEmailTemplatesRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token returned from a previous call to <code>ListEmailTemplates</code> to indicate the position in the list of email templates.</p>",
+          "location": "querystring",
+          "locationName": "NextToken"
+        },
+        "PageSize": {
+          "shape": "MaxItems",
+          "documentation": "<p>The number of results to show in a single call to <code>ListEmailTemplates</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p> <p>The value you specify has to be at least 1, and can be no more than 10.</p>",
+          "location": "querystring",
+          "locationName": "PageSize"
+        }
+      },
+      "documentation": "<p>Represents a request to list the email templates present in your Amazon SES account in the current AWS Region. For more information, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html\">Amazon SES Developer Guide</a>.</p>"
+    },
+    "ListEmailTemplatesResponse": {
+      "type": "structure",
+      "members": {
+        "TemplatesMetadata": {
+          "shape": "EmailTemplateMetadataList",
+          "documentation": "<p>An array the contains the name and creation time stamp for each template in your Amazon SES account.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token indicating that there are additional email templates available to be listed. Pass this token to a subsequent <code>ListEmailTemplates</code> call to retrieve the next 10 email templates.</p>"
+        }
+      },
+      "documentation": "<p>The following elements are returned by the service.</p>"
+    },
     "ListOfDedicatedIpPools": {
       "type": "list",
       "member": {
@@ -3085,6 +4153,13 @@
         "SUCCESS",
         "FAILED",
         "TEMPORARY_FAILURE"
+      ]
+    },
+    "MailType": {
+      "type": "string",
+      "enum": [
+        "MARKETING",
+        "TRANSACTIONAL"
       ]
     },
     "Max24HourSend": {
@@ -3221,6 +4296,27 @@
       },
       "documentation": "<p>An object that contains inbox placement data for an email provider.</p>"
     },
+    "Policy": {
+      "type": "string",
+      "documentation": "<p>The text of the policy in JSON format. The policy cannot exceed 4 KB.</p> <p>For information about the syntax of sending authorization policies, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>.</p>",
+      "min": 1
+    },
+    "PolicyMap": {
+      "type": "map",
+      "key": {
+        "shape": "PolicyName"
+      },
+      "value": {
+        "shape": "Policy"
+      },
+      "documentation": "<p>An object that contains mapping between <code>PolicyName</code> and <code>Policy</code> text.</p>"
+    },
+    "PolicyName": {
+      "type": "string",
+      "documentation": "<p>The name of the policy.</p> <p>The policy name cannot exceed 64 characters and can only include alphanumeric characters, dashes, and underscores.</p>",
+      "max": 64,
+      "min": 1
+    },
     "PoolName": {
       "type": "string",
       "documentation": "<p>The name of a dedicated IP pool.</p>"
@@ -3243,6 +4339,46 @@
       "documentation": "<p>A request to enable or disable the automatic IP address warm-up feature.</p>"
     },
     "PutAccountDedicatedIpWarmupAttributesResponse": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request fails.</p>"
+    },
+    "PutAccountDetailsRequest": {
+      "type": "structure",
+      "required": [
+        "MailType",
+        "WebsiteURL",
+        "UseCaseDescription"
+      ],
+      "members": {
+        "MailType": {
+          "shape": "MailType",
+          "documentation": "<p>The type of email your account will send.</p>"
+        },
+        "WebsiteURL": {
+          "shape": "WebsiteURL",
+          "documentation": "<p>The URL of your website. This information helps us better understand the type of content that you plan to send.</p>"
+        },
+        "ContactLanguage": {
+          "shape": "ContactLanguage",
+          "documentation": "<p>The language you would prefer to be contacted with.</p>"
+        },
+        "UseCaseDescription": {
+          "shape": "UseCaseDescription",
+          "documentation": "<p>A description of the types of email that you plan to send.</p>"
+        },
+        "AdditionalContactEmailAddresses": {
+          "shape": "AdditionalContactEmailAddresses",
+          "documentation": "<p>Additional email addresses that you would like to be notified regarding Amazon SES matters.</p>"
+        },
+        "ProductionAccessEnabled": {
+          "shape": "EnabledWrapper",
+          "documentation": "<p>Indicates whether or not your account should have production access in the current AWS Region.</p> <p>If the value is <code>false</code>, then your account is in the <i>sandbox</i>. When your account is in the sandbox, you can only send email to verified identities. Additionally, the maximum number of emails you can send in a 24-hour period (your sending quota) is 200, and the maximum number of emails you can send per second (your maximum sending rate) is 1.</p> <p>If the value is <code>true</code>, then your account has production access. When your account has production access, you can send email to any address. The sending quota and maximum sending rate for your account vary based on your specific use case.</p>"
+        }
+      },
+      "documentation": "<p>A request to submit new account details.</p>"
+    },
+    "PutAccountDetailsResponse": {
       "type": "structure",
       "members": {},
       "documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request fails.</p>"
@@ -3631,6 +4767,30 @@
       "type": "string",
       "documentation": "<p>The name of a blacklist that an IP address was found on.</p>"
     },
+    "RenderedEmailTemplate": {
+      "type": "string",
+      "documentation": "<p>The complete MIME message rendered by applying the data in the TemplateData parameter to the template specified in the TemplateName parameter.</p>"
+    },
+    "ReplacementEmailContent": {
+      "type": "structure",
+      "members": {
+        "ReplacementTemplate": {
+          "shape": "ReplacementTemplate",
+          "documentation": "<p>The <code>ReplacementTemplate</code> associated with <code>ReplacementEmailContent</code>.</p>"
+        }
+      },
+      "documentation": "<p>The <code>ReplaceEmailContent</code> object to be used for a specific <code>BulkEmailEntry</code>. The <code>ReplacementTemplate</code> can be specified within this object.</p>"
+    },
+    "ReplacementTemplate": {
+      "type": "structure",
+      "members": {
+        "ReplacementTemplateData": {
+          "shape": "EmailTemplateData",
+          "documentation": "<p>A list of replacement values to apply to the template. This parameter is a JSON object, typically consisting of key-value pairs in which the keys correspond to replacement tags in the email template.</p>"
+        }
+      },
+      "documentation": "<p>An object which contains <code>ReplacementTemplateData</code> to be used for a specific <code>BulkEmailEntry</code>.</p>"
+    },
     "ReportId": {
       "type": "string",
       "documentation": "<p>A unique string that identifies a Deliverability dashboard report.</p>"
@@ -3653,22 +4813,138 @@
       },
       "documentation": "<p>Enable or disable collection of reputation metrics for emails that you send using this configuration set in the current AWS Region. </p>"
     },
+    "ReviewDetails": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "ReviewStatus",
+          "documentation": "<p>The status of the latest review of your account. The status can be one of the following:</p> <ul> <li> <p> <code>PENDING</code> – We have received your appeal and are in the process of reviewing it.</p> </li> <li> <p> <code>GRANTED</code> – Your appeal has been reviewed and your production access has been granted.</p> </li> <li> <p> <code>DENIED</code> – Your appeal has been reviewed and your production access has been denied.</p> </li> <li> <p> <code>FAILED</code> – An internal error occurred and we didn't receive your appeal. You can submit your appeal again.</p> </li> </ul>"
+        },
+        "CaseId": {
+          "shape": "CaseId",
+          "documentation": "<p>The associated support center case ID (if any).</p>"
+        }
+      },
+      "documentation": "<p>An object that contains information about your account details review.</p>"
+    },
+    "ReviewStatus": {
+      "type": "string",
+      "enum": [
+        "PENDING",
+        "FAILED",
+        "GRANTED",
+        "DENIED"
+      ]
+    },
     "Selector": {
       "type": "string",
       "max": 63,
       "min": 1,
       "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9]))$"
     },
+    "SendBulkEmailRequest": {
+      "type": "structure",
+      "required": [
+        "DefaultContent",
+        "BulkEmailEntries"
+      ],
+      "members": {
+        "FromEmailAddress": {
+          "shape": "EmailAddress",
+          "documentation": "<p>The email address that you want to use as the \"From\" address for the email. The address that you specify has to be verified.</p>"
+        },
+        "FromEmailAddressIdentityArn": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to use the email address specified in the <code>FromEmailAddress</code> parameter.</p> <p>For example, if the owner of example.com (which has ARN arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it that authorizes you to use sender@example.com, then you would specify the <code>FromEmailAddressIdentityArn</code> to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and the <code>FromEmailAddress</code> to be sender@example.com.</p> <p>For more information about sending authorization, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>.</p>"
+        },
+        "ReplyToAddresses": {
+          "shape": "EmailAddressList",
+          "documentation": "<p>The \"Reply-to\" email addresses for the message. When the recipient replies to the message, each Reply-to address receives the reply.</p>"
+        },
+        "FeedbackForwardingEmailAddress": {
+          "shape": "EmailAddress",
+          "documentation": "<p>The address that you want bounce and complaint notifications to be sent to.</p>"
+        },
+        "FeedbackForwardingEmailAddressIdentityArn": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to use the email address specified in the <code>FeedbackForwardingEmailAddress</code> parameter.</p> <p>For example, if the owner of example.com (which has ARN arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it that authorizes you to use feedback@example.com, then you would specify the <code>FeedbackForwardingEmailAddressIdentityArn</code> to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and the <code>FeedbackForwardingEmailAddress</code> to be feedback@example.com.</p> <p>For more information about sending authorization, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>.</p>"
+        },
+        "DefaultEmailTags": {
+          "shape": "MessageTagList",
+          "documentation": "<p>A list of tags, in the form of name/value pairs, to apply to an email that you send using the <code>SendEmail</code> operation. Tags correspond to characteristics of the email that you define, so that you can publish email sending events.</p>"
+        },
+        "DefaultContent": {
+          "shape": "BulkEmailContent",
+          "documentation": "<p>An object that contains the body of the message. You can specify a template message.</p>"
+        },
+        "BulkEmailEntries": {
+          "shape": "BulkEmailEntryList",
+          "documentation": "<p>The list of bulk email entry objects.</p>"
+        },
+        "ConfigurationSetName": {
+          "shape": "ConfigurationSetName",
+          "documentation": "<p>The name of the configuration set that you want to use when sending the email.</p>"
+        }
+      },
+      "documentation": "<p>Represents a request to send email messages to multiple destinations using Amazon SES. For more information, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html\">Amazon SES Developer Guide</a>.</p>"
+    },
+    "SendBulkEmailResponse": {
+      "type": "structure",
+      "required": [
+        "BulkEmailEntryResults"
+      ],
+      "members": {
+        "BulkEmailEntryResults": {
+          "shape": "BulkEmailEntryResultList"
+        }
+      },
+      "documentation": "<p>The following data is returned in JSON format by the service.</p>"
+    },
+    "SendCustomVerificationEmailRequest": {
+      "type": "structure",
+      "required": [
+        "EmailAddress",
+        "TemplateName"
+      ],
+      "members": {
+        "EmailAddress": {
+          "shape": "EmailAddress",
+          "documentation": "<p>The email address to verify.</p>"
+        },
+        "TemplateName": {
+          "shape": "EmailTemplateName",
+          "documentation": "<p>The name of the custom verification email template to use when sending the verification email.</p>"
+        },
+        "ConfigurationSetName": {
+          "shape": "ConfigurationSetName",
+          "documentation": "<p>Name of a configuration set to use when sending the verification email.</p>"
+        }
+      },
+      "documentation": "<p>Represents a request to send a custom verification email to a specified recipient.</p>"
+    },
+    "SendCustomVerificationEmailResponse": {
+      "type": "structure",
+      "members": {
+        "MessageId": {
+          "shape": "OutboundMessageId",
+          "documentation": "<p>The unique message identifier returned from the <code>SendCustomVerificationEmail</code> operation.</p>"
+        }
+      },
+      "documentation": "<p>The following element is returned by the service.</p>"
+    },
     "SendEmailRequest": {
       "type": "structure",
       "required": [
-        "Destination",
         "Content"
       ],
       "members": {
         "FromEmailAddress": {
           "shape": "EmailAddress",
           "documentation": "<p>The email address that you want to use as the \"From\" address for the email. The address that you specify has to be verified. </p>"
+        },
+        "FromEmailAddressIdentityArn": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to use the email address specified in the <code>FromEmailAddress</code> parameter.</p> <p>For example, if the owner of example.com (which has ARN arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it that authorizes you to use sender@example.com, then you would specify the <code>FromEmailAddressIdentityArn</code> to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and the <code>FromEmailAddress</code> to be sender@example.com.</p> <p>For more information about sending authorization, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>.</p> <p>For Raw emails, the <code>FromEmailAddressIdentityArn</code> value overrides the X-SES-SOURCE-ARN and X-SES-FROM-ARN headers specified in raw email message content.</p>"
         },
         "Destination": {
           "shape": "Destination",
@@ -3682,9 +4958,13 @@
           "shape": "EmailAddress",
           "documentation": "<p>The address that you want bounce and complaint notifications to be sent to.</p>"
         },
+        "FeedbackForwardingEmailAddressIdentityArn": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>This parameter is used only for sending authorization. It is the ARN of the identity that is associated with the sending authorization policy that permits you to use the email address specified in the <code>FeedbackForwardingEmailAddress</code> parameter.</p> <p>For example, if the owner of example.com (which has ARN arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it that authorizes you to use feedback@example.com, then you would specify the <code>FeedbackForwardingEmailAddressIdentityArn</code> to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and the <code>FeedbackForwardingEmailAddress</code> to be feedback@example.com.</p> <p>For more information about sending authorization, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html\">Amazon SES Developer Guide</a>.</p>"
+        },
         "Content": {
           "shape": "EmailContent",
-          "documentation": "<p>An object that contains the body of the message. You can send either a Simple message or a Raw message.</p>"
+          "documentation": "<p>An object that contains the body of the message. You can send either a Simple message Raw message or a template Message.</p>"
         },
         "EmailTags": {
           "shape": "MessageTagList",
@@ -3695,7 +4975,7 @@
           "documentation": "<p>The name of the configuration set that you want to use when sending the email.</p>"
         }
       },
-      "documentation": "<p>A request to send an email message.</p>"
+      "documentation": "<p>Represents a request to send a single formatted email using Amazon SES. For more information, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-formatted.html\">Amazon SES Developer Guide</a>.</p>"
     },
     "SendEmailResponse": {
       "type": "structure",
@@ -3757,6 +5037,10 @@
     },
     "Subject": {
       "type": "string"
+    },
+    "SuccessRedirectionURL": {
+      "type": "string",
+      "documentation": "<p>The URL that the recipient of the verification email is sent to if his or her address is successfully verified.</p>"
     },
     "SuppressedDestination": {
       "type": "structure",
@@ -3922,23 +5206,57 @@
     "Template": {
       "type": "structure",
       "members": {
+        "TemplateName": {
+          "shape": "EmailTemplateName",
+          "documentation": "<p>The name of the template. You will refer to this name when you send email using the <code>SendTemplatedEmail</code> or <code>SendBulkTemplatedEmail</code> operations. </p>"
+        },
         "TemplateArn": {
-          "shape": "TemplateArn",
+          "shape": "AmazonResourceName",
           "documentation": "<p>The Amazon Resource Name (ARN) of the template.</p>"
         },
         "TemplateData": {
-          "shape": "TemplateData",
+          "shape": "EmailTemplateData",
           "documentation": "<p>An object that defines the values to use for message variables in the template. This object is a set of key-value pairs. Each key defines a message variable in the template. The corresponding value defines the value to use for that variable.</p>"
         }
       },
       "documentation": "<p>An object that defines the email template to use for an email message, and the values to use for any message variables in that template. An <i>email template</i> is a type of message template that contains content that you want to define, save, and reuse in email messages that you send.</p>"
     },
-    "TemplateArn": {
-      "type": "string"
-    },
-    "TemplateData": {
+    "TemplateContent": {
       "type": "string",
-      "max": 262144
+      "documentation": "<p>The content of the custom verification email template.</p>"
+    },
+    "TestRenderEmailTemplateRequest": {
+      "type": "structure",
+      "required": [
+        "TemplateName",
+        "TemplateData"
+      ],
+      "members": {
+        "TemplateName": {
+          "shape": "EmailTemplateName",
+          "documentation": "<p>The name of the template that you want to render.</p>",
+          "location": "uri",
+          "locationName": "TemplateName"
+        },
+        "TemplateData": {
+          "shape": "EmailTemplateData",
+          "documentation": "<p>A list of replacement values to apply to the template. This parameter is a JSON object, typically consisting of key-value pairs in which the keys correspond to replacement tags in the email template.</p>"
+        }
+      },
+      "documentation": "<p>&gt;Represents a request to create a preview of the MIME content of an email when provided with a template and a set of replacement data.</p>"
+    },
+    "TestRenderEmailTemplateResponse": {
+      "type": "structure",
+      "required": [
+        "RenderedTemplate"
+      ],
+      "members": {
+        "RenderedTemplate": {
+          "shape": "RenderedEmailTemplate",
+          "documentation": "<p>The complete MIME message rendered by applying the data in the <code>TemplateData</code> parameter to the template specified in the TemplateName parameter.</p>"
+        }
+      },
+      "documentation": "<p>The following element is returned by the service.</p>"
     },
     "Timestamp": {
       "type": "timestamp"
@@ -4021,6 +5339,114 @@
       "members": {},
       "documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request fails.</p>"
     },
+    "UpdateCustomVerificationEmailTemplateRequest": {
+      "type": "structure",
+      "required": [
+        "TemplateName",
+        "FromEmailAddress",
+        "TemplateSubject",
+        "TemplateContent",
+        "SuccessRedirectionURL",
+        "FailureRedirectionURL"
+      ],
+      "members": {
+        "TemplateName": {
+          "shape": "EmailTemplateName",
+          "documentation": "<p>The name of the custom verification email template that you want to update.</p>",
+          "location": "uri",
+          "locationName": "TemplateName"
+        },
+        "FromEmailAddress": {
+          "shape": "EmailAddress",
+          "documentation": "<p>The email address that the custom verification email is sent from.</p>"
+        },
+        "TemplateSubject": {
+          "shape": "EmailTemplateSubject",
+          "documentation": "<p>The subject line of the custom verification email.</p>"
+        },
+        "TemplateContent": {
+          "shape": "TemplateContent",
+          "documentation": "<p>The content of the custom verification email. The total size of the email must be less than 10 MB. The message body may contain HTML, with some limitations. For more information, see <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-verify-address-custom.html#custom-verification-emails-faq\">Custom Verification Email Frequently Asked Questions</a> in the <i>Amazon SES Developer Guide</i>.</p>"
+        },
+        "SuccessRedirectionURL": {
+          "shape": "SuccessRedirectionURL",
+          "documentation": "<p>The URL that the recipient of the verification email is sent to if his or her address is successfully verified.</p>"
+        },
+        "FailureRedirectionURL": {
+          "shape": "FailureRedirectionURL",
+          "documentation": "<p>The URL that the recipient of the verification email is sent to if his or her address is not successfully verified.</p>"
+        }
+      },
+      "documentation": "<p>Represents a request to update an existing custom verification email template.</p>"
+    },
+    "UpdateCustomVerificationEmailTemplateResponse": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p>If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.</p>"
+    },
+    "UpdateEmailIdentityPolicyRequest": {
+      "type": "structure",
+      "required": [
+        "EmailIdentity",
+        "PolicyName",
+        "Policy"
+      ],
+      "members": {
+        "EmailIdentity": {
+          "shape": "Identity",
+          "documentation": "<p>The email identity for which you want to update policy.</p>",
+          "location": "uri",
+          "locationName": "EmailIdentity"
+        },
+        "PolicyName": {
+          "shape": "PolicyName",
+          "documentation": "<p>The name of the policy.</p> <p>The policy name cannot exceed 64 characters and can only include alphanumeric characters, dashes, and underscores.</p>",
+          "location": "uri",
+          "locationName": "PolicyName"
+        },
+        "Policy": {
+          "shape": "Policy",
+          "documentation": "<p>The text of the policy in JSON format. The policy cannot exceed 4 KB.</p> <p> For information about the syntax of sending authorization policies, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-policies.html\">Amazon SES Developer Guide</a>.</p>"
+        }
+      },
+      "documentation": "<p>Represents a request to update a sending authorization policy for an identity. Sending authorization is an Amazon SES feature that enables you to authorize other senders to use your identities. For information, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-identity-owner-tasks-management.html\">Amazon SES Developer Guide</a>.</p>"
+    },
+    "UpdateEmailIdentityPolicyResponse": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request fails.</p>"
+    },
+    "UpdateEmailTemplateRequest": {
+      "type": "structure",
+      "required": [
+        "TemplateName",
+        "TemplateContent"
+      ],
+      "members": {
+        "TemplateName": {
+          "shape": "EmailTemplateName",
+          "documentation": "<p>The name of the template you want to update.</p>",
+          "location": "uri",
+          "locationName": "TemplateName"
+        },
+        "TemplateContent": {
+          "shape": "EmailTemplateContent",
+          "documentation": "<p>The content of the email template, composed of a subject line, an HTML part, and a text-only part.</p>"
+        }
+      },
+      "documentation": "<p>Represents a request to update an email template. For more information, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html\">Amazon SES Developer Guide</a>.</p>"
+    },
+    "UpdateEmailTemplateResponse": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p>If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.</p>"
+    },
+    "UseCaseDescription": {
+      "type": "string",
+      "max": 5000,
+      "min": 1,
+      "sensitive": true
+    },
     "Volume": {
       "type": "long",
       "documentation": "<p>An object that contains information about inbox placement volume.</p>"
@@ -4054,6 +5480,13 @@
         "IN_PROGRESS",
         "DONE"
       ]
+    },
+    "WebsiteURL": {
+      "type": "string",
+      "max": 1000,
+      "min": 1,
+      "pattern": "^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\\?([^#]*))?(#(.*))?",
+      "sensitive": true
     }
   },
   "documentation": "<fullname>Amazon SES API v2</fullname> <p>Welcome to the Amazon SES API v2 Reference. This guide provides information about the Amazon SES API v2, including supported operations, data types, parameters, and schemas.</p> <p> <a href=\"https://aws.amazon.com/pinpoint\">Amazon SES</a> is an AWS service that you can use to send email messages to your customers.</p> <p>If you're new to Amazon SES API v2, you might find it helpful to also review the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/\">Amazon Simple Email Service Developer Guide</a>. The <i>Amazon SES Developer Guide</i> provides information and code samples that demonstrate how to use Amazon SES API v2 features programmatically.</p> <p>The Amazon SES API v2 is available in several AWS Regions and it provides an endpoint for each of these Regions. For a list of all the Regions and endpoints where the API is currently available, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#ses_region\">AWS Service Endpoints</a> in the <i>Amazon Web Services General Reference</i>. To learn more about AWS Regions, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande-manage.html\">Managing AWS Regions</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>In each Region, AWS maintains multiple Availability Zones. These Availability Zones are physically isolated from each other, but are united by private, low-latency, high-throughput, and highly redundant network connections. These Availability Zones enable us to provide very high levels of availability and redundancy, while also minimizing latency. To learn more about the number of Availability Zones that are available in each Region, see <a href=\"http://aws.amazon.com/about-aws/global-infrastructure/\">AWS Global Infrastructure</a>.</p>"

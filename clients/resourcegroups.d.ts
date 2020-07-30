@@ -68,11 +68,11 @@ declare class ResourceGroups extends Service {
    */
   groupResources(callback?: (err: AWSError, data: ResourceGroups.Types.GroupResourcesOutput) => void): Request<ResourceGroups.Types.GroupResourcesOutput, AWSError>;
   /**
-   * Returns a list of ARNs of resources that are members of a specified resource group.
+   * Returns a list of ARNs of the resources that are members of a specified resource group.
    */
   listGroupResources(params: ResourceGroups.Types.ListGroupResourcesInput, callback?: (err: AWSError, data: ResourceGroups.Types.ListGroupResourcesOutput) => void): Request<ResourceGroups.Types.ListGroupResourcesOutput, AWSError>;
   /**
-   * Returns a list of ARNs of resources that are members of a specified resource group.
+   * Returns a list of ARNs of the resources that are members of a specified resource group.
    */
   listGroupResources(callback?: (err: AWSError, data: ResourceGroups.Types.ListGroupResourcesOutput) => void): Request<ResourceGroups.Types.ListGroupResourcesOutput, AWSError>;
   /**
@@ -84,11 +84,11 @@ declare class ResourceGroups extends Service {
    */
   listGroups(callback?: (err: AWSError, data: ResourceGroups.Types.ListGroupsOutput) => void): Request<ResourceGroups.Types.ListGroupsOutput, AWSError>;
   /**
-   * Returns a list of AWS resource identifiers that matches a specified query. The query uses the same format as a resource query in a CreateGroup or UpdateGroupQuery operation.
+   * Returns a list of AWS resource identifiers that matches tne specified query. The query uses the same format as a resource query in a CreateGroup or UpdateGroupQuery operation.
    */
   searchResources(params: ResourceGroups.Types.SearchResourcesInput, callback?: (err: AWSError, data: ResourceGroups.Types.SearchResourcesOutput) => void): Request<ResourceGroups.Types.SearchResourcesOutput, AWSError>;
   /**
-   * Returns a list of AWS resource identifiers that matches a specified query. The query uses the same format as a resource query in a CreateGroup or UpdateGroupQuery operation.
+   * Returns a list of AWS resource identifiers that matches tne specified query. The query uses the same format as a resource query in a CreateGroup or UpdateGroupQuery operation.
    */
   searchResources(callback?: (err: AWSError, data: ResourceGroups.Types.SearchResourcesOutput) => void): Request<ResourceGroups.Types.SearchResourcesOutput, AWSError>;
   /**
@@ -496,7 +496,7 @@ declare namespace ResourceGroups {
   export type ResourceIdentifierList = ResourceIdentifier[];
   export interface ResourceQuery {
     /**
-     * The type of the query. The valid values in this release are the following:     TAG_FILTERS_1_0:  A JSON syntax that lets you specify a collection of simple tag filters for resource types and tags, as supported by the AWS Tagging API GetResources operation. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches any of the specified values. For example, consider the following sample query for resources that have two tags, Stage and Version, with two values each. ([{"Key":"Stage","Values":["Test","Deploy"]},{"Key":"Version","Values":["1","2"]}]) The results of this query might include the following.   An EC2 instance that has the following two tags: {"Key":"Stage","Value":"Deploy"}, and {"Key":"Version","Value":"2"}    An S3 bucket that has the following two tags: {"Key":"Stage","Value":"Test"}, and {"Key":"Version","Value":"1"}    The query would not return the following results, however. The following EC2 instance does not have all tag keys specified in the filter, so it is rejected. The RDS database has all of the tag keys, but no values that match at least one of the specified tag key values in the filter.   An EC2 instance that has only the following tag: {"Key":"Stage","Value":"Deploy"}.   An RDS database that has the following two tags: {"Key":"Stage","Value":"Archived"}, and {"Key":"Version","Value":"4"}        CLOUDFORMATION_STACK_1_0:  A JSON syntax that lets you specify a CloudFormation stack ARN.  
+     * The type of the query. You can use the following values:     CLOUDFORMATION_STACK_1_0:  A JSON syntax that lets you specify a CloudFormation stack ARN.     TAG_FILTERS_1_0:  A JSON syntax that lets you specify a collection of simple tag filters for resource types and tags, as supported by the AWS Tagging API  ResourceTypeFilters parameter of the tagging:GetResources  operation. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches any of the specified values. For example, consider the following sample query for resources that have two tags, Stage and Version, with two values each:  [{"Key":"Stage","Values":["Test","Deploy"]},{"Key":"Version","Values":["1","2"]}]  The results of this query could include the following.   An EC2 instance that has the following two tags: {"Key":"Stage","Value":"Deploy"}, and {"Key":"Version","Value":"2"}    An S3 bucket that has the following two tags: {"Key":"Stage","Value":"Test"}, and {"Key":"Version","Value":"1"}    The query would not include the following items in the results, however.    An EC2 instance that has only the following tag: {"Key":"Stage","Value":"Deploy"}. The instance does not have all of the tag keys specified in the filter, so it is excluded from the results.   An RDS database that has the following two tags: {"Key":"Stage","Value":"Archived"}, and {"Key":"Version","Value":"4"}  The database has all of the tag keys, but none of those keys has an associated value that matches at least one of the specified values in the filter.    
      */
     Type: QueryType;
     /**
