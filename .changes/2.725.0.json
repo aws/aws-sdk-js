@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "Chime",
+        "description": "This release increases the CreateMeetingWithAttendee max attendee limit to 10."
+    },
+    {
+        "type": "feature",
+        "category": "PersonalizeRuntime",
+        "description": "Adds support to use filters with Personalized Ranking recipe"
+    },
+    {
+        "type": "feature",
+        "category": "StorageGateway",
+        "description": "Add support for gateway VM deprecation dates"
+    },
+    {
+        "type": "feature",
+        "category": "WAFV2",
+        "description": "Add ManagedByFirewallManager flag to the logging configuration, which indicates whether AWS Firewall Manager controls the configuration."
+    }
+]

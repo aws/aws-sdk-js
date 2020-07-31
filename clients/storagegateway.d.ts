@@ -1423,6 +1423,7 @@ declare namespace StorageGateway {
      */
     VolumeARN?: VolumeARN;
   }
+  export type DeprecationDate = string;
   export interface DescribeAvailabilityMonitorTestInput {
     GatewayARN: GatewayARN;
   }
@@ -1570,6 +1571,14 @@ declare namespace StorageGateway {
      * The type of endpoint for your gateway. Valid Values: STANDARD | FIPS 
      */
     EndpointType?: EndpointType;
+    /**
+     * Date after which this gateway will not receive software updates for new features.
+     */
+    SoftwareUpdatesEndDate?: SoftwareUpdatesEndDate;
+    /**
+     * Date after which this gateway will not receive software updates for new features and bug fixes.
+     */
+    DeprecationDate?: DeprecationDate;
   }
   export interface DescribeMaintenanceStartTimeInput {
     GatewayARN: GatewayARN;
@@ -2452,6 +2461,7 @@ declare namespace StorageGateway {
   }
   export type SnapshotDescription = string;
   export type SnapshotId = string;
+  export type SoftwareUpdatesEndDate = string;
   export type Squash = string;
   export interface StartAvailabilityMonitorTestInput {
     GatewayARN: GatewayARN;

@@ -2989,6 +2989,11 @@
       },
       "documentation": "<p>A JSON object containing the Amazon Resource Name (ARN) of the storage volume that was deleted.</p>"
     },
+    "DeprecationDate": {
+      "type": "string",
+      "max": 25,
+      "min": 1
+    },
     "DescribeAvailabilityMonitorTestInput": {
       "type": "structure",
       "required": [
@@ -3210,6 +3215,14 @@
         "EndpointType": {
           "shape": "EndpointType",
           "documentation": "<p>The type of endpoint for your gateway.</p> <p>Valid Values: <code>STANDARD</code> | <code>FIPS</code> </p>"
+        },
+        "SoftwareUpdatesEndDate": {
+          "shape": "SoftwareUpdatesEndDate",
+          "documentation": "<p>Date after which this gateway will not receive software updates for new features.</p>"
+        },
+        "DeprecationDate": {
+          "shape": "DeprecationDate",
+          "documentation": "<p>Date after which this gateway will not receive software updates for new features and bug fixes.</p>"
         }
       },
       "documentation": "<p>A JSON object containing the following fields:</p>"
@@ -4939,6 +4952,11 @@
     "SnapshotId": {
       "type": "string",
       "pattern": "\\Asnap-([0-9A-Fa-f]{8}|[0-9A-Fa-f]{17})\\z"
+    },
+    "SoftwareUpdatesEndDate": {
+      "type": "string",
+      "max": 25,
+      "min": 1
     },
     "Squash": {
       "type": "string",

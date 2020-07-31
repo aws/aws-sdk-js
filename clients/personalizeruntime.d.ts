@@ -39,7 +39,7 @@ declare namespace PersonalizeRuntime {
      */
     campaignArn: Arn;
     /**
-     * A list of items (itemId's) to rank. If an item was not included in the training dataset, the item is appended to the end of the reranked list. The maximum is 500.
+     * A list of items (by itemId) to rank. If an item was not included in the training dataset, the item is appended to the end of the reranked list. The maximum is 500.
      */
     inputList: InputList;
     /**
@@ -50,6 +50,10 @@ declare namespace PersonalizeRuntime {
      * The contextual metadata to use when getting recommendations. Contextual metadata includes any interaction information that might be relevant when getting a user's recommendations, such as the user's current location or device type.
      */
     context?: Context;
+    /**
+     * The Amazon Resource Name (ARN) of a filter you created to include or exclude items from recommendations for a given user.
+     */
+    filterArn?: Arn;
   }
   export interface GetPersonalizedRankingResponse {
     /**
@@ -79,7 +83,7 @@ declare namespace PersonalizeRuntime {
      */
     context?: Context;
     /**
-     * The ARN of the filter to apply to the returned recommendations. For more information, see Using Filters with Amazon Personalize.
+     * The ARN of the filter to apply to the returned recommendations. For more information, see Using Filters with Amazon Personalize. When using this parameter, be sure the filter resource is ACTIVE.
      */
     filterArn?: Arn;
   }

@@ -1285,9 +1285,13 @@ declare namespace WAFV2 {
      */
     LogDestinationConfigs: LogDestinationConfigs;
     /**
-     * The parts of the request that you want to keep out of the logs. For example, if you redact the cookie field, the cookie field in the firehose will be xxx. 
+     * The parts of the request that you want to keep out of the logs. For example, if you redact the HEADER field, the HEADER field in the firehose will be xxx.   You must use one of the following values: URI, QUERY_STRING, HEADER, or METHOD. 
      */
     RedactedFields?: RedactedFields;
+    /**
+     * Indicates whether the logging configuration was created by AWS Firewall Manager, as part of an AWS WAF policy configuration. If true, only Firewall Manager can modify or delete the configuration. 
+     */
+    ManagedByFirewallManager?: Boolean;
   }
   export type LoggingConfigurations = LoggingConfiguration[];
   export interface ManagedRuleGroupStatement {
@@ -1607,7 +1611,7 @@ declare namespace WAFV2 {
      */
     Action?: Action;
     /**
-     * The name of the Rule that the request matched. For managed rule groups, the format for this name is &lt;vendor name&gt;#&lt;managed rule group name&gt;#&lt;rule name&gt;. For your own rule groups, the format for this name is &lt;rule group name&gt;#&lt;rule name&gt;. If the rule is not in a rule group, the format is &lt;rule name&gt;. 
+     * The name of the Rule that the request matched. For managed rule groups, the format for this name is &lt;vendor name&gt;#&lt;managed rule group name&gt;#&lt;rule name&gt;. For your own rule groups, the format for this name is &lt;rule group name&gt;#&lt;rule name&gt;. If the rule is not in a rule group, this field is absent. 
      */
     RuleNameWithinRuleGroup?: EntityName;
   }
@@ -1936,7 +1940,7 @@ declare namespace WAFV2 {
      */
     CloudWatchMetricsEnabled: Boolean;
     /**
-     * A name of the CloudWatch metric. The name can contain only the characters: A-Z, a-z, 0-9, - (hyphen), and _ (underscore). The name can be from one to 128 characters long. It can't contain whitespace or metric names reserved for AWS WAF, for example "All" and "Default_Action." You can't change a MetricName after you create a VisibilityConfig.
+     * A name of the CloudWatch metric. The name can contain only the characters: A-Z, a-z, 0-9, - (hyphen), and _ (underscore). The name can be from one to 128 characters long. It can't contain whitespace or metric names reserved for AWS WAF, for example "All" and "Default_Action." 
      */
     MetricName: MetricName;
   }

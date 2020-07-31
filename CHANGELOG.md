@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.724.0-->
+<!--LATEST=2.725.0-->
 <!--ENTRYINSERT-->
+
+## 2.725.0
+* feature: Chime: This release increases the CreateMeetingWithAttendee max attendee limit to 10.
+* feature: PersonalizeRuntime: Adds support to use filters with Personalized Ranking recipe
+* feature: StorageGateway: Add support for gateway VM deprecation dates
+* feature: WAFV2: Add ManagedByFirewallManager flag to the logging configuration, which indicates whether AWS Firewall Manager controls the configuration.
 
 ## 2.724.0
 * feature: CodeBuild: Adding support for BuildBatch, and CodeCoverage APIs. BuildBatch allows you to model your project environment in source, and helps start multiple builds with a single API call. CodeCoverage allows you to track your code coverage using AWS CodeBuild. 
