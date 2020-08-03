@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -987,6 +988,14 @@ declare class SSM extends Service {
    *  ServiceSetting is an account-level setting for an AWS service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an AWS service charges money to the account based on feature or service usage, then the AWS service team might create a default setting of "false". This means the user can't use this feature unless they change the setting to "true" and intentionally opt in for a paid feature. Services map a SettingId object to a setting value. AWS services teams define the default value for a SettingId. You can't create a new SettingId, but you can overwrite the default value if you have the ssm:UpdateServiceSetting permission for the setting. Use the GetServiceSetting API action to view the current value. Or, use the ResetServiceSetting to change the value back to the original value defined by the AWS service team. Update the service setting for the account. 
    */
   updateServiceSetting(callback?: (err: AWSError, data: SSM.Types.UpdateServiceSettingResult) => void): Request<SSM.Types.UpdateServiceSettingResult, AWSError>;
+  /**
+   * Waits for the commandExecuted state by periodically calling the underlying SSM.getCommandInvocationoperation every 5 seconds (at most 20 times).
+   */
+  waitFor(state: "commandExecuted", params: SSM.Types.GetCommandInvocationRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: SSM.Types.GetCommandInvocationResult) => void): Request<SSM.Types.GetCommandInvocationResult, AWSError>;
+  /**
+   * Waits for the commandExecuted state by periodically calling the underlying SSM.getCommandInvocationoperation every 5 seconds (at most 20 times).
+   */
+  waitFor(state: "commandExecuted", callback?: (err: AWSError, data: SSM.Types.GetCommandInvocationResult) => void): Request<SSM.Types.GetCommandInvocationResult, AWSError>;
 }
 declare namespace SSM {
   export type Account = string;

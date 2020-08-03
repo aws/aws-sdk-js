@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.725.0-->
+<!--LATEST=2.726.0-->
 <!--ENTRYINSERT-->
+
+## 2.726.0
+* feature: SSM: Adds a waiter for CommandExecuted and paginators for various other APIs.
 
 ## 2.725.0
 * feature: Chime: This release increases the CreateMeetingWithAttendee max attendee limit to 10.

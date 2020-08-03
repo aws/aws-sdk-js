@@ -9,6 +9,7 @@ Object.defineProperty(apiLoader.services['ssm'], '2014-11-06', {
   get: function get() {
     var model = require('../apis/ssm-2014-11-06.min.json');
     model.paginators = require('../apis/ssm-2014-11-06.paginators.json').pagination;
+    model.waiters = require('../apis/ssm-2014-11-06.waiters2.json').waiters;
     return model;
   },
   enumerable: true,
