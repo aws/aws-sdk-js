@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.727.0-->
+<!--LATEST=2.727.1-->
 <!--ENTRYINSERT-->
+
+## 2.727.1
+* bugfix: docs: Add awsdocs-legal-zone-copyright div
 
 ## 2.727.0
 * feature: AppSync: AWS AppSync releases support for Direct Lambda Resolvers.
