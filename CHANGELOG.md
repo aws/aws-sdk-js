@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.726.0-->
+<!--LATEST=2.727.0-->
 <!--ENTRYINSERT-->
+
+## 2.727.0
+* feature: AppSync: AWS AppSync releases support for Direct Lambda Resolvers.
+* feature: TranscribeService: Amazon Transcribe now supports custom language models, which can improve transcription accuracy for your specific use case.
 
 ## 2.726.0
 * feature: SSM: Adds a waiter for CommandExecuted and paginators for various other APIs.
