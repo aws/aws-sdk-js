@@ -59,6 +59,7 @@ declare namespace LexRuntime {
   export type BlobStream = Buffer|Uint8Array|Blob|string|Readable;
   export type BotAlias = string;
   export type BotName = string;
+  export type BotVersion = string;
   export interface Button {
     /**
      * Text that is visible to the user on the button.
@@ -137,6 +138,7 @@ declare namespace LexRuntime {
   }
   export type DialogActionType = "ElicitIntent"|"ConfirmIntent"|"ElicitSlot"|"Close"|"Delegate"|string;
   export type DialogState = "ElicitIntent"|"ConfirmIntent"|"ElicitSlot"|"Fulfilled"|"ReadyForFulfillment"|"Failed"|string;
+  export type Double = number;
   export type FulfillmentState = "Fulfilled"|"Failed"|"ReadyForFulfillment"|string;
   export interface GenericAttachment {
     /**
@@ -197,6 +199,13 @@ declare namespace LexRuntime {
     dialogAction?: DialogAction;
   }
   export type HttpContentType = string;
+  export interface IntentConfidence {
+    /**
+     * A score that indicates how confident Amazon Lex is that an intent satisfies the user's intent. Ranges between 0.00 and 1.00. Higher scores indicate higher confidence.
+     */
+    score?: Double;
+  }
+  export type IntentList = PredictedIntent[];
   export type IntentName = string;
   export interface IntentSummary {
     /**
@@ -275,6 +284,14 @@ declare namespace LexRuntime {
      */
     intentName?: IntentName;
     /**
+     * Provides a score that indicates how confident Amazon Lex is that the returned intent is the one that matches the user's intent. The score is between 0.0 and 1.0. The score is a relative score, not an absolute score. The score may change based on improvements to the Amazon Lex NLU.
+     */
+    nluIntentConfidence?: String;
+    /**
+     * One to four alternative intents that may be applicable to the user's intent. Each alternative includes a score that indicates how confident Amazon Lex is that the intent matches the user's intent. The intents are sorted by the confidence score.
+     */
+    alternativeIntents?: String;
+    /**
      * Map of zero or more intent slots (name/value pairs) Amazon Lex detected from the user input during the conversation. The field is base-64 encoded. Amazon Lex creates a resolution list containing likely values for a slot. The value that it returns is determined by the valueSelectionStrategy selected when the slot type was created or updated. If valueSelectionStrategy is set to ORIGINAL_VALUE, the value provided by the user is returned, if the user value is similar to the slot values. If valueSelectionStrategy is set to TOP_RESOLUTION Amazon Lex returns the first value in the resolution list or, if there is no resolution list, null. If you don't specify a valueSelectionStrategy, the default is ORIGINAL_VALUE.
      */
     slots?: String;
@@ -283,7 +300,7 @@ declare namespace LexRuntime {
      */
     sessionAttributes?: String;
     /**
-     * The sentiment expressed in and utterance. When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis, this field contains the result of the analysis.
+     * The sentiment expressed in an utterance. When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis, this field contains the result of the analysis.
      */
     sentimentResponse?: String;
     /**
@@ -310,6 +327,10 @@ declare namespace LexRuntime {
      * The prompt (or statement) to convey to the user. This is based on the bot configuration and context. For example, if Amazon Lex did not understand the user intent, it sends the clarificationPrompt configured for the bot. If the intent requires confirmation before taking the fulfillment action, it sends the confirmationPrompt. Another example: Suppose that the Lambda function successfully fulfilled the intent, and sent a message to convey to the user. Then Amazon Lex sends that message in the response. 
      */
     audioStream?: BlobStream;
+    /**
+     * The version of the bot that responded to the conversation. You can use this information to help determine if one version of a bot is performing better than another version. If you have enabled the new natural language understanding (NLU) model, you can use this to determine if the improvement is due to changes to the bot or changes to the NLU. For more information about enabling the new NLU, see the enableModelImprovements parameter of the PutBot operation.
+     */
+    botVersion?: BotVersion;
     /**
      * The unique identifier for the session.
      */
@@ -347,6 +368,14 @@ declare namespace LexRuntime {
      */
     intentName?: IntentName;
     /**
+     * Provides a score that indicates how confident Amazon Lex is that the returned intent is the one that matches the user's intent. The score is between 0.0 and 1.0. For more information, see Confidence Scores. The score is a relative score, not an absolute score. The score may change based on improvements to the Amazon Lex natural language understanding (NLU) model.
+     */
+    nluIntentConfidence?: IntentConfidence;
+    /**
+     * One to four alternative intents that may be applicable to the user's intent. Each alternative includes a score that indicates how confident Amazon Lex is that the intent matches the user's intent. The intents are sorted by the confidence score.
+     */
+    alternativeIntents?: IntentList;
+    /**
      *  The intent slots that Amazon Lex detected from the user input in the conversation.  Amazon Lex creates a resolution list containing likely values for a slot. The value that it returns is determined by the valueSelectionStrategy selected when the slot type was created or updated. If valueSelectionStrategy is set to ORIGINAL_VALUE, the value provided by the user is returned, if the user value is similar to the slot values. If valueSelectionStrategy is set to TOP_RESOLUTION Amazon Lex returns the first value in the resolution list or, if there is no resolution list, null. If you don't specify a valueSelectionStrategy, the default is ORIGINAL_VALUE.
      */
     slots?: StringMap;
@@ -382,6 +411,24 @@ declare namespace LexRuntime {
      * A unique identifier for the session.
      */
     sessionId?: String;
+    /**
+     * The version of the bot that responded to the conversation. You can use this information to help determine if one version of a bot is performing better than another version. If you have enabled the new natural language understanding (NLU) model, you can use this to determine if the improvement is due to changes to the bot or changes to the NLU. For more information about enabling the new NLU, see the enableModelImprovements parameter of the PutBot operation.
+     */
+    botVersion?: BotVersion;
+  }
+  export interface PredictedIntent {
+    /**
+     * The name of the intent that Amazon Lex suggests satisfies the user's intent.
+     */
+    intentName?: IntentName;
+    /**
+     * Indicates how confident Amazon Lex is that an intent satisfies the user's intent.
+     */
+    nluIntentConfidence?: IntentConfidence;
+    /**
+     * The slot and slot values associated with the predicted intent.
+     */
+    slots?: StringMap;
   }
   export interface PutSessionRequest {
     /**

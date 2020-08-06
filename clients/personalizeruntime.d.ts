@@ -60,6 +60,10 @@ declare namespace PersonalizeRuntime {
      * A list of items in order of most likely interest to the user. The maximum is 500.
      */
     personalizedRanking?: ItemList;
+    /**
+     * The ID of the recommendation.
+     */
+    recommendationId?: RecommendationID;
   }
   export interface GetRecommendationsRequest {
     /**
@@ -92,6 +96,10 @@ declare namespace PersonalizeRuntime {
      * A list of recommendations sorted in ascending order by prediction score. There can be a maximum of 500 items in the list.
      */
     itemList?: ItemList;
+    /**
+     * The ID of the recommendation.
+     */
+    recommendationId?: RecommendationID;
   }
   export type InputList = ItemID[];
   export type ItemID = string;
@@ -107,6 +115,7 @@ declare namespace PersonalizeRuntime {
      */
     score?: Score;
   }
+  export type RecommendationID = string;
   export type Score = number;
   export type UserID = string;
   /**

@@ -220,6 +220,12 @@
     "BotName": {
       "type": "string"
     },
+    "BotVersion": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "[0-9]+|\\$LATEST"
+    },
     "Button": {
       "type": "structure",
       "required": [
@@ -369,6 +375,9 @@
         "Failed"
       ]
     },
+    "Double": {
+      "type": "double"
+    },
     "FulfillmentState": {
       "type": "string",
       "enum": [
@@ -460,6 +469,23 @@
     },
     "HttpContentType": {
       "type": "string"
+    },
+    "IntentConfidence": {
+      "type": "structure",
+      "members": {
+        "score": {
+          "shape": "Double",
+          "documentation": "<p>A score that indicates how confident Amazon Lex is that an intent satisfies the user's intent. Ranges between 0.00 and 1.00. Higher scores indicate higher confidence.</p>"
+        }
+      },
+      "documentation": "<p>Provides a score that indicates the confidence that Amazon Lex has that an intent is the one that satisfies the user's intent.</p>"
+    },
+    "IntentList": {
+      "type": "list",
+      "member": {
+        "shape": "PredictedIntent"
+      },
+      "max": 4
     },
     "IntentName": {
       "type": "string"
@@ -600,6 +626,20 @@
           "location": "header",
           "locationName": "x-amz-lex-intent-name"
         },
+        "nluIntentConfidence": {
+          "shape": "String",
+          "documentation": "<p>Provides a score that indicates how confident Amazon Lex is that the returned intent is the one that matches the user's intent. The score is between 0.0 and 1.0.</p> <p>The score is a relative score, not an absolute score. The score may change based on improvements to the Amazon Lex NLU.</p>",
+          "jsonvalue": true,
+          "location": "header",
+          "locationName": "x-amz-lex-nlu-intent-confidence"
+        },
+        "alternativeIntents": {
+          "shape": "String",
+          "documentation": "<p>One to four alternative intents that may be applicable to the user's intent.</p> <p>Each alternative includes a score that indicates how confident Amazon Lex is that the intent matches the user's intent. The intents are sorted by the confidence score.</p>",
+          "jsonvalue": true,
+          "location": "header",
+          "locationName": "x-amz-lex-alternative-intents"
+        },
         "slots": {
           "shape": "String",
           "documentation": "<p>Map of zero or more intent slots (name/value pairs) Amazon Lex detected from the user input during the conversation. The field is base-64 encoded.</p> <p>Amazon Lex creates a resolution list containing likely values for a slot. The value that it returns is determined by the <code>valueSelectionStrategy</code> selected when the slot type was created or updated. If <code>valueSelectionStrategy</code> is set to <code>ORIGINAL_VALUE</code>, the value provided by the user is returned, if the user value is similar to the slot values. If <code>valueSelectionStrategy</code> is set to <code>TOP_RESOLUTION</code> Amazon Lex returns the first value in the resolution list or, if there is no resolution list, null. If you don't specify a <code>valueSelectionStrategy</code>, the default is <code>ORIGINAL_VALUE</code>.</p>",
@@ -616,7 +656,7 @@
         },
         "sentimentResponse": {
           "shape": "String",
-          "documentation": "<p>The sentiment expressed in and utterance.</p> <p>When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis, this field contains the result of the analysis.</p>",
+          "documentation": "<p>The sentiment expressed in an utterance.</p> <p>When the bot is configured to send utterances to Amazon Comprehend for sentiment analysis, this field contains the result of the analysis.</p>",
           "location": "header",
           "locationName": "x-amz-lex-sentiment"
         },
@@ -653,6 +693,12 @@
         "audioStream": {
           "shape": "BlobStream",
           "documentation": "<p>The prompt (or statement) to convey to the user. This is based on the bot configuration and context. For example, if Amazon Lex did not understand the user intent, it sends the <code>clarificationPrompt</code> configured for the bot. If the intent requires confirmation before taking the fulfillment action, it sends the <code>confirmationPrompt</code>. Another example: Suppose that the Lambda function successfully fulfilled the intent, and sent a message to convey to the user. Then Amazon Lex sends that message in the response. </p>"
+        },
+        "botVersion": {
+          "shape": "BotVersion",
+          "documentation": "<p>The version of the bot that responded to the conversation. You can use this information to help determine if one version of a bot is performing better than another version.</p> <p>If you have enabled the new natural language understanding (NLU) model, you can use this to determine if the improvement is due to changes to the bot or changes to the NLU.</p> <p>For more information about enabling the new NLU, see the <a href=\"https://docs.aws.amazon.com/lex/latest/dg/API_PutBot.html#lex-PutBot-request-enableModelImprovements\">enableModelImprovements</a> parameter of the <code>PutBot</code> operation.</p>",
+          "location": "header",
+          "locationName": "x-amz-lex-bot-version"
         },
         "sessionId": {
           "shape": "String",
@@ -711,6 +757,14 @@
           "shape": "IntentName",
           "documentation": "<p>The current user intent that Amazon Lex is aware of.</p>"
         },
+        "nluIntentConfidence": {
+          "shape": "IntentConfidence",
+          "documentation": "<p>Provides a score that indicates how confident Amazon Lex is that the returned intent is the one that matches the user's intent. The score is between 0.0 and 1.0. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/confidence-scores.html\">Confidence Scores</a>.</p> <p>The score is a relative score, not an absolute score. The score may change based on improvements to the Amazon Lex natural language understanding (NLU) model.</p>"
+        },
+        "alternativeIntents": {
+          "shape": "IntentList",
+          "documentation": "<p>One to four alternative intents that may be applicable to the user's intent.</p> <p>Each alternative includes a score that indicates how confident Amazon Lex is that the intent matches the user's intent. The intents are sorted by the confidence score.</p>"
+        },
         "slots": {
           "shape": "StringMap",
           "documentation": "<p> The intent slots that Amazon Lex detected from the user input in the conversation. </p> <p>Amazon Lex creates a resolution list containing likely values for a slot. The value that it returns is determined by the <code>valueSelectionStrategy</code> selected when the slot type was created or updated. If <code>valueSelectionStrategy</code> is set to <code>ORIGINAL_VALUE</code>, the value provided by the user is returned, if the user value is similar to the slot values. If <code>valueSelectionStrategy</code> is set to <code>TOP_RESOLUTION</code> Amazon Lex returns the first value in the resolution list or, if there is no resolution list, null. If you don't specify a <code>valueSelectionStrategy</code>, the default is <code>ORIGINAL_VALUE</code>.</p>"
@@ -746,8 +800,30 @@
         "sessionId": {
           "shape": "String",
           "documentation": "<p>A unique identifier for the session.</p>"
+        },
+        "botVersion": {
+          "shape": "BotVersion",
+          "documentation": "<p>The version of the bot that responded to the conversation. You can use this information to help determine if one version of a bot is performing better than another version.</p> <p>If you have enabled the new natural language understanding (NLU) model, you can use this to determine if the improvement is due to changes to the bot or changes to the NLU.</p> <p>For more information about enabling the new NLU, see the <a href=\"https://docs.aws.amazon.com/lex/latest/dg/API_PutBot.html#lex-PutBot-request-enableModelImprovements\">enableModelImprovements</a> parameter of the <code>PutBot</code> operation.</p>"
         }
       }
+    },
+    "PredictedIntent": {
+      "type": "structure",
+      "members": {
+        "intentName": {
+          "shape": "IntentName",
+          "documentation": "<p>The name of the intent that Amazon Lex suggests satisfies the user's intent.</p>"
+        },
+        "nluIntentConfidence": {
+          "shape": "IntentConfidence",
+          "documentation": "<p>Indicates how confident Amazon Lex is that an intent satisfies the user's intent.</p>"
+        },
+        "slots": {
+          "shape": "StringMap",
+          "documentation": "<p>The slot and slot values associated with the predicted intent.</p>"
+        }
+      },
+      "documentation": "<p>An intent that Amazon Lex suggests satisfies the user's intent. Includes the name of the intent, the confidence that Amazon Lex has that the user's intent is satisfied, and the slots defined for the intent.</p>"
     },
     "PutSessionRequest": {
       "type": "structure",

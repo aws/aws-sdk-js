@@ -61,11 +61,11 @@ declare class EC2 extends Service {
    */
   advertiseByoipCidr(callback?: (err: AWSError, data: EC2.Types.AdvertiseByoipCidrResult) => void): Request<EC2.Types.AdvertiseByoipCidrResult, AWSError>;
   /**
-   * Allocates an Elastic IP address to your AWS account. After you allocate the Elastic IP address you can associate it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address pool and can be allocated to a different AWS account. You can allocate an Elastic IP address from an address pool owned by AWS or from an address pool created from a public IPv4 address range that you have brought to AWS for use with your AWS resources using bring your own IP addresses (BYOIP). For more information, see Bring Your Own IP Addresses (BYOIP) in the Amazon Elastic Compute Cloud User Guide. [EC2-VPC] If you release an Elastic IP address, you might be able to recover it. You cannot recover an Elastic IP address that you released after it is allocated to another AWS account. You cannot recover an Elastic IP address for EC2-Classic. To attempt to recover an Elastic IP address that you released, specify it in this operation. An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per Region and 5 Elastic IP addresses for EC2-VPC per Region. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide.
+   * Allocates an Elastic IP address to your AWS account. After you allocate the Elastic IP address you can associate it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address pool and can be allocated to a different AWS account. You can allocate an Elastic IP address from an address pool owned by AWS or from an address pool created from a public IPv4 address range that you have brought to AWS for use with your AWS resources using bring your own IP addresses (BYOIP). For more information, see Bring Your Own IP Addresses (BYOIP) in the Amazon Elastic Compute Cloud User Guide. [EC2-VPC] If you release an Elastic IP address, you might be able to recover it. You cannot recover an Elastic IP address that you released after it is allocated to another AWS account. You cannot recover an Elastic IP address for EC2-Classic. To attempt to recover an Elastic IP address that you released, specify it in this operation. An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per Region and 5 Elastic IP addresses for EC2-VPC per Region. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. You can allocate a carrier IP address which is a public IP address from a telecommunication carrier, to a network interface which resides in a subnet in a Wavelength Zone (for example an EC2 instance). 
    */
   allocateAddress(params: EC2.Types.AllocateAddressRequest, callback?: (err: AWSError, data: EC2.Types.AllocateAddressResult) => void): Request<EC2.Types.AllocateAddressResult, AWSError>;
   /**
-   * Allocates an Elastic IP address to your AWS account. After you allocate the Elastic IP address you can associate it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address pool and can be allocated to a different AWS account. You can allocate an Elastic IP address from an address pool owned by AWS or from an address pool created from a public IPv4 address range that you have brought to AWS for use with your AWS resources using bring your own IP addresses (BYOIP). For more information, see Bring Your Own IP Addresses (BYOIP) in the Amazon Elastic Compute Cloud User Guide. [EC2-VPC] If you release an Elastic IP address, you might be able to recover it. You cannot recover an Elastic IP address that you released after it is allocated to another AWS account. You cannot recover an Elastic IP address for EC2-Classic. To attempt to recover an Elastic IP address that you released, specify it in this operation. An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per Region and 5 Elastic IP addresses for EC2-VPC per Region. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide.
+   * Allocates an Elastic IP address to your AWS account. After you allocate the Elastic IP address you can associate it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address pool and can be allocated to a different AWS account. You can allocate an Elastic IP address from an address pool owned by AWS or from an address pool created from a public IPv4 address range that you have brought to AWS for use with your AWS resources using bring your own IP addresses (BYOIP). For more information, see Bring Your Own IP Addresses (BYOIP) in the Amazon Elastic Compute Cloud User Guide. [EC2-VPC] If you release an Elastic IP address, you might be able to recover it. You cannot recover an Elastic IP address that you released after it is allocated to another AWS account. You cannot recover an Elastic IP address for EC2-Classic. To attempt to recover an Elastic IP address that you released, specify it in this operation. An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per Region and 5 Elastic IP addresses for EC2-VPC per Region. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. You can allocate a carrier IP address which is a public IP address from a telecommunication carrier, to a network interface which resides in a subnet in a Wavelength Zone (for example an EC2 instance). 
    */
   allocateAddress(callback?: (err: AWSError, data: EC2.Types.AllocateAddressResult) => void): Request<EC2.Types.AllocateAddressResult, AWSError>;
   /**
@@ -101,11 +101,11 @@ declare class EC2 extends Service {
    */
   assignPrivateIpAddresses(callback?: (err: AWSError, data: EC2.Types.AssignPrivateIpAddressesResult) => void): Request<EC2.Types.AssignPrivateIpAddressesResult, AWSError>;
   /**
-   * Associates an Elastic IP address with an instance or a network interface. Before you can use an Elastic IP address, you must allocate it to your account. An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. [EC2-Classic, VPC in an EC2-VPC-only account] If the Elastic IP address is already associated with a different instance, it is disassociated from that instance and associated with the specified instance. If you associate an Elastic IP address with an instance that has an existing Elastic IP address, the existing address is disassociated from the instance, but remains allocated to your account. [VPC in an EC2-Classic account] If you don't specify a private IP address, the Elastic IP address is associated with the primary IP address. If the Elastic IP address is already associated with a different instance or a network interface, you get an error unless you allow reassociation. You cannot associate an Elastic IP address with an instance or network interface that has an existing Elastic IP address. You cannot associate an Elastic IP address with an interface in a different network border group.  This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error, and you may be charged for each time the Elastic IP address is remapped to the same instance. For more information, see the Elastic IP Addresses section of Amazon EC2 Pricing. 
+   * Associates an Elastic IP address, or carrier IP address (for instances that are in subnets in Wavelength Zones) with an instance or a network interface. Before you can use an Elastic IP address, you must allocate it to your account. An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. [EC2-Classic, VPC in an EC2-VPC-only account] If the Elastic IP address is already associated with a different instance, it is disassociated from that instance and associated with the specified instance. If you associate an Elastic IP address with an instance that has an existing Elastic IP address, the existing address is disassociated from the instance, but remains allocated to your account. [VPC in an EC2-Classic account] If you don't specify a private IP address, the Elastic IP address is associated with the primary IP address. If the Elastic IP address is already associated with a different instance or a network interface, you get an error unless you allow reassociation. You cannot associate an Elastic IP address with an instance or network interface that has an existing Elastic IP address. [Subnets in Wavelength Zones] You can associate an IP address from the telecommunication carrier to the instance or network interface.  You cannot associate an Elastic IP address with an interface in a different network border group.  This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error, and you may be charged for each time the Elastic IP address is remapped to the same instance. For more information, see the Elastic IP Addresses section of Amazon EC2 Pricing. 
    */
   associateAddress(params: EC2.Types.AssociateAddressRequest, callback?: (err: AWSError, data: EC2.Types.AssociateAddressResult) => void): Request<EC2.Types.AssociateAddressResult, AWSError>;
   /**
-   * Associates an Elastic IP address with an instance or a network interface. Before you can use an Elastic IP address, you must allocate it to your account. An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. [EC2-Classic, VPC in an EC2-VPC-only account] If the Elastic IP address is already associated with a different instance, it is disassociated from that instance and associated with the specified instance. If you associate an Elastic IP address with an instance that has an existing Elastic IP address, the existing address is disassociated from the instance, but remains allocated to your account. [VPC in an EC2-Classic account] If you don't specify a private IP address, the Elastic IP address is associated with the primary IP address. If the Elastic IP address is already associated with a different instance or a network interface, you get an error unless you allow reassociation. You cannot associate an Elastic IP address with an instance or network interface that has an existing Elastic IP address. You cannot associate an Elastic IP address with an interface in a different network border group.  This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error, and you may be charged for each time the Elastic IP address is remapped to the same instance. For more information, see the Elastic IP Addresses section of Amazon EC2 Pricing. 
+   * Associates an Elastic IP address, or carrier IP address (for instances that are in subnets in Wavelength Zones) with an instance or a network interface. Before you can use an Elastic IP address, you must allocate it to your account. An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. [EC2-Classic, VPC in an EC2-VPC-only account] If the Elastic IP address is already associated with a different instance, it is disassociated from that instance and associated with the specified instance. If you associate an Elastic IP address with an instance that has an existing Elastic IP address, the existing address is disassociated from the instance, but remains allocated to your account. [VPC in an EC2-Classic account] If you don't specify a private IP address, the Elastic IP address is associated with the primary IP address. If the Elastic IP address is already associated with a different instance or a network interface, you get an error unless you allow reassociation. You cannot associate an Elastic IP address with an instance or network interface that has an existing Elastic IP address. [Subnets in Wavelength Zones] You can associate an IP address from the telecommunication carrier to the instance or network interface.  You cannot associate an Elastic IP address with an interface in a different network border group.  This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error, and you may be charged for each time the Elastic IP address is remapped to the same instance. For more information, see the Elastic IP Addresses section of Amazon EC2 Pricing. 
    */
   associateAddress(callback?: (err: AWSError, data: EC2.Types.AssociateAddressResult) => void): Request<EC2.Types.AssociateAddressResult, AWSError>;
   /**
@@ -348,6 +348,14 @@ declare class EC2 extends Service {
    * Creates a new Capacity Reservation with the specified attributes. Capacity Reservations enable you to reserve capacity for your Amazon EC2 instances in a specific Availability Zone for any duration. This gives you the flexibility to selectively add capacity reservations and still get the Regional RI discounts for that usage. By creating Capacity Reservations, you ensure that you always have access to Amazon EC2 capacity when you need it, for as long as you need it. For more information, see Capacity Reservations in the Amazon Elastic Compute Cloud User Guide. Your request to create a Capacity Reservation could fail if Amazon EC2 does not have sufficient capacity to fulfill the request. If your request fails due to Amazon EC2 capacity constraints, either try again at a later time, try in a different Availability Zone, or request a smaller capacity reservation. If your application is flexible across instance types and sizes, try to create a Capacity Reservation with different instance attributes. Your request could also fail if the requested quantity exceeds your On-Demand Instance limit for the selected instance type. If your request fails due to limit constraints, increase your On-Demand Instance limit for the required instance type and try again. For more information about increasing your instance limits, see Amazon EC2 Service Limits in the Amazon Elastic Compute Cloud User Guide.
    */
   createCapacityReservation(callback?: (err: AWSError, data: EC2.Types.CreateCapacityReservationResult) => void): Request<EC2.Types.CreateCapacityReservationResult, AWSError>;
+  /**
+   * Creates a carrier gateway. For more information about carrier gateways, see Carrier gateways in the AWS Wavelength Developer Guide.
+   */
+  createCarrierGateway(params: EC2.Types.CreateCarrierGatewayRequest, callback?: (err: AWSError, data: EC2.Types.CreateCarrierGatewayResult) => void): Request<EC2.Types.CreateCarrierGatewayResult, AWSError>;
+  /**
+   * Creates a carrier gateway. For more information about carrier gateways, see Carrier gateways in the AWS Wavelength Developer Guide.
+   */
+  createCarrierGateway(callback?: (err: AWSError, data: EC2.Types.CreateCarrierGatewayResult) => void): Request<EC2.Types.CreateCarrierGatewayResult, AWSError>;
   /**
    * Creates a Client VPN endpoint. A Client VPN endpoint is the resource you create and configure to enable and manage client VPN sessions. It is the destination endpoint at which all client VPN sessions are terminated.
    */
@@ -772,6 +780,14 @@ declare class EC2 extends Service {
    * Creates a virtual private gateway. A virtual private gateway is the endpoint on the VPC side of your VPN connection. You can create a virtual private gateway before creating the VPC itself. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
    */
   createVpnGateway(callback?: (err: AWSError, data: EC2.Types.CreateVpnGatewayResult) => void): Request<EC2.Types.CreateVpnGatewayResult, AWSError>;
+  /**
+   * Deletes a carrier gateway.  If you do not delete the route that contains the carrier gateway as the Target, the route is a blackhole route. For information about how to delete a route, see DeleteRoute. 
+   */
+  deleteCarrierGateway(params: EC2.Types.DeleteCarrierGatewayRequest, callback?: (err: AWSError, data: EC2.Types.DeleteCarrierGatewayResult) => void): Request<EC2.Types.DeleteCarrierGatewayResult, AWSError>;
+  /**
+   * Deletes a carrier gateway.  If you do not delete the route that contains the carrier gateway as the Target, the route is a blackhole route. For information about how to delete a route, see DeleteRoute. 
+   */
+  deleteCarrierGateway(callback?: (err: AWSError, data: EC2.Types.DeleteCarrierGatewayResult) => void): Request<EC2.Types.DeleteCarrierGatewayResult, AWSError>;
   /**
    * Deletes the specified Client VPN endpoint. You must disassociate all target networks before you can delete a Client VPN endpoint.
    */
@@ -1221,11 +1237,11 @@ declare class EC2 extends Service {
    */
   describeAggregateIdFormat(callback?: (err: AWSError, data: EC2.Types.DescribeAggregateIdFormatResult) => void): Request<EC2.Types.DescribeAggregateIdFormatResult, AWSError>;
   /**
-   * Describes the Availability Zones and Local Zones that are available to you. If there is an event impacting an Availability Zone or Local Zone, you can use this request to view the state and any provided messages for that Availability Zone or Local Zone. For more information about Availability Zones and Local Zones, see Regions and Availability Zones in the Amazon Elastic Compute Cloud User Guide.
+   * Describes the Availability Zones, Local Zones, and Wavelength Zones that are available to you. If there is an event impacting a zone, you can use this request to view the state and any provided messages for that zone. For more information about Availability Zones, Local Zones, and Wavelength Zones, see Regions, Zones and Outposts in the Amazon Elastic Compute Cloud User Guide.
    */
   describeAvailabilityZones(params: EC2.Types.DescribeAvailabilityZonesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeAvailabilityZonesResult) => void): Request<EC2.Types.DescribeAvailabilityZonesResult, AWSError>;
   /**
-   * Describes the Availability Zones and Local Zones that are available to you. If there is an event impacting an Availability Zone or Local Zone, you can use this request to view the state and any provided messages for that Availability Zone or Local Zone. For more information about Availability Zones and Local Zones, see Regions and Availability Zones in the Amazon Elastic Compute Cloud User Guide.
+   * Describes the Availability Zones, Local Zones, and Wavelength Zones that are available to you. If there is an event impacting a zone, you can use this request to view the state and any provided messages for that zone. For more information about Availability Zones, Local Zones, and Wavelength Zones, see Regions, Zones and Outposts in the Amazon Elastic Compute Cloud User Guide.
    */
   describeAvailabilityZones(callback?: (err: AWSError, data: EC2.Types.DescribeAvailabilityZonesResult) => void): Request<EC2.Types.DescribeAvailabilityZonesResult, AWSError>;
   /**
@@ -1252,6 +1268,14 @@ declare class EC2 extends Service {
    * Describes one or more of your Capacity Reservations. The results describe only the Capacity Reservations in the AWS Region that you're currently using.
    */
   describeCapacityReservations(callback?: (err: AWSError, data: EC2.Types.DescribeCapacityReservationsResult) => void): Request<EC2.Types.DescribeCapacityReservationsResult, AWSError>;
+  /**
+   * Describes one or more of your carrier gateways.
+   */
+  describeCarrierGateways(params: EC2.Types.DescribeCarrierGatewaysRequest, callback?: (err: AWSError, data: EC2.Types.DescribeCarrierGatewaysResult) => void): Request<EC2.Types.DescribeCarrierGatewaysResult, AWSError>;
+  /**
+   * Describes one or more of your carrier gateways.
+   */
+  describeCarrierGateways(callback?: (err: AWSError, data: EC2.Types.DescribeCarrierGatewaysResult) => void): Request<EC2.Types.DescribeCarrierGatewaysResult, AWSError>;
   /**
    * Describes one or more of your linked EC2-Classic instances. This request only returns information about EC2-Classic instances linked to a VPC through ClassicLink. You cannot use this request to return information about other instances.
    */
@@ -2549,11 +2573,11 @@ declare class EC2 extends Service {
    */
   importVolume(callback?: (err: AWSError, data: EC2.Types.ImportVolumeResult) => void): Request<EC2.Types.ImportVolumeResult, AWSError>;
   /**
-   * Enables or disables an Availability Zone group for your account. Use  DescribeAvailabilityZones to view the value for GroupName.
+   * Changes the opt-in status of the Local Zone and Wavelength Zone group for your account. Use  DescribeAvailabilityZones to view the value for GroupName.
    */
   modifyAvailabilityZoneGroup(params: EC2.Types.ModifyAvailabilityZoneGroupRequest, callback?: (err: AWSError, data: EC2.Types.ModifyAvailabilityZoneGroupResult) => void): Request<EC2.Types.ModifyAvailabilityZoneGroupResult, AWSError>;
   /**
-   * Enables or disables an Availability Zone group for your account. Use  DescribeAvailabilityZones to view the value for GroupName.
+   * Changes the opt-in status of the Local Zone and Wavelength Zone group for your account. Use  DescribeAvailabilityZones to view the value for GroupName.
    */
   modifyAvailabilityZoneGroup(callback?: (err: AWSError, data: EC2.Types.ModifyAvailabilityZoneGroupResult) => void): Request<EC2.Types.ModifyAvailabilityZoneGroupResult, AWSError>;
   /**
@@ -3739,7 +3763,7 @@ declare namespace EC2 {
      */
     PublicIpv4Pool?: String;
     /**
-     * The name of the location from which the IP address is advertised.
+     * The name of the unique set of Availability Zones, Local Zones, or Wavelength Zones from which AWS advertises IP addresses. 
      */
     NetworkBorderGroup?: String;
     /**
@@ -3750,6 +3774,10 @@ declare namespace EC2 {
      * The ID of the customer-owned address pool.
      */
     CustomerOwnedIpv4Pool?: String;
+    /**
+     * The carrier IP address associated. This option is only available for network interfaces which reside in a subnet in a Wavelength Zone (for example an EC2 instance). 
+     */
+    CarrierIp?: String;
   }
   export type AddressList = Address[];
   export interface AdvertiseByoipCidrRequest {
@@ -3783,7 +3811,7 @@ declare namespace EC2 {
      */
     PublicIpv4Pool?: String;
     /**
-     * The location from which the IP address is advertised. Use this parameter to limit the address to this location. A network border group is a unique set of Availability Zones or Local Zones from where AWS advertises IP addresses and limits the addresses to the group. IP addresses cannot move between network border groups. Use DescribeAvailabilityZones to view the network border groups.  You cannot use a network border group with EC2 Classic. If you attempt this operation on EC2 classic, you will receive an InvalidParameterCombination error. For more information, see Error Codes. 
+     *  A unique set of Availability Zones, Local Zones, or Wavelength Zones from which AWS advertises IP addresses. Use this parameter to limit the IP address to this location. IP addresses cannot move between network border groups. Use DescribeAvailabilityZones to view the network border groups.  You cannot use a network border group with EC2 Classic. If you attempt this operation on EC2 classic, you will receive an InvalidParameterCombination error. For more information, see Error Codes. 
      */
     NetworkBorderGroup?: String;
     /**
@@ -3809,7 +3837,7 @@ declare namespace EC2 {
      */
     PublicIpv4Pool?: String;
     /**
-     * The location from which the IP address is advertised.
+     * The set of Availability Zones, Local Zones, or Wavelength Zones from which AWS advertises IP addresses.
      */
     NetworkBorderGroup?: String;
     /**
@@ -3824,6 +3852,10 @@ declare namespace EC2 {
      * The ID of the customer-owned address pool.
      */
     CustomerOwnedIpv4Pool?: String;
+    /**
+     * The carrier IP address. This option is only available for network interfaces which reside in a subnet in a Wavelength Zone (for example an EC2 instance). 
+     */
+    CarrierIp?: String;
   }
   export interface AllocateHostsRequest {
     /**
@@ -4167,7 +4199,7 @@ declare namespace EC2 {
      */
     VpcId: VpcId;
     /**
-     * The name of the location from which we advertise the IPV6 CIDR block. Use this parameter to limit the CiDR block to this location.  You must set AmazonProvidedIpv6CidrBlock to true to use this parameter.  You can have one IPv6 CIDR block association per network border group.
+     * The name of the location from which we advertise the IPV6 CIDR block. Use this parameter to limit the CIDR block to this location.  You must set AmazonProvidedIpv6CidrBlock to true to use this parameter.  You can have one IPv6 CIDR block association per network border group.
      */
     Ipv6CidrBlockNetworkBorderGroup?: String;
     /**
@@ -4478,15 +4510,15 @@ declare namespace EC2 {
   export type AutoRecoveryFlag = boolean;
   export interface AvailabilityZone {
     /**
-     * The state of the Zone.
+     * The state of the Availability Zone, Local Zone, or Wavelength Zone.
      */
     State?: AvailabilityZoneState;
     /**
-     *  For Availability Zones, this parameter always has the value of opt-in-not-required. For Local Zones, this parameter is the opt in status. The possible values are opted-in, and not-opted-in.
+     * For Availability Zones, this parameter always has the value of opt-in-not-required. For Local Zones and Wavelength Zones, this parameter is the opt-in status. The possible values are opted-in, and not-opted-in.
      */
     OptInStatus?: AvailabilityZoneOptInStatus;
     /**
-     * Any messages about the Zone.
+     * Any messages about the Availability Zone, Local Zone, or Wavelength Zone.
      */
     Messages?: AvailabilityZoneMessageList;
     /**
@@ -4494,38 +4526,38 @@ declare namespace EC2 {
      */
     RegionName?: String;
     /**
-     * The name of the Zone.
+     * The name of the Availability Zone, Local Zone, or Wavelength Zone.
      */
     ZoneName?: String;
     /**
-     * The ID of the Zone.
+     * The ID of the Availability Zone, Local Zone, or Wavelength Zone.
      */
     ZoneId?: String;
     /**
-     *  For Availability Zones, this parameter has the same value as the Region name. For Local Zones, the name of the associated group, for example us-west-2-lax-1.
+     *  For Availability Zones, this parameter has the same value as the Region name. For Local Zones, the name of the associated group, for example us-west-2-lax-1. For Wavelength Zones, the name of the associated group, for example us-east-1-wl1-bos-wlz-1.
      */
     GroupName?: String;
     /**
-     * The name of the location from which the address is advertised.
+     * The name of the network border group.
      */
     NetworkBorderGroup?: String;
     /**
-     * The type of zone. The valid values are availability-zone and local-zone.
+     * The type of zone. The valid values are availability-zone, local-zone, and wavelength-zone.
      */
     ZoneType?: String;
     /**
-     * The name of the zone that handles some of the Local Zone control plane operations, such as API calls.
+     * The name of the zone that handles some of the Local Zone or Wavelength Zone control plane operations, such as API calls.
      */
     ParentZoneName?: String;
     /**
-     * The ID of the zone that handles some of the Local Zone control plane operations, such as API calls.
+     * The ID of the zone that handles some of the Local Zone or Wavelength Zone control plane operations, such as API calls.
      */
     ParentZoneId?: String;
   }
   export type AvailabilityZoneList = AvailabilityZone[];
   export interface AvailabilityZoneMessage {
     /**
-     * The message about the Zone.
+     * The message about the Availability Zone, Local Zone, or Wavelength Zone.
      */
     Message?: String;
   }
@@ -4989,6 +5021,33 @@ declare namespace EC2 {
     CapacityReservationResourceGroupArn?: String;
   }
   export type CapacityReservationTenancy = "default"|"dedicated"|string;
+  export interface CarrierGateway {
+    /**
+     * The ID of the carrier gateway.
+     */
+    CarrierGatewayId?: CarrierGatewayId;
+    /**
+     * The ID of the VPC associated with the carrier gateway.
+     */
+    VpcId?: VpcId;
+    /**
+     * The state of the carrier gateway.
+     */
+    State?: CarrierGatewayState;
+    /**
+     * The AWS account ID of the owner of the carrier gateway.
+     */
+    OwnerId?: String;
+    /**
+     * The tags assigned to the carrier gateway.
+     */
+    Tags?: TagList;
+  }
+  export type CarrierGatewayId = string;
+  export type CarrierGatewayIdSet = CarrierGatewayId[];
+  export type CarrierGatewayMaxResults = number;
+  export type CarrierGatewaySet = CarrierGateway[];
+  export type CarrierGatewayState = "pending"|"available"|"deleting"|"deleted"|string;
   export interface CertificateAuthentication {
     /**
      * The ARN of the client certificate. 
@@ -5713,6 +5772,30 @@ declare namespace EC2 {
      * Information about the Capacity Reservation.
      */
     CapacityReservation?: CapacityReservation;
+  }
+  export interface CreateCarrierGatewayRequest {
+    /**
+     * The ID of the VPC to associate with the carrier gateway.
+     */
+    VpcId: VpcId;
+    /**
+     * The tags to associate with the carrier gateway.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     */
+    ClientToken?: String;
+  }
+  export interface CreateCarrierGatewayResult {
+    /**
+     * Information about the carrier gateway.
+     */
+    CarrierGateway?: CarrierGateway;
   }
   export interface CreateClientVpnEndpointRequest {
     /**
@@ -6659,6 +6742,10 @@ declare namespace EC2 {
      */
     LocalGatewayId?: LocalGatewayId;
     /**
+     * The ID of the carrier gateway. You can only use this option when the VPC contains a subnet which is associated with a Wavelength Zone.
+     */
+    CarrierGatewayId?: CarrierGatewayId;
+    /**
      * The ID of a network interface.
      */
     NetworkInterfaceId?: NetworkInterfaceId;
@@ -7593,6 +7680,22 @@ declare namespace EC2 {
   export type DefaultRouteTablePropagationValue = "enable"|"disable"|string;
   export type DefaultTargetCapacityType = "spot"|"on-demand"|string;
   export type DefaultingDhcpOptionsId = string;
+  export interface DeleteCarrierGatewayRequest {
+    /**
+     * The ID of the carrier gateway.
+     */
+    CarrierGatewayId: CarrierGatewayId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DeleteCarrierGatewayResult {
+    /**
+     * Information about the carrier gateway.
+     */
+    CarrierGateway?: CarrierGateway;
+  }
   export interface DeleteClientVpnEndpointRequest {
     /**
      * The ID of the Client VPN to be deleted.
@@ -8518,7 +8621,7 @@ declare namespace EC2 {
   }
   export interface DescribeAddressesRequest {
     /**
-     * One or more filters. Filter names and values are case-sensitive.    allocation-id - [EC2-VPC] The allocation ID for the address.    association-id - [EC2-VPC] The association ID for the address.    domain - Indicates whether the address is for use in EC2-Classic (standard) or in a VPC (vpc).    instance-id - The ID of the instance the address is associated with, if any.    network-border-group - The location from where the IP address is advertised.    network-interface-id - [EC2-VPC] The ID of the network interface that the address is associated with, if any.    network-interface-owner-id - The AWS account ID of the owner.    private-ip-address - [EC2-VPC] The private IP address associated with the Elastic IP address.    public-ip - The Elastic IP address.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
+     * One or more filters. Filter names and values are case-sensitive.    allocation-id - [EC2-VPC] The allocation ID for the address.    association-id - [EC2-VPC] The association ID for the address.    domain - Indicates whether the address is for use in EC2-Classic (standard) or in a VPC (vpc).    instance-id - The ID of the instance the address is associated with, if any.    network-border-group - A unique set of Availability Zones, Local Zones, or Wavelength Zones from where AWS advertises IP addresses.     network-interface-id - [EC2-VPC] The ID of the network interface that the address is associated with, if any.    network-interface-owner-id - The AWS account ID of the owner.    private-ip-address - [EC2-VPC] The private IP address associated with the Elastic IP address.    public-ip - The Elastic IP address, or the carrier IP address.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
      */
     Filters?: FilterList;
     /**
@@ -8558,19 +8661,19 @@ declare namespace EC2 {
   }
   export interface DescribeAvailabilityZonesRequest {
     /**
-     * The filters.    group-name - For Availability Zones, use the Region name. For Local Zones, use the name of the group associated with the Local Zone (for example, us-west-2-lax-1).    message - The Zone message.    opt-in-status - The opt in status (opted-in, and not-opted-in | opt-in-not-required).   The ID of the zone that handles some of the Local Zone control plane operations, such as API calls.    region-name - The name of the Region for the Zone (for example, us-east-1).    state - The state of the Availability Zone or Local Zone (available | information | impaired | unavailable).    zone-id - The ID of the Availability Zone (for example, use1-az1) or the Local Zone (for example, use usw2-lax1-az1).    zone-type - The type of zone, for example, local-zone.    zone-name - The name of the Availability Zone (for example, us-east-1a) or the Local Zone (for example, use us-west-2-lax-1a).    zone-type - The type of zone, for example, local-zone.  
+     * The filters.    group-name - For Availability Zones, use the Region name. For Local Zones, use the name of the group associated with the Local Zone (for example, us-west-2-lax-1) For Wavelength Zones, use the name of the group associated with the Wavelength Zone (for example, us-east-1-wl1-bos-wlz-1).    message - The Zone message.    opt-in-status - The opt-in status (opted-in, and not-opted-in | opt-in-not-required).    parent-zoneID - The ID of the zone that handles some of the Local Zone and Wavelength Zone control plane operations, such as API calls.    parent-zoneName - The ID of the zone that handles some of the Local Zone and Wavelength Zone control plane operations, such as API calls.    region-name - The name of the Region for the Zone (for example, us-east-1).    state - The state of the Availability Zone, the Local Zone, or the Wavelength Zone (available | information | impaired | unavailable).    zone-id - The ID of the Availability Zone (for example, use1-az1), the Local Zone (for example, usw2-lax1-az1), or the Wavelength Zone (for example, us-east-1-wl1-bos-wlz-1).    zone-type - The type of zone, for example, local-zone.    zone-name - The name of the Availability Zone (for example, us-east-1a), the Local Zone (for example, us-west-2-lax-1a), or the Wavelength Zone (for example, us-east-1-wl1-bos-wlz-1).    zone-type - The type of zone, for example, local-zone.  
      */
     Filters?: FilterList;
     /**
-     * The names of the Zones.
+     * The names of the Availability Zones, Local Zones, and Wavelength Zones.
      */
     ZoneNames?: ZoneNameStringList;
     /**
-     * The IDs of the Zones.
+     * The IDs of the Availability Zones, Local Zones, and Wavelength Zones.
      */
     ZoneIds?: ZoneIdStringList;
     /**
-     * Include all Availability Zones and Local Zones regardless of your opt in status. If you do not use this parameter, the results include only the zones for the Regions where you have chosen the option to opt in.
+     * Include all Availability Zones, Local Zones, and Wavelength Zones regardless of your opt-in status. If you do not use this parameter, the results include only the zones for the Regions where you have chosen the option to opt in.
      */
     AllAvailabilityZones?: Boolean;
     /**
@@ -8580,7 +8683,7 @@ declare namespace EC2 {
   }
   export interface DescribeAvailabilityZonesResult {
     /**
-     * Information about the Zones.
+     * Information about the Availability Zones, Local Zones, and Wavelength Zones.
      */
     AvailabilityZones?: AvailabilityZoneList;
   }
@@ -8661,6 +8764,38 @@ declare namespace EC2 {
      * Information about the Capacity Reservations.
      */
     CapacityReservations?: CapacityReservationSet;
+  }
+  export interface DescribeCarrierGatewaysRequest {
+    /**
+     * One or more carrier gateway IDs.
+     */
+    CarrierGatewayIds?: CarrierGatewayIdSet;
+    /**
+     * One or more filters.    carrier-gateway-id - The ID of the carrier gateway.    state - The state of the carrier gateway (pending | failed | available | deleting | deleted).    owner-id - The AWS account ID of the owner of the carrier gateway.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC associated with the carrier gateway.  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: CarrierGatewayMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DescribeCarrierGatewaysResult {
+    /**
+     * Information about the carrier gateway.
+     */
+    CarrierGateways?: CarrierGatewaySet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
   }
   export type DescribeClassicLinkInstancesMaxResults = number;
   export interface DescribeClassicLinkInstancesRequest {
@@ -12597,7 +12732,7 @@ declare namespace EC2 {
      */
     DeleteOnTermination?: Boolean;
     /**
-     * The number of I/O operations per second (IOPS) that the volume supports. For io1 volumes, this represents the number of IOPS that are provisioned for the volume. For gp2 volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information, see Amazon EBS volume types in the Amazon Elastic Compute Cloud User Guide. Constraints: Range is 100-16,000 IOPS for gp2 volumes and 100 to 64,000IOPS for io1 volumes in most Regions. Maximum io1 IOPS of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Condition: This parameter is required for requests to create io1 volumes; it is not used in requests to create gp2, st1, sc1, or standard volumes.
+     * The number of I/O operations per second (IOPS) that the volume supports. For io1 volumes, this represents the number of IOPS that are provisioned for the volume. For gp2 volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information, see Amazon EBS volume types in the Amazon Elastic Compute Cloud User Guide. Constraints: Range is 100-16,000 IOPS for gp2 volumes and 100 to 64,000 IOPS for io1 volumes in most Regions. Maximum io1 IOPS of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Condition: This parameter is required for requests to create io1 volumes; it is not used in requests to create gp2, st1, sc1, or standard volumes.
      */
     Iops?: Integer;
     /**
@@ -15427,7 +15562,7 @@ declare namespace EC2 {
      */
     PublicDnsName?: String;
     /**
-     * The public IPv4 address assigned to the instance, if applicable.
+     * The public IPv4 address, or the Carrier IP address assigned to the instance, if applicable. A Carrier IP address only applies to an instance launched in a subnet associated with a Wavelength Zone.
      */
     PublicIpAddress?: String;
     /**
@@ -15867,6 +16002,10 @@ declare namespace EC2 {
   }
   export interface InstanceNetworkInterfaceAssociation {
     /**
+     * The carrier IP address associated with the network interface.
+     */
+    CarrierIp?: String;
+    /**
      * The ID of the owner of the Elastic IP address.
      */
     IpOwnerId?: String;
@@ -15951,6 +16090,10 @@ declare namespace EC2 {
      * The ID of the subnet associated with the network interface. Applies only if creating a network interface when launching an instance.
      */
     SubnetId?: String;
+    /**
+     * Indicates whether to assign a carrier IP address to the network interface. You can only assign a carrier IP address to a network interface that is in a subnet in a Wavelength Zone. For more information about carrier IP addresses, see Carrier IP addresses in the AWS Wavelength Developer Guide.
+     */
+    AssociateCarrierIpAddress?: Boolean;
     /**
      * The type of network interface. To create an Elastic Fabric Adapter (EFA), specify efa. For more information, see Elastic Fabric Adapter in the Amazon Elastic Compute Cloud User Guide. If you are not creating an EFA, specify interface or omit this parameter. Valid values: interface | efa 
      */
@@ -16816,6 +16959,10 @@ declare namespace EC2 {
   export type LaunchTemplateInstanceMetadataOptionsState = "pending"|"applied"|string;
   export interface LaunchTemplateInstanceNetworkInterfaceSpecification {
     /**
+     * Indicates whether to associate a Carrier IP address with eth0 for a new network interface. Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface. For more information about Carrier IP addresses, see Carrier IP addresses in the AWS Wavelength Developer Guide.
+     */
+    AssociateCarrierIpAddress?: Boolean;
+    /**
      * Indicates whether to associate a public IPv4 address with eth0 for a new network interface.
      */
     AssociatePublicIpAddress?: Boolean;
@@ -16870,6 +17017,10 @@ declare namespace EC2 {
   }
   export type LaunchTemplateInstanceNetworkInterfaceSpecificationList = LaunchTemplateInstanceNetworkInterfaceSpecification[];
   export interface LaunchTemplateInstanceNetworkInterfaceSpecificationRequest {
+    /**
+     * Associates a Carrier IP address with eth0 for a new network interface. Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface. For more information about Carrier IP addresses, see Carrier IP addresses in the AWS Wavelength Developer Guide.
+     */
+    AssociateCarrierIpAddress?: Boolean;
     /**
      * Associates a public IPv4 address with eth0 for a new network interface.
      */
@@ -17479,11 +17630,11 @@ declare namespace EC2 {
   export type MillisecondDateTime = Date;
   export interface ModifyAvailabilityZoneGroupRequest {
     /**
-     * The name of the Availability Zone Group.
+     * The name of the Availability Zone group, Local Zone group, or Wavelength Zone group.
      */
     GroupName: String;
     /**
-     * Indicates whether to enable or disable membership. The valid values are opted-in. You must contact AWS Support to disable an Availability Zone group.
+     * Indicates whether you are opted in to the Local Zone group or Wavelength Zone group. The only valid value is opted-in. You must contact AWS Support to opt out of a Local Zone group, or Wavelength Zone group.
      */
     OptInStatus: ModifyAvailabilityZoneOptInStatus;
     /**
@@ -19031,9 +19182,13 @@ declare namespace EC2 {
      */
     PublicDnsName?: String;
     /**
-     * The address of the Elastic IP address bound to the network interface.
+     * The address of the Elastic IP address or Carrier IP address bound to the network interface.
      */
     PublicIp?: String;
+    /**
+     * The carrier IP address associated with the network interface. This option is only available when the network interface is in a subnet which is associated with a Wavelength Zone.
+     */
+    CarrierIp?: String;
   }
   export interface NetworkInterfaceAttachment {
     /**
@@ -20148,7 +20303,7 @@ declare namespace EC2 {
      */
     PublicIp?: String;
     /**
-     * The location that the IP address is released from. If you provide an incorrect network border group, you will receive an InvalidAddress.NotFound error. For more information, see Error Codes.  You cannot use a network border group with EC2 Classic. If you attempt this operation on EC2 classic, you will receive an InvalidParameterCombination error. For more information, see Error Codes. 
+     * The set of Availability Zones, Local Zones, or Wavelength Zones from which AWS advertises IP addresses. If you provide an incorrect network border group, you will receive an InvalidAddress.NotFound error. For more information, see Error Codes.  You cannot use a network border group with EC2 Classic. If you attempt this operation on EC2 classic, you will receive an InvalidParameterCombination error. For more information, see Error Codes. 
      */
     NetworkBorderGroup?: String;
     /**
@@ -20302,6 +20457,10 @@ declare namespace EC2 {
      * The ID of the local gateway.
      */
     LocalGatewayId?: LocalGatewayId;
+    /**
+     * [IPv4 traffic only] The ID of a carrier gateway.
+     */
+    CarrierGatewayId?: CarrierGatewayId;
     /**
      * The ID of a network interface.
      */
@@ -21389,6 +21548,10 @@ declare namespace EC2 {
      * The ID of the local gateway.
      */
     LocalGatewayId?: String;
+    /**
+     * The ID of the carrier gateway.
+     */
+    CarrierGatewayId?: CarrierGatewayId;
     /**
      * The ID of the network interface.
      */
@@ -24888,7 +25051,7 @@ declare namespace EC2 {
      */
     CidrBlock?: String;
     /**
-     * The ID of the set of DHCP options you've associated with the VPC (or default if the default options are associated with the VPC).
+     * The ID of the set of DHCP options you've associated with the VPC.
      */
     DhcpOptionsId?: String;
     /**
@@ -25106,7 +25269,7 @@ declare namespace EC2 {
      */
     Ipv6CidrBlockState?: VpcCidrBlockState;
     /**
-     * The name of the location from which we advertise the IPV6 CIDR block.
+     * The name of the unique set of Availability Zones, Local Zones, or Wavelength Zones from which AWS advertises IP addresses, for example, us-east-1-wl1-bos-wlz-1.
      */
     NetworkBorderGroup?: String;
     /**

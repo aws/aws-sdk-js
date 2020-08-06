@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.727.1-->
+<!--LATEST=2.728.0-->
 <!--ENTRYINSERT-->
+
+## 2.728.0
+* feature: EC2: This release supports Wavelength resources, including carrier gateways, and carrier IP addresses.
+* feature: LexModelBuildingService: Amazon Lex supports the option to enable accuracy improvements and specify an intent classification confidence score threshold.
+* feature: LexRuntime: Amazon Lex supports intent classification confidence scores along with a list of the top five intents.
+* feature: Personalize: Add 'exploration' functionality
+* feature: PersonalizeEvents: Adds support implicit and explicit impression input
+* feature: PersonalizeRuntime: Adds support for implicit impressions
 
 ## 2.727.1
 * bugfix: docs: Add awsdocs-legal-zone-copyright div

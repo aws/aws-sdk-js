@@ -478,6 +478,7 @@ declare namespace LexModelBuildingService {
      */
     messageVersion: MessageVersion;
   }
+  export type ConfidenceThreshold = number;
   export type ContentString = string;
   export type ContentType = "PlainText"|"SSML"|"CustomPayload"|string;
   export interface ConversationLogsRequest {
@@ -572,6 +573,10 @@ declare namespace LexModelBuildingService {
      * For each Amazon Lex bot created with the Amazon Lex Model Building Service, you must specify whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to the Children's Online Privacy Protection Act (COPPA) by specifying true or false in the childDirected field. By specifying true in the childDirected field, you confirm that your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. By specifying false in the childDirected field, you confirm that your use of Amazon Lex is not related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. You may not specify a default value for the childDirected field that does not accurately reflect whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. If your use of Amazon Lex relates to a website, program, or other application that is directed in whole or in part, to children under age 13, you must obtain any required verifiable parental consent under COPPA. For information regarding the use of Amazon Lex in connection with websites, programs, or other applications that are directed or targeted, in whole or in part, to children under age 13, see the Amazon Lex FAQ. 
      */
     childDirected?: Boolean;
+    /**
+     * Indicates whether the bot uses the new natural language understanding (NLU) model or the original NLU. True indicates that the bot is using the new model, otherwise, false.
+     */
+    enableModelImprovements?: Boolean;
     /**
      * Indicates whether utterances entered by the user should be sent to Amazon Comprehend for sentiment analysis.
      */
@@ -1003,6 +1008,14 @@ declare namespace LexModelBuildingService {
      * An array of intent objects. For more information, see PutBot.
      */
     intents?: IntentList;
+    /**
+     * Indicates whether the bot uses the new natural language understanding (NLU) model or the original NLU. True indicates that the bot is using the new model, otherwise, false.
+     */
+    enableModelImprovements?: Boolean;
+    /**
+     * The score that determines where Amazon Lex inserts the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents in a PostContent or PostText response. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they are configured for the bot.
+     */
+    nluIntentConfidenceThreshold?: ConfidenceThreshold;
     /**
      * The message Amazon Lex uses when it doesn't understand the user's request. For more information, see PutBot. 
      */
@@ -1748,6 +1761,14 @@ declare namespace LexModelBuildingService {
      */
     intents?: IntentList;
     /**
+     * Set to true to enable the use of a new natural language understanding (NLU) model. Using the new NLU may improve the performance of your bot.  When you set the enableModelImprovements parameter to true you can use the nluIntentConfidenceThreshold parameter to configure confidence scores. For more information, see Confidence Scores. You can only set the enableModelImprovements parameter in certain Regions. If you set the parameter to true, your bot will use the new NLU. If you set the parameter to false, your bot will continue to use the original NLU. If you set the parameter to false after setting it to true, your bot will return to the original NLU. The Regions where you can set the enableModelImprovements parameter to true are:   US East (N. Virginia) (us-east-1)   US West (Oregon) (us-west-2)   Asia Pacific (Sydney) (ap-southeast-2)   EU (Ireland) (eu-west-1)   In other Regions, the enableModelImprovements parameter is set to true by default. In these Regions setting the parameter to false throws a ValidationException exception.   Asia Pacific (Singapore) (ap-southeast-1)   Asia Pacific (Tokyo) (ap-northeast-1)   EU (Frankfurt) (eu-central-1)   EU (London) (eu-west-2)  
+     */
+    enableModelImprovements?: Boolean;
+    /**
+     * Determines the threshold where Amazon Lex will insert the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents in a PostContent or PostText response. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they are configured for the bot. You must set the enableModelImprovements parameter to true to use confidence scores. For example, suppose a bot is configured with the confidence threshold of 0.80 and the AMAZON.FallbackIntent. Amazon Lex returns three alternative intents with the following confidence scores: IntentA (0.70), IntentB (0.60), IntentC (0.50). The response from the PostText operation would be:   AMAZON.FallbackIntent   IntentA   IntentB   IntentC  
+     */
+    nluIntentConfidenceThreshold?: ConfidenceThreshold;
+    /**
      * When Amazon Lex doesn't understand the user's intent, it uses this message to get clarification. To specify how many times Amazon Lex should repeat the clarification prompt, use the maxAttempts field. If Amazon Lex still doesn't understand, it sends the message in the abortStatement field.  When you create a clarification prompt, make sure that it suggests the correct response from the user. for example, for a bot that orders pizza and drinks, you might create this clarification prompt: "What would you like to do? You can say 'Order a pizza' or 'Order a drink.'" If you have defined a fallback intent, it will be invoked if the clarification prompt is repeated the number of times defined in the maxAttempts field. For more information, see  AMAZON.FallbackIntent. If you don't define a clarification prompt, at runtime Amazon Lex will return a 400 Bad Request exception in three cases:    Follow-up prompt - When the user responds to a follow-up prompt but does not provide an intent. For example, in response to a follow-up prompt that says "Would you like anything else today?" the user says "Yes." Amazon Lex will return a 400 Bad Request exception because it does not have a clarification prompt to send to the user to get an intent.   Lambda function - When using a Lambda function, you return an ElicitIntent dialog type. Since Amazon Lex does not have a clarification prompt to get an intent from the user, it returns a 400 Bad Request exception.   PutSession operation - When using the PutSession operation, you send an ElicitIntent dialog type. Since Amazon Lex does not have a clarification prompt to get an intent from the user, it returns a 400 Bad Request exception.  
      */
     clarificationPrompt?: Prompt;
@@ -1805,6 +1826,14 @@ declare namespace LexModelBuildingService {
      * An array of Intent objects. For more information, see PutBot.
      */
     intents?: IntentList;
+    /**
+     * Indicates whether the bot uses the new natural language understanding (NLU) model or the original NLU. True indicates that the bot is using the new model, otherwise, false.
+     */
+    enableModelImprovements?: Boolean;
+    /**
+     * The score that determines where Amazon Lex inserts the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents in a PostContent or PostText response. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they are configured for the bot.
+     */
+    nluIntentConfidenceThreshold?: ConfidenceThreshold;
     /**
      *  The prompts that Amazon Lex uses when it doesn't understand the user's intent. For more information, see PutBot. 
      */

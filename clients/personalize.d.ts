@@ -44,11 +44,11 @@ declare class Personalize extends Service {
    */
   createDatasetGroup(callback?: (err: AWSError, data: Personalize.Types.CreateDatasetGroupResponse) => void): Request<Personalize.Types.CreateDatasetGroupResponse, AWSError>;
   /**
-   * Creates a job that imports training data from your data source (an Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon Personalize to import the training data, you must specify an AWS Identity and Access Management (IAM) role that has permission to read from the data source.  The dataset import job replaces any previous data in the dataset.   Status  A dataset import job can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   To get the status of the import job, call DescribeDatasetImportJob, providing the Amazon Resource Name (ARN) of the dataset import job. The dataset import is complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the job failed.  Importing takes time. You must wait until the status shows as ACTIVE before training a model using the dataset.   Related APIs     ListDatasetImportJobs     DescribeDatasetImportJob   
+   * Creates a job that imports training data from your data source (an Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon Personalize to import the training data, you must specify an AWS Identity and Access Management (IAM) role that has permission to read from the data source, as Amazon Personalize makes a copy of your data and processes it in an internal AWS system.  The dataset import job replaces any previous data in the dataset.   Status  A dataset import job can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   To get the status of the import job, call DescribeDatasetImportJob, providing the Amazon Resource Name (ARN) of the dataset import job. The dataset import is complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the job failed.  Importing takes time. You must wait until the status shows as ACTIVE before training a model using the dataset.   Related APIs     ListDatasetImportJobs     DescribeDatasetImportJob   
    */
   createDatasetImportJob(params: Personalize.Types.CreateDatasetImportJobRequest, callback?: (err: AWSError, data: Personalize.Types.CreateDatasetImportJobResponse) => void): Request<Personalize.Types.CreateDatasetImportJobResponse, AWSError>;
   /**
-   * Creates a job that imports training data from your data source (an Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon Personalize to import the training data, you must specify an AWS Identity and Access Management (IAM) role that has permission to read from the data source.  The dataset import job replaces any previous data in the dataset.   Status  A dataset import job can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   To get the status of the import job, call DescribeDatasetImportJob, providing the Amazon Resource Name (ARN) of the dataset import job. The dataset import is complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the job failed.  Importing takes time. You must wait until the status shows as ACTIVE before training a model using the dataset.   Related APIs     ListDatasetImportJobs     DescribeDatasetImportJob   
+   * Creates a job that imports training data from your data source (an Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon Personalize to import the training data, you must specify an AWS Identity and Access Management (IAM) role that has permission to read from the data source, as Amazon Personalize makes a copy of your data and processes it in an internal AWS system.  The dataset import job replaces any previous data in the dataset.   Status  A dataset import job can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   To get the status of the import job, call DescribeDatasetImportJob, providing the Amazon Resource Name (ARN) of the dataset import job. The dataset import is complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the job failed.  Importing takes time. You must wait until the status shows as ACTIVE before training a model using the dataset.   Related APIs     ListDatasetImportJobs     DescribeDatasetImportJob   
    */
   createDatasetImportJob(callback?: (err: AWSError, data: Personalize.Types.CreateDatasetImportJobResponse) => void): Request<Personalize.Types.CreateDatasetImportJobResponse, AWSError>;
   /**
@@ -463,6 +463,10 @@ declare namespace Personalize {
      */
     jobOutput?: BatchInferenceJobOutput;
     /**
+     * A string to string map of the configuration details of a batch inference job.
+     */
+    batchInferenceJobConfig?: BatchInferenceJobConfig;
+    /**
      * The ARN of the Amazon Identity and Access Management (IAM) role that requested the batch inference job.
      */
     roleArn?: RoleArn;
@@ -478,6 +482,12 @@ declare namespace Personalize {
      * The time at which the batch inference job was last updated.
      */
     lastUpdatedDateTime?: _Date;
+  }
+  export interface BatchInferenceJobConfig {
+    /**
+     * A string to string map specifying the inference hyperparameters you wish to use for hyperparameter optimization. See customizing-solution-config-hpo.
+     */
+    itemExplorationConfig?: HyperParameters;
   }
   export interface BatchInferenceJobInput {
     /**
@@ -541,6 +551,10 @@ declare namespace Personalize {
      */
     minProvisionedTPS?: TransactionsPerSecond;
     /**
+     * The configuration details of a campaign.
+     */
+    campaignConfig?: CampaignConfig;
+    /**
      * The status of the campaign. A campaign can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   DELETE PENDING &gt; DELETE IN_PROGRESS  
      */
     status?: Status;
@@ -557,6 +571,12 @@ declare namespace Personalize {
      */
     lastUpdatedDateTime?: _Date;
     latestCampaignUpdate?: CampaignUpdateSummary;
+  }
+  export interface CampaignConfig {
+    /**
+     * A string to string map specifying the inference hyperparameters you wish to use for hyperparameter optimization. See customizing-solution-config-hpo.
+     */
+    itemExplorationConfig?: HyperParameters;
   }
   export interface CampaignSummary {
     /**
@@ -593,6 +613,7 @@ declare namespace Personalize {
      * Specifies the requested minimum provisioned transactions (recommendations) per second that Amazon Personalize will support.
      */
     minProvisionedTPS?: TransactionsPerSecond;
+    campaignConfig?: CampaignConfig;
     /**
      * The status of the campaign update. A campaign update can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   DELETE PENDING &gt; DELETE IN_PROGRESS  
      */
@@ -670,6 +691,10 @@ declare namespace Personalize {
      * The ARN of the Amazon Identity and Access Management role that has permissions to read and write to your input and out Amazon S3 buckets respectively.
      */
     roleArn: RoleArn;
+    /**
+     * The configuration details of a batch inference job.
+     */
+    batchInferenceJobConfig?: BatchInferenceJobConfig;
   }
   export interface CreateBatchInferenceJobResponse {
     /**
@@ -690,6 +715,10 @@ declare namespace Personalize {
      * Specifies the requested minimum provisioned transactions (recommendations) per second that Amazon Personalize will support.
      */
     minProvisionedTPS: TransactionsPerSecond;
+    /**
+     * The configuration details of a campaign.
+     */
+    campaignConfig?: CampaignConfig;
   }
   export interface CreateCampaignResponse {
     /**
@@ -2173,6 +2202,10 @@ declare namespace Personalize {
      * Specifies the requested minimum provisioned transactions (recommendations) per second that Amazon Personalize will support.
      */
     minProvisionedTPS?: TransactionsPerSecond;
+    /**
+     * The configuration details of a campaign.
+     */
+    campaignConfig?: CampaignConfig;
   }
   export interface UpdateCampaignResponse {
     /**
