@@ -4993,7 +4993,7 @@
         },
         "ConnectionType": {
           "shape": "ConnectionType",
-          "documentation": "<p>The type of the connection. Currently, these types are supported:</p> <ul> <li> <p> <code>JDBC</code> - Designates a connection to a database through Java Database Connectivity (JDBC).</p> </li> <li> <p> <code>KAFKA</code> - Designates a connection to an Apache Kafka streaming platform.</p> </li> <li> <p> <code>MONGODB</code> - Designates a connection to a MongoDB document database.</p> </li> </ul> <p>SFTP is not supported.</p>"
+          "documentation": "<p>The type of the connection. Currently, these types are supported:</p> <ul> <li> <p> <code>JDBC</code> - Designates a connection to a database through Java Database Connectivity (JDBC).</p> </li> <li> <p> <code>KAFKA</code> - Designates a connection to an Apache Kafka streaming platform.</p> </li> <li> <p> <code>MONGODB</code> - Designates a connection to a MongoDB document database.</p> </li> <li> <p> <code>NETWORK</code> - Designates a network connection to a data source within an Amazon Virtual Private Cloud environment (Amazon VPC).</p> </li> </ul> <p>SFTP is not supported.</p>"
         },
         "MatchCriteria": {
           "shape": "MatchCriteria",
@@ -5079,7 +5079,8 @@
         "JDBC",
         "SFTP",
         "MONGODB",
-        "KAFKA"
+        "KAFKA",
+        "NETWORK"
       ]
     },
     "ConnectionsList": {
@@ -10481,6 +10482,10 @@
         "Exclusions": {
           "shape": "PathList",
           "documentation": "<p>A list of glob patterns used to exclude from the crawl. For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html\">Catalog Tables with a Crawler</a>.</p>"
+        },
+        "ConnectionName": {
+          "shape": "ConnectionName",
+          "documentation": "<p>The name of a connection which allows a job or crawler to access data in Amazon S3 within an Amazon Virtual Private Cloud environment (Amazon VPC).</p>"
         }
       },
       "documentation": "<p>Specifies a data store in Amazon Simple Storage Service (Amazon S3).</p>"

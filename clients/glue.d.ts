@@ -1749,7 +1749,7 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * The type of the connection. Currently, these types are supported:    JDBC - Designates a connection to a database through Java Database Connectivity (JDBC).    KAFKA - Designates a connection to an Apache Kafka streaming platform.    MONGODB - Designates a connection to a MongoDB document database.   SFTP is not supported.
+     * The type of the connection. Currently, these types are supported:    JDBC - Designates a connection to a database through Java Database Connectivity (JDBC).    KAFKA - Designates a connection to an Apache Kafka streaming platform.    MONGODB - Designates a connection to a MongoDB document database.    NETWORK - Designates a network connection to a data source within an Amazon Virtual Private Cloud environment (Amazon VPC).   SFTP is not supported.
      */
     ConnectionType: ConnectionType;
     /**
@@ -1779,7 +1779,7 @@ declare namespace Glue {
   }
   export type ConnectionProperties = {[key: string]: ValueString};
   export type ConnectionPropertyKey = "HOST"|"PORT"|"USERNAME"|"PASSWORD"|"ENCRYPTED_PASSWORD"|"JDBC_DRIVER_JAR_URI"|"JDBC_DRIVER_CLASS_NAME"|"JDBC_ENGINE"|"JDBC_ENGINE_VERSION"|"CONFIG_FILES"|"INSTANCE_ID"|"JDBC_CONNECTION_URL"|"JDBC_ENFORCE_SSL"|"CUSTOM_JDBC_CERT"|"SKIP_CUSTOM_JDBC_CERT_VALIDATION"|"CUSTOM_JDBC_CERT_STRING"|"CONNECTION_URL"|"KAFKA_BOOTSTRAP_SERVERS"|"KAFKA_SSL_ENABLED"|"KAFKA_CUSTOM_CERT"|"KAFKA_SKIP_CUSTOM_CERT_VALIDATION"|string;
-  export type ConnectionType = "JDBC"|"SFTP"|"MONGODB"|"KAFKA"|string;
+  export type ConnectionType = "JDBC"|"SFTP"|"MONGODB"|"KAFKA"|"NETWORK"|string;
   export interface ConnectionsList {
     /**
      * A list of connections used by the job.
@@ -5476,6 +5476,10 @@ declare namespace Glue {
      * A list of glob patterns used to exclude from the crawl. For more information, see Catalog Tables with a Crawler.
      */
     Exclusions?: PathList;
+    /**
+     * The name of a connection which allows a job or crawler to access data in Amazon S3 within an Amazon Virtual Private Cloud environment (Amazon VPC).
+     */
+    ConnectionName?: ConnectionName;
   }
   export type S3TargetList = S3Target[];
   export type ScalaCode = string;

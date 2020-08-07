@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.728.0-->
+<!--LATEST=2.729.0-->
 <!--ENTRYINSERT-->
+
+## 2.729.0
+* feature: Glue: AWS Glue now adds support for Network connection type enabling you to access resources inside your VPC using Glue crawlers and Glue ETL jobs.
+* feature: Organizations: Documentation updates for some new error reasons.
+* feature: S3: Updates Amazon S3 API reference documentation. 
+* feature: SMS: In this release, AWS Server Migration Service (SMS) has added new features: 1. APIs to work with application and instance level validation 2. Import application catalog from AWS Application Discovery Service 3. For an application you can start on-demand replication
 
 ## 2.728.0
 * feature: EC2: This release supports Wavelength resources, including carrier gateways, and carrier IP addresses.

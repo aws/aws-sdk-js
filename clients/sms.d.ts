@@ -28,29 +28,37 @@ declare class SMS extends Service {
    */
   createReplicationJob(callback?: (err: AWSError, data: SMS.Types.CreateReplicationJobResponse) => void): Request<SMS.Types.CreateReplicationJobResponse, AWSError>;
   /**
-   * Deletes an existing application. Optionally deletes the launched stack associated with the application and all AWS SMS replication jobs for servers in the application.
+   * Deletes the specified application. Optionally deletes the launched stack associated with the application and all AWS SMS replication jobs for servers in the application.
    */
   deleteApp(params: SMS.Types.DeleteAppRequest, callback?: (err: AWSError, data: SMS.Types.DeleteAppResponse) => void): Request<SMS.Types.DeleteAppResponse, AWSError>;
   /**
-   * Deletes an existing application. Optionally deletes the launched stack associated with the application and all AWS SMS replication jobs for servers in the application.
+   * Deletes the specified application. Optionally deletes the launched stack associated with the application and all AWS SMS replication jobs for servers in the application.
    */
   deleteApp(callback?: (err: AWSError, data: SMS.Types.DeleteAppResponse) => void): Request<SMS.Types.DeleteAppResponse, AWSError>;
   /**
-   * Deletes existing launch configuration for an application.
+   * Deletes the launch configuration for the specified application.
    */
   deleteAppLaunchConfiguration(params: SMS.Types.DeleteAppLaunchConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.DeleteAppLaunchConfigurationResponse) => void): Request<SMS.Types.DeleteAppLaunchConfigurationResponse, AWSError>;
   /**
-   * Deletes existing launch configuration for an application.
+   * Deletes the launch configuration for the specified application.
    */
   deleteAppLaunchConfiguration(callback?: (err: AWSError, data: SMS.Types.DeleteAppLaunchConfigurationResponse) => void): Request<SMS.Types.DeleteAppLaunchConfigurationResponse, AWSError>;
   /**
-   * Deletes existing replication configuration for an application.
+   * Deletes the replication configuration for the specified application.
    */
   deleteAppReplicationConfiguration(params: SMS.Types.DeleteAppReplicationConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.DeleteAppReplicationConfigurationResponse) => void): Request<SMS.Types.DeleteAppReplicationConfigurationResponse, AWSError>;
   /**
-   * Deletes existing replication configuration for an application.
+   * Deletes the replication configuration for the specified application.
    */
   deleteAppReplicationConfiguration(callback?: (err: AWSError, data: SMS.Types.DeleteAppReplicationConfigurationResponse) => void): Request<SMS.Types.DeleteAppReplicationConfigurationResponse, AWSError>;
+  /**
+   * Deletes the validation configuration for the specified application.
+   */
+  deleteAppValidationConfiguration(params: SMS.Types.DeleteAppValidationConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.DeleteAppValidationConfigurationResponse) => void): Request<SMS.Types.DeleteAppValidationConfigurationResponse, AWSError>;
+  /**
+   * Deletes the validation configuration for the specified application.
+   */
+  deleteAppValidationConfiguration(callback?: (err: AWSError, data: SMS.Types.DeleteAppValidationConfigurationResponse) => void): Request<SMS.Types.DeleteAppValidationConfigurationResponse, AWSError>;
   /**
    * Deletes the specified replication job. After you delete a replication job, there are no further replication runs. AWS deletes the contents of the Amazon S3 bucket used to store AWS SMS artifacts. The AMIs created by the replication runs are not deleted.
    */
@@ -84,37 +92,53 @@ declare class SMS extends Service {
    */
   generateChangeSet(callback?: (err: AWSError, data: SMS.Types.GenerateChangeSetResponse) => void): Request<SMS.Types.GenerateChangeSetResponse, AWSError>;
   /**
-   * Generates an Amazon CloudFormation template based on the current launch configuration and writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.
+   * Generates an AWS CloudFormation template based on the current launch configuration and writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.
    */
   generateTemplate(params: SMS.Types.GenerateTemplateRequest, callback?: (err: AWSError, data: SMS.Types.GenerateTemplateResponse) => void): Request<SMS.Types.GenerateTemplateResponse, AWSError>;
   /**
-   * Generates an Amazon CloudFormation template based on the current launch configuration and writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.
+   * Generates an AWS CloudFormation template based on the current launch configuration and writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.
    */
   generateTemplate(callback?: (err: AWSError, data: SMS.Types.GenerateTemplateResponse) => void): Request<SMS.Types.GenerateTemplateResponse, AWSError>;
   /**
-   * Retrieve information about an application.
+   * Retrieve information about the specified application.
    */
   getApp(params: SMS.Types.GetAppRequest, callback?: (err: AWSError, data: SMS.Types.GetAppResponse) => void): Request<SMS.Types.GetAppResponse, AWSError>;
   /**
-   * Retrieve information about an application.
+   * Retrieve information about the specified application.
    */
   getApp(callback?: (err: AWSError, data: SMS.Types.GetAppResponse) => void): Request<SMS.Types.GetAppResponse, AWSError>;
   /**
-   * Retrieves the application launch configuration associated with an application.
+   * Retrieves the application launch configuration associated with the specified application.
    */
   getAppLaunchConfiguration(params: SMS.Types.GetAppLaunchConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.GetAppLaunchConfigurationResponse) => void): Request<SMS.Types.GetAppLaunchConfigurationResponse, AWSError>;
   /**
-   * Retrieves the application launch configuration associated with an application.
+   * Retrieves the application launch configuration associated with the specified application.
    */
   getAppLaunchConfiguration(callback?: (err: AWSError, data: SMS.Types.GetAppLaunchConfigurationResponse) => void): Request<SMS.Types.GetAppLaunchConfigurationResponse, AWSError>;
   /**
-   * Retrieves an application replication configuration associatd with an application.
+   * Retrieves the application replication configuration associated with the specified application.
    */
   getAppReplicationConfiguration(params: SMS.Types.GetAppReplicationConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.GetAppReplicationConfigurationResponse) => void): Request<SMS.Types.GetAppReplicationConfigurationResponse, AWSError>;
   /**
-   * Retrieves an application replication configuration associatd with an application.
+   * Retrieves the application replication configuration associated with the specified application.
    */
   getAppReplicationConfiguration(callback?: (err: AWSError, data: SMS.Types.GetAppReplicationConfigurationResponse) => void): Request<SMS.Types.GetAppReplicationConfigurationResponse, AWSError>;
+  /**
+   * Retrieves information about a configuration for validating an application.
+   */
+  getAppValidationConfiguration(params: SMS.Types.GetAppValidationConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.GetAppValidationConfigurationResponse) => void): Request<SMS.Types.GetAppValidationConfigurationResponse, AWSError>;
+  /**
+   * Retrieves information about a configuration for validating an application.
+   */
+  getAppValidationConfiguration(callback?: (err: AWSError, data: SMS.Types.GetAppValidationConfigurationResponse) => void): Request<SMS.Types.GetAppValidationConfigurationResponse, AWSError>;
+  /**
+   * Retrieves output from validating an application.
+   */
+  getAppValidationOutput(params: SMS.Types.GetAppValidationOutputRequest, callback?: (err: AWSError, data: SMS.Types.GetAppValidationOutputResponse) => void): Request<SMS.Types.GetAppValidationOutputResponse, AWSError>;
+  /**
+   * Retrieves output from validating an application.
+   */
+  getAppValidationOutput(callback?: (err: AWSError, data: SMS.Types.GetAppValidationOutputResponse) => void): Request<SMS.Types.GetAppValidationOutputResponse, AWSError>;
   /**
    * Describes the connectors registered with the AWS SMS.
    */
@@ -148,83 +172,115 @@ declare class SMS extends Service {
    */
   getServers(callback?: (err: AWSError, data: SMS.Types.GetServersResponse) => void): Request<SMS.Types.GetServersResponse, AWSError>;
   /**
-   * Gathers a complete list of on-premises servers. Connectors must be installed and monitoring all servers that you want to import. This call returns immediately, but might take additional time to retrieve all the servers.
+   * Allows application import from AWS Migration Hub.
+   */
+  importAppCatalog(params: SMS.Types.ImportAppCatalogRequest, callback?: (err: AWSError, data: SMS.Types.ImportAppCatalogResponse) => void): Request<SMS.Types.ImportAppCatalogResponse, AWSError>;
+  /**
+   * Allows application import from AWS Migration Hub.
+   */
+  importAppCatalog(callback?: (err: AWSError, data: SMS.Types.ImportAppCatalogResponse) => void): Request<SMS.Types.ImportAppCatalogResponse, AWSError>;
+  /**
+   * Gathers a complete list of on-premises servers. Connectors must be installed and monitoring all servers to import. This call returns immediately, but might take additional time to retrieve all the servers.
    */
   importServerCatalog(params: SMS.Types.ImportServerCatalogRequest, callback?: (err: AWSError, data: SMS.Types.ImportServerCatalogResponse) => void): Request<SMS.Types.ImportServerCatalogResponse, AWSError>;
   /**
-   * Gathers a complete list of on-premises servers. Connectors must be installed and monitoring all servers that you want to import. This call returns immediately, but might take additional time to retrieve all the servers.
+   * Gathers a complete list of on-premises servers. Connectors must be installed and monitoring all servers to import. This call returns immediately, but might take additional time to retrieve all the servers.
    */
   importServerCatalog(callback?: (err: AWSError, data: SMS.Types.ImportServerCatalogResponse) => void): Request<SMS.Types.ImportServerCatalogResponse, AWSError>;
   /**
-   * Launches an application stack.
+   * Launches the specified application as a stack in AWS CloudFormation.
    */
   launchApp(params: SMS.Types.LaunchAppRequest, callback?: (err: AWSError, data: SMS.Types.LaunchAppResponse) => void): Request<SMS.Types.LaunchAppResponse, AWSError>;
   /**
-   * Launches an application stack.
+   * Launches the specified application as a stack in AWS CloudFormation.
    */
   launchApp(callback?: (err: AWSError, data: SMS.Types.LaunchAppResponse) => void): Request<SMS.Types.LaunchAppResponse, AWSError>;
   /**
-   * Returns a list of summaries for all applications.
+   * Retrieves summaries for all applications.
    */
   listApps(params: SMS.Types.ListAppsRequest, callback?: (err: AWSError, data: SMS.Types.ListAppsResponse) => void): Request<SMS.Types.ListAppsResponse, AWSError>;
   /**
-   * Returns a list of summaries for all applications.
+   * Retrieves summaries for all applications.
    */
   listApps(callback?: (err: AWSError, data: SMS.Types.ListAppsResponse) => void): Request<SMS.Types.ListAppsResponse, AWSError>;
   /**
-   * Creates a launch configuration for an application.
+   * Provides information to AWS SMS about whether application validation is successful.
+   */
+  notifyAppValidationOutput(params: SMS.Types.NotifyAppValidationOutputRequest, callback?: (err: AWSError, data: SMS.Types.NotifyAppValidationOutputResponse) => void): Request<SMS.Types.NotifyAppValidationOutputResponse, AWSError>;
+  /**
+   * Provides information to AWS SMS about whether application validation is successful.
+   */
+  notifyAppValidationOutput(callback?: (err: AWSError, data: SMS.Types.NotifyAppValidationOutputResponse) => void): Request<SMS.Types.NotifyAppValidationOutputResponse, AWSError>;
+  /**
+   * Creates or updates the launch configuration for the specified application.
    */
   putAppLaunchConfiguration(params: SMS.Types.PutAppLaunchConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.PutAppLaunchConfigurationResponse) => void): Request<SMS.Types.PutAppLaunchConfigurationResponse, AWSError>;
   /**
-   * Creates a launch configuration for an application.
+   * Creates or updates the launch configuration for the specified application.
    */
   putAppLaunchConfiguration(callback?: (err: AWSError, data: SMS.Types.PutAppLaunchConfigurationResponse) => void): Request<SMS.Types.PutAppLaunchConfigurationResponse, AWSError>;
   /**
-   * Creates or updates a replication configuration for an application.
+   * Creates or updates the replication configuration for the specified application.
    */
   putAppReplicationConfiguration(params: SMS.Types.PutAppReplicationConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.PutAppReplicationConfigurationResponse) => void): Request<SMS.Types.PutAppReplicationConfigurationResponse, AWSError>;
   /**
-   * Creates or updates a replication configuration for an application.
+   * Creates or updates the replication configuration for the specified application.
    */
   putAppReplicationConfiguration(callback?: (err: AWSError, data: SMS.Types.PutAppReplicationConfigurationResponse) => void): Request<SMS.Types.PutAppReplicationConfigurationResponse, AWSError>;
   /**
-   * Starts replicating an application.
+   * Creates or updates a validation configuration for the specified application.
+   */
+  putAppValidationConfiguration(params: SMS.Types.PutAppValidationConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.PutAppValidationConfigurationResponse) => void): Request<SMS.Types.PutAppValidationConfigurationResponse, AWSError>;
+  /**
+   * Creates or updates a validation configuration for the specified application.
+   */
+  putAppValidationConfiguration(callback?: (err: AWSError, data: SMS.Types.PutAppValidationConfigurationResponse) => void): Request<SMS.Types.PutAppValidationConfigurationResponse, AWSError>;
+  /**
+   * Starts replicating the specified application by creating replication jobs for each server in the application.
    */
   startAppReplication(params: SMS.Types.StartAppReplicationRequest, callback?: (err: AWSError, data: SMS.Types.StartAppReplicationResponse) => void): Request<SMS.Types.StartAppReplicationResponse, AWSError>;
   /**
-   * Starts replicating an application.
+   * Starts replicating the specified application by creating replication jobs for each server in the application.
    */
   startAppReplication(callback?: (err: AWSError, data: SMS.Types.StartAppReplicationResponse) => void): Request<SMS.Types.StartAppReplicationResponse, AWSError>;
   /**
-   * Starts an on-demand replication run for the specified replication job. This replication run starts immediately. This replication run is in addition to the ones already scheduled. There is a limit on the number of on-demand replications runs you can request in a 24-hour period.
+   * Starts an on-demand replication run for the specified application.
+   */
+  startOnDemandAppReplication(params: SMS.Types.StartOnDemandAppReplicationRequest, callback?: (err: AWSError, data: SMS.Types.StartOnDemandAppReplicationResponse) => void): Request<SMS.Types.StartOnDemandAppReplicationResponse, AWSError>;
+  /**
+   * Starts an on-demand replication run for the specified application.
+   */
+  startOnDemandAppReplication(callback?: (err: AWSError, data: SMS.Types.StartOnDemandAppReplicationResponse) => void): Request<SMS.Types.StartOnDemandAppReplicationResponse, AWSError>;
+  /**
+   * Starts an on-demand replication run for the specified replication job. This replication run starts immediately. This replication run is in addition to the ones already scheduled. There is a limit on the number of on-demand replications runs that you can request in a 24-hour period.
    */
   startOnDemandReplicationRun(params: SMS.Types.StartOnDemandReplicationRunRequest, callback?: (err: AWSError, data: SMS.Types.StartOnDemandReplicationRunResponse) => void): Request<SMS.Types.StartOnDemandReplicationRunResponse, AWSError>;
   /**
-   * Starts an on-demand replication run for the specified replication job. This replication run starts immediately. This replication run is in addition to the ones already scheduled. There is a limit on the number of on-demand replications runs you can request in a 24-hour period.
+   * Starts an on-demand replication run for the specified replication job. This replication run starts immediately. This replication run is in addition to the ones already scheduled. There is a limit on the number of on-demand replications runs that you can request in a 24-hour period.
    */
   startOnDemandReplicationRun(callback?: (err: AWSError, data: SMS.Types.StartOnDemandReplicationRunResponse) => void): Request<SMS.Types.StartOnDemandReplicationRunResponse, AWSError>;
   /**
-   * Stops replicating an application.
+   * Stops replicating the specified application by deleting the replication job for each server in the application.
    */
   stopAppReplication(params: SMS.Types.StopAppReplicationRequest, callback?: (err: AWSError, data: SMS.Types.StopAppReplicationResponse) => void): Request<SMS.Types.StopAppReplicationResponse, AWSError>;
   /**
-   * Stops replicating an application.
+   * Stops replicating the specified application by deleting the replication job for each server in the application.
    */
   stopAppReplication(callback?: (err: AWSError, data: SMS.Types.StopAppReplicationResponse) => void): Request<SMS.Types.StopAppReplicationResponse, AWSError>;
   /**
-   * Terminates the stack for an application.
+   * Terminates the stack for the specified application.
    */
   terminateApp(params: SMS.Types.TerminateAppRequest, callback?: (err: AWSError, data: SMS.Types.TerminateAppResponse) => void): Request<SMS.Types.TerminateAppResponse, AWSError>;
   /**
-   * Terminates the stack for an application.
+   * Terminates the stack for the specified application.
    */
   terminateApp(callback?: (err: AWSError, data: SMS.Types.TerminateAppResponse) => void): Request<SMS.Types.TerminateAppResponse, AWSError>;
   /**
-   * Updates an application.
+   * Updates the specified application.
    */
   updateApp(params: SMS.Types.UpdateAppRequest, callback?: (err: AWSError, data: SMS.Types.UpdateAppResponse) => void): Request<SMS.Types.UpdateAppResponse, AWSError>;
   /**
-   * Updates an application.
+   * Updates the specified application.
    */
   updateApp(callback?: (err: AWSError, data: SMS.Types.UpdateAppResponse) => void): Request<SMS.Types.UpdateAppResponse, AWSError>;
   /**
@@ -240,25 +296,32 @@ declare namespace SMS {
   export type AmiId = string;
   export type AppDescription = string;
   export type AppId = string;
+  export type AppIdWithValidation = string;
   export type AppIds = AppId[];
-  export type AppLaunchStatus = "READY_FOR_CONFIGURATION"|"CONFIGURATION_IN_PROGRESS"|"CONFIGURATION_INVALID"|"READY_FOR_LAUNCH"|"VALIDATION_IN_PROGRESS"|"LAUNCH_PENDING"|"LAUNCH_IN_PROGRESS"|"LAUNCHED"|"DELTA_LAUNCH_IN_PROGRESS"|"DELTA_LAUNCH_FAILED"|"LAUNCH_FAILED"|"TERMINATE_IN_PROGRESS"|"TERMINATE_FAILED"|"TERMINATED"|string;
+  export type AppLaunchConfigurationStatus = "NOT_CONFIGURED"|"CONFIGURED"|string;
+  export type AppLaunchStatus = "READY_FOR_CONFIGURATION"|"CONFIGURATION_IN_PROGRESS"|"CONFIGURATION_INVALID"|"READY_FOR_LAUNCH"|"VALIDATION_IN_PROGRESS"|"LAUNCH_PENDING"|"LAUNCH_IN_PROGRESS"|"LAUNCHED"|"PARTIALLY_LAUNCHED"|"DELTA_LAUNCH_IN_PROGRESS"|"DELTA_LAUNCH_FAILED"|"LAUNCH_FAILED"|"TERMINATE_IN_PROGRESS"|"TERMINATE_FAILED"|"TERMINATED"|string;
   export type AppLaunchStatusMessage = string;
   export type AppName = string;
-  export type AppReplicationStatus = "READY_FOR_CONFIGURATION"|"CONFIGURATION_IN_PROGRESS"|"CONFIGURATION_INVALID"|"READY_FOR_REPLICATION"|"VALIDATION_IN_PROGRESS"|"REPLICATION_PENDING"|"REPLICATION_IN_PROGRESS"|"REPLICATED"|"DELTA_REPLICATION_IN_PROGRESS"|"DELTA_REPLICATED"|"DELTA_REPLICATION_FAILED"|"REPLICATION_FAILED"|"REPLICATION_STOPPING"|"REPLICATION_STOP_FAILED"|"REPLICATION_STOPPED"|string;
+  export type AppReplicationConfigurationStatus = "NOT_CONFIGURED"|"CONFIGURED"|string;
+  export type AppReplicationStatus = "READY_FOR_CONFIGURATION"|"CONFIGURATION_IN_PROGRESS"|"CONFIGURATION_INVALID"|"READY_FOR_REPLICATION"|"VALIDATION_IN_PROGRESS"|"REPLICATION_PENDING"|"REPLICATION_IN_PROGRESS"|"REPLICATED"|"PARTIALLY_REPLICATED"|"DELTA_REPLICATION_IN_PROGRESS"|"DELTA_REPLICATED"|"DELTA_REPLICATION_FAILED"|"REPLICATION_FAILED"|"REPLICATION_STOPPING"|"REPLICATION_STOP_FAILED"|"REPLICATION_STOPPED"|string;
   export type AppReplicationStatusMessage = string;
   export type AppStatus = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"DELETED"|"DELETE_FAILED"|string;
   export type AppStatusMessage = string;
   export interface AppSummary {
     /**
-     * Unique ID of the application.
+     * The unique ID of the application.
      */
     appId?: AppId;
     /**
-     * Name of the application.
+     * The ID of the application.
+     */
+    importedAppId?: ImportedAppId;
+    /**
+     * The name of the application.
      */
     name?: AppName;
     /**
-     * Description of the application.
+     * The description of the application.
      */
     description?: AppDescription;
     /**
@@ -270,7 +333,11 @@ declare namespace SMS {
      */
     statusMessage?: AppStatusMessage;
     /**
-     * Replication status of the application.
+     * Status of the replication configuration.
+     */
+    replicationConfigurationStatus?: AppReplicationConfigurationStatus;
+    /**
+     * The replication status of the application.
      */
     replicationStatus?: AppReplicationStatus;
     /**
@@ -278,11 +345,15 @@ declare namespace SMS {
      */
     replicationStatusMessage?: AppReplicationStatusMessage;
     /**
-     * Timestamp of the application's most recent successful replication.
+     * The timestamp of the application's most recent successful replication.
      */
     latestReplicationTime?: Timestamp;
     /**
-     * Launch status of the application.
+     * Status of the launch configuration.
+     */
+    launchConfigurationStatus?: AppLaunchConfigurationStatus;
+    /**
+     * The launch status of the application.
      */
     launchStatus?: AppLaunchStatus;
     /**
@@ -294,33 +365,61 @@ declare namespace SMS {
      */
     launchDetails?: LaunchDetails;
     /**
-     * Time of creation of this application.
+     * The creation time of the application.
      */
     creationTime?: Timestamp;
     /**
-     * Timestamp of the application's creation.
+     * The last modified time of the application.
      */
     lastModified?: Timestamp;
     /**
-     * Name of the service role in the customer's account used by AWS SMS.
+     * The name of the service role in the customer's account used by AWS SMS.
      */
     roleName?: RoleName;
     /**
-     * Number of server groups present in the application.
+     * The number of server groups present in the application.
      */
     totalServerGroups?: TotalServerGroups;
     /**
-     * Number of servers present in the application.
+     * The number of servers present in the application.
      */
     totalServers?: TotalServers;
   }
+  export interface AppValidationConfiguration {
+    /**
+     * The ID of the validation.
+     */
+    validationId?: ValidationId;
+    /**
+     * The name of the configuration.
+     */
+    name?: NonEmptyStringWithMaxLen255;
+    /**
+     * The validation strategy.
+     */
+    appValidationStrategy?: AppValidationStrategy;
+    /**
+     * The validation parameters.
+     */
+    ssmValidationParameters?: SSMValidationParameters;
+  }
+  export type AppValidationConfigurations = AppValidationConfiguration[];
+  export interface AppValidationOutput {
+    /**
+     * Output from using SSM to validate the application.
+     */
+    ssmOutput?: SSMOutput;
+  }
+  export type AppValidationStrategy = "SSM"|string;
   export type Apps = AppSummary[];
   export type AssociatePublicIpAddress = boolean;
+  export type AutoLaunch = boolean;
   export type BucketName = string;
   export type ClientToken = string;
+  export type Command = string;
   export interface Connector {
     /**
-     * The identifier of the connector.
+     * The ID of the connector.
      */
     connectorId?: ConnectorId;
     /**
@@ -344,7 +443,7 @@ declare namespace SMS {
      */
     vmManagerType?: VmManagerType;
     /**
-     * The identifier of the VM manager.
+     * The ID of the VM manager.
      */
     vmManagerId?: VmManagerId;
     /**
@@ -360,7 +459,7 @@ declare namespace SMS {
      */
     associatedOn?: Timestamp;
   }
-  export type ConnectorCapability = "VSPHERE"|"SCVMM"|"HYPERV-MANAGER"|"SNAPSHOT_BATCHING"|string;
+  export type ConnectorCapability = "VSPHERE"|"SCVMM"|"HYPERV-MANAGER"|"SNAPSHOT_BATCHING"|"SMS_OPTIMIZED"|string;
   export type ConnectorCapabilityList = ConnectorCapability[];
   export type ConnectorId = string;
   export type ConnectorList = Connector[];
@@ -368,47 +467,47 @@ declare namespace SMS {
   export type ConnectorVersion = string;
   export interface CreateAppRequest {
     /**
-     * Name of the new application.
+     * The name of the new application.
      */
     name?: AppName;
     /**
-     * Description of the new application
+     * The description of the new application
      */
     description?: AppDescription;
     /**
-     * Name of service role in customer's account to be used by AWS SMS.
+     * The name of the service role in the customer's account to be used by AWS SMS.
      */
     roleName?: RoleName;
     /**
-     * A unique, case-sensitive identifier you provide to ensure idempotency of application creation.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of application creation.
      */
     clientToken?: ClientToken;
     /**
-     * List of server groups to include in the application.
+     * The server groups to include in the application.
      */
     serverGroups?: ServerGroups;
     /**
-     * List of tags to be associated with the application.
+     * The tags to be associated with the application.
      */
     tags?: Tags;
   }
   export interface CreateAppResponse {
     /**
-     * Summary description of the application.
+     * A summary description of the application.
      */
     appSummary?: AppSummary;
     /**
-     * List of server groups included in the application.
+     * The server groups included in the application.
      */
     serverGroups?: ServerGroups;
     /**
-     * List of taags associated with the application.
+     * The tags associated with the application.
      */
     tags?: Tags;
   }
   export interface CreateReplicationJobRequest {
     /**
-     * The identifier of the server.
+     * The ID of the server.
      */
     serverId: ServerId;
     /**
@@ -420,7 +519,7 @@ declare namespace SMS {
      */
     frequency?: Frequency;
     /**
-     * 
+     * Indicates whether to run the replication job one time.
      */
     runOnce?: RunOnce;
     /**
@@ -436,15 +535,15 @@ declare namespace SMS {
      */
     description?: Description;
     /**
-     * The maximum number of SMS-created AMIs to retain. The oldest will be deleted once the maximum number is reached and a new AMI is created.
+     * The maximum number of SMS-created AMIs to retain. The oldest is deleted after the maximum number is reached and a new AMI is created.
      */
     numberOfRecentAmisToKeep?: NumberOfRecentAmisToKeep;
     /**
-     * When true, the replication job produces encrypted AMIs. See also KmsKeyId below.
+     * Indicates whether the replication job produces encrypted AMIs.
      */
     encrypted?: Encrypted;
     /**
-     * KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the following:    KMS key ID   KMS key alias   ARN referring to KMS key ID   ARN referring to KMS key alias    If encrypted is true but a KMS key id is not specified, the customer's default KMS key for EBS is used. 
+     * The ID of the KMS key for replication jobs that produce encrypted AMIs. This value can be any of the following:   KMS key ID   KMS key alias   ARN referring to the KMS key ID   ARN referring to the KMS key alias    If encrypted is true but a KMS key ID is not specified, the customer's default KMS key for Amazon EBS is used. 
      */
     kmsKeyId?: KmsKeyId;
   }
@@ -456,7 +555,7 @@ declare namespace SMS {
   }
   export interface DeleteAppLaunchConfigurationRequest {
     /**
-     * ID of the application associated with the launch configuration.
+     * The ID of the application.
      */
     appId?: AppId;
   }
@@ -464,7 +563,7 @@ declare namespace SMS {
   }
   export interface DeleteAppReplicationConfigurationRequest {
     /**
-     * ID of the application associated with the replication configuration.
+     * The ID of the application.
      */
     appId?: AppId;
   }
@@ -472,23 +571,31 @@ declare namespace SMS {
   }
   export interface DeleteAppRequest {
     /**
-     * ID of the application to delete.
+     * The ID of the application.
      */
     appId?: AppId;
     /**
-     * While deleting the application, stop all replication jobs corresponding to the servers in the application.
+     * Indicates whether to stop all replication jobs corresponding to the servers in the application while deleting the application.
      */
     forceStopAppReplication?: ForceStopAppReplication;
     /**
-     * While deleting the application, terminate the stack corresponding to the application.
+     * Indicates whether to terminate the stack corresponding to the application while deleting the application.
      */
     forceTerminateApp?: ForceTerminateApp;
   }
   export interface DeleteAppResponse {
   }
+  export interface DeleteAppValidationConfigurationRequest {
+    /**
+     * The ID of the application.
+     */
+    appId: AppIdWithValidation;
+  }
+  export interface DeleteAppValidationConfigurationResponse {
+  }
   export interface DeleteReplicationJobRequest {
     /**
-     * The identifier of the replication job.
+     * The ID of the replication job.
      */
     replicationJobId: ReplicationJobId;
   }
@@ -501,7 +608,7 @@ declare namespace SMS {
   export type Description = string;
   export interface DisassociateConnectorRequest {
     /**
-     * The identifier of the connector.
+     * The ID of the connector.
      */
     connectorId: ConnectorId;
   }
@@ -509,76 +616,81 @@ declare namespace SMS {
   }
   export type EC2KeyName = string;
   export type Encrypted = boolean;
+  export type ExecutionTimeoutSeconds = number;
   export type ForceStopAppReplication = boolean;
   export type ForceTerminateApp = boolean;
   export type Frequency = number;
   export interface GenerateChangeSetRequest {
     /**
-     * ID of the application associated with the change set.
+     * The ID of the application associated with the change set.
      */
     appId?: AppId;
     /**
-     * Format for the change set.
+     * The format for the change set.
      */
     changesetFormat?: OutputFormat;
   }
   export interface GenerateChangeSetResponse {
     /**
-     * Location of the Amazon S3 object.
+     * The location of the Amazon S3 object.
      */
     s3Location?: S3Location;
   }
   export interface GenerateTemplateRequest {
     /**
-     * ID of the application associated with the Amazon CloudFormation template.
+     * The ID of the application associated with the AWS CloudFormation template.
      */
     appId?: AppId;
     /**
-     * Format for generating the Amazon CloudFormation template.
+     * The format for generating the AWS CloudFormation template.
      */
     templateFormat?: OutputFormat;
   }
   export interface GenerateTemplateResponse {
     /**
-     * Location of the Amazon S3 object.
+     * The location of the Amazon S3 object.
      */
     s3Location?: S3Location;
   }
   export interface GetAppLaunchConfigurationRequest {
     /**
-     * ID of the application launch configuration.
+     * The ID of the application.
      */
     appId?: AppId;
   }
   export interface GetAppLaunchConfigurationResponse {
     /**
-     * ID of the application associated with the launch configuration.
+     * The ID of the application.
      */
     appId?: AppId;
     /**
-     * Name of the service role in the customer's account that Amazon CloudFormation uses to launch the application.
+     * The name of the service role in the customer's account that AWS CloudFormation uses to launch the application.
      */
     roleName?: RoleName;
     /**
-     * List of launch configurations for server groups in this application.
+     * Indicates whether the application is configured to launch automatically after replication is complete.
+     */
+    autoLaunch?: AutoLaunch;
+    /**
+     * The launch configurations for server groups in this application.
      */
     serverGroupLaunchConfigurations?: ServerGroupLaunchConfigurations;
   }
   export interface GetAppReplicationConfigurationRequest {
     /**
-     * ID of the application associated with the replication configuration.
+     * The ID of the application.
      */
     appId?: AppId;
   }
   export interface GetAppReplicationConfigurationResponse {
     /**
-     * Replication configurations associated with server groups in this application.
+     * The replication configurations associated with server groups in this application.
      */
     serverGroupReplicationConfigurations?: ServerGroupReplicationConfigurations;
   }
   export interface GetAppRequest {
     /**
-     * ID of the application whose information is being retrieved.
+     * The ID of the application.
      */
     appId?: AppId;
   }
@@ -588,13 +700,41 @@ declare namespace SMS {
      */
     appSummary?: AppSummary;
     /**
-     * List of server groups belonging to the application.
+     * The server groups that belong to the application.
      */
     serverGroups?: ServerGroups;
     /**
-     * List of tags associated with the application.
+     * The tags associated with the application.
      */
     tags?: Tags;
+  }
+  export interface GetAppValidationConfigurationRequest {
+    /**
+     * The ID of the application.
+     */
+    appId: AppIdWithValidation;
+  }
+  export interface GetAppValidationConfigurationResponse {
+    /**
+     * The configuration for application validation.
+     */
+    appValidationConfigurations?: AppValidationConfigurations;
+    /**
+     * The configuration for instance validation.
+     */
+    serverGroupValidationConfigurations?: ServerGroupValidationConfigurations;
+  }
+  export interface GetAppValidationOutputRequest {
+    /**
+     * The ID of the application.
+     */
+    appId: AppIdWithValidation;
+  }
+  export interface GetAppValidationOutputResponse {
+    /**
+     * The validation output.
+     */
+    validationOutputList?: ValidationOutputList;
   }
   export interface GetConnectorsRequest {
     /**
@@ -618,7 +758,7 @@ declare namespace SMS {
   }
   export interface GetReplicationJobsRequest {
     /**
-     * The identifier of the replication job.
+     * The ID of the replication job.
      */
     replicationJobId?: ReplicationJobId;
     /**
@@ -642,7 +782,7 @@ declare namespace SMS {
   }
   export interface GetReplicationRunsRequest {
     /**
-     * The identifier of the replication job.
+     * The ID of the replication job.
      */
     replicationJobId: ReplicationJobId;
     /**
@@ -678,7 +818,7 @@ declare namespace SMS {
      */
     maxResults?: MaxResults;
     /**
-     * List of VmServerAddress objects
+     * The server addresses.
      */
     vmServerAddressList?: VmServerAddressList;
   }
@@ -700,17 +840,26 @@ declare namespace SMS {
      */
     nextToken?: NextToken;
   }
+  export interface ImportAppCatalogRequest {
+    /**
+     * The name of the service role. If you omit this parameter, we create a service-linked role for AWS Migration Hub in your account. Otherwise, the role that you provide must have the policy and trust policy described in the AWS Migration Hub User Guide.
+     */
+    roleName?: RoleName;
+  }
+  export interface ImportAppCatalogResponse {
+  }
   export interface ImportServerCatalogRequest {
   }
   export interface ImportServerCatalogResponse {
   }
+  export type ImportedAppId = string;
+  export type InstanceId = string;
   export type InstanceType = string;
   export type IpAddress = string;
-  export type KeyName = string;
   export type KmsKeyId = string;
   export interface LaunchAppRequest {
     /**
-     * ID of the application to launch.
+     * The ID of the application.
      */
     appId?: AppId;
   }
@@ -718,15 +867,15 @@ declare namespace SMS {
   }
   export interface LaunchDetails {
     /**
-     * Latest time this application was launched successfully.
+     * The latest time that this application was launched successfully.
      */
     latestLaunchTime?: Timestamp;
     /**
-     * Name of the latest stack launched for this application.
+     * The name of the latest stack launched for this application.
      */
     stackName?: StackName;
     /**
-     * Identifier of the latest stack launched for this application.
+     * The ID of the latest stack launched for this application.
      */
     stackId?: StackId;
   }
@@ -734,7 +883,7 @@ declare namespace SMS {
   export type LicenseType = "AWS"|"BYOL"|string;
   export interface ListAppsRequest {
     /**
-     * 
+     * The unique application IDs.
      */
     appIds?: AppIds;
     /**
@@ -742,13 +891,13 @@ declare namespace SMS {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of results to return in a single call. The default value is 50. To retrieve the remaining results, make another call with the returned NextToken value. 
+     * The maximum number of results to return in a single call. The default value is 100. To retrieve the remaining results, make another call with the returned NextToken value. 
      */
     maxResults?: MaxResults;
   }
   export interface ListAppsResponse {
     /**
-     * A list of application summaries.
+     * The application summaries.
      */
     apps?: Apps;
     /**
@@ -760,19 +909,50 @@ declare namespace SMS {
   export type MacAddress = string;
   export type MaxResults = number;
   export type NextToken = string;
+  export type NonEmptyStringWithMaxLen255 = string;
+  export interface NotificationContext {
+    /**
+     * The ID of the validation.
+     */
+    validationId?: ValidationId;
+    /**
+     * The status of the validation.
+     */
+    status?: ValidationStatus;
+    /**
+     * The status message.
+     */
+    statusMessage?: ValidationStatusMessage;
+  }
+  export interface NotifyAppValidationOutputRequest {
+    /**
+     * The ID of the application.
+     */
+    appId: AppIdWithValidation;
+    /**
+     * The notification information.
+     */
+    notificationContext?: NotificationContext;
+  }
+  export interface NotifyAppValidationOutputResponse {
+  }
   export type NumberOfRecentAmisToKeep = number;
   export type OutputFormat = "JSON"|"YAML"|string;
   export interface PutAppLaunchConfigurationRequest {
     /**
-     * ID of the application associated with the launch configuration.
+     * The ID of the application.
      */
     appId?: AppId;
     /**
-     * Name of service role in the customer's account that Amazon CloudFormation uses to launch the application.
+     * The name of service role in the customer's account that AWS CloudFormation uses to launch the application.
      */
     roleName?: RoleName;
     /**
-     * Launch configurations for server groups in the application.
+     * Indicates whether the application is configured to launch automatically after replication is complete.
+     */
+    autoLaunch?: AutoLaunch;
+    /**
+     * Information about the launch configurations for server groups in the application.
      */
     serverGroupLaunchConfigurations?: ServerGroupLaunchConfigurations;
   }
@@ -780,23 +960,39 @@ declare namespace SMS {
   }
   export interface PutAppReplicationConfigurationRequest {
     /**
-     * ID of the application tassociated with the replication configuration.
+     * The ID of the application.
      */
     appId?: AppId;
     /**
-     * Replication configurations for server groups in the application.
+     * Information about the replication configurations for server groups in the application.
      */
     serverGroupReplicationConfigurations?: ServerGroupReplicationConfigurations;
   }
   export interface PutAppReplicationConfigurationResponse {
   }
+  export interface PutAppValidationConfigurationRequest {
+    /**
+     * The ID of the application.
+     */
+    appId: AppIdWithValidation;
+    /**
+     * The configuration for application validation.
+     */
+    appValidationConfigurations?: AppValidationConfigurations;
+    /**
+     * The configuration for instance validation.
+     */
+    serverGroupValidationConfigurations?: ServerGroupValidationConfigurations;
+  }
+  export interface PutAppValidationConfigurationResponse {
+  }
   export interface ReplicationJob {
     /**
-     * The identifier of the replication job.
+     * The ID of the replication job.
      */
     replicationJobId?: ReplicationJobId;
     /**
-     * The identifier of the server.
+     * The ID of the server.
      */
     serverId?: ServerId;
     /**
@@ -816,7 +1012,7 @@ declare namespace SMS {
      */
     frequency?: Frequency;
     /**
-     * 
+     * Indicates whether to run the replication job one time.
      */
     runOnce?: RunOnce;
     /**
@@ -828,7 +1024,7 @@ declare namespace SMS {
      */
     licenseType?: LicenseType;
     /**
-     * The name of the IAM role to be used by the Server Migration Service.
+     * The name of the IAM role to be used by AWS SMS.
      */
     roleName?: RoleName;
     /**
@@ -848,15 +1044,15 @@ declare namespace SMS {
      */
     description?: Description;
     /**
-     * Number of recent AMIs to keep in the customer's account for a replication job. By default the value is set to zero, meaning that all AMIs are kept.
+     * The number of recent AMIs to keep in the customer's account for a replication job. By default, the value is set to zero, meaning that all AMIs are kept.
      */
     numberOfRecentAmisToKeep?: NumberOfRecentAmisToKeep;
     /**
-     * Whether the replication job should produce encrypted AMIs or not. See also KmsKeyId below.
+     * Indicates whether the replication job should produce encrypted AMIs.
      */
     encrypted?: Encrypted;
     /**
-     * KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the following:    KMS key ID   KMS key alias   ARN referring to KMS key ID   ARN referring to KMS key alias    If encrypted is true but a KMS key id is not specified, the customer's default KMS key for EBS is used. 
+     * The ID of the KMS key for replication jobs that produce encrypted AMIs. This value can be any of the following:    KMS key ID   KMS key alias   ARN referring to the KMS key ID   ARN referring to the KMS key alias   If encrypted is enabled but a KMS key ID is not specified, the customer's default KMS key for Amazon EBS is used.
      */
     kmsKeyId?: KmsKeyId;
     /**
@@ -871,7 +1067,7 @@ declare namespace SMS {
   export type ReplicationJobTerminated = boolean;
   export interface ReplicationRun {
     /**
-     * The identifier of the replication run.
+     * The ID of the replication run.
      */
     replicationRunId?: ReplicationRunId;
     /**
@@ -883,7 +1079,7 @@ declare namespace SMS {
      */
     type?: ReplicationRunType;
     /**
-     * Details of the current stage of the replication run.
+     * Details about the current stage of the replication run.
      */
     stageDetails?: ReplicationRunStageDetails;
     /**
@@ -891,7 +1087,7 @@ declare namespace SMS {
      */
     statusMessage?: ReplicationRunStatusMessage;
     /**
-     * The identifier of the Amazon Machine Image (AMI) from the replication run.
+     * The ID of the Amazon Machine Image (AMI) from the replication run.
      */
     amiId?: AmiId;
     /**
@@ -907,11 +1103,11 @@ declare namespace SMS {
      */
     description?: Description;
     /**
-     * Whether the replication run should produce encrypted AMI or not. See also KmsKeyId below.
+     * Indicates whether the replication run should produce an encrypted AMI.
      */
     encrypted?: Encrypted;
     /**
-     * KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the following:    KMS key ID   KMS key alias   ARN referring to KMS key ID   ARN referring to KMS key alias    If encrypted is true but a KMS key id is not specified, the customer's default KMS key for EBS is used. 
+     * The ID of the KMS key for replication jobs that produce encrypted AMIs. This value can be any of the following:   KMS key ID   KMS key alias   ARN referring to the KMS key ID   ARN referring to the KMS key alias    If encrypted is true but a KMS key ID is not specified, the customer's default KMS key for Amazon EBS is used. 
      */
     kmsKeyId?: KmsKeyId;
   }
@@ -920,11 +1116,11 @@ declare namespace SMS {
   export type ReplicationRunStage = string;
   export interface ReplicationRunStageDetails {
     /**
-     * String describing the current stage of a replication run.
+     * The current stage of a replication run.
      */
     stage?: ReplicationRunStage;
     /**
-     * String describing the progress of the current stage of a replication run.
+     * The progress of the current stage of a replication run.
      */
     stageProgress?: ReplicationRunStageProgress;
   }
@@ -934,20 +1130,52 @@ declare namespace SMS {
   export type ReplicationRunType = "ON_DEMAND"|"AUTOMATIC"|string;
   export type RoleName = string;
   export type RunOnce = boolean;
+  export type S3BucketName = string;
+  export type S3KeyName = string;
   export interface S3Location {
     /**
-     * Amazon S3 bucket name.
+     * The Amazon S3 bucket name.
      */
-    bucket?: BucketName;
+    bucket?: S3BucketName;
     /**
-     * Amazon S3 bucket key.
+     * The Amazon S3 bucket key.
      */
-    key?: KeyName;
+    key?: S3KeyName;
   }
+  export interface SSMOutput {
+    s3Location?: S3Location;
+  }
+  export interface SSMValidationParameters {
+    /**
+     * The location of the validation script.
+     */
+    source?: Source;
+    /**
+     * The ID of the instance. The instance must have the following tag: UserForSMSApplicationValidation=true.
+     */
+    instanceId?: InstanceId;
+    /**
+     * The type of validation script.
+     */
+    scriptType?: ScriptType;
+    /**
+     * The command to run the validation script
+     */
+    command?: Command;
+    /**
+     * The timeout interval, in seconds.
+     */
+    executionTimeoutSeconds?: ExecutionTimeoutSeconds;
+    /**
+     * The name of the S3 bucket for output.
+     */
+    outputS3BucketName?: BucketName;
+  }
+  export type ScriptType = "SHELL_SCRIPT"|"POWERSHELL_SCRIPT"|string;
   export type SecurityGroup = string;
   export interface Server {
     /**
-     * The identifier of the server.
+     * The ID of the server.
      */
     serverId?: ServerId;
     /**
@@ -959,7 +1187,7 @@ declare namespace SMS {
      */
     vmServer?: VmServer;
     /**
-     * The identifier of the replication job.
+     * The ID of the replication job.
      */
     replicationJobId?: ReplicationJobId;
     /**
@@ -970,30 +1198,30 @@ declare namespace SMS {
   export type ServerCatalogStatus = "NOT_IMPORTED"|"IMPORTING"|"AVAILABLE"|"DELETED"|"EXPIRED"|string;
   export interface ServerGroup {
     /**
-     * Identifier of a server group.
+     * The ID of a server group.
      */
     serverGroupId?: ServerGroupId;
     /**
-     * Name of a server group.
+     * The name of a server group.
      */
     name?: ServerGroupName;
     /**
-     * List of servers belonging to a server group.
+     * The servers that belong to a server group.
      */
     serverList?: ServerList;
   }
   export type ServerGroupId = string;
   export interface ServerGroupLaunchConfiguration {
     /**
-     * Identifier of the server group the launch configuration is associated with.
+     * The ID of the server group with which the launch configuration is associated.
      */
     serverGroupId?: ServerGroupId;
     /**
-     * Launch order of servers in the server group.
+     * The launch order of servers in the server group.
      */
     launchOrder?: LaunchOrder;
     /**
-     * Launch configuration for servers in the server group.
+     * The launch configuration for servers in the server group.
      */
     serverLaunchConfigurations?: ServerLaunchConfigurations;
   }
@@ -1001,40 +1229,51 @@ declare namespace SMS {
   export type ServerGroupName = string;
   export interface ServerGroupReplicationConfiguration {
     /**
-     * Identifier of the server group this replication configuration is associated with.
+     * The ID of the server group with which this replication configuration is associated.
      */
     serverGroupId?: ServerGroupId;
     /**
-     * Replication configuration for servers in the server group.
+     * The replication configuration for servers in the server group.
      */
     serverReplicationConfigurations?: ServerReplicationConfigurations;
   }
   export type ServerGroupReplicationConfigurations = ServerGroupReplicationConfiguration[];
+  export interface ServerGroupValidationConfiguration {
+    /**
+     * The ID of the server group.
+     */
+    serverGroupId?: ServerGroupId;
+    /**
+     * The validation configuration.
+     */
+    serverValidationConfigurations?: ServerValidationConfigurations;
+  }
+  export type ServerGroupValidationConfigurations = ServerGroupValidationConfiguration[];
   export type ServerGroups = ServerGroup[];
   export type ServerId = string;
   export interface ServerLaunchConfiguration {
     /**
-     * Identifier of the server the launch configuration is associated with.
+     * The ID of the server with which the launch configuration is associated.
      */
     server?: Server;
     /**
-     * Logical ID of the server in the Amazon CloudFormation template.
+     * The logical ID of the server in the AWS CloudFormation template.
      */
     logicalId?: LogicalId;
     /**
-     * Identifier of the VPC the server should be launched into.
+     * The ID of the VPC into which the server should be launched.
      */
     vpc?: VPC;
     /**
-     * Identifier of the subnet the server should be launched into.
+     * The ID of the subnet the server should be launched into.
      */
     subnet?: Subnet;
     /**
-     * Identifier of the security group that applies to the launched server.
+     * The ID of the security group that applies to the launched server.
      */
     securityGroup?: SecurityGroup;
     /**
-     * Name of the EC2 SSH Key to be used for connecting to the launched server.
+     * The name of the Amazon EC2 SSH key to be used for connecting to the launched server.
      */
     ec2KeyName?: EC2KeyName;
     /**
@@ -1042,71 +1281,119 @@ declare namespace SMS {
      */
     userData?: UserData;
     /**
-     * Instance type to be used for launching the server.
+     * The instance type to use when launching the server.
      */
     instanceType?: InstanceType;
     /**
-     * If true, a publicly accessible IP address is created when launching the server.
+     * Indicates whether a publicly accessible IP address is created when launching the server.
      */
     associatePublicIpAddress?: AssociatePublicIpAddress;
+    /**
+     * The name of the IAM instance profile.
+     */
+    iamInstanceProfileName?: RoleName;
+    configureScript?: S3Location;
+    /**
+     * The type of configuration script.
+     */
+    configureScriptType?: ScriptType;
   }
   export type ServerLaunchConfigurations = ServerLaunchConfiguration[];
   export type ServerList = Server[];
   export interface ServerReplicationConfiguration {
     /**
-     * Identifier of the server this replication configuration is associated with.
+     * The ID of the server with which this replication configuration is associated.
      */
     server?: Server;
     /**
-     * Parameters for replicating the server.
+     * The parameters for replicating the server.
      */
     serverReplicationParameters?: ServerReplicationParameters;
   }
   export type ServerReplicationConfigurations = ServerReplicationConfiguration[];
   export interface ServerReplicationParameters {
     /**
-     * Seed time for creating a replication job for the server.
+     * The seed time for creating a replication job for the server.
      */
     seedTime?: Timestamp;
     /**
-     * Frequency of creating replication jobs for the server.
+     * The frequency of creating replication jobs for the server.
      */
     frequency?: Frequency;
     /**
-     * 
+     * Indicates whether to run the replication job one time.
      */
     runOnce?: RunOnce;
     /**
-     * License type for creating a replication job for the server.
+     * The license type for creating a replication job for the server.
      */
     licenseType?: LicenseType;
     /**
-     * Number of recent AMIs to keep when creating a replication job for this server.
+     * The number of recent AMIs to keep when creating a replication job for this server.
      */
     numberOfRecentAmisToKeep?: NumberOfRecentAmisToKeep;
     /**
-     * When true, the replication job produces encrypted AMIs. See also KmsKeyId below.
+     * Indicates whether the replication job produces encrypted AMIs.
      */
     encrypted?: Encrypted;
     /**
-     *  KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the following:    KMS key ID   KMS key alias   ARN referring to KMS key ID   ARN referring to KMS key alias    If encrypted is true but a KMS key id is not specified, the customer's default KMS key for EBS is used. 
+     * The ID of the KMS key for replication jobs that produce encrypted AMIs. This value can be any of the following:   KMS key ID   KMS key alias   ARN referring to the KMS key ID   ARN referring to the KMS key alias   If encrypted is enabled but a KMS key ID is not specified, the customer's default KMS key for Amazon EBS is used.
      */
     kmsKeyId?: KmsKeyId;
   }
   export type ServerType = "VIRTUAL_MACHINE"|string;
+  export interface ServerValidationConfiguration {
+    server?: Server;
+    /**
+     * The ID of the validation.
+     */
+    validationId?: ValidationId;
+    /**
+     * The name of the configuration.
+     */
+    name?: NonEmptyStringWithMaxLen255;
+    /**
+     * The validation strategy.
+     */
+    serverValidationStrategy?: ServerValidationStrategy;
+    /**
+     * The validation parameters.
+     */
+    userDataValidationParameters?: UserDataValidationParameters;
+  }
+  export type ServerValidationConfigurations = ServerValidationConfiguration[];
+  export interface ServerValidationOutput {
+    server?: Server;
+  }
+  export type ServerValidationStrategy = "USERDATA"|string;
+  export interface Source {
+    s3Location?: S3Location;
+  }
   export type StackId = string;
   export type StackName = string;
   export interface StartAppReplicationRequest {
     /**
-     * ID of the application to replicate.
+     * The ID of the application.
      */
     appId?: AppId;
   }
   export interface StartAppReplicationResponse {
   }
+  export interface StartOnDemandAppReplicationRequest {
+    /**
+     * The ID of the application.
+     */
+    appId: AppId;
+    /**
+     * The description of the replication run.
+     */
+    description?: Description;
+  }
+  export interface StartOnDemandAppReplicationResponse {
+  }
   export interface StartOnDemandReplicationRunRequest {
     /**
-     * The identifier of the replication job.
+     * The ID of the replication job.
      */
     replicationJobId: ReplicationJobId;
     /**
@@ -1116,13 +1403,13 @@ declare namespace SMS {
   }
   export interface StartOnDemandReplicationRunResponse {
     /**
-     * The identifier of the replication run.
+     * The ID of the replication run.
      */
     replicationRunId?: ReplicationRunId;
   }
   export interface StopAppReplicationRequest {
     /**
-     * ID of the application to stop replicating.
+     * The ID of the application.
      */
     appId?: AppId;
   }
@@ -1131,11 +1418,11 @@ declare namespace SMS {
   export type Subnet = string;
   export interface Tag {
     /**
-     * Tag key.
+     * The tag key.
      */
     key?: TagKey;
     /**
-     * Tag value.
+     * The tag value.
      */
     value?: TagValue;
   }
@@ -1144,7 +1431,7 @@ declare namespace SMS {
   export type Tags = Tag[];
   export interface TerminateAppRequest {
     /**
-     * ID of the application to terminate.
+     * The ID of the application.
      */
     appId?: AppId;
   }
@@ -1155,47 +1442,47 @@ declare namespace SMS {
   export type TotalServers = number;
   export interface UpdateAppRequest {
     /**
-     * ID of the application to update.
+     * The ID of the application.
      */
     appId?: AppId;
     /**
-     * New name of the application.
+     * The new name of the application.
      */
     name?: AppName;
     /**
-     * New description of the application.
+     * The new description of the application.
      */
     description?: AppDescription;
     /**
-     * Name of the service role in the customer's account used by AWS SMS.
+     * The name of the service role in the customer's account used by AWS SMS.
      */
     roleName?: RoleName;
     /**
-     * List of server groups in the application to update.
+     * The server groups in the application to update.
      */
     serverGroups?: ServerGroups;
     /**
-     * List of tags to associate with the application.
+     * The tags to associate with the application.
      */
     tags?: Tags;
   }
   export interface UpdateAppResponse {
     /**
-     * Summary description of the application.
+     * A summary description of the application.
      */
     appSummary?: AppSummary;
     /**
-     * List of updated server groups in the application.
+     * The updated server groups in the application.
      */
     serverGroups?: ServerGroups;
     /**
-     * List of tags associated with the application.
+     * The tags associated with the application.
      */
     tags?: Tags;
   }
   export interface UpdateReplicationJobRequest {
     /**
-     * The identifier of the replication job.
+     * The ID of the replication job.
      */
     replicationJobId: ReplicationJobId;
     /**
@@ -1219,15 +1506,15 @@ declare namespace SMS {
      */
     description?: Description;
     /**
-     * The maximum number of SMS-created AMIs to retain. The oldest will be deleted once the maximum number is reached and a new AMI is created.
+     * The maximum number of SMS-created AMIs to retain. The oldest is deleted after the maximum number is reached and a new AMI is created.
      */
     numberOfRecentAmisToKeep?: NumberOfRecentAmisToKeep;
     /**
-     * When true, the replication job produces encrypted AMIs . See also KmsKeyId below.
+     * When true, the replication job produces encrypted AMIs. For more information, KmsKeyId.
      */
     encrypted?: Encrypted;
     /**
-     *  KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the following:    KMS key ID   KMS key alias   ARN referring to KMS key ID   ARN referring to KMS key alias    If encrypted is true but a KMS key id is not specified, the customer's default KMS key for EBS is used. 
+     * The ID of the KMS key for replication jobs that produce encrypted AMIs. This value can be any of the following:   KMS key ID   KMS key alias   ARN referring to the KMS key ID   ARN referring to the KMS key alias   If encrypted is enabled but a KMS key ID is not specified, the customer's default KMS key for Amazon EBS is used.
      */
     kmsKeyId?: KmsKeyId;
   }
@@ -1239,7 +1526,51 @@ declare namespace SMS {
      */
     s3Location?: S3Location;
   }
+  export interface UserDataValidationParameters {
+    /**
+     * The location of the validation script.
+     */
+    source?: Source;
+    /**
+     * The type of validation script.
+     */
+    scriptType?: ScriptType;
+  }
   export type VPC = string;
+  export type ValidationId = string;
+  export interface ValidationOutput {
+    /**
+     * The ID of the validation.
+     */
+    validationId?: ValidationId;
+    /**
+     * The name of the validation.
+     */
+    name?: NonEmptyStringWithMaxLen255;
+    /**
+     * The status of the validation.
+     */
+    status?: ValidationStatus;
+    /**
+     * The status message.
+     */
+    statusMessage?: ValidationStatusMessage;
+    /**
+     * The latest time that the validation was performed.
+     */
+    latestValidationTime?: Timestamp;
+    /**
+     * The output from validating an application.
+     */
+    appValidationOutput?: AppValidationOutput;
+    /**
+     * The output from validation an instance.
+     */
+    serverValidationOutput?: ServerValidationOutput;
+  }
+  export type ValidationOutputList = ValidationOutput[];
+  export type ValidationStatus = "READY_FOR_VALIDATION"|"PENDING"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string;
+  export type ValidationStatusMessage = string;
   export type VmId = string;
   export type VmManagerId = string;
   export type VmManagerName = string;
@@ -1248,7 +1579,7 @@ declare namespace SMS {
   export type VmPath = string;
   export interface VmServer {
     /**
-     * Information about the VM server location.
+     * The VM server location.
      */
     vmServerAddress?: VmServerAddress;
     /**
@@ -1270,11 +1601,11 @@ declare namespace SMS {
   }
   export interface VmServerAddress {
     /**
-     * The identifier of the VM manager.
+     * The ID of the VM manager.
      */
     vmManagerId?: VmManagerId;
     /**
-     * The identifier of the VM.
+     * The ID of the VM.
      */
     vmId?: VmId;
   }

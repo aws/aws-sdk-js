@@ -116,7 +116,7 @@
           "shape": "OperationNotPermittedException"
         }
       ],
-      "documentation": "<p>Deletes an existing application. Optionally deletes the launched stack associated with the application and all AWS SMS replication jobs for servers in the application.</p>"
+      "documentation": "<p>Deletes the specified application. Optionally deletes the launched stack associated with the application and all AWS SMS replication jobs for servers in the application.</p>"
     },
     "DeleteAppLaunchConfiguration": {
       "name": "DeleteAppLaunchConfiguration",
@@ -147,7 +147,7 @@
           "shape": "OperationNotPermittedException"
         }
       ],
-      "documentation": "<p>Deletes existing launch configuration for an application.</p>"
+      "documentation": "<p>Deletes the launch configuration for the specified application.</p>"
     },
     "DeleteAppReplicationConfiguration": {
       "name": "DeleteAppReplicationConfiguration",
@@ -178,7 +178,38 @@
           "shape": "OperationNotPermittedException"
         }
       ],
-      "documentation": "<p>Deletes existing replication configuration for an application.</p>"
+      "documentation": "<p>Deletes the replication configuration for the specified application.</p>"
+    },
+    "DeleteAppValidationConfiguration": {
+      "name": "DeleteAppValidationConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteAppValidationConfigurationRequest"
+      },
+      "output": {
+        "shape": "DeleteAppValidationConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedOperationException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "MissingRequiredParameterException"
+        },
+        {
+          "shape": "InternalError"
+        },
+        {
+          "shape": "OperationNotPermittedException"
+        }
+      ],
+      "documentation": "<p>Deletes the validation configuration for the specified application.</p>"
     },
     "DeleteReplicationJob": {
       "name": "DeleteReplicationJob",
@@ -327,7 +358,7 @@
           "shape": "OperationNotPermittedException"
         }
       ],
-      "documentation": "<p>Generates an Amazon CloudFormation template based on the current launch configuration and writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.</p>"
+      "documentation": "<p>Generates an AWS CloudFormation template based on the current launch configuration and writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.</p>"
     },
     "GetApp": {
       "name": "GetApp",
@@ -358,7 +389,7 @@
           "shape": "OperationNotPermittedException"
         }
       ],
-      "documentation": "<p>Retrieve information about an application.</p>"
+      "documentation": "<p>Retrieve information about the specified application.</p>"
     },
     "GetAppLaunchConfiguration": {
       "name": "GetAppLaunchConfiguration",
@@ -389,7 +420,7 @@
           "shape": "OperationNotPermittedException"
         }
       ],
-      "documentation": "<p>Retrieves the application launch configuration associated with an application.</p>"
+      "documentation": "<p>Retrieves the application launch configuration associated with the specified application.</p>"
     },
     "GetAppReplicationConfiguration": {
       "name": "GetAppReplicationConfiguration",
@@ -420,7 +451,69 @@
           "shape": "OperationNotPermittedException"
         }
       ],
-      "documentation": "<p>Retrieves an application replication configuration associatd with an application.</p>"
+      "documentation": "<p>Retrieves the application replication configuration associated with the specified application.</p>"
+    },
+    "GetAppValidationConfiguration": {
+      "name": "GetAppValidationConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetAppValidationConfigurationRequest"
+      },
+      "output": {
+        "shape": "GetAppValidationConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedOperationException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "MissingRequiredParameterException"
+        },
+        {
+          "shape": "InternalError"
+        },
+        {
+          "shape": "OperationNotPermittedException"
+        }
+      ],
+      "documentation": "<p>Retrieves information about a configuration for validating an application.</p>"
+    },
+    "GetAppValidationOutput": {
+      "name": "GetAppValidationOutput",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetAppValidationOutputRequest"
+      },
+      "output": {
+        "shape": "GetAppValidationOutputResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedOperationException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "MissingRequiredParameterException"
+        },
+        {
+          "shape": "InternalError"
+        },
+        {
+          "shape": "OperationNotPermittedException"
+        }
+      ],
+      "documentation": "<p>Retrieves output from validating an application.</p>"
     },
     "GetConnectors": {
       "name": "GetConnectors",
@@ -506,9 +599,49 @@
       "errors": [
         {
           "shape": "UnauthorizedOperationException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "MissingRequiredParameterException"
+        },
+        {
+          "shape": "InternalError"
         }
       ],
       "documentation": "<p>Describes the servers in your server catalog.</p> <p>Before you can describe your servers, you must import them using <a>ImportServerCatalog</a>.</p>"
+    },
+    "ImportAppCatalog": {
+      "name": "ImportAppCatalog",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ImportAppCatalogRequest"
+      },
+      "output": {
+        "shape": "ImportAppCatalogResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedOperationException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "MissingRequiredParameterException"
+        },
+        {
+          "shape": "InternalError"
+        },
+        {
+          "shape": "OperationNotPermittedException"
+        }
+      ],
+      "documentation": "<p>Allows application import from AWS Migration Hub.</p>"
     },
     "ImportServerCatalog": {
       "name": "ImportServerCatalog",
@@ -539,7 +672,7 @@
           "shape": "NoConnectorsAvailableException"
         }
       ],
-      "documentation": "<p>Gathers a complete list of on-premises servers. Connectors must be installed and monitoring all servers that you want to import.</p> <p>This call returns immediately, but might take additional time to retrieve all the servers.</p>"
+      "documentation": "<p>Gathers a complete list of on-premises servers. Connectors must be installed and monitoring all servers to import.</p> <p>This call returns immediately, but might take additional time to retrieve all the servers.</p>"
     },
     "LaunchApp": {
       "name": "LaunchApp",
@@ -570,7 +703,7 @@
           "shape": "OperationNotPermittedException"
         }
       ],
-      "documentation": "<p>Launches an application stack.</p>"
+      "documentation": "<p>Launches the specified application as a stack in AWS CloudFormation.</p>"
     },
     "ListApps": {
       "name": "ListApps",
@@ -601,7 +734,38 @@
           "shape": "OperationNotPermittedException"
         }
       ],
-      "documentation": "<p>Returns a list of summaries for all applications.</p>"
+      "documentation": "<p>Retrieves summaries for all applications.</p>"
+    },
+    "NotifyAppValidationOutput": {
+      "name": "NotifyAppValidationOutput",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "NotifyAppValidationOutputRequest"
+      },
+      "output": {
+        "shape": "NotifyAppValidationOutputResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedOperationException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "MissingRequiredParameterException"
+        },
+        {
+          "shape": "InternalError"
+        },
+        {
+          "shape": "OperationNotPermittedException"
+        }
+      ],
+      "documentation": "<p>Provides information to AWS SMS about whether application validation is successful.</p>"
     },
     "PutAppLaunchConfiguration": {
       "name": "PutAppLaunchConfiguration",
@@ -632,7 +796,7 @@
           "shape": "OperationNotPermittedException"
         }
       ],
-      "documentation": "<p>Creates a launch configuration for an application.</p>"
+      "documentation": "<p>Creates or updates the launch configuration for the specified application.</p>"
     },
     "PutAppReplicationConfiguration": {
       "name": "PutAppReplicationConfiguration",
@@ -663,7 +827,38 @@
           "shape": "OperationNotPermittedException"
         }
       ],
-      "documentation": "<p>Creates or updates a replication configuration for an application.</p>"
+      "documentation": "<p>Creates or updates the replication configuration for the specified application.</p>"
+    },
+    "PutAppValidationConfiguration": {
+      "name": "PutAppValidationConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutAppValidationConfigurationRequest"
+      },
+      "output": {
+        "shape": "PutAppValidationConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedOperationException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "MissingRequiredParameterException"
+        },
+        {
+          "shape": "InternalError"
+        },
+        {
+          "shape": "OperationNotPermittedException"
+        }
+      ],
+      "documentation": "<p>Creates or updates a validation configuration for the specified application.</p>"
     },
     "StartAppReplication": {
       "name": "StartAppReplication",
@@ -694,7 +889,38 @@
           "shape": "OperationNotPermittedException"
         }
       ],
-      "documentation": "<p>Starts replicating an application.</p>"
+      "documentation": "<p>Starts replicating the specified application by creating replication jobs for each server in the application.</p>"
+    },
+    "StartOnDemandAppReplication": {
+      "name": "StartOnDemandAppReplication",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartOnDemandAppReplicationRequest"
+      },
+      "output": {
+        "shape": "StartOnDemandAppReplicationResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedOperationException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "MissingRequiredParameterException"
+        },
+        {
+          "shape": "InternalError"
+        },
+        {
+          "shape": "OperationNotPermittedException"
+        }
+      ],
+      "documentation": "<p>Starts an on-demand replication run for the specified application.</p>"
     },
     "StartOnDemandReplicationRun": {
       "name": "StartOnDemandReplicationRun",
@@ -723,9 +949,12 @@
         },
         {
           "shape": "ReplicationRunLimitExceededException"
+        },
+        {
+          "shape": "DryRunOperationException"
         }
       ],
-      "documentation": "<p>Starts an on-demand replication run for the specified replication job. This replication run starts immediately. This replication run is in addition to the ones already scheduled.</p> <p>There is a limit on the number of on-demand replications runs you can request in a 24-hour period.</p>"
+      "documentation": "<p>Starts an on-demand replication run for the specified replication job. This replication run starts immediately. This replication run is in addition to the ones already scheduled.</p> <p>There is a limit on the number of on-demand replications runs that you can request in a 24-hour period.</p>"
     },
     "StopAppReplication": {
       "name": "StopAppReplication",
@@ -756,7 +985,7 @@
           "shape": "OperationNotPermittedException"
         }
       ],
-      "documentation": "<p>Stops replicating an application.</p>"
+      "documentation": "<p>Stops replicating the specified application by deleting the replication job for each server in the application.</p>"
     },
     "TerminateApp": {
       "name": "TerminateApp",
@@ -787,7 +1016,7 @@
           "shape": "OperationNotPermittedException"
         }
       ],
-      "documentation": "<p>Terminates the stack for an application.</p>"
+      "documentation": "<p>Terminates the stack for the specified application.</p>"
     },
     "UpdateApp": {
       "name": "UpdateApp",
@@ -818,7 +1047,7 @@
           "shape": "OperationNotPermittedException"
         }
       ],
-      "documentation": "<p>Updates an application.</p>"
+      "documentation": "<p>Updates the specified application.</p>"
     },
     "UpdateReplicationJob": {
       "name": "UpdateReplicationJob",
@@ -871,11 +1100,22 @@
     "AppId": {
       "type": "string"
     },
+    "AppIdWithValidation": {
+      "type": "string",
+      "pattern": "^app-[0-9a-f]{17}$"
+    },
     "AppIds": {
       "type": "list",
       "member": {
         "shape": "AppId"
       }
+    },
+    "AppLaunchConfigurationStatus": {
+      "type": "string",
+      "enum": [
+        "NOT_CONFIGURED",
+        "CONFIGURED"
+      ]
     },
     "AppLaunchStatus": {
       "type": "string",
@@ -888,6 +1128,7 @@
         "LAUNCH_PENDING",
         "LAUNCH_IN_PROGRESS",
         "LAUNCHED",
+        "PARTIALLY_LAUNCHED",
         "DELTA_LAUNCH_IN_PROGRESS",
         "DELTA_LAUNCH_FAILED",
         "LAUNCH_FAILED",
@@ -902,6 +1143,13 @@
     "AppName": {
       "type": "string"
     },
+    "AppReplicationConfigurationStatus": {
+      "type": "string",
+      "enum": [
+        "NOT_CONFIGURED",
+        "CONFIGURED"
+      ]
+    },
     "AppReplicationStatus": {
       "type": "string",
       "enum": [
@@ -913,6 +1161,7 @@
         "REPLICATION_PENDING",
         "REPLICATION_IN_PROGRESS",
         "REPLICATED",
+        "PARTIALLY_REPLICATED",
         "DELTA_REPLICATION_IN_PROGRESS",
         "DELTA_REPLICATED",
         "DELTA_REPLICATION_FAILED",
@@ -944,15 +1193,19 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p>Unique ID of the application.</p>"
+          "documentation": "<p>The unique ID of the application.</p>"
+        },
+        "importedAppId": {
+          "shape": "ImportedAppId",
+          "documentation": "<p>The ID of the application.</p>"
         },
         "name": {
           "shape": "AppName",
-          "documentation": "<p>Name of the application.</p>"
+          "documentation": "<p>The name of the application.</p>"
         },
         "description": {
           "shape": "AppDescription",
-          "documentation": "<p>Description of the application.</p>"
+          "documentation": "<p>The description of the application.</p>"
         },
         "status": {
           "shape": "AppStatus",
@@ -962,9 +1215,13 @@
           "shape": "AppStatusMessage",
           "documentation": "<p>A message related to the status of the application</p>"
         },
+        "replicationConfigurationStatus": {
+          "shape": "AppReplicationConfigurationStatus",
+          "documentation": "<p>Status of the replication configuration.</p>"
+        },
         "replicationStatus": {
           "shape": "AppReplicationStatus",
-          "documentation": "<p>Replication status of the application.</p>"
+          "documentation": "<p>The replication status of the application.</p>"
         },
         "replicationStatusMessage": {
           "shape": "AppReplicationStatusMessage",
@@ -972,11 +1229,15 @@
         },
         "latestReplicationTime": {
           "shape": "Timestamp",
-          "documentation": "<p>Timestamp of the application's most recent successful replication.</p>"
+          "documentation": "<p>The timestamp of the application's most recent successful replication.</p>"
+        },
+        "launchConfigurationStatus": {
+          "shape": "AppLaunchConfigurationStatus",
+          "documentation": "<p>Status of the launch configuration.</p>"
         },
         "launchStatus": {
           "shape": "AppLaunchStatus",
-          "documentation": "<p>Launch status of the application.</p>"
+          "documentation": "<p>The launch status of the application.</p>"
         },
         "launchStatusMessage": {
           "shape": "AppLaunchStatusMessage",
@@ -988,26 +1249,70 @@
         },
         "creationTime": {
           "shape": "Timestamp",
-          "documentation": "<p>Time of creation of this application.</p>"
+          "documentation": "<p>The creation time of the application.</p>"
         },
         "lastModified": {
           "shape": "Timestamp",
-          "documentation": "<p>Timestamp of the application's creation.</p>"
+          "documentation": "<p>The last modified time of the application.</p>"
         },
         "roleName": {
           "shape": "RoleName",
-          "documentation": "<p>Name of the service role in the customer's account used by AWS SMS.</p>"
+          "documentation": "<p>The name of the service role in the customer's account used by AWS SMS.</p>"
         },
         "totalServerGroups": {
           "shape": "TotalServerGroups",
-          "documentation": "<p>Number of server groups present in the application.</p>"
+          "documentation": "<p>The number of server groups present in the application.</p>"
         },
         "totalServers": {
           "shape": "TotalServers",
-          "documentation": "<p>Number of servers present in the application.</p>"
+          "documentation": "<p>The number of servers present in the application.</p>"
         }
       },
       "documentation": "<p>Information about the application.</p>"
+    },
+    "AppValidationConfiguration": {
+      "type": "structure",
+      "members": {
+        "validationId": {
+          "shape": "ValidationId",
+          "documentation": "<p>The ID of the validation.</p>"
+        },
+        "name": {
+          "shape": "NonEmptyStringWithMaxLen255",
+          "documentation": "<p>The name of the configuration.</p>"
+        },
+        "appValidationStrategy": {
+          "shape": "AppValidationStrategy",
+          "documentation": "<p>The validation strategy.</p>"
+        },
+        "ssmValidationParameters": {
+          "shape": "SSMValidationParameters",
+          "documentation": "<p>The validation parameters.</p>"
+        }
+      },
+      "documentation": "<p>Configuration for validating an application.</p>"
+    },
+    "AppValidationConfigurations": {
+      "type": "list",
+      "member": {
+        "shape": "AppValidationConfiguration"
+      }
+    },
+    "AppValidationOutput": {
+      "type": "structure",
+      "members": {
+        "ssmOutput": {
+          "shape": "SSMOutput",
+          "documentation": "<p>Output from using SSM to validate the application.</p>"
+        }
+      },
+      "documentation": "<p>Output from validating an application.</p>"
+    },
+    "AppValidationStrategy": {
+      "type": "string",
+      "enum": [
+        "SSM"
+      ]
     },
     "Apps": {
       "type": "list",
@@ -1018,18 +1323,26 @@
     "AssociatePublicIpAddress": {
       "type": "boolean"
     },
+    "AutoLaunch": {
+      "type": "boolean"
+    },
     "BucketName": {
       "type": "string"
     },
     "ClientToken": {
       "type": "string"
     },
+    "Command": {
+      "type": "string",
+      "max": 64000,
+      "min": 1
+    },
     "Connector": {
       "type": "structure",
       "members": {
         "connectorId": {
           "shape": "ConnectorId",
-          "documentation": "<p>The identifier of the connector.</p>"
+          "documentation": "<p>The ID of the connector.</p>"
         },
         "version": {
           "shape": "ConnectorVersion",
@@ -1053,7 +1366,7 @@
         },
         "vmManagerId": {
           "shape": "VmManagerId",
-          "documentation": "<p>The identifier of the VM manager.</p>"
+          "documentation": "<p>The ID of the VM manager.</p>"
         },
         "ipAddress": {
           "shape": "IpAddress",
@@ -1076,7 +1389,8 @@
         "VSPHERE",
         "SCVMM",
         "HYPERV-MANAGER",
-        "SNAPSHOT_BATCHING"
+        "SNAPSHOT_BATCHING",
+        "SMS_OPTIMIZED"
       ]
     },
     "ConnectorCapabilityList": {
@@ -1109,27 +1423,27 @@
       "members": {
         "name": {
           "shape": "AppName",
-          "documentation": "<p>Name of the new application.</p>"
+          "documentation": "<p>The name of the new application.</p>"
         },
         "description": {
           "shape": "AppDescription",
-          "documentation": "<p>Description of the new application</p>"
+          "documentation": "<p>The description of the new application</p>"
         },
         "roleName": {
           "shape": "RoleName",
-          "documentation": "<p>Name of service role in customer's account to be used by AWS SMS.</p>"
+          "documentation": "<p>The name of the service role in the customer's account to be used by AWS SMS.</p>"
         },
         "clientToken": {
           "shape": "ClientToken",
-          "documentation": "<p>A unique, case-sensitive identifier you provide to ensure idempotency of application creation.</p>"
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of application creation.</p>"
         },
         "serverGroups": {
           "shape": "ServerGroups",
-          "documentation": "<p>List of server groups to include in the application.</p>"
+          "documentation": "<p>The server groups to include in the application.</p>"
         },
         "tags": {
           "shape": "Tags",
-          "documentation": "<p>List of tags to be associated with the application.</p>"
+          "documentation": "<p>The tags to be associated with the application.</p>"
         }
       }
     },
@@ -1138,15 +1452,15 @@
       "members": {
         "appSummary": {
           "shape": "AppSummary",
-          "documentation": "<p>Summary description of the application.</p>"
+          "documentation": "<p>A summary description of the application.</p>"
         },
         "serverGroups": {
           "shape": "ServerGroups",
-          "documentation": "<p>List of server groups included in the application.</p>"
+          "documentation": "<p>The server groups included in the application.</p>"
         },
         "tags": {
           "shape": "Tags",
-          "documentation": "<p>List of taags associated with the application.</p>"
+          "documentation": "<p>The tags associated with the application.</p>"
         }
       }
     },
@@ -1159,7 +1473,7 @@
       "members": {
         "serverId": {
           "shape": "ServerId",
-          "documentation": "<p>The identifier of the server.</p>"
+          "documentation": "<p>The ID of the server.</p>"
         },
         "seedReplicationTime": {
           "shape": "Timestamp",
@@ -1171,7 +1485,7 @@
         },
         "runOnce": {
           "shape": "RunOnce",
-          "documentation": "<p/>"
+          "documentation": "<p>Indicates whether to run the replication job one time.</p>"
         },
         "licenseType": {
           "shape": "LicenseType",
@@ -1187,15 +1501,15 @@
         },
         "numberOfRecentAmisToKeep": {
           "shape": "NumberOfRecentAmisToKeep",
-          "documentation": "<p>The maximum number of SMS-created AMIs to retain. The oldest will be deleted once the maximum number is reached and a new AMI is created.</p>"
+          "documentation": "<p>The maximum number of SMS-created AMIs to retain. The oldest is deleted after the maximum number is reached and a new AMI is created.</p>"
         },
         "encrypted": {
           "shape": "Encrypted",
-          "documentation": "<p>When <i>true</i>, the replication job produces encrypted AMIs. See also <code>KmsKeyId</code> below.</p>"
+          "documentation": "<p>Indicates whether the replication job produces encrypted AMIs.</p>"
         },
         "kmsKeyId": {
           "shape": "KmsKeyId",
-          "documentation": "<p>KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the following: </p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to KMS key ID</p> </li> <li> <p>ARN referring to KMS key alias</p> </li> </ul> <p> If encrypted is <i>true</i> but a KMS key id is not specified, the customer's default KMS key for EBS is used. </p>"
+          "documentation": "<p>The ID of the KMS key for replication jobs that produce encrypted AMIs. This value can be any of the following:</p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to the KMS key ID</p> </li> <li> <p>ARN referring to the KMS key alias</p> </li> </ul> <p> If encrypted is <i>true</i> but a KMS key ID is not specified, the customer's default KMS key for Amazon EBS is used. </p>"
         }
       }
     },
@@ -1213,7 +1527,7 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p>ID of the application associated with the launch configuration.</p>"
+          "documentation": "<p>The ID of the application.</p>"
         }
       }
     },
@@ -1226,7 +1540,7 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p>ID of the application associated with the replication configuration.</p>"
+          "documentation": "<p>The ID of the application.</p>"
         }
       }
     },
@@ -1239,19 +1553,35 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p>ID of the application to delete.</p>"
+          "documentation": "<p>The ID of the application.</p>"
         },
         "forceStopAppReplication": {
           "shape": "ForceStopAppReplication",
-          "documentation": "<p>While deleting the application, stop all replication jobs corresponding to the servers in the application.</p>"
+          "documentation": "<p>Indicates whether to stop all replication jobs corresponding to the servers in the application while deleting the application.</p>"
         },
         "forceTerminateApp": {
           "shape": "ForceTerminateApp",
-          "documentation": "<p>While deleting the application, terminate the stack corresponding to the application.</p>"
+          "documentation": "<p>Indicates whether to terminate the stack corresponding to the application while deleting the application.</p>"
         }
       }
     },
     "DeleteAppResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeleteAppValidationConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "appId"
+      ],
+      "members": {
+        "appId": {
+          "shape": "AppIdWithValidation",
+          "documentation": "<p>The ID of the application.</p>"
+        }
+      }
+    },
+    "DeleteAppValidationConfigurationResponse": {
       "type": "structure",
       "members": {}
     },
@@ -1263,7 +1593,7 @@
       "members": {
         "replicationJobId": {
           "shape": "ReplicationJobId",
-          "documentation": "<p>The identifier of the replication job.</p>"
+          "documentation": "<p>The ID of the replication job.</p>"
         }
       }
     },
@@ -1290,7 +1620,7 @@
       "members": {
         "connectorId": {
           "shape": "ConnectorId",
-          "documentation": "<p>The identifier of the connector.</p>"
+          "documentation": "<p>The ID of the connector.</p>"
         }
       }
     },
@@ -1303,6 +1633,11 @@
     },
     "Encrypted": {
       "type": "boolean"
+    },
+    "ExecutionTimeoutSeconds": {
+      "type": "integer",
+      "max": 28800,
+      "min": 60
     },
     "ForceStopAppReplication": {
       "type": "boolean"
@@ -1318,11 +1653,11 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p>ID of the application associated with the change set.</p>"
+          "documentation": "<p>The ID of the application associated with the change set.</p>"
         },
         "changesetFormat": {
           "shape": "OutputFormat",
-          "documentation": "<p>Format for the change set.</p>"
+          "documentation": "<p>The format for the change set.</p>"
         }
       }
     },
@@ -1331,7 +1666,7 @@
       "members": {
         "s3Location": {
           "shape": "S3Location",
-          "documentation": "<p>Location of the Amazon S3 object.</p>"
+          "documentation": "<p>The location of the Amazon S3 object.</p>"
         }
       }
     },
@@ -1340,11 +1675,11 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p>ID of the application associated with the Amazon CloudFormation template.</p>"
+          "documentation": "<p>The ID of the application associated with the AWS CloudFormation template.</p>"
         },
         "templateFormat": {
           "shape": "OutputFormat",
-          "documentation": "<p>Format for generating the Amazon CloudFormation template.</p>"
+          "documentation": "<p>The format for generating the AWS CloudFormation template.</p>"
         }
       }
     },
@@ -1353,7 +1688,7 @@
       "members": {
         "s3Location": {
           "shape": "S3Location",
-          "documentation": "<p>Location of the Amazon S3 object.</p>"
+          "documentation": "<p>The location of the Amazon S3 object.</p>"
         }
       }
     },
@@ -1362,7 +1697,7 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p>ID of the application launch configuration.</p>"
+          "documentation": "<p>The ID of the application.</p>"
         }
       }
     },
@@ -1371,15 +1706,19 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p>ID of the application associated with the launch configuration.</p>"
+          "documentation": "<p>The ID of the application.</p>"
         },
         "roleName": {
           "shape": "RoleName",
-          "documentation": "<p>Name of the service role in the customer's account that Amazon CloudFormation uses to launch the application.</p>"
+          "documentation": "<p>The name of the service role in the customer's account that AWS CloudFormation uses to launch the application.</p>"
+        },
+        "autoLaunch": {
+          "shape": "AutoLaunch",
+          "documentation": "<p>Indicates whether the application is configured to launch automatically after replication is complete.</p>"
         },
         "serverGroupLaunchConfigurations": {
           "shape": "ServerGroupLaunchConfigurations",
-          "documentation": "<p>List of launch configurations for server groups in this application.</p>"
+          "documentation": "<p>The launch configurations for server groups in this application.</p>"
         }
       }
     },
@@ -1388,7 +1727,7 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p>ID of the application associated with the replication configuration.</p>"
+          "documentation": "<p>The ID of the application.</p>"
         }
       }
     },
@@ -1397,7 +1736,7 @@
       "members": {
         "serverGroupReplicationConfigurations": {
           "shape": "ServerGroupReplicationConfigurations",
-          "documentation": "<p>Replication configurations associated with server groups in this application.</p>"
+          "documentation": "<p>The replication configurations associated with server groups in this application.</p>"
         }
       }
     },
@@ -1406,7 +1745,7 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p>ID of the application whose information is being retrieved.</p>"
+          "documentation": "<p>The ID of the application.</p>"
         }
       }
     },
@@ -1419,11 +1758,57 @@
         },
         "serverGroups": {
           "shape": "ServerGroups",
-          "documentation": "<p>List of server groups belonging to the application.</p>"
+          "documentation": "<p>The server groups that belong to the application.</p>"
         },
         "tags": {
           "shape": "Tags",
-          "documentation": "<p>List of tags associated with the application.</p>"
+          "documentation": "<p>The tags associated with the application.</p>"
+        }
+      }
+    },
+    "GetAppValidationConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "appId"
+      ],
+      "members": {
+        "appId": {
+          "shape": "AppIdWithValidation",
+          "documentation": "<p>The ID of the application.</p>"
+        }
+      }
+    },
+    "GetAppValidationConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "appValidationConfigurations": {
+          "shape": "AppValidationConfigurations",
+          "documentation": "<p>The configuration for application validation.</p>"
+        },
+        "serverGroupValidationConfigurations": {
+          "shape": "ServerGroupValidationConfigurations",
+          "documentation": "<p>The configuration for instance validation.</p>"
+        }
+      }
+    },
+    "GetAppValidationOutputRequest": {
+      "type": "structure",
+      "required": [
+        "appId"
+      ],
+      "members": {
+        "appId": {
+          "shape": "AppIdWithValidation",
+          "documentation": "<p>The ID of the application.</p>"
+        }
+      }
+    },
+    "GetAppValidationOutputResponse": {
+      "type": "structure",
+      "members": {
+        "validationOutputList": {
+          "shape": "ValidationOutputList",
+          "documentation": "<p>The validation output.</p>"
         }
       }
     },
@@ -1458,7 +1843,7 @@
       "members": {
         "replicationJobId": {
           "shape": "ReplicationJobId",
-          "documentation": "<p>The identifier of the replication job.</p>"
+          "documentation": "<p>The ID of the replication job.</p>"
         },
         "nextToken": {
           "shape": "NextToken",
@@ -1491,7 +1876,7 @@
       "members": {
         "replicationJobId": {
           "shape": "ReplicationJobId",
-          "documentation": "<p>The identifier of the replication job.</p>"
+          "documentation": "<p>The ID of the replication job.</p>"
         },
         "nextToken": {
           "shape": "NextToken",
@@ -1533,7 +1918,7 @@
         },
         "vmServerAddressList": {
           "shape": "VmServerAddressList",
-          "documentation": "<p>List of <code>VmServerAddress</code> objects</p>"
+          "documentation": "<p>The server addresses.</p>"
         }
       }
     },
@@ -1558,6 +1943,19 @@
         }
       }
     },
+    "ImportAppCatalogRequest": {
+      "type": "structure",
+      "members": {
+        "roleName": {
+          "shape": "RoleName",
+          "documentation": "<p>The name of the service role. If you omit this parameter, we create a service-linked role for AWS Migration Hub in your account. Otherwise, the role that you provide must have the <a href=\"https://docs.aws.amazon.com/migrationhub/latest/ug/new-customer-setup.html#sms-managed\">policy and trust policy</a> described in the <i>AWS Migration Hub User Guide</i>.</p>"
+        }
+      }
+    },
+    "ImportAppCatalogResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "ImportServerCatalogRequest": {
       "type": "structure",
       "members": {}
@@ -1566,13 +1964,17 @@
       "type": "structure",
       "members": {}
     },
+    "ImportedAppId": {
+      "type": "string"
+    },
+    "InstanceId": {
+      "type": "string",
+      "pattern": "(^i-(\\w{8}|\\w{17})$)|(^mi-\\w{17}$)"
+    },
     "InstanceType": {
       "type": "string"
     },
     "IpAddress": {
-      "type": "string"
-    },
-    "KeyName": {
       "type": "string"
     },
     "KmsKeyId": {
@@ -1583,7 +1985,7 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p>ID of the application to launch.</p>"
+          "documentation": "<p>The ID of the application.</p>"
         }
       }
     },
@@ -1596,15 +1998,15 @@
       "members": {
         "latestLaunchTime": {
           "shape": "Timestamp",
-          "documentation": "<p>Latest time this application was launched successfully.</p>"
+          "documentation": "<p>The latest time that this application was launched successfully.</p>"
         },
         "stackName": {
           "shape": "StackName",
-          "documentation": "<p>Name of the latest stack launched for this application.</p>"
+          "documentation": "<p>The name of the latest stack launched for this application.</p>"
         },
         "stackId": {
           "shape": "StackId",
-          "documentation": "<p>Identifier of the latest stack launched for this application.</p>"
+          "documentation": "<p>The ID of the latest stack launched for this application.</p>"
         }
       },
       "documentation": "<p>Details about the latest launch of an application.</p>"
@@ -1624,7 +2026,7 @@
       "members": {
         "appIds": {
           "shape": "AppIds",
-          "documentation": "<p/>"
+          "documentation": "<p>The unique application IDs.</p>"
         },
         "nextToken": {
           "shape": "NextToken",
@@ -1632,7 +2034,7 @@
         },
         "maxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>The maximum number of results to return in a single call. The default value is 50. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. </p>"
+          "documentation": "<p>The maximum number of results to return in a single call. The default value is 100. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. </p>"
         }
       }
     },
@@ -1641,7 +2043,7 @@
       "members": {
         "apps": {
           "shape": "Apps",
-          "documentation": "<p>A list of application summaries.</p>"
+          "documentation": "<p>The application summaries.</p>"
         },
         "nextToken": {
           "shape": "NextToken",
@@ -1661,6 +2063,50 @@
     "NextToken": {
       "type": "string"
     },
+    "NonEmptyStringWithMaxLen255": {
+      "type": "string",
+      "max": 255,
+      "min": 1,
+      "pattern": "^[\\S]+$"
+    },
+    "NotificationContext": {
+      "type": "structure",
+      "members": {
+        "validationId": {
+          "shape": "ValidationId",
+          "documentation": "<p>The ID of the validation.</p>"
+        },
+        "status": {
+          "shape": "ValidationStatus",
+          "documentation": "<p>The status of the validation.</p>"
+        },
+        "statusMessage": {
+          "shape": "ValidationStatusMessage",
+          "documentation": "<p>The status message.</p>"
+        }
+      },
+      "documentation": "<p>Contains the status of validating an application.</p>"
+    },
+    "NotifyAppValidationOutputRequest": {
+      "type": "structure",
+      "required": [
+        "appId"
+      ],
+      "members": {
+        "appId": {
+          "shape": "AppIdWithValidation",
+          "documentation": "<p>The ID of the application.</p>"
+        },
+        "notificationContext": {
+          "shape": "NotificationContext",
+          "documentation": "<p>The notification information.</p>"
+        }
+      }
+    },
+    "NotifyAppValidationOutputResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "NumberOfRecentAmisToKeep": {
       "type": "integer"
     },
@@ -1676,15 +2122,19 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p>ID of the application associated with the launch configuration.</p>"
+          "documentation": "<p>The ID of the application.</p>"
         },
         "roleName": {
           "shape": "RoleName",
-          "documentation": "<p>Name of service role in the customer's account that Amazon CloudFormation uses to launch the application.</p>"
+          "documentation": "<p>The name of service role in the customer's account that AWS CloudFormation uses to launch the application.</p>"
+        },
+        "autoLaunch": {
+          "shape": "AutoLaunch",
+          "documentation": "<p>Indicates whether the application is configured to launch automatically after replication is complete.</p>"
         },
         "serverGroupLaunchConfigurations": {
           "shape": "ServerGroupLaunchConfigurations",
-          "documentation": "<p>Launch configurations for server groups in the application.</p>"
+          "documentation": "<p>Information about the launch configurations for server groups in the application.</p>"
         }
       }
     },
@@ -1697,15 +2147,39 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p>ID of the application tassociated with the replication configuration.</p>"
+          "documentation": "<p>The ID of the application.</p>"
         },
         "serverGroupReplicationConfigurations": {
           "shape": "ServerGroupReplicationConfigurations",
-          "documentation": "<p>Replication configurations for server groups in the application.</p>"
+          "documentation": "<p>Information about the replication configurations for server groups in the application.</p>"
         }
       }
     },
     "PutAppReplicationConfigurationResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "PutAppValidationConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "appId"
+      ],
+      "members": {
+        "appId": {
+          "shape": "AppIdWithValidation",
+          "documentation": "<p>The ID of the application.</p>"
+        },
+        "appValidationConfigurations": {
+          "shape": "AppValidationConfigurations",
+          "documentation": "<p>The configuration for application validation.</p>"
+        },
+        "serverGroupValidationConfigurations": {
+          "shape": "ServerGroupValidationConfigurations",
+          "documentation": "<p>The configuration for instance validation.</p>"
+        }
+      }
+    },
+    "PutAppValidationConfigurationResponse": {
       "type": "structure",
       "members": {}
     },
@@ -1714,11 +2188,11 @@
       "members": {
         "replicationJobId": {
           "shape": "ReplicationJobId",
-          "documentation": "<p>The identifier of the replication job.</p>"
+          "documentation": "<p>The ID of the replication job.</p>"
         },
         "serverId": {
           "shape": "ServerId",
-          "documentation": "<p>The identifier of the server.</p>"
+          "documentation": "<p>The ID of the server.</p>"
         },
         "serverType": {
           "shape": "ServerType",
@@ -1738,7 +2212,7 @@
         },
         "runOnce": {
           "shape": "RunOnce",
-          "documentation": "<p/>"
+          "documentation": "<p>Indicates whether to run the replication job one time.</p>"
         },
         "nextReplicationRunStartTime": {
           "shape": "Timestamp",
@@ -1750,7 +2224,7 @@
         },
         "roleName": {
           "shape": "RoleName",
-          "documentation": "<p>The name of the IAM role to be used by the Server Migration Service.</p>"
+          "documentation": "<p>The name of the IAM role to be used by AWS SMS.</p>"
         },
         "latestAmiId": {
           "shape": "AmiId",
@@ -1770,15 +2244,15 @@
         },
         "numberOfRecentAmisToKeep": {
           "shape": "NumberOfRecentAmisToKeep",
-          "documentation": "<p>Number of recent AMIs to keep in the customer's account for a replication job. By default the value is set to zero, meaning that all AMIs are kept.</p>"
+          "documentation": "<p>The number of recent AMIs to keep in the customer's account for a replication job. By default, the value is set to zero, meaning that all AMIs are kept.</p>"
         },
         "encrypted": {
           "shape": "Encrypted",
-          "documentation": "<p>Whether the replication job should produce encrypted AMIs or not. See also <code>KmsKeyId</code> below.</p>"
+          "documentation": "<p>Indicates whether the replication job should produce encrypted AMIs.</p>"
         },
         "kmsKeyId": {
           "shape": "KmsKeyId",
-          "documentation": "<p>KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the following: </p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to KMS key ID</p> </li> <li> <p>ARN referring to KMS key alias</p> </li> </ul> <p> If encrypted is <i>true</i> but a KMS key id is not specified, the customer's default KMS key for EBS is used. </p>"
+          "documentation": "<p>The ID of the KMS key for replication jobs that produce encrypted AMIs. This value can be any of the following: </p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to the KMS key ID</p> </li> <li> <p>ARN referring to the KMS key alias</p> </li> </ul> <p>If encrypted is enabled but a KMS key ID is not specified, the customer's default KMS key for Amazon EBS is used.</p>"
         },
         "replicationRunList": {
           "shape": "ReplicationRunList",
@@ -1820,7 +2294,7 @@
       "members": {
         "replicationRunId": {
           "shape": "ReplicationRunId",
-          "documentation": "<p>The identifier of the replication run.</p>"
+          "documentation": "<p>The ID of the replication run.</p>"
         },
         "state": {
           "shape": "ReplicationRunState",
@@ -1832,7 +2306,7 @@
         },
         "stageDetails": {
           "shape": "ReplicationRunStageDetails",
-          "documentation": "<p>Details of the current stage of the replication run.</p>"
+          "documentation": "<p>Details about the current stage of the replication run.</p>"
         },
         "statusMessage": {
           "shape": "ReplicationRunStatusMessage",
@@ -1840,7 +2314,7 @@
         },
         "amiId": {
           "shape": "AmiId",
-          "documentation": "<p>The identifier of the Amazon Machine Image (AMI) from the replication run.</p>"
+          "documentation": "<p>The ID of the Amazon Machine Image (AMI) from the replication run.</p>"
         },
         "scheduledStartTime": {
           "shape": "Timestamp",
@@ -1856,11 +2330,11 @@
         },
         "encrypted": {
           "shape": "Encrypted",
-          "documentation": "<p>Whether the replication run should produce encrypted AMI or not. See also <code>KmsKeyId</code> below.</p>"
+          "documentation": "<p>Indicates whether the replication run should produce an encrypted AMI.</p>"
         },
         "kmsKeyId": {
           "shape": "KmsKeyId",
-          "documentation": "<p>KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the following: </p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to KMS key ID</p> </li> <li> <p>ARN referring to KMS key alias</p> </li> </ul> <p> If encrypted is <i>true</i> but a KMS key id is not specified, the customer's default KMS key for EBS is used. </p>"
+          "documentation": "<p>The ID of the KMS key for replication jobs that produce encrypted AMIs. This value can be any of the following:</p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to the KMS key ID</p> </li> <li> <p>ARN referring to the KMS key alias</p> </li> </ul> <p> If encrypted is <i>true</i> but a KMS key ID is not specified, the customer's default KMS key for Amazon EBS is used. </p>"
         }
       },
       "documentation": "<p>Represents a replication run.</p>"
@@ -1882,11 +2356,11 @@
       "members": {
         "stage": {
           "shape": "ReplicationRunStage",
-          "documentation": "<p>String describing the current stage of a replication run.</p>"
+          "documentation": "<p>The current stage of a replication run.</p>"
         },
         "stageProgress": {
           "shape": "ReplicationRunStageProgress",
-          "documentation": "<p>String describing the progress of the current stage of a replication run.</p>"
+          "documentation": "<p>The progress of the current stage of a replication run.</p>"
         }
       },
       "documentation": "<p>Details of the current stage of a replication run.</p>"
@@ -1922,19 +2396,74 @@
     "RunOnce": {
       "type": "boolean"
     },
+    "S3BucketName": {
+      "type": "string",
+      "max": 63,
+      "min": 3
+    },
+    "S3KeyName": {
+      "type": "string",
+      "max": 1024
+    },
     "S3Location": {
       "type": "structure",
       "members": {
         "bucket": {
-          "shape": "BucketName",
-          "documentation": "<p>Amazon S3 bucket name.</p>"
+          "shape": "S3BucketName",
+          "documentation": "<p>The Amazon S3 bucket name.</p>"
         },
         "key": {
-          "shape": "KeyName",
-          "documentation": "<p>Amazon S3 bucket key.</p>"
+          "shape": "S3KeyName",
+          "documentation": "<p>The Amazon S3 bucket key.</p>"
         }
       },
-      "documentation": "<p>Location of the Amazon S3 object in the customer's account.</p>"
+      "documentation": "<p>Location of an Amazon S3 object.</p>"
+    },
+    "SSMOutput": {
+      "type": "structure",
+      "members": {
+        "s3Location": {
+          "shape": "S3Location"
+        }
+      },
+      "documentation": "<p>Contains the location of validation output.</p>"
+    },
+    "SSMValidationParameters": {
+      "type": "structure",
+      "members": {
+        "source": {
+          "shape": "Source",
+          "documentation": "<p>The location of the validation script.</p>"
+        },
+        "instanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The ID of the instance. The instance must have the following tag: UserForSMSApplicationValidation=true.</p>"
+        },
+        "scriptType": {
+          "shape": "ScriptType",
+          "documentation": "<p>The type of validation script.</p>"
+        },
+        "command": {
+          "shape": "Command",
+          "documentation": "<p>The command to run the validation script</p>"
+        },
+        "executionTimeoutSeconds": {
+          "shape": "ExecutionTimeoutSeconds",
+          "documentation": "<p>The timeout interval, in seconds.</p>"
+        },
+        "outputS3BucketName": {
+          "shape": "BucketName",
+          "documentation": "<p>The name of the S3 bucket for output.</p>"
+        }
+      },
+      "documentation": "<p>Contains validation parameters.</p>"
+    },
+    "ScriptType": {
+      "type": "string",
+      "enum": [
+        "SHELL_SCRIPT",
+        "POWERSHELL_SCRIPT"
+      ]
     },
     "SecurityGroup": {
       "type": "string"
@@ -1944,7 +2473,7 @@
       "members": {
         "serverId": {
           "shape": "ServerId",
-          "documentation": "<p>The identifier of the server.</p>"
+          "documentation": "<p>The ID of the server.</p>"
         },
         "serverType": {
           "shape": "ServerType",
@@ -1956,7 +2485,7 @@
         },
         "replicationJobId": {
           "shape": "ReplicationJobId",
-          "documentation": "<p>The identifier of the replication job.</p>"
+          "documentation": "<p>The ID of the replication job.</p>"
         },
         "replicationJobTerminated": {
           "shape": "ReplicationJobTerminated",
@@ -1980,18 +2509,18 @@
       "members": {
         "serverGroupId": {
           "shape": "ServerGroupId",
-          "documentation": "<p>Identifier of a server group.</p>"
+          "documentation": "<p>The ID of a server group.</p>"
         },
         "name": {
           "shape": "ServerGroupName",
-          "documentation": "<p>Name of a server group.</p>"
+          "documentation": "<p>The name of a server group.</p>"
         },
         "serverList": {
           "shape": "ServerList",
-          "documentation": "<p>List of servers belonging to a server group.</p>"
+          "documentation": "<p>The servers that belong to a server group.</p>"
         }
       },
-      "documentation": "<p>A logical grouping of servers.</p>"
+      "documentation": "<p>Logical grouping of servers.</p>"
     },
     "ServerGroupId": {
       "type": "string"
@@ -2001,15 +2530,15 @@
       "members": {
         "serverGroupId": {
           "shape": "ServerGroupId",
-          "documentation": "<p>Identifier of the server group the launch configuration is associated with.</p>"
+          "documentation": "<p>The ID of the server group with which the launch configuration is associated.</p>"
         },
         "launchOrder": {
           "shape": "LaunchOrder",
-          "documentation": "<p>Launch order of servers in the server group.</p>"
+          "documentation": "<p>The launch order of servers in the server group.</p>"
         },
         "serverLaunchConfigurations": {
           "shape": "ServerLaunchConfigurations",
-          "documentation": "<p>Launch configuration for servers in the server group.</p>"
+          "documentation": "<p>The launch configuration for servers in the server group.</p>"
         }
       },
       "documentation": "<p>Launch configuration for a server group.</p>"
@@ -2028,11 +2557,11 @@
       "members": {
         "serverGroupId": {
           "shape": "ServerGroupId",
-          "documentation": "<p>Identifier of the server group this replication configuration is associated with.</p>"
+          "documentation": "<p>The ID of the server group with which this replication configuration is associated.</p>"
         },
         "serverReplicationConfigurations": {
           "shape": "ServerReplicationConfigurations",
-          "documentation": "<p>Replication configuration for servers in the server group.</p>"
+          "documentation": "<p>The replication configuration for servers in the server group.</p>"
         }
       },
       "documentation": "<p>Replication configuration for a server group.</p>"
@@ -2041,6 +2570,26 @@
       "type": "list",
       "member": {
         "shape": "ServerGroupReplicationConfiguration"
+      }
+    },
+    "ServerGroupValidationConfiguration": {
+      "type": "structure",
+      "members": {
+        "serverGroupId": {
+          "shape": "ServerGroupId",
+          "documentation": "<p>The ID of the server group.</p>"
+        },
+        "serverValidationConfigurations": {
+          "shape": "ServerValidationConfigurations",
+          "documentation": "<p>The validation configuration.</p>"
+        }
+      },
+      "documentation": "<p>Configuration for validating an instance.</p>"
+    },
+    "ServerGroupValidationConfigurations": {
+      "type": "list",
+      "member": {
+        "shape": "ServerGroupValidationConfiguration"
       }
     },
     "ServerGroups": {
@@ -2057,27 +2606,27 @@
       "members": {
         "server": {
           "shape": "Server",
-          "documentation": "<p>Identifier of the server the launch configuration is associated with.</p>"
+          "documentation": "<p>The ID of the server with which the launch configuration is associated.</p>"
         },
         "logicalId": {
           "shape": "LogicalId",
-          "documentation": "<p>Logical ID of the server in the Amazon CloudFormation template.</p>"
+          "documentation": "<p>The logical ID of the server in the AWS CloudFormation template.</p>"
         },
         "vpc": {
           "shape": "VPC",
-          "documentation": "<p>Identifier of the VPC the server should be launched into.</p>"
+          "documentation": "<p>The ID of the VPC into which the server should be launched.</p>"
         },
         "subnet": {
           "shape": "Subnet",
-          "documentation": "<p>Identifier of the subnet the server should be launched into.</p>"
+          "documentation": "<p>The ID of the subnet the server should be launched into.</p>"
         },
         "securityGroup": {
           "shape": "SecurityGroup",
-          "documentation": "<p>Identifier of the security group that applies to the launched server.</p>"
+          "documentation": "<p>The ID of the security group that applies to the launched server.</p>"
         },
         "ec2KeyName": {
           "shape": "EC2KeyName",
-          "documentation": "<p>Name of the EC2 SSH Key to be used for connecting to the launched server.</p>"
+          "documentation": "<p>The name of the Amazon EC2 SSH key to be used for connecting to the launched server.</p>"
         },
         "userData": {
           "shape": "UserData",
@@ -2085,11 +2634,22 @@
         },
         "instanceType": {
           "shape": "InstanceType",
-          "documentation": "<p>Instance type to be used for launching the server.</p>"
+          "documentation": "<p>The instance type to use when launching the server.</p>"
         },
         "associatePublicIpAddress": {
           "shape": "AssociatePublicIpAddress",
-          "documentation": "<p>If true, a publicly accessible IP address is created when launching the server.</p>"
+          "documentation": "<p>Indicates whether a publicly accessible IP address is created when launching the server.</p>"
+        },
+        "iamInstanceProfileName": {
+          "shape": "RoleName",
+          "documentation": "<p>The name of the IAM instance profile.</p>"
+        },
+        "configureScript": {
+          "shape": "S3Location"
+        },
+        "configureScriptType": {
+          "shape": "ScriptType",
+          "documentation": "<p>The type of configuration script.</p>"
         }
       },
       "documentation": "<p>Launch configuration for a server.</p>"
@@ -2111,11 +2671,11 @@
       "members": {
         "server": {
           "shape": "Server",
-          "documentation": "<p>Identifier of the server this replication configuration is associated with.</p>"
+          "documentation": "<p>The ID of the server with which this replication configuration is associated.</p>"
         },
         "serverReplicationParameters": {
           "shape": "ServerReplicationParameters",
-          "documentation": "<p>Parameters for replicating the server.</p>"
+          "documentation": "<p>The parameters for replicating the server.</p>"
         }
       },
       "documentation": "<p>Replication configuration of a server.</p>"
@@ -2131,40 +2691,95 @@
       "members": {
         "seedTime": {
           "shape": "Timestamp",
-          "documentation": "<p>Seed time for creating a replication job for the server.</p>"
+          "documentation": "<p>The seed time for creating a replication job for the server.</p>"
         },
         "frequency": {
           "shape": "Frequency",
-          "documentation": "<p>Frequency of creating replication jobs for the server.</p>"
+          "documentation": "<p>The frequency of creating replication jobs for the server.</p>"
         },
         "runOnce": {
           "shape": "RunOnce",
-          "documentation": "<p/>"
+          "documentation": "<p>Indicates whether to run the replication job one time.</p>"
         },
         "licenseType": {
           "shape": "LicenseType",
-          "documentation": "<p>License type for creating a replication job for the server.</p>"
+          "documentation": "<p>The license type for creating a replication job for the server.</p>"
         },
         "numberOfRecentAmisToKeep": {
           "shape": "NumberOfRecentAmisToKeep",
-          "documentation": "<p>Number of recent AMIs to keep when creating a replication job for this server.</p>"
+          "documentation": "<p>The number of recent AMIs to keep when creating a replication job for this server.</p>"
         },
         "encrypted": {
           "shape": "Encrypted",
-          "documentation": "<p>When true, the replication job produces encrypted AMIs. See also <code>KmsKeyId</code> below.</p>"
+          "documentation": "<p>Indicates whether the replication job produces encrypted AMIs.</p>"
         },
         "kmsKeyId": {
           "shape": "KmsKeyId",
-          "documentation": "<p/> <p>KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the following: </p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to KMS key ID</p> </li> <li> <p>ARN referring to KMS key alias</p> </li> </ul> <p> If encrypted is <i>true</i> but a KMS key id is not specified, the customer's default KMS key for EBS is used. </p>"
+          "documentation": "<p>The ID of the KMS key for replication jobs that produce encrypted AMIs. This value can be any of the following:</p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to the KMS key ID</p> </li> <li> <p>ARN referring to the KMS key alias</p> </li> </ul> <p>If encrypted is enabled but a KMS key ID is not specified, the customer's default KMS key for Amazon EBS is used.</p>"
         }
       },
-      "documentation": "<p>Replication parameters for replicating a server.</p>"
+      "documentation": "<p>The replication parameters for replicating a server.</p>"
     },
     "ServerType": {
       "type": "string",
       "enum": [
         "VIRTUAL_MACHINE"
       ]
+    },
+    "ServerValidationConfiguration": {
+      "type": "structure",
+      "members": {
+        "server": {
+          "shape": "Server"
+        },
+        "validationId": {
+          "shape": "ValidationId",
+          "documentation": "<p>The ID of the validation.</p>"
+        },
+        "name": {
+          "shape": "NonEmptyStringWithMaxLen255",
+          "documentation": "<p>The name of the configuration.</p>"
+        },
+        "serverValidationStrategy": {
+          "shape": "ServerValidationStrategy",
+          "documentation": "<p>The validation strategy.</p>"
+        },
+        "userDataValidationParameters": {
+          "shape": "UserDataValidationParameters",
+          "documentation": "<p>The validation parameters.</p>"
+        }
+      },
+      "documentation": "<p>Configuration for validating an instance.</p>"
+    },
+    "ServerValidationConfigurations": {
+      "type": "list",
+      "member": {
+        "shape": "ServerValidationConfiguration"
+      }
+    },
+    "ServerValidationOutput": {
+      "type": "structure",
+      "members": {
+        "server": {
+          "shape": "Server"
+        }
+      },
+      "documentation": "<p>Contains output from validating an instance.</p>"
+    },
+    "ServerValidationStrategy": {
+      "type": "string",
+      "enum": [
+        "USERDATA"
+      ]
+    },
+    "Source": {
+      "type": "structure",
+      "members": {
+        "s3Location": {
+          "shape": "S3Location"
+        }
+      },
+      "documentation": "<p>Contains the location of a validation script.</p>"
     },
     "StackId": {
       "type": "string"
@@ -2177,11 +2792,31 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p>ID of the application to replicate.</p>"
+          "documentation": "<p>The ID of the application.</p>"
         }
       }
     },
     "StartAppReplicationResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "StartOnDemandAppReplicationRequest": {
+      "type": "structure",
+      "required": [
+        "appId"
+      ],
+      "members": {
+        "appId": {
+          "shape": "AppId",
+          "documentation": "<p>The ID of the application.</p>"
+        },
+        "description": {
+          "shape": "Description",
+          "documentation": "<p>The description of the replication run.</p>"
+        }
+      }
+    },
+    "StartOnDemandAppReplicationResponse": {
       "type": "structure",
       "members": {}
     },
@@ -2193,7 +2828,7 @@
       "members": {
         "replicationJobId": {
           "shape": "ReplicationJobId",
-          "documentation": "<p>The identifier of the replication job.</p>"
+          "documentation": "<p>The ID of the replication job.</p>"
         },
         "description": {
           "shape": "Description",
@@ -2206,7 +2841,7 @@
       "members": {
         "replicationRunId": {
           "shape": "ReplicationRunId",
-          "documentation": "<p>The identifier of the replication run.</p>"
+          "documentation": "<p>The ID of the replication run.</p>"
         }
       }
     },
@@ -2215,7 +2850,7 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p>ID of the application to stop replicating.</p>"
+          "documentation": "<p>The ID of the application.</p>"
         }
       }
     },
@@ -2231,14 +2866,14 @@
       "members": {
         "key": {
           "shape": "TagKey",
-          "documentation": "<p>Tag key.</p>"
+          "documentation": "<p>The tag key.</p>"
         },
         "value": {
           "shape": "TagValue",
-          "documentation": "<p>Tag value.</p>"
+          "documentation": "<p>The tag value.</p>"
         }
       },
-      "documentation": "<p>A label that can be assigned to an application.</p>"
+      "documentation": "<p>Key/value pair that can be assigned to an application.</p>"
     },
     "TagKey": {
       "type": "string"
@@ -2257,7 +2892,7 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p>ID of the application to terminate.</p>"
+          "documentation": "<p>The ID of the application.</p>"
         }
       }
     },
@@ -2279,27 +2914,27 @@
       "members": {
         "appId": {
           "shape": "AppId",
-          "documentation": "<p>ID of the application to update.</p>"
+          "documentation": "<p>The ID of the application.</p>"
         },
         "name": {
           "shape": "AppName",
-          "documentation": "<p>New name of the application.</p>"
+          "documentation": "<p>The new name of the application.</p>"
         },
         "description": {
           "shape": "AppDescription",
-          "documentation": "<p>New description of the application.</p>"
+          "documentation": "<p>The new description of the application.</p>"
         },
         "roleName": {
           "shape": "RoleName",
-          "documentation": "<p>Name of the service role in the customer's account used by AWS SMS.</p>"
+          "documentation": "<p>The name of the service role in the customer's account used by AWS SMS.</p>"
         },
         "serverGroups": {
           "shape": "ServerGroups",
-          "documentation": "<p>List of server groups in the application to update.</p>"
+          "documentation": "<p>The server groups in the application to update.</p>"
         },
         "tags": {
           "shape": "Tags",
-          "documentation": "<p>List of tags to associate with the application.</p>"
+          "documentation": "<p>The tags to associate with the application.</p>"
         }
       }
     },
@@ -2308,15 +2943,15 @@
       "members": {
         "appSummary": {
           "shape": "AppSummary",
-          "documentation": "<p>Summary description of the application.</p>"
+          "documentation": "<p>A summary description of the application.</p>"
         },
         "serverGroups": {
           "shape": "ServerGroups",
-          "documentation": "<p>List of updated server groups in the application.</p>"
+          "documentation": "<p>The updated server groups in the application.</p>"
         },
         "tags": {
           "shape": "Tags",
-          "documentation": "<p>List of tags associated with the application.</p>"
+          "documentation": "<p>The tags associated with the application.</p>"
         }
       }
     },
@@ -2328,7 +2963,7 @@
       "members": {
         "replicationJobId": {
           "shape": "ReplicationJobId",
-          "documentation": "<p>The identifier of the replication job.</p>"
+          "documentation": "<p>The ID of the replication job.</p>"
         },
         "frequency": {
           "shape": "Frequency",
@@ -2352,15 +2987,15 @@
         },
         "numberOfRecentAmisToKeep": {
           "shape": "NumberOfRecentAmisToKeep",
-          "documentation": "<p>The maximum number of SMS-created AMIs to retain. The oldest will be deleted once the maximum number is reached and a new AMI is created.</p>"
+          "documentation": "<p>The maximum number of SMS-created AMIs to retain. The oldest is deleted after the maximum number is reached and a new AMI is created.</p>"
         },
         "encrypted": {
           "shape": "Encrypted",
-          "documentation": "<p>When true, the replication job produces encrypted AMIs . See also <code>KmsKeyId</code> below.</p>"
+          "documentation": "<p>When true, the replication job produces encrypted AMIs. For more information, <code>KmsKeyId</code>.</p>"
         },
         "kmsKeyId": {
           "shape": "KmsKeyId",
-          "documentation": "<p/> <p>KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the following: </p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to KMS key ID</p> </li> <li> <p>ARN referring to KMS key alias</p> </li> </ul> <p> If encrypted is <i>true</i> but a KMS key id is not specified, the customer's default KMS key for EBS is used. </p>"
+          "documentation": "<p>The ID of the KMS key for replication jobs that produce encrypted AMIs. This value can be any of the following:</p> <ul> <li> <p>KMS key ID</p> </li> <li> <p>KMS key alias</p> </li> <li> <p>ARN referring to the KMS key ID</p> </li> <li> <p>ARN referring to the KMS key alias</p> </li> </ul> <p>If encrypted is enabled but a KMS key ID is not specified, the customer's default KMS key for Amazon EBS is used.</p>"
         }
       }
     },
@@ -2378,8 +3013,80 @@
       },
       "documentation": "<p>A script that runs on first launch of an Amazon EC2 instance. Used for configuring the server during launch.</p>"
     },
+    "UserDataValidationParameters": {
+      "type": "structure",
+      "members": {
+        "source": {
+          "shape": "Source",
+          "documentation": "<p>The location of the validation script.</p>"
+        },
+        "scriptType": {
+          "shape": "ScriptType",
+          "documentation": "<p>The type of validation script.</p>"
+        }
+      },
+      "documentation": "<p>Contains validation parameters.</p>"
+    },
     "VPC": {
       "type": "string"
+    },
+    "ValidationId": {
+      "type": "string",
+      "pattern": "^val-[0-9a-f]{17}$"
+    },
+    "ValidationOutput": {
+      "type": "structure",
+      "members": {
+        "validationId": {
+          "shape": "ValidationId",
+          "documentation": "<p>The ID of the validation.</p>"
+        },
+        "name": {
+          "shape": "NonEmptyStringWithMaxLen255",
+          "documentation": "<p>The name of the validation.</p>"
+        },
+        "status": {
+          "shape": "ValidationStatus",
+          "documentation": "<p>The status of the validation.</p>"
+        },
+        "statusMessage": {
+          "shape": "ValidationStatusMessage",
+          "documentation": "<p>The status message.</p>"
+        },
+        "latestValidationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The latest time that the validation was performed.</p>"
+        },
+        "appValidationOutput": {
+          "shape": "AppValidationOutput",
+          "documentation": "<p>The output from validating an application.</p>"
+        },
+        "serverValidationOutput": {
+          "shape": "ServerValidationOutput",
+          "documentation": "<p>The output from validation an instance.</p>"
+        }
+      },
+      "documentation": "<p>Contains validation output.</p>"
+    },
+    "ValidationOutputList": {
+      "type": "list",
+      "member": {
+        "shape": "ValidationOutput"
+      }
+    },
+    "ValidationStatus": {
+      "type": "string",
+      "enum": [
+        "READY_FOR_VALIDATION",
+        "PENDING",
+        "IN_PROGRESS",
+        "SUCCEEDED",
+        "FAILED"
+      ]
+    },
+    "ValidationStatusMessage": {
+      "type": "string",
+      "max": 2500
     },
     "VmId": {
       "type": "string"
@@ -2409,7 +3116,7 @@
       "members": {
         "vmServerAddress": {
           "shape": "VmServerAddress",
-          "documentation": "<p>Information about the VM server location.</p>"
+          "documentation": "<p>The VM server location.</p>"
         },
         "vmName": {
           "shape": "VmName",
@@ -2435,11 +3142,11 @@
       "members": {
         "vmManagerId": {
           "shape": "VmManagerId",
-          "documentation": "<p>The identifier of the VM manager.</p>"
+          "documentation": "<p>The ID of the VM manager.</p>"
         },
         "vmId": {
           "shape": "VmId",
-          "documentation": "<p>The identifier of the VM.</p>"
+          "documentation": "<p>The ID of the VM.</p>"
         }
       },
       "documentation": "<p>Represents a VM server location.</p>"
@@ -2451,5 +3158,5 @@
       }
     }
   },
-  "documentation": "<fullname>AAWS Sever Migration Service</fullname> <p>This is the <i>AWS Sever Migration Service API Reference</i>. It provides descriptions, syntax, and usage examples for each of the actions and data types for the AWS Sever Migration Service (AWS SMS). The topic for each action shows the Query API request parameters and the XML response. You can also view the XML request elements in the WSDL.</p> <p>Alternatively, you can use one of the AWS SDKs to access an API that's tailored to the programming language or platform that you're using. For more information, see <a href=\"http://aws.amazon.com/tools/#SDKs\">AWS SDKs</a>.</p> <p>To learn more about the Server Migration Service, see the following resources:</p> <ul> <li> <p> <a href=\"https://aws.amazon.com/server-migration-service/\">AWS Sever Migration Service product page</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/server-migration-service/latest/userguide/server-migration.html\">AWS Sever Migration Service User Guide</a> </p> </li> </ul>"
+  "documentation": "<fullname>AWS Server Migration Service</fullname> <p>AWS Server Migration Service (AWS SMS) makes it easier and faster for you to migrate your on-premises workloads to AWS. To learn more about AWS SMS, see the following resources:</p> <ul> <li> <p> <a href=\"http://aws.amazon.com/server-migration-service/\">AWS Server Migration Service product page</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/server-migration-service/latest/userguide/\">AWS Server Migration Service User Guide</a> </p> </li> </ul>"
 }
