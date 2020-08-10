@@ -630,7 +630,7 @@ declare namespace SavingsPlans {
   }
   export type SavingsPlanRatePropertyKey = "region"|"instanceType"|"instanceFamily"|"productDescription"|"tenancy"|string;
   export type SavingsPlanRatePropertyList = SavingsPlanRateProperty[];
-  export type SavingsPlanRateServiceCode = "AmazonEC2"|"AmazonECS"|"AWSLambda"|string;
+  export type SavingsPlanRateServiceCode = "AmazonEC2"|"AmazonECS"|"AmazonEKS"|"AWSLambda"|string;
   export type SavingsPlanRateServiceCodeList = SavingsPlanRateServiceCode[];
   export type SavingsPlanRateUnit = "Hrs"|"Lambda-GB-Second"|"Request"|string;
   export type SavingsPlanRateUsageType = string;

@@ -820,11 +820,11 @@ declare class Glue extends Service {
    */
   resetJobBookmark(callback?: (err: AWSError, data: Glue.Types.ResetJobBookmarkResponse) => void): Request<Glue.Types.ResetJobBookmarkResponse, AWSError>;
   /**
-   * Restarts any completed nodes in a workflow run and resumes the run execution.
+   * Restarts selected nodes of a previous partially completed workflow run and resumes the workflow run. The selected nodes and all nodes that are downstream from the selected nodes are run.
    */
   resumeWorkflowRun(params: Glue.Types.ResumeWorkflowRunRequest, callback?: (err: AWSError, data: Glue.Types.ResumeWorkflowRunResponse) => void): Request<Glue.Types.ResumeWorkflowRunResponse, AWSError>;
   /**
-   * Restarts any completed nodes in a workflow run and resumes the run execution.
+   * Restarts selected nodes of a previous partially completed workflow run and resumes the workflow run. The selected nodes and all nodes that are downstream from the selected nodes are run.
    */
   resumeWorkflowRun(callback?: (err: AWSError, data: Glue.Types.ResumeWorkflowRunResponse) => void): Request<Glue.Types.ResumeWorkflowRunResponse, AWSError>;
   /**
@@ -1670,7 +1670,7 @@ declare namespace Glue {
      */
     JobName?: NameString;
     /**
-     * The condition state. Currently, the values supported are SUCCEEDED, STOPPED, TIMEOUT, and FAILED.
+     * The condition state. Currently, the only job states that a trigger can listen for are SUCCEEDED, STOPPED, FAILED, and TIMEOUT. The only crawler states that a trigger can listen for are SUCCEEDED, FAILED, and CANCELLED.
      */
     State?: JobRunState;
     /**
@@ -2539,6 +2539,10 @@ declare namespace Glue {
      * The tags to be used with this workflow.
      */
     Tags?: TagsMap;
+    /**
+     * You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.
+     */
+    MaxConcurrentRuns?: NullableInteger;
   }
   export interface CreateWorkflowResponse {
     /**
@@ -4643,7 +4647,7 @@ declare namespace Glue {
      */
     CompletedOn?: TimestampValue;
     /**
-     * The current state of the job run.
+     * The current state of the job run. For more information about the statuses of jobs that have terminated abnormally, see AWS Glue Job Run Statuses.
      */
     JobRunState?: JobRunState;
     /**
@@ -5436,7 +5440,7 @@ declare namespace Glue {
      */
     RunId: IdString;
     /**
-     * A list of the node IDs for the nodes you want to restart. The nodes that are to be restarted must have an execution attempt in the original run.
+     * A list of the node IDs for the nodes you want to restart. The nodes that are to be restarted must have a run attempt in the original run.
      */
     NodeIds: NodeIdList;
   }
@@ -6757,6 +6761,10 @@ declare namespace Glue {
      * A collection of properties to be used as part of each execution of the workflow.
      */
     DefaultRunProperties?: WorkflowRunProperties;
+    /**
+     * You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.
+     */
+    MaxConcurrentRuns?: NullableInteger;
   }
   export interface UpdateWorkflowResponse {
     /**
@@ -6871,6 +6879,10 @@ declare namespace Glue {
      * The graph representing all the AWS Glue components that belong to the workflow as nodes and directed connections between them as edges.
      */
     Graph?: WorkflowGraph;
+    /**
+     * You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.
+     */
+    MaxConcurrentRuns?: NullableInteger;
   }
   export interface WorkflowGraph {
     /**
@@ -6913,6 +6925,10 @@ declare namespace Glue {
      */
     Status?: WorkflowRunStatus;
     /**
+     * This error message describes any error that may have occurred in starting the workflow run. Currently the only error message is "Concurrent runs exceeded for workflow: foo."
+     */
+    ErrorMessage?: ErrorString;
+    /**
      * The statistics of the run.
      */
     Statistics?: WorkflowRunStatistics;
@@ -6948,7 +6964,7 @@ declare namespace Glue {
      */
     RunningActions?: IntegerValue;
   }
-  export type WorkflowRunStatus = "RUNNING"|"COMPLETED"|"STOPPING"|"STOPPED"|string;
+  export type WorkflowRunStatus = "RUNNING"|"COMPLETED"|"STOPPING"|"STOPPED"|"ERROR"|string;
   export type WorkflowRuns = WorkflowRun[];
   export type Workflows = Workflow[];
   export interface XMLClassifier {

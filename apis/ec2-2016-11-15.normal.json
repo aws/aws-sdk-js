@@ -29089,14 +29089,6 @@
           "shape": "SubnetId",
           "documentation": "<p>The ID of the subnet.</p>",
           "locationName": "subnetId"
-        },
-        "MapCustomerOwnedIpOnLaunch": {
-          "shape": "AttributeBooleanValue",
-          "documentation": "<p>Specify <code>true</code> to indicate that network interfaces attached to instances created in the specified subnet should be assigned a customer-owned IPv4 address.</p> <p>When this value is <code>true</code>, you must specify the customer-owned IP pool using <code>CustomerOwnedIpv4Pool</code>.</p>"
-        },
-        "CustomerOwnedIpv4Pool": {
-          "shape": "CoipPoolId",
-          "documentation": "<p>The customer-owned IPv4 address pool associated with the subnet.</p> <p>You must set this value when you specify <code>true</code> for <code>MapCustomerOwnedIpOnLaunch</code>.</p>"
         }
       }
     },

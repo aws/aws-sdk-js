@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.729.0-->
+<!--LATEST=2.730.0-->
 <!--ENTRYINSERT-->
+
+## 2.730.0
+* feature: EC2: Remove CoIP Auto-Assign feature references.
+* feature: Glue: Starting today, you can further control orchestration of your ETL workloads in AWS Glue by specifying the maximum number of concurrent runs for a Glue workflow.
+* feature: SavingsPlans: Updates to the list of services supported by this API.
 
 ## 2.729.0
 * feature: Glue: AWS Glue now adds support for Network connection type enabling you to access resources inside your VPC using Glue crawlers and Glue ETL jobs.
