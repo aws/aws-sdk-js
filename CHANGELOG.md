@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.730.0-->
+<!--LATEST=2.731.0-->
 <!--ENTRYINSERT-->
+
+## 2.731.0
+* feature: EC2: This release rolls back the EC2 On-Demand Capacity Reservations (ODCRs) release 1.11.831 published on 2020-07-30, which was deployed in error.
+* feature: Lambda: Support Managed Streaming for Kafka as an Event Source. Support retry until record expiration for Kinesis and Dynamodb streams event source mappings.
+* feature: S3: Add support for in-region CopyObject and UploadPartCopy through S3 Access Points
 
 ## 2.730.0
 * feature: EC2: Remove CoIP Auto-Assign feature references.

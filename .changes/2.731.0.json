@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release rolls back the EC2 On-Demand Capacity Reservations (ODCRs) release 1.11.831 published on 2020-07-30, which was deployed in error."
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "Support Managed Streaming for Kafka as an Event Source. Support retry until record expiration for Kinesis and Dynamodb streams event source mappings."
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "Add support for in-region CopyObject and UploadPartCopy through S3 Access Points"
+    }
+]
