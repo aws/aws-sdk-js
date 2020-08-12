@@ -483,6 +483,37 @@
       ],
       "documentation": "<p>Confirms a topic rule destination. When you create a rule requiring a destination, AWS IoT sends a confirmation message to the endpoint or base address you specify. The message includes a token which you pass back when calling <code>ConfirmTopicRuleDestination</code> to confirm that you own or have access to the endpoint.</p>"
     },
+    "CreateAuditSuppression": {
+      "name": "CreateAuditSuppression",
+      "http": {
+        "method": "POST",
+        "requestUri": "/audit/suppressions/create"
+      },
+      "input": {
+        "shape": "CreateAuditSuppressionRequest"
+      },
+      "output": {
+        "shape": "CreateAuditSuppressionResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p> Creates a Device Defender audit suppression. </p>"
+    },
     "CreateAuthorizer": {
       "name": "CreateAuthorizer",
       "http": {
@@ -781,7 +812,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Defines an action that can be applied to audit findings by using StartAuditMitigationActionsTask. Each mitigation action can apply only one type of change.</p>"
+      "documentation": "<p>Defines an action that can be applied to audit findings by using StartAuditMitigationActionsTask. Only certain types of mitigation actions can be applied to specific check names. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/device-defender-mitigation-actions.html\">Mitigation actions</a>. Each mitigation action can apply only one type of change.</p>"
     },
     "CreateOTAUpdate": {
       "name": "CreateOTAUpdate",
@@ -1329,6 +1360,31 @@
         }
       ],
       "documentation": "<p>Restores the default settings for Device Defender audits for this account. Any configuration data you entered is deleted and all audit checks are reset to disabled. </p>"
+    },
+    "DeleteAuditSuppression": {
+      "name": "DeleteAuditSuppression",
+      "http": {
+        "method": "POST",
+        "requestUri": "/audit/suppressions/delete"
+      },
+      "input": {
+        "shape": "DeleteAuditSuppressionRequest"
+      },
+      "output": {
+        "shape": "DeleteAuditSuppressionResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p> Deletes a Device Defender audit suppression. </p>"
     },
     "DeleteAuthorizer": {
       "name": "DeleteAuthorizer",
@@ -2265,6 +2321,34 @@
         }
       ],
       "documentation": "<p>Gets information about an audit mitigation task that is used to apply mitigation actions to a set of audit findings. Properties include the actions being applied, the audit checks to which they're being applied, the task status, and aggregated task statistics.</p>"
+    },
+    "DescribeAuditSuppression": {
+      "name": "DescribeAuditSuppression",
+      "http": {
+        "method": "POST",
+        "requestUri": "/audit/suppressions/describe"
+      },
+      "input": {
+        "shape": "DescribeAuditSuppressionRequest"
+      },
+      "output": {
+        "shape": "DescribeAuditSuppressionResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p> Gets information about a Device Defender audit suppression. </p>"
     },
     "DescribeAuditTask": {
       "name": "DescribeAuditTask",
@@ -3786,6 +3870,31 @@
       ],
       "documentation": "<p>Gets a list of audit mitigation action tasks that match the specified filters.</p>"
     },
+    "ListAuditSuppressions": {
+      "name": "ListAuditSuppressions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/audit/suppressions/list"
+      },
+      "input": {
+        "shape": "ListAuditSuppressionsRequest"
+      },
+      "output": {
+        "shape": "ListAuditSuppressionsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p> Lists your Device Defender audit listings. </p>"
+    },
     "ListAuditTasks": {
       "name": "ListAuditTasks",
       "http": {
@@ -4885,7 +4994,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Lists your things. Use the <b>attributeName</b> and <b>attributeValue</b> parameters to filter your things. For example, calling <code>ListThings</code> with attributeName=Color and attributeValue=Red retrieves all things in the registry that contain an attribute <b>Color</b> with the value <b>Red</b>. </p>"
+      "documentation": "<p>Lists your things. Use the <b>attributeName</b> and <b>attributeValue</b> parameters to filter your things. For example, calling <code>ListThings</code> with attributeName=Color and attributeValue=Red retrieves all things in the registry that contain an attribute <b>Color</b> with the value <b>Red</b>. </p> <note> <p>You will not be charged for calling this API if an <code>Access denied</code> error is returned. You will also not be charged if no attributes or pagination token was provided in request and no pagination token and no results were returned.</p> </note>"
     },
     "ListThingsInBillingGroup": {
       "name": "ListThingsInBillingGroup",
@@ -5823,6 +5932,34 @@
       ],
       "documentation": "<p>Configures or reconfigures the Device Defender audit settings for this account. Settings include how audit notifications are sent and which audit checks are enabled or disabled.</p>"
     },
+    "UpdateAuditSuppression": {
+      "name": "UpdateAuditSuppression",
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/audit/suppressions/update"
+      },
+      "input": {
+        "shape": "UpdateAuditSuppressionRequest"
+      },
+      "output": {
+        "shape": "UpdateAuditSuppressionResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p> Updates a Device Defender audit suppression. </p>"
+    },
     "UpdateAuthorizer": {
       "name": "UpdateAuthorizer",
       "http": {
@@ -5954,7 +6091,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Updates the status of the specified certificate. This operation is idempotent.</p> <p>Moving a certificate from the ACTIVE state (including REVOKED) will not disconnect currently connected devices, but these devices will be unable to reconnect.</p> <p>The ACTIVE state is required to authenticate devices connecting to AWS IoT using a certificate.</p>"
+      "documentation": "<p>Updates the status of the specified certificate. This operation is idempotent.</p> <p>Certificates must be in the ACTIVE state to authenticate devices that use a certificate to connect to AWS IoT.</p> <p>Within a few minutes of updating a certificate from the ACTIVE state to any other state, AWS IoT disconnects all devices that used that certificate to connect. Devices cannot use a certificate that is not in the ACTIVE state to reconnect.</p>"
     },
     "UpdateDimension": {
       "name": "UpdateDimension",
@@ -7179,6 +7316,10 @@
           "shape": "NonCompliantResourcesCount",
           "documentation": "<p>The number of resources that were found noncompliant during the check.</p>"
         },
+        "suppressedNonCompliantResourcesCount": {
+          "shape": "SuppressedNonCompliantResourcesCount",
+          "documentation": "<p> Describes how many of the non-compliant resources created during the evaluation of an audit check were marked as suppressed. </p>"
+        },
         "errorCode": {
           "shape": "ErrorCode",
           "documentation": "<p>The code of any error encountered when this check is performed during this audit. One of \"INSUFFICIENT_PERMISSIONS\" or \"AUDIT_CHECK_DISABLED\".</p>"
@@ -7222,6 +7363,11 @@
       "value": {
         "shape": "ReasonForNonComplianceCodes"
       }
+    },
+    "AuditDescription": {
+      "type": "string",
+      "max": 1000,
+      "pattern": "[\\p{Graph}\\x20]*"
     },
     "AuditDetails": {
       "type": "map",
@@ -7274,6 +7420,10 @@
         "reasonForNonComplianceCode": {
           "shape": "ReasonForNonComplianceCode",
           "documentation": "<p>A code that indicates the reason that the resource was noncompliant.</p>"
+        },
+        "isSuppressed": {
+          "shape": "IsSuppressed",
+          "documentation": "<p> Indicates whether the audit finding was suppressed or not during reporting. </p>"
         }
       },
       "documentation": "<p>The findings (results) of the audit.</p>"
@@ -7459,6 +7609,40 @@
       "enum": [
         "SNS"
       ]
+    },
+    "AuditSuppression": {
+      "type": "structure",
+      "required": [
+        "checkName",
+        "resourceIdentifier"
+      ],
+      "members": {
+        "checkName": {
+          "shape": "AuditCheckName"
+        },
+        "resourceIdentifier": {
+          "shape": "ResourceIdentifier"
+        },
+        "expirationDate": {
+          "shape": "Timestamp",
+          "documentation": "<p> The expiration date (epoch timestamp in seconds) that you want the suppression to adhere to. </p>"
+        },
+        "suppressIndefinitely": {
+          "shape": "SuppressIndefinitely",
+          "documentation": "<p> Indicates whether a suppression should exist indefinitely or not. </p>"
+        },
+        "description": {
+          "shape": "AuditDescription",
+          "documentation": "<p> The description of the audit suppression. </p>"
+        }
+      },
+      "documentation": "<p> Filters out specific findings of a Device Defender audit. </p>"
+    },
+    "AuditSuppressionList": {
+      "type": "list",
+      "member": {
+        "shape": "AuditSuppression"
+      }
     },
     "AuditTaskId": {
       "type": "string",
@@ -8608,6 +8792,43 @@
     },
     "Count": {
       "type": "integer"
+    },
+    "CreateAuditSuppressionRequest": {
+      "type": "structure",
+      "required": [
+        "checkName",
+        "resourceIdentifier",
+        "clientRequestToken"
+      ],
+      "members": {
+        "checkName": {
+          "shape": "AuditCheckName"
+        },
+        "resourceIdentifier": {
+          "shape": "ResourceIdentifier"
+        },
+        "expirationDate": {
+          "shape": "Timestamp",
+          "documentation": "<p> The epoch timestamp in seconds at which this suppression expires. </p>"
+        },
+        "suppressIndefinitely": {
+          "shape": "SuppressIndefinitely",
+          "documentation": "<p> Indicates whether a suppression should exist indefinitely or not. </p>"
+        },
+        "description": {
+          "shape": "AuditDescription",
+          "documentation": "<p> The description of the audit suppression. </p>"
+        },
+        "clientRequestToken": {
+          "shape": "ClientRequestToken",
+          "documentation": "<p> The epoch timestamp in seconds at which this suppression expires. </p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "CreateAuditSuppressionResponse": {
+      "type": "structure",
+      "members": {}
     },
     "CreateAuthorizerRequest": {
       "type": "structure",
@@ -9811,6 +10032,25 @@
     "DeleteAlertTargets": {
       "type": "boolean"
     },
+    "DeleteAuditSuppressionRequest": {
+      "type": "structure",
+      "required": [
+        "checkName",
+        "resourceIdentifier"
+      ],
+      "members": {
+        "checkName": {
+          "shape": "AuditCheckName"
+        },
+        "resourceIdentifier": {
+          "shape": "ResourceIdentifier"
+        }
+      }
+    },
+    "DeleteAuditSuppressionResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "DeleteAuthorizerRequest": {
       "type": "structure",
       "required": [
@@ -10488,6 +10728,44 @@
         "actionsDefinition": {
           "shape": "MitigationActionList",
           "documentation": "<p>Specifies the mitigation actions and their parameters that are applied as part of this task.</p>"
+        }
+      }
+    },
+    "DescribeAuditSuppressionRequest": {
+      "type": "structure",
+      "required": [
+        "checkName",
+        "resourceIdentifier"
+      ],
+      "members": {
+        "checkName": {
+          "shape": "AuditCheckName"
+        },
+        "resourceIdentifier": {
+          "shape": "ResourceIdentifier"
+        }
+      }
+    },
+    "DescribeAuditSuppressionResponse": {
+      "type": "structure",
+      "members": {
+        "checkName": {
+          "shape": "AuditCheckName"
+        },
+        "resourceIdentifier": {
+          "shape": "ResourceIdentifier"
+        },
+        "expirationDate": {
+          "shape": "Timestamp",
+          "documentation": "<p> The epoch timestamp in seconds at which this suppression expires. </p>"
+        },
+        "suppressIndefinitely": {
+          "shape": "SuppressIndefinitely",
+          "documentation": "<p> Indicates whether a suppression should exist indefinitely or not. </p>"
+        },
+        "description": {
+          "shape": "AuditDescription",
+          "documentation": "<p> The description of the audit suppression. </p>"
         }
       }
     },
@@ -11467,7 +11745,7 @@
         },
         "principal": {
           "shape": "Principal",
-          "documentation": "<p>The principal.</p> <p>If the principal is a certificate, specify the certificate ARN. If the principal is an Amazon Cognito identity, specify the identity ID.</p>",
+          "documentation": "<p>The principal.</p> <p>Valid principals are CertificateArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:cert/<i>certificateId</i>), thingGroupArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:thinggroup/<i>groupName</i>) and CognitoId (<i>region</i>:<i>id</i>).</p>",
           "location": "header",
           "locationName": "x-amzn-iot-principal"
         }
@@ -12135,7 +12413,7 @@
       "members": {
         "principal": {
           "shape": "Principal",
-          "documentation": "<p>The principal.</p>"
+          "documentation": "<p>The principal. Valid principals are CertificateArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:cert/<i>certificateId</i>), thingGroupArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:thinggroup/<i>groupName</i>) and CognitoId (<i>region</i>:<i>id</i>).</p>"
         },
         "cognitoIdentityPoolId": {
           "shape": "CognitoIdentityPoolId",
@@ -12792,6 +13070,9 @@
     "IsDisabled": {
       "type": "boolean"
     },
+    "IsSuppressed": {
+      "type": "boolean"
+    },
     "Job": {
       "type": "structure",
       "members": {
@@ -13276,7 +13557,7 @@
       "members": {
         "target": {
           "shape": "PolicyTarget",
-          "documentation": "<p>The group or principal for which the policies will be listed.</p>",
+          "documentation": "<p>The group or principal for which the policies will be listed. Valid principals are CertificateArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:cert/<i>certificateId</i>), thingGroupArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:thinggroup/<i>groupName</i>) and CognitoId (<i>region</i>:<i>id</i>).</p>",
           "location": "uri",
           "locationName": "target"
         },
@@ -13343,6 +13624,10 @@
         "endTime": {
           "shape": "Timestamp",
           "documentation": "<p>A filter to limit results to those found before the specified time. You must specify either the startTime and endTime or the taskId, but not both.</p>"
+        },
+        "listSuppressedFindings": {
+          "shape": "ListSuppressedFindings",
+          "documentation": "<p> Boolean flag indicating whether only the suppressed findings or the unsuppressed findings should be listed. If this parameter isn't provided, the response will list both suppressed and unsuppressed findings. </p>"
         }
       }
     },
@@ -13472,6 +13757,42 @@
         "nextToken": {
           "shape": "NextToken",
           "documentation": "<p>The token for the next set of results.</p>"
+        }
+      }
+    },
+    "ListAuditSuppressionsRequest": {
+      "type": "structure",
+      "members": {
+        "checkName": {
+          "shape": "AuditCheckName"
+        },
+        "resourceIdentifier": {
+          "shape": "ResourceIdentifier"
+        },
+        "ascendingOrder": {
+          "shape": "AscendingOrder",
+          "documentation": "<p> Determines whether suppressions are listed in ascending order by expiration date or not. If parameter isn't provided, <code>ascendingOrder=true</code>. </p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p> The token for the next set of results. </p>"
+        },
+        "maxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p> The maximum number of results to return at one time. The default is 25. </p>"
+        }
+      }
+    },
+    "ListAuditSuppressionsResponse": {
+      "type": "structure",
+      "members": {
+        "suppressions": {
+          "shape": "AuditSuppressionList",
+          "documentation": "<p> List of audit suppressions. </p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p> A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results. </p>"
         }
       }
     },
@@ -14202,7 +14523,7 @@
       "members": {
         "principal": {
           "shape": "Principal",
-          "documentation": "<p>The principal.</p>",
+          "documentation": "<p>The principal. Valid principals are CertificateArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:cert/<i>certificateId</i>), thingGroupArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:thinggroup/<i>groupName</i>) and CognitoId (<i>region</i>:<i>id</i>).</p>",
           "location": "header",
           "locationName": "x-amzn-iot-principal"
         },
@@ -14534,6 +14855,9 @@
         }
       }
     },
+    "ListSuppressedFindings": {
+      "type": "boolean"
+    },
     "ListTagsForResourceRequest": {
       "type": "structure",
       "required": [
@@ -14728,7 +15052,7 @@
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>"
+          "documentation": "<p>The token used to get the next set of results. Will not be returned if operation has returned all results.</p>"
         }
       }
     },
@@ -14876,7 +15200,7 @@
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The token for the next set of results, or <b>null</b> if there are no additional results.</p>"
+          "documentation": "<p>The token for the next set of results. Will not be returned if operation has returned all results.</p>"
         }
       },
       "documentation": "<p>The output for the ListThingTypes operation.</p>"
@@ -14916,7 +15240,7 @@
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>"
+          "documentation": "<p>The token used to get the next set of results. Will not be returned if operation has returned all results.</p>"
         }
       }
     },
@@ -15010,7 +15334,7 @@
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>"
+          "documentation": "<p>The token used to get the next set of results. Will not be returned if operation has returned all results.</p>"
         }
       },
       "documentation": "<p>The output from the ListThings operation.</p>"
@@ -17659,6 +17983,12 @@
     "SumOfSquares": {
       "type": "double"
     },
+    "SuppressIndefinitely": {
+      "type": "boolean"
+    },
+    "SuppressedNonCompliantResourcesCount": {
+      "type": "long"
+    },
     "TableName": {
       "type": "string"
     },
@@ -17849,7 +18179,7 @@
       "members": {
         "principal": {
           "shape": "Principal",
-          "documentation": "<p>The principal.</p>"
+          "documentation": "<p>The principal. Valid principals are CertificateArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:cert/<i>certificateId</i>), thingGroupArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:thinggroup/<i>groupName</i>) and CognitoId (<i>region</i>:<i>id</i>).</p>"
         },
         "cognitoIdentityPoolId": {
           "shape": "CognitoIdentityPoolId",
@@ -18651,6 +18981,37 @@
       }
     },
     "UpdateAccountAuditConfigurationResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "UpdateAuditSuppressionRequest": {
+      "type": "structure",
+      "required": [
+        "checkName",
+        "resourceIdentifier"
+      ],
+      "members": {
+        "checkName": {
+          "shape": "AuditCheckName"
+        },
+        "resourceIdentifier": {
+          "shape": "ResourceIdentifier"
+        },
+        "expirationDate": {
+          "shape": "Timestamp",
+          "documentation": "<p> The expiration date (epoch timestamp in seconds) that you want the suppression to adhere to. </p>"
+        },
+        "suppressIndefinitely": {
+          "shape": "SuppressIndefinitely",
+          "documentation": "<p> Indicates whether a suppression should exist indefinitely or not. </p>"
+        },
+        "description": {
+          "shape": "AuditDescription",
+          "documentation": "<p> The description of the audit suppression. </p>"
+        }
+      }
+    },
+    "UpdateAuditSuppressionResponse": {
       "type": "structure",
       "members": {}
     },

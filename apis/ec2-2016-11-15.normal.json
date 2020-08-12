@@ -1302,7 +1302,7 @@
       "output": {
         "shape": "CreateVpnConnectionResult"
       },
-      "documentation": "<p>Creates a VPN connection between an existing virtual private gateway and a VPN customer gateway. The supported connection type is <code>ipsec.1</code>.</p> <p>The response includes information that you need to give to your network administrator to configure your customer gateway.</p> <important> <p>We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway.</p> </important> <p>If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call.</p> <p>This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
+      "documentation": "<p>Creates a VPN connection between an existing virtual private gateway or transit gateway and a customer gateway. The supported connection type is <code>ipsec.1</code>.</p> <p>The response includes information that you need to give to your network administrator to configure your customer gateway.</p> <important> <p>We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway device.</p> </important> <p>If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call.</p> <p>This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
     },
     "CreateVpnConnectionRoute": {
       "name": "CreateVpnConnectionRoute",
@@ -29743,7 +29743,11 @@
       "members": {
         "TunnelInsideCidr": {
           "shape": "String",
-          "documentation": "<p>The range of inside IP addresses for the tunnel. Any specified CIDR blocks must be unique across all VPN connections that use the same virtual private gateway. </p> <p>Constraints: A size /30 CIDR block from the <code>169.254.0.0/16</code> range. The following CIDR blocks are reserved and cannot be used:</p> <ul> <li> <p> <code>169.254.0.0/30</code> </p> </li> <li> <p> <code>169.254.1.0/30</code> </p> </li> <li> <p> <code>169.254.2.0/30</code> </p> </li> <li> <p> <code>169.254.3.0/30</code> </p> </li> <li> <p> <code>169.254.4.0/30</code> </p> </li> <li> <p> <code>169.254.5.0/30</code> </p> </li> <li> <p> <code>169.254.169.252/30</code> </p> </li> </ul>"
+          "documentation": "<p>The range of inside IPv4 addresses for the tunnel. Any specified CIDR blocks must be unique across all VPN connections that use the same virtual private gateway. </p> <p>Constraints: A size /30 CIDR block from the <code>169.254.0.0/16</code> range. The following CIDR blocks are reserved and cannot be used:</p> <ul> <li> <p> <code>169.254.0.0/30</code> </p> </li> <li> <p> <code>169.254.1.0/30</code> </p> </li> <li> <p> <code>169.254.2.0/30</code> </p> </li> <li> <p> <code>169.254.3.0/30</code> </p> </li> <li> <p> <code>169.254.4.0/30</code> </p> </li> <li> <p> <code>169.254.5.0/30</code> </p> </li> <li> <p> <code>169.254.169.252/30</code> </p> </li> </ul>"
+        },
+        "TunnelInsideIpv6Cidr": {
+          "shape": "String",
+          "documentation": "<p>The range of inside IPv6 addresses for the tunnel. Any specified CIDR blocks must be unique across all VPN connections that use the same transit gateway.</p> <p>Constraints: A size /126 CIDR block from the local <code>fd00::/8</code> range.</p>"
         },
         "PreSharedKey": {
           "shape": "String",
@@ -29775,32 +29779,32 @@
         },
         "Phase1EncryptionAlgorithms": {
           "shape": "Phase1EncryptionAlgorithmsRequestList",
-          "documentation": "<p>One or more encryption algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.</p> <p>Valid values: <code>AES128</code> | <code>AES256</code> </p>",
+          "documentation": "<p>One or more encryption algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.</p> <p>Valid values: <code>AES128</code> | <code>AES256</code> | <code>AES128-GCM-16</code> | <code>AES256-GCM-16</code> </p>",
           "locationName": "Phase1EncryptionAlgorithm"
         },
         "Phase2EncryptionAlgorithms": {
           "shape": "Phase2EncryptionAlgorithmsRequestList",
-          "documentation": "<p>One or more encryption algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations.</p> <p>Valid values: <code>AES128</code> | <code>AES256</code> </p>",
+          "documentation": "<p>One or more encryption algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations.</p> <p>Valid values: <code>AES128</code> | <code>AES256</code> | <code>AES128-GCM-16</code> | <code>AES256-GCM-16</code> </p>",
           "locationName": "Phase2EncryptionAlgorithm"
         },
         "Phase1IntegrityAlgorithms": {
           "shape": "Phase1IntegrityAlgorithmsRequestList",
-          "documentation": "<p>One or more integrity algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.</p> <p>Valid values: <code>SHA1</code> | <code>SHA2-256</code> </p>",
+          "documentation": "<p>One or more integrity algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.</p> <p>Valid values: <code>SHA1</code> | <code>SHA2-256</code> | <code>SHA2-384</code> | <code>SHA2-512</code> </p>",
           "locationName": "Phase1IntegrityAlgorithm"
         },
         "Phase2IntegrityAlgorithms": {
           "shape": "Phase2IntegrityAlgorithmsRequestList",
-          "documentation": "<p>One or more integrity algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations.</p> <p>Valid values: <code>SHA1</code> | <code>SHA2-256</code> </p>",
+          "documentation": "<p>One or more integrity algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations.</p> <p>Valid values: <code>SHA1</code> | <code>SHA2-256</code> | <code>SHA2-384</code> | <code>SHA2-512</code> </p>",
           "locationName": "Phase2IntegrityAlgorithm"
         },
         "Phase1DHGroupNumbers": {
           "shape": "Phase1DHGroupNumbersRequestList",
-          "documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 1 IKE negotiations.</p> <p>Valid values: <code>2</code> | <code>14</code> | <code>15</code> | <code>16</code> | <code>17</code> | <code>18</code> | <code>22</code> | <code>23</code> | <code>24</code> </p>",
+          "documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 1 IKE negotiations.</p> <p>Valid values: <code>2</code> | <code>14</code> | <code>15</code> | <code>16</code> | <code>17</code> | <code>18</code> | <code>19</code> | <code>20</code> | <code>21</code> | <code>22</code> | <code>23</code> | <code>24</code> </p>",
           "locationName": "Phase1DHGroupNumber"
         },
         "Phase2DHGroupNumbers": {
           "shape": "Phase2DHGroupNumbersRequestList",
-          "documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 2 IKE negotiations.</p> <p>Valid values: <code>2</code> | <code>5</code> | <code>14</code> | <code>15</code> | <code>16</code> | <code>17</code> | <code>18</code> | <code>22</code> | <code>23</code> | <code>24</code> </p>",
+          "documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 2 IKE negotiations.</p> <p>Valid values: <code>2</code> | <code>5</code> | <code>14</code> | <code>15</code> | <code>16</code> | <code>17</code> | <code>18</code> | <code>19</code> | <code>20</code> | <code>21</code> | <code>22</code> | <code>23</code> | <code>24</code> </p>",
           "locationName": "Phase2DHGroupNumber"
         },
         "IKEVersions": {
@@ -39176,6 +39180,13 @@
         "udp"
       ]
     },
+    "TunnelInsideIpVersion": {
+      "type": "string",
+      "enum": [
+        "ipv4",
+        "ipv6"
+      ]
+    },
     "TunnelOption": {
       "type": "structure",
       "members": {
@@ -39186,8 +39197,13 @@
         },
         "TunnelInsideCidr": {
           "shape": "String",
-          "documentation": "<p>The range of inside IP addresses for the tunnel.</p>",
+          "documentation": "<p>The range of inside IPv4 addresses for the tunnel.</p>",
           "locationName": "tunnelInsideCidr"
+        },
+        "TunnelInsideIpv6Cidr": {
+          "shape": "String",
+          "documentation": "<p>The range of inside IPv6 addresses for the tunnel.</p>",
+          "locationName": "tunnelInsideIpv6Cidr"
         },
         "PreSharedKey": {
           "shape": "String",
@@ -40943,6 +40959,11 @@
           "documentation": "<p>Indicates whether the VPN connection uses static routes only. Static routes must be used for devices that don't support BGP.</p>",
           "locationName": "staticRoutesOnly"
         },
+        "TunnelInsideIpVersion": {
+          "shape": "TunnelInsideIpVersion",
+          "documentation": "<p>Indicates whether the VPN tunnels process IPv4 or IPv6 traffic.</p>",
+          "locationName": "tunnelInsideIpVersion"
+        },
         "TunnelOptions": {
           "shape": "TunnelOptionsList",
           "documentation": "<p>Indicates the VPN tunnel options.</p>",
@@ -40962,6 +40983,10 @@
           "shape": "Boolean",
           "documentation": "<p>Indicate whether the VPN connection uses static routes only. If you are creating a VPN connection for a device that does not support BGP, you must specify <code>true</code>. Use <a>CreateVpnConnectionRoute</a> to create a static route.</p> <p>Default: <code>false</code> </p>",
           "locationName": "staticRoutesOnly"
+        },
+        "TunnelInsideIpVersion": {
+          "shape": "TunnelInsideIpVersion",
+          "documentation": "<p>Indicate whether the VPN tunnels process IPv4 or IPv6 traffic.</p> <p>Default: <code>ipv4</code> </p>"
         },
         "TunnelOptions": {
           "shape": "VpnTunnelOptionsSpecificationsList",
@@ -41089,7 +41114,11 @@
       "members": {
         "TunnelInsideCidr": {
           "shape": "String",
-          "documentation": "<p>The range of inside IP addresses for the tunnel. Any specified CIDR blocks must be unique across all VPN connections that use the same virtual private gateway. </p> <p>Constraints: A size /30 CIDR block from the <code>169.254.0.0/16</code> range. The following CIDR blocks are reserved and cannot be used:</p> <ul> <li> <p> <code>169.254.0.0/30</code> </p> </li> <li> <p> <code>169.254.1.0/30</code> </p> </li> <li> <p> <code>169.254.2.0/30</code> </p> </li> <li> <p> <code>169.254.3.0/30</code> </p> </li> <li> <p> <code>169.254.4.0/30</code> </p> </li> <li> <p> <code>169.254.5.0/30</code> </p> </li> <li> <p> <code>169.254.169.252/30</code> </p> </li> </ul>"
+          "documentation": "<p>The range of inside IPv4 addresses for the tunnel. Any specified CIDR blocks must be unique across all VPN connections that use the same virtual private gateway. </p> <p>Constraints: A size /30 CIDR block from the <code>169.254.0.0/16</code> range. The following CIDR blocks are reserved and cannot be used:</p> <ul> <li> <p> <code>169.254.0.0/30</code> </p> </li> <li> <p> <code>169.254.1.0/30</code> </p> </li> <li> <p> <code>169.254.2.0/30</code> </p> </li> <li> <p> <code>169.254.3.0/30</code> </p> </li> <li> <p> <code>169.254.4.0/30</code> </p> </li> <li> <p> <code>169.254.5.0/30</code> </p> </li> <li> <p> <code>169.254.169.252/30</code> </p> </li> </ul>"
+        },
+        "TunnelInsideIpv6Cidr": {
+          "shape": "String",
+          "documentation": "<p>The range of inside IPv6 addresses for the tunnel. Any specified CIDR blocks must be unique across all VPN connections that use the same transit gateway.</p> <p>Constraints: A size /126 CIDR block from the local <code>fd00::/8</code> range.</p>"
         },
         "PreSharedKey": {
           "shape": "String",
@@ -41121,32 +41150,32 @@
         },
         "Phase1EncryptionAlgorithms": {
           "shape": "Phase1EncryptionAlgorithmsRequestList",
-          "documentation": "<p>One or more encryption algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.</p> <p>Valid values: <code>AES128</code> | <code>AES256</code> </p>",
+          "documentation": "<p>One or more encryption algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.</p> <p>Valid values: <code>AES128</code> | <code>AES256</code> | <code>AES128-GCM-16</code> | <code>AES256-GCM-16</code> </p>",
           "locationName": "Phase1EncryptionAlgorithm"
         },
         "Phase2EncryptionAlgorithms": {
           "shape": "Phase2EncryptionAlgorithmsRequestList",
-          "documentation": "<p>One or more encryption algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations.</p> <p>Valid values: <code>AES128</code> | <code>AES256</code> </p>",
+          "documentation": "<p>One or more encryption algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations.</p> <p>Valid values: <code>AES128</code> | <code>AES256</code> | <code>AES128-GCM-16</code> | <code>AES256-GCM-16</code> </p>",
           "locationName": "Phase2EncryptionAlgorithm"
         },
         "Phase1IntegrityAlgorithms": {
           "shape": "Phase1IntegrityAlgorithmsRequestList",
-          "documentation": "<p>One or more integrity algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.</p> <p>Valid values: <code>SHA1</code> | <code>SHA2-256</code> </p>",
+          "documentation": "<p>One or more integrity algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.</p> <p>Valid values: <code>SHA1</code> | <code>SHA2-256</code> | <code>SHA2-384</code> | <code>SHA2-512</code> </p>",
           "locationName": "Phase1IntegrityAlgorithm"
         },
         "Phase2IntegrityAlgorithms": {
           "shape": "Phase2IntegrityAlgorithmsRequestList",
-          "documentation": "<p>One or more integrity algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations.</p> <p>Valid values: <code>SHA1</code> | <code>SHA2-256</code> </p>",
+          "documentation": "<p>One or more integrity algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations.</p> <p>Valid values: <code>SHA1</code> | <code>SHA2-256</code> | <code>SHA2-384</code> | <code>SHA2-512</code> </p>",
           "locationName": "Phase2IntegrityAlgorithm"
         },
         "Phase1DHGroupNumbers": {
           "shape": "Phase1DHGroupNumbersRequestList",
-          "documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 1 IKE negotiations.</p> <p>Valid values: <code>2</code> | <code>14</code> | <code>15</code> | <code>16</code> | <code>17</code> | <code>18</code> | <code>22</code> | <code>23</code> | <code>24</code> </p>",
+          "documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 1 IKE negotiations.</p> <p>Valid values: <code>2</code> | <code>14</code> | <code>15</code> | <code>16</code> | <code>17</code> | <code>18</code> | <code>19</code> | <code>20</code> | <code>21</code> | <code>22</code> | <code>23</code> | <code>24</code> </p>",
           "locationName": "Phase1DHGroupNumber"
         },
         "Phase2DHGroupNumbers": {
           "shape": "Phase2DHGroupNumbersRequestList",
-          "documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 2 IKE negotiations.</p> <p>Valid values: <code>2</code> | <code>5</code> | <code>14</code> | <code>15</code> | <code>16</code> | <code>17</code> | <code>18</code> | <code>22</code> | <code>23</code> | <code>24</code> </p>",
+          "documentation": "<p>One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 2 IKE negotiations.</p> <p>Valid values: <code>2</code> | <code>5</code> | <code>14</code> | <code>15</code> | <code>16</code> | <code>17</code> | <code>18</code> | <code>19</code> | <code>20</code> | <code>21</code> | <code>22</code> | <code>23</code> | <code>24</code> </p>",
           "locationName": "Phase2DHGroupNumber"
         },
         "IKEVersions": {

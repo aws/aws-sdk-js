@@ -1385,7 +1385,7 @@ declare namespace WorkSpaces {
      */
     ErrorCode?: WorkspaceErrorCode;
     /**
-     * The name of the WorkSpace, as seen by the operating system.
+     * The name of the WorkSpace, as seen by the operating system. The format of this name varies. For more information, see  Launch a WorkSpace. 
      */
     ComputerName?: ComputerName;
     /**
@@ -1497,6 +1497,10 @@ declare namespace WorkSpaces {
   }
   export type WorkspaceConnectionStatusList = WorkspaceConnectionStatus[];
   export interface WorkspaceCreationProperties {
+    /**
+     * Indicates whether Amazon WorkDocs is enabled for your WorkSpaces.  If WorkDocs is already enabled for a WorkSpaces directory and you disable it, new WorkSpaces launched in the directory will not have WorkDocs enabled. However, WorkDocs remains enabled for any existing WorkSpaces, unless you either disable users' access to WorkDocs or you delete the WorkDocs site. To disable users' access to WorkDocs, see Disabling Users in the Amazon WorkDocs Administration Guide. To delete a WorkDocs site, see Deleting a Site in the Amazon WorkDocs Administration Guide. If you enable WorkDocs on a directory that already has existing WorkSpaces, the existing WorkSpaces and any new WorkSpaces that are launched in the directory will have WorkDocs enabled. 
+     */
+    EnableWorkDocs?: BooleanObject;
     /**
      * Indicates whether internet access is enabled for your WorkSpaces.
      */

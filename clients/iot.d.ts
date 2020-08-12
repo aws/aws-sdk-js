@@ -132,6 +132,14 @@ declare class Iot extends Service {
    */
   confirmTopicRuleDestination(callback?: (err: AWSError, data: Iot.Types.ConfirmTopicRuleDestinationResponse) => void): Request<Iot.Types.ConfirmTopicRuleDestinationResponse, AWSError>;
   /**
+   *  Creates a Device Defender audit suppression. 
+   */
+  createAuditSuppression(params: Iot.Types.CreateAuditSuppressionRequest, callback?: (err: AWSError, data: Iot.Types.CreateAuditSuppressionResponse) => void): Request<Iot.Types.CreateAuditSuppressionResponse, AWSError>;
+  /**
+   *  Creates a Device Defender audit suppression. 
+   */
+  createAuditSuppression(callback?: (err: AWSError, data: Iot.Types.CreateAuditSuppressionResponse) => void): Request<Iot.Types.CreateAuditSuppressionResponse, AWSError>;
+  /**
    * Creates an authorizer.
    */
   createAuthorizer(params: Iot.Types.CreateAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.CreateAuthorizerResponse) => void): Request<Iot.Types.CreateAuthorizerResponse, AWSError>;
@@ -196,11 +204,11 @@ declare class Iot extends Service {
    */
   createKeysAndCertificate(callback?: (err: AWSError, data: Iot.Types.CreateKeysAndCertificateResponse) => void): Request<Iot.Types.CreateKeysAndCertificateResponse, AWSError>;
   /**
-   * Defines an action that can be applied to audit findings by using StartAuditMitigationActionsTask. Each mitigation action can apply only one type of change.
+   * Defines an action that can be applied to audit findings by using StartAuditMitigationActionsTask. Only certain types of mitigation actions can be applied to specific check names. For more information, see Mitigation actions. Each mitigation action can apply only one type of change.
    */
   createMitigationAction(params: Iot.Types.CreateMitigationActionRequest, callback?: (err: AWSError, data: Iot.Types.CreateMitigationActionResponse) => void): Request<Iot.Types.CreateMitigationActionResponse, AWSError>;
   /**
-   * Defines an action that can be applied to audit findings by using StartAuditMitigationActionsTask. Each mitigation action can apply only one type of change.
+   * Defines an action that can be applied to audit findings by using StartAuditMitigationActionsTask. Only certain types of mitigation actions can be applied to specific check names. For more information, see Mitigation actions. Each mitigation action can apply only one type of change.
    */
   createMitigationAction(callback?: (err: AWSError, data: Iot.Types.CreateMitigationActionResponse) => void): Request<Iot.Types.CreateMitigationActionResponse, AWSError>;
   /**
@@ -331,6 +339,14 @@ declare class Iot extends Service {
    * Restores the default settings for Device Defender audits for this account. Any configuration data you entered is deleted and all audit checks are reset to disabled. 
    */
   deleteAccountAuditConfiguration(callback?: (err: AWSError, data: Iot.Types.DeleteAccountAuditConfigurationResponse) => void): Request<Iot.Types.DeleteAccountAuditConfigurationResponse, AWSError>;
+  /**
+   *  Deletes a Device Defender audit suppression. 
+   */
+  deleteAuditSuppression(params: Iot.Types.DeleteAuditSuppressionRequest, callback?: (err: AWSError, data: Iot.Types.DeleteAuditSuppressionResponse) => void): Request<Iot.Types.DeleteAuditSuppressionResponse, AWSError>;
+  /**
+   *  Deletes a Device Defender audit suppression. 
+   */
+  deleteAuditSuppression(callback?: (err: AWSError, data: Iot.Types.DeleteAuditSuppressionResponse) => void): Request<Iot.Types.DeleteAuditSuppressionResponse, AWSError>;
   /**
    * Deletes an authorizer.
    */
@@ -571,6 +587,14 @@ declare class Iot extends Service {
    * Gets information about an audit mitigation task that is used to apply mitigation actions to a set of audit findings. Properties include the actions being applied, the audit checks to which they're being applied, the task status, and aggregated task statistics.
    */
   describeAuditMitigationActionsTask(callback?: (err: AWSError, data: Iot.Types.DescribeAuditMitigationActionsTaskResponse) => void): Request<Iot.Types.DescribeAuditMitigationActionsTaskResponse, AWSError>;
+  /**
+   *  Gets information about a Device Defender audit suppression. 
+   */
+  describeAuditSuppression(params: Iot.Types.DescribeAuditSuppressionRequest, callback?: (err: AWSError, data: Iot.Types.DescribeAuditSuppressionResponse) => void): Request<Iot.Types.DescribeAuditSuppressionResponse, AWSError>;
+  /**
+   *  Gets information about a Device Defender audit suppression. 
+   */
+  describeAuditSuppression(callback?: (err: AWSError, data: Iot.Types.DescribeAuditSuppressionResponse) => void): Request<Iot.Types.DescribeAuditSuppressionResponse, AWSError>;
   /**
    * Gets information about a Device Defender audit.
    */
@@ -964,6 +988,14 @@ declare class Iot extends Service {
    */
   listAuditMitigationActionsTasks(callback?: (err: AWSError, data: Iot.Types.ListAuditMitigationActionsTasksResponse) => void): Request<Iot.Types.ListAuditMitigationActionsTasksResponse, AWSError>;
   /**
+   *  Lists your Device Defender audit listings. 
+   */
+  listAuditSuppressions(params: Iot.Types.ListAuditSuppressionsRequest, callback?: (err: AWSError, data: Iot.Types.ListAuditSuppressionsResponse) => void): Request<Iot.Types.ListAuditSuppressionsResponse, AWSError>;
+  /**
+   *  Lists your Device Defender audit listings. 
+   */
+  listAuditSuppressions(callback?: (err: AWSError, data: Iot.Types.ListAuditSuppressionsResponse) => void): Request<Iot.Types.ListAuditSuppressionsResponse, AWSError>;
+  /**
    * Lists the Device Defender audits that have been performed during a given time period.
    */
   listAuditTasks(params: Iot.Types.ListAuditTasksRequest, callback?: (err: AWSError, data: Iot.Types.ListAuditTasksResponse) => void): Request<Iot.Types.ListAuditTasksResponse, AWSError>;
@@ -1252,11 +1284,11 @@ declare class Iot extends Service {
    */
   listThingTypes(callback?: (err: AWSError, data: Iot.Types.ListThingTypesResponse) => void): Request<Iot.Types.ListThingTypesResponse, AWSError>;
   /**
-   * Lists your things. Use the attributeName and attributeValue parameters to filter your things. For example, calling ListThings with attributeName=Color and attributeValue=Red retrieves all things in the registry that contain an attribute Color with the value Red. 
+   * Lists your things. Use the attributeName and attributeValue parameters to filter your things. For example, calling ListThings with attributeName=Color and attributeValue=Red retrieves all things in the registry that contain an attribute Color with the value Red.   You will not be charged for calling this API if an Access denied error is returned. You will also not be charged if no attributes or pagination token was provided in request and no pagination token and no results were returned. 
    */
   listThings(params: Iot.Types.ListThingsRequest, callback?: (err: AWSError, data: Iot.Types.ListThingsResponse) => void): Request<Iot.Types.ListThingsResponse, AWSError>;
   /**
-   * Lists your things. Use the attributeName and attributeValue parameters to filter your things. For example, calling ListThings with attributeName=Color and attributeValue=Red retrieves all things in the registry that contain an attribute Color with the value Red. 
+   * Lists your things. Use the attributeName and attributeValue parameters to filter your things. For example, calling ListThings with attributeName=Color and attributeValue=Red retrieves all things in the registry that contain an attribute Color with the value Red.   You will not be charged for calling this API if an Access denied error is returned. You will also not be charged if no attributes or pagination token was provided in request and no pagination token and no results were returned. 
    */
   listThings(callback?: (err: AWSError, data: Iot.Types.ListThingsResponse) => void): Request<Iot.Types.ListThingsResponse, AWSError>;
   /**
@@ -1500,6 +1532,14 @@ declare class Iot extends Service {
    */
   updateAccountAuditConfiguration(callback?: (err: AWSError, data: Iot.Types.UpdateAccountAuditConfigurationResponse) => void): Request<Iot.Types.UpdateAccountAuditConfigurationResponse, AWSError>;
   /**
+   *  Updates a Device Defender audit suppression. 
+   */
+  updateAuditSuppression(params: Iot.Types.UpdateAuditSuppressionRequest, callback?: (err: AWSError, data: Iot.Types.UpdateAuditSuppressionResponse) => void): Request<Iot.Types.UpdateAuditSuppressionResponse, AWSError>;
+  /**
+   *  Updates a Device Defender audit suppression. 
+   */
+  updateAuditSuppression(callback?: (err: AWSError, data: Iot.Types.UpdateAuditSuppressionResponse) => void): Request<Iot.Types.UpdateAuditSuppressionResponse, AWSError>;
+  /**
    * Updates an authorizer.
    */
   updateAuthorizer(params: Iot.Types.UpdateAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.UpdateAuthorizerResponse) => void): Request<Iot.Types.UpdateAuthorizerResponse, AWSError>;
@@ -1524,11 +1564,11 @@ declare class Iot extends Service {
    */
   updateCACertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the status of the specified certificate. This operation is idempotent. Moving a certificate from the ACTIVE state (including REVOKED) will not disconnect currently connected devices, but these devices will be unable to reconnect. The ACTIVE state is required to authenticate devices connecting to AWS IoT using a certificate.
+   * Updates the status of the specified certificate. This operation is idempotent. Certificates must be in the ACTIVE state to authenticate devices that use a certificate to connect to AWS IoT. Within a few minutes of updating a certificate from the ACTIVE state to any other state, AWS IoT disconnects all devices that used that certificate to connect. Devices cannot use a certificate that is not in the ACTIVE state to reconnect.
    */
   updateCertificate(params: Iot.Types.UpdateCertificateRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the status of the specified certificate. This operation is idempotent. Moving a certificate from the ACTIVE state (including REVOKED) will not disconnect currently connected devices, but these devices will be unable to reconnect. The ACTIVE state is required to authenticate devices connecting to AWS IoT using a certificate.
+   * Updates the status of the specified certificate. This operation is idempotent. Certificates must be in the ACTIVE state to authenticate devices that use a certificate to connect to AWS IoT. Within a few minutes of updating a certificate from the ACTIVE state to any other state, AWS IoT disconnects all devices that used that certificate to connect. Devices cannot use a certificate that is not in the ACTIVE state to reconnect.
    */
   updateCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -2066,6 +2106,10 @@ declare namespace Iot {
      */
     nonCompliantResourcesCount?: NonCompliantResourcesCount;
     /**
+     *  Describes how many of the non-compliant resources created during the evaluation of an audit check were marked as suppressed. 
+     */
+    suppressedNonCompliantResourcesCount?: SuppressedNonCompliantResourcesCount;
+    /**
      * The code of any error encountered when this check is performed during this audit. One of "INSUFFICIENT_PERMISSIONS" or "AUDIT_CHECK_DISABLED".
      */
     errorCode?: ErrorCode;
@@ -2078,6 +2122,7 @@ declare namespace Iot {
   export type AuditCheckRunStatus = "IN_PROGRESS"|"WAITING_FOR_DATA_COLLECTION"|"CANCELED"|"COMPLETED_COMPLIANT"|"COMPLETED_NON_COMPLIANT"|"FAILED"|string;
   export type AuditCheckToActionsMapping = {[key: string]: MitigationActionNameList};
   export type AuditCheckToReasonCodeFilter = {[key: string]: ReasonForNonComplianceCodes};
+  export type AuditDescription = string;
   export type AuditDetails = {[key: string]: AuditCheckDetails};
   export interface AuditFinding {
     /**
@@ -2120,6 +2165,10 @@ declare namespace Iot {
      * A code that indicates the reason that the resource was noncompliant.
      */
     reasonForNonComplianceCode?: ReasonForNonComplianceCode;
+    /**
+     *  Indicates whether the audit finding was suppressed or not during reporting. 
+     */
+    isSuppressed?: IsSuppressed;
   }
   export type AuditFindingSeverity = "CRITICAL"|"HIGH"|"MEDIUM"|"LOW"|string;
   export type AuditFindings = AuditFinding[];
@@ -2212,6 +2261,23 @@ declare namespace Iot {
   }
   export type AuditNotificationTargetConfigurations = {[key: string]: AuditNotificationTarget};
   export type AuditNotificationType = "SNS"|string;
+  export interface AuditSuppression {
+    checkName: AuditCheckName;
+    resourceIdentifier: ResourceIdentifier;
+    /**
+     *  The expiration date (epoch timestamp in seconds) that you want the suppression to adhere to. 
+     */
+    expirationDate?: Timestamp;
+    /**
+     *  Indicates whether a suppression should exist indefinitely or not. 
+     */
+    suppressIndefinitely?: SuppressIndefinitely;
+    /**
+     *  The description of the audit suppression. 
+     */
+    description?: AuditDescription;
+  }
+  export type AuditSuppressionList = AuditSuppression[];
   export type AuditTaskId = string;
   export interface AuditTaskMetadata {
     /**
@@ -2845,6 +2911,28 @@ declare namespace Iot {
   export type ConsecutiveDatapointsToAlarm = number;
   export type ConsecutiveDatapointsToClear = number;
   export type Count = number;
+  export interface CreateAuditSuppressionRequest {
+    checkName: AuditCheckName;
+    resourceIdentifier: ResourceIdentifier;
+    /**
+     *  The epoch timestamp in seconds at which this suppression expires. 
+     */
+    expirationDate?: Timestamp;
+    /**
+     *  Indicates whether a suppression should exist indefinitely or not. 
+     */
+    suppressIndefinitely?: SuppressIndefinitely;
+    /**
+     *  The description of the audit suppression. 
+     */
+    description?: AuditDescription;
+    /**
+     *  The epoch timestamp in seconds at which this suppression expires. 
+     */
+    clientRequestToken: ClientRequestToken;
+  }
+  export interface CreateAuditSuppressionResponse {
+  }
   export interface CreateAuthorizerRequest {
     /**
      * The authorizer name.
@@ -3706,6 +3794,12 @@ declare namespace Iot {
   }
   export type DeleteAdditionalMetricsToRetain = boolean;
   export type DeleteAlertTargets = boolean;
+  export interface DeleteAuditSuppressionRequest {
+    checkName: AuditCheckName;
+    resourceIdentifier: ResourceIdentifier;
+  }
+  export interface DeleteAuditSuppressionResponse {
+  }
   export interface DeleteAuthorizerRequest {
     /**
      * The name of the authorizer to delete.
@@ -4043,6 +4137,26 @@ declare namespace Iot {
      * Specifies the mitigation actions and their parameters that are applied as part of this task.
      */
     actionsDefinition?: MitigationActionList;
+  }
+  export interface DescribeAuditSuppressionRequest {
+    checkName: AuditCheckName;
+    resourceIdentifier: ResourceIdentifier;
+  }
+  export interface DescribeAuditSuppressionResponse {
+    checkName?: AuditCheckName;
+    resourceIdentifier?: ResourceIdentifier;
+    /**
+     *  The epoch timestamp in seconds at which this suppression expires. 
+     */
+    expirationDate?: Timestamp;
+    /**
+     *  Indicates whether a suppression should exist indefinitely or not. 
+     */
+    suppressIndefinitely?: SuppressIndefinitely;
+    /**
+     *  The description of the audit suppression. 
+     */
+    description?: AuditDescription;
   }
   export interface DescribeAuditTaskRequest {
     /**
@@ -4727,7 +4841,7 @@ declare namespace Iot {
      */
     policyName: PolicyName;
     /**
-     * The principal. If the principal is a certificate, specify the certificate ARN. If the principal is an Amazon Cognito identity, specify the identity ID.
+     * The principal. Valid principals are CertificateArn (arn:aws:iot:region:accountId:cert/certificateId), thingGroupArn (arn:aws:iot:region:accountId:thinggroup/groupName) and CognitoId (region:id).
      */
     principal: Principal;
   }
@@ -5028,7 +5142,7 @@ declare namespace Iot {
   }
   export interface GetEffectivePoliciesRequest {
     /**
-     * The principal.
+     * The principal. Valid principals are CertificateArn (arn:aws:iot:region:accountId:cert/certificateId), thingGroupArn (arn:aws:iot:region:accountId:thinggroup/groupName) and CognitoId (region:id).
      */
     principal?: Principal;
     /**
@@ -5417,6 +5531,7 @@ declare namespace Iot {
   export type IsAuthenticated = boolean;
   export type IsDefaultVersion = boolean;
   export type IsDisabled = boolean;
+  export type IsSuppressed = boolean;
   export interface Job {
     /**
      * An ARN identifying the job with format "arn:aws:iot:region:account:job/jobId".
@@ -5741,7 +5856,7 @@ declare namespace Iot {
   }
   export interface ListAttachedPoliciesRequest {
     /**
-     * The group or principal for which the policies will be listed.
+     * The group or principal for which the policies will be listed. Valid principals are CertificateArn (arn:aws:iot:region:accountId:cert/certificateId), thingGroupArn (arn:aws:iot:region:accountId:thinggroup/groupName) and CognitoId (region:id).
      */
     target: PolicyTarget;
     /**
@@ -5796,6 +5911,10 @@ declare namespace Iot {
      * A filter to limit results to those found before the specified time. You must specify either the startTime and endTime or the taskId, but not both.
      */
     endTime?: Timestamp;
+    /**
+     *  Boolean flag indicating whether only the suppressed findings or the unsuppressed findings should be listed. If this parameter isn't provided, the response will list both suppressed and unsuppressed findings. 
+     */
+    listSuppressedFindings?: ListSuppressedFindings;
   }
   export interface ListAuditFindingsResponse {
     /**
@@ -5876,6 +5995,32 @@ declare namespace Iot {
     tasks?: AuditMitigationActionsTaskMetadataList;
     /**
      * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListAuditSuppressionsRequest {
+    checkName?: AuditCheckName;
+    resourceIdentifier?: ResourceIdentifier;
+    /**
+     *  Determines whether suppressions are listed in ascending order by expiration date or not. If parameter isn't provided, ascendingOrder=true. 
+     */
+    ascendingOrder?: AscendingOrder;
+    /**
+     *  The token for the next set of results. 
+     */
+    nextToken?: NextToken;
+    /**
+     *  The maximum number of results to return at one time. The default is 25. 
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListAuditSuppressionsResponse {
+    /**
+     *  List of audit suppressions. 
+     */
+    suppressions?: AuditSuppressionList;
+    /**
+     *  A token that can be used to retrieve the next set of results, or null if there are no additional results. 
      */
     nextToken?: NextToken;
   }
@@ -6337,7 +6482,7 @@ declare namespace Iot {
   }
   export interface ListPrincipalPoliciesRequest {
     /**
-     * The principal.
+     * The principal. Valid principals are CertificateArn (arn:aws:iot:region:accountId:cert/certificateId), thingGroupArn (arn:aws:iot:region:accountId:thinggroup/groupName) and CognitoId (region:id).
      */
     principal: Principal;
     /**
@@ -6551,6 +6696,7 @@ declare namespace Iot {
      */
     nextToken?: NextToken;
   }
+  export type ListSuppressedFindings = boolean;
   export interface ListTagsForResourceRequest {
     /**
      * The ARN of the resource.
@@ -6671,7 +6817,7 @@ declare namespace Iot {
      */
     thingGroups?: ThingGroupNameAndArnList;
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token used to get the next set of results. Will not be returned if operation has returned all results.
      */
     nextToken?: NextToken;
   }
@@ -6763,7 +6909,7 @@ declare namespace Iot {
      */
     thingTypes?: ThingTypeList;
     /**
-     * The token for the next set of results, or null if there are no additional results.
+     * The token for the next set of results. Will not be returned if operation has returned all results.
      */
     nextToken?: NextToken;
   }
@@ -6787,7 +6933,7 @@ declare namespace Iot {
      */
     things?: ThingNameList;
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token used to get the next set of results. Will not be returned if operation has returned all results.
      */
     nextToken?: NextToken;
   }
@@ -6847,7 +6993,7 @@ declare namespace Iot {
      */
     things?: ThingAttributeList;
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token used to get the next set of results. Will not be returned if operation has returned all results.
      */
     nextToken?: NextToken;
   }
@@ -8305,6 +8451,8 @@ declare namespace Iot {
   export type SucceededThings = number;
   export type Sum = number;
   export type SumOfSquares = number;
+  export type SuppressIndefinitely = boolean;
+  export type SuppressedNonCompliantResourcesCount = number;
   export type TableName = string;
   export interface Tag {
     /**
@@ -8398,7 +8546,7 @@ declare namespace Iot {
   export type TemplateVersionId = number;
   export interface TestAuthorizationRequest {
     /**
-     * The principal.
+     * The principal. Valid principals are CertificateArn (arn:aws:iot:region:accountId:cert/certificateId), thingGroupArn (arn:aws:iot:region:accountId:thinggroup/groupName) and CognitoId (region:id).
      */
     principal?: Principal;
     /**
@@ -8903,6 +9051,24 @@ declare namespace Iot {
     auditCheckConfigurations?: AuditCheckConfigurations;
   }
   export interface UpdateAccountAuditConfigurationResponse {
+  }
+  export interface UpdateAuditSuppressionRequest {
+    checkName: AuditCheckName;
+    resourceIdentifier: ResourceIdentifier;
+    /**
+     *  The expiration date (epoch timestamp in seconds) that you want the suppression to adhere to. 
+     */
+    expirationDate?: Timestamp;
+    /**
+     *  Indicates whether a suppression should exist indefinitely or not. 
+     */
+    suppressIndefinitely?: SuppressIndefinitely;
+    /**
+     *  The description of the audit suppression. 
+     */
+    description?: AuditDescription;
+  }
+  export interface UpdateAuditSuppressionResponse {
   }
   export interface UpdateAuthorizerRequest {
     /**

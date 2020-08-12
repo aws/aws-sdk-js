@@ -358,6 +358,9 @@
         },
         {
           "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConcurrentAccessException"
         }
       ],
       "documentation": "<p>Adds tags to an AWS Cloud9 development environment.</p> <important> <p>Tags that you add to an AWS Cloud9 environment by using this method will NOT be automatically propagated to underlying resources.</p> </important>"
@@ -383,6 +386,9 @@
         },
         {
           "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConcurrentAccessException"
         }
       ],
       "documentation": "<p>Removes tags from an AWS Cloud9 development environment.</p>"
@@ -482,6 +488,13 @@
       "type": "string",
       "pattern": "[\\x20-\\x7E]{10,128}"
     },
+    "ConnectionType": {
+      "type": "string",
+      "enum": [
+        "CONNECT_SSH",
+        "CONNECT_SSM"
+      ]
+    },
     "CreateEnvironmentEC2Request": {
       "type": "structure",
       "required": [
@@ -520,6 +533,10 @@
         "tags": {
           "shape": "TagList",
           "documentation": "<p>An array of key-value pairs that will be associated with the new AWS Cloud9 development environment.</p>"
+        },
+        "connectionType": {
+          "shape": "ConnectionType",
+          "documentation": "<p>The connection type used for connecting to an Amazon EC2 environment.</p>"
         }
       }
     },
@@ -702,6 +719,10 @@
         "type": {
           "shape": "EnvironmentType",
           "documentation": "<p>The type of environment. Valid values include the following:</p> <ul> <li> <p> <code>ec2</code>: An Amazon Elastic Compute Cloud (Amazon EC2) instance connects to the environment.</p> </li> <li> <p> <code>ssh</code>: Your own server connects to the environment.</p> </li> </ul>"
+        },
+        "connectionType": {
+          "shape": "ConnectionType",
+          "documentation": "<p>The connection type used for connecting to an Amazon EC2 environment.</p>"
         },
         "arn": {
           "shape": "String",

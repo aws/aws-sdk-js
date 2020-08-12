@@ -52,6 +52,14 @@ declare class Transfer extends Service {
    */
   deleteUser(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Describes the security policy that is attached to your file transfer protocol-enabled server. The response contains a description of the security policy's properties. For more information about security policies, see Working with security policies.
+   */
+  describeSecurityPolicy(params: Transfer.Types.DescribeSecurityPolicyRequest, callback?: (err: AWSError, data: Transfer.Types.DescribeSecurityPolicyResponse) => void): Request<Transfer.Types.DescribeSecurityPolicyResponse, AWSError>;
+  /**
+   * Describes the security policy that is attached to your file transfer protocol-enabled server. The response contains a description of the security policy's properties. For more information about security policies, see Working with security policies.
+   */
+  describeSecurityPolicy(callback?: (err: AWSError, data: Transfer.Types.DescribeSecurityPolicyResponse) => void): Request<Transfer.Types.DescribeSecurityPolicyResponse, AWSError>;
+  /**
    * Describes a file transfer protocol-enabled server that you specify by passing the ServerId parameter. The response contains a description of a server's properties. When you set EndpointType to VPC, the response will contain the EndpointDetails.
    */
   describeServer(params: Transfer.Types.DescribeServerRequest, callback?: (err: AWSError, data: Transfer.Types.DescribeServerResponse) => void): Request<Transfer.Types.DescribeServerResponse, AWSError>;
@@ -75,6 +83,14 @@ declare class Transfer extends Service {
    * Adds a Secure Shell (SSH) public key to a user account identified by a UserName value assigned to the specific file transfer protocol-enabled server, identified by ServerId. The response returns the UserName value, the ServerId value, and the name of the SshPublicKeyId.
    */
   importSshPublicKey(callback?: (err: AWSError, data: Transfer.Types.ImportSshPublicKeyResponse) => void): Request<Transfer.Types.ImportSshPublicKeyResponse, AWSError>;
+  /**
+   * Lists the security policies that are attached to your file transfer protocol-enabled servers.
+   */
+  listSecurityPolicies(params: Transfer.Types.ListSecurityPoliciesRequest, callback?: (err: AWSError, data: Transfer.Types.ListSecurityPoliciesResponse) => void): Request<Transfer.Types.ListSecurityPoliciesResponse, AWSError>;
+  /**
+   * Lists the security policies that are attached to your file transfer protocol-enabled servers.
+   */
+  listSecurityPolicies(callback?: (err: AWSError, data: Transfer.Types.ListSecurityPoliciesResponse) => void): Request<Transfer.Types.ListSecurityPoliciesResponse, AWSError>;
   /**
    * Lists the file transfer protocol-enabled servers that are associated with your AWS account.
    */
@@ -191,9 +207,13 @@ declare namespace Transfer {
      */
     LoggingRole?: Role;
     /**
-     * Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:    SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH    FTPS (File Transfer Protocol Secure): File transfer with TLS encryption    FTP (File Transfer Protocol): Unencrypted file transfer    If you select FTPS, you must choose a certificate stored in AWS Certificate Manager (ACM) which will be used to identify your server when clients connect to it over FTPS. If Protocol includes either FTP or FTPS, then the EndpointType must be VPC and the IdentityProviderType must be API_GATEWAY. If Protocol includes FTP, then AddressAllocationIds cannot be associated. If Protocol is set only to SFTP, the EndpointType can be set to PUBLIC and the IdentityProviderType can be set to SERVICE_MANAGED. 
+     * Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:    SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH    FTPS (File Transfer Protocol Secure): File transfer with TLS encryption    FTP (File Transfer Protocol): Unencrypted file transfer    If you select FTPS, you must choose a certificate stored in AWS Certificate Manager (ACM) which will be used to identify your file transfer protocol-enabled server when clients connect to it over FTPS. If Protocol includes either FTP or FTPS, then the EndpointType must be VPC and the IdentityProviderType must be API_GATEWAY. If Protocol includes FTP, then AddressAllocationIds cannot be associated. If Protocol is set only to SFTP, the EndpointType can be set to PUBLIC and the IdentityProviderType can be set to SERVICE_MANAGED. 
      */
     Protocols?: Protocols;
+    /**
+     * Specifies the name of the security policy that is attached to the server.
+     */
+    SecurityPolicyName?: SecurityPolicyName;
     /**
      * Key-value pairs that can be used to group and search for file transfer protocol-enabled servers.
      */
@@ -215,7 +235,7 @@ declare namespace Transfer {
      */
     HomeDirectoryType?: HomeDirectoryType;
     /**
-     * Logical directory mappings that specify what Amazon S3 paths and keys should be visible to your user and how you want to make them visible. You will need to specify the "Entry" and "Target" pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 path. If you only specify a target, it will be displayed as is. You will need to also make sure that your IAM role provides access to paths in Target. The following is an example.  '[ "/bucket2/documentation", { "Entry": "your-personal-report.pdf", "Target": "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]'  In most cases, you can use this value instead of the scope-down policy to lock your user down to the designated home directory ("chroot"). To do this, you can set Entry to '/' and set Target to the HomeDirectory parameter value.  If the target of a logical directory entry does not exist in Amazon S3, the entry will be ignored. As a workaround, you can use the Amazon S3 api to create 0 byte objects as place holders for your directory. If using the CLI, use the s3api call instead of s3 so you can use the put-object operation. For example, you use the following: aws s3api put-object --bucket bucketname --key path/to/folder/. Make sure that the end of the key name ends in a '/' for it to be considered a folder. 
+     * Logical directory mappings that specify what Amazon S3 paths and keys should be visible to your user and how you want to make them visible. You will need to specify the "Entry" and "Target" pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 path. If you only specify a target, it will be displayed as is. You will need to also make sure that your IAM role provides access to paths in Target. The following is an example.  '[ "/bucket2/documentation", { "Entry": "your-personal-report.pdf", "Target": "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]'  In most cases, you can use this value instead of the scope-down policy to lock your user down to the designated home directory ("chroot"). To do this, you can set Entry to '/' and set Target to the HomeDirectory parameter value.  If the target of a logical directory entry does not exist in Amazon S3, the entry will be ignored. As a workaround, you can use the Amazon S3 API to create 0 byte objects as place holders for your directory. If using the CLI, use the s3api call instead of s3 so you can use the put-object operation. For example, you use the following: aws s3api put-object --bucket bucketname --key path/to/folder/. Make sure that the end of the key name ends in a '/' for it to be considered a folder. 
      */
     HomeDirectoryMappings?: HomeDirectoryMappings;
     /**
@@ -239,7 +259,7 @@ declare namespace Transfer {
      */
     Tags?: Tags;
     /**
-     * A unique string that identifies a user and is associated with a file transfer protocol-enabled server as specified by the ServerId. This user name must be a minimum of 3 and a maximum of 32 characters long. The following are valid characters: a-z, A-Z, 0-9, underscore, and hyphen. The user name can't start with a hyphen.
+     * A unique string that identifies a user and is associated with a file transfer protocol-enabled server as specified by the ServerId. This user name must be a minimum of 3 and a maximum of 100 characters long. The following are valid characters: a-z, A-Z, 0-9, underscore '_', hyphen '-', period '.', and at sign '@'. The user name can't start with a hyphen, period, and at sign.
      */
     UserName: UserName;
   }
@@ -284,6 +304,18 @@ declare namespace Transfer {
      */
     UserName: UserName;
   }
+  export interface DescribeSecurityPolicyRequest {
+    /**
+     * Specifies the name of the security policy that is attached to the server.
+     */
+    SecurityPolicyName: SecurityPolicyName;
+  }
+  export interface DescribeSecurityPolicyResponse {
+    /**
+     * An array containing the properties of the security policy.
+     */
+    SecurityPolicy: DescribedSecurityPolicy;
+  }
   export interface DescribeServerRequest {
     /**
      * A system-assigned unique identifier for a file transfer protocol-enabled server.
@@ -316,9 +348,35 @@ declare namespace Transfer {
      */
     User: DescribedUser;
   }
+  export interface DescribedSecurityPolicy {
+    /**
+     * Specifies whether this policy enables Federal Information Processing Standards (FIPS).
+     */
+    Fips?: Fips;
+    /**
+     * Specifies the name of the security policy that is attached to the server.
+     */
+    SecurityPolicyName: SecurityPolicyName;
+    /**
+     * Specifies the enabled Secure Shell (SSH) cipher encryption algorithms in the security policy that is attached to the server.
+     */
+    SshCiphers?: SecurityPolicyOptions;
+    /**
+     * Specifies the enabled SSH key exchange (KEX) encryption algorithms in the security policy that is attached to the server.
+     */
+    SshKexs?: SecurityPolicyOptions;
+    /**
+     * Specifies the enabled SSH message authentication code (MAC) encryption algorithms in the security policy that is attached to the server.
+     */
+    SshMacs?: SecurityPolicyOptions;
+    /**
+     * Specifies the enabled Transport Layer Security (TLS) cipher encryption algorithms in the security policy that is attached to the server.
+     */
+    TlsCiphers?: SecurityPolicyOptions;
+  }
   export interface DescribedServer {
     /**
-     * Specifies the unique Amazon Resource Name (ARN) for a file transfer protocol-enabled server to be described.
+     * Specifies the unique Amazon Resource Name (ARN) of the file transfer protocol-enabled server.
      */
     Arn: Arn;
     /**
@@ -353,6 +411,10 @@ declare namespace Transfer {
      * Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:    SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH    FTPS (File Transfer Protocol Secure): File transfer with TLS encryption    FTP (File Transfer Protocol): Unencrypted file transfer  
      */
     Protocols?: Protocols;
+    /**
+     * Specifies the name of the security policy that is attached to the server.
+     */
+    SecurityPolicyName?: SecurityPolicyName;
     /**
      * Specifies the unique system-assigned identifier for a file transfer protocol-enabled server that you instantiate.
      */
@@ -427,6 +489,7 @@ declare namespace Transfer {
     VpcId?: VpcId;
   }
   export type EndpointType = "PUBLIC"|"VPC"|"VPC_ENDPOINT"|string;
+  export type Fips = boolean;
   export type HomeDirectory = string;
   export interface HomeDirectoryMapEntry {
     /**
@@ -481,13 +544,33 @@ declare namespace Transfer {
      */
     UserName: UserName;
   }
+  export interface ListSecurityPoliciesRequest {
+    /**
+     * Specifies the number of security policies to return as a response to the ListSecurityPolicies query.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * When additional results are obtained from the ListSecurityPolicies command, a NextToken parameter is returned in the output. You can then pass the NextToken parameter in a subsequent command to continue listing additional security policies.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListSecurityPoliciesResponse {
+    /**
+     * When you can get additional results from the ListSecurityPolicies operation, a NextToken parameter is returned in the output. In a following command, you can pass in the NextToken parameter to continue listing security policies.
+     */
+    NextToken?: NextToken;
+    /**
+     * An array of security policies that were listed.
+     */
+    SecurityPolicyNames: SecurityPolicyNames;
+  }
   export interface ListServersRequest {
     /**
      * Specifies the number of file transfer protocol-enabled servers to return as a response to the ListServers query.
      */
     MaxResults?: MaxResults;
     /**
-     * When additional results are obtained from theListServers command, a NextToken parameter is returned in the output. You can then pass the NextToken parameter in a subsequent command to continue listing additional file transfer protocol-enabled servers.
+     * When additional results are obtained from the ListServers command, a NextToken parameter is returned in the output. You can then pass the NextToken parameter in a subsequent command to continue listing additional file transfer protocol-enabled servers.
      */
     NextToken?: NextToken;
   }
@@ -626,6 +709,10 @@ declare namespace Transfer {
   export type Protocols = Protocol[];
   export type Response = string;
   export type Role = string;
+  export type SecurityPolicyName = string;
+  export type SecurityPolicyNames = SecurityPolicyName[];
+  export type SecurityPolicyOption = string;
+  export type SecurityPolicyOptions = SecurityPolicyOption[];
   export type ServerId = string;
   export type SourceIp = string;
   export interface SshPublicKey {
@@ -766,6 +853,10 @@ declare namespace Transfer {
      */
     Protocols?: Protocols;
     /**
+     * Specifies the name of the security policy that is attached to the server.
+     */
+    SecurityPolicyName?: SecurityPolicyName;
+    /**
      * A system-assigned unique identifier for a file transfer protocol-enabled server instance that the user account is assigned to.
      */
     ServerId: ServerId;
@@ -786,7 +877,7 @@ declare namespace Transfer {
      */
     HomeDirectoryType?: HomeDirectoryType;
     /**
-     * Logical directory mappings that specify what Amazon S3 paths and keys should be visible to your user and how you want to make them visible. You will need to specify the "Entry" and "Target" pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 path. If you only specify a target, it will be displayed as is. You will need to also make sure that your IAM role provides access to paths in Target. The following is an example.  '[ "/bucket2/documentation", { "Entry": "your-personal-report.pdf", "Target": "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]'  In most cases, you can use this value instead of the scope-down policy to lock your user down to the designated home directory ("chroot"). To do this, you can set Entry to '/' and set Target to the HomeDirectory parameter value.  If the target of a logical directory entry does not exist in Amazon S3, the entry will be ignored. As a workaround, you can use the Amazon S3 api to create 0 byte objects as place holders for your directory. If using the CLI, use the s3api call instead of s3 so you can use the put-object operation. For example, you use the following: aws s3api put-object --bucket bucketname --key path/to/folder/. Make sure that the end of the key name ends in a / for it to be considered a folder. 
+     * Logical directory mappings that specify what Amazon S3 paths and keys should be visible to your user and how you want to make them visible. You will need to specify the "Entry" and "Target" pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 path. If you only specify a target, it will be displayed as is. You will need to also make sure that your IAM role provides access to paths in Target. The following is an example.  '[ "/bucket2/documentation", { "Entry": "your-personal-report.pdf", "Target": "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]'  In most cases, you can use this value instead of the scope-down policy to lock your user down to the designated home directory ("chroot"). To do this, you can set Entry to '/' and set Target to the HomeDirectory parameter value.  If the target of a logical directory entry does not exist in Amazon S3, the entry will be ignored. As a workaround, you can use the Amazon S3 API to create 0 byte objects as place holders for your directory. If using the CLI, use the s3api call instead of s3 so you can use the put-object operation. For example, you use the following: aws s3api put-object --bucket bucketname --key path/to/folder/. Make sure that the end of the key name ends in a / for it to be considered a folder. 
      */
     HomeDirectoryMappings?: HomeDirectoryMappings;
     /**
@@ -802,7 +893,7 @@ declare namespace Transfer {
      */
     ServerId: ServerId;
     /**
-     * A unique string that identifies a user and is associated with a file transfer protocol-enabled server as specified by the ServerId. This is the string that will be used by your user when they log in to your server. This user name is a minimum of 3 and a maximum of 32 characters long. The following are valid characters: a-z, A-Z, 0-9, underscore, and hyphen. The user name can't start with a hyphen.
+     * A unique string that identifies a user and is associated with a file transfer protocol-enabled server as specified by the ServerId. This user name must be a minimum of 3 and a maximum of 100 characters long. The following are valid characters: a-z, A-Z, 0-9, underscore '_', hyphen '-', period '.', and at sign '@'. The user name can't start with a hyphen, period, and at sign.
      */
     UserName: UserName;
   }

@@ -20,11 +20,11 @@ declare class FSx extends Service {
    */
   cancelDataRepositoryTask(callback?: (err: AWSError, data: FSx.Types.CancelDataRepositoryTaskResponse) => void): Request<FSx.Types.CancelDataRepositoryTaskResponse, AWSError>;
   /**
-   * Creates a backup of an existing Amazon FSx file system. Creating regular backups for your file system is a best practice, enabling you to restore a file system from a backup if an issue arises with the original file system. For Amazon FSx for Lustre file systems, you can create a backup only for file systems with the following configuration:   a Persistent deployment type   is not linked to a data respository.   For more information about backing up Amazon FSx for Lustre file systems, see Working with FSx for Lustre backups. For more information about backing up Amazon FSx for Lustre file systems, see Working with FSx for Windows backups. If a backup with the specified client request token exists, and the parameters match, this operation returns the description of the existing backup. If a backup specified client request token exists, and the parameters don't match, this operation returns IncompatibleParameterError. If a backup with the specified client request token doesn't exist, CreateBackup does the following:    Creates a new Amazon FSx backup with an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the backup.   By using the idempotent operation, you can retry a CreateBackup operation without the risk of creating an extra backup. This approach can be useful when an initial call fails in a way that makes it unclear whether a backup was created. If you use the same client request token and the initial call created a backup, the operation returns a successful result because all the parameters are the same. The CreateBackup operation returns while the backup's lifecycle state is still CREATING. You can check the backup creation status by calling the DescribeBackups operation, which returns the backup state along with other information.
+   * Creates a backup of an existing Amazon FSx file system. Creating regular backups for your file system is a best practice, enabling you to restore a file system from a backup if an issue arises with the original file system. For Amazon FSx for Lustre file systems, you can create a backup only for file systems with the following configuration:   a Persistent deployment type   is not linked to an Amazon S3 data respository.   For more information about backing up Amazon FSx for Lustre file systems, see Working with FSx for Lustre backups. For more information about backing up Amazon FSx for Lustre file systems, see Working with FSx for Windows backups. If a backup with the specified client request token exists, and the parameters match, this operation returns the description of the existing backup. If a backup specified client request token exists, and the parameters don't match, this operation returns IncompatibleParameterError. If a backup with the specified client request token doesn't exist, CreateBackup does the following:    Creates a new Amazon FSx backup with an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the backup.   By using the idempotent operation, you can retry a CreateBackup operation without the risk of creating an extra backup. This approach can be useful when an initial call fails in a way that makes it unclear whether a backup was created. If you use the same client request token and the initial call created a backup, the operation returns a successful result because all the parameters are the same. The CreateBackup operation returns while the backup's lifecycle state is still CREATING. You can check the backup creation status by calling the DescribeBackups operation, which returns the backup state along with other information.
    */
   createBackup(params: FSx.Types.CreateBackupRequest, callback?: (err: AWSError, data: FSx.Types.CreateBackupResponse) => void): Request<FSx.Types.CreateBackupResponse, AWSError>;
   /**
-   * Creates a backup of an existing Amazon FSx file system. Creating regular backups for your file system is a best practice, enabling you to restore a file system from a backup if an issue arises with the original file system. For Amazon FSx for Lustre file systems, you can create a backup only for file systems with the following configuration:   a Persistent deployment type   is not linked to a data respository.   For more information about backing up Amazon FSx for Lustre file systems, see Working with FSx for Lustre backups. For more information about backing up Amazon FSx for Lustre file systems, see Working with FSx for Windows backups. If a backup with the specified client request token exists, and the parameters match, this operation returns the description of the existing backup. If a backup specified client request token exists, and the parameters don't match, this operation returns IncompatibleParameterError. If a backup with the specified client request token doesn't exist, CreateBackup does the following:    Creates a new Amazon FSx backup with an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the backup.   By using the idempotent operation, you can retry a CreateBackup operation without the risk of creating an extra backup. This approach can be useful when an initial call fails in a way that makes it unclear whether a backup was created. If you use the same client request token and the initial call created a backup, the operation returns a successful result because all the parameters are the same. The CreateBackup operation returns while the backup's lifecycle state is still CREATING. You can check the backup creation status by calling the DescribeBackups operation, which returns the backup state along with other information.
+   * Creates a backup of an existing Amazon FSx file system. Creating regular backups for your file system is a best practice, enabling you to restore a file system from a backup if an issue arises with the original file system. For Amazon FSx for Lustre file systems, you can create a backup only for file systems with the following configuration:   a Persistent deployment type   is not linked to an Amazon S3 data respository.   For more information about backing up Amazon FSx for Lustre file systems, see Working with FSx for Lustre backups. For more information about backing up Amazon FSx for Lustre file systems, see Working with FSx for Windows backups. If a backup with the specified client request token exists, and the parameters match, this operation returns the description of the existing backup. If a backup specified client request token exists, and the parameters don't match, this operation returns IncompatibleParameterError. If a backup with the specified client request token doesn't exist, CreateBackup does the following:    Creates a new Amazon FSx backup with an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the backup.   By using the idempotent operation, you can retry a CreateBackup operation without the risk of creating an extra backup. This approach can be useful when an initial call fails in a way that makes it unclear whether a backup was created. If you use the same client request token and the initial call created a backup, the operation returns a successful result because all the parameters are the same. The CreateBackup operation returns while the backup's lifecycle state is still CREATING. You can check the backup creation status by calling the DescribeBackups operation, which returns the backup state along with other information.
    */
   createBackup(callback?: (err: AWSError, data: FSx.Types.CreateBackupResponse) => void): Request<FSx.Types.CreateBackupResponse, AWSError>;
   /**
@@ -219,7 +219,7 @@ declare namespace FSx {
   }
   export type BackupId = string;
   export type BackupIds = BackupId[];
-  export type BackupLifecycle = "AVAILABLE"|"CREATING"|"DELETED"|"FAILED"|string;
+  export type BackupLifecycle = "AVAILABLE"|"CREATING"|"TRANSFERRING"|"DELETED"|"FAILED"|string;
   export type BackupType = "AUTOMATIC"|"USER_INITIATED"|string;
   export type Backups = Backup[];
   export interface CancelDataRepositoryTaskRequest {
@@ -263,11 +263,11 @@ declare namespace FSx {
      */
     FileSystemId: FileSystemId;
     /**
-     * (Optional) A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent creation. This string is automatically filled on your behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
+     * A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent creation. This string is automatically filled on your behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
      */
     ClientRequestToken?: ClientRequestToken;
     /**
-     * (Optional) The tags to apply to the backup at backup creation. The key value of the Name tag appears in the console as the backup name. If you have set CopyTagsToBackups to true, and you specify one or more tags using the CreateBackup action, no existing file system tags are copied from the file system to the backup.
+     * The tags to apply to the backup at backup creation. The key value of the Name tag appears in the console as the backup name. If you have set CopyTagsToBackups to true, and you specify one or more tags using the CreateBackup action, no existing tags on the file system are copied from the file system to the backup.
      */
     Tags?: Tags;
   }
@@ -336,7 +336,7 @@ declare namespace FSx {
   }
   export interface CreateFileSystemLustreConfiguration {
     /**
-     * (Optional) The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone, where d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.
+     * The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone, where d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.
      */
     WeeklyMaintenanceStartTime?: WeeklyTime;
     /**
@@ -356,19 +356,23 @@ declare namespace FSx {
      */
     DeploymentType?: LustreDeploymentType;
     /**
-     *  (Optional) When you create your file system, your existing S3 objects appear as file and directory listings. Use this property to choose how Amazon FSx keeps your file and directory listings up to date as you add or modify objects in your linked S3 bucket. AutoImportPolicy can have the following values:    NONE - (Default) AutoImport is off. Amazon FSx only updates file and directory listings from the linked S3 bucket when the file system is created. FSx does not update file and directory listings for any new or changed objects after choosing this option.    NEW - AutoImport is on. Amazon FSx automatically imports directory listings of any new objects added to the linked S3 bucket that do not currently exist in the FSx file system.     NEW_CHANGED - AutoImport is on. Amazon FSx automatically imports file and directory listings of any new objects added to the S3 bucket and any existing objects that are changed in the S3 bucket after you choose this option.    For more information, see Automatically import updates from your S3 bucket.
+     *  (Optional) Use this property to configure the AutoImport feature on the file system's linked Amazon S3 data repository. You use AutoImport to update the contents of your FSx for Lustre file system automatically with changes that occur in the linked S3 data repository. AutoImportPolicy can have the following values:    NONE - (Default) AutoImport is off. Changes in the linked data repository are not reflected on the FSx file system.    NEW - AutoImport is on. New files in the linked data repository that do not currently exist in the FSx file system are automatically imported. Updates to existing FSx files are not imported to the FSx file system. Files deleted from the linked data repository are not deleted from the FSx file system.    NEW_CHANGED - AutoImport is on. New files in the linked S3 data repository that do not currently exist in the FSx file system are automatically imported. Changes to existing FSx files in the linked repository are also automatically imported to the FSx file system. Files deleted from the linked data repository are not deleted from the FSx file system.    For more information, see Automatically import updates from your S3 bucket.
      */
     AutoImportPolicy?: AutoImportPolicyType;
     /**
-     *  Required for the PERSISTENT_1 deployment type, describes the amount of read and write throughput for each 1 tebibyte of storage, in MB/s/TiB. File system throughput capacity is calculated by multiplying ﬁle system storage capacity (TiB) by the PerUnitStorageThroughput (MB/s/TiB). For a 2.4 TiB ﬁle system, provisioning 50 MB/s/TiB of PerUnitStorageThroughput yields 117 MB/s of ﬁle system throughput. You pay for the amount of throughput that you provision.  Valid values are 50, 100, 200.
+     *  Required for the PERSISTENT_1 deployment type, describes the amount of read and write throughput for each 1 tebibyte of storage, in MB/s/TiB. File system throughput capacity is calculated by multiplying ﬁle system storage capacity (TiB) by the PerUnitStorageThroughput (MB/s/TiB). For a 2.4 TiB ﬁle system, provisioning 50 MB/s/TiB of PerUnitStorageThroughput yields 117 MB/s of ﬁle system throughput. You pay for the amount of throughput that you provision.  Valid values for SSD storage: 50, 100, 200. Valid values for HDD storage: 12, 40.
      */
     PerUnitStorageThroughput?: PerUnitStorageThroughput;
     DailyAutomaticBackupStartTime?: DailyTime;
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
     /**
-     * (Optional) Not available to use with file systems that are linked to a data repository. A boolean flag indicating whether tags for the file system should be copied to backups. The default value is false. If it's set to true, all file system tags are copied to all automatic and user-initiated backups when the user doesn't specify any backup-specific tags. If this value is true, and you specify one or more backup tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the file system, regardless of this value. For more information, see Working with backups.
+     * A boolean flag indicating whether tags for the file system should be copied to backups. This value defaults to false. If it's set to true, all tags for the file system are copied to all automatic and user-initiated backups where the user doesn't specify tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the file system, regardless of this value. For more information, see Working with backups.
      */
     CopyTagsToBackups?: Flag;
+    /**
+     * The type of drive cache used by PERSISTENT_1 file systems that are provisioned with HDD storage devices. This parameter is required when storage type is HDD. Set to READ, improve the performance for frequently accessed files and allows 20% of the total storage capacity of the file system to be cached.  This parameter is required when StorageType is set to HDD.
+     */
+    DriveCacheType?: DriveCacheType;
   }
   export interface CreateFileSystemRequest {
     /**
@@ -380,7 +384,7 @@ declare namespace FSx {
      */
     FileSystemType: FileSystemType;
     /**
-     * Sets the storage capacity of the file system that you're creating. For Lustre file systems:   For SCRATCH_2 and PERSISTENT_1 deployment types, valid values are 1200 GiB, 2400 GiB, and increments of 2400 GiB.   For SCRATCH_1 deployment type, valid values are 1200 GiB, 2400 GiB, and increments of 3600 GiB.   For Windows file systems:   If StorageType=SSD, valid values are 32 GiB - 65,536 GiB (64 TiB).   If StorageType=HDD, valid values are 2000 GiB - 65,536 GiB (64 TiB).  
+     * Sets the storage capacity of the file system that you're creating. For Lustre file systems:   For SCRATCH_2 and PERSISTENT_1 deployment types, valid values are 1.2, 2.4, and increments of 2.4 TiB.   For SCRATCH_1 deployment type, valid values are 1.2, 2.4, and increments of 3.6 TiB.   For Windows file systems:   If StorageType=SSD, valid values are 32 GiB - 65,536 GiB (64 TiB).   If StorageType=HDD, valid values are 2000 GiB - 65,536 GiB (64 TiB).  
      */
     StorageCapacity: StorageCapacity;
     /**
@@ -439,7 +443,7 @@ declare namespace FSx {
      */
     DailyAutomaticBackupStartTime?: DailyTime;
     /**
-     * The number of days to retain automatic backups. The default is to retain backups for 7 days. Setting this value to 0 disables the creation of automatic backups. The maximum retention period for backups is 35 days.
+     * The number of days to retain automatic backups. The default is to retain backups for 7 days. Setting this value to 0 disables the creation of automatic backups. The maximum retention period for backups is 90 days.
      */
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
     /**
@@ -468,7 +472,7 @@ declare namespace FSx {
      */
     ImportedFileChunkSize?: Megabytes;
     /**
-     * Describes the file system's linked S3 data repository's AutoImportPolicy. The AutoImportPolicy configures how Amazon FSx keeps your file and directory listings up to date as you add or modify objects in your linked S3 bucket. AutoImportPolicy can have the following values:    NONE - (Default) AutoImport is off. Amazon FSx only updates file and directory listings from the linked S3 bucket when the file system is created. FSx does not update file and directory listings for any new or changed objects after choosing this option.    NEW - AutoImport is on. Amazon FSx automatically imports directory listings of any new objects added to the linked S3 bucket that do not currently exist in the FSx file system.     NEW_CHANGED - AutoImport is on. Amazon FSx automatically imports file and directory listings of any new objects added to the S3 bucket and any existing objects that are changed in the S3 bucket after you choose this option.    For more information, see Automatically import updates from your S3 bucket.
+     * Describes the file system's linked S3 data repository's AutoImportPolicy. The AutoImportPolicy configures how your FSx for Lustre file system automatically updates its contents with changes that occur in the linked S3 data repository. AutoImportPolicy can have the following values:    NONE - (Default) AutoImport is off. Changes in the linked data repository are not reflected on the FSx file system.    NEW - AutoImport is on. New files in the linked data repository that do not currently exist in the FSx file system are automatically imported. Updates to existing FSx files are not imported to the FSx file system. Files deleted from the linked data repository are not deleted from the FSx file system.    NEW_CHANGED - AutoImport is on. New files in the linked S3 data repository that do not currently exist in the FSx file system are automatically imported. Changes to existing FSx files in the linked repository are also automatically imported to the FSx file system. Files deleted from the linked data repository are not deleted from the FSx file system.    For more information, see Automatically import updates from your S3 bucket.
      */
     AutoImportPolicy?: AutoImportPolicyType;
     FailureDetails?: DataRepositoryFailureDetails;
@@ -715,6 +719,7 @@ declare namespace FSx {
   export type DirectoryPassword = string;
   export type DirectoryUserName = string;
   export type DnsIps = IpAddress[];
+  export type DriveCacheType = "NONE"|"READ"|string;
   export type EndTime = Date;
   export type ErrorMessage = string;
   export type FailedCount = number;
@@ -854,7 +859,7 @@ declare namespace FSx {
      */
     DeploymentType?: LustreDeploymentType;
     /**
-     *  Per unit storage throughput represents the megabytes per second of read or write throughput per 1 tebibyte of storage provisioned. File system throughput capacity is equal to Storage capacity (TiB) * PerUnitStorageThroughput (MB/s/TiB). This option is only valid for PERSISTENT_1 deployment types. Valid values are 50, 100, 200. 
+     *  Per unit storage throughput represents the megabytes per second of read or write throughput per 1 tebibyte of storage provisioned. File system throughput capacity is equal to Storage capacity (TiB) * PerUnitStorageThroughput (MB/s/TiB). This option is only valid for PERSISTENT_1 deployment types.  Valid values for SSD storage: 50, 100, 200. Valid values for HDD storage: 12, 40. 
      */
     PerUnitStorageThroughput?: PerUnitStorageThroughput;
     /**
@@ -867,6 +872,10 @@ declare namespace FSx {
      * A boolean flag indicating whether tags on the file system should be copied to backups. If it's set to true, all tags on the file system are copied to all automatic backups and any user-initiated backups where the user doesn't specify any tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the file system, regardless of this value. (Default = false)
      */
     CopyTagsToBackups?: Flag;
+    /**
+     * The type of drive cache used by PERSISTENT_1 file systems that are provisioned with HDD storage devices. This parameter is required when storage type is HDD. Set to READ, improve the performance for frequently accessed files and allows 20% of the total storage capacity of the file system to be cached.  This parameter is required when StorageType is set to HDD.
+     */
+    DriveCacheType?: DriveCacheType;
   }
   export type LustreFileSystemMountName = string;
   export type MaxResults = number;
@@ -996,13 +1005,13 @@ declare namespace FSx {
   }
   export interface UpdateFileSystemLustreConfiguration {
     /**
-     * (Optional) The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone. d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.
+     * The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone. d is the weekday number, from 1 through 7, beginning with Monday and ending with Sunday.
      */
     WeeklyMaintenanceStartTime?: WeeklyTime;
     DailyAutomaticBackupStartTime?: DailyTime;
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
     /**
-     *  (Optional) When you create your file system, your existing S3 objects appear as file and directory listings. Use this property to choose how Amazon FSx keeps your file and directory listing up to date as you add or modify objects in your linked S3 bucket. AutoImportPolicy can have the following values:    NONE - (Default) AutoImport is off. Amazon FSx only updates file and directory listings from the linked S3 bucket when the file system is created. FSx does not update the file and directory listing for any new or changed objects after choosing this option.    NEW - AutoImport is on. Amazon FSx automatically imports directory listings of any new objects added to the linked S3 bucket that do not currently exist in the FSx file system.     NEW_CHANGED - AutoImport is on. Amazon FSx automatically imports file and directory listings of any new objects added to the S3 bucket and any existing objects that are changed in the S3 bucket after you choose this option.    For more information, see Automatically import updates from your S3 bucket.
+     *  (Optional) Use this property to configure the AutoImport feature on the file system's linked Amazon S3 data repository. You use AutoImport to update the contents of your FSx for Lustre file system automatically with changes that occur in the linked S3 data repository. AutoImportPolicy can have the following values:    NONE - (Default) AutoImport is off. Changes in the linked data repository are not reflected on the FSx file system.    NEW - AutoImport is on. New files in the linked data repository that do not currently exist in the FSx file system are automatically imported. Updates to existing FSx files are not imported to the FSx file system. Files deleted from the linked data repository are not deleted from the FSx file system.    NEW_CHANGED - AutoImport is on. New files in the linked S3 data repository that do not currently exist in the FSx file system are automatically imported. Changes to existing FSx files in the linked repository are also automatically imported to the FSx file system. Files deleted from the linked data repository are not deleted from the FSx file system.    For more information, see Automatically import updates from your S3 bucket.
      */
     AutoImportPolicy?: AutoImportPolicyType;
   }
@@ -1041,7 +1050,7 @@ declare namespace FSx {
      */
     DailyAutomaticBackupStartTime?: DailyTime;
     /**
-     * The number of days to retain automatic daily backups. Setting this to zero (0) disables automatic daily backups. You can retain automatic daily backups for a maximum of 35 days. For more information, see Working with Automatic Daily Backups.
+     * The number of days to retain automatic daily backups. Setting this to zero (0) disables automatic daily backups. You can retain automatic daily backups for a maximum of 90 days. For more information, see Working with Automatic Daily Backups.
      */
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
     /**
@@ -1095,7 +1104,7 @@ declare namespace FSx {
      */
     DailyAutomaticBackupStartTime?: DailyTime;
     /**
-     * The number of days to retain automatic backups. Setting this to 0 disables automatic backups. You can retain automatic backups for a maximum of 35 days.
+     * The number of days to retain automatic backups. Setting this to 0 disables automatic backups. You can retain automatic backups for a maximum of 90 days.
      */
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
     /**

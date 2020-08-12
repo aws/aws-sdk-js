@@ -120,6 +120,7 @@ declare namespace Cloud9 {
   export type AutomaticStopTimeMinutes = number;
   export type BoundedEnvironmentIdList = EnvironmentId[];
   export type ClientRequestToken = string;
+  export type ConnectionType = "CONNECT_SSH"|"CONNECT_SSM"|string;
   export interface CreateEnvironmentEC2Request {
     /**
      * The name of the environment to create. This name is visible to other AWS IAM users in the same AWS account.
@@ -153,6 +154,10 @@ declare namespace Cloud9 {
      * An array of key-value pairs that will be associated with the new AWS Cloud9 development environment.
      */
     tags?: TagList;
+    /**
+     * The connection type used for connecting to an Amazon EC2 environment.
+     */
+    connectionType?: ConnectionType;
   }
   export interface CreateEnvironmentEC2Result {
     /**
@@ -277,6 +282,10 @@ declare namespace Cloud9 {
      * The type of environment. Valid values include the following:    ec2: An Amazon Elastic Compute Cloud (Amazon EC2) instance connects to the environment.    ssh: Your own server connects to the environment.  
      */
     type?: EnvironmentType;
+    /**
+     * The connection type used for connecting to an Amazon EC2 environment.
+     */
+    connectionType?: ConnectionType;
     /**
      * The Amazon Resource Name (ARN) of the environment.
      */

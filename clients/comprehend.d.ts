@@ -763,7 +763,7 @@ declare namespace Comprehend {
      */
     ClientRequestToken?: ClientRequestTokenString;
     /**
-     *  The language of the input documents. All documents must be in the same language. Only English ("en") is currently supported. 
+     *  You can specify any of the following languages supported by Amazon Comprehend: English ("en"), Spanish ("es"), French ("fr"), Italian ("it"), German ("de"), or Portuguese ("pt"). All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
     /**
@@ -1463,7 +1463,7 @@ declare namespace Comprehend {
   }
   export interface EntityRecognizerInputDataConfig {
     /**
-     * The entity types in the input data for an entity recognizer. A maximum of 12 entity types can be used at one time to train an entity recognizer.
+     * The entity types in the input data for an entity recognizer. A maximum of 25 entity types can be used at one time to train an entity recognizer.
      */
     EntityTypes: EntityTypesList;
     /**
