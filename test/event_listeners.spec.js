@@ -594,6 +594,24 @@
         expect(request.response.error.code).to.equal('UnknownEndpoint');
         return expect(request.response.error.message).to.contain('This service may not be available in the `mock-region\' region.');
       });
+      if (AWS.util.getSystemErrorName) {
+        // errno is a number after Node 12
+        // reference: https://github.com/nodejs/node/pull/28140
+        it('rewrites ENOTFOUND error to include helpful message when errno is number', function() {
+          var request;
+          helpers.mockHttpResponse({
+            code: 'NetworkingError',
+            errno: -3008,
+            region: 'mock-region',
+            hostname: 'svc.mock-region.example.com',
+            retryable: true
+          });
+          request = makeRequest();
+          request.send();
+          expect(request.response.error.code).to.equal('UnknownEndpoint');
+          return expect(request.response.error.message).to.contain('This service may not be available in the `mock-region\' region.');
+        });
+      }
       return it('retries ENOTFOUND errors', function() {
         var request, response, sendHandler;
         helpers.mockHttpResponse({
