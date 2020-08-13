@@ -18303,6 +18303,14 @@ declare namespace EC2 {
      * The ID of the subnet.
      */
     SubnetId: SubnetId;
+    /**
+     * Specify true to indicate that network interfaces attached to instances created in the specified subnet should be assigned a customer-owned IPv4 address. When this value is true, you must specify the customer-owned IP pool using CustomerOwnedIpv4Pool.
+     */
+    MapCustomerOwnedIpOnLaunch?: AttributeBooleanValue;
+    /**
+     * The customer-owned IPv4 address pool associated with the subnet. You must set this value when you specify true for MapCustomerOwnedIpOnLaunch.
+     */
+    CustomerOwnedIpv4Pool?: CoipPoolId;
   }
   export interface ModifyTrafficMirrorFilterNetworkServicesRequest {
     /**
@@ -19181,6 +19189,10 @@ declare namespace EC2 {
      * The address of the Elastic IP address or Carrier IP address bound to the network interface.
      */
     PublicIp?: String;
+    /**
+     * The customer-owned IP address associated with the network interface.
+     */
+    CustomerOwnedIp?: String;
     /**
      * The carrier IP address associated with the network interface. This option is only available when the network interface is in a subnet which is associated with a Wavelength Zone.
      */

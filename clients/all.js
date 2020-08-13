@@ -225,5 +225,6 @@ module.exports = {
   Macie2: require('./macie2'),
   CodeArtifact: require('./codeartifact'),
   Honeycode: require('./honeycode'),
-  IVS: require('./ivs')
+  IVS: require('./ivs'),
+  Braket: require('./braket')
 };

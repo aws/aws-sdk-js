@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.732.0-->
+<!--LATEST=2.733.0-->
 <!--ENTRYINSERT-->
+
+## 2.733.0
+* feature: Braket: Amazon Braket general availability with Device and Quantum Task operations.
+* feature: CognitoIdentityServiceProvider: Adding ability to customize expiry for Refresh, Access and ID tokens.
+* feature: EC2: Added MapCustomerOwnedIpOnLaunch and CustomerOwnedIpv4Pool to ModifySubnetAttribute to allow CoIP auto assign. Fields are returned in DescribeSubnets and DescribeNetworkInterfaces responses.
+* feature: EKS: Adding support for customer provided EC2 launch templates and AMIs to EKS Managed Nodegroups. Also adds support for Arm-based instances to EKS Managed Nodegroups.
+* feature: RDS: This release allows customers to specify a replica mode when creating or modifying a Read Replica, for DB engines which support this feature.
 
 ## 2.732.0
 * feature: Cloud9: Add ConnectionType input parameter to CreateEnvironmentEC2 endpoint. New parameter enables creation of environments with SSM connection.

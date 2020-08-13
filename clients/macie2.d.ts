@@ -865,7 +865,7 @@ declare namespace Macie2 {
      */
     s3JobDefinition: S3JobDefinition;
     /**
-     * The sampling depth, as a percentage, to apply when processing objects. This value determines the percentage of eligible objects that the job analyzes. If the value is less than 100, Amazon Macie randomly selects the objects to analyze, up to the specified percentage.
+     * The sampling depth, as a percentage, to apply when processing objects. This value determines the percentage of eligible objects that the job analyzes. If this value is less than 100, Amazon Macie selects the objects to analyze at random, up to the specified percentage, and analyzes all the data in those objects.
      */
     samplingPercentage?: __integer;
     /**
@@ -873,7 +873,7 @@ declare namespace Macie2 {
      */
     scheduleFrequency?: JobScheduleFrequency;
     /**
-     * A map of key-value pairs that specifies the tags to associate with the job. A job can have a maximum of 50 tags. Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
+     * A map of key-value pairs that specifies the tags to associate with the job. A job can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
      */
     tags?: TagMap;
   }
@@ -897,11 +897,11 @@ declare namespace Macie2 {
      */
     description?: __string;
     /**
-     * An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters.
+     * An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters. Ignore words are case sensitive.
      */
     ignoreWords?: __listOf__string;
     /**
-     * An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 4 - 90 characters.
+     * An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 4 - 90 characters. Keywords aren't case sensitive.
      */
     keywords?: __listOf__string;
     /**
@@ -917,7 +917,7 @@ declare namespace Macie2 {
      */
     regex?: __string;
     /**
-     * A map of key-value pairs that specifies the tags to associate with the custom data identifier. A custom data identifier can have a maximum of 50 tags. Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
+     * A map of key-value pairs that specifies the tags to associate with the custom data identifier. A custom data identifier can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
      */
     tags?: TagMap;
   }
@@ -953,7 +953,7 @@ declare namespace Macie2 {
      */
     position?: __integer;
     /**
-     * A map of key-value pairs that specifies the tags to associate with the filter. A findings filter can have a maximum of 50 tags. Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
+     * A map of key-value pairs that specifies the tags to associate with the filter. A findings filter can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
      */
     tags?: TagMap;
   }
@@ -993,7 +993,7 @@ declare namespace Macie2 {
      */
     account: AccountDetail;
     /**
-     * A map of key-value pairs that specifies the tags to associate with the account in Amazon Macie. An account can have a maximum of 50 tags. Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
+     * A map of key-value pairs that specifies the tags to associate with the account in Amazon Macie. An account can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
      */
     tags?: TagMap;
   }
@@ -1232,7 +1232,7 @@ declare namespace Macie2 {
      */
     s3JobDefinition?: S3JobDefinition;
     /**
-     * The sampling depth, as a percentage, that the job applies when it processes objects.
+     * The sampling depth, as a percentage, that determines the number of objects that the job processes.
      */
     samplingPercentage?: __integer;
     /**
@@ -1565,11 +1565,11 @@ declare namespace Macie2 {
      */
     id?: __string;
     /**
-     * An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it.
+     * An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. Ignore words are case sensitive.
      */
     ignoreWords?: __listOf__string;
     /**
-     * An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match.
+     * An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. Keywords aren't case sensitive.
      */
     keywords?: __listOf__string;
     /**
@@ -1919,7 +1919,7 @@ declare namespace Macie2 {
      */
     simpleScopeTerm?: SimpleScopeTerm;
     /**
-     * A tag-based condition that defines the operator and a tag key or tag keys and values for including or excluding an object from the job.
+     *  A tag-based condition that defines an operator and a tag key and value for including or excluding an object from the job.
      */
     tagScopeTerm?: TagScopeTerm;
   }
@@ -2555,7 +2555,7 @@ declare namespace Macie2 {
      */
     resourceArn: __string;
     /**
-     * A map of key-value pairs that specifies the tags to associate with the resource. A resource can have a maximum of 50 tags. Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
+     * A map of key-value pairs that specifies the tags to associate with the resource. A resource can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
      */
     tags: TagMap;
   }
@@ -2592,11 +2592,11 @@ declare namespace Macie2 {
   }
   export interface TestCustomDataIdentifierRequest {
     /**
-     * An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters.
+     * An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters. Ignore words are case sensitive.
      */
     ignoreWords?: __listOf__string;
     /**
-     * An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 4 - 90 characters.
+     * An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 4 - 90 characters. Keywords aren't case sensitive.
      */
     keywords?: __listOf__string;
     /**

@@ -2947,7 +2947,7 @@
         "samplingPercentage": {
           "shape": "__integer",
           "locationName": "samplingPercentage",
-          "documentation": "<p>The sampling depth, as a percentage, to apply when processing objects. This value determines the percentage of eligible objects that the job analyzes. If the value is less than 100, Amazon Macie randomly selects the objects to analyze, up to the specified percentage.</p>"
+          "documentation": "<p>The sampling depth, as a percentage, to apply when processing objects. This value determines the percentage of eligible objects that the job analyzes. If this value is less than 100, Amazon Macie selects the objects to analyze at random, up to the specified percentage, and analyzes all the data in those objects.</p>"
         },
         "scheduleFrequency": {
           "shape": "JobScheduleFrequency",
@@ -2957,7 +2957,7 @@
         "tags": {
           "shape": "TagMap",
           "locationName": "tags",
-          "documentation": "<p>A map of key-value pairs that specifies the tags to associate with the job.</p> <p>A job can have a maximum of 50 tags. Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>"
+          "documentation": "<p>A map of key-value pairs that specifies the tags to associate with the job.</p> <p>A job can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>"
         }
       },
       "required": [
@@ -2999,12 +2999,12 @@
         "ignoreWords": {
           "shape": "__listOf__string",
           "locationName": "ignoreWords",
-          "documentation": "<p>An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters.</p>"
+          "documentation": "<p>An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters. Ignore words are case sensitive.</p>"
         },
         "keywords": {
           "shape": "__listOf__string",
           "locationName": "keywords",
-          "documentation": "<p>An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 4 - 90 characters.</p>"
+          "documentation": "<p>An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 4 - 90 characters. Keywords aren't case sensitive.</p>"
         },
         "maximumMatchDistance": {
           "shape": "__integer",
@@ -3024,7 +3024,7 @@
         "tags": {
           "shape": "TagMap",
           "locationName": "tags",
-          "documentation": "<p>A map of key-value pairs that specifies the tags to associate with the custom data identifier.</p> <p>A custom data identifier can have a maximum of 50 tags. Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>"
+          "documentation": "<p>A map of key-value pairs that specifies the tags to associate with the custom data identifier.</p> <p>A custom data identifier can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>"
         }
       }
     },
@@ -3075,7 +3075,7 @@
         "tags": {
           "shape": "TagMap",
           "locationName": "tags",
-          "documentation": "<p>A map of key-value pairs that specifies the tags to associate with the filter.</p> <p>A findings filter can have a maximum of 50 tags. Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>"
+          "documentation": "<p>A map of key-value pairs that specifies the tags to associate with the filter.</p> <p>A findings filter can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>"
         }
       },
       "required": [
@@ -3143,7 +3143,7 @@
         "tags": {
           "shape": "TagMap",
           "locationName": "tags",
-          "documentation": "<p>A map of key-value pairs that specifies the tags to associate with the account in Amazon Macie.</p> <p>An account can have a maximum of 50 tags. Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>"
+          "documentation": "<p>A map of key-value pairs that specifies the tags to associate with the account in Amazon Macie.</p> <p>An account can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>"
         }
       },
       "required": [
@@ -3563,7 +3563,7 @@
         "samplingPercentage": {
           "shape": "__integer",
           "locationName": "samplingPercentage",
-          "documentation": "<p>The sampling depth, as a percentage, that the job applies when it processes objects.</p>"
+          "documentation": "<p>The sampling depth, as a percentage, that determines the number of objects that the job processes.</p>"
         },
         "scheduleFrequency": {
           "shape": "JobScheduleFrequency",
@@ -4134,12 +4134,12 @@
         "ignoreWords": {
           "shape": "__listOf__string",
           "locationName": "ignoreWords",
-          "documentation": "<p>An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it.</p>"
+          "documentation": "<p>An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. Ignore words are case sensitive.</p>"
         },
         "keywords": {
           "shape": "__listOf__string",
           "locationName": "keywords",
-          "documentation": "<p>An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match.</p>"
+          "documentation": "<p>An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. Keywords aren't case sensitive.</p>"
         },
         "maximumMatchDistance": {
           "shape": "__integer",
@@ -4685,7 +4685,7 @@
         "tagScopeTerm": {
           "shape": "TagScopeTerm",
           "locationName": "tagScopeTerm",
-          "documentation": "<p>A tag-based condition that defines the operator and a tag key or tag keys and values for including or excluding an object from the job.</p>"
+          "documentation": " <p>A tag-based condition that defines an operator and a tag key and value for including or excluding an object from the job.</p>"
         }
       },
       "documentation": "<p>Specifies a property- or tag-based condition that defines criteria for including or excluding objects from a classification job.</p>"
@@ -5781,7 +5781,7 @@
         "tags": {
           "shape": "TagMap",
           "locationName": "tags",
-          "documentation": "<p>A map of key-value pairs that specifies the tags to associate with the resource.</p> <p>A resource can have a maximum of 50 tags. Each tag consists of a required tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>"
+          "documentation": "<p>A map of key-value pairs that specifies the tags to associate with the resource.</p> <p>A resource can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>"
         }
       },
       "required": [
@@ -5848,12 +5848,12 @@
         "ignoreWords": {
           "shape": "__listOf__string",
           "locationName": "ignoreWords",
-          "documentation": "<p>An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters.</p>"
+          "documentation": "<p>An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters. Ignore words are case sensitive.</p>"
         },
         "keywords": {
           "shape": "__listOf__string",
           "locationName": "keywords",
-          "documentation": "<p>An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 4 - 90 characters.</p>"
+          "documentation": "<p>An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 4 - 90 characters. Keywords aren't case sensitive.</p>"
         },
         "maximumMatchDistance": {
           "shape": "__integer",

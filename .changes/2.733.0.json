@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "Braket",
+        "description": "Amazon Braket general availability with Device and Quantum Task operations."
+    },
+    {
+        "type": "feature",
+        "category": "CognitoIdentityServiceProvider",
+        "description": "Adding ability to customize expiry for Refresh, Access and ID tokens."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Added MapCustomerOwnedIpOnLaunch and CustomerOwnedIpv4Pool to ModifySubnetAttribute to allow CoIP auto assign. Fields are returned in DescribeSubnets and DescribeNetworkInterfaces responses."
+    },
+    {
+        "type": "feature",
+        "category": "EKS",
+        "description": "Adding support for customer provided EC2 launch templates and AMIs to EKS Managed Nodegroups. Also adds support for Arm-based instances to EKS Managed Nodegroups."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "This release allows customers to specify a replica mode when creating or modifying a Read Replica, for DB engines which support this feature."
+    }
+]

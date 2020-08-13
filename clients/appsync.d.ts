@@ -431,7 +431,7 @@ declare namespace AppSync {
      */
     ttl?: Long;
     /**
-     * The caching keys for a resolver that has caching enabled. Valid values are entries from the $context.identity and $context.arguments maps.
+     * The caching keys for a resolver that has caching enabled. Valid values are entries from the $context.arguments, $context.source, and $context.identity maps.
      */
     cachingKeys?: CachingKeys;
   }
@@ -646,7 +646,7 @@ declare namespace AppSync {
      */
     dataSourceName?: ResourceName;
     /**
-     * The mapping template to be used for requests. A resolver uses a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL).
+     * The mapping template to be used for requests. A resolver uses a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL). VTL request mapping templates are optional when using a Lambda data source. For all other data sources, VTL request and response mapping templates are required.
      */
     requestMappingTemplate?: MappingTemplate;
     /**
@@ -1702,7 +1702,7 @@ declare namespace AppSync {
      */
     dataSourceName?: ResourceName;
     /**
-     * The new request mapping template.
+     * The new request mapping template. A resolver uses a request mapping template to convert a GraphQL expression into a format that a data source can understand. Mapping templates are written in Apache Velocity Template Language (VTL). VTL request mapping templates are optional when using a Lambda data source. For all other data sources, VTL request and response mapping templates are required.
      */
     requestMappingTemplate?: MappingTemplate;
     /**
