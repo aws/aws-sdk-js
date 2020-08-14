@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.733.0',
+	  VERSION: '2.734.0',
 
 	  /**
 	   * @api private
@@ -6942,7 +6942,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    add('EXTRACT_REQUEST_ID', 'extractError', AWS.util.extractRequestId);
 
 	    add('ENOTFOUND_ERROR', 'httpError', function ENOTFOUND_ERROR(err) {
-	      if (err.code === 'NetworkingError' && err.errno === 'ENOTFOUND') {
+	      function isDNSError(err) {
+	        return err.errno === 'ENOTFOUND' ||
+	          typeof err.errno === 'number' &&
+	          typeof AWS.util.getSystemErrorName === 'function' &&
+	          ['EAI_NONAME', 'EAI_NODATA'].indexOf(AWS.util.getSystemErrorName(err.errno) >= 0);
+	      }
+	      if (err.code === 'NetworkingError' && isDNSError(err)) {
 	        var message = 'Inaccessible host: `' + err.hostname +
 	          '\'. This service may not be available in the `' + err.region +
 	          '\' region.';

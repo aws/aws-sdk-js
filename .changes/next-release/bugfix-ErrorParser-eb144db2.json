@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "ErrorParser",
-  "description": "fix UnknownEndpoint exception not thrown in Node14(#3393)"
-}

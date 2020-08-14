@@ -123,7 +123,7 @@ declare namespace Braket {
     quantumTaskArn: QuantumTaskArn;
   }
   export type DeviceArn = string;
-  export type DeviceStatus = "QPU"|"SIMULATOR"|string;
+  export type DeviceStatus = "OFFLINE"|"ONLINE"|string;
   export interface DeviceSummary {
     /**
      * The ARN of the device.
@@ -147,7 +147,7 @@ declare namespace Braket {
     providerName: String;
   }
   export type DeviceSummaryList = DeviceSummary[];
-  export type DeviceType = "OFFLINE"|"ONLINE"|string;
+  export type DeviceType = "QPU"|"SIMULATOR"|string;
   export interface GetDeviceRequest {
     /**
      * The ARN of the device to retrieve.

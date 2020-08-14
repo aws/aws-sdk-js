@@ -335,8 +335,8 @@
     "DeviceStatus": {
       "type": "string",
       "enum": [
-        "QPU",
-        "SIMULATOR"
+        "OFFLINE",
+        "ONLINE"
       ]
     },
     "DeviceSummary": {
@@ -381,8 +381,8 @@
     "DeviceType": {
       "type": "string",
       "enum": [
-        "OFFLINE",
-        "ONLINE"
+        "QPU",
+        "SIMULATOR"
       ]
     },
     "GetDeviceRequest": {

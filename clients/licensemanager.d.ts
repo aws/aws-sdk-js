@@ -12,11 +12,11 @@ declare class LicenseManager extends Service {
   constructor(options?: LicenseManager.Types.ClientConfiguration)
   config: Config & LicenseManager.Types.ClientConfiguration;
   /**
-   * Creates a license configuration. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated Host, or all of these), host affinity (how long a VM must be associated with a host), and the number of licenses purchased and used.
+   * Creates a license configuration. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated Host, or all of these), license affinity to host (how long a license must be associated with a host), and the number of licenses purchased and used.
    */
   createLicenseConfiguration(params: LicenseManager.Types.CreateLicenseConfigurationRequest, callback?: (err: AWSError, data: LicenseManager.Types.CreateLicenseConfigurationResponse) => void): Request<LicenseManager.Types.CreateLicenseConfigurationResponse, AWSError>;
   /**
-   * Creates a license configuration. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated Host, or all of these), host affinity (how long a VM must be associated with a host), and the number of licenses purchased and used.
+   * Creates a license configuration. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated Host, or all of these), license affinity to host (how long a license must be associated with a host), and the number of licenses purchased and used.
    */
   createLicenseConfiguration(callback?: (err: AWSError, data: LicenseManager.Types.CreateLicenseConfigurationResponse) => void): Request<LicenseManager.Types.CreateLicenseConfigurationResponse, AWSError>;
   /**
@@ -116,11 +116,11 @@ declare class LicenseManager extends Service {
    */
   untagResource(callback?: (err: AWSError, data: LicenseManager.Types.UntagResourceResponse) => void): Request<LicenseManager.Types.UntagResourceResponse, AWSError>;
   /**
-   * Modifies the attributes of an existing license configuration. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated Host, or all of these), host affinity (how long a VM must be associated with a host), and the number of licenses purchased and used.
+   * Modifies the attributes of an existing license configuration.
    */
   updateLicenseConfiguration(params: LicenseManager.Types.UpdateLicenseConfigurationRequest, callback?: (err: AWSError, data: LicenseManager.Types.UpdateLicenseConfigurationResponse) => void): Request<LicenseManager.Types.UpdateLicenseConfigurationResponse, AWSError>;
   /**
-   * Modifies the attributes of an existing license configuration. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated Host, or all of these), host affinity (how long a VM must be associated with a host), and the number of licenses purchased and used.
+   * Modifies the attributes of an existing license configuration.
    */
   updateLicenseConfiguration(callback?: (err: AWSError, data: LicenseManager.Types.UpdateLicenseConfigurationResponse) => void): Request<LicenseManager.Types.UpdateLicenseConfigurationResponse, AWSError>;
   /**
@@ -184,7 +184,7 @@ declare namespace LicenseManager {
      */
     LicenseCountHardLimit?: BoxBoolean;
     /**
-     * License rules. The syntax is #name=value (for example, #allowedTenancy=EC2-DedicatedHost). Available rules vary by dimension.    Cores dimension: allowedTenancy | maximumCores | minimumCores     Instances dimension: allowedTenancy | maximumCores | minimumCores | maximumSockets | minimumSockets | maximumVcpus | minimumVcpus     Sockets dimension: allowedTenancy | maximumSockets | minimumSockets     vCPUs dimension: allowedTenancy | honorVcpuOptimization | maximumVcpus | minimumVcpus   
+     * License rules. The syntax is #name=value (for example, #allowedTenancy=EC2-DedicatedHost). The available rules vary by dimension, as follows.    Cores dimension: allowedTenancy | licenseAffinityToHost | maximumCores | minimumCores     Instances dimension: allowedTenancy | maximumCores | minimumCores | maximumSockets | minimumSockets | maximumVcpus | minimumVcpus     Sockets dimension: allowedTenancy | licenseAffinityToHost | maximumSockets | minimumSockets     vCPUs dimension: allowedTenancy | honorVcpuOptimization | maximumVcpus | minimumVcpus    The unit for licenseAffinityToHost is days and the range is 1 to 180. The possible values for allowedTenancy are EC2-Default, EC2-DedicatedHost, and EC2-DedicatedInstance. The possible values for honorVcpuOptimization are True and False.
      */
     LicenseRules?: StringList;
     /**
@@ -552,7 +552,7 @@ declare namespace LicenseManager {
      */
     NextToken?: String;
     /**
-     * Filters to scope the results. The following filters and logical operators are supported:    licenseCountingType - The dimension on which licenses are counted (vCPU). Logical operators are EQUALS | NOT_EQUALS.    enforceLicenseCount - A Boolean value that indicates whether hard license enforcement is used. Logical operators are EQUALS | NOT_EQUALS.    usagelimitExceeded - A Boolean value that indicates whether the available licenses have been exceeded. Logical operators are EQUALS | NOT_EQUALS.  
+     * Filters to scope the results. The following filters and logical operators are supported:    licenseCountingType - The dimension on which licenses are counted. Possible values are vCPU | Instance | Core | Socket. Logical operators are EQUALS | NOT_EQUALS.    enforceLicenseCount - A Boolean value that indicates whether hard license enforcement is used. Logical operators are EQUALS | NOT_EQUALS.    usagelimitExceeded - A Boolean value that indicates whether the available licenses have been exceeded. Logical operators are EQUALS | NOT_EQUALS.  
      */
     Filters?: Filters;
   }
@@ -684,11 +684,11 @@ declare namespace LicenseManager {
   }
   export interface ProductInformation {
     /**
-     * Resource type. The value is SSM_MANAGED.
+     * Resource type. The possible values are SSM_MANAGED | RDS.
      */
     ResourceType: String;
     /**
-     * Product information filters. The following filters and logical operators are supported:    Application Name - The name of the application. Logical operator is EQUALS.    Application Publisher - The publisher of the application. Logical operator is EQUALS.    Application Version - The version of the application. Logical operator is EQUALS.    Platform Name - The name of the platform. Logical operator is EQUALS.    Platform Type - The platform type. Logical operator is EQUALS.    License Included - The type of license included. Logical operators are EQUALS and NOT_EQUALS. Possible values are sql-server-enterprise | sql-server-standard | sql-server-web | windows-server-datacenter.  
+     * Product information filters. The following filters and logical operators are supported when the resource type is SSM_MANAGED:    Application Name - The name of the application. Logical operator is EQUALS.    Application Publisher - The publisher of the application. Logical operator is EQUALS.    Application Version - The version of the application. Logical operator is EQUALS.    Platform Name - The name of the platform. Logical operator is EQUALS.    Platform Type - The platform type. Logical operator is EQUALS.    License Included - The type of license included. Logical operators are EQUALS and NOT_EQUALS. Possible values are: sql-server-enterprise | sql-server-standard | sql-server-web | windows-server-datacenter.   The following filters and logical operators are supported when the resource type is RDS:    Engine Edition - The edition of the database engine. Logical operator is EQUALS. Possible values are: oracle-ee | oracle-se | oracle-se1 | oracle-se2.    License Pack - The license pack. Logical operator is EQUALS. Possible values are: data guard | diagnostic pack sqlt | tuning pack sqlt | ols | olap.  
      */
     ProductInformationFilterList: ProductInformationFilterList;
   }
@@ -784,7 +784,7 @@ declare namespace LicenseManager {
      */
     LicenseConfigurationStatus?: LicenseConfigurationStatus;
     /**
-     * New license rules.
+     * New license rule. The only rule that you can add after you create a license configuration is licenseAffinityToHost.
      */
     LicenseRules?: StringList;
     /**

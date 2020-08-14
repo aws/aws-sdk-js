@@ -45,11 +45,11 @@ declare class SageMaker extends Service {
    */
   createApp(callback?: (err: AWSError, data: SageMaker.Types.CreateAppResponse) => void): Request<SageMaker.Types.CreateAppResponse, AWSError>;
   /**
-   * Creates an AutoPilot job. After you run an AutoPilot job, you can find the best performing model by calling , and then deploy that model by following the steps described in Step 6.1: Deploy the Model to Amazon SageMaker Hosting Services. For information about how to use AutoPilot, see Use AutoPilot to Automate Model Development.
+   * Creates an Autopilot job. Find the best performing model after you run an Autopilot job by calling . Deploy that model by following the steps described in Step 6.1: Deploy the Model to Amazon SageMaker Hosting Services. For information about how to use Autopilot, see  Automate Model Development with Amazon SageMaker Autopilot.
    */
   createAutoMLJob(params: SageMaker.Types.CreateAutoMLJobRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobResponse) => void): Request<SageMaker.Types.CreateAutoMLJobResponse, AWSError>;
   /**
-   * Creates an AutoPilot job. After you run an AutoPilot job, you can find the best performing model by calling , and then deploy that model by following the steps described in Step 6.1: Deploy the Model to Amazon SageMaker Hosting Services. For information about how to use AutoPilot, see Use AutoPilot to Automate Model Development.
+   * Creates an Autopilot job. Find the best performing model after you run an Autopilot job by calling . Deploy that model by following the steps described in Step 6.1: Deploy the Model to Amazon SageMaker Hosting Services. For information about how to use Autopilot, see  Automate Model Development with Amazon SageMaker Autopilot.
    */
   createAutoMLJob(callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobResponse) => void): Request<SageMaker.Types.CreateAutoMLJobResponse, AWSError>;
   /**
@@ -237,11 +237,11 @@ declare class SageMaker extends Service {
    */
   createUserProfile(callback?: (err: AWSError, data: SageMaker.Types.CreateUserProfileResponse) => void): Request<SageMaker.Types.CreateUserProfileResponse, AWSError>;
   /**
-   * Use this operation to create a workforce. This operation will return an error if a workforce already exists in the AWS Region that you specify. You can only create one workforce in each AWS Region. If you want to create a new workforce in an AWS Region where the a workforce already exists, use the API operation to delete the existing workforce and then use this operation to create a new workforce. To create a private workforce using Amazon Cognito, you must specify a Cognito user pool in CognitoConfig. You can also create an Amazon Cognito workforce using the Amazon SageMaker console. For more information, see  Create a Private Workforce (Amazon Cognito). To create a private workforce using your own OIDC Identity Provider (IdP), specify your IdP configuration in OidcConfig. You must create a OIDC IdP workforce using this API operation. For more information, see  Create a Private Workforce (OIDC IdP).
+   * Use this operation to create a workforce. This operation will return an error if a workforce already exists in the AWS Region that you specify. You can only create one workforce in each AWS Region per AWS account. If you want to create a new workforce in an AWS Region where a workforce already exists, use the API operation to delete the existing workforce and then use CreateWorkforce to create a new workforce. To create a private workforce using Amazon Cognito, you must specify a Cognito user pool in CognitoConfig. You can also create an Amazon Cognito workforce using the Amazon SageMaker console. For more information, see  Create a Private Workforce (Amazon Cognito). To create a private workforce using your own OIDC Identity Provider (IdP), specify your IdP configuration in OidcConfig. Your OIDC IdP must support groups because groups are used by Ground Truth and Amazon A2I to create work teams. For more information, see  Create a Private Workforce (OIDC IdP).
    */
   createWorkforce(params: SageMaker.Types.CreateWorkforceRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateWorkforceResponse) => void): Request<SageMaker.Types.CreateWorkforceResponse, AWSError>;
   /**
-   * Use this operation to create a workforce. This operation will return an error if a workforce already exists in the AWS Region that you specify. You can only create one workforce in each AWS Region. If you want to create a new workforce in an AWS Region where the a workforce already exists, use the API operation to delete the existing workforce and then use this operation to create a new workforce. To create a private workforce using Amazon Cognito, you must specify a Cognito user pool in CognitoConfig. You can also create an Amazon Cognito workforce using the Amazon SageMaker console. For more information, see  Create a Private Workforce (Amazon Cognito). To create a private workforce using your own OIDC Identity Provider (IdP), specify your IdP configuration in OidcConfig. You must create a OIDC IdP workforce using this API operation. For more information, see  Create a Private Workforce (OIDC IdP).
+   * Use this operation to create a workforce. This operation will return an error if a workforce already exists in the AWS Region that you specify. You can only create one workforce in each AWS Region per AWS account. If you want to create a new workforce in an AWS Region where a workforce already exists, use the API operation to delete the existing workforce and then use CreateWorkforce to create a new workforce. To create a private workforce using Amazon Cognito, you must specify a Cognito user pool in CognitoConfig. You can also create an Amazon Cognito workforce using the Amazon SageMaker console. For more information, see  Create a Private Workforce (Amazon Cognito). To create a private workforce using your own OIDC Identity Provider (IdP), specify your IdP configuration in OidcConfig. Your OIDC IdP must support groups because groups are used by Ground Truth and Amazon A2I to create work teams. For more information, see  Create a Private Workforce (OIDC IdP).
    */
   createWorkforce(callback?: (err: AWSError, data: SageMaker.Types.CreateWorkforceResponse) => void): Request<SageMaker.Types.CreateWorkforceResponse, AWSError>;
   /**
@@ -397,11 +397,11 @@ declare class SageMaker extends Service {
    */
   deleteUserProfile(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Use this operation to delete a workforce. If you want to create a new workforce in an AWS Region where the a workforce already exists, use this operation to delete the existing workforce and then use to create a new workforce.
+   * Use this operation to delete a workforce. If you want to create a new workforce in an AWS Region where a workforce already exists, use this operation to delete the existing workforce and then use to create a new workforce.  If a private workforce contains one or more work teams, you must use the operation to delete all work teams before you delete the workforce. If you try to delete a workforce that contains one or more work teams, you will recieve a ResourceInUse error. 
    */
   deleteWorkforce(params: SageMaker.Types.DeleteWorkforceRequest, callback?: (err: AWSError, data: SageMaker.Types.DeleteWorkforceResponse) => void): Request<SageMaker.Types.DeleteWorkforceResponse, AWSError>;
   /**
-   * Use this operation to delete a workforce. If you want to create a new workforce in an AWS Region where the a workforce already exists, use this operation to delete the existing workforce and then use to create a new workforce.
+   * Use this operation to delete a workforce. If you want to create a new workforce in an AWS Region where a workforce already exists, use this operation to delete the existing workforce and then use to create a new workforce.  If a private workforce contains one or more work teams, you must use the operation to delete all work teams before you delete the workforce. If you try to delete a workforce that contains one or more work teams, you will recieve a ResourceInUse error. 
    */
   deleteWorkforce(callback?: (err: AWSError, data: SageMaker.Types.DeleteWorkforceResponse) => void): Request<SageMaker.Types.DeleteWorkforceResponse, AWSError>;
   /**
@@ -893,11 +893,11 @@ declare class SageMaker extends Service {
    */
   listWorkforces(callback?: (err: AWSError, data: SageMaker.Types.ListWorkforcesResponse) => void): Request<SageMaker.Types.ListWorkforcesResponse, AWSError>;
   /**
-   * Gets a list of work teams that you have defined in a region. The list may be empty if no work team satisfies the filter specified in the NameContains parameter.
+   * Gets a list of private work teams that you have defined in a region. The list may be empty if no work team satisfies the filter specified in the NameContains parameter.
    */
   listWorkteams(params: SageMaker.Types.ListWorkteamsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListWorkteamsResponse) => void): Request<SageMaker.Types.ListWorkteamsResponse, AWSError>;
   /**
-   * Gets a list of work teams that you have defined in a region. The list may be empty if no work team satisfies the filter specified in the NameContains parameter.
+   * Gets a list of private work teams that you have defined in a region. The list may be empty if no work team satisfies the filter specified in the NameContains parameter.
    */
   listWorkteams(callback?: (err: AWSError, data: SageMaker.Types.ListWorkteamsResponse) => void): Request<SageMaker.Types.ListWorkteamsResponse, AWSError>;
   /**
@@ -1093,11 +1093,11 @@ declare class SageMaker extends Service {
    */
   updateUserProfile(callback?: (err: AWSError, data: SageMaker.Types.UpdateUserProfileResponse) => void): Request<SageMaker.Types.UpdateUserProfileResponse, AWSError>;
   /**
-   * Restricts access to tasks assigned to workers in the specified workforce to those within specific ranges of IP addresses. You specify allowed IP addresses by creating a list of up to ten CIDRs. By default, a workforce isn't restricted to specific IP addresses. If you specify a range of IP addresses, workers who attempt to access tasks using any IP address outside the specified range are denied access and get a Not Found error message on the worker portal. After restricting access with this operation, you can see the allowed IP values for a private workforce with the operation.  This operation applies only to private workforces. 
+   * Use this operation to update your workforce. You can use this operation to require that workers use specific IP addresses to work on tasks and to update your OpenID Connect (OIDC) Identity Provider (IdP) workforce configuration.  Use SourceIpConfig to restrict worker access to tasks to a specific range of IP addresses. You specify allowed IP addresses by creating a list of up to ten CIDRs. By default, a workforce isn't restricted to specific IP addresses. If you specify a range of IP addresses, workers who attempt to access tasks using any IP address outside the specified range are denied and get a Not Found error message on the worker portal. Use OidcConfig to update the configuration of a workforce created using your own OIDC IdP.   You can only update your OIDC IdP configuration when there are no work teams associated with your workforce. You can delete work teams using the operation.  After restricting access to a range of IP addresses or updating your OIDC IdP configuration with this operation, you can view details about your update workforce using the operation.  This operation only applies to private workforces. 
    */
   updateWorkforce(params: SageMaker.Types.UpdateWorkforceRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateWorkforceResponse) => void): Request<SageMaker.Types.UpdateWorkforceResponse, AWSError>;
   /**
-   * Restricts access to tasks assigned to workers in the specified workforce to those within specific ranges of IP addresses. You specify allowed IP addresses by creating a list of up to ten CIDRs. By default, a workforce isn't restricted to specific IP addresses. If you specify a range of IP addresses, workers who attempt to access tasks using any IP address outside the specified range are denied access and get a Not Found error message on the worker portal. After restricting access with this operation, you can see the allowed IP values for a private workforce with the operation.  This operation applies only to private workforces. 
+   * Use this operation to update your workforce. You can use this operation to require that workers use specific IP addresses to work on tasks and to update your OpenID Connect (OIDC) Identity Provider (IdP) workforce configuration.  Use SourceIpConfig to restrict worker access to tasks to a specific range of IP addresses. You specify allowed IP addresses by creating a list of up to ten CIDRs. By default, a workforce isn't restricted to specific IP addresses. If you specify a range of IP addresses, workers who attempt to access tasks using any IP address outside the specified range are denied and get a Not Found error message on the worker portal. Use OidcConfig to update the configuration of a workforce created using your own OIDC IdP.   You can only update your OIDC IdP configuration when there are no work teams associated with your workforce. You can delete work teams using the operation.  After restricting access to a range of IP addresses or updating your OIDC IdP configuration with this operation, you can view details about your update workforce using the operation.  This operation only applies to private workforces. 
    */
   updateWorkforce(callback?: (err: AWSError, data: SageMaker.Types.UpdateWorkforceResponse) => void): Request<SageMaker.Types.UpdateWorkforceResponse, AWSError>;
   /**
@@ -1499,7 +1499,7 @@ declare namespace SageMaker {
   export type AutoMLJobName = string;
   export interface AutoMLJobObjective {
     /**
-     * The name of the metric.
+     * The name of the objective metric used to measure the predictive quality of a machine learning system. This metric is optimized during training to provide the best estimate for model parameter values from data. Here are the options:    MSE: The mean squared error (MSE) is the average of the squared differences between the predicted and actual values. It is used for regression. MSE values are always positive, the better a model is at predicting the actual values the smaller the MSE value. When the data contains outliers, they tend to dominate the MSE which might cause subpar prediction performance.    Accuracy: The ratio of the number correctly classified items to the total number (correctly and incorrectly) classified. It is used for binary and multiclass classification. Measures how close the predicted class values are to the actual values. Accuracy values vary between zero and one, one being perfect accuracy and zero perfect inaccuracy.    F1: The F1 score is the harmonic mean of the precision and recall. It is used for binary classification into classes traditionally referred to as positive and negative. Predictions are said to be true when they match their actual (correct) class; false when they do not. Precision is the ratio of the true positive predictions to all positive predictions (including the false positives) in a data set and measures the quality of the prediction when it predicts the positive class. Recall (or sensitivity) is the ratio of the true positive predictions to all actual positive instances and measures how completely a model predicts the actual class members in a data set. The standard F1 score weighs precision and recall equally. But which metric is paramount typically depends on specific aspects of a problem. F1 scores vary between zero and one, one being the best possible performance and zero the worst.    AUC: The area under the curve (AUC) metric is used to compare and evaluate binary classification by algorithms such as logistic regression that return probabilities. A threshold is needed to map the probabilities into classifications. The relevant curve is the receiver operating characteristic curve that plots the true positive rate (TPR) of predictions (or recall) against the false positive rate (FPR) as a function of the threshold value, above which a prediction is considered positive. Increasing the threshold results in fewer false positives but more false negatives. AUC is the area under this receiver operating characteristic curve and so provides an aggregated measure of the model performance across all possible classification thresholds. The AUC score can also be interpreted as the probability that a randomly selected positive data point is more likely to be predicted positive than a randomly selected negative example. AUC scores vary between zero and one, one being perfect accuracy and one half not better than a random classifier. Values less that one half predict worse than a random predictor and such consistently bad predictors can be inverted to obtain better than random predictors.    F1macro: The F1macro score applies F1 scoring to multiclass classification. In this context, you have multiple classes to predict. You just calculate the precision and recall for each class as you did for the positive class in binary classification. Then used these values to calculate the F1 score for each class and average them to obtain the F1macro score. F1macro scores vary between zero and one, one being the best possible performance and zero the worst.   If you do not specify a metric explicitly, the default behavior is to automatically use:    MSE: for regression.    F1: for binary classification    Accuracy: for multiclass classification.  
      */
     MetricName: AutoMLMetricEnum;
   }
@@ -1529,7 +1529,7 @@ declare namespace SageMaker {
      */
     CreationTime: Timestamp;
     /**
-     * The end time.
+     * The end time of an AutoML job.
      */
     EndTime?: Timestamp;
     /**
@@ -1537,12 +1537,12 @@ declare namespace SageMaker {
      */
     LastModifiedTime: Timestamp;
     /**
-     * The failure reason.
+     * The failure reason of a job.
      */
     FailureReason?: AutoMLFailureReason;
   }
   export type AutoMLMaxResults = number;
-  export type AutoMLMetricEnum = "Accuracy"|"MSE"|"F1"|"F1macro"|string;
+  export type AutoMLMetricEnum = "Accuracy"|"MSE"|"F1"|"F1macro"|"AUC"|string;
   export type AutoMLNameContains = string;
   export interface AutoMLOutputDataConfig {
     /**
@@ -1839,6 +1839,10 @@ declare namespace SageMaker {
      */
     Image?: ContainerImage;
     /**
+     * Specifies whether the model container is in Amazon ECR or a private Docker registry in your Amazon Virtual Private Cloud (VPC). For information about storing containers in a private Docker registry, see Use a Private Docker Registry for Real-Time Inference Containers 
+     */
+    ImageConfig?: ImageConfig;
+    /**
      * Whether the container hosts a single model or multiple models.
      */
     Mode?: ContainerMode;
@@ -1960,7 +1964,7 @@ declare namespace SageMaker {
   }
   export interface CreateAutoMLJobRequest {
     /**
-     * Identifies an AutoPilot job. Must be unique to your account and is case-insensitive.
+     * Identifies an Autopilot job. Must be unique to your account and is case-insensitive.
      */
     AutoMLJobName: AutoMLJobName;
     /**
@@ -1976,7 +1980,7 @@ declare namespace SageMaker {
      */
     ProblemType?: ProblemType;
     /**
-     * Defines the job's objective. You provide a MetricName and AutoML will infer minimize or maximize. If this is not provided, the most commonly used ObjectiveMetric for problem type will be selected.
+     * Defines the objective of a an AutoML job. You provide a AutoMLJobObjective$MetricName and Autopilot infers whether to minimize or maximize it. If a metric is not specified, the most commonly used ObjectiveMetric for problem type is automaically selected.
      */
     AutoMLJobObjective?: AutoMLJobObjective;
     /**
@@ -1984,11 +1988,11 @@ declare namespace SageMaker {
      */
     AutoMLJobConfig?: AutoMLJobConfig;
     /**
-     * The ARN of the role that will be used to access the data.
+     * The ARN of the role that is used to access the data.
      */
     RoleArn: RoleArn;
     /**
-     * This will generate possible candidates without training a model. A candidate is a combination of data preprocessors, algorithms, and algorithm parameter settings.
+     * Generates possible candidates without training a model. A candidate is a combination of data preprocessors, algorithms, and algorithm parameter settings.
      */
     GenerateCandidateDefinitionsOnly?: GenerateCandidateDefinitionsOnly;
     /**
@@ -2808,7 +2812,7 @@ declare namespace SageMaker {
      */
     WorkforceName?: WorkforceName;
     /**
-     * A list of MemberDefinition objects that contains objects that identify the Amazon Cognito user pool that makes up the work team. For more information, see Amazon Cognito User Pools. All of the CognitoMemberDefinition objects that make up the member definition must have the same ClientId and UserPool values.
+     * A list of MemberDefinition objects that contains objects that identify the workers that make up the work team.  Workforces can be created using Amazon Cognito or your own OIDC Identity Provider (IdP). For private workforces created using Amazon Cognito use CognitoMemberDefinition. For workforces created using your own OIDC identity provider (IdP) use OidcMemberDefinition. Do not provide input for both of these parameters in a single request. For workforces created using Amazon Cognito, private work teams correspond to Amazon Cognito user groups within the user pool used to create a workforce. All of the CognitoMemberDefinition objects that make up the member definition must have the same ClientId and UserPool values. To add a Amazon Cognito user group to an existing worker pool, see Adding groups to a User Pool. For more information about user pools, see Amazon Cognito User Pools. For workforces created using your own OIDC IdP, specify the user groups that you want to include in your private work team in OidcMemberDefinition by listing those groups in Groups.
      */
     MemberDefinitions: MemberDefinitions;
     /**
@@ -4249,7 +4253,7 @@ declare namespace SageMaker {
      */
     TrainingJobStatus: TrainingJobStatus;
     /**
-     *  Provides detailed information about the state of the training job. For detailed information on the secondary status of the training job, see StatusMessage under SecondaryStatusTransition. Amazon SageMaker provides primary statuses and secondary statuses that apply to each of them:  InProgress     Starting - Starting the training job.    Downloading - An optional stage for algorithms that support File training input mode. It indicates that data is being downloaded to the ML storage volumes.    Training - Training is in progress.    Interrupted - The job stopped because the managed spot training instances were interrupted.     Uploading - Training is complete and the model artifacts are being uploaded to the S3 location.    Completed     Completed - The training job has completed.    Failed     Failed - The training job has failed. The reason for the failure is returned in the FailureReason field of DescribeTrainingJobResponse.    Stopped     MaxRuntimeExceeded - The job stopped because it exceeded the maximum allowed runtime.    MaxWaitTmeExceeded - The job stopped because it exceeded the maximum allowed wait time.    Stopped - The training job has stopped.    Stopping     Stopping - Stopping the training job.      Valid values for SecondaryStatus are subject to change.   We no longer support the following secondary statuses:    LaunchingMLInstances     PreparingTrainingStack     DownloadingTrainingImage   
+     *  Provides detailed information about the state of the training job. For detailed information on the secondary status of the training job, see StatusMessage under SecondaryStatusTransition. Amazon SageMaker provides primary statuses and secondary statuses that apply to each of them:  InProgress     Starting - Starting the training job.    Downloading - An optional stage for algorithms that support File training input mode. It indicates that data is being downloaded to the ML storage volumes.    Training - Training is in progress.    Interrupted - The job stopped because the managed spot training instances were interrupted.     Uploading - Training is complete and the model artifacts are being uploaded to the S3 location.    Completed     Completed - The training job has completed.    Failed     Failed - The training job has failed. The reason for the failure is returned in the FailureReason field of DescribeTrainingJobResponse.    Stopped     MaxRuntimeExceeded - The job stopped because it exceeded the maximum allowed runtime.    MaxWaitTimeExceeded - The job stopped because it exceeded the maximum allowed wait time.    Stopped - The training job has stopped.    Stopping     Stopping - Stopping the training job.      Valid values for SecondaryStatus are subject to change.   We no longer support the following secondary statuses:    LaunchingMLInstances     PreparingTrainingStack     DownloadingTrainingImage   
      */
     SecondaryStatus: SecondaryStatus;
     /**
@@ -4899,15 +4903,15 @@ declare namespace SageMaker {
   export type FilterValue = string;
   export interface FinalAutoMLJobObjectiveMetric {
     /**
-     * The metric type used.
+     * The type of metric with the best result.
      */
     Type?: AutoMLJobObjectiveType;
     /**
-     * The name of the metric.
+     * The name of the metric with the best result. For a description of the possible objective metrics, see AutoMLJobObjective$MetricName.
      */
     MetricName: AutoMLMetricEnum;
     /**
-     * The value of the metric.
+     * The value of the metric with the best result.
      */
     Value: MetricValue;
   }
@@ -5389,6 +5393,12 @@ declare namespace SageMaker {
   export type HyperParameterTuningJobWarmStartType = "IdenticalDataAndAlgorithm"|"TransferLearning"|string;
   export type HyperParameters = {[key: string]: ParameterValue};
   export type ImageArn = string;
+  export interface ImageConfig {
+    /**
+     * Set this to one of the following values:    Platform - The model image is hosted in Amazon ECR.    VPC - The model image is hosted in a private Docker registry in your VPC.  
+     */
+    RepositoryAccessMode: RepositoryAccessMode;
+  }
   export type ImageDigest = string;
   export type ImageUri = string;
   export interface InferenceSpecification {
@@ -5794,7 +5804,7 @@ declare namespace SageMaker {
      */
     MaxResults?: AutoMLMaxResults;
     /**
-     * If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.
+     * If the previous response was truncated, you receive this token. Use it in your next request to receive the next set of results.
      */
     NextToken?: NextToken;
   }
@@ -5804,7 +5814,7 @@ declare namespace SageMaker {
      */
     AutoMLJobSummaries: AutoMLJobSummaries;
     /**
-     * If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.
+     * If the previous response was truncated, you receive this token. Use it in your next request to receive the next set of results.
      */
     NextToken?: NextToken;
   }
@@ -5834,7 +5844,7 @@ declare namespace SageMaker {
      */
     MaxResults?: AutoMLMaxResults;
     /**
-     * If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.
+     * If the previous response was truncated, you receive this token. Use it in your next request to receive the next set of results.
      */
     NextToken?: NextToken;
   }
@@ -5844,7 +5854,7 @@ declare namespace SageMaker {
      */
     Candidates: AutoMLCandidates;
     /**
-     * If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.
+     * If the previous response was truncated, you receive this token. Use it in your next request to receive the next set of results.
      */
     NextToken?: NextToken;
   }
@@ -8114,6 +8124,7 @@ declare namespace SageMaker {
     Message: String;
   }
   export type RenderingErrorList = RenderingError[];
+  export type RepositoryAccessMode = "Platform"|"Vpc"|string;
   export interface ResolvedAttributes {
     AutoMLJobObjective?: AutoMLJobObjective;
     /**
@@ -8810,7 +8821,7 @@ declare namespace SageMaker {
      */
     CompressionType?: CompressionType;
     /**
-     * The method to use to split the transform job's data files into smaller batches. Splitting is necessary when the total size of each object is too large to fit in a single request. You can also use data splitting to improve performance by processing multiple concurrent mini-batches. The default value for SplitType is None, which indicates that input data files are not split, and request payloads contain the entire contents of an input object. Set the value of this parameter to Line to split records on a newline character boundary. SplitType also supports a number of record-oriented binary data formats. When splitting is enabled, the size of a mini-batch depends on the values of the BatchStrategy and MaxPayloadInMB parameters. When the value of BatchStrategy is MultiRecord, Amazon SageMaker sends the maximum number of records in each request, up to the MaxPayloadInMB limit. If the value of BatchStrategy is SingleRecord, Amazon SageMaker sends individual records in each request.  Some data formats represent a record as a binary payload wrapped with extra padding bytes. When splitting is applied to a binary data format, padding is removed if the value of BatchStrategy is set to SingleRecord. Padding is not removed if the value of BatchStrategy is set to MultiRecord. For more information about RecordIO, see Create a Dataset Using RecordIO in the MXNet documentation. For more information about TFRecord, see Consuming TFRecord data in the TensorFlow documentation. 
+     * The method to use to split the transform job's data files into smaller batches. Splitting is necessary when the total size of each object is too large to fit in a single request. You can also use data splitting to improve performance by processing multiple concurrent mini-batches. The default value for SplitType is None, which indicates that input data files are not split, and request payloads contain the entire contents of an input object. Set the value of this parameter to Line to split records on a newline character boundary. SplitType also supports a number of record-oriented binary data formats. Currently, the supported record formats are:   RecordIO   TFRecord   When splitting is enabled, the size of a mini-batch depends on the values of the BatchStrategy and MaxPayloadInMB parameters. When the value of BatchStrategy is MultiRecord, Amazon SageMaker sends the maximum number of records in each request, up to the MaxPayloadInMB limit. If the value of BatchStrategy is SingleRecord, Amazon SageMaker sends individual records in each request.  Some data formats represent a record as a binary payload wrapped with extra padding bytes. When splitting is applied to a binary data format, padding is removed if the value of BatchStrategy is set to SingleRecord. Padding is not removed if the value of BatchStrategy is set to MultiRecord. For more information about RecordIO, see Create a Dataset Using RecordIO in the MXNet documentation. For more information about TFRecord, see Consuming TFRecord data in the TensorFlow documentation. 
      */
     SplitType?: SplitType;
   }
@@ -9298,7 +9309,7 @@ declare namespace SageMaker {
   }
   export interface TuningJobCompletionCriteria {
     /**
-     * The objective metric's value.
+     * The value of the objective metric.
      */
     TargetObjectiveMetricValue: TargetObjectiveMetricValue;
   }
@@ -9612,7 +9623,7 @@ declare namespace SageMaker {
   }
   export interface UpdateWorkforceRequest {
     /**
-     * The name of the private workforce whose access you want to restrict. WorkforceName is automatically set to default when a workforce is created and cannot be modified. 
+     * The name of the private workforce that you want to update. You can find your workforce name by using the operation.
      */
     WorkforceName: WorkforceName;
     /**
@@ -9626,7 +9637,7 @@ declare namespace SageMaker {
   }
   export interface UpdateWorkforceResponse {
     /**
-     * A single private workforce, which is automatically created when you create your first private work team. You can create one private work force in each AWS Region. By default, any workforce-related API operation used in a specific region will apply to the workforce created in that region. To learn how to create a private workforce, see Create a Private Workforce.
+     * A single private workforce. You can create one private work force in each AWS Region. By default, any workforce-related API operation used in a specific region will apply to the workforce created in that region. To learn how to create a private workforce, see Create a Private Workforce.
      */
     Workforce: Workforce;
   }
@@ -9636,7 +9647,7 @@ declare namespace SageMaker {
      */
     WorkteamName: WorkteamName;
     /**
-     * A list of MemberDefinition objects that contain the updated work team members.
+     * A list of MemberDefinition objects that contains objects that identify the workers that make up the work team.  Workforces can be created using Amazon Cognito or your own OIDC Identity Provider (IdP). For private workforces created using Amazon Cognito use CognitoMemberDefinition. For workforces created using your own OIDC identity provider (IdP) use OidcMemberDefinition. You should not provide input for both of these parameters in a single request. For workforces created using Amazon Cognito, private work teams correspond to Amazon Cognito user groups within the user pool used to create a workforce. All of the CognitoMemberDefinition objects that make up the member definition must have the same ClientId and UserPool values. To add a Amazon Cognito user group to an existing worker pool, see Adding groups to a User Pool. For more information about user pools, see Amazon Cognito User Pools. For workforces created using your own OIDC IdP, specify the user groups that you want to include in your private work team in OidcMemberDefinition by listing those groups in Groups. Be aware that user groups that are already in the work team must also be listed in Groups when you make this request to remain on the work team. If you do not include these user groups, they will no longer be associated with the work team you update. 
      */
     MemberDefinitions?: MemberDefinitions;
     /**
@@ -9759,7 +9770,7 @@ declare namespace SageMaker {
      */
     LastUpdatedDate?: Timestamp;
     /**
-     * A list of one to ten IP address ranges (CIDRs) to be added to the workforce allow list.
+     * A list of one to ten IP address ranges (CIDRs) to be added to the workforce allow list. By default, a workforce isn't restricted to specific IP addresses.
      */
     SourceIpConfig?: SourceIpConfig;
     /**
@@ -9788,7 +9799,7 @@ declare namespace SageMaker {
      */
     WorkteamName: WorkteamName;
     /**
-     * The Amazon Cognito user groups that make up the work team.
+     * A list of MemberDefinition objects that contains objects that identify the workers that make up the work team.  Workforces can be created using Amazon Cognito or your own OIDC Identity Provider (IdP). For private workforces created using Amazon Cognito use CognitoMemberDefinition. For workforces created using your own OIDC identity provider (IdP) use OidcMemberDefinition.
      */
     MemberDefinitions: MemberDefinitions;
     /**

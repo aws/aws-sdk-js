@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.733.0-->
+<!--LATEST=2.734.0-->
 <!--ENTRYINSERT-->
+
+## 2.734.0
+* bugfix: ErrorParser: fix UnknownEndpoint exception not thrown in Node14(#3393)
+* feature: AppStream: Adds support for the Desktop View feature
+* feature: Braket: Fixing bug in our SDK model where device status and device type had been flipped.
+* feature: EC2: New C5ad instances featuring AMD's 2nd Generation EPYC processors, offering up to 96 vCPUs, 192 GiB of instance memory, 3.8 TB of NVMe based SSD instance storage, and 20 Gbps in Network bandwidth
+* feature: SageMaker: Amazon SageMaker now supports 1) creating real-time inference endpoints using model container images from Docker registries in customers' VPC 2) AUC(Area under the curve) as AutoPilot objective metric
 
 ## 2.733.0
 * feature: Braket: Amazon Braket general availability with Device and Quantum Task operations.
