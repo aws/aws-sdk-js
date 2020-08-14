@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "protocol",
+  "description": "Allow error code extraction from pascal cased Code attribute in the JSON body response"
+}
