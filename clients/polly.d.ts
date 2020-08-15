@@ -3,7 +3,7 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {PollyCustomizations} from '../lib/services/polly';
 import {ServiceConfigurationOptions} from '../lib/service';
-import {ConfigBase as Config} from '../lib/config';
+import {ConfigBase as Config} from '../lib/config-base';
 import {Presigner as presigner} from '../lib/polly/presigner';
 import {Readable} from 'stream';
 interface Blob {}

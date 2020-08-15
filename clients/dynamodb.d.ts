@@ -4,7 +4,7 @@ import {AWSError} from '../lib/error';
 import {DynamoDBCustomizations} from '../lib/services/dynamodb';
 import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
-import {ConfigBase as Config} from '../lib/config';
+import {ConfigBase as Config} from '../lib/config-base';
 import {DocumentClient as document_client} from '../lib/dynamodb/document_client';
 import {Converter as converter} from '../lib/dynamodb/converter';
 interface Blob {}
