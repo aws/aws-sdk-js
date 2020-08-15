@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "TypeScript type definitions",
+  "description": "Deep imports of clients no longer reference entire SDK type definitions"
+}
