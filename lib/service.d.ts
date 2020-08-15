@@ -1,6 +1,6 @@
 import {Request} from './request';
 import {AWSError} from './error';
-import {ConfigurationOptions, ConfigBase} from './config';
+import {ConfigurationOptions, ConfigBase} from './config-base';
 import {Endpoint} from './endpoint';
 
 export interface WaiterConfiguration {

@@ -541,7 +541,7 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
     var customConfig = this.generateCustomConfigFromMetadata(serviceIdentifier);
     var hasCustomConfig = !!customConfig.length;
     var customConfigTypes = ['ServiceConfigurationOptions'];
-    code += 'import {ConfigBase as Config} from \'../lib/config\';\n';
+    code += 'import {ConfigBase as Config} from \'../lib/config-base\';\n';
     if (hasCustomConfig) {
         // generate import statements and custom config type
         customConfig.forEach(function(config) {
