@@ -12,6 +12,14 @@ declare class RoboMaker extends Service {
   constructor(options?: RoboMaker.Types.ClientConfiguration)
   config: Config & RoboMaker.Types.ClientConfiguration;
   /**
+   * Deletes one or more worlds in a batch operation.
+   */
+  batchDeleteWorlds(params: RoboMaker.Types.BatchDeleteWorldsRequest, callback?: (err: AWSError, data: RoboMaker.Types.BatchDeleteWorldsResponse) => void): Request<RoboMaker.Types.BatchDeleteWorldsResponse, AWSError>;
+  /**
+   * Deletes one or more worlds in a batch operation.
+   */
+  batchDeleteWorlds(callback?: (err: AWSError, data: RoboMaker.Types.BatchDeleteWorldsResponse) => void): Request<RoboMaker.Types.BatchDeleteWorldsResponse, AWSError>;
+  /**
    * Describes one or more simulation jobs.
    */
   batchDescribeSimulationJob(params: RoboMaker.Types.BatchDescribeSimulationJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.BatchDescribeSimulationJobResponse) => void): Request<RoboMaker.Types.BatchDescribeSimulationJobResponse, AWSError>;
@@ -43,6 +51,22 @@ declare class RoboMaker extends Service {
    * Cancels a simulation job batch. When you cancel a simulation job batch, you are also cancelling all of the active simulation jobs created as part of the batch. 
    */
   cancelSimulationJobBatch(callback?: (err: AWSError, data: RoboMaker.Types.CancelSimulationJobBatchResponse) => void): Request<RoboMaker.Types.CancelSimulationJobBatchResponse, AWSError>;
+  /**
+   * Cancels the specified export job.
+   */
+  cancelWorldExportJob(params: RoboMaker.Types.CancelWorldExportJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.CancelWorldExportJobResponse) => void): Request<RoboMaker.Types.CancelWorldExportJobResponse, AWSError>;
+  /**
+   * Cancels the specified export job.
+   */
+  cancelWorldExportJob(callback?: (err: AWSError, data: RoboMaker.Types.CancelWorldExportJobResponse) => void): Request<RoboMaker.Types.CancelWorldExportJobResponse, AWSError>;
+  /**
+   * Cancels the specified world generator job.
+   */
+  cancelWorldGenerationJob(params: RoboMaker.Types.CancelWorldGenerationJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.CancelWorldGenerationJobResponse) => void): Request<RoboMaker.Types.CancelWorldGenerationJobResponse, AWSError>;
+  /**
+   * Cancels the specified world generator job.
+   */
+  cancelWorldGenerationJob(callback?: (err: AWSError, data: RoboMaker.Types.CancelWorldGenerationJobResponse) => void): Request<RoboMaker.Types.CancelWorldGenerationJobResponse, AWSError>;
   /**
    * Deploys a specific version of a robot application to robots in a fleet. The robot application must have a numbered applicationVersion for consistency reasons. To create a new version, use CreateRobotApplicationVersion or see Creating a Robot Application Version.   After 90 days, deployment jobs expire and will be deleted. They will no longer be accessible.  
    */
@@ -108,6 +132,30 @@ declare class RoboMaker extends Service {
    */
   createSimulationJob(callback?: (err: AWSError, data: RoboMaker.Types.CreateSimulationJobResponse) => void): Request<RoboMaker.Types.CreateSimulationJobResponse, AWSError>;
   /**
+   * Creates a world export job.
+   */
+  createWorldExportJob(params: RoboMaker.Types.CreateWorldExportJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateWorldExportJobResponse) => void): Request<RoboMaker.Types.CreateWorldExportJobResponse, AWSError>;
+  /**
+   * Creates a world export job.
+   */
+  createWorldExportJob(callback?: (err: AWSError, data: RoboMaker.Types.CreateWorldExportJobResponse) => void): Request<RoboMaker.Types.CreateWorldExportJobResponse, AWSError>;
+  /**
+   * Creates worlds using the specified template.
+   */
+  createWorldGenerationJob(params: RoboMaker.Types.CreateWorldGenerationJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateWorldGenerationJobResponse) => void): Request<RoboMaker.Types.CreateWorldGenerationJobResponse, AWSError>;
+  /**
+   * Creates worlds using the specified template.
+   */
+  createWorldGenerationJob(callback?: (err: AWSError, data: RoboMaker.Types.CreateWorldGenerationJobResponse) => void): Request<RoboMaker.Types.CreateWorldGenerationJobResponse, AWSError>;
+  /**
+   * Creates a world template.
+   */
+  createWorldTemplate(params: RoboMaker.Types.CreateWorldTemplateRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateWorldTemplateResponse) => void): Request<RoboMaker.Types.CreateWorldTemplateResponse, AWSError>;
+  /**
+   * Creates a world template.
+   */
+  createWorldTemplate(callback?: (err: AWSError, data: RoboMaker.Types.CreateWorldTemplateResponse) => void): Request<RoboMaker.Types.CreateWorldTemplateResponse, AWSError>;
+  /**
    * Deletes a fleet.
    */
   deleteFleet(params: RoboMaker.Types.DeleteFleetRequest, callback?: (err: AWSError, data: RoboMaker.Types.DeleteFleetResponse) => void): Request<RoboMaker.Types.DeleteFleetResponse, AWSError>;
@@ -139,6 +187,14 @@ declare class RoboMaker extends Service {
    * Deletes a simulation application.
    */
   deleteSimulationApplication(callback?: (err: AWSError, data: RoboMaker.Types.DeleteSimulationApplicationResponse) => void): Request<RoboMaker.Types.DeleteSimulationApplicationResponse, AWSError>;
+  /**
+   * Deletes a world template.
+   */
+  deleteWorldTemplate(params: RoboMaker.Types.DeleteWorldTemplateRequest, callback?: (err: AWSError, data: RoboMaker.Types.DeleteWorldTemplateResponse) => void): Request<RoboMaker.Types.DeleteWorldTemplateResponse, AWSError>;
+  /**
+   * Deletes a world template.
+   */
+  deleteWorldTemplate(callback?: (err: AWSError, data: RoboMaker.Types.DeleteWorldTemplateResponse) => void): Request<RoboMaker.Types.DeleteWorldTemplateResponse, AWSError>;
   /**
    * Deregisters a robot.
    */
@@ -204,6 +260,46 @@ declare class RoboMaker extends Service {
    */
   describeSimulationJobBatch(callback?: (err: AWSError, data: RoboMaker.Types.DescribeSimulationJobBatchResponse) => void): Request<RoboMaker.Types.DescribeSimulationJobBatchResponse, AWSError>;
   /**
+   * Describes a world.
+   */
+  describeWorld(params: RoboMaker.Types.DescribeWorldRequest, callback?: (err: AWSError, data: RoboMaker.Types.DescribeWorldResponse) => void): Request<RoboMaker.Types.DescribeWorldResponse, AWSError>;
+  /**
+   * Describes a world.
+   */
+  describeWorld(callback?: (err: AWSError, data: RoboMaker.Types.DescribeWorldResponse) => void): Request<RoboMaker.Types.DescribeWorldResponse, AWSError>;
+  /**
+   * Describes a world export job.
+   */
+  describeWorldExportJob(params: RoboMaker.Types.DescribeWorldExportJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.DescribeWorldExportJobResponse) => void): Request<RoboMaker.Types.DescribeWorldExportJobResponse, AWSError>;
+  /**
+   * Describes a world export job.
+   */
+  describeWorldExportJob(callback?: (err: AWSError, data: RoboMaker.Types.DescribeWorldExportJobResponse) => void): Request<RoboMaker.Types.DescribeWorldExportJobResponse, AWSError>;
+  /**
+   * Describes a world generation job.
+   */
+  describeWorldGenerationJob(params: RoboMaker.Types.DescribeWorldGenerationJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.DescribeWorldGenerationJobResponse) => void): Request<RoboMaker.Types.DescribeWorldGenerationJobResponse, AWSError>;
+  /**
+   * Describes a world generation job.
+   */
+  describeWorldGenerationJob(callback?: (err: AWSError, data: RoboMaker.Types.DescribeWorldGenerationJobResponse) => void): Request<RoboMaker.Types.DescribeWorldGenerationJobResponse, AWSError>;
+  /**
+   * Describes a world template.
+   */
+  describeWorldTemplate(params: RoboMaker.Types.DescribeWorldTemplateRequest, callback?: (err: AWSError, data: RoboMaker.Types.DescribeWorldTemplateResponse) => void): Request<RoboMaker.Types.DescribeWorldTemplateResponse, AWSError>;
+  /**
+   * Describes a world template.
+   */
+  describeWorldTemplate(callback?: (err: AWSError, data: RoboMaker.Types.DescribeWorldTemplateResponse) => void): Request<RoboMaker.Types.DescribeWorldTemplateResponse, AWSError>;
+  /**
+   * Gets the world template body.
+   */
+  getWorldTemplateBody(params: RoboMaker.Types.GetWorldTemplateBodyRequest, callback?: (err: AWSError, data: RoboMaker.Types.GetWorldTemplateBodyResponse) => void): Request<RoboMaker.Types.GetWorldTemplateBodyResponse, AWSError>;
+  /**
+   * Gets the world template body.
+   */
+  getWorldTemplateBody(callback?: (err: AWSError, data: RoboMaker.Types.GetWorldTemplateBodyResponse) => void): Request<RoboMaker.Types.GetWorldTemplateBodyResponse, AWSError>;
+  /**
    * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs. 
    */
   listDeploymentJobs(params: RoboMaker.Types.ListDeploymentJobsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListDeploymentJobsResponse) => void): Request<RoboMaker.Types.ListDeploymentJobsResponse, AWSError>;
@@ -268,6 +364,38 @@ declare class RoboMaker extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: RoboMaker.Types.ListTagsForResourceResponse) => void): Request<RoboMaker.Types.ListTagsForResourceResponse, AWSError>;
   /**
+   * Lists world export jobs.
+   */
+  listWorldExportJobs(params: RoboMaker.Types.ListWorldExportJobsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListWorldExportJobsResponse) => void): Request<RoboMaker.Types.ListWorldExportJobsResponse, AWSError>;
+  /**
+   * Lists world export jobs.
+   */
+  listWorldExportJobs(callback?: (err: AWSError, data: RoboMaker.Types.ListWorldExportJobsResponse) => void): Request<RoboMaker.Types.ListWorldExportJobsResponse, AWSError>;
+  /**
+   * Lists world generator jobs.
+   */
+  listWorldGenerationJobs(params: RoboMaker.Types.ListWorldGenerationJobsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListWorldGenerationJobsResponse) => void): Request<RoboMaker.Types.ListWorldGenerationJobsResponse, AWSError>;
+  /**
+   * Lists world generator jobs.
+   */
+  listWorldGenerationJobs(callback?: (err: AWSError, data: RoboMaker.Types.ListWorldGenerationJobsResponse) => void): Request<RoboMaker.Types.ListWorldGenerationJobsResponse, AWSError>;
+  /**
+   * Lists world templates.
+   */
+  listWorldTemplates(params: RoboMaker.Types.ListWorldTemplatesRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListWorldTemplatesResponse) => void): Request<RoboMaker.Types.ListWorldTemplatesResponse, AWSError>;
+  /**
+   * Lists world templates.
+   */
+  listWorldTemplates(callback?: (err: AWSError, data: RoboMaker.Types.ListWorldTemplatesResponse) => void): Request<RoboMaker.Types.ListWorldTemplatesResponse, AWSError>;
+  /**
+   * Lists worlds.
+   */
+  listWorlds(params: RoboMaker.Types.ListWorldsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListWorldsResponse) => void): Request<RoboMaker.Types.ListWorldsResponse, AWSError>;
+  /**
+   * Lists worlds.
+   */
+  listWorlds(callback?: (err: AWSError, data: RoboMaker.Types.ListWorldsResponse) => void): Request<RoboMaker.Types.ListWorldsResponse, AWSError>;
+  /**
    * Registers a robot with a fleet.
    */
   registerRobot(params: RoboMaker.Types.RegisterRobotRequest, callback?: (err: AWSError, data: RoboMaker.Types.RegisterRobotResponse) => void): Request<RoboMaker.Types.RegisterRobotResponse, AWSError>;
@@ -331,11 +459,31 @@ declare class RoboMaker extends Service {
    * Updates a simulation application.
    */
   updateSimulationApplication(callback?: (err: AWSError, data: RoboMaker.Types.UpdateSimulationApplicationResponse) => void): Request<RoboMaker.Types.UpdateSimulationApplicationResponse, AWSError>;
+  /**
+   * Updates a world template.
+   */
+  updateWorldTemplate(params: RoboMaker.Types.UpdateWorldTemplateRequest, callback?: (err: AWSError, data: RoboMaker.Types.UpdateWorldTemplateResponse) => void): Request<RoboMaker.Types.UpdateWorldTemplateResponse, AWSError>;
+  /**
+   * Updates a world template.
+   */
+  updateWorldTemplate(callback?: (err: AWSError, data: RoboMaker.Types.UpdateWorldTemplateResponse) => void): Request<RoboMaker.Types.UpdateWorldTemplateResponse, AWSError>;
 }
 declare namespace RoboMaker {
   export type Architecture = "X86_64"|"ARM64"|"ARMHF"|string;
   export type Arn = string;
   export type Arns = Arn[];
+  export interface BatchDeleteWorldsRequest {
+    /**
+     * A list of Amazon Resource Names (arns) that correspond to worlds to delete.
+     */
+    worlds: Arns;
+  }
+  export interface BatchDeleteWorldsResponse {
+    /**
+     * A list of unprocessed worlds associated with the call. These worlds were not deleted.
+     */
+    unprocessedWorlds?: Arns;
+  }
   export interface BatchDescribeSimulationJobRequest {
     /**
      * A list of Amazon Resource Names (ARNs) of simulation jobs to describe.
@@ -389,17 +537,33 @@ declare namespace RoboMaker {
   }
   export interface CancelSimulationJobResponse {
   }
+  export interface CancelWorldExportJobRequest {
+    /**
+     * The Amazon Resource Name (arn) of the world export job to cancel.
+     */
+    job: Arn;
+  }
+  export interface CancelWorldExportJobResponse {
+  }
+  export interface CancelWorldGenerationJobRequest {
+    /**
+     * The Amazon Resource Name (arn) of the world generator job to cancel.
+     */
+    job: Arn;
+  }
+  export interface CancelWorldGenerationJobResponse {
+  }
   export type ClientRequestToken = string;
   export type Command = string;
   export interface Compute {
     /**
-     * The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. 
+     * The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. The default is 15. 
      */
     simulationUnitLimit?: SimulationUnit;
   }
   export interface ComputeResponse {
     /**
-     * The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. 
+     * The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. The default is 15. 
      */
     simulationUnitLimit?: SimulationUnit;
   }
@@ -868,6 +1032,152 @@ declare namespace RoboMaker {
      */
     compute?: ComputeResponse;
   }
+  export interface CreateWorldExportJobRequest {
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    clientRequestToken?: ClientRequestToken;
+    /**
+     * A list of Amazon Resource Names (arns) that correspond to worlds to export.
+     */
+    worlds: Arns;
+    outputLocation: OutputLocation;
+    /**
+     * The IAM role that the world export process uses to access the Amazon S3 bucket and put the export.
+     */
+    iamRole: IamRole;
+    /**
+     * A map that contains tag keys and tag values that are attached to the world export job.
+     */
+    tags?: TagMap;
+  }
+  export interface CreateWorldExportJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the world export job.
+     */
+    arn?: Arn;
+    /**
+     * The status of the world export job.  Pending  The world export job request is pending.  Running  The world export job is running.   Completed  The world export job completed.   Failed  The world export job failed. See failureCode for more information.   Canceled  The world export job was cancelled.  Canceling  The world export job is being cancelled.  
+     */
+    status?: WorldExportJobStatus;
+    /**
+     * The time, in milliseconds since the epoch, when the world export job was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The failure code of the world export job if it failed:  InternalServiceError  Internal service error.  LimitExceeded  The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed.   ResourceNotFound  The specified resource could not be found.   RequestThrottled  The request was throttled.  InvalidInput  An input parameter in the request is not valid.  
+     */
+    failureCode?: WorldExportJobErrorCode;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    clientRequestToken?: ClientRequestToken;
+    outputLocation?: OutputLocation;
+    /**
+     * The IAM role that the world export process uses to access the Amazon S3 bucket and put the export. 
+     */
+    iamRole?: IamRole;
+    /**
+     * A map that contains tag keys and tag values that are attached to the world export job.
+     */
+    tags?: TagMap;
+  }
+  export interface CreateWorldGenerationJobRequest {
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    clientRequestToken?: ClientRequestToken;
+    /**
+     * The Amazon Resource Name (arn) of the world template describing the worlds you want to create.
+     */
+    template: Arn;
+    /**
+     * Information about the world count.
+     */
+    worldCount: WorldCount;
+    /**
+     * A map that contains tag keys and tag values that are attached to the world generator job.
+     */
+    tags?: TagMap;
+  }
+  export interface CreateWorldGenerationJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the world generator job.
+     */
+    arn?: Arn;
+    /**
+     * The status of the world generator job.  Pending  The world generator job request is pending.  Running  The world generator job is running.   Completed  The world generator job completed.   Failed  The world generator job failed. See failureCode for more information.   PartialFailed  Some worlds did not generate.  Canceled  The world generator job was cancelled.  Canceling  The world generator job is being cancelled.  
+     */
+    status?: WorldGenerationJobStatus;
+    /**
+     * The time, in milliseconds since the epoch, when the world generator job was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The failure code of the world generator job if it failed:  InternalServiceError  Internal service error.  LimitExceeded  The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed.   ResourceNotFound  The specified resource could not be found.   RequestThrottled  The request was throttled.  InvalidInput  An input parameter in the request is not valid.  
+     */
+    failureCode?: WorldGenerationJobErrorCode;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    clientRequestToken?: ClientRequestToken;
+    /**
+     * The Amazon Resource Name (arn) of the world template.
+     */
+    template?: Arn;
+    /**
+     * Information about the world count. 
+     */
+    worldCount?: WorldCount;
+    /**
+     * A map that contains tag keys and tag values that are attached to the world generator job.
+     */
+    tags?: TagMap;
+  }
+  export interface CreateWorldTemplateRequest {
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    clientRequestToken?: ClientRequestToken;
+    /**
+     * The name of the world template.
+     */
+    name?: TemplateName;
+    /**
+     * The world template body.
+     */
+    templateBody?: Json;
+    /**
+     * The location of the world template.
+     */
+    templateLocation?: TemplateLocation;
+    /**
+     * A map that contains tag keys and tag values that are attached to the world template.
+     */
+    tags?: TagMap;
+  }
+  export interface CreateWorldTemplateResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the world template.
+     */
+    arn?: Arn;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    clientRequestToken?: ClientRequestToken;
+    /**
+     * The time, in milliseconds since the epoch, when the world template was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The name of the world template.
+     */
+    name?: TemplateName;
+    /**
+     * A map that contains tag keys and tag values that are attached to the world template.
+     */
+    tags?: TagMap;
+  }
   export type CreatedAt = Date;
   export interface DataSource {
     /**
@@ -939,6 +1249,14 @@ declare namespace RoboMaker {
     applicationVersion?: Version;
   }
   export interface DeleteSimulationApplicationResponse {
+  }
+  export interface DeleteWorldTemplateRequest {
+    /**
+     * The Amazon Resource Name (arn) of the world template you want to delete.
+     */
+    template: Arn;
+  }
+  export interface DeleteWorldTemplateResponse {
   }
   export interface DeploymentApplicationConfig {
     /**
@@ -1434,6 +1752,159 @@ declare namespace RoboMaker {
      */
     compute?: ComputeResponse;
   }
+  export interface DescribeWorldExportJobRequest {
+    /**
+     * The Amazon Resource Name (arn) of the world export job to describe.
+     */
+    job: Arn;
+  }
+  export interface DescribeWorldExportJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the world export job.
+     */
+    arn?: Arn;
+    /**
+     * The status of the world export job.  Pending  The world export job request is pending.  Running  The world export job is running.   Completed  The world export job completed.   Failed  The world export job failed. See failureCode and failureReason for more information.   Canceled  The world export job was cancelled.  Canceling  The world export job is being cancelled.  
+     */
+    status?: WorldExportJobStatus;
+    /**
+     * The time, in milliseconds since the epoch, when the world export job was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The failure code of the world export job if it failed:  InternalServiceError  Internal service error.  LimitExceeded  The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed.   ResourceNotFound  The specified resource could not be found.   RequestThrottled  The request was throttled.  InvalidInput  An input parameter in the request is not valid.  
+     */
+    failureCode?: WorldExportJobErrorCode;
+    /**
+     * The reason why the world export job failed.
+     */
+    failureReason?: GenericString;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    clientRequestToken?: ClientRequestToken;
+    /**
+     * A list of Amazon Resource Names (arns) that correspond to worlds to be exported.
+     */
+    worlds?: Arns;
+    outputLocation?: OutputLocation;
+    /**
+     * The IAM role that the world export process uses to access the Amazon S3 bucket and put the export.
+     */
+    iamRole?: IamRole;
+    /**
+     * A map that contains tag keys and tag values that are attached to the world export job.
+     */
+    tags?: TagMap;
+  }
+  export interface DescribeWorldGenerationJobRequest {
+    /**
+     * The Amazon Resource Name (arn) of the world generation job to describe.
+     */
+    job: Arn;
+  }
+  export interface DescribeWorldGenerationJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the world generation job.
+     */
+    arn?: Arn;
+    /**
+     * The status of the world generation job:  Pending  The world generation job request is pending.  Running  The world generation job is running.   Completed  The world generation job completed.   Failed  The world generation job failed. See failureCode for more information.   PartialFailed  Some worlds did not generate.  Canceled  The world generation job was cancelled.  Canceling  The world generation job is being cancelled.  
+     */
+    status?: WorldGenerationJobStatus;
+    /**
+     * The time, in milliseconds since the epoch, when the world generation job was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The failure code of the world generation job if it failed:  InternalServiceError  Internal service error.  LimitExceeded  The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed.   ResourceNotFound  The specified resource could not be found.   RequestThrottled  The request was throttled.  InvalidInput  An input parameter in the request is not valid.  
+     */
+    failureCode?: WorldGenerationJobErrorCode;
+    /**
+     * The reason why the world generation job failed.
+     */
+    failureReason?: GenericString;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    clientRequestToken?: ClientRequestToken;
+    /**
+     * The Amazon Resource Name (arn) of the world template.
+     */
+    template?: Arn;
+    /**
+     * Information about the world count.
+     */
+    worldCount?: WorldCount;
+    /**
+     * Summary information about finished worlds.
+     */
+    finishedWorldsSummary?: FinishedWorldsSummary;
+    /**
+     * A map that contains tag keys and tag values that are attached to the world generation job.
+     */
+    tags?: TagMap;
+  }
+  export interface DescribeWorldRequest {
+    /**
+     * The Amazon Resource Name (arn) of the world you want to describe.
+     */
+    world: Arn;
+  }
+  export interface DescribeWorldResponse {
+    /**
+     * The Amazon Resource Name (arn) of the world.
+     */
+    arn?: Arn;
+    /**
+     * The Amazon Resource Name (arn) of the world generation job that generated the world.
+     */
+    generationJob?: Arn;
+    /**
+     * The world template.
+     */
+    template?: Arn;
+    /**
+     * The time, in milliseconds since the epoch, when the world was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * A map that contains tag keys and tag values that are attached to the world.
+     */
+    tags?: TagMap;
+  }
+  export interface DescribeWorldTemplateRequest {
+    /**
+     * The Amazon Resource Name (arn) of the world template you want to describe.
+     */
+    template: Arn;
+  }
+  export interface DescribeWorldTemplateResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the world template.
+     */
+    arn?: Arn;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    clientRequestToken?: ClientRequestToken;
+    /**
+     * The name of the world template.
+     */
+    name?: TemplateName;
+    /**
+     * The time, in milliseconds since the epoch, when the world template was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The time, in milliseconds since the epoch, when the world template was last updated.
+     */
+    lastUpdatedAt?: LastUpdatedAt;
+    /**
+     * A map that contains tag keys and tag values that are attached to the world template.
+     */
+    tags?: TagMap;
+  }
   export type EnvironmentVariableKey = string;
   export type EnvironmentVariableMap = {[key: string]: EnvironmentVariableValue};
   export type EnvironmentVariableValue = string;
@@ -1458,6 +1929,16 @@ declare namespace RoboMaker {
   }
   export type FailedCreateSimulationJobRequests = FailedCreateSimulationJobRequest[];
   export type FailureBehavior = "Fail"|"Continue"|string;
+  export interface FailureSummary {
+    /**
+     * The total number of failures.
+     */
+    totalFailureCount?: Integer;
+    /**
+     * The worlds that failed.
+     */
+    failures?: WorldFailures;
+  }
   export interface Filter {
     /**
      * The name of the filter.
@@ -1470,6 +1951,20 @@ declare namespace RoboMaker {
   }
   export type FilterValues = Name[];
   export type Filters = Filter[];
+  export interface FinishedWorldsSummary {
+    /**
+     * The total number of finished worlds.
+     */
+    finishedCount?: Integer;
+    /**
+     * A list of worlds that succeeded.
+     */
+    succeededWorlds?: Arns;
+    /**
+     * Information about worlds that failed.
+     */
+    failureSummary?: FailureSummary;
+  }
   export interface Fleet {
     /**
      * The name of the fleet.
@@ -1497,12 +1992,31 @@ declare namespace RoboMaker {
     lastDeploymentTime?: CreatedAt;
   }
   export type Fleets = Fleet[];
+  export type FloorplanCount = number;
   export type GenericInteger = number;
   export type GenericString = string;
+  export interface GetWorldTemplateBodyRequest {
+    /**
+     * The Amazon Resource Name (arn) of the world template.
+     */
+    template?: Arn;
+    /**
+     * The Amazon Resource Name (arn) of the world generator job.
+     */
+    generationJob?: Arn;
+  }
+  export interface GetWorldTemplateBodyResponse {
+    /**
+     * The world template body.
+     */
+    templateBody?: Json;
+  }
   export type IamRole = string;
   export type Id = string;
   export type Integer = number;
+  export type InteriorCountPerFloorplan = number;
   export type JobDuration = number;
+  export type Json = string;
   export type LastStartedAt = Date;
   export type LastUpdatedAt = Date;
   export interface LaunchConfig {
@@ -1533,7 +2047,7 @@ declare namespace RoboMaker {
      */
     filters?: Filters;
     /**
-     * The nextToken value returned from a previous paginated ListDeploymentJobs request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. 
+     * If the previous paginated request did not return all of the remaining results, the response object's nextToken parameter value is set to a token. To retrieve the next set of results, call ListDeploymentJobs again and assign that token to the request object's nextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. 
      */
     nextToken?: PaginationToken;
     /**
@@ -1547,13 +2061,13 @@ declare namespace RoboMaker {
      */
     deploymentJobs?: DeploymentJobs;
     /**
-     * The nextToken value to include in a future ListDeploymentJobs request. When the results of a ListDeploymentJobs request exceed maxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return. 
+     * If the previous paginated request did not return all of the remaining results, the response object's nextToken parameter value is set to a token. To retrieve the next set of results, call ListDeploymentJobs again and assign that token to the request object's nextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. 
      */
     nextToken?: PaginationToken;
   }
   export interface ListFleetsRequest {
     /**
-     * The nextToken value returned from a previous paginated ListFleets request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value.   This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes. 
+     * If the previous paginated request did not return all of the remaining results, the response object's nextToken parameter value is set to a token. To retrieve the next set of results, call ListFleets again and assign that token to the request object's nextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null.   This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes. 
      */
     nextToken?: PaginationToken;
     /**
@@ -1571,7 +2085,7 @@ declare namespace RoboMaker {
      */
     fleetDetails?: Fleets;
     /**
-     * The nextToken value to include in a future ListDeploymentJobs request. When the results of a ListFleets request exceed maxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return. 
+     * If the previous paginated request did not return all of the remaining results, the response object's nextToken parameter value is set to a token. To retrieve the next set of results, call ListFleets again and assign that token to the request object's nextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. 
      */
     nextToken?: PaginationToken;
   }
@@ -1581,7 +2095,7 @@ declare namespace RoboMaker {
      */
     versionQualifier?: VersionQualifier;
     /**
-     * The nextToken value returned from a previous paginated ListRobotApplications request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. 
+     * If the previous paginated request did not return all of the remaining results, the response object's nextToken parameter value is set to a token. To retrieve the next set of results, call ListRobotApplications again and assign that token to the request object's nextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. 
      */
     nextToken?: PaginationToken;
     /**
@@ -1599,13 +2113,13 @@ declare namespace RoboMaker {
      */
     robotApplicationSummaries?: RobotApplicationSummaries;
     /**
-     * The nextToken value to include in a future ListRobotApplications request. When the results of a ListRobotApplications request exceed maxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return. 
+     * If the previous paginated request did not return all of the remaining results, the response object's nextToken parameter value is set to a token. To retrieve the next set of results, call ListRobotApplications again and assign that token to the request object's nextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. 
      */
     nextToken?: PaginationToken;
   }
   export interface ListRobotsRequest {
     /**
-     * The nextToken value returned from a previous paginated ListRobots request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. 
+     * If the previous paginated request did not return all of the remaining results, the response object's nextToken parameter value is set to a token. To retrieve the next set of results, call ListRobots again and assign that token to the request object's nextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. 
      */
     nextToken?: PaginationToken;
     /**
@@ -1623,7 +2137,7 @@ declare namespace RoboMaker {
      */
     robots?: Robots;
     /**
-     * The nextToken value to include in a future ListRobots request. When the results of a ListRobot request exceed maxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return. 
+     * If the previous paginated request did not return all of the remaining results, the response object's nextToken parameter value is set to a token. To retrieve the next set of results, call ListRobots again and assign that token to the request object's nextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. 
      */
     nextToken?: PaginationToken;
   }
@@ -1633,7 +2147,7 @@ declare namespace RoboMaker {
      */
     versionQualifier?: VersionQualifier;
     /**
-     * The nextToken value returned from a previous paginated ListSimulationApplications request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. 
+     * If the previous paginated request did not return all of the remaining results, the response object's nextToken parameter value is set to a token. To retrieve the next set of results, call ListSimulationApplications again and assign that token to the request object's nextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. 
      */
     nextToken?: PaginationToken;
     /**
@@ -1651,13 +2165,13 @@ declare namespace RoboMaker {
      */
     simulationApplicationSummaries?: SimulationApplicationSummaries;
     /**
-     * The nextToken value to include in a future ListSimulationApplications request. When the results of a ListRobot request exceed maxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return. 
+     * If the previous paginated request did not return all of the remaining results, the response object's nextToken parameter value is set to a token. To retrieve the next set of results, call ListSimulationApplications again and assign that token to the request object's nextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. 
      */
     nextToken?: PaginationToken;
   }
   export interface ListSimulationJobBatchesRequest {
     /**
-     * The nextToken value returned from a previous paginated ListSimulationJobBatches request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. 
+     * If the previous paginated request did not return all of the remaining results, the response object's nextToken parameter value is set to a token. To retrieve the next set of results, call ListSimulationJobBatches again and assign that token to the request object's nextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. 
      */
     nextToken?: PaginationToken;
     /**
@@ -1675,13 +2189,13 @@ declare namespace RoboMaker {
      */
     simulationJobBatchSummaries?: SimulationJobBatchSummaries;
     /**
-     * The nextToken value to include in a future ListSimulationJobBatches request. When the results of a ListSimulationJobBatches request exceed maxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return. 
+     * If the previous paginated request did not return all of the remaining results, the response object's nextToken parameter value is set to a token. To retrieve the next set of results, call ListSimulationJobBatches again and assign that token to the request object's nextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. 
      */
     nextToken?: PaginationToken;
   }
   export interface ListSimulationJobsRequest {
     /**
-     * The nextToken value returned from a previous paginated ListSimulationJobs request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value.   This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes. 
+     * If the previous paginated request did not return all of the remaining results, the response object's nextToken parameter value is set to a token. To retrieve the next set of results, call ListSimulationJobs again and assign that token to the request object's nextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. 
      */
     nextToken?: PaginationToken;
     /**
@@ -1699,7 +2213,7 @@ declare namespace RoboMaker {
      */
     simulationJobSummaries: SimulationJobSummaries;
     /**
-     * The nextToken value to include in a future ListSimulationJobs request. When the results of a ListRobot request exceed maxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return. 
+     * If the previous paginated request did not return all of the remaining results, the response object's nextToken parameter value is set to a token. To retrieve the next set of results, call ListSimulationJobs again and assign that token to the request object's nextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. 
      */
     nextToken?: PaginationToken;
   }
@@ -1714,6 +2228,98 @@ declare namespace RoboMaker {
      * The list of all tags added to the specified resource.
      */
     tags?: TagMap;
+  }
+  export interface ListWorldExportJobsRequest {
+    /**
+     * If the previous paginated request did not return all of the remaining results, the response object's nextToken parameter value is set to a token. To retrieve the next set of results, call ListWorldExportJobs again and assign that token to the request object's nextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. 
+     */
+    nextToken?: PaginationToken;
+    /**
+     * When this parameter is used, ListWorldExportJobs only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListWorldExportJobs request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then ListWorldExportJobs returns up to 100 results and a nextToken value if applicable. 
+     */
+    maxResults?: MaxResults;
+    /**
+     * Optional filters to limit results. You can use generationJobId and templateId.
+     */
+    filters?: Filters;
+  }
+  export interface ListWorldExportJobsResponse {
+    /**
+     * Summary information for world export jobs.
+     */
+    worldExportJobSummaries: WorldExportJobSummaries;
+    /**
+     * If the previous paginated request did not return all of the remaining results, the response object's nextToken parameter value is set to a token. To retrieve the next set of results, call ListWorldExportJobsRequest again and assign that token to the request object's nextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. 
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListWorldGenerationJobsRequest {
+    /**
+     * If the previous paginated request did not return all of the remaining results, the response object's nextToken parameter value is set to a token. To retrieve the next set of results, call ListWorldGenerationJobsRequest again and assign that token to the request object's nextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. 
+     */
+    nextToken?: PaginationToken;
+    /**
+     * When this parameter is used, ListWorldGeneratorJobs only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListWorldGeneratorJobs request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then ListWorldGeneratorJobs returns up to 100 results and a nextToken value if applicable. 
+     */
+    maxResults?: MaxResults;
+    /**
+     * Optional filters to limit results. You can use status and templateId.
+     */
+    filters?: Filters;
+  }
+  export interface ListWorldGenerationJobsResponse {
+    /**
+     * Summary information for world generator jobs.
+     */
+    worldGenerationJobSummaries: WorldGenerationJobSummaries;
+    /**
+     * If the previous paginated request did not return all of the remaining results, the response object's nextToken parameter value is set to a token. To retrieve the next set of results, call ListWorldGeneratorJobsRequest again and assign that token to the request object's nextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. 
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListWorldTemplatesRequest {
+    /**
+     * If the previous paginated request did not return all of the remaining results, the response object's nextToken parameter value is set to a token. To retrieve the next set of results, call ListWorldTemplates again and assign that token to the request object's nextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. 
+     */
+    nextToken?: PaginationToken;
+    /**
+     * When this parameter is used, ListWorldTemplates only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListWorldTemplates request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then ListWorldTemplates returns up to 100 results and a nextToken value if applicable. 
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListWorldTemplatesResponse {
+    /**
+     * Summary information for templates.
+     */
+    templateSummaries?: TemplateSummaries;
+    /**
+     * If the previous paginated request did not return all of the remaining results, the response object's nextToken parameter value is set to a token. To retrieve the next set of results, call ListWorldTemplates again and assign that token to the request object's nextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. 
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListWorldsRequest {
+    /**
+     * If the previous paginated request did not return all of the remaining results, the response object's nextToken parameter value is set to a token. To retrieve the next set of results, call ListWorlds again and assign that token to the request object's nextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. 
+     */
+    nextToken?: PaginationToken;
+    /**
+     * When this parameter is used, ListWorlds only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListWorlds request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then ListWorlds returns up to 100 results and a nextToken value if applicable. 
+     */
+    maxResults?: MaxResults;
+    /**
+     * Optional filters to limit results. You can use status.
+     */
+    filters?: Filters;
+  }
+  export interface ListWorldsResponse {
+    /**
+     * Summary information for worlds.
+     */
+    worldSummaries?: WorldSummaries;
+    /**
+     * If the previous paginated request did not return all of the remaining results, the response object's nextToken parameter value is set to a token. To retrieve the next set of results, call ListWorlds again and assign that token to the request object's nextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. 
+     */
+    nextToken?: PaginationToken;
   }
   export interface LoggingConfig {
     /**
@@ -2001,6 +2607,10 @@ declare namespace RoboMaker {
      * The launch configuration for the simulation application.
      */
     launchConfig: LaunchConfig;
+    /**
+     * A list of world configurations.
+     */
+    worldConfigs?: WorldConfigs;
   }
   export type SimulationApplicationConfigs = SimulationApplicationConfig[];
   export type SimulationApplicationNames = Name[];
@@ -2398,6 +3008,36 @@ declare namespace RoboMaker {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export interface TemplateLocation {
+    /**
+     * The Amazon S3 bucket name.
+     */
+    s3Bucket: S3Bucket;
+    /**
+     * The list of S3 keys identifying the data source files.
+     */
+    s3Key: S3Key;
+  }
+  export type TemplateName = string;
+  export type TemplateSummaries = TemplateSummary[];
+  export interface TemplateSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the template.
+     */
+    arn?: Arn;
+    /**
+     * The time, in milliseconds since the epoch, when the template was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The time, in milliseconds since the epoch, when the template was last updated.
+     */
+    lastUpdatedAt?: LastUpdatedAt;
+    /**
+     * The name of the template.
+     */
+    name?: TemplateName;
+  }
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the AWS RoboMaker resource you are removing tags.
@@ -2522,6 +3162,42 @@ declare namespace RoboMaker {
      */
     revisionId?: RevisionId;
   }
+  export interface UpdateWorldTemplateRequest {
+    /**
+     * The Amazon Resource Name (arn) of the world template to update.
+     */
+    template: Arn;
+    /**
+     * The name of the template.
+     */
+    name?: TemplateName;
+    /**
+     * The world template body.
+     */
+    templateBody?: Json;
+    /**
+     * The location of the world template.
+     */
+    templateLocation?: TemplateLocation;
+  }
+  export interface UpdateWorldTemplateResponse {
+    /**
+     * The Amazon Resource Name (arn) of the world template.
+     */
+    arn?: Arn;
+    /**
+     * The name of the world template.
+     */
+    name?: TemplateName;
+    /**
+     * The time, in milliseconds since the epoch, when the world template was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The time, in milliseconds since the epoch, when the world template was last updated.
+     */
+    lastUpdatedAt?: LastUpdatedAt;
+  }
   export interface VPCConfig {
     /**
      * A list of one or more subnet IDs in your VPC.
@@ -2556,6 +3232,111 @@ declare namespace RoboMaker {
   }
   export type Version = string;
   export type VersionQualifier = string;
+  export interface WorldConfig {
+    /**
+     * The world generated by Simulation WorldForge.
+     */
+    world?: Arn;
+  }
+  export type WorldConfigs = WorldConfig[];
+  export interface WorldCount {
+    /**
+     * The number of unique floorplans.
+     */
+    floorplanCount?: FloorplanCount;
+    /**
+     * The number of unique interiors per floorplan.
+     */
+    interiorCountPerFloorplan?: InteriorCountPerFloorplan;
+  }
+  export type WorldExportJobErrorCode = "InternalServiceError"|"LimitExceeded"|"ResourceNotFound"|"RequestThrottled"|"InvalidInput"|"AccessDenied"|string;
+  export type WorldExportJobStatus = "Pending"|"Running"|"Completed"|"Failed"|"Canceling"|"Canceled"|string;
+  export type WorldExportJobSummaries = WorldExportJobSummary[];
+  export interface WorldExportJobSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the world export job.
+     */
+    arn?: Arn;
+    /**
+     * The status of the world export job.  Pending  The world export job request is pending.  Running  The world export job is running.   Completed  The world export job completed.   Failed  The world export job failed. See failureCode for more information.   Canceled  The world export job was cancelled.  Canceling  The world export job is being cancelled.  
+     */
+    status?: WorldExportJobStatus;
+    /**
+     * The time, in milliseconds since the epoch, when the world export job was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * A list of worlds.
+     */
+    worlds?: Arns;
+  }
+  export interface WorldFailure {
+    /**
+     * The failure code of the world export job if it failed:  InternalServiceError  Internal service error.  LimitExceeded  The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed.   ResourceNotFound  The specified resource could not be found.   RequestThrottled  The request was throttled.  InvalidInput  An input parameter in the request is not valid.  
+     */
+    failureCode?: WorldGenerationJobErrorCode;
+    /**
+     * The sample reason why the world failed. World errors are aggregated. A sample is used as the sampleFailureReason. 
+     */
+    sampleFailureReason?: GenericString;
+    /**
+     * The number of failed worlds.
+     */
+    failureCount?: Integer;
+  }
+  export type WorldFailures = WorldFailure[];
+  export type WorldGenerationJobErrorCode = "InternalServiceError"|"LimitExceeded"|"ResourceNotFound"|"RequestThrottled"|"InvalidInput"|"AllWorldGenerationFailed"|string;
+  export type WorldGenerationJobStatus = "Pending"|"Running"|"Completed"|"Failed"|"PartialFailed"|"Canceling"|"Canceled"|string;
+  export type WorldGenerationJobSummaries = WorldGenerationJobSummary[];
+  export interface WorldGenerationJobSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the world generator job.
+     */
+    arn?: Arn;
+    /**
+     * The Amazon Resource Name (arn) of the world template.
+     */
+    template?: Arn;
+    /**
+     * The time, in milliseconds since the epoch, when the world generator job was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The status of the world generator job:  Pending  The world generator job request is pending.  Running  The world generator job is running.   Completed  The world generator job completed.   Failed  The world generator job failed. See failureCode for more information.   PartialFailed  Some worlds did not generate.  Canceled  The world generator job was cancelled.  Canceling  The world generator job is being cancelled.  
+     */
+    status?: WorldGenerationJobStatus;
+    /**
+     * Information about the world count.
+     */
+    worldCount?: WorldCount;
+    /**
+     * The number of worlds that were generated.
+     */
+    succeededWorldCount?: Integer;
+    /**
+     * The number of worlds that failed.
+     */
+    failedWorldCount?: Integer;
+  }
+  export type WorldSummaries = WorldSummary[];
+  export interface WorldSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the world.
+     */
+    arn?: Arn;
+    /**
+     * The time, in milliseconds since the epoch, when the world was created.
+     */
+    createdAt?: CreatedAt;
+    /**
+     * The Amazon Resource Name (arn) of the world generation job.
+     */
+    generationJob?: Arn;
+    /**
+     * The Amazon Resource Name (arn) of the world template.
+     */
+    template?: Arn;
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

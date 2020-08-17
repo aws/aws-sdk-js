@@ -323,11 +323,11 @@ declare namespace ELB {
   }
   export interface AdditionalAttribute {
     /**
-     * This parameter is reserved.
+     * The name of the attribute. The following attribute is supported.    elb.http.desyncmitigationmode - Determines how the load balancer handles requests that might pose a security risk to your application. The possible values are monitor, defensive, and strictest. The default is defensive.  
      */
     Key?: AdditionalAttributeKey;
     /**
-     * This parameter is reserved.
+     * This value of the attribute.
      */
     Value?: AdditionalAttributeValue;
   }
@@ -805,7 +805,7 @@ declare namespace ELB {
      */
     LoadBalancerPort: AccessPointPort;
     /**
-     * The protocol to use for routing traffic to instances: HTTP, HTTPS, TCP, or SSL. If the front-end protocol is HTTP, HTTPS, TCP, or SSL, InstanceProtocol must be at the same protocol. If there is another listener with the same InstancePort whose InstanceProtocol is secure, (HTTPS or SSL), the listener's InstanceProtocol must also be secure. If there is another listener with the same InstancePort whose InstanceProtocol is HTTP or TCP, the listener's InstanceProtocol must be HTTP or TCP.
+     * The protocol to use for routing traffic to instances: HTTP, HTTPS, TCP, or SSL. If the front-end protocol is TCP or SSL, the back-end protocol must be TCP or SSL. If the front-end protocol is HTTP or HTTPS, the back-end protocol must be HTTP or HTTPS. If there is another listener with the same InstancePort whose InstanceProtocol is secure, (HTTPS or SSL), the listener's InstanceProtocol must also be secure. If there is another listener with the same InstancePort whose InstanceProtocol is HTTP or TCP, the listener's InstanceProtocol must be HTTP or TCP.
      */
     InstanceProtocol?: Protocol;
     /**
@@ -847,7 +847,7 @@ declare namespace ELB {
      */
     ConnectionSettings?: ConnectionSettings;
     /**
-     * This parameter is reserved.
+     * Any additional attributes.
      */
     AdditionalAttributes?: AdditionalAttributes;
   }

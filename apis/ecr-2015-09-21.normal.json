@@ -1659,7 +1659,7 @@
         },
         "imageManifestMediaType": {
           "shape": "MediaType",
-          "documentation": "<p>The media type associated with the image manifest.</p>"
+          "documentation": "<p>The manifest media type of the image.</p>"
         }
       },
       "documentation": "<p>An object representing an Amazon ECR image.</p>"
@@ -1708,6 +1708,14 @@
         "imageScanFindingsSummary": {
           "shape": "ImageScanFindingsSummary",
           "documentation": "<p>A summary of the last completed image scan.</p>"
+        },
+        "imageManifestMediaType": {
+          "shape": "MediaType",
+          "documentation": "<p>The media type of the image manifest.</p>"
+        },
+        "artifactMediaType": {
+          "shape": "MediaType",
+          "documentation": "<p>The artifact media type of the image.</p>"
         }
       },
       "documentation": "<p>An object that describes an image returned by a <a>DescribeImages</a> operation.</p>"

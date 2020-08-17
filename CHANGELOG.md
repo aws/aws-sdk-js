@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.734.0-->
+<!--LATEST=2.735.0-->
 <!--ENTRYINSERT-->
+
+## 2.735.0
+* feature: ACM: ACM provides support for the new Private CA feature Cross-account CA sharing. ACM users can issue certificates signed by a private CA belonging to another account where the CA was shared with them.
+* feature: ACMPCA: ACM Private CA is launching cross-account support. This allows customers to share their private CAs with other accounts, AWS Organizations, and organizational units to issue end-entity certificates.
+* feature: ECR: This feature adds support for pushing and pulling Open Container Initiative (OCI) artifacts.
+* feature: Kinesis: Updates API to latest version.
+* feature: QuickSight: Amazon QuickSight now supports programmatic creation and management of analyses with new APIs.
+* feature: RoboMaker: This release introduces RoboMaker Simulation WorldForge, a capability that automatically generates one or more simulation worlds.
 
 ## 2.734.0
 * bugfix: ErrorParser: fix UnknownEndpoint exception not thrown in Node14(#3393)

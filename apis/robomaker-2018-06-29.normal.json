@@ -13,6 +13,31 @@
     "uid": "robomaker-2018-06-29"
   },
   "operations": {
+    "BatchDeleteWorlds": {
+      "name": "BatchDeleteWorlds",
+      "http": {
+        "method": "POST",
+        "requestUri": "/batchDeleteWorlds"
+      },
+      "input": {
+        "shape": "BatchDeleteWorldsRequest"
+      },
+      "output": {
+        "shape": "BatchDeleteWorldsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Deletes one or more worlds in a batch operation.</p>"
+    },
     "BatchDescribeSimulationJob": {
       "name": "BatchDescribeSimulationJob",
       "http": {
@@ -124,6 +149,62 @@
         }
       ],
       "documentation": "<p>Cancels a simulation job batch. When you cancel a simulation job batch, you are also cancelling all of the active simulation jobs created as part of the batch. </p>"
+    },
+    "CancelWorldExportJob": {
+      "name": "CancelWorldExportJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/cancelWorldExportJob"
+      },
+      "input": {
+        "shape": "CancelWorldExportJobRequest"
+      },
+      "output": {
+        "shape": "CancelWorldExportJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Cancels the specified export job.</p>"
+    },
+    "CancelWorldGenerationJob": {
+      "name": "CancelWorldGenerationJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/cancelWorldGenerationJob"
+      },
+      "input": {
+        "shape": "CancelWorldGenerationJobRequest"
+      },
+      "output": {
+        "shape": "CancelWorldGenerationJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Cancels the specified world generator job.</p>"
     },
     "CreateDeploymentJob": {
       "name": "CreateDeploymentJob",
@@ -388,6 +469,111 @@
       ],
       "documentation": "<p>Creates a simulation job.</p> <note> <p>After 90 days, simulation jobs expire and will be deleted. They will no longer be accessible. </p> </note>"
     },
+    "CreateWorldExportJob": {
+      "name": "CreateWorldExportJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/createWorldExportJob"
+      },
+      "input": {
+        "shape": "CreateWorldExportJobRequest"
+      },
+      "output": {
+        "shape": "CreateWorldExportJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "IdempotentParameterMismatchException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Creates a world export job.</p>"
+    },
+    "CreateWorldGenerationJob": {
+      "name": "CreateWorldGenerationJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/createWorldGenerationJob"
+      },
+      "input": {
+        "shape": "CreateWorldGenerationJobRequest"
+      },
+      "output": {
+        "shape": "CreateWorldGenerationJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "IdempotentParameterMismatchException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Creates worlds using the specified template.</p>"
+    },
+    "CreateWorldTemplate": {
+      "name": "CreateWorldTemplate",
+      "http": {
+        "method": "POST",
+        "requestUri": "/createWorldTemplate"
+      },
+      "input": {
+        "shape": "CreateWorldTemplateRequest"
+      },
+      "output": {
+        "shape": "CreateWorldTemplateResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Creates a world template.</p>"
+    },
     "DeleteFleet": {
       "name": "DeleteFleet",
       "http": {
@@ -487,6 +673,34 @@
         }
       ],
       "documentation": "<p>Deletes a simulation application.</p>"
+    },
+    "DeleteWorldTemplate": {
+      "name": "DeleteWorldTemplate",
+      "http": {
+        "method": "POST",
+        "requestUri": "/deleteWorldTemplate"
+      },
+      "input": {
+        "shape": "DeleteWorldTemplateRequest"
+      },
+      "output": {
+        "shape": "DeleteWorldTemplateResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Deletes a world template.</p>"
     },
     "DeregisterRobot": {
       "name": "DeregisterRobot",
@@ -709,6 +923,146 @@
       ],
       "documentation": "<p>Describes a simulation job batch.</p>"
     },
+    "DescribeWorld": {
+      "name": "DescribeWorld",
+      "http": {
+        "method": "POST",
+        "requestUri": "/describeWorld"
+      },
+      "input": {
+        "shape": "DescribeWorldRequest"
+      },
+      "output": {
+        "shape": "DescribeWorldResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Describes a world.</p>"
+    },
+    "DescribeWorldExportJob": {
+      "name": "DescribeWorldExportJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/describeWorldExportJob"
+      },
+      "input": {
+        "shape": "DescribeWorldExportJobRequest"
+      },
+      "output": {
+        "shape": "DescribeWorldExportJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Describes a world export job.</p>"
+    },
+    "DescribeWorldGenerationJob": {
+      "name": "DescribeWorldGenerationJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/describeWorldGenerationJob"
+      },
+      "input": {
+        "shape": "DescribeWorldGenerationJobRequest"
+      },
+      "output": {
+        "shape": "DescribeWorldGenerationJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Describes a world generation job.</p>"
+    },
+    "DescribeWorldTemplate": {
+      "name": "DescribeWorldTemplate",
+      "http": {
+        "method": "POST",
+        "requestUri": "/describeWorldTemplate"
+      },
+      "input": {
+        "shape": "DescribeWorldTemplateRequest"
+      },
+      "output": {
+        "shape": "DescribeWorldTemplateResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Describes a world template.</p>"
+    },
+    "GetWorldTemplateBody": {
+      "name": "GetWorldTemplateBody",
+      "http": {
+        "method": "POST",
+        "requestUri": "/getWorldTemplateBody"
+      },
+      "input": {
+        "shape": "GetWorldTemplateBodyRequest"
+      },
+      "output": {
+        "shape": "GetWorldTemplateBodyResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Gets the world template body.</p>"
+    },
     "ListDeploymentJobs": {
       "name": "ListDeploymentJobs",
       "http": {
@@ -917,6 +1271,106 @@
         }
       ],
       "documentation": "<p>Lists all tags on a AWS RoboMaker resource.</p>"
+    },
+    "ListWorldExportJobs": {
+      "name": "ListWorldExportJobs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/listWorldExportJobs"
+      },
+      "input": {
+        "shape": "ListWorldExportJobsRequest"
+      },
+      "output": {
+        "shape": "ListWorldExportJobsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Lists world export jobs.</p>"
+    },
+    "ListWorldGenerationJobs": {
+      "name": "ListWorldGenerationJobs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/listWorldGenerationJobs"
+      },
+      "input": {
+        "shape": "ListWorldGenerationJobsRequest"
+      },
+      "output": {
+        "shape": "ListWorldGenerationJobsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Lists world generator jobs.</p>"
+    },
+    "ListWorldTemplates": {
+      "name": "ListWorldTemplates",
+      "http": {
+        "method": "POST",
+        "requestUri": "/listWorldTemplates"
+      },
+      "input": {
+        "shape": "ListWorldTemplatesRequest"
+      },
+      "output": {
+        "shape": "ListWorldTemplatesResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Lists world templates.</p>"
+    },
+    "ListWorlds": {
+      "name": "ListWorlds",
+      "http": {
+        "method": "POST",
+        "requestUri": "/listWorlds"
+      },
+      "input": {
+        "shape": "ListWorldsRequest"
+      },
+      "output": {
+        "shape": "ListWorldsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Lists worlds.</p>"
     },
     "RegisterRobot": {
       "name": "RegisterRobot",
@@ -1165,6 +1619,34 @@
         }
       ],
       "documentation": "<p>Updates a simulation application.</p>"
+    },
+    "UpdateWorldTemplate": {
+      "name": "UpdateWorldTemplate",
+      "http": {
+        "method": "POST",
+        "requestUri": "/updateWorldTemplate"
+      },
+      "input": {
+        "shape": "UpdateWorldTemplateRequest"
+      },
+      "output": {
+        "shape": "UpdateWorldTemplateResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Updates a world template.</p>"
     }
   },
   "shapes": {
@@ -1189,6 +1671,27 @@
       },
       "max": 100,
       "min": 1
+    },
+    "BatchDeleteWorldsRequest": {
+      "type": "structure",
+      "required": [
+        "worlds"
+      ],
+      "members": {
+        "worlds": {
+          "shape": "Arns",
+          "documentation": "<p>A list of Amazon Resource Names (arns) that correspond to worlds to delete.</p>"
+        }
+      }
+    },
+    "BatchDeleteWorldsResponse": {
+      "type": "structure",
+      "members": {
+        "unprocessedWorlds": {
+          "shape": "Arns",
+          "documentation": "<p>A list of unprocessed worlds associated with the call. These worlds were not deleted.</p>"
+        }
+      }
     },
     "BatchDescribeSimulationJobRequest": {
       "type": "structure",
@@ -1286,6 +1789,38 @@
       "type": "structure",
       "members": {}
     },
+    "CancelWorldExportJobRequest": {
+      "type": "structure",
+      "required": [
+        "job"
+      ],
+      "members": {
+        "job": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (arn) of the world export job to cancel.</p>"
+        }
+      }
+    },
+    "CancelWorldExportJobResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "CancelWorldGenerationJobRequest": {
+      "type": "structure",
+      "required": [
+        "job"
+      ],
+      "members": {
+        "job": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (arn) of the world generator job to cancel.</p>"
+        }
+      }
+    },
+    "CancelWorldGenerationJobResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "ClientRequestToken": {
       "type": "string",
       "max": 64,
@@ -1303,7 +1838,7 @@
       "members": {
         "simulationUnitLimit": {
           "shape": "SimulationUnit",
-          "documentation": "<p>The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. </p>"
+          "documentation": "<p>The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. The default is 15. </p>"
         }
       },
       "documentation": "<p>Compute information for the simulation job.</p>"
@@ -1313,7 +1848,7 @@
       "members": {
         "simulationUnitLimit": {
           "shape": "SimulationUnit",
-          "documentation": "<p>The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. </p>"
+          "documentation": "<p>The simulation unit limit. Your simulation is allocated CPU and memory proportional to the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are only billed for the SU utilization you consume up to the maximim value provided. The default is 15. </p>"
         }
       },
       "documentation": "<p>Compute information for the simulation job</p>"
@@ -1794,6 +2329,7 @@
       "member": {
         "shape": "SimulationJobRequest"
       },
+      "max": 1000,
       "min": 1
     },
     "CreateSimulationJobResponse": {
@@ -1870,6 +2406,185 @@
         "compute": {
           "shape": "ComputeResponse",
           "documentation": "<p>Compute information for the simulation job.</p>"
+        }
+      }
+    },
+    "CreateWorldExportJobRequest": {
+      "type": "structure",
+      "required": [
+        "worlds",
+        "outputLocation",
+        "iamRole"
+      ],
+      "members": {
+        "clientRequestToken": {
+          "shape": "ClientRequestToken",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+          "idempotencyToken": true
+        },
+        "worlds": {
+          "shape": "Arns",
+          "documentation": "<p>A list of Amazon Resource Names (arns) that correspond to worlds to export.</p>"
+        },
+        "outputLocation": {
+          "shape": "OutputLocation"
+        },
+        "iamRole": {
+          "shape": "IamRole",
+          "documentation": "<p>The IAM role that the world export process uses to access the Amazon S3 bucket and put the export.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>A map that contains tag keys and tag values that are attached to the world export job.</p>"
+        }
+      }
+    },
+    "CreateWorldExportJobResponse": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the world export job.</p>"
+        },
+        "status": {
+          "shape": "WorldExportJobStatus",
+          "documentation": "<p>The status of the world export job.</p> <dl> <dt>Pending</dt> <dd> <p>The world export job request is pending.</p> </dd> <dt>Running</dt> <dd> <p>The world export job is running. </p> </dd> <dt>Completed</dt> <dd> <p>The world export job completed. </p> </dd> <dt>Failed</dt> <dd> <p>The world export job failed. See <code>failureCode</code> for more information. </p> </dd> <dt>Canceled</dt> <dd> <p>The world export job was cancelled.</p> </dd> <dt>Canceling</dt> <dd> <p>The world export job is being cancelled.</p> </dd> </dl>"
+        },
+        "createdAt": {
+          "shape": "CreatedAt",
+          "documentation": "<p>The time, in milliseconds since the epoch, when the world export job was created.</p>"
+        },
+        "failureCode": {
+          "shape": "WorldExportJobErrorCode",
+          "documentation": "<p>The failure code of the world export job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>LimitExceeded</dt> <dd> <p>The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed. </p> </dd> <dt>ResourceNotFound</dt> <dd> <p>The specified resource could not be found. </p> </dd> <dt>RequestThrottled</dt> <dd> <p>The request was throttled.</p> </dd> <dt>InvalidInput</dt> <dd> <p>An input parameter in the request is not valid.</p> </dd> </dl>"
+        },
+        "clientRequestToken": {
+          "shape": "ClientRequestToken",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
+        },
+        "outputLocation": {
+          "shape": "OutputLocation"
+        },
+        "iamRole": {
+          "shape": "IamRole",
+          "documentation": "<p>The IAM role that the world export process uses to access the Amazon S3 bucket and put the export. </p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>A map that contains tag keys and tag values that are attached to the world export job.</p>"
+        }
+      }
+    },
+    "CreateWorldGenerationJobRequest": {
+      "type": "structure",
+      "required": [
+        "template",
+        "worldCount"
+      ],
+      "members": {
+        "clientRequestToken": {
+          "shape": "ClientRequestToken",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+          "idempotencyToken": true
+        },
+        "template": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (arn) of the world template describing the worlds you want to create.</p>"
+        },
+        "worldCount": {
+          "shape": "WorldCount",
+          "documentation": "<p>Information about the world count.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>A map that contains tag keys and tag values that are attached to the world generator job.</p>"
+        }
+      }
+    },
+    "CreateWorldGenerationJobResponse": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the world generator job.</p>"
+        },
+        "status": {
+          "shape": "WorldGenerationJobStatus",
+          "documentation": "<p>The status of the world generator job.</p> <dl> <dt>Pending</dt> <dd> <p>The world generator job request is pending.</p> </dd> <dt>Running</dt> <dd> <p>The world generator job is running. </p> </dd> <dt>Completed</dt> <dd> <p>The world generator job completed. </p> </dd> <dt>Failed</dt> <dd> <p>The world generator job failed. See <code>failureCode</code> for more information. </p> </dd> <dt>PartialFailed</dt> <dd> <p>Some worlds did not generate.</p> </dd> <dt>Canceled</dt> <dd> <p>The world generator job was cancelled.</p> </dd> <dt>Canceling</dt> <dd> <p>The world generator job is being cancelled.</p> </dd> </dl>"
+        },
+        "createdAt": {
+          "shape": "CreatedAt",
+          "documentation": "<p>The time, in milliseconds since the epoch, when the world generator job was created.</p>"
+        },
+        "failureCode": {
+          "shape": "WorldGenerationJobErrorCode",
+          "documentation": "<p>The failure code of the world generator job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>LimitExceeded</dt> <dd> <p>The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed. </p> </dd> <dt>ResourceNotFound</dt> <dd> <p>The specified resource could not be found. </p> </dd> <dt>RequestThrottled</dt> <dd> <p>The request was throttled.</p> </dd> <dt>InvalidInput</dt> <dd> <p>An input parameter in the request is not valid.</p> </dd> </dl>"
+        },
+        "clientRequestToken": {
+          "shape": "ClientRequestToken",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
+        },
+        "template": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (arn) of the world template.</p>"
+        },
+        "worldCount": {
+          "shape": "WorldCount",
+          "documentation": "<p>Information about the world count. </p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>A map that contains tag keys and tag values that are attached to the world generator job.</p>"
+        }
+      }
+    },
+    "CreateWorldTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "clientRequestToken": {
+          "shape": "ClientRequestToken",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
+        },
+        "name": {
+          "shape": "TemplateName",
+          "documentation": "<p>The name of the world template.</p>"
+        },
+        "templateBody": {
+          "shape": "Json",
+          "documentation": "<p>The world template body.</p>"
+        },
+        "templateLocation": {
+          "shape": "TemplateLocation",
+          "documentation": "<p>The location of the world template.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>A map that contains tag keys and tag values that are attached to the world template.</p>"
+        }
+      }
+    },
+    "CreateWorldTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the world template.</p>"
+        },
+        "clientRequestToken": {
+          "shape": "ClientRequestToken",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
+        },
+        "createdAt": {
+          "shape": "CreatedAt",
+          "documentation": "<p>The time, in milliseconds since the epoch, when the world template was created.</p>"
+        },
+        "name": {
+          "shape": "TemplateName",
+          "documentation": "<p>The name of the world template.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>A map that contains tag keys and tag values that are attached to the world template.</p>"
         }
       }
     },
@@ -2006,6 +2721,22 @@
       }
     },
     "DeleteSimulationApplicationResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeleteWorldTemplateRequest": {
+      "type": "structure",
+      "required": [
+        "template"
+      ],
+      "members": {
+        "template": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (arn) of the world template you want to delete.</p>"
+        }
+      }
+    },
+    "DeleteWorldTemplateResponse": {
       "type": "structure",
       "members": {}
     },
@@ -2656,6 +3387,197 @@
         }
       }
     },
+    "DescribeWorldExportJobRequest": {
+      "type": "structure",
+      "required": [
+        "job"
+      ],
+      "members": {
+        "job": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (arn) of the world export job to describe.</p>"
+        }
+      }
+    },
+    "DescribeWorldExportJobResponse": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the world export job.</p>"
+        },
+        "status": {
+          "shape": "WorldExportJobStatus",
+          "documentation": "<p>The status of the world export job.</p> <dl> <dt>Pending</dt> <dd> <p>The world export job request is pending.</p> </dd> <dt>Running</dt> <dd> <p>The world export job is running. </p> </dd> <dt>Completed</dt> <dd> <p>The world export job completed. </p> </dd> <dt>Failed</dt> <dd> <p>The world export job failed. See <code>failureCode</code> and <code>failureReason</code> for more information. </p> </dd> <dt>Canceled</dt> <dd> <p>The world export job was cancelled.</p> </dd> <dt>Canceling</dt> <dd> <p>The world export job is being cancelled.</p> </dd> </dl>"
+        },
+        "createdAt": {
+          "shape": "CreatedAt",
+          "documentation": "<p>The time, in milliseconds since the epoch, when the world export job was created.</p>"
+        },
+        "failureCode": {
+          "shape": "WorldExportJobErrorCode",
+          "documentation": "<p>The failure code of the world export job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>LimitExceeded</dt> <dd> <p>The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed. </p> </dd> <dt>ResourceNotFound</dt> <dd> <p>The specified resource could not be found. </p> </dd> <dt>RequestThrottled</dt> <dd> <p>The request was throttled.</p> </dd> <dt>InvalidInput</dt> <dd> <p>An input parameter in the request is not valid.</p> </dd> </dl>"
+        },
+        "failureReason": {
+          "shape": "GenericString",
+          "documentation": "<p>The reason why the world export job failed.</p>"
+        },
+        "clientRequestToken": {
+          "shape": "ClientRequestToken",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
+        },
+        "worlds": {
+          "shape": "Arns",
+          "documentation": "<p>A list of Amazon Resource Names (arns) that correspond to worlds to be exported.</p>"
+        },
+        "outputLocation": {
+          "shape": "OutputLocation"
+        },
+        "iamRole": {
+          "shape": "IamRole",
+          "documentation": "<p>The IAM role that the world export process uses to access the Amazon S3 bucket and put the export.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>A map that contains tag keys and tag values that are attached to the world export job.</p>"
+        }
+      }
+    },
+    "DescribeWorldGenerationJobRequest": {
+      "type": "structure",
+      "required": [
+        "job"
+      ],
+      "members": {
+        "job": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (arn) of the world generation job to describe.</p>"
+        }
+      }
+    },
+    "DescribeWorldGenerationJobResponse": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the world generation job.</p>"
+        },
+        "status": {
+          "shape": "WorldGenerationJobStatus",
+          "documentation": "<p>The status of the world generation job:</p> <dl> <dt>Pending</dt> <dd> <p>The world generation job request is pending.</p> </dd> <dt>Running</dt> <dd> <p>The world generation job is running. </p> </dd> <dt>Completed</dt> <dd> <p>The world generation job completed. </p> </dd> <dt>Failed</dt> <dd> <p>The world generation job failed. See <code>failureCode</code> for more information. </p> </dd> <dt>PartialFailed</dt> <dd> <p>Some worlds did not generate.</p> </dd> <dt>Canceled</dt> <dd> <p>The world generation job was cancelled.</p> </dd> <dt>Canceling</dt> <dd> <p>The world generation job is being cancelled.</p> </dd> </dl>"
+        },
+        "createdAt": {
+          "shape": "CreatedAt",
+          "documentation": "<p>The time, in milliseconds since the epoch, when the world generation job was created.</p>"
+        },
+        "failureCode": {
+          "shape": "WorldGenerationJobErrorCode",
+          "documentation": "<p>The failure code of the world generation job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>LimitExceeded</dt> <dd> <p>The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed. </p> </dd> <dt>ResourceNotFound</dt> <dd> <p>The specified resource could not be found. </p> </dd> <dt>RequestThrottled</dt> <dd> <p>The request was throttled.</p> </dd> <dt>InvalidInput</dt> <dd> <p>An input parameter in the request is not valid.</p> </dd> </dl>"
+        },
+        "failureReason": {
+          "shape": "GenericString",
+          "documentation": "<p>The reason why the world generation job failed.</p>"
+        },
+        "clientRequestToken": {
+          "shape": "ClientRequestToken",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
+        },
+        "template": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (arn) of the world template.</p>"
+        },
+        "worldCount": {
+          "shape": "WorldCount",
+          "documentation": "<p>Information about the world count.</p>"
+        },
+        "finishedWorldsSummary": {
+          "shape": "FinishedWorldsSummary",
+          "documentation": "<p>Summary information about finished worlds.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>A map that contains tag keys and tag values that are attached to the world generation job.</p>"
+        }
+      }
+    },
+    "DescribeWorldRequest": {
+      "type": "structure",
+      "required": [
+        "world"
+      ],
+      "members": {
+        "world": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (arn) of the world you want to describe.</p>"
+        }
+      }
+    },
+    "DescribeWorldResponse": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (arn) of the world.</p>"
+        },
+        "generationJob": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (arn) of the world generation job that generated the world.</p>"
+        },
+        "template": {
+          "shape": "Arn",
+          "documentation": "<p>The world template.</p>"
+        },
+        "createdAt": {
+          "shape": "CreatedAt",
+          "documentation": "<p>The time, in milliseconds since the epoch, when the world was created.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>A map that contains tag keys and tag values that are attached to the world.</p>"
+        }
+      }
+    },
+    "DescribeWorldTemplateRequest": {
+      "type": "structure",
+      "required": [
+        "template"
+      ],
+      "members": {
+        "template": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (arn) of the world template you want to describe.</p>"
+        }
+      }
+    },
+    "DescribeWorldTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the world template.</p>"
+        },
+        "clientRequestToken": {
+          "shape": "ClientRequestToken",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
+        },
+        "name": {
+          "shape": "TemplateName",
+          "documentation": "<p>The name of the world template.</p>"
+        },
+        "createdAt": {
+          "shape": "CreatedAt",
+          "documentation": "<p>The time, in milliseconds since the epoch, when the world template was created.</p>"
+        },
+        "lastUpdatedAt": {
+          "shape": "LastUpdatedAt",
+          "documentation": "<p>The time, in milliseconds since the epoch, when the world template was last updated.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>A map that contains tag keys and tag values that are attached to the world template.</p>"
+        }
+      }
+    },
     "EnvironmentVariableKey": {
       "type": "string",
       "max": 1024,
@@ -2717,6 +3639,20 @@
         "Continue"
       ]
     },
+    "FailureSummary": {
+      "type": "structure",
+      "members": {
+        "totalFailureCount": {
+          "shape": "Integer",
+          "documentation": "<p>The total number of failures.</p>"
+        },
+        "failures": {
+          "shape": "WorldFailures",
+          "documentation": "<p>The worlds that failed.</p>"
+        }
+      },
+      "documentation": "<p>Information about worlds that failed.</p>"
+    },
     "Filter": {
       "type": "structure",
       "members": {
@@ -2746,6 +3682,24 @@
       },
       "max": 1,
       "min": 1
+    },
+    "FinishedWorldsSummary": {
+      "type": "structure",
+      "members": {
+        "finishedCount": {
+          "shape": "Integer",
+          "documentation": "<p>The total number of finished worlds.</p>"
+        },
+        "succeededWorlds": {
+          "shape": "Arns",
+          "documentation": "<p>A list of worlds that succeeded.</p>"
+        },
+        "failureSummary": {
+          "shape": "FailureSummary",
+          "documentation": "<p>Information about worlds that failed.</p>"
+        }
+      },
+      "documentation": "<p>Information about worlds that finished.</p>"
     },
     "Fleet": {
       "type": "structure",
@@ -2785,6 +3739,9 @@
       "max": 200,
       "min": 0
     },
+    "FloorplanCount": {
+      "type": "integer"
+    },
     "GenericInteger": {
       "type": "integer"
     },
@@ -2793,6 +3750,28 @@
       "max": 1024,
       "min": 0,
       "pattern": ".*"
+    },
+    "GetWorldTemplateBodyRequest": {
+      "type": "structure",
+      "members": {
+        "template": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (arn) of the world template.</p>"
+        },
+        "generationJob": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (arn) of the world generator job.</p>"
+        }
+      }
+    },
+    "GetWorldTemplateBodyResponse": {
+      "type": "structure",
+      "members": {
+        "templateBody": {
+          "shape": "Json",
+          "documentation": "<p>The world template body.</p>"
+        }
+      }
     },
     "IamRole": {
       "type": "string",
@@ -2809,8 +3788,17 @@
     "Integer": {
       "type": "integer"
     },
+    "InteriorCountPerFloorplan": {
+      "type": "integer"
+    },
     "JobDuration": {
       "type": "long"
+    },
+    "Json": {
+      "type": "string",
+      "max": 262144,
+      "min": 1,
+      "pattern": "[\\S\\s]+"
     },
     "LastStartedAt": {
       "type": "timestamp"
@@ -2857,7 +3845,7 @@
         },
         "nextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated <code>ListDeploymentJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p>"
+          "documentation": "<p>If the previous paginated request did not return all of the remaining results, the response object's <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListDeploymentJobs</code> again and assign that token to the request object's <code>nextToken</code> parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. </p>"
         },
         "maxResults": {
           "shape": "MaxResults",
@@ -2874,7 +3862,7 @@
         },
         "nextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListDeploymentJobs</code> request. When the results of a <code>ListDeploymentJobs</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. </p>"
+          "documentation": "<p>If the previous paginated request did not return all of the remaining results, the response object's <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListDeploymentJobs</code> again and assign that token to the request object's <code>nextToken</code> parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. </p>"
         }
       }
     },
@@ -2883,7 +3871,7 @@
       "members": {
         "nextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated <code>ListFleets</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>"
+          "documentation": "<p>If the previous paginated request did not return all of the remaining results, the response object's <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListFleets</code> again and assign that token to the request object's <code>nextToken</code> parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>"
         },
         "maxResults": {
           "shape": "MaxResults",
@@ -2904,7 +3892,7 @@
         },
         "nextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListDeploymentJobs</code> request. When the results of a <code>ListFleets</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. </p>"
+          "documentation": "<p>If the previous paginated request did not return all of the remaining results, the response object's <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListFleets</code> again and assign that token to the request object's <code>nextToken</code> parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. </p>"
         }
       }
     },
@@ -2917,7 +3905,7 @@
         },
         "nextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated <code>ListRobotApplications</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p>"
+          "documentation": "<p>If the previous paginated request did not return all of the remaining results, the response object's <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListRobotApplications</code> again and assign that token to the request object's <code>nextToken</code> parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. </p>"
         },
         "maxResults": {
           "shape": "MaxResults",
@@ -2938,7 +3926,7 @@
         },
         "nextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListRobotApplications</code> request. When the results of a <code>ListRobotApplications</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. </p>"
+          "documentation": "<p>If the previous paginated request did not return all of the remaining results, the response object's <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListRobotApplications</code> again and assign that token to the request object's <code>nextToken</code> parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. </p>"
         }
       }
     },
@@ -2947,7 +3935,7 @@
       "members": {
         "nextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated <code>ListRobots</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p>"
+          "documentation": "<p>If the previous paginated request did not return all of the remaining results, the response object's <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListRobots</code> again and assign that token to the request object's <code>nextToken</code> parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. </p>"
         },
         "maxResults": {
           "shape": "MaxResults",
@@ -2968,7 +3956,7 @@
         },
         "nextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListRobots</code> request. When the results of a <code>ListRobot</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. </p>"
+          "documentation": "<p>If the previous paginated request did not return all of the remaining results, the response object's <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListRobots</code> again and assign that token to the request object's <code>nextToken</code> parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. </p>"
         }
       }
     },
@@ -2981,7 +3969,7 @@
         },
         "nextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationApplications</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p>"
+          "documentation": "<p>If the previous paginated request did not return all of the remaining results, the response object's <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListSimulationApplications</code> again and assign that token to the request object's <code>nextToken</code> parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. </p>"
         },
         "maxResults": {
           "shape": "MaxResults",
@@ -3002,7 +3990,7 @@
         },
         "nextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListSimulationApplications</code> request. When the results of a <code>ListRobot</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. </p>"
+          "documentation": "<p>If the previous paginated request did not return all of the remaining results, the response object's <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListSimulationApplications</code> again and assign that token to the request object's <code>nextToken</code> parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. </p>"
         }
       }
     },
@@ -3011,7 +3999,7 @@
       "members": {
         "nextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationJobBatches</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p>"
+          "documentation": "<p>If the previous paginated request did not return all of the remaining results, the response object's <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListSimulationJobBatches</code> again and assign that token to the request object's <code>nextToken</code> parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. </p>"
         },
         "maxResults": {
           "shape": "MaxResults",
@@ -3032,7 +4020,7 @@
         },
         "nextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListSimulationJobBatches</code> request. When the results of a <code>ListSimulationJobBatches</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. </p>"
+          "documentation": "<p>If the previous paginated request did not return all of the remaining results, the response object's <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListSimulationJobBatches</code> again and assign that token to the request object's <code>nextToken</code> parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. </p>"
         }
       }
     },
@@ -3041,7 +4029,7 @@
       "members": {
         "nextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>"
+          "documentation": "<p>If the previous paginated request did not return all of the remaining results, the response object's <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListSimulationJobs</code> again and assign that token to the request object's <code>nextToken</code> parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. </p>"
         },
         "maxResults": {
           "shape": "MaxResults",
@@ -3065,7 +4053,7 @@
         },
         "nextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListSimulationJobs</code> request. When the results of a <code>ListRobot</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. </p>"
+          "documentation": "<p>If the previous paginated request did not return all of the remaining results, the response object's <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListSimulationJobs</code> again and assign that token to the request object's <code>nextToken</code> parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. </p>"
         }
       }
     },
@@ -3089,6 +4077,128 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>The list of all tags added to the specified resource.</p>"
+        }
+      }
+    },
+    "ListWorldExportJobsRequest": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>If the previous paginated request did not return all of the remaining results, the response object's <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListWorldExportJobs</code> again and assign that token to the request object's <code>nextToken</code> parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. </p>"
+        },
+        "maxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>When this parameter is used, <code>ListWorldExportJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListWorldExportJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListWorldExportJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. </p>"
+        },
+        "filters": {
+          "shape": "Filters",
+          "documentation": "<p>Optional filters to limit results. You can use <code>generationJobId</code> and <code>templateId</code>.</p>"
+        }
+      }
+    },
+    "ListWorldExportJobsResponse": {
+      "type": "structure",
+      "required": [
+        "worldExportJobSummaries"
+      ],
+      "members": {
+        "worldExportJobSummaries": {
+          "shape": "WorldExportJobSummaries",
+          "documentation": "<p>Summary information for world export jobs.</p>"
+        },
+        "nextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>If the previous paginated request did not return all of the remaining results, the response object's <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListWorldExportJobsRequest</code> again and assign that token to the request object's <code>nextToken</code> parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. </p>"
+        }
+      }
+    },
+    "ListWorldGenerationJobsRequest": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>If the previous paginated request did not return all of the remaining results, the response object's <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListWorldGenerationJobsRequest</code> again and assign that token to the request object's <code>nextToken</code> parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. </p>"
+        },
+        "maxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>When this parameter is used, <code>ListWorldGeneratorJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListWorldGeneratorJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListWorldGeneratorJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. </p>"
+        },
+        "filters": {
+          "shape": "Filters",
+          "documentation": "<p>Optional filters to limit results. You can use <code>status</code> and <code>templateId</code>.</p>"
+        }
+      }
+    },
+    "ListWorldGenerationJobsResponse": {
+      "type": "structure",
+      "required": [
+        "worldGenerationJobSummaries"
+      ],
+      "members": {
+        "worldGenerationJobSummaries": {
+          "shape": "WorldGenerationJobSummaries",
+          "documentation": "<p>Summary information for world generator jobs.</p>"
+        },
+        "nextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>If the previous paginated request did not return all of the remaining results, the response object's <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListWorldGeneratorJobsRequest</code> again and assign that token to the request object's <code>nextToken</code> parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. </p>"
+        }
+      }
+    },
+    "ListWorldTemplatesRequest": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>If the previous paginated request did not return all of the remaining results, the response object's <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListWorldTemplates</code> again and assign that token to the request object's <code>nextToken</code> parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. </p>"
+        },
+        "maxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>When this parameter is used, <code>ListWorldTemplates</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListWorldTemplates</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListWorldTemplates</code> returns up to 100 results and a <code>nextToken</code> value if applicable. </p>"
+        }
+      }
+    },
+    "ListWorldTemplatesResponse": {
+      "type": "structure",
+      "members": {
+        "templateSummaries": {
+          "shape": "TemplateSummaries",
+          "documentation": "<p>Summary information for templates.</p>"
+        },
+        "nextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>If the previous paginated request did not return all of the remaining results, the response object's <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListWorldTemplates</code> again and assign that token to the request object's <code>nextToken</code> parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. </p>"
+        }
+      }
+    },
+    "ListWorldsRequest": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>If the previous paginated request did not return all of the remaining results, the response object's <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListWorlds</code> again and assign that token to the request object's <code>nextToken</code> parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. </p>"
+        },
+        "maxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>When this parameter is used, <code>ListWorlds</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListWorlds</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListWorlds</code> returns up to 100 results and a <code>nextToken</code> value if applicable. </p>"
+        },
+        "filters": {
+          "shape": "Filters",
+          "documentation": "<p>Optional filters to limit results. You can use <code>status</code>.</p>"
+        }
+      }
+    },
+    "ListWorldsResponse": {
+      "type": "structure",
+      "members": {
+        "worldSummaries": {
+          "shape": "WorldSummaries",
+          "documentation": "<p>Summary information for worlds.</p>"
+        },
+        "nextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>If the previous paginated request did not return all of the remaining results, the response object's <code>nextToken</code> parameter value is set to a token. To retrieve the next set of results, call <code>ListWorlds</code> again and assign that token to the request object's <code>nextToken</code> parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null. </p>"
         }
       }
     },
@@ -3631,6 +4741,10 @@
         "launchConfig": {
           "shape": "LaunchConfig",
           "documentation": "<p>The launch configuration for the simulation application.</p>"
+        },
+        "worldConfigs": {
+          "shape": "WorldConfigs",
+          "documentation": "<p>A list of world configurations.</p>"
         }
       },
       "documentation": "<p>Information about a simulation application configuration.</p>"
@@ -4262,6 +5376,58 @@
       "min": 0,
       "pattern": "[a-zA-Z0-9 _.\\-\\/+=:]*"
     },
+    "TemplateLocation": {
+      "type": "structure",
+      "required": [
+        "s3Bucket",
+        "s3Key"
+      ],
+      "members": {
+        "s3Bucket": {
+          "shape": "S3Bucket",
+          "documentation": "<p>The Amazon S3 bucket name.</p>"
+        },
+        "s3Key": {
+          "shape": "S3Key",
+          "documentation": "<p>The list of S3 keys identifying the data source files.</p>"
+        }
+      },
+      "documentation": "<p>Information about a template location.</p>"
+    },
+    "TemplateName": {
+      "type": "string",
+      "max": 255,
+      "min": 0,
+      "pattern": ".*"
+    },
+    "TemplateSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "TemplateSummary"
+      }
+    },
+    "TemplateSummary": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the template.</p>"
+        },
+        "createdAt": {
+          "shape": "CreatedAt",
+          "documentation": "<p>The time, in milliseconds since the epoch, when the template was created.</p>"
+        },
+        "lastUpdatedAt": {
+          "shape": "LastUpdatedAt",
+          "documentation": "<p>The time, in milliseconds since the epoch, when the template was last updated.</p>"
+        },
+        "name": {
+          "shape": "TemplateName",
+          "documentation": "<p>The name of the template.</p>"
+        }
+      },
+      "documentation": "<p>Summary information for a template.</p>"
+    },
     "UntagResourceRequest": {
       "type": "structure",
       "required": [
@@ -4422,6 +5588,51 @@
         }
       }
     },
+    "UpdateWorldTemplateRequest": {
+      "type": "structure",
+      "required": [
+        "template"
+      ],
+      "members": {
+        "template": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (arn) of the world template to update.</p>"
+        },
+        "name": {
+          "shape": "TemplateName",
+          "documentation": "<p>The name of the template.</p>"
+        },
+        "templateBody": {
+          "shape": "Json",
+          "documentation": "<p>The world template body.</p>"
+        },
+        "templateLocation": {
+          "shape": "TemplateLocation",
+          "documentation": "<p>The location of the world template.</p>"
+        }
+      }
+    },
+    "UpdateWorldTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (arn) of the world template.</p>"
+        },
+        "name": {
+          "shape": "TemplateName",
+          "documentation": "<p>The name of the world template.</p>"
+        },
+        "createdAt": {
+          "shape": "CreatedAt",
+          "documentation": "<p>The time, in milliseconds since the epoch, when the world template was created.</p>"
+        },
+        "lastUpdatedAt": {
+          "shape": "LastUpdatedAt",
+          "documentation": "<p>The time, in milliseconds since the epoch, when the world template was last updated.</p>"
+        }
+      }
+    },
     "VPCConfig": {
       "type": "structure",
       "required": [
@@ -4476,6 +5687,209 @@
       "max": 255,
       "min": 1,
       "pattern": "ALL"
+    },
+    "WorldConfig": {
+      "type": "structure",
+      "members": {
+        "world": {
+          "shape": "Arn",
+          "documentation": "<p>The world generated by Simulation WorldForge.</p>"
+        }
+      },
+      "documentation": "<p>Configuration information for a world.</p>"
+    },
+    "WorldConfigs": {
+      "type": "list",
+      "member": {
+        "shape": "WorldConfig"
+      },
+      "max": 1,
+      "min": 0
+    },
+    "WorldCount": {
+      "type": "structure",
+      "members": {
+        "floorplanCount": {
+          "shape": "FloorplanCount",
+          "documentation": "<p>The number of unique floorplans.</p>"
+        },
+        "interiorCountPerFloorplan": {
+          "shape": "InteriorCountPerFloorplan",
+          "documentation": "<p>The number of unique interiors per floorplan.</p>"
+        }
+      },
+      "documentation": "<p>The number of worlds that will be created. You can configure the number of unique floorplans and the number of unique interiors for each floor plan. For example, if you want 1 world with 20 unique interiors, you set <code>floorplanCount = 1</code> and <code>interiorCountPerFloorplan = 20</code>. This will result in 20 worlds (<code>floorplanCount</code> * <code>interiorCountPerFloorplan)</code>. </p> <p>If you set <code>floorplanCount = 4</code> and <code>interiorCountPerFloorplan = 5</code>, there will be 20 worlds with 5 unique floor plans. </p>"
+    },
+    "WorldExportJobErrorCode": {
+      "type": "string",
+      "enum": [
+        "InternalServiceError",
+        "LimitExceeded",
+        "ResourceNotFound",
+        "RequestThrottled",
+        "InvalidInput",
+        "AccessDenied"
+      ]
+    },
+    "WorldExportJobStatus": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Running",
+        "Completed",
+        "Failed",
+        "Canceling",
+        "Canceled"
+      ]
+    },
+    "WorldExportJobSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "WorldExportJobSummary"
+      },
+      "max": 100,
+      "min": 0
+    },
+    "WorldExportJobSummary": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the world export job.</p>"
+        },
+        "status": {
+          "shape": "WorldExportJobStatus",
+          "documentation": "<p>The status of the world export job.</p> <dl> <dt>Pending</dt> <dd> <p>The world export job request is pending.</p> </dd> <dt>Running</dt> <dd> <p>The world export job is running. </p> </dd> <dt>Completed</dt> <dd> <p>The world export job completed. </p> </dd> <dt>Failed</dt> <dd> <p>The world export job failed. See <code>failureCode</code> for more information. </p> </dd> <dt>Canceled</dt> <dd> <p>The world export job was cancelled.</p> </dd> <dt>Canceling</dt> <dd> <p>The world export job is being cancelled.</p> </dd> </dl>"
+        },
+        "createdAt": {
+          "shape": "CreatedAt",
+          "documentation": "<p>The time, in milliseconds since the epoch, when the world export job was created.</p>"
+        },
+        "worlds": {
+          "shape": "Arns",
+          "documentation": "<p>A list of worlds.</p>"
+        }
+      },
+      "documentation": "<p>Information about a world export job.</p>"
+    },
+    "WorldFailure": {
+      "type": "structure",
+      "members": {
+        "failureCode": {
+          "shape": "WorldGenerationJobErrorCode",
+          "documentation": "<p>The failure code of the world export job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>LimitExceeded</dt> <dd> <p>The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed. </p> </dd> <dt>ResourceNotFound</dt> <dd> <p>The specified resource could not be found. </p> </dd> <dt>RequestThrottled</dt> <dd> <p>The request was throttled.</p> </dd> <dt>InvalidInput</dt> <dd> <p>An input parameter in the request is not valid.</p> </dd> </dl>"
+        },
+        "sampleFailureReason": {
+          "shape": "GenericString",
+          "documentation": "<p>The sample reason why the world failed. World errors are aggregated. A sample is used as the <code>sampleFailureReason</code>. </p>"
+        },
+        "failureCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of failed worlds.</p>"
+        }
+      },
+      "documentation": "<p>Information about a failed world.</p>"
+    },
+    "WorldFailures": {
+      "type": "list",
+      "member": {
+        "shape": "WorldFailure"
+      },
+      "max": 100,
+      "min": 0
+    },
+    "WorldGenerationJobErrorCode": {
+      "type": "string",
+      "enum": [
+        "InternalServiceError",
+        "LimitExceeded",
+        "ResourceNotFound",
+        "RequestThrottled",
+        "InvalidInput",
+        "AllWorldGenerationFailed"
+      ]
+    },
+    "WorldGenerationJobStatus": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Running",
+        "Completed",
+        "Failed",
+        "PartialFailed",
+        "Canceling",
+        "Canceled"
+      ]
+    },
+    "WorldGenerationJobSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "WorldGenerationJobSummary"
+      },
+      "max": 100,
+      "min": 0
+    },
+    "WorldGenerationJobSummary": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the world generator job.</p>"
+        },
+        "template": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (arn) of the world template.</p>"
+        },
+        "createdAt": {
+          "shape": "CreatedAt",
+          "documentation": "<p>The time, in milliseconds since the epoch, when the world generator job was created.</p>"
+        },
+        "status": {
+          "shape": "WorldGenerationJobStatus",
+          "documentation": "<p>The status of the world generator job:</p> <dl> <dt>Pending</dt> <dd> <p>The world generator job request is pending.</p> </dd> <dt>Running</dt> <dd> <p>The world generator job is running. </p> </dd> <dt>Completed</dt> <dd> <p>The world generator job completed. </p> </dd> <dt>Failed</dt> <dd> <p>The world generator job failed. See <code>failureCode</code> for more information. </p> </dd> <dt>PartialFailed</dt> <dd> <p>Some worlds did not generate.</p> </dd> <dt>Canceled</dt> <dd> <p>The world generator job was cancelled.</p> </dd> <dt>Canceling</dt> <dd> <p>The world generator job is being cancelled.</p> </dd> </dl>"
+        },
+        "worldCount": {
+          "shape": "WorldCount",
+          "documentation": "<p>Information about the world count.</p>"
+        },
+        "succeededWorldCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of worlds that were generated.</p>"
+        },
+        "failedWorldCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of worlds that failed.</p>"
+        }
+      },
+      "documentation": "<p>Information about a world generator job.</p>"
+    },
+    "WorldSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "WorldSummary"
+      }
+    },
+    "WorldSummary": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the world.</p>"
+        },
+        "createdAt": {
+          "shape": "CreatedAt",
+          "documentation": "<p>The time, in milliseconds since the epoch, when the world was created.</p>"
+        },
+        "generationJob": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (arn) of the world generation job.</p>"
+        },
+        "template": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (arn) of the world template.</p>"
+        }
+      },
+      "documentation": "<p>Information about a world.</p>"
     }
   },
   "documentation": "<p>This section provides documentation for the AWS RoboMaker API operations.</p>"

@@ -80,7 +80,44 @@
           "shape": "ResourceUnavailableException"
         }
       ],
-      "documentation": "<p>Creates a customization for the Amazon QuickSight subscription associated with your AWS account.</p>"
+      "documentation": "<p>Creates Amazon QuickSight customizations the current AWS Region. Currently, you can add a custom default theme by using the <code>CreateAccountCustomization</code> or <code>UpdateAccountCustomization</code> API operation. To further customize QuickSight by removing QuickSight sample assets and videos for all new users, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-quicksight.html\">Customizing QuickSight</a> in the Amazon QuickSight User Guide.</p> <p>You can create customizations for your AWS account or, if you specify a namespace, for a QuickSight namespace instead. Customizations that apply to a namespace always override customizations that apply to an AWS account. To find out which customizations apply, use the <code>DescribeAccountCustomization</code> API operation.</p> <p>Before you add a theme as the namespace default, make sure that you first share the theme with the namespace. If you don't share it with the namespace, the theme won't be visible to your users even if you use this API operation to make it the default theme. </p>"
+    },
+    "CreateAnalysis": {
+      "name": "CreateAnalysis",
+      "http": {
+        "method": "POST",
+        "requestUri": "/accounts/{AwsAccountId}/analyses/{AnalysisId}"
+      },
+      "input": {
+        "shape": "CreateAnalysisRequest"
+      },
+      "output": {
+        "shape": "CreateAnalysisResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ResourceExistsException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "UnsupportedUserEditionException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Creates an analysis in Amazon QuickSight.</p>"
     },
     "CreateDashboard": {
       "name": "CreateDashboard",
@@ -117,7 +154,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Creates a dashboard from a template. To first create a template, see the <a>CreateTemplate</a> API operation.</p> <p>A dashboard is an entity in QuickSight that identifies QuickSight reports, created from analyses. You can share QuickSight dashboards. With the right permissions, you can create scheduled email reports from them. The <code>CreateDashboard</code>, <code>DescribeDashboard</code>, and <code>ListDashboardsByUser</code> API operations act on the dashboard entity. If you have the correct permissions, you can create a dashboard from a template that exists in a different AWS account.</p>"
+      "documentation": "<p>Creates a dashboard from a template. To first create a template, see the <code> <a>CreateTemplate</a> </code> API operation.</p> <p>A dashboard is an entity in QuickSight that identifies QuickSight reports, created from analyses. You can share QuickSight dashboards. With the right permissions, you can create scheduled email reports from them. If you have the correct permissions, you can create a dashboard from a template that exists in a different AWS account.</p>"
     },
     "CreateDataSet": {
       "name": "CreateDataSet",
@@ -597,7 +634,41 @@
           "shape": "ResourceUnavailableException"
         }
       ],
-      "documentation": "<p>Deletes customizations for the QuickSight subscription on your AWS account.</p>"
+      "documentation": "<p>Deletes all Amazon QuickSight customizations in this AWS Region for the specified AWS Account and QuickSight namespace.</p>"
+    },
+    "DeleteAnalysis": {
+      "name": "DeleteAnalysis",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/accounts/{AwsAccountId}/analyses/{AnalysisId}"
+      },
+      "input": {
+        "shape": "DeleteAnalysisRequest"
+      },
+      "output": {
+        "shape": "DeleteAnalysisResponse"
+      },
+      "errors": [
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "UnsupportedUserEditionException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Deletes an analysis from Amazon QuickSight. You can optionally include a recovery window during which you can restore the analysis. If you don't specify a recovery window value, the operation defaults to 30 days. QuickSight attaches a <code>DeletionTime</code> stamp to the response that specifies the end of the recovery window. At the end of the recovery window, QuickSight deletes the analysis permanently.</p> <p>At any time before recovery window ends, you can use the <code>RestoreAnalysis</code> API operation to remove the <code>DeletionTime</code> stamp and cancel the deletion of the analysis. The analysis remains visible in the API until it's deleted, so you can describe it but you can't make a template from it.</p> <p>An analysis that's scheduled for deletion isn't accessible in the QuickSight console. To access it in the console, restore it. Deleting an analysis doesn't delete the dashboards that you publish from it.</p>"
     },
     "DeleteDashboard": {
       "name": "DeleteDashboard",
@@ -693,7 +764,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Deletes the data source permanently. This action breaks all the datasets that reference the deleted data source.</p>"
+      "documentation": "<p>Deletes the data source permanently. This operation breaks all the datasets that reference the deleted data source.</p>"
     },
     "DeleteGroup": {
       "name": "DeleteGroup",
@@ -841,7 +912,7 @@
           "shape": "ResourceUnavailableException"
         }
       ],
-      "documentation": "<p>Deletes a namespace and the users and groups that are associated with the namespace. This is an asynchronous process. Assets including dashboards, analyses, datasets and data sources are not deleted. To delete these assets, you use the APIs for the relevant asset. </p>"
+      "documentation": "<p>Deletes a namespace and the users and groups that are associated with the namespace. This is an asynchronous process. Assets including dashboards, analyses, datasets and data sources are not deleted. To delete these assets, you use the API operations for the relevant asset. </p>"
     },
     "DeleteTemplate": {
       "name": "DeleteTemplate",
@@ -1088,7 +1159,7 @@
           "shape": "ResourceUnavailableException"
         }
       ],
-      "documentation": "<p>Describes the customizations associated with your AWS account.</p>"
+      "documentation": "<p>Describes the customizations associated with the provided AWS account and Amazon QuickSight namespace in an AWS Region. The QuickSight console evaluates which customizations to apply by running this API operation with the <code>Resolved</code> flag included. </p> <p>To determine what customizations display when you run this command, it can help to visualize the relationship of the entities involved. </p> <ul> <li> <p> <code>AWS Account</code> - The AWS account exists at the top of the hierarchy. It has the potential to use all of the AWS Regions and AWS Services. When you subscribe to QuickSight, you choose one AWS Region to use as your home region. That's where your free SPICE capacity is located. You can use QuickSight in any supported AWS Region. </p> </li> <li> <p> <code>AWS Region</code> - In each AWS Region where you sign in to QuickSight at least once, QuickSight acts as a separate instance of the same service. If you have a user directory, it resides in us-east-1, which is the US East (N. Virginia). Generally speaking, these users have access to QuickSight in any AWS Region, unless they are constrained to a namespace. </p> <p>To run the command in a different AWS Region, you change your region settings. If you're using the AWS CLI, you can use one of the following options:</p> <ul> <li> <p>Use <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-options.html\">command line options</a>. </p> </li> <li> <p>Use <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html\">named profiles</a>. </p> </li> <li> <p>Run <code>aws configure</code> to change your default AWS Region. Use Enter to key the same settings for your keys. For more information, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html\">Configuring the AWS CLI</a>.</p> </li> </ul> </li> <li> <p> <code>Namespace</code> - A QuickSight namespace is a partition that contains users and assets (data sources, datasets, dashboards, and so on). To access assets that are in a specific namespace, users and groups must also be part of the same namespace. People who share a namespace are completely isolated from users and assets in other namespaces, even if they are in the same AWS account and AWS Region.</p> </li> <li> <p> <code>Applied customizations</code> - Within an AWS Region, a set of QuickSight customizations can apply to an AWS account or to a namespace. Settings that you apply to a namespace override settings that you apply to an AWS Account. All settings are isolated to a single AWS Region. To apply them in other AWS Regions, run the <code>CreateAccountCustomization</code> command in each AWS Region where you want to apply the same customizations. </p> </li> </ul>"
     },
     "DescribeAccountSettings": {
       "name": "DescribeAccountSettings",
@@ -1123,6 +1194,71 @@
         }
       ],
       "documentation": "<p>Describes the settings that were used when your QuickSight subscription was first created in this AWS Account.</p>"
+    },
+    "DescribeAnalysis": {
+      "name": "DescribeAnalysis",
+      "http": {
+        "method": "GET",
+        "requestUri": "/accounts/{AwsAccountId}/analyses/{AnalysisId}"
+      },
+      "input": {
+        "shape": "DescribeAnalysisRequest"
+      },
+      "output": {
+        "shape": "DescribeAnalysisResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "UnsupportedUserEditionException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Provides a summary of the metadata for an analysis.</p>"
+    },
+    "DescribeAnalysisPermissions": {
+      "name": "DescribeAnalysisPermissions",
+      "http": {
+        "method": "GET",
+        "requestUri": "/accounts/{AwsAccountId}/analyses/{AnalysisId}/permissions"
+      },
+      "input": {
+        "shape": "DescribeAnalysisPermissionsRequest"
+      },
+      "output": {
+        "shape": "DescribeAnalysisPermissionsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "UnsupportedUserEditionException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Provides the read and write permissions for an analysis.</p>"
     },
     "DescribeDashboard": {
       "name": "DescribeDashboard",
@@ -1743,7 +1879,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Generates a URL and authorization code that you can embed in your web server code. Before you use this command, make sure that you have configured the dashboards and permissions. </p> <p>Currently, you can use <code>GetDashboardEmbedURL</code> only from the server, not from the user's browser. The following rules apply to the combination of URL and authorization code:</p> <ul> <li> <p>They must be used together.</p> </li> <li> <p>They can be used one time only.</p> </li> <li> <p>They are valid for 5 minutes after you run this command.</p> </li> <li> <p>The resulting user session is valid for 10 hours.</p> </li> </ul> <p> For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedding-dashboards.html\">Embedding Amazon QuickSight Dashboards</a> in the <i>Amazon QuickSight User Guide</i> or <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/qs-dev-embedded-dashboards.html\">Embedding Amazon QuickSight Dashboards</a> in the <i>Amazon QuickSight API Reference</i>.</p>"
+      "documentation": "<p>Generates a session URL and authorization code that you can use to embed an Amazon QuickSight read-only dashboard in your web server code. Before you use this command, make sure that you have configured the dashboards and permissions. </p> <p>Currently, you can use <code>GetDashboardEmbedURL</code> only from the server, not from the user's browser. The following rules apply to the combination of URL and authorization code:</p> <ul> <li> <p>They must be used together.</p> </li> <li> <p>They can be used one time only.</p> </li> <li> <p>They are valid for 5 minutes after you run this command.</p> </li> <li> <p>The resulting user session is valid for 10 hours.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedding-dashboards.html\">Embedding Amazon QuickSight</a> in the <i>Amazon QuickSight User Guide</i> .</p>"
     },
     "GetSessionEmbedUrl": {
       "name": "GetSessionEmbedUrl",
@@ -1786,7 +1922,35 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Generates a session URL and authorization code that you can embed in your web server code. </p>"
+      "documentation": "<p>Generates a session URL and authorization code that you can use to embed the Amazon QuickSight console in your web server code. Use <code>GetSessionEmbedUrl</code> where you want to provide an authoring portal that allows users to create data sources, datasets, analyses, and dashboards. The users who access an embedded QuickSight console need belong to the author or admin security cohort. If you want to restrict permissions to some of these features, add a custom permissions profile to the user with the <code> <a>UpdateUser</a> </code> API operation. Use <code> <a>RegisterUser</a> </code> API operation to add a new user with a custom permission profile attached. For more information, see the following sections in the <i>Amazon QuickSight User Guide</i>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedding-the-quicksight-console.html\">Embedding the Amazon QuickSight Console</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html\">Customizing Access to the Amazon QuickSight Console</a> </p> </li> </ul>"
+    },
+    "ListAnalyses": {
+      "name": "ListAnalyses",
+      "http": {
+        "method": "GET",
+        "requestUri": "/accounts/{AwsAccountId}/analyses"
+      },
+      "input": {
+        "shape": "ListAnalysesRequest"
+      },
+      "output": {
+        "shape": "ListAnalysesResponse"
+      },
+      "errors": [
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
+        },
+        {
+          "shape": "UnsupportedUserEditionException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Lists Amazon QuickSight analyses that exist in the specified AWS account.</p>"
     },
     "ListDashboardVersions": {
       "name": "ListDashboardVersions",
@@ -2501,6 +2665,74 @@
       ],
       "documentation": "<p>Creates an Amazon QuickSight user, whose identity is associated with the AWS Identity and Access Management (IAM) identity or role specified in the request. </p>"
     },
+    "RestoreAnalysis": {
+      "name": "RestoreAnalysis",
+      "http": {
+        "method": "POST",
+        "requestUri": "/accounts/{AwsAccountId}/restore/analyses/{AnalysisId}"
+      },
+      "input": {
+        "shape": "RestoreAnalysisRequest"
+      },
+      "output": {
+        "shape": "RestoreAnalysisResponse"
+      },
+      "errors": [
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "UnsupportedUserEditionException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Restores an analysis.</p>"
+    },
+    "SearchAnalyses": {
+      "name": "SearchAnalyses",
+      "http": {
+        "method": "POST",
+        "requestUri": "/accounts/{AwsAccountId}/search/analyses"
+      },
+      "input": {
+        "shape": "SearchAnalysesRequest"
+      },
+      "output": {
+        "shape": "SearchAnalysesResponse"
+      },
+      "errors": [
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "UnsupportedUserEditionException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Searches for analyses that belong to the user specified in the filter.</p>"
+    },
     "SearchDashboards": {
       "name": "SearchDashboards",
       "http": {
@@ -2533,7 +2765,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Searchs for dashboards that belong to a user. </p>"
+      "documentation": "<p>Searches for dashboards that belong to a user. </p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -2632,7 +2864,7 @@
           "shape": "ResourceUnavailableException"
         }
       ],
-      "documentation": "<p>Updates customizations associated with the QuickSight subscription on your AWS account.</p>"
+      "documentation": "<p>Updates Amazon QuickSight customizations the current AWS Region. Currently, the only customization you can use is a theme.</p> <p>You can use customizations for your AWS account or, if you specify a namespace, for a QuickSight namespace instead. Customizations that apply to a namespace override customizations that apply to an AWS account. To find out which customizations apply, use the <code>DescribeAccountCustomization</code> API operation. </p>"
     },
     "UpdateAccountSettings": {
       "name": "UpdateAccountSettings",
@@ -2666,7 +2898,78 @@
           "shape": "ResourceUnavailableException"
         }
       ],
-      "documentation": "<p>Updates the settings for the Amazon QuickSight subscription in your AWS Account.</p>"
+      "documentation": "<p>Updates the Amazon QuickSight settings in your AWS Account.</p>"
+    },
+    "UpdateAnalysis": {
+      "name": "UpdateAnalysis",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/accounts/{AwsAccountId}/analyses/{AnalysisId}"
+      },
+      "input": {
+        "shape": "UpdateAnalysisRequest"
+      },
+      "output": {
+        "shape": "UpdateAnalysisResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ResourceExistsException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "UnsupportedUserEditionException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Updates an analysis in Amazon QuickSight</p>"
+    },
+    "UpdateAnalysisPermissions": {
+      "name": "UpdateAnalysisPermissions",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/accounts/{AwsAccountId}/analyses/{AnalysisId}/permissions"
+      },
+      "input": {
+        "shape": "UpdateAnalysisPermissionsRequest"
+      },
+      "output": {
+        "shape": "UpdateAnalysisPermissionsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "UnsupportedUserEditionException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Updates the read and write permissions for an analysis.</p>"
     },
     "UpdateDashboard": {
       "name": "UpdateDashboard",
@@ -3255,22 +3558,22 @@
           "documentation": "<p>The default theme for this QuickSight subscription.</p>"
         }
       },
-      "documentation": "<p>The customizations associated with your AWS account for QuickSight.</p>"
+      "documentation": "<p>The Amazon QuickSight customizations associated with your AWS account or a QuickSight namespace in a specific AWS Region.</p>"
     },
     "AccountSettings": {
       "type": "structure",
       "members": {
         "AccountName": {
           "shape": "String",
-          "documentation": "<p>The name associated with the QuickSight subscription in your AWS account.</p>"
+          "documentation": "<p>The \"account name\" you provided for the QuickSight subscription in your AWS account. You create this name when you sign up for QuickSight. It is unique in all of AWS and it appears only in the console when users sign in.</p>"
         },
         "Edition": {
           "shape": "Edition",
-          "documentation": "<p>The edition of QuickSight that you're currently subscribed to.</p>"
+          "documentation": "<p>The edition of QuickSight that you're currently subscribed to: Enterprise edition or Standard edition.</p>"
         },
         "DefaultNamespace": {
           "shape": "Namespace",
-          "documentation": "<p>The default QuickSight namespace for your AWS account.</p>"
+          "documentation": "<p>The default QuickSight namespace for your AWS account. </p>"
         },
         "NotificationEmail": {
           "shape": "String",
@@ -3335,6 +3638,186 @@
         }
       },
       "documentation": "<p>Amazon Elasticsearch Service parameters.</p>"
+    },
+    "Analysis": {
+      "type": "structure",
+      "members": {
+        "AnalysisId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The ID of the analysis.</p>"
+        },
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the analysis.</p>"
+        },
+        "Name": {
+          "shape": "AnalysisName",
+          "documentation": "<p>The descriptive name of the analysis.</p>"
+        },
+        "Status": {
+          "shape": "ResourceStatus",
+          "documentation": "<p>Status associated with the analysis.</p>"
+        },
+        "Errors": {
+          "shape": "AnalysisErrorList",
+          "documentation": "<p>Errors associated with the analysis.</p>"
+        },
+        "DataSetArns": {
+          "shape": "DataSetArnsList",
+          "documentation": "<p>The ARNs of the datasets of the analysis.</p>"
+        },
+        "ThemeArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the theme of the analysis.</p>"
+        },
+        "CreatedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time that the analysis was created.</p>"
+        },
+        "LastUpdatedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time that the analysis was last updated.</p>"
+        }
+      },
+      "documentation": "<p>Metadata structure for an analysis in Amazon QuickSight</p>"
+    },
+    "AnalysisError": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "shape": "AnalysisErrorType",
+          "documentation": "<p>The type of the analysis error.</p>"
+        },
+        "Message": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The message associated with the analysis error.</p>"
+        }
+      },
+      "documentation": "<p>A metadata error structure for an analysis.</p>"
+    },
+    "AnalysisErrorList": {
+      "type": "list",
+      "member": {
+        "shape": "AnalysisError"
+      },
+      "min": 1
+    },
+    "AnalysisErrorType": {
+      "type": "string",
+      "enum": [
+        "ACCESS_DENIED",
+        "SOURCE_NOT_FOUND",
+        "DATA_SET_NOT_FOUND",
+        "INTERNAL_FAILURE",
+        "PARAMETER_VALUE_INCOMPATIBLE",
+        "PARAMETER_TYPE_INVALID",
+        "PARAMETER_NOT_FOUND",
+        "COLUMN_TYPE_MISMATCH",
+        "COLUMN_GEOGRAPHIC_ROLE_MISMATCH",
+        "COLUMN_REPLACEMENT_MISSING"
+      ]
+    },
+    "AnalysisFilterAttribute": {
+      "type": "string",
+      "enum": [
+        "QUICKSIGHT_USER"
+      ]
+    },
+    "AnalysisName": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": "[\\u0020-\\u00FF]+"
+    },
+    "AnalysisSearchFilter": {
+      "type": "structure",
+      "members": {
+        "Operator": {
+          "shape": "FilterOperator",
+          "documentation": "<p>The comparison operator that you want to use as a filter, for example <code>\"Operator\": \"StringEquals\"</code>.</p>"
+        },
+        "Name": {
+          "shape": "AnalysisFilterAttribute",
+          "documentation": "<p>The name of the value that you want to use as a filter, for example <code>\"Name\": \"QUICKSIGHT_USER\"</code>.</p>"
+        },
+        "Value": {
+          "shape": "String",
+          "documentation": "<p>The value of the named item, in this case <code>QUICKSIGHT_USER</code>, that you want to use as a filter, for example <code>\"Value\"</code>. An example is <code>\"arn:aws:quicksight:us-east-1:1:user/default/UserName1\"</code>.</p>"
+        }
+      },
+      "documentation": "<p>A filter that you apply when searching for one or more analyses.</p>"
+    },
+    "AnalysisSearchFilterList": {
+      "type": "list",
+      "member": {
+        "shape": "AnalysisSearchFilter"
+      },
+      "max": 1
+    },
+    "AnalysisSourceEntity": {
+      "type": "structure",
+      "members": {
+        "SourceTemplate": {
+          "shape": "AnalysisSourceTemplate",
+          "documentation": "<p>The source template for the source entity of the analysis.</p>"
+        }
+      },
+      "documentation": "<p>The source entity of an analysis.</p>"
+    },
+    "AnalysisSourceTemplate": {
+      "type": "structure",
+      "required": [
+        "DataSetReferences",
+        "Arn"
+      ],
+      "members": {
+        "DataSetReferences": {
+          "shape": "DataSetReferenceList",
+          "documentation": "<p>The dataset references of the source template of an analysis.</p>"
+        },
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the source template of an analysis.</p>"
+        }
+      },
+      "documentation": "<p>The source template of an analysis.</p>"
+    },
+    "AnalysisSummary": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the analysis.</p>"
+        },
+        "AnalysisId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The ID of the analysis. This ID displays in the URL.</p>"
+        },
+        "Name": {
+          "shape": "AnalysisName",
+          "documentation": "<p>The name of the analysis. This name is displayed in the QuickSight console. </p>"
+        },
+        "Status": {
+          "shape": "ResourceStatus",
+          "documentation": "<p>The last known status for the analysis.</p>"
+        },
+        "CreatedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time that the analysis was created.</p>"
+        },
+        "LastUpdatedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time that the analysis was last updated.</p>"
+        }
+      },
+      "documentation": "<p>The summary metadata that describes an analysis.</p>"
+    },
+    "AnalysisSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "AnalysisSummary"
+      },
+      "max": 100
     },
     "Arn": {
       "type": "string"
@@ -3709,13 +4192,13 @@
         },
         "Namespace": {
           "shape": "Namespace",
-          "documentation": "<p>The namespace associated with the customization that you're creating.</p>",
+          "documentation": "<p>The QuickSight namespace that you want to add customizations to.</p>",
           "location": "querystring",
           "locationName": "namespace"
         },
         "AccountCustomization": {
           "shape": "AccountCustomization",
-          "documentation": "<p>The customizations you're adding to the QuickSight subscription for the AWS account. For example, you could add a default theme by setting <code>AccountCustomization</code> to the midnight theme (<code>DefaultTheme=\"arn:aws:quicksight::aws:theme/MIDNIGHT\"</code>) or to a custom theme (<code>DefaultTheme=\"arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639\"</code>).</p>"
+          "documentation": "<p>The QuickSight customizations you're adding in the current AWS Region. You can add these to an AWS account and a QuickSight namespace. </p> <p>For example, you could add a default theme by setting <code>AccountCustomization</code> to the midnight theme: <code>\"AccountCustomization\": { \"DefaultTheme\": \"arn:aws:quicksight::aws:theme/MIDNIGHT\" }. </code>. Or, you could add a custom theme by specifying <code>\"AccountCustomization\": { \"DefaultTheme\": \"arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639\" }</code>. </p>"
         }
       }
     },
@@ -3732,7 +4215,7 @@
         },
         "AccountCustomization": {
           "shape": "AccountCustomization",
-          "documentation": "<p>The customizations you're adding to the QuickSight subscription for the AWS account.</p>"
+          "documentation": "<p>The QuickSight customizations you're adding in the current AWS Region. </p>"
         },
         "RequestId": {
           "shape": "String",
@@ -3742,6 +4225,79 @@
           "shape": "StatusCode",
           "documentation": "<p>The HTTP status of the request.</p>",
           "location": "statusCode"
+        }
+      }
+    },
+    "CreateAnalysisRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "AnalysisId",
+        "Name",
+        "SourceEntity"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The ID of the AWS account where you are creating an analysis.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "AnalysisId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The ID for the analysis that you're creating. This ID displays in the URL of the analysis.</p>",
+          "location": "uri",
+          "locationName": "AnalysisId"
+        },
+        "Name": {
+          "shape": "AnalysisName",
+          "documentation": "<p>A descriptive name for the analysis that you're creating. This name displays for the analysis in the QuickSight console. </p>"
+        },
+        "Parameters": {
+          "shape": "Parameters",
+          "documentation": "<p>The parameter names and override values that you want to use. An analysis can have any parameter type, and some parameters might accept multiple values. </p>"
+        },
+        "Permissions": {
+          "shape": "ResourcePermissionList",
+          "documentation": "<p>A structure that describes the principals and the resource-level permissions on an analysis. You can use the <code>Permissions</code> structure to grant permissions by providing a list of AWS Identity and Access Management (IAM) action information for each principal listed by Amazon Resource Name (ARN). </p> <p>To specify no permissions, omit <code>Permissions</code>.</p>"
+        },
+        "SourceEntity": {
+          "shape": "AnalysisSourceEntity",
+          "documentation": "<p>A source entity to use for the analysis that you're creating. This metadata structure contains details that describe a source template and one or more datasets.</p>"
+        },
+        "ThemeArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN for the theme to apply to the analysis that you're creating. To see the theme in the QuickSight console, make sure that you have access to it.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the analysis.</p>"
+        }
+      }
+    },
+    "CreateAnalysisResponse": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN for the analysis.</p>"
+        },
+        "AnalysisId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The ID of the analysis.</p>"
+        },
+        "CreationStatus": {
+          "shape": "ResourceStatus",
+          "documentation": "<p>The status of the creation of the analysis. </p>"
+        },
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The HTTP status of the request.</p>",
+          "location": "statusCode"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The AWS request ID for this operation.</p>"
         }
       }
     },
@@ -3789,7 +4345,7 @@
         },
         "Permissions": {
           "shape": "ResourcePermissionList",
-          "documentation": "<p>A structure that contains the permissions of the dashboard. You can use this structure for granting permissions with principal and action information.</p>"
+          "documentation": "<p>A structure that contains the permissions of the dashboard. You can use this structure for granting permissions by providing a list of IAM action information for each principal ARN. </p> <p>To specify no permissions, omit the permissions list.</p>"
         },
         "SourceEntity": {
           "shape": "DashboardSourceEntity",
@@ -3805,7 +4361,7 @@
         },
         "DashboardPublishOptions": {
           "shape": "DashboardPublishOptions",
-          "documentation": "<p>Options for publishing the dashboard when you create it:</p> <ul> <li> <p> <code>AvailabilityStatus</code> for <code>AdHocFilteringOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. When this is set to <code>DISABLED</code>, QuickSight disables the left filter pane on the published dashboard, which can be used for ad hoc (one-time) filtering. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>AvailabilityStatus</code> for <code>ExportToCSVOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual option to export data to .csv format isn't enabled when this is set to <code>DISABLED</code>. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>VisibilityState</code> for <code>SheetControlsOption</code> - This visibility state can be either <code>COLLAPSED</code> or <code>EXPANDED</code>. This option is <code>COLLAPSED</code> by default. </p> </li> </ul>"
+          "documentation": "<p>Options for publishing the dashboard when you create it:</p> <ul> <li> <p> <code>AvailabilityStatus</code> for <code>AdHocFilteringOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. When this is set to <code>DISABLED</code>, QuickSight disables the left filter pane on the published dashboard, which can be used for ad hoc (one-time) filtering. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>AvailabilityStatus</code> for <code>ExportToCSVOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual option to export data to .CSV format isn't enabled when this is set to <code>DISABLED</code>. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>VisibilityState</code> for <code>SheetControlsOption</code> - This visibility state can be either <code>COLLAPSED</code> or <code>EXPANDED</code>. This option is <code>COLLAPSED</code> by default. </p> </li> </ul>"
         },
         "ThemeArn": {
           "shape": "Arn",
@@ -4281,7 +4837,7 @@
         },
         "CreationStatus": {
           "shape": "NamespaceStatus",
-          "documentation": "<p>The status of the creation of the namespace. This is an asynchronous process. A status of <code>CREATED</code> means that your namespace is ready to use. If an error occurs, it indicates if the process is <code>retryable</code> or <code>non-retryable</code>. In the case of a non-retryable error, refer to the error message for follow-up actions.</p>"
+          "documentation": "<p>The status of the creation of the namespace. This is an asynchronous process. A status of <code>CREATED</code> means that your namespace is ready to use. If an error occurs, it indicates if the process is <code>retryable</code> or <code>non-retryable</code>. In the case of a non-retryable error, refer to the error message for follow-up tasks.</p>"
         },
         "IdentityStore": {
           "shape": "IdentityStore",
@@ -4567,7 +5123,7 @@
         },
         "AlternateDataSourceParameters": {
           "shape": "DataSourceParametersList",
-          "documentation": "<p>A set of alternate data source parameters that you want to share for these credentials. The credentials are applied in tandem with the data source parameters when you copy a data source by using a create or update request. The API compares the <code>DataSourceParameters</code> structure that's in the request with the structures in the <code>AlternateDataSourceParameters</code> allowlist. If the structures are an exact match, the request is allowed to use the new data source with the existing credentials. If the <code>AlternateDataSourceParameters</code> list is null, the <code>DataSourceParameters</code> originally used with these <code>Credentials</code> is automatically allowed.</p>"
+          "documentation": "<p>A set of alternate data source parameters that you want to share for these credentials. The credentials are applied in tandem with the data source parameters when you copy a data source by using a create or update request. The API operation compares the <code>DataSourceParameters</code> structure that's in the request with the structures in the <code>AlternateDataSourceParameters</code> allowlist. If the structures are an exact match, the request is allowed to use the new data source with the existing credentials. If the <code>AlternateDataSourceParameters</code> list is null, the <code>DataSourceParameters</code> originally used with these <code>Credentials</code> is automatically allowed.</p>"
         }
       },
       "documentation": "<p>The combination of user name and password that are used as credentials.</p>"
@@ -4824,11 +5380,11 @@
         },
         "Errors": {
           "shape": "DashboardErrorList",
-          "documentation": "<p>Errors.</p>"
+          "documentation": "<p>Errors associated with this dashboard version.</p>"
         },
         "VersionNumber": {
           "shape": "VersionNumber",
-          "documentation": "<p>Version number.</p>"
+          "documentation": "<p>Version number for this version of the dashboard.</p>"
         },
         "Status": {
           "shape": "ResourceStatus",
@@ -4844,11 +5400,15 @@
         },
         "DataSetArns": {
           "shape": "DataSetArnsList",
-          "documentation": "<p>The Amazon Resource Numbers (ARNs) for the datasets that are associated with a version of the dashboard.</p>"
+          "documentation": "<p>The Amazon Resource Numbers (ARNs) for the datasets that are associated with this version of the dashboard.</p>"
         },
         "Description": {
           "shape": "VersionDescription",
           "documentation": "<p>Description.</p>"
+        },
+        "ThemeArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the theme associated with a version of the dashboard.</p>"
         }
       },
       "documentation": "<p>Dashboard version.</p>"
@@ -5118,7 +5678,7 @@
         },
         "AlternateDataSourceParameters": {
           "shape": "DataSourceParametersList",
-          "documentation": "<p>A set of alternate data source parameters that you want to share for the credentials stored with this data source. The credentials are applied in tandem with the data source parameters when you copy a data source by using a create or update request. The API compares the <code>DataSourceParameters</code> structure that's in the request with the structures in the <code>AlternateDataSourceParameters</code> allowlist. If the structures are an exact match, the request is allowed to use the credentials from this existing data source. If the <code>AlternateDataSourceParameters</code> list is null, the <code>Credentials</code> originally used with this <code>DataSourceParameters</code> are automatically allowed.</p>"
+          "documentation": "<p>A set of alternate data source parameters that you want to share for the credentials stored with this data source. The credentials are applied in tandem with the data source parameters when you copy a data source by using a create or update request. The API operation compares the <code>DataSourceParameters</code> structure that's in the request with the structures in the <code>AlternateDataSourceParameters</code> allowlist. If the structures are an exact match, the request is allowed to use the credentials from this existing data source. If the <code>AlternateDataSourceParameters</code> list is null, the <code>Credentials</code> originally used with this <code>DataSourceParameters</code> are automatically allowed.</p>"
         },
         "VpcConnectionProperties": {
           "shape": "VpcConnectionProperties",
@@ -5313,14 +5873,14 @@
       "members": {
         "Name": {
           "shape": "NonEmptyString",
-          "documentation": "<p>A display name for the dataset.</p>"
+          "documentation": "<p>A display name for the date-time parameter.</p>"
         },
         "Values": {
           "shape": "TimestampList",
-          "documentation": "<p>Values.</p>"
+          "documentation": "<p>The values for the date-time parameter.</p>"
         }
       },
-      "documentation": "<p>Date time parameter.</p>"
+      "documentation": "<p>A date-time parameter.</p>"
     },
     "DateTimeParameterList": {
       "type": "list",
@@ -5338,14 +5898,14 @@
       "members": {
         "Name": {
           "shape": "NonEmptyString",
-          "documentation": "<p>A display name for the dataset.</p>"
+          "documentation": "<p>A display name for the decimal parameter.</p>"
         },
         "Values": {
           "shape": "DoubleList",
-          "documentation": "<p>Values.</p>"
+          "documentation": "<p>The values for the decimal parameter.</p>"
         }
       },
-      "documentation": "<p>Decimal parameter.</p>"
+      "documentation": "<p>A decimal parameter.</p>"
     },
     "DecimalParameterList": {
       "type": "list",
@@ -5362,13 +5922,13 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>The ID for the AWS account that you want to delete QuickSight customizations from.</p>",
+          "documentation": "<p>The ID for the AWS account that you want to delete QuickSight customizations from in this AWS Region.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
         "Namespace": {
           "shape": "Namespace",
-          "documentation": "<p>The namespace associated with the customization that you're deleting.</p>",
+          "documentation": "<p>The QuickSight namespace that you're deleting the customizations from.</p>",
           "location": "querystring",
           "locationName": "namespace"
         }
@@ -5385,6 +5945,65 @@
           "shape": "StatusCode",
           "documentation": "<p>The HTTP status of the request.</p>",
           "location": "statusCode"
+        }
+      }
+    },
+    "DeleteAnalysisRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "AnalysisId"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The ID of the AWS account where you want to delete an analysis.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "AnalysisId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The ID of the analysis that you're deleting.</p>",
+          "location": "uri",
+          "locationName": "AnalysisId"
+        },
+        "RecoveryWindowInDays": {
+          "shape": "RecoveryWindowInDays",
+          "documentation": "<p>A value that specifies the number of days that QuickSight waits before it deletes the analysis. You can't use this parameter with the <code>ForceDeleteWithoutRecovery</code> option in the same API call. The default value is 30.</p>",
+          "location": "querystring",
+          "locationName": "recovery-window-in-days"
+        },
+        "ForceDeleteWithoutRecovery": {
+          "shape": "boolean",
+          "documentation": "<p>This option defaults to the value <code>NoForceDeleteWithoutRecovery</code>. To immediately delete the analysis, add the <code>ForceDeleteWithoutRecovery</code> option. You can't restore an analysis after it's deleted. </p>",
+          "location": "querystring",
+          "locationName": "force-delete-without-recovery"
+        }
+      }
+    },
+    "DeleteAnalysisResponse": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The HTTP status of the request.</p>",
+          "location": "statusCode"
+        },
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the deleted analysis.</p>"
+        },
+        "AnalysisId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The ID of the deleted analysis.</p>"
+        },
+        "DeletionTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the analysis is scheduled to be deleted.</p>"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The AWS request ID for this operation.</p>"
         }
       }
     },
@@ -6005,13 +6624,13 @@
         },
         "Namespace": {
           "shape": "Namespace",
-          "documentation": "<p>The namespace associated with the customization that you're describing.</p>",
+          "documentation": "<p>The QuickSight namespace that you want to describe QuickSight customizations for.</p>",
           "location": "querystring",
           "locationName": "namespace"
         },
         "Resolved": {
           "shape": "boolean",
-          "documentation": "<p>The status of the creation of the customization. This is an asynchronous process. A status of <code>CREATED</code> means that your customization is ready to use.</p>",
+          "documentation": "<p>The <code>Resolved</code> flag works with the other parameters to determine which view of QuickSight customizations is returned. You can add this flag to your command to use the same view that QuickSight uses to identify which customizations to apply to the console. Omit this flag, or set it to <code>no-resolved</code>, to reveal customizations that are configured at different levels. </p>",
           "location": "querystring",
           "locationName": "resolved"
         }
@@ -6022,15 +6641,15 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>The ID for the AWS account that you want to describe QuickSight customizations for.</p>"
+          "documentation": "<p>The ID for the AWS account that you're describing.</p>"
         },
         "Namespace": {
           "shape": "Namespace",
-          "documentation": "<p>The namespace associated with the customization that you're describing.</p>"
+          "documentation": "<p>The QuickSight namespace that you're describing. </p>"
         },
         "AccountCustomization": {
           "shape": "AccountCustomization",
-          "documentation": "<p>The customizations associated with QuickSight.</p>"
+          "documentation": "<p>The QuickSight customizations that exist in the current AWS Region. </p>"
         },
         "RequestId": {
           "shape": "String",
@@ -6051,7 +6670,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>The ID for the AWS account that contains the QuickSight namespaces that you want to list.</p>",
+          "documentation": "<p>The ID for the AWS account that contains the settings that you want to list.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         }
@@ -6062,7 +6681,7 @@
       "members": {
         "AccountSettings": {
           "shape": "AccountSettings",
-          "documentation": "<p>The settings associated with the QuickSight subscription associated with this AWS account. This information includes the edition of Amazon QuickSight that you subscribed to (Standard or Enterprise) and the notification email for the QuickSight subscription. The QuickSight console, the QuickSight subscription is sometimes referred to as a QuickSight \"account\" even though it is technically not an account, but a subscription in your AWS account.</p>"
+          "documentation": "<p>The QuickSight settings for this AWS account. This information includes the edition of Amazon QuickSight that you subscribed to (Standard or Enterprise) and the notification email for the QuickSight subscription. The QuickSight console, the QuickSight subscription is sometimes referred to as a QuickSight \"account\" even though it's technically not an account by itself. Instead, it's a subscription to the QuickSight service for your AWS account. The edition that you subscribe to applies to QuickSight in every AWS Region where you use it. </p>"
         },
         "RequestId": {
           "shape": "String",
@@ -6072,6 +6691,92 @@
           "shape": "StatusCode",
           "documentation": "<p>The HTTP status of the request.</p>",
           "location": "statusCode"
+        }
+      }
+    },
+    "DescribeAnalysisPermissionsRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "AnalysisId"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The ID of the AWS account that contains the analysis whose permissions you're describing. You must be using the AWS account that the analysis is in.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "AnalysisId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The ID of the analysis whose permissions you're describing. The ID is part of the analysis URL.</p>",
+          "location": "uri",
+          "locationName": "AnalysisId"
+        }
+      }
+    },
+    "DescribeAnalysisPermissionsResponse": {
+      "type": "structure",
+      "members": {
+        "AnalysisId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The ID of the analysis whose permissions you're describing.</p>"
+        },
+        "AnalysisArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the analysis whose permissions you're describing.</p>"
+        },
+        "Permissions": {
+          "shape": "ResourcePermissionList",
+          "documentation": "<p>A structure that describes the principals and the resource-level permissions on an analysis.</p>"
+        },
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The HTTP status of the request.</p>",
+          "location": "statusCode"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The AWS request ID for this operation.</p>"
+        }
+      }
+    },
+    "DescribeAnalysisRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "AnalysisId"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The ID of the AWS account that contains the analysis. You must be using the AWS account that the analysis is in.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "AnalysisId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The ID of the analysis that you're describing. The ID is part of the URL of the analysis.</p>",
+          "location": "uri",
+          "locationName": "AnalysisId"
+        }
+      }
+    },
+    "DescribeAnalysisResponse": {
+      "type": "structure",
+      "members": {
+        "Analysis": {
+          "shape": "Analysis",
+          "documentation": "<p>A metadata structure that contains summary information for the analysis that you're describing.</p>"
+        },
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The HTTP status of the request.</p>",
+          "location": "statusCode"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The AWS request ID for this operation.</p>"
         }
       }
     },
@@ -6509,7 +7214,7 @@
       "members": {
         "Namespace": {
           "shape": "NamespaceInfoV2",
-          "documentation": "<p>The information about the namespace that you're describing. The response includes the namespace ARN, name, AWS Region, creation status, and identity store. <code>DescribeNamespace</code> also works for namespaces that are in the process of being created. For incomplete namespaces, this API lists the namespace error types and messages associated with the creation process.</p>"
+          "documentation": "<p>The information about the namespace that you're describing. The response includes the namespace ARN, name, AWS Region, creation status, and identity store. <code>DescribeNamespace</code> also works for namespaces that are in the process of being created. For incomplete namespaces, this API operation lists the namespace error types and messages associated with the creation process.</p>"
         },
         "RequestId": {
           "shape": "String",
@@ -7032,7 +7737,7 @@
         },
         "UserArn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon QuickSight user's Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type. You can use this for any Amazon QuickSight users in your account (readers, authors, or admins) authenticated as one of the following:</p> <ul> <li> <p>Active Directory (AD) users or group members</p> </li> <li> <p>Invited nonfederated users</p> </li> <li> <p>IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation.</p> </li> </ul>",
+          "documentation": "<p>The Amazon QuickSight user's Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type. You can use this for any Amazon QuickSight users in your account (readers, authors, or admins) authenticated as one of the following:</p> <ul> <li> <p>Active Directory (AD) users or group members</p> </li> <li> <p>Invited nonfederated users</p> </li> <li> <p>IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation.</p> </li> </ul> <p>Omit this parameter for users in the third group – IAM users and IAM role-based sessions.</p>",
           "location": "querystring",
           "locationName": "user-arn"
         }
@@ -7043,7 +7748,7 @@
       "members": {
         "EmbedUrl": {
           "shape": "EmbeddingUrl",
-          "documentation": "<p>A single-use URL that you can put into your server-side webpage to embed your dashboard. This URL is valid for 5 minutes. The API provides the URL with an <code>auth_code</code> value that enables one (and only one) sign-on to a user session that is valid for 10 hours. </p>"
+          "documentation": "<p>A single-use URL that you can put into your server-side webpage to embed your dashboard. This URL is valid for 5 minutes. The API operation provides the URL with an <code>auth_code</code> value that enables one (and only one) sign-on to a user session that is valid for 10 hours. </p>"
         },
         "Status": {
           "shape": "StatusCode",
@@ -7064,13 +7769,13 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>The ID for the AWS account that contains the QuickSight session that you're embedding.</p>",
+          "documentation": "<p>The ID for the AWS account associated with your QuickSight subscription.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
         "EntryPoint": {
           "shape": "EntryPoint",
-          "documentation": "<p>The entry point for the embedded session.</p>",
+          "documentation": "<p>The URL you use to access the embedded session. The entry point URL is constrained to the following paths:</p> <ul> <li> <p> <code>/start</code> </p> </li> <li> <p> <code>/start/analyses</code> </p> </li> <li> <p> <code>/start/dashboards</code> </p> </li> <li> <p> <code>/start/favorites</code> </p> </li> <li> <p> <code>/dashboards/<i>DashboardId</i> </code> - where <code>DashboardId</code> is the actual ID key from the QuickSight console URL of the dashboard</p> </li> <li> <p> <code>/analyses/<i>AnalysisId</i> </code> - where <code>AnalysisId</code> is the actual ID key from the QuickSight console URL of the analysis</p> </li> </ul>",
           "location": "querystring",
           "locationName": "entry-point"
         },
@@ -7082,7 +7787,7 @@
         },
         "UserArn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon QuickSight user's Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type. You can use this for any Amazon QuickSight users in your account (readers, authors, or admins) authenticated as one of the following:</p> <ul> <li> <p>Active Directory (AD) users or group members</p> </li> <li> <p>Invited nonfederated users</p> </li> <li> <p>IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation.</p> </li> </ul>",
+          "documentation": "<p>The Amazon QuickSight user's Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type. You can use this for any type of Amazon QuickSight users in your account (readers, authors, or admins). They need to be authenticated as one of the following:</p> <ol> <li> <p>Active Directory (AD) users or group members</p> </li> <li> <p>Invited nonfederated users</p> </li> <li> <p>IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation</p> </li> </ol> <p>Omit this parameter for users in the third group – IAM users and IAM role-based sessions.</p>",
           "location": "querystring",
           "locationName": "user-arn"
         }
@@ -7093,7 +7798,7 @@
       "members": {
         "EmbedUrl": {
           "shape": "EmbeddingUrl",
-          "documentation": "<p>A single-use URL that you can put into your server-side web page to embed your QuickSight session. This URL is valid for 5 minutes. The API provides the URL with an <code>auth_code</code> value that enables one (and only one) sign-on to a user session that is valid for 10 hours. </p>"
+          "documentation": "<p>A single-use URL that you can put into your server-side web page to embed your QuickSight session. This URL is valid for 5 minutes. The API operation provides the URL with an <code>auth_code</code> value that enables one (and only one) sign-on to a user session that is valid for 10 hours. </p>"
         },
         "Status": {
           "shape": "StatusCode",
@@ -7126,7 +7831,7 @@
           "documentation": "<p>The principal ID of the group.</p>"
         }
       },
-      "documentation": "<p>A <i>group</i> in Amazon QuickSight consists of a set of users. You can use groups to make it easier to manage access and security. Currently, an Amazon QuickSight subscription can't contain more than 500 Amazon QuickSight groups.</p>"
+      "documentation": "<p>A <i>group</i> in Amazon QuickSight consists of a set of users. You can use groups to make it easier to manage access and security. </p>"
     },
     "GroupDescription": {
       "type": "string",
@@ -7474,14 +8179,14 @@
       "members": {
         "Name": {
           "shape": "NonEmptyString",
-          "documentation": "<p>A display name for the dataset.</p>"
+          "documentation": "<p>The name of the integer parameter.</p>"
         },
         "Values": {
           "shape": "LongList",
-          "documentation": "<p>Values.</p>"
+          "documentation": "<p>The values for the integer parameter.</p>"
         }
       },
-      "documentation": "<p>Integer parameter.</p>"
+      "documentation": "<p>An integer parameter.</p>"
     },
     "IntegerParameterList": {
       "type": "list",
@@ -7539,6 +8244,55 @@
         "LEFT",
         "RIGHT"
       ]
+    },
+    "ListAnalysesRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The ID of the AWS account that contains the analyses.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>A pagination token that can be used in a subsequent request.</p>",
+          "location": "querystring",
+          "locationName": "next-token"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to return.</p>",
+          "box": true,
+          "location": "querystring",
+          "locationName": "max-results"
+        }
+      }
+    },
+    "ListAnalysesResponse": {
+      "type": "structure",
+      "members": {
+        "AnalysisSummaryList": {
+          "shape": "AnalysisSummaryList",
+          "documentation": "<p>Metadata describing each of the analyses that are listed.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>A pagination token that can be used in a subsequent request.</p>"
+        },
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The HTTP status of the request.</p>",
+          "location": "statusCode"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The AWS request ID for this operation.</p>"
+        }
+      }
     },
     "ListDashboardVersionsRequest": {
       "type": "structure",
@@ -8767,7 +9521,7 @@
         },
         "NamespaceError": {
           "shape": "NamespaceError",
-          "documentation": "<p>An error that occured when the namespace was created.</p>"
+          "documentation": "<p>An error that occurred when the namespace was created.</p>"
         }
       },
       "documentation": "<p>The error type.</p>"
@@ -8839,10 +9593,10 @@
         },
         "DateTimeParameters": {
           "shape": "DateTimeParameterList",
-          "documentation": "<p>DateTime parameters.</p>"
+          "documentation": "<p>Date-time parameters.</p>"
         }
       },
-      "documentation": "<p>Parameters.</p>"
+      "documentation": "<p>A list of QuickSight parameters and the list's override values.</p>"
     },
     "Password": {
       "type": "string",
@@ -9006,6 +9760,11 @@
       },
       "documentation": "<p>Amazon RDS parameters.</p>"
     },
+    "RecoveryWindowInDays": {
+      "type": "long",
+      "max": 30,
+      "min": 7
+    },
     "RedshiftParameters": {
       "type": "structure",
       "required": [
@@ -9079,7 +9838,7 @@
         },
         "CustomPermissionsName": {
           "shape": "RoleName",
-          "documentation": "<p>(Enterprise edition only) The name of the custom permissions profile that you want to assign to this user. Currently, custom permissions profile names are assigned to permissions profiles in the QuickSight console. You use this API to assign the named set of permissions to a QuickSight user. </p> <p>Customizing permissions in the QuickSight UI allows you to control a user's access to the following operations:</p> <ul> <li> <p/> </li> <li> <p/> </li> <li> <p/> </li> <li> <p/> </li> </ul> <p>QuickSight custom permissions are applied through IAM policies. Therefore, they override the permissions typically granted by assigning QuickSight users to one of the default security cohorts (admin, author, reader) in QuickSight.</p> <p>This feature is available only to QuickSight Enterprise edition subscriptions that use SAML 2.0-Based Federation for Single Sign-On (SSO).</p>"
+          "documentation": "<p>(Enterprise edition only) The name of the custom permissions profile that you want to assign to this user. Customized permissions allows you to control a user's access by restricting access the following operations:</p> <ul> <li> <p>Create and update data sources</p> </li> <li> <p>Create and update datasets</p> </li> <li> <p>Create and update email reports</p> </li> <li> <p>Subscribe to email reports</p> </li> </ul> <p>To add custom permissions to an existing user, use <code> <a>UpdateUser</a> </code> instead.</p> <p>A set of custom permissions includes any combination of these restrictions. Currently, you need to create the profile names for custom permission sets by using the QuickSight console. Then, you use the <code>RegisterUser</code> API operation to assign the named set of permissions to a QuickSight user. </p> <p>QuickSight custom permissions are applied through IAM policies. Therefore, they override the permissions typically granted by assigning QuickSight users to one of the default security cohorts in QuickSight (admin, author, reader).</p> <p>This feature is available only to QuickSight Enterprise edition subscriptions that use SAML 2.0-Based Federation for Single Sign-On (SSO).</p>"
         }
       }
     },
@@ -9088,7 +9847,7 @@
       "members": {
         "User": {
           "shape": "User",
-          "documentation": "<p>The user name.</p>"
+          "documentation": "<p>The user's user name.</p>"
         },
         "UserInvitationUrl": {
           "shape": "String",
@@ -9180,7 +9939,7 @@
         },
         "Actions": {
           "shape": "ActionList",
-          "documentation": "<p>The action to grant or revoke permissions on, for example <code>\"quicksight:DescribeDashboard\"</code>.</p>"
+          "documentation": "<p>The IAM action to grant or revoke permissions on, for example <code>\"quicksight:DescribeDashboard\"</code>.</p>"
         }
       },
       "documentation": "<p>Permission for the resource.</p>"
@@ -9201,8 +9960,52 @@
         "CREATION_FAILED",
         "UPDATE_IN_PROGRESS",
         "UPDATE_SUCCESSFUL",
-        "UPDATE_FAILED"
+        "UPDATE_FAILED",
+        "DELETED"
       ]
+    },
+    "RestoreAnalysisRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "AnalysisId"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The ID of the AWS account that contains the analysis.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "AnalysisId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The ID of the analysis that you're restoring.</p>",
+          "location": "uri",
+          "locationName": "AnalysisId"
+        }
+      }
+    },
+    "RestoreAnalysisResponse": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The HTTP status of the request.</p>",
+          "location": "statusCode"
+        },
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the analysis that you're restoring.</p>"
+        },
+        "AnalysisId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The ID of the analysis that you're restoring. </p>"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The AWS request ID for this operation.</p>"
+        }
+      }
     },
     "RestrictiveResourceId": {
       "type": "string",
@@ -9312,6 +10115,56 @@
       },
       "documentation": "<p>A physical table type for as S3 data source.</p>"
     },
+    "SearchAnalysesRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "Filters"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The ID of the AWS account that contains the analyses that you're searching for.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "Filters": {
+          "shape": "AnalysisSearchFilterList",
+          "documentation": "<p>The structure for the search filters that you want to apply to your search. </p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>A pagination token that can be used in a subsequent request.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to return.</p>",
+          "box": true
+        }
+      }
+    },
+    "SearchAnalysesResponse": {
+      "type": "structure",
+      "members": {
+        "AnalysisSummaryList": {
+          "shape": "AnalysisSummaryList",
+          "documentation": "<p>Metadata describing the analyses that you searched for.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>A pagination token that can be used in a subsequent request. </p>"
+        },
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The HTTP status of the request.</p>",
+          "location": "statusCode"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The AWS request ID for this operation.</p>"
+        }
+      }
+    },
     "SearchDashboardsRequest": {
       "type": "structure",
       "required": [
@@ -9335,7 +10188,8 @@
         },
         "MaxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>The maximum number of results to be returned per request.</p>"
+          "documentation": "<p>The maximum number of results to be returned per request.</p>",
+          "box": true
         }
       }
     },
@@ -9508,14 +10362,14 @@
       "members": {
         "Name": {
           "shape": "NonEmptyString",
-          "documentation": "<p>A display name for the dataset.</p>"
+          "documentation": "<p>A display name for a string parameter.</p>"
         },
         "Values": {
           "shape": "StringList",
-          "documentation": "<p>Values.</p>"
+          "documentation": "<p>The values of a string parameter.</p>"
         }
       },
-      "documentation": "<p>String parameter.</p>"
+      "documentation": "<p>A string parameter.</p>"
     },
     "StringParameterList": {
       "type": "list",
@@ -9647,7 +10501,7 @@
           "documentation": "<p>Time when this was created.</p>"
         }
       },
-      "documentation": "<p>A template object. A <i>template</i> is an entity in QuickSight that encapsulates the metadata required to create an analysis and that you can use to create a dashboard. A template adds a layer of abstraction by using placeholders to replace the dataset associated with the analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets that follow the same schema that was used to create the source analysis and template.</p> <p>You can share templates across AWS accounts by allowing users in other AWS accounts to create a template or a dashboard from an existing template.</p>"
+      "documentation": "<p>A template object. A <i>template</i> is an entity in QuickSight that encapsulates the metadata required to create an analysis and that you can use to create a dashboard. A template adds a layer of abstraction by using placeholders to replace the dataset associated with an analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets that follow the same schema that was used to create the source analysis and template.</p> <p>You can share templates across AWS accounts by allowing users in other AWS accounts to create a template or a dashboard from an existing template.</p>"
     },
     "TemplateAlias": {
       "type": "structure",
@@ -9700,7 +10554,8 @@
       "enum": [
         "SOURCE_NOT_FOUND",
         "DATA_SET_NOT_FOUND",
-        "INTERNAL_FAILURE"
+        "INTERNAL_FAILURE",
+        "ACCESS_DENIED"
       ]
     },
     "TemplateName": {
@@ -9800,11 +10655,11 @@
         },
         "Errors": {
           "shape": "TemplateErrorList",
-          "documentation": "<p>Errors associated with the template.</p>"
+          "documentation": "<p>Errors associated with this template version.</p>"
         },
         "VersionNumber": {
           "shape": "VersionNumber",
-          "documentation": "<p>The version number of the template.</p>"
+          "documentation": "<p>The version number of the template version.</p>"
         },
         "Status": {
           "shape": "ResourceStatus",
@@ -9812,7 +10667,7 @@
         },
         "DataSetConfigurations": {
           "shape": "DataSetConfigurationList",
-          "documentation": "<p>Schema of the dataset identified by the placeholder. The idea is that any dashboard created from the template should be bound to new datasets matching the same schema described through this API. .</p>"
+          "documentation": "<p>Schema of the dataset identified by the placeholder. Any dashboard created from this template should be bound to new datasets matching the same schema described through this API operation.</p>"
         },
         "Description": {
           "shape": "VersionDescription",
@@ -9820,7 +10675,11 @@
         },
         "SourceEntityArn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the analysis or template which was used to create this template.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of an analysis or template that was used to create this template.</p>"
+        },
+        "ThemeArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the theme associated with this version of the template.</p>"
         }
       },
       "documentation": "<p>A version of a template.</p>"
@@ -9919,7 +10778,7 @@
           "documentation": "<p>The type of theme, based on how it was created. Valid values include: <code>QUICKSIGHT</code> and <code>CUSTOM</code>.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Summary information about a theme.</p>"
     },
     "ThemeAlias": {
       "type": "structure",
@@ -10325,13 +11184,13 @@
         },
         "Namespace": {
           "shape": "Namespace",
-          "documentation": "<p>The namespace associated with the customization that you're updating.</p>",
+          "documentation": "<p>The namespace that you want to update QuickSight customizations for.</p>",
           "location": "querystring",
           "locationName": "namespace"
         },
         "AccountCustomization": {
           "shape": "AccountCustomization",
-          "documentation": "<p>The customizations you want to update in QuickSight.</p>"
+          "documentation": "<p>The QuickSight customizations you're updating in the current AWS Region. </p>"
         }
       }
     },
@@ -10348,7 +11207,7 @@
         },
         "AccountCustomization": {
           "shape": "AccountCustomization",
-          "documentation": "<p>The customizations associated with your QuickSight subscription.</p>"
+          "documentation": "<p>The QuickSight customizations you're updating in the current AWS Region. </p>"
         },
         "RequestId": {
           "shape": "String",
@@ -10370,7 +11229,7 @@
       "members": {
         "AwsAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>The ID for the AWS account that contains the QuickSight namespaces that you want to list.</p>",
+          "documentation": "<p>The ID for the AWS account that contains the QuickSight settings that you want to list.</p>",
           "location": "uri",
           "locationName": "AwsAccountId"
         },
@@ -10380,7 +11239,7 @@
         },
         "NotificationEmail": {
           "shape": "String",
-          "documentation": "<p>Email address used to send notifications regarding administration of QuickSight.</p>"
+          "documentation": "<p>The email address that you want QuickSight to send notifications to regarding your AWS account or QuickSight subscription.</p>"
         }
       }
     },
@@ -10395,6 +11254,126 @@
           "shape": "StatusCode",
           "documentation": "<p>The HTTP status of the request.</p>",
           "location": "statusCode"
+        }
+      }
+    },
+    "UpdateAnalysisPermissionsRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "AnalysisId"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The ID of the AWS account that contains the analysis whose permissions you're updating. You must be using the AWS account that the analysis is in.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "AnalysisId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The ID of the analysis whose permissions you're updating. The ID is part of the analysis URL.</p>",
+          "location": "uri",
+          "locationName": "AnalysisId"
+        },
+        "GrantPermissions": {
+          "shape": "UpdateResourcePermissionList",
+          "documentation": "<p>A structure that describes the permissions to add and the principal to add them to.</p>"
+        },
+        "RevokePermissions": {
+          "shape": "UpdateResourcePermissionList",
+          "documentation": "<p>A structure that describes the permissions to remove and the principal to remove them from.</p>"
+        }
+      }
+    },
+    "UpdateAnalysisPermissionsResponse": {
+      "type": "structure",
+      "members": {
+        "AnalysisArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the analysis that you updated.</p>"
+        },
+        "AnalysisId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The ID of the analysis that you updated permissions for.</p>"
+        },
+        "Permissions": {
+          "shape": "ResourcePermissionList",
+          "documentation": "<p>A structure that describes the principals and the resource-level permissions on an analysis.</p>"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The AWS request ID for this operation.</p>"
+        },
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The HTTP status of the request.</p>",
+          "location": "statusCode"
+        }
+      }
+    },
+    "UpdateAnalysisRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "AnalysisId",
+        "Name",
+        "SourceEntity"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The ID of the AWS account that contains the analysis that you're updating.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "AnalysisId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The ID for the analysis that you're updating. This ID displays in the URL of the analysis.</p>",
+          "location": "uri",
+          "locationName": "AnalysisId"
+        },
+        "Name": {
+          "shape": "AnalysisName",
+          "documentation": "<p>A descriptive name for the analysis that you're updating. This name displays for the analysis in the QuickSight console.</p>"
+        },
+        "Parameters": {
+          "shape": "Parameters",
+          "documentation": "<p>The parameter names and override values that you want to use. An analysis can have any parameter type, and some parameters might accept multiple values. </p>"
+        },
+        "SourceEntity": {
+          "shape": "AnalysisSourceEntity",
+          "documentation": "<p>A source entity to use for the analysis that you're updating. This metadata structure contains details that describe a source template and one or more datasets.</p>"
+        },
+        "ThemeArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the theme to apply to the analysis that you're creating. To see the theme in the QuickSight console, make sure that you have access to it.</p>"
+        }
+      }
+    },
+    "UpdateAnalysisResponse": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the analysis that you're updating.</p>"
+        },
+        "AnalysisId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The ID of the analysis.</p>"
+        },
+        "UpdateStatus": {
+          "shape": "ResourceStatus",
+          "documentation": "<p>The update status of the last update that was made to the analysis.</p>"
+        },
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The HTTP status of the request.</p>",
+          "location": "statusCode"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The AWS request ID for this operation.</p>"
         }
       }
     },
@@ -10542,7 +11521,7 @@
         },
         "DashboardPublishOptions": {
           "shape": "DashboardPublishOptions",
-          "documentation": "<p>Options for publishing the dashboard when you create it:</p> <ul> <li> <p> <code>AvailabilityStatus</code> for <code>AdHocFilteringOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. When this is set to <code>DISABLED</code>, QuickSight disables the left filter pane on the published dashboard, which can be used for ad hoc (one-time) filtering. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>AvailabilityStatus</code> for <code>ExportToCSVOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual option to export data to .csv format isn't enabled when this is set to <code>DISABLED</code>. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>VisibilityState</code> for <code>SheetControlsOption</code> - This visibility state can be either <code>COLLAPSED</code> or <code>EXPANDED</code>. This option is <code>COLLAPSED</code> by default. </p> </li> </ul>"
+          "documentation": "<p>Options for publishing the dashboard when you create it:</p> <ul> <li> <p> <code>AvailabilityStatus</code> for <code>AdHocFilteringOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. When this is set to <code>DISABLED</code>, QuickSight disables the left filter pane on the published dashboard, which can be used for ad hoc (one-time) filtering. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>AvailabilityStatus</code> for <code>ExportToCSVOption</code> - This status can be either <code>ENABLED</code> or <code>DISABLED</code>. The visual option to export data to .CSV format isn't enabled when this is set to <code>DISABLED</code>. This option is <code>ENABLED</code> by default. </p> </li> <li> <p> <code>VisibilityState</code> for <code>SheetControlsOption</code> - This visibility state can be either <code>COLLAPSED</code> or <code>EXPANDED</code>. This option is <code>COLLAPSED</code> by default. </p> </li> </ul>"
         },
         "ThemeArn": {
           "shape": "Arn",
@@ -11336,11 +12315,11 @@
         },
         "Role": {
           "shape": "UserRole",
-          "documentation": "<p>The Amazon QuickSight role of the user. The user role can be one of the following:</p> <ul> <li> <p> <code>READER</code>: A user who has read-only access to dashboards.</p> </li> <li> <p> <code>AUTHOR</code>: A user who can create data sources, datasets, analyses, and dashboards.</p> </li> <li> <p> <code>ADMIN</code>: A user who is an author, who can also manage Amazon QuickSight settings.</p> </li> </ul>"
+          "documentation": "<p>The Amazon QuickSight role of the user. The role can be one of the following default security cohorts:</p> <ul> <li> <p> <code>READER</code>: A user who has read-only access to dashboards.</p> </li> <li> <p> <code>AUTHOR</code>: A user who can create data sources, datasets, analyses, and dashboards.</p> </li> <li> <p> <code>ADMIN</code>: A user who is an author, who can also manage Amazon QuickSight settings.</p> </li> </ul> <p>The name of the QuickSight role is invisible to the user except for the console screens dealing with permissions.</p>"
         },
         "CustomPermissionsName": {
           "shape": "RoleName",
-          "documentation": "<p>The name of the custom permissions profile that you want to assign to this user. Currently, custom permissions profile names are assigned to permissions profiles in the QuickSight console. You use this API to assign the named set of permissions to a QuickSight user. </p>"
+          "documentation": "<p>(Enterprise edition only) The name of the custom permissions profile that you want to assign to this user. Customized permissions allows you to control a user's access by restricting access the following operations:</p> <ul> <li> <p>Create and update data sources</p> </li> <li> <p>Create and update datasets</p> </li> <li> <p>Create and update email reports</p> </li> <li> <p>Subscribe to email reports</p> </li> </ul> <p>A set of custom permissions includes any combination of these restrictions. Currently, you need to create the profile names for custom permission sets by using the QuickSight console. Then, you use the <code>RegisterUser</code> API operation to assign the named set of permissions to a QuickSight user. </p> <p>QuickSight custom permissions are applied through IAM policies. Therefore, they override the permissions typically granted by assigning QuickSight users to one of the default security cohorts in QuickSight (admin, author, reader).</p> <p>This feature is available only to QuickSight Enterprise edition subscriptions that use SAML 2.0-Based Federation for Single Sign-On (SSO).</p>"
         },
         "UnapplyCustomPermissions": {
           "shape": "Boolean",
@@ -11430,7 +12409,7 @@
           "documentation": "<p>The custom permissions profile associated with this user.</p>"
         }
       },
-      "documentation": "<p>A registered user of Amazon QuickSight. Currently, an Amazon QuickSight subscription can't contain more than 20 million users.</p>"
+      "documentation": "<p>A registered user of Amazon QuickSight. </p>"
     },
     "UserList": {
       "type": "list",

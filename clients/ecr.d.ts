@@ -800,7 +800,7 @@ declare namespace ECR {
      */
     imageManifest?: ImageManifest;
     /**
-     * The media type associated with the image manifest.
+     * The manifest media type of the image.
      */
     imageManifestMediaType?: MediaType;
   }
@@ -839,6 +839,14 @@ declare namespace ECR {
      * A summary of the last completed image scan.
      */
     imageScanFindingsSummary?: ImageScanFindingsSummary;
+    /**
+     * The media type of the image manifest.
+     */
+    imageManifestMediaType?: MediaType;
+    /**
+     * The artifact media type of the image.
+     */
+    artifactMediaType?: MediaType;
   }
   export type ImageDetailList = ImageDetail[];
   export type ImageDigest = string;
