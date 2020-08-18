@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.735.0-->
+<!--LATEST=2.736.0-->
 <!--ENTRYINSERT-->
+
+## 2.736.0
+* feature: CognitoIdentityServiceProvider: Adding the option to use a service linked role to publish events to Pinpoint.
+* feature: DataSync: DataSync support for filters as input arguments to the ListTasks and ListLocations API calls.
+* feature: IdentityStore: AWS Single Sign-On (SSO) Identity Store service provides an interface to retrieve all of your users and groups. It enables entitlement management per user or group for AWS SSO and other IDPs.
+* feature: SESV2: This release includes new APIs to allow customers to add or remove email addresses from their account-level suppression list in bulk.
+* feature: SecurityHub: New details for DynamoDB tables, Elastic IP addresses, IAM policies and users, RDS DB clusters and snapshots, and Secrets Manager secrets. Added details for AWS KMS keys and RDS DB instances.
 
 ## 2.735.0
 * feature: ACM: ACM provides support for the new Private CA feature Cross-account CA sharing. ACM users can issue certificates signed by a private CA belonging to another account where the CA was shared with them.

@@ -76,6 +76,14 @@ declare class SESV2 extends Service {
    */
   createEmailTemplate(callback?: (err: AWSError, data: SESV2.Types.CreateEmailTemplateResponse) => void): Request<SESV2.Types.CreateEmailTemplateResponse, AWSError>;
   /**
+   * Creates an import job for a data destination.
+   */
+  createImportJob(params: SESV2.Types.CreateImportJobRequest, callback?: (err: AWSError, data: SESV2.Types.CreateImportJobResponse) => void): Request<SESV2.Types.CreateImportJobResponse, AWSError>;
+  /**
+   * Creates an import job for a data destination.
+   */
+  createImportJob(callback?: (err: AWSError, data: SESV2.Types.CreateImportJobResponse) => void): Request<SESV2.Types.CreateImportJobResponse, AWSError>;
+  /**
    * Delete an existing configuration set.  Configuration sets are groups of rules that you can apply to the emails you send. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email.
    */
   deleteConfigurationSet(params: SESV2.Types.DeleteConfigurationSetRequest, callback?: (err: AWSError, data: SESV2.Types.DeleteConfigurationSetResponse) => void): Request<SESV2.Types.DeleteConfigurationSetResponse, AWSError>;
@@ -252,6 +260,14 @@ declare class SESV2 extends Service {
    */
   getEmailTemplate(callback?: (err: AWSError, data: SESV2.Types.GetEmailTemplateResponse) => void): Request<SESV2.Types.GetEmailTemplateResponse, AWSError>;
   /**
+   * Provides information about an import job.
+   */
+  getImportJob(params: SESV2.Types.GetImportJobRequest, callback?: (err: AWSError, data: SESV2.Types.GetImportJobResponse) => void): Request<SESV2.Types.GetImportJobResponse, AWSError>;
+  /**
+   * Provides information about an import job.
+   */
+  getImportJob(callback?: (err: AWSError, data: SESV2.Types.GetImportJobResponse) => void): Request<SESV2.Types.GetImportJobResponse, AWSError>;
+  /**
    * Retrieves information about a specific email address that's on the suppression list for your account.
    */
   getSuppressedDestination(params: SESV2.Types.GetSuppressedDestinationRequest, callback?: (err: AWSError, data: SESV2.Types.GetSuppressedDestinationResponse) => void): Request<SESV2.Types.GetSuppressedDestinationResponse, AWSError>;
@@ -315,6 +331,14 @@ declare class SESV2 extends Service {
    * Lists the email templates present in your Amazon SES account in the current AWS Region. You can execute this operation no more than once per second.
    */
   listEmailTemplates(callback?: (err: AWSError, data: SESV2.Types.ListEmailTemplatesResponse) => void): Request<SESV2.Types.ListEmailTemplatesResponse, AWSError>;
+  /**
+   * Lists all of the import jobs.
+   */
+  listImportJobs(params: SESV2.Types.ListImportJobsRequest, callback?: (err: AWSError, data: SESV2.Types.ListImportJobsResponse) => void): Request<SESV2.Types.ListImportJobsResponse, AWSError>;
+  /**
+   * Lists all of the import jobs.
+   */
+  listImportJobs(callback?: (err: AWSError, data: SESV2.Types.ListImportJobsResponse) => void): Request<SESV2.Types.ListImportJobsResponse, AWSError>;
   /**
    * Retrieves a list of email addresses that are on the suppression list for your account.
    */
@@ -851,6 +875,22 @@ declare namespace SESV2 {
   }
   export interface CreateEmailTemplateResponse {
   }
+  export interface CreateImportJobRequest {
+    /**
+     * The destination for the import job.
+     */
+    ImportDestination: ImportDestination;
+    /**
+     * The data source for the import job.
+     */
+    ImportDataSource: ImportDataSource;
+  }
+  export interface CreateImportJobResponse {
+    /**
+     * A string that represents the import job ID.
+     */
+    JobId?: JobId;
+  }
   export type CustomRedirectDomain = string;
   export interface CustomVerificationEmailTemplateMetadata {
     /**
@@ -890,6 +930,7 @@ declare namespace SESV2 {
     DomainIspPlacements?: DomainIspPlacements;
   }
   export type DailyVolumes = DailyVolume[];
+  export type DataFormat = "CSV"|"JSON"|string;
   export interface DedicatedIp {
     /**
      * An IPv4 address.
@@ -1279,6 +1320,18 @@ declare namespace SESV2 {
   export type EventDestinations = EventDestination[];
   export type EventType = "SEND"|"REJECT"|"BOUNCE"|"COMPLAINT"|"DELIVERY"|"OPEN"|"CLICK"|"RENDERING_FAILURE"|"DELIVERY_DELAY"|string;
   export type EventTypes = EventType[];
+  export type FailedRecordsCount = number;
+  export type FailedRecordsS3Url = string;
+  export interface FailureInfo {
+    /**
+     * An Amazon S3 presigned URL that contains all the failed records and related information.
+     */
+    FailedRecordsS3Url?: FailedRecordsS3Url;
+    /**
+     * A message about why the import job failed.
+     */
+    ErrorMessage?: ErrorMessage;
+  }
   export type FailureRedirectionURL = string;
   export type FeedbackId = string;
   export type GeneralEnforcementStatus = string;
@@ -1594,6 +1647,50 @@ declare namespace SESV2 {
      */
     TemplateContent: EmailTemplateContent;
   }
+  export interface GetImportJobRequest {
+    /**
+     * The ID of the import job.
+     */
+    JobId: JobId;
+  }
+  export interface GetImportJobResponse {
+    /**
+     * A string that represents the import job ID.
+     */
+    JobId?: JobId;
+    /**
+     * The destination of the import job.
+     */
+    ImportDestination?: ImportDestination;
+    /**
+     * The data source of the import job.
+     */
+    ImportDataSource?: ImportDataSource;
+    /**
+     * The failure details about an import job.
+     */
+    FailureInfo?: FailureInfo;
+    /**
+     * The status of the import job.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * The time stamp of when the import job was created.
+     */
+    CreatedTimestamp?: Timestamp;
+    /**
+     * The time stamp of when the import job was completed.
+     */
+    CompletedTimestamp?: Timestamp;
+    /**
+     * The current number of records processed.
+     */
+    ProcessedRecordsCount?: ProcessedRecordsCount;
+    /**
+     * The number of records that failed processing because of invalid input or other reasons.
+     */
+    FailedRecordsCount?: FailedRecordsCount;
+  }
   export interface GetSuppressedDestinationRequest {
     /**
      * The email address that's on the account suppression list.
@@ -1624,6 +1721,30 @@ declare namespace SESV2 {
   export type IdentityInfoList = IdentityInfo[];
   export type IdentityType = "EMAIL_ADDRESS"|"DOMAIN"|"MANAGED_DOMAIN"|string;
   export type ImageUrl = string;
+  export interface ImportDataSource {
+    /**
+     * An Amazon S3 URL in the format s3://&lt;bucket_name&gt;/&lt;object&gt;.
+     */
+    S3Url: S3Url;
+    /**
+     * The data format of the import job's data source.
+     */
+    DataFormat: DataFormat;
+  }
+  export interface ImportDestination {
+    /**
+     * An object that contains the action of the import job towards suppression list.
+     */
+    SuppressionListDestination: SuppressionListDestination;
+  }
+  export type ImportDestinationType = "SUPPRESSION_LIST"|string;
+  export interface ImportJobSummary {
+    JobId?: JobId;
+    ImportDestination?: ImportDestination;
+    JobStatus?: JobStatus;
+    CreatedTimestamp?: Timestamp;
+  }
+  export type ImportJobSummaryList = ImportJobSummary[];
   export interface InboxPlacementTrackingOption {
     /**
      * Specifies whether inbox placement data is being tracked for the domain.
@@ -1649,6 +1770,8 @@ declare namespace SESV2 {
     PlacementStatistics?: PlacementStatistics;
   }
   export type IspPlacements = IspPlacement[];
+  export type JobId = string;
+  export type JobStatus = "CREATED"|"PROCESSING"|"COMPLETED"|"FAILED"|string;
   export interface KinesisFirehoseDestination {
     /**
      * The Amazon Resource Name (ARN) of the IAM role that the Amazon SES API v2 uses to send email events to the Amazon Kinesis Data Firehose stream.
@@ -1812,6 +1935,30 @@ declare namespace SESV2 {
      */
     NextToken?: NextToken;
   }
+  export interface ListImportJobsRequest {
+    /**
+     * The destination of the import job, which can be used to list import jobs that have a certain ImportDestinationType.
+     */
+    ImportDestinationType?: ImportDestinationType;
+    /**
+     * A string token indicating that there might be additional import jobs available to be listed. Copy this token to a subsequent call to ListImportJobs with the same parameters to retrieve the next page of import jobs.
+     */
+    NextToken?: NextToken;
+    /**
+     * Maximum number of import jobs to return at once. Use this parameter to paginate results. If additional import jobs exist beyond the specified limit, the NextToken element is sent in the response. Use the NextToken value in subsequent requests to retrieve additional addresses.
+     */
+    PageSize?: MaxItems;
+  }
+  export interface ListImportJobsResponse {
+    /**
+     * A list of the import job summaries.
+     */
+    ImportJobs?: ImportJobSummaryList;
+    /**
+     * A string token indicating that there might be additional import jobs available to be listed. Copy this token to a subsequent call to ListImportJobs with the same parameters to retrieve the next page of import jobs.
+     */
+    NextToken?: NextToken;
+  }
   export type ListOfDedicatedIpPools = PoolName[];
   export interface ListSuppressedDestinationsRequest {
     /**
@@ -1953,6 +2100,7 @@ declare namespace SESV2 {
   export type PolicyName = string;
   export type PoolName = string;
   export type PrivateKey = string;
+  export type ProcessedRecordsCount = number;
   export interface PutAccountDedicatedIpWarmupAttributesRequest {
     /**
      * Enables or disables the automatic warm-up feature for dedicated IP addresses that are associated with your Amazon SES account in the current AWS Region. Set to true to enable the automatic warm-up feature, or set to false to disable it.
@@ -2225,6 +2373,7 @@ declare namespace SESV2 {
     CaseId?: CaseId;
   }
   export type ReviewStatus = "PENDING"|"FAILED"|"GRANTED"|"DENIED"|string;
+  export type S3Url = string;
   export type Selector = string;
   export interface SendBulkEmailRequest {
     /**
@@ -2410,6 +2559,13 @@ declare namespace SESV2 {
      */
     SuppressedReasons?: SuppressionListReasons;
   }
+  export interface SuppressionListDestination {
+    /**
+     * The type of action that you want to perform on the address. Acceptable values:   PUT: add the addresses to the suppression list. If the record already exists, it will override it with the new value.   DELETE: remove the addresses from the suppression list.  
+     */
+    SuppressionListImportAction: SuppressionListImportAction;
+  }
+  export type SuppressionListImportAction = "DELETE"|"PUT"|string;
   export type SuppressionListReason = "BOUNCE"|"COMPLAINT"|string;
   export type SuppressionListReasons = SuppressionListReason[];
   export interface SuppressionOptions {

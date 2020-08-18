@@ -1395,7 +1395,7 @@
         },
         "CreatedTime": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The datetime when the auto scaling group was created.</p>"
+          "documentation": "<p>Indicates when the auto scaling group was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
         }
       },
       "documentation": "<p>Provides details about an auto scaling group.</p>"
@@ -1413,7 +1413,7 @@
         },
         "LastModifiedTime": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The date and time that the distribution was last modified.</p>"
+          "documentation": "<p>Indicates when that the distribution was last modified.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
         },
         "Logging": {
           "shape": "AwsCloudFrontDistributionLogging",
@@ -1596,6 +1596,428 @@
       },
       "documentation": "<p>Information about the VPC configuration that AWS CodeBuild accesses.</p>"
     },
+    "AwsDynamoDbTableAttributeDefinition": {
+      "type": "structure",
+      "members": {
+        "AttributeName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the attribute.</p>"
+        },
+        "AttributeType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of the attribute.</p>"
+        }
+      },
+      "documentation": "<p>Contains a definition of an attribute for the table.</p>"
+    },
+    "AwsDynamoDbTableAttributeDefinitionList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsDynamoDbTableAttributeDefinition"
+      }
+    },
+    "AwsDynamoDbTableBillingModeSummary": {
+      "type": "structure",
+      "members": {
+        "BillingMode": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The method used to charge for read and write throughput and to manage capacity.</p>"
+        },
+        "LastUpdateToPayPerRequestDateTime": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>If the billing mode is <code>PAY_PER_REQUEST</code>, indicates when the billing mode was set to that value.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about the billing for read/write capacity on the table.</p>"
+    },
+    "AwsDynamoDbTableDetails": {
+      "type": "structure",
+      "members": {
+        "AttributeDefinitions": {
+          "shape": "AwsDynamoDbTableAttributeDefinitionList",
+          "documentation": "<p>A list of attribute definitions for the table.</p>"
+        },
+        "BillingModeSummary": {
+          "shape": "AwsDynamoDbTableBillingModeSummary",
+          "documentation": "<p>Information about the billing for read/write capacity on the table.</p>"
+        },
+        "CreationDateTime": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the table was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "GlobalSecondaryIndexes": {
+          "shape": "AwsDynamoDbTableGlobalSecondaryIndexList",
+          "documentation": "<p>List of global secondary indexes for the table.</p>"
+        },
+        "GlobalTableVersion": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The version of global tables being used.</p>"
+        },
+        "ItemCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of items in the table.</p>"
+        },
+        "KeySchema": {
+          "shape": "AwsDynamoDbTableKeySchemaList",
+          "documentation": "<p>The primary key structure for the table.</p>"
+        },
+        "LatestStreamArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the latest stream for the table.</p>"
+        },
+        "LatestStreamLabel": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The label of the latest stream. The label is not a unique identifier.</p>"
+        },
+        "LocalSecondaryIndexes": {
+          "shape": "AwsDynamoDbTableLocalSecondaryIndexList",
+          "documentation": "<p>The list of local secondary indexes for the table.</p>"
+        },
+        "ProvisionedThroughput": {
+          "shape": "AwsDynamoDbTableProvisionedThroughput",
+          "documentation": "<p>Information about the provisioned throughput for the table.</p>"
+        },
+        "Replicas": {
+          "shape": "AwsDynamoDbTableReplicaList",
+          "documentation": "<p>The list of replicas of this table.</p>"
+        },
+        "RestoreSummary": {
+          "shape": "AwsDynamoDbTableRestoreSummary",
+          "documentation": "<p>Information about the restore for the table.</p>"
+        },
+        "SseDescription": {
+          "shape": "AwsDynamoDbTableSseDescription",
+          "documentation": "<p>Information about the server-side encryption for the table.</p>"
+        },
+        "StreamSpecification": {
+          "shape": "AwsDynamoDbTableStreamSpecification",
+          "documentation": "<p>The current DynamoDB Streams configuration for the table.</p>"
+        },
+        "TableId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the table.</p>"
+        },
+        "TableName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the table.</p>"
+        },
+        "TableSizeBytes": {
+          "shape": "SizeBytes",
+          "documentation": "<p>The total size of the table in bytes.</p>"
+        },
+        "TableStatus": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The current status of the table.</p>"
+        }
+      },
+      "documentation": "<p>Provides details about a DynamoDB table.</p>"
+    },
+    "AwsDynamoDbTableGlobalSecondaryIndex": {
+      "type": "structure",
+      "members": {
+        "Backfilling": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the index is currently backfilling.</p>"
+        },
+        "IndexArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the index.</p>"
+        },
+        "IndexName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the index.</p>"
+        },
+        "IndexSizeBytes": {
+          "shape": "SizeBytes",
+          "documentation": "<p>The total size in bytes of the index.</p>"
+        },
+        "IndexStatus": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The current status of the index.</p>"
+        },
+        "ItemCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of items in the index.</p>"
+        },
+        "KeySchema": {
+          "shape": "AwsDynamoDbTableKeySchemaList",
+          "documentation": "<p>The key schema for the index.</p>"
+        },
+        "Projection": {
+          "shape": "AwsDynamoDbTableProjection",
+          "documentation": "<p>Attributes that are copied from the table into an index.</p>"
+        },
+        "ProvisionedThroughput": {
+          "shape": "AwsDynamoDbTableProvisionedThroughput",
+          "documentation": "<p>Information about the provisioned throughput settings for the indexes.</p>"
+        }
+      },
+      "documentation": "<p>Information abut a global secondary index for the table.</p>"
+    },
+    "AwsDynamoDbTableGlobalSecondaryIndexList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsDynamoDbTableGlobalSecondaryIndex"
+      }
+    },
+    "AwsDynamoDbTableKeySchema": {
+      "type": "structure",
+      "members": {
+        "AttributeName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the key schema attribute.</p>"
+        },
+        "KeyType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of key used for the key schema attribute.</p>"
+        }
+      },
+      "documentation": "<p>A component of the key schema for the DynamoDB table, a global secondary index, or a local secondary index.</p>"
+    },
+    "AwsDynamoDbTableKeySchemaList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsDynamoDbTableKeySchema"
+      }
+    },
+    "AwsDynamoDbTableLocalSecondaryIndex": {
+      "type": "structure",
+      "members": {
+        "IndexArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the index.</p>"
+        },
+        "IndexName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the index.</p>"
+        },
+        "KeySchema": {
+          "shape": "AwsDynamoDbTableKeySchemaList",
+          "documentation": "<p>The complete key schema for the index.</p>"
+        },
+        "Projection": {
+          "shape": "AwsDynamoDbTableProjection",
+          "documentation": "<p>Attributes that are copied from the table into the index. These are in addition to the primary key attributes and index key attributes, which are automatically projected.</p>"
+        }
+      },
+      "documentation": "<p>Information about a local secondary index for a DynamoDB table.</p>"
+    },
+    "AwsDynamoDbTableLocalSecondaryIndexList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsDynamoDbTableLocalSecondaryIndex"
+      }
+    },
+    "AwsDynamoDbTableProjection": {
+      "type": "structure",
+      "members": {
+        "NonKeyAttributes": {
+          "shape": "StringList",
+          "documentation": "<p>The nonkey attributes that are projected into the index. For each attribute, provide the attribute name.</p>"
+        },
+        "ProjectionType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The types of attributes that are projected into the index.</p>"
+        }
+      },
+      "documentation": "<p>For global and local secondary indexes, identifies the attributes that are copied from the table into the index.</p>"
+    },
+    "AwsDynamoDbTableProvisionedThroughput": {
+      "type": "structure",
+      "members": {
+        "LastDecreaseDateTime": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the provisioned throughput was last decreased.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "LastIncreaseDateTime": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the provisioned throughput was last increased.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "NumberOfDecreasesToday": {
+          "shape": "Integer",
+          "documentation": "<p>The number of times during the current UTC calendar day that the provisioned throughput was decreased.</p>"
+        },
+        "ReadCapacityUnits": {
+          "shape": "Integer",
+          "documentation": "<p>The maximum number of strongly consistent reads consumed per second before DynamoDB returns a <code>ThrottlingException</code>.</p>"
+        },
+        "WriteCapacityUnits": {
+          "shape": "Integer",
+          "documentation": "<p>The maximum number of writes consumed per second before DynamoDB returns a <code>ThrottlingException</code>.</p>"
+        }
+      },
+      "documentation": "<p>Information about the provisioned throughput for the table or for a global secondary index.</p>"
+    },
+    "AwsDynamoDbTableProvisionedThroughputOverride": {
+      "type": "structure",
+      "members": {
+        "ReadCapacityUnits": {
+          "shape": "Integer",
+          "documentation": "<p>The read capacity units for the replica.</p>"
+        }
+      },
+      "documentation": "<p>Replica-specific configuration for the provisioned throughput.</p>"
+    },
+    "AwsDynamoDbTableReplica": {
+      "type": "structure",
+      "members": {
+        "GlobalSecondaryIndexes": {
+          "shape": "AwsDynamoDbTableReplicaGlobalSecondaryIndexList",
+          "documentation": "<p>List of global secondary indexes for the replica.</p>"
+        },
+        "KmsMasterKeyId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the AWS KMS customer master key (CMK) that will be used for AWS KMS encryption for the replica.</p>"
+        },
+        "ProvisionedThroughputOverride": {
+          "shape": "AwsDynamoDbTableProvisionedThroughputOverride",
+          "documentation": "<p>Replica-specific configuration for the provisioned throughput.</p>"
+        },
+        "RegionName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the Region where the replica is located.</p>"
+        },
+        "ReplicaStatus": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The current status of the replica.</p>"
+        },
+        "ReplicaStatusDescription": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Detailed information about the replica status.</p>"
+        }
+      },
+      "documentation": "<p>Information about a replica of a DynamoDB table.</p>"
+    },
+    "AwsDynamoDbTableReplicaGlobalSecondaryIndex": {
+      "type": "structure",
+      "members": {
+        "IndexName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the index.</p>"
+        },
+        "ProvisionedThroughputOverride": {
+          "shape": "AwsDynamoDbTableProvisionedThroughputOverride",
+          "documentation": "<p>Replica-specific configuration for the provisioned throughput for the index.</p>"
+        }
+      },
+      "documentation": "<p>Information about a global secondary index for a DynamoDB table replica.</p>"
+    },
+    "AwsDynamoDbTableReplicaGlobalSecondaryIndexList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsDynamoDbTableReplicaGlobalSecondaryIndex"
+      }
+    },
+    "AwsDynamoDbTableReplicaList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsDynamoDbTableReplica"
+      }
+    },
+    "AwsDynamoDbTableRestoreSummary": {
+      "type": "structure",
+      "members": {
+        "SourceBackupArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the source backup from which the table was restored.</p>"
+        },
+        "SourceTableArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the source table for the backup.</p>"
+        },
+        "RestoreDateTime": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates the point in time that the table was restored to.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "RestoreInProgress": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether a restore is currently in progress.</p>"
+        }
+      },
+      "documentation": "<p>Information about the restore for the table.</p>"
+    },
+    "AwsDynamoDbTableSseDescription": {
+      "type": "structure",
+      "members": {
+        "InaccessibleEncryptionDateTime": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>If the key is inaccessible, the date and time when DynamoDB detected that the key was inaccessible.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "Status": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The status of the server-side encryption.</p>"
+        },
+        "SseType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of server-side encryption.</p>"
+        },
+        "KmsMasterKeyArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the AWS KMS customer master key (CMK) that is used for the AWS KMS encryption.</p>"
+        }
+      },
+      "documentation": "<p>Information about the server-side encryption for the table.</p>"
+    },
+    "AwsDynamoDbTableStreamSpecification": {
+      "type": "structure",
+      "members": {
+        "StreamEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether DynamoDB Streams is enabled on the table.</p>"
+        },
+        "StreamViewType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Determines the information that is written to the table.</p>"
+        }
+      },
+      "documentation": "<p>The current DynamoDB Streams configuration for the table.</p>"
+    },
+    "AwsEc2EipDetails": {
+      "type": "structure",
+      "members": {
+        "InstanceId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the EC2 instance.</p>"
+        },
+        "PublicIp": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>A public IP address that is associated with the EC2 instance.</p>"
+        },
+        "AllocationId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier that AWS assigns to represent the allocation of the Elastic IP address for use with Amazon VPC.</p>"
+        },
+        "AssociationId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier that represents the association of the Elastic IP address with an EC2 instance.</p>"
+        },
+        "Domain": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The domain in which to allocate the address.</p> <p>If the address is for use with EC2 instances in a VPC, then <code>Domain</code> is <code>vpc</code>. Otherwise, <code>Domain</code> is <code>standard</code>. </p>"
+        },
+        "PublicIpv4Pool": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of an IP address pool. This parameter allows Amazon EC2 to select an IP address from the address pool.</p>"
+        },
+        "NetworkBorderGroup": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the location from which the Elastic IP address is advertised.</p>"
+        },
+        "NetworkInterfaceId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the network interface.</p>"
+        },
+        "NetworkInterfaceOwnerId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The AWS account ID of the owner of the network interface.</p>"
+        },
+        "PrivateIpAddress": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The private IP address that is associated with the Elastic IP address.</p>"
+        }
+      },
+      "documentation": "<p>Information about an Elastic IP address.</p>"
+    },
     "AwsEc2InstanceDetails": {
       "type": "structure",
       "members": {
@@ -1633,7 +2055,7 @@
         },
         "LaunchedAt": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The date/time the instance was launched.</p>"
+          "documentation": "<p>Indicates when the instance was launched.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
         }
       },
       "documentation": "<p>The details of an Amazon EC2 instance.</p>"
@@ -1643,7 +2065,7 @@
       "members": {
         "AttachTime": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The timestamp indicating when the attachment initiated.</p>"
+          "documentation": "<p>Indicates when the attachment initiated.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
         },
         "AttachmentId": {
           "shape": "NonEmptyString",
@@ -1901,7 +2323,7 @@
       "members": {
         "CreateTime": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The datetime when the volume was created.</p>"
+          "documentation": "<p>Indicates when the volume was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
         },
         "Encrypted": {
           "shape": "Boolean",
@@ -2071,7 +2493,7 @@
         },
         "CreatedTime": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The date and time the load balancer was created.</p>"
+          "documentation": "<p>Indicates when the load balancer was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
         },
         "DNSName": {
           "shape": "NonEmptyString",
@@ -2119,7 +2541,7 @@
         },
         "CreatedAt": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The creation date/time of the IAM access key related to a finding.</p>"
+          "documentation": "<p>Indicates when the IAM access key was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
         },
         "PrincipalId": {
           "shape": "NonEmptyString",
@@ -2143,6 +2565,114 @@
         "Inactive"
       ]
     },
+    "AwsIamAttachedManagedPolicy": {
+      "type": "structure",
+      "members": {
+        "PolicyName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the policy.</p>"
+        },
+        "PolicyArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the policy.</p>"
+        }
+      },
+      "documentation": "<p>A managed policy that is attached to an IAM user.</p>"
+    },
+    "AwsIamAttachedManagedPolicyList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsIamAttachedManagedPolicy"
+      }
+    },
+    "AwsIamPermissionsBoundary": {
+      "type": "structure",
+      "members": {
+        "PermissionsBoundaryArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the policy used to set the permissions boundary for the user.</p>"
+        },
+        "PermissionsBoundaryType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The usage type for the permissions boundary.</p>"
+        }
+      },
+      "documentation": "<p>Information about the policy used to set the permissions boundary for an IAM user.</p>"
+    },
+    "AwsIamPolicyDetails": {
+      "type": "structure",
+      "members": {
+        "AttachmentCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of users, groups, and roles that the policy is attached to.</p>"
+        },
+        "CreateDate": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>When the policy was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "DefaultVersionId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the default version of the policy.</p>"
+        },
+        "Description": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>A description of the policy.</p>"
+        },
+        "IsAttachable": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the policy can be attached to a user, group, or role.</p>"
+        },
+        "Path": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The path to the policy.</p>"
+        },
+        "PermissionsBoundaryUsageCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of users and roles that use the policy to set the permissions boundary.</p>"
+        },
+        "PolicyId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The unique identifier of the policy.</p>"
+        },
+        "PolicyName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the policy.</p>"
+        },
+        "PolicyVersionList": {
+          "shape": "AwsIamPolicyVersionList",
+          "documentation": "<p>List of versions of the policy.</p>"
+        },
+        "UpdateDate": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>When the policy was most recently updated.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        }
+      },
+      "documentation": "<p>Represents an IAM permissions policy.</p>"
+    },
+    "AwsIamPolicyVersion": {
+      "type": "structure",
+      "members": {
+        "VersionId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the policy version.</p>"
+        },
+        "IsDefaultVersion": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the version is the default version.</p>"
+        },
+        "CreateDate": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the version was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        }
+      },
+      "documentation": "<p>A version of an IAM policy.</p>"
+    },
+    "AwsIamPolicyVersionList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsIamPolicyVersion"
+      }
+    },
     "AwsIamRoleAssumeRolePolicyDocument": {
       "type": "string",
       "max": 131072,
@@ -2158,7 +2688,7 @@
         },
         "CreateDate": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The date and time, in ISO 8601 date-time format, when the role was created.</p>"
+          "documentation": "<p>Indicates when the role was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
         },
         "RoleId": {
           "shape": "NonEmptyString",
@@ -2179,6 +2709,60 @@
       },
       "documentation": "<p>Contains information about an IAM role, including all of the role's policies.</p>"
     },
+    "AwsIamUserDetails": {
+      "type": "structure",
+      "members": {
+        "AttachedManagedPolicies": {
+          "shape": "AwsIamAttachedManagedPolicyList",
+          "documentation": "<p>A list of the managed policies that are attached to the user.</p>"
+        },
+        "CreateDate": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the user was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "GroupList": {
+          "shape": "StringList",
+          "documentation": "<p>A list of IAM groups that the user belongs to.</p>"
+        },
+        "Path": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The path to the user.</p>"
+        },
+        "PermissionsBoundary": {
+          "shape": "AwsIamPermissionsBoundary",
+          "documentation": "<p>The permissions boundary for the user.</p>"
+        },
+        "UserId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The unique identifier for the user.</p>"
+        },
+        "UserName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the user.</p>"
+        },
+        "UserPolicyList": {
+          "shape": "AwsIamUserPolicyList",
+          "documentation": "<p>The list of inline policies that are embedded in the user.</p>"
+        }
+      },
+      "documentation": "<p>Information about an IAM user.</p>"
+    },
+    "AwsIamUserPolicy": {
+      "type": "structure",
+      "members": {
+        "PolicyName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the policy.</p>"
+        }
+      },
+      "documentation": "<p>Information about an inline policy that is embedded in the user.</p>"
+    },
+    "AwsIamUserPolicyList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsIamUserPolicy"
+      }
+    },
     "AwsKmsKeyDetails": {
       "type": "structure",
       "members": {
@@ -2188,7 +2772,7 @@
         },
         "CreationDate": {
           "shape": "Double",
-          "documentation": "<p>The date and time when the CMK was created.</p>"
+          "documentation": "<p>Indicates when the CMK was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
         },
         "KeyId": {
           "shape": "NonEmptyString",
@@ -2205,6 +2789,10 @@
         "Origin": {
           "shape": "NonEmptyString",
           "documentation": "<p>The source of the CMK's key material.</p> <p>When this value is <code>AWS_KMS</code>, AWS KMS created the key material.</p> <p>When this value is <code>EXTERNAL</code>, the key material was imported from your existing key management infrastructure or the CMK lacks key material.</p> <p>When this value is <code>AWS_CLOUDHSM</code>, the key material was created in the AWS CloudHSM cluster associated with a custom key store.</p>"
+        },
+        "Description": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>A description of the key.</p>"
         }
       },
       "documentation": "<p>Contains metadata about a customer master key (CMK).</p>"
@@ -2274,7 +2862,7 @@
         },
         "LastModified": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The date and time that the function was last updated, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).</p>"
+          "documentation": "<p>Indicates when the function was last updated.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
         },
         "Layers": {
           "shape": "AwsLambdaFunctionLayerList",
@@ -2408,13 +2996,341 @@
         },
         "CreatedDate": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The date that the version was created, in ISO 8601 format. For example, 2018-11-27T15:10:45.123+0000. </p>"
+          "documentation": "<p>Indicates when the version was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
         }
       },
       "documentation": "<p>Details about a Lambda layer version.</p>"
     },
     "AwsLambdaLayerVersionNumber": {
       "type": "long"
+    },
+    "AwsRdsDbClusterAssociatedRole": {
+      "type": "structure",
+      "members": {
+        "RoleArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the IAM role.</p>"
+        },
+        "Status": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The status of the association between the IAM role and the DB cluster.</p>"
+        }
+      },
+      "documentation": "<p>An IAM role that is associated with the Amazon RDS DB cluster.</p>"
+    },
+    "AwsRdsDbClusterAssociatedRoles": {
+      "type": "list",
+      "member": {
+        "shape": "AwsRdsDbClusterAssociatedRole"
+      }
+    },
+    "AwsRdsDbClusterDetails": {
+      "type": "structure",
+      "members": {
+        "AllocatedStorage": {
+          "shape": "Integer",
+          "documentation": "<p>For all database engines except Aurora, specifies the allocated storage size in gibibytes (GiB).</p>"
+        },
+        "AvailabilityZones": {
+          "shape": "StringList",
+          "documentation": "<p>A list of Availability Zones (AZs) where instances in the DB cluster can be created.</p>"
+        },
+        "BackupRetentionPeriod": {
+          "shape": "Integer",
+          "documentation": "<p>The number of days for which automated backups are retained.</p>"
+        },
+        "DatabaseName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the database.</p>"
+        },
+        "Status": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The current status of this DB cluster.</p>"
+        },
+        "Endpoint": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The connection endpoint for the primary instance of the DB cluster.</p>"
+        },
+        "ReaderEndpoint": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The reader endpoint for the DB cluster.</p>"
+        },
+        "CustomEndpoints": {
+          "shape": "StringList",
+          "documentation": "<p>A list of custom endpoints for the DB cluster.</p>"
+        },
+        "MultiAz": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the DB cluster has instances in multiple Availability Zones.</p>"
+        },
+        "Engine": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the database engine to use for this DB cluster.</p>"
+        },
+        "EngineVersion": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The version number of the database engine to use.</p>"
+        },
+        "Port": {
+          "shape": "Integer",
+          "documentation": "<p>The port number on which the DB instances in the DB cluster accept connections.</p>"
+        },
+        "MasterUsername": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the master user for the DB cluster.</p>"
+        },
+        "PreferredBackupWindow": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The range of time each day when automated backups are created, if automated backups are enabled.</p> <p>Uses the format <code>HH:MM-HH:MM</code>. For example, <code>04:52-05:22</code>.</p>"
+        },
+        "PreferredMaintenanceWindow": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).</p> <p>Uses the format <code>&lt;day&gt;:HH:MM-&lt;day&gt;:HH:MM</code>.</p> <p>For the day values, use <code>mon</code>|<code>tue</code>|<code>wed</code>|<code>thu</code>|<code>fri</code>|<code>sat</code>|<code>sun</code>.</p> <p>For example, <code>sun:09:32-sun:10:02</code>.</p>"
+        },
+        "ReadReplicaIdentifiers": {
+          "shape": "StringList",
+          "documentation": "<p>The identifiers of the read replicas that are associated with this DB cluster.</p>"
+        },
+        "VpcSecurityGroups": {
+          "shape": "AwsRdsDbInstanceVpcSecurityGroups",
+          "documentation": "<p>A list of VPC security groups that the DB cluster belongs to.</p>"
+        },
+        "HostedZoneId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Specifies the identifier that Amazon Route 53 assigns when you create a hosted zone.</p>"
+        },
+        "StorageEncrypted": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the DB cluster is encrypted.</p>"
+        },
+        "KmsKeyId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the AWS KMS master key that is used to encrypt the database instances in the DB cluster.</p>"
+        },
+        "DbClusterResourceId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the DB cluster. The identifier must be unique within each AWS Region and is immutable.</p>"
+        },
+        "AssociatedRoles": {
+          "shape": "AwsRdsDbClusterAssociatedRoles",
+          "documentation": "<p>A list of the IAM roles that are associated with the DB cluster.</p>"
+        },
+        "ClusterCreateTime": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the DB cluster was created, in Universal Coordinated Time (UTC).</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "EnabledCloudWatchLogsExports": {
+          "shape": "StringList",
+          "documentation": "<p>A list of log types that this DB cluster is configured to export to CloudWatch Logs.</p>"
+        },
+        "EngineMode": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The database engine mode of the DB cluster.</p>"
+        },
+        "DeletionProtection": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the DB cluster has deletion protection enabled.</p>"
+        },
+        "HttpEndpointEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the HTTP endpoint for an Aurora Serverless DB cluster is enabled.</p>"
+        },
+        "ActivityStreamStatus": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The status of the database activity stream.</p>"
+        },
+        "CopyTagsToSnapshot": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether tags are copied from the DB cluster to snapshots of the DB cluster.</p>"
+        },
+        "CrossAccountClone": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the DB cluster is a clone of a DB cluster owned by a different AWS account.</p>"
+        },
+        "DomainMemberships": {
+          "shape": "AwsRdsDbDomainMemberships",
+          "documentation": "<p>The Active Directory domain membership records that are associated with the DB cluster.</p>"
+        },
+        "DbClusterParameterGroup": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the DB cluster parameter group for the DB cluster.</p>"
+        },
+        "DbSubnetGroup": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The subnet group that is associated with the DB cluster, including the name, description, and subnets in the subnet group.</p>"
+        },
+        "DbClusterOptionGroupMemberships": {
+          "shape": "AwsRdsDbClusterOptionGroupMemberships",
+          "documentation": "<p>The list of option group memberships for this DB cluster.</p>"
+        },
+        "DbClusterIdentifier": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The DB cluster identifier that the user assigned to the cluster. This identifier is the unique key that identifies a DB cluster.</p>"
+        },
+        "DbClusterMembers": {
+          "shape": "AwsRdsDbClusterMembers",
+          "documentation": "<p>The list of instances that make up the DB cluster.</p>"
+        },
+        "IamDatabaseAuthenticationEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the mapping of IAM accounts to database accounts is enabled.</p>"
+        }
+      },
+      "documentation": "<p>Information about an Amazon RDS DB cluster.</p>"
+    },
+    "AwsRdsDbClusterMember": {
+      "type": "structure",
+      "members": {
+        "IsClusterWriter": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the cluster member is the primary instance for the DB cluster.</p>"
+        },
+        "PromotionTier": {
+          "shape": "Integer",
+          "documentation": "<p>Specifies the order in which an Aurora replica is promoted to the primary instance when the existing primary instance fails.</p>"
+        },
+        "DbInstanceIdentifier": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The instance identifier for this member of the DB cluster.</p>"
+        },
+        "DbClusterParameterGroupStatus": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The status of the DB cluster parameter group for this member of the DB cluster.</p>"
+        }
+      },
+      "documentation": "<p>Information about an instance in the DB cluster.</p>"
+    },
+    "AwsRdsDbClusterMembers": {
+      "type": "list",
+      "member": {
+        "shape": "AwsRdsDbClusterMember"
+      }
+    },
+    "AwsRdsDbClusterOptionGroupMembership": {
+      "type": "structure",
+      "members": {
+        "DbClusterOptionGroupName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the DB cluster option group.</p>"
+        },
+        "Status": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The status of the DB cluster option group.</p>"
+        }
+      },
+      "documentation": "<p>Information about an option group membership for a DB cluster.</p>"
+    },
+    "AwsRdsDbClusterOptionGroupMemberships": {
+      "type": "list",
+      "member": {
+        "shape": "AwsRdsDbClusterOptionGroupMembership"
+      }
+    },
+    "AwsRdsDbClusterSnapshotDetails": {
+      "type": "structure",
+      "members": {
+        "AvailabilityZones": {
+          "shape": "StringList",
+          "documentation": "<p>A list of Availability Zones where instances in the DB cluster can be created.</p>"
+        },
+        "SnapshotCreateTime": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the snapshot was taken.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "Engine": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "AllocatedStorage": {
+          "shape": "Integer",
+          "documentation": "<p>Specifies the allocated storage size in gibibytes (GiB).</p>"
+        },
+        "Status": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The status of this DB cluster snapshot.</p>"
+        },
+        "Port": {
+          "shape": "Integer",
+          "documentation": "<p>The port number on which the DB instances in the DB cluster accept connections.</p>"
+        },
+        "VpcId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The VPC ID that is associated with the DB cluster snapshot.</p>"
+        },
+        "ClusterCreateTime": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the DB cluster was created, in Universal Coordinated Time (UTC).</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "MasterUsername": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the master user for the DB cluster.</p>"
+        },
+        "EngineVersion": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The version of the database engine to use.</p>"
+        },
+        "LicenseModel": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The license model information for this DB cluster snapshot.</p>"
+        },
+        "SnapshotType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of DB cluster snapshot.</p>"
+        },
+        "PercentProgress": {
+          "shape": "Integer",
+          "documentation": "<p>Specifies the percentage of the estimated data that has been transferred.</p>"
+        },
+        "StorageEncrypted": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the DB cluster is encrypted.</p>"
+        },
+        "KmsKeyId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the AWS KMS master key that is used to encrypt the database instances in the DB cluster.</p>"
+        },
+        "DbClusterIdentifier": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The DB cluster identifier.</p>"
+        },
+        "DbClusterSnapshotIdentifier": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the DB cluster snapshot.</p>"
+        },
+        "IamDatabaseAuthenticationEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether mapping of IAM accounts to database accounts is enabled.</p>"
+        }
+      },
+      "documentation": "<p>Information about an Amazon RDS DB cluster snapshot.</p>"
+    },
+    "AwsRdsDbDomainMembership": {
+      "type": "structure",
+      "members": {
+        "Domain": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the Active Directory domain.</p>"
+        },
+        "Status": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The status of the Active Directory Domain membership for the DB instance.</p>"
+        },
+        "Fqdn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The fully qualified domain name of the Active Directory domain.</p>"
+        },
+        "IamRoleName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the IAM role to use when making API calls to the Directory Service.</p>"
+        }
+      },
+      "documentation": "<p>Information about an Active Directory domain membership record associated with the DB instance.</p>"
+    },
+    "AwsRdsDbDomainMemberships": {
+      "type": "list",
+      "member": {
+        "shape": "AwsRdsDbDomainMembership"
+      }
     },
     "AwsRdsDbInstanceAssociatedRole": {
       "type": "structure",
@@ -2497,7 +3413,7 @@
         },
         "InstanceCreateTime": {
           "shape": "NonEmptyString",
-          "documentation": "<p>Provides the date and time the DB instance was created.</p>"
+          "documentation": "<p>Indicates when the DB instance was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
         },
         "KmsKeyId": {
           "shape": "NonEmptyString",
@@ -2518,6 +3434,157 @@
         "VpcSecurityGroups": {
           "shape": "AwsRdsDbInstanceVpcSecurityGroups",
           "documentation": "<p>A list of VPC security groups that the DB instance belongs to.</p>"
+        },
+        "MultiAz": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the DB instance is a multiple Availability Zone deployment.</p>"
+        },
+        "EnhancedMonitoringResourceArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the CloudWatch Logs log stream that receives the enhanced monitoring metrics data for the DB instance.</p>"
+        },
+        "DbInstanceStatus": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The current status of the DB instance.</p>"
+        },
+        "MasterUsername": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The master user name of the DB instance.</p>"
+        },
+        "AllocatedStorage": {
+          "shape": "Integer",
+          "documentation": "<p>The amount of storage (in gigabytes) to initially allocate for the DB instance.</p>"
+        },
+        "PreferredBackupWindow": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The range of time each day when automated backups are created, if automated backups are enabled.</p> <p>Uses the format <code>HH:MM-HH:MM</code>. For example, <code>04:52-05:22</code>.</p>"
+        },
+        "BackupRetentionPeriod": {
+          "shape": "Integer",
+          "documentation": "<p>The number of days for which to retain automated backups.</p>"
+        },
+        "DbSecurityGroups": {
+          "shape": "StringList",
+          "documentation": "<p>A list of the DB security groups to assign to the DB instance.</p>"
+        },
+        "DbParameterGroups": {
+          "shape": "AwsRdsDbParameterGroups",
+          "documentation": "<p>A list of the DB parameter groups to assign to the DB instance.</p>"
+        },
+        "AvailabilityZone": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Availability Zone where the DB instance will be created.</p>"
+        },
+        "DbSubnetGroup": {
+          "shape": "AwsRdsDbSubnetGroup",
+          "documentation": "<p>Information about the subnet group that is associated with the DB instance.</p>"
+        },
+        "PreferredMaintenanceWindow": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).</p> <p>Uses the format <code>&lt;day&gt;:HH:MM-&lt;day&gt;:HH:MM</code>.</p> <p>For the day values, use <code>mon</code>|<code>tue</code>|<code>wed</code>|<code>thu</code>|<code>fri</code>|<code>sat</code>|<code>sun</code>.</p> <p>For example, <code>sun:09:32-sun:10:02</code>.</p>"
+        },
+        "PendingModifiedValues": {
+          "shape": "AwsRdsDbPendingModifiedValues",
+          "documentation": "<p>Changes to the DB instance that are currently pending.</p>"
+        },
+        "LatestRestorableTime": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Specifies the latest time to which a database can be restored with point-in-time restore.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "AutoMinorVersionUpgrade": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether minor version patches are applied automatically.</p>"
+        },
+        "ReadReplicaSourceDBInstanceIdentifier": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>If this DB instance is a read replica, contains the identifier of the source DB instance.</p>"
+        },
+        "ReadReplicaDBInstanceIdentifiers": {
+          "shape": "StringList",
+          "documentation": "<p>List of identifiers of the read replicas associated with this DB instance.</p>"
+        },
+        "ReadReplicaDBClusterIdentifiers": {
+          "shape": "StringList",
+          "documentation": "<p>List of identifiers of Aurora DB clusters to which the RDS DB instance is replicated as a read replica.</p>"
+        },
+        "LicenseModel": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>License model information for this DB instance.</p>"
+        },
+        "Iops": {
+          "shape": "Integer",
+          "documentation": "<p>Specifies the provisioned IOPS (I/O operations per second) for this DB instance.</p>"
+        },
+        "OptionGroupMemberships": {
+          "shape": "AwsRdsDbOptionGroupMemberships",
+          "documentation": "<p>The list of option group memberships for this DB instance.</p>"
+        },
+        "CharacterSetName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the character set that this DB instance is associated with.</p>"
+        },
+        "SecondaryAvailabilityZone": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>For a DB instance with multi-Availability Zone support, the name of the secondary Availability Zone.</p>"
+        },
+        "StatusInfos": {
+          "shape": "AwsRdsDbStatusInfos",
+          "documentation": "<p>The status of a read replica. If the instance isn't a read replica, this is empty.</p>"
+        },
+        "StorageType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The storage type for the DB instance.</p>"
+        },
+        "DomainMemberships": {
+          "shape": "AwsRdsDbDomainMemberships",
+          "documentation": "<p>The Active Directory domain membership records associated with the DB instance.</p>"
+        },
+        "CopyTagsToSnapshot": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether to copy resource tags to snapshots of the DB instance.</p>"
+        },
+        "MonitoringInterval": {
+          "shape": "Integer",
+          "documentation": "<p>The interval, in seconds, between points when enhanced monitoring metrics are collected for the DB instance.</p>"
+        },
+        "MonitoringRoleArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN for the IAM role that permits Amazon RDS to send enhanced monitoring metrics to CloudWatch Logs.</p>"
+        },
+        "PromotionTier": {
+          "shape": "Integer",
+          "documentation": "<p>The order in which to promote an Aurora replica to the primary instance after a failure of the existing primary instance.</p>"
+        },
+        "Timezone": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The time zone of the DB instance.</p>"
+        },
+        "PerformanceInsightsEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether Performance Insights is enabled for the DB instance.</p>"
+        },
+        "PerformanceInsightsKmsKeyId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the AWS KMS key used to encrypt the Performance Insights data.</p>"
+        },
+        "PerformanceInsightsRetentionPeriod": {
+          "shape": "Integer",
+          "documentation": "<p>The number of days to retain Performance Insights data.</p>"
+        },
+        "EnabledCloudWatchLogsExports": {
+          "shape": "StringList",
+          "documentation": "<p>A list of log types that this DB instance is configured to export to CloudWatch Logs.</p>"
+        },
+        "ProcessorFeatures": {
+          "shape": "AwsRdsDbProcessorFeatures",
+          "documentation": "<p>The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.</p>"
+        },
+        "ListenerEndpoint": {
+          "shape": "AwsRdsDbInstanceEndpoint"
+        },
+        "MaxAllocatedStorage": {
+          "shape": "Integer",
+          "documentation": "<p>The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.</p>"
         }
       },
       "documentation": "<p>Contains the details of an Amazon RDS DB instance.</p>"
@@ -2560,6 +3627,352 @@
         "shape": "AwsRdsDbInstanceVpcSecurityGroup"
       }
     },
+    "AwsRdsDbOptionGroupMembership": {
+      "type": "structure",
+      "members": {
+        "OptionGroupName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "Status": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        }
+      },
+      "documentation": "<p/>"
+    },
+    "AwsRdsDbOptionGroupMemberships": {
+      "type": "list",
+      "member": {
+        "shape": "AwsRdsDbOptionGroupMembership"
+      }
+    },
+    "AwsRdsDbParameterGroup": {
+      "type": "structure",
+      "members": {
+        "DbParameterGroupName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "ParameterApplyStatus": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        }
+      },
+      "documentation": "<p/>"
+    },
+    "AwsRdsDbParameterGroups": {
+      "type": "list",
+      "member": {
+        "shape": "AwsRdsDbParameterGroup"
+      }
+    },
+    "AwsRdsDbPendingModifiedValues": {
+      "type": "structure",
+      "members": {
+        "DbInstanceClass": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "AllocatedStorage": {
+          "shape": "Integer",
+          "documentation": "<p/>"
+        },
+        "MasterUserPassword": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "Port": {
+          "shape": "Integer",
+          "documentation": "<p/>"
+        },
+        "BackupRetentionPeriod": {
+          "shape": "Integer",
+          "documentation": "<p/>"
+        },
+        "MultiAZ": {
+          "shape": "Boolean",
+          "documentation": "<p/>"
+        },
+        "EngineVersion": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "LicenseModel": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "Iops": {
+          "shape": "Integer",
+          "documentation": "<p/>"
+        },
+        "DbInstanceIdentifier": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "StorageType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "CaCertificateIdentifier": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "DbSubnetGroupName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "PendingCloudWatchLogsExports": {
+          "shape": "AwsRdsPendingCloudWatchLogsExports",
+          "documentation": "<p/>"
+        },
+        "ProcessorFeatures": {
+          "shape": "AwsRdsDbProcessorFeatures",
+          "documentation": "<p/>"
+        }
+      },
+      "documentation": "<p/>"
+    },
+    "AwsRdsDbProcessorFeature": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "Value": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        }
+      },
+      "documentation": "<p/>"
+    },
+    "AwsRdsDbProcessorFeatures": {
+      "type": "list",
+      "member": {
+        "shape": "AwsRdsDbProcessorFeature"
+      }
+    },
+    "AwsRdsDbSnapshotDetails": {
+      "type": "structure",
+      "members": {
+        "DbSnapshotIdentifier": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "DbInstanceIdentifier": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "SnapshotCreateTime": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "Engine": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "AllocatedStorage": {
+          "shape": "Integer",
+          "documentation": "<p/>"
+        },
+        "Status": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "Port": {
+          "shape": "Integer",
+          "documentation": "<p/>"
+        },
+        "AvailabilityZone": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "VpcId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "InstanceCreateTime": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "MasterUsername": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "EngineVersion": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "LicenseModel": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "SnapshotType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "Iops": {
+          "shape": "Integer",
+          "documentation": "<p/>"
+        },
+        "OptionGroupName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "PercentProgress": {
+          "shape": "Integer",
+          "documentation": "<p/>"
+        },
+        "SourceRegion": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "SourceDbSnapshotIdentifier": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "StorageType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "TdeCredentialArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "Encrypted": {
+          "shape": "Boolean",
+          "documentation": "<p/>"
+        },
+        "KmsKeyId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "Timezone": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
+        "IamDatabaseAuthenticationEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p/>"
+        },
+        "ProcessorFeatures": {
+          "shape": "AwsRdsDbProcessorFeatures",
+          "documentation": "<p/>"
+        },
+        "DbiResourceId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        }
+      },
+      "documentation": "<p/>"
+    },
+    "AwsRdsDbStatusInfo": {
+      "type": "structure",
+      "members": {
+        "StatusType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of status. For a read replica, the status type is read replication.</p>"
+        },
+        "Normal": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the read replica instance is operating normally.</p>"
+        },
+        "Status": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The status of the read replica instance.</p>"
+        },
+        "Message": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>If the read replica is currently in an error state, provides the error details.</p>"
+        }
+      },
+      "documentation": "<p>Information about the status of a read replica.</p>"
+    },
+    "AwsRdsDbStatusInfos": {
+      "type": "list",
+      "member": {
+        "shape": "AwsRdsDbStatusInfo"
+      }
+    },
+    "AwsRdsDbSubnetGroup": {
+      "type": "structure",
+      "members": {
+        "DbSubnetGroupName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the subnet group.</p>"
+        },
+        "DbSubnetGroupDescription": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The description of the subnet group.</p>"
+        },
+        "VpcId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The VPC ID of the subnet group.</p>"
+        },
+        "SubnetGroupStatus": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The status of the subnet group.</p>"
+        },
+        "Subnets": {
+          "shape": "AwsRdsDbSubnetGroupSubnets",
+          "documentation": "<p>A list of subnets in the subnet group.</p>"
+        },
+        "DbSubnetGroupArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the subnet group.</p>"
+        }
+      },
+      "documentation": "<p>Information about the subnet group for the database instance.</p>"
+    },
+    "AwsRdsDbSubnetGroupSubnet": {
+      "type": "structure",
+      "members": {
+        "SubnetIdentifier": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of a subnet in the subnet group.</p>"
+        },
+        "SubnetAvailabilityZone": {
+          "shape": "AwsRdsDbSubnetGroupSubnetAvailabilityZone",
+          "documentation": "<p>Information about the Availability Zone for a subnet in the subnet group.</p>"
+        },
+        "SubnetStatus": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The status of a subnet in the subnet group.</p>"
+        }
+      },
+      "documentation": "<p>Information about a subnet in a subnet group.</p>"
+    },
+    "AwsRdsDbSubnetGroupSubnetAvailabilityZone": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the Availability Zone for a subnet in the subnet group.</p>"
+        }
+      },
+      "documentation": "<p>An Availability Zone for a subnet in a subnet group.</p>"
+    },
+    "AwsRdsDbSubnetGroupSubnets": {
+      "type": "list",
+      "member": {
+        "shape": "AwsRdsDbSubnetGroupSubnet"
+      }
+    },
+    "AwsRdsPendingCloudWatchLogsExports": {
+      "type": "structure",
+      "members": {
+        "LogTypesToEnable": {
+          "shape": "StringList",
+          "documentation": "<p>A list of log types that are being enabled.</p>"
+        },
+        "LogTypesToDisable": {
+          "shape": "StringList",
+          "documentation": "<p>A list of log types that are being disabled.</p>"
+        }
+      },
+      "documentation": "<p>Identifies the log types to enable and disable.</p>"
+    },
     "AwsS3BucketDetails": {
       "type": "structure",
       "members": {
@@ -2573,7 +3986,7 @@
         },
         "CreatedAt": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The date and time when the S3 bucket was created.</p>"
+          "documentation": "<p>Indicates when the S3 bucket was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
         },
         "ServerSideEncryptionConfiguration": {
           "shape": "AwsS3BucketServerSideEncryptionConfiguration",
@@ -2627,7 +4040,7 @@
       "members": {
         "LastModified": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The date and time when the object was last modified.</p>"
+          "documentation": "<p>Indicates when the object was last modified.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
         },
         "ETag": {
           "shape": "NonEmptyString",
@@ -2651,6 +4064,54 @@
         }
       },
       "documentation": "<p>Details about an Amazon S3 object.</p>"
+    },
+    "AwsSecretsManagerSecretDetails": {
+      "type": "structure",
+      "members": {
+        "RotationRules": {
+          "shape": "AwsSecretsManagerSecretRotationRules",
+          "documentation": "<p>Defines the rotation schedule for the secret.</p>"
+        },
+        "RotationOccurredWithinFrequency": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the rotation occurred within the specified rotation frequency.</p>"
+        },
+        "KmsKeyId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN, Key ID, or alias of the AWS KMS customer master key (CMK) used to encrypt the <code>SecretString</code> or <code>SecretBinary</code> values for versions of this secret.</p>"
+        },
+        "RotationEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether rotation is enabled.</p>"
+        },
+        "RotationLambdaArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the Lambda function that rotates the secret.</p>"
+        },
+        "Deleted": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the secret is deleted.</p>"
+        },
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the secret.</p>"
+        },
+        "Description": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The user-provided description of the secret.</p>"
+        }
+      },
+      "documentation": "<p>Details about an AWS Secrets Manager secret.</p>"
+    },
+    "AwsSecretsManagerSecretRotationRules": {
+      "type": "structure",
+      "members": {
+        "AutomaticallyAfterDays": {
+          "shape": "Integer",
+          "documentation": "<p>The number of days after the previous rotation to rotate the secret.</p>"
+        }
+      },
+      "documentation": "<p>Defines the rotation schedule for the secret.</p>"
     },
     "AwsSecurityFinding": {
       "type": "structure",
@@ -2695,19 +4156,19 @@
         },
         "FirstObservedAt": {
           "shape": "NonEmptyString",
-          "documentation": "<p>An ISO8601-formatted timestamp that indicates when the security-findings provider first observed the potential security issue that a finding captured.</p>"
+          "documentation": "<p>Indicates when the security-findings provider first observed the potential security issue that a finding captured.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
         },
         "LastObservedAt": {
           "shape": "NonEmptyString",
-          "documentation": "<p>An ISO8601-formatted timestamp that indicates when the security-findings provider most recently observed the potential security issue that a finding captured.</p>"
+          "documentation": "<p>Indicates when the security-findings provider most recently observed the potential security issue that a finding captured.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
         },
         "CreatedAt": {
           "shape": "NonEmptyString",
-          "documentation": "<p>An ISO8601-formatted timestamp that indicates when the security-findings provider created the potential security issue that a finding captured.</p>"
+          "documentation": "<p>Indicates when the security-findings provider created the potential security issue that a finding captured.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
         },
         "UpdatedAt": {
           "shape": "NonEmptyString",
-          "documentation": "<p>An ISO8601-formatted timestamp that indicates when the security-findings provider last updated the finding record. </p>"
+          "documentation": "<p>Indicates when the security-findings provider last updated the finding record.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
         },
         "Severity": {
           "shape": "Severity",
@@ -3543,7 +5004,7 @@
         },
         "LaunchedAt": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The date and time when the container started.</p>"
+          "documentation": "<p>Indicates when the container started.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
         }
       },
       "documentation": "<p>Container details related to a finding.</p>"
@@ -4683,23 +6144,24 @@
       "members": {
         "Key": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The key of the map filter.</p>"
+          "documentation": "<p>The key of the map filter. For example, for <code>ResourceTags</code>, <code>Key</code> identifies the name of the tag. For <code>UserDefinedFields</code>, <code>Key</code> is the name of the field.</p>"
         },
         "Value": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The value for the key in the map filter.</p>"
+          "documentation": "<p>The value for the key in the map filter. Filter values are case sensitive. For example, one of the values for a tag called <code>Department</code> might be <code>Security</code>. If you provide <code>security</code> as the filter value, then there is no match.</p>"
         },
         "Comparison": {
           "shape": "MapFilterComparison",
-          "documentation": "<p>The condition to apply to a key value when querying for findings with a map filter.</p>"
+          "documentation": "<p>The condition to apply to the key value when querying for findings with a map filter.</p> <p>To search for values that exactly match the filter value, use <code>EQUALS</code>. For example, for the <code>ResourceTags</code> field, the filter <code>Department EQUALS Security</code> matches findings that have the value <code>Security</code> for the tag <code>Department</code>.</p> <p>To search for values other than the filter value, use <code>NOT_EQUALS</code>. For example, for the <code>ResourceTags</code> field, the filter <code>Department NOT_EQUALS Finance</code> matches findings that do not have the value <code>Finance</code> for the tag <code>Department</code>.</p> <p> <code>EQUALS</code> filters on the same field are joined by <code>OR</code>. A finding matches if it matches any one of those filters.</p> <p> <code>NOT_EQUALS</code> filters on the same field are joined by <code>AND</code>. A finding matches only if it matches all of those filters.</p> <p>You cannot have both an <code>EQUALS</code> filter and a <code>NOT_EQUALS</code> filter on the same field.</p>"
         }
       },
-      "documentation": "<p>The map filter for querying findings.</p>"
+      "documentation": "<p>A map filter for querying findings. Each map filter provides the field to check, the value to look for, and the comparison operator.</p>"
     },
     "MapFilterComparison": {
       "type": "string",
       "enum": [
-        "EQUALS"
+        "EQUALS",
+        "NOT_EQUALS"
       ]
     },
     "MapFilterList": {
@@ -4901,7 +6363,7 @@
         },
         "UpdatedAt": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The timestamp of when the note was updated.</p>"
+          "documentation": "<p>The timestamp of when the note was updated.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
         }
       },
       "documentation": "<p>A user-defined note added to a finding.</p>"
@@ -4997,11 +6459,11 @@
         },
         "LaunchedAt": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The date/time that the process was launched.</p>"
+          "documentation": "<p>Indicates when the process was launched.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
         },
         "TerminatedAt": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The date and time when the process was terminated.</p>"
+          "documentation": "<p>Indicates when the process was terminated.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
         }
       },
       "documentation": "<p>The details of process-related information about a finding.</p>"
@@ -5202,6 +6664,10 @@
           "shape": "AwsEc2VpcDetails",
           "documentation": "<p>Details for an EC2 VPC.</p>"
         },
+        "AwsEc2Eip": {
+          "shape": "AwsEc2EipDetails",
+          "documentation": "<p>Details about an Elastic IP address.</p>"
+        },
         "AwsElbv2LoadBalancer": {
           "shape": "AwsElbv2LoadBalancerDetails",
           "documentation": "<p>Details about a load balancer.</p>"
@@ -5218,9 +6684,25 @@
           "shape": "AwsS3ObjectDetails",
           "documentation": "<p>Details about an Amazon S3 object related to a finding.</p>"
         },
+        "AwsSecretsManagerSecret": {
+          "shape": "AwsSecretsManagerSecretDetails",
+          "documentation": "<p>Details about a Secrets Manager secret.</p>"
+        },
         "AwsIamAccessKey": {
           "shape": "AwsIamAccessKeyDetails",
           "documentation": "<p>Details about an IAM access key related to a finding.</p>"
+        },
+        "AwsIamUser": {
+          "shape": "AwsIamUserDetails",
+          "documentation": "<p>Details about an IAM user.</p>"
+        },
+        "AwsIamPolicy": {
+          "shape": "AwsIamPolicyDetails",
+          "documentation": "<p>Details about an IAM permissions policy.</p>"
+        },
+        "AwsDynamoDbTable": {
+          "shape": "AwsDynamoDbTableDetails",
+          "documentation": "<p>Details about a DynamoDB table.</p>"
         },
         "AwsIamRole": {
           "shape": "AwsIamRoleDetails",
@@ -5240,7 +6722,7 @@
         },
         "AwsRdsDbInstance": {
           "shape": "AwsRdsDbInstanceDetails",
-          "documentation": "<p>Details for an Amazon RDS database instance.</p>"
+          "documentation": "<p>Details about an Amazon RDS database instance.</p>"
         },
         "AwsSnsTopic": {
           "shape": "AwsSnsTopicDetails",
@@ -5253,6 +6735,18 @@
         "AwsWafWebAcl": {
           "shape": "AwsWafWebAclDetails",
           "documentation": "<p>Details for a WAF WebACL.</p>"
+        },
+        "AwsRdsDbSnapshot": {
+          "shape": "AwsRdsDbSnapshotDetails",
+          "documentation": "<p>Details about an Amazon RDS database snapshot.</p>"
+        },
+        "AwsRdsDbClusterSnapshot": {
+          "shape": "AwsRdsDbClusterSnapshotDetails",
+          "documentation": "<p>Details about an Amazon RDS database cluster snapshot.</p>"
+        },
+        "AwsRdsDbCluster": {
+          "shape": "AwsRdsDbClusterDetails",
+          "documentation": "<p>Details about an Amazon RDS database cluster.</p>"
         },
         "Container": {
           "shape": "ContainerDetails",
@@ -5355,6 +6849,9 @@
         }
       },
       "documentation": "<p>Updates to the severity information for a finding.</p>"
+    },
+    "SizeBytes": {
+      "type": "long"
     },
     "SoftwarePackage": {
       "type": "structure",
@@ -5609,11 +7106,11 @@
       "members": {
         "Value": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The string filter value.</p>"
+          "documentation": "<p>The string filter value. Filter values are case sensitive. For example, the product name for control-based findings is <code>Security Hub</code>. If you provide <code>security hub</code> as the filter text, then there is no match.</p>"
         },
         "Comparison": {
           "shape": "StringFilterComparison",
-          "documentation": "<p>The condition to be applied to a string value when querying for findings. </p>"
+          "documentation": "<p>The condition to apply to a string value when querying for findings. To search for values that contain the filter criteria value, use one of the following comparison operators:</p> <ul> <li> <p>To search for values that exactly match the filter value, use <code>EQUALS</code>.</p> <p>For example, the filter <code>ResourceType EQUALS AwsEc2SecurityGroup</code> only matches findings that have a resource type of <code>AwsEc2SecurityGroup</code>.</p> </li> <li> <p>To search for values that start with the filter value, use <code>PREFIX</code>.</p> <p>For example, the filter <code>ResourceType PREFIX AwsIam</code> matches findings that have a resource type that starts with <code>AwsIam</code>. Findings with a resource type of <code>AwsIamPolicy</code>, <code>AwsIamRole</code>, or <code>AwsIamUser</code> would all match.</p> </li> </ul> <p> <code>EQUALS</code> and <code>PREFIX</code> filters on the same field are joined by <code>OR</code>. A finding matches if it matches any one of those filters.</p> <p>To search for values that do not contain the filter criteria value, use one of the following comparison operators:</p> <ul> <li> <p>To search for values that do not exactly match the filter value, use <code>NOT_EQUALS</code>.</p> <p>For example, the filter <code>ResourceType NOT_EQUALS AwsIamPolicy</code> matches findings that have a resource type other than <code>AwsIamPolicy</code>.</p> </li> <li> <p>To search for values that do not start with the filter value, use <code>PREFIX_NOT_EQUALS</code>.</p> <p>For example, the filter <code>ResourceType PREFIX_NOT_EQUALS AwsIam</code> matches findings that have a resource type that does not start with <code>AwsIam</code>. Findings with a resource type of <code>AwsIamPolicy</code>, <code>AwsIamRole</code>, or <code>AwsIamUser</code> would all be excluded from the results.</p> </li> </ul> <p> <code>NOT_EQUALS</code> and <code>PREFIX_NOT_EQUALS</code> filters on the same field are joined by <code>AND</code>. A finding matches only if it matches all of those filters.</p> <p>For filters on the same field, you cannot provide both an <code>EQUALS</code> filter and a <code>NOT_EQUALS</code> or <code>PREFIX_NOT_EQUALS</code> filter. Combining filters in this way always returns an error, even if the provided filter values would return valid results.</p> <p>You can combine <code>PREFIX</code> filters with <code>NOT_EQUALS</code> or <code>PREFIX_NOT_EQUALS</code> filters for the same field. Security Hub first processes the <code>PREFIX</code> filters, then the <code>NOT_EQUALS</code> or <code>PREFIX_NOT_EQUALS</code> filters.</p> <p> For example, for the following filter, Security Hub first identifies findings that have resource types that start with either <code>AwsIAM</code> or <code>AwsEc2</code>. It then excludes findings that have a resource type of <code>AwsIamPolicy</code> and findings that have a resource type of <code>AwsEc2NetworkInterface</code>.</p> <ul> <li> <p> <code>ResourceType PREFIX AwsIam</code> </p> </li> <li> <p> <code>ResourceType PREFIX AwsEc2</code> </p> </li> <li> <p> <code>ResourceType NOT_EQUALS AwsIamPolicy</code> </p> </li> <li> <p> <code>ResourceType NOT_EQUALS AwsEc2NetworkInterface</code> </p> </li> </ul>"
         }
       },
       "documentation": "<p>A string filter for querying findings.</p>"
@@ -5622,7 +7119,9 @@
       "type": "string",
       "enum": [
         "EQUALS",
-        "PREFIX"
+        "PREFIX",
+        "NOT_EQUALS",
+        "PREFIX_NOT_EQUALS"
       ]
     },
     "StringFilterList": {
@@ -5706,7 +7205,7 @@
         },
         "LastObservedAt": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The date and time when the most recent instance of a threat intelligence indicator was observed.</p>"
+          "documentation": "<p>Indicates when the most recent instance of a threat intelligence indicator was observed.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
         },
         "Source": {
           "shape": "NonEmptyString",
@@ -5974,11 +7473,11 @@
         },
         "VendorCreatedAt": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The datetime when the vulnerability advisory was created.</p>"
+          "documentation": "<p>Indicates when the vulnerability advisory was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
         },
         "VendorUpdatedAt": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The datetime when the vulnerability advisory was last updated.</p>"
+          "documentation": "<p>Indicates when the vulnerability advisory was last updated.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
         }
       },
       "documentation": "<p>A vendor that generates a vulnerability report.</p>"

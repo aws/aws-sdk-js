@@ -273,6 +273,31 @@
       ],
       "documentation": "<p>Creates an email template. Email templates enable you to send personalized email to one or more destinations in a single API operation. For more information, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html\">Amazon SES Developer Guide</a>.</p> <p>You can execute this operation no more than once per second.</p>"
     },
+    "CreateImportJob": {
+      "name": "CreateImportJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v2/email/import-jobs"
+      },
+      "input": {
+        "shape": "CreateImportJobRequest"
+      },
+      "output": {
+        "shape": "CreateImportJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "documentation": "<p>Creates an import job for a data destination.</p>"
+    },
     "DeleteConfigurationSet": {
       "name": "DeleteConfigurationSet",
       "http": {
@@ -829,6 +854,31 @@
       ],
       "documentation": "<p>Displays the template object (which includes the subject line, HTML part and text part) for the template you specify.</p> <p>You can execute this operation no more than once per second.</p>"
     },
+    "GetImportJob": {
+      "name": "GetImportJob",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v2/email/import-jobs/{JobId}"
+      },
+      "input": {
+        "shape": "GetImportJobRequest"
+      },
+      "output": {
+        "shape": "GetImportJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "documentation": "<p>Provides information about an import job.</p>"
+    },
     "GetSuppressedDestination": {
       "name": "GetSuppressedDestination",
       "http": {
@@ -1013,6 +1063,28 @@
         }
       ],
       "documentation": "<p>Lists the email templates present in your Amazon SES account in the current AWS Region.</p> <p>You can execute this operation no more than once per second.</p>"
+    },
+    "ListImportJobs": {
+      "name": "ListImportJobs",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v2/email/import-jobs"
+      },
+      "input": {
+        "shape": "ListImportJobsRequest"
+      },
+      "output": {
+        "shape": "ListImportJobsResponse"
+      },
+      "errors": [
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "BadRequestException"
+        }
+      ],
+      "documentation": "<p>Lists all of the import jobs.</p>"
     },
     "ListSuppressedDestinations": {
       "name": "ListSuppressedDestinations",
@@ -2341,6 +2413,34 @@
       "members": {},
       "documentation": "<p>If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.</p>"
     },
+    "CreateImportJobRequest": {
+      "type": "structure",
+      "required": [
+        "ImportDestination",
+        "ImportDataSource"
+      ],
+      "members": {
+        "ImportDestination": {
+          "shape": "ImportDestination",
+          "documentation": "<p>The destination for the import job.</p>"
+        },
+        "ImportDataSource": {
+          "shape": "ImportDataSource",
+          "documentation": "<p>The data source for the import job.</p>"
+        }
+      },
+      "documentation": "<p>Represents a request to create an import job from a data source for a data destination.</p>"
+    },
+    "CreateImportJobResponse": {
+      "type": "structure",
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>A string that represents the import job ID.</p>"
+        }
+      },
+      "documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request fails.</p>"
+    },
     "CustomRedirectDomain": {
       "type": "string",
       "documentation": "<p>The domain that you want to use for tracking open and click events.</p>"
@@ -2401,6 +2501,14 @@
       "member": {
         "shape": "DailyVolume"
       }
+    },
+    "DataFormat": {
+      "type": "string",
+      "documentation": "<p>The data format of the import job's data source.</p>",
+      "enum": [
+        "CSV",
+        "JSON"
+      ]
     },
     "DedicatedIp": {
       "type": "structure",
@@ -3117,6 +3225,26 @@
         "shape": "EventType"
       }
     },
+    "FailedRecordsCount": {
+      "type": "integer"
+    },
+    "FailedRecordsS3Url": {
+      "type": "string"
+    },
+    "FailureInfo": {
+      "type": "structure",
+      "members": {
+        "FailedRecordsS3Url": {
+          "shape": "FailedRecordsS3Url",
+          "documentation": "<p>An Amazon S3 presigned URL that contains all the failed records and related information.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "ErrorMessage",
+          "documentation": "<p>A message about why the import job failed.</p>"
+        }
+      },
+      "documentation": "<p>An object that contains the failure details about an import job.</p>"
+    },
     "FailureRedirectionURL": {
       "type": "string",
       "documentation": "<p>The URL that the recipient of the verification email is sent to if his or her address is not successfully verified.</p>"
@@ -3638,6 +3766,63 @@
       },
       "documentation": "<p>The following element is returned by the service.</p>"
     },
+    "GetImportJobRequest": {
+      "type": "structure",
+      "required": [
+        "JobId"
+      ],
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The ID of the import job.</p>",
+          "location": "uri",
+          "locationName": "JobId"
+        }
+      },
+      "documentation": "<p>Represents a request for information about an import job using the import job ID.</p>"
+    },
+    "GetImportJobResponse": {
+      "type": "structure",
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>A string that represents the import job ID.</p>"
+        },
+        "ImportDestination": {
+          "shape": "ImportDestination",
+          "documentation": "<p>The destination of the import job.</p>"
+        },
+        "ImportDataSource": {
+          "shape": "ImportDataSource",
+          "documentation": "<p>The data source of the import job.</p>"
+        },
+        "FailureInfo": {
+          "shape": "FailureInfo",
+          "documentation": "<p>The failure details about an import job.</p>"
+        },
+        "JobStatus": {
+          "shape": "JobStatus",
+          "documentation": "<p>The status of the import job.</p>"
+        },
+        "CreatedTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time stamp of when the import job was created.</p>"
+        },
+        "CompletedTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time stamp of when the import job was completed.</p>"
+        },
+        "ProcessedRecordsCount": {
+          "shape": "ProcessedRecordsCount",
+          "documentation": "<p>The current number of records processed.</p>"
+        },
+        "FailedRecordsCount": {
+          "shape": "FailedRecordsCount",
+          "documentation": "<p>The number of records that failed processing because of invalid input or other reasons.</p>"
+        }
+      },
+      "documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request fails.</p>"
+    },
     "GetSuppressedDestinationRequest": {
       "type": "structure",
       "required": [
@@ -3706,6 +3891,69 @@
     "ImageUrl": {
       "type": "string"
     },
+    "ImportDataSource": {
+      "type": "structure",
+      "required": [
+        "S3Url",
+        "DataFormat"
+      ],
+      "members": {
+        "S3Url": {
+          "shape": "S3Url",
+          "documentation": "<p>An Amazon S3 URL in the format s3://<i>&lt;bucket_name&gt;</i>/<i>&lt;object&gt;</i>.</p>"
+        },
+        "DataFormat": {
+          "shape": "DataFormat",
+          "documentation": "<p>The data format of the import job's data source.</p>"
+        }
+      },
+      "documentation": "<p>An object that contains details about the data source of the import job.</p>"
+    },
+    "ImportDestination": {
+      "type": "structure",
+      "required": [
+        "SuppressionListDestination"
+      ],
+      "members": {
+        "SuppressionListDestination": {
+          "shape": "SuppressionListDestination",
+          "documentation": "<p>An object that contains the action of the import job towards suppression list.</p>"
+        }
+      },
+      "documentation": "<p>An object that contains details about the resource destination the import job is going to target.</p>"
+    },
+    "ImportDestinationType": {
+      "type": "string",
+      "documentation": "<p>The destination of the import job, which can be used to list import jobs that have a certain <code>ImportDestinationType</code>.</p>",
+      "enum": [
+        "SUPPRESSION_LIST"
+      ]
+    },
+    "ImportJobSummary": {
+      "type": "structure",
+      "members": {
+        "JobId": {
+          "shape": "JobId"
+        },
+        "ImportDestination": {
+          "shape": "ImportDestination"
+        },
+        "JobStatus": {
+          "shape": "JobStatus"
+        },
+        "CreatedTimestamp": {
+          "shape": "Timestamp"
+        }
+      },
+      "documentation": "<p>A summary of the import job.</p>"
+    },
+    "ImportJobSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "ImportJobSummary"
+      },
+      "documentation": "<p>A list of the import job summaries.</p>"
+    },
     "InboxPlacementTrackingOption": {
       "type": "structure",
       "members": {
@@ -3759,6 +4007,21 @@
       "member": {
         "shape": "IspPlacement"
       }
+    },
+    "JobId": {
+      "type": "string",
+      "documentation": "<p>A string that represents the import job ID.</p>",
+      "min": 1
+    },
+    "JobStatus": {
+      "type": "string",
+      "documentation": "<p>The status of the import job.</p>",
+      "enum": [
+        "CREATED",
+        "PROCESSING",
+        "COMPLETED",
+        "FAILED"
+      ]
     },
     "KinesisFirehoseDestination": {
       "type": "structure",
@@ -4034,6 +4297,42 @@
         }
       },
       "documentation": "<p>The following elements are returned by the service.</p>"
+    },
+    "ListImportJobsRequest": {
+      "type": "structure",
+      "members": {
+        "ImportDestinationType": {
+          "shape": "ImportDestinationType",
+          "documentation": "<p>The destination of the import job, which can be used to list import jobs that have a certain <code>ImportDestinationType</code>.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A string token indicating that there might be additional import jobs available to be listed. Copy this token to a subsequent call to <code>ListImportJobs</code> with the same parameters to retrieve the next page of import jobs.</p>",
+          "location": "querystring",
+          "locationName": "NextToken"
+        },
+        "PageSize": {
+          "shape": "MaxItems",
+          "documentation": "<p>Maximum number of import jobs to return at once. Use this parameter to paginate results. If additional import jobs exist beyond the specified limit, the <code>NextToken</code> element is sent in the response. Use the <code>NextToken</code> value in subsequent requests to retrieve additional addresses.</p>",
+          "location": "querystring",
+          "locationName": "PageSize"
+        }
+      },
+      "documentation": "<p>Represents a request to list all of the import jobs for a data destination within the specified maximum number of import jobs.</p>"
+    },
+    "ListImportJobsResponse": {
+      "type": "structure",
+      "members": {
+        "ImportJobs": {
+          "shape": "ImportJobSummaryList",
+          "documentation": "<p>A list of the import job summaries.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A string token indicating that there might be additional import jobs available to be listed. Copy this token to a subsequent call to <code>ListImportJobs</code> with the same parameters to retrieve the next page of import jobs.</p>"
+        }
+      },
+      "documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request fails.</p>"
     },
     "ListOfDedicatedIpPools": {
       "type": "list",
@@ -4327,6 +4626,9 @@
       "min": 1,
       "pattern": "^[a-zA-Z0-9+\\/]+={0,2}$",
       "sensitive": true
+    },
+    "ProcessedRecordsCount": {
+      "type": "integer"
     },
     "PutAccountDedicatedIpWarmupAttributesRequest": {
       "type": "structure",
@@ -4836,6 +5138,11 @@
         "DENIED"
       ]
     },
+    "S3Url": {
+      "type": "string",
+      "documentation": "<p>An Amazon S3 URL in the format s3://<i>&lt;bucket_name&gt;</i>/<i>&lt;object&gt;</i>.</p>",
+      "pattern": "^s3:\\/\\/([^\\/]+)\\/(.*?([^\\/]+)\\/?)$"
+    },
     "Selector": {
       "type": "string",
       "max": 63,
@@ -5121,6 +5428,27 @@
         }
       },
       "documentation": "<p>An object that contains information about the email address suppression preferences for your account in the current AWS Region.</p>"
+    },
+    "SuppressionListDestination": {
+      "type": "structure",
+      "required": [
+        "SuppressionListImportAction"
+      ],
+      "members": {
+        "SuppressionListImportAction": {
+          "shape": "SuppressionListImportAction",
+          "documentation": "<p>The type of action that you want to perform on the address. Acceptable values:</p> <ul> <li> <p>PUT: add the addresses to the suppression list. If the record already exists, it will override it with the new value.</p> </li> <li> <p>DELETE: remove the addresses from the suppression list.</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>An object that contains details about the action of suppression list.</p>"
+    },
+    "SuppressionListImportAction": {
+      "type": "string",
+      "documentation": "<p>The type of action that you want to perform on the address. Acceptable values:</p> <ul> <li> <p>PUT: add the addresses to the suppression list.</p> </li> <li> <p>DELETE: remove the address from the suppression list.</p> </li> </ul>",
+      "enum": [
+        "DELETE",
+        "PUT"
+      ]
     },
     "SuppressionListReason": {
       "type": "string",

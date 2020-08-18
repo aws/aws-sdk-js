@@ -4927,15 +4927,14 @@
     },
     "AnalyticsConfigurationType": {
       "type": "structure",
-      "required": [
-        "ApplicationId",
-        "RoleArn",
-        "ExternalId"
-      ],
       "members": {
         "ApplicationId": {
           "shape": "HexStringType",
           "documentation": "<p>The application ID for an Amazon Pinpoint application.</p>"
+        },
+        "ApplicationArn": {
+          "shape": "ArnType",
+          "documentation": "<p>The Amazon Resource Name (ARN) of an Amazon Pinpoint project. You can use the Amazon Pinpoint project for Pinpoint integration with the chosen User Pool Client. Amazon Cognito publishes events to the pinpoint project declared by the app ARN.</p>"
         },
         "RoleArn": {
           "shape": "ArnType",

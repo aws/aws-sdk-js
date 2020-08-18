@@ -887,5 +887,8 @@
   },
   "braket": {
     "name": "Braket"
+  },
+  "identitystore": {
+    "name": "IdentityStore"
   }
 }

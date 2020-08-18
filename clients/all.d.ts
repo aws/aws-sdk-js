@@ -225,3 +225,4 @@ export import CodeArtifact = require('./codeartifact');
 export import Honeycode = require('./honeycode');
 export import IVS = require('./ivs');
 export import Braket = require('./braket');
+export import IdentityStore = require('./identitystore');

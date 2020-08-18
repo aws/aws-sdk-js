@@ -427,7 +427,7 @@ declare namespace SecurityHub {
      */
     HealthCheckGracePeriod?: Integer;
     /**
-     * The datetime when the auto scaling group was created.
+     * Indicates when the auto scaling group was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     CreatedTime?: NonEmptyString;
   }
@@ -441,7 +441,7 @@ declare namespace SecurityHub {
      */
     ETag?: NonEmptyString;
     /**
-     * The date and time that the distribution was last modified.
+     * Indicates when that the distribution was last modified. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     LastModifiedTime?: NonEmptyString;
     /**
@@ -586,6 +586,338 @@ declare namespace SecurityHub {
      */
     SecurityGroupIds?: NonEmptyStringList;
   }
+  export interface AwsDynamoDbTableAttributeDefinition {
+    /**
+     * The name of the attribute.
+     */
+    AttributeName?: NonEmptyString;
+    /**
+     * The type of the attribute.
+     */
+    AttributeType?: NonEmptyString;
+  }
+  export type AwsDynamoDbTableAttributeDefinitionList = AwsDynamoDbTableAttributeDefinition[];
+  export interface AwsDynamoDbTableBillingModeSummary {
+    /**
+     * The method used to charge for read and write throughput and to manage capacity.
+     */
+    BillingMode?: NonEmptyString;
+    /**
+     * If the billing mode is PAY_PER_REQUEST, indicates when the billing mode was set to that value. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    LastUpdateToPayPerRequestDateTime?: NonEmptyString;
+  }
+  export interface AwsDynamoDbTableDetails {
+    /**
+     * A list of attribute definitions for the table.
+     */
+    AttributeDefinitions?: AwsDynamoDbTableAttributeDefinitionList;
+    /**
+     * Information about the billing for read/write capacity on the table.
+     */
+    BillingModeSummary?: AwsDynamoDbTableBillingModeSummary;
+    /**
+     * Indicates when the table was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    CreationDateTime?: NonEmptyString;
+    /**
+     * List of global secondary indexes for the table.
+     */
+    GlobalSecondaryIndexes?: AwsDynamoDbTableGlobalSecondaryIndexList;
+    /**
+     * The version of global tables being used.
+     */
+    GlobalTableVersion?: NonEmptyString;
+    /**
+     * The number of items in the table.
+     */
+    ItemCount?: Integer;
+    /**
+     * The primary key structure for the table.
+     */
+    KeySchema?: AwsDynamoDbTableKeySchemaList;
+    /**
+     * The ARN of the latest stream for the table.
+     */
+    LatestStreamArn?: NonEmptyString;
+    /**
+     * The label of the latest stream. The label is not a unique identifier.
+     */
+    LatestStreamLabel?: NonEmptyString;
+    /**
+     * The list of local secondary indexes for the table.
+     */
+    LocalSecondaryIndexes?: AwsDynamoDbTableLocalSecondaryIndexList;
+    /**
+     * Information about the provisioned throughput for the table.
+     */
+    ProvisionedThroughput?: AwsDynamoDbTableProvisionedThroughput;
+    /**
+     * The list of replicas of this table.
+     */
+    Replicas?: AwsDynamoDbTableReplicaList;
+    /**
+     * Information about the restore for the table.
+     */
+    RestoreSummary?: AwsDynamoDbTableRestoreSummary;
+    /**
+     * Information about the server-side encryption for the table.
+     */
+    SseDescription?: AwsDynamoDbTableSseDescription;
+    /**
+     * The current DynamoDB Streams configuration for the table.
+     */
+    StreamSpecification?: AwsDynamoDbTableStreamSpecification;
+    /**
+     * The identifier of the table.
+     */
+    TableId?: NonEmptyString;
+    /**
+     * The name of the table.
+     */
+    TableName?: NonEmptyString;
+    /**
+     * The total size of the table in bytes.
+     */
+    TableSizeBytes?: SizeBytes;
+    /**
+     * The current status of the table.
+     */
+    TableStatus?: NonEmptyString;
+  }
+  export interface AwsDynamoDbTableGlobalSecondaryIndex {
+    /**
+     * Whether the index is currently backfilling.
+     */
+    Backfilling?: Boolean;
+    /**
+     * The ARN of the index.
+     */
+    IndexArn?: NonEmptyString;
+    /**
+     * The name of the index.
+     */
+    IndexName?: NonEmptyString;
+    /**
+     * The total size in bytes of the index.
+     */
+    IndexSizeBytes?: SizeBytes;
+    /**
+     * The current status of the index.
+     */
+    IndexStatus?: NonEmptyString;
+    /**
+     * The number of items in the index.
+     */
+    ItemCount?: Integer;
+    /**
+     * The key schema for the index.
+     */
+    KeySchema?: AwsDynamoDbTableKeySchemaList;
+    /**
+     * Attributes that are copied from the table into an index.
+     */
+    Projection?: AwsDynamoDbTableProjection;
+    /**
+     * Information about the provisioned throughput settings for the indexes.
+     */
+    ProvisionedThroughput?: AwsDynamoDbTableProvisionedThroughput;
+  }
+  export type AwsDynamoDbTableGlobalSecondaryIndexList = AwsDynamoDbTableGlobalSecondaryIndex[];
+  export interface AwsDynamoDbTableKeySchema {
+    /**
+     * The name of the key schema attribute.
+     */
+    AttributeName?: NonEmptyString;
+    /**
+     * The type of key used for the key schema attribute.
+     */
+    KeyType?: NonEmptyString;
+  }
+  export type AwsDynamoDbTableKeySchemaList = AwsDynamoDbTableKeySchema[];
+  export interface AwsDynamoDbTableLocalSecondaryIndex {
+    /**
+     * The ARN of the index.
+     */
+    IndexArn?: NonEmptyString;
+    /**
+     * The name of the index.
+     */
+    IndexName?: NonEmptyString;
+    /**
+     * The complete key schema for the index.
+     */
+    KeySchema?: AwsDynamoDbTableKeySchemaList;
+    /**
+     * Attributes that are copied from the table into the index. These are in addition to the primary key attributes and index key attributes, which are automatically projected.
+     */
+    Projection?: AwsDynamoDbTableProjection;
+  }
+  export type AwsDynamoDbTableLocalSecondaryIndexList = AwsDynamoDbTableLocalSecondaryIndex[];
+  export interface AwsDynamoDbTableProjection {
+    /**
+     * The nonkey attributes that are projected into the index. For each attribute, provide the attribute name.
+     */
+    NonKeyAttributes?: StringList;
+    /**
+     * The types of attributes that are projected into the index.
+     */
+    ProjectionType?: NonEmptyString;
+  }
+  export interface AwsDynamoDbTableProvisionedThroughput {
+    /**
+     * Indicates when the provisioned throughput was last decreased. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    LastDecreaseDateTime?: NonEmptyString;
+    /**
+     * Indicates when the provisioned throughput was last increased. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    LastIncreaseDateTime?: NonEmptyString;
+    /**
+     * The number of times during the current UTC calendar day that the provisioned throughput was decreased.
+     */
+    NumberOfDecreasesToday?: Integer;
+    /**
+     * The maximum number of strongly consistent reads consumed per second before DynamoDB returns a ThrottlingException.
+     */
+    ReadCapacityUnits?: Integer;
+    /**
+     * The maximum number of writes consumed per second before DynamoDB returns a ThrottlingException.
+     */
+    WriteCapacityUnits?: Integer;
+  }
+  export interface AwsDynamoDbTableProvisionedThroughputOverride {
+    /**
+     * The read capacity units for the replica.
+     */
+    ReadCapacityUnits?: Integer;
+  }
+  export interface AwsDynamoDbTableReplica {
+    /**
+     * List of global secondary indexes for the replica.
+     */
+    GlobalSecondaryIndexes?: AwsDynamoDbTableReplicaGlobalSecondaryIndexList;
+    /**
+     * The identifier of the AWS KMS customer master key (CMK) that will be used for AWS KMS encryption for the replica.
+     */
+    KmsMasterKeyId?: NonEmptyString;
+    /**
+     * Replica-specific configuration for the provisioned throughput.
+     */
+    ProvisionedThroughputOverride?: AwsDynamoDbTableProvisionedThroughputOverride;
+    /**
+     * The name of the Region where the replica is located.
+     */
+    RegionName?: NonEmptyString;
+    /**
+     * The current status of the replica.
+     */
+    ReplicaStatus?: NonEmptyString;
+    /**
+     * Detailed information about the replica status.
+     */
+    ReplicaStatusDescription?: NonEmptyString;
+  }
+  export interface AwsDynamoDbTableReplicaGlobalSecondaryIndex {
+    /**
+     * The name of the index.
+     */
+    IndexName?: NonEmptyString;
+    /**
+     * Replica-specific configuration for the provisioned throughput for the index.
+     */
+    ProvisionedThroughputOverride?: AwsDynamoDbTableProvisionedThroughputOverride;
+  }
+  export type AwsDynamoDbTableReplicaGlobalSecondaryIndexList = AwsDynamoDbTableReplicaGlobalSecondaryIndex[];
+  export type AwsDynamoDbTableReplicaList = AwsDynamoDbTableReplica[];
+  export interface AwsDynamoDbTableRestoreSummary {
+    /**
+     * The ARN of the source backup from which the table was restored.
+     */
+    SourceBackupArn?: NonEmptyString;
+    /**
+     * The ARN of the source table for the backup.
+     */
+    SourceTableArn?: NonEmptyString;
+    /**
+     * Indicates the point in time that the table was restored to. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    RestoreDateTime?: NonEmptyString;
+    /**
+     * Whether a restore is currently in progress.
+     */
+    RestoreInProgress?: Boolean;
+  }
+  export interface AwsDynamoDbTableSseDescription {
+    /**
+     * If the key is inaccessible, the date and time when DynamoDB detected that the key was inaccessible. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    InaccessibleEncryptionDateTime?: NonEmptyString;
+    /**
+     * The status of the server-side encryption.
+     */
+    Status?: NonEmptyString;
+    /**
+     * The type of server-side encryption.
+     */
+    SseType?: NonEmptyString;
+    /**
+     * The ARN of the AWS KMS customer master key (CMK) that is used for the AWS KMS encryption.
+     */
+    KmsMasterKeyArn?: NonEmptyString;
+  }
+  export interface AwsDynamoDbTableStreamSpecification {
+    /**
+     * Indicates whether DynamoDB Streams is enabled on the table.
+     */
+    StreamEnabled?: Boolean;
+    /**
+     * Determines the information that is written to the table.
+     */
+    StreamViewType?: NonEmptyString;
+  }
+  export interface AwsEc2EipDetails {
+    /**
+     * The identifier of the EC2 instance.
+     */
+    InstanceId?: NonEmptyString;
+    /**
+     * A public IP address that is associated with the EC2 instance.
+     */
+    PublicIp?: NonEmptyString;
+    /**
+     * The identifier that AWS assigns to represent the allocation of the Elastic IP address for use with Amazon VPC.
+     */
+    AllocationId?: NonEmptyString;
+    /**
+     * The identifier that represents the association of the Elastic IP address with an EC2 instance.
+     */
+    AssociationId?: NonEmptyString;
+    /**
+     * The domain in which to allocate the address. If the address is for use with EC2 instances in a VPC, then Domain is vpc. Otherwise, Domain is standard. 
+     */
+    Domain?: NonEmptyString;
+    /**
+     * The identifier of an IP address pool. This parameter allows Amazon EC2 to select an IP address from the address pool.
+     */
+    PublicIpv4Pool?: NonEmptyString;
+    /**
+     * The name of the location from which the Elastic IP address is advertised.
+     */
+    NetworkBorderGroup?: NonEmptyString;
+    /**
+     * The identifier of the network interface.
+     */
+    NetworkInterfaceId?: NonEmptyString;
+    /**
+     * The AWS account ID of the owner of the network interface.
+     */
+    NetworkInterfaceOwnerId?: NonEmptyString;
+    /**
+     * The private IP address that is associated with the Elastic IP address.
+     */
+    PrivateIpAddress?: NonEmptyString;
+  }
   export interface AwsEc2InstanceDetails {
     /**
      * The instance type of the instance. 
@@ -620,13 +952,13 @@ declare namespace SecurityHub {
      */
     SubnetId?: NonEmptyString;
     /**
-     * The date/time the instance was launched.
+     * Indicates when the instance was launched. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     LaunchedAt?: NonEmptyString;
   }
   export interface AwsEc2NetworkInterfaceAttachment {
     /**
-     * The timestamp indicating when the attachment initiated.
+     * Indicates when the attachment initiated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     AttachTime?: NonEmptyString;
     /**
@@ -809,7 +1141,7 @@ declare namespace SecurityHub {
   export type AwsEc2VolumeAttachmentList = AwsEc2VolumeAttachment[];
   export interface AwsEc2VolumeDetails {
     /**
-     * The datetime when the volume was created.
+     * Indicates when the volume was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     CreateTime?: NonEmptyString;
     /**
@@ -951,7 +1283,7 @@ declare namespace SecurityHub {
      */
     CanonicalHostedZoneId?: NonEmptyString;
     /**
-     * The date and time the load balancer was created.
+     * Indicates when the load balancer was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     CreatedTime?: NonEmptyString;
     /**
@@ -993,7 +1325,7 @@ declare namespace SecurityHub {
      */
     Status?: AwsIamAccessKeyStatus;
     /**
-     * The creation date/time of the IAM access key related to a finding.
+     * Indicates when the IAM access key was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     CreatedAt?: NonEmptyString;
     /**
@@ -1010,6 +1342,88 @@ declare namespace SecurityHub {
     PrincipalName?: NonEmptyString;
   }
   export type AwsIamAccessKeyStatus = "Active"|"Inactive"|string;
+  export interface AwsIamAttachedManagedPolicy {
+    /**
+     * The name of the policy.
+     */
+    PolicyName?: NonEmptyString;
+    /**
+     * The ARN of the policy.
+     */
+    PolicyArn?: NonEmptyString;
+  }
+  export type AwsIamAttachedManagedPolicyList = AwsIamAttachedManagedPolicy[];
+  export interface AwsIamPermissionsBoundary {
+    /**
+     * The ARN of the policy used to set the permissions boundary for the user.
+     */
+    PermissionsBoundaryArn?: NonEmptyString;
+    /**
+     * The usage type for the permissions boundary.
+     */
+    PermissionsBoundaryType?: NonEmptyString;
+  }
+  export interface AwsIamPolicyDetails {
+    /**
+     * The number of users, groups, and roles that the policy is attached to.
+     */
+    AttachmentCount?: Integer;
+    /**
+     * When the policy was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    CreateDate?: NonEmptyString;
+    /**
+     * The identifier of the default version of the policy.
+     */
+    DefaultVersionId?: NonEmptyString;
+    /**
+     * A description of the policy.
+     */
+    Description?: NonEmptyString;
+    /**
+     * Whether the policy can be attached to a user, group, or role.
+     */
+    IsAttachable?: Boolean;
+    /**
+     * The path to the policy.
+     */
+    Path?: NonEmptyString;
+    /**
+     * The number of users and roles that use the policy to set the permissions boundary.
+     */
+    PermissionsBoundaryUsageCount?: Integer;
+    /**
+     * The unique identifier of the policy.
+     */
+    PolicyId?: NonEmptyString;
+    /**
+     * The name of the policy.
+     */
+    PolicyName?: NonEmptyString;
+    /**
+     * List of versions of the policy.
+     */
+    PolicyVersionList?: AwsIamPolicyVersionList;
+    /**
+     * When the policy was most recently updated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    UpdateDate?: NonEmptyString;
+  }
+  export interface AwsIamPolicyVersion {
+    /**
+     * The identifier of the policy version.
+     */
+    VersionId?: NonEmptyString;
+    /**
+     * Whether the version is the default version.
+     */
+    IsDefaultVersion?: Boolean;
+    /**
+     * Indicates when the version was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    CreateDate?: NonEmptyString;
+  }
+  export type AwsIamPolicyVersionList = AwsIamPolicyVersion[];
   export type AwsIamRoleAssumeRolePolicyDocument = string;
   export interface AwsIamRoleDetails {
     /**
@@ -1017,7 +1431,7 @@ declare namespace SecurityHub {
      */
     AssumeRolePolicyDocument?: AwsIamRoleAssumeRolePolicyDocument;
     /**
-     * The date and time, in ISO 8601 date-time format, when the role was created.
+     * Indicates when the role was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     CreateDate?: NonEmptyString;
     /**
@@ -1037,13 +1451,54 @@ declare namespace SecurityHub {
      */
     Path?: NonEmptyString;
   }
+  export interface AwsIamUserDetails {
+    /**
+     * A list of the managed policies that are attached to the user.
+     */
+    AttachedManagedPolicies?: AwsIamAttachedManagedPolicyList;
+    /**
+     * Indicates when the user was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    CreateDate?: NonEmptyString;
+    /**
+     * A list of IAM groups that the user belongs to.
+     */
+    GroupList?: StringList;
+    /**
+     * The path to the user.
+     */
+    Path?: NonEmptyString;
+    /**
+     * The permissions boundary for the user.
+     */
+    PermissionsBoundary?: AwsIamPermissionsBoundary;
+    /**
+     * The unique identifier for the user.
+     */
+    UserId?: NonEmptyString;
+    /**
+     * The name of the user.
+     */
+    UserName?: NonEmptyString;
+    /**
+     * The list of inline policies that are embedded in the user.
+     */
+    UserPolicyList?: AwsIamUserPolicyList;
+  }
+  export interface AwsIamUserPolicy {
+    /**
+     * The name of the policy.
+     */
+    PolicyName?: NonEmptyString;
+  }
+  export type AwsIamUserPolicyList = AwsIamUserPolicy[];
   export interface AwsKmsKeyDetails {
     /**
      * The twelve-digit account ID of the AWS account that owns the CMK.
      */
     AWSAccountId?: NonEmptyString;
     /**
-     * The date and time when the CMK was created.
+     * Indicates when the CMK was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     CreationDate?: Double;
     /**
@@ -1062,6 +1517,10 @@ declare namespace SecurityHub {
      * The source of the CMK's key material. When this value is AWS_KMS, AWS KMS created the key material. When this value is EXTERNAL, the key material was imported from your existing key management infrastructure or the CMK lacks key material. When this value is AWS_CLOUDHSM, the key material was created in the AWS CloudHSM cluster associated with a custom key store.
      */
     Origin?: NonEmptyString;
+    /**
+     * A description of the key.
+     */
+    Description?: NonEmptyString;
   }
   export interface AwsLambdaFunctionCode {
     /**
@@ -1117,7 +1576,7 @@ declare namespace SecurityHub {
      */
     KmsKeyArn?: NonEmptyString;
     /**
-     * The date and time that the function was last updated, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+     * Indicates when the function was last updated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     LastModified?: NonEmptyString;
     /**
@@ -1222,11 +1681,295 @@ declare namespace SecurityHub {
      */
     CompatibleRuntimes?: NonEmptyStringList;
     /**
-     * The date that the version was created, in ISO 8601 format. For example, 2018-11-27T15:10:45.123+0000. 
+     * Indicates when the version was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     CreatedDate?: NonEmptyString;
   }
   export type AwsLambdaLayerVersionNumber = number;
+  export interface AwsRdsDbClusterAssociatedRole {
+    /**
+     * The ARN of the IAM role.
+     */
+    RoleArn?: NonEmptyString;
+    /**
+     * The status of the association between the IAM role and the DB cluster.
+     */
+    Status?: NonEmptyString;
+  }
+  export type AwsRdsDbClusterAssociatedRoles = AwsRdsDbClusterAssociatedRole[];
+  export interface AwsRdsDbClusterDetails {
+    /**
+     * For all database engines except Aurora, specifies the allocated storage size in gibibytes (GiB).
+     */
+    AllocatedStorage?: Integer;
+    /**
+     * A list of Availability Zones (AZs) where instances in the DB cluster can be created.
+     */
+    AvailabilityZones?: StringList;
+    /**
+     * The number of days for which automated backups are retained.
+     */
+    BackupRetentionPeriod?: Integer;
+    /**
+     * The name of the database.
+     */
+    DatabaseName?: NonEmptyString;
+    /**
+     * The current status of this DB cluster.
+     */
+    Status?: NonEmptyString;
+    /**
+     * The connection endpoint for the primary instance of the DB cluster.
+     */
+    Endpoint?: NonEmptyString;
+    /**
+     * The reader endpoint for the DB cluster.
+     */
+    ReaderEndpoint?: NonEmptyString;
+    /**
+     * A list of custom endpoints for the DB cluster.
+     */
+    CustomEndpoints?: StringList;
+    /**
+     * Whether the DB cluster has instances in multiple Availability Zones.
+     */
+    MultiAz?: Boolean;
+    /**
+     * The name of the database engine to use for this DB cluster.
+     */
+    Engine?: NonEmptyString;
+    /**
+     * The version number of the database engine to use.
+     */
+    EngineVersion?: NonEmptyString;
+    /**
+     * The port number on which the DB instances in the DB cluster accept connections.
+     */
+    Port?: Integer;
+    /**
+     * The name of the master user for the DB cluster.
+     */
+    MasterUsername?: NonEmptyString;
+    /**
+     * The range of time each day when automated backups are created, if automated backups are enabled. Uses the format HH:MM-HH:MM. For example, 04:52-05:22.
+     */
+    PreferredBackupWindow?: NonEmptyString;
+    /**
+     * The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). Uses the format &lt;day&gt;:HH:MM-&lt;day&gt;:HH:MM. For the day values, use mon|tue|wed|thu|fri|sat|sun. For example, sun:09:32-sun:10:02.
+     */
+    PreferredMaintenanceWindow?: NonEmptyString;
+    /**
+     * The identifiers of the read replicas that are associated with this DB cluster.
+     */
+    ReadReplicaIdentifiers?: StringList;
+    /**
+     * A list of VPC security groups that the DB cluster belongs to.
+     */
+    VpcSecurityGroups?: AwsRdsDbInstanceVpcSecurityGroups;
+    /**
+     * Specifies the identifier that Amazon Route 53 assigns when you create a hosted zone.
+     */
+    HostedZoneId?: NonEmptyString;
+    /**
+     * Whether the DB cluster is encrypted.
+     */
+    StorageEncrypted?: Boolean;
+    /**
+     * The ARN of the AWS KMS master key that is used to encrypt the database instances in the DB cluster.
+     */
+    KmsKeyId?: NonEmptyString;
+    /**
+     * The identifier of the DB cluster. The identifier must be unique within each AWS Region and is immutable.
+     */
+    DbClusterResourceId?: NonEmptyString;
+    /**
+     * A list of the IAM roles that are associated with the DB cluster.
+     */
+    AssociatedRoles?: AwsRdsDbClusterAssociatedRoles;
+    /**
+     * Indicates when the DB cluster was created, in Universal Coordinated Time (UTC). Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    ClusterCreateTime?: NonEmptyString;
+    /**
+     * A list of log types that this DB cluster is configured to export to CloudWatch Logs.
+     */
+    EnabledCloudWatchLogsExports?: StringList;
+    /**
+     * The database engine mode of the DB cluster.
+     */
+    EngineMode?: NonEmptyString;
+    /**
+     * Whether the DB cluster has deletion protection enabled.
+     */
+    DeletionProtection?: Boolean;
+    /**
+     * Whether the HTTP endpoint for an Aurora Serverless DB cluster is enabled.
+     */
+    HttpEndpointEnabled?: Boolean;
+    /**
+     * The status of the database activity stream.
+     */
+    ActivityStreamStatus?: NonEmptyString;
+    /**
+     * Whether tags are copied from the DB cluster to snapshots of the DB cluster.
+     */
+    CopyTagsToSnapshot?: Boolean;
+    /**
+     * Whether the DB cluster is a clone of a DB cluster owned by a different AWS account.
+     */
+    CrossAccountClone?: Boolean;
+    /**
+     * The Active Directory domain membership records that are associated with the DB cluster.
+     */
+    DomainMemberships?: AwsRdsDbDomainMemberships;
+    /**
+     * The name of the DB cluster parameter group for the DB cluster.
+     */
+    DbClusterParameterGroup?: NonEmptyString;
+    /**
+     * The subnet group that is associated with the DB cluster, including the name, description, and subnets in the subnet group.
+     */
+    DbSubnetGroup?: NonEmptyString;
+    /**
+     * The list of option group memberships for this DB cluster.
+     */
+    DbClusterOptionGroupMemberships?: AwsRdsDbClusterOptionGroupMemberships;
+    /**
+     * The DB cluster identifier that the user assigned to the cluster. This identifier is the unique key that identifies a DB cluster.
+     */
+    DbClusterIdentifier?: NonEmptyString;
+    /**
+     * The list of instances that make up the DB cluster.
+     */
+    DbClusterMembers?: AwsRdsDbClusterMembers;
+    /**
+     * Whether the mapping of IAM accounts to database accounts is enabled.
+     */
+    IamDatabaseAuthenticationEnabled?: Boolean;
+  }
+  export interface AwsRdsDbClusterMember {
+    /**
+     * Whether the cluster member is the primary instance for the DB cluster.
+     */
+    IsClusterWriter?: Boolean;
+    /**
+     * Specifies the order in which an Aurora replica is promoted to the primary instance when the existing primary instance fails.
+     */
+    PromotionTier?: Integer;
+    /**
+     * The instance identifier for this member of the DB cluster.
+     */
+    DbInstanceIdentifier?: NonEmptyString;
+    /**
+     * The status of the DB cluster parameter group for this member of the DB cluster.
+     */
+    DbClusterParameterGroupStatus?: NonEmptyString;
+  }
+  export type AwsRdsDbClusterMembers = AwsRdsDbClusterMember[];
+  export interface AwsRdsDbClusterOptionGroupMembership {
+    /**
+     * The name of the DB cluster option group.
+     */
+    DbClusterOptionGroupName?: NonEmptyString;
+    /**
+     * The status of the DB cluster option group.
+     */
+    Status?: NonEmptyString;
+  }
+  export type AwsRdsDbClusterOptionGroupMemberships = AwsRdsDbClusterOptionGroupMembership[];
+  export interface AwsRdsDbClusterSnapshotDetails {
+    /**
+     * A list of Availability Zones where instances in the DB cluster can be created.
+     */
+    AvailabilityZones?: StringList;
+    /**
+     * Indicates when the snapshot was taken. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    SnapshotCreateTime?: NonEmptyString;
+    /**
+     * 
+     */
+    Engine?: NonEmptyString;
+    /**
+     * Specifies the allocated storage size in gibibytes (GiB).
+     */
+    AllocatedStorage?: Integer;
+    /**
+     * The status of this DB cluster snapshot.
+     */
+    Status?: NonEmptyString;
+    /**
+     * The port number on which the DB instances in the DB cluster accept connections.
+     */
+    Port?: Integer;
+    /**
+     * The VPC ID that is associated with the DB cluster snapshot.
+     */
+    VpcId?: NonEmptyString;
+    /**
+     * Indicates when the DB cluster was created, in Universal Coordinated Time (UTC). Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    ClusterCreateTime?: NonEmptyString;
+    /**
+     * The name of the master user for the DB cluster.
+     */
+    MasterUsername?: NonEmptyString;
+    /**
+     * The version of the database engine to use.
+     */
+    EngineVersion?: NonEmptyString;
+    /**
+     * The license model information for this DB cluster snapshot.
+     */
+    LicenseModel?: NonEmptyString;
+    /**
+     * The type of DB cluster snapshot.
+     */
+    SnapshotType?: NonEmptyString;
+    /**
+     * Specifies the percentage of the estimated data that has been transferred.
+     */
+    PercentProgress?: Integer;
+    /**
+     * Whether the DB cluster is encrypted.
+     */
+    StorageEncrypted?: Boolean;
+    /**
+     * The ARN of the AWS KMS master key that is used to encrypt the database instances in the DB cluster.
+     */
+    KmsKeyId?: NonEmptyString;
+    /**
+     * The DB cluster identifier.
+     */
+    DbClusterIdentifier?: NonEmptyString;
+    /**
+     * The identifier of the DB cluster snapshot.
+     */
+    DbClusterSnapshotIdentifier?: NonEmptyString;
+    /**
+     * Whether mapping of IAM accounts to database accounts is enabled.
+     */
+    IamDatabaseAuthenticationEnabled?: Boolean;
+  }
+  export interface AwsRdsDbDomainMembership {
+    /**
+     * The identifier of the Active Directory domain.
+     */
+    Domain?: NonEmptyString;
+    /**
+     * The status of the Active Directory Domain membership for the DB instance.
+     */
+    Status?: NonEmptyString;
+    /**
+     * The fully qualified domain name of the Active Directory domain.
+     */
+    Fqdn?: NonEmptyString;
+    /**
+     * The name of the IAM role to use when making API calls to the Directory Service.
+     */
+    IamRoleName?: NonEmptyString;
+  }
+  export type AwsRdsDbDomainMemberships = AwsRdsDbDomainMembership[];
   export interface AwsRdsDbInstanceAssociatedRole {
     /**
      * The Amazon Resource Name (ARN) of the IAM role that is associated with the DB instance.
@@ -1296,7 +2039,7 @@ declare namespace SecurityHub {
      */
     IAMDatabaseAuthenticationEnabled?: Boolean;
     /**
-     * Provides the date and time the DB instance was created.
+     * Indicates when the DB instance was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     InstanceCreateTime?: NonEmptyString;
     /**
@@ -1319,6 +2062,155 @@ declare namespace SecurityHub {
      * A list of VPC security groups that the DB instance belongs to.
      */
     VpcSecurityGroups?: AwsRdsDbInstanceVpcSecurityGroups;
+    /**
+     * Whether the DB instance is a multiple Availability Zone deployment.
+     */
+    MultiAz?: Boolean;
+    /**
+     * The ARN of the CloudWatch Logs log stream that receives the enhanced monitoring metrics data for the DB instance.
+     */
+    EnhancedMonitoringResourceArn?: NonEmptyString;
+    /**
+     * The current status of the DB instance.
+     */
+    DbInstanceStatus?: NonEmptyString;
+    /**
+     * The master user name of the DB instance.
+     */
+    MasterUsername?: NonEmptyString;
+    /**
+     * The amount of storage (in gigabytes) to initially allocate for the DB instance.
+     */
+    AllocatedStorage?: Integer;
+    /**
+     * The range of time each day when automated backups are created, if automated backups are enabled. Uses the format HH:MM-HH:MM. For example, 04:52-05:22.
+     */
+    PreferredBackupWindow?: NonEmptyString;
+    /**
+     * The number of days for which to retain automated backups.
+     */
+    BackupRetentionPeriod?: Integer;
+    /**
+     * A list of the DB security groups to assign to the DB instance.
+     */
+    DbSecurityGroups?: StringList;
+    /**
+     * A list of the DB parameter groups to assign to the DB instance.
+     */
+    DbParameterGroups?: AwsRdsDbParameterGroups;
+    /**
+     * The Availability Zone where the DB instance will be created.
+     */
+    AvailabilityZone?: NonEmptyString;
+    /**
+     * Information about the subnet group that is associated with the DB instance.
+     */
+    DbSubnetGroup?: AwsRdsDbSubnetGroup;
+    /**
+     * The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). Uses the format &lt;day&gt;:HH:MM-&lt;day&gt;:HH:MM. For the day values, use mon|tue|wed|thu|fri|sat|sun. For example, sun:09:32-sun:10:02.
+     */
+    PreferredMaintenanceWindow?: NonEmptyString;
+    /**
+     * Changes to the DB instance that are currently pending.
+     */
+    PendingModifiedValues?: AwsRdsDbPendingModifiedValues;
+    /**
+     * Specifies the latest time to which a database can be restored with point-in-time restore. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    LatestRestorableTime?: NonEmptyString;
+    /**
+     * Indicates whether minor version patches are applied automatically.
+     */
+    AutoMinorVersionUpgrade?: Boolean;
+    /**
+     * If this DB instance is a read replica, contains the identifier of the source DB instance.
+     */
+    ReadReplicaSourceDBInstanceIdentifier?: NonEmptyString;
+    /**
+     * List of identifiers of the read replicas associated with this DB instance.
+     */
+    ReadReplicaDBInstanceIdentifiers?: StringList;
+    /**
+     * List of identifiers of Aurora DB clusters to which the RDS DB instance is replicated as a read replica.
+     */
+    ReadReplicaDBClusterIdentifiers?: StringList;
+    /**
+     * License model information for this DB instance.
+     */
+    LicenseModel?: NonEmptyString;
+    /**
+     * Specifies the provisioned IOPS (I/O operations per second) for this DB instance.
+     */
+    Iops?: Integer;
+    /**
+     * The list of option group memberships for this DB instance.
+     */
+    OptionGroupMemberships?: AwsRdsDbOptionGroupMemberships;
+    /**
+     * The name of the character set that this DB instance is associated with.
+     */
+    CharacterSetName?: NonEmptyString;
+    /**
+     * For a DB instance with multi-Availability Zone support, the name of the secondary Availability Zone.
+     */
+    SecondaryAvailabilityZone?: NonEmptyString;
+    /**
+     * The status of a read replica. If the instance isn't a read replica, this is empty.
+     */
+    StatusInfos?: AwsRdsDbStatusInfos;
+    /**
+     * The storage type for the DB instance.
+     */
+    StorageType?: NonEmptyString;
+    /**
+     * The Active Directory domain membership records associated with the DB instance.
+     */
+    DomainMemberships?: AwsRdsDbDomainMemberships;
+    /**
+     * Whether to copy resource tags to snapshots of the DB instance.
+     */
+    CopyTagsToSnapshot?: Boolean;
+    /**
+     * The interval, in seconds, between points when enhanced monitoring metrics are collected for the DB instance.
+     */
+    MonitoringInterval?: Integer;
+    /**
+     * The ARN for the IAM role that permits Amazon RDS to send enhanced monitoring metrics to CloudWatch Logs.
+     */
+    MonitoringRoleArn?: NonEmptyString;
+    /**
+     * The order in which to promote an Aurora replica to the primary instance after a failure of the existing primary instance.
+     */
+    PromotionTier?: Integer;
+    /**
+     * The time zone of the DB instance.
+     */
+    Timezone?: NonEmptyString;
+    /**
+     * Indicates whether Performance Insights is enabled for the DB instance.
+     */
+    PerformanceInsightsEnabled?: Boolean;
+    /**
+     * The identifier of the AWS KMS key used to encrypt the Performance Insights data.
+     */
+    PerformanceInsightsKmsKeyId?: NonEmptyString;
+    /**
+     * The number of days to retain Performance Insights data.
+     */
+    PerformanceInsightsRetentionPeriod?: Integer;
+    /**
+     * A list of log types that this DB instance is configured to export to CloudWatch Logs.
+     */
+    EnabledCloudWatchLogsExports?: StringList;
+    /**
+     * The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+     */
+    ProcessorFeatures?: AwsRdsDbProcessorFeatures;
+    ListenerEndpoint?: AwsRdsDbInstanceEndpoint;
+    /**
+     * The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.
+     */
+    MaxAllocatedStorage?: Integer;
   }
   export interface AwsRdsDbInstanceEndpoint {
     /**
@@ -1345,6 +2237,287 @@ declare namespace SecurityHub {
     Status?: NonEmptyString;
   }
   export type AwsRdsDbInstanceVpcSecurityGroups = AwsRdsDbInstanceVpcSecurityGroup[];
+  export interface AwsRdsDbOptionGroupMembership {
+    /**
+     * 
+     */
+    OptionGroupName?: NonEmptyString;
+    /**
+     * 
+     */
+    Status?: NonEmptyString;
+  }
+  export type AwsRdsDbOptionGroupMemberships = AwsRdsDbOptionGroupMembership[];
+  export interface AwsRdsDbParameterGroup {
+    /**
+     * 
+     */
+    DbParameterGroupName?: NonEmptyString;
+    /**
+     * 
+     */
+    ParameterApplyStatus?: NonEmptyString;
+  }
+  export type AwsRdsDbParameterGroups = AwsRdsDbParameterGroup[];
+  export interface AwsRdsDbPendingModifiedValues {
+    /**
+     * 
+     */
+    DbInstanceClass?: NonEmptyString;
+    /**
+     * 
+     */
+    AllocatedStorage?: Integer;
+    /**
+     * 
+     */
+    MasterUserPassword?: NonEmptyString;
+    /**
+     * 
+     */
+    Port?: Integer;
+    /**
+     * 
+     */
+    BackupRetentionPeriod?: Integer;
+    /**
+     * 
+     */
+    MultiAZ?: Boolean;
+    /**
+     * 
+     */
+    EngineVersion?: NonEmptyString;
+    /**
+     * 
+     */
+    LicenseModel?: NonEmptyString;
+    /**
+     * 
+     */
+    Iops?: Integer;
+    /**
+     * 
+     */
+    DbInstanceIdentifier?: NonEmptyString;
+    /**
+     * 
+     */
+    StorageType?: NonEmptyString;
+    /**
+     * 
+     */
+    CaCertificateIdentifier?: NonEmptyString;
+    /**
+     * 
+     */
+    DbSubnetGroupName?: NonEmptyString;
+    /**
+     * 
+     */
+    PendingCloudWatchLogsExports?: AwsRdsPendingCloudWatchLogsExports;
+    /**
+     * 
+     */
+    ProcessorFeatures?: AwsRdsDbProcessorFeatures;
+  }
+  export interface AwsRdsDbProcessorFeature {
+    /**
+     * 
+     */
+    Name?: NonEmptyString;
+    /**
+     * 
+     */
+    Value?: NonEmptyString;
+  }
+  export type AwsRdsDbProcessorFeatures = AwsRdsDbProcessorFeature[];
+  export interface AwsRdsDbSnapshotDetails {
+    /**
+     * 
+     */
+    DbSnapshotIdentifier?: NonEmptyString;
+    /**
+     * 
+     */
+    DbInstanceIdentifier?: NonEmptyString;
+    /**
+     * 
+     */
+    SnapshotCreateTime?: NonEmptyString;
+    /**
+     * 
+     */
+    Engine?: NonEmptyString;
+    /**
+     * 
+     */
+    AllocatedStorage?: Integer;
+    /**
+     * 
+     */
+    Status?: NonEmptyString;
+    /**
+     * 
+     */
+    Port?: Integer;
+    /**
+     * 
+     */
+    AvailabilityZone?: NonEmptyString;
+    /**
+     * 
+     */
+    VpcId?: NonEmptyString;
+    /**
+     * 
+     */
+    InstanceCreateTime?: NonEmptyString;
+    /**
+     * 
+     */
+    MasterUsername?: NonEmptyString;
+    /**
+     * 
+     */
+    EngineVersion?: NonEmptyString;
+    /**
+     * 
+     */
+    LicenseModel?: NonEmptyString;
+    /**
+     * 
+     */
+    SnapshotType?: NonEmptyString;
+    /**
+     * 
+     */
+    Iops?: Integer;
+    /**
+     * 
+     */
+    OptionGroupName?: NonEmptyString;
+    /**
+     * 
+     */
+    PercentProgress?: Integer;
+    /**
+     * 
+     */
+    SourceRegion?: NonEmptyString;
+    /**
+     * 
+     */
+    SourceDbSnapshotIdentifier?: NonEmptyString;
+    /**
+     * 
+     */
+    StorageType?: NonEmptyString;
+    /**
+     * 
+     */
+    TdeCredentialArn?: NonEmptyString;
+    /**
+     * 
+     */
+    Encrypted?: Boolean;
+    /**
+     * 
+     */
+    KmsKeyId?: NonEmptyString;
+    /**
+     * 
+     */
+    Timezone?: NonEmptyString;
+    /**
+     * 
+     */
+    IamDatabaseAuthenticationEnabled?: Boolean;
+    /**
+     * 
+     */
+    ProcessorFeatures?: AwsRdsDbProcessorFeatures;
+    /**
+     * 
+     */
+    DbiResourceId?: NonEmptyString;
+  }
+  export interface AwsRdsDbStatusInfo {
+    /**
+     * The type of status. For a read replica, the status type is read replication.
+     */
+    StatusType?: NonEmptyString;
+    /**
+     * Whether the read replica instance is operating normally.
+     */
+    Normal?: Boolean;
+    /**
+     * The status of the read replica instance.
+     */
+    Status?: NonEmptyString;
+    /**
+     * If the read replica is currently in an error state, provides the error details.
+     */
+    Message?: NonEmptyString;
+  }
+  export type AwsRdsDbStatusInfos = AwsRdsDbStatusInfo[];
+  export interface AwsRdsDbSubnetGroup {
+    /**
+     * The name of the subnet group.
+     */
+    DbSubnetGroupName?: NonEmptyString;
+    /**
+     * The description of the subnet group.
+     */
+    DbSubnetGroupDescription?: NonEmptyString;
+    /**
+     * The VPC ID of the subnet group.
+     */
+    VpcId?: NonEmptyString;
+    /**
+     * The status of the subnet group.
+     */
+    SubnetGroupStatus?: NonEmptyString;
+    /**
+     * A list of subnets in the subnet group.
+     */
+    Subnets?: AwsRdsDbSubnetGroupSubnets;
+    /**
+     * The ARN of the subnet group.
+     */
+    DbSubnetGroupArn?: NonEmptyString;
+  }
+  export interface AwsRdsDbSubnetGroupSubnet {
+    /**
+     * The identifier of a subnet in the subnet group.
+     */
+    SubnetIdentifier?: NonEmptyString;
+    /**
+     * Information about the Availability Zone for a subnet in the subnet group.
+     */
+    SubnetAvailabilityZone?: AwsRdsDbSubnetGroupSubnetAvailabilityZone;
+    /**
+     * The status of a subnet in the subnet group.
+     */
+    SubnetStatus?: NonEmptyString;
+  }
+  export interface AwsRdsDbSubnetGroupSubnetAvailabilityZone {
+    /**
+     * The name of the Availability Zone for a subnet in the subnet group.
+     */
+    Name?: NonEmptyString;
+  }
+  export type AwsRdsDbSubnetGroupSubnets = AwsRdsDbSubnetGroupSubnet[];
+  export interface AwsRdsPendingCloudWatchLogsExports {
+    /**
+     * A list of log types that are being enabled.
+     */
+    LogTypesToEnable?: StringList;
+    /**
+     * A list of log types that are being disabled.
+     */
+    LogTypesToDisable?: StringList;
+  }
   export interface AwsS3BucketDetails {
     /**
      * The canonical user ID of the owner of the S3 bucket.
@@ -1355,7 +2528,7 @@ declare namespace SecurityHub {
      */
     OwnerName?: NonEmptyString;
     /**
-     * The date and time when the S3 bucket was created.
+     * Indicates when the S3 bucket was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     CreatedAt?: NonEmptyString;
     /**
@@ -1388,7 +2561,7 @@ declare namespace SecurityHub {
   export type AwsS3BucketServerSideEncryptionRules = AwsS3BucketServerSideEncryptionRule[];
   export interface AwsS3ObjectDetails {
     /**
-     * The date and time when the object was last modified.
+     * Indicates when the object was last modified. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     LastModified?: NonEmptyString;
     /**
@@ -1411,6 +2584,46 @@ declare namespace SecurityHub {
      * The identifier of the AWS Key Management Service (AWS KMS) symmetric customer managed customer master key (CMK) that was used for the object.
      */
     SSEKMSKeyId?: NonEmptyString;
+  }
+  export interface AwsSecretsManagerSecretDetails {
+    /**
+     * Defines the rotation schedule for the secret.
+     */
+    RotationRules?: AwsSecretsManagerSecretRotationRules;
+    /**
+     * Whether the rotation occurred within the specified rotation frequency.
+     */
+    RotationOccurredWithinFrequency?: Boolean;
+    /**
+     * The ARN, Key ID, or alias of the AWS KMS customer master key (CMK) used to encrypt the SecretString or SecretBinary values for versions of this secret.
+     */
+    KmsKeyId?: NonEmptyString;
+    /**
+     * Whether rotation is enabled.
+     */
+    RotationEnabled?: Boolean;
+    /**
+     * The ARN of the Lambda function that rotates the secret.
+     */
+    RotationLambdaArn?: NonEmptyString;
+    /**
+     * Whether the secret is deleted.
+     */
+    Deleted?: Boolean;
+    /**
+     * The name of the secret.
+     */
+    Name?: NonEmptyString;
+    /**
+     * The user-provided description of the secret.
+     */
+    Description?: NonEmptyString;
+  }
+  export interface AwsSecretsManagerSecretRotationRules {
+    /**
+     * The number of days after the previous rotation to rotate the secret.
+     */
+    AutomaticallyAfterDays?: Integer;
   }
   export interface AwsSecurityFinding {
     /**
@@ -1438,19 +2651,19 @@ declare namespace SecurityHub {
      */
     Types: TypeList;
     /**
-     * An ISO8601-formatted timestamp that indicates when the security-findings provider first observed the potential security issue that a finding captured.
+     * Indicates when the security-findings provider first observed the potential security issue that a finding captured. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     FirstObservedAt?: NonEmptyString;
     /**
-     * An ISO8601-formatted timestamp that indicates when the security-findings provider most recently observed the potential security issue that a finding captured.
+     * Indicates when the security-findings provider most recently observed the potential security issue that a finding captured. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     LastObservedAt?: NonEmptyString;
     /**
-     * An ISO8601-formatted timestamp that indicates when the security-findings provider created the potential security issue that a finding captured.
+     * Indicates when the security-findings provider created the potential security issue that a finding captured. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     CreatedAt: NonEmptyString;
     /**
-     * An ISO8601-formatted timestamp that indicates when the security-findings provider last updated the finding record. 
+     * Indicates when the security-findings provider last updated the finding record. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     UpdatedAt: NonEmptyString;
     /**
@@ -2142,7 +3355,7 @@ declare namespace SecurityHub {
      */
     ImageName?: NonEmptyString;
     /**
-     * The date and time when the container started.
+     * Indicates when the container started. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     LaunchedAt?: NonEmptyString;
   }
@@ -2809,19 +4022,19 @@ declare namespace SecurityHub {
   export type MalwareType = "ADWARE"|"BLENDED_THREAT"|"BOTNET_AGENT"|"COIN_MINER"|"EXPLOIT_KIT"|"KEYLOGGER"|"MACRO"|"POTENTIALLY_UNWANTED"|"SPYWARE"|"RANSOMWARE"|"REMOTE_ACCESS"|"ROOTKIT"|"TROJAN"|"VIRUS"|"WORM"|string;
   export interface MapFilter {
     /**
-     * The key of the map filter.
+     * The key of the map filter. For example, for ResourceTags, Key identifies the name of the tag. For UserDefinedFields, Key is the name of the field.
      */
     Key?: NonEmptyString;
     /**
-     * The value for the key in the map filter.
+     * The value for the key in the map filter. Filter values are case sensitive. For example, one of the values for a tag called Department might be Security. If you provide security as the filter value, then there is no match.
      */
     Value?: NonEmptyString;
     /**
-     * The condition to apply to a key value when querying for findings with a map filter.
+     * The condition to apply to the key value when querying for findings with a map filter. To search for values that exactly match the filter value, use EQUALS. For example, for the ResourceTags field, the filter Department EQUALS Security matches findings that have the value Security for the tag Department. To search for values other than the filter value, use NOT_EQUALS. For example, for the ResourceTags field, the filter Department NOT_EQUALS Finance matches findings that do not have the value Finance for the tag Department.  EQUALS filters on the same field are joined by OR. A finding matches if it matches any one of those filters.  NOT_EQUALS filters on the same field are joined by AND. A finding matches only if it matches all of those filters. You cannot have both an EQUALS filter and a NOT_EQUALS filter on the same field.
      */
     Comparison?: MapFilterComparison;
   }
-  export type MapFilterComparison = "EQUALS"|string;
+  export type MapFilterComparison = "EQUALS"|"NOT_EQUALS"|string;
   export type MapFilterList = MapFilter[];
   export type MaxResults = number;
   export interface Member {
@@ -2958,7 +4171,7 @@ declare namespace SecurityHub {
      */
     UpdatedBy: NonEmptyString;
     /**
-     * The timestamp of when the note was updated.
+     * The timestamp of when the note was updated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     UpdatedAt: NonEmptyString;
   }
@@ -3017,11 +4230,11 @@ declare namespace SecurityHub {
      */
     ParentPid?: Integer;
     /**
-     * The date/time that the process was launched.
+     * Indicates when the process was launched. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     LaunchedAt?: NonEmptyString;
     /**
-     * The date and time when the process was terminated.
+     * Indicates when the process was terminated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     TerminatedAt?: NonEmptyString;
   }
@@ -3156,6 +4369,10 @@ declare namespace SecurityHub {
      */
     AwsEc2Vpc?: AwsEc2VpcDetails;
     /**
+     * Details about an Elastic IP address.
+     */
+    AwsEc2Eip?: AwsEc2EipDetails;
+    /**
      * Details about a load balancer.
      */
     AwsElbv2LoadBalancer?: AwsElbv2LoadBalancerDetails;
@@ -3172,9 +4389,25 @@ declare namespace SecurityHub {
      */
     AwsS3Object?: AwsS3ObjectDetails;
     /**
+     * Details about a Secrets Manager secret.
+     */
+    AwsSecretsManagerSecret?: AwsSecretsManagerSecretDetails;
+    /**
      * Details about an IAM access key related to a finding.
      */
     AwsIamAccessKey?: AwsIamAccessKeyDetails;
+    /**
+     * Details about an IAM user.
+     */
+    AwsIamUser?: AwsIamUserDetails;
+    /**
+     * Details about an IAM permissions policy.
+     */
+    AwsIamPolicy?: AwsIamPolicyDetails;
+    /**
+     * Details about a DynamoDB table.
+     */
+    AwsDynamoDbTable?: AwsDynamoDbTableDetails;
     /**
      * Details about an IAM role.
      */
@@ -3192,7 +4425,7 @@ declare namespace SecurityHub {
      */
     AwsLambdaLayerVersion?: AwsLambdaLayerVersionDetails;
     /**
-     * Details for an Amazon RDS database instance.
+     * Details about an Amazon RDS database instance.
      */
     AwsRdsDbInstance?: AwsRdsDbInstanceDetails;
     /**
@@ -3207,6 +4440,18 @@ declare namespace SecurityHub {
      * Details for a WAF WebACL.
      */
     AwsWafWebAcl?: AwsWafWebAclDetails;
+    /**
+     * Details about an Amazon RDS database snapshot.
+     */
+    AwsRdsDbSnapshot?: AwsRdsDbSnapshotDetails;
+    /**
+     * Details about an Amazon RDS database cluster snapshot.
+     */
+    AwsRdsDbClusterSnapshot?: AwsRdsDbClusterSnapshotDetails;
+    /**
+     * Details about an Amazon RDS database cluster.
+     */
+    AwsRdsDbCluster?: AwsRdsDbClusterDetails;
     /**
      * Details about a container resource related to a finding.
      */
@@ -3263,6 +4508,7 @@ declare namespace SecurityHub {
      */
     Label?: SeverityLabel;
   }
+  export type SizeBytes = number;
   export interface SoftwarePackage {
     /**
      * The name of the software package.
@@ -3406,15 +4652,15 @@ declare namespace SecurityHub {
   export type StatusReasonsList = StatusReason[];
   export interface StringFilter {
     /**
-     * The string filter value.
+     * The string filter value. Filter values are case sensitive. For example, the product name for control-based findings is Security Hub. If you provide security hub as the filter text, then there is no match.
      */
     Value?: NonEmptyString;
     /**
-     * The condition to be applied to a string value when querying for findings. 
+     * The condition to apply to a string value when querying for findings. To search for values that contain the filter criteria value, use one of the following comparison operators:   To search for values that exactly match the filter value, use EQUALS. For example, the filter ResourceType EQUALS AwsEc2SecurityGroup only matches findings that have a resource type of AwsEc2SecurityGroup.   To search for values that start with the filter value, use PREFIX. For example, the filter ResourceType PREFIX AwsIam matches findings that have a resource type that starts with AwsIam. Findings with a resource type of AwsIamPolicy, AwsIamRole, or AwsIamUser would all match.    EQUALS and PREFIX filters on the same field are joined by OR. A finding matches if it matches any one of those filters. To search for values that do not contain the filter criteria value, use one of the following comparison operators:   To search for values that do not exactly match the filter value, use NOT_EQUALS. For example, the filter ResourceType NOT_EQUALS AwsIamPolicy matches findings that have a resource type other than AwsIamPolicy.   To search for values that do not start with the filter value, use PREFIX_NOT_EQUALS. For example, the filter ResourceType PREFIX_NOT_EQUALS AwsIam matches findings that have a resource type that does not start with AwsIam. Findings with a resource type of AwsIamPolicy, AwsIamRole, or AwsIamUser would all be excluded from the results.    NOT_EQUALS and PREFIX_NOT_EQUALS filters on the same field are joined by AND. A finding matches only if it matches all of those filters. For filters on the same field, you cannot provide both an EQUALS filter and a NOT_EQUALS or PREFIX_NOT_EQUALS filter. Combining filters in this way always returns an error, even if the provided filter values would return valid results. You can combine PREFIX filters with NOT_EQUALS or PREFIX_NOT_EQUALS filters for the same field. Security Hub first processes the PREFIX filters, then the NOT_EQUALS or PREFIX_NOT_EQUALS filters.  For example, for the following filter, Security Hub first identifies findings that have resource types that start with either AwsIAM or AwsEc2. It then excludes findings that have a resource type of AwsIamPolicy and findings that have a resource type of AwsEc2NetworkInterface.    ResourceType PREFIX AwsIam     ResourceType PREFIX AwsEc2     ResourceType NOT_EQUALS AwsIamPolicy     ResourceType NOT_EQUALS AwsEc2NetworkInterface   
      */
     Comparison?: StringFilterComparison;
   }
-  export type StringFilterComparison = "EQUALS"|"PREFIX"|string;
+  export type StringFilterComparison = "EQUALS"|"PREFIX"|"NOT_EQUALS"|"PREFIX_NOT_EQUALS"|string;
   export type StringFilterList = StringFilter[];
   export type StringList = NonEmptyString[];
   export type TagKey = string;
@@ -3447,7 +4693,7 @@ declare namespace SecurityHub {
      */
     Category?: ThreatIntelIndicatorCategory;
     /**
-     * The date and time when the most recent instance of a threat intelligence indicator was observed.
+     * Indicates when the most recent instance of a threat intelligence indicator was observed. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     LastObservedAt?: NonEmptyString;
     /**
@@ -3594,11 +4840,11 @@ declare namespace SecurityHub {
      */
     VendorSeverity?: NonEmptyString;
     /**
-     * The datetime when the vulnerability advisory was created.
+     * Indicates when the vulnerability advisory was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     VendorCreatedAt?: NonEmptyString;
     /**
-     * The datetime when the vulnerability advisory was last updated.
+     * Indicates when the vulnerability advisory was last updated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     VendorUpdatedAt?: NonEmptyString;
   }

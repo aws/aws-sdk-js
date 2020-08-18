@@ -227,6 +227,7 @@ export abstract class ConfigurationServicePlaceholders {
   honeycode?: AWS.Honeycode.Types.ClientConfiguration;
   ivs?: AWS.IVS.Types.ClientConfiguration;
   braket?: AWS.Braket.Types.ClientConfiguration;
+  identitystore?: AWS.IdentityStore.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -456,4 +457,5 @@ export interface ConfigurationServiceApiVersions {
   honeycode?: AWS.Honeycode.Types.apiVersion;
   ivs?: AWS.IVS.Types.apiVersion;
   braket?: AWS.Braket.Types.apiVersion;
+  identitystore?: AWS.IdentityStore.Types.apiVersion;
 }

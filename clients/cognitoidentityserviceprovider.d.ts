@@ -1467,15 +1467,19 @@ declare namespace CognitoIdentityServiceProvider {
     /**
      * The application ID for an Amazon Pinpoint application.
      */
-    ApplicationId: HexStringType;
+    ApplicationId?: HexStringType;
+    /**
+     * The Amazon Resource Name (ARN) of an Amazon Pinpoint project. You can use the Amazon Pinpoint project for Pinpoint integration with the chosen User Pool Client. Amazon Cognito publishes events to the pinpoint project declared by the app ARN.
+     */
+    ApplicationArn?: ArnType;
     /**
      * The ARN of an IAM role that authorizes Amazon Cognito to publish events to Amazon Pinpoint analytics.
      */
-    RoleArn: ArnType;
+    RoleArn?: ArnType;
     /**
      * The external ID.
      */
-    ExternalId: StringType;
+    ExternalId?: StringType;
     /**
      * If UserDataShared is true, Amazon Cognito will include user data in the events it publishes to Amazon Pinpoint analytics.
      */

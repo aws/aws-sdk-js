@@ -934,6 +934,7 @@ declare namespace DataSync {
   export type EfsSubdirectory = string;
   export type Endpoint = string;
   export type EndpointType = "PUBLIC"|"PRIVATE_LINK"|"FIPS"|string;
+  export type FilterAttributeValue = string;
   export type FilterList = FilterRule[];
   export interface FilterRule {
     /**
@@ -947,6 +948,7 @@ declare namespace DataSync {
   }
   export type FilterType = "SIMPLE_PATTERN"|string;
   export type FilterValue = string;
+  export type FilterValues = FilterAttributeValue[];
   export type FsxFilesystemArn = string;
   export type FsxWindowsSubdirectory = string;
   export type Gid = "NONE"|"INT_VALUE"|"NAME"|"BOTH"|string;
@@ -981,6 +983,7 @@ declare namespace DataSync {
      * An opaque string that indicates the position at which to begin the next list of locations.
      */
     NextToken?: NextToken;
+    Filters?: LocationFilters;
   }
   export interface ListLocationsResponse {
     /**
@@ -1049,6 +1052,7 @@ declare namespace DataSync {
      * An opaque string that indicates the position at which to begin the next list of tasks.
      */
     NextToken?: NextToken;
+    Filters?: TaskFilters;
   }
   export interface ListTasksResponse {
     /**
@@ -1061,6 +1065,13 @@ declare namespace DataSync {
     NextToken?: NextToken;
   }
   export type LocationArn = string;
+  export interface LocationFilter {
+    Name: LocationFilterName;
+    Values: FilterValues;
+    Operator: Operator;
+  }
+  export type LocationFilterName = "LocationUri"|"LocationType"|"CreationTime"|string;
+  export type LocationFilters = LocationFilter[];
   export type LocationList = LocationListEntry[];
   export interface LocationListEntry {
     /**
@@ -1098,6 +1109,7 @@ declare namespace DataSync {
      */
     AgentArns: AgentArnList;
   }
+  export type Operator = "Equals"|"NotEquals"|"In"|"LessThanOrEqual"|"LessThan"|"GreaterThanOrEqual"|"GreaterThan"|"Contains"|"NotContains"|"BeginsWith"|string;
   export interface Options {
     /**
      * A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred. For more information, see create-task  Default value: POINT_IN_TIME_CONSISTENT. ONLY_FILES_TRANSFERRED (recommended): Perform verification only on files that were transferred.  POINT_IN_TIME_CONSISTENT: Scan the entire source and entire destination at the end of the transfer to verify that source and destination are fully synchronized. This option isn't supported when transferring to S3 Glacier or S3 Glacier Deep Archive storage classes. NONE: No additional verification is done at the end of the transfer, but all data transmissions are integrity-checked with checksum verification during the transfer.
@@ -1296,6 +1308,13 @@ declare namespace DataSync {
     ErrorDetail?: string;
   }
   export type TaskExecutionStatus = "QUEUED"|"LAUNCHING"|"PREPARING"|"TRANSFERRING"|"VERIFYING"|"SUCCESS"|"ERROR"|string;
+  export interface TaskFilter {
+    Name: TaskFilterName;
+    Values: FilterValues;
+    Operator: Operator;
+  }
+  export type TaskFilterName = "LocationId"|"CreationTime"|string;
+  export type TaskFilters = TaskFilter[];
   export type TaskList = TaskListEntry[];
   export interface TaskListEntry {
     /**
