@@ -274,7 +274,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Creates a Server Message Block (SMB) file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway expose file shares using an SMB interface. This operation is only supported for file gateways.</p> <important> <p>File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide</i>.</p> <p>File gateways don't support creating hard or symbolic links on a file share.</p> </important>"
+      "documentation": "<p>Creates a Server Message Block (SMB) file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using an SMB interface. This operation is only supported for file gateways.</p> <important> <p>File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide</i>.</p> <p>File gateways don't support creating hard or symbolic links on a file share.</p> </important>"
     },
     "CreateSnapshot": {
       "name": "CreateSnapshot",
@@ -299,7 +299,7 @@
           "shape": "ServiceUnavailableError"
         }
       ],
-      "documentation": "<p>Initiates a snapshot of a volume.</p> <p>AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage (Amazon S3) for durable off-site recovery, as well as import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad hoc basis. This API enables you to take ad-hoc snapshot. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#SchedulingSnapshot\">Editing a snapshot schedule</a>.</p> <p>In the CreateSnapshot request you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the AWS Storage Gateway Console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot. This operation is only supported in stored and cached volume gateway type.</p> <note> <p>To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html\">DescribeSnapshots</a> or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSnapshot.html\">DeleteSnapshot</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p> </note> <important> <p>Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the <a href=\"https://docs.aws.amazon.com/storagegateway/latest/APIReference/Welcome.html\">Welcome</a> page.</p> </important>"
+      "documentation": "<p>Initiates a snapshot of a volume.</p> <p>AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage (Amazon S3) for durable off-site recovery, as well as import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad hoc basis. This API enables you to take an ad hoc snapshot. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#SchedulingSnapshot\">Editing a snapshot schedule</a>.</p> <p>In the <code>CreateSnapshot</code> request, you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the AWS Storage Gateway console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot. This operation is only supported in stored and cached volume gateway type.</p> <note> <p>To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html\">DescribeSnapshots</a> or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSnapshot.html\">DeleteSnapshot</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p> </note> <important> <p>Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the <a href=\"https://docs.aws.amazon.com/storagegateway/latest/APIReference/Welcome.html\">Welcome</a> page.</p> </important>"
     },
     "CreateSnapshotFromVolumeRecoveryPoint": {
       "name": "CreateSnapshotFromVolumeRecoveryPoint",
@@ -346,7 +346,29 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Creates a volume on a specified gateway. This operation is only supported in the stored volume gateway type.</p> <p>The size of the volume to create is inferred from the disk size. You can choose to preserve existing data on the disk, create volume from an existing snapshot, or create an empty volume. If you choose to create an empty gateway volume, then any existing data on the disk is erased.</p> <p>In the request you must specify the gateway and the disk information on which you are creating the volume. In response, the gateway creates the volume and returns volume information such as the volume Amazon Resource Name (ARN), its size, and the iSCSI target ARN that initiators can use to connect to the volume target.</p>"
+      "documentation": "<p>Creates a volume on a specified gateway. This operation is only supported in the stored volume gateway type.</p> <p>The size of the volume to create is inferred from the disk size. You can choose to preserve existing data on the disk, create volume from an existing snapshot, or create an empty volume. If you choose to create an empty gateway volume, then any existing data on the disk is erased.</p> <p>In the request, you must specify the gateway and the disk information on which you are creating the volume. In response, the gateway creates the volume and returns volume information such as the volume Amazon Resource Name (ARN), its size, and the iSCSI target ARN that initiators can use to connect to the volume target.</p>"
+    },
+    "CreateTapePool": {
+      "name": "CreateTapePool",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateTapePoolInput"
+      },
+      "output": {
+        "shape": "CreateTapePoolOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidGatewayRequestException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Creates a new custom tape pool. You can use custom tape pool to enable tape retention lock on tapes that are archived in the custom pool.</p>"
     },
     "CreateTapeWithBarcode": {
       "name": "CreateTapeWithBarcode",
@@ -368,7 +390,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Creates a virtual tape by using your own barcode. You write data to the virtual tape and then archive the tape. A barcode is unique and can not be reused if it has already been used on a tape. This applies to barcodes used on deleted tapes. This operation is only supported in the tape gateway type.</p> <note> <p>Cache storage must be allocated to the gateway before you can create a virtual tape. Use the <a>AddCache</a> operation to add cache storage to a gateway.</p> </note>"
+      "documentation": "<p>Creates a virtual tape by using your own barcode. You write data to the virtual tape and then archive the tape. A barcode is unique and cannot be reused if it has already been used on a tape. This applies to barcodes used on deleted tapes. This operation is only supported in the tape gateway type.</p> <note> <p>Cache storage must be allocated to the gateway before you can create a virtual tape. Use the <a>AddCache</a> operation to add cache storage to a gateway.</p> </note>"
     },
     "CreateTapes": {
       "name": "CreateTapes",
@@ -522,7 +544,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Deletes a snapshot of a volume.</p> <p>You can take snapshots of your gateway volumes on a scheduled or ad hoc basis. This API action enables you to delete a snapshot schedule for a volume. For more information, see <a href=\"https://docs.aws.amazon.com/storagegatewaylatest/userguide/backing-up-volumes.html\">Backing up your volumes</a>. In the <code>DeleteSnapshotSchedule</code> request, you identify the volume by providing its Amazon Resource Name (ARN). This operation is only supported in stored and cached volume gateway types.</p> <note> <p>To list or delete a snapshot, you must use the Amazon EC2 API. For more information, go to <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html\">DescribeSnapshots</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p> </note>"
+      "documentation": "<p>Deletes a snapshot of a volume.</p> <p>You can take snapshots of your gateway volumes on a scheduled or ad hoc basis. This API action enables you to delete a snapshot schedule for a volume. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/backing-up-volumes.html\">Backing up your volumes</a>. In the <code>DeleteSnapshotSchedule</code> request, you identify the volume by providing its Amazon Resource Name (ARN). This operation is only supported in stored and cached volume gateway types.</p> <note> <p>To list or delete a snapshot, you must use the Amazon EC2 API. For more information, go to <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html\">DescribeSnapshots</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p> </note>"
     },
     "DeleteTape": {
       "name": "DeleteTape",
@@ -567,6 +589,28 @@
         }
       ],
       "documentation": "<p>Deletes the specified virtual tape from the virtual tape shelf (VTS). This operation is only supported in the tape gateway type.</p>"
+    },
+    "DeleteTapePool": {
+      "name": "DeleteTapePool",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteTapePoolInput"
+      },
+      "output": {
+        "shape": "DeleteTapePoolOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidGatewayRequestException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Delete a custom tape pool. A custom tape pool can only be deleted if there are no tapes in the pool and if there are no automatic tape creation policies that reference the custom tape pool.</p>"
     },
     "DeleteVolume": {
       "name": "DeleteVolume",
@@ -632,7 +676,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Returns the bandwidth rate limits of a gateway. By default, these limits are not set, which means no bandwidth rate limiting is in effect. This operation is supported for the stored volume, cached volume and tape gateway types.</p> <p>This operation only returns a value for a bandwidth rate limit only if the limit is set. If no limits are set for the gateway, then this operation returns only the gateway ARN in the response body. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.</p>"
+      "documentation": "<p>Returns the bandwidth rate limits of a gateway. By default, these limits are not set, which means no bandwidth rate limiting is in effect. This operation is supported for the stored volume, cached volume, and tape gateway types.</p> <p>This operation only returns a value for a bandwidth rate limit only if the limit is set. If no limits are set for the gateway, then this operation returns only the gateway ARN in the response body. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.</p>"
     },
     "DescribeCache": {
       "name": "DescribeCache",
@@ -1162,6 +1206,28 @@
       ],
       "documentation": "<p>Lists the tags that have been added to the specified resource. This operation is supported in storage gateways of all types.</p>"
     },
+    "ListTapePools": {
+      "name": "ListTapePools",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListTapePoolsInput"
+      },
+      "output": {
+        "shape": "ListTapePoolsOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidGatewayRequestException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Lists custom tape pools. You specify custom tape pools to list by specifying one or more custom tape pool Amazon Resource Names (ARNs). If you don't specify a custom tape pool ARN, the operation lists all custom tape pools.</p> <p>This operation supports pagination. You can optionally specify the <code>Limit</code> parameter in the body to limit the number of tape pools in the response. If the number of tape pools returned in the response is truncated, the response includes a <code>Marker</code> element that you can use in your subsequent request to retrieve the next set of tape pools.</p>"
+    },
     "ListTapes": {
       "name": "ListTapes",
       "http": {
@@ -1578,7 +1644,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Updates a gateway's metadata, which includes the gateway's name and time zone. To specify which gateway to update, use the Amazon Resource Name (ARN) of the gateway in your request.</p> <note> <p>For Gateways activated after September 2, 2015, the gateway's ARN contains the gateway ID rather than the gateway name. However, changing the name of the gateway has no effect on the gateway's ARN.</p> </note>"
+      "documentation": "<p>Updates a gateway's metadata, which includes the gateway's name and time zone. To specify which gateway to update, use the Amazon Resource Name (ARN) of the gateway in your request.</p> <note> <p>For gateways activated after September 2, 2015, the gateway's ARN contains the gateway ID rather than the gateway name. However, changing the name of the gateway has no effect on the gateway's ARN.</p> </note>"
     },
     "UpdateGatewaySoftwareNow": {
       "name": "UpdateGatewaySoftwareNow",
@@ -1771,7 +1837,7 @@
         },
         "MediumChangerType": {
           "shape": "MediumChangerType",
-          "documentation": "<p>The value that indicates the type of medium changer to use for tape gateway. This field is optional.</p> <p>Valid Values: <code>STK-L700</code> | <code>AWS-Gateway-VTL</code> </p>"
+          "documentation": "<p>The value that indicates the type of medium changer to use for tape gateway. This field is optional.</p> <p>Valid Values: <code>STK-L700</code> | <code>AWS-Gateway-VTL</code> | <code>IBM-03584L32-0402</code> </p>"
         },
         "Tags": {
           "shape": "Tags",
@@ -1922,6 +1988,10 @@
         "PoolId": {
           "shape": "PoolId",
           "documentation": "<p>The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.</p> <p>Valid Values: <code>GLACIER</code> | <code>DEEP_ARCHIVE</code> </p>"
+        },
+        "BypassGovernanceRetention": {
+          "shape": "boolean",
+          "documentation": "<p>Set permissions to bypass governance retention. If the lock type of the archived tape is <code>Governance</code>, the tape's archived age is not older than <code>RetentionLockInDays</code>, and the user does not already have <code>BypassGovernanceRetention</code>, setting this to TRUE enables the user to bypass the retention lock. This parameter is set to true by default for calls from the console.</p> <p>Valid values: <code>TRUE</code> | <code>FALSE</code> </p>"
         }
       }
     },
@@ -2031,10 +2101,14 @@
         },
         "MinimumNumTapes": {
           "shape": "MinimumNumTapes",
-          "documentation": "<p>The minimum number of available virtual tapes that the gateway maintains at all times. If the number of tapes on the gateway goes below this value, the gateway creates as many new tapes as are needed to have <code>MinimumNumTapes</code> on the gateway.</p>"
+          "documentation": "<p>The minimum number of available virtual tapes that the gateway maintains at all times. If the number of tapes on the gateway goes below this value, the gateway creates as many new tapes as are needed to have <code>MinimumNumTapes</code> on the gateway. For more information about automatic tape creation, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/GettingStartedCreateTapes.html#CreateTapesAutomatically\">Creating Tapes Automatically</a>.</p>"
+        },
+        "Worm": {
+          "shape": "boolean",
+          "documentation": "<p>Set to <code>true</code> to indicate that tapes are to be archived as write-once-read-many (WORM). Set to <code>false</code> when WORM is not enabled for tapes.</p>"
         }
       },
-      "documentation": "<p>An automatic tape creation policy consists of automatic tape creation rules where each rule defines when and how to create new tapes.</p>"
+      "documentation": "<p>An automatic tape creation policy consists of automatic tape creation rules where each rule defines when and how to create new tapes. For more information about automatic tape creation, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/GettingStartedCreateTapes.html#CreateTapesAutomatically\">Creating Tapes Automatically</a>.</p>"
     },
     "AutomaticTapeCreationRules": {
       "type": "list",
@@ -2090,7 +2164,7 @@
         },
         "VolumeId": {
           "shape": "VolumeId",
-          "documentation": "<p>The unique identifier of the volume, e.g. vol-AE4B946D.</p>"
+          "documentation": "<p>The unique identifier of the volume, e.g., vol-AE4B946D.</p>"
         },
         "VolumeType": {
           "shape": "VolumeType",
@@ -2114,7 +2188,7 @@
         },
         "SourceSnapshotId": {
           "shape": "SnapshotId",
-          "documentation": "<p>If the cached volume was created from a snapshot, this field contains the snapshot ID used, e.g. snap-78e22663. Otherwise, this field is not included.</p>"
+          "documentation": "<p>If the cached volume was created from a snapshot, this field contains the snapshot ID used, e.g., snap-78e22663. Otherwise, this field is not included.</p>"
         },
         "VolumeiSCSIAttributes": {
           "shape": "VolumeiSCSIAttributes",
@@ -2122,7 +2196,7 @@
         },
         "CreatedDate": {
           "shape": "CreatedDate",
-          "documentation": "<p>The date the volume was created. Volumes created prior to March 28, 2017 don’t have this time stamp.</p>"
+          "documentation": "<p>The date the volume was created. Volumes created prior to March 28, 2017 don’t have this timestamp.</p>"
         },
         "VolumeUsedInBytes": {
           "shape": "VolumeUsedInBytes",
@@ -2228,7 +2302,7 @@
         },
         "SecretToAuthenticateTarget": {
           "shape": "ChapSecret",
-          "documentation": "<p>The secret key that the target must provide to participate in mutual CHAP with the initiator (e.g. Windows client).</p>"
+          "documentation": "<p>The secret key that the target must provide to participate in mutual CHAP with the initiator (e.g., Windows client).</p>"
         }
       },
       "documentation": "<p>Describes Challenge-Handshake Authentication Protocol (CHAP) information that supports authentication between your gateway and iSCSI initiators.</p>"
@@ -2648,6 +2722,44 @@
       },
       "documentation": "<p>A JSON object containing the following fields:</p>"
     },
+    "CreateTapePoolInput": {
+      "type": "structure",
+      "required": [
+        "PoolName",
+        "StorageClass"
+      ],
+      "members": {
+        "PoolName": {
+          "shape": "PoolName",
+          "documentation": "<p>The name of the new custom tape pool.</p>"
+        },
+        "StorageClass": {
+          "shape": "TapeStorageClass",
+          "documentation": "<p>The storage class that is associated with the new custom pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.</p>"
+        },
+        "RetentionLockType": {
+          "shape": "RetentionLockType",
+          "documentation": "<p>Tape retention lock can be configured in two modes. When configured in governance mode, AWS accounts with specific IAM permissions are authorized to remove the tape retention lock from archived virtual tapes. When configured in compliance mode, the tape retention lock cannot be removed by any user, including the root AWS account.</p>"
+        },
+        "RetentionLockTimeInDays": {
+          "shape": "RetentionLockTimeInDays",
+          "documentation": "<p>Tape retention lock time is set in days. Tape retention lock can be enabled for up to 100 years (36,500 days).</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "documentation": "<p>A list of up to 50 tags that can be assigned to tape pool. Each tag is a key-value pair.</p> <note> <p>Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag's key is 128 characters, and the maximum length for a tag's value is 256.</p> </note>"
+        }
+      }
+    },
+    "CreateTapePoolOutput": {
+      "type": "structure",
+      "members": {
+        "PoolARN": {
+          "shape": "PoolARN",
+          "documentation": "<p>The unique Amazon Resource Name (ARN) that represents the custom tape pool. Use the <a>ListTapePools</a> operation to return a list of tape pools for your account and AWS Region.</p>"
+        }
+      }
+    },
     "CreateTapeWithBarcodeInput": {
       "type": "structure",
       "required": [
@@ -2679,6 +2791,10 @@
         "PoolId": {
           "shape": "PoolId",
           "documentation": "<p>The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Deep Archive) that corresponds to the pool.</p> <p>Valid Values: <code>GLACIER</code> | <code>DEEP_ARCHIVE</code> </p>"
+        },
+        "Worm": {
+          "shape": "boolean",
+          "documentation": "<p>Set to <code>TRUE</code> if the tape you are creating is to be configured as a write-once-read-many (WORM) tape.</p>"
         },
         "Tags": {
           "shape": "Tags",
@@ -2738,6 +2854,10 @@
         "PoolId": {
           "shape": "PoolId",
           "documentation": "<p>The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.</p> <p>Valid Values: <code>GLACIER</code> | <code>DEEP_ARCHIVE</code> </p>"
+        },
+        "Worm": {
+          "shape": "boolean",
+          "documentation": "<p>Set to <code>TRUE</code> if the tape you are creating is to be configured as a write-once-read-many (WORM) tape.</p>"
         },
         "Tags": {
           "shape": "Tags",
@@ -2800,7 +2920,7 @@
         },
         "BandwidthType": {
           "shape": "BandwidthType",
-          "documentation": "<p>One of the BandwidthType values that indicates the gateway bandwidth rate limit to delete.</p> <p>Valid Values: <code>Upload</code> | <code>Download</code> | <code>All</code> </p>"
+          "documentation": "<p>One of the BandwidthType values that indicates the gateway bandwidth rate limit to delete.</p> <p>Valid Values: <code>UPLOAD</code> | <code>DOWNLOAD</code> | <code>ALL</code> </p>"
         }
       },
       "documentation": "<p>A JSON object containing the following fields:</p> <ul> <li> <p> <a>DeleteBandwidthRateLimitInput$BandwidthType</a> </p> </li> </ul>"
@@ -2924,6 +3044,10 @@
         "TapeARN": {
           "shape": "TapeARN",
           "documentation": "<p>The Amazon Resource Name (ARN) of the virtual tape to delete from the virtual tape shelf (VTS).</p>"
+        },
+        "BypassGovernanceRetention": {
+          "shape": "boolean",
+          "documentation": "<p>Set to <code>TRUE</code> to delete an archived tape that belongs to a custom pool with tape retention lock. Only archived tapes with tape retention lock set to <code>governance</code> can be deleted. Archived tapes with tape retention lock set to <code>compliance</code> can't be deleted.</p>"
         }
       },
       "documentation": "<p>DeleteTapeArchiveInput</p>"
@@ -2952,6 +3076,10 @@
         "TapeARN": {
           "shape": "TapeARN",
           "documentation": "<p>The Amazon Resource Name (ARN) of the virtual tape to delete.</p>"
+        },
+        "BypassGovernanceRetention": {
+          "shape": "boolean",
+          "documentation": "<p>Set to <code>TRUE</code> to delete an archived tape that belongs to a custom pool with tape retention lock. Only archived tapes with tape retention lock set to <code>governance</code> can be deleted. Archived tapes with tape retention lock set to <code>compliance</code> can't be deleted.</p>"
         }
       },
       "documentation": "<p>DeleteTapeInput</p>"
@@ -2965,6 +3093,27 @@
         }
       },
       "documentation": "<p>DeleteTapeOutput</p>"
+    },
+    "DeleteTapePoolInput": {
+      "type": "structure",
+      "required": [
+        "PoolARN"
+      ],
+      "members": {
+        "PoolARN": {
+          "shape": "PoolARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the custom tape pool to delete.</p>"
+        }
+      }
+    },
+    "DeleteTapePoolOutput": {
+      "type": "structure",
+      "members": {
+        "PoolARN": {
+          "shape": "PoolARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the custom tape pool being deleted.</p>"
+        }
+      }
     },
     "DeleteVolumeInput": {
       "type": "structure",
@@ -3206,7 +3355,7 @@
         },
         "CloudWatchLogGroupARN": {
           "shape": "CloudWatchLogGroupARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch Log Group that is used to monitor events in the gateway.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that is used to monitor events in the gateway.</p>"
         },
         "HostEnvironment": {
           "shape": "HostEnvironment",
@@ -4241,7 +4390,7 @@
       "members": {
         "ResourceARN": {
           "shape": "ResourceARN",
-          "documentation": "<p>he Amazon Resource Name (ARN) of the resource for which you want to list tags.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource for which you want to list tags.</p>"
         },
         "Marker": {
           "shape": "Marker",
@@ -4253,6 +4402,36 @@
         }
       },
       "documentation": "<p>ListTagsForResourceOutput</p>"
+    },
+    "ListTapePoolsInput": {
+      "type": "structure",
+      "members": {
+        "PoolARNs": {
+          "shape": "PoolARNs",
+          "documentation": "<p>The Amazon Resource Name (ARN) of each of the custom tape pools you want to list. If you don't specify a custom tape pool ARN, the response lists all custom tape pools. </p>"
+        },
+        "Marker": {
+          "shape": "Marker",
+          "documentation": "<p>A string that indicates the position at which to begin the returned list of tape pools.</p>"
+        },
+        "Limit": {
+          "shape": "PositiveIntObject",
+          "documentation": "<p>An optional number limit for the tape pools in the list returned by this call.</p>"
+        }
+      }
+    },
+    "ListTapePoolsOutput": {
+      "type": "structure",
+      "members": {
+        "PoolInfos": {
+          "shape": "PoolInfos",
+          "documentation": "<p>An array of <code>PoolInfo</code> objects, where each object describes a single custom tape pool. If there are no custom tape pools, the <code>PoolInfos</code> is an empty array. </p>"
+        },
+        "Marker": {
+          "shape": "Marker",
+          "documentation": "<p>A string that indicates the position at which to begin the returned list of tape pools. Use the marker in your next request to continue pagination of tape pools. If there are no more tape pools to list, this element does not appear in the response body. </p>"
+        }
+      }
     },
     "ListTapesInput": {
       "type": "structure",
@@ -4592,10 +4771,70 @@
       "min": 1,
       "pattern": "^[0-7]{4}$"
     },
+    "PoolARN": {
+      "type": "string",
+      "max": 500,
+      "min": 50
+    },
+    "PoolARNs": {
+      "type": "list",
+      "member": {
+        "shape": "PoolARN"
+      }
+    },
     "PoolId": {
       "type": "string",
       "max": 100,
       "min": 1
+    },
+    "PoolInfo": {
+      "type": "structure",
+      "members": {
+        "PoolARN": {
+          "shape": "PoolARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the custom tape pool. Use the <a>ListTapePools</a> operation to return a list of custom tape pools for your account and AWS Region.</p>"
+        },
+        "PoolName": {
+          "shape": "PoolName",
+          "documentation": "<p>The name of the custom tape pool. <code>PoolName</code> can use all ASCII characters, except '/' and '\\'.</p>"
+        },
+        "StorageClass": {
+          "shape": "TapeStorageClass",
+          "documentation": "<p>The storage class that is associated with the custom pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.</p>"
+        },
+        "RetentionLockType": {
+          "shape": "RetentionLockType",
+          "documentation": "<p>Tape retention lock type, which can be configured in two modes. When configured in governance mode, AWS accounts with specific IAM permissions are authorized to remove the tape retention lock from archived virtual tapes. When configured in compliance mode, the tape retention lock cannot be removed by any user, including the root AWS account.</p>"
+        },
+        "RetentionLockTimeInDays": {
+          "shape": "RetentionLockTimeInDays",
+          "documentation": "<p>Tape retention lock time is set in days. Tape retention lock can be enabled for up to 100 years (36,500 days).</p>"
+        },
+        "PoolStatus": {
+          "shape": "PoolStatus",
+          "documentation": "<p>Status of the custom tape pool. Pool can be <code>ACTIVE</code> or <code>DELETED</code>.</p>"
+        }
+      },
+      "documentation": "<p>Describes a custom tape pool.</p>"
+    },
+    "PoolInfos": {
+      "type": "list",
+      "member": {
+        "shape": "PoolInfo"
+      }
+    },
+    "PoolName": {
+      "type": "string",
+      "max": 100,
+      "min": 1,
+      "pattern": "^[ -\\.0-\\[\\]-~]*[!-\\.0-\\[\\]-~][ -\\.0-\\[\\]-~]*$"
+    },
+    "PoolStatus": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "DELETED"
+      ]
     },
     "PositiveIntObject": {
       "type": "integer",
@@ -4695,6 +4934,19 @@
       "type": "string",
       "max": 500,
       "min": 50
+    },
+    "RetentionLockTimeInDays": {
+      "type": "integer",
+      "max": 36500,
+      "min": 0
+    },
+    "RetentionLockType": {
+      "type": "string",
+      "enum": [
+        "COMPLIANCE",
+        "GOVERNANCE",
+        "NONE"
+      ]
     },
     "RetrieveTapeArchiveInput": {
       "type": "structure",
@@ -5019,7 +5271,7 @@
         },
         "VolumeId": {
           "shape": "VolumeId",
-          "documentation": "<p>The unique identifier of the volume, e.g. vol-AE4B946D.</p>"
+          "documentation": "<p>The unique identifier of the volume, e.g., vol-AE4B946D.</p>"
         },
         "VolumeType": {
           "shape": "VolumeType",
@@ -5059,7 +5311,7 @@
         },
         "CreatedDate": {
           "shape": "CreatedDate",
-          "documentation": "<p>The date the volume was created. Volumes created prior to March 28, 2017 don’t have this time stamp.</p>"
+          "documentation": "<p>The date the volume was created. Volumes created prior to March 28, 2017 don’t have this timestamp.</p>"
         },
         "VolumeUsedInBytes": {
           "shape": "VolumeUsedInBytes",
@@ -5162,6 +5414,18 @@
         "PoolId": {
           "shape": "PoolId",
           "documentation": "<p>The ID of the pool that contains tapes that will be archived. The tapes in this pool are archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.</p> <p>Valid Values: <code>GLACIER</code> | <code>DEEP_ARCHIVE</code> </p>"
+        },
+        "Worm": {
+          "shape": "boolean",
+          "documentation": "<p>If the tape is archived as write-once-read-many (WORM), this value is <code>true</code>.</p>"
+        },
+        "RetentionStartDate": {
+          "shape": "Time",
+          "documentation": "<p>The date that the tape is first archived with tape retention lock enabled.</p>"
+        },
+        "PoolEntryDate": {
+          "shape": "Time",
+          "documentation": "<p>The date that the tape enters a custom tape pool.</p>"
         }
       },
       "documentation": "<p>Describes a virtual tape object.</p>"
@@ -5200,7 +5464,7 @@
         },
         "CompletionTime": {
           "shape": "Time",
-          "documentation": "<p>The time that the archiving of the virtual tape was completed.</p> <p>The default time stamp format is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.</p>"
+          "documentation": "<p>The time that the archiving of the virtual tape was completed.</p> <p>The default timestamp format is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.</p>"
         },
         "RetrievedTo": {
           "shape": "GatewayARN",
@@ -5220,6 +5484,18 @@
         "PoolId": {
           "shape": "PoolId",
           "documentation": "<p>The ID of the pool that was used to archive the tape. The tapes in this pool are archived in the S3 storage class that is associated with the pool.</p> <p>Valid Values: <code>GLACIER</code> | <code>DEEP_ARCHIVE</code> </p>"
+        },
+        "Worm": {
+          "shape": "boolean",
+          "documentation": "<p>Set to <code>true</code> if the archived tape is stored as write-once-read-many (WORM).</p>"
+        },
+        "RetentionStartDate": {
+          "shape": "Time",
+          "documentation": "<p>If the archived tape is subject to tape retention lock, the date that the archived tape started being retained.</p>"
+        },
+        "PoolEntryDate": {
+          "shape": "Time",
+          "documentation": "<p>The time that the tape entered the custom tape pool.</p> <p>The default timestamp format is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.</p>"
         }
       },
       "documentation": "<p>Represents a virtual tape that is archived in the virtual tape shelf (VTS).</p>"
@@ -5276,6 +5552,14 @@
         "PoolId": {
           "shape": "PoolId",
           "documentation": "<p>The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.</p> <p>Valid Values: <code>GLACIER</code> | <code>DEEP_ARCHIVE</code> </p>"
+        },
+        "RetentionStartDate": {
+          "shape": "Time",
+          "documentation": "<p>The date that the tape became subject to tape retention lock.</p>"
+        },
+        "PoolEntryDate": {
+          "shape": "Time",
+          "documentation": "<p>The date that the tape entered the custom tape pool with tape retention lock enabled.</p>"
         }
       },
       "documentation": "<p>Describes a virtual tape.</p>"
@@ -5296,7 +5580,7 @@
         },
         "TapeRecoveryPointTime": {
           "shape": "Time",
-          "documentation": "<p>The time when the point-in-time view of the virtual tape was replicated for later recovery.</p> <p>The default time stamp format of the tape recovery point time is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.</p>"
+          "documentation": "<p>The time when the point-in-time view of the virtual tape was replicated for later recovery.</p> <p>The default timestamp format of the tape recovery point time is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.</p>"
         },
         "TapeSizeInBytes": {
           "shape": "TapeSize",
@@ -5323,6 +5607,13 @@
     },
     "TapeStatus": {
       "type": "string"
+    },
+    "TapeStorageClass": {
+      "type": "string",
+      "enum": [
+        "DEEP_ARCHIVE",
+        "GLACIER"
+      ]
     },
     "TapeUsage": {
       "type": "long"
@@ -5464,7 +5755,7 @@
         },
         "CloudWatchLogGroupARN": {
           "shape": "CloudWatchLogGroupARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that you want to use to monitor and log events in the gateway.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html\">What is Amazon CloudWatch logs?</a>.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that you want to use to monitor and log events in the gateway.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html\">What is Amazon CloudWatch Logs?</a> </p>"
         }
       }
     },
@@ -5773,7 +6064,7 @@
         },
         "DeviceType": {
           "shape": "DeviceType",
-          "documentation": "<p>The type of medium changer you want to select.</p> <p>Valid Values: <code>STK-L700</code> | <code>AWS-Gateway-VTL</code> </p>"
+          "documentation": "<p>The type of medium changer you want to select.</p> <p>Valid Values: <code>STK-L700</code> | <code>AWS-Gateway-VTL</code> | <code>IBM-03584L32-0402</code> </p>"
         }
       }
     },
@@ -5982,5 +6273,5 @@
       "type": "string"
     }
   },
-  "documentation": "<fullname>AWS Storage Gateway Service</fullname> <p>AWS Storage Gateway is the service that connects an on-premises software appliance with cloud-based storage to provide seamless and secure integration between an organization's on-premises IT environment and the AWS storage infrastructure. The service enables you to securely upload data to the AWS Cloud for cost effective backup and rapid disaster recovery.</p> <p>Use the following links to get started using the <i>AWS Storage Gateway Service API Reference</i>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewayHTTPRequestsHeaders\">AWS Storage Gateway required request headers</a>: Describes the required headers that you must send with every POST request to AWS Storage Gateway.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewaySigningRequests\">Signing requests</a>: AWS Storage Gateway requires that you authenticate every request you send; this topic describes how sign such a request.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#APIErrorResponses\">Error responses</a>: Provides reference information about AWS Storage Gateway errors.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_Operations.html\">Operations in AWS Storage Gateway</a>: Contains detailed descriptions of all AWS Storage Gateway operations, their request parameters, response elements, possible errors, and examples of requests and responses.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/general/latest/gr/sg.html\">AWS Storage Gateway endpoints and quotas:</a> Provides a list of each AWS Region and the endpoints available for use with AWS Storage Gateway.</p> </li> </ul> <note> <p>AWS Storage Gateway resource IDs are in uppercase. When you use these resource IDs with the Amazon EC2 API, EC2 expects resource IDs in lowercase. You must change your resource ID to lowercase to use it with the EC2 API. For example, in Storage Gateway the ID for a volume might be <code>vol-AA22BB012345DAF670</code>. When you use this ID with the EC2 API, you must change it to <code>vol-aa22bb012345daf670</code>. Otherwise, the EC2 API might not behave as expected.</p> </note> <important> <p>IDs for Storage Gateway volumes and Amazon EBS snapshots created from gateway volumes are changing to a longer format. Starting in December 2016, all new volumes and snapshots will be created with a 17-character string. Starting in April 2016, you will be able to use these longer IDs so you can test your systems with the new format. For more information, see <a href=\"http://aws.amazon.com/ec2/faqs/#longer-ids\">Longer EC2 and EBS resource IDs</a>.</p> <p>For example, a volume Amazon Resource Name (ARN) with the longer volume ID format looks like the following:</p> <p> <code>arn:aws:storagegateway:us-west-2:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABBCCDDEEFFG</code>.</p> <p>A snapshot ID with the longer ID format looks like the following: <code>snap-78e226633445566ee</code>.</p> <p>For more information, see <a href=\"http://forums.aws.amazon.com/ann.jspa?annID=3557\">Announcement: Heads-up – Longer AWS Storage Gateway volume and snapshot IDs coming in 2016</a>.</p> </important>"
+  "documentation": "<fullname>AWS Storage Gateway Service</fullname> <p>AWS Storage Gateway is the service that connects an on-premises software appliance with cloud-based storage to provide seamless and secure integration between an organization's on-premises IT environment and the AWS storage infrastructure. The service enables you to securely upload data to the AWS Cloud for cost effective backup and rapid disaster recovery.</p> <p>Use the following links to get started using the <i>AWS Storage Gateway Service API Reference</i>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewayHTTPRequestsHeaders\">AWS Storage Gateway required request headers</a>: Describes the required headers that you must send with every POST request to AWS Storage Gateway.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewaySigningRequests\">Signing requests</a>: AWS Storage Gateway requires that you authenticate every request you send; this topic describes how sign such a request.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#APIErrorResponses\">Error responses</a>: Provides reference information about AWS Storage Gateway errors.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_Operations.html\">Operations in AWS Storage Gateway</a>: Contains detailed descriptions of all AWS Storage Gateway operations, their request parameters, response elements, possible errors, and examples of requests and responses.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/general/latest/gr/sg.html\">AWS Storage Gateway endpoints and quotas</a>: Provides a list of each AWS Region and the endpoints available for use with AWS Storage Gateway.</p> </li> </ul> <note> <p>AWS Storage Gateway resource IDs are in uppercase. When you use these resource IDs with the Amazon EC2 API, EC2 expects resource IDs in lowercase. You must change your resource ID to lowercase to use it with the EC2 API. For example, in Storage Gateway the ID for a volume might be <code>vol-AA22BB012345DAF670</code>. When you use this ID with the EC2 API, you must change it to <code>vol-aa22bb012345daf670</code>. Otherwise, the EC2 API might not behave as expected.</p> </note> <important> <p>IDs for Storage Gateway volumes and Amazon EBS snapshots created from gateway volumes are changing to a longer format. Starting in December 2016, all new volumes and snapshots will be created with a 17-character string. Starting in April 2016, you will be able to use these longer IDs so you can test your systems with the new format. For more information, see <a href=\"http://aws.amazon.com/ec2/faqs/#longer-ids\">Longer EC2 and EBS resource IDs</a>.</p> <p>For example, a volume Amazon Resource Name (ARN) with the longer volume ID format looks like the following:</p> <p> <code>arn:aws:storagegateway:us-west-2:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABBCCDDEEFFG</code>.</p> <p>A snapshot ID with the longer ID format looks like the following: <code>snap-78e226633445566ee</code>.</p> <p>For more information, see <a href=\"http://forums.aws.amazon.com/ann.jspa?annID=3557\">Announcement: Heads-up – Longer AWS Storage Gateway volume and snapshot IDs coming in 2016</a>.</p> </important>"
 }

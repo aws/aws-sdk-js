@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.736.0-->
+<!--LATEST=2.737.0-->
 <!--ENTRYINSERT-->
+
+## 2.737.0
+* feature: IVS: Amazon Interactive Video Service (IVS) now offers customers the ability to create private channels, allowing customers to restrict their streams by channel or viewer.
+* feature: LakeFormation: Adding additional field in ListPermissions API response to return RAM resource share ARN if a resource were shared through AWS RAM service.
+* feature: ServiceCatalog: Enhance SearchProvisionedProducts API to allow queries using productName and provisioningArtifactName. Added lastProvisioningRecordId and lastSuccessfulRecordId to Read ProvisionedProduct APIs
+* feature: StorageGateway: Added WORM, tape retention lock, and custom pool features for virtual tapes.
 
 ## 2.736.0
 * feature: CognitoIdentityServiceProvider: Adding the option to use a service linked role to publish events to Pinpoint.

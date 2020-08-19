@@ -262,6 +262,12 @@ declare namespace LakeFormation {
     ResourceInfo?: ResourceInfo;
   }
   export type DescriptionString = string;
+  export interface DetailsMap {
+    /**
+     * A share resource ARN for a catalog resource shared through AWS Resource Access Manager (AWS RAM).
+     */
+    ResourceShare?: ResourceShareList;
+  }
   export interface ErrorDetail {
     /**
      * The code associated with this error.
@@ -448,6 +454,10 @@ declare namespace LakeFormation {
      * Indicates whether to grant the ability to grant permissions (as a subset of permissions granted).
      */
     PermissionsWithGrantOption?: PermissionList;
+    /**
+     * This attribute can be used to return any additional details of PrincipalResourcePermissions. Currently returns only as a RAM share resource ARN.
+     */
+    AdditionalDetails?: DetailsMap;
   }
   export type PrincipalResourcePermissionsList = PrincipalResourcePermissions[];
   export interface PutDataLakeSettingsRequest {
@@ -462,6 +472,7 @@ declare namespace LakeFormation {
   }
   export interface PutDataLakeSettingsResponse {
   }
+  export type RAMResourceShareArn = string;
   export interface RegisterResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource that you want to register.
@@ -516,6 +527,7 @@ declare namespace LakeFormation {
     LastModified?: LastModifiedTimestamp;
   }
   export type ResourceInfoList = ResourceInfo[];
+  export type ResourceShareList = RAMResourceShareArn[];
   export interface RevokePermissionsRequest {
     /**
      * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. 

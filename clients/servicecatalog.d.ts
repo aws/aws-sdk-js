@@ -2810,6 +2810,14 @@ declare namespace ServiceCatalog {
      */
     LastRecordId?: Id;
     /**
+     * The record identifier of the last request performed on this provisioned product of the following types:    ProvisionedProduct     UpdateProvisionedProduct     ExecuteProvisionedProductPlan     TerminateProvisionedProduct   
+     */
+    LastProvisioningRecordId?: Id;
+    /**
+     * The record identifier of the last successful request performed on this provisioned product of the following types:    ProvisionedProduct     UpdateProvisionedProduct     ExecuteProvisionedProductPlan     TerminateProvisionedProduct   
+     */
+    LastSuccessfulProvisioningRecordId?: Id;
+    /**
      * One or more tags.
      */
     Tags?: Tags;
@@ -2822,9 +2830,17 @@ declare namespace ServiceCatalog {
      */
     ProductId?: Id;
     /**
+     * The name of the product.
+     */
+    ProductName?: ProductViewName;
+    /**
      * The identifier of the provisioning artifact.
      */
     ProvisioningArtifactId?: Id;
+    /**
+     * The name of the provisioning artifact.
+     */
+    ProvisioningArtifactName?: ProvisioningArtifactName;
     /**
      * The Amazon Resource Name (ARN) of the IAM user.
      */
@@ -2872,6 +2888,14 @@ declare namespace ServiceCatalog {
      * The record identifier of the last request performed on this provisioned product.
      */
     LastRecordId?: LastRequestId;
+    /**
+     * The record identifier of the last request performed on this provisioned product of the following types:    ProvisionedProduct     UpdateProvisionedProduct     ExecuteProvisionedProductPlan     TerminateProvisionedProduct   
+     */
+    LastProvisioningRecordId?: Id;
+    /**
+     * The record identifier of the last successful request performed on this provisioned product of the following types:    ProvisionedProduct     UpdateProvisionedProduct     ExecuteProvisionedProductPlan     TerminateProvisionedProduct   
+     */
+    LastSuccessfulProvisioningRecordId?: Id;
     /**
      * The product identifier. For example, prod-abcdzk7xy33qa.
      */
@@ -3524,7 +3548,7 @@ declare namespace ServiceCatalog {
      */
     AccessLevelFilter?: AccessLevelFilter;
     /**
-     * The search filters. When the key is SearchQuery, the searchable fields are arn, createdTime, id, lastRecordId, idempotencyToken, name, physicalId, productId, provisioningArtifact, type, status, tags, userArn, and userArnSession. Example: "SearchQuery":["status:AVAILABLE"] 
+     * The search filters. When the key is SearchQuery, the searchable fields are arn, createdTime, id, lastRecordId, idempotencyToken, name, physicalId, productId, provisioningArtifact, type, status, tags, userArn, userArnSession, lastProvisioningRecordId, lastSuccessfulProvisioningRecordId, productName, and provisioningArtifactName. Example: "SearchQuery":["status:AVAILABLE"] 
      */
     Filters?: ProvisionedProductFilters;
     /**

@@ -52,6 +52,14 @@ declare class IVS extends Service {
    */
   deleteChannel(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes a specified authorization key pair. This invalidates future viewer tokens generated using the key pair’s privateKey.
+   */
+  deletePlaybackKeyPair(params: IVS.Types.DeletePlaybackKeyPairRequest, callback?: (err: AWSError, data: IVS.Types.DeletePlaybackKeyPairResponse) => void): Request<IVS.Types.DeletePlaybackKeyPairResponse, AWSError>;
+  /**
+   * Deletes a specified authorization key pair. This invalidates future viewer tokens generated using the key pair’s privateKey.
+   */
+  deletePlaybackKeyPair(callback?: (err: AWSError, data: IVS.Types.DeletePlaybackKeyPairResponse) => void): Request<IVS.Types.DeletePlaybackKeyPairResponse, AWSError>;
+  /**
    * Deletes the stream key for the specified ARN, so it can no longer be used to stream.
    */
   deleteStreamKey(params: IVS.Types.DeleteStreamKeyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -67,6 +75,14 @@ declare class IVS extends Service {
    * Gets the channel configuration for the specified channel ARN. See also BatchGetChannel.
    */
   getChannel(callback?: (err: AWSError, data: IVS.Types.GetChannelResponse) => void): Request<IVS.Types.GetChannelResponse, AWSError>;
+  /**
+   * Gets a specified playback authorization key pair and returns the arn and fingerprint. The privateKey held by the caller can be used to generate viewer authorization tokens, to grant viewers access to authorized channels.
+   */
+  getPlaybackKeyPair(params: IVS.Types.GetPlaybackKeyPairRequest, callback?: (err: AWSError, data: IVS.Types.GetPlaybackKeyPairResponse) => void): Request<IVS.Types.GetPlaybackKeyPairResponse, AWSError>;
+  /**
+   * Gets a specified playback authorization key pair and returns the arn and fingerprint. The privateKey held by the caller can be used to generate viewer authorization tokens, to grant viewers access to authorized channels.
+   */
+  getPlaybackKeyPair(callback?: (err: AWSError, data: IVS.Types.GetPlaybackKeyPairResponse) => void): Request<IVS.Types.GetPlaybackKeyPairResponse, AWSError>;
   /**
    * Gets information about the active (live) stream on a specified channel.
    */
@@ -84,6 +100,14 @@ declare class IVS extends Service {
    */
   getStreamKey(callback?: (err: AWSError, data: IVS.Types.GetStreamKeyResponse) => void): Request<IVS.Types.GetStreamKeyResponse, AWSError>;
   /**
+   * Imports the public portion of a new key pair and returns its arn and fingerprint. The privateKey can then be used to generate viewer authorization tokens, to grant viewers access to authorized channels.
+   */
+  importPlaybackKeyPair(params: IVS.Types.ImportPlaybackKeyPairRequest, callback?: (err: AWSError, data: IVS.Types.ImportPlaybackKeyPairResponse) => void): Request<IVS.Types.ImportPlaybackKeyPairResponse, AWSError>;
+  /**
+   * Imports the public portion of a new key pair and returns its arn and fingerprint. The privateKey can then be used to generate viewer authorization tokens, to grant viewers access to authorized channels.
+   */
+  importPlaybackKeyPair(callback?: (err: AWSError, data: IVS.Types.ImportPlaybackKeyPairResponse) => void): Request<IVS.Types.ImportPlaybackKeyPairResponse, AWSError>;
+  /**
    * Gets summary information about all channels in your account, in the AWS region where the API request is processed. This list can be filtered to match a specified string.
    */
   listChannels(params: IVS.Types.ListChannelsRequest, callback?: (err: AWSError, data: IVS.Types.ListChannelsResponse) => void): Request<IVS.Types.ListChannelsResponse, AWSError>;
@@ -91,6 +115,14 @@ declare class IVS extends Service {
    * Gets summary information about all channels in your account, in the AWS region where the API request is processed. This list can be filtered to match a specified string.
    */
   listChannels(callback?: (err: AWSError, data: IVS.Types.ListChannelsResponse) => void): Request<IVS.Types.ListChannelsResponse, AWSError>;
+  /**
+   * Gets summary information about playback key pairs.
+   */
+  listPlaybackKeyPairs(params: IVS.Types.ListPlaybackKeyPairsRequest, callback?: (err: AWSError, data: IVS.Types.ListPlaybackKeyPairsResponse) => void): Request<IVS.Types.ListPlaybackKeyPairsResponse, AWSError>;
+  /**
+   * Gets summary information about playback key pairs.
+   */
+  listPlaybackKeyPairs(callback?: (err: AWSError, data: IVS.Types.ListPlaybackKeyPairsResponse) => void): Request<IVS.Types.ListPlaybackKeyPairsResponse, AWSError>;
   /**
    * Gets summary information about stream keys for the specified channel.
    */
@@ -195,6 +227,7 @@ declare namespace IVS {
     streamKeys?: StreamKeys;
     errors?: BatchErrors;
   }
+  export type Boolean = boolean;
   export interface Channel {
     /**
      * Channel ARN.
@@ -221,6 +254,10 @@ declare namespace IVS {
      */
     playbackUrl?: PlaybackURL;
     /**
+     * Whether the channel is authorized.
+     */
+    authorized?: IsAuthorized;
+    /**
      * Array of 1-50 maps, each of the form string:string (key:value).
      */
     tags?: Tags;
@@ -244,6 +281,10 @@ declare namespace IVS {
      */
     latencyMode?: ChannelLatencyMode;
     /**
+     * Whether the channel is authorized.
+     */
+    authorized?: IsAuthorized;
+    /**
      * Array of 1-50 maps, each of the form string:string (key:value).
      */
     tags?: Tags;
@@ -263,6 +304,10 @@ declare namespace IVS {
      * Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately. Valid values:    STANDARD: Multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps.    BASIC: Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Vertical resolution can be up to 480 and bitrate can be up to 1.5 Mbps.   Default: STANDARD.
      */
     type?: ChannelType;
+    /**
+     * Whether the channel is authorized. Default: false.
+     */
+    authorized?: Boolean;
     /**
      * See Channel$tags.
      */
@@ -294,6 +339,14 @@ declare namespace IVS {
      */
     arn: ChannelArn;
   }
+  export interface DeletePlaybackKeyPairRequest {
+    /**
+     * ARN of the key pair to be deleted.
+     */
+    arn: PlaybackKeyPairArn;
+  }
+  export interface DeletePlaybackKeyPairResponse {
+  }
   export interface DeleteStreamKeyRequest {
     /**
      * ARN of the stream key to be deleted.
@@ -308,6 +361,15 @@ declare namespace IVS {
   }
   export interface GetChannelResponse {
     channel?: Channel;
+  }
+  export interface GetPlaybackKeyPairRequest {
+    /**
+     * ARN of the key pair to be returned.
+     */
+    arn: PlaybackKeyPairArn;
+  }
+  export interface GetPlaybackKeyPairResponse {
+    keyPair?: PlaybackKeyPair;
   }
   export interface GetStreamKeyRequest {
     /**
@@ -327,7 +389,25 @@ declare namespace IVS {
   export interface GetStreamResponse {
     stream?: Stream;
   }
+  export interface ImportPlaybackKeyPairRequest {
+    /**
+     * The public portion of a customer-generated key pair.
+     */
+    publicKeyMaterial: PlaybackPublicKeyMaterial;
+    /**
+     * An arbitrary string (a nickname) assigned to a playback key pair that helps the customer identify that resource. The value does not need to be unique.
+     */
+    name?: PlaybackKeyPairName;
+    /**
+     * Any tags provided with the request are added to the playback key pair tags.
+     */
+    tags?: Tags;
+  }
+  export interface ImportPlaybackKeyPairResponse {
+    keyPair?: PlaybackKeyPair;
+  }
   export type IngestEndpoint = string;
+  export type IsAuthorized = boolean;
   export interface ListChannelsRequest {
     /**
      * Filters the channel list to match the specified name.
@@ -349,6 +429,26 @@ declare namespace IVS {
     channels: ChannelList;
     /**
      * If there are more channels than maxResults, use nextToken in the request to get the next set.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListPlaybackKeyPairsRequest {
+    /**
+     * Maximum number of key pairs to return.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The first key pair to retrieve. This is used for pagination; see the nextToken response field.
+     */
+    maxResults?: MaxPlaybackKeyPairResults;
+  }
+  export interface ListPlaybackKeyPairsResponse {
+    /**
+     * List of key pairs.
+     */
+    keyPairs: PlaybackKeyPairList;
+    /**
+     * If there are more key pairs than maxResults, use nextToken in the request to get the next set.
      */
     nextToken?: PaginationToken;
   }
@@ -418,10 +518,48 @@ declare namespace IVS {
     nextToken?: String;
   }
   export type MaxChannelResults = number;
+  export type MaxPlaybackKeyPairResults = number;
   export type MaxStreamKeyResults = number;
   export type MaxStreamResults = number;
   export type MaxTagResults = number;
   export type PaginationToken = string;
+  export interface PlaybackKeyPair {
+    /**
+     * Key-pair ARN.
+     */
+    arn?: PlaybackKeyPairArn;
+    /**
+     * Key-pair name.
+     */
+    name?: PlaybackKeyPairName;
+    /**
+     * Key-pair identifier.
+     */
+    fingerprint?: PlaybackKeyPairFingerprint;
+    /**
+     * Array of 1-50 maps, each of the form string:string (key:value).
+     */
+    tags?: Tags;
+  }
+  export type PlaybackKeyPairArn = string;
+  export type PlaybackKeyPairFingerprint = string;
+  export type PlaybackKeyPairList = PlaybackKeyPairSummary[];
+  export type PlaybackKeyPairName = string;
+  export interface PlaybackKeyPairSummary {
+    /**
+     * Key-pair ARN.
+     */
+    arn?: PlaybackKeyPairArn;
+    /**
+     * Key-pair name.
+     */
+    name?: PlaybackKeyPairName;
+    /**
+     * Array of 1-50 maps, each of the form string:string (key:value) 
+     */
+    tags?: Tags;
+  }
+  export type PlaybackPublicKeyMaterial = string;
   export type PlaybackURL = string;
   export interface PutMetadataRequest {
     /**
@@ -483,7 +621,7 @@ declare namespace IVS {
      */
     channelArn?: ChannelArn;
     /**
-     * Array of 1-50 maps, each of the form string:string (key:value) 
+     * Array of 1-50 maps, each of the form string:string (key:value).
      */
     tags?: Tags;
   }
@@ -500,7 +638,7 @@ declare namespace IVS {
      */
     channelArn?: ChannelArn;
     /**
-     * Array of 1-50 maps, each of the form string:string (key:value) 
+     * Array of 1-50 maps, each of the form string:string (key:value).
      */
     tags?: Tags;
   }
@@ -579,6 +717,10 @@ declare namespace IVS {
      * Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately. Valid values:    STANDARD: Multiple qualities are generated from the original input, to automatically give viewers the best experience for their devices and network conditions. Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps.    BASIC: Amazon IVS delivers the original input to viewers. The viewer’s video-quality choice is limited to the original input. Vertical resolution can be up to 480 and bitrate can be up to 1.5 Mbps.   Default: STANDARD.
      */
     type?: ChannelType;
+    /**
+     * Whether the channel is authorized. Default: false.
+     */
+    authorized?: Boolean;
   }
   export interface UpdateChannelResponse {
     channel?: Channel;

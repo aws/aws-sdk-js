@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "IVS",
+        "description": "Amazon Interactive Video Service (IVS) now offers customers the ability to create private channels, allowing customers to restrict their streams by channel or viewer."
+    },
+    {
+        "type": "feature",
+        "category": "LakeFormation",
+        "description": "Adding additional field in ListPermissions API response to return RAM resource share ARN if a resource were shared through AWS RAM service."
+    },
+    {
+        "type": "feature",
+        "category": "ServiceCatalog",
+        "description": "Enhance SearchProvisionedProducts API to allow queries using productName and provisioningArtifactName. Added lastProvisioningRecordId and lastSuccessfulRecordId to Read ProvisionedProduct APIs"
+    },
+    {
+        "type": "feature",
+        "category": "StorageGateway",
+        "description": "Added WORM, tape retention lock, and custom pool features for virtual tapes."
+    }
+]

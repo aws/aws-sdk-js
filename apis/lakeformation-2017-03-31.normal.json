@@ -625,6 +625,16 @@
       "min": 0,
       "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
     },
+    "DetailsMap": {
+      "type": "structure",
+      "members": {
+        "ResourceShare": {
+          "shape": "ResourceShareList",
+          "documentation": "<p>A share resource ARN for a catalog resource shared through AWS Resource Access Manager (AWS RAM).</p>"
+        }
+      },
+      "documentation": "<p>A structure containing the additional details to be returned in the <code>AdditionalDetails</code> attribute of <code>PrincipalResourcePermissions</code>.</p> <p>If a catalog resource is shared through AWS Resource Access Manager (AWS RAM), then there will exist a corresponding RAM share resource ARN.</p>"
+    },
     "ErrorDetail": {
       "type": "structure",
       "members": {
@@ -921,6 +931,10 @@
         "PermissionsWithGrantOption": {
           "shape": "PermissionList",
           "documentation": "<p>Indicates whether to grant the ability to grant permissions (as a subset of permissions granted).</p>"
+        },
+        "AdditionalDetails": {
+          "shape": "DetailsMap",
+          "documentation": "<p>This attribute can be used to return any additional details of <code>PrincipalResourcePermissions</code>. Currently returns only as a RAM share resource ARN.</p>"
         }
       },
       "documentation": "<p>The permissions granted or revoked on a resource.</p>"
@@ -950,6 +964,9 @@
     "PutDataLakeSettingsResponse": {
       "type": "structure",
       "members": {}
+    },
+    "RAMResourceShareArn": {
+      "type": "string"
     },
     "RegisterResourceRequest": {
       "type": "structure",
@@ -1026,6 +1043,12 @@
       "type": "list",
       "member": {
         "shape": "ResourceInfo"
+      }
+    },
+    "ResourceShareList": {
+      "type": "list",
+      "member": {
+        "shape": "RAMResourceShareArn"
       }
     },
     "RevokePermissionsRequest": {

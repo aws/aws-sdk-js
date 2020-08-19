@@ -100,19 +100,19 @@ declare class StorageGateway extends Service {
    */
   createNFSFileShare(callback?: (err: AWSError, data: StorageGateway.Types.CreateNFSFileShareOutput) => void): Request<StorageGateway.Types.CreateNFSFileShareOutput, AWSError>;
   /**
-   * Creates a Server Message Block (SMB) file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway expose file shares using an SMB interface. This operation is only supported for file gateways.  File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see Activating and deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide. File gateways don't support creating hard or symbolic links on a file share. 
+   * Creates a Server Message Block (SMB) file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using an SMB interface. This operation is only supported for file gateways.  File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see Activating and deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide. File gateways don't support creating hard or symbolic links on a file share. 
    */
   createSMBFileShare(params: StorageGateway.Types.CreateSMBFileShareInput, callback?: (err: AWSError, data: StorageGateway.Types.CreateSMBFileShareOutput) => void): Request<StorageGateway.Types.CreateSMBFileShareOutput, AWSError>;
   /**
-   * Creates a Server Message Block (SMB) file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway expose file shares using an SMB interface. This operation is only supported for file gateways.  File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see Activating and deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide. File gateways don't support creating hard or symbolic links on a file share. 
+   * Creates a Server Message Block (SMB) file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using an SMB interface. This operation is only supported for file gateways.  File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see Activating and deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide. File gateways don't support creating hard or symbolic links on a file share. 
    */
   createSMBFileShare(callback?: (err: AWSError, data: StorageGateway.Types.CreateSMBFileShareOutput) => void): Request<StorageGateway.Types.CreateSMBFileShareOutput, AWSError>;
   /**
-   * Initiates a snapshot of a volume. AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage (Amazon S3) for durable off-site recovery, as well as import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad hoc basis. This API enables you to take ad-hoc snapshot. For more information, see Editing a snapshot schedule. In the CreateSnapshot request you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the AWS Storage Gateway Console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot. This operation is only supported in stored and cached volume gateway type.  To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see DescribeSnapshots or DeleteSnapshot in the Amazon Elastic Compute Cloud API Reference.   Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the Welcome page. 
+   * Initiates a snapshot of a volume. AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage (Amazon S3) for durable off-site recovery, as well as import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad hoc basis. This API enables you to take an ad hoc snapshot. For more information, see Editing a snapshot schedule. In the CreateSnapshot request, you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the AWS Storage Gateway console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot. This operation is only supported in stored and cached volume gateway type.  To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see DescribeSnapshots or DeleteSnapshot in the Amazon Elastic Compute Cloud API Reference.   Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the Welcome page. 
    */
   createSnapshot(params: StorageGateway.Types.CreateSnapshotInput, callback?: (err: AWSError, data: StorageGateway.Types.CreateSnapshotOutput) => void): Request<StorageGateway.Types.CreateSnapshotOutput, AWSError>;
   /**
-   * Initiates a snapshot of a volume. AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage (Amazon S3) for durable off-site recovery, as well as import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad hoc basis. This API enables you to take ad-hoc snapshot. For more information, see Editing a snapshot schedule. In the CreateSnapshot request you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the AWS Storage Gateway Console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot. This operation is only supported in stored and cached volume gateway type.  To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see DescribeSnapshots or DeleteSnapshot in the Amazon Elastic Compute Cloud API Reference.   Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the Welcome page. 
+   * Initiates a snapshot of a volume. AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage (Amazon S3) for durable off-site recovery, as well as import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad hoc basis. This API enables you to take an ad hoc snapshot. For more information, see Editing a snapshot schedule. In the CreateSnapshot request, you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the AWS Storage Gateway console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot. This operation is only supported in stored and cached volume gateway type.  To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see DescribeSnapshots or DeleteSnapshot in the Amazon Elastic Compute Cloud API Reference.   Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the Welcome page. 
    */
   createSnapshot(callback?: (err: AWSError, data: StorageGateway.Types.CreateSnapshotOutput) => void): Request<StorageGateway.Types.CreateSnapshotOutput, AWSError>;
   /**
@@ -124,19 +124,27 @@ declare class StorageGateway extends Service {
    */
   createSnapshotFromVolumeRecoveryPoint(callback?: (err: AWSError, data: StorageGateway.Types.CreateSnapshotFromVolumeRecoveryPointOutput) => void): Request<StorageGateway.Types.CreateSnapshotFromVolumeRecoveryPointOutput, AWSError>;
   /**
-   * Creates a volume on a specified gateway. This operation is only supported in the stored volume gateway type. The size of the volume to create is inferred from the disk size. You can choose to preserve existing data on the disk, create volume from an existing snapshot, or create an empty volume. If you choose to create an empty gateway volume, then any existing data on the disk is erased. In the request you must specify the gateway and the disk information on which you are creating the volume. In response, the gateway creates the volume and returns volume information such as the volume Amazon Resource Name (ARN), its size, and the iSCSI target ARN that initiators can use to connect to the volume target.
+   * Creates a volume on a specified gateway. This operation is only supported in the stored volume gateway type. The size of the volume to create is inferred from the disk size. You can choose to preserve existing data on the disk, create volume from an existing snapshot, or create an empty volume. If you choose to create an empty gateway volume, then any existing data on the disk is erased. In the request, you must specify the gateway and the disk information on which you are creating the volume. In response, the gateway creates the volume and returns volume information such as the volume Amazon Resource Name (ARN), its size, and the iSCSI target ARN that initiators can use to connect to the volume target.
    */
   createStorediSCSIVolume(params: StorageGateway.Types.CreateStorediSCSIVolumeInput, callback?: (err: AWSError, data: StorageGateway.Types.CreateStorediSCSIVolumeOutput) => void): Request<StorageGateway.Types.CreateStorediSCSIVolumeOutput, AWSError>;
   /**
-   * Creates a volume on a specified gateway. This operation is only supported in the stored volume gateway type. The size of the volume to create is inferred from the disk size. You can choose to preserve existing data on the disk, create volume from an existing snapshot, or create an empty volume. If you choose to create an empty gateway volume, then any existing data on the disk is erased. In the request you must specify the gateway and the disk information on which you are creating the volume. In response, the gateway creates the volume and returns volume information such as the volume Amazon Resource Name (ARN), its size, and the iSCSI target ARN that initiators can use to connect to the volume target.
+   * Creates a volume on a specified gateway. This operation is only supported in the stored volume gateway type. The size of the volume to create is inferred from the disk size. You can choose to preserve existing data on the disk, create volume from an existing snapshot, or create an empty volume. If you choose to create an empty gateway volume, then any existing data on the disk is erased. In the request, you must specify the gateway and the disk information on which you are creating the volume. In response, the gateway creates the volume and returns volume information such as the volume Amazon Resource Name (ARN), its size, and the iSCSI target ARN that initiators can use to connect to the volume target.
    */
   createStorediSCSIVolume(callback?: (err: AWSError, data: StorageGateway.Types.CreateStorediSCSIVolumeOutput) => void): Request<StorageGateway.Types.CreateStorediSCSIVolumeOutput, AWSError>;
   /**
-   * Creates a virtual tape by using your own barcode. You write data to the virtual tape and then archive the tape. A barcode is unique and can not be reused if it has already been used on a tape. This applies to barcodes used on deleted tapes. This operation is only supported in the tape gateway type.  Cache storage must be allocated to the gateway before you can create a virtual tape. Use the AddCache operation to add cache storage to a gateway. 
+   * Creates a new custom tape pool. You can use custom tape pool to enable tape retention lock on tapes that are archived in the custom pool.
+   */
+  createTapePool(params: StorageGateway.Types.CreateTapePoolInput, callback?: (err: AWSError, data: StorageGateway.Types.CreateTapePoolOutput) => void): Request<StorageGateway.Types.CreateTapePoolOutput, AWSError>;
+  /**
+   * Creates a new custom tape pool. You can use custom tape pool to enable tape retention lock on tapes that are archived in the custom pool.
+   */
+  createTapePool(callback?: (err: AWSError, data: StorageGateway.Types.CreateTapePoolOutput) => void): Request<StorageGateway.Types.CreateTapePoolOutput, AWSError>;
+  /**
+   * Creates a virtual tape by using your own barcode. You write data to the virtual tape and then archive the tape. A barcode is unique and cannot be reused if it has already been used on a tape. This applies to barcodes used on deleted tapes. This operation is only supported in the tape gateway type.  Cache storage must be allocated to the gateway before you can create a virtual tape. Use the AddCache operation to add cache storage to a gateway. 
    */
   createTapeWithBarcode(params: StorageGateway.Types.CreateTapeWithBarcodeInput, callback?: (err: AWSError, data: StorageGateway.Types.CreateTapeWithBarcodeOutput) => void): Request<StorageGateway.Types.CreateTapeWithBarcodeOutput, AWSError>;
   /**
-   * Creates a virtual tape by using your own barcode. You write data to the virtual tape and then archive the tape. A barcode is unique and can not be reused if it has already been used on a tape. This applies to barcodes used on deleted tapes. This operation is only supported in the tape gateway type.  Cache storage must be allocated to the gateway before you can create a virtual tape. Use the AddCache operation to add cache storage to a gateway. 
+   * Creates a virtual tape by using your own barcode. You write data to the virtual tape and then archive the tape. A barcode is unique and cannot be reused if it has already been used on a tape. This applies to barcodes used on deleted tapes. This operation is only supported in the tape gateway type.  Cache storage must be allocated to the gateway before you can create a virtual tape. Use the AddCache operation to add cache storage to a gateway. 
    */
   createTapeWithBarcode(callback?: (err: AWSError, data: StorageGateway.Types.CreateTapeWithBarcodeOutput) => void): Request<StorageGateway.Types.CreateTapeWithBarcodeOutput, AWSError>;
   /**
@@ -212,6 +220,14 @@ declare class StorageGateway extends Service {
    */
   deleteTapeArchive(callback?: (err: AWSError, data: StorageGateway.Types.DeleteTapeArchiveOutput) => void): Request<StorageGateway.Types.DeleteTapeArchiveOutput, AWSError>;
   /**
+   * Delete a custom tape pool. A custom tape pool can only be deleted if there are no tapes in the pool and if there are no automatic tape creation policies that reference the custom tape pool.
+   */
+  deleteTapePool(params: StorageGateway.Types.DeleteTapePoolInput, callback?: (err: AWSError, data: StorageGateway.Types.DeleteTapePoolOutput) => void): Request<StorageGateway.Types.DeleteTapePoolOutput, AWSError>;
+  /**
+   * Delete a custom tape pool. A custom tape pool can only be deleted if there are no tapes in the pool and if there are no automatic tape creation policies that reference the custom tape pool.
+   */
+  deleteTapePool(callback?: (err: AWSError, data: StorageGateway.Types.DeleteTapePoolOutput) => void): Request<StorageGateway.Types.DeleteTapePoolOutput, AWSError>;
+  /**
    * Deletes the specified storage volume that you previously created using the CreateCachediSCSIVolume or CreateStorediSCSIVolume API. This operation is only supported in the cached volume and stored volume types. For stored volume gateways, the local disk that was configured as the storage volume is not deleted. You can reuse the local disk to create another storage volume. Before you delete a volume, make sure there are no iSCSI connections to the volume you are deleting. You should also make sure there is no snapshot in progress. You can use the Amazon Elastic Compute Cloud (Amazon EC2) API to query snapshots on the volume you are deleting and check the snapshot status. For more information, go to DescribeSnapshots in the Amazon Elastic Compute Cloud API Reference. In the request, you must provide the Amazon Resource Name (ARN) of the storage volume you want to delete.
    */
   deleteVolume(params: StorageGateway.Types.DeleteVolumeInput, callback?: (err: AWSError, data: StorageGateway.Types.DeleteVolumeOutput) => void): Request<StorageGateway.Types.DeleteVolumeOutput, AWSError>;
@@ -228,11 +244,11 @@ declare class StorageGateway extends Service {
    */
   describeAvailabilityMonitorTest(callback?: (err: AWSError, data: StorageGateway.Types.DescribeAvailabilityMonitorTestOutput) => void): Request<StorageGateway.Types.DescribeAvailabilityMonitorTestOutput, AWSError>;
   /**
-   * Returns the bandwidth rate limits of a gateway. By default, these limits are not set, which means no bandwidth rate limiting is in effect. This operation is supported for the stored volume, cached volume and tape gateway types. This operation only returns a value for a bandwidth rate limit only if the limit is set. If no limits are set for the gateway, then this operation returns only the gateway ARN in the response body. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.
+   * Returns the bandwidth rate limits of a gateway. By default, these limits are not set, which means no bandwidth rate limiting is in effect. This operation is supported for the stored volume, cached volume, and tape gateway types. This operation only returns a value for a bandwidth rate limit only if the limit is set. If no limits are set for the gateway, then this operation returns only the gateway ARN in the response body. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.
    */
   describeBandwidthRateLimit(params: StorageGateway.Types.DescribeBandwidthRateLimitInput, callback?: (err: AWSError, data: StorageGateway.Types.DescribeBandwidthRateLimitOutput) => void): Request<StorageGateway.Types.DescribeBandwidthRateLimitOutput, AWSError>;
   /**
-   * Returns the bandwidth rate limits of a gateway. By default, these limits are not set, which means no bandwidth rate limiting is in effect. This operation is supported for the stored volume, cached volume and tape gateway types. This operation only returns a value for a bandwidth rate limit only if the limit is set. If no limits are set for the gateway, then this operation returns only the gateway ARN in the response body. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.
+   * Returns the bandwidth rate limits of a gateway. By default, these limits are not set, which means no bandwidth rate limiting is in effect. This operation is supported for the stored volume, cached volume, and tape gateway types. This operation only returns a value for a bandwidth rate limit only if the limit is set. If no limits are set for the gateway, then this operation returns only the gateway ARN in the response body. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.
    */
   describeBandwidthRateLimit(callback?: (err: AWSError, data: StorageGateway.Types.DescribeBandwidthRateLimitOutput) => void): Request<StorageGateway.Types.DescribeBandwidthRateLimitOutput, AWSError>;
   /**
@@ -428,6 +444,14 @@ declare class StorageGateway extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: StorageGateway.Types.ListTagsForResourceOutput) => void): Request<StorageGateway.Types.ListTagsForResourceOutput, AWSError>;
   /**
+   * Lists custom tape pools. You specify custom tape pools to list by specifying one or more custom tape pool Amazon Resource Names (ARNs). If you don't specify a custom tape pool ARN, the operation lists all custom tape pools. This operation supports pagination. You can optionally specify the Limit parameter in the body to limit the number of tape pools in the response. If the number of tape pools returned in the response is truncated, the response includes a Marker element that you can use in your subsequent request to retrieve the next set of tape pools.
+   */
+  listTapePools(params: StorageGateway.Types.ListTapePoolsInput, callback?: (err: AWSError, data: StorageGateway.Types.ListTapePoolsOutput) => void): Request<StorageGateway.Types.ListTapePoolsOutput, AWSError>;
+  /**
+   * Lists custom tape pools. You specify custom tape pools to list by specifying one or more custom tape pool Amazon Resource Names (ARNs). If you don't specify a custom tape pool ARN, the operation lists all custom tape pools. This operation supports pagination. You can optionally specify the Limit parameter in the body to limit the number of tape pools in the response. If the number of tape pools returned in the response is truncated, the response includes a Marker element that you can use in your subsequent request to retrieve the next set of tape pools.
+   */
+  listTapePools(callback?: (err: AWSError, data: StorageGateway.Types.ListTapePoolsOutput) => void): Request<StorageGateway.Types.ListTapePoolsOutput, AWSError>;
+  /**
    * Lists virtual tapes in your virtual tape library (VTL) and your virtual tape shelf (VTS). You specify the tapes to list by specifying one or more tape Amazon Resource Names (ARNs). If you don't specify a tape ARN, the operation lists all virtual tapes in both your VTL and VTS. This operation supports pagination. By default, the operation returns a maximum of up to 100 tapes. You can optionally specify the Limit parameter in the body to limit the number of tapes in the response. If the number of tapes returned in the response is truncated, the response includes a Marker element that you can use in your subsequent request to retrieve the next set of tapes. This operation is only supported in the tape gateway type.
    */
   listTapes(params: StorageGateway.Types.ListTapesInput, callback?: (err: AWSError, data: StorageGateway.Types.ListTapesOutput) => void): Request<StorageGateway.Types.ListTapesOutput, AWSError>;
@@ -572,11 +596,11 @@ declare class StorageGateway extends Service {
    */
   updateChapCredentials(callback?: (err: AWSError, data: StorageGateway.Types.UpdateChapCredentialsOutput) => void): Request<StorageGateway.Types.UpdateChapCredentialsOutput, AWSError>;
   /**
-   * Updates a gateway's metadata, which includes the gateway's name and time zone. To specify which gateway to update, use the Amazon Resource Name (ARN) of the gateway in your request.  For Gateways activated after September 2, 2015, the gateway's ARN contains the gateway ID rather than the gateway name. However, changing the name of the gateway has no effect on the gateway's ARN. 
+   * Updates a gateway's metadata, which includes the gateway's name and time zone. To specify which gateway to update, use the Amazon Resource Name (ARN) of the gateway in your request.  For gateways activated after September 2, 2015, the gateway's ARN contains the gateway ID rather than the gateway name. However, changing the name of the gateway has no effect on the gateway's ARN. 
    */
   updateGatewayInformation(params: StorageGateway.Types.UpdateGatewayInformationInput, callback?: (err: AWSError, data: StorageGateway.Types.UpdateGatewayInformationOutput) => void): Request<StorageGateway.Types.UpdateGatewayInformationOutput, AWSError>;
   /**
-   * Updates a gateway's metadata, which includes the gateway's name and time zone. To specify which gateway to update, use the Amazon Resource Name (ARN) of the gateway in your request.  For Gateways activated after September 2, 2015, the gateway's ARN contains the gateway ID rather than the gateway name. However, changing the name of the gateway has no effect on the gateway's ARN. 
+   * Updates a gateway's metadata, which includes the gateway's name and time zone. To specify which gateway to update, use the Amazon Resource Name (ARN) of the gateway in your request.  For gateways activated after September 2, 2015, the gateway's ARN contains the gateway ID rather than the gateway name. However, changing the name of the gateway has no effect on the gateway's ARN. 
    */
   updateGatewayInformation(callback?: (err: AWSError, data: StorageGateway.Types.UpdateGatewayInformationOutput) => void): Request<StorageGateway.Types.UpdateGatewayInformationOutput, AWSError>;
   /**
@@ -663,7 +687,7 @@ declare namespace StorageGateway {
      */
     TapeDriveType?: TapeDriveType;
     /**
-     * The value that indicates the type of medium changer to use for tape gateway. This field is optional. Valid Values: STK-L700 | AWS-Gateway-VTL 
+     * The value that indicates the type of medium changer to use for tape gateway. This field is optional. Valid Values: STK-L700 | AWS-Gateway-VTL | IBM-03584L32-0402 
      */
     MediumChangerType?: MediumChangerType;
     /**
@@ -731,6 +755,10 @@ declare namespace StorageGateway {
      * The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool. Valid Values: GLACIER | DEEP_ARCHIVE 
      */
     PoolId: PoolId;
+    /**
+     * Set permissions to bypass governance retention. If the lock type of the archived tape is Governance, the tape's archived age is not older than RetentionLockInDays, and the user does not already have BypassGovernanceRetention, setting this to TRUE enables the user to bypass the retention lock. This parameter is set to true by default for calls from the console. Valid values: TRUE | FALSE 
+     */
+    BypassGovernanceRetention?: boolean;
   }
   export interface AssignTapePoolOutput {
     /**
@@ -794,9 +822,13 @@ declare namespace StorageGateway {
      */
     TapeSizeInBytes: TapeSize;
     /**
-     * The minimum number of available virtual tapes that the gateway maintains at all times. If the number of tapes on the gateway goes below this value, the gateway creates as many new tapes as are needed to have MinimumNumTapes on the gateway.
+     * The minimum number of available virtual tapes that the gateway maintains at all times. If the number of tapes on the gateway goes below this value, the gateway creates as many new tapes as are needed to have MinimumNumTapes on the gateway. For more information about automatic tape creation, see Creating Tapes Automatically.
      */
     MinimumNumTapes: MinimumNumTapes;
+    /**
+     * Set to true to indicate that tapes are to be archived as write-once-read-many (WORM). Set to false when WORM is not enabled for tapes.
+     */
+    Worm?: boolean;
   }
   export type AutomaticTapeCreationRules = AutomaticTapeCreationRule[];
   export type AvailabilityMonitorTestStatus = "COMPLETE"|"FAILED"|"PENDING"|string;
@@ -817,7 +849,7 @@ declare namespace StorageGateway {
      */
     VolumeARN?: VolumeARN;
     /**
-     * The unique identifier of the volume, e.g. vol-AE4B946D.
+     * The unique identifier of the volume, e.g., vol-AE4B946D.
      */
     VolumeId?: VolumeId;
     /**
@@ -841,7 +873,7 @@ declare namespace StorageGateway {
      */
     VolumeProgress?: DoubleObject;
     /**
-     * If the cached volume was created from a snapshot, this field contains the snapshot ID used, e.g. snap-78e22663. Otherwise, this field is not included.
+     * If the cached volume was created from a snapshot, this field contains the snapshot ID used, e.g., snap-78e22663. Otherwise, this field is not included.
      */
     SourceSnapshotId?: SnapshotId;
     /**
@@ -849,7 +881,7 @@ declare namespace StorageGateway {
      */
     VolumeiSCSIAttributes?: VolumeiSCSIAttributes;
     /**
-     * The date the volume was created. Volumes created prior to March 28, 2017 don’t have this time stamp.
+     * The date the volume was created. Volumes created prior to March 28, 2017 don’t have this timestamp.
      */
     CreatedDate?: CreatedDate;
     /**
@@ -905,7 +937,7 @@ declare namespace StorageGateway {
      */
     InitiatorName?: IqnName;
     /**
-     * The secret key that the target must provide to participate in mutual CHAP with the initiator (e.g. Windows client).
+     * The secret key that the target must provide to participate in mutual CHAP with the initiator (e.g., Windows client).
      */
     SecretToAuthenticateTarget?: ChapSecret;
   }
@@ -1230,6 +1262,34 @@ declare namespace StorageGateway {
      */
     TargetARN?: TargetARN;
   }
+  export interface CreateTapePoolInput {
+    /**
+     * The name of the new custom tape pool.
+     */
+    PoolName: PoolName;
+    /**
+     * The storage class that is associated with the new custom pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.
+     */
+    StorageClass: TapeStorageClass;
+    /**
+     * Tape retention lock can be configured in two modes. When configured in governance mode, AWS accounts with specific IAM permissions are authorized to remove the tape retention lock from archived virtual tapes. When configured in compliance mode, the tape retention lock cannot be removed by any user, including the root AWS account.
+     */
+    RetentionLockType?: RetentionLockType;
+    /**
+     * Tape retention lock time is set in days. Tape retention lock can be enabled for up to 100 years (36,500 days).
+     */
+    RetentionLockTimeInDays?: RetentionLockTimeInDays;
+    /**
+     * A list of up to 50 tags that can be assigned to tape pool. Each tag is a key-value pair.  Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag's key is 128 characters, and the maximum length for a tag's value is 256. 
+     */
+    Tags?: Tags;
+  }
+  export interface CreateTapePoolOutput {
+    /**
+     * The unique Amazon Resource Name (ARN) that represents the custom tape pool. Use the ListTapePools operation to return a list of tape pools for your account and AWS Region.
+     */
+    PoolARN?: PoolARN;
+  }
   export interface CreateTapeWithBarcodeInput {
     /**
      * The unique Amazon Resource Name (ARN) that represents the gateway to associate the virtual tape with. Use the ListGateways operation to return a list of gateways for your account and AWS Region.
@@ -1255,6 +1315,10 @@ declare namespace StorageGateway {
      * The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Deep Archive) that corresponds to the pool. Valid Values: GLACIER | DEEP_ARCHIVE 
      */
     PoolId?: PoolId;
+    /**
+     * Set to TRUE if the tape you are creating is to be configured as a write-once-read-many (WORM) tape.
+     */
+    Worm?: boolean;
     /**
      * A list of up to 50 tags that can be assigned to a virtual tape that has a barcode. Each tag is a key-value pair.  Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag's key is 128 characters, and the maximum length for a tag's value is 256. 
      */
@@ -1300,6 +1364,10 @@ declare namespace StorageGateway {
      */
     PoolId?: PoolId;
     /**
+     * Set to TRUE if the tape you are creating is to be configured as a write-once-read-many (WORM) tape.
+     */
+    Worm?: boolean;
+    /**
      * A list of up to 50 tags that can be assigned to a virtual tape. Each tag is a key-value pair.  Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag's key is 128 characters, and the maximum length for a tag's value is 256. 
      */
     Tags?: Tags;
@@ -1322,7 +1390,7 @@ declare namespace StorageGateway {
   export interface DeleteBandwidthRateLimitInput {
     GatewayARN: GatewayARN;
     /**
-     * One of the BandwidthType values that indicates the gateway bandwidth rate limit to delete. Valid Values: Upload | Download | All 
+     * One of the BandwidthType values that indicates the gateway bandwidth rate limit to delete. Valid Values: UPLOAD | DOWNLOAD | ALL 
      */
     BandwidthType: BandwidthType;
   }
@@ -1388,6 +1456,10 @@ declare namespace StorageGateway {
      * The Amazon Resource Name (ARN) of the virtual tape to delete from the virtual tape shelf (VTS).
      */
     TapeARN: TapeARN;
+    /**
+     * Set to TRUE to delete an archived tape that belongs to a custom pool with tape retention lock. Only archived tapes with tape retention lock set to governance can be deleted. Archived tapes with tape retention lock set to compliance can't be deleted.
+     */
+    BypassGovernanceRetention?: boolean;
   }
   export interface DeleteTapeArchiveOutput {
     /**
@@ -1404,12 +1476,28 @@ declare namespace StorageGateway {
      * The Amazon Resource Name (ARN) of the virtual tape to delete.
      */
     TapeARN: TapeARN;
+    /**
+     * Set to TRUE to delete an archived tape that belongs to a custom pool with tape retention lock. Only archived tapes with tape retention lock set to governance can be deleted. Archived tapes with tape retention lock set to compliance can't be deleted.
+     */
+    BypassGovernanceRetention?: boolean;
   }
   export interface DeleteTapeOutput {
     /**
      * The Amazon Resource Name (ARN) of the deleted virtual tape.
      */
     TapeARN?: TapeARN;
+  }
+  export interface DeleteTapePoolInput {
+    /**
+     * The Amazon Resource Name (ARN) of the custom tape pool to delete.
+     */
+    PoolARN: PoolARN;
+  }
+  export interface DeleteTapePoolOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the custom tape pool being deleted.
+     */
+    PoolARN?: PoolARN;
   }
   export interface DeleteVolumeInput {
     /**
@@ -1560,7 +1648,7 @@ declare namespace StorageGateway {
      */
     VPCEndpoint?: string;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon CloudWatch Log Group that is used to monitor events in the gateway.
+     * The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that is used to monitor events in the gateway.
      */
     CloudWatchLogGroupARN?: CloudWatchLogGroupARN;
     /**
@@ -2106,7 +2194,7 @@ declare namespace StorageGateway {
   }
   export interface ListTagsForResourceOutput {
     /**
-     * he Amazon Resource Name (ARN) of the resource for which you want to list tags.
+     * The Amazon Resource Name (ARN) of the resource for which you want to list tags.
      */
     ResourceARN?: ResourceARN;
     /**
@@ -2117,6 +2205,30 @@ declare namespace StorageGateway {
      * An array that contains the tags for the specified resource.
      */
     Tags?: Tags;
+  }
+  export interface ListTapePoolsInput {
+    /**
+     * The Amazon Resource Name (ARN) of each of the custom tape pools you want to list. If you don't specify a custom tape pool ARN, the response lists all custom tape pools. 
+     */
+    PoolARNs?: PoolARNs;
+    /**
+     * A string that indicates the position at which to begin the returned list of tape pools.
+     */
+    Marker?: Marker;
+    /**
+     * An optional number limit for the tape pools in the list returned by this call.
+     */
+    Limit?: PositiveIntObject;
+  }
+  export interface ListTapePoolsOutput {
+    /**
+     * An array of PoolInfo objects, where each object describes a single custom tape pool. If there are no custom tape pools, the PoolInfos is an empty array. 
+     */
+    PoolInfos?: PoolInfos;
+    /**
+     * A string that indicates the position at which to begin the returned list of tape pools. Use the marker in your next request to continue pagination of tape pools. If there are no more tape pools to list, this element does not appear in the response body. 
+     */
+    Marker?: Marker;
   }
   export interface ListTapesInput {
     TapeARNs?: TapeARNs;
@@ -2281,7 +2393,38 @@ declare namespace StorageGateway {
   export type Path = string;
   export type PermissionId = number;
   export type PermissionMode = string;
+  export type PoolARN = string;
+  export type PoolARNs = PoolARN[];
   export type PoolId = string;
+  export interface PoolInfo {
+    /**
+     * The Amazon Resource Name (ARN) of the custom tape pool. Use the ListTapePools operation to return a list of custom tape pools for your account and AWS Region.
+     */
+    PoolARN?: PoolARN;
+    /**
+     * The name of the custom tape pool. PoolName can use all ASCII characters, except '/' and '\'.
+     */
+    PoolName?: PoolName;
+    /**
+     * The storage class that is associated with the custom pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.
+     */
+    StorageClass?: TapeStorageClass;
+    /**
+     * Tape retention lock type, which can be configured in two modes. When configured in governance mode, AWS accounts with specific IAM permissions are authorized to remove the tape retention lock from archived virtual tapes. When configured in compliance mode, the tape retention lock cannot be removed by any user, including the root AWS account.
+     */
+    RetentionLockType?: RetentionLockType;
+    /**
+     * Tape retention lock time is set in days. Tape retention lock can be enabled for up to 100 years (36,500 days).
+     */
+    RetentionLockTimeInDays?: RetentionLockTimeInDays;
+    /**
+     * Status of the custom tape pool. Pool can be ACTIVE or DELETED.
+     */
+    PoolStatus?: PoolStatus;
+  }
+  export type PoolInfos = PoolInfo[];
+  export type PoolName = string;
+  export type PoolStatus = "ACTIVE"|"DELETED"|string;
   export type PositiveIntObject = number;
   export type RecurrenceInHours = number;
   export interface RefreshCacheInput {
@@ -2326,6 +2469,8 @@ declare namespace StorageGateway {
     GatewayARN?: GatewayARN;
   }
   export type ResourceARN = string;
+  export type RetentionLockTimeInDays = number;
+  export type RetentionLockType = "COMPLIANCE"|"GOVERNANCE"|"NONE"|string;
   export interface RetrieveTapeArchiveInput {
     /**
      * The Amazon Resource Name (ARN) of the virtual tape you want to retrieve from the virtual tape shelf (VTS).
@@ -2482,7 +2627,7 @@ declare namespace StorageGateway {
      */
     VolumeARN?: VolumeARN;
     /**
-     * The unique identifier of the volume, e.g. vol-AE4B946D.
+     * The unique identifier of the volume, e.g., vol-AE4B946D.
      */
     VolumeId?: VolumeId;
     /**
@@ -2522,7 +2667,7 @@ declare namespace StorageGateway {
      */
     VolumeiSCSIAttributes?: VolumeiSCSIAttributes;
     /**
-     * The date the volume was created. Volumes created prior to March 28, 2017 don’t have this time stamp.
+     * The date the volume was created. Volumes created prior to March 28, 2017 don’t have this timestamp.
      */
     CreatedDate?: CreatedDate;
     /**
@@ -2588,6 +2733,18 @@ declare namespace StorageGateway {
      * The ID of the pool that contains tapes that will be archived. The tapes in this pool are archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool. Valid Values: GLACIER | DEEP_ARCHIVE 
      */
     PoolId?: PoolId;
+    /**
+     * If the tape is archived as write-once-read-many (WORM), this value is true.
+     */
+    Worm?: boolean;
+    /**
+     * The date that the tape is first archived with tape retention lock enabled.
+     */
+    RetentionStartDate?: Time;
+    /**
+     * The date that the tape enters a custom tape pool.
+     */
+    PoolEntryDate?: Time;
   }
   export type TapeARN = string;
   export type TapeARNs = TapeARN[];
@@ -2609,7 +2766,7 @@ declare namespace StorageGateway {
      */
     TapeSizeInBytes?: TapeSize;
     /**
-     * The time that the archiving of the virtual tape was completed. The default time stamp format is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
+     * The time that the archiving of the virtual tape was completed. The default timestamp format is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
      */
     CompletionTime?: Time;
     /**
@@ -2629,6 +2786,18 @@ declare namespace StorageGateway {
      * The ID of the pool that was used to archive the tape. The tapes in this pool are archived in the S3 storage class that is associated with the pool. Valid Values: GLACIER | DEEP_ARCHIVE 
      */
     PoolId?: PoolId;
+    /**
+     * Set to true if the archived tape is stored as write-once-read-many (WORM).
+     */
+    Worm?: boolean;
+    /**
+     * If the archived tape is subject to tape retention lock, the date that the archived tape started being retained.
+     */
+    RetentionStartDate?: Time;
+    /**
+     * The time that the tape entered the custom tape pool. The default timestamp format is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
+     */
+    PoolEntryDate?: Time;
   }
   export type TapeArchiveStatus = string;
   export type TapeArchives = TapeArchive[];
@@ -2660,6 +2829,14 @@ declare namespace StorageGateway {
      * The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool. Valid Values: GLACIER | DEEP_ARCHIVE 
      */
     PoolId?: PoolId;
+    /**
+     * The date that the tape became subject to tape retention lock.
+     */
+    RetentionStartDate?: Time;
+    /**
+     * The date that the tape entered the custom tape pool with tape retention lock enabled.
+     */
+    PoolEntryDate?: Time;
   }
   export type TapeInfos = TapeInfo[];
   export interface TapeRecoveryPointInfo {
@@ -2668,7 +2845,7 @@ declare namespace StorageGateway {
      */
     TapeARN?: TapeARN;
     /**
-     * The time when the point-in-time view of the virtual tape was replicated for later recovery. The default time stamp format of the tape recovery point time is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
+     * The time when the point-in-time view of the virtual tape was replicated for later recovery. The default timestamp format of the tape recovery point time is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
      */
     TapeRecoveryPointTime?: Time;
     /**
@@ -2684,6 +2861,7 @@ declare namespace StorageGateway {
   export type TapeRecoveryPointStatus = string;
   export type TapeSize = number;
   export type TapeStatus = string;
+  export type TapeStorageClass = "DEEP_ARCHIVE"|"GLACIER"|string;
   export type TapeUsage = number;
   export type Tapes = Tape[];
   export type TargetARN = string;
@@ -2750,7 +2928,7 @@ declare namespace StorageGateway {
      */
     GatewayTimezone?: GatewayTimezone;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that you want to use to monitor and log events in the gateway. For more information, see What is Amazon CloudWatch logs?.
+     * The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that you want to use to monitor and log events in the gateway. For more information, see What is Amazon CloudWatch Logs? 
      */
     CloudWatchLogGroupARN?: CloudWatchLogGroupARN;
   }
@@ -2965,7 +3143,7 @@ declare namespace StorageGateway {
      */
     VTLDeviceARN: VTLDeviceARN;
     /**
-     * The type of medium changer you want to select. Valid Values: STK-L700 | AWS-Gateway-VTL 
+     * The type of medium changer you want to select. Valid Values: STK-L700 | AWS-Gateway-VTL | IBM-03584L32-0402 
      */
     DeviceType: DeviceType;
   }

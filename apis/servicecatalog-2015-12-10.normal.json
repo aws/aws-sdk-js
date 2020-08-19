@@ -5134,6 +5134,14 @@
           "shape": "Id",
           "documentation": "<p>The record identifier of the last request performed on this provisioned product.</p>"
         },
+        "LastProvisioningRecordId": {
+          "shape": "Id",
+          "documentation": "<p>The record identifier of the last request performed on this provisioned product of the following types:</p> <ul> <li> <p> ProvisionedProduct </p> </li> <li> <p> UpdateProvisionedProduct </p> </li> <li> <p> ExecuteProvisionedProductPlan </p> </li> <li> <p> TerminateProvisionedProduct </p> </li> </ul>"
+        },
+        "LastSuccessfulProvisioningRecordId": {
+          "shape": "Id",
+          "documentation": "<p>The record identifier of the last successful request performed on this provisioned product of the following types:</p> <ul> <li> <p> ProvisionedProduct </p> </li> <li> <p> UpdateProvisionedProduct </p> </li> <li> <p> ExecuteProvisionedProductPlan </p> </li> <li> <p> TerminateProvisionedProduct </p> </li> </ul>"
+        },
         "Tags": {
           "shape": "Tags",
           "documentation": "<p>One or more tags.</p>"
@@ -5146,9 +5154,17 @@
           "shape": "Id",
           "documentation": "<p>The product identifier.</p>"
         },
+        "ProductName": {
+          "shape": "ProductViewName",
+          "documentation": "<p>The name of the product.</p>"
+        },
         "ProvisioningArtifactId": {
           "shape": "Id",
           "documentation": "<p>The identifier of the provisioning artifact.</p>"
+        },
+        "ProvisioningArtifactName": {
+          "shape": "ProvisioningArtifactName",
+          "documentation": "<p>The name of the provisioning artifact.</p>"
         },
         "UserArn": {
           "shape": "UserArn",
@@ -5205,6 +5221,14 @@
         "LastRecordId": {
           "shape": "LastRequestId",
           "documentation": "<p>The record identifier of the last request performed on this provisioned product.</p>"
+        },
+        "LastProvisioningRecordId": {
+          "shape": "Id",
+          "documentation": "<p>The record identifier of the last request performed on this provisioned product of the following types:</p> <ul> <li> <p> ProvisionedProduct </p> </li> <li> <p> UpdateProvisionedProduct </p> </li> <li> <p> ExecuteProvisionedProductPlan </p> </li> <li> <p> TerminateProvisionedProduct </p> </li> </ul>"
+        },
+        "LastSuccessfulProvisioningRecordId": {
+          "shape": "Id",
+          "documentation": "<p>The record identifier of the last successful request performed on this provisioned product of the following types:</p> <ul> <li> <p> ProvisionedProduct </p> </li> <li> <p> UpdateProvisionedProduct </p> </li> <li> <p> ExecuteProvisionedProductPlan </p> </li> <li> <p> TerminateProvisionedProduct </p> </li> </ul>"
         },
         "ProductId": {
           "shape": "Id",
@@ -6249,7 +6273,7 @@
         },
         "Filters": {
           "shape": "ProvisionedProductFilters",
-          "documentation": "<p>The search filters.</p> <p>When the key is <code>SearchQuery</code>, the searchable fields are <code>arn</code>, <code>createdTime</code>, <code>id</code>, <code>lastRecordId</code>, <code>idempotencyToken</code>, <code>name</code>, <code>physicalId</code>, <code>productId</code>, <code>provisioningArtifact</code>, <code>type</code>, <code>status</code>, <code>tags</code>, <code>userArn</code>, and <code>userArnSession</code>.</p> <p>Example: <code>\"SearchQuery\":[\"status:AVAILABLE\"]</code> </p>"
+          "documentation": "<p>The search filters.</p> <p>When the key is <code>SearchQuery</code>, the searchable fields are <code>arn</code>, <code>createdTime</code>, <code>id</code>, <code>lastRecordId</code>, <code>idempotencyToken</code>, <code>name</code>, <code>physicalId</code>, <code>productId</code>, <code>provisioningArtifact</code>, <code>type</code>, <code>status</code>, <code>tags</code>, <code>userArn</code>, <code>userArnSession</code>, <code>lastProvisioningRecordId</code>, <code>lastSuccessfulProvisioningRecordId</code>, <code>productName</code>, and <code>provisioningArtifactName</code>.</p> <p>Example: <code>\"SearchQuery\":[\"status:AVAILABLE\"]</code> </p>"
         },
         "SortBy": {
           "shape": "SortField",
