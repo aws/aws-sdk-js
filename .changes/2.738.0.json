@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "ApiGatewayV2",
+        "description": "Customers can now create Amazon API Gateway HTTP APIs that route requests to AWS AppConfig, Amazon EventBridge, Amazon Kinesis Data Streams, Amazon SQS, and AWS Step Functions."
+    }
+]

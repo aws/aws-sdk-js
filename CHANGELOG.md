@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.737.0-->
+<!--LATEST=2.738.0-->
 <!--ENTRYINSERT-->
+
+## 2.738.0
+* feature: ApiGatewayV2: Customers can now create Amazon API Gateway HTTP APIs that route requests to AWS AppConfig, Amazon EventBridge, Amazon Kinesis Data Streams, Amazon SQS, and AWS Step Functions.
 
 ## 2.737.0
 * feature: IVS: Amazon Interactive Video Service (IVS) now offers customers the ability to create private channels, allowing customers to restrict their streams by channel or viewer.
