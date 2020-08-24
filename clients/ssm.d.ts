@@ -125,11 +125,11 @@ declare class SSM extends Service {
    */
   deleteDocument(callback?: (err: AWSError, data: SSM.Types.DeleteDocumentResult) => void): Request<SSM.Types.DeleteDocumentResult, AWSError>;
   /**
-   * Delete a custom inventory type, or the data associated with a custom Inventory type. Deleting a custom inventory type is also referred to as deleting a custom inventory schema.
+   * Delete a custom inventory type or the data associated with a custom Inventory type. Deleting a custom inventory type is also referred to as deleting a custom inventory schema.
    */
   deleteInventory(params: SSM.Types.DeleteInventoryRequest, callback?: (err: AWSError, data: SSM.Types.DeleteInventoryResult) => void): Request<SSM.Types.DeleteInventoryResult, AWSError>;
   /**
-   * Delete a custom inventory type, or the data associated with a custom Inventory type. Deleting a custom inventory type is also referred to as deleting a custom inventory schema.
+   * Delete a custom inventory type or the data associated with a custom Inventory type. Deleting a custom inventory type is also referred to as deleting a custom inventory schema.
    */
   deleteInventory(callback?: (err: AWSError, data: SSM.Types.DeleteInventoryResult) => void): Request<SSM.Types.DeleteInventoryResult, AWSError>;
   /**
@@ -469,11 +469,11 @@ declare class SSM extends Service {
    */
   getAutomationExecution(callback?: (err: AWSError, data: SSM.Types.GetAutomationExecutionResult) => void): Request<SSM.Types.GetAutomationExecutionResult, AWSError>;
   /**
-   * Gets the state of the AWS Systems Manager Change Calendar at an optional, specified time. If you specify a time, GetCalendarState returns the state of the calendar at a specific time, and returns the next time that the Change Calendar state will transition. If you do not specify a time, GetCalendarState assumes the current time. Change Calendar entries have two possible states: OPEN or CLOSED. For more information about Systems Manager Change Calendar, see AWS Systems Manager Change Calendar in the AWS Systems Manager User Guide.
+   * Gets the state of the AWS Systems Manager Change Calendar at an optional, specified time. If you specify a time, GetCalendarState returns the state of the calendar at a specific time, and returns the next time that the Change Calendar state will transition. If you do not specify a time, GetCalendarState assumes the current time. Change Calendar entries have two possible states: OPEN or CLOSED. If you specify more than one calendar in a request, the command returns the status of OPEN only if all calendars in the request are open. If one or more calendars in the request are closed, the status returned is CLOSED. For more information about Systems Manager Change Calendar, see AWS Systems Manager Change Calendar in the AWS Systems Manager User Guide.
    */
   getCalendarState(params: SSM.Types.GetCalendarStateRequest, callback?: (err: AWSError, data: SSM.Types.GetCalendarStateResponse) => void): Request<SSM.Types.GetCalendarStateResponse, AWSError>;
   /**
-   * Gets the state of the AWS Systems Manager Change Calendar at an optional, specified time. If you specify a time, GetCalendarState returns the state of the calendar at a specific time, and returns the next time that the Change Calendar state will transition. If you do not specify a time, GetCalendarState assumes the current time. Change Calendar entries have two possible states: OPEN or CLOSED. For more information about Systems Manager Change Calendar, see AWS Systems Manager Change Calendar in the AWS Systems Manager User Guide.
+   * Gets the state of the AWS Systems Manager Change Calendar at an optional, specified time. If you specify a time, GetCalendarState returns the state of the calendar at a specific time, and returns the next time that the Change Calendar state will transition. If you do not specify a time, GetCalendarState assumes the current time. Change Calendar entries have two possible states: OPEN or CLOSED. If you specify more than one calendar in a request, the command returns the status of OPEN only if all calendars in the request are open. If one or more calendars in the request are closed, the status returned is CLOSED. For more information about Systems Manager Change Calendar, see AWS Systems Manager Change Calendar in the AWS Systems Manager User Guide.
    */
   getCalendarState(callback?: (err: AWSError, data: SSM.Types.GetCalendarStateResponse) => void): Request<SSM.Types.GetCalendarStateResponse, AWSError>;
   /**
@@ -2581,7 +2581,7 @@ declare namespace SSM {
   }
   export interface DeleteInventoryRequest {
     /**
-     * The name of the custom inventory type for which you want to delete either all previously collected data, or the inventory type itself. 
+     * The name of the custom inventory type for which you want to delete either all previously collected data or the inventory type itself. 
      */
     TypeName: InventoryItemTypeName;
     /**
@@ -2595,13 +2595,13 @@ declare namespace SSM {
     /**
      * User-provided idempotency token.
      */
-    ClientToken?: ClientToken;
+    ClientToken?: UUID;
   }
   export interface DeleteInventoryResult {
     /**
      * Every DeleteInventory action is assigned a unique ID. This option returns a unique ID. You can use this ID to query the status of a delete operation. This option is useful for ensuring that a delete operation has completed before you begin other actions. 
      */
-    DeletionId?: InventoryDeletionId;
+    DeletionId?: UUID;
     /**
      * The name of the inventory data type specified in the request.
      */
@@ -3168,7 +3168,7 @@ declare namespace SSM {
     /**
      * Specify the delete inventory ID for which you want information. This ID was returned by the DeleteInventory action.
      */
-    DeletionId?: InventoryDeletionId;
+    DeletionId?: UUID;
     /**
      * A token to start the list. Use this token to get the next set of results. 
      */
@@ -5115,7 +5115,6 @@ declare namespace SSM {
   export type InventoryAggregatorExpression = string;
   export type InventoryAggregatorList = InventoryAggregator[];
   export type InventoryAttributeDataType = "string"|"number"|string;
-  export type InventoryDeletionId = string;
   export type InventoryDeletionLastStatusMessage = string;
   export type InventoryDeletionLastStatusUpdateTime = Date;
   export type InventoryDeletionStartTime = Date;
@@ -5124,7 +5123,7 @@ declare namespace SSM {
     /**
      * The deletion ID returned by the DeleteInventory action.
      */
-    DeletionId?: InventoryDeletionId;
+    DeletionId?: UUID;
     /**
      * The name of the inventory data type.
      */
@@ -6976,7 +6975,7 @@ declare namespace SSM {
      */
     Description?: ParameterDescription;
     /**
-     * The parameter value that you want to add to the system. Standard parameters have a value limit of 4 KB. Advanced parameters have a value limit of 8 KB.
+     * The parameter value that you want to add to the system. Standard parameters have a value limit of 4 KB. Advanced parameters have a value limit of 8 KB.  Parameters can't be referenced or nested in the values of other parameters. You can't include {{}} or {{ssm:parameter-name}} in a parameter value. 
      */
     Value: PSParameterValue;
     /**
@@ -7980,6 +7979,7 @@ declare namespace SSM {
   export type TimeoutSeconds = number;
   export type TokenValue = string;
   export type TotalCount = number;
+  export type UUID = string;
   export interface UpdateAssociationRequest {
     /**
      * The ID of the association you want to update. 

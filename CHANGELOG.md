@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.738.0-->
+<!--LATEST=2.739.0-->
 <!--ENTRYINSERT-->
+
+## 2.739.0
+* feature: DMS: Added new endpoint settings to include columns with Null and Empty value when using Kinesis and Kafka as target. Added a new endpoint setting to set maximum message size when using Kafka as target.
+* feature: EC2: This release enables customers to use VPC prefix lists in their transit gateway route tables, and it adds support for Provisioned IOPS SSD (io2) EBS volumes.
+* feature: IoTSiteWise: Add traversalDirection to ListAssociatedAssetsRequest and add portal status to ListPortalsResponse
+* feature: Kafka: Add UpdateConfiguration and DeleteConfiguration operations.
+* feature: SSM: Add string length constraints to OpsDataAttributeName and OpsFilterValue.
+* feature: XRay: AWS X-Ray now supports tagging on sampling rules and groups.
 
 ## 2.738.0
 * feature: ApiGatewayV2: Customers can now create Amazon API Gateway HTTP APIs that route requests to AWS AppConfig, Amazon EventBridge, Amazon Kinesis Data Streams, Amazon SQS, and AWS Step Functions.

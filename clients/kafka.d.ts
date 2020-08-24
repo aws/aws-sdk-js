@@ -49,6 +49,18 @@ declare class Kafka extends Service {
   deleteCluster(callback?: (err: AWSError, data: Kafka.Types.DeleteClusterResponse) => void): Request<Kafka.Types.DeleteClusterResponse, AWSError>;
   /**
    * 
+            Deletes an MSK Configuration.
+         
+   */
+  deleteConfiguration(params: Kafka.Types.DeleteConfigurationRequest, callback?: (err: AWSError, data: Kafka.Types.DeleteConfigurationResponse) => void): Request<Kafka.Types.DeleteConfigurationResponse, AWSError>;
+  /**
+   * 
+            Deletes an MSK Configuration.
+         
+   */
+  deleteConfiguration(callback?: (err: AWSError, data: Kafka.Types.DeleteConfigurationResponse) => void): Request<Kafka.Types.DeleteConfigurationResponse, AWSError>;
+  /**
+   * 
             Returns a description of the MSK cluster whose Amazon Resource Name (ARN) is specified in the request.
          
    */
@@ -259,6 +271,18 @@ declare class Kafka extends Service {
          
    */
   updateBrokerStorage(callback?: (err: AWSError, data: Kafka.Types.UpdateBrokerStorageResponse) => void): Request<Kafka.Types.UpdateBrokerStorageResponse, AWSError>;
+  /**
+   * 
+            Updates an MSK configuration.
+         
+   */
+  updateConfiguration(params: Kafka.Types.UpdateConfigurationRequest, callback?: (err: AWSError, data: Kafka.Types.UpdateConfigurationResponse) => void): Request<Kafka.Types.UpdateConfigurationResponse, AWSError>;
+  /**
+   * 
+            Updates an MSK configuration.
+         
+   */
+  updateConfiguration(callback?: (err: AWSError, data: Kafka.Types.UpdateConfigurationResponse) => void): Request<Kafka.Types.UpdateConfigurationResponse, AWSError>;
   /**
    * 
             Updates the cluster with the configuration that is specified in the request body.
@@ -658,6 +682,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     Name: __string;
+    /**
+     * 
+            The state of the configuration. The possible states are ACTIVE, DELETING, and DELETE_FAILED. 
+         
+     */
+    State: ConfigurationState;
   }
   export interface ConfigurationInfo {
     /**
@@ -693,6 +723,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     Revision: __long;
   }
+  export type ConfigurationState = "ACTIVE"|"DELETING"|"DELETE_FAILED"|string;
   export interface CreateClusterRequest {
     /**
      * 
@@ -828,6 +859,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     Name?: __string;
+    /**
+     * 
+            The state of the configuration. The possible states are ACTIVE, DELETING, and DELETE_FAILED. 
+         
+     */
+    State?: ConfigurationState;
   }
   export interface DeleteClusterRequest {
     /**
@@ -856,6 +893,28 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     State?: ClusterState;
+  }
+  export interface DeleteConfigurationRequest {
+    /**
+     * 
+            The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration.
+         
+     */
+    Arn: __string;
+  }
+  export interface DeleteConfigurationResponse {
+    /**
+     * 
+            The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration.
+         
+     */
+    Arn?: __string;
+    /**
+     * 
+            The state of the configuration. The possible states are ACTIVE, DELETING, and DELETE_FAILED. 
+         
+     */
+    State?: ConfigurationState;
   }
   export interface DescribeClusterOperationRequest {
     /**
@@ -934,6 +993,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     Name?: __string;
+    /**
+     * 
+            The state of the configuration. The possible states are ACTIVE, DELETING, and DELETE_FAILED. 
+         
+     */
+    State?: ConfigurationState;
   }
   export interface DescribeConfigurationRevisionRequest {
     /**
@@ -1740,6 +1805,41 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     ClusterOperationArn?: __string;
+  }
+  export interface UpdateConfigurationRequest {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the configuration.
+         
+     */
+    Arn: __string;
+    /**
+     * 
+            The description of the configuration revision.
+         
+     */
+    Description?: __string;
+    /**
+     * 
+            Contents of the server.properties file. When using the API, you must ensure that the contents of the file are base64 encoded. 
+               When using the AWS Management Console, the SDK, or the AWS CLI, the contents of server.properties can be in plaintext.
+         
+     */
+    ServerProperties: __blob;
+  }
+  export interface UpdateConfigurationResponse {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the configuration.
+         
+     */
+    Arn?: __string;
+    /**
+     * 
+            Latest revision of the configuration.
+         
+     */
+    LatestRevision?: ConfigurationRevision;
   }
   export interface ZookeeperNodeInfo {
     /**

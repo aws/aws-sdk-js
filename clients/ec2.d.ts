@@ -197,11 +197,11 @@ declare class EC2 extends Service {
    */
   attachNetworkInterface(callback?: (err: AWSError, data: EC2.Types.AttachNetworkInterfaceResult) => void): Request<EC2.Types.AttachNetworkInterfaceResult, AWSError>;
   /**
-   * Attaches an EBS volume to a running or stopped instance and exposes it to the instance with the specified device name. Encrypted EBS volumes must be attached to instances that support Amazon EBS encryption. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide. After you attach an EBS volume, you must make it available. For more information, see Making an EBS Volume Available For Use. If a volume has an AWS Marketplace product code:   The volume can be attached only to a stopped instance.   AWS Marketplace product codes are copied from the volume to the instance.   You must be subscribed to the product.   The instance type and operating system of the instance must support the product. For example, you can't detach a volume from a Windows instance and attach it to a Linux instance.   For more information, see Attaching Amazon EBS Volumes in the Amazon Elastic Compute Cloud User Guide.
+   * Attaches an EBS volume to a running or stopped instance and exposes it to the instance with the specified device name. Encrypted EBS volumes must be attached to instances that support Amazon EBS encryption. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide. After you attach an EBS volume, you must make it available. For more information, see Making an EBS volume available for use. If a volume has an AWS Marketplace product code:   The volume can be attached only to a stopped instance.   AWS Marketplace product codes are copied from the volume to the instance.   You must be subscribed to the product.   The instance type and operating system of the instance must support the product. For example, you can't detach a volume from a Windows instance and attach it to a Linux instance.   For more information, see Attaching Amazon EBS volumes in the Amazon Elastic Compute Cloud User Guide.
    */
   attachVolume(params: EC2.Types.AttachVolumeRequest, callback?: (err: AWSError, data: EC2.Types.VolumeAttachment) => void): Request<EC2.Types.VolumeAttachment, AWSError>;
   /**
-   * Attaches an EBS volume to a running or stopped instance and exposes it to the instance with the specified device name. Encrypted EBS volumes must be attached to instances that support Amazon EBS encryption. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide. After you attach an EBS volume, you must make it available. For more information, see Making an EBS Volume Available For Use. If a volume has an AWS Marketplace product code:   The volume can be attached only to a stopped instance.   AWS Marketplace product codes are copied from the volume to the instance.   You must be subscribed to the product.   The instance type and operating system of the instance must support the product. For example, you can't detach a volume from a Windows instance and attach it to a Linux instance.   For more information, see Attaching Amazon EBS Volumes in the Amazon Elastic Compute Cloud User Guide.
+   * Attaches an EBS volume to a running or stopped instance and exposes it to the instance with the specified device name. Encrypted EBS volumes must be attached to instances that support Amazon EBS encryption. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide. After you attach an EBS volume, you must make it available. For more information, see Making an EBS volume available for use. If a volume has an AWS Marketplace product code:   The volume can be attached only to a stopped instance.   AWS Marketplace product codes are copied from the volume to the instance.   You must be subscribed to the product.   The instance type and operating system of the instance must support the product. For example, you can't detach a volume from a Windows instance and attach it to a Linux instance.   For more information, see Attaching Amazon EBS volumes in the Amazon Elastic Compute Cloud User Guide.
    */
   attachVolume(callback?: (err: AWSError, data: EC2.Types.VolumeAttachment) => void): Request<EC2.Types.VolumeAttachment, AWSError>;
   /**
@@ -333,11 +333,11 @@ declare class EC2 extends Service {
    */
   copyImage(callback?: (err: AWSError, data: EC2.Types.CopyImageResult) => void): Request<EC2.Types.CopyImageResult, AWSError>;
   /**
-   * Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You can copy the snapshot within the same Region or from one Region to another. You can use the snapshot to create EBS volumes or Amazon Machine Images (AMIs). Copies of encrypted EBS snapshots remain encrypted. Copies of unencrypted snapshots remain unencrypted, unless you enable encryption for the snapshot copy operation. By default, encrypted snapshot copies use the default AWS Key Management Service (AWS KMS) customer master key (CMK); however, you can specify a different CMK. To copy an encrypted snapshot that has been shared from another account, you must have permissions for the CMK used to encrypt the snapshot. Snapshots created by copying another snapshot have an arbitrary volume ID that should not be used for any purpose. For more information, see Copying an Amazon EBS Snapshot in the Amazon Elastic Compute Cloud User Guide.
+   * Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You can copy the snapshot within the same Region or from one Region to another. You can use the snapshot to create EBS volumes or Amazon Machine Images (AMIs). Copies of encrypted EBS snapshots remain encrypted. Copies of unencrypted snapshots remain unencrypted, unless you enable encryption for the snapshot copy operation. By default, encrypted snapshot copies use the default AWS Key Management Service (AWS KMS) customer master key (CMK); however, you can specify a different CMK. To copy an encrypted snapshot that has been shared from another account, you must have permissions for the CMK used to encrypt the snapshot. Snapshots created by copying another snapshot have an arbitrary volume ID that should not be used for any purpose. For more information, see Copying an Amazon EBS snapshot in the Amazon Elastic Compute Cloud User Guide.
    */
   copySnapshot(params: EC2.Types.CopySnapshotRequest, callback?: (err: AWSError, data: EC2.Types.CopySnapshotResult) => void): Request<EC2.Types.CopySnapshotResult, AWSError>;
   /**
-   * Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You can copy the snapshot within the same Region or from one Region to another. You can use the snapshot to create EBS volumes or Amazon Machine Images (AMIs). Copies of encrypted EBS snapshots remain encrypted. Copies of unencrypted snapshots remain unencrypted, unless you enable encryption for the snapshot copy operation. By default, encrypted snapshot copies use the default AWS Key Management Service (AWS KMS) customer master key (CMK); however, you can specify a different CMK. To copy an encrypted snapshot that has been shared from another account, you must have permissions for the CMK used to encrypt the snapshot. Snapshots created by copying another snapshot have an arbitrary volume ID that should not be used for any purpose. For more information, see Copying an Amazon EBS Snapshot in the Amazon Elastic Compute Cloud User Guide.
+   * Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You can copy the snapshot within the same Region or from one Region to another. You can use the snapshot to create EBS volumes or Amazon Machine Images (AMIs). Copies of encrypted EBS snapshots remain encrypted. Copies of unencrypted snapshots remain unencrypted, unless you enable encryption for the snapshot copy operation. By default, encrypted snapshot copies use the default AWS Key Management Service (AWS KMS) customer master key (CMK); however, you can specify a different CMK. To copy an encrypted snapshot that has been shared from another account, you must have permissions for the CMK used to encrypt the snapshot. Snapshots created by copying another snapshot have an arbitrary volume ID that should not be used for any purpose. For more information, see Copying an Amazon EBS snapshot in the Amazon Elastic Compute Cloud User Guide.
    */
   copySnapshot(callback?: (err: AWSError, data: EC2.Types.CopySnapshotResult) => void): Request<EC2.Types.CopySnapshotResult, AWSError>;
   /**
@@ -589,11 +589,11 @@ declare class EC2 extends Service {
    */
   createSecurityGroup(callback?: (err: AWSError, data: EC2.Types.CreateSecurityGroupResult) => void): Request<EC2.Types.CreateSecurityGroupResult, AWSError>;
   /**
-   * Creates a snapshot of an EBS volume and stores it in Amazon S3. You can use snapshots for backups, to make copies of EBS volumes, and to save data before shutting down an instance. When a snapshot is created, any AWS Marketplace product codes that are associated with the source volume are propagated to the snapshot. You can take a snapshot of an attached volume that is in use. However, snapshots only capture data that has been written to your EBS volume at the time the snapshot command is issued; this may exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the volume long enough to take a snapshot, your snapshot should be complete. However, if you cannot pause all file writes to the volume, you should unmount the volume from within the instance, issue the snapshot command, and then remount the volume to ensure a consistent and complete snapshot. You may remount and use your volume while the snapshot status is pending. To create a snapshot for EBS volumes that serve as root devices, you should stop the instance before taking the snapshot. Snapshots that are taken from encrypted volumes are automatically encrypted. Volumes that are created from encrypted snapshots are also automatically encrypted. Your encrypted volumes and any associated snapshots always remain protected. You can tag your snapshots during creation. For more information, see Tagging Your Amazon EC2 Resources in the Amazon Elastic Compute Cloud User Guide. For more information, see Amazon Elastic Block Store and Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a snapshot of an EBS volume and stores it in Amazon S3. You can use snapshots for backups, to make copies of EBS volumes, and to save data before shutting down an instance. When a snapshot is created, any AWS Marketplace product codes that are associated with the source volume are propagated to the snapshot. You can take a snapshot of an attached volume that is in use. However, snapshots only capture data that has been written to your EBS volume at the time the snapshot command is issued; this may exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the volume long enough to take a snapshot, your snapshot should be complete. However, if you cannot pause all file writes to the volume, you should unmount the volume from within the instance, issue the snapshot command, and then remount the volume to ensure a consistent and complete snapshot. You may remount and use your volume while the snapshot status is pending. To create a snapshot for EBS volumes that serve as root devices, you should stop the instance before taking the snapshot. Snapshots that are taken from encrypted volumes are automatically encrypted. Volumes that are created from encrypted snapshots are also automatically encrypted. Your encrypted volumes and any associated snapshots always remain protected. You can tag your snapshots during creation. For more information, see Tagging your Amazon EC2 resources in the Amazon Elastic Compute Cloud User Guide. For more information, see Amazon Elastic Block Store and Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide.
    */
   createSnapshot(params: EC2.Types.CreateSnapshotRequest, callback?: (err: AWSError, data: EC2.Types.Snapshot) => void): Request<EC2.Types.Snapshot, AWSError>;
   /**
-   * Creates a snapshot of an EBS volume and stores it in Amazon S3. You can use snapshots for backups, to make copies of EBS volumes, and to save data before shutting down an instance. When a snapshot is created, any AWS Marketplace product codes that are associated with the source volume are propagated to the snapshot. You can take a snapshot of an attached volume that is in use. However, snapshots only capture data that has been written to your EBS volume at the time the snapshot command is issued; this may exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the volume long enough to take a snapshot, your snapshot should be complete. However, if you cannot pause all file writes to the volume, you should unmount the volume from within the instance, issue the snapshot command, and then remount the volume to ensure a consistent and complete snapshot. You may remount and use your volume while the snapshot status is pending. To create a snapshot for EBS volumes that serve as root devices, you should stop the instance before taking the snapshot. Snapshots that are taken from encrypted volumes are automatically encrypted. Volumes that are created from encrypted snapshots are also automatically encrypted. Your encrypted volumes and any associated snapshots always remain protected. You can tag your snapshots during creation. For more information, see Tagging Your Amazon EC2 Resources in the Amazon Elastic Compute Cloud User Guide. For more information, see Amazon Elastic Block Store and Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a snapshot of an EBS volume and stores it in Amazon S3. You can use snapshots for backups, to make copies of EBS volumes, and to save data before shutting down an instance. When a snapshot is created, any AWS Marketplace product codes that are associated with the source volume are propagated to the snapshot. You can take a snapshot of an attached volume that is in use. However, snapshots only capture data that has been written to your EBS volume at the time the snapshot command is issued; this may exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the volume long enough to take a snapshot, your snapshot should be complete. However, if you cannot pause all file writes to the volume, you should unmount the volume from within the instance, issue the snapshot command, and then remount the volume to ensure a consistent and complete snapshot. You may remount and use your volume while the snapshot status is pending. To create a snapshot for EBS volumes that serve as root devices, you should stop the instance before taking the snapshot. Snapshots that are taken from encrypted volumes are automatically encrypted. Volumes that are created from encrypted snapshots are also automatically encrypted. Your encrypted volumes and any associated snapshots always remain protected. You can tag your snapshots during creation. For more information, see Tagging your Amazon EC2 resources in the Amazon Elastic Compute Cloud User Guide. For more information, see Amazon Elastic Block Store and Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide.
    */
   createSnapshot(callback?: (err: AWSError, data: EC2.Types.Snapshot) => void): Request<EC2.Types.Snapshot, AWSError>;
   /**
@@ -685,6 +685,14 @@ declare class EC2 extends Service {
    */
   createTransitGatewayPeeringAttachment(callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayPeeringAttachmentResult) => void): Request<EC2.Types.CreateTransitGatewayPeeringAttachmentResult, AWSError>;
   /**
+   * Creates a reference (route) to a prefix list in a specified transit gateway route table.
+   */
+  createTransitGatewayPrefixListReference(params: EC2.Types.CreateTransitGatewayPrefixListReferenceRequest, callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayPrefixListReferenceResult) => void): Request<EC2.Types.CreateTransitGatewayPrefixListReferenceResult, AWSError>;
+  /**
+   * Creates a reference (route) to a prefix list in a specified transit gateway route table.
+   */
+  createTransitGatewayPrefixListReference(callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayPrefixListReferenceResult) => void): Request<EC2.Types.CreateTransitGatewayPrefixListReferenceResult, AWSError>;
+  /**
    * Creates a static route for the specified transit gateway route table.
    */
   createTransitGatewayRoute(params: EC2.Types.CreateTransitGatewayRouteRequest, callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayRouteResult) => void): Request<EC2.Types.CreateTransitGatewayRouteResult, AWSError>;
@@ -709,11 +717,11 @@ declare class EC2 extends Service {
    */
   createTransitGatewayVpcAttachment(callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayVpcAttachmentResult) => void): Request<EC2.Types.CreateTransitGatewayVpcAttachmentResult, AWSError>;
   /**
-   * Creates an EBS volume that can be attached to an instance in the same Availability Zone. The volume is created in the regional endpoint that you send the HTTP request to. For more information see Regions and Endpoints. You can create a new empty volume or restore a volume from an EBS snapshot. Any AWS Marketplace product codes from the snapshot are propagated to the volume. You can create encrypted volumes. Encrypted volumes must be attached to instances that support Amazon EBS encryption. Volumes that are created from encrypted snapshots are also automatically encrypted. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide. You can tag your volumes during creation. For more information, see Tagging Your Amazon EC2 Resources in the Amazon Elastic Compute Cloud User Guide. For more information, see Creating an Amazon EBS Volume in the Amazon Elastic Compute Cloud User Guide.
+   * Creates an EBS volume that can be attached to an instance in the same Availability Zone. The volume is created in the regional endpoint that you send the HTTP request to. For more information see Regions and Endpoints. You can create a new empty volume or restore a volume from an EBS snapshot. Any AWS Marketplace product codes from the snapshot are propagated to the volume. You can create encrypted volumes. Encrypted volumes must be attached to instances that support Amazon EBS encryption. Volumes that are created from encrypted snapshots are also automatically encrypted. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide. You can tag your volumes during creation. For more information, see Tagging your Amazon EC2 resources in the Amazon Elastic Compute Cloud User Guide. For more information, see Creating an Amazon EBS volume in the Amazon Elastic Compute Cloud User Guide.
    */
   createVolume(params: EC2.Types.CreateVolumeRequest, callback?: (err: AWSError, data: EC2.Types.Volume) => void): Request<EC2.Types.Volume, AWSError>;
   /**
-   * Creates an EBS volume that can be attached to an instance in the same Availability Zone. The volume is created in the regional endpoint that you send the HTTP request to. For more information see Regions and Endpoints. You can create a new empty volume or restore a volume from an EBS snapshot. Any AWS Marketplace product codes from the snapshot are propagated to the volume. You can create encrypted volumes. Encrypted volumes must be attached to instances that support Amazon EBS encryption. Volumes that are created from encrypted snapshots are also automatically encrypted. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide. You can tag your volumes during creation. For more information, see Tagging Your Amazon EC2 Resources in the Amazon Elastic Compute Cloud User Guide. For more information, see Creating an Amazon EBS Volume in the Amazon Elastic Compute Cloud User Guide.
+   * Creates an EBS volume that can be attached to an instance in the same Availability Zone. The volume is created in the regional endpoint that you send the HTTP request to. For more information see Regions and Endpoints. You can create a new empty volume or restore a volume from an EBS snapshot. Any AWS Marketplace product codes from the snapshot are propagated to the volume. You can create encrypted volumes. Encrypted volumes must be attached to instances that support Amazon EBS encryption. Volumes that are created from encrypted snapshots are also automatically encrypted. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide. You can tag your volumes during creation. For more information, see Tagging your Amazon EC2 resources in the Amazon Elastic Compute Cloud User Guide. For more information, see Creating an Amazon EBS volume in the Amazon Elastic Compute Cloud User Guide.
    */
   createVolume(callback?: (err: AWSError, data: EC2.Types.Volume) => void): Request<EC2.Types.Volume, AWSError>;
   /**
@@ -989,11 +997,11 @@ declare class EC2 extends Service {
    */
   deleteSecurityGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified snapshot. When you make periodic snapshots of a volume, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the volume. You cannot delete a snapshot of the root device of an EBS volume used by a registered AMI. You must first de-register the AMI before you can delete the snapshot. For more information, see Deleting an Amazon EBS Snapshot in the Amazon Elastic Compute Cloud User Guide.
+   * Deletes the specified snapshot. When you make periodic snapshots of a volume, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the volume. You cannot delete a snapshot of the root device of an EBS volume used by a registered AMI. You must first de-register the AMI before you can delete the snapshot. For more information, see Deleting an Amazon EBS snapshot in the Amazon Elastic Compute Cloud User Guide.
    */
   deleteSnapshot(params: EC2.Types.DeleteSnapshotRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified snapshot. When you make periodic snapshots of a volume, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the volume. You cannot delete a snapshot of the root device of an EBS volume used by a registered AMI. You must first de-register the AMI before you can delete the snapshot. For more information, see Deleting an Amazon EBS Snapshot in the Amazon Elastic Compute Cloud User Guide.
+   * Deletes the specified snapshot. When you make periodic snapshots of a volume, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the volume. You cannot delete a snapshot of the root device of an EBS volume used by a registered AMI. You must first de-register the AMI before you can delete the snapshot. For more information, see Deleting an Amazon EBS snapshot in the Amazon Elastic Compute Cloud User Guide.
    */
   deleteSnapshot(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1077,6 +1085,14 @@ declare class EC2 extends Service {
    */
   deleteTransitGatewayPeeringAttachment(callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayPeeringAttachmentResult) => void): Request<EC2.Types.DeleteTransitGatewayPeeringAttachmentResult, AWSError>;
   /**
+   * Deletes a reference (route) to a prefix list in a specified transit gateway route table.
+   */
+  deleteTransitGatewayPrefixListReference(params: EC2.Types.DeleteTransitGatewayPrefixListReferenceRequest, callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayPrefixListReferenceResult) => void): Request<EC2.Types.DeleteTransitGatewayPrefixListReferenceResult, AWSError>;
+  /**
+   * Deletes a reference (route) to a prefix list in a specified transit gateway route table.
+   */
+  deleteTransitGatewayPrefixListReference(callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayPrefixListReferenceResult) => void): Request<EC2.Types.DeleteTransitGatewayPrefixListReferenceResult, AWSError>;
+  /**
    * Deletes the specified route from the specified transit gateway route table.
    */
   deleteTransitGatewayRoute(params: EC2.Types.DeleteTransitGatewayRouteRequest, callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayRouteResult) => void): Request<EC2.Types.DeleteTransitGatewayRouteResult, AWSError>;
@@ -1101,11 +1117,11 @@ declare class EC2 extends Service {
    */
   deleteTransitGatewayVpcAttachment(callback?: (err: AWSError, data: EC2.Types.DeleteTransitGatewayVpcAttachmentResult) => void): Request<EC2.Types.DeleteTransitGatewayVpcAttachmentResult, AWSError>;
   /**
-   * Deletes the specified EBS volume. The volume must be in the available state (not attached to an instance). The volume can remain in the deleting state for several minutes. For more information, see Deleting an Amazon EBS Volume in the Amazon Elastic Compute Cloud User Guide.
+   * Deletes the specified EBS volume. The volume must be in the available state (not attached to an instance). The volume can remain in the deleting state for several minutes. For more information, see Deleting an Amazon EBS volume in the Amazon Elastic Compute Cloud User Guide.
    */
   deleteVolume(params: EC2.Types.DeleteVolumeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified EBS volume. The volume must be in the available state (not attached to an instance). The volume can remain in the deleting state for several minutes. For more information, see Deleting an Amazon EBS Volume in the Amazon Elastic Compute Cloud User Guide.
+   * Deletes the specified EBS volume. The volume must be in the available state (not attached to an instance). The volume can remain in the deleting state for several minutes. For more information, see Deleting an Amazon EBS volume in the Amazon Elastic Compute Cloud User Guide.
    */
   deleteVolume(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -2005,11 +2021,11 @@ declare class EC2 extends Service {
    */
   describeVolumeAttribute(callback?: (err: AWSError, data: EC2.Types.DescribeVolumeAttributeResult) => void): Request<EC2.Types.DescribeVolumeAttributeResult, AWSError>;
   /**
-   * Describes the status of the specified volumes. Volume status provides the result of the checks performed on your volumes to determine events that can impair the performance of your volumes. The performance of a volume can be affected if an issue occurs on the volume's underlying host. If the volume's underlying host experiences a power outage or system issue, after the system is restored, there could be data inconsistencies on the volume. Volume events notify you if this occurs. Volume actions notify you if any action needs to be taken in response to the event. The DescribeVolumeStatus operation provides the following information about the specified volumes:  Status: Reflects the current status of the volume. The possible values are ok, impaired , warning, or insufficient-data. If all checks pass, the overall status of the volume is ok. If the check fails, the overall status is impaired. If the status is insufficient-data, then the checks may still be taking place on your volume at the time. We recommend that you retry the request. For more information about volume status, see Monitoring the Status of Your Volumes in the Amazon Elastic Compute Cloud User Guide.  Events: Reflect the cause of a volume status and may require you to take action. For example, if your volume returns an impaired status, then the volume event might be potential-data-inconsistency. This means that your volume has been affected by an issue with the underlying host, has all I/O operations disabled, and may have inconsistent data.  Actions: Reflect the actions you may have to take in response to an event. For example, if the status of the volume is impaired and the volume event shows potential-data-inconsistency, then the action shows enable-volume-io. This means that you may want to enable the I/O operations for the volume by calling the EnableVolumeIO action and then check the volume for data consistency. Volume status is based on the volume status checks, and does not reflect the volume state. Therefore, volume status does not indicate volumes in the error state (for example, when a volume is incapable of accepting I/O.)
+   * Describes the status of the specified volumes. Volume status provides the result of the checks performed on your volumes to determine events that can impair the performance of your volumes. The performance of a volume can be affected if an issue occurs on the volume's underlying host. If the volume's underlying host experiences a power outage or system issue, after the system is restored, there could be data inconsistencies on the volume. Volume events notify you if this occurs. Volume actions notify you if any action needs to be taken in response to the event. The DescribeVolumeStatus operation provides the following information about the specified volumes:  Status: Reflects the current status of the volume. The possible values are ok, impaired , warning, or insufficient-data. If all checks pass, the overall status of the volume is ok. If the check fails, the overall status is impaired. If the status is insufficient-data, then the checks may still be taking place on your volume at the time. We recommend that you retry the request. For more information about volume status, see Monitoring the status of your volumes in the Amazon Elastic Compute Cloud User Guide.  Events: Reflect the cause of a volume status and may require you to take action. For example, if your volume returns an impaired status, then the volume event might be potential-data-inconsistency. This means that your volume has been affected by an issue with the underlying host, has all I/O operations disabled, and may have inconsistent data.  Actions: Reflect the actions you may have to take in response to an event. For example, if the status of the volume is impaired and the volume event shows potential-data-inconsistency, then the action shows enable-volume-io. This means that you may want to enable the I/O operations for the volume by calling the EnableVolumeIO action and then check the volume for data consistency. Volume status is based on the volume status checks, and does not reflect the volume state. Therefore, volume status does not indicate volumes in the error state (for example, when a volume is incapable of accepting I/O.)
    */
   describeVolumeStatus(params: EC2.Types.DescribeVolumeStatusRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVolumeStatusResult) => void): Request<EC2.Types.DescribeVolumeStatusResult, AWSError>;
   /**
-   * Describes the status of the specified volumes. Volume status provides the result of the checks performed on your volumes to determine events that can impair the performance of your volumes. The performance of a volume can be affected if an issue occurs on the volume's underlying host. If the volume's underlying host experiences a power outage or system issue, after the system is restored, there could be data inconsistencies on the volume. Volume events notify you if this occurs. Volume actions notify you if any action needs to be taken in response to the event. The DescribeVolumeStatus operation provides the following information about the specified volumes:  Status: Reflects the current status of the volume. The possible values are ok, impaired , warning, or insufficient-data. If all checks pass, the overall status of the volume is ok. If the check fails, the overall status is impaired. If the status is insufficient-data, then the checks may still be taking place on your volume at the time. We recommend that you retry the request. For more information about volume status, see Monitoring the Status of Your Volumes in the Amazon Elastic Compute Cloud User Guide.  Events: Reflect the cause of a volume status and may require you to take action. For example, if your volume returns an impaired status, then the volume event might be potential-data-inconsistency. This means that your volume has been affected by an issue with the underlying host, has all I/O operations disabled, and may have inconsistent data.  Actions: Reflect the actions you may have to take in response to an event. For example, if the status of the volume is impaired and the volume event shows potential-data-inconsistency, then the action shows enable-volume-io. This means that you may want to enable the I/O operations for the volume by calling the EnableVolumeIO action and then check the volume for data consistency. Volume status is based on the volume status checks, and does not reflect the volume state. Therefore, volume status does not indicate volumes in the error state (for example, when a volume is incapable of accepting I/O.)
+   * Describes the status of the specified volumes. Volume status provides the result of the checks performed on your volumes to determine events that can impair the performance of your volumes. The performance of a volume can be affected if an issue occurs on the volume's underlying host. If the volume's underlying host experiences a power outage or system issue, after the system is restored, there could be data inconsistencies on the volume. Volume events notify you if this occurs. Volume actions notify you if any action needs to be taken in response to the event. The DescribeVolumeStatus operation provides the following information about the specified volumes:  Status: Reflects the current status of the volume. The possible values are ok, impaired , warning, or insufficient-data. If all checks pass, the overall status of the volume is ok. If the check fails, the overall status is impaired. If the status is insufficient-data, then the checks may still be taking place on your volume at the time. We recommend that you retry the request. For more information about volume status, see Monitoring the status of your volumes in the Amazon Elastic Compute Cloud User Guide.  Events: Reflect the cause of a volume status and may require you to take action. For example, if your volume returns an impaired status, then the volume event might be potential-data-inconsistency. This means that your volume has been affected by an issue with the underlying host, has all I/O operations disabled, and may have inconsistent data.  Actions: Reflect the actions you may have to take in response to an event. For example, if the status of the volume is impaired and the volume event shows potential-data-inconsistency, then the action shows enable-volume-io. This means that you may want to enable the I/O operations for the volume by calling the EnableVolumeIO action and then check the volume for data consistency. Volume status is based on the volume status checks, and does not reflect the volume state. Therefore, volume status does not indicate volumes in the error state (for example, when a volume is incapable of accepting I/O.)
    */
   describeVolumeStatus(callback?: (err: AWSError, data: EC2.Types.DescribeVolumeStatusResult) => void): Request<EC2.Types.DescribeVolumeStatusResult, AWSError>;
   /**
@@ -2021,11 +2037,11 @@ declare class EC2 extends Service {
    */
   describeVolumes(callback?: (err: AWSError, data: EC2.Types.DescribeVolumesResult) => void): Request<EC2.Types.DescribeVolumesResult, AWSError>;
   /**
-   * Describes the most recent volume modification request for the specified EBS volumes. If a volume has never been modified, some information in the output will be null. If a volume has been modified more than once, the output includes only the most recent modification request. You can also use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the Amazon CloudWatch Events User Guide. For more information, see Monitoring Volume Modifications in the Amazon Elastic Compute Cloud User Guide.
+   * Describes the most recent volume modification request for the specified EBS volumes. If a volume has never been modified, some information in the output will be null. If a volume has been modified more than once, the output includes only the most recent modification request. You can also use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the Amazon CloudWatch Events User Guide. For more information, see Monitoring volume modifications in the Amazon Elastic Compute Cloud User Guide.
    */
   describeVolumesModifications(params: EC2.Types.DescribeVolumesModificationsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVolumesModificationsResult) => void): Request<EC2.Types.DescribeVolumesModificationsResult, AWSError>;
   /**
-   * Describes the most recent volume modification request for the specified EBS volumes. If a volume has never been modified, some information in the output will be null. If a volume has been modified more than once, the output includes only the most recent modification request. You can also use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the Amazon CloudWatch Events User Guide. For more information, see Monitoring Volume Modifications in the Amazon Elastic Compute Cloud User Guide.
+   * Describes the most recent volume modification request for the specified EBS volumes. If a volume has never been modified, some information in the output will be null. If a volume has been modified more than once, the output includes only the most recent modification request. You can also use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the Amazon CloudWatch Events User Guide. For more information, see Monitoring volume modifications in the Amazon Elastic Compute Cloud User Guide.
    */
   describeVolumesModifications(callback?: (err: AWSError, data: EC2.Types.DescribeVolumesModificationsResult) => void): Request<EC2.Types.DescribeVolumesModificationsResult, AWSError>;
   /**
@@ -2157,11 +2173,11 @@ declare class EC2 extends Service {
    */
   detachNetworkInterface(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Detaches an EBS volume from an instance. Make sure to unmount any file systems on the device within your operating system before detaching the volume. Failure to do so can result in the volume becoming stuck in the busy state while detaching. If this happens, detachment can be delayed indefinitely until you unmount the volume, force detachment, reboot the instance, or all three. If an EBS volume is the root device of an instance, it can't be detached while the instance is running. To detach the root volume, stop the instance first. When a volume with an AWS Marketplace product code is detached from an instance, the product code is no longer associated with the instance. For more information, see Detaching an Amazon EBS Volume in the Amazon Elastic Compute Cloud User Guide.
+   * Detaches an EBS volume from an instance. Make sure to unmount any file systems on the device within your operating system before detaching the volume. Failure to do so can result in the volume becoming stuck in the busy state while detaching. If this happens, detachment can be delayed indefinitely until you unmount the volume, force detachment, reboot the instance, or all three. If an EBS volume is the root device of an instance, it can't be detached while the instance is running. To detach the root volume, stop the instance first. When a volume with an AWS Marketplace product code is detached from an instance, the product code is no longer associated with the instance. For more information, see Detaching an Amazon EBS volume in the Amazon Elastic Compute Cloud User Guide.
    */
   detachVolume(params: EC2.Types.DetachVolumeRequest, callback?: (err: AWSError, data: EC2.Types.VolumeAttachment) => void): Request<EC2.Types.VolumeAttachment, AWSError>;
   /**
-   * Detaches an EBS volume from an instance. Make sure to unmount any file systems on the device within your operating system before detaching the volume. Failure to do so can result in the volume becoming stuck in the busy state while detaching. If this happens, detachment can be delayed indefinitely until you unmount the volume, force detachment, reboot the instance, or all three. If an EBS volume is the root device of an instance, it can't be detached while the instance is running. To detach the root volume, stop the instance first. When a volume with an AWS Marketplace product code is detached from an instance, the product code is no longer associated with the instance. For more information, see Detaching an Amazon EBS Volume in the Amazon Elastic Compute Cloud User Guide.
+   * Detaches an EBS volume from an instance. Make sure to unmount any file systems on the device within your operating system before detaching the volume. Failure to do so can result in the volume becoming stuck in the busy state while detaching. If this happens, detachment can be delayed indefinitely until you unmount the volume, force detachment, reboot the instance, or all three. If an EBS volume is the root device of an instance, it can't be detached while the instance is running. To detach the root volume, stop the instance first. When a volume with an AWS Marketplace product code is detached from an instance, the product code is no longer associated with the instance. For more information, see Detaching an Amazon EBS volume in the Amazon Elastic Compute Cloud User Guide.
    */
   detachVolume(callback?: (err: AWSError, data: EC2.Types.VolumeAttachment) => void): Request<EC2.Types.VolumeAttachment, AWSError>;
   /**
@@ -2285,19 +2301,19 @@ declare class EC2 extends Service {
    */
   disassociateVpcCidrBlock(callback?: (err: AWSError, data: EC2.Types.DisassociateVpcCidrBlockResult) => void): Request<EC2.Types.DisassociateVpcCidrBlockResult, AWSError>;
   /**
-   * Enables EBS encryption by default for your account in the current Region. After you enable encryption by default, the EBS volumes that you create are are always encrypted, either using the default CMK or the CMK that you specified when you created each volume. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide. You can specify the default CMK for encryption by default using ModifyEbsDefaultKmsKeyId or ResetEbsDefaultKmsKeyId. Enabling encryption by default has no effect on the encryption status of your existing volumes. After you enable encryption by default, you can no longer launch instances using instance types that do not support encryption. For more information, see Supported Instance Types.
+   * Enables EBS encryption by default for your account in the current Region. After you enable encryption by default, the EBS volumes that you create are are always encrypted, either using the default CMK or the CMK that you specified when you created each volume. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide. You can specify the default CMK for encryption by default using ModifyEbsDefaultKmsKeyId or ResetEbsDefaultKmsKeyId. Enabling encryption by default has no effect on the encryption status of your existing volumes. After you enable encryption by default, you can no longer launch instances using instance types that do not support encryption. For more information, see Supported instance types.
    */
   enableEbsEncryptionByDefault(params: EC2.Types.EnableEbsEncryptionByDefaultRequest, callback?: (err: AWSError, data: EC2.Types.EnableEbsEncryptionByDefaultResult) => void): Request<EC2.Types.EnableEbsEncryptionByDefaultResult, AWSError>;
   /**
-   * Enables EBS encryption by default for your account in the current Region. After you enable encryption by default, the EBS volumes that you create are are always encrypted, either using the default CMK or the CMK that you specified when you created each volume. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide. You can specify the default CMK for encryption by default using ModifyEbsDefaultKmsKeyId or ResetEbsDefaultKmsKeyId. Enabling encryption by default has no effect on the encryption status of your existing volumes. After you enable encryption by default, you can no longer launch instances using instance types that do not support encryption. For more information, see Supported Instance Types.
+   * Enables EBS encryption by default for your account in the current Region. After you enable encryption by default, the EBS volumes that you create are are always encrypted, either using the default CMK or the CMK that you specified when you created each volume. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide. You can specify the default CMK for encryption by default using ModifyEbsDefaultKmsKeyId or ResetEbsDefaultKmsKeyId. Enabling encryption by default has no effect on the encryption status of your existing volumes. After you enable encryption by default, you can no longer launch instances using instance types that do not support encryption. For more information, see Supported instance types.
    */
   enableEbsEncryptionByDefault(callback?: (err: AWSError, data: EC2.Types.EnableEbsEncryptionByDefaultResult) => void): Request<EC2.Types.EnableEbsEncryptionByDefaultResult, AWSError>;
   /**
-   * Enables fast snapshot restores for the specified snapshots in the specified Availability Zones. You get the full benefit of fast snapshot restores after they enter the enabled state. To get the current state of fast snapshot restores, use DescribeFastSnapshotRestores. To disable fast snapshot restores, use DisableFastSnapshotRestores. For more information, see Amazon EBS Fast Snapshot Restore in the Amazon Elastic Compute Cloud User Guide.
+   * Enables fast snapshot restores for the specified snapshots in the specified Availability Zones. You get the full benefit of fast snapshot restores after they enter the enabled state. To get the current state of fast snapshot restores, use DescribeFastSnapshotRestores. To disable fast snapshot restores, use DisableFastSnapshotRestores. For more information, see Amazon EBS fast snapshot restore in the Amazon Elastic Compute Cloud User Guide.
    */
   enableFastSnapshotRestores(params: EC2.Types.EnableFastSnapshotRestoresRequest, callback?: (err: AWSError, data: EC2.Types.EnableFastSnapshotRestoresResult) => void): Request<EC2.Types.EnableFastSnapshotRestoresResult, AWSError>;
   /**
-   * Enables fast snapshot restores for the specified snapshots in the specified Availability Zones. You get the full benefit of fast snapshot restores after they enter the enabled state. To get the current state of fast snapshot restores, use DescribeFastSnapshotRestores. To disable fast snapshot restores, use DisableFastSnapshotRestores. For more information, see Amazon EBS Fast Snapshot Restore in the Amazon Elastic Compute Cloud User Guide.
+   * Enables fast snapshot restores for the specified snapshots in the specified Availability Zones. You get the full benefit of fast snapshot restores after they enter the enabled state. To get the current state of fast snapshot restores, use DescribeFastSnapshotRestores. To disable fast snapshot restores, use DisableFastSnapshotRestores. For more information, see Amazon EBS fast snapshot restore in the Amazon Elastic Compute Cloud User Guide.
    */
   enableFastSnapshotRestores(callback?: (err: AWSError, data: EC2.Types.EnableFastSnapshotRestoresResult) => void): Request<EC2.Types.EnableFastSnapshotRestoresResult, AWSError>;
   /**
@@ -2508,6 +2524,14 @@ declare class EC2 extends Service {
    * Gets information about the associations for the transit gateway multicast domain.
    */
   getTransitGatewayMulticastDomainAssociations(callback?: (err: AWSError, data: EC2.Types.GetTransitGatewayMulticastDomainAssociationsResult) => void): Request<EC2.Types.GetTransitGatewayMulticastDomainAssociationsResult, AWSError>;
+  /**
+   * Gets information about the prefix list references in a specified transit gateway route table.
+   */
+  getTransitGatewayPrefixListReferences(params: EC2.Types.GetTransitGatewayPrefixListReferencesRequest, callback?: (err: AWSError, data: EC2.Types.GetTransitGatewayPrefixListReferencesResult) => void): Request<EC2.Types.GetTransitGatewayPrefixListReferencesResult, AWSError>;
+  /**
+   * Gets information about the prefix list references in a specified transit gateway route table.
+   */
+  getTransitGatewayPrefixListReferences(callback?: (err: AWSError, data: EC2.Types.GetTransitGatewayPrefixListReferencesResult) => void): Request<EC2.Types.GetTransitGatewayPrefixListReferencesResult, AWSError>;
   /**
    * Gets information about the associations for the specified transit gateway route table.
    */
@@ -2741,11 +2765,11 @@ declare class EC2 extends Service {
    */
   modifyReservedInstances(callback?: (err: AWSError, data: EC2.Types.ModifyReservedInstancesResult) => void): Request<EC2.Types.ModifyReservedInstancesResult, AWSError>;
   /**
-   * Adds or removes permission settings for the specified snapshot. You may add or remove specified AWS account IDs from a snapshot's list of create volume permissions, but you cannot do both in a single operation. If you need to both add and remove account IDs for a snapshot, you must use multiple operations. You can make up to 500 modifications to a snapshot in a single operation. Encrypted snapshots and snapshots with AWS Marketplace product codes cannot be made public. Snapshots encrypted with your default CMK cannot be shared with other accounts. For more information about modifying snapshot permissions, see Sharing Snapshots in the Amazon Elastic Compute Cloud User Guide.
+   * Adds or removes permission settings for the specified snapshot. You may add or remove specified AWS account IDs from a snapshot's list of create volume permissions, but you cannot do both in a single operation. If you need to both add and remove account IDs for a snapshot, you must use multiple operations. You can make up to 500 modifications to a snapshot in a single operation. Encrypted snapshots and snapshots with AWS Marketplace product codes cannot be made public. Snapshots encrypted with your default CMK cannot be shared with other accounts. For more information about modifying snapshot permissions, see Sharing snapshots in the Amazon Elastic Compute Cloud User Guide.
    */
   modifySnapshotAttribute(params: EC2.Types.ModifySnapshotAttributeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds or removes permission settings for the specified snapshot. You may add or remove specified AWS account IDs from a snapshot's list of create volume permissions, but you cannot do both in a single operation. If you need to both add and remove account IDs for a snapshot, you must use multiple operations. You can make up to 500 modifications to a snapshot in a single operation. Encrypted snapshots and snapshots with AWS Marketplace product codes cannot be made public. Snapshots encrypted with your default CMK cannot be shared with other accounts. For more information about modifying snapshot permissions, see Sharing Snapshots in the Amazon Elastic Compute Cloud User Guide.
+   * Adds or removes permission settings for the specified snapshot. You may add or remove specified AWS account IDs from a snapshot's list of create volume permissions, but you cannot do both in a single operation. If you need to both add and remove account IDs for a snapshot, you must use multiple operations. You can make up to 500 modifications to a snapshot in a single operation. Encrypted snapshots and snapshots with AWS Marketplace product codes cannot be made public. Snapshots encrypted with your default CMK cannot be shared with other accounts. For more information about modifying snapshot permissions, see Sharing snapshots in the Amazon Elastic Compute Cloud User Guide.
    */
   modifySnapshotAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -2789,6 +2813,22 @@ declare class EC2 extends Service {
    */
   modifyTrafficMirrorSession(callback?: (err: AWSError, data: EC2.Types.ModifyTrafficMirrorSessionResult) => void): Request<EC2.Types.ModifyTrafficMirrorSessionResult, AWSError>;
   /**
+   * Modifies the specified transit gateway. When you modify a transit gateway, the modified options are applied to new transit gateway attachments only. Your existing transit gateway attachments are not modified.
+   */
+  modifyTransitGateway(params: EC2.Types.ModifyTransitGatewayRequest, callback?: (err: AWSError, data: EC2.Types.ModifyTransitGatewayResult) => void): Request<EC2.Types.ModifyTransitGatewayResult, AWSError>;
+  /**
+   * Modifies the specified transit gateway. When you modify a transit gateway, the modified options are applied to new transit gateway attachments only. Your existing transit gateway attachments are not modified.
+   */
+  modifyTransitGateway(callback?: (err: AWSError, data: EC2.Types.ModifyTransitGatewayResult) => void): Request<EC2.Types.ModifyTransitGatewayResult, AWSError>;
+  /**
+   * Modifies a reference (route) to a prefix list in a specified transit gateway route table.
+   */
+  modifyTransitGatewayPrefixListReference(params: EC2.Types.ModifyTransitGatewayPrefixListReferenceRequest, callback?: (err: AWSError, data: EC2.Types.ModifyTransitGatewayPrefixListReferenceResult) => void): Request<EC2.Types.ModifyTransitGatewayPrefixListReferenceResult, AWSError>;
+  /**
+   * Modifies a reference (route) to a prefix list in a specified transit gateway route table.
+   */
+  modifyTransitGatewayPrefixListReference(callback?: (err: AWSError, data: EC2.Types.ModifyTransitGatewayPrefixListReferenceResult) => void): Request<EC2.Types.ModifyTransitGatewayPrefixListReferenceResult, AWSError>;
+  /**
    * Modifies the specified VPC attachment.
    */
   modifyTransitGatewayVpcAttachment(params: EC2.Types.ModifyTransitGatewayVpcAttachmentRequest, callback?: (err: AWSError, data: EC2.Types.ModifyTransitGatewayVpcAttachmentResult) => void): Request<EC2.Types.ModifyTransitGatewayVpcAttachmentResult, AWSError>;
@@ -2797,11 +2837,11 @@ declare class EC2 extends Service {
    */
   modifyTransitGatewayVpcAttachment(callback?: (err: AWSError, data: EC2.Types.ModifyTransitGatewayVpcAttachmentResult) => void): Request<EC2.Types.ModifyTransitGatewayVpcAttachmentResult, AWSError>;
   /**
-   * You can modify several parameters of an existing EBS volume, including volume size, volume type, and IOPS capacity. If your EBS volume is attached to a current-generation EC2 instance type, you may be able to apply these changes without stopping the instance or detaching the volume from it. For more information about modifying an EBS volume running Linux, see Modifying the Size, IOPS, or Type of an EBS Volume on Linux. For more information about modifying an EBS volume running Windows, see Modifying the Size, IOPS, or Type of an EBS Volume on Windows.   When you complete a resize operation on your volume, you need to extend the volume's file-system size to take advantage of the new storage capacity. For information about extending a Linux file system, see Extending a Linux File System. For information about extending a Windows file system, see Extending a Windows File System.   You can use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the Amazon CloudWatch Events User Guide. You can also track the status of a modification using DescribeVolumesModifications. For information about tracking status changes using either method, see Monitoring Volume Modifications.  With previous-generation instance types, resizing an EBS volume may require detaching and reattaching the volume or stopping and restarting the instance. For more information, see Modifying the Size, IOPS, or Type of an EBS Volume on Linux and Modifying the Size, IOPS, or Type of an EBS Volume on Windows. If you reach the maximum volume modification rate per volume limit, you will need to wait at least six hours before applying further modifications to the affected EBS volume.
+   * You can modify several parameters of an existing EBS volume, including volume size, volume type, and IOPS capacity. If your EBS volume is attached to a current-generation EC2 instance type, you may be able to apply these changes without stopping the instance or detaching the volume from it. For more information about modifying an EBS volume running Linux, see Modifying the size, IOPS, or type of an EBS volume on Linux. For more information about modifying an EBS volume running Windows, see Modifying the size, IOPS, or type of an EBS volume on Windows.   When you complete a resize operation on your volume, you need to extend the volume's file-system size to take advantage of the new storage capacity. For information about extending a Linux file system, see Extending a Linux file system. For information about extending a Windows file system, see Extending a Windows file system.   You can use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the Amazon CloudWatch Events User Guide. You can also track the status of a modification using DescribeVolumesModifications. For information about tracking status changes using either method, see Monitoring volume modifications.  With previous-generation instance types, resizing an EBS volume may require detaching and reattaching the volume or stopping and restarting the instance. For more information, see Modifying the size, IOPS, or type of an EBS volume on Linux and Modifying the size, IOPS, or type of an EBS volume on Windows. If you reach the maximum volume modification rate per volume limit, you will need to wait at least six hours before applying further modifications to the affected EBS volume.
    */
   modifyVolume(params: EC2.Types.ModifyVolumeRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVolumeResult) => void): Request<EC2.Types.ModifyVolumeResult, AWSError>;
   /**
-   * You can modify several parameters of an existing EBS volume, including volume size, volume type, and IOPS capacity. If your EBS volume is attached to a current-generation EC2 instance type, you may be able to apply these changes without stopping the instance or detaching the volume from it. For more information about modifying an EBS volume running Linux, see Modifying the Size, IOPS, or Type of an EBS Volume on Linux. For more information about modifying an EBS volume running Windows, see Modifying the Size, IOPS, or Type of an EBS Volume on Windows.   When you complete a resize operation on your volume, you need to extend the volume's file-system size to take advantage of the new storage capacity. For information about extending a Linux file system, see Extending a Linux File System. For information about extending a Windows file system, see Extending a Windows File System.   You can use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the Amazon CloudWatch Events User Guide. You can also track the status of a modification using DescribeVolumesModifications. For information about tracking status changes using either method, see Monitoring Volume Modifications.  With previous-generation instance types, resizing an EBS volume may require detaching and reattaching the volume or stopping and restarting the instance. For more information, see Modifying the Size, IOPS, or Type of an EBS Volume on Linux and Modifying the Size, IOPS, or Type of an EBS Volume on Windows. If you reach the maximum volume modification rate per volume limit, you will need to wait at least six hours before applying further modifications to the affected EBS volume.
+   * You can modify several parameters of an existing EBS volume, including volume size, volume type, and IOPS capacity. If your EBS volume is attached to a current-generation EC2 instance type, you may be able to apply these changes without stopping the instance or detaching the volume from it. For more information about modifying an EBS volume running Linux, see Modifying the size, IOPS, or type of an EBS volume on Linux. For more information about modifying an EBS volume running Windows, see Modifying the size, IOPS, or type of an EBS volume on Windows.   When you complete a resize operation on your volume, you need to extend the volume's file-system size to take advantage of the new storage capacity. For information about extending a Linux file system, see Extending a Linux file system. For information about extending a Windows file system, see Extending a Windows file system.   You can use CloudWatch Events to check the status of a modification to an EBS volume. For information about CloudWatch Events, see the Amazon CloudWatch Events User Guide. You can also track the status of a modification using DescribeVolumesModifications. For information about tracking status changes using either method, see Monitoring volume modifications.  With previous-generation instance types, resizing an EBS volume may require detaching and reattaching the volume or stopping and restarting the instance. For more information, see Modifying the size, IOPS, or type of an EBS volume on Linux and Modifying the size, IOPS, or type of an EBS volume on Windows. If you reach the maximum volume modification rate per volume limit, you will need to wait at least six hours before applying further modifications to the affected EBS volume.
    */
   modifyVolume(callback?: (err: AWSError, data: EC2.Types.ModifyVolumeResult) => void): Request<EC2.Types.ModifyVolumeResult, AWSError>;
   /**
@@ -3141,11 +3181,11 @@ declare class EC2 extends Service {
    */
   resetNetworkInterfaceAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Resets permission settings for the specified snapshot. For more information about modifying snapshot permissions, see Sharing Snapshots in the Amazon Elastic Compute Cloud User Guide.
+   * Resets permission settings for the specified snapshot. For more information about modifying snapshot permissions, see Sharing snapshots in the Amazon Elastic Compute Cloud User Guide.
    */
   resetSnapshotAttribute(params: EC2.Types.ResetSnapshotAttributeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Resets permission settings for the specified snapshot. For more information about modifying snapshot permissions, see Sharing Snapshots in the Amazon Elastic Compute Cloud User Guide.
+   * Resets permission settings for the specified snapshot. For more information about modifying snapshot permissions, see Sharing snapshots in the Amazon Elastic Compute Cloud User Guide.
    */
   resetSnapshotAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -7164,6 +7204,34 @@ declare namespace EC2 {
      */
     TransitGatewayPeeringAttachment?: TransitGatewayPeeringAttachment;
   }
+  export interface CreateTransitGatewayPrefixListReferenceRequest {
+    /**
+     * The ID of the transit gateway route table.
+     */
+    TransitGatewayRouteTableId: TransitGatewayRouteTableId;
+    /**
+     * The ID of the prefix list that is used for destination matches.
+     */
+    PrefixListId: PrefixListResourceId;
+    /**
+     * The ID of the attachment to which traffic is routed.
+     */
+    TransitGatewayAttachmentId?: TransitGatewayAttachmentId;
+    /**
+     * Indicates whether to drop traffic that matches this route.
+     */
+    Blackhole?: Boolean;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface CreateTransitGatewayPrefixListReferenceResult {
+    /**
+     * Information about the prefix list reference.
+     */
+    TransitGatewayPrefixListReference?: TransitGatewayPrefixListReference;
+  }
   export interface CreateTransitGatewayRequest {
     /**
      * A description of the transit gateway.
@@ -7305,11 +7373,11 @@ declare namespace EC2 {
      */
     AvailabilityZone: String;
     /**
-     * Specifies whether the volume should be encrypted. The effect of setting the encryption state to true depends on the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see Encryption by Default in the Amazon Elastic Compute Cloud User Guide. Encrypted Amazon EBS volumes must be attached to instances that support Amazon EBS encryption. For more information, see Supported Instance Types.
+     * Specifies whether the volume should be encrypted. The effect of setting the encryption state to true depends on the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see Encryption by default in the Amazon Elastic Compute Cloud User Guide. Encrypted Amazon EBS volumes must be attached to instances that support Amazon EBS encryption. For more information, see Supported instance types.
      */
     Encrypted?: Boolean;
     /**
-     * The number of I/O operations per second (IOPS) to provision for the volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000 IOPS for volumes in most Regions. Maximum IOPS of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. This parameter is valid only for Provisioned IOPS SSD (io1) volumes.
+     * The number of I/O operations per second (IOPS) to provision for an io1 or io2 volume, with a maximum ratio of 50 IOPS/GiB for io1, and 500 IOPS/GiB for io2. Range is 100 to 64,000 IOPS for volumes in most Regions. Maximum IOPS of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. For more information, see Amazon EBS volume types in the Amazon Elastic Compute Cloud User Guide. This parameter is valid only for Provisioned IOPS SSD (io1 and io2) volumes.
      */
     Iops?: Integer;
     /**
@@ -7321,7 +7389,7 @@ declare namespace EC2 {
      */
     OutpostArn?: String;
     /**
-     * The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size. Constraints: 1-16,384 for gp2, 4-16,384 for io1, 500-16,384 for st1, 500-16,384 for sc1, and 1-1,024 for standard. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size. Default: If you're creating the volume from a snapshot and don't specify a volume size, the default is the snapshot size.
+     * The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size. Constraints: 1-16,384 for gp2, 4-16,384 for io1 and io2, 500-16,384 for st1, 500-16,384 for sc1, and 1-1,024 for standard. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size. Default: If you're creating the volume from a snapshot and don't specify a volume size, the default is the snapshot size.
      */
     Size?: Integer;
     /**
@@ -7329,7 +7397,7 @@ declare namespace EC2 {
      */
     SnapshotId?: SnapshotId;
     /**
-     * The volume type. This can be gp2 for General Purpose SSD, io1 for Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard for Magnetic volumes. Default: gp2 
+     * The volume type. This can be gp2 for General Purpose SSD, io1 or io2 for Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard for Magnetic volumes. Default: gp2 
      */
     VolumeType?: VolumeType;
     /**
@@ -8320,6 +8388,26 @@ declare namespace EC2 {
      * The transit gateway peering attachment.
      */
     TransitGatewayPeeringAttachment?: TransitGatewayPeeringAttachment;
+  }
+  export interface DeleteTransitGatewayPrefixListReferenceRequest {
+    /**
+     * The ID of the route table.
+     */
+    TransitGatewayRouteTableId: TransitGatewayRouteTableId;
+    /**
+     * The ID of the prefix list.
+     */
+    PrefixListId: PrefixListResourceId;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DeleteTransitGatewayPrefixListReferenceResult {
+    /**
+     * Information about the deleted prefix list reference.
+     */
+    TransitGatewayPrefixListReference?: TransitGatewayPrefixListReference;
   }
   export interface DeleteTransitGatewayRequest {
     /**
@@ -9713,7 +9801,7 @@ declare namespace EC2 {
      */
     ExecutableUsers?: ExecutableByStringList;
     /**
-     * The filters.    architecture - The image architecture (i386 | x86_64 | arm64).    block-device-mapping.delete-on-termination - A Boolean value that indicates whether the Amazon EBS volume is deleted on instance termination.    block-device-mapping.device-name - The device name specified in the block device mapping (for example, /dev/sdh or xvdh).    block-device-mapping.snapshot-id - The ID of the snapshot used for the EBS volume.    block-device-mapping.volume-size - The volume size of the EBS volume, in GiB.    block-device-mapping.volume-type - The volume type of the EBS volume (gp2 | io1 | st1 | sc1 | standard).    block-device-mapping.encrypted - A Boolean that indicates whether the EBS volume is encrypted.    description - The description of the image (provided during image creation).    ena-support - A Boolean that indicates whether enhanced networking with ENA is enabled.    hypervisor - The hypervisor type (ovm | xen).    image-id - The ID of the image.    image-type - The image type (machine | kernel | ramdisk).    is-public - A Boolean that indicates whether the image is public.    kernel-id - The kernel ID.    manifest-location - The location of the image manifest.    name - The name of the AMI (provided during image creation).    owner-alias - The owner alias, from an Amazon-maintained list (amazon | aws-marketplace). This is not the user-configured AWS account alias set using the IAM console. We recommend that you use the related parameter instead of this filter.    owner-id - The AWS account ID of the owner. We recommend that you use the related parameter instead of this filter.    platform - The platform. To only list Windows-based AMIs, use windows.    product-code - The product code.    product-code.type - The type of the product code (devpay | marketplace).    ramdisk-id - The RAM disk ID.    root-device-name - The device name of the root device volume (for example, /dev/sda1).    root-device-type - The type of the root device volume (ebs | instance-store).    state - The state of the image (available | pending | failed).    state-reason-code - The reason code for the state change.    state-reason-message - The message for the state change.    sriov-net-support - A value of simple indicates that enhanced networking with the Intel 82599 VF interface is enabled.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    virtualization-type - The virtualization type (paravirtual | hvm).  
+     * The filters.    architecture - The image architecture (i386 | x86_64 | arm64).    block-device-mapping.delete-on-termination - A Boolean value that indicates whether the Amazon EBS volume is deleted on instance termination.    block-device-mapping.device-name - The device name specified in the block device mapping (for example, /dev/sdh or xvdh).    block-device-mapping.snapshot-id - The ID of the snapshot used for the EBS volume.    block-device-mapping.volume-size - The volume size of the EBS volume, in GiB.    block-device-mapping.volume-type - The volume type of the EBS volume (gp2 | io1 | io2 | st1 | sc1 | standard).    block-device-mapping.encrypted - A Boolean that indicates whether the EBS volume is encrypted.    description - The description of the image (provided during image creation).    ena-support - A Boolean that indicates whether enhanced networking with ENA is enabled.    hypervisor - The hypervisor type (ovm | xen).    image-id - The ID of the image.    image-type - The image type (machine | kernel | ramdisk).    is-public - A Boolean that indicates whether the image is public.    kernel-id - The kernel ID.    manifest-location - The location of the image manifest.    name - The name of the AMI (provided during image creation).    owner-alias - The owner alias, from an Amazon-maintained list (amazon | aws-marketplace). This is not the user-configured AWS account alias set using the IAM console. We recommend that you use the related parameter instead of this filter.    owner-id - The AWS account ID of the owner. We recommend that you use the related parameter instead of this filter.    platform - The platform. To only list Windows-based AMIs, use windows.    product-code - The product code.    product-code.type - The type of the product code (devpay | marketplace).    ramdisk-id - The RAM disk ID.    root-device-name - The device name of the root device volume (for example, /dev/sda1).    root-device-type - The type of the root device volume (ebs | instance-store).    state - The state of the image (available | pending | failed).    state-reason-code - The reason code for the state change.    state-reason-message - The message for the state change.    sriov-net-support - A value of simple indicates that enhanced networking with the Intel 82599 VF interface is enabled.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    virtualization-type - The virtualization type (paravirtual | hvm).  
      */
     Filters?: FilterList;
     /**
@@ -11225,7 +11313,7 @@ declare namespace EC2 {
   }
   export interface DescribeSpotInstanceRequestsRequest {
     /**
-     * One or more filters.    availability-zone-group - The Availability Zone group.    create-time - The time stamp when the Spot Instance request was created.    fault-code - The fault code related to the request.    fault-message - The fault message related to the request.    instance-id - The ID of the instance that fulfilled the request.    launch-group - The Spot Instance launch group.    launch.block-device-mapping.delete-on-termination - Indicates whether the EBS volume is deleted on instance termination.    launch.block-device-mapping.device-name - The device name for the volume in the block device mapping (for example, /dev/sdh or xvdh).    launch.block-device-mapping.snapshot-id - The ID of the snapshot for the EBS volume.    launch.block-device-mapping.volume-size - The size of the EBS volume, in GiB.    launch.block-device-mapping.volume-type - The type of EBS volume: gp2 for General Purpose SSD, io1 for Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1for Cold HDD, or standard for Magnetic.    launch.group-id - The ID of the security group for the instance.    launch.group-name - The name of the security group for the instance.    launch.image-id - The ID of the AMI.    launch.instance-type - The type of instance (for example, m3.medium).    launch.kernel-id - The kernel ID.    launch.key-name - The name of the key pair the instance launched with.    launch.monitoring-enabled - Whether detailed monitoring is enabled for the Spot Instance.    launch.ramdisk-id - The RAM disk ID.    launched-availability-zone - The Availability Zone in which the request is launched.    network-interface.addresses.primary - Indicates whether the IP address is the primary private IP address.    network-interface.delete-on-termination - Indicates whether the network interface is deleted when the instance is terminated.    network-interface.description - A description of the network interface.    network-interface.device-index - The index of the device for the network interface attachment on the instance.    network-interface.group-id - The ID of the security group associated with the network interface.    network-interface.network-interface-id - The ID of the network interface.    network-interface.private-ip-address - The primary private IP address of the network interface.    network-interface.subnet-id - The ID of the subnet for the instance.    product-description - The product description associated with the instance (Linux/UNIX | Windows).    spot-instance-request-id - The Spot Instance request ID.    spot-price - The maximum hourly price for any Spot Instance launched to fulfill the request.    state - The state of the Spot Instance request (open | active | closed | cancelled | failed). Spot request status information can help you track your Amazon EC2 Spot Instance requests. For more information, see Spot request status in the Amazon EC2 User Guide for Linux Instances.    status-code - The short code describing the most recent evaluation of your Spot Instance request.    status-message - The message explaining the status of the Spot Instance request.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    type - The type of Spot Instance request (one-time | persistent).    valid-from - The start date of the request.    valid-until - The end date of the request.  
+     * One or more filters.    availability-zone-group - The Availability Zone group.    create-time - The time stamp when the Spot Instance request was created.    fault-code - The fault code related to the request.    fault-message - The fault message related to the request.    instance-id - The ID of the instance that fulfilled the request.    launch-group - The Spot Instance launch group.    launch.block-device-mapping.delete-on-termination - Indicates whether the EBS volume is deleted on instance termination.    launch.block-device-mapping.device-name - The device name for the volume in the block device mapping (for example, /dev/sdh or xvdh).    launch.block-device-mapping.snapshot-id - The ID of the snapshot for the EBS volume.    launch.block-device-mapping.volume-size - The size of the EBS volume, in GiB.    launch.block-device-mapping.volume-type - The type of EBS volume: gp2 for General Purpose SSD, io1 or io2 for Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1for Cold HDD, or standard for Magnetic.    launch.group-id - The ID of the security group for the instance.    launch.group-name - The name of the security group for the instance.    launch.image-id - The ID of the AMI.    launch.instance-type - The type of instance (for example, m3.medium).    launch.kernel-id - The kernel ID.    launch.key-name - The name of the key pair the instance launched with.    launch.monitoring-enabled - Whether detailed monitoring is enabled for the Spot Instance.    launch.ramdisk-id - The RAM disk ID.    launched-availability-zone - The Availability Zone in which the request is launched.    network-interface.addresses.primary - Indicates whether the IP address is the primary private IP address.    network-interface.delete-on-termination - Indicates whether the network interface is deleted when the instance is terminated.    network-interface.description - A description of the network interface.    network-interface.device-index - The index of the device for the network interface attachment on the instance.    network-interface.group-id - The ID of the security group associated with the network interface.    network-interface.network-interface-id - The ID of the network interface.    network-interface.private-ip-address - The primary private IP address of the network interface.    network-interface.subnet-id - The ID of the subnet for the instance.    product-description - The product description associated with the instance (Linux/UNIX | Windows).    spot-instance-request-id - The Spot Instance request ID.    spot-price - The maximum hourly price for any Spot Instance launched to fulfill the request.    state - The state of the Spot Instance request (open | active | closed | cancelled | failed). Spot request status information can help you track your Amazon EC2 Spot Instance requests. For more information, see Spot request status in the Amazon EC2 User Guide for Linux Instances.    status-code - The short code describing the most recent evaluation of your Spot Instance request.    status-message - The message explaining the status of the Spot Instance request.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    type - The type of Spot Instance request (one-time | persistent).    valid-from - The start date of the request.    valid-until - The end date of the request.  
      */
     Filters?: FilterList;
     /**
@@ -11496,7 +11584,7 @@ declare namespace EC2 {
      */
     TransitGatewayAttachmentIds?: TransitGatewayAttachmentIdStringList;
     /**
-     * One or more filters. The possible values are:    association.state - The state of the association (associating | associated | disassociating).    association.transit-gateway-route-table-id - The ID of the route table for the transit gateway.    resource-id - The ID of the resource.    resource-owner-id - The ID of the AWS account that owns the resource.    resource-type - The resource type (vpc | vpn).    state - The state of the attachment (available | deleted | deleting | failed | modifying | pendingAcceptance | pending | rollingBack | rejected | rejecting).    transit-gateway-attachment-id - The ID of the attachment.    transit-gateway-id - The ID of the transit gateway.    transit-gateway-owner-id - The ID of the AWS account that owns the transit gateway.  
+     * One or more filters. The possible values are:    association.state - The state of the association (associating | associated | disassociating).    association.transit-gateway-route-table-id - The ID of the route table for the transit gateway.    resource-id - The ID of the resource.    resource-owner-id - The ID of the AWS account that owns the resource.    resource-type - The resource type (vpc | vpn | direct-connect-gateway | tgw-peering).    state - The state of the attachment (available | deleted | deleting | failed | modifying | pendingAcceptance | pending | rollingBack | rejected | rejecting).    transit-gateway-attachment-id - The ID of the attachment.    transit-gateway-id - The ID of the transit gateway.    transit-gateway-owner-id - The ID of the AWS account that owns the transit gateway.  
      */
     Filters?: FilterList;
     /**
@@ -11752,7 +11840,7 @@ declare namespace EC2 {
      */
     VolumeIds?: VolumeIdStringList;
     /**
-     * The filters.    modification-state - The current modification state (modifying | optimizing | completed | failed).    original-iops - The original IOPS rate of the volume.    original-size - The original size of the volume, in GiB.    original-volume-type - The original volume type of the volume (standard | io1 | gp2 | sc1 | st1).    originalMultiAttachEnabled - Indicates whether Multi-Attach support was enabled (true | false).    start-time - The modification start time.    target-iops - The target IOPS rate of the volume.    target-size - The target size of the volume, in GiB.    target-volume-type - The target volume type of the volume (standard | io1 | gp2 | sc1 | st1).    targetMultiAttachEnabled - Indicates whether Multi-Attach support is to be enabled (true | false).    volume-id - The ID of the volume.  
+     * The filters.    modification-state - The current modification state (modifying | optimizing | completed | failed).    original-iops - The original IOPS rate of the volume.    original-size - The original size of the volume, in GiB.    original-volume-type - The original volume type of the volume (standard | io1 | io2 | gp2 | sc1 | st1).    originalMultiAttachEnabled - Indicates whether Multi-Attach support was enabled (true | false).    start-time - The modification start time.    target-iops - The target IOPS rate of the volume.    target-size - The target size of the volume, in GiB.    target-volume-type - The target volume type of the volume (standard | io1 | io2 | gp2 | sc1 | st1).    targetMultiAttachEnabled - Indicates whether Multi-Attach support is to be enabled (true | false).    volume-id - The ID of the volume.  
      */
     Filters?: FilterList;
     /**
@@ -11776,7 +11864,7 @@ declare namespace EC2 {
   }
   export interface DescribeVolumesRequest {
     /**
-     * The filters.    attachment.attach-time - The time stamp when the attachment initiated.    attachment.delete-on-termination - Whether the volume is deleted on instance termination.    attachment.device - The device name specified in the block device mapping (for example, /dev/sda1).    attachment.instance-id - The ID of the instance the volume is attached to.    attachment.status - The attachment state (attaching | attached | detaching).    availability-zone - The Availability Zone in which the volume was created.    create-time - The time stamp when the volume was created.    encrypted - Indicates whether the volume is encrypted (true | false)    multi-attach-enabled - Indicates whether the volume is enabled for Multi-Attach (true | false)    fast-restored - Indicates whether the volume was created from a snapshot that is enabled for fast snapshot restore (true | false).    size - The size of the volume, in GiB.    snapshot-id - The snapshot from which the volume was created.    status - The status of the volume (creating | available | in-use | deleting | deleted | error).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    volume-id - The volume ID.    volume-type - The Amazon EBS volume type. This can be gp2 for General Purpose SSD, io1 for Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard for Magnetic volumes.  
+     * The filters.    attachment.attach-time - The time stamp when the attachment initiated.    attachment.delete-on-termination - Whether the volume is deleted on instance termination.    attachment.device - The device name specified in the block device mapping (for example, /dev/sda1).    attachment.instance-id - The ID of the instance the volume is attached to.    attachment.status - The attachment state (attaching | attached | detaching).    availability-zone - The Availability Zone in which the volume was created.    create-time - The time stamp when the volume was created.    encrypted - Indicates whether the volume is encrypted (true | false)    multi-attach-enabled - Indicates whether the volume is enabled for Multi-Attach (true | false)    fast-restored - Indicates whether the volume was created from a snapshot that is enabled for fast snapshot restore (true | false).    size - The size of the volume, in GiB.    snapshot-id - The snapshot from which the volume was created.    status - The state of the volume (creating | available | in-use | deleting | deleted | error).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    volume-id - The volume ID.    volume-type - The Amazon EBS volume type. This can be gp2 for General Purpose SSD, io1 or io2 for Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard for Magnetic volumes.  
      */
     Filters?: FilterList;
     /**
@@ -12732,7 +12820,7 @@ declare namespace EC2 {
      */
     DeleteOnTermination?: Boolean;
     /**
-     * The number of I/O operations per second (IOPS) that the volume supports. For io1 volumes, this represents the number of IOPS that are provisioned for the volume. For gp2 volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information, see Amazon EBS volume types in the Amazon Elastic Compute Cloud User Guide. Constraints: Range is 100-16,000 IOPS for gp2 volumes and 100 to 64,000 IOPS for io1 volumes in most Regions. Maximum io1 IOPS of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Condition: This parameter is required for requests to create io1 volumes; it is not used in requests to create gp2, st1, sc1, or standard volumes.
+     * The number of I/O operations per second (IOPS) that the volume supports. For io1 and io2 volumes, this represents the number of IOPS that are provisioned for the volume. For gp2 volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information, see Amazon EBS volume types in the Amazon Elastic Compute Cloud User Guide. Constraints: Range is 100-16,000 IOPS for gp2 volumes and 100 to 64,000 IOPS for io1 and io2 volumes in most Regions. Maximum io1 and io2 IOPS of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Condition: This parameter is required for requests to create io1 and io2 volumes; it is not used in requests to create gp2, st1, sc1, or standard volumes.
      */
     Iops?: Integer;
     /**
@@ -12740,11 +12828,11 @@ declare namespace EC2 {
      */
     SnapshotId?: String;
     /**
-     * The size of the volume, in GiB. Default: If you're creating the volume from a snapshot and don't specify a volume size, the default is the snapshot size. Constraints: 1-16384 for General Purpose SSD (gp2), 4-16384 for Provisioned IOPS SSD (io1), 500-16384 for Throughput Optimized HDD (st1), 500-16384 for Cold HDD (sc1), and 1-1024 for Magnetic (standard) volumes. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size.
+     * The size of the volume, in GiB. Default: If you're creating the volume from a snapshot and don't specify a volume size, the default is the snapshot size. Constraints: 1-16384 for General Purpose SSD (gp2), 4-16384 for Provisioned IOPS SSD (io1 and io2), 500-16384 for Throughput Optimized HDD (st1), 500-16384 for Cold HDD (sc1), and 1-1024 for Magnetic (standard) volumes. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size.
      */
     VolumeSize?: Integer;
     /**
-     * The volume type. If you set the type to io1, you must also specify the Iops parameter. If you set the type to gp2, st1, sc1, or standard, you must omit the Iops parameter. Default: gp2 
+     * The volume type. If you set the type to io1 or io2, you must also specify the Iops parameter. If you set the type to gp2, st1, sc1, or standard, you must omit the Iops parameter. Default: gp2 
      */
     VolumeType?: VolumeType;
     /**
@@ -14352,13 +14440,45 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export interface GetTransitGatewayPrefixListReferencesRequest {
+    /**
+     * The ID of the transit gateway route table.
+     */
+    TransitGatewayRouteTableId: TransitGatewayRouteTableId;
+    /**
+     * One or more filters. The possible values are:    attachment.resource-id - The ID of the resource for the attachment.    attachment.resource-type - The type of resource for the attachment (vpc | vpn | direct-connect-gateway | tgw-peering).    attachment.transit-gateway-attachment-id - The ID of the attachment.    is-blackhole - Whether traffic matching the route is blocked (true | false).    prefix-list-id - The ID of the prefix list.    prefix-list-owner-id - The ID of the owner of the prefix list.    state - The state of the prefix list reference (pending | available | modifying | deleting).  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: TransitGatewayMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetTransitGatewayPrefixListReferencesResult {
+    /**
+     * Information about the prefix list references.
+     */
+    TransitGatewayPrefixListReferences?: TransitGatewayPrefixListReferenceSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
   export interface GetTransitGatewayRouteTableAssociationsRequest {
     /**
      * The ID of the transit gateway route table.
      */
     TransitGatewayRouteTableId: TransitGatewayRouteTableId;
     /**
-     * One or more filters. The possible values are:    resource-id - The ID of the resource.    resource-type - The resource type (vpc | vpn).    transit-gateway-attachment-id - The ID of the attachment.  
+     * One or more filters. The possible values are:    resource-id - The ID of the resource.    resource-type - The resource type (vpc | vpn | direct-connect-gateway | tgw-peering).    transit-gateway-attachment-id - The ID of the attachment.  
      */
     Filters?: FilterList;
     /**
@@ -14390,7 +14510,7 @@ declare namespace EC2 {
      */
     TransitGatewayRouteTableId: TransitGatewayRouteTableId;
     /**
-     * One or more filters. The possible values are:    resource-id - The ID of the resource.    resource-type - The resource type (vpc | vpn).    transit-gateway-attachment-id - The ID of the attachment.  
+     * One or more filters. The possible values are:    resource-id - The ID of the resource.    resource-type - The resource type (vpc | vpn | direct-connect-gateway | tgw-peering).    transit-gateway-attachment-id - The ID of the attachment.  
      */
     Filters?: FilterList;
     /**
@@ -16824,7 +16944,7 @@ declare namespace EC2 {
      */
     DeleteOnTermination?: Boolean;
     /**
-     * The number of I/O operations per second (IOPS) that the volume supports. For io1, this represents the number of IOPS that are provisioned for the volume. For gp2, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Condition: This parameter is required for requests to create io1 volumes; it is not used in requests to create gp2, st1, sc1, or standard volumes.
+     * The number of I/O operations per second (IOPS) to provision for an io1 or io2 volume, with a maximum ratio of 50 IOPS/GiB for io1, and 500 IOPS/GiB for io2. Range is 100 to 64,000 IOPS for volumes in most Regions. Maximum IOPS of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. This parameter is valid only for Provisioned IOPS SSD (io1 and io2) volumes.
      */
     Iops?: Integer;
     /**
@@ -18436,6 +18556,85 @@ declare namespace EC2 {
      */
     TrafficMirrorSession?: TrafficMirrorSession;
   }
+  export interface ModifyTransitGatewayOptions {
+    /**
+     * Enable or disable Equal Cost Multipath Protocol support.
+     */
+    VpnEcmpSupport?: VpnEcmpSupportValue;
+    /**
+     * Enable or disable DNS support.
+     */
+    DnsSupport?: DnsSupportValue;
+    /**
+     * Enable or disable automatic acceptance of attachment requests.
+     */
+    AutoAcceptSharedAttachments?: AutoAcceptSharedAttachmentsValue;
+    /**
+     * Enable or disable automatic association with the default association route table.
+     */
+    DefaultRouteTableAssociation?: DefaultRouteTableAssociationValue;
+    /**
+     * The ID of the default association route table.
+     */
+    AssociationDefaultRouteTableId?: TransitGatewayRouteTableId;
+    /**
+     * Enable or disable automatic propagation of routes to the default propagation route table.
+     */
+    DefaultRouteTablePropagation?: DefaultRouteTablePropagationValue;
+    /**
+     * The ID of the default propagation route table.
+     */
+    PropagationDefaultRouteTableId?: TransitGatewayRouteTableId;
+  }
+  export interface ModifyTransitGatewayPrefixListReferenceRequest {
+    /**
+     * The ID of the transit gateway route table.
+     */
+    TransitGatewayRouteTableId: TransitGatewayRouteTableId;
+    /**
+     * The ID of the prefix list.
+     */
+    PrefixListId: PrefixListResourceId;
+    /**
+     * The ID of the attachment to which traffic is routed.
+     */
+    TransitGatewayAttachmentId?: TransitGatewayAttachmentId;
+    /**
+     * Indicates whether to drop traffic that matches this route.
+     */
+    Blackhole?: Boolean;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ModifyTransitGatewayPrefixListReferenceResult {
+    /**
+     * Information about the prefix list reference.
+     */
+    TransitGatewayPrefixListReference?: TransitGatewayPrefixListReference;
+  }
+  export interface ModifyTransitGatewayRequest {
+    /**
+     * The ID of the transit gateway.
+     */
+    TransitGatewayId: TransitGatewayId;
+    /**
+     * The description for the transit gateway.
+     */
+    Description?: String;
+    /**
+     * The options to modify.
+     */
+    Options?: ModifyTransitGatewayOptions;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ModifyTransitGatewayResult {
+    TransitGateway?: TransitGateway;
+  }
   export interface ModifyTransitGatewayVpcAttachmentRequest {
     /**
      * The ID of the attachment.
@@ -18506,7 +18705,7 @@ declare namespace EC2 {
      */
     VolumeType?: VolumeType;
     /**
-     * The target IOPS rate of the volume. This is only valid for Provisioned IOPS SSD (io1) volumes. For more information, see Provisioned IOPS SSD (io1) Volumes. Default: If no IOPS value is specified, the existing value is retained.
+     * The target IOPS rate of the volume. This is only valid for Provisioned IOPS SSD (io1 and io2) volumes. For moreinformation, see  Provisioned IOPS SSD (io1 and io2) volumes. Default: If no IOPS value is specified, the existing value is retained.
      */
     Iops?: Integer;
   }
@@ -22049,7 +22248,7 @@ declare namespace EC2 {
      */
     Encrypted?: Boolean;
     /**
-     * The number of I/O operations per second (IOPS) that the volume supports. For io1 volumes, this represents the number of IOPS that are provisioned for the volume. For gp2 volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about gp2 baseline performance, I/O credits, and bursting, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Constraint: Range is 100-20000 IOPS for io1 volumes and 100-10000 IOPS for gp2 volumes. Condition: This parameter is required for requests to create io1volumes; it is not used in requests to create gp2, st1, sc1, or standard volumes.
+     * The number of I/O operations per second (IOPS) to provision for an io1 or io2 volume, with a maximum ratio of 50 IOPS/GiB for io1, and 500 IOPS/GiB for io2. Range is 100 to 64,000 IOPS for volumes in most Regions. Maximum IOPS of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. This parameter is valid only for Provisioned IOPS SSD (io1 and io2) volumes.
      */
     Iops?: Integer;
     /**
@@ -22061,7 +22260,7 @@ declare namespace EC2 {
      */
     VolumeSize?: Integer;
     /**
-     * The volume type. gp2 for General Purpose SSD, io1 for Provisioned IOPS SSD, Throughput Optimized HDD for st1, Cold HDD for sc1, or standard for Magnetic. Default: gp2 
+     * The volume type. gp2 for General Purpose SSD, io1 or  io2 for Provisioned IOPS SSD, Throughput Optimized HDD for st1, Cold HDD for sc1, or standard for Magnetic. Default: gp2 
      */
     VolumeType?: String;
   }
@@ -22288,7 +22487,7 @@ declare namespace EC2 {
      */
     TransitGatewayRouteTableId: TransitGatewayRouteTableId;
     /**
-     * One or more filters. The possible values are:    attachment.transit-gateway-attachment-id- The id of the transit gateway attachment.    attachment.resource-id - The resource id of the transit gateway attachment.    attachment.resource-type - The attachment resource type (vpc | vpn).    route-search.exact-match - The exact match of the specified filter.    route-search.longest-prefix-match - The longest prefix that matches the route.    route-search.subnet-of-match - The routes with a subnet that match the specified CIDR filter.    route-search.supernet-of-match - The routes with a CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.    state - The state of the route (active | blackhole).    type - The type of route (propagated | static).  
+     * One or more filters. The possible values are:    attachment.transit-gateway-attachment-id- The id of the transit gateway attachment.    attachment.resource-id - The resource id of the transit gateway attachment.    attachment.resource-type - The attachment resource type (vpc | vpn | direct-connect-gateway | tgw-peering).    prefix-list-id - The ID of the prefix list.    route-search.exact-match - The exact match of the specified filter.    route-search.longest-prefix-match - The longest prefix that matches the route.    route-search.subnet-of-match - The routes with a subnet that match the specified CIDR filter.    route-search.supernet-of-match - The routes with a CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.    state - The state of the route (active | blackhole).    type - The type of route (propagated | static).  
      */
     Filters: FilterList;
     /**
@@ -24236,6 +24435,48 @@ declare namespace EC2 {
     Tags?: TagList;
   }
   export type TransitGatewayPeeringAttachmentList = TransitGatewayPeeringAttachment[];
+  export interface TransitGatewayPrefixListAttachment {
+    /**
+     * The ID of the attachment.
+     */
+    TransitGatewayAttachmentId?: TransitGatewayAttachmentId;
+    /**
+     * The resource type.
+     */
+    ResourceType?: TransitGatewayAttachmentResourceType;
+    /**
+     * The ID of the resource.
+     */
+    ResourceId?: String;
+  }
+  export interface TransitGatewayPrefixListReference {
+    /**
+     * The ID of the transit gateway route table.
+     */
+    TransitGatewayRouteTableId?: TransitGatewayRouteTableId;
+    /**
+     * The ID of the prefix list.
+     */
+    PrefixListId?: PrefixListResourceId;
+    /**
+     * The ID of the prefix list owner.
+     */
+    PrefixListOwnerId?: String;
+    /**
+     * The state of the prefix list reference.
+     */
+    State?: TransitGatewayPrefixListReferenceState;
+    /**
+     * Indicates whether traffic that matches this route is dropped.
+     */
+    Blackhole?: Boolean;
+    /**
+     * Information about the transit gateway attachment.
+     */
+    TransitGatewayAttachment?: TransitGatewayPrefixListAttachment;
+  }
+  export type TransitGatewayPrefixListReferenceSet = TransitGatewayPrefixListReference[];
+  export type TransitGatewayPrefixListReferenceState = "pending"|"available"|"modifying"|"deleting"|string;
   export interface TransitGatewayPropagation {
     /**
      * The ID of the attachment.
@@ -24294,6 +24535,10 @@ declare namespace EC2 {
      * The CIDR block used for destination matches.
      */
     DestinationCidrBlock?: String;
+    /**
+     * The ID of the prefix list used for destination matches.
+     */
+    PrefixListId?: PrefixListResourceId;
     /**
      * The attachments.
      */
@@ -24835,7 +25080,7 @@ declare namespace EC2 {
      */
     VolumeId?: String;
     /**
-     * The number of I/O operations per second (IOPS) that the volume supports. For Provisioned IOPS SSD volumes, this represents the number of IOPS that are provisioned for the volume. For General Purpose SSD volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Constraints: Range is 100-16,000 IOPS for gp2 volumes and 100 to 64,000IOPS for io1 volumes, in most Regions. The maximum IOPS for io1 of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. Condition: This parameter is required for requests to create io1 volumes; it is not used in requests to create gp2, st1, sc1, or standard volumes.
+     * The number of I/O operations per second (IOPS) that the volume supports. For Provisioned IOPS SSD volumes, this represents the number of IOPS that are provisioned for the volume. For General Purpose SSD volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information, see Amazon EBS volume types in the Amazon Elastic Compute Cloud User Guide. Constraints: Range is 100-16,000 IOPS for gp2 volumes and 100 to 64,000 IOPS for io1 and io2 volumes, in most Regions. The maximum IOPS for io1 and io2 of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. Condition: This parameter is required for requests to create io1 and io2 volumes; it is not used in requests to create gp2, st1, sc1, or standard volumes.
      */
     Iops?: Integer;
     /**
@@ -24843,7 +25088,7 @@ declare namespace EC2 {
      */
     Tags?: TagList;
     /**
-     * The volume type. This can be gp2 for General Purpose SSD, io1 for Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard for Magnetic volumes.
+     * The volume type. This can be gp2 for General Purpose SSD, io1 or io2 for Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard for Magnetic volumes.
      */
     VolumeType?: VolumeType;
     /**
@@ -25057,7 +25302,7 @@ declare namespace EC2 {
   }
   export type VolumeStatusList = VolumeStatusItem[];
   export type VolumeStatusName = "io-enabled"|"io-performance"|string;
-  export type VolumeType = "standard"|"io1"|"gp2"|"sc1"|"st1"|string;
+  export type VolumeType = "standard"|"io1"|"io2"|"gp2"|"sc1"|"st1"|string;
   export interface Vpc {
     /**
      * The primary IPv4 CIDR block for the VPC.

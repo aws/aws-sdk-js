@@ -13,11 +13,11 @@ declare class DMS extends Service {
   constructor(options?: DMS.Types.ClientConfiguration)
   config: Config & DMS.Types.ClientConfiguration;
   /**
-   * Adds metadata tags to an AWS DMS resource, including replication instance, endpoint, security group, and migration task. These tags can also be used with cost allocation reporting to track cost associated with DMS resources, or used in a Condition statement in an IAM policy for DMS.
+   * Adds metadata tags to an AWS DMS resource, including replication instance, endpoint, security group, and migration task. These tags can also be used with cost allocation reporting to track cost associated with DMS resources, or used in a Condition statement in an IAM policy for DMS. For more information, see  Tag  data type description.
    */
   addTagsToResource(params: DMS.Types.AddTagsToResourceMessage, callback?: (err: AWSError, data: DMS.Types.AddTagsToResourceResponse) => void): Request<DMS.Types.AddTagsToResourceResponse, AWSError>;
   /**
-   * Adds metadata tags to an AWS DMS resource, including replication instance, endpoint, security group, and migration task. These tags can also be used with cost allocation reporting to track cost associated with DMS resources, or used in a Condition statement in an IAM policy for DMS.
+   * Adds metadata tags to an AWS DMS resource, including replication instance, endpoint, security group, and migration task. These tags can also be used with cost allocation reporting to track cost associated with DMS resources, or used in a Condition statement in an IAM policy for DMS. For more information, see  Tag  data type description.
    */
   addTagsToResource(callback?: (err: AWSError, data: DMS.Types.AddTagsToResourceResponse) => void): Request<DMS.Types.AddTagsToResourceResponse, AWSError>;
   /**
@@ -317,11 +317,11 @@ declare class DMS extends Service {
    */
   importCertificate(callback?: (err: AWSError, data: DMS.Types.ImportCertificateResponse) => void): Request<DMS.Types.ImportCertificateResponse, AWSError>;
   /**
-   * Lists all tags for an AWS DMS resource.
+   * Lists all metadata tags attached to an AWS DMS resource, including replication instance, endpoint, security group, and migration task. For more information, see  Tag  data type description.
    */
   listTagsForResource(params: DMS.Types.ListTagsForResourceMessage, callback?: (err: AWSError, data: DMS.Types.ListTagsForResourceResponse) => void): Request<DMS.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists all tags for an AWS DMS resource.
+   * Lists all metadata tags attached to an AWS DMS resource, including replication instance, endpoint, security group, and migration task. For more information, see  Tag  data type description.
    */
   listTagsForResource(callback?: (err: AWSError, data: DMS.Types.ListTagsForResourceResponse) => void): Request<DMS.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -389,11 +389,11 @@ declare class DMS extends Service {
    */
   reloadTables(callback?: (err: AWSError, data: DMS.Types.ReloadTablesResponse) => void): Request<DMS.Types.ReloadTablesResponse, AWSError>;
   /**
-   * Removes metadata tags from a DMS resource.
+   * Removes metadata tags from an AWS DMS resource, including replication instance, endpoint, security group, and migration task. For more information, see  Tag  data type description.
    */
   removeTagsFromResource(params: DMS.Types.RemoveTagsFromResourceMessage, callback?: (err: AWSError, data: DMS.Types.RemoveTagsFromResourceResponse) => void): Request<DMS.Types.RemoveTagsFromResourceResponse, AWSError>;
   /**
-   * Removes metadata tags from a DMS resource.
+   * Removes metadata tags from an AWS DMS resource, including replication instance, endpoint, security group, and migration task. For more information, see  Tag  data type description.
    */
   removeTagsFromResource(callback?: (err: AWSError, data: DMS.Types.RemoveTagsFromResourceResponse) => void): Request<DMS.Types.RemoveTagsFromResourceResponse, AWSError>;
   /**
@@ -646,7 +646,7 @@ declare namespace DMS {
   export type ConnectionList = Connection[];
   export interface CreateEndpointMessage {
     /**
-     * The database endpoint identifier. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.
+     * The database endpoint identifier. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen, or contain two consecutive hyphens.
      */
     EndpointIdentifier: String;
     /**
@@ -654,7 +654,7 @@ declare namespace DMS {
      */
     EndpointType: ReplicationEndpointTypeValue;
     /**
-     * The type of engine for the endpoint. Valid values, depending on the EndpointType value, include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql", "redshift", "s3", "db2", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis", "kafka", "elasticsearch", "documentdb", "sqlserver", and "neptune".
+     * The type of engine for the endpoint. Valid values, depending on the EndpointType value, include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql", "redshift", "s3", "db2", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis", "kafka", "elasticsearch", "docdb", "sqlserver", and "neptune".
      */
     EngineName: String;
     /**
@@ -839,7 +839,7 @@ declare namespace DMS {
      */
     MultiAZ?: BooleanOptional;
     /**
-     * The engine version number of the replication instance.
+     * The engine version number of the replication instance. If an engine version number is not specified when a replication instance is created, the default is the latest engine version available.
      */
     EngineVersion?: String;
     /**
@@ -931,7 +931,7 @@ declare namespace DMS {
      */
     CdcStartPosition?: String;
     /**
-     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “
+     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time: 2018-02-09T12:12:12 “
      */
     CdcStopPosition?: String;
     /**
@@ -1901,25 +1901,33 @@ declare namespace DMS {
      */
     MessageFormat?: MessageFormatValue;
     /**
-     * Provides detailed transaction information from the source database. This information includes a commit timestamp, a log position, and values for transaction_id, previous transaction_id, and transaction_record_id (the record offset within a transaction). The default is False.
+     * Provides detailed transaction information from the source database. This information includes a commit timestamp, a log position, and values for transaction_id, previous transaction_id, and transaction_record_id (the record offset within a transaction). The default is false.
      */
     IncludeTransactionDetails?: BooleanOptional;
     /**
-     * Shows the partition value within the Kafka message output, unless the partition type is schema-table-type. The default is False.
+     * Shows the partition value within the Kafka message output, unless the partition type is schema-table-type. The default is false.
      */
     IncludePartitionValue?: BooleanOptional;
     /**
-     * Prefixes schema and table names to partition values, when the partition type is primary-key-type. Doing this increases data distribution among Kafka partitions. For example, suppose that a SysBench schema has thousands of tables and each table has only limited range for a primary key. In this case, the same primary key is sent from thousands of tables to the same partition, which causes throttling. The default is False.
+     * Prefixes schema and table names to partition values, when the partition type is primary-key-type. Doing this increases data distribution among Kafka partitions. For example, suppose that a SysBench schema has thousands of tables and each table has only limited range for a primary key. In this case, the same primary key is sent from thousands of tables to the same partition, which causes throttling. The default is false.
      */
     PartitionIncludeSchemaTable?: BooleanOptional;
     /**
-     * Includes any data definition language (DDL) operations that change the table in the control data, such as rename-table, drop-table, add-column, drop-column, and rename-column. The default is False.
+     * Includes any data definition language (DDL) operations that change the table in the control data, such as rename-table, drop-table, add-column, drop-column, and rename-column. The default is false.
      */
     IncludeTableAlterOperations?: BooleanOptional;
     /**
-     * Shows detailed control information for table definition, column definition, and table and column changes in the Kafka message output. The default is False.
+     * Shows detailed control information for table definition, column definition, and table and column changes in the Kafka message output. The default is false.
      */
     IncludeControlDetails?: BooleanOptional;
+    /**
+     * The maximum size in bytes for records created on the endpoint The default is 1,000,000.
+     */
+    MessageMaxBytes?: IntegerOptional;
+    /**
+     * Include NULL and empty columns for records migrated to the endpoint. The default is false.
+     */
+    IncludeNullAndEmpty?: BooleanOptional;
   }
   export type KeyList = String[];
   export interface KinesisSettings {
@@ -1936,25 +1944,29 @@ declare namespace DMS {
      */
     ServiceAccessRoleArn?: String;
     /**
-     * Provides detailed transaction information from the source database. This information includes a commit timestamp, a log position, and values for transaction_id, previous transaction_id, and transaction_record_id (the record offset within a transaction). The default is False.
+     * Provides detailed transaction information from the source database. This information includes a commit timestamp, a log position, and values for transaction_id, previous transaction_id, and transaction_record_id (the record offset within a transaction). The default is false.
      */
     IncludeTransactionDetails?: BooleanOptional;
     /**
-     * Shows the partition value within the Kinesis message output, unless the partition type is schema-table-type. The default is False.
+     * Shows the partition value within the Kinesis message output, unless the partition type is schema-table-type. The default is false.
      */
     IncludePartitionValue?: BooleanOptional;
     /**
-     * Prefixes schema and table names to partition values, when the partition type is primary-key-type. Doing this increases data distribution among Kinesis shards. For example, suppose that a SysBench schema has thousands of tables and each table has only limited range for a primary key. In this case, the same primary key is sent from thousands of tables to the same shard, which causes throttling. The default is False.
+     * Prefixes schema and table names to partition values, when the partition type is primary-key-type. Doing this increases data distribution among Kinesis shards. For example, suppose that a SysBench schema has thousands of tables and each table has only limited range for a primary key. In this case, the same primary key is sent from thousands of tables to the same shard, which causes throttling. The default is false.
      */
     PartitionIncludeSchemaTable?: BooleanOptional;
     /**
-     * Includes any data definition language (DDL) operations that change the table in the control data, such as rename-table, drop-table, add-column, drop-column, and rename-column. The default is False.
+     * Includes any data definition language (DDL) operations that change the table in the control data, such as rename-table, drop-table, add-column, drop-column, and rename-column. The default is false.
      */
     IncludeTableAlterOperations?: BooleanOptional;
     /**
-     * Shows detailed control information for table definition, column definition, and table and column changes in the Kinesis message output. The default is False.
+     * Shows detailed control information for table definition, column definition, and table and column changes in the Kinesis message output. The default is false.
      */
     IncludeControlDetails?: BooleanOptional;
+    /**
+     * Include NULL and empty columns for records migrated to the endpoint. The default is false.
+     */
+    IncludeNullAndEmpty?: BooleanOptional;
   }
   export interface ListTagsForResourceMessage {
     /**
@@ -2172,7 +2184,7 @@ declare namespace DMS {
      */
     MultiAZ?: BooleanOptional;
     /**
-     * The engine version number of the replication instance.
+     * The engine version number of the replication instance. When modifying a major engine version of an instance, also set AllowMajorVersionUpgrade to true.
      */
     EngineVersion?: String;
     /**
@@ -2244,7 +2256,7 @@ declare namespace DMS {
      */
     CdcStartPosition?: String;
     /**
-     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “
+     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time: 2018-02-09T12:12:12 “
      */
     CdcStopPosition?: String;
     /**
@@ -2543,7 +2555,7 @@ declare namespace DMS {
      */
     EmptyAsNull?: BooleanOptional;
     /**
-     * The type of server-side encryption that you want to use for your data. This encryption type is part of the endpoint settings or the extra connections attributes for Amazon S3. You can choose either SSE_S3 (the default) or SSE_KMS. To use SSE_S3, create an AWS Identity and Access Management (IAM) role with a policy that allows "arn:aws:s3:::*" to use the following actions: "s3:PutObject", "s3:ListBucket" 
+     * The type of server-side encryption that you want to use for your data. This encryption type is part of the endpoint settings or the extra connections attributes for Amazon S3. You can choose either SSE_S3 (the default) or SSE_KMS.   For the ModifyEndpoint operation, you can change the existing value of the EncryptionMode parameter from SSE_KMS to SSE_S3. But you can’t change the existing value from SSE_S3 to SSE_KMS.  To use SSE_S3, create an AWS Identity and Access Management (IAM) role with a policy that allows "arn:aws:s3:::*" to use the following actions: "s3:PutObject", "s3:ListBucket" 
      */
     EncryptionMode?: EncryptionModeValue;
     /**
@@ -2687,11 +2699,11 @@ declare namespace DMS {
   export type ReplicationEndpointTypeValue = "source"|"target"|string;
   export interface ReplicationInstance {
     /**
-     * The replication instance identifier. This parameter is stored as a lowercase string. Constraints:   Must contain 1-63 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.   Example: myrepinstance 
+     * The replication instance identifier is a required parameter. This parameter is stored as a lowercase string. Constraints:   Must contain 1-63 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.   Example: myrepinstance 
      */
     ReplicationInstanceIdentifier?: String;
     /**
-     * The compute and memory capacity of the replication instance as defined for the specified replication instance class. For more information on the settings and capacities for the available replication instance classes, see  Selecting the right AWS DMS replication instance for your migration. 
+     * The compute and memory capacity of the replication instance as defined for the specified replication instance class. It is a required parameter, although a defualt value is pre-selected in the DMS console. For more information on the settings and capacities for the available replication instance classes, see  Selecting the right AWS DMS replication instance for your migration. 
      */
     ReplicationInstanceClass?: String;
     /**
@@ -2719,7 +2731,7 @@ declare namespace DMS {
      */
     ReplicationSubnetGroup?: ReplicationSubnetGroup;
     /**
-     * The maintenance window times for the replication instance.
+     * The maintenance window times for the replication instance. Any pending upgrades to the replication instance are performed during this time.
      */
     PreferredMaintenanceWindow?: String;
     /**
@@ -2731,7 +2743,7 @@ declare namespace DMS {
      */
     MultiAZ?: Boolean;
     /**
-     * The engine version number of the replication instance.
+     * The engine version number of the replication instance. If an engine version number is not specified when a replication instance is created, the default is the latest engine version available. When modifying a major engine version of an instance, also set AllowMajorVersionUpgrade to true.
      */
     EngineVersion?: String;
     /**
@@ -2872,7 +2884,7 @@ declare namespace DMS {
      */
     Status?: String;
     /**
-     * The last error (failure) message generated for the replication instance.
+     * The last error (failure) message generated for the replication task.
      */
     LastFailureMessage?: String;
     /**
@@ -2892,7 +2904,7 @@ declare namespace DMS {
      */
     CdcStartPosition?: String;
     /**
-     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “
+     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time: 2018-02-09T12:12:12 “
      */
     CdcStopPosition?: String;
     /**
@@ -3086,19 +3098,19 @@ declare namespace DMS {
   }
   export interface S3Settings {
     /**
-     *  The Amazon Resource Name (ARN) used by the service access IAM role. 
+     *  The Amazon Resource Name (ARN) used by the service access IAM role. It is a required parameter that enables DMS to write and read objects from an 3S bucket.
      */
     ServiceAccessRoleArn?: String;
     /**
-     *  The external table definition. 
+     *  Specifies how tables are defined in the S3 source files only. 
      */
     ExternalTableDefinition?: String;
     /**
-     *  The delimiter used to separate rows in the source files. The default is a carriage return (\n). 
+     *  The delimiter used to separate rows in the .csv file for both source and target. The default is a carriage return (\n). 
      */
     CsvRowDelimiter?: String;
     /**
-     *  The delimiter used to separate columns in the source files. The default is a comma. 
+     *  The delimiter used to separate columns in the .csv file for both source and target. The default is a comma. 
      */
     CsvDelimiter?: String;
     /**
@@ -3114,7 +3126,7 @@ declare namespace DMS {
      */
     CompressionType?: CompressionTypeValue;
     /**
-     * The type of server-side encryption that you want to use for your data. This encryption type is part of the endpoint settings or the extra connections attributes for Amazon S3. You can choose either SSE_S3 (the default) or SSE_KMS. To use SSE_S3, you need an AWS Identity and Access Management (IAM) role with permission to allow "arn:aws:s3:::dms-*" to use the following actions:    s3:CreateBucket     s3:ListBucket     s3:DeleteBucket     s3:GetBucketLocation     s3:GetObject     s3:PutObject     s3:DeleteObject     s3:GetObjectVersion     s3:GetBucketPolicy     s3:PutBucketPolicy     s3:DeleteBucketPolicy   
+     * The type of server-side encryption that you want to use for your data. This encryption type is part of the endpoint settings or the extra connections attributes for Amazon S3. You can choose either SSE_S3 (the default) or SSE_KMS.   For the ModifyEndpoint operation, you can change the existing value of the EncryptionMode parameter from SSE_KMS to SSE_S3. But you can’t change the existing value from SSE_S3 to SSE_KMS.  To use SSE_S3, you need an AWS Identity and Access Management (IAM) role with permission to allow "arn:aws:s3:::dms-*" to use the following actions:    s3:CreateBucket     s3:ListBucket     s3:DeleteBucket     s3:GetBucketLocation     s3:GetObject     s3:PutObject     s3:DeleteObject     s3:GetObjectVersion     s3:GetBucketPolicy     s3:PutBucketPolicy     s3:DeleteBucketPolicy   
      */
     EncryptionMode?: EncryptionModeValue;
     /**
@@ -3166,7 +3178,7 @@ declare namespace DMS {
      */
     ParquetTimestampInMillisecond?: BooleanOptional;
     /**
-     * A value that enables a change data capture (CDC) load to write INSERT and UPDATE operations to .csv or .parquet (columnar storage) output files. The default setting is false, but when CdcInsertsAndUpdates is set to trueor y, INSERTs and UPDATEs from the source database are migrated to the .csv or .parquet file.  For .csv file format only, how these INSERTs and UPDATEs are recorded depends on the value of the IncludeOpForFullLoad parameter. If IncludeOpForFullLoad is set to true, the first field of every CDC record is set to either I or U to indicate INSERT and UPDATE operations at the source. But if IncludeOpForFullLoad is set to false, CDC records are written without an indication of INSERT or UPDATE operations at the source. For more information about how these settings work together, see Indicating Source DB Operations in Migrated S3 Data in the AWS Database Migration Service User Guide..  AWS DMS supports the use of the CdcInsertsAndUpdates parameter in versions 3.3.1 and later.  CdcInsertsOnly and CdcInsertsAndUpdates can't both be set to true for the same endpoint. Set either CdcInsertsOnly or CdcInsertsAndUpdates to true for the same endpoint, but not both. 
+     * A value that enables a change data capture (CDC) load to write INSERT and UPDATE operations to .csv or .parquet (columnar storage) output files. The default setting is false, but when CdcInsertsAndUpdates is set to true or y, only INSERTs and UPDATEs from the source database are migrated to the .csv or .parquet file.  For .csv file format only, how these INSERTs and UPDATEs are recorded depends on the value of the IncludeOpForFullLoad parameter. If IncludeOpForFullLoad is set to true, the first field of every CDC record is set to either I or U to indicate INSERT and UPDATE operations at the source. But if IncludeOpForFullLoad is set to false, CDC records are written without an indication of INSERT or UPDATE operations at the source. For more information about how these settings work together, see Indicating Source DB Operations in Migrated S3 Data in the AWS Database Migration Service User Guide..  AWS DMS supports the use of the CdcInsertsAndUpdates parameter in versions 3.3.1 and later.  CdcInsertsOnly and CdcInsertsAndUpdates can't both be set to true for the same endpoint. Set either CdcInsertsOnly or CdcInsertsAndUpdates to true for the same endpoint, but not both. 
      */
     CdcInsertsAndUpdates?: BooleanOptional;
   }
@@ -3248,7 +3260,7 @@ declare namespace DMS {
      */
     CdcStartPosition?: String;
     /**
-     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “
+     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time: 2018-02-09T12:12:12 “
      */
     CdcStopPosition?: String;
   }
@@ -3405,7 +3417,7 @@ declare namespace DMS {
      */
     ValidationSuspendedRecords?: Long;
     /**
-     * The validation state of the table. This parameter can have the following values:   Not enabled - Validation isn't enabled for the table in the migration task.   Pending records - Some records in the table are waiting for validation.   Mismatched records - Some records in the table don't match between the source and target.   Suspended records - Some records in the table couldn't be validated.   No primary key - The table couldn't be validated because it has no primary key.   Table error - The table wasn't validated because it's in an error state and some data wasn't migrated.   Validated - All rows in the table are validated. If the table is updated, the status can change from Validated.   Error - The table couldn't be validated because of an unexpected error.  
+     * The validation state of the table. This parameter can have the following values:   Not enabled – Validation isn't enabled for the table in the migration task.   Pending records – Some records in the table are waiting for validation.   Mismatched records – Some records in the table don't match between the source and target.   Suspended records – Some records in the table couldn't be validated.   No primary key –The table couldn't be validated because it has no primary key.   Table error – The table wasn't validated because it's in an error state and some data wasn't migrated.   Validated – All rows in the table are validated. If the table is updated, the status can change from Validated.   Error – The table couldn't be validated because of an unexpected error.   Pending validation – The table is waiting validation.   Preparing table – Preparing the table enabled in the migration task for validation.   Pending revalidation – All rows in the table are pending validation after the table was updated.  
      */
     ValidationState?: String;
     /**

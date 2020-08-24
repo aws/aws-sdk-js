@@ -13,11 +13,11 @@ declare class IoTSiteWise extends Service {
   constructor(options?: IoTSiteWise.Types.ClientConfiguration)
   config: Config & IoTSiteWise.Types.ClientConfiguration;
   /**
-   * Associates a child asset with the given parent asset through a hierarchy defined in the parent asset's model. For more information, see Associating Assets in the AWS IoT SiteWise User Guide.
+   * Associates a child asset with the given parent asset through a hierarchy defined in the parent asset's model. For more information, see Associating assets in the AWS IoT SiteWise User Guide.
    */
   associateAssets(params: IoTSiteWise.Types.AssociateAssetsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Associates a child asset with the given parent asset through a hierarchy defined in the parent asset's model. For more information, see Associating Assets in the AWS IoT SiteWise User Guide.
+   * Associates a child asset with the given parent asset through a hierarchy defined in the parent asset's model. For more information, see Associating assets in the AWS IoT SiteWise User Guide.
    */
   associateAssets(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -37,11 +37,11 @@ declare class IoTSiteWise extends Service {
    */
   batchDisassociateProjectAssets(callback?: (err: AWSError, data: IoTSiteWise.Types.BatchDisassociateProjectAssetsResponse) => void): Request<IoTSiteWise.Types.BatchDisassociateProjectAssetsResponse, AWSError>;
   /**
-   * Sends a list of asset property values to AWS IoT SiteWise. Each value is a timestamp-quality-value (TQV) data point. For more information, see Ingesting Data Using the API in the AWS IoT SiteWise User Guide. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.    With respect to Unix epoch time, AWS IoT SiteWise accepts only TQVs that have a timestamp of no more than 15 minutes in the past and no more than 5 minutes in the future. AWS IoT SiteWise rejects timestamps outside of the inclusive range of [-15, +5] minutes and returns a TimestampOutOfRangeException error. For each asset property, AWS IoT SiteWise overwrites TQVs with duplicate timestamps unless the newer TQV has a different quality. For example, if you store a TQV {T1, GOOD, V1}, then storing {T1, GOOD, V2} replaces the existing TQV. 
+   * Sends a list of asset property values to AWS IoT SiteWise. Each value is a timestamp-quality-value (TQV) data point. For more information, see Ingesting data using the API in the AWS IoT SiteWise User Guide. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.    With respect to Unix epoch time, AWS IoT SiteWise accepts only TQVs that have a timestamp of no more than 15 minutes in the past and no more than 5 minutes in the future. AWS IoT SiteWise rejects timestamps outside of the inclusive range of [-15, +5] minutes and returns a TimestampOutOfRangeException error. For each asset property, AWS IoT SiteWise overwrites TQVs with duplicate timestamps unless the newer TQV has a different quality. For example, if you store a TQV {T1, GOOD, V1}, then storing {T1, GOOD, V2} replaces the existing TQV.  AWS IoT SiteWise authorizes access to each BatchPutAssetPropertyValue entry individually. For more information, see BatchPutAssetPropertyValue authorization in the AWS IoT SiteWise User Guide.
    */
   batchPutAssetPropertyValue(params: IoTSiteWise.Types.BatchPutAssetPropertyValueRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.BatchPutAssetPropertyValueResponse) => void): Request<IoTSiteWise.Types.BatchPutAssetPropertyValueResponse, AWSError>;
   /**
-   * Sends a list of asset property values to AWS IoT SiteWise. Each value is a timestamp-quality-value (TQV) data point. For more information, see Ingesting Data Using the API in the AWS IoT SiteWise User Guide. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.    With respect to Unix epoch time, AWS IoT SiteWise accepts only TQVs that have a timestamp of no more than 15 minutes in the past and no more than 5 minutes in the future. AWS IoT SiteWise rejects timestamps outside of the inclusive range of [-15, +5] minutes and returns a TimestampOutOfRangeException error. For each asset property, AWS IoT SiteWise overwrites TQVs with duplicate timestamps unless the newer TQV has a different quality. For example, if you store a TQV {T1, GOOD, V1}, then storing {T1, GOOD, V2} replaces the existing TQV. 
+   * Sends a list of asset property values to AWS IoT SiteWise. Each value is a timestamp-quality-value (TQV) data point. For more information, see Ingesting data using the API in the AWS IoT SiteWise User Guide. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.    With respect to Unix epoch time, AWS IoT SiteWise accepts only TQVs that have a timestamp of no more than 15 minutes in the past and no more than 5 minutes in the future. AWS IoT SiteWise rejects timestamps outside of the inclusive range of [-15, +5] minutes and returns a TimestampOutOfRangeException error. For each asset property, AWS IoT SiteWise overwrites TQVs with duplicate timestamps unless the newer TQV has a different quality. For example, if you store a TQV {T1, GOOD, V1}, then storing {T1, GOOD, V2} replaces the existing TQV.  AWS IoT SiteWise authorizes access to each BatchPutAssetPropertyValue entry individually. For more information, see BatchPutAssetPropertyValue authorization in the AWS IoT SiteWise User Guide.
    */
   batchPutAssetPropertyValue(callback?: (err: AWSError, data: IoTSiteWise.Types.BatchPutAssetPropertyValueResponse) => void): Request<IoTSiteWise.Types.BatchPutAssetPropertyValueResponse, AWSError>;
   /**
@@ -53,19 +53,19 @@ declare class IoTSiteWise extends Service {
    */
   createAccessPolicy(callback?: (err: AWSError, data: IoTSiteWise.Types.CreateAccessPolicyResponse) => void): Request<IoTSiteWise.Types.CreateAccessPolicyResponse, AWSError>;
   /**
-   * Creates an asset from an existing asset model. For more information, see Creating Assets in the AWS IoT SiteWise User Guide.
+   * Creates an asset from an existing asset model. For more information, see Creating assets in the AWS IoT SiteWise User Guide.
    */
   createAsset(params: IoTSiteWise.Types.CreateAssetRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.CreateAssetResponse) => void): Request<IoTSiteWise.Types.CreateAssetResponse, AWSError>;
   /**
-   * Creates an asset from an existing asset model. For more information, see Creating Assets in the AWS IoT SiteWise User Guide.
+   * Creates an asset from an existing asset model. For more information, see Creating assets in the AWS IoT SiteWise User Guide.
    */
   createAsset(callback?: (err: AWSError, data: IoTSiteWise.Types.CreateAssetResponse) => void): Request<IoTSiteWise.Types.CreateAssetResponse, AWSError>;
   /**
-   * Creates an asset model from specified property and hierarchy definitions. You create assets from asset models. With asset models, you can easily create assets of the same type that have standardized definitions. Each asset created from a model inherits the asset model's property and hierarchy definitions. For more information, see Defining Asset Models in the AWS IoT SiteWise User Guide.
+   * Creates an asset model from specified property and hierarchy definitions. You create assets from asset models. With asset models, you can easily create assets of the same type that have standardized definitions. Each asset created from a model inherits the asset model's property and hierarchy definitions. For more information, see Defining asset models in the AWS IoT SiteWise User Guide.
    */
   createAssetModel(params: IoTSiteWise.Types.CreateAssetModelRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.CreateAssetModelResponse) => void): Request<IoTSiteWise.Types.CreateAssetModelResponse, AWSError>;
   /**
-   * Creates an asset model from specified property and hierarchy definitions. You create assets from asset models. With asset models, you can easily create assets of the same type that have standardized definitions. Each asset created from a model inherits the asset model's property and hierarchy definitions. For more information, see Defining Asset Models in the AWS IoT SiteWise User Guide.
+   * Creates an asset model from specified property and hierarchy definitions. You create assets from asset models. With asset models, you can easily create assets of the same type that have standardized definitions. Each asset created from a model inherits the asset model's property and hierarchy definitions. For more information, see Defining asset models in the AWS IoT SiteWise User Guide.
    */
   createAssetModel(callback?: (err: AWSError, data: IoTSiteWise.Types.CreateAssetModelResponse) => void): Request<IoTSiteWise.Types.CreateAssetModelResponse, AWSError>;
   /**
@@ -85,11 +85,11 @@ declare class IoTSiteWise extends Service {
    */
   createGateway(callback?: (err: AWSError, data: IoTSiteWise.Types.CreateGatewayResponse) => void): Request<IoTSiteWise.Types.CreateGatewayResponse, AWSError>;
   /**
-   * Creates a portal, which can contain projects and dashboards. Before you can create a portal, you must configure AWS Single Sign-On in the current Region. AWS IoT SiteWise Monitor uses AWS SSO to manage user permissions. For more information, see Enabling AWS SSO in the AWS IoT SiteWise User Guide.  Before you can sign in to a new portal, you must add at least one AWS SSO user or group to that portal. For more information, see Adding or Removing Portal Administrators in the AWS IoT SiteWise User Guide. 
+   * Creates a portal, which can contain projects and dashboards. Before you can create a portal, you must enable AWS Single Sign-On. AWS IoT SiteWise Monitor uses AWS SSO to manage user permissions. For more information, see Enabling AWS SSO in the AWS IoT SiteWise User Guide.  Before you can sign in to a new portal, you must add at least one AWS SSO user or group to that portal. For more information, see Adding or removing portal administrators in the AWS IoT SiteWise User Guide. 
    */
   createPortal(params: IoTSiteWise.Types.CreatePortalRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.CreatePortalResponse) => void): Request<IoTSiteWise.Types.CreatePortalResponse, AWSError>;
   /**
-   * Creates a portal, which can contain projects and dashboards. Before you can create a portal, you must configure AWS Single Sign-On in the current Region. AWS IoT SiteWise Monitor uses AWS SSO to manage user permissions. For more information, see Enabling AWS SSO in the AWS IoT SiteWise User Guide.  Before you can sign in to a new portal, you must add at least one AWS SSO user or group to that portal. For more information, see Adding or Removing Portal Administrators in the AWS IoT SiteWise User Guide. 
+   * Creates a portal, which can contain projects and dashboards. Before you can create a portal, you must enable AWS Single Sign-On. AWS IoT SiteWise Monitor uses AWS SSO to manage user permissions. For more information, see Enabling AWS SSO in the AWS IoT SiteWise User Guide.  Before you can sign in to a new portal, you must add at least one AWS SSO user or group to that portal. For more information, see Adding or removing portal administrators in the AWS IoT SiteWise User Guide. 
    */
   createPortal(callback?: (err: AWSError, data: IoTSiteWise.Types.CreatePortalResponse) => void): Request<IoTSiteWise.Types.CreatePortalResponse, AWSError>;
   /**
@@ -109,19 +109,19 @@ declare class IoTSiteWise extends Service {
    */
   deleteAccessPolicy(callback?: (err: AWSError, data: IoTSiteWise.Types.DeleteAccessPolicyResponse) => void): Request<IoTSiteWise.Types.DeleteAccessPolicyResponse, AWSError>;
   /**
-   * Deletes an asset. This action can't be undone. For more information, see Deleting Assets and Models in the AWS IoT SiteWise User Guide.   You can't delete an asset that's associated to another asset. For more information, see DisassociateAssets. 
+   * Deletes an asset. This action can't be undone. For more information, see Deleting assets and models in the AWS IoT SiteWise User Guide.   You can't delete an asset that's associated to another asset. For more information, see DisassociateAssets. 
    */
   deleteAsset(params: IoTSiteWise.Types.DeleteAssetRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.DeleteAssetResponse) => void): Request<IoTSiteWise.Types.DeleteAssetResponse, AWSError>;
   /**
-   * Deletes an asset. This action can't be undone. For more information, see Deleting Assets and Models in the AWS IoT SiteWise User Guide.   You can't delete an asset that's associated to another asset. For more information, see DisassociateAssets. 
+   * Deletes an asset. This action can't be undone. For more information, see Deleting assets and models in the AWS IoT SiteWise User Guide.   You can't delete an asset that's associated to another asset. For more information, see DisassociateAssets. 
    */
   deleteAsset(callback?: (err: AWSError, data: IoTSiteWise.Types.DeleteAssetResponse) => void): Request<IoTSiteWise.Types.DeleteAssetResponse, AWSError>;
   /**
-   * Deletes an asset model. This action can't be undone. You must delete all assets created from an asset model before you can delete the model. Also, you can't delete an asset model if a parent asset model exists that contains a property formula expression that depends on the asset model that you want to delete. For more information, see Deleting Assets and Models in the AWS IoT SiteWise User Guide.
+   * Deletes an asset model. This action can't be undone. You must delete all assets created from an asset model before you can delete the model. Also, you can't delete an asset model if a parent asset model exists that contains a property formula expression that depends on the asset model that you want to delete. For more information, see Deleting assets and models in the AWS IoT SiteWise User Guide.
    */
   deleteAssetModel(params: IoTSiteWise.Types.DeleteAssetModelRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.DeleteAssetModelResponse) => void): Request<IoTSiteWise.Types.DeleteAssetModelResponse, AWSError>;
   /**
-   * Deletes an asset model. This action can't be undone. You must delete all assets created from an asset model before you can delete the model. Also, you can't delete an asset model if a parent asset model exists that contains a property formula expression that depends on the asset model that you want to delete. For more information, see Deleting Assets and Models in the AWS IoT SiteWise User Guide.
+   * Deletes an asset model. This action can't be undone. You must delete all assets created from an asset model before you can delete the model. Also, you can't delete an asset model if a parent asset model exists that contains a property formula expression that depends on the asset model that you want to delete. For more information, see Deleting assets and models in the AWS IoT SiteWise User Guide.
    */
   deleteAssetModel(callback?: (err: AWSError, data: IoTSiteWise.Types.DeleteAssetModelResponse) => void): Request<IoTSiteWise.Types.DeleteAssetModelResponse, AWSError>;
   /**
@@ -181,11 +181,11 @@ declare class IoTSiteWise extends Service {
    */
   describeAssetModel(callback?: (err: AWSError, data: IoTSiteWise.Types.DescribeAssetModelResponse) => void): Request<IoTSiteWise.Types.DescribeAssetModelResponse, AWSError>;
   /**
-   * Retrieves information about an asset's property.
+   * Retrieves information about an asset property.  When you call this operation for an attribute property, this response includes the default attribute value that you define in the asset model. If you update the default value in the model, this operation's response includes the new default value.  This operation doesn't return the value of the asset property. To get the value of an asset property, use GetAssetPropertyValue.
    */
   describeAssetProperty(params: IoTSiteWise.Types.DescribeAssetPropertyRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.DescribeAssetPropertyResponse) => void): Request<IoTSiteWise.Types.DescribeAssetPropertyResponse, AWSError>;
   /**
-   * Retrieves information about an asset's property.
+   * Retrieves information about an asset property.  When you call this operation for an attribute property, this response includes the default attribute value that you define in the asset model. If you update the default value in the model, this operation's response includes the new default value.  This operation doesn't return the value of the asset property. To get the value of an asset property, use GetAssetPropertyValue.
    */
   describeAssetProperty(callback?: (err: AWSError, data: IoTSiteWise.Types.DescribeAssetPropertyResponse) => void): Request<IoTSiteWise.Types.DescribeAssetPropertyResponse, AWSError>;
   /**
@@ -245,27 +245,27 @@ declare class IoTSiteWise extends Service {
    */
   disassociateAssets(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Gets aggregated values for an asset property. For more information, see Querying Aggregated Property Values in the AWS IoT SiteWise User Guide. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.  
+   * Gets aggregated values for an asset property. For more information, see Querying aggregates in the AWS IoT SiteWise User Guide. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.  
    */
   getAssetPropertyAggregates(params: IoTSiteWise.Types.GetAssetPropertyAggregatesRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.GetAssetPropertyAggregatesResponse) => void): Request<IoTSiteWise.Types.GetAssetPropertyAggregatesResponse, AWSError>;
   /**
-   * Gets aggregated values for an asset property. For more information, see Querying Aggregated Property Values in the AWS IoT SiteWise User Guide. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.  
+   * Gets aggregated values for an asset property. For more information, see Querying aggregates in the AWS IoT SiteWise User Guide. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.  
    */
   getAssetPropertyAggregates(callback?: (err: AWSError, data: IoTSiteWise.Types.GetAssetPropertyAggregatesResponse) => void): Request<IoTSiteWise.Types.GetAssetPropertyAggregatesResponse, AWSError>;
   /**
-   * Gets an asset property's current value. For more information, see Querying Current Property Values in the AWS IoT SiteWise User Guide. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.  
+   * Gets an asset property's current value. For more information, see Querying current values in the AWS IoT SiteWise User Guide. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.  
    */
   getAssetPropertyValue(params: IoTSiteWise.Types.GetAssetPropertyValueRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.GetAssetPropertyValueResponse) => void): Request<IoTSiteWise.Types.GetAssetPropertyValueResponse, AWSError>;
   /**
-   * Gets an asset property's current value. For more information, see Querying Current Property Values in the AWS IoT SiteWise User Guide. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.  
+   * Gets an asset property's current value. For more information, see Querying current values in the AWS IoT SiteWise User Guide. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.  
    */
   getAssetPropertyValue(callback?: (err: AWSError, data: IoTSiteWise.Types.GetAssetPropertyValueResponse) => void): Request<IoTSiteWise.Types.GetAssetPropertyValueResponse, AWSError>;
   /**
-   * Gets the history of an asset property's values. For more information, see Querying Historical Property Values in the AWS IoT SiteWise User Guide. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.  
+   * Gets the history of an asset property's values. For more information, see Querying historical values in the AWS IoT SiteWise User Guide. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.  
    */
   getAssetPropertyValueHistory(params: IoTSiteWise.Types.GetAssetPropertyValueHistoryRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.GetAssetPropertyValueHistoryResponse) => void): Request<IoTSiteWise.Types.GetAssetPropertyValueHistoryResponse, AWSError>;
   /**
-   * Gets the history of an asset property's values. For more information, see Querying Historical Property Values in the AWS IoT SiteWise User Guide. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.  
+   * Gets the history of an asset property's values. For more information, see Querying historical values in the AWS IoT SiteWise User Guide. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.  
    */
   getAssetPropertyValueHistory(callback?: (err: AWSError, data: IoTSiteWise.Types.GetAssetPropertyValueHistoryResponse) => void): Request<IoTSiteWise.Types.GetAssetPropertyValueHistoryResponse, AWSError>;
   /**
@@ -293,11 +293,11 @@ declare class IoTSiteWise extends Service {
    */
   listAssets(callback?: (err: AWSError, data: IoTSiteWise.Types.ListAssetsResponse) => void): Request<IoTSiteWise.Types.ListAssetsResponse, AWSError>;
   /**
-   * Retrieves a paginated list of the assets associated to a parent asset (assetId) by a given hierarchy (hierarchyId).
+   * Retrieves a paginated list of associated assets. You can use this operation to do the following:   List child assets associated to a parent asset by a hierarchy that you specify.   List an asset's parent asset.  
    */
   listAssociatedAssets(params: IoTSiteWise.Types.ListAssociatedAssetsRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.ListAssociatedAssetsResponse) => void): Request<IoTSiteWise.Types.ListAssociatedAssetsResponse, AWSError>;
   /**
-   * Retrieves a paginated list of the assets associated to a parent asset (assetId) by a given hierarchy (hierarchyId).
+   * Retrieves a paginated list of associated assets. You can use this operation to do the following:   List child assets associated to a parent asset by a hierarchy that you specify.   List an asset's parent asset.  
    */
   listAssociatedAssets(callback?: (err: AWSError, data: IoTSiteWise.Types.ListAssociatedAssetsResponse) => void): Request<IoTSiteWise.Types.ListAssociatedAssetsResponse, AWSError>;
   /**
@@ -381,19 +381,19 @@ declare class IoTSiteWise extends Service {
    */
   updateAccessPolicy(callback?: (err: AWSError, data: IoTSiteWise.Types.UpdateAccessPolicyResponse) => void): Request<IoTSiteWise.Types.UpdateAccessPolicyResponse, AWSError>;
   /**
-   * Updates an asset's name. For more information, see Updating Assets and Models in the AWS IoT SiteWise User Guide.
+   * Updates an asset's name. For more information, see Updating assets and models in the AWS IoT SiteWise User Guide.
    */
   updateAsset(params: IoTSiteWise.Types.UpdateAssetRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.UpdateAssetResponse) => void): Request<IoTSiteWise.Types.UpdateAssetResponse, AWSError>;
   /**
-   * Updates an asset's name. For more information, see Updating Assets and Models in the AWS IoT SiteWise User Guide.
+   * Updates an asset's name. For more information, see Updating assets and models in the AWS IoT SiteWise User Guide.
    */
   updateAsset(callback?: (err: AWSError, data: IoTSiteWise.Types.UpdateAssetResponse) => void): Request<IoTSiteWise.Types.UpdateAssetResponse, AWSError>;
   /**
-   * Updates an asset model and all of the assets that were created from the model. Each asset created from the model inherits the updated asset model's property and hierarchy definitions. For more information, see Updating Assets and Models in the AWS IoT SiteWise User Guide.  This operation overwrites the existing model with the provided model. To avoid deleting your asset model's properties or hierarchies, you must include their IDs and definitions in the updated asset model payload. For more information, see DescribeAssetModel. If you remove a property from an asset model or update a property's formula expression, AWS IoT SiteWise deletes all previous data for that property. If you remove a hierarchy definition from an asset model, AWS IoT SiteWise disassociates every asset associated with that hierarchy. You can't change the type or data type of an existing property. 
+   * Updates an asset model and all of the assets that were created from the model. Each asset created from the model inherits the updated asset model's property and hierarchy definitions. For more information, see Updating assets and models in the AWS IoT SiteWise User Guide.  This operation overwrites the existing model with the provided model. To avoid deleting your asset model's properties or hierarchies, you must include their IDs and definitions in the updated asset model payload. For more information, see DescribeAssetModel. If you remove a property from an asset model or update a property's formula expression, AWS IoT SiteWise deletes all previous data for that property. If you remove a hierarchy definition from an asset model, AWS IoT SiteWise disassociates every asset associated with that hierarchy. You can't change the type or data type of an existing property. 
    */
   updateAssetModel(params: IoTSiteWise.Types.UpdateAssetModelRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.UpdateAssetModelResponse) => void): Request<IoTSiteWise.Types.UpdateAssetModelResponse, AWSError>;
   /**
-   * Updates an asset model and all of the assets that were created from the model. Each asset created from the model inherits the updated asset model's property and hierarchy definitions. For more information, see Updating Assets and Models in the AWS IoT SiteWise User Guide.  This operation overwrites the existing model with the provided model. To avoid deleting your asset model's properties or hierarchies, you must include their IDs and definitions in the updated asset model payload. For more information, see DescribeAssetModel. If you remove a property from an asset model or update a property's formula expression, AWS IoT SiteWise deletes all previous data for that property. If you remove a hierarchy definition from an asset model, AWS IoT SiteWise disassociates every asset associated with that hierarchy. You can't change the type or data type of an existing property. 
+   * Updates an asset model and all of the assets that were created from the model. Each asset created from the model inherits the updated asset model's property and hierarchy definitions. For more information, see Updating assets and models in the AWS IoT SiteWise User Guide.  This operation overwrites the existing model with the provided model. To avoid deleting your asset model's properties or hierarchies, you must include their IDs and definitions in the updated asset model payload. For more information, see DescribeAssetModel. If you remove a property from an asset model or update a property's formula expression, AWS IoT SiteWise deletes all previous data for that property. If you remove a hierarchy definition from an asset model, AWS IoT SiteWise disassociates every asset associated with that hierarchy. You can't change the type or data type of an existing property. 
    */
   updateAssetModel(callback?: (err: AWSError, data: IoTSiteWise.Types.UpdateAssetModelResponse) => void): Request<IoTSiteWise.Types.UpdateAssetModelResponse, AWSError>;
   /**
@@ -716,11 +716,11 @@ declare namespace IoTSiteWise {
      */
     name: Name;
     /**
-     * The property alias that identifies the property, such as an OPC-UA server data stream path (for example, /company/windfarm/3/turbine/7/temperature). For more information, see Mapping Industrial Data Streams to Asset Properties in the AWS IoT SiteWise User Guide.
+     * The property alias that identifies the property, such as an OPC-UA server data stream path (for example, /company/windfarm/3/turbine/7/temperature). For more information, see Mapping industrial data streams to asset properties in the AWS IoT SiteWise User Guide.
      */
     alias?: PropertyAlias;
     /**
-     * The asset property's notification topic and state. For more information, see UpdateAssetProperty 
+     * The asset property's notification topic and state. For more information, see UpdateAssetProperty.
      */
     notification?: PropertyNotification;
     /**
@@ -801,7 +801,7 @@ declare namespace IoTSiteWise {
      */
     assetId: ID;
     /**
-     * The ID of a hierarchy in the parent asset's model. Hierarchies allow different groupings of assets to be formed that all come from the same asset model. For more information, see Asset Hierarchies in the AWS IoT SiteWise User Guide.
+     * The ID of a hierarchy in the parent asset's model. Hierarchies allow different groupings of assets to be formed that all come from the same asset model. For more information, see Asset hierarchies in the AWS IoT SiteWise User Guide.
      */
     hierarchyId: ID;
     /**
@@ -850,7 +850,7 @@ declare namespace IoTSiteWise {
   }
   export interface Attribute {
     /**
-     * The default value of the asset model property attribute. All assets that you create from the asset model contain this attribute value. You can update an attribute's value after you create an asset. For more information, see Updating Attribute Values in the AWS IoT SiteWise User Guide.
+     * The default value of the asset model property attribute. All assets that you create from the asset model contain this attribute value. You can update an attribute's value after you create an asset. For more information, see Updating attribute values in the AWS IoT SiteWise User Guide.
      */
     defaultValue?: DefaultValue;
   }
@@ -981,11 +981,11 @@ declare namespace IoTSiteWise {
      */
     assetModelDescription?: Description;
     /**
-     * The property definitions of the asset model. For more information, see Asset Properties in the AWS IoT SiteWise User Guide. You can specify up to 200 properties per asset model. For more information, see Quotas in the AWS IoT SiteWise User Guide.
+     * The property definitions of the asset model. For more information, see Asset properties in the AWS IoT SiteWise User Guide. You can specify up to 200 properties per asset model. For more information, see Quotas in the AWS IoT SiteWise User Guide.
      */
     assetModelProperties?: AssetModelPropertyDefinitions;
     /**
-     * The hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. For more information, see Asset Hierarchies in the AWS IoT SiteWise User Guide. You can specify up to 10 hierarchies per asset model. For more information, see Quotas in the AWS IoT SiteWise User Guide.
+     * The hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. For more information, see Asset hierarchies in the AWS IoT SiteWise User Guide. You can specify up to 10 hierarchies per asset model. For more information, see Quotas in the AWS IoT SiteWise User Guide.
      */
     assetModelHierarchies?: AssetModelHierarchyDefinitions;
     /**
@@ -1057,7 +1057,7 @@ declare namespace IoTSiteWise {
      */
     dashboardDescription?: Description;
     /**
-     * The dashboard definition specified in a JSON literal. For detailed information, see Creating Dashboards (CLI) in the AWS IoT SiteWise User Guide.
+     * The dashboard definition specified in a JSON literal. For detailed information, see Creating dashboards (CLI) in the AWS IoT SiteWise User Guide.
      */
     dashboardDefinition: DashboardDefinition;
     /**
@@ -1482,7 +1482,7 @@ declare namespace IoTSiteWise {
      */
     dashboardDescription?: Description;
     /**
-     * The dashboard's definition JSON literal. For detailed information, see Creating Dashboards (CLI) in the AWS IoT SiteWise User Guide.
+     * The dashboard's definition JSON literal. For detailed information, see Creating dashboards (CLI) in the AWS IoT SiteWise User Guide.
      */
     dashboardDefinition: DashboardDefinition;
     /**
@@ -1665,7 +1665,7 @@ declare namespace IoTSiteWise {
      */
     assetId: ID;
     /**
-     * The ID of a hierarchy in the parent asset's model. Hierarchies allow different groupings of assets to be formed that all come from the same asset model. You can use the hierarchy ID to identify the correct asset to disassociate. For more information, see Asset Hierarchies in the AWS IoT SiteWise User Guide.
+     * The ID of a hierarchy in the parent asset's model. Hierarchies allow different groupings of assets to be formed that all come from the same asset model. You can use the hierarchy ID to identify the correct asset to disassociate. For more information, see Asset hierarchies in the AWS IoT SiteWise User Guide.
      */
     hierarchyId: ID;
     /**
@@ -1753,7 +1753,7 @@ declare namespace IoTSiteWise {
      */
     propertyId?: ID;
     /**
-     * The property alias that identifies the property, such as an OPC-UA server data stream path (for example, /company/windfarm/3/turbine/7/temperature). For more information, see Mapping Industrial Data Streams to Asset Properties in the AWS IoT SiteWise User Guide.
+     * The property alias that identifies the property, such as an OPC-UA server data stream path (for example, /company/windfarm/3/turbine/7/temperature). For more information, see Mapping industrial data streams to asset properties in the AWS IoT SiteWise User Guide.
      */
     propertyAlias?: AssetPropertyAlias;
     /**
@@ -1777,7 +1777,7 @@ declare namespace IoTSiteWise {
      */
     endDate: Timestamp;
     /**
-     * The chronological sorting order of the requested information.
+     * The chronological sorting order of the requested information. Default: ASCENDING 
      */
     timeOrdering?: TimeOrdering;
     /**
@@ -1785,7 +1785,7 @@ declare namespace IoTSiteWise {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of results to be returned per paginated request.
+     * The maximum number of results to be returned per paginated request. Default: 100
      */
     maxResults?: MaxResults;
   }
@@ -1809,7 +1809,7 @@ declare namespace IoTSiteWise {
      */
     propertyId?: ID;
     /**
-     * The property alias that identifies the property, such as an OPC-UA server data stream path (for example, /company/windfarm/3/turbine/7/temperature). For more information, see Mapping Industrial Data Streams to Asset Properties in the AWS IoT SiteWise User Guide.
+     * The property alias that identifies the property, such as an OPC-UA server data stream path (for example, /company/windfarm/3/turbine/7/temperature). For more information, see Mapping industrial data streams to asset properties in the AWS IoT SiteWise User Guide.
      */
     propertyAlias?: AssetPropertyAlias;
     /**
@@ -1825,7 +1825,7 @@ declare namespace IoTSiteWise {
      */
     qualities?: Qualities;
     /**
-     * The chronological sorting order of the requested information.
+     * The chronological sorting order of the requested information. Default: ASCENDING 
      */
     timeOrdering?: TimeOrdering;
     /**
@@ -1833,7 +1833,7 @@ declare namespace IoTSiteWise {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of results to be returned per paginated request.
+     * The maximum number of results to be returned per paginated request. Default: 100
      */
     maxResults?: MaxResults;
   }
@@ -1857,7 +1857,7 @@ declare namespace IoTSiteWise {
      */
     propertyId?: ID;
     /**
-     * The property alias that identifies the property, such as an OPC-UA server data stream path (for example, /company/windfarm/3/turbine/7/temperature). For more information, see Mapping Industrial Data Streams to Asset Properties in the AWS IoT SiteWise User Guide.
+     * The property alias that identifies the property, such as an OPC-UA server data stream path (for example, /company/windfarm/3/turbine/7/temperature). For more information, see Mapping industrial data streams to asset properties in the AWS IoT SiteWise User Guide.
      */
     propertyAlias?: AssetPropertyAlias;
   }
@@ -1945,7 +1945,7 @@ declare namespace IoTSiteWise {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of results to be returned per paginated request.
+     * The maximum number of results to be returned per paginated request. Default: 50
      */
     maxResults?: MaxResults;
   }
@@ -1965,7 +1965,7 @@ declare namespace IoTSiteWise {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of results to be returned per paginated request.
+     * The maximum number of results to be returned per paginated request. Default: 50
      */
     maxResults?: MaxResults;
   }
@@ -1986,7 +1986,7 @@ declare namespace IoTSiteWise {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of results to be returned per paginated request.
+     * The maximum number of results to be returned per paginated request. Default: 50
      */
     maxResults?: MaxResults;
     /**
@@ -1994,7 +1994,7 @@ declare namespace IoTSiteWise {
      */
     assetModelId?: ID;
     /**
-     * The filter for the requested list of assets. Choose one of the following options. Defaults to ALL.    ALL – The list includes all assets for a given asset model ID. The assetModelId parameter is required if you filter by ALL.    TOP_LEVEL – The list includes only top-level assets in the asset hierarchy tree.  
+     * The filter for the requested list of assets. Choose one of the following options:    ALL – The list includes all assets for a given asset model ID. The assetModelId parameter is required if you filter by ALL.    TOP_LEVEL – The list includes only top-level assets in the asset hierarchy tree.   Default: ALL 
      */
     filter?: ListAssetsFilter;
   }
@@ -2010,19 +2010,23 @@ declare namespace IoTSiteWise {
   }
   export interface ListAssociatedAssetsRequest {
     /**
-     * The ID of the parent asset.
+     * The ID of the asset to query.
      */
     assetId: ID;
     /**
-     * The hierarchy ID (of the parent asset model) whose associated assets are returned. To find a hierarchy ID, use the DescribeAsset or DescribeAssetModel actions. For more information, see Asset Hierarchies in the AWS IoT SiteWise User Guide.
+     * The ID of the hierarchy by which child assets are associated to the asset. To find a hierarchy ID, use the DescribeAsset or DescribeAssetModel operations. This parameter is required if you choose CHILD for traversalDirection. For more information, see Asset hierarchies in the AWS IoT SiteWise User Guide.
      */
-    hierarchyId: ID;
+    hierarchyId?: ID;
+    /**
+     * The direction to list associated assets. Choose one of the following options:    CHILD – The list includes all child assets associated to the asset. The hierarchyId parameter is required if you choose CHILD.    PARENT – The list includes the asset's parent asset.   Default: CHILD 
+     */
+    traversalDirection?: TraversalDirection;
     /**
      * The token to be used for the next set of paginated results.
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of results to be returned per paginated request.
+     * The maximum number of results to be returned per paginated request. Default: 50
      */
     maxResults?: MaxResults;
   }
@@ -2046,7 +2050,7 @@ declare namespace IoTSiteWise {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of results to be returned per paginated request.
+     * The maximum number of results to be returned per paginated request. Default: 50
      */
     maxResults?: MaxResults;
   }
@@ -2066,7 +2070,7 @@ declare namespace IoTSiteWise {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of results to be returned per paginated request.
+     * The maximum number of results to be returned per paginated request. Default: 50
      */
     maxResults?: MaxResults;
   }
@@ -2086,7 +2090,7 @@ declare namespace IoTSiteWise {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of results to be returned per paginated request.
+     * The maximum number of results to be returned per paginated request. Default: 50
      */
     maxResults?: MaxResults;
   }
@@ -2110,7 +2114,7 @@ declare namespace IoTSiteWise {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of results to be returned per paginated request.
+     * The maximum number of results to be returned per paginated request. Default: 50
      */
     maxResults?: MaxResults;
   }
@@ -2134,7 +2138,7 @@ declare namespace IoTSiteWise {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of results to be returned per paginated request.
+     * The maximum number of results to be returned per paginated request. Default: 50
      */
     maxResults?: MaxResults;
   }
@@ -2191,7 +2195,7 @@ declare namespace IoTSiteWise {
      */
     tumbling?: TumblingWindow;
   }
-  export type MonitorErrorCode = "INTERNAL_FAILURE"|string;
+  export type MonitorErrorCode = "INTERNAL_FAILURE"|"VALIDATION_ERROR"|"LIMIT_EXCEEDED"|string;
   export interface MonitorErrorDetails {
     /**
      * The error code.
@@ -2255,6 +2259,7 @@ declare namespace IoTSiteWise {
      * The ARN of the service role that allows the portal's users to access your AWS IoT SiteWise resources on your behalf. For more information, see Using service roles for AWS IoT SiteWise Monitor in the AWS IoT SiteWise User Guide.
      */
     roleArn?: ARN;
+    status: PortalStatus;
   }
   export interface ProjectResource {
     /**
@@ -2295,11 +2300,11 @@ declare namespace IoTSiteWise {
      */
     name: Name;
     /**
-     * The property alias that identifies the property, such as an OPC-UA server data stream path (for example, /company/windfarm/3/turbine/7/temperature). For more information, see Mapping Industrial Data Streams to Asset Properties in the AWS IoT SiteWise User Guide.
+     * The property alias that identifies the property, such as an OPC-UA server data stream path (for example, /company/windfarm/3/turbine/7/temperature). For more information, see Mapping industrial data streams to asset properties in the AWS IoT SiteWise User Guide.
      */
     alias?: PropertyAlias;
     /**
-     * The asset property's notification topic and state. For more information, see UpdateAssetProperty 
+     * The asset property's notification topic and state. For more information, see UpdateAssetProperty.
      */
     notification?: PropertyNotification;
     /**
@@ -2367,7 +2372,7 @@ declare namespace IoTSiteWise {
      */
     propertyId?: ID;
     /**
-     * The property alias that identifies the property, such as an OPC-UA server data stream path (for example, /company/windfarm/3/turbine/7/temperature). For more information, see Mapping Industrial Data Streams to Asset Properties in the AWS IoT SiteWise User Guide.
+     * The property alias that identifies the property, such as an OPC-UA server data stream path (for example, /company/windfarm/3/turbine/7/temperature). For more information, see Mapping industrial data streams to asset properties in the AWS IoT SiteWise User Guide.
      */
     propertyAlias?: AssetPropertyAlias;
     /**
@@ -2438,6 +2443,7 @@ declare namespace IoTSiteWise {
      */
     variables: ExpressionVariables;
   }
+  export type TraversalDirection = "PARENT"|"CHILD"|string;
   export interface TumblingWindow {
     /**
      * The time interval for the tumbling window. Note that w represents weeks, d represents days, h represents hours, and m represents minutes. AWS IoT SiteWise computes the 1w interval the end of Sunday at midnight each week (UTC), the 1d interval at the end of each day at midnight (UTC), the 1h interval at the end of each hour, and so on.  When AWS IoT SiteWise aggregates data points for metric computations, the start of each interval is exclusive and the end of each interval is inclusive. AWS IoT SiteWise places the computed data point at the end of the interval.
@@ -2494,11 +2500,11 @@ declare namespace IoTSiteWise {
      */
     assetModelDescription?: Description;
     /**
-     * The updated property definitions of the asset model. For more information, see Asset Properties in the AWS IoT SiteWise User Guide. You can specify up to 200 properties per asset model. For more information, see Quotas in the AWS IoT SiteWise User Guide.
+     * The updated property definitions of the asset model. For more information, see Asset properties in the AWS IoT SiteWise User Guide. You can specify up to 200 properties per asset model. For more information, see Quotas in the AWS IoT SiteWise User Guide.
      */
     assetModelProperties?: AssetModelProperties;
     /**
-     * The updated hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. For more information, see Asset Hierarchies in the AWS IoT SiteWise User Guide. You can specify up to 10 hierarchies per asset model. For more information, see Quotas in the AWS IoT SiteWise User Guide.
+     * The updated hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. For more information, see Asset hierarchies in the AWS IoT SiteWise User Guide. You can specify up to 10 hierarchies per asset model. For more information, see Quotas in the AWS IoT SiteWise User Guide.
      */
     assetModelHierarchies?: AssetModelHierarchies;
     /**
@@ -2522,11 +2528,11 @@ declare namespace IoTSiteWise {
      */
     propertyId: ID;
     /**
-     * The property alias that identifies the property, such as an OPC-UA server data stream path (for example, /company/windfarm/3/turbine/7/temperature). For more information, see Mapping Industrial Data Streams to Asset Properties in the AWS IoT SiteWise User Guide. If you omit this parameter, the alias is removed from the property.
+     * The property alias that identifies the property, such as an OPC-UA server data stream path (for example, /company/windfarm/3/turbine/7/temperature). For more information, see Mapping industrial data streams to asset properties in the AWS IoT SiteWise User Guide. If you omit this parameter, the alias is removed from the property.
      */
     propertyAlias?: PropertyAlias;
     /**
-     * The MQTT notification state (enabled or disabled) for this asset property. When the notification state is enabled, AWS IoT SiteWise publishes property value updates to a unique MQTT topic. For more information, see Interacting with Other Services in the AWS IoT SiteWise User Guide. If you omit this parameter, the notification state is set to DISABLED.
+     * The MQTT notification state (enabled or disabled) for this asset property. When the notification state is enabled, AWS IoT SiteWise publishes property value updates to a unique MQTT topic. For more information, see Interacting with other services in the AWS IoT SiteWise User Guide. If you omit this parameter, the notification state is set to DISABLED.
      */
     propertyNotificationState?: PropertyNotificationState;
     /**
@@ -2568,7 +2574,7 @@ declare namespace IoTSiteWise {
      */
     dashboardDescription?: Description;
     /**
-     * The new dashboard definition, as specified in a JSON literal. For detailed information, see Creating Dashboards (CLI) in the AWS IoT SiteWise User Guide.
+     * The new dashboard definition, as specified in a JSON literal. For detailed information, see Creating dashboards (CLI) in the AWS IoT SiteWise User Guide.
      */
     dashboardDefinition: DashboardDefinition;
     /**
@@ -2679,7 +2685,7 @@ declare namespace IoTSiteWise {
      */
     propertyId: Macro;
     /**
-     * The ID of the hierarchy to query for the property ID. You can use the hierarchy's name instead of the hierarchy's ID. You use a hierarchy ID instead of a model ID because you can have several hierarchies using the same model and therefore the same propertyId. For example, you might have separately grouped assets that come from the same asset model. For more information, see Asset Hierarchies in the AWS IoT SiteWise User Guide.
+     * The ID of the hierarchy to query for the property ID. You can use the hierarchy's name instead of the hierarchy's ID. You use a hierarchy ID instead of a model ID because you can have several hierarchies using the same model and therefore the same propertyId. For example, you might have separately grouped assets that come from the same asset model. For more information, see Asset hierarchies in the AWS IoT SiteWise User Guide.
      */
     hierarchyId?: Macro;
   }

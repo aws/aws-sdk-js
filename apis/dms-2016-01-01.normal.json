@@ -29,7 +29,7 @@
           "shape": "ResourceNotFoundFault"
         }
       ],
-      "documentation": "<p>Adds metadata tags to an AWS DMS resource, including replication instance, endpoint, security group, and migration task. These tags can also be used with cost allocation reporting to track cost associated with DMS resources, or used in a Condition statement in an IAM policy for DMS.</p>"
+      "documentation": "<p>Adds metadata tags to an AWS DMS resource, including replication instance, endpoint, security group, and migration task. These tags can also be used with cost allocation reporting to track cost associated with DMS resources, or used in a Condition statement in an IAM policy for DMS. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_Tag.html\"> <code>Tag</code> </a> data type description.</p>"
     },
     "ApplyPendingMaintenanceAction": {
       "name": "ApplyPendingMaintenanceAction",
@@ -199,7 +199,7 @@
           "shape": "KMSKeyNotAccessibleFault"
         }
       ],
-      "documentation": "<p>Creates the replication instance using the specified parameters.</p> <p>AWS DMS requires that your account have certain roles with appropriate permissions before you can create a replication instance. For information on the required roles, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.APIRole.html\">Creating the IAM Roles to Use With the AWS CLI and AWS DMS API</a>. For information on the required permissions, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.IAMPermissions.html\">IAM Permissions Needed to Use AWS DMS</a>.</p>"
+      "documentation": "<p>Creates the replication instance using the specified parameters.</p> <p>AWS DMS requires that your account have certain roles with appropriate permissions before you can create a replication instance. For information on the required roles, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.APIRole\">Creating the IAM Roles to Use With the AWS CLI and AWS DMS API</a>. For information on the required permissions, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.IAMPermissions\">IAM Permissions Needed to Use AWS DMS</a>.</p>"
     },
     "CreateReplicationSubnetGroup": {
       "name": "CreateReplicationSubnetGroup",
@@ -885,7 +885,7 @@
           "shape": "ResourceNotFoundFault"
         }
       ],
-      "documentation": "<p>Lists all tags for an AWS DMS resource.</p>"
+      "documentation": "<p>Lists all metadata tags attached to an AWS DMS resource, including replication instance, endpoint, security group, and migration task. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_Tag.html\"> <code>Tag</code> </a> data type description.</p>"
     },
     "ModifyEndpoint": {
       "name": "ModifyEndpoint",
@@ -1149,7 +1149,7 @@
           "shape": "ResourceNotFoundFault"
         }
       ],
-      "documentation": "<p>Removes metadata tags from a DMS resource.</p>"
+      "documentation": "<p>Removes metadata tags from an AWS DMS resource, including replication instance, endpoint, security group, and migration task. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_Tag.html\"> <code>Tag</code> </a> data type description.</p>"
     },
     "StartReplicationTask": {
       "name": "StartReplicationTask",
@@ -1405,7 +1405,7 @@
           "documentation": "<p>The name of the Availability Zone.</p>"
         }
       },
-      "documentation": "<p>The name of an Availability Zone for use during database migration.</p>"
+      "documentation": "<p>The name of an Availability Zone for use during database migration. <code>AvailabilityZone</code> is an optional parameter to the <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationInstance.html\"> <code>CreateReplicationInstance</code> </a> operation, and it’s value relates to the AWS Region of an endpoint. For example, the availability zone of an endpoint in the us-east-1 region might be us-east-1a, us-east-1b, us-east-1c, or us-east-1d.</p>"
     },
     "AvailabilityZonesList": {
       "type": "list",
@@ -1550,7 +1550,7 @@
       "members": {
         "EndpointIdentifier": {
           "shape": "String",
-          "documentation": "<p>The database endpoint identifier. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.</p>"
+          "documentation": "<p>The database endpoint identifier. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen, or contain two consecutive hyphens.</p>"
         },
         "EndpointType": {
           "shape": "ReplicationEndpointTypeValue",
@@ -1558,7 +1558,7 @@
         },
         "EngineName": {
           "shape": "String",
-          "documentation": "<p>The type of engine for the endpoint. Valid values, depending on the <code>EndpointType</code> value, include <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, <code>\"mariadb\"</code>, <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>, <code>\"redshift\"</code>, <code>\"s3\"</code>, <code>\"db2\"</code>, <code>\"azuredb\"</code>, <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, <code>\"mongodb\"</code>, <code>\"kinesis\"</code>, <code>\"kafka\"</code>, <code>\"elasticsearch\"</code>, <code>\"documentdb\"</code>, <code>\"sqlserver\"</code>, and <code>\"neptune\"</code>.</p>"
+          "documentation": "<p>The type of engine for the endpoint. Valid values, depending on the <code>EndpointType</code> value, include <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>, <code>\"mariadb\"</code>, <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>, <code>\"redshift\"</code>, <code>\"s3\"</code>, <code>\"db2\"</code>, <code>\"azuredb\"</code>, <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, <code>\"mongodb\"</code>, <code>\"kinesis\"</code>, <code>\"kafka\"</code>, <code>\"elasticsearch\"</code>, <code>\"docdb\"</code>, <code>\"sqlserver\"</code>, and <code>\"neptune\"</code>.</p>"
         },
         "Username": {
           "shape": "String",
@@ -1645,27 +1645,27 @@
         },
         "PostgreSQLSettings": {
           "shape": "PostgreSQLSettings",
-          "documentation": "<p>Settings in JSON format for the source and target PostgreSQL endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.ConnectionAttrib\">Extra connection attributes when using PostgreSQL as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.PostgreSQL.ConnectionAttrib\"> Extra connection attributes when using PostgreSQL as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
+          "documentation": "<p>Settings in JSON format for the source and target PostgreSQL endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html\">Extra connection attributes when using PostgreSQL as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.PostgreSQL.html\"> Extra connection attributes when using PostgreSQL as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
         },
         "MySQLSettings": {
           "shape": "MySQLSettings",
-          "documentation": "<p>Settings in JSON format for the source and target MySQL endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.ConnectionAttrib\">Extra connection attributes when using MySQL as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.ConnectionAttrib\">Extra connection attributes when using a MySQL-compatible database as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
+          "documentation": "<p>Settings in JSON format for the source and target MySQL endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.html\">Extra connection attributes when using MySQL as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.html\">Extra connection attributes when using a MySQL-compatible database as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
         },
         "OracleSettings": {
           "shape": "OracleSettings",
-          "documentation": "<p>Settings in JSON format for the source and target Oracle endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.ConnectionAttrib\">Extra connection attributes when using Oracle as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Oracle.ConnectionAttrib\"> Extra connection attributes when using Oracle as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
+          "documentation": "<p>Settings in JSON format for the source and target Oracle endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html\">Extra connection attributes when using Oracle as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Oracle.html\"> Extra connection attributes when using Oracle as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
         },
         "SybaseSettings": {
           "shape": "SybaseSettings",
-          "documentation": "<p>Settings in JSON format for the source and target SAP ASE endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SAP.ConnectionAttrib\">Extra connection attributes when using SAP ASE as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SAP.ConnectionAttrib\">Extra connection attributes when using SAP ASE as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
+          "documentation": "<p>Settings in JSON format for the source and target SAP ASE endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SAP.html\">Extra connection attributes when using SAP ASE as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SAP.html\">Extra connection attributes when using SAP ASE as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
         },
         "MicrosoftSQLServerSettings": {
           "shape": "MicrosoftSQLServerSettings",
-          "documentation": "<p>Settings in JSON format for the source and target Microsoft SQL Server endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SQLServer.ConnectionAttrib\">Extra connection attributes when using SQL Server as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SQLServer.ConnectionAttrib\"> Extra connection attributes when using SQL Server as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
+          "documentation": "<p>Settings in JSON format for the source and target Microsoft SQL Server endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SQLServer.html\">Extra connection attributes when using SQL Server as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SQLServer.html\"> Extra connection attributes when using SQL Server as a target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
         },
         "IBMDb2Settings": {
           "shape": "IBMDb2Settings",
-          "documentation": "<p>Settings in JSON format for the source IBM Db2 LUW endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.ConnectionAttrib\">Extra connection attributes when using Db2 LUW as a source for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
+          "documentation": "<p>Settings in JSON format for the source IBM Db2 LUW endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.html\">Extra connection attributes when using Db2 LUW as a source for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
         }
       },
       "documentation": "<p/>"
@@ -1769,7 +1769,7 @@
         },
         "EngineVersion": {
           "shape": "String",
-          "documentation": "<p>The engine version number of the replication instance.</p>"
+          "documentation": "<p>The engine version number of the replication instance.</p> <p>If an engine version number is not specified when a replication instance is created, the default is the latest engine version available.</p>"
         },
         "AutoMinorVersionUpgrade": {
           "shape": "BooleanOptional",
@@ -1890,7 +1890,7 @@
         },
         "CdcStopPosition": {
           "shape": "String",
-          "documentation": "<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time.</p> <p>Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12”</p> <p>Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “</p>"
+          "documentation": "<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time.</p> <p>Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12”</p> <p>Commit time example: --cdc-stop-position “commit_time: 2018-02-09T12:12:12 “</p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -3074,7 +3074,7 @@
           "documentation": "<p> A list of event categories from a source type that you've chosen.</p>"
         }
       },
-      "documentation": "<p>Lists categories of events subscribed to, and generated by, the applicable AWS DMS resource type.</p>"
+      "documentation": "<p>Lists categories of events subscribed to, and generated by, the applicable AWS DMS resource type. This data type appears in response to the <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_EventCategoryGroup.html\"> <code>DescribeEventCategories</code> </a> action.</p>"
     },
     "EventCategoryGroupList": {
       "type": "list",
@@ -3266,23 +3266,31 @@
         },
         "IncludeTransactionDetails": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Provides detailed transaction information from the source database. This information includes a commit timestamp, a log position, and values for <code>transaction_id</code>, previous <code>transaction_id</code>, and <code>transaction_record_id</code> (the record offset within a transaction). The default is <code>False</code>.</p>"
+          "documentation": "<p>Provides detailed transaction information from the source database. This information includes a commit timestamp, a log position, and values for <code>transaction_id</code>, previous <code>transaction_id</code>, and <code>transaction_record_id</code> (the record offset within a transaction). The default is <code>false</code>.</p>"
         },
         "IncludePartitionValue": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Shows the partition value within the Kafka message output, unless the partition type is <code>schema-table-type</code>. The default is <code>False</code>.</p>"
+          "documentation": "<p>Shows the partition value within the Kafka message output, unless the partition type is <code>schema-table-type</code>. The default is <code>false</code>.</p>"
         },
         "PartitionIncludeSchemaTable": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Prefixes schema and table names to partition values, when the partition type is <code>primary-key-type</code>. Doing this increases data distribution among Kafka partitions. For example, suppose that a SysBench schema has thousands of tables and each table has only limited range for a primary key. In this case, the same primary key is sent from thousands of tables to the same partition, which causes throttling. The default is <code>False</code>.</p>"
+          "documentation": "<p>Prefixes schema and table names to partition values, when the partition type is <code>primary-key-type</code>. Doing this increases data distribution among Kafka partitions. For example, suppose that a SysBench schema has thousands of tables and each table has only limited range for a primary key. In this case, the same primary key is sent from thousands of tables to the same partition, which causes throttling. The default is <code>false</code>.</p>"
         },
         "IncludeTableAlterOperations": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Includes any data definition language (DDL) operations that change the table in the control data, such as <code>rename-table</code>, <code>drop-table</code>, <code>add-column</code>, <code>drop-column</code>, and <code>rename-column</code>. The default is <code>False</code>.</p>"
+          "documentation": "<p>Includes any data definition language (DDL) operations that change the table in the control data, such as <code>rename-table</code>, <code>drop-table</code>, <code>add-column</code>, <code>drop-column</code>, and <code>rename-column</code>. The default is <code>false</code>.</p>"
         },
         "IncludeControlDetails": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Shows detailed control information for table definition, column definition, and table and column changes in the Kafka message output. The default is <code>False</code>.</p>"
+          "documentation": "<p>Shows detailed control information for table definition, column definition, and table and column changes in the Kafka message output. The default is <code>false</code>.</p>"
+        },
+        "MessageMaxBytes": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The maximum size in bytes for records created on the endpoint The default is 1,000,000.</p>"
+        },
+        "IncludeNullAndEmpty": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Include NULL and empty columns for records migrated to the endpoint. The default is <code>false</code>.</p>"
         }
       },
       "documentation": "<p>Provides information that describes an Apache Kafka endpoint. This information includes the output format of records applied to the endpoint and details of transaction and control table data information.</p>"
@@ -3310,23 +3318,27 @@
         },
         "IncludeTransactionDetails": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Provides detailed transaction information from the source database. This information includes a commit timestamp, a log position, and values for <code>transaction_id</code>, previous <code>transaction_id</code>, and <code>transaction_record_id</code> (the record offset within a transaction). The default is <code>False</code>.</p>"
+          "documentation": "<p>Provides detailed transaction information from the source database. This information includes a commit timestamp, a log position, and values for <code>transaction_id</code>, previous <code>transaction_id</code>, and <code>transaction_record_id</code> (the record offset within a transaction). The default is <code>false</code>.</p>"
         },
         "IncludePartitionValue": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Shows the partition value within the Kinesis message output, unless the partition type is <code>schema-table-type</code>. The default is <code>False</code>.</p>"
+          "documentation": "<p>Shows the partition value within the Kinesis message output, unless the partition type is <code>schema-table-type</code>. The default is <code>false</code>.</p>"
         },
         "PartitionIncludeSchemaTable": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Prefixes schema and table names to partition values, when the partition type is <code>primary-key-type</code>. Doing this increases data distribution among Kinesis shards. For example, suppose that a SysBench schema has thousands of tables and each table has only limited range for a primary key. In this case, the same primary key is sent from thousands of tables to the same shard, which causes throttling. The default is <code>False</code>.</p>"
+          "documentation": "<p>Prefixes schema and table names to partition values, when the partition type is <code>primary-key-type</code>. Doing this increases data distribution among Kinesis shards. For example, suppose that a SysBench schema has thousands of tables and each table has only limited range for a primary key. In this case, the same primary key is sent from thousands of tables to the same shard, which causes throttling. The default is <code>false</code>.</p>"
         },
         "IncludeTableAlterOperations": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Includes any data definition language (DDL) operations that change the table in the control data, such as <code>rename-table</code>, <code>drop-table</code>, <code>add-column</code>, <code>drop-column</code>, and <code>rename-column</code>. The default is <code>False</code>.</p>"
+          "documentation": "<p>Includes any data definition language (DDL) operations that change the table in the control data, such as <code>rename-table</code>, <code>drop-table</code>, <code>add-column</code>, <code>drop-column</code>, and <code>rename-column</code>. The default is <code>false</code>.</p>"
         },
         "IncludeControlDetails": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Shows detailed control information for table definition, column definition, and table and column changes in the Kinesis message output. The default is <code>False</code>.</p>"
+          "documentation": "<p>Shows detailed control information for table definition, column definition, and table and column changes in the Kinesis message output. The default is <code>false</code>.</p>"
+        },
+        "IncludeNullAndEmpty": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Include NULL and empty columns for records migrated to the endpoint. The default is <code>false</code>.</p>"
         }
       },
       "documentation": "<p>Provides information that describes an Amazon Kinesis Data Stream endpoint. This information includes the output format of records applied to the endpoint and details of transaction and control table data information.</p>"
@@ -3607,7 +3619,7 @@
         },
         "EngineVersion": {
           "shape": "String",
-          "documentation": "<p>The engine version number of the replication instance.</p>"
+          "documentation": "<p>The engine version number of the replication instance.</p> <p>When modifying a major engine version of an instance, also set <code>AllowMajorVersionUpgrade</code> to <code>true</code>.</p>"
         },
         "AllowMajorVersionUpgrade": {
           "shape": "Boolean",
@@ -3702,7 +3714,7 @@
         },
         "CdcStopPosition": {
           "shape": "String",
-          "documentation": "<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time.</p> <p>Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12”</p> <p>Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “</p>"
+          "documentation": "<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time.</p> <p>Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12”</p> <p>Commit time example: --cdc-stop-position “commit_time: 2018-02-09T12:12:12 “</p>"
         },
         "TaskData": {
           "shape": "String",
@@ -4077,7 +4089,7 @@
         },
         "EncryptionMode": {
           "shape": "EncryptionModeValue",
-          "documentation": "<p>The type of server-side encryption that you want to use for your data. This encryption type is part of the endpoint settings or the extra connections attributes for Amazon S3. You can choose either <code>SSE_S3</code> (the default) or <code>SSE_KMS</code>. To use <code>SSE_S3</code>, create an AWS Identity and Access Management (IAM) role with a policy that allows <code>\"arn:aws:s3:::*\"</code> to use the following actions: <code>\"s3:PutObject\", \"s3:ListBucket\"</code> </p>"
+          "documentation": "<p>The type of server-side encryption that you want to use for your data. This encryption type is part of the endpoint settings or the extra connections attributes for Amazon S3. You can choose either <code>SSE_S3</code> (the default) or <code>SSE_KMS</code>. </p> <note> <p>For the <code>ModifyEndpoint</code> operation, you can change the existing value of the <code>EncryptionMode</code> parameter from <code>SSE_KMS</code> to <code>SSE_S3</code>. But you can’t change the existing value from <code>SSE_S3</code> to <code>SSE_KMS</code>.</p> </note> <p>To use <code>SSE_S3</code>, create an AWS Identity and Access Management (IAM) role with a policy that allows <code>\"arn:aws:s3:::*\"</code> to use the following actions: <code>\"s3:PutObject\", \"s3:ListBucket\"</code> </p>"
         },
         "FileTransferUploadStreams": {
           "shape": "IntegerOptional",
@@ -4286,11 +4298,11 @@
       "members": {
         "ReplicationInstanceIdentifier": {
           "shape": "String",
-          "documentation": "<p>The replication instance identifier. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1-63 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>myrepinstance</code> </p>"
+          "documentation": "<p>The replication instance identifier is a required parameter. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1-63 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>myrepinstance</code> </p>"
         },
         "ReplicationInstanceClass": {
           "shape": "String",
-          "documentation": "<p>The compute and memory capacity of the replication instance as defined for the specified replication instance class.</p> <p>For more information on the settings and capacities for the available replication instance classes, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth\"> Selecting the right AWS DMS replication instance for your migration</a>. </p>"
+          "documentation": "<p>The compute and memory capacity of the replication instance as defined for the specified replication instance class. It is a required parameter, although a defualt value is pre-selected in the DMS console.</p> <p>For more information on the settings and capacities for the available replication instance classes, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth\"> Selecting the right AWS DMS replication instance for your migration</a>. </p>"
         },
         "ReplicationInstanceStatus": {
           "shape": "String",
@@ -4318,7 +4330,7 @@
         },
         "PreferredMaintenanceWindow": {
           "shape": "String",
-          "documentation": "<p>The maintenance window times for the replication instance.</p>"
+          "documentation": "<p>The maintenance window times for the replication instance. Any pending upgrades to the replication instance are performed during this time.</p>"
         },
         "PendingModifiedValues": {
           "shape": "ReplicationPendingModifiedValues",
@@ -4330,7 +4342,7 @@
         },
         "EngineVersion": {
           "shape": "String",
-          "documentation": "<p>The engine version number of the replication instance.</p>"
+          "documentation": "<p>The engine version number of the replication instance.</p> <p>If an engine version number is not specified when a replication instance is created, the default is the latest engine version available.</p> <p>When modifying a major engine version of an instance, also set <code>AllowMajorVersionUpgrade</code> to <code>true</code>.</p>"
         },
         "AutoMinorVersionUpgrade": {
           "shape": "Boolean",
@@ -4443,7 +4455,7 @@
           "documentation": "<p>The engine version number of the replication instance.</p>"
         }
       },
-      "documentation": "<p>Provides information about the values of pending modifications to a replication instance. This data type is an object of the <code>ReplicationInstance</code> user-defined data type. </p>"
+      "documentation": "<p>Provides information about the values of pending modifications to a replication instance. This data type is an object of the <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_ReplicationInstance.html\"> <code>ReplicationInstance</code> </a> user-defined data type. </p>"
     },
     "ReplicationSubnetGroup": {
       "type": "structure",
@@ -4514,7 +4526,7 @@
         },
         "LastFailureMessage": {
           "shape": "String",
-          "documentation": "<p>The last error (failure) message generated for the replication instance.</p>"
+          "documentation": "<p>The last error (failure) message generated for the replication task.</p>"
         },
         "StopReason": {
           "shape": "String",
@@ -4534,7 +4546,7 @@
         },
         "CdcStopPosition": {
           "shape": "String",
-          "documentation": "<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time.</p> <p>Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12”</p> <p>Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “</p>"
+          "documentation": "<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time.</p> <p>Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12”</p> <p>Commit time example: --cdc-stop-position “commit_time: 2018-02-09T12:12:12 “</p>"
         },
         "RecoveryCheckpoint": {
           "shape": "String",
@@ -4776,19 +4788,19 @@
       "members": {
         "ServiceAccessRoleArn": {
           "shape": "String",
-          "documentation": "<p> The Amazon Resource Name (ARN) used by the service access IAM role. </p>"
+          "documentation": "<p> The Amazon Resource Name (ARN) used by the service access IAM role. It is a required parameter that enables DMS to write and read objects from an 3S bucket.</p>"
         },
         "ExternalTableDefinition": {
           "shape": "String",
-          "documentation": "<p> The external table definition. </p>"
+          "documentation": "<p> Specifies how tables are defined in the S3 source files only. </p>"
         },
         "CsvRowDelimiter": {
           "shape": "String",
-          "documentation": "<p> The delimiter used to separate rows in the source files. The default is a carriage return (<code>\\n</code>). </p>"
+          "documentation": "<p> The delimiter used to separate rows in the .csv file for both source and target. The default is a carriage return (<code>\\n</code>). </p>"
         },
         "CsvDelimiter": {
           "shape": "String",
-          "documentation": "<p> The delimiter used to separate columns in the source files. The default is a comma. </p>"
+          "documentation": "<p> The delimiter used to separate columns in the .csv file for both source and target. The default is a comma. </p>"
         },
         "BucketFolder": {
           "shape": "String",
@@ -4804,7 +4816,7 @@
         },
         "EncryptionMode": {
           "shape": "EncryptionModeValue",
-          "documentation": "<p>The type of server-side encryption that you want to use for your data. This encryption type is part of the endpoint settings or the extra connections attributes for Amazon S3. You can choose either <code>SSE_S3</code> (the default) or <code>SSE_KMS</code>. To use <code>SSE_S3</code>, you need an AWS Identity and Access Management (IAM) role with permission to allow <code>\"arn:aws:s3:::dms-*\"</code> to use the following actions:</p> <ul> <li> <p> <code>s3:CreateBucket</code> </p> </li> <li> <p> <code>s3:ListBucket</code> </p> </li> <li> <p> <code>s3:DeleteBucket</code> </p> </li> <li> <p> <code>s3:GetBucketLocation</code> </p> </li> <li> <p> <code>s3:GetObject</code> </p> </li> <li> <p> <code>s3:PutObject</code> </p> </li> <li> <p> <code>s3:DeleteObject</code> </p> </li> <li> <p> <code>s3:GetObjectVersion</code> </p> </li> <li> <p> <code>s3:GetBucketPolicy</code> </p> </li> <li> <p> <code>s3:PutBucketPolicy</code> </p> </li> <li> <p> <code>s3:DeleteBucketPolicy</code> </p> </li> </ul>"
+          "documentation": "<p>The type of server-side encryption that you want to use for your data. This encryption type is part of the endpoint settings or the extra connections attributes for Amazon S3. You can choose either <code>SSE_S3</code> (the default) or <code>SSE_KMS</code>. </p> <note> <p>For the <code>ModifyEndpoint</code> operation, you can change the existing value of the <code>EncryptionMode</code> parameter from <code>SSE_KMS</code> to <code>SSE_S3</code>. But you can’t change the existing value from <code>SSE_S3</code> to <code>SSE_KMS</code>.</p> </note> <p>To use <code>SSE_S3</code>, you need an AWS Identity and Access Management (IAM) role with permission to allow <code>\"arn:aws:s3:::dms-*\"</code> to use the following actions:</p> <ul> <li> <p> <code>s3:CreateBucket</code> </p> </li> <li> <p> <code>s3:ListBucket</code> </p> </li> <li> <p> <code>s3:DeleteBucket</code> </p> </li> <li> <p> <code>s3:GetBucketLocation</code> </p> </li> <li> <p> <code>s3:GetObject</code> </p> </li> <li> <p> <code>s3:PutObject</code> </p> </li> <li> <p> <code>s3:DeleteObject</code> </p> </li> <li> <p> <code>s3:GetObjectVersion</code> </p> </li> <li> <p> <code>s3:GetBucketPolicy</code> </p> </li> <li> <p> <code>s3:PutBucketPolicy</code> </p> </li> <li> <p> <code>s3:DeleteBucketPolicy</code> </p> </li> </ul>"
         },
         "ServerSideEncryptionKmsKeyId": {
           "shape": "String",
@@ -4856,7 +4868,7 @@
         },
         "CdcInsertsAndUpdates": {
           "shape": "BooleanOptional",
-          "documentation": "<p>A value that enables a change data capture (CDC) load to write INSERT and UPDATE operations to .csv or .parquet (columnar storage) output files. The default setting is <code>false</code>, but when <code>CdcInsertsAndUpdates</code> is set to <code>true</code>or <code>y</code>, INSERTs and UPDATEs from the source database are migrated to the .csv or .parquet file. </p> <p>For .csv file format only, how these INSERTs and UPDATEs are recorded depends on the value of the <code>IncludeOpForFullLoad</code> parameter. If <code>IncludeOpForFullLoad</code> is set to <code>true</code>, the first field of every CDC record is set to either <code>I</code> or <code>U</code> to indicate INSERT and UPDATE operations at the source. But if <code>IncludeOpForFullLoad</code> is set to <code>false</code>, CDC records are written without an indication of INSERT or UPDATE operations at the source. For more information about how these settings work together, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps\">Indicating Source DB Operations in Migrated S3 Data</a> in the <i>AWS Database Migration Service User Guide.</i>.</p> <note> <p>AWS DMS supports the use of the <code>CdcInsertsAndUpdates</code> parameter in versions 3.3.1 and later.</p> <p> <code>CdcInsertsOnly</code> and <code>CdcInsertsAndUpdates</code> can't both be set to <code>true</code> for the same endpoint. Set either <code>CdcInsertsOnly</code> or <code>CdcInsertsAndUpdates</code> to <code>true</code> for the same endpoint, but not both.</p> </note>"
+          "documentation": "<p>A value that enables a change data capture (CDC) load to write INSERT and UPDATE operations to .csv or .parquet (columnar storage) output files. The default setting is <code>false</code>, but when <code>CdcInsertsAndUpdates</code> is set to <code>true</code> or <code>y</code>, only INSERTs and UPDATEs from the source database are migrated to the .csv or .parquet file. </p> <p>For .csv file format only, how these INSERTs and UPDATEs are recorded depends on the value of the <code>IncludeOpForFullLoad</code> parameter. If <code>IncludeOpForFullLoad</code> is set to <code>true</code>, the first field of every CDC record is set to either <code>I</code> or <code>U</code> to indicate INSERT and UPDATE operations at the source. But if <code>IncludeOpForFullLoad</code> is set to <code>false</code>, CDC records are written without an indication of INSERT or UPDATE operations at the source. For more information about how these settings work together, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps\">Indicating Source DB Operations in Migrated S3 Data</a> in the <i>AWS Database Migration Service User Guide.</i>.</p> <note> <p>AWS DMS supports the use of the <code>CdcInsertsAndUpdates</code> parameter in versions 3.3.1 and later.</p> <p> <code>CdcInsertsOnly</code> and <code>CdcInsertsAndUpdates</code> can't both be set to <code>true</code> for the same endpoint. Set either <code>CdcInsertsOnly</code> or <code>CdcInsertsAndUpdates</code> to <code>true</code> for the same endpoint, but not both.</p> </note>"
         }
       },
       "documentation": "<p>Settings for exporting data to Amazon S3. </p>"
@@ -4989,7 +5001,7 @@
         },
         "CdcStopPosition": {
           "shape": "String",
-          "documentation": "<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time.</p> <p>Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12”</p> <p>Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “</p>"
+          "documentation": "<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time.</p> <p>Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12”</p> <p>Commit time example: --cdc-stop-position “commit_time: 2018-02-09T12:12:12 “</p>"
         }
       },
       "documentation": "<p/>"
@@ -5208,7 +5220,7 @@
         },
         "ValidationState": {
           "shape": "String",
-          "documentation": "<p>The validation state of the table.</p> <p>This parameter can have the following values:</p> <ul> <li> <p>Not enabled - Validation isn't enabled for the table in the migration task.</p> </li> <li> <p>Pending records - Some records in the table are waiting for validation.</p> </li> <li> <p>Mismatched records - Some records in the table don't match between the source and target.</p> </li> <li> <p>Suspended records - Some records in the table couldn't be validated.</p> </li> <li> <p>No primary key - The table couldn't be validated because it has no primary key.</p> </li> <li> <p>Table error - The table wasn't validated because it's in an error state and some data wasn't migrated.</p> </li> <li> <p>Validated - All rows in the table are validated. If the table is updated, the status can change from Validated.</p> </li> <li> <p>Error - The table couldn't be validated because of an unexpected error.</p> </li> </ul>"
+          "documentation": "<p>The validation state of the table.</p> <p>This parameter can have the following values:</p> <ul> <li> <p>Not enabled – Validation isn't enabled for the table in the migration task.</p> </li> <li> <p>Pending records – Some records in the table are waiting for validation.</p> </li> <li> <p>Mismatched records – Some records in the table don't match between the source and target.</p> </li> <li> <p>Suspended records – Some records in the table couldn't be validated.</p> </li> <li> <p>No primary key –The table couldn't be validated because it has no primary key.</p> </li> <li> <p>Table error – The table wasn't validated because it's in an error state and some data wasn't migrated.</p> </li> <li> <p>Validated – All rows in the table are validated. If the table is updated, the status can change from Validated.</p> </li> <li> <p>Error – The table couldn't be validated because of an unexpected error.</p> </li> <li> <p>Pending validation – The table is waiting validation.</p> </li> <li> <p>Preparing table – Preparing the table enabled in the migration task for validation.</p> </li> <li> <p>Pending revalidation – All rows in the table are pending validation after the table was updated.</p> </li> </ul>"
         },
         "ValidationStateDetails": {
           "shape": "String",
