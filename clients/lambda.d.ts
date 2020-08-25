@@ -4,7 +4,7 @@ import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
-import {ConfigBase as Config} from '../lib/config';
+import {ConfigBase as Config} from '../lib/config-base';
 import {Readable} from 'stream';
 interface Blob {}
 declare class Lambda extends Service {

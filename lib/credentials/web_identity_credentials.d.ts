@@ -1,6 +1,6 @@
 import {Credentials} from '../credentials';
 import {AWSError} from '../error';
-import {ConfigurationOptions} from '../config';
+import {ConfigurationOptions} from '../config-base';
 import STS = require('../../clients/sts');
 export class WebIdentityCredentials extends Credentials {
     /**

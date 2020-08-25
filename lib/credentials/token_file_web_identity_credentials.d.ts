@@ -1,6 +1,6 @@
 import {Credentials} from '../credentials';
 import {AWSError} from '../error';
-import {ConfigurationOptions} from '../config';
+import {ConfigurationOptions} from '../config-base';
 export class TokenFileWebIdentityCredentials extends Credentials {
     /**
      * Creates a new credentials object with optional configuraion.

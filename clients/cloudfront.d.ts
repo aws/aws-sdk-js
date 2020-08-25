@@ -4,7 +4,7 @@ import {AWSError} from '../lib/error';
 import {CloudFrontCustomizations} from '../lib/services/cloudfront';
 import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
-import {ConfigBase as Config} from '../lib/config';
+import {ConfigBase as Config} from '../lib/config-base';
 import {Signer as signer} from '../lib/cloudfront/signer';
 interface Blob {}
 declare class CloudFront extends CloudFrontCustomizations {

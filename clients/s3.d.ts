@@ -4,7 +4,7 @@ import {AWSError} from '../lib/error';
 import {S3Customizations} from '../lib/services/s3';
 import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
-import {ConfigBase as Config} from '../lib/config';
+import {ConfigBase as Config} from '../lib/config-base';
 import {UseDualstackConfigOptions} from '../lib/config_use_dualstack';
 import {EventStream} from '../lib/event-stream/event-stream';
 import {ManagedUpload as managed_upload} from '../lib/s3/managed_upload';
