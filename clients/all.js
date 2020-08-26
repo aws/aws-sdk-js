@@ -227,5 +227,6 @@ module.exports = {
   Honeycode: require('./honeycode'),
   IVS: require('./ivs'),
   Braket: require('./braket'),
-  IdentityStore: require('./identitystore')
+  IdentityStore: require('./identitystore'),
+  Appflow: require('./appflow')
 };

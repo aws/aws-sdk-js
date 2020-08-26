@@ -890,5 +890,8 @@
   },
   "identitystore": {
     "name": "IdentityStore"
+  },
+  "appflow": {
+    "name": "Appflow"
   }
 }

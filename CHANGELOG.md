@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.739.0-->
+<!--LATEST=2.740.0-->
 <!--ENTRYINSERT-->
+
+## 2.740.0
+* bugfix: TypeScript type definitions: Deep imports of clients no longer reference entire SDK type definitions
+* feature: Appflow: Amazon AppFlow is a fully managed integration service that securely transfers data between AWS services and SaaS applications. This update releases the first version of Amazon AppFlow APIs and SDK.
+* feature: Route53Resolver: Route 53 Resolver adds support for resolver query logs
 
 ## 2.739.0
 * feature: DMS: Added new endpoint settings to include columns with Null and Empty value when using Kinesis and Kafka as target. Added a new endpoint setting to set maximum message size when using Kafka as target.

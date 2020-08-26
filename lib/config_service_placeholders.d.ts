@@ -228,6 +228,7 @@ export abstract class ConfigurationServicePlaceholders {
   ivs?: AWS.IVS.Types.ClientConfiguration;
   braket?: AWS.Braket.Types.ClientConfiguration;
   identitystore?: AWS.IdentityStore.Types.ClientConfiguration;
+  appflow?: AWS.Appflow.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -458,4 +459,5 @@ export interface ConfigurationServiceApiVersions {
   ivs?: AWS.IVS.Types.apiVersion;
   braket?: AWS.Braket.Types.apiVersion;
   identitystore?: AWS.IdentityStore.Types.apiVersion;
+  appflow?: AWS.Appflow.Types.apiVersion;
 }
