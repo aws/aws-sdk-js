@@ -2324,7 +2324,7 @@
           "shape": "LimitExceededFault"
         }
       ],
-      "documentation": "<p>Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method. </p> <p>Elastic resize operations have the following restrictions:</p> <ul> <li> <p>You can only resize clusters of the following types:</p> <ul> <li> <p>dc2.large</p> </li> <li> <p>dc2.8xlarge</p> </li> <li> <p>ds2.xlarge</p> </li> <li> <p>ds2.8xlarge</p> </li> <li> <p>ra3.4xlarge</p> </li> <li> <p>ra3.16xlarge</p> </li> </ul> </li> <li> <p>The type of nodes that you add must match the node type for the cluster.</p> </li> </ul>"
+      "documentation": "<p>Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method. </p> <p>Elastic resize operations have the following restrictions:</p> <ul> <li> <p>You can only resize clusters of the following types:</p> <ul> <li> <p>dc1.large (if your cluster is in a VPC)</p> </li> <li> <p>dc1.8xlarge (if your cluster is in a VPC)</p> </li> <li> <p>dc2.large</p> </li> <li> <p>dc2.8xlarge</p> </li> <li> <p>ds2.xlarge</p> </li> <li> <p>ds2.8xlarge</p> </li> <li> <p>ra3.4xlarge</p> </li> <li> <p>ra3.16xlarge</p> </li> </ul> </li> <li> <p>The type of nodes that you add must match the node type for the cluster.</p> </li> </ul>"
     },
     "RestoreFromClusterSnapshot": {
       "name": "RestoreFromClusterSnapshot",
@@ -5922,7 +5922,7 @@
         },
         "Encrypted": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Indicates whether the cluster is encrypted. If the value is encrypted (true) and you provide a value for the <code>KmsKeyId</code> parameter, we encrypt the cluster with the provided <code>KmsKeyId</code>. If you don't provide a <code>KmsKeyId</code>, we encrypt with the default key. In the China region we use legacy encryption if you specify that the cluster is encrypted.</p> <p>If the value is not encrypted (false), then the cluster is decrypted. </p>"
+          "documentation": "<p>Indicates whether the cluster is encrypted. If the value is encrypted (true) and you provide a value for the <code>KmsKeyId</code> parameter, we encrypt the cluster with the provided <code>KmsKeyId</code>. If you don't provide a <code>KmsKeyId</code>, we encrypt with the default key. </p> <p>If the value is not encrypted (false), then the cluster is decrypted. </p>"
         },
         "KmsKeyId": {
           "shape": "String",
@@ -5947,7 +5947,7 @@
           "documentation": "<p>An array of parameters to be modified. A maximum of 20 parameters can be modified in a single request.</p> <p>For each parameter to be modified, you must supply at least the parameter name and parameter value; other name-value pairs of the parameter are optional.</p> <p>For the workload management (WLM) configuration, you must supply all the name-value pairs in the wlm_json_configuration parameter.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Describes a modify cluster parameter group operation. </p>"
     },
     "ModifyClusterResult": {
       "type": "structure",
@@ -6393,7 +6393,8 @@
           "shape": "String",
           "documentation": "<p>The identifier of the cluster to be paused.</p>"
         }
-      }
+      },
+      "documentation": "<p>Describes a pause cluster operation. For example, a scheduled action to run the <code>PauseCluster</code> API operation. </p>"
     },
     "PauseClusterResult": {
       "type": "structure",
@@ -6454,7 +6455,7 @@
         },
         "EncryptionType": {
           "shape": "String",
-          "documentation": "<p>The encryption type for a cluster. Possible values are: KMS and None. For the China region the possible values are None, and Legacy. </p>"
+          "documentation": "<p>The encryption type for a cluster. Possible values are: KMS and None. </p>"
         }
       },
       "documentation": "<p>Describes cluster attributes that are in a pending state. A change to one or more the attributes was requested and is in progress or will be applied.</p>"
@@ -6719,13 +6720,14 @@
         },
         "NumberOfNodes": {
           "shape": "Integer",
-          "documentation": "<p>The new number of nodes for the cluster.</p>"
+          "documentation": "<p>The new number of nodes for the cluster. If not specified, the cluster's current number of nodes is used.</p>"
         },
         "Classic": {
           "shape": "BooleanOptional",
           "documentation": "<p>A boolean value indicating whether the resize operation is using the classic resize process. If you don't provide this parameter or set the value to <code>false</code>, the resize type is elastic. </p>"
         }
-      }
+      },
+      "documentation": "<p>Describes a resize cluster operation. For example, a scheduled action to run the <code>ResizeCluster</code> API operation. </p>"
     },
     "ResizeClusterResult": {
       "type": "structure",
@@ -6810,7 +6812,7 @@
         },
         "TargetEncryptionType": {
           "shape": "String",
-          "documentation": "<p>The type of encryption for the cluster after the resize is complete.</p> <p>Possible values are <code>KMS</code> and <code>None</code>. In the China region possible values are: <code>Legacy</code> and <code>None</code>.</p>"
+          "documentation": "<p>The type of encryption for the cluster after the resize is complete.</p> <p>Possible values are <code>KMS</code> and <code>None</code>. </p>"
         },
         "DataTransferProgressPercent": {
           "shape": "DoubleOptional",
@@ -7041,7 +7043,8 @@
           "shape": "String",
           "documentation": "<p>The identifier of the cluster to be resumed.</p>"
         }
-      }
+      },
+      "documentation": "<p>Describes a resume cluster operation. For example, a scheduled action to run the <code>ResumeCluster</code> API operation. </p>"
     },
     "ResumeClusterResult": {
       "type": "structure",

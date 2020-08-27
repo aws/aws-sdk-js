@@ -20,11 +20,11 @@ declare class GameLift extends Service {
    */
   acceptMatch(callback?: (err: AWSError, data: GameLift.Types.AcceptMatchOutput) => void): Request<GameLift.Types.AcceptMatchOutput, AWSError>;
   /**
-   *  This action is part of Amazon GameLift FleetIQ with game server groups, which is in preview release and is subject to change.  Locates an available game server and temporarily reserves it to host gameplay and players. This action is called by a game client or client service (such as a matchmaker) to request hosting resources for a new game session. In response, GameLift FleetIQ searches for an available game server in the specified game server group, places the game server in "claimed" status for 60 seconds, and returns connection information back to the requester so that players can connect to the game server.  There are two ways you can claim a game server. For the first option, you provide a game server group ID only, which prompts GameLift FleetIQ to search for an available game server in the specified group and claim it. With this option, GameLift FleetIQ attempts to consolidate gameplay on as few instances as possible to minimize hosting costs. For the second option, you request a specific game server by its ID. This option results in a less efficient claiming process because it does not take advantage of consolidation and may fail if the requested game server is unavailable.  To claim a game server, identify a game server group and (optionally) a game server ID. If your game requires that game data be provided to the game server at the start of a game, such as a game map or player information, you can provide it in your claim request.  When a game server is successfully claimed, connection information is returned. A claimed game server's utilization status remains AVAILABLE, while the claim status is set to CLAIMED for up to 60 seconds. This time period allows the game server to be prompted to update its status to UTILIZED (using UpdateGameServer). If the game server's status is not updated within 60 seconds, the game server reverts to unclaimed status and is available to be claimed by another request. If you try to claim a specific game server, this request will fail in the following cases: (1) if the game server utilization status is UTILIZED, (2) if the game server claim status is CLAIMED, or (3) if the instance that the game server is running on is flagged as draining.  Learn more   GameLift FleetIQ Guide   Related operations     RegisterGameServer     ListGameServers     ClaimGameServer     DescribeGameServer     UpdateGameServer     DeregisterGameServer   
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Locates an available game server and temporarily reserves it to host gameplay and players. This operation is called from a game client or client service (such as a matchmaker) to request hosting resources for a new game session. In response, GameLift FleetIQ locates an available game server, places it in CLAIMED status for 60 seconds, and returns connection information that players can use to connect to the game server.  To claim a game server, identify a game server group. You can also specify a game server ID, although this approach bypasses GameLift FleetIQ placement optimization. Optionally, include game data to pass to the game server at the start of a game session, such as a game map or player information.  When a game server is successfully claimed, connection information is returned. A claimed game server's utilization status remains AVAILABLE while the claim status is set to CLAIMED for up to 60 seconds. This time period gives the game server time to update its status to UTILIZED (using UpdateGameServer) once players join. If the game server's status is not updated within 60 seconds, the game server reverts to unclaimed status and is available to be claimed by another request. The claim time period is a fixed value and is not configurable. If you try to claim a specific game server, this request will fail in the following cases:   If the game server utilization status is UTILIZED.   If the game server claim status is CLAIMED.    When claiming a specific game server, this request will succeed even if the game server is running on an instance in DRAINING status. To avoid this, first check the instance status by calling DescribeGameServerInstances.   Learn more   GameLift FleetIQ Guide   Related operations     RegisterGameServer     ListGameServers     ClaimGameServer     DescribeGameServer     UpdateGameServer     DeregisterGameServer   
    */
   claimGameServer(params: GameLift.Types.ClaimGameServerInput, callback?: (err: AWSError, data: GameLift.Types.ClaimGameServerOutput) => void): Request<GameLift.Types.ClaimGameServerOutput, AWSError>;
   /**
-   *  This action is part of Amazon GameLift FleetIQ with game server groups, which is in preview release and is subject to change.  Locates an available game server and temporarily reserves it to host gameplay and players. This action is called by a game client or client service (such as a matchmaker) to request hosting resources for a new game session. In response, GameLift FleetIQ searches for an available game server in the specified game server group, places the game server in "claimed" status for 60 seconds, and returns connection information back to the requester so that players can connect to the game server.  There are two ways you can claim a game server. For the first option, you provide a game server group ID only, which prompts GameLift FleetIQ to search for an available game server in the specified group and claim it. With this option, GameLift FleetIQ attempts to consolidate gameplay on as few instances as possible to minimize hosting costs. For the second option, you request a specific game server by its ID. This option results in a less efficient claiming process because it does not take advantage of consolidation and may fail if the requested game server is unavailable.  To claim a game server, identify a game server group and (optionally) a game server ID. If your game requires that game data be provided to the game server at the start of a game, such as a game map or player information, you can provide it in your claim request.  When a game server is successfully claimed, connection information is returned. A claimed game server's utilization status remains AVAILABLE, while the claim status is set to CLAIMED for up to 60 seconds. This time period allows the game server to be prompted to update its status to UTILIZED (using UpdateGameServer). If the game server's status is not updated within 60 seconds, the game server reverts to unclaimed status and is available to be claimed by another request. If you try to claim a specific game server, this request will fail in the following cases: (1) if the game server utilization status is UTILIZED, (2) if the game server claim status is CLAIMED, or (3) if the instance that the game server is running on is flagged as draining.  Learn more   GameLift FleetIQ Guide   Related operations     RegisterGameServer     ListGameServers     ClaimGameServer     DescribeGameServer     UpdateGameServer     DeregisterGameServer   
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Locates an available game server and temporarily reserves it to host gameplay and players. This operation is called from a game client or client service (such as a matchmaker) to request hosting resources for a new game session. In response, GameLift FleetIQ locates an available game server, places it in CLAIMED status for 60 seconds, and returns connection information that players can use to connect to the game server.  To claim a game server, identify a game server group. You can also specify a game server ID, although this approach bypasses GameLift FleetIQ placement optimization. Optionally, include game data to pass to the game server at the start of a game session, such as a game map or player information.  When a game server is successfully claimed, connection information is returned. A claimed game server's utilization status remains AVAILABLE while the claim status is set to CLAIMED for up to 60 seconds. This time period gives the game server time to update its status to UTILIZED (using UpdateGameServer) once players join. If the game server's status is not updated within 60 seconds, the game server reverts to unclaimed status and is available to be claimed by another request. The claim time period is a fixed value and is not configurable. If you try to claim a specific game server, this request will fail in the following cases:   If the game server utilization status is UTILIZED.   If the game server claim status is CLAIMED.    When claiming a specific game server, this request will succeed even if the game server is running on an instance in DRAINING status. To avoid this, first check the instance status by calling DescribeGameServerInstances.   Learn more   GameLift FleetIQ Guide   Related operations     RegisterGameServer     ListGameServers     ClaimGameServer     DescribeGameServer     UpdateGameServer     DeregisterGameServer   
    */
   claimGameServer(callback?: (err: AWSError, data: GameLift.Types.ClaimGameServerOutput) => void): Request<GameLift.Types.ClaimGameServerOutput, AWSError>;
   /**
@@ -36,11 +36,11 @@ declare class GameLift extends Service {
    */
   createAlias(callback?: (err: AWSError, data: GameLift.Types.CreateAliasOutput) => void): Request<GameLift.Types.CreateAliasOutput, AWSError>;
   /**
-   * Creates a new Amazon GameLift build resource for your game server binary files. Game server binaries must be combined into a zip file for use with Amazon GameLift.   When setting up a new game build for GameLift, we recommend using the AWS CLI command  upload-build . This helper command combines two tasks: (1) it uploads your build files from a file directory to a GameLift Amazon S3 location, and (2) it creates a new build resource.   The CreateBuild operation can used in the following scenarios:   To create a new game build with build files that are in an S3 location under an AWS account that you control. To use this option, you must first give Amazon GameLift access to the S3 bucket. With permissions in place, call CreateBuild and specify a build name, operating system, and the S3 storage location of your game build.   To directly upload your build files to a GameLift S3 location. To use this option, first call CreateBuild and specify a build name and operating system. This action creates a new build resource and also returns an S3 location with temporary access credentials. Use the credentials to manually upload your build files to the specified S3 location. For more information, see Uploading Objects in the Amazon S3 Developer Guide. Build files can be uploaded to the GameLift S3 location once only; that can't be updated.    If successful, this operation creates a new build resource with a unique build ID and places it in INITIALIZED status. A build must be in READY status before you can create fleets with it.  Learn more   Uploading Your Game    Create a Build with Files in Amazon S3   Related operations     CreateBuild     ListBuilds     DescribeBuild     UpdateBuild     DeleteBuild   
+   * Creates a new Amazon GameLift build resource for your game server binary files. Game server binaries must be combined into a zip file for use with Amazon GameLift.   When setting up a new game build for GameLift, we recommend using the AWS CLI command  upload-build . This helper command combines two tasks: (1) it uploads your build files from a file directory to a GameLift Amazon S3 location, and (2) it creates a new build resource.   The CreateBuild operation can used in the following scenarios:   To create a new game build with build files that are in an S3 location under an AWS account that you control. To use this option, you must first give Amazon GameLift access to the S3 bucket. With permissions in place, call CreateBuild and specify a build name, operating system, and the S3 storage location of your game build.   To directly upload your build files to a GameLift S3 location. To use this option, first call CreateBuild and specify a build name and operating system. This operation creates a new build resource and also returns an S3 location with temporary access credentials. Use the credentials to manually upload your build files to the specified S3 location. For more information, see Uploading Objects in the Amazon S3 Developer Guide. Build files can be uploaded to the GameLift S3 location once only; that can't be updated.    If successful, this operation creates a new build resource with a unique build ID and places it in INITIALIZED status. A build must be in READY status before you can create fleets with it.  Learn more   Uploading Your Game    Create a Build with Files in Amazon S3   Related operations     CreateBuild     ListBuilds     DescribeBuild     UpdateBuild     DeleteBuild   
    */
   createBuild(params: GameLift.Types.CreateBuildInput, callback?: (err: AWSError, data: GameLift.Types.CreateBuildOutput) => void): Request<GameLift.Types.CreateBuildOutput, AWSError>;
   /**
-   * Creates a new Amazon GameLift build resource for your game server binary files. Game server binaries must be combined into a zip file for use with Amazon GameLift.   When setting up a new game build for GameLift, we recommend using the AWS CLI command  upload-build . This helper command combines two tasks: (1) it uploads your build files from a file directory to a GameLift Amazon S3 location, and (2) it creates a new build resource.   The CreateBuild operation can used in the following scenarios:   To create a new game build with build files that are in an S3 location under an AWS account that you control. To use this option, you must first give Amazon GameLift access to the S3 bucket. With permissions in place, call CreateBuild and specify a build name, operating system, and the S3 storage location of your game build.   To directly upload your build files to a GameLift S3 location. To use this option, first call CreateBuild and specify a build name and operating system. This action creates a new build resource and also returns an S3 location with temporary access credentials. Use the credentials to manually upload your build files to the specified S3 location. For more information, see Uploading Objects in the Amazon S3 Developer Guide. Build files can be uploaded to the GameLift S3 location once only; that can't be updated.    If successful, this operation creates a new build resource with a unique build ID and places it in INITIALIZED status. A build must be in READY status before you can create fleets with it.  Learn more   Uploading Your Game    Create a Build with Files in Amazon S3   Related operations     CreateBuild     ListBuilds     DescribeBuild     UpdateBuild     DeleteBuild   
+   * Creates a new Amazon GameLift build resource for your game server binary files. Game server binaries must be combined into a zip file for use with Amazon GameLift.   When setting up a new game build for GameLift, we recommend using the AWS CLI command  upload-build . This helper command combines two tasks: (1) it uploads your build files from a file directory to a GameLift Amazon S3 location, and (2) it creates a new build resource.   The CreateBuild operation can used in the following scenarios:   To create a new game build with build files that are in an S3 location under an AWS account that you control. To use this option, you must first give Amazon GameLift access to the S3 bucket. With permissions in place, call CreateBuild and specify a build name, operating system, and the S3 storage location of your game build.   To directly upload your build files to a GameLift S3 location. To use this option, first call CreateBuild and specify a build name and operating system. This operation creates a new build resource and also returns an S3 location with temporary access credentials. Use the credentials to manually upload your build files to the specified S3 location. For more information, see Uploading Objects in the Amazon S3 Developer Guide. Build files can be uploaded to the GameLift S3 location once only; that can't be updated.    If successful, this operation creates a new build resource with a unique build ID and places it in INITIALIZED status. A build must be in READY status before you can create fleets with it.  Learn more   Uploading Your Game    Create a Build with Files in Amazon S3   Related operations     CreateBuild     ListBuilds     DescribeBuild     UpdateBuild     DeleteBuild   
    */
   createBuild(callback?: (err: AWSError, data: GameLift.Types.CreateBuildOutput) => void): Request<GameLift.Types.CreateBuildOutput, AWSError>;
   /**
@@ -52,19 +52,19 @@ declare class GameLift extends Service {
    */
   createFleet(callback?: (err: AWSError, data: GameLift.Types.CreateFleetOutput) => void): Request<GameLift.Types.CreateFleetOutput, AWSError>;
   /**
-   *  This action is part of Amazon GameLift FleetIQ with game server groups, which is in preview release and is subject to change.  Creates a GameLift FleetIQ game server group to manage a collection of EC2 instances for game hosting. In addition to creating the game server group, this action also creates an Auto Scaling group in your AWS account and establishes a link between the two groups. You have full control over configuration of the Auto Scaling group, but GameLift FleetIQ routinely certain Auto Scaling group properties in order to optimize the group's instances for low-cost game hosting. You can view the status of your game server groups in the GameLift Console. Game server group metrics and events are emitted to Amazon CloudWatch. Prior creating a new game server group, you must set up the following:    An EC2 launch template. The template provides configuration settings for a set of EC2 instances and includes the game server build that you want to deploy and run on each instance. For more information on creating a launch template, see  Launching an Instance from a Launch Template in the Amazon EC2 User Guide.    An IAM role. The role sets up limited access to your AWS account, allowing GameLift FleetIQ to create and manage the EC2 Auto Scaling group, get instance data, and emit metrics and events to CloudWatch. For more information on setting up an IAM permissions policy with principal access for GameLift, see  Specifying a Principal in a Policy in the Amazon S3 Developer Guide.   To create a new game server group, provide a name and specify the IAM role and EC2 launch template. You also need to provide a list of instance types to be used in the group and set initial maximum and minimum limits on the group's instance count. You can optionally set an autoscaling policy with target tracking based on a GameLift FleetIQ metric. Once the game server group and corresponding Auto Scaling group are created, you have full access to change the Auto Scaling group's configuration as needed. Keep in mind, however, that some properties are periodically updated by GameLift FleetIQ as it balances the group's instances based on availability and cost.  Learn more   GameLift FleetIQ Guide   Updating a GameLift FleetIQ-Linked Auto Scaling Group   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup   
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Creates a GameLift FleetIQ game server group for managing game hosting on a collection of Amazon EC2 instances for game hosting. This operation creates the game server group, creates an Auto Scaling group in your AWS account, and establishes a link between the two groups. You can view the status of your game server groups in the GameLift console. Game server group metrics and events are emitted to Amazon CloudWatch. Before creating a new game server group, you must have the following:    An Amazon EC2 launch template that specifies how to launch Amazon EC2 instances with your game server build. For more information, see  Launching an Instance from a Launch Template in the Amazon EC2 User Guide.    An IAM role that extends limited access to your AWS account to allow GameLift FleetIQ to create and interact with the Auto Scaling group. For more information, see Create IAM roles for cross-service interaction in the GameLift FleetIQ Developer Guide.   To create a new game server group, specify a unique group name, IAM role and Amazon EC2 launch template, and provide a list of instance types that can be used in the group. You must also set initial maximum and minimum limits on the group's instance count. You can optionally set an Auto Scaling policy with target tracking based on a GameLift FleetIQ metric. Once the game server group and corresponding Auto Scaling group are created, you have full access to change the Auto Scaling group's configuration as needed. Several properties that are set when creating a game server group, including maximum/minimum size and auto-scaling policy settings, must be updated directly in the Auto Scaling group. Keep in mind that some Auto Scaling group properties are periodically updated by GameLift FleetIQ as part of its balancing activities to optimize for availability and cost.  Learn more   GameLift FleetIQ Guide   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup     DescribeGameServerInstances   
    */
   createGameServerGroup(params: GameLift.Types.CreateGameServerGroupInput, callback?: (err: AWSError, data: GameLift.Types.CreateGameServerGroupOutput) => void): Request<GameLift.Types.CreateGameServerGroupOutput, AWSError>;
   /**
-   *  This action is part of Amazon GameLift FleetIQ with game server groups, which is in preview release and is subject to change.  Creates a GameLift FleetIQ game server group to manage a collection of EC2 instances for game hosting. In addition to creating the game server group, this action also creates an Auto Scaling group in your AWS account and establishes a link between the two groups. You have full control over configuration of the Auto Scaling group, but GameLift FleetIQ routinely certain Auto Scaling group properties in order to optimize the group's instances for low-cost game hosting. You can view the status of your game server groups in the GameLift Console. Game server group metrics and events are emitted to Amazon CloudWatch. Prior creating a new game server group, you must set up the following:    An EC2 launch template. The template provides configuration settings for a set of EC2 instances and includes the game server build that you want to deploy and run on each instance. For more information on creating a launch template, see  Launching an Instance from a Launch Template in the Amazon EC2 User Guide.    An IAM role. The role sets up limited access to your AWS account, allowing GameLift FleetIQ to create and manage the EC2 Auto Scaling group, get instance data, and emit metrics and events to CloudWatch. For more information on setting up an IAM permissions policy with principal access for GameLift, see  Specifying a Principal in a Policy in the Amazon S3 Developer Guide.   To create a new game server group, provide a name and specify the IAM role and EC2 launch template. You also need to provide a list of instance types to be used in the group and set initial maximum and minimum limits on the group's instance count. You can optionally set an autoscaling policy with target tracking based on a GameLift FleetIQ metric. Once the game server group and corresponding Auto Scaling group are created, you have full access to change the Auto Scaling group's configuration as needed. Keep in mind, however, that some properties are periodically updated by GameLift FleetIQ as it balances the group's instances based on availability and cost.  Learn more   GameLift FleetIQ Guide   Updating a GameLift FleetIQ-Linked Auto Scaling Group   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup   
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Creates a GameLift FleetIQ game server group for managing game hosting on a collection of Amazon EC2 instances for game hosting. This operation creates the game server group, creates an Auto Scaling group in your AWS account, and establishes a link between the two groups. You can view the status of your game server groups in the GameLift console. Game server group metrics and events are emitted to Amazon CloudWatch. Before creating a new game server group, you must have the following:    An Amazon EC2 launch template that specifies how to launch Amazon EC2 instances with your game server build. For more information, see  Launching an Instance from a Launch Template in the Amazon EC2 User Guide.    An IAM role that extends limited access to your AWS account to allow GameLift FleetIQ to create and interact with the Auto Scaling group. For more information, see Create IAM roles for cross-service interaction in the GameLift FleetIQ Developer Guide.   To create a new game server group, specify a unique group name, IAM role and Amazon EC2 launch template, and provide a list of instance types that can be used in the group. You must also set initial maximum and minimum limits on the group's instance count. You can optionally set an Auto Scaling policy with target tracking based on a GameLift FleetIQ metric. Once the game server group and corresponding Auto Scaling group are created, you have full access to change the Auto Scaling group's configuration as needed. Several properties that are set when creating a game server group, including maximum/minimum size and auto-scaling policy settings, must be updated directly in the Auto Scaling group. Keep in mind that some Auto Scaling group properties are periodically updated by GameLift FleetIQ as part of its balancing activities to optimize for availability and cost.  Learn more   GameLift FleetIQ Guide   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup     DescribeGameServerInstances   
    */
   createGameServerGroup(callback?: (err: AWSError, data: GameLift.Types.CreateGameServerGroupOutput) => void): Request<GameLift.Types.CreateGameServerGroupOutput, AWSError>;
   /**
-   * Creates a multiplayer game session for players. This action creates a game session record and assigns an available server process in the specified fleet to host the game session. A fleet must have an ACTIVE status before a game session can be created in it. To create a game session, specify either fleet ID or alias ID and indicate a maximum number of players to allow in the game session. You can also provide a name and game-specific properties for this game session. If successful, a GameSession object is returned containing the game session properties and other settings you specified.  Idempotency tokens. You can add a token that uniquely identifies game session requests. This is useful for ensuring that game session requests are idempotent. Multiple requests with the same idempotency token are processed only once; subsequent requests return the original result. All response values are the same with the exception of game session status, which may change.  Resource creation limits. If you are creating a game session on a fleet with a resource creation limit policy in force, then you must specify a creator ID. Without this ID, Amazon GameLift has no way to evaluate the policy for this new game session request.  Player acceptance policy. By default, newly created game sessions are open to new players. You can restrict new player access by using UpdateGameSession to change the game session's player session creation policy.  Game session logs. Logs are retained for all active game sessions for 14 days. To access the logs, call GetGameSessionLogUrl to download the log files.  Available in Amazon GameLift Local.     CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
+   * Creates a multiplayer game session for players. This operation creates a game session record and assigns an available server process in the specified fleet to host the game session. A fleet must have an ACTIVE status before a game session can be created in it. To create a game session, specify either fleet ID or alias ID and indicate a maximum number of players to allow in the game session. You can also provide a name and game-specific properties for this game session. If successful, a GameSession object is returned containing the game session properties and other settings you specified.  Idempotency tokens. You can add a token that uniquely identifies game session requests. This is useful for ensuring that game session requests are idempotent. Multiple requests with the same idempotency token are processed only once; subsequent requests return the original result. All response values are the same with the exception of game session status, which may change.  Resource creation limits. If you are creating a game session on a fleet with a resource creation limit policy in force, then you must specify a creator ID. Without this ID, Amazon GameLift has no way to evaluate the policy for this new game session request.  Player acceptance policy. By default, newly created game sessions are open to new players. You can restrict new player access by using UpdateGameSession to change the game session's player session creation policy.  Game session logs. Logs are retained for all active game sessions for 14 days. To access the logs, call GetGameSessionLogUrl to download the log files.  Available in Amazon GameLift Local.     CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
    */
   createGameSession(params: GameLift.Types.CreateGameSessionInput, callback?: (err: AWSError, data: GameLift.Types.CreateGameSessionOutput) => void): Request<GameLift.Types.CreateGameSessionOutput, AWSError>;
   /**
-   * Creates a multiplayer game session for players. This action creates a game session record and assigns an available server process in the specified fleet to host the game session. A fleet must have an ACTIVE status before a game session can be created in it. To create a game session, specify either fleet ID or alias ID and indicate a maximum number of players to allow in the game session. You can also provide a name and game-specific properties for this game session. If successful, a GameSession object is returned containing the game session properties and other settings you specified.  Idempotency tokens. You can add a token that uniquely identifies game session requests. This is useful for ensuring that game session requests are idempotent. Multiple requests with the same idempotency token are processed only once; subsequent requests return the original result. All response values are the same with the exception of game session status, which may change.  Resource creation limits. If you are creating a game session on a fleet with a resource creation limit policy in force, then you must specify a creator ID. Without this ID, Amazon GameLift has no way to evaluate the policy for this new game session request.  Player acceptance policy. By default, newly created game sessions are open to new players. You can restrict new player access by using UpdateGameSession to change the game session's player session creation policy.  Game session logs. Logs are retained for all active game sessions for 14 days. To access the logs, call GetGameSessionLogUrl to download the log files.  Available in Amazon GameLift Local.     CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
+   * Creates a multiplayer game session for players. This operation creates a game session record and assigns an available server process in the specified fleet to host the game session. A fleet must have an ACTIVE status before a game session can be created in it. To create a game session, specify either fleet ID or alias ID and indicate a maximum number of players to allow in the game session. You can also provide a name and game-specific properties for this game session. If successful, a GameSession object is returned containing the game session properties and other settings you specified.  Idempotency tokens. You can add a token that uniquely identifies game session requests. This is useful for ensuring that game session requests are idempotent. Multiple requests with the same idempotency token are processed only once; subsequent requests return the original result. All response values are the same with the exception of game session status, which may change.  Resource creation limits. If you are creating a game session on a fleet with a resource creation limit policy in force, then you must specify a creator ID. Without this ID, Amazon GameLift has no way to evaluate the policy for this new game session request.  Player acceptance policy. By default, newly created game sessions are open to new players. You can restrict new player access by using UpdateGameSession to change the game session's player session creation policy.  Game session logs. Logs are retained for all active game sessions for 14 days. To access the logs, call GetGameSessionLogUrl to download the log files.  Available in Amazon GameLift Local.     CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
    */
   createGameSession(callback?: (err: AWSError, data: GameLift.Types.CreateGameSessionOutput) => void): Request<GameLift.Types.CreateGameSessionOutput, AWSError>;
   /**
@@ -76,11 +76,11 @@ declare class GameLift extends Service {
    */
   createGameSessionQueue(callback?: (err: AWSError, data: GameLift.Types.CreateGameSessionQueueOutput) => void): Request<GameLift.Types.CreateGameSessionQueueOutput, AWSError>;
   /**
-   * Defines a new matchmaking configuration for use with FlexMatch. A matchmaking configuration sets out guidelines for matching players and getting the matches into games. You can set up multiple matchmaking configurations to handle the scenarios needed for your game. Each matchmaking ticket (StartMatchmaking or StartMatchBackfill) specifies a configuration for the match and provides player attributes to support the configuration being used.  To create a matchmaking configuration, at a minimum you must specify the following: configuration name; a rule set that governs how to evaluate players and find acceptable matches; a game session queue to use when placing a new game session for the match; and the maximum time allowed for a matchmaking attempt. There are two ways to track the progress of matchmaking tickets: (1) polling ticket status with DescribeMatchmaking; or (2) receiving notifications with Amazon Simple Notification Service (SNS). To use notifications, you first need to set up an SNS topic to receive the notifications, and provide the topic ARN in the matchmaking configuration. Since notifications promise only "best effort" delivery, we recommend calling DescribeMatchmaking if no notifications are received within 30 seconds.  Learn more    Design a FlexMatch Matchmaker    Setting up Notifications for Matchmaking   Related operations     CreateMatchmakingConfiguration     DescribeMatchmakingConfigurations     UpdateMatchmakingConfiguration     DeleteMatchmakingConfiguration     CreateMatchmakingRuleSet     DescribeMatchmakingRuleSets     ValidateMatchmakingRuleSet     DeleteMatchmakingRuleSet   
+   * Defines a new matchmaking configuration for use with FlexMatch. A matchmaking configuration sets out guidelines for matching players and getting the matches into games. You can set up multiple matchmaking configurations to handle the scenarios needed for your game. Each matchmaking ticket (StartMatchmaking or StartMatchBackfill) specifies a configuration for the match and provides player attributes to support the configuration being used.  To create a matchmaking configuration, at a minimum you must specify the following: configuration name; a rule set that governs how to evaluate players and find acceptable matches; a game session queue to use when placing a new game session for the match; and the maximum time allowed for a matchmaking attempt. To track the progress of matchmaking tickets, set up an Amazon Simple Notification Service (SNS) to receive notifications, and provide the topic ARN in the matchmaking configuration. An alternative method, continuously poling ticket status with DescribeMatchmaking, should only be used for games in development with low matchmaking usage.  Learn more    Design a FlexMatch Matchmaker    Set Up FlexMatch Event Notification   Related operations     CreateMatchmakingConfiguration     DescribeMatchmakingConfigurations     UpdateMatchmakingConfiguration     DeleteMatchmakingConfiguration     CreateMatchmakingRuleSet     DescribeMatchmakingRuleSets     ValidateMatchmakingRuleSet     DeleteMatchmakingRuleSet   
    */
   createMatchmakingConfiguration(params: GameLift.Types.CreateMatchmakingConfigurationInput, callback?: (err: AWSError, data: GameLift.Types.CreateMatchmakingConfigurationOutput) => void): Request<GameLift.Types.CreateMatchmakingConfigurationOutput, AWSError>;
   /**
-   * Defines a new matchmaking configuration for use with FlexMatch. A matchmaking configuration sets out guidelines for matching players and getting the matches into games. You can set up multiple matchmaking configurations to handle the scenarios needed for your game. Each matchmaking ticket (StartMatchmaking or StartMatchBackfill) specifies a configuration for the match and provides player attributes to support the configuration being used.  To create a matchmaking configuration, at a minimum you must specify the following: configuration name; a rule set that governs how to evaluate players and find acceptable matches; a game session queue to use when placing a new game session for the match; and the maximum time allowed for a matchmaking attempt. There are two ways to track the progress of matchmaking tickets: (1) polling ticket status with DescribeMatchmaking; or (2) receiving notifications with Amazon Simple Notification Service (SNS). To use notifications, you first need to set up an SNS topic to receive the notifications, and provide the topic ARN in the matchmaking configuration. Since notifications promise only "best effort" delivery, we recommend calling DescribeMatchmaking if no notifications are received within 30 seconds.  Learn more    Design a FlexMatch Matchmaker    Setting up Notifications for Matchmaking   Related operations     CreateMatchmakingConfiguration     DescribeMatchmakingConfigurations     UpdateMatchmakingConfiguration     DeleteMatchmakingConfiguration     CreateMatchmakingRuleSet     DescribeMatchmakingRuleSets     ValidateMatchmakingRuleSet     DeleteMatchmakingRuleSet   
+   * Defines a new matchmaking configuration for use with FlexMatch. A matchmaking configuration sets out guidelines for matching players and getting the matches into games. You can set up multiple matchmaking configurations to handle the scenarios needed for your game. Each matchmaking ticket (StartMatchmaking or StartMatchBackfill) specifies a configuration for the match and provides player attributes to support the configuration being used.  To create a matchmaking configuration, at a minimum you must specify the following: configuration name; a rule set that governs how to evaluate players and find acceptable matches; a game session queue to use when placing a new game session for the match; and the maximum time allowed for a matchmaking attempt. To track the progress of matchmaking tickets, set up an Amazon Simple Notification Service (SNS) to receive notifications, and provide the topic ARN in the matchmaking configuration. An alternative method, continuously poling ticket status with DescribeMatchmaking, should only be used for games in development with low matchmaking usage.  Learn more    Design a FlexMatch Matchmaker    Set Up FlexMatch Event Notification   Related operations     CreateMatchmakingConfiguration     DescribeMatchmakingConfigurations     UpdateMatchmakingConfiguration     DeleteMatchmakingConfiguration     CreateMatchmakingRuleSet     DescribeMatchmakingRuleSets     ValidateMatchmakingRuleSet     DeleteMatchmakingRuleSet   
    */
   createMatchmakingConfiguration(callback?: (err: AWSError, data: GameLift.Types.CreateMatchmakingConfigurationOutput) => void): Request<GameLift.Types.CreateMatchmakingConfigurationOutput, AWSError>;
   /**
@@ -132,43 +132,43 @@ declare class GameLift extends Service {
    */
   createVpcPeeringConnection(callback?: (err: AWSError, data: GameLift.Types.CreateVpcPeeringConnectionOutput) => void): Request<GameLift.Types.CreateVpcPeeringConnectionOutput, AWSError>;
   /**
-   * Deletes an alias. This action removes all record of the alias. Game clients attempting to access a server process using the deleted alias receive an error. To delete an alias, specify the alias ID to be deleted.    CreateAlias     ListAliases     DescribeAlias     UpdateAlias     DeleteAlias     ResolveAlias   
+   * Deletes an alias. This operation removes all record of the alias. Game clients attempting to access a server process using the deleted alias receive an error. To delete an alias, specify the alias ID to be deleted.    CreateAlias     ListAliases     DescribeAlias     UpdateAlias     DeleteAlias     ResolveAlias   
    */
   deleteAlias(params: GameLift.Types.DeleteAliasInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an alias. This action removes all record of the alias. Game clients attempting to access a server process using the deleted alias receive an error. To delete an alias, specify the alias ID to be deleted.    CreateAlias     ListAliases     DescribeAlias     UpdateAlias     DeleteAlias     ResolveAlias   
+   * Deletes an alias. This operation removes all record of the alias. Game clients attempting to access a server process using the deleted alias receive an error. To delete an alias, specify the alias ID to be deleted.    CreateAlias     ListAliases     DescribeAlias     UpdateAlias     DeleteAlias     ResolveAlias   
    */
   deleteAlias(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a build. This action permanently deletes the build resource and any uploaded build files. Deleting a build does not affect the status of any active fleets using the build, but you can no longer create new fleets with the deleted build. To delete a build, specify the build ID.   Learn more    Upload a Custom Server Build   Related operations     CreateBuild     ListBuilds     DescribeBuild     UpdateBuild     DeleteBuild   
+   * Deletes a build. This operation permanently deletes the build resource and any uploaded build files. Deleting a build does not affect the status of any active fleets using the build, but you can no longer create new fleets with the deleted build. To delete a build, specify the build ID.   Learn more    Upload a Custom Server Build   Related operations     CreateBuild     ListBuilds     DescribeBuild     UpdateBuild     DeleteBuild   
    */
   deleteBuild(params: GameLift.Types.DeleteBuildInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a build. This action permanently deletes the build resource and any uploaded build files. Deleting a build does not affect the status of any active fleets using the build, but you can no longer create new fleets with the deleted build. To delete a build, specify the build ID.   Learn more    Upload a Custom Server Build   Related operations     CreateBuild     ListBuilds     DescribeBuild     UpdateBuild     DeleteBuild   
+   * Deletes a build. This operation permanently deletes the build resource and any uploaded build files. Deleting a build does not affect the status of any active fleets using the build, but you can no longer create new fleets with the deleted build. To delete a build, specify the build ID.   Learn more    Upload a Custom Server Build   Related operations     CreateBuild     ListBuilds     DescribeBuild     UpdateBuild     DeleteBuild   
    */
   deleteBuild(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes everything related to a fleet. Before deleting a fleet, you must set the fleet's desired capacity to zero. See UpdateFleetCapacity. If the fleet being deleted has a VPC peering connection, you first need to get a valid authorization (good for 24 hours) by calling CreateVpcPeeringAuthorization. You do not need to explicitly delete the VPC peering connection--this is done as part of the delete fleet process. This action removes the fleet and its resources. Once a fleet is deleted, you can no longer use any of the resource in that fleet.  Learn more   Setting up GameLift Fleets   Related operations     CreateFleet     ListFleets     DeleteFleet     DescribeFleetAttributes     UpdateFleetAttributes     StartFleetActions or StopFleetActions   
+   * Deletes everything related to a fleet. Before deleting a fleet, you must set the fleet's desired capacity to zero. See UpdateFleetCapacity. If the fleet being deleted has a VPC peering connection, you first need to get a valid authorization (good for 24 hours) by calling CreateVpcPeeringAuthorization. You do not need to explicitly delete the VPC peering connection--this is done as part of the delete fleet process. This operation removes the fleet and its resources. Once a fleet is deleted, you can no longer use any of the resource in that fleet.  Learn more   Setting up GameLift Fleets   Related operations     CreateFleet     ListFleets     DeleteFleet     DescribeFleetAttributes     UpdateFleetAttributes     StartFleetActions or StopFleetActions   
    */
   deleteFleet(params: GameLift.Types.DeleteFleetInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes everything related to a fleet. Before deleting a fleet, you must set the fleet's desired capacity to zero. See UpdateFleetCapacity. If the fleet being deleted has a VPC peering connection, you first need to get a valid authorization (good for 24 hours) by calling CreateVpcPeeringAuthorization. You do not need to explicitly delete the VPC peering connection--this is done as part of the delete fleet process. This action removes the fleet and its resources. Once a fleet is deleted, you can no longer use any of the resource in that fleet.  Learn more   Setting up GameLift Fleets   Related operations     CreateFleet     ListFleets     DeleteFleet     DescribeFleetAttributes     UpdateFleetAttributes     StartFleetActions or StopFleetActions   
+   * Deletes everything related to a fleet. Before deleting a fleet, you must set the fleet's desired capacity to zero. See UpdateFleetCapacity. If the fleet being deleted has a VPC peering connection, you first need to get a valid authorization (good for 24 hours) by calling CreateVpcPeeringAuthorization. You do not need to explicitly delete the VPC peering connection--this is done as part of the delete fleet process. This operation removes the fleet and its resources. Once a fleet is deleted, you can no longer use any of the resource in that fleet.  Learn more   Setting up GameLift Fleets   Related operations     CreateFleet     ListFleets     DeleteFleet     DescribeFleetAttributes     UpdateFleetAttributes     StartFleetActions or StopFleetActions   
    */
   deleteFleet(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  This action is part of Amazon GameLift FleetIQ with game server groups, which is in preview release and is subject to change.  Terminates a game server group and permanently deletes the game server group record. You have several options for how these resources are impacted when deleting the game server group. Depending on the type of delete action selected, this action may affect three types of resources: the game server group, the corresponding Auto Scaling group, and all game servers currently running in the group.  To delete a game server group, identify the game server group to delete and specify the type of delete action to initiate. Game server groups can only be deleted if they are in ACTIVE or ERROR status. If the delete request is successful, a series of actions are kicked off. The game server group status is changed to DELETE_SCHEDULED, which prevents new game servers from being registered and stops autoscaling activity. Once all game servers in the game server group are de-registered, GameLift FleetIQ can begin deleting resources. If any of the delete actions fail, the game server group is placed in ERROR status. GameLift FleetIQ emits delete events to Amazon CloudWatch.  Learn more   GameLift FleetIQ Guide   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup   
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Terminates a game server group and permanently deletes the game server group record. You have several options for how these resources are impacted when deleting the game server group. Depending on the type of delete operation selected, this operation might affect these resources:   The game server group   The corresponding Auto Scaling group   All game servers that are currently running in the group   To delete a game server group, identify the game server group to delete and specify the type of delete operation to initiate. Game server groups can only be deleted if they are in ACTIVE or ERROR status. If the delete request is successful, a series of operations are kicked off. The game server group status is changed to DELETE_SCHEDULED, which prevents new game servers from being registered and stops automatic scaling activity. Once all game servers in the game server group are deregistered, GameLift FleetIQ can begin deleting resources. If any of the delete operations fail, the game server group is placed in ERROR status. GameLift FleetIQ emits delete events to Amazon CloudWatch.  Learn more   GameLift FleetIQ Guide   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup     DescribeGameServerInstances   
    */
   deleteGameServerGroup(params: GameLift.Types.DeleteGameServerGroupInput, callback?: (err: AWSError, data: GameLift.Types.DeleteGameServerGroupOutput) => void): Request<GameLift.Types.DeleteGameServerGroupOutput, AWSError>;
   /**
-   *  This action is part of Amazon GameLift FleetIQ with game server groups, which is in preview release and is subject to change.  Terminates a game server group and permanently deletes the game server group record. You have several options for how these resources are impacted when deleting the game server group. Depending on the type of delete action selected, this action may affect three types of resources: the game server group, the corresponding Auto Scaling group, and all game servers currently running in the group.  To delete a game server group, identify the game server group to delete and specify the type of delete action to initiate. Game server groups can only be deleted if they are in ACTIVE or ERROR status. If the delete request is successful, a series of actions are kicked off. The game server group status is changed to DELETE_SCHEDULED, which prevents new game servers from being registered and stops autoscaling activity. Once all game servers in the game server group are de-registered, GameLift FleetIQ can begin deleting resources. If any of the delete actions fail, the game server group is placed in ERROR status. GameLift FleetIQ emits delete events to Amazon CloudWatch.  Learn more   GameLift FleetIQ Guide   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup   
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Terminates a game server group and permanently deletes the game server group record. You have several options for how these resources are impacted when deleting the game server group. Depending on the type of delete operation selected, this operation might affect these resources:   The game server group   The corresponding Auto Scaling group   All game servers that are currently running in the group   To delete a game server group, identify the game server group to delete and specify the type of delete operation to initiate. Game server groups can only be deleted if they are in ACTIVE or ERROR status. If the delete request is successful, a series of operations are kicked off. The game server group status is changed to DELETE_SCHEDULED, which prevents new game servers from being registered and stops automatic scaling activity. Once all game servers in the game server group are deregistered, GameLift FleetIQ can begin deleting resources. If any of the delete operations fail, the game server group is placed in ERROR status. GameLift FleetIQ emits delete events to Amazon CloudWatch.  Learn more   GameLift FleetIQ Guide   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup     DescribeGameServerInstances   
    */
   deleteGameServerGroup(callback?: (err: AWSError, data: GameLift.Types.DeleteGameServerGroupOutput) => void): Request<GameLift.Types.DeleteGameServerGroupOutput, AWSError>;
   /**
-   * Deletes a game session queue. This action means that any StartGameSessionPlacement requests that reference this queue will fail. To delete a queue, specify the queue name.  Learn more    Using Multi-Region Queues   Related operations     CreateGameSessionQueue     DescribeGameSessionQueues     UpdateGameSessionQueue     DeleteGameSessionQueue   
+   * Deletes a game session queue. Once a queue is successfully deleted, unfulfilled StartGameSessionPlacement requests that reference the queue will fail. To delete a queue, specify the queue name.  Learn more    Using Multi-Region Queues   Related operations     CreateGameSessionQueue     DescribeGameSessionQueues     UpdateGameSessionQueue     DeleteGameSessionQueue   
    */
   deleteGameSessionQueue(params: GameLift.Types.DeleteGameSessionQueueInput, callback?: (err: AWSError, data: GameLift.Types.DeleteGameSessionQueueOutput) => void): Request<GameLift.Types.DeleteGameSessionQueueOutput, AWSError>;
   /**
-   * Deletes a game session queue. This action means that any StartGameSessionPlacement requests that reference this queue will fail. To delete a queue, specify the queue name.  Learn more    Using Multi-Region Queues   Related operations     CreateGameSessionQueue     DescribeGameSessionQueues     UpdateGameSessionQueue     DeleteGameSessionQueue   
+   * Deletes a game session queue. Once a queue is successfully deleted, unfulfilled StartGameSessionPlacement requests that reference the queue will fail. To delete a queue, specify the queue name.  Learn more    Using Multi-Region Queues   Related operations     CreateGameSessionQueue     DescribeGameSessionQueues     UpdateGameSessionQueue     DeleteGameSessionQueue   
    */
   deleteGameSessionQueue(callback?: (err: AWSError, data: GameLift.Types.DeleteGameSessionQueueOutput) => void): Request<GameLift.Types.DeleteGameSessionQueueOutput, AWSError>;
   /**
@@ -188,19 +188,19 @@ declare class GameLift extends Service {
    */
   deleteMatchmakingRuleSet(callback?: (err: AWSError, data: GameLift.Types.DeleteMatchmakingRuleSetOutput) => void): Request<GameLift.Types.DeleteMatchmakingRuleSetOutput, AWSError>;
   /**
-   * Deletes a fleet scaling policy. This action means that the policy is no longer in force and removes all record of it. To delete a scaling policy, specify both the scaling policy name and the fleet ID it is associated with. To temporarily suspend scaling policies, call StopFleetActions. This operation suspends all policies for the fleet.    DescribeFleetCapacity     UpdateFleetCapacity     DescribeEC2InstanceLimits    Manage scaling policies:    PutScalingPolicy (auto-scaling)    DescribeScalingPolicies (auto-scaling)    DeleteScalingPolicy (auto-scaling)     Manage fleet actions:    StartFleetActions     StopFleetActions     
+   * Deletes a fleet scaling policy. Once deleted, the policy is no longer in force and GameLift removes all record of it. To delete a scaling policy, specify both the scaling policy name and the fleet ID it is associated with. To temporarily suspend scaling policies, call StopFleetActions. This operation suspends all policies for the fleet.    DescribeFleetCapacity     UpdateFleetCapacity     DescribeEC2InstanceLimits    Manage scaling policies:    PutScalingPolicy (auto-scaling)    DescribeScalingPolicies (auto-scaling)    DeleteScalingPolicy (auto-scaling)     Manage fleet actions:    StartFleetActions     StopFleetActions     
    */
   deleteScalingPolicy(params: GameLift.Types.DeleteScalingPolicyInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a fleet scaling policy. This action means that the policy is no longer in force and removes all record of it. To delete a scaling policy, specify both the scaling policy name and the fleet ID it is associated with. To temporarily suspend scaling policies, call StopFleetActions. This operation suspends all policies for the fleet.    DescribeFleetCapacity     UpdateFleetCapacity     DescribeEC2InstanceLimits    Manage scaling policies:    PutScalingPolicy (auto-scaling)    DescribeScalingPolicies (auto-scaling)    DeleteScalingPolicy (auto-scaling)     Manage fleet actions:    StartFleetActions     StopFleetActions     
+   * Deletes a fleet scaling policy. Once deleted, the policy is no longer in force and GameLift removes all record of it. To delete a scaling policy, specify both the scaling policy name and the fleet ID it is associated with. To temporarily suspend scaling policies, call StopFleetActions. This operation suspends all policies for the fleet.    DescribeFleetCapacity     UpdateFleetCapacity     DescribeEC2InstanceLimits    Manage scaling policies:    PutScalingPolicy (auto-scaling)    DescribeScalingPolicies (auto-scaling)    DeleteScalingPolicy (auto-scaling)     Manage fleet actions:    StartFleetActions     StopFleetActions     
    */
   deleteScalingPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a Realtime script. This action permanently deletes the script record. If script files were uploaded, they are also deleted (files stored in an S3 bucket are not deleted).  To delete a script, specify the script ID. Before deleting a script, be sure to terminate all fleets that are deployed with the script being deleted. Fleet instances periodically check for script updates, and if the script record no longer exists, the instance will go into an error state and be unable to host game sessions.  Learn more   Amazon GameLift Realtime Servers   Related operations     CreateScript     ListScripts     DescribeScript     UpdateScript     DeleteScript   
+   * Deletes a Realtime script. This operation permanently deletes the script record. If script files were uploaded, they are also deleted (files stored in an S3 bucket are not deleted).  To delete a script, specify the script ID. Before deleting a script, be sure to terminate all fleets that are deployed with the script being deleted. Fleet instances periodically check for script updates, and if the script record no longer exists, the instance will go into an error state and be unable to host game sessions.  Learn more   Amazon GameLift Realtime Servers   Related operations     CreateScript     ListScripts     DescribeScript     UpdateScript     DeleteScript   
    */
   deleteScript(params: GameLift.Types.DeleteScriptInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a Realtime script. This action permanently deletes the script record. If script files were uploaded, they are also deleted (files stored in an S3 bucket are not deleted).  To delete a script, specify the script ID. Before deleting a script, be sure to terminate all fleets that are deployed with the script being deleted. Fleet instances periodically check for script updates, and if the script record no longer exists, the instance will go into an error state and be unable to host game sessions.  Learn more   Amazon GameLift Realtime Servers   Related operations     CreateScript     ListScripts     DescribeScript     UpdateScript     DeleteScript   
+   * Deletes a Realtime script. This operation permanently deletes the script record. If script files were uploaded, they are also deleted (files stored in an S3 bucket are not deleted).  To delete a script, specify the script ID. Before deleting a script, be sure to terminate all fleets that are deployed with the script being deleted. Fleet instances periodically check for script updates, and if the script record no longer exists, the instance will go into an error state and be unable to host game sessions.  Learn more   Amazon GameLift Realtime Servers   Related operations     CreateScript     ListScripts     DescribeScript     UpdateScript     DeleteScript   
    */
   deleteScript(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -220,11 +220,11 @@ declare class GameLift extends Service {
    */
   deleteVpcPeeringConnection(callback?: (err: AWSError, data: GameLift.Types.DeleteVpcPeeringConnectionOutput) => void): Request<GameLift.Types.DeleteVpcPeeringConnectionOutput, AWSError>;
   /**
-   *  This action is part of Amazon GameLift FleetIQ with game server groups, which is in preview release and is subject to change.  Removes the game server resource from the game server group. As a result of this action, the de-registered game server can no longer be claimed and will not returned in a list of active game servers.  To de-register a game server, specify the game server group and game server ID. If successful, this action emits a CloudWatch event with termination time stamp and reason.  Learn more   GameLift FleetIQ Guide   Related operations     RegisterGameServer     ListGameServers     ClaimGameServer     DescribeGameServer     UpdateGameServer     DeregisterGameServer   
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Removes the game server from a game server group. As a result of this operation, the deregistered game server can no longer be claimed and will not be returned in a list of active game servers.  To deregister a game server, specify the game server group and game server ID. If successful, this operation emits a CloudWatch event with termination timestamp and reason.  Learn more   GameLift FleetIQ Guide   Related operations     RegisterGameServer     ListGameServers     ClaimGameServer     DescribeGameServer     UpdateGameServer     DeregisterGameServer   
    */
   deregisterGameServer(params: GameLift.Types.DeregisterGameServerInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  This action is part of Amazon GameLift FleetIQ with game server groups, which is in preview release and is subject to change.  Removes the game server resource from the game server group. As a result of this action, the de-registered game server can no longer be claimed and will not returned in a list of active game servers.  To de-register a game server, specify the game server group and game server ID. If successful, this action emits a CloudWatch event with termination time stamp and reason.  Learn more   GameLift FleetIQ Guide   Related operations     RegisterGameServer     ListGameServers     ClaimGameServer     DescribeGameServer     UpdateGameServer     DeregisterGameServer   
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Removes the game server from a game server group. As a result of this operation, the deregistered game server can no longer be claimed and will not be returned in a list of active game servers.  To deregister a game server, specify the game server group and game server ID. If successful, this operation emits a CloudWatch event with termination timestamp and reason.  Learn more   GameLift FleetIQ Guide   Related operations     RegisterGameServer     ListGameServers     ClaimGameServer     DescribeGameServer     UpdateGameServer     DeregisterGameServer   
    */
   deregisterGameServer(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -252,19 +252,19 @@ declare class GameLift extends Service {
    */
   describeEC2InstanceLimits(callback?: (err: AWSError, data: GameLift.Types.DescribeEC2InstanceLimitsOutput) => void): Request<GameLift.Types.DescribeEC2InstanceLimitsOutput, AWSError>;
   /**
-   * Retrieves core properties, including configuration, status, and metadata, for a fleet.  To get attributes for one or more fleets, provide a list of fleet IDs or fleet ARNs. To get attributes for all fleets, do not specify a fleet identifier. When requesting attributes for multiple fleets, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a FleetAttributes object is returned for each fleet requested, unless the fleet identifier is not found.  Some API actions may limit the number of fleet IDs allowed in one request. If a request exceeds this limit, the request fails and the error message includes the maximum allowed number.   Learn more   Setting up GameLift Fleets   Related operations     CreateFleet     ListFleets     DeleteFleet    Describe fleets:    DescribeFleetAttributes     DescribeFleetCapacity     DescribeFleetPortSettings     DescribeFleetUtilization     DescribeRuntimeConfiguration     DescribeEC2InstanceLimits     DescribeFleetEvents       UpdateFleetAttributes     StartFleetActions or StopFleetActions   
+   * Retrieves core properties, including configuration, status, and metadata, for a fleet.  To get attributes for one or more fleets, provide a list of fleet IDs or fleet ARNs. To get attributes for all fleets, do not specify a fleet identifier. When requesting attributes for multiple fleets, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a FleetAttributes object is returned for each fleet requested, unless the fleet identifier is not found.  Some API operations may limit the number of fleet IDs allowed in one request. If a request exceeds this limit, the request fails and the error message includes the maximum allowed number.   Learn more   Setting up GameLift Fleets   Related operations     CreateFleet     ListFleets     DeleteFleet    Describe fleets:    DescribeFleetAttributes     DescribeFleetCapacity     DescribeFleetPortSettings     DescribeFleetUtilization     DescribeRuntimeConfiguration     DescribeEC2InstanceLimits     DescribeFleetEvents       UpdateFleetAttributes     StartFleetActions or StopFleetActions   
    */
   describeFleetAttributes(params: GameLift.Types.DescribeFleetAttributesInput, callback?: (err: AWSError, data: GameLift.Types.DescribeFleetAttributesOutput) => void): Request<GameLift.Types.DescribeFleetAttributesOutput, AWSError>;
   /**
-   * Retrieves core properties, including configuration, status, and metadata, for a fleet.  To get attributes for one or more fleets, provide a list of fleet IDs or fleet ARNs. To get attributes for all fleets, do not specify a fleet identifier. When requesting attributes for multiple fleets, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a FleetAttributes object is returned for each fleet requested, unless the fleet identifier is not found.  Some API actions may limit the number of fleet IDs allowed in one request. If a request exceeds this limit, the request fails and the error message includes the maximum allowed number.   Learn more   Setting up GameLift Fleets   Related operations     CreateFleet     ListFleets     DeleteFleet    Describe fleets:    DescribeFleetAttributes     DescribeFleetCapacity     DescribeFleetPortSettings     DescribeFleetUtilization     DescribeRuntimeConfiguration     DescribeEC2InstanceLimits     DescribeFleetEvents       UpdateFleetAttributes     StartFleetActions or StopFleetActions   
+   * Retrieves core properties, including configuration, status, and metadata, for a fleet.  To get attributes for one or more fleets, provide a list of fleet IDs or fleet ARNs. To get attributes for all fleets, do not specify a fleet identifier. When requesting attributes for multiple fleets, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a FleetAttributes object is returned for each fleet requested, unless the fleet identifier is not found.  Some API operations may limit the number of fleet IDs allowed in one request. If a request exceeds this limit, the request fails and the error message includes the maximum allowed number.   Learn more   Setting up GameLift Fleets   Related operations     CreateFleet     ListFleets     DeleteFleet    Describe fleets:    DescribeFleetAttributes     DescribeFleetCapacity     DescribeFleetPortSettings     DescribeFleetUtilization     DescribeRuntimeConfiguration     DescribeEC2InstanceLimits     DescribeFleetEvents       UpdateFleetAttributes     StartFleetActions or StopFleetActions   
    */
   describeFleetAttributes(callback?: (err: AWSError, data: GameLift.Types.DescribeFleetAttributesOutput) => void): Request<GameLift.Types.DescribeFleetAttributesOutput, AWSError>;
   /**
-   * Retrieves the current capacity statistics for one or more fleets. These statistics present a snapshot of the fleet's instances and provide insight on current or imminent scaling activity. To get statistics on game hosting activity in the fleet, see DescribeFleetUtilization. You can request capacity for all fleets or specify a list of one or more fleet identifiers. When requesting multiple fleets, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a FleetCapacity object is returned for each requested fleet ID. When a list of fleet IDs is provided, attribute objects are returned only for fleets that currently exist.  Some API actions may limit the number of fleet IDs allowed in one request. If a request exceeds this limit, the request fails and the error message includes the maximum allowed.   Learn more   Setting up GameLift Fleets   GameLift Metrics for Fleets   Related operations     CreateFleet     ListFleets     DeleteFleet    Describe fleets:    DescribeFleetAttributes     DescribeFleetCapacity     DescribeFleetPortSettings     DescribeFleetUtilization     DescribeRuntimeConfiguration     DescribeEC2InstanceLimits     DescribeFleetEvents       UpdateFleetAttributes     StartFleetActions or StopFleetActions   
+   * Retrieves the current capacity statistics for one or more fleets. These statistics present a snapshot of the fleet's instances and provide insight on current or imminent scaling activity. To get statistics on game hosting activity in the fleet, see DescribeFleetUtilization. You can request capacity for all fleets or specify a list of one or more fleet identifiers. When requesting multiple fleets, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a FleetCapacity object is returned for each requested fleet ID. When a list of fleet IDs is provided, attribute objects are returned only for fleets that currently exist.  Some API operations may limit the number of fleet IDs allowed in one request. If a request exceeds this limit, the request fails and the error message includes the maximum allowed.   Learn more   Setting up GameLift Fleets   GameLift Metrics for Fleets   Related operations     CreateFleet     ListFleets     DeleteFleet    Describe fleets:    DescribeFleetAttributes     DescribeFleetCapacity     DescribeFleetPortSettings     DescribeFleetUtilization     DescribeRuntimeConfiguration     DescribeEC2InstanceLimits     DescribeFleetEvents       UpdateFleetAttributes     StartFleetActions or StopFleetActions   
    */
   describeFleetCapacity(params: GameLift.Types.DescribeFleetCapacityInput, callback?: (err: AWSError, data: GameLift.Types.DescribeFleetCapacityOutput) => void): Request<GameLift.Types.DescribeFleetCapacityOutput, AWSError>;
   /**
-   * Retrieves the current capacity statistics for one or more fleets. These statistics present a snapshot of the fleet's instances and provide insight on current or imminent scaling activity. To get statistics on game hosting activity in the fleet, see DescribeFleetUtilization. You can request capacity for all fleets or specify a list of one or more fleet identifiers. When requesting multiple fleets, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a FleetCapacity object is returned for each requested fleet ID. When a list of fleet IDs is provided, attribute objects are returned only for fleets that currently exist.  Some API actions may limit the number of fleet IDs allowed in one request. If a request exceeds this limit, the request fails and the error message includes the maximum allowed.   Learn more   Setting up GameLift Fleets   GameLift Metrics for Fleets   Related operations     CreateFleet     ListFleets     DeleteFleet    Describe fleets:    DescribeFleetAttributes     DescribeFleetCapacity     DescribeFleetPortSettings     DescribeFleetUtilization     DescribeRuntimeConfiguration     DescribeEC2InstanceLimits     DescribeFleetEvents       UpdateFleetAttributes     StartFleetActions or StopFleetActions   
+   * Retrieves the current capacity statistics for one or more fleets. These statistics present a snapshot of the fleet's instances and provide insight on current or imminent scaling activity. To get statistics on game hosting activity in the fleet, see DescribeFleetUtilization. You can request capacity for all fleets or specify a list of one or more fleet identifiers. When requesting multiple fleets, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a FleetCapacity object is returned for each requested fleet ID. When a list of fleet IDs is provided, attribute objects are returned only for fleets that currently exist.  Some API operations may limit the number of fleet IDs allowed in one request. If a request exceeds this limit, the request fails and the error message includes the maximum allowed.   Learn more   Setting up GameLift Fleets   GameLift Metrics for Fleets   Related operations     CreateFleet     ListFleets     DeleteFleet    Describe fleets:    DescribeFleetAttributes     DescribeFleetCapacity     DescribeFleetPortSettings     DescribeFleetUtilization     DescribeRuntimeConfiguration     DescribeEC2InstanceLimits     DescribeFleetEvents       UpdateFleetAttributes     StartFleetActions or StopFleetActions   
    */
   describeFleetCapacity(callback?: (err: AWSError, data: GameLift.Types.DescribeFleetCapacityOutput) => void): Request<GameLift.Types.DescribeFleetCapacityOutput, AWSError>;
   /**
@@ -284,35 +284,43 @@ declare class GameLift extends Service {
    */
   describeFleetPortSettings(callback?: (err: AWSError, data: GameLift.Types.DescribeFleetPortSettingsOutput) => void): Request<GameLift.Types.DescribeFleetPortSettingsOutput, AWSError>;
   /**
-   * Retrieves utilization statistics for one or more fleets. These statistics provide insight into how available hosting resources are currently being used. To get statistics on available hosting resources, see DescribeFleetCapacity. You can request utilization data for all fleets, or specify a list of one or more fleet IDs. When requesting multiple fleets, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a FleetUtilization object is returned for each requested fleet ID, unless the fleet identifier is not found.   Some API actions may limit the number of fleet IDs allowed in one request. If a request exceeds this limit, the request fails and the error message includes the maximum allowed.   Learn more   Setting up GameLift Fleets   GameLift Metrics for Fleets   Related operations     CreateFleet     ListFleets     DeleteFleet    Describe fleets:    DescribeFleetAttributes     DescribeFleetCapacity     DescribeFleetPortSettings     DescribeFleetUtilization     DescribeRuntimeConfiguration     DescribeEC2InstanceLimits     DescribeFleetEvents       UpdateFleetAttributes     StartFleetActions or StopFleetActions   
+   * Retrieves utilization statistics for one or more fleets. These statistics provide insight into how available hosting resources are currently being used. To get statistics on available hosting resources, see DescribeFleetCapacity. You can request utilization data for all fleets, or specify a list of one or more fleet IDs. When requesting multiple fleets, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a FleetUtilization object is returned for each requested fleet ID, unless the fleet identifier is not found.   Some API operations may limit the number of fleet IDs allowed in one request. If a request exceeds this limit, the request fails and the error message includes the maximum allowed.   Learn more   Setting up GameLift Fleets   GameLift Metrics for Fleets   Related operations     CreateFleet     ListFleets     DeleteFleet    Describe fleets:    DescribeFleetAttributes     DescribeFleetCapacity     DescribeFleetPortSettings     DescribeFleetUtilization     DescribeRuntimeConfiguration     DescribeEC2InstanceLimits     DescribeFleetEvents       UpdateFleetAttributes     StartFleetActions or StopFleetActions   
    */
   describeFleetUtilization(params: GameLift.Types.DescribeFleetUtilizationInput, callback?: (err: AWSError, data: GameLift.Types.DescribeFleetUtilizationOutput) => void): Request<GameLift.Types.DescribeFleetUtilizationOutput, AWSError>;
   /**
-   * Retrieves utilization statistics for one or more fleets. These statistics provide insight into how available hosting resources are currently being used. To get statistics on available hosting resources, see DescribeFleetCapacity. You can request utilization data for all fleets, or specify a list of one or more fleet IDs. When requesting multiple fleets, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a FleetUtilization object is returned for each requested fleet ID, unless the fleet identifier is not found.   Some API actions may limit the number of fleet IDs allowed in one request. If a request exceeds this limit, the request fails and the error message includes the maximum allowed.   Learn more   Setting up GameLift Fleets   GameLift Metrics for Fleets   Related operations     CreateFleet     ListFleets     DeleteFleet    Describe fleets:    DescribeFleetAttributes     DescribeFleetCapacity     DescribeFleetPortSettings     DescribeFleetUtilization     DescribeRuntimeConfiguration     DescribeEC2InstanceLimits     DescribeFleetEvents       UpdateFleetAttributes     StartFleetActions or StopFleetActions   
+   * Retrieves utilization statistics for one or more fleets. These statistics provide insight into how available hosting resources are currently being used. To get statistics on available hosting resources, see DescribeFleetCapacity. You can request utilization data for all fleets, or specify a list of one or more fleet IDs. When requesting multiple fleets, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a FleetUtilization object is returned for each requested fleet ID, unless the fleet identifier is not found.   Some API operations may limit the number of fleet IDs allowed in one request. If a request exceeds this limit, the request fails and the error message includes the maximum allowed.   Learn more   Setting up GameLift Fleets   GameLift Metrics for Fleets   Related operations     CreateFleet     ListFleets     DeleteFleet    Describe fleets:    DescribeFleetAttributes     DescribeFleetCapacity     DescribeFleetPortSettings     DescribeFleetUtilization     DescribeRuntimeConfiguration     DescribeEC2InstanceLimits     DescribeFleetEvents       UpdateFleetAttributes     StartFleetActions or StopFleetActions   
    */
   describeFleetUtilization(callback?: (err: AWSError, data: GameLift.Types.DescribeFleetUtilizationOutput) => void): Request<GameLift.Types.DescribeFleetUtilizationOutput, AWSError>;
   /**
-   *  This action is part of Amazon GameLift FleetIQ with game server groups, which is in preview release and is subject to change.  Retrieves information for a game server resource. Information includes the game server statuses, health check info, and the instance the game server is running on.  To retrieve game server information, specify the game server ID. If successful, the requested game server object is returned.   Learn more   GameLift FleetIQ Guide   Related operations     RegisterGameServer     ListGameServers     ClaimGameServer     DescribeGameServer     UpdateGameServer     DeregisterGameServer   
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Retrieves information for a registered game server. Information includes game server status, health check info, and the instance that the game server is running on.  To retrieve game server information, specify the game server ID. If successful, the requested game server object is returned.   Learn more   GameLift FleetIQ Guide   Related operations     RegisterGameServer     ListGameServers     ClaimGameServer     DescribeGameServer     UpdateGameServer     DeregisterGameServer   
    */
   describeGameServer(params: GameLift.Types.DescribeGameServerInput, callback?: (err: AWSError, data: GameLift.Types.DescribeGameServerOutput) => void): Request<GameLift.Types.DescribeGameServerOutput, AWSError>;
   /**
-   *  This action is part of Amazon GameLift FleetIQ with game server groups, which is in preview release and is subject to change.  Retrieves information for a game server resource. Information includes the game server statuses, health check info, and the instance the game server is running on.  To retrieve game server information, specify the game server ID. If successful, the requested game server object is returned.   Learn more   GameLift FleetIQ Guide   Related operations     RegisterGameServer     ListGameServers     ClaimGameServer     DescribeGameServer     UpdateGameServer     DeregisterGameServer   
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Retrieves information for a registered game server. Information includes game server status, health check info, and the instance that the game server is running on.  To retrieve game server information, specify the game server ID. If successful, the requested game server object is returned.   Learn more   GameLift FleetIQ Guide   Related operations     RegisterGameServer     ListGameServers     ClaimGameServer     DescribeGameServer     UpdateGameServer     DeregisterGameServer   
    */
   describeGameServer(callback?: (err: AWSError, data: GameLift.Types.DescribeGameServerOutput) => void): Request<GameLift.Types.DescribeGameServerOutput, AWSError>;
   /**
-   *  This action is part of Amazon GameLift FleetIQ with game server groups, which is in preview release and is subject to change.  Retrieves information on a game server group.  To get attributes for a game server group, provide a group name or ARN value. If successful, a GameServerGroup object is returned.  Learn more   GameLift FleetIQ Guide   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup   
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Retrieves information on a game server group. This operation returns only properties related to GameLift FleetIQ. To view or update properties for the corresponding Auto Scaling group, such as launch template, auto scaling policies, and maximum/minimum group size, access the Auto Scaling group directly. To get attributes for a game server group, provide a group name or ARN value. If successful, a GameServerGroup object is returned.  Learn more   GameLift FleetIQ Guide   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup     DescribeGameServerInstances   
    */
   describeGameServerGroup(params: GameLift.Types.DescribeGameServerGroupInput, callback?: (err: AWSError, data: GameLift.Types.DescribeGameServerGroupOutput) => void): Request<GameLift.Types.DescribeGameServerGroupOutput, AWSError>;
   /**
-   *  This action is part of Amazon GameLift FleetIQ with game server groups, which is in preview release and is subject to change.  Retrieves information on a game server group.  To get attributes for a game server group, provide a group name or ARN value. If successful, a GameServerGroup object is returned.  Learn more   GameLift FleetIQ Guide   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup   
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Retrieves information on a game server group. This operation returns only properties related to GameLift FleetIQ. To view or update properties for the corresponding Auto Scaling group, such as launch template, auto scaling policies, and maximum/minimum group size, access the Auto Scaling group directly. To get attributes for a game server group, provide a group name or ARN value. If successful, a GameServerGroup object is returned.  Learn more   GameLift FleetIQ Guide   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup     DescribeGameServerInstances   
    */
   describeGameServerGroup(callback?: (err: AWSError, data: GameLift.Types.DescribeGameServerGroupOutput) => void): Request<GameLift.Types.DescribeGameServerGroupOutput, AWSError>;
   /**
-   * Retrieves properties, including the protection policy in force, for one or more game sessions. This action can be used in several ways: (1) provide a GameSessionId or GameSessionArn to request details for a specific game session; (2) provide either a FleetId or an AliasId to request properties for all game sessions running on a fleet.  To get game session record(s), specify just one of the following: game session ID, fleet ID, or alias ID. You can filter this request by game session status. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a GameSessionDetail object is returned for each session matching the request.    CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Retrieves status information about the Amazon EC2 instances associated with a GameLift FleetIQ game server group. Use this operation to detect when instances are active or not available to host new game servers. If you are looking for instance configuration information, call DescribeGameServerGroup or access the corresponding Auto Scaling group properties. To request status for all instances in the game server group, provide a game server group ID only. To request status for specific instances, provide the game server group ID and one or more instance IDs. Use the pagination parameters to retrieve results in sequential segments. If successful, a collection of GameServerInstance objects is returned.  This operation is not designed to be called with every game server claim request; this practice can cause you to exceed your API limit, which results in errors. Instead, as a best practice, cache the results and refresh your cache no more than once every 10 seconds.  Learn more   GameLift FleetIQ Guide   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup     DescribeGameServerInstances   
+   */
+  describeGameServerInstances(params: GameLift.Types.DescribeGameServerInstancesInput, callback?: (err: AWSError, data: GameLift.Types.DescribeGameServerInstancesOutput) => void): Request<GameLift.Types.DescribeGameServerInstancesOutput, AWSError>;
+  /**
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Retrieves status information about the Amazon EC2 instances associated with a GameLift FleetIQ game server group. Use this operation to detect when instances are active or not available to host new game servers. If you are looking for instance configuration information, call DescribeGameServerGroup or access the corresponding Auto Scaling group properties. To request status for all instances in the game server group, provide a game server group ID only. To request status for specific instances, provide the game server group ID and one or more instance IDs. Use the pagination parameters to retrieve results in sequential segments. If successful, a collection of GameServerInstance objects is returned.  This operation is not designed to be called with every game server claim request; this practice can cause you to exceed your API limit, which results in errors. Instead, as a best practice, cache the results and refresh your cache no more than once every 10 seconds.  Learn more   GameLift FleetIQ Guide   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup     DescribeGameServerInstances   
+   */
+  describeGameServerInstances(callback?: (err: AWSError, data: GameLift.Types.DescribeGameServerInstancesOutput) => void): Request<GameLift.Types.DescribeGameServerInstancesOutput, AWSError>;
+  /**
+   * Retrieves properties, including the protection policy in force, for one or more game sessions. This operation can be used in several ways: (1) provide a GameSessionId or GameSessionArn to request details for a specific game session; (2) provide either a FleetId or an AliasId to request properties for all game sessions running on a fleet.  To get game session record(s), specify just one of the following: game session ID, fleet ID, or alias ID. You can filter this request by game session status. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a GameSessionDetail object is returned for each session matching the request.    CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
    */
   describeGameSessionDetails(params: GameLift.Types.DescribeGameSessionDetailsInput, callback?: (err: AWSError, data: GameLift.Types.DescribeGameSessionDetailsOutput) => void): Request<GameLift.Types.DescribeGameSessionDetailsOutput, AWSError>;
   /**
-   * Retrieves properties, including the protection policy in force, for one or more game sessions. This action can be used in several ways: (1) provide a GameSessionId or GameSessionArn to request details for a specific game session; (2) provide either a FleetId or an AliasId to request properties for all game sessions running on a fleet.  To get game session record(s), specify just one of the following: game session ID, fleet ID, or alias ID. You can filter this request by game session status. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a GameSessionDetail object is returned for each session matching the request.    CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
+   * Retrieves properties, including the protection policy in force, for one or more game sessions. This operation can be used in several ways: (1) provide a GameSessionId or GameSessionArn to request details for a specific game session; (2) provide either a FleetId or an AliasId to request properties for all game sessions running on a fleet.  To get game session record(s), specify just one of the following: game session ID, fleet ID, or alias ID. You can filter this request by game session status. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a GameSessionDetail object is returned for each session matching the request.    CreateGameSession     DescribeGameSessions     DescribeGameSessionDetails     SearchGameSessions     UpdateGameSession     GetGameSessionLogUrl    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
    */
   describeGameSessionDetails(callback?: (err: AWSError, data: GameLift.Types.DescribeGameSessionDetailsOutput) => void): Request<GameLift.Types.DescribeGameSessionDetailsOutput, AWSError>;
   /**
@@ -340,27 +348,27 @@ declare class GameLift extends Service {
    */
   describeGameSessions(callback?: (err: AWSError, data: GameLift.Types.DescribeGameSessionsOutput) => void): Request<GameLift.Types.DescribeGameSessionsOutput, AWSError>;
   /**
-   * Retrieves information about a fleet's instances, including instance IDs. Use this action to get details on all instances in the fleet or get details on one specific instance. To get a specific instance, specify fleet ID and instance ID. To get all instances in a fleet, specify a fleet ID only. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, an Instance object is returned for each result.  Learn more   Remotely Access Fleet Instances   Debug Fleet Issues   Related operations     DescribeInstances     GetInstanceAccess   
+   * Retrieves information about a fleet's instances, including instance IDs. Use this operation to get details on all instances in the fleet or get details on one specific instance. To get a specific instance, specify fleet ID and instance ID. To get all instances in a fleet, specify a fleet ID only. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, an Instance object is returned for each result.  Learn more   Remotely Access Fleet Instances   Debug Fleet Issues   Related operations     DescribeInstances     GetInstanceAccess   
    */
   describeInstances(params: GameLift.Types.DescribeInstancesInput, callback?: (err: AWSError, data: GameLift.Types.DescribeInstancesOutput) => void): Request<GameLift.Types.DescribeInstancesOutput, AWSError>;
   /**
-   * Retrieves information about a fleet's instances, including instance IDs. Use this action to get details on all instances in the fleet or get details on one specific instance. To get a specific instance, specify fleet ID and instance ID. To get all instances in a fleet, specify a fleet ID only. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, an Instance object is returned for each result.  Learn more   Remotely Access Fleet Instances   Debug Fleet Issues   Related operations     DescribeInstances     GetInstanceAccess   
+   * Retrieves information about a fleet's instances, including instance IDs. Use this operation to get details on all instances in the fleet or get details on one specific instance. To get a specific instance, specify fleet ID and instance ID. To get all instances in a fleet, specify a fleet ID only. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, an Instance object is returned for each result.  Learn more   Remotely Access Fleet Instances   Debug Fleet Issues   Related operations     DescribeInstances     GetInstanceAccess   
    */
   describeInstances(callback?: (err: AWSError, data: GameLift.Types.DescribeInstancesOutput) => void): Request<GameLift.Types.DescribeInstancesOutput, AWSError>;
   /**
-   * Retrieves one or more matchmaking tickets. Use this operation to retrieve ticket information, including status and--once a successful match is made--acquire connection information for the resulting new game session.  You can use this operation to track the progress of matchmaking requests (through polling) as an alternative to using event notifications. See more details on tracking matchmaking requests through polling or notifications in StartMatchmaking.  To request matchmaking tickets, provide a list of up to 10 ticket IDs. If the request is successful, a ticket object is returned for each requested ID that currently exists.  Learn more    Add FlexMatch to a Game Client    Set Up FlexMatch Event Notification   Related operations     StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch     StartMatchBackfill   
+   * Retrieves one or more matchmaking tickets. Use this operation to retrieve ticket information, including--after a successful match is made--connection information for the resulting new game session.  To request matchmaking tickets, provide a list of up to 10 ticket IDs. If the request is successful, a ticket object is returned for each requested ID that currently exists. This operation is not designed to be continually called to track matchmaking ticket status. This practice can cause you to exceed your API limit, which results in errors. Instead, as a best practice, set up an Amazon Simple Notification Service (SNS) to receive notifications, and provide the topic ARN in the matchmaking configuration. Continuously poling ticket status with DescribeMatchmaking should only be used for games in development with low matchmaking usage.   Learn more    Add FlexMatch to a Game Client    Set Up FlexMatch Event Notification   Related operations     StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch     StartMatchBackfill   
    */
   describeMatchmaking(params: GameLift.Types.DescribeMatchmakingInput, callback?: (err: AWSError, data: GameLift.Types.DescribeMatchmakingOutput) => void): Request<GameLift.Types.DescribeMatchmakingOutput, AWSError>;
   /**
-   * Retrieves one or more matchmaking tickets. Use this operation to retrieve ticket information, including status and--once a successful match is made--acquire connection information for the resulting new game session.  You can use this operation to track the progress of matchmaking requests (through polling) as an alternative to using event notifications. See more details on tracking matchmaking requests through polling or notifications in StartMatchmaking.  To request matchmaking tickets, provide a list of up to 10 ticket IDs. If the request is successful, a ticket object is returned for each requested ID that currently exists.  Learn more    Add FlexMatch to a Game Client    Set Up FlexMatch Event Notification   Related operations     StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch     StartMatchBackfill   
+   * Retrieves one or more matchmaking tickets. Use this operation to retrieve ticket information, including--after a successful match is made--connection information for the resulting new game session.  To request matchmaking tickets, provide a list of up to 10 ticket IDs. If the request is successful, a ticket object is returned for each requested ID that currently exists. This operation is not designed to be continually called to track matchmaking ticket status. This practice can cause you to exceed your API limit, which results in errors. Instead, as a best practice, set up an Amazon Simple Notification Service (SNS) to receive notifications, and provide the topic ARN in the matchmaking configuration. Continuously poling ticket status with DescribeMatchmaking should only be used for games in development with low matchmaking usage.   Learn more    Add FlexMatch to a Game Client    Set Up FlexMatch Event Notification   Related operations     StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch     StartMatchBackfill   
    */
   describeMatchmaking(callback?: (err: AWSError, data: GameLift.Types.DescribeMatchmakingOutput) => void): Request<GameLift.Types.DescribeMatchmakingOutput, AWSError>;
   /**
-   * Retrieves the details of FlexMatch matchmaking configurations. With this operation, you have the following options: (1) retrieve all existing configurations, (2) provide the names of one or more configurations to retrieve, or (3) retrieve all configurations that use a specified rule set name. When requesting multiple items, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a configuration is returned for each requested name. When specifying a list of names, only configurations that currently exist are returned.   Learn more    Setting Up FlexMatch Matchmakers   Related operations     CreateMatchmakingConfiguration     DescribeMatchmakingConfigurations     UpdateMatchmakingConfiguration     DeleteMatchmakingConfiguration     CreateMatchmakingRuleSet     DescribeMatchmakingRuleSets     ValidateMatchmakingRuleSet     DeleteMatchmakingRuleSet   
+   * Retrieves the details of FlexMatch matchmaking configurations.  This operation offers the following options: (1) retrieve all matchmaking configurations, (2) retrieve configurations for a specified list, or (3) retrieve all configurations that use a specified rule set name. When requesting multiple items, use the pagination parameters to retrieve results as a set of sequential pages.  If successful, a configuration is returned for each requested name. When specifying a list of names, only configurations that currently exist are returned.   Learn more    Setting Up FlexMatch Matchmakers   Related operations     CreateMatchmakingConfiguration     DescribeMatchmakingConfigurations     UpdateMatchmakingConfiguration     DeleteMatchmakingConfiguration     CreateMatchmakingRuleSet     DescribeMatchmakingRuleSets     ValidateMatchmakingRuleSet     DeleteMatchmakingRuleSet   
    */
   describeMatchmakingConfigurations(params: GameLift.Types.DescribeMatchmakingConfigurationsInput, callback?: (err: AWSError, data: GameLift.Types.DescribeMatchmakingConfigurationsOutput) => void): Request<GameLift.Types.DescribeMatchmakingConfigurationsOutput, AWSError>;
   /**
-   * Retrieves the details of FlexMatch matchmaking configurations. With this operation, you have the following options: (1) retrieve all existing configurations, (2) provide the names of one or more configurations to retrieve, or (3) retrieve all configurations that use a specified rule set name. When requesting multiple items, use the pagination parameters to retrieve results as a set of sequential pages. If successful, a configuration is returned for each requested name. When specifying a list of names, only configurations that currently exist are returned.   Learn more    Setting Up FlexMatch Matchmakers   Related operations     CreateMatchmakingConfiguration     DescribeMatchmakingConfigurations     UpdateMatchmakingConfiguration     DeleteMatchmakingConfiguration     CreateMatchmakingRuleSet     DescribeMatchmakingRuleSets     ValidateMatchmakingRuleSet     DeleteMatchmakingRuleSet   
+   * Retrieves the details of FlexMatch matchmaking configurations.  This operation offers the following options: (1) retrieve all matchmaking configurations, (2) retrieve configurations for a specified list, or (3) retrieve all configurations that use a specified rule set name. When requesting multiple items, use the pagination parameters to retrieve results as a set of sequential pages.  If successful, a configuration is returned for each requested name. When specifying a list of names, only configurations that currently exist are returned.   Learn more    Setting Up FlexMatch Matchmakers   Related operations     CreateMatchmakingConfiguration     DescribeMatchmakingConfigurations     UpdateMatchmakingConfiguration     DeleteMatchmakingConfiguration     CreateMatchmakingRuleSet     DescribeMatchmakingRuleSets     ValidateMatchmakingRuleSet     DeleteMatchmakingRuleSet   
    */
   describeMatchmakingConfigurations(callback?: (err: AWSError, data: GameLift.Types.DescribeMatchmakingConfigurationsOutput) => void): Request<GameLift.Types.DescribeMatchmakingConfigurationsOutput, AWSError>;
   /**
@@ -372,11 +380,11 @@ declare class GameLift extends Service {
    */
   describeMatchmakingRuleSets(callback?: (err: AWSError, data: GameLift.Types.DescribeMatchmakingRuleSetsOutput) => void): Request<GameLift.Types.DescribeMatchmakingRuleSetsOutput, AWSError>;
   /**
-   * Retrieves properties for one or more player sessions. This action can be used in several ways: (1) provide a PlayerSessionId to request properties for a specific player session; (2) provide a GameSessionId to request properties for all player sessions in the specified game session; (3) provide a PlayerId to request properties for all player sessions of a specified player.  To get game session record(s), specify only one of the following: a player session ID, a game session ID, or a player ID. You can filter this request by player session status. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a PlayerSession object is returned for each session matching the request.  Available in Amazon GameLift Local.     CreatePlayerSession     CreatePlayerSessions     DescribePlayerSessions    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
+   * Retrieves properties for one or more player sessions. This operation can be used in several ways: (1) provide a PlayerSessionId to request properties for a specific player session; (2) provide a GameSessionId to request properties for all player sessions in the specified game session; (3) provide a PlayerId to request properties for all player sessions of a specified player.  To get game session record(s), specify only one of the following: a player session ID, a game session ID, or a player ID. You can filter this request by player session status. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a PlayerSession object is returned for each session matching the request.  Available in Amazon GameLift Local.     CreatePlayerSession     CreatePlayerSessions     DescribePlayerSessions    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
    */
   describePlayerSessions(params: GameLift.Types.DescribePlayerSessionsInput, callback?: (err: AWSError, data: GameLift.Types.DescribePlayerSessionsOutput) => void): Request<GameLift.Types.DescribePlayerSessionsOutput, AWSError>;
   /**
-   * Retrieves properties for one or more player sessions. This action can be used in several ways: (1) provide a PlayerSessionId to request properties for a specific player session; (2) provide a GameSessionId to request properties for all player sessions in the specified game session; (3) provide a PlayerId to request properties for all player sessions of a specified player.  To get game session record(s), specify only one of the following: a player session ID, a game session ID, or a player ID. You can filter this request by player session status. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a PlayerSession object is returned for each session matching the request.  Available in Amazon GameLift Local.     CreatePlayerSession     CreatePlayerSessions     DescribePlayerSessions    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
+   * Retrieves properties for one or more player sessions. This operation can be used in several ways: (1) provide a PlayerSessionId to request properties for a specific player session; (2) provide a GameSessionId to request properties for all player sessions in the specified game session; (3) provide a PlayerId to request properties for all player sessions of a specified player.  To get game session record(s), specify only one of the following: a player session ID, a game session ID, or a player ID. You can filter this request by player session status. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, a PlayerSession object is returned for each session matching the request.  Available in Amazon GameLift Local.     CreatePlayerSession     CreatePlayerSessions     DescribePlayerSessions    Game session placements    StartGameSessionPlacement     DescribeGameSessionPlacement     StopGameSessionPlacement     
    */
   describePlayerSessions(callback?: (err: AWSError, data: GameLift.Types.DescribePlayerSessionsOutput) => void): Request<GameLift.Types.DescribePlayerSessionsOutput, AWSError>;
   /**
@@ -388,11 +396,11 @@ declare class GameLift extends Service {
    */
   describeRuntimeConfiguration(callback?: (err: AWSError, data: GameLift.Types.DescribeRuntimeConfigurationOutput) => void): Request<GameLift.Types.DescribeRuntimeConfigurationOutput, AWSError>;
   /**
-   * Retrieves all scaling policies applied to a fleet. To get a fleet's scaling policies, specify the fleet ID. You can filter this request by policy status, such as to retrieve only active scaling policies. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, set of ScalingPolicy objects is returned for the fleet. A fleet may have all of its scaling policies suspended (StopFleetActions). This action does not affect the status of the scaling policies, which remains ACTIVE. To see whether a fleet's scaling policies are in force or suspended, call DescribeFleetAttributes and check the stopped actions.    DescribeFleetCapacity     UpdateFleetCapacity     DescribeEC2InstanceLimits    Manage scaling policies:    PutScalingPolicy (auto-scaling)    DescribeScalingPolicies (auto-scaling)    DeleteScalingPolicy (auto-scaling)     Manage fleet actions:    StartFleetActions     StopFleetActions     
+   * Retrieves all scaling policies applied to a fleet. To get a fleet's scaling policies, specify the fleet ID. You can filter this request by policy status, such as to retrieve only active scaling policies. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, set of ScalingPolicy objects is returned for the fleet. A fleet may have all of its scaling policies suspended (StopFleetActions). This operation does not affect the status of the scaling policies, which remains ACTIVE. To see whether a fleet's scaling policies are in force or suspended, call DescribeFleetAttributes and check the stopped actions.    DescribeFleetCapacity     UpdateFleetCapacity     DescribeEC2InstanceLimits    Manage scaling policies:    PutScalingPolicy (auto-scaling)    DescribeScalingPolicies (auto-scaling)    DeleteScalingPolicy (auto-scaling)     Manage fleet actions:    StartFleetActions     StopFleetActions     
    */
   describeScalingPolicies(params: GameLift.Types.DescribeScalingPoliciesInput, callback?: (err: AWSError, data: GameLift.Types.DescribeScalingPoliciesOutput) => void): Request<GameLift.Types.DescribeScalingPoliciesOutput, AWSError>;
   /**
-   * Retrieves all scaling policies applied to a fleet. To get a fleet's scaling policies, specify the fleet ID. You can filter this request by policy status, such as to retrieve only active scaling policies. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, set of ScalingPolicy objects is returned for the fleet. A fleet may have all of its scaling policies suspended (StopFleetActions). This action does not affect the status of the scaling policies, which remains ACTIVE. To see whether a fleet's scaling policies are in force or suspended, call DescribeFleetAttributes and check the stopped actions.    DescribeFleetCapacity     UpdateFleetCapacity     DescribeEC2InstanceLimits    Manage scaling policies:    PutScalingPolicy (auto-scaling)    DescribeScalingPolicies (auto-scaling)    DeleteScalingPolicy (auto-scaling)     Manage fleet actions:    StartFleetActions     StopFleetActions     
+   * Retrieves all scaling policies applied to a fleet. To get a fleet's scaling policies, specify the fleet ID. You can filter this request by policy status, such as to retrieve only active scaling policies. Use the pagination parameters to retrieve results as a set of sequential pages. If successful, set of ScalingPolicy objects is returned for the fleet. A fleet may have all of its scaling policies suspended (StopFleetActions). This operation does not affect the status of the scaling policies, which remains ACTIVE. To see whether a fleet's scaling policies are in force or suspended, call DescribeFleetAttributes and check the stopped actions.    DescribeFleetCapacity     UpdateFleetCapacity     DescribeEC2InstanceLimits    Manage scaling policies:    PutScalingPolicy (auto-scaling)    DescribeScalingPolicies (auto-scaling)    DeleteScalingPolicy (auto-scaling)     Manage fleet actions:    StartFleetActions     StopFleetActions     
    */
   describeScalingPolicies(callback?: (err: AWSError, data: GameLift.Types.DescribeScalingPoliciesOutput) => void): Request<GameLift.Types.DescribeScalingPoliciesOutput, AWSError>;
   /**
@@ -428,11 +436,11 @@ declare class GameLift extends Service {
    */
   getGameSessionLogUrl(callback?: (err: AWSError, data: GameLift.Types.GetGameSessionLogUrlOutput) => void): Request<GameLift.Types.GetGameSessionLogUrlOutput, AWSError>;
   /**
-   * Requests remote access to a fleet instance. Remote access is useful for debugging, gathering benchmarking data, or observing activity in real time.  To remotely access an instance, you need credentials that match the operating system of the instance. For a Windows instance, Amazon GameLift returns a user name and password as strings for use with a Windows Remote Desktop client. For a Linux instance, Amazon GameLift returns a user name and RSA private key, also as strings, for use with an SSH client. The private key must be saved in the proper format to a .pem file before using. If you're making this request using the AWS CLI, saving the secret can be handled as part of the GetInstanceAccess request, as shown in one of the examples for this action.  To request access to a specific instance, specify the IDs of both the instance and the fleet it belongs to. You can retrieve a fleet's instance IDs by calling DescribeInstances. If successful, an InstanceAccess object is returned that contains the instance's IP address and a set of credentials.  Learn more   Remotely Access Fleet Instances   Debug Fleet Issues   Related operations     DescribeInstances     GetInstanceAccess   
+   * Requests remote access to a fleet instance. Remote access is useful for debugging, gathering benchmarking data, or observing activity in real time.  To remotely access an instance, you need credentials that match the operating system of the instance. For a Windows instance, Amazon GameLift returns a user name and password as strings for use with a Windows Remote Desktop client. For a Linux instance, Amazon GameLift returns a user name and RSA private key, also as strings, for use with an SSH client. The private key must be saved in the proper format to a .pem file before using. If you're making this request using the AWS CLI, saving the secret can be handled as part of the GetInstanceAccess request, as shown in one of the examples for this operation.  To request access to a specific instance, specify the IDs of both the instance and the fleet it belongs to. You can retrieve a fleet's instance IDs by calling DescribeInstances. If successful, an InstanceAccess object is returned that contains the instance's IP address and a set of credentials.  Learn more   Remotely Access Fleet Instances   Debug Fleet Issues   Related operations     DescribeInstances     GetInstanceAccess   
    */
   getInstanceAccess(params: GameLift.Types.GetInstanceAccessInput, callback?: (err: AWSError, data: GameLift.Types.GetInstanceAccessOutput) => void): Request<GameLift.Types.GetInstanceAccessOutput, AWSError>;
   /**
-   * Requests remote access to a fleet instance. Remote access is useful for debugging, gathering benchmarking data, or observing activity in real time.  To remotely access an instance, you need credentials that match the operating system of the instance. For a Windows instance, Amazon GameLift returns a user name and password as strings for use with a Windows Remote Desktop client. For a Linux instance, Amazon GameLift returns a user name and RSA private key, also as strings, for use with an SSH client. The private key must be saved in the proper format to a .pem file before using. If you're making this request using the AWS CLI, saving the secret can be handled as part of the GetInstanceAccess request, as shown in one of the examples for this action.  To request access to a specific instance, specify the IDs of both the instance and the fleet it belongs to. You can retrieve a fleet's instance IDs by calling DescribeInstances. If successful, an InstanceAccess object is returned that contains the instance's IP address and a set of credentials.  Learn more   Remotely Access Fleet Instances   Debug Fleet Issues   Related operations     DescribeInstances     GetInstanceAccess   
+   * Requests remote access to a fleet instance. Remote access is useful for debugging, gathering benchmarking data, or observing activity in real time.  To remotely access an instance, you need credentials that match the operating system of the instance. For a Windows instance, Amazon GameLift returns a user name and password as strings for use with a Windows Remote Desktop client. For a Linux instance, Amazon GameLift returns a user name and RSA private key, also as strings, for use with an SSH client. The private key must be saved in the proper format to a .pem file before using. If you're making this request using the AWS CLI, saving the secret can be handled as part of the GetInstanceAccess request, as shown in one of the examples for this operation.  To request access to a specific instance, specify the IDs of both the instance and the fleet it belongs to. You can retrieve a fleet's instance IDs by calling DescribeInstances. If successful, an InstanceAccess object is returned that contains the instance's IP address and a set of credentials.  Learn more   Remotely Access Fleet Instances   Debug Fleet Issues   Related operations     DescribeInstances     GetInstanceAccess   
    */
   getInstanceAccess(callback?: (err: AWSError, data: GameLift.Types.GetInstanceAccessOutput) => void): Request<GameLift.Types.GetInstanceAccessOutput, AWSError>;
   /**
@@ -460,19 +468,19 @@ declare class GameLift extends Service {
    */
   listFleets(callback?: (err: AWSError, data: GameLift.Types.ListFleetsOutput) => void): Request<GameLift.Types.ListFleetsOutput, AWSError>;
   /**
-   *  This action is part of Amazon GameLift FleetIQ with game server groups, which is in preview release and is subject to change.  Retrieves information on all game servers groups that exist in the current AWS account for the selected region. Use the pagination parameters to retrieve results in a set of sequential pages.   Learn more   GameLift FleetIQ Guide   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup   
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Retrieves information on all game servers groups that exist in the current AWS account for the selected Region. Use the pagination parameters to retrieve results in a set of sequential segments.   Learn more   GameLift FleetIQ Guide   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup     DescribeGameServerInstances   
    */
   listGameServerGroups(params: GameLift.Types.ListGameServerGroupsInput, callback?: (err: AWSError, data: GameLift.Types.ListGameServerGroupsOutput) => void): Request<GameLift.Types.ListGameServerGroupsOutput, AWSError>;
   /**
-   *  This action is part of Amazon GameLift FleetIQ with game server groups, which is in preview release and is subject to change.  Retrieves information on all game servers groups that exist in the current AWS account for the selected region. Use the pagination parameters to retrieve results in a set of sequential pages.   Learn more   GameLift FleetIQ Guide   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup   
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Retrieves information on all game servers groups that exist in the current AWS account for the selected Region. Use the pagination parameters to retrieve results in a set of sequential segments.   Learn more   GameLift FleetIQ Guide   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup     DescribeGameServerInstances   
    */
   listGameServerGroups(callback?: (err: AWSError, data: GameLift.Types.ListGameServerGroupsOutput) => void): Request<GameLift.Types.ListGameServerGroupsOutput, AWSError>;
   /**
-   *  This action is part of Amazon GameLift FleetIQ with game server groups, which is in preview release and is subject to change.  Retrieves information on all game servers that are currently running in a specified game server group. If there are custom key sort values for your game servers, you can opt to have the returned list sorted based on these values. Use the pagination parameters to retrieve results in a set of sequential pages.   Learn more   GameLift FleetIQ Guide   Related operations     RegisterGameServer     ListGameServers     ClaimGameServer     DescribeGameServer     UpdateGameServer     DeregisterGameServer   
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Retrieves information on all game servers that are currently active in a specified game server group. You can opt to sort the list by game server age. Use the pagination parameters to retrieve results in a set of sequential segments.   Learn more   GameLift FleetIQ Guide   Related operations     RegisterGameServer     ListGameServers     ClaimGameServer     DescribeGameServer     UpdateGameServer     DeregisterGameServer   
    */
   listGameServers(params: GameLift.Types.ListGameServersInput, callback?: (err: AWSError, data: GameLift.Types.ListGameServersOutput) => void): Request<GameLift.Types.ListGameServersOutput, AWSError>;
   /**
-   *  This action is part of Amazon GameLift FleetIQ with game server groups, which is in preview release and is subject to change.  Retrieves information on all game servers that are currently running in a specified game server group. If there are custom key sort values for your game servers, you can opt to have the returned list sorted based on these values. Use the pagination parameters to retrieve results in a set of sequential pages.   Learn more   GameLift FleetIQ Guide   Related operations     RegisterGameServer     ListGameServers     ClaimGameServer     DescribeGameServer     UpdateGameServer     DeregisterGameServer   
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Retrieves information on all game servers that are currently active in a specified game server group. You can opt to sort the list by game server age. Use the pagination parameters to retrieve results in a set of sequential segments.   Learn more   GameLift FleetIQ Guide   Related operations     RegisterGameServer     ListGameServers     ClaimGameServer     DescribeGameServer     UpdateGameServer     DeregisterGameServer   
    */
   listGameServers(callback?: (err: AWSError, data: GameLift.Types.ListGameServersOutput) => void): Request<GameLift.Types.ListGameServersOutput, AWSError>;
   /**
@@ -484,11 +492,11 @@ declare class GameLift extends Service {
    */
   listScripts(callback?: (err: AWSError, data: GameLift.Types.ListScriptsOutput) => void): Request<GameLift.Types.ListScriptsOutput, AWSError>;
   /**
-   *  Retrieves all tags that are assigned to a GameLift resource. Resource tags are used to organize AWS resources for a range of purposes. This action handles the permissions necessary to manage tags for the following GameLift resource types:   Build   Script   Fleet   Alias   GameSessionQueue   MatchmakingConfiguration   MatchmakingRuleSet   To list tags for a resource, specify the unique ARN value for the resource.  Learn more   Tagging AWS Resources in the AWS General Reference    AWS Tagging Strategies   Related operations     TagResource     UntagResource     ListTagsForResource   
+   *  Retrieves all tags that are assigned to a GameLift resource. Resource tags are used to organize AWS resources for a range of purposes. This operation handles the permissions necessary to manage tags for the following GameLift resource types:   Build   Script   Fleet   Alias   GameSessionQueue   MatchmakingConfiguration   MatchmakingRuleSet   To list tags for a resource, specify the unique ARN value for the resource.  Learn more   Tagging AWS Resources in the AWS General Reference    AWS Tagging Strategies   Related operations     TagResource     UntagResource     ListTagsForResource   
    */
   listTagsForResource(params: GameLift.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: GameLift.Types.ListTagsForResourceResponse) => void): Request<GameLift.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   *  Retrieves all tags that are assigned to a GameLift resource. Resource tags are used to organize AWS resources for a range of purposes. This action handles the permissions necessary to manage tags for the following GameLift resource types:   Build   Script   Fleet   Alias   GameSessionQueue   MatchmakingConfiguration   MatchmakingRuleSet   To list tags for a resource, specify the unique ARN value for the resource.  Learn more   Tagging AWS Resources in the AWS General Reference    AWS Tagging Strategies   Related operations     TagResource     UntagResource     ListTagsForResource   
+   *  Retrieves all tags that are assigned to a GameLift resource. Resource tags are used to organize AWS resources for a range of purposes. This operation handles the permissions necessary to manage tags for the following GameLift resource types:   Build   Script   Fleet   Alias   GameSessionQueue   MatchmakingConfiguration   MatchmakingRuleSet   To list tags for a resource, specify the unique ARN value for the resource.  Learn more   Tagging AWS Resources in the AWS General Reference    AWS Tagging Strategies   Related operations     TagResource     UntagResource     ListTagsForResource   
    */
   listTagsForResource(callback?: (err: AWSError, data: GameLift.Types.ListTagsForResourceResponse) => void): Request<GameLift.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -500,11 +508,11 @@ declare class GameLift extends Service {
    */
   putScalingPolicy(callback?: (err: AWSError, data: GameLift.Types.PutScalingPolicyOutput) => void): Request<GameLift.Types.PutScalingPolicyOutput, AWSError>;
   /**
-   *  This action is part of Amazon GameLift FleetIQ with game server groups, which is in preview release and is subject to change.  Creates a new game server resource and notifies GameLift FleetIQ that the game server is ready to host gameplay and players. This action is called by a game server process that is running on an instance in a game server group. Registering game servers enables GameLift FleetIQ to track available game servers and enables game clients and services to claim a game server for a new game session.  To register a game server, identify the game server group and instance where the game server is running, and provide a unique identifier for the game server. You can also include connection and game server data; when a game client or service requests a game server by calling ClaimGameServer, this information is returned in response. Once a game server is successfully registered, it is put in status AVAILABLE. A request to register a game server may fail if the instance it is in the process of shutting down as part of instance rebalancing or scale-down activity.   Learn more   GameLift FleetIQ Guide   Related operations     RegisterGameServer     ListGameServers     ClaimGameServer     DescribeGameServer     UpdateGameServer     DeregisterGameServer   
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Creates a new game server resource and notifies GameLift FleetIQ that the game server is ready to host gameplay and players. This operation is called by a game server process that is running on an instance in a game server group. Registering game servers enables GameLift FleetIQ to track available game servers and enables game clients and services to claim a game server for a new game session.  To register a game server, identify the game server group and instance where the game server is running, and provide a unique identifier for the game server. You can also include connection and game server data. When a game client or service requests a game server by calling ClaimGameServer, this information is returned in the response. Once a game server is successfully registered, it is put in status AVAILABLE. A request to register a game server may fail if the instance it is running on is in the process of shutting down as part of instance balancing or scale-down activity.   Learn more   GameLift FleetIQ Guide   Related operations     RegisterGameServer     ListGameServers     ClaimGameServer     DescribeGameServer     UpdateGameServer     DeregisterGameServer   
    */
   registerGameServer(params: GameLift.Types.RegisterGameServerInput, callback?: (err: AWSError, data: GameLift.Types.RegisterGameServerOutput) => void): Request<GameLift.Types.RegisterGameServerOutput, AWSError>;
   /**
-   *  This action is part of Amazon GameLift FleetIQ with game server groups, which is in preview release and is subject to change.  Creates a new game server resource and notifies GameLift FleetIQ that the game server is ready to host gameplay and players. This action is called by a game server process that is running on an instance in a game server group. Registering game servers enables GameLift FleetIQ to track available game servers and enables game clients and services to claim a game server for a new game session.  To register a game server, identify the game server group and instance where the game server is running, and provide a unique identifier for the game server. You can also include connection and game server data; when a game client or service requests a game server by calling ClaimGameServer, this information is returned in response. Once a game server is successfully registered, it is put in status AVAILABLE. A request to register a game server may fail if the instance it is in the process of shutting down as part of instance rebalancing or scale-down activity.   Learn more   GameLift FleetIQ Guide   Related operations     RegisterGameServer     ListGameServers     ClaimGameServer     DescribeGameServer     UpdateGameServer     DeregisterGameServer   
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Creates a new game server resource and notifies GameLift FleetIQ that the game server is ready to host gameplay and players. This operation is called by a game server process that is running on an instance in a game server group. Registering game servers enables GameLift FleetIQ to track available game servers and enables game clients and services to claim a game server for a new game session.  To register a game server, identify the game server group and instance where the game server is running, and provide a unique identifier for the game server. You can also include connection and game server data. When a game client or service requests a game server by calling ClaimGameServer, this information is returned in the response. Once a game server is successfully registered, it is put in status AVAILABLE. A request to register a game server may fail if the instance it is running on is in the process of shutting down as part of instance balancing or scale-down activity.   Learn more   GameLift FleetIQ Guide   Related operations     RegisterGameServer     ListGameServers     ClaimGameServer     DescribeGameServer     UpdateGameServer     DeregisterGameServer   
    */
   registerGameServer(callback?: (err: AWSError, data: GameLift.Types.RegisterGameServerOutput) => void): Request<GameLift.Types.RegisterGameServerOutput, AWSError>;
   /**
@@ -524,11 +532,11 @@ declare class GameLift extends Service {
    */
   resolveAlias(callback?: (err: AWSError, data: GameLift.Types.ResolveAliasOutput) => void): Request<GameLift.Types.ResolveAliasOutput, AWSError>;
   /**
-   *  This action is part of Amazon GameLift FleetIQ with game server groups, which is in preview release and is subject to change.  Reinstates activity on a game server group after it has been suspended. A game server group may be suspended by calling SuspendGameServerGroup, or it may have been involuntarily suspended due to a configuration problem. You can manually resume activity on the group once the configuration problem has been resolved. Refer to the game server group status and status reason for more information on why group activity is suspended. To resume activity, specify a game server group ARN and the type of activity to be resumed.  Learn more   GameLift FleetIQ Guide   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup   
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Reinstates activity on a game server group after it has been suspended. A game server group might be suspended by theSuspendGameServerGroup operation, or it might be suspended involuntarily due to a configuration problem. In the second case, you can manually resume activity on the group once the configuration problem has been resolved. Refer to the game server group status and status reason for more information on why group activity is suspended. To resume activity, specify a game server group ARN and the type of activity to be resumed. If successful, a GameServerGroup object is returned showing that the resumed activity is no longer listed in SuspendedActions.   Learn more   GameLift FleetIQ Guide   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup     DescribeGameServerInstances   
    */
   resumeGameServerGroup(params: GameLift.Types.ResumeGameServerGroupInput, callback?: (err: AWSError, data: GameLift.Types.ResumeGameServerGroupOutput) => void): Request<GameLift.Types.ResumeGameServerGroupOutput, AWSError>;
   /**
-   *  This action is part of Amazon GameLift FleetIQ with game server groups, which is in preview release and is subject to change.  Reinstates activity on a game server group after it has been suspended. A game server group may be suspended by calling SuspendGameServerGroup, or it may have been involuntarily suspended due to a configuration problem. You can manually resume activity on the group once the configuration problem has been resolved. Refer to the game server group status and status reason for more information on why group activity is suspended. To resume activity, specify a game server group ARN and the type of activity to be resumed.  Learn more   GameLift FleetIQ Guide   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup   
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Reinstates activity on a game server group after it has been suspended. A game server group might be suspended by theSuspendGameServerGroup operation, or it might be suspended involuntarily due to a configuration problem. In the second case, you can manually resume activity on the group once the configuration problem has been resolved. Refer to the game server group status and status reason for more information on why group activity is suspended. To resume activity, specify a game server group ARN and the type of activity to be resumed. If successful, a GameServerGroup object is returned showing that the resumed activity is no longer listed in SuspendedActions.   Learn more   GameLift FleetIQ Guide   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup     DescribeGameServerInstances   
    */
   resumeGameServerGroup(callback?: (err: AWSError, data: GameLift.Types.ResumeGameServerGroupOutput) => void): Request<GameLift.Types.ResumeGameServerGroupOutput, AWSError>;
   /**
@@ -564,11 +572,11 @@ declare class GameLift extends Service {
    */
   startMatchBackfill(callback?: (err: AWSError, data: GameLift.Types.StartMatchBackfillOutput) => void): Request<GameLift.Types.StartMatchBackfillOutput, AWSError>;
   /**
-   * Uses FlexMatch to create a game match for a group of players based on custom matchmaking rules, and starts a new game for the matched players. Each matchmaking request specifies the type of match to build (team configuration, rules for an acceptable match, etc.). The request also specifies the players to find a match for and where to host the new game session for optimal performance. A matchmaking request might start with a single player or a group of players who want to play together. FlexMatch finds additional players as needed to fill the match. Match type, rules, and the queue used to place a new game session are defined in a MatchmakingConfiguration.  To start matchmaking, provide a unique ticket ID, specify a matchmaking configuration, and include the players to be matched. You must also include a set of player attributes relevant for the matchmaking configuration. If successful, a matchmaking ticket is returned with status set to QUEUED. Track the status of the ticket to respond as needed and acquire game session connection information for successfully completed matches.  Tracking ticket status -- A couple of options are available for tracking the status of matchmaking requests:    Polling -- Call DescribeMatchmaking. This operation returns the full ticket object, including current status and (for completed tickets) game session connection info. We recommend polling no more than once every 10 seconds.   Notifications -- Get event notifications for changes in ticket status using Amazon Simple Notification Service (SNS). Notifications are easy to set up (see CreateMatchmakingConfiguration) and typically deliver match status changes faster and more efficiently than polling. We recommend that you use polling to back up to notifications (since delivery is not guaranteed) and call DescribeMatchmaking only when notifications are not received within 30 seconds.    Processing a matchmaking request -- FlexMatch handles a matchmaking request as follows:    Your client code submits a StartMatchmaking request for one or more players and tracks the status of the request ticket.    FlexMatch uses this ticket and others in process to build an acceptable match. When a potential match is identified, all tickets in the proposed match are advanced to the next status.    If the match requires player acceptance (set in the matchmaking configuration), the tickets move into status REQUIRES_ACCEPTANCE. This status triggers your client code to solicit acceptance from all players in every ticket involved in the match, and then call AcceptMatch for each player. If any player rejects or fails to accept the match before a specified timeout, the proposed match is dropped (see AcceptMatch for more details).   Once a match is proposed and accepted, the matchmaking tickets move into status PLACING. FlexMatch locates resources for a new game session using the game session queue (set in the matchmaking configuration) and creates the game session based on the match data.    When the match is successfully placed, the matchmaking tickets move into COMPLETED status. Connection information (including game session endpoint and player session) is added to the matchmaking tickets. Matched players can use the connection information to join the game.     Learn more    Add FlexMatch to a Game Client    Set Up FlexMatch Event Notification    FlexMatch Integration Roadmap    How GameLift FlexMatch Works   Related operations     StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch     StartMatchBackfill   
+   * Uses FlexMatch to create a game match for a group of players based on custom matchmaking rules, and starts a new game for the matched players. Each matchmaking request specifies the type of match to build (team configuration, rules for an acceptable match, etc.). The request also specifies the players to find a match for and where to host the new game session for optimal performance. A matchmaking request might start with a single player or a group of players who want to play together. FlexMatch finds additional players as needed to fill the match. Match type, rules, and the queue used to place a new game session are defined in a MatchmakingConfiguration.  To start matchmaking, provide a unique ticket ID, specify a matchmaking configuration, and include the players to be matched. You must also include a set of player attributes relevant for the matchmaking configuration. If successful, a matchmaking ticket is returned with status set to QUEUED.  Track the status of the ticket to respond as needed and acquire game session connection information for successfully completed matches. Ticket status updates are tracked using event notification through Amazon Simple Notification Service (SNS), which is defined in the matchmaking configuration.  Processing a matchmaking request -- FlexMatch handles a matchmaking request as follows:    Your client code submits a StartMatchmaking request for one or more players and tracks the status of the request ticket.    FlexMatch uses this ticket and others in process to build an acceptable match. When a potential match is identified, all tickets in the proposed match are advanced to the next status.    If the match requires player acceptance (set in the matchmaking configuration), the tickets move into status REQUIRES_ACCEPTANCE. This status triggers your client code to solicit acceptance from all players in every ticket involved in the match, and then call AcceptMatch for each player. If any player rejects or fails to accept the match before a specified timeout, the proposed match is dropped (see AcceptMatch for more details).   Once a match is proposed and accepted, the matchmaking tickets move into status PLACING. FlexMatch locates resources for a new game session using the game session queue (set in the matchmaking configuration) and creates the game session based on the match data.    When the match is successfully placed, the matchmaking tickets move into COMPLETED status. Connection information (including game session endpoint and player session) is added to the matchmaking tickets. Matched players can use the connection information to join the game.     Learn more    Add FlexMatch to a Game Client    Set Up FlexMatch Event Notification    FlexMatch Integration Roadmap    How GameLift FlexMatch Works   Related operations     StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch     StartMatchBackfill   
    */
   startMatchmaking(params: GameLift.Types.StartMatchmakingInput, callback?: (err: AWSError, data: GameLift.Types.StartMatchmakingOutput) => void): Request<GameLift.Types.StartMatchmakingOutput, AWSError>;
   /**
-   * Uses FlexMatch to create a game match for a group of players based on custom matchmaking rules, and starts a new game for the matched players. Each matchmaking request specifies the type of match to build (team configuration, rules for an acceptable match, etc.). The request also specifies the players to find a match for and where to host the new game session for optimal performance. A matchmaking request might start with a single player or a group of players who want to play together. FlexMatch finds additional players as needed to fill the match. Match type, rules, and the queue used to place a new game session are defined in a MatchmakingConfiguration.  To start matchmaking, provide a unique ticket ID, specify a matchmaking configuration, and include the players to be matched. You must also include a set of player attributes relevant for the matchmaking configuration. If successful, a matchmaking ticket is returned with status set to QUEUED. Track the status of the ticket to respond as needed and acquire game session connection information for successfully completed matches.  Tracking ticket status -- A couple of options are available for tracking the status of matchmaking requests:    Polling -- Call DescribeMatchmaking. This operation returns the full ticket object, including current status and (for completed tickets) game session connection info. We recommend polling no more than once every 10 seconds.   Notifications -- Get event notifications for changes in ticket status using Amazon Simple Notification Service (SNS). Notifications are easy to set up (see CreateMatchmakingConfiguration) and typically deliver match status changes faster and more efficiently than polling. We recommend that you use polling to back up to notifications (since delivery is not guaranteed) and call DescribeMatchmaking only when notifications are not received within 30 seconds.    Processing a matchmaking request -- FlexMatch handles a matchmaking request as follows:    Your client code submits a StartMatchmaking request for one or more players and tracks the status of the request ticket.    FlexMatch uses this ticket and others in process to build an acceptable match. When a potential match is identified, all tickets in the proposed match are advanced to the next status.    If the match requires player acceptance (set in the matchmaking configuration), the tickets move into status REQUIRES_ACCEPTANCE. This status triggers your client code to solicit acceptance from all players in every ticket involved in the match, and then call AcceptMatch for each player. If any player rejects or fails to accept the match before a specified timeout, the proposed match is dropped (see AcceptMatch for more details).   Once a match is proposed and accepted, the matchmaking tickets move into status PLACING. FlexMatch locates resources for a new game session using the game session queue (set in the matchmaking configuration) and creates the game session based on the match data.    When the match is successfully placed, the matchmaking tickets move into COMPLETED status. Connection information (including game session endpoint and player session) is added to the matchmaking tickets. Matched players can use the connection information to join the game.     Learn more    Add FlexMatch to a Game Client    Set Up FlexMatch Event Notification    FlexMatch Integration Roadmap    How GameLift FlexMatch Works   Related operations     StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch     StartMatchBackfill   
+   * Uses FlexMatch to create a game match for a group of players based on custom matchmaking rules, and starts a new game for the matched players. Each matchmaking request specifies the type of match to build (team configuration, rules for an acceptable match, etc.). The request also specifies the players to find a match for and where to host the new game session for optimal performance. A matchmaking request might start with a single player or a group of players who want to play together. FlexMatch finds additional players as needed to fill the match. Match type, rules, and the queue used to place a new game session are defined in a MatchmakingConfiguration.  To start matchmaking, provide a unique ticket ID, specify a matchmaking configuration, and include the players to be matched. You must also include a set of player attributes relevant for the matchmaking configuration. If successful, a matchmaking ticket is returned with status set to QUEUED.  Track the status of the ticket to respond as needed and acquire game session connection information for successfully completed matches. Ticket status updates are tracked using event notification through Amazon Simple Notification Service (SNS), which is defined in the matchmaking configuration.  Processing a matchmaking request -- FlexMatch handles a matchmaking request as follows:    Your client code submits a StartMatchmaking request for one or more players and tracks the status of the request ticket.    FlexMatch uses this ticket and others in process to build an acceptable match. When a potential match is identified, all tickets in the proposed match are advanced to the next status.    If the match requires player acceptance (set in the matchmaking configuration), the tickets move into status REQUIRES_ACCEPTANCE. This status triggers your client code to solicit acceptance from all players in every ticket involved in the match, and then call AcceptMatch for each player. If any player rejects or fails to accept the match before a specified timeout, the proposed match is dropped (see AcceptMatch for more details).   Once a match is proposed and accepted, the matchmaking tickets move into status PLACING. FlexMatch locates resources for a new game session using the game session queue (set in the matchmaking configuration) and creates the game session based on the match data.    When the match is successfully placed, the matchmaking tickets move into COMPLETED status. Connection information (including game session endpoint and player session) is added to the matchmaking tickets. Matched players can use the connection information to join the game.     Learn more    Add FlexMatch to a Game Client    Set Up FlexMatch Event Notification    FlexMatch Integration Roadmap    How GameLift FlexMatch Works   Related operations     StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch     StartMatchBackfill   
    */
   startMatchmaking(callback?: (err: AWSError, data: GameLift.Types.StartMatchmakingOutput) => void): Request<GameLift.Types.StartMatchmakingOutput, AWSError>;
   /**
@@ -588,35 +596,35 @@ declare class GameLift extends Service {
    */
   stopGameSessionPlacement(callback?: (err: AWSError, data: GameLift.Types.StopGameSessionPlacementOutput) => void): Request<GameLift.Types.StopGameSessionPlacementOutput, AWSError>;
   /**
-   * Cancels a matchmaking ticket or match backfill ticket that is currently being processed. To stop the matchmaking operation, specify the ticket ID. If successful, work on the ticket is stopped, and the ticket status is changed to CANCELLED. This call is also used to turn off automatic backfill for an individual game session. This is for game sessions that are created with a matchmaking configuration that has automatic backfill enabled. The ticket ID is included in the MatchmakerData of an updated game session object, which is provided to the game server.  If the action is successful, the service sends back an empty JSON struct with the HTTP 200 response (not an empty HTTP body).   Learn more    Add FlexMatch to a Game Client   Related operations     StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch     StartMatchBackfill   
+   * Cancels a matchmaking ticket or match backfill ticket that is currently being processed. To stop the matchmaking operation, specify the ticket ID. If successful, work on the ticket is stopped, and the ticket status is changed to CANCELLED. This call is also used to turn off automatic backfill for an individual game session. This is for game sessions that are created with a matchmaking configuration that has automatic backfill enabled. The ticket ID is included in the MatchmakerData of an updated game session object, which is provided to the game server.  If the operation is successful, the service sends back an empty JSON struct with the HTTP 200 response (not an empty HTTP body).   Learn more    Add FlexMatch to a Game Client   Related operations     StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch     StartMatchBackfill   
    */
   stopMatchmaking(params: GameLift.Types.StopMatchmakingInput, callback?: (err: AWSError, data: GameLift.Types.StopMatchmakingOutput) => void): Request<GameLift.Types.StopMatchmakingOutput, AWSError>;
   /**
-   * Cancels a matchmaking ticket or match backfill ticket that is currently being processed. To stop the matchmaking operation, specify the ticket ID. If successful, work on the ticket is stopped, and the ticket status is changed to CANCELLED. This call is also used to turn off automatic backfill for an individual game session. This is for game sessions that are created with a matchmaking configuration that has automatic backfill enabled. The ticket ID is included in the MatchmakerData of an updated game session object, which is provided to the game server.  If the action is successful, the service sends back an empty JSON struct with the HTTP 200 response (not an empty HTTP body).   Learn more    Add FlexMatch to a Game Client   Related operations     StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch     StartMatchBackfill   
+   * Cancels a matchmaking ticket or match backfill ticket that is currently being processed. To stop the matchmaking operation, specify the ticket ID. If successful, work on the ticket is stopped, and the ticket status is changed to CANCELLED. This call is also used to turn off automatic backfill for an individual game session. This is for game sessions that are created with a matchmaking configuration that has automatic backfill enabled. The ticket ID is included in the MatchmakerData of an updated game session object, which is provided to the game server.  If the operation is successful, the service sends back an empty JSON struct with the HTTP 200 response (not an empty HTTP body).   Learn more    Add FlexMatch to a Game Client   Related operations     StartMatchmaking     DescribeMatchmaking     StopMatchmaking     AcceptMatch     StartMatchBackfill   
    */
   stopMatchmaking(callback?: (err: AWSError, data: GameLift.Types.StopMatchmakingOutput) => void): Request<GameLift.Types.StopMatchmakingOutput, AWSError>;
   /**
-   *  This action is part of Amazon GameLift FleetIQ with game server groups, which is in preview release and is subject to change.  Temporarily stops activity on a game server group without terminating instances or the game server group. Activity can be restarted by calling ResumeGameServerGroup. Activities that can suspended are:   Instance type replacement. This activity evaluates the current Spot viability of all instance types that are defined for the game server group. It updates the Auto Scaling group to remove nonviable Spot instance types (which have a higher chance of game server interruptions) and rebalances capacity across the remaining viable Spot instance types. When this activity is suspended, the Auto Scaling group continues with its current balance, regardless of viability. Instance protection, utilization metrics, and capacity autoscaling activities continue to be active.    To suspend activity, specify a game server group ARN and the type of activity to be suspended.  Learn more   GameLift FleetIQ Guide   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup   
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Temporarily stops activity on a game server group without terminating instances or the game server group. You can restart activity by calling ResumeGameServerGroup. You can suspend the following activity:    Instance type replacement - This activity evaluates the current game hosting viability of all Spot instance types that are defined for the game server group. It updates the Auto Scaling group to remove nonviable Spot Instance types, which have a higher chance of game server interruptions. It then balances capacity across the remaining viable Spot Instance types. When this activity is suspended, the Auto Scaling group continues with its current balance, regardless of viability. Instance protection, utilization metrics, and capacity scaling activities continue to be active.    To suspend activity, specify a game server group ARN and the type of activity to be suspended. If successful, a GameServerGroup object is returned showing that the activity is listed in SuspendedActions.  Learn more   GameLift FleetIQ Guide   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup     DescribeGameServerInstances   
    */
   suspendGameServerGroup(params: GameLift.Types.SuspendGameServerGroupInput, callback?: (err: AWSError, data: GameLift.Types.SuspendGameServerGroupOutput) => void): Request<GameLift.Types.SuspendGameServerGroupOutput, AWSError>;
   /**
-   *  This action is part of Amazon GameLift FleetIQ with game server groups, which is in preview release and is subject to change.  Temporarily stops activity on a game server group without terminating instances or the game server group. Activity can be restarted by calling ResumeGameServerGroup. Activities that can suspended are:   Instance type replacement. This activity evaluates the current Spot viability of all instance types that are defined for the game server group. It updates the Auto Scaling group to remove nonviable Spot instance types (which have a higher chance of game server interruptions) and rebalances capacity across the remaining viable Spot instance types. When this activity is suspended, the Auto Scaling group continues with its current balance, regardless of viability. Instance protection, utilization metrics, and capacity autoscaling activities continue to be active.    To suspend activity, specify a game server group ARN and the type of activity to be suspended.  Learn more   GameLift FleetIQ Guide   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup   
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Temporarily stops activity on a game server group without terminating instances or the game server group. You can restart activity by calling ResumeGameServerGroup. You can suspend the following activity:    Instance type replacement - This activity evaluates the current game hosting viability of all Spot instance types that are defined for the game server group. It updates the Auto Scaling group to remove nonviable Spot Instance types, which have a higher chance of game server interruptions. It then balances capacity across the remaining viable Spot Instance types. When this activity is suspended, the Auto Scaling group continues with its current balance, regardless of viability. Instance protection, utilization metrics, and capacity scaling activities continue to be active.    To suspend activity, specify a game server group ARN and the type of activity to be suspended. If successful, a GameServerGroup object is returned showing that the activity is listed in SuspendedActions.  Learn more   GameLift FleetIQ Guide   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup     DescribeGameServerInstances   
    */
   suspendGameServerGroup(callback?: (err: AWSError, data: GameLift.Types.SuspendGameServerGroupOutput) => void): Request<GameLift.Types.SuspendGameServerGroupOutput, AWSError>;
   /**
-   *  Assigns a tag to a GameLift resource. AWS resource tags provide an additional management tool set. You can use tags to organize resources, create IAM permissions policies to manage access to groups of resources, customize AWS cost breakdowns, etc. This action handles the permissions necessary to manage tags for the following GameLift resource types:   Build   Script   Fleet   Alias   GameSessionQueue   MatchmakingConfiguration   MatchmakingRuleSet   To add a tag to a resource, specify the unique ARN value for the resource and provide a tag list containing one or more tags. The operation succeeds even if the list includes tags that are already assigned to the specified resource.   Learn more   Tagging AWS Resources in the AWS General Reference    AWS Tagging Strategies   Related operations     TagResource     UntagResource     ListTagsForResource   
+   *  Assigns a tag to a GameLift resource. AWS resource tags provide an additional management tool set. You can use tags to organize resources, create IAM permissions policies to manage access to groups of resources, customize AWS cost breakdowns, etc. This operation handles the permissions necessary to manage tags for the following GameLift resource types:   Build   Script   Fleet   Alias   GameSessionQueue   MatchmakingConfiguration   MatchmakingRuleSet   To add a tag to a resource, specify the unique ARN value for the resource and provide a tag list containing one or more tags. The operation succeeds even if the list includes tags that are already assigned to the specified resource.   Learn more   Tagging AWS Resources in the AWS General Reference    AWS Tagging Strategies   Related operations     TagResource     UntagResource     ListTagsForResource   
    */
   tagResource(params: GameLift.Types.TagResourceRequest, callback?: (err: AWSError, data: GameLift.Types.TagResourceResponse) => void): Request<GameLift.Types.TagResourceResponse, AWSError>;
   /**
-   *  Assigns a tag to a GameLift resource. AWS resource tags provide an additional management tool set. You can use tags to organize resources, create IAM permissions policies to manage access to groups of resources, customize AWS cost breakdowns, etc. This action handles the permissions necessary to manage tags for the following GameLift resource types:   Build   Script   Fleet   Alias   GameSessionQueue   MatchmakingConfiguration   MatchmakingRuleSet   To add a tag to a resource, specify the unique ARN value for the resource and provide a tag list containing one or more tags. The operation succeeds even if the list includes tags that are already assigned to the specified resource.   Learn more   Tagging AWS Resources in the AWS General Reference    AWS Tagging Strategies   Related operations     TagResource     UntagResource     ListTagsForResource   
+   *  Assigns a tag to a GameLift resource. AWS resource tags provide an additional management tool set. You can use tags to organize resources, create IAM permissions policies to manage access to groups of resources, customize AWS cost breakdowns, etc. This operation handles the permissions necessary to manage tags for the following GameLift resource types:   Build   Script   Fleet   Alias   GameSessionQueue   MatchmakingConfiguration   MatchmakingRuleSet   To add a tag to a resource, specify the unique ARN value for the resource and provide a tag list containing one or more tags. The operation succeeds even if the list includes tags that are already assigned to the specified resource.   Learn more   Tagging AWS Resources in the AWS General Reference    AWS Tagging Strategies   Related operations     TagResource     UntagResource     ListTagsForResource   
    */
   tagResource(callback?: (err: AWSError, data: GameLift.Types.TagResourceResponse) => void): Request<GameLift.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes a tag that is assigned to a GameLift resource. Resource tags are used to organize AWS resources for a range of purposes. This action handles the permissions necessary to manage tags for the following GameLift resource types:   Build   Script   Fleet   Alias   GameSessionQueue   MatchmakingConfiguration   MatchmakingRuleSet   To remove a tag from a resource, specify the unique ARN value for the resource and provide a string list containing one or more tags to be removed. This action succeeds even if the list includes tags that are not currently assigned to the specified resource.  Learn more   Tagging AWS Resources in the AWS General Reference    AWS Tagging Strategies   Related operations     TagResource     UntagResource     ListTagsForResource   
+   * Removes a tag that is assigned to a GameLift resource. Resource tags are used to organize AWS resources for a range of purposes. This operation handles the permissions necessary to manage tags for the following GameLift resource types:   Build   Script   Fleet   Alias   GameSessionQueue   MatchmakingConfiguration   MatchmakingRuleSet   To remove a tag from a resource, specify the unique ARN value for the resource and provide a string list containing one or more tags to be removed. This operation succeeds even if the list includes tags that are not currently assigned to the specified resource.  Learn more   Tagging AWS Resources in the AWS General Reference    AWS Tagging Strategies   Related operations     TagResource     UntagResource     ListTagsForResource   
    */
   untagResource(params: GameLift.Types.UntagResourceRequest, callback?: (err: AWSError, data: GameLift.Types.UntagResourceResponse) => void): Request<GameLift.Types.UntagResourceResponse, AWSError>;
   /**
-   * Removes a tag that is assigned to a GameLift resource. Resource tags are used to organize AWS resources for a range of purposes. This action handles the permissions necessary to manage tags for the following GameLift resource types:   Build   Script   Fleet   Alias   GameSessionQueue   MatchmakingConfiguration   MatchmakingRuleSet   To remove a tag from a resource, specify the unique ARN value for the resource and provide a string list containing one or more tags to be removed. This action succeeds even if the list includes tags that are not currently assigned to the specified resource.  Learn more   Tagging AWS Resources in the AWS General Reference    AWS Tagging Strategies   Related operations     TagResource     UntagResource     ListTagsForResource   
+   * Removes a tag that is assigned to a GameLift resource. Resource tags are used to organize AWS resources for a range of purposes. This operation handles the permissions necessary to manage tags for the following GameLift resource types:   Build   Script   Fleet   Alias   GameSessionQueue   MatchmakingConfiguration   MatchmakingRuleSet   To remove a tag from a resource, specify the unique ARN value for the resource and provide a string list containing one or more tags to be removed. This operation succeeds even if the list includes tags that are not currently assigned to the specified resource.  Learn more   Tagging AWS Resources in the AWS General Reference    AWS Tagging Strategies   Related operations     TagResource     UntagResource     ListTagsForResource   
    */
   untagResource(callback?: (err: AWSError, data: GameLift.Types.UntagResourceResponse) => void): Request<GameLift.Types.UntagResourceResponse, AWSError>;
   /**
@@ -644,11 +652,11 @@ declare class GameLift extends Service {
    */
   updateFleetAttributes(callback?: (err: AWSError, data: GameLift.Types.UpdateFleetAttributesOutput) => void): Request<GameLift.Types.UpdateFleetAttributesOutput, AWSError>;
   /**
-   * Updates capacity settings for a fleet. Use this action to specify the number of EC2 instances (hosts) that you want this fleet to contain. Before calling this action, you may want to call DescribeEC2InstanceLimits to get the maximum capacity based on the fleet's EC2 instance type. Specify minimum and maximum number of instances. Amazon GameLift will not change fleet capacity to values fall outside of this range. This is particularly important when using auto-scaling (see PutScalingPolicy) to allow capacity to adjust based on player demand while imposing limits on automatic adjustments. To update fleet capacity, specify the fleet ID and the number of instances you want the fleet to host. If successful, Amazon GameLift starts or terminates instances so that the fleet's active instance count matches the desired instance count. You can view a fleet's current capacity information by calling DescribeFleetCapacity. If the desired instance count is higher than the instance type's limit, the "Limit Exceeded" exception occurs.  Learn more   Setting up GameLift Fleets   Related operations     CreateFleet     ListFleets     DeleteFleet     DescribeFleetAttributes    Update fleets:    UpdateFleetAttributes     UpdateFleetCapacity     UpdateFleetPortSettings     UpdateRuntimeConfiguration       StartFleetActions or StopFleetActions   
+   * Updates capacity settings for a fleet. Use this operation to specify the number of EC2 instances (hosts) that you want this fleet to contain. Before calling this operation, you may want to call DescribeEC2InstanceLimits to get the maximum capacity based on the fleet's EC2 instance type. Specify minimum and maximum number of instances. Amazon GameLift will not change fleet capacity to values fall outside of this range. This is particularly important when using auto-scaling (see PutScalingPolicy) to allow capacity to adjust based on player demand while imposing limits on automatic adjustments. To update fleet capacity, specify the fleet ID and the number of instances you want the fleet to host. If successful, Amazon GameLift starts or terminates instances so that the fleet's active instance count matches the desired instance count. You can view a fleet's current capacity information by calling DescribeFleetCapacity. If the desired instance count is higher than the instance type's limit, the "Limit Exceeded" exception occurs.  Learn more   Setting up GameLift Fleets   Related operations     CreateFleet     ListFleets     DeleteFleet     DescribeFleetAttributes    Update fleets:    UpdateFleetAttributes     UpdateFleetCapacity     UpdateFleetPortSettings     UpdateRuntimeConfiguration       StartFleetActions or StopFleetActions   
    */
   updateFleetCapacity(params: GameLift.Types.UpdateFleetCapacityInput, callback?: (err: AWSError, data: GameLift.Types.UpdateFleetCapacityOutput) => void): Request<GameLift.Types.UpdateFleetCapacityOutput, AWSError>;
   /**
-   * Updates capacity settings for a fleet. Use this action to specify the number of EC2 instances (hosts) that you want this fleet to contain. Before calling this action, you may want to call DescribeEC2InstanceLimits to get the maximum capacity based on the fleet's EC2 instance type. Specify minimum and maximum number of instances. Amazon GameLift will not change fleet capacity to values fall outside of this range. This is particularly important when using auto-scaling (see PutScalingPolicy) to allow capacity to adjust based on player demand while imposing limits on automatic adjustments. To update fleet capacity, specify the fleet ID and the number of instances you want the fleet to host. If successful, Amazon GameLift starts or terminates instances so that the fleet's active instance count matches the desired instance count. You can view a fleet's current capacity information by calling DescribeFleetCapacity. If the desired instance count is higher than the instance type's limit, the "Limit Exceeded" exception occurs.  Learn more   Setting up GameLift Fleets   Related operations     CreateFleet     ListFleets     DeleteFleet     DescribeFleetAttributes    Update fleets:    UpdateFleetAttributes     UpdateFleetCapacity     UpdateFleetPortSettings     UpdateRuntimeConfiguration       StartFleetActions or StopFleetActions   
+   * Updates capacity settings for a fleet. Use this operation to specify the number of EC2 instances (hosts) that you want this fleet to contain. Before calling this operation, you may want to call DescribeEC2InstanceLimits to get the maximum capacity based on the fleet's EC2 instance type. Specify minimum and maximum number of instances. Amazon GameLift will not change fleet capacity to values fall outside of this range. This is particularly important when using auto-scaling (see PutScalingPolicy) to allow capacity to adjust based on player demand while imposing limits on automatic adjustments. To update fleet capacity, specify the fleet ID and the number of instances you want the fleet to host. If successful, Amazon GameLift starts or terminates instances so that the fleet's active instance count matches the desired instance count. You can view a fleet's current capacity information by calling DescribeFleetCapacity. If the desired instance count is higher than the instance type's limit, the "Limit Exceeded" exception occurs.  Learn more   Setting up GameLift Fleets   Related operations     CreateFleet     ListFleets     DeleteFleet     DescribeFleetAttributes    Update fleets:    UpdateFleetAttributes     UpdateFleetCapacity     UpdateFleetPortSettings     UpdateRuntimeConfiguration       StartFleetActions or StopFleetActions   
    */
   updateFleetCapacity(callback?: (err: AWSError, data: GameLift.Types.UpdateFleetCapacityOutput) => void): Request<GameLift.Types.UpdateFleetCapacityOutput, AWSError>;
   /**
@@ -660,19 +668,19 @@ declare class GameLift extends Service {
    */
   updateFleetPortSettings(callback?: (err: AWSError, data: GameLift.Types.UpdateFleetPortSettingsOutput) => void): Request<GameLift.Types.UpdateFleetPortSettingsOutput, AWSError>;
   /**
-   *  This action is part of Amazon GameLift FleetIQ with game server groups, which is in preview release and is subject to change.  Updates information about a registered game server. This action is called by a game server process that is running on an instance in a game server group. There are three reasons to update game server information: (1) to change the utilization status of the game server, (2) to report game server health status, and (3) to change game server metadata. A registered game server should regularly report health and should update utilization status when it is supporting gameplay so that GameLift FleetIQ can accurately track game server availability. You can make all three types of updates in the same request.   To update the game server's utilization status, identify the game server and game server group and specify the current utilization status. Use this status to identify when game servers are currently hosting games and when they are available to be claimed.    To report health status, identify the game server and game server group and set health check to HEALTHY. If a game server does not report health status for a certain length of time, the game server is no longer considered healthy and will be eventually de-registered from the game server group to avoid affecting utilization metrics. The best practice is to report health every 60 seconds.   To change game server metadata, provide updated game server data and custom sort key values.   Once a game server is successfully updated, the relevant statuses and timestamps are updated.  Learn more   GameLift FleetIQ Guide   Related operations     RegisterGameServer     ListGameServers     ClaimGameServer     DescribeGameServer     UpdateGameServer     DeregisterGameServer   
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Updates information about a registered game server to help GameLift FleetIQ to track game server availability. This operation is called by a game server process that is running on an instance in a game server group.  Use this operation to update the following types of game server information. You can make all three types of updates in the same request:   To update the game server's utilization status, identify the game server and game server group and specify the current utilization status. Use this status to identify when game servers are currently hosting games and when they are available to be claimed.   To report health status, identify the game server and game server group and set health check to HEALTHY. If a game server does not report health status for a certain length of time, the game server is no longer considered healthy. As a result, it will be eventually deregistered from the game server group to avoid affecting utilization metrics. The best practice is to report health every 60 seconds.   To change game server metadata, provide updated game server data.   Once a game server is successfully updated, the relevant statuses and timestamps are updated.  Learn more   GameLift FleetIQ Guide   Related operations     RegisterGameServer     ListGameServers     ClaimGameServer     DescribeGameServer     UpdateGameServer     DeregisterGameServer   
    */
   updateGameServer(params: GameLift.Types.UpdateGameServerInput, callback?: (err: AWSError, data: GameLift.Types.UpdateGameServerOutput) => void): Request<GameLift.Types.UpdateGameServerOutput, AWSError>;
   /**
-   *  This action is part of Amazon GameLift FleetIQ with game server groups, which is in preview release and is subject to change.  Updates information about a registered game server. This action is called by a game server process that is running on an instance in a game server group. There are three reasons to update game server information: (1) to change the utilization status of the game server, (2) to report game server health status, and (3) to change game server metadata. A registered game server should regularly report health and should update utilization status when it is supporting gameplay so that GameLift FleetIQ can accurately track game server availability. You can make all three types of updates in the same request.   To update the game server's utilization status, identify the game server and game server group and specify the current utilization status. Use this status to identify when game servers are currently hosting games and when they are available to be claimed.    To report health status, identify the game server and game server group and set health check to HEALTHY. If a game server does not report health status for a certain length of time, the game server is no longer considered healthy and will be eventually de-registered from the game server group to avoid affecting utilization metrics. The best practice is to report health every 60 seconds.   To change game server metadata, provide updated game server data and custom sort key values.   Once a game server is successfully updated, the relevant statuses and timestamps are updated.  Learn more   GameLift FleetIQ Guide   Related operations     RegisterGameServer     ListGameServers     ClaimGameServer     DescribeGameServer     UpdateGameServer     DeregisterGameServer   
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Updates information about a registered game server to help GameLift FleetIQ to track game server availability. This operation is called by a game server process that is running on an instance in a game server group.  Use this operation to update the following types of game server information. You can make all three types of updates in the same request:   To update the game server's utilization status, identify the game server and game server group and specify the current utilization status. Use this status to identify when game servers are currently hosting games and when they are available to be claimed.   To report health status, identify the game server and game server group and set health check to HEALTHY. If a game server does not report health status for a certain length of time, the game server is no longer considered healthy. As a result, it will be eventually deregistered from the game server group to avoid affecting utilization metrics. The best practice is to report health every 60 seconds.   To change game server metadata, provide updated game server data.   Once a game server is successfully updated, the relevant statuses and timestamps are updated.  Learn more   GameLift FleetIQ Guide   Related operations     RegisterGameServer     ListGameServers     ClaimGameServer     DescribeGameServer     UpdateGameServer     DeregisterGameServer   
    */
   updateGameServer(callback?: (err: AWSError, data: GameLift.Types.UpdateGameServerOutput) => void): Request<GameLift.Types.UpdateGameServerOutput, AWSError>;
   /**
-   *  This action is part of Amazon GameLift FleetIQ with game server groups, which is in preview release and is subject to change.  Updates GameLift FleetIQ-specific properties for a game server group. These properties include instance rebalancing and game server protection. Many Auto Scaling group properties are updated directly. These include autoscaling policies, minimum/maximum/desired instance counts, and launch template.  To update the game server group, specify the game server group ID and provide the updated values. Updated properties are validated to ensure that GameLift FleetIQ can continue to perform its core instance rebalancing activity. When you change Auto Scaling group properties directly and the changes cause errors with GameLift FleetIQ activities, an alert is sent.  Learn more   GameLift FleetIQ Guide   Updating a GameLift FleetIQ-Linked Auto Scaling Group   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup   
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Updates GameLift FleetIQ-specific properties for a game server group. Many Auto Scaling group properties are updated on the Auto Scaling group directly, including the launch template, Auto Scaling policies, and maximum/minimum/desired instance counts. To update the game server group, specify the game server group ID and provide the updated values. Before applying the updates, the new values are validated to ensure that GameLift FleetIQ can continue to perform instance balancing activity. If successful, a GameServerGroup object is returned.  Learn more   GameLift FleetIQ Guide   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup     DescribeGameServerInstances   
    */
   updateGameServerGroup(params: GameLift.Types.UpdateGameServerGroupInput, callback?: (err: AWSError, data: GameLift.Types.UpdateGameServerGroupOutput) => void): Request<GameLift.Types.UpdateGameServerGroupOutput, AWSError>;
   /**
-   *  This action is part of Amazon GameLift FleetIQ with game server groups, which is in preview release and is subject to change.  Updates GameLift FleetIQ-specific properties for a game server group. These properties include instance rebalancing and game server protection. Many Auto Scaling group properties are updated directly. These include autoscaling policies, minimum/maximum/desired instance counts, and launch template.  To update the game server group, specify the game server group ID and provide the updated values. Updated properties are validated to ensure that GameLift FleetIQ can continue to perform its core instance rebalancing activity. When you change Auto Scaling group properties directly and the changes cause errors with GameLift FleetIQ activities, an alert is sent.  Learn more   GameLift FleetIQ Guide   Updating a GameLift FleetIQ-Linked Auto Scaling Group   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup   
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Updates GameLift FleetIQ-specific properties for a game server group. Many Auto Scaling group properties are updated on the Auto Scaling group directly, including the launch template, Auto Scaling policies, and maximum/minimum/desired instance counts. To update the game server group, specify the game server group ID and provide the updated values. Before applying the updates, the new values are validated to ensure that GameLift FleetIQ can continue to perform instance balancing activity. If successful, a GameServerGroup object is returned.  Learn more   GameLift FleetIQ Guide   Related operations     CreateGameServerGroup     ListGameServerGroups     DescribeGameServerGroup     UpdateGameServerGroup     DeleteGameServerGroup     ResumeGameServerGroup     SuspendGameServerGroup     DescribeGameServerInstances   
    */
   updateGameServerGroup(callback?: (err: AWSError, data: GameLift.Types.UpdateGameServerGroupOutput) => void): Request<GameLift.Types.UpdateGameServerGroupOutput, AWSError>;
   /**
@@ -812,7 +820,7 @@ declare namespace GameLift {
     SessionToken?: NonEmptyString;
   }
   export type BackfillMode = "AUTOMATIC"|"MANUAL"|string;
-  export type BalancingStrategy = "SPOT_ONLY"|"SPOT_PREFERRED"|string;
+  export type BalancingStrategy = "SPOT_ONLY"|"SPOT_PREFERRED"|"ON_DEMAND_ONLY"|string;
   export type BooleanModel = boolean;
   export interface Build {
     /**
@@ -862,7 +870,7 @@ declare namespace GameLift {
   export type CertificateType = "DISABLED"|"GENERATED"|string;
   export interface ClaimGameServerInput {
     /**
-     * An identifier for the game server group. When claiming a specific game server, this is the game server group whether the game server is located. When requesting that GameLift FleetIQ locate an available game server, this is the game server group to search on. You can use either the GameServerGroup name or ARN value.
+     * A unique identifier for the game server group where the game server is running. Use either the GameServerGroup name or ARN value.. If you are not specifying a game server to claim, this value identifies where you want GameLift FleetIQ to look for an available game server to claim. 
      */
     GameServerGroupName: GameServerGroupNameOrArn;
     /**
@@ -870,13 +878,13 @@ declare namespace GameLift {
      */
     GameServerId?: GameServerId;
     /**
-     * A set of custom game server properties, formatted as a single string value, to be passed to the claimed game server. 
+     * A set of custom game server properties, formatted as a single string value. This data is passed to a game client or service when it requests information on game servers using ListGameServers or ClaimGameServer. 
      */
     GameServerData?: GameServerData;
   }
   export interface ClaimGameServerOutput {
     /**
-     * Object that describes the newly claimed game server resource.
+     * Object that describes the newly claimed game server.
      */
     GameServer?: GameServer;
   }
@@ -1031,43 +1039,43 @@ declare namespace GameLift {
      */
     GameServerGroupName: GameServerGroupName;
     /**
-     * The Amazon Resource Name (ARN) for an IAM role that allows Amazon GameLift to access your EC2 Auto Scaling groups. The submitted role is validated to ensure that it contains the necessary permissions for game server groups.
+     * The Amazon Resource Name (ARN) for an IAM role that allows Amazon GameLift to access your EC2 Auto Scaling groups.
      */
     RoleArn: IamRoleArn;
     /**
-     * The minimum number of instances allowed in the EC2 Auto Scaling group. During autoscaling events, GameLift FleetIQ and EC2 do not scale down the group below this minimum. In production, this value should be set to at least 1.
+     * The minimum number of instances allowed in the EC2 Auto Scaling group. During automatic scaling events, GameLift FleetIQ and EC2 do not scale down the group below this minimum. In production, this value should be set to at least 1. After the Auto Scaling group is created, update this value directly in the Auto Scaling group using the AWS console or APIs.
      */
     MinSize: WholeNumber;
     /**
-     * The maximum number of instances allowed in the EC2 Auto Scaling group. During autoscaling events, GameLift FleetIQ and EC2 do not scale up the group above this maximum.
+     * The maximum number of instances allowed in the EC2 Auto Scaling group. During automatic scaling events, GameLift FleetIQ and EC2 do not scale up the group above this maximum. After the Auto Scaling group is created, update this value directly in the Auto Scaling group using the AWS console or APIs.
      */
     MaxSize: PositiveInteger;
     /**
-     * The EC2 launch template that contains configuration settings and game server code to be deployed to all instances in the game server group. You can specify the template using either the template name or ID. For help with creating a launch template, see Creating a Launch Template for an Auto Scaling Group in the Amazon EC2 Auto Scaling User Guide.
+     * The EC2 launch template that contains configuration settings and game server code to be deployed to all instances in the game server group. You can specify the template using either the template name or ID. For help with creating a launch template, see Creating a Launch Template for an Auto Scaling Group in the Amazon EC2 Auto Scaling User Guide. After the Auto Scaling group is created, update this value directly in the Auto Scaling group using the AWS console or APIs.
      */
     LaunchTemplate: LaunchTemplateSpecification;
     /**
-     * A set of EC2 instance types to use when creating instances in the group. The instance definitions must specify at least two different instance types that are supported by GameLift FleetIQ. For more information on instance types, see EC2 Instance Types in the Amazon EC2 User Guide.
+     * The EC2 instance types and sizes to use in the Auto Scaling group. The instance definitions must specify at least two different instance types that are supported by GameLift FleetIQ. For more information on instance types, see EC2 Instance Types in the Amazon EC2 User Guide. You can optionally specify capacity weighting for each instance type. If no weight value is specified for an instance type, it is set to the default value "1". For more information about capacity weighting, see  Instance Weighting for Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide.
      */
     InstanceDefinitions: InstanceDefinitions;
     /**
-     * Configuration settings to define a scaling policy for the Auto Scaling group that is optimized for game hosting. The scaling policy uses the metric "PercentUtilizedGameServers" to maintain a buffer of idle game servers that can immediately accommodate new games and players. Once the game server and Auto Scaling groups are created, you can update the scaling policy settings directly in Auto Scaling Groups.
+     * Configuration settings to define a scaling policy for the Auto Scaling group that is optimized for game hosting. The scaling policy uses the metric "PercentUtilizedGameServers" to maintain a buffer of idle game servers that can immediately accommodate new games and players. After the Auto Scaling group is created, update this value directly in the Auto Scaling group using the AWS console or APIs.
      */
     AutoScalingPolicy?: GameServerGroupAutoScalingPolicy;
     /**
-     * The fallback balancing method to use for the game server group when Spot instances in a Region become unavailable or are not viable for game hosting. Once triggered, this method remains active until Spot instances can once again be used. Method options include:   SPOT_ONLY -- If Spot instances are unavailable, the game server group provides no hosting capacity. No new instances are started, and the existing nonviable Spot instances are terminated (once current gameplay ends) and not replaced.   SPOT_PREFERRED -- If Spot instances are unavailable, the game server group continues to provide hosting capacity by using On-Demand instances. Existing nonviable Spot instances are terminated (once current gameplay ends) and replaced with new On-Demand instances.   
+     * Indicates how GameLift FleetIQ balances the use of Spot Instances and On-Demand Instances in the game server group. Method options include the following:    SPOT_ONLY - Only Spot Instances are used in the game server group. If Spot Instances are unavailable or not viable for game hosting, the game server group provides no hosting capacity until Spot Instances can again be used. Until then, no new instances are started, and the existing nonviable Spot Instances are terminated (after current gameplay ends) and are not replaced.    SPOT_PREFERRED - (default value) Spot Instances are used whenever available in the game server group. If Spot Instances are unavailable, the game server group continues to provide hosting capacity by falling back to On-Demand Instances. Existing nonviable Spot Instances are terminated (after current gameplay ends) and are replaced with new On-Demand Instances.    ON_DEMAND_ONLY - Only On-Demand Instances are used in the game server group. No Spot Instances are used, even when available, while this balancing strategy is in force.  
      */
     BalancingStrategy?: BalancingStrategy;
     /**
-     * A flag that indicates whether instances in the game server group are protected from early termination. Unprotected instances that have active game servers running may by terminated during a scale-down event, causing players to be dropped from the game. Protected instances cannot be terminated while there are active game servers running. An exception to this is Spot Instances, which may be terminated by AWS regardless of protection status. This property is set to NO_PROTECTION by default.
+     * A flag that indicates whether instances in the game server group are protected from early termination. Unprotected instances that have active game servers running might be terminated during a scale-down event, causing players to be dropped from the game. Protected instances cannot be terminated while there are active game servers running except in the event of a forced game server group deletion (see ). An exception to this is with Spot Instances, which can be terminated by AWS regardless of protection status. This property is set to NO_PROTECTION by default.
      */
     GameServerProtectionPolicy?: GameServerProtectionPolicy;
     /**
-     * A list of virtual private cloud (VPC) subnets to use with instances in the game server group. By default, all GameLift FleetIQ-supported availability zones are used; this parameter allows you to specify VPCs that you've set up. 
+     * A list of virtual private cloud (VPC) subnets to use with instances in the game server group. By default, all GameLift FleetIQ-supported Availability Zones are used. You can use this parameter to specify VPCs that you've set up. This property cannot be updated after the game server group is created, and the corresponding Auto Scaling group will always use the property value that is set with this request, even if the Auto Scaling group is updated directly
      */
     VpcSubnets?: VpcSubnets;
     /**
-     * A list of labels to assign to the new game server group resource. Tags are developer-defined key-value pairs. Tagging AWS resources are useful for resource management, access management, and cost allocation. For more information, see  Tagging AWS Resources in the AWS General Reference. Once the resource is created, you can use TagResource, UntagResource, and ListTagsForResource to add, remove, and view tags. The maximum tag limit may be lower than stated. See the AWS General Reference for actual tagging limits.
+     * A list of labels to assign to the new game server group resource. Tags are developer-defined key-value pairs. Tagging AWS resources is useful for resource management, access management, and cost allocation. For more information, see  Tagging AWS Resources in the AWS General Reference. Once the resource is created, you can use TagResource, UntagResource, and ListTagsForResource to add, remove, and view tags, respectively. The maximum tag limit may be lower than stated. See the AWS General Reference for actual tagging limits.
      */
     Tags?: TagList;
   }
@@ -1354,11 +1362,11 @@ declare namespace GameLift {
   }
   export interface DeleteGameServerGroupInput {
     /**
-     * The unique identifier of the game server group to delete. Use either the GameServerGroup name or ARN value.
+     * A unique identifier for the game server group. Use either the GameServerGroup name or ARN value.
      */
     GameServerGroupName: GameServerGroupNameOrArn;
     /**
-     * The type of delete to perform. Options include:   SAFE_DELETE – Terminates the game server group and EC2 Auto Scaling group only when it has no game servers that are in IN_USE status.   FORCE_DELETE – Terminates the game server group, including all active game servers regardless of their utilization status, and the EC2 Auto Scaling group.    RETAIN – Does a safe delete of the game server group but retains the EC2 Auto Scaling group as is.  
+     * The type of delete to perform. Options include the following:    SAFE_DELETE – Terminates the game server group and EC2 Auto Scaling group only when it has no game servers that are in UTILIZED status.    FORCE_DELETE – Terminates the game server group, including all active game servers regardless of their utilization status, and the EC2 Auto Scaling group.     RETAIN – Does a safe delete of the game server group but retains the EC2 Auto Scaling group as is.  
      */
     DeleteOption?: GameServerGroupDeleteOption;
   }
@@ -1434,11 +1442,11 @@ declare namespace GameLift {
   }
   export interface DeregisterGameServerInput {
     /**
-     * An identifier for the game server group where the game server to be de-registered is running. Use either the GameServerGroup name or ARN value.
+     * A unique identifier for the game server group where the game server is running. Use either the GameServerGroup name or ARN value.
      */
     GameServerGroupName: GameServerGroupNameOrArn;
     /**
-     * The identifier for the game server to be de-registered.
+     * A custom string that uniquely identifies the game server to deregister.
      */
     GameServerId: GameServerId;
   }
@@ -1488,7 +1496,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value. This parameter is ignored when the request specifies one or a list of fleet IDs.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value. This parameter is ignored when the request specifies one or a list of fleet IDs.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1498,7 +1506,7 @@ declare namespace GameLift {
      */
     FleetAttributes?: FleetAttributesList;
     /**
-     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * Token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1512,7 +1520,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value. This parameter is ignored when the request specifies one or a list of fleet IDs.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value. This parameter is ignored when the request specifies one or a list of fleet IDs.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1522,7 +1530,7 @@ declare namespace GameLift {
      */
     FleetCapacity?: FleetCapacityList;
     /**
-     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * Token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1544,7 +1552,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1554,7 +1562,7 @@ declare namespace GameLift {
      */
     Events?: EventList;
     /**
-     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * Token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1580,7 +1588,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value. This parameter is ignored when the request specifies one or a list of fleet IDs.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value. This parameter is ignored when the request specifies one or a list of fleet IDs.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1590,35 +1598,63 @@ declare namespace GameLift {
      */
     FleetUtilization?: FleetUtilizationList;
     /**
-     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * Token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
   export interface DescribeGameServerGroupInput {
     /**
-     * The unique identifier for the game server group being requested. Use either the GameServerGroup name or ARN value.
+     * A unique identifier for the game server group. Use either the GameServerGroup name or ARN value.
      */
     GameServerGroupName: GameServerGroupNameOrArn;
   }
   export interface DescribeGameServerGroupOutput {
     /**
-     * An object that describes the requested game server group resource. 
+     * An object with the property settings for the requested game server group resource. 
      */
     GameServerGroup?: GameServerGroup;
   }
   export interface DescribeGameServerInput {
     /**
-     * An identifier for the game server group where the game server is running. Use either the GameServerGroup name or ARN value.
+     * A unique identifier for the game server group where the game server is running. Use either the GameServerGroup name or ARN value.
      */
     GameServerGroupName: GameServerGroupNameOrArn;
     /**
-     * The identifier for the game server to be retrieved.
+     * A custom string that uniquely identifies the game server information to be retrieved.
      */
     GameServerId: GameServerId;
   }
+  export interface DescribeGameServerInstancesInput {
+    /**
+     * A unique identifier for the game server group. Use either the GameServerGroup name or ARN value.
+     */
+    GameServerGroupName: GameServerGroupNameOrArn;
+    /**
+     * The EC2 instance IDs that you want to retrieve status on. EC2 instance IDs use a 17-character format, for example: i-1234567890abcdef0. To retrieve all instances in the game server group, leave this parameter empty. 
+     */
+    InstanceIds?: GameServerInstanceIds;
+    /**
+     *  The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential segments. 
+     */
+    Limit?: PositiveInteger;
+    /**
+     *  A token that indicates the start of the next sequential segment of results. Use the token returned with the previous call to this operation. To start at the beginning of the result set, do not specify a value. 
+     */
+    NextToken?: NonZeroAndMaxString;
+  }
+  export interface DescribeGameServerInstancesOutput {
+    /**
+     *  The collection of requested game server instances. 
+     */
+    GameServerInstances?: GameServerInstances;
+    /**
+     *  A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list. 
+     */
+    NextToken?: NonZeroAndMaxString;
+  }
   export interface DescribeGameServerOutput {
     /**
-     * Object that describes the requested game server resource.
+     * Object that describes the requested game server.
      */
     GameServer?: GameServer;
   }
@@ -1644,7 +1680,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1654,7 +1690,7 @@ declare namespace GameLift {
      */
     GameSessionDetails?: GameSessionDetailList;
     /**
-     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * Token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1676,11 +1712,11 @@ declare namespace GameLift {
      */
     Names?: GameSessionQueueNameOrArnList;
     /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages. You can request up to 50 results.
      */
     Limit?: PositiveInteger;
     /**
-     * A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
+     * A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1690,7 +1726,7 @@ declare namespace GameLift {
      */
     GameSessionQueues?: GameSessionQueueList;
     /**
-     * A token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1716,7 +1752,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1726,7 +1762,7 @@ declare namespace GameLift {
      */
     GameSessions?: GameSessionList;
     /**
-     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * Token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1744,7 +1780,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1754,7 +1790,7 @@ declare namespace GameLift {
      */
     Instances?: InstanceList;
     /**
-     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * Token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1772,7 +1808,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
+     * A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1782,7 +1818,7 @@ declare namespace GameLift {
      */
     Configurations?: MatchmakingConfigurationList;
     /**
-     * A token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1808,7 +1844,7 @@ declare namespace GameLift {
      */
     Limit?: RuleSetLimit;
     /**
-     * A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
+     * A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1818,7 +1854,7 @@ declare namespace GameLift {
      */
     RuleSets: MatchmakingRuleSetList;
     /**
-     * A token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1844,7 +1880,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value. If a player session ID is specified, this parameter is ignored.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value. If a player session ID is specified, this parameter is ignored.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1854,7 +1890,7 @@ declare namespace GameLift {
      */
     PlayerSessions?: PlayerSessionList;
     /**
-     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * Token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1884,7 +1920,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -1894,7 +1930,7 @@ declare namespace GameLift {
      */
     ScalingPolicies?: ScalingPolicyList;
     /**
-     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * Token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -2103,7 +2139,7 @@ declare namespace GameLift {
      */
     MetricGroups?: MetricGroupList;
     /**
-     * List of fleet actions that have been suspended using StopFleetActions. This includes auto-scaling.
+     * List of fleet activity that have been suspended using StopFleetActions. This includes auto-scaling.
      */
     StoppedActions?: FleetActionList;
     /**
@@ -2177,7 +2213,7 @@ declare namespace GameLift {
   export type GamePropertyValue = string;
   export interface GameServer {
     /**
-     * The name identifier for the game server group where the game server is located.
+     * A unique identifier for the game server group where the game server is running. Use either the GameServerGroup name or ARN value.
      */
     GameServerGroupName?: GameServerGroupName;
     /**
@@ -2189,7 +2225,7 @@ declare namespace GameLift {
      */
     GameServerId?: GameServerId;
     /**
-     * The unique identifier for the instance where the game server is located.
+     * The unique identifier for the instance where the game server is running. This ID is available in the instance metadata. EC2 instance IDs use a 17-character format, for example: i-1234567890abcdef0.
      */
     InstanceId?: GameServerInstanceId;
     /**
@@ -2197,31 +2233,27 @@ declare namespace GameLift {
      */
     ConnectionInfo?: GameServerConnectionInfo;
     /**
-     * A set of custom game server properties, formatted as a single string value. This data is passed to a game client or service in response to requests ListGameServers or ClaimGameServer. This property can be updated using UpdateGameServer.
+     * A set of custom game server properties, formatted as a single string value. This data is passed to a game client or service when it requests information on game servers using ListGameServers or ClaimGameServer.
      */
     GameServerData?: GameServerData;
     /**
-     * A game server tag that can be used to request sorted lists of game servers when calling ListGameServers. Custom sort keys are developer-defined. This property can be updated using UpdateGameServer.
-     */
-    CustomSortKey?: GameServerSortKey;
-    /**
-     * Indicates when an available game server has been reserved but has not yet started hosting a game. Once it is claimed, game server remains in CLAIMED status for a maximum of one minute. During this time, game clients must connect to the game server and start the game, which triggers the game server to update its utilization status. After one minute, the game server claim status reverts to null.
+     * Indicates when an available game server has been reserved for gameplay but has not yet started hosting a game. Once it is claimed, the game server remains in CLAIMED status for a maximum of one minute. During this time, game clients connect to the game server to start the game and trigger the game server to update its utilization status. After one minute, the game server claim status reverts to null.
      */
     ClaimStatus?: GameServerClaimStatus;
     /**
-     * Indicates whether the game server is currently available for new games or is busy. Possible statuses include:   AVAILABLE - The game server is available to be claimed. A game server that has been claimed remains in this status until it reports game hosting activity.    IN_USE - The game server is currently hosting a game session with players.   
+     * Indicates whether the game server is currently available for new games or is busy. Possible statuses include:    AVAILABLE - The game server is available to be claimed. A game server that has been claimed remains in this status until it reports game hosting activity.     UTILIZED - The game server is currently hosting a game session with players.   
      */
     UtilizationStatus?: GameServerUtilizationStatus;
     /**
-     * Time stamp indicating when the game server resource was created with a RegisterGameServer request. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
+     * Timestamp that indicates when the game server was created with a RegisterGameServer request. The format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
      */
     RegistrationTime?: Timestamp;
     /**
-     * Time stamp indicating the last time the game server was claimed with a ClaimGameServer request. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057"). This value is used to calculate when the game server's claim status.
+     * Timestamp that indicates the last time the game server was claimed with a ClaimGameServer request. The format is a number expressed in Unix time as milliseconds (for example "1469498468.057"). This value is used to calculate when a claimed game server's status should revert to null.
      */
     LastClaimTime?: Timestamp;
     /**
-     * Time stamp indicating the last time the game server was updated with health status using an UpdateGameServer request. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057"). After game server registration, this property is only changed when a game server update specifies a health check value.
+     * Timestamp that indicates the last time the game server was updated with health status using an UpdateGameServer request. The format is a number expressed in Unix time as milliseconds (for example "1469498468.057"). After game server registration, this property is only changed when a game server update specifies a health check value.
      */
     LastHealthCheckTime?: Timestamp;
   }
@@ -2230,7 +2262,7 @@ declare namespace GameLift {
   export type GameServerData = string;
   export interface GameServerGroup {
     /**
-     * A developer-defined identifier for the game server group. The name is unique per Region per AWS account.
+     * A developer-defined identifier for the game server group. The name is unique for each Region in each AWS account.
      */
     GameServerGroupName?: GameServerGroupName;
     /**
@@ -2238,31 +2270,31 @@ declare namespace GameLift {
      */
     GameServerGroupArn?: GameServerGroupArn;
     /**
-     * The Amazon Resource Name (ARN) for an IAM role that allows Amazon GameLift to access your EC2 Auto Scaling groups. The submitted role is validated to ensure that it contains the necessary permissions for game server groups.
+     * The Amazon Resource Name (ARN) for an IAM role that allows Amazon GameLift to access your EC2 Auto Scaling groups.
      */
     RoleArn?: IamRoleArn;
     /**
-     * The set of EC2 instance types that GameLift FleetIQ can use when rebalancing and autoscaling instances in the group. 
+     * The set of EC2 instance types that GameLift FleetIQ can use when balancing and automatically scaling instances in the corresponding Auto Scaling group. 
      */
     InstanceDefinitions?: InstanceDefinitions;
     /**
-     * The fallback balancing method to use for the game server group when Spot instances in a Region become unavailable or are not viable for game hosting. Once triggered, this method remains active until Spot instances can once again be used. Method options include:   SPOT_ONLY -- If Spot instances are unavailable, the game server group provides no hosting capacity. No new instances are started, and the existing nonviable Spot instances are terminated (once current gameplay ends) and not replaced.   SPOT_PREFERRED -- If Spot instances are unavailable, the game server group continues to provide hosting capacity by using On-Demand instances. Existing nonviable Spot instances are terminated (once current gameplay ends) and replaced with new On-Demand instances.   
+     * Indicates how GameLift FleetIQ balances the use of Spot Instances and On-Demand Instances in the game server group. Method options include the following:    SPOT_ONLY - Only Spot Instances are used in the game server group. If Spot Instances are unavailable or not viable for game hosting, the game server group provides no hosting capacity until Spot Instances can again be used. Until then, no new instances are started, and the existing nonviable Spot Instances are terminated (after current gameplay ends) and are not replaced.    SPOT_PREFERRED - (default value) Spot Instances are used whenever available in the game server group. If Spot Instances are unavailable, the game server group continues to provide hosting capacity by falling back to On-Demand Instances. Existing nonviable Spot Instances are terminated (after current gameplay ends) and are replaced with new On-Demand Instances.    ON_DEMAND_ONLY - Only On-Demand Instances are used in the game server group. No Spot Instances are used, even when available, while this balancing strategy is in force.  
      */
     BalancingStrategy?: BalancingStrategy;
     /**
-     * A flag that indicates whether instances in the game server group are protected from early termination. Unprotected instances that have active game servers running may be terminated during a scale-down event, causing players to be dropped from the game. Protected instances cannot be terminated while there are active game servers running except in the event of a forced game server group deletion (see DeleteGameServerGroup). An exception to this is Spot Instances, which may be terminated by AWS regardless of protection status.
+     * A flag that indicates whether instances in the game server group are protected from early termination. Unprotected instances that have active game servers running might be terminated during a scale-down event, causing players to be dropped from the game. Protected instances cannot be terminated while there are active game servers running except in the event of a forced game server group deletion (see ). An exception to this is with Spot Instances, which can be terminated by AWS regardless of protection status. 
      */
     GameServerProtectionPolicy?: GameServerProtectionPolicy;
     /**
-     * A generated unique ID for the EC2 Auto Scaling group with is associated with this game server group.
+     * A generated unique ID for the EC2 Auto Scaling group that is associated with this game server group.
      */
     AutoScalingGroupArn?: AutoScalingGroupArn;
     /**
-     * The current status of the game server group. Possible statuses include:    NEW - GameLift FleetIQ has validated the CreateGameServerGroup() request.    ACTIVATING - GameLift FleetIQ is setting up a game server group, which includes creating an autoscaling group in your AWS account.    ACTIVE - The game server group has been successfully created.    DELETE_SCHEDULED - A request to delete the game server group has been received.    DELETING - GameLift FleetIQ has received a valid DeleteGameServerGroup() request and is processing it. GameLift FleetIQ must first complete and release hosts before it deletes the autoscaling group and the game server group.    DELETED - The game server group has been successfully deleted.    ERROR - The asynchronous processes of activating or deleting a game server group has failed, resulting in an error state.  
+     * The current status of the game server group. Possible statuses include:    NEW - GameLift FleetIQ has validated the CreateGameServerGroup() request.     ACTIVATING - GameLift FleetIQ is setting up a game server group, which includes creating an Auto Scaling group in your AWS account.     ACTIVE - The game server group has been successfully created.     DELETE_SCHEDULED - A request to delete the game server group has been received.     DELETING - GameLift FleetIQ has received a valid DeleteGameServerGroup() request and is processing it. GameLift FleetIQ must first complete and release hosts before it deletes the Auto Scaling group and the game server group.     DELETED - The game server group has been successfully deleted.     ERROR - The asynchronous processes of activating or deleting a game server group has failed, resulting in an error state.  
      */
     Status?: GameServerGroupStatus;
     /**
-     * Additional information about the current game server group status. This information may provide additional insight on groups that in ERROR status.
+     * Additional information about the current game server group status. This information might provide additional insight on groups that are in ERROR status.
      */
     StatusReason?: NonZeroAndMaxString;
     /**
@@ -2270,11 +2302,11 @@ declare namespace GameLift {
      */
     SuspendedActions?: GameServerGroupActions;
     /**
-     * A time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
+     * A timestamp that indicates when this data object was created. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
      */
     CreationTime?: Timestamp;
     /**
-     * A time stamp indicating when this game server group was last updated.
+     * A timestamp that indicates when this game server group was last updated.
      */
     LastUpdatedTime?: Timestamp;
   }
@@ -2283,7 +2315,7 @@ declare namespace GameLift {
   export type GameServerGroupArn = string;
   export interface GameServerGroupAutoScalingPolicy {
     /**
-     * Length of time, in seconds, it takes for a new instance to start new game server processes and register with GameLift FleetIQ. Specifying a warm-up time can be useful, particularly with game servers that take a long time to start up, because it avoids prematurely starting new instances 
+     * Length of time, in seconds, it takes for a new instance to start new game server processes and register with GameLift FleetIQ. Specifying a warm-up time can be useful, particularly with game servers that take a long time to start up, because it avoids prematurely starting new instances. 
      */
     EstimatedInstanceWarmup?: PositiveInteger;
     /**
@@ -2299,9 +2331,29 @@ declare namespace GameLift {
   export type GameServerGroups = GameServerGroup[];
   export type GameServerHealthCheck = "HEALTHY"|string;
   export type GameServerId = string;
+  export interface GameServerInstance {
+    /**
+     * A developer-defined identifier for the game server group that includes the game server instance. The name is unique for each Region in each AWS account.
+     */
+    GameServerGroupName?: GameServerGroupName;
+    /**
+     * A generated unique identifier for the game server group that includes the game server instance. 
+     */
+    GameServerGroupArn?: GameServerGroupArn;
+    /**
+     * The unique identifier for the instance where the game server is running. This ID is available in the instance metadata. EC2 instance IDs use a 17-character format, for example: i-1234567890abcdef0.
+     */
+    InstanceId?: GameServerInstanceId;
+    /**
+     *  Current status of the game server instance.     ACTIVE -- The instance is viable for hosting game servers.     DRAINING -- The instance is not viable for hosting game servers. Existing game servers are in the process of ending, and new game servers are not started on this instance unless no other resources are available. When the instance is put in DRAINING, a new instance is started up to replace it. Once the instance has no UTILIZED game servers, it will be terminated in favor of the new instance.    SPOT_TERMINATING -- The instance is in the process of shutting down due to a Spot instance interruption. No new game servers are started on this instance.  
+     */
+    InstanceStatus?: GameServerInstanceStatus;
+  }
   export type GameServerInstanceId = string;
+  export type GameServerInstanceIds = GameServerInstanceId[];
+  export type GameServerInstanceStatus = "ACTIVE"|"DRAINING"|"SPOT_TERMINATING"|string;
+  export type GameServerInstances = GameServerInstance[];
   export type GameServerProtectionPolicy = "NO_PROTECTION"|"FULL_PROTECTION"|string;
-  export type GameServerSortKey = string;
   export type GameServerUtilizationStatus = "AVAILABLE"|"UTILIZED"|string;
   export type GameServers = GameServer[];
   export interface GameSession {
@@ -2670,7 +2722,7 @@ declare namespace GameLift {
      */
     LaunchTemplateName?: LaunchTemplateName;
     /**
-     * The version of the EC2 launch template to use. If no version is specified, the default version will be used. EC2 allows you to specify a default version for a launch template, if none is set, the default is the first version created.
+     * The version of the EC2 launch template to use. If no version is specified, the default version will be used. With Amazon EC2, you can specify a default version for a launch template. If none is set, the default is the first version created.
      */
     Version?: LaunchTemplateVersion;
   }
@@ -2689,7 +2741,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
+     * A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.
      */
     NextToken?: NonEmptyString;
   }
@@ -2699,7 +2751,7 @@ declare namespace GameLift {
      */
     Aliases?: AliasList;
     /**
-     * A token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonEmptyString;
   }
@@ -2713,7 +2765,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.
      */
     NextToken?: NonEmptyString;
   }
@@ -2723,7 +2775,7 @@ declare namespace GameLift {
      */
     Builds?: BuildList;
     /**
-     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * Token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonEmptyString;
   }
@@ -2741,7 +2793,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -2751,17 +2803,17 @@ declare namespace GameLift {
      */
     FleetIds?: FleetIdList;
     /**
-     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * Token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
   export interface ListGameServerGroupsInput {
     /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential segments.
      */
     Limit?: PositiveInteger;
     /**
-     * A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
+     * A token that indicates the start of the next sequential segment of results. Use the token returned with the previous call to this operation. To start at the beginning of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -2771,25 +2823,25 @@ declare namespace GameLift {
      */
     GameServerGroups?: GameServerGroups;
     /**
-     * A token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
   export interface ListGameServersInput {
     /**
-     * An identifier for the game server group for the game server you want to list. Use either the GameServerGroup name or ARN value.
+     * An identifier for the game server group to retrieve a list of game servers from. Use either the GameServerGroup name or ARN value.
      */
     GameServerGroupName: GameServerGroupNameOrArn;
     /**
-     * Indicates how to sort the returned data based on the game servers' custom key sort value. If this parameter is left empty, the list of game servers is returned in no particular order.
+     * Indicates how to sort the returned data based on game server registration timestamp. Use ASCENDING to retrieve oldest game servers first, or use DESCENDING to retrieve newest game servers first. If this parameter is left empty, game servers are returned in no particular order.
      */
     SortOrder?: SortOrder;
     /**
-     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential pages.
+     * The maximum number of results to return. Use this parameter with NextToken to get results as a set of sequential segments.
      */
     Limit?: PositiveInteger;
     /**
-     * A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
+     * A token that indicates the start of the next sequential segment of results. Use the token returned with the previous call to this operation. To start at the beginning of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -2799,7 +2851,7 @@ declare namespace GameLift {
      */
     GameServers?: GameServers;
     /**
-     * A token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -2809,7 +2861,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
+     * A token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.
      */
     NextToken?: NonEmptyString;
   }
@@ -2819,13 +2871,13 @@ declare namespace GameLift {
      */
     Scripts?: ScriptList;
     /**
-     * A token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * A token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonEmptyString;
   }
   export interface ListTagsForResourceRequest {
     /**
-     *  The Amazon Resource Name (ARN) that is assigned to and uniquely identifies the GameLift resource that you want to retrieve tags for. GameLift resource ARNs are included in the data object for the resource, which can be retrieved by calling a List or Describe action for the resource type. 
+     *  The Amazon Resource Name (ARN) that is assigned to and uniquely identifies the GameLift resource that you want to retrieve tags for. GameLift resource ARNs are included in the data object for the resource, which can be retrieved by calling a List or Describe operation for the resource type. 
      */
     ResourceARN: AmazonResourceName;
   }
@@ -3171,37 +3223,29 @@ declare namespace GameLift {
   export type QueueArnsList = ArnStringModel[];
   export interface RegisterGameServerInput {
     /**
-     * An identifier for the game server group where the game server is running. You can use either the GameServerGroup name or ARN value.
+     * A unique identifier for the game server group where the game server is running. Use either the GameServerGroup name or ARN value.
      */
     GameServerGroupName: GameServerGroupNameOrArn;
     /**
-     * A custom string that uniquely identifies the new game server. Game server IDs are developer-defined and must be unique across all game server groups in your AWS account.
+     * A custom string that uniquely identifies the game server to register. Game server IDs are developer-defined and must be unique across all game server groups in your AWS account.
      */
     GameServerId: GameServerId;
     /**
-     * The unique identifier for the instance where the game server is running. This ID is available in the instance metadata.
+     * The unique identifier for the instance where the game server is running. This ID is available in the instance metadata. EC2 instance IDs use a 17-character format, for example: i-1234567890abcdef0.
      */
     InstanceId: GameServerInstanceId;
     /**
-     * Information needed to make inbound client connections to the game server. This might include IP address and port, DNS name, etc.
+     * Information that is needed to make inbound client connections to the game server. This might include the IP address and port, DNS name, and other information.
      */
     ConnectionInfo?: GameServerConnectionInfo;
     /**
-     * A set of custom game server properties, formatted as a single string value. This data is passed to a game client or service when it requests information on a game servers using ListGameServers or ClaimGameServer. 
+     * A set of custom game server properties, formatted as a single string value. This data is passed to a game client or service when it requests information on game servers using ListGameServers or ClaimGameServer. 
      */
     GameServerData?: GameServerData;
-    /**
-     * A game server tag that can be used to request sorted lists of game servers using ListGameServers. Custom sort keys are developer-defined based on how you want to organize the retrieved game server information.
-     */
-    CustomSortKey?: GameServerSortKey;
-    /**
-     * A list of labels to assign to the new game server resource. Tags are developer-defined key-value pairs. Tagging AWS resources are useful for resource management, access management, and cost allocation. For more information, see  Tagging AWS Resources in the AWS General Reference. Once the resource is created, you can use TagResource, UntagResource, and ListTagsForResource to add, remove, and view tags. The maximum tag limit may be lower than stated. See the AWS General Reference for actual tagging limits.
-     */
-    Tags?: TagList;
   }
   export interface RegisterGameServerOutput {
     /**
-     * Object that describes the newly created game server resource.
+     * Object that describes the newly registered game server.
      */
     GameServer?: GameServer;
   }
@@ -3249,11 +3293,11 @@ declare namespace GameLift {
   }
   export interface ResumeGameServerGroupInput {
     /**
-     * The unique identifier of the game server group to resume activity on. Use either the GameServerGroup name or ARN value.
+     * A unique identifier for the game server group. Use either the GameServerGroup name or ARN value.
      */
     GameServerGroupName: GameServerGroupNameOrArn;
     /**
-     * The action to resume for this game server group.
+     * The activity to resume for this game server group.
      */
     ResumeActions: GameServerGroupActions;
   }
@@ -3296,7 +3340,7 @@ declare namespace GameLift {
   }
   export interface S3Location {
     /**
-     * An S3 bucket identifier. This is the name of the S3 bucket.
+     * An S3 bucket identifier. This is the name of the S3 bucket.  GameLift currently does not support uploading from S3 buckets with names that contain a dot (.). 
      */
     Bucket?: NonEmptyString;
     /**
@@ -3414,7 +3458,7 @@ declare namespace GameLift {
      */
     Limit?: PositiveInteger;
     /**
-     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this action. To start at the beginning of the result set, do not specify a value.
+     * Token that indicates the start of the next sequential page of results. Use the token that is returned with a previous call to this operation. To start at the beginning of the result set, do not specify a value.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -3424,7 +3468,7 @@ declare namespace GameLift {
      */
     GameSessions?: GameSessionList;
     /**
-     * Token that indicates where to resume retrieving results on the next call to this action. If no token is returned, these results represent the end of the list.
+     * Token that indicates where to resume retrieving results on the next call to this operation. If no token is returned, these results represent the end of the list.
      */
     NextToken?: NonZeroAndMaxString;
   }
@@ -3578,11 +3622,11 @@ declare namespace GameLift {
   export type StringModel = string;
   export interface SuspendGameServerGroupInput {
     /**
-     * The unique identifier of the game server group to stop activity on. Use either the GameServerGroup name or ARN value.
+     * A unique identifier for the game server group. Use either the GameServerGroup name or ARN value.
      */
     GameServerGroupName: GameServerGroupNameOrArn;
     /**
-     * The action to suspend for this game server group.
+     * The activity to suspend for this game server group.
      */
     SuspendActions: GameServerGroupActions;
   }
@@ -3607,7 +3651,7 @@ declare namespace GameLift {
   export type TagList = Tag[];
   export interface TagResourceRequest {
     /**
-     *  The Amazon Resource Name (ARN) that is assigned to and uniquely identifies the GameLift resource that you want to assign tags to. GameLift resource ARNs are included in the data object for the resource, which can be retrieved by calling a List or Describe action for the resource type. 
+     *  The Amazon Resource Name (ARN) that is assigned to and uniquely identifies the GameLift resource that you want to assign tags to. GameLift resource ARNs are included in the data object for the resource, which can be retrieved by calling a List or Describe operation for the resource type. 
      */
     ResourceARN: AmazonResourceName;
     /**
@@ -3633,7 +3677,7 @@ declare namespace GameLift {
   export type Timestamp = Date;
   export interface UntagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) that is assigned to and uniquely identifies the GameLift resource that you want to remove tags from. GameLift resource ARNs are included in the data object for the resource, which can be retrieved by calling a List or Describe action for the resource type. 
+     * The Amazon Resource Name (ARN) that is assigned to and uniquely identifies the GameLift resource that you want to remove tags from. GameLift resource ARNs are included in the data object for the resource, which can be retrieved by calling a List or Describe operation for the resource type. 
      */
     ResourceARN: AmazonResourceName;
     /**
@@ -3765,23 +3809,23 @@ declare namespace GameLift {
   }
   export interface UpdateGameServerGroupInput {
     /**
-     * The unique identifier of the game server group to update. Use either the GameServerGroup name or ARN value.
+     * A unique identifier for the game server group. Use either the GameServerGroup name or ARN value.
      */
     GameServerGroupName: GameServerGroupNameOrArn;
     /**
-     * The Amazon Resource Name (ARN) for an IAM role that allows Amazon GameLift to access your EC2 Auto Scaling groups. The submitted role is validated to ensure that it contains the necessary permissions for game server groups.
+     * The Amazon Resource Name (ARN) for an IAM role that allows Amazon GameLift to access your EC2 Auto Scaling groups.
      */
     RoleArn?: IamRoleArn;
     /**
-     * An updated list of EC2 instance types to use when creating instances in the group. The instance definition must specify instance types that are supported by GameLift FleetIQ, and must include at least two instance types. This updated list replaces the entire current list of instance definitions for the game server group. For more information on instance types, see EC2 Instance Types in the Amazon EC2 User Guide..
+     * An updated list of EC2 instance types to use in the Auto Scaling group. The instance definitions must specify at least two different instance types that are supported by GameLift FleetIQ. This updated list replaces the entire current list of instance definitions for the game server group. For more information on instance types, see EC2 Instance Types in the Amazon EC2 User Guide. You can optionally specify capacity weighting for each instance type. If no weight value is specified for an instance type, it is set to the default value "1". For more information about capacity weighting, see  Instance Weighting for Amazon EC2 Auto Scaling in the Amazon EC2 Auto Scaling User Guide.
      */
     InstanceDefinitions?: InstanceDefinitions;
     /**
-     * A flag that indicates whether instances in the game server group are protected from early termination. Unprotected instances that have active game servers running may by terminated during a scale-down event, causing players to be dropped from the game. Protected instances cannot be terminated while there are active game servers running. An exception to this is Spot Instances, which may be terminated by AWS regardless of protection status. This property is set to NO_PROTECTION by default.
+     * A flag that indicates whether instances in the game server group are protected from early termination. Unprotected instances that have active game servers running might be terminated during a scale-down event, causing players to be dropped from the game. Protected instances cannot be terminated while there are active game servers running except in the event of a forced game server group deletion (see ). An exception to this is with Spot Instances, which can be terminated by AWS regardless of protection status. This property is set to NO_PROTECTION by default.
      */
     GameServerProtectionPolicy?: GameServerProtectionPolicy;
     /**
-     * The fallback balancing method to use for the game server group when Spot instances in a Region become unavailable or are not viable for game hosting. Once triggered, this method remains active until Spot instances can once again be used. Method options include:   SPOT_ONLY -- If Spot instances are unavailable, the game server group provides no hosting capacity. No new instances are started, and the existing nonviable Spot instances are terminated (once current gameplay ends) and not replaced.   SPOT_PREFERRED -- If Spot instances are unavailable, the game server group continues to provide hosting capacity by using On-Demand instances. Existing nonviable Spot instances are terminated (once current gameplay ends) and replaced with new On-Demand instances.   
+     * Indicates how GameLift FleetIQ balances the use of Spot Instances and On-Demand Instances in the game server group. Method options include the following:    SPOT_ONLY - Only Spot Instances are used in the game server group. If Spot Instances are unavailable or not viable for game hosting, the game server group provides no hosting capacity until Spot Instances can again be used. Until then, no new instances are started, and the existing nonviable Spot Instances are terminated (after current gameplay ends) and are not replaced.    SPOT_PREFERRED - (default value) Spot Instances are used whenever available in the game server group. If Spot Instances are unavailable, the game server group continues to provide hosting capacity by falling back to On-Demand Instances. Existing nonviable Spot Instances are terminated (after current gameplay ends) and are replaced with new On-Demand Instances.    ON_DEMAND_ONLY - Only On-Demand Instances are used in the game server group. No Spot Instances are used, even when available, while this balancing strategy is in force.  
      */
     BalancingStrategy?: BalancingStrategy;
   }
@@ -3793,33 +3837,29 @@ declare namespace GameLift {
   }
   export interface UpdateGameServerInput {
     /**
-     * An identifier for the game server group where the game server is running. Use either the GameServerGroup name or ARN value.
+     * A unique identifier for the game server group where the game server is running. Use either the GameServerGroup name or ARN value.
      */
     GameServerGroupName: GameServerGroupNameOrArn;
     /**
-     * The identifier for the game server to be updated.
+     * A custom string that uniquely identifies the game server to update.
      */
     GameServerId: GameServerId;
     /**
-     * A set of custom game server properties, formatted as a single string value. This data is passed to a game client or service when it requests information on a game servers using DescribeGameServer or ClaimGameServer. 
+     * A set of custom game server properties, formatted as a single string value. This data is passed to a game client or service when it requests information on game servers using ListGameServers or ClaimGameServer. 
      */
     GameServerData?: GameServerData;
-    /**
-     * A game server tag that can be used to request sorted lists of game servers using ListGameServers. Custom sort keys are developer-defined based on how you want to organize the retrieved game server information.
-     */
-    CustomSortKey?: GameServerSortKey;
     /**
      * Indicates whether the game server is available or is currently hosting gameplay.
      */
     UtilizationStatus?: GameServerUtilizationStatus;
     /**
-     * Indicates health status of the game server. An update that explicitly includes this parameter updates the game server's LastHealthCheckTime time stamp. 
+     * Indicates health status of the game server. A request that includes this parameter updates the game server's LastHealthCheckTime timestamp. 
      */
     HealthCheck?: GameServerHealthCheck;
   }
   export interface UpdateGameServerOutput {
     /**
-     * Object that describes the newly updated game server resource.
+     * Object that describes the newly updated game server.
      */
     GameServer?: GameServer;
   }

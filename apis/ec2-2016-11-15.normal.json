@@ -636,7 +636,7 @@
       "output": {
         "shape": "CreateCustomerGatewayResult"
       },
-      "documentation": "<p>Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the Internet-routable IP address of the customer gateway's external interface. The IP address must be static and can be behind a device performing network address translation (NAT).</p> <p>For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).</p> <note> <p>Amazon EC2 supports all 2-byte ASN numbers in the range of 1 - 65534, with the exception of 7224, which is reserved in the <code>us-east-1</code> Region, and 9059, which is reserved in the <code>eu-west-1</code> Region.</p> </note> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p> <important> <p>To create more than one customer gateway with the same VPN type, IP address, and BGP ASN, specify a unique device name for each customer gateway. Identical requests return information about the existing customer gateway and do not create new customer gateways.</p> </important>"
+      "documentation": "<p>Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the internet-routable IP address of the customer gateway's external interface. The IP address must be static and can be behind a device performing network address translation (NAT).</p> <p>For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).</p> <note> <p>Amazon EC2 supports all 4-byte ASN numbers in the range of 1 - 2147483647, with the exception of the following:</p> <ul> <li> <p>7224 - reserved in the <code>us-east-1</code> Region</p> </li> <li> <p>9059 - reserved in the <code>eu-west-1</code> Region</p> </li> <li> <p>17943 - reserved in the <code>ap-southeast-1</code> Region</p> </li> <li> <p>10124 - reserved in the <code>ap-northeast-1</code> Region</p> </li> </ul> </note> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p> <important> <p>To create more than one customer gateway with the same VPN type, IP address, and BGP ASN, specify a unique device name for each customer gateway. Identical requests return information about the existing customer gateway and do not create new customer gateways.</p> </important>"
     },
     "CreateDefaultSubnet": {
       "name": "CreateDefaultSubnet",
@@ -4952,6 +4952,20 @@
         "shape": "ModifyVpnConnectionResult"
       },
       "documentation": "<p>Modifies the customer gateway or the target gateway of an AWS Site-to-Site VPN connection. To modify the target gateway, the following migration options are available:</p> <ul> <li> <p>An existing virtual private gateway to a new virtual private gateway</p> </li> <li> <p>An existing virtual private gateway to a transit gateway</p> </li> <li> <p>An existing transit gateway to a new transit gateway</p> </li> <li> <p>An existing transit gateway to a virtual private gateway</p> </li> </ul> <p>Before you perform the migration to the new gateway, you must configure the new gateway. Use <a>CreateVpnGateway</a> to create a virtual private gateway, or <a>CreateTransitGateway</a> to create a transit gateway.</p> <p>This step is required when you migrate from a virtual private gateway with static routes to a transit gateway. </p> <p>You must delete the static routes before you migrate to the new gateway.</p> <p>Keep a copy of the static route before you delete it. You will need to add back these routes to the transit gateway after the VPN connection migration is complete.</p> <p>After you migrate to the new gateway, you might need to modify your VPC route table. Use <a>CreateRoute</a> and <a>DeleteRoute</a> to make the changes described in <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/modify-vpn-target.html#step-update-routing\">VPN Gateway Target Modification Required VPC Route Table Updates</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p> <p> When the new gateway is a transit gateway, modify the transit gateway route table to allow traffic between the VPC and the AWS Site-to-Site VPN connection. Use <a>CreateTransitGatewayRoute</a> to add the routes.</p> <p> If you deleted VPN static routes, you must add the static routes to the transit gateway route table.</p> <p>After you perform this operation, the AWS VPN endpoint's IP addresses on the AWS side and the tunnel options remain intact. Your AWS Site-to-Site VPN connection will be temporarily unavailable for a brief period while we provision the new endpoints.</p>"
+    },
+    "ModifyVpnConnectionOptions": {
+      "name": "ModifyVpnConnectionOptions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyVpnConnectionOptionsRequest"
+      },
+      "output": {
+        "shape": "ModifyVpnConnectionOptionsResult"
+      },
+      "documentation": "<p>Modifies the connection options for your Site-to-Site VPN VPN connection.</p> <p>When you modify the VPN connection options, the VPN endpoint IP addresses on the AWS side do not change, and the tunnel options do not change. Your VPN connection will be temporarily unavailable for a brief period while the VPN connection is updated.</p>"
     },
     "ModifyVpnTunnelCertificate": {
       "name": "ModifyVpnTunnelCertificate",
@@ -29942,6 +29956,47 @@
         }
       }
     },
+    "ModifyVpnConnectionOptionsRequest": {
+      "type": "structure",
+      "required": [
+        "VpnConnectionId"
+      ],
+      "members": {
+        "VpnConnectionId": {
+          "shape": "VpnConnectionId",
+          "documentation": "<p>The ID of the Site-to-Site VPN VPN connection. </p>"
+        },
+        "LocalIpv4NetworkCidr": {
+          "shape": "String",
+          "documentation": "<p>The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection.</p> <p>Default: <code>0.0.0.0/0</code> </p>"
+        },
+        "RemoteIpv4NetworkCidr": {
+          "shape": "String",
+          "documentation": "<p>The IPv4 CIDR on the AWS side of the VPN connection.</p> <p>Default: <code>0.0.0.0/0</code> </p>"
+        },
+        "LocalIpv6NetworkCidr": {
+          "shape": "String",
+          "documentation": "<p>The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.</p> <p>Default: <code>::/0</code> </p>"
+        },
+        "RemoteIpv6NetworkCidr": {
+          "shape": "String",
+          "documentation": "<p>The IPv6 CIDR on the AWS side of the VPN connection.</p> <p>Default: <code>::/0</code> </p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "ModifyVpnConnectionOptionsResult": {
+      "type": "structure",
+      "members": {
+        "VpnConnection": {
+          "shape": "VpnConnection",
+          "locationName": "vpnConnection"
+        }
+      }
+    },
     "ModifyVpnConnectionRequest": {
       "type": "structure",
       "required": [
@@ -30083,6 +30138,10 @@
           "shape": "Integer",
           "documentation": "<p>The number of seconds after which a DPD timeout occurs.</p> <p>Constraints: A value between 0 and 30.</p> <p>Default: <code>30</code> </p>"
         },
+        "DPDTimeoutAction": {
+          "shape": "String",
+          "documentation": "<p>The action to take after DPD timeout occurs. Specify <code>restart</code> to restart the IKE initiation. Specify <code>clear</code> to end the IKE session.</p> <p>Valid Values: <code>clear</code> | <code>none</code> | <code>restart</code> </p> <p>Default: <code>clear</code> </p>"
+        },
         "Phase1EncryptionAlgorithms": {
           "shape": "Phase1EncryptionAlgorithmsRequestList",
           "documentation": "<p>One or more encryption algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.</p> <p>Valid values: <code>AES128</code> | <code>AES256</code> | <code>AES128-GCM-16</code> | <code>AES256-GCM-16</code> </p>",
@@ -30117,6 +30176,10 @@
           "shape": "IKEVersionsRequestList",
           "documentation": "<p>The IKE versions that are permitted for the VPN tunnel.</p> <p>Valid values: <code>ikev1</code> | <code>ikev2</code> </p>",
           "locationName": "IKEVersion"
+        },
+        "StartupAction": {
+          "shape": "String",
+          "documentation": "<p>The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify <code>start</code> for AWS to initiate the IKE negotiation.</p> <p>Valid Values: <code>add</code> | <code>start</code> </p> <p>Default: <code>add</code> </p>"
         }
       },
       "documentation": "<p>The AWS Site-to-Site VPN tunnel options to modify.</p>"
@@ -39629,6 +39692,11 @@
           "documentation": "<p>The number of seconds after which a DPD timeout occurs.</p>",
           "locationName": "dpdTimeoutSeconds"
         },
+        "DpdTimeoutAction": {
+          "shape": "String",
+          "documentation": "<p>The action to take after a DPD timeout occurs.</p>",
+          "locationName": "dpdTimeoutAction"
+        },
         "Phase1EncryptionAlgorithms": {
           "shape": "Phase1EncryptionAlgorithmsList",
           "documentation": "<p>The permitted encryption algorithms for the VPN tunnel for phase 1 IKE negotiations.</p>",
@@ -39663,6 +39731,11 @@
           "shape": "IKEVersionsList",
           "documentation": "<p>The IKE versions that are permitted for the VPN tunnel.</p>",
           "locationName": "ikeVersionSet"
+        },
+        "StartupAction": {
+          "shape": "String",
+          "documentation": "<p>The action to take when the establishing the VPN tunnels for a VPN connection.</p>",
+          "locationName": "startupAction"
         }
       },
       "documentation": "<p>The VPN tunnel options.</p>"
@@ -41349,6 +41422,26 @@
           "documentation": "<p>Indicates whether the VPN connection uses static routes only. Static routes must be used for devices that don't support BGP.</p>",
           "locationName": "staticRoutesOnly"
         },
+        "LocalIpv4NetworkCidr": {
+          "shape": "String",
+          "documentation": "<p>The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection.</p>",
+          "locationName": "localIpv4NetworkCidr"
+        },
+        "RemoteIpv4NetworkCidr": {
+          "shape": "String",
+          "documentation": "<p>The IPv4 CIDR on the AWS side of the VPN connection.</p>",
+          "locationName": "remoteIpv4NetworkCidr"
+        },
+        "LocalIpv6NetworkCidr": {
+          "shape": "String",
+          "documentation": "<p>The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.</p>",
+          "locationName": "localIpv6NetworkCidr"
+        },
+        "RemoteIpv6NetworkCidr": {
+          "shape": "String",
+          "documentation": "<p>The IPv6 CIDR on the AWS side of the VPN connection.</p>",
+          "locationName": "remoteIpv6NetworkCidr"
+        },
         "TunnelInsideIpVersion": {
           "shape": "TunnelInsideIpVersion",
           "documentation": "<p>Indicates whether the VPN tunnels process IPv4 or IPv6 traffic.</p>",
@@ -41381,6 +41474,22 @@
         "TunnelOptions": {
           "shape": "VpnTunnelOptionsSpecificationsList",
           "documentation": "<p>The tunnel options for the VPN connection.</p>"
+        },
+        "LocalIpv4NetworkCidr": {
+          "shape": "String",
+          "documentation": "<p>The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection.</p> <p>Default: <code>0.0.0.0/0</code> </p>"
+        },
+        "RemoteIpv4NetworkCidr": {
+          "shape": "String",
+          "documentation": "<p>The IPv4 CIDR on the AWS side of the VPN connection.</p> <p>Default: <code>0.0.0.0/0</code> </p>"
+        },
+        "LocalIpv6NetworkCidr": {
+          "shape": "String",
+          "documentation": "<p>The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.</p> <p>Default: <code>::/0</code> </p>"
+        },
+        "RemoteIpv6NetworkCidr": {
+          "shape": "String",
+          "documentation": "<p>The IPv6 CIDR on the AWS side of the VPN connection.</p> <p>Default: <code>::/0</code> </p>"
         }
       },
       "documentation": "<p>Describes VPN connection options.</p>"
@@ -41538,6 +41647,10 @@
           "shape": "Integer",
           "documentation": "<p>The number of seconds after which a DPD timeout occurs.</p> <p>Constraints: A value between 0 and 30.</p> <p>Default: <code>30</code> </p>"
         },
+        "DPDTimeoutAction": {
+          "shape": "String",
+          "documentation": "<p>The action to take after DPD timeout occurs. Specify <code>restart</code> to restart the IKE initiation. Specify <code>clear</code> to end the IKE session.</p> <p>Valid Values: <code>clear</code> | <code>none</code> | <code>restart</code> </p> <p>Default: <code>clear</code> </p>"
+        },
         "Phase1EncryptionAlgorithms": {
           "shape": "Phase1EncryptionAlgorithmsRequestList",
           "documentation": "<p>One or more encryption algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.</p> <p>Valid values: <code>AES128</code> | <code>AES256</code> | <code>AES128-GCM-16</code> | <code>AES256-GCM-16</code> </p>",
@@ -41572,6 +41685,10 @@
           "shape": "IKEVersionsRequestList",
           "documentation": "<p>The IKE versions that are permitted for the VPN tunnel.</p> <p>Valid values: <code>ikev1</code> | <code>ikev2</code> </p>",
           "locationName": "IKEVersion"
+        },
+        "StartupAction": {
+          "shape": "String",
+          "documentation": "<p>The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify <code>start</code> for AWS to initiate the IKE negotiation.</p> <p>Valid Values: <code>add</code> | <code>start</code> </p> <p>Default: <code>add</code> </p>"
         }
       },
       "documentation": "<p>The tunnel options for a single VPN tunnel.</p>"

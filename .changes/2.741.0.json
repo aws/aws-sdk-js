@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Introduces support to initiate Internet Key Exchange (IKE) negotiations for VPN connections from AWS. A user can now send the initial IKE message to their Customer Gateway (CGW) from VPN endpoints."
+    },
+    {
+        "type": "feature",
+        "category": "GameLift",
+        "description": "GameLift FleetIQ as a standalone feature is now generally available. FleetIQ makes low-cost Spot instances viable for game hosting. Use GameLift FleetIQ with your EC2 Auto Scaling groups."
+    },
+    {
+        "type": "feature",
+        "category": "MediaConvert",
+        "description": "AWS Elemental MediaConvert SDK has added support for WebM DASH outputs as well as H.264 4:2:2 10-bit output in MOV and MP4."
+    }
+]

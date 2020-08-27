@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.740.0-->
+<!--LATEST=2.741.0-->
 <!--ENTRYINSERT-->
+
+## 2.741.0
+* feature: EC2: Introduces support to initiate Internet Key Exchange (IKE) negotiations for VPN connections from AWS. A user can now send the initial IKE message to their Customer Gateway (CGW) from VPN endpoints.
+* feature: GameLift: GameLift FleetIQ as a standalone feature is now generally available. FleetIQ makes low-cost Spot instances viable for game hosting. Use GameLift FleetIQ with your EC2 Auto Scaling groups.
+* feature: MediaConvert: AWS Elemental MediaConvert SDK has added support for WebM DASH outputs as well as H.264 4:2:2 10-bit output in MOV and MP4.
 
 ## 2.740.0
 * bugfix: TypeScript type definitions: Deep imports of clients no longer reference entire SDK type definitions

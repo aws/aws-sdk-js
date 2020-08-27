@@ -689,11 +689,11 @@ declare class Redshift extends Service {
    */
   resetClusterParameterGroup(callback?: (err: AWSError, data: Redshift.Types.ClusterParameterGroupNameMessage) => void): Request<Redshift.Types.ClusterParameterGroupNameMessage, AWSError>;
   /**
-   * Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method.  Elastic resize operations have the following restrictions:   You can only resize clusters of the following types:   dc2.large   dc2.8xlarge   ds2.xlarge   ds2.8xlarge   ra3.4xlarge   ra3.16xlarge     The type of nodes that you add must match the node type for the cluster.  
+   * Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method.  Elastic resize operations have the following restrictions:   You can only resize clusters of the following types:   dc1.large (if your cluster is in a VPC)   dc1.8xlarge (if your cluster is in a VPC)   dc2.large   dc2.8xlarge   ds2.xlarge   ds2.8xlarge   ra3.4xlarge   ra3.16xlarge     The type of nodes that you add must match the node type for the cluster.  
    */
   resizeCluster(params: Redshift.Types.ResizeClusterMessage, callback?: (err: AWSError, data: Redshift.Types.ResizeClusterResult) => void): Request<Redshift.Types.ResizeClusterResult, AWSError>;
   /**
-   * Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method.  Elastic resize operations have the following restrictions:   You can only resize clusters of the following types:   dc2.large   dc2.8xlarge   ds2.xlarge   ds2.8xlarge   ra3.4xlarge   ra3.16xlarge     The type of nodes that you add must match the node type for the cluster.  
+   * Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method.  Elastic resize operations have the following restrictions:   You can only resize clusters of the following types:   dc1.large (if your cluster is in a VPC)   dc1.8xlarge (if your cluster is in a VPC)   dc2.large   dc2.8xlarge   ds2.xlarge   ds2.8xlarge   ra3.4xlarge   ra3.16xlarge     The type of nodes that you add must match the node type for the cluster.  
    */
   resizeCluster(callback?: (err: AWSError, data: Redshift.Types.ResizeClusterResult) => void): Request<Redshift.Types.ResizeClusterResult, AWSError>;
   /**
@@ -3146,7 +3146,7 @@ declare namespace Redshift {
      */
     MaintenanceTrackName?: String;
     /**
-     * Indicates whether the cluster is encrypted. If the value is encrypted (true) and you provide a value for the KmsKeyId parameter, we encrypt the cluster with the provided KmsKeyId. If you don't provide a KmsKeyId, we encrypt with the default key. In the China region we use legacy encryption if you specify that the cluster is encrypted. If the value is not encrypted (false), then the cluster is decrypted. 
+     * Indicates whether the cluster is encrypted. If the value is encrypted (true) and you provide a value for the KmsKeyId parameter, we encrypt the cluster with the provided KmsKeyId. If you don't provide a KmsKeyId, we encrypt with the default key.  If the value is not encrypted (false), then the cluster is decrypted. 
      */
     Encrypted?: BooleanOptional;
     /**
@@ -3491,7 +3491,7 @@ declare namespace Redshift {
      */
     MaintenanceTrackName?: String;
     /**
-     * The encryption type for a cluster. Possible values are: KMS and None. For the China region the possible values are None, and Legacy. 
+     * The encryption type for a cluster. Possible values are: KMS and None. 
      */
     EncryptionType?: String;
   }
@@ -3671,7 +3671,7 @@ declare namespace Redshift {
      */
     NodeType?: String;
     /**
-     * The new number of nodes for the cluster.
+     * The new number of nodes for the cluster. If not specified, the cluster's current number of nodes is used.
      */
     NumberOfNodes?: Integer;
     /**
@@ -3750,7 +3750,7 @@ declare namespace Redshift {
      */
     Message?: String;
     /**
-     * The type of encryption for the cluster after the resize is complete. Possible values are KMS and None. In the China region possible values are: Legacy and None.
+     * The type of encryption for the cluster after the resize is complete. Possible values are KMS and None. 
      */
     TargetEncryptionType?: String;
     /**
