@@ -110,17 +110,29 @@
       "type": "string",
       "documentation": "<p>The region of the S3 bucket that AWS delivers the report into.</p>",
       "enum": [
-        "us-east-1",
-        "us-west-1",
-        "us-west-2",
-        "eu-central-1",
-        "eu-west-1",
+        "af-south-1",
+        "ap-east-1",
+        "ap-south-1",
         "ap-southeast-1",
         "ap-southeast-2",
         "ap-northeast-1",
-        "eu-north-1",
+        "ap-northeast-2",
         "ap-northeast-3",
-        "ap-east-1"
+        "ca-central-1",
+        "eu-central-1",
+        "eu-west-1",
+        "eu-west-2",
+        "eu-west-3",
+        "eu-north-1",
+        "eu-south-1",
+        "me-south-1",
+        "sa-east-1",
+        "us-east-1",
+        "us-east-2",
+        "us-west-1",
+        "us-west-2",
+        "cn-north-1",
+        "cn-northwest-1"
       ]
     },
     "AdditionalArtifact": {
@@ -152,7 +164,8 @@
       "type": "structure",
       "members": {
         "ReportName": {
-          "shape": "ReportName"
+          "shape": "ReportName",
+          "documentation": "<p>The name of the report that you want to delete. The name must be unique, is case sensitive, and can't include spaces.</p>"
         }
       },
       "documentation": "<p>Deletes the specified report.</p>"
@@ -197,7 +210,9 @@
     },
     "GenericString": {
       "type": "string",
-      "documentation": "<p>A generic string.</p>"
+      "documentation": "<p>A generic string.</p>",
+      "max": 256,
+      "pattern": "[A-Za-z0-9_\\.\\-=]*"
     },
     "MaxResults": {
       "type": "integer",
@@ -331,7 +346,8 @@
     "S3Bucket": {
       "type": "string",
       "documentation": "<p>The S3 bucket where AWS delivers the report.</p>",
-      "max": 256
+      "max": 256,
+      "pattern": "[A-Za-z0-9_\\.\\-]+"
     },
     "S3Prefix": {
       "type": "string",
@@ -358,7 +374,8 @@
       "documentation": "<p>The length of time covered by the report. </p>",
       "enum": [
         "HOURLY",
-        "DAILY"
+        "DAILY",
+        "MONTHLY"
       ]
     }
   },

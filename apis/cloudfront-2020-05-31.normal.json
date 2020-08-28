@@ -536,6 +536,28 @@
       ],
       "documentation": "<p>Create a new invalidation. </p>"
     },
+    "CreateMonitoringSubscription": {
+      "name": "CreateMonitoringSubscription2020_05_31",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2020-05-31/distributions/{DistributionId}/monitoring-subscription"
+      },
+      "input": {
+        "shape": "CreateMonitoringSubscriptionRequest"
+      },
+      "output": {
+        "shape": "CreateMonitoringSubscriptionResult"
+      },
+      "errors": [
+        {
+          "shape": "AccessDenied"
+        },
+        {
+          "shape": "NoSuchDistribution"
+        }
+      ],
+      "documentation": "<p>Enables additional CloudWatch metrics for the specified CloudFront distribution. The additional metrics incur an additional cost.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/viewing-cloudfront-metrics.html#monitoring-console.distributions-additional\">Viewing additional CloudFront distribution metrics</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
+    },
     "CreateOriginRequestPolicy": {
       "name": "CreateOriginRequestPolicy2020_05_31",
       "http": {
@@ -859,6 +881,28 @@
         }
       ],
       "documentation": "<p>Remove a field-level encryption profile.</p>"
+    },
+    "DeleteMonitoringSubscription": {
+      "name": "DeleteMonitoringSubscription2020_05_31",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/2020-05-31/distributions/{DistributionId}/monitoring-subscription"
+      },
+      "input": {
+        "shape": "DeleteMonitoringSubscriptionRequest"
+      },
+      "output": {
+        "shape": "DeleteMonitoringSubscriptionResult"
+      },
+      "errors": [
+        {
+          "shape": "AccessDenied"
+        },
+        {
+          "shape": "NoSuchDistribution"
+        }
+      ],
+      "documentation": "<p>Disables additional CloudWatch metrics for the specified CloudFront distribution.</p>"
     },
     "DeleteOriginRequestPolicy": {
       "name": "DeleteOriginRequestPolicy2020_05_31",
@@ -1194,6 +1238,28 @@
         }
       ],
       "documentation": "<p>Get the information about an invalidation. </p>"
+    },
+    "GetMonitoringSubscription": {
+      "name": "GetMonitoringSubscription2020_05_31",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2020-05-31/distributions/{DistributionId}/monitoring-subscription"
+      },
+      "input": {
+        "shape": "GetMonitoringSubscriptionRequest"
+      },
+      "output": {
+        "shape": "GetMonitoringSubscriptionResult"
+      },
+      "errors": [
+        {
+          "shape": "AccessDenied"
+        },
+        {
+          "shape": "NoSuchDistribution"
+        }
+      ],
+      "documentation": "<p>Gets information about whether additional CloudWatch metrics are enabled for the specified CloudFront distribution.</p>"
     },
     "GetOriginRequestPolicy": {
       "name": "GetOriginRequestPolicy2020_05_31",
@@ -3069,6 +3135,40 @@
       "documentation": "<p>The returned result of the corresponding request.</p>",
       "payload": "Invalidation"
     },
+    "CreateMonitoringSubscriptionRequest": {
+      "type": "structure",
+      "required": [
+        "MonitoringSubscription",
+        "DistributionId"
+      ],
+      "members": {
+        "DistributionId": {
+          "shape": "string",
+          "documentation": "<p>The ID of the distribution that you are enabling metrics for.</p>",
+          "location": "uri",
+          "locationName": "DistributionId"
+        },
+        "MonitoringSubscription": {
+          "shape": "MonitoringSubscription",
+          "documentation": "<p>A monitoring subscription. This structure contains information about whether additional CloudWatch metrics are enabled for a given CloudFront distribution.</p>",
+          "locationName": "MonitoringSubscription",
+          "xmlNamespace": {
+            "uri": "http://cloudfront.amazonaws.com/doc/2020-05-31/"
+          }
+        }
+      },
+      "payload": "MonitoringSubscription"
+    },
+    "CreateMonitoringSubscriptionResult": {
+      "type": "structure",
+      "members": {
+        "MonitoringSubscription": {
+          "shape": "MonitoringSubscription",
+          "documentation": "<p>A monitoring subscription. This structure contains information about whether additional CloudWatch metrics are enabled for a given CloudFront distribution.</p>"
+        }
+      },
+      "payload": "MonitoringSubscription"
+    },
     "CreateOriginRequestPolicyRequest": {
       "type": "structure",
       "required": [
@@ -3501,6 +3601,24 @@
           "locationName": "If-Match"
         }
       }
+    },
+    "DeleteMonitoringSubscriptionRequest": {
+      "type": "structure",
+      "required": [
+        "DistributionId"
+      ],
+      "members": {
+        "DistributionId": {
+          "shape": "string",
+          "documentation": "<p>The ID of the distribution that you are disabling metrics for.</p>",
+          "location": "uri",
+          "locationName": "DistributionId"
+        }
+      }
+    },
+    "DeleteMonitoringSubscriptionResult": {
+      "type": "structure",
+      "members": {}
     },
     "DeleteOriginRequestPolicyRequest": {
       "type": "structure",
@@ -4615,6 +4733,30 @@
       "documentation": "<p>The returned result of the corresponding request.</p>",
       "payload": "Invalidation"
     },
+    "GetMonitoringSubscriptionRequest": {
+      "type": "structure",
+      "required": [
+        "DistributionId"
+      ],
+      "members": {
+        "DistributionId": {
+          "shape": "string",
+          "documentation": "<p>The ID of the distribution that you are getting metrics information for.</p>",
+          "location": "uri",
+          "locationName": "DistributionId"
+        }
+      }
+    },
+    "GetMonitoringSubscriptionResult": {
+      "type": "structure",
+      "members": {
+        "MonitoringSubscription": {
+          "shape": "MonitoringSubscription",
+          "documentation": "<p>A monitoring subscription. This structure contains information about whether additional CloudWatch metrics are enabled for a given CloudFront distribution.</p>"
+        }
+      },
+      "payload": "MonitoringSubscription"
+    },
     "GetOriginRequestPolicyConfigRequest": {
       "type": "structure",
       "required": [
@@ -5507,6 +5649,16 @@
         "TLSv1.2_2019"
       ]
     },
+    "MonitoringSubscription": {
+      "type": "structure",
+      "members": {
+        "RealtimeMetricsSubscriptionConfig": {
+          "shape": "RealtimeMetricsSubscriptionConfig",
+          "documentation": "<p>A subscription configuration for additional CloudWatch metrics.</p>"
+        }
+      },
+      "documentation": "<p>A monitoring subscription. This structure contains information about whether additional CloudWatch metrics are enabled for a given CloudFront distribution.</p>"
+    },
     "Origin": {
       "type": "structure",
       "required": [
@@ -6196,6 +6348,26 @@
         "shape": "string",
         "locationName": "Name"
       }
+    },
+    "RealtimeMetricsSubscriptionConfig": {
+      "type": "structure",
+      "required": [
+        "RealtimeMetricsSubscriptionStatus"
+      ],
+      "members": {
+        "RealtimeMetricsSubscriptionStatus": {
+          "shape": "RealtimeMetricsSubscriptionStatus",
+          "documentation": "<p>A flag that indicates whether additional CloudWatch metrics are enabled for a given CloudFront distribution.</p>"
+        }
+      },
+      "documentation": "<p>A subscription configuration for additional CloudWatch metrics.</p>"
+    },
+    "RealtimeMetricsSubscriptionStatus": {
+      "type": "string",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ]
     },
     "ResourceARN": {
       "type": "string",

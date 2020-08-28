@@ -85,6 +85,14 @@ declare class EMR extends Service {
    */
   describeJobFlows(callback?: (err: AWSError, data: EMR.Types.DescribeJobFlowsOutput) => void): Request<EMR.Types.DescribeJobFlowsOutput, AWSError>;
   /**
+   * Provides details of a notebook execution.
+   */
+  describeNotebookExecution(params: EMR.Types.DescribeNotebookExecutionInput, callback?: (err: AWSError, data: EMR.Types.DescribeNotebookExecutionOutput) => void): Request<EMR.Types.DescribeNotebookExecutionOutput, AWSError>;
+  /**
+   * Provides details of a notebook execution.
+   */
+  describeNotebookExecution(callback?: (err: AWSError, data: EMR.Types.DescribeNotebookExecutionOutput) => void): Request<EMR.Types.DescribeNotebookExecutionOutput, AWSError>;
+  /**
    * Provides the details of a security configuration by returning the configuration JSON.
    */
   describeSecurityConfiguration(params: EMR.Types.DescribeSecurityConfigurationInput, callback?: (err: AWSError, data: EMR.Types.DescribeSecurityConfigurationOutput) => void): Request<EMR.Types.DescribeSecurityConfigurationOutput, AWSError>;
@@ -156,6 +164,14 @@ declare class EMR extends Service {
    * Provides information for all active EC2 instances and EC2 instances terminated in the last 30 days, up to a maximum of 2,000. EC2 instances in any of the following states are considered active: AWAITING_FULFILLMENT, PROVISIONING, BOOTSTRAPPING, RUNNING.
    */
   listInstances(callback?: (err: AWSError, data: EMR.Types.ListInstancesOutput) => void): Request<EMR.Types.ListInstancesOutput, AWSError>;
+  /**
+   * Provides summaries of all notebook executions. You can filter the list based on multiple criteria such as status, time range, and editor id. Returns a maximum of 50 notebook executions and a marker to track the paging of a longer notebook execution list across multiple ListNotebookExecution calls.
+   */
+  listNotebookExecutions(params: EMR.Types.ListNotebookExecutionsInput, callback?: (err: AWSError, data: EMR.Types.ListNotebookExecutionsOutput) => void): Request<EMR.Types.ListNotebookExecutionsOutput, AWSError>;
+  /**
+   * Provides summaries of all notebook executions. You can filter the list based on multiple criteria such as status, time range, and editor id. Returns a maximum of 50 notebook executions and a marker to track the paging of a longer notebook execution list across multiple ListNotebookExecution calls.
+   */
+  listNotebookExecutions(callback?: (err: AWSError, data: EMR.Types.ListNotebookExecutionsOutput) => void): Request<EMR.Types.ListNotebookExecutionsOutput, AWSError>;
   /**
    * Lists all the security configurations visible to this account, providing their creation dates and times, and their names. This call returns a maximum of 50 clusters per call, but returns a marker to track the paging of the cluster list across multiple ListSecurityConfigurations calls.
    */
@@ -268,6 +284,22 @@ declare class EMR extends Service {
    * Sets the Cluster$VisibleToAllUsers value, which determines whether the cluster is visible to all IAM users of the AWS account associated with the cluster. Only the IAM user who created the cluster or the AWS account root user can call this action. The default value, true, indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. If set to false, only the IAM user that created the cluster can perform actions. This action works on running clusters. You can override the default true setting when you create a cluster by using the VisibleToAllUsers parameter with RunJobFlow.
    */
   setVisibleToAllUsers(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Starts a notebook execution.
+   */
+  startNotebookExecution(params: EMR.Types.StartNotebookExecutionInput, callback?: (err: AWSError, data: EMR.Types.StartNotebookExecutionOutput) => void): Request<EMR.Types.StartNotebookExecutionOutput, AWSError>;
+  /**
+   * Starts a notebook execution.
+   */
+  startNotebookExecution(callback?: (err: AWSError, data: EMR.Types.StartNotebookExecutionOutput) => void): Request<EMR.Types.StartNotebookExecutionOutput, AWSError>;
+  /**
+   * Stops a notebook execution.
+   */
+  stopNotebookExecution(params: EMR.Types.StopNotebookExecutionInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Stops a notebook execution.
+   */
+  stopNotebookExecution(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * TerminateJobFlows shuts a list of clusters (job flows) down. When a job flow is shut down, any step not yet completed is canceled and the EC2 instances on which the cluster is running are stopped. Any log files not already saved are uploaded to Amazon S3 if a LogUri was specified when the cluster was created. The maximum number of clusters allowed is 10. The call to TerminateJobFlows is asynchronous. Depending on the configuration of the cluster, it may take up to 1-5 minutes for the cluster to completely terminate and release allocated resources, such as Amazon EC2 instances.
    */
@@ -866,6 +898,18 @@ declare namespace EMR {
      */
     JobFlows?: JobFlowDetailList;
   }
+  export interface DescribeNotebookExecutionInput {
+    /**
+     * The unique identifier of the notebook execution.
+     */
+    NotebookExecutionId: XmlStringMaxLen256;
+  }
+  export interface DescribeNotebookExecutionOutput {
+    /**
+     * Properties of the notebook execution.
+     */
+    NotebookExecution?: NotebookExecution;
+  }
   export interface DescribeSecurityConfigurationInput {
     /**
      * The name of the security configuration.
@@ -993,6 +1037,21 @@ declare namespace EMR {
      */
     AdditionalSlaveSecurityGroups?: StringList;
   }
+  export interface ExecutionEngineConfig {
+    /**
+     * The unique identifier of the execution engine. For an EMR cluster, this is the cluster ID.
+     */
+    Id: XmlStringMaxLen256;
+    /**
+     * The type of execution engine. A value of EMR specifies an EMR cluster.
+     */
+    Type?: ExecutionEngineType;
+    /**
+     * An optional unique ID of an EC2 security group to associate with the master instance of the EMR cluster for this notebook execution. For more information see Specifying EC2 Security Groups for EMR Notebooks in the EMR Management Guide.
+     */
+    MasterInstanceSecurityGroupId?: XmlStringMaxLen256;
+  }
+  export type ExecutionEngineType = "EMR"|string;
   export interface FailureDetails {
     /**
      * The reason for the step failure. In the case where the service cannot successfully determine the root cause of the failure, it returns "Unknown Error" as a reason.
@@ -1984,6 +2043,38 @@ declare namespace EMR {
      */
     Marker?: Marker;
   }
+  export interface ListNotebookExecutionsInput {
+    /**
+     * The unique ID of the editor associated with the notebook execution.
+     */
+    EditorId?: XmlStringMaxLen256;
+    /**
+     * The status filter for listing notebook executions.    START_PENDING indicates that the cluster has received the execution request but execution has not begun.    STARTING indicates that the execution is starting on the cluster.    RUNNING indicates that the execution is being processed by the cluster.    FINISHING indicates that execution processing is in the final stages.    FINISHED indicates that the execution has completed without error.    FAILING indicates that the execution is failing and will not finish successfully.    FAILED indicates that the execution failed.    STOP_PENDING indicates that the cluster has received a StopNotebookExecution request and the stop is pending.    STOPPING indicates that the cluster is in the process of stopping the execution as a result of a StopNotebookExecution request.    STOPPED indicates that the execution stopped because of a StopNotebookExecution request.  
+     */
+    Status?: NotebookExecutionStatus;
+    /**
+     * The beginning of time range filter for listing notebook executions. The default is the timestamp of 30 days ago.
+     */
+    From?: _Date;
+    /**
+     * The end of time range filter for listing notebook executions. The default is the current timestamp.
+     */
+    To?: _Date;
+    /**
+     * The pagination token, returned by a previous ListNotebookExecutions call, that indicates the start of the list for this ListNotebookExecutions call.
+     */
+    Marker?: Marker;
+  }
+  export interface ListNotebookExecutionsOutput {
+    /**
+     * A list of notebook executions.
+     */
+    NotebookExecutions?: NotebookExecutionSummaryList;
+    /**
+     * A pagination token that a subsequent ListNotebookExecutions can use to determine the next set of results to retrieve.
+     */
+    Marker?: Marker;
+  }
   export interface ListSecurityConfigurationsInput {
     /**
      * The pagination token that indicates the set of results to retrieve.
@@ -2031,7 +2122,7 @@ declare namespace EMR {
   export type Long = number;
   export interface ManagedScalingPolicy {
     /**
-     *  The EC2 unit limits for a managed scaling policy. The managed scaling activity of a cluster is not allowed to go above or below these limits. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. 
+     * The EC2 unit limits for a managed scaling policy. The managed scaling activity of a cluster is not allowed to go above or below these limits. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration.
      */
     ComputeLimits?: ComputeLimits;
   }
@@ -2086,6 +2177,88 @@ declare namespace EMR {
   }
   export type NewSupportedProductsList = SupportedProductConfig[];
   export type NonNegativeDouble = number;
+  export interface NotebookExecution {
+    /**
+     * The unique identifier of a notebook execution.
+     */
+    NotebookExecutionId?: XmlStringMaxLen256;
+    /**
+     * The unique identifier of the EMR Notebook that is used for the notebook execution.
+     */
+    EditorId?: XmlStringMaxLen256;
+    /**
+     * The execution engine, such as an EMR cluster, used to run the EMR notebook and perform the notebook execution.
+     */
+    ExecutionEngine?: ExecutionEngineConfig;
+    /**
+     * A name for the notebook execution.
+     */
+    NotebookExecutionName?: XmlStringMaxLen256;
+    /**
+     * Input parameters in JSON format passed to the EMR Notebook at runtime for execution.
+     */
+    NotebookParams?: XmlString;
+    /**
+     * The status of the notebook execution.    START_PENDING indicates that the cluster has received the execution request but execution has not begun.    STARTING indicates that the execution is starting on the cluster.    RUNNING indicates that the execution is being processed by the cluster.    FINISHING indicates that execution processing is in the final stages.    FINISHED indicates that the execution has completed without error.    FAILING indicates that the execution is failing and will not finish successfully.    FAILED indicates that the execution failed.    STOP_PENDING indicates that the cluster has received a StopNotebookExecution request and the stop is pending.    STOPPING indicates that the cluster is in the process of stopping the execution as a result of a StopNotebookExecution request.    STOPPED indicates that the execution stopped because of a StopNotebookExecution request.  
+     */
+    Status?: NotebookExecutionStatus;
+    /**
+     * The timestamp when notebook execution started.
+     */
+    StartTime?: _Date;
+    /**
+     * The timestamp when notebook execution ended.
+     */
+    EndTime?: _Date;
+    /**
+     * The Amazon Resource Name (ARN) of the notebook execution.
+     */
+    Arn?: XmlStringMaxLen256;
+    /**
+     * The location of the notebook execution's output file in Amazon S3.
+     */
+    OutputNotebookURI?: XmlString;
+    /**
+     * The reason for the latest status change of the notebook execution.
+     */
+    LastStateChangeReason?: XmlString;
+    /**
+     * The unique identifier of the EC2 security group associated with the EMR Notebook instance. For more information see Specifying EC2 Security Groups for EMR Notebooks in the EMR Management Guide.
+     */
+    NotebookInstanceSecurityGroupId?: XmlStringMaxLen256;
+    /**
+     * A list of tags associated with a notebook execution. Tags are user-defined key value pairs that consist of a required key string with a maximum of 128 characters and an optional value string with a maximum of 256 characters.
+     */
+    Tags?: TagList;
+  }
+  export type NotebookExecutionStatus = "START_PENDING"|"STARTING"|"RUNNING"|"FINISHING"|"FINISHED"|"FAILING"|"FAILED"|"STOP_PENDING"|"STOPPING"|"STOPPED"|string;
+  export interface NotebookExecutionSummary {
+    /**
+     * The unique identifier of the notebook execution.
+     */
+    NotebookExecutionId?: XmlStringMaxLen256;
+    /**
+     * The unique identifier of the editor associated with the notebook execution.
+     */
+    EditorId?: XmlStringMaxLen256;
+    /**
+     * The name of the notebook execution.
+     */
+    NotebookExecutionName?: XmlStringMaxLen256;
+    /**
+     * The status of the notebook execution.    START_PENDING indicates that the cluster has received the execution request but execution has not begun.    STARTING indicates that the execution is starting on the cluster.    RUNNING indicates that the execution is being processed by the cluster.    FINISHING indicates that execution processing is in the final stages.    FINISHED indicates that the execution has completed without error.    FAILING indicates that the execution is failing and will not finish successfully.    FAILED indicates that the execution failed.    STOP_PENDING indicates that the cluster has received a StopNotebookExecution request and the stop is pending.    STOPPING indicates that the cluster is in the process of stopping the execution as a result of a StopNotebookExecution request.    STOPPED indicates that the execution stopped because of a StopNotebookExecution request.  
+     */
+    Status?: NotebookExecutionStatus;
+    /**
+     * The timestamp when notebook execution started.
+     */
+    StartTime?: _Date;
+    /**
+     * The timestamp when notebook execution started.
+     */
+    EndTime?: _Date;
+  }
+  export type NotebookExecutionSummaryList = NotebookExecutionSummary[];
   export type OnDemandProvisioningAllocationStrategy = "lowest-price"|string;
   export interface OnDemandProvisioningSpecification {
     /**
@@ -2450,6 +2623,46 @@ declare namespace EMR {
     AllocationStrategy?: SpotProvisioningAllocationStrategy;
   }
   export type SpotProvisioningTimeoutAction = "SWITCH_TO_ON_DEMAND"|"TERMINATE_CLUSTER"|string;
+  export interface StartNotebookExecutionInput {
+    /**
+     * The unique identifier of the EMR Notebook to use for notebook execution.
+     */
+    EditorId: XmlStringMaxLen256;
+    /**
+     * The path and file name of the notebook file for this execution, relative to the path specified for the EMR Notebook. For example, if you specify a path of s3://MyBucket/MyNotebooks when you create an EMR Notebook for a notebook with an ID of e-ABCDEFGHIJK1234567890ABCD (the EditorID of this request), and you specify a RelativePath of my_notebook_executions/notebook_execution.ipynb, the location of the file for the notebook execution is s3://MyBucket/MyNotebooks/e-ABCDEFGHIJK1234567890ABCD/my_notebook_executions/notebook_execution.ipynb.
+     */
+    RelativePath: XmlString;
+    /**
+     * An optional name for the notebook execution.
+     */
+    NotebookExecutionName?: XmlStringMaxLen256;
+    /**
+     * Input parameters in JSON format passed to the EMR Notebook at runtime for execution.
+     */
+    NotebookParams?: XmlString;
+    /**
+     * Specifies the execution engine (cluster) that runs the notebook execution.
+     */
+    ExecutionEngine: ExecutionEngineConfig;
+    /**
+     * The name or ARN of the IAM role that is used as the service role for Amazon EMR (the EMR role) for the notebook execution.
+     */
+    ServiceRole: XmlString;
+    /**
+     * The unique identifier of the Amazon EC2 security group to associate with the EMR Notebook for this notebook execution.
+     */
+    NotebookInstanceSecurityGroupId?: XmlStringMaxLen256;
+    /**
+     * A list of tags associated with a notebook execution. Tags are user-defined key value pairs that consist of a required key string with a maximum of 128 characters and an optional value string with a maximum of 256 characters.
+     */
+    Tags?: TagList;
+  }
+  export interface StartNotebookExecutionOutput {
+    /**
+     * The unique identifier of the notebook execution.
+     */
+    NotebookExecutionId?: XmlStringMaxLen256;
+  }
   export type Statistic = "SAMPLE_COUNT"|"AVERAGE"|"SUM"|"MINIMUM"|"MAXIMUM"|string;
   export interface Step {
     /**
@@ -2592,6 +2805,12 @@ declare namespace EMR {
      * The date and time when the cluster step execution completed or failed.
      */
     EndDateTime?: _Date;
+  }
+  export interface StopNotebookExecutionInput {
+    /**
+     * The unique identifier of the notebook execution.
+     */
+    NotebookExecutionId: XmlStringMaxLen256;
   }
   export type String = string;
   export type StringList = String[];

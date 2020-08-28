@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.741.0-->
+<!--LATEST=2.742.0-->
 <!--ENTRYINSERT-->
+
+## 2.742.0
+* feature: CUR: This release add MONTHLY as the new supported TimeUnit for ReportDefinition.
+* feature: CloudFront: You can now manage CloudFront's additional, real-time metrics with the CloudFront API.
+* feature: EMR: Amazon EMR adds support for ICMP, port -1, in Block Public Access Exceptions and API access for EMR Notebooks execution. You can now non-interactively execute EMR Notebooks and pass input parameters.
 
 ## 2.741.0
 * feature: EC2: Introduces support to initiate Internet Key Exchange (IKE) negotiations for VPN connections from AWS. A user can now send the initial IKE message to their Customer Gateway (CGW) from VPN endpoints.

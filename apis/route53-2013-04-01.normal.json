@@ -54,7 +54,7 @@
           "shape": "PriorRequestNotComplete"
         }
       ],
-      "documentation": "<p>Associates an Amazon VPC with a private hosted zone. </p> <note> <p>To perform the association, the VPC and the private hosted zone must already exist. Also, you can't convert a public hosted zone into a private hosted zone.</p> </note> <p>If you want to associate a VPC that was created by one AWS account with a private hosted zone that was created by a different account, do one of the following:</p> <ul> <li> <p>Use the AWS account that created the private hosted zone to submit a <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateVPCAssociationAuthorization.html\">CreateVPCAssociationAuthorization</a> request. Then use the account that created the VPC to submit an <code>AssociateVPCWithHostedZone</code> request.</p> </li> <li> <p>If a subnet in the VPC was shared with another account, you can use the account that the subnet was shared with to submit an <code>AssociateVPCWithHostedZone</code> request. For more information about sharing subnets, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html\">Working with Shared VPCs</a>.</p> </li> </ul>"
+      "documentation": "<p>Associates an Amazon VPC with a private hosted zone. </p> <important> <p>To perform the association, the VPC and the private hosted zone must already exist. You can't convert a public hosted zone into a private hosted zone.</p> </important> <note> <p>If you want to associate a VPC that was created by using one AWS account with a private hosted zone that was created by using a different account, the AWS account that created the private hosted zone must first submit a <code>CreateVPCAssociationAuthorization</code> request. Then the account that created the VPC must submit an <code>AssociateVPCWithHostedZone</code> request.</p> </note>"
     },
     "ChangeResourceRecordSets": {
       "name": "ChangeResourceRecordSets",
@@ -560,7 +560,7 @@
           "shape": "ConcurrentModification"
         }
       ],
-      "documentation": "<p>Deletes a traffic policy.</p>"
+      "documentation": "<p>Deletes a traffic policy.</p> <p>When you delete a traffic policy, Route 53 sets a flag on the policy to indicate that it has been deleted. However, Route 53 never fully deletes the traffic policy. Note the following:</p> <ul> <li> <p>Deleted traffic policies aren't listed if you run <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListTrafficPolicies.html\">ListTrafficPolicies</a>.</p> </li> <li> <p> There's no way to get a list of deleted policies.</p> </li> <li> <p>If you retain the ID of the policy, you can get information about the policy, including the traffic policy document, by running <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetTrafficPolicy.html\">GetTrafficPolicy</a>.</p> </li> </ul>"
     },
     "DeleteTrafficPolicyInstance": {
       "name": "DeleteTrafficPolicyInstance",
@@ -972,7 +972,7 @@
           "shape": "InvalidInput"
         }
       ],
-      "documentation": "<p>Gets information about a specific traffic policy version.</p>"
+      "documentation": "<p>Gets information about a specific traffic policy version.</p> <p>For information about how of deleting a traffic policy affects the response from <code>GetTrafficPolicy</code>, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_DeleteTrafficPolicy.html\">DeleteTrafficPolicy</a>. </p>"
     },
     "GetTrafficPolicyInstance": {
       "name": "GetTrafficPolicyInstance",
@@ -1269,7 +1269,7 @@
           "shape": "InvalidInput"
         }
       ],
-      "documentation": "<p>Gets information about the latest version for every traffic policy that is associated with the current AWS account. Policies are listed in the order that they were created in. </p>"
+      "documentation": "<p>Gets information about the latest version for every traffic policy that is associated with the current AWS account. Policies are listed in the order that they were created in. </p> <p>For information about how of deleting a traffic policy affects the response from <code>ListTrafficPolicies</code>, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_DeleteTrafficPolicy.html\">DeleteTrafficPolicy</a>. </p>"
     },
     "ListTrafficPolicyInstances": {
       "name": "ListTrafficPolicyInstances",
@@ -3702,7 +3702,7 @@
         },
         "MaxItems": {
           "shape": "PageMaxItems",
-          "documentation": "<p>(Optional) The maximum number of hosted zones that you want Amazon Route 53 to return. If the specified VPC is associated with more than <code>MaxItems</code> hosted zones, the response includes a <code>NextToken</code> element. <code>NextToken</code> contains the hosted zone ID of the first hosted zone that Route 53 will return if you submit another request.</p>",
+          "documentation": "<p>(Optional) The maximum number of hosted zones that you want Amazon Route 53 to return. If the specified VPC is associated with more than <code>MaxItems</code> hosted zones, the response includes a <code>NextToken</code> element. <code>NextToken</code> contains an encrypted token that identifies the first hosted zone that Route 53 will return if you submit another request.</p>",
           "location": "querystring",
           "locationName": "maxitems"
         },

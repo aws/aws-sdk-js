@@ -13,11 +13,11 @@ declare class Route53 extends Service {
   constructor(options?: Route53.Types.ClientConfiguration)
   config: Config & Route53.Types.ClientConfiguration;
   /**
-   * Associates an Amazon VPC with a private hosted zone.   To perform the association, the VPC and the private hosted zone must already exist. Also, you can't convert a public hosted zone into a private hosted zone.  If you want to associate a VPC that was created by one AWS account with a private hosted zone that was created by a different account, do one of the following:   Use the AWS account that created the private hosted zone to submit a CreateVPCAssociationAuthorization request. Then use the account that created the VPC to submit an AssociateVPCWithHostedZone request.   If a subnet in the VPC was shared with another account, you can use the account that the subnet was shared with to submit an AssociateVPCWithHostedZone request. For more information about sharing subnets, see Working with Shared VPCs.  
+   * Associates an Amazon VPC with a private hosted zone.   To perform the association, the VPC and the private hosted zone must already exist. You can't convert a public hosted zone into a private hosted zone.   If you want to associate a VPC that was created by using one AWS account with a private hosted zone that was created by using a different account, the AWS account that created the private hosted zone must first submit a CreateVPCAssociationAuthorization request. Then the account that created the VPC must submit an AssociateVPCWithHostedZone request. 
    */
   associateVPCWithHostedZone(params: Route53.Types.AssociateVPCWithHostedZoneRequest, callback?: (err: AWSError, data: Route53.Types.AssociateVPCWithHostedZoneResponse) => void): Request<Route53.Types.AssociateVPCWithHostedZoneResponse, AWSError>;
   /**
-   * Associates an Amazon VPC with a private hosted zone.   To perform the association, the VPC and the private hosted zone must already exist. Also, you can't convert a public hosted zone into a private hosted zone.  If you want to associate a VPC that was created by one AWS account with a private hosted zone that was created by a different account, do one of the following:   Use the AWS account that created the private hosted zone to submit a CreateVPCAssociationAuthorization request. Then use the account that created the VPC to submit an AssociateVPCWithHostedZone request.   If a subnet in the VPC was shared with another account, you can use the account that the subnet was shared with to submit an AssociateVPCWithHostedZone request. For more information about sharing subnets, see Working with Shared VPCs.  
+   * Associates an Amazon VPC with a private hosted zone.   To perform the association, the VPC and the private hosted zone must already exist. You can't convert a public hosted zone into a private hosted zone.   If you want to associate a VPC that was created by using one AWS account with a private hosted zone that was created by using a different account, the AWS account that created the private hosted zone must first submit a CreateVPCAssociationAuthorization request. Then the account that created the VPC must submit an AssociateVPCWithHostedZone request. 
    */
   associateVPCWithHostedZone(callback?: (err: AWSError, data: Route53.Types.AssociateVPCWithHostedZoneResponse) => void): Request<Route53.Types.AssociateVPCWithHostedZoneResponse, AWSError>;
   /**
@@ -133,11 +133,11 @@ declare class Route53 extends Service {
    */
   deleteReusableDelegationSet(callback?: (err: AWSError, data: Route53.Types.DeleteReusableDelegationSetResponse) => void): Request<Route53.Types.DeleteReusableDelegationSetResponse, AWSError>;
   /**
-   * Deletes a traffic policy.
+   * Deletes a traffic policy. When you delete a traffic policy, Route 53 sets a flag on the policy to indicate that it has been deleted. However, Route 53 never fully deletes the traffic policy. Note the following:   Deleted traffic policies aren't listed if you run ListTrafficPolicies.    There's no way to get a list of deleted policies.   If you retain the ID of the policy, you can get information about the policy, including the traffic policy document, by running GetTrafficPolicy.  
    */
   deleteTrafficPolicy(params: Route53.Types.DeleteTrafficPolicyRequest, callback?: (err: AWSError, data: Route53.Types.DeleteTrafficPolicyResponse) => void): Request<Route53.Types.DeleteTrafficPolicyResponse, AWSError>;
   /**
-   * Deletes a traffic policy.
+   * Deletes a traffic policy. When you delete a traffic policy, Route 53 sets a flag on the policy to indicate that it has been deleted. However, Route 53 never fully deletes the traffic policy. Note the following:   Deleted traffic policies aren't listed if you run ListTrafficPolicies.    There's no way to get a list of deleted policies.   If you retain the ID of the policy, you can get information about the policy, including the traffic policy document, by running GetTrafficPolicy.  
    */
   deleteTrafficPolicy(callback?: (err: AWSError, data: Route53.Types.DeleteTrafficPolicyResponse) => void): Request<Route53.Types.DeleteTrafficPolicyResponse, AWSError>;
   /**
@@ -277,11 +277,11 @@ declare class Route53 extends Service {
    */
   getReusableDelegationSetLimit(callback?: (err: AWSError, data: Route53.Types.GetReusableDelegationSetLimitResponse) => void): Request<Route53.Types.GetReusableDelegationSetLimitResponse, AWSError>;
   /**
-   * Gets information about a specific traffic policy version.
+   * Gets information about a specific traffic policy version. For information about how of deleting a traffic policy affects the response from GetTrafficPolicy, see DeleteTrafficPolicy. 
    */
   getTrafficPolicy(params: Route53.Types.GetTrafficPolicyRequest, callback?: (err: AWSError, data: Route53.Types.GetTrafficPolicyResponse) => void): Request<Route53.Types.GetTrafficPolicyResponse, AWSError>;
   /**
-   * Gets information about a specific traffic policy version.
+   * Gets information about a specific traffic policy version. For information about how of deleting a traffic policy affects the response from GetTrafficPolicy, see DeleteTrafficPolicy. 
    */
   getTrafficPolicy(callback?: (err: AWSError, data: Route53.Types.GetTrafficPolicyResponse) => void): Request<Route53.Types.GetTrafficPolicyResponse, AWSError>;
   /**
@@ -381,11 +381,11 @@ declare class Route53 extends Service {
    */
   listTagsForResources(callback?: (err: AWSError, data: Route53.Types.ListTagsForResourcesResponse) => void): Request<Route53.Types.ListTagsForResourcesResponse, AWSError>;
   /**
-   * Gets information about the latest version for every traffic policy that is associated with the current AWS account. Policies are listed in the order that they were created in. 
+   * Gets information about the latest version for every traffic policy that is associated with the current AWS account. Policies are listed in the order that they were created in.  For information about how of deleting a traffic policy affects the response from ListTrafficPolicies, see DeleteTrafficPolicy. 
    */
   listTrafficPolicies(params: Route53.Types.ListTrafficPoliciesRequest, callback?: (err: AWSError, data: Route53.Types.ListTrafficPoliciesResponse) => void): Request<Route53.Types.ListTrafficPoliciesResponse, AWSError>;
   /**
-   * Gets information about the latest version for every traffic policy that is associated with the current AWS account. Policies are listed in the order that they were created in. 
+   * Gets information about the latest version for every traffic policy that is associated with the current AWS account. Policies are listed in the order that they were created in.  For information about how of deleting a traffic policy affects the response from ListTrafficPolicies, see DeleteTrafficPolicy. 
    */
   listTrafficPolicies(callback?: (err: AWSError, data: Route53.Types.ListTrafficPoliciesResponse) => void): Request<Route53.Types.ListTrafficPoliciesResponse, AWSError>;
   /**
@@ -1598,7 +1598,7 @@ declare namespace Route53 {
      */
     VPCRegion: VPCRegion;
     /**
-     * (Optional) The maximum number of hosted zones that you want Amazon Route 53 to return. If the specified VPC is associated with more than MaxItems hosted zones, the response includes a NextToken element. NextToken contains the hosted zone ID of the first hosted zone that Route 53 will return if you submit another request.
+     * (Optional) The maximum number of hosted zones that you want Amazon Route 53 to return. If the specified VPC is associated with more than MaxItems hosted zones, the response includes a NextToken element. NextToken contains an encrypted token that identifies the first hosted zone that Route 53 will return if you submit another request.
      */
     MaxItems?: PageMaxItems;
     /**

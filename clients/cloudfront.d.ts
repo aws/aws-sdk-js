@@ -70,6 +70,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   createInvalidation(callback?: (err: AWSError, data: CloudFront.Types.CreateInvalidationResult) => void): Request<CloudFront.Types.CreateInvalidationResult, AWSError>;
   /**
+   * Enables additional CloudWatch metrics for the specified CloudFront distribution. The additional metrics incur an additional cost. For more information, see Viewing additional CloudFront distribution metrics in the Amazon CloudFront Developer Guide.
+   */
+  createMonitoringSubscription(params: CloudFront.Types.CreateMonitoringSubscriptionRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateMonitoringSubscriptionResult) => void): Request<CloudFront.Types.CreateMonitoringSubscriptionResult, AWSError>;
+  /**
+   * Enables additional CloudWatch metrics for the specified CloudFront distribution. The additional metrics incur an additional cost. For more information, see Viewing additional CloudFront distribution metrics in the Amazon CloudFront Developer Guide.
+   */
+  createMonitoringSubscription(callback?: (err: AWSError, data: CloudFront.Types.CreateMonitoringSubscriptionResult) => void): Request<CloudFront.Types.CreateMonitoringSubscriptionResult, AWSError>;
+  /**
    * Creates an origin request policy. After you create an origin request policy, you can attach it to one or more cache behaviors. When it’s attached to a cache behavior, the origin request policy determines the values that CloudFront includes in requests that it sends to the origin. Each request that CloudFront sends to the origin includes the following:   The request body and the URL path (without the domain name) from the viewer request.   The headers that CloudFront automatically includes in every origin request, including Host, User-Agent, and X-Amz-Cf-Id.   All HTTP headers, cookies, and URL query strings that are specified in the cache policy or the origin request policy. These can include items from the viewer request and, in the case of headers, additional ones that are added by CloudFront.   CloudFront sends a request when it can’t find a valid object in its cache that matches the request. If you want to send values to the origin and also include them in the cache key, use CreateCachePolicy. For more information about origin request policies, see Controlling origin requests in the Amazon CloudFront Developer Guide.
    */
   createOriginRequestPolicy(params: CloudFront.Types.CreateOriginRequestPolicyRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateOriginRequestPolicyResult) => void): Request<CloudFront.Types.CreateOriginRequestPolicyResult, AWSError>;
@@ -141,6 +149,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Remove a field-level encryption profile.
    */
   deleteFieldLevelEncryptionProfile(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Disables additional CloudWatch metrics for the specified CloudFront distribution.
+   */
+  deleteMonitoringSubscription(params: CloudFront.Types.DeleteMonitoringSubscriptionRequest, callback?: (err: AWSError, data: CloudFront.Types.DeleteMonitoringSubscriptionResult) => void): Request<CloudFront.Types.DeleteMonitoringSubscriptionResult, AWSError>;
+  /**
+   * Disables additional CloudWatch metrics for the specified CloudFront distribution.
+   */
+  deleteMonitoringSubscription(callback?: (err: AWSError, data: CloudFront.Types.DeleteMonitoringSubscriptionResult) => void): Request<CloudFront.Types.DeleteMonitoringSubscriptionResult, AWSError>;
   /**
    * Deletes an origin request policy. You cannot delete an origin request policy if it’s attached to any cache behaviors. First update your distributions to remove the origin request policy from all cache behaviors, then delete the origin request policy. To delete an origin request policy, you must provide the policy’s identifier and version. To get the identifier, you can use ListOriginRequestPolicies or GetOriginRequestPolicy.
    */
@@ -253,6 +269,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Get the information about an invalidation. 
    */
   getInvalidation(callback?: (err: AWSError, data: CloudFront.Types.GetInvalidationResult) => void): Request<CloudFront.Types.GetInvalidationResult, AWSError>;
+  /**
+   * Gets information about whether additional CloudWatch metrics are enabled for the specified CloudFront distribution.
+   */
+  getMonitoringSubscription(params: CloudFront.Types.GetMonitoringSubscriptionRequest, callback?: (err: AWSError, data: CloudFront.Types.GetMonitoringSubscriptionResult) => void): Request<CloudFront.Types.GetMonitoringSubscriptionResult, AWSError>;
+  /**
+   * Gets information about whether additional CloudWatch metrics are enabled for the specified CloudFront distribution.
+   */
+  getMonitoringSubscription(callback?: (err: AWSError, data: CloudFront.Types.GetMonitoringSubscriptionResult) => void): Request<CloudFront.Types.GetMonitoringSubscriptionResult, AWSError>;
   /**
    * Gets an origin request policy, including the following metadata:   The policy’s identifier.   The date and time when the policy was last modified.   To get an origin request policy, you must provide the policy’s identifier. If the origin request policy is attached to a distribution’s cache behavior, you can get the policy’s identifier using ListDistributions or GetDistribution. If the origin request policy is not attached to a cache behavior, you can get the identifier using ListOriginRequestPolicies.
    */
@@ -1002,6 +1026,22 @@ declare namespace CloudFront {
      */
     Invalidation?: Invalidation;
   }
+  export interface CreateMonitoringSubscriptionRequest {
+    /**
+     * The ID of the distribution that you are enabling metrics for.
+     */
+    DistributionId: string;
+    /**
+     * A monitoring subscription. This structure contains information about whether additional CloudWatch metrics are enabled for a given CloudFront distribution.
+     */
+    MonitoringSubscription: MonitoringSubscription;
+  }
+  export interface CreateMonitoringSubscriptionResult {
+    /**
+     * A monitoring subscription. This structure contains information about whether additional CloudWatch metrics are enabled for a given CloudFront distribution.
+     */
+    MonitoringSubscription?: MonitoringSubscription;
+  }
   export interface CreateOriginRequestPolicyRequest {
     /**
      * An origin request policy configuration.
@@ -1251,6 +1291,14 @@ declare namespace CloudFront {
      * The value of the ETag header that you received when retrieving the profile to delete. For example: E2QWRUHAPOMQZL.
      */
     IfMatch?: string;
+  }
+  export interface DeleteMonitoringSubscriptionRequest {
+    /**
+     * The ID of the distribution that you are disabling metrics for.
+     */
+    DistributionId: string;
+  }
+  export interface DeleteMonitoringSubscriptionResult {
   }
   export interface DeleteOriginRequestPolicyRequest {
     /**
@@ -1929,6 +1977,18 @@ declare namespace CloudFront {
      */
     Invalidation?: Invalidation;
   }
+  export interface GetMonitoringSubscriptionRequest {
+    /**
+     * The ID of the distribution that you are getting metrics information for.
+     */
+    DistributionId: string;
+  }
+  export interface GetMonitoringSubscriptionResult {
+    /**
+     * A monitoring subscription. This structure contains information about whether additional CloudWatch metrics are enabled for a given CloudFront distribution.
+     */
+    MonitoringSubscription?: MonitoringSubscription;
+  }
   export interface GetOriginRequestPolicyConfigRequest {
     /**
      * The unique identifier for the origin request policy. If the origin request policy is attached to a distribution’s cache behavior, you can get the policy’s identifier using ListDistributions or GetDistribution. If the origin request policy is not attached to a cache behavior, you can get the identifier using ListOriginRequestPolicies.
@@ -2395,6 +2455,12 @@ declare namespace CloudFront {
   export type Method = "GET"|"HEAD"|"POST"|"PUT"|"PATCH"|"OPTIONS"|"DELETE"|string;
   export type MethodsList = Method[];
   export type MinimumProtocolVersion = "SSLv3"|"TLSv1"|"TLSv1_2016"|"TLSv1.1_2016"|"TLSv1.2_2018"|"TLSv1.2_2019"|string;
+  export interface MonitoringSubscription {
+    /**
+     * A subscription configuration for additional CloudWatch metrics.
+     */
+    RealtimeMetricsSubscriptionConfig?: RealtimeMetricsSubscriptionConfig;
+  }
   export interface Origin {
     /**
      * A unique identifier for the origin. This value must be unique within the distribution. Use this value to specify the TargetOriginId in a CacheBehavior or DefaultCacheBehavior.
@@ -2759,6 +2825,13 @@ declare namespace CloudFront {
     Items?: QueryStringNamesList;
   }
   export type QueryStringNamesList = string[];
+  export interface RealtimeMetricsSubscriptionConfig {
+    /**
+     * A flag that indicates whether additional CloudWatch metrics are enabled for a given CloudFront distribution.
+     */
+    RealtimeMetricsSubscriptionStatus: RealtimeMetricsSubscriptionStatus;
+  }
+  export type RealtimeMetricsSubscriptionStatus = "Enabled"|"Disabled"|string;
   export type ResourceARN = string;
   export interface Restrictions {
     /**
