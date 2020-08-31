@@ -28540,6 +28540,11 @@
           "shape": "FleetExcessCapacityTerminationPolicy",
           "documentation": "<p>Indicates whether running instances should be terminated if the total target capacity of the EC2 Fleet is decreased below the current size of the EC2 Fleet.</p>"
         },
+        "LaunchTemplateConfigs": {
+          "shape": "FleetLaunchTemplateConfigListRequest",
+          "documentation": "<p>The launch template and overrides.</p>",
+          "locationName": "LaunchTemplateConfig"
+        },
         "FleetId": {
           "shape": "FleetId",
           "documentation": "<p>The ID of the EC2 Fleet.</p>"
@@ -29247,6 +29252,11 @@
           "shape": "ExcessCapacityTerminationPolicy",
           "documentation": "<p>Indicates whether running Spot Instances should be terminated if the target capacity of the Spot Fleet request is decreased below the current size of the Spot Fleet.</p>",
           "locationName": "excessCapacityTerminationPolicy"
+        },
+        "LaunchTemplateConfigs": {
+          "shape": "LaunchTemplateConfigList",
+          "documentation": "<p>The launch template and overrides. You can only use this parameter if you specified a launch template (<code>LaunchTemplateConfigs</code>) in your Spot Fleet request. If you specified <code>LaunchSpecifications</code> in your Spot Fleet request, then omit this parameter.</p>",
+          "locationName": "LaunchTemplateConfig"
         },
         "SpotFleetRequestId": {
           "shape": "SpotFleetRequestId",
@@ -34359,6 +34369,7 @@
         "customer-gateway",
         "dedicated-host",
         "dhcp-options",
+        "egress-only-internet-gateway",
         "elastic-ip",
         "elastic-gpu",
         "export-image-task",

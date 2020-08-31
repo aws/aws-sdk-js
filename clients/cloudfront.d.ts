@@ -94,6 +94,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   createPublicKey(callback?: (err: AWSError, data: CloudFront.Types.CreatePublicKeyResult) => void): Request<CloudFront.Types.CreatePublicKeyResult, AWSError>;
   /**
+   * Creates a real-time log configuration. After you create a real-time log configuration, you can attach it to one or more cache behaviors to send real-time log data to the specified Amazon Kinesis data stream. For more information about real-time log configurations, see Real-time logs in the Amazon CloudFront Developer Guide.
+   */
+  createRealtimeLogConfig(params: CloudFront.Types.CreateRealtimeLogConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateRealtimeLogConfigResult) => void): Request<CloudFront.Types.CreateRealtimeLogConfigResult, AWSError>;
+  /**
+   * Creates a real-time log configuration. After you create a real-time log configuration, you can attach it to one or more cache behaviors to send real-time log data to the specified Amazon Kinesis data stream. For more information about real-time log configurations, see Real-time logs in the Amazon CloudFront Developer Guide.
+   */
+  createRealtimeLogConfig(callback?: (err: AWSError, data: CloudFront.Types.CreateRealtimeLogConfigResult) => void): Request<CloudFront.Types.CreateRealtimeLogConfigResult, AWSError>;
+  /**
    * Creates a new RTMP distribution. An RTMP distribution is similar to a web distribution, but an RTMP distribution streams media files using the Adobe Real-Time Messaging Protocol (RTMP) instead of serving files using HTTP.  To create a new distribution, submit a POST request to the CloudFront API version/distribution resource. The request body must include a document with a StreamingDistributionConfig element. The response echoes the StreamingDistributionConfig element and returns other information about the RTMP distribution. To get the status of your request, use the GET StreamingDistribution API action. When the value of Enabled is true and the value of Status is Deployed, your distribution is ready. A distribution usually deploys in less than 15 minutes. For more information about web distributions, see Working with RTMP Distributions in the Amazon CloudFront Developer Guide.  Beginning with the 2012-05-05 version of the CloudFront API, we made substantial changes to the format of the XML document that you include in the request body when you create or update a web distribution or an RTMP distribution, and when you invalidate objects. With previous versions of the API, we discovered that it was too easy to accidentally delete one or more values for an element that accepts multiple values, for example, CNAMEs and trusted signers. Our changes for the 2012-05-05 release are intended to prevent these accidental deletions and to notify you when there's a mismatch between the number of values you say you're specifying in the Quantity element and the number of values specified. 
    */
   createStreamingDistribution(params: CloudFront.Types.CreateStreamingDistributionRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateStreamingDistributionResult) => void): Request<CloudFront.Types.CreateStreamingDistributionResult, AWSError>;
@@ -173,6 +181,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Remove a public key you previously added to CloudFront.
    */
   deletePublicKey(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a real-time log configuration. You cannot delete a real-time log configuration if it’s attached to a cache behavior. First update your distributions to remove the real-time log configuration from all cache behaviors, then delete the real-time log configuration. To delete a real-time log configuration, you can provide the configuration’s name or its Amazon Resource Name (ARN). You must provide at least one. If you provide both, CloudFront uses the name to identify the real-time log configuration to delete.
+   */
+  deleteRealtimeLogConfig(params: CloudFront.Types.DeleteRealtimeLogConfigRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a real-time log configuration. You cannot delete a real-time log configuration if it’s attached to a cache behavior. First update your distributions to remove the real-time log configuration from all cache behaviors, then delete the real-time log configuration. To delete a real-time log configuration, you can provide the configuration’s name or its Amazon Resource Name (ARN). You must provide at least one. If you provide both, CloudFront uses the name to identify the real-time log configuration to delete.
+   */
+  deleteRealtimeLogConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Delete a streaming distribution. To delete an RTMP distribution using the CloudFront API, perform the following steps.  To delete an RTMP distribution using the CloudFront API:   Disable the RTMP distribution.   Submit a GET Streaming Distribution Config request to get the current configuration and the Etag header for the distribution.    Update the XML document that was returned in the response to your GET Streaming Distribution Config request to change the value of Enabled to false.   Submit a PUT Streaming Distribution Config request to update the configuration for your distribution. In the request body, include the XML document that you updated in Step 3. Then set the value of the HTTP If-Match header to the value of the ETag header that CloudFront returned when you submitted the GET Streaming Distribution Config request in Step 2.   Review the response to the PUT Streaming Distribution Config request to confirm that the distribution was successfully disabled.   Submit a GET Streaming Distribution Config request to confirm that your changes have propagated. When propagation is complete, the value of Status is Deployed.   Submit a DELETE Streaming Distribution request. Set the value of the HTTP If-Match header to the value of the ETag header that CloudFront returned when you submitted the GET Streaming Distribution Config request in Step 2.   Review the response to your DELETE Streaming Distribution request to confirm that the distribution was successfully deleted.   For information about deleting a distribution using the CloudFront console, see Deleting a Distribution in the Amazon CloudFront Developer Guide.
    */
@@ -310,6 +326,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   getPublicKeyConfig(callback?: (err: AWSError, data: CloudFront.Types.GetPublicKeyConfigResult) => void): Request<CloudFront.Types.GetPublicKeyConfigResult, AWSError>;
   /**
+   * Gets a real-time log configuration. To get a real-time log configuration, you can provide the configuration’s name or its Amazon Resource Name (ARN). You must provide at least one. If you provide both, CloudFront uses the name to identify the real-time log configuration to get.
+   */
+  getRealtimeLogConfig(params: CloudFront.Types.GetRealtimeLogConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.GetRealtimeLogConfigResult) => void): Request<CloudFront.Types.GetRealtimeLogConfigResult, AWSError>;
+  /**
+   * Gets a real-time log configuration. To get a real-time log configuration, you can provide the configuration’s name or its Amazon Resource Name (ARN). You must provide at least one. If you provide both, CloudFront uses the name to identify the real-time log configuration to get.
+   */
+  getRealtimeLogConfig(callback?: (err: AWSError, data: CloudFront.Types.GetRealtimeLogConfigResult) => void): Request<CloudFront.Types.GetRealtimeLogConfigResult, AWSError>;
+  /**
    * Gets information about a specified RTMP distribution, including the distribution configuration.
    */
   getStreamingDistribution(params: CloudFront.Types.GetStreamingDistributionRequest, callback?: (err: AWSError, data: CloudFront.Types.GetStreamingDistributionResult) => void): Request<CloudFront.Types.GetStreamingDistributionResult, AWSError>;
@@ -366,6 +390,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   listDistributionsByOriginRequestPolicyId(callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsByOriginRequestPolicyIdResult) => void): Request<CloudFront.Types.ListDistributionsByOriginRequestPolicyIdResult, AWSError>;
   /**
+   * Gets a list of distribution that have a cache behavior that’s associated with the specified real-time log configuration. You can specify the real-time log configuration by its name or its Amazon Resource Name (ARN). You must provide at least one. If you provide both, CloudFront uses the name to identify the real-time log configuration to list distributions for. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request. 
+   */
+  listDistributionsByRealtimeLogConfig(params: CloudFront.Types.ListDistributionsByRealtimeLogConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsByRealtimeLogConfigResult) => void): Request<CloudFront.Types.ListDistributionsByRealtimeLogConfigResult, AWSError>;
+  /**
+   * Gets a list of distribution that have a cache behavior that’s associated with the specified real-time log configuration. You can specify the real-time log configuration by its name or its Amazon Resource Name (ARN). You must provide at least one. If you provide both, CloudFront uses the name to identify the real-time log configuration to list distributions for. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request. 
+   */
+  listDistributionsByRealtimeLogConfig(callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsByRealtimeLogConfigResult) => void): Request<CloudFront.Types.ListDistributionsByRealtimeLogConfigResult, AWSError>;
+  /**
    * List the distributions that are associated with a specified AWS WAF web ACL. 
    */
   listDistributionsByWebACLId(params: CloudFront.Types.ListDistributionsByWebACLIdRequest, callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsByWebACLIdResult) => void): Request<CloudFront.Types.ListDistributionsByWebACLIdResult, AWSError>;
@@ -413,6 +445,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    * List all public keys that have been added to CloudFront for this account.
    */
   listPublicKeys(callback?: (err: AWSError, data: CloudFront.Types.ListPublicKeysResult) => void): Request<CloudFront.Types.ListPublicKeysResult, AWSError>;
+  /**
+   * Gets a list of real-time log configurations. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request. 
+   */
+  listRealtimeLogConfigs(params: CloudFront.Types.ListRealtimeLogConfigsRequest, callback?: (err: AWSError, data: CloudFront.Types.ListRealtimeLogConfigsResult) => void): Request<CloudFront.Types.ListRealtimeLogConfigsResult, AWSError>;
+  /**
+   * Gets a list of real-time log configurations. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request. 
+   */
+  listRealtimeLogConfigs(callback?: (err: AWSError, data: CloudFront.Types.ListRealtimeLogConfigsResult) => void): Request<CloudFront.Types.ListRealtimeLogConfigsResult, AWSError>;
   /**
    * List streaming distributions. 
    */
@@ -501,6 +541,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Update public key information. Note that the only value you can change is the comment.
    */
   updatePublicKey(callback?: (err: AWSError, data: CloudFront.Types.UpdatePublicKeyResult) => void): Request<CloudFront.Types.UpdatePublicKeyResult, AWSError>;
+  /**
+   * Updates a real-time log configuration. When you update a real-time log configuration, all the parameters are updated with the values provided in the request. You cannot update some parameters independent of others. To update a real-time log configuration:   Call GetRealtimeLogConfig to get the current real-time log configuration.   Locally modify the parameters in the real-time log configuration that you want to update.   Call this API (UpdateRealtimeLogConfig) by providing the entire real-time log configuration, including the parameters that you modified and those that you didn’t.   You cannot update a real-time log configuration’s Name or ARN.
+   */
+  updateRealtimeLogConfig(params: CloudFront.Types.UpdateRealtimeLogConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateRealtimeLogConfigResult) => void): Request<CloudFront.Types.UpdateRealtimeLogConfigResult, AWSError>;
+  /**
+   * Updates a real-time log configuration. When you update a real-time log configuration, all the parameters are updated with the values provided in the request. You cannot update some parameters independent of others. To update a real-time log configuration:   Call GetRealtimeLogConfig to get the current real-time log configuration.   Locally modify the parameters in the real-time log configuration that you want to update.   Call this API (UpdateRealtimeLogConfig) by providing the entire real-time log configuration, including the parameters that you modified and those that you didn’t.   You cannot update a real-time log configuration’s Name or ARN.
+   */
+  updateRealtimeLogConfig(callback?: (err: AWSError, data: CloudFront.Types.UpdateRealtimeLogConfigResult) => void): Request<CloudFront.Types.UpdateRealtimeLogConfigResult, AWSError>;
   /**
    * Update a streaming distribution. 
    */
@@ -620,6 +668,10 @@ declare namespace CloudFront {
      * The value of ID for the field-level encryption configuration that you want CloudFront to use for encrypting specific fields of data for this cache behavior.
      */
     FieldLevelEncryptionId?: string;
+    /**
+     * The Amazon Resource Name (ARN) of the real-time log configuration that is attached to this cache behavior. For more information, see Real-time logs in the Amazon CloudFront Developer Guide.
+     */
+    RealtimeLogConfigArn?: string;
     /**
      * The unique identifier of the cache policy that is attached to this cache behavior. For more information, see Creating cache policies or Using the managed cache policies in the Amazon CloudFront Developer Guide.
      */
@@ -1082,6 +1134,30 @@ declare namespace CloudFront {
      */
     ETag?: string;
   }
+  export interface CreateRealtimeLogConfigRequest {
+    /**
+     * Contains information about the Amazon Kinesis data stream where you are sending real-time log data.
+     */
+    EndPoints: EndPointList;
+    /**
+     * A list of fields to include in each real-time log record. For more information about fields, see Real-time log configuration fields in the Amazon CloudFront Developer Guide.
+     */
+    Fields: FieldList;
+    /**
+     * A unique name to identify this real-time log configuration.
+     */
+    Name: string;
+    /**
+     * The sampling rate for this real-time log configuration. The sampling rate determines the percentage of viewer requests that are represented in the real-time log data. You must provide an integer between 1 and 100, inclusive.
+     */
+    SamplingRate: long;
+  }
+  export interface CreateRealtimeLogConfigResult {
+    /**
+     * A real-time log configuration.
+     */
+    RealtimeLogConfig?: RealtimeLogConfig;
+  }
   export interface CreateStreamingDistributionRequest {
     /**
      * The streaming distribution's configuration information.
@@ -1218,6 +1294,10 @@ declare namespace CloudFront {
      */
     FieldLevelEncryptionId?: string;
     /**
+     * The Amazon Resource Name (ARN) of the real-time log configuration that is attached to this cache behavior. For more information, see Real-time logs in the Amazon CloudFront Developer Guide.
+     */
+    RealtimeLogConfigArn?: string;
+    /**
      * The unique identifier of the cache policy that is attached to the default cache behavior. For more information, see Creating cache policies or Using the managed cache policies in the Amazon CloudFront Developer Guide.
      */
     CachePolicyId?: string;
@@ -1319,6 +1399,16 @@ declare namespace CloudFront {
      * The value of the ETag header that you received when retrieving the public key identity to delete. For example: E2QWRUHAPOMQZL.
      */
     IfMatch?: string;
+  }
+  export interface DeleteRealtimeLogConfigRequest {
+    /**
+     * The name of the real-time log configuration to delete.
+     */
+    Name?: string;
+    /**
+     * The Amazon Resource Name (ARN) of the real-time log configuration to delete.
+     */
+    ARN?: string;
   }
   export interface DeleteStreamingDistributionRequest {
     /**
@@ -1609,6 +1699,17 @@ declare namespace CloudFront {
     FieldPatterns: FieldPatterns;
   }
   export type EncryptionEntityList = EncryptionEntity[];
+  export interface EndPoint {
+    /**
+     * The type of data stream where you are sending real-time log data. The only valid value is Kinesis.
+     */
+    StreamType: string;
+    /**
+     * Contains information about the Amazon Kinesis data stream where you are sending real-time log data.
+     */
+    KinesisStreamConfig?: KinesisStreamConfig;
+  }
+  export type EndPointList = EndPoint[];
   export type EventType = "viewer-request"|"viewer-response"|"origin-request"|"origin-response"|string;
   export interface FieldLevelEncryption {
     /**
@@ -1756,6 +1857,7 @@ declare namespace CloudFront {
     ContentTypeProfileConfig?: ContentTypeProfileConfig;
   }
   export type FieldLevelEncryptionSummaryList = FieldLevelEncryptionSummary[];
+  export type FieldList = string[];
   export type FieldPatternList = string[];
   export interface FieldPatterns {
     /**
@@ -2053,6 +2155,22 @@ declare namespace CloudFront {
      */
     ETag?: string;
   }
+  export interface GetRealtimeLogConfigRequest {
+    /**
+     * The name of the real-time log configuration to get.
+     */
+    Name?: string;
+    /**
+     * The Amazon Resource Name (ARN) of the real-time log configuration to get.
+     */
+    ARN?: string;
+  }
+  export interface GetRealtimeLogConfigResult {
+    /**
+     * A real-time log configuration.
+     */
+    RealtimeLogConfig?: RealtimeLogConfig;
+  }
   export interface GetStreamingDistributionConfigRequest {
     /**
      * The streaming distribution's ID.
@@ -2179,6 +2297,16 @@ declare namespace CloudFront {
      */
     Items?: KeyPairIdList;
   }
+  export interface KinesisStreamConfig {
+    /**
+     * The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM) role that CloudFront can use to send real-time log data to your Kinesis data stream. For more information the IAM role, see Real-time log configuration IAM role in the Amazon CloudFront Developer Guide.
+     */
+    RoleARN: string;
+    /**
+     * The Amazon Resource Name (ARN) of the Kinesis data stream where you are sending real-time log data.
+     */
+    StreamARN: string;
+  }
   export type LambdaFunctionARN = string;
   export interface LambdaFunctionAssociation {
     /**
@@ -2280,6 +2408,27 @@ declare namespace CloudFront {
      * A list of distribution IDs.
      */
     DistributionIdList?: DistributionIdList;
+  }
+  export interface ListDistributionsByRealtimeLogConfigRequest {
+    /**
+     * Use this field when paginating results to indicate where to begin in your list of distributions. The response includes distributions in the list that occur after the marker. To get the next page of the list, set this field’s value to the value of NextMarker from the current page’s response.
+     */
+    Marker?: string;
+    /**
+     * The maximum number of distributions that you want in the response.
+     */
+    MaxItems?: string;
+    /**
+     * The name of the real-time log configuration whose associated distributions you want to list.
+     */
+    RealtimeLogConfigName?: string;
+    /**
+     * The Amazon Resource Name (ARN) of the real-time log configuration whose associated distributions you want to list.
+     */
+    RealtimeLogConfigArn?: string;
+  }
+  export interface ListDistributionsByRealtimeLogConfigResult {
+    DistributionList?: DistributionList;
   }
   export interface ListDistributionsByWebACLIdRequest {
     /**
@@ -2404,6 +2553,22 @@ declare namespace CloudFront {
      * Returns a list of all public keys that have been added to CloudFront for this account.
      */
     PublicKeyList?: PublicKeyList;
+  }
+  export interface ListRealtimeLogConfigsRequest {
+    /**
+     * The maximum number of real-time log configurations that you want in the response.
+     */
+    MaxItems?: string;
+    /**
+     * Use this field when paginating results to indicate where to begin in your list of real-time log configurations. The response includes real-time log configurations in the list that occur after the marker. To get the next page of the list, set this field’s value to the value of NextMarker from the current page’s response.
+     */
+    Marker?: string;
+  }
+  export interface ListRealtimeLogConfigsResult {
+    /**
+     * A list of real-time log configurations.
+     */
+    RealtimeLogConfigs?: RealtimeLogConfigs;
   }
   export interface ListStreamingDistributionsRequest {
     /**
@@ -2825,6 +2990,51 @@ declare namespace CloudFront {
     Items?: QueryStringNamesList;
   }
   export type QueryStringNamesList = string[];
+  export interface RealtimeLogConfig {
+    /**
+     * The Amazon Resource Name (ARN) of this real-time log configuration.
+     */
+    ARN: string;
+    /**
+     * The unique name of this real-time log configuration.
+     */
+    Name: string;
+    /**
+     * The sampling rate for this real-time log configuration. The sampling rate determines the percentage of viewer requests that are represented in the real-time log data. The sampling rate is an integer between 1 and 100, inclusive.
+     */
+    SamplingRate: long;
+    /**
+     * Contains information about the Amazon Kinesis data stream where you are sending real-time log data for this real-time log configuration.
+     */
+    EndPoints: EndPointList;
+    /**
+     * A list of fields that are included in each real-time log record. In an API response, the fields are provided in the same order in which they are sent to the Amazon Kinesis data stream. For more information about fields, see Real-time log configuration fields in the Amazon CloudFront Developer Guide.
+     */
+    Fields: FieldList;
+  }
+  export type RealtimeLogConfigList = RealtimeLogConfig[];
+  export interface RealtimeLogConfigs {
+    /**
+     * The maximum number of real-time log configurations requested.
+     */
+    MaxItems: integer;
+    /**
+     * Contains the list of real-time log configurations.
+     */
+    Items?: RealtimeLogConfigList;
+    /**
+     * A flag that indicates whether there are more real-time log configurations than are contained in this list.
+     */
+    IsTruncated: boolean;
+    /**
+     * This parameter indicates where this list of real-time log configurations begins. This list includes real-time log configurations that occur after the marker.
+     */
+    Marker: string;
+    /**
+     * If there are more items in the list than are in this response, this element is present. It contains the value that you should use in the Marker field of a subsequent request to continue listing real-time log configurations where you left off. 
+     */
+    NextMarker?: string;
+  }
   export interface RealtimeMetricsSubscriptionConfig {
     /**
      * A flag that indicates whether additional CloudWatch metrics are enabled for a given CloudFront distribution.
@@ -2855,7 +3065,7 @@ declare namespace CloudFront {
      */
     OriginAccessIdentity: string;
   }
-  export type SSLSupportMethod = "sni-only"|"vip"|string;
+  export type SSLSupportMethod = "sni-only"|"vip"|"static-ip"|string;
   export interface _Signer {
     /**
      * An AWS account that is included in the TrustedSigners complex type for this distribution. Valid values include:    self, which is the AWS account used to create the distribution.   An AWS account number.  
@@ -3269,6 +3479,34 @@ declare namespace CloudFront {
      */
     ETag?: string;
   }
+  export interface UpdateRealtimeLogConfigRequest {
+    /**
+     * Contains information about the Amazon Kinesis data stream where you are sending real-time log data.
+     */
+    EndPoints?: EndPointList;
+    /**
+     * A list of fields to include in each real-time log record. For more information about fields, see Real-time log configuration fields in the Amazon CloudFront Developer Guide.
+     */
+    Fields?: FieldList;
+    /**
+     * The name for this real-time log configuration.
+     */
+    Name?: string;
+    /**
+     * The Amazon Resource Name (ARN) for this real-time log configuration.
+     */
+    ARN?: string;
+    /**
+     * The sampling rate for this real-time log configuration. The sampling rate determines the percentage of viewer requests that are represented in the real-time log data. You must provide an integer between 1 and 100, inclusive.
+     */
+    SamplingRate?: long;
+  }
+  export interface UpdateRealtimeLogConfigResult {
+    /**
+     * A real-time log configuration.
+     */
+    RealtimeLogConfig?: RealtimeLogConfig;
+  }
   export interface UpdateStreamingDistributionRequest {
     /**
      * The streaming distribution's configuration information.
@@ -3307,7 +3545,7 @@ declare namespace CloudFront {
      */
     ACMCertificateArn?: string;
     /**
-     * If the distribution uses Aliases (alternate domain names or CNAMEs), specify which viewers the distribution accepts HTTPS connections from.    sni-only – The distribution accepts HTTPS connections from only viewers that support server name indication (SNI). This is recommended. Most browsers and clients support SNI.    vip – The distribution accepts HTTPS connections from all viewers including those that don’t support SNI. This is not recommended, and results in additional monthly charges from CloudFront.   If the distribution uses the CloudFront domain name such as d111111abcdef8.cloudfront.net, don’t set a value for this field.
+     * If the distribution uses Aliases (alternate domain names or CNAMEs), specify which viewers the distribution accepts HTTPS connections from.    sni-only – The distribution accepts HTTPS connections from only viewers that support server name indication (SNI). This is recommended. Most browsers and clients support SNI.    vip – The distribution accepts HTTPS connections from all viewers including those that don’t support SNI. This is not recommended, and results in additional monthly charges from CloudFront.    static-ip - Do not specify this value unless your distribution has been enabled for this feature by the CloudFront team. If you have a use case that requires static IP addresses for a distribution, contact CloudFront through the AWS Support Center.   If the distribution uses the CloudFront domain name such as d111111abcdef8.cloudfront.net, don’t set a value for this field.
      */
     SSLSupportMethod?: SSLSupportMethod;
     /**

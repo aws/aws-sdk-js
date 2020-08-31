@@ -625,6 +625,36 @@
       ],
       "documentation": "<p>Add a new public key to CloudFront to use, for example, for field-level encryption. You can add a maximum of 10 public keys with one AWS account.</p>"
     },
+    "CreateRealtimeLogConfig": {
+      "name": "CreateRealtimeLogConfig2020_05_31",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2020-05-31/realtime-log-config",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateRealtimeLogConfigRequest",
+        "locationName": "CreateRealtimeLogConfigRequest",
+        "xmlNamespace": {
+          "uri": "http://cloudfront.amazonaws.com/doc/2020-05-31/"
+        }
+      },
+      "output": {
+        "shape": "CreateRealtimeLogConfigResult"
+      },
+      "errors": [
+        {
+          "shape": "RealtimeLogConfigAlreadyExists"
+        },
+        {
+          "shape": "TooManyRealtimeLogConfigs"
+        },
+        {
+          "shape": "InvalidArgument"
+        }
+      ],
+      "documentation": "<p>Creates a real-time log configuration.</p> <p>After you create a real-time log configuration, you can attach it to one or more cache behaviors to send real-time log data to the specified Amazon Kinesis data stream.</p> <p>For more information about real-time log configurations, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html\">Real-time logs</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
+    },
     "CreateStreamingDistribution": {
       "name": "CreateStreamingDistribution2020_05_31",
       "http": {
@@ -964,6 +994,33 @@
         }
       ],
       "documentation": "<p>Remove a public key you previously added to CloudFront.</p>"
+    },
+    "DeleteRealtimeLogConfig": {
+      "name": "DeleteRealtimeLogConfig2020_05_31",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2020-05-31/delete-realtime-log-config/",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteRealtimeLogConfigRequest",
+        "locationName": "DeleteRealtimeLogConfigRequest",
+        "xmlNamespace": {
+          "uri": "http://cloudfront.amazonaws.com/doc/2020-05-31/"
+        }
+      },
+      "errors": [
+        {
+          "shape": "NoSuchRealtimeLogConfig"
+        },
+        {
+          "shape": "RealtimeLogConfigInUse"
+        },
+        {
+          "shape": "InvalidArgument"
+        }
+      ],
+      "documentation": "<p>Deletes a real-time log configuration.</p> <p>You cannot delete a real-time log configuration if it’s attached to a cache behavior. First update your distributions to remove the real-time log configuration from all cache behaviors, then delete the real-time log configuration.</p> <p>To delete a real-time log configuration, you can provide the configuration’s name or its Amazon Resource Name (ARN). You must provide at least one. If you provide both, CloudFront uses the name to identify the real-time log configuration to delete.</p>"
     },
     "DeleteStreamingDistribution": {
       "name": "DeleteStreamingDistribution2020_05_31",
@@ -1349,6 +1406,32 @@
       ],
       "documentation": "<p>Return public key configuration informaation</p>"
     },
+    "GetRealtimeLogConfig": {
+      "name": "GetRealtimeLogConfig2020_05_31",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2020-05-31/get-realtime-log-config/"
+      },
+      "input": {
+        "shape": "GetRealtimeLogConfigRequest",
+        "locationName": "GetRealtimeLogConfigRequest",
+        "xmlNamespace": {
+          "uri": "http://cloudfront.amazonaws.com/doc/2020-05-31/"
+        }
+      },
+      "output": {
+        "shape": "GetRealtimeLogConfigResult"
+      },
+      "errors": [
+        {
+          "shape": "NoSuchRealtimeLogConfig"
+        },
+        {
+          "shape": "InvalidArgument"
+        }
+      ],
+      "documentation": "<p>Gets a real-time log configuration.</p> <p>To get a real-time log configuration, you can provide the configuration’s name or its Amazon Resource Name (ARN). You must provide at least one. If you provide both, CloudFront uses the name to identify the real-time log configuration to get.</p>"
+    },
     "GetStreamingDistribution": {
       "name": "GetStreamingDistribution2020_05_31",
       "http": {
@@ -1506,6 +1589,29 @@
       ],
       "documentation": "<p>Gets a list of distribution IDs for distributions that have a cache behavior that’s associated with the specified origin request policy.</p> <p>You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the <code>NextMarker</code> value from the current response as the <code>Marker</code> value in the subsequent request.</p>"
     },
+    "ListDistributionsByRealtimeLogConfig": {
+      "name": "ListDistributionsByRealtimeLogConfig2020_05_31",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2020-05-31/distributionsByRealtimeLogConfig/"
+      },
+      "input": {
+        "shape": "ListDistributionsByRealtimeLogConfigRequest",
+        "locationName": "ListDistributionsByRealtimeLogConfigRequest",
+        "xmlNamespace": {
+          "uri": "http://cloudfront.amazonaws.com/doc/2020-05-31/"
+        }
+      },
+      "output": {
+        "shape": "ListDistributionsByRealtimeLogConfigResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidArgument"
+        }
+      ],
+      "documentation": "<p>Gets a list of distribution that have a cache behavior that’s associated with the specified real-time log configuration.</p> <p>You can specify the real-time log configuration by its name or its Amazon Resource Name (ARN). You must provide at least one. If you provide both, CloudFront uses the name to identify the real-time log configuration to list distributions for.</p> <p>You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the <code>NextMarker</code> value from the current response as the <code>Marker</code> value in the subsequent request. </p>"
+    },
     "ListDistributionsByWebACLId": {
       "name": "ListDistributionsByWebACLId2020_05_31",
       "http": {
@@ -1634,6 +1740,20 @@
         }
       ],
       "documentation": "<p>List all public keys that have been added to CloudFront for this account.</p>"
+    },
+    "ListRealtimeLogConfigs": {
+      "name": "ListRealtimeLogConfigs2020_05_31",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2020-05-31/realtime-log-config"
+      },
+      "input": {
+        "shape": "ListRealtimeLogConfigsRequest"
+      },
+      "output": {
+        "shape": "ListRealtimeLogConfigsResult"
+      },
+      "documentation": "<p>Gets a list of real-time log configurations.</p> <p>You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the <code>NextMarker</code> value from the current response as the <code>Marker</code> value in the subsequent request. </p>"
     },
     "ListStreamingDistributions": {
       "name": "ListStreamingDistributions2020_05_31",
@@ -2173,6 +2293,32 @@
       ],
       "documentation": "<p>Update public key information. Note that the only value you can change is the comment.</p>"
     },
+    "UpdateRealtimeLogConfig": {
+      "name": "UpdateRealtimeLogConfig2020_05_31",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/2020-05-31/realtime-log-config/"
+      },
+      "input": {
+        "shape": "UpdateRealtimeLogConfigRequest",
+        "locationName": "UpdateRealtimeLogConfigRequest",
+        "xmlNamespace": {
+          "uri": "http://cloudfront.amazonaws.com/doc/2020-05-31/"
+        }
+      },
+      "output": {
+        "shape": "UpdateRealtimeLogConfigResult"
+      },
+      "errors": [
+        {
+          "shape": "NoSuchRealtimeLogConfig"
+        },
+        {
+          "shape": "InvalidArgument"
+        }
+      ],
+      "documentation": "<p>Updates a real-time log configuration.</p> <p>When you update a real-time log configuration, all the parameters are updated with the values provided in the request. You cannot update some parameters independent of others. To update a real-time log configuration:</p> <ol> <li> <p>Call <code>GetRealtimeLogConfig</code> to get the current real-time log configuration.</p> </li> <li> <p>Locally modify the parameters in the real-time log configuration that you want to update.</p> </li> <li> <p>Call this API (<code>UpdateRealtimeLogConfig</code>) by providing the entire real-time log configuration, including the parameters that you modified and those that you didn’t.</p> </li> </ol> <p>You cannot update a real-time log configuration’s <code>Name</code> or <code>ARN</code>.</p>"
+    },
     "UpdateStreamingDistribution": {
       "name": "UpdateStreamingDistribution2020_05_31",
       "http": {
@@ -2368,6 +2514,10 @@
         "FieldLevelEncryptionId": {
           "shape": "string",
           "documentation": "<p>The value of <code>ID</code> for the field-level encryption configuration that you want CloudFront to use for encrypting specific fields of data for this cache behavior.</p>"
+        },
+        "RealtimeLogConfigArn": {
+          "shape": "string",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the real-time log configuration that is attached to this cache behavior. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html\">Real-time logs</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
         },
         "CachePolicyId": {
           "shape": "string",
@@ -3247,6 +3397,42 @@
       },
       "payload": "PublicKey"
     },
+    "CreateRealtimeLogConfigRequest": {
+      "type": "structure",
+      "required": [
+        "EndPoints",
+        "Fields",
+        "Name",
+        "SamplingRate"
+      ],
+      "members": {
+        "EndPoints": {
+          "shape": "EndPointList",
+          "documentation": "<p>Contains information about the Amazon Kinesis data stream where you are sending real-time log data.</p>"
+        },
+        "Fields": {
+          "shape": "FieldList",
+          "documentation": "<p>A list of fields to include in each real-time log record.</p> <p>For more information about fields, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields\">Real-time log configuration fields</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
+        },
+        "Name": {
+          "shape": "string",
+          "documentation": "<p>A unique name to identify this real-time log configuration.</p>"
+        },
+        "SamplingRate": {
+          "shape": "long",
+          "documentation": "<p>The sampling rate for this real-time log configuration. The sampling rate determines the percentage of viewer requests that are represented in the real-time log data. You must provide an integer between 1 and 100, inclusive.</p>"
+        }
+      }
+    },
+    "CreateRealtimeLogConfigResult": {
+      "type": "structure",
+      "members": {
+        "RealtimeLogConfig": {
+          "shape": "RealtimeLogConfig",
+          "documentation": "<p>A real-time log configuration.</p>"
+        }
+      }
+    },
     "CreateStreamingDistributionRequest": {
       "type": "structure",
       "required": [
@@ -3469,6 +3655,10 @@
           "shape": "string",
           "documentation": "<p>The value of <code>ID</code> for the field-level encryption configuration that you want CloudFront to use for encrypting specific fields of data for the default cache behavior.</p>"
         },
+        "RealtimeLogConfigArn": {
+          "shape": "string",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the real-time log configuration that is attached to this cache behavior. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html\">Real-time logs</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
+        },
         "CachePolicyId": {
           "shape": "string",
           "documentation": "<p>The unique identifier of the cache policy that is attached to the default cache behavior. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy\">Creating cache policies</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html\">Using the managed cache policies</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
@@ -3657,6 +3847,19 @@
           "documentation": "<p>The value of the <code>ETag</code> header that you received when retrieving the public key identity to delete. For example: <code>E2QWRUHAPOMQZL</code>.</p>",
           "location": "header",
           "locationName": "If-Match"
+        }
+      }
+    },
+    "DeleteRealtimeLogConfigRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "string",
+          "documentation": "<p>The name of the real-time log configuration to delete.</p>"
+        },
+        "ARN": {
+          "shape": "string",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the real-time log configuration to delete.</p>"
         }
       }
     },
@@ -4071,6 +4274,29 @@
         "locationName": "EncryptionEntity"
       }
     },
+    "EndPoint": {
+      "type": "structure",
+      "required": [
+        "StreamType"
+      ],
+      "members": {
+        "StreamType": {
+          "shape": "string",
+          "documentation": "<p>The type of data stream where you are sending real-time log data. The only valid value is <code>Kinesis</code>.</p>"
+        },
+        "KinesisStreamConfig": {
+          "shape": "KinesisStreamConfig",
+          "documentation": "<p>Contains information about the Amazon Kinesis data stream where you are sending real-time log data.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about the Amazon Kinesis data stream where you are sending real-time log data in a real-time log configuration.</p>"
+    },
+    "EndPointList": {
+      "type": "list",
+      "member": {
+        "shape": "EndPoint"
+      }
+    },
     "EventType": {
       "type": "string",
       "enum": [
@@ -4304,6 +4530,13 @@
       "member": {
         "shape": "FieldLevelEncryptionSummary",
         "locationName": "FieldLevelEncryptionSummary"
+      }
+    },
+    "FieldList": {
+      "type": "list",
+      "member": {
+        "shape": "string",
+        "locationName": "Field"
       }
     },
     "FieldPatternList": {
@@ -4877,6 +5110,28 @@
       },
       "payload": "PublicKey"
     },
+    "GetRealtimeLogConfigRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "string",
+          "documentation": "<p>The name of the real-time log configuration to get.</p>"
+        },
+        "ARN": {
+          "shape": "string",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the real-time log configuration to get.</p>"
+        }
+      }
+    },
+    "GetRealtimeLogConfigResult": {
+      "type": "structure",
+      "members": {
+        "RealtimeLogConfig": {
+          "shape": "RealtimeLogConfig",
+          "documentation": "<p>A real-time log configuration.</p>"
+        }
+      }
+    },
     "GetStreamingDistributionConfigRequest": {
       "type": "structure",
       "required": [
@@ -5124,6 +5379,24 @@
       },
       "documentation": "<p>A complex type that lists the active CloudFront key pairs, if any, that are associated with <code>AwsAccountNumber</code>. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ActiveTrustedSigners.html\">ActiveTrustedSigners</a>.</p>"
     },
+    "KinesisStreamConfig": {
+      "type": "structure",
+      "required": [
+        "RoleARN",
+        "StreamARN"
+      ],
+      "members": {
+        "RoleARN": {
+          "shape": "string",
+          "documentation": "<p>The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM) role that CloudFront can use to send real-time log data to your Kinesis data stream.</p> <p>For more information the IAM role, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-iam-role\">Real-time log configuration IAM role</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
+        },
+        "StreamARN": {
+          "shape": "string",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Kinesis data stream where you are sending real-time log data.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about the Amazon Kinesis data stream where you are sending real-time log data.</p>"
+    },
     "LambdaFunctionARN": {
       "type": "string"
     },
@@ -5306,6 +5579,36 @@
         }
       },
       "payload": "DistributionIdList"
+    },
+    "ListDistributionsByRealtimeLogConfigRequest": {
+      "type": "structure",
+      "members": {
+        "Marker": {
+          "shape": "string",
+          "documentation": "<p>Use this field when paginating results to indicate where to begin in your list of distributions. The response includes distributions in the list that occur after the marker. To get the next page of the list, set this field’s value to the value of <code>NextMarker</code> from the current page’s response.</p>"
+        },
+        "MaxItems": {
+          "shape": "string",
+          "documentation": "<p>The maximum number of distributions that you want in the response.</p>"
+        },
+        "RealtimeLogConfigName": {
+          "shape": "string",
+          "documentation": "<p>The name of the real-time log configuration whose associated distributions you want to list.</p>"
+        },
+        "RealtimeLogConfigArn": {
+          "shape": "string",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the real-time log configuration whose associated distributions you want to list.</p>"
+        }
+      }
+    },
+    "ListDistributionsByRealtimeLogConfigResult": {
+      "type": "structure",
+      "members": {
+        "DistributionList": {
+          "shape": "DistributionList"
+        }
+      },
+      "payload": "DistributionList"
     },
     "ListDistributionsByWebACLIdRequest": {
       "type": "structure",
@@ -5525,6 +5828,33 @@
         }
       },
       "payload": "PublicKeyList"
+    },
+    "ListRealtimeLogConfigsRequest": {
+      "type": "structure",
+      "members": {
+        "MaxItems": {
+          "shape": "string",
+          "documentation": "<p>The maximum number of real-time log configurations that you want in the response.</p>",
+          "location": "querystring",
+          "locationName": "MaxItems"
+        },
+        "Marker": {
+          "shape": "string",
+          "documentation": "<p>Use this field when paginating results to indicate where to begin in your list of real-time log configurations. The response includes real-time log configurations in the list that occur after the marker. To get the next page of the list, set this field’s value to the value of <code>NextMarker</code> from the current page’s response.</p>",
+          "location": "querystring",
+          "locationName": "Marker"
+        }
+      }
+    },
+    "ListRealtimeLogConfigsResult": {
+      "type": "structure",
+      "members": {
+        "RealtimeLogConfigs": {
+          "shape": "RealtimeLogConfigs",
+          "documentation": "<p>A list of real-time log configurations.</p>"
+        }
+      },
+      "payload": "RealtimeLogConfigs"
     },
     "ListStreamingDistributionsRequest": {
       "type": "structure",
@@ -6349,6 +6679,76 @@
         "locationName": "Name"
       }
     },
+    "RealtimeLogConfig": {
+      "type": "structure",
+      "required": [
+        "ARN",
+        "Name",
+        "SamplingRate",
+        "EndPoints",
+        "Fields"
+      ],
+      "members": {
+        "ARN": {
+          "shape": "string",
+          "documentation": "<p>The Amazon Resource Name (ARN) of this real-time log configuration.</p>"
+        },
+        "Name": {
+          "shape": "string",
+          "documentation": "<p>The unique name of this real-time log configuration.</p>"
+        },
+        "SamplingRate": {
+          "shape": "long",
+          "documentation": "<p>The sampling rate for this real-time log configuration. The sampling rate determines the percentage of viewer requests that are represented in the real-time log data. The sampling rate is an integer between 1 and 100, inclusive.</p>"
+        },
+        "EndPoints": {
+          "shape": "EndPointList",
+          "documentation": "<p>Contains information about the Amazon Kinesis data stream where you are sending real-time log data for this real-time log configuration.</p>"
+        },
+        "Fields": {
+          "shape": "FieldList",
+          "documentation": "<p>A list of fields that are included in each real-time log record. In an API response, the fields are provided in the same order in which they are sent to the Amazon Kinesis data stream.</p> <p>For more information about fields, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields\">Real-time log configuration fields</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
+        }
+      },
+      "documentation": "<p>A real-time log configuration.</p>"
+    },
+    "RealtimeLogConfigList": {
+      "type": "list",
+      "member": {
+        "shape": "RealtimeLogConfig"
+      }
+    },
+    "RealtimeLogConfigs": {
+      "type": "structure",
+      "required": [
+        "MaxItems",
+        "IsTruncated",
+        "Marker"
+      ],
+      "members": {
+        "MaxItems": {
+          "shape": "integer",
+          "documentation": "<p>The maximum number of real-time log configurations requested.</p>"
+        },
+        "Items": {
+          "shape": "RealtimeLogConfigList",
+          "documentation": "<p>Contains the list of real-time log configurations.</p>"
+        },
+        "IsTruncated": {
+          "shape": "boolean",
+          "documentation": "<p>A flag that indicates whether there are more real-time log configurations than are contained in this list.</p>"
+        },
+        "Marker": {
+          "shape": "string",
+          "documentation": "<p>This parameter indicates where this list of real-time log configurations begins. This list includes real-time log configurations that occur after the marker.</p>"
+        },
+        "NextMarker": {
+          "shape": "string",
+          "documentation": "<p>If there are more items in the list than are in this response, this element is present. It contains the value that you should use in the <code>Marker</code> field of a subsequent request to continue listing real-time log configurations where you left off. </p>"
+        }
+      },
+      "documentation": "<p>A list of real-time log configurations.</p>"
+    },
     "RealtimeMetricsSubscriptionConfig": {
       "type": "structure",
       "required": [
@@ -6421,7 +6821,8 @@
       "type": "string",
       "enum": [
         "sni-only",
-        "vip"
+        "vip",
+        "static-ip"
       ]
     },
     "Signer": {
@@ -7184,6 +7585,40 @@
       },
       "payload": "PublicKey"
     },
+    "UpdateRealtimeLogConfigRequest": {
+      "type": "structure",
+      "members": {
+        "EndPoints": {
+          "shape": "EndPointList",
+          "documentation": "<p>Contains information about the Amazon Kinesis data stream where you are sending real-time log data.</p>"
+        },
+        "Fields": {
+          "shape": "FieldList",
+          "documentation": "<p>A list of fields to include in each real-time log record.</p> <p>For more information about fields, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields\">Real-time log configuration fields</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
+        },
+        "Name": {
+          "shape": "string",
+          "documentation": "<p>The name for this real-time log configuration.</p>"
+        },
+        "ARN": {
+          "shape": "string",
+          "documentation": "<p>The Amazon Resource Name (ARN) for this real-time log configuration.</p>"
+        },
+        "SamplingRate": {
+          "shape": "long",
+          "documentation": "<p>The sampling rate for this real-time log configuration. The sampling rate determines the percentage of viewer requests that are represented in the real-time log data. You must provide an integer between 1 and 100, inclusive.</p>"
+        }
+      }
+    },
+    "UpdateRealtimeLogConfigResult": {
+      "type": "structure",
+      "members": {
+        "RealtimeLogConfig": {
+          "shape": "RealtimeLogConfig",
+          "documentation": "<p>A real-time log configuration.</p>"
+        }
+      }
+    },
     "UpdateStreamingDistributionRequest": {
       "type": "structure",
       "required": [
@@ -7249,7 +7684,7 @@
         },
         "SSLSupportMethod": {
           "shape": "SSLSupportMethod",
-          "documentation": "<p>If the distribution uses <code>Aliases</code> (alternate domain names or CNAMEs), specify which viewers the distribution accepts HTTPS connections from.</p> <ul> <li> <p> <code>sni-only</code> – The distribution accepts HTTPS connections from only viewers that support <a href=\"https://en.wikipedia.org/wiki/Server_Name_Indication\">server name indication (SNI)</a>. This is recommended. Most browsers and clients support SNI.</p> </li> <li> <p> <code>vip</code> – The distribution accepts HTTPS connections from all viewers including those that don’t support SNI. This is not recommended, and results in additional monthly charges from CloudFront.</p> </li> </ul> <p>If the distribution uses the CloudFront domain name such as <code>d111111abcdef8.cloudfront.net</code>, don’t set a value for this field.</p>"
+          "documentation": "<p>If the distribution uses <code>Aliases</code> (alternate domain names or CNAMEs), specify which viewers the distribution accepts HTTPS connections from.</p> <ul> <li> <p> <code>sni-only</code> – The distribution accepts HTTPS connections from only viewers that support <a href=\"https://en.wikipedia.org/wiki/Server_Name_Indication\">server name indication (SNI)</a>. This is recommended. Most browsers and clients support SNI.</p> </li> <li> <p> <code>vip</code> – The distribution accepts HTTPS connections from all viewers including those that don’t support SNI. This is not recommended, and results in additional monthly charges from CloudFront.</p> </li> <li> <p> <code>static-ip</code> - Do not specify this value unless your distribution has been enabled for this feature by the CloudFront team. If you have a use case that requires static IP addresses for a distribution, contact CloudFront through the <a href=\"https://console.aws.amazon.com/support/home\">AWS Support Center</a>.</p> </li> </ul> <p>If the distribution uses the CloudFront domain name such as <code>d111111abcdef8.cloudfront.net</code>, don’t set a value for this field.</p>"
         },
         "MinimumProtocolVersion": {
           "shape": "MinimumProtocolVersion",

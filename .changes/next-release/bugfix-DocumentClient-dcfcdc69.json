@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "DocumentClient",
-  "description": "Add options.wrapNumbers doc in DynamoDB.DocumentClient"
-}

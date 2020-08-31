@@ -84,11 +84,11 @@ declare class SQS extends Service {
    */
   getQueueUrl(callback?: (err: AWSError, data: SQS.Types.GetQueueUrlResult) => void): Request<SQS.Types.GetQueueUrlResult, AWSError>;
   /**
-   * Returns a list of your queues that have the RedrivePolicy queue attribute configured with a dead-letter queue. For more information about using dead-letter queues, see Using Amazon SQS Dead-Letter Queues in the Amazon Simple Queue Service Developer Guide.
+   * Returns a list of your queues that have the RedrivePolicy queue attribute configured with a dead-letter queue.  The ListDeadLetterSourceQueues methods supports pagination. Set parameter MaxResults in the request to specify the maximum number of results to be returned in the response. If you do not set MaxResults, the response includes a maximum of 1,000 results. If you set MaxResults and there are additional results to display, the response includes a value for NextToken. Use NextToken as a parameter in your next request to ListDeadLetterSourceQueues to receive the next page of results.  For more information about using dead-letter queues, see Using Amazon SQS Dead-Letter Queues in the Amazon Simple Queue Service Developer Guide.
    */
   listDeadLetterSourceQueues(params: SQS.Types.ListDeadLetterSourceQueuesRequest, callback?: (err: AWSError, data: SQS.Types.ListDeadLetterSourceQueuesResult) => void): Request<SQS.Types.ListDeadLetterSourceQueuesResult, AWSError>;
   /**
-   * Returns a list of your queues that have the RedrivePolicy queue attribute configured with a dead-letter queue. For more information about using dead-letter queues, see Using Amazon SQS Dead-Letter Queues in the Amazon Simple Queue Service Developer Guide.
+   * Returns a list of your queues that have the RedrivePolicy queue attribute configured with a dead-letter queue.  The ListDeadLetterSourceQueues methods supports pagination. Set parameter MaxResults in the request to specify the maximum number of results to be returned in the response. If you do not set MaxResults, the response includes a maximum of 1,000 results. If you set MaxResults and there are additional results to display, the response includes a value for NextToken. Use NextToken as a parameter in your next request to ListDeadLetterSourceQueues to receive the next page of results.  For more information about using dead-letter queues, see Using Amazon SQS Dead-Letter Queues in the Amazon Simple Queue Service Developer Guide.
    */
   listDeadLetterSourceQueues(callback?: (err: AWSError, data: SQS.Types.ListDeadLetterSourceQueuesResult) => void): Request<SQS.Types.ListDeadLetterSourceQueuesResult, AWSError>;
   /**
@@ -100,11 +100,11 @@ declare class SQS extends Service {
    */
   listQueueTags(callback?: (err: AWSError, data: SQS.Types.ListQueueTagsResult) => void): Request<SQS.Types.ListQueueTagsResult, AWSError>;
   /**
-   * Returns a list of your queues. The maximum number of queues that can be returned is 1,000. If you specify a value for the optional QueueNamePrefix parameter, only queues with a name that begins with the specified value are returned.  Cross-account permissions don't apply to this action. For more information, see Grant Cross-Account Permissions to a Role and a User Name in the Amazon Simple Queue Service Developer Guide. 
+   * Returns a list of your queues in the current region. The response includes a maximum of 1,000 results. If you specify a value for the optional QueueNamePrefix parameter, only queues with a name that begins with the specified value are returned.  The listQueues methods supports pagination. Set parameter MaxResults in the request to specify the maximum number of results to be returned in the response. If you do not set MaxResults, the response includes a maximum of 1,000 results. If you set MaxResults and there are additional results to display, the response includes a value for NextToken. Use NextToken as a parameter in your next request to listQueues to receive the next page of results.   Cross-account permissions don't apply to this action. For more information, see Grant Cross-Account Permissions to a Role and a User Name in the Amazon Simple Queue Service Developer Guide. 
    */
   listQueues(params: SQS.Types.ListQueuesRequest, callback?: (err: AWSError, data: SQS.Types.ListQueuesResult) => void): Request<SQS.Types.ListQueuesResult, AWSError>;
   /**
-   * Returns a list of your queues. The maximum number of queues that can be returned is 1,000. If you specify a value for the optional QueueNamePrefix parameter, only queues with a name that begins with the specified value are returned.  Cross-account permissions don't apply to this action. For more information, see Grant Cross-Account Permissions to a Role and a User Name in the Amazon Simple Queue Service Developer Guide. 
+   * Returns a list of your queues in the current region. The response includes a maximum of 1,000 results. If you specify a value for the optional QueueNamePrefix parameter, only queues with a name that begins with the specified value are returned.  The listQueues methods supports pagination. Set parameter MaxResults in the request to specify the maximum number of results to be returned in the response. If you do not set MaxResults, the response includes a maximum of 1,000 results. If you set MaxResults and there are additional results to display, the response includes a value for NextToken. Use NextToken as a parameter in your next request to listQueues to receive the next page of results.   Cross-account permissions don't apply to this action. For more information, see Grant Cross-Account Permissions to a Role and a User Name in the Amazon Simple Queue Service Developer Guide. 
    */
   listQueues(callback?: (err: AWSError, data: SQS.Types.ListQueuesResult) => void): Request<SQS.Types.ListQueuesResult, AWSError>;
   /**
@@ -269,7 +269,7 @@ declare namespace SQS {
      */
     ReceiptHandle: String;
     /**
-     * The new value for the message's visibility timeout (in seconds). Values values: 0 to 43200. Maximum: 12 hours.
+     * The new value for the message's visibility timeout (in seconds). Values range: 0 to 43200. Maximum: 12 hours.
      */
     VisibilityTimeout: Integer;
   }
@@ -390,7 +390,7 @@ declare namespace SQS {
      */
     NextToken?: Token;
     /**
-     * Maximum number of results to include in the response.
+     * Maximum number of results to include in the response. Value range is 1 to 1000. You must set MaxResults to receive a value for NextToken in the response.
      */
     MaxResults?: BoxedInteger;
   }
@@ -400,7 +400,7 @@ declare namespace SQS {
      */
     queueUrls: QueueUrlList;
     /**
-     * Pagination token to include in the next request.
+     * Pagination token to include in the next request. Token value is null if there are no additional results to request, or if you did not set MaxResults in the request.
      */
     NextToken?: Token;
   }
@@ -426,7 +426,7 @@ declare namespace SQS {
      */
     NextToken?: Token;
     /**
-     * Maximum number of results to include in the response.
+     * Maximum number of results to include in the response. Value range is 1 to 1000. You must set MaxResults to receive a value for NextToken in the response.
      */
     MaxResults?: BoxedInteger;
   }
@@ -436,7 +436,7 @@ declare namespace SQS {
      */
     QueueUrls?: QueueUrlList;
     /**
-     * Pagination token to include in the next request.
+     * Pagination token to include in the next request. Token value is null if there are no additional results to request, or if you did not set MaxResults in the request.
      */
     NextToken?: Token;
   }
@@ -661,7 +661,7 @@ declare namespace SQS {
      */
     QueueUrl: String;
     /**
-     * The message to send. The maximum string size is 256 KB.  A message can include only XML, JSON, and unformatted text. The following Unicode characters are allowed:  #x9 | #xA | #xD | #x20 to #xD7FF | #xE000 to #xFFFD | #x10000 to #x10FFFF  Any characters not included in this list will be rejected. For more information, see the W3C specification for characters. 
+     * The message to send. The minimum size is one character. The maximum size is 256 KB.  A message can include only XML, JSON, and unformatted text. The following Unicode characters are allowed:  #x9 | #xA | #xD | #x20 to #xD7FF | #xE000 to #xFFFD | #x10000 to #x10FFFF  Any characters not included in this list will be rejected. For more information, see the W3C specification for characters. 
      */
     MessageBody: String;
     /**

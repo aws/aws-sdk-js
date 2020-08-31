@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.742.0-->
+<!--LATEST=2.743.0-->
 <!--ENTRYINSERT-->
+
+## 2.743.0
+* bugfix: DocumentClient: Add options.wrapNumbers doc in DynamoDB.DocumentClient
+* feature: CloudFront: CloudFront now supports real-time logging for CloudFront distributions. CloudFront real-time logs are more detailed, configurable, and are available in real time.
+* feature: EC2: Amazon EC2 and Spot Fleet now support modification of launch template configs for a running fleet enabling instance type, instance weight, AZ, and AMI updates without losing the current fleet ID.
 
 ## 2.742.0
 * feature: CUR: This release add MONTHLY as the new supported TimeUnit for ReportDefinition.
