@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.743.0-->
+<!--LATEST=2.744.0-->
 <!--ENTRYINSERT-->
+
+## 2.744.0
+* feature: CodeGuruReviewer: Add support for repository analysis based code reviews
+* feature: SecurityHub: Added a PatchSummary object for security findings. The PatchSummary object provides details about the patch compliance status of an instance.
 
 ## 2.743.0
 * bugfix: DocumentClient: Add options.wrapNumbers doc in DynamoDB.DocumentClient

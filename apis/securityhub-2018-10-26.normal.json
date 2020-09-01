@@ -4261,6 +4261,10 @@
         "Vulnerabilities": {
           "shape": "VulnerabilityList",
           "documentation": "<p>Provides a list of vulnerabilities associated with the findings.</p>"
+        },
+        "PatchSummary": {
+          "shape": "PatchSummary",
+          "documentation": "<p>Provides an overview of the patch compliance status for an instance against a selected compliance standard.</p>"
         }
       },
       "documentation": "<p>Provides consistent format for the contents of the Security Hub-aggregated findings. <code>AwsSecurityFinding</code> format enables you to share findings between AWS security services and third-party solutions, and security standards checks.</p> <note> <p>A finding is a potential security issue generated either by AWS services (Amazon GuardDuty, Amazon Inspector, and Amazon Macie) or by the integrated third-party solutions and standards checks.</p> </note>"
@@ -6417,6 +6421,59 @@
         "aws-cn",
         "aws-us-gov"
       ]
+    },
+    "PatchSummary": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "Id": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the compliance standard that was used to determine the patch compliance status.</p>"
+        },
+        "InstalledCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of patches from the compliance standard that were installed successfully.</p>"
+        },
+        "MissingCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of patches that are part of the compliance standard but are not installed. The count includes patches that failed to install.</p>"
+        },
+        "FailedCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of patches from the compliance standard that failed to install.</p>"
+        },
+        "InstalledOtherCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of installed patches that are not part of the compliance standard.</p>"
+        },
+        "InstalledRejectedCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of patches that are installed but are also on a list of patches that the customer rejected.</p>"
+        },
+        "InstalledPendingReboot": {
+          "shape": "Integer",
+          "documentation": "<p>The number of patches that were installed since the last time the instance was rebooted.</p>"
+        },
+        "OperationStartTime": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the operation started.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "OperationEndTime": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the operation completed.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "RebootOption": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The reboot option specified for the instance.</p>"
+        },
+        "Operation": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of patch operation performed. For Patch Manager, the values are <code>SCAN</code> and <code>INSTALL</code>. </p>"
+        }
+      },
+      "documentation": "<p>Provides an overview of the patch compliance status for an instance against a selected compliance standard.</p>"
     },
     "PortRange": {
       "type": "structure",

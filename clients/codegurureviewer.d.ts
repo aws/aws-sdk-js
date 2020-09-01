@@ -12,13 +12,21 @@ declare class CodeGuruReviewer extends Service {
   constructor(options?: CodeGuruReviewer.Types.ClientConfiguration)
   config: Config & CodeGuruReviewer.Types.ClientConfiguration;
   /**
-   *  Use to associate an AWS CodeCommit repository or a repostory managed by AWS CodeStar Connections with Amazon CodeGuru Reviewer. When you associate a repository, CodeGuru Reviewer reviews source code changes in the repository's pull requests and provides automatic recommendations. You can view recommendations using the CodeGuru Reviewer console. For more information, see Recommendations in Amazon CodeGuru Reviewer in the Amazon CodeGuru Reviewer User Guide.  If you associate a CodeCommit repository, it must be in the same AWS Region and AWS account where its CodeGuru Reviewer code reviews are configured.  Bitbucket and GitHub Enterprise Server repositories are managed by AWS CodeStar Connections to connect to CodeGuru Reviewer. For more information, see Connect to a repository source provider in the Amazon CodeGuru Reviewer User Guide.    You cannot use the CodeGuru Reviewer SDK or the AWS CLI to associate a GitHub repository with Amazon CodeGuru Reviewer. To associate a GitHub repository, use the console. For more information, see Getting started with CodeGuru Reviewer in the CodeGuru Reviewer User Guide.  
+   *  Use to associate an AWS CodeCommit repository or a repostory managed by AWS CodeStar Connections with Amazon CodeGuru Reviewer. When you associate a repository, CodeGuru Reviewer reviews source code changes in the repository's pull requests and provides automatic recommendations. You can view recommendations using the CodeGuru Reviewer console. For more information, see Recommendations in Amazon CodeGuru Reviewer in the Amazon CodeGuru Reviewer User Guide.  If you associate a CodeCommit repository, it must be in the same AWS Region and AWS account where its CodeGuru Reviewer code reviews are configured. Bitbucket and GitHub Enterprise Server repositories are managed by AWS CodeStar Connections to connect to CodeGuru Reviewer. For more information, see Connect to a repository source provider in the Amazon CodeGuru Reviewer User Guide.    You cannot use the CodeGuru Reviewer SDK or the AWS CLI to associate a GitHub repository with Amazon CodeGuru Reviewer. To associate a GitHub repository, use the console. For more information, see Getting started with CodeGuru Reviewer in the CodeGuru Reviewer User Guide.  
    */
   associateRepository(params: CodeGuruReviewer.Types.AssociateRepositoryRequest, callback?: (err: AWSError, data: CodeGuruReviewer.Types.AssociateRepositoryResponse) => void): Request<CodeGuruReviewer.Types.AssociateRepositoryResponse, AWSError>;
   /**
-   *  Use to associate an AWS CodeCommit repository or a repostory managed by AWS CodeStar Connections with Amazon CodeGuru Reviewer. When you associate a repository, CodeGuru Reviewer reviews source code changes in the repository's pull requests and provides automatic recommendations. You can view recommendations using the CodeGuru Reviewer console. For more information, see Recommendations in Amazon CodeGuru Reviewer in the Amazon CodeGuru Reviewer User Guide.  If you associate a CodeCommit repository, it must be in the same AWS Region and AWS account where its CodeGuru Reviewer code reviews are configured.  Bitbucket and GitHub Enterprise Server repositories are managed by AWS CodeStar Connections to connect to CodeGuru Reviewer. For more information, see Connect to a repository source provider in the Amazon CodeGuru Reviewer User Guide.    You cannot use the CodeGuru Reviewer SDK or the AWS CLI to associate a GitHub repository with Amazon CodeGuru Reviewer. To associate a GitHub repository, use the console. For more information, see Getting started with CodeGuru Reviewer in the CodeGuru Reviewer User Guide.  
+   *  Use to associate an AWS CodeCommit repository or a repostory managed by AWS CodeStar Connections with Amazon CodeGuru Reviewer. When you associate a repository, CodeGuru Reviewer reviews source code changes in the repository's pull requests and provides automatic recommendations. You can view recommendations using the CodeGuru Reviewer console. For more information, see Recommendations in Amazon CodeGuru Reviewer in the Amazon CodeGuru Reviewer User Guide.  If you associate a CodeCommit repository, it must be in the same AWS Region and AWS account where its CodeGuru Reviewer code reviews are configured. Bitbucket and GitHub Enterprise Server repositories are managed by AWS CodeStar Connections to connect to CodeGuru Reviewer. For more information, see Connect to a repository source provider in the Amazon CodeGuru Reviewer User Guide.    You cannot use the CodeGuru Reviewer SDK or the AWS CLI to associate a GitHub repository with Amazon CodeGuru Reviewer. To associate a GitHub repository, use the console. For more information, see Getting started with CodeGuru Reviewer in the CodeGuru Reviewer User Guide.  
    */
   associateRepository(callback?: (err: AWSError, data: CodeGuruReviewer.Types.AssociateRepositoryResponse) => void): Request<CodeGuruReviewer.Types.AssociateRepositoryResponse, AWSError>;
+  /**
+   *  Use to create a code review for a repository analysis. 
+   */
+  createCodeReview(params: CodeGuruReviewer.Types.CreateCodeReviewRequest, callback?: (err: AWSError, data: CodeGuruReviewer.Types.CreateCodeReviewResponse) => void): Request<CodeGuruReviewer.Types.CreateCodeReviewResponse, AWSError>;
+  /**
+   *  Use to create a code review for a repository analysis. 
+   */
+  createCodeReview(callback?: (err: AWSError, data: CodeGuruReviewer.Types.CreateCodeReviewResponse) => void): Request<CodeGuruReviewer.Types.CreateCodeReviewResponse, AWSError>;
   /**
    *  Returns the metadata associated with the code review along with its status.
    */
@@ -100,7 +108,7 @@ declare namespace CodeGuruReviewer {
      */
     Repository: Repository;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. To add a new repository association, this parameter specifies a unique identifier for the new repository association that helps ensure idempotency. If you use the AWS CLI or one of the AWS SDKs to call this operation, you can leave this parameter empty. The CLI or SDK generates a random UUID for you and includes that in the request. If you don't use the SDK and instead generate a raw HTTP request to the Secrets Manager service endpoint, you must generate a ClientRequestToken yourself for new versions and include that value in the request. You typically interact with this value if you implement your own retry logic and want to ensure that a given repository association is not created twice. We recommend that you generate a UUID-type value to ensure uniqueness within the specified repository association. Amazon CodeGuru Reviewer uses this value to prevent the accidental creation of duplicate repository associations if there are failures and retries. 
+     * Amazon CodeGuru Reviewer uses this value to prevent the accidental creation of duplicate repository associations if there are failures and retries. 
      */
     ClientRequestToken?: ClientRequestToken;
   }
@@ -111,6 +119,7 @@ declare namespace CodeGuruReviewer {
     RepositoryAssociation?: RepositoryAssociation;
   }
   export type AssociationId = string;
+  export type BranchName = string;
   export type ClientRequestToken = string;
   export interface CodeCommitRepository {
     /**
@@ -132,7 +141,7 @@ declare namespace CodeGuruReviewer {
      */
     RepositoryName?: Name;
     /**
-     * The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the account that owns the repository. For a GitHub or Bitbucket repository, this is the username for the account that owns the repository.
+     * The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.
      */
     Owner?: Owner;
     /**
@@ -172,6 +181,7 @@ declare namespace CodeGuruReviewer {
      */
     Metrics?: Metrics;
   }
+  export type CodeReviewName = string;
   export type CodeReviewSummaries = CodeReviewSummary[];
   export interface CodeReviewSummary {
     /**
@@ -187,7 +197,7 @@ declare namespace CodeGuruReviewer {
      */
     RepositoryName?: Name;
     /**
-     * The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the account that owns the repository. For a GitHub or Bitbucket repository, this is the username for the account that owns the repository.
+     * The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.
      */
     Owner?: Owner;
     /**
@@ -219,18 +229,45 @@ declare namespace CodeGuruReviewer {
      */
     MetricsSummary?: MetricsSummary;
   }
+  export interface CodeReviewType {
+    /**
+     *  A code review that analyzes all code under a specified branch in an associated respository. The assocated repository is specified using its ARN in  CreateCodeReview  
+     */
+    RepositoryAnalysis: RepositoryAnalysis;
+  }
   export interface CommitDiffSourceCodeType {
     /**
-     *  The SHA of the source commit. 
+     *  The SHA of the source commit used to generate a commit diff. 
      */
     SourceCommit?: CommitId;
     /**
-     *  The SHA of the destination commit. 
+     *  The SHA of the destination commit used to generate a commit diff. 
      */
     DestinationCommit?: CommitId;
   }
   export type CommitId = string;
   export type ConnectionArn = string;
+  export interface CreateCodeReviewRequest {
+    /**
+     *  The name of the code review. Each code review of the same code review type must have a unique name in your AWS account. 
+     */
+    Name: CodeReviewName;
+    /**
+     *  The Amazon Resource Name (ARN) of the  RepositoryAssociation  object. You can retrieve this ARN by calling ListRepositories.   A code review can only be created on an associated repository. This is the ARN of the associated repository. 
+     */
+    RepositoryAssociationArn: Arn;
+    /**
+     *  The type of code review to create. This is specified using a  CodeReviewType  object. 
+     */
+    Type: CodeReviewType;
+    /**
+     *  Amazon CodeGuru Reviewer uses this value to prevent the accidental creation of duplicate code reviews if there are failures and retries. 
+     */
+    ClientRequestToken?: ClientRequestToken;
+  }
+  export interface CreateCodeReviewResponse {
+    CodeReview?: CodeReview;
+  }
   export interface DescribeCodeReviewRequest {
     /**
      * The Amazon Resource Name (ARN) of the  CodeReview  object. 
@@ -265,7 +302,7 @@ declare namespace CodeGuruReviewer {
   }
   export interface DescribeRepositoryAssociationRequest {
     /**
-     * The Amazon Resource Name (ARN) of the  RepositoryAssociation  object. You can retrieve this ARN by calling ListRepositories.
+     *  The Amazon Resource Name (ARN) of the  RepositoryAssociation  object. You can retrieve this ARN by calling ListRepositories. 
      */
     AssociationArn: Arn;
   }
@@ -277,7 +314,7 @@ declare namespace CodeGuruReviewer {
   }
   export interface DisassociateRepositoryRequest {
     /**
-     * The Amazon Resource Name (ARN) of the  RepositoryAssociation  object. 
+     *  The Amazon Resource Name (ARN) of the  RepositoryAssociation  object. You can retrieve this ARN by calling ListRepositories. 
      */
     AssociationArn: Arn;
   }
@@ -391,7 +428,7 @@ declare namespace CodeGuruReviewer {
      */
     ProviderTypes?: ProviderTypes;
     /**
-     * List of repository association states to use as a filter. The valid repository association states are:    Associated: The repository association is complete.     Associating: CodeGuru Reviewer is:     Setting up pull request notifications. This is required for pull requests to trigger a CodeGuru Reviewer review.    If your repository ProviderType is GitHub or Bitbucket, CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your repository cannot be triggered.      Setting up source code access. This is required for CodeGuru Reviewer to securely clone code in your repository.       Failed: The repository failed to associate or disassociate.     Disassociating: CodeGuru Reviewer is removing the repository's pull request notifications and source code access.   
+     * List of repository association states to use as a filter. The valid repository association states are:    Associated: The repository association is complete.     Associating: CodeGuru Reviewer is:     Setting up pull request notifications. This is required for pull requests to trigger a CodeGuru Reviewer review.    If your repository ProviderType is GitHub, GitHub Enterprise Server, or Bitbucket, CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your repository cannot be triggered.      Setting up source code access. This is required for CodeGuru Reviewer to securely clone code in your repository.       Failed: The repository failed to associate or disassociate.     Disassociating: CodeGuru Reviewer is removing the repository's pull request notifications and source code access.   
      */
     States?: RepositoryAssociationStates;
     /**
@@ -399,7 +436,7 @@ declare namespace CodeGuruReviewer {
      */
     Names?: Names;
     /**
-     * List of owners to use as a filter. For AWS CodeCommit, it is the name of the CodeCommit account that was used to associate the repository. For other repository source providers, such as Bitbucket, this is name of the account that was used to associate the repository. 
+     * List of owners to use as a filter. For AWS CodeCommit, it is the name of the CodeCommit account that was used to associate the repository. For other repository source providers, such as Bitbucket and GitHub Enterprise Server, this is name of the account that was used to associate the repository. 
      */
     Owners?: Owners;
     /**
@@ -549,6 +586,12 @@ declare namespace CodeGuruReviewer {
      */
     GitHubEnterpriseServer?: ThirdPartySourceRepository;
   }
+  export interface RepositoryAnalysis {
+    /**
+     *  A  SourceCodeType  that specifies the tip of a branch in an associated repository. 
+     */
+    RepositoryHead: RepositoryHeadSourceCodeType;
+  }
   export interface RepositoryAssociation {
     /**
      * The ID of the repository association.
@@ -559,7 +602,7 @@ declare namespace CodeGuruReviewer {
      */
     AssociationArn?: Arn;
     /**
-     *  The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its format is arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id. For more information, see Connection in the AWS CodeStar Connections API Reference. 
+     *  The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its format is arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id. For more information, see  Connection  in the AWS CodeStar Connections API Reference. 
      */
     ConnectionArn?: ConnectionArn;
     /**
@@ -567,7 +610,7 @@ declare namespace CodeGuruReviewer {
      */
     Name?: Name;
     /**
-     * The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the account that owns the repository. For a GitHub or Bitbucket repository, this is the username for the account that owns the repository.
+     * The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.
      */
     Owner?: Owner;
     /**
@@ -575,7 +618,7 @@ declare namespace CodeGuruReviewer {
      */
     ProviderType?: ProviderType;
     /**
-     * The state of the repository association. The valid repository association states are:    Associated: The repository association is complete.     Associating: CodeGuru Reviewer is:     Setting up pull request notifications. This is required for pull requests to trigger a CodeGuru Reviewer review.    If your repository ProviderType is GitHub or Bitbucket, CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your repository cannot be triggered.      Setting up source code access. This is required for CodeGuru Reviewer to securely clone code in your repository.       Failed: The repository failed to associate or disassociate.     Disassociating: CodeGuru Reviewer is removing the repository's pull request notifications and source code access.   
+     * The state of the repository association. The valid repository association states are:    Associated: The repository association is complete.     Associating: CodeGuru Reviewer is:     Setting up pull request notifications. This is required for pull requests to trigger a CodeGuru Reviewer review.    If your repository ProviderType is GitHub, GitHub Enterprise Server, or Bitbucket, CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your repository cannot be triggered.      Setting up source code access. This is required for CodeGuru Reviewer to securely clone code in your repository.       Failed: The repository failed to associate or disassociate.     Disassociating: CodeGuru Reviewer is removing the repository's pull request notifications and source code access.   
      */
     State?: RepositoryAssociationState;
     /**
@@ -596,11 +639,11 @@ declare namespace CodeGuruReviewer {
   export type RepositoryAssociationSummaries = RepositoryAssociationSummary[];
   export interface RepositoryAssociationSummary {
     /**
-     * The Amazon Resource Name (ARN) of the  RepositoryAssociation  object. 
+     *  The Amazon Resource Name (ARN) of the  RepositoryAssociation  object. You can retrieve this ARN by calling ListRepositories. 
      */
     AssociationArn?: Arn;
     /**
-     *  The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its format is arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id. For more information, see Connection in the AWS CodeStar Connections API Reference. 
+     *  The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its format is arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id. For more information, see  Connection  in the AWS CodeStar Connections API Reference. 
      */
     ConnectionArn?: ConnectionArn;
     /**
@@ -616,7 +659,7 @@ declare namespace CodeGuruReviewer {
      */
     Name?: Name;
     /**
-     * The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the account that owns the repository. For a GitHub or Bitbucket repository, this is the username for the account that owns the repository.
+     * The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.
      */
     Owner?: Owner;
     /**
@@ -624,16 +667,23 @@ declare namespace CodeGuruReviewer {
      */
     ProviderType?: ProviderType;
     /**
-     * The state of the repository association. The valid repository association states are:    Associated: The repository association is complete.     Associating: CodeGuru Reviewer is:     Setting up pull request notifications. This is required for pull requests to trigger a CodeGuru Reviewer review.    If your repository ProviderType is GitHub or Bitbucket, CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your repository cannot be triggered.      Setting up source code access. This is required for CodeGuru Reviewer to securely clone code in your repository.       Failed: The repository failed to associate or disassociate.     Disassociating: CodeGuru Reviewer is removing the repository's pull request notifications and source code access.   
+     * The state of the repository association. The valid repository association states are:    Associated: The repository association is complete.     Associating: CodeGuru Reviewer is:     Setting up pull request notifications. This is required for pull requests to trigger a CodeGuru Reviewer review.    If your repository ProviderType is GitHub, GitHub Enterprise Server, or Bitbucket, CodeGuru Reviewer creates webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your repository cannot be triggered.      Setting up source code access. This is required for CodeGuru Reviewer to securely clone code in your repository.       Failed: The repository failed to associate or disassociate.     Disassociating: CodeGuru Reviewer is removing the repository's pull request notifications and source code access.   
      */
     State?: RepositoryAssociationState;
+  }
+  export interface RepositoryHeadSourceCodeType {
+    /**
+     *  The name of the branch in an associated repository. The RepositoryHeadSourceCodeType specifies the tip of this branch. 
+     */
+    BranchName: BranchName;
   }
   export type RepositoryNames = Name[];
   export interface SourceCodeType {
     /**
-     *  The commit diff for the pull request. 
+     *  A  SourceCodeType  that specifies a commit diff created by a pull request on an associated repository. 
      */
     CommitDiff?: CommitDiffSourceCodeType;
+    RepositoryHead?: RepositoryHeadSourceCodeType;
   }
   export type StateReason = string;
   export type Text = string;
@@ -643,7 +693,7 @@ declare namespace CodeGuruReviewer {
      */
     Name: Name;
     /**
-     *  The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its format is arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id. For more information, see Connection in the AWS CodeStar Connections API Reference. 
+     *  The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its format is arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id. For more information, see  Connection  in the AWS CodeStar Connections API Reference. 
      */
     ConnectionArn: ConnectionArn;
     /**
@@ -652,7 +702,7 @@ declare namespace CodeGuruReviewer {
     Owner: Owner;
   }
   export type TimeStamp = Date;
-  export type Type = "PullRequest"|string;
+  export type Type = "PullRequest"|"RepositoryAnalysis"|string;
   export type UserId = string;
   export type UserIds = UserId[];
   /**

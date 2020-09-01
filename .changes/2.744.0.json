@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeGuruReviewer",
+        "description": "Add support for repository analysis based code reviews"
+    },
+    {
+        "type": "feature",
+        "category": "SecurityHub",
+        "description": "Added a PatchSummary object for security findings. The PatchSummary object provides details about the patch compliance status of an instance."
+    }
+]

@@ -2758,6 +2758,10 @@ declare namespace SecurityHub {
      * Provides a list of vulnerabilities associated with the findings.
      */
     Vulnerabilities?: VulnerabilityList;
+    /**
+     * Provides an overview of the patch compliance status for an instance against a selected compliance standard.
+     */
+    PatchSummary?: PatchSummary;
   }
   export interface AwsSecurityFindingFilters {
     /**
@@ -4201,6 +4205,52 @@ declare namespace SecurityHub {
   }
   export type NumberFilterList = NumberFilter[];
   export type Partition = "aws"|"aws-cn"|"aws-us-gov"|string;
+  export interface PatchSummary {
+    /**
+     * The identifier of the compliance standard that was used to determine the patch compliance status.
+     */
+    Id: NonEmptyString;
+    /**
+     * The number of patches from the compliance standard that were installed successfully.
+     */
+    InstalledCount?: Integer;
+    /**
+     * The number of patches that are part of the compliance standard but are not installed. The count includes patches that failed to install.
+     */
+    MissingCount?: Integer;
+    /**
+     * The number of patches from the compliance standard that failed to install.
+     */
+    FailedCount?: Integer;
+    /**
+     * The number of installed patches that are not part of the compliance standard.
+     */
+    InstalledOtherCount?: Integer;
+    /**
+     * The number of patches that are installed but are also on a list of patches that the customer rejected.
+     */
+    InstalledRejectedCount?: Integer;
+    /**
+     * The number of patches that were installed since the last time the instance was rebooted.
+     */
+    InstalledPendingReboot?: Integer;
+    /**
+     * Indicates when the operation started. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    OperationStartTime?: NonEmptyString;
+    /**
+     * Indicates when the operation completed. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    OperationEndTime?: NonEmptyString;
+    /**
+     * The reboot option specified for the instance.
+     */
+    RebootOption?: NonEmptyString;
+    /**
+     * The type of patch operation performed. For Patch Manager, the values are SCAN and INSTALL. 
+     */
+    Operation?: NonEmptyString;
+  }
   export interface PortRange {
     /**
      * The first port in the port range.
