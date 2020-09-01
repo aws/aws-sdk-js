@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "XML",
+  "description": "Fixed an array equality bug in the Node.js XML parser"
+}
