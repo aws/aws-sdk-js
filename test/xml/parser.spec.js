@@ -36,6 +36,13 @@
           return expect(data).to.eql({});
         });
       });
+      it('returns an empty object from an empty document with attributes', function() {
+        var xml;
+        xml = '<xml xmlns="http://foo.bar.com"/>';
+        return parse(xml, rules, function(data) {
+          return expect(data).to.eql({});
+        });
+      });
       it('returns empty elements as empty string', function() {
         var xml;
         xml = '<xml><element/></xml>';
