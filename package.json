@@ -127,7 +127,7 @@
     "unit": "mocha -- $npm_package_config_test_args",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --reporter=lcovonly -- $npm_package_config_test_args",
     "browsertest": "rake browser:test && karma start",
-    "buildertest": "mocha --require coffeescript/register -s 1000 -t 10000 dist-tools/test/*.coffee",
+    "buildertest": "mocha -s 1000 -t 10000 dist-tools/test/*.js",
     "integration": "cucumber.js",
     "lint": "eslint lib test dist-tools/*.js",
     "console": "./scripts/console",
