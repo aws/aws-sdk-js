@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Devtools",
+  "description": "Removed coffeescript deps and misleading generated comments"
+}
