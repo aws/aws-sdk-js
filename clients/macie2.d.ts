@@ -675,7 +675,7 @@ declare namespace Macie2 {
   }
   export interface BucketMetadata {
     /**
-     * The unique identifier for the AWS account that's associated with the bucket.
+     * The unique identifier for the AWS account that owns the bucket.
      */
     accountId?: __string;
     /**
@@ -691,11 +691,15 @@ declare namespace Macie2 {
      */
     bucketName?: __string;
     /**
-     * The total number of objects that Amazon Macie can analyze in the bucket. These objects use a file format, file extension, or content type that Amazon Macie supports.
+     * The total number of objects that Amazon Macie can analyze in the bucket. These objects use a supported file or storage format and storage class.
      */
     classifiableObjectCount?: __long;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when Amazon Macie last analyzed the bucket.
+     * The total storage size, in bytes, of the objects that Amazon Macie can analyze in the bucket. These objects use a supported file or storage format and storage class.
+     */
+    classifiableSizeInBytes?: __long;
+    /**
+     * The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently retrieved data about the bucket from Amazon S3.
      */
     lastUpdated?: __timestampIso8601;
     /**
@@ -719,7 +723,7 @@ declare namespace Macie2 {
      */
     replicationDetails?: ReplicationDetails;
     /**
-     * Specifies whether the bucket is shared with another AWS account. Valid values are: EXTERNAL - The bucket is shared with an AWS account that isn’t part of the same Amazon Macie organization. INTERNAL - The bucket is shared with an AWS account that's part of the same Amazon Macie organization. NOT_SHARED - The bucket isn't shared with other AWS accounts.
+     *  Specifies whether the bucket is shared with another AWS account. Possible values are: EXTERNAL - The bucket is shared with an AWS account that isn’t part of the same Amazon Macie organization. INTERNAL - The bucket is shared with an AWS account that's part of the same Amazon Macie organization. NOT_SHARED - The bucket isn't shared with other AWS accounts. UNKNOWN - Amazon Macie wasn't able to evaluate the shared access settings for the bucket.
      */
     sharedAccess?: SharedAccess;
     /**
@@ -734,6 +738,14 @@ declare namespace Macie2 {
      * An array that specifies the tags (keys and values) that are associated with the bucket.
      */
     tags?: __listOfKeyValuePair;
+    /**
+     * The total number of objects that Amazon Macie can't analyze in the bucket. These objects use an unsupported file or storage format or storage class.
+     */
+    unclassifiableObjectCount?: ObjectLevelStatistics;
+    /**
+     * The total storage size, in bytes, of the objects that Amazon Macie can't analyze in the bucket. These objects use an unsupported file or storage format or storage class.
+     */
+    unclassifiableObjectSizeInBytes?: ObjectLevelStatistics;
     /**
      * Specifies whether versioning is enabled for the bucket.
      */
@@ -761,7 +773,7 @@ declare namespace Macie2 {
   }
   export interface BucketPublicAccess {
     /**
-     * Specifies whether the bucket is publicly accessible due to the combination of permissions settings that apply to the bucket. Possible values are: PUBLIC, the bucket is publicly accessible; and, NOT_PUBLIC, the bucket isn't publicly accessible.
+     *  Specifies whether the bucket is publicly accessible due to the combination of permissions settings that apply to the bucket. Possible values are: NOT_PUBLIC - The bucket isn't publicly accessible. PUBLIC - The bucket is publicly accessible. UNKNOWN - Amazon Macie can't determine whether the bucket is publicly accessible.
      */
     effectivePermission?: EffectivePermission;
     /**
@@ -771,7 +783,7 @@ declare namespace Macie2 {
   }
   export interface BucketSortCriteria {
     /**
-     * The name of the attribute to sort the results by. This value can be the name of any property that Amazon Macie defines as bucket metadata, such as bucketName, accountId, or lastUpdated.
+     * The name of the attribute to sort the results by. This value can be the name of any property that Amazon Macie defines as bucket metadata, such as bucketName or accountId.
      */
     attributeName?: __string;
     /**
@@ -781,7 +793,7 @@ declare namespace Macie2 {
   }
   export interface ClassificationDetails {
     /**
-     * The Amazon Resource Name (ARN) of the file that contains the detailed record, including offsets, for the finding.
+     * The path to the folder or file (in Amazon S3) that contains the corresponding sensitive data discovery results for the finding. If a finding applies to a large archive or compressed file, this is a path to a folder. Otherwise, this is a path to a file.
      */
     detailedResultsLocation?: __string;
     /**
@@ -793,7 +805,7 @@ declare namespace Macie2 {
      */
     jobId?: __string;
     /**
-     * The status and detailed results of the finding.
+     * The status and other details for the finding.
      */
     result?: ClassificationResult;
   }
@@ -827,7 +839,7 @@ declare namespace Macie2 {
   }
   export interface ClassificationResultStatus {
     /**
-     * The status of the finding, such as COMPLETE.
+     *  The status of the finding. Possible values are: COMPLETE - Amazon Macie successfully completed its analysis of the object that the finding applies to. PARTIAL - Macie was able to analyze only a subset of the data in the object that the finding applies to. For example, the object is a compressed or archive file that contains files in an unsupported format. SKIPPED - Macie wasn't able to analyze the object that the finding applies to. For example, the object is a malformed file or a file that's in an unsupported format.
      */
     code?: __string;
     /**
@@ -849,7 +861,7 @@ declare namespace Macie2 {
      */
     description?: __string;
     /**
-     * Specifies whether to run the job immediately, after it's created.
+     * Specifies whether to analyze all existing, eligible objects immediately after the job is created.
      */
     initialRun?: __boolean;
     /**
@@ -1200,7 +1212,7 @@ declare namespace Macie2 {
      */
     description?: __string;
     /**
-     * Specifies whether the job has run for the first time.
+     * Specifies whether the job is configured to analyze all existing, eligible objects immediately after it's created.
      */
     initialRun?: __boolean;
     /**
@@ -1212,7 +1224,7 @@ declare namespace Macie2 {
      */
     jobId?: __string;
     /**
-     * The current status of the job. Possible values are: CANCELLED - The job was cancelled by you or a user of the master account for your organization. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job's access to the bucket. COMPLETE - Amazon Macie finished processing all the data specified for the job. IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to jobs that occur only once. PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account. RUNNING - The job is in progress.
+     * The current status of the job. Possible values are: CANCELLED - You cancelled the job. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job's access to the bucket. COMPLETE - Amazon Macie finished processing all the data specified for the job. IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to jobs that occur only once. PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account. RUNNING - The job is in progress.
      */
     jobStatus?: JobStatus;
     /**
@@ -1232,7 +1244,7 @@ declare namespace Macie2 {
      */
     s3JobDefinition?: S3JobDefinition;
     /**
-     * The sampling depth, as a percentage, that determines the number of objects that the job processes.
+     * The sampling depth, as a percentage, that determines the percentage of eligible objects that the job analyzes.
      */
     samplingPercentage?: __integer;
     /**
@@ -1290,7 +1302,7 @@ declare namespace Macie2 {
      */
     domainName?: __string;
   }
-  export type EffectivePermission = "PUBLIC"|"NOT_PUBLIC"|string;
+  export type EffectivePermission = "PUBLIC"|"NOT_PUBLIC"|"UNKNOWN"|string;
   export interface EnableMacieRequest {
     /**
      * A unique, case-sensitive token that you provide to ensure the idempotency of the request.
@@ -1501,7 +1513,7 @@ declare namespace Macie2 {
      */
     bucketCountByEffectivePermission?: BucketCountByEffectivePermission;
     /**
-     * The total number of buckets, grouped by server-side encryption type. This object also reports the total number of buckets that aren't encrypted.
+     * The total number of buckets, grouped by server-side encryption type. This object also reports the total number of buckets that don't encrypt objects by default.
      */
     bucketCountByEncryptionType?: BucketCountByEncryptionType;
     /**
@@ -1509,25 +1521,37 @@ declare namespace Macie2 {
      */
     bucketCountBySharedAccessType?: BucketCountBySharedAccessType;
     /**
-     * The total number of objects that Amazon Macie can analyze in all the buckets. These objects use a file format, file extension, or content type that Amazon Macie supports.
+     * The total number of objects that Amazon Macie can analyze in the buckets. These objects use a supported file or storage format and storage class.
      */
     classifiableObjectCount?: __long;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when Amazon Macie last analyzed the buckets.
+     * The total storage size, in bytes, of all the objects that Amazon Macie can analyze in the buckets. These objects use a supported file or storage format and storage class.
+     */
+    classifiableSizeInBytes?: __long;
+    /**
+     * The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently retrieved data about the buckets from Amazon S3.
      */
     lastUpdated?: __timestampIso8601;
     /**
-     * The total number of objects in all the buckets.
+     * The total number of objects in the buckets.
      */
     objectCount?: __long;
     /**
-     * The total storage size, in bytes, of all the buckets.
+     * The total storage size, in bytes, of the buckets.
      */
     sizeInBytes?: __long;
     /**
-     * The total compressed storage size, in bytes, of all the buckets.
+     * The total compressed storage size, in bytes, of the buckets.
      */
     sizeInBytesCompressed?: __long;
+    /**
+     * The total number of objects that Amazon Macie can't analyze in the buckets. These objects use an unsupported file or storage format or storage class.
+     */
+    unclassifiableObjectCount?: ObjectLevelStatistics;
+    /**
+     * The total storage size, in bytes, of all the objects that Amazon Macie can't analyze in the buckets. These objects use an unsupported file or storage format or storage class.
+     */
+    unclassifiableObjectSizeInBytes?: ObjectLevelStatistics;
   }
   export interface GetClassificationExportConfigurationRequest {
   }
@@ -1919,7 +1943,7 @@ declare namespace Macie2 {
      */
     simpleScopeTerm?: SimpleScopeTerm;
     /**
-     *  A tag-based condition that defines an operator and a tag key and value for including or excluding an object from the job.
+     * A tag-based condition that defines the operator and a tag key or tag keys and values for including or excluding an object from the job.
      */
     tagScopeTerm?: TagScopeTerm;
   }
@@ -1944,7 +1968,7 @@ declare namespace Macie2 {
      */
     jobId?: __string;
     /**
-     * The current status of the job. Possible values are: CANCELLED - The job was cancelled by you or a user of the master account for your organization. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job's access to the bucket. COMPLETE - Amazon Macie finished processing all the data specified for the job. IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to jobs that occur only once. PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account. RUNNING - The job is in progress.
+     * The current status of the job. Possible values are: CANCELLED - You cancelled the job. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job's access to the bucket. COMPLETE - Amazon Macie finished processing all the data specified for the job. IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to jobs that occur only once. PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account. RUNNING - The job is in progress.
      */
     jobStatus?: JobStatus;
     /**
@@ -2236,6 +2260,20 @@ declare namespace Macie2 {
      */
     unencrypted?: __long;
   }
+  export interface ObjectLevelStatistics {
+    /**
+     * The total storage size (in bytes) or number of objects that Amazon Macie can't analyze because the objects use an unsupported file or storage format.
+     */
+    fileType?: __long;
+    /**
+     * The total storage size (in bytes) or number of objects that Amazon Macie can't analyze because the objects use an unsupported storage class.
+     */
+    storageClass?: __long;
+    /**
+     * The total storage size (in bytes) or number of objects that Amazon Macie can't analyze because the objects use an unsupported file or storage format or storage class.
+     */
+    total?: __long;
+  }
   export type OrderBy = "ASC"|"DESC"|string;
   export interface PolicyDetails {
     /**
@@ -2266,7 +2304,7 @@ declare namespace Macie2 {
      */
     replicated?: __boolean;
     /**
-     * Specifies whether the bucket is configured to replicate one or more objects to an AWS account that isn't part of the Amazon Macie organization.
+     * Specifies whether the bucket is configured to replicate one or more objects to an AWS account that isn't part of the same Amazon Macie organization.
      */
     replicatedExternally?: __boolean;
     /**
@@ -2368,7 +2406,7 @@ declare namespace Macie2 {
      */
     eTag?: __string;
     /**
-     * The file extension of the object. If the object doesn't have a file extension, this value is "".
+     * The file name extension of the object. If the object doesn't have a file name extension, this value is "".
      */
     extension?: __string;
     /**
@@ -2441,7 +2479,7 @@ declare namespace Macie2 {
      */
     encryptionType?: EncryptionType;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) master key that's used to encrypt the bucket or object. This value is null if KMS isn't used to encrypt the bucket or object.
+     * The unique identifier for the AWS Key Management Service (AWS KMS) master key that's used to encrypt the bucket or object. This value is null if AWS KMS isn't used to encrypt the bucket or object.
      */
     kmsMasterKeyId?: __string;
   }
@@ -2512,7 +2550,7 @@ declare namespace Macie2 {
     score?: __long;
   }
   export type SeverityDescription = "Low"|"Medium"|"High"|string;
-  export type SharedAccess = "EXTERNAL"|"INTERNAL"|"NOT_SHARED"|string;
+  export type SharedAccess = "EXTERNAL"|"INTERNAL"|"NOT_SHARED"|"UNKNOWN"|string;
   export interface SimpleScopeTerm {
     /**
      * The operator to use in the condition.

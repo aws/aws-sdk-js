@@ -11592,7 +11592,7 @@ declare namespace EC2 {
      */
     TransitGatewayAttachmentIds?: TransitGatewayAttachmentIdStringList;
     /**
-     * One or more filters. The possible values are:    association.state - The state of the association (associating | associated | disassociating).    association.transit-gateway-route-table-id - The ID of the route table for the transit gateway.    resource-id - The ID of the resource.    resource-owner-id - The ID of the AWS account that owns the resource.    resource-type - The resource type (vpc | vpn | direct-connect-gateway | tgw-peering).    state - The state of the attachment (available | deleted | deleting | failed | modifying | pendingAcceptance | pending | rollingBack | rejected | rejecting).    transit-gateway-attachment-id - The ID of the attachment.    transit-gateway-id - The ID of the transit gateway.    transit-gateway-owner-id - The ID of the AWS account that owns the transit gateway.  
+     * One or more filters. The possible values are:    association.state - The state of the association (associating | associated | disassociating).    association.transit-gateway-route-table-id - The ID of the route table for the transit gateway.    resource-id - The ID of the resource.    resource-owner-id - The ID of the AWS account that owns the resource.    resource-type - The resource type. Valid values are vpc | vpn | direct-connect-gateway | peering.    state - The state of the attachment. Valid values are available | deleted | deleting | failed | failing | initiatingRequest | modifying | pendingAcceptance | pending | rollingBack | rejected | rejecting.    transit-gateway-attachment-id - The ID of the attachment.    transit-gateway-id - The ID of the transit gateway.    transit-gateway-owner-id - The ID of the AWS account that owns the transit gateway.  
      */
     Filters?: FilterList;
     /**
@@ -11656,7 +11656,7 @@ declare namespace EC2 {
      */
     TransitGatewayAttachmentIds?: TransitGatewayAttachmentIdStringList;
     /**
-     * One or more filters. The possible values are:    transit-gateway-attachment-id - The ID of the transit gateway attachment.    local-owner-id - The ID of your AWS account.    remote-owner-id - The ID of the AWS account in the remote Region that owns the transit gateway.    state - The state of the peering attachment (available | deleted | deleting | failed | modifying | pendingAcceptance | pending | rollingBack | rejected | rejecting).    transit-gateway-id - The ID of the transit gateway.  
+     * One or more filters. The possible values are:    transit-gateway-attachment-id - The ID of the transit gateway attachment.    local-owner-id - The ID of your AWS account.    remote-owner-id - The ID of the AWS account in the remote Region that owns the transit gateway.    state - The state of the peering attachment. Valid values are available | deleted | deleting | failed | failing | initiatingRequest | modifying | pendingAcceptance | pending | rollingBack | rejected | rejecting).    transit-gateway-id - The ID of the transit gateway.  
      */
     Filters?: FilterList;
     /**
@@ -11688,7 +11688,7 @@ declare namespace EC2 {
      */
     TransitGatewayRouteTableIds?: TransitGatewayRouteTableIdStringList;
     /**
-     * One or more filters. The possible values are:    default-association-route-table - Indicates whether this is the default association route table for the transit gateway (true | false).    default-propagation-route-table - Indicates whether this is the default propagation route table for the transit gateway (true | false).    state - The state of the attachment (available | deleted | deleting | failed | modifying | pendingAcceptance | pending | rollingBack | rejected | rejecting).    transit-gateway-id - The ID of the transit gateway.    transit-gateway-route-table-id - The ID of the transit gateway route table.  
+     * One or more filters. The possible values are:    default-association-route-table - Indicates whether this is the default association route table for the transit gateway (true | false).    default-propagation-route-table - Indicates whether this is the default propagation route table for the transit gateway (true | false).    state - The state of the route table (available | deleting | deleted | pending).    transit-gateway-id - The ID of the transit gateway.    transit-gateway-route-table-id - The ID of the transit gateway route table.  
      */
     Filters?: FilterList;
     /**
@@ -11720,7 +11720,7 @@ declare namespace EC2 {
      */
     TransitGatewayAttachmentIds?: TransitGatewayAttachmentIdStringList;
     /**
-     * One or more filters. The possible values are:    state - The state of the attachment (available | deleted | deleting | failed | modifying | pendingAcceptance | pending | rollingBack | rejected | rejecting).    transit-gateway-attachment-id - The ID of the attachment.    transit-gateway-id - The ID of the transit gateway.    vpc-id - The ID of the VPC.  
+     * One or more filters. The possible values are:    state - The state of the attachment. Valid values are available | deleted | deleting | failed | failing | initiatingRequest | modifying | pendingAcceptance | pending | rollingBack | rejected | rejecting.    transit-gateway-attachment-id - The ID of the attachment.    transit-gateway-id - The ID of the transit gateway.    vpc-id - The ID of the VPC.  
      */
     Filters?: FilterList;
     /**
@@ -11752,7 +11752,7 @@ declare namespace EC2 {
      */
     TransitGatewayIds?: TransitGatewayIdStringList;
     /**
-     * One or more filters. The possible values are:    options.propagation-default-route-table-id - The ID of the default propagation route table.    options.amazon-side-asn - The private ASN for the Amazon side of a BGP session.    options.association-default-route-table-id - The ID of the default association route table.    options.auto-accept-shared-attachments - Indicates whether there is automatic acceptance of attachment requests (enable | disable).    options.default-route-table-association - Indicates whether resource attachments are automatically associated with the default association route table (enable | disable).    options.default-route-table-propagation - Indicates whether resource attachments automatically propagate routes to the default propagation route table (enable | disable).    options.dns-support - Indicates whether DNS support is enabled (enable | disable).    options.vpn-ecmp-support - Indicates whether Equal Cost Multipath Protocol support is enabled (enable | disable).    owner-id - The ID of the AWS account that owns the transit gateway.    state - The state of the attachment (available | deleted | deleting | failed | modifying | pendingAcceptance | pending | rollingBack | rejected | rejecting).    transit-gateway-id - The ID of the transit gateway.  
+     * One or more filters. The possible values are:    options.propagation-default-route-table-id - The ID of the default propagation route table.    options.amazon-side-asn - The private ASN for the Amazon side of a BGP session.    options.association-default-route-table-id - The ID of the default association route table.    options.auto-accept-shared-attachments - Indicates whether there is automatic acceptance of attachment requests (enable | disable).    options.default-route-table-association - Indicates whether resource attachments are automatically associated with the default association route table (enable | disable).    options.default-route-table-propagation - Indicates whether resource attachments automatically propagate routes to the default propagation route table (enable | disable).    options.dns-support - Indicates whether DNS support is enabled (enable | disable).    options.vpn-ecmp-support - Indicates whether Equal Cost Multipath Protocol support is enabled (enable | disable).    owner-id - The ID of the AWS account that owns the transit gateway.    state - The state of the transit gateway (available | deleted | deleting | modifying | pending).    transit-gateway-id - The ID of the transit gateway.  
      */
     Filters?: FilterList;
     /**
@@ -13507,7 +13507,7 @@ declare namespace EC2 {
      */
     TransitGatewayRouteTableId: TransitGatewayRouteTableId;
     /**
-     * One or more filters. The possible values are:    attachment.transit-gateway-attachment-id - The id of the transit gateway attachment.    attachment.resource-id - The resource id of the transit gateway attachment.    route-search.exact-match - The exact match of the specified filter.    route-search.longest-prefix-match - The longest prefix that matches the route.    route-search.subnet-of-match - The routes with a subnet that match the specified CIDR filter.    route-search.supernet-of-match - The routes with a CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.    state - The state of the attachment (available | deleted | deleting | failed | modifying | pendingAcceptance | pending | rollingBack | rejected | rejecting).    transit-gateway-route-destination-cidr-block - The CIDR range.    type - The type of route (active | blackhole).  
+     * One or more filters. The possible values are:    attachment.transit-gateway-attachment-id - The id of the transit gateway attachment.    attachment.resource-id - The resource id of the transit gateway attachment.    route-search.exact-match - The exact match of the specified filter.    route-search.longest-prefix-match - The longest prefix that matches the route.    route-search.subnet-of-match - The routes with a subnet that match the specified CIDR filter.    route-search.supernet-of-match - The routes with a CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.    state - The state of the route (active | blackhole).    transit-gateway-route-destination-cidr-block - The CIDR range.    type - The type of route (propagated | static).  
      */
     Filters?: FilterList;
     /**
@@ -14454,7 +14454,7 @@ declare namespace EC2 {
      */
     TransitGatewayRouteTableId: TransitGatewayRouteTableId;
     /**
-     * One or more filters. The possible values are:    attachment.resource-id - The ID of the resource for the attachment.    attachment.resource-type - The type of resource for the attachment (vpc | vpn | direct-connect-gateway | tgw-peering).    attachment.transit-gateway-attachment-id - The ID of the attachment.    is-blackhole - Whether traffic matching the route is blocked (true | false).    prefix-list-id - The ID of the prefix list.    prefix-list-owner-id - The ID of the owner of the prefix list.    state - The state of the prefix list reference (pending | available | modifying | deleting).  
+     * One or more filters. The possible values are:    attachment.resource-id - The ID of the resource for the attachment.    attachment.resource-type - The type of resource for the attachment. Valid values are vpc | vpn | direct-connect-gateway | peering.    attachment.transit-gateway-attachment-id - The ID of the attachment.    is-blackhole - Whether traffic matching the route is blocked (true | false).    prefix-list-id - The ID of the prefix list.    prefix-list-owner-id - The ID of the owner of the prefix list.    state - The state of the prefix list reference (pending | available | modifying | deleting).  
      */
     Filters?: FilterList;
     /**
@@ -14486,7 +14486,7 @@ declare namespace EC2 {
      */
     TransitGatewayRouteTableId: TransitGatewayRouteTableId;
     /**
-     * One or more filters. The possible values are:    resource-id - The ID of the resource.    resource-type - The resource type (vpc | vpn | direct-connect-gateway | tgw-peering).    transit-gateway-attachment-id - The ID of the attachment.  
+     * One or more filters. The possible values are:    resource-id - The ID of the resource.    resource-type - The resource type. Valid values are vpc | vpn | direct-connect-gateway | peering.    transit-gateway-attachment-id - The ID of the attachment.  
      */
     Filters?: FilterList;
     /**
@@ -14518,7 +14518,7 @@ declare namespace EC2 {
      */
     TransitGatewayRouteTableId: TransitGatewayRouteTableId;
     /**
-     * One or more filters. The possible values are:    resource-id - The ID of the resource.    resource-type - The resource type (vpc | vpn | direct-connect-gateway | tgw-peering).    transit-gateway-attachment-id - The ID of the attachment.  
+     * One or more filters. The possible values are:    resource-id - The ID of the resource.    resource-type - The resource type. Valid values are vpc | vpn | direct-connect-gateway | peering.    transit-gateway-attachment-id - The ID of the attachment.  
      */
     Filters?: FilterList;
     /**
@@ -22540,7 +22540,7 @@ declare namespace EC2 {
      */
     TransitGatewayRouteTableId: TransitGatewayRouteTableId;
     /**
-     * One or more filters. The possible values are:    attachment.transit-gateway-attachment-id- The id of the transit gateway attachment.    attachment.resource-id - The resource id of the transit gateway attachment.    attachment.resource-type - The attachment resource type (vpc | vpn | direct-connect-gateway | tgw-peering).    prefix-list-id - The ID of the prefix list.    route-search.exact-match - The exact match of the specified filter.    route-search.longest-prefix-match - The longest prefix that matches the route.    route-search.subnet-of-match - The routes with a subnet that match the specified CIDR filter.    route-search.supernet-of-match - The routes with a CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.    state - The state of the route (active | blackhole).    type - The type of route (propagated | static).  
+     * One or more filters. The possible values are:    attachment.transit-gateway-attachment-id- The id of the transit gateway attachment.    attachment.resource-id - The resource id of the transit gateway attachment.    attachment.resource-type - The attachment resource type. Valid values are vpc | vpn | direct-connect-gateway | peering.    prefix-list-id - The ID of the prefix list.    route-search.exact-match - The exact match of the specified filter.    route-search.longest-prefix-match - The longest prefix that matches the route.    route-search.subnet-of-match - The routes with a subnet that match the specified CIDR filter.    route-search.supernet-of-match - The routes with a CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.    state - The state of the route (active | blackhole).    type - The type of route (propagated | static).  
      */
     Filters: FilterList;
     /**
@@ -24170,7 +24170,7 @@ declare namespace EC2 {
      */
     ResourceId?: String;
     /**
-     * The resource type.
+     * The resource type. Note that the tgw-peering resource type has been deprecated.
      */
     ResourceType?: TransitGatewayAttachmentResourceType;
     /**
@@ -24197,7 +24197,7 @@ declare namespace EC2 {
      */
     ResourceOwnerId?: String;
     /**
-     * The resource type.
+     * The resource type. Note that the tgw-peering resource type has been deprecated.
      */
     ResourceType?: TransitGatewayAttachmentResourceType;
     /**
@@ -24205,7 +24205,7 @@ declare namespace EC2 {
      */
     ResourceId?: String;
     /**
-     * The attachment state.
+     * The attachment state. Note that the initiating state has been deprecated.
      */
     State?: TransitGatewayAttachmentState;
     /**
@@ -24245,8 +24245,8 @@ declare namespace EC2 {
     State?: TransitGatewayPropagationState;
   }
   export type TransitGatewayAttachmentPropagationList = TransitGatewayAttachmentPropagation[];
-  export type TransitGatewayAttachmentResourceType = "vpc"|"vpn"|"direct-connect-gateway"|"tgw-peering"|string;
-  export type TransitGatewayAttachmentState = "initiating"|"pendingAcceptance"|"rollingBack"|"pending"|"available"|"modifying"|"deleting"|"deleted"|"failed"|"rejected"|"rejecting"|"failing"|string;
+  export type TransitGatewayAttachmentResourceType = "vpc"|"vpn"|"direct-connect-gateway"|"peering"|"tgw-peering"|string;
+  export type TransitGatewayAttachmentState = "initiating"|"initiatingRequest"|"pendingAcceptance"|"rollingBack"|"pending"|"available"|"modifying"|"deleting"|"deleted"|"failed"|"rejected"|"rejecting"|"failing"|string;
   export type TransitGatewayId = string;
   export type TransitGatewayIdStringList = TransitGatewayId[];
   export type TransitGatewayList = TransitGateway[];
@@ -24475,7 +24475,7 @@ declare namespace EC2 {
      */
     Status?: PeeringAttachmentStatus;
     /**
-     * The state of the transit gateway peering attachment.
+     * The state of the transit gateway peering attachment. Note that the initiating state has been deprecated.
      */
     State?: TransitGatewayAttachmentState;
     /**
@@ -24494,7 +24494,7 @@ declare namespace EC2 {
      */
     TransitGatewayAttachmentId?: TransitGatewayAttachmentId;
     /**
-     * The resource type.
+     * The resource type. Note that the tgw-peering resource type has been deprecated.
      */
     ResourceType?: TransitGatewayAttachmentResourceType;
     /**
@@ -24540,7 +24540,7 @@ declare namespace EC2 {
      */
     ResourceId?: String;
     /**
-     * The resource type.
+     * The resource type. Note that the tgw-peering resource type has been deprecated.
      */
     ResourceType?: TransitGatewayAttachmentResourceType;
     /**
@@ -24615,7 +24615,7 @@ declare namespace EC2 {
      */
     TransitGatewayAttachmentId?: String;
     /**
-     * The resource type.
+     * The resource type. Note that the tgw-peering resource type has been deprecated. 
      */
     ResourceType?: TransitGatewayAttachmentResourceType;
   }
@@ -24662,7 +24662,7 @@ declare namespace EC2 {
      */
     ResourceId?: String;
     /**
-     * The resource type.
+     * The resource type. Note that the tgw-peering resource type has been deprecated.
      */
     ResourceType?: TransitGatewayAttachmentResourceType;
     /**
@@ -24684,7 +24684,7 @@ declare namespace EC2 {
      */
     ResourceId?: String;
     /**
-     * The type of resource.
+     * The type of resource. Note that the tgw-peering resource type has been deprecated.
      */
     ResourceType?: TransitGatewayAttachmentResourceType;
     /**
@@ -24715,7 +24715,7 @@ declare namespace EC2 {
      */
     VpcOwnerId?: String;
     /**
-     * The state of the VPC attachment.
+     * The state of the VPC attachment. Note that the initiating state has been deprecated.
      */
     State?: TransitGatewayAttachmentState;
     /**

@@ -2669,7 +2669,7 @@
           "documentation": "<p>The permissions settings of the bucket policy for the bucket. This value is null if a bucket policy hasn't been defined for the bucket.</p>"
         }
       },
-      "documentation": "<p>Provides information about bucket-level permissions settings for an S3 bucket.</p>"
+      "documentation": "<p>Provides information about the bucket-level permissions settings for an S3 bucket.</p>"
     },
     "BucketMetadata": {
       "type": "structure",
@@ -2677,7 +2677,7 @@
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>The unique identifier for the AWS account that's associated with the bucket.</p>"
+          "documentation": "<p>The unique identifier for the AWS account that owns the bucket.</p>"
         },
         "bucketArn": {
           "shape": "__string",
@@ -2697,12 +2697,17 @@
         "classifiableObjectCount": {
           "shape": "__long",
           "locationName": "classifiableObjectCount",
-          "documentation": "<p>The total number of objects that Amazon Macie can analyze in the bucket. These objects use a file format, file extension, or content type that Amazon Macie supports.</p>"
+          "documentation": "<p>The total number of objects that Amazon Macie can analyze in the bucket. These objects use a supported file or storage format and storage class.</p>"
+        },
+        "classifiableSizeInBytes": {
+          "shape": "__long",
+          "locationName": "classifiableSizeInBytes",
+          "documentation": "<p>The total storage size, in bytes, of the objects that Amazon Macie can analyze in the bucket. These objects use a supported file or storage format and storage class.</p>"
         },
         "lastUpdated": {
           "shape": "__timestampIso8601",
           "locationName": "lastUpdated",
-          "documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when Amazon Macie last analyzed the bucket.</p>"
+          "documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently retrieved data about the bucket from Amazon S3.</p>"
         },
         "objectCount": {
           "shape": "__long",
@@ -2732,7 +2737,7 @@
         "sharedAccess": {
           "shape": "SharedAccess",
           "locationName": "sharedAccess",
-          "documentation": "<p>Specifies whether the bucket is shared with another AWS account. Valid values are:</p> <ul><li><p>EXTERNAL - The bucket is shared with an AWS account that isn’t part of the same Amazon Macie organization.</p></li> <li><p>INTERNAL - The bucket is shared with an AWS account that's part of the same Amazon Macie organization.</p></li> <li><p>NOT_SHARED - The bucket isn't shared with other AWS accounts.</p></li></ul>"
+          "documentation": " <p>Specifies whether the bucket is shared with another AWS account. Possible values are:</p> <ul><li><p>EXTERNAL - The bucket is shared with an AWS account that isn’t part of the same Amazon Macie organization.</p></li> <li><p>INTERNAL - The bucket is shared with an AWS account that's part of the same Amazon Macie organization.</p></li> <li><p>NOT_SHARED - The bucket isn't shared with other AWS accounts.</p></li> <li><p>UNKNOWN - Amazon Macie wasn't able to evaluate the shared access settings for the bucket.</p></li></ul>"
         },
         "sizeInBytes": {
           "shape": "__long",
@@ -2748,6 +2753,16 @@
           "shape": "__listOfKeyValuePair",
           "locationName": "tags",
           "documentation": "<p>An array that specifies the tags (keys and values) that are associated with the bucket.</p>"
+        },
+        "unclassifiableObjectCount": {
+          "shape": "ObjectLevelStatistics",
+          "locationName": "unclassifiableObjectCount",
+          "documentation": "<p>The total number of objects that Amazon Macie can't analyze in the bucket. These objects use an unsupported file or storage format or storage class.</p>"
+        },
+        "unclassifiableObjectSizeInBytes": {
+          "shape": "ObjectLevelStatistics",
+          "locationName": "unclassifiableObjectSizeInBytes",
+          "documentation": "<p>The total storage size, in bytes, of the objects that Amazon Macie can't analyze in the bucket. These objects use an unsupported file or storage format or storage class.</p>"
         },
         "versioning": {
           "shape": "__boolean",
@@ -2771,7 +2786,7 @@
           "documentation": "<p>The bucket-level permissions settings for the bucket.</p>"
         }
       },
-      "documentation": "<p>The account-level and bucket-level permissions settings for an S3 bucket.</p>"
+      "documentation": "<p>Provides information about the account-level and bucket-level permissions settings for an S3 bucket.</p>"
     },
     "BucketPolicy": {
       "type": "structure",
@@ -2795,7 +2810,7 @@
         "effectivePermission": {
           "shape": "EffectivePermission",
           "locationName": "effectivePermission",
-          "documentation": "<p>Specifies whether the bucket is publicly accessible due to the combination of permissions settings that apply to the bucket. Possible values are: PUBLIC, the bucket is publicly accessible; and, NOT_PUBLIC, the bucket isn't publicly accessible.</p>"
+          "documentation": " <p>Specifies whether the bucket is publicly accessible due to the combination of permissions settings that apply to the bucket. Possible values are:</p> <ul><li><p>NOT_PUBLIC - The bucket isn't publicly accessible.</p></li> <li><p>PUBLIC - The bucket is publicly accessible.</p></li> <li><p>UNKNOWN - Amazon Macie can't determine whether the bucket is publicly accessible.</p></li></ul>"
         },
         "permissionConfiguration": {
           "shape": "BucketPermissionConfiguration",
@@ -2803,7 +2818,7 @@
           "documentation": "<p>The account-level and bucket-level permissions for the bucket.</p>"
         }
       },
-      "documentation": "<p>Provides information about permissions settings that determine whether an S3 bucket is publicly accessible.</p>"
+      "documentation": "<p>Provides information about the permissions settings that determine whether an S3 bucket is publicly accessible.</p>"
     },
     "BucketSortCriteria": {
       "type": "structure",
@@ -2811,7 +2826,7 @@
         "attributeName": {
           "shape": "__string",
           "locationName": "attributeName",
-          "documentation": "<p>The name of the attribute to sort the results by. This value can be the name of any property that Amazon Macie defines as bucket metadata, such as bucketName, accountId, or lastUpdated.</p>"
+          "documentation": "<p>The name of the attribute to sort the results by. This value can be the name of any property that Amazon Macie defines as bucket metadata, such as bucketName or accountId.</p>"
         },
         "orderBy": {
           "shape": "OrderBy",
@@ -2827,7 +2842,7 @@
         "detailedResultsLocation": {
           "shape": "__string",
           "locationName": "detailedResultsLocation",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the file that contains the detailed record, including offsets, for the finding.</p>"
+          "documentation": "<p>The path to the folder or file (in Amazon S3) that contains the corresponding sensitive data discovery results for the finding. If a finding applies to a large archive or compressed file, this is a path to a folder. Otherwise, this is a path to a file.</p>"
         },
         "jobArn": {
           "shape": "__string",
@@ -2842,7 +2857,7 @@
         "result": {
           "shape": "ClassificationResult",
           "locationName": "result",
-          "documentation": "<p>The status and detailed results of the finding.</p>"
+          "documentation": "<p>The status and other details for the finding.</p>"
         }
       },
       "documentation": "<p>Provides information about a sensitive data finding, including the classification job that produced the finding.</p>"
@@ -2895,7 +2910,7 @@
         "code": {
           "shape": "__string",
           "locationName": "code",
-          "documentation": "<p>The status of the finding, such as COMPLETE.</p>"
+          "documentation": " <p>The status of the finding. Possible values are:</p> <ul><li><p>COMPLETE - Amazon Macie successfully completed its analysis of the object that the finding applies to.</p></li> <li><p>PARTIAL - Macie was able to analyze only a subset of the data in the object that the finding applies to. For example, the object is a compressed or archive file that contains files in an unsupported format.</p></li> <li><p>SKIPPED - Macie wasn't able to analyze the object that the finding applies to. For example, the object is a malformed file or a file that's in an unsupported format.</p></li></ul>"
         },
         "reason": {
           "shape": "__string",
@@ -2927,7 +2942,7 @@
         "initialRun": {
           "shape": "__boolean",
           "locationName": "initialRun",
-          "documentation": "<p>Specifies whether to run the job immediately, after it's created.</p>"
+          "documentation": "<p>Specifies whether to analyze all existing, eligible objects immediately after the job is created.</p>"
         },
         "jobType": {
           "shape": "JobType",
@@ -3523,7 +3538,7 @@
         "initialRun": {
           "shape": "__boolean",
           "locationName": "initialRun",
-          "documentation": "<p>Specifies whether the job has run for the first time.</p>"
+          "documentation": "<p>Specifies whether the job is configured to analyze all existing, eligible objects immediately after it's created.</p>"
         },
         "jobArn": {
           "shape": "__string",
@@ -3538,7 +3553,7 @@
         "jobStatus": {
           "shape": "JobStatus",
           "locationName": "jobStatus",
-          "documentation": "<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - The job was cancelled by you or a user of the master account for your organization. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job's access to the bucket.</p></li> <li><p>COMPLETE - Amazon Macie finished processing all the data specified for the job.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to jobs that occur only once.</p></li> <li><p>PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account.</p></li> <li><p>RUNNING - The job is in progress.</p></li></ul>"
+          "documentation": "<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job's access to the bucket.</p></li> <li><p>COMPLETE - Amazon Macie finished processing all the data specified for the job.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to jobs that occur only once.</p></li> <li><p>PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account.</p></li> <li><p>RUNNING - The job is in progress.</p></li></ul>"
         },
         "jobType": {
           "shape": "JobType",
@@ -3563,7 +3578,7 @@
         "samplingPercentage": {
           "shape": "__integer",
           "locationName": "samplingPercentage",
-          "documentation": "<p>The sampling depth, as a percentage, that determines the number of objects that the job processes.</p>"
+          "documentation": "<p>The sampling depth, as a percentage, that determines the percentage of eligible objects that the job analyzes.</p>"
         },
         "scheduleFrequency": {
           "shape": "JobScheduleFrequency",
@@ -3668,7 +3683,8 @@
       "type": "string",
       "enum": [
         "PUBLIC",
-        "NOT_PUBLIC"
+        "NOT_PUBLIC",
+        "UNKNOWN"
       ]
     },
     "EnableMacieRequest": {
@@ -4041,7 +4057,7 @@
         "bucketCountByEncryptionType": {
           "shape": "BucketCountByEncryptionType",
           "locationName": "bucketCountByEncryptionType",
-          "documentation": "<p>The total number of buckets, grouped by server-side encryption type. This object also reports the total number of buckets that aren't encrypted.</p>"
+          "documentation": "<p>The total number of buckets, grouped by server-side encryption type. This object also reports the total number of buckets that don't encrypt objects by default.</p>"
         },
         "bucketCountBySharedAccessType": {
           "shape": "BucketCountBySharedAccessType",
@@ -4051,27 +4067,42 @@
         "classifiableObjectCount": {
           "shape": "__long",
           "locationName": "classifiableObjectCount",
-          "documentation": "<p>The total number of objects that Amazon Macie can analyze in all the buckets. These objects use a file format, file extension, or content type that Amazon Macie supports.</p>"
+          "documentation": "<p>The total number of objects that Amazon Macie can analyze in the buckets. These objects use a supported file or storage format and storage class.</p>"
+        },
+        "classifiableSizeInBytes": {
+          "shape": "__long",
+          "locationName": "classifiableSizeInBytes",
+          "documentation": "<p>The total storage size, in bytes, of all the objects that Amazon Macie can analyze in the buckets. These objects use a supported file or storage format and storage class.</p>"
         },
         "lastUpdated": {
           "shape": "__timestampIso8601",
           "locationName": "lastUpdated",
-          "documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when Amazon Macie last analyzed the buckets.</p>"
+          "documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most recently retrieved data about the buckets from Amazon S3.</p>"
         },
         "objectCount": {
           "shape": "__long",
           "locationName": "objectCount",
-          "documentation": "<p>The total number of objects in all the buckets.</p>"
+          "documentation": "<p>The total number of objects in the buckets.</p>"
         },
         "sizeInBytes": {
           "shape": "__long",
           "locationName": "sizeInBytes",
-          "documentation": "<p>The total storage size, in bytes, of all the buckets.</p>"
+          "documentation": "<p>The total storage size, in bytes, of the buckets.</p>"
         },
         "sizeInBytesCompressed": {
           "shape": "__long",
           "locationName": "sizeInBytesCompressed",
-          "documentation": "<p>The total compressed storage size, in bytes, of all the buckets.</p>"
+          "documentation": "<p>The total compressed storage size, in bytes, of the buckets.</p>"
+        },
+        "unclassifiableObjectCount": {
+          "shape": "ObjectLevelStatistics",
+          "locationName": "unclassifiableObjectCount",
+          "documentation": "<p>The total number of objects that Amazon Macie can't analyze in the buckets. These objects use an unsupported file or storage format or storage class.</p>"
+        },
+        "unclassifiableObjectSizeInBytes": {
+          "shape": "ObjectLevelStatistics",
+          "locationName": "unclassifiableObjectSizeInBytes",
+          "documentation": "<p>The total storage size, in bytes, of all the objects that Amazon Macie can't analyze in the buckets. These objects use an unsupported file or storage format or storage class.</p>"
         }
       }
     },
@@ -4685,7 +4716,7 @@
         "tagScopeTerm": {
           "shape": "TagScopeTerm",
           "locationName": "tagScopeTerm",
-          "documentation": " <p>A tag-based condition that defines an operator and a tag key and value for including or excluding an object from the job.</p>"
+          "documentation": "<p>A tag-based condition that defines the operator and a tag key or tag keys and values for including or excluding an object from the job.</p>"
         }
       },
       "documentation": "<p>Specifies a property- or tag-based condition that defines criteria for including or excluding objects from a classification job.</p>"
@@ -4733,7 +4764,7 @@
         "jobStatus": {
           "shape": "JobStatus",
           "locationName": "jobStatus",
-          "documentation": "<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - The job was cancelled by you or a user of the master account for your organization. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job's access to the bucket.</p></li> <li><p>COMPLETE - Amazon Macie finished processing all the data specified for the job.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to jobs that occur only once.</p></li> <li><p>PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account.</p></li> <li><p>RUNNING - The job is in progress.</p></li></ul>"
+          "documentation": "<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job's access to the bucket.</p></li> <li><p>COMPLETE - Amazon Macie finished processing all the data specified for the job.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to jobs that occur only once.</p></li> <li><p>PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account.</p></li> <li><p>RUNNING - The job is in progress.</p></li></ul>"
         },
         "jobType": {
           "shape": "JobType",
@@ -5216,6 +5247,27 @@
       },
       "documentation": "<p>Provides information about the number of objects that are in an S3 bucket and use certain types of server-side encryption, use client-side encryption, or aren't encrypted.</p>"
     },
+    "ObjectLevelStatistics": {
+      "type": "structure",
+      "members": {
+        "fileType": {
+          "shape": "__long",
+          "locationName": "fileType",
+          "documentation": "<p>The total storage size (in bytes) or number of objects that Amazon Macie can't analyze because the objects use an unsupported file or storage format.</p>"
+        },
+        "storageClass": {
+          "shape": "__long",
+          "locationName": "storageClass",
+          "documentation": "<p>The total storage size (in bytes) or number of objects that Amazon Macie can't analyze because the objects use an unsupported storage class.</p>"
+        },
+        "total": {
+          "shape": "__long",
+          "locationName": "total",
+          "documentation": "<p>The total storage size (in bytes) or number of objects that Amazon Macie can't analyze because the objects use an unsupported file or storage format or storage class.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about the total storage size (in bytes) or number of objects that Amazon Macie can't analyze in one or more S3 buckets. In a BucketMetadata object, this data is for a specific bucket. In a GetBucketStatisticsResponse object, this data is aggregated for all the buckets in the query results.</p>"
+    },
     "OrderBy": {
       "type": "string",
       "enum": [
@@ -5289,7 +5341,7 @@
         "replicatedExternally": {
           "shape": "__boolean",
           "locationName": "replicatedExternally",
-          "documentation": "<p>Specifies whether the bucket is configured to replicate one or more objects to an AWS account that isn't part of the Amazon Macie organization.</p>"
+          "documentation": "<p>Specifies whether the bucket is configured to replicate one or more objects to an AWS account that isn't part of the same Amazon Macie organization.</p>"
         },
         "replicationAccounts": {
           "shape": "__listOf__string",
@@ -5445,7 +5497,7 @@
         "extension": {
           "shape": "__string",
           "locationName": "extension",
-          "documentation": "<p>The file extension of the object. If the object doesn't have a file extension, this value is \"\".</p>"
+          "documentation": "<p>The file name extension of the object. If the object doesn't have a file name extension, this value is \"\".</p>"
         },
         "key": {
           "shape": "__string",
@@ -5571,7 +5623,7 @@
         "kmsMasterKeyId": {
           "shape": "__string",
           "locationName": "kmsMasterKeyId",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) master key that's used to encrypt the bucket or object. This value is null if KMS isn't used to encrypt the bucket or object.</p>"
+          "documentation": "<p>The unique identifier for the AWS Key Management Service (AWS KMS) master key that's used to encrypt the bucket or object. This value is null if AWS KMS isn't used to encrypt the bucket or object.</p>"
         }
       },
       "documentation": "<p>Provides information about the server-side encryption settings for an S3 bucket or object.</p>"
@@ -5690,7 +5742,8 @@
       "enum": [
         "EXTERNAL",
         "INTERNAL",
-        "NOT_SHARED"
+        "NOT_SHARED",
+        "UNKNOWN"
       ]
     },
     "SimpleScopeTerm": {

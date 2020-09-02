@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.744.0-->
+<!--LATEST=2.745.0-->
 <!--ENTRYINSERT-->
+
+## 2.745.0
+* bugfix: XML: Fixed an array equality bug in the Node.js XML parser
+* feature: EC2: This release adds a new transit gateway attachment state and resource type.
+* feature: Macie2: This release of the Amazon Macie API introduces additional statistics for the size and count of Amazon S3 objects that Macie can analyze as part of a classification job.
 
 ## 2.744.0
 * feature: CodeGuruReviewer: Add support for repository analysis based code reviews
