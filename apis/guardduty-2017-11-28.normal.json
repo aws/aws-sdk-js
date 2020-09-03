@@ -1578,9 +1578,14 @@
           "documentation": "<p>The domain information for the AWS API call.</p>",
           "locationName": "domainDetails"
         },
+        "ErrorCode": {
+          "shape": "String",
+          "documentation": "<p>The error code of the failed AWS API action.</p>",
+          "locationName": "errorCode"
+        },
         "RemoteIpDetails": {
           "shape": "RemoteIpDetails",
-          "documentation": "<p>The remote IP information of the connection.</p>",
+          "documentation": "<p>The remote IP information of the connection that initiated the AWS API call.</p>",
           "locationName": "remoteIpDetails"
         },
         "ServiceName": {
@@ -1589,7 +1594,7 @@
           "locationName": "serviceName"
         }
       },
-      "documentation": "<p>Contains information about the API operation.</p>"
+      "documentation": "<p>Contains information about the API action.</p>"
     },
     "BlockPublicAccess": {
       "type": "structure",
@@ -2248,7 +2253,7 @@
           "locationName": "kmsMasterKeyArn"
         }
       },
-      "documentation": "<p>Contains information on the server side encryption method used in the S3 bucket. See <a href=\"https://docs.aws.amazon.com/AmazonS3/atest/dev/serv-side-encryption.html\">S3 Server-Side Encryption</a> for more information.</p>"
+      "documentation": "<p>Contains information on the server side encryption method used in the S3 bucket. See <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html\">S3 Server-Side Encryption</a> for more information.</p>"
     },
     "DeleteDetectorRequest": {
       "type": "structure",

@@ -1119,6 +1119,16 @@
           "documentation": "Duration (in seconds) to delay live content before presentation.",
           "locationName": "suggestedPresentationDelaySeconds",
           "shape": "__integer"
+        },
+        "UtcTiming": {
+          "documentation": "Determines the type of UTCTiming included in the Media Presentation Description (MPD)",
+          "locationName": "utcTiming",
+          "shape": "UtcTiming"
+        },
+        "UtcTimingUri": {
+          "documentation": "Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO or HTTP-HEAD",
+          "locationName": "utcTimingUri",
+          "shape": "__string"
         }
       },
       "type": "structure"
@@ -2369,6 +2379,14 @@
         }
       },
       "type": "structure"
+    },
+    "UtcTiming": {
+      "enum": [
+        "NONE",
+        "HTTP-HEAD",
+        "HTTP-ISO"
+      ],
+      "type": "string"
     },
     "__AdTriggersElement": {
       "enum": [

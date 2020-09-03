@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Types",
-  "description": "Re-export ConfigBase on previous config typings"
-}

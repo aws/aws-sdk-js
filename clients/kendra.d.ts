@@ -258,11 +258,11 @@ declare namespace Kendra {
      */
     EqualsTo?: DocumentAttribute;
     /**
-     * Returns true when a document contains all of the specified document attributes. This filter is only appicable to StringListValue metadata.
+     * Returns true when a document contains all of the specified document attributes. This filter is only applicable to StringListValue metadata.
      */
     ContainsAll?: DocumentAttribute;
     /**
-     * Returns true when a document contains any of the specified document attributes.This filter is only appicable to StringListValue metadata.
+     * Returns true when a document contains any of the specified document attributes. This filter is only applicable to StringListValue metadata.
      */
     ContainsAny?: DocumentAttribute;
     /**
@@ -1373,7 +1373,7 @@ declare namespace Kendra {
      */
     Type?: QueryResultType;
     /**
-     * One or more additional attribues associated with the query result.
+     * One or more additional attributes associated with the query result.
      */
     AdditionalAttributes?: AdditionalResultAttributeList;
     /**
@@ -1396,6 +1396,10 @@ declare namespace Kendra {
      * An array of document attributes for the document that the query result maps to. For example, the document author (Author) or the source URI (SourceUri) of the document.
      */
     DocumentAttributes?: DocumentAttributeList;
+    /**
+     * Indicates the confidence that Amazon Kendra has that a result matches the query that you provided. Each result is placed into a bin that indicates the confidence, VERY_HIGH, HIGH, and MEDIUM. You can use the score to determine if a response meets the confidence needed for your application. Confidence scores are only returned for results with the Type field set to QUESTION_ANSWER or ANSWER. This field is not returned if the Type field is set to DOCUMENT.
+     */
+    ScoreAttributes?: ScoreAttributes;
   }
   export type QueryResultItemList = QueryResultItem[];
   export type QueryResultType = "DOCUMENT"|"QUESTION_ANSWER"|"ANSWER"|string;
@@ -1607,6 +1611,13 @@ declare namespace Kendra {
   export type SalesforceStandardObjectConfigurationList = SalesforceStandardObjectConfiguration[];
   export type SalesforceStandardObjectName = "ACCOUNT"|"CAMPAIGN"|"CASE"|"CONTACT"|"CONTRACT"|"DOCUMENT"|"GROUP"|"IDEA"|"LEAD"|"OPPORTUNITY"|"PARTNER"|"PRICEBOOK"|"PRODUCT"|"PROFILE"|"SOLUTION"|"TASK"|"USER"|string;
   export type ScanSchedule = string;
+  export interface ScoreAttributes {
+    /**
+     * A relative ranking for how well the response matches the query.
+     */
+    ScoreConfidence?: ScoreConfidence;
+  }
+  export type ScoreConfidence = "VERY_HIGH"|"HIGH"|"MEDIUM"|string;
   export interface Search {
     /**
      * Indicates that the field can be used to create search facets, a count of results for each value in the field. The default is false .
@@ -1763,7 +1774,7 @@ declare namespace Kendra {
   }
   export interface SqlConfiguration {
     /**
-     * Determines whether Amazon Kendra encloses SQL identifiers in double quotes (") when making a database query. By default, Amazon Kendra passes SQL identifiers the way that they are entered into the data source configuration. It does not change the case of identifiers or enclose them in quotes. PostgreSQL internally converts uppercase characters to lower case characters in identifiers unless they are quoted. Choosing this option encloses identifiers in quotes so that PostgreSQL does not convert the character's case. For MySQL databases, you must enable the ansi_quotes option when you choose this option.
+     * Determines whether Amazon Kendra encloses SQL identifiers for tables and column names in double quotes (") when making a database query. By default, Amazon Kendra passes SQL identifiers the way that they are entered into the data source configuration. It does not change the case of identifiers or enclose them in quotes. PostgreSQL internally converts uppercase characters to lower case characters in identifiers unless they are quoted. Choosing this option encloses identifiers in quotes so that PostgreSQL does not convert the character's case. For MySQL databases, you must enable the ansi_quotes option when you set this field to DOUBLE_QUOTES.
      */
     QueryIdentifiersEnclosingOption?: QueryIdentifiersEnclosingOption;
   }

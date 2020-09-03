@@ -492,6 +492,14 @@ rounded to the nearest multiple of the source segment duration.
      * Duration (in seconds) to delay live content before presentation.
      */
     SuggestedPresentationDelaySeconds?: __integer;
+    /**
+     * Determines the type of UTCTiming included in the Media Presentation Description (MPD)
+     */
+    UtcTiming?: UtcTiming;
+    /**
+     * Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO or HTTP-HEAD
+     */
+    UtcTimingUri?: __string;
   }
   export interface DeleteChannelRequest {
     /**
@@ -1300,6 +1308,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     Whitelist?: __listOf__string;
   }
+  export type UtcTiming = "NONE"|"HTTP-HEAD"|"HTTP-ISO"|string;
   export type __AdTriggersElement = "SPLICE_INSERT"|"BREAK"|"PROVIDER_ADVERTISEMENT"|"DISTRIBUTOR_ADVERTISEMENT"|"PROVIDER_PLACEMENT_OPPORTUNITY"|"DISTRIBUTOR_PLACEMENT_OPPORTUNITY"|"PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY"|"DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"|string;
   export type __PeriodTriggersElement = "ADS"|string;
   export type __boolean = boolean;

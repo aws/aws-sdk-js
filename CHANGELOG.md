@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.745.0-->
+<!--LATEST=2.746.0-->
 <!--ENTRYINSERT-->
+
+## 2.746.0
+* bugfix: Types: Re-export ConfigBase on previous config typings
+* feature: GuardDuty: GuardDuty findings triggered by failed events now include the error code name within the AwsApiCallAction section.
+* feature: Kendra: Amazon Kendra now returns confidence scores for both 'answer' and 'question and answer' query responses.
+* feature: MediaPackage: Enables inserting a UTCTiming XML tag in the output manifest of a DASH endpoint which a media player will use to help with time synchronization.
+* feature: StepFunctions: This release of the AWS Step Functions SDK introduces support for payloads up to 256KB for Standard and Express workflows
 
 ## 2.745.0
 * bugfix: XML: Fixed an array equality bug in the Node.js XML parser

@@ -896,11 +896,11 @@
         },
         "ContainsAll": {
           "shape": "DocumentAttribute",
-          "documentation": "<p>Returns true when a document contains all of the specified document attributes. This filter is only appicable to <code>StringListValue</code> metadata.</p>"
+          "documentation": "<p>Returns true when a document contains all of the specified document attributes. This filter is only applicable to <code>StringListValue</code> metadata.</p>"
         },
         "ContainsAny": {
           "shape": "DocumentAttribute",
-          "documentation": "<p>Returns true when a document contains any of the specified document attributes.This filter is only appicable to <code>StringListValue</code> metadata.</p>"
+          "documentation": "<p>Returns true when a document contains any of the specified document attributes. This filter is only applicable to <code>StringListValue</code> metadata.</p>"
         },
         "GreaterThan": {
           "shape": "DocumentAttribute",
@@ -1380,7 +1380,7 @@
     },
     "DataSourceInclusionsExclusionsStringsMember": {
       "type": "string",
-      "max": 150,
+      "max": 50,
       "min": 1
     },
     "DataSourceName": {
@@ -2789,7 +2789,7 @@
         },
         "AdditionalAttributes": {
           "shape": "AdditionalResultAttributeList",
-          "documentation": "<p>One or more additional attribues associated with the query result.</p>"
+          "documentation": "<p>One or more additional attributes associated with the query result.</p>"
         },
         "DocumentId": {
           "shape": "DocumentId",
@@ -2810,6 +2810,10 @@
         "DocumentAttributes": {
           "shape": "DocumentAttributeList",
           "documentation": "<p>An array of document attributes for the document that the query result maps to. For example, the document author (Author) or the source URI (SourceUri) of the document.</p>"
+        },
+        "ScoreAttributes": {
+          "shape": "ScoreAttributes",
+          "documentation": "<p>Indicates the confidence that Amazon Kendra has that a result matches the query that you provided. Each result is placed into a bin that indicates the confidence, <code>VERY_HIGH</code>, <code>HIGH</code>, and <code>MEDIUM</code>. You can use the score to determine if a response meets the confidence needed for your application.</p> <p>Confidence scores are only returned for results with the <code>Type</code> field set to <code>QUESTION_ANSWER</code> or <code>ANSWER</code>. This field is not returned if the <code>Type</code> field is set to <code>DOCUMENT</code>.</p>"
         }
       },
       "documentation": "<p>A single query result.</p> <p>A query result contains information about a document returned by the query. This includes the original location of the document, a list of attributes assigned to the document, and relevant text from the document that satisfies the query.</p>"
@@ -3223,6 +3227,25 @@
     "ScanSchedule": {
       "type": "string"
     },
+    "ScoreAttributes": {
+      "type": "structure",
+      "members": {
+        "ScoreConfidence": {
+          "shape": "ScoreConfidence",
+          "documentation": "<p>A relative ranking for how well the response matches the query.</p>"
+        }
+      },
+      "documentation": "<p>Provides a relative ranking that indicates how confident Amazon Kendra is that the response matches the query.</p>"
+    },
+    "ScoreConfidence": {
+      "type": "string",
+      "documentation": "Enumeration for query score confidence.",
+      "enum": [
+        "VERY_HIGH",
+        "HIGH",
+        "MEDIUM"
+      ]
+    },
     "Search": {
       "type": "structure",
       "members": {
@@ -3466,14 +3489,14 @@
           "documentation": "<p>The order that the results should be returned in. In case of ties, the relevance assigned to the result by Amazon Kendra is used as the tie-breaker.</p>"
         }
       },
-      "documentation": "<p>Specifies the document attribute to use to sort the response to a Amazon Kendra query. You can specify a single attribute for sorting. The attribute must have the <code>Sortable</code> flag set to <code>true</code>, otherwise Amazon Kendra returns an exception.</p>"
+      "documentation": "<p>Specifies the document attribute to use to sort the response to a Amazon Kendra query. You can specify a single attribute for sorting. The attribute must have the <code>Sortable</code> flag set to <code>true</code>, otherwise Amazon Kendra returns an exception.</p> <p>You can sort attributes of the following types.</p> <ul> <li> <p>Date value</p> </li> <li> <p>Long value</p> </li> <li> <p>String value</p> </li> </ul> <p>You can't sort attributes of the following type.</p> <ul> <li> <p>String list value</p> </li> </ul>"
     },
     "SqlConfiguration": {
       "type": "structure",
       "members": {
         "QueryIdentifiersEnclosingOption": {
           "shape": "QueryIdentifiersEnclosingOption",
-          "documentation": "<p>Determines whether Amazon Kendra encloses SQL identifiers in double quotes (\") when making a database query.</p> <p>By default, Amazon Kendra passes SQL identifiers the way that they are entered into the data source configuration. It does not change the case of identifiers or enclose them in quotes.</p> <p>PostgreSQL internally converts uppercase characters to lower case characters in identifiers unless they are quoted. Choosing this option encloses identifiers in quotes so that PostgreSQL does not convert the character's case.</p> <p>For MySQL databases, you must enable the <code>ansi_quotes</code> option when you choose this option.</p>"
+          "documentation": "<p>Determines whether Amazon Kendra encloses SQL identifiers for tables and column names in double quotes (\") when making a database query.</p> <p>By default, Amazon Kendra passes SQL identifiers the way that they are entered into the data source configuration. It does not change the case of identifiers or enclose them in quotes.</p> <p>PostgreSQL internally converts uppercase characters to lower case characters in identifiers unless they are quoted. Choosing this option encloses identifiers in quotes so that PostgreSQL does not convert the character's case.</p> <p>For MySQL databases, you must enable the <code>ansi_quotes</code> option when you set this field to <code>DOUBLE_QUOTES</code>.</p>"
         }
       },
       "documentation": "<p>Provides information that configures Amazon Kendra to use a SQL database.</p>"

@@ -600,7 +600,11 @@ declare namespace GuardDuty {
      */
     DomainDetails?: DomainDetails;
     /**
-     * The remote IP information of the connection.
+     * The error code of the failed AWS API action.
+     */
+    ErrorCode?: String;
+    /**
+     * The remote IP information of the connection that initiated the AWS API call.
      */
     RemoteIpDetails?: RemoteIpDetails;
     /**
