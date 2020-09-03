@@ -44,3 +44,6 @@ export interface APIVersions {
      */
     apiVersions?: ConfigurationServiceApiVersions;
 }
+
+// for backwards compatible client generation
+export { ConfigBase } from "./config-base";
