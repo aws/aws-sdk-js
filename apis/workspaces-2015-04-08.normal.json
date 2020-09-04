@@ -610,7 +610,7 @@
           "shape": "InvalidParameterValuesException"
         }
       ],
-      "documentation": "<p>Imports the specified Windows 7 or Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. </p>"
+      "documentation": "<p>Imports the specified Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. For more information about creating BYOL images, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html\"> Bring Your Own Windows Desktop Licenses</a>.</p>"
     },
     "ListAvailableManagementCidrRanges": {
       "name": "ListAvailableManagementCidrRanges",
@@ -1137,6 +1137,21 @@
     },
     "Alias": {
       "type": "string"
+    },
+    "Application": {
+      "type": "string",
+      "enum": [
+        "Microsoft_Office_2016",
+        "Microsoft_Office_2019"
+      ]
+    },
+    "ApplicationList": {
+      "type": "list",
+      "member": {
+        "shape": "Application"
+      },
+      "max": 5,
+      "min": 1
     },
     "AssociateIpGroupsRequest": {
       "type": "structure",
@@ -2027,7 +2042,7 @@
         },
         "IngestionProcess": {
           "shape": "WorkspaceImageIngestionProcess",
-          "documentation": "<p>The ingestion process to be used when importing the image.</p>"
+          "documentation": "<p>The ingestion process to be used when importing the image. For non-GPU-enabled bundles (bundles other than Graphics or GraphicsPro), specify <code>BYOL_REGULAR</code>.</p>"
         },
         "ImageName": {
           "shape": "WorkspaceImageName",
@@ -2040,6 +2055,10 @@
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>The tags. Each WorkSpaces resource can have a maximum of 50 tags.</p>"
+        },
+        "Applications": {
+          "shape": "ApplicationList",
+          "documentation": "<p>If specified, the version of Microsoft Office to subscribe to. Valid only for Windows 10 BYOL images. For more information about subscribing to Office for BYOL images, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html\"> Bring Your Own Windows Desktop Licenses</a>.</p> <note> <p>Although this parameter is an array, only one item is allowed at this time.</p> </note>"
         }
       }
     },

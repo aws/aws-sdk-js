@@ -196,11 +196,11 @@ declare class WorkSpaces extends Service {
    */
   disassociateIpGroups(callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateIpGroupsResult) => void): Request<WorkSpaces.Types.DisassociateIpGroupsResult, AWSError>;
   /**
-   * Imports the specified Windows 7 or Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. 
+   * Imports the specified Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. For more information about creating BYOL images, see  Bring Your Own Windows Desktop Licenses.
    */
   importWorkspaceImage(params: WorkSpaces.Types.ImportWorkspaceImageRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ImportWorkspaceImageResult) => void): Request<WorkSpaces.Types.ImportWorkspaceImageResult, AWSError>;
   /**
-   * Imports the specified Windows 7 or Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. 
+   * Imports the specified Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. For more information about creating BYOL images, see  Bring Your Own Windows Desktop Licenses.
    */
   importWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.ImportWorkspaceImageResult) => void): Request<WorkSpaces.Types.ImportWorkspaceImageResult, AWSError>;
   /**
@@ -387,6 +387,8 @@ declare namespace WorkSpaces {
   }
   export type AccountModificationList = AccountModification[];
   export type Alias = string;
+  export type Application = "Microsoft_Office_2016"|"Microsoft_Office_2019"|string;
+  export type ApplicationList = Application[];
   export interface AssociateIpGroupsRequest {
     /**
      * The identifier of the directory.
@@ -911,7 +913,7 @@ declare namespace WorkSpaces {
      */
     Ec2ImageId: Ec2ImageId;
     /**
-     * The ingestion process to be used when importing the image.
+     * The ingestion process to be used when importing the image. For non-GPU-enabled bundles (bundles other than Graphics or GraphicsPro), specify BYOL_REGULAR.
      */
     IngestionProcess: WorkspaceImageIngestionProcess;
     /**
@@ -926,6 +928,10 @@ declare namespace WorkSpaces {
      * The tags. Each WorkSpaces resource can have a maximum of 50 tags.
      */
     Tags?: TagList;
+    /**
+     * If specified, the version of Microsoft Office to subscribe to. Valid only for Windows 10 BYOL images. For more information about subscribing to Office for BYOL images, see  Bring Your Own Windows Desktop Licenses.  Although this parameter is an array, only one item is allowed at this time. 
+     */
+    Applications?: ApplicationList;
   }
   export interface ImportWorkspaceImageResult {
     /**

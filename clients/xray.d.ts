@@ -132,11 +132,11 @@ declare class XRay extends Service {
    */
   getTraceSummaries(callback?: (err: AWSError, data: XRay.Types.GetTraceSummariesResult) => void): Request<XRay.Types.GetTraceSummariesResult, AWSError>;
   /**
-   * 
+   * Returns a list of tags that are applied to the specified AWS X-Ray group or sampling rule.
    */
   listTagsForResource(params: XRay.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: XRay.Types.ListTagsForResourceResponse) => void): Request<XRay.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * 
+   * Returns a list of tags that are applied to the specified AWS X-Ray group or sampling rule.
    */
   listTagsForResource(callback?: (err: AWSError, data: XRay.Types.ListTagsForResourceResponse) => void): Request<XRay.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -164,19 +164,19 @@ declare class XRay extends Service {
    */
   putTraceSegments(callback?: (err: AWSError, data: XRay.Types.PutTraceSegmentsResult) => void): Request<XRay.Types.PutTraceSegmentsResult, AWSError>;
   /**
-   * 
+   * Applies tags to an existing AWS X-Ray group or sampling rule.
    */
   tagResource(params: XRay.Types.TagResourceRequest, callback?: (err: AWSError, data: XRay.Types.TagResourceResponse) => void): Request<XRay.Types.TagResourceResponse, AWSError>;
   /**
-   * 
+   * Applies tags to an existing AWS X-Ray group or sampling rule.
    */
   tagResource(callback?: (err: AWSError, data: XRay.Types.TagResourceResponse) => void): Request<XRay.Types.TagResourceResponse, AWSError>;
   /**
-   * 
+   * Removes tags from an AWS X-Ray group or sampling rule. You cannot edit or delete system tags (those with an aws: prefix).
    */
   untagResource(params: XRay.Types.UntagResourceRequest, callback?: (err: AWSError, data: XRay.Types.UntagResourceResponse) => void): Request<XRay.Types.UntagResourceResponse, AWSError>;
   /**
-   * 
+   * Removes tags from an AWS X-Ray group or sampling rule. You cannot edit or delete system tags (those with an aws: prefix).
    */
   untagResource(callback?: (err: AWSError, data: XRay.Types.UntagResourceResponse) => void): Request<XRay.Types.UntagResourceResponse, AWSError>;
   /**
@@ -301,11 +301,18 @@ declare namespace XRay {
      * The filter expression defining criteria by which to group traces.
      */
     FilterExpression?: FilterExpression;
+    /**
+     * The structure containing configurations related to insights. The InsightsEnabled boolean can be set to true to enable insights for the new group or false to disable insights for the new group.
+     */
+    InsightsConfiguration?: InsightsConfiguration;
+    /**
+     * A map that contains one or more tag keys and tag values to attach to an X-Ray group. For more information about ways to use tags, see Tagging AWS resources in the AWS General Reference. The following restrictions apply to tags:   Maximum number of user-applied tags per resource: 50   Maximum tag key length: 128 Unicode characters   Maximum tag value length: 256 Unicode characters   Valid values for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . : / = + - and @   Tag keys and values are case sensitive.   Don't use aws: as a prefix for keys; it's reserved for AWS use.  
+     */
     Tags?: TagList;
   }
   export interface CreateGroupResult {
     /**
-     * The group that was created. Contains the name of the group that was created, the ARN of the group that was generated based on the group name, and the filter expression that was assigned to the group.
+     * The group that was created. Contains the name of the group that was created, the ARN of the group that was generated based on the group name, the filter expression, and the insight configuration that was assigned to the group.
      */
     Group?: Group;
   }
@@ -314,6 +321,9 @@ declare namespace XRay {
      * The rule definition.
      */
     SamplingRule: SamplingRule;
+    /**
+     * A map that contains one or more tag keys and tag values to attach to an X-Ray sampling rule. For more information about ways to use tags, see Tagging AWS resources in the AWS General Reference. The following restrictions apply to tags:   Maximum number of user-applied tags per resource: 50   Maximum tag key length: 128 Unicode characters   Maximum tag value length: 256 Unicode characters   Valid values for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . : / = + - and @   Tag keys and values are case sensitive.   Don't use aws: as a prefix for keys; it's reserved for AWS use.  
+     */
     Tags?: TagList;
   }
   export interface CreateSamplingRuleResult {
@@ -813,6 +823,10 @@ declare namespace XRay {
      * The filter expression defining the parameters to include traces.
      */
     FilterExpression?: String;
+    /**
+     * The structure containing configurations related to insights. The InsightsEnabled boolean can be set to true to enable insights for the group or false to disable insights for the group.
+     */
+    InsightsConfiguration?: InsightsConfiguration;
   }
   export type GroupARN = string;
   export type GroupName = string;
@@ -829,6 +843,10 @@ declare namespace XRay {
      * The filter expression defining the parameters to include traces.
      */
     FilterExpression?: String;
+    /**
+     * The structure containing configurations related to insights. The InsightsEnabled boolean can be set to true to enable insights for the groups or false to disable insights for the groups.
+     */
+    InsightsConfiguration?: InsightsConfiguration;
   }
   export type GroupSummaryList = GroupSummary[];
   export type HTTPMethod = string;
@@ -867,6 +885,12 @@ declare namespace XRay {
      */
     ClientIp?: String;
   }
+  export interface InsightsConfiguration {
+    /**
+     * Set the InsightsEnabled value to true to enable insights or false to disable insights.
+     */
+    InsightsEnabled?: NullableBoolean;
+  }
   export interface InstanceIdDetail {
     /**
      * The ID of a corresponding EC2 instance.
@@ -875,11 +899,23 @@ declare namespace XRay {
   }
   export type Integer = number;
   export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
+     */
     ResourceARN: AmazonResourceName;
+    /**
+     * A pagination token. If multiple pages of results are returned, use the NextToken value returned with the current page of results as the value of this parameter to get the next page of results.
+     */
     NextToken?: String;
   }
   export interface ListTagsForResourceResponse {
+    /**
+     * A list of tags, as key and value pairs, that is associated with the specified X-Ray group or sampling rule.
+     */
     Tags?: TagList;
+    /**
+     * A pagination token. If multiple pages of results are returned, use the NextToken value returned with the current page of results to get the next page of results.
+     */
     NextToken?: String;
   }
   export type NullableBoolean = boolean;
@@ -1327,14 +1363,26 @@ declare namespace XRay {
   export type ServiceType = string;
   export type String = string;
   export interface Tag {
+    /**
+     * A tag key, such as Stage or Name. A tag key cannot be empty. The key can be a maximum of 128 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: + - = . _ : / 
+     */
     Key: TagKey;
+    /**
+     * An optional tag value, such as Production or test-only. The value can be a maximum of 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: + - = . _ : / 
+     */
     Value: TagValue;
   }
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagList = Tag[];
   export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
+     */
     ResourceARN: AmazonResourceName;
+    /**
+     * A map that contains one or more tag keys and tag values to attach to an X-Ray group or sampling rule. For more information about ways to use tags, see Tagging AWS resources in the AWS General Reference. The following restrictions apply to tags:   Maximum number of user-applied tags per resource: 50   Maximum tag key length: 128 Unicode characters   Maximum tag value length: 256 Unicode characters   Valid values for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . : / = + - and @   Tag keys and values are case sensitive.   Don't use aws: as a prefix for keys; it's reserved for AWS use. You cannot edit or delete system tags.  
+     */
     Tags: TagList;
   }
   export interface TagResourceResponse {
@@ -1531,7 +1579,13 @@ declare namespace XRay {
   }
   export type UnprocessedTraceSegmentList = UnprocessedTraceSegment[];
   export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
+     */
     ResourceARN: AmazonResourceName;
+    /**
+     * Keys for one or more tags that you want to remove from an X-Ray group or sampling rule.
+     */
     TagKeys: TagKeyList;
   }
   export interface UntagResourceResponse {
@@ -1549,10 +1603,14 @@ declare namespace XRay {
      * The updated filter expression defining criteria by which to group traces.
      */
     FilterExpression?: FilterExpression;
+    /**
+     * The structure containing configurations related to insights. The InsightsEnabled boolean can be set to true to enable insights for the group or false to disable insights for the group.
+     */
+    InsightsConfiguration?: InsightsConfiguration;
   }
   export interface UpdateGroupResult {
     /**
-     * The group that was updated. Contains the name of the group that was updated, the ARN of the group that was updated, and the updated filter expression assigned to the group.
+     * The group that was updated. Contains the name of the group that was updated, the ARN of the group that was updated, the updated filter expression, and the updated insight configuration assigned to the group.
      */
     Group?: Group;
   }

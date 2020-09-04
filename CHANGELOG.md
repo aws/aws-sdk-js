@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.746.0-->
+<!--LATEST=2.747.0-->
 <!--ENTRYINSERT-->
+
+## 2.747.0
+* feature: WorkSpaces: Adding support for Microsoft Office 2016 and Microsoft Office 2019 in BYOL Images
+* feature: XRay: Enhancing CreateGroup, UpdateGroup, GetGroup and GetGroups APIs to support configuring X-Ray Insights
 
 ## 2.746.0
 * bugfix: Types: Re-export ConfigBase on previous config typings
