@@ -1951,8 +1951,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (httpResponse.body.length > 0) {
 	    try {
 	      var e = JSON.parse(httpResponse.body.toString());
-	      if (e.__type || e.code) {
-	        error.code = (e.__type || e.code).split('#').pop();
+	      var code = e.__type || e.code || e.Code;
+	      if (code) {
+	        error.code = code.split('#').pop();
 	      }
 	      if (error.code === 'RequestEntityTooLarge') {
 	        error.message = 'Request body must be less than 1 MB';

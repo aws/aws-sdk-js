@@ -122,8 +122,20 @@
         expect(response.error.code).to.equal('ErrorCode');
         return expect(response.data).to.equal(null);
       });
-      it('returns the full code when a # is not present', function() {
+      it('returns the full code when a # is not present using the __type attribute', function() {
         extractError('{"__type":"ErrorCode" }');
+        expect(response.error).to.be.instanceOf(Error);
+        expect(response.error.code).to.equal('ErrorCode');
+        return expect(response.data).to.equal(null);
+      });
+      it('returns the full code when a # is not present using the code attribute', function() {
+        extractError('{"code":"ErrorCode" }');
+        expect(response.error).to.be.instanceOf(Error);
+        expect(response.error.code).to.equal('ErrorCode');
+        return expect(response.data).to.equal(null);
+      });
+      it('returns the full code when a # is not present using the Code attribute', function() {
+        extractError('{"Code":"ErrorCode" }');
         expect(response.error).to.be.instanceOf(Error);
         expect(response.error.code).to.equal('ErrorCode');
         return expect(response.data).to.equal(null);
