@@ -1349,6 +1349,10 @@
           "shape": "SubnetId",
           "documentation": "<p>The ID of the subnet. You can specify one subnet per Availability Zone.</p>"
         },
+        "OutpostId": {
+          "shape": "OutpostId",
+          "documentation": "<p>[Application Load Balancers on Outposts] The ID of the Outpost.</p>"
+        },
         "LoadBalancerAddresses": {
           "shape": "LoadBalancerAddresses",
           "documentation": "<p>[Network Load Balancers] If you need static IP addresses for your load balancer, you can specify one Elastic IP address per Availability Zone when you create an internal-facing load balancer. For internal load balancers, you can specify a private IP address from the IPv4 range of the subnet.</p>"
@@ -1478,11 +1482,11 @@
         },
         "Subnets": {
           "shape": "Subnets",
-          "documentation": "<p>The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.</p> <p>[Application Load Balancers] You must specify subnets from at least two Availability Zones.</p> <p>[Network Load Balancers] You can specify subnets from one or more Availability Zones.</p>"
+          "documentation": "<p>The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.</p> <p>[Application Load Balancers] You must specify subnets from at least two Availability Zones.</p> <p>[Application Load Balancers on Outposts] You must specify one Outpost subnet.</p> <p>[Application Load Balancers on Local Zones] You can specify subnets from one or more Local Zones.</p> <p>[Network Load Balancers] You can specify subnets from one or more Availability Zones.</p>"
         },
         "SubnetMappings": {
           "shape": "SubnetMappings",
-          "documentation": "<p>The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.</p> <p>[Application Load Balancers] You must specify subnets from at least two Availability Zones. You cannot specify Elastic IP addresses for your subnets.</p> <p>[Network Load Balancers] You can specify subnets from one or more Availability Zones. You can specify one Elastic IP address per subnet if you need static IP addresses for your internet-facing load balancer. For internal load balancers, you can specify one private IP address per subnet from the IPv4 range of the subnet.</p>"
+          "documentation": "<p>The IDs of the public subnets. You can specify only one subnet per Availability Zone. You must specify either subnets or subnet mappings.</p> <p>[Application Load Balancers] You must specify subnets from at least two Availability Zones. You cannot specify Elastic IP addresses for your subnets.</p> <p>[Application Load Balancers on Outposts] You must specify one Outpost subnet.</p> <p>[Application Load Balancers on Local Zones] You can specify subnets from one or more Local Zones.</p> <p>[Network Load Balancers] You can specify subnets from one or more Availability Zones. You can specify one Elastic IP address per subnet if you need static IP addresses for your internet-facing load balancer. For internal load balancers, you can specify one private IP address per subnet from the IPv4 range of the subnet.</p>"
         },
         "SecurityGroups": {
           "shape": "SecurityGroups",
@@ -1503,6 +1507,10 @@
         "IpAddressType": {
           "shape": "IpAddressType",
           "documentation": "<p>[Application Load Balancers] The type of IP addresses used by the subnets for your load balancer. The possible values are <code>ipv4</code> (for IPv4 addresses) and <code>dualstack</code> (for IPv4 and IPv6 addresses). Internal load balancers must use <code>ipv4</code>.</p>"
+        },
+        "CustomerOwnedIpv4Pool": {
+          "shape": "CustomerOwnedIpv4Pool",
+          "documentation": "<p>[Application Load Balancers on Outposts] The ID of the customer-owned address pool (CoIP pool).</p>"
         }
       }
     },
@@ -1626,6 +1634,11 @@
     },
     "CreatedTime": {
       "type": "timestamp"
+    },
+    "CustomerOwnedIpv4Pool": {
+      "type": "string",
+      "max": 256,
+      "pattern": "^(ipv4pool-coip-)[a-zA-Z0-9]+$"
     },
     "DNSName": {
       "type": "string"
@@ -2281,7 +2294,7 @@
         },
         "AvailabilityZones": {
           "shape": "AvailabilityZones",
-          "documentation": "<p>The Availability Zones for the load balancer.</p>"
+          "documentation": "<p>The subnets for the load balancer.</p>"
         },
         "SecurityGroups": {
           "shape": "SecurityGroups",
@@ -2290,6 +2303,10 @@
         "IpAddressType": {
           "shape": "IpAddressType",
           "documentation": "<p>The type of IP addresses used by the subnets for your load balancer. The possible values are <code>ipv4</code> (for IPv4 addresses) and <code>dualstack</code> (for IPv4 and IPv6 addresses).</p>"
+        },
+        "CustomerOwnedIpv4Pool": {
+          "shape": "CustomerOwnedIpv4Pool",
+          "documentation": "<p>[Application Load Balancers on Outposts] The ID of the customer-owned address pool.</p>"
         }
       },
       "documentation": "<p>Information about a load balancer.</p>"
@@ -2612,6 +2629,9 @@
       }
     },
     "Name": {
+      "type": "string"
+    },
+    "OutpostId": {
       "type": "string"
     },
     "PageSize": {
@@ -3034,7 +3054,7 @@
       "members": {
         "AvailabilityZones": {
           "shape": "AvailabilityZones",
-          "documentation": "<p>Information about the subnet and Availability Zone.</p>"
+          "documentation": "<p>Information about the subnets.</p>"
         }
       }
     },

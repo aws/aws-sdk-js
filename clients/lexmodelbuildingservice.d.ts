@@ -530,7 +530,7 @@ declare namespace LexModelBuildingService {
      */
     clarificationPrompt?: Prompt;
     /**
-     * The message that Amazon Lex uses to abort a conversation. For more information, see PutBot.
+     * The message that Amazon Lex uses to cancel a conversation. For more information, see PutBot.
      */
     abortStatement?: Statement;
     /**
@@ -574,7 +574,7 @@ declare namespace LexModelBuildingService {
      */
     childDirected?: Boolean;
     /**
-     * Indicates whether the bot uses the new natural language understanding (NLU) model or the original NLU. True indicates that the bot is using the new model, otherwise, false.
+     * Indicates whether the bot uses accuracy improvements. true indicates that the bot is using the imoprovements, otherwise, false.
      */
     enableModelImprovements?: Boolean;
     /**
@@ -1009,11 +1009,11 @@ declare namespace LexModelBuildingService {
      */
     intents?: IntentList;
     /**
-     * Indicates whether the bot uses the new natural language understanding (NLU) model or the original NLU. True indicates that the bot is using the new model, otherwise, false.
+     * Indicates whether the bot uses accuracy improvements. true indicates that the bot is using the imoprovements, otherwise, false.
      */
     enableModelImprovements?: Boolean;
     /**
-     * The score that determines where Amazon Lex inserts the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents in a PostContent or PostText response. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they are configured for the bot.
+     * The score that determines where Amazon Lex inserts the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents in a PostContent or PostText response. AMAZON.FallbackIntent is inserted if the confidence score for all intents is below this value. AMAZON.KendraSearchIntent is only inserted if it is configured for the bot.
      */
     nluIntentConfidenceThreshold?: ConfidenceThreshold;
     /**
@@ -1595,7 +1595,7 @@ declare namespace LexModelBuildingService {
     tags?: TagList;
   }
   export type ListsOfUtterances = UtteranceList[];
-  export type Locale = "en-US"|"en-GB"|"de-DE"|string;
+  export type Locale = "en-US"|"en-GB"|"de-DE"|"en-AU"|string;
   export type LocaleList = Locale[];
   export interface LogSettingsRequest {
     /**
@@ -1761,11 +1761,11 @@ declare namespace LexModelBuildingService {
      */
     intents?: IntentList;
     /**
-     * Set to true to enable the use of a new natural language understanding (NLU) model. Using the new NLU may improve the performance of your bot.  When you set the enableModelImprovements parameter to true you can use the nluIntentConfidenceThreshold parameter to configure confidence scores. For more information, see Confidence Scores. You can only set the enableModelImprovements parameter in certain Regions. If you set the parameter to true, your bot will use the new NLU. If you set the parameter to false, your bot will continue to use the original NLU. If you set the parameter to false after setting it to true, your bot will return to the original NLU. The Regions where you can set the enableModelImprovements parameter to true are:   US East (N. Virginia) (us-east-1)   US West (Oregon) (us-west-2)   Asia Pacific (Sydney) (ap-southeast-2)   EU (Ireland) (eu-west-1)   In other Regions, the enableModelImprovements parameter is set to true by default. In these Regions setting the parameter to false throws a ValidationException exception.   Asia Pacific (Singapore) (ap-southeast-1)   Asia Pacific (Tokyo) (ap-northeast-1)   EU (Frankfurt) (eu-central-1)   EU (London) (eu-west-2)  
+     * Set to true to enable access to natural language understanding improvements.  When you set the enableModelImprovements parameter to true you can use the nluIntentConfidenceThreshold parameter to configure confidence scores. For more information, see Confidence Scores. You can only set the enableModelImprovements parameter in certain Regions. If you set the parameter to true, your bot has access to accuracy improvements. The Regions where you can set the enableModelImprovements parameter to true are:   US East (N. Virginia) (us-east-1)   US West (Oregon) (us-west-2)   Asia Pacific (Sydney) (ap-southeast-2)   EU (Ireland) (eu-west-1)   In other Regions, the enableModelImprovements parameter is set to true by default. In these Regions setting the parameter to false throws a ValidationException exception.   Asia Pacific (Singapore) (ap-southeast-1)   Asia Pacific (Tokyo) (ap-northeast-1)   EU (Frankfurt) (eu-central-1)   EU (London) (eu-west-2)  
      */
     enableModelImprovements?: Boolean;
     /**
-     * Determines the threshold where Amazon Lex will insert the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents in a PostContent or PostText response. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they are configured for the bot. You must set the enableModelImprovements parameter to true to use confidence scores. For example, suppose a bot is configured with the confidence threshold of 0.80 and the AMAZON.FallbackIntent. Amazon Lex returns three alternative intents with the following confidence scores: IntentA (0.70), IntentB (0.60), IntentC (0.50). The response from the PostText operation would be:   AMAZON.FallbackIntent   IntentA   IntentB   IntentC  
+     * Determines the threshold where Amazon Lex will insert the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents in a PostContent or PostText response. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they are configured for the bot. You must set the enableModelImprovements parameter to true to use confidence scores.   US East (N. Virginia) (us-east-1)   US West (Oregon) (us-west-2)   Asia Pacific (Sydney) (ap-southeast-2)   EU (Ireland) (eu-west-1)   In other Regions, the enableModelImprovements parameter is set to true by default. For example, suppose a bot is configured with the confidence threshold of 0.80 and the AMAZON.FallbackIntent. Amazon Lex returns three alternative intents with the following confidence scores: IntentA (0.70), IntentB (0.60), IntentC (0.50). The response from the PostText operation would be:   AMAZON.FallbackIntent   IntentA   IntentB   IntentC  
      */
     nluIntentConfidenceThreshold?: ConfidenceThreshold;
     /**
@@ -1773,7 +1773,7 @@ declare namespace LexModelBuildingService {
      */
     clarificationPrompt?: Prompt;
     /**
-     * When Amazon Lex can't understand the user's input in context, it tries to elicit the information a few times. After that, Amazon Lex sends the message defined in abortStatement to the user, and then aborts the conversation. To set the number of retries, use the valueElicitationPrompt field for the slot type.  For example, in a pizza ordering bot, Amazon Lex might ask a user "What type of crust would you like?" If the user's response is not one of the expected responses (for example, "thin crust, "deep dish," etc.), Amazon Lex tries to elicit a correct response a few more times.  For example, in a pizza ordering application, OrderPizza might be one of the intents. This intent might require the CrustType slot. You specify the valueElicitationPrompt field when you create the CrustType slot. If you have defined a fallback intent the abort statement will not be sent to the user, the fallback intent is used instead. For more information, see  AMAZON.FallbackIntent.
+     * When Amazon Lex can't understand the user's input in context, it tries to elicit the information a few times. After that, Amazon Lex sends the message defined in abortStatement to the user, and then cancels the conversation. To set the number of retries, use the valueElicitationPrompt field for the slot type.  For example, in a pizza ordering bot, Amazon Lex might ask a user "What type of crust would you like?" If the user's response is not one of the expected responses (for example, "thin crust, "deep dish," etc.), Amazon Lex tries to elicit a correct response a few more times.  For example, in a pizza ordering application, OrderPizza might be one of the intents. This intent might require the CrustType slot. You specify the valueElicitationPrompt field when you create the CrustType slot. If you have defined a fallback intent the cancel statement will not be sent to the user, the fallback intent is used instead. For more information, see  AMAZON.FallbackIntent.
      */
     abortStatement?: Statement;
     /**
@@ -1827,11 +1827,11 @@ declare namespace LexModelBuildingService {
      */
     intents?: IntentList;
     /**
-     * Indicates whether the bot uses the new natural language understanding (NLU) model or the original NLU. True indicates that the bot is using the new model, otherwise, false.
+     * Indicates whether the bot uses accuracy improvements. true indicates that the bot is using the imoprovements, otherwise, false.
      */
     enableModelImprovements?: Boolean;
     /**
-     * The score that determines where Amazon Lex inserts the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents in a PostContent or PostText response. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they are configured for the bot.
+     * The score that determines where Amazon Lex inserts the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents in a PostContent or PostText response. AMAZON.FallbackIntent is inserted if the confidence score for all intents is below this value. AMAZON.KendraSearchIntent is only inserted if it is configured for the bot.
      */
     nluIntentConfidenceThreshold?: ConfidenceThreshold;
     /**
@@ -1839,7 +1839,7 @@ declare namespace LexModelBuildingService {
      */
     clarificationPrompt?: Prompt;
     /**
-     * The message that Amazon Lex uses to abort a conversation. For more information, see PutBot.
+     * The message that Amazon Lex uses to cancel a conversation. For more information, see PutBot.
      */
     abortStatement?: Statement;
     /**
@@ -2033,7 +2033,7 @@ declare namespace LexModelBuildingService {
      */
     description?: Description;
     /**
-     * A list of EnumerationValue objects that defines the values that the slot type can take. Each value can have a list of synonyms, which are additional values that help train the machine learning model about the values that it resolves for a slot.  When Amazon Lex resolves a slot value, it generates a resolution list that contains up to five possible values for the slot. If you are using a Lambda function, this resolution list is passed to the function. If you are not using a Lambda function you can choose to return the value that the user entered or the first value in the resolution list as the slot value. The valueSelectionStrategy field indicates the option to use. 
+     * A list of EnumerationValue objects that defines the values that the slot type can take. Each value can have a list of synonyms, which are additional values that help train the machine learning model about the values that it resolves for a slot.  A regular expression slot type doesn't require enumeration values. All other slot types require a list of enumeration values. When Amazon Lex resolves a slot value, it generates a resolution list that contains up to five possible values for the slot. If you are using a Lambda function, this resolution list is passed to the function. If you are not using a Lambda function you can choose to return the value that the user entered or the first value in the resolution list as the slot value. The valueSelectionStrategy field indicates the option to use. 
      */
     enumerationValues?: EnumerationValues;
     /**

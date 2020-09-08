@@ -1145,8 +1145,16 @@ declare namespace QuickSight {
      * The QuickSight customizations you're adding in the current AWS Region. You can add these to an AWS account and a QuickSight namespace.  For example, you could add a default theme by setting AccountCustomization to the midnight theme: "AccountCustomization": { "DefaultTheme": "arn:aws:quicksight::aws:theme/MIDNIGHT" }. . Or, you could add a custom theme by specifying "AccountCustomization": { "DefaultTheme": "arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639" }. 
      */
     AccountCustomization: AccountCustomization;
+    /**
+     * A list of the tags that you want to attach to this resource.
+     */
+    Tags?: TagList;
   }
   export interface CreateAccountCustomizationResponse {
+    /**
+     * The Amazon Resource Name (ARN) for the customization that you created for this AWS account.
+     */
+    Arn?: Arn;
     /**
      * The ID for the AWS account that you want to customize QuickSight for.
      */
@@ -2787,6 +2795,10 @@ declare namespace QuickSight {
     Resolved?: boolean;
   }
   export interface DescribeAccountCustomizationResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the customization that's associated with this AWS account.
+     */
+    Arn?: Arn;
     /**
      * The ID for the AWS account that you're describing.
      */
@@ -5487,6 +5499,10 @@ declare namespace QuickSight {
     AccountCustomization: AccountCustomization;
   }
   export interface UpdateAccountCustomizationResponse {
+    /**
+     * The Amazon Resource Name (ARN) for the updated customization for this AWS account.
+     */
+    Arn?: Arn;
     /**
      * The ID for the AWS account that you want to update QuickSight customizations for.
      */

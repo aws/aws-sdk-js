@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.747.0-->
+<!--LATEST=2.748.0-->
 <!--ENTRYINSERT-->
+
+## 2.748.0
+* bugfix: protocol: Allow error code extraction from pascal cased Code attribute in the JSON body response
+* feature: ApiGatewayV2: You can now secure HTTP APIs using Lambda authorizers and IAM authorizers. These options enable you to make flexible auth decisions using a Lambda function, or using IAM policies, respectively.
+* feature: CodeBuild: AWS CodeBuild - Support keyword search for test cases in DecribeTestCases API . Allow deletion of reports in the report group, before deletion of report group using the deleteReports flag.
+* feature: ELBv2: Adds support for Application Load Balancers on Outposts.
+* feature: LexModelBuildingService: Amazon Lex supports en-AU locale
+* feature: QuickSight: Adds tagging support for QuickSight customization resources.  A user can now specify a list of tags when creating a customization resource and use a customization ARN in QuickSight's tagging APIs.
 
 ## 2.747.0
 * feature: WorkSpaces: Adding support for Microsoft Office 2016 and Microsoft Office 2019 in BYOL Images

@@ -108,11 +108,11 @@ declare class CodeBuild extends Service {
    */
   deleteReport(callback?: (err: AWSError, data: CodeBuild.Types.DeleteReportOutput) => void): Request<CodeBuild.Types.DeleteReportOutput, AWSError>;
   /**
-   *  DeleteReportGroup: Deletes a report group. Before you delete a report group, you must delete its reports. Use ListReportsForReportGroup to get the reports in a report group. Use DeleteReport to delete the reports. If you call DeleteReportGroup for a report group that contains one or more reports, an exception is thrown. 
+   * Deletes a report group. Before you delete a report group, you must delete its reports. 
    */
   deleteReportGroup(params: CodeBuild.Types.DeleteReportGroupInput, callback?: (err: AWSError, data: CodeBuild.Types.DeleteReportGroupOutput) => void): Request<CodeBuild.Types.DeleteReportGroupOutput, AWSError>;
   /**
-   *  DeleteReportGroup: Deletes a report group. Before you delete a report group, you must delete its reports. Use ListReportsForReportGroup to get the reports in a report group. Use DeleteReport to delete the reports. If you call DeleteReportGroup for a report group that contains one or more reports, an exception is thrown. 
+   * Deletes a report group. Before you delete a report group, you must delete its reports. 
    */
   deleteReportGroup(callback?: (err: AWSError, data: CodeBuild.Types.DeleteReportGroupOutput) => void): Request<CodeBuild.Types.DeleteReportGroupOutput, AWSError>;
   /**
@@ -1123,9 +1123,13 @@ declare namespace CodeBuild {
   }
   export interface DeleteReportGroupInput {
     /**
-     *  The ARN of the report group to delete. 
+     * The ARN of the report group to delete. 
      */
     arn: NonEmptyString;
+    /**
+     * If true, deletes any reports that belong to a report group before deleting the report group.  If false, you must delete any reports in the report group. Use ListReportsForReportGroup to get the reports in a report group. Use DeleteReport to delete the reports. If you call DeleteReportGroup for a report group that contains one or more reports, an exception is thrown. 
+     */
+    deleteReports?: Boolean;
   }
   export interface DeleteReportGroupOutput {
   }
@@ -1281,7 +1285,7 @@ declare namespace CodeBuild {
      */
     value: String;
     /**
-     * The type of environment variable. Valid values include:    PARAMETER_STORE: An environment variable stored in Amazon EC2 Systems Manager Parameter Store. To learn how to specify a parameter store environment variable, see  parameter store reference-key in the buildspec file.    PLAINTEXT: An environment variable in plain text format. This is the default value.    SECRETS_MANAGER: An environment variable stored in AWS Secrets Manager. To learn how to specify a secrets manager environment variable, see  secrets manager reference-key in the buildspec file.  
+     * The type of environment variable. Valid values include:    PARAMETER_STORE: An environment variable stored in Amazon EC2 Systems Manager Parameter Store. To learn how to specify a parameter store environment variable, see env/parameter-store in the AWS CodeBuild User Guide.    PLAINTEXT: An environment variable in plain text format. This is the default value.    SECRETS_MANAGER: An environment variable stored in AWS Secrets Manager. To learn how to specify a secrets manager environment variable, see env/secrets-manager in the AWS CodeBuild User Guide.  
      */
     type?: EnvironmentVariableType;
   }
@@ -1908,7 +1912,7 @@ declare namespace CodeBuild {
      */
     type: EnvironmentType;
     /**
-     * The image tag or image digest that identifies the Docker image to use for this build project. Use the following formats:   For an image tag: registry/repository:tag. For example, to specify an image with the tag "latest," use registry/repository:latest.   For an image digest: registry/repository@digest. For example, to specify an image with the digest "sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf," use registry/repository@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf.  
+     * The image tag or image digest that identifies the Docker image to use for this build project. Use the following formats:   For an image tag: &lt;registry&gt;/&lt;repository&gt;:&lt;tag&gt;. For example, in the Docker repository that CodeBuild uses to manage its Docker images, this would be aws/codebuild/standard:4.0. To specify the latest version of this image, this would be aws/codebuild/standard:latest.   For an image digest: &lt;registry&gt;/&lt;repository&gt;@&lt;digest&gt;. For example, to specify an image with the digest "sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf," use &lt;registry&gt;/&lt;repository&gt;@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf.  
      */
     image: NonEmptyString;
     /**
@@ -2596,9 +2600,13 @@ declare namespace CodeBuild {
   }
   export interface TestCaseFilter {
     /**
-     *  The status used to filter test cases. Valid statuses are SUCCEEDED, FAILED, ERROR, SKIPPED, and UNKNOWN. A TestCaseFilter can have one status. 
+     * The status used to filter test cases. A TestCaseFilter can have one status. Valid values are:    SUCCEEDED     FAILED     ERROR     SKIPPED     UNKNOWN   
      */
     status?: String;
+    /**
+     * A keyword that is used to filter on the name or the prefix of the test cases. Only test cases where the keyword is a substring of the name or the prefix will be returned.
+     */
+    keyword?: String;
   }
   export type TestCases = TestCase[];
   export interface TestReportSummary {

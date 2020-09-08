@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.747.0',
+	  VERSION: '2.748.0',
 
 	  /**
 	   * @api private
@@ -8884,7 +8884,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if (resp.error) {
 	          reject(resp.error);
 	        } else {
-	          // define $response property so that it is not enumberable
+	          // define $response property so that it is not enumerable
 	          // this prevents circular reference errors when stringifying the JSON object
 	          resolve(Object.defineProperty(
 	            resp.data || {},

@@ -1553,7 +1553,7 @@
         },
         "abortStatement": {
           "shape": "Statement",
-          "documentation": "<p>The message that Amazon Lex uses to abort a conversation. For more information, see <a>PutBot</a>.</p>"
+          "documentation": "<p>The message that Amazon Lex uses to cancel a conversation. For more information, see <a>PutBot</a>.</p>"
         },
         "status": {
           "shape": "Status",
@@ -1597,7 +1597,7 @@
         },
         "enableModelImprovements": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether the bot uses the new natural language understanding (NLU) model or the original NLU. True indicates that the bot is using the new model, otherwise, false.</p>"
+          "documentation": "<p>Indicates whether the bot uses accuracy improvements. <code>true</code> indicates that the bot is using the imoprovements, otherwise, <code>false</code>.</p>"
         },
         "detectSentiment": {
           "shape": "Boolean",
@@ -2292,11 +2292,11 @@
         },
         "enableModelImprovements": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether the bot uses the new natural language understanding (NLU) model or the original NLU. True indicates that the bot is using the new model, otherwise, false.</p>"
+          "documentation": "<p>Indicates whether the bot uses accuracy improvements. <code>true</code> indicates that the bot is using the imoprovements, otherwise, <code>false</code>.</p>"
         },
         "nluIntentConfidenceThreshold": {
           "shape": "ConfidenceThreshold",
-          "documentation": "<p>The score that determines where Amazon Lex inserts the <code>AMAZON.FallbackIntent</code>, <code>AMAZON.KendraSearchIntent</code>, or both when returning alternative intents in a <a href=\"https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html\">PostContent</a> or <a href=\"https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html\">PostText</a> response. <code>AMAZON.FallbackIntent</code> and <code>AMAZON.KendraSearchIntent</code> are only inserted if they are configured for the bot.</p>"
+          "documentation": "<p>The score that determines where Amazon Lex inserts the <code>AMAZON.FallbackIntent</code>, <code>AMAZON.KendraSearchIntent</code>, or both when returning alternative intents in a <a href=\"https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html\">PostContent</a> or <a href=\"https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html\">PostText</a> response. <code>AMAZON.FallbackIntent</code> is inserted if the confidence score for all intents is below this value. <code>AMAZON.KendraSearchIntent</code> is only inserted if it is configured for the bot.</p>"
         },
         "clarificationPrompt": {
           "shape": "Prompt",
@@ -3174,7 +3174,8 @@
       "enum": [
         "en-US",
         "en-GB",
-        "de-DE"
+        "de-DE",
+        "en-AU"
       ]
     },
     "LocaleList": {
@@ -3471,11 +3472,11 @@
         },
         "enableModelImprovements": {
           "shape": "Boolean",
-          "documentation": "<p>Set to <code>true</code> to enable the use of a new natural language understanding (NLU) model. Using the new NLU may improve the performance of your bot. </p> <p>When you set the <code>enableModelImprovements</code> parameter to <code>true</code> you can use the <code>nluIntentConfidenceThreshold</code> parameter to configure confidence scores. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/confidence-scores.html\">Confidence Scores</a>.</p> <p>You can only set the <code>enableModelImprovements</code> parameter in certain Regions. If you set the parameter to <code>true</code>, your bot will use the new NLU. If you set the parameter to <code>false</code>, your bot will continue to use the original NLU. If you set the parameter to <code>false</code> after setting it to <code>true</code>, your bot will return to the original NLU.</p> <p>The Regions where you can set the <code>enableModelImprovements</code> parameter to <code>true</code> are:</p> <ul> <li> <p>US East (N. Virginia) (us-east-1)</p> </li> <li> <p>US West (Oregon) (us-west-2)</p> </li> <li> <p>Asia Pacific (Sydney) (ap-southeast-2)</p> </li> <li> <p>EU (Ireland) (eu-west-1)</p> </li> </ul> <p>In other Regions, the <code>enableModelImprovements</code> parameter is set to <code>true</code> by default. In these Regions setting the parameter to <code>false</code> throws a <code>ValidationException</code> exception.</p> <ul> <li> <p>Asia Pacific (Singapore) (ap-southeast-1)</p> </li> <li> <p>Asia Pacific (Tokyo) (ap-northeast-1)</p> </li> <li> <p>EU (Frankfurt) (eu-central-1)</p> </li> <li> <p>EU (London) (eu-west-2)</p> </li> </ul>"
+          "documentation": "<p>Set to <code>true</code> to enable access to natural language understanding improvements. </p> <p>When you set the <code>enableModelImprovements</code> parameter to <code>true</code> you can use the <code>nluIntentConfidenceThreshold</code> parameter to configure confidence scores. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/confidence-scores.html\">Confidence Scores</a>.</p> <p>You can only set the <code>enableModelImprovements</code> parameter in certain Regions. If you set the parameter to <code>true</code>, your bot has access to accuracy improvements.</p> <p>The Regions where you can set the <code>enableModelImprovements</code> parameter to <code>true</code> are:</p> <ul> <li> <p>US East (N. Virginia) (us-east-1)</p> </li> <li> <p>US West (Oregon) (us-west-2)</p> </li> <li> <p>Asia Pacific (Sydney) (ap-southeast-2)</p> </li> <li> <p>EU (Ireland) (eu-west-1)</p> </li> </ul> <p>In other Regions, the <code>enableModelImprovements</code> parameter is set to <code>true</code> by default. In these Regions setting the parameter to <code>false</code> throws a <code>ValidationException</code> exception.</p> <ul> <li> <p>Asia Pacific (Singapore) (ap-southeast-1)</p> </li> <li> <p>Asia Pacific (Tokyo) (ap-northeast-1)</p> </li> <li> <p>EU (Frankfurt) (eu-central-1)</p> </li> <li> <p>EU (London) (eu-west-2)</p> </li> </ul>"
         },
         "nluIntentConfidenceThreshold": {
           "shape": "ConfidenceThreshold",
-          "documentation": "<p>Determines the threshold where Amazon Lex will insert the <code>AMAZON.FallbackIntent</code>, <code>AMAZON.KendraSearchIntent</code>, or both when returning alternative intents in a <a href=\"https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html\">PostContent</a> or <a href=\"https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html\">PostText</a> response. <code>AMAZON.FallbackIntent</code> and <code>AMAZON.KendraSearchIntent</code> are only inserted if they are configured for the bot.</p> <p>You must set the <code>enableModelImprovements</code> parameter to <code>true</code> to use confidence scores.</p> <p>For example, suppose a bot is configured with the confidence threshold of 0.80 and the <code>AMAZON.FallbackIntent</code>. Amazon Lex returns three alternative intents with the following confidence scores: IntentA (0.70), IntentB (0.60), IntentC (0.50). The response from the <code>PostText</code> operation would be:</p> <ul> <li> <p>AMAZON.FallbackIntent</p> </li> <li> <p>IntentA</p> </li> <li> <p>IntentB</p> </li> <li> <p>IntentC</p> </li> </ul>"
+          "documentation": "<p>Determines the threshold where Amazon Lex will insert the <code>AMAZON.FallbackIntent</code>, <code>AMAZON.KendraSearchIntent</code>, or both when returning alternative intents in a <a href=\"https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html\">PostContent</a> or <a href=\"https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html\">PostText</a> response. <code>AMAZON.FallbackIntent</code> and <code>AMAZON.KendraSearchIntent</code> are only inserted if they are configured for the bot.</p> <p>You must set the <code>enableModelImprovements</code> parameter to <code>true</code> to use confidence scores.</p> <ul> <li> <p>US East (N. Virginia) (us-east-1)</p> </li> <li> <p>US West (Oregon) (us-west-2)</p> </li> <li> <p>Asia Pacific (Sydney) (ap-southeast-2)</p> </li> <li> <p>EU (Ireland) (eu-west-1)</p> </li> </ul> <p>In other Regions, the <code>enableModelImprovements</code> parameter is set to <code>true</code> by default.</p> <p>For example, suppose a bot is configured with the confidence threshold of 0.80 and the <code>AMAZON.FallbackIntent</code>. Amazon Lex returns three alternative intents with the following confidence scores: IntentA (0.70), IntentB (0.60), IntentC (0.50). The response from the <code>PostText</code> operation would be:</p> <ul> <li> <p>AMAZON.FallbackIntent</p> </li> <li> <p>IntentA</p> </li> <li> <p>IntentB</p> </li> <li> <p>IntentC</p> </li> </ul>"
         },
         "clarificationPrompt": {
           "shape": "Prompt",
@@ -3483,7 +3484,7 @@
         },
         "abortStatement": {
           "shape": "Statement",
-          "documentation": "<p>When Amazon Lex can't understand the user's input in context, it tries to elicit the information a few times. After that, Amazon Lex sends the message defined in <code>abortStatement</code> to the user, and then aborts the conversation. To set the number of retries, use the <code>valueElicitationPrompt</code> field for the slot type. </p> <p>For example, in a pizza ordering bot, Amazon Lex might ask a user \"What type of crust would you like?\" If the user's response is not one of the expected responses (for example, \"thin crust, \"deep dish,\" etc.), Amazon Lex tries to elicit a correct response a few more times. </p> <p>For example, in a pizza ordering application, <code>OrderPizza</code> might be one of the intents. This intent might require the <code>CrustType</code> slot. You specify the <code>valueElicitationPrompt</code> field when you create the <code>CrustType</code> slot.</p> <p>If you have defined a fallback intent the abort statement will not be sent to the user, the fallback intent is used instead. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/built-in-intent-fallback.html\"> AMAZON.FallbackIntent</a>.</p>"
+          "documentation": "<p>When Amazon Lex can't understand the user's input in context, it tries to elicit the information a few times. After that, Amazon Lex sends the message defined in <code>abortStatement</code> to the user, and then cancels the conversation. To set the number of retries, use the <code>valueElicitationPrompt</code> field for the slot type. </p> <p>For example, in a pizza ordering bot, Amazon Lex might ask a user \"What type of crust would you like?\" If the user's response is not one of the expected responses (for example, \"thin crust, \"deep dish,\" etc.), Amazon Lex tries to elicit a correct response a few more times. </p> <p>For example, in a pizza ordering application, <code>OrderPizza</code> might be one of the intents. This intent might require the <code>CrustType</code> slot. You specify the <code>valueElicitationPrompt</code> field when you create the <code>CrustType</code> slot.</p> <p>If you have defined a fallback intent the cancel statement will not be sent to the user, the fallback intent is used instead. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/built-in-intent-fallback.html\"> AMAZON.FallbackIntent</a>.</p>"
         },
         "idleSessionTTLInSeconds": {
           "shape": "SessionTTL",
@@ -3540,11 +3541,11 @@
         },
         "enableModelImprovements": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether the bot uses the new natural language understanding (NLU) model or the original NLU. True indicates that the bot is using the new model, otherwise, false.</p>"
+          "documentation": "<p>Indicates whether the bot uses accuracy improvements. <code>true</code> indicates that the bot is using the imoprovements, otherwise, <code>false</code>.</p>"
         },
         "nluIntentConfidenceThreshold": {
           "shape": "ConfidenceThreshold",
-          "documentation": "<p>The score that determines where Amazon Lex inserts the <code>AMAZON.FallbackIntent</code>, <code>AMAZON.KendraSearchIntent</code>, or both when returning alternative intents in a <a href=\"https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html\">PostContent</a> or <a href=\"https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html\">PostText</a> response. <code>AMAZON.FallbackIntent</code> and <code>AMAZON.KendraSearchIntent</code> are only inserted if they are configured for the bot.</p>"
+          "documentation": "<p>The score that determines where Amazon Lex inserts the <code>AMAZON.FallbackIntent</code>, <code>AMAZON.KendraSearchIntent</code>, or both when returning alternative intents in a <a href=\"https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html\">PostContent</a> or <a href=\"https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html\">PostText</a> response. <code>AMAZON.FallbackIntent</code> is inserted if the confidence score for all intents is below this value. <code>AMAZON.KendraSearchIntent</code> is only inserted if it is configured for the bot.</p>"
         },
         "clarificationPrompt": {
           "shape": "Prompt",
@@ -3552,7 +3553,7 @@
         },
         "abortStatement": {
           "shape": "Statement",
-          "documentation": "<p>The message that Amazon Lex uses to abort a conversation. For more information, see <a>PutBot</a>.</p>"
+          "documentation": "<p>The message that Amazon Lex uses to cancel a conversation. For more information, see <a>PutBot</a>.</p>"
         },
         "status": {
           "shape": "Status",
@@ -3765,7 +3766,7 @@
         },
         "enumerationValues": {
           "shape": "EnumerationValues",
-          "documentation": "<p>A list of <code>EnumerationValue</code> objects that defines the values that the slot type can take. Each value can have a list of <code>synonyms</code>, which are additional values that help train the machine learning model about the values that it resolves for a slot. </p> <p>When Amazon Lex resolves a slot value, it generates a resolution list that contains up to five possible values for the slot. If you are using a Lambda function, this resolution list is passed to the function. If you are not using a Lambda function you can choose to return the value that the user entered or the first value in the resolution list as the slot value. The <code>valueSelectionStrategy</code> field indicates the option to use. </p>"
+          "documentation": "<p>A list of <code>EnumerationValue</code> objects that defines the values that the slot type can take. Each value can have a list of <code>synonyms</code>, which are additional values that help train the machine learning model about the values that it resolves for a slot. </p> <p>A regular expression slot type doesn't require enumeration values. All other slot types require a list of enumeration values.</p> <p>When Amazon Lex resolves a slot value, it generates a resolution list that contains up to five possible values for the slot. If you are using a Lambda function, this resolution list is passed to the function. If you are not using a Lambda function you can choose to return the value that the user entered or the first value in the resolution list as the slot value. The <code>valueSelectionStrategy</code> field indicates the option to use. </p>"
         },
         "checksum": {
           "shape": "String",
