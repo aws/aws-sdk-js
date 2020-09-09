@@ -227,3 +227,4 @@ export import IVS = require('./ivs');
 export import Braket = require('./braket');
 export import IdentityStore = require('./identitystore');
 export import Appflow = require('./appflow');
+export import RedshiftData = require('./redshiftdata');

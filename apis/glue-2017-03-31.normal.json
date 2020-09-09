@@ -2027,6 +2027,37 @@
       ],
       "documentation": "<p>Retrieves information about a specified partition.</p>"
     },
+    "GetPartitionIndexes": {
+      "name": "GetPartitionIndexes",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetPartitionIndexesRequest"
+      },
+      "output": {
+        "shape": "GetPartitionIndexesResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        }
+      ],
+      "documentation": "<p>Retrieves the partition indexes associated with a table.</p>"
+    },
     "GetPartitions": {
       "name": "GetPartitions",
       "http": {
@@ -4954,7 +4985,7 @@
         },
         "ConnectionProperties": {
           "shape": "ConnectionProperties",
-          "documentation": "<p>These key-value pairs define parameters for the connection:</p> <ul> <li> <p> <code>HOST</code> - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.</p> </li> <li> <p> <code>PORT</code> - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.</p> </li> <li> <p> <code>USER_NAME</code> - The name under which to log in to the database. The value string for <code>USER_NAME</code> is \"<code>USERNAME</code>\".</p> </li> <li> <p> <code>PASSWORD</code> - A password, if one is used, for the user name.</p> </li> <li> <p> <code>ENCRYPTED_PASSWORD</code> - When you enable connection password protection by setting <code>ConnectionPasswordEncryption</code> in the Data Catalog encryption settings, this field stores the encrypted password.</p> </li> <li> <p> <code>JDBC_DRIVER_JAR_URI</code> - The Amazon Simple Storage Service (Amazon S3) path of the JAR file that contains the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_DRIVER_CLASS_NAME</code> - The class name of the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_ENGINE</code> - The name of the JDBC engine to use.</p> </li> <li> <p> <code>JDBC_ENGINE_VERSION</code> - The version of the JDBC engine to use.</p> </li> <li> <p> <code>CONFIG_FILES</code> - (Reserved for future use.)</p> </li> <li> <p> <code>INSTANCE_ID</code> - The instance ID to use.</p> </li> <li> <p> <code>JDBC_CONNECTION_URL</code> - The URL for connecting to a JDBC data source.</p> </li> <li> <p> <code>JDBC_ENFORCE_SSL</code> - A Boolean string (true, false) specifying whether Secure Sockets Layer (SSL) with hostname matching is enforced for the JDBC connection on the client. The default is false.</p> </li> <li> <p> <code>CUSTOM_JDBC_CERT</code> - An Amazon S3 location specifying the customer's root certificate. AWS Glue uses this root certificate to validate the customer’s certificate when connecting to the customer database. AWS Glue only handles X.509 certificates. The certificate provided must be DER-encoded and supplied in Base64 encoding PEM format.</p> </li> <li> <p> <code>SKIP_CUSTOM_JDBC_CERT_VALIDATION</code> - By default, this is <code>false</code>. AWS Glue validates the Signature algorithm and Subject Public Key Algorithm for the customer certificate. The only permitted algorithms for the Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA. For the Subject Public Key Algorithm, the key length must be at least 2048. You can set the value of this property to <code>true</code> to skip AWS Glue’s validation of the customer certificate.</p> </li> <li> <p> <code>CUSTOM_JDBC_CERT_STRING</code> - A custom JDBC certificate string which is used for domain match or distinguished name match to prevent a man-in-the-middle attack. In Oracle database, this is used as the <code>SSL_SERVER_CERT_DN</code>; in Microsoft SQL Server, this is used as the <code>hostNameInCertificate</code>.</p> </li> <li> <p> <code>CONNECTION_URL</code> - The URL for connecting to a general (non-JDBC) data source.</p> </li> <li> <p> <code>KAFKA_BOOTSTRAP_SERVERS</code> - A comma-separated list of host and port pairs that are the addresses of the Apache Kafka brokers in a Kafka cluster to which a Kafka client will connect to and bootstrap itself.</p> </li> <li> <p> <code>KAFKA_SSL_ENABLED</code> - Whether to enable or disable SSL on an Apache Kafka connection. Default value is \"true\".</p> </li> <li> <p> <code>KAFKA_CUSTOM_CERT</code> - The Amazon S3 URL for the private CA cert file (.pem format). The default is an empty string.</p> </li> <li> <p> <code>KAFKA_SKIP_CUSTOM_CERT_VALIDATION</code> - Whether to skip the validation of the CA cert file or not. AWS Glue validates for three algorithms: SHA256withRSA, SHA384withRSA and SHA512withRSA. Default value is \"false\".</p> </li> </ul>"
+          "documentation": "<p>These key-value pairs define parameters for the connection:</p> <ul> <li> <p> <code>HOST</code> - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.</p> </li> <li> <p> <code>PORT</code> - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.</p> </li> <li> <p> <code>USER_NAME</code> - The name under which to log in to the database. The value string for <code>USER_NAME</code> is \"<code>USERNAME</code>\".</p> </li> <li> <p> <code>PASSWORD</code> - A password, if one is used, for the user name.</p> </li> <li> <p> <code>ENCRYPTED_PASSWORD</code> - When you enable connection password protection by setting <code>ConnectionPasswordEncryption</code> in the Data Catalog encryption settings, this field stores the encrypted password.</p> </li> <li> <p> <code>JDBC_DRIVER_JAR_URI</code> - The Amazon Simple Storage Service (Amazon S3) path of the JAR file that contains the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_DRIVER_CLASS_NAME</code> - The class name of the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_ENGINE</code> - The name of the JDBC engine to use.</p> </li> <li> <p> <code>JDBC_ENGINE_VERSION</code> - The version of the JDBC engine to use.</p> </li> <li> <p> <code>CONFIG_FILES</code> - (Reserved for future use.)</p> </li> <li> <p> <code>INSTANCE_ID</code> - The instance ID to use.</p> </li> <li> <p> <code>JDBC_CONNECTION_URL</code> - The URL for connecting to a JDBC data source.</p> </li> <li> <p> <code>JDBC_ENFORCE_SSL</code> - A Boolean string (true, false) specifying whether Secure Sockets Layer (SSL) with hostname matching is enforced for the JDBC connection on the client. The default is false.</p> </li> <li> <p> <code>CUSTOM_JDBC_CERT</code> - An Amazon S3 location specifying the customer's root certificate. AWS Glue uses this root certificate to validate the customer’s certificate when connecting to the customer database. AWS Glue only handles X.509 certificates. The certificate provided must be DER-encoded and supplied in Base64 encoding PEM format.</p> </li> <li> <p> <code>SKIP_CUSTOM_JDBC_CERT_VALIDATION</code> - By default, this is <code>false</code>. AWS Glue validates the Signature algorithm and Subject Public Key Algorithm for the customer certificate. The only permitted algorithms for the Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA. For the Subject Public Key Algorithm, the key length must be at least 2048. You can set the value of this property to <code>true</code> to skip AWS Glue’s validation of the customer certificate.</p> </li> <li> <p> <code>CUSTOM_JDBC_CERT_STRING</code> - A custom JDBC certificate string which is used for domain match or distinguished name match to prevent a man-in-the-middle attack. In Oracle database, this is used as the <code>SSL_SERVER_CERT_DN</code>; in Microsoft SQL Server, this is used as the <code>hostNameInCertificate</code>.</p> </li> <li> <p> <code>CONNECTION_URL</code> - The URL for connecting to a general (non-JDBC) data source.</p> </li> <li> <p> <code>KAFKA_BOOTSTRAP_SERVERS</code> - A comma-separated list of host and port pairs that are the addresses of the Apache Kafka brokers in a Kafka cluster to which a Kafka client will connect to and bootstrap itself.</p> </li> </ul>"
         },
         "PhysicalConnectionRequirements": {
           "shape": "PhysicalConnectionRequirements",
@@ -4993,7 +5024,7 @@
         },
         "ConnectionType": {
           "shape": "ConnectionType",
-          "documentation": "<p>The type of the connection. Currently, these types are supported:</p> <ul> <li> <p> <code>JDBC</code> - Designates a connection to a database through Java Database Connectivity (JDBC).</p> </li> <li> <p> <code>KAFKA</code> - Designates a connection to an Apache Kafka streaming platform.</p> </li> <li> <p> <code>MONGODB</code> - Designates a connection to a MongoDB document database.</p> </li> <li> <p> <code>NETWORK</code> - Designates a network connection to a data source within an Amazon Virtual Private Cloud environment (Amazon VPC).</p> </li> </ul> <p>SFTP is not supported.</p>"
+          "documentation": "<p>The type of the connection. Currently, these types are supported:</p> <ul> <li> <p> <code>JDBC</code> - Designates a connection to a database through Java Database Connectivity (JDBC).</p> </li> <li> <p> <code>KAFKA</code> - Designates a connection to an Apache Kafka streaming platform.</p> </li> <li> <p> <code>MONGODB</code> - Designates a connection to a MongoDB document database.</p> </li> </ul> <p>SFTP is not supported.</p>"
         },
         "MatchCriteria": {
           "shape": "MatchCriteria",
@@ -5951,6 +5982,10 @@
         "TableInput": {
           "shape": "TableInput",
           "documentation": "<p>The <code>TableInput</code> object that defines the metadata table to create in the catalog.</p>"
+        },
+        "PartitionIndexes": {
+          "shape": "PartitionIndexList",
+          "documentation": "<p>A list of partition indexes, <code>PartitionIndex</code> structures, to create in the table.</p>"
         }
       }
     },
@@ -8083,6 +8118,44 @@
         }
       }
     },
+    "GetPartitionIndexesRequest": {
+      "type": "structure",
+      "required": [
+        "DatabaseName",
+        "TableName"
+      ],
+      "members": {
+        "CatalogId": {
+          "shape": "CatalogIdString",
+          "documentation": "<p>The catalog ID where the table resides.</p>"
+        },
+        "DatabaseName": {
+          "shape": "NameString",
+          "documentation": "<p>Specifies the name of a database from which you want to retrieve partition indexes.</p>"
+        },
+        "TableName": {
+          "shape": "NameString",
+          "documentation": "<p>Specifies the name of a table for which you want to retrieve the partition indexes.</p>"
+        },
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>A continuation token, included if this is a continuation call.</p>"
+        }
+      }
+    },
+    "GetPartitionIndexesResponse": {
+      "type": "structure",
+      "members": {
+        "PartitionIndexDescriptorList": {
+          "shape": "PartitionIndexDescriptorList",
+          "documentation": "<p>A list of index descriptors.</p>"
+        },
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>A continuation token, present if the current list segment is not the last.</p>"
+        }
+      }
+    },
     "GetPartitionRequest": {
       "type": "structure",
       "required": [
@@ -9332,6 +9405,38 @@
     "JsonValue": {
       "type": "string"
     },
+    "KeyList": {
+      "type": "list",
+      "member": {
+        "shape": "NameString"
+      },
+      "min": 1
+    },
+    "KeySchemaElement": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "Type"
+      ],
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The name of a partition key.</p>"
+        },
+        "Type": {
+          "shape": "ColumnTypeString",
+          "documentation": "<p>The type of a partition key.</p>"
+        }
+      },
+      "documentation": "<p>A partition key pair consisting of a name and a type.</p>"
+    },
+    "KeySchemaElementList": {
+      "type": "list",
+      "member": {
+        "shape": "KeySchemaElement"
+      },
+      "min": 1
+    },
     "KeyString": {
       "type": "string",
       "max": 255,
@@ -10039,6 +10144,66 @@
       "member": {
         "shape": "PartitionError"
       }
+    },
+    "PartitionIndex": {
+      "type": "structure",
+      "required": [
+        "Keys",
+        "IndexName"
+      ],
+      "members": {
+        "Keys": {
+          "shape": "KeyList",
+          "documentation": "<p>The keys for the partition index.</p>"
+        },
+        "IndexName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the partition index.</p>"
+        }
+      },
+      "documentation": "<p>A structure for a partition index.</p>"
+    },
+    "PartitionIndexDescriptor": {
+      "type": "structure",
+      "required": [
+        "IndexName",
+        "Keys",
+        "IndexStatus"
+      ],
+      "members": {
+        "IndexName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the partition index.</p>"
+        },
+        "Keys": {
+          "shape": "KeySchemaElementList",
+          "documentation": "<p>A list of one or more keys, as <code>KeySchemaElement</code> structures, for the partition index.</p>"
+        },
+        "IndexStatus": {
+          "shape": "PartitionIndexStatus",
+          "documentation": "<p>The status of the partition index. </p>"
+        }
+      },
+      "documentation": "<p>A descriptor for a partition index in a table.</p>"
+    },
+    "PartitionIndexDescriptorList": {
+      "type": "list",
+      "member": {
+        "shape": "PartitionIndexDescriptor"
+      }
+    },
+    "PartitionIndexList": {
+      "type": "list",
+      "member": {
+        "shape": "PartitionIndex"
+      },
+      "max": 3
+    },
+    "PartitionIndexStatus": {
+      "type": "string",
+      "enum": [
+        "ACTIVE"
+      ]
     },
     "PartitionInput": {
       "type": "structure",

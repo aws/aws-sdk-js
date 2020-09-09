@@ -228,5 +228,6 @@ module.exports = {
   IVS: require('./ivs'),
   Braket: require('./braket'),
   IdentityStore: require('./identitystore'),
-  Appflow: require('./appflow')
+  Appflow: require('./appflow'),
+  RedshiftData: require('./redshiftdata')
 };

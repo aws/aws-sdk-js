@@ -893,5 +893,9 @@
   },
   "appflow": {
     "name": "Appflow"
+  },
+  "redshiftdata": {
+    "prefix": "redshift-data",
+    "name": "RedshiftData"
   }
 }

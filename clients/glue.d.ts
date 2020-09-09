@@ -580,6 +580,14 @@ declare class Glue extends Service {
    */
   getPartition(callback?: (err: AWSError, data: Glue.Types.GetPartitionResponse) => void): Request<Glue.Types.GetPartitionResponse, AWSError>;
   /**
+   * Retrieves the partition indexes associated with a table.
+   */
+  getPartitionIndexes(params: Glue.Types.GetPartitionIndexesRequest, callback?: (err: AWSError, data: Glue.Types.GetPartitionIndexesResponse) => void): Request<Glue.Types.GetPartitionIndexesResponse, AWSError>;
+  /**
+   * Retrieves the partition indexes associated with a table.
+   */
+  getPartitionIndexes(callback?: (err: AWSError, data: Glue.Types.GetPartitionIndexesResponse) => void): Request<Glue.Types.GetPartitionIndexesResponse, AWSError>;
+  /**
    * Retrieves information about the partitions in a table.
    */
   getPartitions(params: Glue.Types.GetPartitionsRequest, callback?: (err: AWSError, data: Glue.Types.GetPartitionsResponse) => void): Request<Glue.Types.GetPartitionsResponse, AWSError>;
@@ -1719,7 +1727,7 @@ declare namespace Glue {
      */
     MatchCriteria?: MatchCriteria;
     /**
-     * These key-value pairs define parameters for the connection:    HOST - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.    PORT - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.    USER_NAME - The name under which to log in to the database. The value string for USER_NAME is "USERNAME".    PASSWORD - A password, if one is used, for the user name.    ENCRYPTED_PASSWORD - When you enable connection password protection by setting ConnectionPasswordEncryption in the Data Catalog encryption settings, this field stores the encrypted password.    JDBC_DRIVER_JAR_URI - The Amazon Simple Storage Service (Amazon S3) path of the JAR file that contains the JDBC driver to use.    JDBC_DRIVER_CLASS_NAME - The class name of the JDBC driver to use.    JDBC_ENGINE - The name of the JDBC engine to use.    JDBC_ENGINE_VERSION - The version of the JDBC engine to use.    CONFIG_FILES - (Reserved for future use.)    INSTANCE_ID - The instance ID to use.    JDBC_CONNECTION_URL - The URL for connecting to a JDBC data source.    JDBC_ENFORCE_SSL - A Boolean string (true, false) specifying whether Secure Sockets Layer (SSL) with hostname matching is enforced for the JDBC connection on the client. The default is false.    CUSTOM_JDBC_CERT - An Amazon S3 location specifying the customer's root certificate. AWS Glue uses this root certificate to validate the customer’s certificate when connecting to the customer database. AWS Glue only handles X.509 certificates. The certificate provided must be DER-encoded and supplied in Base64 encoding PEM format.    SKIP_CUSTOM_JDBC_CERT_VALIDATION - By default, this is false. AWS Glue validates the Signature algorithm and Subject Public Key Algorithm for the customer certificate. The only permitted algorithms for the Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA. For the Subject Public Key Algorithm, the key length must be at least 2048. You can set the value of this property to true to skip AWS Glue’s validation of the customer certificate.    CUSTOM_JDBC_CERT_STRING - A custom JDBC certificate string which is used for domain match or distinguished name match to prevent a man-in-the-middle attack. In Oracle database, this is used as the SSL_SERVER_CERT_DN; in Microsoft SQL Server, this is used as the hostNameInCertificate.    CONNECTION_URL - The URL for connecting to a general (non-JDBC) data source.    KAFKA_BOOTSTRAP_SERVERS - A comma-separated list of host and port pairs that are the addresses of the Apache Kafka brokers in a Kafka cluster to which a Kafka client will connect to and bootstrap itself.    KAFKA_SSL_ENABLED - Whether to enable or disable SSL on an Apache Kafka connection. Default value is "true".    KAFKA_CUSTOM_CERT - The Amazon S3 URL for the private CA cert file (.pem format). The default is an empty string.    KAFKA_SKIP_CUSTOM_CERT_VALIDATION - Whether to skip the validation of the CA cert file or not. AWS Glue validates for three algorithms: SHA256withRSA, SHA384withRSA and SHA512withRSA. Default value is "false".  
+     * These key-value pairs define parameters for the connection:    HOST - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.    PORT - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.    USER_NAME - The name under which to log in to the database. The value string for USER_NAME is "USERNAME".    PASSWORD - A password, if one is used, for the user name.    ENCRYPTED_PASSWORD - When you enable connection password protection by setting ConnectionPasswordEncryption in the Data Catalog encryption settings, this field stores the encrypted password.    JDBC_DRIVER_JAR_URI - The Amazon Simple Storage Service (Amazon S3) path of the JAR file that contains the JDBC driver to use.    JDBC_DRIVER_CLASS_NAME - The class name of the JDBC driver to use.    JDBC_ENGINE - The name of the JDBC engine to use.    JDBC_ENGINE_VERSION - The version of the JDBC engine to use.    CONFIG_FILES - (Reserved for future use.)    INSTANCE_ID - The instance ID to use.    JDBC_CONNECTION_URL - The URL for connecting to a JDBC data source.    JDBC_ENFORCE_SSL - A Boolean string (true, false) specifying whether Secure Sockets Layer (SSL) with hostname matching is enforced for the JDBC connection on the client. The default is false.    CUSTOM_JDBC_CERT - An Amazon S3 location specifying the customer's root certificate. AWS Glue uses this root certificate to validate the customer’s certificate when connecting to the customer database. AWS Glue only handles X.509 certificates. The certificate provided must be DER-encoded and supplied in Base64 encoding PEM format.    SKIP_CUSTOM_JDBC_CERT_VALIDATION - By default, this is false. AWS Glue validates the Signature algorithm and Subject Public Key Algorithm for the customer certificate. The only permitted algorithms for the Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA. For the Subject Public Key Algorithm, the key length must be at least 2048. You can set the value of this property to true to skip AWS Glue’s validation of the customer certificate.    CUSTOM_JDBC_CERT_STRING - A custom JDBC certificate string which is used for domain match or distinguished name match to prevent a man-in-the-middle attack. In Oracle database, this is used as the SSL_SERVER_CERT_DN; in Microsoft SQL Server, this is used as the hostNameInCertificate.    CONNECTION_URL - The URL for connecting to a general (non-JDBC) data source.    KAFKA_BOOTSTRAP_SERVERS - A comma-separated list of host and port pairs that are the addresses of the Apache Kafka brokers in a Kafka cluster to which a Kafka client will connect to and bootstrap itself.  
      */
     ConnectionProperties?: ConnectionProperties;
     /**
@@ -1749,7 +1757,7 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * The type of the connection. Currently, these types are supported:    JDBC - Designates a connection to a database through Java Database Connectivity (JDBC).    KAFKA - Designates a connection to an Apache Kafka streaming platform.    MONGODB - Designates a connection to a MongoDB document database.    NETWORK - Designates a network connection to a data source within an Amazon Virtual Private Cloud environment (Amazon VPC).   SFTP is not supported.
+     * The type of the connection. Currently, these types are supported:    JDBC - Designates a connection to a database through Java Database Connectivity (JDBC).    KAFKA - Designates a connection to an Apache Kafka streaming platform.    MONGODB - Designates a connection to a MongoDB document database.   SFTP is not supported.
      */
     ConnectionType: ConnectionType;
     /**
@@ -2459,6 +2467,10 @@ declare namespace Glue {
      * The TableInput object that defines the metadata table to create in the catalog.
      */
     TableInput: TableInput;
+    /**
+     * A list of partition indexes, PartitionIndex structures, to create in the table.
+     */
+    PartitionIndexes?: PartitionIndexList;
   }
   export interface CreateTableResponse {
   }
@@ -3897,6 +3909,34 @@ declare namespace Glue {
      */
     Mapping: MappingList;
   }
+  export interface GetPartitionIndexesRequest {
+    /**
+     * The catalog ID where the table resides.
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * Specifies the name of a database from which you want to retrieve partition indexes.
+     */
+    DatabaseName: NameString;
+    /**
+     * Specifies the name of a table for which you want to retrieve the partition indexes.
+     */
+    TableName: NameString;
+    /**
+     * A continuation token, included if this is a continuation call.
+     */
+    NextToken?: Token;
+  }
+  export interface GetPartitionIndexesResponse {
+    /**
+     * A list of index descriptors.
+     */
+    PartitionIndexDescriptorList?: PartitionIndexDescriptorList;
+    /**
+     * A continuation token, present if the current list segment is not the last.
+     */
+    NextToken?: Token;
+  }
   export interface GetPartitionRequest {
     /**
      * The ID of the Data Catalog where the partition in question resides. If none is provided, the AWS account ID is used by default.
@@ -4799,6 +4839,18 @@ declare namespace Glue {
   }
   export type JsonPath = string;
   export type JsonValue = string;
+  export type KeyList = NameString[];
+  export interface KeySchemaElement {
+    /**
+     * The name of a partition key.
+     */
+    Name: NameString;
+    /**
+     * The type of a partition key.
+     */
+    Type: ColumnTypeString;
+  }
+  export type KeySchemaElementList = KeySchemaElement[];
   export type KeyString = string;
   export type KmsKeyArn = string;
   export type LabelCount = number;
@@ -5243,6 +5295,33 @@ declare namespace Glue {
     ErrorDetail?: ErrorDetail;
   }
   export type PartitionErrors = PartitionError[];
+  export interface PartitionIndex {
+    /**
+     * The keys for the partition index.
+     */
+    Keys: KeyList;
+    /**
+     * The name of the partition index.
+     */
+    IndexName: NameString;
+  }
+  export interface PartitionIndexDescriptor {
+    /**
+     * The name of the partition index.
+     */
+    IndexName: NameString;
+    /**
+     * A list of one or more keys, as KeySchemaElement structures, for the partition index.
+     */
+    Keys: KeySchemaElementList;
+    /**
+     * The status of the partition index. 
+     */
+    IndexStatus: PartitionIndexStatus;
+  }
+  export type PartitionIndexDescriptorList = PartitionIndexDescriptor[];
+  export type PartitionIndexList = PartitionIndex[];
+  export type PartitionIndexStatus = "ACTIVE"|string;
   export interface PartitionInput {
     /**
      * The values of the partition. Although this parameter is not required by the SDK, you must specify this parameter for a valid input. The values for the keys for the new partition must be passed as an array of String objects that must be ordered in the same order as the partition keys appearing in the Amazon S3 prefix. Otherwise AWS Glue will add the values to the wrong keys.

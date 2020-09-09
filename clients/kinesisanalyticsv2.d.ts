@@ -586,7 +586,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     SnapshotsEnabledUpdate: BooleanObject;
   }
-  export type ApplicationStatus = "DELETING"|"STARTING"|"STOPPING"|"READY"|"RUNNING"|"UPDATING"|string;
+  export type ApplicationStatus = "DELETING"|"STARTING"|"STOPPING"|"READY"|"RUNNING"|"UPDATING"|"AUTOSCALING"|string;
   export type ApplicationSummaries = ApplicationSummary[];
   export interface ApplicationSummary {
     /**
@@ -1784,6 +1784,7 @@ declare namespace KinesisAnalyticsV2 {
      * Describes the restore behavior of a restarting application.
      */
     ApplicationRestoreConfigurationDescription?: ApplicationRestoreConfiguration;
+    FlinkRunConfigurationDescription?: FlinkRunConfiguration;
   }
   export interface RunConfigurationUpdate {
     /**

@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.748.0-->
+<!--LATEST=2.749.0-->
 <!--ENTRYINSERT-->
+
+## 2.749.0
+* feature: Glue: Adding support for partitionIndexes to improve GetPartitions performance.
+* feature: KinesisAnalyticsV2: Kinesis Data Analytics is adding new AUTOSCALING application status for applications during auto scaling and also adding FlinkRunConfigurationDescription in the ApplicationDetails.
+* feature: RedshiftData: The Amazon Redshift Data API is generally available. This release enables querying Amazon Redshift data and listing various database objects.
 
 ## 2.748.0
 * bugfix: protocol: Allow error code extraction from pascal cased Code attribute in the JSON body response

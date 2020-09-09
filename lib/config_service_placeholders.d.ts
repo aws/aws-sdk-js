@@ -229,6 +229,7 @@ export abstract class ConfigurationServicePlaceholders {
   braket?: AWS.Braket.Types.ClientConfiguration;
   identitystore?: AWS.IdentityStore.Types.ClientConfiguration;
   appflow?: AWS.Appflow.Types.ClientConfiguration;
+  redshiftdata?: AWS.RedshiftData.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -460,4 +461,5 @@ export interface ConfigurationServiceApiVersions {
   braket?: AWS.Braket.Types.apiVersion;
   identitystore?: AWS.IdentityStore.Types.apiVersion;
   appflow?: AWS.Appflow.Types.apiVersion;
+  redshiftdata?: AWS.RedshiftData.Types.apiVersion;
 }
