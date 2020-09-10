@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.749.0-->
+<!--LATEST=2.750.0-->
 <!--ENTRYINSERT-->
+
+## 2.750.0
+* feature: CloudFront: Cloudfront adds support for Brotli. You can enable brotli caching and compression support by enabling it in your Cache Policy.
+* feature: S3: Bucket owner verification feature added. This feature introduces the x-amz-expected-bucket-owner and x-amz-source-expected-bucket-owner headers.
+* feature: SSOAdmin: This is an initial release of AWS Single Sign-On (SSO) Access Management APIs. This release adds support for SSO operations which could be used for managing access to AWS accounts.
 
 ## 2.749.0
 * feature: Glue: Adding support for partitionIndexes to improve GetPartitions performance.

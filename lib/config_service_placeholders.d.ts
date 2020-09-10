@@ -230,6 +230,7 @@ export abstract class ConfigurationServicePlaceholders {
   identitystore?: AWS.IdentityStore.Types.ClientConfiguration;
   appflow?: AWS.Appflow.Types.ClientConfiguration;
   redshiftdata?: AWS.RedshiftData.Types.ClientConfiguration;
+  ssoadmin?: AWS.SSOAdmin.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -462,4 +463,5 @@ export interface ConfigurationServiceApiVersions {
   identitystore?: AWS.IdentityStore.Types.apiVersion;
   appflow?: AWS.Appflow.Types.apiVersion;
   redshiftdata?: AWS.RedshiftData.Types.apiVersion;
+  ssoadmin?: AWS.SSOAdmin.Types.apiVersion;
 }

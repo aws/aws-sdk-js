@@ -229,5 +229,6 @@ module.exports = {
   Braket: require('./braket'),
   IdentityStore: require('./identitystore'),
   Appflow: require('./appflow'),
-  RedshiftData: require('./redshiftdata')
+  RedshiftData: require('./redshiftdata'),
+  SSOAdmin: require('./ssoadmin')
 };

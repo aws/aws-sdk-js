@@ -29,27 +29,27 @@ declare class EBS extends Service {
    */
   getSnapshotBlock(callback?: (err: AWSError, data: EBS.Types.GetSnapshotBlockResponse) => void): Request<EBS.Types.GetSnapshotBlockResponse, AWSError>;
   /**
-   * Returns the block indexes and block tokens for blocks that are different between two Amazon Elastic Block Store snapshots of the same volume/snapshot lineage.
+   * Returns information about the blocks that are different between two Amazon Elastic Block Store snapshots of the same volume/snapshot lineage.
    */
   listChangedBlocks(params: EBS.Types.ListChangedBlocksRequest, callback?: (err: AWSError, data: EBS.Types.ListChangedBlocksResponse) => void): Request<EBS.Types.ListChangedBlocksResponse, AWSError>;
   /**
-   * Returns the block indexes and block tokens for blocks that are different between two Amazon Elastic Block Store snapshots of the same volume/snapshot lineage.
+   * Returns information about the blocks that are different between two Amazon Elastic Block Store snapshots of the same volume/snapshot lineage.
    */
   listChangedBlocks(callback?: (err: AWSError, data: EBS.Types.ListChangedBlocksResponse) => void): Request<EBS.Types.ListChangedBlocksResponse, AWSError>;
   /**
-   * Returns the block indexes and block tokens for blocks in an Amazon Elastic Block Store snapshot.
+   * Returns information about the blocks in an Amazon Elastic Block Store snapshot.
    */
   listSnapshotBlocks(params: EBS.Types.ListSnapshotBlocksRequest, callback?: (err: AWSError, data: EBS.Types.ListSnapshotBlocksResponse) => void): Request<EBS.Types.ListSnapshotBlocksResponse, AWSError>;
   /**
-   * Returns the block indexes and block tokens for blocks in an Amazon Elastic Block Store snapshot.
+   * Returns information about the blocks in an Amazon Elastic Block Store snapshot.
    */
   listSnapshotBlocks(callback?: (err: AWSError, data: EBS.Types.ListSnapshotBlocksResponse) => void): Request<EBS.Types.ListSnapshotBlocksResponse, AWSError>;
   /**
-   * Writes a block of data to a block in the snapshot. If the specified block contains data, the existing data is overwritten. The target snapshot must be in the pending state. Data written to a snapshot must be aligned with 512-byte sectors.
+   * Writes a block of data to a snapshot. If the specified block contains data, the existing data is overwritten. The target snapshot must be in the pending state. Data written to a snapshot must be aligned with 512-byte sectors.
    */
   putSnapshotBlock(params: EBS.Types.PutSnapshotBlockRequest, callback?: (err: AWSError, data: EBS.Types.PutSnapshotBlockResponse) => void): Request<EBS.Types.PutSnapshotBlockResponse, AWSError>;
   /**
-   * Writes a block of data to a block in the snapshot. If the specified block contains data, the existing data is overwritten. The target snapshot must be in the pending state. Data written to a snapshot must be aligned with 512-byte sectors.
+   * Writes a block of data to a snapshot. If the specified block contains data, the existing data is overwritten. The target snapshot must be in the pending state. Data written to a snapshot must be aligned with 512-byte sectors.
    */
   putSnapshotBlock(callback?: (err: AWSError, data: EBS.Types.PutSnapshotBlockResponse) => void): Request<EBS.Types.PutSnapshotBlockResponse, AWSError>;
   /**
@@ -255,7 +255,7 @@ declare namespace EBS {
      */
     SnapshotId: SnapshotId;
     /**
-     * The block index of the block in which to write the data. A block index is the offset position of a block within a snapshot, and it is used to identify the block. To identify the logical offset of the data in the logical volume, multiply the block index with the block size (Block index * 512 bytes).
+     * The block index of the block in which to write the data. A block index is a logical index in units of 512 KiB blocks. To identify the block index, divide the logical offset of the data in the logical volume by the block size (logical offset of data/524288). The logical offset of the data must be 512 KiB aligned.
      */
     BlockIndex: BlockIndex;
     /**

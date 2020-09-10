@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudFront",
+        "description": "Cloudfront adds support for Brotli. You can enable brotli caching and compression support by enabling it in your Cache Policy."
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "Bucket owner verification feature added. This feature introduces the x-amz-expected-bucket-owner and x-amz-source-expected-bucket-owner headers."
+    },
+    {
+        "type": "feature",
+        "category": "SSOAdmin",
+        "description": "This is an initial release of AWS Single Sign-On (SSO) Access Management APIs. This release adds support for SSO operations which could be used for managing access to AWS accounts."
+    }
+]

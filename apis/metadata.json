@@ -897,5 +897,9 @@
   "redshiftdata": {
     "prefix": "redshift-data",
     "name": "RedshiftData"
+  },
+  "ssoadmin": {
+    "prefix": "sso-admin",
+    "name": "SSOAdmin"
   }
 }
