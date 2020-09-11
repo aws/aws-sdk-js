@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.750.0-->
+<!--LATEST=2.751.0-->
 <!--ENTRYINSERT-->
+
+## 2.751.0
+* feature: WorkSpaces: Adds API support for WorkSpaces Cross-Region Redirection feature.
 
 ## 2.750.0
 * feature: CloudFront: Cloudfront adds support for Brotli. You can enable brotli caching and compression support by enabling it in your Cache Policy.

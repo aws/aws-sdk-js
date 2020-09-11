@@ -12,6 +12,14 @@ declare class WorkSpaces extends Service {
   constructor(options?: WorkSpaces.Types.ClientConfiguration)
   config: Config & WorkSpaces.Types.ClientConfiguration;
   /**
+   * Associates the specified connection alias with the specified directory to enable cross-Region redirection. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.  Before performing this operation, call  DescribeConnectionAliases to make sure that the current state of the connection alias is CREATED. 
+   */
+  associateConnectionAlias(params: WorkSpaces.Types.AssociateConnectionAliasRequest, callback?: (err: AWSError, data: WorkSpaces.Types.AssociateConnectionAliasResult) => void): Request<WorkSpaces.Types.AssociateConnectionAliasResult, AWSError>;
+  /**
+   * Associates the specified connection alias with the specified directory to enable cross-Region redirection. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.  Before performing this operation, call  DescribeConnectionAliases to make sure that the current state of the connection alias is CREATED. 
+   */
+  associateConnectionAlias(callback?: (err: AWSError, data: WorkSpaces.Types.AssociateConnectionAliasResult) => void): Request<WorkSpaces.Types.AssociateConnectionAliasResult, AWSError>;
+  /**
    * Associates the specified IP access control group with the specified directory.
    */
   associateIpGroups(params: WorkSpaces.Types.AssociateIpGroupsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.AssociateIpGroupsResult) => void): Request<WorkSpaces.Types.AssociateIpGroupsResult, AWSError>;
@@ -36,6 +44,14 @@ declare class WorkSpaces extends Service {
    */
   copyWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.CopyWorkspaceImageResult) => void): Request<WorkSpaces.Types.CopyWorkspaceImageResult, AWSError>;
   /**
+   * Creates the specified connection alias for use with cross-Region redirection. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.
+   */
+  createConnectionAlias(params: WorkSpaces.Types.CreateConnectionAliasRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateConnectionAliasResult) => void): Request<WorkSpaces.Types.CreateConnectionAliasResult, AWSError>;
+  /**
+   * Creates the specified connection alias for use with cross-Region redirection. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.
+   */
+  createConnectionAlias(callback?: (err: AWSError, data: WorkSpaces.Types.CreateConnectionAliasResult) => void): Request<WorkSpaces.Types.CreateConnectionAliasResult, AWSError>;
+  /**
    * Creates an IP access control group. An IP access control group provides you with the ability to control the IP addresses from which users are allowed to access their WorkSpaces. To specify the CIDR address ranges, add rules to your IP access control group and then associate the group with your directory. You can add rules when you create the group or at any time using AuthorizeIpRules. There is a default IP access control group associated with your directory. If you don't associate an IP access control group with your directory, the default group is used. The default group includes a default rule that allows users to access their WorkSpaces from anywhere. You cannot modify the default IP access control group for your directory.
    */
   createIpGroup(params: WorkSpaces.Types.CreateIpGroupRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateIpGroupResult) => void): Request<WorkSpaces.Types.CreateIpGroupResult, AWSError>;
@@ -59,6 +75,14 @@ declare class WorkSpaces extends Service {
    * Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.
    */
   createWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspacesResult) => void): Request<WorkSpaces.Types.CreateWorkspacesResult, AWSError>;
+  /**
+   * Deletes the specified connection alias. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.   If you will no longer be using a fully qualified domain name (FQDN) as the registration code for your WorkSpaces users, you must take certain precautions to prevent potential security issues. For more information, see  Security Considerations if You Stop Using Cross-Region Redirection.   To delete a connection alias that has been shared, the shared account must first disassociate the connection alias from any directories it has been associated with. Then you must unshare the connection alias from the account it has been shared with. You can delete a connection alias only after it is no longer shared with any accounts or associated with any directories. 
+   */
+  deleteConnectionAlias(params: WorkSpaces.Types.DeleteConnectionAliasRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteConnectionAliasResult) => void): Request<WorkSpaces.Types.DeleteConnectionAliasResult, AWSError>;
+  /**
+   * Deletes the specified connection alias. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.   If you will no longer be using a fully qualified domain name (FQDN) as the registration code for your WorkSpaces users, you must take certain precautions to prevent potential security issues. For more information, see  Security Considerations if You Stop Using Cross-Region Redirection.   To delete a connection alias that has been shared, the shared account must first disassociate the connection alias from any directories it has been associated with. Then you must unshare the connection alias from the account it has been shared with. You can delete a connection alias only after it is no longer shared with any accounts or associated with any directories. 
+   */
+  deleteConnectionAlias(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteConnectionAliasResult) => void): Request<WorkSpaces.Types.DeleteConnectionAliasResult, AWSError>;
   /**
    * Deletes the specified IP access control group. You cannot delete an IP access control group that is associated with a directory.
    */
@@ -115,6 +139,22 @@ declare class WorkSpaces extends Service {
    * Retrieves a list that describes one or more specified Amazon WorkSpaces clients.
    */
   describeClientProperties(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeClientPropertiesResult) => void): Request<WorkSpaces.Types.DescribeClientPropertiesResult, AWSError>;
+  /**
+   * Describes the permissions that the owner of a connection alias has granted to another AWS account for the specified connection alias. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.
+   */
+  describeConnectionAliasPermissions(params: WorkSpaces.Types.DescribeConnectionAliasPermissionsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeConnectionAliasPermissionsResult) => void): Request<WorkSpaces.Types.DescribeConnectionAliasPermissionsResult, AWSError>;
+  /**
+   * Describes the permissions that the owner of a connection alias has granted to another AWS account for the specified connection alias. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.
+   */
+  describeConnectionAliasPermissions(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeConnectionAliasPermissionsResult) => void): Request<WorkSpaces.Types.DescribeConnectionAliasPermissionsResult, AWSError>;
+  /**
+   * Retrieves a list that describes the connection aliases used for cross-Region redirection. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.
+   */
+  describeConnectionAliases(params: WorkSpaces.Types.DescribeConnectionAliasesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeConnectionAliasesResult) => void): Request<WorkSpaces.Types.DescribeConnectionAliasesResult, AWSError>;
+  /**
+   * Retrieves a list that describes the connection aliases used for cross-Region redirection. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.
+   */
+  describeConnectionAliases(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeConnectionAliasesResult) => void): Request<WorkSpaces.Types.DescribeConnectionAliasesResult, AWSError>;
   /**
    * Describes one or more of your IP access control groups.
    */
@@ -188,6 +228,14 @@ declare class WorkSpaces extends Service {
    */
   describeWorkspacesConnectionStatus(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesConnectionStatusResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesConnectionStatusResult, AWSError>;
   /**
+   * Disassociates a connection alias from a directory. Disassociating a connection alias disables cross-Region redirection between two directories in different AWS Regions. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.  Before performing this operation, call  DescribeConnectionAliases to make sure that the current state of the connection alias is CREATED. 
+   */
+  disassociateConnectionAlias(params: WorkSpaces.Types.DisassociateConnectionAliasRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateConnectionAliasResult) => void): Request<WorkSpaces.Types.DisassociateConnectionAliasResult, AWSError>;
+  /**
+   * Disassociates a connection alias from a directory. Disassociating a connection alias disables cross-Region redirection between two directories in different AWS Regions. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.  Before performing this operation, call  DescribeConnectionAliases to make sure that the current state of the connection alias is CREATED. 
+   */
+  disassociateConnectionAlias(callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateConnectionAliasResult) => void): Request<WorkSpaces.Types.DisassociateConnectionAliasResult, AWSError>;
+  /**
    * Disassociates the specified IP access control group from the specified directory.
    */
   disassociateIpGroups(params: WorkSpaces.Types.DisassociateIpGroupsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateIpGroupsResult) => void): Request<WorkSpaces.Types.DisassociateIpGroupsResult, AWSError>;
@@ -196,11 +244,11 @@ declare class WorkSpaces extends Service {
    */
   disassociateIpGroups(callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateIpGroupsResult) => void): Request<WorkSpaces.Types.DisassociateIpGroupsResult, AWSError>;
   /**
-   * Imports the specified Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. For more information about creating BYOL images, see  Bring Your Own Windows Desktop Licenses.
+   * Imports the specified Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is in your AWS account, and you must own the image. For more information about creating BYOL images, see  Bring Your Own Windows Desktop Licenses.
    */
   importWorkspaceImage(params: WorkSpaces.Types.ImportWorkspaceImageRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ImportWorkspaceImageResult) => void): Request<WorkSpaces.Types.ImportWorkspaceImageResult, AWSError>;
   /**
-   * Imports the specified Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. For more information about creating BYOL images, see  Bring Your Own Windows Desktop Licenses.
+   * Imports the specified Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is in your AWS account, and you must own the image. For more information about creating BYOL images, see  Bring Your Own Windows Desktop Licenses.
    */
   importWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.ImportWorkspaceImageResult) => void): Request<WorkSpaces.Types.ImportWorkspaceImageResult, AWSError>;
   /**
@@ -340,6 +388,14 @@ declare class WorkSpaces extends Service {
    */
   terminateWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesResult, AWSError>;
   /**
+   * Shares or unshares a connection alias with one account by specifying whether that account has permission to associate the connection alias with a directory. If the association permission is granted, the connection alias is shared with that account. If the association permission is revoked, the connection alias is unshared with the account. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.    Before performing this operation, call  DescribeConnectionAliases to make sure that the current state of the connection alias is CREATED.   To delete a connection alias that has been shared, the shared account must first disassociate the connection alias from any directories it has been associated with. Then you must unshare the connection alias from the account it has been shared with. You can delete a connection alias only after it is no longer shared with any accounts or associated with any directories.   
+   */
+  updateConnectionAliasPermission(params: WorkSpaces.Types.UpdateConnectionAliasPermissionRequest, callback?: (err: AWSError, data: WorkSpaces.Types.UpdateConnectionAliasPermissionResult) => void): Request<WorkSpaces.Types.UpdateConnectionAliasPermissionResult, AWSError>;
+  /**
+   * Shares or unshares a connection alias with one account by specifying whether that account has permission to associate the connection alias with a directory. If the association permission is granted, the connection alias is shared with that account. If the association permission is revoked, the connection alias is unshared with the account. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.    Before performing this operation, call  DescribeConnectionAliases to make sure that the current state of the connection alias is CREATED.   To delete a connection alias that has been shared, the shared account must first disassociate the connection alias from any directories it has been associated with. Then you must unshare the connection alias from the account it has been shared with. You can delete a connection alias only after it is no longer shared with any accounts or associated with any directories.   
+   */
+  updateConnectionAliasPermission(callback?: (err: AWSError, data: WorkSpaces.Types.UpdateConnectionAliasPermissionResult) => void): Request<WorkSpaces.Types.UpdateConnectionAliasPermissionResult, AWSError>;
+  /**
    * Replaces the current rules of the specified IP access control group with the specified rules.
    */
   updateRulesOfIpGroup(params: WorkSpaces.Types.UpdateRulesOfIpGroupRequest, callback?: (err: AWSError, data: WorkSpaces.Types.UpdateRulesOfIpGroupResult) => void): Request<WorkSpaces.Types.UpdateRulesOfIpGroupResult, AWSError>;
@@ -389,6 +445,22 @@ declare namespace WorkSpaces {
   export type Alias = string;
   export type Application = "Microsoft_Office_2016"|"Microsoft_Office_2019"|string;
   export type ApplicationList = Application[];
+  export interface AssociateConnectionAliasRequest {
+    /**
+     * The identifier of the connection alias.
+     */
+    AliasId: ConnectionAliasId;
+    /**
+     * The identifier of the directory to associate the connection alias with.
+     */
+    ResourceId: NonEmptyString;
+  }
+  export interface AssociateConnectionAliasResult {
+    /**
+     * The identifier of the connection alias association. You use the connection identifier in the DNS TXT record when you're configuring your DNS routing policies. 
+     */
+    ConnectionIdentifier?: ConnectionIdentifier;
+  }
   export interface AssociateIpGroupsRequest {
     /**
      * The identifier of the directory.
@@ -401,6 +473,7 @@ declare namespace WorkSpaces {
   }
   export interface AssociateIpGroupsResult {
   }
+  export type AssociationStatus = "NOT_ASSOCIATED"|"ASSOCIATED_WITH_OWNER_ACCOUNT"|"ASSOCIATED_WITH_SHARED_ACCOUNT"|"PENDING_ASSOCIATION"|"PENDING_DISASSOCIATION"|string;
   export interface AuthorizeIpRulesRequest {
     /**
      * The identifier of the group.
@@ -444,7 +517,65 @@ declare namespace WorkSpaces {
     Name?: Compute;
   }
   export type ComputerName = string;
+  export interface ConnectionAlias {
+    /**
+     * The connection string specified for the connection alias. The connection string must be in the form of a fully qualified domain name (FQDN), such as www.example.com.
+     */
+    ConnectionString?: ConnectionString;
+    /**
+     * The identifier of the connection alias.
+     */
+    AliasId?: ConnectionAliasId;
+    /**
+     * The current state of the connection alias.
+     */
+    State?: ConnectionAliasState;
+    /**
+     * The identifier of the AWS account that owns the connection alias.
+     */
+    OwnerAccountId?: AwsAccount;
+    /**
+     * The association status of the connection alias.
+     */
+    Associations?: ConnectionAliasAssociationList;
+  }
+  export interface ConnectionAliasAssociation {
+    /**
+     * The association status of the connection alias.
+     */
+    AssociationStatus?: AssociationStatus;
+    /**
+     * The identifier of the AWS account that associated the connection alias with a directory.
+     */
+    AssociatedAccountId?: AwsAccount;
+    /**
+     * The identifier of the directory associated with a connection alias.
+     */
+    ResourceId?: NonEmptyString;
+    /**
+     * The identifier of the connection alias association. You use the connection identifier in the DNS TXT record when you're configuring your DNS routing policies.
+     */
+    ConnectionIdentifier?: ConnectionIdentifier;
+  }
+  export type ConnectionAliasAssociationList = ConnectionAliasAssociation[];
+  export type ConnectionAliasId = string;
+  export type ConnectionAliasIdList = ConnectionAliasId[];
+  export type ConnectionAliasList = ConnectionAlias[];
+  export interface ConnectionAliasPermission {
+    /**
+     * The identifier of the AWS account that the connection alias is shared with.
+     */
+    SharedAccountId: AwsAccount;
+    /**
+     * Indicates whether the specified AWS account is allowed to associate the connection alias with a directory.
+     */
+    AllowAssociation: BooleanObject;
+  }
+  export type ConnectionAliasPermissions = ConnectionAliasPermission[];
+  export type ConnectionAliasState = "CREATING"|"CREATED"|"DELETING"|string;
+  export type ConnectionIdentifier = string;
   export type ConnectionState = "CONNECTED"|"DISCONNECTED"|"UNKNOWN"|string;
+  export type ConnectionString = string;
   export interface CopyWorkspaceImageRequest {
     /**
      * The name of the image.
@@ -473,6 +604,22 @@ declare namespace WorkSpaces {
      */
     ImageId?: WorkspaceImageId;
   }
+  export interface CreateConnectionAliasRequest {
+    /**
+     * A connection string in the form of a fully qualified domain name (FQDN), such as www.example.com.  After you create a connection string, it is always associated to your AWS account. You cannot recreate the same connection string with a different account, even if you delete all instances of it from the original account. The connection string is globally reserved for your account. 
+     */
+    ConnectionString: ConnectionString;
+    /**
+     * The tags to associate with the connection alias.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateConnectionAliasResult {
+    /**
+     * The identifier of the connection alias.
+     */
+    AliasId?: ConnectionAliasId;
+  }
   export interface CreateIpGroupRequest {
     /**
      * The name of the group.
@@ -499,7 +646,7 @@ declare namespace WorkSpaces {
   }
   export interface CreateTagsRequest {
     /**
-     * The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.
+     * The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, IP access control groups, and connection aliases.
      */
     ResourceId: NonEmptyString;
     /**
@@ -557,6 +704,14 @@ declare namespace WorkSpaces {
      */
     EnableMaintenanceMode?: BooleanObject;
   }
+  export interface DeleteConnectionAliasRequest {
+    /**
+     * The identifier of the connection alias to delete.
+     */
+    AliasId: ConnectionAliasId;
+  }
+  export interface DeleteConnectionAliasResult {
+  }
   export interface DeleteIpGroupRequest {
     /**
      * The identifier of the IP access control group.
@@ -567,7 +722,7 @@ declare namespace WorkSpaces {
   }
   export interface DeleteTagsRequest {
     /**
-     * The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.
+     * The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, IP access control groups, and connection aliases.
      */
     ResourceId: NonEmptyString;
     /**
@@ -633,6 +788,62 @@ declare namespace WorkSpaces {
      */
     ClientPropertiesList?: ClientPropertiesList;
   }
+  export interface DescribeConnectionAliasPermissionsRequest {
+    /**
+     * The identifier of the connection alias.
+     */
+    AliasId: ConnectionAliasId;
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results. 
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: Limit;
+  }
+  export interface DescribeConnectionAliasPermissionsResult {
+    /**
+     * The identifier of the connection alias.
+     */
+    AliasId?: ConnectionAliasId;
+    /**
+     * The permissions associated with a connection alias.
+     */
+    ConnectionAliasPermissions?: ConnectionAliasPermissions;
+    /**
+     * The token to use to retrieve the next set of results, or null if no more results are available.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface DescribeConnectionAliasesRequest {
+    /**
+     * The identifiers of the connection aliases to describe.
+     */
+    AliasIds?: ConnectionAliasIdList;
+    /**
+     * The identifier of the directory associated with the connection alias.
+     */
+    ResourceId?: NonEmptyString;
+    /**
+     * The maximum number of connection aliases to return.
+     */
+    Limit?: Limit;
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results. 
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface DescribeConnectionAliasesResult {
+    /**
+     * Information about the specified connection aliases.
+     */
+    ConnectionAliases?: ConnectionAliasList;
+    /**
+     * The token to use to retrieve the next set of results, or null if no more results are available.
+     */
+    NextToken?: PaginationToken;
+  }
   export interface DescribeIpGroupsRequest {
     /**
      * The identifiers of one or more IP access control groups.
@@ -659,7 +870,7 @@ declare namespace WorkSpaces {
   }
   export interface DescribeTagsRequest {
     /**
-     * The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.
+     * The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, IP access control groups, and connection aliases.
      */
     ResourceId: NonEmptyString;
   }
@@ -850,6 +1061,14 @@ declare namespace WorkSpaces {
   export type DirectoryIdList = DirectoryId[];
   export type DirectoryList = WorkspaceDirectory[];
   export type DirectoryName = string;
+  export interface DisassociateConnectionAliasRequest {
+    /**
+     * The identifier of the connection alias to disassociate.
+     */
+    AliasId: ConnectionAliasId;
+  }
+  export interface DisassociateConnectionAliasResult {
+  }
   export interface DisassociateIpGroupsRequest {
     /**
      * The identifier of the directory.
@@ -1316,6 +1535,18 @@ declare namespace WorkSpaces {
     FailedRequests?: FailedTerminateWorkspaceRequests;
   }
   export type Timestamp = Date;
+  export interface UpdateConnectionAliasPermissionRequest {
+    /**
+     * The identifier of the connection alias that you want to update permissions for.
+     */
+    AliasId: ConnectionAliasId;
+    /**
+     * Indicates whether to share or unshare the connection alias with the specified AWS account.
+     */
+    ConnectionAliasPermission: ConnectionAliasPermission;
+  }
+  export interface UpdateConnectionAliasPermissionResult {
+  }
   export interface UpdateRulesOfIpGroupRequest {
     /**
      * The identifier of the group.
@@ -1512,7 +1743,7 @@ declare namespace WorkSpaces {
      */
     EnableInternetAccess?: BooleanObject;
     /**
-     * The default organizational unit (OU) for your WorkSpace directories.
+     * The default organizational unit (OU) for your WorkSpaces directories. This string must be the full Lightweight Directory Access Protocol (LDAP) distinguished name for the target domain and OU. It must be in the form "OU=value,DC=value,DC=value", where value is any string of characters, and the number of domain components (DCs) is two or more. For example, OU=WorkSpaces_machines,DC=machines,DC=example,DC=com.     To avoid errors, certain characters in the distinguished name must be escaped. For more information, see  Distinguished Names in the Microsoft documentation.   The API doesn't validate whether the OU exists.   
      */
     DefaultOu?: DefaultOu;
     /**
