@@ -20,11 +20,11 @@ declare class StepFunctions extends Service {
    */
   createActivity(callback?: (err: AWSError, data: StepFunctions.Types.CreateActivityOutput) => void): Request<StepFunctions.Types.CreateActivityOutput, AWSError>;
   /**
-   * Creates a state machine. A state machine consists of a collection of states that can do work (Task states), determine to which states to transition next (Choice states), stop an execution with an error (Fail states), and so on. State machines are specified using a JSON-based, structured language. For more information, see Amazon States Language in the AWS Step Functions User Guide.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.    CreateStateMachine is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. CreateStateMachine's idempotency check is based on the state machine name, definition, type, and LoggingConfiguration. If a following request has a different roleArn or tags, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, roleArn and tags will not be updated, even if they are different. 
+   * Creates a state machine. A state machine consists of a collection of states that can do work (Task states), determine to which states to transition next (Choice states), stop an execution with an error (Fail states), and so on. State machines are specified using a JSON-based, structured language. For more information, see Amazon States Language in the AWS Step Functions User Guide.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.    CreateStateMachine is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. CreateStateMachine's idempotency check is based on the state machine name, definition, type, LoggingConfiguration and TracingConfiguration. If a following request has a different roleArn or tags, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, roleArn and tags will not be updated, even if they are different. 
    */
   createStateMachine(params: StepFunctions.Types.CreateStateMachineInput, callback?: (err: AWSError, data: StepFunctions.Types.CreateStateMachineOutput) => void): Request<StepFunctions.Types.CreateStateMachineOutput, AWSError>;
   /**
-   * Creates a state machine. A state machine consists of a collection of states that can do work (Task states), determine to which states to transition next (Choice states), stop an execution with an error (Fail states), and so on. State machines are specified using a JSON-based, structured language. For more information, see Amazon States Language in the AWS Step Functions User Guide.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.    CreateStateMachine is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. CreateStateMachine's idempotency check is based on the state machine name, definition, type, and LoggingConfiguration. If a following request has a different roleArn or tags, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, roleArn and tags will not be updated, even if they are different. 
+   * Creates a state machine. A state machine consists of a collection of states that can do work (Task states), determine to which states to transition next (Choice states), stop an execution with an error (Fail states), and so on. State machines are specified using a JSON-based, structured language. For more information, see Amazon States Language in the AWS Step Functions User Guide.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.    CreateStateMachine is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. CreateStateMachine's idempotency check is based on the state machine name, definition, type, LoggingConfiguration and TracingConfiguration. If a following request has a different roleArn or tags, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, roleArn and tags will not be updated, even if they are different. 
    */
   createStateMachine(callback?: (err: AWSError, data: StepFunctions.Types.CreateStateMachineOutput) => void): Request<StepFunctions.Types.CreateStateMachineOutput, AWSError>;
   /**
@@ -275,7 +275,7 @@ declare namespace StepFunctions {
   export type Arn = string;
   export interface CloudWatchEventsExecutionDataDetails {
     /**
-     * Indicates whether input or output was included in the response. Always true for API calls, but may be false for CloudWatch Events.
+     * Indicates whether input or output was included in the response. Always true for API calls. 
      */
     included?: included;
   }
@@ -331,6 +331,10 @@ declare namespace StepFunctions {
      * Tags to be added when creating a state machine. An array of key-value pairs. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide, and Controlling Access Using IAM Tags. Tags may only contain Unicode letters, digits, white space, or these symbols: _ . : / = + - @.
      */
     tags?: TagList;
+    /**
+     * Selects whether AWS X-Ray tracing is enabled.
+     */
+    tracingConfiguration?: TracingConfiguration;
   }
   export interface CreateStateMachineOutput {
     /**
@@ -420,6 +424,10 @@ declare namespace StepFunctions {
      */
     output?: SensitiveData;
     outputDetails?: CloudWatchEventsExecutionDataDetails;
+    /**
+     * The AWS X-Ray trace header which was passed to the execution.
+     */
+    traceHeader?: TraceHeader;
   }
   export interface DescribeStateMachineForExecutionInput {
     /**
@@ -449,6 +457,10 @@ declare namespace StepFunctions {
      */
     updateDate: Timestamp;
     loggingConfiguration?: LoggingConfiguration;
+    /**
+     * Selects whether AWS X-Ray tracing is enabled.
+     */
+    tracingConfiguration?: TracingConfiguration;
   }
   export interface DescribeStateMachineInput {
     /**
@@ -486,7 +498,12 @@ declare namespace StepFunctions {
      */
     creationDate: Timestamp;
     loggingConfiguration?: LoggingConfiguration;
+    /**
+     * Selects whether AWS X-Ray tracing is enabled.
+     */
+    tracingConfiguration?: TracingConfiguration;
   }
+  export type Enabled = boolean;
   export type EventId = number;
   export interface ExecutionAbortedEventDetails {
     /**
@@ -722,7 +739,7 @@ declare namespace StepFunctions {
   }
   export interface HistoryEventExecutionDataDetails {
     /**
-     * Indicates whether input or output was truncated in the response. Always false.
+     * Indicates whether input or output was truncated in the response. Always false for API calls.
      */
     truncated?: truncated;
   }
@@ -972,6 +989,10 @@ declare namespace StepFunctions {
      * The string that contains the JSON input data for the execution, for example:  "input": "{\"first_name\" : \"test\"}"   If you don't include any JSON input data, you still must include the two braces, for example: "input": "{}"   Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
      */
     input?: SensitiveData;
+    /**
+     * Passes the AWS X-Ray trace header. The trace header can also be passed in the request payload.
+     */
+    traceHeader?: TraceHeader;
   }
   export interface StartExecutionOutput {
     /**
@@ -1225,6 +1246,13 @@ declare namespace StepFunctions {
   export type TaskToken = string;
   export type TimeoutInSeconds = number;
   export type Timestamp = Date;
+  export type TraceHeader = string;
+  export interface TracingConfiguration {
+    /**
+     * When set to true, AWS X-Ray tracing is enabled.
+     */
+    enabled?: Enabled;
+  }
   export type UnsignedInteger = number;
   export interface UntagResourceInput {
     /**
@@ -1255,6 +1283,10 @@ declare namespace StepFunctions {
      * The LoggingConfiguration data type is used to set CloudWatch Logs options.
      */
     loggingConfiguration?: LoggingConfiguration;
+    /**
+     * Selects whether AWS X-Ray tracing is enabled.
+     */
+    tracingConfiguration?: TracingConfiguration;
   }
   export interface UpdateStateMachineOutput {
     /**

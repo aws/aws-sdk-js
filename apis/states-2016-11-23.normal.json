@@ -65,6 +65,9 @@
           "shape": "InvalidLoggingConfiguration"
         },
         {
+          "shape": "InvalidTracingConfiguration"
+        },
+        {
           "shape": "StateMachineAlreadyExists"
         },
         {
@@ -80,7 +83,7 @@
           "shape": "TooManyTags"
         }
       ],
-      "documentation": "<p>Creates a state machine. A state machine consists of a collection of states that can do work (<code>Task</code> states), determine to which states to transition next (<code>Choice</code> states), stop an execution with an error (<code>Fail</code> states), and so on. State machines are specified using a JSON-based, structured language. For more information, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html\">Amazon States Language</a> in the AWS Step Functions User Guide.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note> <note> <p> <code>CreateStateMachine</code> is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. <code>CreateStateMachine</code>'s idempotency check is based on the state machine <code>name</code>, <code>definition</code>, <code>type</code>, and <code>LoggingConfiguration</code>. If a following request has a different <code>roleArn</code> or <code>tags</code>, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, <code>roleArn</code> and <code>tags</code> will not be updated, even if they are different.</p> </note>",
+      "documentation": "<p>Creates a state machine. A state machine consists of a collection of states that can do work (<code>Task</code> states), determine to which states to transition next (<code>Choice</code> states), stop an execution with an error (<code>Fail</code> states), and so on. State machines are specified using a JSON-based, structured language. For more information, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html\">Amazon States Language</a> in the AWS Step Functions User Guide.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note> <note> <p> <code>CreateStateMachine</code> is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. <code>CreateStateMachine</code>'s idempotency check is based on the state machine <code>name</code>, <code>definition</code>, <code>type</code>, <code>LoggingConfiguration</code> and <code>TracingConfiguration</code>. If a following request has a different <code>roleArn</code> or <code>tags</code>, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, <code>roleArn</code> and <code>tags</code> will not be updated, even if they are different.</p> </note>",
       "idempotent": true
     },
     "DeleteActivity": {
@@ -555,6 +558,9 @@
           "shape": "InvalidLoggingConfiguration"
         },
         {
+          "shape": "InvalidTracingConfiguration"
+        },
+        {
           "shape": "MissingRequiredParameter"
         },
         {
@@ -705,10 +711,10 @@
       "members": {
         "included": {
           "shape": "included",
-          "documentation": "<p>Indicates whether input or output was included in the response. Always <code>true</code> for API calls, but may be <code>false</code> for CloudWatch Events.</p>"
+          "documentation": "<p>Indicates whether input or output was included in the response. Always <code>true</code> for API calls. </p>"
         }
       },
-      "documentation": "<p>Provides details about execution input.</p>"
+      "documentation": "<p>Provides details about execution input or output.</p>"
     },
     "CloudWatchLogsLogGroup": {
       "type": "structure",
@@ -790,6 +796,10 @@
         "tags": {
           "shape": "TagList",
           "documentation": "<p>Tags to be added when creating a state machine.</p> <p>An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>, and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html\">Controlling Access Using IAM Tags</a>.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>"
+        },
+        "tracingConfiguration": {
+          "shape": "TracingConfiguration",
+          "documentation": "<p>Selects whether AWS X-Ray tracing is enabled.</p>"
         }
       }
     },
@@ -940,6 +950,10 @@
         },
         "outputDetails": {
           "shape": "CloudWatchEventsExecutionDataDetails"
+        },
+        "traceHeader": {
+          "shape": "TraceHeader",
+          "documentation": "<p>The AWS X-Ray trace header which was passed to the execution.</p>"
         }
       }
     },
@@ -987,6 +1001,10 @@
         },
         "loggingConfiguration": {
           "shape": "LoggingConfiguration"
+        },
+        "tracingConfiguration": {
+          "shape": "TracingConfiguration",
+          "documentation": "<p>Selects whether AWS X-Ray tracing is enabled.</p>"
         }
       }
     },
@@ -1043,8 +1061,15 @@
         },
         "loggingConfiguration": {
           "shape": "LoggingConfiguration"
+        },
+        "tracingConfiguration": {
+          "shape": "TracingConfiguration",
+          "documentation": "<p>Selects whether AWS X-Ray tracing is enabled.</p>"
         }
       }
+    },
+    "Enabled": {
+      "type": "boolean"
     },
     "EventId": {
       "type": "long"
@@ -1393,10 +1418,10 @@
       "members": {
         "truncated": {
           "shape": "truncated",
-          "documentation": "<p>Indicates whether input or output was truncated in the response. Always <code>false</code>.</p>"
+          "documentation": "<p>Indicates whether input or output was truncated in the response. Always <code>false</code> for API calls.</p>"
         }
       },
-      "documentation": "<p>Contains details about the data from an execution's events. Always <code>true</code> for API calls, but may be <code>false</code> for CloudWatch Logs.</p>"
+      "documentation": "<p>Provides details about input or output in an execution history event.</p>"
     },
     "HistoryEventList": {
       "type": "list",
@@ -1880,6 +1905,10 @@
         "input": {
           "shape": "SensitiveData",
           "documentation": "<p>The string that contains the JSON input data for the execution, for example:</p> <p> <code>\"input\": \"{\\\"first_name\\\" : \\\"test\\\"}\"</code> </p> <note> <p>If you don't include any JSON input data, you still must include the two braces, for example: <code>\"input\": \"{}\"</code> </p> </note> <p>Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>"
+        },
+        "traceHeader": {
+          "shape": "TraceHeader",
+          "documentation": "<p>Passes the AWS X-Ray trace header. The trace header can also be passed in the request payload.</p>"
         }
       }
     },
@@ -2302,6 +2331,22 @@
     "Timestamp": {
       "type": "timestamp"
     },
+    "TraceHeader": {
+      "type": "string",
+      "max": 256,
+      "min": 0,
+      "pattern": "\\p{ASCII}*"
+    },
+    "TracingConfiguration": {
+      "type": "structure",
+      "members": {
+        "enabled": {
+          "shape": "Enabled",
+          "documentation": "<p>When set to <code>true</code>, AWS X-Ray tracing is enabled.</p>"
+        }
+      },
+      "documentation": "<p>Selects whether or not the state machine's AWS X-Ray tracing is enabled. Default is <code>false</code> </p>"
+    },
     "UnsignedInteger": {
       "type": "integer",
       "min": 0
@@ -2348,6 +2393,10 @@
         "loggingConfiguration": {
           "shape": "LoggingConfiguration",
           "documentation": "<p>The <code>LoggingConfiguration</code> data type is used to set CloudWatch Logs options.</p>"
+        },
+        "tracingConfiguration": {
+          "shape": "TracingConfiguration",
+          "documentation": "<p>Selects whether AWS X-Ray tracing is enabled.</p>"
         }
       }
     },

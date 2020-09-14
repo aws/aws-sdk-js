@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.751.0-->
+<!--LATEST=2.752.0-->
 <!--ENTRYINSERT-->
+
+## 2.752.0
+* feature: DocDB: Updated API documentation and added paginators for DescribeCertificates, DescribeDBClusterParameterGroups, DescribeDBClusterParameters, DescribeDBClusterSnapshots and DescribePendingMaintenanceActions
+* feature: EC2: This release adds support for the T4G instance family to the EC2 ModifyDefaultCreditSpecification and GetDefaultCreditSpecification APIs.
+* feature: ManagedBlockchain: Introducing support for Hyperledger Fabric 1.4. When using framework version 1.4, the state database may optionally be specified when creating peer nodes (defaults to CouchDB).
+* feature: StepFunctions: This release of the AWS Step Functions SDK introduces support for AWS X-Ray.
 
 ## 2.751.0
 * feature: WorkSpaces: Adds API support for WorkSpaces Cross-Region Redirection feature.

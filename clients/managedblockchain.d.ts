@@ -92,11 +92,11 @@ declare class ManagedBlockchain extends Service {
    */
   getProposal(callback?: (err: AWSError, data: ManagedBlockchain.Types.GetProposalOutput) => void): Request<ManagedBlockchain.Types.GetProposalOutput, AWSError>;
   /**
-   * Returns a listing of all invitations made on the specified network.
+   * Returns a listing of all invitations for the current AWS account.
    */
   listInvitations(params: ManagedBlockchain.Types.ListInvitationsInput, callback?: (err: AWSError, data: ManagedBlockchain.Types.ListInvitationsOutput) => void): Request<ManagedBlockchain.Types.ListInvitationsOutput, AWSError>;
   /**
-   * Returns a listing of all invitations made on the specified network.
+   * Returns a listing of all invitations for the current AWS account.
    */
   listInvitations(callback?: (err: AWSError, data: ManagedBlockchain.Types.ListInvitationsOutput) => void): Request<ManagedBlockchain.Types.ListInvitationsOutput, AWSError>;
   /**
@@ -668,7 +668,7 @@ declare namespace ManagedBlockchain {
      */
     FrameworkConfiguration: MemberFrameworkConfiguration;
     /**
-     * 
+     * Configuration properties for logging events associated with a member of a Managed Blockchain network.
      */
     LogPublishingConfiguration?: MemberLogPublishingConfiguration;
   }
@@ -876,9 +876,13 @@ declare namespace ManagedBlockchain {
      */
     FrameworkAttributes?: NodeFrameworkAttributes;
     /**
-     * 
+     * Configuration properties for logging events associated with a peer node owned by a member in a Managed Blockchain network.
      */
     LogPublishingConfiguration?: NodeLogPublishingConfiguration;
+    /**
+     * The state database that the node uses. Values are LevelDB or CouchDB.
+     */
+    StateDB?: StateDBType;
     /**
      * The status of the node.
      */
@@ -898,9 +902,13 @@ declare namespace ManagedBlockchain {
      */
     AvailabilityZone: AvailabilityZoneString;
     /**
-     * 
+     * Configuration properties for logging events associated with a peer node owned by a member in a Managed Blockchain network. 
      */
     LogPublishingConfiguration?: NodeLogPublishingConfiguration;
+    /**
+     * The state database that the node uses. Values are LevelDB or CouchDB. When using an Amazon Managed Blockchain network with Hyperledger Fabric version 1.4 or later, the default is CouchDB.
+     */
+    StateDB?: StateDBType;
   }
   export interface NodeFabricAttributes {
     /**
@@ -1073,6 +1081,7 @@ declare namespace ManagedBlockchain {
   }
   export type RemoveActionList = RemoveAction[];
   export type ResourceIdString = string;
+  export type StateDBType = "LevelDB"|"CouchDB"|string;
   export type String = string;
   export type ThresholdComparator = "GREATER_THAN"|"GREATER_THAN_OR_EQUAL_TO"|string;
   export type ThresholdPercentageInt = number;

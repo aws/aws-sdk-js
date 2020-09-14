@@ -24857,7 +24857,7 @@ declare namespace EC2 {
      */
     PrivateIpAddresses: PrivateIpAddressStringList;
   }
-  export type UnlimitedSupportedInstanceFamily = "t2"|"t3"|"t3a"|string;
+  export type UnlimitedSupportedInstanceFamily = "t2"|"t3"|"t3a"|"t4g"|string;
   export interface UnmonitorInstancesRequest {
     /**
      * The IDs of the instances.
