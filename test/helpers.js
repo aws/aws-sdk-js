@@ -78,7 +78,12 @@
         'arguments': Array.prototype.slice.call(arguments)
       });
       if (spy.callFn) {
-        return spy.callFn.apply(spy.object, arguments);
+        // 'this' to keep the current 'this' intact, so that if we've mocked a class method
+        // we can still use 'this' inside the method to get the instance properties.
+        //
+        // This used to be 'object' but then in case of mocking a class method we'd only
+        // be able to access the class (object prototype), instead of the object itself.
+        return spy.callFn.apply(this, arguments);
       }
       if (spy.shouldReturn) {
         return spy.returnValue;

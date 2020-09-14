@@ -837,6 +837,139 @@
           return done();
         });
       });
+
+      it('will assume a role from the config file even if there are unrelated entries in the credentials file', function(done) {
+        // This test is actually a stand-in for a config like:
+        //
+        // credentials:
+        //   [foo]
+        //   role_arn = arn:aws:...
+        //   source_profile = ...
+        //
+        // config
+        //   [profile foo]
+        //   region = us-west-1
+        //
+        // Where the single profile 'foo' is scattered over multiple files.
+        // The test below is an easier way to test the same behavior that doesn't
+        // have to deal with regions (yet).
+
+        var creds, credsCtorSpy;
+        process.env.AWS_SDK_LOAD_CONFIG = '1';
+        helpers.spyOn(AWS.util, 'readFileSync').andCallFake(function(path) {
+          if (path.match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]config/)) {
+            return [
+              '[default]',
+              'role_arn = arn',
+              'source_profile = foo'
+            ].join('\n');
+          } else {
+            return [
+              '[default]',
+              'something = unrelated',
+              '[foo]',
+              'aws_access_key_id = akid',
+              'aws_secret_access_key = secret'
+            ].join('\n');
+          }
+        });
+        helpers.mockHttpResponse(200, {}, '<AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">\n  <AssumeRoleResult>\n    <Credentials>\n      <AccessKeyId>KEY</AccessKeyId>\n      <SecretAccessKey>SECRET</SecretAccessKey>\n      <SessionToken>TOKEN</SessionToken>\n      <Expiration>1970-01-01T00:00:00.000Z</Expiration>\n    </Credentials>\n  </AssumeRoleResult>\n</AssumeRoleResponse>');
+        creds = new AWS.SharedIniFileCredentials();
+        credsCtorSpy = helpers.spyOn(AWS, 'SharedIniFileCredentials').andCallThrough();
+        expect(creds.roleArn).to.equal('arn');
+        return creds.refresh(function(err) {
+          expect(credsCtorSpy.calls.length).to.equal(1);
+          parentCredsArg = credsCtorSpy.calls[0]['arguments'][0];
+          expect(parentCredsArg.profile).to.equal('foo');
+          delete process.env.AWS_SDK_LOAD_CONFIG;
+          return done();
+        });
+      });
+
+      it('will use the profile\'s region to assume the role', function(done) {
+        var mock = [
+          '[foo]',
+          'role_arn = arn',
+          'source_profile = base',
+          'region = eu-banana-5',
+          '[base]',
+          'aws_access_key_id = akid',
+          'aws_secret_access_key = secret',
+        ].join('\n');
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
+
+        var STSPrototype = (new STS()).constructor.prototype;
+        helpers.spyOn(STSPrototype, 'assumeRole').andCallFake(
+          function() {
+            expect(this.config.region).to.equal('eu-banana-5');
+            return done();
+          }
+        );
+
+        new AWS.SharedIniFileCredentials({
+          profile: 'foo',
+          callback: function () {
+            fail('test should not have gotten here');
+          }
+        });
+      });
+
+      it('will use us-east-1 to assume the role if no region is available', function(done) {
+        var mock = [
+          '[foo]',
+          'role_arn = arn',
+          'source_profile = base',
+          '[base]',
+          'aws_access_key_id = akid',
+          'aws_secret_access_key = secret',
+        ].join('\n');
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
+
+        var STSPrototype = (new STS()).constructor.prototype;
+        helpers.spyOn(STSPrototype, 'assumeRole').andCallFake(
+          function() {
+            expect(this.config.region).to.equal('us-east-1');
+            return done();
+          }
+        );
+
+        new AWS.SharedIniFileCredentials({
+          profile: 'foo',
+          callback: function () {
+            fail('test should not have gotten here');
+          }
+        });
+      });
+
+      it('will ignore the region in the default profile', function(done) {
+        var mock = [
+          '[default]',
+          'region = eu-banana-5',
+          '[foo]',
+          'role_arn = arn',
+          'source_profile = base',
+          '[base]',
+          'aws_access_key_id = akid',
+          'aws_secret_access_key = secret',
+        ].join('\n');
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
+
+        var STSPrototype = (new STS()).constructor.prototype;
+        helpers.spyOn(STSPrototype, 'assumeRole').andCallFake(
+          function() {
+            expect(this.config.region).to.equal('us-east-1');
+            return done();
+          }
+        );
+
+        new AWS.SharedIniFileCredentials({
+          profile: 'foo',
+          callback: function () {
+            fail('test should not have gotten here');
+          }
+        });
+      });
+
       it('should prefer static credentials to role_arn in source profiles', function(done) {
         var creds, mock;
         mock = '[default]\nrole_arn = arn\nsource_profile = foo_first\n[foo_first]\naws_access_key_id=first_key\naws_secret_access_key=first_secret\nrole_arn = arn_foo_first\nsource_profile = foo_base\n[foo_base]\naws_access_key_id = baseKey\naws_secret_access_key = baseSecret\n';
