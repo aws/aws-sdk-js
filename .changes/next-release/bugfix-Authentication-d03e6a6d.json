@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Authentication",
+  "description": "assume-role credentials ignore profile region"
+}
