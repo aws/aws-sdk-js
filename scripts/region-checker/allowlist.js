@@ -13,6 +13,9 @@ var allowlist = {
         79,
         109
     ],
+    '/credentials/shared_ini_file_credentials.js': [
+        5,
+    ],
     '/http.js': [
         5
     ],
