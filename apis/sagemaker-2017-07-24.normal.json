@@ -3795,11 +3795,11 @@
         },
         "Image": {
           "shape": "ContainerImage",
-          "documentation": "<p>The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored. If you are using your own custom algorithm instead of an algorithm provided by Amazon SageMaker, the inference code must meet Amazon SageMaker requirements. Amazon SageMaker supports both <code>registry/repository[:tag]</code> and <code>registry/repository[@digest]</code> image path formats. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html\">Using Your Own Algorithms with Amazon SageMaker</a> </p>"
+          "documentation": "<p>The path where inference code is stored. This can be either in Amazon EC2 Container Registry or in a Docker registry that is accessible from the same VPC that you configure for your endpoint. If you are using your own custom algorithm instead of an algorithm provided by Amazon SageMaker, the inference code must meet Amazon SageMaker requirements. Amazon SageMaker supports both <code>registry/repository[:tag]</code> and <code>registry/repository[@digest]</code> image path formats. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html\">Using Your Own Algorithms with Amazon SageMaker</a> </p>"
         },
         "ImageConfig": {
           "shape": "ImageConfig",
-          "documentation": "<p>Specifies whether the model container is in Amazon ECR or a private Docker registry in your Amazon Virtual Private Cloud (VPC). For information about storing containers in a private Docker registry, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-containers-inference-private.html\">Use a Private Docker Registry for Real-Time Inference Containers</a> </p>"
+          "documentation": "<p>Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). For information about storing containers in a private Docker registry, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-containers-inference-private.html\">Use a Private Docker Registry for Real-Time Inference Containers</a> </p>"
         },
         "Mode": {
           "shape": "ContainerMode",
@@ -8620,11 +8620,11 @@
         },
         "TaskAvailabilityLifetimeInSeconds": {
           "shape": "FlowDefinitionTaskAvailabilityLifetimeInSeconds",
-          "documentation": "<p>The length of time that a task remains available for labeling by human workers.</p>"
+          "documentation": "<p>The length of time that a task remains available for review by human workers.</p>"
         },
         "TaskTimeLimitInSeconds": {
           "shape": "FlowDefinitionTaskTimeLimitInSeconds",
-          "documentation": "<p>The amount of time that a worker has to complete a task.</p>"
+          "documentation": "<p>The amount of time that a worker has to complete a task. The default value is 3,600 seconds (1 hour)</p>"
         },
         "TaskKeywords": {
           "shape": "FlowDefinitionTaskKeywords",
@@ -9203,10 +9203,10 @@
       "members": {
         "RepositoryAccessMode": {
           "shape": "RepositoryAccessMode",
-          "documentation": "<p>Set this to one of the following values:</p> <ul> <li> <p> <code>Platform</code> - The model image is hosted in Amazon ECR.</p> </li> <li> <p> <code>VPC</code> - The model image is hosted in a private Docker registry in your VPC.</p> </li> </ul>"
+          "documentation": "<p>Set this to one of the following values:</p> <ul> <li> <p> <code>Platform</code> - The model image is hosted in Amazon ECR.</p> </li> <li> <p> <code>Vpc</code> - The model image is hosted in a private Docker registry in your VPC.</p> </li> </ul>"
         }
       },
-      "documentation": "<p>Specifies whether the model container is in Amazon ECR or a private Docker registry in your Amazon Virtual Private Cloud (VPC).</p>"
+      "documentation": "<p>Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC).</p>"
     },
     "ImageDigest": {
       "type": "string",
@@ -9528,7 +9528,7 @@
         },
         "InitialActiveLearningModelArn": {
           "shape": "ModelArn",
-          "documentation": "<p>At the end of an auto-label job Amazon SageMaker Ground Truth sends the Amazon Resource Nam (ARN) of the final model used for auto-labeling. You can use this model as the starting point for subsequent similar jobs by providing the ARN of the model here. </p>"
+          "documentation": "<p>At the end of an auto-label job Ground Truth sends the Amazon Resource Name (ARN) of the final model used for auto-labeling. You can use this model as the starting point for subsequent similar jobs by providing the ARN of the model here. </p>"
         },
         "LabelingJobResourceConfig": {
           "shape": "LabelingJobResourceConfig",
@@ -9558,9 +9558,13 @@
         "S3DataSource": {
           "shape": "LabelingJobS3DataSource",
           "documentation": "<p>The Amazon S3 location of the input data objects.</p>"
+        },
+        "SnsDataSource": {
+          "shape": "LabelingJobSnsDataSource",
+          "documentation": "<p>An Amazon SNS data source used for streaming labeling jobs.</p>"
         }
       },
-      "documentation": "<p>Provides information about the location of input data.</p>"
+      "documentation": "<p>Provides information about the location of input data.</p> <p>You must specify at least one of the following: <code>S3DataSource</code> or <code>SnsDataSource</code>.</p> <p>Use <code>SnsDataSource</code> to specify an SNS input topic for a streaming labeling job. If you do not specify and SNS input topic ARN, Ground Truth will create a one-time labeling job.</p> <p>Use <code>S3DataSource</code> to specify an input manifest file for both streaming and one-time labeling jobs. Adding an <code>S3DataSource</code> is optional if you use <code>SnsDataSource</code> to create a streaming labeling job.</p>"
     },
     "LabelingJobForWorkteamSummary": {
       "type": "structure",
@@ -9656,6 +9660,10 @@
         "KmsKeyId": {
           "shape": "KmsKeyId",
           "documentation": "<p>The AWS Key Management Service ID of the key used to encrypt the output data, if any.</p> <p>If you use a KMS key ID or an alias of your master key, the Amazon SageMaker execution role must include permissions to call <code>kms:Encrypt</code>. If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account. Amazon SageMaker uses server-side encryption with KMS-managed keys for <code>LabelingJobOutputConfig</code>. If you use a bucket policy with an <code>s3:PutObject</code> permission that only allows objects with server-side encryption, set the condition key of <code>s3:x-amz-server-side-encryption</code> to <code>\"aws:kms\"</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">KMS-Managed Encryption Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i> </p> <p>The KMS key policy must grant permission to the IAM role that you specify in your <code>CreateLabelingJob</code> request. For more information, see <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using Key Policies in AWS KMS</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
+        },
+        "SnsTopicArn": {
+          "shape": "SnsTopicArn",
+          "documentation": "<p>An Amazon Simple Notification Service (Amazon SNS) output topic ARN.</p> <p>When workers complete labeling tasks, Ground Truth will send labeling task output data to the SNS output topic you specify here.</p> <p>You must provide a value for this parameter if you provide an Amazon SNS input topic in <code>SnsDataSource</code> in <code>InputConfig</code>.</p>"
         }
       },
       "documentation": "<p>Output configuration information for a labeling job.</p>"
@@ -9682,6 +9690,19 @@
         }
       },
       "documentation": "<p>The Amazon S3 location of the input data objects.</p>"
+    },
+    "LabelingJobSnsDataSource": {
+      "type": "structure",
+      "required": [
+        "SnsTopicArn"
+      ],
+      "members": {
+        "SnsTopicArn": {
+          "shape": "SnsTopicArn",
+          "documentation": "<p>The Amazon SNS input topic Amazon Resource Name (ARN). Specify the ARN of the input topic you will use to send new data objects to a streaming labeling job.</p> <p>If you specify an input topic for <code>SnsTopicArn</code> in <code>InputConfig</code>, you must specify a value for <code>SnsTopicArn</code> in <code>OutputConfig</code>.</p>"
+        }
+      },
+      "documentation": "<p>An Amazon SNS data source used for streaming labeling jobs.</p>"
     },
     "LabelingJobStatus": {
       "type": "string",
@@ -14158,6 +14179,11 @@
     "SingleSignOnUserIdentifier": {
       "type": "string",
       "pattern": "UserName"
+    },
+    "SnsTopicArn": {
+      "type": "string",
+      "max": 2048,
+      "pattern": "arn:aws[a-z\\-]*:sns:[a-z0-9\\-]*:[0-9]{12}:[a-zA-Z0-9_.-]*"
     },
     "SortBy": {
       "type": "string",

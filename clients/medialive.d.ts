@@ -747,7 +747,7 @@ Alternate rendition that the client will not try to play back by default. Repres
   }
   export interface AudioTrackSelection {
     /**
-     * Selects one or more unique audio tracks from within an mp4 source.
+     * Selects one or more unique audio tracks from within a source.
      */
     Tracks: __listOfAudioTrack;
   }
@@ -2371,7 +2371,7 @@ If you disable the feature on an existing schedule, make sure that you first del
   export type FollowPoint = "END"|"START"|string;
   export interface FrameCaptureGroupSettings {
     /**
-     * The destination for the frame capture files. Either the URI for an Amazon S3 bucket and object, plus a file name prefix (for example, s3ssl://sportsDelivery/highlights/20180820/curling_) or the URI for a MediaStore container, plus a file name prefix (for example, mediastoressl://sportsDelivery/20180820/curling_). The final file names consist of the prefix from the destination field (for example, "curling_") + name modifier + the counter (5 digits, starting from 00001) + extension (which is always .jpg).  For example, curlingLow.00001.jpg
+     * The destination for the frame capture files. Either the URI for an Amazon S3 bucket and object, plus a file name prefix (for example, s3ssl://sportsDelivery/highlights/20180820/curling-) or the URI for a MediaStore container, plus a file name prefix (for example, mediastoressl://sportsDelivery/20180820/curling-). The final file names consist of the prefix from the destination field (for example, "curling-") + name modifier + the counter (5 digits, starting from 00001) + extension (which is always .jpg).  For example, curling-low.00001.jpg
      */
     Destination: OutputLocationRef;
   }
@@ -2958,7 +2958,9 @@ STANDARD: Create an I-frame-only manifest for each output that contains video, a
      */
     IFrameOnlyPlaylists?: IFrameOnlyPlaylistType;
     /**
-     * Applies only if Mode field is LIVE. Specifies the maximum number of segments in the media manifest file. After this maximum, older segments are removed from the media manifest. This number must be less than or equal to the Keep Segments field.
+     * Applies only if Mode field is LIVE.
+
+Specifies the maximum number of segments in the media manifest file. After this maximum, older segments are removed from the media manifest. This number must be smaller than the number in the Keep Segments field.
      */
     IndexNSegments?: __integerMin3;
     /**
@@ -2974,7 +2976,11 @@ STANDARD: Create an I-frame-only manifest for each output that contains video, a
      */
     IvSource?: HlsIvSource;
     /**
-     * Applies only if Mode field is LIVE. Specifies the number of media segments (.ts files) to retain in the destination directory.
+     * Applies only if Mode field is LIVE.
+
+Specifies the number of media segments to retain in the destination directory. This number should be bigger than indexNSegments (Num segments). We recommend (value = (2 x indexNsegments) + 1).
+
+If this "keep segments" number is too low, the following might happen: the player is still reading a media manifest file that lists this segment, but that segment has been removed from the destination directory (as directed by indexNSegments). This situation would result in a 404 HTTP error on the player.
      */
     KeepSegments?: __integerMin1;
     /**
@@ -3652,7 +3658,7 @@ pulled from.
     UrlPath?: __listOf__string;
   }
   export type InputTimecodeSource = "ZEROBASED"|"EMBEDDED"|string;
-  export type InputType = "UDP_PUSH"|"RTP_PUSH"|"RTMP_PUSH"|"RTMP_PULL"|"URL_PULL"|"MP4_FILE"|"MEDIACONNECT"|"INPUT_DEVICE"|string;
+  export type InputType = "UDP_PUSH"|"RTP_PUSH"|"RTMP_PUSH"|"RTMP_PULL"|"URL_PULL"|"MP4_FILE"|"MEDIACONNECT"|"INPUT_DEVICE"|"AWS_CDI"|string;
   export interface InputVpcRequest {
     /**
      * A list of up to 5 EC2 VPC security group IDs to attach to the Input VPC network interfaces.
@@ -3780,7 +3786,7 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
      */
     ChannelConfiguration?: __string;
     /**
-     * Filter by codec, 'AVC', 'HEVC', 'MPEG2', or 'AUDIO'
+     * Filter by codec, 'AVC', 'HEVC', 'MPEG2', 'AUDIO', or 'LINK'
      */
     Codec?: __string;
     /**
@@ -3834,7 +3840,7 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
      */
     ChannelClass?: __string;
     /**
-     * Filter by codec, 'AVC', 'HEVC', 'MPEG2', or 'AUDIO'
+     * Filter by codec, 'AVC', 'HEVC', 'MPEG2', 'AUDIO', or 'LINK'
      */
     Codec?: __string;
     MaxResults?: MaxResults;
@@ -3940,7 +3946,7 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
      */
     Bitrate?: __integerMin0;
     /**
-     * If set to multiplex, use multiplex buffer model for accurate interleaving.  Setting to bufferModel to none can lead to lower latency, but low-memory devices may not be able to play back the stream without interruptions.
+     * Controls the timing accuracy for output network traffic. Leave as MULTIPLEX to ensure accurate network packet timing. Or set to NONE, which might result in lower latency but will result in more variability in output network packet timing. This variability might cause interruptions, jitter, or bursty behavior in your playback or receiving devices.
      */
     BufferModel?: M2tsBufferModel;
     /**
@@ -4855,7 +4861,7 @@ Valid values: 1, 2, 4, 6, 8
      */
     UsagePrice?: __double;
   }
-  export type ReservationCodec = "MPEG2"|"AVC"|"HEVC"|"AUDIO"|string;
+  export type ReservationCodec = "MPEG2"|"AVC"|"HEVC"|"AUDIO"|"LINK"|string;
   export type ReservationMaximumBitrate = "MAX_10_MBPS"|"MAX_20_MBPS"|"MAX_50_MBPS"|string;
   export type ReservationMaximumFramerate = "MAX_30_FPS"|"MAX_60_FPS"|string;
   export type ReservationResolution = "SD"|"HD"|"FHD"|"UHD"|string;
@@ -5811,7 +5817,10 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
      */
     Name: __string;
     /**
-     * Indicates how to respond to the AFD values in the input stream. RESPOND causes input video to be clipped, depending on the AFD value, input display aspect ratio, and output display aspect ratio, and (except for FRAME_CAPTURE codec) includes the values in the output. PASSTHROUGH (does not apply to FRAME_CAPTURE codec) ignores the AFD values and includes the values in the output, so input video is not clipped. NONE ignores the AFD values and does not include the values through to the output, so input video is not clipped.
+     * Indicates how MediaLive will respond to the AFD values that might be in the input video. If you do not know what AFD signaling is, or if your downstream system has not given you guidance, choose PASSTHROUGH.
+RESPOND: MediaLive clips the input video using a formula that uses the AFD values (configured in afdSignaling ), the input display aspect ratio, and the output display aspect ratio. MediaLive also includes the AFD values in the output, unless the codec for this encode is FRAME_CAPTURE.
+PASSTHROUGH: MediaLive ignores the AFD values and does not clip the video. But MediaLive does include the values in the output.
+NONE: MediaLive does not clip the input video and does not include the AFD values in the output
      */
     RespondToAfd?: VideoDescriptionRespondToAfd;
     /**
@@ -5863,9 +5872,6 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   }
   export interface WebvttDestinationSettings {
   }
-  export type AcceptHeader = "image/jpeg"|string;
-  export type ContentType = "image/jpeg"|string;
-  export type InputDeviceThumbnail = Buffer|Uint8Array|Blob|string|Readable;
   export type __double = number;
   export type __doubleMin0 = number;
   export type __doubleMin1 = number;
@@ -5976,6 +5982,9 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export type __stringMin34Max34 = string;
   export type __stringMin3Max3 = string;
   export type __stringMin6Max6 = string;
+  export type InputDeviceThumbnail = Buffer|Uint8Array|Blob|string|Readable;
+  export type AcceptHeader = "image/jpeg"|string;
+  export type ContentType = "image/jpeg"|string;
   export type __timestamp = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

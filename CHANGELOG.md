@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.752.0-->
+<!--LATEST=2.753.0-->
 <!--ENTRYINSERT-->
+
+## 2.753.0
+* feature: EC2: T4g instances are powered by AWS Graviton2 processors
+* feature: Kafka: Added new API's to support SASL SCRAM Authentication with MSK Clusters.
+* feature: Kendra: Amazon Kendra now returns confidence scores for 'document' query responses.
+* feature: MediaLive: AWS Elemental MediaLive now supports CDI (Cloud Digital Interface) inputs which enable uncompressed video from applications on Elastic Cloud Compute (EC2), AWS Media Services, and from AWS partners
+* feature: Organizations: AWS Organizations now enables you to add tags to the AWS accounts, organizational units, organization root, and policies in your organization.
+* feature: SageMaker: Sagemaker Ground Truth: Added support for a new Streaming feature which helps to continuously feed data and receive labels in real time. This release adds a new input and output SNS data channel.
+* feature: TranscribeService: Amazon Transcribe now supports automatic language identification, which enables you to transcribe audio files without needing to know the language in advance.
 
 ## 2.752.0
 * feature: DocDB: Updated API documentation and added paginators for DescribeCertificates, DescribeDBClusterParameterGroups, DescribeDBClusterParameters, DescribeDBClusterSnapshots and DescribePendingMaintenanceActions

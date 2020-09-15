@@ -1835,11 +1835,11 @@ declare namespace SageMaker {
      */
     ContainerHostname?: ContainerHostname;
     /**
-     * The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored. If you are using your own custom algorithm instead of an algorithm provided by Amazon SageMaker, the inference code must meet Amazon SageMaker requirements. Amazon SageMaker supports both registry/repository[:tag] and registry/repository[@digest] image path formats. For more information, see Using Your Own Algorithms with Amazon SageMaker 
+     * The path where inference code is stored. This can be either in Amazon EC2 Container Registry or in a Docker registry that is accessible from the same VPC that you configure for your endpoint. If you are using your own custom algorithm instead of an algorithm provided by Amazon SageMaker, the inference code must meet Amazon SageMaker requirements. Amazon SageMaker supports both registry/repository[:tag] and registry/repository[@digest] image path formats. For more information, see Using Your Own Algorithms with Amazon SageMaker 
      */
     Image?: ContainerImage;
     /**
-     * Specifies whether the model container is in Amazon ECR or a private Docker registry in your Amazon Virtual Private Cloud (VPC). For information about storing containers in a private Docker registry, see Use a Private Docker Registry for Real-Time Inference Containers 
+     * Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). For information about storing containers in a private Docker registry, see Use a Private Docker Registry for Real-Time Inference Containers 
      */
     ImageConfig?: ImageConfig;
     /**
@@ -5051,11 +5051,11 @@ declare namespace SageMaker {
      */
     TaskCount: FlowDefinitionTaskCount;
     /**
-     * The length of time that a task remains available for labeling by human workers.
+     * The length of time that a task remains available for review by human workers.
      */
     TaskAvailabilityLifetimeInSeconds?: FlowDefinitionTaskAvailabilityLifetimeInSeconds;
     /**
-     * The amount of time that a worker has to complete a task.
+     * The amount of time that a worker has to complete a task. The default value is 3,600 seconds (1 hour)
      */
     TaskTimeLimitInSeconds?: FlowDefinitionTaskTimeLimitInSeconds;
     /**
@@ -5395,7 +5395,7 @@ declare namespace SageMaker {
   export type ImageArn = string;
   export interface ImageConfig {
     /**
-     * Set this to one of the following values:    Platform - The model image is hosted in Amazon ECR.    VPC - The model image is hosted in a private Docker registry in your VPC.  
+     * Set this to one of the following values:    Platform - The model image is hosted in Amazon ECR.    Vpc - The model image is hosted in a private Docker registry in your VPC.  
      */
     RepositoryAccessMode: RepositoryAccessMode;
   }
@@ -5535,7 +5535,7 @@ declare namespace SageMaker {
      */
     LabelingJobAlgorithmSpecificationArn: LabelingJobAlgorithmSpecificationArn;
     /**
-     * At the end of an auto-label job Amazon SageMaker Ground Truth sends the Amazon Resource Nam (ARN) of the final model used for auto-labeling. You can use this model as the starting point for subsequent similar jobs by providing the ARN of the model here. 
+     * At the end of an auto-label job Ground Truth sends the Amazon Resource Name (ARN) of the final model used for auto-labeling. You can use this model as the starting point for subsequent similar jobs by providing the ARN of the model here. 
      */
     InitialActiveLearningModelArn?: ModelArn;
     /**
@@ -5555,6 +5555,10 @@ declare namespace SageMaker {
      * The Amazon S3 location of the input data objects.
      */
     S3DataSource?: LabelingJobS3DataSource;
+    /**
+     * An Amazon SNS data source used for streaming labeling jobs.
+     */
+    SnsDataSource?: LabelingJobSnsDataSource;
   }
   export interface LabelingJobForWorkteamSummary {
     /**
@@ -5613,6 +5617,10 @@ declare namespace SageMaker {
      * The AWS Key Management Service ID of the key used to encrypt the output data, if any. If you use a KMS key ID or an alias of your master key, the Amazon SageMaker execution role must include permissions to call kms:Encrypt. If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account. Amazon SageMaker uses server-side encryption with KMS-managed keys for LabelingJobOutputConfig. If you use a bucket policy with an s3:PutObject permission that only allows objects with server-side encryption, set the condition key of s3:x-amz-server-side-encryption to "aws:kms". For more information, see KMS-Managed Encryption Keys in the Amazon Simple Storage Service Developer Guide.  The KMS key policy must grant permission to the IAM role that you specify in your CreateLabelingJob request. For more information, see Using Key Policies in AWS KMS in the AWS Key Management Service Developer Guide.
      */
     KmsKeyId?: KmsKeyId;
+    /**
+     * An Amazon Simple Notification Service (Amazon SNS) output topic ARN. When workers complete labeling tasks, Ground Truth will send labeling task output data to the SNS output topic you specify here. You must provide a value for this parameter if you provide an Amazon SNS input topic in SnsDataSource in InputConfig.
+     */
+    SnsTopicArn?: SnsTopicArn;
   }
   export interface LabelingJobResourceConfig {
     /**
@@ -5625,6 +5633,12 @@ declare namespace SageMaker {
      * The Amazon S3 location of the manifest file that describes the input data objects.
      */
     ManifestS3Uri: S3Uri;
+  }
+  export interface LabelingJobSnsDataSource {
+    /**
+     * The Amazon SNS input topic Amazon Resource Name (ARN). Specify the ARN of the input topic you will use to send new data objects to a streaming labeling job. If you specify an input topic for SnsTopicArn in InputConfig, you must specify a value for SnsTopicArn in OutputConfig.
+     */
+    SnsTopicArn: SnsTopicArn;
   }
   export type LabelingJobStatus = "Initializing"|"InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped"|string;
   export interface LabelingJobStoppingConditions {
@@ -8340,6 +8354,7 @@ declare namespace SageMaker {
     Seed: Seed;
   }
   export type SingleSignOnUserIdentifier = string;
+  export type SnsTopicArn = string;
   export type SortBy = "Name"|"CreationTime"|"Status"|string;
   export type SortExperimentsBy = "Name"|"CreationTime"|string;
   export type SortOrder = "Ascending"|"Descending"|string;

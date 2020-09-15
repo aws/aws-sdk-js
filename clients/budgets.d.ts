@@ -144,11 +144,11 @@ declare namespace Budgets {
      */
     CostFilters?: CostFilters;
     /**
-     * The types of costs that are included in this COST budget.  USAGE, RI_UTILIZATION, RI_COVERAGE, Savings_Plans_Utilization, and Savings_Plans_Coverage budgets do not have CostTypes.
+     * The types of costs that are included in this COST budget.  USAGE, RI_UTILIZATION, RI_COVERAGE, SAVINGS_PLANS_UTILIZATION, and SAVINGS_PLANS_COVERAGE budgets do not have CostTypes.
      */
     CostTypes?: CostTypes;
     /**
-     * The length of time until a budget resets the actual and forecasted spend. DAILY is available only for RI_UTILIZATION, RI_COVERAGE, Savings_Plans_Utilization, and Savings_Plans_Coverage budgets.
+     * The length of time until a budget resets the actual and forecasted spend.
      */
     TimeUnit: TimeUnit;
     /**
@@ -205,11 +205,11 @@ declare namespace Budgets {
   export type Budgets = Budget[];
   export interface CalculatedSpend {
     /**
-     * The amount of cost, usage, or RI units that you have used.
+     * The amount of cost, usage, RI units, or Savings Plans units that you have used.
      */
     ActualSpend: Spend;
     /**
-     * The amount of cost, usage, or RI units that you are forecasted to use.
+     * The amount of cost, usage, RI units, or Savings Plans units that you are forecasted to use.
      */
     ForecastedSpend?: Spend;
   }
@@ -496,7 +496,7 @@ declare namespace Budgets {
      */
     ComparisonOperator: ComparisonOperator;
     /**
-     * The threshold that is associated with a notification. Thresholds are always a percentage.
+     * The threshold that is associated with a notification. Thresholds are always a percentage, and many customers find value being alerted between 50% - 200% of the budgeted amount. The maximum limit for your threshold is 1,000,000% above the budgeted amount.
      */
     Threshold: NotificationThreshold;
     /**

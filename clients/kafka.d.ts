@@ -13,6 +13,18 @@ declare class Kafka extends Service {
   config: Config & Kafka.Types.ClientConfiguration;
   /**
    * 
+            Associates one or more Scram Secrets with an Amazon MSK cluster.
+         
+   */
+  batchAssociateScramSecret(params: Kafka.Types.BatchAssociateScramSecretRequest, callback?: (err: AWSError, data: Kafka.Types.BatchAssociateScramSecretResponse) => void): Request<Kafka.Types.BatchAssociateScramSecretResponse, AWSError>;
+  /**
+   * 
+            Associates one or more Scram Secrets with an Amazon MSK cluster.
+         
+   */
+  batchAssociateScramSecret(callback?: (err: AWSError, data: Kafka.Types.BatchAssociateScramSecretResponse) => void): Request<Kafka.Types.BatchAssociateScramSecretResponse, AWSError>;
+  /**
+   * 
             Creates a new MSK cluster.
          
    */
@@ -109,6 +121,18 @@ declare class Kafka extends Service {
   describeConfigurationRevision(callback?: (err: AWSError, data: Kafka.Types.DescribeConfigurationRevisionResponse) => void): Request<Kafka.Types.DescribeConfigurationRevisionResponse, AWSError>;
   /**
    * 
+            Disassociates one or more Scram Secrets from an Amazon MSK cluster.
+         
+   */
+  batchDisassociateScramSecret(params: Kafka.Types.BatchDisassociateScramSecretRequest, callback?: (err: AWSError, data: Kafka.Types.BatchDisassociateScramSecretResponse) => void): Request<Kafka.Types.BatchDisassociateScramSecretResponse, AWSError>;
+  /**
+   * 
+            Disassociates one or more Scram Secrets from an Amazon MSK cluster.
+         
+   */
+  batchDisassociateScramSecret(callback?: (err: AWSError, data: Kafka.Types.BatchDisassociateScramSecretResponse) => void): Request<Kafka.Types.BatchDisassociateScramSecretResponse, AWSError>;
+  /**
+   * 
             A list of brokers that a client application can use to bootstrap.
          
    */
@@ -203,6 +227,18 @@ declare class Kafka extends Service {
          
    */
   listNodes(callback?: (err: AWSError, data: Kafka.Types.ListNodesResponse) => void): Request<Kafka.Types.ListNodesResponse, AWSError>;
+  /**
+   * 
+            Returns a list of the Scram Secrets associated with an Amazon MSK cluster.
+         
+   */
+  listScramSecrets(params: Kafka.Types.ListScramSecretsRequest, callback?: (err: AWSError, data: Kafka.Types.ListScramSecretsResponse) => void): Request<Kafka.Types.ListScramSecretsResponse, AWSError>;
+  /**
+   * 
+            Returns a list of the Scram Secrets associated with an Amazon MSK cluster.
+         
+   */
+  listScramSecrets(callback?: (err: AWSError, data: Kafka.Types.ListScramSecretsResponse) => void): Request<Kafka.Types.ListScramSecretsResponse, AWSError>;
   /**
    * 
             Returns a list of the tags associated with the specified resource.
@@ -321,6 +357,34 @@ declare class Kafka extends Service {
   updateMonitoring(callback?: (err: AWSError, data: Kafka.Types.UpdateMonitoringResponse) => void): Request<Kafka.Types.UpdateMonitoringResponse, AWSError>;
 }
 declare namespace Kafka {
+  export interface BatchAssociateScramSecretRequest {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster to be updated.
+         
+     */
+    ClusterArn: __string;
+    /**
+     * 
+            List of AWS Secrets Manager secret ARNs.
+         
+     */
+    SecretArnList: __listOf__string;
+  }
+  export interface BatchAssociateScramSecretResponse {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster.
+         
+     */
+    ClusterArn?: __string;
+    /**
+     * 
+            List of errors when associating secrets to cluster.
+         
+     */
+    UnprocessedScramSecrets?: __listOfUnprocessedScramSecret;
+  }
   export type BrokerAZDistribution = "DEFAULT"|string;
   export interface BrokerEBSVolumeInfo {
     /**
@@ -434,6 +498,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     KafkaVersion?: __string;
   }
   export interface ClientAuthentication {
+    /**
+     * 
+            Details for ClientAuthentication using SASL.
+         
+     */
+    Sasl?: Sasl;
     /**
      * 
             Details for ClientAuthentication using TLS.
@@ -1047,6 +1117,34 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     ServerProperties?: __blob;
   }
+  export interface BatchDisassociateScramSecretRequest {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster to be updated.
+         
+     */
+    ClusterArn: __string;
+    /**
+     * 
+            List of AWS Secrets Manager secret ARNs.
+         
+     */
+    SecretArnList: __listOf__string;
+  }
+  export interface BatchDisassociateScramSecretResponse {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster.
+         
+     */
+    ClusterArn?: __string;
+    /**
+     * 
+            List of errors when disassociating secrets to cluster.
+         
+     */
+    UnprocessedScramSecrets?: __listOfUnprocessedScramSecret;
+  }
   export interface EBSStorageInfo {
     /**
      * 
@@ -1139,6 +1237,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     BootstrapBrokerStringTls?: __string;
+    /**
+     * 
+            A string containing one or more DNS names (or IP) and Sasl Scram port pairs.
+         
+     */
+    BootstrapBrokerStringSaslScram?: __string;
   }
   export interface GetCompatibleKafkaVersionsRequest {
     /**
@@ -1349,6 +1453,40 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     NodeInfoList?: __listOfNodeInfo;
   }
+  export interface ListScramSecretsRequest {
+    /**
+     * 
+            The arn of the cluster.
+         
+     */
+    ClusterArn: __string;
+    /**
+     * 
+            The maxResults of the query.
+         
+     */
+    MaxResults?: MaxResults;
+    /**
+     * 
+            The nextToken of the query.
+         
+     */
+    NextToken?: __string;
+  }
+  export interface ListScramSecretsResponse {
+    /**
+     * 
+            Paginated results marker.
+         
+     */
+    NextToken?: __string;
+    /**
+     * 
+            The list of scram secrets associated with the cluster.
+         
+     */
+    SecretArnList?: __listOf__string;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * 
@@ -1487,7 +1625,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
   export interface RebootBrokerRequest {
     /**
      * 
-            The list of broker IDs to be rebooted.
+            The list of broker IDs to be rebooted. The reboot-broker operation supports rebooting one broker at a time.
          
      */
     BrokerIds: __listOf__string;
@@ -1516,6 +1654,22 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     Bucket?: __string;
     Enabled: __boolean;
     Prefix?: __string;
+  }
+  export interface Sasl {
+    /**
+     * 
+            Details for SASL/SCRAM client authentication.
+         
+     */
+    Scram?: Scram;
+  }
+  export interface Scram {
+    /**
+     * 
+            SASL/SCRAM authentication is enabled or not.
+         
+     */
+    Enabled?: __boolean;
   }
   export interface NodeInfo {
     /**
@@ -1589,6 +1743,26 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     CertificateAuthorityArnList?: __listOf__string;
+  }
+  export interface UnprocessedScramSecret {
+    /**
+     * 
+            Error code for associate/disassociate failure.
+         
+     */
+    ErrorCode?: __string;
+    /**
+     * 
+            Error message for associate/disassociate failure.
+         
+     */
+    ErrorMessage?: __string;
+    /**
+     * 
+            AWS Secrets Manager secret ARN.
+         
+     */
+    SecretArn?: __string;
   }
   export interface UntagResourceRequest {
     /**
@@ -1888,6 +2062,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
   export type __listOfConfigurationRevision = ConfigurationRevision[];
   export type __listOfKafkaVersion = KafkaVersion[];
   export type __listOfNodeInfo = NodeInfo[];
+  export type __listOfUnprocessedScramSecret = UnprocessedScramSecret[];
   export type __listOf__string = __string[];
   export type __long = number;
   export type __mapOf__string = {[key: string]: __string};

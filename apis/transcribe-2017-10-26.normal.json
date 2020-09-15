@@ -1219,6 +1219,9 @@
         }
       }
     },
+    "IdentifiedLanguageScore": {
+      "type": "float"
+    },
     "InputDataConfig": {
       "type": "structure",
       "required": [
@@ -1343,6 +1346,13 @@
         }
       },
       "documentation": "<p>The structure used to describe a custom language model.</p>"
+    },
+    "LanguageOptions": {
+      "type": "list",
+      "member": {
+        "shape": "LanguageCode"
+      },
+      "min": 2
     },
     "ListLanguageModelsRequest": {
       "type": "structure",
@@ -1933,7 +1943,6 @@
       "type": "structure",
       "required": [
         "TranscriptionJobName",
-        "LanguageCode",
         "Media"
       ],
       "members": {
@@ -1980,6 +1989,14 @@
         "ContentRedaction": {
           "shape": "ContentRedaction",
           "documentation": "<p>An object that contains the request parameters for content redaction.</p>"
+        },
+        "IdentifyLanguage": {
+          "shape": "Boolean",
+          "documentation": "<p>Set this field to <code>true</code> to enable automatic language identification. Automatic language identification is disabled by default. You receive a <code>BadRequestException</code> error if you enter a value for a <code>LanguageCode</code>.</p>"
+        },
+        "LanguageOptions": {
+          "shape": "LanguageOptions",
+          "documentation": "<p>An object containing a list of languages that might be present in your collection of audio files. Automatic language identification chooses a language that best matches the source audio from that list.</p>"
         }
       }
     },
@@ -2068,6 +2085,18 @@
         "ContentRedaction": {
           "shape": "ContentRedaction",
           "documentation": "<p>An object that describes content redaction settings for the transcription job.</p>"
+        },
+        "IdentifyLanguage": {
+          "shape": "Boolean",
+          "documentation": "<p>A value that shows if automatic language identification was enabled for a transcription job.</p>"
+        },
+        "LanguageOptions": {
+          "shape": "LanguageOptions",
+          "documentation": "<p>An object that shows the optional array of languages inputted for transcription jobs with automatic language identification enabled.</p>"
+        },
+        "IdentifiedLanguageScore": {
+          "shape": "IdentifiedLanguageScore",
+          "documentation": "<p>The score that Amazon Transcribe gives for the predominant language that it identified in your collection of source audio files. This score reflects the confidence that the language that Amazon Transcribe identified is the correct language.</p>"
         }
       },
       "documentation": "<p>Describes an asynchronous transcription job that was created with the <code>StartTranscriptionJob</code> operation. </p>"
@@ -2134,6 +2163,14 @@
         },
         "ModelSettings": {
           "shape": "ModelSettings"
+        },
+        "IdentifyLanguage": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether automatic language identification was enabled for a transcription job.</p>"
+        },
+        "IdentifiedLanguageScore": {
+          "shape": "IdentifiedLanguageScore",
+          "documentation": "<p>A value between zero and one that Amazon Transcribe assigned to the language it identified in the source audio. A higher score indicates that Amazon Transcribe is more confident in the language it identified.</p>"
         }
       },
       "documentation": "<p>Provides a summary of information about a transcription job.</p>"

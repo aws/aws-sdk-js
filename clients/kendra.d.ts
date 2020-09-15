@@ -140,11 +140,11 @@ declare class Kendra extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Kendra.Types.ListTagsForResourceResponse) => void): Request<Kendra.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Searches an active index. Use this API to search your documents using query. The Query operation enables to do faceted search and to filter results based on document attributes. It also enables you to provide user context that Amazon Kendra uses to enforce document access control in the search results.  Amazon Kendra searches your index for text content and question and answer (FAQ) content. By default the response contains three types of results.   Relevant passages   Matching FAQs   Relevant documents   You can specify that the query return only one type of result using the QueryResultTypeConfig parameter.
+   * Searches an active index. Use this API to search your documents using query. The Query operation enables to do faceted search and to filter results based on document attributes. It also enables you to provide user context that Amazon Kendra uses to enforce document access control in the search results.  Amazon Kendra searches your index for text content and question and answer (FAQ) content. By default the response contains three types of results.   Relevant passages   Matching FAQs   Relevant documents   You can specify that the query return only one type of result using the QueryResultTypeConfig parameter. Each query returns the 100 most relevant results. 
    */
   query(params: Kendra.Types.QueryRequest, callback?: (err: AWSError, data: Kendra.Types.QueryResult) => void): Request<Kendra.Types.QueryResult, AWSError>;
   /**
-   * Searches an active index. Use this API to search your documents using query. The Query operation enables to do faceted search and to filter results based on document attributes. It also enables you to provide user context that Amazon Kendra uses to enforce document access control in the search results.  Amazon Kendra searches your index for text content and question and answer (FAQ) content. By default the response contains three types of results.   Relevant passages   Matching FAQs   Relevant documents   You can specify that the query return only one type of result using the QueryResultTypeConfig parameter.
+   * Searches an active index. Use this API to search your documents using query. The Query operation enables to do faceted search and to filter results based on document attributes. It also enables you to provide user context that Amazon Kendra uses to enforce document access control in the search results.  Amazon Kendra searches your index for text content and question and answer (FAQ) content. By default the response contains three types of results.   Relevant passages   Matching FAQs   Relevant documents   You can specify that the query return only one type of result using the QueryResultTypeConfig parameter. Each query returns the 100 most relevant results. 
    */
   query(callback?: (err: AWSError, data: Kendra.Types.QueryResult) => void): Request<Kendra.Types.QueryResult, AWSError>;
   /**
@@ -499,7 +499,7 @@ declare namespace Kendra {
      */
     Name: IndexName;
     /**
-     * The Amazon Kendra edition to use for the index. Choose DEVELOPER_EDITION for indexes intended for development, testing, or proof of concept. Use ENTERPRISE_EDITION for your production databases. Once you set the edition for an index, it can't be changed. 
+     * The Amazon Kendra edition to use for the index. Choose DEVELOPER_EDITION for indexes intended for development, testing, or proof of concept. Use ENTERPRISE_EDITION for your production databases. Once you set the edition for an index, it can't be changed.  The Edition parameter is optional. If you don't supply a value, the default is ENTERPRISE_EDITION.
      */
     Edition?: IndexEdition;
     /**
@@ -1025,6 +1025,10 @@ declare namespace Kendra {
      */
     DocumentAttributeKey?: DocumentAttributeKey;
     /**
+     * The data type of the facet value. This is the same as the type defined for the index field when it was created.
+     */
+    DocumentAttributeValueType?: DocumentAttributeValueType;
+    /**
      * An array of key/value pairs, where the key is the value of the attribute and the count is the number of documents that share the key value.
      */
     DocumentAttributeValueCountPairs?: DocumentAttributeValueCountPairList;
@@ -1359,7 +1363,7 @@ declare namespace Kendra {
      */
     FacetResults?: FacetResultList;
     /**
-     * The number of items returned by the search. Use this to determine when you have requested the last set of results.
+     * The total number of items found by the search; however, you can only retrieve up to 100 items. For example, if the search found 192 items, you can only retrieve the first 100 of the items.
      */
     TotalNumberOfResults?: Integer;
   }
@@ -1397,7 +1401,7 @@ declare namespace Kendra {
      */
     DocumentAttributes?: DocumentAttributeList;
     /**
-     * Indicates the confidence that Amazon Kendra has that a result matches the query that you provided. Each result is placed into a bin that indicates the confidence, VERY_HIGH, HIGH, and MEDIUM. You can use the score to determine if a response meets the confidence needed for your application. Confidence scores are only returned for results with the Type field set to QUESTION_ANSWER or ANSWER. This field is not returned if the Type field is set to DOCUMENT.
+     * Indicates the confidence that Amazon Kendra has that a result matches the query that you provided. Each result is placed into a bin that indicates the confidence, VERY_HIGH, HIGH, MEDIUM and LOW. You can use the score to determine if a response meets the confidence needed for your application. The field is only set to LOW when the Type field is set to DOCUMENT and Amazon Kendra is not confident that the result matches the query.
      */
     ScoreAttributes?: ScoreAttributes;
   }
@@ -1617,7 +1621,7 @@ declare namespace Kendra {
      */
     ScoreConfidence?: ScoreConfidence;
   }
-  export type ScoreConfidence = "VERY_HIGH"|"HIGH"|"MEDIUM"|string;
+  export type ScoreConfidence = "VERY_HIGH"|"HIGH"|"MEDIUM"|"LOW"|string;
   export interface Search {
     /**
      * Indicates that the field can be used to create search facets, a count of results for each value in the field. The default is false .

@@ -553,6 +553,7 @@ declare namespace TranscribeService {
      */
     DownloadUri?: Uri;
   }
+  export type IdentifiedLanguageScore = number;
   export interface InputDataConfig {
     /**
      * The Amazon S3 prefix you specify to access the plain text files that you use to train your custom language model.
@@ -617,6 +618,7 @@ declare namespace TranscribeService {
      */
     InputDataConfig?: InputDataConfig;
   }
+  export type LanguageOptions = LanguageCode[];
   export interface ListLanguageModelsRequest {
     /**
      * When specified, returns only custom language models with the specified status. Language models are ordered by creation date, with the newest models first. If you don't specify a status, Amazon Transcribe returns all custom language models ordered by date.
@@ -1042,7 +1044,7 @@ declare namespace TranscribeService {
     /**
      * The language code for the language used in the input media file.
      */
-    LanguageCode: LanguageCode;
+    LanguageCode?: LanguageCode;
     /**
      * The sample rate, in Hertz, of the audio track in the input media file.  If you do not specify the media sample rate, Amazon Transcribe determines the sample rate. If you specify the sample rate, it must match the sample rate detected by Amazon Transcribe. In most cases, you should leave the MediaSampleRateHertz field blank and let Amazon Transcribe determine the sample rate.
      */
@@ -1079,6 +1081,14 @@ declare namespace TranscribeService {
      * An object that contains the request parameters for content redaction.
      */
     ContentRedaction?: ContentRedaction;
+    /**
+     * Set this field to true to enable automatic language identification. Automatic language identification is disabled by default. You receive a BadRequestException error if you enter a value for a LanguageCode.
+     */
+    IdentifyLanguage?: Boolean;
+    /**
+     * An object containing a list of languages that might be present in your collection of audio files. Automatic language identification chooses a language that best matches the source audio from that list.
+     */
+    LanguageOptions?: LanguageOptions;
   }
   export interface StartTranscriptionJobResponse {
     /**
@@ -1157,6 +1167,18 @@ declare namespace TranscribeService {
      * An object that describes content redaction settings for the transcription job.
      */
     ContentRedaction?: ContentRedaction;
+    /**
+     * A value that shows if automatic language identification was enabled for a transcription job.
+     */
+    IdentifyLanguage?: Boolean;
+    /**
+     * An object that shows the optional array of languages inputted for transcription jobs with automatic language identification enabled.
+     */
+    LanguageOptions?: LanguageOptions;
+    /**
+     * The score that Amazon Transcribe gives for the predominant language that it identified in your collection of source audio files. This score reflects the confidence that the language that Amazon Transcribe identified is the correct language.
+     */
+    IdentifiedLanguageScore?: IdentifiedLanguageScore;
   }
   export type TranscriptionJobName = string;
   export type TranscriptionJobStatus = "QUEUED"|"IN_PROGRESS"|"FAILED"|"COMPLETED"|string;
@@ -1199,6 +1221,14 @@ declare namespace TranscribeService {
      */
     ContentRedaction?: ContentRedaction;
     ModelSettings?: ModelSettings;
+    /**
+     * Whether automatic language identification was enabled for a transcription job.
+     */
+    IdentifyLanguage?: Boolean;
+    /**
+     * A value between zero and one that Amazon Transcribe assigned to the language it identified in the source audio. A higher score indicates that Amazon Transcribe is more confident in the language it identified.
+     */
+    IdentifiedLanguageScore?: IdentifiedLanguageScore;
   }
   export type Type = "CONVERSATION"|"DICTATION"|string;
   export interface UpdateMedicalVocabularyRequest {
