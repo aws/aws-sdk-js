@@ -1213,6 +1213,32 @@
       ],
       "documentation": "Retrieves information about a subscription definition version."
     },
+    "GetThingRuntimeConfiguration": {
+      "name": "GetThingRuntimeConfiguration",
+      "http": {
+        "method": "GET",
+        "requestUri": "/greengrass/things/{ThingName}/runtimeconfig",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetThingRuntimeConfigurationRequest"
+      },
+      "output": {
+        "shape": "GetThingRuntimeConfigurationResponse",
+        "documentation": "Success. The response contains the runtime configuration for the given thing."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "invalid request"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "server error"
+        }
+      ],
+      "documentation": "Get the runtime configuration of a thing."
+    },
     "ListBulkDeploymentDetailedReports": {
       "name": "ListBulkDeploymentDetailedReports",
       "http": {
@@ -1957,6 +1983,32 @@
         }
       ],
       "documentation": "Updates a subscription definition."
+    },
+    "UpdateThingRuntimeConfiguration": {
+      "name": "UpdateThingRuntimeConfiguration",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/greengrass/things/{ThingName}/runtimeconfig",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateThingRuntimeConfigurationRequest"
+      },
+      "output": {
+        "shape": "UpdateThingRuntimeConfigurationResponse",
+        "documentation": "success"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "invalid request"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "server error"
+        }
+      ],
+      "documentation": "Updates the runtime configuration of a thing."
     }
   },
   "shapes": {
@@ -2106,6 +2158,13 @@
       "member": {
         "shape": "BulkDeployment"
       }
+    },
+    "ConfigurationSyncStatus": {
+      "type": "string",
+      "enum": [
+        "InSync",
+        "OutOfSync"
+      ]
     },
     "ConnectivityInfo": {
       "type": "structure",
@@ -4692,6 +4751,29 @@
         }
       }
     },
+    "GetThingRuntimeConfigurationRequest": {
+      "type": "structure",
+      "members": {
+        "ThingName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "ThingName",
+          "documentation": "The thing name."
+        }
+      },
+      "required": [
+        "ThingName"
+      ]
+    },
+    "GetThingRuntimeConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "RuntimeConfiguration": {
+          "shape": "RuntimeConfiguration",
+          "documentation": "Runtime configuration for a thing."
+        }
+      }
+    },
     "GroupCertificateAuthorityProperties": {
       "type": "structure",
       "members": {
@@ -5731,6 +5813,16 @@
         "GroupPermission"
       ]
     },
+    "RuntimeConfiguration": {
+      "type": "structure",
+      "members": {
+        "TelemetryConfiguration": {
+          "shape": "TelemetryConfiguration",
+          "documentation": "Configuration for telemetry service."
+        }
+      },
+      "documentation": "Runtime configuration for a thing."
+    },
     "S3MachineLearningModelResourceData": {
       "type": "structure",
       "members": {
@@ -5914,6 +6006,43 @@
       "value": {
         "shape": "__string"
       }
+    },
+    "Telemetry": {
+      "type": "string",
+      "enum": [
+        "On",
+        "Off"
+      ]
+    },
+    "TelemetryConfiguration": {
+      "type": "structure",
+      "members": {
+        "ConfigurationSyncStatus": {
+          "shape": "ConfigurationSyncStatus",
+          "documentation": "Synchronization status of the device reported configuration with the desired configuration."
+        },
+        "Telemetry": {
+          "shape": "Telemetry",
+          "documentation": "Configure telemetry to be on or off."
+        }
+      },
+      "documentation": "Configuration settings for running telemetry.",
+      "required": [
+        "Telemetry"
+      ]
+    },
+    "TelemetryConfigurationUpdate": {
+      "type": "structure",
+      "members": {
+        "Telemetry": {
+          "shape": "Telemetry",
+          "documentation": "Configure telemetry to be on or off."
+        }
+      },
+      "documentation": "Configuration settings for running telemetry.",
+      "required": [
+        "Telemetry"
+      ]
     },
     "UntagResourceRequest": {
       "type": "structure",
@@ -6220,6 +6349,28 @@
         "amazon_linux",
         "openwrt"
       ]
+    },
+    "UpdateThingRuntimeConfigurationRequest": {
+      "type": "structure",
+      "members": {
+        "TelemetryConfiguration": {
+          "shape": "TelemetryConfigurationUpdate",
+          "documentation": "Configuration for telemetry service."
+        },
+        "ThingName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "ThingName",
+          "documentation": "The thing name."
+        }
+      },
+      "required": [
+        "ThingName"
+      ]
+    },
+    "UpdateThingRuntimeConfigurationResponse": {
+      "type": "structure",
+      "members": {}
     },
     "VersionInformation": {
       "type": "structure",

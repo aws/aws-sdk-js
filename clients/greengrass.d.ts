@@ -444,6 +444,14 @@ declare class Greengrass extends Service {
    */
   getSubscriptionDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.GetSubscriptionDefinitionVersionResponse) => void): Request<Greengrass.Types.GetSubscriptionDefinitionVersionResponse, AWSError>;
   /**
+   * Get the runtime configuration of a thing.
+   */
+  getThingRuntimeConfiguration(params: Greengrass.Types.GetThingRuntimeConfigurationRequest, callback?: (err: AWSError, data: Greengrass.Types.GetThingRuntimeConfigurationResponse) => void): Request<Greengrass.Types.GetThingRuntimeConfigurationResponse, AWSError>;
+  /**
+   * Get the runtime configuration of a thing.
+   */
+  getThingRuntimeConfiguration(callback?: (err: AWSError, data: Greengrass.Types.GetThingRuntimeConfigurationResponse) => void): Request<Greengrass.Types.GetThingRuntimeConfigurationResponse, AWSError>;
+  /**
    * Gets a paginated list of the deployments that have been started in a bulk deployment operation, and their current deployment status.
    */
   listBulkDeploymentDetailedReports(params: Greengrass.Types.ListBulkDeploymentDetailedReportsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListBulkDeploymentDetailedReportsResponse) => void): Request<Greengrass.Types.ListBulkDeploymentDetailedReportsResponse, AWSError>;
@@ -731,6 +739,14 @@ declare class Greengrass extends Service {
    * Updates a subscription definition.
    */
   updateSubscriptionDefinition(callback?: (err: AWSError, data: Greengrass.Types.UpdateSubscriptionDefinitionResponse) => void): Request<Greengrass.Types.UpdateSubscriptionDefinitionResponse, AWSError>;
+  /**
+   * Updates the runtime configuration of a thing.
+   */
+  updateThingRuntimeConfiguration(params: Greengrass.Types.UpdateThingRuntimeConfigurationRequest, callback?: (err: AWSError, data: Greengrass.Types.UpdateThingRuntimeConfigurationResponse) => void): Request<Greengrass.Types.UpdateThingRuntimeConfigurationResponse, AWSError>;
+  /**
+   * Updates the runtime configuration of a thing.
+   */
+  updateThingRuntimeConfiguration(callback?: (err: AWSError, data: Greengrass.Types.UpdateThingRuntimeConfigurationResponse) => void): Request<Greengrass.Types.UpdateThingRuntimeConfigurationResponse, AWSError>;
 }
 declare namespace Greengrass {
   export interface AssociateRoleToGroupRequest {
@@ -826,6 +842,7 @@ declare namespace Greengrass {
   export type BulkDeploymentResults = BulkDeploymentResult[];
   export type BulkDeploymentStatus = "Initializing"|"Running"|"Completed"|"Stopping"|"Stopped"|"Failed"|string;
   export type BulkDeployments = BulkDeployment[];
+  export type ConfigurationSyncStatus = "InSync"|"OutOfSync"|string;
   export interface ConnectivityInfo {
     /**
      * The endpoint for the Greengrass core. Can be an IP address or DNS.
@@ -2670,6 +2687,18 @@ declare namespace Greengrass {
      */
     Version?: __string;
   }
+  export interface GetThingRuntimeConfigurationRequest {
+    /**
+     * The thing name.
+     */
+    ThingName: __string;
+  }
+  export interface GetThingRuntimeConfigurationResponse {
+    /**
+     * Runtime configuration for a thing.
+     */
+    RuntimeConfiguration?: RuntimeConfiguration;
+  }
   export interface GroupCertificateAuthorityProperties {
     /**
      * The ARN of the certificate authority for the group.
@@ -3333,6 +3362,12 @@ declare namespace Greengrass {
      */
     GroupPermission: Permission;
   }
+  export interface RuntimeConfiguration {
+    /**
+     * Configuration for telemetry service.
+     */
+    TelemetryConfiguration?: TelemetryConfiguration;
+  }
   export interface S3MachineLearningModelResourceData {
     /**
      * The absolute local path of the resource inside the Lambda environment.
@@ -3435,6 +3470,23 @@ declare namespace Greengrass {
     tags?: Tags;
   }
   export type Tags = {[key: string]: __string};
+  export type Telemetry = "On"|"Off"|string;
+  export interface TelemetryConfiguration {
+    /**
+     * Synchronization status of the device reported configuration with the desired configuration.
+     */
+    ConfigurationSyncStatus?: ConfigurationSyncStatus;
+    /**
+     * Configure telemetry to be on or off.
+     */
+    Telemetry: Telemetry;
+  }
+  export interface TelemetryConfigurationUpdate {
+    /**
+     * Configure telemetry to be on or off.
+     */
+    Telemetry: Telemetry;
+  }
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource.
@@ -3589,6 +3641,18 @@ declare namespace Greengrass {
   export type UpdateTargets = __string[];
   export type UpdateTargetsArchitecture = "armv6l"|"armv7l"|"x86_64"|"aarch64"|string;
   export type UpdateTargetsOperatingSystem = "ubuntu"|"raspbian"|"amazon_linux"|"openwrt"|string;
+  export interface UpdateThingRuntimeConfigurationRequest {
+    /**
+     * Configuration for telemetry service.
+     */
+    TelemetryConfiguration?: TelemetryConfigurationUpdate;
+    /**
+     * The thing name.
+     */
+    ThingName: __string;
+  }
+  export interface UpdateThingRuntimeConfigurationResponse {
+  }
   export interface VersionInformation {
     /**
      * The ARN of the version.

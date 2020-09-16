@@ -12,21 +12,61 @@ declare class Connect extends Service {
   constructor(options?: Connect.Types.ClientConfiguration)
   config: Config & Connect.Types.ClientConfiguration;
   /**
-   * Creates a user account for the specified Amazon Connect instance.
+   * Associates a set of queues with a routing profile.
+   */
+  associateRoutingProfileQueues(params: Connect.Types.AssociateRoutingProfileQueuesRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Associates a set of queues with a routing profile.
+   */
+  associateRoutingProfileQueues(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Creates a contact flow for the specified Amazon Connect instance.
+   */
+  createContactFlow(params: Connect.Types.CreateContactFlowRequest, callback?: (err: AWSError, data: Connect.Types.CreateContactFlowResponse) => void): Request<Connect.Types.CreateContactFlowResponse, AWSError>;
+  /**
+   * Creates a contact flow for the specified Amazon Connect instance.
+   */
+  createContactFlow(callback?: (err: AWSError, data: Connect.Types.CreateContactFlowResponse) => void): Request<Connect.Types.CreateContactFlowResponse, AWSError>;
+  /**
+   * Creates a new routing profile.
+   */
+  createRoutingProfile(params: Connect.Types.CreateRoutingProfileRequest, callback?: (err: AWSError, data: Connect.Types.CreateRoutingProfileResponse) => void): Request<Connect.Types.CreateRoutingProfileResponse, AWSError>;
+  /**
+   * Creates a new routing profile.
+   */
+  createRoutingProfile(callback?: (err: AWSError, data: Connect.Types.CreateRoutingProfileResponse) => void): Request<Connect.Types.CreateRoutingProfileResponse, AWSError>;
+  /**
+   * Creates a user account for the specified Amazon Connect instance. For information about how to create user accounts using the Amazon Connect console, see Add Users in the Amazon Connect Administrator Guide.
    */
   createUser(params: Connect.Types.CreateUserRequest, callback?: (err: AWSError, data: Connect.Types.CreateUserResponse) => void): Request<Connect.Types.CreateUserResponse, AWSError>;
   /**
-   * Creates a user account for the specified Amazon Connect instance.
+   * Creates a user account for the specified Amazon Connect instance. For information about how to create user accounts using the Amazon Connect console, see Add Users in the Amazon Connect Administrator Guide.
    */
   createUser(callback?: (err: AWSError, data: Connect.Types.CreateUserResponse) => void): Request<Connect.Types.CreateUserResponse, AWSError>;
   /**
-   * Deletes a user account from the specified Amazon Connect instance.
+   * Deletes a user account from the specified Amazon Connect instance. For information about what happens to a user's data when their account is deleted, see Delete Users from Your Amazon Connect Instance in the Amazon Connect Administrator Guide.
    */
   deleteUser(params: Connect.Types.DeleteUserRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a user account from the specified Amazon Connect instance.
+   * Deletes a user account from the specified Amazon Connect instance. For information about what happens to a user's data when their account is deleted, see Delete Users from Your Amazon Connect Instance in the Amazon Connect Administrator Guide.
    */
   deleteUser(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Describes the specified contact flow.
+   */
+  describeContactFlow(params: Connect.Types.DescribeContactFlowRequest, callback?: (err: AWSError, data: Connect.Types.DescribeContactFlowResponse) => void): Request<Connect.Types.DescribeContactFlowResponse, AWSError>;
+  /**
+   * Describes the specified contact flow.
+   */
+  describeContactFlow(callback?: (err: AWSError, data: Connect.Types.DescribeContactFlowResponse) => void): Request<Connect.Types.DescribeContactFlowResponse, AWSError>;
+  /**
+   * Describes the specified routing profile.
+   */
+  describeRoutingProfile(params: Connect.Types.DescribeRoutingProfileRequest, callback?: (err: AWSError, data: Connect.Types.DescribeRoutingProfileResponse) => void): Request<Connect.Types.DescribeRoutingProfileResponse, AWSError>;
+  /**
+   * Describes the specified routing profile.
+   */
+  describeRoutingProfile(callback?: (err: AWSError, data: Connect.Types.DescribeRoutingProfileResponse) => void): Request<Connect.Types.DescribeRoutingProfileResponse, AWSError>;
   /**
    * Describes the specified user account. You can find the instance ID in the console (it’s the final part of the ARN). The console does not display the user IDs. Instead, list the users and note the IDs provided in the output.
    */
@@ -52,6 +92,14 @@ declare class Connect extends Service {
    */
   describeUserHierarchyStructure(callback?: (err: AWSError, data: Connect.Types.DescribeUserHierarchyStructureResponse) => void): Request<Connect.Types.DescribeUserHierarchyStructureResponse, AWSError>;
   /**
+   * Disassociates a set of queues from a routing profile.
+   */
+  disassociateRoutingProfileQueues(params: Connect.Types.DisassociateRoutingProfileQueuesRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Disassociates a set of queues from a routing profile.
+   */
+  disassociateRoutingProfileQueues(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Retrieves the contact attributes for the specified contact.
    */
   getContactAttributes(params: Connect.Types.GetContactAttributesRequest, callback?: (err: AWSError, data: Connect.Types.GetContactAttributesResponse) => void): Request<Connect.Types.GetContactAttributesResponse, AWSError>;
@@ -60,11 +108,11 @@ declare class Connect extends Service {
    */
   getContactAttributes(callback?: (err: AWSError, data: Connect.Types.GetContactAttributesResponse) => void): Request<Connect.Types.GetContactAttributesResponse, AWSError>;
   /**
-   * Gets the real-time metric data from the specified Amazon Connect instance. For more information, see Real-time Metrics Reports in the Amazon Connect Administrator Guide.
+   * Gets the real-time metric data from the specified Amazon Connect instance. For a description of each metric, see Real-time Metrics Definitions in the Amazon Connect Administrator Guide.
    */
   getCurrentMetricData(params: Connect.Types.GetCurrentMetricDataRequest, callback?: (err: AWSError, data: Connect.Types.GetCurrentMetricDataResponse) => void): Request<Connect.Types.GetCurrentMetricDataResponse, AWSError>;
   /**
-   * Gets the real-time metric data from the specified Amazon Connect instance. For more information, see Real-time Metrics Reports in the Amazon Connect Administrator Guide.
+   * Gets the real-time metric data from the specified Amazon Connect instance. For a description of each metric, see Real-time Metrics Definitions in the Amazon Connect Administrator Guide.
    */
   getCurrentMetricData(callback?: (err: AWSError, data: Connect.Types.GetCurrentMetricDataResponse) => void): Request<Connect.Types.GetCurrentMetricDataResponse, AWSError>;
   /**
@@ -76,75 +124,91 @@ declare class Connect extends Service {
    */
   getFederationToken(callback?: (err: AWSError, data: Connect.Types.GetFederationTokenResponse) => void): Request<Connect.Types.GetFederationTokenResponse, AWSError>;
   /**
-   * Gets historical metric data from the specified Amazon Connect instance. For more information, see Historical Metrics Reports in the Amazon Connect Administrator Guide.
+   * Gets historical metric data from the specified Amazon Connect instance. For a description of each historical metric, see Historical Metrics Definitions in the Amazon Connect Administrator Guide.
    */
   getMetricData(params: Connect.Types.GetMetricDataRequest, callback?: (err: AWSError, data: Connect.Types.GetMetricDataResponse) => void): Request<Connect.Types.GetMetricDataResponse, AWSError>;
   /**
-   * Gets historical metric data from the specified Amazon Connect instance. For more information, see Historical Metrics Reports in the Amazon Connect Administrator Guide.
+   * Gets historical metric data from the specified Amazon Connect instance. For a description of each historical metric, see Historical Metrics Definitions in the Amazon Connect Administrator Guide.
    */
   getMetricData(callback?: (err: AWSError, data: Connect.Types.GetMetricDataResponse) => void): Request<Connect.Types.GetMetricDataResponse, AWSError>;
   /**
-   * Provides information about the contact flows for the specified Amazon Connect instance.
+   * Provides information about the contact flows for the specified Amazon Connect instance. For more information about contact flows, see Contact Flows in the Amazon Connect Administrator Guide.
    */
   listContactFlows(params: Connect.Types.ListContactFlowsRequest, callback?: (err: AWSError, data: Connect.Types.ListContactFlowsResponse) => void): Request<Connect.Types.ListContactFlowsResponse, AWSError>;
   /**
-   * Provides information about the contact flows for the specified Amazon Connect instance.
+   * Provides information about the contact flows for the specified Amazon Connect instance. For more information about contact flows, see Contact Flows in the Amazon Connect Administrator Guide.
    */
   listContactFlows(callback?: (err: AWSError, data: Connect.Types.ListContactFlowsResponse) => void): Request<Connect.Types.ListContactFlowsResponse, AWSError>;
   /**
-   * Provides information about the hours of operation for the specified Amazon Connect instance.
+   * Provides information about the hours of operation for the specified Amazon Connect instance. For more information about hours of operation, see Set the Hours of Operation for a Queue in the Amazon Connect Administrator Guide.
    */
   listHoursOfOperations(params: Connect.Types.ListHoursOfOperationsRequest, callback?: (err: AWSError, data: Connect.Types.ListHoursOfOperationsResponse) => void): Request<Connect.Types.ListHoursOfOperationsResponse, AWSError>;
   /**
-   * Provides information about the hours of operation for the specified Amazon Connect instance.
+   * Provides information about the hours of operation for the specified Amazon Connect instance. For more information about hours of operation, see Set the Hours of Operation for a Queue in the Amazon Connect Administrator Guide.
    */
   listHoursOfOperations(callback?: (err: AWSError, data: Connect.Types.ListHoursOfOperationsResponse) => void): Request<Connect.Types.ListHoursOfOperationsResponse, AWSError>;
   /**
-   * Provides information about the phone numbers for the specified Amazon Connect instance.
+   * Provides information about the phone numbers for the specified Amazon Connect instance.  For more information about phone numbers, see Set Up Phone Numbers for Your Contact Center in the Amazon Connect Administrator Guide.
    */
   listPhoneNumbers(params: Connect.Types.ListPhoneNumbersRequest, callback?: (err: AWSError, data: Connect.Types.ListPhoneNumbersResponse) => void): Request<Connect.Types.ListPhoneNumbersResponse, AWSError>;
   /**
-   * Provides information about the phone numbers for the specified Amazon Connect instance.
+   * Provides information about the phone numbers for the specified Amazon Connect instance.  For more information about phone numbers, see Set Up Phone Numbers for Your Contact Center in the Amazon Connect Administrator Guide.
    */
   listPhoneNumbers(callback?: (err: AWSError, data: Connect.Types.ListPhoneNumbersResponse) => void): Request<Connect.Types.ListPhoneNumbersResponse, AWSError>;
   /**
-   * Provides information about the queues for the specified Amazon Connect instance.
+   * Provides information about the prompts for the specified Amazon Connect instance.
+   */
+  listPrompts(params: Connect.Types.ListPromptsRequest, callback?: (err: AWSError, data: Connect.Types.ListPromptsResponse) => void): Request<Connect.Types.ListPromptsResponse, AWSError>;
+  /**
+   * Provides information about the prompts for the specified Amazon Connect instance.
+   */
+  listPrompts(callback?: (err: AWSError, data: Connect.Types.ListPromptsResponse) => void): Request<Connect.Types.ListPromptsResponse, AWSError>;
+  /**
+   * Provides information about the queues for the specified Amazon Connect instance. For more information about queues, see Queues: Standard and Agent in the Amazon Connect Administrator Guide.
    */
   listQueues(params: Connect.Types.ListQueuesRequest, callback?: (err: AWSError, data: Connect.Types.ListQueuesResponse) => void): Request<Connect.Types.ListQueuesResponse, AWSError>;
   /**
-   * Provides information about the queues for the specified Amazon Connect instance.
+   * Provides information about the queues for the specified Amazon Connect instance. For more information about queues, see Queues: Standard and Agent in the Amazon Connect Administrator Guide.
    */
   listQueues(callback?: (err: AWSError, data: Connect.Types.ListQueuesResponse) => void): Request<Connect.Types.ListQueuesResponse, AWSError>;
   /**
-   * Provides summary information about the routing profiles for the specified Amazon Connect instance.
+   * List the queues associated with a routing profile.
+   */
+  listRoutingProfileQueues(params: Connect.Types.ListRoutingProfileQueuesRequest, callback?: (err: AWSError, data: Connect.Types.ListRoutingProfileQueuesResponse) => void): Request<Connect.Types.ListRoutingProfileQueuesResponse, AWSError>;
+  /**
+   * List the queues associated with a routing profile.
+   */
+  listRoutingProfileQueues(callback?: (err: AWSError, data: Connect.Types.ListRoutingProfileQueuesResponse) => void): Request<Connect.Types.ListRoutingProfileQueuesResponse, AWSError>;
+  /**
+   * Provides summary information about the routing profiles for the specified Amazon Connect instance. For more information about routing profiles, see Routing Profiles and Create a Routing Profile in the Amazon Connect Administrator Guide.
    */
   listRoutingProfiles(params: Connect.Types.ListRoutingProfilesRequest, callback?: (err: AWSError, data: Connect.Types.ListRoutingProfilesResponse) => void): Request<Connect.Types.ListRoutingProfilesResponse, AWSError>;
   /**
-   * Provides summary information about the routing profiles for the specified Amazon Connect instance.
+   * Provides summary information about the routing profiles for the specified Amazon Connect instance. For more information about routing profiles, see Routing Profiles and Create a Routing Profile in the Amazon Connect Administrator Guide.
    */
   listRoutingProfiles(callback?: (err: AWSError, data: Connect.Types.ListRoutingProfilesResponse) => void): Request<Connect.Types.ListRoutingProfilesResponse, AWSError>;
   /**
-   * Provides summary information about the security profiles for the specified Amazon Connect instance.
+   * Provides summary information about the security profiles for the specified Amazon Connect instance. For more information about security profiles, see Security Profiles in the Amazon Connect Administrator Guide.
    */
   listSecurityProfiles(params: Connect.Types.ListSecurityProfilesRequest, callback?: (err: AWSError, data: Connect.Types.ListSecurityProfilesResponse) => void): Request<Connect.Types.ListSecurityProfilesResponse, AWSError>;
   /**
-   * Provides summary information about the security profiles for the specified Amazon Connect instance.
+   * Provides summary information about the security profiles for the specified Amazon Connect instance. For more information about security profiles, see Security Profiles in the Amazon Connect Administrator Guide.
    */
   listSecurityProfiles(callback?: (err: AWSError, data: Connect.Types.ListSecurityProfilesResponse) => void): Request<Connect.Types.ListSecurityProfilesResponse, AWSError>;
   /**
-   * Lists the tags for the specified resource.
+   * Lists the tags for the specified resource. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
    */
   listTagsForResource(params: Connect.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Connect.Types.ListTagsForResourceResponse) => void): Request<Connect.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists the tags for the specified resource.
+   * Lists the tags for the specified resource. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
    */
   listTagsForResource(callback?: (err: AWSError, data: Connect.Types.ListTagsForResourceResponse) => void): Request<Connect.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Provides summary information about the hierarchy groups for the specified Amazon Connect instance.
+   * Provides summary information about the hierarchy groups for the specified Amazon Connect instance. For more information about agent hierarchies, see Set Up Agent Hierarchies in the Amazon Connect Administrator Guide.
    */
   listUserHierarchyGroups(params: Connect.Types.ListUserHierarchyGroupsRequest, callback?: (err: AWSError, data: Connect.Types.ListUserHierarchyGroupsResponse) => void): Request<Connect.Types.ListUserHierarchyGroupsResponse, AWSError>;
   /**
-   * Provides summary information about the hierarchy groups for the specified Amazon Connect instance.
+   * Provides summary information about the hierarchy groups for the specified Amazon Connect instance. For more information about agent hierarchies, see Set Up Agent Hierarchies in the Amazon Connect Administrator Guide.
    */
   listUserHierarchyGroups(callback?: (err: AWSError, data: Connect.Types.ListUserHierarchyGroupsResponse) => void): Request<Connect.Types.ListUserHierarchyGroupsResponse, AWSError>;
   /**
@@ -164,11 +228,11 @@ declare class Connect extends Service {
    */
   resumeContactRecording(callback?: (err: AWSError, data: Connect.Types.ResumeContactRecordingResponse) => void): Request<Connect.Types.ResumeContactRecordingResponse, AWSError>;
   /**
-   * Initiates a contact flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the CreateParticipantConnection API in the Amazon Connect Participant Service. When a new chat contact is successfully created, clients need to subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking CreateParticipantConnection with WEBSOCKET and CONNECTION_CREDENTIALS. 
+   * Initiates a contact flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the CreateParticipantConnection API in the Amazon Connect Participant Service. When a new chat contact is successfully created, clients need to subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking CreateParticipantConnection with WEBSOCKET and CONNECTION_CREDENTIALS.  A 429 error occurs in two situations:   API rate limit is exceeded. API TPS throttling returns a TooManyRequests exception from the API Gateway.   The quota for concurrent active chats is exceeded. Active chat throttling returns a LimitExceededException.   For more information about how chat works, see Chat in the Amazon Connect Administrator Guide.
    */
   startChatContact(params: Connect.Types.StartChatContactRequest, callback?: (err: AWSError, data: Connect.Types.StartChatContactResponse) => void): Request<Connect.Types.StartChatContactResponse, AWSError>;
   /**
-   * Initiates a contact flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the CreateParticipantConnection API in the Amazon Connect Participant Service. When a new chat contact is successfully created, clients need to subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking CreateParticipantConnection with WEBSOCKET and CONNECTION_CREDENTIALS. 
+   * Initiates a contact flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the CreateParticipantConnection API in the Amazon Connect Participant Service. When a new chat contact is successfully created, clients need to subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking CreateParticipantConnection with WEBSOCKET and CONNECTION_CREDENTIALS.  A 429 error occurs in two situations:   API rate limit is exceeded. API TPS throttling returns a TooManyRequests exception from the API Gateway.   The quota for concurrent active chats is exceeded. Active chat throttling returns a LimitExceededException.   For more information about how chat works, see Chat in the Amazon Connect Administrator Guide.
    */
   startChatContact(callback?: (err: AWSError, data: Connect.Types.StartChatContactResponse) => void): Request<Connect.Types.StartChatContactResponse, AWSError>;
   /**
@@ -180,11 +244,11 @@ declare class Connect extends Service {
    */
   startContactRecording(callback?: (err: AWSError, data: Connect.Types.StartContactRecordingResponse) => void): Request<Connect.Types.StartContactRecordingResponse, AWSError>;
   /**
-   * This API places an outbound call to a contact, and then initiates the contact flow. It performs the actions in the contact flow that's specified (in ContactFlowId). Agents are not involved in initiating the outbound API (that is, dialing the contact). If the contact flow places an outbound call to a contact, and then puts the contact in queue, that's when the call is routed to the agent, like any other inbound case. There is a 60 second dialing timeout for this operation. If the call is not connected after 60 seconds, it fails.
+   * This API places an outbound call to a contact, and then initiates the contact flow. It performs the actions in the contact flow that's specified (in ContactFlowId). Agents are not involved in initiating the outbound API (that is, dialing the contact). If the contact flow places an outbound call to a contact, and then puts the contact in queue, that's when the call is routed to the agent, like any other inbound case. There is a 60 second dialing timeout for this operation. If the call is not connected after 60 seconds, it fails.  UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK mobile numbers, you must submit a service quota increase request. For more information, see Amazon Connect Service Quotas in the Amazon Connect Administrator Guide.  
    */
   startOutboundVoiceContact(params: Connect.Types.StartOutboundVoiceContactRequest, callback?: (err: AWSError, data: Connect.Types.StartOutboundVoiceContactResponse) => void): Request<Connect.Types.StartOutboundVoiceContactResponse, AWSError>;
   /**
-   * This API places an outbound call to a contact, and then initiates the contact flow. It performs the actions in the contact flow that's specified (in ContactFlowId). Agents are not involved in initiating the outbound API (that is, dialing the contact). If the contact flow places an outbound call to a contact, and then puts the contact in queue, that's when the call is routed to the agent, like any other inbound case. There is a 60 second dialing timeout for this operation. If the call is not connected after 60 seconds, it fails.
+   * This API places an outbound call to a contact, and then initiates the contact flow. It performs the actions in the contact flow that's specified (in ContactFlowId). Agents are not involved in initiating the outbound API (that is, dialing the contact). If the contact flow places an outbound call to a contact, and then puts the contact in queue, that's when the call is routed to the agent, like any other inbound case. There is a 60 second dialing timeout for this operation. If the call is not connected after 60 seconds, it fails.  UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK mobile numbers, you must submit a service quota increase request. For more information, see Amazon Connect Service Quotas in the Amazon Connect Administrator Guide.  
    */
   startOutboundVoiceContact(callback?: (err: AWSError, data: Connect.Types.StartOutboundVoiceContactResponse) => void): Request<Connect.Types.StartOutboundVoiceContactResponse, AWSError>;
   /**
@@ -212,11 +276,11 @@ declare class Connect extends Service {
    */
   suspendContactRecording(callback?: (err: AWSError, data: Connect.Types.SuspendContactRecordingResponse) => void): Request<Connect.Types.SuspendContactRecordingResponse, AWSError>;
   /**
-   * Adds the specified tags to the specified resource. The supported resource type is users.
+   * Adds the specified tags to the specified resource. The supported resource type is users. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
    */
   tagResource(params: Connect.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds the specified tags to the specified resource. The supported resource type is users.
+   * Adds the specified tags to the specified resource. The supported resource type is users. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -236,6 +300,54 @@ declare class Connect extends Service {
    */
   updateContactAttributes(callback?: (err: AWSError, data: Connect.Types.UpdateContactAttributesResponse) => void): Request<Connect.Types.UpdateContactAttributesResponse, AWSError>;
   /**
+   * Updates the specified contact flow.
+   */
+  updateContactFlowContent(params: Connect.Types.UpdateContactFlowContentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the specified contact flow.
+   */
+  updateContactFlowContent(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * The name of the contact flow.
+   */
+  updateContactFlowName(params: Connect.Types.UpdateContactFlowNameRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * The name of the contact flow.
+   */
+  updateContactFlowName(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the channels that agents can handle in the Contact Control Panel (CCP) for a routing profile.
+   */
+  updateRoutingProfileConcurrency(params: Connect.Types.UpdateRoutingProfileConcurrencyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the channels that agents can handle in the Contact Control Panel (CCP) for a routing profile.
+   */
+  updateRoutingProfileConcurrency(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the default outbound queue of a routing profile.
+   */
+  updateRoutingProfileDefaultOutboundQueue(params: Connect.Types.UpdateRoutingProfileDefaultOutboundQueueRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the default outbound queue of a routing profile.
+   */
+  updateRoutingProfileDefaultOutboundQueue(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the name and description of a routing profile. The request accepts the following data in JSON format. At least Name or Description must be provided.
+   */
+  updateRoutingProfileName(params: Connect.Types.UpdateRoutingProfileNameRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the name and description of a routing profile. The request accepts the following data in JSON format. At least Name or Description must be provided.
+   */
+  updateRoutingProfileName(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the properties associated with a set of queues for a routing profile.
+   */
+  updateRoutingProfileQueues(params: Connect.Types.UpdateRoutingProfileQueuesRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the properties associated with a set of queues for a routing profile.
+   */
+  updateRoutingProfileQueues(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Assigns the specified hierarchy group to the specified user.
    */
   updateUserHierarchy(params: Connect.Types.UpdateUserHierarchyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -244,11 +356,11 @@ declare class Connect extends Service {
    */
   updateUserHierarchy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the identity information for the specified user.
+   * Updates the identity information for the specified user.  Someone with the ability to invoke UpdateUserIndentityInfo can change the login credentials of other users by changing their email address. This poses a security risk to your organization. They can change the email address of a user to the attacker's email address, and then reset the password through email. We strongly recommend limiting who has the ability to invoke UpdateUserIndentityInfo. For more information, see Best Practices for Security Profiles in the Amazon Connect Administrator Guide. 
    */
   updateUserIdentityInfo(params: Connect.Types.UpdateUserIdentityInfoRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the identity information for the specified user.
+   * Updates the identity information for the specified user.  Someone with the ability to invoke UpdateUserIndentityInfo can change the login credentials of other users by changing their email address. This poses a security risk to your organization. They can change the email address of a user to the attacker's email address, and then reset the password through email. We strongly recommend limiting who has the ability to invoke UpdateUserIndentityInfo. For more information, see Best Practices for Security Profiles in the Amazon Connect Administrator Guide. 
    */
   updateUserIdentityInfo(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -282,6 +394,20 @@ declare namespace Connect {
   export type AgentFirstName = string;
   export type AgentLastName = string;
   export type AgentUsername = string;
+  export interface AssociateRoutingProfileQueuesRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the routing profile.
+     */
+    RoutingProfileId: RoutingProfileId;
+    /**
+     * The queues to associate with this routing profile.
+     */
+    QueueConfigs: RoutingProfileQueueConfigList;
+  }
   export type AttributeName = string;
   export type AttributeValue = string;
   export type Attributes = {[key: string]: AttributeValue};
@@ -302,6 +428,39 @@ declare namespace Connect {
   }
   export type ClientToken = string;
   export type Comparison = "LT"|string;
+  export type Concurrency = number;
+  export interface ContactFlow {
+    /**
+     * The Amazon Resource Name (ARN) of the contact flow.
+     */
+    Arn?: ARN;
+    /**
+     * The identifier of the contact flow.
+     */
+    Id?: ContactFlowId;
+    /**
+     * The name of the contact flow.
+     */
+    Name?: ContactFlowName;
+    /**
+     * The type of the contact flow. For descriptions of the available types, see Choose a Contact Flow Type in the Amazon Connect Administrator Guide.
+     */
+    Type?: ContactFlowType;
+    /**
+     * The description of the contact flow.
+     */
+    Description?: ContactFlowDescription;
+    /**
+     * The content of the contact flow.
+     */
+    Content?: ContactFlowContent;
+    /**
+     * One or more tags.
+     */
+    Tags?: TagMap;
+  }
+  export type ContactFlowContent = string;
+  export type ContactFlowDescription = string;
   export type ContactFlowId = string;
   export type ContactFlowName = string;
   export interface ContactFlowSummary {
@@ -326,6 +485,82 @@ declare namespace Connect {
   export type ContactFlowType = "CONTACT_FLOW"|"CUSTOMER_QUEUE"|"CUSTOMER_HOLD"|"CUSTOMER_WHISPER"|"AGENT_HOLD"|"AGENT_WHISPER"|"OUTBOUND_WHISPER"|"AGENT_TRANSFER"|"QUEUE_TRANSFER"|string;
   export type ContactFlowTypes = ContactFlowType[];
   export type ContactId = string;
+  export interface CreateContactFlowRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The name of the contact flow.
+     */
+    Name: ContactFlowName;
+    /**
+     * The type of the contact flow. For descriptions of the available types, see Choose a Contact Flow Type in the Amazon Connect Administrator Guide.
+     */
+    Type: ContactFlowType;
+    /**
+     * The description of the contact flow. 
+     */
+    Description?: ContactFlowDescription;
+    /**
+     * The content of the contact flow. 
+     */
+    Content: ContactFlowContent;
+    /**
+     * One or more tags.
+     */
+    Tags?: TagMap;
+  }
+  export interface CreateContactFlowResponse {
+    /**
+     * The identifier of the contact flow.
+     */
+    ContactFlowId?: ContactFlowId;
+    /**
+     * The Amazon Resource Name (ARN) of the contact flow.
+     */
+    ContactFlowArn?: ARN;
+  }
+  export interface CreateRoutingProfileRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The name of the routing profile. Must not be more than 127 characters.
+     */
+    Name: RoutingProfileName;
+    /**
+     * Description of the routing profile. Must not be more than 250 characters.
+     */
+    Description: RoutingProfileDescription;
+    /**
+     * The default outbound queue for the routing profile.
+     */
+    DefaultOutboundQueueId: QueueId;
+    /**
+     * The inbound queues associated with the routing profile. If no queue is added, the agent can only make outbound calls.
+     */
+    QueueConfigs?: RoutingProfileQueueConfigList;
+    /**
+     * The channels agents can handle in the Contact Control Panel (CCP) for this routing profile.
+     */
+    MediaConcurrencies: MediaConcurrencies;
+    /**
+     * One or more tags.
+     */
+    Tags?: TagMap;
+  }
+  export interface CreateRoutingProfileResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the routing profile.
+     */
+    RoutingProfileArn?: ARN;
+    /**
+     * The identifier of the routing profile.
+     */
+    RoutingProfileId?: RoutingProfileId;
+  }
   export interface CreateUserRequest {
     /**
      * The user name for the account. For instances not using SAML for identity management, the user name can include up to 20 characters. If you are using SAML for identity management, the user name can include up to 64 characters from [a-zA-Z0-9_-.\@]+.
@@ -430,6 +665,7 @@ declare namespace Connect {
   }
   export type CurrentMetricResults = CurrentMetricResult[];
   export type CurrentMetrics = CurrentMetric[];
+  export type Delay = number;
   export interface DeleteUserRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -439,6 +675,38 @@ declare namespace Connect {
      * The identifier of the user.
      */
     UserId: UserId;
+  }
+  export interface DescribeContactFlowRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the contact flow.
+     */
+    ContactFlowId: ContactFlowId;
+  }
+  export interface DescribeContactFlowResponse {
+    /**
+     * Information about the contact flow.
+     */
+    ContactFlow?: ContactFlow;
+  }
+  export interface DescribeRoutingProfileRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the routing profile.
+     */
+    RoutingProfileId: RoutingProfileId;
+  }
+  export interface DescribeRoutingProfileResponse {
+    /**
+     * The routing profile.
+     */
+    RoutingProfile?: RoutingProfile;
   }
   export interface DescribeUserHierarchyGroupRequest {
     /**
@@ -495,6 +763,20 @@ declare namespace Connect {
     Channel?: Channel;
   }
   export type DirectoryUserId = string;
+  export interface DisassociateRoutingProfileQueuesRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the routing profile.
+     */
+    RoutingProfileId: RoutingProfileId;
+    /**
+     * The queues to disassociate from this routing profile.
+     */
+    QueueReferences: RoutingProfileQueueReferenceList;
+  }
   export type DisplayName = string;
   export type Email = string;
   export interface Filters {
@@ -529,15 +811,15 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The queues, up to 100, or channels, to use to filter the metrics returned. Metric data is retrieved only for the resources associated with the queues or channels included in the filter. You can include both queue IDs and queue ARNs in the same request. The only supported channel is VOICE.
+     * The queues, up to 100, or channels, to use to filter the metrics returned. Metric data is retrieved only for the resources associated with the queues or channels included in the filter. You can include both queue IDs and queue ARNs in the same request. Both VOICE and CHAT channels are supported.
      */
     Filters: Filters;
     /**
-     * The grouping applied to the metrics returned. For example, when grouped by QUEUE, the metrics returned apply to each queue rather than aggregated for all queues. If you group by CHANNEL, you should include a Channels filter. The only supported channel is VOICE. If no Grouping is included in the request, a summary of metrics is returned.
+     * The grouping applied to the metrics returned. For example, when grouped by QUEUE, the metrics returned apply to each queue rather than aggregated for all queues. If you group by CHANNEL, you should include a Channels filter. Both VOICE and CHAT channels are supported. If no Grouping is included in the request, a summary of metrics is returned.
      */
     Groupings?: Groupings;
     /**
-     * The metrics to retrieve. Specify the name and unit for each metric. The following metrics are available. For a description of each metric, see Real-time Metrics Definitions in the Amazon Connect Administrator Guide.  AGENTS_AFTER_CONTACT_WORK  Unit: COUNT  AGENTS_AVAILABLE  Unit: COUNT  AGENTS_ERROR  Unit: COUNT  AGENTS_NON_PRODUCTIVE  Unit: COUNT  AGENTS_ON_CALL  Unit: COUNT  AGENTS_ON_CONTACT  Unit: COUNT  AGENTS_ONLINE  Unit: COUNT  AGENTS_STAFFED  Unit: COUNT  CONTACTS_IN_QUEUE  Unit: COUNT  CONTACTS_SCHEDULED  Unit: COUNT  OLDEST_CONTACT_AGE  Unit: SECONDS  SLOTS_ACTIVE  Unit: COUNT  SLOTS_AVAILABLE  Unit: COUNT  
+     * The metrics to retrieve. Specify the name and unit for each metric. The following metrics are available. For a description of all the metrics, see Real-time Metrics Definitions in the Amazon Connect Administrator Guide.  AGENTS_AFTER_CONTACT_WORK  Unit: COUNT Name in real-time metrics report: ACW   AGENTS_AVAILABLE  Unit: COUNT Name in real-time metrics report: Available   AGENTS_ERROR  Unit: COUNT Name in real-time metrics report: Error   AGENTS_NON_PRODUCTIVE  Unit: COUNT Name in real-time metrics report: NPT (Non-Productive Time)   AGENTS_ON_CALL  Unit: COUNT Name in real-time metrics report: On contact   AGENTS_ON_CONTACT  Unit: COUNT Name in real-time metrics report: On contact   AGENTS_ONLINE  Unit: COUNT Name in real-time metrics report: Online   AGENTS_STAFFED  Unit: COUNT Name in real-time metrics report: Staffed   CONTACTS_IN_QUEUE  Unit: COUNT Name in real-time metrics report: In queue   CONTACTS_SCHEDULED  Unit: COUNT Name in real-time metrics report: Scheduled   OLDEST_CONTACT_AGE  Unit: SECONDS When you use groupings, Unit says SECONDS but the Value is returned in MILLISECONDS. For example, if you get a response like this:  { "Metric": { "Name": "OLDEST_CONTACT_AGE", "Unit": "SECONDS" }, "Value": 24113.0 } The actual OLDEST_CONTACT_AGE is 24 seconds. Name in real-time metrics report: Oldest   SLOTS_ACTIVE  Unit: COUNT Name in real-time metrics report: Active   SLOTS_AVAILABLE  Unit: COUNT Name in real-time metrics report: Availability   
      */
     CurrentMetrics: CurrentMetrics;
     /**
@@ -589,7 +871,7 @@ declare namespace Connect {
      */
     EndTime: timestamp;
     /**
-     * The queues, up to 100, or channels, to use to filter the metrics returned. Metric data is retrieved only for the resources associated with the queues or channels included in the filter. You can include both queue IDs and queue ARNs in the same request. The only supported channel is VOICE.
+     * The queues, up to 100, or channels, to use to filter the metrics returned. Metric data is retrieved only for the resources associated with the queues or channels included in the filter. You can include both queue IDs and queue ARNs in the same request. Both VOICE and CHAT channels are supported.
      */
     Filters: Filters;
     /**
@@ -864,6 +1146,30 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
   }
+  export interface ListPromptsRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult1000;
+  }
+  export interface ListPromptsResponse {
+    /**
+     * Information about the prompts.
+     */
+    PromptSummaryList?: PromptSummaryList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListQueuesRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -891,6 +1197,34 @@ declare namespace Connect {
      * If there are additional results, this is the token for the next set of results.
      */
     NextToken?: NextToken;
+  }
+  export interface ListRoutingProfileQueuesRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the routing profile.
+     */
+    RoutingProfileId: RoutingProfileId;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximimum number of results to return per page.
+     */
+    MaxResults?: MaxResult100;
+  }
+  export interface ListRoutingProfileQueuesResponse {
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * Information about the routing profiles.
+     */
+    RoutingProfileQueueConfigSummaryList?: RoutingProfileQueueConfigSummaryList;
   }
   export interface ListRoutingProfilesRequest {
     /**
@@ -1002,6 +1336,17 @@ declare namespace Connect {
   }
   export type MaxResult100 = number;
   export type MaxResult1000 = number;
+  export type MediaConcurrencies = MediaConcurrency[];
+  export interface MediaConcurrency {
+    /**
+     * The channels that agents can handle in the Contact Control Panel (CCP).
+     */
+    Channel: Channel;
+    /**
+     * The number of contacts an agent can have on a channel simultaneously.
+     */
+    Concurrency: Concurrency;
+  }
   export type NextToken = string;
   export interface ParticipantDetails {
     /**
@@ -1042,6 +1387,24 @@ declare namespace Connect {
   export type PhoneNumberType = "TOLL_FREE"|"DID"|string;
   export type PhoneNumberTypes = PhoneNumberType[];
   export type PhoneType = "SOFT_PHONE"|"DESK_PHONE"|string;
+  export type Priority = number;
+  export type PromptId = string;
+  export type PromptName = string;
+  export interface PromptSummary {
+    /**
+     * The identifier of the prompt.
+     */
+    Id?: PromptId;
+    /**
+     * The Amazon Resource Name (ARN) of the prompt.
+     */
+    Arn?: ARN;
+    /**
+     * The name of the prompt.
+     */
+    Name?: PromptName;
+  }
+  export type PromptSummaryList = PromptSummary[];
   export type QueueId = string;
   export type QueueName = string;
   export interface QueueReference {
@@ -1092,8 +1455,96 @@ declare namespace Connect {
   }
   export interface ResumeContactRecordingResponse {
   }
+  export interface RoutingProfile {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId?: InstanceId;
+    /**
+     * The name of the routing profile.
+     */
+    Name?: RoutingProfileName;
+    /**
+     * The Amazon Resource Name (ARN) of the routing profile.
+     */
+    RoutingProfileArn?: ARN;
+    /**
+     * The identifier of the routing profile.
+     */
+    RoutingProfileId?: RoutingProfileId;
+    /**
+     * The description of the routing profile.
+     */
+    Description?: RoutingProfileDescription;
+    /**
+     * The channels agents can handle in the Contact Control Panel (CCP) for this routing profile.
+     */
+    MediaConcurrencies?: MediaConcurrencies;
+    /**
+     * The identifier of the default outbound queue for this routing profile.
+     */
+    DefaultOutboundQueueId?: QueueId;
+    /**
+     * One or more tags.
+     */
+    Tags?: TagMap;
+  }
+  export type RoutingProfileDescription = string;
   export type RoutingProfileId = string;
   export type RoutingProfileName = string;
+  export interface RoutingProfileQueueConfig {
+    /**
+     * Contains information about a queue resource.
+     */
+    QueueReference: RoutingProfileQueueReference;
+    /**
+     * The order in which contacts are to be handled for the queue. For more information, see Queues: priority and delay.
+     */
+    Priority: Priority;
+    /**
+     * The delay, in seconds, a contact should be in the queue before they are routed to an available agent. For more information, see Queues: priority and delay in the Amazon Connect Administrator Guide.
+     */
+    Delay: Delay;
+  }
+  export type RoutingProfileQueueConfigList = RoutingProfileQueueConfig[];
+  export interface RoutingProfileQueueConfigSummary {
+    /**
+     * The identifier of the queue.
+     */
+    QueueId: QueueId;
+    /**
+     * The Amazon Resource Name (ARN) of the queue.
+     */
+    QueueArn: ARN;
+    /**
+     * The name of the queue.
+     */
+    QueueName: QueueName;
+    /**
+     * The order in which contacts are to be handled for the queue. For more information, see Queues: priority and delay.
+     */
+    Priority: Priority;
+    /**
+     * The delay, in seconds, that a contact should be in the queue before they are routed to an available agent. For more information, see Queues: priority and delay in the Amazon Connect Administrator Guide.
+     */
+    Delay: Delay;
+    /**
+     * The channels this queue supports.
+     */
+    Channel: Channel;
+  }
+  export type RoutingProfileQueueConfigSummaryList = RoutingProfileQueueConfigSummary[];
+  export interface RoutingProfileQueueReference {
+    /**
+     * The identifier of the queue.
+     */
+    QueueId: QueueId;
+    /**
+     * The channels agents can handle in the Contact Control Panel (CCP) for this routing profile.
+     */
+    Channel: Channel;
+  }
+  export type RoutingProfileQueueReferenceList = RoutingProfileQueueReference[];
   export interface RoutingProfileSummary {
     /**
      * The identifier of the routing profile.
@@ -1134,7 +1585,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The identifier of the contact flow for the chat.
+     * The identifier of the contact flow for initiating the chat. To see the ContactFlowId in the Amazon Connect console user interface, on the navigation menu go to Routing, Contact Flows. Choose the contact flow. On the contact flow page, under the name of the contact flow, choose Show additional flow information. The ContactFlowId is the last part of the ARN, shown here in bold:  arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/846ec553-a005-41c0-8341-xxxxxxxxxxxx 
      */
     ContactFlowId: ContactFlowId;
     /**
@@ -1194,7 +1645,7 @@ declare namespace Connect {
      */
     DestinationPhoneNumber: PhoneNumber;
     /**
-     * The identifier of the contact flow for the outbound call.
+     * The identifier of the contact flow for the outbound call. To see the ContactFlowId in the Amazon Connect console user interface, on the navigation menu go to Routing, Contact Flows. Choose the contact flow. On the contact flow page, under the name of the contact flow, choose Show additional flow information. The ContactFlowId is the last part of the ARN, shown here in bold:  arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/846ec553-a005-41c0-8341-xxxxxxxxxxxx 
      */
     ContactFlowId: ContactFlowId;
     /**
@@ -1320,6 +1771,98 @@ declare namespace Connect {
     Attributes: Attributes;
   }
   export interface UpdateContactAttributesResponse {
+  }
+  export interface UpdateContactFlowContentRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the contact flow.
+     */
+    ContactFlowId: ContactFlowId;
+    /**
+     * The content of the contact flow.
+     */
+    Content: ContactFlowContent;
+  }
+  export interface UpdateContactFlowNameRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the contact flow.
+     */
+    ContactFlowId: ContactFlowId;
+    /**
+     * The name of the contact flow.
+     */
+    Name?: ContactFlowName;
+    /**
+     * The description of the contact flow.
+     */
+    Description?: ContactFlowDescription;
+  }
+  export interface UpdateRoutingProfileConcurrencyRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the routing profile.
+     */
+    RoutingProfileId: RoutingProfileId;
+    /**
+     * The channels agents can handle in the Contact Control Panel (CCP).
+     */
+    MediaConcurrencies: MediaConcurrencies;
+  }
+  export interface UpdateRoutingProfileDefaultOutboundQueueRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the routing profile.
+     */
+    RoutingProfileId: RoutingProfileId;
+    /**
+     * The identifier for the default outbound queue.
+     */
+    DefaultOutboundQueueId: QueueId;
+  }
+  export interface UpdateRoutingProfileNameRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the routing profile.
+     */
+    RoutingProfileId: RoutingProfileId;
+    /**
+     * The name of the routing profile. Must not be more than 127 characters.
+     */
+    Name?: RoutingProfileName;
+    /**
+     * The description of the routing profile. Must not be more than 250 characters.
+     */
+    Description?: RoutingProfileDescription;
+  }
+  export interface UpdateRoutingProfileQueuesRequest {
+    /**
+     * The identifier of the Amazon Connect instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the routing profile.
+     */
+    RoutingProfileId: RoutingProfileId;
+    /**
+     * The queues to be updated for this routing profile.
+     */
+    QueueConfigs: RoutingProfileQueueConfigList;
   }
   export interface UpdateUserHierarchyRequest {
     /**

@@ -648,7 +648,7 @@
         },
         "Schedules": {
           "shape": "ScheduleList",
-          "documentation": "<p>The schedule of policy-defined actions.</p>"
+          "documentation": "<p>The schedules of policy-defined actions. A policy can have up to four schedules - one mandatory schedule and up to three optional schedules.</p>"
         },
         "Parameters": {
           "shape": "Parameters",
@@ -760,7 +760,7 @@
       "member": {
         "shape": "Schedule"
       },
-      "max": 1,
+      "max": 4,
       "min": 1
     },
     "ScheduleName": {

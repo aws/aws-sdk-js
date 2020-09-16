@@ -803,6 +803,9 @@
       "errors": [
         {
           "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParametersException"
         }
       ],
       "documentation": "<p>Gets information about the specified provisioned product.</p>"
@@ -3228,9 +3231,6 @@
     },
     "DescribeProvisionedProductInput": {
       "type": "structure",
-      "required": [
-        "Id"
-      ],
       "members": {
         "AcceptLanguage": {
           "shape": "AcceptLanguage",
@@ -3238,9 +3238,14 @@
         },
         "Id": {
           "shape": "Id",
-          "documentation": "<p>The provisioned product identifier.</p>"
+          "documentation": "<p>The provisioned product identifier. You must provide the name or ID, but not both.</p> <p>If you do not provide a name or ID, or you provide both name and ID, an <code>InvalidParametersException</code> will occur.</p>"
+        },
+        "Name": {
+          "shape": "ProvisionedProductName",
+          "documentation": "<p>The name of the provisioned product. You must provide the name or ID, but not both.</p> <p>If you do not provide a name or ID, or you provide both name and ID, an <code>InvalidParametersException</code> will occur.</p>"
         }
-      }
+      },
+      "documentation": "DescribeProvisionedProductAPI input structure. AcceptLanguage - [Optional] The language code for localization. Id - [Optional] The provisioned product identifier. Name - [Optional] Another provisioned product identifier. Customers must provide either Id or Name."
     },
     "DescribeProvisionedProductOutput": {
       "type": "structure",

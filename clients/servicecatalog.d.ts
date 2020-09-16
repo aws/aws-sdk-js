@@ -1557,9 +1557,13 @@ declare namespace ServiceCatalog {
      */
     AcceptLanguage?: AcceptLanguage;
     /**
-     * The provisioned product identifier.
+     * The provisioned product identifier. You must provide the name or ID, but not both. If you do not provide a name or ID, or you provide both name and ID, an InvalidParametersException will occur.
      */
-    Id: Id;
+    Id?: Id;
+    /**
+     * The name of the provisioned product. You must provide the name or ID, but not both. If you do not provide a name or ID, or you provide both name and ID, an InvalidParametersException will occur.
+     */
+    Name?: ProvisionedProductName;
   }
   export interface DescribeProvisionedProductOutput {
     /**
