@@ -70,7 +70,7 @@ export class Credentials {
     sessionToken: string;
 }
 
-interface CredentialsOptions {
+export interface CredentialsOptions {
     /**
      * AWS access key ID.
      */
