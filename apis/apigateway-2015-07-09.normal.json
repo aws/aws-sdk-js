@@ -1428,6 +1428,9 @@
           "shape": "BadRequestException"
         },
         {
+          "shape": "NotFoundException"
+        },
+        {
           "shape": "UnauthorizedException"
         },
         {
@@ -4081,6 +4084,9 @@
         "securityPolicy": {
           "shape": "SecurityPolicy",
           "documentation": "<p>The Transport Layer Security (TLS) version + cipher suite for this <a>DomainName</a>. The valid values are <code>TLS_1_0</code> and <code>TLS_1_2</code>.</p>"
+        },
+        "mutualTlsAuthentication": {
+          "shape": "MutualTlsAuthenticationInput"
         }
       },
       "documentation": "<p>A request to create a new domain name.</p>"
@@ -5068,6 +5074,10 @@
         "tags": {
           "shape": "MapOfStringToString",
           "documentation": "<p>The collection of tags. Each tag element is associated with a given resource.</p>"
+        },
+        "mutualTlsAuthentication": {
+          "shape": "MutualTlsAuthentication",
+          "documentation": "<p>The mutual TLS authentication configuration for a custom domain name. If specified, API Gateway performs two-way authentication between the client and the server. Clients must present a trusted certificate to access your API.</p>"
         }
       },
       "documentation": "<p>Represents a custom domain name as a user-friendly host name of an API (<a>RestApi</a>).</p> <div class=\"Remarks\"> <p>When you deploy an API, API Gateway creates a default host name for the API. This default API host name is of the <code>{restapi-id}.execute-api.{region}.amazonaws.com</code> format. With the default host name, you can access the API's root resource with the URL of <code>https://{restapi-id}.execute-api.{region}.amazonaws.com/{stage}/</code>. When you set up a custom domain name of <code>apis.example.com</code> for this API, you can then access the same resource using the URL of the <code>https://apis.examples.com/myApi</code>, where <code>myApi</code> is the base path mapping (<a>BasePathMapping</a>) of your API under the custom domain name. </p> </div> <div class=\"seeAlso\"> <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html\">Set a Custom Host Name for an API</a> </div>"
@@ -7040,6 +7050,38 @@
         }
       },
       "documentation": "<p>Represents a collection of <a>Model</a> resources.</p> <div class=\"seeAlso\"> <a>Method</a>, <a>MethodResponse</a>, <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html\">Models and Mappings</a> </div>"
+    },
+    "MutualTlsAuthentication": {
+      "type": "structure",
+      "members": {
+        "truststoreUri": {
+          "shape": "String",
+          "documentation": "<p>An Amazon S3 URL that specifies the truststore for mutual TLS authentication, for example <code>s3://bucket-name/key-name</code>. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version. To update the truststore, you must have permissions to access the S3 object.</p>"
+        },
+        "truststoreVersion": {
+          "shape": "String",
+          "documentation": "<p>The version of the S3 object that contains your truststore. To specify a version, you must have versioning enabled for the S3 bucket.</p>"
+        },
+        "truststoreWarnings": {
+          "shape": "ListOfString",
+          "documentation": "<p>A list of warnings that API Gateway returns while processing your truststore. Invalid certificates produce warnings. Mutual TLS is still enabled, but some clients might not be able to access your API. To resolve warnings, upload a new truststore to S3, and then update you domain name to use the new version.</p>"
+        }
+      },
+      "documentation": "<p>If specified, API Gateway performs two-way authentication between the client and the server. Clients must present a trusted certificate to access your custom domain name.</p>"
+    },
+    "MutualTlsAuthenticationInput": {
+      "type": "structure",
+      "members": {
+        "truststoreUri": {
+          "shape": "String",
+          "documentation": "<p>An Amazon S3 resource ARN that specifies the truststore for mutual TLS authentication, for example, <code>s3://bucket-name/key-name</code>. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version. To update the truststore, you must have permissions to access the S3 object.</p>"
+        },
+        "truststoreVersion": {
+          "shape": "String",
+          "documentation": "<p>The version of the S3 object that contains your truststore. To specify a version, you must have versioning enabled for the S3 bucket.</p>"
+        }
+      },
+      "documentation": "<p>If specified, API Gateway performs two-way authentication between the client and the server. Clients must present a trusted certificate to access your custom domain name.</p>"
     },
     "NullableBoolean": {
       "type": "boolean"

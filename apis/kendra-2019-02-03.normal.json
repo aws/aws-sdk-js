@@ -123,7 +123,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Creates a data source that you use to with an Amazon Kendra index. </p> <p>You specify a name, connector type and description for your data source. You can choose between an S3 connector, a SharePoint Online connector, and a database connector.</p> <p>You also specify configuration information such as document metadata (author, source URI, and so on) and user context information.</p> <p> <code>CreateDataSource</code> is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised.</p>"
+      "documentation": "<p>Creates a data source that you use to with an Amazon Kendra index. </p> <p>You specify a name, data source connector type and description for your data source. You also specify configuration information such as document metadata (author, source URI, and so on) and user context information.</p> <p> <code>CreateDataSource</code> is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised.</p>"
     },
     "CreateFaq": {
       "name": "CreateFaq",
@@ -1199,7 +1199,7 @@
         },
         "Configuration": {
           "shape": "DataSourceConfiguration",
-          "documentation": "<p>The connector configuration information that is required to access the repository.</p>"
+          "documentation": "<p>The data source connector configuration information that is required to access the repository.</p>"
         },
         "Description": {
           "shape": "Description",
@@ -1263,6 +1263,10 @@
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>A list of key-value pairs that identify the FAQ. You can use the tags to identify and organize your resources and to control access to resources.</p>"
+        },
+        "FileFormat": {
+          "shape": "FaqFileFormat",
+          "documentation": "<p>The format of the input file. You can choose between a basic CSV format, a CSV format that includes customs attributes in a header, and a JSON format that includes custom attributes.</p> <p>The format must match the format of the file stored in the S3 bucket identified in the <code>S3Path</code> parameter.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html\">Adding questions and answers</a>.</p>"
         }
       }
     },
@@ -1327,15 +1331,15 @@
       "members": {
         "S3Configuration": {
           "shape": "S3DataSourceConfiguration",
-          "documentation": "<p>Provides information to create a connector for a document repository in an Amazon S3 bucket.</p>"
+          "documentation": "<p>Provides information to create a data source connector for a document repository in an Amazon S3 bucket.</p>"
         },
         "SharePointConfiguration": {
           "shape": "SharePointConfiguration",
-          "documentation": "<p>Provides information necessary to create a connector for a Microsoft SharePoint site.</p>"
+          "documentation": "<p>Provides information necessary to create a data source connector for a Microsoft SharePoint site.</p>"
         },
         "DatabaseConfiguration": {
           "shape": "DatabaseConfiguration",
-          "documentation": "<p>Provides information necessary to create a connector for a database.</p>"
+          "documentation": "<p>Provides information necessary to create a data source connector for a database.</p>"
         },
         "SalesforceConfiguration": {
           "shape": "SalesforceConfiguration",
@@ -1468,7 +1472,7 @@
         },
         "Metrics": {
           "shape": "DataSourceSyncJobMetrics",
-          "documentation": "<p>Maps a batch delete document request to a specific data source sync job. This is optional and should only be supplied when documents are deleted by a connector.</p>"
+          "documentation": "<p>Maps a batch delete document request to a specific data source sync job. This is optional and should only be supplied when documents are deleted by a data source connector.</p>"
         }
       },
       "documentation": "<p>Provides information about a synchronization job.</p>"
@@ -1527,7 +1531,7 @@
           "documentation": "<p>The current number of documents crawled by the current sync job in the data source.</p>"
         }
       },
-      "documentation": "<p>Maps a batch delete document request to a specific data source sync job. This is optional and should only be supplied when documents are deleted by a connector.</p>"
+      "documentation": "<p>Maps a batch delete document request to a specific data source sync job. This is optional and should only be supplied when documents are deleted by a data source connector.</p>"
     },
     "DataSourceSyncJobStatus": {
       "type": "string",
@@ -1833,6 +1837,10 @@
         "ErrorMessage": {
           "shape": "ErrorMessage",
           "documentation": "<p>If the <code>Status</code> field is <code>FAILED</code>, the <code>ErrorMessage</code> field contains the reason why the FAQ failed.</p>"
+        },
+        "FileFormat": {
+          "shape": "FaqFileFormat",
+          "documentation": "<p>The file format used by the input files for the FAQ.</p>"
         }
       }
     },
@@ -2179,6 +2187,14 @@
         "shape": "FacetResult"
       }
     },
+    "FaqFileFormat": {
+      "type": "string",
+      "enum": [
+        "CSV",
+        "CSV_WITH_HEADER",
+        "JSON"
+      ]
+    },
     "FaqId": {
       "type": "string",
       "max": 100,
@@ -2236,6 +2252,10 @@
         "UpdatedAt": {
           "shape": "Timestamp",
           "documentation": "<p>The UNIX datetime that the FAQ was last updated.</p>"
+        },
+        "FileFormat": {
+          "shape": "FaqFileFormat",
+          "documentation": "<p>The file type used to create the FAQ. </p>"
         }
       },
       "documentation": "<p>Provides information about a frequently asked questions and answer contained in an index.</p>"

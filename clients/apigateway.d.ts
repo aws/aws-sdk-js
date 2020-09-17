@@ -1417,6 +1417,7 @@ declare namespace APIGateway {
      * The Transport Layer Security (TLS) version + cipher suite for this DomainName. The valid values are TLS_1_0 and TLS_1_2.
      */
     securityPolicy?: SecurityPolicy;
+    mutualTlsAuthentication?: MutualTlsAuthenticationInput;
   }
   export interface CreateModelRequest {
     /**
@@ -2004,6 +2005,10 @@ declare namespace APIGateway {
      * The collection of tags. Each tag element is associated with a given resource.
      */
     tags?: MapOfStringToString;
+    /**
+     * The mutual TLS authentication configuration for a custom domain name. If specified, API Gateway performs two-way authentication between the client and the server. Clients must present a trusted certificate to access your API.
+     */
+    mutualTlsAuthentication?: MutualTlsAuthentication;
   }
   export type DomainNameStatus = "AVAILABLE"|"UPDATING"|"PENDING"|string;
   export interface DomainNames {
@@ -2994,6 +2999,30 @@ declare namespace APIGateway {
      * The current page of elements from this collection.
      */
     items?: ListOfModel;
+  }
+  export interface MutualTlsAuthentication {
+    /**
+     * An Amazon S3 URL that specifies the truststore for mutual TLS authentication, for example s3://bucket-name/key-name. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version. To update the truststore, you must have permissions to access the S3 object.
+     */
+    truststoreUri?: String;
+    /**
+     * The version of the S3 object that contains your truststore. To specify a version, you must have versioning enabled for the S3 bucket.
+     */
+    truststoreVersion?: String;
+    /**
+     * A list of warnings that API Gateway returns while processing your truststore. Invalid certificates produce warnings. Mutual TLS is still enabled, but some clients might not be able to access your API. To resolve warnings, upload a new truststore to S3, and then update you domain name to use the new version.
+     */
+    truststoreWarnings?: ListOfString;
+  }
+  export interface MutualTlsAuthenticationInput {
+    /**
+     * An Amazon S3 resource ARN that specifies the truststore for mutual TLS authentication, for example, s3://bucket-name/key-name. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version. To update the truststore, you must have permissions to access the S3 object.
+     */
+    truststoreUri?: String;
+    /**
+     * The version of the S3 object that contains your truststore. To specify a version, you must have versioning enabled for the S3 bucket.
+     */
+    truststoreVersion?: String;
   }
   export type NullableBoolean = boolean;
   export type NullableInteger = number;

@@ -633,6 +633,10 @@ declare namespace ApiGatewayV2 {
      */
     DisableSchemaValidation?: __boolean;
     /**
+     * Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.
+     */
+    DisableExecuteApiEndpoint?: __boolean;
+    /**
      * The validation information during API import. This may include particular properties of your OpenAPI definition which are ignored during import. Supported only for HTTP APIs.
      */
     ImportInfo?: __listOf__string;
@@ -819,6 +823,10 @@ declare namespace ApiGatewayV2 {
      */
     DisableSchemaValidation?: __boolean;
     /**
+     * Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.
+     */
+    DisableExecuteApiEndpoint?: __boolean;
+    /**
      * The name of the API.
      */
     Name: StringWithLengthBetween1And128;
@@ -880,6 +888,10 @@ declare namespace ApiGatewayV2 {
      * Avoid validating models when creating a deployment. Supported only for WebSocket APIs.
      */
     DisableSchemaValidation?: __boolean;
+    /**
+     * Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.
+     */
+    DisableExecuteApiEndpoint?: __boolean;
     /**
      * The validation information during API import. This may include particular properties of your OpenAPI definition which are ignored during import. Supported only for HTTP APIs.
      */
@@ -1053,6 +1065,10 @@ declare namespace ApiGatewayV2 {
      */
     DomainNameConfigurations?: DomainNameConfigurations;
     /**
+     * The mutual TLS authentication configuration for a custom domain name.
+     */
+    MutualTlsAuthentication?: MutualTlsAuthenticationInput;
+    /**
      * The collection of tags associated with a domain name.
      */
     Tags?: Tags;
@@ -1070,6 +1086,10 @@ declare namespace ApiGatewayV2 {
      * The domain name configurations.
      */
     DomainNameConfigurations?: DomainNameConfigurations;
+    /**
+     * The mutual TLS authentication configuration for a custom domain name.
+     */
+    MutualTlsAuthentication?: MutualTlsAuthentication;
     /**
      * The collection of tags associated with a domain name.
      */
@@ -1840,6 +1860,10 @@ declare namespace ApiGatewayV2 {
      */
     DomainNameConfigurations?: DomainNameConfigurations;
     /**
+     * The mutual TLS authentication configuration for a custom domain name.
+     */
+    MutualTlsAuthentication?: MutualTlsAuthentication;
+    /**
      * The collection of tags associated with a domain name.
      */
     Tags?: Tags;
@@ -2016,6 +2040,10 @@ declare namespace ApiGatewayV2 {
      * Avoid validating models when creating a deployment. Supported only for WebSocket APIs.
      */
     DisableSchemaValidation?: __boolean;
+    /**
+     * Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.
+     */
+    DisableExecuteApiEndpoint?: __boolean;
     /**
      * The validation information during API import. This may include particular properties of your OpenAPI definition which are ignored during import. Supported only for HTTP APIs.
      */
@@ -2225,6 +2253,10 @@ declare namespace ApiGatewayV2 {
      * The domain name configurations.
      */
     DomainNameConfigurations?: DomainNameConfigurations;
+    /**
+     * The mutual TLS authentication configuration for a custom domain name.
+     */
+    MutualTlsAuthentication?: MutualTlsAuthentication;
     /**
      * The collection of tags associated with a domain name.
      */
@@ -2870,6 +2902,10 @@ declare namespace ApiGatewayV2 {
      */
     DisableSchemaValidation?: __boolean;
     /**
+     * Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.
+     */
+    DisableExecuteApiEndpoint?: __boolean;
+    /**
      * The validation information during API import. This may include particular properties of your OpenAPI definition which are ignored during import. Supported only for HTTP APIs.
      */
     ImportInfo?: __listOf__string;
@@ -3042,6 +3078,30 @@ declare namespace ApiGatewayV2 {
      */
     Schema?: StringWithLengthBetween0And32K;
   }
+  export interface MutualTlsAuthentication {
+    /**
+     * An Amazon S3 URL that specifies the truststore for mutual TLS authentication, for example, s3://bucket-name/key-name. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version. To update the truststore, you must have permissions to access the S3 object.
+     */
+    TruststoreUri?: UriWithLengthBetween1And2048;
+    /**
+     * The version of the S3 object that contains your truststore. To specify a version, you must have versioning enabled for the S3 bucket.
+     */
+    TruststoreVersion?: StringWithLengthBetween1And64;
+    /**
+     * A list of warnings that API Gateway returns while processing your truststore. Invalid certificates produce warnings. Mutual TLS is still enabled, but some clients might not be able to access your API. To resolve warnings, upload a new truststore to S3, and then update you domain name to use the new version.
+     */
+    TruststoreWarnings?: __listOf__string;
+  }
+  export interface MutualTlsAuthenticationInput {
+    /**
+     * An Amazon S3 URL that specifies the truststore for mutual TLS authentication, for example, s3://bucket-name/key-name. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version. To update the truststore, you must have permissions to access the S3 object.
+     */
+    TruststoreUri?: UriWithLengthBetween1And2048;
+    /**
+     * The version of the S3 object that contains your truststore. To specify a version, you must have versioning enabled for the S3 bucket.
+     */
+    TruststoreVersion?: StringWithLengthBetween1And64;
+  }
   export type NextToken = string;
   export interface ParameterConstraints {
     /**
@@ -3102,6 +3162,10 @@ declare namespace ApiGatewayV2 {
      * Avoid validating models when creating a deployment. Supported only for WebSocket APIs.
      */
     DisableSchemaValidation?: __boolean;
+    /**
+     * Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.
+     */
+    DisableExecuteApiEndpoint?: __boolean;
     /**
      * The validation information during API import. This may include particular properties of your OpenAPI definition which are ignored during import. Supported only for HTTP APIs.
      */
@@ -3407,6 +3471,10 @@ declare namespace ApiGatewayV2 {
      */
     DisableSchemaValidation?: __boolean;
     /**
+     * Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.
+     */
+    DisableExecuteApiEndpoint?: __boolean;
+    /**
      * The name of the API.
      */
     Name?: StringWithLengthBetween1And128;
@@ -3460,6 +3528,10 @@ declare namespace ApiGatewayV2 {
      * Avoid validating models when creating a deployment. Supported only for WebSocket APIs.
      */
     DisableSchemaValidation?: __boolean;
+    /**
+     * Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.
+     */
+    DisableExecuteApiEndpoint?: __boolean;
     /**
      * The validation information during API import. This may include particular properties of your OpenAPI definition which are ignored during import. Supported only for HTTP APIs.
      */
@@ -3636,6 +3708,10 @@ declare namespace ApiGatewayV2 {
      * The domain name configurations.
      */
     DomainNameConfigurations?: DomainNameConfigurations;
+    /**
+     * The mutual TLS authentication configuration for a custom domain name.
+     */
+    MutualTlsAuthentication?: MutualTlsAuthenticationInput;
   }
   export interface UpdateDomainNameResponse {
     /**
@@ -3650,6 +3726,10 @@ declare namespace ApiGatewayV2 {
      * The domain name configurations.
      */
     DomainNameConfigurations?: DomainNameConfigurations;
+    /**
+     * The mutual TLS authentication configuration for a custom domain name.
+     */
+    MutualTlsAuthentication?: MutualTlsAuthentication;
     /**
      * The collection of tags associated with a domain name.
      */

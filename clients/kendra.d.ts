@@ -28,11 +28,11 @@ declare class Kendra extends Service {
    */
   batchPutDocument(callback?: (err: AWSError, data: Kendra.Types.BatchPutDocumentResponse) => void): Request<Kendra.Types.BatchPutDocumentResponse, AWSError>;
   /**
-   * Creates a data source that you use to with an Amazon Kendra index.  You specify a name, connector type and description for your data source. You can choose between an S3 connector, a SharePoint Online connector, and a database connector. You also specify configuration information such as document metadata (author, source URI, and so on) and user context information.  CreateDataSource is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised.
+   * Creates a data source that you use to with an Amazon Kendra index.  You specify a name, data source connector type and description for your data source. You also specify configuration information such as document metadata (author, source URI, and so on) and user context information.  CreateDataSource is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised.
    */
   createDataSource(params: Kendra.Types.CreateDataSourceRequest, callback?: (err: AWSError, data: Kendra.Types.CreateDataSourceResponse) => void): Request<Kendra.Types.CreateDataSourceResponse, AWSError>;
   /**
-   * Creates a data source that you use to with an Amazon Kendra index.  You specify a name, connector type and description for your data source. You can choose between an S3 connector, a SharePoint Online connector, and a database connector. You also specify configuration information such as document metadata (author, source URI, and so on) and user context information.  CreateDataSource is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised.
+   * Creates a data source that you use to with an Amazon Kendra index.  You specify a name, data source connector type and description for your data source. You also specify configuration information such as document metadata (author, source URI, and so on) and user context information.  CreateDataSource is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised.
    */
   createDataSource(callback?: (err: AWSError, data: Kendra.Types.CreateDataSourceResponse) => void): Request<Kendra.Types.CreateDataSourceResponse, AWSError>;
   /**
@@ -435,7 +435,7 @@ declare namespace Kendra {
      */
     Type: DataSourceType;
     /**
-     * The connector configuration information that is required to access the repository.
+     * The data source connector configuration information that is required to access the repository.
      */
     Configuration: DataSourceConfiguration;
     /**
@@ -486,6 +486,10 @@ declare namespace Kendra {
      * A list of key-value pairs that identify the FAQ. You can use the tags to identify and organize your resources and to control access to resources.
      */
     Tags?: TagList;
+    /**
+     * The format of the input file. You can choose between a basic CSV format, a CSV format that includes customs attributes in a header, and a JSON format that includes custom attributes. The format must match the format of the file stored in the S3 bucket identified in the S3Path parameter. For more information, see Adding questions and answers.
+     */
+    FileFormat?: FaqFileFormat;
   }
   export interface CreateFaqResponse {
     /**
@@ -531,15 +535,15 @@ declare namespace Kendra {
   }
   export interface DataSourceConfiguration {
     /**
-     * Provides information to create a connector for a document repository in an Amazon S3 bucket.
+     * Provides information to create a data source connector for a document repository in an Amazon S3 bucket.
      */
     S3Configuration?: S3DataSourceConfiguration;
     /**
-     * Provides information necessary to create a connector for a Microsoft SharePoint site.
+     * Provides information necessary to create a data source connector for a Microsoft SharePoint site.
      */
     SharePointConfiguration?: SharePointConfiguration;
     /**
-     * Provides information necessary to create a connector for a database.
+     * Provides information necessary to create a data source connector for a database.
      */
     DatabaseConfiguration?: DatabaseConfiguration;
     /**
@@ -619,7 +623,7 @@ declare namespace Kendra {
      */
     DataSourceErrorCode?: String;
     /**
-     * Maps a batch delete document request to a specific data source sync job. This is optional and should only be supplied when documents are deleted by a connector.
+     * Maps a batch delete document request to a specific data source sync job. This is optional and should only be supplied when documents are deleted by a data source connector.
      */
     Metrics?: DataSourceSyncJobMetrics;
   }
@@ -845,6 +849,10 @@ declare namespace Kendra {
      * If the Status field is FAILED, the ErrorMessage field contains the reason why the FAQ failed.
      */
     ErrorMessage?: ErrorMessage;
+    /**
+     * The file format used by the input files for the FAQ.
+     */
+    FileFormat?: FaqFileFormat;
   }
   export interface DescribeIndexRequest {
     /**
@@ -1034,6 +1042,7 @@ declare namespace Kendra {
     DocumentAttributeValueCountPairs?: DocumentAttributeValueCountPairList;
   }
   export type FacetResultList = FacetResult[];
+  export type FaqFileFormat = "CSV"|"CSV_WITH_HEADER"|"JSON"|string;
   export type FaqId = string;
   export type FaqName = string;
   export interface FaqStatistics {
@@ -1064,6 +1073,10 @@ declare namespace Kendra {
      * The UNIX datetime that the FAQ was last updated.
      */
     UpdatedAt?: Timestamp;
+    /**
+     * The file type used to create the FAQ. 
+     */
+    FileFormat?: FaqFileFormat;
   }
   export type FaqSummaryItems = FaqSummary[];
   export interface Highlight {

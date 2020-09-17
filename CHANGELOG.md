@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.754.0-->
+<!--LATEST=2.755.0-->
 <!--ENTRYINSERT-->
+
+## 2.755.0
+* bugfix: Types: Update types for fetching credentials from config
+* feature: APIGateway: Adds support for mutual TLS authentication for public regional REST Apis
+* feature: ApiGatewayV2: Adds support for mutual TLS authentication and disableAPIExecuteEndpoint for public regional HTTP Apis
+* feature: Comprehend: Amazon Comprehend now supports detecting Personally Identifiable Information (PII) entities in a document.
+* feature: ES: Adds support for data plane audit logging in Amazon Elasticsearch Service.
+* feature: Kendra: Amazon Kendra now supports additional file formats and metadata for FAQs.
 
 ## 2.754.0
 * feature: Connect: This release adds support for contact flows and routing profiles. For details, see the Release Notes in the Amazon Connect Administrator Guide.

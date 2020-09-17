@@ -164,6 +164,14 @@ declare class Comprehend extends Service {
    */
   describeKeyPhrasesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.DescribeKeyPhrasesDetectionJobResponse) => void): Request<Comprehend.Types.DescribeKeyPhrasesDetectionJobResponse, AWSError>;
   /**
+   * Gets the properties associated with a PII entities detection job. For example, you can use this operation to get the job status.
+   */
+  describePiiEntitiesDetectionJob(params: Comprehend.Types.DescribePiiEntitiesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribePiiEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.DescribePiiEntitiesDetectionJobResponse, AWSError>;
+  /**
+   * Gets the properties associated with a PII entities detection job. For example, you can use this operation to get the job status.
+   */
+  describePiiEntitiesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.DescribePiiEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.DescribePiiEntitiesDetectionJobResponse, AWSError>;
+  /**
    * Gets the properties associated with a sentiment detection job. Use this operation to get the status of a detection job.
    */
   describeSentimentDetectionJob(params: Comprehend.Types.DescribeSentimentDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeSentimentDetectionJobResponse) => void): Request<Comprehend.Types.DescribeSentimentDetectionJobResponse, AWSError>;
@@ -203,6 +211,14 @@ declare class Comprehend extends Service {
    * Detects the key noun phrases found in the text. 
    */
   detectKeyPhrases(callback?: (err: AWSError, data: Comprehend.Types.DetectKeyPhrasesResponse) => void): Request<Comprehend.Types.DetectKeyPhrasesResponse, AWSError>;
+  /**
+   * Inspects the input text for entities that contain personally identifiable information (PII) and returns information about them.
+   */
+  detectPiiEntities(params: Comprehend.Types.DetectPiiEntitiesRequest, callback?: (err: AWSError, data: Comprehend.Types.DetectPiiEntitiesResponse) => void): Request<Comprehend.Types.DetectPiiEntitiesResponse, AWSError>;
+  /**
+   * Inspects the input text for entities that contain personally identifiable information (PII) and returns information about them.
+   */
+  detectPiiEntities(callback?: (err: AWSError, data: Comprehend.Types.DetectPiiEntitiesResponse) => void): Request<Comprehend.Types.DetectPiiEntitiesResponse, AWSError>;
   /**
    * Inspects text and returns an inference of the prevailing sentiment (POSITIVE, NEUTRAL, MIXED, or NEGATIVE). 
    */
@@ -276,6 +292,14 @@ declare class Comprehend extends Service {
    */
   listKeyPhrasesDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListKeyPhrasesDetectionJobsResponse) => void): Request<Comprehend.Types.ListKeyPhrasesDetectionJobsResponse, AWSError>;
   /**
+   * Gets a list of the PII entity detection jobs that you have submitted.
+   */
+  listPiiEntitiesDetectionJobs(params: Comprehend.Types.ListPiiEntitiesDetectionJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListPiiEntitiesDetectionJobsResponse) => void): Request<Comprehend.Types.ListPiiEntitiesDetectionJobsResponse, AWSError>;
+  /**
+   * Gets a list of the PII entity detection jobs that you have submitted.
+   */
+  listPiiEntitiesDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListPiiEntitiesDetectionJobsResponse) => void): Request<Comprehend.Types.ListPiiEntitiesDetectionJobsResponse, AWSError>;
+  /**
    * Gets a list of sentiment detection jobs that you have submitted.
    */
   listSentimentDetectionJobs(params: Comprehend.Types.ListSentimentDetectionJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListSentimentDetectionJobsResponse) => void): Request<Comprehend.Types.ListSentimentDetectionJobsResponse, AWSError>;
@@ -332,6 +356,14 @@ declare class Comprehend extends Service {
    */
   startKeyPhrasesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StartKeyPhrasesDetectionJobResponse) => void): Request<Comprehend.Types.StartKeyPhrasesDetectionJobResponse, AWSError>;
   /**
+   * Starts an asynchronous PII entity detection job for a collection of documents.
+   */
+  startPiiEntitiesDetectionJob(params: Comprehend.Types.StartPiiEntitiesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartPiiEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StartPiiEntitiesDetectionJobResponse, AWSError>;
+  /**
+   * Starts an asynchronous PII entity detection job for a collection of documents.
+   */
+  startPiiEntitiesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StartPiiEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StartPiiEntitiesDetectionJobResponse, AWSError>;
+  /**
    * Starts an asynchronous sentiment detection job for a collection of documents. use the operation to track the status of a job.
    */
   startSentimentDetectionJob(params: Comprehend.Types.StartSentimentDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartSentimentDetectionJobResponse) => void): Request<Comprehend.Types.StartSentimentDetectionJobResponse, AWSError>;
@@ -371,6 +403,14 @@ declare class Comprehend extends Service {
    * Stops a key phrases detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
   stopKeyPhrasesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StopKeyPhrasesDetectionJobResponse) => void): Request<Comprehend.Types.StopKeyPhrasesDetectionJobResponse, AWSError>;
+  /**
+   * Stops a PII entities detection job in progress.
+   */
+  stopPiiEntitiesDetectionJob(params: Comprehend.Types.StopPiiEntitiesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StopPiiEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StopPiiEntitiesDetectionJobResponse, AWSError>;
+  /**
+   * Stops a PII entities detection job in progress.
+   */
+  stopPiiEntitiesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StopPiiEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StopPiiEntitiesDetectionJobResponse, AWSError>;
   /**
    * Stops a sentiment detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is be stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
@@ -891,6 +931,15 @@ declare namespace Comprehend {
      */
     KeyPhrasesDetectionJobProperties?: KeyPhrasesDetectionJobProperties;
   }
+  export interface DescribePiiEntitiesDetectionJobRequest {
+    /**
+     * The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
+     */
+    JobId: JobId;
+  }
+  export interface DescribePiiEntitiesDetectionJobResponse {
+    PiiEntitiesDetectionJobProperties?: PiiEntitiesDetectionJobProperties;
+  }
   export interface DescribeSentimentDetectionJobRequest {
     /**
      * The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
@@ -962,6 +1011,22 @@ declare namespace Comprehend {
      * A collection of key phrases that Amazon Comprehend identified in the input text. For each key phrase, the response provides the text of the key phrase, where the key phrase begins and ends, and the level of confidence that Amazon Comprehend has in the accuracy of the detection. 
      */
     KeyPhrases?: ListOfKeyPhrases;
+  }
+  export interface DetectPiiEntitiesRequest {
+    /**
+     * A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8 encoded characters.
+     */
+    Text: String;
+    /**
+     * The language of the input documents.
+     */
+    LanguageCode: LanguageCode;
+  }
+  export interface DetectPiiEntitiesResponse {
+    /**
+     * A collection of PII entities identified in the input text. For each entity, the response provides the entity type, where the entity text begins and ends, and the level of confidence that Amazon Comprehend has in the detection.
+     */
+    Entities?: ListOfPiiEntities;
   }
   export interface DetectSentimentRequest {
     /**
@@ -1876,7 +1941,33 @@ declare namespace Comprehend {
   export type ListOfEntities = Entity[];
   export type ListOfKeyPhrases = KeyPhrase[];
   export type ListOfLabels = DocumentLabel[];
+  export type ListOfPiiEntities = PiiEntity[];
+  export type ListOfPiiEntityTypes = PiiEntityType[];
   export type ListOfSyntaxTokens = SyntaxToken[];
+  export interface ListPiiEntitiesDetectionJobsRequest {
+    /**
+     * Filters the jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.
+     */
+    Filter?: PiiEntitiesDetectionJobFilter;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in each page.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListPiiEntitiesDetectionJobsResponse {
+    /**
+     * A list containing the properties of each job that is returned.
+     */
+    PiiEntitiesDetectionJobPropertiesList?: PiiEntitiesDetectionJobPropertiesList;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+  }
   export interface ListSentimentDetectionJobsRequest {
     /**
      * Filters the jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.
@@ -1941,6 +2032,7 @@ declare namespace Comprehend {
      */
     NextToken?: String;
   }
+  export type MaskCharacter = string;
   export type MaxResultsInteger = number;
   export type ModelStatus = "SUBMITTED"|"TRAINING"|"DELETING"|"STOP_REQUESTED"|"STOPPED"|"IN_ERROR"|"TRAINED"|string;
   export type NumberOfTopicsInteger = number;
@@ -1965,6 +2057,120 @@ declare namespace Comprehend {
     Score?: Float;
   }
   export type PartOfSpeechTagType = "ADJ"|"ADP"|"ADV"|"AUX"|"CONJ"|"CCONJ"|"DET"|"INTJ"|"NOUN"|"NUM"|"O"|"PART"|"PRON"|"PROPN"|"PUNCT"|"SCONJ"|"SYM"|"VERB"|string;
+  export interface PiiEntitiesDetectionJobFilter {
+    /**
+     * Filters on the name of the job.
+     */
+    JobName?: JobName;
+    /**
+     * Filters the list of jobs based on job status. Returns only jobs with the specified status.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.
+     */
+    SubmitTimeBefore?: Timestamp;
+    /**
+     * Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.
+     */
+    SubmitTimeAfter?: Timestamp;
+  }
+  export interface PiiEntitiesDetectionJobProperties {
+    /**
+     * The identifier assigned to the PII entities detection job.
+     */
+    JobId?: JobId;
+    /**
+     * The name that you assigned the PII entities detection job.
+     */
+    JobName?: JobName;
+    /**
+     * The current status of the PII entities detection job. If the status is FAILED, the Message field shows the reason for the failure.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * A description of the status of a job.
+     */
+    Message?: AnyLengthString;
+    /**
+     * The time that the PII entities detection job was submitted for processing.
+     */
+    SubmitTime?: Timestamp;
+    /**
+     * The time that the PII entities detection job completed.
+     */
+    EndTime?: Timestamp;
+    /**
+     * The input properties for a PII entities detection job.
+     */
+    InputDataConfig?: InputDataConfig;
+    /**
+     * The output data configuration that you supplied when you created the PII entities detection job.
+     */
+    OutputDataConfig?: PiiOutputDataConfig;
+    /**
+     * Provides configuration parameters for PII entity redaction. This parameter is required if you set the Mode parameter to ONLY_REDACTION. In that case, you must provide a RedactionConfig definition that includes the PiiEntityTypes parameter.
+     */
+    RedactionConfig?: RedactionConfig;
+    /**
+     * The language code of the input documents
+     */
+    LanguageCode?: LanguageCode;
+    /**
+     * The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn?: IamRoleArn;
+    /**
+     * Specifies whether the output provides the locations (offsets) of PII entities or a file in which PII entities are redacted.
+     */
+    Mode?: PiiEntitiesDetectionMode;
+  }
+  export type PiiEntitiesDetectionJobPropertiesList = PiiEntitiesDetectionJobProperties[];
+  export type PiiEntitiesDetectionMaskMode = "MASK"|"REPLACE_WITH_PII_ENTITY_TYPE"|string;
+  export type PiiEntitiesDetectionMode = "ONLY_REDACTION"|"ONLY_OFFSETS"|string;
+  export interface PiiEntity {
+    /**
+     * The level of confidence that Amazon Comprehend has in the accuracy of the detection.
+     */
+    Score?: Float;
+    /**
+     * The entity's type.
+     */
+    Type?: PiiEntityType;
+    /**
+     * A character offset in the input text that shows where the PII entity begins (the first character is at position 0). The offset returns the position of each UTF-8 code point in the string. A code point is the abstract character from a particular graphical representation. For example, a multi-byte UTF-8 character maps to a single code point.
+     */
+    BeginOffset?: Integer;
+    /**
+     * A character offset in the input text that shows where the PII entity ends. The offset returns the position of each UTF-8 code point in the string. A code point is the abstract character from a particular graphical representation. For example, a multi-byte UTF-8 character maps to a single code point.
+     */
+    EndOffset?: Integer;
+  }
+  export type PiiEntityType = "BANK_ACCOUNT_NUMBER"|"BANK_ROUTING"|"CREDIT_DEBIT_NUMBER"|"CREDIT_DEBIT_CVV"|"CREDIT_DEBIT_EXPIRY"|"PIN"|"EMAIL"|"ADDRESS"|"NAME"|"PHONE"|"SSN"|"DATE_TIME"|"PASSPORT_NUMBER"|"DRIVER_ID"|"URL"|"AGE"|"USERNAME"|"PASSWORD"|"AWS_ACCESS_KEY"|"AWS_SECRET_KEY"|"IP_ADDRESS"|"MAC_ADDRESS"|"ALL"|string;
+  export interface PiiOutputDataConfig {
+    /**
+     * When you use the PiiOutputDataConfig object with asynchronous operations, you specify the Amazon S3 location where you want to write the output data. 
+     */
+    S3Uri: S3Uri;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt the output results from an analysis job.
+     */
+    KmsKeyId?: KmsKeyId;
+  }
+  export interface RedactionConfig {
+    /**
+     * An array of the types of PII entities that Amazon Comprehend detects in the input text for your request.
+     */
+    PiiEntityTypes?: ListOfPiiEntityTypes;
+    /**
+     * Specifies whether the PII entity is redacted with the mask character or the entity type.
+     */
+    MaskMode?: PiiEntitiesDetectionMaskMode;
+    /**
+     * A character that replaces each character in the redacted PII entity.
+     */
+    MaskCharacter?: MaskCharacter;
+  }
   export type S3Uri = string;
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
@@ -2232,6 +2438,50 @@ declare namespace Comprehend {
      */
     JobStatus?: JobStatus;
   }
+  export interface StartPiiEntitiesDetectionJobRequest {
+    /**
+     * The input properties for a PII entities detection job.
+     */
+    InputDataConfig: InputDataConfig;
+    /**
+     * Provides conﬁguration parameters for the output of PII entity detection jobs.
+     */
+    OutputDataConfig: OutputDataConfig;
+    /**
+     * Specifies whether the output provides the locations (offsets) of PII entities or a file in which PII entities are redacted.
+     */
+    Mode: PiiEntitiesDetectionMode;
+    /**
+     * Provides configuration parameters for PII entity redaction. This parameter is required if you set the Mode parameter to ONLY_REDACTION. In that case, you must provide a RedactionConfig definition that includes the PiiEntityTypes parameter.
+     */
+    RedactionConfig?: RedactionConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn: IamRoleArn;
+    /**
+     * The identifier of the job.
+     */
+    JobName?: JobName;
+    /**
+     * The language of the input documents.
+     */
+    LanguageCode: LanguageCode;
+    /**
+     * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
+     */
+    ClientRequestToken?: ClientRequestTokenString;
+  }
+  export interface StartPiiEntitiesDetectionJobResponse {
+    /**
+     * The identifier generated for the job.
+     */
+    JobId?: JobId;
+    /**
+     * The status of the job.
+     */
+    JobStatus?: JobStatus;
+  }
   export interface StartSentimentDetectionJobRequest {
     /**
      * Specifies the format and location of the input data for the job.
@@ -2365,6 +2615,22 @@ declare namespace Comprehend {
     JobId?: JobId;
     /**
      * Either STOP_REQUESTED if the job is currently running, or STOPPED if the job was previously stopped with the StopKeyPhrasesDetectionJob operation.
+     */
+    JobStatus?: JobStatus;
+  }
+  export interface StopPiiEntitiesDetectionJobRequest {
+    /**
+     * The identifier of the PII entities detection job to stop.
+     */
+    JobId: JobId;
+  }
+  export interface StopPiiEntitiesDetectionJobResponse {
+    /**
+     * The identifier of the PII entities detection job to stop.
+     */
+    JobId?: JobId;
+    /**
+     * The status of the PII entities detection job.
      */
     JobStatus?: JobStatus;
   }

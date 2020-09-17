@@ -608,6 +608,34 @@
       ],
       "documentation": "<p>Gets the properties associated with a key phrases detection job. Use this operation to get the status of a detection job.</p>"
     },
+    "DescribePiiEntitiesDetectionJob": {
+      "name": "DescribePiiEntitiesDetectionJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribePiiEntitiesDetectionJobRequest"
+      },
+      "output": {
+        "shape": "DescribePiiEntitiesDetectionJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "JobNotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Gets the properties associated with a PII entities detection job. For example, you can use this operation to get the job status.</p>"
+    },
     "DescribeSentimentDetectionJob": {
       "name": "DescribeSentimentDetectionJob",
       "http": {
@@ -747,6 +775,34 @@
         }
       ],
       "documentation": "<p>Detects the key noun phrases found in the text. </p>"
+    },
+    "DetectPiiEntities": {
+      "name": "DetectPiiEntities",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DetectPiiEntitiesRequest"
+      },
+      "output": {
+        "shape": "DetectPiiEntitiesResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "TextSizeLimitExceededException"
+        },
+        {
+          "shape": "UnsupportedLanguageException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Inspects the input text for entities that contain personally identifiable information (PII) and returns information about them.</p>"
     },
     "DetectSentiment": {
       "name": "DetectSentiment",
@@ -997,6 +1053,34 @@
       ],
       "documentation": "<p>Get a list of key phrase detection jobs that you have submitted.</p>"
     },
+    "ListPiiEntitiesDetectionJobs": {
+      "name": "ListPiiEntitiesDetectionJobs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListPiiEntitiesDetectionJobsRequest"
+      },
+      "output": {
+        "shape": "ListPiiEntitiesDetectionJobsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "InvalidFilterException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Gets a list of the PII entity detection jobs that you have submitted.</p>"
+    },
     "ListSentimentDetectionJobs": {
       "name": "ListSentimentDetectionJobs",
       "http": {
@@ -1202,6 +1286,34 @@
       ],
       "documentation": "<p>Starts an asynchronous key phrase detection job for a collection of documents. Use the operation to track the status of a job.</p>"
     },
+    "StartPiiEntitiesDetectionJob": {
+      "name": "StartPiiEntitiesDetectionJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartPiiEntitiesDetectionJobRequest"
+      },
+      "output": {
+        "shape": "StartPiiEntitiesDetectionJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "KmsKeyValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Starts an asynchronous PII entity detection job for a collection of documents.</p>"
+    },
     "StartSentimentDetectionJob": {
       "name": "StartSentimentDetectionJob",
       "http": {
@@ -1332,6 +1444,31 @@
         }
       ],
       "documentation": "<p>Stops a key phrases detection job in progress.</p> <p>If the job state is <code>IN_PROGRESS</code> the job is marked for termination and put into the <code>STOP_REQUESTED</code> state. If the job completes before it can be stopped, it is put into the <code>COMPLETED</code> state; otherwise the job is stopped and put into the <code>STOPPED</code> state.</p> <p>If the job is in the <code>COMPLETED</code> or <code>FAILED</code> state when you call the <code>StopDominantLanguageDetectionJob</code> operation, the operation returns a 400 Internal Request Exception. </p> <p>When a job is stopped, any documents already processed are written to the output location.</p>"
+    },
+    "StopPiiEntitiesDetectionJob": {
+      "name": "StopPiiEntitiesDetectionJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StopPiiEntitiesDetectionJobRequest"
+      },
+      "output": {
+        "shape": "StopPiiEntitiesDetectionJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "JobNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Stops a PII entities detection job in progress.</p>"
     },
     "StopSentimentDetectionJob": {
       "name": "StopSentimentDetectionJob",
@@ -2270,6 +2407,26 @@
         }
       }
     },
+    "DescribePiiEntitiesDetectionJobRequest": {
+      "type": "structure",
+      "required": [
+        "JobId"
+      ],
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.</p>"
+        }
+      }
+    },
+    "DescribePiiEntitiesDetectionJobResponse": {
+      "type": "structure",
+      "members": {
+        "PiiEntitiesDetectionJobProperties": {
+          "shape": "PiiEntitiesDetectionJobProperties"
+        }
+      }
+    },
     "DescribeSentimentDetectionJobRequest": {
       "type": "structure",
       "required": [
@@ -2390,6 +2547,32 @@
         }
       },
       "sensitive": true
+    },
+    "DetectPiiEntitiesRequest": {
+      "type": "structure",
+      "required": [
+        "Text",
+        "LanguageCode"
+      ],
+      "members": {
+        "Text": {
+          "shape": "String",
+          "documentation": "<p>A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8 encoded characters.</p>"
+        },
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The language of the input documents.</p>"
+        }
+      }
+    },
+    "DetectPiiEntitiesResponse": {
+      "type": "structure",
+      "members": {
+        "Entities": {
+          "shape": "ListOfPiiEntities",
+          "documentation": "<p>A collection of PII entities identified in the input text. For each entity, the response provides the entity type, where the entity text begins and ends, and the level of confidence that Amazon Comprehend has in the detection.</p>"
+        }
+      }
     },
     "DetectSentimentRequest": {
       "type": "structure",
@@ -3722,10 +3905,52 @@
         "shape": "DocumentLabel"
       }
     },
+    "ListOfPiiEntities": {
+      "type": "list",
+      "member": {
+        "shape": "PiiEntity"
+      }
+    },
+    "ListOfPiiEntityTypes": {
+      "type": "list",
+      "member": {
+        "shape": "PiiEntityType"
+      }
+    },
     "ListOfSyntaxTokens": {
       "type": "list",
       "member": {
         "shape": "SyntaxToken"
+      }
+    },
+    "ListPiiEntitiesDetectionJobsRequest": {
+      "type": "structure",
+      "members": {
+        "Filter": {
+          "shape": "PiiEntitiesDetectionJobFilter",
+          "documentation": "<p>Filters the jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>Identifies the next page of results to return.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResultsInteger",
+          "documentation": "<p>The maximum number of results to return in each page.</p>"
+        }
+      }
+    },
+    "ListPiiEntitiesDetectionJobsResponse": {
+      "type": "structure",
+      "members": {
+        "PiiEntitiesDetectionJobPropertiesList": {
+          "shape": "PiiEntitiesDetectionJobPropertiesList",
+          "documentation": "<p>A list containing the properties of each job that is returned.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>Identifies the next page of results to return.</p>"
+        }
       }
     },
     "ListSentimentDetectionJobsRequest": {
@@ -3813,6 +4038,12 @@
         }
       }
     },
+    "MaskCharacter": {
+      "type": "string",
+      "max": 1,
+      "min": 1,
+      "pattern": "[!@#$%&*]"
+    },
     "MaxResultsInteger": {
       "type": "integer",
       "max": 500,
@@ -3888,6 +4119,187 @@
         "SYM",
         "VERB"
       ]
+    },
+    "PiiEntitiesDetectionJobFilter": {
+      "type": "structure",
+      "members": {
+        "JobName": {
+          "shape": "JobName",
+          "documentation": "<p>Filters on the name of the job.</p>"
+        },
+        "JobStatus": {
+          "shape": "JobStatus",
+          "documentation": "<p>Filters the list of jobs based on job status. Returns only jobs with the specified status.</p>"
+        },
+        "SubmitTimeBefore": {
+          "shape": "Timestamp",
+          "documentation": "<p>Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.</p>"
+        },
+        "SubmitTimeAfter": {
+          "shape": "Timestamp",
+          "documentation": "<p>Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.</p>"
+        }
+      },
+      "documentation": "<p>Provides information for filtering a list of PII entity detection jobs.</p>"
+    },
+    "PiiEntitiesDetectionJobProperties": {
+      "type": "structure",
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The identifier assigned to the PII entities detection job.</p>"
+        },
+        "JobName": {
+          "shape": "JobName",
+          "documentation": "<p>The name that you assigned the PII entities detection job.</p>"
+        },
+        "JobStatus": {
+          "shape": "JobStatus",
+          "documentation": "<p>The current status of the PII entities detection job. If the status is <code>FAILED</code>, the <code>Message</code> field shows the reason for the failure.</p>"
+        },
+        "Message": {
+          "shape": "AnyLengthString",
+          "documentation": "<p>A description of the status of a job.</p>"
+        },
+        "SubmitTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time that the PII entities detection job was submitted for processing.</p>"
+        },
+        "EndTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time that the PII entities detection job completed.</p>"
+        },
+        "InputDataConfig": {
+          "shape": "InputDataConfig",
+          "documentation": "<p>The input properties for a PII entities detection job.</p>"
+        },
+        "OutputDataConfig": {
+          "shape": "PiiOutputDataConfig",
+          "documentation": "<p>The output data configuration that you supplied when you created the PII entities detection job.</p>"
+        },
+        "RedactionConfig": {
+          "shape": "RedactionConfig",
+          "documentation": "<p>Provides configuration parameters for PII entity redaction.</p> <p>This parameter is required if you set the <code>Mode</code> parameter to <code>ONLY_REDACTION</code>. In that case, you must provide a <code>RedactionConfig</code> definition that includes the <code>PiiEntityTypes</code> parameter.</p>"
+        },
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The language code of the input documents</p>"
+        },
+        "DataAccessRoleArn": {
+          "shape": "IamRoleArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.</p>"
+        },
+        "Mode": {
+          "shape": "PiiEntitiesDetectionMode",
+          "documentation": "<p>Specifies whether the output provides the locations (offsets) of PII entities or a file in which PII entities are redacted.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about a PII entities detection job.</p>"
+    },
+    "PiiEntitiesDetectionJobPropertiesList": {
+      "type": "list",
+      "member": {
+        "shape": "PiiEntitiesDetectionJobProperties"
+      }
+    },
+    "PiiEntitiesDetectionMaskMode": {
+      "type": "string",
+      "enum": [
+        "MASK",
+        "REPLACE_WITH_PII_ENTITY_TYPE"
+      ]
+    },
+    "PiiEntitiesDetectionMode": {
+      "type": "string",
+      "enum": [
+        "ONLY_REDACTION",
+        "ONLY_OFFSETS"
+      ]
+    },
+    "PiiEntity": {
+      "type": "structure",
+      "members": {
+        "Score": {
+          "shape": "Float",
+          "documentation": "<p>The level of confidence that Amazon Comprehend has in the accuracy of the detection.</p>"
+        },
+        "Type": {
+          "shape": "PiiEntityType",
+          "documentation": "<p>The entity's type.</p>"
+        },
+        "BeginOffset": {
+          "shape": "Integer",
+          "documentation": "<p>A character offset in the input text that shows where the PII entity begins (the first character is at position 0). The offset returns the position of each UTF-8 code point in the string. A <i>code point</i> is the abstract character from a particular graphical representation. For example, a multi-byte UTF-8 character maps to a single code point.</p>"
+        },
+        "EndOffset": {
+          "shape": "Integer",
+          "documentation": "<p>A character offset in the input text that shows where the PII entity ends. The offset returns the position of each UTF-8 code point in the string. A <i>code point</i> is the abstract character from a particular graphical representation. For example, a multi-byte UTF-8 character maps to a single code point.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about a PII entity.</p>"
+    },
+    "PiiEntityType": {
+      "type": "string",
+      "enum": [
+        "BANK_ACCOUNT_NUMBER",
+        "BANK_ROUTING",
+        "CREDIT_DEBIT_NUMBER",
+        "CREDIT_DEBIT_CVV",
+        "CREDIT_DEBIT_EXPIRY",
+        "PIN",
+        "EMAIL",
+        "ADDRESS",
+        "NAME",
+        "PHONE",
+        "SSN",
+        "DATE_TIME",
+        "PASSPORT_NUMBER",
+        "DRIVER_ID",
+        "URL",
+        "AGE",
+        "USERNAME",
+        "PASSWORD",
+        "AWS_ACCESS_KEY",
+        "AWS_SECRET_KEY",
+        "IP_ADDRESS",
+        "MAC_ADDRESS",
+        "ALL"
+      ]
+    },
+    "PiiOutputDataConfig": {
+      "type": "structure",
+      "required": [
+        "S3Uri"
+      ],
+      "members": {
+        "S3Uri": {
+          "shape": "S3Uri",
+          "documentation": "<p>When you use the <code>PiiOutputDataConfig</code> object with asynchronous operations, you specify the Amazon S3 location where you want to write the output data. </p>"
+        },
+        "KmsKeyId": {
+          "shape": "KmsKeyId",
+          "documentation": "<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt the output results from an analysis job.</p>"
+        }
+      },
+      "documentation": "<p>Provides configuration parameters for the output of PII entity detection jobs.</p>"
+    },
+    "RedactionConfig": {
+      "type": "structure",
+      "members": {
+        "PiiEntityTypes": {
+          "shape": "ListOfPiiEntityTypes",
+          "documentation": "<p>An array of the types of PII entities that Amazon Comprehend detects in the input text for your request.</p>"
+        },
+        "MaskMode": {
+          "shape": "PiiEntitiesDetectionMaskMode",
+          "documentation": "<p>Specifies whether the PII entity is redacted with the mask character or the entity type.</p>"
+        },
+        "MaskCharacter": {
+          "shape": "MaskCharacter",
+          "documentation": "<p>A character that replaces each character in the redacted PII entity.</p>"
+        }
+      },
+      "documentation": "<p>Provides configuration parameters for PII entity redaction.</p>"
     },
     "S3Uri": {
       "type": "string",
@@ -4248,6 +4660,64 @@
         }
       }
     },
+    "StartPiiEntitiesDetectionJobRequest": {
+      "type": "structure",
+      "required": [
+        "InputDataConfig",
+        "OutputDataConfig",
+        "Mode",
+        "DataAccessRoleArn",
+        "LanguageCode"
+      ],
+      "members": {
+        "InputDataConfig": {
+          "shape": "InputDataConfig",
+          "documentation": "<p>The input properties for a PII entities detection job.</p>"
+        },
+        "OutputDataConfig": {
+          "shape": "OutputDataConfig",
+          "documentation": "<p>Provides conﬁguration parameters for the output of PII entity detection jobs.</p>"
+        },
+        "Mode": {
+          "shape": "PiiEntitiesDetectionMode",
+          "documentation": "<p>Specifies whether the output provides the locations (offsets) of PII entities or a file in which PII entities are redacted.</p>"
+        },
+        "RedactionConfig": {
+          "shape": "RedactionConfig",
+          "documentation": "<p>Provides configuration parameters for PII entity redaction.</p> <p>This parameter is required if you set the <code>Mode</code> parameter to <code>ONLY_REDACTION</code>. In that case, you must provide a <code>RedactionConfig</code> definition that includes the <code>PiiEntityTypes</code> parameter.</p>"
+        },
+        "DataAccessRoleArn": {
+          "shape": "IamRoleArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.</p>"
+        },
+        "JobName": {
+          "shape": "JobName",
+          "documentation": "<p>The identifier of the job.</p>"
+        },
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The language of the input documents.</p>"
+        },
+        "ClientRequestToken": {
+          "shape": "ClientRequestTokenString",
+          "documentation": "<p>A unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "StartPiiEntitiesDetectionJobResponse": {
+      "type": "structure",
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The identifier generated for the job.</p>"
+        },
+        "JobStatus": {
+          "shape": "JobStatus",
+          "documentation": "<p>The status of the job.</p>"
+        }
+      }
+    },
     "StartSentimentDetectionJobRequest": {
       "type": "structure",
       "required": [
@@ -4433,6 +4903,31 @@
         "JobStatus": {
           "shape": "JobStatus",
           "documentation": "<p>Either <code>STOP_REQUESTED</code> if the job is currently running, or <code>STOPPED</code> if the job was previously stopped with the <code>StopKeyPhrasesDetectionJob</code> operation.</p>"
+        }
+      }
+    },
+    "StopPiiEntitiesDetectionJobRequest": {
+      "type": "structure",
+      "required": [
+        "JobId"
+      ],
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The identifier of the PII entities detection job to stop.</p>"
+        }
+      }
+    },
+    "StopPiiEntitiesDetectionJobResponse": {
+      "type": "structure",
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The identifier of the PII entities detection job to stop.</p>"
+        },
+        "JobStatus": {
+          "shape": "JobStatus",
+          "documentation": "<p>The status of the PII entities detection job.</p>"
         }
       }
     },
