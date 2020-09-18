@@ -14,6 +14,30 @@ declare class MediaLive extends Service {
   constructor(options?: MediaLive.Types.ClientConfiguration)
   config: Config & MediaLive.Types.ClientConfiguration;
   /**
+   * Starts delete of resources.
+   */
+  batchDelete(params: MediaLive.Types.BatchDeleteRequest, callback?: (err: AWSError, data: MediaLive.Types.BatchDeleteResponse) => void): Request<MediaLive.Types.BatchDeleteResponse, AWSError>;
+  /**
+   * Starts delete of resources.
+   */
+  batchDelete(callback?: (err: AWSError, data: MediaLive.Types.BatchDeleteResponse) => void): Request<MediaLive.Types.BatchDeleteResponse, AWSError>;
+  /**
+   * Starts existing resources
+   */
+  batchStart(params: MediaLive.Types.BatchStartRequest, callback?: (err: AWSError, data: MediaLive.Types.BatchStartResponse) => void): Request<MediaLive.Types.BatchStartResponse, AWSError>;
+  /**
+   * Starts existing resources
+   */
+  batchStart(callback?: (err: AWSError, data: MediaLive.Types.BatchStartResponse) => void): Request<MediaLive.Types.BatchStartResponse, AWSError>;
+  /**
+   * Stops running resources
+   */
+  batchStop(params: MediaLive.Types.BatchStopRequest, callback?: (err: AWSError, data: MediaLive.Types.BatchStopResponse) => void): Request<MediaLive.Types.BatchStopResponse, AWSError>;
+  /**
+   * Stops running resources
+   */
+  batchStop(callback?: (err: AWSError, data: MediaLive.Types.BatchStopResponse) => void): Request<MediaLive.Types.BatchStopResponse, AWSError>;
+  /**
    * Update a channel schedule
    */
   batchUpdateSchedule(params: MediaLive.Types.BatchUpdateScheduleRequest, callback?: (err: AWSError, data: MediaLive.Types.BatchUpdateScheduleResponse) => void): Request<MediaLive.Types.BatchUpdateScheduleResponse, AWSError>;
@@ -784,6 +808,52 @@ Alternate rendition that the client will not try to play back by default. Repres
     Scte35SpliceInsert?: Scte35SpliceInsert;
     Scte35TimeSignalApos?: Scte35TimeSignalApos;
   }
+  export interface BatchDeleteRequest {
+    /**
+     * List of channel IDs
+     */
+    ChannelIds?: __listOf__string;
+    /**
+     * List of input IDs
+     */
+    InputIds?: __listOf__string;
+    /**
+     * List of input security group IDs
+     */
+    InputSecurityGroupIds?: __listOf__string;
+    /**
+     * List of multiplex IDs
+     */
+    MultiplexIds?: __listOf__string;
+  }
+  export interface BatchDeleteResponse {
+    /**
+     * List of failed operations
+     */
+    Failed?: __listOfBatchFailedResultModel;
+    /**
+     * List of successful operations
+     */
+    Successful?: __listOfBatchSuccessfulResultModel;
+  }
+  export interface BatchFailedResultModel {
+    /**
+     * ARN of the resource
+     */
+    Arn?: __string;
+    /**
+     * Error code for the failed operation
+     */
+    Code?: __string;
+    /**
+     * ID of the resource
+     */
+    Id?: __string;
+    /**
+     * Error message for the failed operation
+     */
+    Message?: __string;
+  }
   export interface BatchScheduleActionCreateRequest {
     /**
      * A list of schedule actions to create.
@@ -807,6 +877,60 @@ Alternate rendition that the client will not try to play back by default. Repres
      * List of actions that have been deleted from the schedule.
      */
     ScheduleActions: __listOfScheduleAction;
+  }
+  export interface BatchStartRequest {
+    /**
+     * List of channel IDs
+     */
+    ChannelIds?: __listOf__string;
+    /**
+     * List of multiplex IDs
+     */
+    MultiplexIds?: __listOf__string;
+  }
+  export interface BatchStartResponse {
+    /**
+     * List of failed operations
+     */
+    Failed?: __listOfBatchFailedResultModel;
+    /**
+     * List of successful operations
+     */
+    Successful?: __listOfBatchSuccessfulResultModel;
+  }
+  export interface BatchStopRequest {
+    /**
+     * List of channel IDs
+     */
+    ChannelIds?: __listOf__string;
+    /**
+     * List of multiplex IDs
+     */
+    MultiplexIds?: __listOf__string;
+  }
+  export interface BatchStopResponse {
+    /**
+     * List of failed operations
+     */
+    Failed?: __listOfBatchFailedResultModel;
+    /**
+     * List of successful operations
+     */
+    Successful?: __listOfBatchSuccessfulResultModel;
+  }
+  export interface BatchSuccessfulResultModel {
+    /**
+     * ARN of the resource
+     */
+    Arn?: __string;
+    /**
+     * ID of the resource
+     */
+    Id?: __string;
+    /**
+     * Current state of the resource
+     */
+    State?: __string;
   }
   export interface BatchUpdateScheduleRequest {
     /**
@@ -5929,6 +6053,8 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
   export type __listOfAudioDescription = AudioDescription[];
   export type __listOfAudioSelector = AudioSelector[];
   export type __listOfAudioTrack = AudioTrack[];
+  export type __listOfBatchFailedResultModel = BatchFailedResultModel[];
+  export type __listOfBatchSuccessfulResultModel = BatchSuccessfulResultModel[];
   export type __listOfCaptionDescription = CaptionDescription[];
   export type __listOfCaptionLanguageMapping = CaptionLanguageMapping[];
   export type __listOfCaptionSelector = CaptionSelector[];

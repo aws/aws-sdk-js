@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.755.0-->
+<!--LATEST=2.756.0-->
 <!--ENTRYINSERT-->
+
+## 2.756.0
+* feature: CodeStarconnections: New integration with the GitHub provider type.
+* feature: MediaLive: AWS Elemental MediaLive now supports batch operations, which allow users to start, stop, and delete multiple MediaLive resources with a single request.
 
 ## 2.755.0
 * bugfix: Types: Update types for fetching credentials from config

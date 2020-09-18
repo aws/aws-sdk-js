@@ -338,7 +338,7 @@ declare namespace CodeStarconnections {
   }
   export type MaxResults = number;
   export type NextToken = string;
-  export type ProviderType = "Bitbucket"|"GitHubEnterpriseServer"|string;
+  export type ProviderType = "Bitbucket"|"GitHub"|"GitHubEnterpriseServer"|string;
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
   export type SubnetId = string;

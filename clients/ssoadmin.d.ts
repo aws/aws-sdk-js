@@ -12,27 +12,27 @@ declare class SSOAdmin extends Service {
   constructor(options?: SSOAdmin.Types.ClientConfiguration)
   config: Config & SSOAdmin.Types.ClientConfiguration;
   /**
-   * Attaches an IAM managed policy ARN to a permission set.
+   * Attaches an IAM managed policy ARN to a permission set.  If the permission set is already referenced by one or more account assignments, you will need to call  ProvisionPermissionSet  after this action to apply the corresponding IAM policy updates to all assigned accounts. 
    */
   attachManagedPolicyToPermissionSet(params: SSOAdmin.Types.AttachManagedPolicyToPermissionSetRequest, callback?: (err: AWSError, data: SSOAdmin.Types.AttachManagedPolicyToPermissionSetResponse) => void): Request<SSOAdmin.Types.AttachManagedPolicyToPermissionSetResponse, AWSError>;
   /**
-   * Attaches an IAM managed policy ARN to a permission set.
+   * Attaches an IAM managed policy ARN to a permission set.  If the permission set is already referenced by one or more account assignments, you will need to call  ProvisionPermissionSet  after this action to apply the corresponding IAM policy updates to all assigned accounts. 
    */
   attachManagedPolicyToPermissionSet(callback?: (err: AWSError, data: SSOAdmin.Types.AttachManagedPolicyToPermissionSetResponse) => void): Request<SSOAdmin.Types.AttachManagedPolicyToPermissionSetResponse, AWSError>;
   /**
-   * Assigns access to a principal for a specified AWS account using a specified permission set.  The term principal here refers to a user or group that is defined in AWS SSO. 
+   * Assigns access to a principal for a specified AWS account using a specified permission set.  The term principal here refers to a user or group that is defined in AWS SSO.   As part of a successful CreateAccountAssignment call, the specified permission set will automatically be provisioned to the account in the form of an IAM policy attached to the SSO-created IAM role. If the permission set is subsequently updated, the corresponding IAM policies attached to roles in your accounts will not be updated automatically. In this case, you will need to call  ProvisionPermissionSet  to make these updates. 
    */
   createAccountAssignment(params: SSOAdmin.Types.CreateAccountAssignmentRequest, callback?: (err: AWSError, data: SSOAdmin.Types.CreateAccountAssignmentResponse) => void): Request<SSOAdmin.Types.CreateAccountAssignmentResponse, AWSError>;
   /**
-   * Assigns access to a principal for a specified AWS account using a specified permission set.  The term principal here refers to a user or group that is defined in AWS SSO. 
+   * Assigns access to a principal for a specified AWS account using a specified permission set.  The term principal here refers to a user or group that is defined in AWS SSO.   As part of a successful CreateAccountAssignment call, the specified permission set will automatically be provisioned to the account in the form of an IAM policy attached to the SSO-created IAM role. If the permission set is subsequently updated, the corresponding IAM policies attached to roles in your accounts will not be updated automatically. In this case, you will need to call  ProvisionPermissionSet  to make these updates. 
    */
   createAccountAssignment(callback?: (err: AWSError, data: SSOAdmin.Types.CreateAccountAssignmentResponse) => void): Request<SSOAdmin.Types.CreateAccountAssignmentResponse, AWSError>;
   /**
-   * Creates a permission set within a specified SSO instance.
+   * Creates a permission set within a specified SSO instance.  To grant users and groups access to AWS account resources, use  CreateAccountAssignment . 
    */
   createPermissionSet(params: SSOAdmin.Types.CreatePermissionSetRequest, callback?: (err: AWSError, data: SSOAdmin.Types.CreatePermissionSetResponse) => void): Request<SSOAdmin.Types.CreatePermissionSetResponse, AWSError>;
   /**
-   * Creates a permission set within a specified SSO instance.
+   * Creates a permission set within a specified SSO instance.  To grant users and groups access to AWS account resources, use  CreateAccountAssignment . 
    */
   createPermissionSet(callback?: (err: AWSError, data: SSOAdmin.Types.CreatePermissionSetResponse) => void): Request<SSOAdmin.Types.CreatePermissionSetResponse, AWSError>;
   /**
@@ -196,11 +196,11 @@ declare class SSOAdmin extends Service {
    */
   provisionPermissionSet(callback?: (err: AWSError, data: SSOAdmin.Types.ProvisionPermissionSetResponse) => void): Request<SSOAdmin.Types.ProvisionPermissionSetResponse, AWSError>;
   /**
-   * Attaches an IAM inline policy to a permission set.
+   * Attaches an IAM inline policy to a permission set.  If the permission set is already referenced by one or more account assignments, you will need to call  ProvisionPermissionSet  after this action to apply the corresponding IAM policy updates to all assigned accounts. 
    */
   putInlinePolicyToPermissionSet(params: SSOAdmin.Types.PutInlinePolicyToPermissionSetRequest, callback?: (err: AWSError, data: SSOAdmin.Types.PutInlinePolicyToPermissionSetResponse) => void): Request<SSOAdmin.Types.PutInlinePolicyToPermissionSetResponse, AWSError>;
   /**
-   * Attaches an IAM inline policy to a permission set.
+   * Attaches an IAM inline policy to a permission set.  If the permission set is already referenced by one or more account assignments, you will need to call  ProvisionPermissionSet  after this action to apply the corresponding IAM policy updates to all assigned accounts. 
    */
   putInlinePolicyToPermissionSet(callback?: (err: AWSError, data: SSOAdmin.Types.PutInlinePolicyToPermissionSetResponse) => void): Request<SSOAdmin.Types.PutInlinePolicyToPermissionSetResponse, AWSError>;
   /**
@@ -243,7 +243,7 @@ declare namespace SSOAdmin {
      */
     PrincipalType?: PrincipalType;
     /**
-     * The identifier of the principal.
+     * An identifier for an object in AWS SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in AWS SSO, see the AWS SSO Identity Store API Reference.
      */
     PrincipalId?: PrincipalId;
   }
@@ -262,7 +262,7 @@ declare namespace SSOAdmin {
      */
     FailureReason?: Reason;
     /**
-     * The identifier for the chosen target.
+     * TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).
      */
     TargetId?: TargetId;
     /**
@@ -278,7 +278,7 @@ declare namespace SSOAdmin {
      */
     PrincipalType?: PrincipalType;
     /**
-     * The identifier of the principal.
+     * An identifier for an object in AWS SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in AWS SSO, see the AWS SSO Identity Store API Reference.
      */
     PrincipalId?: PrincipalId;
     /**
@@ -336,7 +336,7 @@ declare namespace SSOAdmin {
      */
     InstanceArn: InstanceArn;
     /**
-     * The identifier for the chosen target.
+     * TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).
      */
     TargetId: TargetId;
     /**
@@ -352,7 +352,7 @@ declare namespace SSOAdmin {
      */
     PrincipalType: PrincipalType;
     /**
-     * The identifier of the principal.
+     * An identifier for an object in AWS SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in AWS SSO, see the AWS SSO Identity Store API Reference.
      */
     PrincipalId: PrincipalId;
   }
@@ -401,7 +401,7 @@ declare namespace SSOAdmin {
      */
     InstanceArn: InstanceArn;
     /**
-     * The identifier for the chosen target.
+     * TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).
      */
     TargetId: TargetId;
     /**
@@ -417,7 +417,7 @@ declare namespace SSOAdmin {
      */
     PrincipalType: PrincipalType;
     /**
-     * The identifier of the principal.
+     * An identifier for an object in AWS SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in AWS SSO, see the AWS SSO Identity Store API Reference.
      */
     PrincipalId: PrincipalId;
   }
@@ -931,7 +931,7 @@ declare namespace SSOAdmin {
      */
     PermissionSetArn: PermissionSetArn;
     /**
-     * The identifier for the chosen target.
+     * TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).
      */
     TargetId?: TargetId;
     /**

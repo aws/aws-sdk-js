@@ -49,7 +49,7 @@
           "shape": "ConflictException"
         }
       ],
-      "documentation": "<p>Attaches an IAM managed policy ARN to a permission set.</p>"
+      "documentation": "<p>Attaches an IAM managed policy ARN to a permission set.</p> <note> <p>If the permission set is already referenced by one or more account assignments, you will need to call <code> <a>ProvisionPermissionSet</a> </code> after this action to apply the corresponding IAM policy updates to all assigned accounts.</p> </note>"
     },
     "CreateAccountAssignment": {
       "name": "CreateAccountAssignment",
@@ -86,7 +86,7 @@
           "shape": "ConflictException"
         }
       ],
-      "documentation": "<p>Assigns access to a principal for a specified AWS account using a specified permission set.</p> <note> <p>The term <i>principal</i> here refers to a user or group that is defined in AWS SSO.</p> </note>"
+      "documentation": "<p>Assigns access to a principal for a specified AWS account using a specified permission set.</p> <note> <p>The term <i>principal</i> here refers to a user or group that is defined in AWS SSO.</p> </note> <note> <p>As part of a successful <code>CreateAccountAssignment</code> call, the specified permission set will automatically be provisioned to the account in the form of an IAM policy attached to the SSO-created IAM role. If the permission set is subsequently updated, the corresponding IAM policies attached to roles in your accounts will not be updated automatically. In this case, you will need to call <code> <a>ProvisionPermissionSet</a> </code> to make these updates.</p> </note>"
     },
     "CreatePermissionSet": {
       "name": "CreatePermissionSet",
@@ -123,7 +123,7 @@
           "shape": "ConflictException"
         }
       ],
-      "documentation": "<p>Creates a permission set within a specified SSO instance.</p>"
+      "documentation": "<p>Creates a permission set within a specified SSO instance.</p> <note> <p>To grant users and groups access to AWS account resources, use <code> <a>CreateAccountAssignment</a> </code>.</p> </note>"
     },
     "DeleteAccountAssignment": {
       "name": "DeleteAccountAssignment",
@@ -792,7 +792,7 @@
           "shape": "ConflictException"
         }
       ],
-      "documentation": "<p>Attaches an IAM inline policy to a permission set.</p>"
+      "documentation": "<p>Attaches an IAM inline policy to a permission set.</p> <note> <p>If the permission set is already referenced by one or more account assignments, you will need to call <code> <a>ProvisionPermissionSet</a> </code> after this action to apply the corresponding IAM policy updates to all assigned accounts.</p> </note>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -918,7 +918,7 @@
         },
         "PrincipalId": {
           "shape": "PrincipalId",
-          "documentation": "<p>The identifier of the principal.</p>"
+          "documentation": "<p>An identifier for an object in AWS SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in AWS SSO, see the <a href=\"/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">AWS SSO Identity Store API Reference</a>.</p>"
         }
       },
       "documentation": "<p>The assignment that indicates a principal's limited access to a specified AWS account with a specified permission set.</p> <note> <p>The term <i>principal</i> here refers to a user or group that is defined in AWS SSO.</p> </note>"
@@ -946,7 +946,7 @@
         },
         "TargetId": {
           "shape": "TargetId",
-          "documentation": "<p>The identifier for the chosen target.</p>"
+          "documentation": "<p>TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).</p>"
         },
         "TargetType": {
           "shape": "TargetType",
@@ -962,7 +962,7 @@
         },
         "PrincipalId": {
           "shape": "PrincipalId",
-          "documentation": "<p>The identifier of the principal.</p>"
+          "documentation": "<p>An identifier for an object in AWS SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in AWS SSO, see the <a href=\"/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">AWS SSO Identity Store API Reference</a>.</p>"
         },
         "CreatedDate": {
           "shape": "Date",
@@ -1068,7 +1068,7 @@
         },
         "TargetId": {
           "shape": "TargetId",
-          "documentation": "<p>The identifier for the chosen target.</p>"
+          "documentation": "<p>TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).</p>"
         },
         "TargetType": {
           "shape": "TargetType",
@@ -1084,7 +1084,7 @@
         },
         "PrincipalId": {
           "shape": "PrincipalId",
-          "documentation": "<p>The identifier of the principal.</p>"
+          "documentation": "<p>An identifier for an object in AWS SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in AWS SSO, see the <a href=\"/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">AWS SSO Identity Store API Reference</a>.</p>"
         }
       }
     },
@@ -1159,7 +1159,7 @@
         },
         "TargetId": {
           "shape": "TargetId",
-          "documentation": "<p>The identifier for the chosen target.</p>"
+          "documentation": "<p>TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).</p>"
         },
         "TargetType": {
           "shape": "TargetType",
@@ -1175,7 +1175,7 @@
         },
         "PrincipalId": {
           "shape": "PrincipalId",
-          "documentation": "<p>The identifier of the principal.</p>"
+          "documentation": "<p>An identifier for an object in AWS SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in AWS SSO, see the <a href=\"/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">AWS SSO Identity Store API Reference</a>.</p>"
         }
       }
     },
@@ -1970,7 +1970,7 @@
         },
         "TargetId": {
           "shape": "TargetId",
-          "documentation": "<p>The identifier for the chosen target.</p>"
+          "documentation": "<p>TargetID is an AWS account identifier, typically a 10-12 digit string (For example, 123456789012).</p>"
         },
         "TargetType": {
           "shape": "ProvisionTargetType",
