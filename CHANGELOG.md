@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.756.0-->
+<!--LATEST=2.757.0-->
 <!--ENTRYINSERT-->
+
+## 2.757.0
+* feature: CloudWatchEvents: Add support for Redshift Data API Targets
+* feature: EventBridge: Add support for Redshift Data API Targets
+* feature: Glue: Adding support to update multiple partitions of a table in a single request
+* feature: IoTSiteWise: This release supports IAM mode for SiteWise Monitor portals
 
 ## 2.756.0
 * feature: CodeStarconnections: New integration with the GitHub provider type.

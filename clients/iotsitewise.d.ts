@@ -45,11 +45,11 @@ declare class IoTSiteWise extends Service {
    */
   batchPutAssetPropertyValue(callback?: (err: AWSError, data: IoTSiteWise.Types.BatchPutAssetPropertyValueResponse) => void): Request<IoTSiteWise.Types.BatchPutAssetPropertyValueResponse, AWSError>;
   /**
-   * Creates an access policy that grants the specified AWS Single Sign-On user or group access to the specified AWS IoT SiteWise Monitor portal or project resource.
+   * Creates an access policy that grants the specified identity (AWS SSO user, AWS SSO group, or IAM user) access to the specified AWS IoT SiteWise Monitor portal or project resource.
    */
   createAccessPolicy(params: IoTSiteWise.Types.CreateAccessPolicyRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.CreateAccessPolicyResponse) => void): Request<IoTSiteWise.Types.CreateAccessPolicyResponse, AWSError>;
   /**
-   * Creates an access policy that grants the specified AWS Single Sign-On user or group access to the specified AWS IoT SiteWise Monitor portal or project resource.
+   * Creates an access policy that grants the specified identity (AWS SSO user, AWS SSO group, or IAM user) access to the specified AWS IoT SiteWise Monitor portal or project resource.
    */
   createAccessPolicy(callback?: (err: AWSError, data: IoTSiteWise.Types.CreateAccessPolicyResponse) => void): Request<IoTSiteWise.Types.CreateAccessPolicyResponse, AWSError>;
   /**
@@ -85,13 +85,21 @@ declare class IoTSiteWise extends Service {
    */
   createGateway(callback?: (err: AWSError, data: IoTSiteWise.Types.CreateGatewayResponse) => void): Request<IoTSiteWise.Types.CreateGatewayResponse, AWSError>;
   /**
-   * Creates a portal, which can contain projects and dashboards. Before you can create a portal, you must enable AWS Single Sign-On. AWS IoT SiteWise Monitor uses AWS SSO to manage user permissions. For more information, see Enabling AWS SSO in the AWS IoT SiteWise User Guide.  Before you can sign in to a new portal, you must add at least one AWS SSO user or group to that portal. For more information, see Adding or removing portal administrators in the AWS IoT SiteWise User Guide. 
+   * Creates a portal, which can contain projects and dashboards. AWS IoT SiteWise Monitor uses AWS SSO or IAM to authenticate portal users and manage user permissions.  Before you can sign in to a new portal, you must add at least one identity to that portal. For more information, see Adding or removing portal administrators in the AWS IoT SiteWise User Guide. 
    */
   createPortal(params: IoTSiteWise.Types.CreatePortalRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.CreatePortalResponse) => void): Request<IoTSiteWise.Types.CreatePortalResponse, AWSError>;
   /**
-   * Creates a portal, which can contain projects and dashboards. Before you can create a portal, you must enable AWS Single Sign-On. AWS IoT SiteWise Monitor uses AWS SSO to manage user permissions. For more information, see Enabling AWS SSO in the AWS IoT SiteWise User Guide.  Before you can sign in to a new portal, you must add at least one AWS SSO user or group to that portal. For more information, see Adding or removing portal administrators in the AWS IoT SiteWise User Guide. 
+   * Creates a portal, which can contain projects and dashboards. AWS IoT SiteWise Monitor uses AWS SSO or IAM to authenticate portal users and manage user permissions.  Before you can sign in to a new portal, you must add at least one identity to that portal. For more information, see Adding or removing portal administrators in the AWS IoT SiteWise User Guide. 
    */
   createPortal(callback?: (err: AWSError, data: IoTSiteWise.Types.CreatePortalResponse) => void): Request<IoTSiteWise.Types.CreatePortalResponse, AWSError>;
+  /**
+   * Creates a pre-signed URL to a portal. Use this operation to create URLs to portals that use AWS Identity and Access Management (IAM) to authenticate users. An IAM user with access to a portal can call this API to get a URL to that portal. The URL contains a session token that lets the IAM user access the portal.
+   */
+  createPresignedPortalUrl(params: IoTSiteWise.Types.CreatePresignedPortalUrlRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.CreatePresignedPortalUrlResponse) => void): Request<IoTSiteWise.Types.CreatePresignedPortalUrlResponse, AWSError>;
+  /**
+   * Creates a pre-signed URL to a portal. Use this operation to create URLs to portals that use AWS Identity and Access Management (IAM) to authenticate users. An IAM user with access to a portal can call this API to get a URL to that portal. The URL contains a session token that lets the IAM user access the portal.
+   */
+  createPresignedPortalUrl(callback?: (err: AWSError, data: IoTSiteWise.Types.CreatePresignedPortalUrlResponse) => void): Request<IoTSiteWise.Types.CreatePresignedPortalUrlResponse, AWSError>;
   /**
    * Creates a project in the specified portal.
    */
@@ -101,11 +109,11 @@ declare class IoTSiteWise extends Service {
    */
   createProject(callback?: (err: AWSError, data: IoTSiteWise.Types.CreateProjectResponse) => void): Request<IoTSiteWise.Types.CreateProjectResponse, AWSError>;
   /**
-   * Deletes an access policy that grants the specified AWS Single Sign-On identity access to the specified AWS IoT SiteWise Monitor resource. You can use this operation to revoke access to an AWS IoT SiteWise Monitor resource.
+   * Deletes an access policy that grants the specified identity access to the specified AWS IoT SiteWise Monitor resource. You can use this operation to revoke access to an AWS IoT SiteWise Monitor resource.
    */
   deleteAccessPolicy(params: IoTSiteWise.Types.DeleteAccessPolicyRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.DeleteAccessPolicyResponse) => void): Request<IoTSiteWise.Types.DeleteAccessPolicyResponse, AWSError>;
   /**
-   * Deletes an access policy that grants the specified AWS Single Sign-On identity access to the specified AWS IoT SiteWise Monitor resource. You can use this operation to revoke access to an AWS IoT SiteWise Monitor resource.
+   * Deletes an access policy that grants the specified identity access to the specified AWS IoT SiteWise Monitor resource. You can use this operation to revoke access to an AWS IoT SiteWise Monitor resource.
    */
   deleteAccessPolicy(callback?: (err: AWSError, data: IoTSiteWise.Types.DeleteAccessPolicyResponse) => void): Request<IoTSiteWise.Types.DeleteAccessPolicyResponse, AWSError>;
   /**
@@ -133,11 +141,11 @@ declare class IoTSiteWise extends Service {
    */
   deleteDashboard(callback?: (err: AWSError, data: IoTSiteWise.Types.DeleteDashboardResponse) => void): Request<IoTSiteWise.Types.DeleteDashboardResponse, AWSError>;
   /**
-   * Deletes a gateway from AWS IoT SiteWise. When you delete a gateway, some of the gateway's files remain in your gateway's file system. For more information, see Data retention in the AWS IoT SiteWise User Guide.
+   * Deletes a gateway from AWS IoT SiteWise. When you delete a gateway, some of the gateway's files remain in your gateway's file system.
    */
   deleteGateway(params: IoTSiteWise.Types.DeleteGatewayRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a gateway from AWS IoT SiteWise. When you delete a gateway, some of the gateway's files remain in your gateway's file system. For more information, see Data retention in the AWS IoT SiteWise User Guide.
+   * Deletes a gateway from AWS IoT SiteWise. When you delete a gateway, some of the gateway's files remain in your gateway's file system.
    */
   deleteGateway(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -157,11 +165,11 @@ declare class IoTSiteWise extends Service {
    */
   deleteProject(callback?: (err: AWSError, data: IoTSiteWise.Types.DeleteProjectResponse) => void): Request<IoTSiteWise.Types.DeleteProjectResponse, AWSError>;
   /**
-   * Describes an access policy, which specifies an AWS SSO user or group's access to an AWS IoT SiteWise Monitor portal or project.
+   * Describes an access policy, which specifies an identity's access to an AWS IoT SiteWise Monitor portal or project.
    */
   describeAccessPolicy(params: IoTSiteWise.Types.DescribeAccessPolicyRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.DescribeAccessPolicyResponse) => void): Request<IoTSiteWise.Types.DescribeAccessPolicyResponse, AWSError>;
   /**
-   * Describes an access policy, which specifies an AWS SSO user or group's access to an AWS IoT SiteWise Monitor portal or project.
+   * Describes an access policy, which specifies an identity's access to an AWS IoT SiteWise Monitor portal or project.
    */
   describeAccessPolicy(callback?: (err: AWSError, data: IoTSiteWise.Types.DescribeAccessPolicyResponse) => void): Request<IoTSiteWise.Types.DescribeAccessPolicyResponse, AWSError>;
   /**
@@ -269,11 +277,11 @@ declare class IoTSiteWise extends Service {
    */
   getAssetPropertyValueHistory(callback?: (err: AWSError, data: IoTSiteWise.Types.GetAssetPropertyValueHistoryResponse) => void): Request<IoTSiteWise.Types.GetAssetPropertyValueHistoryResponse, AWSError>;
   /**
-   * Retrieves a paginated list of access policies for an AWS SSO identity (a user or group) or an AWS IoT SiteWise Monitor resource (a portal or project).
+   * Retrieves a paginated list of access policies for an identity (an AWS SSO user, an AWS SSO group, or an IAM user) or an AWS IoT SiteWise Monitor resource (a portal or project).
    */
   listAccessPolicies(params: IoTSiteWise.Types.ListAccessPoliciesRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.ListAccessPoliciesResponse) => void): Request<IoTSiteWise.Types.ListAccessPoliciesResponse, AWSError>;
   /**
-   * Retrieves a paginated list of access policies for an AWS SSO identity (a user or group) or an AWS IoT SiteWise Monitor resource (a portal or project).
+   * Retrieves a paginated list of access policies for an identity (an AWS SSO user, an AWS SSO group, or an IAM user) or an AWS IoT SiteWise Monitor resource (a portal or project).
    */
   listAccessPolicies(callback?: (err: AWSError, data: IoTSiteWise.Types.ListAccessPoliciesResponse) => void): Request<IoTSiteWise.Types.ListAccessPoliciesResponse, AWSError>;
   /**
@@ -373,11 +381,11 @@ declare class IoTSiteWise extends Service {
    */
   untagResource(callback?: (err: AWSError, data: IoTSiteWise.Types.UntagResourceResponse) => void): Request<IoTSiteWise.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates an existing access policy that specifies an AWS SSO user or group's access to an AWS IoT SiteWise Monitor portal or project resource.
+   * Updates an existing access policy that specifies an identity's access to an AWS IoT SiteWise Monitor portal or project resource.
    */
   updateAccessPolicy(params: IoTSiteWise.Types.UpdateAccessPolicyRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.UpdateAccessPolicyResponse) => void): Request<IoTSiteWise.Types.UpdateAccessPolicyResponse, AWSError>;
   /**
-   * Updates an existing access policy that specifies an AWS SSO user or group's access to an AWS IoT SiteWise Monitor portal or project resource.
+   * Updates an existing access policy that specifies an identity's access to an AWS IoT SiteWise Monitor portal or project resource.
    */
   updateAccessPolicy(callback?: (err: AWSError, data: IoTSiteWise.Types.UpdateAccessPolicyResponse) => void): Request<IoTSiteWise.Types.UpdateAccessPolicyResponse, AWSError>;
   /**
@@ -389,11 +397,11 @@ declare class IoTSiteWise extends Service {
    */
   updateAsset(callback?: (err: AWSError, data: IoTSiteWise.Types.UpdateAssetResponse) => void): Request<IoTSiteWise.Types.UpdateAssetResponse, AWSError>;
   /**
-   * Updates an asset model and all of the assets that were created from the model. Each asset created from the model inherits the updated asset model's property and hierarchy definitions. For more information, see Updating assets and models in the AWS IoT SiteWise User Guide.  This operation overwrites the existing model with the provided model. To avoid deleting your asset model's properties or hierarchies, you must include their IDs and definitions in the updated asset model payload. For more information, see DescribeAssetModel. If you remove a property from an asset model or update a property's formula expression, AWS IoT SiteWise deletes all previous data for that property. If you remove a hierarchy definition from an asset model, AWS IoT SiteWise disassociates every asset associated with that hierarchy. You can't change the type or data type of an existing property. 
+   * Updates an asset model and all of the assets that were created from the model. Each asset created from the model inherits the updated asset model's property and hierarchy definitions. For more information, see Updating assets and models in the AWS IoT SiteWise User Guide.  This operation overwrites the existing model with the provided model. To avoid deleting your asset model's properties or hierarchies, you must include their IDs and definitions in the updated asset model payload. For more information, see DescribeAssetModel. If you remove a property from an asset model, AWS IoT SiteWise deletes all previous data for that property. If you remove a hierarchy definition from an asset model, AWS IoT SiteWise disassociates every asset associated with that hierarchy. You can't change the type or data type of an existing property. 
    */
   updateAssetModel(params: IoTSiteWise.Types.UpdateAssetModelRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.UpdateAssetModelResponse) => void): Request<IoTSiteWise.Types.UpdateAssetModelResponse, AWSError>;
   /**
-   * Updates an asset model and all of the assets that were created from the model. Each asset created from the model inherits the updated asset model's property and hierarchy definitions. For more information, see Updating assets and models in the AWS IoT SiteWise User Guide.  This operation overwrites the existing model with the provided model. To avoid deleting your asset model's properties or hierarchies, you must include their IDs and definitions in the updated asset model payload. For more information, see DescribeAssetModel. If you remove a property from an asset model or update a property's formula expression, AWS IoT SiteWise deletes all previous data for that property. If you remove a hierarchy definition from an asset model, AWS IoT SiteWise disassociates every asset associated with that hierarchy. You can't change the type or data type of an existing property. 
+   * Updates an asset model and all of the assets that were created from the model. Each asset created from the model inherits the updated asset model's property and hierarchy definitions. For more information, see Updating assets and models in the AWS IoT SiteWise User Guide.  This operation overwrites the existing model with the provided model. To avoid deleting your asset model's properties or hierarchies, you must include their IDs and definitions in the updated asset model payload. For more information, see DescribeAssetModel. If you remove a property from an asset model, AWS IoT SiteWise deletes all previous data for that property. If you remove a hierarchy definition from an asset model, AWS IoT SiteWise disassociates every asset associated with that hierarchy. You can't change the type or data type of an existing property. 
    */
   updateAssetModel(callback?: (err: AWSError, data: IoTSiteWise.Types.UpdateAssetModelResponse) => void): Request<IoTSiteWise.Types.UpdateAssetModelResponse, AWSError>;
   /**
@@ -502,7 +510,7 @@ declare namespace IoTSiteWise {
      */
     id: ID;
     /**
-     * The AWS SSO identity (a user or group).
+     * The identity (an AWS SSO user, an AWS SSO group, or an IAM user).
      */
     identity: Identity;
     /**
@@ -590,7 +598,7 @@ declare namespace IoTSiteWise {
      */
     id?: ID;
     /**
-     * The hierarchy name provided in the CreateAssetModel or UpdateAssetModel API.
+     * The hierarchy name provided in the CreateAssetModel or UpdateAssetModel API operation.
      */
     name: Name;
   }
@@ -602,7 +610,7 @@ declare namespace IoTSiteWise {
      */
     id?: ID;
     /**
-     * The name of the asset model hierarchy that you specify by using the CreateAssetModel or UpdateAssetModel API.
+     * The name of the asset model hierarchy that you specify by using the CreateAssetModel or UpdateAssetModel API operation.
      */
     name: Name;
     /**
@@ -612,7 +620,7 @@ declare namespace IoTSiteWise {
   }
   export interface AssetModelHierarchyDefinition {
     /**
-     * The name of the asset model hierarchy definition (as specified in CreateAssetModel or UpdateAssetModel).
+     * The name of the asset model hierarchy definition (as specified in the CreateAssetModel or UpdateAssetModel API operation).
      */
     name: Name;
     /**
@@ -854,6 +862,7 @@ declare namespace IoTSiteWise {
      */
     defaultValue?: DefaultValue;
   }
+  export type AuthMode = "IAM"|"SSO"|string;
   export type BatchAssociateProjectAssetsErrors = AssetErrorDetails[];
   export interface BatchAssociateProjectAssetsRequest {
     /**
@@ -941,11 +950,11 @@ declare namespace IoTSiteWise {
   export type ClientToken = string;
   export interface CreateAccessPolicyRequest {
     /**
-     * The identity for this access policy. Choose either a user or a group but not both.
+     * The identity for this access policy. Choose an AWS SSO user, an AWS SSO group, or an IAM user.
      */
     accessPolicyIdentity: Identity;
     /**
-     * The AWS IoT SiteWise Monitor resource for this access policy. Choose either portal or project but not both.
+     * The AWS IoT SiteWise Monitor resource for this access policy. Choose either a portal or a project.
      */
     accessPolicyResource: Resource;
     /**
@@ -1132,6 +1141,10 @@ declare namespace IoTSiteWise {
      * A list of key-value pairs that contain metadata for the portal. For more information, see Tagging your AWS IoT SiteWise resources in the AWS IoT SiteWise User Guide.
      */
     tags?: TagMap;
+    /**
+     * The service to use to authenticate users to the portal. Choose from the following options:    SSO – The portal uses AWS Single Sign-On to authenticate users and manage user permissions. Before you can create a portal that uses AWS SSO, you must enable AWS SSO. For more information, see Enabling AWS SSO in the AWS IoT SiteWise User Guide. This option is only available in AWS Regions other than the China Regions.    IAM – The portal uses AWS Identity and Access Management (IAM) to authenticate users and manage user permissions. IAM users must have the iotsitewise:CreatePresignedPortalUrl permission to sign in to the portal. This option is only available in the China Regions.   You can't change this value after you create a portal. Default: SSO 
+     */
+    portalAuthMode?: AuthMode;
   }
   export interface CreatePortalResponse {
     /**
@@ -1143,7 +1156,7 @@ declare namespace IoTSiteWise {
      */
     portalArn: ARN;
     /**
-     * The public URL for the AWS IoT SiteWise Monitor portal.
+     * The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that use AWS SSO for authentication. For portals that use IAM for authentication, you must use the CreatePresignedPortalUrl operation to create a URL that you can use to access the portal.
      */
     portalStartUrl: Url;
     /**
@@ -1151,9 +1164,25 @@ declare namespace IoTSiteWise {
      */
     portalStatus: PortalStatus;
     /**
-     * The associated AWS SSO application Id.
+     * The associated AWS SSO application ID, if the portal uses AWS SSO.
      */
     ssoApplicationId: SSOApplicationId;
+  }
+  export interface CreatePresignedPortalUrlRequest {
+    /**
+     * The ID of the portal to access.
+     */
+    portalId: ID;
+    /**
+     * The duration (in seconds) for which the session at the URL is valid. Default: 900 seconds (15 minutes)
+     */
+    sessionDurationSeconds?: SessionDurationSeconds;
+  }
+  export interface CreatePresignedPortalUrlResponse {
+    /**
+     * The pre-signed URL to the portal. The URL contains the portal ID and a session token that lets you access the portal. The URL has the following format.  https://&lt;portal-id&gt;.app.iotsitewise.aws/auth?token=&lt;encrypted-token&gt; 
+     */
+    presignedPortalUrl: Url;
   }
   export interface CreateProjectRequest {
     /**
@@ -1318,7 +1347,7 @@ declare namespace IoTSiteWise {
      */
     accessPolicyArn: ARN;
     /**
-     * The AWS SSO identity (user or group) to which this access policy applies.
+     * The identity (AWS SSO user, AWS SSO group, or IAM user) to which this access policy applies.
      */
     accessPolicyIdentity: Identity;
     /**
@@ -1590,11 +1619,11 @@ declare namespace IoTSiteWise {
      */
     portalDescription?: Description;
     /**
-     * The AWS SSO application generated client ID (used with AWS SSO APIs).
+     * The AWS SSO application generated client ID (used with AWS SSO APIs). AWS IoT SiteWise includes portalClientId for only portals that use AWS SSO to authenticate users.
      */
     portalClientId: PortalClientId;
     /**
-     * The public root URL for the AWS IoT AWS IoT SiteWise Monitor application portal.
+     * The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that use AWS SSO for authentication. For portals that use IAM for authentication, you must use the CreatePresignedPortalUrl operation to create a URL that you can use to access the portal.
      */
     portalStartUrl: Url;
     /**
@@ -1621,6 +1650,10 @@ declare namespace IoTSiteWise {
      * The ARN of the service role that allows the portal's users to access your AWS IoT SiteWise resources on your behalf. For more information, see Using service roles for AWS IoT SiteWise Monitor in the AWS IoT SiteWise User Guide.
      */
     roleArn?: ARN;
+    /**
+     * The service to use to authenticate users to the portal.
+     */
+    portalAuthMode?: AuthMode;
   }
   export interface DescribeProjectRequest {
     /**
@@ -1879,20 +1912,30 @@ declare namespace IoTSiteWise {
      */
     id: IdentityId;
   }
+  export interface IAMUserIdentity {
+    /**
+     * The ARN of the IAM user. IAM users must have the iotsitewise:CreatePresignedPortalUrl permission to sign in to the portal. For more information, see IAM ARNs in the IAM User Guide.  If you delete the IAM user, access policies that contain this identity include an empty arn. You can delete the access policy for the IAM user that no longer exists. 
+     */
+    arn: ARN;
+  }
   export type ID = string;
   export type IDs = ID[];
   export interface Identity {
     /**
-     * A user identity.
+     * An AWS SSO user identity.
      */
     user?: UserIdentity;
     /**
-     * A group identity.
+     * An AWS SSO group identity.
      */
     group?: GroupIdentity;
+    /**
+     * An IAM user identity.
+     */
+    iamUser?: IAMUserIdentity;
   }
   export type IdentityId = string;
-  export type IdentityType = "USER"|"GROUP"|string;
+  export type IdentityType = "USER"|"GROUP"|"IAM"|string;
   export interface Image {
     /**
      * The ID of an existing image. Specify this parameter to keep an existing image.
@@ -1925,11 +1968,11 @@ declare namespace IoTSiteWise {
   export type Interval = string;
   export interface ListAccessPoliciesRequest {
     /**
-     * The type of identity (user or group). This parameter is required if you specify identityId.
+     * The type of identity (AWS SSO user, AWS SSO group, or IAM user). This parameter is required if you specify identityId.
      */
     identityType?: IdentityType;
     /**
-     * The ID of the identity. This parameter is required if you specify identityType.
+     * The ID of the identity. This parameter is required if you specify USER or GROUP for identityType.
      */
     identityId?: IdentityId;
     /**
@@ -1940,6 +1983,10 @@ declare namespace IoTSiteWise {
      * The ID of the resource. This parameter is required if you specify resourceType.
      */
     resourceId?: ID;
+    /**
+     * The ARN of the IAM user. For more information, see IAM ARNs in the IAM User Guide. This parameter is required if you specify IAM for identityType.
+     */
+    iamArn?: ARN;
     /**
      * The token to be used for the next set of paginated results.
      */
@@ -2244,7 +2291,7 @@ declare namespace IoTSiteWise {
      */
     description?: Description;
     /**
-     * The public root URL for the AWS IoT AWS IoT SiteWise Monitor application portal.
+     * The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that use AWS SSO for authentication. For portals that use IAM for authentication, you must use the CreatePresignedPortalUrl operation to create a URL that you can use to access the portal.
      */
     startUrl: Url;
     /**
@@ -2403,6 +2450,7 @@ declare namespace IoTSiteWise {
   }
   export type ResourceType = "PORTAL"|"PROJECT"|string;
   export type SSOApplicationId = string;
+  export type SessionDurationSeconds = number;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagMap = {[key: string]: TagValue};
@@ -2468,11 +2516,11 @@ declare namespace IoTSiteWise {
      */
     accessPolicyId: ID;
     /**
-     * The identity for this access policy. Choose either a user or a group but not both.
+     * The identity for this access policy. Choose an AWS SSO user, an AWS SSO group, or an IAM user.
      */
     accessPolicyIdentity: Identity;
     /**
-     * The AWS IoT SiteWise Monitor resource for this access policy. Choose either portal or project but not both.
+     * The AWS IoT SiteWise Monitor resource for this access policy. Choose either a portal or a project.
      */
     accessPolicyResource: Resource;
     /**

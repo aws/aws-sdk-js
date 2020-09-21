@@ -183,7 +183,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Creates an access policy that grants the specified AWS Single Sign-On user or group access to the specified AWS IoT SiteWise Monitor portal or project resource.</p>",
+      "documentation": "<p>Creates an access policy that grants the specified identity (AWS SSO user, AWS SSO group, or IAM user) access to the specified AWS IoT SiteWise Monitor portal or project resource.</p>",
       "endpoint": {
         "hostPrefix": "monitor."
       }
@@ -370,7 +370,36 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Creates a portal, which can contain projects and dashboards. Before you can create a portal, you must enable AWS Single Sign-On. AWS IoT SiteWise Monitor uses AWS SSO to manage user permissions. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso\">Enabling AWS SSO</a> in the <i>AWS IoT SiteWise User Guide</i>.</p> <note> <p>Before you can sign in to a new portal, you must add at least one AWS SSO user or group to that portal. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/administer-portals.html#portal-change-admins\">Adding or removing portal administrators</a> in the <i>AWS IoT SiteWise User Guide</i>.</p> </note>",
+      "documentation": "<p>Creates a portal, which can contain projects and dashboards. AWS IoT SiteWise Monitor uses AWS SSO or IAM to authenticate portal users and manage user permissions.</p> <note> <p>Before you can sign in to a new portal, you must add at least one identity to that portal. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/administer-portals.html#portal-change-admins\">Adding or removing portal administrators</a> in the <i>AWS IoT SiteWise User Guide</i>.</p> </note>",
+      "endpoint": {
+        "hostPrefix": "monitor."
+      }
+    },
+    "CreatePresignedPortalUrl": {
+      "name": "CreatePresignedPortalUrl",
+      "http": {
+        "method": "GET",
+        "requestUri": "/portals/{portalId}/presigned-url",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "CreatePresignedPortalUrlRequest"
+      },
+      "output": {
+        "shape": "CreatePresignedPortalUrlResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Creates a pre-signed URL to a portal. Use this operation to create URLs to portals that use AWS Identity and Access Management (IAM) to authenticate users. An IAM user with access to a portal can call this API to get a URL to that portal. The URL contains a session token that lets the IAM user access the portal.</p>",
       "endpoint": {
         "hostPrefix": "monitor."
       }
@@ -437,7 +466,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Deletes an access policy that grants the specified AWS Single Sign-On identity access to the specified AWS IoT SiteWise Monitor resource. You can use this operation to revoke access to an AWS IoT SiteWise Monitor resource.</p>",
+      "documentation": "<p>Deletes an access policy that grants the specified identity access to the specified AWS IoT SiteWise Monitor resource. You can use this operation to revoke access to an AWS IoT SiteWise Monitor resource.</p>",
       "endpoint": {
         "hostPrefix": "monitor."
       }
@@ -567,7 +596,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Deletes a gateway from AWS IoT SiteWise. When you delete a gateway, some of the gateway's files remain in your gateway's file system. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-retention.html\">Data retention</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>",
+      "documentation": "<p>Deletes a gateway from AWS IoT SiteWise. When you delete a gateway, some of the gateway's files remain in your gateway's file system.</p>",
       "endpoint": {
         "hostPrefix": "edge."
       }
@@ -666,7 +695,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Describes an access policy, which specifies an AWS SSO user or group's access to an AWS IoT SiteWise Monitor portal or project.</p>",
+      "documentation": "<p>Describes an access policy, which specifies an identity's access to an AWS IoT SiteWise Monitor portal or project.</p>",
       "endpoint": {
         "hostPrefix": "monitor."
       }
@@ -1110,7 +1139,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Retrieves a paginated list of access policies for an AWS SSO identity (a user or group) or an AWS IoT SiteWise Monitor resource (a portal or project).</p>",
+      "documentation": "<p>Retrieves a paginated list of access policies for an identity (an AWS SSO user, an AWS SSO group, or an IAM user) or an AWS IoT SiteWise Monitor resource (a portal or project).</p>",
       "endpoint": {
         "hostPrefix": "monitor."
       }
@@ -1497,7 +1526,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Updates an existing access policy that specifies an AWS SSO user or group's access to an AWS IoT SiteWise Monitor portal or project resource.</p>",
+      "documentation": "<p>Updates an existing access policy that specifies an identity's access to an AWS IoT SiteWise Monitor portal or project resource.</p>",
       "endpoint": {
         "hostPrefix": "monitor."
       }
@@ -1576,7 +1605,7 @@
           "shape": "ConflictingOperationException"
         }
       ],
-      "documentation": "<p>Updates an asset model and all of the assets that were created from the model. Each asset created from the model inherits the updated asset model's property and hierarchy definitions. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html\">Updating assets and models</a> in the <i>AWS IoT SiteWise User Guide</i>.</p> <important> <p>This operation overwrites the existing model with the provided model. To avoid deleting your asset model's properties or hierarchies, you must include their IDs and definitions in the updated asset model payload. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetModel.html\">DescribeAssetModel</a>.</p> <p>If you remove a property from an asset model or update a property's formula expression, AWS IoT SiteWise deletes all previous data for that property. If you remove a hierarchy definition from an asset model, AWS IoT SiteWise disassociates every asset associated with that hierarchy. You can't change the type or data type of an existing property.</p> </important>",
+      "documentation": "<p>Updates an asset model and all of the assets that were created from the model. Each asset created from the model inherits the updated asset model's property and hierarchy definitions. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html\">Updating assets and models</a> in the <i>AWS IoT SiteWise User Guide</i>.</p> <important> <p>This operation overwrites the existing model with the provided model. To avoid deleting your asset model's properties or hierarchies, you must include their IDs and definitions in the updated asset model payload. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetModel.html\">DescribeAssetModel</a>.</p> <p>If you remove a property from an asset model, AWS IoT SiteWise deletes all previous data for that property. If you remove a hierarchy definition from an asset model, AWS IoT SiteWise disassociates every asset associated with that hierarchy. You can't change the type or data type of an existing property.</p> </important>",
       "endpoint": {
         "hostPrefix": "model."
       }
@@ -1809,7 +1838,7 @@
         },
         "identity": {
           "shape": "Identity",
-          "documentation": "<p>The AWS SSO identity (a user or group).</p>"
+          "documentation": "<p>The identity (an AWS SSO user, an AWS SSO group, or an IAM user).</p>"
         },
         "resource": {
           "shape": "Resource",
@@ -1828,7 +1857,7 @@
           "documentation": "<p>The date the access policy was last updated, in Unix epoch time.</p>"
         }
       },
-      "documentation": "<p>Contains an access policy that defines an AWS SSO identity's access to an AWS IoT SiteWise Monitor resource.</p>"
+      "documentation": "<p>Contains an access policy that defines an identity's access to an AWS IoT SiteWise Monitor resource.</p>"
     },
     "AggregateType": {
       "type": "string",
@@ -1964,7 +1993,7 @@
         },
         "name": {
           "shape": "Name",
-          "documentation": "<p>The hierarchy name provided in the <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModel.html\">CreateAssetModel</a> or <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html\">UpdateAssetModel</a> API.</p>"
+          "documentation": "<p>The hierarchy name provided in the <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModel.html\">CreateAssetModel</a> or <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html\">UpdateAssetModel</a> API operation.</p>"
         }
       },
       "documentation": "<p>Describes an asset hierarchy that contains a hierarchy's name and ID.</p>"
@@ -1994,7 +2023,7 @@
         },
         "name": {
           "shape": "Name",
-          "documentation": "<p>The name of the asset model hierarchy that you specify by using the <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModel.html\">CreateAssetModel</a> or <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html\">UpdateAssetModel</a> API.</p>"
+          "documentation": "<p>The name of the asset model hierarchy that you specify by using the <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModel.html\">CreateAssetModel</a> or <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html\">UpdateAssetModel</a> API operation.</p>"
         },
         "childAssetModelId": {
           "shape": "ID",
@@ -2012,7 +2041,7 @@
       "members": {
         "name": {
           "shape": "Name",
-          "documentation": "<p>The name of the asset model hierarchy definition (as specified in <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModel.html\">CreateAssetModel</a> or <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html\">UpdateAssetModel</a>).</p>"
+          "documentation": "<p>The name of the asset model hierarchy definition (as specified in the <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModel.html\">CreateAssetModel</a> or <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetModel.html\">UpdateAssetModel</a> API operation).</p>"
         },
         "childAssetModelId": {
           "shape": "ID",
@@ -2429,6 +2458,13 @@
       },
       "documentation": "<p>Contains an asset attribute property. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#attributes\">Attributes</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>"
     },
+    "AuthMode": {
+      "type": "string",
+      "enum": [
+        "IAM",
+        "SSO"
+      ]
+    },
     "BatchAssociateProjectAssetsErrors": {
       "type": "list",
       "member": {
@@ -2633,11 +2669,11 @@
       "members": {
         "accessPolicyIdentity": {
           "shape": "Identity",
-          "documentation": "<p>The identity for this access policy. Choose either a <code>user</code> or a <code>group</code> but not both.</p>"
+          "documentation": "<p>The identity for this access policy. Choose an AWS SSO user, an AWS SSO group, or an IAM user.</p>"
         },
         "accessPolicyResource": {
           "shape": "Resource",
-          "documentation": "<p>The AWS IoT SiteWise Monitor resource for this access policy. Choose either <code>portal</code> or <code>project</code> but not both.</p>"
+          "documentation": "<p>The AWS IoT SiteWise Monitor resource for this access policy. Choose either a portal or a project.</p>"
         },
         "accessPolicyPermission": {
           "shape": "Permission",
@@ -2900,6 +2936,10 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>A list of key-value pairs that contain metadata for the portal. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html\">Tagging your AWS IoT SiteWise resources</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>"
+        },
+        "portalAuthMode": {
+          "shape": "AuthMode",
+          "documentation": "<p>The service to use to authenticate users to the portal. Choose from the following options:</p> <ul> <li> <p> <code>SSO</code> – The portal uses AWS Single Sign-On to authenticate users and manage user permissions. Before you can create a portal that uses AWS SSO, you must enable AWS SSO. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso\">Enabling AWS SSO</a> in the <i>AWS IoT SiteWise User Guide</i>. This option is only available in AWS Regions other than the China Regions.</p> </li> <li> <p> <code>IAM</code> – The portal uses AWS Identity and Access Management (IAM) to authenticate users and manage user permissions. IAM users must have the <code>iotsitewise:CreatePresignedPortalUrl</code> permission to sign in to the portal. This option is only available in the China Regions.</p> </li> </ul> <p>You can't change this value after you create a portal.</p> <p>Default: <code>SSO</code> </p>"
         }
       }
     },
@@ -2923,7 +2963,7 @@
         },
         "portalStartUrl": {
           "shape": "Url",
-          "documentation": "<p>The public URL for the AWS IoT SiteWise Monitor portal.</p>"
+          "documentation": "<p>The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that use AWS SSO for authentication. For portals that use IAM for authentication, you must use the <a href=\"https://docs.aws.amazon.com/AWS IoT SiteWise API ReferenceAPI_CreatePresignedPortalUrl.html\">CreatePresignedPortalUrl</a> operation to create a URL that you can use to access the portal.</p>"
         },
         "portalStatus": {
           "shape": "PortalStatus",
@@ -2931,7 +2971,39 @@
         },
         "ssoApplicationId": {
           "shape": "SSOApplicationId",
-          "documentation": "<p>The associated AWS SSO application Id.</p>"
+          "documentation": "<p>The associated AWS SSO application ID, if the portal uses AWS SSO.</p>"
+        }
+      }
+    },
+    "CreatePresignedPortalUrlRequest": {
+      "type": "structure",
+      "required": [
+        "portalId"
+      ],
+      "members": {
+        "portalId": {
+          "shape": "ID",
+          "documentation": "<p>The ID of the portal to access.</p>",
+          "location": "uri",
+          "locationName": "portalId"
+        },
+        "sessionDurationSeconds": {
+          "shape": "SessionDurationSeconds",
+          "documentation": "<p>The duration (in seconds) for which the session at the URL is valid.</p> <p>Default: 900 seconds (15 minutes)</p>",
+          "location": "querystring",
+          "locationName": "sessionDurationSeconds"
+        }
+      }
+    },
+    "CreatePresignedPortalUrlResponse": {
+      "type": "structure",
+      "required": [
+        "presignedPortalUrl"
+      ],
+      "members": {
+        "presignedPortalUrl": {
+          "shape": "Url",
+          "documentation": "<p>The pre-signed URL to the portal. The URL contains the portal ID and a session token that lets you access the portal. The URL has the following format.</p> <p> <code>https://&lt;portal-id&gt;.app.iotsitewise.aws/auth?token=&lt;encrypted-token&gt;</code> </p>"
         }
       }
     },
@@ -3254,7 +3326,7 @@
         },
         "accessPolicyIdentity": {
           "shape": "Identity",
-          "documentation": "<p>The AWS SSO identity (user or group) to which this access policy applies.</p>"
+          "documentation": "<p>The identity (AWS SSO user, AWS SSO group, or IAM user) to which this access policy applies.</p>"
         },
         "accessPolicyResource": {
           "shape": "Resource",
@@ -3679,11 +3751,11 @@
         },
         "portalClientId": {
           "shape": "PortalClientId",
-          "documentation": "<p>The AWS SSO application generated client ID (used with AWS SSO APIs).</p>"
+          "documentation": "<p>The AWS SSO application generated client ID (used with AWS SSO APIs). AWS IoT SiteWise includes <code>portalClientId</code> for only portals that use AWS SSO to authenticate users.</p>"
         },
         "portalStartUrl": {
           "shape": "Url",
-          "documentation": "<p>The public root URL for the AWS IoT AWS IoT SiteWise Monitor application portal.</p>"
+          "documentation": "<p>The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that use AWS SSO for authentication. For portals that use IAM for authentication, you must use the <a href=\"https://docs.aws.amazon.com/AWS IoT SiteWise API ReferenceAPI_CreatePresignedPortalUrl.html\">CreatePresignedPortalUrl</a> operation to create a URL that you can use to access the portal.</p>"
         },
         "portalContactEmail": {
           "shape": "Email",
@@ -3708,6 +3780,10 @@
         "roleArn": {
           "shape": "ARN",
           "documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the service role that allows the portal's users to access your AWS IoT SiteWise resources on your behalf. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html\">Using service roles for AWS IoT SiteWise Monitor</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>"
+        },
+        "portalAuthMode": {
+          "shape": "AuthMode",
+          "documentation": "<p>The service to use to authenticate users to the portal.</p>"
         }
       }
     },
@@ -4172,6 +4248,19 @@
       },
       "documentation": "<p>Contains information for a group identity in an access policy.</p>"
     },
+    "IAMUserIdentity": {
+      "type": "structure",
+      "required": [
+        "arn"
+      ],
+      "members": {
+        "arn": {
+          "shape": "ARN",
+          "documentation": "<p>The ARN of the IAM user. IAM users must have the <code>iotsitewise:CreatePresignedPortalUrl</code> permission to sign in to the portal. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html\">IAM ARNs</a> in the <i>IAM User Guide</i>.</p> <note> <p>If you delete the IAM user, access policies that contain this identity include an empty <code>arn</code>. You can delete the access policy for the IAM user that no longer exists.</p> </note>"
+        }
+      },
+      "documentation": "<p>Contains information about an AWS Identity and Access Management (IAM) user.</p>"
+    },
     "ID": {
       "type": "string",
       "max": 36,
@@ -4191,14 +4280,18 @@
       "members": {
         "user": {
           "shape": "UserIdentity",
-          "documentation": "<p>A user identity.</p>"
+          "documentation": "<p>An AWS SSO user identity.</p>"
         },
         "group": {
           "shape": "GroupIdentity",
-          "documentation": "<p>A group identity.</p>"
+          "documentation": "<p>An AWS SSO group identity.</p>"
+        },
+        "iamUser": {
+          "shape": "IAMUserIdentity",
+          "documentation": "<p>An IAM user identity.</p>"
         }
       },
-      "documentation": "<p>Contains an AWS SSO identity ID for a user or group.</p> <note> <p>Currently, you can't use AWS APIs to retrieve AWS SSO identity IDs. You can find the AWS SSO identity IDs in the URL of user and group pages in the <a href=\"https://console.aws.amazon.com/singlesignon\">AWS SSO console</a>.</p> </note>"
+      "documentation": "<p>Contains an identity that can access an AWS IoT SiteWise Monitor resource.</p> <note> <p>Currently, you can't use AWS APIs to retrieve AWS SSO identity IDs. You can find the AWS SSO identity IDs in the URL of user and group pages in the <a href=\"https://console.aws.amazon.com/singlesignon\">AWS SSO console</a>.</p> </note>"
     },
     "IdentityId": {
       "type": "string",
@@ -4210,7 +4303,8 @@
       "type": "string",
       "enum": [
         "USER",
-        "GROUP"
+        "GROUP",
+        "IAM"
       ]
     },
     "Image": {
@@ -4284,13 +4378,13 @@
       "members": {
         "identityType": {
           "shape": "IdentityType",
-          "documentation": "<p>The type of identity (user or group). This parameter is required if you specify <code>identityId</code>.</p>",
+          "documentation": "<p>The type of identity (AWS SSO user, AWS SSO group, or IAM user). This parameter is required if you specify <code>identityId</code>.</p>",
           "location": "querystring",
           "locationName": "identityType"
         },
         "identityId": {
           "shape": "IdentityId",
-          "documentation": "<p>The ID of the identity. This parameter is required if you specify <code>identityType</code>.</p>",
+          "documentation": "<p>The ID of the identity. This parameter is required if you specify <code>USER</code> or <code>GROUP</code> for <code>identityType</code>.</p>",
           "location": "querystring",
           "locationName": "identityId"
         },
@@ -4305,6 +4399,12 @@
           "documentation": "<p>The ID of the resource. This parameter is required if you specify <code>resourceType</code>.</p>",
           "location": "querystring",
           "locationName": "resourceId"
+        },
+        "iamArn": {
+          "shape": "ARN",
+          "documentation": "<p>The ARN of the IAM user. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html\">IAM ARNs</a> in the <i>IAM User Guide</i>. This parameter is required if you specify <code>IAM</code> for <code>identityType</code>.</p>",
+          "location": "querystring",
+          "locationName": "iamArn"
         },
         "nextToken": {
           "shape": "NextToken",
@@ -4881,7 +4981,7 @@
         },
         "startUrl": {
           "shape": "Url",
-          "documentation": "<p>The public root URL for the AWS IoT AWS IoT SiteWise Monitor application portal.</p>"
+          "documentation": "<p>The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that use AWS SSO for authentication. For portals that use IAM for authentication, you must use the <a href=\"https://docs.aws.amazon.com/AWS IoT SiteWise API ReferenceAPI_CreatePresignedPortalUrl.html\">CreatePresignedPortalUrl</a> operation to create a URL that you can use to access the portal.</p>"
         },
         "creationDate": {
           "shape": "Timestamp",
@@ -5108,7 +5208,7 @@
           "documentation": "<p>The list of property values to upload. You can specify up to 10 <code>propertyValues</code> array elements. </p>"
         }
       },
-      "documentation": "<p>Contains a list of value updates for an asset property in the list of asset entries consumed by the <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchPutAssetPropertyValue.html\">BatchPutAssetPropertyValue</a> API.</p>"
+      "documentation": "<p>Contains a list of value updates for an asset property in the list of asset entries consumed by the <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchPutAssetPropertyValue.html\">BatchPutAssetPropertyValue</a> API operation.</p>"
     },
     "PutLoggingOptionsRequest": {
       "type": "structure",
@@ -5174,6 +5274,11 @@
       "max": 64,
       "min": 1,
       "pattern": "^[!-~]*"
+    },
+    "SessionDurationSeconds": {
+      "type": "integer",
+      "max": 43200,
+      "min": 900
     },
     "TagKey": {
       "type": "string",
@@ -5345,11 +5450,11 @@
         },
         "accessPolicyIdentity": {
           "shape": "Identity",
-          "documentation": "<p>The identity for this access policy. Choose either a <code>user</code> or a <code>group</code> but not both.</p>"
+          "documentation": "<p>The identity for this access policy. Choose an AWS SSO user, an AWS SSO group, or an IAM user.</p>"
         },
         "accessPolicyResource": {
           "shape": "Resource",
-          "documentation": "<p>The AWS IoT SiteWise Monitor resource for this access policy. Choose either <code>portal</code> or <code>project</code> but not both.</p>"
+          "documentation": "<p>The AWS IoT SiteWise Monitor resource for this access policy. Choose either a portal or a project.</p>"
         },
         "accessPolicyPermission": {
           "shape": "Permission",
