@@ -462,6 +462,18 @@ declare class Comprehend extends Service {
 }
 declare namespace Comprehend {
   export type AnyLengthString = string;
+  export type AttributeNamesList = AttributeNamesListItem[];
+  export type AttributeNamesListItem = string;
+  export interface AugmentedManifestsListItem {
+    /**
+     * The Amazon S3 location of the augmented manifest file.
+     */
+    S3Uri: S3Uri;
+    /**
+     * The JSON attribute that contains the annotations for your training documents. The number of attribute names that you specify depends on whether your augmented manifest file is the output of a single labeling job or a chained labeling job. If your file is the output of a single labeling job, specify the LabelAttributeName key that was used when the job was created in Ground Truth. If your file is the output of a chained labeling job, specify the LabelAttributeName key for one or more jobs in the chain. Each LabelAttributeName key provides the annotations from an individual job.
+     */
+    AttributeNames: AttributeNamesList;
+  }
   export interface BatchDetectDominantLanguageItemResult {
     /**
      * The zero-based index of the document in the input list.
@@ -1144,10 +1156,12 @@ declare namespace Comprehend {
   }
   export type DocumentClassificationJobPropertiesList = DocumentClassificationJobProperties[];
   export type DocumentClassifierArn = string;
+  export type DocumentClassifierAugmentedManifestsList = AugmentedManifestsListItem[];
+  export type DocumentClassifierDataFormat = "COMPREHEND_CSV"|"AUGMENTED_MANIFEST"|string;
   export type DocumentClassifierEndpointArn = string;
   export interface DocumentClassifierFilter {
     /**
-     * Filters the list of classifiers based on status. 
+     * Filters the list of classifiers based on status.
      */
     Status?: ModelStatus;
     /**
@@ -1161,13 +1175,21 @@ declare namespace Comprehend {
   }
   export interface DocumentClassifierInputDataConfig {
     /**
-     * The Amazon S3 URI for the input data. The S3 bucket must be in the same region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of input files. For example, if you use the URI S3://bucketName/prefix, if the prefix is a single file, Amazon Comprehend uses that file as input. If more than one file begins with the prefix, Amazon Comprehend uses all of them as input.
+     * The format of your training data:    COMPREHEND_CSV: A two-column CSV file, where labels are provided in the first column, and documents are provided in the second. If you use this value, you must provide the S3Uri parameter in your request.    AUGMENTED_MANIFEST: A labeled dataset that is produced by Amazon SageMaker Ground Truth. This file is in JSON lines format. Each line is a complete JSON object that contains a training document and its associated labels.  If you use this value, you must provide the AugmentedManifests parameter in your request.   If you don't specify a value, Amazon Comprehend uses COMPREHEND_CSV as the default.
      */
-    S3Uri: S3Uri;
+    DataFormat?: DocumentClassifierDataFormat;
+    /**
+     * The Amazon S3 URI for the input data. The S3 bucket must be in the same region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of input files. For example, if you use the URI S3://bucketName/prefix, if the prefix is a single file, Amazon Comprehend uses that file as input. If more than one file begins with the prefix, Amazon Comprehend uses all of them as input. This parameter is required if you set DataFormat to COMPREHEND_CSV.
+     */
+    S3Uri?: S3Uri;
     /**
      * Indicates the delimiter used to separate each label for training a multi-label classifier. The default delimiter between labels is a pipe (|). You can use a different character as a delimiter (if it's an allowed character) by specifying it under Delimiter for labels. If the training documents use a delimiter other than the default or the delimiter you specify, the labels on that line will be combined to make a single unique label, such as LABELLABELLABEL.
      */
     LabelDelimiter?: LabelDelimiter;
+    /**
+     * A list of augmented manifest files that provide training data for your custom model. An augmented manifest file is a labeled dataset that is produced by Amazon SageMaker Ground Truth. This parameter is required if you set DataFormat to AUGMENTED_MANIFEST.
+     */
+    AugmentedManifests?: DocumentClassifierAugmentedManifestsList;
   }
   export type DocumentClassifierMode = "MULTI_CLASS"|"MULTI_LABEL"|string;
   export interface DocumentClassifierOutputDataConfig {
@@ -1485,6 +1507,8 @@ declare namespace Comprehend {
     S3Uri: S3Uri;
   }
   export type EntityRecognizerArn = string;
+  export type EntityRecognizerAugmentedManifestsList = AugmentedManifestsListItem[];
+  export type EntityRecognizerDataFormat = "COMPREHEND_CSV"|"AUGMENTED_MANIFEST"|string;
   export interface EntityRecognizerDocuments {
     /**
      *  Specifies the Amazon S3 location where the training documents for an entity recognizer are located. The URI must be in the same region as the API endpoint that you are calling.
@@ -1528,21 +1552,29 @@ declare namespace Comprehend {
   }
   export interface EntityRecognizerInputDataConfig {
     /**
-     * The entity types in the input data for an entity recognizer. A maximum of 25 entity types can be used at one time to train an entity recognizer.
+     * The format of your training data:    COMPREHEND_CSV: A CSV file that supplements your training documents. The CSV file contains information about the custom entities that your trained model will detect. The required format of the file depends on whether you are providing annotations or an entity list. If you use this value, you must provide your CSV file by using either the Annotations or EntityList parameters. You must provide your training documents by using the Documents parameter.    AUGMENTED_MANIFEST: A labeled dataset that is produced by Amazon SageMaker Ground Truth. This file is in JSON lines format. Each line is a complete JSON object that contains a training document and its labels. Each label annotates a named entity in the training document.  If you use this value, you must provide the AugmentedManifests parameter in your request.   If you don't specify a value, Amazon Comprehend uses COMPREHEND_CSV as the default.
+     */
+    DataFormat?: EntityRecognizerDataFormat;
+    /**
+     * The entity types in the labeled training data that Amazon Comprehend uses to train the custom entity recognizer. Any entity types that you don't specify are ignored. A maximum of 25 entity types can be used at one time to train an entity recognizer. Entity types must not contain the following invalid characters: \n (line break), \\n (escaped line break), \r (carriage return), \\r (escaped carriage return), \t (tab), \\t (escaped tab), space, and , (comma). 
      */
     EntityTypes: EntityTypesList;
     /**
-     * S3 location of the documents folder for an entity recognizer
+     * The S3 location of the folder that contains the training documents for your custom entity recognizer. This parameter is required if you set DataFormat to COMPREHEND_CSV.
      */
-    Documents: EntityRecognizerDocuments;
+    Documents?: EntityRecognizerDocuments;
     /**
-     * S3 location of the annotations file for an entity recognizer.
+     * The S3 location of the CSV file that annotates your training documents.
      */
     Annotations?: EntityRecognizerAnnotations;
     /**
-     * S3 location of the entity list for an entity recognizer.
+     * The S3 location of the CSV file that has the entity list for your custom entity recognizer.
      */
     EntityList?: EntityRecognizerEntityList;
+    /**
+     * A list of augmented manifest files that provide training data for your custom model. An augmented manifest file is a labeled dataset that is produced by Amazon SageMaker Ground Truth. This parameter is required if you set DataFormat to AUGMENTED_MANIFEST.
+     */
+    AugmentedManifests?: EntityRecognizerAugmentedManifestsList;
   }
   export interface EntityRecognizerMetadata {
     /**
@@ -1651,7 +1683,7 @@ declare namespace Comprehend {
   export type EntityTypesList = EntityTypesListItem[];
   export interface EntityTypesListItem {
     /**
-     * Entity type of an item on an entity type list.
+     * An entity type within a labeled training dataset that Amazon Comprehend uses to train a custom entity recognizer. Entity types must not contain the following invalid characters: \n (line break), \\n (escaped line break, \r (carriage return), \\r (escaped carriage return), \t (tab), \\t (escaped tab), space, and , (comma).
      */
     Type: EntityTypeName;
   }

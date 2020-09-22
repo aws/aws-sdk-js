@@ -1,0 +1,22 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Authentication",
+        "description": "assume-role credentials ignore profile region"
+    },
+    {
+        "type": "feature",
+        "category": "Comprehend",
+        "description": "Amazon Comprehend integrates with Amazon SageMaker GroundTruth to allow its customers to annotate their datasets using GroundTruth and train their models using Comprehend Custom APIs."
+    },
+    {
+        "type": "feature",
+        "category": "LexModelBuildingService",
+        "description": "Lex now supports es-US locales"
+    },
+    {
+        "type": "feature",
+        "category": "WorkMail",
+        "description": "Adding support for Mailbox Export APIs"
+    }
+]

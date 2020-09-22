@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.757.0',
+	  VERSION: '2.758.0',
 
 	  /**
 	   * @api private
@@ -1145,12 +1145,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	        (process.env[util.configOptInEnv] && process.env[util.sharedCredentialsFileEnv])
 	    });
 	    for (var i = 0, profileNames = Object.keys(profilesFromConfig); i < profileNames.length; i++) {
-	      profiles[profileNames[i]] = profilesFromConfig[profileNames[i]];
+	      profiles[profileNames[i]] = objectAssign(profiles[profileNames[i]] || {}, profilesFromConfig[profileNames[i]]);
 	    }
 	    for (var i = 0, profileNames = Object.keys(profilesFromCreds); i < profileNames.length; i++) {
-	      profiles[profileNames[i]] = profilesFromCreds[profileNames[i]];
+	      profiles[profileNames[i]] = objectAssign(profiles[profileNames[i]] || {}, profilesFromCreds[profileNames[i]]);
 	    }
 	    return profiles;
+
+	    /**
+	     * Roughly the semantics of `Object.assign(target, source)`
+	     */
+	    function objectAssign(target, source) {
+	      for (var i = 0, keys = Object.keys(source); i < keys.length; i++) {
+	        target[keys[i]] = source[keys[i]];
+	      }
+	      return target;
+	    }
 	  },
 
 	  /**

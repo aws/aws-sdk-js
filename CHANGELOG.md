@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.757.0-->
+<!--LATEST=2.758.0-->
 <!--ENTRYINSERT-->
+
+## 2.758.0
+* bugfix: Authentication: assume-role credentials ignore profile region
+* feature: Comprehend: Amazon Comprehend integrates with Amazon SageMaker GroundTruth to allow its customers to annotate their datasets using GroundTruth and train their models using Comprehend Custom APIs.
+* feature: LexModelBuildingService: Lex now supports es-US locales
+* feature: WorkMail: Adding support for Mailbox Export APIs
 
 ## 2.757.0
 * feature: CloudWatchEvents: Add support for Redshift Data API Targets

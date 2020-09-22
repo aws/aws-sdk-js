@@ -574,7 +574,7 @@ declare namespace LexModelBuildingService {
      */
     childDirected?: Boolean;
     /**
-     * Indicates whether the bot uses accuracy improvements. true indicates that the bot is using the imoprovements, otherwise, false.
+     * Indicates whether the bot uses accuracy improvements. true indicates that the bot is using the improvements, otherwise, false.
      */
     enableModelImprovements?: Boolean;
     /**
@@ -654,7 +654,7 @@ declare namespace LexModelBuildingService {
      */
     checksum?: String;
     /**
-     * Configuration information, if any, for connectin an Amazon Kendra index with the AMAZON.KendraSearchIntent intent.
+     * Configuration information, if any, for connecting an Amazon Kendra index with the AMAZON.KendraSearchIntent intent.
      */
     kendraConfiguration?: KendraConfiguration;
   }
@@ -1009,7 +1009,7 @@ declare namespace LexModelBuildingService {
      */
     intents?: IntentList;
     /**
-     * Indicates whether the bot uses accuracy improvements. true indicates that the bot is using the imoprovements, otherwise, false.
+     * Indicates whether the bot uses accuracy improvements. true indicates that the bot is using the improvements, otherwise, false.
      */
     enableModelImprovements?: Boolean;
     /**
@@ -1595,7 +1595,7 @@ declare namespace LexModelBuildingService {
     tags?: TagList;
   }
   export type ListsOfUtterances = UtteranceList[];
-  export type Locale = "en-US"|"en-GB"|"de-DE"|"en-AU"|string;
+  export type Locale = "de-DE"|"en-AU"|"en-GB"|"en-US"|"es-US"|string;
   export type LocaleList = Locale[];
   export interface LogSettingsRequest {
     /**
@@ -1827,7 +1827,7 @@ declare namespace LexModelBuildingService {
      */
     intents?: IntentList;
     /**
-     * Indicates whether the bot uses accuracy improvements. true indicates that the bot is using the imoprovements, otherwise, false.
+     * Indicates whether the bot uses accuracy improvements. true indicates that the bot is using the improvements, otherwise, false.
      */
     enableModelImprovements?: Boolean;
     /**

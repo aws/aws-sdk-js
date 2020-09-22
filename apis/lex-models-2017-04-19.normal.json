@@ -1597,7 +1597,7 @@
         },
         "enableModelImprovements": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether the bot uses accuracy improvements. <code>true</code> indicates that the bot is using the imoprovements, otherwise, <code>false</code>.</p>"
+          "documentation": "<p>Indicates whether the bot uses accuracy improvements. <code>true</code> indicates that the bot is using the improvements, otherwise, <code>false</code>.</p>"
         },
         "detectSentiment": {
           "shape": "Boolean",
@@ -1688,7 +1688,7 @@
         },
         "kendraConfiguration": {
           "shape": "KendraConfiguration",
-          "documentation": "<p>Configuration information, if any, for connectin an Amazon Kendra index with the <code>AMAZON.KendraSearchIntent</code> intent.</p>"
+          "documentation": "<p>Configuration information, if any, for connecting an Amazon Kendra index with the <code>AMAZON.KendraSearchIntent</code> intent.</p>"
         }
       }
     },
@@ -2292,7 +2292,7 @@
         },
         "enableModelImprovements": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether the bot uses accuracy improvements. <code>true</code> indicates that the bot is using the imoprovements, otherwise, <code>false</code>.</p>"
+          "documentation": "<p>Indicates whether the bot uses accuracy improvements. <code>true</code> indicates that the bot is using the improvements, otherwise, <code>false</code>.</p>"
         },
         "nluIntentConfidenceThreshold": {
           "shape": "ConfidenceThreshold",
@@ -3172,10 +3172,11 @@
     "Locale": {
       "type": "string",
       "enum": [
-        "en-US",
-        "en-GB",
         "de-DE",
-        "en-AU"
+        "en-AU",
+        "en-GB",
+        "en-US",
+        "es-US"
       ]
     },
     "LocaleList": {
@@ -3541,7 +3542,7 @@
         },
         "enableModelImprovements": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether the bot uses accuracy improvements. <code>true</code> indicates that the bot is using the imoprovements, otherwise, <code>false</code>.</p>"
+          "documentation": "<p>Indicates whether the bot uses accuracy improvements. <code>true</code> indicates that the bot is using the improvements, otherwise, <code>false</code>.</p>"
         },
         "nluIntentConfidenceThreshold": {
           "shape": "ConfidenceThreshold",

@@ -1655,6 +1655,36 @@
     "AnyLengthString": {
       "type": "string"
     },
+    "AttributeNamesList": {
+      "type": "list",
+      "member": {
+        "shape": "AttributeNamesListItem"
+      }
+    },
+    "AttributeNamesListItem": {
+      "type": "string",
+      "max": 63,
+      "min": 1,
+      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+    },
+    "AugmentedManifestsListItem": {
+      "type": "structure",
+      "required": [
+        "S3Uri",
+        "AttributeNames"
+      ],
+      "members": {
+        "S3Uri": {
+          "shape": "S3Uri",
+          "documentation": "<p>The Amazon S3 location of the augmented manifest file.</p>"
+        },
+        "AttributeNames": {
+          "shape": "AttributeNamesList",
+          "documentation": "<p>The JSON attribute that contains the annotations for your training documents. The number of attribute names that you specify depends on whether your augmented manifest file is the output of a single labeling job or a chained labeling job.</p> <p>If your file is the output of a single labeling job, specify the LabelAttributeName key that was used when the job was created in Ground Truth.</p> <p>If your file is the output of a chained labeling job, specify the LabelAttributeName key for one or more jobs in the chain. Each LabelAttributeName key provides the annotations from an individual job.</p>"
+        }
+      },
+      "documentation": "<p>An augmented manifest file that provides training data for your custom model. An augmented manifest file is a labeled dataset that is produced by Amazon SageMaker Ground Truth.</p>"
+    },
     "BatchDetectDominantLanguageItemResult": {
       "type": "structure",
       "members": {
@@ -2733,6 +2763,19 @@
       "max": 256,
       "pattern": "arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:document-classifier/[a-zA-Z0-9](-*[a-zA-Z0-9])*"
     },
+    "DocumentClassifierAugmentedManifestsList": {
+      "type": "list",
+      "member": {
+        "shape": "AugmentedManifestsListItem"
+      }
+    },
+    "DocumentClassifierDataFormat": {
+      "type": "string",
+      "enum": [
+        "COMPREHEND_CSV",
+        "AUGMENTED_MANIFEST"
+      ]
+    },
     "DocumentClassifierEndpointArn": {
       "type": "string",
       "max": 256,
@@ -2743,7 +2786,7 @@
       "members": {
         "Status": {
           "shape": "ModelStatus",
-          "documentation": "<p>Filters the list of classifiers based on status. </p>"
+          "documentation": "<p>Filters the list of classifiers based on status.</p>"
         },
         "SubmitTimeBefore": {
           "shape": "Timestamp",
@@ -2758,17 +2801,22 @@
     },
     "DocumentClassifierInputDataConfig": {
       "type": "structure",
-      "required": [
-        "S3Uri"
-      ],
       "members": {
+        "DataFormat": {
+          "shape": "DocumentClassifierDataFormat",
+          "documentation": "<p>The format of your training data:</p> <ul> <li> <p> <code>COMPREHEND_CSV</code>: A two-column CSV file, where labels are provided in the first column, and documents are provided in the second. If you use this value, you must provide the <code>S3Uri</code> parameter in your request.</p> </li> <li> <p> <code>AUGMENTED_MANIFEST</code>: A labeled dataset that is produced by Amazon SageMaker Ground Truth. This file is in JSON lines format. Each line is a complete JSON object that contains a training document and its associated labels. </p> <p>If you use this value, you must provide the <code>AugmentedManifests</code> parameter in your request.</p> </li> </ul> <p>If you don't specify a value, Amazon Comprehend uses <code>COMPREHEND_CSV</code> as the default.</p>"
+        },
         "S3Uri": {
           "shape": "S3Uri",
-          "documentation": "<p>The Amazon S3 URI for the input data. The S3 bucket must be in the same region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of input files.</p> <p>For example, if you use the URI <code>S3://bucketName/prefix</code>, if the prefix is a single file, Amazon Comprehend uses that file as input. If more than one file begins with the prefix, Amazon Comprehend uses all of them as input.</p>"
+          "documentation": "<p>The Amazon S3 URI for the input data. The S3 bucket must be in the same region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of input files.</p> <p>For example, if you use the URI <code>S3://bucketName/prefix</code>, if the prefix is a single file, Amazon Comprehend uses that file as input. If more than one file begins with the prefix, Amazon Comprehend uses all of them as input.</p> <p>This parameter is required if you set <code>DataFormat</code> to <code>COMPREHEND_CSV</code>.</p>"
         },
         "LabelDelimiter": {
           "shape": "LabelDelimiter",
           "documentation": "<p>Indicates the delimiter used to separate each label for training a multi-label classifier. The default delimiter between labels is a pipe (|). You can use a different character as a delimiter (if it's an allowed character) by specifying it under Delimiter for labels. If the training documents use a delimiter other than the default or the delimiter you specify, the labels on that line will be combined to make a single unique label, such as LABELLABELLABEL.</p>"
+        },
+        "AugmentedManifests": {
+          "shape": "DocumentClassifierAugmentedManifestsList",
+          "documentation": "<p>A list of augmented manifest files that provide training data for your custom model. An augmented manifest file is a labeled dataset that is produced by Amazon SageMaker Ground Truth.</p> <p>This parameter is required if you set <code>DataFormat</code> to <code>AUGMENTED_MANIFEST</code>.</p>"
         }
       },
       "documentation": "<p>The input properties for training a document classifier. </p> <p>For more information on how the input file is formatted, see <a>how-document-classification-training-data</a>. </p>"
@@ -3181,6 +3229,19 @@
       "max": 256,
       "pattern": "arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:entity-recognizer/[a-zA-Z0-9](-*[a-zA-Z0-9])*"
     },
+    "EntityRecognizerAugmentedManifestsList": {
+      "type": "list",
+      "member": {
+        "shape": "AugmentedManifestsListItem"
+      }
+    },
+    "EntityRecognizerDataFormat": {
+      "type": "string",
+      "enum": [
+        "COMPREHEND_CSV",
+        "AUGMENTED_MANIFEST"
+      ]
+    },
     "EntityRecognizerDocuments": {
       "type": "structure",
       "required": [
@@ -3251,25 +3312,32 @@
     "EntityRecognizerInputDataConfig": {
       "type": "structure",
       "required": [
-        "EntityTypes",
-        "Documents"
+        "EntityTypes"
       ],
       "members": {
+        "DataFormat": {
+          "shape": "EntityRecognizerDataFormat",
+          "documentation": "<p>The format of your training data:</p> <ul> <li> <p> <code>COMPREHEND_CSV</code>: A CSV file that supplements your training documents. The CSV file contains information about the custom entities that your trained model will detect. The required format of the file depends on whether you are providing annotations or an entity list.</p> <p>If you use this value, you must provide your CSV file by using either the <code>Annotations</code> or <code>EntityList</code> parameters. You must provide your training documents by using the <code>Documents</code> parameter.</p> </li> <li> <p> <code>AUGMENTED_MANIFEST</code>: A labeled dataset that is produced by Amazon SageMaker Ground Truth. This file is in JSON lines format. Each line is a complete JSON object that contains a training document and its labels. Each label annotates a named entity in the training document. </p> <p>If you use this value, you must provide the <code>AugmentedManifests</code> parameter in your request.</p> </li> </ul> <p>If you don't specify a value, Amazon Comprehend uses <code>COMPREHEND_CSV</code> as the default.</p>"
+        },
         "EntityTypes": {
           "shape": "EntityTypesList",
-          "documentation": "<p>The entity types in the input data for an entity recognizer. A maximum of 25 entity types can be used at one time to train an entity recognizer.</p>"
+          "documentation": "<p>The entity types in the labeled training data that Amazon Comprehend uses to train the custom entity recognizer. Any entity types that you don't specify are ignored.</p> <p>A maximum of 25 entity types can be used at one time to train an entity recognizer. Entity types must not contain the following invalid characters: \\n (line break), \\\\n (escaped line break), \\r (carriage return), \\\\r (escaped carriage return), \\t (tab), \\\\t (escaped tab), space, and , (comma). </p>"
         },
         "Documents": {
           "shape": "EntityRecognizerDocuments",
-          "documentation": "<p>S3 location of the documents folder for an entity recognizer</p>"
+          "documentation": "<p>The S3 location of the folder that contains the training documents for your custom entity recognizer.</p> <p>This parameter is required if you set <code>DataFormat</code> to <code>COMPREHEND_CSV</code>.</p>"
         },
         "Annotations": {
           "shape": "EntityRecognizerAnnotations",
-          "documentation": "<p>S3 location of the annotations file for an entity recognizer.</p>"
+          "documentation": "<p>The S3 location of the CSV file that annotates your training documents.</p>"
         },
         "EntityList": {
           "shape": "EntityRecognizerEntityList",
-          "documentation": "<p>S3 location of the entity list for an entity recognizer.</p>"
+          "documentation": "<p>The S3 location of the CSV file that has the entity list for your custom entity recognizer.</p>"
+        },
+        "AugmentedManifests": {
+          "shape": "EntityRecognizerAugmentedManifestsList",
+          "documentation": "<p>A list of augmented manifest files that provide training data for your custom model. An augmented manifest file is a labeled dataset that is produced by Amazon SageMaker Ground Truth.</p> <p>This parameter is required if you set <code>DataFormat</code> to <code>AUGMENTED_MANIFEST</code>.</p>"
         }
       },
       "documentation": "<p>Specifies the format and location of the input data.</p>"
@@ -3402,7 +3470,7 @@
     "EntityTypeName": {
       "type": "string",
       "max": 64,
-      "pattern": "[_A-Z0-9]+"
+      "pattern": "^(?:(?!\\\\n+|\\\\t+|\\\\r+|[\\r\\t\\n\\s,]).)+$"
     },
     "EntityTypesEvaluationMetrics": {
       "type": "structure",
@@ -3436,10 +3504,10 @@
       "members": {
         "Type": {
           "shape": "EntityTypeName",
-          "documentation": "<p>Entity type of an item on an entity type list.</p>"
+          "documentation": "<p>An entity type within a labeled training dataset that Amazon Comprehend uses to train a custom entity recognizer.</p> <p>Entity types must not contain the following invalid characters: \\n (line break), \\\\n (escaped line break, \\r (carriage return), \\\\r (escaped carriage return), \\t (tab), \\\\t (escaped tab), space, and , (comma).</p>"
         }
       },
-      "documentation": "<p>Information about an individual item on a list of entity types.</p>"
+      "documentation": "<p>An entity type within a labeled training dataset that Amazon Comprehend uses to train a custom entity recognizer.</p>"
     },
     "Float": {
       "type": "float"

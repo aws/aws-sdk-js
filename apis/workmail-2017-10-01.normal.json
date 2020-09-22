@@ -85,6 +85,35 @@
       "documentation": "<p>Adds a member (user or group) to the group's set.</p>",
       "idempotent": true
     },
+    "CancelMailboxExportJob": {
+      "name": "CancelMailboxExportJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CancelMailboxExportJobRequest"
+      },
+      "output": {
+        "shape": "CancelMailboxExportJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        }
+      ],
+      "documentation": "<p>Cancels a mailbox export job.</p> <note> <p>If the mailbox export job is near completion, it might not be possible to cancel it.</p> </note>",
+      "idempotent": true
+    },
     "CreateAlias": {
       "name": "CreateAlias",
       "http": {
@@ -530,6 +559,35 @@
       "documentation": "<p>Returns the data available for the group.</p>",
       "idempotent": true
     },
+    "DescribeMailboxExportJob": {
+      "name": "DescribeMailboxExportJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeMailboxExportJobRequest"
+      },
+      "output": {
+        "shape": "DescribeMailboxExportJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        }
+      ],
+      "documentation": "<p>Describes the current status of a mailbox export job.</p>",
+      "idempotent": true
+    },
     "DescribeOrganization": {
       "name": "DescribeOrganization",
       "http": {
@@ -882,6 +940,32 @@
       "documentation": "<p>Returns summaries of the organization's groups.</p>",
       "idempotent": true
     },
+    "ListMailboxExportJobs": {
+      "name": "ListMailboxExportJobs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListMailboxExportJobsRequest"
+      },
+      "output": {
+        "shape": "ListMailboxExportJobsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        }
+      ],
+      "documentation": "<p>Lists the mailbox export jobs started for the specified organization within the last seven days.</p>",
+      "idempotent": true
+    },
     "ListMailboxPermissions": {
       "name": "ListMailboxPermissions",
       "http": {
@@ -1218,6 +1302,38 @@
         }
       ],
       "documentation": "<p>Allows the administrator to reset the password for a user.</p>",
+      "idempotent": true
+    },
+    "StartMailboxExportJob": {
+      "name": "StartMailboxExportJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartMailboxExportJobRequest"
+      },
+      "output": {
+        "shape": "StartMailboxExportJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p>Starts a mailbox export job to export MIME-format email messages and calendar items from the specified mailbox to the specified Amazon Simple Storage Service (Amazon S3) bucket. For more information, see <a href=\"https://docs.aws.amazon.com/workmail/latest/adminguide/mail-export.html\">Exporting mailbox content</a> in the <i>Amazon WorkMail Administrator Guide</i>.</p>",
       "idempotent": true
     },
     "TagResource": {
@@ -1581,6 +1697,33 @@
     "Boolean": {
       "type": "boolean"
     },
+    "CancelMailboxExportJobRequest": {
+      "type": "structure",
+      "required": [
+        "ClientToken",
+        "JobId",
+        "OrganizationId"
+      ],
+      "members": {
+        "ClientToken": {
+          "shape": "IdempotencyClientToken",
+          "documentation": "<p>The idempotency token for the client request.</p>",
+          "idempotencyToken": true
+        },
+        "JobId": {
+          "shape": "MailboxExportJobId",
+          "documentation": "<p>The job ID.</p>"
+        },
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The organization ID.</p>"
+        }
+      }
+    },
+    "CancelMailboxExportJobResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "CreateAliasRequest": {
       "type": "structure",
       "required": [
@@ -1942,6 +2085,76 @@
         }
       }
     },
+    "DescribeMailboxExportJobRequest": {
+      "type": "structure",
+      "required": [
+        "JobId",
+        "OrganizationId"
+      ],
+      "members": {
+        "JobId": {
+          "shape": "MailboxExportJobId",
+          "documentation": "<p>The mailbox export job ID.</p>"
+        },
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The organization ID.</p>"
+        }
+      }
+    },
+    "DescribeMailboxExportJobResponse": {
+      "type": "structure",
+      "members": {
+        "EntityId": {
+          "shape": "WorkMailIdentifier",
+          "documentation": "<p>The identifier of the user or resource associated with the mailbox.</p>"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>The mailbox export job description.</p>"
+        },
+        "RoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The ARN of the AWS Identity and Access Management (IAM) role that grants write permission to the Amazon Simple Storage Service (Amazon S3) bucket.</p>"
+        },
+        "KmsKeyArn": {
+          "shape": "KmsKeyArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the symmetric AWS Key Management Service (AWS KMS) key that encrypts the exported mailbox content.</p>"
+        },
+        "S3BucketName": {
+          "shape": "S3BucketName",
+          "documentation": "<p>The name of the S3 bucket.</p>"
+        },
+        "S3Prefix": {
+          "shape": "S3ObjectKey",
+          "documentation": "<p>The S3 bucket prefix.</p>"
+        },
+        "S3Path": {
+          "shape": "S3ObjectKey",
+          "documentation": "<p>The path to the S3 bucket and file that the mailbox export job is exporting to.</p>"
+        },
+        "EstimatedProgress": {
+          "shape": "Percentage",
+          "documentation": "<p>The estimated progress of the mailbox export job, in percentage points.</p>"
+        },
+        "State": {
+          "shape": "MailboxExportJobState",
+          "documentation": "<p>The state of the mailbox export job.</p>"
+        },
+        "ErrorInfo": {
+          "shape": "MailboxExportErrorInfo",
+          "documentation": "<p>Error information for failed mailbox export jobs.</p>"
+        },
+        "StartTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The mailbox export job start timestamp.</p>"
+        },
+        "EndTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The mailbox export job end timestamp.</p>"
+        }
+      }
+    },
     "DescribeOrganizationRequest": {
       "type": "structure",
       "required": [
@@ -2102,6 +2315,12 @@
           "documentation": "<p>The date and time at which the user was disabled for Amazon WorkMail usage, in UNIX epoch time format.</p>"
         }
       }
+    },
+    "Description": {
+      "type": "string",
+      "max": 1023,
+      "min": 0,
+      "pattern": "[\\S\\s]*"
     },
     "DisassociateDelegateFromResourceRequest": {
       "type": "structure",
@@ -2352,6 +2571,12 @@
         "shape": "Group"
       }
     },
+    "IdempotencyClientToken": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "[\\x21-\\x7e]+"
+    },
     "IpAddress": {
       "type": "string",
       "max": 15,
@@ -2371,6 +2596,18 @@
       },
       "max": 10,
       "min": 0
+    },
+    "Jobs": {
+      "type": "list",
+      "member": {
+        "shape": "MailboxExportJob"
+      }
+    },
+    "KmsKeyArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 20,
+      "pattern": "arn:aws:kms:[a-z0-9-]*:[a-z0-9-]+:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}"
     },
     "ListAccessControlRulesRequest": {
       "type": "structure",
@@ -2499,6 +2736,39 @@
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>The token to use to retrieve the next page of results. The value is \"null\" when there are no more results to return.</p>"
+        }
+      }
+    },
+    "ListMailboxExportJobsRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The organization ID.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to use to retrieve the next page of results.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to return in a single call.</p>"
+        }
+      }
+    },
+    "ListMailboxExportJobsResponse": {
+      "type": "structure",
+      "members": {
+        "Jobs": {
+          "shape": "Jobs",
+          "documentation": "<p>The mailbox export job details.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to use to retrieve the next page of results.</p>"
         }
       }
     },
@@ -2691,6 +2961,69 @@
         }
       }
     },
+    "MailboxExportErrorInfo": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "pattern": "[\\S\\s]*"
+    },
+    "MailboxExportJob": {
+      "type": "structure",
+      "members": {
+        "JobId": {
+          "shape": "MailboxExportJobId",
+          "documentation": "<p>The identifier of the mailbox export job.</p>"
+        },
+        "EntityId": {
+          "shape": "WorkMailIdentifier",
+          "documentation": "<p>The identifier of the user or resource associated with the mailbox.</p>"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>The mailbox export job description.</p>"
+        },
+        "S3BucketName": {
+          "shape": "S3BucketName",
+          "documentation": "<p>The name of the S3 bucket.</p>"
+        },
+        "S3Path": {
+          "shape": "S3ObjectKey",
+          "documentation": "<p>The path to the S3 bucket and file that the mailbox export job exports to.</p>"
+        },
+        "EstimatedProgress": {
+          "shape": "Percentage",
+          "documentation": "<p>The estimated progress of the mailbox export job, in percentage points.</p>"
+        },
+        "State": {
+          "shape": "MailboxExportJobState",
+          "documentation": "<p>The state of the mailbox export job.</p>"
+        },
+        "StartTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The mailbox export job start timestamp.</p>"
+        },
+        "EndTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The mailbox export job end timestamp.</p>"
+        }
+      },
+      "documentation": "<p>The details of a mailbox export job, including the user or resource ID associated with the mailbox and the S3 bucket that the mailbox contents are exported to.</p>"
+    },
+    "MailboxExportJobId": {
+      "type": "string",
+      "max": 63,
+      "min": 1,
+      "pattern": "[A-Za-z0-9-]+"
+    },
+    "MailboxExportJobState": {
+      "type": "string",
+      "enum": [
+        "RUNNING",
+        "COMPLETED",
+        "FAILED",
+        "CANCELLED"
+      ]
+    },
     "MailboxQuota": {
       "type": "integer",
       "box": true,
@@ -2798,6 +3131,11 @@
       "pattern": "[\\u0020-\\u00FF]+",
       "sensitive": true
     },
+    "Percentage": {
+      "type": "integer",
+      "max": 100,
+      "min": 0
+    },
     "Permission": {
       "type": "structure",
       "required": [
@@ -2844,7 +3182,8 @@
     "PolicyDescription": {
       "type": "string",
       "max": 256,
-      "pattern": "[\\w\\d\\s\\S\\-!?=,.;:'_]+"
+      "pattern": "[\\w\\d\\s\\S\\-!?=,.;:'_]+",
+      "sensitive": true
     },
     "PutAccessControlRuleRequest": {
       "type": "structure",
@@ -3095,11 +3434,84 @@
       "max": 730,
       "min": 1
     },
+    "RoleArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 20
+    },
+    "S3BucketName": {
+      "type": "string",
+      "max": 63,
+      "min": 1,
+      "pattern": "[A-Za-z0-9.-]+"
+    },
+    "S3ObjectKey": {
+      "type": "string",
+      "max": 1023,
+      "min": 1,
+      "pattern": "[A-Za-z0-9!_.*'()/-]+"
+    },
     "ShortString": {
       "type": "string",
       "max": 64,
       "min": 1,
       "pattern": "[a-zA-Z0-9_-]+"
+    },
+    "StartMailboxExportJobRequest": {
+      "type": "structure",
+      "required": [
+        "ClientToken",
+        "OrganizationId",
+        "EntityId",
+        "RoleArn",
+        "KmsKeyArn",
+        "S3BucketName",
+        "S3Prefix"
+      ],
+      "members": {
+        "ClientToken": {
+          "shape": "IdempotencyClientToken",
+          "documentation": "<p>The idempotency token for the client request.</p>",
+          "idempotencyToken": true
+        },
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The identifier associated with the organization.</p>"
+        },
+        "EntityId": {
+          "shape": "WorkMailIdentifier",
+          "documentation": "<p>The identifier of the user or resource associated with the mailbox.</p>"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>The mailbox export job description.</p>"
+        },
+        "RoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The ARN of the AWS Identity and Access Management (IAM) role that grants write permission to the S3 bucket.</p>"
+        },
+        "KmsKeyArn": {
+          "shape": "KmsKeyArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the symmetric AWS Key Management Service (AWS KMS) key that encrypts the exported mailbox content.</p>"
+        },
+        "S3BucketName": {
+          "shape": "S3BucketName",
+          "documentation": "<p>The name of the S3 bucket.</p>"
+        },
+        "S3Prefix": {
+          "shape": "S3ObjectKey",
+          "documentation": "<p>The S3 bucket prefix.</p>"
+        }
+      }
+    },
+    "StartMailboxExportJobResponse": {
+      "type": "structure",
+      "members": {
+        "JobId": {
+          "shape": "MailboxExportJobId",
+          "documentation": "<p>The job ID.</p>"
+        }
+      }
     },
     "String": {
       "type": "string",

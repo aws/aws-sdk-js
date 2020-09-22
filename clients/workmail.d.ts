@@ -28,6 +28,14 @@ declare class WorkMail extends Service {
    */
   associateMemberToGroup(callback?: (err: AWSError, data: WorkMail.Types.AssociateMemberToGroupResponse) => void): Request<WorkMail.Types.AssociateMemberToGroupResponse, AWSError>;
   /**
+   * Cancels a mailbox export job.  If the mailbox export job is near completion, it might not be possible to cancel it. 
+   */
+  cancelMailboxExportJob(params: WorkMail.Types.CancelMailboxExportJobRequest, callback?: (err: AWSError, data: WorkMail.Types.CancelMailboxExportJobResponse) => void): Request<WorkMail.Types.CancelMailboxExportJobResponse, AWSError>;
+  /**
+   * Cancels a mailbox export job.  If the mailbox export job is near completion, it might not be possible to cancel it. 
+   */
+  cancelMailboxExportJob(callback?: (err: AWSError, data: WorkMail.Types.CancelMailboxExportJobResponse) => void): Request<WorkMail.Types.CancelMailboxExportJobResponse, AWSError>;
+  /**
    * Adds an alias to the set of a given member (user or group) of Amazon WorkMail.
    */
   createAlias(params: WorkMail.Types.CreateAliasRequest, callback?: (err: AWSError, data: WorkMail.Types.CreateAliasResponse) => void): Request<WorkMail.Types.CreateAliasResponse, AWSError>;
@@ -132,6 +140,14 @@ declare class WorkMail extends Service {
    */
   describeGroup(callback?: (err: AWSError, data: WorkMail.Types.DescribeGroupResponse) => void): Request<WorkMail.Types.DescribeGroupResponse, AWSError>;
   /**
+   * Describes the current status of a mailbox export job.
+   */
+  describeMailboxExportJob(params: WorkMail.Types.DescribeMailboxExportJobRequest, callback?: (err: AWSError, data: WorkMail.Types.DescribeMailboxExportJobResponse) => void): Request<WorkMail.Types.DescribeMailboxExportJobResponse, AWSError>;
+  /**
+   * Describes the current status of a mailbox export job.
+   */
+  describeMailboxExportJob(callback?: (err: AWSError, data: WorkMail.Types.DescribeMailboxExportJobResponse) => void): Request<WorkMail.Types.DescribeMailboxExportJobResponse, AWSError>;
+  /**
    * Provides more information regarding a given organization based on its identifier.
    */
   describeOrganization(params: WorkMail.Types.DescribeOrganizationRequest, callback?: (err: AWSError, data: WorkMail.Types.DescribeOrganizationResponse) => void): Request<WorkMail.Types.DescribeOrganizationResponse, AWSError>;
@@ -228,6 +244,14 @@ declare class WorkMail extends Service {
    */
   listGroups(callback?: (err: AWSError, data: WorkMail.Types.ListGroupsResponse) => void): Request<WorkMail.Types.ListGroupsResponse, AWSError>;
   /**
+   * Lists the mailbox export jobs started for the specified organization within the last seven days.
+   */
+  listMailboxExportJobs(params: WorkMail.Types.ListMailboxExportJobsRequest, callback?: (err: AWSError, data: WorkMail.Types.ListMailboxExportJobsResponse) => void): Request<WorkMail.Types.ListMailboxExportJobsResponse, AWSError>;
+  /**
+   * Lists the mailbox export jobs started for the specified organization within the last seven days.
+   */
+  listMailboxExportJobs(callback?: (err: AWSError, data: WorkMail.Types.ListMailboxExportJobsResponse) => void): Request<WorkMail.Types.ListMailboxExportJobsResponse, AWSError>;
+  /**
    * Lists the mailbox permissions associated with a user, group, or resource mailbox.
    */
   listMailboxPermissions(params: WorkMail.Types.ListMailboxPermissionsRequest, callback?: (err: AWSError, data: WorkMail.Types.ListMailboxPermissionsResponse) => void): Request<WorkMail.Types.ListMailboxPermissionsResponse, AWSError>;
@@ -315,6 +339,14 @@ declare class WorkMail extends Service {
    * Allows the administrator to reset the password for a user.
    */
   resetPassword(callback?: (err: AWSError, data: WorkMail.Types.ResetPasswordResponse) => void): Request<WorkMail.Types.ResetPasswordResponse, AWSError>;
+  /**
+   * Starts a mailbox export job to export MIME-format email messages and calendar items from the specified mailbox to the specified Amazon Simple Storage Service (Amazon S3) bucket. For more information, see Exporting mailbox content in the Amazon WorkMail Administrator Guide.
+   */
+  startMailboxExportJob(params: WorkMail.Types.StartMailboxExportJobRequest, callback?: (err: AWSError, data: WorkMail.Types.StartMailboxExportJobResponse) => void): Request<WorkMail.Types.StartMailboxExportJobResponse, AWSError>;
+  /**
+   * Starts a mailbox export job to export MIME-format email messages and calendar items from the specified mailbox to the specified Amazon Simple Storage Service (Amazon S3) bucket. For more information, see Exporting mailbox content in the Amazon WorkMail Administrator Guide.
+   */
+  startMailboxExportJob(callback?: (err: AWSError, data: WorkMail.Types.StartMailboxExportJobResponse) => void): Request<WorkMail.Types.StartMailboxExportJobResponse, AWSError>;
   /**
    * Applies the specified tags to the specified Amazon WorkMail organization resource.
    */
@@ -459,6 +491,22 @@ declare namespace WorkMail {
     AutoDeclineConflictingRequests?: Boolean;
   }
   export type Boolean = boolean;
+  export interface CancelMailboxExportJobRequest {
+    /**
+     * The idempotency token for the client request.
+     */
+    ClientToken: IdempotencyClientToken;
+    /**
+     * The job ID.
+     */
+    JobId: MailboxExportJobId;
+    /**
+     * The organization ID.
+     */
+    OrganizationId: OrganizationId;
+  }
+  export interface CancelMailboxExportJobResponse {
+  }
   export interface CreateAliasRequest {
     /**
      * The organization under which the member (user or group) exists.
@@ -685,6 +733,66 @@ declare namespace WorkMail {
      */
     DisabledDate?: Timestamp;
   }
+  export interface DescribeMailboxExportJobRequest {
+    /**
+     * The mailbox export job ID.
+     */
+    JobId: MailboxExportJobId;
+    /**
+     * The organization ID.
+     */
+    OrganizationId: OrganizationId;
+  }
+  export interface DescribeMailboxExportJobResponse {
+    /**
+     * The identifier of the user or resource associated with the mailbox.
+     */
+    EntityId?: WorkMailIdentifier;
+    /**
+     * The mailbox export job description.
+     */
+    Description?: Description;
+    /**
+     * The ARN of the AWS Identity and Access Management (IAM) role that grants write permission to the Amazon Simple Storage Service (Amazon S3) bucket.
+     */
+    RoleArn?: RoleArn;
+    /**
+     * The Amazon Resource Name (ARN) of the symmetric AWS Key Management Service (AWS KMS) key that encrypts the exported mailbox content.
+     */
+    KmsKeyArn?: KmsKeyArn;
+    /**
+     * The name of the S3 bucket.
+     */
+    S3BucketName?: S3BucketName;
+    /**
+     * The S3 bucket prefix.
+     */
+    S3Prefix?: S3ObjectKey;
+    /**
+     * The path to the S3 bucket and file that the mailbox export job is exporting to.
+     */
+    S3Path?: S3ObjectKey;
+    /**
+     * The estimated progress of the mailbox export job, in percentage points.
+     */
+    EstimatedProgress?: Percentage;
+    /**
+     * The state of the mailbox export job.
+     */
+    State?: MailboxExportJobState;
+    /**
+     * Error information for failed mailbox export jobs.
+     */
+    ErrorInfo?: MailboxExportErrorInfo;
+    /**
+     * The mailbox export job start timestamp.
+     */
+    StartTime?: Timestamp;
+    /**
+     * The mailbox export job end timestamp.
+     */
+    EndTime?: Timestamp;
+  }
   export interface DescribeOrganizationRequest {
     /**
      * The identifier for the organization to be described.
@@ -817,6 +925,7 @@ declare namespace WorkMail {
      */
     DisabledDate?: Timestamp;
   }
+  export type Description = string;
   export interface DisassociateDelegateFromResourceRequest {
     /**
      * The identifier for the organization under which the resource exists.
@@ -967,9 +1076,12 @@ declare namespace WorkMail {
   }
   export type GroupName = string;
   export type Groups = Group[];
+  export type IdempotencyClientToken = string;
   export type IpAddress = string;
   export type IpRange = string;
   export type IpRangeList = IpRange[];
+  export type Jobs = MailboxExportJob[];
+  export type KmsKeyArn = string;
   export interface ListAccessControlRulesRequest {
     /**
      * The identifier for the organization.
@@ -1059,6 +1171,30 @@ declare namespace WorkMail {
     Groups?: Groups;
     /**
      * The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListMailboxExportJobsRequest {
+    /**
+     * The organization ID.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return in a single call.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListMailboxExportJobsResponse {
+    /**
+     * The mailbox export job details.
+     */
+    Jobs?: Jobs;
+    /**
+     * The token to use to retrieve the next page of results.
      */
     NextToken?: NextToken;
   }
@@ -1198,6 +1334,47 @@ declare namespace WorkMail {
      */
     NextToken?: NextToken;
   }
+  export type MailboxExportErrorInfo = string;
+  export interface MailboxExportJob {
+    /**
+     * The identifier of the mailbox export job.
+     */
+    JobId?: MailboxExportJobId;
+    /**
+     * The identifier of the user or resource associated with the mailbox.
+     */
+    EntityId?: WorkMailIdentifier;
+    /**
+     * The mailbox export job description.
+     */
+    Description?: Description;
+    /**
+     * The name of the S3 bucket.
+     */
+    S3BucketName?: S3BucketName;
+    /**
+     * The path to the S3 bucket and file that the mailbox export job exports to.
+     */
+    S3Path?: S3ObjectKey;
+    /**
+     * The estimated progress of the mailbox export job, in percentage points.
+     */
+    EstimatedProgress?: Percentage;
+    /**
+     * The state of the mailbox export job.
+     */
+    State?: MailboxExportJobState;
+    /**
+     * The mailbox export job start timestamp.
+     */
+    StartTime?: Timestamp;
+    /**
+     * The mailbox export job end timestamp.
+     */
+    EndTime?: Timestamp;
+  }
+  export type MailboxExportJobId = string;
+  export type MailboxExportJobState = "RUNNING"|"COMPLETED"|"FAILED"|"CANCELLED"|string;
   export type MailboxQuota = number;
   export type MailboxSize = number;
   export type MaxResults = number;
@@ -1252,6 +1429,7 @@ declare namespace WorkMail {
     State?: String;
   }
   export type Password = string;
+  export type Percentage = number;
   export interface Permission {
     /**
      * The identifier of the user, group, or resource to which the permissions are granted.
@@ -1427,7 +1605,50 @@ declare namespace WorkMail {
   export type Resources = Resource[];
   export type RetentionAction = "NONE"|"DELETE"|"PERMANENTLY_DELETE"|string;
   export type RetentionPeriod = number;
+  export type RoleArn = string;
+  export type S3BucketName = string;
+  export type S3ObjectKey = string;
   export type ShortString = string;
+  export interface StartMailboxExportJobRequest {
+    /**
+     * The idempotency token for the client request.
+     */
+    ClientToken: IdempotencyClientToken;
+    /**
+     * The identifier associated with the organization.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The identifier of the user or resource associated with the mailbox.
+     */
+    EntityId: WorkMailIdentifier;
+    /**
+     * The mailbox export job description.
+     */
+    Description?: Description;
+    /**
+     * The ARN of the AWS Identity and Access Management (IAM) role that grants write permission to the S3 bucket.
+     */
+    RoleArn: RoleArn;
+    /**
+     * The Amazon Resource Name (ARN) of the symmetric AWS Key Management Service (AWS KMS) key that encrypts the exported mailbox content.
+     */
+    KmsKeyArn: KmsKeyArn;
+    /**
+     * The name of the S3 bucket.
+     */
+    S3BucketName: S3BucketName;
+    /**
+     * The S3 bucket prefix.
+     */
+    S3Prefix: S3ObjectKey;
+  }
+  export interface StartMailboxExportJobResponse {
+    /**
+     * The job ID.
+     */
+    JobId?: MailboxExportJobId;
+  }
   export type String = string;
   export interface Tag {
     /**
