@@ -80,7 +80,7 @@
           "shape": "ResourceUnavailableException"
         }
       ],
-      "documentation": "<p>Creates Amazon QuickSight customizations the current AWS Region. Currently, you can add a custom default theme by using the <code>CreateAccountCustomization</code> or <code>UpdateAccountCustomization</code> API operation. To further customize QuickSight by removing QuickSight sample assets and videos for all new users, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-quicksight.html\">Customizing QuickSight</a> in the Amazon QuickSight User Guide.</p> <p>You can create customizations for your AWS account or, if you specify a namespace, for a QuickSight namespace instead. Customizations that apply to a namespace always override customizations that apply to an AWS account. To find out which customizations apply, use the <code>DescribeAccountCustomization</code> API operation.</p> <p>Before you add a theme as the namespace default, make sure that you first share the theme with the namespace. If you don't share it with the namespace, the theme won't be visible to your users even if you use this API operation to make it the default theme. </p>"
+      "documentation": "<p>Creates Amazon QuickSight customizations the current AWS Region. Currently, you can add a custom default theme by using the <code>CreateAccountCustomization</code> or <code>UpdateAccountCustomization</code> API operation. To further customize QuickSight by removing QuickSight sample assets and videos for all new users, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-quicksight.html\">Customizing QuickSight</a> in the <i>Amazon QuickSight User Guide.</i> </p> <p>You can create customizations for your AWS account or, if you specify a namespace, for a QuickSight namespace instead. Customizations that apply to a namespace always override customizations that apply to an AWS account. To find out which customizations apply, use the <code>DescribeAccountCustomization</code> API operation.</p> <p>Before you use the <code>CreateAccountCustomization</code> API operation to add a theme as the namespace default, make sure that you first share the theme with the namespace. If you don't share it with the namespace, the theme isn't visible to your users even if you make it the default theme. To check if the theme is shared, view the current permissions by using the <code> <a>DescribeThemePermissions</a> </code> API operation. To share the theme, grant permissions by using the <code> <a>UpdateThemePermissions</a> </code> API operation. </p>"
     },
     "CreateAnalysis": {
       "name": "CreateAnalysis",
@@ -634,7 +634,7 @@
           "shape": "ResourceUnavailableException"
         }
       ],
-      "documentation": "<p>Deletes all Amazon QuickSight customizations in this AWS Region for the specified AWS Account and QuickSight namespace.</p>"
+      "documentation": "<p>Deletes all Amazon QuickSight customizations in this AWS Region for the specified AWS account and QuickSight namespace.</p>"
     },
     "DeleteAnalysis": {
       "name": "DeleteAnalysis",
@@ -1159,7 +1159,7 @@
           "shape": "ResourceUnavailableException"
         }
       ],
-      "documentation": "<p>Describes the customizations associated with the provided AWS account and Amazon QuickSight namespace in an AWS Region. The QuickSight console evaluates which customizations to apply by running this API operation with the <code>Resolved</code> flag included. </p> <p>To determine what customizations display when you run this command, it can help to visualize the relationship of the entities involved. </p> <ul> <li> <p> <code>AWS Account</code> - The AWS account exists at the top of the hierarchy. It has the potential to use all of the AWS Regions and AWS Services. When you subscribe to QuickSight, you choose one AWS Region to use as your home region. That's where your free SPICE capacity is located. You can use QuickSight in any supported AWS Region. </p> </li> <li> <p> <code>AWS Region</code> - In each AWS Region where you sign in to QuickSight at least once, QuickSight acts as a separate instance of the same service. If you have a user directory, it resides in us-east-1, which is the US East (N. Virginia). Generally speaking, these users have access to QuickSight in any AWS Region, unless they are constrained to a namespace. </p> <p>To run the command in a different AWS Region, you change your region settings. If you're using the AWS CLI, you can use one of the following options:</p> <ul> <li> <p>Use <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-options.html\">command line options</a>. </p> </li> <li> <p>Use <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html\">named profiles</a>. </p> </li> <li> <p>Run <code>aws configure</code> to change your default AWS Region. Use Enter to key the same settings for your keys. For more information, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html\">Configuring the AWS CLI</a>.</p> </li> </ul> </li> <li> <p> <code>Namespace</code> - A QuickSight namespace is a partition that contains users and assets (data sources, datasets, dashboards, and so on). To access assets that are in a specific namespace, users and groups must also be part of the same namespace. People who share a namespace are completely isolated from users and assets in other namespaces, even if they are in the same AWS account and AWS Region.</p> </li> <li> <p> <code>Applied customizations</code> - Within an AWS Region, a set of QuickSight customizations can apply to an AWS account or to a namespace. Settings that you apply to a namespace override settings that you apply to an AWS Account. All settings are isolated to a single AWS Region. To apply them in other AWS Regions, run the <code>CreateAccountCustomization</code> command in each AWS Region where you want to apply the same customizations. </p> </li> </ul>"
+      "documentation": "<p>Describes the customizations associated with the provided AWS account and Amazon QuickSight namespace in an AWS Region. The QuickSight console evaluates which customizations to apply by running this API operation with the <code>Resolved</code> flag included. </p> <p>To determine what customizations display when you run this command, it can help to visualize the relationship of the entities involved. </p> <ul> <li> <p> <code>AWS Account</code> - The AWS account exists at the top of the hierarchy. It has the potential to use all of the AWS Regions and AWS Services. When you subscribe to QuickSight, you choose one AWS Region to use as your home Region. That's where your free SPICE capacity is located. You can use QuickSight in any supported AWS Region. </p> </li> <li> <p> <code>AWS Region</code> - In each AWS Region where you sign in to QuickSight at least once, QuickSight acts as a separate instance of the same service. If you have a user directory, it resides in us-east-1, which is the US East (N. Virginia). Generally speaking, these users have access to QuickSight in any AWS Region, unless they are constrained to a namespace. </p> <p>To run the command in a different AWS Region, you change your Region settings. If you're using the AWS CLI, you can use one of the following options:</p> <ul> <li> <p>Use <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-options.html\">command line options</a>. </p> </li> <li> <p>Use <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html\">named profiles</a>. </p> </li> <li> <p>Run <code>aws configure</code> to change your default AWS Region. Use Enter to key the same settings for your keys. For more information, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html\">Configuring the AWS CLI</a>.</p> </li> </ul> </li> <li> <p> <code>Namespace</code> - A QuickSight namespace is a partition that contains users and assets (data sources, datasets, dashboards, and so on). To access assets that are in a specific namespace, users and groups must also be part of the same namespace. People who share a namespace are completely isolated from users and assets in other namespaces, even if they are in the same AWS account and AWS Region.</p> </li> <li> <p> <code>Applied customizations</code> - Within an AWS Region, a set of QuickSight customizations can apply to an AWS account or to a namespace. Settings that you apply to a namespace override settings that you apply to an AWS account. All settings are isolated to a single AWS Region. To apply them in other AWS Regions, run the <code>CreateAccountCustomization</code> command in each AWS Region where you want to apply the same customizations. </p> </li> </ul>"
     },
     "DescribeAccountSettings": {
       "name": "DescribeAccountSettings",
@@ -1193,7 +1193,7 @@
           "shape": "ResourceUnavailableException"
         }
       ],
-      "documentation": "<p>Describes the settings that were used when your QuickSight subscription was first created in this AWS Account.</p>"
+      "documentation": "<p>Describes the settings that were used when your QuickSight subscription was first created in this AWS account.</p>"
     },
     "DescribeAnalysis": {
       "name": "DescribeAnalysis",
@@ -2898,7 +2898,7 @@
           "shape": "ResourceUnavailableException"
         }
       ],
-      "documentation": "<p>Updates the Amazon QuickSight settings in your AWS Account.</p>"
+      "documentation": "<p>Updates the Amazon QuickSight settings in your AWS account.</p>"
     },
     "UpdateAnalysis": {
       "name": "UpdateAnalysis",
@@ -3677,6 +3677,10 @@
         "LastUpdatedTime": {
           "shape": "Timestamp",
           "documentation": "<p>The time that the analysis was last updated.</p>"
+        },
+        "Sheets": {
+          "shape": "SheetList",
+          "documentation": "<p>A list of the associated sheets with the unique identifier and name of each sheet.</p>"
         }
       },
       "documentation": "<p>Metadata structure for an analysis in Amazon QuickSight</p>"
@@ -4198,7 +4202,7 @@
         },
         "AccountCustomization": {
           "shape": "AccountCustomization",
-          "documentation": "<p>The QuickSight customizations you're adding in the current AWS Region. You can add these to an AWS account and a QuickSight namespace. </p> <p>For example, you could add a default theme by setting <code>AccountCustomization</code> to the midnight theme: <code>\"AccountCustomization\": { \"DefaultTheme\": \"arn:aws:quicksight::aws:theme/MIDNIGHT\" }. </code>. Or, you could add a custom theme by specifying <code>\"AccountCustomization\": { \"DefaultTheme\": \"arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639\" }</code>. </p>"
+          "documentation": "<p>The QuickSight customizations you're adding in the current AWS Region. You can add these to an AWS account and a QuickSight namespace. </p> <p>For example, you can add a default theme by setting <code>AccountCustomization</code> to the midnight theme: <code>\"AccountCustomization\": { \"DefaultTheme\": \"arn:aws:quicksight::aws:theme/MIDNIGHT\" }</code>. Or, you can add a custom theme by specifying <code>\"AccountCustomization\": { \"DefaultTheme\": \"arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639\" }</code>. </p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -5417,6 +5421,10 @@
         "ThemeArn": {
           "shape": "Arn",
           "documentation": "<p>The ARN of the theme associated with a version of the dashboard.</p>"
+        },
+        "Sheets": {
+          "shape": "SheetList",
+          "documentation": "<p>A list of the associated sheets with the unique identifier and name of each sheet.</p>"
         }
       },
       "documentation": "<p>Dashboard version.</p>"
@@ -6693,7 +6701,7 @@
       "members": {
         "AccountSettings": {
           "shape": "AccountSettings",
-          "documentation": "<p>The QuickSight settings for this AWS account. This information includes the edition of Amazon QuickSight that you subscribed to (Standard or Enterprise) and the notification email for the QuickSight subscription. The QuickSight console, the QuickSight subscription is sometimes referred to as a QuickSight \"account\" even though it's technically not an account by itself. Instead, it's a subscription to the QuickSight service for your AWS account. The edition that you subscribe to applies to QuickSight in every AWS Region where you use it. </p>"
+          "documentation": "<p>The QuickSight settings for this AWS account. This information includes the edition of Amazon QuickSight that you subscribed to (Standard or Enterprise) and the notification email for the QuickSight subscription. In the QuickSight console, the QuickSight subscription is sometimes referred to as a QuickSight \"account\" even though it's technically not an account by itself. Instead, it's a subscription to the QuickSight service for your AWS account. The edition that you subscribe to applies to QuickSight in every AWS Region where you use it.</p>"
         },
         "RequestId": {
           "shape": "String",
@@ -10245,6 +10253,20 @@
       "max": 600,
       "min": 15
     },
+    "Sheet": {
+      "type": "structure",
+      "members": {
+        "SheetId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The unique identifier associated with a sheet.</p>"
+        },
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of a sheet. This is displayed on the sheet's tab in the QuickSight console.</p>"
+        }
+      },
+      "documentation": "<p>A sheet is an object that contains a set of visuals that are viewed together on one page in the Amazon QuickSight console. Every analysis and dashboard contains at least one sheet. Each sheet contains at least one visualization widget, for example a chart, pivot table, or narrative insight. Sheets can be associated with other components, such as controls, filters, and so on.</p>"
+    },
     "SheetControlsOption": {
       "type": "structure",
       "members": {
@@ -10254,6 +10276,13 @@
         }
       },
       "documentation": "<p>Sheet controls option.</p>"
+    },
+    "SheetList": {
+      "type": "list",
+      "member": {
+        "shape": "Sheet"
+      },
+      "max": 20
     },
     "SheetStyle": {
       "type": "structure",
@@ -10692,6 +10721,10 @@
         "ThemeArn": {
           "shape": "Arn",
           "documentation": "<p>The ARN of the theme associated with this version of the template.</p>"
+        },
+        "Sheets": {
+          "shape": "SheetList",
+          "documentation": "<p>A list of the associated sheets with the unique identifier and name of each sheet.</p>"
         }
       },
       "documentation": "<p>A version of a template.</p>"
@@ -11251,7 +11284,7 @@
         },
         "DefaultNamespace": {
           "shape": "Namespace",
-          "documentation": "<p>The default namespace for this AWS Account. Currently, the default is <code>default</code>. IAM users who register for the first time with QuickSight provide an email that becomes associated with the default namespace.</p>"
+          "documentation": "<p>The default namespace for this AWS account. Currently, the default is <code>default</code>. AWS Identity and Access Management (IAM) users that register for the first time with QuickSight provide an email that becomes associated with the default namespace.</p>"
         },
         "NotificationEmail": {
           "shape": "String",

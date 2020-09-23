@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "Backup",
+        "description": "This release allows customers to enable or disable advanced backup settings in backup plan. As part of this feature AWS Backup added support for  Windows VSS backup option for EC2 resources."
+    },
+    {
+        "type": "feature",
+        "category": "CostExplorer",
+        "description": "This release provides access to Cost Anomaly Detection Public Preview APIs. Cost Anomaly Detection finds cost anomalies based on your historical cost and usage using Machine Learning models."
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "Added Sheet information to DescribeDashboard, DescribeTemplate and DescribeAnalysis API response."
+    },
+    {
+        "type": "feature",
+        "category": "Translate",
+        "description": "Improvements to DeleteTerminology API."
+    }
+]

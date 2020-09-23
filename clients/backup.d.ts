@@ -12,19 +12,19 @@ declare class Backup extends Service {
   constructor(options?: Backup.Types.ClientConfiguration)
   config: Config & Backup.Types.ClientConfiguration;
   /**
-   * Backup plans are documents that contain information that AWS Backup uses to schedule tasks that create recovery points of resources. If you call CreateBackupPlan with a plan that already exists, an AlreadyExistsException is returned.
+   * Creates a backup plan using a backup plan name and backup rules. A backup plan is a document that contains information that AWS Backup uses to schedule tasks that create recovery points for resources. If you call CreateBackupPlan with a plan that already exists, an AlreadyExistsException is returned.
    */
   createBackupPlan(params: Backup.Types.CreateBackupPlanInput, callback?: (err: AWSError, data: Backup.Types.CreateBackupPlanOutput) => void): Request<Backup.Types.CreateBackupPlanOutput, AWSError>;
   /**
-   * Backup plans are documents that contain information that AWS Backup uses to schedule tasks that create recovery points of resources. If you call CreateBackupPlan with a plan that already exists, an AlreadyExistsException is returned.
+   * Creates a backup plan using a backup plan name and backup rules. A backup plan is a document that contains information that AWS Backup uses to schedule tasks that create recovery points for resources. If you call CreateBackupPlan with a plan that already exists, an AlreadyExistsException is returned.
    */
   createBackupPlan(callback?: (err: AWSError, data: Backup.Types.CreateBackupPlanOutput) => void): Request<Backup.Types.CreateBackupPlanOutput, AWSError>;
   /**
-   * Creates a JSON document that specifies a set of resources to assign to a backup plan. Resources can be included by specifying patterns for a ListOfTags and selected Resources.  For example, consider the following patterns:    Resources: "arn:aws:ec2:region:account-id:volume/volume-id"     ConditionKey:"department"   ConditionValue:"finance"   ConditionType:"StringEquals"     ConditionKey:"importance"   ConditionValue:"critical"   ConditionType:"StringEquals"    Using these patterns would back up all Amazon Elastic Block Store (Amazon EBS) volumes that are tagged as "department=finance", "importance=critical", in addition to an EBS volume with the specified volume Id. Resources and conditions are additive in that all resources that match the pattern are selected. This shouldn't be confused with a logical AND, where all conditions must match. The matching patterns are logically 'put together using the OR operator. In other words, all patterns that match are selected for backup.
+   * Creates a JSON document that specifies a set of resources to assign to a backup plan. Resources can be included by specifying patterns for a ListOfTags and selected Resources.  For example, consider the following patterns:    Resources: "arn:aws:ec2:region:account-id:volume/volume-id"     ConditionKey:"department"   ConditionValue:"finance"   ConditionType:"StringEquals"     ConditionKey:"importance"   ConditionValue:"critical"   ConditionType:"StringEquals"    Using these patterns would back up all Amazon Elastic Block Store (Amazon EBS) volumes that are tagged as "department=finance", "importance=critical", in addition to an EBS volume with the specified volume ID. Resources and conditions are additive in that all resources that match the pattern are selected. This shouldn't be confused with a logical AND, where all conditions must match. The matching patterns are logically put together using the OR operator. In other words, all patterns that match are selected for backup.
    */
   createBackupSelection(params: Backup.Types.CreateBackupSelectionInput, callback?: (err: AWSError, data: Backup.Types.CreateBackupSelectionOutput) => void): Request<Backup.Types.CreateBackupSelectionOutput, AWSError>;
   /**
-   * Creates a JSON document that specifies a set of resources to assign to a backup plan. Resources can be included by specifying patterns for a ListOfTags and selected Resources.  For example, consider the following patterns:    Resources: "arn:aws:ec2:region:account-id:volume/volume-id"     ConditionKey:"department"   ConditionValue:"finance"   ConditionType:"StringEquals"     ConditionKey:"importance"   ConditionValue:"critical"   ConditionType:"StringEquals"    Using these patterns would back up all Amazon Elastic Block Store (Amazon EBS) volumes that are tagged as "department=finance", "importance=critical", in addition to an EBS volume with the specified volume Id. Resources and conditions are additive in that all resources that match the pattern are selected. This shouldn't be confused with a logical AND, where all conditions must match. The matching patterns are logically 'put together using the OR operator. In other words, all patterns that match are selected for backup.
+   * Creates a JSON document that specifies a set of resources to assign to a backup plan. Resources can be included by specifying patterns for a ListOfTags and selected Resources.  For example, consider the following patterns:    Resources: "arn:aws:ec2:region:account-id:volume/volume-id"     ConditionKey:"department"   ConditionValue:"finance"   ConditionType:"StringEquals"     ConditionKey:"importance"   ConditionValue:"critical"   ConditionType:"StringEquals"    Using these patterns would back up all Amazon Elastic Block Store (Amazon EBS) volumes that are tagged as "department=finance", "importance=critical", in addition to an EBS volume with the specified volume ID. Resources and conditions are additive in that all resources that match the pattern are selected. This shouldn't be confused with a logical AND, where all conditions must match. The matching patterns are logically put together using the OR operator. In other words, all patterns that match are selected for backup.
    */
   createBackupSelection(callback?: (err: AWSError, data: Backup.Types.CreateBackupSelectionOutput) => void): Request<Backup.Types.CreateBackupSelectionOutput, AWSError>;
   /**
@@ -84,11 +84,11 @@ declare class Backup extends Service {
    */
   deleteRecoveryPoint(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Returns metadata associated with creating a backup of a resource.
+   * Returns backup job details for the specified BackupJobId.
    */
   describeBackupJob(params: Backup.Types.DescribeBackupJobInput, callback?: (err: AWSError, data: Backup.Types.DescribeBackupJobOutput) => void): Request<Backup.Types.DescribeBackupJobOutput, AWSError>;
   /**
-   * Returns metadata associated with creating a backup of a resource.
+   * Returns backup job details for the specified BackupJobId.
    */
   describeBackupJob(callback?: (err: AWSError, data: Backup.Types.DescribeBackupJobOutput) => void): Request<Backup.Types.DescribeBackupJobOutput, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class Backup extends Service {
    */
   describeRecoveryPoint(callback?: (err: AWSError, data: Backup.Types.DescribeRecoveryPointOutput) => void): Request<Backup.Types.DescribeRecoveryPointOutput, AWSError>;
   /**
-   * Returns the current service opt-in settings for the Region. If the service has a value set to true, AWS Backup attempts to protect that service's resources in this Region, when included in an on-demand backup or scheduled backup plan. If the value is set to false for a service, AWS Backup does not attempt to protect that service's resources in this Region.
+   * Returns the current service opt-in settings for the Region. If the service has a value set to true, AWS Backup tries to protect that service's resources in this Region, when included in an on-demand backup or scheduled backup plan. If the value is set to false for a service, AWS Backup does not try to protect that service's resources in this Region.
    */
   describeRegionSettings(params: Backup.Types.DescribeRegionSettingsInput, callback?: (err: AWSError, data: Backup.Types.DescribeRegionSettingsOutput) => void): Request<Backup.Types.DescribeRegionSettingsOutput, AWSError>;
   /**
-   * Returns the current service opt-in settings for the Region. If the service has a value set to true, AWS Backup attempts to protect that service's resources in this Region, when included in an on-demand backup or scheduled backup plan. If the value is set to false for a service, AWS Backup does not attempt to protect that service's resources in this Region.
+   * Returns the current service opt-in settings for the Region. If the service has a value set to true, AWS Backup tries to protect that service's resources in this Region, when included in an on-demand backup or scheduled backup plan. If the value is set to false for a service, AWS Backup does not try to protect that service's resources in this Region.
    */
   describeRegionSettings(callback?: (err: AWSError, data: Backup.Types.DescribeRegionSettingsOutput) => void): Request<Backup.Types.DescribeRegionSettingsOutput, AWSError>;
   /**
@@ -148,11 +148,11 @@ declare class Backup extends Service {
    */
   exportBackupPlanTemplate(callback?: (err: AWSError, data: Backup.Types.ExportBackupPlanTemplateOutput) => void): Request<Backup.Types.ExportBackupPlanTemplateOutput, AWSError>;
   /**
-   * Returns the body of a backup plan in JSON format, in addition to plan metadata.
+   * Returns BackupPlan details for the specified BackupPlanId. Returns the body of a backup plan in JSON format, in addition to plan metadata.
    */
   getBackupPlan(params: Backup.Types.GetBackupPlanInput, callback?: (err: AWSError, data: Backup.Types.GetBackupPlanOutput) => void): Request<Backup.Types.GetBackupPlanOutput, AWSError>;
   /**
-   * Returns the body of a backup plan in JSON format, in addition to plan metadata.
+   * Returns BackupPlan details for the specified BackupPlanId. Returns the body of a backup plan in JSON format, in addition to plan metadata.
    */
   getBackupPlan(callback?: (err: AWSError, data: Backup.Types.GetBackupPlanOutput) => void): Request<Backup.Types.GetBackupPlanOutput, AWSError>;
   /**
@@ -208,11 +208,11 @@ declare class Backup extends Service {
    */
   getSupportedResourceTypes(callback?: (err: AWSError, data: Backup.Types.GetSupportedResourceTypesOutput) => void): Request<Backup.Types.GetSupportedResourceTypesOutput, AWSError>;
   /**
-   * Returns metadata about your backup jobs.
+   * Returns a list of existing backup jobs for an authenticated account.
    */
   listBackupJobs(params: Backup.Types.ListBackupJobsInput, callback?: (err: AWSError, data: Backup.Types.ListBackupJobsOutput) => void): Request<Backup.Types.ListBackupJobsOutput, AWSError>;
   /**
-   * Returns metadata about your backup jobs.
+   * Returns a list of existing backup jobs for an authenticated account.
    */
   listBackupJobs(callback?: (err: AWSError, data: Backup.Types.ListBackupJobsOutput) => void): Request<Backup.Types.ListBackupJobsOutput, AWSError>;
   /**
@@ -232,11 +232,11 @@ declare class Backup extends Service {
    */
   listBackupPlanVersions(callback?: (err: AWSError, data: Backup.Types.ListBackupPlanVersionsOutput) => void): Request<Backup.Types.ListBackupPlanVersionsOutput, AWSError>;
   /**
-   * Returns metadata of your saved backup plans, including Amazon Resource Names (ARNs), plan IDs, creation and deletion dates, version IDs, plan names, and creator request IDs.
+   * Returns a list of existing backup plans for an authenticated account. The list is populated only if the advanced option is set for the backup plan. The list contains information such as Amazon Resource Names (ARNs), plan IDs, creation and deletion dates, version IDs, plan names, and creator request IDs.
    */
   listBackupPlans(params: Backup.Types.ListBackupPlansInput, callback?: (err: AWSError, data: Backup.Types.ListBackupPlansOutput) => void): Request<Backup.Types.ListBackupPlansOutput, AWSError>;
   /**
-   * Returns metadata of your saved backup plans, including Amazon Resource Names (ARNs), plan IDs, creation and deletion dates, version IDs, plan names, and creator request IDs.
+   * Returns a list of existing backup plans for an authenticated account. The list is populated only if the advanced option is set for the backup plan. The list contains information such as Amazon Resource Names (ARNs), plan IDs, creation and deletion dates, version IDs, plan names, and creator request IDs.
    */
   listBackupPlans(callback?: (err: AWSError, data: Backup.Types.ListBackupPlansOutput) => void): Request<Backup.Types.ListBackupPlansOutput, AWSError>;
   /**
@@ -320,11 +320,11 @@ declare class Backup extends Service {
    */
   putBackupVaultNotifications(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Starts a job to create a one-time backup of the specified resource.
+   * Starts an on-demand backup job for the specified resource.
    */
   startBackupJob(params: Backup.Types.StartBackupJobInput, callback?: (err: AWSError, data: Backup.Types.StartBackupJobOutput) => void): Request<Backup.Types.StartBackupJobOutput, AWSError>;
   /**
-   * Starts a job to create a one-time backup of the specified resource.
+   * Starts an on-demand backup job for the specified resource.
    */
   startBackupJob(callback?: (err: AWSError, data: Backup.Types.StartBackupJobOutput) => void): Request<Backup.Types.StartBackupJobOutput, AWSError>;
   /**
@@ -368,11 +368,11 @@ declare class Backup extends Service {
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Replaces the body of a saved backup plan identified by its backupPlanId with the input document in JSON format. The new version is uniquely identified by a VersionId.
+   * Updates an existing backup plan identified by its backupPlanId with the input document in JSON format. The new version is uniquely identified by a VersionId.
    */
   updateBackupPlan(params: Backup.Types.UpdateBackupPlanInput, callback?: (err: AWSError, data: Backup.Types.UpdateBackupPlanOutput) => void): Request<Backup.Types.UpdateBackupPlanOutput, AWSError>;
   /**
-   * Replaces the body of a saved backup plan identified by its backupPlanId with the input document in JSON format. The new version is uniquely identified by a VersionId.
+   * Updates an existing backup plan identified by its backupPlanId with the input document in JSON format. The new version is uniquely identified by a VersionId.
    */
   updateBackupPlan(callback?: (err: AWSError, data: Backup.Types.UpdateBackupPlanOutput) => void): Request<Backup.Types.UpdateBackupPlanOutput, AWSError>;
   /**
@@ -384,17 +384,28 @@ declare class Backup extends Service {
    */
   updateRecoveryPointLifecycle(callback?: (err: AWSError, data: Backup.Types.UpdateRecoveryPointLifecycleOutput) => void): Request<Backup.Types.UpdateRecoveryPointLifecycleOutput, AWSError>;
   /**
-   * Updates the current service opt-in settings for the Region. If the service has a value set to true, AWS Backup attempts to protect that service's resources in this Region, when included in an on-demand backup or scheduled backup plan. If the value is set to false for a service, AWS Backup does not attempt to protect that service's resources in this Region.
+   * Updates the current service opt-in settings for the Region. If the service has a value set to true, AWS Backup tries to protect that service's resources in this Region, when included in an on-demand backup or scheduled backup plan. If the value is set to false for a service, AWS Backup does not try to protect that service's resources in this Region.
    */
   updateRegionSettings(params: Backup.Types.UpdateRegionSettingsInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the current service opt-in settings for the Region. If the service has a value set to true, AWS Backup attempts to protect that service's resources in this Region, when included in an on-demand backup or scheduled backup plan. If the value is set to false for a service, AWS Backup does not attempt to protect that service's resources in this Region.
+   * Updates the current service opt-in settings for the Region. If the service has a value set to true, AWS Backup tries to protect that service's resources in this Region, when included in an on-demand backup or scheduled backup plan. If the value is set to false for a service, AWS Backup does not try to protect that service's resources in this Region.
    */
   updateRegionSettings(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace Backup {
   export type ARN = string;
   export type AccountId = string;
+  export interface AdvancedBackupSetting {
+    /**
+     * The type of AWS resource to be backed up. For VSS Windows backups, the only supported resource type is Amazon EC2. Valid values: EC2.
+     */
+    ResourceType?: ResourceType;
+    /**
+     * Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs. Valid value: "WindowsVSS”:“enabled". If enabled, creates a VSS Windows backup; otherwise, creates a regular backup. If you specify an invalid option, you get an InvalidParameterValueException exception. For more information about Windows VSS backups, see Creating a VSS-Enabled Windows Backup.
+     */
+    BackupOptions?: BackupOptions;
+  }
+  export type AdvancedBackupSettings = AdvancedBackupSetting[];
   export interface BackupJob {
     /**
      * The account ID that owns the backup job.
@@ -461,16 +472,27 @@ declare namespace Backup {
      */
     StartBy?: timestamp;
     /**
-     * The type of AWS resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.
+     * The type of AWS resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For VSS Windows backups, the only supported resource type is Amazon EC2.
      */
     ResourceType?: ResourceType;
     /**
      * The size in bytes transferred to a backup vault at the time that the job status was queried.
      */
     BytesTransferred?: Long;
+    /**
+     * Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs. Valid value: "WindowsVSS”:“enabled". If enabled, creates a VSS Windows backup; otherwise, creates a regular backup. If you specify an invalid option, you get an InvalidParameterValueException exception.
+     */
+    BackupOptions?: BackupOptions;
+    /**
+     * Represents the type of backup for a backup job.
+     */
+    BackupType?: string;
   }
   export type BackupJobState = "CREATED"|"PENDING"|"RUNNING"|"ABORTING"|"ABORTED"|"COMPLETED"|"FAILED"|"EXPIRED"|string;
   export type BackupJobsList = BackupJob[];
+  export type BackupOptionKey = string;
+  export type BackupOptionValue = string;
+  export type BackupOptions = {[key: string]: BackupOptionValue};
   export interface BackupPlan {
     /**
      * The display name of a backup plan.
@@ -480,6 +502,10 @@ declare namespace Backup {
      * An array of BackupRule objects, each of which specifies a scheduled task that is used to back up a selection of resources. 
      */
     Rules: BackupRules;
+    /**
+     * Contains a list of BackupOptions for each resource type.
+     */
+    AdvancedBackupSettings?: AdvancedBackupSettings;
   }
   export interface BackupPlanInput {
     /**
@@ -490,6 +516,10 @@ declare namespace Backup {
      * An array of BackupRule objects, each of which specifies a scheduled task that is used to back up a selection of resources.
      */
     Rules: BackupRulesInput;
+    /**
+     * Specifies a list of BackupOptions for each resource type. These settings are only available for Windows VSS backup jobs.
+     */
+    AdvancedBackupSettings?: AdvancedBackupSettings;
   }
   export type BackupPlanName = string;
   export type BackupPlanTemplatesList = BackupPlanTemplatesListMember[];
@@ -531,13 +561,17 @@ declare namespace Backup {
      */
     BackupPlanName?: BackupPlanName;
     /**
-     * A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
+     * A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
      */
     CreatorRequestId?: string;
     /**
-     * The last time a job to back up resources was executed with this rule. A date and time, in Unix format and Coordinated Universal Time (UTC). The value of LastExecutionDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     * The last time a job to back up resources was run with this rule. A date and time, in Unix format and Coordinated Universal Time (UTC). The value of LastExecutionDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
      */
     LastExecutionDate?: timestamp;
+    /**
+     * Contains a list of BackupOptions for a resource type.
+     */
+    AdvancedBackupSettings?: AdvancedBackupSettings;
   }
   export interface BackupRule {
     /**
@@ -652,7 +686,7 @@ declare namespace Backup {
      */
     CreationDate?: timestamp;
     /**
-     * A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
+     * A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
      */
     CreatorRequestId?: string;
     /**
@@ -681,7 +715,7 @@ declare namespace Backup {
      */
     EncryptionKeyArn?: ARN;
     /**
-     * A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
+     * A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
      */
     CreatorRequestId?: string;
     /**
@@ -781,7 +815,7 @@ declare namespace Backup {
     IamRoleArn?: IAMRoleArn;
     CreatedBy?: RecoveryPointCreator;
     /**
-     * The type of AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.
+     * The type of AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. 
      */
     ResourceType?: ResourceType;
   }
@@ -797,7 +831,7 @@ declare namespace Backup {
      */
     BackupPlanTags?: Tags;
     /**
-     * Identifies the request and allows failed requests to be retried without the risk of executing the operation twice. If the request includes a CreatorRequestId that matches an existing backup plan, that plan is returned. This parameter is optional.
+     * Identifies the request and allows failed requests to be retried without the risk of running the operation twice. If the request includes a CreatorRequestId that matches an existing backup plan, that plan is returned. This parameter is optional.
      */
     CreatorRequestId?: string;
   }
@@ -818,6 +852,10 @@ declare namespace Backup {
      * Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. They cannot be edited.
      */
     VersionId?: string;
+    /**
+     * A list of BackupOptions settings for a resource type. This option is only available for Windows VSS backup jobs.
+     */
+    AdvancedBackupSettings?: AdvancedBackupSettings;
   }
   export interface CreateBackupSelectionInput {
     /**
@@ -829,7 +867,7 @@ declare namespace Backup {
      */
     BackupSelection: BackupSelection;
     /**
-     * A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
+     * A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
      */
     CreatorRequestId?: string;
   }
@@ -861,7 +899,7 @@ declare namespace Backup {
      */
     EncryptionKeyArn?: ARN;
     /**
-     * A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
+     * A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
      */
     CreatorRequestId?: string;
   }
@@ -900,7 +938,7 @@ declare namespace Backup {
      */
     DeletionDate?: timestamp;
     /**
-     * Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. Version Ids cannot be edited.
+     * Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. Version IDs cannot be edited.
      */
     VersionId?: string;
   }
@@ -1021,6 +1059,14 @@ declare namespace Backup {
      * Specifies the time in Unix format and Coordinated Universal Time (UTC) when a backup job must be started before it is canceled. The value is calculated by adding the start window to the scheduled time. So if the scheduled time were 6:00 PM and the start window is 2 hours, the StartBy time would be 8:00 PM on the date specified. The value of StartBy is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
      */
     StartBy?: timestamp;
+    /**
+     * Represents the options specified as part of backup plan or on-demand backup job.
+     */
+    BackupOptions?: BackupOptions;
+    /**
+     * Represents the actual backup type selected for a backup job. For example, if a successful WindowsVSS backup was taken, BackupType returns “WindowsVSS”. If BackupType is empty, then it is a regular backup.
+     */
+    BackupType?: string;
   }
   export interface DescribeBackupVaultInput {
     /**
@@ -1046,7 +1092,7 @@ declare namespace Backup {
      */
     CreationDate?: timestamp;
     /**
-     * A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
+     * A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
      */
     CreatorRequestId?: string;
     /**
@@ -1170,7 +1216,7 @@ declare namespace Backup {
   }
   export interface DescribeRegionSettingsOutput {
     /**
-     * Returns a list of all services along with the opt-in preferences in the region.
+     * Returns a list of all services along with the opt-in preferences in the Region.
      */
     ResourceTypeOptInPreference?: ResourceTypeOptInPreference;
   }
@@ -1298,7 +1344,7 @@ declare namespace Backup {
      */
     VersionId?: string;
     /**
-     * A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
+     * A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
      */
     CreatorRequestId?: string;
     /**
@@ -1310,9 +1356,13 @@ declare namespace Backup {
      */
     DeletionDate?: timestamp;
     /**
-     * The last time a job to back up resources was executed with this backup plan. A date and time, in Unix format and Coordinated Universal Time (UTC). The value of LastExecutionDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     * The last time a job to back up resources was run with this backup plan. A date and time, in Unix format and Coordinated Universal Time (UTC). The value of LastExecutionDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
      */
     LastExecutionDate?: timestamp;
+    /**
+     * Contains a list of BackupOptions for each resource type. The list is populated only if the advanced option is set for the backup plan.
+     */
+    AdvancedBackupSettings?: AdvancedBackupSettings;
   }
   export interface GetBackupSelectionInput {
     /**
@@ -1342,7 +1392,7 @@ declare namespace Backup {
      */
     CreationDate?: timestamp;
     /**
-     * A unique string that identifies the request and allows failed requests to be retried without the risk of executing the operation twice.
+     * A unique string that identifies the request and allows failed requests to be retried without the risk of running the operation twice.
      */
     CreatorRequestId?: string;
   }
@@ -1410,7 +1460,7 @@ declare namespace Backup {
      */
     RecoveryPointArn?: ARN;
     /**
-     * The set of metadata key-value pairs that describes the original configuration of the backed-up resource. These values vary depending on the service that is being restored.
+     * The set of metadata key-value pairs that describe the original configuration of the backed-up resource. These values vary depending on the service that is being restored.
      */
     RestoreMetadata?: Metadata;
   }
@@ -1801,7 +1851,7 @@ declare namespace Backup {
      */
     ResourceArn?: ARN;
     /**
-     * The type of AWS resource; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.
+     * The type of AWS resource; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For VSS Windows backups, the only supported resource type is Amazon EC2.
      */
     ResourceType?: ResourceType;
     /**
@@ -1852,7 +1902,7 @@ declare namespace Backup {
      */
     ResourceArn?: ARN;
     /**
-     * The type of AWS resource saved as a recovery point; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.
+     * The type of AWS resource saved as a recovery point; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For VSS Windows backups, the only supported resource type is Amazon EC2.
      */
     ResourceType?: ResourceType;
     /**
@@ -2004,7 +2054,7 @@ declare namespace Backup {
      */
     CreatedResourceArn?: ARN;
     /**
-     * The resource type of the listed restore jobs; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.
+     * The resource type of the listed restore jobs; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For VSS Windows backups, the only supported resource type is Amazon EC2.
      */
     ResourceType?: ResourceType;
   }
@@ -2041,6 +2091,10 @@ declare namespace Backup {
      * To help organize your resources, you can assign your own metadata to the resources that you create. Each tag is a key-value pair.
      */
     RecoveryPointTags?: Tags;
+    /**
+     * Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs. Valid value: "WindowsVSS”:“enabled". If enabled, creates a VSS Windows backup; otherwise, creates a regular backup.
+     */
+    BackupOptions?: BackupOptions;
   }
   export interface StartBackupJobOutput {
     /**
@@ -2095,7 +2149,7 @@ declare namespace Backup {
      */
     RecoveryPointArn: ARN;
     /**
-     * A set of metadata key-value pairs. Contains information, such as a resource name, required to restore a recovery point.  You can get configuration metadata about a resource at the time it was backed up by calling GetRecoveryPointRestoreMetadata. However, values in addition to those provided by GetRecoveryPointRestoreMetadata might be required to restore a resource. For example, you might need to provide a new resource name if the original already exists. You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:    file-system-id: ID of the Amazon EFS file system that is backed up by AWS Backup. Returned in GetRecoveryPointRestoreMetadata.    Encrypted: A Boolean value that, if true, specifies that the file system is encrypted. If KmsKeyId is specified, Encrypted must be set to true.    KmsKeyId: Specifies the AWS KMS key that is used to encrypt the restored file system.    PerformanceMode: Specifies the throughput mode of the file system.    CreationToken: A user-supplied value that ensures the uniqueness (idempotency) of the request.    newFileSystem: A Boolean value that, if true, specifies that the recovery point is restored to a new Amazon EFS file system.  
+     * A set of metadata key-value pairs. Contains information, such as a resource name, required to restore a recovery point.  You can get configuration metadata about a resource at the time it was backed up by calling GetRecoveryPointRestoreMetadata. However, values in addition to those provided by GetRecoveryPointRestoreMetadata might be required to restore a resource. For example, you might need to provide a new resource name if the original already exists. You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:    file-system-id: The ID of the Amazon EFS file system that is backed up by AWS Backup. Returned in GetRecoveryPointRestoreMetadata.    Encrypted: A Boolean value that, if true, specifies that the file system is encrypted. If KmsKeyId is specified, Encrypted must be set to true.    KmsKeyId: Specifies the AWS KMS key that is used to encrypt the restored file system.    PerformanceMode: Specifies the throughput mode of the file system.    CreationToken: A user-supplied value that ensures the uniqueness (idempotency) of the request.    newFileSystem: A Boolean value that, if true, specifies that the recovery point is restored to a new Amazon EFS file system.  
      */
     Metadata: Metadata;
     /**
@@ -2175,6 +2229,10 @@ declare namespace Backup {
      * Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most 1,024 bytes long. Version Ids cannot be edited.
      */
     VersionId?: string;
+    /**
+     * Contains a list of BackupOptions for each resource type.
+     */
+    AdvancedBackupSettings?: AdvancedBackupSettings;
   }
   export interface UpdateRecoveryPointLifecycleInput {
     /**
@@ -2210,7 +2268,7 @@ declare namespace Backup {
   }
   export interface UpdateRegionSettingsInput {
     /**
-     * Updates the list of services along with the opt-in preferences for the region.
+     * Updates the list of services along with the opt-in preferences for the Region.
      */
     ResourceTypeOptInPreference?: ResourceTypeOptInPreference;
   }

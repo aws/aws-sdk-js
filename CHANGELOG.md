@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.758.0-->
+<!--LATEST=2.759.0-->
 <!--ENTRYINSERT-->
+
+## 2.759.0
+* feature: Backup: This release allows customers to enable or disable advanced backup settings in backup plan. As part of this feature AWS Backup added support for  Windows VSS backup option for EC2 resources.
+* feature: CostExplorer: This release provides access to Cost Anomaly Detection Public Preview APIs. Cost Anomaly Detection finds cost anomalies based on your historical cost and usage using Machine Learning models.
+* feature: QuickSight: Added Sheet information to DescribeDashboard, DescribeTemplate and DescribeAnalysis API response.
+* feature: Translate: Improvements to DeleteTerminology API.
 
 ## 2.758.0
 * bugfix: Authentication: assume-role credentials ignore profile region
