@@ -117,7 +117,6 @@ declare class Synthetics extends Service {
   updateCanary(callback?: (err: AWSError, data: Synthetics.Types.UpdateCanaryResponse) => void): Request<Synthetics.Types.UpdateCanaryResponse, AWSError>;
 }
 declare namespace Synthetics {
-  export type Arn = string;
   export type _Blob = Buffer|Uint8Array|Blob|string;
   export type Canaries = Canary[];
   export type CanariesLastRun = CanaryLastRun[];
@@ -134,7 +133,7 @@ declare namespace Synthetics {
     /**
      * The ARN of the IAM role used to run the canary. This role must include lambda.amazonaws.com as a principal in the trust policy.
      */
-    ExecutionRoleArn?: Arn;
+    ExecutionRoleArn?: RoleArn;
     /**
      * A structure that contains information about how often the canary is to run, and when these runs are to stop.
      */
@@ -163,9 +162,9 @@ declare namespace Synthetics {
     /**
      * The ARN of the Lambda function that is used as your canary's engine. For more information about Lambda ARN format, see Resources and Conditions for Lambda Actions.
      */
-    EngineArn?: Arn;
+    EngineArn?: FunctionArn;
     /**
-     * Specifies the runtime version to use for the canary. Currently, the only valid value is syn-1.0. For more information about runtime versions, see  Canary Runtime Versions.
+     * Specifies the runtime version to use for the canary. Currently, the only valid values are syn-nodejs-2.0, syn-nodejs-2.0-beta, and syn-1.0. For more information about runtime versions, see  Canary Runtime Versions.
      */
     RuntimeVersion?: String;
     VpcConfig?: VpcConfigOutput;
@@ -174,6 +173,7 @@ declare namespace Synthetics {
      */
     Tags?: TagMap;
   }
+  export type CanaryArn = string;
   export interface CanaryCodeInput {
     /**
      * If your canary script is located in S3, specify the full bucket name here. The bucket must already exist. Specify the full bucket name, including s3:// as the start of the bucket name.
@@ -219,6 +219,10 @@ declare namespace Synthetics {
   export type CanaryName = string;
   export interface CanaryRun {
     /**
+     * A unique ID that identifies this canary run.
+     */
+    Id?: UUID;
+    /**
      * The name of the canary.
      */
     Name?: CanaryName;
@@ -237,13 +241,17 @@ declare namespace Synthetics {
   }
   export interface CanaryRunConfigInput {
     /**
-     * How long the canary is allowed to run before it must stop. If you omit this field, the frequency of the canary is used as this value, up to a maximum of 14 minutes.
+     * How long the canary is allowed to run before it must stop. You can't set this time to be longer than the frequency of the runs of this canary. If you omit this field, the frequency of the canary is used as this value, up to a maximum of 14 minutes.
      */
-    TimeoutInSeconds: MaxFifteenMinutesInSeconds;
+    TimeoutInSeconds?: MaxFifteenMinutesInSeconds;
     /**
-     * The maximum amount of memory available to the canary while it is running, in MB. The value you specify must be a multiple of 64.
+     * The maximum amount of memory available to the canary while it is running, in MB. This value must be a multiple of 64.
      */
     MemoryInMB?: MaxSize3008;
+    /**
+     * Specifies whether this canary is to use active AWS X-Ray tracing when it runs. Active tracing enables this canary run to be displayed in the ServiceLens and X-Ray service maps even if the canary does not hit an endpoint that has X-ray tracing enabled. Using X-Ray tracing incurs charges. For more information, see  Canaries and X-Ray tracing. You can enable active tracing only for canaries that use version syn-nodejs-2.0 or later for their canary runtime.
+     */
+    ActiveTracing?: NullableBoolean;
   }
   export interface CanaryRunConfigOutput {
     /**
@@ -251,9 +259,13 @@ declare namespace Synthetics {
      */
     TimeoutInSeconds?: MaxFifteenMinutesInSeconds;
     /**
-     * The maximum amount of memory available to the canary while it is running, in MB. The value you must be a multiple of 64.
+     * The maximum amount of memory available to the canary while it is running, in MB. This value must be a multiple of 64.
      */
     MemoryInMB?: MaxSize3008;
+    /**
+     * Displays whether this canary run used active AWS X-Ray tracing. 
+     */
+    ActiveTracing?: NullableBoolean;
   }
   export type CanaryRunState = "RUNNING"|"PASSED"|"FAILED"|string;
   export type CanaryRunStateReasonCode = "CANARY_FAILURE"|"EXECUTION_FAILURE"|string;
@@ -350,9 +362,9 @@ declare namespace Synthetics {
      */
     ArtifactS3Location: String;
     /**
-     * The ARN of the IAM role to be used to run the canary. This role must already exist, and must include lambda.amazonaws.com as a principal in the trust policy. The role must also have the following permissions:    s3:PutObject     s3:GetBucketLocation     s3:ListAllMyBuckets     cloudwatch:PutMetricData     logs:CreateLogGroup     logs:CreateLogStream     logs:CreateLogStream   
+     * The ARN of the IAM role to be used to run the canary. This role must already exist, and must include lambda.amazonaws.com as a principal in the trust policy. The role must also have the following permissions:    s3:PutObject     s3:GetBucketLocation     s3:ListAllMyBuckets     cloudwatch:PutMetricData     logs:CreateLogGroup     logs:CreateLogStream     logs:PutLogEvents   
      */
-    ExecutionRoleArn: Arn;
+    ExecutionRoleArn: RoleArn;
     /**
      * A structure that contains information about how often the canary is to run and when these test runs are to stop.
      */
@@ -370,7 +382,7 @@ declare namespace Synthetics {
      */
     FailureRetentionPeriodInDays?: MaxSize1024;
     /**
-     * Specifies the runtime version to use for the canary. Currently, the only valid value is syn-1.0. For more information about runtime versions, see  Canary Runtime Versions.
+     * Specifies the runtime version to use for the canary. Currently, the only valid values are syn-nodejs-2.0, syn-nodejs-2.0-beta, and syn-1.0. For more information about runtime versions, see  Canary Runtime Versions.
      */
     RuntimeVersion: String;
     /**
@@ -456,6 +468,7 @@ declare namespace Synthetics {
      */
     NextToken?: Token;
   }
+  export type FunctionArn = string;
   export interface GetCanaryRequest {
     /**
      * The name of the canary that you want details for.
@@ -496,7 +509,7 @@ declare namespace Synthetics {
     /**
      * The ARN of the canary that you want to view tags for. The ARN format of a canary is arn:aws:synthetics:Region:account-id:canary:canary-name .
      */
-    ResourceArn: Arn;
+    ResourceArn: CanaryArn;
   }
   export interface ListTagsForResourceResponse {
     /**
@@ -510,9 +523,11 @@ declare namespace Synthetics {
   export type MaxSize100 = number;
   export type MaxSize1024 = number;
   export type MaxSize3008 = number;
+  export type NullableBoolean = boolean;
+  export type RoleArn = string;
   export interface RuntimeVersion {
     /**
-     * The name of the runtime version. Currently, the only valid value is syn-1.0.  Specifies the runtime version to use for the canary. Currently, the only valid value is syn-1.0.
+     * The name of the runtime version. Currently, the only valid values are syn-nodejs-2.0, syn-nodejs-2.0-beta, and syn-1.0.
      */
     VersionName?: String;
     /**
@@ -557,7 +572,7 @@ declare namespace Synthetics {
     /**
      * The ARN of the canary that you're adding tags to. The ARN format of a canary is arn:aws:synthetics:Region:account-id:canary:canary-name .
      */
-    ResourceArn: Arn;
+    ResourceArn: CanaryArn;
     /**
      * The list of key-value pairs to associate with the canary.
      */
@@ -573,7 +588,7 @@ declare namespace Synthetics {
     /**
      * The ARN of the canary that you're removing tags from. The ARN format of a canary is arn:aws:synthetics:Region:account-id:canary:canary-name .
      */
-    ResourceArn: Arn;
+    ResourceArn: CanaryArn;
     /**
      * The list of tag keys to remove from the resource.
      */
@@ -593,9 +608,9 @@ declare namespace Synthetics {
     /**
      * The ARN of the IAM role to be used to run the canary. This role must already exist, and must include lambda.amazonaws.com as a principal in the trust policy. The role must also have the following permissions:    s3:PutObject     s3:GetBucketLocation     s3:ListAllMyBuckets     cloudwatch:PutMetricData     logs:CreateLogGroup     logs:CreateLogStream     logs:CreateLogStream   
      */
-    ExecutionRoleArn?: Arn;
+    ExecutionRoleArn?: RoleArn;
     /**
-     * Specifies the runtime version to use for the canary. Currently, the only valid value is syn-1.0. For more information about runtime versions, see  Canary Runtime Versions.
+     * Specifies the runtime version to use for the canary. Currently, the only valid values are syn-nodejs-2.0, syn-nodejs-2.0-beta, and syn-1.0. For more information about runtime versions, see  Canary Runtime Versions.
      */
     RuntimeVersion?: String;
     /**

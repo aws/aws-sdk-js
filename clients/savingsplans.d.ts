@@ -20,6 +20,14 @@ declare class SavingsPlans extends Service {
    */
   createSavingsPlan(callback?: (err: AWSError, data: SavingsPlans.Types.CreateSavingsPlanResponse) => void): Request<SavingsPlans.Types.CreateSavingsPlanResponse, AWSError>;
   /**
+   * Deletes the queued purchase for the specified Savings Plan.
+   */
+  deleteQueuedSavingsPlan(params: SavingsPlans.Types.DeleteQueuedSavingsPlanRequest, callback?: (err: AWSError, data: SavingsPlans.Types.DeleteQueuedSavingsPlanResponse) => void): Request<SavingsPlans.Types.DeleteQueuedSavingsPlanResponse, AWSError>;
+  /**
+   * Deletes the queued purchase for the specified Savings Plan.
+   */
+  deleteQueuedSavingsPlan(callback?: (err: AWSError, data: SavingsPlans.Types.DeleteQueuedSavingsPlanResponse) => void): Request<SavingsPlans.Types.DeleteQueuedSavingsPlanResponse, AWSError>;
+  /**
    * Describes the specified Savings Plans rates.
    */
   describeSavingsPlanRates(params: SavingsPlans.Types.DescribeSavingsPlanRatesRequest, callback?: (err: AWSError, data: SavingsPlans.Types.DescribeSavingsPlanRatesResponse) => void): Request<SavingsPlans.Types.DescribeSavingsPlanRatesResponse, AWSError>;
@@ -93,6 +101,10 @@ declare namespace SavingsPlans {
      */
     upfrontPaymentAmount?: Amount;
     /**
+     * The time at which to purchase the Savings Plan, in UTC format (YYYY-MM-DDTHH:MM:SSZ).
+     */
+    purchaseTime?: DateTime;
+    /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     clientToken?: ClientToken;
@@ -109,6 +121,15 @@ declare namespace SavingsPlans {
   }
   export type CurrencyCode = "CNY"|"USD"|string;
   export type CurrencyList = CurrencyCode[];
+  export type DateTime = Date;
+  export interface DeleteQueuedSavingsPlanRequest {
+    /**
+     * The ID of the Savings Plan.
+     */
+    savingsPlanId: SavingsPlanId;
+  }
+  export interface DeleteQueuedSavingsPlanResponse {
+  }
   export interface DescribeSavingsPlanRatesRequest {
     /**
      * The ID of the Savings Plan.
@@ -630,14 +651,14 @@ declare namespace SavingsPlans {
   }
   export type SavingsPlanRatePropertyKey = "region"|"instanceType"|"instanceFamily"|"productDescription"|"tenancy"|string;
   export type SavingsPlanRatePropertyList = SavingsPlanRateProperty[];
-  export type SavingsPlanRateServiceCode = "AmazonEC2"|"AmazonECS"|"AmazonEKS"|"AWSLambda"|string;
+  export type SavingsPlanRateServiceCode = "AmazonEC2"|"AmazonECS"|"AWSLambda"|string;
   export type SavingsPlanRateServiceCodeList = SavingsPlanRateServiceCode[];
   export type SavingsPlanRateUnit = "Hrs"|"Lambda-GB-Second"|"Request"|string;
   export type SavingsPlanRateUsageType = string;
   export type SavingsPlanRateUsageTypeList = SavingsPlanRateUsageType[];
   export type SavingsPlanServiceCode = string;
   export type SavingsPlanServiceCodeList = SavingsPlanServiceCode[];
-  export type SavingsPlanState = "payment-pending"|"payment-failed"|"active"|"retired"|string;
+  export type SavingsPlanState = "payment-pending"|"payment-failed"|"active"|"retired"|"queued"|"queued-deleted"|string;
   export type SavingsPlanStateList = SavingsPlanState[];
   export type SavingsPlanType = "Compute"|"EC2Instance"|string;
   export type SavingsPlanTypeList = SavingsPlanType[];

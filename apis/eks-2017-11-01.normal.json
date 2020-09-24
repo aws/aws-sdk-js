@@ -729,6 +729,10 @@
           "shape": "VpcConfigResponse",
           "documentation": "<p>The VPC configuration used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html\">Cluster VPC Considerations</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html\">Cluster Security Group Considerations</a> in the <i>Amazon EKS User Guide</i>.</p>"
         },
+        "kubernetesNetworkConfig": {
+          "shape": "KubernetesNetworkConfigResponse",
+          "documentation": "<p>Network configuration settings for your cluster.</p>"
+        },
         "logging": {
           "shape": "Logging",
           "documentation": "<p>The logging configuration for your cluster.</p>"
@@ -803,6 +807,10 @@
         "resourcesVpcConfig": {
           "shape": "VpcConfigRequest",
           "documentation": "<p>The VPC configuration used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/network_reqs.html\">Cluster VPC Considerations</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html\">Cluster Security Group Considerations</a> in the <i>Amazon EKS User Guide</i>. You must specify at least two subnets. You can specify up to five security groups, but we recommend that you use a dedicated security group for your cluster control plane.</p>"
+        },
+        "kubernetesNetworkConfig": {
+          "shape": "KubernetesNetworkConfigRequest",
+          "documentation": "<p>The Kubernetes network configuration for the cluster.</p>"
         },
         "logging": {
           "shape": "Logging",
@@ -919,7 +927,7 @@
         },
         "amiType": {
           "shape": "AMITypes",
-          "documentation": "<p>The AMI type for your node group. GPU instance types should use the <code>AL2_x86_64_GPU</code> AMI type, which uses the Amazon EKS-optimized Linux AMI with GPU support. Non-GPU instances should use the <code>AL2_x86_64</code> AMI type, which uses the Amazon EKS-optimized Linux AMI. If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify <code>amiType</code>, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>"
+          "documentation": "<p>The AMI type for your node group. GPU instance types should use the <code>AL2_x86_64_GPU</code> AMI type. Non-GPU instances should use the <code>AL2_x86_64</code> AMI type. Arm instances should use the <code>AL2_ARM_64</code> AMI type. All types use the Amazon EKS-optimized Amazon Linux 2 AMI. If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify <code>amiType</code>, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>"
         },
         "remoteAccess": {
           "shape": "RemoteAccessConfig",
@@ -944,7 +952,7 @@
         },
         "launchTemplate": {
           "shape": "LaunchTemplateSpecification",
-          "documentation": "<p>An object representing a node group's launch template specification. If specified, then do not specify <code>instanceTypes</code>, <code>diskSize</code>, or <code>remoteAccess</code>. If specified, make sure that the launch template meets the requirements in <code>launchTemplateSpecification</code>.</p>"
+          "documentation": "<p>An object representing a node group's launch template specification. If specified, then do not specify <code>instanceTypes</code>, <code>diskSize</code>, or <code>remoteAccess</code> and make sure that the launch template meets the requirements in <code>launchTemplateSpecification</code>.</p>"
         },
         "version": {
           "shape": "String",
@@ -1349,6 +1357,26 @@
         "shape": "Issue"
       }
     },
+    "KubernetesNetworkConfigRequest": {
+      "type": "structure",
+      "members": {
+        "serviceIpv4Cidr": {
+          "shape": "String",
+          "documentation": "<p>The CIDR block to assign Kubernetes service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. The block must meet the following requirements:</p> <ul> <li> <p>Within one of the following private IP address blocks: 10.0.0.0/8, 172.16.0.0.0/12, or 192.168.0.0/16.</p> </li> <li> <p>Doesn't overlap with any CIDR block assigned to the VPC that you selected for VPC.</p> </li> <li> <p>Between /24 and /12.</p> </li> </ul> <important> <p>You can only specify a custom CIDR block when you create a cluster and can't change this value once the cluster is created.</p> </important>"
+        }
+      },
+      "documentation": "<p>The Kubernetes network configuration for the cluster.</p>"
+    },
+    "KubernetesNetworkConfigResponse": {
+      "type": "structure",
+      "members": {
+        "serviceIpv4Cidr": {
+          "shape": "String",
+          "documentation": "<p>The CIDR block that Kubernetes service IP addresses are assigned from. If you didn't specify a CIDR block, then Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. If this was specified, then it was specified when the cluster was created and it cannot be changed.</p>"
+        }
+      },
+      "documentation": "<p>The Kubernetes network configuration for the cluster.</p>"
+    },
     "LaunchTemplateSpecification": {
       "type": "structure",
       "members": {
@@ -1648,7 +1676,7 @@
         },
         "instanceTypes": {
           "shape": "StringList",
-          "documentation": "<p>If the node group wasn't deployed with a launch template, then this is the instance type that is associated with the node group. If the node group was deployed with a launch template, then <code>instanceTypes</code> is <code>null</code>.</p>"
+          "documentation": "<p>If the node group wasn't deployed with a launch template, then this is the instance type that is associated with the node group. If the node group was deployed with a launch template, then this is <code>null</code>.</p>"
         },
         "subnets": {
           "shape": "StringList",
@@ -1656,7 +1684,7 @@
         },
         "remoteAccess": {
           "shape": "RemoteAccessConfig",
-          "documentation": "<p>If the node group wasn't deployed with a launch template, then this is the remote access configuration that is associated with the node group. If the node group was deployed with a launch template, then <code>remoteAccess</code> is <code>null</code>.</p>"
+          "documentation": "<p>If the node group wasn't deployed with a launch template, then this is the remote access configuration that is associated with the node group. If the node group was deployed with a launch template, then this is <code>null</code>.</p>"
         },
         "amiType": {
           "shape": "AMITypes",
@@ -1676,7 +1704,7 @@
         },
         "diskSize": {
           "shape": "BoxedInteger",
-          "documentation": "<p>If the node group wasn't deployed with a launch template, then this is the disk size in the node group configuration. If the node group was deployed with a launch template, then <code>diskSize</code> is <code>null</code>.</p>"
+          "documentation": "<p>If the node group wasn't deployed with a launch template, then this is the disk size in the node group configuration. If the node group was deployed with a launch template, then this is <code>null</code>.</p>"
         },
         "health": {
           "shape": "NodegroupHealth",

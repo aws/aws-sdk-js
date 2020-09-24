@@ -262,6 +262,10 @@ declare namespace EKS {
      */
     resourcesVpcConfig?: VpcConfigResponse;
     /**
+     * Network configuration settings for your cluster.
+     */
+    kubernetesNetworkConfig?: KubernetesNetworkConfigResponse;
+    /**
      * The logging configuration for your cluster.
      */
     logging?: Logging;
@@ -313,6 +317,10 @@ declare namespace EKS {
      * The VPC configuration used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see Cluster VPC Considerations and Cluster Security Group Considerations in the Amazon EKS User Guide. You must specify at least two subnets. You can specify up to five security groups, but we recommend that you use a dedicated security group for your cluster control plane.
      */
     resourcesVpcConfig: VpcConfigRequest;
+    /**
+     * The Kubernetes network configuration for the cluster.
+     */
+    kubernetesNetworkConfig?: KubernetesNetworkConfigRequest;
     /**
      * Enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more information, see Amazon EKS Cluster Control Plane Logs in the  Amazon EKS User Guide .  CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported control plane logs. For more information, see Amazon CloudWatch Pricing. 
      */
@@ -398,7 +406,7 @@ declare namespace EKS {
      */
     instanceTypes?: StringList;
     /**
-     * The AMI type for your node group. GPU instance types should use the AL2_x86_64_GPU AMI type, which uses the Amazon EKS-optimized Linux AMI with GPU support. Non-GPU instances should use the AL2_x86_64 AMI type, which uses the Amazon EKS-optimized Linux AMI. If you specify launchTemplate, and your launch template uses a custom AMI, then don't specify amiType, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see Launch template support in the Amazon EKS User Guide.
+     * The AMI type for your node group. GPU instance types should use the AL2_x86_64_GPU AMI type. Non-GPU instances should use the AL2_x86_64 AMI type. Arm instances should use the AL2_ARM_64 AMI type. All types use the Amazon EKS-optimized Amazon Linux 2 AMI. If you specify launchTemplate, and your launch template uses a custom AMI, then don't specify amiType, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see Launch template support in the Amazon EKS User Guide.
      */
     amiType?: AMITypes;
     /**
@@ -422,7 +430,7 @@ declare namespace EKS {
      */
     clientRequestToken?: String;
     /**
-     * An object representing a node group's launch template specification. If specified, then do not specify instanceTypes, diskSize, or remoteAccess. If specified, make sure that the launch template meets the requirements in launchTemplateSpecification.
+     * An object representing a node group's launch template specification. If specified, then do not specify instanceTypes, diskSize, or remoteAccess and make sure that the launch template meets the requirements in launchTemplateSpecification.
      */
     launchTemplate?: LaunchTemplateSpecification;
     /**
@@ -648,6 +656,18 @@ declare namespace EKS {
     resourceIds?: StringList;
   }
   export type IssueList = Issue[];
+  export interface KubernetesNetworkConfigRequest {
+    /**
+     * The CIDR block to assign Kubernetes service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. The block must meet the following requirements:   Within one of the following private IP address blocks: 10.0.0.0/8, 172.16.0.0.0/12, or 192.168.0.0/16.   Doesn't overlap with any CIDR block assigned to the VPC that you selected for VPC.   Between /24 and /12.    You can only specify a custom CIDR block when you create a cluster and can't change this value once the cluster is created. 
+     */
+    serviceIpv4Cidr?: String;
+  }
+  export interface KubernetesNetworkConfigResponse {
+    /**
+     * The CIDR block that Kubernetes service IP addresses are assigned from. If you didn't specify a CIDR block, then Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. If this was specified, then it was specified when the cluster was created and it cannot be changed.
+     */
+    serviceIpv4Cidr?: String;
+  }
   export interface LaunchTemplateSpecification {
     /**
      * The name of the launch template.
@@ -830,7 +850,7 @@ declare namespace EKS {
      */
     scalingConfig?: NodegroupScalingConfig;
     /**
-     * If the node group wasn't deployed with a launch template, then this is the instance type that is associated with the node group. If the node group was deployed with a launch template, then instanceTypes is null.
+     * If the node group wasn't deployed with a launch template, then this is the instance type that is associated with the node group. If the node group was deployed with a launch template, then this is null.
      */
     instanceTypes?: StringList;
     /**
@@ -838,7 +858,7 @@ declare namespace EKS {
      */
     subnets?: StringList;
     /**
-     * If the node group wasn't deployed with a launch template, then this is the remote access configuration that is associated with the node group. If the node group was deployed with a launch template, then remoteAccess is null.
+     * If the node group wasn't deployed with a launch template, then this is the remote access configuration that is associated with the node group. If the node group was deployed with a launch template, then this is null.
      */
     remoteAccess?: RemoteAccessConfig;
     /**
@@ -858,7 +878,7 @@ declare namespace EKS {
      */
     resources?: NodegroupResources;
     /**
-     * If the node group wasn't deployed with a launch template, then this is the disk size in the node group configuration. If the node group was deployed with a launch template, then diskSize is null.
+     * If the node group wasn't deployed with a launch template, then this is the disk size in the node group configuration. If the node group was deployed with a launch template, then this is null.
      */
     diskSize?: BoxedInteger;
     /**

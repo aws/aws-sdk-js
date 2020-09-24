@@ -265,7 +265,7 @@ declare namespace Textract {
      */
     Warnings?: Warnings;
     /**
-     * The current status of an asynchronous document-analysis operation.
+     * Returns if the detection job could not be completed. Contains explanation for what error occured.
      */
     StatusMessage?: StatusMessage;
     /**
@@ -309,7 +309,7 @@ declare namespace Textract {
      */
     Warnings?: Warnings;
     /**
-     * The current status of an asynchronous text-detection operation for the document. 
+     * Returns if the detection job could not be completed. Contains explanation for what error occured. 
      */
     StatusMessage?: StatusMessage;
     /**
@@ -373,6 +373,16 @@ declare namespace Textract {
      */
     RoleArn: RoleArn;
   }
+  export interface OutputConfig {
+    /**
+     * The name of the bucket your output will go to.
+     */
+    S3Bucket: S3Bucket;
+    /**
+     * The prefix of the object key that the output will be saved to. When not enabled, the prefix will be “textract_output".
+     */
+    S3Prefix?: S3ObjectName;
+  }
   export type Pages = UInteger[];
   export type PaginationToken = string;
   export type Percent = number;
@@ -389,7 +399,7 @@ declare namespace Textract {
   export type Polygon = Point[];
   export interface Relationship {
     /**
-     * The type of relationship that the blocks in the IDs array have with the current block. The relationship can be VALUE or CHILD. A relationship of type VALUE is a list that contains the ID of the VALUE block that's associated with the KEY of a key-value pair. A relationship of type CHILD is a list of IDs that identify WORD blocks.
+     * The type of relationship that the blocks in the IDs array have with the current block. The relationship can be VALUE or CHILD. A relationship of type VALUE is a list that contains the ID of the VALUE block that's associated with the KEY of a key-value pair. A relationship of type CHILD is a list of IDs that identify WORD blocks in the case of lines Cell blocks in the case of Tables, and WORD blocks in the case of Selection Elements.
      */
     Type?: RelationshipType;
     /**
@@ -398,7 +408,7 @@ declare namespace Textract {
     Ids?: IdList;
   }
   export type RelationshipList = Relationship[];
-  export type RelationshipType = "VALUE"|"CHILD"|string;
+  export type RelationshipType = "VALUE"|"CHILD"|"COMPLEX_FEATURES"|string;
   export type RoleArn = string;
   export type S3Bucket = string;
   export interface S3Object {
@@ -440,6 +450,10 @@ declare namespace Textract {
      * The Amazon SNS topic ARN that you want Amazon Textract to publish the completion status of the operation to. 
      */
     NotificationChannel?: NotificationChannel;
+    /**
+     * Sets if the output will go to a customer defined bucket. By default, Amazon Textract will save the results internally to be accessed by the GetDocumentAnalysis operation.
+     */
+    OutputConfig?: OutputConfig;
   }
   export interface StartDocumentAnalysisResponse {
     /**
@@ -464,6 +478,10 @@ declare namespace Textract {
      * The Amazon SNS topic ARN that you want Amazon Textract to publish the completion status of the operation to. 
      */
     NotificationChannel?: NotificationChannel;
+    /**
+     * Sets if the output will go to a customer defined bucket. By default Amazon Textract will save the results internally to be accessed with the GetDocumentTextDetection operation.
+     */
+    OutputConfig?: OutputConfig;
   }
   export interface StartDocumentTextDetectionResponse {
     /**

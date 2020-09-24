@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.759.0-->
+<!--LATEST=2.760.0-->
 <!--ENTRYINSERT-->
+
+## 2.760.0
+* feature: Amplify: Allow Oauth Token in CreateApp call to be a maximum of 1000 characters instead of 100
+* feature: EKS: Amazon EKS now supports configuring your cluster's service CIDR during cluster creation.
+* feature: SavingsPlans: Introducing Queued SavingsPlans that will enable customers to queue their purchase request of Savings Plans for future dates.
+* feature: Synthetics: AWS Synthetics now supports AWS X-Ray Active Tracing feature. RunConfig is now an optional parameter with timeout updated from (60 - 900 seconds) to (3 - 840 seconds).
+* feature: Textract: AWS Textract now supports output results for asynchronous jobs to customer specified s3 bucket.
+* feature: TranscribeService: Amazon Transcribe now supports WebM, OGG, AMR and AMR-WB as input formats. You can also specify an output key as a location within your S3 buckets to store the output of your transcription jobs.
 
 ## 2.759.0
 * feature: Backup: This release allows customers to enable or disable advanced backup settings in backup plan. As part of this feature AWS Backup added support for  Windows VSS backup option for EC2 resources.
