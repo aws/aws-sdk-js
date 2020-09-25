@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.760.0-->
+<!--LATEST=2.761.0-->
 <!--ENTRYINSERT-->
+
+## 2.761.0
+* feature: Batch: Support custom logging, executionRole, secrets, and linuxParameters (initProcessEnabled, maxSwap, swappiness, sharedMemorySize, and tmpfs). Also, add new context keys for awslogs.
+* feature: ConfigService: Make the delivery-s3-bucket as an optional parameter for conformance packs and organizational conformance packs
+* feature: EC2: This release supports returning additional information about local gateway resources, such as the local gateway route table.
+* feature: FraudDetector: Increased maximum length of eventVariables values for GetEventPrediction from 256 to 1024.
+* feature: STS: Documentation update for AssumeRole error
 
 ## 2.760.0
 * feature: Amplify: Allow Oauth Token in CreateApp call to be a maximum of 1000 characters instead of 100

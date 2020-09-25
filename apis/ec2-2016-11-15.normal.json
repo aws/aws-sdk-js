@@ -27852,7 +27852,7 @@
         },
         "OwnerId": {
           "shape": "String",
-          "documentation": "<p>The ID of the AWS account ID that owns the local gateway.</p>",
+          "documentation": "<p>The AWS account ID that owns the local gateway.</p>",
           "locationName": "ownerId"
         },
         "State": {
@@ -27910,6 +27910,16 @@
           "shape": "LocalGatewayRoutetableId",
           "documentation": "<p>The ID of the local gateway route table.</p>",
           "locationName": "localGatewayRouteTableId"
+        },
+        "LocalGatewayRouteTableArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the local gateway route table.</p>",
+          "locationName": "localGatewayRouteTableArn"
+        },
+        "OwnerId": {
+          "shape": "String",
+          "documentation": "<p>The AWS account ID that owns the local gateway route.</p>",
+          "locationName": "ownerId"
         }
       },
       "documentation": "<p>Describes a route for a local gateway route table.</p>"
@@ -27939,6 +27949,11 @@
           "documentation": "<p>The ID of the local gateway route table.</p>",
           "locationName": "localGatewayRouteTableId"
         },
+        "LocalGatewayRouteTableArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the local gateway route table.</p>",
+          "locationName": "localGatewayRouteTableArn"
+        },
         "LocalGatewayId": {
           "shape": "LocalGatewayId",
           "documentation": "<p>The ID of the local gateway.</p>",
@@ -27948,6 +27963,11 @@
           "shape": "String",
           "documentation": "<p>The Amazon Resource Name (ARN) of the Outpost.</p>",
           "locationName": "outpostArn"
+        },
+        "OwnerId": {
+          "shape": "String",
+          "documentation": "<p>The AWS account ID that owns the local gateway route table.</p>",
+          "locationName": "ownerId"
         },
         "State": {
           "shape": "String",
@@ -27999,6 +28019,16 @@
           "documentation": "<p>The ID of the local gateway route table.</p>",
           "locationName": "localGatewayRouteTableId"
         },
+        "LocalGatewayRouteTableArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the local gateway route table for the virtual interface group.</p>",
+          "locationName": "localGatewayRouteTableArn"
+        },
+        "OwnerId": {
+          "shape": "String",
+          "documentation": "<p>The AWS account ID that owns the local gateway virtual interface group association.</p>",
+          "locationName": "ownerId"
+        },
         "State": {
           "shape": "String",
           "documentation": "<p>The state of the association.</p>",
@@ -28042,6 +28072,11 @@
           "documentation": "<p>The ID of the local gateway route table.</p>",
           "locationName": "localGatewayRouteTableId"
         },
+        "LocalGatewayRouteTableArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the local gateway route table for the association.</p>",
+          "locationName": "localGatewayRouteTableArn"
+        },
         "LocalGatewayId": {
           "shape": "String",
           "documentation": "<p>The ID of the local gateway.</p>",
@@ -28051,6 +28086,11 @@
           "shape": "String",
           "documentation": "<p>The ID of the VPC.</p>",
           "locationName": "vpcId"
+        },
+        "OwnerId": {
+          "shape": "String",
+          "documentation": "<p>The AWS account ID that owns the local gateway route table for the association.</p>",
+          "locationName": "ownerId"
         },
         "State": {
           "shape": "String",

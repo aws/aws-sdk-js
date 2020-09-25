@@ -532,7 +532,7 @@ declare namespace DocDB {
      */
     Engine: String;
     /**
-     * The version number of the database engine to use.
+     * The version number of the database engine to use. The --engine-version will default to the latest major engine version. For production workloads, we recommend explicitly declaring this parameter with the intended major engine version.
      */
     EngineVersion?: String;
     /**

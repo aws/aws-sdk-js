@@ -17510,7 +17510,7 @@ declare namespace EC2 {
      */
     OutpostArn?: String;
     /**
-     * The ID of the AWS account ID that owns the local gateway.
+     * The AWS account ID that owns the local gateway.
      */
     OwnerId?: String;
     /**
@@ -17546,6 +17546,14 @@ declare namespace EC2 {
      * The ID of the local gateway route table.
      */
     LocalGatewayRouteTableId?: LocalGatewayRoutetableId;
+    /**
+     * The Amazon Resource Name (ARN) of the local gateway route table.
+     */
+    LocalGatewayRouteTableArn?: ResourceArn;
+    /**
+     * The AWS account ID that owns the local gateway route.
+     */
+    OwnerId?: String;
   }
   export type LocalGatewayRouteList = LocalGatewayRoute[];
   export type LocalGatewayRouteState = "pending"|"active"|"blackhole"|"deleting"|"deleted"|string;
@@ -17555,6 +17563,10 @@ declare namespace EC2 {
      */
     LocalGatewayRouteTableId?: String;
     /**
+     * The Amazon Resource Name (ARN) of the local gateway route table.
+     */
+    LocalGatewayRouteTableArn?: ResourceArn;
+    /**
      * The ID of the local gateway.
      */
     LocalGatewayId?: LocalGatewayId;
@@ -17562,6 +17574,10 @@ declare namespace EC2 {
      * The Amazon Resource Name (ARN) of the Outpost.
      */
     OutpostArn?: String;
+    /**
+     * The AWS account ID that owns the local gateway route table.
+     */
+    OwnerId?: String;
     /**
      * The state of the local gateway route table.
      */
@@ -17591,6 +17607,14 @@ declare namespace EC2 {
      */
     LocalGatewayRouteTableId?: LocalGatewayId;
     /**
+     * The Amazon Resource Name (ARN) of the local gateway route table for the virtual interface group.
+     */
+    LocalGatewayRouteTableArn?: ResourceArn;
+    /**
+     * The AWS account ID that owns the local gateway virtual interface group association.
+     */
+    OwnerId?: String;
+    /**
      * The state of the association.
      */
     State?: String;
@@ -17612,6 +17636,10 @@ declare namespace EC2 {
      */
     LocalGatewayRouteTableId?: String;
     /**
+     * The Amazon Resource Name (ARN) of the local gateway route table for the association.
+     */
+    LocalGatewayRouteTableArn?: ResourceArn;
+    /**
      * The ID of the local gateway.
      */
     LocalGatewayId?: String;
@@ -17619,6 +17647,10 @@ declare namespace EC2 {
      * The ID of the VPC.
      */
     VpcId?: String;
+    /**
+     * The AWS account ID that owns the local gateway route table for the association.
+     */
+    OwnerId?: String;
     /**
      * The state of the association.
      */

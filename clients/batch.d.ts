@@ -205,11 +205,11 @@ declare namespace Batch {
      */
     container?: AttemptContainerDetail;
     /**
-     * The Unix timestamp (in seconds and milliseconds) for when the attempt was started (when the attempt transitioned from the STARTING state to the RUNNING state).
+     * The Unix timestamp (in milliseconds) for when the attempt was started (when the attempt transitioned from the STARTING state to the RUNNING state).
      */
     startedAt?: Long;
     /**
-     * The Unix timestamp (in seconds and milliseconds) for when the attempt was stopped (when the attempt transitioned from the RUNNING state to a terminal state, such as SUCCEEDED or FAILED).
+     * The Unix timestamp (in milliseconds) for when the attempt was stopped (when the attempt transitioned from the RUNNING state to a terminal state, such as SUCCEEDED or FAILED).
      */
     stoppedAt?: Long;
     /**
@@ -388,6 +388,10 @@ declare namespace Batch {
      */
     jobRoleArn?: String;
     /**
+     * The Amazon Resource Name (ARN) of the execution role that AWS Batch can assume. For more information, see Amazon ECS task execution IAM role.
+     */
+    executionRoleArn?: String;
+    /**
      * A list of volumes associated with the job.
      */
     volumes?: Volumes;
@@ -451,6 +455,14 @@ declare namespace Batch {
      * Linux-specific modifications that are applied to the container, such as details for device mappings.
      */
     linuxParameters?: LinuxParameters;
+    /**
+     * The log configuration specification for the container. This parameter maps to LogConfig in the Create a container section of the Docker Remote API and the --log-driver option to docker run. By default, containers use the same logging driver that the Docker daemon uses. However the container may use a different logging driver than the Docker daemon by specifying a log driver with this parameter in the container definition. To use a different logging driver for a container, the log system must be configured properly on the container instance (or on a different log server for remote logging options). For more information on the options for different supported log drivers, see Configure logging drivers in the Docker documentation.  AWS Batch currently supports a subset of the logging drivers available to the Docker daemon (shown in the LogConfiguration data type). Additional log drivers may be available in future releases of the Amazon ECS container agent.  This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: sudo docker version | grep "Server API version"   The Amazon ECS container agent running on a container instance must register the logging drivers available on that instance with the ECS_AVAILABLE_LOGGING_DRIVERS environment variable before containers placed on that instance can use these log configuration options. For more information, see Amazon ECS Container Agent Configuration in the Amazon Elastic Container Service Developer Guide. 
+     */
+    logConfiguration?: LogConfiguration;
+    /**
+     * The secrets to pass to the container. For more information, see Specifying Sensitive Data in the Amazon Elastic Container Service Developer Guide.
+     */
+    secrets?: SecretList;
   }
   export interface ContainerOverrides {
     /**
@@ -484,11 +496,11 @@ declare namespace Batch {
      */
     image?: String;
     /**
-     * The number of vCPUs reserved for the container. This parameter maps to CpuShares in the Create a container section of the Docker Remote API and the --cpu-shares option to docker run. Each vCPU is equivalent to 1,024 CPU shares. You must specify at least one vCPU.
+     * The number of vCPUs reserved for the container. This parameter maps to CpuShares in the Create a container section of the Docker Remote API and the --cpu-shares option to docker run. Each vCPU is equivalent to 1,024 CPU shares. You must specify at least one vCPU. This is required but can be specified in several places for multi-node parallel (MNP) jobs; it must be specified for each node at least once.
      */
     vcpus?: Integer;
     /**
-     * The hard limit (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed. This parameter maps to Memory in the Create a container section of the Docker Remote API and the --memory option to docker run. You must specify at least 4 MiB of memory for a job.  If you are trying to maximize your resource utilization by providing your jobs as much memory as possible for a particular instance type, see Memory Management in the AWS Batch User Guide. 
+     * The hard limit (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed. This parameter maps to Memory in the Create a container section of the Docker Remote API and the --memory option to docker run. You must specify at least 4 MiB of memory for a job. This is required but can be specified in several places for multi-node parallel (MNP) jobs; it must be specified for each node at least once.  If you are trying to maximize your resource utilization by providing your jobs as much memory as possible for a particular instance type, see Memory Management in the AWS Batch User Guide. 
      */
     memory?: Integer;
     /**
@@ -499,6 +511,10 @@ declare namespace Batch {
      * The Amazon Resource Name (ARN) of the IAM role that the container can assume for AWS permissions.
      */
     jobRoleArn?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the execution role that AWS Batch can assume. For more information, see Amazon ECS task execution IAM role.
+     */
+    executionRoleArn?: String;
     /**
      * A list of data volumes used in a job.
      */
@@ -539,6 +555,14 @@ declare namespace Batch {
      * Linux-specific modifications that are applied to the container, such as details for device mappings.
      */
     linuxParameters?: LinuxParameters;
+    /**
+     * The log configuration specification for the container. This parameter maps to LogConfig in the Create a container section of the Docker Remote API and the --log-driver option to docker run. By default, containers use the same logging driver that the Docker daemon uses. However the container may use a different logging driver than the Docker daemon by specifying a log driver with this parameter in the container definition. To use a different logging driver for a container, the log system must be configured properly on the container instance (or on a different log server for remote logging options). For more information on the options for different supported log drivers, see Configure logging drivers in the Docker documentation.  AWS Batch currently supports a subset of the logging drivers available to the Docker daemon (shown in the LogConfiguration data type).  This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: sudo docker version | grep "Server API version"   The Amazon ECS container agent running on a container instance must register the logging drivers available on that instance with the ECS_AVAILABLE_LOGGING_DRIVERS environment variable before containers placed on that instance can use these log configuration options. For more information, see Amazon ECS Container Agent Configuration in the Amazon Elastic Container Service Developer Guide. 
+     */
+    logConfiguration?: LogConfiguration;
+    /**
+     * The secrets for the container. For more information, see Specifying Sensitive Data in the Amazon Elastic Container Service Developer Guide.
+     */
+    secrets?: SecretList;
   }
   export interface ContainerSummary {
     /**
@@ -588,7 +612,7 @@ declare namespace Batch {
      */
     jobQueueName: String;
     /**
-     * The state of the job queue. If the job queue state is ENABLED, it is able to accept jobs.
+     * The state of the job queue. If the job queue state is ENABLED, it is able to accept jobs. If the job queue state is DISABLED, new jobs cannot be added to the queue, but jobs already in the queue can finish.
      */
     state?: JQState;
     /**
@@ -834,7 +858,7 @@ declare namespace Batch {
      */
     statusReason?: String;
     /**
-     * The Unix timestamp (in seconds and milliseconds) for when the job was created. For non-array jobs and parent array jobs, this is when the job entered the SUBMITTED state (at the time SubmitJob was called). For array child jobs, this is when the child job was spawned by its parent and entered the PENDING state.
+     * The Unix timestamp (in milliseconds) for when the job was created. For non-array jobs and parent array jobs, this is when the job entered the SUBMITTED state (at the time SubmitJob was called). For array child jobs, this is when the child job was spawned by its parent and entered the PENDING state.
      */
     createdAt?: Long;
     /**
@@ -842,11 +866,11 @@ declare namespace Batch {
      */
     retryStrategy?: RetryStrategy;
     /**
-     * The Unix timestamp (in seconds and milliseconds) for when the job was started (when the job transitioned from the STARTING state to the RUNNING state).
+     * The Unix timestamp (in milliseconds) for when the job was started (when the job transitioned from the STARTING state to the RUNNING state). This parameter is not provided for child jobs of array jobs or multi-node parallel jobs.
      */
     startedAt: Long;
     /**
-     * The Unix timestamp (in seconds and milliseconds) for when the job was stopped (when the job transitioned from the RUNNING state to a terminal state, such as SUCCEEDED or FAILED).
+     * The Unix timestamp (in milliseconds) for when the job was stopped (when the job transitioned from the RUNNING state to a terminal state, such as SUCCEEDED or FAILED).
      */
     stoppedAt?: Long;
     /**
@@ -893,7 +917,7 @@ declare namespace Batch {
      */
     jobQueueArn: String;
     /**
-     * Describes the ability of the queue to accept new jobs.
+     * Describes the ability of the queue to accept new jobs. If the job queue state is ENABLED, it is able to accept jobs. If the job queue state is DISABLED, new jobs cannot be added to the queue, but jobs already in the queue can finish.
      */
     state: JQState;
     /**
@@ -984,7 +1008,7 @@ declare namespace Batch {
      */
     launchTemplateName?: String;
     /**
-     * The version number of the launch template. Default: The default version of the launch template.
+     * The version number of the launch template, $Latest, or $Default. If the value is $Latest, the latest version of the launch template is used. If the value is $Default, the default version of the launch template is used. Default: $Default.
      */
     version?: String;
   }
@@ -993,6 +1017,26 @@ declare namespace Batch {
      * Any host devices to expose to the container. This parameter maps to Devices in the Create a container section of the Docker Remote API and the --device option to docker run.
      */
     devices?: DevicesList;
+    /**
+     * Run an init process inside the container that forwards signals and reaps processes. This parameter maps to the --init option to docker run. This parameter requires version 1.25 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: sudo docker version | grep "Server API version" 
+     */
+    initProcessEnabled?: Boolean;
+    /**
+     * The value for the size (in MiB) of the /dev/shm volume. This parameter maps to the --shm-size option to docker run.
+     */
+    sharedMemorySize?: Integer;
+    /**
+     * The container path, mount options, and size (in MiB) of the tmpfs mount. This parameter maps to the --tmpfs option to docker run.
+     */
+    tmpfs?: TmpfsList;
+    /**
+     * The total amount of swap memory (in MiB) a container can use. This parameter will be translated to the --memory-swap option to docker run where the value would be the sum of the container memory plus the maxSwap value. If a maxSwap value of 0 is specified, the container will not use swap. Accepted values are 0 or any positive integer. If the maxSwap parameter is omitted, the container will use the swap configuration for the container instance it is running on. A maxSwap value must be set for the swappiness parameter to be used.
+     */
+    maxSwap?: Integer;
+    /**
+     * This allows you to tune a container's memory swappiness behavior. A swappiness value of 0 will cause swapping to not happen unless absolutely necessary. A swappiness value of 100 will cause pages to be swapped very aggressively. Accepted values are whole numbers between 0 and 100. If the swappiness parameter is not specified, a default value of 60 is used. If a value is not specified for maxSwap then this parameter is ignored. This parameter maps to the --memory-swappiness option to docker run.
+     */
+    swappiness?: Integer;
   }
   export interface ListJobsRequest {
     /**
@@ -1030,6 +1074,22 @@ declare namespace Batch {
      */
     nextToken?: String;
   }
+  export interface LogConfiguration {
+    /**
+     * The log driver to use for the container. The valid values listed for this parameter are log drivers that the Amazon ECS container agent can communicate with by default. The supported log drivers are awslogs, fluentd, gelf, json-file, journald, logentries, syslog, and splunk. For more information about using the awslogs log driver, see Using the awslogs Log Driver in the Amazon Elastic Container Service Developer Guide.  If you have a custom driver that is not listed earlier that you would like to work with the Amazon ECS container agent, you can fork the Amazon ECS container agent project that is available on GitHub and customize it to work with that driver. We encourage you to submit pull requests for changes that you would like to have included. However, Amazon Web Services does not currently support running modified copies of this software.  This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: sudo docker version | grep "Server API version" 
+     */
+    logDriver: LogDriver;
+    /**
+     * The configuration options to send to the log driver. This parameter requires version 1.19 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: sudo docker version | grep "Server API version" 
+     */
+    options?: LogConfigurationOptionsMap;
+    /**
+     * The secrets to pass to the log configuration. For more information, see Specifying Sensitive Data in the Amazon Elastic Container Service Developer Guide.
+     */
+    secretOptions?: SecretList;
+  }
+  export type LogConfigurationOptionsMap = {[key: string]: String};
+  export type LogDriver = "json-file"|"syslog"|"journald"|"gelf"|"fluentd"|"awslogs"|"splunk"|string;
   export type Long = number;
   export interface MountPoint {
     /**
@@ -1194,6 +1254,17 @@ declare namespace Batch {
      */
     attempts?: Integer;
   }
+  export interface Secret {
+    /**
+     * The name of the secret.
+     */
+    name: String;
+    /**
+     * The secret to expose to the container. The supported values are either the full ARN of the AWS Secrets Manager secret or the full ARN of the parameter in the AWS Systems Manager Parameter Store.  If the AWS Systems Manager Parameter Store parameter exists in the same Region as the task you are launching, then you can use either the full ARN or name of the parameter. If the parameter exists in a different Region, then the full ARN must be specified. 
+     */
+    valueFrom: String;
+  }
+  export type SecretList = Secret[];
   export type String = string;
   export type StringList = String[];
   export interface SubmitJobRequest {
@@ -1261,6 +1332,21 @@ declare namespace Batch {
   }
   export interface TerminateJobResponse {
   }
+  export interface Tmpfs {
+    /**
+     * The absolute file path where the tmpfs volume is to be mounted.
+     */
+    containerPath: String;
+    /**
+     * The size (in MiB) of the tmpfs volume.
+     */
+    size: Integer;
+    /**
+     * The list of tmpfs volume mount options. Valid values: "defaults" | "ro" | "rw" | "suid" | "nosuid" | "dev" | "nodev" | "exec" | "noexec" | "sync" | "async" | "dirsync" | "remount" | "mand" | "nomand" | "atime" | "noatime" | "diratime" | "nodiratime" | "bind" | "rbind" | "unbindable" | "runbindable" | "private" | "rprivate" | "shared" | "rshared" | "slave" | "rslave" | "relatime" | "norelatime" | "strictatime" | "nostrictatime" | "mode" | "uid" | "gid" | "nr_inodes" | "nr_blocks" | "mpol" 
+     */
+    mountOptions?: StringList;
+  }
+  export type TmpfsList = Tmpfs[];
   export interface Ulimit {
     /**
      * The hard limit for the ulimit type.
@@ -1310,7 +1396,7 @@ declare namespace Batch {
      */
     jobQueue: String;
     /**
-     * Describes the queue's ability to accept new jobs.
+     * Describes the queue's ability to accept new jobs. If the job queue state is ENABLED, it is able to accept jobs. If the job queue state is DISABLED, new jobs cannot be added to the queue, but jobs already in the queue can finish.
      */
     state?: JQState;
     /**

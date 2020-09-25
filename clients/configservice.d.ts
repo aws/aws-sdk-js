@@ -1358,7 +1358,7 @@ declare namespace ConfigService {
     /**
      * Conformance pack template that is used to create a pack. The delivery bucket name should start with awsconfigconforms. For example: "Resource": "arn:aws:s3:::your_bucket_name/*".
      */
-    DeliveryS3Bucket: DeliveryS3Bucket;
+    DeliveryS3Bucket?: DeliveryS3Bucket;
     /**
      * The prefix for the Amazon S3 bucket.
      */
@@ -2922,7 +2922,7 @@ declare namespace ConfigService {
     /**
      * Location of an Amazon S3 bucket where AWS Config can deliver evaluation results and conformance pack template that is used to create a pack. 
      */
-    DeliveryS3Bucket: DeliveryS3Bucket;
+    DeliveryS3Bucket?: DeliveryS3Bucket;
     /**
      * Any folder structure you want to add to an Amazon S3 bucket.
      */
@@ -3170,7 +3170,7 @@ declare namespace ConfigService {
     /**
      * AWS Config stores intermediate files while processing conformance pack template.
      */
-    DeliveryS3Bucket: DeliveryS3Bucket;
+    DeliveryS3Bucket?: DeliveryS3Bucket;
     /**
      * The prefix for the Amazon S3 bucket. 
      */
@@ -3252,7 +3252,7 @@ declare namespace ConfigService {
     /**
      * Location of an Amazon S3 bucket where AWS Config can deliver evaluation results. AWS Config stores intermediate files while processing conformance pack template.  The delivery bucket name should start with awsconfigconforms. For example: "Resource": "arn:aws:s3:::your_bucket_name/*". For more information, see Permissions for cross account bucket access.
      */
-    DeliveryS3Bucket: DeliveryS3Bucket;
+    DeliveryS3Bucket?: DeliveryS3Bucket;
     /**
      * The prefix for the Amazon S3 bucket.
      */

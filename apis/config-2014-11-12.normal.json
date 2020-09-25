@@ -3051,8 +3051,7 @@
       "required": [
         "ConformancePackName",
         "ConformancePackArn",
-        "ConformancePackId",
-        "DeliveryS3Bucket"
+        "ConformancePackId"
       ],
       "members": {
         "ConformancePackName": {
@@ -3617,12 +3616,12 @@
     "DeliveryS3Bucket": {
       "type": "string",
       "max": 63,
-      "min": 3
+      "min": 0
     },
     "DeliveryS3KeyPrefix": {
       "type": "string",
       "max": 1024,
-      "min": 1
+      "min": 0
     },
     "DeliveryStatus": {
       "type": "string",
@@ -5493,7 +5492,6 @@
       "required": [
         "OrganizationConformancePackName",
         "OrganizationConformancePackArn",
-        "DeliveryS3Bucket",
         "LastUpdateTime"
       ],
       "members": {
@@ -5911,8 +5909,7 @@
     "PutConformancePackRequest": {
       "type": "structure",
       "required": [
-        "ConformancePackName",
-        "DeliveryS3Bucket"
+        "ConformancePackName"
       ],
       "members": {
         "ConformancePackName": {
@@ -6030,8 +6027,7 @@
     "PutOrganizationConformancePackRequest": {
       "type": "structure",
       "required": [
-        "OrganizationConformancePackName",
-        "DeliveryS3Bucket"
+        "OrganizationConformancePackName"
       ],
       "members": {
         "OrganizationConformancePackName": {

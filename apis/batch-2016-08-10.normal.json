@@ -463,11 +463,11 @@
         },
         "startedAt": {
           "shape": "Long",
-          "documentation": "<p>The Unix timestamp (in seconds and milliseconds) for when the attempt was started (when the attempt transitioned from the <code>STARTING</code> state to the <code>RUNNING</code> state).</p>"
+          "documentation": "<p>The Unix timestamp (in milliseconds) for when the attempt was started (when the attempt transitioned from the <code>STARTING</code> state to the <code>RUNNING</code> state).</p>"
         },
         "stoppedAt": {
           "shape": "Long",
-          "documentation": "<p>The Unix timestamp (in seconds and milliseconds) for when the attempt was stopped (when the attempt transitioned from the <code>RUNNING</code> state to a terminal state, such as <code>SUCCEEDED</code> or <code>FAILED</code>).</p>"
+          "documentation": "<p>The Unix timestamp (in milliseconds) for when the attempt was stopped (when the attempt transitioned from the <code>RUNNING</code> state to a terminal state, such as <code>SUCCEEDED</code> or <code>FAILED</code>).</p>"
         },
         "statusReason": {
           "shape": "String",
@@ -742,6 +742,10 @@
           "shape": "String",
           "documentation": "<p>The Amazon Resource Name (ARN) associated with the job upon execution.</p>"
         },
+        "executionRoleArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the execution role that AWS Batch can assume. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html\">Amazon ECS task execution IAM role</a>.</p>"
+        },
         "volumes": {
           "shape": "Volumes",
           "documentation": "<p>A list of volumes associated with the job.</p>"
@@ -805,6 +809,14 @@
         "linuxParameters": {
           "shape": "LinuxParameters",
           "documentation": "<p>Linux-specific modifications that are applied to the container, such as details for device mappings.</p>"
+        },
+        "logConfiguration": {
+          "shape": "LogConfiguration",
+          "documentation": "<p>The log configuration specification for the container.</p> <p>This parameter maps to <code>LogConfig</code> in the <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> and the <code>--log-driver</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>. By default, containers use the same logging driver that the Docker daemon uses. However the container may use a different logging driver than the Docker daemon by specifying a log driver with this parameter in the container definition. To use a different logging driver for a container, the log system must be configured properly on the container instance (or on a different log server for remote logging options). For more information on the options for different supported log drivers, see <a href=\"https://docs.docker.com/engine/admin/logging/overview/\">Configure logging drivers</a> in the Docker documentation.</p> <note> <p>AWS Batch currently supports a subset of the logging drivers available to the Docker daemon (shown in the <a>LogConfiguration</a> data type). Additional log drivers may be available in future releases of the Amazon ECS container agent.</p> </note> <p>This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: <code>sudo docker version | grep \"Server API version\"</code> </p> <note> <p>The Amazon ECS container agent running on a container instance must register the logging drivers available on that instance with the <code>ECS_AVAILABLE_LOGGING_DRIVERS</code> environment variable before containers placed on that instance can use these log configuration options. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html\">Amazon ECS Container Agent Configuration</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> </note>"
+        },
+        "secrets": {
+          "shape": "SecretList",
+          "documentation": "<p>The secrets to pass to the container. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html\">Specifying Sensitive Data</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
         }
       },
       "documentation": "<p>An object representing the details of a container that is part of a job.</p>"
@@ -848,11 +860,11 @@
         },
         "vcpus": {
           "shape": "Integer",
-          "documentation": "<p>The number of vCPUs reserved for the container. This parameter maps to <code>CpuShares</code> in the <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> and the <code>--cpu-shares</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>. Each vCPU is equivalent to 1,024 CPU shares. You must specify at least one vCPU.</p>"
+          "documentation": "<p>The number of vCPUs reserved for the container. This parameter maps to <code>CpuShares</code> in the <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> and the <code>--cpu-shares</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>. Each vCPU is equivalent to 1,024 CPU shares. You must specify at least one vCPU. This is required but can be specified in several places for multi-node parallel (MNP) jobs; it must be specified for each node at least once.</p>"
         },
         "memory": {
           "shape": "Integer",
-          "documentation": "<p>The hard limit (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed. This parameter maps to <code>Memory</code> in the <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> and the <code>--memory</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>. You must specify at least 4 MiB of memory for a job.</p> <note> <p>If you are trying to maximize your resource utilization by providing your jobs as much memory as possible for a particular instance type, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/memory-management.html\">Memory Management</a> in the <i>AWS Batch User Guide</i>.</p> </note>"
+          "documentation": "<p>The hard limit (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed. This parameter maps to <code>Memory</code> in the <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> and the <code>--memory</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>. You must specify at least 4 MiB of memory for a job. This is required but can be specified in several places for multi-node parallel (MNP) jobs; it must be specified for each node at least once.</p> <note> <p>If you are trying to maximize your resource utilization by providing your jobs as much memory as possible for a particular instance type, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/memory-management.html\">Memory Management</a> in the <i>AWS Batch User Guide</i>.</p> </note>"
         },
         "command": {
           "shape": "StringList",
@@ -861,6 +873,10 @@
         "jobRoleArn": {
           "shape": "String",
           "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that the container can assume for AWS permissions.</p>"
+        },
+        "executionRoleArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the execution role that AWS Batch can assume. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html\">Amazon ECS task execution IAM role</a>.</p>"
         },
         "volumes": {
           "shape": "Volumes",
@@ -901,6 +917,14 @@
         "linuxParameters": {
           "shape": "LinuxParameters",
           "documentation": "<p>Linux-specific modifications that are applied to the container, such as details for device mappings.</p>"
+        },
+        "logConfiguration": {
+          "shape": "LogConfiguration",
+          "documentation": "<p>The log configuration specification for the container.</p> <p>This parameter maps to <code>LogConfig</code> in the <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> and the <code>--log-driver</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>. By default, containers use the same logging driver that the Docker daemon uses. However the container may use a different logging driver than the Docker daemon by specifying a log driver with this parameter in the container definition. To use a different logging driver for a container, the log system must be configured properly on the container instance (or on a different log server for remote logging options). For more information on the options for different supported log drivers, see <a href=\"https://docs.docker.com/engine/admin/logging/overview/\">Configure logging drivers</a> in the Docker documentation.</p> <note> <p>AWS Batch currently supports a subset of the logging drivers available to the Docker daemon (shown in the <a>LogConfiguration</a> data type).</p> </note> <p>This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: <code>sudo docker version | grep \"Server API version\"</code> </p> <note> <p>The Amazon ECS container agent running on a container instance must register the logging drivers available on that instance with the <code>ECS_AVAILABLE_LOGGING_DRIVERS</code> environment variable before containers placed on that instance can use these log configuration options. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html\">Amazon ECS Container Agent Configuration</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> </note>"
+        },
+        "secrets": {
+          "shape": "SecretList",
+          "documentation": "<p>The secrets for the container. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html\">Specifying Sensitive Data</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
         }
       },
       "documentation": "<p>Container properties are used in job definitions to describe the container that is launched as part of a job.</p>"
@@ -976,7 +1000,7 @@
         },
         "state": {
           "shape": "JQState",
-          "documentation": "<p>The state of the job queue. If the job queue state is <code>ENABLED</code>, it is able to accept jobs.</p>"
+          "documentation": "<p>The state of the job queue. If the job queue state is <code>ENABLED</code>, it is able to accept jobs. If the job queue state is <code>DISABLED</code>, new jobs cannot be added to the queue, but jobs already in the queue can finish.</p>"
         },
         "priority": {
           "shape": "Integer",
@@ -1372,7 +1396,7 @@
         },
         "createdAt": {
           "shape": "Long",
-          "documentation": "<p>The Unix timestamp (in seconds and milliseconds) for when the job was created. For non-array jobs and parent array jobs, this is when the job entered the <code>SUBMITTED</code> state (at the time <a>SubmitJob</a> was called). For array child jobs, this is when the child job was spawned by its parent and entered the <code>PENDING</code> state.</p>"
+          "documentation": "<p>The Unix timestamp (in milliseconds) for when the job was created. For non-array jobs and parent array jobs, this is when the job entered the <code>SUBMITTED</code> state (at the time <a>SubmitJob</a> was called). For array child jobs, this is when the child job was spawned by its parent and entered the <code>PENDING</code> state.</p>"
         },
         "retryStrategy": {
           "shape": "RetryStrategy",
@@ -1380,11 +1404,11 @@
         },
         "startedAt": {
           "shape": "Long",
-          "documentation": "<p>The Unix timestamp (in seconds and milliseconds) for when the job was started (when the job transitioned from the <code>STARTING</code> state to the <code>RUNNING</code> state).</p>"
+          "documentation": "<p>The Unix timestamp (in milliseconds) for when the job was started (when the job transitioned from the <code>STARTING</code> state to the <code>RUNNING</code> state). This parameter is not provided for child jobs of array jobs or multi-node parallel jobs.</p>"
         },
         "stoppedAt": {
           "shape": "Long",
-          "documentation": "<p>The Unix timestamp (in seconds and milliseconds) for when the job was stopped (when the job transitioned from the <code>RUNNING</code> state to a terminal state, such as <code>SUCCEEDED</code> or <code>FAILED</code>).</p>"
+          "documentation": "<p>The Unix timestamp (in milliseconds) for when the job was stopped (when the job transitioned from the <code>RUNNING</code> state to a terminal state, such as <code>SUCCEEDED</code> or <code>FAILED</code>).</p>"
         },
         "dependsOn": {
           "shape": "JobDependencyList",
@@ -1447,7 +1471,7 @@
         },
         "state": {
           "shape": "JQState",
-          "documentation": "<p>Describes the ability of the queue to accept new jobs.</p>"
+          "documentation": "<p>Describes the ability of the queue to accept new jobs. If the job queue state is <code>ENABLED</code>, it is able to accept jobs. If the job queue state is <code>DISABLED</code>, new jobs cannot be added to the queue, but jobs already in the queue can finish.</p>"
         },
         "status": {
           "shape": "JQStatus",
@@ -1579,7 +1603,7 @@
         },
         "version": {
           "shape": "String",
-          "documentation": "<p>The version number of the launch template.</p> <p>Default: The default version of the launch template.</p>"
+          "documentation": "<p>The version number of the launch template, <code>$Latest</code>, or <code>$Default</code>.</p> <p>If the value is <code>$Latest</code>, the latest version of the launch template is used. If the value is <code>$Default</code>, the default version of the launch template is used.</p> <p>Default: <code>$Default</code>.</p>"
         }
       },
       "documentation": "<p>An object representing a launch template associated with a compute resource. You must specify either the launch template ID or launch template name in the request, but not both.</p>"
@@ -1590,6 +1614,26 @@
         "devices": {
           "shape": "DevicesList",
           "documentation": "<p>Any host devices to expose to the container. This parameter maps to <code>Devices</code> in the <a href=\"https://docs.docker.com/engine/api/v1.23/#create-a-container\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.23/\">Docker Remote API</a> and the <code>--device</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>.</p>"
+        },
+        "initProcessEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Run an <code>init</code> process inside the container that forwards signals and reaps processes. This parameter maps to the <code>--init</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>. This parameter requires version 1.25 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: <code>sudo docker version | grep \"Server API version\"</code> </p>"
+        },
+        "sharedMemorySize": {
+          "shape": "Integer",
+          "documentation": "<p>The value for the size (in MiB) of the <code>/dev/shm</code> volume. This parameter maps to the <code>--shm-size</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>.</p>"
+        },
+        "tmpfs": {
+          "shape": "TmpfsList",
+          "documentation": "<p>The container path, mount options, and size (in MiB) of the tmpfs mount. This parameter maps to the <code>--tmpfs</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>.</p>"
+        },
+        "maxSwap": {
+          "shape": "Integer",
+          "documentation": "<p>The total amount of swap memory (in MiB) a container can use. This parameter will be translated to the <code>--memory-swap</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a> where the value would be the sum of the container memory plus the <code>maxSwap</code> value.</p> <p>If a <code>maxSwap</code> value of <code>0</code> is specified, the container will not use swap. Accepted values are <code>0</code> or any positive integer. If the <code>maxSwap</code> parameter is omitted, the container will use the swap configuration for the container instance it is running on. A <code>maxSwap</code> value must be set for the <code>swappiness</code> parameter to be used.</p>"
+        },
+        "swappiness": {
+          "shape": "Integer",
+          "documentation": "<p>This allows you to tune a container's memory swappiness behavior. A <code>swappiness</code> value of <code>0</code> will cause swapping to not happen unless absolutely necessary. A <code>swappiness</code> value of <code>100</code> will cause pages to be swapped very aggressively. Accepted values are whole numbers between <code>0</code> and <code>100</code>. If the <code>swappiness</code> parameter is not specified, a default value of <code>60</code> is used. If a value is not specified for <code>maxSwap</code> then this parameter is ignored. This parameter maps to the <code>--memory-swappiness</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>.</p>"
         }
       },
       "documentation": "<p>Linux-specific modifications that are applied to the container, such as details for device mappings.</p>"
@@ -1638,6 +1682,48 @@
           "documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListJobs</code> request. When the results of a <code>ListJobs</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
         }
       }
+    },
+    "LogConfiguration": {
+      "type": "structure",
+      "required": [
+        "logDriver"
+      ],
+      "members": {
+        "logDriver": {
+          "shape": "LogDriver",
+          "documentation": "<p>The log driver to use for the container. The valid values listed for this parameter are log drivers that the Amazon ECS container agent can communicate with by default.</p> <p>The supported log drivers are <code>awslogs</code>, <code>fluentd</code>, <code>gelf</code>, <code>json-file</code>, <code>journald</code>, <code>logentries</code>, <code>syslog</code>, and <code>splunk</code>.</p> <p>For more information about using the <code>awslogs</code> log driver, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html\">Using the awslogs Log Driver</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <note> <p>If you have a custom driver that is not listed earlier that you would like to work with the Amazon ECS container agent, you can fork the Amazon ECS container agent project that is <a href=\"https://github.com/aws/amazon-ecs-agent\">available on GitHub</a> and customize it to work with that driver. We encourage you to submit pull requests for changes that you would like to have included. However, Amazon Web Services does not currently support running modified copies of this software.</p> </note> <p>This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: <code>sudo docker version | grep \"Server API version\"</code> </p>"
+        },
+        "options": {
+          "shape": "LogConfigurationOptionsMap",
+          "documentation": "<p>The configuration options to send to the log driver. This parameter requires version 1.19 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: <code>sudo docker version | grep \"Server API version\"</code> </p>"
+        },
+        "secretOptions": {
+          "shape": "SecretList",
+          "documentation": "<p>The secrets to pass to the log configuration. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html\">Specifying Sensitive Data</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+        }
+      },
+      "documentation": "<p>Log configuration options to send to a custom log driver for the container.</p>"
+    },
+    "LogConfigurationOptionsMap": {
+      "type": "map",
+      "key": {
+        "shape": "String"
+      },
+      "value": {
+        "shape": "String"
+      }
+    },
+    "LogDriver": {
+      "type": "string",
+      "enum": [
+        "json-file",
+        "syslog",
+        "journald",
+        "gelf",
+        "fluentd",
+        "awslogs",
+        "splunk"
+      ]
     },
     "Long": {
       "type": "long"
@@ -1913,6 +1999,30 @@
       },
       "documentation": "<p>The retry strategy associated with a job.</p>"
     },
+    "Secret": {
+      "type": "structure",
+      "required": [
+        "name",
+        "valueFrom"
+      ],
+      "members": {
+        "name": {
+          "shape": "String",
+          "documentation": "<p>The name of the secret.</p>"
+        },
+        "valueFrom": {
+          "shape": "String",
+          "documentation": "<p>The secret to expose to the container. The supported values are either the full ARN of the AWS Secrets Manager secret or the full ARN of the parameter in the AWS Systems Manager Parameter Store.</p> <note> <p>If the AWS Systems Manager Parameter Store parameter exists in the same Region as the task you are launching, then you can use either the full ARN or name of the parameter. If the parameter exists in a different Region, then the full ARN must be specified.</p> </note>"
+        }
+      },
+      "documentation": "<p>An object representing the secret to expose to your container. Secrets can be exposed to a container in the following ways:</p> <ul> <li> <p>To inject sensitive data into your containers as environment variables, use the <code>secrets</code> container definition parameter.</p> </li> <li> <p>To reference sensitive information in the log configuration of a container, use the <code>secretOptions</code> container definition parameter.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html\">Specifying Sensitive Data</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+    },
+    "SecretList": {
+      "type": "list",
+      "member": {
+        "shape": "Secret"
+      }
+    },
     "String": {
       "type": "string"
     },
@@ -2019,6 +2129,34 @@
       "type": "structure",
       "members": {}
     },
+    "Tmpfs": {
+      "type": "structure",
+      "required": [
+        "containerPath",
+        "size"
+      ],
+      "members": {
+        "containerPath": {
+          "shape": "String",
+          "documentation": "<p>The absolute file path where the tmpfs volume is to be mounted.</p>"
+        },
+        "size": {
+          "shape": "Integer",
+          "documentation": "<p>The size (in MiB) of the tmpfs volume.</p>"
+        },
+        "mountOptions": {
+          "shape": "StringList",
+          "documentation": "<p>The list of tmpfs volume mount options.</p> <p>Valid values: <code>\"defaults\" | \"ro\" | \"rw\" | \"suid\" | \"nosuid\" | \"dev\" | \"nodev\" | \"exec\" | \"noexec\" | \"sync\" | \"async\" | \"dirsync\" | \"remount\" | \"mand\" | \"nomand\" | \"atime\" | \"noatime\" | \"diratime\" | \"nodiratime\" | \"bind\" | \"rbind\" | \"unbindable\" | \"runbindable\" | \"private\" | \"rprivate\" | \"shared\" | \"rshared\" | \"slave\" | \"rslave\" | \"relatime\" | \"norelatime\" | \"strictatime\" | \"nostrictatime\" | \"mode\" | \"uid\" | \"gid\" | \"nr_inodes\" | \"nr_blocks\" | \"mpol\"</code> </p>"
+        }
+      },
+      "documentation": "<p>The container path, mount options, and size of the tmpfs mount.</p>"
+    },
+    "TmpfsList": {
+      "type": "list",
+      "member": {
+        "shape": "Tmpfs"
+      }
+    },
     "Ulimit": {
       "type": "structure",
       "required": [
@@ -2097,7 +2235,7 @@
         },
         "state": {
           "shape": "JQState",
-          "documentation": "<p>Describes the queue's ability to accept new jobs.</p>"
+          "documentation": "<p>Describes the queue's ability to accept new jobs. If the job queue state is <code>ENABLED</code>, it is able to accept jobs. If the job queue state is <code>DISABLED</code>, new jobs cannot be added to the queue, but jobs already in the queue can finish.</p>"
         },
         "priority": {
           "shape": "Integer",
