@@ -6331,7 +6331,7 @@ declare namespace RDS {
      */
     AutoAppliedAfterDate?: TStamp;
     /**
-     * The date when the maintenance action is automatically applied. The maintenance action is applied to the resource on this date regardless of the maintenance window for the resource.
+     * The date when the maintenance action is automatically applied. On this date, the maintenance action is applied to the resource as soon as possible, regardless of the maintenance window for the resource. There might be a delay of one or more days from this date before the maintenance action is applied.
      */
     ForcedApplyDate?: TStamp;
     /**

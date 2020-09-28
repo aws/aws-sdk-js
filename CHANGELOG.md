@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.761.0-->
+<!--LATEST=2.762.0-->
 <!--ENTRYINSERT-->
+
+## 2.762.0
+* feature: ApplicationAutoScaling: This release extends Application Auto Scaling support to AWS Comprehend Entity Recognizer endpoint, allowing automatic updates to provisioned Inference Units to maintain targeted utilization level.
+* feature: RDS: This release adds the InsufficientAvailableIPsInSubnetFault error for RDS Proxy.
 
 ## 2.761.0
 * feature: Batch: Support custom logging, executionRole, secrets, and linuxParameters (initProcessEnabled, maxSwap, swappiness, sharedMemorySize, and tmpfs). Also, add new context keys for awslogs.

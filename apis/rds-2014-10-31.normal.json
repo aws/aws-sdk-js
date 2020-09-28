@@ -2801,6 +2801,9 @@
         },
         {
           "shape": "InvalidDBProxyStateFault"
+        },
+        {
+          "shape": "InsufficientAvailableIPsInSubnetFault"
         }
       ],
       "documentation": "<p>Associate one or more <code>DBProxyTarget</code> data structures with a <code>DBProxyTargetGroup</code>.</p>"
@@ -10686,7 +10689,7 @@
         },
         "ForcedApplyDate": {
           "shape": "TStamp",
-          "documentation": "<p>The date when the maintenance action is automatically applied. The maintenance action is applied to the resource on this date regardless of the maintenance window for the resource.</p>"
+          "documentation": "<p>The date when the maintenance action is automatically applied.</p> <p>On this date, the maintenance action is applied to the resource as soon as possible, regardless of the maintenance window for the resource. There might be a delay of one or more days from this date before the maintenance action is applied.</p>"
         },
         "OptInStatus": {
           "shape": "String",
