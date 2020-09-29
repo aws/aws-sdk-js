@@ -2917,11 +2917,11 @@ declare class EC2 extends Service {
    */
   modifyVpnConnection(callback?: (err: AWSError, data: EC2.Types.ModifyVpnConnectionResult) => void): Request<EC2.Types.ModifyVpnConnectionResult, AWSError>;
   /**
-   * Modifies the connection options for your Site-to-Site VPN VPN connection. When you modify the VPN connection options, the VPN endpoint IP addresses on the AWS side do not change, and the tunnel options do not change. Your VPN connection will be temporarily unavailable for a brief period while the VPN connection is updated.
+   * Modifies the connection options for your Site-to-Site VPN connection. When you modify the VPN connection options, the VPN endpoint IP addresses on the AWS side do not change, and the tunnel options do not change. Your VPN connection will be temporarily unavailable for a brief period while the VPN connection is updated.
    */
   modifyVpnConnectionOptions(params: EC2.Types.ModifyVpnConnectionOptionsRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpnConnectionOptionsResult) => void): Request<EC2.Types.ModifyVpnConnectionOptionsResult, AWSError>;
   /**
-   * Modifies the connection options for your Site-to-Site VPN VPN connection. When you modify the VPN connection options, the VPN endpoint IP addresses on the AWS side do not change, and the tunnel options do not change. Your VPN connection will be temporarily unavailable for a brief period while the VPN connection is updated.
+   * Modifies the connection options for your Site-to-Site VPN connection. When you modify the VPN connection options, the VPN endpoint IP addresses on the AWS side do not change, and the tunnel options do not change. Your VPN connection will be temporarily unavailable for a brief period while the VPN connection is updated.
    */
   modifyVpnConnectionOptions(callback?: (err: AWSError, data: EC2.Types.ModifyVpnConnectionOptionsResult) => void): Request<EC2.Types.ModifyVpnConnectionOptionsResult, AWSError>;
   /**
@@ -5923,11 +5923,11 @@ declare namespace EC2 {
      */
     ClientVpnEndpointId: ClientVpnEndpointId;
     /**
-     * The IPv4 address range, in CIDR notation, of the route destination. For example:   To add a route for Internet access, enter 0.0.0.0/0    To add a route for a peered VPC, enter the peered VPC's IPv4 CIDR range   To add a route for an on-premises network, enter the AWS Site-to-Site VPN connection's IPv4 CIDR range   Route address ranges cannot overlap with the CIDR range specified for client allocation.
+     * The IPv4 address range, in CIDR notation, of the route destination. For example:   To add a route for Internet access, enter 0.0.0.0/0    To add a route for a peered VPC, enter the peered VPC's IPv4 CIDR range   To add a route for an on-premises network, enter the AWS Site-to-Site VPN connection's IPv4 CIDR range   To add a route for the local network, enter the client CIDR range  
      */
     DestinationCidrBlock: String;
     /**
-     * The ID of the subnet through which you want to route traffic. The specified subnet must be an existing target network of the Client VPN endpoint.
+     * The ID of the subnet through which you want to route traffic. The specified subnet must be an existing target network of the Client VPN endpoint. Alternatively, if you're adding a route for the local network, specify local.
      */
     TargetVpcSubnetId: SubnetId;
     /**
@@ -18963,7 +18963,7 @@ declare namespace EC2 {
   }
   export interface ModifyVpnConnectionOptionsRequest {
     /**
-     * The ID of the Site-to-Site VPN VPN connection. 
+     * The ID of the Site-to-Site VPN connection. 
      */
     VpnConnectionId: VpnConnectionId;
     /**

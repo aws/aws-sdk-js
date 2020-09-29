@@ -4965,7 +4965,7 @@
       "output": {
         "shape": "ModifyVpnConnectionOptionsResult"
       },
-      "documentation": "<p>Modifies the connection options for your Site-to-Site VPN VPN connection.</p> <p>When you modify the VPN connection options, the VPN endpoint IP addresses on the AWS side do not change, and the tunnel options do not change. Your VPN connection will be temporarily unavailable for a brief period while the VPN connection is updated.</p>"
+      "documentation": "<p>Modifies the connection options for your Site-to-Site VPN connection.</p> <p>When you modify the VPN connection options, the VPN endpoint IP addresses on the AWS side do not change, and the tunnel options do not change. Your VPN connection will be temporarily unavailable for a brief period while the VPN connection is updated.</p>"
     },
     "ModifyVpnTunnelCertificate": {
       "name": "ModifyVpnTunnelCertificate",
@@ -9619,11 +9619,11 @@
         },
         "DestinationCidrBlock": {
           "shape": "String",
-          "documentation": "<p>The IPv4 address range, in CIDR notation, of the route destination. For example:</p> <ul> <li> <p>To add a route for Internet access, enter <code>0.0.0.0/0</code> </p> </li> <li> <p>To add a route for a peered VPC, enter the peered VPC's IPv4 CIDR range</p> </li> <li> <p>To add a route for an on-premises network, enter the AWS Site-to-Site VPN connection's IPv4 CIDR range</p> </li> </ul> <p>Route address ranges cannot overlap with the CIDR range specified for client allocation.</p>"
+          "documentation": "<p>The IPv4 address range, in CIDR notation, of the route destination. For example:</p> <ul> <li> <p>To add a route for Internet access, enter <code>0.0.0.0/0</code> </p> </li> <li> <p>To add a route for a peered VPC, enter the peered VPC's IPv4 CIDR range</p> </li> <li> <p>To add a route for an on-premises network, enter the AWS Site-to-Site VPN connection's IPv4 CIDR range</p> </li> <li> <p>To add a route for the local network, enter the client CIDR range</p> </li> </ul>"
         },
         "TargetVpcSubnetId": {
           "shape": "SubnetId",
-          "documentation": "<p>The ID of the subnet through which you want to route traffic. The specified subnet must be an existing target network of the Client VPN endpoint.</p>"
+          "documentation": "<p>The ID of the subnet through which you want to route traffic. The specified subnet must be an existing target network of the Client VPN endpoint.</p> <p>Alternatively, if you're adding a route for the local network, specify <code>local</code>.</p>"
         },
         "Description": {
           "shape": "String",
@@ -30021,7 +30021,7 @@
       "members": {
         "VpnConnectionId": {
           "shape": "VpnConnectionId",
-          "documentation": "<p>The ID of the Site-to-Site VPN VPN connection. </p>"
+          "documentation": "<p>The ID of the Site-to-Site VPN connection. </p>"
         },
         "LocalIpv4NetworkCidr": {
           "shape": "String",

@@ -901,5 +901,13 @@
   "ssoadmin": {
     "prefix": "sso-admin",
     "name": "SSOAdmin"
+  },
+  "timestreamquery": {
+    "prefix": "timestream-query",
+    "name": "TimestreamQuery"
+  },
+  "timestreamwrite": {
+    "prefix": "timestream-write",
+    "name": "TimestreamWrite"
   }
 }

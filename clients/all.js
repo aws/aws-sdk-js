@@ -230,5 +230,7 @@ module.exports = {
   IdentityStore: require('./identitystore'),
   Appflow: require('./appflow'),
   RedshiftData: require('./redshiftdata'),
-  SSOAdmin: require('./ssoadmin')
+  SSOAdmin: require('./ssoadmin'),
+  TimestreamQuery: require('./timestreamquery'),
+  TimestreamWrite: require('./timestreamwrite')
 };

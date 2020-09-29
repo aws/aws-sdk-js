@@ -4970,7 +4970,7 @@
         },
         "Status": {
           "shape": "ComplianceStatus",
-          "documentation": "<p>The status of the compliance item. An item is either COMPLIANT or NON_COMPLIANT.</p>"
+          "documentation": "<p>The status of the compliance item. An item is either COMPLIANT, NON_COMPLIANT, or an empty string (for Windows patches that aren't applicable).</p>"
         },
         "Severity": {
           "shape": "ComplianceSeverity",
@@ -5021,7 +5021,7 @@
         },
         "Status": {
           "shape": "ComplianceStatus",
-          "documentation": "<p>The status of the compliance item. An item is either COMPLIANT, NON_COMPLIANT, or an empty string (for Windows patches that aren't applicable).</p>"
+          "documentation": "<p>The status of the compliance item. An item is either COMPLIANT or NON_COMPLIANT.</p>"
         },
         "Details": {
           "shape": "ComplianceItemDetails",
@@ -9036,7 +9036,7 @@
         },
         "PingStatus": {
           "shape": "PingStatus",
-          "documentation": "<p>Connection status of SSM Agent. </p>"
+          "documentation": "<p>Connection status of SSM Agent. </p> <note> <p>The status <code>Inactive</code> has been deprecated and is no longer in use.</p> </note>"
         },
         "LastPingDateTime": {
           "shape": "DateTime",

@@ -109,6 +109,14 @@ declare class Schemas extends Service {
    */
   describeSchema(callback?: (err: AWSError, data: Schemas.Types.DescribeSchemaResponse) => void): Request<Schemas.Types.DescribeSchemaResponse, AWSError>;
   /**
+   * 
+   */
+  exportSchema(params: Schemas.Types.ExportSchemaRequest, callback?: (err: AWSError, data: Schemas.Types.ExportSchemaResponse) => void): Request<Schemas.Types.ExportSchemaResponse, AWSError>;
+  /**
+   * 
+   */
+  exportSchema(callback?: (err: AWSError, data: Schemas.Types.ExportSchemaResponse) => void): Request<Schemas.Types.ExportSchemaResponse, AWSError>;
+  /**
    * Get the code binding source URI.
    */
   getCodeBindingSource(params: Schemas.Types.GetCodeBindingSourceRequest, callback?: (err: AWSError, data: Schemas.Types.GetCodeBindingSourceResponse) => void): Request<Schemas.Types.GetCodeBindingSourceResponse, AWSError>;
@@ -601,6 +609,28 @@ declare namespace Schemas {
      */
     Tags?: Tags;
   }
+  export interface ExportSchemaRequest {
+    /**
+     * The name of the registry.
+     */
+    RegistryName: __string;
+    /**
+     * The name of the schema.
+     */
+    SchemaName: __string;
+    /**
+     * Specifying this limits the results to only this schema version.
+     */
+    SchemaVersion?: __string;
+    Type: __string;
+  }
+  export interface ExportSchemaResponse {
+    Content?: __string;
+    SchemaArn?: __string;
+    SchemaName?: __string;
+    SchemaVersion?: __string;
+    Type?: __string;
+  }
   export interface GetCodeBindingSourceRequest {
     /**
      * The language of the code binding.
@@ -873,6 +903,10 @@ declare namespace Schemas {
      * The version number of the schema.
      */
     SchemaVersion?: __string;
+    /**
+     * The type of schema.
+     */
+    Type?: Type;
   }
   export interface SearchSchemaSummary {
     /**
@@ -901,6 +935,10 @@ declare namespace Schemas {
      * The version number of the schema
      */
     SchemaVersion?: __string;
+    /**
+     * The type of schema.
+     */
+    Type?: Type;
   }
   export interface SearchSchemasRequest {
     /**
@@ -970,7 +1008,7 @@ declare namespace Schemas {
     Tags: Tags;
   }
   export type Tags = {[key: string]: __string};
-  export type Type = "OpenApi3"|string;
+  export type Type = "OpenApi3"|"JSONSchemaDraft4"|string;
   export interface UntagResourceRequest {
     /**
      * The ARN of the resource.

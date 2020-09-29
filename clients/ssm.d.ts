@@ -2029,7 +2029,7 @@ declare namespace SSM {
      */
     Title?: ComplianceItemTitle;
     /**
-     * The status of the compliance item. An item is either COMPLIANT or NON_COMPLIANT.
+     * The status of the compliance item. An item is either COMPLIANT, NON_COMPLIANT, or an empty string (for Windows patches that aren't applicable).
      */
     Status?: ComplianceStatus;
     /**
@@ -2061,7 +2061,7 @@ declare namespace SSM {
      */
     Severity: ComplianceSeverity;
     /**
-     * The status of the compliance item. An item is either COMPLIANT, NON_COMPLIANT, or an empty string (for Windows patches that aren't applicable).
+     * The status of the compliance item. An item is either COMPLIANT or NON_COMPLIANT.
      */
     Status: ComplianceStatus;
     /**
@@ -4897,7 +4897,7 @@ declare namespace SSM {
      */
     InstanceId?: InstanceId;
     /**
-     * Connection status of SSM Agent. 
+     * Connection status of SSM Agent.   The status Inactive has been deprecated and is no longer in use. 
      */
     PingStatus?: PingStatus;
     /**

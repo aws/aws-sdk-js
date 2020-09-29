@@ -231,6 +231,8 @@ export abstract class ConfigurationServicePlaceholders {
   appflow?: AWS.Appflow.Types.ClientConfiguration;
   redshiftdata?: AWS.RedshiftData.Types.ClientConfiguration;
   ssoadmin?: AWS.SSOAdmin.Types.ClientConfiguration;
+  timestreamquery?: AWS.TimestreamQuery.Types.ClientConfiguration;
+  timestreamwrite?: AWS.TimestreamWrite.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -464,4 +466,6 @@ export interface ConfigurationServiceApiVersions {
   appflow?: AWS.Appflow.Types.apiVersion;
   redshiftdata?: AWS.RedshiftData.Types.apiVersion;
   ssoadmin?: AWS.SSOAdmin.Types.apiVersion;
+  timestreamquery?: AWS.TimestreamQuery.Types.apiVersion;
+  timestreamwrite?: AWS.TimestreamWrite.Types.apiVersion;
 }

@@ -229,3 +229,5 @@ export import IdentityStore = require('./identitystore');
 export import Appflow = require('./appflow');
 export import RedshiftData = require('./redshiftdata');
 export import SSOAdmin = require('./ssoadmin');
+export import TimestreamQuery = require('./timestreamquery');
+export import TimestreamWrite = require('./timestreamwrite');
