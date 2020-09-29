@@ -413,10 +413,10 @@
         response = request.send(function() {});
         return expect(response.error.message).to.equal('ERROR');
       });
-      it('uses the api.signingName if provided', function() {
+      return it('uses the signingName from service', function() {
         var request, response;
         helpers.mockHttpResponse(200, {}, '');
-        service.api.signingName = 'SIGNING_NAME';
+        service.getSigningName = function() { return 'SIGNING_NAME';};
         helpers.spyOn(AWS.Signers.RequestSigner, 'getVersion').andCallFake(function() {
           return function(req, signingName) {
             throw signingName;
@@ -426,18 +426,6 @@
         response = request.send(function() {});
         expect(response.error).to.equal('SIGNING_NAME');
         return delete service.api.signingName;
-      });
-      return it('uses the api.endpointPrefix if signingName not provided', function() {
-        var request, response;
-        helpers.mockHttpResponse(200, {}, '');
-        helpers.spyOn(AWS.Signers.RequestSigner, 'getVersion').andCallFake(function() {
-          return function(req, signingName) {
-            throw signingName;
-          };
-        });
-        request = makeRequest();
-        response = request.send(function() {});
-        return expect(response.error).to.equal('mockservice');
       });
     });
 
