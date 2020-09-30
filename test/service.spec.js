@@ -717,6 +717,24 @@
         });
       });
     });
+    describe('getServiceName', function() {
+      it('should return api.signingName if provided', function(done) {
+        service = new AWS.Lambda();
+        service.api.signingName = 'SIGNING_NAME';
+        expect(service.getSigningName()).to.equal(
+          service.api.signingName
+        );
+        done();
+      });
+      it('should return api.endpointPrefix if signingName is not provided', function(done) {
+        service = new AWS.Lambda();
+        service.api.endpointPrefix = 'SIGNING_NAME';
+        expect(service.getSigningName()).to.equal(
+          service.api.endpointPrefix
+        );
+        done();
+      });
+    });
     describe('getSignerClass', function() {
       var getVersion;
       getVersion = function(signer) {
