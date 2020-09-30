@@ -153,7 +153,7 @@
           "shape": "InvalidAccessException"
         }
       ],
-      "documentation": "<p>Used by Security Hub customers to update information about their investigation into a finding. Requested by master accounts or member accounts. Master accounts can update findings for their account and their member accounts. Member accounts can update findings for their account.</p> <p>Updates from <code>BatchUpdateFindings</code> do not affect the value of <code>UpdatedAt</code> for a finding.</p> <p>Master accounts can use <code>BatchUpdateFindings</code> to update the following finding fields and objects.</p> <ul> <li> <p> <code>Confidence</code> </p> </li> <li> <p> <code>Criticality</code> </p> </li> <li> <p> <code>Note</code> </p> </li> <li> <p> <code>RelatedFindings</code> </p> </li> <li> <p> <code>Severity</code> </p> </li> <li> <p> <code>Types</code> </p> </li> <li> <p> <code>UserDefinedFields</code> </p> </li> <li> <p> <code>VerificationState</code> </p> </li> <li> <p> <code>Workflow</code> </p> </li> </ul> <p>Member accounts can only use <code>BatchUpdateFindings</code> to update the Note object.</p>"
+      "documentation": "<p>Used by Security Hub customers to update information about their investigation into a finding. Requested by master accounts or member accounts. Master accounts can update findings for their account and their member accounts. Member accounts can update findings for their account.</p> <p>Updates from <code>BatchUpdateFindings</code> do not affect the value of <code>UpdatedAt</code> for a finding.</p> <p>Master and member accounts can use <code>BatchUpdateFindings</code> to update the following finding fields and objects.</p> <ul> <li> <p> <code>Confidence</code> </p> </li> <li> <p> <code>Criticality</code> </p> </li> <li> <p> <code>Note</code> </p> </li> <li> <p> <code>RelatedFindings</code> </p> </li> <li> <p> <code>Severity</code> </p> </li> <li> <p> <code>Types</code> </p> </li> <li> <p> <code>UserDefinedFields</code> </p> </li> <li> <p> <code>VerificationState</code> </p> </li> <li> <p> <code>Workflow</code> </p> </li> </ul> <p>You can configure IAM policies to restrict access to fields and field values. For example, you might not want member accounts to be able to suppress findings or change the finding severity. See <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/finding-update-batchupdatefindings.html#batchupdatefindings-configure-access\">Configuring access to BatchUpdateFindings</a> in the <i>AWS Security Hub User Guide</i>.</p>"
     },
     "CreateActionTarget": {
       "name": "CreateActionTarget",
@@ -1374,6 +1374,350 @@
         "shape": "AvailabilityZone"
       }
     },
+    "AwsApiGatewayAccessLogSettings": {
+      "type": "structure",
+      "members": {
+        "Format": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>A single-line format of the access logs of data, as specified by selected <code>$context</code> variables. The format must include at least <code>$context.requestId</code>.</p>"
+        },
+        "DestinationArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the CloudWatch Logs log group that receives the access logs.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about settings for logging access for the stage.</p>"
+    },
+    "AwsApiGatewayCanarySettings": {
+      "type": "structure",
+      "members": {
+        "PercentTraffic": {
+          "shape": "Double",
+          "documentation": "<p>The percentage of traffic that is diverted to a canary deployment.</p>"
+        },
+        "DeploymentId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The deployment identifier for the canary deployment.</p>"
+        },
+        "StageVariableOverrides": {
+          "shape": "FieldMap",
+          "documentation": "<p>Stage variables that are overridden in the canary release deployment. The variables include new stage variables that are introduced in the canary.</p> <p>Each variable is represented as a string-to-string map between the stage variable name and the variable value.</p>"
+        },
+        "UseStageCache": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the canary deployment uses the stage cache.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about settings for canary deployment in the stage.</p>"
+    },
+    "AwsApiGatewayEndpointConfiguration": {
+      "type": "structure",
+      "members": {
+        "Types": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>A list of endpoint types for the REST API.</p> <p>For an edge-optimized API, the endpoint type is <code>EDGE</code>. For a Regional API, the endpoint type is <code>REGIONAL</code>. For a private API, the endpoint type is <code>PRIVATE</code>.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about the endpoints for the API.</p>"
+    },
+    "AwsApiGatewayMethodSettings": {
+      "type": "structure",
+      "members": {
+        "MetricsEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether CloudWatch metrics are enabled for the method. </p>"
+        },
+        "LoggingLevel": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The logging level for this method. The logging level affects the log entries that are pushed to CloudWatch Logs.</p> <p>If the logging level is <code>ERROR</code>, then the logs only include error-level entries.</p> <p>If the logging level is <code>INFO</code>, then the logs include both <code>ERROR</code> events and extra informational events.</p> <p>Valid values: <code>OFF</code> | <code>ERROR</code> | <code>INFO</code> </p>"
+        },
+        "DataTraceEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether data trace logging is enabled for the method. Data trace logging affects the log entries that are pushed to CloudWatch Logs.</p>"
+        },
+        "ThrottlingBurstLimit": {
+          "shape": "Integer",
+          "documentation": "<p>The throttling burst limit for the method.</p>"
+        },
+        "ThrottlingRateLimit": {
+          "shape": "Double",
+          "documentation": "<p>The throttling rate limit for the method.</p>"
+        },
+        "CachingEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether responses are cached and returned for requests. For responses to be cached, a cache cluster must be enabled on the stage.</p>"
+        },
+        "CacheTtlInSeconds": {
+          "shape": "Integer",
+          "documentation": "<p>Specifies the time to live (TTL), in seconds, for cached responses. The higher the TTL, the longer the response is cached.</p>"
+        },
+        "CacheDataEncrypted": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the cached responses are encrypted. </p>"
+        },
+        "RequireAuthorizationForCacheControl": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether authorization is required for a cache invalidation request.</p>"
+        },
+        "UnauthorizedCacheControlHeaderStrategy": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates how to handle unauthorized requests for cache invalidation.</p> <p>Valid values: <code>FAIL_WITH_403</code> | <code>SUCCEED_WITH_RESPONSE_HEADER</code> | <code>SUCCEED_WITHOUT_RESPONSE_HEADER</code> </p>"
+        },
+        "HttpMethod": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The HTTP method. You can use an asterisk (*) as a wildcard to apply method settings to multiple methods.</p>"
+        },
+        "ResourcePath": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The resource path for this method. Forward slashes (/) are encoded as ~1 . The initial slash must include a forward slash.</p> <p>For example, the path value <code>/resource/subresource</code> must be encoded as <code>/~1resource~1subresource</code>.</p> <p>To specify the root path, use only a slash (/). You can use an asterisk (*) as a wildcard to apply method settings to multiple methods.</p>"
+        }
+      },
+      "documentation": "<p>Defines settings for a method for the stage.</p>"
+    },
+    "AwsApiGatewayMethodSettingsList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsApiGatewayMethodSettings"
+      }
+    },
+    "AwsApiGatewayRestApiDetails": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the REST API.</p>"
+        },
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the REST API.</p>"
+        },
+        "Description": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>A description of the REST API.</p>"
+        },
+        "CreatedDate": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the API was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "Version": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The version identifier for the REST API.</p>"
+        },
+        "BinaryMediaTypes": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>The list of binary media types supported by the REST API.</p>"
+        },
+        "MinimumCompressionSize": {
+          "shape": "Integer",
+          "documentation": "<p>The minimum size in bytes of a payload before compression is enabled.</p> <p>If <code>null</code>, then compression is disabled.</p> <p>If 0, then all payloads are compressed.</p>"
+        },
+        "ApiKeySource": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The source of the API key for metering requests according to a usage plan.</p> <p> <code>HEADER</code> indicates whether to read the API key from the X-API-Key header of a request.</p> <p> <code>AUTHORIZER</code> indicates whether to read the API key from the <code>UsageIdentifierKey</code> from a custom authorizer.</p>"
+        },
+        "EndpointConfiguration": {
+          "shape": "AwsApiGatewayEndpointConfiguration",
+          "documentation": "<p>The endpoint configuration of the REST API.</p>"
+        }
+      },
+      "documentation": "<p>contains information about a REST API in version 1 of Amazon API Gateway.</p>"
+    },
+    "AwsApiGatewayStageDetails": {
+      "type": "structure",
+      "members": {
+        "DeploymentId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the deployment that the stage points to.</p>"
+        },
+        "ClientCertificateId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the client certificate for the stage.</p>"
+        },
+        "StageName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the stage.</p>"
+        },
+        "Description": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>A description of the stage.</p>"
+        },
+        "CacheClusterEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether a cache cluster is enabled for the stage.</p>"
+        },
+        "CacheClusterSize": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>If a cache cluster is enabled, the size of the cache cluster.</p>"
+        },
+        "CacheClusterStatus": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>If a cache cluster is enabled, the status of the cache cluster.</p>"
+        },
+        "MethodSettings": {
+          "shape": "AwsApiGatewayMethodSettingsList",
+          "documentation": "<p>Defines the method settings for the stage.</p>"
+        },
+        "Variables": {
+          "shape": "FieldMap",
+          "documentation": "<p>A map that defines the stage variables for the stage.</p> <p>Variable names can have alphanumeric and underscore characters.</p> <p>Variable values can contain the following characters:</p> <ul> <li> <p>Uppercase and lowercase letters</p> </li> <li> <p>Numbers</p> </li> <li> <p>Special characters -._~:/?#&amp;=,</p> </li> </ul>"
+        },
+        "DocumentationVersion": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The version of the API documentation that is associated with the stage.</p>"
+        },
+        "AccessLogSettings": {
+          "shape": "AwsApiGatewayAccessLogSettings",
+          "documentation": "<p>Settings for logging access for the stage.</p>"
+        },
+        "CanarySettings": {
+          "shape": "AwsApiGatewayCanarySettings",
+          "documentation": "<p>Information about settings for canary deployment in the stage.</p>"
+        },
+        "TracingEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether active tracing with AWS X-Ray is enabled for the stage.</p>"
+        },
+        "CreatedDate": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the stage was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "LastUpdatedDate": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the stage was most recently updated.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "WebAclArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the web ACL associated with the stage.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about a version 1 Amazon API Gateway stage.</p>"
+    },
+    "AwsApiGatewayV2ApiDetails": {
+      "type": "structure",
+      "members": {
+        "ApiEndpoint": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The URI of the API. </p> <p>Uses the format <code> <i>&lt;api-id&gt;</i>.execute-api.<i>&lt;region&gt;</i>.amazonaws.com</code> </p> <p>The stage name is typically appended to the URI to form a complete path to a deployed API stage.</p>"
+        },
+        "ApiId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the API.</p>"
+        },
+        "ApiKeySelectionExpression": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>An API key selection expression. Supported only for WebSocket APIs. </p>"
+        },
+        "CreatedDate": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the API was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "Description": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>A description of the API.</p>"
+        },
+        "Version": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The version identifier for the API.</p>"
+        },
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the API.</p>"
+        },
+        "ProtocolType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The API protocol for the API.</p> <p>Valid values: <code>WEBSOCKET</code> | <code>HTTP</code> </p>"
+        },
+        "RouteSelectionExpression": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The route selection expression for the API.</p> <p>For HTTP APIs, must be <code>${request.method} ${request.path}</code>. This is the default value for HTTP APIs.</p> <p>For WebSocket APIs, there is no default value.</p>"
+        },
+        "CorsConfiguration": {
+          "shape": "AwsCorsConfiguration",
+          "documentation": "<p>A cross-origin resource sharing (CORS) configuration. Supported only for HTTP APIs.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about a version 2 API in Amazon API Gateway.</p>"
+    },
+    "AwsApiGatewayV2RouteSettings": {
+      "type": "structure",
+      "members": {
+        "DetailedMetricsEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether detailed metrics are enabled.</p>"
+        },
+        "LoggingLevel": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The logging level. The logging level affects the log entries that are pushed to CloudWatch Logs. Supported only for WebSocket APIs.</p> <p>If the logging level is <code>ERROR</code>, then the logs only include error-level entries.</p> <p>If the logging level is <code>INFO</code>, then the logs include both <code>ERROR</code> events and extra informational events.</p> <p>Valid values: <code>OFF</code> | <code>ERROR</code> | <code>INFO</code> </p>"
+        },
+        "DataTraceEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether data trace logging is enabled. Data trace logging affects the log entries that are pushed to CloudWatch Logs. Supported only for WebSocket APIs.</p>"
+        },
+        "ThrottlingBurstLimit": {
+          "shape": "Integer",
+          "documentation": "<p>The throttling burst limit.</p>"
+        },
+        "ThrottlingRateLimit": {
+          "shape": "Double",
+          "documentation": "<p>The throttling rate limit.</p>"
+        }
+      },
+      "documentation": "<p>Contains route settings for a stage.</p>"
+    },
+    "AwsApiGatewayV2StageDetails": {
+      "type": "structure",
+      "members": {
+        "CreatedDate": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the stage was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "Description": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The description of the stage.</p>"
+        },
+        "DefaultRouteSettings": {
+          "shape": "AwsApiGatewayV2RouteSettings",
+          "documentation": "<p>Default route settings for the stage.</p>"
+        },
+        "DeploymentId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the deployment that the stage is associated with. </p>"
+        },
+        "LastUpdatedDate": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the stage was most recently updated.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "RouteSettings": {
+          "shape": "AwsApiGatewayV2RouteSettings",
+          "documentation": "<p>The route settings for the stage.</p>"
+        },
+        "StageName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the stage.</p>"
+        },
+        "StageVariables": {
+          "shape": "FieldMap",
+          "documentation": "<p>A map that defines the stage variables for the stage.</p> <p>Variable names can have alphanumeric and underscore characters.</p> <p>Variable values can contain the following characters:</p> <ul> <li> <p>Uppercase and lowercase letters</p> </li> <li> <p>Numbers</p> </li> <li> <p>Special characters -._~:/?#&amp;=,</p> </li> </ul>"
+        },
+        "AccessLogSettings": {
+          "shape": "AwsApiGatewayAccessLogSettings",
+          "documentation": "<p>Information about settings for logging access for the stage.</p>"
+        },
+        "AutoDeploy": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether updates to an API automatically trigger a new deployment.</p>"
+        },
+        "LastDeploymentStatusMessage": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The status of the last deployment of a stage. Supported only if the stage has automatic deployment enabled.</p>"
+        },
+        "ApiGatewayManaged": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the stage is managed by API Gateway.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about a version 2 stage for Amazon API Gateway.</p>"
+    },
     "AwsAutoScalingAutoScalingGroupDetails": {
       "type": "structure",
       "members": {
@@ -1400,9 +1744,277 @@
       },
       "documentation": "<p>Provides details about an auto scaling group.</p>"
     },
+    "AwsCertificateManagerCertificateDetails": {
+      "type": "structure",
+      "members": {
+        "CertificateAuthorityArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the private certificate authority (CA) that will be used to issue the certificate.</p>"
+        },
+        "CreatedAt": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the certificate was requested.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "DomainName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The fully qualified domain name (FQDN), such as www.example.com, that is secured by the certificate.</p>"
+        },
+        "DomainValidationOptions": {
+          "shape": "AwsCertificateManagerCertificateDomainValidationOptions",
+          "documentation": "<p>Contains information about the initial validation of each domain name that occurs as a result of the <code>RequestCertificate</code> request.</p> <p>Only provided if the certificate type is <code>AMAZON_ISSUED</code>.</p>"
+        },
+        "ExtendedKeyUsages": {
+          "shape": "AwsCertificateManagerCertificateExtendedKeyUsages",
+          "documentation": "<p>Contains a list of Extended Key Usage X.509 v3 extension objects. Each object specifies a purpose for which the certificate public key can be used and consists of a name and an object identifier (OID).</p>"
+        },
+        "FailureReason": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>For a failed certificate request, the reason for the failure.</p> <p>Valid values: <code>NO_AVAILABLE_CONTACTS</code> | <code>ADDITIONAL_VERIFICATION_REQUIRED</code> | <code>DOMAIN_NOT_ALLOWED</code> | <code>INVALID_PUBLIC_DOMAIN</code> | <code>DOMAIN_VALIDATION_DENIED</code> | <code>CAA_ERROR</code> | <code>PCA_LIMIT_EXCEEDED</code> | <code>PCA_INVALID_ARN</code> | <code>PCA_INVALID_STATE</code> | <code>PCA_REQUEST_FAILED</code> | <code>PCA_NAME_CONSTRAINTS_VALIDATION</code> | <code>PCA_RESOURCE_NOT_FOUND</code> | <code>PCA_INVALID_ARGS</code> | <code>PCA_INVALID_DURATION</code> | <code>PCA_ACCESS_DENIED</code> | <code>SLR_NOT_FOUND</code> | <code>OTHER</code> </p>"
+        },
+        "ImportedAt": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the certificate was imported. Provided if the certificate type is <code>IMPORTED</code>.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "InUseBy": {
+          "shape": "StringList",
+          "documentation": "<p>The list of ARNs for the AWS resources that use the certificate.</p>"
+        },
+        "IssuedAt": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the certificate was issued. Provided if the certificate type is <code>AMAZON_ISSUED</code>.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "Issuer": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the certificate authority that issued and signed the certificate.</p>"
+        },
+        "KeyAlgorithm": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The algorithm that was used to generate the public-private key pair.</p> <p>Valid values: <code>RSA_2048</code> | <code>RSA_1024</code> |<code> RSA_4096</code> | <code>EC_prime256v1</code> | <code>EC_secp384r1</code> | <code>EC_secp521r1</code> </p>"
+        },
+        "KeyUsages": {
+          "shape": "AwsCertificateManagerCertificateKeyUsages",
+          "documentation": "<p>A list of key usage X.509 v3 extension objects.</p>"
+        },
+        "NotAfter": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The time after which the certificate becomes invalid.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "NotBefore": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The time before which the certificate is not valid.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "Options": {
+          "shape": "AwsCertificateManagerCertificateOptions",
+          "documentation": "<p>Provides a value that specifies whether to add the certificate to a transparency log.</p>"
+        },
+        "RenewalEligibility": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Whether the certificate is eligible for renewal.</p> <p>Valid values: <code>ELIGIBLE</code> | <code>INELIGIBLE</code> </p>"
+        },
+        "RenewalSummary": {
+          "shape": "AwsCertificateManagerCertificateRenewalSummary",
+          "documentation": "<p>Information about the status of the AWS Certificate Manager managed renewal for the certificate. Provided only when the certificate type is <code>AMAZON_ISSUED</code>.</p>"
+        },
+        "Serial": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The serial number of the certificate.</p>"
+        },
+        "SignatureAlgorithm": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The algorithm that was used to sign the certificate.</p>"
+        },
+        "Status": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The status of the certificate.</p> <p>Valid values: <code>PENDING_VALIDATION</code> | <code>ISSUED</code> | <code>INACTIVE</code> | <code>EXPIRED</code> | <code>VALIDATION_TIMED_OUT</code> | <code>REVOKED</code> | <code>FAILED</code> </p>"
+        },
+        "Subject": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the entity that is associated with the public key contained in the certificate.</p>"
+        },
+        "SubjectAlternativeNames": {
+          "shape": "StringList",
+          "documentation": "<p>One or more domain names (subject alternative names) included in the certificate. This list contains the domain names that are bound to the public key that is contained in the certificate.</p> <p>The subject alternative names include the canonical domain name (CN) of the certificate and additional domain names that can be used to connect to the website.</p>"
+        },
+        "Type": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The source of the certificate. For certificates that AWS Certificate Manager provides, <code>Type</code> is <code>AMAZON_ISSUED</code>. For certificates that are imported with <code>ImportCertificate</code>, <code>Type</code> is <code>IMPORTED</code>.</p> <p>Valid values: <code>IMPORTED</code> | <code>AMAZON_ISSUED</code> | <code>PRIVATE</code> </p>"
+        }
+      },
+      "documentation": "<p>Provides details about an AWS Certificate Manager certificate.</p>"
+    },
+    "AwsCertificateManagerCertificateDomainValidationOption": {
+      "type": "structure",
+      "members": {
+        "DomainName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>A fully qualified domain name (FQDN) in the certificate.</p>"
+        },
+        "ResourceRecord": {
+          "shape": "AwsCertificateManagerCertificateResourceRecord",
+          "documentation": "<p>The CNAME record that is added to the DNS database for domain validation.</p>"
+        },
+        "ValidationDomain": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The domain name that AWS Certificate Manager uses to send domain validation emails.</p>"
+        },
+        "ValidationEmails": {
+          "shape": "StringList",
+          "documentation": "<p>A list of email addresses that AWS Certificate Manager uses to send domain validation emails.</p>"
+        },
+        "ValidationMethod": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The method used to validate the domain name.</p>"
+        },
+        "ValidationStatus": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The validation status of the domain name.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about one of the following:</p> <ul> <li> <p>The initial validation of each domain name that occurs as a result of the <code>RequestCertificate</code> request</p> </li> <li> <p>The validation of each domain name in the certificate, as it pertains to AWS Certificate Manager managed renewal</p> </li> </ul>"
+    },
+    "AwsCertificateManagerCertificateDomainValidationOptions": {
+      "type": "list",
+      "member": {
+        "shape": "AwsCertificateManagerCertificateDomainValidationOption"
+      }
+    },
+    "AwsCertificateManagerCertificateExtendedKeyUsage": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of an extension value. Indicates the purpose for which the certificate public key can be used.</p>"
+        },
+        "OId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>An object identifier (OID) for the extension value.</p> <p>The format is numbers separated by periods.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about an extended key usage X.509 v3 extension object.</p>"
+    },
+    "AwsCertificateManagerCertificateExtendedKeyUsages": {
+      "type": "list",
+      "member": {
+        "shape": "AwsCertificateManagerCertificateExtendedKeyUsage"
+      }
+    },
+    "AwsCertificateManagerCertificateKeyUsage": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The key usage extension name.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about a key usage X.509 v3 extension object.</p>"
+    },
+    "AwsCertificateManagerCertificateKeyUsages": {
+      "type": "list",
+      "member": {
+        "shape": "AwsCertificateManagerCertificateKeyUsage"
+      }
+    },
+    "AwsCertificateManagerCertificateOptions": {
+      "type": "structure",
+      "members": {
+        "CertificateTransparencyLoggingPreference": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Whether to add the certificate to a transparency log.</p> <p>Valid values: <code>DISABLED</code> | <code>ENABLED</code> </p>"
+        }
+      },
+      "documentation": "<p>Contains other options for the certificate.</p>"
+    },
+    "AwsCertificateManagerCertificateRenewalSummary": {
+      "type": "structure",
+      "members": {
+        "DomainValidationOptions": {
+          "shape": "AwsCertificateManagerCertificateDomainValidationOptions",
+          "documentation": "<p>Information about the validation of each domain name in the certificate, as it pertains to AWS Certificate Manager managed renewal. Provided only when the certificate type is <code>AMAZON_ISSUED</code>.</p>"
+        },
+        "RenewalStatus": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The status of the AWS Certificate Manager managed renewal of the certificate.</p> <p>Valid values: <code>PENDING_AUTO_RENEWAL</code> | <code>PENDING_VALIDATION</code> | <code>SUCCESS</code> | <code>FAILED</code> </p>"
+        },
+        "RenewalStatusReason": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The reason that a renewal request was unsuccessful.</p> <p>Valid values: <code>NO_AVAILABLE_CONTACTS</code> | <code>ADDITIONAL_VERIFICATION_REQUIRED</code> | <code>DOMAIN_NOT_ALLOWED</code> | <code>INVALID_PUBLIC_DOMAIN</code> | <code>DOMAIN_VALIDATION_DENIED</code> | <code>CAA_ERROR</code> | <code>PCA_LIMIT_EXCEEDED</code> | <code>PCA_INVALID_ARN</code> | <code>PCA_INVALID_STATE</code> | <code>PCA_REQUEST_FAILED</code> | <code>PCA_NAME_CONSTRAINTS_VALIDATION</code> | <code>PCA_RESOURCE_NOT_FOUND</code> | <code>PCA_INVALID_ARGS</code> | <code>PCA_INVALID_DURATION</code> | <code>PCA_ACCESS_DENIED</code> | <code>SLR_NOT_FOUND</code> | <code>OTHER</code> </p>"
+        },
+        "UpdatedAt": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the renewal summary was last updated.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about the AWS Certificate Manager managed renewal for an <code>AMAZON_ISSUED</code> certificate.</p>"
+    },
+    "AwsCertificateManagerCertificateResourceRecord": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the resource.</p>"
+        },
+        "Type": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of resource.</p>"
+        },
+        "Value": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The value of the resource.</p>"
+        }
+      },
+      "documentation": "<p>Provides details about the CNAME record that is added to the DNS database for domain validation.</p>"
+    },
+    "AwsCloudFrontDistributionCacheBehavior": {
+      "type": "structure",
+      "members": {
+        "ViewerProtocolPolicy": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The protocol that viewers can use to access the files in an origin. You can specify the following options:</p> <ul> <li> <p> <code>allow-all</code> - Viewers can use HTTP or HTTPS.</p> </li> <li> <p> <code>redirect-to-https</code> - CloudFront responds to HTTP requests with an HTTP status code of 301 (Moved Permanently) and the HTTPS URL. The viewer then uses the new URL to resubmit.</p> </li> <li> <p> <code>https-only</code> - CloudFront responds to HTTP request with an HTTP status code of 403 (Forbidden).</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>Information about a cache behavior for the distribution.</p>"
+    },
+    "AwsCloudFrontDistributionCacheBehaviors": {
+      "type": "structure",
+      "members": {
+        "Items": {
+          "shape": "AwsCloudFrontDistributionCacheBehaviorsItemList",
+          "documentation": "<p>The cache behaviors for the distribution.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about caching for the distribution.</p>"
+    },
+    "AwsCloudFrontDistributionCacheBehaviorsItemList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsCloudFrontDistributionCacheBehavior"
+      }
+    },
+    "AwsCloudFrontDistributionDefaultCacheBehavior": {
+      "type": "structure",
+      "members": {
+        "ViewerProtocolPolicy": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The protocol that viewers can use to access the files in an origin. You can specify the following options:</p> <ul> <li> <p> <code>allow-all</code> - Viewers can use HTTP or HTTPS.</p> </li> <li> <p> <code>redirect-to-https</code> - CloudFront responds to HTTP requests with an HTTP status code of 301 (Moved Permanently) and the HTTPS URL. The viewer then uses the new URL to resubmit.</p> </li> <li> <p> <code>https-only</code> - CloudFront responds to HTTP request with an HTTP status code of 403 (Forbidden).</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>Contains information about the default cache configuration for the distribution.</p>"
+    },
     "AwsCloudFrontDistributionDetails": {
       "type": "structure",
       "members": {
+        "CacheBehaviors": {
+          "shape": "AwsCloudFrontDistributionCacheBehaviors",
+          "documentation": "<p>Provides information about the cache configuration for the distribution.</p>"
+        },
+        "DefaultCacheBehavior": {
+          "shape": "AwsCloudFrontDistributionDefaultCacheBehavior",
+          "documentation": "<p>The default cache behavior for the configuration.</p>"
+        },
+        "DefaultRootObject": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The object that CloudFront sends in response to requests from the origin (for example, index.html) when a viewer requests the root URL for the distribution (http://www.example.com) instead of an object in your distribution (http://www.example.com/product-description.html). </p>"
+        },
         "DomainName": {
           "shape": "NonEmptyString",
           "documentation": "<p>The domain name corresponding to the distribution.</p>"
@@ -1422,6 +2034,10 @@
         "Origins": {
           "shape": "AwsCloudFrontDistributionOrigins",
           "documentation": "<p>A complex type that contains information about origins for this distribution.</p>"
+        },
+        "OriginGroups": {
+          "shape": "AwsCloudFrontDistributionOriginGroups",
+          "documentation": "<p>Provides information about the origin groups in the distribution.</p>"
         },
         "Status": {
           "shape": "NonEmptyString",
@@ -1456,6 +2072,62 @@
       },
       "documentation": "<p>A complex type that controls whether access logs are written for the distribution.</p>"
     },
+    "AwsCloudFrontDistributionOriginGroup": {
+      "type": "structure",
+      "members": {
+        "FailoverCriteria": {
+          "shape": "AwsCloudFrontDistributionOriginGroupFailover",
+          "documentation": "<p>Provides the criteria for an origin group to fail over.</p>"
+        }
+      },
+      "documentation": "<p>Information about an origin group for the distribution.</p>"
+    },
+    "AwsCloudFrontDistributionOriginGroupFailover": {
+      "type": "structure",
+      "members": {
+        "StatusCodes": {
+          "shape": "AwsCloudFrontDistributionOriginGroupFailoverStatusCodes",
+          "documentation": "<p>Information about the status codes that cause an origin group to fail over.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about when an origin group fails over.</p>"
+    },
+    "AwsCloudFrontDistributionOriginGroupFailoverStatusCodes": {
+      "type": "structure",
+      "members": {
+        "Items": {
+          "shape": "AwsCloudFrontDistributionOriginGroupFailoverStatusCodesItemList",
+          "documentation": "<p>The list of status code values that can cause a failover to the next origin.</p>"
+        },
+        "Quantity": {
+          "shape": "Integer",
+          "documentation": "<p>The number of status codes that can cause a failover.</p>"
+        }
+      },
+      "documentation": "<p>The status codes that cause an origin group to fail over.</p>"
+    },
+    "AwsCloudFrontDistributionOriginGroupFailoverStatusCodesItemList": {
+      "type": "list",
+      "member": {
+        "shape": "Integer"
+      }
+    },
+    "AwsCloudFrontDistributionOriginGroups": {
+      "type": "structure",
+      "members": {
+        "Items": {
+          "shape": "AwsCloudFrontDistributionOriginGroupsItemList",
+          "documentation": "<p>The list of origin groups.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about origin groups that are associated with the distribution.</p>"
+    },
+    "AwsCloudFrontDistributionOriginGroupsItemList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsCloudFrontDistributionOriginGroup"
+      }
+    },
     "AwsCloudFrontDistributionOriginItem": {
       "type": "structure",
       "members": {
@@ -1470,6 +2142,10 @@
         "OriginPath": {
           "shape": "NonEmptyString",
           "documentation": "<p>An optional element that causes CloudFront to request your content from a directory in your Amazon S3 bucket or your custom origin.</p>"
+        },
+        "S3OriginConfig": {
+          "shape": "AwsCloudFrontDistributionOriginS3OriginConfig",
+          "documentation": "<p>An origin that is an S3 bucket that is not configured with static website hosting.</p>"
         }
       },
       "documentation": "<p>A complex type that describes the Amazon S3 bucket, HTTP server (for example, a web server), Amazon Elemental MediaStore, or other server from which CloudFront gets your files.</p>"
@@ -1480,6 +2156,16 @@
         "shape": "AwsCloudFrontDistributionOriginItem"
       }
     },
+    "AwsCloudFrontDistributionOriginS3OriginConfig": {
+      "type": "structure",
+      "members": {
+        "OriginAccessIdentity": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The CloudFront origin access identity to associate with the origin.</p>"
+        }
+      },
+      "documentation": "<p>Information about an origin that is an S3 bucket that is not configured with static website hosting.</p>"
+    },
     "AwsCloudFrontDistributionOrigins": {
       "type": "structure",
       "members": {
@@ -1489,6 +2175,72 @@
         }
       },
       "documentation": "<p>A complex type that contains information about origins and origin groups for this distribution.</p>"
+    },
+    "AwsCloudTrailTrailDetails": {
+      "type": "structure",
+      "members": {
+        "CloudWatchLogsLogGroupArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the log group that CloudTrail logs are delivered to.</p>"
+        },
+        "CloudWatchLogsRoleArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the role that the CloudWatch Logs endpoint assumes when it writes to the log group.</p>"
+        },
+        "HasCustomEventSelectors": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the trail has custom event selectors.</p>"
+        },
+        "HomeRegion": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Region where the trail was created.</p>"
+        },
+        "IncludeGlobalServiceEvents": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the trail publishes events from global services such as IAM to the log files.</p>"
+        },
+        "IsMultiRegionTrail": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the trail applies only to the current Region or to all Regions.</p>"
+        },
+        "IsOrganizationTrail": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the trail is created for all accounts in an organization in AWS Organizations, or only for the current AWS account.</p>"
+        },
+        "KmsKeyId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The AWS KMS key ID to use to encrypt the logs.</p>"
+        },
+        "LogFileValidationEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether CloudTrail log file validation is enabled.</p>"
+        },
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the trail.</p>"
+        },
+        "S3BucketName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the S3 bucket where the log files are published.</p>"
+        },
+        "S3KeyPrefix": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The S3 key prefix. The key prefix is added after the name of the S3 bucket where the log files are published.</p>"
+        },
+        "SnsTopicArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the SNS topic that is used for notifications of log file delivery.</p>"
+        },
+        "SnsTopicName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the SNS topic that is used for notifications of log file delivery.</p>"
+        },
+        "TrailArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the trail.</p>"
+        }
+      },
+      "documentation": "<p>Provides details about a CloudTrail trail.</p>"
     },
     "AwsCodeBuildProjectDetails": {
       "type": "structure",
@@ -1595,6 +2347,36 @@
         }
       },
       "documentation": "<p>Information about the VPC configuration that AWS CodeBuild accesses.</p>"
+    },
+    "AwsCorsConfiguration": {
+      "type": "structure",
+      "members": {
+        "AllowOrigins": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>The allowed origins for CORS requests.</p>"
+        },
+        "AllowCredentials": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the CORS request includes credentials.</p>"
+        },
+        "ExposeHeaders": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>The exposed headers for CORS requests.</p>"
+        },
+        "MaxAge": {
+          "shape": "Integer",
+          "documentation": "<p>The number of seconds for which the browser caches preflight request results.</p>"
+        },
+        "AllowMethods": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>The allowed methods for CORS requests.</p>"
+        },
+        "AllowHeaders": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>The allowed headers for CORS requests.</p>"
+        }
+      },
+      "documentation": "<p>Contains the cross-origin resource sharing (CORS) configuration for the API. CORS is only supported for HTTP APIs.</p>"
     },
     "AwsDynamoDbTableAttributeDefinition": {
       "type": "structure",
@@ -2480,6 +3262,338 @@
       },
       "documentation": "<p>Information that Amazon ES derives based on <code>VPCOptions</code> for the domain.</p>"
     },
+    "AwsElbAppCookieStickinessPolicies": {
+      "type": "list",
+      "member": {
+        "shape": "AwsElbAppCookieStickinessPolicy"
+      }
+    },
+    "AwsElbAppCookieStickinessPolicy": {
+      "type": "structure",
+      "members": {
+        "CookieName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the application cookie used for stickiness.</p>"
+        },
+        "PolicyName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The mnemonic name for the policy being created. The name must be unique within the set of policies for the load balancer.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about a stickiness policy that was created using <code>CreateAppCookieStickinessPolicy</code>.</p>"
+    },
+    "AwsElbLbCookieStickinessPolicies": {
+      "type": "list",
+      "member": {
+        "shape": "AwsElbLbCookieStickinessPolicy"
+      }
+    },
+    "AwsElbLbCookieStickinessPolicy": {
+      "type": "structure",
+      "members": {
+        "CookieExpirationPeriod": {
+          "shape": "Long",
+          "documentation": "<p>The amount of time, in seconds, after which the cookie is considered stale. If an expiration period is not specified, the stickiness session lasts for the duration of the browser session.</p>"
+        },
+        "PolicyName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the policy. The name must be unique within the set of policies for the load balancer.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about a stickiness policy that was created using <code>CreateLBCookieStickinessPolicy</code>.</p>"
+    },
+    "AwsElbLoadBalancerAccessLog": {
+      "type": "structure",
+      "members": {
+        "EmitInterval": {
+          "shape": "Integer",
+          "documentation": "<p>The interval in minutes for publishing the access logs.</p> <p>You can publish access logs either every 5 minutes or every 60 minutes.</p>"
+        },
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether access logs are enabled for the load balancer.</p>"
+        },
+        "S3BucketName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the S3 bucket where the access logs are stored.</p>"
+        },
+        "S3BucketPrefix": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The logical hierarchy that was created for the S3 bucket.</p> <p>If a prefix is not provided, the log is placed at the root level of the bucket.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about the access log configuration for the load balancer.</p>"
+    },
+    "AwsElbLoadBalancerAttributes": {
+      "type": "structure",
+      "members": {
+        "AccessLog": {
+          "shape": "AwsElbLoadBalancerAccessLog",
+          "documentation": "<p>Information about the access log configuration for the load balancer.</p> <p>If the access log is enabled, the load balancer captures detailed information about all requests. It delivers the information to a specified S3 bucket.</p>"
+        },
+        "ConnectionDraining": {
+          "shape": "AwsElbLoadBalancerConnectionDraining",
+          "documentation": "<p>Information about the connection draining configuration for the load balancer.</p> <p>If connection draining is enabled, the load balancer allows existing requests to complete before it shifts traffic away from a deregistered or unhealthy instance.</p>"
+        },
+        "ConnectionSettings": {
+          "shape": "AwsElbLoadBalancerConnectionSettings",
+          "documentation": "<p>Connection settings for the load balancer.</p> <p>If an idle timeout is configured, the load balancer allows connections to remain idle for the specified duration. When a connection is idle, no data is sent over the connection.</p>"
+        },
+        "CrossZoneLoadBalancing": {
+          "shape": "AwsElbLoadBalancerCrossZoneLoadBalancing",
+          "documentation": "<p>Cross-zone load balancing settings for the load balancer.</p> <p>If cross-zone load balancing is enabled, the load balancer routes the request traffic evenly across all instances regardless of the Availability Zones.</p>"
+        }
+      },
+      "documentation": "<p>Contains attributes for the load balancer.</p>"
+    },
+    "AwsElbLoadBalancerBackendServerDescription": {
+      "type": "structure",
+      "members": {
+        "InstancePort": {
+          "shape": "Integer",
+          "documentation": "<p>The port on which the EC2 instance is listening.</p>"
+        },
+        "PolicyNames": {
+          "shape": "StringList",
+          "documentation": "<p>The names of the policies that are enabled for the EC2 instance.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about the configuration of an EC2 instance for the load balancer.</p>"
+    },
+    "AwsElbLoadBalancerBackendServerDescriptions": {
+      "type": "list",
+      "member": {
+        "shape": "AwsElbLoadBalancerBackendServerDescription"
+      }
+    },
+    "AwsElbLoadBalancerConnectionDraining": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether connection draining is enabled for the load balancer.</p>"
+        },
+        "Timeout": {
+          "shape": "Integer",
+          "documentation": "<p>The maximum time, in seconds, to keep the existing connections open before deregistering the instances.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about the connection draining configuration for the load balancer.</p>"
+    },
+    "AwsElbLoadBalancerConnectionSettings": {
+      "type": "structure",
+      "members": {
+        "IdleTimeout": {
+          "shape": "Integer",
+          "documentation": "<p>The time, in seconds, that the connection can be idle (no data is sent over the connection) before it is closed by the load balancer.</p>"
+        }
+      },
+      "documentation": "<p>Contains connection settings for the load balancer.</p>"
+    },
+    "AwsElbLoadBalancerCrossZoneLoadBalancing": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether cross-zone load balancing is enabled for the load balancer.</p>"
+        }
+      },
+      "documentation": "<p>Contains cross-zone load balancing settings for the load balancer.</p>"
+    },
+    "AwsElbLoadBalancerDetails": {
+      "type": "structure",
+      "members": {
+        "AvailabilityZones": {
+          "shape": "StringList",
+          "documentation": "<p>The list of Availability Zones for the load balancer.</p>"
+        },
+        "BackendServerDescriptions": {
+          "shape": "AwsElbLoadBalancerBackendServerDescriptions",
+          "documentation": "<p>Information about the configuration of the EC2 instances.</p>"
+        },
+        "CanonicalHostedZoneName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the Amazon Route 53 hosted zone for the load balancer.</p>"
+        },
+        "CanonicalHostedZoneNameID": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ID of the Amazon Route 53 hosted zone for the load balancer.</p>"
+        },
+        "CreatedTime": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the load balancer was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "DnsName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The DNS name of the load balancer.</p>"
+        },
+        "HealthCheck": {
+          "shape": "AwsElbLoadBalancerHealthCheck",
+          "documentation": "<p>Information about the health checks that are conducted on the load balancer.</p>"
+        },
+        "Instances": {
+          "shape": "AwsElbLoadBalancerInstances",
+          "documentation": "<p>List of EC2 instances for the load balancer.</p>"
+        },
+        "ListenerDescriptions": {
+          "shape": "AwsElbLoadBalancerListenerDescriptions",
+          "documentation": "<p>The policies that are enabled for the load balancer listeners.</p>"
+        },
+        "LoadBalancerAttributes": {
+          "shape": "AwsElbLoadBalancerAttributes",
+          "documentation": "<p>The attributes for a load balancer.</p>"
+        },
+        "LoadBalancerName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the load balancer.</p>"
+        },
+        "Policies": {
+          "shape": "AwsElbLoadBalancerPolicies",
+          "documentation": "<p>The policies for a load balancer.</p>"
+        },
+        "Scheme": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of load balancer. Only provided if the load balancer is in a VPC.</p> <p>If <code>Scheme</code> is <code>internet-facing</code>, the load balancer has a public DNS name that resolves to a public IP address.</p> <p>If <code>Scheme</code> is <code>internal</code>, the load balancer has a public DNS name that resolves to a private IP address.</p>"
+        },
+        "SecurityGroups": {
+          "shape": "StringList",
+          "documentation": "<p>The security groups for the load balancer. Only provided if the load balancer is in a VPC.</p>"
+        },
+        "SourceSecurityGroup": {
+          "shape": "AwsElbLoadBalancerSourceSecurityGroup",
+          "documentation": "<p>Information about the security group for the load balancer. This is the security group that is used for inbound rules.</p>"
+        },
+        "Subnets": {
+          "shape": "StringList",
+          "documentation": "<p>The list of subnet identifiers for the load balancer.</p>"
+        },
+        "VpcId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the VPC for the load balancer.</p>"
+        }
+      },
+      "documentation": "<p>Contains details about a Classic Load Balancer.</p>"
+    },
+    "AwsElbLoadBalancerHealthCheck": {
+      "type": "structure",
+      "members": {
+        "HealthyThreshold": {
+          "shape": "Integer",
+          "documentation": "<p>The number of consecutive health check successes required before the instance is moved to the Healthy state.</p>"
+        },
+        "Interval": {
+          "shape": "Integer",
+          "documentation": "<p>The approximate interval, in seconds, between health checks of an individual instance.</p>"
+        },
+        "Target": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The instance that is being checked. The target specifies the protocol and port. The available protocols are TCP, SSL, HTTP, and HTTPS. The range of valid ports is 1 through 65535.</p> <p>For the HTTP and HTTPS protocols, the target also specifies the ping path.</p> <p>For the TCP protocol, the target is specified as <code>TCP: <i>&lt;port&gt;</i> </code>.</p> <p>For the SSL protocol, the target is specified as <code>SSL.<i>&lt;port&gt;</i> </code>.</p> <p>For the HTTP and HTTPS protocols, the target is specified as <code> <i>&lt;protocol&gt;</i>:<i>&lt;port&gt;</i>/<i>&lt;path to ping&gt;</i> </code>.</p>"
+        },
+        "Timeout": {
+          "shape": "Integer",
+          "documentation": "<p>The amount of time, in seconds, during which no response means a failed health check.</p>"
+        },
+        "UnhealthyThreshold": {
+          "shape": "Integer",
+          "documentation": "<p>The number of consecutive health check failures that must occur before the instance is moved to the Unhealthy state.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about the health checks that are conducted on the load balancer.</p>"
+    },
+    "AwsElbLoadBalancerInstance": {
+      "type": "structure",
+      "members": {
+        "InstanceId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The instance identifier.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about an EC2 instance for a load balancer.</p>"
+    },
+    "AwsElbLoadBalancerInstances": {
+      "type": "list",
+      "member": {
+        "shape": "AwsElbLoadBalancerInstance"
+      }
+    },
+    "AwsElbLoadBalancerListener": {
+      "type": "structure",
+      "members": {
+        "InstancePort": {
+          "shape": "Integer",
+          "documentation": "<p>The port on which the instance is listening.</p>"
+        },
+        "InstanceProtocol": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The protocol to use to route traffic to instances.</p> <p>Valid values: <code>HTTP</code> | <code>HTTPS</code> | <code>TCP</code> | <code>SSL</code> </p>"
+        },
+        "LoadBalancerPort": {
+          "shape": "Integer",
+          "documentation": "<p>The port on which the load balancer is listening.</p> <p>On EC2-VPC, you can specify any port from the range 1-65535.</p> <p>On EC2-Classic, you can specify any port from the following list: 25, 80, 443, 465, 587, 1024-65535.</p>"
+        },
+        "Protocol": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The load balancer transport protocol to use for routing.</p> <p>Valid values: <code>HTTP</code> | <code>HTTPS</code> | <code>TCP</code> | <code>SSL</code> </p>"
+        },
+        "SslCertificateId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the server certificate.</p>"
+        }
+      },
+      "documentation": "<p>Information about a load balancer listener.</p>"
+    },
+    "AwsElbLoadBalancerListenerDescription": {
+      "type": "structure",
+      "members": {
+        "Listener": {
+          "shape": "AwsElbLoadBalancerListener",
+          "documentation": "<p>Information about the listener.</p>"
+        },
+        "PolicyNames": {
+          "shape": "StringList",
+          "documentation": "<p>The policies enabled for the listener.</p>"
+        }
+      },
+      "documentation": "<p>Lists the policies that are enabled for a load balancer listener.</p>"
+    },
+    "AwsElbLoadBalancerListenerDescriptions": {
+      "type": "list",
+      "member": {
+        "shape": "AwsElbLoadBalancerListenerDescription"
+      }
+    },
+    "AwsElbLoadBalancerPolicies": {
+      "type": "structure",
+      "members": {
+        "AppCookieStickinessPolicies": {
+          "shape": "AwsElbAppCookieStickinessPolicies",
+          "documentation": "<p>The stickiness policies that are created using <code>CreateAppCookieStickinessPolicy</code>.</p>"
+        },
+        "LbCookieStickinessPolicies": {
+          "shape": "AwsElbLbCookieStickinessPolicies",
+          "documentation": "<p>The stickiness policies that are created using <code>CreateLBCookieStickinessPolicy</code>.</p>"
+        },
+        "OtherPolicies": {
+          "shape": "StringList",
+          "documentation": "<p>The policies other than the stickiness policies.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about the policies for a load balancer.</p>"
+    },
+    "AwsElbLoadBalancerSourceSecurityGroup": {
+      "type": "structure",
+      "members": {
+        "GroupName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the security group.</p>"
+        },
+        "OwnerAlias": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The owner of the security group.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about the security group for the load balancer.</p>"
+    },
     "AwsElbv2LoadBalancerDetails": {
       "type": "structure",
       "members": {
@@ -2554,9 +3668,75 @@
         "PrincipalName": {
           "shape": "NonEmptyString",
           "documentation": "<p>The name of the principal.</p>"
+        },
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The AWS account ID of the account for the key.</p>"
+        },
+        "AccessKeyId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the access key.</p>"
+        },
+        "SessionContext": {
+          "shape": "AwsIamAccessKeySessionContext",
+          "documentation": "<p>Information about the session that the key was used for.</p>"
         }
       },
       "documentation": "<p>IAM access key details related to a finding.</p>"
+    },
+    "AwsIamAccessKeySessionContext": {
+      "type": "structure",
+      "members": {
+        "Attributes": {
+          "shape": "AwsIamAccessKeySessionContextAttributes",
+          "documentation": "<p>Attributes of the session that the key was used for.</p>"
+        },
+        "SessionIssuer": {
+          "shape": "AwsIamAccessKeySessionContextSessionIssuer",
+          "documentation": "<p>Information about the entity that created the session.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about the session that the key was used for.</p>"
+    },
+    "AwsIamAccessKeySessionContextAttributes": {
+      "type": "structure",
+      "members": {
+        "MfaAuthenticated": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the session used multi-factor authentication (MFA).</p>"
+        },
+        "CreationDate": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the session was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        }
+      },
+      "documentation": "<p>Attributes of the session that the key was used for.</p>"
+    },
+    "AwsIamAccessKeySessionContextSessionIssuer": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of principal (user, role, or group) that created the session.</p>"
+        },
+        "PrincipalId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The principal ID of the principal (user, role, or group) that created the session.</p>"
+        },
+        "Arn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the session.</p>"
+        },
+        "AccountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the AWS account that created the session.</p>"
+        },
+        "UserName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the principal that created the session.</p>"
+        }
+      },
+      "documentation": "<p>Information about the entity that created the session.</p>"
     },
     "AwsIamAccessKeyStatus": {
       "type": "string",
@@ -2577,7 +3757,7 @@
           "documentation": "<p>The ARN of the policy.</p>"
         }
       },
-      "documentation": "<p>A managed policy that is attached to an IAM user.</p>"
+      "documentation": "<p>A managed policy that is attached to an IAM principal.</p>"
     },
     "AwsIamAttachedManagedPolicyList": {
       "type": "list",
@@ -2585,19 +3765,137 @@
         "shape": "AwsIamAttachedManagedPolicy"
       }
     },
+    "AwsIamGroupDetails": {
+      "type": "structure",
+      "members": {
+        "AttachedManagedPolicies": {
+          "shape": "AwsIamAttachedManagedPolicyList",
+          "documentation": "<p>A list of the managed policies that are attached to the IAM group.</p>"
+        },
+        "CreateDate": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the IAM group was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "GroupId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the IAM group.</p>"
+        },
+        "GroupName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the IAM group.</p>"
+        },
+        "GroupPolicyList": {
+          "shape": "AwsIamGroupPolicyList",
+          "documentation": "<p>The list of inline policies that are embedded in the group.</p>"
+        },
+        "Path": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The path to the group.</p>"
+        }
+      },
+      "documentation": "<p>Contains details about an IAM group.</p>"
+    },
+    "AwsIamGroupPolicy": {
+      "type": "structure",
+      "members": {
+        "PolicyName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the policy.</p>"
+        }
+      },
+      "documentation": "<p>A managed policy that is attached to the IAM group.</p>"
+    },
+    "AwsIamGroupPolicyList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsIamGroupPolicy"
+      }
+    },
+    "AwsIamInstanceProfile": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the instance profile.</p>"
+        },
+        "CreateDate": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the instance profile was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "InstanceProfileId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the instance profile.</p>"
+        },
+        "InstanceProfileName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the instance profile.</p>"
+        },
+        "Path": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The path to the instance profile.</p>"
+        },
+        "Roles": {
+          "shape": "AwsIamInstanceProfileRoles",
+          "documentation": "<p>The roles associated with the instance profile.</p>"
+        }
+      },
+      "documentation": "<p>Information about an instance profile.</p>"
+    },
+    "AwsIamInstanceProfileList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsIamInstanceProfile"
+      }
+    },
+    "AwsIamInstanceProfileRole": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the role.</p>"
+        },
+        "AssumeRolePolicyDocument": {
+          "shape": "AwsIamRoleAssumeRolePolicyDocument",
+          "documentation": "<p>The policy that grants an entity permission to assume the role.</p>"
+        },
+        "CreateDate": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the role was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "Path": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The path to the role.</p>"
+        },
+        "RoleId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the role.</p>"
+        },
+        "RoleName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the role.</p>"
+        }
+      },
+      "documentation": "<p>Information about a role associated with an instance profile.</p>"
+    },
+    "AwsIamInstanceProfileRoles": {
+      "type": "list",
+      "member": {
+        "shape": "AwsIamInstanceProfileRole"
+      }
+    },
     "AwsIamPermissionsBoundary": {
       "type": "structure",
       "members": {
         "PermissionsBoundaryArn": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The ARN of the policy used to set the permissions boundary for the user.</p>"
+          "documentation": "<p>The ARN of the policy used to set the permissions boundary.</p>"
         },
         "PermissionsBoundaryType": {
           "shape": "NonEmptyString",
           "documentation": "<p>The usage type for the permissions boundary.</p>"
         }
       },
-      "documentation": "<p>Information about the policy used to set the permissions boundary for an IAM user.</p>"
+      "documentation": "<p>Information about the policy used to set the permissions boundary for an IAM principal.</p>"
     },
     "AwsIamPolicyDetails": {
       "type": "structure",
@@ -2686,9 +3984,20 @@
           "shape": "AwsIamRoleAssumeRolePolicyDocument",
           "documentation": "<p>The trust policy that grants permission to assume the role.</p>"
         },
+        "AttachedManagedPolicies": {
+          "shape": "AwsIamAttachedManagedPolicyList",
+          "documentation": "<p>The list of the managed policies that are attached to the role.</p>"
+        },
         "CreateDate": {
           "shape": "NonEmptyString",
           "documentation": "<p>Indicates when the role was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "InstanceProfileList": {
+          "shape": "AwsIamInstanceProfileList",
+          "documentation": "<p>The list of instance profiles that contain this role.</p>"
+        },
+        "PermissionsBoundary": {
+          "shape": "AwsIamPermissionsBoundary"
         },
         "RoleId": {
           "shape": "NonEmptyString",
@@ -2697,6 +4006,10 @@
         "RoleName": {
           "shape": "NonEmptyString",
           "documentation": "<p>The friendly name that identifies the role.</p>"
+        },
+        "RolePolicyList": {
+          "shape": "AwsIamRolePolicyList",
+          "documentation": "<p>The list of inline policies that are embedded in the role.</p>"
         },
         "MaxSessionDuration": {
           "shape": "Integer",
@@ -2708,6 +4021,22 @@
         }
       },
       "documentation": "<p>Contains information about an IAM role, including all of the role's policies.</p>"
+    },
+    "AwsIamRolePolicy": {
+      "type": "structure",
+      "members": {
+        "PolicyName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the policy.</p>"
+        }
+      },
+      "documentation": "<p>An inline policy that is embedded in the role.</p>"
+    },
+    "AwsIamRolePolicyList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsIamRolePolicy"
+      }
     },
     "AwsIamUserDetails": {
       "type": "structure",
@@ -3973,6 +5302,502 @@
       },
       "documentation": "<p>Identifies the log types to enable and disable.</p>"
     },
+    "AwsRedshiftClusterClusterNode": {
+      "type": "structure",
+      "members": {
+        "NodeRole": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The role of the node. A node might be a leader node or a compute node.</p>"
+        },
+        "PrivateIpAddress": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The private IP address of the node.</p>"
+        },
+        "PublicIpAddress": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The public IP address of the node.</p>"
+        }
+      },
+      "documentation": "<p>A node in an Amazon Redshift cluster.</p>"
+    },
+    "AwsRedshiftClusterClusterNodes": {
+      "type": "list",
+      "member": {
+        "shape": "AwsRedshiftClusterClusterNode"
+      }
+    },
+    "AwsRedshiftClusterClusterParameterGroup": {
+      "type": "structure",
+      "members": {
+        "ClusterParameterStatusList": {
+          "shape": "AwsRedshiftClusterClusterParameterStatusList",
+          "documentation": "<p>The list of parameter statuses.</p>"
+        },
+        "ParameterApplyStatus": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The status of updates to the parameters.</p>"
+        },
+        "ParameterGroupName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the parameter group.</p>"
+        }
+      },
+      "documentation": "<p>A cluster parameter group that is associated with an Amazon Redshift cluster.</p>"
+    },
+    "AwsRedshiftClusterClusterParameterGroups": {
+      "type": "list",
+      "member": {
+        "shape": "AwsRedshiftClusterClusterParameterGroup"
+      }
+    },
+    "AwsRedshiftClusterClusterParameterStatus": {
+      "type": "structure",
+      "members": {
+        "ParameterName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the parameter.</p>"
+        },
+        "ParameterApplyStatus": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The status of the parameter. Indicates whether the parameter is in sync with the database, waiting for a cluster reboot, or encountered an error when it was applied.</p> <p>Valid values: <code>in-sync</code> | <code>pending-reboot</code> | <code>applying</code> | <code>invalid-parameter</code> | <code>apply-deferred</code> | <code>apply-error</code> | <code>unknown-error</code> </p>"
+        },
+        "ParameterApplyErrorDescription": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The error that prevented the parameter from being applied to the database.</p>"
+        }
+      },
+      "documentation": "<p>The status of a parameter in a cluster parameter group for an Amazon Redshift cluster.</p>"
+    },
+    "AwsRedshiftClusterClusterParameterStatusList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsRedshiftClusterClusterParameterStatus"
+      }
+    },
+    "AwsRedshiftClusterClusterSecurityGroup": {
+      "type": "structure",
+      "members": {
+        "ClusterSecurityGroupName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the cluster security group.</p>"
+        },
+        "Status": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The status of the cluster security group.</p>"
+        }
+      },
+      "documentation": "<p>A security group that is associated with the cluster.</p>"
+    },
+    "AwsRedshiftClusterClusterSecurityGroups": {
+      "type": "list",
+      "member": {
+        "shape": "AwsRedshiftClusterClusterSecurityGroup"
+      }
+    },
+    "AwsRedshiftClusterClusterSnapshotCopyStatus": {
+      "type": "structure",
+      "members": {
+        "DestinationRegion": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The destination Region that snapshots are automatically copied to when cross-Region snapshot copy is enabled.</p>"
+        },
+        "ManualSnapshotRetentionPeriod": {
+          "shape": "Integer",
+          "documentation": "<p>The number of days that manual snapshots are retained in the destination region after they are copied from a source region.</p> <p>If the value is -1, then the manual snapshot is retained indefinitely.</p> <p>Valid values: Either -1 or an integer between 1 and 3,653</p>"
+        },
+        "RetentionPeriod": {
+          "shape": "Integer",
+          "documentation": "<p>The number of days to retain automated snapshots in the destination Region after they are copied from a source Region.</p>"
+        },
+        "SnapshotCopyGrantName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the snapshot copy grant.</p>"
+        }
+      },
+      "documentation": "<p>Information about a cross-Region snapshot copy.</p>"
+    },
+    "AwsRedshiftClusterDeferredMaintenanceWindow": {
+      "type": "structure",
+      "members": {
+        "DeferMaintenanceEndTime": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The end of the time window for which maintenance was deferred.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "DeferMaintenanceIdentifier": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the maintenance window.</p>"
+        },
+        "DeferMaintenanceStartTime": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The start of the time window for which maintenance was deferred.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        }
+      },
+      "documentation": "<p>A time windows during which maintenance was deferred for an Amazon Redshift cluster.</p>"
+    },
+    "AwsRedshiftClusterDeferredMaintenanceWindows": {
+      "type": "list",
+      "member": {
+        "shape": "AwsRedshiftClusterDeferredMaintenanceWindow"
+      }
+    },
+    "AwsRedshiftClusterDetails": {
+      "type": "structure",
+      "members": {
+        "AllowVersionUpgrade": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether major version upgrades are applied automatically to the cluster during the maintenance window.</p>"
+        },
+        "AutomatedSnapshotRetentionPeriod": {
+          "shape": "Integer",
+          "documentation": "<p>The number of days that automatic cluster snapshots are retained.</p>"
+        },
+        "AvailabilityZone": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the Availability Zone in which the cluster is located.</p>"
+        },
+        "ClusterAvailabilityStatus": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The availability status of the cluster for queries. Possible values are the following:</p> <ul> <li> <p> <code>Available</code> - The cluster is available for queries.</p> </li> <li> <p> <code>Unavailable</code> - The cluster is not available for queries.</p> </li> <li> <p> <code>Maintenance</code> - The cluster is intermittently available for queries due to maintenance activities.</p> </li> <li> <p> <code>Modifying</code> -The cluster is intermittently available for queries due to changes that modify the cluster.</p> </li> <li> <p> <code>Failed</code> - The cluster failed and is not available for queries.</p> </li> </ul>"
+        },
+        "ClusterCreateTime": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the cluster was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "ClusterIdentifier": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The unique identifier of the cluster.</p>"
+        },
+        "ClusterNodes": {
+          "shape": "AwsRedshiftClusterClusterNodes",
+          "documentation": "<p>The nodes in the cluster.</p>"
+        },
+        "ClusterParameterGroups": {
+          "shape": "AwsRedshiftClusterClusterParameterGroups",
+          "documentation": "<p>The list of cluster parameter groups that are associated with this cluster.</p>"
+        },
+        "ClusterPublicKey": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The public key for the cluster.</p>"
+        },
+        "ClusterRevisionNumber": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The specific revision number of the database in the cluster.</p>"
+        },
+        "ClusterSecurityGroups": {
+          "shape": "AwsRedshiftClusterClusterSecurityGroups",
+          "documentation": "<p>A list of cluster security groups that are associated with the cluster.</p>"
+        },
+        "ClusterSnapshotCopyStatus": {
+          "shape": "AwsRedshiftClusterClusterSnapshotCopyStatus",
+          "documentation": "<p>Information about the destination Region and retention period for the cross-Region snapshot copy.</p>"
+        },
+        "ClusterStatus": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The current status of the cluster.</p> <p>Valid values: <code>available</code> | <code>available, prep-for-resize</code> | <code>available, resize-cleanup</code> |<code> cancelling-resize</code> | <code>creating</code> | <code>deleting</code> | <code>final-snapshot</code> | <code>hardware-failure</code> | <code>incompatible-hsm</code> |<code> incompatible-network</code> | <code>incompatible-parameters</code> | <code>incompatible-restore</code> | <code>modifying</code> | <code>paused</code> | <code>rebooting</code> | <code>renaming</code> | <code>resizing</code> | <code>rotating-keys</code> | <code>storage-full</code> | <code>updating-hsm</code> </p>"
+        },
+        "ClusterSubnetGroupName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the subnet group that is associated with the cluster. This parameter is valid only when the cluster is in a VPC.</p>"
+        },
+        "ClusterVersion": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The version ID of the Amazon Redshift engine that runs on the cluster.</p>"
+        },
+        "DBName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the initial database that was created when the cluster was created.</p> <p>The same name is returned for the life of the cluster.</p> <p>If an initial database is not specified, a database named <code>devdev</code> is created by default.</p>"
+        },
+        "DeferredMaintenanceWindows": {
+          "shape": "AwsRedshiftClusterDeferredMaintenanceWindows",
+          "documentation": "<p>List of time windows during which maintenance was deferred.</p>"
+        },
+        "ElasticIpStatus": {
+          "shape": "AwsRedshiftClusterElasticIpStatus",
+          "documentation": "<p>Information about the status of the Elastic IP (EIP) address.</p>"
+        },
+        "ElasticResizeNumberOfNodeOptions": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The number of nodes that you can use the elastic resize method to resize the cluster to.</p>"
+        },
+        "Encrypted": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the data in the cluster is encrypted at rest.</p>"
+        },
+        "Endpoint": {
+          "shape": "AwsRedshiftClusterEndpoint",
+          "documentation": "<p>The connection endpoint.</p>"
+        },
+        "EnhancedVpcRouting": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether to create the cluster with enhanced VPC routing enabled.</p>"
+        },
+        "ExpectedNextSnapshotScheduleTime": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates when the next snapshot is expected to be taken. The cluster must have a valid snapshot schedule and have backups enabled.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "ExpectedNextSnapshotScheduleTimeStatus": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The status of the next expected snapshot.</p> <p>Valid values: <code>OnTrack</code> | <code>Pending</code> </p>"
+        },
+        "HsmStatus": {
+          "shape": "AwsRedshiftClusterHsmStatus",
+          "documentation": "<p>Information about whether the Amazon Redshift cluster finished applying any changes to hardware security module (HSM) settings that were specified in a modify cluster command.</p>"
+        },
+        "IamRoles": {
+          "shape": "AwsRedshiftClusterIamRoles",
+          "documentation": "<p>A list of IAM roles that the cluster can use to access other AWS services.</p>"
+        },
+        "KmsKeyId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the AWS KMS encryption key that is used to encrypt data in the cluster.</p>"
+        },
+        "MaintenanceTrackName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the maintenance track for the cluster.</p>"
+        },
+        "ManualSnapshotRetentionPeriod": {
+          "shape": "Integer",
+          "documentation": "<p>The default number of days to retain a manual snapshot.</p> <p>If the value is -1, the snapshot is retained indefinitely.</p> <p>This setting doesn't change the retention period of existing snapshots.</p> <p>Valid values: Either -1 or an integer between 1 and 3,653</p>"
+        },
+        "MasterUsername": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The master user name for the cluster. This name is used to connect to the database that is specified in as the value of <code>DBName</code>.</p>"
+        },
+        "NextMaintenanceWindowStartTime": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates the start of the next maintenance window.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "NodeType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The node type for the nodes in the cluster.</p>"
+        },
+        "NumberOfNodes": {
+          "shape": "Integer",
+          "documentation": "<p>The number of compute nodes in the cluster.</p>"
+        },
+        "PendingActions": {
+          "shape": "StringList",
+          "documentation": "<p>A list of cluster operations that are waiting to start.</p>"
+        },
+        "PendingModifiedValues": {
+          "shape": "AwsRedshiftClusterPendingModifiedValues",
+          "documentation": "<p>A list of changes to the cluster that are currently pending.</p>"
+        },
+        "PreferredMaintenanceWindow": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The weekly time range, in Universal Coordinated Time (UTC), during which system maintenance can occur.</p> <p>Format: <code> <i>&lt;day&gt;</i>:HH:MM-<i>&lt;day&gt;</i>:HH:MM</code> </p> <p>For the day values, use <code>mon</code> | <code>tue</code> | <code>wed</code> | <code>thu</code> | <code>fri</code> | <code>sat</code> | <code>sun</code> </p> <p>For example, <code>sun:09:32-sun:10:02</code> </p>"
+        },
+        "PubliclyAccessible": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the cluster can be accessed from a public network.</p>"
+        },
+        "ResizeInfo": {
+          "shape": "AwsRedshiftClusterResizeInfo",
+          "documentation": "<p>Information about the resize operation for the cluster.</p>"
+        },
+        "RestoreStatus": {
+          "shape": "AwsRedshiftClusterRestoreStatus",
+          "documentation": "<p>Information about the status of a cluster restore action. Only applies to a cluster that was created by restoring a snapshot.</p>"
+        },
+        "SnapshotScheduleIdentifier": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>A unique identifier for the cluster snapshot schedule.</p>"
+        },
+        "SnapshotScheduleState": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The current state of the cluster snapshot schedule.</p> <p>Valid values: <code>MODIFYING</code> | <code>ACTIVE</code> | <code>FAILED</code> </p>"
+        },
+        "VpcId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the VPC that the cluster is in, if the cluster is in a VPC.</p>"
+        },
+        "VpcSecurityGroups": {
+          "shape": "AwsRedshiftClusterVpcSecurityGroups",
+          "documentation": "<p>The list of VPC security groups that the cluster belongs to, if the cluster is in a VPC.</p>"
+        }
+      },
+      "documentation": "<p>Details about an Amazon Redshift cluster.</p>"
+    },
+    "AwsRedshiftClusterElasticIpStatus": {
+      "type": "structure",
+      "members": {
+        "ElasticIp": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The elastic IP address for the cluster.</p>"
+        },
+        "Status": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The status of the elastic IP address.</p>"
+        }
+      },
+      "documentation": "<p>The status of the elastic IP (EIP) address for an Amazon Redshift cluster.</p>"
+    },
+    "AwsRedshiftClusterEndpoint": {
+      "type": "structure",
+      "members": {
+        "Address": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The DNS address of the cluster.</p>"
+        },
+        "Port": {
+          "shape": "Integer",
+          "documentation": "<p>The port that the database engine listens on.</p>"
+        }
+      },
+      "documentation": "<p>The connection endpoint for an Amazon Redshift cluster.</p>"
+    },
+    "AwsRedshiftClusterHsmStatus": {
+      "type": "structure",
+      "members": {
+        "HsmClientCertificateIdentifier": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the HSM client certificate that the Amazon Redshift cluster uses to retrieve the data encryption keys that are stored in an HSM.</p>"
+        },
+        "HsmConfigurationIdentifier": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the HSM configuration that contains the information that the Amazon Redshift cluster can use to retrieve and store keys in an HSM.</p>"
+        },
+        "Status": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates whether the Amazon Redshift cluster has finished applying any HSM settings changes specified in a modify cluster command.</p> <p>Type: String</p> <p>Valid values: <code>active</code> | <code>applying</code> </p>"
+        }
+      },
+      "documentation": "<p>Information about whether an Amazon Redshift cluster finished applying any hardware changes to security module (HSM) settings that were specified in a modify cluster command.</p>"
+    },
+    "AwsRedshiftClusterIamRole": {
+      "type": "structure",
+      "members": {
+        "ApplyStatus": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The status of the IAM role's association with the cluster.</p> <p>Valid values: <code>in-sync</code> | <code>adding</code> | <code>removing</code> </p>"
+        },
+        "IamRoleArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the IAM role.</p>"
+        }
+      },
+      "documentation": "<p>An IAM role that the cluster can use to access other AWS services.</p>"
+    },
+    "AwsRedshiftClusterIamRoles": {
+      "type": "list",
+      "member": {
+        "shape": "AwsRedshiftClusterIamRole"
+      }
+    },
+    "AwsRedshiftClusterPendingModifiedValues": {
+      "type": "structure",
+      "members": {
+        "AutomatedSnapshotRetentionPeriod": {
+          "shape": "Integer",
+          "documentation": "<p>The pending or in-progress change to the automated snapshot retention period.</p>"
+        },
+        "ClusterIdentifier": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The pending or in-progress change to the identifier for the cluster.</p>"
+        },
+        "ClusterType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The pending or in-progress change to the cluster type.</p>"
+        },
+        "ClusterVersion": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The pending or in-progress change to the service version.</p>"
+        },
+        "EncryptionType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The encryption type for a cluster.</p>"
+        },
+        "EnhancedVpcRouting": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether to create the cluster with enhanced VPC routing enabled.</p>"
+        },
+        "MaintenanceTrackName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the maintenance track that the cluster changes to during the next maintenance window.</p>"
+        },
+        "MasterUserPassword": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The pending or in-progress change to the master user password for the cluster.</p>"
+        },
+        "NodeType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The pending or in-progress change to the cluster's node type.</p>"
+        },
+        "NumberOfNodes": {
+          "shape": "Integer",
+          "documentation": "<p>The pending or in-progress change to the number of nodes in the cluster.</p>"
+        },
+        "PubliclyAccessible": {
+          "shape": "Boolean",
+          "documentation": "<p>The pending or in-progress change to whether the cluster can be connected to from the public network.</p>"
+        }
+      },
+      "documentation": "<p>Changes to the Amazon Redshift cluster that are currently pending.</p>"
+    },
+    "AwsRedshiftClusterResizeInfo": {
+      "type": "structure",
+      "members": {
+        "AllowCancelResize": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the resize operation can be canceled.</p>"
+        },
+        "ResizeType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of resize operation.</p> <p>Valid values: <code>ClassicResize</code> </p>"
+        }
+      },
+      "documentation": "<p>Information about the resize operation for the cluster.</p>"
+    },
+    "AwsRedshiftClusterRestoreStatus": {
+      "type": "structure",
+      "members": {
+        "CurrentRestoreRateInMegaBytesPerSecond": {
+          "shape": "Double",
+          "documentation": "<p>The number of megabytes per second being transferred from the backup storage. Returns the average rate for a completed backup.</p> <p>This field is only updated when you restore to DC2 and DS2 node types.</p>"
+        },
+        "ElapsedTimeInSeconds": {
+          "shape": "Long",
+          "documentation": "<p>The amount of time an in-progress restore has been running, or the amount of time it took a completed restore to finish.</p> <p>This field is only updated when you restore to DC2 and DS2 node types.</p>"
+        },
+        "EstimatedTimeToCompletionInSeconds": {
+          "shape": "Long",
+          "documentation": "<p>The estimate of the time remaining before the restore is complete. Returns 0 for a completed restore.</p> <p>This field is only updated when you restore to DC2 and DS2 node types.</p>"
+        },
+        "ProgressInMegaBytes": {
+          "shape": "Long",
+          "documentation": "<p>The number of megabytes that were transferred from snapshot storage.</p> <p>This field is only updated when you restore to DC2 and DS2 node types.</p>"
+        },
+        "SnapshotSizeInMegaBytes": {
+          "shape": "Long",
+          "documentation": "<p>The size of the set of snapshot data that was used to restore the cluster.</p> <p>This field is only updated when you restore to DC2 and DS2 node types.</p>"
+        },
+        "Status": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The status of the restore action.</p> <p>Valid values: <code>starting</code> | <code>restoring</code> | <code>completed</code> | <code>failed</code> </p>"
+        }
+      },
+      "documentation": "<p>Information about the status of a cluster restore action. It only applies if the cluster was created by restoring a snapshot.</p>"
+    },
+    "AwsRedshiftClusterVpcSecurityGroup": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The status of the VPC security group.</p>"
+        },
+        "VpcSecurityGroupId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the VPC security group.</p>"
+        }
+      },
+      "documentation": "<p>A VPC security group that the cluster belongs to, if the cluster is in a VPC.</p>"
+    },
+    "AwsRedshiftClusterVpcSecurityGroups": {
+      "type": "list",
+      "member": {
+        "shape": "AwsRedshiftClusterVpcSecurityGroup"
+      }
+    },
     "AwsS3BucketDetails": {
       "type": "structure",
       "members": {
@@ -4609,7 +6434,7 @@
           "documentation": "<p>A keyword for a finding.</p>"
         }
       },
-      "documentation": "<p>A collection of attributes that are applied to all active Security Hub-aggregated findings and that result in a subset of findings that are included in this insight.</p>"
+      "documentation": "<p>A collection of attributes that are applied to all active Security Hub-aggregated findings and that result in a subset of findings that are included in this insight.</p> <p>You can filter by up to 10 finding attributes. For each attribute, you can provide up to 20 filter values.</p>"
     },
     "AwsSecurityFindingIdentifier": {
       "type": "structure",
@@ -5581,7 +7406,7 @@
       "members": {
         "Filters": {
           "shape": "AwsSecurityFindingFilters",
-          "documentation": "<p>The finding attributes used to define a condition to filter the returned findings.</p> <p>Note that in the available filter fields, <code>WorkflowState</code> is deprecated. To search for a finding based on its workflow status, use <code>WorkflowStatus</code>.</p>"
+          "documentation": "<p>The finding attributes used to define a condition to filter the returned findings.</p> <p>You can filter by up to 10 finding attributes. For each attribute, you can provide up to 20 filter values.</p> <p>Note that in the available filter fields, <code>WorkflowState</code> is deprecated. To search for a finding based on its workflow status, use <code>WorkflowStatus</code>.</p>"
         },
         "SortCriteria": {
           "shape": "SortCriteria",
@@ -6084,6 +7909,9 @@
       },
       "documentation": "<p>Information about the state of the load balancer.</p>"
     },
+    "Long": {
+      "type": "long"
+    },
     "Malware": {
       "type": "structure",
       "required": [
@@ -6196,7 +8024,7 @@
         },
         "MemberStatus": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The status of the relationship between the member account and its master account. </p>"
+          "documentation": "<p>The status of the relationship between the member account and its master account. </p> <p>The status can have one of the following values:</p> <ul> <li> <p> <code>CREATED</code> - Indicates that the master account added the member account, but has not yet invited the member account.</p> </li> <li> <p> <code>INVITED</code> - Indicates that the master account invited the member account. The member account has not yet responded to the invitation.</p> </li> <li> <p> <code>ASSOCIATED</code> - Indicates that the member account accepted the invitation.</p> </li> <li> <p> <code>REMOVED</code> - Indicates that the master account disassociated the member account.</p> </li> <li> <p> <code>RESIGNED</code> - Indicates that the member account disassociated themselves from the master account.</p> </li> <li> <p> <code>DELETED</code> - Indicates that the master account deleted the member account.</p> </li> </ul>"
         },
         "InvitedAt": {
           "shape": "Timestamp",
@@ -6454,7 +8282,7 @@
         },
         "InstalledPendingReboot": {
           "shape": "Integer",
-          "documentation": "<p>The number of patches that were installed since the last time the instance was rebooted.</p>"
+          "documentation": "<p>The number of patches that were applied, but that require the instance to be rebooted in order to be marked as installed.</p>"
         },
         "OperationStartTime": {
           "shape": "NonEmptyString",
@@ -6671,6 +8499,10 @@
           "shape": "NonEmptyString",
           "documentation": "<p>The canonical AWS external Region name where this resource is located.</p>"
         },
+        "ResourceRole": {
+          "shape": "NonEmptyString",
+          "documentation": "<p/>"
+        },
         "Tags": {
           "shape": "FieldMap",
           "documentation": "<p>A list of AWS tags associated with a resource at the time the finding was processed.</p>"
@@ -6757,9 +8589,45 @@
           "shape": "AwsIamPolicyDetails",
           "documentation": "<p>Details about an IAM permissions policy.</p>"
         },
+        "AwsApiGatewayV2Stage": {
+          "shape": "AwsApiGatewayV2StageDetails",
+          "documentation": "<p/>"
+        },
+        "AwsApiGatewayV2Api": {
+          "shape": "AwsApiGatewayV2ApiDetails",
+          "documentation": "<p/>"
+        },
         "AwsDynamoDbTable": {
           "shape": "AwsDynamoDbTableDetails",
           "documentation": "<p>Details about a DynamoDB table.</p>"
+        },
+        "AwsApiGatewayStage": {
+          "shape": "AwsApiGatewayStageDetails",
+          "documentation": "<p/>"
+        },
+        "AwsApiGatewayRestApi": {
+          "shape": "AwsApiGatewayRestApiDetails",
+          "documentation": "<p/>"
+        },
+        "AwsCloudTrailTrail": {
+          "shape": "AwsCloudTrailTrailDetails",
+          "documentation": "<p/>"
+        },
+        "AwsCertificateManagerCertificate": {
+          "shape": "AwsCertificateManagerCertificateDetails",
+          "documentation": "<p/>"
+        },
+        "AwsRedshiftCluster": {
+          "shape": "AwsRedshiftClusterDetails",
+          "documentation": "<p/>"
+        },
+        "AwsElbLoadBalancer": {
+          "shape": "AwsElbLoadBalancerDetails",
+          "documentation": "<p/>"
+        },
+        "AwsIamGroup": {
+          "shape": "AwsIamGroupDetails",
+          "documentation": "<p/>"
         },
         "AwsIamRole": {
           "shape": "AwsIamRoleDetails",
@@ -7617,5 +9485,5 @@
       "documentation": "<p>Used to update information about the investigation into the finding.</p>"
     }
   },
-  "documentation": "<p>Security Hub provides you with a comprehensive view of the security state of your AWS environment and resources. It also provides you with the readiness status of your environment based on controls from supported security standards. Security Hub collects security data from AWS accounts, services, and integrated third-party products and helps you analyze security trends in your environment to identify the highest priority security issues. For more information about Security Hub, see the <i> <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html\">AWS Security Hub User Guide</a> </i>.</p> <p>When you use operations in the Security Hub API, the requests are executed only in the AWS Region that is currently active or in the specific AWS Region that you specify in your request. Any configuration or settings change that results from the operation is applied only to that Region. To make the same change in other Regions, execute the same command for each Region to apply the change to.</p> <p>For example, if your Region is set to <code>us-west-2</code>, when you use <code> <a>CreateMembers</a> </code> to add a member account to Security Hub, the association of the member account with the master account is created only in the <code>us-west-2</code> Region. Security Hub must be enabled for the member account in the same Region that the invitation was sent from.</p> <p>The following throttling limits apply to using Security Hub API operations.</p> <ul> <li> <p> <code> <a>GetFindings</a> </code> - <code>RateLimit</code> of 3 requests per second. <code>BurstLimit</code> of 6 requests per second.</p> </li> <li> <p> <code> <a>UpdateFindings</a> </code> - <code>RateLimit</code> of 1 request per second. <code>BurstLimit</code> of 5 requests per second.</p> </li> <li> <p>All other operations - <code>RateLimit</code> of 10 requests per second. <code>BurstLimit</code> of 30 requests per second.</p> </li> </ul>"
+  "documentation": "<p>Security Hub provides you with a comprehensive view of the security state of your AWS environment and resources. It also provides you with the readiness status of your environment based on controls from supported security standards. Security Hub collects security data from AWS accounts, services, and integrated third-party products and helps you analyze security trends in your environment to identify the highest priority security issues. For more information about Security Hub, see the <i> <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html\">AWS Security Hub User Guide</a> </i>.</p> <p>When you use operations in the Security Hub API, the requests are executed only in the AWS Region that is currently active or in the specific AWS Region that you specify in your request. Any configuration or settings change that results from the operation is applied only to that Region. To make the same change in other Regions, execute the same command for each Region to apply the change to.</p> <p>For example, if your Region is set to <code>us-west-2</code>, when you use <code> <a>CreateMembers</a> </code> to add a member account to Security Hub, the association of the member account with the master account is created only in the <code>us-west-2</code> Region. Security Hub must be enabled for the member account in the same Region that the invitation was sent from.</p> <p>The following throttling limits apply to using Security Hub API operations.</p> <ul> <li> <p> <code> <a>BatchEnableStandards</a> </code> - <code>RateLimit</code> of 1 request per second, <code>BurstLimit</code> of 1 request per second.</p> </li> <li> <p> <code> <a>GetFindings</a> </code> - <code>RateLimit</code> of 3 requests per second. <code>BurstLimit</code> of 6 requests per second.</p> </li> <li> <p> <code> <a>UpdateFindings</a> </code> - <code>RateLimit</code> of 1 request per second. <code>BurstLimit</code> of 5 requests per second.</p> </li> <li> <p> <code> <a>UpdateStandardsControl</a> </code> - <code>RateLimit</code> of 1 request per second, <code>BurstLimit</code> of 5 requests per second.</p> </li> <li> <p>All other operations - <code>RateLimit</code> of 10 requests per second. <code>BurstLimit</code> of 30 requests per second.</p> </li> </ul>"
 }

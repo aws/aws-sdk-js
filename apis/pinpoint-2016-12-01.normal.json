@@ -4611,6 +4611,10 @@
         {
           "shape": "TooManyRequestsException",
           "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "<p>The request failed due to a conflict with the current state of the specified resource (ConflictException).</p>"
         }
       ],
       "documentation": "<p>Updates the configuration and other settings for a journey.</p>"
@@ -5952,11 +5956,11 @@
         },
         "Limits": {
           "shape": "CampaignLimits",
-          "documentation": "<p>The default sending limits for campaigns and journeys in the application.</p>"
+          "documentation": "<p>The default sending limits for campaigns in the application.</p>"
         },
         "QuietTime": {
           "shape": "QuietTime",
-          "documentation": "<p>The default quiet time for campaigns and journeys in the application. Quiet time is a specific time range when messages aren't sent to endpoints, if all the following conditions are met:</p> <ul><li><p>The EndpointDemographic.Timezone property of the endpoint is set to a valid value.</p></li> <li><p>The current time in the endpoint's time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign or journey that has custom quiet time settings).</p></li> <li><p>The current time in the endpoint's time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign or journey that has custom quiet time settings).</p></li></ul> <p>If any of the preceding conditions isn't met, the endpoint will receive messages from a campaign or journey, even if quiet time is enabled.</p>"
+          "documentation": "<p>The default quiet time for campaigns in the application. Quiet time is a specific time range when messages aren't sent to endpoints, if all the following conditions are met:</p> <ul><li><p>The EndpointDemographic.Timezone property of the endpoint is set to a valid value.</p></li> <li><p>The current time in the endpoint's time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign or journey that has custom quiet time settings).</p></li> <li><p>The current time in the endpoint's time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign or journey that has custom quiet time settings).</p></li></ul> <p>If any of the preceding conditions isn't met, the endpoint will receive messages from a campaign or journey, even if quiet time is enabled.</p>"
         }
       },
       "documentation": "<p>Provides information about an application, including the default settings for an application.</p>",
@@ -6298,14 +6302,14 @@
         },
         "MessagesPerSecond": {
           "shape": "__integer",
-          "documentation": "<p>The maximum number of messages that a campaign can send each second. For an application, this value specifies the default limit for the number of messages that campaigns and journeys can send each second. The minimum value is 50. The maximum value is 20,000.</p>"
+          "documentation": "<p>The maximum number of messages that a campaign can send each second. For an application, this value specifies the default limit for the number of messages that campaigns can send each second. The minimum value is 50. The maximum value is 20,000.</p>"
         },
         "Total": {
           "shape": "__integer",
           "documentation": "<p>The maximum number of messages that a campaign can send to a single endpoint during the course of the campaign. If a campaign recurs, this setting applies to all runs of the campaign. The maximum value is 100.</p>"
         }
       },
-      "documentation": "<p>For a campaign, specifies limits on the messages that the campaign can send. For an application, specifies the default limits for messages that campaigns and journeys in the application can send.</p>"
+      "documentation": "<p>For a campaign, specifies limits on the messages that the campaign can send. For an application, specifies the default limits for messages that campaigns in the application can send.</p>"
     },
     "CampaignResponse": {
       "type": "structure",
@@ -6455,7 +6459,8 @@
         "PENDING_NEXT_RUN",
         "COMPLETED",
         "PAUSED",
-        "DELETED"
+        "DELETED",
+        "INVALID"
       ]
     },
     "CampaignsResponse": {
@@ -6581,7 +6586,7 @@
           "documentation": "<p>The unique identifier for the activity to perform if the conditions are met.</p>"
         }
       },
-      "documentation": "<p>Specifies the settings for a yes/no split activity in a journey. This type of activity sends participants down one of two paths in a journey, based on conditions that you specify.</p>"
+      "documentation": "<p>Specifies the settings for a yes/no split activity in a journey. This type of activity sends participants down one of two paths in a journey, based on conditions that you specify.</p> <note><p>To create yes/no split activities that send participants down different paths based on push notification events (such as Open or Received events), your mobile app has to specify the User ID and Endpoint ID values. For more information, see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/integrate.html\">Integrating Amazon Pinpoint with your application</a> in the <i>Amazon Pinpoint Developer Guide</i>.</p></note>"
     },
     "CreateAppRequest": {
       "type": "structure",
@@ -7014,7 +7019,7 @@
       "members": {
         "DeliveryUri": {
           "shape": "__string",
-          "documentation": "<p>The destination to send the custom message to. This value can be one of the following:</p> <ul><li><p>The name or Amazon Resource Name (ARN) of an AWS Lambda function to invoke to handle delivery of the custom message.</p></li> <li><p>The URL for a web application or service that supports HTTPS and can receive the message. The URL has to be a full URL, including the HTTPS protocol.</p></li></ul>"
+          "documentation": "<p>The destination to send the campaign or treatment to. This value can be one of the following:</p> <ul><li><p>The name or Amazon Resource Name (ARN) of an AWS Lambda function to invoke to handle delivery of the campaign or treatment.</p></li> <li><p>The URL for a web application or service that supports HTTPS and can receive the message. The URL has to be a full URL, including the HTTPS protocol.</p></li></ul>"
         },
         "EndpointTypes": {
           "shape": "ListOf__EndpointTypesElement",
@@ -8503,6 +8508,24 @@
       },
       "documentation": "<p>Specifies the dimensions for an event filter that determines when a campaign is sent or a journey activity is performed.</p>"
     },
+    "EventFilter": {
+      "type": "structure",
+      "members": {
+        "Dimensions": {
+          "shape": "EventDimensions",
+          "documentation": "<p>The dimensions for the event filter to use for the campaign or the journey activity.</p>"
+        },
+        "FilterType": {
+          "shape": "FilterType",
+          "documentation": "<p>The type of event that causes the campaign to be sent or the journey activity to be performed. Valid values are: SYSTEM, sends the campaign or performs the activity when a system event occurs; and, ENDPOINT, sends the campaign or performs the activity when an endpoint event (<link  linkend=\"apps-application-id-events\">Events resource</link>) occurs.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the settings for an event that causes a campaign to be sent or a journey activity to be performed.</p>",
+      "required": [
+        "FilterType",
+        "Dimensions"
+      ]
+    },
     "EventItemResponse": {
       "type": "structure",
       "members": {
@@ -8516,6 +8539,18 @@
         }
       },
       "documentation": "<p>Provides the status code and message that result from processing an event.</p>"
+    },
+    "EventStartCondition": {
+      "type": "structure",
+      "members": {
+        "EventFilter": {
+          "shape": "EventFilter"
+        },
+        "SegmentId": {
+          "shape": "__string"
+        }
+      },
+      "documentation": "<p>Specifies the settings for an event that causes a journey activity to start.</p>"
     },
     "EventStream": {
       "type": "structure",
@@ -10818,7 +10853,7 @@
         },
         "Metrics": {
           "shape": "MapOf__string",
-          "documentation": "<p>A JSON object that contains the results of the query. For information about the structure and contents of the results, see the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html\">Amazon Pinpoint Developer Guide</a>.</p>"
+          "documentation": "<p>A JSON object that contains the results of the query. For information about the structure and contents of the results, see the <a href=\"https://docs.aws.amazon.com//pinpoint/latest/developerguide/analytics-standard-metrics.html\">Amazon Pinpoint Developer Guide</a>.</p>"
         }
       },
       "documentation": "<p>Provides the results of a query that retrieved the data for a standard execution metric that applies to a journey, and provides information about that query.</p>",
@@ -10938,7 +10973,7 @@
         },
         "SenderId": {
           "shape": "__string",
-          "documentation": "<p>The sender ID to display as the sender of the message on a recipient's device. Support for sender IDs varies by country or region. For more information, see <a href=\"https://docs.aws.amazon.com.amazon.com/pinpoint/latest/userguide/channels-sms-countries.html\">Supported Countries and Regions</a> in the Amazon Pinpoint User Guide.</p>"
+          "documentation": "<p>The sender ID to display as the sender of the message on a recipient's device. Support for sender IDs varies by country or region. For more information, see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-countries.html\">Supported Countries and Regions</a> in the Amazon Pinpoint User Guide.</p>"
         }
       },
       "documentation": "<p>Specifies the sender ID and message type for an SMS message that's sent to participants in a journey.</p>"
@@ -11266,7 +11301,7 @@
       "members": {
         "Addresses": {
           "shape": "MapOfAddressConfiguration",
-          "documentation": "<p>A map of key-value pairs, where each key is an address and each value is an AddressConfiguration object. An address can be a push notification token, a phone number, or an email address. You can use an AddressConfiguration object to tailor the message for an address by specifying settings such as content overrides and message variables.</p>"
+          "documentation": "<p>A map of key-value pairs, where each key is an address and each value is an <a href=\"https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-addressconfiguration\">AddressConfiguration</a> object. An address can be a push notification token, a phone number, or an email address. You can use an <a href=\"https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-addressconfiguration\">AddressConfiguration</a> object to tailor the message for an address by specifying settings such as content overrides and message variables.</p>"
         },
         "Context": {
           "shape": "MapOf__string",
@@ -11274,7 +11309,7 @@
         },
         "Endpoints": {
           "shape": "MapOfEndpointSendConfiguration",
-          "documentation": "<p>A map of key-value pairs, where each key is an endpoint ID and each value is an EndpointSendConfiguration object. You can use an EndpointSendConfiguration object to tailor the message for an endpoint by specifying settings such as content overrides and message variables.</p>"
+          "documentation": "<p>A map of key-value pairs, where each key is an endpoint ID and each value is an <a href=\"https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-endpointsendconfiguration\">EndpointSendConfiguration</a> object. You can use an <a href=\"https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-endpointsendconfiguration\">EndpointSendConfiguration</a> object to tailor the message for an endpoint by specifying settings such as content overrides and message variables.</p>"
         },
         "MessageConfiguration": {
           "shape": "DirectMessageConfiguration",
@@ -11411,7 +11446,7 @@
           "documentation": "<p>The amount of time to wait or the date and time when Amazon Pinpoint determines whether the conditions are met.</p>"
         }
       },
-      "documentation": "<p>Specifies the settings for a multivariate split activity in a journey. This type of activity sends participants down one of as many as five paths (including a default <i>Else</i> path) in a journey, based on conditions that you specify.</p>"
+      "documentation": "<p>Specifies the settings for a multivariate split activity in a journey. This type of activity sends participants down one of as many as five paths (including a default <i>Else</i> path) in a journey, based on conditions that you specify.</p> <note><p>To create multivariate split activities that send participants down different paths based on push notification events (such as Open or Received events), your mobile app has to specify the User ID and Endpoint ID values. For more information, see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/integrate.html\">Integrating Amazon Pinpoint with your application</a> in the <i>Amazon Pinpoint Developer Guide</i>.</p></note>"
     },
     "NumberValidateRequest": {
       "type": "structure",
@@ -12082,7 +12117,7 @@
         },
         "MediaUrl": {
           "shape": "__string",
-          "documentation": "<p>The URL of an image or video to display in the SMS message.</p>"
+          "documentation": "<p>This field is reserved for future use.</p>"
         },
         "MessageType": {
           "shape": "MessageType",
@@ -12571,7 +12606,7 @@
         },
         "Users": {
           "shape": "MapOfEndpointSendConfiguration",
-          "documentation": "<p>A map that associates user IDs with EndpointSendConfiguration objects. You can use an EndpointSendConfiguration object to tailor the message for a user by specifying settings such as content overrides and message variables.</p>"
+          "documentation": "<p>A map that associates user IDs with <a href=\"https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-endpointsendconfiguration\">EndpointSendConfiguration</a> objects. You can use an <a href=\"https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-messages.html#apps-application-id-messages-model-endpointsendconfiguration\">EndpointSendConfiguration</a> object to tailor the message for a user by specifying settings such as content overrides and message variables.</p>"
         }
       },
       "documentation": "<p>Specifies the configuration and other settings for a message to send to all the endpoints that are associated with a list of users.</p>",
@@ -12740,6 +12775,9 @@
         "Description": {
           "shape": "__string",
           "documentation": "<p>The custom description of the condition.</p>"
+        },
+        "EventStartCondition": {
+          "shape": "EventStartCondition"
         },
         "SegmentStartCondition": {
           "shape": "SegmentCondition",
@@ -14127,13 +14165,16 @@
           "shape": "__boolean",
           "documentation": "<p>Specifies whether to enable application-related alarms in Amazon CloudWatch.</p>"
         },
+        "EventTaggingEnabled": {
+          "shape": "__boolean"
+        },
         "Limits": {
           "shape": "CampaignLimits",
-          "documentation": "<p>The default sending limits for campaigns and journeys in the application. To override these limits and define custom limits for a specific campaign or journey, use the <link  linkend=\"apps-application-id-campaigns-campaign-id\">Campaign</link> resource or the <link  linkend=\"apps-application-id-journeys-journey-id\">Journey</link> resource, respectively.</p>"
+          "documentation": "<p>The default sending limits for campaigns in the application. To override these limits and define custom limits for a specific campaign or journey, use the <link  linkend=\"apps-application-id-campaigns-campaign-id\">Campaign</link> resource or the <link  linkend=\"apps-application-id-journeys-journey-id\">Journey</link> resource, respectively.</p>"
         },
         "QuietTime": {
           "shape": "QuietTime",
-          "documentation": "<p>The default quiet time for campaigns and journeys in the application. Quiet time is a specific time range when messages aren't sent to endpoints, if all the following conditions are met:</p> <ul><li><p>The EndpointDemographic.Timezone property of the endpoint is set to a valid value.</p></li> <li><p>The current time in the endpoint's time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign or journey that has custom quiet time settings).</p></li> <li><p>The current time in the endpoint's time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign or journey that has custom quiet time settings).</p></li></ul> <p>If any of the preceding conditions isn't met, the endpoint will receive messages from a campaign or journey, even if quiet time is enabled.</p> <p>To override the default quiet time settings for a specific campaign or journey, use the <link  linkend=\"apps-application-id-campaigns-campaign-id\">Campaign</link> resource or the <link  linkend=\"apps-application-id-journeys-journey-id\">Journey</link> resource to define a custom quiet time for the campaign or journey.</p>"
+          "documentation": "<p>The default quiet time for campaigns in the application. Quiet time is a specific time range when messages aren't sent to endpoints, if all the following conditions are met:</p> <ul><li><p>The EndpointDemographic.Timezone property of the endpoint is set to a valid value.</p></li> <li><p>The current time in the endpoint's time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign or journey that has custom quiet time settings).</p></li> <li><p>The current time in the endpoint's time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign or journey that has custom quiet time settings).</p></li></ul> <p>If any of the preceding conditions isn't met, the endpoint will receive messages from a campaign or journey, even if quiet time is enabled.</p> <p>To override the default quiet time settings for a specific campaign or journey, use the <link  linkend=\"apps-application-id-campaigns-campaign-id\">Campaign</link> resource or the <link  linkend=\"apps-application-id-journeys-journey-id\">Journey</link> resource to define a custom quiet time for the campaign or journey.</p>"
         }
       },
       "documentation": "<p>Specifies the default settings for an application.</p>"

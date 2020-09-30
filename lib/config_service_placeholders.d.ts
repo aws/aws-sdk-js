@@ -233,6 +233,7 @@ export abstract class ConfigurationServicePlaceholders {
   ssoadmin?: AWS.SSOAdmin.Types.ClientConfiguration;
   timestreamquery?: AWS.TimestreamQuery.Types.ClientConfiguration;
   timestreamwrite?: AWS.TimestreamWrite.Types.ClientConfiguration;
+  s3outposts?: AWS.S3Outposts.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -468,4 +469,5 @@ export interface ConfigurationServiceApiVersions {
   ssoadmin?: AWS.SSOAdmin.Types.apiVersion;
   timestreamquery?: AWS.TimestreamQuery.Types.apiVersion;
   timestreamwrite?: AWS.TimestreamWrite.Types.apiVersion;
+  s3outposts?: AWS.S3Outposts.Types.apiVersion;
 }

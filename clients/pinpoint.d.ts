@@ -1700,11 +1700,11 @@ declare namespace Pinpoint {
      */
     LastModifiedDate?: __string;
     /**
-     * The default sending limits for campaigns and journeys in the application.
+     * The default sending limits for campaigns in the application.
      */
     Limits?: CampaignLimits;
     /**
-     * The default quiet time for campaigns and journeys in the application. Quiet time is a specific time range when messages aren't sent to endpoints, if all the following conditions are met: The EndpointDemographic.Timezone property of the endpoint is set to a valid value. The current time in the endpoint's time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign or journey that has custom quiet time settings). The current time in the endpoint's time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign or journey that has custom quiet time settings). If any of the preceding conditions isn't met, the endpoint will receive messages from a campaign or journey, even if quiet time is enabled.
+     * The default quiet time for campaigns in the application. Quiet time is a specific time range when messages aren't sent to endpoints, if all the following conditions are met: The EndpointDemographic.Timezone property of the endpoint is set to a valid value. The current time in the endpoint's time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign or journey that has custom quiet time settings). The current time in the endpoint's time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign or journey that has custom quiet time settings). If any of the preceding conditions isn't met, the endpoint will receive messages from a campaign or journey, even if quiet time is enabled.
      */
     QuietTime?: QuietTime;
   }
@@ -1955,7 +1955,7 @@ declare namespace Pinpoint {
      */
     MaximumDuration?: __integer;
     /**
-     * The maximum number of messages that a campaign can send each second. For an application, this value specifies the default limit for the number of messages that campaigns and journeys can send each second. The minimum value is 50. The maximum value is 20,000.
+     * The maximum number of messages that a campaign can send each second. For an application, this value specifies the default limit for the number of messages that campaigns can send each second. The minimum value is 50. The maximum value is 20,000.
      */
     MessagesPerSecond?: __integer;
     /**
@@ -2081,7 +2081,7 @@ declare namespace Pinpoint {
      */
     CampaignStatus?: CampaignStatus;
   }
-  export type CampaignStatus = "SCHEDULED"|"EXECUTING"|"PENDING_NEXT_RUN"|"COMPLETED"|"PAUSED"|"DELETED"|string;
+  export type CampaignStatus = "SCHEDULED"|"EXECUTING"|"PENDING_NEXT_RUN"|"COMPLETED"|"PAUSED"|"DELETED"|"INVALID"|string;
   export interface CampaignsResponse {
     /**
      * An array of responses, one for each campaign that's associated with the application.
@@ -2341,7 +2341,7 @@ declare namespace Pinpoint {
   }
   export interface CustomMessageActivity {
     /**
-     * The destination to send the custom message to. This value can be one of the following: The name or Amazon Resource Name (ARN) of an AWS Lambda function to invoke to handle delivery of the custom message. The URL for a web application or service that supports HTTPS and can receive the message. The URL has to be a full URL, including the HTTPS protocol.
+     * The destination to send the campaign or treatment to. This value can be one of the following: The name or Amazon Resource Name (ARN) of an AWS Lambda function to invoke to handle delivery of the campaign or treatment. The URL for a web application or service that supports HTTPS and can receive the message. The URL has to be a full URL, including the HTTPS protocol.
      */
     DeliveryUri?: __string;
     /**
@@ -3282,6 +3282,16 @@ declare namespace Pinpoint {
      */
     Metrics?: MapOfMetricDimension;
   }
+  export interface EventFilter {
+    /**
+     * The dimensions for the event filter to use for the campaign or the journey activity.
+     */
+    Dimensions: EventDimensions;
+    /**
+     * The type of event that causes the campaign to be sent or the journey activity to be performed. Valid values are: SYSTEM, sends the campaign or performs the activity when a system event occurs; and, ENDPOINT, sends the campaign or performs the activity when an endpoint event (Events resource) occurs.
+     */
+    FilterType: FilterType;
+  }
   export interface EventItemResponse {
     /**
      * A custom message that's returned in the response as a result of processing the event.
@@ -3291,6 +3301,10 @@ declare namespace Pinpoint {
      * The status code that's returned in the response as a result of processing the event. Possible values are: 202, for events that were accepted; and, 400, for events that weren't valid.
      */
     StatusCode?: __integer;
+  }
+  export interface EventStartCondition {
+    EventFilter?: EventFilter;
+    SegmentId?: __string;
   }
   export interface EventStream {
     /**
@@ -5358,7 +5372,7 @@ declare namespace Pinpoint {
      */
     Keyword?: __string;
     /**
-     * The URL of an image or video to display in the SMS message.
+     * This field is reserved for future use.
      */
     MediaUrl?: __string;
     /**
@@ -5824,6 +5838,7 @@ declare namespace Pinpoint {
      * The custom description of the condition.
      */
     Description?: __string;
+    EventStartCondition?: EventStartCondition;
     /**
      * The segment that's associated with the first activity in the journey. This segment determines which users are participants in the journey.
      */
@@ -6528,12 +6543,13 @@ declare namespace Pinpoint {
      * Specifies whether to enable application-related alarms in Amazon CloudWatch.
      */
     CloudWatchMetricsEnabled?: __boolean;
+    EventTaggingEnabled?: __boolean;
     /**
-     * The default sending limits for campaigns and journeys in the application. To override these limits and define custom limits for a specific campaign or journey, use the Campaign resource or the Journey resource, respectively.
+     * The default sending limits for campaigns in the application. To override these limits and define custom limits for a specific campaign or journey, use the Campaign resource or the Journey resource, respectively.
      */
     Limits?: CampaignLimits;
     /**
-     * The default quiet time for campaigns and journeys in the application. Quiet time is a specific time range when messages aren't sent to endpoints, if all the following conditions are met: The EndpointDemographic.Timezone property of the endpoint is set to a valid value. The current time in the endpoint's time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign or journey that has custom quiet time settings). The current time in the endpoint's time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign or journey that has custom quiet time settings). If any of the preceding conditions isn't met, the endpoint will receive messages from a campaign or journey, even if quiet time is enabled. To override the default quiet time settings for a specific campaign or journey, use the Campaign resource or the Journey resource to define a custom quiet time for the campaign or journey.
+     * The default quiet time for campaigns in the application. Quiet time is a specific time range when messages aren't sent to endpoints, if all the following conditions are met: The EndpointDemographic.Timezone property of the endpoint is set to a valid value. The current time in the endpoint's time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign or journey that has custom quiet time settings). The current time in the endpoint's time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign or journey that has custom quiet time settings). If any of the preceding conditions isn't met, the endpoint will receive messages from a campaign or journey, even if quiet time is enabled. To override the default quiet time settings for a specific campaign or journey, use the Campaign resource or the Journey resource to define a custom quiet time for the campaign or journey.
      */
     QuietTime?: QuietTime;
   }

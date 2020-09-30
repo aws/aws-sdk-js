@@ -1608,11 +1608,17 @@
     }
   },
   "shapes": {
+    "AccountId": {
+      "type": "string",
+      "pattern": "^\\d{12}$"
+    },
     "AccountList": {
       "type": "list",
       "member": {
-        "shape": "NonEmptyString"
-      }
+        "shape": "AccountId"
+      },
+      "max": 50,
+      "min": 1
     },
     "Ami": {
       "type": "structure",
@@ -1635,6 +1641,10 @@
         },
         "state": {
           "shape": "ImageState"
+        },
+        "accountId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p> The account ID of the owner of the AMI. </p>"
         }
       },
       "documentation": "<p> Details of an EC2 AMI. </p>"
@@ -1649,6 +1659,10 @@
         "description": {
           "shape": "NonEmptyString",
           "documentation": "<p>The description of the distribution configuration. </p>"
+        },
+        "targetAccountIds": {
+          "shape": "AccountList",
+          "documentation": "<p> The ID of an account to which you want to distribute an image. </p>"
         },
         "amiTags": {
           "shape": "TagMap",
@@ -1679,12 +1693,6 @@
     },
     "Arn": {
       "type": "string"
-    },
-    "ArnList": {
-      "type": "list",
-      "member": {
-        "shape": "Arn"
-      }
     },
     "CancelImageCreationRequest": {
       "type": "structure",
@@ -2162,7 +2170,7 @@
         },
         "parentImage": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The parent image of the image recipe. The value of the string can be the ARN of the parent image or an AMI ID. The format for the ARN follows this example: <code>arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/2019.x.x</code>. The ARN ends with <code>/20xx.x.x</code>, which communicates to EC2 Image Builder that you want to use the latest AMI created in 20xx (year). You can provide the specific version that you want to use, or you can use a wildcard in all of the fields. If you enter an AMI ID for the string value, you must have access to the AMI, and the AMI must be in the same Region in which you are using Image Builder. </p>"
+          "documentation": "<p>The parent image of the image recipe. The value of the string can be the ARN of the parent image or an AMI ID. The format for the ARN follows this example: <code>arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/xxxx.x.x</code>. You can provide the specific version that you want to use, or you can use a wildcard in all of the fields. If you enter an AMI ID for the string value, you must have access to the AMI, and the AMI must be in the same Region in which you are using Image Builder. </p>"
         },
         "blockDeviceMappings": {
           "shape": "InstanceBlockDeviceMappings",
@@ -2516,7 +2524,7 @@
           "documentation": "<p>The specific AMI settings (for example, launch permissions, AMI tags). </p>"
         },
         "licenseConfigurationArns": {
-          "shape": "ArnList",
+          "shape": "LicenseConfigurationArnList",
           "documentation": "<p>The License Manager Configuration to associate with the AMI in the specified Region.</p>"
         }
       },
@@ -2663,6 +2671,7 @@
       "enum": [
         "standard",
         "io1",
+        "io2",
         "gp2",
         "sc1",
         "st1"
@@ -3606,6 +3615,18 @@
       },
       "documentation": "<p>Describes the configuration for a launch permission. The launch permission modification request is sent to the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html\">EC2 ModifyImageAttribute</a> API on behalf of the user for each Region they have selected to distribute the AMI. To make an AMI public, set the launch permission authorized accounts to <code>all</code>. See the examples for making an AMI public at <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html\">EC2 ModifyImageAttribute</a>. </p>"
     },
+    "LicenseConfigurationArn": {
+      "type": "string",
+      "pattern": "^arn:aws[^:]*:license-manager:[^:]+:\\d{12}:license-configuration:lic-[a-z0-9-_]{32}$"
+    },
+    "LicenseConfigurationArnList": {
+      "type": "list",
+      "member": {
+        "shape": "LicenseConfigurationArn"
+      },
+      "max": 50,
+      "min": 1
+    },
     "ListComponentBuildVersionsRequest": {
       "type": "structure",
       "required": [
@@ -4176,11 +4197,11 @@
       "members": {
         "scheduleExpression": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The expression determines how often EC2 Image Builder evaluates your <code>pipelineExecutionStartCondition</code>.</p>"
+          "documentation": "<p>The cron expression determines how often EC2 Image Builder evaluates your <code>pipelineExecutionStartCondition</code>.</p> <p>For information on how to format a cron expression in Image Builder, see <a href=\"https://docs.aws.amazon.com/imagebuilder/latest/userguide/image-builder-cron.html\">Use cron expressions in EC2 Image Builder</a>.</p>"
         },
         "pipelineExecutionStartCondition": {
           "shape": "PipelineExecutionStartCondition",
-          "documentation": "<p>The condition configures when the pipeline should trigger a new image build. When the <code>pipelineExecutionStartCondition</code> is set to <code>EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE</code>, EC2 Image Builder will build a new image only when there are known changes pending. When it is set to <code>EXPRESSION_MATCH_ONLY</code>, it will build a new image every time the CRON expression matches the current time.</p>"
+          "documentation": "<p>The condition configures when the pipeline should trigger a new image build. When the <code>pipelineExecutionStartCondition</code> is set to <code>EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE</code>, and you use semantic version filters on the source image or components in your image recipe, EC2 Image Builder will build a new image only when there are new versions of the image or components in your recipe that match the semantic version filter. When it is set to <code>EXPRESSION_MATCH_ONLY</code>, it will build a new image every time the CRON expression matches the current time. For semantic version syntax, see <a href=\"https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_CreateComponent.html\">CreateComponent</a> in the <i> EC2 Image Builder API Reference</i>.</p>"
         }
       },
       "documentation": "<p>A schedule configures how often and when a pipeline will automatically create a new image. </p>"

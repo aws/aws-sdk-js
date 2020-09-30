@@ -709,6 +709,7 @@ declare namespace EMR {
      * Specifies the number of steps that can be executed concurrently.
      */
     StepConcurrencyLevel?: Integer;
+    PlacementGroups?: PlacementGroupConfigList;
   }
   export type ClusterId = string;
   export type ClusterState = "STARTING"|"BOOTSTRAPPING"|"RUNNING"|"WAITING"|"TERMINATING"|"TERMINATED"|"TERMINATED_WITH_ERRORS"|string;
@@ -2267,6 +2268,12 @@ declare namespace EMR {
     AllocationStrategy: OnDemandProvisioningAllocationStrategy;
   }
   export type OptionalArnType = string;
+  export interface PlacementGroupConfig {
+    InstanceRole: InstanceRoleType;
+    PlacementStrategy?: PlacementGroupStrategy;
+  }
+  export type PlacementGroupConfigList = PlacementGroupConfig[];
+  export type PlacementGroupStrategy = "SPREAD"|"PARTITION"|"CLUSTER"|"NONE"|string;
   export interface PlacementType {
     /**
      * The Amazon EC2 Availability Zone for the cluster. AvailabilityZone is used for uniform instance groups, while AvailabilityZones (plural) is used for instance fleets.
@@ -2480,6 +2487,7 @@ declare namespace EMR {
      *  The specified managed scaling policy for an Amazon EMR cluster. 
      */
     ManagedScalingPolicy?: ManagedScalingPolicy;
+    PlacementGroupConfigs?: PlacementGroupConfigList;
   }
   export interface RunJobFlowOutput {
     /**

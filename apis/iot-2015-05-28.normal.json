@@ -3818,7 +3818,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Lists the findings (results) of a Device Defender audit or of the audits performed during a specified time period. (Findings are retained for 180 days.)</p>"
+      "documentation": "<p>Lists the findings (results) of a Device Defender audit or of the audits performed during a specified time period. (Findings are retained for 90 days.)</p>"
     },
     "ListAuditMitigationActionsExecutions": {
       "name": "ListAuditMitigationActionsExecutions",
@@ -5590,6 +5590,9 @@
         },
         {
           "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "LimitExceededException"
         }
       ],
       "documentation": "<p>Sets the logging level.</p>"
@@ -6773,6 +6776,10 @@
           "shape": "StepFunctionsAction",
           "documentation": "<p>Starts execution of a Step Functions state machine.</p>"
         },
+        "timestream": {
+          "shape": "TimestreamAction",
+          "documentation": "<p>The Timestream rule action writes attributes (measures) from an MQTT message into an Amazon Timestream table. For more information, see the <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/timestream-rule-action.html\">Timestream</a> topic rule action documentation.</p>"
+        },
         "http": {
           "shape": "HttpAction",
           "documentation": "<p>Send data to an HTTPS endpoint.</p>"
@@ -7000,7 +7007,6 @@
     },
     "AssetPropertyAlias": {
       "type": "string",
-      "max": 2048,
       "min": 1
     },
     "AssetPropertyBooleanValue": {
@@ -13805,7 +13811,7 @@
       "members": {
         "startTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The beginning of the time period. Audit information is retained for a limited time (180 days). Requesting a start time prior to what is retained results in an \"InvalidRequestException\".</p>",
+          "documentation": "<p>The beginning of the time period. Audit information is retained for a limited time (90 days). Requesting a start time prior to what is retained results in an \"InvalidRequestException\".</p>",
           "location": "querystring",
           "locationName": "startTime"
         },
@@ -18647,6 +18653,100 @@
     },
     "Timestamp": {
       "type": "timestamp"
+    },
+    "TimestreamAction": {
+      "type": "structure",
+      "required": [
+        "roleArn",
+        "databaseName",
+        "tableName",
+        "dimensions"
+      ],
+      "members": {
+        "roleArn": {
+          "shape": "AwsArn",
+          "documentation": "<p>The ARN of the role that grants permission to write to the Amazon Timestream database table.</p>"
+        },
+        "databaseName": {
+          "shape": "TimestreamDatabaseName",
+          "documentation": "<p>The name of an Amazon Timestream database.</p>"
+        },
+        "tableName": {
+          "shape": "TimestreamTableName",
+          "documentation": "<p>The name of the database table into which to write the measure records.</p>"
+        },
+        "dimensions": {
+          "shape": "TimestreamDimensionList",
+          "documentation": "<p>Metadata attributes of the time series that are written in each measure record.</p>"
+        },
+        "timestamp": {
+          "shape": "TimestreamTimestamp",
+          "documentation": "<p>Specifies an application-defined value to replace the default value assigned to the Timestream record's timestamp in the <code>time</code> column.</p> <p>You can use this property to specify the value and the precision of the Timestream record's timestamp. You can specify a value from the message payload or a value computed by a substitution template.</p> <p>If omitted, the topic rule action assigns the timestamp, in milliseconds, at the time it processed the rule. </p>"
+        }
+      },
+      "documentation": "<p>The Timestream rule action writes attributes (measures) from an MQTT message into an Amazon Timestream table. For more information, see the <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/timestream-rule-action.html\">Timestream</a> topic rule action documentation.</p>"
+    },
+    "TimestreamDatabaseName": {
+      "type": "string"
+    },
+    "TimestreamDimension": {
+      "type": "structure",
+      "required": [
+        "name",
+        "value"
+      ],
+      "members": {
+        "name": {
+          "shape": "TimestreamDimensionName",
+          "documentation": "<p>The metadata dimension name. This is the name of the column in the Amazon Timestream database table record.</p> <p>Dimensions cannot be named: <code>measure_name</code>, <code>measure_value</code>, or <code>time</code>. These names are reserved. Dimension names cannot start with <code>ts_</code> or <code>measure_value</code> and they cannot contain the colon (<code>:</code>) character.</p>"
+        },
+        "value": {
+          "shape": "TimestreamDimensionValue",
+          "documentation": "<p>The value to write in this column of the database record.</p>"
+        }
+      },
+      "documentation": "<p>Metadata attributes of the time series that are written in each measure record.</p>"
+    },
+    "TimestreamDimensionList": {
+      "type": "list",
+      "member": {
+        "shape": "TimestreamDimension"
+      },
+      "max": 128,
+      "min": 1
+    },
+    "TimestreamDimensionName": {
+      "type": "string"
+    },
+    "TimestreamDimensionValue": {
+      "type": "string"
+    },
+    "TimestreamTableName": {
+      "type": "string"
+    },
+    "TimestreamTimestamp": {
+      "type": "structure",
+      "required": [
+        "value",
+        "unit"
+      ],
+      "members": {
+        "value": {
+          "shape": "TimestreamTimestampValue",
+          "documentation": "<p>An expression that returns a long epoch time value.</p>"
+        },
+        "unit": {
+          "shape": "TimestreamTimestampUnit",
+          "documentation": "<p>The precision of the timestamp value that results from the expression described in <code>value</code>.</p> <p>Valid values: <code>SECONDS</code> | <code>MILLISECONDS</code> | <code>MICROSECONDS</code> | <code>NANOSECONDS</code>. The default is <code>MILLISECONDS</code>.</p>"
+        }
+      },
+      "documentation": "<p>Describes how to interpret an application-defined timestamp value from an MQTT message payload and the precision of that value.</p>"
+    },
+    "TimestreamTimestampUnit": {
+      "type": "string"
+    },
+    "TimestreamTimestampValue": {
+      "type": "string"
     },
     "TlsContext": {
       "type": "structure",

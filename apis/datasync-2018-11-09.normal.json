@@ -56,7 +56,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region.</p> <p>You can activate the agent in a VPC (virtual private cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public Internet.</p> <p>You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run. </p> <p>Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks.</p> <p/>"
+      "documentation": "<p>Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region.</p> <p>You can activate the agent in a VPC (virtual private cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public internet.</p> <p>You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run. </p> <p>Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks.</p> <p/>"
     },
     "CreateLocationEfs": {
       "name": "CreateLocationEfs",
@@ -144,7 +144,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Creates an endpoint for a self-managed object storage bucket.</p>"
+      "documentation": "<p>Creates an endpoint for a self-managed object storage bucket. For more information about self-managed object storage locations, see <a>create-object-location</a>.</p>"
     },
     "CreateLocationS3": {
       "name": "CreateLocationS3",
@@ -166,7 +166,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Creates an endpoint for an Amazon S3 bucket.</p> <p>For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section.</p> <p>For more information, see https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location in the <i>AWS DataSync User Guide.</i> </p>"
+      "documentation": "<p>Creates an endpoint for an Amazon S3 bucket.</p> <p>For more information, see https://docs.aws.amazon.com/datasync/latest/userguide/create-locations-cli.html#create-location-s3-cli in the <i>AWS DataSync User Guide</i>.</p>"
     },
     "CreateLocationSmb": {
       "name": "CreateLocationSmb",
@@ -210,7 +210,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Creates a task. A task is a set of two locations (source and destination) and a set of Options that you use to control the behavior of a task. If you don't specify Options when you create a task, AWS DataSync populates them with service defaults.</p> <p>When you create a task, it first enters the CREATING state. During CREATING AWS DataSync attempts to mount the on-premises Network File System (NFS) location. The task transitions to the AVAILABLE state without waiting for the AWS location to become mounted. If required, AWS DataSync mounts the AWS location before each task execution.</p> <p>If an agent that is associated with a source (NFS) location goes offline, the task transitions to the UNAVAILABLE status. If the status of the task remains in the CREATING status for more than a few minutes, it means that your agent might be having trouble mounting the source NFS file system. Check the task's ErrorCode and ErrorDetail. Mount issues are often caused by either a misconfigured firewall or a mistyped NFS server host name.</p>"
+      "documentation": "<p>Creates a task. A task is a set of two locations (source and destination) and a set of Options that you use to control the behavior of a task. If you don't specify Options when you create a task, AWS DataSync populates them with service defaults.</p> <p>When you create a task, it first enters the CREATING state. During CREATING AWS DataSync attempts to mount the on-premises Network File System (NFS) location. The task transitions to the AVAILABLE state without waiting for the AWS location to become mounted. If required, AWS DataSync mounts the AWS location before each task execution.</p> <p>If an agent that is associated with a source (NFS) location goes offline, the task transitions to the UNAVAILABLE status. If the status of the task remains in the CREATING status for more than a few minutes, it means that your agent might be having trouble mounting the source NFS file system. Check the task's ErrorCode and ErrorDetail. Mount issues are often caused by either a misconfigured firewall or a mistyped NFS server hostname.</p>"
     },
     "DeleteAgent": {
       "name": "DeleteAgent",
@@ -386,7 +386,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Returns metadata about a self-managed object storage server location.</p>"
+      "documentation": "<p>Returns metadata about a self-managed object storage server location. For more information about self-managed object storage locations, see <a>create-object-location</a>.</p>"
     },
     "DescribeLocationS3": {
       "name": "DescribeLocationS3",
@@ -973,11 +973,11 @@
         },
         "AccessKey": {
           "shape": "ObjectStorageAccessKey",
-          "documentation": "<p>Optional. The access key is used if credentials are required to access the self-managed object storage server.</p>"
+          "documentation": "<p>Optional. The access key is used if credentials are required to access the self-managed object storage server. If your object storage requires a user name and password to authenticate, use <code>AccessKey</code> and <code>SecretKey</code> to provide the user name and password, respectively.</p>"
         },
         "SecretKey": {
           "shape": "ObjectStorageSecretKey",
-          "documentation": "<p>Optional. The secret key is used if credentials are required to access the self-managed object storage server.</p>"
+          "documentation": "<p>Optional. The secret key is used if credentials are required to access the self-managed object storage server. If your object storage requires a user name and password to authenticate, use <code>AccessKey</code> and <code>SecretKey</code> to provide the user name and password, respectively.</p>"
         },
         "AgentArns": {
           "shape": "AgentArnList",
@@ -1013,14 +1013,18 @@
         },
         "S3BucketArn": {
           "shape": "S3BucketArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon S3 bucket.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon S3 bucket. If the bucket is on an AWS Outpost, this must be an access point ARN.</p>"
         },
         "S3StorageClass": {
           "shape": "S3StorageClass",
-          "documentation": "<p>The Amazon S3 storage class that you want to store your files in when this location is used as a task destination. For more information about S3 storage classes, see <a href=\"https://aws.amazon.com/s3/storage-classes/\">Amazon S3 Storage Classes</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. Some storage classes have behaviors that can affect your S3 storage cost. For detailed information, see <a>using-storage-classes</a>.</p>"
+          "documentation": "<p>The Amazon S3 storage class that you want to store your files in when this location is used as a task destination. For buckets in AWS Regions, the storage class defaults to Standard. For buckets on AWS Outposts, the storage class defaults to AWS S3 Outposts.</p> <p>For more information about S3 storage classes, see <a href=\"https://aws.amazon.com/s3/storage-classes/\">Amazon S3 Storage Classes</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. Some storage classes have behaviors that can affect your S3 storage cost. For detailed information, see <a>using-storage-classes</a>.</p>"
         },
         "S3Config": {
           "shape": "S3Config"
+        },
+        "AgentArns": {
+          "shape": "AgentArnList",
+          "documentation": "<p>If you are using DataSync on an AWS Outpost, specify the Amazon Resource Names (ARNs) of the DataSync agents deployed on your AWS Outpost. For more information about launching a DataSync agent on an Amazon Outpost, see <a>outposts-agent</a>.</p>"
         },
         "Tags": {
           "shape": "InputTagList",
@@ -1383,7 +1387,7 @@
         },
         "AccessKey": {
           "shape": "ObjectStorageAccessKey",
-          "documentation": "<p>Optional. The access key is used if credentials are required to access the self-managed object storage server.</p>"
+          "documentation": "<p>Optional. The access key is used if credentials are required to access the self-managed object storage server. If your object storage requires a user name and password to authenticate, use <code>AccessKey</code> and <code>SecretKey</code> to provide the user name and password, respectively.</p>"
         },
         "ServerPort": {
           "shape": "ObjectStorageServerPort",
@@ -1422,7 +1426,7 @@
       "members": {
         "LocationArn": {
           "shape": "LocationArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon S3 bucket location.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon S3 bucket or access point.</p>"
         },
         "LocationUri": {
           "shape": "LocationUri",
@@ -1434,6 +1438,10 @@
         },
         "S3Config": {
           "shape": "S3Config"
+        },
+        "AgentArns": {
+          "shape": "AgentArnList",
+          "documentation": "<p>If you are using DataSync on an Amazon Outpost, the Amazon Resource Name (ARNs) of the EC2 agents deployed on your AWS Outpost. For more information about launching a DataSync agent on an Amazon Outpost, see <a>outposts-agent</a>.</p>"
         },
         "CreationTime": {
           "shape": "Time",
@@ -1823,7 +1831,8 @@
           "documentation": "<p>An opaque string that indicates the position at which to begin the next list of locations.</p>"
         },
         "Filters": {
-          "shape": "LocationFilters"
+          "shape": "LocationFilters",
+          "documentation": "<p>You can use API filters to narrow down the list of resources returned by <code>ListLocations</code>. For example, to retrieve all tasks on a specific source location, you can use <code>ListLocations</code> with filter name <code>LocationType S3</code> and <code>Operator Equals</code>.</p>"
         }
       },
       "documentation": "<p>ListLocationsRequest</p>"
@@ -1921,7 +1930,8 @@
           "documentation": "<p>An opaque string that indicates the position at which to begin the next list of tasks.</p>"
         },
         "Filters": {
-          "shape": "TaskFilters"
+          "shape": "TaskFilters",
+          "documentation": "<p>You can use API filters to narrow down the list of resources returned by <code>ListTasks</code>. For example, to retrieve all tasks on a specific source location, you can use <code>ListTasks</code> with filter name <code>LocationId</code> and <code>Operator Equals</code> with the ARN for the location.</p>"
         }
       },
       "documentation": "<p>ListTasksRequest</p>"
@@ -1954,15 +1964,19 @@
       ],
       "members": {
         "Name": {
-          "shape": "LocationFilterName"
+          "shape": "LocationFilterName",
+          "documentation": "<p>The name of the filter being used. Each API call supports a list of filters that are available for it (for example, <code>LocationType</code> for <code>ListLocations</code>).</p>"
         },
         "Values": {
-          "shape": "FilterValues"
+          "shape": "FilterValues",
+          "documentation": "<p>The values that you want to filter for. For example, you might want to display only Amazon S3 locations.</p>"
         },
         "Operator": {
-          "shape": "Operator"
+          "shape": "Operator",
+          "documentation": "<p>The operator that is used to compare filter values (for example, <code>Equals</code> or <code>Contains</code>). For more about API filtering operators, see <a>query-resources</a>.</p>"
         }
-      }
+      },
+      "documentation": "<p>You can use API filters to narrow down the list of resources returned by <code>ListLocations</code>. For example, to retrieve all your Amazon S3 locations, you can use <code>ListLocations</code> with filter name <code>LocationType S3</code> and <code>Operator Equals</code>.</p>"
     },
     "LocationFilterName": {
       "type": "string",
@@ -2102,7 +2116,7 @@
       "members": {
         "AgentArns": {
           "shape": "AgentArnList",
-          "documentation": "<p>ARNs)of the agents to use for an NFS location.</p>"
+          "documentation": "<p>ARNs of the agents to use for an NFS location.</p>"
         }
       },
       "documentation": "<p>A list of Amazon Resource Names (ARNs) of agents to use for a Network File System (NFS) location.</p>"
@@ -2175,7 +2189,7 @@
         },
         "TransferMode": {
           "shape": "TransferMode",
-          "documentation": "<p>TransferMode has two values: CHANGED and ALL. CHANGED performs an \"incremental\" or \"delta sync\", it compares file modification time between source and destination to determine which files need to be transferred. ALL skips destination inventory and transfers all files discovered on the source.</p>"
+          "documentation": "<p>A value that determines whether DataSync transfers only the data and metadata that differ between the source and the destination location, or whether DataSync transfers all the content from the source, without comparing to the destination location. </p> <p>CHANGED: DataSync copies only data or metadata that is new or different content from the source location to the destination location.</p> <p>ALL: DataSync copies all source location content to the destination, without comparing to existing content on the destination.</p>"
         }
       },
       "documentation": "<p>Represents the options that are available to control the behavior of a <a>StartTaskExecution</a> operation. Behavior includes preserving metadata such as user ID (UID), group ID (GID), and file permissions, and also overwriting files in the destination, data integrity verification, and so on.</p> <p>A task has a set of default options associated with it. If you don't specify an option in <a>StartTaskExecution</a>, the default value is used. You can override the defaults options on each task execution by specifying an overriding <code>Options</code> value to <a>StartTaskExecution</a>.</p>"
@@ -2264,8 +2278,8 @@
     },
     "S3BucketArn": {
       "type": "string",
-      "max": 76,
-      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):s3:::([^/]*)$"
+      "max": 156,
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):(s3|s3-outposts):[a-z\\-0-9]*:[0-9]*:.*$"
     },
     "S3Config": {
       "type": "structure",
@@ -2288,7 +2302,8 @@
         "ONEZONE_IA",
         "INTELLIGENT_TIERING",
         "GLACIER",
-        "DEEP_ARCHIVE"
+        "DEEP_ARCHIVE",
+        "OUTPOSTS"
       ]
     },
     "S3Subdirectory": {
@@ -2538,15 +2553,19 @@
       ],
       "members": {
         "Name": {
-          "shape": "TaskFilterName"
+          "shape": "TaskFilterName",
+          "documentation": "<p>The name of the filter being used. Each API call supports a list of filters that are available for it. For example, <code>LocationId</code> for <code>ListTasks</code>.</p>"
         },
         "Values": {
-          "shape": "FilterValues"
+          "shape": "FilterValues",
+          "documentation": "<p>The values that you want to filter for. For example, you might want to display only tasks for a specific destination location.</p>"
         },
         "Operator": {
-          "shape": "Operator"
+          "shape": "Operator",
+          "documentation": "<p>The operator that is used to compare filter values (for example, <code>Equals</code> or <code>Contains</code>). For more about API filtering operators, see <a>query-resources</a>.</p>"
         }
-      }
+      },
+      "documentation": "<p>You can use API filters to narrow down the list of resources returned by <code>ListTasks</code>. For example, to retrieve all tasks on a source location, you can use <code>ListTasks</code> with filter name <code>LocationId</code> and <code>Operator Equals</code> with the ARN for the location.</p>"
     },
     "TaskFilterName": {
       "type": "string",

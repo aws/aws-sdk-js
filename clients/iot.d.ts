@@ -964,11 +964,11 @@ declare class Iot extends Service {
    */
   listAttachedPolicies(callback?: (err: AWSError, data: Iot.Types.ListAttachedPoliciesResponse) => void): Request<Iot.Types.ListAttachedPoliciesResponse, AWSError>;
   /**
-   * Lists the findings (results) of a Device Defender audit or of the audits performed during a specified time period. (Findings are retained for 180 days.)
+   * Lists the findings (results) of a Device Defender audit or of the audits performed during a specified time period. (Findings are retained for 90 days.)
    */
   listAuditFindings(params: Iot.Types.ListAuditFindingsRequest, callback?: (err: AWSError, data: Iot.Types.ListAuditFindingsResponse) => void): Request<Iot.Types.ListAuditFindingsResponse, AWSError>;
   /**
-   * Lists the findings (results) of a Device Defender audit or of the audits performed during a specified time period. (Findings are retained for 180 days.)
+   * Lists the findings (results) of a Device Defender audit or of the audits performed during a specified time period. (Findings are retained for 90 days.)
    */
   listAuditFindings(callback?: (err: AWSError, data: Iot.Types.ListAuditFindingsResponse) => void): Request<Iot.Types.ListAuditFindingsResponse, AWSError>;
   /**
@@ -1820,6 +1820,10 @@ declare namespace Iot {
      * Starts execution of a Step Functions state machine.
      */
     stepFunctions?: StepFunctionsAction;
+    /**
+     * The Timestream rule action writes attributes (measures) from an MQTT message into an Amazon Timestream table. For more information, see the Timestream topic rule action documentation.
+     */
+    timestream?: TimestreamAction;
     /**
      * Send data to an HTTPS endpoint.
      */
@@ -6026,7 +6030,7 @@ declare namespace Iot {
   }
   export interface ListAuditTasksRequest {
     /**
-     * The beginning of the time period. Audit information is retained for a limited time (180 days). Requesting a start time prior to what is retained results in an "InvalidRequestException".
+     * The beginning of the time period. Audit information is retained for a limited time (90 days). Requesting a start time prior to what is retained results in an "InvalidRequestException".
      */
     startTime: Timestamp;
     /**
@@ -8837,6 +8841,55 @@ declare namespace Iot {
     inProgressTimeoutInMinutes?: InProgressTimeoutInMinutes;
   }
   export type Timestamp = Date;
+  export interface TimestreamAction {
+    /**
+     * The ARN of the role that grants permission to write to the Amazon Timestream database table.
+     */
+    roleArn: AwsArn;
+    /**
+     * The name of an Amazon Timestream database.
+     */
+    databaseName: TimestreamDatabaseName;
+    /**
+     * The name of the database table into which to write the measure records.
+     */
+    tableName: TimestreamTableName;
+    /**
+     * Metadata attributes of the time series that are written in each measure record.
+     */
+    dimensions: TimestreamDimensionList;
+    /**
+     * Specifies an application-defined value to replace the default value assigned to the Timestream record's timestamp in the time column. You can use this property to specify the value and the precision of the Timestream record's timestamp. You can specify a value from the message payload or a value computed by a substitution template. If omitted, the topic rule action assigns the timestamp, in milliseconds, at the time it processed the rule. 
+     */
+    timestamp?: TimestreamTimestamp;
+  }
+  export type TimestreamDatabaseName = string;
+  export interface TimestreamDimension {
+    /**
+     * The metadata dimension name. This is the name of the column in the Amazon Timestream database table record. Dimensions cannot be named: measure_name, measure_value, or time. These names are reserved. Dimension names cannot start with ts_ or measure_value and they cannot contain the colon (:) character.
+     */
+    name: TimestreamDimensionName;
+    /**
+     * The value to write in this column of the database record.
+     */
+    value: TimestreamDimensionValue;
+  }
+  export type TimestreamDimensionList = TimestreamDimension[];
+  export type TimestreamDimensionName = string;
+  export type TimestreamDimensionValue = string;
+  export type TimestreamTableName = string;
+  export interface TimestreamTimestamp {
+    /**
+     * An expression that returns a long epoch time value.
+     */
+    value: TimestreamTimestampValue;
+    /**
+     * The precision of the timestamp value that results from the expression described in value. Valid values: SECONDS | MILLISECONDS | MICROSECONDS | NANOSECONDS. The default is MILLISECONDS.
+     */
+    unit: TimestreamTimestampUnit;
+  }
+  export type TimestreamTimestampUnit = string;
+  export type TimestreamTimestampValue = string;
   export interface TlsContext {
     /**
      * The value of the serverName key in a TLS authorization request.

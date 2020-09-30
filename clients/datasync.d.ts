@@ -20,11 +20,11 @@ declare class DataSync extends Service {
    */
   cancelTaskExecution(callback?: (err: AWSError, data: DataSync.Types.CancelTaskExecutionResponse) => void): Request<DataSync.Types.CancelTaskExecutionResponse, AWSError>;
   /**
-   * Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region. You can activate the agent in a VPC (virtual private cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public Internet. You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run.  Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks. 
+   * Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region. You can activate the agent in a VPC (virtual private cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public internet. You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run.  Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks. 
    */
   createAgent(params: DataSync.Types.CreateAgentRequest, callback?: (err: AWSError, data: DataSync.Types.CreateAgentResponse) => void): Request<DataSync.Types.CreateAgentResponse, AWSError>;
   /**
-   * Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region. You can activate the agent in a VPC (virtual private cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public Internet. You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run.  Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks. 
+   * Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region. You can activate the agent in a VPC (virtual private cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public internet. You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run.  Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks. 
    */
   createAgent(callback?: (err: AWSError, data: DataSync.Types.CreateAgentResponse) => void): Request<DataSync.Types.CreateAgentResponse, AWSError>;
   /**
@@ -52,19 +52,19 @@ declare class DataSync extends Service {
    */
   createLocationNfs(callback?: (err: AWSError, data: DataSync.Types.CreateLocationNfsResponse) => void): Request<DataSync.Types.CreateLocationNfsResponse, AWSError>;
   /**
-   * Creates an endpoint for a self-managed object storage bucket.
+   * Creates an endpoint for a self-managed object storage bucket. For more information about self-managed object storage locations, see create-object-location.
    */
   createLocationObjectStorage(params: DataSync.Types.CreateLocationObjectStorageRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationObjectStorageResponse) => void): Request<DataSync.Types.CreateLocationObjectStorageResponse, AWSError>;
   /**
-   * Creates an endpoint for a self-managed object storage bucket.
+   * Creates an endpoint for a self-managed object storage bucket. For more information about self-managed object storage locations, see create-object-location.
    */
   createLocationObjectStorage(callback?: (err: AWSError, data: DataSync.Types.CreateLocationObjectStorageResponse) => void): Request<DataSync.Types.CreateLocationObjectStorageResponse, AWSError>;
   /**
-   * Creates an endpoint for an Amazon S3 bucket. For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section. For more information, see https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location in the AWS DataSync User Guide. 
+   * Creates an endpoint for an Amazon S3 bucket. For more information, see https://docs.aws.amazon.com/datasync/latest/userguide/create-locations-cli.html#create-location-s3-cli in the AWS DataSync User Guide.
    */
   createLocationS3(params: DataSync.Types.CreateLocationS3Request, callback?: (err: AWSError, data: DataSync.Types.CreateLocationS3Response) => void): Request<DataSync.Types.CreateLocationS3Response, AWSError>;
   /**
-   * Creates an endpoint for an Amazon S3 bucket. For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section. For more information, see https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location in the AWS DataSync User Guide. 
+   * Creates an endpoint for an Amazon S3 bucket. For more information, see https://docs.aws.amazon.com/datasync/latest/userguide/create-locations-cli.html#create-location-s3-cli in the AWS DataSync User Guide.
    */
   createLocationS3(callback?: (err: AWSError, data: DataSync.Types.CreateLocationS3Response) => void): Request<DataSync.Types.CreateLocationS3Response, AWSError>;
   /**
@@ -76,11 +76,11 @@ declare class DataSync extends Service {
    */
   createLocationSmb(callback?: (err: AWSError, data: DataSync.Types.CreateLocationSmbResponse) => void): Request<DataSync.Types.CreateLocationSmbResponse, AWSError>;
   /**
-   * Creates a task. A task is a set of two locations (source and destination) and a set of Options that you use to control the behavior of a task. If you don't specify Options when you create a task, AWS DataSync populates them with service defaults. When you create a task, it first enters the CREATING state. During CREATING AWS DataSync attempts to mount the on-premises Network File System (NFS) location. The task transitions to the AVAILABLE state without waiting for the AWS location to become mounted. If required, AWS DataSync mounts the AWS location before each task execution. If an agent that is associated with a source (NFS) location goes offline, the task transitions to the UNAVAILABLE status. If the status of the task remains in the CREATING status for more than a few minutes, it means that your agent might be having trouble mounting the source NFS file system. Check the task's ErrorCode and ErrorDetail. Mount issues are often caused by either a misconfigured firewall or a mistyped NFS server host name.
+   * Creates a task. A task is a set of two locations (source and destination) and a set of Options that you use to control the behavior of a task. If you don't specify Options when you create a task, AWS DataSync populates them with service defaults. When you create a task, it first enters the CREATING state. During CREATING AWS DataSync attempts to mount the on-premises Network File System (NFS) location. The task transitions to the AVAILABLE state without waiting for the AWS location to become mounted. If required, AWS DataSync mounts the AWS location before each task execution. If an agent that is associated with a source (NFS) location goes offline, the task transitions to the UNAVAILABLE status. If the status of the task remains in the CREATING status for more than a few minutes, it means that your agent might be having trouble mounting the source NFS file system. Check the task's ErrorCode and ErrorDetail. Mount issues are often caused by either a misconfigured firewall or a mistyped NFS server hostname.
    */
   createTask(params: DataSync.Types.CreateTaskRequest, callback?: (err: AWSError, data: DataSync.Types.CreateTaskResponse) => void): Request<DataSync.Types.CreateTaskResponse, AWSError>;
   /**
-   * Creates a task. A task is a set of two locations (source and destination) and a set of Options that you use to control the behavior of a task. If you don't specify Options when you create a task, AWS DataSync populates them with service defaults. When you create a task, it first enters the CREATING state. During CREATING AWS DataSync attempts to mount the on-premises Network File System (NFS) location. The task transitions to the AVAILABLE state without waiting for the AWS location to become mounted. If required, AWS DataSync mounts the AWS location before each task execution. If an agent that is associated with a source (NFS) location goes offline, the task transitions to the UNAVAILABLE status. If the status of the task remains in the CREATING status for more than a few minutes, it means that your agent might be having trouble mounting the source NFS file system. Check the task's ErrorCode and ErrorDetail. Mount issues are often caused by either a misconfigured firewall or a mistyped NFS server host name.
+   * Creates a task. A task is a set of two locations (source and destination) and a set of Options that you use to control the behavior of a task. If you don't specify Options when you create a task, AWS DataSync populates them with service defaults. When you create a task, it first enters the CREATING state. During CREATING AWS DataSync attempts to mount the on-premises Network File System (NFS) location. The task transitions to the AVAILABLE state without waiting for the AWS location to become mounted. If required, AWS DataSync mounts the AWS location before each task execution. If an agent that is associated with a source (NFS) location goes offline, the task transitions to the UNAVAILABLE status. If the status of the task remains in the CREATING status for more than a few minutes, it means that your agent might be having trouble mounting the source NFS file system. Check the task's ErrorCode and ErrorDetail. Mount issues are often caused by either a misconfigured firewall or a mistyped NFS server hostname.
    */
   createTask(callback?: (err: AWSError, data: DataSync.Types.CreateTaskResponse) => void): Request<DataSync.Types.CreateTaskResponse, AWSError>;
   /**
@@ -140,11 +140,11 @@ declare class DataSync extends Service {
    */
   describeLocationNfs(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationNfsResponse) => void): Request<DataSync.Types.DescribeLocationNfsResponse, AWSError>;
   /**
-   * Returns metadata about a self-managed object storage server location.
+   * Returns metadata about a self-managed object storage server location. For more information about self-managed object storage locations, see create-object-location.
    */
   describeLocationObjectStorage(params: DataSync.Types.DescribeLocationObjectStorageRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationObjectStorageResponse) => void): Request<DataSync.Types.DescribeLocationObjectStorageResponse, AWSError>;
   /**
-   * Returns metadata about a self-managed object storage server location.
+   * Returns metadata about a self-managed object storage server location. For more information about self-managed object storage locations, see create-object-location.
    */
   describeLocationObjectStorage(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationObjectStorageResponse) => void): Request<DataSync.Types.DescribeLocationObjectStorageResponse, AWSError>;
   /**
@@ -432,11 +432,11 @@ declare namespace DataSync {
      */
     BucketName: ObjectStorageBucketName;
     /**
-     * Optional. The access key is used if credentials are required to access the self-managed object storage server.
+     * Optional. The access key is used if credentials are required to access the self-managed object storage server. If your object storage requires a user name and password to authenticate, use AccessKey and SecretKey to provide the user name and password, respectively.
      */
     AccessKey?: ObjectStorageAccessKey;
     /**
-     * Optional. The secret key is used if credentials are required to access the self-managed object storage server.
+     * Optional. The secret key is used if credentials are required to access the self-managed object storage server. If your object storage requires a user name and password to authenticate, use AccessKey and SecretKey to provide the user name and password, respectively.
      */
     SecretKey?: ObjectStorageSecretKey;
     /**
@@ -460,14 +460,18 @@ declare namespace DataSync {
      */
     Subdirectory?: S3Subdirectory;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon S3 bucket.
+     * The Amazon Resource Name (ARN) of the Amazon S3 bucket. If the bucket is on an AWS Outpost, this must be an access point ARN.
      */
     S3BucketArn: S3BucketArn;
     /**
-     * The Amazon S3 storage class that you want to store your files in when this location is used as a task destination. For more information about S3 storage classes, see Amazon S3 Storage Classes in the Amazon Simple Storage Service Developer Guide. Some storage classes have behaviors that can affect your S3 storage cost. For detailed information, see using-storage-classes.
+     * The Amazon S3 storage class that you want to store your files in when this location is used as a task destination. For buckets in AWS Regions, the storage class defaults to Standard. For buckets on AWS Outposts, the storage class defaults to AWS S3 Outposts. For more information about S3 storage classes, see Amazon S3 Storage Classes in the Amazon Simple Storage Service Developer Guide. Some storage classes have behaviors that can affect your S3 storage cost. For detailed information, see using-storage-classes.
      */
     S3StorageClass?: S3StorageClass;
     S3Config: S3Config;
+    /**
+     * If you are using DataSync on an AWS Outpost, specify the Amazon Resource Names (ARNs) of the DataSync agents deployed on your AWS Outpost. For more information about launching a DataSync agent on an Amazon Outpost, see outposts-agent.
+     */
+    AgentArns?: AgentArnList;
     /**
      * The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
      */
@@ -713,7 +717,7 @@ declare namespace DataSync {
      */
     LocationUri?: LocationUri;
     /**
-     * Optional. The access key is used if credentials are required to access the self-managed object storage server.
+     * Optional. The access key is used if credentials are required to access the self-managed object storage server. If your object storage requires a user name and password to authenticate, use AccessKey and SecretKey to provide the user name and password, respectively.
      */
     AccessKey?: ObjectStorageAccessKey;
     /**
@@ -741,7 +745,7 @@ declare namespace DataSync {
   }
   export interface DescribeLocationS3Response {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon S3 bucket location.
+     * The Amazon Resource Name (ARN) of the Amazon S3 bucket or access point.
      */
     LocationArn?: LocationArn;
     /**
@@ -753,6 +757,10 @@ declare namespace DataSync {
      */
     S3StorageClass?: S3StorageClass;
     S3Config?: S3Config;
+    /**
+     * If you are using DataSync on an Amazon Outpost, the Amazon Resource Name (ARNs) of the EC2 agents deployed on your AWS Outpost. For more information about launching a DataSync agent on an Amazon Outpost, see outposts-agent.
+     */
+    AgentArns?: AgentArnList;
     /**
      * The time that the Amazon S3 bucket location was created.
      */
@@ -983,6 +991,9 @@ declare namespace DataSync {
      * An opaque string that indicates the position at which to begin the next list of locations.
      */
     NextToken?: NextToken;
+    /**
+     * You can use API filters to narrow down the list of resources returned by ListLocations. For example, to retrieve all tasks on a specific source location, you can use ListLocations with filter name LocationType S3 and Operator Equals.
+     */
     Filters?: LocationFilters;
   }
   export interface ListLocationsResponse {
@@ -1052,6 +1063,9 @@ declare namespace DataSync {
      * An opaque string that indicates the position at which to begin the next list of tasks.
      */
     NextToken?: NextToken;
+    /**
+     * You can use API filters to narrow down the list of resources returned by ListTasks. For example, to retrieve all tasks on a specific source location, you can use ListTasks with filter name LocationId and Operator Equals with the ARN for the location.
+     */
     Filters?: TaskFilters;
   }
   export interface ListTasksResponse {
@@ -1066,8 +1080,17 @@ declare namespace DataSync {
   }
   export type LocationArn = string;
   export interface LocationFilter {
+    /**
+     * The name of the filter being used. Each API call supports a list of filters that are available for it (for example, LocationType for ListLocations).
+     */
     Name: LocationFilterName;
+    /**
+     * The values that you want to filter for. For example, you might want to display only Amazon S3 locations.
+     */
     Values: FilterValues;
+    /**
+     * The operator that is used to compare filter values (for example, Equals or Contains). For more about API filtering operators, see query-resources.
+     */
     Operator: Operator;
   }
   export type LocationFilterName = "LocationUri"|"LocationType"|"CreationTime"|string;
@@ -1105,7 +1128,7 @@ declare namespace DataSync {
   export type ObjectStorageServerProtocol = "HTTPS"|"HTTP"|string;
   export interface OnPremConfig {
     /**
-     * ARNs)of the agents to use for an NFS location.
+     * ARNs of the agents to use for an NFS location.
      */
     AgentArns: AgentArnList;
   }
@@ -1160,7 +1183,7 @@ declare namespace DataSync {
      */
     LogLevel?: LogLevel;
     /**
-     * TransferMode has two values: CHANGED and ALL. CHANGED performs an "incremental" or "delta sync", it compares file modification time between source and destination to determine which files need to be transferred. ALL skips destination inventory and transfers all files discovered on the source.
+     * A value that determines whether DataSync transfers only the data and metadata that differ between the source and the destination location, or whether DataSync transfers all the content from the source, without comparing to the destination location.  CHANGED: DataSync copies only data or metadata that is new or different content from the source location to the destination location. ALL: DataSync copies all source location content to the destination, without comparing to existing content on the destination.
      */
     TransferMode?: TransferMode;
   }
@@ -1197,7 +1220,7 @@ declare namespace DataSync {
      */
     BucketAccessRoleArn: IamRoleArn;
   }
-  export type S3StorageClass = "STANDARD"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"GLACIER"|"DEEP_ARCHIVE"|string;
+  export type S3StorageClass = "STANDARD"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"GLACIER"|"DEEP_ARCHIVE"|"OUTPOSTS"|string;
   export type S3Subdirectory = string;
   export type ScheduleExpressionCron = string;
   export type ServerHostname = string;
@@ -1309,8 +1332,17 @@ declare namespace DataSync {
   }
   export type TaskExecutionStatus = "QUEUED"|"LAUNCHING"|"PREPARING"|"TRANSFERRING"|"VERIFYING"|"SUCCESS"|"ERROR"|string;
   export interface TaskFilter {
+    /**
+     * The name of the filter being used. Each API call supports a list of filters that are available for it. For example, LocationId for ListTasks.
+     */
     Name: TaskFilterName;
+    /**
+     * The values that you want to filter for. For example, you might want to display only tasks for a specific destination location.
+     */
     Values: FilterValues;
+    /**
+     * The operator that is used to compare filter values (for example, Equals or Contains). For more about API filtering operators, see query-resources.
+     */
     Operator: Operator;
   }
   export type TaskFilterName = "LocationId"|"CreationTime"|string;

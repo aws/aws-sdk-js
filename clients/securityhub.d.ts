@@ -44,11 +44,11 @@ declare class SecurityHub extends Service {
    */
   batchImportFindings(callback?: (err: AWSError, data: SecurityHub.Types.BatchImportFindingsResponse) => void): Request<SecurityHub.Types.BatchImportFindingsResponse, AWSError>;
   /**
-   * Used by Security Hub customers to update information about their investigation into a finding. Requested by master accounts or member accounts. Master accounts can update findings for their account and their member accounts. Member accounts can update findings for their account. Updates from BatchUpdateFindings do not affect the value of UpdatedAt for a finding. Master accounts can use BatchUpdateFindings to update the following finding fields and objects.    Confidence     Criticality     Note     RelatedFindings     Severity     Types     UserDefinedFields     VerificationState     Workflow    Member accounts can only use BatchUpdateFindings to update the Note object.
+   * Used by Security Hub customers to update information about their investigation into a finding. Requested by master accounts or member accounts. Master accounts can update findings for their account and their member accounts. Member accounts can update findings for their account. Updates from BatchUpdateFindings do not affect the value of UpdatedAt for a finding. Master and member accounts can use BatchUpdateFindings to update the following finding fields and objects.    Confidence     Criticality     Note     RelatedFindings     Severity     Types     UserDefinedFields     VerificationState     Workflow    You can configure IAM policies to restrict access to fields and field values. For example, you might not want member accounts to be able to suppress findings or change the finding severity. See Configuring access to BatchUpdateFindings in the AWS Security Hub User Guide.
    */
   batchUpdateFindings(params: SecurityHub.Types.BatchUpdateFindingsRequest, callback?: (err: AWSError, data: SecurityHub.Types.BatchUpdateFindingsResponse) => void): Request<SecurityHub.Types.BatchUpdateFindingsResponse, AWSError>;
   /**
-   * Used by Security Hub customers to update information about their investigation into a finding. Requested by master accounts or member accounts. Master accounts can update findings for their account and their member accounts. Member accounts can update findings for their account. Updates from BatchUpdateFindings do not affect the value of UpdatedAt for a finding. Master accounts can use BatchUpdateFindings to update the following finding fields and objects.    Confidence     Criticality     Note     RelatedFindings     Severity     Types     UserDefinedFields     VerificationState     Workflow    Member accounts can only use BatchUpdateFindings to update the Note object.
+   * Used by Security Hub customers to update information about their investigation into a finding. Requested by master accounts or member accounts. Master accounts can update findings for their account and their member accounts. Member accounts can update findings for their account. Updates from BatchUpdateFindings do not affect the value of UpdatedAt for a finding. Master and member accounts can use BatchUpdateFindings to update the following finding fields and objects.    Confidence     Criticality     Note     RelatedFindings     Severity     Types     UserDefinedFields     VerificationState     Workflow    You can configure IAM policies to restrict access to fields and field values. For example, you might not want member accounts to be able to suppress findings or change the finding severity. See Configuring access to BatchUpdateFindings in the AWS Security Hub User Guide.
    */
   batchUpdateFindings(callback?: (err: AWSError, data: SecurityHub.Types.BatchUpdateFindingsResponse) => void): Request<SecurityHub.Types.BatchUpdateFindingsResponse, AWSError>;
   /**
@@ -409,6 +409,309 @@ declare namespace SecurityHub {
     SubnetId?: NonEmptyString;
   }
   export type AvailabilityZones = AvailabilityZone[];
+  export interface AwsApiGatewayAccessLogSettings {
+    /**
+     * A single-line format of the access logs of data, as specified by selected $context variables. The format must include at least $context.requestId.
+     */
+    Format?: NonEmptyString;
+    /**
+     * The ARN of the CloudWatch Logs log group that receives the access logs.
+     */
+    DestinationArn?: NonEmptyString;
+  }
+  export interface AwsApiGatewayCanarySettings {
+    /**
+     * The percentage of traffic that is diverted to a canary deployment.
+     */
+    PercentTraffic?: Double;
+    /**
+     * The deployment identifier for the canary deployment.
+     */
+    DeploymentId?: NonEmptyString;
+    /**
+     * Stage variables that are overridden in the canary release deployment. The variables include new stage variables that are introduced in the canary. Each variable is represented as a string-to-string map between the stage variable name and the variable value.
+     */
+    StageVariableOverrides?: FieldMap;
+    /**
+     * Indicates whether the canary deployment uses the stage cache.
+     */
+    UseStageCache?: Boolean;
+  }
+  export interface AwsApiGatewayEndpointConfiguration {
+    /**
+     * A list of endpoint types for the REST API. For an edge-optimized API, the endpoint type is EDGE. For a Regional API, the endpoint type is REGIONAL. For a private API, the endpoint type is PRIVATE.
+     */
+    Types?: NonEmptyStringList;
+  }
+  export interface AwsApiGatewayMethodSettings {
+    /**
+     * Indicates whether CloudWatch metrics are enabled for the method. 
+     */
+    MetricsEnabled?: Boolean;
+    /**
+     * The logging level for this method. The logging level affects the log entries that are pushed to CloudWatch Logs. If the logging level is ERROR, then the logs only include error-level entries. If the logging level is INFO, then the logs include both ERROR events and extra informational events. Valid values: OFF | ERROR | INFO 
+     */
+    LoggingLevel?: NonEmptyString;
+    /**
+     * Indicates whether data trace logging is enabled for the method. Data trace logging affects the log entries that are pushed to CloudWatch Logs.
+     */
+    DataTraceEnabled?: Boolean;
+    /**
+     * The throttling burst limit for the method.
+     */
+    ThrottlingBurstLimit?: Integer;
+    /**
+     * The throttling rate limit for the method.
+     */
+    ThrottlingRateLimit?: Double;
+    /**
+     * Indicates whether responses are cached and returned for requests. For responses to be cached, a cache cluster must be enabled on the stage.
+     */
+    CachingEnabled?: Boolean;
+    /**
+     * Specifies the time to live (TTL), in seconds, for cached responses. The higher the TTL, the longer the response is cached.
+     */
+    CacheTtlInSeconds?: Integer;
+    /**
+     * Indicates whether the cached responses are encrypted. 
+     */
+    CacheDataEncrypted?: Boolean;
+    /**
+     * Indicates whether authorization is required for a cache invalidation request.
+     */
+    RequireAuthorizationForCacheControl?: Boolean;
+    /**
+     * Indicates how to handle unauthorized requests for cache invalidation. Valid values: FAIL_WITH_403 | SUCCEED_WITH_RESPONSE_HEADER | SUCCEED_WITHOUT_RESPONSE_HEADER 
+     */
+    UnauthorizedCacheControlHeaderStrategy?: NonEmptyString;
+    /**
+     * The HTTP method. You can use an asterisk (*) as a wildcard to apply method settings to multiple methods.
+     */
+    HttpMethod?: NonEmptyString;
+    /**
+     * The resource path for this method. Forward slashes (/) are encoded as ~1 . The initial slash must include a forward slash. For example, the path value /resource/subresource must be encoded as /~1resource~1subresource. To specify the root path, use only a slash (/). You can use an asterisk (*) as a wildcard to apply method settings to multiple methods.
+     */
+    ResourcePath?: NonEmptyString;
+  }
+  export type AwsApiGatewayMethodSettingsList = AwsApiGatewayMethodSettings[];
+  export interface AwsApiGatewayRestApiDetails {
+    /**
+     * The identifier of the REST API.
+     */
+    Id?: NonEmptyString;
+    /**
+     * The name of the REST API.
+     */
+    Name?: NonEmptyString;
+    /**
+     * A description of the REST API.
+     */
+    Description?: NonEmptyString;
+    /**
+     * Indicates when the API was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    CreatedDate?: NonEmptyString;
+    /**
+     * The version identifier for the REST API.
+     */
+    Version?: NonEmptyString;
+    /**
+     * The list of binary media types supported by the REST API.
+     */
+    BinaryMediaTypes?: NonEmptyStringList;
+    /**
+     * The minimum size in bytes of a payload before compression is enabled. If null, then compression is disabled. If 0, then all payloads are compressed.
+     */
+    MinimumCompressionSize?: Integer;
+    /**
+     * The source of the API key for metering requests according to a usage plan.  HEADER indicates whether to read the API key from the X-API-Key header of a request.  AUTHORIZER indicates whether to read the API key from the UsageIdentifierKey from a custom authorizer.
+     */
+    ApiKeySource?: NonEmptyString;
+    /**
+     * The endpoint configuration of the REST API.
+     */
+    EndpointConfiguration?: AwsApiGatewayEndpointConfiguration;
+  }
+  export interface AwsApiGatewayStageDetails {
+    /**
+     * The identifier of the deployment that the stage points to.
+     */
+    DeploymentId?: NonEmptyString;
+    /**
+     * The identifier of the client certificate for the stage.
+     */
+    ClientCertificateId?: NonEmptyString;
+    /**
+     * The name of the stage.
+     */
+    StageName?: NonEmptyString;
+    /**
+     * A description of the stage.
+     */
+    Description?: NonEmptyString;
+    /**
+     * Indicates whether a cache cluster is enabled for the stage.
+     */
+    CacheClusterEnabled?: Boolean;
+    /**
+     * If a cache cluster is enabled, the size of the cache cluster.
+     */
+    CacheClusterSize?: NonEmptyString;
+    /**
+     * If a cache cluster is enabled, the status of the cache cluster.
+     */
+    CacheClusterStatus?: NonEmptyString;
+    /**
+     * Defines the method settings for the stage.
+     */
+    MethodSettings?: AwsApiGatewayMethodSettingsList;
+    /**
+     * A map that defines the stage variables for the stage. Variable names can have alphanumeric and underscore characters. Variable values can contain the following characters:   Uppercase and lowercase letters   Numbers   Special characters -._~:/?#&amp;=,  
+     */
+    Variables?: FieldMap;
+    /**
+     * The version of the API documentation that is associated with the stage.
+     */
+    DocumentationVersion?: NonEmptyString;
+    /**
+     * Settings for logging access for the stage.
+     */
+    AccessLogSettings?: AwsApiGatewayAccessLogSettings;
+    /**
+     * Information about settings for canary deployment in the stage.
+     */
+    CanarySettings?: AwsApiGatewayCanarySettings;
+    /**
+     * Indicates whether active tracing with AWS X-Ray is enabled for the stage.
+     */
+    TracingEnabled?: Boolean;
+    /**
+     * Indicates when the stage was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    CreatedDate?: NonEmptyString;
+    /**
+     * Indicates when the stage was most recently updated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    LastUpdatedDate?: NonEmptyString;
+    /**
+     * The ARN of the web ACL associated with the stage.
+     */
+    WebAclArn?: NonEmptyString;
+  }
+  export interface AwsApiGatewayV2ApiDetails {
+    /**
+     * The URI of the API.  Uses the format  &lt;api-id&gt;.execute-api.&lt;region&gt;.amazonaws.com  The stage name is typically appended to the URI to form a complete path to a deployed API stage.
+     */
+    ApiEndpoint?: NonEmptyString;
+    /**
+     * The identifier of the API.
+     */
+    ApiId?: NonEmptyString;
+    /**
+     * An API key selection expression. Supported only for WebSocket APIs. 
+     */
+    ApiKeySelectionExpression?: NonEmptyString;
+    /**
+     * Indicates when the API was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    CreatedDate?: NonEmptyString;
+    /**
+     * A description of the API.
+     */
+    Description?: NonEmptyString;
+    /**
+     * The version identifier for the API.
+     */
+    Version?: NonEmptyString;
+    /**
+     * The name of the API.
+     */
+    Name?: NonEmptyString;
+    /**
+     * The API protocol for the API. Valid values: WEBSOCKET | HTTP 
+     */
+    ProtocolType?: NonEmptyString;
+    /**
+     * The route selection expression for the API. For HTTP APIs, must be ${request.method} ${request.path}. This is the default value for HTTP APIs. For WebSocket APIs, there is no default value.
+     */
+    RouteSelectionExpression?: NonEmptyString;
+    /**
+     * A cross-origin resource sharing (CORS) configuration. Supported only for HTTP APIs.
+     */
+    CorsConfiguration?: AwsCorsConfiguration;
+  }
+  export interface AwsApiGatewayV2RouteSettings {
+    /**
+     * Indicates whether detailed metrics are enabled.
+     */
+    DetailedMetricsEnabled?: Boolean;
+    /**
+     * The logging level. The logging level affects the log entries that are pushed to CloudWatch Logs. Supported only for WebSocket APIs. If the logging level is ERROR, then the logs only include error-level entries. If the logging level is INFO, then the logs include both ERROR events and extra informational events. Valid values: OFF | ERROR | INFO 
+     */
+    LoggingLevel?: NonEmptyString;
+    /**
+     * Indicates whether data trace logging is enabled. Data trace logging affects the log entries that are pushed to CloudWatch Logs. Supported only for WebSocket APIs.
+     */
+    DataTraceEnabled?: Boolean;
+    /**
+     * The throttling burst limit.
+     */
+    ThrottlingBurstLimit?: Integer;
+    /**
+     * The throttling rate limit.
+     */
+    ThrottlingRateLimit?: Double;
+  }
+  export interface AwsApiGatewayV2StageDetails {
+    /**
+     * Indicates when the stage was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    CreatedDate?: NonEmptyString;
+    /**
+     * The description of the stage.
+     */
+    Description?: NonEmptyString;
+    /**
+     * Default route settings for the stage.
+     */
+    DefaultRouteSettings?: AwsApiGatewayV2RouteSettings;
+    /**
+     * The identifier of the deployment that the stage is associated with. 
+     */
+    DeploymentId?: NonEmptyString;
+    /**
+     * Indicates when the stage was most recently updated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    LastUpdatedDate?: NonEmptyString;
+    /**
+     * The route settings for the stage.
+     */
+    RouteSettings?: AwsApiGatewayV2RouteSettings;
+    /**
+     * The name of the stage.
+     */
+    StageName?: NonEmptyString;
+    /**
+     * A map that defines the stage variables for the stage. Variable names can have alphanumeric and underscore characters. Variable values can contain the following characters:   Uppercase and lowercase letters   Numbers   Special characters -._~:/?#&amp;=,  
+     */
+    StageVariables?: FieldMap;
+    /**
+     * Information about settings for logging access for the stage.
+     */
+    AccessLogSettings?: AwsApiGatewayAccessLogSettings;
+    /**
+     * Indicates whether updates to an API automatically trigger a new deployment.
+     */
+    AutoDeploy?: Boolean;
+    /**
+     * The status of the last deployment of a stage. Supported only if the stage has automatic deployment enabled.
+     */
+    LastDeploymentStatusMessage?: NonEmptyString;
+    /**
+     * Indicates whether the stage is managed by API Gateway.
+     */
+    ApiGatewayManaged?: Boolean;
+  }
   export interface AwsAutoScalingAutoScalingGroupDetails {
     /**
      * The name of the launch configuration.
@@ -431,7 +734,215 @@ declare namespace SecurityHub {
      */
     CreatedTime?: NonEmptyString;
   }
+  export interface AwsCertificateManagerCertificateDetails {
+    /**
+     * The ARN of the private certificate authority (CA) that will be used to issue the certificate.
+     */
+    CertificateAuthorityArn?: NonEmptyString;
+    /**
+     * Indicates when the certificate was requested. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    CreatedAt?: NonEmptyString;
+    /**
+     * The fully qualified domain name (FQDN), such as www.example.com, that is secured by the certificate.
+     */
+    DomainName?: NonEmptyString;
+    /**
+     * Contains information about the initial validation of each domain name that occurs as a result of the RequestCertificate request. Only provided if the certificate type is AMAZON_ISSUED.
+     */
+    DomainValidationOptions?: AwsCertificateManagerCertificateDomainValidationOptions;
+    /**
+     * Contains a list of Extended Key Usage X.509 v3 extension objects. Each object specifies a purpose for which the certificate public key can be used and consists of a name and an object identifier (OID).
+     */
+    ExtendedKeyUsages?: AwsCertificateManagerCertificateExtendedKeyUsages;
+    /**
+     * For a failed certificate request, the reason for the failure. Valid values: NO_AVAILABLE_CONTACTS | ADDITIONAL_VERIFICATION_REQUIRED | DOMAIN_NOT_ALLOWED | INVALID_PUBLIC_DOMAIN | DOMAIN_VALIDATION_DENIED | CAA_ERROR | PCA_LIMIT_EXCEEDED | PCA_INVALID_ARN | PCA_INVALID_STATE | PCA_REQUEST_FAILED | PCA_NAME_CONSTRAINTS_VALIDATION | PCA_RESOURCE_NOT_FOUND | PCA_INVALID_ARGS | PCA_INVALID_DURATION | PCA_ACCESS_DENIED | SLR_NOT_FOUND | OTHER 
+     */
+    FailureReason?: NonEmptyString;
+    /**
+     * Indicates when the certificate was imported. Provided if the certificate type is IMPORTED. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    ImportedAt?: NonEmptyString;
+    /**
+     * The list of ARNs for the AWS resources that use the certificate.
+     */
+    InUseBy?: StringList;
+    /**
+     * Indicates when the certificate was issued. Provided if the certificate type is AMAZON_ISSUED. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    IssuedAt?: NonEmptyString;
+    /**
+     * The name of the certificate authority that issued and signed the certificate.
+     */
+    Issuer?: NonEmptyString;
+    /**
+     * The algorithm that was used to generate the public-private key pair. Valid values: RSA_2048 | RSA_1024 | RSA_4096 | EC_prime256v1 | EC_secp384r1 | EC_secp521r1 
+     */
+    KeyAlgorithm?: NonEmptyString;
+    /**
+     * A list of key usage X.509 v3 extension objects.
+     */
+    KeyUsages?: AwsCertificateManagerCertificateKeyUsages;
+    /**
+     * The time after which the certificate becomes invalid. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    NotAfter?: NonEmptyString;
+    /**
+     * The time before which the certificate is not valid. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    NotBefore?: NonEmptyString;
+    /**
+     * Provides a value that specifies whether to add the certificate to a transparency log.
+     */
+    Options?: AwsCertificateManagerCertificateOptions;
+    /**
+     * Whether the certificate is eligible for renewal. Valid values: ELIGIBLE | INELIGIBLE 
+     */
+    RenewalEligibility?: NonEmptyString;
+    /**
+     * Information about the status of the AWS Certificate Manager managed renewal for the certificate. Provided only when the certificate type is AMAZON_ISSUED.
+     */
+    RenewalSummary?: AwsCertificateManagerCertificateRenewalSummary;
+    /**
+     * The serial number of the certificate.
+     */
+    Serial?: NonEmptyString;
+    /**
+     * The algorithm that was used to sign the certificate.
+     */
+    SignatureAlgorithm?: NonEmptyString;
+    /**
+     * The status of the certificate. Valid values: PENDING_VALIDATION | ISSUED | INACTIVE | EXPIRED | VALIDATION_TIMED_OUT | REVOKED | FAILED 
+     */
+    Status?: NonEmptyString;
+    /**
+     * The name of the entity that is associated with the public key contained in the certificate.
+     */
+    Subject?: NonEmptyString;
+    /**
+     * One or more domain names (subject alternative names) included in the certificate. This list contains the domain names that are bound to the public key that is contained in the certificate. The subject alternative names include the canonical domain name (CN) of the certificate and additional domain names that can be used to connect to the website.
+     */
+    SubjectAlternativeNames?: StringList;
+    /**
+     * The source of the certificate. For certificates that AWS Certificate Manager provides, Type is AMAZON_ISSUED. For certificates that are imported with ImportCertificate, Type is IMPORTED. Valid values: IMPORTED | AMAZON_ISSUED | PRIVATE 
+     */
+    Type?: NonEmptyString;
+  }
+  export interface AwsCertificateManagerCertificateDomainValidationOption {
+    /**
+     * A fully qualified domain name (FQDN) in the certificate.
+     */
+    DomainName?: NonEmptyString;
+    /**
+     * The CNAME record that is added to the DNS database for domain validation.
+     */
+    ResourceRecord?: AwsCertificateManagerCertificateResourceRecord;
+    /**
+     * The domain name that AWS Certificate Manager uses to send domain validation emails.
+     */
+    ValidationDomain?: NonEmptyString;
+    /**
+     * A list of email addresses that AWS Certificate Manager uses to send domain validation emails.
+     */
+    ValidationEmails?: StringList;
+    /**
+     * The method used to validate the domain name.
+     */
+    ValidationMethod?: NonEmptyString;
+    /**
+     * The validation status of the domain name.
+     */
+    ValidationStatus?: NonEmptyString;
+  }
+  export type AwsCertificateManagerCertificateDomainValidationOptions = AwsCertificateManagerCertificateDomainValidationOption[];
+  export interface AwsCertificateManagerCertificateExtendedKeyUsage {
+    /**
+     * The name of an extension value. Indicates the purpose for which the certificate public key can be used.
+     */
+    Name?: NonEmptyString;
+    /**
+     * An object identifier (OID) for the extension value. The format is numbers separated by periods.
+     */
+    OId?: NonEmptyString;
+  }
+  export type AwsCertificateManagerCertificateExtendedKeyUsages = AwsCertificateManagerCertificateExtendedKeyUsage[];
+  export interface AwsCertificateManagerCertificateKeyUsage {
+    /**
+     * The key usage extension name.
+     */
+    Name?: NonEmptyString;
+  }
+  export type AwsCertificateManagerCertificateKeyUsages = AwsCertificateManagerCertificateKeyUsage[];
+  export interface AwsCertificateManagerCertificateOptions {
+    /**
+     * Whether to add the certificate to a transparency log. Valid values: DISABLED | ENABLED 
+     */
+    CertificateTransparencyLoggingPreference?: NonEmptyString;
+  }
+  export interface AwsCertificateManagerCertificateRenewalSummary {
+    /**
+     * Information about the validation of each domain name in the certificate, as it pertains to AWS Certificate Manager managed renewal. Provided only when the certificate type is AMAZON_ISSUED.
+     */
+    DomainValidationOptions?: AwsCertificateManagerCertificateDomainValidationOptions;
+    /**
+     * The status of the AWS Certificate Manager managed renewal of the certificate. Valid values: PENDING_AUTO_RENEWAL | PENDING_VALIDATION | SUCCESS | FAILED 
+     */
+    RenewalStatus?: NonEmptyString;
+    /**
+     * The reason that a renewal request was unsuccessful. Valid values: NO_AVAILABLE_CONTACTS | ADDITIONAL_VERIFICATION_REQUIRED | DOMAIN_NOT_ALLOWED | INVALID_PUBLIC_DOMAIN | DOMAIN_VALIDATION_DENIED | CAA_ERROR | PCA_LIMIT_EXCEEDED | PCA_INVALID_ARN | PCA_INVALID_STATE | PCA_REQUEST_FAILED | PCA_NAME_CONSTRAINTS_VALIDATION | PCA_RESOURCE_NOT_FOUND | PCA_INVALID_ARGS | PCA_INVALID_DURATION | PCA_ACCESS_DENIED | SLR_NOT_FOUND | OTHER 
+     */
+    RenewalStatusReason?: NonEmptyString;
+    /**
+     * Indicates when the renewal summary was last updated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    UpdatedAt?: NonEmptyString;
+  }
+  export interface AwsCertificateManagerCertificateResourceRecord {
+    /**
+     * The name of the resource.
+     */
+    Name?: NonEmptyString;
+    /**
+     * The type of resource.
+     */
+    Type?: NonEmptyString;
+    /**
+     * The value of the resource.
+     */
+    Value?: NonEmptyString;
+  }
+  export interface AwsCloudFrontDistributionCacheBehavior {
+    /**
+     * The protocol that viewers can use to access the files in an origin. You can specify the following options:    allow-all - Viewers can use HTTP or HTTPS.    redirect-to-https - CloudFront responds to HTTP requests with an HTTP status code of 301 (Moved Permanently) and the HTTPS URL. The viewer then uses the new URL to resubmit.    https-only - CloudFront responds to HTTP request with an HTTP status code of 403 (Forbidden).  
+     */
+    ViewerProtocolPolicy?: NonEmptyString;
+  }
+  export interface AwsCloudFrontDistributionCacheBehaviors {
+    /**
+     * The cache behaviors for the distribution.
+     */
+    Items?: AwsCloudFrontDistributionCacheBehaviorsItemList;
+  }
+  export type AwsCloudFrontDistributionCacheBehaviorsItemList = AwsCloudFrontDistributionCacheBehavior[];
+  export interface AwsCloudFrontDistributionDefaultCacheBehavior {
+    /**
+     * The protocol that viewers can use to access the files in an origin. You can specify the following options:    allow-all - Viewers can use HTTP or HTTPS.    redirect-to-https - CloudFront responds to HTTP requests with an HTTP status code of 301 (Moved Permanently) and the HTTPS URL. The viewer then uses the new URL to resubmit.    https-only - CloudFront responds to HTTP request with an HTTP status code of 403 (Forbidden).  
+     */
+    ViewerProtocolPolicy?: NonEmptyString;
+  }
   export interface AwsCloudFrontDistributionDetails {
+    /**
+     * Provides information about the cache configuration for the distribution.
+     */
+    CacheBehaviors?: AwsCloudFrontDistributionCacheBehaviors;
+    /**
+     * The default cache behavior for the configuration.
+     */
+    DefaultCacheBehavior?: AwsCloudFrontDistributionDefaultCacheBehavior;
+    /**
+     * The object that CloudFront sends in response to requests from the origin (for example, index.html) when a viewer requests the root URL for the distribution (http://www.example.com) instead of an object in your distribution (http://www.example.com/product-description.html). 
+     */
+    DefaultRootObject?: NonEmptyString;
     /**
      * The domain name corresponding to the distribution.
      */
@@ -452,6 +963,10 @@ declare namespace SecurityHub {
      * A complex type that contains information about origins for this distribution.
      */
     Origins?: AwsCloudFrontDistributionOrigins;
+    /**
+     * Provides information about the origin groups in the distribution.
+     */
+    OriginGroups?: AwsCloudFrontDistributionOriginGroups;
     /**
      * Indicates the current status of the distribution.
      */
@@ -479,6 +994,36 @@ declare namespace SecurityHub {
      */
     Prefix?: NonEmptyString;
   }
+  export interface AwsCloudFrontDistributionOriginGroup {
+    /**
+     * Provides the criteria for an origin group to fail over.
+     */
+    FailoverCriteria?: AwsCloudFrontDistributionOriginGroupFailover;
+  }
+  export interface AwsCloudFrontDistributionOriginGroupFailover {
+    /**
+     * Information about the status codes that cause an origin group to fail over.
+     */
+    StatusCodes?: AwsCloudFrontDistributionOriginGroupFailoverStatusCodes;
+  }
+  export interface AwsCloudFrontDistributionOriginGroupFailoverStatusCodes {
+    /**
+     * The list of status code values that can cause a failover to the next origin.
+     */
+    Items?: AwsCloudFrontDistributionOriginGroupFailoverStatusCodesItemList;
+    /**
+     * The number of status codes that can cause a failover.
+     */
+    Quantity?: Integer;
+  }
+  export type AwsCloudFrontDistributionOriginGroupFailoverStatusCodesItemList = Integer[];
+  export interface AwsCloudFrontDistributionOriginGroups {
+    /**
+     * The list of origin groups.
+     */
+    Items?: AwsCloudFrontDistributionOriginGroupsItemList;
+  }
+  export type AwsCloudFrontDistributionOriginGroupsItemList = AwsCloudFrontDistributionOriginGroup[];
   export interface AwsCloudFrontDistributionOriginItem {
     /**
      * Amazon S3 origins: The DNS name of the Amazon S3 bucket from which you want CloudFront to get objects for this origin.
@@ -492,13 +1037,85 @@ declare namespace SecurityHub {
      * An optional element that causes CloudFront to request your content from a directory in your Amazon S3 bucket or your custom origin.
      */
     OriginPath?: NonEmptyString;
+    /**
+     * An origin that is an S3 bucket that is not configured with static website hosting.
+     */
+    S3OriginConfig?: AwsCloudFrontDistributionOriginS3OriginConfig;
   }
   export type AwsCloudFrontDistributionOriginItemList = AwsCloudFrontDistributionOriginItem[];
+  export interface AwsCloudFrontDistributionOriginS3OriginConfig {
+    /**
+     * The CloudFront origin access identity to associate with the origin.
+     */
+    OriginAccessIdentity?: NonEmptyString;
+  }
   export interface AwsCloudFrontDistributionOrigins {
     /**
      * A complex type that contains origins or origin groups for this distribution.
      */
     Items?: AwsCloudFrontDistributionOriginItemList;
+  }
+  export interface AwsCloudTrailTrailDetails {
+    /**
+     * The ARN of the log group that CloudTrail logs are delivered to.
+     */
+    CloudWatchLogsLogGroupArn?: NonEmptyString;
+    /**
+     * The ARN of the role that the CloudWatch Logs endpoint assumes when it writes to the log group.
+     */
+    CloudWatchLogsRoleArn?: NonEmptyString;
+    /**
+     * Indicates whether the trail has custom event selectors.
+     */
+    HasCustomEventSelectors?: Boolean;
+    /**
+     * The Region where the trail was created.
+     */
+    HomeRegion?: NonEmptyString;
+    /**
+     * Indicates whether the trail publishes events from global services such as IAM to the log files.
+     */
+    IncludeGlobalServiceEvents?: Boolean;
+    /**
+     * Indicates whether the trail applies only to the current Region or to all Regions.
+     */
+    IsMultiRegionTrail?: Boolean;
+    /**
+     * Whether the trail is created for all accounts in an organization in AWS Organizations, or only for the current AWS account.
+     */
+    IsOrganizationTrail?: Boolean;
+    /**
+     * The AWS KMS key ID to use to encrypt the logs.
+     */
+    KmsKeyId?: NonEmptyString;
+    /**
+     * Indicates whether CloudTrail log file validation is enabled.
+     */
+    LogFileValidationEnabled?: Boolean;
+    /**
+     * The name of the trail.
+     */
+    Name?: NonEmptyString;
+    /**
+     * The name of the S3 bucket where the log files are published.
+     */
+    S3BucketName?: NonEmptyString;
+    /**
+     * The S3 key prefix. The key prefix is added after the name of the S3 bucket where the log files are published.
+     */
+    S3KeyPrefix?: NonEmptyString;
+    /**
+     * The ARN of the SNS topic that is used for notifications of log file delivery.
+     */
+    SnsTopicArn?: NonEmptyString;
+    /**
+     * The name of the SNS topic that is used for notifications of log file delivery.
+     */
+    SnsTopicName?: NonEmptyString;
+    /**
+     * The ARN of the trail.
+     */
+    TrailArn?: NonEmptyString;
   }
   export interface AwsCodeBuildProjectDetails {
     /**
@@ -585,6 +1202,32 @@ declare namespace SecurityHub {
      * A list of one or more security group IDs in your Amazon VPC.
      */
     SecurityGroupIds?: NonEmptyStringList;
+  }
+  export interface AwsCorsConfiguration {
+    /**
+     * The allowed origins for CORS requests.
+     */
+    AllowOrigins?: NonEmptyStringList;
+    /**
+     * Indicates whether the CORS request includes credentials.
+     */
+    AllowCredentials?: Boolean;
+    /**
+     * The exposed headers for CORS requests.
+     */
+    ExposeHeaders?: NonEmptyStringList;
+    /**
+     * The number of seconds for which the browser caches preflight request results.
+     */
+    MaxAge?: Integer;
+    /**
+     * The allowed methods for CORS requests.
+     */
+    AllowMethods?: NonEmptyStringList;
+    /**
+     * The allowed headers for CORS requests.
+     */
+    AllowHeaders?: NonEmptyStringList;
   }
   export interface AwsDynamoDbTableAttributeDefinition {
     /**
@@ -1273,6 +1916,253 @@ declare namespace SecurityHub {
      */
     VPCId?: NonEmptyString;
   }
+  export type AwsElbAppCookieStickinessPolicies = AwsElbAppCookieStickinessPolicy[];
+  export interface AwsElbAppCookieStickinessPolicy {
+    /**
+     * The name of the application cookie used for stickiness.
+     */
+    CookieName?: NonEmptyString;
+    /**
+     * The mnemonic name for the policy being created. The name must be unique within the set of policies for the load balancer.
+     */
+    PolicyName?: NonEmptyString;
+  }
+  export type AwsElbLbCookieStickinessPolicies = AwsElbLbCookieStickinessPolicy[];
+  export interface AwsElbLbCookieStickinessPolicy {
+    /**
+     * The amount of time, in seconds, after which the cookie is considered stale. If an expiration period is not specified, the stickiness session lasts for the duration of the browser session.
+     */
+    CookieExpirationPeriod?: Long;
+    /**
+     * The name of the policy. The name must be unique within the set of policies for the load balancer.
+     */
+    PolicyName?: NonEmptyString;
+  }
+  export interface AwsElbLoadBalancerAccessLog {
+    /**
+     * The interval in minutes for publishing the access logs. You can publish access logs either every 5 minutes or every 60 minutes.
+     */
+    EmitInterval?: Integer;
+    /**
+     * Indicates whether access logs are enabled for the load balancer.
+     */
+    Enabled?: Boolean;
+    /**
+     * The name of the S3 bucket where the access logs are stored.
+     */
+    S3BucketName?: NonEmptyString;
+    /**
+     * The logical hierarchy that was created for the S3 bucket. If a prefix is not provided, the log is placed at the root level of the bucket.
+     */
+    S3BucketPrefix?: NonEmptyString;
+  }
+  export interface AwsElbLoadBalancerAttributes {
+    /**
+     * Information about the access log configuration for the load balancer. If the access log is enabled, the load balancer captures detailed information about all requests. It delivers the information to a specified S3 bucket.
+     */
+    AccessLog?: AwsElbLoadBalancerAccessLog;
+    /**
+     * Information about the connection draining configuration for the load balancer. If connection draining is enabled, the load balancer allows existing requests to complete before it shifts traffic away from a deregistered or unhealthy instance.
+     */
+    ConnectionDraining?: AwsElbLoadBalancerConnectionDraining;
+    /**
+     * Connection settings for the load balancer. If an idle timeout is configured, the load balancer allows connections to remain idle for the specified duration. When a connection is idle, no data is sent over the connection.
+     */
+    ConnectionSettings?: AwsElbLoadBalancerConnectionSettings;
+    /**
+     * Cross-zone load balancing settings for the load balancer. If cross-zone load balancing is enabled, the load balancer routes the request traffic evenly across all instances regardless of the Availability Zones.
+     */
+    CrossZoneLoadBalancing?: AwsElbLoadBalancerCrossZoneLoadBalancing;
+  }
+  export interface AwsElbLoadBalancerBackendServerDescription {
+    /**
+     * The port on which the EC2 instance is listening.
+     */
+    InstancePort?: Integer;
+    /**
+     * The names of the policies that are enabled for the EC2 instance.
+     */
+    PolicyNames?: StringList;
+  }
+  export type AwsElbLoadBalancerBackendServerDescriptions = AwsElbLoadBalancerBackendServerDescription[];
+  export interface AwsElbLoadBalancerConnectionDraining {
+    /**
+     * Indicates whether connection draining is enabled for the load balancer.
+     */
+    Enabled?: Boolean;
+    /**
+     * The maximum time, in seconds, to keep the existing connections open before deregistering the instances.
+     */
+    Timeout?: Integer;
+  }
+  export interface AwsElbLoadBalancerConnectionSettings {
+    /**
+     * The time, in seconds, that the connection can be idle (no data is sent over the connection) before it is closed by the load balancer.
+     */
+    IdleTimeout?: Integer;
+  }
+  export interface AwsElbLoadBalancerCrossZoneLoadBalancing {
+    /**
+     * Indicates whether cross-zone load balancing is enabled for the load balancer.
+     */
+    Enabled?: Boolean;
+  }
+  export interface AwsElbLoadBalancerDetails {
+    /**
+     * The list of Availability Zones for the load balancer.
+     */
+    AvailabilityZones?: StringList;
+    /**
+     * Information about the configuration of the EC2 instances.
+     */
+    BackendServerDescriptions?: AwsElbLoadBalancerBackendServerDescriptions;
+    /**
+     * The name of the Amazon Route 53 hosted zone for the load balancer.
+     */
+    CanonicalHostedZoneName?: NonEmptyString;
+    /**
+     * The ID of the Amazon Route 53 hosted zone for the load balancer.
+     */
+    CanonicalHostedZoneNameID?: NonEmptyString;
+    /**
+     * Indicates when the load balancer was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    CreatedTime?: NonEmptyString;
+    /**
+     * The DNS name of the load balancer.
+     */
+    DnsName?: NonEmptyString;
+    /**
+     * Information about the health checks that are conducted on the load balancer.
+     */
+    HealthCheck?: AwsElbLoadBalancerHealthCheck;
+    /**
+     * List of EC2 instances for the load balancer.
+     */
+    Instances?: AwsElbLoadBalancerInstances;
+    /**
+     * The policies that are enabled for the load balancer listeners.
+     */
+    ListenerDescriptions?: AwsElbLoadBalancerListenerDescriptions;
+    /**
+     * The attributes for a load balancer.
+     */
+    LoadBalancerAttributes?: AwsElbLoadBalancerAttributes;
+    /**
+     * The name of the load balancer.
+     */
+    LoadBalancerName?: NonEmptyString;
+    /**
+     * The policies for a load balancer.
+     */
+    Policies?: AwsElbLoadBalancerPolicies;
+    /**
+     * The type of load balancer. Only provided if the load balancer is in a VPC. If Scheme is internet-facing, the load balancer has a public DNS name that resolves to a public IP address. If Scheme is internal, the load balancer has a public DNS name that resolves to a private IP address.
+     */
+    Scheme?: NonEmptyString;
+    /**
+     * The security groups for the load balancer. Only provided if the load balancer is in a VPC.
+     */
+    SecurityGroups?: StringList;
+    /**
+     * Information about the security group for the load balancer. This is the security group that is used for inbound rules.
+     */
+    SourceSecurityGroup?: AwsElbLoadBalancerSourceSecurityGroup;
+    /**
+     * The list of subnet identifiers for the load balancer.
+     */
+    Subnets?: StringList;
+    /**
+     * The identifier of the VPC for the load balancer.
+     */
+    VpcId?: NonEmptyString;
+  }
+  export interface AwsElbLoadBalancerHealthCheck {
+    /**
+     * The number of consecutive health check successes required before the instance is moved to the Healthy state.
+     */
+    HealthyThreshold?: Integer;
+    /**
+     * The approximate interval, in seconds, between health checks of an individual instance.
+     */
+    Interval?: Integer;
+    /**
+     * The instance that is being checked. The target specifies the protocol and port. The available protocols are TCP, SSL, HTTP, and HTTPS. The range of valid ports is 1 through 65535. For the HTTP and HTTPS protocols, the target also specifies the ping path. For the TCP protocol, the target is specified as TCP: &lt;port&gt; . For the SSL protocol, the target is specified as SSL.&lt;port&gt; . For the HTTP and HTTPS protocols, the target is specified as  &lt;protocol&gt;:&lt;port&gt;/&lt;path to ping&gt; .
+     */
+    Target?: NonEmptyString;
+    /**
+     * The amount of time, in seconds, during which no response means a failed health check.
+     */
+    Timeout?: Integer;
+    /**
+     * The number of consecutive health check failures that must occur before the instance is moved to the Unhealthy state.
+     */
+    UnhealthyThreshold?: Integer;
+  }
+  export interface AwsElbLoadBalancerInstance {
+    /**
+     * The instance identifier.
+     */
+    InstanceId?: NonEmptyString;
+  }
+  export type AwsElbLoadBalancerInstances = AwsElbLoadBalancerInstance[];
+  export interface AwsElbLoadBalancerListener {
+    /**
+     * The port on which the instance is listening.
+     */
+    InstancePort?: Integer;
+    /**
+     * The protocol to use to route traffic to instances. Valid values: HTTP | HTTPS | TCP | SSL 
+     */
+    InstanceProtocol?: NonEmptyString;
+    /**
+     * The port on which the load balancer is listening. On EC2-VPC, you can specify any port from the range 1-65535. On EC2-Classic, you can specify any port from the following list: 25, 80, 443, 465, 587, 1024-65535.
+     */
+    LoadBalancerPort?: Integer;
+    /**
+     * The load balancer transport protocol to use for routing. Valid values: HTTP | HTTPS | TCP | SSL 
+     */
+    Protocol?: NonEmptyString;
+    /**
+     * The ARN of the server certificate.
+     */
+    SslCertificateId?: NonEmptyString;
+  }
+  export interface AwsElbLoadBalancerListenerDescription {
+    /**
+     * Information about the listener.
+     */
+    Listener?: AwsElbLoadBalancerListener;
+    /**
+     * The policies enabled for the listener.
+     */
+    PolicyNames?: StringList;
+  }
+  export type AwsElbLoadBalancerListenerDescriptions = AwsElbLoadBalancerListenerDescription[];
+  export interface AwsElbLoadBalancerPolicies {
+    /**
+     * The stickiness policies that are created using CreateAppCookieStickinessPolicy.
+     */
+    AppCookieStickinessPolicies?: AwsElbAppCookieStickinessPolicies;
+    /**
+     * The stickiness policies that are created using CreateLBCookieStickinessPolicy.
+     */
+    LbCookieStickinessPolicies?: AwsElbLbCookieStickinessPolicies;
+    /**
+     * The policies other than the stickiness policies.
+     */
+    OtherPolicies?: StringList;
+  }
+  export interface AwsElbLoadBalancerSourceSecurityGroup {
+    /**
+     * The name of the security group.
+     */
+    GroupName?: NonEmptyString;
+    /**
+     * The owner of the security group.
+     */
+    OwnerAlias?: NonEmptyString;
+  }
   export interface AwsElbv2LoadBalancerDetails {
     /**
      * The Availability Zones for the load balancer.
@@ -1340,6 +2230,60 @@ declare namespace SecurityHub {
      * The name of the principal.
      */
     PrincipalName?: NonEmptyString;
+    /**
+     * The AWS account ID of the account for the key.
+     */
+    AccountId?: NonEmptyString;
+    /**
+     * The identifier of the access key.
+     */
+    AccessKeyId?: NonEmptyString;
+    /**
+     * Information about the session that the key was used for.
+     */
+    SessionContext?: AwsIamAccessKeySessionContext;
+  }
+  export interface AwsIamAccessKeySessionContext {
+    /**
+     * Attributes of the session that the key was used for.
+     */
+    Attributes?: AwsIamAccessKeySessionContextAttributes;
+    /**
+     * Information about the entity that created the session.
+     */
+    SessionIssuer?: AwsIamAccessKeySessionContextSessionIssuer;
+  }
+  export interface AwsIamAccessKeySessionContextAttributes {
+    /**
+     * Indicates whether the session used multi-factor authentication (MFA).
+     */
+    MfaAuthenticated?: Boolean;
+    /**
+     * Indicates when the session was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    CreationDate?: NonEmptyString;
+  }
+  export interface AwsIamAccessKeySessionContextSessionIssuer {
+    /**
+     * The type of principal (user, role, or group) that created the session.
+     */
+    Type?: NonEmptyString;
+    /**
+     * The principal ID of the principal (user, role, or group) that created the session.
+     */
+    PrincipalId?: NonEmptyString;
+    /**
+     * The ARN of the session.
+     */
+    Arn?: NonEmptyString;
+    /**
+     * The identifier of the AWS account that created the session.
+     */
+    AccountId?: NonEmptyString;
+    /**
+     * The name of the principal that created the session.
+     */
+    UserName?: NonEmptyString;
   }
   export type AwsIamAccessKeyStatus = "Active"|"Inactive"|string;
   export interface AwsIamAttachedManagedPolicy {
@@ -1353,9 +2297,96 @@ declare namespace SecurityHub {
     PolicyArn?: NonEmptyString;
   }
   export type AwsIamAttachedManagedPolicyList = AwsIamAttachedManagedPolicy[];
+  export interface AwsIamGroupDetails {
+    /**
+     * A list of the managed policies that are attached to the IAM group.
+     */
+    AttachedManagedPolicies?: AwsIamAttachedManagedPolicyList;
+    /**
+     * Indicates when the IAM group was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    CreateDate?: NonEmptyString;
+    /**
+     * The identifier of the IAM group.
+     */
+    GroupId?: NonEmptyString;
+    /**
+     * The name of the IAM group.
+     */
+    GroupName?: NonEmptyString;
+    /**
+     * The list of inline policies that are embedded in the group.
+     */
+    GroupPolicyList?: AwsIamGroupPolicyList;
+    /**
+     * The path to the group.
+     */
+    Path?: NonEmptyString;
+  }
+  export interface AwsIamGroupPolicy {
+    /**
+     * The name of the policy.
+     */
+    PolicyName?: NonEmptyString;
+  }
+  export type AwsIamGroupPolicyList = AwsIamGroupPolicy[];
+  export interface AwsIamInstanceProfile {
+    /**
+     * The ARN of the instance profile.
+     */
+    Arn?: NonEmptyString;
+    /**
+     * Indicates when the instance profile was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    CreateDate?: NonEmptyString;
+    /**
+     * The identifier of the instance profile.
+     */
+    InstanceProfileId?: NonEmptyString;
+    /**
+     * The name of the instance profile.
+     */
+    InstanceProfileName?: NonEmptyString;
+    /**
+     * The path to the instance profile.
+     */
+    Path?: NonEmptyString;
+    /**
+     * The roles associated with the instance profile.
+     */
+    Roles?: AwsIamInstanceProfileRoles;
+  }
+  export type AwsIamInstanceProfileList = AwsIamInstanceProfile[];
+  export interface AwsIamInstanceProfileRole {
+    /**
+     * The ARN of the role.
+     */
+    Arn?: NonEmptyString;
+    /**
+     * The policy that grants an entity permission to assume the role.
+     */
+    AssumeRolePolicyDocument?: AwsIamRoleAssumeRolePolicyDocument;
+    /**
+     * Indicates when the role was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    CreateDate?: NonEmptyString;
+    /**
+     * The path to the role.
+     */
+    Path?: NonEmptyString;
+    /**
+     * The identifier of the role.
+     */
+    RoleId?: NonEmptyString;
+    /**
+     * The name of the role.
+     */
+    RoleName?: NonEmptyString;
+  }
+  export type AwsIamInstanceProfileRoles = AwsIamInstanceProfileRole[];
   export interface AwsIamPermissionsBoundary {
     /**
-     * The ARN of the policy used to set the permissions boundary for the user.
+     * The ARN of the policy used to set the permissions boundary.
      */
     PermissionsBoundaryArn?: NonEmptyString;
     /**
@@ -1431,9 +2462,18 @@ declare namespace SecurityHub {
      */
     AssumeRolePolicyDocument?: AwsIamRoleAssumeRolePolicyDocument;
     /**
+     * The list of the managed policies that are attached to the role.
+     */
+    AttachedManagedPolicies?: AwsIamAttachedManagedPolicyList;
+    /**
      * Indicates when the role was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     CreateDate?: NonEmptyString;
+    /**
+     * The list of instance profiles that contain this role.
+     */
+    InstanceProfileList?: AwsIamInstanceProfileList;
+    PermissionsBoundary?: AwsIamPermissionsBoundary;
     /**
      * The stable and unique string identifying the role.
      */
@@ -1443,6 +2483,10 @@ declare namespace SecurityHub {
      */
     RoleName?: NonEmptyString;
     /**
+     * The list of inline policies that are embedded in the role.
+     */
+    RolePolicyList?: AwsIamRolePolicyList;
+    /**
      * The maximum session duration (in seconds) that you want to set for the specified role.
      */
     MaxSessionDuration?: Integer;
@@ -1451,6 +2495,13 @@ declare namespace SecurityHub {
      */
     Path?: NonEmptyString;
   }
+  export interface AwsIamRolePolicy {
+    /**
+     * The name of the policy.
+     */
+    PolicyName?: NonEmptyString;
+  }
+  export type AwsIamRolePolicyList = AwsIamRolePolicy[];
   export interface AwsIamUserDetails {
     /**
      * A list of the managed policies that are attached to the user.
@@ -2518,6 +3569,407 @@ declare namespace SecurityHub {
      */
     LogTypesToDisable?: StringList;
   }
+  export interface AwsRedshiftClusterClusterNode {
+    /**
+     * The role of the node. A node might be a leader node or a compute node.
+     */
+    NodeRole?: NonEmptyString;
+    /**
+     * The private IP address of the node.
+     */
+    PrivateIpAddress?: NonEmptyString;
+    /**
+     * The public IP address of the node.
+     */
+    PublicIpAddress?: NonEmptyString;
+  }
+  export type AwsRedshiftClusterClusterNodes = AwsRedshiftClusterClusterNode[];
+  export interface AwsRedshiftClusterClusterParameterGroup {
+    /**
+     * The list of parameter statuses.
+     */
+    ClusterParameterStatusList?: AwsRedshiftClusterClusterParameterStatusList;
+    /**
+     * The status of updates to the parameters.
+     */
+    ParameterApplyStatus?: NonEmptyString;
+    /**
+     * The name of the parameter group.
+     */
+    ParameterGroupName?: NonEmptyString;
+  }
+  export type AwsRedshiftClusterClusterParameterGroups = AwsRedshiftClusterClusterParameterGroup[];
+  export interface AwsRedshiftClusterClusterParameterStatus {
+    /**
+     * The name of the parameter.
+     */
+    ParameterName?: NonEmptyString;
+    /**
+     * The status of the parameter. Indicates whether the parameter is in sync with the database, waiting for a cluster reboot, or encountered an error when it was applied. Valid values: in-sync | pending-reboot | applying | invalid-parameter | apply-deferred | apply-error | unknown-error 
+     */
+    ParameterApplyStatus?: NonEmptyString;
+    /**
+     * The error that prevented the parameter from being applied to the database.
+     */
+    ParameterApplyErrorDescription?: NonEmptyString;
+  }
+  export type AwsRedshiftClusterClusterParameterStatusList = AwsRedshiftClusterClusterParameterStatus[];
+  export interface AwsRedshiftClusterClusterSecurityGroup {
+    /**
+     * The name of the cluster security group.
+     */
+    ClusterSecurityGroupName?: NonEmptyString;
+    /**
+     * The status of the cluster security group.
+     */
+    Status?: NonEmptyString;
+  }
+  export type AwsRedshiftClusterClusterSecurityGroups = AwsRedshiftClusterClusterSecurityGroup[];
+  export interface AwsRedshiftClusterClusterSnapshotCopyStatus {
+    /**
+     * The destination Region that snapshots are automatically copied to when cross-Region snapshot copy is enabled.
+     */
+    DestinationRegion?: NonEmptyString;
+    /**
+     * The number of days that manual snapshots are retained in the destination region after they are copied from a source region. If the value is -1, then the manual snapshot is retained indefinitely. Valid values: Either -1 or an integer between 1 and 3,653
+     */
+    ManualSnapshotRetentionPeriod?: Integer;
+    /**
+     * The number of days to retain automated snapshots in the destination Region after they are copied from a source Region.
+     */
+    RetentionPeriod?: Integer;
+    /**
+     * The name of the snapshot copy grant.
+     */
+    SnapshotCopyGrantName?: NonEmptyString;
+  }
+  export interface AwsRedshiftClusterDeferredMaintenanceWindow {
+    /**
+     * The end of the time window for which maintenance was deferred. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    DeferMaintenanceEndTime?: NonEmptyString;
+    /**
+     * The identifier of the maintenance window.
+     */
+    DeferMaintenanceIdentifier?: NonEmptyString;
+    /**
+     * The start of the time window for which maintenance was deferred. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    DeferMaintenanceStartTime?: NonEmptyString;
+  }
+  export type AwsRedshiftClusterDeferredMaintenanceWindows = AwsRedshiftClusterDeferredMaintenanceWindow[];
+  export interface AwsRedshiftClusterDetails {
+    /**
+     * Indicates whether major version upgrades are applied automatically to the cluster during the maintenance window.
+     */
+    AllowVersionUpgrade?: Boolean;
+    /**
+     * The number of days that automatic cluster snapshots are retained.
+     */
+    AutomatedSnapshotRetentionPeriod?: Integer;
+    /**
+     * The name of the Availability Zone in which the cluster is located.
+     */
+    AvailabilityZone?: NonEmptyString;
+    /**
+     * The availability status of the cluster for queries. Possible values are the following:    Available - The cluster is available for queries.    Unavailable - The cluster is not available for queries.    Maintenance - The cluster is intermittently available for queries due to maintenance activities.    Modifying -The cluster is intermittently available for queries due to changes that modify the cluster.    Failed - The cluster failed and is not available for queries.  
+     */
+    ClusterAvailabilityStatus?: NonEmptyString;
+    /**
+     * Indicates when the cluster was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    ClusterCreateTime?: NonEmptyString;
+    /**
+     * The unique identifier of the cluster.
+     */
+    ClusterIdentifier?: NonEmptyString;
+    /**
+     * The nodes in the cluster.
+     */
+    ClusterNodes?: AwsRedshiftClusterClusterNodes;
+    /**
+     * The list of cluster parameter groups that are associated with this cluster.
+     */
+    ClusterParameterGroups?: AwsRedshiftClusterClusterParameterGroups;
+    /**
+     * The public key for the cluster.
+     */
+    ClusterPublicKey?: NonEmptyString;
+    /**
+     * The specific revision number of the database in the cluster.
+     */
+    ClusterRevisionNumber?: NonEmptyString;
+    /**
+     * A list of cluster security groups that are associated with the cluster.
+     */
+    ClusterSecurityGroups?: AwsRedshiftClusterClusterSecurityGroups;
+    /**
+     * Information about the destination Region and retention period for the cross-Region snapshot copy.
+     */
+    ClusterSnapshotCopyStatus?: AwsRedshiftClusterClusterSnapshotCopyStatus;
+    /**
+     * The current status of the cluster. Valid values: available | available, prep-for-resize | available, resize-cleanup | cancelling-resize | creating | deleting | final-snapshot | hardware-failure | incompatible-hsm | incompatible-network | incompatible-parameters | incompatible-restore | modifying | paused | rebooting | renaming | resizing | rotating-keys | storage-full | updating-hsm 
+     */
+    ClusterStatus?: NonEmptyString;
+    /**
+     * The name of the subnet group that is associated with the cluster. This parameter is valid only when the cluster is in a VPC.
+     */
+    ClusterSubnetGroupName?: NonEmptyString;
+    /**
+     * The version ID of the Amazon Redshift engine that runs on the cluster.
+     */
+    ClusterVersion?: NonEmptyString;
+    /**
+     * The name of the initial database that was created when the cluster was created. The same name is returned for the life of the cluster. If an initial database is not specified, a database named devdev is created by default.
+     */
+    DBName?: NonEmptyString;
+    /**
+     * List of time windows during which maintenance was deferred.
+     */
+    DeferredMaintenanceWindows?: AwsRedshiftClusterDeferredMaintenanceWindows;
+    /**
+     * Information about the status of the Elastic IP (EIP) address.
+     */
+    ElasticIpStatus?: AwsRedshiftClusterElasticIpStatus;
+    /**
+     * The number of nodes that you can use the elastic resize method to resize the cluster to.
+     */
+    ElasticResizeNumberOfNodeOptions?: NonEmptyString;
+    /**
+     * Indicates whether the data in the cluster is encrypted at rest.
+     */
+    Encrypted?: Boolean;
+    /**
+     * The connection endpoint.
+     */
+    Endpoint?: AwsRedshiftClusterEndpoint;
+    /**
+     * Indicates whether to create the cluster with enhanced VPC routing enabled.
+     */
+    EnhancedVpcRouting?: Boolean;
+    /**
+     * Indicates when the next snapshot is expected to be taken. The cluster must have a valid snapshot schedule and have backups enabled. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    ExpectedNextSnapshotScheduleTime?: NonEmptyString;
+    /**
+     * The status of the next expected snapshot. Valid values: OnTrack | Pending 
+     */
+    ExpectedNextSnapshotScheduleTimeStatus?: NonEmptyString;
+    /**
+     * Information about whether the Amazon Redshift cluster finished applying any changes to hardware security module (HSM) settings that were specified in a modify cluster command.
+     */
+    HsmStatus?: AwsRedshiftClusterHsmStatus;
+    /**
+     * A list of IAM roles that the cluster can use to access other AWS services.
+     */
+    IamRoles?: AwsRedshiftClusterIamRoles;
+    /**
+     * The identifier of the AWS KMS encryption key that is used to encrypt data in the cluster.
+     */
+    KmsKeyId?: NonEmptyString;
+    /**
+     * The name of the maintenance track for the cluster.
+     */
+    MaintenanceTrackName?: NonEmptyString;
+    /**
+     * The default number of days to retain a manual snapshot. If the value is -1, the snapshot is retained indefinitely. This setting doesn't change the retention period of existing snapshots. Valid values: Either -1 or an integer between 1 and 3,653
+     */
+    ManualSnapshotRetentionPeriod?: Integer;
+    /**
+     * The master user name for the cluster. This name is used to connect to the database that is specified in as the value of DBName.
+     */
+    MasterUsername?: NonEmptyString;
+    /**
+     * Indicates the start of the next maintenance window. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    NextMaintenanceWindowStartTime?: NonEmptyString;
+    /**
+     * The node type for the nodes in the cluster.
+     */
+    NodeType?: NonEmptyString;
+    /**
+     * The number of compute nodes in the cluster.
+     */
+    NumberOfNodes?: Integer;
+    /**
+     * A list of cluster operations that are waiting to start.
+     */
+    PendingActions?: StringList;
+    /**
+     * A list of changes to the cluster that are currently pending.
+     */
+    PendingModifiedValues?: AwsRedshiftClusterPendingModifiedValues;
+    /**
+     * The weekly time range, in Universal Coordinated Time (UTC), during which system maintenance can occur. Format:  &lt;day&gt;:HH:MM-&lt;day&gt;:HH:MM  For the day values, use mon | tue | wed | thu | fri | sat | sun  For example, sun:09:32-sun:10:02 
+     */
+    PreferredMaintenanceWindow?: NonEmptyString;
+    /**
+     * Whether the cluster can be accessed from a public network.
+     */
+    PubliclyAccessible?: Boolean;
+    /**
+     * Information about the resize operation for the cluster.
+     */
+    ResizeInfo?: AwsRedshiftClusterResizeInfo;
+    /**
+     * Information about the status of a cluster restore action. Only applies to a cluster that was created by restoring a snapshot.
+     */
+    RestoreStatus?: AwsRedshiftClusterRestoreStatus;
+    /**
+     * A unique identifier for the cluster snapshot schedule.
+     */
+    SnapshotScheduleIdentifier?: NonEmptyString;
+    /**
+     * The current state of the cluster snapshot schedule. Valid values: MODIFYING | ACTIVE | FAILED 
+     */
+    SnapshotScheduleState?: NonEmptyString;
+    /**
+     * The identifier of the VPC that the cluster is in, if the cluster is in a VPC.
+     */
+    VpcId?: NonEmptyString;
+    /**
+     * The list of VPC security groups that the cluster belongs to, if the cluster is in a VPC.
+     */
+    VpcSecurityGroups?: AwsRedshiftClusterVpcSecurityGroups;
+  }
+  export interface AwsRedshiftClusterElasticIpStatus {
+    /**
+     * The elastic IP address for the cluster.
+     */
+    ElasticIp?: NonEmptyString;
+    /**
+     * The status of the elastic IP address.
+     */
+    Status?: NonEmptyString;
+  }
+  export interface AwsRedshiftClusterEndpoint {
+    /**
+     * The DNS address of the cluster.
+     */
+    Address?: NonEmptyString;
+    /**
+     * The port that the database engine listens on.
+     */
+    Port?: Integer;
+  }
+  export interface AwsRedshiftClusterHsmStatus {
+    /**
+     * The name of the HSM client certificate that the Amazon Redshift cluster uses to retrieve the data encryption keys that are stored in an HSM.
+     */
+    HsmClientCertificateIdentifier?: NonEmptyString;
+    /**
+     * The name of the HSM configuration that contains the information that the Amazon Redshift cluster can use to retrieve and store keys in an HSM.
+     */
+    HsmConfigurationIdentifier?: NonEmptyString;
+    /**
+     * Indicates whether the Amazon Redshift cluster has finished applying any HSM settings changes specified in a modify cluster command. Type: String Valid values: active | applying 
+     */
+    Status?: NonEmptyString;
+  }
+  export interface AwsRedshiftClusterIamRole {
+    /**
+     * The status of the IAM role's association with the cluster. Valid values: in-sync | adding | removing 
+     */
+    ApplyStatus?: NonEmptyString;
+    /**
+     * The ARN of the IAM role.
+     */
+    IamRoleArn?: NonEmptyString;
+  }
+  export type AwsRedshiftClusterIamRoles = AwsRedshiftClusterIamRole[];
+  export interface AwsRedshiftClusterPendingModifiedValues {
+    /**
+     * The pending or in-progress change to the automated snapshot retention period.
+     */
+    AutomatedSnapshotRetentionPeriod?: Integer;
+    /**
+     * The pending or in-progress change to the identifier for the cluster.
+     */
+    ClusterIdentifier?: NonEmptyString;
+    /**
+     * The pending or in-progress change to the cluster type.
+     */
+    ClusterType?: NonEmptyString;
+    /**
+     * The pending or in-progress change to the service version.
+     */
+    ClusterVersion?: NonEmptyString;
+    /**
+     * The encryption type for a cluster.
+     */
+    EncryptionType?: NonEmptyString;
+    /**
+     * Indicates whether to create the cluster with enhanced VPC routing enabled.
+     */
+    EnhancedVpcRouting?: Boolean;
+    /**
+     * The name of the maintenance track that the cluster changes to during the next maintenance window.
+     */
+    MaintenanceTrackName?: NonEmptyString;
+    /**
+     * The pending or in-progress change to the master user password for the cluster.
+     */
+    MasterUserPassword?: NonEmptyString;
+    /**
+     * The pending or in-progress change to the cluster's node type.
+     */
+    NodeType?: NonEmptyString;
+    /**
+     * The pending or in-progress change to the number of nodes in the cluster.
+     */
+    NumberOfNodes?: Integer;
+    /**
+     * The pending or in-progress change to whether the cluster can be connected to from the public network.
+     */
+    PubliclyAccessible?: Boolean;
+  }
+  export interface AwsRedshiftClusterResizeInfo {
+    /**
+     * Indicates whether the resize operation can be canceled.
+     */
+    AllowCancelResize?: Boolean;
+    /**
+     * The type of resize operation. Valid values: ClassicResize 
+     */
+    ResizeType?: NonEmptyString;
+  }
+  export interface AwsRedshiftClusterRestoreStatus {
+    /**
+     * The number of megabytes per second being transferred from the backup storage. Returns the average rate for a completed backup. This field is only updated when you restore to DC2 and DS2 node types.
+     */
+    CurrentRestoreRateInMegaBytesPerSecond?: Double;
+    /**
+     * The amount of time an in-progress restore has been running, or the amount of time it took a completed restore to finish. This field is only updated when you restore to DC2 and DS2 node types.
+     */
+    ElapsedTimeInSeconds?: Long;
+    /**
+     * The estimate of the time remaining before the restore is complete. Returns 0 for a completed restore. This field is only updated when you restore to DC2 and DS2 node types.
+     */
+    EstimatedTimeToCompletionInSeconds?: Long;
+    /**
+     * The number of megabytes that were transferred from snapshot storage. This field is only updated when you restore to DC2 and DS2 node types.
+     */
+    ProgressInMegaBytes?: Long;
+    /**
+     * The size of the set of snapshot data that was used to restore the cluster. This field is only updated when you restore to DC2 and DS2 node types.
+     */
+    SnapshotSizeInMegaBytes?: Long;
+    /**
+     * The status of the restore action. Valid values: starting | restoring | completed | failed 
+     */
+    Status?: NonEmptyString;
+  }
+  export interface AwsRedshiftClusterVpcSecurityGroup {
+    /**
+     * The status of the VPC security group.
+     */
+    Status?: NonEmptyString;
+    /**
+     * The identifier of the VPC security group.
+     */
+    VpcSecurityGroupId?: NonEmptyString;
+  }
+  export type AwsRedshiftClusterVpcSecurityGroups = AwsRedshiftClusterVpcSecurityGroup[];
   export interface AwsS3BucketDetails {
     /**
      * The canonical user ID of the owner of the S3 bucket.
@@ -3701,7 +5153,7 @@ declare namespace SecurityHub {
   }
   export interface GetFindingsRequest {
     /**
-     * The finding attributes used to define a condition to filter the returned findings. Note that in the available filter fields, WorkflowState is deprecated. To search for a finding based on its workflow status, use WorkflowStatus.
+     * The finding attributes used to define a condition to filter the returned findings. You can filter by up to 10 finding attributes. For each attribute, you can provide up to 20 filter values. Note that in the available filter fields, WorkflowState is deprecated. To search for a finding based on its workflow status, use WorkflowStatus.
      */
     Filters?: AwsSecurityFindingFilters;
     /**
@@ -4003,6 +5455,7 @@ declare namespace SecurityHub {
      */
     Reason?: NonEmptyString;
   }
+  export type Long = number;
   export interface Malware {
     /**
      * The name of the malware that was observed.
@@ -4055,7 +5508,7 @@ declare namespace SecurityHub {
      */
     MasterId?: NonEmptyString;
     /**
-     * The status of the relationship between the member account and its master account. 
+     * The status of the relationship between the member account and its master account.  The status can have one of the following values:    CREATED - Indicates that the master account added the member account, but has not yet invited the member account.    INVITED - Indicates that the master account invited the member account. The member account has not yet responded to the invitation.    ASSOCIATED - Indicates that the member account accepted the invitation.    REMOVED - Indicates that the master account disassociated the member account.    RESIGNED - Indicates that the member account disassociated themselves from the master account.    DELETED - Indicates that the master account deleted the member account.  
      */
     MemberStatus?: NonEmptyString;
     /**
@@ -4231,7 +5684,7 @@ declare namespace SecurityHub {
      */
     InstalledRejectedCount?: Integer;
     /**
-     * The number of patches that were installed since the last time the instance was rebooted.
+     * The number of patches that were applied, but that require the instance to be rebooted in order to be marked as installed.
      */
     InstalledPendingReboot?: Integer;
     /**
@@ -4376,6 +5829,10 @@ declare namespace SecurityHub {
      */
     Region?: NonEmptyString;
     /**
+     * 
+     */
+    ResourceRole?: NonEmptyString;
+    /**
      * A list of AWS tags associated with a resource at the time the finding was processed.
      */
     Tags?: FieldMap;
@@ -4455,9 +5912,45 @@ declare namespace SecurityHub {
      */
     AwsIamPolicy?: AwsIamPolicyDetails;
     /**
+     * 
+     */
+    AwsApiGatewayV2Stage?: AwsApiGatewayV2StageDetails;
+    /**
+     * 
+     */
+    AwsApiGatewayV2Api?: AwsApiGatewayV2ApiDetails;
+    /**
      * Details about a DynamoDB table.
      */
     AwsDynamoDbTable?: AwsDynamoDbTableDetails;
+    /**
+     * 
+     */
+    AwsApiGatewayStage?: AwsApiGatewayStageDetails;
+    /**
+     * 
+     */
+    AwsApiGatewayRestApi?: AwsApiGatewayRestApiDetails;
+    /**
+     * 
+     */
+    AwsCloudTrailTrail?: AwsCloudTrailTrailDetails;
+    /**
+     * 
+     */
+    AwsCertificateManagerCertificate?: AwsCertificateManagerCertificateDetails;
+    /**
+     * 
+     */
+    AwsRedshiftCluster?: AwsRedshiftClusterDetails;
+    /**
+     * 
+     */
+    AwsElbLoadBalancer?: AwsElbLoadBalancerDetails;
+    /**
+     * 
+     */
+    AwsIamGroup?: AwsIamGroupDetails;
     /**
      * Details about an IAM role.
      */

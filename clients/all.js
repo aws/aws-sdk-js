@@ -232,5 +232,6 @@ module.exports = {
   RedshiftData: require('./redshiftdata'),
   SSOAdmin: require('./ssoadmin'),
   TimestreamQuery: require('./timestreamquery'),
-  TimestreamWrite: require('./timestreamwrite')
+  TimestreamWrite: require('./timestreamwrite'),
+  S3Outposts: require('./s3outposts')
 };

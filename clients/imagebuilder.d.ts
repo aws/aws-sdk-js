@@ -349,7 +349,8 @@ declare class Imagebuilder extends Service {
   updateInfrastructureConfiguration(callback?: (err: AWSError, data: Imagebuilder.Types.UpdateInfrastructureConfigurationResponse) => void): Request<Imagebuilder.Types.UpdateInfrastructureConfigurationResponse, AWSError>;
 }
 declare namespace Imagebuilder {
-  export type AccountList = NonEmptyString[];
+  export type AccountId = string;
+  export type AccountList = AccountId[];
   export interface Ami {
     /**
      * The AWS Region of the EC2 AMI. 
@@ -368,6 +369,10 @@ declare namespace Imagebuilder {
      */
     description?: NonEmptyString;
     state?: ImageState;
+    /**
+     *  The account ID of the owner of the AMI. 
+     */
+    accountId?: NonEmptyString;
   }
   export interface AmiDistributionConfiguration {
     /**
@@ -378,6 +383,10 @@ declare namespace Imagebuilder {
      * The description of the distribution configuration. 
      */
     description?: NonEmptyString;
+    /**
+     *  The ID of an account to which you want to distribute an image. 
+     */
+    targetAccountIds?: AccountList;
     /**
      * The tags to apply to AMIs distributed to this Region. 
      */
@@ -394,7 +403,6 @@ declare namespace Imagebuilder {
   export type AmiList = Ami[];
   export type AmiNameString = string;
   export type Arn = string;
-  export type ArnList = Arn[];
   export interface CancelImageCreationRequest {
     /**
      * The Amazon Resource Name (ARN) of the image whose creation you want to cancel.
@@ -751,7 +759,7 @@ declare namespace Imagebuilder {
      */
     components: ComponentConfigurationList;
     /**
-     * The parent image of the image recipe. The value of the string can be the ARN of the parent image or an AMI ID. The format for the ARN follows this example: arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/2019.x.x. The ARN ends with /20xx.x.x, which communicates to EC2 Image Builder that you want to use the latest AMI created in 20xx (year). You can provide the specific version that you want to use, or you can use a wildcard in all of the fields. If you enter an AMI ID for the string value, you must have access to the AMI, and the AMI must be in the same Region in which you are using Image Builder. 
+     * The parent image of the image recipe. The value of the string can be the ARN of the parent image or an AMI ID. The format for the ARN follows this example: arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/xxxx.x.x. You can provide the specific version that you want to use, or you can use a wildcard in all of the fields. If you enter an AMI ID for the string value, you must have access to the AMI, and the AMI must be in the same Region in which you are using Image Builder. 
      */
     parentImage: NonEmptyString;
     /**
@@ -1006,7 +1014,7 @@ declare namespace Imagebuilder {
     /**
      * The License Manager Configuration to associate with the AMI in the specified Region.
      */
-    licenseConfigurationArns?: ArnList;
+    licenseConfigurationArns?: LicenseConfigurationArnList;
   }
   export interface DistributionConfiguration {
     /**
@@ -1104,7 +1112,7 @@ declare namespace Imagebuilder {
   }
   export type EbsIopsInteger = number;
   export type EbsVolumeSizeInteger = number;
-  export type EbsVolumeType = "standard"|"io1"|"gp2"|"sc1"|"st1"|string;
+  export type EbsVolumeType = "standard"|"io1"|"io2"|"gp2"|"sc1"|"st1"|string;
   export type EmptyString = string;
   export interface Filter {
     /**
@@ -1770,6 +1778,8 @@ declare namespace Imagebuilder {
      */
     userGroups?: StringList;
   }
+  export type LicenseConfigurationArn = string;
+  export type LicenseConfigurationArnList = LicenseConfigurationArn[];
   export interface ListComponentBuildVersionsRequest {
     /**
      * The component version Amazon Resource Name (ARN) whose versions you want to list. 
@@ -2150,11 +2160,11 @@ declare namespace Imagebuilder {
   }
   export interface Schedule {
     /**
-     * The expression determines how often EC2 Image Builder evaluates your pipelineExecutionStartCondition.
+     * The cron expression determines how often EC2 Image Builder evaluates your pipelineExecutionStartCondition. For information on how to format a cron expression in Image Builder, see Use cron expressions in EC2 Image Builder.
      */
     scheduleExpression?: NonEmptyString;
     /**
-     * The condition configures when the pipeline should trigger a new image build. When the pipelineExecutionStartCondition is set to EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE, EC2 Image Builder will build a new image only when there are known changes pending. When it is set to EXPRESSION_MATCH_ONLY, it will build a new image every time the CRON expression matches the current time.
+     * The condition configures when the pipeline should trigger a new image build. When the pipelineExecutionStartCondition is set to EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE, and you use semantic version filters on the source image or components in your image recipe, EC2 Image Builder will build a new image only when there are new versions of the image or components in your recipe that match the semantic version filter. When it is set to EXPRESSION_MATCH_ONLY, it will build a new image every time the CRON expression matches the current time. For semantic version syntax, see CreateComponent in the  EC2 Image Builder API Reference.
      */
     pipelineExecutionStartCondition?: PipelineExecutionStartCondition;
   }

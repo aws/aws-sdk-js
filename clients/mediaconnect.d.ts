@@ -60,6 +60,22 @@ declare class MediaConnect extends Service {
    */
   describeFlow(callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowResponse) => void): Request<MediaConnect.Types.DescribeFlowResponse, AWSError>;
   /**
+   * Displays the details of an offering. The response includes the offering description, duration, outbound bandwidth, price, and Amazon Resource Name (ARN).
+   */
+  describeOffering(params: MediaConnect.Types.DescribeOfferingRequest, callback?: (err: AWSError, data: MediaConnect.Types.DescribeOfferingResponse) => void): Request<MediaConnect.Types.DescribeOfferingResponse, AWSError>;
+  /**
+   * Displays the details of an offering. The response includes the offering description, duration, outbound bandwidth, price, and Amazon Resource Name (ARN).
+   */
+  describeOffering(callback?: (err: AWSError, data: MediaConnect.Types.DescribeOfferingResponse) => void): Request<MediaConnect.Types.DescribeOfferingResponse, AWSError>;
+  /**
+   * Displays the details of a reservation. The response includes the reservation name, state, start date and time, and the details of the offering that make up the rest of the reservation (such as price, duration, and outbound bandwidth).
+   */
+  describeReservation(params: MediaConnect.Types.DescribeReservationRequest, callback?: (err: AWSError, data: MediaConnect.Types.DescribeReservationResponse) => void): Request<MediaConnect.Types.DescribeReservationResponse, AWSError>;
+  /**
+   * Displays the details of a reservation. The response includes the reservation name, state, start date and time, and the details of the offering that make up the rest of the reservation (such as price, duration, and outbound bandwidth).
+   */
+  describeReservation(callback?: (err: AWSError, data: MediaConnect.Types.DescribeReservationResponse) => void): Request<MediaConnect.Types.DescribeReservationResponse, AWSError>;
+  /**
    * Grants entitlements to an existing flow.
    */
   grantFlowEntitlements(params: MediaConnect.Types.GrantFlowEntitlementsRequest, callback?: (err: AWSError, data: MediaConnect.Types.GrantFlowEntitlementsResponse) => void): Request<MediaConnect.Types.GrantFlowEntitlementsResponse, AWSError>;
@@ -84,6 +100,22 @@ declare class MediaConnect extends Service {
    */
   listFlows(callback?: (err: AWSError, data: MediaConnect.Types.ListFlowsResponse) => void): Request<MediaConnect.Types.ListFlowsResponse, AWSError>;
   /**
+   * Displays a list of all offerings that are available to this account in the current AWS Region. If you have an active reservation (which means you've purchased an offering that has already started and hasn't expired yet), your account isn't eligible for other offerings.
+   */
+  listOfferings(params: MediaConnect.Types.ListOfferingsRequest, callback?: (err: AWSError, data: MediaConnect.Types.ListOfferingsResponse) => void): Request<MediaConnect.Types.ListOfferingsResponse, AWSError>;
+  /**
+   * Displays a list of all offerings that are available to this account in the current AWS Region. If you have an active reservation (which means you've purchased an offering that has already started and hasn't expired yet), your account isn't eligible for other offerings.
+   */
+  listOfferings(callback?: (err: AWSError, data: MediaConnect.Types.ListOfferingsResponse) => void): Request<MediaConnect.Types.ListOfferingsResponse, AWSError>;
+  /**
+   * Displays a list of all reservations that have been purchased by this account in the current AWS Region. This list includes all reservations in all states (such as active and expired).
+   */
+  listReservations(params: MediaConnect.Types.ListReservationsRequest, callback?: (err: AWSError, data: MediaConnect.Types.ListReservationsResponse) => void): Request<MediaConnect.Types.ListReservationsResponse, AWSError>;
+  /**
+   * Displays a list of all reservations that have been purchased by this account in the current AWS Region. This list includes all reservations in all states (such as active and expired).
+   */
+  listReservations(callback?: (err: AWSError, data: MediaConnect.Types.ListReservationsResponse) => void): Request<MediaConnect.Types.ListReservationsResponse, AWSError>;
+  /**
    * List all tags on an AWS Elemental MediaConnect resource
    */
   listTagsForResource(params: MediaConnect.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: MediaConnect.Types.ListTagsForResourceResponse) => void): Request<MediaConnect.Types.ListTagsForResourceResponse, AWSError>;
@@ -91,6 +123,14 @@ declare class MediaConnect extends Service {
    * List all tags on an AWS Elemental MediaConnect resource
    */
   listTagsForResource(callback?: (err: AWSError, data: MediaConnect.Types.ListTagsForResourceResponse) => void): Request<MediaConnect.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Submits a request to purchase an offering. If you already have an active reservation, you can't purchase another offering.
+   */
+  purchaseOffering(params: MediaConnect.Types.PurchaseOfferingRequest, callback?: (err: AWSError, data: MediaConnect.Types.PurchaseOfferingResponse) => void): Request<MediaConnect.Types.PurchaseOfferingResponse, AWSError>;
+  /**
+   * Submits a request to purchase an offering. If you already have an active reservation, you can't purchase another offering.
+   */
+  purchaseOffering(callback?: (err: AWSError, data: MediaConnect.Types.PurchaseOfferingResponse) => void): Request<MediaConnect.Types.PurchaseOfferingResponse, AWSError>;
   /**
    * Removes an output from an existing flow. This request can be made only on an output that does not have an entitlement associated with it. If the output has an entitlement, you must revoke the entitlement instead. When an entitlement is revoked from a flow, the service automatically removes the associated output.
    */
@@ -354,6 +394,25 @@ declare namespace MediaConnect {
     Flow?: Flow;
     Messages?: Messages;
   }
+  export interface DescribeOfferingRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the offering.
+     */
+    OfferingArn: __string;
+  }
+  export interface DescribeOfferingResponse {
+    Offering?: Offering;
+  }
+  export interface DescribeReservationRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the reservation.
+     */
+    ReservationArn: __string;
+  }
+  export interface DescribeReservationResponse {
+    Reservation?: Reservation;
+  }
+  export type DurationUnits = "MONTHS"|string;
   export interface Encryption {
     /**
      * The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).
@@ -558,6 +617,46 @@ declare namespace MediaConnect {
      */
     NextToken?: __string;
   }
+  export interface ListOfferingsRequest {
+    /**
+     * The maximum number of results to return per API request. For example, you submit a ListOfferings request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 10 results per page.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token that identifies which batch of results that you want to see. For example, you submit a ListOfferings request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListOfferings request a second time and specify the NextToken value.
+     */
+    NextToken?: __string;
+  }
+  export interface ListOfferingsResponse {
+    /**
+     * The token that identifies which batch of results that you want to see. For example, you submit a ListOfferings request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListOfferings request a second time and specify the NextToken value.
+     */
+    NextToken?: __string;
+    /**
+     * A list of offerings that are available to this account in the current AWS Region.
+     */
+    Offerings?: __listOfOffering;
+  }
+  export interface ListReservationsRequest {
+    /**
+     * The maximum number of results to return per API request. For example, you submit a ListReservations request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 10 results per page.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token that identifies which batch of results that you want to see. For example, you submit a ListReservations request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListOfferings request a second time and specify the NextToken value.
+     */
+    NextToken?: __string;
+  }
+  export interface ListReservationsResponse {
+    /**
+     * The token that identifies which batch of results that you want to see. For example, you submit a ListReservations request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListReservations request a second time and specify the NextToken value.
+     */
+    NextToken?: __string;
+    /**
+     * A list of all reservations that have been purchased by this account in the current AWS Region.
+     */
+    Reservations?: __listOfReservation;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The Amazon Resource Name (ARN) that identifies the AWS Elemental MediaConnect resource for which to list the tags.
@@ -617,6 +716,40 @@ declare namespace MediaConnect {
      */
     Errors: __listOf__string;
   }
+  export interface Offering {
+    /**
+     * The type of currency that is used for billing. The currencyCode used for all reservations is US dollars.
+     */
+    CurrencyCode: __string;
+    /**
+     * The length of time that your reservation would be active.
+     */
+    Duration: __integer;
+    /**
+     * The unit of measurement for the duration of the offering.
+     */
+    DurationUnits: DurationUnits;
+    /**
+     * The Amazon Resource Name (ARN) that MediaConnect assigns to the offering.
+     */
+    OfferingArn: __string;
+    /**
+     * A description of the offering.
+     */
+    OfferingDescription: __string;
+    /**
+     * The cost of a single unit. This value, in combination with priceUnits, makes up the rate.
+     */
+    PricePerUnit: __string;
+    /**
+     * The unit of measurement that is used for billing. This value, in combination with pricePerUnit, makes up the rate.
+     */
+    PriceUnits: PriceUnits;
+    /**
+     * A definition of the amount of outbound bandwidth that you would be reserving if you purchase the offering.
+     */
+    ResourceSpecification: ResourceSpecification;
+  }
   export interface Output {
     /**
      * Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
@@ -663,7 +796,25 @@ declare namespace MediaConnect {
      */
     VpcInterfaceAttachment?: VpcInterfaceAttachment;
   }
+  export type PriceUnits = "HOURLY"|string;
   export type Protocol = "zixi-push"|"rtp-fec"|"rtp"|"zixi-pull"|"rist"|string;
+  export interface PurchaseOfferingRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the offering.
+     */
+    OfferingArn: __string;
+    /**
+     * The name that you want to use for the reservation.
+     */
+    ReservationName: __string;
+    /**
+     * The date and time that you want the reservation to begin, in Coordinated Universal Time (UTC). You can specify any date and time between 12:00am on the first day of the current month to the current time on today's date, inclusive. Specify the start in a 24-hour notation. Use the following format: YYYY-MM-DDTHH:mm:SSZ, where T and Z are literal characters. For example, to specify 11:30pm on March 5, 2020, enter 2020-03-05T23:30:00Z.
+     */
+    Start: __string;
+  }
+  export interface PurchaseOfferingResponse {
+    Reservation?: Reservation;
+  }
   export interface RemoveFlowOutputRequest {
     /**
      * The flow that you want to remove an output from.
@@ -728,6 +879,72 @@ declare namespace MediaConnect {
      */
     VpcInterfaceName?: __string;
   }
+  export interface Reservation {
+    /**
+     * The type of currency that is used for billing. The currencyCode used for your reservation is US dollars.
+     */
+    CurrencyCode: __string;
+    /**
+     * The length of time that this reservation is active. MediaConnect defines this value in the offering.
+     */
+    Duration: __integer;
+    /**
+     * The unit of measurement for the duration of the reservation. MediaConnect defines this value in the offering.
+     */
+    DurationUnits: DurationUnits;
+    /**
+     * The day and time that this reservation expires. This value is calculated based on the start date and time that you set and the offering's duration.
+     */
+    End: __string;
+    /**
+     * The Amazon Resource Name (ARN) that MediaConnect assigns to the offering.
+     */
+    OfferingArn: __string;
+    /**
+     * A description of the offering. MediaConnect defines this value in the offering.
+     */
+    OfferingDescription: __string;
+    /**
+     * The cost of a single unit. This value, in combination with priceUnits, makes up the rate. MediaConnect defines this value in the offering.
+     */
+    PricePerUnit: __string;
+    /**
+     * The unit of measurement that is used for billing. This value, in combination with pricePerUnit, makes up the rate. MediaConnect defines this value in the offering.
+     */
+    PriceUnits: PriceUnits;
+    /**
+     * The Amazon Resource Name (ARN) that MediaConnect assigns to the reservation when you purchase an offering.
+     */
+    ReservationArn: __string;
+    /**
+     * The name that you assigned to the reservation when you purchased the offering.
+     */
+    ReservationName: __string;
+    /**
+     * The status of your reservation.
+     */
+    ReservationState: ReservationState;
+    /**
+     * A definition of the amount of outbound bandwidth that you would be reserving if you purchase the offering. MediaConnect defines the values that make up the resourceSpecification in the offering.
+     */
+    ResourceSpecification: ResourceSpecification;
+    /**
+     * The day and time that the reservation becomes active. You set this value when you purchase the offering.
+     */
+    Start: __string;
+  }
+  export type ReservationState = "ACTIVE"|"EXPIRED"|"PROCESSING"|"CANCELED"|string;
+  export interface ResourceSpecification {
+    /**
+     * The amount of outbound bandwidth that is discounted in the offering.
+     */
+    ReservedBitrate?: __integer;
+    /**
+     * The type of resource and the unit that is being billed for.
+     */
+    ResourceType: ResourceType;
+  }
+  export type ResourceType = "Mbps_Outbound_Bandwidth"|string;
   export interface RevokeFlowEntitlementRequest {
     /**
      * The ARN of the entitlement that you want to revoke.
@@ -997,6 +1214,9 @@ declare namespace MediaConnect {
     Subscribers?: __listOf__string;
   }
   export interface UpdateFlowEntitlementResponse {
+    /**
+     * The new configuration of the entitlement that you updated.
+     */
     Entitlement?: Entitlement;
     /**
      * The ARN of the flow that this entitlement was granted on.
@@ -1062,6 +1282,9 @@ declare namespace MediaConnect {
      * The ARN of the flow that is associated with the updated output.
      */
     FlowArn?: __string;
+    /**
+     * The new settings of the output that you updated.
+     */
     Output?: Output;
   }
   export interface UpdateFlowRequest {
@@ -1186,7 +1409,9 @@ declare namespace MediaConnect {
   export type __listOfGrantEntitlementRequest = GrantEntitlementRequest[];
   export type __listOfListedEntitlement = ListedEntitlement[];
   export type __listOfListedFlow = ListedFlow[];
+  export type __listOfOffering = Offering[];
   export type __listOfOutput = Output[];
+  export type __listOfReservation = Reservation[];
   export type __listOfSetSourceRequest = SetSourceRequest[];
   export type __listOfSource = Source[];
   export type __listOfVpcInterface = VpcInterface[];

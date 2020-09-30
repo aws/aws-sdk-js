@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "S3",
-  "description": "Support S3 on Outposts Access Point and Bucket ARNs"
-}

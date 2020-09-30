@@ -1,6 +1,20 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.763.0-->
+<!--LATEST=2.764.0-->
 <!--ENTRYINSERT-->
+
+## 2.764.0
+* feature: ApplicationAutoScaling: This release extends Auto Scaling support for cluster storage of Managed Streaming for Kafka. Auto Scaling monitors and automatically expands storage capacity when a critical usage threshold is met.
+* feature: DataSync: This release enables customers to create s3 location for S3 bucket's located on an AWS Outpost.
+* feature: EMR: Amazon EMR customers can now use EC2 placement group to influence the placement of master nodes in a high-availability (HA) cluster across distinct underlying hardware to improve cluster availability.
+* feature: Imagebuilder: EC2 Image Builder adds support for copying AMIs created by Image Builder to accounts specific to each Region.
+* feature: Iot: AWS IoT Rules Engine adds Timestream action. The Timestream rule action lets you stream time-series data from IoT sensors and applications to Amazon Timestream databases for time series analysis.
+* feature: MediaConnect: MediaConnect now supports reservations to provide a discounted rate for a specific outbound bandwidth over a period of time.
+* feature: Pinpoint: Amazon Pinpoint - Features - Customers can start a journey based on an event being triggered by an endpoint or user.
+* feature: S3: Amazon S3 on Outposts expands object storage to on-premises AWS Outposts environments, enabling you to store and retrieve objects using S3 APIs and features.
+* feature: S3: Support S3 on Outposts Access Point and Bucket ARNs
+* feature: S3Control: Amazon S3 on Outposts expands object storage to on-premises AWS Outposts environments, enabling you to store and retrieve objects using S3 APIs and features.
+* feature: S3Outposts: Amazon S3 on Outposts expands object storage to on-premises AWS Outposts environments, enabling you to store and retrieve objects using S3 APIs and features.
+* feature: SecurityHub: Added several new resource details objects. Added additional details for CloudFront distributions, IAM roles, and IAM access keys. Added a new ResourceRole attribute for resources.
 
 ## 2.763.0
 * feature: Schemas: Added support for schemas of type JSONSchemaDraft4. Added ExportSchema API that converts schemas in AWS Events registry and Discovered schemas from OpenApi3  to JSONSchemaDraft4.

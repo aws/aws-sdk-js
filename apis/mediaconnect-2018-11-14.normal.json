@@ -267,6 +267,82 @@
       ],
       "documentation": "Displays the details of a flow. The response includes the flow ARN, name, and Availability Zone, as well as details about the source, outputs, and entitlements."
     },
+    "DescribeOffering": {
+      "name": "DescribeOffering",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/offerings/{offeringArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeOfferingRequest"
+      },
+      "output": {
+        "shape": "DescribeOfferingResponse",
+        "documentation": "MediaConnect returned the offering details successfully."
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        }
+      ],
+      "documentation": "Displays the details of an offering. The response includes the offering description, duration, outbound bandwidth, price, and Amazon Resource Name (ARN)."
+    },
+    "DescribeReservation": {
+      "name": "DescribeReservation",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/reservations/{reservationArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeReservationRequest"
+      },
+      "output": {
+        "shape": "DescribeReservationResponse",
+        "documentation": "MediaConnect returned the reservation details successfully."
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        }
+      ],
+      "documentation": "Displays the details of a reservation. The response includes the reservation name, state, start date and time, and the details of the offering that make up the rest of the reservation (such as price, duration, and outbound bandwidth)."
+    },
     "GrantFlowEntitlements": {
       "name": "GrantFlowEntitlements",
       "http": {
@@ -381,6 +457,74 @@
       ],
       "documentation": "Displays a list of flows that are associated with this account. This request returns a paginated result."
     },
+    "ListOfferings": {
+      "name": "ListOfferings",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/offerings",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListOfferingsRequest"
+      },
+      "output": {
+        "shape": "ListOfferingsResponse",
+        "documentation": "MediaConnect returned the list of offerings successfully."
+      },
+      "errors": [
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        }
+      ],
+      "documentation": "Displays a list of all offerings that are available to this account in the current AWS Region. If you have an active reservation (which means you've purchased an offering that has already started and hasn't expired yet), your account isn't eligible for other offerings."
+    },
+    "ListReservations": {
+      "name": "ListReservations",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/reservations",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListReservationsRequest"
+      },
+      "output": {
+        "shape": "ListReservationsResponse",
+        "documentation": "MediaConnect returned the list of reservations successfully."
+      },
+      "errors": [
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        }
+      ],
+      "documentation": "Displays a list of all reservations that have been purchased by this account in the current AWS Region. This list includes all reservations in all states (such as active and expired)."
+    },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
       "http": {
@@ -410,6 +554,48 @@
         }
       ],
       "documentation": "List all tags on an AWS Elemental MediaConnect resource"
+    },
+    "PurchaseOffering": {
+      "name": "PurchaseOffering",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/offerings/{offeringArn}",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "PurchaseOfferingRequest"
+      },
+      "output": {
+        "shape": "PurchaseOfferingResponse",
+        "documentation": "AWS Elemental MediaConnect purchased offering successfully."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        }
+      ],
+      "documentation": "Submits a request to purchase an offering. If you already have an active reservation, you can't purchase another offering."
     },
     "RemoveFlowOutput": {
       "name": "RemoveFlowOutput",
@@ -1181,6 +1367,58 @@
         }
       }
     },
+    "DescribeOfferingRequest": {
+      "type": "structure",
+      "members": {
+        "OfferingArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "offeringArn",
+          "documentation": "The Amazon Resource Name (ARN) of the offering."
+        }
+      },
+      "required": [
+        "OfferingArn"
+      ]
+    },
+    "DescribeOfferingResponse": {
+      "type": "structure",
+      "members": {
+        "Offering": {
+          "shape": "Offering",
+          "locationName": "offering"
+        }
+      }
+    },
+    "DescribeReservationRequest": {
+      "type": "structure",
+      "members": {
+        "ReservationArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "reservationArn",
+          "documentation": "The Amazon Resource Name (ARN) of the reservation."
+        }
+      },
+      "required": [
+        "ReservationArn"
+      ]
+    },
+    "DescribeReservationResponse": {
+      "type": "structure",
+      "members": {
+        "Reservation": {
+          "shape": "Reservation",
+          "locationName": "reservation"
+        }
+      }
+    },
+    "DurationUnits": {
+      "type": "string",
+      "enum": [
+        "MONTHS"
+      ]
+    },
     "Encryption": {
       "type": "structure",
       "members": {
@@ -1522,6 +1760,70 @@
         }
       }
     },
+    "ListOfferingsRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "shape": "MaxResults",
+          "location": "querystring",
+          "locationName": "maxResults",
+          "documentation": "The maximum number of results to return per API request. For example, you submit a ListOfferings request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 10 results per page."
+        },
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "nextToken",
+          "documentation": "The token that identifies which batch of results that you want to see. For example, you submit a ListOfferings request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListOfferings request a second time and specify the NextToken value."
+        }
+      }
+    },
+    "ListOfferingsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "__string",
+          "locationName": "nextToken",
+          "documentation": "The token that identifies which batch of results that you want to see. For example, you submit a ListOfferings request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListOfferings request a second time and specify the NextToken value."
+        },
+        "Offerings": {
+          "shape": "__listOfOffering",
+          "locationName": "offerings",
+          "documentation": "A list of offerings that are available to this account in the current AWS Region."
+        }
+      }
+    },
+    "ListReservationsRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "shape": "MaxResults",
+          "location": "querystring",
+          "locationName": "maxResults",
+          "documentation": "The maximum number of results to return per API request. For example, you submit a ListReservations request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 10 results per page."
+        },
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "nextToken",
+          "documentation": "The token that identifies which batch of results that you want to see. For example, you submit a ListReservations request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListOfferings request a second time and specify the NextToken value."
+        }
+      }
+    },
+    "ListReservationsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "__string",
+          "locationName": "nextToken",
+          "documentation": "The token that identifies which batch of results that you want to see. For example, you submit a ListReservations request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListReservations request a second time and specify the NextToken value."
+        },
+        "Reservations": {
+          "shape": "__listOfReservation",
+          "locationName": "reservations",
+          "documentation": "A list of all reservations that have been purchased by this account in the current AWS Region."
+        }
+      }
+    },
     "ListTagsForResourceRequest": {
       "type": "structure",
       "members": {
@@ -1634,6 +1936,62 @@
         "Errors"
       ]
     },
+    "Offering": {
+      "type": "structure",
+      "members": {
+        "CurrencyCode": {
+          "shape": "__string",
+          "locationName": "currencyCode",
+          "documentation": "The type of currency that is used for billing. The currencyCode used for all reservations is US dollars."
+        },
+        "Duration": {
+          "shape": "__integer",
+          "locationName": "duration",
+          "documentation": "The length of time that your reservation would be active."
+        },
+        "DurationUnits": {
+          "shape": "DurationUnits",
+          "locationName": "durationUnits",
+          "documentation": "The unit of measurement for the duration of the offering."
+        },
+        "OfferingArn": {
+          "shape": "__string",
+          "locationName": "offeringArn",
+          "documentation": "The Amazon Resource Name (ARN) that MediaConnect assigns to the offering."
+        },
+        "OfferingDescription": {
+          "shape": "__string",
+          "locationName": "offeringDescription",
+          "documentation": "A description of the offering."
+        },
+        "PricePerUnit": {
+          "shape": "__string",
+          "locationName": "pricePerUnit",
+          "documentation": "The cost of a single unit. This value, in combination with priceUnits, makes up the rate."
+        },
+        "PriceUnits": {
+          "shape": "PriceUnits",
+          "locationName": "priceUnits",
+          "documentation": "The unit of measurement that is used for billing. This value, in combination with pricePerUnit, makes up the rate."
+        },
+        "ResourceSpecification": {
+          "shape": "ResourceSpecification",
+          "locationName": "resourceSpecification",
+          "documentation": "A definition of the amount of outbound bandwidth that you would be reserving if you purchase the offering."
+        }
+      },
+      "documentation": "A savings plan that reserves a certain amount of outbound bandwidth usage at a discounted rate each month over a period of time.",
+      "required": [
+        "CurrencyCode",
+        "OfferingArn",
+        "OfferingDescription",
+        "DurationUnits",
+        "Duration",
+        "PricePerUnit",
+        "ResourceSpecification",
+        "PriceUnits"
+      ]
+    },
     "Output": {
       "type": "structure",
       "members": {
@@ -1699,6 +2057,12 @@
         "Name"
       ]
     },
+    "PriceUnits": {
+      "type": "string",
+      "enum": [
+        "HOURLY"
+      ]
+    },
     "Protocol": {
       "type": "string",
       "enum": [
@@ -1708,6 +2072,42 @@
         "zixi-pull",
         "rist"
       ]
+    },
+    "PurchaseOfferingRequest": {
+      "type": "structure",
+      "members": {
+        "OfferingArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "offeringArn",
+          "documentation": "The Amazon Resource Name (ARN) of the offering."
+        },
+        "ReservationName": {
+          "shape": "__string",
+          "locationName": "reservationName",
+          "documentation": "The name that you want to use for the reservation."
+        },
+        "Start": {
+          "shape": "__string",
+          "locationName": "start",
+          "documentation": "The date and time that you want the reservation to begin, in Coordinated Universal Time (UTC). You can specify any date and time between 12:00am on the first day of the current month to the current time on today's date, inclusive. Specify the start in a 24-hour notation. Use the following format: YYYY-MM-DDTHH:mm:SSZ, where T and Z are literal characters. For example, to specify 11:30pm on March 5, 2020, enter 2020-03-05T23:30:00Z."
+        }
+      },
+      "documentation": "A request to purchase a offering.",
+      "required": [
+        "OfferingArn",
+        "Start",
+        "ReservationName"
+      ]
+    },
+    "PurchaseOfferingResponse": {
+      "type": "structure",
+      "members": {
+        "Reservation": {
+          "shape": "Reservation",
+          "locationName": "reservation"
+        }
+      }
     },
     "RemoveFlowOutputRequest": {
       "type": "structure",
@@ -1821,6 +2221,126 @@
           "documentation": "The name of the VPC interface that was removed."
         }
       }
+    },
+    "Reservation": {
+      "type": "structure",
+      "members": {
+        "CurrencyCode": {
+          "shape": "__string",
+          "locationName": "currencyCode",
+          "documentation": "The type of currency that is used for billing. The currencyCode used for your reservation is US dollars."
+        },
+        "Duration": {
+          "shape": "__integer",
+          "locationName": "duration",
+          "documentation": "The length of time that this reservation is active. MediaConnect defines this value in the offering."
+        },
+        "DurationUnits": {
+          "shape": "DurationUnits",
+          "locationName": "durationUnits",
+          "documentation": "The unit of measurement for the duration of the reservation. MediaConnect defines this value in the offering."
+        },
+        "End": {
+          "shape": "__string",
+          "locationName": "end",
+          "documentation": "The day and time that this reservation expires. This value is calculated based on the start date and time that you set and the offering's duration."
+        },
+        "OfferingArn": {
+          "shape": "__string",
+          "locationName": "offeringArn",
+          "documentation": "The Amazon Resource Name (ARN) that MediaConnect assigns to the offering."
+        },
+        "OfferingDescription": {
+          "shape": "__string",
+          "locationName": "offeringDescription",
+          "documentation": "A description of the offering. MediaConnect defines this value in the offering."
+        },
+        "PricePerUnit": {
+          "shape": "__string",
+          "locationName": "pricePerUnit",
+          "documentation": "The cost of a single unit. This value, in combination with priceUnits, makes up the rate. MediaConnect defines this value in the offering."
+        },
+        "PriceUnits": {
+          "shape": "PriceUnits",
+          "locationName": "priceUnits",
+          "documentation": "The unit of measurement that is used for billing. This value, in combination with pricePerUnit, makes up the rate. MediaConnect defines this value in the offering."
+        },
+        "ReservationArn": {
+          "shape": "__string",
+          "locationName": "reservationArn",
+          "documentation": "The Amazon Resource Name (ARN) that MediaConnect assigns to the reservation when you purchase an offering."
+        },
+        "ReservationName": {
+          "shape": "__string",
+          "locationName": "reservationName",
+          "documentation": "The name that you assigned to the reservation when you purchased the offering."
+        },
+        "ReservationState": {
+          "shape": "ReservationState",
+          "locationName": "reservationState",
+          "documentation": "The status of your reservation."
+        },
+        "ResourceSpecification": {
+          "shape": "ResourceSpecification",
+          "locationName": "resourceSpecification",
+          "documentation": "A definition of the amount of outbound bandwidth that you would be reserving if you purchase the offering. MediaConnect defines the values that make up the resourceSpecification in the offering."
+        },
+        "Start": {
+          "shape": "__string",
+          "locationName": "start",
+          "documentation": "The day and time that the reservation becomes active. You set this value when you purchase the offering."
+        }
+      },
+      "documentation": "A pricing agreement for a discounted rate for a specific outbound bandwidth that your MediaConnect account will use each month over a specific time period. The discounted rate in the reservation applies to outbound bandwidth for all flows from your account until your account reaches the amount of bandwidth in your reservation. If you use more outbound bandwidth than the agreed upon amount in a single month, the overage is charged at the on-demand rate.",
+      "required": [
+        "CurrencyCode",
+        "ReservationState",
+        "OfferingArn",
+        "ReservationArn",
+        "Start",
+        "OfferingDescription",
+        "ReservationName",
+        "End",
+        "Duration",
+        "DurationUnits",
+        "PricePerUnit",
+        "ResourceSpecification",
+        "PriceUnits"
+      ]
+    },
+    "ReservationState": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "EXPIRED",
+        "PROCESSING",
+        "CANCELED"
+      ]
+    },
+    "ResourceSpecification": {
+      "type": "structure",
+      "members": {
+        "ReservedBitrate": {
+          "shape": "__integer",
+          "locationName": "reservedBitrate",
+          "documentation": "The amount of outbound bandwidth that is discounted in the offering."
+        },
+        "ResourceType": {
+          "shape": "ResourceType",
+          "locationName": "resourceType",
+          "documentation": "The type of resource and the unit that is being billed for."
+        }
+      },
+      "documentation": "A definition of what is being billed for, including the type and amount.",
+      "required": [
+        "ResourceType"
+      ]
+    },
+    "ResourceType": {
+      "type": "string",
+      "enum": [
+        "Mbps_Outbound_Bandwidth"
+      ]
     },
     "RevokeFlowEntitlementRequest": {
       "type": "structure",
@@ -2267,7 +2787,8 @@
       "members": {
         "Entitlement": {
           "shape": "Entitlement",
-          "locationName": "entitlement"
+          "locationName": "entitlement",
+          "documentation": "The new configuration of the entitlement that you updated."
         },
         "FlowArn": {
           "shape": "__string",
@@ -2363,7 +2884,8 @@
         },
         "Output": {
           "shape": "Output",
-          "locationName": "output"
+          "locationName": "output",
+          "documentation": "The new settings of the output that you updated."
         }
       }
     },
@@ -2596,10 +3118,22 @@
         "shape": "ListedFlow"
       }
     },
+    "__listOfOffering": {
+      "type": "list",
+      "member": {
+        "shape": "Offering"
+      }
+    },
     "__listOfOutput": {
       "type": "list",
       "member": {
         "shape": "Output"
+      }
+    },
+    "__listOfReservation": {
+      "type": "list",
+      "member": {
+        "shape": "Reservation"
       }
     },
     "__listOfSetSourceRequest": {

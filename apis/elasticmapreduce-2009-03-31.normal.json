@@ -1312,6 +1312,9 @@
         "StepConcurrencyLevel": {
           "shape": "Integer",
           "documentation": "<p>Specifies the number of steps that can be executed concurrently.</p>"
+        },
+        "PlacementGroups": {
+          "shape": "PlacementGroupConfigList"
         }
       },
       "documentation": "<p>The detailed description of the cluster.</p>"
@@ -3640,6 +3643,35 @@
       "max": 2048,
       "min": 0
     },
+    "PlacementGroupConfig": {
+      "type": "structure",
+      "required": [
+        "InstanceRole"
+      ],
+      "members": {
+        "InstanceRole": {
+          "shape": "InstanceRoleType"
+        },
+        "PlacementStrategy": {
+          "shape": "PlacementGroupStrategy"
+        }
+      }
+    },
+    "PlacementGroupConfigList": {
+      "type": "list",
+      "member": {
+        "shape": "PlacementGroupConfig"
+      }
+    },
+    "PlacementGroupStrategy": {
+      "type": "string",
+      "enum": [
+        "SPREAD",
+        "PARTITION",
+        "CLUSTER",
+        "NONE"
+      ]
+    },
     "PlacementType": {
       "type": "structure",
       "members": {
@@ -3942,6 +3974,9 @@
         "ManagedScalingPolicy": {
           "shape": "ManagedScalingPolicy",
           "documentation": "<p> The specified managed scaling policy for an Amazon EMR cluster. </p>"
+        },
+        "PlacementGroupConfigs": {
+          "shape": "PlacementGroupConfigList"
         }
       },
       "documentation": "<p> Input to the <a>RunJobFlow</a> operation. </p>"
