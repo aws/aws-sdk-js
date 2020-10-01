@@ -1120,6 +1120,7 @@ declare namespace Glue {
     CrawlerName?: NameString;
   }
   export type ActionList = Action[];
+  export type AdditionalPlanOptionsMap = {[key: string]: GenericString};
   export type AttemptCount = number;
   export interface BatchCreatePartitionRequest {
     /**
@@ -4076,6 +4077,10 @@ declare namespace Glue {
      * The programming language of the code to perform the mapping.
      */
     Language?: Language;
+    /**
+     * A map to hold additional optional key-value parameters.
+     */
+    AdditionalPlanOptionsMap?: AdditionalPlanOptionsMap;
   }
   export interface GetPlanResponse {
     /**

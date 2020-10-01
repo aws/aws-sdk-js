@@ -196,11 +196,11 @@ declare class AppSync extends Service {
    */
   getType(callback?: (err: AWSError, data: AppSync.Types.GetTypeResponse) => void): Request<AppSync.Types.GetTypeResponse, AWSError>;
   /**
-   * Lists the API keys for a given API.  API keys are deleted automatically sometime after they expire. However, they may still be included in the response until they have actually been deleted. You can safely call DeleteApiKey to manually delete a key before it's automatically deleted. 
+   * Lists the API keys for a given API.  API keys are deleted automatically 60 days after they expire. However, they may still be included in the response until they have actually been deleted. You can safely call DeleteApiKey to manually delete a key before it's automatically deleted. 
    */
   listApiKeys(params: AppSync.Types.ListApiKeysRequest, callback?: (err: AWSError, data: AppSync.Types.ListApiKeysResponse) => void): Request<AppSync.Types.ListApiKeysResponse, AWSError>;
   /**
-   * Lists the API keys for a given API.  API keys are deleted automatically sometime after they expire. However, they may still be included in the response until they have actually been deleted. You can safely call DeleteApiKey to manually delete a key before it's automatically deleted. 
+   * Lists the API keys for a given API.  API keys are deleted automatically 60 days after they expire. However, they may still be included in the response until they have actually been deleted. You can safely call DeleteApiKey to manually delete a key before it's automatically deleted. 
    */
   listApiKeys(callback?: (err: AWSError, data: AppSync.Types.ListApiKeysResponse) => void): Request<AppSync.Types.ListApiKeysResponse, AWSError>;
   /**
@@ -292,11 +292,11 @@ declare class AppSync extends Service {
    */
   updateApiCache(callback?: (err: AWSError, data: AppSync.Types.UpdateApiCacheResponse) => void): Request<AppSync.Types.UpdateApiCacheResponse, AWSError>;
   /**
-   * Updates an API key.
+   * Updates an API key. The key can be updated while it is not deleted.
    */
   updateApiKey(params: AppSync.Types.UpdateApiKeyRequest, callback?: (err: AWSError, data: AppSync.Types.UpdateApiKeyResponse) => void): Request<AppSync.Types.UpdateApiKeyResponse, AWSError>;
   /**
-   * Updates an API key.
+   * Updates an API key. The key can be updated while it is not deleted.
    */
   updateApiKey(callback?: (err: AWSError, data: AppSync.Types.UpdateApiKeyResponse) => void): Request<AppSync.Types.UpdateApiKeyResponse, AWSError>;
   /**
@@ -398,6 +398,10 @@ declare namespace AppSync {
      * The time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour.
      */
     expires?: Long;
+    /**
+     * The time after which the API key is deleted. The date is represented as seconds since the epoch, rounded down to the nearest hour.
+     */
+    deletes?: Long;
   }
   export type ApiKeys = ApiKey[];
   export type AuthenticationType = "API_KEY"|"AWS_IAM"|"AMAZON_COGNITO_USER_POOLS"|"OPENID_CONNECT"|string;
@@ -1089,6 +1093,10 @@ declare namespace AppSync {
      * A flag representing whether X-Ray tracing is enabled for this GraphqlApi.
      */
     xrayEnabled?: Boolean;
+    /**
+     * The ARN of the AWS WAF ACL associated with this GraphqlApi if one exists.
+     */
+    wafWebAclArn?: String;
   }
   export type GraphqlApis = GraphqlApi[];
   export interface HttpDataSourceConfig {

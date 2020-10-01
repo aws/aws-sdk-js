@@ -1440,6 +1440,11 @@
           "shape": "__string",
           "locationName": "zookeeperConnectString",
           "documentation": "\n            <p>The connection string to use to connect to the Apache ZooKeeper cluster.</p>\n         "
+        },
+        "ZookeeperConnectStringTls": {
+          "shape": "__string",
+          "locationName": "zookeeperConnectStringTls",
+          "documentation": "\n            <p>The connection string to use to connect to zookeeper cluster on Tls port.</p>\n         "
         }
       },
       "documentation": "\n            <p>Returns information about a cluster.</p>\n         "

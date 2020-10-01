@@ -609,6 +609,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     ZookeeperConnectString?: __string;
+    /**
+     * 
+            The connection string to use to connect to zookeeper cluster on Tls port.
+         
+     */
+    ZookeeperConnectStringTls?: __string;
   }
   export interface ClusterOperationInfo {
     /**

@@ -709,6 +709,9 @@ declare namespace EMR {
      * Specifies the number of steps that can be executed concurrently.
      */
     StepConcurrencyLevel?: Integer;
+    /**
+     * Placement group configured for an Amazon EMR cluster.
+     */
     PlacementGroups?: PlacementGroupConfigList;
   }
   export type ClusterId = string;
@@ -2269,7 +2272,13 @@ declare namespace EMR {
   }
   export type OptionalArnType = string;
   export interface PlacementGroupConfig {
+    /**
+     * Role of the instance in the cluster. Starting with Amazon EMR version 5.23.0, the only supported instance role is MASTER.
+     */
     InstanceRole: InstanceRoleType;
+    /**
+     * EC2 Placement Group strategy associated with instance role. Starting with Amazon EMR version 5.23.0, the only supported placement strategy is SPREAD for the MASTER instance role.
+     */
     PlacementStrategy?: PlacementGroupStrategy;
   }
   export type PlacementGroupConfigList = PlacementGroupConfig[];
@@ -2487,6 +2496,9 @@ declare namespace EMR {
      *  The specified managed scaling policy for an Amazon EMR cluster. 
      */
     ManagedScalingPolicy?: ManagedScalingPolicy;
+    /**
+     * The specified placement group configuration for an Amazon EMR cluster.
+     */
     PlacementGroupConfigs?: PlacementGroupConfigList;
   }
   export interface RunJobFlowOutput {

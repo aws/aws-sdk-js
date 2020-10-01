@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.764.0-->
+<!--LATEST=2.765.0-->
 <!--ENTRYINSERT-->
+
+## 2.765.0
+* feature: AppSync: Exposes the wafWebAclArn field on GraphQL api records. The wafWebAclArn field contains the amazon resource name of a WAF Web ACL if the AWS AppSync API is associated with one.
+* feature: Glue: Adding additional optional map parameter to get-plan api
+* feature: Kafka: Added support for Enabling Zookeeper Encryption in Transit for AWS MSK.
+* feature: QuickSight: QuickSight now supports connecting to AWS Timestream data source
+* feature: WAFV2: AWS WAF is now available for AWS AppSync GraphQL APIs. AWS WAF protects against malicious attacks with AWS Managed Rules or your own custom rules. For more information see the AWS WAF Developer Guide.
 
 ## 2.764.0
 * feature: ApplicationAutoScaling: This release extends Auto Scaling support for cluster storage of Managed Streaming for Kafka. Auto Scaling monitors and automatically expands storage capacity when a critical usage threshold is met.

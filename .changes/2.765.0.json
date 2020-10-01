@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "AppSync",
+        "description": "Exposes the wafWebAclArn field on GraphQL api records. The wafWebAclArn field contains the amazon resource name of a WAF Web ACL if the AWS AppSync API is associated with one."
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "Adding additional optional map parameter to get-plan api"
+    },
+    {
+        "type": "feature",
+        "category": "Kafka",
+        "description": "Added support for Enabling Zookeeper Encryption in Transit for AWS MSK."
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "QuickSight now supports connecting to AWS Timestream data source"
+    },
+    {
+        "type": "feature",
+        "category": "WAFV2",
+        "description": "AWS WAF is now available for AWS AppSync GraphQL APIs. AWS WAF protects against malicious attacks with AWS Managed Rules or your own custom rules. For more information see the AWS WAF Developer Guide."
+    }
+]

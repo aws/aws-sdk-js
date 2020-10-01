@@ -1314,7 +1314,8 @@
           "documentation": "<p>Specifies the number of steps that can be executed concurrently.</p>"
         },
         "PlacementGroups": {
-          "shape": "PlacementGroupConfigList"
+          "shape": "PlacementGroupConfigList",
+          "documentation": "<p>Placement group configured for an Amazon EMR cluster.</p>"
         }
       },
       "documentation": "<p>The detailed description of the cluster.</p>"
@@ -3650,12 +3651,15 @@
       ],
       "members": {
         "InstanceRole": {
-          "shape": "InstanceRoleType"
+          "shape": "InstanceRoleType",
+          "documentation": "<p>Role of the instance in the cluster.</p> <p>Starting with Amazon EMR version 5.23.0, the only supported instance role is <code>MASTER</code>.</p>"
         },
         "PlacementStrategy": {
-          "shape": "PlacementGroupStrategy"
+          "shape": "PlacementGroupStrategy",
+          "documentation": "<p>EC2 Placement Group strategy associated with instance role.</p> <p>Starting with Amazon EMR version 5.23.0, the only supported placement strategy is <code>SPREAD</code> for the <code>MASTER</code> instance role.</p>"
         }
-      }
+      },
+      "documentation": "<p>Placement group configuration for an Amazon EMR cluster. The configuration specifies the placement strategy that can be applied to instance roles during cluster creation.</p> <p>To use this configuration, consider attaching managed policy AmazonElasticMapReducePlacementGroupPolicy to the EMR role.</p>"
     },
     "PlacementGroupConfigList": {
       "type": "list",
@@ -3976,7 +3980,8 @@
           "documentation": "<p> The specified managed scaling policy for an Amazon EMR cluster. </p>"
         },
         "PlacementGroupConfigs": {
-          "shape": "PlacementGroupConfigList"
+          "shape": "PlacementGroupConfigList",
+          "documentation": "<p>The specified placement group configuration for an Amazon EMR cluster.</p>"
         }
       },
       "documentation": "<p> Input to the <a>RunJobFlow</a> operation. </p>"
