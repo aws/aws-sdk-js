@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "lib",
+  "description": "call customBackoff() only upon retryable errors"
+}
