@@ -4722,6 +4722,10 @@
           "shape": "String",
           "documentation": "<p>For supported engines, indicates that the DB instance should be associated with the specified CharacterSet.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The character set is managed by the DB cluster. For more information, see <code>CreateDBCluster</code>.</p>"
         },
+        "NcharCharacterSetName": {
+          "shape": "String",
+          "documentation": "<p>The name of the NCHAR character set for the Oracle DB instance.</p>"
+        },
         "PubliclyAccessible": {
           "shape": "BooleanOptional",
           "documentation": "<p>A value that indicates whether the DB instance is publicly accessible.</p> <p>When the DB instance is publicly accessible, its DNS endpoint resolves to the private IP address from within the DB instance's VPC, and to the public IP address from outside of the DB instance's VPC. Access to the DB instance is ultimately controlled by the security group it uses, and that public access is not permitted if the security group assigned to the DB instance doesn't permit it.</p> <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a private IP address.</p> <p>Default: The default behavior varies depending on whether <code>DBSubnetGroupName</code> is specified.</p> <p>If <code>DBSubnetGroupName</code> isn't specified, and <code>PubliclyAccessible</code> isn't specified, the following applies:</p> <ul> <li> <p>If the default VPC in the target region doesn’t have an Internet gateway attached to it, the DB instance is private.</p> </li> <li> <p>If the default VPC in the target region has an Internet gateway attached to it, the DB instance is public.</p> </li> </ul> <p>If <code>DBSubnetGroupName</code> is specified, and <code>PubliclyAccessible</code> isn't specified, the following applies:</p> <ul> <li> <p>If the subnets are part of a VPC that doesn’t have an Internet gateway attached to it, the DB instance is private.</p> </li> <li> <p>If the subnets are part of a VPC that has an Internet gateway attached to it, the DB instance is public.</p> </li> </ul>"
@@ -6030,7 +6034,11 @@
         },
         "SupportedCharacterSets": {
           "shape": "SupportedCharacterSetsList",
-          "documentation": "<p> A list of the character sets supported by this engine for the <code>CharacterSetName</code> parameter of the <code>CreateDBInstance</code> action. </p>"
+          "documentation": "<p>A list of the character sets supported by this engine for the <code>CharacterSetName</code> parameter of the <code>CreateDBInstance</code> operation. </p>"
+        },
+        "SupportedNcharCharacterSets": {
+          "shape": "SupportedCharacterSetsList",
+          "documentation": "<p>A list of the character sets supported by the Oracle DB engine for the <code>NcharCharacterSetName</code> parameter of the <code>CreateDBInstance</code> operation. </p>"
         },
         "ValidUpgradeTarget": {
           "shape": "ValidUpgradeTargetList",
@@ -6218,6 +6226,10 @@
         "CharacterSetName": {
           "shape": "String",
           "documentation": "<p>If present, specifies the name of the character set that this instance is associated with.</p>"
+        },
+        "NcharCharacterSetName": {
+          "shape": "String",
+          "documentation": "<p>The name of the NCHAR character set for the Oracle DB instance. This character set specifies the Unicode encoding for data stored in table columns of type NCHAR, NCLOB, or NVARCHAR2. </p>"
         },
         "SecondaryAvailabilityZone": {
           "shape": "String",

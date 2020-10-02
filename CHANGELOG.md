@@ -1,6 +1,16 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.765.0-->
+<!--LATEST=2.766.0-->
 <!--ENTRYINSERT-->
+
+## 2.766.0
+* bugfix: lib: call customBackoff() only upon retryable errors
+* feature: Batch: Support tagging for Batch resources (compute environment, job queue, job definition and job) and tag based access control on Batch APIs
+* feature: ELBv2: This release adds support for tagging listeners, rules, and target groups on creation. This release also supported tagging operations through tagging api's for listeners and rules.
+* feature: PersonalizeEvents: Adds new APIs to write item and user records to Datasets.
+* feature: RDS: Adds the NCHAR Character Set ID parameter to the CreateDbInstance API for RDS Oracle.
+* feature: S3: Amazon S3 Object Ownership is a new S3 feature that enables bucket owners to automatically assume ownership of objects that are uploaded to their buckets by other AWS Accounts.
+* feature: ServiceDiscovery: Added support for optional parameters for DiscoverInstances API in AWS Cloud Map
+* feature: docs: Update s_code Script Handling
 
 ## 2.765.0
 * feature: AppSync: Exposes the wafWebAclArn field on GraphQL api records. The wafWebAclArn field contains the amazon resource name of a WAF Web ACL if the AWS AppSync API is associated with one.

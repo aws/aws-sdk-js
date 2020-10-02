@@ -100,6 +100,14 @@ declare class Batch extends Service {
    */
   listJobs(callback?: (err: AWSError, data: Batch.Types.ListJobsResponse) => void): Request<Batch.Types.ListJobsResponse, AWSError>;
   /**
+   * List the tags for an AWS Batch resource. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
+   */
+  listTagsForResource(params: Batch.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Batch.Types.ListTagsForResourceResponse) => void): Request<Batch.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * List the tags for an AWS Batch resource. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Batch.Types.ListTagsForResourceResponse) => void): Request<Batch.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Registers an AWS Batch job definition.
    */
   registerJobDefinition(params: Batch.Types.RegisterJobDefinitionRequest, callback?: (err: AWSError, data: Batch.Types.RegisterJobDefinitionResponse) => void): Request<Batch.Types.RegisterJobDefinitionResponse, AWSError>;
@@ -116,6 +124,14 @@ declare class Batch extends Service {
    */
   submitJob(callback?: (err: AWSError, data: Batch.Types.SubmitJobResponse) => void): Request<Batch.Types.SubmitJobResponse, AWSError>;
   /**
+   * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
+   */
+  tagResource(params: Batch.Types.TagResourceRequest, callback?: (err: AWSError, data: Batch.Types.TagResourceResponse) => void): Request<Batch.Types.TagResourceResponse, AWSError>;
+  /**
+   * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
+   */
+  tagResource(callback?: (err: AWSError, data: Batch.Types.TagResourceResponse) => void): Request<Batch.Types.TagResourceResponse, AWSError>;
+  /**
    * Terminates a job in a job queue. Jobs that are in the STARTING or RUNNING state are terminated, which causes them to transition to FAILED. Jobs that have not progressed to the STARTING state are cancelled.
    */
   terminateJob(params: Batch.Types.TerminateJobRequest, callback?: (err: AWSError, data: Batch.Types.TerminateJobResponse) => void): Request<Batch.Types.TerminateJobResponse, AWSError>;
@@ -123,6 +139,14 @@ declare class Batch extends Service {
    * Terminates a job in a job queue. Jobs that are in the STARTING or RUNNING state are terminated, which causes them to transition to FAILED. Jobs that have not progressed to the STARTING state are cancelled.
    */
   terminateJob(callback?: (err: AWSError, data: Batch.Types.TerminateJobResponse) => void): Request<Batch.Types.TerminateJobResponse, AWSError>;
+  /**
+   * Deletes specified tags from an AWS Batch resource.
+   */
+  untagResource(params: Batch.Types.UntagResourceRequest, callback?: (err: AWSError, data: Batch.Types.UntagResourceResponse) => void): Request<Batch.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Deletes specified tags from an AWS Batch resource.
+   */
+  untagResource(callback?: (err: AWSError, data: Batch.Types.UntagResourceResponse) => void): Request<Batch.Types.UntagResourceResponse, AWSError>;
   /**
    * Updates an AWS Batch compute environment.
    */
@@ -250,6 +274,10 @@ declare namespace Batch {
      */
     ecsClusterArn: String;
     /**
+     * The tags applied to the compute environment.
+     */
+    tags?: TagrisTagsMap;
+    /**
      * The type of the compute environment.
      */
     type?: CEType;
@@ -332,7 +360,7 @@ declare namespace Batch {
      */
     instanceRole: String;
     /**
-     * Key-value pair tags to be applied to resources that are launched in the compute environment. For AWS Batch, these take the form of "String1": "String2", where String1 is the tag key and String2 is the tag value—for example, { "Name": "AWS Batch Instance - C4OnDemand" }.
+     * Key-value pair tags to be applied to resources that are launched in the compute environment. For AWS Batch, these take the form of "String1": "String2", where String1 is the tag key and String2 is the tag value—for example, { "Name": "AWS Batch Instance - C4OnDemand" }. These tags can not be updated or removed after the compute environment has been created; any changes require creating a new compute environment and removing the old compute environment. These tags are not seen when using the AWS Batch ListTagsForResource API operation.
      */
     tags?: TagsMap;
     /**
@@ -372,11 +400,11 @@ declare namespace Batch {
      */
     image?: String;
     /**
-     * The number of VCPUs allocated for the job.
+     * The number of VCPUs allocated for the job. This is a required parameter.
      */
     vcpus?: Integer;
     /**
-     * The number of MiB of memory reserved for the job.
+     * The number of MiB of memory reserved for the job. This is a required parameter.
      */
     memory?: Integer;
     /**
@@ -388,7 +416,7 @@ declare namespace Batch {
      */
     jobRoleArn?: String;
     /**
-     * The Amazon Resource Name (ARN) of the execution role that AWS Batch can assume. For more information, see Amazon ECS task execution IAM role.
+     * The Amazon Resource Name (ARN) of the execution role that AWS Batch can assume. For more information, see AWS Batch execution IAM role.
      */
     executionRoleArn?: String;
     /**
@@ -512,7 +540,7 @@ declare namespace Batch {
      */
     jobRoleArn?: String;
     /**
-     * The Amazon Resource Name (ARN) of the execution role that AWS Batch can assume. For more information, see Amazon ECS task execution IAM role.
+     * The Amazon Resource Name (ARN) of the execution role that AWS Batch can assume. For more information, see AWS Batch execution IAM role.
      */
     executionRoleArn?: String;
     /**
@@ -595,6 +623,10 @@ declare namespace Batch {
      * The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf. If your specified role has a path other than /, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path.  Depending on how you created your AWS Batch service role, its ARN may contain the service-role path prefix. When you only specify the name of the service role, AWS Batch assumes that your ARN does not use the service-role path prefix. Because of this, we recommend that you specify the full ARN of your service role when you create compute environments. 
      */
     serviceRole: String;
+    /**
+     * The tags that you apply to the compute environment to help you categorize and organize your resources. Each tag consists of a key and an optional value. For more information, see Tagging AWS Resources in AWS General Reference. These tags can be updated or removed using the TagResource and UntagResource API operations. These tags do not propagate to the underlying compute resources.
+     */
+    tags?: TagrisTagsMap;
   }
   export interface CreateComputeEnvironmentResponse {
     /**
@@ -623,6 +655,10 @@ declare namespace Batch {
      * The set of compute environments mapped to a job queue and their order relative to each other. The job scheduler uses this parameter to determine which compute environment should execute a given job. Compute environments must be in the VALID state before you can associate them with a job queue. You can associate up to three compute environments with a job queue.
      */
     computeEnvironmentOrder: ComputeEnvironmentOrders;
+    /**
+     * The tags that you apply to the job queue to help you categorize and organize your resources. Each tag consists of a key and an optional value. For more information, see Tagging AWS Resources in AWS General Reference.
+     */
+    tags?: TagrisTagsMap;
   }
   export interface CreateJobQueueResponse {
     /**
@@ -818,6 +854,10 @@ declare namespace Batch {
      * An object with various properties specific to multi-node parallel jobs.
      */
     nodeProperties?: NodeProperties;
+    /**
+     * The tags applied to the job definition.
+     */
+    tags?: TagrisTagsMap;
   }
   export type JobDefinitionList = JobDefinition[];
   export type JobDefinitionType = "container"|"multinode"|string;
@@ -833,6 +873,10 @@ declare namespace Batch {
   }
   export type JobDependencyList = JobDependency[];
   export interface JobDetail {
+    /**
+     * The Amazon Resource Name (ARN) of the job.
+     */
+    jobArn?: String;
     /**
      * The name of the job.
      */
@@ -905,6 +949,10 @@ declare namespace Batch {
      * The timeout configuration for the job.
      */
     timeout?: JobTimeout;
+    /**
+     * The tags applied to the job.
+     */
+    tags?: TagrisTagsMap;
   }
   export type JobDetailList = JobDetail[];
   export interface JobQueueDetail {
@@ -936,10 +984,18 @@ declare namespace Batch {
      * The compute environments that are attached to the job queue and the order in which job placement is preferred. Compute environments are selected for job placement in ascending order.
      */
     computeEnvironmentOrder: ComputeEnvironmentOrders;
+    /**
+     * The tags applied to the job queue.
+     */
+    tags?: TagrisTagsMap;
   }
   export type JobQueueDetailList = JobQueueDetail[];
   export type JobStatus = "SUBMITTED"|"PENDING"|"RUNNABLE"|"STARTING"|"RUNNING"|"SUCCEEDED"|"FAILED"|string;
   export interface JobSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the job.
+     */
+    jobArn?: String;
     /**
      * The ID of the job.
      */
@@ -1018,7 +1074,7 @@ declare namespace Batch {
      */
     devices?: DevicesList;
     /**
-     * Run an init process inside the container that forwards signals and reaps processes. This parameter maps to the --init option to docker run. This parameter requires version 1.25 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: sudo docker version | grep "Server API version" 
+     * If true, run an init process inside the container that forwards signals and reaps processes. This parameter maps to the --init option to docker run. This parameter requires version 1.25 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: sudo docker version | grep "Server API version" 
      */
     initProcessEnabled?: Boolean;
     /**
@@ -1074,9 +1130,21 @@ declare namespace Batch {
      */
     nextToken?: String;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
+     */
+    resourceArn: String;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The tags for the resource.
+     */
+    tags?: TagrisTagsMap;
+  }
   export interface LogConfiguration {
     /**
-     * The log driver to use for the container. The valid values listed for this parameter are log drivers that the Amazon ECS container agent can communicate with by default. The supported log drivers are awslogs, fluentd, gelf, json-file, journald, logentries, syslog, and splunk. For more information about using the awslogs log driver, see Using the awslogs Log Driver in the Amazon Elastic Container Service Developer Guide.  If you have a custom driver that is not listed earlier that you would like to work with the Amazon ECS container agent, you can fork the Amazon ECS container agent project that is available on GitHub and customize it to work with that driver. We encourage you to submit pull requests for changes that you would like to have included. However, Amazon Web Services does not currently support running modified copies of this software.  This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: sudo docker version | grep "Server API version" 
+     * The log driver to use for the container. The valid values listed for this parameter are log drivers that the Amazon ECS container agent can communicate with by default. The supported log drivers are awslogs, fluentd, gelf, json-file, journald, logentries, syslog, and splunk.  awslogs  Specifies the Amazon CloudWatch Logs logging driver. For more information, see Using the awslogs Log Driver in the AWS Batch User Guide and Amazon CloudWatch Logs logging driver in the Docker documentation.  fluentd  Specifies the Fluentd logging driver. For more information, including usage and options, see Fluentd logging driver in the Docker documentation.  gelf  Specifies the Graylog Extended Format (GELF) logging driver. For more information, including usage and options, see Graylog Extended Format logging driver in the Docker documentation.  journald  Specifies the journald logging driver. For more information, including usage and options, see Journald logging driver in the Docker documentation.  json-file  Specifies the JSON file logging driver. For more information, including usage and options, see JSON File logging driver in the Docker documentation.  splunk  Specifies the Splunk logging driver. For more information, including usage and options, see Splunk logging driver in the Docker documentation.  syslog  Specifies the syslog logging driver. For more information, including usage and options, see Syslog logging driver in the Docker documentation.    If you have a custom driver that is not listed earlier that you would like to work with the Amazon ECS container agent, you can fork the Amazon ECS container agent project that is available on GitHub and customize it to work with that driver. We encourage you to submit pull requests for changes that you would like to have included. However, Amazon Web Services does not currently support running modified copies of this software.  This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log into your container instance and run the following command: sudo docker version | grep "Server API version" 
      */
     logDriver: LogDriver;
     /**
@@ -1084,7 +1152,7 @@ declare namespace Batch {
      */
     options?: LogConfigurationOptionsMap;
     /**
-     * The secrets to pass to the log configuration. For more information, see Specifying Sensitive Data in the Amazon Elastic Container Service Developer Guide.
+     * The secrets to pass to the log configuration. For more information, see Specifying Sensitive Data in the AWS Batch User Guide.
      */
     secretOptions?: SecretList;
   }
@@ -1221,6 +1289,10 @@ declare namespace Batch {
      * The timeout configuration for jobs that are submitted with this job definition, after which AWS Batch terminates your jobs if they have not finished. If a job is terminated due to a timeout, it is not retried. The minimum value for the timeout is 60 seconds. Any timeout configuration that is specified during a SubmitJob operation overrides the timeout configuration defined here. For more information, see Job Timeouts in the Amazon Elastic Container Service Developer Guide.
      */
     timeout?: JobTimeout;
+    /**
+     * The tags that you apply to the job definition to help you categorize and organize your resources. Each tag consists of a key and an optional value. For more information, see Tagging AWS Resources in AWS General Reference.
+     */
+    tags?: TagrisTagsMap;
   }
   export interface RegisterJobDefinitionResponse {
     /**
@@ -1308,8 +1380,16 @@ declare namespace Batch {
      * The timeout configuration for this SubmitJob operation. You can specify a timeout duration after which AWS Batch terminates your jobs if they have not finished. If a job is terminated due to a timeout, it is not retried. The minimum value for the timeout is 60 seconds. This configuration overrides any timeout configuration specified in the job definition. For array jobs, child jobs have the same timeout configuration as the parent job. For more information, see Job Timeouts in the Amazon Elastic Container Service Developer Guide.
      */
     timeout?: JobTimeout;
+    /**
+     * The tags that you apply to the job request to help you categorize and organize your resources. Each tag consists of a key and an optional value. For more information, see Tagging AWS Resources in AWS General Reference.
+     */
+    tags?: TagrisTagsMap;
   }
   export interface SubmitJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) for the job.
+     */
+    jobArn?: String;
     /**
      * The name of the job.
      */
@@ -1319,6 +1399,22 @@ declare namespace Batch {
      */
     jobId: String;
   }
+  export type TagKey = string;
+  export type TagKeysList = TagKey[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource to which to add tags. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
+     */
+    resourceArn: String;
+    /**
+     * The tags that you apply to the resource to help you categorize and organize your resources. Each tag consists of a key and an optional value. For more information, see Tagging AWS Resources in AWS General Reference.
+     */
+    tags: TagrisTagsMap;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
+  export type TagrisTagsMap = {[key: string]: TagValue};
   export type TagsMap = {[key: string]: String};
   export interface TerminateJobRequest {
     /**
@@ -1334,7 +1430,7 @@ declare namespace Batch {
   }
   export interface Tmpfs {
     /**
-     * The absolute file path where the tmpfs volume is to be mounted.
+     * The absolute file path in the container where the tmpfs volume is to be mounted.
      */
     containerPath: String;
     /**
@@ -1342,7 +1438,7 @@ declare namespace Batch {
      */
     size: Integer;
     /**
-     * The list of tmpfs volume mount options. Valid values: "defaults" | "ro" | "rw" | "suid" | "nosuid" | "dev" | "nodev" | "exec" | "noexec" | "sync" | "async" | "dirsync" | "remount" | "mand" | "nomand" | "atime" | "noatime" | "diratime" | "nodiratime" | "bind" | "rbind" | "unbindable" | "runbindable" | "private" | "rprivate" | "shared" | "rshared" | "slave" | "rslave" | "relatime" | "norelatime" | "strictatime" | "nostrictatime" | "mode" | "uid" | "gid" | "nr_inodes" | "nr_blocks" | "mpol" 
+     * The list of tmpfs volume mount options. Valid values: "defaults" | "ro" | "rw" | "suid" | "nosuid" | "dev" | "nodev" | "exec" | "noexec" | "sync" | "async" | "dirsync" | "remount" | "mand" | "nomand" | "atime" | "noatime" | "diratime" | "nodiratime" | "bind" | "rbind" | "unbindable" | "runbindable" | "private" | "rprivate" | "shared" | "rshared" | "slave" | "rslave" | "relatime" | "norelatime" | "strictatime" | "nostrictatime" | "mode" | "uid" | "gid" | "nr_inodes" | "nr_blocks" | "mpol"
      */
     mountOptions?: StringList;
   }
@@ -1362,6 +1458,18 @@ declare namespace Batch {
     softLimit: Integer;
   }
   export type Ulimits = Ulimit[];
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource from which to delete tags. AWS Batch resources that support tags are compute environments, jobs, job definitions, and job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are not supported.
+     */
+    resourceArn: String;
+    /**
+     * The keys of the tags to be removed.
+     */
+    tagKeys: TagKeysList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateComputeEnvironmentRequest {
     /**
      * The name or full Amazon Resource Name (ARN) of the compute environment to update.

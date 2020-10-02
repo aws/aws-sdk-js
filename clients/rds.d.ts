@@ -1821,6 +1821,10 @@ declare namespace RDS {
      */
     CharacterSetName?: String;
     /**
+     * The name of the NCHAR character set for the Oracle DB instance.
+     */
+    NcharCharacterSetName?: String;
+    /**
      * A value that indicates whether the DB instance is publicly accessible. When the DB instance is publicly accessible, its DNS endpoint resolves to the private IP address from within the DB instance's VPC, and to the public IP address from outside of the DB instance's VPC. Access to the DB instance is ultimately controlled by the security group it uses, and that public access is not permitted if the security group assigned to the DB instance doesn't permit it. When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a private IP address. Default: The default behavior varies depending on whether DBSubnetGroupName is specified. If DBSubnetGroupName isn't specified, and PubliclyAccessible isn't specified, the following applies:   If the default VPC in the target region doesn’t have an Internet gateway attached to it, the DB instance is private.   If the default VPC in the target region has an Internet gateway attached to it, the DB instance is public.   If DBSubnetGroupName is specified, and PubliclyAccessible isn't specified, the following applies:   If the subnets are part of a VPC that doesn’t have an Internet gateway attached to it, the DB instance is private.   If the subnets are part of a VPC that has an Internet gateway attached to it, the DB instance is public.  
      */
     PubliclyAccessible?: BooleanOptional;
@@ -2852,9 +2856,13 @@ declare namespace RDS {
      */
     DefaultCharacterSet?: CharacterSet;
     /**
-     *  A list of the character sets supported by this engine for the CharacterSetName parameter of the CreateDBInstance action. 
+     * A list of the character sets supported by this engine for the CharacterSetName parameter of the CreateDBInstance operation. 
      */
     SupportedCharacterSets?: SupportedCharacterSetsList;
+    /**
+     * A list of the character sets supported by the Oracle DB engine for the NcharCharacterSetName parameter of the CreateDBInstance operation. 
+     */
+    SupportedNcharCharacterSets?: SupportedCharacterSetsList;
     /**
      * A list of engine versions that this database engine version can be upgraded to.
      */
@@ -3028,6 +3036,10 @@ declare namespace RDS {
      * If present, specifies the name of the character set that this instance is associated with.
      */
     CharacterSetName?: String;
+    /**
+     * The name of the NCHAR character set for the Oracle DB instance. This character set specifies the Unicode encoding for data stored in table columns of type NCHAR, NCLOB, or NVARCHAR2. 
+     */
+    NcharCharacterSetName?: String;
     /**
      * If present, specifies the name of the secondary Availability Zone for a DB instance with multi-AZ support.
      */

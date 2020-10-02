@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.765.0',
+	  VERSION: '2.766.0',
 
 	  /**
 	   * @api private
@@ -1051,13 +1051,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var errCallback = function(err) {
 	      var maxRetries = options.maxRetries || 0;
 	      if (err && err.code === 'TimeoutError') err.retryable = true;
-	      var delay = util.calculateRetryDelay(retryCount, options.retryDelayOptions, err);
-	      if (err && err.retryable && retryCount < maxRetries && delay >= 0) {
-	        retryCount++;
-	        setTimeout(sendRequest, delay + (err.retryAfter || 0));
-	      } else {
-	        cb(err);
+
+	      // Call `calculateRetryDelay()` only when relevant, see #3401
+	      if (err && err.retryable && retryCount < maxRetries) {
+	        var delay = util.calculateRetryDelay(retryCount, options.retryDelayOptions, err);
+	        if (delay >= 0) {
+	          retryCount++;
+	          setTimeout(sendRequest, delay + (err.retryAfter || 0));
+	          return;
+	        }
 	      }
+	      cb(err);
 	    };
 
 	    var sendRequest = function() {
@@ -5279,7 +5283,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *       retry count and error and returns the amount of time to delay in
 	 *       milliseconds. If the result is a non-zero negative value, no further
 	 *       retry attempts will be made. The `base` option will be ignored if this
-	 *       option is supplied.
+	 *       option is supplied. The function is only called for retryable errors.
 	 *
 	 * @!attribute httpOptions
 	 *   @return [map] A set of options to pass to the low-level HTTP request.
@@ -5432,7 +5436,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *     retry count and error and returns the amount of time to delay in
 	   *     milliseconds. If the result is a non-zero negative value, no further
 	   *     retry attempts will be made. The `base` option will be ignored if this
-	   *     option is supplied.
+	   *     option is supplied. The function is only called for retryable errors.
 	   * @option options httpOptions [map] A set of options to pass to the low-level
 	   *   HTTP request. Currently supported options are:
 	   *
