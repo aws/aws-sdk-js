@@ -2003,6 +2003,10 @@ declare namespace Glue {
      */
     JdbcTargets?: JdbcTargetList;
     /**
+     * Specifies Amazon DocumentDB or MongoDB targets.
+     */
+    MongoDBTargets?: MongoDBTargetList;
+    /**
      * Specifies Amazon DynamoDB targets.
      */
     DynamoDBTargets?: DynamoDBTargetList;
@@ -5245,6 +5249,21 @@ declare namespace Glue {
   export type MaxRetries = number;
   export type MessagePrefix = string;
   export type MillisecondsCount = number;
+  export interface MongoDBTarget {
+    /**
+     * The name of the connection to use to connect to the Amazon DocumentDB or MongoDB target.
+     */
+    ConnectionName?: ConnectionName;
+    /**
+     * The path of the Amazon DocumentDB or MongoDB target (database/collection).
+     */
+    Path?: Path;
+    /**
+     * Indicates whether to scan all the records, or to sample rows from the table. Scanning all the records can take a long time when the table is not a high throughput table. A value of true means to scan all records, while a value of false means to sample the records. If no value is specified, the value defaults to true.
+     */
+    ScanAll?: NullableBoolean;
+  }
+  export type MongoDBTargetList = MongoDBTarget[];
   export type NameString = string;
   export type NameStringList = NameString[];
   export interface Node {

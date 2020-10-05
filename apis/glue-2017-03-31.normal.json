@@ -5460,6 +5460,10 @@
           "shape": "JdbcTargetList",
           "documentation": "<p>Specifies JDBC targets.</p>"
         },
+        "MongoDBTargets": {
+          "shape": "MongoDBTargetList",
+          "documentation": "<p>Specifies Amazon DocumentDB or MongoDB targets.</p>"
+        },
         "DynamoDBTargets": {
           "shape": "DynamoDBTargetList",
           "documentation": "<p>Specifies Amazon DynamoDB targets.</p>"
@@ -10054,6 +10058,30 @@
     },
     "MillisecondsCount": {
       "type": "long"
+    },
+    "MongoDBTarget": {
+      "type": "structure",
+      "members": {
+        "ConnectionName": {
+          "shape": "ConnectionName",
+          "documentation": "<p>The name of the connection to use to connect to the Amazon DocumentDB or MongoDB target.</p>"
+        },
+        "Path": {
+          "shape": "Path",
+          "documentation": "<p>The path of the Amazon DocumentDB or MongoDB target (database/collection).</p>"
+        },
+        "ScanAll": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>Indicates whether to scan all the records, or to sample rows from the table. Scanning all the records can take a long time when the table is not a high throughput table.</p> <p>A value of <code>true</code> means to scan all records, while a value of <code>false</code> means to sample the records. If no value is specified, the value defaults to <code>true</code>.</p>"
+        }
+      },
+      "documentation": "<p>Specifies an Amazon DocumentDB or MongoDB data store to crawl.</p>"
+    },
+    "MongoDBTargetList": {
+      "type": "list",
+      "member": {
+        "shape": "MongoDBTarget"
+      }
     },
     "NameString": {
       "type": "string",

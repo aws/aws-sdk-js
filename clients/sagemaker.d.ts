@@ -69,11 +69,11 @@ declare class SageMaker extends Service {
    */
   createCompilationJob(callback?: (err: AWSError, data: SageMaker.Types.CreateCompilationJobResponse) => void): Request<SageMaker.Types.CreateCompilationJobResponse, AWSError>;
   /**
-   * Creates a Domain used by SageMaker Studio. A domain consists of an associated directory, a list of authorized users, and a variety of security, application, policy, and Amazon Virtual Private Cloud (VPC) configurations. An AWS account is limited to one domain per region. Users within a domain can share notebook files and other artifacts with each other. When a domain is created, an Amazon Elastic File System (EFS) volume is also created for use by all of the users within the domain. Each user receives a private home directory within the EFS for notebooks, Git repositories, and data files. All traffic between the domain and the EFS volume is communicated through the specified subnet IDs. All other traffic goes over the Internet through an Amazon SageMaker system VPC. The EFS traffic uses the NFS/TCP protocol over port 2049.  NFS traffic over TCP on port 2049 needs to be allowed in both inbound and outbound rules in order to launch a SageMaker Studio app successfully. 
+   * Creates a Domain used by Amazon SageMaker Studio. A domain consists of an associated Amazon Elastic File System (EFS) volume, a list of authorized users, and a variety of security, application, policy, and Amazon Virtual Private Cloud (VPC) configurations. An AWS account is limited to one domain per region. Users within a domain can share notebook files and other artifacts with each other. When a domain is created, an EFS volume is created for use by all of the users within the domain. Each user receives a private home directory within the EFS volume for notebooks, Git repositories, and data files.  VPC configuration  All SageMaker Studio traffic between the domain and the EFS volume is through the specified VPC and subnets. For other Studio traffic, you specify the AppNetworkAccessType parameter. AppNetworkAccessType corresponds to the VPC mode that's chosen when you onboard to Studio. The following options are available:    PublicInternetOnly - Non-EFS traffic goes through a VPC managed by Amazon SageMaker, which allows internet access. This is the default value.    VpcOnly - All Studio traffic is through the specified VPC and subnets. Internet access is disabled by default. To allow internet access, you must specify a NAT gateway. When internet access is disabled, you won't be able to train or host models unless your VPC has an interface endpoint (PrivateLink) or a NAT gateway and your security groups allow outbound connections.     VpcOnly mode  When you specify VpcOnly, you must specify the following:   Security group inbound and outbound rules to allow NFS traffic over TCP on port 2049 between the domain and the EFS volume   Security group inbound and outbound rules to allow traffic between the JupyterServer app and the KernelGateway apps   Interface endpoints to access the SageMaker API and SageMaker runtime   For more information, see:    Security groups for your VPC     VPC with public and private subnets (NAT)     Connect to SageMaker through a VPC interface endpoint   
    */
   createDomain(params: SageMaker.Types.CreateDomainRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateDomainResponse) => void): Request<SageMaker.Types.CreateDomainResponse, AWSError>;
   /**
-   * Creates a Domain used by SageMaker Studio. A domain consists of an associated directory, a list of authorized users, and a variety of security, application, policy, and Amazon Virtual Private Cloud (VPC) configurations. An AWS account is limited to one domain per region. Users within a domain can share notebook files and other artifacts with each other. When a domain is created, an Amazon Elastic File System (EFS) volume is also created for use by all of the users within the domain. Each user receives a private home directory within the EFS for notebooks, Git repositories, and data files. All traffic between the domain and the EFS volume is communicated through the specified subnet IDs. All other traffic goes over the Internet through an Amazon SageMaker system VPC. The EFS traffic uses the NFS/TCP protocol over port 2049.  NFS traffic over TCP on port 2049 needs to be allowed in both inbound and outbound rules in order to launch a SageMaker Studio app successfully. 
+   * Creates a Domain used by Amazon SageMaker Studio. A domain consists of an associated Amazon Elastic File System (EFS) volume, a list of authorized users, and a variety of security, application, policy, and Amazon Virtual Private Cloud (VPC) configurations. An AWS account is limited to one domain per region. Users within a domain can share notebook files and other artifacts with each other. When a domain is created, an EFS volume is created for use by all of the users within the domain. Each user receives a private home directory within the EFS volume for notebooks, Git repositories, and data files.  VPC configuration  All SageMaker Studio traffic between the domain and the EFS volume is through the specified VPC and subnets. For other Studio traffic, you specify the AppNetworkAccessType parameter. AppNetworkAccessType corresponds to the VPC mode that's chosen when you onboard to Studio. The following options are available:    PublicInternetOnly - Non-EFS traffic goes through a VPC managed by Amazon SageMaker, which allows internet access. This is the default value.    VpcOnly - All Studio traffic is through the specified VPC and subnets. Internet access is disabled by default. To allow internet access, you must specify a NAT gateway. When internet access is disabled, you won't be able to train or host models unless your VPC has an interface endpoint (PrivateLink) or a NAT gateway and your security groups allow outbound connections.     VpcOnly mode  When you specify VpcOnly, you must specify the following:   Security group inbound and outbound rules to allow NFS traffic over TCP on port 2049 between the domain and the EFS volume   Security group inbound and outbound rules to allow traffic between the JupyterServer app and the KernelGateway apps   Interface endpoints to access the SageMaker API and SageMaker runtime   For more information, see:    Security groups for your VPC     VPC with public and private subnets (NAT)     Connect to SageMaker through a VPC interface endpoint   
    */
   createDomain(callback?: (err: AWSError, data: SageMaker.Types.CreateDomainResponse) => void): Request<SageMaker.Types.CreateDomainResponse, AWSError>;
   /**
@@ -173,11 +173,11 @@ declare class SageMaker extends Service {
    */
   createNotebookInstanceLifecycleConfig(callback?: (err: AWSError, data: SageMaker.Types.CreateNotebookInstanceLifecycleConfigOutput) => void): Request<SageMaker.Types.CreateNotebookInstanceLifecycleConfigOutput, AWSError>;
   /**
-   * Creates a URL for a specified UserProfile in a Domain. When accessed in a web browser, the user will be automatically signed in to Amazon SageMaker Studio, and granted access to all of the Apps and files associated with the Domain's Amazon Elastic File System (EFS) volume. This operation can only be called when the authentication mode equals IAM. 
+   * Creates a URL for a specified UserProfile in a Domain. When accessed in a web browser, the user will be automatically signed in to Amazon SageMaker Studio, and granted access to all of the Apps and files associated with the Domain's Amazon Elastic File System (EFS) volume. This operation can only be called when the authentication mode equals IAM.   The URL that you get from a call to CreatePresignedDomainUrl is valid only for 5 minutes. If you try to use the URL after the 5-minute limit expires, you are directed to the AWS console sign-in page. 
    */
   createPresignedDomainUrl(params: SageMaker.Types.CreatePresignedDomainUrlRequest, callback?: (err: AWSError, data: SageMaker.Types.CreatePresignedDomainUrlResponse) => void): Request<SageMaker.Types.CreatePresignedDomainUrlResponse, AWSError>;
   /**
-   * Creates a URL for a specified UserProfile in a Domain. When accessed in a web browser, the user will be automatically signed in to Amazon SageMaker Studio, and granted access to all of the Apps and files associated with the Domain's Amazon Elastic File System (EFS) volume. This operation can only be called when the authentication mode equals IAM. 
+   * Creates a URL for a specified UserProfile in a Domain. When accessed in a web browser, the user will be automatically signed in to Amazon SageMaker Studio, and granted access to all of the Apps and files associated with the Domain's Amazon Elastic File System (EFS) volume. This operation can only be called when the authentication mode equals IAM.   The URL that you get from a call to CreatePresignedDomainUrl is valid only for 5 minutes. If you try to use the URL after the 5-minute limit expires, you are directed to the AWS console sign-in page. 
    */
   createPresignedDomainUrl(callback?: (err: AWSError, data: SageMaker.Types.CreatePresignedDomainUrlResponse) => void): Request<SageMaker.Types.CreatePresignedDomainUrlResponse, AWSError>;
   /**
@@ -1328,6 +1328,7 @@ declare namespace SageMaker {
   export type AppInstanceType = "system"|"ml.t3.micro"|"ml.t3.small"|"ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.8xlarge"|"ml.m5.12xlarge"|"ml.m5.16xlarge"|"ml.m5.24xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.12xlarge"|"ml.c5.18xlarge"|"ml.c5.24xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|string;
   export type AppList = AppDetails[];
   export type AppName = string;
+  export type AppNetworkAccessType = "PublicInternetOnly"|"VpcOnly"|string;
   export type AppSortKey = "CreationTime"|string;
   export interface AppSpecification {
     /**
@@ -1455,7 +1456,7 @@ declare namespace SageMaker {
   export type AutoMLContainerDefinitions = AutoMLContainerDefinition[];
   export interface AutoMLDataSource {
     /**
-     * The Amazon S3 location of the input data.  The input data must be in CSV format and contain at least 1000 rows. 
+     * The Amazon S3 location of the input data.  The input data must be in CSV format and contain at least 500 rows. 
      */
     S3DataSource: AutoMLS3DataSource;
   }
@@ -1847,7 +1848,7 @@ declare namespace SageMaker {
      */
     Mode?: ContainerMode;
     /**
-     * The S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix). The S3 path is required for Amazon SageMaker built-in algorithms, but not if you use your own algorithms. For more information on built-in algorithms, see Common Parameters.  If you provide a value for this parameter, Amazon SageMaker uses AWS Security Token Service to download model artifacts from the S3 path you provide. AWS STS is activated in your IAM user account by default. If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more information, see Activating and Deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide.  If you use a built-in algorithm to create a model, Amazon SageMaker requires that you provide a S3 path to the model artifacts in ModelDataUrl. 
+     * The S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix). The S3 path is required for Amazon SageMaker built-in algorithms, but not if you use your own algorithms. For more information on built-in algorithms, see Common Parameters.   The model artifacts must be in an S3 bucket that is in the same region as the model or endpoint you are creating.  If you provide a value for this parameter, Amazon SageMaker uses AWS Security Token Service to download model artifacts from the S3 path you provide. AWS STS is activated in your IAM user account by default. If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more information, see Activating and Deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide.  If you use a built-in algorithm to create a model, Amazon SageMaker requires that you provide a S3 path to the model artifacts in ModelDataUrl. 
      */
     ModelDataUrl?: Url;
     /**
@@ -1968,7 +1969,7 @@ declare namespace SageMaker {
      */
     AutoMLJobName: AutoMLJobName;
     /**
-     * Similar to InputDataConfig supported by Tuning. Format(s) supported: CSV. Minimum of 1000 rows.
+     * Similar to InputDataConfig supported by Tuning. Format(s) supported: CSV. Minimum of 500 rows.
      */
     InputDataConfig: AutoMLInputDataConfig;
     /**
@@ -2064,11 +2065,11 @@ declare namespace SageMaker {
      */
     DefaultUserSettings: UserSettings;
     /**
-     * The VPC subnets to use for communication with the EFS volume.
+     * The VPC subnets that Studio uses for communication.
      */
     SubnetIds: Subnets;
     /**
-     * The ID of the Amazon Virtual Private Cloud (VPC) to use for communication with the EFS volume.
+     * The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
      */
     VpcId: VpcId;
     /**
@@ -2079,6 +2080,10 @@ declare namespace SageMaker {
      * The AWS Key Management Service (KMS) encryption key ID. Encryption with a customer master key (CMK) is not supported.
      */
     HomeEfsFileSystemKmsKeyId?: KmsKeyId;
+    /**
+     * Specifies the VPC used for non-EFS traffic. The default value is PublicInternetOnly.    PublicInternetOnly - Non-EFS traffic is through a VPC managed by Amazon SageMaker, which allows direct internet access    VpcOnly - All Studio traffic is through the specified VPC and subnets  
+     */
+    AppNetworkAccessType?: AppNetworkAccessType;
   }
   export interface CreateDomainResponse {
     /**
@@ -3514,7 +3519,7 @@ declare namespace SageMaker {
      */
     HomeEfsFileSystemKmsKeyId?: KmsKeyId;
     /**
-     * Security setting to limit to a set of subnets.
+     * The VPC subnets that Studio uses for communication.
      */
     SubnetIds?: Subnets;
     /**
@@ -3522,9 +3527,13 @@ declare namespace SageMaker {
      */
     Url?: String1024;
     /**
-     * The ID of the Amazon Virtual Private Cloud.
+     * The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
      */
     VpcId?: VpcId;
+    /**
+     * Specifies the VPC used for non-EFS traffic. The default value is PublicInternetOnly.    PublicInternetOnly - Non-EFS traffic is through a VPC managed by Amazon SageMaker, which allows direct internet access    VpcOnly - All Studio traffic is through the specified VPC and subnets  
+     */
+    AppNetworkAccessType?: AppNetworkAccessType;
   }
   export interface DescribeEndpointConfigInput {
     /**
@@ -7169,7 +7178,7 @@ declare namespace SageMaker {
      */
     ImageDigest?: ImageDigest;
     /**
-     * The Amazon S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).
+     * The Amazon S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).  The model artifacts must be in an S3 bucket that is in the same region as the model package. 
      */
     ModelDataUrl?: Url;
     /**
@@ -8339,7 +8348,7 @@ declare namespace SageMaker {
      */
     NotebookOutputOption?: NotebookOutputOption;
     /**
-     * When NotebookOutputOption is Allowed, the Amazon S3 bucket used to save the notebook cell output. If S3OutputPath isn't specified, a default bucket is used.
+     * When NotebookOutputOption is Allowed, the Amazon S3 bucket used to save the notebook cell output.
      */
     S3OutputPath?: S3Uri;
     /**
@@ -8362,7 +8371,7 @@ declare namespace SageMaker {
   export type SortTrialsBy = "Name"|"CreationTime"|string;
   export interface SourceAlgorithm {
     /**
-     * The Amazon S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).
+     * The Amazon S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).  The model artifacts must be in an S3 bucket that is in the same region as the algorithm. 
      */
     ModelDataUrl?: Url;
     /**
@@ -9228,7 +9237,7 @@ declare namespace SageMaker {
      */
     ProcessingJob?: ProcessingJob;
     /**
-     * Information about a transform job that's the source of the trial component.
+     * Information about a transform job that's the source of a trial component.
      */
     TransformJob?: TransformJob;
   }
