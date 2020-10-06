@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.767.0-->
+<!--LATEST=2.768.0-->
 <!--ENTRYINSERT-->
+
+## 2.768.0
+* feature: DMS: Added new S3 endpoint settings to allow partitioning CDC data by date for S3 as target. Exposed some Extra Connection Attributes as endpoint settings for relational databases as target.
+* feature: EC2: This release supports returning additional information about local gateway virtual interfaces, and virtual interface groups.
+* feature: KinesisAnalyticsV2: Amazon Kinesis Analytics now supports StopApplication with 'force' option
+* feature: MarketplaceCatalog: AWS Marketplace Catalog now supports FailureCode for change workflows to help differentiate client errors and server faults.
 
 ## 2.767.0
 * feature: DynamoDB: This release adds a new ReplicaStatus REGION DISABLED for the Table description. This state indicates that the AWS Region for the replica is inaccessible because the AWS Region is disabled.

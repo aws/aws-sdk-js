@@ -1497,6 +1497,14 @@
     "CertificateWallet": {
       "type": "blob"
     },
+    "CharLengthSemantics": {
+      "type": "string",
+      "enum": [
+        "default",
+        "char",
+        "byte"
+      ]
+    },
     "CompressionTypeValue": {
       "type": "string",
       "enum": [
@@ -1918,6 +1926,25 @@
       "enum": [
         "csv",
         "parquet"
+      ]
+    },
+    "DatePartitionDelimiterValue": {
+      "type": "string",
+      "enum": [
+        "SLASH",
+        "UNDERSCORE",
+        "DASH",
+        "NONE"
+      ]
+    },
+    "DatePartitionSequenceValue": {
+      "type": "string",
+      "enum": [
+        "YYYYMMDD",
+        "YYYYMMDDHH",
+        "YYYYMM",
+        "MMYYYYDD",
+        "DDMMYYYY"
       ]
     },
     "DeleteCertificateMessage": {
@@ -2862,11 +2889,11 @@
         },
         "EndpointUri": {
           "shape": "String",
-          "documentation": "<p>The endpoint for the Elasticsearch cluster.</p>"
+          "documentation": "<p>The endpoint for the Elasticsearch cluster. AWS DMS uses HTTPS if a transport protocol (http/https) is not specified.</p>"
         },
         "FullLoadErrorPercentage": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The maximum percentage of records that can fail to be written before a full load operation stops. </p>"
+          "documentation": "<p>The maximum percentage of records that can fail to be written before a full load operation stops.</p> <p>To avoid early failure, this counter is only effective after 1000 records are transferred. Elasticsearch also has the concept of error monitoring during the last 10 minutes of an Observation Window. If transfer of all records fail in the last 10 minutes, the full load operation stops. </p>"
         },
         "ErrorRetryDuration": {
           "shape": "IntegerOptional",
@@ -3158,7 +3185,7 @@
           "documentation": "<p>The filter value, which can specify one or more values used to narrow the returned results.</p>"
         }
       },
-      "documentation": "<p>Identifies the name and value of a filter object. This filter is used to limit the number and type of AWS DMS objects that are returned for a particular <code>Describe*</code> or similar operation.</p>"
+      "documentation": "<p>Identifies the name and value of a filter object. This filter is used to limit the number and type of AWS DMS objects that are returned for a particular <code>Describe*</code> call or similar operation. Filters are used as an optional parameter to the following APIs. </p>"
     },
     "FilterList": {
       "type": "list",
@@ -3190,6 +3217,18 @@
         "ServerName": {
           "shape": "String",
           "documentation": "<p>Fully qualified domain name of the endpoint.</p>"
+        },
+        "SetDataCaptureChanges": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Enables ongoing replication (CDC) as a BOOLEAN value. The default is true.</p>"
+        },
+        "CurrentLsn": {
+          "shape": "String",
+          "documentation": "<p>For ongoing replication (CDC), use CurrentLSN to specify a log sequence number (LSN) where you want the replication to start.</p>"
+        },
+        "MaxKBytesPerRead": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Maximum number of bytes per read, as a NUMBER value. The default is 64 KB.</p>"
         },
         "Username": {
           "shape": "String",
@@ -3383,13 +3422,29 @@
           "shape": "IntegerOptional",
           "documentation": "<p>Endpoint TCP port.</p>"
         },
+        "BcpPacketSize": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The maximum size of the packets (in bytes) used to transfer data using BCP.</p>"
+        },
         "DatabaseName": {
           "shape": "String",
           "documentation": "<p>Database name for the endpoint.</p>"
         },
+        "ControlTablesFileGroup": {
+          "shape": "String",
+          "documentation": "<p>Specify a filegroup for the AWS DMS internal tables. When the replication task starts, all the internal AWS DMS control tables (awsdms_ apply_exception, awsdms_apply, awsdms_changes) are created on the specified filegroup.</p>"
+        },
         "Password": {
           "shape": "SecretString",
           "documentation": "<p>Endpoint connection password.</p>"
+        },
+        "ReadBackupOnly": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>When this attribute is set to <code>Y</code>, AWS DMS only reads changes from transaction log backups and doesn't read from the active transaction log file during ongoing replication. Setting this parameter to <code>Y</code> enables you to control active transaction log file growth during full load and ongoing replication tasks. However, it can add some source latency to ongoing replication.</p>"
+        },
+        "SafeguardPolicy": {
+          "shape": "SafeguardPolicy",
+          "documentation": "<p>Use this attribute to minimize the need to access the backup log and enable AWS DMS to prevent truncation using one of the following two methods.</p> <p> <i>Start transactions in the database:</i> This is the default method. When this method is used, AWS DMS prevents TLOG truncation by mimicking a transaction in the database. As long as such a transaction is open, changes that appear after the transaction started aren't truncated. If you need Microsoft Replication to be enabled in your database, then you must choose this method.</p> <p> <i>Exclusively use sp_repldone within a single task</i>: When this method is used, AWS DMS reads the changes and then uses sp_repldone to mark the TLOG transactions as ready for truncation. Although this method doesn't involve any transactional activities, it can only be used when Microsoft Replication isn't running. Also, when using this method, only one AWS DMS task can access the database at any given time. Therefore, if you need to run parallel AWS DMS tasks against the same database, use the default method.</p>"
         },
         "ServerName": {
           "shape": "String",
@@ -3398,6 +3453,10 @@
         "Username": {
           "shape": "String",
           "documentation": "<p>Endpoint connection user name.</p>"
+        },
+        "UseBcpFullLoad": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Use this to attribute to transfer data for full-load operations using BCP. When the target table contains an identity column that does not exist in the source table, you must disable the use BCP for loading table option.</p>"
         }
       },
       "documentation": "<p>Provides information that defines a Microsoft SQL Server endpoint.</p>"
@@ -3790,9 +3849,29 @@
     "MySQLSettings": {
       "type": "structure",
       "members": {
+        "AfterConnectScript": {
+          "shape": "String",
+          "documentation": "<p>Specifies a script to run immediately after AWS DMS connects to the endpoint. The migration task continues running regardless if the SQL statement succeeds or fails.</p>"
+        },
         "DatabaseName": {
           "shape": "String",
           "documentation": "<p>Database name for the endpoint.</p>"
+        },
+        "EventsPollInterval": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Specifies how often to check the binary log for new changes/events when the database is idle.</p> <p>Example: <code>eventsPollInterval=5;</code> </p> <p>In the example, AWS DMS checks for changes in the binary logs every five seconds.</p>"
+        },
+        "TargetDbType": {
+          "shape": "TargetDbType",
+          "documentation": "<p>Specifies where to migrate source tables on the target, either to a single database or multiple databases.</p> <p>Example: <code>targetDbType=MULTIPLE_DATABASES</code> </p>"
+        },
+        "MaxFileSize": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Specifies the maximum size (in KB) of any .csv file used to transfer data to a MySQL-compatible database.</p> <p>Example: <code>maxFileSize=512</code> </p>"
+        },
+        "ParallelLoadThreads": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Improves performance when loading data into the MySQLcompatible target database. Specifies how many threads to use to load the data into the MySQL-compatible target database. Setting a large number of threads can have an adverse effect on database performance, because a separate connection is required for each thread.</p> <p>Example: <code>parallelLoadThreads=1</code> </p>"
         },
         "Password": {
           "shape": "SecretString",
@@ -3805,6 +3884,10 @@
         "ServerName": {
           "shape": "String",
           "documentation": "<p>Fully qualified domain name of the endpoint.</p>"
+        },
+        "ServerTimezone": {
+          "shape": "String",
+          "documentation": "<p>Specifies the time zone for the source MySQL database.</p> <p>Example: <code>serverTimezone=US/Pacific;</code> </p> <p>Note: Do not enclose time zones in single quotes.</p>"
         },
         "Username": {
           "shape": "String",
@@ -3861,6 +3944,62 @@
     "OracleSettings": {
       "type": "structure",
       "members": {
+        "AddSupplementalLogging": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Set this attribute to set up table-level supplemental logging for the Oracle database. This attribute enables PRIMARY KEY supplemental logging on all tables selected for a migration task.</p> <p>If you use this option, you still need to enable database-level supplemental logging.</p>"
+        },
+        "ArchivedLogDestId": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Specifies the destination of the archived redo logs. The value should be the same as the DEST_ID number in the v$archived_log table. When working with multiple log destinations (DEST_ID), we recommend that you to specify an archived redo logs location identifier. Doing this improves performance by ensuring that the correct logs are accessed from the outset.</p>"
+        },
+        "AdditionalArchivedLogDestId": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Set this attribute with <code>archivedLogDestId</code> in a primary/ standby setup. This attribute is useful in the case of a switchover. In this case, AWS DMS needs to know which destination to get archive redo logs from to read changes. This need arises because the previous primary instance is now a standby instance after switchover.</p>"
+        },
+        "AllowSelectNestedTables": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Set this attribute to <code>true</code> to enable replication of Oracle tables containing columns that are nested tables or defined types.</p>"
+        },
+        "ParallelAsmReadThreads": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Set this attribute to change the number of threads that DMS configures to perform a Change Data Capture (CDC) load using Oracle Automatic Storage Management (ASM). You can specify an integer value between 2 (the default) and 8 (the maximum). Use this attribute together with the <code>readAheadBlocks</code> attribute.</p>"
+        },
+        "ReadAheadBlocks": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Set this attribute to change the number of read-ahead blocks that DMS configures to perform a Change Data Capture (CDC) load using Oracle Automatic Storage Management (ASM). You can specify an integer value between 1000 (the default) and 200,000 (the maximum).</p>"
+        },
+        "AccessAlternateDirectly": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Set this attribute to <code>false</code> in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source. This tells the DMS instance to not access redo logs through any specified path prefix replacement using direct file access.</p>"
+        },
+        "UseAlternateFolderForOnline": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Set this attribute to <code>true</code> in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source. This tells the DMS instance to use any specified prefix replacement to access all online redo logs.</p>"
+        },
+        "OraclePathPrefix": {
+          "shape": "String",
+          "documentation": "<p>Set this string attribute to the required value in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source. This value specifies the default Oracle root used to access the redo logs.</p>"
+        },
+        "UsePathPrefix": {
+          "shape": "String",
+          "documentation": "<p>Set this string attribute to the required value in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source. This value specifies the path prefix used to replace the default Oracle root to access the redo logs.</p>"
+        },
+        "ReplacePathPrefix": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Set this attribute to true in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source. This setting tells DMS instance to replace the default Oracle root with the specified <code>usePathPrefix</code> setting to access the redo logs.</p>"
+        },
+        "EnableHomogenousTablespace": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Set this attribute to enable homogenous tablespace replication and create existing tables or indexes under the same tablespace on the target.</p>"
+        },
+        "DirectPathNoLog": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>When set to <code>true</code>, this attribute helps to increase the commit rate on the Oracle target database by writing directly to tables and not writing a trail to database logs.</p>"
+        },
+        "ArchivedLogsOnly": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>When this field is set to <code>Y</code>, AWS DMS only accesses the archived redo logs. If the archived redo logs are stored on Oracle ASM only, the AWS DMS user account needs to be granted ASM privileges.</p>"
+        },
         "AsmPassword": {
           "shape": "SecretString",
           "documentation": "<p>For an Oracle source endpoint, your Oracle Automatic Storage Management (ASM) password. You can set this value from the <code> <i>asm_user_password</i> </code> value. You set this value as part of the comma-separated value that you set to the <code>Password</code> request parameter when you create the endpoint to access transaction logs using Binary Reader. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration\">Configuration for change data capture (CDC) on an Oracle source database</a>.</p>"
@@ -3873,9 +4012,25 @@
           "shape": "String",
           "documentation": "<p>For an Oracle source endpoint, your ASM user name. You can set this value from the <code>asm_user</code> value. You set <code>asm_user</code> as part of the extra connection attribute string to access an Oracle server with Binary Reader that uses ASM. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration\">Configuration for change data capture (CDC) on an Oracle source database</a>.</p>"
         },
+        "CharLengthSemantics": {
+          "shape": "CharLengthSemantics",
+          "documentation": "<p>Specifies whether the length of a character column is in bytes or in characters. To indicate that the character column length is in characters, set this attribute to <code>CHAR</code>. Otherwise, the character column length is in bytes.</p> <p>Example: <code>charLengthSemantics=CHAR;</code> </p>"
+        },
         "DatabaseName": {
           "shape": "String",
           "documentation": "<p>Database name for the endpoint.</p>"
+        },
+        "DirectPathParallelLoad": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>When set to <code>true</code>, this attribute specifies a parallel load when <code>useDirectPathFullLoad</code> is set to <code>Y</code>. This attribute also only applies when you use the AWS DMS parallel load feature. Note that the target table cannot have any constraints or indexes.</p>"
+        },
+        "FailTasksOnLobTruncation": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>When set to <code>true</code>, this attribute causes a task to fail if the actual size of an LOB column is greater than the specified <code>LobMaxSize</code>.</p> <p>If a task is set to limited LOB mode and this option is set to <code>true</code>, the task fails instead of truncating the LOB data.</p>"
+        },
+        "NumberDatatypeScale": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Specifies the number scale. You can select a scale up to 38, or you can select FLOAT. By default, the NUMBER data type is converted to precision 38, scale 10.</p> <p>Example: <code>numberDataTypeScale=12</code> </p>"
         },
         "Password": {
           "shape": "SecretString",
@@ -3884,6 +4039,14 @@
         "Port": {
           "shape": "IntegerOptional",
           "documentation": "<p>Endpoint TCP port.</p>"
+        },
+        "ReadTableSpaceName": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>When set to <code>true</code>, this attribute supports tablespace replication.</p>"
+        },
+        "RetryInterval": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Specifies the number of seconds that the system waits before resending a query.</p> <p>Example: <code>retryInterval=6;</code> </p>"
         },
         "SecurityDbEncryption": {
           "shape": "SecretString",
@@ -4004,9 +4167,33 @@
     "PostgreSQLSettings": {
       "type": "structure",
       "members": {
+        "AfterConnectScript": {
+          "shape": "String",
+          "documentation": "<p>For use with change data capture (CDC) only, this attribute has AWS DMS bypass foreign keys and user triggers to reduce the time it takes to bulk load data.</p> <p>Example: <code>afterConnectScript=SET session_replication_role='replica'</code> </p>"
+        },
+        "CaptureDdls": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>To capture DDL events, AWS DMS creates various artifacts in the PostgreSQL database when the task starts. You can later remove these artifacts.</p> <p>If this value is set to <code>N</code>, you don't have to create tables or triggers on the source database.</p>"
+        },
+        "MaxFileSize": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Specifies the maximum size (in KB) of any .csv file used to transfer data to PostgreSQL.</p> <p>Example: <code>maxFileSize=512</code> </p>"
+        },
         "DatabaseName": {
           "shape": "String",
           "documentation": "<p>Database name for the endpoint.</p>"
+        },
+        "DdlArtifactsSchema": {
+          "shape": "String",
+          "documentation": "<p>The schema in which the operational DDL database artifacts are created.</p> <p>Example: <code>ddlArtifactsSchema=xyzddlschema;</code> </p>"
+        },
+        "ExecuteTimeout": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Sets the client statement timeout for the PostgreSQL instance, in seconds. The default value is 60 seconds.</p> <p>Example: <code>executeTimeout=100;</code> </p>"
+        },
+        "FailTasksOnLobTruncation": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>When set to <code>true</code>, this value causes a task to fail if the actual size of a LOB column is greater than the specified <code>LobMaxSize</code>.</p> <p>If task is set to Limited LOB mode and this option is set to true, the task fails instead of truncating the LOB data.</p>"
         },
         "Password": {
           "shape": "SecretString",
@@ -4023,6 +4210,10 @@
         "Username": {
           "shape": "String",
           "documentation": "<p>Endpoint connection user name.</p>"
+        },
+        "SlotName": {
+          "shape": "String",
+          "documentation": "<p>Sets the name of a previously created logical replication slot for a CDC load of the PostgreSQL source instance.</p> <p>When used with the AWS DMS API <code>CdcStartPosition</code> request parameter, this attribute also enables using native CDC start points.</p>"
         }
       },
       "documentation": "<p>Provides information that defines a PostgreSQL endpoint.</p>"
@@ -4065,11 +4256,11 @@
         },
         "BucketFolder": {
           "shape": "String",
-          "documentation": "<p>The location where the comma-separated value (.csv) files are stored before being uploaded to the S3 bucket. </p>"
+          "documentation": "<p>An S3 folder where the comma-separated-value (.csv) files are stored before being uploaded to the target Redshift cluster. </p> <p>For full load mode, AWS DMS converts source records into .csv files and loads them to the <i>BucketFolder/TableID</i> path. AWS DMS uses the Redshift <code>COPY</code> command to upload the .csv files to the target table. The files are deleted once the <code>COPY</code> operation has finished. For more information, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html\">Amazon Redshift Database Developer Guide</a> </p> <p>For change-data-capture (CDC) mode, AWS DMS creates a <i>NetChanges</i> table, and loads the .csv files to this <i>BucketFolder/NetChangesTableID</i> path.</p>"
         },
         "BucketName": {
           "shape": "String",
-          "documentation": "<p>The name of the S3 bucket you want to use</p>"
+          "documentation": "<p>The name of the intermediate S3 bucket used to store .csv files before uploading data to Redshift.</p>"
         },
         "ConnectionTimeout": {
           "shape": "IntegerOptional",
@@ -4093,15 +4284,15 @@
         },
         "FileTransferUploadStreams": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The number of threads used to upload a single file. This parameter accepts a value from 1 through 64. It defaults to 10.</p>"
+          "documentation": "<p>The number of threads used to upload a single file. This parameter accepts a value from 1 through 64. It defaults to 10.</p> <p>The number of parallel streams used to upload a single .csv file to an S3 bucket using S3 Multipart Upload. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html\">Multipart upload overview</a>. </p> <p> <code>FileTransferUploadStreams</code> accepts a value from 1 through 64. It defaults to 10.</p>"
         },
         "LoadTimeout": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The amount of time to wait (in milliseconds) before timing out, beginning from when you begin loading.</p>"
+          "documentation": "<p>The amount of time to wait (in milliseconds) before timing out of operations performed by AWS DMS on a Redshift cluster, such as Redshift COPY, INSERT, DELETE, and UPDATE.</p>"
         },
         "MaxFileSize": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The maximum size (in KB) of any .csv file used to transfer data to Amazon Redshift. This accepts a value from 1 through 1,048,576. It defaults to 32,768 KB (32 MB).</p>"
+          "documentation": "<p>The maximum size (in KB) of any .csv file used to load data on an S3 bucket and transfer data to Amazon Redshift. It defaults to 1048576KB (1 GB).</p>"
         },
         "Password": {
           "shape": "SecretString",
@@ -4153,7 +4344,7 @@
         },
         "WriteBufferSize": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The size of the write buffer to use in rows. Valid values range from 1 through 2,048. The default is 1,024. Use this setting to tune performance. </p>"
+          "documentation": "<p>The size (in KB) of the in-memory file write buffer used when generating .csv files on the local disk at the DMS replication instance. The default value is 1000 (buffer size is 1000KB).</p>"
         }
       },
       "documentation": "<p>Provides information that defines an Amazon Redshift endpoint.</p>"
@@ -4481,7 +4672,7 @@
           "documentation": "<p>The subnets that are in the subnet group.</p>"
         }
       },
-      "documentation": "<p>Describes a subnet group in response to a request by the <code>DescribeReplicationSubnetGroup</code> operation.</p>"
+      "documentation": "<p>Describes a subnet group in response to a request by the <code>DescribeReplicationSubnetGroups</code> operation.</p>"
     },
     "ReplicationSubnetGroups": {
       "type": "list",
@@ -4869,9 +5060,29 @@
         "CdcInsertsAndUpdates": {
           "shape": "BooleanOptional",
           "documentation": "<p>A value that enables a change data capture (CDC) load to write INSERT and UPDATE operations to .csv or .parquet (columnar storage) output files. The default setting is <code>false</code>, but when <code>CdcInsertsAndUpdates</code> is set to <code>true</code> or <code>y</code>, only INSERTs and UPDATEs from the source database are migrated to the .csv or .parquet file. </p> <p>For .csv file format only, how these INSERTs and UPDATEs are recorded depends on the value of the <code>IncludeOpForFullLoad</code> parameter. If <code>IncludeOpForFullLoad</code> is set to <code>true</code>, the first field of every CDC record is set to either <code>I</code> or <code>U</code> to indicate INSERT and UPDATE operations at the source. But if <code>IncludeOpForFullLoad</code> is set to <code>false</code>, CDC records are written without an indication of INSERT or UPDATE operations at the source. For more information about how these settings work together, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps\">Indicating Source DB Operations in Migrated S3 Data</a> in the <i>AWS Database Migration Service User Guide.</i>.</p> <note> <p>AWS DMS supports the use of the <code>CdcInsertsAndUpdates</code> parameter in versions 3.3.1 and later.</p> <p> <code>CdcInsertsOnly</code> and <code>CdcInsertsAndUpdates</code> can't both be set to <code>true</code> for the same endpoint. Set either <code>CdcInsertsOnly</code> or <code>CdcInsertsAndUpdates</code> to <code>true</code> for the same endpoint, but not both.</p> </note>"
+        },
+        "DatePartitionEnabled": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>When set to <code>true</code>, this parameter partitions S3 bucket folders based on transaction commit dates. The default value is <code>false</code>. For more information about date-based folder partitoning, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib\">Using date-based folder partitioning</a> </p>"
+        },
+        "DatePartitionSequence": {
+          "shape": "DatePartitionSequenceValue",
+          "documentation": "<p>Identifies the sequence of the date format to use during folder partitioning. The default value is <code>YYYYMMDD</code>. Use this parameter when <code>DatePartitionedEnabled</code> is set to <code>true</code>.</p>"
+        },
+        "DatePartitionDelimiter": {
+          "shape": "DatePartitionDelimiterValue",
+          "documentation": "<p>Specifies a date separating delimiter to use during folder partitioning. The default value is <code>SLASH</code> (/). Use this parameter when <code>DatePartitionedEnabled</code> is set to <code>true</code>.</p>"
         }
       },
       "documentation": "<p>Settings for exporting data to Amazon S3. </p>"
+    },
+    "SafeguardPolicy": {
+      "type": "string",
+      "enum": [
+        "rely-on-sql-server-replication-agent",
+        "exclusive-automatic-truncation",
+        "shared-automatic-truncation"
+      ]
     },
     "SchemaList": {
       "type": "list",
@@ -5066,7 +5277,7 @@
           "documentation": "<p>The status of the subnet.</p>"
         }
       },
-      "documentation": "<p>In response to a request by the <code>DescribeReplicationSubnetGroup</code> operation, this object identifies a subnet by its given Availability Zone, subnet identifier, and status.</p>"
+      "documentation": "<p>In response to a request by the <code>DescribeReplicationSubnetGroups</code> operation, this object identifies a subnet by its given Availability Zone, subnet identifier, and status.</p>"
     },
     "SubnetIdentifierList": {
       "type": "list",
@@ -5272,6 +5483,13 @@
       "member": {
         "shape": "Tag"
       }
+    },
+    "TargetDbType": {
+      "type": "string",
+      "enum": [
+        "specific-database",
+        "multiple-databases"
+      ]
     },
     "TestConnectionMessage": {
       "type": "structure",

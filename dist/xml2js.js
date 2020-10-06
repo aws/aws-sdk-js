@@ -4968,7 +4968,7 @@ module.exports =
 	  } else {
 	    // Fallback: Return an object instance of the Buffer class
 	    if (that === null) {
-	      that = Buffer.from(length)
+	      that = new Buffer(length)
 	    }
 	    that.length = length
 	  }
@@ -4988,7 +4988,7 @@ module.exports =
 
 	function Buffer (arg, encodingOrOffset, length) {
 	  if (!Buffer.TYPED_ARRAY_SUPPORT && !(this instanceof Buffer)) {
-	    return Buffer.from(arg, encodingOrOffset, length)
+	    return new Buffer(arg, encodingOrOffset, length)
 	  }
 
 	  // Common case.

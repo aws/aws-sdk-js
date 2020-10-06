@@ -20,35 +20,35 @@ declare class KinesisAnalyticsV2 extends Service {
    */
   addApplicationCloudWatchLoggingOption(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationCloudWatchLoggingOptionResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationCloudWatchLoggingOptionResponse, AWSError>;
   /**
-   *  Adds a streaming source to your SQL-based Amazon Kinesis Data Analytics application.  You can add a streaming source when you create an application, or you can use this operation to add a streaming source after you create an application. For more information, see CreateApplication. Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the DescribeApplication operation to find the current application version. 
+   *  Adds a streaming source to your SQL-based Kinesis Data Analytics application.  You can add a streaming source when you create an application, or you can use this operation to add a streaming source after you create an application. For more information, see CreateApplication. Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the DescribeApplication operation to find the current application version. 
    */
   addApplicationInput(params: KinesisAnalyticsV2.Types.AddApplicationInputRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationInputResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationInputResponse, AWSError>;
   /**
-   *  Adds a streaming source to your SQL-based Amazon Kinesis Data Analytics application.  You can add a streaming source when you create an application, or you can use this operation to add a streaming source after you create an application. For more information, see CreateApplication. Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the DescribeApplication operation to find the current application version. 
+   *  Adds a streaming source to your SQL-based Kinesis Data Analytics application.  You can add a streaming source when you create an application, or you can use this operation to add a streaming source after you create an application. For more information, see CreateApplication. Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the DescribeApplication operation to find the current application version. 
    */
   addApplicationInput(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationInputResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationInputResponse, AWSError>;
   /**
-   * Adds an InputProcessingConfiguration to an SQL-based Kinesis Data Analytics application. An input processor pre-processes records on the input stream before the application's SQL code executes. Currently, the only input processor available is AWS Lambda.
+   * Adds an InputProcessingConfiguration to a SQL-based Kinesis Data Analytics application. An input processor pre-processes records on the input stream before the application's SQL code executes. Currently, the only input processor available is AWS Lambda.
    */
   addApplicationInputProcessingConfiguration(params: KinesisAnalyticsV2.Types.AddApplicationInputProcessingConfigurationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationInputProcessingConfigurationResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationInputProcessingConfigurationResponse, AWSError>;
   /**
-   * Adds an InputProcessingConfiguration to an SQL-based Kinesis Data Analytics application. An input processor pre-processes records on the input stream before the application's SQL code executes. Currently, the only input processor available is AWS Lambda.
+   * Adds an InputProcessingConfiguration to a SQL-based Kinesis Data Analytics application. An input processor pre-processes records on the input stream before the application's SQL code executes. Currently, the only input processor available is AWS Lambda.
    */
   addApplicationInputProcessingConfiguration(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationInputProcessingConfigurationResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationInputProcessingConfigurationResponse, AWSError>;
   /**
-   * Adds an external destination to your SQL-based Amazon Kinesis Data Analytics application. If you want Kinesis Data Analytics to deliver data from an in-application stream within your application to an external destination (such as an Kinesis data stream, a Kinesis Data Firehose delivery stream, or an AWS Lambda function), you add the relevant configuration to your application using this operation. You can configure one or more outputs for your application. Each output configuration maps an in-application stream and an external destination.  You can use one of the output configurations to deliver data from your in-application error stream to an external destination so that you can analyze the errors.   Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the DescribeApplication operation to find the current application version.
+   * Adds an external destination to your SQL-based Kinesis Data Analytics application. If you want Kinesis Data Analytics to deliver data from an in-application stream within your application to an external destination (such as an Kinesis data stream, a Kinesis Data Firehose delivery stream, or an AWS Lambda function), you add the relevant configuration to your application using this operation. You can configure one or more outputs for your application. Each output configuration maps an in-application stream and an external destination.  You can use one of the output configurations to deliver data from your in-application error stream to an external destination so that you can analyze the errors.   Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the DescribeApplication operation to find the current application version.
    */
   addApplicationOutput(params: KinesisAnalyticsV2.Types.AddApplicationOutputRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationOutputResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationOutputResponse, AWSError>;
   /**
-   * Adds an external destination to your SQL-based Amazon Kinesis Data Analytics application. If you want Kinesis Data Analytics to deliver data from an in-application stream within your application to an external destination (such as an Kinesis data stream, a Kinesis Data Firehose delivery stream, or an AWS Lambda function), you add the relevant configuration to your application using this operation. You can configure one or more outputs for your application. Each output configuration maps an in-application stream and an external destination.  You can use one of the output configurations to deliver data from your in-application error stream to an external destination so that you can analyze the errors.   Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the DescribeApplication operation to find the current application version.
+   * Adds an external destination to your SQL-based Kinesis Data Analytics application. If you want Kinesis Data Analytics to deliver data from an in-application stream within your application to an external destination (such as an Kinesis data stream, a Kinesis Data Firehose delivery stream, or an AWS Lambda function), you add the relevant configuration to your application using this operation. You can configure one or more outputs for your application. Each output configuration maps an in-application stream and an external destination.  You can use one of the output configurations to deliver data from your in-application error stream to an external destination so that you can analyze the errors.   Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the DescribeApplication operation to find the current application version.
    */
   addApplicationOutput(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationOutputResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationOutputResponse, AWSError>;
   /**
-   * Adds a reference data source to an existing SQL-based Amazon Kinesis Data Analytics application. Kinesis Data Analytics reads reference data (that is, an Amazon S3 object) and creates an in-application table within your application. In the request, you provide the source (S3 bucket name and object key name), name of the in-application table to create, and the necessary mapping information that describes how data in an Amazon S3 object maps to columns in the resulting in-application table.
+   * Adds a reference data source to an existing SQL-based Kinesis Data Analytics application. Kinesis Data Analytics reads reference data (that is, an Amazon S3 object) and creates an in-application table within your application. In the request, you provide the source (S3 bucket name and object key name), name of the in-application table to create, and the necessary mapping information that describes how data in an Amazon S3 object maps to columns in the resulting in-application table.
    */
   addApplicationReferenceDataSource(params: KinesisAnalyticsV2.Types.AddApplicationReferenceDataSourceRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationReferenceDataSourceResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationReferenceDataSourceResponse, AWSError>;
   /**
-   * Adds a reference data source to an existing SQL-based Amazon Kinesis Data Analytics application. Kinesis Data Analytics reads reference data (that is, an Amazon S3 object) and creates an in-application table within your application. In the request, you provide the source (S3 bucket name and object key name), name of the in-application table to create, and the necessary mapping information that describes how data in an Amazon S3 object maps to columns in the resulting in-application table.
+   * Adds a reference data source to an existing SQL-based Kinesis Data Analytics application. Kinesis Data Analytics reads reference data (that is, an Amazon S3 object) and creates an in-application table within your application. In the request, you provide the source (S3 bucket name and object key name), name of the in-application table to create, and the necessary mapping information that describes how data in an Amazon S3 object maps to columns in the resulting in-application table.
    */
   addApplicationReferenceDataSource(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationReferenceDataSourceResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationReferenceDataSourceResponse, AWSError>;
   /**
@@ -60,11 +60,11 @@ declare class KinesisAnalyticsV2 extends Service {
    */
   addApplicationVpcConfiguration(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationVpcConfigurationResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationVpcConfigurationResponse, AWSError>;
   /**
-   * Creates an Amazon Kinesis Data Analytics application. For information about creating a Kinesis Data Analytics application, see Creating an Application. 
+   * Creates a Kinesis Data Analytics application. For information about creating a Kinesis Data Analytics application, see Creating an Application.
    */
   createApplication(params: KinesisAnalyticsV2.Types.CreateApplicationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.CreateApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.CreateApplicationResponse, AWSError>;
   /**
-   * Creates an Amazon Kinesis Data Analytics application. For information about creating a Kinesis Data Analytics application, see Creating an Application. 
+   * Creates a Kinesis Data Analytics application. For information about creating a Kinesis Data Analytics application, see Creating an Application.
    */
   createApplication(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.CreateApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.CreateApplicationResponse, AWSError>;
   /**
@@ -84,11 +84,11 @@ declare class KinesisAnalyticsV2 extends Service {
    */
   deleteApplication(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DeleteApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.DeleteApplicationResponse, AWSError>;
   /**
-   * Deletes an Amazon CloudWatch log stream from an Amazon Kinesis Data Analytics application. 
+   * Deletes an Amazon CloudWatch log stream from an Kinesis Data Analytics application. 
    */
   deleteApplicationCloudWatchLoggingOption(params: KinesisAnalyticsV2.Types.DeleteApplicationCloudWatchLoggingOptionRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DeleteApplicationCloudWatchLoggingOptionResponse) => void): Request<KinesisAnalyticsV2.Types.DeleteApplicationCloudWatchLoggingOptionResponse, AWSError>;
   /**
-   * Deletes an Amazon CloudWatch log stream from an Amazon Kinesis Data Analytics application. 
+   * Deletes an Amazon CloudWatch log stream from an Kinesis Data Analytics application. 
    */
   deleteApplicationCloudWatchLoggingOption(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DeleteApplicationCloudWatchLoggingOptionResponse) => void): Request<KinesisAnalyticsV2.Types.DeleteApplicationCloudWatchLoggingOptionResponse, AWSError>;
   /**
@@ -100,19 +100,19 @@ declare class KinesisAnalyticsV2 extends Service {
    */
   deleteApplicationInputProcessingConfiguration(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DeleteApplicationInputProcessingConfigurationResponse) => void): Request<KinesisAnalyticsV2.Types.DeleteApplicationInputProcessingConfigurationResponse, AWSError>;
   /**
-   * Deletes the output destination configuration from your SQL-based Amazon Kinesis Data Analytics application's configuration. Kinesis Data Analytics will no longer write data from the corresponding in-application stream to the external output destination.
+   * Deletes the output destination configuration from your SQL-based Kinesis Data Analytics application's configuration. Kinesis Data Analytics will no longer write data from the corresponding in-application stream to the external output destination.
    */
   deleteApplicationOutput(params: KinesisAnalyticsV2.Types.DeleteApplicationOutputRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DeleteApplicationOutputResponse) => void): Request<KinesisAnalyticsV2.Types.DeleteApplicationOutputResponse, AWSError>;
   /**
-   * Deletes the output destination configuration from your SQL-based Amazon Kinesis Data Analytics application's configuration. Kinesis Data Analytics will no longer write data from the corresponding in-application stream to the external output destination.
+   * Deletes the output destination configuration from your SQL-based Kinesis Data Analytics application's configuration. Kinesis Data Analytics will no longer write data from the corresponding in-application stream to the external output destination.
    */
   deleteApplicationOutput(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DeleteApplicationOutputResponse) => void): Request<KinesisAnalyticsV2.Types.DeleteApplicationOutputResponse, AWSError>;
   /**
-   * Deletes a reference data source configuration from the specified SQL-based Amazon Kinesis Data Analytics application's configuration. If the application is running, Kinesis Data Analytics immediately removes the in-application table that you created using the AddApplicationReferenceDataSource operation. 
+   * Deletes a reference data source configuration from the specified SQL-based Kinesis Data Analytics application's configuration. If the application is running, Kinesis Data Analytics immediately removes the in-application table that you created using the AddApplicationReferenceDataSource operation. 
    */
   deleteApplicationReferenceDataSource(params: KinesisAnalyticsV2.Types.DeleteApplicationReferenceDataSourceRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DeleteApplicationReferenceDataSourceResponse) => void): Request<KinesisAnalyticsV2.Types.DeleteApplicationReferenceDataSourceResponse, AWSError>;
   /**
-   * Deletes a reference data source configuration from the specified SQL-based Amazon Kinesis Data Analytics application's configuration. If the application is running, Kinesis Data Analytics immediately removes the in-application table that you created using the AddApplicationReferenceDataSource operation. 
+   * Deletes a reference data source configuration from the specified SQL-based Kinesis Data Analytics application's configuration. If the application is running, Kinesis Data Analytics immediately removes the in-application table that you created using the AddApplicationReferenceDataSource operation. 
    */
   deleteApplicationReferenceDataSource(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DeleteApplicationReferenceDataSourceResponse) => void): Request<KinesisAnalyticsV2.Types.DeleteApplicationReferenceDataSourceResponse, AWSError>;
   /**
@@ -132,11 +132,11 @@ declare class KinesisAnalyticsV2 extends Service {
    */
   deleteApplicationVpcConfiguration(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DeleteApplicationVpcConfigurationResponse) => void): Request<KinesisAnalyticsV2.Types.DeleteApplicationVpcConfigurationResponse, AWSError>;
   /**
-   * Returns information about a specific Amazon Kinesis Data Analytics application. If you want to retrieve a list of all applications in your account, use the ListApplications operation.
+   * Returns information about a specific Kinesis Data Analytics application. If you want to retrieve a list of all applications in your account, use the ListApplications operation.
    */
   describeApplication(params: KinesisAnalyticsV2.Types.DescribeApplicationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DescribeApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.DescribeApplicationResponse, AWSError>;
   /**
-   * Returns information about a specific Amazon Kinesis Data Analytics application. If you want to retrieve a list of all applications in your account, use the ListApplications operation.
+   * Returns information about a specific Kinesis Data Analytics application. If you want to retrieve a list of all applications in your account, use the ListApplications operation.
    */
   describeApplication(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DescribeApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.DescribeApplicationResponse, AWSError>;
   /**
@@ -148,11 +148,11 @@ declare class KinesisAnalyticsV2 extends Service {
    */
   describeApplicationSnapshot(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DescribeApplicationSnapshotResponse) => void): Request<KinesisAnalyticsV2.Types.DescribeApplicationSnapshotResponse, AWSError>;
   /**
-   * Infers a schema for an SQL-based Amazon Kinesis Data Analytics application by evaluating sample records on the specified streaming source (Kinesis data stream or Kinesis Data Firehose delivery stream) or Amazon S3 object. In the response, the operation returns the inferred schema and also the sample records that the operation used to infer the schema.  You can use the inferred schema when configuring a streaming source for your application. When you create an application using the Kinesis Data Analytics console, the console uses this operation to infer a schema and show it in the console user interface. 
+   * Infers a schema for a SQL-based Kinesis Data Analytics application by evaluating sample records on the specified streaming source (Kinesis data stream or Kinesis Data Firehose delivery stream) or Amazon S3 object. In the response, the operation returns the inferred schema and also the sample records that the operation used to infer the schema.  You can use the inferred schema when configuring a streaming source for your application. When you create an application using the Kinesis Data Analytics console, the console uses this operation to infer a schema and show it in the console user interface. 
    */
   discoverInputSchema(params: KinesisAnalyticsV2.Types.DiscoverInputSchemaRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DiscoverInputSchemaResponse) => void): Request<KinesisAnalyticsV2.Types.DiscoverInputSchemaResponse, AWSError>;
   /**
-   * Infers a schema for an SQL-based Amazon Kinesis Data Analytics application by evaluating sample records on the specified streaming source (Kinesis data stream or Kinesis Data Firehose delivery stream) or Amazon S3 object. In the response, the operation returns the inferred schema and also the sample records that the operation used to infer the schema.  You can use the inferred schema when configuring a streaming source for your application. When you create an application using the Kinesis Data Analytics console, the console uses this operation to infer a schema and show it in the console user interface. 
+   * Infers a schema for a SQL-based Kinesis Data Analytics application by evaluating sample records on the specified streaming source (Kinesis data stream or Kinesis Data Firehose delivery stream) or Amazon S3 object. In the response, the operation returns the inferred schema and also the sample records that the operation used to infer the schema.  You can use the inferred schema when configuring a streaming source for your application. When you create an application using the Kinesis Data Analytics console, the console uses this operation to infer a schema and show it in the console user interface. 
    */
   discoverInputSchema(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DiscoverInputSchemaResponse) => void): Request<KinesisAnalyticsV2.Types.DiscoverInputSchemaResponse, AWSError>;
   /**
@@ -164,11 +164,11 @@ declare class KinesisAnalyticsV2 extends Service {
    */
   listApplicationSnapshots(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.ListApplicationSnapshotsResponse) => void): Request<KinesisAnalyticsV2.Types.ListApplicationSnapshotsResponse, AWSError>;
   /**
-   * Returns a list of Amazon Kinesis Data Analytics applications in your account. For each application, the response includes the application name, Amazon Resource Name (ARN), and status.  If you want detailed information about a specific application, use DescribeApplication.
+   * Returns a list of Kinesis Data Analytics applications in your account. For each application, the response includes the application name, Amazon Resource Name (ARN), and status.  If you want detailed information about a specific application, use DescribeApplication.
    */
   listApplications(params: KinesisAnalyticsV2.Types.ListApplicationsRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.ListApplicationsResponse) => void): Request<KinesisAnalyticsV2.Types.ListApplicationsResponse, AWSError>;
   /**
-   * Returns a list of Amazon Kinesis Data Analytics applications in your account. For each application, the response includes the application name, Amazon Resource Name (ARN), and status.  If you want detailed information about a specific application, use DescribeApplication.
+   * Returns a list of Kinesis Data Analytics applications in your account. For each application, the response includes the application name, Amazon Resource Name (ARN), and status.  If you want detailed information about a specific application, use DescribeApplication.
    */
   listApplications(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.ListApplicationsResponse) => void): Request<KinesisAnalyticsV2.Types.ListApplicationsResponse, AWSError>;
   /**
@@ -180,11 +180,11 @@ declare class KinesisAnalyticsV2 extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.ListTagsForResourceResponse) => void): Request<KinesisAnalyticsV2.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Starts the specified Amazon Kinesis Data Analytics application. After creating an application, you must exclusively call this operation to start your application.
+   * Starts the specified Kinesis Data Analytics application. After creating an application, you must exclusively call this operation to start your application.
    */
   startApplication(params: KinesisAnalyticsV2.Types.StartApplicationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.StartApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.StartApplicationResponse, AWSError>;
   /**
-   * Starts the specified Amazon Kinesis Data Analytics application. After creating an application, you must exclusively call this operation to start your application.
+   * Starts the specified Kinesis Data Analytics application. After creating an application, you must exclusively call this operation to start your application.
    */
   startApplication(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.StartApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.StartApplicationResponse, AWSError>;
   /**
@@ -196,27 +196,27 @@ declare class KinesisAnalyticsV2 extends Service {
    */
   stopApplication(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.StopApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.StopApplicationResponse, AWSError>;
   /**
-   * Adds one or more key-value tags to a Kinesis Analytics application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see Using Tagging.
+   * Adds one or more key-value tags to a Kinesis Data Analytics application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see Using Tagging.
    */
   tagResource(params: KinesisAnalyticsV2.Types.TagResourceRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.TagResourceResponse) => void): Request<KinesisAnalyticsV2.Types.TagResourceResponse, AWSError>;
   /**
-   * Adds one or more key-value tags to a Kinesis Analytics application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see Using Tagging.
+   * Adds one or more key-value tags to a Kinesis Data Analytics application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see Using Tagging.
    */
   tagResource(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.TagResourceResponse) => void): Request<KinesisAnalyticsV2.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes one or more tags from a Kinesis Analytics application. For more information, see Using Tagging.
+   * Removes one or more tags from a Kinesis Data Analytics application. For more information, see Using Tagging.
    */
   untagResource(params: KinesisAnalyticsV2.Types.UntagResourceRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.UntagResourceResponse) => void): Request<KinesisAnalyticsV2.Types.UntagResourceResponse, AWSError>;
   /**
-   * Removes one or more tags from a Kinesis Analytics application. For more information, see Using Tagging.
+   * Removes one or more tags from a Kinesis Data Analytics application. For more information, see Using Tagging.
    */
   untagResource(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.UntagResourceResponse) => void): Request<KinesisAnalyticsV2.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates an existing Amazon Kinesis Data Analytics application. Using this operation, you can update application code, input configuration, and output configuration.  Kinesis Data Analytics updates the ApplicationVersionId each time you update your application. 
+   * Updates an existing Kinesis Data Analytics application. Using this operation, you can update application code, input configuration, and output configuration.  Kinesis Data Analytics updates the ApplicationVersionId each time you update your application.   You cannot update the RuntimeEnvironment of an existing application. If you need to update an application's RuntimeEnvironment, you must delete the application and create it again. 
    */
   updateApplication(params: KinesisAnalyticsV2.Types.UpdateApplicationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.UpdateApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.UpdateApplicationResponse, AWSError>;
   /**
-   * Updates an existing Amazon Kinesis Data Analytics application. Using this operation, you can update application code, input configuration, and output configuration.  Kinesis Data Analytics updates the ApplicationVersionId each time you update your application. 
+   * Updates an existing Kinesis Data Analytics application. Using this operation, you can update application code, input configuration, and output configuration.  Kinesis Data Analytics updates the ApplicationVersionId each time you update your application.   You cannot update the RuntimeEnvironment of an existing application. If you need to update an application's RuntimeEnvironment, you must delete the application and create it again. 
    */
   updateApplication(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.UpdateApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.UpdateApplicationResponse, AWSError>;
 }
@@ -277,7 +277,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationVersionId?: ApplicationVersionId;
     /**
-     * The input ID that is associated with the application input. This is the ID that Amazon Kinesis Data Analytics assigns to each input configuration that you add to your application.
+     * The input ID that is associated with the application input. This is the ID that Kinesis Data Analytics assigns to each input configuration that you add to your application.
      */
     InputId?: Id;
     /**
@@ -361,7 +361,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationARN?: ResourceARN;
     /**
-     * The updated application version ID. Amazon Kinesis Data Analytics increments this ID when the application is updated.
+     * The updated application version ID. Kinesis Data Analytics increments this ID when the application is updated.
      */
     ApplicationVersionId?: ApplicationVersionId;
     /**
@@ -375,7 +375,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationName: ApplicationName;
     /**
-     * The version of the application to which you want to add the input processing configuration. You can use the DescribeApplication operation to get the current application version. If the version specified is not the current version, the ConcurrentModificationException is returned.
+     * The version of the application to which you want to add the VPC configuration. You can use the DescribeApplication operation to get the current application version. If the version specified is not the current version, the ConcurrentModificationException is returned.
      */
     CurrentApplicationVersionId: ApplicationVersionId;
     /**
@@ -429,23 +429,23 @@ declare namespace KinesisAnalyticsV2 {
   }
   export interface ApplicationConfiguration {
     /**
-     * The creation and update parameters for an SQL-based Kinesis Data Analytics application.
+     * The creation and update parameters for a SQL-based Kinesis Data Analytics application.
      */
     SqlApplicationConfiguration?: SqlApplicationConfiguration;
     /**
-     * The creation and update parameters for a Java-based Kinesis Data Analytics application.
+     * The creation and update parameters for a Flink-based Kinesis Data Analytics application.
      */
     FlinkApplicationConfiguration?: FlinkApplicationConfiguration;
     /**
-     * Describes execution properties for a Java-based Kinesis Data Analytics application.
+     * Describes execution properties for a Flink-based Kinesis Data Analytics application.
      */
     EnvironmentProperties?: EnvironmentProperties;
     /**
-     * The code location and type parameters for a Java-based Kinesis Data Analytics application.
+     * The code location and type parameters for a Flink-based Kinesis Data Analytics application.
      */
     ApplicationCodeConfiguration: ApplicationCodeConfiguration;
     /**
-     * Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
+     * Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.
      */
     ApplicationSnapshotConfiguration?: ApplicationSnapshotConfiguration;
     /**
@@ -455,11 +455,11 @@ declare namespace KinesisAnalyticsV2 {
   }
   export interface ApplicationConfigurationDescription {
     /**
-     * The details about inputs, outputs, and reference data sources for an SQL-based Kinesis Data Analytics application.
+     * The details about inputs, outputs, and reference data sources for a SQL-based Kinesis Data Analytics application.
      */
     SqlApplicationConfigurationDescription?: SqlApplicationConfigurationDescription;
     /**
-     * The details about the application code for a Java-based Kinesis Data Analytics application.
+     * The details about the application code for a Flink-based Kinesis Data Analytics application.
      */
     ApplicationCodeConfigurationDescription?: ApplicationCodeConfigurationDescription;
     /**
@@ -467,15 +467,15 @@ declare namespace KinesisAnalyticsV2 {
      */
     RunConfigurationDescription?: RunConfigurationDescription;
     /**
-     * The details about a Java-based Kinesis Data Analytics application.
+     * The details about a Flink-based Kinesis Data Analytics application.
      */
     FlinkApplicationConfigurationDescription?: FlinkApplicationConfigurationDescription;
     /**
-     * Describes execution properties for a Java-based Kinesis Data Analytics application.
+     * Describes execution properties for a Flink-based Kinesis Data Analytics application.
      */
     EnvironmentPropertyDescriptions?: EnvironmentPropertyDescriptions;
     /**
-     * Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
+     * Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.
      */
     ApplicationSnapshotConfigurationDescription?: ApplicationSnapshotConfigurationDescription;
     /**
@@ -485,23 +485,23 @@ declare namespace KinesisAnalyticsV2 {
   }
   export interface ApplicationConfigurationUpdate {
     /**
-     * Describes updates to an SQL-based Kinesis Data Analytics application's configuration.
+     * Describes updates to a SQL-based Kinesis Data Analytics application's configuration.
      */
     SqlApplicationConfigurationUpdate?: SqlApplicationConfigurationUpdate;
     /**
-     * Describes updates to a Java-based Kinesis Data Analytics application's code configuration.
+     * Describes updates to a Flink-based Kinesis Data Analytics application's code configuration.
      */
     ApplicationCodeConfigurationUpdate?: ApplicationCodeConfigurationUpdate;
     /**
-     * Describes updates to a Java-based Kinesis Data Analytics application's configuration.
+     * Describes updates to a Flink-based Kinesis Data Analytics application's configuration.
      */
     FlinkApplicationConfigurationUpdate?: FlinkApplicationConfigurationUpdate;
     /**
-     * Describes updates to the environment properties for a Java-based Kinesis Data Analytics application.
+     * Describes updates to the environment properties for a Flink-based Kinesis Data Analytics application.
      */
     EnvironmentPropertyUpdates?: EnvironmentPropertyUpdates;
     /**
-     * Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
+     * Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.
      */
     ApplicationSnapshotConfigurationUpdate?: ApplicationSnapshotConfigurationUpdate;
     /**
@@ -524,7 +524,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationName: ApplicationName;
     /**
-     * The runtime environment for the application (SQL-1.0 or FLINK-1_6).
+     * The runtime environment for the application (SQL-1.0, FLINK-1_6, or FLINK-1_8).
      */
     RuntimeEnvironment: RuntimeEnvironment;
     /**
@@ -548,7 +548,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     LastUpdateTimestamp?: Timestamp;
     /**
-     * Provides details about the application's SQL or Java code and starting parameters.
+     * Provides details about the application's Java, SQL, or Scala code and starting parameters.
      */
     ApplicationConfigurationDescription?: ApplicationConfigurationDescription;
     /**
@@ -570,23 +570,23 @@ declare namespace KinesisAnalyticsV2 {
   export type ApplicationRestoreType = "SKIP_RESTORE_FROM_SNAPSHOT"|"RESTORE_FROM_LATEST_SNAPSHOT"|"RESTORE_FROM_CUSTOM_SNAPSHOT"|string;
   export interface ApplicationSnapshotConfiguration {
     /**
-     * Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
+     * Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.
      */
     SnapshotsEnabled: BooleanObject;
   }
   export interface ApplicationSnapshotConfigurationDescription {
     /**
-     * Describes whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
+     * Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.
      */
     SnapshotsEnabled: BooleanObject;
   }
   export interface ApplicationSnapshotConfigurationUpdate {
     /**
-     * Describes updates to whether snapshots are enabled for a Java-based Kinesis Data Analytics application.
+     * Describes updates to whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.
      */
     SnapshotsEnabledUpdate: BooleanObject;
   }
-  export type ApplicationStatus = "DELETING"|"STARTING"|"STOPPING"|"READY"|"RUNNING"|"UPDATING"|"AUTOSCALING"|string;
+  export type ApplicationStatus = "DELETING"|"STARTING"|"STOPPING"|"READY"|"RUNNING"|"UPDATING"|"AUTOSCALING"|"FORCE_STOPPING"|string;
   export type ApplicationSummaries = ApplicationSummary[];
   export interface ApplicationSummary {
     /**
@@ -606,7 +606,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationVersionId: ApplicationVersionId;
     /**
-     * The runtime environment for the application (SQL-1.0 or FLINK-1_6).
+     * The runtime environment for the application (SQL-1.0, FLINK-1_6, or FLINK-1_8).
      */
     RuntimeEnvironment: RuntimeEnvironment;
   }
@@ -625,11 +625,11 @@ declare namespace KinesisAnalyticsV2 {
   }
   export interface CheckpointConfiguration {
     /**
-     * Describes whether the application uses Amazon Kinesis Data Analytics' default checkpointing behavior. You must set this property to CUSTOM in order to set the CheckpointingEnabled, CheckpointInterval, or MinPauseBetweenCheckpoints parameters.  If this value is set to DEFAULT, the application will use the following values, even if they are set to other values using APIs or application code:    CheckpointingEnabled: true    CheckpointInterval: 60000    MinPauseBetweenCheckpoints: 5000   
+     * Describes whether the application uses Kinesis Data Analytics' default checkpointing behavior. You must set this property to CUSTOM in order to set the CheckpointingEnabled, CheckpointInterval, or MinPauseBetweenCheckpoints parameters.  If this value is set to DEFAULT, the application will use the following values, even if they are set to other values using APIs or application code:    CheckpointingEnabled: true    CheckpointInterval: 60000    MinPauseBetweenCheckpoints: 5000   
      */
     ConfigurationType: ConfigurationType;
     /**
-     * Describes whether checkpointing is enabled for a Java-based Kinesis Data Analytics application.  If CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a CheckpointingEnabled value of true, even if this value is set to another value using this API or in application code. 
+     * Describes whether checkpointing is enabled for a Flink-based Kinesis Data Analytics application.  If CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a CheckpointingEnabled value of true, even if this value is set to another value using this API or in application code. 
      */
     CheckpointingEnabled?: BooleanObject;
     /**
@@ -647,7 +647,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ConfigurationType?: ConfigurationType;
     /**
-     * Describes whether checkpointing is enabled for a Java-based Kinesis Data Analytics application.  If CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a CheckpointingEnabled value of true, even if this value is set to another value using this API or in application code. 
+     * Describes whether checkpointing is enabled for a Flink-based Kinesis Data Analytics application.  If CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a CheckpointingEnabled value of true, even if this value is set to another value using this API or in application code. 
      */
     CheckpointingEnabled?: BooleanObject;
     /**
@@ -713,11 +713,11 @@ declare namespace KinesisAnalyticsV2 {
   export type CloudWatchLoggingOptions = CloudWatchLoggingOption[];
   export interface CodeContent {
     /**
-     * The text-format code for a Java-based Kinesis Data Analytics application.
+     * The text-format code for a Flink-based Kinesis Data Analytics application.
      */
     TextContent?: TextContent;
     /**
-     * The zip-format code for a Java-based Kinesis Data Analytics application.
+     * The zip-format code for a Flink-based Kinesis Data Analytics application.
      */
     ZipFileContent?: ZipFileContent;
     /**
@@ -771,7 +771,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationDescription?: ApplicationDescription;
     /**
-     * The runtime environment for the application (SQL-1.0 or FLINK-1_6).
+     * The runtime environment for the application (SQL-1.0, FLINK-1_6, or FLINK-1_8).
      */
     RuntimeEnvironment: RuntimeEnvironment;
     /**
@@ -1106,7 +1106,7 @@ declare namespace KinesisAnalyticsV2 {
   }
   export interface FlinkRunConfiguration {
     /**
-     * When restoring from a savepoint, specifies whether the runtime is allowed to skip a state that cannot be mapped to the new program. This will happen if the program is updated between savepoints to remove stateful parameters, and state data in the savepoint no longer corresponds to valid application data. For more information, see  Allowing Non-Restored State in the Apache Flink documentation.
+     * When restoring from a snapshot, specifies whether the runtime is allowed to skip a state that cannot be mapped to the new program. This will happen if the program is updated between snapshots to remove stateful parameters, and state data in the snapshot no longer corresponds to valid application data. For more information, see  Allowing Non-Restored State in the Apache Flink documentation.  This value defaults to false. If you update your application without specifying this parameter, AllowNonRestoredState will be set to false, even if it was previously set to true. 
      */
     AllowNonRestoredState?: BooleanObject;
   }
@@ -1481,7 +1481,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ConfigurationType: ConfigurationType;
     /**
-     * Describes the granularity of the CloudWatch Logs for an application.
+     * Describes the granularity of the CloudWatch Logs for an application. The Parallelism level is not recommended for applications with a Parallelism over 64 due to excessive costs.
      */
     MetricsLevel?: MetricsLevel;
     /**
@@ -1509,7 +1509,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ConfigurationTypeUpdate?: ConfigurationType;
     /**
-     * Describes updates to the granularity of the CloudWatch Logs for an application.
+     * Describes updates to the granularity of the CloudWatch Logs for an application. The Parallelism level is not recommended for applications with a Parallelism over 64 due to excessive costs.
      */
     MetricsLevelUpdate?: MetricsLevel;
     /**
@@ -1525,11 +1525,11 @@ declare namespace KinesisAnalyticsV2 {
      */
     Name: InAppStreamName;
     /**
-     * Identifies an Amazon Kinesis data stream as the destination.
+     * Identifies a Kinesis data stream as the destination.
      */
     KinesisStreamsOutput?: KinesisStreamsOutput;
     /**
-     * Identifies an Amazon Kinesis Data Firehose delivery stream as the destination.
+     * Identifies a Kinesis Data Firehose delivery stream as the destination.
      */
     KinesisFirehoseOutput?: KinesisFirehoseOutput;
     /**
@@ -1603,11 +1603,11 @@ declare namespace KinesisAnalyticsV2 {
      */
     ConfigurationType: ConfigurationType;
     /**
-     * Describes the initial number of parallel tasks that a Java-based Kinesis Data Analytics application can perform. If AutoScalingEnabled is set to True, Kinesis Data Analytics increases the CurrentParallelism value in response to application load. The service can increase the CurrentParallelism value up to the maximum parallelism, which is ParalellismPerKPU times the maximum KPUs for the application. The maximum KPUs for an application is 32 by default, and can be increased by requesting a limit increase. If application load is reduced, the service can reduce the CurrentParallelism value down to the Parallelism setting.
+     * Describes the initial number of parallel tasks that a Flink-based Kinesis Data Analytics application can perform. If AutoScalingEnabled is set to True, Kinesis Data Analytics increases the CurrentParallelism value in response to application load. The service can increase the CurrentParallelism value up to the maximum parallelism, which is ParalellismPerKPU times the maximum KPUs for the application. The maximum KPUs for an application is 32 by default, and can be increased by requesting a limit increase. If application load is reduced, the service can reduce the CurrentParallelism value down to the Parallelism setting.
      */
     Parallelism?: Parallelism;
     /**
-     * Describes the number of parallel tasks that a Java-based Kinesis Data Analytics application can perform per Kinesis Processing Unit (KPU) used by the application. For more information about KPUs, see Amazon Kinesis Data Analytics Pricing.
+     * Describes the number of parallel tasks that a Flink-based Kinesis Data Analytics application can perform per Kinesis Processing Unit (KPU) used by the application. For more information about KPUs, see Amazon Kinesis Data Analytics Pricing.
      */
     ParallelismPerKPU?: ParallelismPerKPU;
     /**
@@ -1621,15 +1621,15 @@ declare namespace KinesisAnalyticsV2 {
      */
     ConfigurationType?: ConfigurationType;
     /**
-     * Describes the initial number of parallel tasks that a Java-based Kinesis Data Analytics application can perform. If AutoScalingEnabled is set to True, then Kinesis Data Analytics can increase the CurrentParallelism value in response to application load. The service can increase CurrentParallelism up to the maximum parallelism, which is ParalellismPerKPU times the maximum KPUs for the application. The maximum KPUs for an application is 32 by default, and can be increased by requesting a limit increase. If application load is reduced, the service can reduce the CurrentParallelism value down to the Parallelism setting.
+     * Describes the initial number of parallel tasks that a Flink-based Kinesis Data Analytics application can perform. If AutoScalingEnabled is set to True, then Kinesis Data Analytics can increase the CurrentParallelism value in response to application load. The service can increase CurrentParallelism up to the maximum parallelism, which is ParalellismPerKPU times the maximum KPUs for the application. The maximum KPUs for an application is 32 by default, and can be increased by requesting a limit increase. If application load is reduced, the service can reduce the CurrentParallelism value down to the Parallelism setting.
      */
     Parallelism?: Parallelism;
     /**
-     * Describes the number of parallel tasks that a Java-based Kinesis Data Analytics application can perform per Kinesis Processing Unit (KPU) used by the application.
+     * Describes the number of parallel tasks that a Flink-based Kinesis Data Analytics application can perform per Kinesis Processing Unit (KPU) used by the application.
      */
     ParallelismPerKPU?: ParallelismPerKPU;
     /**
-     * Describes the current number of parallel tasks that a Java-based Kinesis Data Analytics application can perform. If AutoScalingEnabled is set to True, Kinesis Data Analytics can increase this value in response to application load. The service can increase this value up to the maximum parallelism, which is ParalellismPerKPU times the maximum KPUs for the application. The maximum KPUs for an application is 32 by default, and can be increased by requesting a limit increase. If application load is reduced, the service can reduce the CurrentParallelism value down to the Parallelism setting.
+     * Describes the current number of parallel tasks that a Flink-based Kinesis Data Analytics application can perform. If AutoScalingEnabled is set to True, Kinesis Data Analytics can increase this value in response to application load. The service can increase this value up to the maximum parallelism, which is ParalellismPerKPU times the maximum KPUs for the application. The maximum KPUs for an application is 32 by default, and can be increased by requesting a limit increase. If application load is reduced, the service can reduce the CurrentParallelism value down to the Parallelism setting.
      */
     CurrentParallelism?: Parallelism;
     /**
@@ -1767,11 +1767,11 @@ declare namespace KinesisAnalyticsV2 {
   export type RoleARN = string;
   export interface RunConfiguration {
     /**
-     * Describes the starting parameters for an Apache Flink-based Kinesis Data Analytics application.
+     * Describes the starting parameters for a Flink-based Kinesis Data Analytics application.
      */
     FlinkRunConfiguration?: FlinkRunConfiguration;
     /**
-     * Describes the starting parameters for an SQL-based Kinesis Data Analytics application.
+     * Describes the starting parameters for a SQL-based Kinesis Data Analytics application application.
      */
     SqlRunConfigurations?: SqlRunConfigurations;
     /**
@@ -1788,7 +1788,7 @@ declare namespace KinesisAnalyticsV2 {
   }
   export interface RunConfigurationUpdate {
     /**
-     * Describes the starting parameters for an Apache Flink-based Kinesis Data Analytics application.
+     * Describes the starting parameters for a Flink-based Kinesis Data Analytics application.
      */
     FlinkRunConfiguration?: FlinkRunConfiguration;
     /**
@@ -1990,6 +1990,10 @@ declare namespace KinesisAnalyticsV2 {
      * The name of the running application to stop.
      */
     ApplicationName: ApplicationName;
+    /**
+     * Set to true to force the application to stop. If you set Force to true, Kinesis Data Analytics stops the application without taking a snapshot. You can only force stop a Flink-based Kinesis Data Analytics application. You can't force stop a SQL-based Kinesis Data Analytics application. The application must be in the STARTING, UPDATING, STOPPING, AUTOSCALING, or RUNNING state. 
+     */
+    Force?: BooleanObject;
   }
   export interface StopApplicationResponse {
   }
@@ -2025,7 +2029,7 @@ declare namespace KinesisAnalyticsV2 {
   export type Timestamp = Date;
   export interface UntagResourceRequest {
     /**
-     * The ARN of the Kinesis Analytics application from which to remove the tags.
+     * The ARN of the Kinesis Data Analytics application from which to remove the tags.
      */
     ResourceARN: KinesisAnalyticsARN;
     /**

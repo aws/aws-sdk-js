@@ -129,6 +129,10 @@ declare namespace MarketplaceCatalog {
      * This object is a list of entity IDs (string) that are a part of a change set. The entity ID list is a maximum of 20 entities. It must contain at least one entity.
      */
     EntityIdList?: ResourceIdList;
+    /**
+     * Returned if the change set is in FAILED status. Can be either CLIENT_ERROR, which means that there are issues with the request (see the ErrorDetailList of DescribeChangeSet), or SERVER_FAULT, which means that there is a problem in the system, and you should retry your request.
+     */
+    FailureCode?: FailureCode;
   }
   export type ChangeStatus = "PREPARING"|"APPLYING"|"SUCCEEDED"|"CANCELLED"|"FAILED"|string;
   export interface ChangeSummary {
@@ -187,6 +191,10 @@ declare namespace MarketplaceCatalog {
      * The status of the change request.
      */
     Status?: ChangeStatus;
+    /**
+     * Returned if the change set is in FAILED status. Can be either CLIENT_ERROR, which means that there are issues with the request (see the ErrorDetailList), or SERVER_FAULT, which means that there is a problem in the system, and you should retry your request.
+     */
+    FailureCode?: FailureCode;
     /**
      * Returned if there is a failure on the change set, but that failure is not related to any of the changes in the request.
      */
@@ -277,6 +285,7 @@ declare namespace MarketplaceCatalog {
     ErrorMessage?: StringValue;
   }
   export type ErrorDetailList = ErrorDetail[];
+  export type FailureCode = "CLIENT_ERROR"|"SERVER_FAULT"|string;
   export interface Filter {
     /**
      * For ListEntities, the supported value for this is an EntityId. For ListChangeSets, the supported values are as follows:

@@ -327,6 +327,10 @@
         "EntityIdList": {
           "shape": "ResourceIdList",
           "documentation": "<p>This object is a list of entity IDs (string) that are a part of a change set. The entity ID list is a maximum of 20 entities. It must contain at least one entity.</p>"
+        },
+        "FailureCode": {
+          "shape": "FailureCode",
+          "documentation": "<p>Returned if the change set is in <code>FAILED</code> status. Can be either <code>CLIENT_ERROR</code>, which means that there are issues with the request (see the <code>ErrorDetailList</code> of <code>DescribeChangeSet</code>), or <code>SERVER_FAULT</code>, which means that there is a problem in the system, and you should retry your request.</p>"
         }
       },
       "documentation": "<p>A summary of a change set returned in a list of change sets when the <code>ListChangeSets</code> action is called.</p>"
@@ -428,6 +432,10 @@
         "Status": {
           "shape": "ChangeStatus",
           "documentation": "<p>The status of the change request.</p>"
+        },
+        "FailureCode": {
+          "shape": "FailureCode",
+          "documentation": "<p>Returned if the change set is in <code>FAILED</code> status. Can be either <code>CLIENT_ERROR</code>, which means that there are issues with the request (see the <code>ErrorDetailList</code>), or <code>SERVER_FAULT</code>, which means that there is a problem in the system, and you should retry your request.</p>"
         },
         "FailureDescription": {
           "shape": "StringValue",
@@ -563,6 +571,13 @@
       "member": {
         "shape": "ErrorDetail"
       }
+    },
+    "FailureCode": {
+      "type": "string",
+      "enum": [
+        "CLIENT_ERROR",
+        "SERVER_FAULT"
+      ]
     },
     "Filter": {
       "type": "structure",
@@ -800,5 +815,5 @@
       "min": 1
     }
   },
-  "documentation": "<p>Catalog API actions allow you to manage your entities through list, describe, and update capabilities. An entity can be a product or an offer on AWS Marketplace.</p> <p>You can automate your entity update process by integrating the AWS Marketplace Catalog API with your AWS Marketplace product build or deployment pipelines. You can also create your own applications on top of the Catalog API to manage your products on AWS Marketplace.</p>"
+  "documentation": "<p>Catalog API actions allow you to manage your entities through list, describe, and update capabilities. An entity can be a product or an offer on AWS Marketplace. </p> <p>You can automate your entity update process by integrating the AWS Marketplace Catalog API with your AWS Marketplace product build or deployment pipelines. You can also create your own applications on top of the Catalog API to manage your products on AWS Marketplace.</p>"
 }

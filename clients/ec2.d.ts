@@ -17696,6 +17696,10 @@ declare namespace EC2 {
      */
     PeerBgpAsn?: Integer;
     /**
+     * The AWS account ID that owns the local gateway virtual interface.
+     */
+    OwnerId?: String;
+    /**
      * The tags assigned to the virtual interface.
      */
     Tags?: TagList;
@@ -17713,6 +17717,10 @@ declare namespace EC2 {
      * The ID of the local gateway.
      */
     LocalGatewayId?: String;
+    /**
+     * The AWS account ID that owns the local gateway virtual interface group.
+     */
+    OwnerId?: String;
     /**
      * The tags assigned to the virtual interface group.
      */
