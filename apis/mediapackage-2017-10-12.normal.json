@@ -13,6 +13,42 @@
     "uid": "mediapackage-2017-10-12"
   },
   "operations": {
+    "ConfigureLogs": {
+      "documentation": "Changes the Channel's properities to configure log subscription",
+      "errors": [
+        {
+          "shape": "UnprocessableEntityException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "http": {
+        "method": "PUT",
+        "requestUri": "/channels/{id}/configure_logs",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ConfigureLogsRequest"
+      },
+      "name": "ConfigureLogs",
+      "output": {
+        "documentation": "The updated log configuration record.",
+        "shape": "ConfigureLogsResponse"
+      }
+    },
     "CreateChannel": {
       "documentation": "Creates a new Channel.",
       "errors": [
@@ -656,6 +692,10 @@
           "locationName": "description",
           "shape": "__string"
         },
+        "EgressAccessLogs": {
+          "locationName": "egressAccessLogs",
+          "shape": "EgressAccessLogs"
+        },
         "HlsIngest": {
           "locationName": "hlsIngest",
           "shape": "HlsIngest"
@@ -664,6 +704,10 @@
           "documentation": "The ID of the Channel.",
           "locationName": "id",
           "shape": "__string"
+        },
+        "IngressAccessLogs": {
+          "locationName": "ingressAccessLogs",
+          "shape": "IngressAccessLogs"
         },
         "Tags": {
           "locationName": "tags",
@@ -748,6 +792,65 @@
       },
       "type": "structure"
     },
+    "ConfigureLogsRequest": {
+      "documentation": "the option to configure log subscription.",
+      "members": {
+        "EgressAccessLogs": {
+          "locationName": "egressAccessLogs",
+          "shape": "EgressAccessLogs"
+        },
+        "Id": {
+          "documentation": "The ID of the channel to log subscription.",
+          "location": "uri",
+          "locationName": "id",
+          "shape": "__string"
+        },
+        "IngressAccessLogs": {
+          "locationName": "ingressAccessLogs",
+          "shape": "IngressAccessLogs"
+        }
+      },
+      "required": [
+        "Id"
+      ],
+      "type": "structure"
+    },
+    "ConfigureLogsResponse": {
+      "members": {
+        "Arn": {
+          "documentation": "The Amazon Resource Name (ARN) assigned to the Channel.",
+          "locationName": "arn",
+          "shape": "__string"
+        },
+        "Description": {
+          "documentation": "A short text description of the Channel.",
+          "locationName": "description",
+          "shape": "__string"
+        },
+        "EgressAccessLogs": {
+          "locationName": "egressAccessLogs",
+          "shape": "EgressAccessLogs"
+        },
+        "HlsIngest": {
+          "locationName": "hlsIngest",
+          "shape": "HlsIngest"
+        },
+        "Id": {
+          "documentation": "The ID of the Channel.",
+          "locationName": "id",
+          "shape": "__string"
+        },
+        "IngressAccessLogs": {
+          "locationName": "ingressAccessLogs",
+          "shape": "IngressAccessLogs"
+        },
+        "Tags": {
+          "locationName": "tags",
+          "shape": "Tags"
+        }
+      },
+      "type": "structure"
+    },
     "CreateChannelRequest": {
       "documentation": "A new Channel configuration.",
       "members": {
@@ -783,6 +886,10 @@
           "locationName": "description",
           "shape": "__string"
         },
+        "EgressAccessLogs": {
+          "locationName": "egressAccessLogs",
+          "shape": "EgressAccessLogs"
+        },
         "HlsIngest": {
           "locationName": "hlsIngest",
           "shape": "HlsIngest"
@@ -791,6 +898,10 @@
           "documentation": "The ID of the Channel.",
           "locationName": "id",
           "shape": "__string"
+        },
+        "IngressAccessLogs": {
+          "locationName": "ingressAccessLogs",
+          "shape": "IngressAccessLogs"
         },
         "Tags": {
           "locationName": "tags",
@@ -1195,6 +1306,10 @@
           "locationName": "description",
           "shape": "__string"
         },
+        "EgressAccessLogs": {
+          "locationName": "egressAccessLogs",
+          "shape": "EgressAccessLogs"
+        },
         "HlsIngest": {
           "locationName": "hlsIngest",
           "shape": "HlsIngest"
@@ -1203,6 +1318,10 @@
           "documentation": "The ID of the Channel.",
           "locationName": "id",
           "shape": "__string"
+        },
+        "IngressAccessLogs": {
+          "locationName": "ingressAccessLogs",
+          "shape": "IngressAccessLogs"
         },
         "Tags": {
           "locationName": "tags",
@@ -1363,6 +1482,17 @@
           "documentation": "A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.",
           "locationName": "whitelist",
           "shape": "__listOf__string"
+        }
+      },
+      "type": "structure"
+    },
+    "EgressAccessLogs": {
+      "documentation": "Configure egress access logging.",
+      "members": {
+        "LogGroupName": {
+          "documentation": "Customize the log group name.",
+          "locationName": "logGroupName",
+          "shape": "__string"
         }
       },
       "type": "structure"
@@ -1647,6 +1777,17 @@
         "Username": {
           "documentation": "The system generated username for ingest authentication.",
           "locationName": "username",
+          "shape": "__string"
+        }
+      },
+      "type": "structure"
+    },
+    "IngressAccessLogs": {
+      "documentation": "Configure ingress access logging.",
+      "members": {
+        "LogGroupName": {
+          "documentation": "Customize the log group name.",
+          "locationName": "logGroupName",
           "shape": "__string"
         }
       },
@@ -1967,6 +2108,10 @@
           "locationName": "description",
           "shape": "__string"
         },
+        "EgressAccessLogs": {
+          "locationName": "egressAccessLogs",
+          "shape": "EgressAccessLogs"
+        },
         "HlsIngest": {
           "locationName": "hlsIngest",
           "shape": "HlsIngest"
@@ -1975,6 +2120,10 @@
           "documentation": "The ID of the Channel.",
           "locationName": "id",
           "shape": "__string"
+        },
+        "IngressAccessLogs": {
+          "locationName": "ingressAccessLogs",
+          "shape": "IngressAccessLogs"
         },
         "Tags": {
           "locationName": "tags",
@@ -2016,6 +2165,10 @@
           "locationName": "description",
           "shape": "__string"
         },
+        "EgressAccessLogs": {
+          "locationName": "egressAccessLogs",
+          "shape": "EgressAccessLogs"
+        },
         "HlsIngest": {
           "locationName": "hlsIngest",
           "shape": "HlsIngest"
@@ -2024,6 +2177,10 @@
           "documentation": "The ID of the Channel.",
           "locationName": "id",
           "shape": "__string"
+        },
+        "IngressAccessLogs": {
+          "locationName": "ingressAccessLogs",
+          "shape": "IngressAccessLogs"
         },
         "Tags": {
           "locationName": "tags",
@@ -2220,6 +2377,10 @@
           "locationName": "description",
           "shape": "__string"
         },
+        "EgressAccessLogs": {
+          "locationName": "egressAccessLogs",
+          "shape": "EgressAccessLogs"
+        },
         "HlsIngest": {
           "locationName": "hlsIngest",
           "shape": "HlsIngest"
@@ -2228,6 +2389,10 @@
           "documentation": "The ID of the Channel.",
           "locationName": "id",
           "shape": "__string"
+        },
+        "IngressAccessLogs": {
+          "locationName": "ingressAccessLogs",
+          "shape": "IngressAccessLogs"
         },
         "Tags": {
           "locationName": "tags",

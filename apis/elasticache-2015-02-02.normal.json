@@ -324,6 +324,9 @@
         },
         {
           "shape": "InvalidSubnet"
+        },
+        {
+          "shape": "SubnetNotAllowedFault"
         }
       ],
       "documentation": "<p>Creates a new cache subnet group.</p> <p>Use this parameter only when you are creating a cluster in an Amazon Virtual Private Cloud (Amazon VPC).</p>"
@@ -382,6 +385,12 @@
         },
         {
           "shape": "ReplicationGroupAlreadyExistsFault"
+        },
+        {
+          "shape": "InvalidUserGroupStateFault"
+        },
+        {
+          "shape": "UserGroupNotFoundFault"
         },
         {
           "shape": "InsufficientCacheClusterCapacityFault"
@@ -471,6 +480,73 @@
         }
       ],
       "documentation": "<p>Creates a copy of an entire cluster or replication group at a specific moment in time.</p> <note> <p>This operation is valid for Redis only.</p> </note>"
+    },
+    "CreateUser": {
+      "name": "CreateUser",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateUserMessage"
+      },
+      "output": {
+        "shape": "User",
+        "resultWrapper": "CreateUserResult"
+      },
+      "errors": [
+        {
+          "shape": "UserAlreadyExistsFault"
+        },
+        {
+          "shape": "UserQuotaExceededFault"
+        },
+        {
+          "shape": "DuplicateUserNameFault"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "InvalidParameterCombinationException"
+        }
+      ],
+      "documentation": "<p>For Redis engine version 6.04 onwards: Creates a Redis user. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html\">Using Role Based Access Control (RBAC)</a>.</p>"
+    },
+    "CreateUserGroup": {
+      "name": "CreateUserGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateUserGroupMessage"
+      },
+      "output": {
+        "shape": "UserGroup",
+        "resultWrapper": "CreateUserGroupResult"
+      },
+      "errors": [
+        {
+          "shape": "UserNotFoundFault"
+        },
+        {
+          "shape": "DuplicateUserNameFault"
+        },
+        {
+          "shape": "UserGroupAlreadyExistsFault"
+        },
+        {
+          "shape": "DefaultUserRequired"
+        },
+        {
+          "shape": "UserGroupQuotaExceededFault"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        }
+      ],
+      "documentation": "<p>For Redis engine version 6.04 onwards: Creates a Redis user group. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html\">Using Role Based Access Control (RBAC)</a> </p>"
     },
     "DecreaseNodeGroupsInGlobalReplicationGroup": {
       "name": "DecreaseNodeGroupsInGlobalReplicationGroup",
@@ -753,6 +829,61 @@
         }
       ],
       "documentation": "<p>Deletes an existing snapshot. When you receive a successful response from this operation, ElastiCache immediately begins deleting the snapshot; you cannot cancel or revert this operation.</p> <note> <p>This operation is valid for Redis only.</p> </note>"
+    },
+    "DeleteUser": {
+      "name": "DeleteUser",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteUserMessage"
+      },
+      "output": {
+        "shape": "User",
+        "resultWrapper": "DeleteUserResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidUserStateFault"
+        },
+        {
+          "shape": "UserNotFoundFault"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "DefaultUserAssociatedToUserGroupFault"
+        }
+      ],
+      "documentation": "<p>For Redis engine version 6.04 onwards: Deletes a user. The user will be removed from all user groups and in turn removed from all replication groups. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html\">Using Role Based Access Control (RBAC)</a>. </p>"
+    },
+    "DeleteUserGroup": {
+      "name": "DeleteUserGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteUserGroupMessage"
+      },
+      "output": {
+        "shape": "UserGroup",
+        "resultWrapper": "DeleteUserGroupResult"
+      },
+      "errors": [
+        {
+          "shape": "UserGroupNotFoundFault"
+        },
+        {
+          "shape": "InvalidUserGroupStateFault"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        }
+      ],
+      "documentation": "<p>For Redis engine version 6.04 onwards: Deletes a ser group. The user group must first be disassociated from the replcation group before it can be deleted. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.RBAC.html\">Using Role Based Access Control (RBAC)</a>. </p>"
     },
     "DescribeCacheClusters": {
       "name": "DescribeCacheClusters",
@@ -1121,6 +1252,52 @@
       ],
       "documentation": "<p>Returns details of the update actions </p>"
     },
+    "DescribeUserGroups": {
+      "name": "DescribeUserGroups",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeUserGroupsMessage"
+      },
+      "output": {
+        "shape": "DescribeUserGroupsResult",
+        "resultWrapper": "DescribeUserGroupsResult"
+      },
+      "errors": [
+        {
+          "shape": "UserGroupNotFoundFault"
+        },
+        {
+          "shape": "InvalidParameterCombinationException"
+        }
+      ],
+      "documentation": "<p>Returns a list of user groups.</p>"
+    },
+    "DescribeUsers": {
+      "name": "DescribeUsers",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeUsersMessage"
+      },
+      "output": {
+        "shape": "DescribeUsersResult",
+        "resultWrapper": "DescribeUsersResult"
+      },
+      "errors": [
+        {
+          "shape": "UserNotFoundFault"
+        },
+        {
+          "shape": "InvalidParameterCombinationException"
+        }
+      ],
+      "documentation": "<p>Returns a list of users.</p>"
+    },
     "DisassociateGlobalReplicationGroup": {
       "name": "DisassociateGlobalReplicationGroup",
       "http": {
@@ -1420,6 +1597,9 @@
         },
         {
           "shape": "InvalidSubnet"
+        },
+        {
+          "shape": "SubnetNotAllowedFault"
         }
       ],
       "documentation": "<p>Modifies an existing cache subnet group.</p>"
@@ -1469,6 +1649,12 @@
         },
         {
           "shape": "InvalidReplicationGroupStateFault"
+        },
+        {
+          "shape": "InvalidUserGroupStateFault"
+        },
+        {
+          "shape": "UserGroupNotFoundFault"
         },
         {
           "shape": "InvalidCacheClusterStateFault"
@@ -1555,6 +1741,73 @@
         }
       ],
       "documentation": "<p>Modifies a replication group's shards (node groups) by allowing you to add shards, remove shards, or rebalance the keyspaces among exisiting shards.</p>"
+    },
+    "ModifyUser": {
+      "name": "ModifyUser",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyUserMessage"
+      },
+      "output": {
+        "shape": "User",
+        "resultWrapper": "ModifyUserResult"
+      },
+      "errors": [
+        {
+          "shape": "UserNotFoundFault"
+        },
+        {
+          "shape": "InvalidUserStateFault"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "InvalidParameterCombinationException"
+        }
+      ],
+      "documentation": "<p>Changes user password(s) and/or access string.</p>"
+    },
+    "ModifyUserGroup": {
+      "name": "ModifyUserGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyUserGroupMessage"
+      },
+      "output": {
+        "shape": "UserGroup",
+        "resultWrapper": "ModifyUserGroupResult"
+      },
+      "errors": [
+        {
+          "shape": "UserGroupNotFoundFault"
+        },
+        {
+          "shape": "UserNotFoundFault"
+        },
+        {
+          "shape": "DuplicateUserNameFault"
+        },
+        {
+          "shape": "DefaultUserRequired"
+        },
+        {
+          "shape": "InvalidUserGroupStateFault"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "InvalidParameterCombinationException"
+        }
+      ],
+      "documentation": "<p>Changes the list of users that belong to the user group.</p>"
     },
     "PurchaseReservedCacheNodesOffering": {
       "name": "PurchaseReservedCacheNodesOffering",
@@ -1812,6 +2065,10 @@
         "cross-az"
       ]
     },
+    "AccessString": {
+      "type": "string",
+      "pattern": ".*\\S.*"
+    },
     "AddTagsToResourceMessage": {
       "type": "structure",
       "required": [
@@ -1861,7 +2118,29 @@
       "type": "string",
       "enum": [
         "SET",
-        "ROTATE"
+        "ROTATE",
+        "DELETE"
+      ]
+    },
+    "Authentication": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "shape": "AuthenticationType",
+          "documentation": "<p>Indicates whether the user requires a password to authenticate.</p>"
+        },
+        "PasswordCount": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The number of passwords belonging to the user. The maximum is two.</p>"
+        }
+      },
+      "documentation": "<p>Indicates whether the user requires a password to authenticate.</p>"
+    },
+    "AuthenticationType": {
+      "type": "string",
+      "enum": [
+        "password",
+        "no-password"
       ]
     },
     "AuthorizeCacheSecurityGroupIngressMessage": {
@@ -2006,6 +2285,10 @@
         "PreferredAvailabilityZone": {
           "shape": "String",
           "documentation": "<p>The name of the Availability Zone in which the cluster is located or \"Multiple\" if the cache nodes are located in different Availability Zones.</p>"
+        },
+        "PreferredOutpostArn": {
+          "shape": "String",
+          "documentation": "<p>The outpost ARN in which the cache cluster is created.</p>"
         },
         "CacheClusterCreateTime": {
           "shape": "TStamp",
@@ -2187,6 +2470,10 @@
         "CustomerAvailabilityZone": {
           "shape": "String",
           "documentation": "<p>The Availability Zone where this node was created and now resides.</p>"
+        },
+        "CustomerOutpostArn": {
+          "shape": "String",
+          "documentation": "<p>The customer outpost ARN of the cache node.</p>"
         }
       },
       "documentation": "<p>Represents an individual cache node within a cluster. Each cache node runs its own instance of the cluster's protocol-compliant caching software - either Memcached or Redis.</p> <p>The following node types are supported by ElastiCache. Generally speaking, the current generation types provide more memory and computational power at lower cost when compared to their equivalent previous generation counterparts.</p> <ul> <li> <p>General purpose:</p> <ul> <li> <p>Current generation: </p> <p> <b>M5 node types:</b> <code>cache.m5.large</code>, <code>cache.m5.xlarge</code>, <code>cache.m5.2xlarge</code>, <code>cache.m5.4xlarge</code>, <code>cache.m5.12xlarge</code>, <code>cache.m5.24xlarge</code> </p> <p> <b>M4 node types:</b> <code>cache.m4.large</code>, <code>cache.m4.xlarge</code>, <code>cache.m4.2xlarge</code>, <code>cache.m4.4xlarge</code>, <code>cache.m4.10xlarge</code> </p> <p> <b>T3 node types:</b> <code>cache.t3.micro</code>, <code>cache.t3.small</code>, <code>cache.t3.medium</code> </p> <p> <b>T2 node types:</b> <code>cache.t2.micro</code>, <code>cache.t2.small</code>, <code>cache.t2.medium</code> </p> </li> <li> <p>Previous generation: (not recommended)</p> <p> <b>T1 node types:</b> <code>cache.t1.micro</code> </p> <p> <b>M1 node types:</b> <code>cache.m1.small</code>, <code>cache.m1.medium</code>, <code>cache.m1.large</code>, <code>cache.m1.xlarge</code> </p> <p> <b>M3 node types:</b> <code>cache.m3.medium</code>, <code>cache.m3.large</code>, <code>cache.m3.xlarge</code>, <code>cache.m3.2xlarge</code> </p> </li> </ul> </li> <li> <p>Compute optimized:</p> <ul> <li> <p>Previous generation: (not recommended)</p> <p> <b>C1 node types:</b> <code>cache.c1.xlarge</code> </p> </li> </ul> </li> <li> <p>Memory optimized:</p> <ul> <li> <p>Current generation: </p> <p> <b>R5 node types:</b> <code>cache.r5.large</code>, <code>cache.r5.xlarge</code>, <code>cache.r5.2xlarge</code>, <code>cache.r5.4xlarge</code>, <code>cache.r5.12xlarge</code>, <code>cache.r5.24xlarge</code> </p> <p> <b>R4 node types:</b> <code>cache.r4.large</code>, <code>cache.r4.xlarge</code>, <code>cache.r4.2xlarge</code>, <code>cache.r4.4xlarge</code>, <code>cache.r4.8xlarge</code>, <code>cache.r4.16xlarge</code> </p> </li> <li> <p>Previous generation: (not recommended)</p> <p> <b>M2 node types:</b> <code>cache.m2.xlarge</code>, <code>cache.m2.2xlarge</code>, <code>cache.m2.4xlarge</code> </p> <p> <b>R3 node types:</b> <code>cache.r3.large</code>, <code>cache.r3.xlarge</code>, <code>cache.r3.2xlarge</code>, <code>cache.r3.4xlarge</code>, <code>cache.r3.8xlarge</code> </p> </li> </ul> </li> </ul> <p> <b>Additional node type info</b> </p> <ul> <li> <p>All current generation instance types are created in Amazon VPC by default.</p> </li> <li> <p>Redis append-only files (AOF) are not supported for T1 or T2 instances.</p> </li> <li> <p>Redis Multi-AZ with automatic failover is not supported on T1 instances.</p> </li> <li> <p>Redis configuration variables <code>appendonly</code> and <code>appendfsync</code> are not supported on Redis version 2.8.22 and later.</p> </li> </ul>"
@@ -2435,7 +2722,7 @@
         },
         "ARN": {
           "shape": "String",
-          "documentation": "<p>The ARN (Amazon Resource Name) of the cache security group.</p>"
+          "documentation": "<p>The ARN of the cache security group,</p>"
         }
       },
       "documentation": "<p>Represents the output of one of the following operations:</p> <ul> <li> <p> <code>AuthorizeCacheSecurityGroupIngress</code> </p> </li> <li> <p> <code>CreateCacheSecurityGroup</code> </p> </li> <li> <p> <code>RevokeCacheSecurityGroupIngress</code> </p> </li> </ul>",
@@ -2594,6 +2881,10 @@
         "PreferredAvailabilityZones": {
           "shape": "PreferredAvailabilityZoneList",
           "documentation": "<p>A list of <code>PreferredAvailabilityZone</code> strings that specify which availability zones the replication group's nodes are to be in. The nummber of <code>PreferredAvailabilityZone</code> values must equal the value of <code>NewReplicaCount</code> plus 1 to account for the primary node. If this member of <code>ReplicaConfiguration</code> is omitted, ElastiCache for Redis selects the availability zone for each of the replicas.</p>"
+        },
+        "PreferredOutpostArns": {
+          "shape": "PreferredOutpostArnList",
+          "documentation": "<p>The outpost ARNs in which the cache cluster is created.</p>"
         }
       },
       "documentation": "<p>Node group (shard) configuration options when adding or removing replicas. Each node group (shard) configuration has the following members: NodeGroupId, NewReplicaCount, and PreferredAvailabilityZones. </p>"
@@ -2729,6 +3020,18 @@
         "AuthToken": {
           "shape": "String",
           "documentation": "<p> <b>Reserved parameter.</b> The password used to access a password protected server.</p> <p>Password constraints:</p> <ul> <li> <p>Must be only printable ASCII characters.</p> </li> <li> <p>Must be at least 16 characters and no more than 128 characters in length.</p> </li> <li> <p>The only permitted printable special characters are !, &amp;, #, $, ^, &lt;, &gt;, and -. Other printable special characters cannot be used in the AUTH token.</p> </li> </ul> <p>For more information, see <a href=\"http://redis.io/commands/AUTH\">AUTH password</a> at http://redis.io/commands/AUTH.</p>"
+        },
+        "OutpostMode": {
+          "shape": "OutpostMode",
+          "documentation": "<p>Specifies whether the nodes in the cluster are created in a single outpost or across multiple outposts.</p>"
+        },
+        "PreferredOutpostArn": {
+          "shape": "String",
+          "documentation": "<p>The outpost ARN in which the cache cluster is created.</p>"
+        },
+        "PreferredOutpostArns": {
+          "shape": "PreferredOutpostArnList",
+          "documentation": "<p>The outpost ARNs in which the cache cluster is created.</p>"
         }
       },
       "documentation": "<p>Represents the input of a CreateCacheCluster operation.</p>"
@@ -2838,7 +3141,7 @@
       "members": {
         "GlobalReplicationGroupIdSuffix": {
           "shape": "String",
-          "documentation": "<p>The suffix name of a Global Datastore. The suffix guarantees uniqueness of the Global Datastore name across multiple regions.</p>"
+          "documentation": "<p>The suffix name of a Global Datastore. Amazon ElastiCache automatically applies a prefix to the Global Datastore ID when it is created. Each AWS Region has its own prefix. For instance, a Global Datastore ID created in the US-West-1 region will begin with \"dsdfu\" along with the suffix name you provide. The suffix, combined with the auto-generated prefix, guarantees uniqueness of the Global Datastore name across multiple regions. </p> <p>For a full list of AWS Regions and their respective Global Datastore iD prefixes, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Clusters-CLI.html\">Using the AWS CLI with Global Datastores </a>.</p>"
         },
         "GlobalReplicationGroupDescription": {
           "shape": "String",
@@ -2988,6 +3291,10 @@
         "KmsKeyId": {
           "shape": "String",
           "documentation": "<p>The ID of the KMS key used to encrypt the disk in the cluster.</p>"
+        },
+        "UserGroupIds": {
+          "shape": "UserGroupIdListInput",
+          "documentation": "<p>The list of user groups to associate with the replication group.</p>"
         }
       },
       "documentation": "<p>Represents the input of a <code>CreateReplicationGroup</code> operation.</p>"
@@ -3030,6 +3337,62 @@
       "members": {
         "Snapshot": {
           "shape": "Snapshot"
+        }
+      }
+    },
+    "CreateUserGroupMessage": {
+      "type": "structure",
+      "required": [
+        "UserGroupId",
+        "Engine"
+      ],
+      "members": {
+        "UserGroupId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the user group.</p>"
+        },
+        "Engine": {
+          "shape": "EngineType",
+          "documentation": "<p>Must be Redis. </p>"
+        },
+        "UserIds": {
+          "shape": "UserIdListInput",
+          "documentation": "<p>The list of user IDs that belong to the user group.</p>"
+        }
+      }
+    },
+    "CreateUserMessage": {
+      "type": "structure",
+      "required": [
+        "UserId",
+        "UserName",
+        "Engine",
+        "AccessString"
+      ],
+      "members": {
+        "UserId": {
+          "shape": "UserId",
+          "documentation": "<p>The ID of the user.</p>"
+        },
+        "UserName": {
+          "shape": "UserName",
+          "documentation": "<p>The username of the user.</p>"
+        },
+        "Engine": {
+          "shape": "EngineType",
+          "documentation": "<p>Must be Redis. </p>"
+        },
+        "Passwords": {
+          "shape": "PasswordListInput",
+          "documentation": "<p>Passwords used for this user account. You can create up to two passwords for each user.</p>"
+        },
+        "AccessString": {
+          "shape": "AccessString",
+          "documentation": "<p>Access permissions string used for this user account.</p>"
+        },
+        "NoPasswordRequired": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Indicates a password is not required for this user account.</p>"
         }
       }
     },
@@ -3264,6 +3627,30 @@
       "members": {
         "Snapshot": {
           "shape": "Snapshot"
+        }
+      }
+    },
+    "DeleteUserGroupMessage": {
+      "type": "structure",
+      "required": [
+        "UserGroupId"
+      ],
+      "members": {
+        "UserGroupId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the user group.</p>"
+        }
+      }
+    },
+    "DeleteUserMessage": {
+      "type": "structure",
+      "required": [
+        "UserId"
+      ],
+      "members": {
+        "UserId": {
+          "shape": "UserId",
+          "documentation": "<p>The ID of the user.</p>"
         }
       }
     },
@@ -3703,6 +4090,74 @@
         }
       }
     },
+    "DescribeUserGroupsMessage": {
+      "type": "structure",
+      "members": {
+        "UserGroupId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the user group.</p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved. </p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. &gt;</p>"
+        }
+      }
+    },
+    "DescribeUserGroupsResult": {
+      "type": "structure",
+      "members": {
+        "UserGroups": {
+          "shape": "UserGroupList",
+          "documentation": "<p>Returns a list of user groups.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. &gt;</p>"
+        }
+      }
+    },
+    "DescribeUsersMessage": {
+      "type": "structure",
+      "members": {
+        "Engine": {
+          "shape": "EngineType",
+          "documentation": "<p>The Redis engine. </p>"
+        },
+        "UserId": {
+          "shape": "UserId",
+          "documentation": "<p>The ID of the user.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>Filter to determine the list of User IDs to return.</p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved. </p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. &gt;</p>"
+        }
+      }
+    },
+    "DescribeUsersResult": {
+      "type": "structure",
+      "members": {
+        "Users": {
+          "shape": "UserList",
+          "documentation": "<p>A list of users.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. &gt;</p>"
+        }
+      }
+    },
     "DisassociateGlobalReplicationGroupMessage": {
       "type": "structure",
       "required": [
@@ -3798,6 +4253,10 @@
       "documentation": "<p>Represents the output of a <code>DescribeEngineDefaultParameters</code> operation.</p>",
       "wrapper": true
     },
+    "EngineType": {
+      "type": "string",
+      "pattern": "[a-zA-Z]*"
+    },
     "Event": {
       "type": "structure",
       "members": {
@@ -3870,6 +4329,45 @@
           "shape": "GlobalReplicationGroup"
         }
       }
+    },
+    "Filter": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "Values"
+      ],
+      "members": {
+        "Name": {
+          "shape": "FilterName",
+          "documentation": "<p>The property being filtered. For example, UserId.</p>"
+        },
+        "Values": {
+          "shape": "FilterValueList",
+          "documentation": "<p>The property values to filter on. For example, \"user-123\".</p>"
+        }
+      },
+      "documentation": "<p>Used to streamline results of a search based on the property being filtered.</p>"
+    },
+    "FilterList": {
+      "type": "list",
+      "member": {
+        "shape": "Filter"
+      }
+    },
+    "FilterName": {
+      "type": "string",
+      "pattern": ".*\\S.*"
+    },
+    "FilterValue": {
+      "type": "string",
+      "pattern": ".*\\S.*"
+    },
+    "FilterValueList": {
+      "type": "list",
+      "member": {
+        "shape": "FilterValue"
+      },
+      "min": 1
     },
     "GlobalNodeGroup": {
       "type": "structure",
@@ -4390,6 +4888,18 @@
         "AuthTokenUpdateStrategy": {
           "shape": "AuthTokenUpdateStrategyType",
           "documentation": "<p>Specifies the strategy to use to update the AUTH token. This parameter must be specified with the <code>auth-token</code> parameter. Possible values:</p> <ul> <li> <p>Rotate</p> </li> <li> <p>Set</p> </li> </ul> <p> For more information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html\">Authenticating Users with Redis AUTH</a> </p>"
+        },
+        "UserGroupIdsToAdd": {
+          "shape": "UserGroupIdList",
+          "documentation": "<p>A list of user group IDs.</p>"
+        },
+        "UserGroupIdsToRemove": {
+          "shape": "UserGroupIdList",
+          "documentation": "<p>A list of users groups to remove, meaning the users in the group no longer can access thereplication group.</p>"
+        },
+        "RemoveUserGroups": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Removes the user groups that can access this replication group.</p>"
         }
       },
       "documentation": "<p>Represents the input of a <code>ModifyReplicationGroups</code> operation.</p>"
@@ -4442,6 +4952,54 @@
       "members": {
         "ReplicationGroup": {
           "shape": "ReplicationGroup"
+        }
+      }
+    },
+    "ModifyUserGroupMessage": {
+      "type": "structure",
+      "required": [
+        "UserGroupId"
+      ],
+      "members": {
+        "UserGroupId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the user group.</p>"
+        },
+        "UserIdsToAdd": {
+          "shape": "UserIdListInput",
+          "documentation": "<p>The list of user IDs to add to the user group.</p>"
+        },
+        "UserIdsToRemove": {
+          "shape": "UserIdListInput",
+          "documentation": "<p>The list of user IDs to remove from the user group.</p>"
+        }
+      }
+    },
+    "ModifyUserMessage": {
+      "type": "structure",
+      "required": [
+        "UserId"
+      ],
+      "members": {
+        "UserId": {
+          "shape": "UserId",
+          "documentation": "<p>The ID of the user.</p>"
+        },
+        "AccessString": {
+          "shape": "AccessString",
+          "documentation": "<p>Access permissions string used for this user account.</p>"
+        },
+        "AppendAccessString": {
+          "shape": "AccessString",
+          "documentation": "<p>Adds additional user permissions to the access string.</p>"
+        },
+        "Passwords": {
+          "shape": "PasswordListInput",
+          "documentation": "<p>The passwords belonging to the user account. You are allowed up to two.</p>"
+        },
+        "NoPasswordRequired": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Indicates no password is required for the user account.</p>"
         }
       }
     },
@@ -4504,6 +5062,14 @@
         "ReplicaAvailabilityZones": {
           "shape": "AvailabilityZonesList",
           "documentation": "<p>A list of Availability Zones to be used for the read replicas. The number of Availability Zones in this list must match the value of <code>ReplicaCount</code> or <code>ReplicasPerNodeGroup</code> if not specified.</p>"
+        },
+        "PrimaryOutpostArn": {
+          "shape": "String",
+          "documentation": "<p>The output ARN of the primary node.</p>"
+        },
+        "ReplicaOutpostArns": {
+          "shape": "OutpostArnsList",
+          "documentation": "<p>The outpost ARN of the node replicas.</p>"
         }
       },
       "documentation": "<p>Node group (shard) configuration options. Each node group (shard) configuration has the following: <code>Slots</code>, <code>PrimaryAvailabilityZone</code>, <code>ReplicaAvailabilityZones</code>, <code>ReplicaCount</code>.</p>"
@@ -4540,6 +5106,10 @@
         "PreferredAvailabilityZone": {
           "shape": "String",
           "documentation": "<p>The name of the Availability Zone in which the node is located.</p>"
+        },
+        "PreferredOutpostArn": {
+          "shape": "String",
+          "documentation": "<p>The outpost ARN of the node group member.</p>"
         },
         "CurrentRole": {
           "shape": "String",
@@ -4719,6 +5289,20 @@
       },
       "documentation": "<p>Describes a notification topic and its status. Notification topics are used for publishing ElastiCache events to subscribers using Amazon Simple Notification Service (SNS).</p>"
     },
+    "OutpostArnsList": {
+      "type": "list",
+      "member": {
+        "shape": "String",
+        "locationName": "OutpostArn"
+      }
+    },
+    "OutpostMode": {
+      "type": "string",
+      "enum": [
+        "single-outpost",
+        "cross-outpost"
+      ]
+    },
     "Parameter": {
       "type": "structure",
       "members": {
@@ -4789,6 +5373,13 @@
         "locationName": "Parameter"
       }
     },
+    "PasswordListInput": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      },
+      "min": 1
+    },
     "PendingAutomaticFailoverStatus": {
       "type": "string",
       "enum": [
@@ -4827,6 +5418,13 @@
       "member": {
         "shape": "String",
         "locationName": "PreferredAvailabilityZone"
+      }
+    },
+    "PreferredOutpostArnList": {
+      "type": "list",
+      "member": {
+        "shape": "String",
+        "locationName": "PreferredOutpostArn"
       }
     },
     "ProcessedUpdateAction": {
@@ -5100,6 +5698,10 @@
           "shape": "BooleanOptional",
           "documentation": "<p>A flag that enables encryption at-rest when set to <code>true</code>.</p> <p>You cannot modify the value of <code>AtRestEncryptionEnabled</code> after the cluster is created. To enable encryption at-rest on a cluster you must set <code>AtRestEncryptionEnabled</code> to <code>true</code> when you create a cluster.</p> <p> <b>Required:</b> Only available when creating a replication group in an Amazon VPC using redis version <code>3.2.6</code>, <code>4.x</code> or later.</p> <p>Default: <code>false</code> </p>"
         },
+        "MemberClustersOutpostArns": {
+          "shape": "ReplicationGroupOutpostArnList",
+          "documentation": "<p>The outpost ARNs of the replication group's member clusters.</p>"
+        },
         "KmsKeyId": {
           "shape": "String",
           "documentation": "<p>The ID of the KMS key used to encrypt the disk in the cluster.</p>"
@@ -5107,6 +5709,10 @@
         "ARN": {
           "shape": "String",
           "documentation": "<p>The ARN (Amazon Resource Name) of the replication group.</p>"
+        },
+        "UserGroupIds": {
+          "shape": "UserGroupIdList",
+          "documentation": "<p>The list of user group IDs that have access to the replication group.</p>"
         }
       },
       "documentation": "<p>Contains all of the attributes of a specific Redis replication group.</p>",
@@ -5140,6 +5746,13 @@
       },
       "documentation": "<p>Represents the output of a <code>DescribeReplicationGroups</code> operation.</p>"
     },
+    "ReplicationGroupOutpostArnList": {
+      "type": "list",
+      "member": {
+        "shape": "String",
+        "locationName": "ReplicationGroupOutpostArn"
+      }
+    },
     "ReplicationGroupPendingModifiedValues": {
       "type": "structure",
       "members": {
@@ -5158,6 +5771,10 @@
         "AuthTokenStatus": {
           "shape": "AuthTokenUpdateStatus",
           "documentation": "<p>The auth token status</p>"
+        },
+        "UserGroups": {
+          "shape": "UserGroupsUpdateStatus",
+          "documentation": "<p>The user groups being modified.</p>"
         }
       },
       "documentation": "<p>The settings to be applied to the Redis replication group, either immediately or during the next maintenance window.</p>"
@@ -5581,6 +6198,10 @@
           "shape": "String",
           "documentation": "<p>The name of the Availability Zone in which the source cluster is located.</p>"
         },
+        "PreferredOutpostArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN (Amazon Resource Name) of the preferred outpost.</p>"
+        },
         "CacheClusterCreateTime": {
           "shape": "TStamp",
           "documentation": "<p>The date and time when the source cluster was created.</p>"
@@ -5666,7 +6287,9 @@
         "cache-parameter-group",
         "cache-security-group",
         "cache-subnet-group",
-        "replication-group"
+        "replication-group",
+        "user",
+        "user-group"
       ]
     },
     "StartMigrationMessage": {
@@ -5707,6 +6330,10 @@
         "SubnetAvailabilityZone": {
           "shape": "AvailabilityZone",
           "documentation": "<p>The Availability Zone associated with the subnet.</p>"
+        },
+        "SubnetOutpost": {
+          "shape": "SubnetOutpost",
+          "documentation": "<p>The outpost ARN of the subnet.</p>"
         }
       },
       "documentation": "<p>Represents the subnet associated with a cluster. This parameter refers to subnets defined in Amazon Virtual Private Cloud (Amazon VPC) and used with ElastiCache.</p>"
@@ -5724,6 +6351,16 @@
         "shape": "Subnet",
         "locationName": "Subnet"
       }
+    },
+    "SubnetOutpost": {
+      "type": "structure",
+      "members": {
+        "SubnetOutpostArn": {
+          "shape": "String",
+          "documentation": "<p>The outpost ARN of the subnet.</p>"
+        }
+      },
+      "documentation": "<p>The ID of the outpost subnet.</p>"
     },
     "TStamp": {
       "type": "timestamp"
@@ -5797,6 +6434,12 @@
         }
       },
       "documentation": "<p>Filters update actions from the service updates that are in available status during the time range.</p>"
+    },
+    "UGReplicationGroupIdList": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
     },
     "UnprocessedUpdateAction": {
       "type": "structure",
@@ -5958,6 +6601,156 @@
           "documentation": "<p>Returns a list of update actions</p>"
         }
       }
+    },
+    "User": {
+      "type": "structure",
+      "members": {
+        "UserId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the user.</p>"
+        },
+        "UserName": {
+          "shape": "String",
+          "documentation": "<p>The username of the user.</p>"
+        },
+        "Status": {
+          "shape": "String",
+          "documentation": "<p>Indicates the user status. Can be \"active\", \"modifying\" or \"deleting\".</p>"
+        },
+        "Engine": {
+          "shape": "EngineType",
+          "documentation": "<p>Must be Redis. </p>"
+        },
+        "AccessString": {
+          "shape": "String",
+          "documentation": "<p>Access permissions string used for this user account.</p>"
+        },
+        "UserGroupIds": {
+          "shape": "UserGroupIdList",
+          "documentation": "<p>Returns a list of the user group IDs the user belongs to.</p>"
+        },
+        "Authentication": {
+          "shape": "Authentication",
+          "documentation": "<p>Denotes whether the user requires a password to authenticate.</p>"
+        },
+        "ARN": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the user account.</p>"
+        }
+      }
+    },
+    "UserGroup": {
+      "type": "structure",
+      "members": {
+        "UserGroupId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the user group.</p>"
+        },
+        "Status": {
+          "shape": "String",
+          "documentation": "<p>Indicates user group status. Can be \"creating\", \"active\", \"modifying\", \"deleting\".</p>"
+        },
+        "Engine": {
+          "shape": "EngineType",
+          "documentation": "<p>Must be Redis. </p>"
+        },
+        "UserIds": {
+          "shape": "UserIdList",
+          "documentation": "<p>The list of user IDs that belong to the user group.</p>"
+        },
+        "PendingChanges": {
+          "shape": "UserGroupPendingChanges",
+          "documentation": "<p>A list of updates being applied to the user groups.</p>"
+        },
+        "ReplicationGroups": {
+          "shape": "UGReplicationGroupIdList",
+          "documentation": "<p>A list of replication groups that the user group can access.</p>"
+        },
+        "ARN": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the user group.</p>"
+        }
+      }
+    },
+    "UserGroupId": {
+      "type": "string",
+      "min": 1,
+      "pattern": "[a-zA-Z][a-zA-Z0-9\\-]*"
+    },
+    "UserGroupIdList": {
+      "type": "list",
+      "member": {
+        "shape": "UserGroupId"
+      }
+    },
+    "UserGroupIdListInput": {
+      "type": "list",
+      "member": {
+        "shape": "UserGroupId"
+      },
+      "min": 1
+    },
+    "UserGroupList": {
+      "type": "list",
+      "member": {
+        "shape": "UserGroup"
+      }
+    },
+    "UserGroupPendingChanges": {
+      "type": "structure",
+      "members": {
+        "UserIdsToRemove": {
+          "shape": "UserIdList",
+          "documentation": "<p>The list of user group IDs ro remove.</p>"
+        },
+        "UserIdsToAdd": {
+          "shape": "UserIdList",
+          "documentation": "<p>The list of user IDs to add.</p>"
+        }
+      },
+      "documentation": "<p>Returns the updates being applied to the user group.</p>"
+    },
+    "UserGroupsUpdateStatus": {
+      "type": "structure",
+      "members": {
+        "UserGroupIdsToAdd": {
+          "shape": "UserGroupIdList",
+          "documentation": "<p>The list of user group IDs to add.</p>"
+        },
+        "UserGroupIdsToRemove": {
+          "shape": "UserGroupIdList",
+          "documentation": "<p>The list of user group IDs to remove.</p>"
+        }
+      },
+      "documentation": "<p>The status of the user group update.</p>"
+    },
+    "UserId": {
+      "type": "string",
+      "min": 1,
+      "pattern": "[a-zA-Z][a-zA-Z0-9\\-]*"
+    },
+    "UserIdList": {
+      "type": "list",
+      "member": {
+        "shape": "UserId"
+      }
+    },
+    "UserIdListInput": {
+      "type": "list",
+      "member": {
+        "shape": "UserId"
+      },
+      "min": 1
+    },
+    "UserList": {
+      "type": "list",
+      "member": {
+        "shape": "User"
+      }
+    },
+    "UserName": {
+      "type": "string",
+      "min": 1
     }
   },
   "documentation": "<fullname>Amazon ElastiCache</fullname> <p>Amazon ElastiCache is a web service that makes it easier to set up, operate, and scale a distributed cache in the cloud.</p> <p>With ElastiCache, customers get all of the benefits of a high-performance, in-memory cache with less of the administrative burden involved in launching and managing a distributed cache. The service makes setup, scaling, and cluster failure handling much simpler than in a self-managed cache deployment.</p> <p>In addition, through integration with Amazon CloudWatch, customers get enhanced visibility into the key performance statistics associated with their cache and can receive alarms if a part of their cache runs hot.</p>"

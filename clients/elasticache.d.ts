@@ -117,6 +117,22 @@ declare class ElastiCache extends Service {
    */
   createSnapshot(callback?: (err: AWSError, data: ElastiCache.Types.CreateSnapshotResult) => void): Request<ElastiCache.Types.CreateSnapshotResult, AWSError>;
   /**
+   * For Redis engine version 6.04 onwards: Creates a Redis user. For more information, see Using Role Based Access Control (RBAC).
+   */
+  createUser(params: ElastiCache.Types.CreateUserMessage, callback?: (err: AWSError, data: ElastiCache.Types.User) => void): Request<ElastiCache.Types.User, AWSError>;
+  /**
+   * For Redis engine version 6.04 onwards: Creates a Redis user. For more information, see Using Role Based Access Control (RBAC).
+   */
+  createUser(callback?: (err: AWSError, data: ElastiCache.Types.User) => void): Request<ElastiCache.Types.User, AWSError>;
+  /**
+   * For Redis engine version 6.04 onwards: Creates a Redis user group. For more information, see Using Role Based Access Control (RBAC) 
+   */
+  createUserGroup(params: ElastiCache.Types.CreateUserGroupMessage, callback?: (err: AWSError, data: ElastiCache.Types.UserGroup) => void): Request<ElastiCache.Types.UserGroup, AWSError>;
+  /**
+   * For Redis engine version 6.04 onwards: Creates a Redis user group. For more information, see Using Role Based Access Control (RBAC) 
+   */
+  createUserGroup(callback?: (err: AWSError, data: ElastiCache.Types.UserGroup) => void): Request<ElastiCache.Types.UserGroup, AWSError>;
+  /**
    * Decreases the number of node groups in a Global Datastore
    */
   decreaseNodeGroupsInGlobalReplicationGroup(params: ElastiCache.Types.DecreaseNodeGroupsInGlobalReplicationGroupMessage, callback?: (err: AWSError, data: ElastiCache.Types.DecreaseNodeGroupsInGlobalReplicationGroupResult) => void): Request<ElastiCache.Types.DecreaseNodeGroupsInGlobalReplicationGroupResult, AWSError>;
@@ -188,6 +204,22 @@ declare class ElastiCache extends Service {
    * Deletes an existing snapshot. When you receive a successful response from this operation, ElastiCache immediately begins deleting the snapshot; you cannot cancel or revert this operation.  This operation is valid for Redis only. 
    */
   deleteSnapshot(callback?: (err: AWSError, data: ElastiCache.Types.DeleteSnapshotResult) => void): Request<ElastiCache.Types.DeleteSnapshotResult, AWSError>;
+  /**
+   * For Redis engine version 6.04 onwards: Deletes a user. The user will be removed from all user groups and in turn removed from all replication groups. For more information, see Using Role Based Access Control (RBAC). 
+   */
+  deleteUser(params: ElastiCache.Types.DeleteUserMessage, callback?: (err: AWSError, data: ElastiCache.Types.User) => void): Request<ElastiCache.Types.User, AWSError>;
+  /**
+   * For Redis engine version 6.04 onwards: Deletes a user. The user will be removed from all user groups and in turn removed from all replication groups. For more information, see Using Role Based Access Control (RBAC). 
+   */
+  deleteUser(callback?: (err: AWSError, data: ElastiCache.Types.User) => void): Request<ElastiCache.Types.User, AWSError>;
+  /**
+   * For Redis engine version 6.04 onwards: Deletes a ser group. The user group must first be disassociated from the replcation group before it can be deleted. For more information, see Using Role Based Access Control (RBAC). 
+   */
+  deleteUserGroup(params: ElastiCache.Types.DeleteUserGroupMessage, callback?: (err: AWSError, data: ElastiCache.Types.UserGroup) => void): Request<ElastiCache.Types.UserGroup, AWSError>;
+  /**
+   * For Redis engine version 6.04 onwards: Deletes a ser group. The user group must first be disassociated from the replcation group before it can be deleted. For more information, see Using Role Based Access Control (RBAC). 
+   */
+  deleteUserGroup(callback?: (err: AWSError, data: ElastiCache.Types.UserGroup) => void): Request<ElastiCache.Types.UserGroup, AWSError>;
   /**
    * Returns information about all provisioned clusters if no cluster identifier is specified, or about a specific cache cluster if a cluster identifier is supplied. By default, abbreviated information about the clusters is returned. You can use the optional ShowCacheNodeInfo flag to retrieve detailed information about the cache nodes associated with the clusters. These details include the DNS address and port for the cache node endpoint. If the cluster is in the creating state, only cluster-level information is displayed until all of the nodes are successfully provisioned. If the cluster is in the deleting state, only cluster-level information is displayed. If cache nodes are currently being added to the cluster, node endpoint information and creation time for the additional nodes are not displayed until they are completely provisioned. When the cluster state is available, the cluster is ready for use. If cache nodes are currently being removed from the cluster, no endpoint information for the removed nodes is displayed.
    */
@@ -309,6 +341,22 @@ declare class ElastiCache extends Service {
    */
   describeUpdateActions(callback?: (err: AWSError, data: ElastiCache.Types.UpdateActionsMessage) => void): Request<ElastiCache.Types.UpdateActionsMessage, AWSError>;
   /**
+   * Returns a list of user groups.
+   */
+  describeUserGroups(params: ElastiCache.Types.DescribeUserGroupsMessage, callback?: (err: AWSError, data: ElastiCache.Types.DescribeUserGroupsResult) => void): Request<ElastiCache.Types.DescribeUserGroupsResult, AWSError>;
+  /**
+   * Returns a list of user groups.
+   */
+  describeUserGroups(callback?: (err: AWSError, data: ElastiCache.Types.DescribeUserGroupsResult) => void): Request<ElastiCache.Types.DescribeUserGroupsResult, AWSError>;
+  /**
+   * Returns a list of users.
+   */
+  describeUsers(params: ElastiCache.Types.DescribeUsersMessage, callback?: (err: AWSError, data: ElastiCache.Types.DescribeUsersResult) => void): Request<ElastiCache.Types.DescribeUsersResult, AWSError>;
+  /**
+   * Returns a list of users.
+   */
+  describeUsers(callback?: (err: AWSError, data: ElastiCache.Types.DescribeUsersResult) => void): Request<ElastiCache.Types.DescribeUsersResult, AWSError>;
+  /**
    * Remove a secondary cluster from the Global Datastore using the Global Datastore name. The secondary cluster will no longer receive updates from the primary cluster, but will remain as a standalone cluster in that AWS region.
    */
   disassociateGlobalReplicationGroup(params: ElastiCache.Types.DisassociateGlobalReplicationGroupMessage, callback?: (err: AWSError, data: ElastiCache.Types.DisassociateGlobalReplicationGroupResult) => void): Request<ElastiCache.Types.DisassociateGlobalReplicationGroupResult, AWSError>;
@@ -404,6 +452,22 @@ declare class ElastiCache extends Service {
    * Modifies a replication group's shards (node groups) by allowing you to add shards, remove shards, or rebalance the keyspaces among exisiting shards.
    */
   modifyReplicationGroupShardConfiguration(callback?: (err: AWSError, data: ElastiCache.Types.ModifyReplicationGroupShardConfigurationResult) => void): Request<ElastiCache.Types.ModifyReplicationGroupShardConfigurationResult, AWSError>;
+  /**
+   * Changes user password(s) and/or access string.
+   */
+  modifyUser(params: ElastiCache.Types.ModifyUserMessage, callback?: (err: AWSError, data: ElastiCache.Types.User) => void): Request<ElastiCache.Types.User, AWSError>;
+  /**
+   * Changes user password(s) and/or access string.
+   */
+  modifyUser(callback?: (err: AWSError, data: ElastiCache.Types.User) => void): Request<ElastiCache.Types.User, AWSError>;
+  /**
+   * Changes the list of users that belong to the user group.
+   */
+  modifyUserGroup(params: ElastiCache.Types.ModifyUserGroupMessage, callback?: (err: AWSError, data: ElastiCache.Types.UserGroup) => void): Request<ElastiCache.Types.UserGroup, AWSError>;
+  /**
+   * Changes the list of users that belong to the user group.
+   */
+  modifyUserGroup(callback?: (err: AWSError, data: ElastiCache.Types.UserGroup) => void): Request<ElastiCache.Types.UserGroup, AWSError>;
   /**
    * Allows you to purchase a reserved cache node offering.
    */
@@ -503,6 +567,7 @@ declare class ElastiCache extends Service {
 }
 declare namespace ElastiCache {
   export type AZMode = "single-az"|"cross-az"|string;
+  export type AccessString = string;
   export interface AddTagsToResourceMessage {
     /**
      * The Amazon Resource Name (ARN) of the resource to which the tags are to be added, for example arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster or arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot. ElastiCache resources are cluster and snapshot. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces.
@@ -525,7 +590,18 @@ declare namespace ElastiCache {
     ScaleDownModifications?: NodeTypeList;
   }
   export type AuthTokenUpdateStatus = "SETTING"|"ROTATING"|string;
-  export type AuthTokenUpdateStrategyType = "SET"|"ROTATE"|string;
+  export type AuthTokenUpdateStrategyType = "SET"|"ROTATE"|"DELETE"|string;
+  export interface Authentication {
+    /**
+     * Indicates whether the user requires a password to authenticate.
+     */
+    Type?: AuthenticationType;
+    /**
+     * The number of passwords belonging to the user. The maximum is two.
+     */
+    PasswordCount?: IntegerOptional;
+  }
+  export type AuthenticationType = "password"|"no-password"|string;
   export interface AuthorizeCacheSecurityGroupIngressMessage {
     /**
      * The cache security group that allows network ingress.
@@ -618,6 +694,10 @@ declare namespace ElastiCache {
      * The name of the Availability Zone in which the cluster is located or "Multiple" if the cache nodes are located in different Availability Zones.
      */
     PreferredAvailabilityZone?: String;
+    /**
+     * The outpost ARN in which the cache cluster is created.
+     */
+    PreferredOutpostArn?: String;
     /**
      * The date and time when the cluster was created.
      */
@@ -762,6 +842,10 @@ declare namespace ElastiCache {
      * The Availability Zone where this node was created and now resides.
      */
     CustomerAvailabilityZone?: String;
+    /**
+     * The customer outpost ARN of the cache node.
+     */
+    CustomerOutpostArn?: String;
   }
   export type CacheNodeIdsList = String[];
   export type CacheNodeList = CacheNode[];
@@ -935,7 +1019,7 @@ declare namespace ElastiCache {
      */
     EC2SecurityGroups?: EC2SecurityGroupList;
     /**
-     * The ARN (Amazon Resource Name) of the cache security group.
+     * The ARN of the cache security group,
      */
     ARN?: String;
   }
@@ -1023,6 +1107,10 @@ declare namespace ElastiCache {
      * A list of PreferredAvailabilityZone strings that specify which availability zones the replication group's nodes are to be in. The nummber of PreferredAvailabilityZone values must equal the value of NewReplicaCount plus 1 to account for the primary node. If this member of ReplicaConfiguration is omitted, ElastiCache for Redis selects the availability zone for each of the replicas.
      */
     PreferredAvailabilityZones?: PreferredAvailabilityZoneList;
+    /**
+     * The outpost ARNs in which the cache cluster is created.
+     */
+    PreferredOutpostArns?: PreferredOutpostArnList;
   }
   export interface CopySnapshotMessage {
     /**
@@ -1138,6 +1226,18 @@ declare namespace ElastiCache {
      *  Reserved parameter. The password used to access a password protected server. Password constraints:   Must be only printable ASCII characters.   Must be at least 16 characters and no more than 128 characters in length.   The only permitted printable special characters are !, &amp;, #, $, ^, &lt;, &gt;, and -. Other printable special characters cannot be used in the AUTH token.   For more information, see AUTH password at http://redis.io/commands/AUTH.
      */
     AuthToken?: String;
+    /**
+     * Specifies whether the nodes in the cluster are created in a single outpost or across multiple outposts.
+     */
+    OutpostMode?: OutpostMode;
+    /**
+     * The outpost ARN in which the cache cluster is created.
+     */
+    PreferredOutpostArn?: String;
+    /**
+     * The outpost ARNs in which the cache cluster is created.
+     */
+    PreferredOutpostArns?: PreferredOutpostArnList;
   }
   export interface CreateCacheClusterResult {
     CacheCluster?: CacheCluster;
@@ -1191,7 +1291,7 @@ declare namespace ElastiCache {
   }
   export interface CreateGlobalReplicationGroupMessage {
     /**
-     * The suffix name of a Global Datastore. The suffix guarantees uniqueness of the Global Datastore name across multiple regions.
+     * The suffix name of a Global Datastore. Amazon ElastiCache automatically applies a prefix to the Global Datastore ID when it is created. Each AWS Region has its own prefix. For instance, a Global Datastore ID created in the US-West-1 region will begin with "dsdfu" along with the suffix name you provide. The suffix, combined with the auto-generated prefix, guarantees uniqueness of the Global Datastore name across multiple regions.  For a full list of AWS Regions and their respective Global Datastore iD prefixes, see Using the AWS CLI with Global Datastores .
      */
     GlobalReplicationGroupIdSuffix: String;
     /**
@@ -1331,6 +1431,10 @@ declare namespace ElastiCache {
      * The ID of the KMS key used to encrypt the disk in the cluster.
      */
     KmsKeyId?: String;
+    /**
+     * The list of user groups to associate with the replication group.
+     */
+    UserGroupIds?: UserGroupIdListInput;
   }
   export interface CreateReplicationGroupResult {
     ReplicationGroup?: ReplicationGroup;
@@ -1355,6 +1459,46 @@ declare namespace ElastiCache {
   }
   export interface CreateSnapshotResult {
     Snapshot?: Snapshot;
+  }
+  export interface CreateUserGroupMessage {
+    /**
+     * The ID of the user group.
+     */
+    UserGroupId: String;
+    /**
+     * Must be Redis. 
+     */
+    Engine: EngineType;
+    /**
+     * The list of user IDs that belong to the user group.
+     */
+    UserIds?: UserIdListInput;
+  }
+  export interface CreateUserMessage {
+    /**
+     * The ID of the user.
+     */
+    UserId: UserId;
+    /**
+     * The username of the user.
+     */
+    UserName: UserName;
+    /**
+     * Must be Redis. 
+     */
+    Engine: EngineType;
+    /**
+     * Passwords used for this user account. You can create up to two passwords for each user.
+     */
+    Passwords?: PasswordListInput;
+    /**
+     * Access permissions string used for this user account.
+     */
+    AccessString: AccessString;
+    /**
+     * Indicates a password is not required for this user account.
+     */
+    NoPasswordRequired?: BooleanOptional;
   }
   export interface CustomerNodeEndpoint {
     /**
@@ -1486,6 +1630,18 @@ declare namespace ElastiCache {
   }
   export interface DeleteSnapshotResult {
     Snapshot?: Snapshot;
+  }
+  export interface DeleteUserGroupMessage {
+    /**
+     * The ID of the user group.
+     */
+    UserGroupId: String;
+  }
+  export interface DeleteUserMessage {
+    /**
+     * The ID of the user.
+     */
+    UserId: UserId;
   }
   export interface DescribeCacheClustersMessage {
     /**
@@ -1848,6 +2004,62 @@ declare namespace ElastiCache {
      */
     Marker?: String;
   }
+  export interface DescribeUserGroupsMessage {
+    /**
+     * The ID of the user group.
+     */
+    UserGroupId?: String;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved. 
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. &gt;
+     */
+    Marker?: String;
+  }
+  export interface DescribeUserGroupsResult {
+    /**
+     * Returns a list of user groups.
+     */
+    UserGroups?: UserGroupList;
+    /**
+     * An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. &gt;
+     */
+    Marker?: String;
+  }
+  export interface DescribeUsersMessage {
+    /**
+     * The Redis engine. 
+     */
+    Engine?: EngineType;
+    /**
+     * The ID of the user.
+     */
+    UserId?: UserId;
+    /**
+     * Filter to determine the list of User IDs to return.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved. 
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. &gt;
+     */
+    Marker?: String;
+  }
+  export interface DescribeUsersResult {
+    /**
+     * A list of users.
+     */
+    Users?: UserList;
+    /**
+     * An optional marker returned from a prior request. Use this marker for pagination of results from this operation. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. &gt;
+     */
+    Marker?: String;
+  }
   export interface DisassociateGlobalReplicationGroupMessage {
     /**
      * The name of the Global Datastore
@@ -1909,6 +2121,7 @@ declare namespace ElastiCache {
      */
     CacheNodeTypeSpecificParameters?: CacheNodeTypeSpecificParametersList;
   }
+  export type EngineType = string;
   export interface Event {
     /**
      * The identifier for the source of the event. For example, if the event occurred at the cluster level, the identifier would be the name of the cluster.
@@ -1955,6 +2168,20 @@ declare namespace ElastiCache {
   export interface FailoverGlobalReplicationGroupResult {
     GlobalReplicationGroup?: GlobalReplicationGroup;
   }
+  export interface Filter {
+    /**
+     * The property being filtered. For example, UserId.
+     */
+    Name: FilterName;
+    /**
+     * The property values to filter on. For example, "user-123".
+     */
+    Values: FilterValueList;
+  }
+  export type FilterList = Filter[];
+  export type FilterName = string;
+  export type FilterValue = string;
+  export type FilterValueList = FilterValue[];
   export interface GlobalNodeGroup {
     /**
      * The name of the global node group
@@ -2338,6 +2565,18 @@ declare namespace ElastiCache {
      * Specifies the strategy to use to update the AUTH token. This parameter must be specified with the auth-token parameter. Possible values:   Rotate   Set    For more information, see Authenticating Users with Redis AUTH 
      */
     AuthTokenUpdateStrategy?: AuthTokenUpdateStrategyType;
+    /**
+     * A list of user group IDs.
+     */
+    UserGroupIdsToAdd?: UserGroupIdList;
+    /**
+     * A list of users groups to remove, meaning the users in the group no longer can access thereplication group.
+     */
+    UserGroupIdsToRemove?: UserGroupIdList;
+    /**
+     * Removes the user groups that can access this replication group.
+     */
+    RemoveUserGroups?: BooleanOptional;
   }
   export interface ModifyReplicationGroupResult {
     ReplicationGroup?: ReplicationGroup;
@@ -2370,6 +2609,42 @@ declare namespace ElastiCache {
   }
   export interface ModifyReplicationGroupShardConfigurationResult {
     ReplicationGroup?: ReplicationGroup;
+  }
+  export interface ModifyUserGroupMessage {
+    /**
+     * The ID of the user group.
+     */
+    UserGroupId: String;
+    /**
+     * The list of user IDs to add to the user group.
+     */
+    UserIdsToAdd?: UserIdListInput;
+    /**
+     * The list of user IDs to remove from the user group.
+     */
+    UserIdsToRemove?: UserIdListInput;
+  }
+  export interface ModifyUserMessage {
+    /**
+     * The ID of the user.
+     */
+    UserId: UserId;
+    /**
+     * Access permissions string used for this user account.
+     */
+    AccessString?: AccessString;
+    /**
+     * Adds additional user permissions to the access string.
+     */
+    AppendAccessString?: AccessString;
+    /**
+     * The passwords belonging to the user account. You are allowed up to two.
+     */
+    Passwords?: PasswordListInput;
+    /**
+     * Indicates no password is required for the user account.
+     */
+    NoPasswordRequired?: BooleanOptional;
   }
   export type MultiAZStatus = "enabled"|"disabled"|string;
   export interface NodeGroup {
@@ -2419,6 +2694,14 @@ declare namespace ElastiCache {
      * A list of Availability Zones to be used for the read replicas. The number of Availability Zones in this list must match the value of ReplicaCount or ReplicasPerNodeGroup if not specified.
      */
     ReplicaAvailabilityZones?: AvailabilityZonesList;
+    /**
+     * The output ARN of the primary node.
+     */
+    PrimaryOutpostArn?: String;
+    /**
+     * The outpost ARN of the node replicas.
+     */
+    ReplicaOutpostArns?: OutpostArnsList;
   }
   export type NodeGroupConfigurationList = NodeGroupConfiguration[];
   export type NodeGroupList = NodeGroup[];
@@ -2439,6 +2722,10 @@ declare namespace ElastiCache {
      * The name of the Availability Zone in which the node is located.
      */
     PreferredAvailabilityZone?: String;
+    /**
+     * The outpost ARN of the node group member.
+     */
+    PreferredOutpostArn?: String;
     /**
      * The role that is currently assigned to the node - primary or replica. This member is only applicable for Redis (cluster mode disabled) replication groups.
      */
@@ -2541,6 +2828,8 @@ declare namespace ElastiCache {
      */
     TopicStatus?: String;
   }
+  export type OutpostArnsList = String[];
+  export type OutpostMode = "single-outpost"|"cross-outpost"|string;
   export interface Parameter {
     /**
      * The name of the parameter.
@@ -2591,6 +2880,7 @@ declare namespace ElastiCache {
   }
   export type ParameterNameValueList = ParameterNameValue[];
   export type ParametersList = Parameter[];
+  export type PasswordListInput = String[];
   export type PendingAutomaticFailoverStatus = "enabled"|"disabled"|string;
   export interface PendingModifiedValues {
     /**
@@ -2615,6 +2905,7 @@ declare namespace ElastiCache {
     AuthTokenStatus?: AuthTokenUpdateStatus;
   }
   export type PreferredAvailabilityZoneList = String[];
+  export type PreferredOutpostArnList = String[];
   export interface ProcessedUpdateAction {
     /**
      * The ID of the replication group
@@ -2793,6 +3084,10 @@ declare namespace ElastiCache {
      */
     AtRestEncryptionEnabled?: BooleanOptional;
     /**
+     * The outpost ARNs of the replication group's member clusters.
+     */
+    MemberClustersOutpostArns?: ReplicationGroupOutpostArnList;
+    /**
      * The ID of the KMS key used to encrypt the disk in the cluster.
      */
     KmsKeyId?: String;
@@ -2800,6 +3095,10 @@ declare namespace ElastiCache {
      * The ARN (Amazon Resource Name) of the replication group.
      */
     ARN?: String;
+    /**
+     * The list of user group IDs that have access to the replication group.
+     */
+    UserGroupIds?: UserGroupIdList;
   }
   export type ReplicationGroupIdList = String[];
   export type ReplicationGroupList = ReplicationGroup[];
@@ -2813,6 +3112,7 @@ declare namespace ElastiCache {
      */
     ReplicationGroups?: ReplicationGroupList;
   }
+  export type ReplicationGroupOutpostArnList = String[];
   export interface ReplicationGroupPendingModifiedValues {
     /**
      * The primary cluster ID that is applied immediately (if --apply-immediately was specified), or during the next maintenance window.
@@ -2830,6 +3130,10 @@ declare namespace ElastiCache {
      * The auth token status
      */
     AuthTokenStatus?: AuthTokenUpdateStatus;
+    /**
+     * The user groups being modified.
+     */
+    UserGroups?: UserGroupsUpdateStatus;
   }
   export interface ReservedCacheNode {
     /**
@@ -3119,6 +3423,10 @@ declare namespace ElastiCache {
      */
     PreferredAvailabilityZone?: String;
     /**
+     * The ARN (Amazon Resource Name) of the preferred outpost.
+     */
+    PreferredOutpostArn?: String;
+    /**
      * The date and time when the source cluster was created.
      */
     CacheClusterCreateTime?: TStamp;
@@ -3181,7 +3489,7 @@ declare namespace ElastiCache {
   }
   export type SnapshotArnsList = String[];
   export type SnapshotList = Snapshot[];
-  export type SourceType = "cache-cluster"|"cache-parameter-group"|"cache-security-group"|"cache-subnet-group"|"replication-group"|string;
+  export type SourceType = "cache-cluster"|"cache-parameter-group"|"cache-security-group"|"cache-subnet-group"|"replication-group"|"user"|"user-group"|string;
   export interface StartMigrationMessage {
     /**
      * The ID of the replication group to which data should be migrated.
@@ -3205,9 +3513,19 @@ declare namespace ElastiCache {
      * The Availability Zone associated with the subnet.
      */
     SubnetAvailabilityZone?: AvailabilityZone;
+    /**
+     * The outpost ARN of the subnet.
+     */
+    SubnetOutpost?: SubnetOutpost;
   }
   export type SubnetIdentifierList = String[];
   export type SubnetList = Subnet[];
+  export interface SubnetOutpost {
+    /**
+     * The outpost ARN of the subnet.
+     */
+    SubnetOutpostArn?: String;
+  }
   export type TStamp = Date;
   export interface Tag {
     /**
@@ -3249,6 +3567,7 @@ declare namespace ElastiCache {
      */
     EndTime?: TStamp;
   }
+  export type UGReplicationGroupIdList = String[];
   export interface UnprocessedUpdateAction {
     /**
      * The replication group ID
@@ -3365,6 +3684,99 @@ declare namespace ElastiCache {
      */
     UpdateActions?: UpdateActionList;
   }
+  export interface User {
+    /**
+     * The ID of the user.
+     */
+    UserId?: String;
+    /**
+     * The username of the user.
+     */
+    UserName?: String;
+    /**
+     * Indicates the user status. Can be "active", "modifying" or "deleting".
+     */
+    Status?: String;
+    /**
+     * Must be Redis. 
+     */
+    Engine?: EngineType;
+    /**
+     * Access permissions string used for this user account.
+     */
+    AccessString?: String;
+    /**
+     * Returns a list of the user group IDs the user belongs to.
+     */
+    UserGroupIds?: UserGroupIdList;
+    /**
+     * Denotes whether the user requires a password to authenticate.
+     */
+    Authentication?: Authentication;
+    /**
+     * The Amazon Resource Name (ARN) of the user account.
+     */
+    ARN?: String;
+  }
+  export interface UserGroup {
+    /**
+     * The ID of the user group.
+     */
+    UserGroupId?: String;
+    /**
+     * Indicates user group status. Can be "creating", "active", "modifying", "deleting".
+     */
+    Status?: String;
+    /**
+     * Must be Redis. 
+     */
+    Engine?: EngineType;
+    /**
+     * The list of user IDs that belong to the user group.
+     */
+    UserIds?: UserIdList;
+    /**
+     * A list of updates being applied to the user groups.
+     */
+    PendingChanges?: UserGroupPendingChanges;
+    /**
+     * A list of replication groups that the user group can access.
+     */
+    ReplicationGroups?: UGReplicationGroupIdList;
+    /**
+     * The Amazon Resource Name (ARN) of the user group.
+     */
+    ARN?: String;
+  }
+  export type UserGroupId = string;
+  export type UserGroupIdList = UserGroupId[];
+  export type UserGroupIdListInput = UserGroupId[];
+  export type UserGroupList = UserGroup[];
+  export interface UserGroupPendingChanges {
+    /**
+     * The list of user group IDs ro remove.
+     */
+    UserIdsToRemove?: UserIdList;
+    /**
+     * The list of user IDs to add.
+     */
+    UserIdsToAdd?: UserIdList;
+  }
+  export interface UserGroupsUpdateStatus {
+    /**
+     * The list of user group IDs to add.
+     */
+    UserGroupIdsToAdd?: UserGroupIdList;
+    /**
+     * The list of user group IDs to remove.
+     */
+    UserGroupIdsToRemove?: UserGroupIdList;
+  }
+  export type UserId = string;
+  export type UserIdList = UserId[];
+  export type UserIdListInput = UserId[];
+  export type UserList = User[];
+  export type UserName = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "ComputeOptimizer",
+        "description": "This release enables AWS Compute Optimizer to analyze EC2 instance-level EBS read and write operations, and throughput when generating recommendations for your EC2 instances and Auto Scaling groups."
+    },
+    {
+        "type": "feature",
+        "category": "CostExplorer",
+        "description": "Enables Rightsizing Recommendations to analyze and present EC2 instance-level EBS metrics when generating recommendations. Returns AccessDeniedException if the account is not opted into Rightsizing"
+    },
+    {
+        "type": "feature",
+        "category": "ElastiCache",
+        "description": "This release introduces User and UserGroup to allow customers to have access control list of the Redis resources for AWS ElastiCache. This release also adds support for Outposts  for AWS ElastiCache."
+    },
+    {
+        "type": "feature",
+        "category": "MediaPackage",
+        "description": "AWS Elemental MediaPackage provides access logs that capture detailed information about requests sent to a customer's MediaPackage channel."
+    }
+]
