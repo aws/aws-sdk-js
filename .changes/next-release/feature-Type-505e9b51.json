@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "Type",
-  "description": "export client config interface on root as ConfigurationOptions"
-}

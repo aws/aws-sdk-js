@@ -50,7 +50,7 @@
           "shape": "InvalidImageFormatException"
         }
       ],
-      "documentation": "<p>Compares a face in the <i>source</i> input image with each of the 100 largest faces detected in the <i>target</i> input image. </p> <note> <p> If the source image contains multiple faces, the service detects the largest face and compares it with each face detected in the target image. </p> </note> <p>You pass the input and target images either as base64-encoded image bytes or as references to images in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes isn't supported. The image must be formatted as a PNG or JPEG file. </p> <p>In response, the operation returns an array of face matches ordered by similarity score in descending order. For each face match, the response provides a bounding box of the face, facial landmarks, pose details (pitch, role, and yaw), quality (brightness and sharpness), and confidence value (indicating the level of confidence that the bounding box contains a face). The response also provides a similarity score, which indicates how closely the faces match. </p> <note> <p>By default, only faces with a similarity score of greater than or equal to 80% are returned in the response. You can change this value by specifying the <code>SimilarityThreshold</code> parameter.</p> </note> <p> <code>CompareFaces</code> also returns an array of faces that don't match the source image. For each face, it returns a bounding box, confidence value, landmarks, pose details, and quality. The response also returns information about the face in the source image, including the bounding box of the face and confidence value.</p> <p>The <code>QualityFilter</code> input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. Use <code>QualityFilter</code> to set the quality bar by specifying <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>. If you do not want to filter detected faces, specify <code>NONE</code>. The default value is <code>NONE</code>. </p> <note> <p>To use quality filtering, you need a collection associated with version 3 of the face model or higher. To get the version of the face model associated with a collection, call <a>DescribeCollection</a>. </p> </note> <p>If the image doesn't contain Exif metadata, <code>CompareFaces</code> returns orientation information for the source and target images. Use these values to display the images with the correct image orientation.</p> <p>If no faces are detected in the source or target images, <code>CompareFaces</code> returns an <code>InvalidParameterException</code> error. </p> <note> <p> This is a stateless API operation. That is, data returned by this operation doesn't persist.</p> </note> <p>For an example, see Comparing Faces in Images in the Amazon Rekognition Developer Guide.</p> <p>This operation requires permissions to perform the <code>rekognition:CompareFaces</code> action.</p>"
+      "documentation": "<p>Compares a face in the <i>source</i> input image with each of the 100 largest faces detected in the <i>target</i> input image. </p> <note> <p> If the source image contains multiple faces, the service detects the largest face and compares it with each face detected in the target image. </p> </note> <p>You pass the input and target images either as base64-encoded image bytes or as references to images in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes isn't supported. The image must be formatted as a PNG or JPEG file. </p> <p>In response, the operation returns an array of face matches ordered by similarity score in descending order. For each face match, the response provides a bounding box of the face, facial landmarks, pose details (pitch, role, and yaw), quality (brightness and sharpness), and confidence value (indicating the level of confidence that the bounding box contains a face). The response also provides a similarity score, which indicates how closely the faces match. </p> <note> <p>By default, only faces with a similarity score of greater than or equal to 80% are returned in the response. You can change this value by specifying the <code>SimilarityThreshold</code> parameter.</p> </note> <p> <code>CompareFaces</code> also returns an array of faces that don't match the source image. For each face, it returns a bounding box, confidence value, landmarks, pose details, and quality. The response also returns information about the face in the source image, including the bounding box of the face and confidence value.</p> <p>The <code>QualityFilter</code> input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. Use <code>QualityFilter</code> to set the quality bar by specifying <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>. If you do not want to filter detected faces, specify <code>NONE</code>. The default value is <code>NONE</code>. </p> <p>If the image doesn't contain Exif metadata, <code>CompareFaces</code> returns orientation information for the source and target images. Use these values to display the images with the correct image orientation.</p> <p>If no faces are detected in the source or target images, <code>CompareFaces</code> returns an <code>InvalidParameterException</code> error. </p> <note> <p> This is a stateless API operation. That is, data returned by this operation doesn't persist.</p> </note> <p>For an example, see Comparing Faces in Images in the Amazon Rekognition Developer Guide.</p> <p>This operation requires permissions to perform the <code>rekognition:CompareFaces</code> action.</p>"
     },
     "CreateCollection": {
       "name": "CreateCollection",
@@ -1252,7 +1252,7 @@
           "shape": "InvalidImageFormatException"
         }
       ],
-      "documentation": "<p>Returns an array of celebrities recognized in the input image. For more information, see Recognizing Celebrities in the Amazon Rekognition Developer Guide. </p> <p> <code>RecognizeCelebrities</code> returns the 100 largest faces in the image. It lists recognized celebrities in the <code>CelebrityFaces</code> array and unrecognized faces in the <code>UnrecognizedFaces</code> array. <code>RecognizeCelebrities</code> doesn't return celebrities whose faces aren't among the largest 100 faces in the image.</p> <p>For each celebrity recognized, <code>RecognizeCelebrities</code> returns a <code>Celebrity</code> object. The <code>Celebrity</code> object contains the celebrity name, ID, URL links to additional information, match confidence, and a <code>ComparedFace</code> object that you can use to locate the celebrity's face on the image.</p> <p>Amazon Rekognition doesn't retain information about which images a celebrity has been recognized in. Your application must store this information and use the <code>Celebrity</code> ID property as a unique identifier for the celebrity. If you don't store the celebrity name or additional information URLs returned by <code>RecognizeCelebrities</code>, you will need the ID to identify the celebrity in a call to the <a>GetCelebrityInfo</a> operation.</p> <p>You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <p>For an example, see Recognizing Celebrities in an Image in the Amazon Rekognition Developer Guide.</p> <p>This operation requires permissions to perform the <code>rekognition:RecognizeCelebrities</code> operation.</p>"
+      "documentation": "<p>Returns an array of celebrities recognized in the input image. For more information, see Recognizing Celebrities in the Amazon Rekognition Developer Guide. </p> <p> <code>RecognizeCelebrities</code> returns the 64 largest faces in the image. It lists recognized celebrities in the <code>CelebrityFaces</code> array and unrecognized faces in the <code>UnrecognizedFaces</code> array. <code>RecognizeCelebrities</code> doesn't return celebrities whose faces aren't among the largest 64 faces in the image.</p> <p>For each celebrity recognized, <code>RecognizeCelebrities</code> returns a <code>Celebrity</code> object. The <code>Celebrity</code> object contains the celebrity name, ID, URL links to additional information, match confidence, and a <code>ComparedFace</code> object that you can use to locate the celebrity's face on the image.</p> <p>Amazon Rekognition doesn't retain information about which images a celebrity has been recognized in. Your application must store this information and use the <code>Celebrity</code> ID property as a unique identifier for the celebrity. If you don't store the celebrity name or additional information URLs returned by <code>RecognizeCelebrities</code>, you will need the ID to identify the celebrity in a call to the <a>GetCelebrityInfo</a> operation.</p> <p>You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <p>For an example, see Recognizing Celebrities in an Image in the Amazon Rekognition Developer Guide.</p> <p>This operation requires permissions to perform the <code>rekognition:RecognizeCelebrities</code> operation.</p>"
     },
     "SearchFaces": {
       "name": "SearchFaces",
@@ -1860,7 +1860,7 @@
           "shape": "GroundTruthManifest"
         }
       },
-      "documentation": "<p>Assets are the images that you use to train and evaluate a model version. Assets are referenced by Sagemaker GroundTruth manifest files. </p>"
+      "documentation": "<p>Assets are the images that you use to train and evaluate a model version. Assets can also contain validation information that you use to debug a failed model training. </p>"
     },
     "Assets": {
       "type": "list",
@@ -1898,7 +1898,7 @@
         },
         "NumberOfChannels": {
           "shape": "ULong",
-          "documentation": "<p>The number of audio channels in the segement.</p>"
+          "documentation": "<p>The number of audio channels in the segment.</p>"
         }
       },
       "documentation": "<p>Metadata information about an audio stream. An array of <code>AudioMetadata</code> objects for the audio streams found in a stored video is returned by <a>GetSegmentDetection</a>. </p>"
@@ -3552,7 +3552,7 @@
         },
         "Segments": {
           "shape": "SegmentDetections",
-          "documentation": "<p>An array of segments detected in a video.</p>"
+          "documentation": "<p>An array of segments detected in a video. The array is sorted by the segment types (TECHNICAL_CUE or SHOT) specified in the <code>SegmentTypes</code> input parameter of <code>StartSegmentDetection</code>. Within each segment type the array is sorted by timestamp values.</p>"
         },
         "SelectedSegmentTypes": {
           "shape": "SegmentTypesInfo",
@@ -3615,7 +3615,7 @@
           "shape": "S3Object"
         }
       },
-      "documentation": "<p>The S3 bucket that contains the Ground Truth manifest file.</p>"
+      "documentation": "<p>The S3 bucket that contains an Amazon Sagemaker Ground Truth format manifest file. </p>"
     },
     "HumanLoopActivationConditionsEvaluationResults": {
       "type": "string",
@@ -3911,11 +3911,11 @@
         },
         "X": {
           "shape": "Float",
-          "documentation": "<p>The x-coordinate from the top left of the landmark expressed as the ratio of the width of the image. For example, if the image is 700 x 200 and the x-coordinate of the landmark is at 350 pixels, this value is 0.5. </p>"
+          "documentation": "<p>The x-coordinate of the landmark expressed as a ratio of the width of the image. The x-coordinate is measured from the left-side of the image. For example, if the image is 700 pixels wide and the x-coordinate of the landmark is at 350 pixels, this value is 0.5. </p>"
         },
         "Y": {
           "shape": "Float",
-          "documentation": "<p>The y-coordinate from the top left of the landmark expressed as the ratio of the height of the image. For example, if the image is 700 x 200 and the y-coordinate of the landmark is at 100 pixels, this value is 0.5.</p>"
+          "documentation": "<p>The y-coordinate of the landmark expressed as a ratio of the height of the image. The y-coordinate is measured from the top of the image. For example, if the image height is 200 pixels and the y-coordinate of the landmark is at 50 pixels, this value is 0.25.</p>"
         }
       },
       "documentation": "<p>Indicates the location of the landmark on the face.</p>"
@@ -4387,15 +4387,19 @@
         },
         "TrainingDataResult": {
           "shape": "TrainingDataResult",
-          "documentation": "<p>The manifest file that represents the training results.</p>"
+          "documentation": "<p>Contains information about the training results.</p>"
         },
         "TestingDataResult": {
           "shape": "TestingDataResult",
-          "documentation": "<p>The manifest file that represents the testing results.</p>"
+          "documentation": "<p>Contains information about the testing results.</p>"
         },
         "EvaluationResult": {
           "shape": "EvaluationResult",
           "documentation": "<p>The training results. <code>EvaluationResult</code> is only returned if training is successful.</p>"
+        },
+        "ManifestSummary": {
+          "shape": "GroundTruthManifest",
+          "documentation": "<p>The location of the summary manifest. The summary manifest provides aggregate data validation results for the training and test datasets.</p>"
         }
       },
       "documentation": "<p>The description of a version of a model.</p>"
@@ -4475,7 +4479,7 @@
       "members": {
         "CelebrityFaces": {
           "shape": "CelebrityList",
-          "documentation": "<p>Details about each celebrity found in the image. Amazon Rekognition can detect a maximum of 15 celebrities in an image.</p>"
+          "documentation": "<p>Details about each celebrity found in the image. Amazon Rekognition can detect a maximum of 64 celebrities in an image.</p>"
         },
         "UnrecognizedFaces": {
           "shape": "ComparedFaceList",
@@ -4661,11 +4665,11 @@
         },
         "StartTimestampMillis": {
           "shape": "Timestamp",
-          "documentation": "<p>The start time of the detected segment in milliseconds from the start of the video.</p>"
+          "documentation": "<p>The start time of the detected segment in milliseconds from the start of the video. This value is rounded down. For example, if the actual timestamp is 100.6667 milliseconds, Amazon Rekognition Video returns a value of 100 millis.</p>"
         },
         "EndTimestampMillis": {
           "shape": "Timestamp",
-          "documentation": "<p>The end time of the detected segment, in milliseconds, from the start of the video.</p>"
+          "documentation": "<p>The end time of the detected segment, in milliseconds, from the start of the video. This value is rounded down.</p>"
         },
         "DurationMillis": {
           "shape": "ULong",
@@ -4739,7 +4743,7 @@
       "members": {
         "Index": {
           "shape": "ULong",
-          "documentation": "<p>An Identifier for a shot detection segment detected in a video </p>"
+          "documentation": "<p>An Identifier for a shot detection segment detected in a video. </p>"
         },
         "Confidence": {
           "shape": "SegmentConfidence",
@@ -5329,9 +5333,13 @@
         "Output": {
           "shape": "TestingData",
           "documentation": "<p>The subset of the dataset that was actually tested. Some images (assets) might not be tested due to file formatting and other issues. </p>"
+        },
+        "Validation": {
+          "shape": "ValidationData",
+          "documentation": "<p>The location of the data validation manifest. The data validation manifest is created for the test dataset during model training.</p>"
         }
       },
-      "documentation": "<p>A Sagemaker Groundtruth format manifest file representing the dataset used for testing.</p>"
+      "documentation": "<p>Sagemaker Groundtruth format manifest files for the input, output and validation datasets that are used and created during testing.</p>"
     },
     "TextDetection": {
       "type": "structure",
@@ -5422,9 +5430,13 @@
         "Output": {
           "shape": "TrainingData",
           "documentation": "<p>The images (assets) that were actually trained by Amazon Rekognition Custom Labels. </p>"
+        },
+        "Validation": {
+          "shape": "ValidationData",
+          "documentation": "<p>The location of the data validation manifest. The data validation manifest is created for the training dataset during model training.</p>"
         }
       },
-      "documentation": "<p>A Sagemaker Groundtruth format manifest file that represents the dataset used for training.</p>"
+      "documentation": "<p>Sagemaker Groundtruth format manifest files for the input, output and validation datasets that are used and created during testing.</p>"
     },
     "UInteger": {
       "type": "integer",
@@ -5462,6 +5474,16 @@
       "member": {
         "shape": "Url"
       }
+    },
+    "ValidationData": {
+      "type": "structure",
+      "members": {
+        "Assets": {
+          "shape": "Assets",
+          "documentation": "<p>The assets that comprise the validation data. </p>"
+        }
+      },
+      "documentation": "<p>Contains the Amazon S3 bucket location of the validation data for a model training job. </p> <p>The validation data includes error information for individual JSON lines in the dataset. For more information, see Debugging a Failed Model Training in the Amazon Rekognition Custom Labels Developer Guide. </p> <p>You get the <code>ValidationData</code> object for the training dataset (<a>TrainingDataResult</a>) and the test dataset (<a>TestingDataResult</a>) by calling <a>DescribeProjectVersions</a>. </p> <p>The assets array contains a single <a>Asset</a> object. The <a>GroundTruthManifest</a> field of the Asset object contains the S3 bucket location of the validation data. </p>"
     },
     "VersionName": {
       "type": "string",

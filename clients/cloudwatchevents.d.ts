@@ -374,6 +374,12 @@ declare namespace CloudWatchEvents {
      */
     Name: EventSourceName;
   }
+  export interface DeadLetterConfig {
+    /**
+     * The ARN of the SQS queue specified as the target for the dead-letter queue.
+     */
+    Arn?: ResourceArn;
+  }
   export interface DeleteEventBusRequest {
     /**
      * The name of the event bus to delete.
@@ -850,6 +856,8 @@ declare namespace CloudWatchEvents {
     NextToken?: NextToken;
   }
   export type ManagedBy = string;
+  export type MaximumEventAgeInSeconds = number;
+  export type MaximumRetryAttempts = number;
   export type MessageGroupId = string;
   export interface NetworkConfiguration {
     /**
@@ -1189,6 +1197,17 @@ declare namespace CloudWatchEvents {
     ErrorMessage?: ErrorMessage;
   }
   export type RemoveTargetsResultEntryList = RemoveTargetsResultEntry[];
+  export type ResourceArn = string;
+  export interface RetryPolicy {
+    /**
+     * The maximum number of retry attempts to make before the request fails. Retry attempts continue until either the maximum number of attempts is made or until the duration of the MaximumEventAgeInSeconds is met.
+     */
+    MaximumRetryAttempts?: MaximumRetryAttempts;
+    /**
+     * The maximum amount of time, in seconds, to continue to make retry attempts.
+     */
+    MaximumEventAgeInSeconds?: MaximumEventAgeInSeconds;
+  }
   export type RoleArn = string;
   export interface Rule {
     /**
@@ -1345,6 +1364,14 @@ declare namespace CloudWatchEvents {
      * Contains the Redshift Data API parameters to use when the target is a Redshift cluster. If you specify a Redshift Cluster as a Target, you can use this to specify parameters to invoke the Redshift Data API ExecuteStatement based on EventBridge events.
      */
     RedshiftDataParameters?: RedshiftDataParameters;
+    /**
+     * The DeadLetterConfig that defines the target queue to send dead-letter queue events to.
+     */
+    DeadLetterConfig?: DeadLetterConfig;
+    /**
+     * The RetryPolicy object that contains the retry policy configuration to use for the dead-letter queue.
+     */
+    RetryPolicy?: RetryPolicy;
   }
   export type TargetArn = string;
   export type TargetId = string;

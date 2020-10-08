@@ -987,6 +987,10 @@
         "Rules": {
           "shape": "CostCategoryRulesList",
           "documentation": "<p> Rules are processed in order. If there are multiple rules that match the line item, then the first rule to match is used to determine that Cost Category value. </p>"
+        },
+        "ProcessingStatus": {
+          "shape": "CostCategoryProcessingStatusList",
+          "documentation": "<p> The list of processing statuses for Cost Management products for a specific cost category. </p>"
         }
       },
       "documentation": "<p>The structure of Cost Categories. This includes detailed metadata and the set of rules for the <code>CostCategory</code> object.</p>"
@@ -1002,6 +1006,26 @@
       "max": 255,
       "min": 1,
       "pattern": "^(?! )[\\p{L}\\p{N}\\p{Z}-_]*(?<! )$"
+    },
+    "CostCategoryProcessingStatus": {
+      "type": "structure",
+      "members": {
+        "Component": {
+          "shape": "CostCategoryStatusComponent",
+          "documentation": "<p> The Cost Management product name of the applied status. </p>"
+        },
+        "Status": {
+          "shape": "CostCategoryStatus",
+          "documentation": "<p> The process status for a specific cost category. </p>"
+        }
+      },
+      "documentation": "<p> The list of processing statuses for Cost Management products for a specific cost category. </p>"
+    },
+    "CostCategoryProcessingStatusList": {
+      "type": "list",
+      "member": {
+        "shape": "CostCategoryProcessingStatus"
+      }
     },
     "CostCategoryReference": {
       "type": "structure",
@@ -1024,6 +1048,14 @@
         "NumberOfRules": {
           "shape": "NonNegativeInteger",
           "documentation": "<p> The number of rules associated with a specific Cost Category. </p>"
+        },
+        "ProcessingStatus": {
+          "shape": "CostCategoryProcessingStatusList",
+          "documentation": "<p> The list of processing statuses for Cost Management products for a specific cost category. </p>"
+        },
+        "Values": {
+          "shape": "CostCategoryValuesList",
+          "documentation": "<p> A list of unique cost category values in a specific cost category. </p>"
         }
       },
       "documentation": "<p>A reference to a Cost Category containing only enough information to identify the Cost Category.</p> <p>You can use this information to retrieve the full Cost Category information using <code>DescribeCostCategory</code>.</p>"
@@ -1066,6 +1098,19 @@
       "max": 500,
       "min": 1
     },
+    "CostCategoryStatus": {
+      "type": "string",
+      "enum": [
+        "PROCESSING",
+        "APPLIED"
+      ]
+    },
+    "CostCategoryStatusComponent": {
+      "type": "string",
+      "enum": [
+        "COST_EXPLORER"
+      ]
+    },
     "CostCategoryValue": {
       "type": "string",
       "documentation": "<p>The value a line item will be categorized as, if it matches the rule.</p>",
@@ -1082,9 +1127,19 @@
         "Values": {
           "shape": "Values",
           "documentation": "<p>The specific value of the Cost Category.</p>"
+        },
+        "MatchOptions": {
+          "shape": "MatchOptions",
+          "documentation": "<p> The match options that you can use to filter your results. MatchOptions is only applicable for only applicable for actions related to cost category. The default values for <code>MatchOptions</code> is <code>EQUALS</code> and <code>CASE_SENSITIVE</code>. </p>"
         }
       },
       "documentation": "<p>The Cost Categories values used for filtering the costs.</p>"
+    },
+    "CostCategoryValuesList": {
+      "type": "list",
+      "member": {
+        "shape": "CostCategoryValue"
+      }
     },
     "Coverage": {
       "type": "structure",

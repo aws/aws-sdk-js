@@ -400,9 +400,24 @@ declare namespace CostExplorer {
      *  Rules are processed in order. If there are multiple rules that match the line item, then the first rule to match is used to determine that Cost Category value. 
      */
     Rules: CostCategoryRulesList;
+    /**
+     *  The list of processing statuses for Cost Management products for a specific cost category. 
+     */
+    ProcessingStatus?: CostCategoryProcessingStatusList;
   }
   export type CostCategoryMaxResults = number;
   export type CostCategoryName = string;
+  export interface CostCategoryProcessingStatus {
+    /**
+     *  The Cost Management product name of the applied status. 
+     */
+    Component?: CostCategoryStatusComponent;
+    /**
+     *  The process status for a specific cost category. 
+     */
+    Status?: CostCategoryStatus;
+  }
+  export type CostCategoryProcessingStatusList = CostCategoryProcessingStatus[];
   export interface CostCategoryReference {
     /**
      *  The unique identifier for your Cost Category. 
@@ -421,6 +436,14 @@ declare namespace CostExplorer {
      *  The number of rules associated with a specific Cost Category. 
      */
     NumberOfRules?: NonNegativeInteger;
+    /**
+     *  The list of processing statuses for Cost Management products for a specific cost category. 
+     */
+    ProcessingStatus?: CostCategoryProcessingStatusList;
+    /**
+     *  A list of unique cost category values in a specific cost category. 
+     */
+    Values?: CostCategoryValuesList;
   }
   export type CostCategoryReferencesList = CostCategoryReference[];
   export interface CostCategoryRule {
@@ -432,6 +455,8 @@ declare namespace CostExplorer {
   }
   export type CostCategoryRuleVersion = "CostCategoryExpression.v1"|string;
   export type CostCategoryRulesList = CostCategoryRule[];
+  export type CostCategoryStatus = "PROCESSING"|"APPLIED"|string;
+  export type CostCategoryStatusComponent = "COST_EXPLORER"|string;
   export type CostCategoryValue = string;
   export interface CostCategoryValues {
     Key?: CostCategoryName;
@@ -439,7 +464,12 @@ declare namespace CostExplorer {
      * The specific value of the Cost Category.
      */
     Values?: Values;
+    /**
+     *  The match options that you can use to filter your results. MatchOptions is only applicable for only applicable for actions related to cost category. The default values for MatchOptions is EQUALS and CASE_SENSITIVE. 
+     */
+    MatchOptions?: MatchOptions;
   }
+  export type CostCategoryValuesList = CostCategoryValue[];
   export interface Coverage {
     /**
      * The amount of instance usage that the reservation covered, in hours.

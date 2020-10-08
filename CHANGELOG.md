@@ -1,6 +1,16 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.769.0-->
+<!--LATEST=2.770.0-->
 <!--ENTRYINSERT-->
+
+## 2.770.0
+* feature: CloudWatchEvents: Amazon EventBridge (formerly called CloudWatch Events) adds support for target Dead-letter Queues and custom retry policies.
+* feature: CostExplorer: You can now create hierarchical cost categories by choosing "Cost Category" as a dimension. You can also track the status of your cost category updates to your cost and usage information.
+* feature: EC2: AWS EC2 RevokeSecurityGroupIngress and RevokeSecurityGroupEgress APIs will return IpPermissions which do not match with any existing IpPermissions for security groups in default VPC and EC2-Classic.
+* feature: EventBridge: Amazon EventBridge adds support for target Dead Letter Queues (DLQs) and custom retry policies.
+* feature: RDS: Supports a new parameter to set the max allocated storage in gigabytes for restore database instance from S3 and restore database instance to a point in time APIs.
+* feature: Rekognition: This release provides location information for the manifest validation files.
+* feature: SageMaker: This release enables Sagemaker customers to convert Tensorflow and PyTorch models to CoreML (ML Model) format.
+* feature: Type: export client config interface on root as ConfigurationOptions
 
 ## 2.769.0
 * feature: ComputeOptimizer: This release enables AWS Compute Optimizer to analyze EC2 instance-level EBS read and write operations, and throughput when generating recommendations for your EC2 instances and Auto Scaling groups.

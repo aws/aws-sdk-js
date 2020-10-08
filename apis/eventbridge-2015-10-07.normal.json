@@ -991,6 +991,16 @@
         }
       }
     },
+    "DeadLetterConfig": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The ARN of the SQS queue specified as the target for the dead-letter queue.</p>"
+        }
+      },
+      "documentation": "<p>A <code>DeadLetterConfig</code> object that contains information about a dead-letter queue configuration.</p>"
+    },
     "DeleteEventBusRequest": {
       "type": "structure",
       "required": [
@@ -1716,6 +1726,16 @@
       "max": 128,
       "min": 1
     },
+    "MaximumEventAgeInSeconds": {
+      "type": "integer",
+      "max": 86400,
+      "min": 60
+    },
+    "MaximumRetryAttempts": {
+      "type": "integer",
+      "max": 185,
+      "min": 0
+    },
     "MessageGroupId": {
       "type": "string"
     },
@@ -2254,6 +2274,25 @@
         "shape": "RemoveTargetsResultEntry"
       }
     },
+    "ResourceArn": {
+      "type": "string",
+      "max": 1600,
+      "min": 1
+    },
+    "RetryPolicy": {
+      "type": "structure",
+      "members": {
+        "MaximumRetryAttempts": {
+          "shape": "MaximumRetryAttempts",
+          "documentation": "<p>The maximum number of retry attempts to make before the request fails. Retry attempts continue until either the maximum number of attempts is made or until the duration of the <code>MaximumEventAgeInSeconds</code> is met.</p>"
+        },
+        "MaximumEventAgeInSeconds": {
+          "shape": "MaximumEventAgeInSeconds",
+          "documentation": "<p>The maximum amount of time, in seconds, to continue to make retry attempts.</p>"
+        }
+      },
+      "documentation": "<p>A <code>RetryPolicy</code> object that includes information about the retry policy settings.</p>"
+    },
     "RoleArn": {
       "type": "string",
       "max": 1600,
@@ -2551,6 +2590,14 @@
         "RedshiftDataParameters": {
           "shape": "RedshiftDataParameters",
           "documentation": "<p>Contains the Redshift Data API parameters to use when the target is a Redshift cluster.</p> <p>If you specify a Redshift Cluster as a Target, you can use this to specify parameters to invoke the Redshift Data API ExecuteStatement based on EventBridge events.</p>"
+        },
+        "DeadLetterConfig": {
+          "shape": "DeadLetterConfig",
+          "documentation": "<p>The <code>DeadLetterConfig</code> that defines the target queue to send dead-letter queue events to.</p>"
+        },
+        "RetryPolicy": {
+          "shape": "RetryPolicy",
+          "documentation": "<p>The <code>RetryPolicy</code> object that contains the retry policy configuration to use for the dead-letter queue.</p>"
         }
       },
       "documentation": "<p>Targets are the resources to be invoked when a rule is triggered. For a complete list of services and resources that can be set as a target, see <a>PutTargets</a>.</p> <p>If you are setting the event bus of another account as the target, and that account granted permission to your account through an organization instead of directly by the account ID, then you must specify a <code>RoleArn</code> with proper permissions in the <code>Target</code> structure. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html\">Sending and Receiving Events Between AWS Accounts</a> in the <i>Amazon EventBridge User Guide</i>.</p>"
