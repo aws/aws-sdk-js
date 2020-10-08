@@ -116,6 +116,9 @@ export interface RetryDelayOptions {
     customBackoff?: (retryCount: number, err?: Error) => number
 }
 
+/**
+ * Common configuration entries to construct a service client.
+ */
 export abstract class ConfigurationOptions {
 
     /**
