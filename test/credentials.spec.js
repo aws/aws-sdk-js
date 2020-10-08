@@ -798,7 +798,6 @@
         credsCtorSpy = helpers.spyOn(AWS, 'SharedIniFileCredentials').andCallThrough();
         expect(creds.roleArn).to.equal('arn');
         return creds.refresh(function(err) {
-          var sourceCreds;
           expect(credsCtorSpy.calls.length).to.equal(1);
           parentCredsArg = credsCtorSpy.calls[0]['arguments'][0];
           expect(parentCredsArg.profile).to.equal('foo');
@@ -825,7 +824,6 @@
         credsCtorSpy = helpers.spyOn(AWS, 'SharedIniFileCredentials').andCallThrough();
         expect(creds.roleArn).to.equal('arn');
         return creds.refresh(function(err) {
-          var sourceCreds;
           expect(credsCtorSpy.calls.length).to.equal(1);
           parentCredsArg = credsCtorSpy.calls[0]['arguments'][0];
           expect(parentCredsArg.profile).to.equal('foo');
