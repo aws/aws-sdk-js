@@ -447,6 +447,10 @@ declare namespace Amplify {
      */
     enableBasicAuth?: EnableBasicAuth;
     /**
+     *  Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. Enabling performance mode will mean that hosting configuration or code changes can take up to 10 minutes to roll out. 
+     */
+    enablePerformanceMode?: EnablePerformanceMode;
+    /**
      *  The build specification (build spec) for the autocreated branch. 
      */
     buildSpec?: BuildSpec;
@@ -558,6 +562,10 @@ declare namespace Amplify {
      *  Enables basic authorization for a branch of an Amplify app. 
      */
     enableBasicAuth: EnableBasicAuth;
+    /**
+     *  Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. Enabling performance mode will mean that hosting configuration or code changes can take up to 10 minutes to roll out. 
+     */
+    enablePerformanceMode?: EnablePerformanceMode;
     /**
      *  The thumbnail URL for the branch of an Amplify app. 
      */
@@ -751,6 +759,10 @@ declare namespace Amplify {
      *  Enables basic authorization for the branch. 
      */
     enableBasicAuth?: EnableBasicAuth;
+    /**
+     *  Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. Enabling performance mode will mean that hosting configuration or code changes can take up to 10 minutes to roll out. 
+     */
+    enablePerformanceMode?: EnablePerformanceMode;
     /**
      *  The tag for the branch. 
      */
@@ -1026,6 +1038,7 @@ declare namespace Amplify {
   export type EnableBranchAutoBuild = boolean;
   export type EnableBranchAutoDeletion = boolean;
   export type EnableNotification = boolean;
+  export type EnablePerformanceMode = boolean;
   export type EnablePullRequestPreview = boolean;
   export type EndTime = Date;
   export type EnvKey = string;
@@ -1757,6 +1770,10 @@ declare namespace Amplify {
      *  Enables basic authorization for the branch. 
      */
     enableBasicAuth?: EnableBasicAuth;
+    /**
+     *  Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. Enabling performance mode will mean that hosting configuration or code changes can take up to 10 minutes to roll out. 
+     */
+    enablePerformanceMode?: EnablePerformanceMode;
     /**
      *  The build specification (build spec) for the branch. 
      */

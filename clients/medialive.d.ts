@@ -586,8 +586,15 @@ Leave set to "normal" when input does not contain pre-mixed audio + AD.
     MetadataControl?: Ac3MetadataControl;
   }
   export type AfdSignaling = "AUTO"|"FIXED"|"NONE"|string;
+  export interface AncillarySourceSettings {
+    /**
+     * Specifies the number (1 to 4) of the captions channel you want to extract from the ancillary captions. If you plan to convert the ancillary captions to another format, complete this field. If you plan to choose Embedded as the captions destination in the output (to pass through all the channels in the ancillary captions), leave this field blank because MediaLive ignores the field.
+     */
+    SourceAncillaryChannelNumber?: __integerMin1Max4;
+  }
   export interface ArchiveContainerSettings {
     M2tsSettings?: M2tsSettings;
+    RawSettings?: RawSettings;
   }
   export interface ArchiveGroupSettings {
     /**
@@ -633,6 +640,7 @@ Leave set to "normal" when input does not contain pre-mixed audio + AD.
     Eac3Settings?: Eac3Settings;
     Mp2Settings?: Mp2Settings;
     PassThroughSettings?: PassThroughSettings;
+    WavSettings?: WavSettings;
   }
   export interface AudioDescription {
     /**
@@ -1122,6 +1130,7 @@ Alternate rendition that the client will not try to play back by default. Repres
     SelectorSettings?: CaptionSelectorSettings;
   }
   export interface CaptionSelectorSettings {
+    AncillarySourceSettings?: AncillarySourceSettings;
     AribSourceSettings?: AribSourceSettings;
     DvbSubSourceSettings?: DvbSubSourceSettings;
     EmbeddedSourceSettings?: EmbeddedSourceSettings;
@@ -1129,11 +1138,22 @@ Alternate rendition that the client will not try to play back by default. Repres
     Scte27SourceSettings?: Scte27SourceSettings;
     TeletextSourceSettings?: TeletextSourceSettings;
   }
+  export type CdiInputResolution = "SD"|"HD"|"FHD"|"UHD"|string;
+  export interface CdiInputSpecification {
+    /**
+     * Maximum CDI input resolution
+     */
+    Resolution?: CdiInputResolution;
+  }
   export interface Channel {
     /**
      * The unique arn of the channel.
      */
     Arn?: __string;
+    /**
+     * Specification of CDI inputs for this channel
+     */
+    CdiInputSpecification?: CdiInputSpecification;
     /**
      * The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline.
      */
@@ -1158,6 +1178,9 @@ one destination per packager.
      * List of input attachments for channel.
      */
     InputAttachments?: __listOfInputAttachment;
+    /**
+     * Specification of network and file inputs for this channel
+     */
     InputSpecification?: InputSpecification;
     /**
      * The log level being written to CloudWatch Logs.
@@ -1199,6 +1222,10 @@ one destination per packager.
      */
     Arn?: __string;
     /**
+     * Specification of CDI inputs for this channel
+     */
+    CdiInputSpecification?: CdiInputSpecification;
+    /**
      * The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline.
      */
     ChannelClass?: ChannelClass;
@@ -1221,6 +1248,9 @@ one destination per packager.
      * List of input attachments for channel.
      */
     InputAttachments?: __listOfInputAttachment;
+    /**
+     * Specification of network and file inputs for this channel
+     */
     InputSpecification?: InputSpecification;
     /**
      * The log level being written to CloudWatch Logs.
@@ -1248,6 +1278,10 @@ one destination per packager.
   }
   export interface CreateChannelRequest {
     /**
+     * Specification of CDI inputs for this channel
+     */
+    CdiInputSpecification?: CdiInputSpecification;
+    /**
      * The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline.
      */
     ChannelClass?: ChannelClass;
@@ -1258,7 +1292,7 @@ one destination per packager.
      */
     InputAttachments?: __listOfInputAttachment;
     /**
-     * Specification of input for this channel (max. bitrate, resolution, codec, etc.)
+     * Specification of network and file inputs for this channel
      */
     InputSpecification?: InputSpecification;
     /**
@@ -1427,6 +1461,10 @@ resources.
      */
     Arn?: __string;
     /**
+     * Specification of CDI inputs for this channel
+     */
+    CdiInputSpecification?: CdiInputSpecification;
+    /**
      * The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline.
      */
     ChannelClass?: ChannelClass;
@@ -1450,6 +1488,9 @@ one destination per packager.
      * List of input attachments for channel.
      */
     InputAttachments?: __listOfInputAttachment;
+    /**
+     * Specification of network and file inputs for this channel
+     */
     InputSpecification?: InputSpecification;
     /**
      * The log level being written to CloudWatch Logs.
@@ -1516,6 +1557,10 @@ one destination per packager.
      * The packet identifier map for this multiplex program.
      */
     PacketIdentifiersMap?: MultiplexProgramPacketIdentifiersMap;
+    /**
+     * Contains information about the current sources for the specified program in the specified multiplex. Keep in mind that each multiplex pipeline connects to both pipelines in a given source channel (the channel identified by the program). But only one of those channel pipelines is ever active at one time.
+     */
+    PipelineDetails?: __listOfMultiplexProgramPipelineDetail;
     /**
      * The name of the multiplex program.
      */
@@ -1676,6 +1721,10 @@ one destination per packager.
      */
     Arn?: __string;
     /**
+     * Specification of CDI inputs for this channel
+     */
+    CdiInputSpecification?: CdiInputSpecification;
+    /**
      * The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline.
      */
     ChannelClass?: ChannelClass;
@@ -1699,6 +1748,9 @@ one destination per packager.
      * List of input attachments for channel.
      */
     InputAttachments?: __listOfInputAttachment;
+    /**
+     * Specification of network and file inputs for this channel
+     */
     InputSpecification?: InputSpecification;
     /**
      * The log level being written to CloudWatch Logs.
@@ -1927,6 +1979,10 @@ during input switch actions. Presently, this functionality only works with MP4_F
      * The packet identifier map for this multiplex program.
      */
     PacketIdentifiersMap?: MultiplexProgramPacketIdentifiersMap;
+    /**
+     * Contains information about the current sources for the specified program in the specified multiplex. Keep in mind that each multiplex pipeline connects to both pipelines in a given source channel (the channel identified by the program). But only one of those channel pipelines is ever active at one time.
+     */
+    PipelineDetails?: __listOfMultiplexProgramPipelineDetail;
     /**
      * The name of the multiplex program.
      */
@@ -4343,6 +4399,96 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
      */
     SampleRate?: __double;
   }
+  export type Mpeg2AdaptiveQuantization = "AUTO"|"HIGH"|"LOW"|"MEDIUM"|"OFF"|string;
+  export type Mpeg2ColorMetadata = "IGNORE"|"INSERT"|string;
+  export type Mpeg2ColorSpace = "AUTO"|"PASSTHROUGH"|string;
+  export type Mpeg2DisplayRatio = "DISPLAYRATIO16X9"|"DISPLAYRATIO4X3"|string;
+  export interface Mpeg2FilterSettings {
+    TemporalFilterSettings?: TemporalFilterSettings;
+  }
+  export type Mpeg2GopSizeUnits = "FRAMES"|"SECONDS"|string;
+  export type Mpeg2ScanType = "INTERLACED"|"PROGRESSIVE"|string;
+  export interface Mpeg2Settings {
+    /**
+     * Choose Off to disable adaptive quantization. Or choose another value to enable the quantizer and set its strength. The strengths are: Auto, Off, Low, Medium, High. When you enable this field, MediaLive allows intra-frame quantizers to vary, which might improve visual quality.
+     */
+    AdaptiveQuantization?: Mpeg2AdaptiveQuantization;
+    /**
+     * Indicates the AFD values that MediaLive will write into the video encode. If you do not know what AFD signaling is, or if your downstream system has not given you guidance, choose AUTO.
+AUTO: MediaLive will try to preserve the input AFD value (in cases where multiple AFD values are valid).
+FIXED: MediaLive will use the value you specify in fixedAFD.
+     */
+    AfdSignaling?: AfdSignaling;
+    /**
+     * Specifies whether to include the color space metadata. The metadata describes the color space that applies to the video (the colorSpace field). We recommend that you insert the metadata.
+     */
+    ColorMetadata?: Mpeg2ColorMetadata;
+    /**
+     * Choose the type of color space conversion to apply to the output. For detailed information on setting up both the input and the output to obtain the desired color space in the output, see the section on \"MediaLive Features - Video - color space\" in the MediaLive User Guide.
+PASSTHROUGH: Keep the color space of the input content - do not convert it.
+AUTO:Convert all content that is SD to rec 601, and convert all content that is HD to rec 709.
+     */
+    ColorSpace?: Mpeg2ColorSpace;
+    /**
+     * Sets the pixel aspect ratio for the encode.
+     */
+    DisplayAspectRatio?: Mpeg2DisplayRatio;
+    /**
+     * Optionally specify a noise reduction filter, which can improve quality of compressed content. If you do not choose a filter, no filter will be applied.
+TEMPORAL: This filter is useful for both source content that is noisy (when it has excessive digital artifacts) and source content that is clean.
+When the content is noisy, the filter cleans up the source content before the encoding phase, with these two effects: First, it improves the output video quality because the content has been cleaned up. Secondly, it decreases the bandwidth because MediaLive does not waste bits on encoding noise.
+When the content is reasonably clean, the filter tends to decrease the bitrate.
+     */
+    FilterSettings?: Mpeg2FilterSettings;
+    /**
+     * Complete this field only when afdSignaling is set to FIXED. Enter the AFD value (4 bits) to write on all frames of the video encode.
+     */
+    FixedAfd?: FixedAfd;
+    /**
+     * description": "The framerate denominator. For example, 1001. The framerate is the numerator divided by the denominator. For example, 24000 / 1001 = 23.976 FPS.
+     */
+    FramerateDenominator: __integerMin1;
+    /**
+     * The framerate numerator. For example, 24000. The framerate is the numerator divided by the denominator. For example, 24000 / 1001 = 23.976 FPS.
+     */
+    FramerateNumerator: __integerMin1;
+    /**
+     * MPEG2: default is open GOP.
+     */
+    GopClosedCadence?: __integerMin0;
+    /**
+     * Relates to the GOP structure. The number of B-frames between reference frames. If you do not know what a B-frame is, use the default.
+     */
+    GopNumBFrames?: __integerMin0Max7;
+    /**
+     * Relates to the GOP structure. The GOP size (keyframe interval) in the units specified in gopSizeUnits. If you do not know what GOP is, use the default.
+If gopSizeUnits is frames, then the gopSize must be an integer and must be greater than or equal to 1.
+If gopSizeUnits is seconds, the gopSize must be greater than 0, but does not need to be an integer.
+     */
+    GopSize?: __double;
+    /**
+     * Relates to the GOP structure. Specifies whether the gopSize is specified in frames or seconds. If you do not plan to change the default gopSize, leave the default. If you specify SECONDS, MediaLive will internally convert the gop size to a frame count.
+     */
+    GopSizeUnits?: Mpeg2GopSizeUnits;
+    /**
+     * Set the scan type of the output to PROGRESSIVE or INTERLACED (top field first).
+     */
+    ScanType?: Mpeg2ScanType;
+    /**
+     * Relates to the GOP structure. If you do not know what GOP is, use the default.
+FIXED: Set the number of B-frames in each sub-GOP to the value in gopNumBFrames.
+DYNAMIC: Let MediaLive optimize the number of B-frames in each sub-GOP, to improve visual quality.
+     */
+    SubgopLength?: Mpeg2SubGopLength;
+    /**
+     * Determines how MediaLive inserts timecodes in the output video. For detailed information about setting up the input and the output for a timecode, see the section on \"MediaLive Features - Timecode configuration\" in the MediaLive User Guide.
+DISABLED: do not include timecodes.
+GOP_TIMECODE: Include timecode metadata in the GOP header.
+     */
+    TimecodeInsertion?: Mpeg2TimecodeInsertionBehavior;
+  }
+  export type Mpeg2SubGopLength = "DYNAMIC"|"FIXED"|string;
+  export type Mpeg2TimecodeInsertionBehavior = "DISABLED"|"GOP_TIMECODE"|string;
   export interface MsSmoothGroupSettings {
     /**
      * The ID to include in each message in the sparse track. Ignored if sparseTrackType is NONE.
@@ -4521,6 +4667,10 @@ Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
      */
     PacketIdentifiersMap?: MultiplexProgramPacketIdentifiersMap;
     /**
+     * Contains information about the current sources for the specified program in the specified multiplex. Keep in mind that each multiplex pipeline connects to both pipelines in a given source channel (the channel identified by the program). But only one of those channel pipelines is ever active at one time.
+     */
+    PipelineDetails?: __listOfMultiplexProgramPipelineDetail;
+    /**
      * The name of the multiplex program.
      */
     ProgramName?: __string;
@@ -4550,6 +4700,16 @@ The Multiplex must be in the same region as the Channel.
     Scte35Pid?: __integer;
     TimedMetadataPid?: __integer;
     VideoPid?: __integer;
+  }
+  export interface MultiplexProgramPipelineDetail {
+    /**
+     * Identifies the channel pipeline that is currently active for the pipeline (identified by PipelineId) in the multiplex.
+     */
+    ActiveChannelPipeline?: __string;
+    /**
+     * Identifies a specific pipeline in the multiplex.
+     */
+    PipelineId?: __string;
   }
   export interface MultiplexProgramServiceDescriptor {
     /**
@@ -4593,7 +4753,7 @@ The Multiplex must be in the same region as the Channel.
     /**
      * Maximum video buffer delay in milliseconds.
      */
-    MaximumVideoBufferDelayMilliseconds?: __integerMin1000Max3000;
+    MaximumVideoBufferDelayMilliseconds?: __integerMin800Max3000;
     /**
      * Transport stream bit rate.
      */
@@ -4623,6 +4783,10 @@ The Multiplex must be in the same region as the Channel.
      * Minimum statmux bitrate.
      */
     MinimumBitrate?: __integerMin100000Max100000000;
+    /**
+     * The purpose of the priority is to use a combination of the\nmultiplex rate control algorithm and the QVBR capability of the\nencoder to prioritize the video quality of some channels in a\nmultiplex over others.  Channels that have a higher priority will\nget higher video quality at the expense of the video quality of\nother channels in the multiplex with lower priority.
+     */
+    Priority?: __integerMinNegative5Max5;
   }
   export interface MultiplexSummary {
     /**
@@ -4891,6 +5055,8 @@ When this field is defined, ConstantBitrate must be undefined.
   }
   export interface PurchaseOfferingResponse {
     Reservation?: Reservation;
+  }
+  export interface RawSettings {
   }
   export interface Rec601Settings {
   }
@@ -5339,6 +5505,10 @@ Valid values: 1, 2, 4, 6, 8
      */
     Arn?: __string;
     /**
+     * Specification of CDI inputs for this channel
+     */
+    CdiInputSpecification?: CdiInputSpecification;
+    /**
      * The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline.
      */
     ChannelClass?: ChannelClass;
@@ -5362,6 +5532,9 @@ one destination per packager.
      * List of input attachments for channel.
      */
     InputAttachments?: __listOfInputAttachment;
+    /**
+     * Specification of network and file inputs for this channel
+     */
     InputSpecification?: InputSpecification;
     /**
      * The log level being written to CloudWatch Logs.
@@ -5517,6 +5690,10 @@ one destination per packager.
      */
     Arn?: __string;
     /**
+     * Specification of CDI inputs for this channel
+     */
+    CdiInputSpecification?: CdiInputSpecification;
+    /**
      * The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline.
      */
     ChannelClass?: ChannelClass;
@@ -5540,6 +5717,9 @@ one destination per packager.
      * List of input attachments for channel.
      */
     InputAttachments?: __listOfInputAttachment;
+    /**
+     * Specification of network and file inputs for this channel
+     */
     InputSpecification?: InputSpecification;
     /**
      * The log level being written to CloudWatch Logs.
@@ -5721,6 +5901,10 @@ one destination per packager.
   }
   export interface UpdateChannelRequest {
     /**
+     * Specification of CDI inputs for this channel
+     */
+    CdiInputSpecification?: CdiInputSpecification;
+    /**
      * channel ID
      */
     ChannelId: __string;
@@ -5734,7 +5918,7 @@ one destination per packager.
     EncoderSettings?: EncoderSettings;
     InputAttachments?: __listOfInputAttachment;
     /**
-     * Specification of input for this channel (max. bitrate, resolution, codec, etc.)
+     * Specification of network and file inputs for this channel
      */
     InputSpecification?: InputSpecification;
     /**
@@ -5926,6 +6110,7 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
     FrameCaptureSettings?: FrameCaptureSettings;
     H264Settings?: H264Settings;
     H265Settings?: H265Settings;
+    Mpeg2Settings?: Mpeg2Settings;
   }
   export interface VideoDescription {
     /**
@@ -5994,6 +6179,21 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
     VideoSelectorPid?: VideoSelectorPid;
     VideoSelectorProgramId?: VideoSelectorProgramId;
   }
+  export type WavCodingMode = "CODING_MODE_1_0"|"CODING_MODE_2_0"|"CODING_MODE_4_0"|"CODING_MODE_8_0"|string;
+  export interface WavSettings {
+    /**
+     * Bits per sample.
+     */
+    BitDepth?: __double;
+    /**
+     * The audio coding mode for the WAV audio. The mode determines the number of channels in the audio.
+     */
+    CodingMode?: WavCodingMode;
+    /**
+     * Sample rate in Hz.
+     */
+    SampleRate?: __double;
+  }
   export interface WebvttDestinationSettings {
   }
   export type __double = number;
@@ -6026,7 +6226,6 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
   export type __integerMin100000Max100000000 = number;
   export type __integerMin100000Max40000000 = number;
   export type __integerMin100000Max80000000 = number;
-  export type __integerMin1000Max3000 = number;
   export type __integerMin1000Max30000 = number;
   export type __integerMin1Max10 = number;
   export type __integerMin1Max1000000 = number;
@@ -6045,8 +6244,10 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
   export type __integerMin3 = number;
   export type __integerMin30 = number;
   export type __integerMin4Max20 = number;
+  export type __integerMin800Max3000 = number;
   export type __integerMin96Max600 = number;
   export type __integerMinNegative1000Max1000 = number;
+  export type __integerMinNegative5Max5 = number;
   export type __integerMinNegative60Max6 = number;
   export type __integerMinNegative60Max60 = number;
   export type __listOfAudioChannelMapping = AudioChannelMapping[];
@@ -6078,6 +6279,7 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
   export type __listOfMediaConnectFlowRequest = MediaConnectFlowRequest[];
   export type __listOfMediaPackageOutputDestinationSettings = MediaPackageOutputDestinationSettings[];
   export type __listOfMultiplexOutputDestination = MultiplexOutputDestination[];
+  export type __listOfMultiplexProgramPipelineDetail = MultiplexProgramPipelineDetail[];
   export type __listOfMultiplexProgramSummary = MultiplexProgramSummary[];
   export type __listOfMultiplexSummary = MultiplexSummary[];
   export type __listOfOffering = Offering[];

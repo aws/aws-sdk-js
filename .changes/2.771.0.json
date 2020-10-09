@@ -1,0 +1,32 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Test",
+        "description": "Delete unused variable declarations from test"
+    },
+    {
+        "type": "feature",
+        "category": "Amplify",
+        "description": "Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval - enabling can make code changes can take up to 10 minutes to roll out."
+    },
+    {
+        "type": "feature",
+        "category": "EKS",
+        "description": "This release introduces a new Amazon EKS error code: \"ClusterUnreachable\""
+    },
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "WAV audio output. Extracting ancillary captions in MP4 file inputs. Priority on channels feeding a multiplex (higher priority channels will tend to have higher video quality)."
+    },
+    {
+        "type": "feature",
+        "category": "ServiceCatalog",
+        "description": "This new API takes either a ProvisonedProductId or a ProvisionedProductName, along with a list of 1 or more output keys and responds with the (key,value) pairs of those outputs."
+    },
+    {
+        "type": "feature",
+        "category": "Snowball",
+        "description": "We added new APIs to allow customers to better manage their device shipping. You can check if your shipping label expired, generate a new label, and tell us that you received or shipped your job."
+    }
+]

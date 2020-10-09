@@ -83,7 +83,7 @@
           "shape": "UnsupportedAddressException"
         }
       ],
-      "documentation": "<p>Creates an address for a Snowball to be shipped to. In most regions, addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. If the address is invalid or unsupported, then an exception is thrown.</p>"
+      "documentation": "<p>Creates an address for a Snow device to be shipped to. In most regions, addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. If the address is invalid or unsupported, then an exception is thrown.</p>"
     },
     "CreateCluster": {
       "name": "CreateCluster",
@@ -142,7 +142,38 @@
           "shape": "Ec2RequestFailedException"
         }
       ],
-      "documentation": "<p>Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for Snowball. If you're creating a job for a node in a cluster, you only need to provide the <code>clusterId</code> value; the other job attributes are inherited from the cluster. </p>"
+      "documentation": "<p>Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for a Snow device. If you're creating a job for a node in a cluster, you only need to provide the <code>clusterId</code> value; the other job attributes are inherited from the cluster. </p>"
+    },
+    "CreateReturnShippingLabel": {
+      "name": "CreateReturnShippingLabel",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateReturnShippingLabelRequest"
+      },
+      "output": {
+        "shape": "CreateReturnShippingLabelResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidResourceException"
+        },
+        {
+          "shape": "InvalidJobStateException"
+        },
+        {
+          "shape": "InvalidInputCombinationException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ReturnShippingLabelAlreadyExistsException"
+        }
+      ],
+      "documentation": "<p>Creates a shipping label that will be used to return the Snow device to AWS.</p>"
     },
     "DescribeAddress": {
       "name": "DescribeAddress",
@@ -223,6 +254,31 @@
       ],
       "documentation": "<p>Returns information about a specific job including shipping information, job status, and other important metadata. </p>"
     },
+    "DescribeReturnShippingLabel": {
+      "name": "DescribeReturnShippingLabel",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeReturnShippingLabelRequest"
+      },
+      "output": {
+        "shape": "DescribeReturnShippingLabelResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidResourceException"
+        },
+        {
+          "shape": "InvalidJobStateException"
+        },
+        {
+          "shape": "ConflictException"
+        }
+      ],
+      "documentation": "<p>Information on the shipping label of a Snow device that is being returned to AWS.</p>"
+    },
     "GetJobManifest": {
       "name": "GetJobManifest",
       "http": {
@@ -243,7 +299,7 @@
           "shape": "InvalidJobStateException"
         }
       ],
-      "documentation": "<p>Returns a link to an Amazon S3 presigned URL for the manifest file associated with the specified <code>JobId</code> value. You can access the manifest file for up to 60 minutes after this request has been made. To access the manifest file after 60 minutes have passed, you'll have to make another call to the <code>GetJobManifest</code> action.</p> <p>The manifest is an encrypted file that you can download after your job enters the <code>WithCustomer</code> status. The manifest is decrypted by using the <code>UnlockCode</code> code value, when you pass both values to the Snowball through the Snowball client when the client is started for the first time.</p> <p>As a best practice, we recommend that you don't save a copy of an <code>UnlockCode</code> value in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job.</p> <p>The credentials of a given job, including its manifest file and unlock code, expire 90 days after the job is created.</p>"
+      "documentation": "<p>Returns a link to an Amazon S3 presigned URL for the manifest file associated with the specified <code>JobId</code> value. You can access the manifest file for up to 60 minutes after this request has been made. To access the manifest file after 60 minutes have passed, you'll have to make another call to the <code>GetJobManifest</code> action.</p> <p>The manifest is an encrypted file that you can download after your job enters the <code>WithCustomer</code> status. The manifest is decrypted by using the <code>UnlockCode</code> code value, when you pass both values to the Snow device through the Snowball client when the client is started for the first time.</p> <p>As a best practice, we recommend that you don't save a copy of an <code>UnlockCode</code> value in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snow device associated with that job.</p> <p>The credentials of a given job, including its manifest file and unlock code, expire 90 days after the job is created.</p>"
     },
     "GetJobUnlockCode": {
       "name": "GetJobUnlockCode",
@@ -265,7 +321,7 @@
           "shape": "InvalidJobStateException"
         }
       ],
-      "documentation": "<p>Returns the <code>UnlockCode</code> code value for the specified job. A particular <code>UnlockCode</code> value can be accessed for up to 90 days after the associated job has been created.</p> <p>The <code>UnlockCode</code> value is a 29-character code with 25 alphanumeric characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed along with the manifest to the Snowball through the Snowball client when the client is started for the first time.</p> <p>As a best practice, we recommend that you don't save a copy of the <code>UnlockCode</code> in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job.</p>"
+      "documentation": "<p>Returns the <code>UnlockCode</code> code value for the specified job. A particular <code>UnlockCode</code> value can be accessed for up to 90 days after the associated job has been created.</p> <p>The <code>UnlockCode</code> value is a 29-character code with 25 alphanumeric characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed along with the manifest to the Snow device through the Snowball client when the client is started for the first time.</p> <p>As a best practice, we recommend that you don't save a copy of the <code>UnlockCode</code> in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snow device associated with that job.</p>"
     },
     "GetSnowballUsage": {
       "name": "GetSnowballUsage",
@@ -279,7 +335,7 @@
       "output": {
         "shape": "GetSnowballUsageResult"
       },
-      "documentation": "<p>Returns information about the Snowball service limit for your account, and also the number of Snowballs your account has in use.</p> <p>The default service limit for the number of Snowballs that you can have at one time is 1. If you want to increase your service limit, contact AWS Support.</p>"
+      "documentation": "<p>Returns information about the Snow Family service limit for your account, and also the number of Snow devices your account has in use.</p> <p>The default service limit for the number of Snow devices that you can have at one time is 1. If you want to increase your service limit, contact AWS Support.</p>"
     },
     "GetSoftwareUpdates": {
       "name": "GetSoftwareUpdates",
@@ -364,7 +420,7 @@
           "shape": "Ec2RequestFailedException"
         }
       ],
-      "documentation": "<p>This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs) that are owned by your AWS account that would be supported for use on a Snowball Edge device. Currently, supported AMIs are based on the CentOS 7 (x86_64) - with Updates HVM, Ubuntu Server 14.04 LTS (HVM), and Ubuntu 16.04 LTS - Xenial (HVM) images, available on the AWS Marketplace.</p>"
+      "documentation": "<p>This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs) that are owned by your AWS account that would be supported for use on a Snow device. Currently, supported AMIs are based on the CentOS 7 (x86_64) - with Updates HVM, Ubuntu Server 14.04 LTS (HVM), and Ubuntu 16.04 LTS - Xenial (HVM) images, available on the AWS Marketplace.</p>"
     },
     "ListJobs": {
       "name": "ListJobs",
@@ -449,6 +505,28 @@
         }
       ],
       "documentation": "<p>While a job's <code>JobState</code> value is <code>New</code>, you can update some of the information associated with a job. Once the job changes to a different job state, usually within 60 minutes of the job being created, this action is no longer available.</p>"
+    },
+    "UpdateJobShipmentState": {
+      "name": "UpdateJobShipmentState",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateJobShipmentStateRequest"
+      },
+      "output": {
+        "shape": "UpdateJobShipmentStateResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidResourceException"
+        },
+        {
+          "shape": "InvalidJobStateException"
+        }
+      ],
+      "documentation": "<p>Updates the state when a the shipment states changes to a different state.</p>"
     }
   },
   "shapes": {
@@ -461,31 +539,31 @@
         },
         "Name": {
           "shape": "String",
-          "documentation": "<p>The name of a person to receive a Snowball at an address.</p>"
+          "documentation": "<p>The name of a person to receive a Snow device at an address.</p>"
         },
         "Company": {
           "shape": "String",
-          "documentation": "<p>The name of the company to receive a Snowball at an address.</p>"
+          "documentation": "<p>The name of the company to receive a Snow device at an address.</p>"
         },
         "Street1": {
           "shape": "String",
-          "documentation": "<p>The first line in a street address that a Snowball is to be delivered to.</p>"
+          "documentation": "<p>The first line in a street address that a Snow device is to be delivered to.</p>"
         },
         "Street2": {
           "shape": "String",
-          "documentation": "<p>The second line in a street address that a Snowball is to be delivered to.</p>"
+          "documentation": "<p>The second line in a street address that a Snow device is to be delivered to.</p>"
         },
         "Street3": {
           "shape": "String",
-          "documentation": "<p>The third line in a street address that a Snowball is to be delivered to.</p>"
+          "documentation": "<p>The third line in a street address that a Snow device is to be delivered to.</p>"
         },
         "City": {
           "shape": "String",
-          "documentation": "<p>The city in an address that a Snowball is to be delivered to.</p>"
+          "documentation": "<p>The city in an address that a Snow device is to be delivered to.</p>"
         },
         "StateOrProvince": {
           "shape": "String",
-          "documentation": "<p>The state or province in an address that a Snowball is to be delivered to.</p>"
+          "documentation": "<p>The state or province in an address that a Snow device is to be delivered to.</p>"
         },
         "PrefectureOrDistrict": {
           "shape": "String",
@@ -497,22 +575,22 @@
         },
         "Country": {
           "shape": "String",
-          "documentation": "<p>The country in an address that a Snowball is to be delivered to.</p>"
+          "documentation": "<p>The country in an address that a Snow device is to be delivered to.</p>"
         },
         "PostalCode": {
           "shape": "String",
-          "documentation": "<p>The postal code in an address that a Snowball is to be delivered to.</p>"
+          "documentation": "<p>The postal code in an address that a Snow device is to be delivered to.</p>"
         },
         "PhoneNumber": {
           "shape": "String",
-          "documentation": "<p>The phone number associated with an address that a Snowball is to be delivered to.</p>"
+          "documentation": "<p>The phone number associated with an address that a Snow device is to be delivered to.</p>"
         },
         "IsRestricted": {
           "shape": "Boolean",
           "documentation": "<p>If the address you are creating is a primary address, then set this option to true. This field is not supported in most regions.</p>"
         }
       },
-      "documentation": "<p>The address that you want the Snowball or Snowballs associated with a specific job to be shipped to. Addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. Although no individual elements of the <code>Address</code> are required, if the address is invalid or unsupported, then an exception is thrown.</p>"
+      "documentation": "<p>The address that you want the Snow device(s) associated with a specific job to be shipped to. Addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. Although no individual elements of the <code>Address</code> are required, if the address is invalid or unsupported, then an exception is thrown.</p>"
     },
     "AddressId": {
       "type": "string",
@@ -630,7 +708,7 @@
         },
         "SnowballType": {
           "shape": "SnowballType",
-          "documentation": "<p>The type of AWS Snowball device to use for this cluster. </p> <note> <p>For cluster jobs, AWS Snowball currently supports only the <code>EDGE</code> device type.</p> </note>"
+          "documentation": "<p>The type of AWS Snow device to use for this cluster. </p> <note> <p>For cluster jobs, AWS Snow Family currently supports only the <code>EDGE</code> device type.</p> </note>"
         },
         "CreationDate": {
           "shape": "Timestamp",
@@ -646,7 +724,7 @@
         },
         "ShippingOption": {
           "shape": "ShippingOption",
-          "documentation": "<p>The shipping speed for each node in this cluster. This speed doesn't dictate how soon you'll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows:</p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowball Edges are delivered in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day shipping and two-day shipping.</p> </li> </ul>"
+          "documentation": "<p>The shipping speed for each node in this cluster. This speed doesn't dictate how soon you'll get each device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows:</p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snow devices are delivered in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day shipping and two-day shipping.</p> </li> </ul>"
         },
         "Notification": {
           "shape": "Notification",
@@ -678,14 +756,14 @@
       "members": {
         "AmiId": {
           "shape": "String",
-          "documentation": "<p>The unique identifier for an individual Snowball Edge AMI.</p>"
+          "documentation": "<p>The unique identifier for an individual Snow device AMI.</p>"
         },
         "Name": {
           "shape": "String",
           "documentation": "<p>The optional name of a compatible image.</p>"
         }
       },
-      "documentation": "<p>A JSON-formatted object that describes a compatible Amazon Machine Image (AMI), including the ID and name for a Snowball Edge AMI. This AMI is compatible with the device's physical hardware requirements, and it should be able to be run in an SBE1 instance on the device.</p>"
+      "documentation": "<p>A JSON-formatted object that describes a compatible Amazon Machine Image (AMI), including the ID and name for a Snow device AMI. This AMI is compatible with the device's physical hardware requirements, and it should be able to be run in an SBE1 instance on the device.</p>"
     },
     "CompatibleImageList": {
       "type": "list",
@@ -701,7 +779,7 @@
       "members": {
         "Address": {
           "shape": "Address",
-          "documentation": "<p>The address that you want the Snowball shipped to.</p>"
+          "documentation": "<p>The address that you want the Snow device shipped to.</p>"
         }
       }
     },
@@ -710,7 +788,7 @@
       "members": {
         "AddressId": {
           "shape": "String",
-          "documentation": "<p>The automatically generated ID for a specific address. You'll use this ID when you create a job to specify which address you want the Snowball for that job shipped to.</p>"
+          "documentation": "<p>The automatically generated ID for a specific address. You'll use this ID when you create a job to specify which address you want the Snow device for that job shipped to.</p>"
         }
       }
     },
@@ -750,11 +828,11 @@
         },
         "SnowballType": {
           "shape": "SnowballType",
-          "documentation": "<p>The type of AWS Snowball device to use for this cluster. </p> <note> <p>For cluster jobs, AWS Snowball currently supports only the <code>EDGE</code> device type.</p> </note>"
+          "documentation": "<p>The type of AWS Snow Family device to use for this cluster. </p> <note> <p>For cluster jobs, AWS Snow Family currently supports only the <code>EDGE</code> device type.</p> </note>"
         },
         "ShippingOption": {
           "shape": "ShippingOption",
-          "documentation": "<p>The shipping speed for each node in this cluster. This speed doesn't dictate how soon you'll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows: </p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowballs are delivered in one to seven days.</p> </li> <li> <p>In the United States of America (US), you have access to one-day shipping and two-day shipping.</p> </li> </ul> <ul> <li> <p>In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowball Edges shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowball Edges are delivered in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day shipping and two-day shipping.</p> </li> </ul>"
+          "documentation": "<p>The shipping speed for each node in this cluster. This speed doesn't dictate how soon you'll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows: </p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snow device are delivered in one to seven days.</p> </li> <li> <p>In the United States of America (US), you have access to one-day shipping and two-day shipping.</p> </li> </ul> <ul> <li> <p>In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snow device are delivered in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day shipping and two-day shipping.</p> </li> </ul>"
         },
         "Notification": {
           "shape": "Notification",
@@ -796,7 +874,7 @@
         },
         "AddressId": {
           "shape": "AddressId",
-          "documentation": "<p>The ID for the address that you want the Snowball shipped to.</p>"
+          "documentation": "<p>The ID for the address that you want the Snow device shipped to.</p>"
         },
         "KmsKeyARN": {
           "shape": "KmsKeyARN",
@@ -808,11 +886,11 @@
         },
         "SnowballCapacityPreference": {
           "shape": "SnowballCapacity",
-          "documentation": "<p>If your job is being created in one of the US regions, you have the option of specifying what size Snowball you'd like for this job. In all other regions, Snowballs come with 80 TB in storage capacity.</p>"
+          "documentation": "<p>If your job is being created in one of the US regions, you have the option of specifying what size Snow device you'd like for this job. In all other regions, Snowballs come with 80 TB in storage capacity.</p>"
         },
         "ShippingOption": {
           "shape": "ShippingOption",
-          "documentation": "<p>The shipping speed for this job. This speed doesn't dictate how soon you'll get the Snowball, rather it represents how quickly the Snowball moves to its destination while in transit. Regional shipping speeds are as follows:</p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowballs are delivered in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day shipping and two-day shipping.</p> </li> </ul>"
+          "documentation": "<p>The shipping speed for this job. This speed doesn't dictate how soon you'll get the Snow device, rather it represents how quickly the Snow device moves to its destination while in transit. Regional shipping speeds are as follows:</p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snow devices are delivered in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day shipping and two-day shipping.</p> </li> </ul>"
         },
         "Notification": {
           "shape": "Notification",
@@ -824,7 +902,7 @@
         },
         "SnowballType": {
           "shape": "SnowballType",
-          "documentation": "<p>The type of AWS Snowball device to use for this job. </p> <note> <p>For cluster jobs, AWS Snowball currently supports only the <code>EDGE</code> device type.</p> </note> <p>The type of AWS Snowball device to use for this job. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html\">Snowball Edge Device Options</a> in the Snowball Edge Developer Guide.</p>"
+          "documentation": "<p>The type of AWS Snow Family device to use for this job. </p> <note> <p>For cluster jobs, AWS Snow Family currently supports only the <code>EDGE</code> device type.</p> </note> <p>The type of AWS Snow device to use for this job. Currently, the only supported device type for cluster jobs is <code>EDGE</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html\">Snowball Edge Device Options</a> in the Snowball Edge Developer Guide.</p>"
         },
         "ForwardingAddressId": {
           "shape": "AddressId",
@@ -849,27 +927,52 @@
         }
       }
     },
+    "CreateReturnShippingLabelRequest": {
+      "type": "structure",
+      "required": [
+        "JobId"
+      ],
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The ID for a job that you want to create the return shipping label for. For example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>"
+        },
+        "ShippingOption": {
+          "shape": "ShippingOption",
+          "documentation": "<p>The shipping speed for a particular job. This speed doesn't dictate how soon the device is returned to AWS. This speed represents how quickly it moves to its destination while in transit. Regional shipping speeds are as follows:</p>"
+        }
+      }
+    },
+    "CreateReturnShippingLabelResult": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "ShippingLabelStatus",
+          "documentation": "<p>The status information of the task on a Snow device that is being returned to AWS.</p>"
+        }
+      }
+    },
     "DataTransfer": {
       "type": "structure",
       "members": {
         "BytesTransferred": {
           "shape": "Long",
-          "documentation": "<p>The number of bytes transferred between a Snowball and Amazon S3.</p>"
+          "documentation": "<p>The number of bytes transferred between a Snow device and Amazon S3.</p>"
         },
         "ObjectsTransferred": {
           "shape": "Long",
-          "documentation": "<p>The number of objects transferred between a Snowball and Amazon S3.</p>"
+          "documentation": "<p>The number of objects transferred between a Snow device and Amazon S3.</p>"
         },
         "TotalBytes": {
           "shape": "Long",
-          "documentation": "<p>The total bytes of data for a transfer between a Snowball and Amazon S3. This value is set to 0 (zero) until all the keys that will be transferred have been listed.</p>"
+          "documentation": "<p>The total bytes of data for a transfer between a Snow device and Amazon S3. This value is set to 0 (zero) until all the keys that will be transferred have been listed.</p>"
         },
         "TotalObjects": {
           "shape": "Long",
-          "documentation": "<p>The total number of objects for a transfer between a Snowball and Amazon S3. This value is set to 0 (zero) until all the keys that will be transferred have been listed.</p>"
+          "documentation": "<p>The total number of objects for a transfer between a Snow device and Amazon S3. This value is set to 0 (zero) until all the keys that will be transferred have been listed.</p>"
         }
       },
-      "documentation": "<p>Defines the real-time status of a Snowball's data transfer while the device is at AWS. This data is only available while a job has a <code>JobState</code> value of <code>InProgress</code>, for both import and export jobs.</p>"
+      "documentation": "<p>Defines the real-time status of a Snow device's data transfer while the device is at AWS. This data is only available while a job has a <code>JobState</code> value of <code>InProgress</code>, for both import and export jobs.</p>"
     },
     "DescribeAddressRequest": {
       "type": "structure",
@@ -888,7 +991,7 @@
       "members": {
         "Address": {
           "shape": "Address",
-          "documentation": "<p>The address that you want the Snowball or Snowballs associated with a specific job to be shipped to.</p>"
+          "documentation": "<p>The address that you want the Snow device(s) associated with a specific job to be shipped to.</p>"
         }
       }
     },
@@ -910,7 +1013,7 @@
       "members": {
         "Addresses": {
           "shape": "AddressList",
-          "documentation": "<p>The Snowball shipping addresses that were created for this account.</p>"
+          "documentation": "<p>The Snow device shipping addresses that were created for this account.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -964,6 +1067,28 @@
         }
       }
     },
+    "DescribeReturnShippingLabelRequest": {
+      "type": "structure",
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The automatically generated ID for a job, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>"
+        }
+      }
+    },
+    "DescribeReturnShippingLabelResult": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "ShippingLabelStatus",
+          "documentation": "<p>The status information of the task on a Snow device that is being returned to AWS.</p>"
+        },
+        "ExpirationDate": {
+          "shape": "Timestamp",
+          "documentation": "<p>The expiration date of the current return shipping label.</p>"
+        }
+      }
+    },
     "DeviceConfiguration": {
       "type": "structure",
       "members": {
@@ -986,10 +1111,10 @@
         },
         "SnowballAmiId": {
           "shape": "String",
-          "documentation": "<p>The ID of the AMI on the Snowball Edge device.</p>"
+          "documentation": "<p>The ID of the AMI on the Snow device.</p>"
         }
       },
-      "documentation": "<p>A JSON-formatted object that contains the IDs for an Amazon Machine Image (AMI), including the Amazon EC2 AMI ID and the Snowball Edge AMI ID. Each AMI has these two IDs to simplify identifying the AMI in both the AWS Cloud and on the device.</p>"
+      "documentation": "<p>A JSON-formatted object that contains the IDs for an Amazon Machine Image (AMI), including the Amazon EC2 AMI ID and the Snow device AMI ID. Each AMI has these two IDs to simplify identifying the AMI in both the AWS Cloud and on the device.</p>"
     },
     "Ec2AmiResourceList": {
       "type": "list",
@@ -1068,11 +1193,11 @@
       "members": {
         "SnowballLimit": {
           "shape": "Integer",
-          "documentation": "<p>The service limit for number of Snowballs this account can have at once. The default service limit is 1 (one).</p>"
+          "documentation": "<p>The service limit for number of Snow devices this account can have at once. The default service limit is 1 (one).</p>"
         },
         "SnowballsInUse": {
           "shape": "Integer",
-          "documentation": "<p>The number of Snowballs that this account is currently using.</p>"
+          "documentation": "<p>The number of Snow devices that this account is currently using.</p>"
         }
       }
     },
@@ -1129,7 +1254,7 @@
         },
         "IsMaster": {
           "shape": "Boolean",
-          "documentation": "<p>A value that indicates that this job is a master job. A master job represents a successful request to create an export job. Master jobs aren't associated with any Snowballs. Instead, each master job will have at least one job part, and each job part is associated with a Snowball. It might take some time before the job parts associated with a particular master job are listed, because they are created after the master job is created.</p>"
+          "documentation": "<p>A value that indicates that this job is a main job. A main job represents a successful request to create an export job. Main jobs aren't associated with any Snowballs. Instead, each main job will have at least one job part, and each job part is associated with a Snowball. It might take some time before the job parts associated with a particular main job are listed, because they are created after the main job is created.</p>"
         },
         "JobType": {
           "shape": "JobType",
@@ -1172,7 +1297,7 @@
           "documentation": "<p>A link to an Amazon S3 presigned URL where the job failure log is located.</p>"
         }
       },
-      "documentation": "<p>Contains job logs. Whenever Snowball is used to import data into or export data out of Amazon S3, you'll have the option of downloading a PDF job report. Job logs are returned as a part of the response syntax of the <code>DescribeJob</code> action in the <code>JobMetadata</code> data type. The job logs can be accessed for up to 60 minutes after this request has been made. To access any of the job logs after 60 minutes have passed, you'll have to make another call to the <code>DescribeJob</code> action.</p> <p>For import jobs, the PDF job report becomes available at the end of the import process. For export jobs, your job report typically becomes available while the Snowball for your job part is being delivered to you.</p> <p>The job report provides you insight into the state of your Amazon S3 data transfer. The report includes details about your job or job part for your records.</p> <p>For deeper visibility into the status of your transferred objects, you can look at the two associated logs: a success log and a failure log. The logs are saved in comma-separated value (CSV) format, and the name of each log includes the ID of the job or job part that the log describes.</p>"
+      "documentation": "<p>Contains job logs. Whenever a Snow device is used to import data into or export data out of Amazon S3, you'll have the option of downloading a PDF job report. Job logs are returned as a part of the response syntax of the <code>DescribeJob</code> action in the <code>JobMetadata</code> data type. The job logs can be accessed for up to 60 minutes after this request has been made. To access any of the job logs after 60 minutes have passed, you'll have to make another call to the <code>DescribeJob</code> action.</p> <p>For import jobs, the PDF job report becomes available at the end of the import process. For export jobs, your job report typically becomes available while the Snow device for your job part is being delivered to you.</p> <p>The job report provides you insight into the state of your Amazon S3 data transfer. The report includes details about your job or job part for your records.</p> <p>For deeper visibility into the status of your transferred objects, you can look at the two associated logs: a success log and a failure log. The logs are saved in comma-separated value (CSV) format, and the name of each log includes the ID of the job or job part that the log describes.</p>"
     },
     "JobMetadata": {
       "type": "structure",
@@ -1215,7 +1340,7 @@
         },
         "AddressId": {
           "shape": "AddressId",
-          "documentation": "<p>The ID for the address that you want the Snowball shipped to.</p>"
+          "documentation": "<p>The ID for the address that you want the Snow device shipped to.</p>"
         },
         "ShippingDetails": {
           "shape": "ShippingDetails",
@@ -1223,7 +1348,7 @@
         },
         "SnowballCapacityPreference": {
           "shape": "SnowballCapacity",
-          "documentation": "<p>The Snowball capacity preference for this job, specified at job creation. In US regions, you can choose between 50 TB and 80 TB Snowballs. All other regions use 80 TB capacity Snowballs.</p>"
+          "documentation": "<p>The Snow device capacity preference for this job, specified at job creation. In US regions, you can choose between 50 TB and 80 TB Snowballs. All other regions use 80 TB capacity Snowballs.</p>"
         },
         "Notification": {
           "shape": "Notification",
@@ -1231,11 +1356,11 @@
         },
         "DataTransferProgress": {
           "shape": "DataTransfer",
-          "documentation": "<p>A value that defines the real-time status of a Snowball's data transfer while the device is at AWS. This data is only available while a job has a <code>JobState</code> value of <code>InProgress</code>, for both import and export jobs.</p>"
+          "documentation": "<p>A value that defines the real-time status of a Snow device's data transfer while the device is at AWS. This data is only available while a job has a <code>JobState</code> value of <code>InProgress</code>, for both import and export jobs.</p>"
         },
         "JobLogInfo": {
           "shape": "JobLogs",
-          "documentation": "<p>Links to Amazon S3 presigned URLs for the job report and logs. For import jobs, the PDF job report becomes available at the end of the import process. For export jobs, your job report typically becomes available while the Snowball for your job part is being delivered to you.</p>"
+          "documentation": "<p>Links to Amazon S3 presigned URLs for the job report and logs. For import jobs, the PDF job report becomes available at the end of the import process. For export jobs, your job report typically becomes available while the Snow device for your job part is being delivered to you.</p>"
         },
         "ClusterId": {
           "shape": "String",
@@ -1427,7 +1552,7 @@
       "members": {
         "CompatibleImages": {
           "shape": "CompatibleImageList",
-          "documentation": "<p>A JSON-formatted object that describes a compatible AMI, including the ID and name for a Snowball Edge AMI.</p>"
+          "documentation": "<p>A JSON-formatted object that describes a compatible AMI, including the ID and name for a Snow device AMI.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -1525,28 +1650,44 @@
         },
         "TrackingNumber": {
           "shape": "String",
-          "documentation": "<p>The tracking number for this job. Using this tracking number with your region's carrier's website, you can track a Snowball as the carrier transports it.</p> <p>For India, the carrier is Amazon Logistics. For all other regions, UPS is the carrier.</p>"
+          "documentation": "<p>The tracking number for this job. Using this tracking number with your region's carrier's website, you can track a Snow device as the carrier transports it.</p> <p>For India, the carrier is Amazon Logistics. For all other regions, UPS is the carrier.</p>"
         }
       },
       "documentation": "<p>The <code>Status</code> and <code>TrackingNumber</code> information for an inbound or outbound shipment.</p>"
+    },
+    "ShipmentState": {
+      "type": "string",
+      "enum": [
+        "RECEIVED",
+        "RETURNED"
+      ]
     },
     "ShippingDetails": {
       "type": "structure",
       "members": {
         "ShippingOption": {
           "shape": "ShippingOption",
-          "documentation": "<p>The shipping speed for a particular job. This speed doesn't dictate how soon you'll get the Snowball from the job's creation date. This speed represents how quickly it moves to its destination while in transit. Regional shipping speeds are as follows:</p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snowballs shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snowballs are delivered in one to seven days.</p> </li> <li> <p>In the United States of America (US), you have access to one-day shipping and two-day shipping.</p> </li> </ul>"
+          "documentation": "<p>The shipping speed for a particular job. This speed doesn't dictate how soon you'll get the Snow device from the job's creation date. This speed represents how quickly it moves to its destination while in transit. Regional shipping speeds are as follows:</p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snow device are delivered in one to seven days.</p> </li> <li> <p>In the United States of America (US), you have access to one-day shipping and two-day shipping.</p> </li> </ul>"
         },
         "InboundShipment": {
           "shape": "Shipment",
-          "documentation": "<p>The <code>Status</code> and <code>TrackingNumber</code> values for a Snowball being returned to AWS for a particular job.</p>"
+          "documentation": "<p>The <code>Status</code> and <code>TrackingNumber</code> values for a Snow device being returned to AWS for a particular job.</p>"
         },
         "OutboundShipment": {
           "shape": "Shipment",
-          "documentation": "<p>The <code>Status</code> and <code>TrackingNumber</code> values for a Snowball being delivered to the address that you specified for a particular job.</p>"
+          "documentation": "<p>The <code>Status</code> and <code>TrackingNumber</code> values for a Snow device being delivered to the address that you specified for a particular job.</p>"
         }
       },
       "documentation": "<p>A job's shipping information, including inbound and outbound tracking numbers and shipping speed options.</p>"
+    },
+    "ShippingLabelStatus": {
+      "type": "string",
+      "enum": [
+        "InProgress",
+        "TimedOut",
+        "Succeeded",
+        "Failed"
+      ]
     },
     "ShippingOption": {
       "type": "string",
@@ -1703,6 +1844,27 @@
       "type": "structure",
       "members": {}
     },
+    "UpdateJobShipmentStateRequest": {
+      "type": "structure",
+      "required": [
+        "JobId",
+        "ShipmentState"
+      ],
+      "members": {
+        "JobId": {
+          "shape": "JobId",
+          "documentation": "<p>The job ID of the job whose shipment date you want to update, for example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>"
+        },
+        "ShipmentState": {
+          "shape": "ShipmentState",
+          "documentation": "<p>The state of a device when it is being shipped. </p> <p>Set to <code>RECEIVED</code> when the device arrives at your location.</p> <p>Set to <code>RETURNED</code> when you have returned the device to AWS.</p>"
+        }
+      }
+    },
+    "UpdateJobShipmentStateResult": {
+      "type": "structure",
+      "members": {}
+    },
     "WirelessConnection": {
       "type": "structure",
       "members": {
@@ -1714,5 +1876,5 @@
       "documentation": "<p>Configures the wireless connection on an AWS Snowcone device.</p>"
     }
   },
-  "documentation": "<p>AWS Snowball is a petabyte-scale data transport solution that uses secure devices to transfer large amounts of data between your on-premises data centers and Amazon Simple Storage Service (Amazon S3). The Snowball commands described here provide access to the same functionality that is available in the AWS Snowball Management Console, which enables you to create and manage jobs for Snowball. To transfer data locally with a Snowball device, you'll need to use the Snowball client or the Amazon S3 API adapter for Snowball. For more information, see the <a href=\"https://docs.aws.amazon.com/AWSImportExport/latest/ug/api-reference.html\">User Guide</a>.</p>"
+  "documentation": "<p>AWS Snow Family is a petabyte-scale data transport solution that uses secure devices to transfer large amounts of data between your on-premises data centers and Amazon Simple Storage Service (Amazon S3). The Snow commands described here provide access to the same functionality that is available in the AWS Snow Family Management Console, which enables you to create and manage jobs for a Snow device. To transfer data locally with a Snow device, you'll need to use the Snowball Edge client or the Amazon S3 API Interface for Snowball or AWS OpsHub for Snow Family. For more information, see the <a href=\"https://docs.aws.amazon.com/AWSImportExport/latest/ug/api-reference.html\">User Guide</a>.</p>"
 }

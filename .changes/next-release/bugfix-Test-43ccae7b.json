@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Test",
-  "description": "Delete unused variable declarations from test"
-}

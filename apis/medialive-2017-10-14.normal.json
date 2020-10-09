@@ -379,11 +379,11 @@
         },
         {
           "shape": "BadGatewayException",
-          "documentation": "Bad Gateway Error."
+          "documentation": "Bad Gateway Error"
         },
         {
           "shape": "GatewayTimeoutException",
-          "documentation": "Gateway Timeout Error."
+          "documentation": "Gateway Timeout Error"
         },
         {
           "shape": "TooManyRequestsException",
@@ -429,11 +429,11 @@
         },
         {
           "shape": "BadGatewayException",
-          "documentation": "Bad Gateway Error."
+          "documentation": "Bad Gateway Error"
         },
         {
           "shape": "GatewayTimeoutException",
-          "documentation": "Gateway Timeout Error."
+          "documentation": "Gateway Timeout Error"
         },
         {
           "shape": "TooManyRequestsException",
@@ -651,7 +651,7 @@
         },
         {
           "shape": "BadGatewayException",
-          "documentation": "Bad Gateway Error."
+          "documentation": "Bad Gateway Error"
         },
         {
           "shape": "NotFoundException",
@@ -659,7 +659,7 @@
         },
         {
           "shape": "GatewayTimeoutException",
-          "documentation": "Gateway Timeout Error."
+          "documentation": "Gateway Timeout Error"
         },
         {
           "shape": "TooManyRequestsException",
@@ -701,7 +701,7 @@
         },
         {
           "shape": "BadGatewayException",
-          "documentation": "Bad Gateway Error."
+          "documentation": "Bad Gateway Error"
         },
         {
           "shape": "NotFoundException",
@@ -709,7 +709,7 @@
         },
         {
           "shape": "GatewayTimeoutException",
-          "documentation": "Gateway Timeout Error."
+          "documentation": "Gateway Timeout Error"
         },
         {
           "shape": "TooManyRequestsException",
@@ -759,7 +759,7 @@
         },
         {
           "shape": "GatewayTimeoutException",
-          "documentation": "Gateway timeout error"
+          "documentation": "Gateway Timeout Error"
         },
         {
           "shape": "TooManyRequestsException",
@@ -977,7 +977,7 @@
         },
         {
           "shape": "GatewayTimeoutException",
-          "documentation": "Gateway timeout error."
+          "documentation": "Gateway Timeout Error"
         },
         {
           "shape": "TooManyRequestsException",
@@ -1023,7 +1023,7 @@
         },
         {
           "shape": "GatewayTimeoutException",
-          "documentation": "Gateway timeout error."
+          "documentation": "Gateway Timeout Error"
         },
         {
           "shape": "TooManyRequestsException",
@@ -1107,7 +1107,7 @@
         },
         {
           "shape": "BadGatewayException",
-          "documentation": "Bad Gateway Error."
+          "documentation": "Bad Gateway Error"
         },
         {
           "shape": "NotFoundException",
@@ -1115,7 +1115,7 @@
         },
         {
           "shape": "GatewayTimeoutException",
-          "documentation": "Gateway Timeout Error."
+          "documentation": "Gateway Timeout Error"
         },
         {
           "shape": "TooManyRequestsException",
@@ -1153,7 +1153,7 @@
         },
         {
           "shape": "BadGatewayException",
-          "documentation": "Bad Gateway Error."
+          "documentation": "Bad Gateway Error"
         },
         {
           "shape": "NotFoundException",
@@ -1161,7 +1161,7 @@
         },
         {
           "shape": "GatewayTimeoutException",
-          "documentation": "Gateway Timeout Error."
+          "documentation": "Gateway Timeout Error"
         },
         {
           "shape": "TooManyRequestsException",
@@ -1207,7 +1207,7 @@
         },
         {
           "shape": "GatewayTimeoutException",
-          "documentation": "Gateway timeout error"
+          "documentation": "Gateway Timeout Error"
         },
         {
           "shape": "TooManyRequestsException",
@@ -1253,7 +1253,7 @@
         },
         {
           "shape": "GatewayTimeoutException",
-          "documentation": "Gateway timeout error"
+          "documentation": "Gateway Timeout Error"
         },
         {
           "shape": "TooManyRequestsException",
@@ -1383,7 +1383,7 @@
         },
         {
           "shape": "GatewayTimeoutException",
-          "documentation": "Gateway timeout error."
+          "documentation": "Gateway Timeout Error"
         },
         {
           "shape": "TooManyRequestsException",
@@ -1505,7 +1505,7 @@
         },
         {
           "shape": "BadGatewayException",
-          "documentation": "Bad Gateway Error."
+          "documentation": "Bad Gateway Error"
         },
         {
           "shape": "NotFoundException",
@@ -1513,7 +1513,7 @@
         },
         {
           "shape": "GatewayTimeoutException",
-          "documentation": "Gateway Timeout Error."
+          "documentation": "Gateway Timeout Error"
         },
         {
           "shape": "TooManyRequestsException",
@@ -1551,11 +1551,11 @@
         },
         {
           "shape": "BadGatewayException",
-          "documentation": "Bad Gateway Error."
+          "documentation": "Bad Gateway Error"
         },
         {
           "shape": "GatewayTimeoutException",
-          "documentation": "Gateway Timeout Error."
+          "documentation": "Gateway Timeout Error"
         },
         {
           "shape": "TooManyRequestsException",
@@ -1597,7 +1597,7 @@
         },
         {
           "shape": "GatewayTimeoutException",
-          "documentation": "Gateway timeout error"
+          "documentation": "Gateway Timeout Error"
         },
         {
           "shape": "TooManyRequestsException",
@@ -1639,7 +1639,7 @@
         },
         {
           "shape": "GatewayTimeoutException",
-          "documentation": "Gateway timeout error"
+          "documentation": "Gateway Timeout Error"
         },
         {
           "shape": "TooManyRequestsException",
@@ -1719,7 +1719,7 @@
         },
         {
           "shape": "GatewayTimeoutException",
-          "documentation": "Gateway timeout error"
+          "documentation": "Gateway Timeout Error"
         },
         {
           "shape": "TooManyRequestsException",
@@ -1811,7 +1811,7 @@
         },
         {
           "shape": "BadGatewayException",
-          "documentation": "Bad Gateway Error."
+          "documentation": "Bad Gateway Error"
         },
         {
           "shape": "NotFoundException",
@@ -1819,7 +1819,7 @@
         },
         {
           "shape": "GatewayTimeoutException",
-          "documentation": "Gateway Timeout Error."
+          "documentation": "Gateway Timeout Error"
         },
         {
           "shape": "TooManyRequestsException",
@@ -1911,7 +1911,7 @@
         },
         {
           "shape": "BadGatewayException",
-          "documentation": "Bad Gateway Error."
+          "documentation": "Bad Gateway Error"
         },
         {
           "shape": "NotFoundException",
@@ -1919,7 +1919,7 @@
         },
         {
           "shape": "GatewayTimeoutException",
-          "documentation": "Gateway Timeout Error."
+          "documentation": "Gateway Timeout Error"
         },
         {
           "shape": "TooManyRequestsException",
@@ -2119,7 +2119,7 @@
         },
         {
           "shape": "GatewayTimeoutException",
-          "documentation": "Gateway timeout error."
+          "documentation": "Gateway Timeout Error"
         },
         {
           "shape": "TooManyRequestsException",
@@ -2207,7 +2207,7 @@
         },
         {
           "shape": "BadGatewayException",
-          "documentation": "Bad Gateway Error."
+          "documentation": "Bad Gateway Error"
         },
         {
           "shape": "NotFoundException",
@@ -2215,7 +2215,7 @@
         },
         {
           "shape": "GatewayTimeoutException",
-          "documentation": "Gateway Timeout Error."
+          "documentation": "Gateway Timeout Error"
         },
         {
           "shape": "ConflictException",
@@ -2257,7 +2257,7 @@
         },
         {
           "shape": "BadGatewayException",
-          "documentation": "Bad Gateway Error."
+          "documentation": "Bad Gateway Error"
         },
         {
           "shape": "NotFoundException",
@@ -2265,7 +2265,7 @@
         },
         {
           "shape": "GatewayTimeoutException",
-          "documentation": "Gateway Timeout Error."
+          "documentation": "Gateway Timeout Error"
         },
         {
           "shape": "ConflictException",
@@ -2311,7 +2311,7 @@
         },
         {
           "shape": "GatewayTimeoutException",
-          "documentation": "Gateway timeout error"
+          "documentation": "Gateway Timeout Error"
         },
         {
           "shape": "TooManyRequestsException",
@@ -2537,12 +2537,27 @@
         "NONE"
       ]
     },
+    "AncillarySourceSettings": {
+      "type": "structure",
+      "members": {
+        "SourceAncillaryChannelNumber": {
+          "shape": "__integerMin1Max4",
+          "locationName": "sourceAncillaryChannelNumber",
+          "documentation": "Specifies the number (1 to 4) of the captions channel you want to extract from the ancillary captions. If you plan to convert the ancillary captions to another format, complete this field. If you plan to choose Embedded as the captions destination in the output (to pass through all the channels in the ancillary captions), leave this field blank because MediaLive ignores the field."
+        }
+      },
+      "documentation": "Ancillary Source Settings"
+    },
     "ArchiveContainerSettings": {
       "type": "structure",
       "members": {
         "M2tsSettings": {
           "shape": "M2tsSettings",
           "locationName": "m2tsSettings"
+        },
+        "RawSettings": {
+          "shape": "RawSettings",
+          "locationName": "rawSettings"
         }
       },
       "documentation": "Archive Container Settings"
@@ -2642,6 +2657,10 @@
         "PassThroughSettings": {
           "shape": "PassThroughSettings",
           "locationName": "passThroughSettings"
+        },
+        "WavSettings": {
+          "shape": "WavSettings",
+          "locationName": "wavSettings"
         }
       },
       "documentation": "Audio Codec Settings"
@@ -3587,6 +3606,10 @@
     "CaptionSelectorSettings": {
       "type": "structure",
       "members": {
+        "AncillarySourceSettings": {
+          "shape": "AncillarySourceSettings",
+          "locationName": "ancillarySourceSettings"
+        },
         "AribSourceSettings": {
           "shape": "AribSourceSettings",
           "locationName": "aribSourceSettings"
@@ -3614,6 +3637,27 @@
       },
       "documentation": "Caption Selector Settings"
     },
+    "CdiInputResolution": {
+      "type": "string",
+      "documentation": "Maximum CDI input resolution; SD is 480i and 576i up to 30 frames-per-second (fps), HD is 720p up to 60 fps / 1080i up to 30 fps, FHD is 1080p up to 60 fps, UHD is 2160p up to 60 fps\n",
+      "enum": [
+        "SD",
+        "HD",
+        "FHD",
+        "UHD"
+      ]
+    },
+    "CdiInputSpecification": {
+      "type": "structure",
+      "members": {
+        "Resolution": {
+          "shape": "CdiInputResolution",
+          "locationName": "resolution",
+          "documentation": "Maximum CDI input resolution"
+        }
+      },
+      "documentation": "Placeholder documentation for CdiInputSpecification"
+    },
     "Channel": {
       "type": "structure",
       "members": {
@@ -3621,6 +3665,11 @@
           "shape": "__string",
           "locationName": "arn",
           "documentation": "The unique arn of the channel."
+        },
+        "CdiInputSpecification": {
+          "shape": "CdiInputSpecification",
+          "locationName": "cdiInputSpecification",
+          "documentation": "Specification of CDI inputs for this channel"
         },
         "ChannelClass": {
           "shape": "ChannelClass",
@@ -3653,7 +3702,8 @@
         },
         "InputSpecification": {
           "shape": "InputSpecification",
-          "locationName": "inputSpecification"
+          "locationName": "inputSpecification",
+          "documentation": "Specification of network and file inputs for this channel"
         },
         "LogLevel": {
           "shape": "LogLevel",
@@ -3736,6 +3786,11 @@
           "locationName": "arn",
           "documentation": "The unique arn of the channel."
         },
+        "CdiInputSpecification": {
+          "shape": "CdiInputSpecification",
+          "locationName": "cdiInputSpecification",
+          "documentation": "Specification of CDI inputs for this channel"
+        },
         "ChannelClass": {
           "shape": "ChannelClass",
           "locationName": "channelClass",
@@ -3763,7 +3818,8 @@
         },
         "InputSpecification": {
           "shape": "InputSpecification",
-          "locationName": "inputSpecification"
+          "locationName": "inputSpecification",
+          "documentation": "Specification of network and file inputs for this channel"
         },
         "LogLevel": {
           "shape": "LogLevel",
@@ -3805,6 +3861,11 @@
     "CreateChannelRequest": {
       "type": "structure",
       "members": {
+        "CdiInputSpecification": {
+          "shape": "CdiInputSpecification",
+          "locationName": "cdiInputSpecification",
+          "documentation": "Specification of CDI inputs for this channel"
+        },
         "ChannelClass": {
           "shape": "ChannelClass",
           "locationName": "channelClass",
@@ -3826,7 +3887,7 @@
         "InputSpecification": {
           "shape": "InputSpecification",
           "locationName": "inputSpecification",
-          "documentation": "Specification of input for this channel (max. bitrate, resolution, codec, etc.)"
+          "documentation": "Specification of network and file inputs for this channel"
         },
         "LogLevel": {
           "shape": "LogLevel",
@@ -4104,6 +4165,11 @@
           "locationName": "arn",
           "documentation": "The unique arn of the channel."
         },
+        "CdiInputSpecification": {
+          "shape": "CdiInputSpecification",
+          "locationName": "cdiInputSpecification",
+          "documentation": "Specification of CDI inputs for this channel"
+        },
         "ChannelClass": {
           "shape": "ChannelClass",
           "locationName": "channelClass",
@@ -4135,7 +4201,8 @@
         },
         "InputSpecification": {
           "shape": "InputSpecification",
-          "locationName": "inputSpecification"
+          "locationName": "inputSpecification",
+          "documentation": "Specification of network and file inputs for this channel"
         },
         "LogLevel": {
           "shape": "LogLevel",
@@ -4253,6 +4320,11 @@
           "shape": "MultiplexProgramPacketIdentifiersMap",
           "locationName": "packetIdentifiersMap",
           "documentation": "The packet identifier map for this multiplex program."
+        },
+        "PipelineDetails": {
+          "shape": "__listOfMultiplexProgramPipelineDetail",
+          "locationName": "pipelineDetails",
+          "documentation": "Contains information about the current sources for the specified program in the specified multiplex. Keep in mind that each multiplex pipeline connects to both pipelines in a given source channel (the channel identified by the program). But only one of those channel pipelines is ever active at one time."
         },
         "ProgramName": {
           "shape": "__string",
@@ -4508,6 +4580,11 @@
           "locationName": "arn",
           "documentation": "The unique arn of the channel."
         },
+        "CdiInputSpecification": {
+          "shape": "CdiInputSpecification",
+          "locationName": "cdiInputSpecification",
+          "documentation": "Specification of CDI inputs for this channel"
+        },
         "ChannelClass": {
           "shape": "ChannelClass",
           "locationName": "channelClass",
@@ -4539,7 +4616,8 @@
         },
         "InputSpecification": {
           "shape": "InputSpecification",
-          "locationName": "inputSpecification"
+          "locationName": "inputSpecification",
+          "documentation": "Specification of network and file inputs for this channel"
         },
         "LogLevel": {
           "shape": "LogLevel",
@@ -4891,6 +4969,11 @@
           "shape": "MultiplexProgramPacketIdentifiersMap",
           "locationName": "packetIdentifiersMap",
           "documentation": "The packet identifier map for this multiplex program."
+        },
+        "PipelineDetails": {
+          "shape": "__listOfMultiplexProgramPipelineDetail",
+          "locationName": "pipelineDetails",
+          "documentation": "Contains information about the current sources for the specified program in the specified multiplex. Keep in mind that each multiplex pipeline connects to both pipelines in a given source channel (the channel identified by the program). But only one of those channel pipelines is ever active at one time."
         },
         "ProgramName": {
           "shape": "__string",
@@ -9435,6 +9518,173 @@
       },
       "documentation": "Mp2 Settings"
     },
+    "Mpeg2AdaptiveQuantization": {
+      "type": "string",
+      "documentation": "Mpeg2 Adaptive Quantization",
+      "enum": [
+        "AUTO",
+        "HIGH",
+        "LOW",
+        "MEDIUM",
+        "OFF"
+      ]
+    },
+    "Mpeg2ColorMetadata": {
+      "type": "string",
+      "documentation": "Mpeg2 Color Metadata",
+      "enum": [
+        "IGNORE",
+        "INSERT"
+      ]
+    },
+    "Mpeg2ColorSpace": {
+      "type": "string",
+      "documentation": "Mpeg2 Color Space",
+      "enum": [
+        "AUTO",
+        "PASSTHROUGH"
+      ]
+    },
+    "Mpeg2DisplayRatio": {
+      "type": "string",
+      "documentation": "Mpeg2 Display Ratio",
+      "enum": [
+        "DISPLAYRATIO16X9",
+        "DISPLAYRATIO4X3"
+      ]
+    },
+    "Mpeg2FilterSettings": {
+      "type": "structure",
+      "members": {
+        "TemporalFilterSettings": {
+          "shape": "TemporalFilterSettings",
+          "locationName": "temporalFilterSettings"
+        }
+      },
+      "documentation": "Mpeg2 Filter Settings"
+    },
+    "Mpeg2GopSizeUnits": {
+      "type": "string",
+      "documentation": "Mpeg2 Gop Size Units",
+      "enum": [
+        "FRAMES",
+        "SECONDS"
+      ]
+    },
+    "Mpeg2ScanType": {
+      "type": "string",
+      "documentation": "Mpeg2 Scan Type",
+      "enum": [
+        "INTERLACED",
+        "PROGRESSIVE"
+      ]
+    },
+    "Mpeg2Settings": {
+      "type": "structure",
+      "members": {
+        "AdaptiveQuantization": {
+          "shape": "Mpeg2AdaptiveQuantization",
+          "locationName": "adaptiveQuantization",
+          "documentation": "Choose Off to disable adaptive quantization. Or choose another value to enable the quantizer and set its strength. The strengths are: Auto, Off, Low, Medium, High. When you enable this field, MediaLive allows intra-frame quantizers to vary, which might improve visual quality."
+        },
+        "AfdSignaling": {
+          "shape": "AfdSignaling",
+          "locationName": "afdSignaling",
+          "documentation": "Indicates the AFD values that MediaLive will write into the video encode. If you do not know what AFD signaling is, or if your downstream system has not given you guidance, choose AUTO.\nAUTO: MediaLive will try to preserve the input AFD value (in cases where multiple AFD values are valid).\nFIXED: MediaLive will use the value you specify in fixedAFD."
+        },
+        "ColorMetadata": {
+          "shape": "Mpeg2ColorMetadata",
+          "locationName": "colorMetadata",
+          "documentation": "Specifies whether to include the color space metadata. The metadata describes the color space that applies to the video (the colorSpace field). We recommend that you insert the metadata."
+        },
+        "ColorSpace": {
+          "shape": "Mpeg2ColorSpace",
+          "locationName": "colorSpace",
+          "documentation": "Choose the type of color space conversion to apply to the output. For detailed information on setting up both the input and the output to obtain the desired color space in the output, see the section on \\\"MediaLive Features - Video - color space\\\" in the MediaLive User Guide.\nPASSTHROUGH: Keep the color space of the input content - do not convert it.\nAUTO:Convert all content that is SD to rec 601, and convert all content that is HD to rec 709."
+        },
+        "DisplayAspectRatio": {
+          "shape": "Mpeg2DisplayRatio",
+          "locationName": "displayAspectRatio",
+          "documentation": "Sets the pixel aspect ratio for the encode."
+        },
+        "FilterSettings": {
+          "shape": "Mpeg2FilterSettings",
+          "locationName": "filterSettings",
+          "documentation": "Optionally specify a noise reduction filter, which can improve quality of compressed content. If you do not choose a filter, no filter will be applied.\nTEMPORAL: This filter is useful for both source content that is noisy (when it has excessive digital artifacts) and source content that is clean.\nWhen the content is noisy, the filter cleans up the source content before the encoding phase, with these two effects: First, it improves the output video quality because the content has been cleaned up. Secondly, it decreases the bandwidth because MediaLive does not waste bits on encoding noise.\nWhen the content is reasonably clean, the filter tends to decrease the bitrate."
+        },
+        "FixedAfd": {
+          "shape": "FixedAfd",
+          "locationName": "fixedAfd",
+          "documentation": "Complete this field only when afdSignaling is set to FIXED. Enter the AFD value (4 bits) to write on all frames of the video encode."
+        },
+        "FramerateDenominator": {
+          "shape": "__integerMin1",
+          "locationName": "framerateDenominator",
+          "documentation": "description\": \"The framerate denominator. For example, 1001. The framerate is the numerator divided by the denominator. For example, 24000 / 1001 = 23.976 FPS."
+        },
+        "FramerateNumerator": {
+          "shape": "__integerMin1",
+          "locationName": "framerateNumerator",
+          "documentation": "The framerate numerator. For example, 24000. The framerate is the numerator divided by the denominator. For example, 24000 / 1001 = 23.976 FPS."
+        },
+        "GopClosedCadence": {
+          "shape": "__integerMin0",
+          "locationName": "gopClosedCadence",
+          "documentation": "MPEG2: default is open GOP."
+        },
+        "GopNumBFrames": {
+          "shape": "__integerMin0Max7",
+          "locationName": "gopNumBFrames",
+          "documentation": "Relates to the GOP structure. The number of B-frames between reference frames. If you do not know what a B-frame is, use the default."
+        },
+        "GopSize": {
+          "shape": "__double",
+          "locationName": "gopSize",
+          "documentation": "Relates to the GOP structure. The GOP size (keyframe interval) in the units specified in gopSizeUnits. If you do not know what GOP is, use the default.\nIf gopSizeUnits is frames, then the gopSize must be an integer and must be greater than or equal to 1.\nIf gopSizeUnits is seconds, the gopSize must be greater than 0, but does not need to be an integer."
+        },
+        "GopSizeUnits": {
+          "shape": "Mpeg2GopSizeUnits",
+          "locationName": "gopSizeUnits",
+          "documentation": "Relates to the GOP structure. Specifies whether the gopSize is specified in frames or seconds. If you do not plan to change the default gopSize, leave the default. If you specify SECONDS, MediaLive will internally convert the gop size to a frame count."
+        },
+        "ScanType": {
+          "shape": "Mpeg2ScanType",
+          "locationName": "scanType",
+          "documentation": "Set the scan type of the output to PROGRESSIVE or INTERLACED (top field first)."
+        },
+        "SubgopLength": {
+          "shape": "Mpeg2SubGopLength",
+          "locationName": "subgopLength",
+          "documentation": "Relates to the GOP structure. If you do not know what GOP is, use the default.\nFIXED: Set the number of B-frames in each sub-GOP to the value in gopNumBFrames.\nDYNAMIC: Let MediaLive optimize the number of B-frames in each sub-GOP, to improve visual quality."
+        },
+        "TimecodeInsertion": {
+          "shape": "Mpeg2TimecodeInsertionBehavior",
+          "locationName": "timecodeInsertion",
+          "documentation": "Determines how MediaLive inserts timecodes in the output video. For detailed information about setting up the input and the output for a timecode, see the section on \\\"MediaLive Features - Timecode configuration\\\" in the MediaLive User Guide.\nDISABLED: do not include timecodes.\nGOP_TIMECODE: Include timecode metadata in the GOP header."
+        }
+      },
+      "documentation": "Mpeg2 Settings",
+      "required": [
+        "FramerateNumerator",
+        "FramerateDenominator"
+      ]
+    },
+    "Mpeg2SubGopLength": {
+      "type": "string",
+      "documentation": "Mpeg2 Sub Gop Length",
+      "enum": [
+        "DYNAMIC",
+        "FIXED"
+      ]
+    },
+    "Mpeg2TimecodeInsertionBehavior": {
+      "type": "string",
+      "documentation": "Mpeg2 Timecode Insertion Behavior",
+      "enum": [
+        "DISABLED",
+        "GOP_TIMECODE"
+      ]
+    },
     "MsSmoothGroupSettings": {
       "type": "structure",
       "members": {
@@ -9678,6 +9928,11 @@
           "locationName": "packetIdentifiersMap",
           "documentation": "The packet identifier map for this multiplex program."
         },
+        "PipelineDetails": {
+          "shape": "__listOfMultiplexProgramPipelineDetail",
+          "locationName": "pipelineDetails",
+          "documentation": "Contains information about the current sources for the specified program in the specified multiplex. Keep in mind that each multiplex pipeline connects to both pipelines in a given source channel (the channel identified by the program). But only one of those channel pipelines is ever active at one time."
+        },
         "ProgramName": {
           "shape": "__string",
           "locationName": "programName",
@@ -9760,6 +10015,22 @@
       },
       "documentation": "Packet identifiers map for a given Multiplex program."
     },
+    "MultiplexProgramPipelineDetail": {
+      "type": "structure",
+      "members": {
+        "ActiveChannelPipeline": {
+          "shape": "__string",
+          "locationName": "activeChannelPipeline",
+          "documentation": "Identifies the channel pipeline that is currently active for the pipeline (identified by PipelineId) in the multiplex."
+        },
+        "PipelineId": {
+          "shape": "__string",
+          "locationName": "pipelineId",
+          "documentation": "Identifies a specific pipeline in the multiplex."
+        }
+      },
+      "documentation": "The current source for one of the pipelines in the multiplex."
+    },
     "MultiplexProgramServiceDescriptor": {
       "type": "structure",
       "members": {
@@ -9829,7 +10100,7 @@
       "type": "structure",
       "members": {
         "MaximumVideoBufferDelayMilliseconds": {
-          "shape": "__integerMin1000Max3000",
+          "shape": "__integerMin800Max3000",
           "locationName": "maximumVideoBufferDelayMilliseconds",
           "documentation": "Maximum video buffer delay in milliseconds."
         },
@@ -9893,6 +10164,11 @@
           "shape": "__integerMin100000Max100000000",
           "locationName": "minimumBitrate",
           "documentation": "Minimum statmux bitrate."
+        },
+        "Priority": {
+          "shape": "__integerMinNegative5Max5",
+          "locationName": "priority",
+          "documentation": "The purpose of the priority is to use a combination of the\\nmultiplex rate control algorithm and the QVBR capability of the\\nencoder to prioritize the video quality of some channels in a\\nmultiplex over others.  Channels that have a higher priority will\\nget higher video quality at the expense of the video quality of\\nother channels in the multiplex with lower priority."
         }
       },
       "documentation": "Statmux rate control settings"
@@ -10401,6 +10677,11 @@
         }
       },
       "documentation": "Placeholder documentation for PurchaseOfferingResponse"
+    },
+    "RawSettings": {
+      "type": "structure",
+      "members": {},
+      "documentation": "Raw Settings"
     },
     "Rec601Settings": {
       "type": "structure",
@@ -11304,6 +11585,11 @@
           "locationName": "arn",
           "documentation": "The unique arn of the channel."
         },
+        "CdiInputSpecification": {
+          "shape": "CdiInputSpecification",
+          "locationName": "cdiInputSpecification",
+          "documentation": "Specification of CDI inputs for this channel"
+        },
         "ChannelClass": {
           "shape": "ChannelClass",
           "locationName": "channelClass",
@@ -11335,7 +11621,8 @@
         },
         "InputSpecification": {
           "shape": "InputSpecification",
-          "locationName": "inputSpecification"
+          "locationName": "inputSpecification",
+          "documentation": "Specification of network and file inputs for this channel"
         },
         "LogLevel": {
           "shape": "LogLevel",
@@ -11573,6 +11860,11 @@
           "locationName": "arn",
           "documentation": "The unique arn of the channel."
         },
+        "CdiInputSpecification": {
+          "shape": "CdiInputSpecification",
+          "locationName": "cdiInputSpecification",
+          "documentation": "Specification of CDI inputs for this channel"
+        },
         "ChannelClass": {
           "shape": "ChannelClass",
           "locationName": "channelClass",
@@ -11604,7 +11896,8 @@
         },
         "InputSpecification": {
           "shape": "InputSpecification",
-          "locationName": "inputSpecification"
+          "locationName": "inputSpecification",
+          "documentation": "Specification of network and file inputs for this channel"
         },
         "LogLevel": {
           "shape": "LogLevel",
@@ -11959,6 +12252,11 @@
     "UpdateChannelRequest": {
       "type": "structure",
       "members": {
+        "CdiInputSpecification": {
+          "shape": "CdiInputSpecification",
+          "locationName": "cdiInputSpecification",
+          "documentation": "Specification of CDI inputs for this channel"
+        },
         "ChannelId": {
           "shape": "__string",
           "location": "uri",
@@ -11982,7 +12280,7 @@
         "InputSpecification": {
           "shape": "InputSpecification",
           "locationName": "inputSpecification",
-          "documentation": "Specification of input for this channel (max. bitrate, resolution, codec, etc.)"
+          "documentation": "Specification of network and file inputs for this channel"
         },
         "LogLevel": {
           "shape": "LogLevel",
@@ -12309,6 +12607,10 @@
         "H265Settings": {
           "shape": "H265Settings",
           "locationName": "h265Settings"
+        },
+        "Mpeg2Settings": {
+          "shape": "Mpeg2Settings",
+          "locationName": "mpeg2Settings"
         }
       },
       "documentation": "Video Codec Settings"
@@ -12447,6 +12749,37 @@
         }
       },
       "documentation": "Video Selector Settings"
+    },
+    "WavCodingMode": {
+      "type": "string",
+      "documentation": "Wav Coding Mode",
+      "enum": [
+        "CODING_MODE_1_0",
+        "CODING_MODE_2_0",
+        "CODING_MODE_4_0",
+        "CODING_MODE_8_0"
+      ]
+    },
+    "WavSettings": {
+      "type": "structure",
+      "members": {
+        "BitDepth": {
+          "shape": "__double",
+          "locationName": "bitDepth",
+          "documentation": "Bits per sample."
+        },
+        "CodingMode": {
+          "shape": "WavCodingMode",
+          "locationName": "codingMode",
+          "documentation": "The audio coding mode for the WAV audio. The mode determines the number of channels in the audio."
+        },
+        "SampleRate": {
+          "shape": "__double",
+          "locationName": "sampleRate",
+          "documentation": "Sample rate in Hz."
+        }
+      },
+      "documentation": "Wav Settings"
     },
     "WebvttDestinationSettings": {
       "type": "structure",
@@ -12620,12 +12953,6 @@
       "max": 80000000,
       "documentation": "Placeholder documentation for __integerMin100000Max80000000"
     },
-    "__integerMin1000Max3000": {
-      "type": "integer",
-      "min": 1000,
-      "max": 3000,
-      "documentation": "Placeholder documentation for __integerMin1000Max3000"
-    },
     "__integerMin1000Max30000": {
       "type": "integer",
       "min": 1000,
@@ -12732,6 +13059,12 @@
       "max": 20,
       "documentation": "Placeholder documentation for __integerMin4Max20"
     },
+    "__integerMin800Max3000": {
+      "type": "integer",
+      "min": 800,
+      "max": 3000,
+      "documentation": "Placeholder documentation for __integerMin800Max3000"
+    },
     "__integerMin96Max600": {
       "type": "integer",
       "min": 96,
@@ -12743,6 +13076,12 @@
       "min": -1000,
       "max": 1000,
       "documentation": "Placeholder documentation for __integerMinNegative1000Max1000"
+    },
+    "__integerMinNegative5Max5": {
+      "type": "integer",
+      "min": -5,
+      "max": 5,
+      "documentation": "Placeholder documentation for __integerMinNegative5Max5"
     },
     "__integerMinNegative60Max6": {
       "type": "integer",
@@ -12958,6 +13297,13 @@
         "shape": "MultiplexOutputDestination"
       },
       "documentation": "Placeholder documentation for __listOfMultiplexOutputDestination"
+    },
+    "__listOfMultiplexProgramPipelineDetail": {
+      "type": "list",
+      "member": {
+        "shape": "MultiplexProgramPipelineDetail"
+      },
+      "documentation": "Placeholder documentation for __listOfMultiplexProgramPipelineDetail"
     },
     "__listOfMultiplexProgramSummary": {
       "type": "list",
