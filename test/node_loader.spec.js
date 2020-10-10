@@ -1,12 +1,13 @@
 require('./helpers');
 const AWS = require('../lib/node_loader');
 
-describe('node_loader', () => {
-  describe('AWS.CredentialProviderChain', () => {
-    it('initiates providers with named functions', () => {
-      console.log(AWS.CredentialProviderChain.defaultProviders)
+describe('node_loader', function () {
+  describe('AWS.CredentialProviderChain', function () {
+    it('initiates providers with named functions', function () {
       expect(
-        AWS.CredentialProviderChain.defaultProviders.map((fn) => fn.name)
+        AWS.CredentialProviderChain.defaultProviders.map(function (fn) {
+          return fn.name;
+        })
       ).to.eql([
           'EnvironmentCredentialsAWS',
           'EnvironmentCredentialsAMAZON',
