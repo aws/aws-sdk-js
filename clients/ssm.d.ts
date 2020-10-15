@@ -597,11 +597,11 @@ declare class SSM extends Service {
    */
   getParameter(callback?: (err: AWSError, data: SSM.Types.GetParameterResult) => void): Request<SSM.Types.GetParameterResult, AWSError>;
   /**
-   * Query a list of all parameters used by the AWS account.
+   * Retrieves the history of all changes to a parameter.
    */
   getParameterHistory(params: SSM.Types.GetParameterHistoryRequest, callback?: (err: AWSError, data: SSM.Types.GetParameterHistoryResult) => void): Request<SSM.Types.GetParameterHistoryResult, AWSError>;
   /**
-   * Query a list of all parameters used by the AWS account.
+   * Retrieves the history of all changes to a parameter.
    */
   getParameterHistory(callback?: (err: AWSError, data: SSM.Types.GetParameterHistoryResult) => void): Request<SSM.Types.GetParameterHistoryResult, AWSError>;
   /**
@@ -4586,7 +4586,7 @@ declare namespace SSM {
   }
   export interface GetParameterHistoryRequest {
     /**
-     * The name of a parameter you want to query.
+     * The name of the parameter for which you want to review history.
      */
     Name: PSParameterName;
     /**
@@ -6644,7 +6644,7 @@ declare namespace SSM {
   export type ParametersFilterValueList = ParametersFilterValue[];
   export interface Patch {
     /**
-     * The ID of the patch (this is different than the Microsoft Knowledge Base ID).
+     * The ID of the patch. Applies to Windows patches only.  This ID is not the same as the Microsoft Knowledge Base ID. 
      */
     Id?: PatchId;
     /**
@@ -6668,35 +6668,78 @@ declare namespace SSM {
      */
     Vendor?: PatchVendor;
     /**
-     * The product family the patch is applicable for (for example, Windows).
+     * The product family the patch is applicable for. For example, Windows or Amazon Linux 2.
      */
     ProductFamily?: PatchProductFamily;
     /**
-     * The specific product the patch is applicable for (for example, WindowsServer2016).
+     * The specific product the patch is applicable for. For example, WindowsServer2016 or AmazonLinux2018.03.
      */
     Product?: PatchProduct;
     /**
-     * The classification of the patch (for example, SecurityUpdates, Updates, CriticalUpdates).
+     * The classification of the patch. For example, SecurityUpdates, Updates, or CriticalUpdates.
      */
     Classification?: PatchClassification;
     /**
-     * The severity of the patch (for example Critical, Important, Moderate).
+     * The severity of the patch, such as Critical, Important, or Moderate. Applies to Windows patches only.
      */
     MsrcSeverity?: PatchMsrcSeverity;
     /**
-     * The Microsoft Knowledge Base ID of the patch.
+     * The Microsoft Knowledge Base ID of the patch. Applies to Windows patches only.
      */
     KbNumber?: PatchKbNumber;
     /**
-     * The ID of the MSRC bulletin the patch is related to.
+     * The ID of the Microsoft Security Response Center (MSRC) bulletin the patch is related to. For example, MS14-045. Applies to Windows patches only.
      */
     MsrcNumber?: PatchMsrcNumber;
     /**
      * The language of the patch if it's language-specific.
      */
     Language?: PatchLanguage;
+    /**
+     * The Advisory ID of the patch. For example, RHSA-2020:3779. Applies to Linux-based instances only.
+     */
+    AdvisoryIds?: PatchAdvisoryIdList;
+    /**
+     * The Bugzilla ID of the patch. For example, 1600646. Applies to Linux-based instances only.
+     */
+    BugzillaIds?: PatchBugzillaIdList;
+    /**
+     * The Common Vulnerabilities and Exposures (CVE) ID of the patch. For example, CVE-1999-0067. Applies to Linux-based instances only.
+     */
+    CVEIds?: PatchCVEIdList;
+    /**
+     * The name of the patch. Applies to Linux-based instances only.
+     */
+    Name?: PatchName;
+    /**
+     * The epoch of the patch. For example in pkg-example-EE-20180914-2.2.amzn1.noarch, the epoch value is 20180914-2. Applies to Linux-based instances only.
+     */
+    Epoch?: PatchEpoch;
+    /**
+     * The version number of the patch. For example, in example-pkg-1.710.10-2.7.abcd.x86_64, the version number is indicated by -1. Applies to Linux-based instances only.
+     */
+    Version?: PatchVersion;
+    /**
+     * The particular release of a patch. For example, in pkg-example-EE-20180914-2.2.amzn1.noarch, the release is 2.amaz1. Applies to Linux-based instances only.
+     */
+    Release?: PatchRelease;
+    /**
+     * The architecture of the patch. For example, in example-pkg-0.710.10-2.7.abcd.x86_64, the architecture is indicated by x86_64. Applies to Linux-based instances only.
+     */
+    Arch?: PatchArch;
+    /**
+     * The severity level of the patch. For example, CRITICAL or MODERATE.
+     */
+    Severity?: PatchSeverity;
+    /**
+     * The source patch repository for the operating system and version, such as trusty-security for Ubuntu Server 14.04 LTE and focal-security for Ubuntu Server 20.04 LTE. Applies to Linux-based instances only.
+     */
+    Repository?: PatchRepository;
   }
   export type PatchAction = "ALLOW_AS_DEPENDENCY"|"BLOCK"|string;
+  export type PatchAdvisoryId = string;
+  export type PatchAdvisoryIdList = PatchAdvisoryId[];
+  export type PatchArch = string;
   export interface PatchBaselineIdentity {
     /**
      * The ID of the patch baseline.
@@ -6721,6 +6764,10 @@ declare namespace SSM {
   }
   export type PatchBaselineIdentityList = PatchBaselineIdentity[];
   export type PatchBaselineMaxResults = number;
+  export type PatchBugzillaId = string;
+  export type PatchBugzillaIdList = PatchBugzillaId[];
+  export type PatchCVEId = string;
+  export type PatchCVEIdList = PatchCVEId[];
   export type PatchClassification = string;
   export interface PatchComplianceData {
     /**
@@ -6755,6 +6802,7 @@ declare namespace SSM {
   export type PatchContentUrl = string;
   export type PatchDeploymentStatus = "APPROVED"|"PENDING_APPROVAL"|"EXPLICIT_APPROVED"|"EXPLICIT_REJECTED"|string;
   export type PatchDescription = string;
+  export type PatchEpoch = number;
   export type PatchFailedCount = number;
   export interface PatchFilter {
     /**
@@ -6772,7 +6820,7 @@ declare namespace SSM {
      */
     PatchFilters: PatchFilterList;
   }
-  export type PatchFilterKey = "PATCH_SET"|"PRODUCT"|"PRODUCT_FAMILY"|"CLASSIFICATION"|"MSRC_SEVERITY"|"PATCH_ID"|"SECTION"|"PRIORITY"|"SEVERITY"|string;
+  export type PatchFilterKey = "ARCH"|"ADVISORY_ID"|"BUGZILLA_ID"|"PATCH_SET"|"PRODUCT"|"PRODUCT_FAMILY"|"CLASSIFICATION"|"CVE_ID"|"EPOCH"|"MSRC_SEVERITY"|"NAME"|"PATCH_ID"|"SECTION"|"PRIORITY"|"REPOSITORY"|"RELEASE"|"SEVERITY"|"SECURITY"|"VERSION"|string;
   export type PatchFilterList = PatchFilter[];
   export type PatchFilterValue = string;
   export type PatchFilterValueList = PatchFilterValue[];
@@ -6801,6 +6849,7 @@ declare namespace SSM {
   export type PatchMissingCount = number;
   export type PatchMsrcNumber = string;
   export type PatchMsrcSeverity = string;
+  export type PatchName = string;
   export type PatchNotApplicableCount = number;
   export type PatchOperationType = "Scan"|"Install"|string;
   export interface PatchOrchestratorFilter {
@@ -6822,6 +6871,8 @@ declare namespace SSM {
   export type PatchPropertiesList = PatchPropertyEntry[];
   export type PatchProperty = "PRODUCT"|"PRODUCT_FAMILY"|"CLASSIFICATION"|"MSRC_SEVERITY"|"PRIORITY"|"SEVERITY"|string;
   export type PatchPropertyEntry = {[key: string]: AttributeValue};
+  export type PatchRelease = string;
+  export type PatchRepository = string;
   export interface PatchRule {
     /**
      * The patch filter group that defines the criteria for the rule.
@@ -6890,6 +6941,7 @@ declare namespace SSM {
   export type PatchTitle = string;
   export type PatchUnreportedNotApplicableCount = number;
   export type PatchVendor = string;
+  export type PatchVersion = string;
   export type PingStatus = "Online"|"ConnectionLost"|"Inactive"|string;
   export type PlatformType = "Windows"|"Linux"|string;
   export type PlatformTypeList = PlatformType[];

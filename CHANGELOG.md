@@ -1,6 +1,21 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.771.0-->
+<!--LATEST=2.772.0-->
 <!--ENTRYINSERT-->
+
+## 2.772.0
+* feature: AccessAnalyzer: This release adds support for the ApplyArchiveRule api in IAM Access Analyzer.  The ApplyArchiveRule api allows users to apply an archive rule retroactively to existing findings in an analyzer.
+* feature: Budgets: This release introduces AWS Budgets Actions, allowing you to define an explicit response(or set of responses)  to take when your budget exceeds it's action threshold.
+* feature: CostExplorer: This release improves email validation for subscriptions on the SDK endpoints.
+* feature: DMS: When creating Endpoints, Replication Instances, and Replication Tasks, the feature provides you the option to specify friendly name to the resources.
+* feature: GroundStation: Adds error message attribute to DescribeContact DataflowDetails
+* feature: Iot: Add new variable, lastStatusChangeDate, to DescribeDomainConfiguration  API
+* feature: Macie2: This release of the Amazon Macie API adds support for pausing and resuming classification jobs. Also, sensitive data findings now include location data for up to 15 occurrences of sensitive data.
+* feature: RDS: Return tags for all resources in the output of DescribeDBInstances, DescribeDBSnapshots, DescribeDBClusters, and DescribeDBClusterSnapshots API operations.
+* feature: Rekognition: This SDK Release introduces new API (DetectProtectiveEquipment) for Amazon Rekognition. This release also adds ServiceQuotaExceeded exception to Amazon Rekognition IndexFaces API.
+* feature: SSM: This Patch Manager release now supports searching for available packages from Amazon Linux and Amazon Linux 2 via the DescribeAvailablePatches API.
+* feature: Transfer: Add support to associate VPC Security Groups at server creation.
+* feature: WorkMail: Add CreateOrganization and DeleteOrganization API operations.
+* feature: XRay: Enhancing CreateGroup, UpdateGroup, GetGroup and GetGroups APIs to support configuring X-Ray Insights Notifications. Adding TraceLimit information into X-Ray BatchGetTraces API response.
 
 ## 2.771.0
 * bugfix: Test: Delete unused variable declarations from test

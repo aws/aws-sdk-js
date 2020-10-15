@@ -12,6 +12,14 @@ declare class AccessAnalyzer extends Service {
   constructor(options?: AccessAnalyzer.Types.ClientConfiguration)
   config: Config & AccessAnalyzer.Types.ClientConfiguration;
   /**
+   * Retroactively applies the archive rule to existing findings that meet the archive rule criteria.
+   */
+  applyArchiveRule(params: AccessAnalyzer.Types.ApplyArchiveRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Retroactively applies the archive rule to existing findings that meet the archive rule criteria.
+   */
+  applyArchiveRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Creates an analyzer for your account.
    */
   createAnalyzer(params: AccessAnalyzer.Types.CreateAnalyzerRequest, callback?: (err: AWSError, data: AccessAnalyzer.Types.CreateAnalyzerResponse) => void): Request<AccessAnalyzer.Types.CreateAnalyzerResponse, AWSError>;
@@ -20,11 +28,11 @@ declare class AccessAnalyzer extends Service {
    */
   createAnalyzer(callback?: (err: AWSError, data: AccessAnalyzer.Types.CreateAnalyzerResponse) => void): Request<AccessAnalyzer.Types.CreateAnalyzerResponse, AWSError>;
   /**
-   * Creates an archive rule for the specified analyzer. Archive rules automatically archive findings that meet the criteria you define when you create the rule.
+   * Creates an archive rule for the specified analyzer. Archive rules automatically archive new findings that meet the criteria you define when you create the rule.
    */
   createArchiveRule(params: AccessAnalyzer.Types.CreateArchiveRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates an archive rule for the specified analyzer. Archive rules automatically archive findings that meet the criteria you define when you create the rule.
+   * Creates an archive rule for the specified analyzer. Archive rules automatically archive new findings that meet the criteria you define when you create the rule.
    */
   createArchiveRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -260,6 +268,20 @@ declare namespace AccessAnalyzer {
     type: Type;
   }
   export type AnalyzersList = AnalyzerSummary[];
+  export interface ApplyArchiveRuleRequest {
+    /**
+     * The Amazon resource name (ARN) of the analyzer.
+     */
+    analyzerArn: AnalyzerArn;
+    /**
+     * A client token.
+     */
+    clientToken?: String;
+    /**
+     * The name of the rule to apply.
+     */
+    ruleName: Name;
+  }
   export interface ArchiveRuleSummary {
     /**
      * The time at which the archive rule was created.
@@ -447,7 +469,7 @@ declare namespace AccessAnalyzer {
     accessPointArn?: String;
   }
   export type FindingSourceList = FindingSource[];
-  export type FindingSourceType = "BUCKET_ACL"|"POLICY"|"S3_ACCESS_POINT"|string;
+  export type FindingSourceType = "POLICY"|"BUCKET_ACL"|"S3_ACCESS_POINT"|string;
   export type FindingStatus = "ACTIVE"|"ARCHIVED"|"RESOLVED"|string;
   export type FindingStatusUpdate = "ACTIVE"|"ARCHIVED"|string;
   export interface FindingSummary {
@@ -703,7 +725,7 @@ declare namespace AccessAnalyzer {
   export type PrincipalMap = {[key: string]: String};
   export type ReasonCode = "AWS_SERVICE_ACCESS_DISABLED"|"DELEGATED_ADMINISTRATOR_DEREGISTERED"|"ORGANIZATION_DELETED"|"SERVICE_LINKED_ROLE_CREATION_FAILED"|string;
   export type ResourceArn = string;
-  export type ResourceType = "AWS::IAM::Role"|"AWS::KMS::Key"|"AWS::Lambda::Function"|"AWS::Lambda::LayerVersion"|"AWS::S3::Bucket"|"AWS::SQS::Queue"|string;
+  export type ResourceType = "AWS::S3::Bucket"|"AWS::IAM::Role"|"AWS::SQS::Queue"|"AWS::Lambda::Function"|"AWS::Lambda::LayerVersion"|"AWS::KMS::Key"|string;
   export type SharedViaList = String[];
   export interface SortCriteria {
     /**

@@ -1674,6 +1674,10 @@
         "IBMDb2Settings": {
           "shape": "IBMDb2Settings",
           "documentation": "<p>Settings in JSON format for the source IBM Db2 LUW endpoint. For information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.html\">Extra connection attributes when using Db2 LUW as a source for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
+        },
+        "ResourceIdentifier": {
+          "shape": "String",
+          "documentation": "<p>A friendly name for the resource identifier at the end of the <code>EndpointArn</code> response parameter that is returned in the created <code>Endpoint</code> object. The value for this parameter can have up to 31 characters. It can contain only ASCII letters, digits, and hyphen ('-'). Also, it can't end with a hyphen or contain two consecutive hyphens, and can only begin with a letter, such as <code>Example-App-ARN1</code>. For example, this value might result in the <code>EndpointArn</code> value <code>arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1</code>. If you don't specify a <code>ResourceIdentifier</code> value, AWS DMS generates a default identifier value for the end of <code>EndpointArn</code>.</p>"
         }
       },
       "documentation": "<p/>"
@@ -1798,6 +1802,10 @@
         "DnsNameServers": {
           "shape": "String",
           "documentation": "<p>A list of custom DNS name servers supported for the replication instance to access your on-premise source or target database. This list overrides the default name servers supported by the replication instance. You can specify a comma-separated list of internet addresses for up to four on-premise DNS name servers. For example: <code>\"1.1.1.1,2.2.2.2,3.3.3.3,4.4.4.4\"</code> </p>"
+        },
+        "ResourceIdentifier": {
+          "shape": "String",
+          "documentation": "<p>A friendly name for the resource identifier at the end of the <code>EndpointArn</code> response parameter that is returned in the created <code>Endpoint</code> object. The value for this parameter can have up to 31 characters. It can contain only ASCII letters, digits, and hyphen ('-'). Also, it can't end with a hyphen or contain two consecutive hyphens, and can only begin with a letter, such as <code>Example-App-ARN1</code>. For example, this value might result in the <code>EndpointArn</code> value <code>arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1</code>. If you don't specify a <code>ResourceIdentifier</code> value, AWS DMS generates a default identifier value for the end of <code>EndpointArn</code>.</p>"
         }
       },
       "documentation": "<p/>"
@@ -1907,6 +1915,10 @@
         "TaskData": {
           "shape": "String",
           "documentation": "<p>Supplemental information that the task requires to migrate the data for certain source and target endpoints. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html\">Specifying Supplemental Data for Task Settings</a> in the <i>AWS Database Migration Service User Guide.</i> </p>"
+        },
+        "ResourceIdentifier": {
+          "shape": "String",
+          "documentation": "<p>A friendly name for the resource identifier at the end of the <code>EndpointArn</code> response parameter that is returned in the created <code>Endpoint</code> object. The value for this parameter can have up to 31 characters. It can contain only ASCII letters, digits, and hyphen ('-'). Also, it can't end with a hyphen or contain two consecutive hyphens, and can only begin with a letter, such as <code>Example-App-ARN1</code>. For example, this value might result in the <code>EndpointArn</code> value <code>arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1</code>. If you don't specify a <code>ResourceIdentifier</code> value, AWS DMS generates a default identifier value for the end of <code>EndpointArn</code>.</p>"
         }
       },
       "documentation": "<p/>"
@@ -4262,6 +4274,14 @@
           "shape": "String",
           "documentation": "<p>The name of the intermediate S3 bucket used to store .csv files before uploading data to Redshift.</p>"
         },
+        "CaseSensitiveNames": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>If Amazon Redshift is configured to support case sensitive schema names, set <code>CaseSensitiveNames</code> to <code>true</code>. The default is <code>false</code>.</p>"
+        },
+        "CompUpdate": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>If you set <code>CompUpdate</code> to <code>true</code> Amazon Redshift applies automatic compression if the table is empty. This applies even if the table columns already have encodings other than <code>RAW</code>. If you set <code>CompUpdate</code> to <code>false</code>, automatic compression is disabled and existing column encodings aren't changed. The default is <code>true</code>.</p>"
+        },
         "ConnectionTimeout": {
           "shape": "IntegerOptional",
           "documentation": "<p>A value that sets the amount of time to wait (in milliseconds) before timing out, beginning from when you initially establish a connection.</p>"
@@ -4281,6 +4301,10 @@
         "EncryptionMode": {
           "shape": "EncryptionModeValue",
           "documentation": "<p>The type of server-side encryption that you want to use for your data. This encryption type is part of the endpoint settings or the extra connections attributes for Amazon S3. You can choose either <code>SSE_S3</code> (the default) or <code>SSE_KMS</code>. </p> <note> <p>For the <code>ModifyEndpoint</code> operation, you can change the existing value of the <code>EncryptionMode</code> parameter from <code>SSE_KMS</code> to <code>SSE_S3</code>. But you can’t change the existing value from <code>SSE_S3</code> to <code>SSE_KMS</code>.</p> </note> <p>To use <code>SSE_S3</code>, create an AWS Identity and Access Management (IAM) role with a policy that allows <code>\"arn:aws:s3:::*\"</code> to use the following actions: <code>\"s3:PutObject\", \"s3:ListBucket\"</code> </p>"
+        },
+        "ExplicitIds": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>This setting is only valid for a full-load migration task. Set <code>ExplicitIds</code> to <code>true</code> to have tables with <code>IDENTITY</code> columns override their auto-generated values with explicit values loaded from the source data files used to populate the tables. The default is <code>false</code>.</p>"
         },
         "FileTransferUploadStreams": {
           "shape": "IntegerOptional",
@@ -5071,7 +5095,7 @@
         },
         "DatePartitionDelimiter": {
           "shape": "DatePartitionDelimiterValue",
-          "documentation": "<p>Specifies a date separating delimiter to use during folder partitioning. The default value is <code>SLASH</code> (/). Use this parameter when <code>DatePartitionedEnabled</code> is set to <code>true</code>.</p>"
+          "documentation": "<p>Specifies a date separating delimiter to use during folder partitioning. The default value is <code>SLASH</code>. Use this parameter when <code>DatePartitionedEnabled</code> is set to <code>true</code>.</p>"
         }
       },
       "documentation": "<p>Settings for exporting data to Amazon S3. </p>"
@@ -5200,7 +5224,7 @@
         },
         "StartReplicationTaskType": {
           "shape": "StartReplicationTaskTypeValue",
-          "documentation": "<p>The type of replication task.</p>"
+          "documentation": "<p>A type of replication task.</p>"
         },
         "CdcStartTime": {
           "shape": "TStamp",

@@ -20,6 +20,14 @@ declare class Budgets extends Service {
    */
   createBudget(callback?: (err: AWSError, data: Budgets.Types.CreateBudgetResponse) => void): Request<Budgets.Types.CreateBudgetResponse, AWSError>;
   /**
+   *  Creates a budget action. 
+   */
+  createBudgetAction(params: Budgets.Types.CreateBudgetActionRequest, callback?: (err: AWSError, data: Budgets.Types.CreateBudgetActionResponse) => void): Request<Budgets.Types.CreateBudgetActionResponse, AWSError>;
+  /**
+   *  Creates a budget action. 
+   */
+  createBudgetAction(callback?: (err: AWSError, data: Budgets.Types.CreateBudgetActionResponse) => void): Request<Budgets.Types.CreateBudgetActionResponse, AWSError>;
+  /**
    * Creates a notification. You must create the budget before you create the associated notification.
    */
   createNotification(params: Budgets.Types.CreateNotificationRequest, callback?: (err: AWSError, data: Budgets.Types.CreateNotificationResponse) => void): Request<Budgets.Types.CreateNotificationResponse, AWSError>;
@@ -44,6 +52,14 @@ declare class Budgets extends Service {
    */
   deleteBudget(callback?: (err: AWSError, data: Budgets.Types.DeleteBudgetResponse) => void): Request<Budgets.Types.DeleteBudgetResponse, AWSError>;
   /**
+   *  Deletes a budget action. 
+   */
+  deleteBudgetAction(params: Budgets.Types.DeleteBudgetActionRequest, callback?: (err: AWSError, data: Budgets.Types.DeleteBudgetActionResponse) => void): Request<Budgets.Types.DeleteBudgetActionResponse, AWSError>;
+  /**
+   *  Deletes a budget action. 
+   */
+  deleteBudgetAction(callback?: (err: AWSError, data: Budgets.Types.DeleteBudgetActionResponse) => void): Request<Budgets.Types.DeleteBudgetActionResponse, AWSError>;
+  /**
    * Deletes a notification.  Deleting a notification also deletes the subscribers that are associated with the notification. 
    */
   deleteNotification(params: Budgets.Types.DeleteNotificationRequest, callback?: (err: AWSError, data: Budgets.Types.DeleteNotificationResponse) => void): Request<Budgets.Types.DeleteNotificationResponse, AWSError>;
@@ -67,6 +83,38 @@ declare class Budgets extends Service {
    * Describes a budget.  The Request Syntax section shows the BudgetLimit syntax. For PlannedBudgetLimits, see the Examples section.  
    */
   describeBudget(callback?: (err: AWSError, data: Budgets.Types.DescribeBudgetResponse) => void): Request<Budgets.Types.DescribeBudgetResponse, AWSError>;
+  /**
+   *  Describes a budget action detail. 
+   */
+  describeBudgetAction(params: Budgets.Types.DescribeBudgetActionRequest, callback?: (err: AWSError, data: Budgets.Types.DescribeBudgetActionResponse) => void): Request<Budgets.Types.DescribeBudgetActionResponse, AWSError>;
+  /**
+   *  Describes a budget action detail. 
+   */
+  describeBudgetAction(callback?: (err: AWSError, data: Budgets.Types.DescribeBudgetActionResponse) => void): Request<Budgets.Types.DescribeBudgetActionResponse, AWSError>;
+  /**
+   *  Describes a budget action history detail. 
+   */
+  describeBudgetActionHistories(params: Budgets.Types.DescribeBudgetActionHistoriesRequest, callback?: (err: AWSError, data: Budgets.Types.DescribeBudgetActionHistoriesResponse) => void): Request<Budgets.Types.DescribeBudgetActionHistoriesResponse, AWSError>;
+  /**
+   *  Describes a budget action history detail. 
+   */
+  describeBudgetActionHistories(callback?: (err: AWSError, data: Budgets.Types.DescribeBudgetActionHistoriesResponse) => void): Request<Budgets.Types.DescribeBudgetActionHistoriesResponse, AWSError>;
+  /**
+   *  Describes all of the budget actions for an account. 
+   */
+  describeBudgetActionsForAccount(params: Budgets.Types.DescribeBudgetActionsForAccountRequest, callback?: (err: AWSError, data: Budgets.Types.DescribeBudgetActionsForAccountResponse) => void): Request<Budgets.Types.DescribeBudgetActionsForAccountResponse, AWSError>;
+  /**
+   *  Describes all of the budget actions for an account. 
+   */
+  describeBudgetActionsForAccount(callback?: (err: AWSError, data: Budgets.Types.DescribeBudgetActionsForAccountResponse) => void): Request<Budgets.Types.DescribeBudgetActionsForAccountResponse, AWSError>;
+  /**
+   *  Describes all of the budget actions for a budget. 
+   */
+  describeBudgetActionsForBudget(params: Budgets.Types.DescribeBudgetActionsForBudgetRequest, callback?: (err: AWSError, data: Budgets.Types.DescribeBudgetActionsForBudgetResponse) => void): Request<Budgets.Types.DescribeBudgetActionsForBudgetResponse, AWSError>;
+  /**
+   *  Describes all of the budget actions for a budget. 
+   */
+  describeBudgetActionsForBudget(callback?: (err: AWSError, data: Budgets.Types.DescribeBudgetActionsForBudgetResponse) => void): Request<Budgets.Types.DescribeBudgetActionsForBudgetResponse, AWSError>;
   /**
    * Describes the history for DAILY, MONTHLY, and QUARTERLY budgets. Budget history isn't available for ANNUAL budgets.
    */
@@ -100,6 +148,14 @@ declare class Budgets extends Service {
    */
   describeSubscribersForNotification(callback?: (err: AWSError, data: Budgets.Types.DescribeSubscribersForNotificationResponse) => void): Request<Budgets.Types.DescribeSubscribersForNotificationResponse, AWSError>;
   /**
+   *  Executes a budget action. 
+   */
+  executeBudgetAction(params: Budgets.Types.ExecuteBudgetActionRequest, callback?: (err: AWSError, data: Budgets.Types.ExecuteBudgetActionResponse) => void): Request<Budgets.Types.ExecuteBudgetActionResponse, AWSError>;
+  /**
+   *  Executes a budget action. 
+   */
+  executeBudgetAction(callback?: (err: AWSError, data: Budgets.Types.ExecuteBudgetActionResponse) => void): Request<Budgets.Types.ExecuteBudgetActionResponse, AWSError>;
+  /**
    * Updates a budget. You can change every part of a budget except for the budgetName and the calculatedSpend. When you modify a budget, the calculatedSpend drops to zero until AWS has new usage data to use for forecasting.  Only one of BudgetLimit or PlannedBudgetLimits can be present in the syntax at one time. Use the syntax that matches your case. The Request Syntax section shows the BudgetLimit syntax. For PlannedBudgetLimits, see the Examples section.  
    */
   updateBudget(params: Budgets.Types.UpdateBudgetRequest, callback?: (err: AWSError, data: Budgets.Types.UpdateBudgetResponse) => void): Request<Budgets.Types.UpdateBudgetResponse, AWSError>;
@@ -107,6 +163,14 @@ declare class Budgets extends Service {
    * Updates a budget. You can change every part of a budget except for the budgetName and the calculatedSpend. When you modify a budget, the calculatedSpend drops to zero until AWS has new usage data to use for forecasting.  Only one of BudgetLimit or PlannedBudgetLimits can be present in the syntax at one time. Use the syntax that matches your case. The Request Syntax section shows the BudgetLimit syntax. For PlannedBudgetLimits, see the Examples section.  
    */
   updateBudget(callback?: (err: AWSError, data: Budgets.Types.UpdateBudgetResponse) => void): Request<Budgets.Types.UpdateBudgetResponse, AWSError>;
+  /**
+   *  Updates a budget action. 
+   */
+  updateBudgetAction(params: Budgets.Types.UpdateBudgetActionRequest, callback?: (err: AWSError, data: Budgets.Types.UpdateBudgetActionResponse) => void): Request<Budgets.Types.UpdateBudgetActionResponse, AWSError>;
+  /**
+   *  Updates a budget action. 
+   */
+  updateBudgetAction(callback?: (err: AWSError, data: Budgets.Types.UpdateBudgetActionResponse) => void): Request<Budgets.Types.UpdateBudgetActionResponse, AWSError>;
   /**
    * Updates a notification.
    */
@@ -126,6 +190,72 @@ declare class Budgets extends Service {
 }
 declare namespace Budgets {
   export type AccountId = string;
+  export interface Action {
+    /**
+     *  A system-generated universally unique identifier (UUID) for the action. 
+     */
+    ActionId: ActionId;
+    BudgetName: BudgetName;
+    NotificationType: NotificationType;
+    /**
+     *  The type of action. This defines the type of tasks that can be carried out by this action. This field also determines the format for definition. 
+     */
+    ActionType: ActionType;
+    /**
+     *  The trigger threshold of the action. 
+     */
+    ActionThreshold: ActionThreshold;
+    /**
+     *  Where you specify all of the type-specific parameters. 
+     */
+    Definition: Definition;
+    /**
+     *  The role passed for action execution and reversion. Roles and actions must be in the same account. 
+     */
+    ExecutionRoleArn: RoleArn;
+    /**
+     *  This specifies if the action needs manual or automatic approval. 
+     */
+    ApprovalModel: ApprovalModel;
+    /**
+     *  The status of action. 
+     */
+    Status: ActionStatus;
+    Subscribers: Subscribers;
+  }
+  export type ActionHistories = ActionHistory[];
+  export interface ActionHistory {
+    Timestamp: GenericTimestamp;
+    /**
+     *  The status of action at the time of the event. 
+     */
+    Status: ActionStatus;
+    /**
+     *  This distinguishes between whether the events are triggered by the user or generated by the system. 
+     */
+    EventType: EventType;
+    /**
+     *  The description of details of the event. 
+     */
+    ActionHistoryDetails: ActionHistoryDetails;
+  }
+  export interface ActionHistoryDetails {
+    Message: GenericString;
+    /**
+     *  The budget action resource. 
+     */
+    Action: Action;
+  }
+  export type ActionId = string;
+  export type ActionStatus = "STANDBY"|"PENDING"|"EXECUTION_IN_PROGRESS"|"EXECUTION_SUCCESS"|"EXECUTION_FAILURE"|"REVERSE_IN_PROGRESS"|"REVERSE_SUCCESS"|"REVERSE_FAILURE"|"RESET_IN_PROGRESS"|"RESET_FAILURE"|string;
+  export type ActionSubType = "STOP_EC2_INSTANCES"|"STOP_RDS_INSTANCES"|string;
+  export interface ActionThreshold {
+    ActionThresholdValue: NotificationThreshold;
+    ActionThresholdType: ThresholdType;
+  }
+  export type ActionType = "APPLY_IAM_POLICY"|"APPLY_SCP_POLICY"|"RUN_SSM_DOCUMENTS"|string;
+  export type Actions = Action[];
+  export type ApprovalModel = "AUTOMATIC"|"MANUAL"|string;
   export interface Budget {
     /**
      * The name of a budget. The name must be unique within an account. The : and \ characters aren't allowed in BudgetName.
@@ -261,6 +391,34 @@ declare namespace Budgets {
      */
     UseAmortized?: NullableBoolean;
   }
+  export interface CreateBudgetActionRequest {
+    AccountId: AccountId;
+    BudgetName: BudgetName;
+    NotificationType: NotificationType;
+    /**
+     *  The type of action. This defines the type of tasks that can be carried out by this action. This field also determines the format for definition. 
+     */
+    ActionType: ActionType;
+    ActionThreshold: ActionThreshold;
+    Definition: Definition;
+    /**
+     *  The role passed for action execution and reversion. Roles and actions must be in the same account. 
+     */
+    ExecutionRoleArn: RoleArn;
+    /**
+     *  This specifies if the action needs manual or automatic approval. 
+     */
+    ApprovalModel: ApprovalModel;
+    Subscribers: Subscribers;
+  }
+  export interface CreateBudgetActionResponse {
+    AccountId: AccountId;
+    BudgetName: BudgetName;
+    /**
+     *  A system-generated universally unique identifier (UUID) for the action. 
+     */
+    ActionId: ActionId;
+  }
   export interface CreateBudgetRequest {
     /**
      * The accountId that is associated with the budget.
@@ -317,6 +475,33 @@ declare namespace Budgets {
   }
   export interface CreateSubscriberResponse {
   }
+  export interface Definition {
+    /**
+     *  The AWS Identity and Access Management (IAM) action definition details. 
+     */
+    IamActionDefinition?: IamActionDefinition;
+    /**
+     *  The service control policies (SCPs) action definition details. 
+     */
+    ScpActionDefinition?: ScpActionDefinition;
+    /**
+     *  The AWS Systems Manager (SSM) action definition details. 
+     */
+    SsmActionDefinition?: SsmActionDefinition;
+  }
+  export interface DeleteBudgetActionRequest {
+    AccountId: AccountId;
+    BudgetName: BudgetName;
+    /**
+     *  A system-generated universally unique identifier (UUID) for the action. 
+     */
+    ActionId: ActionId;
+  }
+  export interface DeleteBudgetActionResponse {
+    AccountId: AccountId;
+    BudgetName: BudgetName;
+    Action: Action;
+  }
   export interface DeleteBudgetRequest {
     /**
      * The accountId that is associated with the budget that you want to delete.
@@ -364,6 +549,65 @@ declare namespace Budgets {
     Subscriber: Subscriber;
   }
   export interface DeleteSubscriberResponse {
+  }
+  export interface DescribeBudgetActionHistoriesRequest {
+    AccountId: AccountId;
+    BudgetName: BudgetName;
+    /**
+     *  A system-generated universally unique identifier (UUID) for the action. 
+     */
+    ActionId: ActionId;
+    TimePeriod?: TimePeriod;
+    MaxResults?: MaxResults;
+    NextToken?: GenericString;
+  }
+  export interface DescribeBudgetActionHistoriesResponse {
+    /**
+     *  The historical record of the budget action resource. 
+     */
+    ActionHistories: ActionHistories;
+    NextToken?: GenericString;
+  }
+  export interface DescribeBudgetActionRequest {
+    AccountId: AccountId;
+    BudgetName: BudgetName;
+    /**
+     *  A system-generated universally unique identifier (UUID) for the action. 
+     */
+    ActionId: ActionId;
+  }
+  export interface DescribeBudgetActionResponse {
+    AccountId: AccountId;
+    BudgetName: BudgetName;
+    /**
+     *  A budget action resource. 
+     */
+    Action: Action;
+  }
+  export interface DescribeBudgetActionsForAccountRequest {
+    AccountId: AccountId;
+    MaxResults?: MaxResults;
+    NextToken?: GenericString;
+  }
+  export interface DescribeBudgetActionsForAccountResponse {
+    /**
+     *  A list of the budget action resources information. 
+     */
+    Actions: Actions;
+    NextToken?: GenericString;
+  }
+  export interface DescribeBudgetActionsForBudgetRequest {
+    AccountId: AccountId;
+    BudgetName: BudgetName;
+    MaxResults?: MaxResults;
+    NextToken?: GenericString;
+  }
+  export interface DescribeBudgetActionsForBudgetResponse {
+    /**
+     *  A list of the budget action resources information. 
+     */
+    Actions: Actions;
+    NextToken?: GenericString;
   }
   export interface DescribeBudgetPerformanceHistoryRequest {
     AccountId: AccountId;
@@ -483,8 +727,56 @@ declare namespace Budgets {
     NextToken?: GenericString;
   }
   export type DimensionValues = GenericString[];
+  export type EventType = "SYSTEM"|"CREATE_ACTION"|"DELETE_ACTION"|"UPDATE_ACTION"|"EXECUTE_ACTION"|string;
+  export interface ExecuteBudgetActionRequest {
+    AccountId: AccountId;
+    BudgetName: BudgetName;
+    /**
+     *  A system-generated universally unique identifier (UUID) for the action. 
+     */
+    ActionId: ActionId;
+    /**
+     *  The type of execution. 
+     */
+    ExecutionType: ExecutionType;
+  }
+  export interface ExecuteBudgetActionResponse {
+    AccountId: AccountId;
+    BudgetName: BudgetName;
+    /**
+     *  A system-generated universally unique identifier (UUID) for the action. 
+     */
+    ActionId: ActionId;
+    /**
+     *  The type of execution. 
+     */
+    ExecutionType: ExecutionType;
+  }
+  export type ExecutionType = "APPROVE_BUDGET_ACTION"|"RETRY_BUDGET_ACTION"|"REVERSE_BUDGET_ACTION"|"RESET_BUDGET_ACTION"|string;
   export type GenericString = string;
   export type GenericTimestamp = Date;
+  export type Group = string;
+  export type Groups = Group[];
+  export interface IamActionDefinition {
+    /**
+     *  The Amazon Resource Name (ARN) of the policy to be attached. 
+     */
+    PolicyArn: PolicyArn;
+    /**
+     *  A list of roles to be attached. There must be at least one role. 
+     */
+    Roles?: Roles;
+    /**
+     *  A list of groups to be attached. There must be at least one group. 
+     */
+    Groups?: Groups;
+    /**
+     *  A list of users to be attached. There must be at least one user. 
+     */
+    Users?: Users;
+  }
+  export type InstanceId = string;
+  export type InstanceIds = InstanceId[];
   export type MaxResults = number;
   export interface Notification {
     /**
@@ -526,6 +818,22 @@ declare namespace Budgets {
   export type NullableBoolean = boolean;
   export type NumericValue = string;
   export type PlannedBudgetLimits = {[key: string]: Spend};
+  export type PolicyArn = string;
+  export type PolicyId = string;
+  export type Region = string;
+  export type Role = string;
+  export type RoleArn = string;
+  export type Roles = Role[];
+  export interface ScpActionDefinition {
+    /**
+     *  The policy ID attached. 
+     */
+    PolicyId: PolicyId;
+    /**
+     *  A list of target IDs. 
+     */
+    TargetIds: TargetIds;
+  }
   export interface Spend {
     /**
      * The cost or usage amount that is associated with a budget forecast, actual spend, or budget threshold.
@@ -535,6 +843,20 @@ declare namespace Budgets {
      * The unit of measurement that is used for the budget forecast, actual spend, or budget threshold, such as dollars or GB.
      */
     Unit: UnitValue;
+  }
+  export interface SsmActionDefinition {
+    /**
+     *  The action subType. 
+     */
+    ActionSubType: ActionSubType;
+    /**
+     *  The Region to run the SSM document. 
+     */
+    Region: Region;
+    /**
+     *  The EC2 and RDS instance IDs. 
+     */
+    InstanceIds: InstanceIds;
   }
   export interface Subscriber {
     /**
@@ -549,6 +871,8 @@ declare namespace Budgets {
   export type SubscriberAddress = string;
   export type Subscribers = Subscriber[];
   export type SubscriptionType = "SNS"|"EMAIL"|string;
+  export type TargetId = string;
+  export type TargetIds = TargetId[];
   export type ThresholdType = "PERCENTAGE"|"ABSOLUTE_VALUE"|string;
   export interface TimePeriod {
     /**
@@ -562,6 +886,38 @@ declare namespace Budgets {
   }
   export type TimeUnit = "DAILY"|"MONTHLY"|"QUARTERLY"|"ANNUALLY"|string;
   export type UnitValue = string;
+  export interface UpdateBudgetActionRequest {
+    AccountId: AccountId;
+    BudgetName: BudgetName;
+    /**
+     *  A system-generated universally unique identifier (UUID) for the action. 
+     */
+    ActionId: ActionId;
+    NotificationType?: NotificationType;
+    ActionThreshold?: ActionThreshold;
+    Definition?: Definition;
+    /**
+     *  The role passed for action execution and reversion. Roles and actions must be in the same account. 
+     */
+    ExecutionRoleArn?: RoleArn;
+    /**
+     *  This specifies if the action needs manual or automatic approval. 
+     */
+    ApprovalModel?: ApprovalModel;
+    Subscribers?: Subscribers;
+  }
+  export interface UpdateBudgetActionResponse {
+    AccountId: AccountId;
+    BudgetName: BudgetName;
+    /**
+     *  The previous action resource information. 
+     */
+    OldAction: Action;
+    /**
+     *  The updated action resource information. 
+     */
+    NewAction: Action;
+  }
   export interface UpdateBudgetRequest {
     /**
      * The accountId that is associated with the budget that you want to update.
@@ -618,6 +974,8 @@ declare namespace Budgets {
   }
   export interface UpdateSubscriberResponse {
   }
+  export type User = string;
+  export type Users = User[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

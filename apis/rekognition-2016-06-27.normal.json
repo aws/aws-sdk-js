@@ -690,6 +690,46 @@
       ],
       "documentation": "<p>Detects unsafe content in a specified JPEG or PNG format image. Use <code>DetectModerationLabels</code> to moderate images depending on your requirements. For example, you might want to filter images that contain nudity, but not images containing suggestive content.</p> <p>To filter images, use the labels returned by <code>DetectModerationLabels</code> to determine which types of content are appropriate.</p> <p>For information about moderation labels, see Detecting Unsafe Content in the Amazon Rekognition Developer Guide.</p> <p>You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p>"
     },
+    "DetectProtectiveEquipment": {
+      "name": "DetectProtectiveEquipment",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DetectProtectiveEquipmentRequest"
+      },
+      "output": {
+        "shape": "DetectProtectiveEquipmentResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidS3ObjectException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ImageTooLargeException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ProvisionedThroughputExceededException"
+        },
+        {
+          "shape": "InvalidImageFormatException"
+        }
+      ],
+      "documentation": "<p>Detects Personal Protective Equipment (PPE) worn by people detected in an image. Amazon Rekognition can detect the following types of PPE.</p> <ul> <li> <p>Face cover</p> </li> <li> <p>Hand cover</p> </li> <li> <p>Head cover</p> </li> </ul> <p>You pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. The image must be either a PNG or JPG formatted file. </p> <p> <code>DetectProtectiveEquipment</code> detects PPE worn by up to 15 persons detected in an image.</p> <p>For each person detected in the image the API returns an array of body parts (face, head, left-hand, right-hand). For each body part, an array of detected items of PPE is returned, including an indicator of whether or not the PPE covers the body part. The API returns the confidence it has in each detection (person, PPE, body part and body part coverage). It also returns a bounding box (<a>BoundingBox</a>) for each detected person and each detected item of PPE. </p> <p>You can optionally request a summary of detected PPE items with the <code>SummarizationAttributes</code> input parameter. The summary provides the following information. </p> <ul> <li> <p>The persons detected as wearing all of the types of PPE that you specify.</p> </li> <li> <p>The persons detected as not wearing all of the types PPE that you specify.</p> </li> <li> <p>The persons detected where PPE adornment could not be determined. </p> </li> </ul> <p>This is a stateless API operation. That is, the operation does not persist any data.</p> <p>This operation requires permissions to perform the <code>rekognition:DetectProtectiveEquipment</code> action. </p>"
+    },
     "DetectText": {
       "name": "DetectText",
       "http": {
@@ -1099,6 +1139,9 @@
         },
         {
           "shape": "InvalidImageFormatException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
         }
       ],
       "documentation": "<p>Detects faces in the input image and adds them to the specified collection. </p> <p>Amazon Rekognition doesn't save the actual faces that are detected. Instead, the underlying detection algorithm first detects the faces in the input image. For each face, the algorithm extracts facial features into a feature vector, and stores it in the backend database. Amazon Rekognition uses feature vectors when it performs face match and search operations using the <a>SearchFaces</a> and <a>SearchFacesByImage</a> operations.</p> <p>For more information, see Adding Faces to a Collection in the Amazon Rekognition Developer Guide.</p> <p>To get the number of faces in a collection, call <a>DescribeCollection</a>. </p> <p>If you're using version 1.0 of the face detection model, <code>IndexFaces</code> indexes the 15 largest faces in the input image. Later versions of the face detection model index the 100 largest faces in the input image. </p> <p>If you're using version 4 or later of the face model, image orientation information is not returned in the <code>OrientationCorrection</code> field. </p> <p>To determine which version of the model you're using, call <a>DescribeCollection</a> and supply the collection ID. You can also get the model version from the value of <code>FaceModelVersion</code> in the response from <code>IndexFaces</code> </p> <p>For more information, see Model Versioning in the Amazon Rekognition Developer Guide.</p> <p>If you provide the optional <code>ExternalImageId</code> for the input image you provided, Amazon Rekognition associates this ID with all faces that it detects. When you call the <a>ListFaces</a> operation, the response returns the external ID. You can use this external image ID to create a client-side index to associate the faces with each image. You can then use the index to find all faces in an image.</p> <p>You can specify the maximum number of faces to index with the <code>MaxFaces</code> input parameter. This is useful when you want to index the largest faces in an image and don't want to index smaller faces, such as those belonging to people standing in the background.</p> <p>The <code>QualityFilter</code> input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. By default, <code>IndexFaces</code> chooses the quality bar that's used to filter faces. You can also explicitly choose the quality bar. Use <code>QualityFilter</code>, to set the quality bar by specifying <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>. If you do not want to filter detected faces, specify <code>NONE</code>. </p> <note> <p>To use quality filtering, you need a collection associated with version 3 of the face model or higher. To get the version of the face model associated with a collection, call <a>DescribeCollection</a>. </p> </note> <p>Information about faces detected in an image, but not indexed, is returned in an array of <a>UnindexedFace</a> objects, <code>UnindexedFaces</code>. Faces aren't indexed for reasons such as:</p> <ul> <li> <p>The number of faces detected exceeds the value of the <code>MaxFaces</code> request parameter.</p> </li> <li> <p>The face is too small compared to the image dimensions.</p> </li> <li> <p>The face is too blurry.</p> </li> <li> <p>The image is too dark.</p> </li> <li> <p>The face has an extreme pose.</p> </li> <li> <p>The face doesn’t have enough detail to be suitable for face search.</p> </li> </ul> <p>In response, the <code>IndexFaces</code> operation returns an array of metadata for all detected faces, <code>FaceRecords</code>. This includes: </p> <ul> <li> <p>The bounding box, <code>BoundingBox</code>, of the detected face. </p> </li> <li> <p>A confidence value, <code>Confidence</code>, which indicates the confidence that the bounding box contains a face.</p> </li> <li> <p>A face ID, <code>FaceId</code>, assigned by the service for each face that's detected and stored.</p> </li> <li> <p>An image ID, <code>ImageId</code>, assigned by the service for the input image.</p> </li> </ul> <p>If you request all facial attributes (by using the <code>detectionAttributes</code> parameter), Amazon Rekognition returns detailed facial attributes, such as facial landmarks (for example, location of eye and mouth) and other facial attributes. If you provide the same image, specify the same collection, and use the same external ID in the <code>IndexFaces</code> operation, Amazon Rekognition doesn't save duplicate face metadata.</p> <p/> <p>The input image is passed either as base64-encoded image bytes, or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes isn't supported. The image must be formatted as a PNG or JPEG file. </p> <p>This operation requires permissions to perform the <code>rekognition:IndexFaces</code> action.</p>"
@@ -1923,6 +1966,21 @@
       },
       "documentation": "<p>Indicates whether or not the face has a beard, and the confidence level in the determination.</p>"
     },
+    "BodyPart": {
+      "type": "string",
+      "enum": [
+        "FACE",
+        "HEAD",
+        "LEFT_HAND",
+        "RIGHT_HAND"
+      ]
+    },
+    "BodyParts": {
+      "type": "list",
+      "member": {
+        "shape": "ProtectiveEquipmentBodyPart"
+      }
+    },
     "Boolean": {
       "type": "boolean"
     },
@@ -1946,7 +2004,7 @@
           "documentation": "<p>Top coordinate of the bounding box as a ratio of overall image height.</p>"
         }
       },
-      "documentation": "<p>Identifies the bounding box around the label, face, or text. The <code>left</code> (x-coordinate) and <code>top</code> (y-coordinate) are coordinates representing the top and left sides of the bounding box. Note that the upper-left corner of the image is the origin (0,0). </p> <p>The <code>top</code> and <code>left</code> values returned are ratios of the overall image size. For example, if the input image is 700x200 pixels, and the top-left coordinate of the bounding box is 350x50 pixels, the API returns a <code>left</code> value of 0.5 (350/700) and a <code>top</code> value of 0.25 (50/200).</p> <p>The <code>width</code> and <code>height</code> values represent the dimensions of the bounding box as a ratio of the overall image dimension. For example, if the input image is 700x200 pixels, and the bounding box width is 70 pixels, the width returned is 0.1. </p> <note> <p> The bounding box coordinates can have negative values. For example, if Amazon Rekognition is able to detect a face that is at the image edge and is only partially visible, the service can return coordinates that are outside the image bounds and, depending on the image edge, you might get negative values or values greater than 1 for the <code>left</code> or <code>top</code> values. </p> </note>"
+      "documentation": "<p>Identifies the bounding box around the label, face, text or personal protective equipment. The <code>left</code> (x-coordinate) and <code>top</code> (y-coordinate) are coordinates representing the top and left sides of the bounding box. Note that the upper-left corner of the image is the origin (0,0). </p> <p>The <code>top</code> and <code>left</code> values returned are ratios of the overall image size. For example, if the input image is 700x200 pixels, and the top-left coordinate of the bounding box is 350x50 pixels, the API returns a <code>left</code> value of 0.5 (350/700) and a <code>top</code> value of 0.25 (50/200).</p> <p>The <code>width</code> and <code>height</code> values represent the dimensions of the bounding box as a ratio of the overall image dimension. For example, if the input image is 700x200 pixels, and the bounding box width is 70 pixels, the width returned is 0.1. </p> <note> <p> The bounding box coordinates can have negative values. For example, if Amazon Rekognition is able to detect a face that is at the image edge and is only partially visible, the service can return coordinates that are outside the image bounds and, depending on the image edge, you might get negative values or values greater than 1 for the <code>left</code> or <code>top</code> values. </p> </note>"
     },
     "BoundingBoxHeight": {
       "type": "float",
@@ -2227,6 +2285,20 @@
         "NAME",
         "TIMESTAMP"
       ]
+    },
+    "CoversBodyPart": {
+      "type": "structure",
+      "members": {
+        "Confidence": {
+          "shape": "Percent",
+          "documentation": "<p>The confidence that Amazon Rekognition has in the value of <code>Value</code>.</p>"
+        },
+        "Value": {
+          "shape": "Boolean",
+          "documentation": "<p>True if the PPE covers the corresponding body part, otherwise false.</p>"
+        }
+      },
+      "documentation": "<p>Information about an item of Personal Protective Equipment covering a corresponding body part. For more information, see <a>DetectProtectiveEquipment</a>.</p>"
     },
     "CreateCollectionRequest": {
       "type": "structure",
@@ -2786,6 +2858,39 @@
         }
       }
     },
+    "DetectProtectiveEquipmentRequest": {
+      "type": "structure",
+      "required": [
+        "Image"
+      ],
+      "members": {
+        "Image": {
+          "shape": "Image",
+          "documentation": "<p>The image in which you want to detect PPE on detected persons. The image can be passed as image bytes or you can reference an image stored in an Amazon S3 bucket. </p>"
+        },
+        "SummarizationAttributes": {
+          "shape": "ProtectiveEquipmentSummarizationAttributes",
+          "documentation": "<p>An array of PPE types that you want to summarize.</p>"
+        }
+      }
+    },
+    "DetectProtectiveEquipmentResponse": {
+      "type": "structure",
+      "members": {
+        "ProtectiveEquipmentModelVersion": {
+          "shape": "String",
+          "documentation": "<p>The version number of the PPE detection model used to detect PPE in the image.</p>"
+        },
+        "Persons": {
+          "shape": "ProtectiveEquipmentPersons",
+          "documentation": "<p>An array of persons detected in the image (including persons not wearing PPE).</p>"
+        },
+        "Summary": {
+          "shape": "ProtectiveEquipmentSummary",
+          "documentation": "<p>Summary information for the types of PPE specified in the <code>SummarizationAttributes</code> input parameter.</p>"
+        }
+      }
+    },
     "DetectTextFilters": {
       "type": "structure",
       "members": {
@@ -2878,6 +2983,34 @@
       "type": "list",
       "member": {
         "shape": "Emotion"
+      }
+    },
+    "EquipmentDetection": {
+      "type": "structure",
+      "members": {
+        "BoundingBox": {
+          "shape": "BoundingBox",
+          "documentation": "<p>A bounding box surrounding the item of detected PPE.</p>"
+        },
+        "Confidence": {
+          "shape": "Percent",
+          "documentation": "<p>The confidence that Amazon Rekognition has that the bounding box (<code>BoundingBox</code>) contains an item of PPE.</p>"
+        },
+        "Type": {
+          "shape": "ProtectiveEquipmentType",
+          "documentation": "<p>The type of detected PPE.</p>"
+        },
+        "CoversBodyPart": {
+          "shape": "CoversBodyPart",
+          "documentation": "<p>Information about the body part covered by the detected PPE.</p>"
+        }
+      },
+      "documentation": "<p>Information about an item of Personal Protective Equipment (PPE) detected by <a>DetectProtectiveEquipment</a>. For more information, see <a>DetectProtectiveEquipment</a>.</p>"
+    },
+    "EquipmentDetections": {
+      "type": "list",
+      "member": {
+        "shape": "EquipmentDetection"
       }
     },
     "EvaluationResult": {
@@ -4433,6 +4566,108 @@
       "type": "integer",
       "max": 100,
       "min": 1
+    },
+    "ProtectiveEquipmentBodyPart": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "BodyPart",
+          "documentation": "<p>The detected body part.</p>"
+        },
+        "Confidence": {
+          "shape": "Percent",
+          "documentation": "<p>The confidence that Amazon Rekognition has in the detection accuracy of the detected body part. </p>"
+        },
+        "EquipmentDetections": {
+          "shape": "EquipmentDetections",
+          "documentation": "<p>An array of Personal Protective Equipment items detected around a body part.</p>"
+        }
+      },
+      "documentation": "<p>Information about a body part detected by <a>DetectProtectiveEquipment</a> that contains PPE. An array of <code>ProtectiveEquipmentBodyPart</code> objects is returned for each person detected by <code>DetectProtectiveEquipment</code>. </p>"
+    },
+    "ProtectiveEquipmentPerson": {
+      "type": "structure",
+      "members": {
+        "BodyParts": {
+          "shape": "BodyParts",
+          "documentation": "<p>An array of body parts detected on a person's body (including body parts without PPE). </p>"
+        },
+        "BoundingBox": {
+          "shape": "BoundingBox",
+          "documentation": "<p>A bounding box around the detected person.</p>"
+        },
+        "Confidence": {
+          "shape": "Percent",
+          "documentation": "<p>The confidence that Amazon Rekognition has that the bounding box contains a person.</p>"
+        },
+        "Id": {
+          "shape": "UInteger",
+          "documentation": "<p>The identifier for the detected person. The identifier is only unique for a single call to <code>DetectProtectiveEquipment</code>.</p>"
+        }
+      },
+      "documentation": "<p>A person detected by a call to <a>DetectProtectiveEquipment</a>. The API returns all persons detected in the input image in an array of <code>ProtectiveEquipmentPerson</code> objects.</p>"
+    },
+    "ProtectiveEquipmentPersonIds": {
+      "type": "list",
+      "member": {
+        "shape": "UInteger"
+      }
+    },
+    "ProtectiveEquipmentPersons": {
+      "type": "list",
+      "member": {
+        "shape": "ProtectiveEquipmentPerson"
+      }
+    },
+    "ProtectiveEquipmentSummarizationAttributes": {
+      "type": "structure",
+      "required": [
+        "MinConfidence",
+        "RequiredEquipmentTypes"
+      ],
+      "members": {
+        "MinConfidence": {
+          "shape": "Percent",
+          "documentation": "<p>The minimum confidence level for which you want summary information. The confidence level applies to person detection, body part detection, equipment detection, and body part coverage. Amazon Rekognition doesn't return summary information with a confidence than this specified value. There isn't a default value.</p> <p>Specify a <code>MinConfidence</code> value that is between 50-100% as <code>DetectProtectiveEquipment</code> returns predictions only where the detection confidence is between 50% - 100%. If you specify a value that is less than 50%, the results are the same specifying a value of 50%.</p> <p> </p>"
+        },
+        "RequiredEquipmentTypes": {
+          "shape": "ProtectiveEquipmentTypes",
+          "documentation": "<p>An array of personal protective equipment types for which you want summary information. If a person is detected wearing a required requipment type, the person's ID is added to the <code>PersonsWithRequiredEquipment</code> array field returned in <a>ProtectiveEquipmentSummary</a> by <code>DetectProtectiveEquipment</code>. </p>"
+        }
+      },
+      "documentation": "<p>Specifies summary attributes to return from a call to <a>DetectProtectiveEquipment</a>. You can specify which types of PPE to summarize. You can also specify a minimum confidence value for detections. Summary information is returned in the <code>Summary</code> (<a>ProtectiveEquipmentSummary</a>) field of the response from <code>DetectProtectiveEquipment</code>. The summary includes which persons in an image were detected wearing the requested types of person protective equipment (PPE), which persons were detected as not wearing PPE, and the persons in which a determination could not be made. For more information, see <a>ProtectiveEquipmentSummary</a>.</p>"
+    },
+    "ProtectiveEquipmentSummary": {
+      "type": "structure",
+      "members": {
+        "PersonsWithRequiredEquipment": {
+          "shape": "ProtectiveEquipmentPersonIds",
+          "documentation": "<p>An array of IDs for persons who are wearing detected personal protective equipment. </p>"
+        },
+        "PersonsWithoutRequiredEquipment": {
+          "shape": "ProtectiveEquipmentPersonIds",
+          "documentation": "<p>An array of IDs for persons who are not wearing all of the types of PPE specified in the RequiredEquipmentTypes field of the detected personal protective equipment. </p>"
+        },
+        "PersonsIndeterminate": {
+          "shape": "ProtectiveEquipmentPersonIds",
+          "documentation": "<p>An array of IDs for persons where it was not possible to determine if they are wearing personal protective equipment. </p>"
+        }
+      },
+      "documentation": "<p>Summary information for required items of personal protective equipment (PPE) detected on persons by a call to <a>DetectProtectiveEquipment</a>. You specify the required type of PPE in the <code>SummarizationAttributes</code> (<a>ProtectiveEquipmentSummarizationAttributes</a>) input parameter. The summary includes which persons were detected wearing the required personal protective equipment (<code>PersonsWithRequiredEquipment</code>), which persons were detected as not wearing the required PPE (<code>PersonsWithoutRequiredEquipment</code>), and the persons in which a determination could not be made (<code>PersonsIndeterminate</code>).</p> <p>To get a total for each category, use the size of the field array. For example, to find out how many people were detected as wearing the specified PPE, use the size of the <code>PersonsWithRequiredEquipment</code> array. If you want to find out more about a person, such as the location (<a>BoundingBox</a>) of the person on the image, use the person ID in each array element. Each person ID matches the ID field of a <a>ProtectiveEquipmentPerson</a> object returned in the <code>Persons</code> array by <code>DetectProtectiveEquipment</code>.</p>"
+    },
+    "ProtectiveEquipmentType": {
+      "type": "string",
+      "enum": [
+        "FACE_COVER",
+        "HAND_COVER",
+        "HEAD_COVER"
+      ]
+    },
+    "ProtectiveEquipmentTypes": {
+      "type": "list",
+      "member": {
+        "shape": "ProtectiveEquipmentType"
+      }
     },
     "QualityFilter": {
       "type": "string",

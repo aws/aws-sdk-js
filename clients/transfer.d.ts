@@ -124,11 +124,11 @@ declare class Transfer extends Service {
    */
   startServer(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Changes the state of a file transfer protocol-enabled server from ONLINE to OFFLINE. An OFFLINE server cannot accept and process file transfer jobs. Information tied to your server, such as server and user properties, are not affected by stopping your server. Stopping the server will not reduce or impact your file transfer protocol endpoint billing. The state of STOPPING indicates that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of STOP_FAILED can indicate an error condition. No response is returned from this call.
+   * Changes the state of a file transfer protocol-enabled server from ONLINE to OFFLINE. An OFFLINE server cannot accept and process file transfer jobs. Information tied to your server, such as server and user properties, are not affected by stopping your server.  Stopping the server will not reduce or impact your file transfer protocol endpoint billing; you must delete the server to stop being billed.  The state of STOPPING indicates that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of STOP_FAILED can indicate an error condition. No response is returned from this call.
    */
   stopServer(params: Transfer.Types.StopServerRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Changes the state of a file transfer protocol-enabled server from ONLINE to OFFLINE. An OFFLINE server cannot accept and process file transfer jobs. Information tied to your server, such as server and user properties, are not affected by stopping your server. Stopping the server will not reduce or impact your file transfer protocol endpoint billing. The state of STOPPING indicates that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of STOP_FAILED can indicate an error condition. No response is returned from this call.
+   * Changes the state of a file transfer protocol-enabled server from ONLINE to OFFLINE. An OFFLINE server cannot accept and process file transfer jobs. Information tied to your server, such as server and user properties, are not affected by stopping your server.  Stopping the server will not reduce or impact your file transfer protocol endpoint billing; you must delete the server to stop being billed.  The state of STOPPING indicates that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of STOP_FAILED can indicate an error condition. No response is returned from this call.
    */
   stopServer(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -183,11 +183,11 @@ declare namespace Transfer {
      */
     Certificate?: Certificate;
     /**
-     * The virtual private cloud (VPC) endpoint settings that are configured for your file transfer protocol-enabled server. When you host your endpoint within your VPC, you can make it accessible only to resources within your VPC, or you can attach Elastic IPs and make it accessible to clients over the internet. Your VPC's default security groups are automatically assigned to your endpoint.
+     * The virtual private cloud (VPC) endpoint settings that are configured for your server. When you host your endpoint within your VPC, you can make it accessible only to resources within your VPC, or you can attach Elastic IPs and make it accessible to clients over the internet. Your VPC's default security groups are automatically assigned to your endpoint.
      */
     EndpointDetails?: EndpointDetails;
     /**
-     * The type of VPC endpoint that you want your file transfer protocol-enabled server to connect to. You can choose to connect to the public internet or a VPC endpoint. With a VPC endpoint, you can restrict access to your server and resources only within your VPC.  It is recommended that you use VPC as the EndpointType. With this endpoint type, you have the option to directly associate up to three Elastic IPv4 addresses (BYO IP included) with your server's endpoint and use VPC security groups to restrict traffic by the client's public IP address. This is not possible with EndpointType set to VPC_ENDPOINT. 
+     * The type of VPC endpoint that you want your server to connect to. You can choose to connect to the public internet or a VPC endpoint. With a VPC endpoint, you can restrict access to your server and resources only within your VPC.  It is recommended that you use VPC as the EndpointType. With this endpoint type, you have the option to directly associate up to three Elastic IPv4 addresses (BYO IP included) with your server's endpoint and use VPC security groups to restrict traffic by the client's public IP address. This is not possible with EndpointType set to VPC_ENDPOINT. 
      */
     EndpointType?: EndpointType;
     /**
@@ -199,7 +199,7 @@ declare namespace Transfer {
      */
     IdentityProviderDetails?: IdentityProviderDetails;
     /**
-     * Specifies the mode of authentication for a file transfer protocol-enabled server. The default value is SERVICE_MANAGED, which allows you to store and access user credentials within the AWS Transfer Family service. Use the API_GATEWAY value to integrate with an identity provider of your choosing. The API_GATEWAY setting requires you to provide an API Gateway endpoint URL to call for authentication using the IdentityProviderDetails parameter.
+     * Specifies the mode of authentication for a server. The default value is SERVICE_MANAGED, which allows you to store and access user credentials within the AWS Transfer Family service. Use the API_GATEWAY value to integrate with an identity provider of your choosing. The API_GATEWAY setting requires you to provide an API Gateway endpoint URL to call for authentication using the IdentityProviderDetails parameter.
      */
     IdentityProviderType?: IdentityProviderType;
     /**
@@ -207,7 +207,7 @@ declare namespace Transfer {
      */
     LoggingRole?: Role;
     /**
-     * Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:    SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH    FTPS (File Transfer Protocol Secure): File transfer with TLS encryption    FTP (File Transfer Protocol): Unencrypted file transfer    If you select FTPS, you must choose a certificate stored in AWS Certificate Manager (ACM) which will be used to identify your file transfer protocol-enabled server when clients connect to it over FTPS. If Protocol includes either FTP or FTPS, then the EndpointType must be VPC and the IdentityProviderType must be API_GATEWAY. If Protocol includes FTP, then AddressAllocationIds cannot be associated. If Protocol is set only to SFTP, the EndpointType can be set to PUBLIC and the IdentityProviderType can be set to SERVICE_MANAGED. 
+     * Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. The available protocols are:    SFTP (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH    FTPS (File Transfer Protocol Secure): File transfer with TLS encryption    FTP (File Transfer Protocol): Unencrypted file transfer    If you select FTPS, you must choose a certificate stored in AWS Certificate Manager (ACM) which will be used to identify your server when clients connect to it over FTPS. If Protocol includes either FTP or FTPS, then the EndpointType must be VPC and the IdentityProviderType must be API_GATEWAY. If Protocol includes FTP, then AddressAllocationIds cannot be associated. If Protocol is set only to SFTP, the EndpointType can be set to PUBLIC and the IdentityProviderType can be set to SERVICE_MANAGED. 
      */
     Protocols?: Protocols;
     /**
@@ -215,23 +215,23 @@ declare namespace Transfer {
      */
     SecurityPolicyName?: SecurityPolicyName;
     /**
-     * Key-value pairs that can be used to group and search for file transfer protocol-enabled servers.
+     * Key-value pairs that can be used to group and search for servers.
      */
     Tags?: Tags;
   }
   export interface CreateServerResponse {
     /**
-     * The service-assigned ID of the file transfer protocol-enabled server that is created.
+     * The service-assigned ID of the server that is created.
      */
     ServerId: ServerId;
   }
   export interface CreateUserRequest {
     /**
-     * The landing directory (folder) for a user when they log in to the file transfer protocol-enabled server using the client. An example is  your-Amazon-S3-bucket-name&gt;/home/username .
+     * The landing directory (folder) for a user when they log in to the server using the client. An example is  your-Amazon-S3-bucket-name&gt;/home/username .
      */
     HomeDirectory?: HomeDirectory;
     /**
-     * The type of landing directory (folder) you want your users' home directory to be when they log into the file transfer protocol-enabled server. If you set it to PATH, the user will see the absolute Amazon S3 bucket paths as is in their file transfer protocol clients. If you set it LOGICAL, you will need to provide mappings in the HomeDirectoryMappings for how you want to make Amazon S3 paths visible to your users.
+     * The type of landing directory (folder) you want your users' home directory to be when they log into the server. If you set it to PATH, the user will see the absolute Amazon S3 bucket paths as is in their file transfer protocol clients. If you set it LOGICAL, you will need to provide mappings in the HomeDirectoryMappings for how you want to make Amazon S3 paths visible to your users.
      */
     HomeDirectoryType?: HomeDirectoryType;
     /**
@@ -243,15 +243,15 @@ declare namespace Transfer {
      */
     Policy?: Policy;
     /**
-     * The IAM role that controls your users' access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the file transfer protocol-enabled server to access your resources when servicing your users' transfer requests.
+     * The IAM role that controls your users' access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the server to access your resources when servicing your users' transfer requests.
      */
     Role: Role;
     /**
-     * A system-assigned unique identifier for a file transfer protocol-enabled server instance. This is the specific server that you added your user to.
+     * A system-assigned unique identifier for a server instance. This is the specific server that you added your user to.
      */
     ServerId: ServerId;
     /**
-     * The public portion of the Secure Shell (SSH) key used to authenticate the user to the file transfer protocol-enabled server.
+     * The public portion of the Secure Shell (SSH) key used to authenticate the user to the server.
      */
     SshPublicKeyBody?: SshPublicKeyBody;
     /**
@@ -259,24 +259,24 @@ declare namespace Transfer {
      */
     Tags?: Tags;
     /**
-     * A unique string that identifies a user and is associated with a file transfer protocol-enabled server as specified by the ServerId. This user name must be a minimum of 3 and a maximum of 100 characters long. The following are valid characters: a-z, A-Z, 0-9, underscore '_', hyphen '-', period '.', and at sign '@'. The user name can't start with a hyphen, period, and at sign.
+     * A unique string that identifies a user and is associated with a as specified by the ServerId. This user name must be a minimum of 3 and a maximum of 100 characters long. The following are valid characters: a-z, A-Z, 0-9, underscore '_', hyphen '-', period '.', and at sign '@'. The user name can't start with a hyphen, period, or at sign.
      */
     UserName: UserName;
   }
   export interface CreateUserResponse {
     /**
-     * The ID of the file transfer protocol-enabled server that the user is attached to.
+     * The ID of the server that the user is attached to.
      */
     ServerId: ServerId;
     /**
-     * A unique string that identifies a user account associated with a file transfer protocol-enabled server.
+     * A unique string that identifies a user account associated with a server.
      */
     UserName: UserName;
   }
   export type DateImported = Date;
   export interface DeleteServerRequest {
     /**
-     * A unique system-assigned identifier for a file transfer protocol-enabled server instance.
+     * A unique system-assigned identifier for a server instance.
      */
     ServerId: ServerId;
   }
@@ -296,11 +296,11 @@ declare namespace Transfer {
   }
   export interface DeleteUserRequest {
     /**
-     * A system-assigned unique identifier for a file transfer protocol-enabled server instance that has the user assigned to it.
+     * A system-assigned unique identifier for a server instance that has the user assigned to it.
      */
     ServerId: ServerId;
     /**
-     * A unique string that identifies a user that is being deleted from a file transfer protocol-enabled server.
+     * A unique string that identifies a user that is being deleted from a server.
      */
     UserName: UserName;
   }
@@ -318,29 +318,29 @@ declare namespace Transfer {
   }
   export interface DescribeServerRequest {
     /**
-     * A system-assigned unique identifier for a file transfer protocol-enabled server.
+     * A system-assigned unique identifier for a server.
      */
     ServerId: ServerId;
   }
   export interface DescribeServerResponse {
     /**
-     * An array containing the properties of a file transfer protocol-enabled server with the ServerID you specified.
+     * An array containing the properties of a server with the ServerID you specified.
      */
     Server: DescribedServer;
   }
   export interface DescribeUserRequest {
     /**
-     * A system-assigned unique identifier for a file transfer protocol-enabled server that has this user assigned.
+     * A system-assigned unique identifier for a server that has this user assigned.
      */
     ServerId: ServerId;
     /**
-     * The name of the user assigned to one or more file transfer protocol-enabled servers. User names are part of the sign-in credentials to use the AWS Transfer Family service and perform file transfer tasks.
+     * The name of the user assigned to one or more servers. User names are part of the sign-in credentials to use the AWS Transfer Family service and perform file transfer tasks.
      */
     UserName: UserName;
   }
   export interface DescribeUserResponse {
     /**
-     * A system-assigned unique identifier for a file transfer protocol-enabled server that has this user assigned.
+     * A system-assigned unique identifier for a server that has this user assigned.
      */
     ServerId: ServerId;
     /**
@@ -376,7 +376,7 @@ declare namespace Transfer {
   }
   export interface DescribedServer {
     /**
-     * Specifies the unique Amazon Resource Name (ARN) of the file transfer protocol-enabled server.
+     * Specifies the unique Amazon Resource Name (ARN) of the server.
      */
     Arn: Arn;
     /**
@@ -384,11 +384,11 @@ declare namespace Transfer {
      */
     Certificate?: Certificate;
     /**
-     * Specifies the virtual private cloud (VPC) endpoint settings that you configured for your file transfer protocol-enabled server.
+     * Specifies the virtual private cloud (VPC) endpoint settings that you configured for your server.
      */
     EndpointDetails?: EndpointDetails;
     /**
-     * Defines the type of endpoint that your file transfer protocol-enabled server is connected to. If your server is connected to a VPC endpoint, your server isn't accessible over the public internet.
+     * Defines the type of endpoint that your server is connected to. If your server is connected to a VPC endpoint, your server isn't accessible over the public internet.
      */
     EndpointType?: EndpointType;
     /**
@@ -396,15 +396,15 @@ declare namespace Transfer {
      */
     HostKeyFingerprint?: HostKeyFingerprint;
     /**
-     * Specifies information to call a customer-supplied authentication API. This field is not populated when the IdentityProviderType of a file transfer protocol-enabled server is SERVICE_MANAGED.
+     * Specifies information to call a customer-supplied authentication API. This field is not populated when the IdentityProviderType of a server is SERVICE_MANAGED.
      */
     IdentityProviderDetails?: IdentityProviderDetails;
     /**
-     * Specifies the mode of authentication method enabled for this service. A value of SERVICE_MANAGED means that you are using this file transfer protocol-enabled server to store and access user credentials within the service. A value of API_GATEWAY indicates that you have integrated an API Gateway endpoint that will be invoked for authenticating your user into the service.
+     * Specifies the mode of authentication method enabled for this service. A value of SERVICE_MANAGED means that you are using this server to store and access user credentials within the service. A value of API_GATEWAY indicates that you have integrated an API Gateway endpoint that will be invoked for authenticating your user into the service.
      */
     IdentityProviderType?: IdentityProviderType;
     /**
-     * Specifies the AWS Identity and Access Management (IAM) role that allows a file transfer protocol-enabled server to turn on Amazon CloudWatch logging for Amazon S3 events. When set, user activity can be viewed in your CloudWatch logs.
+     * Specifies the AWS Identity and Access Management (IAM) role that allows a server to turn on Amazon CloudWatch logging for Amazon S3 events. When set, user activity can be viewed in your CloudWatch logs.
      */
     LoggingRole?: Role;
     /**
@@ -416,19 +416,19 @@ declare namespace Transfer {
      */
     SecurityPolicyName?: SecurityPolicyName;
     /**
-     * Specifies the unique system-assigned identifier for a file transfer protocol-enabled server that you instantiate.
+     * Specifies the unique system-assigned identifier for a server that you instantiate.
      */
     ServerId?: ServerId;
     /**
-     * Specifies the condition of a file transfer protocol-enabled server for the server that was described. A value of ONLINE indicates that the server can accept jobs and transfer files. A State value of OFFLINE means that the server cannot perform file transfer operations. The states of STARTING and STOPPING indicate that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of START_FAILED or STOP_FAILED can indicate an error condition.
+     * Specifies the condition of a server for the server that was described. A value of ONLINE indicates that the server can accept jobs and transfer files. A State value of OFFLINE means that the server cannot perform file transfer operations. The states of STARTING and STOPPING indicate that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of START_FAILED or STOP_FAILED can indicate an error condition.
      */
     State?: State;
     /**
-     * Specifies the key-value pairs that you can use to search for and group file transfer protocol-enabled servers that were assigned to the server that was described.
+     * Specifies the key-value pairs that you can use to search for and group servers that were assigned to the server that was described.
      */
     Tags?: Tags;
     /**
-     * Specifies the number of users that are assigned to a file transfer protocol-enabled server you specified with the ServerId.
+     * Specifies the number of users that are assigned to a server you specified with the ServerId.
      */
     UserCount?: UserCount;
   }
@@ -454,7 +454,7 @@ declare namespace Transfer {
      */
     Policy?: Policy;
     /**
-     * Specifies the IAM role that controls your users' access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows a file transfer protocol-enabled server to access your resources when servicing your users' transfer requests.
+     * Specifies the IAM role that controls your users' access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows a server to access your resources when servicing your users' transfer requests.
      */
     Role?: Role;
     /**
@@ -466,27 +466,31 @@ declare namespace Transfer {
      */
     Tags?: Tags;
     /**
-     * Specifies the name of the user that was requested to be described. User names are used for authentication purposes. This is the string that will be used by your user when they log in to your file transfer protocol-enabled server.
+     * Specifies the name of the user that was requested to be described. User names are used for authentication purposes. This is the string that will be used by your user when they log in to your server.
      */
     UserName?: UserName;
   }
   export interface EndpointDetails {
     /**
-     * A list of address allocation IDs that are required to attach an Elastic IP address to your file transfer protocol-enabled server's endpoint. This is only valid in the UpdateServer API.  This property can only be use when EndpointType is set to VPC. 
+     * A list of address allocation IDs that are required to attach an Elastic IP address to your server's endpoint.  This property can only be set when EndpointType is set to VPC and it is only valid in the UpdateServer API. 
      */
     AddressAllocationIds?: AddressAllocationIds;
     /**
-     * A list of subnet IDs that are required to host your file transfer protocol-enabled server endpoint in your VPC.  This property can only be used when EndpointType is set to VPC. 
+     * A list of subnet IDs that are required to host your server endpoint in your VPC.  This property can only be set when EndpointType is set to VPC. 
      */
     SubnetIds?: SubnetIds;
     /**
-     * The ID of the VPC endpoint.  This property can only be used when EndpointType is set to VPC_ENDPOINT. 
+     * The ID of the VPC endpoint.  This property can only be set when EndpointType is set to VPC_ENDPOINT. 
      */
     VpcEndpointId?: VpcEndpointId;
     /**
-     * The VPC ID of the VPC in which a file transfer protocol-enabled server's endpoint will be hosted.  This property can only be used when EndpointType is set to VPC. 
+     * The VPC ID of the VPC in which a server's endpoint will be hosted.  This property can only be set when EndpointType is set to VPC. 
      */
     VpcId?: VpcId;
+    /**
+     * A list of security groups IDs that are available to attach to your server's endpoint.  This property can only be set when EndpointType is set to VPC. You can only edit the SecurityGroupIds property in the UpdateServer API and only if you are changing the EndpointType from PUBLIC or VPC_ENDPOINT to VPC. 
+     */
+    SecurityGroupIds?: SecurityGroupIds;
   }
   export type EndpointType = "PUBLIC"|"VPC"|"VPC_ENDPOINT"|string;
   export type Fips = boolean;
@@ -518,7 +522,7 @@ declare namespace Transfer {
   export type IdentityProviderType = "SERVICE_MANAGED"|"API_GATEWAY"|string;
   export interface ImportSshPublicKeyRequest {
     /**
-     * A system-assigned unique identifier for a file transfer protocol-enabled server.
+     * A system-assigned unique identifier for a server.
      */
     ServerId: ServerId;
     /**
@@ -526,13 +530,13 @@ declare namespace Transfer {
      */
     SshPublicKeyBody: SshPublicKeyBody;
     /**
-     * The name of the user account that is assigned to one or more file transfer protocol-enabled servers.
+     * The name of the user account that is assigned to one or more servers.
      */
     UserName: UserName;
   }
   export interface ImportSshPublicKeyResponse {
     /**
-     * A system-assigned unique identifier for a file transfer protocol-enabled server.
+     * A system-assigned unique identifier for a server.
      */
     ServerId: ServerId;
     /**
@@ -566,21 +570,21 @@ declare namespace Transfer {
   }
   export interface ListServersRequest {
     /**
-     * Specifies the number of file transfer protocol-enabled servers to return as a response to the ListServers query.
+     * Specifies the number of servers to return as a response to the ListServers query.
      */
     MaxResults?: MaxResults;
     /**
-     * When additional results are obtained from the ListServers command, a NextToken parameter is returned in the output. You can then pass the NextToken parameter in a subsequent command to continue listing additional file transfer protocol-enabled servers.
+     * When additional results are obtained from the ListServers command, a NextToken parameter is returned in the output. You can then pass the NextToken parameter in a subsequent command to continue listing additional servers.
      */
     NextToken?: NextToken;
   }
   export interface ListServersResponse {
     /**
-     * When you can get additional results from the ListServers operation, a NextToken parameter is returned in the output. In a following command, you can pass in the NextToken parameter to continue listing additional file transfer protocol-enabled servers.
+     * When you can get additional results from the ListServers operation, a NextToken parameter is returned in the output. In a following command, you can pass in the NextToken parameter to continue listing additional servers.
      */
     NextToken?: NextToken;
     /**
-     * An array of file transfer protocol-enabled servers that were listed.
+     * An array of servers that were listed.
      */
     Servers: ListedServers;
   }
@@ -622,7 +626,7 @@ declare namespace Transfer {
      */
     NextToken?: NextToken;
     /**
-     * A system-assigned unique identifier for a file transfer protocol-enabled server that has users assigned to it.
+     * A system-assigned unique identifier for a server that has users assigned to it.
      */
     ServerId: ServerId;
   }
@@ -632,7 +636,7 @@ declare namespace Transfer {
      */
     NextToken?: NextToken;
     /**
-     * A system-assigned unique identifier for a file transfer protocol-enabled server that the users are assigned to.
+     * A system-assigned unique identifier for a server that the users are assigned to.
      */
     ServerId: ServerId;
     /**
@@ -642,31 +646,31 @@ declare namespace Transfer {
   }
   export interface ListedServer {
     /**
-     * Specifies the unique Amazon Resource Name (ARN) for a file transfer protocol-enabled server to be listed.
+     * Specifies the unique Amazon Resource Name (ARN) for a server to be listed.
      */
     Arn: Arn;
     /**
-     * Specifies the authentication method used to validate a user for a file transfer protocol-enabled server that was specified. This can include Secure Shell (SSH), user name and password combinations, or your own custom authentication method. Valid values include SERVICE_MANAGED or API_GATEWAY.
+     * Specifies the authentication method used to validate a user for a server that was specified. This can include Secure Shell (SSH), user name and password combinations, or your own custom authentication method. Valid values include SERVICE_MANAGED or API_GATEWAY.
      */
     IdentityProviderType?: IdentityProviderType;
     /**
-     * Specifies the type of VPC endpoint that your file transfer protocol-enabled server is connected to. If your server is connected to a VPC endpoint, your server isn't accessible over the public internet.
+     * Specifies the type of VPC endpoint that your server is connected to. If your server is connected to a VPC endpoint, your server isn't accessible over the public internet.
      */
     EndpointType?: EndpointType;
     /**
-     * Specifies the AWS Identity and Access Management (IAM) role that allows a file transfer protocol-enabled server to turn on Amazon CloudWatch logging.
+     * Specifies the AWS Identity and Access Management (IAM) role that allows a server to turn on Amazon CloudWatch logging.
      */
     LoggingRole?: Role;
     /**
-     * Specifies the unique system assigned identifier for a file transfer protocol-enabled servers that were listed.
+     * Specifies the unique system assigned identifier for the servers that were listed.
      */
     ServerId?: ServerId;
     /**
-     * Specifies the condition of a file transfer protocol-enabled server for the server that was described. A value of ONLINE indicates that the server can accept jobs and transfer files. A State value of OFFLINE means that the server cannot perform file transfer operations. The states of STARTING and STOPPING indicate that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of START_FAILED or STOP_FAILED can indicate an error condition.
+     * Specifies the condition of a server for the server that was described. A value of ONLINE indicates that the server can accept jobs and transfer files. A State value of OFFLINE means that the server cannot perform file transfer operations. The states of STARTING and STOPPING indicate that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of START_FAILED or STOP_FAILED can indicate an error condition.
      */
     State?: State;
     /**
-     * Specifies the number of users that are assigned to a file transfer protocol-enabled server you specified with the ServerId.
+     * Specifies the number of users that are assigned to a server you specified with the ServerId.
      */
     UserCount?: UserCount;
   }
@@ -709,6 +713,8 @@ declare namespace Transfer {
   export type Protocols = Protocol[];
   export type Response = string;
   export type Role = string;
+  export type SecurityGroupId = string;
+  export type SecurityGroupIds = SecurityGroupId[];
   export type SecurityPolicyName = string;
   export type SecurityPolicyNames = SecurityPolicyName[];
   export type SecurityPolicyOption = string;
@@ -735,7 +741,7 @@ declare namespace Transfer {
   export type SshPublicKeys = SshPublicKey[];
   export interface StartServerRequest {
     /**
-     * A system-assigned unique identifier for a file transfer protocol-enabled server that you start.
+     * A system-assigned unique identifier for a server that you start.
      */
     ServerId: ServerId;
   }
@@ -743,7 +749,7 @@ declare namespace Transfer {
   export type StatusCode = number;
   export interface StopServerRequest {
     /**
-     * A system-assigned unique identifier for a file transfer protocol-enabled server that you stopped.
+     * A system-assigned unique identifier for a server that you stopped.
      */
     ServerId: ServerId;
   }
@@ -775,7 +781,7 @@ declare namespace Transfer {
   export type Tags = Tag[];
   export interface TestIdentityProviderRequest {
     /**
-     * A system-assigned identifier for a specific file transfer protocol-enabled server. That server's user authentication method is tested with a user name and password.
+     * A system-assigned identifier for a specific server. That server's user authentication method is tested with a user name and password.
      */
     ServerId: ServerId;
     /**
@@ -829,15 +835,15 @@ declare namespace Transfer {
      */
     Certificate?: Certificate;
     /**
-     * The virtual private cloud (VPC) endpoint settings that are configured for your file transfer protocol-enabled server. With a VPC endpoint, you can restrict access to your server to resources only within your VPC. To control incoming internet traffic, you will need to associate one or more Elastic IP addresses with your server's endpoint.
+     * The virtual private cloud (VPC) endpoint settings that are configured for your server. With a VPC endpoint, you can restrict access to your server to resources only within your VPC. To control incoming internet traffic, you will need to associate one or more Elastic IP addresses with your server's endpoint.
      */
     EndpointDetails?: EndpointDetails;
     /**
-     * The type of endpoint that you want your file transfer protocol-enabled server to connect to. You can choose to connect to the public internet or a VPC endpoint. With a VPC endpoint, you can restrict access to your server and resources only within your VPC.  It is recommended that you use VPC as the EndpointType. With this endpoint type, you have the option to directly associate up to three Elastic IPv4 addresses (BYO IP included) with your server's endpoint and use VPC security groups to restrict traffic by the client's public IP address. This is not possible with EndpointType set to VPC_ENDPOINT. 
+     * The type of endpoint that you want your server to connect to. You can choose to connect to the public internet or a VPC endpoint. With a VPC endpoint, you can restrict access to your server and resources only within your VPC.  It is recommended that you use VPC as the EndpointType. With this endpoint type, you have the option to directly associate up to three Elastic IPv4 addresses (BYO IP included) with your server's endpoint and use VPC security groups to restrict traffic by the client's public IP address. This is not possible with EndpointType set to VPC_ENDPOINT. 
      */
     EndpointType?: EndpointType;
     /**
-     * The RSA private key as generated by ssh-keygen -N "" -m PEM -f my-new-server-key.  If you aren't planning to migrate existing users from an existing file transfer protocol-enabled server to a new server, don't update the host key. Accidentally changing a server's host key can be disruptive.  For more information, see Change the host key for your SFTP-enabled server in the AWS Transfer Family User Guide.
+     * The RSA private key as generated by ssh-keygen -N "" -m PEM -f my-new-server-key.  If you aren't planning to migrate existing users from an existing server to a new server, don't update the host key. Accidentally changing a server's host key can be disruptive.  For more information, see Change the host key for your SFTP-enabled server in the AWS Transfer Family User Guide.
      */
     HostKey?: HostKey;
     /**
@@ -857,23 +863,23 @@ declare namespace Transfer {
      */
     SecurityPolicyName?: SecurityPolicyName;
     /**
-     * A system-assigned unique identifier for a file transfer protocol-enabled server instance that the user account is assigned to.
+     * A system-assigned unique identifier for a server instance that the user account is assigned to.
      */
     ServerId: ServerId;
   }
   export interface UpdateServerResponse {
     /**
-     * A system-assigned unique identifier for a file transfer protocol-enabled server that the user account is assigned to.
+     * A system-assigned unique identifier for a server that the user account is assigned to.
      */
     ServerId: ServerId;
   }
   export interface UpdateUserRequest {
     /**
-     * Specifies the landing directory (folder) for a user when they log in to the file transfer protocol-enabled server using their file transfer protocol client. An example is your-Amazon-S3-bucket-name&gt;/home/username.
+     * Specifies the landing directory (folder) for a user when they log in to the server using their file transfer protocol client. An example is your-Amazon-S3-bucket-name&gt;/home/username.
      */
     HomeDirectory?: HomeDirectory;
     /**
-     * The type of landing directory (folder) you want your users' home directory to be when they log into the file transfer protocol-enabled server. If you set it to PATH, the user will see the absolute Amazon S3 bucket paths as is in their file transfer protocol clients. If you set it LOGICAL, you will need to provide mappings in the HomeDirectoryMappings for how you want to make Amazon S3 paths visible to your users.
+     * The type of landing directory (folder) you want your users' home directory to be when they log into the server. If you set it to PATH, the user will see the absolute Amazon S3 bucket paths as is in their file transfer protocol clients. If you set it LOGICAL, you will need to provide mappings in the HomeDirectoryMappings for how you want to make Amazon S3 paths visible to your users.
      */
     HomeDirectoryType?: HomeDirectoryType;
     /**
@@ -885,25 +891,25 @@ declare namespace Transfer {
      */
     Policy?: Policy;
     /**
-     * The IAM role that controls your users' access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the file transfer protocol-enabled server to access your resources when servicing your users' transfer requests.
+     * The IAM role that controls your users' access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the server to access your resources when servicing your users' transfer requests.
      */
     Role?: Role;
     /**
-     * A system-assigned unique identifier for a file transfer protocol-enabled server instance that the user account is assigned to.
+     * A system-assigned unique identifier for a server instance that the user account is assigned to.
      */
     ServerId: ServerId;
     /**
-     * A unique string that identifies a user and is associated with a file transfer protocol-enabled server as specified by the ServerId. This user name must be a minimum of 3 and a maximum of 100 characters long. The following are valid characters: a-z, A-Z, 0-9, underscore '_', hyphen '-', period '.', and at sign '@'. The user name can't start with a hyphen, period, and at sign.
+     * A unique string that identifies a user and is associated with a server as specified by the ServerId. This user name must be a minimum of 3 and a maximum of 100 characters long. The following are valid characters: a-z, A-Z, 0-9, underscore '_', hyphen '-', period '.', and at sign '@'. The user name can't start with a hyphen, period, or at sign.
      */
     UserName: UserName;
   }
   export interface UpdateUserResponse {
     /**
-     * A system-assigned unique identifier for a file transfer protocol-enabled server instance that the user account is assigned to.
+     * A system-assigned unique identifier for a server instance that the user account is assigned to.
      */
     ServerId: ServerId;
     /**
-     * The unique identifier for a user that is assigned to a file transfer protocol-enabled server instance that was specified in the request.
+     * The unique identifier for a user that is assigned to a server instance that was specified in the request.
      */
     UserName: UserName;
   }

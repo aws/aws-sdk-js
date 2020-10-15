@@ -52,6 +52,14 @@ declare class WorkMail extends Service {
    */
   createGroup(callback?: (err: AWSError, data: WorkMail.Types.CreateGroupResponse) => void): Request<WorkMail.Types.CreateGroupResponse, AWSError>;
   /**
+   * Creates a new Amazon WorkMail organization. Optionally, you can choose to associate an existing AWS Directory Service directory with your organization. If an AWS Directory Service directory ID is specified, the organization alias must match the directory alias. If you choose not to associate an existing directory with your organization, then we create a new Amazon WorkMail directory for you. For more information, see Adding an organization in the Amazon WorkMail Administrator Guide. You can associate multiple email domains with an organization, then set your default email domain from the Amazon WorkMail console. You can also associate a domain that is managed in an Amazon Route 53 public hosted zone. For more information, see Adding a domain and Choosing the default domain in the Amazon WorkMail Administrator Guide. Optionally, you can use a customer managed master key from AWS Key Management Service (AWS KMS) to encrypt email for your organization. If you don't associate an AWS KMS key, Amazon WorkMail creates a default AWS managed master key for you.
+   */
+  createOrganization(params: WorkMail.Types.CreateOrganizationRequest, callback?: (err: AWSError, data: WorkMail.Types.CreateOrganizationResponse) => void): Request<WorkMail.Types.CreateOrganizationResponse, AWSError>;
+  /**
+   * Creates a new Amazon WorkMail organization. Optionally, you can choose to associate an existing AWS Directory Service directory with your organization. If an AWS Directory Service directory ID is specified, the organization alias must match the directory alias. If you choose not to associate an existing directory with your organization, then we create a new Amazon WorkMail directory for you. For more information, see Adding an organization in the Amazon WorkMail Administrator Guide. You can associate multiple email domains with an organization, then set your default email domain from the Amazon WorkMail console. You can also associate a domain that is managed in an Amazon Route 53 public hosted zone. For more information, see Adding a domain and Choosing the default domain in the Amazon WorkMail Administrator Guide. Optionally, you can use a customer managed master key from AWS Key Management Service (AWS KMS) to encrypt email for your organization. If you don't associate an AWS KMS key, Amazon WorkMail creates a default AWS managed master key for you.
+   */
+  createOrganization(callback?: (err: AWSError, data: WorkMail.Types.CreateOrganizationResponse) => void): Request<WorkMail.Types.CreateOrganizationResponse, AWSError>;
+  /**
    * Creates a new Amazon WorkMail resource. 
    */
   createResource(params: WorkMail.Types.CreateResourceRequest, callback?: (err: AWSError, data: WorkMail.Types.CreateResourceResponse) => void): Request<WorkMail.Types.CreateResourceResponse, AWSError>;
@@ -99,6 +107,14 @@ declare class WorkMail extends Service {
    * Deletes permissions granted to a member (user or group).
    */
   deleteMailboxPermissions(callback?: (err: AWSError, data: WorkMail.Types.DeleteMailboxPermissionsResponse) => void): Request<WorkMail.Types.DeleteMailboxPermissionsResponse, AWSError>;
+  /**
+   * Deletes an Amazon WorkMail organization and all underlying AWS resources managed by Amazon WorkMail as part of the organization. You can choose whether to delete the associated directory. For more information, see Removing an organization in the Amazon WorkMail Administrator Guide.
+   */
+  deleteOrganization(params: WorkMail.Types.DeleteOrganizationRequest, callback?: (err: AWSError, data: WorkMail.Types.DeleteOrganizationResponse) => void): Request<WorkMail.Types.DeleteOrganizationResponse, AWSError>;
+  /**
+   * Deletes an Amazon WorkMail organization and all underlying AWS resources managed by Amazon WorkMail as part of the organization. You can choose whether to delete the associated directory. For more information, see Removing an organization in the Amazon WorkMail Administrator Guide.
+   */
+  deleteOrganization(callback?: (err: AWSError, data: WorkMail.Types.DeleteOrganizationResponse) => void): Request<WorkMail.Types.DeleteOrganizationResponse, AWSError>;
   /**
    * Deletes the specified resource. 
    */
@@ -539,6 +555,38 @@ declare namespace WorkMail {
      */
     GroupId?: WorkMailIdentifier;
   }
+  export interface CreateOrganizationRequest {
+    /**
+     * The AWS Directory Service directory ID.
+     */
+    DirectoryId?: DirectoryId;
+    /**
+     * The organization alias.
+     */
+    Alias: OrganizationName;
+    /**
+     * The idempotency token associated with the request.
+     */
+    ClientToken?: IdempotencyClientToken;
+    /**
+     * The email domains to associate with the organization.
+     */
+    Domains?: Domains;
+    /**
+     * The Amazon Resource Name (ARN) of a customer managed master key from AWS KMS.
+     */
+    KmsKeyArn?: KmsKeyArn;
+    /**
+     * When true, allows organization interoperability between Amazon WorkMail and Microsoft Exchange. Can only be set to true if an AD Connector directory ID is included in the request.
+     */
+    EnableInteroperability?: Boolean;
+  }
+  export interface CreateOrganizationResponse {
+    /**
+     * The organization ID.
+     */
+    OrganizationId?: OrganizationId;
+  }
   export interface CreateResourceRequest {
     /**
      * The identifier associated with the organization for which the resource is created.
@@ -639,7 +687,7 @@ declare namespace WorkMail {
      */
     OrganizationId: OrganizationId;
     /**
-     * The identifier of the member (user or group)that owns the mailbox.
+     * The identifier of the member (user or group) that owns the mailbox.
      */
     EntityId: WorkMailIdentifier;
     /**
@@ -648,6 +696,30 @@ declare namespace WorkMail {
     GranteeId: WorkMailIdentifier;
   }
   export interface DeleteMailboxPermissionsResponse {
+  }
+  export interface DeleteOrganizationRequest {
+    /**
+     * The idempotency token associated with the request.
+     */
+    ClientToken?: IdempotencyClientToken;
+    /**
+     * The organization ID.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * If true, deletes the AWS Directory Service directory associated with the organization.
+     */
+    DeleteDirectory: Boolean;
+  }
+  export interface DeleteOrganizationResponse {
+    /**
+     * The organization ID.
+     */
+    OrganizationId?: OrganizationId;
+    /**
+     * The state of the organization.
+     */
+    State?: String;
   }
   export interface DeleteResourceRequest {
     /**
@@ -926,6 +998,7 @@ declare namespace WorkMail {
     DisabledDate?: Timestamp;
   }
   export type Description = string;
+  export type DirectoryId = string;
   export interface DisassociateDelegateFromResourceRequest {
     /**
      * The identifier for the organization under which the resource exists.
@@ -958,6 +1031,18 @@ declare namespace WorkMail {
   }
   export interface DisassociateMemberFromGroupResponse {
   }
+  export interface Domain {
+    /**
+     * The fully qualified domain name.
+     */
+    DomainName?: DomainName;
+    /**
+     * The hosted zone ID for a domain hosted in Route 53. Required when configuring a domain hosted in Route 53.
+     */
+    HostedZoneId?: HostedZoneId;
+  }
+  export type DomainName = string;
+  export type Domains = Domain[];
   export type EmailAddress = string;
   export type EntityState = "ENABLED"|"DISABLED"|"DELETED"|string;
   export interface FolderConfiguration {
@@ -1076,6 +1161,7 @@ declare namespace WorkMail {
   }
   export type GroupName = string;
   export type Groups = Group[];
+  export type HostedZoneId = string;
   export type IdempotencyClientToken = string;
   export type IpAddress = string;
   export type IpRange = string;
@@ -1419,6 +1505,10 @@ declare namespace WorkMail {
      * The alias associated with the organization.
      */
     Alias?: OrganizationName;
+    /**
+     * The default email domain associated with the organization.
+     */
+    DefaultMailDomain?: DomainName;
     /**
      * The error message associated with the organization. It is only present if unexpected behavior has occurred with regards to the organization. It provides insight or solutions regarding unexpected behavior.
      */

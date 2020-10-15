@@ -958,6 +958,7 @@
       "enum": [
         "AVAILABLE",
         "AWS_CANCELLED",
+        "AWS_FAILED",
         "CANCELLED",
         "CANCELLING",
         "COMPLETED",
@@ -1062,6 +1063,10 @@
       "members": {
         "destination": {
           "shape": "Destination"
+        },
+        "errorMessage": {
+          "shape": "String",
+          "documentation": "<p>Error message for a dataflow.</p>"
         },
         "source": {
           "shape": "Source"

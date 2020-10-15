@@ -1071,7 +1071,7 @@ declare namespace CostExplorer {
      */
     Metrics?: MetricNames;
     /**
-     * You can group Amazon Web Services costs using up to two different groups: either dimensions, tag keys, or both.
+     * You can group Amazon Web Services costs using up to two different groups: DIMENSION, TAG, COST_CATEGORY.
      */
     GroupBy?: GroupDefinitions;
     /**

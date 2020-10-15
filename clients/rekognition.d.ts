@@ -157,6 +157,14 @@ declare class Rekognition extends Service {
    */
   detectModerationLabels(callback?: (err: AWSError, data: Rekognition.Types.DetectModerationLabelsResponse) => void): Request<Rekognition.Types.DetectModerationLabelsResponse, AWSError>;
   /**
+   * Detects Personal Protective Equipment (PPE) worn by people detected in an image. Amazon Rekognition can detect the following types of PPE.   Face cover   Hand cover   Head cover   You pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. The image must be either a PNG or JPG formatted file.   DetectProtectiveEquipment detects PPE worn by up to 15 persons detected in an image. For each person detected in the image the API returns an array of body parts (face, head, left-hand, right-hand). For each body part, an array of detected items of PPE is returned, including an indicator of whether or not the PPE covers the body part. The API returns the confidence it has in each detection (person, PPE, body part and body part coverage). It also returns a bounding box (BoundingBox) for each detected person and each detected item of PPE.  You can optionally request a summary of detected PPE items with the SummarizationAttributes input parameter. The summary provides the following information.    The persons detected as wearing all of the types of PPE that you specify.   The persons detected as not wearing all of the types PPE that you specify.   The persons detected where PPE adornment could not be determined.    This is a stateless API operation. That is, the operation does not persist any data. This operation requires permissions to perform the rekognition:DetectProtectiveEquipment action. 
+   */
+  detectProtectiveEquipment(params: Rekognition.Types.DetectProtectiveEquipmentRequest, callback?: (err: AWSError, data: Rekognition.Types.DetectProtectiveEquipmentResponse) => void): Request<Rekognition.Types.DetectProtectiveEquipmentResponse, AWSError>;
+  /**
+   * Detects Personal Protective Equipment (PPE) worn by people detected in an image. Amazon Rekognition can detect the following types of PPE.   Face cover   Hand cover   Head cover   You pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. The image must be either a PNG or JPG formatted file.   DetectProtectiveEquipment detects PPE worn by up to 15 persons detected in an image. For each person detected in the image the API returns an array of body parts (face, head, left-hand, right-hand). For each body part, an array of detected items of PPE is returned, including an indicator of whether or not the PPE covers the body part. The API returns the confidence it has in each detection (person, PPE, body part and body part coverage). It also returns a bounding box (BoundingBox) for each detected person and each detected item of PPE.  You can optionally request a summary of detected PPE items with the SummarizationAttributes input parameter. The summary provides the following information.    The persons detected as wearing all of the types of PPE that you specify.   The persons detected as not wearing all of the types PPE that you specify.   The persons detected where PPE adornment could not be determined.    This is a stateless API operation. That is, the operation does not persist any data. This operation requires permissions to perform the rekognition:DetectProtectiveEquipment action. 
+   */
+  detectProtectiveEquipment(callback?: (err: AWSError, data: Rekognition.Types.DetectProtectiveEquipmentResponse) => void): Request<Rekognition.Types.DetectProtectiveEquipmentResponse, AWSError>;
+  /**
    * Detects text in the input image and converts it into machine-readable text. Pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, you must pass it as a reference to an image in an Amazon S3 bucket. For the AWS CLI, passing image bytes is not supported. The image must be either a .png or .jpeg formatted file.  The DetectText operation returns text in an array of TextDetection elements, TextDetections. Each TextDetection element provides information about a single word or line of text that was detected in the image.  A word is one or more ISO basic latin script characters that are not separated by spaces. DetectText can detect up to 50 words in an image. A line is a string of equally spaced words. A line isn't necessarily a complete sentence. For example, a driver's license number is detected as a line. A line ends when there is no aligned text after it. Also, a line ends when there is a large gap between words, relative to the length of the words. This means, depending on the gap between words, Amazon Rekognition may detect multiple lines in text aligned in the same direction. Periods don't represent the end of a line. If a sentence spans multiple lines, the DetectText operation returns multiple lines. To determine whether a TextDetection element is a line of text or a word, use the TextDetection object Type field.  To be detected, text must be within +/- 90 degrees orientation of the horizontal axis. For more information, see DetectText in the Amazon Rekognition Developer Guide.
    */
   detectText(params: Rekognition.Types.DetectTextRequest, callback?: (err: AWSError, data: Rekognition.Types.DetectTextResponse) => void): Request<Rekognition.Types.DetectTextResponse, AWSError>;
@@ -451,6 +459,8 @@ declare namespace Rekognition {
      */
     Confidence?: Percent;
   }
+  export type BodyPart = "FACE"|"HEAD"|"LEFT_HAND"|"RIGHT_HAND"|string;
+  export type BodyParts = ProtectiveEquipmentBodyPart[];
   export type Boolean = boolean;
   export interface BoundingBox {
     /**
@@ -635,6 +645,16 @@ declare namespace Rekognition {
   }
   export type ContentModerationDetections = ContentModerationDetection[];
   export type ContentModerationSortBy = "NAME"|"TIMESTAMP"|string;
+  export interface CoversBodyPart {
+    /**
+     * The confidence that Amazon Rekognition has in the value of Value.
+     */
+    Confidence?: Percent;
+    /**
+     * True if the PPE covers the corresponding body part, otherwise false.
+     */
+    Value?: Boolean;
+  }
   export interface CreateCollectionRequest {
     /**
      * ID for the collection that you are creating.
@@ -1017,6 +1037,30 @@ declare namespace Rekognition {
      */
     HumanLoopActivationOutput?: HumanLoopActivationOutput;
   }
+  export interface DetectProtectiveEquipmentRequest {
+    /**
+     * The image in which you want to detect PPE on detected persons. The image can be passed as image bytes or you can reference an image stored in an Amazon S3 bucket. 
+     */
+    Image: Image;
+    /**
+     * An array of PPE types that you want to summarize.
+     */
+    SummarizationAttributes?: ProtectiveEquipmentSummarizationAttributes;
+  }
+  export interface DetectProtectiveEquipmentResponse {
+    /**
+     * The version number of the PPE detection model used to detect PPE in the image.
+     */
+    ProtectiveEquipmentModelVersion?: String;
+    /**
+     * An array of persons detected in the image (including persons not wearing PPE).
+     */
+    Persons?: ProtectiveEquipmentPersons;
+    /**
+     * Summary information for the types of PPE specified in the SummarizationAttributes input parameter.
+     */
+    Summary?: ProtectiveEquipmentSummary;
+  }
   export interface DetectTextFilters {
     WordFilter?: DetectionFilter;
     /**
@@ -1070,6 +1114,25 @@ declare namespace Rekognition {
   }
   export type EmotionName = "HAPPY"|"SAD"|"ANGRY"|"CONFUSED"|"DISGUSTED"|"SURPRISED"|"CALM"|"UNKNOWN"|"FEAR"|string;
   export type Emotions = Emotion[];
+  export interface EquipmentDetection {
+    /**
+     * A bounding box surrounding the item of detected PPE.
+     */
+    BoundingBox?: BoundingBox;
+    /**
+     * The confidence that Amazon Rekognition has that the bounding box (BoundingBox) contains an item of PPE.
+     */
+    Confidence?: Percent;
+    /**
+     * The type of detected PPE.
+     */
+    Type?: ProtectiveEquipmentType;
+    /**
+     * Information about the body part covered by the detected PPE.
+     */
+    CoversBodyPart?: CoversBodyPart;
+  }
+  export type EquipmentDetections = EquipmentDetection[];
   export interface EvaluationResult {
     /**
      * The F1 score for the evaluation of all labels. The F1 score metric evaluates the overall precision and recall performance of the model as a single value. A higher value indicates better precision and recall performance. A lower score indicates that precision, recall, or both are performing poorly. 
@@ -2064,6 +2127,66 @@ declare namespace Rekognition {
   export type ProjectVersionStatus = "TRAINING_IN_PROGRESS"|"TRAINING_COMPLETED"|"TRAINING_FAILED"|"STARTING"|"RUNNING"|"FAILED"|"STOPPING"|"STOPPED"|"DELETING"|string;
   export type ProjectVersionsPageSize = number;
   export type ProjectsPageSize = number;
+  export interface ProtectiveEquipmentBodyPart {
+    /**
+     * The detected body part.
+     */
+    Name?: BodyPart;
+    /**
+     * The confidence that Amazon Rekognition has in the detection accuracy of the detected body part. 
+     */
+    Confidence?: Percent;
+    /**
+     * An array of Personal Protective Equipment items detected around a body part.
+     */
+    EquipmentDetections?: EquipmentDetections;
+  }
+  export interface ProtectiveEquipmentPerson {
+    /**
+     * An array of body parts detected on a person's body (including body parts without PPE). 
+     */
+    BodyParts?: BodyParts;
+    /**
+     * A bounding box around the detected person.
+     */
+    BoundingBox?: BoundingBox;
+    /**
+     * The confidence that Amazon Rekognition has that the bounding box contains a person.
+     */
+    Confidence?: Percent;
+    /**
+     * The identifier for the detected person. The identifier is only unique for a single call to DetectProtectiveEquipment.
+     */
+    Id?: UInteger;
+  }
+  export type ProtectiveEquipmentPersonIds = UInteger[];
+  export type ProtectiveEquipmentPersons = ProtectiveEquipmentPerson[];
+  export interface ProtectiveEquipmentSummarizationAttributes {
+    /**
+     * The minimum confidence level for which you want summary information. The confidence level applies to person detection, body part detection, equipment detection, and body part coverage. Amazon Rekognition doesn't return summary information with a confidence than this specified value. There isn't a default value. Specify a MinConfidence value that is between 50-100% as DetectProtectiveEquipment returns predictions only where the detection confidence is between 50% - 100%. If you specify a value that is less than 50%, the results are the same specifying a value of 50%.  
+     */
+    MinConfidence: Percent;
+    /**
+     * An array of personal protective equipment types for which you want summary information. If a person is detected wearing a required requipment type, the person's ID is added to the PersonsWithRequiredEquipment array field returned in ProtectiveEquipmentSummary by DetectProtectiveEquipment. 
+     */
+    RequiredEquipmentTypes: ProtectiveEquipmentTypes;
+  }
+  export interface ProtectiveEquipmentSummary {
+    /**
+     * An array of IDs for persons who are wearing detected personal protective equipment. 
+     */
+    PersonsWithRequiredEquipment?: ProtectiveEquipmentPersonIds;
+    /**
+     * An array of IDs for persons who are not wearing all of the types of PPE specified in the RequiredEquipmentTypes field of the detected personal protective equipment. 
+     */
+    PersonsWithoutRequiredEquipment?: ProtectiveEquipmentPersonIds;
+    /**
+     * An array of IDs for persons where it was not possible to determine if they are wearing personal protective equipment. 
+     */
+    PersonsIndeterminate?: ProtectiveEquipmentPersonIds;
+  }
+  export type ProtectiveEquipmentType = "FACE_COVER"|"HAND_COVER"|"HEAD_COVER"|string;
+  export type ProtectiveEquipmentTypes = ProtectiveEquipmentType[];
   export type QualityFilter = "NONE"|"AUTO"|"LOW"|"MEDIUM"|"HIGH"|string;
   export type Reason = "EXCEEDS_MAX_FACES"|"EXTREME_POSE"|"LOW_BRIGHTNESS"|"LOW_SHARPNESS"|"LOW_CONFIDENCE"|"SMALL_BOUNDING_BOX"|"LOW_FACE_QUALITY"|string;
   export type Reasons = Reason[];

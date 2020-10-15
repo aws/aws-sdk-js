@@ -3583,7 +3583,7 @@ declare namespace Iot {
      */
     alertTargets?: AlertTargets;
     /**
-     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.  Note: This API field is deprecated. Please use CreateSecurityProfileRequest$additionalMetricsToRetainV2 instead.
+     *  Please use CreateSecurityProfileRequest$additionalMetricsToRetainV2 instead.  A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.
      */
     additionalMetricsToRetain?: AdditionalMetricsToRetainList;
     /**
@@ -4345,6 +4345,10 @@ declare namespace Iot {
      * The type of the domain.
      */
     domainType?: DomainType;
+    /**
+     * The date and time the domain configuration's status was last changed.
+     */
+    lastStatusChangeDate?: DateType;
   }
   export interface DescribeEndpointRequest {
     /**
@@ -4618,7 +4622,7 @@ declare namespace Iot {
      */
     alertTargets?: AlertTargets;
     /**
-     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.  Note: This API field is deprecated. Please use DescribeSecurityProfileResponse$additionalMetricsToRetainV2 instead.
+     *  Please use DescribeSecurityProfileResponse$additionalMetricsToRetainV2 instead.  A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.
      */
     additionalMetricsToRetain?: AdditionalMetricsToRetainList;
     /**
@@ -5060,11 +5064,11 @@ declare namespace Iot {
      */
     baseRatePerMinute: RolloutRatePerMinute;
     /**
-     * The exponential factor to increase the rate of rollout for a job.
+     * The exponential factor to increase the rate of rollout for a job. AWS IoT supports up to one digit after the decimal (for example, 1.5, but not 1.55).
      */
     incrementFactor: IncrementFactor;
     /**
-     * The criteria to initiate the increase in rate of rollout for a job. AWS IoT supports up to one digit after the decimal (for example, 1.5, but not 1.55).
+     * The criteria to initiate the increase in rate of rollout for a job.
      */
     rateIncreaseCriteria: RateIncreaseCriteria;
   }
@@ -9487,7 +9491,7 @@ declare namespace Iot {
      */
     alertTargets?: AlertTargets;
     /**
-     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.  Note: This API field is deprecated. Please use UpdateSecurityProfileRequest$additionalMetricsToRetainV2 instead.
+     *  Please use UpdateSecurityProfileRequest$additionalMetricsToRetainV2 instead.  A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.
      */
     additionalMetricsToRetain?: AdditionalMetricsToRetainList;
     /**
@@ -9533,7 +9537,7 @@ declare namespace Iot {
      */
     alertTargets?: AlertTargets;
     /**
-     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the security profile's behaviors, but it is also retained for any metric specified here.  Note: This API field is deprecated. Please use UpdateSecurityProfileResponse$additionalMetricsToRetainV2 instead.
+     *  Please use UpdateSecurityProfileResponse$additionalMetricsToRetainV2 instead.  A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the security profile's behaviors, but it is also retained for any metric specified here.
      */
     additionalMetricsToRetain?: AdditionalMetricsToRetainList;
     /**

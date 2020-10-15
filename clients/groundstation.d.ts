@@ -391,7 +391,7 @@ declare namespace GroundStation {
     contactId?: String;
   }
   export type ContactList = ContactData[];
-  export type ContactStatus = "AVAILABLE"|"AWS_CANCELLED"|"CANCELLED"|"CANCELLING"|"COMPLETED"|"FAILED"|"FAILED_TO_SCHEDULE"|"PASS"|"POSTPASS"|"PREPASS"|"SCHEDULED"|"SCHEDULING"|string;
+  export type ContactStatus = "AVAILABLE"|"AWS_CANCELLED"|"AWS_FAILED"|"CANCELLED"|"CANCELLING"|"COMPLETED"|"FAILED"|"FAILED_TO_SCHEDULE"|"PASS"|"POSTPASS"|"PREPASS"|"SCHEDULED"|"SCHEDULING"|string;
   export interface CreateConfigRequest {
     /**
      * Parameters of a Config.
@@ -449,6 +449,10 @@ declare namespace GroundStation {
   export type Criticality = "PREFERRED"|"REMOVED"|"REQUIRED"|string;
   export interface DataflowDetail {
     destination?: Destination;
+    /**
+     * Error message for a dataflow.
+     */
+    errorMessage?: String;
     source?: Source;
   }
   export type DataflowEdge = ConfigArn[];

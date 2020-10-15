@@ -763,6 +763,10 @@ declare namespace DMS {
      * Settings in JSON format for the source IBM Db2 LUW endpoint. For information about other available settings, see Extra connection attributes when using Db2 LUW as a source for AWS DMS in the AWS Database Migration Service User Guide. 
      */
     IBMDb2Settings?: IBMDb2Settings;
+    /**
+     * A friendly name for the resource identifier at the end of the EndpointArn response parameter that is returned in the created Endpoint object. The value for this parameter can have up to 31 characters. It can contain only ASCII letters, digits, and hyphen ('-'). Also, it can't end with a hyphen or contain two consecutive hyphens, and can only begin with a letter, such as Example-App-ARN1. For example, this value might result in the EndpointArn value arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1. If you don't specify a ResourceIdentifier value, AWS DMS generates a default identifier value for the end of EndpointArn.
+     */
+    ResourceIdentifier?: String;
   }
   export interface CreateEndpointResponse {
     /**
@@ -863,6 +867,10 @@ declare namespace DMS {
      * A list of custom DNS name servers supported for the replication instance to access your on-premise source or target database. This list overrides the default name servers supported by the replication instance. You can specify a comma-separated list of internet addresses for up to four on-premise DNS name servers. For example: "1.1.1.1,2.2.2.2,3.3.3.3,4.4.4.4" 
      */
     DnsNameServers?: String;
+    /**
+     * A friendly name for the resource identifier at the end of the EndpointArn response parameter that is returned in the created Endpoint object. The value for this parameter can have up to 31 characters. It can contain only ASCII letters, digits, and hyphen ('-'). Also, it can't end with a hyphen or contain two consecutive hyphens, and can only begin with a letter, such as Example-App-ARN1. For example, this value might result in the EndpointArn value arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1. If you don't specify a ResourceIdentifier value, AWS DMS generates a default identifier value for the end of EndpointArn.
+     */
+    ResourceIdentifier?: String;
   }
   export interface CreateReplicationInstanceResponse {
     /**
@@ -943,6 +951,10 @@ declare namespace DMS {
      * Supplemental information that the task requires to migrate the data for certain source and target endpoints. For more information, see Specifying Supplemental Data for Task Settings in the AWS Database Migration Service User Guide. 
      */
     TaskData?: String;
+    /**
+     * A friendly name for the resource identifier at the end of the EndpointArn response parameter that is returned in the created Endpoint object. The value for this parameter can have up to 31 characters. It can contain only ASCII letters, digits, and hyphen ('-'). Also, it can't end with a hyphen or contain two consecutive hyphens, and can only begin with a letter, such as Example-App-ARN1. For example, this value might result in the EndpointArn value arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1. If you don't specify a ResourceIdentifier value, AWS DMS generates a default identifier value for the end of EndpointArn.
+     */
+    ResourceIdentifier?: String;
   }
   export interface CreateReplicationTaskResponse {
     /**
@@ -2706,6 +2718,14 @@ declare namespace DMS {
      */
     BucketName?: String;
     /**
+     * If Amazon Redshift is configured to support case sensitive schema names, set CaseSensitiveNames to true. The default is false.
+     */
+    CaseSensitiveNames?: BooleanOptional;
+    /**
+     * If you set CompUpdate to true Amazon Redshift applies automatic compression if the table is empty. This applies even if the table columns already have encodings other than RAW. If you set CompUpdate to false, automatic compression is disabled and existing column encodings aren't changed. The default is true.
+     */
+    CompUpdate?: BooleanOptional;
+    /**
      * A value that sets the amount of time to wait (in milliseconds) before timing out, beginning from when you initially establish a connection.
      */
     ConnectionTimeout?: IntegerOptional;
@@ -2725,6 +2745,10 @@ declare namespace DMS {
      * The type of server-side encryption that you want to use for your data. This encryption type is part of the endpoint settings or the extra connections attributes for Amazon S3. You can choose either SSE_S3 (the default) or SSE_KMS.   For the ModifyEndpoint operation, you can change the existing value of the EncryptionMode parameter from SSE_KMS to SSE_S3. But you can’t change the existing value from SSE_S3 to SSE_KMS.  To use SSE_S3, create an AWS Identity and Access Management (IAM) role with a policy that allows "arn:aws:s3:::*" to use the following actions: "s3:PutObject", "s3:ListBucket" 
      */
     EncryptionMode?: EncryptionModeValue;
+    /**
+     * This setting is only valid for a full-load migration task. Set ExplicitIds to true to have tables with IDENTITY columns override their auto-generated values with explicit values loaded from the source data files used to populate the tables. The default is false.
+     */
+    ExplicitIds?: BooleanOptional;
     /**
      * The number of threads used to upload a single file. This parameter accepts a value from 1 through 64. It defaults to 10. The number of parallel streams used to upload a single .csv file to an S3 bucket using S3 Multipart Upload. For more information, see Multipart upload overview.   FileTransferUploadStreams accepts a value from 1 through 64. It defaults to 10.
      */
@@ -3357,7 +3381,7 @@ declare namespace DMS {
      */
     DatePartitionSequence?: DatePartitionSequenceValue;
     /**
-     * Specifies a date separating delimiter to use during folder partitioning. The default value is SLASH (/). Use this parameter when DatePartitionedEnabled is set to true.
+     * Specifies a date separating delimiter to use during folder partitioning. The default value is SLASH. Use this parameter when DatePartitionedEnabled is set to true.
      */
     DatePartitionDelimiter?: DatePartitionDelimiterValue;
   }
@@ -3428,7 +3452,7 @@ declare namespace DMS {
      */
     ReplicationTaskArn: String;
     /**
-     * The type of replication task.
+     * A type of replication task.
      */
     StartReplicationTaskType: StartReplicationTaskTypeValue;
     /**

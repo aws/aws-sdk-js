@@ -12,6 +12,36 @@
     "uid": "accessanalyzer-2019-11-01"
   },
   "operations": {
+    "ApplyArchiveRule": {
+      "name": "ApplyArchiveRule",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/archive-rule",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ApplyArchiveRuleRequest"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Retroactively applies the archive rule to existing findings that meet the archive rule criteria.</p>",
+      "idempotent": true
+    },
     "CreateAnalyzer": {
       "name": "CreateAnalyzer",
       "http": {
@@ -81,7 +111,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Creates an archive rule for the specified analyzer. Archive rules automatically archive findings that meet the criteria you define when you create the rule.</p>",
+      "documentation": "<p>Creates an archive rule for the specified analyzer. Archive rules automatically archive new findings that meet the criteria you define when you create the rule.</p>",
       "idempotent": true
     },
     "DeleteAnalyzer": {
@@ -745,6 +775,29 @@
         "shape": "AnalyzerSummary"
       }
     },
+    "ApplyArchiveRuleRequest": {
+      "type": "structure",
+      "required": [
+        "analyzerArn",
+        "ruleName"
+      ],
+      "members": {
+        "analyzerArn": {
+          "shape": "AnalyzerArn",
+          "documentation": "<p>The Amazon resource name (ARN) of the analyzer.</p>"
+        },
+        "clientToken": {
+          "shape": "String",
+          "documentation": "<p>A client token.</p>",
+          "idempotencyToken": true
+        },
+        "ruleName": {
+          "shape": "Name",
+          "documentation": "<p>The name of the rule to apply.</p>"
+        }
+      },
+      "documentation": "<p>Retroactively applies an archive rule.</p>"
+    },
     "ArchiveRuleSummary": {
       "type": "structure",
       "required": [
@@ -1062,8 +1115,8 @@
     "FindingSourceType": {
       "type": "string",
       "enum": [
-        "BUCKET_ACL",
         "POLICY",
+        "BUCKET_ACL",
         "S3_ACCESS_POINT"
       ]
     },
@@ -1550,12 +1603,12 @@
     "ResourceType": {
       "type": "string",
       "enum": [
+        "AWS::S3::Bucket",
         "AWS::IAM::Role",
-        "AWS::KMS::Key",
+        "AWS::SQS::Queue",
         "AWS::Lambda::Function",
         "AWS::Lambda::LayerVersion",
-        "AWS::S3::Bucket",
-        "AWS::SQS::Queue"
+        "AWS::KMS::Key"
       ]
     },
     "SharedViaList": {

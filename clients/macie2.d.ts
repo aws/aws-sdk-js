@@ -124,19 +124,19 @@ declare class Macie2 extends Service {
    */
   describeBuckets(callback?: (err: AWSError, data: Macie2.Types.DescribeBucketsResponse) => void): Request<Macie2.Types.DescribeBucketsResponse, AWSError>;
   /**
-   * Retrieves information about the status and settings for a classification job.
+   * Retrieves the status and settings for a classification job.
    */
   describeClassificationJob(params: Macie2.Types.DescribeClassificationJobRequest, callback?: (err: AWSError, data: Macie2.Types.DescribeClassificationJobResponse) => void): Request<Macie2.Types.DescribeClassificationJobResponse, AWSError>;
   /**
-   * Retrieves information about the status and settings for a classification job.
+   * Retrieves the status and settings for a classification job.
    */
   describeClassificationJob(callback?: (err: AWSError, data: Macie2.Types.DescribeClassificationJobResponse) => void): Request<Macie2.Types.DescribeClassificationJobResponse, AWSError>;
   /**
-   * Retrieves information about the Amazon Macie configuration settings for an AWS organization.
+   * Retrieves the Amazon Macie configuration settings for an AWS organization.
    */
   describeOrganizationConfiguration(params: Macie2.Types.DescribeOrganizationConfigurationRequest, callback?: (err: AWSError, data: Macie2.Types.DescribeOrganizationConfigurationResponse) => void): Request<Macie2.Types.DescribeOrganizationConfigurationResponse, AWSError>;
   /**
-   * Retrieves information about the Amazon Macie configuration settings for an AWS organization.
+   * Retrieves the Amazon Macie configuration settings for an AWS organization.
    */
   describeOrganizationConfiguration(callback?: (err: AWSError, data: Macie2.Types.DescribeOrganizationConfigurationResponse) => void): Request<Macie2.Types.DescribeOrganizationConfigurationResponse, AWSError>;
   /**
@@ -204,11 +204,11 @@ declare class Macie2 extends Service {
    */
   getClassificationExportConfiguration(callback?: (err: AWSError, data: Macie2.Types.GetClassificationExportConfigurationResponse) => void): Request<Macie2.Types.GetClassificationExportConfigurationResponse, AWSError>;
   /**
-   * Retrieves information about the criteria and other settings for a custom data identifier.
+   * Retrieves the criteria and other settings for a custom data identifier.
    */
   getCustomDataIdentifier(params: Macie2.Types.GetCustomDataIdentifierRequest, callback?: (err: AWSError, data: Macie2.Types.GetCustomDataIdentifierResponse) => void): Request<Macie2.Types.GetCustomDataIdentifierResponse, AWSError>;
   /**
-   * Retrieves information about the criteria and other settings for a custom data identifier.
+   * Retrieves the criteria and other settings for a custom data identifier.
    */
   getCustomDataIdentifier(callback?: (err: AWSError, data: Macie2.Types.GetCustomDataIdentifierResponse) => void): Request<Macie2.Types.GetCustomDataIdentifierResponse, AWSError>;
   /**
@@ -220,19 +220,19 @@ declare class Macie2 extends Service {
    */
   getFindingStatistics(callback?: (err: AWSError, data: Macie2.Types.GetFindingStatisticsResponse) => void): Request<Macie2.Types.GetFindingStatisticsResponse, AWSError>;
   /**
-   * Retrieves information about one or more findings.
+   * Retrieves the details of one or more findings.
    */
   getFindings(params: Macie2.Types.GetFindingsRequest, callback?: (err: AWSError, data: Macie2.Types.GetFindingsResponse) => void): Request<Macie2.Types.GetFindingsResponse, AWSError>;
   /**
-   * Retrieves information about one or more findings.
+   * Retrieves the details of one or more findings.
    */
   getFindings(callback?: (err: AWSError, data: Macie2.Types.GetFindingsResponse) => void): Request<Macie2.Types.GetFindingsResponse, AWSError>;
   /**
-   * Retrieves information about the criteria and other settings for a findings filter.
+   * Retrieves the criteria and other settings for a findings filter.
    */
   getFindingsFilter(params: Macie2.Types.GetFindingsFilterRequest, callback?: (err: AWSError, data: Macie2.Types.GetFindingsFilterResponse) => void): Request<Macie2.Types.GetFindingsFilterResponse, AWSError>;
   /**
-   * Retrieves information about the criteria and other settings for a findings filter.
+   * Retrieves the criteria and other settings for a findings filter.
    */
   getFindingsFilter(callback?: (err: AWSError, data: Macie2.Types.GetFindingsFilterResponse) => void): Request<Macie2.Types.GetFindingsFilterResponse, AWSError>;
   /**
@@ -244,11 +244,11 @@ declare class Macie2 extends Service {
    */
   getInvitationsCount(callback?: (err: AWSError, data: Macie2.Types.GetInvitationsCountResponse) => void): Request<Macie2.Types.GetInvitationsCountResponse, AWSError>;
   /**
-   * Retrieves information about the current status and configuration settings for an Amazon Macie account.
+   * Retrieves the current status and configuration settings for an Amazon Macie account.
    */
   getMacieSession(params: Macie2.Types.GetMacieSessionRequest, callback?: (err: AWSError, data: Macie2.Types.GetMacieSessionResponse) => void): Request<Macie2.Types.GetMacieSessionResponse, AWSError>;
   /**
-   * Retrieves information about the current status and configuration settings for an Amazon Macie account.
+   * Retrieves the current status and configuration settings for an Amazon Macie account.
    */
   getMacieSession(callback?: (err: AWSError, data: Macie2.Types.GetMacieSessionResponse) => void): Request<Macie2.Types.GetMacieSessionResponse, AWSError>;
   /**
@@ -380,11 +380,11 @@ declare class Macie2 extends Service {
    */
   untagResource(callback?: (err: AWSError, data: Macie2.Types.UntagResourceResponse) => void): Request<Macie2.Types.UntagResourceResponse, AWSError>;
   /**
-   * Cancels a classification job.
+   * Changes the status of a classification job.
    */
   updateClassificationJob(params: Macie2.Types.UpdateClassificationJobRequest, callback?: (err: AWSError, data: Macie2.Types.UpdateClassificationJobResponse) => void): Request<Macie2.Types.UpdateClassificationJobResponse, AWSError>;
   /**
-   * Cancels a classification job.
+   * Changes the status of a classification job.
    */
   updateClassificationJob(callback?: (err: AWSError, data: Macie2.Types.UpdateClassificationJobResponse) => void): Request<Macie2.Types.UpdateClassificationJobResponse, AWSError>;
   /**
@@ -599,6 +599,10 @@ declare namespace Macie2 {
      * The total number of buckets that allow the general public to have write access to the bucket.
      */
     publiclyWritable?: __long;
+    /**
+     * The total number of buckets that Amazon Macie wasn't able to evaluate permissions settings for. Macie can't determine whether these buckets are publicly accessible.
+     */
+    unknown?: __long;
   }
   export interface BucketCountByEncryptionType {
     /**
@@ -624,9 +628,13 @@ declare namespace Macie2 {
      */
     internal?: __long;
     /**
-     * The total number of buckets that aren't shared with any other AWS accounts.
+     * The total number of buckets that aren't shared with other AWS accounts.
      */
     notShared?: __long;
+    /**
+     * The total number of buckets that Amazon Macie wasn't able to evaluate shared access settings for. Macie can't determine whether these buckets are shared with other AWS accounts.
+     */
+    unknown?: __long;
   }
   export type BucketCriteria = {[key: string]: BucketCriteriaAdditionalProperties};
   export interface BucketCriteriaAdditionalProperties {
@@ -691,11 +699,11 @@ declare namespace Macie2 {
      */
     bucketName?: __string;
     /**
-     * The total number of objects that Amazon Macie can analyze in the bucket. These objects use a supported file or storage format and storage class.
+     * The total number of objects that Amazon Macie can analyze in the bucket. These objects use a supported storage class and have a file name extension for a supported file or storage format.
      */
     classifiableObjectCount?: __long;
     /**
-     * The total storage size, in bytes, of the objects that Amazon Macie can analyze in the bucket. These objects use a supported file or storage format and storage class.
+     * The total storage size, in bytes, of the objects that Amazon Macie can analyze in the bucket. These objects use a supported storage class and have a file name extension for a supported file or storage format.
      */
     classifiableSizeInBytes?: __long;
     /**
@@ -723,7 +731,7 @@ declare namespace Macie2 {
      */
     replicationDetails?: ReplicationDetails;
     /**
-     *  Specifies whether the bucket is shared with another AWS account. Possible values are: EXTERNAL - The bucket is shared with an AWS account that isn’t part of the same Amazon Macie organization. INTERNAL - The bucket is shared with an AWS account that's part of the same Amazon Macie organization. NOT_SHARED - The bucket isn't shared with other AWS accounts. UNKNOWN - Amazon Macie wasn't able to evaluate the shared access settings for the bucket.
+     *  Specifies whether the bucket is shared with another AWS account. Possible values are: EXTERNAL - The bucket is shared with an AWS account that isn't part of the same Amazon Macie organization. INTERNAL - The bucket is shared with an AWS account that's part of the same Amazon Macie organization. NOT_SHARED - The bucket isn't shared with other AWS accounts. UNKNOWN - Amazon Macie wasn't able to evaluate the shared access settings for the bucket.
      */
     sharedAccess?: SharedAccess;
     /**
@@ -739,11 +747,11 @@ declare namespace Macie2 {
      */
     tags?: __listOfKeyValuePair;
     /**
-     * The total number of objects that Amazon Macie can't analyze in the bucket. These objects use an unsupported file or storage format or storage class.
+     * The total number of objects that Amazon Macie can't analyze in the bucket. These objects don't use a supported storage class or don't have a file name extension for a supported file or storage format.
      */
     unclassifiableObjectCount?: ObjectLevelStatistics;
     /**
-     * The total storage size, in bytes, of the objects that Amazon Macie can't analyze in the bucket. These objects use an unsupported file or storage format or storage class.
+     * The total storage size, in bytes, of the objects that Amazon Macie can't analyze in the bucket. These objects don't use a supported storage class or don't have a file name extension for a supported file or storage format.
      */
     unclassifiableObjectSizeInBytes?: ObjectLevelStatistics;
     /**
@@ -791,9 +799,28 @@ declare namespace Macie2 {
      */
     orderBy?: OrderBy;
   }
+  export interface Cell {
+    /**
+     * The location of the cell, as an absolute cell reference, that contains the data. For example, Sheet2!C5 for cell C5 on Sheet2 in a Microsoft Excel workbook. This value is null for CSV and TSV files.
+     */
+    cellReference?: __string;
+    /**
+     * The column number of the column that contains the data. For a Microsoft Excel workbook, this value correlates to the alphabetical character(s) for a column identifier. For example, 1 for column A, 2 for column B, and so on.
+     */
+    column?: __long;
+    /**
+     * The name of the column that contains the data, if available.
+     */
+    columnName?: __string;
+    /**
+     * The row number of the row that contains the data.
+     */
+    row?: __long;
+  }
+  export type Cells = Cell[];
   export interface ClassificationDetails {
     /**
-     * The path to the folder or file (in Amazon S3) that contains the corresponding sensitive data discovery results for the finding. If a finding applies to a large archive or compressed file, this is a path to a folder. Otherwise, this is a path to a file.
+     * The path to the folder or file (in Amazon S3) that contains the corresponding sensitive data discovery result for the finding. If a finding applies to a large archive or compressed file, this value is the path to a folder. Otherwise, this value is the path to a file.
      */
     detailedResultsLocation?: __string;
     /**
@@ -817,15 +844,19 @@ declare namespace Macie2 {
   }
   export interface ClassificationResult {
     /**
-     * The number of occurrences of the data that produced the finding, and the custom data identifiers that detected the data.
+     * Specifies whether Amazon Macie detected additional occurrences of sensitive data in the S3 object. A finding includes location data for a maximum of 15 occurrences of sensitive data. This value can help you to determine whether to investigate additional occurrences of sensitive data in an object. You can do this by referring to the corresponding sensitive data discovery result for the finding (ClassificationDetails.detailedResultsLocation).
+     */
+    additionalOccurrences?: __boolean;
+    /**
+     * The custom data identifiers that detected the sensitive data and the number of occurrences of the data that they detected.
      */
     customDataIdentifiers?: CustomDataIdentifiers;
     /**
-     * The type of content, expressed as a MIME type, that the finding applies to. For example, application/gzip, for a GNU Gzip compressed archive file, or application/pdf, for an Adobe PDF file.
+     * The type of content, as a MIME type, that the finding applies to. For example, application/gzip, for a GNU Gzip compressed archive file, or application/pdf, for an Adobe Portable Document Format file.
      */
     mimeType?: __string;
     /**
-     * The category and number of occurrences of the sensitive data that produced the finding.
+     * The category, types, and number of occurrences of the sensitive data that produced the finding.
      */
     sensitiveData?: SensitiveData;
     /**
@@ -839,7 +870,7 @@ declare namespace Macie2 {
   }
   export interface ClassificationResultStatus {
     /**
-     *  The status of the finding. Possible values are: COMPLETE - Amazon Macie successfully completed its analysis of the object that the finding applies to. PARTIAL - Macie was able to analyze only a subset of the data in the object that the finding applies to. For example, the object is a compressed or archive file that contains files in an unsupported format. SKIPPED - Macie wasn't able to analyze the object that the finding applies to. For example, the object is a malformed file or a file that's in an unsupported format.
+     *  The status of the finding. Possible values are: COMPLETE - Amazon Macie successfully completed its analysis of the object that the finding applies to. PARTIAL - Macie was able to analyze only a subset of the data in the object that the finding applies to. For example, the object is a compressed or archive file that contains files in an unsupported format. SKIPPED - Macie wasn't able to analyze the object that the finding applies to. For example, the object is a malformed file or a file that uses an unsupported format.
      */
     code?: __string;
     /**
@@ -881,7 +912,7 @@ declare namespace Macie2 {
      */
     samplingPercentage?: __integer;
     /**
-     * The recurrence pattern for running the job. To run the job only once, don't specify a value for this property and set the value of the jobType property to ONE_TIME.
+     * The recurrence pattern for running the job. To run the job only once, don't specify a value for this property and set the value for the jobType property to ONE_TIME.
      */
     scheduleFrequency?: JobScheduleFrequency;
     /**
@@ -1089,13 +1120,17 @@ declare namespace Macie2 {
      */
     arn?: __string;
     /**
-     * The total number of occurrences of the data that the custom data identifier detected for the finding.
+     * The total number of occurrences of the sensitive data that the custom data identifier detected.
      */
     count?: __long;
     /**
      * The name of the custom data identifier.
      */
     name?: __string;
+    /**
+     * The location of 1-15 occurrences of the sensitive data that the custom data identifier detected. A finding includes location data for a maximum of 15 occurrences of sensitive data.
+     */
+    occurrences?: Occurrences;
   }
   export type CustomDetections = CustomDetection[];
   export interface DailySchedule {
@@ -1115,11 +1150,15 @@ declare namespace Macie2 {
   }
   export interface DefaultDetection {
     /**
-     * The total number of occurrences of the type of data that was detected.
+     * The total number of occurrences of the type of sensitive data that was detected.
      */
     count?: __long;
     /**
-     * The type of data that was detected. For example, AWS_CREDENTIALS, PHONE_NUMBER, or ADDRESS.
+     * The location of 1-15 occurrences of the sensitive data that was detected. A finding includes location data for a maximum of 15 occurrences of sensitive data.
+     */
+    occurrences?: Occurrences;
+    /**
+     * The type of sensitive data that was detected. For example, AWS_CREDENTIALS, PHONE_NUMBER, or ADDRESS.
      */
     type?: __string;
   }
@@ -1224,11 +1263,11 @@ declare namespace Macie2 {
      */
     jobId?: __string;
     /**
-     * The current status of the job. Possible values are: CANCELLED - You cancelled the job. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job's access to the bucket. COMPLETE - Amazon Macie finished processing all the data specified for the job. IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to jobs that occur only once. PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account. RUNNING - The job is in progress.
+     * The current status of the job. Possible values are: CANCELLED - You cancelled the job, or you paused the job and didn't resume it within 30 days of pausing it. COMPLETE - For a one-time job, Amazon Macie finished processing all the data specified for the job. This value doesn't apply to recurring jobs. IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to one-time jobs. PAUSED - Amazon Macie started running the job but completion of the job would exceed one or more quotas for your account. RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress. USER_PAUSED - You paused the job. If you don't resume the job within 30 days of pausing it, the job will expire and be cancelled.
      */
     jobStatus?: JobStatus;
     /**
-     * The schedule for running the job. Possible values are: ONE_TIME - The job ran or will run only once. SCHEDULED - The job runs on a daily, weekly, or monthly basis. The scheduleFrequency property indicates the recurrence pattern for the job.
+     * The schedule for running the job. Possible values are: ONE_TIME - The job runs only once. SCHEDULED - The job runs on a daily, weekly, or monthly basis. The scheduleFrequency property indicates the recurrence pattern for the job.
      */
     jobType?: JobType;
     /**
@@ -1252,13 +1291,17 @@ declare namespace Macie2 {
      */
     scheduleFrequency?: JobScheduleFrequency;
     /**
-     * The number of times that the job has run and processing statistics for the job's most recent run.
+     * The number of times that the job has run and processing statistics for the job's current run.
      */
     statistics?: Statistics;
     /**
-     * A map of key-value pairs that identifies the tags (keys and values) that are associated with the classification job.
+     * A map of key-value pairs that specifies which tags (keys and values) are associated with the classification job.
      */
     tags?: TagMap;
+    /**
+     * If the current status of the job is USER_PAUSED, specifies when the job was paused and when the job will expire and be cancelled if it isn't resumed. This value is present only if the value for jobStatus is USER_PAUSED.
+     */
+    userPausedDetails?: UserPausedDetails;
   }
   export interface DescribeOrganizationConfigurationRequest {
   }
@@ -1373,7 +1416,7 @@ declare namespace Macie2 {
      */
     classificationDetails?: ClassificationDetails;
     /**
-     * The total number of occurrences of this finding.
+     * The total number of occurrences of the finding.
      */
     count?: __long;
     /**
@@ -1413,7 +1456,7 @@ declare namespace Macie2 {
      */
     schemaVersion?: __string;
     /**
-     * The severity of the finding.
+     * The severity level and score for the finding.
      */
     severity?: Severity;
     /**
@@ -1425,7 +1468,7 @@ declare namespace Macie2 {
      */
     type?: FindingType;
     /**
-     * The date and time, in UTC and extended ISO 8601 format, when the finding was last updated. For sensitive data findings, this value is the same as the value for the createdAt property. Sensitive data findings aren't updated.
+     * The date and time, in UTC and extended ISO 8601 format, when the finding was last updated. For sensitive data findings, this value is the same as the value for the createdAt property. All sensitive data findings are considered new (unique) because they derive from individual classification jobs.
      */
     updatedAt?: __timestampIso8601;
   }
@@ -1521,11 +1564,11 @@ declare namespace Macie2 {
      */
     bucketCountBySharedAccessType?: BucketCountBySharedAccessType;
     /**
-     * The total number of objects that Amazon Macie can analyze in the buckets. These objects use a supported file or storage format and storage class.
+     * The total number of objects that Amazon Macie can analyze in the buckets. These objects use a supported storage class and have a file name extension for a supported file or storage format.
      */
     classifiableObjectCount?: __long;
     /**
-     * The total storage size, in bytes, of all the objects that Amazon Macie can analyze in the buckets. These objects use a supported file or storage format and storage class.
+     * The total storage size, in bytes, of all the objects that Amazon Macie can analyze in the buckets. These objects use a supported storage class and have a file name extension for a supported file or storage format.
      */
     classifiableSizeInBytes?: __long;
     /**
@@ -1545,11 +1588,11 @@ declare namespace Macie2 {
      */
     sizeInBytesCompressed?: __long;
     /**
-     * The total number of objects that Amazon Macie can't analyze in the buckets. These objects use an unsupported file or storage format or storage class.
+     * The total number of objects that Amazon Macie can't analyze in the buckets. These objects don't use a supported storage class or don't have a file name extension for a supported file or storage format.
      */
     unclassifiableObjectCount?: ObjectLevelStatistics;
     /**
-     * The total storage size, in bytes, of all the objects that Amazon Macie can't analyze in the buckets. These objects use an unsupported file or storage format or storage class.
+     * The total storage size, in bytes, of all the objects that Amazon Macie can't analyze in the buckets. These objects don't use a supported storage class or don't have a file name extension for a supported file or storage format.
      */
     unclassifiableObjectSizeInBytes?: ObjectLevelStatistics;
   }
@@ -1619,7 +1662,7 @@ declare namespace Macie2 {
      */
     findingCriteria?: FindingCriteria;
     /**
-     * The finding property to use to group the query results. Valid values are: classificationDetails.jobId - The unique identifier for the classification job that produced the finding. resourcesAffected.s3Bucket.name - The name of the S3 bucket that the finding applies to. severity.description - The severity of the finding, such as High or Medium. type - The type of finding, such as Policy:IAMUser/S3BucketPublic and SensitiveData:S3Object/Personal.
+     * The finding property to use to group the query results. Valid values are: classificationDetails.jobId - The unique identifier for the classification job that produced the finding. resourcesAffected.s3Bucket.name - The name of the S3 bucket that the finding applies to. severity.description - The severity level of the finding, such as High or Medium. type - The type of finding, such as Policy:IAMUser/S3BucketPublic and SensitiveData:S3Object/Personal.
      */
     groupBy: GroupBy;
     /**
@@ -1679,7 +1722,7 @@ declare namespace Macie2 {
   }
   export interface GetFindingsRequest {
     /**
-     * An array of strings that lists the unique identifiers for the findings to retrieve information about.
+     * An array of strings that lists the unique identifiers for the findings to retrieve.
      */
     findingIds: __listOf__string;
     /**
@@ -1943,7 +1986,7 @@ declare namespace Macie2 {
      */
     simpleScopeTerm?: SimpleScopeTerm;
     /**
-     * A tag-based condition that defines the operator and a tag key or tag keys and values for including or excluding an object from the job.
+     * A tag-based condition that defines the operator and tag keys or tag key and value pairs for including or excluding an object from the job.
      */
     tagScopeTerm?: TagScopeTerm;
   }
@@ -1953,7 +1996,7 @@ declare namespace Macie2 {
      */
     and?: __listOfJobScopeTerm;
   }
-  export type JobStatus = "RUNNING"|"PAUSED"|"CANCELLED"|"COMPLETE"|"IDLE"|string;
+  export type JobStatus = "RUNNING"|"PAUSED"|"CANCELLED"|"COMPLETE"|"IDLE"|"USER_PAUSED"|string;
   export interface JobSummary {
     /**
      * The S3 buckets that the job is configured to analyze.
@@ -1968,17 +2011,21 @@ declare namespace Macie2 {
      */
     jobId?: __string;
     /**
-     * The current status of the job. Possible values are: CANCELLED - You cancelled the job. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job's access to the bucket. COMPLETE - Amazon Macie finished processing all the data specified for the job. IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to jobs that occur only once. PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account. RUNNING - The job is in progress.
+     * The current status of the job. Possible values are: CANCELLED - You cancelled the job, or you paused the job and didn't resume it within 30 days of pausing it. COMPLETE - For a one-time job, Amazon Macie finished processing all the data specified for the job. This value doesn't apply to recurring jobs. IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to one-time jobs. PAUSED - Amazon Macie started running the job but completion of the job would exceed one or more quotas for your account. RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress. USER_PAUSED - You paused the job. If you don't resume the job within 30 days of pausing it, the job will expire and be cancelled.
      */
     jobStatus?: JobStatus;
     /**
-     * The schedule for running the job. Possible values are: ONE_TIME - The job ran or will run only once. SCHEDULED - The job runs on a daily, weekly, or monthly basis.
+     * The schedule for running the job. Possible values are: ONE_TIME - The job runs only once. SCHEDULED - The job runs on a daily, weekly, or monthly basis.
      */
     jobType?: JobType;
     /**
      * The custom name of the job.
      */
     name?: __string;
+    /**
+     * If the current status of the job is USER_PAUSED, specifies when the job was paused and when the job will expire and be cancelled if it isn't resumed. This value is present only if the value for jobStatus is USER_PAUSED.
+     */
+    userPausedDetails?: UserPausedDetails;
   }
   export type JobType = "ONE_TIME"|"SCHEDULED"|string;
   export interface KeyValuePair {
@@ -2238,7 +2285,7 @@ declare namespace Macie2 {
   }
   export interface MonthlySchedule {
     /**
-     * The numeric day of the month when Amazon Macie runs the job. This value can be an integer from 1 through 30.
+     * The numeric day of the month when Amazon Macie runs the job. This value can be an integer from 1 through 31. If this value exceeds the number of days in a certain month, Macie runs the job on the last day of that month. For example, if this value is 31 and a month has only 30 days, Macie runs the job on day 30 of that month.
      */
     dayOfMonth?: __integer;
   }
@@ -2262,7 +2309,7 @@ declare namespace Macie2 {
   }
   export interface ObjectLevelStatistics {
     /**
-     * The total storage size (in bytes) or number of objects that Amazon Macie can't analyze because the objects use an unsupported file or storage format.
+     * The total storage size (in bytes) or number of objects that Amazon Macie can't analyze because the objects don't have a file name extension for a supported file or storage format.
      */
     fileType?: __long;
     /**
@@ -2270,11 +2317,48 @@ declare namespace Macie2 {
      */
     storageClass?: __long;
     /**
-     * The total storage size (in bytes) or number of objects that Amazon Macie can't analyze because the objects use an unsupported file or storage format or storage class.
+     * The total storage size (in bytes) or number of objects that Amazon Macie can't analyze because the objects use an unsupported storage class or don't have a file name extension for a supported file or storage format.
      */
     total?: __long;
   }
+  export interface Occurrences {
+    /**
+     * An array of objects, one for each occurrence of sensitive data in a Microsoft Excel workbook, CSV file, or TSV file. Each object specifies the cell that contains the data. This value is null for all other types of files.
+     */
+    cells?: Cells;
+    /**
+     * An array of objects, one for each occurrence of sensitive data in an Apache Avro object container, Microsoft Word document, or non-binary text file, such as an HTML, JSON, TXT, or XML file. Each object specifies the line that contains the data, and the position of the data on that line. This value is often null for file types that are supported by Cell, Page, or Record objects. Exceptions are the locations of: full names and addresses in a Microsoft Excel workbook, CSV file, or TSV file; data in unstructured sections of an otherwise structured file, such as a comment in a file; and, data in a malformed file that Amazon Macie analyzes as plain text.
+     */
+    lineRanges?: Ranges;
+    /**
+     * An array of objects, one for each occurrence of sensitive data in a binary text file. Each object specifies the position of the data relative to the start of the file. This value is typically null. For binary text files, Macie adds location data to a lineRanges.Range or Page object, depending on the file type.
+     */
+    offsetRanges?: Ranges;
+    /**
+     * An array of objects, one for each occurrence of sensitive data in an Adobe Portable Document Format file. Each object specifies the page that contains the data, and the position of the data on that page. This value is null for all other types of files.
+     */
+    pages?: Pages;
+    /**
+     * An array of objects, one for each occurrence of sensitive data in an Apache Parquet file. Each object specifies the row that contains the data. This value is null for all other types of files.
+     */
+    records?: Records;
+  }
   export type OrderBy = "ASC"|"DESC"|string;
+  export interface Page {
+    /**
+     * The line that contains the data, and the position of the data on that line.
+     */
+    lineRange?: Range;
+    /**
+     * The position of the data on the page, relative to the start and end of the page.
+     */
+    offsetRange?: Range;
+    /**
+     * The page number of the page that contains the data.
+     */
+    pageNumber?: __long;
+  }
+  export type Pages = Page[];
   export interface PolicyDetails {
     /**
      * The action that produced the finding.
@@ -2297,6 +2381,28 @@ declare namespace Macie2 {
      */
     configuration?: ClassificationExportConfiguration;
   }
+  export interface Range {
+    /**
+     * Possible values are: In an Occurrences.lineRanges array, the number of lines from the end of the file. In an Occurrences.offsetRanges array, the number of characters from the end of the file. In a Page object, the number of lines (lineRange) or characters (offsetRange) from the end of the page.
+     */
+    end?: __long;
+    /**
+     * Possible values are: In an Occurrences.lineRanges array, the number of lines from the start of the file. In an Occurrences.offsetRanges array, the number of characters from the start of the file. In a Page object, the number of lines (lineRange) or characters (offsetRange) from the start of the page.
+     */
+    start?: __long;
+    /**
+     * The column number for the column that contains the data, if the file contains structured data.
+     */
+    startColumn?: __long;
+  }
+  export type Ranges = Range[];
+  export interface Record {
+    /**
+     * The row index, starting from 0, for the row that contains the data.
+     */
+    recordIndex?: __long;
+  }
+  export type Records = Record[];
   export type RelationshipStatus = "Enabled"|"Paused"|"Invited"|"Created"|"Removed"|"Resigned"|"EmailVerificationInProgress"|"EmailVerificationFailed"|"RegionDisabled"|"AccountSuspended"|string;
   export interface ReplicationDetails {
     /**
@@ -2332,7 +2438,7 @@ declare namespace Macie2 {
      */
     createdAt?: __timestampIso8601;
     /**
-     * The server-side encryption settings for the bucket.
+     * The type of server-side encryption that's used by default to encrypt objects in the bucket.
      */
     defaultServerSideEncryption?: ServerSideEncryption;
     /**
@@ -2426,7 +2532,7 @@ declare namespace Macie2 {
      */
     publicAccess?: __boolean;
     /**
-     * The server-side encryption settings for the object.
+     * The type of server-side encryption that's used for the object.
      */
     serverSideEncryption?: ServerSideEncryption;
     /**
@@ -2460,11 +2566,11 @@ declare namespace Macie2 {
   export type SensitiveData = SensitiveDataItem[];
   export interface SensitiveDataItem {
     /**
-     * The category of sensitive data that was detected. For example: FINANCIAL_INFORMATION, for financial information such as credit card numbers; PERSONAL_INFORMATION, for personally identifiable information such as full names and mailing addresses; or, CUSTOM_IDENTIFIER, for data that was detected by a custom data identifier.
+     * The category of sensitive data that was detected. For example: FINANCIAL_INFORMATION, for financial information such as credit card numbers; PERSONAL_INFORMATION, for personally identifiable information, such as full names and mailing addresses, or personal health information; or, CUSTOM_IDENTIFIER, for data that was detected by a custom data identifier.
      */
     category?: SensitiveDataItemCategory;
     /**
-     * An array of objects, one for each type of sensitive data that was detected. Each object reports the number of occurrences of a specific type of sensitive data that was detected.
+     * An array of objects, one for each type of sensitive data that was detected. Each object reports the number of occurrences of a specific type of sensitive data that was detected, and the location of up to 15 of those occurrences.
      */
     detections?: DefaultDetections;
     /**
@@ -2541,11 +2647,11 @@ declare namespace Macie2 {
   }
   export interface Severity {
     /**
-     * The textual representation of the severity value, such as Low or High.
+     * The qualitative representation of the finding's severity, ranging from Low (least severe) to High (most severe).
      */
     description?: SeverityDescription;
     /**
-     * The numeric score for the severity value, ranging from 0 (least severe) to 4 (most severe).
+     * The numerical representation of the finding's severity, ranging from 1 (least severe) to 3 (most severe).
      */
     score?: __long;
   }
@@ -2553,15 +2659,15 @@ declare namespace Macie2 {
   export type SharedAccess = "EXTERNAL"|"INTERNAL"|"NOT_SHARED"|"UNKNOWN"|string;
   export interface SimpleScopeTerm {
     /**
-     * The operator to use in the condition.
+     * The operator to use in the condition. Valid operators for each supported property (key) are: OBJECT_EXTENSION - EQ (equals) or NE (not equals) OBJECT_LAST_MODIFIED_DATE - Any operator except CONTAINS OBJECT_SIZE - Any operator except CONTAINS TAG - EQ (equals) or NE (not equals)
      */
     comparator?: JobComparator;
     /**
-     * The property to use in the condition.
+     * The object property to use in the condition.
      */
     key?: ScopeFilterKey;
     /**
-     * An array that lists one or more values to use in the condition.
+     * An array that lists the values to use in the condition. If the value for the key property is OBJECT_EXTENSION, this array can specify multiple values and Amazon Macie uses an OR operator to join the values. Otherwise, this array can specify only one value. Valid values for each supported property (key) are: OBJECT_EXTENSION - A string that represents the file name extension of an object. For example: doc, docx, pdf OBJECT_LAST_MODIFIED_DATE - The date and time (in UTC and extended ISO 8601 format) when an object was created or last changed, whichever is latest. For example: 2020-09-28T14:31:13Z OBJECT_SIZE - An integer that represents the storage size (in bytes) of an object. TAG - A string that represents a tag key for an object. For advanced options, use a TagScopeTerm object, instead of a SimpleScopeTerm object, to define a tag-based condition for the job.
      */
     values?: __listOf__string;
   }
@@ -2601,7 +2707,7 @@ declare namespace Macie2 {
   }
   export interface TagScopeTerm {
     /**
-     * The operator to use in the condition.
+     * The operator to use in the condition. Valid operators are EQ (equals) or NE (not equals).
      */
     comparator?: JobComparator;
     /**
@@ -2609,7 +2715,7 @@ declare namespace Macie2 {
      */
     key?: __string;
     /**
-     * The tag key and value pairs to use in the condition.
+     * The tag keys or tag key and value pairs to use in the condition.
      */
     tagValues?: __listOfTagValuePair;
     /**
@@ -2624,7 +2730,7 @@ declare namespace Macie2 {
      */
     key?: __string;
     /**
-     * The tag value, associated with the specified tag key, to use in the condition.
+     * The tag value, associated with the specified tag key (key), to use in the condition. To specify only a tag key for a condition, specify the tag key for the key property and set this value to an empty string.
      */
     value?: __string;
   }
@@ -2689,7 +2795,7 @@ declare namespace Macie2 {
      */
     jobId: __string;
     /**
-     * The status to change the job's status to. The only supported value is CANCELLED, which cancels the job completely.
+     * The new status for the job. Valid values are: CANCELLED - Stops the job permanently and cancels it. You can't resume a job after you cancel it. This value is valid only if the job's current status is IDLE, PAUSED, RUNNING, or USER_PAUSED. RUNNING - Resumes the job. This value is valid only if the job's current status is USER_PAUSED. If you specify this value, Amazon Macie immediately resumes the job. USER_PAUSED - Pauses the job. This value is valid only if the job's current status is IDLE or RUNNING. If you specify this value and the job is currently running, Macie immediately stops running the job. To resume a job after you pause it, change the job's status to RUNNING. If you don't resume a job within 30 days of pausing it, the job expires and Macie cancels it. You can't resume a job after it's cancelled.
      */
     jobStatus: JobStatus;
   }
@@ -2882,6 +2988,20 @@ declare namespace Macie2 {
     principalId?: __string;
   }
   export type UserIdentityType = "AssumedRole"|"IAMUser"|"FederatedUser"|"Root"|"AWSAccount"|"AWSService"|string;
+  export interface UserPausedDetails {
+    /**
+     * The date and time, in UTC and extended ISO 8601 format, when the job will expire and be cancelled if you don't resume it first. If you don't resume a job within 30 days of pausing it, the job expires and Amazon Macie cancels it.
+     */
+    jobExpiresAt?: __timestampIso8601;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Health event that Amazon Macie sent to notify you of the job's pending expiration and cancellation. This value is null if a job has been paused for less than 23 days.
+     */
+    jobImminentExpirationHealthEventArn?: __string;
+    /**
+     * The date and time, in UTC and extended ISO 8601 format, when you paused the job.
+     */
+    jobPausedAt?: __timestampIso8601;
+  }
   export interface WeeklySchedule {
     /**
      * The day of the week when Amazon Macie runs the job.
