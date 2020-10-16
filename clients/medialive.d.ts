@@ -14,6 +14,14 @@ declare class MediaLive extends Service {
   constructor(options?: MediaLive.Types.ClientConfiguration)
   config: Config & MediaLive.Types.ClientConfiguration;
   /**
+   * Accept an incoming input device transfer. The ownership of the device will transfer to your AWS account.
+   */
+  acceptInputDeviceTransfer(params: MediaLive.Types.AcceptInputDeviceTransferRequest, callback?: (err: AWSError, data: MediaLive.Types.AcceptInputDeviceTransferResponse) => void): Request<MediaLive.Types.AcceptInputDeviceTransferResponse, AWSError>;
+  /**
+   * Accept an incoming input device transfer. The ownership of the device will transfer to your AWS account.
+   */
+  acceptInputDeviceTransfer(callback?: (err: AWSError, data: MediaLive.Types.AcceptInputDeviceTransferResponse) => void): Request<MediaLive.Types.AcceptInputDeviceTransferResponse, AWSError>;
+  /**
    * Starts delete of resources.
    */
   batchDelete(params: MediaLive.Types.BatchDeleteRequest, callback?: (err: AWSError, data: MediaLive.Types.BatchDeleteResponse) => void): Request<MediaLive.Types.BatchDeleteResponse, AWSError>;
@@ -45,6 +53,14 @@ declare class MediaLive extends Service {
    * Update a channel schedule
    */
   batchUpdateSchedule(callback?: (err: AWSError, data: MediaLive.Types.BatchUpdateScheduleResponse) => void): Request<MediaLive.Types.BatchUpdateScheduleResponse, AWSError>;
+  /**
+   * Cancel an input device transfer that you have requested.
+   */
+  cancelInputDeviceTransfer(params: MediaLive.Types.CancelInputDeviceTransferRequest, callback?: (err: AWSError, data: MediaLive.Types.CancelInputDeviceTransferResponse) => void): Request<MediaLive.Types.CancelInputDeviceTransferResponse, AWSError>;
+  /**
+   * Cancel an input device transfer that you have requested.
+   */
+  cancelInputDeviceTransfer(callback?: (err: AWSError, data: MediaLive.Types.CancelInputDeviceTransferResponse) => void): Request<MediaLive.Types.CancelInputDeviceTransferResponse, AWSError>;
   /**
    * Creates a new channel
    */
@@ -246,6 +262,14 @@ declare class MediaLive extends Service {
    */
   listChannels(callback?: (err: AWSError, data: MediaLive.Types.ListChannelsResponse) => void): Request<MediaLive.Types.ListChannelsResponse, AWSError>;
   /**
+   * List input devices that are currently being transferred. List input devices that you are transferring from your AWS account or input devices that another AWS account is transferring to you.
+   */
+  listInputDeviceTransfers(params: MediaLive.Types.ListInputDeviceTransfersRequest, callback?: (err: AWSError, data: MediaLive.Types.ListInputDeviceTransfersResponse) => void): Request<MediaLive.Types.ListInputDeviceTransfersResponse, AWSError>;
+  /**
+   * List input devices that are currently being transferred. List input devices that you are transferring from your AWS account or input devices that another AWS account is transferring to you.
+   */
+  listInputDeviceTransfers(callback?: (err: AWSError, data: MediaLive.Types.ListInputDeviceTransfersResponse) => void): Request<MediaLive.Types.ListInputDeviceTransfersResponse, AWSError>;
+  /**
    * List input devices
    */
   listInputDevices(params: MediaLive.Types.ListInputDevicesRequest, callback?: (err: AWSError, data: MediaLive.Types.ListInputDevicesResponse) => void): Request<MediaLive.Types.ListInputDevicesResponse, AWSError>;
@@ -318,6 +342,14 @@ declare class MediaLive extends Service {
    */
   purchaseOffering(callback?: (err: AWSError, data: MediaLive.Types.PurchaseOfferingResponse) => void): Request<MediaLive.Types.PurchaseOfferingResponse, AWSError>;
   /**
+   * Reject the transfer of the specified input device to your AWS account.
+   */
+  rejectInputDeviceTransfer(params: MediaLive.Types.RejectInputDeviceTransferRequest, callback?: (err: AWSError, data: MediaLive.Types.RejectInputDeviceTransferResponse) => void): Request<MediaLive.Types.RejectInputDeviceTransferResponse, AWSError>;
+  /**
+   * Reject the transfer of the specified input device to your AWS account.
+   */
+  rejectInputDeviceTransfer(callback?: (err: AWSError, data: MediaLive.Types.RejectInputDeviceTransferResponse) => void): Request<MediaLive.Types.RejectInputDeviceTransferResponse, AWSError>;
+  /**
    * Starts an existing channel
    */
   startChannel(params: MediaLive.Types.StartChannelRequest, callback?: (err: AWSError, data: MediaLive.Types.StartChannelResponse) => void): Request<MediaLive.Types.StartChannelResponse, AWSError>;
@@ -349,6 +381,14 @@ declare class MediaLive extends Service {
    * Stops a running multiplex. If the multiplex isn't running, this action has no effect.
    */
   stopMultiplex(callback?: (err: AWSError, data: MediaLive.Types.StopMultiplexResponse) => void): Request<MediaLive.Types.StopMultiplexResponse, AWSError>;
+  /**
+   * Start an input device transfer to another AWS account. After you make the request, the other account must accept or reject the transfer.
+   */
+  transferInputDevice(params: MediaLive.Types.TransferInputDeviceRequest, callback?: (err: AWSError, data: MediaLive.Types.TransferInputDeviceResponse) => void): Request<MediaLive.Types.TransferInputDeviceResponse, AWSError>;
+  /**
+   * Start an input device transfer to another AWS account. After you make the request, the other account must accept or reject the transfer.
+   */
+  transferInputDevice(callback?: (err: AWSError, data: MediaLive.Types.TransferInputDeviceResponse) => void): Request<MediaLive.Types.TransferInputDeviceResponse, AWSError>;
   /**
    * Updates a channel.
    */
@@ -584,6 +624,14 @@ Leave set to "normal" when input does not contain pre-mixed audio + AD.
      * When set to "followInput", encoder metadata will be sourced from the DD, DD+, or DolbyE decoder that supplied this audio data. If audio was not supplied from one of these streams, then the static metadata settings will be used.
      */
     MetadataControl?: Ac3MetadataControl;
+  }
+  export interface AcceptInputDeviceTransferRequest {
+    /**
+     * The unique ID of the input device to accept. For example, hd-123456789abcdef.
+     */
+    InputDeviceId: __string;
+  }
+  export interface AcceptInputDeviceTransferResponse {
   }
   export type AfdSignaling = "AUTO"|"FIXED"|"NONE"|string;
   export interface AncillarySourceSettings {
@@ -1064,6 +1112,14 @@ Alternate rendition that the client will not try to play back by default. Repres
   export type BurnInOutlineColor = "BLACK"|"BLUE"|"GREEN"|"RED"|"WHITE"|"YELLOW"|string;
   export type BurnInShadowColor = "BLACK"|"NONE"|"WHITE"|string;
   export type BurnInTeletextGridControl = "FIXED"|"SCALED"|string;
+  export interface CancelInputDeviceTransferRequest {
+    /**
+     * The unique ID of the input device to cancel. For example, hd-123456789abcdef.
+     */
+    InputDeviceId: __string;
+  }
+  export interface CancelInputDeviceTransferResponse {
+  }
   export interface CaptionDescription {
     /**
      * Specifies which input caption selector to use as a caption source when generating output captions. This field should match a captionSelector name.
@@ -3640,6 +3696,7 @@ to.
      */
     Type?: InputDeviceType;
   }
+  export type InputDeviceTransferType = "OUTGOING"|"INCOMING"|string;
   export type InputDeviceType = "HD"|string;
   export type InputFilter = "AUTO"|"DISABLED"|"FORCED"|string;
   export interface InputLocation {
@@ -3875,6 +3932,21 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
   }
   export interface ListChannelsResponse {
     Channels?: __listOfChannelSummary;
+    NextToken?: __string;
+  }
+  export interface ListInputDeviceTransfersRequest {
+    MaxResults?: MaxResults;
+    NextToken?: __string;
+    TransferType: __string;
+  }
+  export interface ListInputDeviceTransfersResponse {
+    /**
+     * The list of devices that you are transferring or are being transferred to you.
+     */
+    InputDeviceTransfers?: __listOfTransferringInputDeviceSummary;
+    /**
+     * A token to get additional list results.
+     */
     NextToken?: __string;
   }
   export interface ListInputDevicesRequest {
@@ -5062,6 +5134,14 @@ When this field is defined, ConstantBitrate must be undefined.
   }
   export interface Rec709Settings {
   }
+  export interface RejectInputDeviceTransferRequest {
+    /**
+     * The unique ID of the input device to reject. For example, hd-123456789abcdef.
+     */
+    InputDeviceId: __string;
+  }
+  export interface RejectInputDeviceTransferResponse {
+  }
   export interface RemixSettings {
     /**
      * Mapping of input channels to output channels, with appropriate gain adjustments.
@@ -5842,6 +5922,40 @@ one destination per packager.
     SyncThreshold?: __integerMin1Max1000000;
   }
   export type TimecodeConfigSource = "EMBEDDED"|"SYSTEMCLOCK"|"ZEROBASED"|string;
+  export interface TransferInputDeviceRequest {
+    /**
+     * The unique ID of this input device. For example, hd-123456789abcdef.
+     */
+    InputDeviceId: __string;
+    /**
+     * The AWS account ID (12 digits) for the recipient of the device transfer.
+     */
+    TargetCustomerId?: __string;
+    /**
+     * An optional message for the recipient. Maximum 280 characters.
+     */
+    TransferMessage?: __string;
+  }
+  export interface TransferInputDeviceResponse {
+  }
+  export interface TransferringInputDeviceSummary {
+    /**
+     * The unique ID of the input device.
+     */
+    Id?: __string;
+    /**
+     * The optional message that the sender has attached to the transfer.
+     */
+    Message?: __string;
+    /**
+     * The AWS account ID for the recipient of the input device transfer.
+     */
+    TargetCustomerId?: __string;
+    /**
+     * The type (direction) of the input device transfer.
+     */
+    TransferType?: InputDeviceTransferType;
+  }
   export interface TtmlDestinationSettings {
     /**
      * When set to passthrough, passes through style and position information from a TTML-like input source (TTML, SMPTE-TT, CFF-TT) to the CFF-TT output or TTML output.
@@ -6292,6 +6406,7 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
   export type __listOfReservation = Reservation[];
   export type __listOfScheduleAction = ScheduleAction[];
   export type __listOfScte35Descriptor = Scte35Descriptor[];
+  export type __listOfTransferringInputDeviceSummary = TransferringInputDeviceSummary[];
   export type __listOfVideoDescription = VideoDescription[];
   export type __listOf__integer = __integer[];
   export type __listOf__string = __string[];

@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.772.0-->
+<!--LATEST=2.773.0-->
 <!--ENTRYINSERT-->
+
+## 2.773.0
+* feature: MediaLive: The AWS Elemental MediaLive APIs and SDKs now support the ability to transfer the ownership of MediaLive Link devices across AWS accounts.
 
 ## 2.772.0
 * feature: AccessAnalyzer: This release adds support for the ApplyArchiveRule api in IAM Access Analyzer.  The ApplyArchiveRule api allows users to apply an archive rule retroactively to existing findings in an analyzer.

@@ -12,6 +12,60 @@
     "jsonVersion": "1.1"
   },
   "operations": {
+    "AcceptInputDeviceTransfer": {
+      "name": "AcceptInputDeviceTransfer",
+      "http": {
+        "method": "POST",
+        "requestUri": "/prod/inputDevices/{inputDeviceId}/accept",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "AcceptInputDeviceTransferRequest"
+      },
+      "output": {
+        "shape": "AcceptInputDeviceTransferResponse",
+        "documentation": "Your request to accept this device transfer has succeeded."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request was invalid."
+        },
+        {
+          "shape": "UnprocessableEntityException",
+          "documentation": "Transfer operation failed, input could not be validated."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Unexpected internal service error."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You do not have permission to accept input device transfers."
+        },
+        {
+          "shape": "BadGatewayException",
+          "documentation": "Bad gateway error."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "Input device not found."
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "Gateway Timeout Error"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "Request limit exceeded on transfer device calls to the input device service."
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "Input device transfer could not be accepted."
+        }
+      ],
+      "documentation": "Accept an incoming input device transfer. The ownership of the device will transfer to your AWS account."
+    },
     "BatchDelete": {
       "name": "BatchDelete",
       "http": {
@@ -211,6 +265,60 @@
         }
       ],
       "documentation": "Update a channel schedule"
+    },
+    "CancelInputDeviceTransfer": {
+      "name": "CancelInputDeviceTransfer",
+      "http": {
+        "method": "POST",
+        "requestUri": "/prod/inputDevices/{inputDeviceId}/cancel",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "CancelInputDeviceTransferRequest"
+      },
+      "output": {
+        "shape": "CancelInputDeviceTransferResponse",
+        "documentation": "Your cancel request has succeeded."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request was invalid."
+        },
+        {
+          "shape": "UnprocessableEntityException",
+          "documentation": "Transfer operation failed, input could not be validated."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Unexpected internal service error."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You do not have permission to cancel input device transfers."
+        },
+        {
+          "shape": "BadGatewayException",
+          "documentation": "Bad gateway error."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "Input device not found."
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "Gateway Timeout Error"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "Request limit exceeded on transfer device calls to the input device service."
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "Input device transfer could not be canceled."
+        }
+      ],
+      "documentation": "Cancel an input device transfer that you have requested."
     },
     "CreateChannel": {
       "name": "CreateChannel",
@@ -1350,6 +1458,52 @@
       ],
       "documentation": "Produces list of channels that have been created"
     },
+    "ListInputDeviceTransfers": {
+      "name": "ListInputDeviceTransfers",
+      "http": {
+        "method": "GET",
+        "requestUri": "/prod/inputDeviceTransfers",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListInputDeviceTransfersRequest"
+      },
+      "output": {
+        "shape": "ListInputDeviceTransfersResponse",
+        "documentation": "An array of input devices that are currently being transferred."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request was invalid."
+        },
+        {
+          "shape": "UnprocessableEntityException",
+          "documentation": "Transfer operation failed, input could not be validated."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Unexpected internal service error."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You do not have permission to list transferring devices."
+        },
+        {
+          "shape": "BadGatewayException",
+          "documentation": "Bad gateway error."
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "Gateway Timeout Error"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "Request limit exceeded on list devices calls to the input device service."
+        }
+      ],
+      "documentation": "List input devices that are currently being transferred. List input devices that you are transferring from your AWS account or input devices that another AWS account is transferring to you."
+    },
     "ListInputDevices": {
       "name": "ListInputDevices",
       "http": {
@@ -1732,6 +1886,60 @@
       ],
       "documentation": "Purchase an offering and create a reservation."
     },
+    "RejectInputDeviceTransfer": {
+      "name": "RejectInputDeviceTransfer",
+      "http": {
+        "method": "POST",
+        "requestUri": "/prod/inputDevices/{inputDeviceId}/reject",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "RejectInputDeviceTransferRequest"
+      },
+      "output": {
+        "shape": "RejectInputDeviceTransferResponse",
+        "documentation": "Your reject request has succeeded."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request was invalid."
+        },
+        {
+          "shape": "UnprocessableEntityException",
+          "documentation": "Transfer operation failed, input could not be validated."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Unexpected internal service error."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You do not have permission to reject input device transfers."
+        },
+        {
+          "shape": "BadGatewayException",
+          "documentation": "Bad gateway error."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "Input device not found."
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "Gateway Timeout Error"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "Request limit exceeded on transfer device calls to the input device service."
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "Input device transfer could not be rejected."
+        }
+      ],
+      "documentation": "Reject the transfer of the specified input device to your AWS account."
+    },
     "StartChannel": {
       "name": "StartChannel",
       "http": {
@@ -1931,6 +2139,60 @@
         }
       ],
       "documentation": "Stops a running multiplex. If the multiplex isn't running, this action has no effect."
+    },
+    "TransferInputDevice": {
+      "name": "TransferInputDevice",
+      "http": {
+        "method": "POST",
+        "requestUri": "/prod/inputDevices/{inputDeviceId}/transfer",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "TransferInputDeviceRequest"
+      },
+      "output": {
+        "shape": "TransferInputDeviceResponse",
+        "documentation": "The device transfer request has started."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request was invalid."
+        },
+        {
+          "shape": "UnprocessableEntityException",
+          "documentation": "Transfer operation failed, input could not be validated."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Unexpected internal service error."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You do not have permission to transfer input devices."
+        },
+        {
+          "shape": "BadGatewayException",
+          "documentation": "Bad gateway error."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "Input device not found."
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "Gateway Timeout Error"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "Request limit exceeded on transfer device calls to the input device service."
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "Input device could not be transferred."
+        }
+      ],
+      "documentation": "Start an input device transfer to another AWS account. After you make the request, the other account must accept or reject the transfer."
     },
     "UpdateChannel": {
       "name": "UpdateChannel",
@@ -2527,6 +2789,26 @@
         }
       },
       "documentation": "Ac3 Settings"
+    },
+    "AcceptInputDeviceTransferRequest": {
+      "type": "structure",
+      "members": {
+        "InputDeviceId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "inputDeviceId",
+          "documentation": "The unique ID of the input device to accept. For example, hd-123456789abcdef."
+        }
+      },
+      "required": [
+        "InputDeviceId"
+      ],
+      "documentation": "Placeholder documentation for AcceptInputDeviceTransferRequest"
+    },
+    "AcceptInputDeviceTransferResponse": {
+      "type": "structure",
+      "members": {},
+      "documentation": "Placeholder documentation for AcceptInputDeviceTransferResponse"
     },
     "AfdSignaling": {
       "type": "string",
@@ -3459,6 +3741,26 @@
         "FIXED",
         "SCALED"
       ]
+    },
+    "CancelInputDeviceTransferRequest": {
+      "type": "structure",
+      "members": {
+        "InputDeviceId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "inputDeviceId",
+          "documentation": "The unique ID of the input device to cancel. For example, hd-123456789abcdef."
+        }
+      },
+      "required": [
+        "InputDeviceId"
+      ],
+      "documentation": "Placeholder documentation for CancelInputDeviceTransferRequest"
+    },
+    "CancelInputDeviceTransferResponse": {
+      "type": "structure",
+      "members": {},
+      "documentation": "Placeholder documentation for CancelInputDeviceTransferResponse"
     },
     "CaptionDescription": {
       "type": "structure",
@@ -8047,6 +8349,14 @@
       },
       "documentation": "Details of the input device."
     },
+    "InputDeviceTransferType": {
+      "type": "string",
+      "documentation": "The type of device transfer. INCOMING for an input device that is being transferred to you, OUTGOING for an input device that you are transferring to another AWS account.",
+      "enum": [
+        "OUTGOING",
+        "INCOMING"
+      ]
+    },
     "InputDeviceType": {
       "type": "string",
       "documentation": "The type of the input device. For an AWS Elemental Link device that outputs resolutions up to 1080, choose \"HD\".",
@@ -8533,6 +8843,46 @@
         }
       },
       "documentation": "Placeholder documentation for ListChannelsResponse"
+    },
+    "ListInputDeviceTransfersRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "shape": "MaxResults",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "TransferType": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "transferType"
+        }
+      },
+      "required": [
+        "TransferType"
+      ],
+      "documentation": "Placeholder documentation for ListInputDeviceTransfersRequest"
+    },
+    "ListInputDeviceTransfersResponse": {
+      "type": "structure",
+      "members": {
+        "InputDeviceTransfers": {
+          "shape": "__listOfTransferringInputDeviceSummary",
+          "locationName": "inputDeviceTransfers",
+          "documentation": "The list of devices that you are transferring or are being transferred to you."
+        },
+        "NextToken": {
+          "shape": "__string",
+          "locationName": "nextToken",
+          "documentation": "A token to get additional list results."
+        }
+      },
+      "documentation": "Placeholder documentation for ListInputDeviceTransfersResponse"
     },
     "ListInputDevicesRequest": {
       "type": "structure",
@@ -10693,6 +11043,26 @@
       "members": {},
       "documentation": "Rec709 Settings"
     },
+    "RejectInputDeviceTransferRequest": {
+      "type": "structure",
+      "members": {
+        "InputDeviceId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "inputDeviceId",
+          "documentation": "The unique ID of the input device to reject. For example, hd-123456789abcdef."
+        }
+      },
+      "required": [
+        "InputDeviceId"
+      ],
+      "documentation": "Placeholder documentation for RejectInputDeviceTransferRequest"
+    },
+    "RejectInputDeviceTransferResponse": {
+      "type": "structure",
+      "members": {},
+      "documentation": "Placeholder documentation for RejectInputDeviceTransferResponse"
+    },
     "RemixSettings": {
       "type": "structure",
       "members": {
@@ -12125,6 +12495,62 @@
         "ZEROBASED"
       ]
     },
+    "TransferInputDeviceRequest": {
+      "type": "structure",
+      "members": {
+        "InputDeviceId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "inputDeviceId",
+          "documentation": "The unique ID of this input device. For example, hd-123456789abcdef."
+        },
+        "TargetCustomerId": {
+          "shape": "__string",
+          "locationName": "targetCustomerId",
+          "documentation": "The AWS account ID (12 digits) for the recipient of the device transfer."
+        },
+        "TransferMessage": {
+          "shape": "__string",
+          "locationName": "transferMessage",
+          "documentation": "An optional message for the recipient. Maximum 280 characters."
+        }
+      },
+      "documentation": "A request to transfer an input device.",
+      "required": [
+        "InputDeviceId"
+      ]
+    },
+    "TransferInputDeviceResponse": {
+      "type": "structure",
+      "members": {},
+      "documentation": "Placeholder documentation for TransferInputDeviceResponse"
+    },
+    "TransferringInputDeviceSummary": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "__string",
+          "locationName": "id",
+          "documentation": "The unique ID of the input device."
+        },
+        "Message": {
+          "shape": "__string",
+          "locationName": "message",
+          "documentation": "The optional message that the sender has attached to the transfer."
+        },
+        "TargetCustomerId": {
+          "shape": "__string",
+          "locationName": "targetCustomerId",
+          "documentation": "The AWS account ID for the recipient of the input device transfer."
+        },
+        "TransferType": {
+          "shape": "InputDeviceTransferType",
+          "locationName": "transferType",
+          "documentation": "The type (direction) of the input device transfer."
+        }
+      },
+      "documentation": "Details about the input device that is being transferred."
+    },
     "TtmlDestinationSettings": {
       "type": "structure",
       "members": {
@@ -13388,6 +13814,13 @@
         "shape": "Scte35Descriptor"
       },
       "documentation": "Placeholder documentation for __listOfScte35Descriptor"
+    },
+    "__listOfTransferringInputDeviceSummary": {
+      "type": "list",
+      "member": {
+        "shape": "TransferringInputDeviceSummary"
+      },
+      "documentation": "Placeholder documentation for __listOfTransferringInputDeviceSummary"
     },
     "__listOfVideoDescription": {
       "type": "list",
