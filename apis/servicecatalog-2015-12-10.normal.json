@@ -3260,11 +3260,11 @@
         },
         "Id": {
           "shape": "Id",
-          "documentation": "<p>The provisioned product identifier.</p>"
+          "documentation": "<p>The provisioned product identifier. You must provide the name or ID, but not both.</p> <p>If you do not provide a name or ID, or you provide both name and ID, an <code>InvalidParametersException</code> will occur.</p>"
         },
         "Name": {
           "shape": "ProvisionedProductName",
-          "documentation": "<p>The name of the provisioned product.</p>"
+          "documentation": "<p>The name of the provisioned product. You must provide the name or ID, but not both.</p> <p>If you do not provide a name or ID, or you provide both name and ID, an <code>InvalidParametersException</code> will occur.</p>"
         }
       },
       "documentation": "DescribeProvisionedProductAPI input structure. AcceptLanguage - [Optional] The language code for localization. Id - [Optional] The provisioned product identifier. Name - [Optional] Another provisioned product identifier. Customers must provide either Id or Name."
@@ -5082,7 +5082,8 @@
     "PropertyKey": {
       "type": "string",
       "enum": [
-        "OWNER"
+        "OWNER",
+        "LAUNCH_ROLE"
       ],
       "max": 128,
       "min": 1
@@ -5313,6 +5314,10 @@
         "ProvisioningArtifactId": {
           "shape": "Id",
           "documentation": "<p>The identifier of the provisioning artifact. For example, <code>pa-4abcdjnxjj6ne</code>.</p>"
+        },
+        "LaunchRoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The ARN of the launch role associated with the provisioned product.</p>"
         }
       },
       "documentation": "<p>Information about a provisioned product.</p>"
@@ -5900,6 +5905,10 @@
         "RecordTags": {
           "shape": "RecordTags",
           "documentation": "<p>One or more tags.</p>"
+        },
+        "LaunchRoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The ARN of the launch role associated with the provisioned product.</p>"
         }
       },
       "documentation": "<p>Information about a request operation.</p>"
@@ -6193,6 +6202,12 @@
     },
     "ResourceType": {
       "type": "string"
+    },
+    "RoleArn": {
+      "type": "string",
+      "max": 1224,
+      "min": 1,
+      "pattern": "arn:[a-z0-9-\\.]{1,63}:iam::[a-z0-9-\\.]{0,63}:role\\/.{0,1023}"
     },
     "ScanProvisionedProductsInput": {
       "type": "structure",
@@ -7097,7 +7112,7 @@
         },
         "ProvisionedProductProperties": {
           "shape": "ProvisionedProductProperties",
-          "documentation": "<p>A map that contains the provisioned product properties to be updated.</p> <p>The <code>OWNER</code> key accepts user ARNs and role ARNs. The owner is the user that is allowed to see, update, terminate, and execute service actions in the provisioned product.</p> <p>The administrator can change the owner of a provisioned product to another IAM user within the same account. Both end user owners and administrators can see ownership history of the provisioned product using the <code>ListRecordHistory</code> API. The new owner can describe all past records for the provisioned product using the <code>DescribeRecord</code> API. The previous owner can no longer use <code>DescribeRecord</code>, but can still see the product's history from when he was an owner using <code>ListRecordHistory</code>.</p> <p>If a provisioned product ownership is assigned to an end user, they can see and perform any action through the API or Service Catalog console such as update, terminate, and execute service actions. If an end user provisions a product and the owner is updated to someone else, they will no longer be able to see or perform any actions through API or the Service Catalog console on that provisioned product.</p>"
+          "documentation": "<p>A map that contains the provisioned product properties to be updated.</p> <p>The <code>LAUNCH_ROLE</code> key accepts user ARNs and role ARNs. This key allows an administrator to call <code>UpdateProvisionedProductProperties</code> to update the launch role that is associated with a provisioned product. This role is used when an end-user calls a provisioning operation such as <code>UpdateProvisionedProduct</code>, <code>TerminateProvisionedProduct</code>, or <code>ExecuteProvisionedProductServiceAction</code>. Only an ARN role or <code>null</code> is valid. A user ARN is invalid. For example, if an admin user passes <code>null</code> as the value for the key <code>LAUNCH_ROLE</code>, the admin removes the launch role that is associated with the provisioned product. As a result, the end user operations use the credentials of the end user.</p> <p>The <code>OWNER</code> key accepts user ARNs and role ARNs. The owner is the user that has permission to see, update, terminate, and execute service actions in the provisioned product.</p> <p>The administrator can change the owner of a provisioned product to another IAM user within the same account. Both end user owners and administrators can see ownership history of the provisioned product using the <code>ListRecordHistory</code> API. The new owner can describe all past records for the provisioned product using the <code>DescribeRecord</code> API. The previous owner can no longer use <code>DescribeRecord</code>, but can still see the product's history from when he was an owner using <code>ListRecordHistory</code>.</p> <p>If a provisioned product ownership is assigned to an end user, they can see and perform any action through the API or Service Catalog console such as update, terminate, and execute service actions. If an end user provisions a product and the owner is updated to someone else, they will no longer be able to see or perform any actions through API or the Service Catalog console on that provisioned product.</p>"
         },
         "IdempotencyToken": {
           "shape": "IdempotencyToken",

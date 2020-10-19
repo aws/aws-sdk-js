@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.773.0-->
+<!--LATEST=2.774.0-->
 <!--ENTRYINSERT-->
+
+## 2.774.0
+* feature: CloudFront: Amazon CloudFront adds support for Origin Shield.
+* feature: SSM: This Patch Manager release now supports Common Vulnerabilities and Exposure (CVE) Ids for missing packages via the DescribeInstancePatches API.
+* feature: ServiceCatalog: An Admin can now update the launch role associated with a Provisioned Product. Admins and End Users can now view the launch role associated with a Provisioned Product.
 
 ## 2.773.0
 * feature: MediaLive: The AWS Elemental MediaLive APIs and SDKs now support the ability to transfer the ownership of MediaLive Link devices across AWS accounts.

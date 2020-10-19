@@ -336,11 +336,11 @@ declare class Backup extends Service {
    */
   startCopyJob(callback?: (err: AWSError, data: Backup.Types.StartCopyJobOutput) => void): Request<Backup.Types.StartCopyJobOutput, AWSError>;
   /**
-   * Recovers the saved resource identified by an Amazon Resource Name (ARN).  If the resource ARN is included in the request, then the last complete backup of that resource is recovered. If the ARN of a recovery point is supplied, then that recovery point is restored.
+   * Recovers the saved resource identified by an Amazon Resource Name (ARN). 
    */
   startRestoreJob(params: Backup.Types.StartRestoreJobInput, callback?: (err: AWSError, data: Backup.Types.StartRestoreJobOutput) => void): Request<Backup.Types.StartRestoreJobOutput, AWSError>;
   /**
-   * Recovers the saved resource identified by an Amazon Resource Name (ARN).  If the resource ARN is included in the request, then the last complete backup of that resource is recovered. If the ARN of a recovery point is supplied, then that recovery point is restored.
+   * Recovers the saved resource identified by an Amazon Resource Name (ARN). 
    */
   startRestoreJob(callback?: (err: AWSError, data: Backup.Types.StartRestoreJobOutput) => void): Request<Backup.Types.StartRestoreJobOutput, AWSError>;
   /**
@@ -401,7 +401,7 @@ declare namespace Backup {
      */
     ResourceType?: ResourceType;
     /**
-     * Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs. Valid value: "WindowsVSS”:“enabled". If enabled, creates a VSS Windows backup; otherwise, creates a regular backup. If you specify an invalid option, you get an InvalidParameterValueException exception. For more information about Windows VSS backups, see Creating a VSS-Enabled Windows Backup.
+     * Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs. Valid values: Set to "WindowsVSS”:“enabled" to enable WindowsVSS backup option and create a VSS Windows backup. Set to “WindowsVSS”:”disabled” to create a regular backup. The WindowsVSS option is not enabled by default. If you specify an invalid option, you get an InvalidParameterValueException exception. For more information about Windows VSS backups, see Creating a VSS-Enabled Windows Backup.
      */
     BackupOptions?: BackupOptions;
   }
@@ -480,7 +480,7 @@ declare namespace Backup {
      */
     BytesTransferred?: Long;
     /**
-     * Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs. Valid value: "WindowsVSS”:“enabled". If enabled, creates a VSS Windows backup; otherwise, creates a regular backup. If you specify an invalid option, you get an InvalidParameterValueException exception.
+     * Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs. Valid values: Set to "WindowsVSS”:“enabled" to enable WindowsVSS backup option and create a VSS Windows backup. Set to “WindowsVSS”:”disabled” to create a regular backup. If you specify an invalid option, you get an InvalidParameterValueException exception.
      */
     BackupOptions?: BackupOptions;
     /**
@@ -583,7 +583,7 @@ declare namespace Backup {
      */
     TargetBackupVaultName: BackupVaultName;
     /**
-     * A CRON expression specifying when AWS Backup initiates a backup job.
+     * A CRON expression specifying when AWS Backup initiates a backup job. For more information about cron expressions, see Schedule Expressions for Rules in the Amazon CloudWatch Events User Guide.. Prior to specifying a value for this parameter, we recommend testing your cron expression using one of the many available cron generator and testing tools.
      */
     ScheduleExpression?: CronExpression;
     /**
@@ -2092,7 +2092,7 @@ declare namespace Backup {
      */
     RecoveryPointTags?: Tags;
     /**
-     * Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs. Valid value: "WindowsVSS”:“enabled". If enabled, creates a VSS Windows backup; otherwise, creates a regular backup.
+     * Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs. Valid values: Set to "WindowsVSS”:“enabled" to enable WindowsVSS backup option and create a VSS Windows backup. Set to “WindowsVSS”:”disabled” to create a regular backup. The WindowsVSS option is not enabled by default.
      */
     BackupOptions?: BackupOptions;
   }
@@ -2149,7 +2149,7 @@ declare namespace Backup {
      */
     RecoveryPointArn: ARN;
     /**
-     * A set of metadata key-value pairs. Contains information, such as a resource name, required to restore a recovery point.  You can get configuration metadata about a resource at the time it was backed up by calling GetRecoveryPointRestoreMetadata. However, values in addition to those provided by GetRecoveryPointRestoreMetadata might be required to restore a resource. For example, you might need to provide a new resource name if the original already exists. You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:    file-system-id: The ID of the Amazon EFS file system that is backed up by AWS Backup. Returned in GetRecoveryPointRestoreMetadata.    Encrypted: A Boolean value that, if true, specifies that the file system is encrypted. If KmsKeyId is specified, Encrypted must be set to true.    KmsKeyId: Specifies the AWS KMS key that is used to encrypt the restored file system.    PerformanceMode: Specifies the throughput mode of the file system.    CreationToken: A user-supplied value that ensures the uniqueness (idempotency) of the request.    newFileSystem: A Boolean value that, if true, specifies that the recovery point is restored to a new Amazon EFS file system.  
+     * A set of metadata key-value pairs. Contains information, such as a resource name, required to restore a recovery point.  You can get configuration metadata about a resource at the time it was backed up by calling GetRecoveryPointRestoreMetadata. However, values in addition to those provided by GetRecoveryPointRestoreMetadata might be required to restore a resource. For example, you might need to provide a new resource name if the original already exists. You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:    file-system-id: The ID of the Amazon EFS file system that is backed up by AWS Backup. Returned in GetRecoveryPointRestoreMetadata.    Encrypted: A Boolean value that, if true, specifies that the file system is encrypted. If KmsKeyId is specified, Encrypted must be set to true.    KmsKeyId: Specifies the AWS KMS key that is used to encrypt the restored file system. You can specify a key from another AWS account provided that key it is properly shared with your account via AWS KMS.    PerformanceMode: Specifies the throughput mode of the file system.    CreationToken: A user-supplied value that ensures the uniqueness (idempotency) of the request.    newFileSystem: A Boolean value that, if true, specifies that the recovery point is restored to a new Amazon EFS file system.    ItemsToRestore : A serialized list of up to five strings where each string is a file path. Use ItemsToRestore to restore specific files or directories rather than the entire file system. This parameter is optional.  
      */
     Metadata: Metadata;
     /**

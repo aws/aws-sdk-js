@@ -6768,6 +6768,7 @@ declare namespace SSM {
   export type PatchBugzillaIdList = PatchBugzillaId[];
   export type PatchCVEId = string;
   export type PatchCVEIdList = PatchCVEId[];
+  export type PatchCVEIds = string;
   export type PatchClassification = string;
   export interface PatchComplianceData {
     /**
@@ -6794,6 +6795,10 @@ declare namespace SSM {
      * The date/time the patch was installed on the instance. Note that not all operating systems provide this level of information.
      */
     InstalledTime: DateTime;
+    /**
+     * The IDs of one or more Common Vulnerabilities and Exposure (CVE) issues that are resolved by the patch.
+     */
+    CVEIds?: PatchCVEIds;
   }
   export type PatchComplianceDataList = PatchComplianceData[];
   export type PatchComplianceDataState = "INSTALLED"|"INSTALLED_OTHER"|"INSTALLED_PENDING_REBOOT"|"INSTALLED_REJECTED"|"MISSING"|"NOT_APPLICABLE"|"FAILED"|string;
@@ -7031,7 +7036,7 @@ declare namespace SSM {
      */
     Value: PSParameterValue;
     /**
-     * The type of parameter that you want to add to the system.   SecureString is not currently supported for AWS CloudFormation templates or in the China Regions.  Items in a StringList must be separated by a comma (,). You can't use other punctuation or special character to escape items in the list. If you have a parameter value that requires a comma, then use the String data type.  Specifying a parameter type is not required when updating a parameter. You must specify a parameter type when creating a parameter. 
+     * The type of parameter that you want to add to the system.   SecureString is not currently supported for AWS CloudFormation templates.  Items in a StringList must be separated by a comma (,). You can't use other punctuation or special character to escape items in the list. If you have a parameter value that requires a comma, then use the String data type.  Specifying a parameter type is not required when updating a parameter. You must specify a parameter type when creating a parameter. 
      */
     Type?: ParameterType;
     /**
