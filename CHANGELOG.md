@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.774.0-->
+<!--LATEST=2.775.0-->
 <!--ENTRYINSERT-->
+
+## 2.775.0
+* bugfix: Credentials: Do not require credentials file when loading from config.
+* feature: Batch: Adding evaluateOnExit to job retry strategies.
+* feature: ElasticBeanstalk: EnvironmentStatus enum update to include Aborting, LinkingFrom and LinkingTo
 
 ## 2.774.0
 * feature: CloudFront: Amazon CloudFront adds support for Origin Shield.

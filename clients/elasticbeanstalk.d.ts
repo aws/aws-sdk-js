@@ -1654,7 +1654,7 @@ declare namespace ElasticBeanstalk {
      */
     LoadBalancer?: LoadBalancerDescription;
   }
-  export type EnvironmentStatus = "Launching"|"Updating"|"Ready"|"Terminating"|"Terminated"|string;
+  export type EnvironmentStatus = "Aborting"|"Launching"|"Updating"|"LinkingFrom"|"LinkingTo"|"Ready"|"Terminating"|"Terminated"|string;
   export interface EnvironmentTier {
     /**
      * The name of this environment tier. Valid values:   For Web server tier – WebServer    For Worker tier – Worker   

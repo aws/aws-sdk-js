@@ -710,7 +710,7 @@
         },
         "allocationStrategy": {
           "shape": "CRAllocationStrategy",
-          "documentation": "<p>The allocation strategy to use for the compute resource in case not enough instances of the best fitting instance type can be allocated. This could be due to availability of the instance type in the region or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html\">Amazon EC2 service limits</a>. If this is not specified, the default is <code>BEST_FIT</code>, which will use only the best fitting instance type, waiting for additional capacity if it's not available. This allocation strategy keeps costs lower but can limit scaling. If you are using Spot Fleets with <code>BEST_FIT</code> then the Spot Fleet IAM Role must be specified. <code>BEST_FIT_PROGRESSIVE</code> will select additional instance types that are large enough to meet the requirements of the jobs in the queue, with a preference for instance types with a lower cost per vCPU. <code>SPOT_CAPACITY_OPTIMIZED</code> is only available for Spot Instance compute resources and will select additional instance types that are large enough to meet the requirements of the jobs in the queue, with a preference for instance types that are less likely to be interrupted. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/allocation-strategies.html \">Allocation Strategies</a> in the <i>AWS Batch User Guide</i>.</p>"
+          "documentation": "<p>The allocation strategy to use for the compute resource in case not enough instances of the best fitting instance type can be allocated. This could be due to availability of the instance type in the region or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html\">Amazon EC2 service limits</a>. If this is not specified, the default is <code>BEST_FIT</code>, which will use only the best fitting instance type, waiting for additional capacity if it's not available. This allocation strategy keeps costs lower but can limit scaling. If you are using Spot Fleets with <code>BEST_FIT</code> then the Spot Fleet IAM Role must be specified. <code>BEST_FIT_PROGRESSIVE</code> will select additional instance types that are large enough to meet the requirements of the jobs in the queue, with a preference for instance types with a lower cost per vCPU. <code>SPOT_CAPACITY_OPTIMIZED</code> is only available for Spot Instance compute resources and will select additional instance types that are large enough to meet the requirements of the jobs in the queue, with a preference for instance types that are less likely to be interrupted. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/allocation-strategies.html\">Allocation Strategies</a> in the <i>AWS Batch User Guide</i>.</p>"
         },
         "minvCpus": {
           "shape": "Integer",
@@ -1321,6 +1321,37 @@
         "shape": "KeyValuePair"
       }
     },
+    "EvaluateOnExit": {
+      "type": "structure",
+      "required": [
+        "action"
+      ],
+      "members": {
+        "onStatusReason": {
+          "shape": "String",
+          "documentation": "<p>Contains a glob pattern to match against the <code>StatusReason</code> returned for a job. The patten can be up to 512 characters long, can contain letters, numbers, periods (.), colons (:), and whitespace (spaces, tabs). and can optionally end with an asterisk (*) so that only the start of the string needs to be an exact match.</p>"
+        },
+        "onReason": {
+          "shape": "String",
+          "documentation": "<p>Contains a glob pattern to match against the <code>Reason</code> returned for a job. The patten can be up to 512 characters long, can contain letters, numbers, periods (.), colons (:), and whitespace (spaces, tabs), and can optionally end with an asterisk (*) so that only the start of the string needs to be an exact match.</p>"
+        },
+        "onExitCode": {
+          "shape": "String",
+          "documentation": "<p>Contains a glob pattern to match against the decimal representation of the <code>ExitCode</code> returned for a job. The patten can be up to 512 characters long, can contain only numbers, and can optionally end with an asterisk (*) so that only the start of the string needs to be an exact match.</p>"
+        },
+        "action": {
+          "shape": "RetryAction",
+          "documentation": "<p>Specifies the action to take if all of the specified conditions (<code>onStatusReason</code>, <code>onReason</code>, and <code>onExitCode</code>) are met.</p>"
+        }
+      },
+      "documentation": "<p>Specifies a set of conditions to be met, and an action to take (<code>RETRY</code> or <code>EXIT</code>) if all conditions are met.</p>"
+    },
+    "EvaluateOnExitList": {
+      "type": "list",
+      "member": {
+        "shape": "EvaluateOnExit"
+      }
+    },
     "Host": {
       "type": "structure",
       "members": {
@@ -1727,7 +1758,7 @@
         },
         "maxSwap": {
           "shape": "Integer",
-          "documentation": "<p>The total amount of swap memory (in MiB) a container can use. This parameter will be translated to the <code>--memory-swap</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a> where the value would be the sum of the container memory plus the <code>maxSwap</code> value.</p> <p>If a <code>maxSwap</code> value of <code>0</code> is specified, the container will not use swap. Accepted values are <code>0</code> or any positive integer. If the <code>maxSwap</code> parameter is omitted, the container will use the swap configuration for the container instance it is running on. A <code>maxSwap</code> value must be set for the <code>swappiness</code> parameter to be used.</p>"
+          "documentation": "<p>The total amount of swap memory (in MiB) a container can use. This parameter will be translated to the <code>--memory-swap</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a> where the value would be the sum of the container memory plus the <code>maxSwap</code> value. For more information, see <a href=\"https://docs.docker.com/config/containers/resource_constraints/#--memory-swap-details\"> <code>--memory-swap</code> details</a> in the Docker documentation.</p> <p>If a <code>maxSwap</code> value of <code>0</code> is specified, the container will not use swap. Accepted values are <code>0</code> or any positive integer. If the <code>maxSwap</code> parameter is omitted, the container will use the swap configuration for the container instance it is running on. A <code>maxSwap</code> value must be set for the <code>swappiness</code> parameter to be used.</p>"
         },
         "swappiness": {
           "shape": "Integer",
@@ -2114,12 +2145,23 @@
         "GPU"
       ]
     },
+    "RetryAction": {
+      "type": "string",
+      "enum": [
+        "RETRY",
+        "EXIT"
+      ]
+    },
     "RetryStrategy": {
       "type": "structure",
       "members": {
         "attempts": {
           "shape": "Integer",
           "documentation": "<p>The number of times to move a job to the <code>RUNNABLE</code> status. You may specify between 1 and 10 attempts. If the value of <code>attempts</code> is greater than one, the job is retried on failure the same number of attempts as the value.</p>"
+        },
+        "evaluateOnExit": {
+          "shape": "EvaluateOnExitList",
+          "documentation": "<p>Array of up to 5 objects that specify conditions under which the job should be retried or failed. If this parameter is specified, then the <code>attempts</code> parameter must also be specified.</p>"
         }
       },
       "documentation": "<p>The retry strategy associated with a job.</p>"

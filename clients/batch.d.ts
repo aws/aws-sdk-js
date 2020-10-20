@@ -804,6 +804,25 @@ declare namespace Batch {
   export type DeviceCgroupPermissions = DeviceCgroupPermission[];
   export type DevicesList = Device[];
   export type EnvironmentVariables = KeyValuePair[];
+  export interface EvaluateOnExit {
+    /**
+     * Contains a glob pattern to match against the StatusReason returned for a job. The patten can be up to 512 characters long, can contain letters, numbers, periods (.), colons (:), and whitespace (spaces, tabs). and can optionally end with an asterisk (*) so that only the start of the string needs to be an exact match.
+     */
+    onStatusReason?: String;
+    /**
+     * Contains a glob pattern to match against the Reason returned for a job. The patten can be up to 512 characters long, can contain letters, numbers, periods (.), colons (:), and whitespace (spaces, tabs), and can optionally end with an asterisk (*) so that only the start of the string needs to be an exact match.
+     */
+    onReason?: String;
+    /**
+     * Contains a glob pattern to match against the decimal representation of the ExitCode returned for a job. The patten can be up to 512 characters long, can contain only numbers, and can optionally end with an asterisk (*) so that only the start of the string needs to be an exact match.
+     */
+    onExitCode?: String;
+    /**
+     * Specifies the action to take if all of the specified conditions (onStatusReason, onReason, and onExitCode) are met.
+     */
+    action: RetryAction;
+  }
+  export type EvaluateOnExitList = EvaluateOnExit[];
   export interface Host {
     /**
      * The path on the host container instance that is presented to the container. If this parameter is empty, then the Docker daemon has assigned a host path for you. If this parameter contains a file location, then the data volume persists at the specified location on the host container instance until you delete it manually. If the source path location does not exist on the host container instance, the Docker daemon creates it. If the location does exist, the contents of the source path folder are exported.
@@ -1086,7 +1105,7 @@ declare namespace Batch {
      */
     tmpfs?: TmpfsList;
     /**
-     * The total amount of swap memory (in MiB) a container can use. This parameter will be translated to the --memory-swap option to docker run where the value would be the sum of the container memory plus the maxSwap value. If a maxSwap value of 0 is specified, the container will not use swap. Accepted values are 0 or any positive integer. If the maxSwap parameter is omitted, the container will use the swap configuration for the container instance it is running on. A maxSwap value must be set for the swappiness parameter to be used.
+     * The total amount of swap memory (in MiB) a container can use. This parameter will be translated to the --memory-swap option to docker run where the value would be the sum of the container memory plus the maxSwap value. For more information, see  --memory-swap details in the Docker documentation. If a maxSwap value of 0 is specified, the container will not use swap. Accepted values are 0 or any positive integer. If the maxSwap parameter is omitted, the container will use the swap configuration for the container instance it is running on. A maxSwap value must be set for the swappiness parameter to be used.
      */
     maxSwap?: Integer;
     /**
@@ -1320,11 +1339,16 @@ declare namespace Batch {
   }
   export type ResourceRequirements = ResourceRequirement[];
   export type ResourceType = "GPU"|string;
+  export type RetryAction = "RETRY"|"EXIT"|string;
   export interface RetryStrategy {
     /**
      * The number of times to move a job to the RUNNABLE status. You may specify between 1 and 10 attempts. If the value of attempts is greater than one, the job is retried on failure the same number of attempts as the value.
      */
     attempts?: Integer;
+    /**
+     * Array of up to 5 objects that specify conditions under which the job should be retried or failed. If this parameter is specified, then the attempts parameter must also be specified.
+     */
+    evaluateOnExit?: EvaluateOnExitList;
   }
   export interface Secret {
     /**

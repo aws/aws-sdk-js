@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.774.0',
+	  VERSION: '2.775.0',
 
 	  /**
 	   * @api private
@@ -1144,10 +1144,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	        filename: process.env[util.sharedConfigFileEnv]
 	      });
 	    }
-	    var profilesFromCreds = iniLoader.loadFrom({
-	      filename: filename ||
-	        (process.env[util.configOptInEnv] && process.env[util.sharedCredentialsFileEnv])
-	    });
+	    var profilesFromCreds= {};
+	    try {
+	      var profilesFromCreds = iniLoader.loadFrom({
+	        filename: filename ||
+	          (process.env[util.configOptInEnv] && process.env[util.sharedCredentialsFileEnv])
+	      });
+	    } catch (error) {
+	      // if using config, assume it is fully descriptive without a credentials file:
+	      if (!process.env[util.configOptInEnv]) throw error;
+	    }
 	    for (var i = 0, profileNames = Object.keys(profilesFromConfig); i < profileNames.length; i++) {
 	      profiles[profileNames[i]] = objectAssign(profiles[profileNames[i]] || {}, profilesFromConfig[profileNames[i]]);
 	    }
