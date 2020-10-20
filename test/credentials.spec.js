@@ -358,6 +358,22 @@
           validateCredentials(creds);
           return expect(AWS.util.readFileSync.calls[0]['arguments'][0]).to.match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]config/);
         });
+        it('does not require ~/.aws/credentials if AWS_SDK_LOAD_CONFIG is set', function() {
+          var creds, mock;
+          process.env.AWS_SDK_LOAD_CONFIG = '1';
+          mock = '[default]\naws_access_key_id = akid\naws_secret_access_key = secret\naws_session_token = session';
+          helpers.spyOn(AWS.util, 'readFileSync').andCallFake(function(path) {
+            if (path.match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]credentials/)) {
+              throw new Error('ENOENT: no such file or directory');
+            } else {
+              return '[default]\naws_access_key_id = akid\naws_secret_access_key = secret\naws_session_token = session';
+            }
+          });
+          creds = new AWS.SharedIniFileCredentials();
+          creds.get();
+          validateCredentials(creds);
+          return expect(AWS.util.readFileSync.calls[0]['arguments'][0]).to.match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]config/);
+        });
         it('prefers credentials from ~/.aws/credentials if AWS_SDK_LOAD_CONFIG is set', function() {
           var creds;
           process.env.AWS_SDK_LOAD_CONFIG = '1';
