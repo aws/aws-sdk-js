@@ -1903,6 +1903,10 @@ declare namespace Glue {
      */
     Classifiers?: ClassifierNameList;
     /**
+     * A policy that specifies whether to crawl the entire dataset again, or to crawl only folders that were added since the last crawler run.
+     */
+    RecrawlPolicy?: RecrawlPolicy;
+    /**
      * The policy that specifies update and delete behaviors for the crawler.
      */
     SchemaChangePolicy?: SchemaChangePolicy;
@@ -2084,6 +2088,10 @@ declare namespace Glue {
      * The policy for the crawler's update and deletion behavior.
      */
     SchemaChangePolicy?: SchemaChangePolicy;
+    /**
+     * A policy that specifies whether to crawl the entire dataset again, or to crawl only folders that were added since the last crawler run.
+     */
+    RecrawlPolicy?: RecrawlPolicy;
     /**
      * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
      */
@@ -5557,6 +5565,13 @@ declare namespace Glue {
   export type PythonScript = string;
   export type PythonVersionString = string;
   export type RecordsCount = number;
+  export type RecrawlBehavior = "CRAWL_EVERYTHING"|"CRAWL_NEW_FOLDERS_ONLY"|string;
+  export interface RecrawlPolicy {
+    /**
+     * Specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run. A value of CRAWL_EVERYTHING specifies crawling the entire dataset again. A value of CRAWL_NEW_FOLDERS_ONLY specifies crawling only folders that were added since the last crawler run.
+     */
+    RecrawlBehavior?: RecrawlBehavior;
+  }
   export type ReplaceBoolean = boolean;
   export interface ResetJobBookmarkRequest {
     /**
@@ -6624,6 +6639,10 @@ declare namespace Glue {
      * The policy for the crawler's update and deletion behavior.
      */
     SchemaChangePolicy?: SchemaChangePolicy;
+    /**
+     * A policy that specifies whether to crawl the entire dataset again, or to crawl only folders that were added since the last crawler run.
+     */
+    RecrawlPolicy?: RecrawlPolicy;
     /**
      * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
      */

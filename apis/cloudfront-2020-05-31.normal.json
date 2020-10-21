@@ -245,6 +245,15 @@
         },
         {
           "shape": "TooManyDistributionsAssociatedToOriginRequestPolicy"
+        },
+        {
+          "shape": "TooManyDistributionsAssociatedToKeyGroup"
+        },
+        {
+          "shape": "TooManyKeyGroupsAssociatedToDistribution"
+        },
+        {
+          "shape": "TrustedKeyGroupDoesNotExist"
         }
       ],
       "documentation": "<p>Creates a new web distribution. You create a CloudFront distribution to tell CloudFront where you want content to be delivered from, and the details about how to track and manage content delivery. Send a <code>POST</code> request to the <code>/<i>CloudFront API version</i>/distribution</code>/<code>distribution ID</code> resource.</p> <important> <p>When you update a distribution, there are more required fields than when you create a distribution. When you update your distribution by using <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html\">UpdateDistribution</a>, follow the steps included in the documentation to get the current configuration and then make your updates. This helps to make sure that you include all of the required fields. To view a summary, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-overview-required-fields.html\">Required Fields for Create Distribution and Update Distribution</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> </important>"
@@ -412,6 +421,15 @@
         },
         {
           "shape": "TooManyDistributionsAssociatedToOriginRequestPolicy"
+        },
+        {
+          "shape": "TooManyDistributionsAssociatedToKeyGroup"
+        },
+        {
+          "shape": "TooManyKeyGroupsAssociatedToDistribution"
+        },
+        {
+          "shape": "TrustedKeyGroupDoesNotExist"
         }
       ],
       "documentation": "<p>Create a new distribution with tags.</p>"
@@ -536,6 +554,35 @@
       ],
       "documentation": "<p>Create a new invalidation. </p>"
     },
+    "CreateKeyGroup": {
+      "name": "CreateKeyGroup2020_05_31",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2020-05-31/key-group",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateKeyGroupRequest"
+      },
+      "output": {
+        "shape": "CreateKeyGroupResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidArgument"
+        },
+        {
+          "shape": "KeyGroupAlreadyExists"
+        },
+        {
+          "shape": "TooManyKeyGroups"
+        },
+        {
+          "shape": "TooManyPublicKeysInKeyGroup"
+        }
+      ],
+      "documentation": "<p>Creates a key group that you can use with <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html\">CloudFront signed URLs and signed cookies</a>.</p> <p>To create a key group, you must specify at least one public key for the key group. After you create a key group, you can reference it from one or more cache behaviors. When you reference a key group in a cache behavior, CloudFront requires signed URLs or signed cookies for all requests that match the cache behavior. The URLs or cookies must be signed with a private key whose corresponding public key is in the key group. The signed URL or cookie contains information about which public key CloudFront should use to verify the signature. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html\">Serving private content</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
+    },
     "CreateMonitoringSubscription": {
       "name": "CreateMonitoringSubscription2020_05_31",
       "http": {
@@ -623,7 +670,7 @@
           "shape": "TooManyPublicKeys"
         }
       ],
-      "documentation": "<p>Add a new public key to CloudFront to use, for example, for field-level encryption. You can add a maximum of 10 public keys with one AWS account.</p>"
+      "documentation": "<p>Uploads a public key to CloudFront that you can use with <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html\">signed URLs and signed cookies</a>, or with <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html\">field-level encryption</a>.</p>"
     },
     "CreateRealtimeLogConfig": {
       "name": "CreateRealtimeLogConfig2020_05_31",
@@ -651,6 +698,9 @@
         },
         {
           "shape": "InvalidArgument"
+        },
+        {
+          "shape": "AccessDenied"
         }
       ],
       "documentation": "<p>Creates a real-time log configuration.</p> <p>After you create a real-time log configuration, you can attach it to one or more cache behaviors to send real-time log data to the specified Amazon Kinesis data stream.</p> <p>For more information about real-time log configurations, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html\">Real-time logs</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
@@ -912,6 +962,32 @@
       ],
       "documentation": "<p>Remove a field-level encryption profile.</p>"
     },
+    "DeleteKeyGroup": {
+      "name": "DeleteKeyGroup2020_05_31",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/2020-05-31/key-group/{Id}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteKeyGroupRequest"
+      },
+      "errors": [
+        {
+          "shape": "InvalidIfMatchVersion"
+        },
+        {
+          "shape": "NoSuchResource"
+        },
+        {
+          "shape": "PreconditionFailed"
+        },
+        {
+          "shape": "ResourceInUse"
+        }
+      ],
+      "documentation": "<p>Deletes a key group.</p> <p>You cannot delete a key group that is referenced in a cache behavior. First update your distributions to remove the key group from all cache behaviors, then delete the key group.</p> <p>To delete a key group, you must provide the key group’s identifier and version. To get these values, use <code>ListKeyGroups</code> followed by <code>GetKeyGroup</code> or <code>GetKeyGroupConfig</code>.</p>"
+    },
     "DeleteMonitoringSubscription": {
       "name": "DeleteMonitoringSubscription2020_05_31",
       "http": {
@@ -1018,6 +1094,9 @@
         },
         {
           "shape": "InvalidArgument"
+        },
+        {
+          "shape": "AccessDenied"
         }
       ],
       "documentation": "<p>Deletes a real-time log configuration.</p> <p>You cannot delete a real-time log configuration if it’s attached to a cache behavior. First update your distributions to remove the real-time log configuration from all cache behaviors, then delete the real-time log configuration.</p> <p>To delete a real-time log configuration, you can provide the configuration’s name or its Amazon Resource Name (ARN). You must provide at least one. If you provide both, CloudFront uses the name to identify the real-time log configuration to delete.</p>"
@@ -1296,6 +1375,44 @@
       ],
       "documentation": "<p>Get the information about an invalidation. </p>"
     },
+    "GetKeyGroup": {
+      "name": "GetKeyGroup2020_05_31",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2020-05-31/key-group/{Id}"
+      },
+      "input": {
+        "shape": "GetKeyGroupRequest"
+      },
+      "output": {
+        "shape": "GetKeyGroupResult"
+      },
+      "errors": [
+        {
+          "shape": "NoSuchResource"
+        }
+      ],
+      "documentation": "<p>Gets a key group, including the date and time when the key group was last modified.</p> <p>To get a key group, you must provide the key group’s identifier. If the key group is referenced in a distribution’s cache behavior, you can get the key group’s identifier using <code>ListDistributions</code> or <code>GetDistribution</code>. If the key group is not referenced in a cache behavior, you can get the identifier using <code>ListKeyGroups</code>.</p>"
+    },
+    "GetKeyGroupConfig": {
+      "name": "GetKeyGroupConfig2020_05_31",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2020-05-31/key-group/{Id}/config"
+      },
+      "input": {
+        "shape": "GetKeyGroupConfigRequest"
+      },
+      "output": {
+        "shape": "GetKeyGroupConfigResult"
+      },
+      "errors": [
+        {
+          "shape": "NoSuchResource"
+        }
+      ],
+      "documentation": "<p>Gets a key group configuration.</p> <p>To get a key group configuration, you must provide the key group’s identifier. If the key group is referenced in a distribution’s cache behavior, you can get the key group’s identifier using <code>ListDistributions</code> or <code>GetDistribution</code>. If the key group is not referenced in a cache behavior, you can get the identifier using <code>ListKeyGroups</code>.</p>"
+    },
     "GetMonitoringSubscription": {
       "name": "GetMonitoringSubscription2020_05_31",
       "http": {
@@ -1382,7 +1499,7 @@
           "shape": "NoSuchPublicKey"
         }
       ],
-      "documentation": "<p>Get the public key information.</p>"
+      "documentation": "<p>Gets a public key.</p>"
     },
     "GetPublicKeyConfig": {
       "name": "GetPublicKeyConfig2020_05_31",
@@ -1404,7 +1521,7 @@
           "shape": "NoSuchPublicKey"
         }
       ],
-      "documentation": "<p>Return public key configuration informaation</p>"
+      "documentation": "<p>Gets a public key configuration.</p>"
     },
     "GetRealtimeLogConfig": {
       "name": "GetRealtimeLogConfig2020_05_31",
@@ -1428,6 +1545,9 @@
         },
         {
           "shape": "InvalidArgument"
+        },
+        {
+          "shape": "AccessDenied"
         }
       ],
       "documentation": "<p>Gets a real-time log configuration.</p> <p>To get a real-time log configuration, you can provide the configuration’s name or its Amazon Resource Name (ARN). You must provide at least one. If you provide both, CloudFront uses the name to identify the real-time log configuration to get.</p>"
@@ -1564,6 +1684,28 @@
       ],
       "documentation": "<p>Gets a list of distribution IDs for distributions that have a cache behavior that’s associated with the specified cache policy.</p> <p>You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the <code>NextMarker</code> value from the current response as the <code>Marker</code> value in the subsequent request.</p>"
     },
+    "ListDistributionsByKeyGroup": {
+      "name": "ListDistributionsByKeyGroup2020_05_31",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2020-05-31/distributionsByKeyGroupId/{KeyGroupId}"
+      },
+      "input": {
+        "shape": "ListDistributionsByKeyGroupRequest"
+      },
+      "output": {
+        "shape": "ListDistributionsByKeyGroupResult"
+      },
+      "errors": [
+        {
+          "shape": "NoSuchResource"
+        },
+        {
+          "shape": "InvalidArgument"
+        }
+      ],
+      "documentation": "<p>Gets a list of distribution IDs for distributions that have a cache behavior that references the specified key group.</p> <p>You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the <code>NextMarker</code> value from the current response as the <code>Marker</code> value in the subsequent request.</p>"
+    },
     "ListDistributionsByOriginRequestPolicyId": {
       "name": "ListDistributionsByOriginRequestPolicyId2020_05_31",
       "http": {
@@ -1697,6 +1839,25 @@
       ],
       "documentation": "<p>Lists invalidation batches. </p>"
     },
+    "ListKeyGroups": {
+      "name": "ListKeyGroups2020_05_31",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2020-05-31/key-group"
+      },
+      "input": {
+        "shape": "ListKeyGroupsRequest"
+      },
+      "output": {
+        "shape": "ListKeyGroupsResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidArgument"
+        }
+      ],
+      "documentation": "<p>Gets a list of key groups.</p> <p>You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the <code>NextMarker</code> value from the current response as the <code>Marker</code> value in the subsequent request.</p>"
+    },
     "ListOriginRequestPolicies": {
       "name": "ListOriginRequestPolicies2020_05_31",
       "http": {
@@ -1753,6 +1914,17 @@
       "output": {
         "shape": "ListRealtimeLogConfigsResult"
       },
+      "errors": [
+        {
+          "shape": "InvalidArgument"
+        },
+        {
+          "shape": "AccessDenied"
+        },
+        {
+          "shape": "NoSuchRealtimeLogConfig"
+        }
+      ],
       "documentation": "<p>Gets a list of real-time log configurations.</p> <p>You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the <code>NextMarker</code> value from the current response as the <code>Marker</code> value in the subsequent request. </p>"
     },
     "ListStreamingDistributions": {
@@ -2102,6 +2274,15 @@
         },
         {
           "shape": "TooManyDistributionsAssociatedToOriginRequestPolicy"
+        },
+        {
+          "shape": "TooManyDistributionsAssociatedToKeyGroup"
+        },
+        {
+          "shape": "TooManyKeyGroupsAssociatedToDistribution"
+        },
+        {
+          "shape": "TrustedKeyGroupDoesNotExist"
         }
       ],
       "documentation": "<p>Updates the configuration for a web distribution. </p> <important> <p>When you update a distribution, there are more required fields than when you create a distribution. When you update your distribution by using this API action, follow the steps here to get the current configuration and then make your updates, to make sure that you include all of the required fields. To view a summary, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-overview-required-fields.html\">Required Fields for Create Distribution and Update Distribution</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> </important> <p>The update process includes getting the current distribution configuration, updating the XML document that is returned to make your changes, and then submitting an <code>UpdateDistribution</code> request to make the updates.</p> <p>For information about updating a distribution using the CloudFront console instead, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-creating-console.html\">Creating a Distribution</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p> <b>To update a web distribution using the CloudFront API</b> </p> <ol> <li> <p>Submit a <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistributionConfig.html\">GetDistributionConfig</a> request to get the current configuration and an <code>Etag</code> header for the distribution.</p> <note> <p>If you update the distribution again, you must get a new <code>Etag</code> header.</p> </note> </li> <li> <p>Update the XML document that was returned in the response to your <code>GetDistributionConfig</code> request to include your changes. </p> <important> <p>When you edit the XML file, be aware of the following:</p> <ul> <li> <p>You must strip out the ETag parameter that is returned.</p> </li> <li> <p>Additional fields are required when you update a distribution. There may be fields included in the XML file for features that you haven't configured for your distribution. This is expected and required to successfully update the distribution.</p> </li> <li> <p>You can't change the value of <code>CallerReference</code>. If you try to change this value, CloudFront returns an <code>IllegalUpdate</code> error. </p> </li> <li> <p>The new configuration replaces the existing configuration; the values that you specify in an <code>UpdateDistribution</code> request are not merged into your existing configuration. When you add, delete, or replace values in an element that allows multiple values (for example, <code>CNAME</code>), you must specify all of the values that you want to appear in the updated distribution. In addition, you must update the corresponding <code>Quantity</code> element.</p> </li> </ul> </important> </li> <li> <p>Submit an <code>UpdateDistribution</code> request to update the configuration for your distribution:</p> <ul> <li> <p>In the request body, include the XML document that you updated in Step 2. The request body must include an XML document with a <code>DistributionConfig</code> element.</p> </li> <li> <p>Set the value of the HTTP <code>If-Match</code> header to the value of the <code>ETag</code> header that CloudFront returned when you submitted the <code>GetDistributionConfig</code> request in Step 1.</p> </li> </ul> </li> <li> <p>Review the response to the <code>UpdateDistribution</code> request to confirm that the configuration was successfully updated.</p> </li> <li> <p>Optional: Submit a <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistribution.html\">GetDistribution</a> request to confirm that your changes have propagated. When propagation is complete, the value of <code>Status</code> is <code>Deployed</code>.</p> </li> </ol>"
@@ -2206,6 +2387,40 @@
         }
       ],
       "documentation": "<p>Update a field-level encryption profile. </p>"
+    },
+    "UpdateKeyGroup": {
+      "name": "UpdateKeyGroup2020_05_31",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/2020-05-31/key-group/{Id}"
+      },
+      "input": {
+        "shape": "UpdateKeyGroupRequest"
+      },
+      "output": {
+        "shape": "UpdateKeyGroupResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidIfMatchVersion"
+        },
+        {
+          "shape": "NoSuchResource"
+        },
+        {
+          "shape": "PreconditionFailed"
+        },
+        {
+          "shape": "KeyGroupAlreadyExists"
+        },
+        {
+          "shape": "InvalidArgument"
+        },
+        {
+          "shape": "TooManyPublicKeysInKeyGroup"
+        }
+      ],
+      "documentation": "<p>Updates a key group.</p> <p>When you update a key group, all the fields are updated with the values provided in the request. You cannot update some fields independent of others. To update a key group:</p> <ol> <li> <p>Get the current key group with <code>GetKeyGroup</code> or <code>GetKeyGroupConfig</code>.</p> </li> <li> <p>Locally modify the fields in the key group that you want to update. For example, add or remove public key IDs.</p> </li> <li> <p>Call <code>UpdateKeyGroup</code> with the entire key group object, including the fields that you modified and those that you didn’t.</p> </li> </ol>"
     },
     "UpdateOriginRequestPolicy": {
       "name": "UpdateOriginRequestPolicy2020_05_31",
@@ -2315,6 +2530,9 @@
         },
         {
           "shape": "InvalidArgument"
+        },
+        {
+          "shape": "AccessDenied"
         }
       ],
       "documentation": "<p>Updates a real-time log configuration.</p> <p>When you update a real-time log configuration, all the parameters are updated with the values provided in the request. You cannot update some parameters independent of others. To update a real-time log configuration:</p> <ol> <li> <p>Call <code>GetRealtimeLogConfig</code> to get the current real-time log configuration.</p> </li> <li> <p>Locally modify the parameters in the real-time log configuration that you want to update.</p> </li> <li> <p>Call this API (<code>UpdateRealtimeLogConfig</code>) by providing the entire real-time log configuration, including the parameters that you modified and those that you didn’t.</p> </li> </ol> <p>You cannot update a real-time log configuration’s <code>Name</code> or <code>ARN</code>.</p>"
@@ -2376,6 +2594,28 @@
     }
   },
   "shapes": {
+    "ActiveTrustedKeyGroups": {
+      "type": "structure",
+      "required": [
+        "Enabled",
+        "Quantity"
+      ],
+      "members": {
+        "Enabled": {
+          "shape": "boolean",
+          "documentation": "<p>This field is <code>true</code> if any of the key groups have public keys that CloudFront can use to verify the signatures of signed URLs and signed cookies. If not, this field is <code>false</code>.</p>"
+        },
+        "Quantity": {
+          "shape": "integer",
+          "documentation": "<p>The number of key groups in the list.</p>"
+        },
+        "Items": {
+          "shape": "KGKeyPairIdsList",
+          "documentation": "<p>A list of key groups, including the identifiers of the public keys in each key group that CloudFront can use to verify the signatures of signed URLs and signed cookies.</p>"
+        }
+      },
+      "documentation": "<p>A list of key groups, and the public keys in each key group, that CloudFront can use to verify the signatures of signed URLs and signed cookies.</p>"
+    },
     "ActiveTrustedSigners": {
       "type": "structure",
       "required": [
@@ -2385,18 +2625,18 @@
       "members": {
         "Enabled": {
           "shape": "boolean",
-          "documentation": "<p>Enabled is <code>true</code> if any of the AWS accounts listed in the <code>TrustedSigners</code> complex type for this distribution have active CloudFront key pairs. If not, <code>Enabled</code> is <code>false</code>.</p>"
+          "documentation": "<p>This field is <code>true</code> if any of the AWS accounts in the list have active CloudFront key pairs that CloudFront can use to verify the signatures of signed URLs and signed cookies. If not, this field is <code>false</code>.</p>"
         },
         "Quantity": {
           "shape": "integer",
-          "documentation": "<p>The number of trusted signers specified in the <code>TrustedSigners</code> complex type.</p>"
+          "documentation": "<p>The number of AWS accounts in the list.</p>"
         },
         "Items": {
           "shape": "SignerList",
-          "documentation": "<p>A complex type that contains one <code>Signer</code> complex type for each trusted signer that is specified in the <code>TrustedSigners</code> complex type.</p>"
+          "documentation": "<p>A list of AWS accounts and the identifiers of active CloudFront key pairs in each account that CloudFront can use to verify the signatures of signed URLs and signed cookies.</p>"
         }
       },
-      "documentation": "<p>A complex type that lists the AWS accounts, if any, that you included in the <code>TrustedSigners</code> complex type for this distribution. These are the accounts that you want to allow to create signed URLs for private content.</p> <p>The <code>Signer</code> complex type lists the AWS account number of the trusted signer or <code>self</code> if the signer is the AWS account that created the distribution. The <code>Signer</code> element also includes the IDs of any active CloudFront key pairs that are associated with the trusted signer's AWS account. If no <code>KeyPairId</code> element appears for a <code>Signer</code>, that signer can't create signed URLs. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html\">Serving Private Content through CloudFront</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
+      "documentation": "<p>A list of AWS accounts and the active CloudFront key pairs in each account that CloudFront can use to verify the signatures of signed URLs and signed cookies.</p>"
     },
     "AliasICPRecordal": {
       "type": "structure",
@@ -2476,7 +2716,6 @@
       "required": [
         "PathPattern",
         "TargetOriginId",
-        "TrustedSigners",
         "ViewerProtocolPolicy"
       ],
       "members": {
@@ -2490,7 +2729,11 @@
         },
         "TrustedSigners": {
           "shape": "TrustedSigners",
-          "documentation": "<p>A complex type that specifies the AWS accounts, if any, that you want to allow to create signed URLs for private content.</p> <p>If you want to require signed URLs in requests for objects in the target origin that match the <code>PathPattern</code> for this cache behavior, specify <code>true</code> for <code>Enabled</code>, and specify the applicable values for <code>Quantity</code> and <code>Items</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html\">Serving Private Content with Signed URLs and Signed Cookies</a> in the <i>Amazon CloudFront Developer Guide</i>. </p> <p>If you don’t want to require signed URLs in requests for objects that match <code>PathPattern</code>, specify <code>false</code> for <code>Enabled</code> and <code>0</code> for <code>Quantity</code>. Omit <code>Items</code>.</p> <p>To add, change, or remove one or more trusted signers, change <code>Enabled</code> to <code>true</code> (if it’s currently <code>false</code>), change <code>Quantity</code> as applicable, and specify all of the trusted signers that you want to include in the updated distribution.</p>"
+          "documentation": "<important> <p>We recommend using <code>TrustedKeyGroups</code> instead of <code>TrustedSigners</code>.</p> </important> <p>A list of AWS account IDs whose public keys CloudFront can use to validate signed URLs or signed cookies.</p> <p>When a cache behavior contains trusted signers, CloudFront requires signed URLs or signed cookies for all requests that match the cache behavior. The URLs or cookies must be signed with the private key of a CloudFront key pair in the trusted signer’s AWS account. The signed URL or cookie contains information about which public key CloudFront should use to verify the signature. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html\">Serving private content</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
+        },
+        "TrustedKeyGroups": {
+          "shape": "TrustedKeyGroups",
+          "documentation": "<p>A list of key groups that CloudFront can use to validate signed URLs or signed cookies.</p> <p>When a cache behavior contains trusted key groups, CloudFront requires signed URLs or signed cookies for all requests that match the cache behavior. The URLs or cookies must be signed with a private key whose corresponding public key is in the key group. The signed URL or cookie contains information about which public key CloudFront should use to verify the signature. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html\">Serving private content</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
         },
         "ViewerProtocolPolicy": {
           "shape": "ViewerProtocolPolicy",
@@ -3285,6 +3528,45 @@
       "documentation": "<p>The returned result of the corresponding request.</p>",
       "payload": "Invalidation"
     },
+    "CreateKeyGroupRequest": {
+      "type": "structure",
+      "required": [
+        "KeyGroupConfig"
+      ],
+      "members": {
+        "KeyGroupConfig": {
+          "shape": "KeyGroupConfig",
+          "documentation": "<p>A key group configuration.</p>",
+          "locationName": "KeyGroupConfig",
+          "xmlNamespace": {
+            "uri": "http://cloudfront.amazonaws.com/doc/2020-05-31/"
+          }
+        }
+      },
+      "payload": "KeyGroupConfig"
+    },
+    "CreateKeyGroupResult": {
+      "type": "structure",
+      "members": {
+        "KeyGroup": {
+          "shape": "KeyGroup",
+          "documentation": "<p>The key group that was just created.</p>"
+        },
+        "Location": {
+          "shape": "string",
+          "documentation": "<p>The URL of the key group.</p>",
+          "location": "header",
+          "locationName": "Location"
+        },
+        "ETag": {
+          "shape": "string",
+          "documentation": "<p>The identifier for this version of the key group.</p>",
+          "location": "header",
+          "locationName": "ETag"
+        }
+      },
+      "payload": "KeyGroup"
+    },
     "CreateMonitoringSubscriptionRequest": {
       "type": "structure",
       "required": [
@@ -3366,7 +3648,7 @@
       "members": {
         "PublicKeyConfig": {
           "shape": "PublicKeyConfig",
-          "documentation": "<p>The request to add a public key to CloudFront.</p>",
+          "documentation": "<p>A CloudFront public key configuration.</p>",
           "locationName": "PublicKeyConfig",
           "xmlNamespace": {
             "uri": "http://cloudfront.amazonaws.com/doc/2020-05-31/"
@@ -3380,17 +3662,17 @@
       "members": {
         "PublicKey": {
           "shape": "PublicKey",
-          "documentation": "<p>Returned when you add a public key.</p>"
+          "documentation": "<p>The public key.</p>"
         },
         "Location": {
           "shape": "string",
-          "documentation": "<p>The fully qualified URI of the new public key resource just created.</p>",
+          "documentation": "<p>The URL of the public key.</p>",
           "location": "header",
           "locationName": "Location"
         },
         "ETag": {
           "shape": "string",
-          "documentation": "<p>The current version of the public key. For example: <code>E2QWRUHAPOMQZL</code>.</p>",
+          "documentation": "<p>The identifier for this version of the public key.</p>",
           "location": "header",
           "locationName": "ETag"
         }
@@ -3620,7 +3902,6 @@
       "type": "structure",
       "required": [
         "TargetOriginId",
-        "TrustedSigners",
         "ViewerProtocolPolicy"
       ],
       "members": {
@@ -3630,7 +3911,11 @@
         },
         "TrustedSigners": {
           "shape": "TrustedSigners",
-          "documentation": "<p>A complex type that specifies the AWS accounts, if any, that you want to allow to create signed URLs for private content.</p> <p>If you want to require signed URLs in requests for objects in the target origin that match the <code>PathPattern</code> for this cache behavior, specify <code>true</code> for <code>Enabled</code>, and specify the applicable values for <code>Quantity</code> and <code>Items</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html\">Serving Private Content with Signed URLs and Signed Cookies</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>If you don’t want to require signed URLs in requests for objects that match <code>PathPattern</code>, specify <code>false</code> for <code>Enabled</code> and <code>0</code> for <code>Quantity</code>. Omit <code>Items</code>.</p> <p>To add, change, or remove one or more trusted signers, change <code>Enabled</code> to <code>true</code> (if it’s currently <code>false</code>), change <code>Quantity</code> as applicable, and specify all of the trusted signers that you want to include in the updated distribution.</p>"
+          "documentation": "<important> <p>We recommend using <code>TrustedKeyGroups</code> instead of <code>TrustedSigners</code>.</p> </important> <p>A list of AWS account IDs whose public keys CloudFront can use to validate signed URLs or signed cookies.</p> <p>When a cache behavior contains trusted signers, CloudFront requires signed URLs or signed cookies for all requests that match the cache behavior. The URLs or cookies must be signed with the private key of a CloudFront key pair in a trusted signer’s AWS account. The signed URL or cookie contains information about which public key CloudFront should use to verify the signature. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html\">Serving private content</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
+        },
+        "TrustedKeyGroups": {
+          "shape": "TrustedKeyGroups",
+          "documentation": "<p>A list of key groups that CloudFront can use to validate signed URLs or signed cookies.</p> <p>When a cache behavior contains trusted key groups, CloudFront requires signed URLs or signed cookies for all requests that match the cache behavior. The URLs or cookies must be signed with a private key whose corresponding public key is in the key group. The signed URL or cookie contains information about which public key CloudFront should use to verify the signature. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html\">Serving private content</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
         },
         "ViewerProtocolPolicy": {
           "shape": "ViewerProtocolPolicy",
@@ -3792,6 +4077,26 @@
         }
       }
     },
+    "DeleteKeyGroupRequest": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "Id": {
+          "shape": "string",
+          "documentation": "<p>The identifier of the key group that you are deleting. To get the identifier, use <code>ListKeyGroups</code>.</p>",
+          "location": "uri",
+          "locationName": "Id"
+        },
+        "IfMatch": {
+          "shape": "string",
+          "documentation": "<p>The version of the key group that you are deleting. The version is the key group’s <code>ETag</code> value. To get the <code>ETag</code>, use <code>GetKeyGroup</code> or <code>GetKeyGroupConfig</code>.</p>",
+          "location": "header",
+          "locationName": "If-Match"
+        }
+      }
+    },
     "DeleteMonitoringSubscriptionRequest": {
       "type": "structure",
       "required": [
@@ -3893,7 +4198,6 @@
         "LastModifiedTime",
         "InProgressInvalidationBatches",
         "DomainName",
-        "ActiveTrustedSigners",
         "DistributionConfig"
       ],
       "members": {
@@ -3923,7 +4227,11 @@
         },
         "ActiveTrustedSigners": {
           "shape": "ActiveTrustedSigners",
-          "documentation": "<p>CloudFront automatically adds this element to the response only if you've set up the distribution to serve private content with signed URLs. The element lists the key pair IDs that CloudFront is aware of for each trusted signer. The <code>Signer</code> child element lists the AWS account number of the trusted signer (or an empty <code>Self</code> element if the signer is you). The <code>Signer</code> element also includes the IDs of any active key pairs associated with the trusted signer's AWS account. If no <code>KeyPairId</code> element appears for a <code>Signer</code>, that signer can't create working signed URLs.</p>"
+          "documentation": "<important> <p>We recommend using <code>TrustedKeyGroups</code> instead of <code>TrustedSigners</code>.</p> </important> <p>CloudFront automatically adds this field to the response if you’ve configured a cache behavior in this distribution to serve private content using trusted signers. This field contains a list of AWS account IDs and the active CloudFront key pairs in each account that CloudFront can use to verify the signatures of signed URLs or signed cookies.</p>"
+        },
+        "ActiveTrustedKeyGroups": {
+          "shape": "ActiveTrustedKeyGroups",
+          "documentation": "<p>CloudFront automatically adds this field to the response if you’ve configured a cache behavior in this distribution to serve private content using key groups. This field contains a list of key groups and the public keys in each key group that CloudFront can use to verify the signatures of signed URLs or signed cookies.</p>"
         },
         "DistributionConfig": {
           "shape": "DistributionConfig",
@@ -4966,6 +5274,66 @@
       "documentation": "<p>The returned result of the corresponding request.</p>",
       "payload": "Invalidation"
     },
+    "GetKeyGroupConfigRequest": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "Id": {
+          "shape": "string",
+          "documentation": "<p>The identifier of the key group whose configuration you are getting. To get the identifier, use <code>ListKeyGroups</code>.</p>",
+          "location": "uri",
+          "locationName": "Id"
+        }
+      }
+    },
+    "GetKeyGroupConfigResult": {
+      "type": "structure",
+      "members": {
+        "KeyGroupConfig": {
+          "shape": "KeyGroupConfig",
+          "documentation": "<p>The key group configuration.</p>"
+        },
+        "ETag": {
+          "shape": "string",
+          "documentation": "<p>The identifier for this version of the key group.</p>",
+          "location": "header",
+          "locationName": "ETag"
+        }
+      },
+      "payload": "KeyGroupConfig"
+    },
+    "GetKeyGroupRequest": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "Id": {
+          "shape": "string",
+          "documentation": "<p>The identifier of the key group that you are getting. To get the identifier, use <code>ListKeyGroups</code>.</p>",
+          "location": "uri",
+          "locationName": "Id"
+        }
+      }
+    },
+    "GetKeyGroupResult": {
+      "type": "structure",
+      "members": {
+        "KeyGroup": {
+          "shape": "KeyGroup",
+          "documentation": "<p>The key group.</p>"
+        },
+        "ETag": {
+          "shape": "string",
+          "documentation": "<p>The identifier for this version of the key group.</p>",
+          "location": "header",
+          "locationName": "ETag"
+        }
+      },
+      "payload": "KeyGroup"
+    },
     "GetMonitoringSubscriptionRequest": {
       "type": "structure",
       "required": [
@@ -5058,7 +5426,7 @@
       "members": {
         "Id": {
           "shape": "string",
-          "documentation": "<p>Request the ID for the public key configuration.</p>",
+          "documentation": "<p>The identifier of the public key whose configuration you are getting.</p>",
           "location": "uri",
           "locationName": "Id"
         }
@@ -5069,11 +5437,11 @@
       "members": {
         "PublicKeyConfig": {
           "shape": "PublicKeyConfig",
-          "documentation": "<p>Return the result for the public key configuration.</p>"
+          "documentation": "<p>A public key configuration.</p>"
         },
         "ETag": {
           "shape": "string",
-          "documentation": "<p>The current version of the public key configuration. For example: <code>E2QWRUHAPOMQZL</code>.</p>",
+          "documentation": "<p>The identifier for this version of the public key configuration.</p>",
           "location": "header",
           "locationName": "ETag"
         }
@@ -5088,7 +5456,7 @@
       "members": {
         "Id": {
           "shape": "string",
-          "documentation": "<p>Request the ID for the public key.</p>",
+          "documentation": "<p>The identifier of the public key you are getting.</p>",
           "location": "uri",
           "locationName": "Id"
         }
@@ -5099,11 +5467,11 @@
       "members": {
         "PublicKey": {
           "shape": "PublicKey",
-          "documentation": "<p>Return the public key.</p>"
+          "documentation": "<p>The public key.</p>"
         },
         "ETag": {
           "shape": "string",
-          "documentation": "<p>The current version of the public key. For example: <code>E2QWRUHAPOMQZL</code>.</p>",
+          "documentation": "<p>The identifier for this version of the public key.</p>",
           "location": "header",
           "locationName": "ETag"
         }
@@ -5355,6 +5723,117 @@
         "all"
       ]
     },
+    "KGKeyPairIds": {
+      "type": "structure",
+      "members": {
+        "KeyGroupId": {
+          "shape": "string",
+          "documentation": "<p>The identifier of the key group that contains the public keys.</p>"
+        },
+        "KeyPairIds": {
+          "shape": "KeyPairIds"
+        }
+      },
+      "documentation": "<p>A list of identifiers for the public keys that CloudFront can use to verify the signatures of signed URLs and signed cookies.</p>"
+    },
+    "KGKeyPairIdsList": {
+      "type": "list",
+      "member": {
+        "shape": "KGKeyPairIds",
+        "locationName": "KeyGroup"
+      }
+    },
+    "KeyGroup": {
+      "type": "structure",
+      "required": [
+        "Id",
+        "LastModifiedTime",
+        "KeyGroupConfig"
+      ],
+      "members": {
+        "Id": {
+          "shape": "string",
+          "documentation": "<p>The identifier for the key group.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "timestamp",
+          "documentation": "<p>The date and time when the key group was last modified.</p>"
+        },
+        "KeyGroupConfig": {
+          "shape": "KeyGroupConfig",
+          "documentation": "<p>The key group configuration.</p>"
+        }
+      },
+      "documentation": "<p>A key group.</p> <p>A key group contains a list of public keys that you can use with <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html\">CloudFront signed URLs and signed cookies</a>.</p>"
+    },
+    "KeyGroupConfig": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "Items"
+      ],
+      "members": {
+        "Name": {
+          "shape": "string",
+          "documentation": "<p>A name to identify the key group.</p>"
+        },
+        "Items": {
+          "shape": "PublicKeyIdList",
+          "documentation": "<p>A list of the identifiers of the public keys in the key group.</p>"
+        },
+        "Comment": {
+          "shape": "string",
+          "documentation": "<p>A comment to describe the key group.</p>"
+        }
+      },
+      "documentation": "<p>A key group configuration.</p> <p>A key group contains a list of public keys that you can use with <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html\">CloudFront signed URLs and signed cookies</a>.</p>"
+    },
+    "KeyGroupList": {
+      "type": "structure",
+      "required": [
+        "MaxItems",
+        "Quantity"
+      ],
+      "members": {
+        "NextMarker": {
+          "shape": "string",
+          "documentation": "<p>If there are more items in the list than are in this response, this element is present. It contains the value that you should use in the <code>Marker</code> field of a subsequent request to continue listing key groups.</p>"
+        },
+        "MaxItems": {
+          "shape": "integer",
+          "documentation": "<p>The maximum number of key groups requested.</p>"
+        },
+        "Quantity": {
+          "shape": "integer",
+          "documentation": "<p>The number of key groups returned in the response.</p>"
+        },
+        "Items": {
+          "shape": "KeyGroupSummaryList",
+          "documentation": "<p>A list of key groups.</p>"
+        }
+      },
+      "documentation": "<p>A list of key groups.</p>"
+    },
+    "KeyGroupSummary": {
+      "type": "structure",
+      "required": [
+        "KeyGroup"
+      ],
+      "members": {
+        "KeyGroup": {
+          "shape": "KeyGroup",
+          "documentation": "<p>A key group.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about a key group.</p>"
+    },
+    "KeyGroupSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "KeyGroupSummary",
+        "locationName": "KeyGroupSummary"
+      }
+    },
     "KeyPairIdList": {
       "type": "list",
       "member": {
@@ -5370,14 +5849,14 @@
       "members": {
         "Quantity": {
           "shape": "integer",
-          "documentation": "<p>The number of active CloudFront key pairs for <code>AwsAccountNumber</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ActiveTrustedSigners.html\">ActiveTrustedSigners</a>.</p>"
+          "documentation": "<p>The number of key pair identifiers in the list.</p>"
         },
         "Items": {
           "shape": "KeyPairIdList",
-          "documentation": "<p>A complex type that lists the active CloudFront key pairs, if any, that are associated with <code>AwsAccountNumber</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ActiveTrustedSigners.html\">ActiveTrustedSigners</a>.</p>"
+          "documentation": "<p>A list of CloudFront key pair identifiers.</p>"
         }
       },
-      "documentation": "<p>A complex type that lists the active CloudFront key pairs, if any, that are associated with <code>AwsAccountNumber</code>. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ActiveTrustedSigners.html\">ActiveTrustedSigners</a>.</p>"
+      "documentation": "<p>A list of CloudFront key pair identifiers.</p>"
     },
     "KinesisStreamConfig": {
       "type": "structure",
@@ -5540,6 +6019,41 @@
         "DistributionIdList": {
           "shape": "DistributionIdList",
           "documentation": "<p>A list of distribution IDs.</p>"
+        }
+      },
+      "payload": "DistributionIdList"
+    },
+    "ListDistributionsByKeyGroupRequest": {
+      "type": "structure",
+      "required": [
+        "KeyGroupId"
+      ],
+      "members": {
+        "Marker": {
+          "shape": "string",
+          "documentation": "<p>Use this field when paginating results to indicate where to begin in your list of distribution IDs. The response includes distribution IDs in the list that occur after the marker. To get the next page of the list, set this field’s value to the value of <code>NextMarker</code> from the current page’s response.</p>",
+          "location": "querystring",
+          "locationName": "Marker"
+        },
+        "MaxItems": {
+          "shape": "string",
+          "documentation": "<p>The maximum number of distribution IDs that you want in the response.</p>",
+          "location": "querystring",
+          "locationName": "MaxItems"
+        },
+        "KeyGroupId": {
+          "shape": "string",
+          "documentation": "<p>The ID of the key group whose associated distribution IDs you are listing.</p>",
+          "location": "uri",
+          "locationName": "KeyGroupId"
+        }
+      }
+    },
+    "ListDistributionsByKeyGroupResult": {
+      "type": "structure",
+      "members": {
+        "DistributionIdList": {
+          "shape": "DistributionIdList"
         }
       },
       "payload": "DistributionIdList"
@@ -5768,6 +6282,33 @@
       },
       "documentation": "<p>The returned result of the corresponding request. </p>",
       "payload": "InvalidationList"
+    },
+    "ListKeyGroupsRequest": {
+      "type": "structure",
+      "members": {
+        "Marker": {
+          "shape": "string",
+          "documentation": "<p>Use this field when paginating results to indicate where to begin in your list of key groups. The response includes key groups in the list that occur after the marker. To get the next page of the list, set this field’s value to the value of <code>NextMarker</code> from the current page’s response.</p>",
+          "location": "querystring",
+          "locationName": "Marker"
+        },
+        "MaxItems": {
+          "shape": "string",
+          "documentation": "<p>The maximum number of key groups that you want in the response.</p>",
+          "location": "querystring",
+          "locationName": "MaxItems"
+        }
+      }
+    },
+    "ListKeyGroupsResult": {
+      "type": "structure",
+      "members": {
+        "KeyGroupList": {
+          "shape": "KeyGroupList",
+          "documentation": "<p>A list of key groups.</p>"
+        }
+      },
+      "payload": "KeyGroupList"
     },
     "ListOriginRequestPoliciesRequest": {
       "type": "structure",
@@ -6498,18 +7039,18 @@
       "members": {
         "Id": {
           "shape": "string",
-          "documentation": "<p>A unique ID assigned to a public key you've added to CloudFront.</p>"
+          "documentation": "<p>The identifier of the public key.</p>"
         },
         "CreatedTime": {
           "shape": "timestamp",
-          "documentation": "<p>A time you added a public key to CloudFront.</p>"
+          "documentation": "<p>The date and time when the public key was uploaded.</p>"
         },
         "PublicKeyConfig": {
           "shape": "PublicKeyConfig",
-          "documentation": "<p>A complex data type for a public key you add to CloudFront to use with features like field-level encryption.</p>"
+          "documentation": "<p>Configuration information about a public key that you can use with <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html\">signed URLs and signed cookies</a>, or with <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html\">field-level encryption</a>.</p>"
         }
       },
-      "documentation": "<p>A complex data type of public keys you add to CloudFront to use with features like field-level encryption.</p>"
+      "documentation": "<p>A public key that you can use with <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html\">signed URLs and signed cookies</a>, or with <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html\">field-level encryption</a>.</p>"
     },
     "PublicKeyConfig": {
       "type": "structure",
@@ -6521,22 +7062,29 @@
       "members": {
         "CallerReference": {
           "shape": "string",
-          "documentation": "<p>A unique number that ensures that the request can't be replayed.</p>"
+          "documentation": "<p>A string included in the request to help make sure that the request can’t be replayed.</p>"
         },
         "Name": {
           "shape": "string",
-          "documentation": "<p>The name for a public key you add to CloudFront to use with features like field-level encryption.</p>"
+          "documentation": "<p>A name to help identify the public key.</p>"
         },
         "EncodedKey": {
           "shape": "string",
-          "documentation": "<p>The encoded public key that you want to add to CloudFront to use with features like field-level encryption.</p>"
+          "documentation": "<p>The public key that you can use with <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html\">signed URLs and signed cookies</a>, or with <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html\">field-level encryption</a>.</p>"
         },
         "Comment": {
           "shape": "string",
-          "documentation": "<p>An optional comment about a public key.</p>"
+          "documentation": "<p>A comment to describe the public key.</p>"
         }
       },
-      "documentation": "<p>Information about a public key you add to CloudFront to use with features like field-level encryption.</p>"
+      "documentation": "<p>Configuration information about a public key that you can use with <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html\">signed URLs and signed cookies</a>, or with <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html\">field-level encryption</a>.</p>"
+    },
+    "PublicKeyIdList": {
+      "type": "list",
+      "member": {
+        "shape": "string",
+        "locationName": "PublicKey"
+      }
     },
     "PublicKeyList": {
       "type": "structure",
@@ -6551,18 +7099,18 @@
         },
         "MaxItems": {
           "shape": "integer",
-          "documentation": "<p>The maximum number of public keys you want in the response body. </p>"
+          "documentation": "<p>The maximum number of public keys you want in the response.</p>"
         },
         "Quantity": {
           "shape": "integer",
-          "documentation": "<p>The number of public keys you added to CloudFront to use with features like field-level encryption.</p>"
+          "documentation": "<p>The number of public keys in the list.</p>"
         },
         "Items": {
           "shape": "PublicKeySummaryList",
-          "documentation": "<p>An array of information about a public key you add to CloudFront to use with features like field-level encryption.</p>"
+          "documentation": "<p>A list of public keys.</p>"
         }
       },
-      "documentation": "<p>A list of public keys you've added to CloudFront to use with features like field-level encryption.</p>"
+      "documentation": "<p>A list of public keys that you can use with <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html\">signed URLs and signed cookies</a>, or with <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html\">field-level encryption</a>.</p>"
     },
     "PublicKeySummary": {
       "type": "structure",
@@ -6575,26 +7123,26 @@
       "members": {
         "Id": {
           "shape": "string",
-          "documentation": "<p> ID for public key information summary. </p>"
+          "documentation": "<p>The identifier of the public key.</p>"
         },
         "Name": {
           "shape": "string",
-          "documentation": "<p> Name for public key information summary. </p>"
+          "documentation": "<p>A name to help identify the public key.</p>"
         },
         "CreatedTime": {
           "shape": "timestamp",
-          "documentation": "<p> Creation time for public key information summary. </p>"
+          "documentation": "<p>The date and time when the public key was uploaded.</p>"
         },
         "EncodedKey": {
           "shape": "string",
-          "documentation": "<p> Encoded key for public key information summary. </p>"
+          "documentation": "<p>The public key.</p>"
         },
         "Comment": {
           "shape": "string",
-          "documentation": "<p> Comment for public key information summary. </p>"
+          "documentation": "<p>A comment to describe the public key.</p>"
         }
       },
-      "documentation": "<p>A complex data type for public key information. </p>"
+      "documentation": "<p>Contains information about a public key.</p>"
     },
     "PublicKeySummaryList": {
       "type": "list",
@@ -6861,14 +7409,14 @@
       "members": {
         "AwsAccountNumber": {
           "shape": "string",
-          "documentation": "<p>An AWS account that is included in the <code>TrustedSigners</code> complex type for this distribution. Valid values include:</p> <ul> <li> <p> <code>self</code>, which is the AWS account used to create the distribution.</p> </li> <li> <p>An AWS account number.</p> </li> </ul>"
+          "documentation": "<p>An AWS account number that contains active CloudFront key pairs that CloudFront can use to verify the signatures of signed URLs and signed cookies. If the AWS account that owns the key pairs is the same account that owns the CloudFront distribution, the value of this field is <code>self</code>.</p>"
         },
         "KeyPairIds": {
           "shape": "KeyPairIds",
-          "documentation": "<p>A complex type that lists the active CloudFront key pairs, if any, that are associated with <code>AwsAccountNumber</code>.</p>"
+          "documentation": "<p>A list of CloudFront key pair identifiers.</p>"
         }
       },
-      "documentation": "<p>A complex type that lists the AWS accounts that were included in the <code>TrustedSigners</code> complex type, as well as their active CloudFront key pair IDs, if any. </p>"
+      "documentation": "<p>A list of AWS accounts and the active CloudFront key pairs in each account that CloudFront can use to verify the signatures of signed URLs and signed cookies.</p>"
     },
     "SignerList": {
       "type": "list",
@@ -7243,6 +7791,35 @@
       },
       "documentation": "<p> A complex type that contains zero or more <code>Tag</code> elements.</p>"
     },
+    "TrustedKeyGroupIdList": {
+      "type": "list",
+      "member": {
+        "shape": "string",
+        "locationName": "KeyGroup"
+      }
+    },
+    "TrustedKeyGroups": {
+      "type": "structure",
+      "required": [
+        "Enabled",
+        "Quantity"
+      ],
+      "members": {
+        "Enabled": {
+          "shape": "boolean",
+          "documentation": "<p>This field is <code>true</code> if any of the key groups in the list have public keys that CloudFront can use to verify the signatures of signed URLs and signed cookies. If not, this field is <code>false</code>.</p>"
+        },
+        "Quantity": {
+          "shape": "integer",
+          "documentation": "<p>The number of key groups in the list.</p>"
+        },
+        "Items": {
+          "shape": "TrustedKeyGroupIdList",
+          "documentation": "<p>A list of key groups identifiers.</p>"
+        }
+      },
+      "documentation": "<p>A list of key groups whose public keys CloudFront can use to verify the signatures of signed URLs and signed cookies.</p>"
+    },
     "TrustedSigners": {
       "type": "structure",
       "required": [
@@ -7252,18 +7829,18 @@
       "members": {
         "Enabled": {
           "shape": "boolean",
-          "documentation": "<p>Specifies whether you want to require viewers to use signed URLs to access the files specified by <code>PathPattern</code> and <code>TargetOriginId</code>.</p>"
+          "documentation": "<p>This field is <code>true</code> if any of the AWS accounts have public keys that CloudFront can use to verify the signatures of signed URLs and signed cookies. If not, this field is <code>false</code>.</p>"
         },
         "Quantity": {
           "shape": "integer",
-          "documentation": "<p>The number of trusted signers for this cache behavior.</p>"
+          "documentation": "<p>The number of AWS accounts in the list.</p>"
         },
         "Items": {
           "shape": "AwsAccountNumberList",
-          "documentation": "<p> <b>Optional</b>: A complex type that contains trusted signers for this cache behavior. If <code>Quantity</code> is <code>0</code>, you can omit <code>Items</code>.</p>"
+          "documentation": "<p>A list of AWS account identifiers.</p>"
         }
       },
-      "documentation": "<p>A complex type that specifies the AWS accounts, if any, that you want to allow to create signed URLs for private content.</p> <p>If you want to require signed URLs in requests for objects in the target origin that match the <code>PathPattern</code> for this cache behavior, specify <code>true</code> for <code>Enabled</code>, and specify the applicable values for <code>Quantity</code> and <code>Items</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html\">Serving Private Content through CloudFront</a> in the <i> Amazon CloudFront Developer Guide</i>.</p> <p>If you don't want to require signed URLs in requests for objects that match <code>PathPattern</code>, specify <code>false</code> for <code>Enabled</code> and <code>0</code> for <code>Quantity</code>. Omit <code>Items</code>.</p> <p>To add, change, or remove one or more trusted signers, change <code>Enabled</code> to <code>true</code> (if it's currently <code>false</code>), change <code>Quantity</code> as applicable, and specify all of the trusted signers that you want to include in the updated distribution.</p> <p>For more information about updating the distribution configuration, see <a href=\"https://docs.aws.amazon.com/cloudfront/latest/APIReference/DistributionConfig.html\">DistributionConfig</a> in the <i>Amazon CloudFront API Reference</i>.</p>"
+      "documentation": "<p>A list of AWS accounts whose public keys CloudFront can use to verify the signatures of signed URLs and signed cookies.</p>"
     },
     "UntagResourceRequest": {
       "type": "structure",
@@ -7524,6 +8101,52 @@
       },
       "payload": "FieldLevelEncryptionProfile"
     },
+    "UpdateKeyGroupRequest": {
+      "type": "structure",
+      "required": [
+        "KeyGroupConfig",
+        "Id"
+      ],
+      "members": {
+        "KeyGroupConfig": {
+          "shape": "KeyGroupConfig",
+          "documentation": "<p>The key group configuration.</p>",
+          "locationName": "KeyGroupConfig",
+          "xmlNamespace": {
+            "uri": "http://cloudfront.amazonaws.com/doc/2020-05-31/"
+          }
+        },
+        "Id": {
+          "shape": "string",
+          "documentation": "<p>The identifier of the key group that you are updating.</p>",
+          "location": "uri",
+          "locationName": "Id"
+        },
+        "IfMatch": {
+          "shape": "string",
+          "documentation": "<p>The version of the key group that you are updating. The version is the key group’s <code>ETag</code> value.</p>",
+          "location": "header",
+          "locationName": "If-Match"
+        }
+      },
+      "payload": "KeyGroupConfig"
+    },
+    "UpdateKeyGroupResult": {
+      "type": "structure",
+      "members": {
+        "KeyGroup": {
+          "shape": "KeyGroup",
+          "documentation": "<p>The key group that was just updated.</p>"
+        },
+        "ETag": {
+          "shape": "string",
+          "documentation": "<p>The identifier for this version of the key group.</p>",
+          "location": "header",
+          "locationName": "ETag"
+        }
+      },
+      "payload": "KeyGroup"
+    },
     "UpdateOriginRequestPolicyRequest": {
       "type": "structure",
       "required": [
@@ -7579,7 +8202,7 @@
       "members": {
         "PublicKeyConfig": {
           "shape": "PublicKeyConfig",
-          "documentation": "<p>Request to update public key information.</p>",
+          "documentation": "<p>A public key configuration.</p>",
           "locationName": "PublicKeyConfig",
           "xmlNamespace": {
             "uri": "http://cloudfront.amazonaws.com/doc/2020-05-31/"
@@ -7587,7 +8210,7 @@
         },
         "Id": {
           "shape": "string",
-          "documentation": "<p>ID of the public key to be updated.</p>",
+          "documentation": "<p>The identifier of the public key that you are updating.</p>",
           "location": "uri",
           "locationName": "Id"
         },
@@ -7605,11 +8228,11 @@
       "members": {
         "PublicKey": {
           "shape": "PublicKey",
-          "documentation": "<p>Return the results of updating the public key.</p>"
+          "documentation": "<p>The public key.</p>"
         },
         "ETag": {
           "shape": "string",
-          "documentation": "<p>The current version of the update public key result. For example: <code>E2QWRUHAPOMQZL</code>.</p>",
+          "documentation": "<p>The identifier of the current version of the public key.</p>",
           "location": "header",
           "locationName": "ETag"
         }

@@ -435,25 +435,29 @@ declare namespace Kendra {
      */
     Type: DataSourceType;
     /**
-     * The data source connector configuration information that is required to access the repository.
+     * The connector configuration information that is required to access the repository. You can't specify the Configuration parameter when the Type parameter is set to CUSTOM. If you do, you receive a ValidationException exception. The Configuration parameter is required for all other data sources.
      */
-    Configuration: DataSourceConfiguration;
+    Configuration?: DataSourceConfiguration;
     /**
      * A description for the data source.
      */
     Description?: Description;
     /**
-     * Sets the frequency that Amazon Kendra will check the documents in your repository and update the index. If you don't set a schedule Amazon Kendra will not periodically update the index. You can call the StartDataSourceSyncJob operation to update the index.
+     * Sets the frequency that Amazon Kendra will check the documents in your repository and update the index. If you don't set a schedule Amazon Kendra will not periodically update the index. You can call the StartDataSourceSyncJob operation to update the index. You can't specify the Schedule parameter when the Type parameter is set to CUSTOM. If you do, you receive a ValidationException exception.
      */
     Schedule?: ScanSchedule;
     /**
-     * The Amazon Resource Name (ARN) of a role with permission to access the data source. For more information, see IAM Roles for Amazon Kendra.
+     * The Amazon Resource Name (ARN) of a role with permission to access the data source. For more information, see IAM Roles for Amazon Kendra. You can't specify the RoleArn parameter when the Type parameter is set to CUSTOM. If you do, you receive a ValidationException exception. The RoleArn parameter is required for all other data sources.
      */
-    RoleArn: RoleArn;
+    RoleArn?: RoleArn;
     /**
      * A list of key-value pairs that identify the data source. You can use the tags to identify and organize your resources and to control access to resources.
      */
     Tags?: TagList;
+    /**
+     * A token that you provide to identify the request to create a data source. Multiple calls to the CreateDataSource operation with the same client token will create only one data source.
+     */
+    ClientToken?: ClientTokenName;
   }
   export interface CreateDataSourceResponse {
     /**
@@ -490,6 +494,10 @@ declare namespace Kendra {
      * The format of the input file. You can choose between a basic CSV format, a CSV format that includes customs attributes in a header, and a JSON format that includes custom attributes. The format must match the format of the file stored in the S3 bucket identified in the S3Path parameter. For more information, see Adding questions and answers.
      */
     FileFormat?: FaqFileFormat;
+    /**
+     * A token that you provide to identify the request to create a FAQ. Multiple calls to the CreateFaqRequest operation with the same client token will create only one FAQ. 
+     */
+    ClientToken?: ClientTokenName;
   }
   export interface CreateFaqResponse {
     /**
@@ -507,7 +515,7 @@ declare namespace Kendra {
      */
     Edition?: IndexEdition;
     /**
-     * An IAM role that gives Amazon Kendra permissions to access your Amazon CloudWatch logs and metrics. This is also the role used when you use the BatchPutDocument operation to index documents from an Amazon S3 bucket.
+     * An AWS Identity and Access Management (IAM) role that gives Amazon Kendra permissions to access your Amazon CloudWatch logs and metrics. This is also the role used when you use the BatchPutDocument operation to index documents from an Amazon S3 bucket.
      */
     RoleArn: RoleArn;
     /**
@@ -519,7 +527,7 @@ declare namespace Kendra {
      */
     Description?: Description;
     /**
-     * A token that you provide to identify the request to create an index. Multiple calls to the CreateIndex operation with the same client token will create only one index.”
+     * A token that you provide to identify the request to create an index. Multiple calls to the CreateIndex operation with the same client token will create only one index.
      */
     ClientToken?: ClientTokenName;
     /**
@@ -677,7 +685,7 @@ declare namespace Kendra {
     IndexFieldName: IndexFieldName;
   }
   export type DataSourceToIndexFieldMappingList = DataSourceToIndexFieldMapping[];
-  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|string;
+  export type DataSourceType = "S3"|"SHAREPOINT"|"DATABASE"|"SALESFORCE"|"ONEDRIVE"|"SERVICENOW"|"CUSTOM"|string;
   export interface DataSourceVpcConfiguration {
     /**
      * A list of identifiers for subnets within your Amazon VPC. The subnets should be able to connect to each other in the VPC, and they should have outgoing access to the Internet through a NAT device.
@@ -1469,7 +1477,11 @@ declare namespace Kendra {
      */
     InclusionPrefixes?: DataSourceInclusionsExclusionsStrings;
     /**
-     * A list of glob patterns for documents that should not be indexed. If a document that matches an inclusion prefix also matches an exclusion pattern, the document is not indexed. For more information about glob patterns, see glob (programming) in Wikipedia.
+     * A list of glob patterns for documents that should be indexed. If a document that matches an inclusion pattern also matches an exclusion pattern, the document is not indexed. For more information about glob patterns, see glob (programming) in Wikipedia.
+     */
+    InclusionPatterns?: DataSourceInclusionsExclusionsStrings;
+    /**
+     * A list of glob patterns for documents that should not be indexed. If a document that matches an inclusion prefix or inclusion pattern also matches an exclusion pattern, the document is not indexed. For more information about glob patterns, see glob (programming) in Wikipedia.
      */
     ExclusionPatterns?: DataSourceInclusionsExclusionsStrings;
     DocumentsMetadataConfiguration?: DocumentsMetadataConfiguration;

@@ -5318,6 +5318,10 @@
           "shape": "ClassifierNameList",
           "documentation": "<p>A list of UTF-8 strings that specify the custom classifiers that are associated with the crawler.</p>"
         },
+        "RecrawlPolicy": {
+          "shape": "RecrawlPolicy",
+          "documentation": "<p>A policy that specifies whether to crawl the entire dataset again, or to crawl only folders that were added since the last crawler run.</p>"
+        },
         "SchemaChangePolicy": {
           "shape": "SchemaChangePolicy",
           "documentation": "<p>The policy that specifies update and delete behaviors for the crawler.</p>"
@@ -5563,6 +5567,10 @@
         "SchemaChangePolicy": {
           "shape": "SchemaChangePolicy",
           "documentation": "<p>The policy for the crawler's update and deletion behavior.</p>"
+        },
+        "RecrawlPolicy": {
+          "shape": "RecrawlPolicy",
+          "documentation": "<p>A policy that specifies whether to crawl the entire dataset again, or to crawl only folders that were added since the last crawler run.</p>"
         },
         "Configuration": {
           "shape": "CrawlerConfiguration",
@@ -10650,6 +10658,23 @@
       "type": "long",
       "box": true
     },
+    "RecrawlBehavior": {
+      "type": "string",
+      "enum": [
+        "CRAWL_EVERYTHING",
+        "CRAWL_NEW_FOLDERS_ONLY"
+      ]
+    },
+    "RecrawlPolicy": {
+      "type": "structure",
+      "members": {
+        "RecrawlBehavior": {
+          "shape": "RecrawlBehavior",
+          "documentation": "<p>Specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run.</p> <p>A value of <code>CRAWL_EVERYTHING</code> specifies crawling the entire dataset again.</p> <p>A value of <code>CRAWL_NEW_FOLDERS_ONLY</code> specifies crawling only folders that were added since the last crawler run.</p>"
+        }
+      },
+      "documentation": "<p>When crawling an Amazon S3 data source after the first crawl is complete, specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run. For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/incremental-crawls.html\">Incremental Crawls in AWS Glue</a> in the developer guide.</p>"
+    },
     "ReplaceBoolean": {
       "type": "boolean"
     },
@@ -12351,6 +12376,10 @@
         "SchemaChangePolicy": {
           "shape": "SchemaChangePolicy",
           "documentation": "<p>The policy for the crawler's update and deletion behavior.</p>"
+        },
+        "RecrawlPolicy": {
+          "shape": "RecrawlPolicy",
+          "documentation": "<p>A policy that specifies whether to crawl the entire dataset again, or to crawl only folders that were added since the last crawler run.</p>"
         },
         "Configuration": {
           "shape": "CrawlerConfiguration",

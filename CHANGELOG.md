@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.775.0-->
+<!--LATEST=2.776.0-->
 <!--ENTRYINSERT-->
+
+## 2.776.0
+* feature: CloudFront: CloudFront adds support for managing the public keys for signed URLs and signed cookies directly in CloudFront (it no longer requires the AWS root account).
+* feature: EC2: instance-storage-info nvmeSupport added to DescribeInstanceTypes API
+* feature: GlobalAccelerator: This release adds support for specifying port overrides on AWS Global Accelerator endpoint groups.
+* feature: Glue: AWS Glue crawlers now support incremental crawls for the Amazon Simple Storage Service (Amazon S3) data source.
+* feature: Kendra: This release adds custom data sources: a new data source type that gives you full control of the documents added, modified or deleted during a data source sync while providing run history metrics.
 
 ## 2.775.0
 * bugfix: Credentials: Do not require credentials file when loading from config.

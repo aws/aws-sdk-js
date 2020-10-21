@@ -70,6 +70,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   createInvalidation(callback?: (err: AWSError, data: CloudFront.Types.CreateInvalidationResult) => void): Request<CloudFront.Types.CreateInvalidationResult, AWSError>;
   /**
+   * Creates a key group that you can use with CloudFront signed URLs and signed cookies. To create a key group, you must specify at least one public key for the key group. After you create a key group, you can reference it from one or more cache behaviors. When you reference a key group in a cache behavior, CloudFront requires signed URLs or signed cookies for all requests that match the cache behavior. The URLs or cookies must be signed with a private key whose corresponding public key is in the key group. The signed URL or cookie contains information about which public key CloudFront should use to verify the signature. For more information, see Serving private content in the Amazon CloudFront Developer Guide.
+   */
+  createKeyGroup(params: CloudFront.Types.CreateKeyGroupRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateKeyGroupResult) => void): Request<CloudFront.Types.CreateKeyGroupResult, AWSError>;
+  /**
+   * Creates a key group that you can use with CloudFront signed URLs and signed cookies. To create a key group, you must specify at least one public key for the key group. After you create a key group, you can reference it from one or more cache behaviors. When you reference a key group in a cache behavior, CloudFront requires signed URLs or signed cookies for all requests that match the cache behavior. The URLs or cookies must be signed with a private key whose corresponding public key is in the key group. The signed URL or cookie contains information about which public key CloudFront should use to verify the signature. For more information, see Serving private content in the Amazon CloudFront Developer Guide.
+   */
+  createKeyGroup(callback?: (err: AWSError, data: CloudFront.Types.CreateKeyGroupResult) => void): Request<CloudFront.Types.CreateKeyGroupResult, AWSError>;
+  /**
    * Enables additional CloudWatch metrics for the specified CloudFront distribution. The additional metrics incur an additional cost. For more information, see Viewing additional CloudFront distribution metrics in the Amazon CloudFront Developer Guide.
    */
   createMonitoringSubscription(params: CloudFront.Types.CreateMonitoringSubscriptionRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateMonitoringSubscriptionResult) => void): Request<CloudFront.Types.CreateMonitoringSubscriptionResult, AWSError>;
@@ -86,11 +94,11 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   createOriginRequestPolicy(callback?: (err: AWSError, data: CloudFront.Types.CreateOriginRequestPolicyResult) => void): Request<CloudFront.Types.CreateOriginRequestPolicyResult, AWSError>;
   /**
-   * Add a new public key to CloudFront to use, for example, for field-level encryption. You can add a maximum of 10 public keys with one AWS account.
+   * Uploads a public key to CloudFront that you can use with signed URLs and signed cookies, or with field-level encryption.
    */
   createPublicKey(params: CloudFront.Types.CreatePublicKeyRequest, callback?: (err: AWSError, data: CloudFront.Types.CreatePublicKeyResult) => void): Request<CloudFront.Types.CreatePublicKeyResult, AWSError>;
   /**
-   * Add a new public key to CloudFront to use, for example, for field-level encryption. You can add a maximum of 10 public keys with one AWS account.
+   * Uploads a public key to CloudFront that you can use with signed URLs and signed cookies, or with field-level encryption.
    */
   createPublicKey(callback?: (err: AWSError, data: CloudFront.Types.CreatePublicKeyResult) => void): Request<CloudFront.Types.CreatePublicKeyResult, AWSError>;
   /**
@@ -157,6 +165,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Remove a field-level encryption profile.
    */
   deleteFieldLevelEncryptionProfile(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a key group. You cannot delete a key group that is referenced in a cache behavior. First update your distributions to remove the key group from all cache behaviors, then delete the key group. To delete a key group, you must provide the key group’s identifier and version. To get these values, use ListKeyGroups followed by GetKeyGroup or GetKeyGroupConfig.
+   */
+  deleteKeyGroup(params: CloudFront.Types.DeleteKeyGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a key group. You cannot delete a key group that is referenced in a cache behavior. First update your distributions to remove the key group from all cache behaviors, then delete the key group. To delete a key group, you must provide the key group’s identifier and version. To get these values, use ListKeyGroups followed by GetKeyGroup or GetKeyGroupConfig.
+   */
+  deleteKeyGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Disables additional CloudWatch metrics for the specified CloudFront distribution.
    */
@@ -286,6 +302,22 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   getInvalidation(callback?: (err: AWSError, data: CloudFront.Types.GetInvalidationResult) => void): Request<CloudFront.Types.GetInvalidationResult, AWSError>;
   /**
+   * Gets a key group, including the date and time when the key group was last modified. To get a key group, you must provide the key group’s identifier. If the key group is referenced in a distribution’s cache behavior, you can get the key group’s identifier using ListDistributions or GetDistribution. If the key group is not referenced in a cache behavior, you can get the identifier using ListKeyGroups.
+   */
+  getKeyGroup(params: CloudFront.Types.GetKeyGroupRequest, callback?: (err: AWSError, data: CloudFront.Types.GetKeyGroupResult) => void): Request<CloudFront.Types.GetKeyGroupResult, AWSError>;
+  /**
+   * Gets a key group, including the date and time when the key group was last modified. To get a key group, you must provide the key group’s identifier. If the key group is referenced in a distribution’s cache behavior, you can get the key group’s identifier using ListDistributions or GetDistribution. If the key group is not referenced in a cache behavior, you can get the identifier using ListKeyGroups.
+   */
+  getKeyGroup(callback?: (err: AWSError, data: CloudFront.Types.GetKeyGroupResult) => void): Request<CloudFront.Types.GetKeyGroupResult, AWSError>;
+  /**
+   * Gets a key group configuration. To get a key group configuration, you must provide the key group’s identifier. If the key group is referenced in a distribution’s cache behavior, you can get the key group’s identifier using ListDistributions or GetDistribution. If the key group is not referenced in a cache behavior, you can get the identifier using ListKeyGroups.
+   */
+  getKeyGroupConfig(params: CloudFront.Types.GetKeyGroupConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.GetKeyGroupConfigResult) => void): Request<CloudFront.Types.GetKeyGroupConfigResult, AWSError>;
+  /**
+   * Gets a key group configuration. To get a key group configuration, you must provide the key group’s identifier. If the key group is referenced in a distribution’s cache behavior, you can get the key group’s identifier using ListDistributions or GetDistribution. If the key group is not referenced in a cache behavior, you can get the identifier using ListKeyGroups.
+   */
+  getKeyGroupConfig(callback?: (err: AWSError, data: CloudFront.Types.GetKeyGroupConfigResult) => void): Request<CloudFront.Types.GetKeyGroupConfigResult, AWSError>;
+  /**
    * Gets information about whether additional CloudWatch metrics are enabled for the specified CloudFront distribution.
    */
   getMonitoringSubscription(params: CloudFront.Types.GetMonitoringSubscriptionRequest, callback?: (err: AWSError, data: CloudFront.Types.GetMonitoringSubscriptionResult) => void): Request<CloudFront.Types.GetMonitoringSubscriptionResult, AWSError>;
@@ -310,19 +342,19 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   getOriginRequestPolicyConfig(callback?: (err: AWSError, data: CloudFront.Types.GetOriginRequestPolicyConfigResult) => void): Request<CloudFront.Types.GetOriginRequestPolicyConfigResult, AWSError>;
   /**
-   * Get the public key information.
+   * Gets a public key.
    */
   getPublicKey(params: CloudFront.Types.GetPublicKeyRequest, callback?: (err: AWSError, data: CloudFront.Types.GetPublicKeyResult) => void): Request<CloudFront.Types.GetPublicKeyResult, AWSError>;
   /**
-   * Get the public key information.
+   * Gets a public key.
    */
   getPublicKey(callback?: (err: AWSError, data: CloudFront.Types.GetPublicKeyResult) => void): Request<CloudFront.Types.GetPublicKeyResult, AWSError>;
   /**
-   * Return public key configuration informaation
+   * Gets a public key configuration.
    */
   getPublicKeyConfig(params: CloudFront.Types.GetPublicKeyConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.GetPublicKeyConfigResult) => void): Request<CloudFront.Types.GetPublicKeyConfigResult, AWSError>;
   /**
-   * Return public key configuration informaation
+   * Gets a public key configuration.
    */
   getPublicKeyConfig(callback?: (err: AWSError, data: CloudFront.Types.GetPublicKeyConfigResult) => void): Request<CloudFront.Types.GetPublicKeyConfigResult, AWSError>;
   /**
@@ -382,6 +414,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   listDistributionsByCachePolicyId(callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsByCachePolicyIdResult) => void): Request<CloudFront.Types.ListDistributionsByCachePolicyIdResult, AWSError>;
   /**
+   * Gets a list of distribution IDs for distributions that have a cache behavior that references the specified key group. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   */
+  listDistributionsByKeyGroup(params: CloudFront.Types.ListDistributionsByKeyGroupRequest, callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsByKeyGroupResult) => void): Request<CloudFront.Types.ListDistributionsByKeyGroupResult, AWSError>;
+  /**
+   * Gets a list of distribution IDs for distributions that have a cache behavior that references the specified key group. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   */
+  listDistributionsByKeyGroup(callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsByKeyGroupResult) => void): Request<CloudFront.Types.ListDistributionsByKeyGroupResult, AWSError>;
+  /**
    * Gets a list of distribution IDs for distributions that have a cache behavior that’s associated with the specified origin request policy. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
    */
   listDistributionsByOriginRequestPolicyId(params: CloudFront.Types.ListDistributionsByOriginRequestPolicyIdRequest, callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsByOriginRequestPolicyIdResult) => void): Request<CloudFront.Types.ListDistributionsByOriginRequestPolicyIdResult, AWSError>;
@@ -429,6 +469,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Lists invalidation batches. 
    */
   listInvalidations(callback?: (err: AWSError, data: CloudFront.Types.ListInvalidationsResult) => void): Request<CloudFront.Types.ListInvalidationsResult, AWSError>;
+  /**
+   * Gets a list of key groups. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   */
+  listKeyGroups(params: CloudFront.Types.ListKeyGroupsRequest, callback?: (err: AWSError, data: CloudFront.Types.ListKeyGroupsResult) => void): Request<CloudFront.Types.ListKeyGroupsResult, AWSError>;
+  /**
+   * Gets a list of key groups. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   */
+  listKeyGroups(callback?: (err: AWSError, data: CloudFront.Types.ListKeyGroupsResult) => void): Request<CloudFront.Types.ListKeyGroupsResult, AWSError>;
   /**
    * Gets a list of origin request policies. You can optionally apply a filter to return only the managed policies created by AWS, or only the custom policies created in your AWS account. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
    */
@@ -526,6 +574,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   updateFieldLevelEncryptionProfile(callback?: (err: AWSError, data: CloudFront.Types.UpdateFieldLevelEncryptionProfileResult) => void): Request<CloudFront.Types.UpdateFieldLevelEncryptionProfileResult, AWSError>;
   /**
+   * Updates a key group. When you update a key group, all the fields are updated with the values provided in the request. You cannot update some fields independent of others. To update a key group:   Get the current key group with GetKeyGroup or GetKeyGroupConfig.   Locally modify the fields in the key group that you want to update. For example, add or remove public key IDs.   Call UpdateKeyGroup with the entire key group object, including the fields that you modified and those that you didn’t.  
+   */
+  updateKeyGroup(params: CloudFront.Types.UpdateKeyGroupRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateKeyGroupResult) => void): Request<CloudFront.Types.UpdateKeyGroupResult, AWSError>;
+  /**
+   * Updates a key group. When you update a key group, all the fields are updated with the values provided in the request. You cannot update some fields independent of others. To update a key group:   Get the current key group with GetKeyGroup or GetKeyGroupConfig.   Locally modify the fields in the key group that you want to update. For example, add or remove public key IDs.   Call UpdateKeyGroup with the entire key group object, including the fields that you modified and those that you didn’t.  
+   */
+  updateKeyGroup(callback?: (err: AWSError, data: CloudFront.Types.UpdateKeyGroupResult) => void): Request<CloudFront.Types.UpdateKeyGroupResult, AWSError>;
+  /**
    * Updates an origin request policy configuration. When you update an origin request policy configuration, all the fields are updated with the values provided in the request. You cannot update some fields independent of others. To update an origin request policy configuration:   Use GetOriginRequestPolicyConfig to get the current configuration.   Locally modify the fields in the origin request policy configuration that you want to update.   Call UpdateOriginRequestPolicy by providing the entire origin request policy configuration, including the fields that you modified and those that you didn’t.  
    */
   updateOriginRequestPolicy(params: CloudFront.Types.UpdateOriginRequestPolicyRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateOriginRequestPolicyResult) => void): Request<CloudFront.Types.UpdateOriginRequestPolicyResult, AWSError>;
@@ -586,17 +642,31 @@ declare namespace CloudFront {
   export import Signer = signer;
 }
 declare namespace CloudFront {
-  export interface ActiveTrustedSigners {
+  export interface ActiveTrustedKeyGroups {
     /**
-     * Enabled is true if any of the AWS accounts listed in the TrustedSigners complex type for this distribution have active CloudFront key pairs. If not, Enabled is false.
+     * This field is true if any of the key groups have public keys that CloudFront can use to verify the signatures of signed URLs and signed cookies. If not, this field is false.
      */
     Enabled: boolean;
     /**
-     * The number of trusted signers specified in the TrustedSigners complex type.
+     * The number of key groups in the list.
      */
     Quantity: integer;
     /**
-     * A complex type that contains one Signer complex type for each trusted signer that is specified in the TrustedSigners complex type.
+     * A list of key groups, including the identifiers of the public keys in each key group that CloudFront can use to verify the signatures of signed URLs and signed cookies.
+     */
+    Items?: KGKeyPairIdsList;
+  }
+  export interface ActiveTrustedSigners {
+    /**
+     * This field is true if any of the AWS accounts in the list have active CloudFront key pairs that CloudFront can use to verify the signatures of signed URLs and signed cookies. If not, this field is false.
+     */
+    Enabled: boolean;
+    /**
+     * The number of AWS accounts in the list.
+     */
+    Quantity: integer;
+    /**
+     * A list of AWS accounts and the identifiers of active CloudFront key pairs in each account that CloudFront can use to verify the signatures of signed URLs and signed cookies.
      */
     Items?: SignerList;
   }
@@ -644,9 +714,13 @@ declare namespace CloudFront {
      */
     TargetOriginId: string;
     /**
-     * A complex type that specifies the AWS accounts, if any, that you want to allow to create signed URLs for private content. If you want to require signed URLs in requests for objects in the target origin that match the PathPattern for this cache behavior, specify true for Enabled, and specify the applicable values for Quantity and Items. For more information, see Serving Private Content with Signed URLs and Signed Cookies in the Amazon CloudFront Developer Guide.  If you don’t want to require signed URLs in requests for objects that match PathPattern, specify false for Enabled and 0 for Quantity. Omit Items. To add, change, or remove one or more trusted signers, change Enabled to true (if it’s currently false), change Quantity as applicable, and specify all of the trusted signers that you want to include in the updated distribution.
+     *  We recommend using TrustedKeyGroups instead of TrustedSigners.  A list of AWS account IDs whose public keys CloudFront can use to validate signed URLs or signed cookies. When a cache behavior contains trusted signers, CloudFront requires signed URLs or signed cookies for all requests that match the cache behavior. The URLs or cookies must be signed with the private key of a CloudFront key pair in the trusted signer’s AWS account. The signed URL or cookie contains information about which public key CloudFront should use to verify the signature. For more information, see Serving private content in the Amazon CloudFront Developer Guide.
      */
-    TrustedSigners: TrustedSigners;
+    TrustedSigners?: TrustedSigners;
+    /**
+     * A list of key groups that CloudFront can use to validate signed URLs or signed cookies. When a cache behavior contains trusted key groups, CloudFront requires signed URLs or signed cookies for all requests that match the cache behavior. The URLs or cookies must be signed with a private key whose corresponding public key is in the key group. The signed URL or cookie contains information about which public key CloudFront should use to verify the signature. For more information, see Serving private content in the Amazon CloudFront Developer Guide.
+     */
+    TrustedKeyGroups?: TrustedKeyGroups;
     /**
      * The protocol that viewers can use to access the files in the origin specified by TargetOriginId when a request matches the path pattern in PathPattern. You can specify the following options:    allow-all: Viewers can use HTTP or HTTPS.    redirect-to-https: If a viewer submits an HTTP request, CloudFront returns an HTTP status code of 301 (Moved Permanently) to the viewer along with the HTTPS URL. The viewer then resubmits the request using the new URL.     https-only: If a viewer sends an HTTP request, CloudFront returns an HTTP status code of 403 (Forbidden).    For more information about requiring the HTTPS protocol, see Requiring HTTPS Between Viewers and CloudFront in the Amazon CloudFront Developer Guide.  The only way to guarantee that viewers retrieve an object that was fetched from the origin using HTTPS is never to use any other protocol to fetch the object. If you have recently changed from HTTP to HTTPS, we recommend that you clear your objects’ cache because cached objects are protocol agnostic. That means that an edge location will return an object from the cache regardless of whether the current request protocol matches the protocol used previously. For more information, see Managing Cache Expiration in the Amazon CloudFront Developer Guide. 
      */
@@ -1078,6 +1152,26 @@ declare namespace CloudFront {
      */
     Invalidation?: Invalidation;
   }
+  export interface CreateKeyGroupRequest {
+    /**
+     * A key group configuration.
+     */
+    KeyGroupConfig: KeyGroupConfig;
+  }
+  export interface CreateKeyGroupResult {
+    /**
+     * The key group that was just created.
+     */
+    KeyGroup?: KeyGroup;
+    /**
+     * The URL of the key group.
+     */
+    Location?: string;
+    /**
+     * The identifier for this version of the key group.
+     */
+    ETag?: string;
+  }
   export interface CreateMonitoringSubscriptionRequest {
     /**
      * The ID of the distribution that you are enabling metrics for.
@@ -1116,21 +1210,21 @@ declare namespace CloudFront {
   }
   export interface CreatePublicKeyRequest {
     /**
-     * The request to add a public key to CloudFront.
+     * A CloudFront public key configuration.
      */
     PublicKeyConfig: PublicKeyConfig;
   }
   export interface CreatePublicKeyResult {
     /**
-     * Returned when you add a public key.
+     * The public key.
      */
     PublicKey?: PublicKey;
     /**
-     * The fully qualified URI of the new public key resource just created.
+     * The URL of the public key.
      */
     Location?: string;
     /**
-     * The current version of the public key. For example: E2QWRUHAPOMQZL.
+     * The identifier for this version of the public key.
      */
     ETag?: string;
   }
@@ -1269,9 +1363,13 @@ declare namespace CloudFront {
      */
     TargetOriginId: string;
     /**
-     * A complex type that specifies the AWS accounts, if any, that you want to allow to create signed URLs for private content. If you want to require signed URLs in requests for objects in the target origin that match the PathPattern for this cache behavior, specify true for Enabled, and specify the applicable values for Quantity and Items. For more information, see Serving Private Content with Signed URLs and Signed Cookies in the Amazon CloudFront Developer Guide. If you don’t want to require signed URLs in requests for objects that match PathPattern, specify false for Enabled and 0 for Quantity. Omit Items. To add, change, or remove one or more trusted signers, change Enabled to true (if it’s currently false), change Quantity as applicable, and specify all of the trusted signers that you want to include in the updated distribution.
+     *  We recommend using TrustedKeyGroups instead of TrustedSigners.  A list of AWS account IDs whose public keys CloudFront can use to validate signed URLs or signed cookies. When a cache behavior contains trusted signers, CloudFront requires signed URLs or signed cookies for all requests that match the cache behavior. The URLs or cookies must be signed with the private key of a CloudFront key pair in a trusted signer’s AWS account. The signed URL or cookie contains information about which public key CloudFront should use to verify the signature. For more information, see Serving private content in the Amazon CloudFront Developer Guide.
      */
-    TrustedSigners: TrustedSigners;
+    TrustedSigners?: TrustedSigners;
+    /**
+     * A list of key groups that CloudFront can use to validate signed URLs or signed cookies. When a cache behavior contains trusted key groups, CloudFront requires signed URLs or signed cookies for all requests that match the cache behavior. The URLs or cookies must be signed with a private key whose corresponding public key is in the key group. The signed URL or cookie contains information about which public key CloudFront should use to verify the signature. For more information, see Serving private content in the Amazon CloudFront Developer Guide.
+     */
+    TrustedKeyGroups?: TrustedKeyGroups;
     /**
      * The protocol that viewers can use to access the files in the origin specified by TargetOriginId when a request matches the path pattern in PathPattern. You can specify the following options:    allow-all: Viewers can use HTTP or HTTPS.    redirect-to-https: If a viewer submits an HTTP request, CloudFront returns an HTTP status code of 301 (Moved Permanently) to the viewer along with the HTTPS URL. The viewer then resubmits the request using the new URL.    https-only: If a viewer sends an HTTP request, CloudFront returns an HTTP status code of 403 (Forbidden).   For more information about requiring the HTTPS protocol, see Requiring HTTPS Between Viewers and CloudFront in the Amazon CloudFront Developer Guide.  The only way to guarantee that viewers retrieve an object that was fetched from the origin using HTTPS is never to use any other protocol to fetch the object. If you have recently changed from HTTP to HTTPS, we recommend that you clear your objects’ cache because cached objects are protocol agnostic. That means that an edge location will return an object from the cache regardless of whether the current request protocol matches the protocol used previously. For more information, see Managing Cache Expiration in the Amazon CloudFront Developer Guide. 
      */
@@ -1372,6 +1470,16 @@ declare namespace CloudFront {
      */
     IfMatch?: string;
   }
+  export interface DeleteKeyGroupRequest {
+    /**
+     * The identifier of the key group that you are deleting. To get the identifier, use ListKeyGroups.
+     */
+    Id: string;
+    /**
+     * The version of the key group that you are deleting. The version is the key group’s ETag value. To get the ETag, use GetKeyGroup or GetKeyGroupConfig.
+     */
+    IfMatch?: string;
+  }
   export interface DeleteMonitoringSubscriptionRequest {
     /**
      * The ID of the distribution that you are disabling metrics for.
@@ -1446,9 +1554,13 @@ declare namespace CloudFront {
      */
     DomainName: string;
     /**
-     * CloudFront automatically adds this element to the response only if you've set up the distribution to serve private content with signed URLs. The element lists the key pair IDs that CloudFront is aware of for each trusted signer. The Signer child element lists the AWS account number of the trusted signer (or an empty Self element if the signer is you). The Signer element also includes the IDs of any active key pairs associated with the trusted signer's AWS account. If no KeyPairId element appears for a Signer, that signer can't create working signed URLs.
+     *  We recommend using TrustedKeyGroups instead of TrustedSigners.  CloudFront automatically adds this field to the response if you’ve configured a cache behavior in this distribution to serve private content using trusted signers. This field contains a list of AWS account IDs and the active CloudFront key pairs in each account that CloudFront can use to verify the signatures of signed URLs or signed cookies.
      */
-    ActiveTrustedSigners: ActiveTrustedSigners;
+    ActiveTrustedSigners?: ActiveTrustedSigners;
+    /**
+     * CloudFront automatically adds this field to the response if you’ve configured a cache behavior in this distribution to serve private content using key groups. This field contains a list of key groups and the public keys in each key group that CloudFront can use to verify the signatures of signed URLs or signed cookies.
+     */
+    ActiveTrustedKeyGroups?: ActiveTrustedKeyGroups;
     /**
      * The current configuration information for the distribution. Send a GET request to the /CloudFront API version/distribution ID/config resource.
      */
@@ -2079,6 +2191,38 @@ declare namespace CloudFront {
      */
     Invalidation?: Invalidation;
   }
+  export interface GetKeyGroupConfigRequest {
+    /**
+     * The identifier of the key group whose configuration you are getting. To get the identifier, use ListKeyGroups.
+     */
+    Id: string;
+  }
+  export interface GetKeyGroupConfigResult {
+    /**
+     * The key group configuration.
+     */
+    KeyGroupConfig?: KeyGroupConfig;
+    /**
+     * The identifier for this version of the key group.
+     */
+    ETag?: string;
+  }
+  export interface GetKeyGroupRequest {
+    /**
+     * The identifier of the key group that you are getting. To get the identifier, use ListKeyGroups.
+     */
+    Id: string;
+  }
+  export interface GetKeyGroupResult {
+    /**
+     * The key group.
+     */
+    KeyGroup?: KeyGroup;
+    /**
+     * The identifier for this version of the key group.
+     */
+    ETag?: string;
+  }
   export interface GetMonitoringSubscriptionRequest {
     /**
      * The ID of the distribution that you are getting metrics information for.
@@ -2125,33 +2269,33 @@ declare namespace CloudFront {
   }
   export interface GetPublicKeyConfigRequest {
     /**
-     * Request the ID for the public key configuration.
+     * The identifier of the public key whose configuration you are getting.
      */
     Id: string;
   }
   export interface GetPublicKeyConfigResult {
     /**
-     * Return the result for the public key configuration.
+     * A public key configuration.
      */
     PublicKeyConfig?: PublicKeyConfig;
     /**
-     * The current version of the public key configuration. For example: E2QWRUHAPOMQZL.
+     * The identifier for this version of the public key configuration.
      */
     ETag?: string;
   }
   export interface GetPublicKeyRequest {
     /**
-     * Request the ID for the public key.
+     * The identifier of the public key you are getting.
      */
     Id: string;
   }
   export interface GetPublicKeyResult {
     /**
-     * Return the public key.
+     * The public key.
      */
     PublicKey?: PublicKey;
     /**
-     * The current version of the public key. For example: E2QWRUHAPOMQZL.
+     * The identifier for this version of the public key.
      */
     ETag?: string;
   }
@@ -2286,14 +2430,75 @@ declare namespace CloudFront {
   }
   export type InvalidationSummaryList = InvalidationSummary[];
   export type ItemSelection = "none"|"whitelist"|"all"|string;
-  export type KeyPairIdList = string[];
-  export interface KeyPairIds {
+  export interface KGKeyPairIds {
     /**
-     * The number of active CloudFront key pairs for AwsAccountNumber. For more information, see ActiveTrustedSigners.
+     * The identifier of the key group that contains the public keys.
+     */
+    KeyGroupId?: string;
+    KeyPairIds?: KeyPairIds;
+  }
+  export type KGKeyPairIdsList = KGKeyPairIds[];
+  export interface KeyGroup {
+    /**
+     * The identifier for the key group.
+     */
+    Id: string;
+    /**
+     * The date and time when the key group was last modified.
+     */
+    LastModifiedTime: timestamp;
+    /**
+     * The key group configuration.
+     */
+    KeyGroupConfig: KeyGroupConfig;
+  }
+  export interface KeyGroupConfig {
+    /**
+     * A name to identify the key group.
+     */
+    Name: string;
+    /**
+     * A list of the identifiers of the public keys in the key group.
+     */
+    Items: PublicKeyIdList;
+    /**
+     * A comment to describe the key group.
+     */
+    Comment?: string;
+  }
+  export interface KeyGroupList {
+    /**
+     * If there are more items in the list than are in this response, this element is present. It contains the value that you should use in the Marker field of a subsequent request to continue listing key groups.
+     */
+    NextMarker?: string;
+    /**
+     * The maximum number of key groups requested.
+     */
+    MaxItems: integer;
+    /**
+     * The number of key groups returned in the response.
      */
     Quantity: integer;
     /**
-     * A complex type that lists the active CloudFront key pairs, if any, that are associated with AwsAccountNumber. For more information, see ActiveTrustedSigners.
+     * A list of key groups.
+     */
+    Items?: KeyGroupSummaryList;
+  }
+  export interface KeyGroupSummary {
+    /**
+     * A key group.
+     */
+    KeyGroup: KeyGroup;
+  }
+  export type KeyGroupSummaryList = KeyGroupSummary[];
+  export type KeyPairIdList = string[];
+  export interface KeyPairIds {
+    /**
+     * The number of key pair identifiers in the list.
+     */
+    Quantity: integer;
+    /**
+     * A list of CloudFront key pair identifiers.
      */
     Items?: KeyPairIdList;
   }
@@ -2387,6 +2592,23 @@ declare namespace CloudFront {
     /**
      * A list of distribution IDs.
      */
+    DistributionIdList?: DistributionIdList;
+  }
+  export interface ListDistributionsByKeyGroupRequest {
+    /**
+     * Use this field when paginating results to indicate where to begin in your list of distribution IDs. The response includes distribution IDs in the list that occur after the marker. To get the next page of the list, set this field’s value to the value of NextMarker from the current page’s response.
+     */
+    Marker?: string;
+    /**
+     * The maximum number of distribution IDs that you want in the response.
+     */
+    MaxItems?: string;
+    /**
+     * The ID of the key group whose associated distribution IDs you are listing.
+     */
+    KeyGroupId: string;
+  }
+  export interface ListDistributionsByKeyGroupResult {
     DistributionIdList?: DistributionIdList;
   }
   export interface ListDistributionsByOriginRequestPolicyIdRequest {
@@ -2517,6 +2739,22 @@ declare namespace CloudFront {
      * Information about invalidation batches. 
      */
     InvalidationList?: InvalidationList;
+  }
+  export interface ListKeyGroupsRequest {
+    /**
+     * Use this field when paginating results to indicate where to begin in your list of key groups. The response includes key groups in the list that occur after the marker. To get the next page of the list, set this field’s value to the value of NextMarker from the current page’s response.
+     */
+    Marker?: string;
+    /**
+     * The maximum number of key groups that you want in the response.
+     */
+    MaxItems?: string;
+  }
+  export interface ListKeyGroupsResult {
+    /**
+     * A list of key groups.
+     */
+    KeyGroupList?: KeyGroupList;
   }
   export interface ListOriginRequestPoliciesRequest {
     /**
@@ -2885,73 +3123,74 @@ declare namespace CloudFront {
   export type PriceClass = "PriceClass_100"|"PriceClass_200"|"PriceClass_All"|string;
   export interface PublicKey {
     /**
-     * A unique ID assigned to a public key you've added to CloudFront.
+     * The identifier of the public key.
      */
     Id: string;
     /**
-     * A time you added a public key to CloudFront.
+     * The date and time when the public key was uploaded.
      */
     CreatedTime: timestamp;
     /**
-     * A complex data type for a public key you add to CloudFront to use with features like field-level encryption.
+     * Configuration information about a public key that you can use with signed URLs and signed cookies, or with field-level encryption.
      */
     PublicKeyConfig: PublicKeyConfig;
   }
   export interface PublicKeyConfig {
     /**
-     * A unique number that ensures that the request can't be replayed.
+     * A string included in the request to help make sure that the request can’t be replayed.
      */
     CallerReference: string;
     /**
-     * The name for a public key you add to CloudFront to use with features like field-level encryption.
+     * A name to help identify the public key.
      */
     Name: string;
     /**
-     * The encoded public key that you want to add to CloudFront to use with features like field-level encryption.
+     * The public key that you can use with signed URLs and signed cookies, or with field-level encryption.
      */
     EncodedKey: string;
     /**
-     * An optional comment about a public key.
+     * A comment to describe the public key.
      */
     Comment?: string;
   }
+  export type PublicKeyIdList = string[];
   export interface PublicKeyList {
     /**
      * If there are more elements to be listed, this element is present and contains the value that you can use for the Marker request parameter to continue listing your public keys where you left off.
      */
     NextMarker?: string;
     /**
-     * The maximum number of public keys you want in the response body. 
+     * The maximum number of public keys you want in the response.
      */
     MaxItems: integer;
     /**
-     * The number of public keys you added to CloudFront to use with features like field-level encryption.
+     * The number of public keys in the list.
      */
     Quantity: integer;
     /**
-     * An array of information about a public key you add to CloudFront to use with features like field-level encryption.
+     * A list of public keys.
      */
     Items?: PublicKeySummaryList;
   }
   export interface PublicKeySummary {
     /**
-     *  ID for public key information summary. 
+     * The identifier of the public key.
      */
     Id: string;
     /**
-     *  Name for public key information summary. 
+     * A name to help identify the public key.
      */
     Name: string;
     /**
-     *  Creation time for public key information summary. 
+     * The date and time when the public key was uploaded.
      */
     CreatedTime: timestamp;
     /**
-     *  Encoded key for public key information summary. 
+     * The public key.
      */
     EncodedKey: string;
     /**
-     *  Comment for public key information summary. 
+     * A comment to describe the public key.
      */
     Comment?: string;
   }
@@ -3087,11 +3326,11 @@ declare namespace CloudFront {
   export type SSLSupportMethod = "sni-only"|"vip"|"static-ip"|string;
   export interface _Signer {
     /**
-     * An AWS account that is included in the TrustedSigners complex type for this distribution. Valid values include:    self, which is the AWS account used to create the distribution.   An AWS account number.  
+     * An AWS account number that contains active CloudFront key pairs that CloudFront can use to verify the signatures of signed URLs and signed cookies. If the AWS account that owns the key pairs is the same account that owns the CloudFront distribution, the value of this field is self.
      */
     AwsAccountNumber?: string;
     /**
-     * A complex type that lists the active CloudFront key pairs, if any, that are associated with AwsAccountNumber.
+     * A list of CloudFront key pair identifiers.
      */
     KeyPairIds?: KeyPairIds;
   }
@@ -3306,17 +3545,32 @@ declare namespace CloudFront {
      */
     Items?: TagList;
   }
-  export interface TrustedSigners {
+  export type TrustedKeyGroupIdList = string[];
+  export interface TrustedKeyGroups {
     /**
-     * Specifies whether you want to require viewers to use signed URLs to access the files specified by PathPattern and TargetOriginId.
+     * This field is true if any of the key groups in the list have public keys that CloudFront can use to verify the signatures of signed URLs and signed cookies. If not, this field is false.
      */
     Enabled: boolean;
     /**
-     * The number of trusted signers for this cache behavior.
+     * The number of key groups in the list.
      */
     Quantity: integer;
     /**
-     *  Optional: A complex type that contains trusted signers for this cache behavior. If Quantity is 0, you can omit Items.
+     * A list of key groups identifiers.
+     */
+    Items?: TrustedKeyGroupIdList;
+  }
+  export interface TrustedSigners {
+    /**
+     * This field is true if any of the AWS accounts have public keys that CloudFront can use to verify the signatures of signed URLs and signed cookies. If not, this field is false.
+     */
+    Enabled: boolean;
+    /**
+     * The number of AWS accounts in the list.
+     */
+    Quantity: integer;
+    /**
+     * A list of AWS account identifiers.
      */
     Items?: AwsAccountNumberList;
   }
@@ -3450,6 +3704,30 @@ declare namespace CloudFront {
      */
     ETag?: string;
   }
+  export interface UpdateKeyGroupRequest {
+    /**
+     * The key group configuration.
+     */
+    KeyGroupConfig: KeyGroupConfig;
+    /**
+     * The identifier of the key group that you are updating.
+     */
+    Id: string;
+    /**
+     * The version of the key group that you are updating. The version is the key group’s ETag value.
+     */
+    IfMatch?: string;
+  }
+  export interface UpdateKeyGroupResult {
+    /**
+     * The key group that was just updated.
+     */
+    KeyGroup?: KeyGroup;
+    /**
+     * The identifier for this version of the key group.
+     */
+    ETag?: string;
+  }
   export interface UpdateOriginRequestPolicyRequest {
     /**
      * An origin request policy configuration.
@@ -3476,11 +3754,11 @@ declare namespace CloudFront {
   }
   export interface UpdatePublicKeyRequest {
     /**
-     * Request to update public key information.
+     * A public key configuration.
      */
     PublicKeyConfig: PublicKeyConfig;
     /**
-     * ID of the public key to be updated.
+     * The identifier of the public key that you are updating.
      */
     Id: string;
     /**
@@ -3490,11 +3768,11 @@ declare namespace CloudFront {
   }
   export interface UpdatePublicKeyResult {
     /**
-     * Return the results of updating the public key.
+     * The public key.
      */
     PublicKey?: PublicKey;
     /**
-     * The current version of the update public key result. For example: E2QWRUHAPOMQZL.
+     * The identifier of the current version of the public key.
      */
     ETag?: string;
   }

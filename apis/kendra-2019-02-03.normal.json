@@ -1180,9 +1180,7 @@
       "required": [
         "Name",
         "IndexId",
-        "Type",
-        "Configuration",
-        "RoleArn"
+        "Type"
       ],
       "members": {
         "Name": {
@@ -1199,7 +1197,7 @@
         },
         "Configuration": {
           "shape": "DataSourceConfiguration",
-          "documentation": "<p>The data source connector configuration information that is required to access the repository.</p>"
+          "documentation": "<p>The connector configuration information that is required to access the repository.</p> <p>You can't specify the <code>Configuration</code> parameter when the <code>Type</code> parameter is set to <code>CUSTOM</code>. If you do, you receive a <code>ValidationException</code> exception.</p> <p>The <code>Configuration</code> parameter is required for all other data sources.</p>"
         },
         "Description": {
           "shape": "Description",
@@ -1207,15 +1205,20 @@
         },
         "Schedule": {
           "shape": "ScanSchedule",
-          "documentation": "<p>Sets the frequency that Amazon Kendra will check the documents in your repository and update the index. If you don't set a schedule Amazon Kendra will not periodically update the index. You can call the <code>StartDataSourceSyncJob</code> operation to update the index.</p>"
+          "documentation": "<p>Sets the frequency that Amazon Kendra will check the documents in your repository and update the index. If you don't set a schedule Amazon Kendra will not periodically update the index. You can call the <code>StartDataSourceSyncJob</code> operation to update the index.</p> <p>You can't specify the <code>Schedule</code> parameter when the <code>Type</code> parameter is set to <code>CUSTOM</code>. If you do, you receive a <code>ValidationException</code> exception.</p>"
         },
         "RoleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of a role with permission to access the data source. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">IAM Roles for Amazon Kendra</a>.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of a role with permission to access the data source. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html\">IAM Roles for Amazon Kendra</a>.</p> <p>You can't specify the <code>RoleArn</code> parameter when the <code>Type</code> parameter is set to <code>CUSTOM</code>. If you do, you receive a <code>ValidationException</code> exception.</p> <p>The <code>RoleArn</code> parameter is required for all other data sources.</p>"
         },
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>A list of key-value pairs that identify the data source. You can use the tags to identify and organize your resources and to control access to resources.</p>"
+        },
+        "ClientToken": {
+          "shape": "ClientTokenName",
+          "documentation": "<p>A token that you provide to identify the request to create a data source. Multiple calls to the <code>CreateDataSource</code> operation with the same client token will create only one data source.</p>",
+          "idempotencyToken": true
         }
       }
     },
@@ -1267,6 +1270,11 @@
         "FileFormat": {
           "shape": "FaqFileFormat",
           "documentation": "<p>The format of the input file. You can choose between a basic CSV format, a CSV format that includes customs attributes in a header, and a JSON format that includes custom attributes.</p> <p>The format must match the format of the file stored in the S3 bucket identified in the <code>S3Path</code> parameter.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html\">Adding questions and answers</a>.</p>"
+        },
+        "ClientToken": {
+          "shape": "ClientTokenName",
+          "documentation": "<p>A token that you provide to identify the request to create a FAQ. Multiple calls to the <code>CreateFaqRequest</code> operation with the same client token will create only one FAQ. </p>",
+          "idempotencyToken": true
         }
       }
     },
@@ -1296,7 +1304,7 @@
         },
         "RoleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>An IAM role that gives Amazon Kendra permissions to access your Amazon CloudWatch logs and metrics. This is also the role used when you use the <code>BatchPutDocument</code> operation to index documents from an Amazon S3 bucket.</p>"
+          "documentation": "<p>An AWS Identity and Access Management (IAM) role that gives Amazon Kendra permissions to access your Amazon CloudWatch logs and metrics. This is also the role used when you use the <code>BatchPutDocument</code> operation to index documents from an Amazon S3 bucket.</p>"
         },
         "ServerSideEncryptionConfiguration": {
           "shape": "ServerSideEncryptionConfiguration",
@@ -1308,7 +1316,7 @@
         },
         "ClientToken": {
           "shape": "ClientTokenName",
-          "documentation": "<p>A token that you provide to identify the request to create an index. Multiple calls to the <code>CreateIndex</code> operation with the same client token will create only one index.”</p>",
+          "documentation": "<p>A token that you provide to identify the request to create an index. Multiple calls to the <code>CreateIndex</code> operation with the same client token will create only one index.</p>",
           "idempotencyToken": true
         },
         "Tags": {
@@ -1384,7 +1392,7 @@
     },
     "DataSourceInclusionsExclusionsStringsMember": {
       "type": "string",
-      "max": 50,
+      "max": 150,
       "min": 1
     },
     "DataSourceName": {
@@ -1583,7 +1591,8 @@
         "DATABASE",
         "SALESFORCE",
         "ONEDRIVE",
-        "SERVICENOW"
+        "SERVICENOW",
+        "CUSTOM"
       ]
     },
     "DataSourceVpcConfiguration": {
@@ -1916,7 +1925,7 @@
     "Description": {
       "type": "string",
       "max": 1000,
-      "min": 1,
+      "min": 0,
       "pattern": "^\\P{C}*$"
     },
     "Document": {
@@ -2957,9 +2966,13 @@
           "shape": "DataSourceInclusionsExclusionsStrings",
           "documentation": "<p>A list of S3 prefixes for the documents that should be included in the index.</p>"
         },
+        "InclusionPatterns": {
+          "shape": "DataSourceInclusionsExclusionsStrings",
+          "documentation": "<p>A list of glob patterns for documents that should be indexed. If a document that matches an inclusion pattern also matches an exclusion pattern, the document is not indexed.</p> <p>For more information about glob patterns, see <a href=\"https://en.wikipedia.org/wiki/Glob_(programming)\">glob (programming)</a> in <i>Wikipedia</i>.</p>"
+        },
         "ExclusionPatterns": {
           "shape": "DataSourceInclusionsExclusionsStrings",
-          "documentation": "<p>A list of glob patterns for documents that should not be indexed. If a document that matches an inclusion prefix also matches an exclusion pattern, the document is not indexed.</p> <p>For more information about glob patterns, see <a href=\"https://en.wikipedia.org/wiki/Glob_(programming)\">glob (programming)</a> in <i>Wikipedia</i>.</p>"
+          "documentation": "<p>A list of glob patterns for documents that should not be indexed. If a document that matches an inclusion prefix or inclusion pattern also matches an exclusion pattern, the document is not indexed.</p> <p>For more information about glob patterns, see <a href=\"https://en.wikipedia.org/wiki/Glob_(programming)\">glob (programming)</a> in <i>Wikipedia</i>.</p>"
         },
         "DocumentsMetadataConfiguration": {
           "shape": "DocumentsMetadataConfiguration"
