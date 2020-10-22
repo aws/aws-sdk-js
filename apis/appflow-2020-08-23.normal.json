@@ -632,6 +632,13 @@
       "max": 512,
       "pattern": ".*"
     },
+    "ClientCredentialsArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 20,
+      "pattern": "arn:aws:secretsmanager:.*:[0-9]+:.*",
+      "sensitive": true
+    },
     "ClientId": {
       "type": "string",
       "max": 512,
@@ -1350,6 +1357,11 @@
     "Date": {
       "type": "timestamp"
     },
+    "DatetimeTypeFieldName": {
+      "type": "string",
+      "max": 256,
+      "pattern": ".*"
+    },
     "DeleteConnectorProfileRequest": {
       "type": "structure",
       "required": [
@@ -1646,6 +1658,14 @@
         "isUpsertable": {
           "shape": "Boolean",
           "documentation": "<p> Specifies if the flow run can either insert new rows in the destination field if they do not already exist, or update them if they do. </p>"
+        },
+        "isUpdatable": {
+          "shape": "Boolean",
+          "documentation": "<p> Specifies whether the field can be updated during an <code>UPDATE</code> or <code>UPSERT</code> write operation. </p>"
+        },
+        "supportedWriteOperations": {
+          "shape": "SupportedWriteOperationList",
+          "documentation": "<p> A list of supported write operations. For each write operation listed, this field can be used in <code>idFieldNames</code> when that write operation is present as a destination option. </p>"
         }
       },
       "documentation": "<p> The properties that can be applied to a field when connector is being used as a destination. </p>"
@@ -2044,7 +2064,7 @@
         },
         "clientSecret": {
           "shape": "ClientSecret",
-          "documentation": "<p> The client secret used by the oauth client to authenticate to the authorization server. </p>"
+          "documentation": "<p> The client secret used by the OAuth client to authenticate to the authorization server. </p>"
         },
         "accessToken": {
           "shape": "AccessToken",
@@ -2056,7 +2076,7 @@
         },
         "oAuthRequest": {
           "shape": "ConnectorOAuthRequest",
-          "documentation": "<p> The oauth requirement needed to request security tokens from the connector endpoint. </p>"
+          "documentation": "<p> The OAuth requirement needed to request security tokens from the connector endpoint. </p>"
         }
       },
       "documentation": "<p> The connector-specific profile credentials required by Google Analytics. </p>"
@@ -2094,10 +2114,29 @@
       "max": 128,
       "pattern": "\\S+"
     },
+    "IdFieldNameList": {
+      "type": "list",
+      "member": {
+        "shape": "Name"
+      },
+      "documentation": "<p> A list of field names that can be used as an ID field when performing a write operation. </p>",
+      "max": 1,
+      "min": 0
+    },
     "Identifier": {
       "type": "string",
       "max": 128,
       "pattern": "\\S+"
+    },
+    "IncrementalPullConfig": {
+      "type": "structure",
+      "members": {
+        "datetimeTypeFieldName": {
+          "shape": "DatetimeTypeFieldName",
+          "documentation": "<p> A field that specifies the date time or timestamp field as the criteria to use when importing incremental records from the source. </p>"
+        }
+      },
+      "documentation": "<p> Specifies the configuration used when importing incremental records from the source. </p>"
     },
     "InforNexusConnectorOperator": {
       "type": "string",
@@ -2314,7 +2353,7 @@
         },
         "clientSecret": {
           "shape": "ClientSecret",
-          "documentation": "<p> The client secret used by the oauth client to authenticate to the authorization server. </p>"
+          "documentation": "<p> The client secret used by the OAuth client to authenticate to the authorization server. </p>"
         },
         "accessToken": {
           "shape": "AccessToken",
@@ -2322,7 +2361,7 @@
         },
         "oAuthRequest": {
           "shape": "ConnectorOAuthRequest",
-          "documentation": "<p> The oauth requirement needed to request security tokens from the connector endpoint. </p>"
+          "documentation": "<p> The OAuth requirement needed to request security tokens from the connector endpoint. </p>"
         }
       },
       "documentation": "<p> The connector-specific profile credentials required by Marketo. </p>"
@@ -2712,7 +2751,11 @@
         },
         "oAuthRequest": {
           "shape": "ConnectorOAuthRequest",
-          "documentation": "<p> The oauth requirement needed to request security tokens from the connector endpoint. </p>"
+          "documentation": "<p> The OAuth requirement needed to request security tokens from the connector endpoint. </p>"
+        },
+        "clientCredentialsArn": {
+          "shape": "ClientCredentialsArn",
+          "documentation": "<p> The secret manager ARN, which contains the client ID and client secret of the connected app. </p>"
         }
       },
       "documentation": "<p> The connector-specific profile credentials required when using Salesforce. </p>"
@@ -2741,9 +2784,17 @@
           "shape": "Object",
           "documentation": "<p> The object specified in the Salesforce flow destination. </p>"
         },
+        "idFieldNames": {
+          "shape": "IdFieldNameList",
+          "documentation": "<p> The name of the field that Amazon AppFlow uses as an ID when performing a write operation such as update or delete. </p>"
+        },
         "errorHandlingConfig": {
           "shape": "ErrorHandlingConfig",
           "documentation": "<p> The settings that determine how Amazon AppFlow handles an error when placing data in the Salesforce destination. For example, this setting would determine if the flow should fail after one insertion error, or continue and attempt to insert every record regardless of the initial failure. <code>ErrorHandlingConfig</code> is a part of the destination connector details. </p>"
+        },
+        "writeOperationType": {
+          "shape": "WriteOperationType",
+          "documentation": "<p> This specifies the type of write operation to be performed in Salesforce. When the value is <code>UPSERT</code>, then <code>idFieldNames</code> is required. </p>"
         }
       },
       "documentation": "<p> The properties that are applied when Salesforce is being used as a destination. </p>"
@@ -3003,7 +3054,7 @@
         },
         "clientSecret": {
           "shape": "ClientSecret",
-          "documentation": "<p> The client secret used by the oauth client to authenticate to the authorization server. </p>"
+          "documentation": "<p> The client secret used by the OAuth client to authenticate to the authorization server. </p>"
         },
         "accessToken": {
           "shape": "AccessToken",
@@ -3011,7 +3062,7 @@
         },
         "oAuthRequest": {
           "shape": "ConnectorOAuthRequest",
-          "documentation": "<p> The oauth requirement needed to request security tokens from the connector endpoint. </p>"
+          "documentation": "<p> The OAuth requirement needed to request security tokens from the connector endpoint. </p>"
         }
       },
       "documentation": "<p> The connector-specific profile credentials required when using Slack. </p>"
@@ -3245,6 +3296,10 @@
         "sourceConnectorProperties": {
           "shape": "SourceConnectorProperties",
           "documentation": "<p> Specifies the information that is required to query a particular source connector. </p>"
+        },
+        "incrementalPullConfig": {
+          "shape": "IncrementalPullConfig",
+          "documentation": "<p> Defines the configuration for a scheduled incremental data pull. If a valid configuration is provided, the fields specified in the configuration are used when querying for the incremental data pull. </p>"
         }
       },
       "documentation": "<p> Contains information about the configuration of the source connector used in the flow. </p>"
@@ -3276,6 +3331,10 @@
         "flowStatus": {
           "shape": "FlowStatus",
           "documentation": "<p> Indicates the current status of the flow. </p>"
+        },
+        "executionId": {
+          "shape": "ExecutionId",
+          "documentation": "<p> Returns the internal execution ID of an on-demand flow when the flow is started. For scheduled or event-triggered flows, this value is null. </p>"
         }
       }
     },
@@ -3326,6 +3385,12 @@
       "type": "list",
       "member": {
         "shape": "Value"
+      }
+    },
+    "SupportedWriteOperationList": {
+      "type": "list",
+      "member": {
+        "shape": "WriteOperationType"
       }
     },
     "TagKey": {
@@ -3440,7 +3505,8 @@
     },
     "Timezone": {
       "type": "string",
-      "max": 256
+      "max": 256,
+      "pattern": ".*"
     },
     "TrendmicroConnectorOperator": {
       "type": "string",
@@ -3732,6 +3798,15 @@
       "max": 512,
       "pattern": "[\\s\\w/!@#+=.-]*"
     },
+    "WriteOperationType": {
+      "type": "string",
+      "documentation": "<p> The possible write operations in the destination connector. When this value is not provided, this defaults to the <code>INSERT</code> operation. </p>",
+      "enum": [
+        "INSERT",
+        "UPSERT",
+        "UPDATE"
+      ]
+    },
     "ZendeskConnectorOperator": {
       "type": "string",
       "enum": [
@@ -3764,7 +3839,7 @@
         },
         "clientSecret": {
           "shape": "ClientSecret",
-          "documentation": "<p> The client secret used by the oauth client to authenticate to the authorization server. </p>"
+          "documentation": "<p> The client secret used by the OAuth client to authenticate to the authorization server. </p>"
         },
         "accessToken": {
           "shape": "AccessToken",
@@ -3772,7 +3847,7 @@
         },
         "oAuthRequest": {
           "shape": "ConnectorOAuthRequest",
-          "documentation": "<p> The oauth requirement needed to request security tokens from the connector endpoint. </p>"
+          "documentation": "<p> The OAuth requirement needed to request security tokens from the connector endpoint. </p>"
         }
       },
       "documentation": "<p> The connector-specific profile credentials required when using Zendesk. </p>"

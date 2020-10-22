@@ -197,6 +197,7 @@ declare namespace Appflow {
   export type Boolean = boolean;
   export type BucketName = string;
   export type BucketPrefix = string;
+  export type ClientCredentialsArn = string;
   export type ClientId = string;
   export type ClientSecret = string;
   export type ConnectionMode = "Public"|"Private"|string;
@@ -691,6 +692,7 @@ declare namespace Appflow {
     object: Object;
   }
   export type _Date = Date;
+  export type DatetimeTypeFieldName = string;
   export interface DeleteConnectorProfileRequest {
     /**
      *  The name of the connector profile. The name is unique for each ConnectorProfile in your account. 
@@ -916,6 +918,14 @@ declare namespace Appflow {
      *  Specifies if the flow run can either insert new rows in the destination field if they do not already exist, or update them if they do. 
      */
     isUpsertable?: Boolean;
+    /**
+     *  Specifies whether the field can be updated during an UPDATE or UPSERT write operation. 
+     */
+    isUpdatable?: Boolean;
+    /**
+     *  A list of supported write operations. For each write operation listed, this field can be used in idFieldNames when that write operation is present as a destination option. 
+     */
+    supportedWriteOperations?: SupportedWriteOperationList;
   }
   export interface DestinationFlowConfig {
     /**
@@ -1129,7 +1139,7 @@ declare namespace Appflow {
      */
     clientId: ClientId;
     /**
-     *  The client secret used by the oauth client to authenticate to the authorization server. 
+     *  The client secret used by the OAuth client to authenticate to the authorization server. 
      */
     clientSecret: ClientSecret;
     /**
@@ -1141,7 +1151,7 @@ declare namespace Appflow {
      */
     refreshToken?: RefreshToken;
     /**
-     *  The oauth requirement needed to request security tokens from the connector endpoint. 
+     *  The OAuth requirement needed to request security tokens from the connector endpoint. 
      */
     oAuthRequest?: ConnectorOAuthRequest;
   }
@@ -1160,7 +1170,14 @@ declare namespace Appflow {
     object: Object;
   }
   export type Group = string;
+  export type IdFieldNameList = Name[];
   export type Identifier = string;
+  export interface IncrementalPullConfig {
+    /**
+     *  A field that specifies the date time or timestamp field as the criteria to use when importing incremental records from the source. 
+     */
+    datetimeTypeFieldName?: DatetimeTypeFieldName;
+  }
   export type InforNexusConnectorOperator = "PROJECTION"|"BETWEEN"|"EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface InforNexusConnectorProfileCredentials {
     /**
@@ -1258,7 +1275,7 @@ declare namespace Appflow {
      */
     clientId: ClientId;
     /**
-     *  The client secret used by the oauth client to authenticate to the authorization server. 
+     *  The client secret used by the OAuth client to authenticate to the authorization server. 
      */
     clientSecret: ClientSecret;
     /**
@@ -1266,7 +1283,7 @@ declare namespace Appflow {
      */
     accessToken?: AccessToken;
     /**
-     *  The oauth requirement needed to request security tokens from the connector endpoint. 
+     *  The OAuth requirement needed to request security tokens from the connector endpoint. 
      */
     oAuthRequest?: ConnectorOAuthRequest;
   }
@@ -1407,9 +1424,13 @@ declare namespace Appflow {
      */
     refreshToken?: RefreshToken;
     /**
-     *  The oauth requirement needed to request security tokens from the connector endpoint. 
+     *  The OAuth requirement needed to request security tokens from the connector endpoint. 
      */
     oAuthRequest?: ConnectorOAuthRequest;
+    /**
+     *  The secret manager ARN, which contains the client ID and client secret of the connected app. 
+     */
+    clientCredentialsArn?: ClientCredentialsArn;
   }
   export interface SalesforceConnectorProfileProperties {
     /**
@@ -1427,9 +1448,17 @@ declare namespace Appflow {
      */
     object: Object;
     /**
+     *  The name of the field that Amazon AppFlow uses as an ID when performing a write operation such as update or delete. 
+     */
+    idFieldNames?: IdFieldNameList;
+    /**
      *  The settings that determine how Amazon AppFlow handles an error when placing data in the Salesforce destination. For example, this setting would determine if the flow should fail after one insertion error, or continue and attempt to insert every record regardless of the initial failure. ErrorHandlingConfig is a part of the destination connector details. 
      */
     errorHandlingConfig?: ErrorHandlingConfig;
+    /**
+     *  This specifies the type of write operation to be performed in Salesforce. When the value is UPSERT, then idFieldNames is required. 
+     */
+    writeOperationType?: WriteOperationType;
   }
   export interface SalesforceMetadata {
     /**
@@ -1526,7 +1555,7 @@ declare namespace Appflow {
      */
     clientId: ClientId;
     /**
-     *  The client secret used by the oauth client to authenticate to the authorization server. 
+     *  The client secret used by the OAuth client to authenticate to the authorization server. 
      */
     clientSecret: ClientSecret;
     /**
@@ -1534,7 +1563,7 @@ declare namespace Appflow {
      */
     accessToken?: AccessToken;
     /**
-     *  The oauth requirement needed to request security tokens from the connector endpoint. 
+     *  The OAuth requirement needed to request security tokens from the connector endpoint. 
      */
     oAuthRequest?: ConnectorOAuthRequest;
   }
@@ -1702,6 +1731,10 @@ declare namespace Appflow {
      *  Specifies the information that is required to query a particular source connector. 
      */
     sourceConnectorProperties: SourceConnectorProperties;
+    /**
+     *  Defines the configuration for a scheduled incremental data pull. If a valid configuration is provided, the fields specified in the configuration are used when querying for the incremental data pull. 
+     */
+    incrementalPullConfig?: IncrementalPullConfig;
   }
   export type Stage = string;
   export interface StartFlowRequest {
@@ -1719,6 +1752,10 @@ declare namespace Appflow {
      *  Indicates the current status of the flow. 
      */
     flowStatus?: FlowStatus;
+    /**
+     *  Returns the internal execution ID of an on-demand flow when the flow is started. For scheduled or event-triggered flows, this value is null. 
+     */
+    executionId?: ExecutionId;
   }
   export interface StopFlowRequest {
     /**
@@ -1744,6 +1781,7 @@ declare namespace Appflow {
     v1: FieldTypeDetails;
   }
   export type SupportedValueList = Value[];
+  export type SupportedWriteOperationList = WriteOperationType[];
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagMap = {[key: string]: TagValue};
@@ -1911,6 +1949,7 @@ declare namespace Appflow {
     object: Object;
   }
   export type Warehouse = string;
+  export type WriteOperationType = "INSERT"|"UPSERT"|"UPDATE"|string;
   export type ZendeskConnectorOperator = "PROJECTION"|"GREATER_THAN"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface ZendeskConnectorProfileCredentials {
     /**
@@ -1918,7 +1957,7 @@ declare namespace Appflow {
      */
     clientId: ClientId;
     /**
-     *  The client secret used by the oauth client to authenticate to the authorization server. 
+     *  The client secret used by the OAuth client to authenticate to the authorization server. 
      */
     clientSecret: ClientSecret;
     /**
@@ -1926,7 +1965,7 @@ declare namespace Appflow {
      */
     accessToken?: AccessToken;
     /**
-     *  The oauth requirement needed to request security tokens from the connector endpoint. 
+     *  The OAuth requirement needed to request security tokens from the connector endpoint. 
      */
     oAuthRequest?: ConnectorOAuthRequest;
   }
